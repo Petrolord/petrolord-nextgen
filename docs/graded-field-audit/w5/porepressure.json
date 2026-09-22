@@ -1,0 +1,313 @@
+{
+ "course": "porepressure",
+ "wave": "w5b",
+ "migration": "20261028b_w5_porepressure.sql",
+ "fields_file": "docs/graded-field-audit/w5b/porepressure.fields.json",
+ "keys_module": "docs/graded-field-audit/w5b/porepressure.keys.mjs",
+ "sources": [
+  "src/lib/porepressureTeaching.js",
+  "src/pages/apps/PorePressureLearningPage.jsx"
+ ],
+ "capstone_lessons": {
+  "beginner": "beginner/m06-the-pore-pressure-workflow/l03-the-capstone-walkthrough.md",
+  "intermediate": "intermediate/m06-the-prognosis-workflow/l03-the-capstone-walkthrough.md",
+  "advanced": "advanced/m06-the-window-workflow/l03-the-capstone-walkthrough.md"
+ },
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "title": "The pressure frame of the synthetic well",
+   "dataset": "porepressure/golden logs, 250 m water setting",
+   "why": "The walkthrough printed all six answers and the frame explorer opened on the golden well at TD. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+   "prompt": "The same logs are re-used for an appraisal location in deeper water: 250 m of seawater (1025 kg/m3) over the same 4000 m below-mudline section, with a pore fluid of 1040 kg/m3. Type that setting into the frame explorer (it opens on the golden well's header) and report hydrostatic and overburden at TD, the Gardner density a sonic-only interval would use at 1750 m/s, the normal-compaction transit time at 2750 m on the well's trend (656/220/0.0006), and the exact least-squares NCT fit through the twelve shale picks with a matrix transit time of 210 us/m.",
+   "rekey": [
+    "hydro_td_mpa",
+    "ob_td_mpa",
+    "gardner_rho",
+    "nct_2500",
+    "fit_dtml",
+    "fit_c_per_km"
+   ],
+   "case": {
+    "water_depth_m": 250,
+    "rho_fluid_kg_m3": 1040,
+    "fit_dt_ma": 210,
+    "gardner_v_ms": 1750,
+    "nct_depth_m": 2750
+   },
+   "annot": {
+    "hydro_td_mpa": {
+     "evidence": "The walkthrough printed all six answers and the frame explorer opened on the golden well at TD. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:26 (depth defaults to TD)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:134 fmt(read.hydroPa / MPA, 6)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ob_td_mpa": {
+     "evidence": "The walkthrough printed all six answers and the frame explorer opened on the golden well at TD. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:26",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:135 fmt(read.obPa / MPA, 6)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "gardner_rho": {
+     "evidence": "The walkthrough printed all six answers and the frame explorer opened on the golden well at TD. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:27 (velocity defaults to 1600 m/s)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:144 fmt(gardnerRho(vRaw), 6)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nct_case_depth": {
+     "evidence": "The walkthrough printed all six answers and the frame explorer opened on the golden well at TD. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:54 depth box set to 2500",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:138 fmt(read.dtWell, 6)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "fit_dtml": {
+     "evidence": "The walkthrough printed all six answers and the frame explorer opened on the golden well at TD. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:145 fitted-trend tile",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:145 fmt(BASICS.fit.dtMl, 2)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "fit_c_per_km": {
+     "evidence": "The walkthrough printed all six answers and the frame explorer opened on the golden well at TD. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:145",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:145 fmt(BASICS.fit.c * 1000, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "A",
+   "title": "Eaton prognosis on the golden sonic",
+   "dataset": "porepressure/golden logs, Eaton n 2.2 setting",
+   "why": "The walkthrough printed all six answers and the Eaton explorer opened on the n = 3 prognosis. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+   "prompt": "Run the full pipeline over the same sonic and density logs at the appraisal setting: 250 m of water, pore fluid 1040 kg/m3, Eaton n = 2.2 on the well's own NCT (656/220/0.0006) and coefficient-form fracture pressure with Poisson's ratio 0.35. Type the setting into the Eaton explorer (it opens on the golden well's header) and report the overpressure onset (the first sample more than 0.25 MPa above hydrostatic), the overburden minus hydrostatic at TD, pore pressure at 3000 m and at TD, the overpressure at TD, and fracture pressure at TD.",
+   "rekey": [
+    "onset_m",
+    "dtn_td",
+    "pp_3000_mpa",
+    "pp_td_mpa",
+    "op_td_mpa",
+    "fp_td_mpa"
+   ],
+   "case": {
+    "eaton_n": 2.2,
+    "threshold_mpa": 0.25,
+    "water_depth_m": 250,
+    "rho_fluid_kg_m3": 1040,
+    "nu": 0.35
+   },
+   "annot": {
+    "onset_m": {
+     "evidence": "The walkthrough printed all six answers and the Eaton explorer opened on the n = 3 prognosis. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:23 (threshold defaults to 0.05 MPa)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:77 String(m.onsetM)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "budget_td_mpa": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/porepressure/EatonExplorer.jsx (Tile 'Budget S minus Ph at TD')",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/porepressure/EatonExplorer.jsx fmt(m.budgetTdMpa) (3 dp)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The walkthrough printed all six answers and the Eaton explorer opened on the n = 3 prognosis. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "pp_3000_mpa": {
+     "evidence": "The walkthrough printed all six answers and the Eaton explorer opened on the n = 3 prognosis. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:21 (n defaults to CAPSTONE_EATON_N)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:79 fmt(m.pp3000Mpa) (3 dp)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "pp_td_mpa": {
+     "evidence": "The walkthrough printed all six answers and the Eaton explorer opened on the n = 3 prognosis. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:21",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:80 fmt(m.ppTdMpa)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "op_td_mpa": {
+     "evidence": "The walkthrough printed all six answers and the Eaton explorer opened on the n = 3 prognosis. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:21",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:81 fmt(m.opTdMpa)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "fp_td_mpa": {
+     "evidence": "The walkthrough printed all six answers and the Eaton explorer opened on the n = 3 prognosis. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:21",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:82 fmt(m.fpTdMpa)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "advanced": {
+   "pick": "A",
+   "title": "The mud-weight window at TD",
+   "dataset": "porepressure/golden logs, mud window n 2.2 + Bowers 11/0.72",
+   "why": "The walkthrough printed all six answers and the window explorer opened on the n = 3 window with the golden Bowers pair. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+   "prompt": "Turn the appraisal prognosis (250 m of water, pore fluid 1040 kg/m3, Eaton n = 2.2, Poisson's ratio 0.35) into drilling numbers: equivalent mud weight referenced to sea level (P divided by g times depth-below-mudline plus water depth) for pore and fracture pressure at TD, and the window between them. Cross-check the physics with Bowers (A 11, B 0.72): the loading velocity at 8 MPa effective stress, and the effective stress the unloading form (sigma_max 45 MPa, U 3.5) reads from 2900 m/s. Then probe the calibration lever: pore pressure at TD with Eaton n = 1.5. Type all of it into the window explorer, which opens on the teaching case.",
+   "rekey": [
+    "pp_emw_td",
+    "fp_emw_td",
+    "window_td",
+    "bowers_v_5mpa",
+    "bowers_sigma_mpa",
+    "pp_td_n12_mpa"
+   ],
+   "case": {
+    "eaton_n": 2.2,
+    "eaton_n_alt": 1.5,
+    "water_depth_m": 250,
+    "rho_fluid_kg_m3": 1040,
+    "nu": 0.35,
+    "bowers_a": 11,
+    "bowers_b": 0.72,
+    "bowers_stress_mpa": 8,
+    "bowers_v_unload_ms": 2900,
+    "bowers_sigma_max_mpa": 45,
+    "bowers_u": 3.5
+   },
+   "annot": {
+    "pp_emw_td": {
+     "evidence": "The walkthrough printed all six answers and the window explorer opened on the n = 3 window with the golden Bowers pair. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:23 (n defaults to CAPSTONE_EATON_N)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:70 fmt(m.ppEmwTd) (2 dp)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "fp_emw_td": {
+     "evidence": "The walkthrough printed all six answers and the window explorer opened on the n = 3 window with the golden Bowers pair. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:23",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:71 fmt(m.fpEmwTd)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "window_td": {
+     "evidence": "The walkthrough printed all six answers and the window explorer opened on the n = 3 window with the golden Bowers pair. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:23",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:72 fmt(m.windowTd)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "bowers_v_case": {
+     "evidence": "The walkthrough printed all six answers and the window explorer opened on the n = 3 window with the golden Bowers pair. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:76",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:76 fmt(BOWERS.vLoad5MPa)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "bowers_sigma_mpa": {
+     "evidence": "The walkthrough printed all six answers and the window explorer opened on the n = 3 window with the golden Bowers pair. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:77",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:77 fmt(BOWERS.sigmaUnloadPa / 1e6, 3)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "pp_td_alt_n_mpa": {
+     "evidence": "The walkthrough printed all six answers and the window explorer opened on the n = 3 window with the golden Bowers pair. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:41 (n select set to 1.2)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:75 fmt(m.ppTdMpa, 3)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  }
+ }
+}

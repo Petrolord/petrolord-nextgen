@@ -1,16 +1,14 @@
 # The capstone walkthrough
 
-> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+The capstone converts a prognosis into drilling numbers, cross-checks with Bowers, and probes the calibration lever, on a setting its brief states: the water depth, pore fluid, exponent and Poisson's ratio of the prognosis, the Bowers coefficients, stress and velocity, and a second exponent. You type that setting into the window explorer. Six fields; this lesson walks each on the teaching case (n 3 on the golden header, the golden Bowers fixture, n 1.2 for the lever): its teaching value, tolerance, route, and the slip that loses it. The capstone does not grade the teaching values.
 
-The capstone converts the n 3 prognosis into drilling numbers, cross-checks with Bowers, and probes the calibration lever. Six fields; this lesson walks each: exact expected value, tolerance, route, and the slip that loses it.
+## The six fields, on the teaching case
 
-## The six fields
-
-Pore pressure as EMW at TD, expected 1179.1048116553065 kg/m3, tolerance 0.5. Fracture pressure as EMW at TD, 1903.9238599165737, tolerance 0.5. The window between them, 724.8190482612672, tolerance 0.5. Bowers loading velocity at 5 MPa, 1949.944709834568 m/s, tolerance 0.5. Bowers unloading stress at 3125.8 m/s, 10 MPa, tolerance 0.01. Pore pressure at TD with n 1.2, 43.901549937778526 MPa, tolerance 0.01.
+Pore pressure as EMW at TD, 1179.1048116553065 kg/m3, tolerance 0.5. Fracture pressure as EMW at TD, 1903.9238599165737, tolerance 0.5. The window between them, 724.8190482612672, tolerance 0.5. Bowers loading velocity (at 5 MPa on the fixture), 1949.944709834568 m/s, tolerance 0.5. Bowers unloading stress (from 3125.8 m/s on the fixture), 10 MPa, tolerance 0.01. Pore pressure at TD with the second exponent (n 1.2 here), 43.901549937778526 MPa, tolerance 0.01.
 
 ## Field by field
 
-The floor. One division: 47408579.625 over $9.80665 \times 4100 = 40207.265$. The slips: dividing by 4000 m of sediment alone, 1208.58, wrong by sixty tolerances; or a rig-floor datum imported from habit. Column and datum, then divide.
+The floor. One division; on the teaching case 47408579.625 over $9.80665 \times 4100 = 40207.265$, the column being TD plus the stated water depth. The slips: dividing by 4000 m of sediment alone, 1208.58, wrong by sixty tolerances; or a rig-floor datum imported from habit. Column and datum, then divide.
 
 The ceiling. Same division on 76551571.17548856: 1903.92. The slip: converting the OVERBURDEN instead of the fracture pressure, 2266.33, a wall the well does not have; the mixture audit, two thirds overburden EMW plus one third floor, catches any such swap in one line.
 
@@ -30,10 +28,10 @@ Time allocation for the sitting: the three conversions are two minutes; the Bowe
 
 ## Worked example
 
-The full submission, six lines. Floor: $47408579.625 / 40207.265 = 1179.10$ kg/m3. Ceiling: $76551571.17548856 / 40207.265 = 1903.92$. Window: $1903.9238599165737 - 1179.1048116553065 = 724.82$. Loading: $(5000 + 10 \times (5 \times 10^6 / 6894.757293168361)^{0.75}) \times 0.3048 = 1949.94$ m/s. Unloading: written in stages as the module taught, since the one-line form invites bracket errors: loading-equivalent $(((3125.808993287662 / 0.3048 - 5000)/10)^{4/3}) \times 6894.757293168361 = 29.240177382128643$ MPa, then over 50, cubed, times 50: 10.00 MPa. Exponent: $41.408579625 + 49.714487325732826 \times (1 - 0.9580337483265022^{1.2}) = 43.9015$ MPa. Every line audited by a protection from this course.
+The teaching case, six lines. Floor: $47408579.625 / 40207.265 = 1179.10$ kg/m3. Ceiling: $76551571.17548856 / 40207.265 = 1903.92$. Window: $1903.9238599165737 - 1179.1048116553065 = 724.82$. Loading: $(5000 + 10 \times (5 \times 10^6 / 6894.757293168361)^{0.75}) \times 0.3048 = 1949.94$ m/s. Unloading: written in stages as the module taught, since the one-line form invites bracket errors: loading-equivalent $(((3125.808993287662 / 0.3048 - 5000)/10)^{4/3}) \times 6894.757293168361 = 29.240177382128643$ MPa, then over 50, cubed, times 50: 10.00 MPa. Exponent: $41.408579625 + 49.714487325732826 \times (1 - 0.9580337483265022^{1.2}) = 43.9015$ MPa. Every line audited by a protection from this course.
 
 ## Exercise
 
-Close the book and reconstruct the six values from structure: which are conversions, which are curve evaluations, which are chains, and which are exact by construction? Then check against the list.
+Close the book and sort the six fields by structure: which are conversions, which are curve evaluations, which are chains, and which are exact by construction? Then check against the list.
 
 Self check: conversions are the floor and ceiling, one division each; the window is a subtraction protected by three routes. Curve evaluations are the Bowers pair, one forward on loading, one backward through unloading, the second exact at 10 by fixture construction. The chain is the n 1.2 pore pressure, the only field where the Professional tier's five steps re-run in full. Knowing the kinds tells you where checking time goes: the chain gets the most, the conversions the least, and the Bowers pair gets its time at the unit edges, where all its risk lives.

@@ -1,6 +1,6 @@
 # The graded inversion
 
-The capstone's fifth field: the effective stress the unloading form reads from 3125.8 m/s, with sigma_max 50 MPa and U 3. Expected value, exactly 10 MPa, tolerance 0.01. This lesson computes it, explains the suspicious roundness, and prices the assumptions it stands on.
+The capstone's fifth field is the effective stress the unloading form reads from a stated velocity. On the golden fixture: 3125.8 m/s, with sigma_max 50 MPa and U 3, reading exactly 10 MPa. The capstone grades it to 0.01 MPa on inputs its brief states. This lesson computes it, explains the suspicious roundness, and prices the assumptions it stands on.
 
 ## The inversion, formally
 
@@ -18,7 +18,7 @@ Then the unloading layer, workable in SI: divide by $\sigma_{max}$, $29.24017738
 
 ## Why it is exactly 10
 
-Because the fixture built it that way: 3125.808993287662 m/s IS the unloading velocity at exactly 10 MPa, computed forward in last lesson's worked example, and the capstone asks you to run the loop backward. The graded pair, forward at 5 MPa on loading and backward to 10 MPa on unloading, tests both directions of both curves with two clean integers as the anchors.
+Because the fixture built it that way: 3125.808993287662 m/s IS the unloading velocity at exactly 10 MPa, computed forward in last lesson's worked example, and the inversion runs the loop backward. The fixture pair, forward at 5 MPa on loading and backward to 10 MPa on unloading, tests both directions of both curves with two clean integers as the anchors.
 
 This is the same pedagogy as the Eaton ramp: known answers, exact recovery, machinery certified. And the same epistemology warning attaches: recovering the encoded 10 certifies your arithmetic, not the parameters. The 10 is only as real as the 50 and the 3 it was computed through.
 

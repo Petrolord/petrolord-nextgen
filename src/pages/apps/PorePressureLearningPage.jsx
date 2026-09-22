@@ -15,7 +15,7 @@ import {
   BookOpen, Award, ArrowRight,
 } from 'lucide-react';
 import {
-  WELL, PARAMS, NCT_PICKS, RAMP_TOP_M, TD_M, EATON_N_OPTIONS, CAPSTONE_EATON_N,
+  WELL, PARAMS, NCT_PICKS, RAMP_TOP_M, TD_M, EATON_N_OPTIONS, TEACHING_EATON_N,
   computeBasics, computePrognosis, computeMudWindow,
 } from '@/lib/porepressureTeaching';
 import {
@@ -104,7 +104,7 @@ const PorePressureLearningPage = () => {
   const { actualRole } = useRole();
   const [gate, setGate] = useState({ loading: true, allowed: false, quota: null });
   const [tier, setTier] = useState('beginner');
-  const [eatonN, setEatonN] = useState(CAPSTONE_EATON_N);
+  const [eatonN, setEatonN] = useState(TEACHING_EATON_N);
   const [capstone, setCapstone] = useState(null);
   const [answers, setAnswers] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -158,7 +158,7 @@ const PorePressureLearningPage = () => {
       } else {
         toast({
           title: 'Not passing yet',
-          description: `${res.score}/${res.max_score} answers within tolerance. Read the panels at the capstone settings (Eaton n = ${CAPSTONE_EATON_N}) and try again.`,
+          description: `${res.score}/${res.max_score} answers within tolerance. Type the setting the brief states into the course panels and read them again.`,
           variant: 'destructive',
         });
       }
@@ -278,11 +278,11 @@ const PorePressureLearningPage = () => {
           </div>
 
           {tier === 'intermediate' && (() => {
-            const prog = computePrognosis(CAPSTONE_EATON_N);
+            const prog = computePrognosis(TEACHING_EATON_N);
             return (
               <Card className="bg-[#1E293B] border-gray-700">
                 <CardHeader>
-                  <CardTitle className="text-white">Eaton prognosis (Intermediate), n = {CAPSTONE_EATON_N}</CardTitle>
+                  <CardTitle className="text-white">Eaton prognosis (Intermediate), n = {TEACHING_EATON_N}</CardTitle>
                   <CardDescription>
                     The full pipeline over the golden sonic: density → overburden → NCT ratio → Eaton →
                     fracture pressure. Onset = the first sample more than 0.05 MPa above hydrostatic.
@@ -316,14 +316,14 @@ const PorePressureLearningPage = () => {
 
           {tier === 'advanced' && (() => {
             const mw = computeMudWindow();
-            const shown = eatonN === CAPSTONE_EATON_N ? mw.base : mw.alt;
+            const shown = eatonN === TEACHING_EATON_N ? mw.base : mw.alt;
             return (
               <Card className="bg-[#1E293B] border-gray-700">
                 <CardHeader>
                   <CardTitle className="text-white">Mud-weight window and the Bowers cross-check (Advanced)</CardTitle>
                   <CardDescription>
                     Pressures become drilling numbers: equivalent mud weight referenced to sea level
-                    (P / g·(z + water depth)). The capstone grades the n = {CAPSTONE_EATON_N} window.
+                    (P / g·(z + water depth)). The teaching case reads the n = {TEACHING_EATON_N} window.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -430,7 +430,7 @@ const PorePressureLearningPage = () => {
                     </>
                   ) : (
                     <p className="text-red-300 font-medium flex items-center gap-2">
-                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance — read the panels at the capstone settings and try again.
+                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Type the setting the brief states into the course panels and read them again.
                     </p>
                   )}
                 </div>

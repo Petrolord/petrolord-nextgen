@@ -1,6 +1,6 @@
 # The TD numbers
 
-Four of the capstone's six graded values live at total depth: the trend transit time, the pore pressure, the overpressure, and the fracture pressure. This lesson assembles all four and files them against the frame, because at total depth every curve this course has drawn comes to a point and the numbers have to agree with each other.
+Four of the tier's six headline values live at total depth: the trend transit time, the pore pressure, the overpressure, and the fracture pressure. This lesson assembles all four and files them against the frame, because at total depth every curve this course has drawn comes to a point and the numbers have to agree with each other.
 
 ## The trend at TD
 
@@ -16,7 +16,7 @@ From the chain: ratio $259.5530276341839 / 270.92263512383806 = 0.95803374832650
 
 $$PP(TD) = 41.408579625 + 6 = 47.408579625 \ \mathrm{MPa}$$
 
-graded at 0.01. Notice the graded value is hydrostatic plus overpressure with both parts exact: the capstone's pp_td and op_td fields are not independent numbers, they differ by exactly the hydrostatic the Associate tier computed. Internal consistency like this is your friend in the exam: any two of hydrostatic, pore pressure and overpressure at TD determine the third, so compute two and check the third.
+graded at 0.01. Notice the value is hydrostatic plus overpressure with both parts exact: pore pressure and overpressure at TD are not independent numbers, they differ by exactly the hydrostatic the Associate tier computed. Internal consistency like this is your friend in the exam: any two of hydrostatic, pore pressure and overpressure at TD determine the third, so compute two and check the third.
 
 ## The overpressure at TD
 
@@ -24,7 +24,7 @@ Exactly 6 MPa, graded at 0.01, and by now you can say precisely why: 4 kPa per m
 
 ## The fracture pressure at TD
 
-Module 5 derives the formula; the capstone needs its value:
+Module 5 derives the formula; here is its value on the teaching case:
 
 $$FP = K(S - PP) + PP = \tfrac{2}{3}(91.12306695073282 - 47.408579625) + 47.408579625 = 76.55157117548856 \ \mathrm{MPa}$$
 

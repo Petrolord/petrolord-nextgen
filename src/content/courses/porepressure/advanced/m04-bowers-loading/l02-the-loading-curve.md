@@ -38,7 +38,7 @@ What breaks the assumption is stress REDUCTION after burial: uplift, or late ove
 
 ## Worked example
 
-Evaluate the curve at 20 MPa by hand through the published domain, practising for lesson 4's graded route. Convert: $20 \times 10^6 / 6894.757293168361 = 2900.7547546041847$ psi. Power: $2900.7547546041847^{0.75} = 395.2603579193691$. Times $A$: 3952.603579193691 ft/s. Plus mudline: 8952.603579193691 ft/s. Convert: $\times 0.3048 = 2728.7535709382373$ m/s, and the engine's bowersVLoading at 20 MPa returns exactly that. The chain is four operations and two unit conversions, and every graded Bowers value in the capstone is this chain or its reverse.
+Evaluate the curve at 20 MPa by hand through the published domain, practising for lesson 4's graded route. Convert: $20 \times 10^6 / 6894.757293168361 = 2900.7547546041847$ psi. Power: $2900.7547546041847^{0.75} = 395.2603579193691$. Times $A$: 3952.603579193691 ft/s. Plus mudline: 8952.603579193691 ft/s. Convert: $\times 0.3048 = 2728.7535709382373$ m/s, and the engine's bowersVLoading at 20 MPa returns exactly that. The chain is four operations and two unit conversions, and every Bowers value the capstone asks for is this chain or its reverse.
 
 ## Exercise
 

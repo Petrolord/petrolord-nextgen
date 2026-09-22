@@ -25,7 +25,7 @@ Four velocities through the transform, as the engine computes them:
 | 2500 | 2192.0310216782973 |
 | 3000 | 2294.256693926084 |
 
-The value at 1600 m/s, 1960.612149304395 kg/m3, is one of the six numbers the capstone grades, with a tolerance of 0.5 kg/m3.
+The value at 1600 m/s is 1960.612149304395 kg/m3. The capstone asks for a Gardner density at a velocity its brief states, with a tolerance of 0.5 kg/m3.
 
 Two things to read off that table. The first is a sanity check. A velocity of 1600 m/s is a soft, shallow, water rich sediment, and the transform returns just under 2000 kg/m3 for it, which is what a soft shallow sediment weighs. A transform that returned 2600 kg/m3 there would be telling you something was wrong with the input.
 

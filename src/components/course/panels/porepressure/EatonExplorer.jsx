@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import {
-  TD_M, RAMP_TOP_M, CAPSTONE_EATON_N,
+  TD_M, RAMP_TOP_M, TEACHING_EATON_N, PARAMS,
   EXPLORER_N_OPTIONS_PRO, EXPLORER_THRESHOLDS_MPA, computeEatonExplorer,
 } from '@/lib/porepressureTeaching';
-import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Eaton explorer: the full prognosis down the golden well with the tier's
 // three levers exposed: the exponent, the trend the ratio is measured
@@ -18,14 +18,48 @@ const PAD = { left: 54, top: 22, right: 16, bottom: 34 };
 const fmt = (v, d = 3) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 
 const EatonExplorer = () => {
-  const [n, setN] = useState(String(CAPSTONE_EATON_N));
+  const [n, setN] = useState(String(TEACHING_EATON_N));
   const [trend, setTrend] = useState('well');
   const [thr, setThr] = useState('0.05');
+  // The well setting opens on the golden well's header; a capstone brief
+  // states its own and the learner types it in.
+  const [wd, setWd] = useState(String(PARAMS.waterDepthM));
+  const [rf, setRf] = useState(String(PARAMS.rhoFluidKgM3));
+  const [nu, setNu] = useState(String(PARAMS.nu));
 
-  const m = useMemo(
-    () => computeEatonExplorer(Number(n), trend, Number(thr)),
-    [n, trend, thr],
+  const m = useMemo(() => {
+    const c = { waterDepthM: Number(wd), rhoFluidKgM3: Number(rf), nu: Number(nu) };
+    const ok = Number(n) > 0 && Number(n) <= 10 && Number(thr) > 0 && Number(thr) < 20
+      && c.waterDepthM >= 0 && c.waterDepthM <= 3000 && c.rhoFluidKgM3 >= 900 && c.rhoFluidKgM3 <= 1300
+      && c.nu > 0 && c.nu < 0.5;
+    if (!ok) return null;
+    try {
+      return computeEatonExplorer(Number(n), trend, Number(thr), c);
+    } catch {
+      return null;
+    }
+  }, [n, trend, thr, wd, rf, nu]);
+
+  const inputs = (
+    <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 items-end">
+      <NumField label="Eaton exponent n" value={n} onChange={setN} />
+      <SelectField label="Compaction trend" value={trend} onChange={setTrend}
+        options={[['well', "the well's own (656 / 0.6 per km)"], ['fitted', 'fitted to the picks (650 / 0.7 per km)']]} />
+      <NumField label="Onset threshold (MPa)" value={thr} onChange={setThr} />
+      <NumField label="Water depth (m)" value={wd} onChange={setWd} />
+      <NumField label="Pore fluid density (kg/m3)" value={rf} onChange={setRf} />
+      <NumField label="Poisson's ratio" value={nu} onChange={setNu} />
+    </div>
   );
+
+  if (!m) {
+    return (
+      <PanelShell title="Eaton explorer" subtitle="Enter an exponent, a threshold and a well setting.">
+        {inputs}
+        <Note>The exponent must lie between 0 and 10, the threshold above 0 MPa, the water depth 0 to 3000 m, the pore fluid 900 to 1300 kg/m3 and Poisson&apos;s ratio between 0 and 0.5.</Note>
+      </PanelShell>
+    );
+  }
 
   const plotW = W - PAD.left - PAD.right;
   const plotH = H - PAD.top - PAD.bottom;
@@ -33,18 +67,18 @@ const EatonExplorer = () => {
   const sy = (z) => PAD.top + (z / TD_M) * plotH;
   const sx = (mpa) => PAD.left + (mpa / pMax) * plotW;
   const path = (key) => m.curve.map((p, i) => `${i ? 'L' : 'M'} ${sx(p[key]).toFixed(1)} ${sy(p.z).toFixed(1)}`).join(' ');
-  const loopCloses = trend === 'well' && Number(n) === CAPSTONE_EATON_N;
+  const loopCloses = trend === 'well' && Number(n) === TEACHING_EATON_N
+    && Number(wd) === PARAMS.waterDepthM && Number(rf) === PARAMS.rhoFluidKgM3;
 
   return (
     <PanelShell title="Eaton explorer"
       subtitle="The prognosis over the golden sonic. The exponent, the trend and the onset threshold are the choices an interpreter actually makes, so all three are exposed.">
-      <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 items-end">
-        <SelectField label="Eaton exponent n" value={n} onChange={setN}
-          options={EXPLORER_N_OPTIONS_PRO.map((v) => [String(v), v === CAPSTONE_EATON_N ? '3 (capstone)' : String(v)])} />
-        <SelectField label="Compaction trend" value={trend} onChange={setTrend}
-          options={[['well', "the well's own (656 / 0.6 per km)"], ['fitted', 'fitted to the picks (650 / 0.7 per km)']]} />
-        <SelectField label="Onset threshold" value={thr} onChange={setThr}
-          options={EXPLORER_THRESHOLDS_MPA.map((v) => [String(v), `${v} MPa`])} />
+      {inputs}
+      <div className="text-xs text-gray-500">
+        The panel opens on the teaching case: the golden well&apos;s header at n = {TEACHING_EATON_N}, a 0.05 MPa
+        onset threshold and Poisson&apos;s ratio {PARAMS.nu}. Try {EXPLORER_N_OPTIONS_PRO.join(', ')} for the exponent
+        and {EXPLORER_THRESHOLDS_MPA.join(', ')} MPa for the threshold. A capstone brief states a setting of its
+        own; type it in.
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full mt-3" role="img"

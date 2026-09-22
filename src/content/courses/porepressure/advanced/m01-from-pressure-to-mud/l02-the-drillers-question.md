@@ -18,7 +18,7 @@ That collapse is the entire reason equivalent mud weight exists. It is not a uni
 
 The Associate tier taught that EMW is referenced to a datum, sea level in this course, and that a value on a different datum is a different number. At this tier the discipline stops being pedantic and starts being operational: the mud column stands from the rig floor, not sea level, and offshore the gap between the two is real. This course keeps sea level throughout, states it, and flags every place a rig-floor reference would shift a value; the exercise below quantifies the shift once, so you know its size, several kg/m3 for a typical air gap, an order of magnitude over the capstone tolerances.
 
-The general rule to carry: an EMW without a stated datum is not yet a number. The capstone's expected values are sea-level referenced, as the capstone statement says.
+The general rule to carry: an EMW without a stated datum is not yet a number. The capstone's expected values are sea-level referenced, as its brief says.
 
 ## What this tier's window is not, yet
 

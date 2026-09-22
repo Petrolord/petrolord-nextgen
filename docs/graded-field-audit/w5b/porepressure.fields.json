@@ -1,0 +1,148 @@
+[
+ {
+  "tier": "beginner",
+  "key": "hydro_td_mpa",
+  "label": "Hydrostatic pressure at TD",
+  "unit": "MPa",
+  "tol": 0.01,
+  "expected": 43.3086180625
+ },
+ {
+  "tier": "beginner",
+  "key": "ob_td_mpa",
+  "label": "Overburden stress at TD",
+  "unit": "MPa",
+  "tol": 0.01,
+  "expected": 92.63083938823286
+ },
+ {
+  "tier": "beginner",
+  "key": "gardner_rho",
+  "label": "Gardner density at 1750 m/s",
+  "unit": "kg/m3",
+  "tol": 0.5,
+  "expected": 2005.0315278060425
+ },
+ {
+  "tier": "beginner",
+  "key": "nct_case_depth",
+  "label": "NCT transit time at 2750 m",
+  "unit": "us/m",
+  "tol": 0.5,
+  "expected": 303.7337601586488
+ },
+ {
+  "tier": "beginner",
+  "key": "fit_dtml",
+  "label": "Fitted NCT mudline transit time",
+  "unit": "us/m",
+  "tol": 0.5,
+  "expected": 634.6745981683341
+ },
+ {
+  "tier": "beginner",
+  "key": "fit_c_per_km",
+  "label": "Fitted compaction constant",
+  "unit": "1/km",
+  "tol": 0.005,
+  "expected": 0.6385297904636702
+ },
+ {
+  "tier": "intermediate",
+  "key": "onset_m",
+  "label": "Overpressure onset depth (0.25 MPa threshold)",
+  "unit": "m bml",
+  "tol": 0,
+  "expected": 2590,
+  "context": "onset|overpressure",
+  "context_word": "overpressure onset"
+ },
+ {
+  "tier": "intermediate",
+  "key": "budget_td_mpa",
+  "label": "Overburden minus hydrostatic at TD",
+  "unit": "MPa",
+  "tol": 0.01,
+  "expected": 49.322221325732855
+ },
+ {
+  "tier": "intermediate",
+  "key": "pp_3000_mpa",
+  "label": "Pore pressure at 3000 m",
+  "unit": "MPa",
+  "tol": 0.01,
+  "expected": 34.57540894296633
+ },
+ {
+  "tier": "intermediate",
+  "key": "pp_td_mpa",
+  "label": "Pore pressure at TD",
+  "unit": "MPa",
+  "tol": 0.01,
+  "expected": 47.74799153175756
+ },
+ {
+  "tier": "intermediate",
+  "key": "op_td_mpa",
+  "label": "Overpressure at TD",
+  "unit": "MPa",
+  "tol": 0.01,
+  "expected": 4.439373469257563
+ },
+ {
+  "tier": "intermediate",
+  "key": "fp_td_mpa",
+  "label": "Fracture pressure at TD",
+  "unit": "MPa",
+  "tol": 0.01,
+  "expected": 71.9156788390904
+ },
+ {
+  "tier": "advanced",
+  "key": "pp_emw_td",
+  "label": "Pore pressure as EMW at TD",
+  "unit": "kg/m3",
+  "tol": 0.5,
+  "expected": 1145.6329671074357
+ },
+ {
+  "tier": "advanced",
+  "key": "fp_emw_td",
+  "label": "Fracture pressure as EMW at TD",
+  "unit": "kg/m3",
+  "tol": 0.5,
+  "expected": 1725.4960865772755
+ },
+ {
+  "tier": "advanced",
+  "key": "window_td",
+  "label": "Mud-weight window at TD",
+  "unit": "kg/m3",
+  "tol": 0.5,
+  "expected": 579.8631194698398
+ },
+ {
+  "tier": "advanced",
+  "key": "bowers_v_case",
+  "label": "Bowers loading velocity at 8 MPa",
+  "unit": "m/s",
+  "tol": 0.5,
+  "expected": 2063.3848832274025
+ },
+ {
+  "tier": "advanced",
+  "key": "bowers_sigma_mpa",
+  "label": "Bowers unloading stress at 2900 m/s",
+  "unit": "MPa",
+  "tol": 0.01,
+  "expected": 10.113305897648297
+ },
+ {
+  "tier": "advanced",
+  "key": "pp_td_alt_n_mpa",
+  "label": "Pore pressure at TD with n = 1.5",
+  "unit": "MPa",
+  "tol": 0.01,
+  "expected": 46.38061545588117
+ }
+]

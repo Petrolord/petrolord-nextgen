@@ -10,7 +10,7 @@ Think of a column of unit cross section standing on the point of interest and re
 
 The column offshore has two parts. Above the mudline it is seawater at 1025 kg/m3 in this well, standing 100 m deep. Below the mudline it is bulk rock, meaning the grains and the fluid in the pore space taken together. The density log reads exactly that bulk quantity, which is why the density log is the input the overburden calculation wants.
 
-For the golden well the two ends of the answer are these. At the mudline the overburden is 1.005182 MPa, and every pascal of it is seawater. At TD, 4000 m below the mudline, it is 91.12306695073282 MPa. That second value is one of the six numbers the capstone grades, with a tolerance of 0.01 MPa.
+For the golden well the two ends of the answer are these. At the mudline the overburden is 1.005182 MPa, and every pascal of it is seawater. At TD, 4000 m below the mudline, it is 91.12306695073282 MPa. Overburden at TD is one of the six quantities the capstone asks for, on a setting of its own, with a tolerance of 0.01 MPa.
 
 ## The ceiling on pore pressure
 

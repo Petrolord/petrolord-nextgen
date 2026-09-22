@@ -14,7 +14,7 @@ $$220 + (656 - 220) \, e^{-0.0006 \times 2500} = 317.2847498247154 \text{ us/m}$
 
 The bracket is 436 us/m, the amount of transit time available to be lost between a mudline suspension and a zero porosity matrix. The exponent is $-0.0006 \times 2500 = -1.5$, so the exponential has decayed to a little over a fifth of its starting value, and a little over a fifth of the 436 remains on top of the 220 floor.
 
-That value, 317.2847498247154 us/m, is one of the six numbers the capstone grades, with a tolerance of 0.5 us/m. It is worth doing on a calculator once, because the shape of the arithmetic is the shape of the physics.
+That value is 317.2847498247154 us/m. The trend value at a stated depth is one of the six quantities the capstone asks for, with a tolerance of 0.5 us/m. It is worth doing on a calculator once, because the shape of the arithmetic is the shape of the physics.
 
 Notice also that the golden well's log reads exactly 317.2847498247154 us/m at 2500 m. The log is on the trend there. That is the depth where the overpressure ramp begins, so 2500 m is the last depth at which this well is normally pressured.
 

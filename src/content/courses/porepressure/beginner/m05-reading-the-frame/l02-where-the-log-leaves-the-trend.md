@@ -15,7 +15,7 @@ Compare the log transit time against the well's own compaction trend down the fr
 | 2000 | 351.32067639372013 | 351.320676 |
 | 2500 | 317.2847498247154  | 317.284750 |
 
-The log sits on the trend. At 2500 m the two are the same number to every digit either of them carries, 317.2847498247154 us/m. That is the value the capstone grades, and it is the last depth at which the well behaves normally.
+The log sits on the trend. At 2500 m the two are the same number to every digit either of them carries, 317.2847498247154 us/m. It is the last depth at which the well behaves normally.
 
 A section that tracks its trend is a section in hydrostatic equilibrium. The pore fluid there has been free to escape upward as the grains packed closer, so the pressure in the pores is the weight of a connected fluid column and nothing more. Boring is the correct result for most of most wells.
 

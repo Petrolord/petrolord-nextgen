@@ -438,3 +438,4 @@ A printed number counts as a leak when typing it would pass: it lies within the 
 
 | Course | Tiers | Case (what the brief states) |
 |---|---|---|
+| porepressure | all | the same golden logs at an appraisal setting: 250 m of water, pore fluid 1040 kg/m3. beginner: Gardner at 1750 m/s, the trend at 2750 m, fit matrix 210 us/m. intermediate: Eaton n 2.2, onset threshold 0.25 MPa, Poisson's ratio 0.35. advanced: the same prognosis to EMW, Bowers A 11 and B 0.72 at 8 MPa and from 2900 m/s (sigma max 45 MPa, U 3.5), second exponent 1.5. The NCT-at-TD field became overburden minus hydrostatic at TD (budget_td_mpa), because the trend at TD does not depend on the setting. |

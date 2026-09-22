@@ -22,7 +22,7 @@ The engine computes the coefficient form:
 
 $$FP = K\,(S - PP) + PP$$
 
-with $K$ a stress-ratio coefficient. It is the workhorse form of fracture gradient practice, common to Eaton's fracture method and to Matthews and Kelly, who differ only in where $K$ comes from. The capstone specifies $K$ from Poisson's ratio at $\nu = 0.4$, giving $K = \nu/(1-\nu) = 2/3$, and grades the TD value of 76.55157117548856 MPa.
+with $K$ a stress-ratio coefficient. It is the workhorse form of fracture gradient practice, common to Eaton's fracture method and to Matthews and Kelly, who differ only in where $K$ comes from. The teaching case takes $K$ from Poisson's ratio at $\nu = 0.4$, giving $K = \nu/(1-\nu) = 2/3$, and a TD value of 76.55157117548856 MPa; the capstone states a Poisson's ratio of its own.
 
 Read the form once, mechanically: take the effective stress $S - PP$, keep the fraction $K$ of it as horizontal confinement, add back the pore pressure. Everything the module does unpacks those three motions.
 

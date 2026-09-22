@@ -1,10 +1,10 @@
 # Worked: velocity at 5 MPa
 
-One graded field, walked end to end at exam pace, with the checks that protect it and the readings that give the bare number its meaning. This is the shortest capstone field in the whole ladder, five operations, and the lesson uses the spare room to teach what the number is FOR.
+One capstone quantity, walked end to end at exam pace on the golden fixture, with the checks that protect it and the readings that give the bare number its meaning. This is the shortest capstone field in the whole ladder, five operations, and the lesson uses the spare room to teach what the number is FOR.
 
 ## The computation
 
-The capstone asks: the loading velocity at 5 MPa effective stress, coefficients A 10, B 0.75. Tolerance 0.5 m/s.
+The question, on the golden fixture: the loading velocity at 5 MPa effective stress, coefficients A 10, B 0.75. The capstone asks the same question with a stress and coefficients its brief states, to a tolerance of 0.5 m/s.
 
 Step 1, stress to the published domain: $5 \times 10^6\ \mathrm{Pa} / 6894.757293168361 = 725.1886886510462$ psi.
 
@@ -26,7 +26,7 @@ Consistency check: in the normal section effective stress equals the budget, and
 
 ## What this point is for
 
-Why does the capstone grade the FORWARD direction, when prediction runs backward? Because the forward evaluation is how a Bowers calibration is used in anger: against every depth where pressure is known, evaluate the curve and compare with the log. The 5 MPa point is a stand-in for that workflow.
+Why does the capstone grade the FORWARD direction, when prediction runs backward? Because the forward evaluation is how a Bowers calibration is used in anger: against every depth where pressure is known, evaluate the curve and compare with the log. The single stress point is a stand-in for that workflow.
 
 On this well the known-pressure depth is everywhere, so module 5 will run the comparison at TD and close the loop. On a real well the known depths are the few with measured pressures, and the forward residuals at those depths are the evidence that A and B fit the basin, exactly as measured pressures were the evidence for Eaton's n in module 3. The two methods have the same calibration epistemology; they differ in what they parameterise, a depth trend against a stress law, which is why their errors decorrelate and their agreement means something.
 

@@ -22,7 +22,7 @@ The loop: at n 3 the recovered overpressure matches the encoded ramp to a hundre
 
 The second method: Bowers' loading curve, fed the TD velocity, returns a pore pressure 0.038 MPa from the n 3 Eaton value, module 5's centrepiece. Two methods with different mathematics converging on 47.4 is independent endorsement; the n 1.2 value of 43.9 sits 3.5 MPa from the Bowers answer.
 
-So on the golden well, n 3 is not a preference, it is the finding. The capstone still grades the n 1.2 number because computing the alternative correctly IS the skill: a calibration argument conducted between people who cannot each run both candidates cleanly is noise.
+So on the golden well, n 3 is not a preference, it is the finding. The capstone still grades a low-exponent alternative because computing the alternative correctly IS the skill: a calibration argument conducted between people who cannot each run both candidates cleanly is noise.
 
 ## Before the evidence: how to carry two exponents
 

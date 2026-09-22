@@ -28,7 +28,7 @@ That reading discipline is the final skill of the module: a cross-check is not a
 
 ## The course's argument, closed
 
-Assemble what has now been shown about this one well, tier by tier. The frame is arithmetic: hydrostatic 41.409, overburden 91.123 MPa at TD. The prognosis on the defended trend recovers the encoded ramp exactly: 6 MPa of overpressure, onset detected at 2520 m. The window in the driller's units: floor 1179.10, ceiling 1903.92, room 724.82 kg/m3. The calibration alternative is computed, priced at 87 kg/m3, and rejected on this well by the closed loop. And an independent method agrees to 0.038 MPa at the deepest point, certifying the mechanism. That is what a finished pressure argument looks like: every number derived, every choice defended, every uncertainty priced, and a second method in agreement. The capstone asks for six of these numbers; the standard it is really examining is the argument.
+Assemble what has now been shown about this one well, tier by tier. The frame is arithmetic: hydrostatic 41.409, overburden 91.123 MPa at TD. The prognosis on the defended trend recovers the encoded ramp exactly: 6 MPa of overpressure, onset detected at 2520 m. The window in the driller's units: floor 1179.10, ceiling 1903.92, room 724.82 kg/m3. The calibration alternative is computed, priced at 87 kg/m3, and rejected on this well by the closed loop. And an independent method agrees to 0.038 MPa at the deepest point, certifying the mechanism. That is what a finished pressure argument looks like: every number derived, every choice defended, every uncertainty priced, and a second method in agreement. The capstone asks for six of these numbers on a setting of its own; the standard it is really examining is the argument.
 
 ## Worked example
 

@@ -4,9 +4,9 @@ The Associate tier ended module 4 with a finding that looked like a curiosity: t
 
 At this tier that curiosity becomes the most consequential fact about the well. Eaton's ratio is measured against a trend. This well has two candidate trends, and they give different answers. Not slightly different: module 4 of this tier will show that running the same prognosis on the fitted trend more than doubles the overpressure at total depth and reports an onset at 120 m below the mudline, which is absurd on its face. Choosing the trend is the single largest decision in the method.
 
-## Which trend the capstone uses
+## Which trend the tier uses
 
-The capstone statement is explicit: run the pipeline on the well's own NCT, the 656/220/0.0006 of the header. Every graded number in this tier comes from that trend.
+Run the pipeline on the well's own NCT, the 656/220/0.0006 of the header. Every number this tier works, and the capstone's prognosis, comes from that trend.
 
 That is a deliberate choice with a physical justification, not an arbitrary one. The well's sonic was constructed on the header trend. Above 2500 m the log sits exactly on it; the encoded ramp below 2500 m was written as a departure from it. The header trend is, on this synthetic well, the true normal-compaction behaviour, in the way that only a synthetic well can have a true anything.
 
@@ -16,7 +16,7 @@ The fitted trend is not wrong as a fit. It is a perfect fit to the twelve picks 
 
 Both trends share the matrix time of 220 us/m. They differ at the mudline by 6 us/m, 656 against 650, and in the decay constant by a sixth, 0.6 against 0.7 per km. Small numbers. Here is what they do with depth.
 
-At the mudline the gap is 6 us/m, the fitted trend below the header. At 2500 m the header trend reads 317.2847498247154 us/m, the number the Associate capstone graded. The fitted trend, decaying faster from a lower start, reads lower still. By total depth the header trend reads 259.5530276341839 us/m and the gap between the two trends has grown, because an exponential with a larger decay constant keeps pulling away.
+At the mudline the gap is 6 us/m, the fitted trend below the header. At 2500 m the header trend reads 317.2847498247154 us/m, the Associate tier's teaching value. The fitted trend, decaying faster from a lower start, reads lower still. By total depth the header trend reads 259.5530276341839 us/m and the gap between the two trends has grown, because an exponential with a larger decay constant keeps pulling away.
 
 The direction matters more than the size. The fitted trend sits below the header trend at every depth. A trend that reads low says the rock should be faster than it is, everywhere. Fed to Eaton, a low trend makes every ratio less than one, which makes every depth look at least slightly overpressured, from near the mudline down. That is where module 4's spurious 120 m onset will come from, and you can already see it coming with no computation at all.
 

@@ -57,7 +57,7 @@ The curve does not start at zero. At the mudline, 0 m below mudline, the hydrost
 
 The curve is a straight line below the mudline. Each 500 m of sediment adds the same increment of pressure, because the pore fluid density is treated as constant at 1030 kg/m3. That is a modelling choice. Real formation water changes density with salinity, temperature and pressure, and a careful prognosis in a deep well will vary it. At this tier it is constant, which makes the arithmetic exactly checkable.
 
-The value at total depth, 41.408579625 MPa at 4000 m below mudline, is one of the six graded numbers in the capstone. The next lesson has you compute it by hand.
+The value at total depth, 41.408579625 MPa at 4000 m below mudline, is the teaching value of one of the six quantities the capstone asks for. The next lesson has you compute it by hand.
 
 ## Exercise
 

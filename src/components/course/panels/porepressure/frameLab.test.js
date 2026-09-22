@@ -5,14 +5,14 @@ import {
 import { nctDt } from '@petrolord/engines/engines/porepressure/nct.js';
 import { G_ACCEL } from '@petrolord/engines/engines/porepressure/constants.js';
 
-// Pins the frame-explorer panel math to the live NG9 Beginner capstone oracle.
+// Pins the frame-explorer panel math to the teaching case (the pre-W5b NG9 Beginner capstone key).
 const MPA = 1e6;
 const idx = (z) => WELL.z_bml_m.indexOf(z);
 
 describe('porepressure frame explorer: engine math', () => {
   const b = computeBasics();
 
-  it('reproduces the NG9 beginner capstone answer key', () => {
+  it('reproduces the teaching case (the pre-W5b NG9 beginner key)', () => {
     expect(b.hydroTdPa / MPA).toBeCloseTo(41.408579625, 9);
     expect(b.obTdPa / MPA).toBeCloseTo(91.12306695073282, 9);
     expect(b.gardnerRho1600).toBeCloseTo(1960.612149304395, 9);
