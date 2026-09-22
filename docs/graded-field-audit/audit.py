@@ -158,6 +158,8 @@ def evaluate(caps, annots):
                 'owner_decision': bool(a.get('owner_decision')), 'recommendation': a.get('recommendation'),
                 'leak': a.get('leak'), 'reclassed_from': a.get('reclassed_from'), 'shipped': a.get('shipped'),
                 'evidence': a.get('evidence'), 'notes': a.get('notes')})
+            if a.get('stripped'):
+                row['stripped'] = a['stripped']
             rows.append(row)
     for k in by_key:
         if k not in seen:
@@ -211,6 +213,18 @@ def post_check(before, after, rows, waves=()):
                     errs.append(f'{k}: something other than tol moved')
             elif f0 != f1:
                 errs.append(f'{k}: moved but the recut does not name it')
+    # a stripped tier (W5 pick B): its brief carries no open-book label and is its
+    # pre-W1 brief again, the one the baseline dump holds
+    strips = {(r['course'], r['tier']): r['stripped'] for r in rows
+              if isinstance(r.get('stripped'), dict) and r['stripped'].get('wave') in waves}
+    for ck, st in sorted(strips.items()):
+        cb, ca = idx_b.get(ck), idx_a.get(ck)
+        if cb is None or ca is None:
+            continue
+        if 'Open book' in (ca.get('prompt') or ''):
+            errs.append(f'{ck}: stripped by {st["migration"]} but the brief still carries the open-book label')
+        elif ca.get('prompt') != cb.get('prompt'):
+            errs.append(f'{ck}: stripped, but the brief is not its pre-W1 text')
     # W2 lesson route: the lesson that now prints the form must carry it (read
     # from the repository this folder sits in; the apply dry run extracts
     # src/content beside it)
@@ -719,7 +733,8 @@ def selftest(caps, annots):
     global ANNOTS_FOR_POST
     ANNOTS_FOR_POST = annots
     rows = evaluate(caps, annots)[0]
-    waves = tuple(sorted({r['shipped']['wave'] for r in rows if isinstance(r.get('shipped'), dict) and r['shipped'].get('wave')}))
+    waves = tuple(sorted({r['shipped']['wave'] for r in rows if isinstance(r.get('shipped'), dict) and r['shipped'].get('wave')}
+                         | {r['stripped']['wave'] for r in rows if isinstance(r.get('stripped'), dict)}))
     shipped = {(r['course'], r['tier'], r['key']): r['shipped']['tol'][1] for r in rows
                if isinstance(r.get('shipped'), dict) and 'tol' in r['shipped']}
     rekeys = {(r['course'], r['tier'], r['key']): r['shipped']['rekey'] for r in rows
@@ -768,6 +783,21 @@ def selftest(caps, annots):
         first = next(iter(rekeys))
         red = bool(post_check(caps, after(skip=first), rows, waves))
         print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: one shipped re-key not applied")
+        ok &= red
+    stripped = sorted({(r['course'], r['tier']) for r in rows if isinstance(r.get('stripped'), dict)})
+    if stripped:
+        ck = stripped[0]
+        c2 = after()
+        cap2 = next(c for c in c2 if (c['app'], c['tier']) == ck)
+        cap2['prompt'] = 'Open book, in part: planted. ' + (cap2.get('prompt') or '')
+        red = bool(post_check(caps, c2, rows, waves))
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: a stripped tier ({ck[0]}/{ck[1]}) still labelled open book")
+        ok &= red
+        c2 = after()
+        cap2 = next(c for c in c2 if (c['app'], c['tier']) == ck)
+        cap2['prompt'] = (cap2.get('prompt') or '') + ' drift'
+        red = bool(post_check(caps, c2, rows, waves))
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: a stripped tier's brief drifted from its pre-W1 text")
         ok &= red
         c2 = after()
         k = first

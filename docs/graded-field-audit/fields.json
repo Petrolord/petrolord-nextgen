@@ -2964,7 +2964,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Sum of the fourteen lengths from a surface hanger = 2600.65 exactly; the prompt states the identity. tol 5e-7 is fine for an exact two-decimal sum.",
-  "notes": null
+  "notes": null,
+  "stripped": {
+   "migration": "20261028d_w5_completion.sql",
+   "wave": "w5d",
+   "why": "the string explorer drift table opened on every catalog row and printed both graded casing drifts (7 in 32 lb/ft liner, 13-3/8 in 68 lb/ft surface casing) to seven decimals; it now opens on the tubing class, and placing each casing in its class is the skill the capstone tests"
+  }
  },
  {
   "course": "completion",
@@ -2995,7 +3000,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Running sum through the packer row = 2594.4 exactly; a terminating decimal the learner types in full.",
-  "notes": null
+  "notes": null,
+  "stripped": {
+   "migration": "20261028d_w5_completion.sql",
+   "wave": "w5d",
+   "why": "the string explorer drift table opened on every catalog row and printed both graded casing drifts (7 in 32 lb/ft liner, 13-3/8 in 68 lb/ft surface casing) to seven decimals; it now opens on the tubing class, and placing each casing in its class is the skill the capstone tests"
+  }
  },
  {
   "course": "completion",
@@ -3022,11 +3032,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "(6.094 - 0.125) x 0.0254 = 0.1516126 exactly (7 decimals); tol 5e-8 is half a unit of the 7th decimal and the value is exact at 7 decimals.",
-  "notes": "Possible LEAK: the ClearanceExplorer size matrix prints '7.00 in 32.0 lb/ft 0.1516126' in its default state (probe). It is the catalog drift the lessons teach, so it is a lookup more than a leak, but the capstone's own 'trap' (32 lb/ft not 29) is answered on screen."
+  "notes": "Possible LEAK: the ClearanceExplorer size matrix prints '7.00 in 32.0 lb/ft 0.1516126' in its default state (probe). It is the catalog drift the lessons teach, so it is a lookup more than a leak, but the capstone's own 'trap' (32 lb/ft not 29) is answered on screen.",
+  "stripped": {
+   "migration": "20261028d_w5_completion.sql",
+   "wave": "w5d",
+   "why": "the string explorer drift table opened on every catalog row and printed both graded casing drifts (7 in 32 lb/ft liner, 13-3/8 in 68 lb/ft surface casing) to seven decimals; it now opens on the tubing class, and placing each casing in its class is the skill the capstone tests"
+  }
  },
  {
   "course": "completion",
@@ -3055,7 +3070,7 @@
   },
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": {
    "migration": "20261022_b5_graded_tolerances.sql",
@@ -3065,7 +3080,12 @@
    ]
   },
   "evidence": "(12.415 - 5/32) x 0.0254 = 0.31137225 exactly, an 8-decimal value sitting exactly on the 7-decimal rounding boundary; stored expected 0.31137224999999996, tol 5e-8. The panel prints drifts to 7 decimals (fmt(r.driftM, 7)) and shows 0.3113722, which passes by 4e-17; a learner who rounds half up to 0.3113723 fails by 4e-17.",
-  "notes": "Possible LEAK: StringExplorer's drift table prints '13.375 68.00 -0.15625 0.3113722' in default state (probe), which is this field's answer (12.415 in bore is 13-3/8 68 lb/ft). Loosening only; cannot flip a pass."
+  "notes": "Possible LEAK: StringExplorer's drift table prints '13.375 68.00 -0.15625 0.3113722' in default state (probe), which is this field's answer (12.415 in bore is 13-3/8 68 lb/ft). Loosening only; cannot flip a pass.",
+  "stripped": {
+   "migration": "20261028d_w5_completion.sql",
+   "wave": "w5d",
+   "why": "the string explorer drift table opened on every catalog row and printed both graded casing drifts (7 in 32 lb/ft liner, 13-3/8 in 68 lb/ft surface casing) to seven decimals; it now opens on the tubing class, and placing each casing in its class is the skill the capstone tests"
+  }
  },
  {
   "course": "completion",
@@ -3096,7 +3116,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Sum of pi/4 x ID^2 x L over 14 rows; 7.852067852872 rounds to 7.852068 at the panel's 6-decimal volume convention (diff 1.5e-7 <= 5e-7).",
-  "notes": "tol 5e-7 is exactly half a unit of the 6-decimal print convention (panel fmt 6); it demands full-precision pi and no rounding of intermediate areas (pi = 3.14159 alone moves the answer by 7e-6). Honest by the rule, but unforgiving; owner may prefer 5e-4 for a 14-row hand sum."
+  "notes": "tol 5e-7 is exactly half a unit of the 6-decimal print convention (panel fmt 6); it demands full-precision pi and no rounding of intermediate areas (pi = 3.14159 alone moves the answer by 7e-6). Honest by the rule, but unforgiving; owner may prefer 5e-4 for a 14-row hand sum.",
+  "stripped": {
+   "migration": "20261028d_w5_completion.sql",
+   "wave": "w5d",
+   "why": "the string explorer drift table opened on every catalog row and printed both graded casing drifts (7 in 32 lb/ft liner, 13-3/8 in 68 lb/ft surface casing) to seven decimals; it now opens on the tubing class, and placing each casing in its class is the skill the capstone tests"
+  }
  },
  {
   "course": "completion",
@@ -3127,7 +3152,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Sum of pi/4 x OD^2 x L; 17.767445424 rounds to 17.767445 at 6 decimals (diff 4.2e-7 <= 5e-7, close to the edge).",
-  "notes": "Same fragility as capacity: 6-decimal rounding passes by 8e-8 only; 5 decimals fails."
+  "notes": "Same fragility as capacity: 6-decimal rounding passes by 8e-8 only; 5 decimals fails.",
+  "stripped": {
+   "migration": "20261028d_w5_completion.sql",
+   "wave": "w5d",
+   "why": "the string explorer drift table opened on every catalog row and printed both graded casing drifts (7 in 32 lb/ft liner, 13-3/8 in 68 lb/ft surface casing) to seven decimals; it now opens on the tubing class, and placing each casing in its class is the skill the capstone tests"
+  }
  },
  {
   "course": "completion",
@@ -22093,7 +22123,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "5 x the Associate D50 (hand-calc, full precision), and the Saucier range '5 to 6' is printed (SandExplorer.jsx:127). The Gravel view band tile prints only 2 decimals of um (757.74) against tol 0.0005 um, but the lesson routes the learner through the hand value.",
-  "notes": null
+  "notes": null,
+  "stripped": {
+   "migration": "20261028d_w5_perfsand.sql",
+   "wave": "w5d",
+   "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
+  }
  },
  {
   "course": "perfsand",
@@ -22122,11 +22157,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Typing the capstone D50 into 'Or a D50 directly (um)' gives gravel 16/30, largest gauge 23.4252 thou, gauge 20 thou and 'Gauge margin 87.00 um' (fmt(pack.marginM/UM, 3)); expected 8.7e-5 m is exactly 87 um, tol 5e-10 m.",
-  "notes": "Possible LEAK: the Gravel view's default state (graded sand, also sized to 16/30) shows 'Gauge margin 87.00 um' (probe), and the always-visible gauge table prints every gravel's margin (SandExplorer.jsx:163), so the answer space is the 7 table margins. Picking the right row still needs the Saucier band, so left as none."
+  "notes": "Possible LEAK: the Gravel view's default state (graded sand, also sized to 16/30) shows 'Gauge margin 87.00 um' (probe), and the always-visible gauge table prints every gravel's margin (SandExplorer.jsx:163), so the answer space is the 7 table margins. Picking the right row still needs the Saucier band, so left as none.",
+  "stripped": {
+   "migration": "20261028d_w5_perfsand.sql",
+   "wave": "w5d",
+   "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
+  }
  },
  {
   "course": "perfsand",
@@ -22155,7 +22195,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": "display",
   "shipped": {
    "wave": "w4a",
@@ -22163,7 +22203,12 @@
    "migration": "20261027a_w4_perfsand.sql"
   },
   "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
-  "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged."
+  "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged.",
+  "stripped": {
+   "migration": "20261028d_w5_perfsand.sql",
+   "wave": "w5d",
+   "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
+  }
  },
  {
   "course": "perfsand",
@@ -22192,7 +22237,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": "display",
   "shipped": {
    "wave": "w4a",
@@ -22200,7 +22245,12 @@
    "migration": "20261027a_w4_perfsand.sql"
   },
   "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
-  "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged."
+  "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged.",
+  "stripped": {
+   "migration": "20261028d_w5_perfsand.sql",
+   "wave": "w5d",
+   "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
+  }
  },
  {
   "course": "perfsand",
@@ -22229,7 +22279,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": "display",
   "shipped": {
    "wave": "w4a",
@@ -22237,7 +22287,12 @@
    "migration": "20261027a_w4_perfsand.sql"
   },
   "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
-  "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged."
+  "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged.",
+  "stripped": {
+   "migration": "20261028d_w5_perfsand.sql",
+   "wave": "w5d",
+   "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
+  }
  },
  {
   "course": "perfsand",
@@ -22266,7 +22321,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": "display",
   "shipped": {
    "wave": "w4a",
@@ -22274,7 +22329,12 @@
    "migration": "20261027a_w4_perfsand.sql"
   },
   "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
-  "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged."
+  "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged.",
+  "stripped": {
+   "migration": "20261028d_w5_perfsand.sql",
+   "wave": "w5d",
+   "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
+  }
  },
  {
   "course": "petrophysics",
@@ -36857,11 +36917,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "fmt(v.stringVolumeM3, 8) = 26.08360366; tol 5e-4.",
-  "notes": "All six beginner values appear on the VolumeExplorer after selecting the slant well; the capstone lesson directs the learner there, so this is the intended reading rather than a leak, but it means the tier grades a readout, not the span walk the prompt describes. Dataset metadata says 'shoe at 1500 m' but the fixture (wellcontrol_cases.json:191) and the capstone lesson use 1400 m; the prompt itself states no shoe depth."
+  "notes": "All six beginner values appear on the VolumeExplorer after selecting the slant well; the capstone lesson directs the learner there, so this is the intended reading rather than a leak, but it means the tier grades a readout, not the span walk the prompt describes. Dataset metadata says 'shoe at 1500 m' but the fixture (wellcontrol_cases.json:191) and the capstone lesson use 1400 m; the prompt itself states no shoe depth.",
+  "stripped": {
+   "migration": "20261028d_w5_wellcontrol.sql",
+   "wave": "w5d",
+   "why": "three Expert module 1 lessons (open to every learner) printed the slant shoe and bit true vertical depths to twelve decimals; they now round them to one decimal and say why. The volume explorer already opened on the horizontal well"
+  }
  },
  {
   "course": "wellcontrol",
@@ -36894,7 +36959,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "fmt(v.annulusVolumeM3, 8) = 72.4689441; tol 5e-4.",
-  "notes": "Default-state-plus-one-click match in the probe."
+  "notes": "Default-state-plus-one-click match in the probe.",
+  "stripped": {
+   "migration": "20261028d_w5_wellcontrol.sql",
+   "wave": "w5d",
+   "why": "three Expert module 1 lessons (open to every learner) printed the slant shoe and bit true vertical depths to twelve decimals; they now round them to one decimal and say why. The volume explorer already opened on the horizontal well"
+  }
  },
  {
   "course": "wellcontrol",
@@ -36927,7 +36997,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "string volume / 0.012 printed to 6 decimals = 2,173.633638; tol 0.05.",
-  "notes": null
+  "notes": null,
+  "stripped": {
+   "migration": "20261028d_w5_wellcontrol.sql",
+   "wave": "w5d",
+   "why": "three Expert module 1 lessons (open to every learner) printed the slant shoe and bit true vertical depths to twelve decimals; they now round them to one decimal and say why. The volume explorer already opened on the horizontal well"
+  }
  },
  {
   "course": "wellcontrol",
@@ -36960,7 +37035,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "annulus volume / 0.012 = 6,039.078675; tol 0.05.",
-  "notes": null
+  "notes": null,
+  "stripped": {
+   "migration": "20261028d_w5_wellcontrol.sql",
+   "wave": "w5d",
+   "why": "three Expert module 1 lessons (open to every learner) printed the slant shoe and bit true vertical depths to twelve decimals; they now round them to one decimal and say why. The volume explorer already opened on the horizontal well"
+  }
  },
  {
   "course": "wellcontrol",
@@ -36993,7 +37073,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "'TVD at the bit' fmt(v.tvdBhM, 6) = 2,507.919699; tol 5e-4.",
-  "notes": null
+  "notes": null,
+  "stripped": {
+   "migration": "20261028d_w5_wellcontrol.sql",
+   "wave": "w5d",
+   "why": "three Expert module 1 lessons (open to every learner) printed the slant shoe and bit true vertical depths to twelve decimals; they now round them to one decimal and say why. The volume explorer already opened on the horizontal well"
+  }
  },
  {
   "course": "wellcontrol",
@@ -37026,7 +37111,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "'TVD at the shoe' fmt(v.tvdShoeM, 6) = 1,282.248590; tol 5e-4.",
-  "notes": null
+  "notes": null,
+  "stripped": {
+   "migration": "20261028d_w5_wellcontrol.sql",
+   "wave": "w5d",
+   "why": "three Expert module 1 lessons (open to every learner) printed the slant shoe and bit true vertical depths to twelve decimals; they now round them to one decimal and say why. The volume explorer already opened on the horizontal well"
+  }
  },
  {
   "course": "wellcontrol",
@@ -39399,7 +39489,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Methods table prints fmt(x.tvd, 4) = 1,653.9867 against expected 1653.986686; tol 0.002 is 40x half a unit in the 4th decimal. The panel also prints the published 1653.99, which fails (lesson warns).",
-  "notes": "One click from default (View select). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma."
+  "notes": "One click from default (View select). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+  }
  },
  {
   "course": "welldesign",
@@ -39432,7 +39527,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "TVD error column is computed against the PUBLISHED 1653.99 (welldesignLab.js:97), exactly the prompt's definition; prints -25.3812 vs expected -25.381206, tol 0.005.",
-  "notes": "One click from default. Also hand-computable (sum d cos(inc_lower)) but the panel does not list the 21 ADE stations, so the panel is the practical source."
+  "notes": "One click from default. Also hand-computable (sum d cos(inc_lower)) but the panel does not list the 21 ADE stations, so the panel is the practical source.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+  }
  },
  {
   "course": "welldesign",
@@ -39461,11 +39561,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile 'TVD at TD' fmt(s.tvd, 4) = 3,686.9805; tol 0.005.",
-  "notes": "LEAK: the panel opens on the listing view of the feet well, so this graded value shows in the default state (probe state ''). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma."
+  "notes": "LEAK: the panel opens on the listing view of the feet well, so this graded value shows in the default state (probe state ''). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+  }
  },
  {
   "course": "welldesign",
@@ -39494,11 +39599,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile 'Vertical section' fmt(s.vs, 4) with unit 'on 75.0 deg' (the fixture's own azimuth, welldesignLab.js:50); prints 1,255.8726; tol 0.005.",
-  "notes": "LEAK: shown in the default state (feet well listing). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma."
+  "notes": "LEAK: shown in the default state (feet well listing). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+  }
  },
  {
   "course": "welldesign",
@@ -39531,7 +39641,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile 'North' fmt(s.n, 4) = -1,320.5052 on the metric well (vs azimuth from fixture, 200 deg); tol 0.005.",
-  "notes": "One click from default. The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma."
+  "notes": "One click from default. The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+  }
  },
  {
   "course": "welldesign",
@@ -39564,7 +39679,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile 'End TVD' fmt(bh.end.tvd, 4) = 1,481.1257 for the first published build-and-hold case; tol 0.005.",
-  "notes": "One click from default. The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma."
+  "notes": "One click from default. The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+  }
  },
  {
   "course": "welldesign",
@@ -39798,7 +39918,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile 'Minimum separation factor' fmt(c.minSf, 6) = 1.400242; tol 0.0005. Published minimum shown beside it (line 52) also passes.",
-  "notes": "One click from default."
+  "notes": "One click from default.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+  }
  },
  {
   "course": "welldesign",
@@ -39831,7 +39956,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Prints 0.009795 vs 0.0097947 (diff 3e-7); tol 5e-5.",
-  "notes": "One click from default."
+  "notes": "One click from default.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+  }
  },
  {
   "course": "welldesign",
@@ -39860,11 +39990,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Prints -0.606857; tol 0.0005; kickoff depth is applied from the fixture (welldesignLab.js:285).",
-  "notes": "LEAK: the ladder view opens on offset 10, so this graded value shows in the default state."
+  "notes": "LEAK: the ladder view opens on offset 10, so this graded value shows in the default state.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+  }
  },
  {
   "course": "welldesign",
@@ -39897,7 +40032,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Sensitivity table prints fmt(r.minSf, 6) = -0.4248 (value -0.4248 exactly, trailing zeros trimmed); tol 0.0005.",
-  "notes": "One click from default; the sensitivity view defaults to offset 10 (line 81)."
+  "notes": "One click from default; the sensitivity view defaults to offset 10 (line 81).",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+  }
  },
  {
   "course": "welldesign",
@@ -39930,7 +40070,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Note line prints fmt(check.maxDeclinationError, 8) = 0.00461482 vs 0.004614824; tol 5e-6. The per-point table (line 170) also prints dError to 6 dp.",
-  "notes": "One click from default."
+  "notes": "One click from default.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+  }
  },
  {
   "course": "welldesign",
@@ -39963,7 +40108,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Entering 80 / 0 gives Tile 'Declination' fmt(f.declinationDeg, 5) = 1.28148 at the default decimalYear 2025, heightKm 0 (welldesignLab.js:319); the NOAA table's first row prints the same 5 dp. Diff 2e-6, tol 5e-5.",
-  "notes": "One click from default; no leak in the default state (lat 60, lon 2)."
+  "notes": "One click from default; no leak in the default state (lat 60, lon 2).",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+  }
  },
  {
   "course": "welltest",

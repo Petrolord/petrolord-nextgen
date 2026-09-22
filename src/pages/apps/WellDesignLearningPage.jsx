@@ -17,7 +17,7 @@ import DeepCourseBanner from '@/components/course/DeepCourseBanner';
 import SurveyExplorer from '@/components/course/panels/welldesign/SurveyExplorer';
 import UncertaintyExplorer from '@/components/course/panels/welldesign/UncertaintyExplorer';
 import ClearanceExplorer from '@/components/course/panels/welldesign/ClearanceExplorer';
-import { surveyMethods, uncertaintyAt, clearanceCase, workbookCheck } from '@/components/course/panels/welldesign/welldesignLab';
+import { pageIntroFigures } from '@/components/course/panels/welldesign/welldesignLab';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, getCourseProgress, verificationUrl,
 } from '@/services/academyService';
@@ -100,21 +100,11 @@ const WellDesignLearningPage = () => {
     || courseProgress?.capstone?.passed === true
     || actualRole === 'super_admin';
 
-  // The survey methods, the uncertainty at total depth and the closest of the
-  // standard clearance cases each run the engine, so memoise them rather than
-  // re-running on every render.
-  const design = useMemo(() => {
-    const methods = surveyMethods();
-    const td = uncertaintyAt();
-    return {
-      methods,
-      tangential: methods.methods.find((m) => m.name === 'Tangential'),
-      td,
-      dominant: td.contributions[0],
-      worst: clearanceCase('10 - well'),
-      workbook: workbookCheck(),
-    };
-  }, []);
+  // The survey methods, the uncertainty at total depth and the kicked-off
+  // clearance case each run the engine, so memoise them rather than re-running
+  // on every render. The lab formats them, so the course's leakage gate checks
+  // exactly what this intro prints.
+  const intro = useMemo(() => pageIntroFigures(), []);
 
   const watermark = gate.quota?.export_watermark;
 
@@ -166,15 +156,15 @@ const WellDesignLearningPage = () => {
             <p className="mt-1 text-gray-400">
               A survey is three numbers at a depth. On the published Applied Drilling Engineering
               example the tangential method puts the shoe{' '}
-              {Math.abs(design.tangential.tvdError).toFixed(1)} ft shallow and{' '}
-              {design.tangential.northError.toFixed(1)} ft too far north; minimum curvature lands
-              within {Math.abs(design.methods.methods[0].tvdError).toFixed(3)} ft of the published
+              {intro.tangentialTvdShallowFt} ft shallow and{' '}
+              {intro.tangentialNorthFt} ft too far north; minimum curvature lands
+              within {intro.minimumCurvatureWithinFt} ft of the published
               answer. At total depth on the ISCWSA validation well the lateral uncertainty is{' '}
-              {(design.td.sigmaL / design.td.sigmaH).toFixed(1)} times the highside one and{' '}
-              {design.dominant.code} pays for{' '}
-              {(100 * design.dominant.shareOfTrace).toFixed(1)} percent of the variance.
-              And on the standard clearance case with a kickoff, the separation factor is{' '}
-              {design.worst.minSf.toFixed(3)}, which is negative, and widening the confidence
+              {intro.lateralOverHighside} times the highside one and{' '}
+              {intro.dominantCode} pays for{' '}
+              {intro.dominantSharePct} percent of the variance.
+              And on the standard clearance case with a kickoff, the separation factor is about{' '}
+              {intro.kickoffMinSf}, which is negative, and widening the confidence
               factor improves it. This course is how you tell a computed number from a measured one.
               {gate.quota?.own_data_upload === false && ' Your own data upload unlocks at the Associate tier.'}            </p>
           </div>

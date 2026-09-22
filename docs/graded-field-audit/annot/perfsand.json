@@ -274,7 +274,12 @@
    "evidence": "5 x the Associate D50 (hand-calc, full precision), and the Saucier range '5 to 6' is printed (SandExplorer.jsx:127). The Gravel view band tile prints only 2 decimals of um (757.74) against tol 0.0005 um, but the lesson routes the learner through the hand value.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_perfsand.sql",
+    "wave": "w5d",
+    "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
+   }
   },
   {
    "tier": "advanced",
@@ -295,8 +300,13 @@
    "recommendation": null,
    "evidence": "Typing the capstone D50 into 'Or a D50 directly (um)' gives gravel 16/30, largest gauge 23.4252 thou, gauge 20 thou and 'Gauge margin 87.00 um' (fmt(pack.marginM/UM, 3)); expected 8.7e-5 m is exactly 87 um, tol 5e-10 m.",
    "notes": "Possible LEAK: the Gravel view's default state (graded sand, also sized to 16/30) shows 'Gauge margin 87.00 um' (probe), and the always-visible gauge table prints every gravel's margin (SandExplorer.jsx:163), so the answer space is the 7 table margins. Picking the right row still needs the Saucier band, so left as none.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_perfsand.sql",
+    "wave": "w5d",
+    "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
+   }
   },
   {
    "tier": "advanced",
@@ -317,12 +327,17 @@
    "recommendation": null,
    "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
    "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged.",
-   "leak": true,
+   "leak": false,
    "reclassed_from": "display",
    "shipped": {
     "wave": "w4a",
     "route": "typed-case panel mode (W4a)",
     "migration": "20261027a_w4_perfsand.sql"
+   },
+   "stripped": {
+    "migration": "20261028d_w5_perfsand.sql",
+    "wave": "w5d",
+    "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
    }
   },
   {
@@ -344,12 +359,17 @@
    "recommendation": null,
    "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
    "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged.",
-   "leak": true,
+   "leak": false,
    "reclassed_from": "display",
    "shipped": {
     "wave": "w4a",
     "route": "typed-case panel mode (W4a)",
     "migration": "20261027a_w4_perfsand.sql"
+   },
+   "stripped": {
+    "migration": "20261028d_w5_perfsand.sql",
+    "wave": "w5d",
+    "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
    }
   },
   {
@@ -371,12 +391,17 @@
    "recommendation": null,
    "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
    "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged.",
-   "leak": true,
+   "leak": false,
    "reclassed_from": "display",
    "shipped": {
     "wave": "w4a",
     "route": "typed-case panel mode (W4a)",
     "migration": "20261027a_w4_perfsand.sql"
+   },
+   "stripped": {
+    "migration": "20261028d_w5_perfsand.sql",
+    "wave": "w5d",
+    "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
    }
   },
   {
@@ -398,12 +423,17 @@
    "recommendation": null,
    "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
    "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged.",
-   "leak": true,
+   "leak": false,
    "reclassed_from": "display",
    "shipped": {
     "wave": "w4a",
     "route": "typed-case panel mode (W4a)",
     "migration": "20261027a_w4_perfsand.sql"
+   },
+   "stripped": {
+    "migration": "20261028d_w5_perfsand.sql",
+    "wave": "w5d",
+    "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
    }
   }
  ]
