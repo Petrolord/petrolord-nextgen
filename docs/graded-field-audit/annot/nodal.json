@@ -129,90 +129,114 @@
   {
    "tier": "intermediate",
    "key": "vlp_min_q_stbd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_pd1_nodal_course.sql:139",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/nodal.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "State the three tubing constants in the Professional and Expert prompts ('bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, psia'), and in the Professional prompt state that the 49 points run evenly from one thousandth of the open flow to the open flow. The form is already taught (intermediate/m03-what-moves-the-curve/l03-water-cut-and-density.md:9), and with the constants stated every value is spreadsheet-reproducible: verified here, the sampled minimum and both ends match exactly and bisection roots on the 900-point scan land within 1.3e-6 stb/d of expected."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Amend the two prompts to state the constants (no graded value moves). Without that the six Expert fields and four Professional fields cannot be obtained by any route the course offers.",
-   "evidence": "The prompt says 'the gravity-plus-friction relation supplied with this capstone' but never states its constants (gGrav 3835 psi, qRef 600 stb/d, kFric 0.000238 psi/(stb/d)^2 live only in /root/wt-b5-nextgen/src/components/course/panels/nodal/nodalLab.js:99-120 (CAP)). They are not in any lesson, panel or the capstone card (NodalLearningPage.jsx:317-318 renders only title and prompt; the dataset column is not shown), and panelCapstoneGuard.test.js forbids panels from reading CAP. Given the constants it is a spreadsheet job (49 samples from AOF x 1e-3 to AOF, pick the smallest bhp): reproduces 1285.2338376891 exactly.",
+   "evidence": "W2: Prompt only, no field moves. The prompt called the tubing curve \"the gravity-plus-friction relation supplied with this capstone\" and never stated its constants (3835, 600, 0.000238 lived only in nodalLab.js CAP), nor where the 49 points start (B5 finding 1). The prompt now states the relation, the wellhead pressure and the sampling, and restates the inflow the open flow comes from, so the four tubing fields are spreadsheet work on a form the course teaches (intermediate m03 l03). The two lift gas fields still need a Cullender and Smith march with the engine z; they stay class display for the W4 panel mode. The published inputs reproduce vlp_min_q_stbd = 1285.2338376891341 through the vendored engines against the key 1285.2338376891341 (tol 0.00064); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_nodal.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The tubing curve is the gravity-plus-friction relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, with bhp and pWh in psia and q in stb/d, evaluated at a wellhead pressure of 1236 psia at 49 evenly spaced rates from one thousandth of the absolute open flow up to the absolute open flow itself. The open flow is the Associate tier's, from its composite inflow: reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
    "key": "vlp_min_bhp_psia",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_pd1_nodal_course.sql:139",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/nodal.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "State the three tubing constants in the Professional and Expert prompts ('bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, psia'), and in the Professional prompt state that the 49 points run evenly from one thousandth of the open flow to the open flow. The form is already taught (intermediate/m03-what-moves-the-curve/l03-water-cut-and-density.md:9), and with the constants stated every value is spreadsheet-reproducible: verified here, the sampled minimum and both ends match exactly and bisection roots on the 900-point scan land within 1.3e-6 stb/d of expected."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Amend the two prompts to state the constants (no graded value moves). Without that the six Expert fields and four Professional fields cannot be obtained by any route the course offers.",
-   "evidence": "The prompt says 'the gravity-plus-friction relation supplied with this capstone' but never states its constants (gGrav 3835 psi, qRef 600 stb/d, kFric 0.000238 psi/(stb/d)^2 live only in /root/wt-b5-nextgen/src/components/course/panels/nodal/nodalLab.js:99-120 (CAP)). They are not in any lesson, panel or the capstone card (NodalLearningPage.jsx:317-318 renders only title and prompt; the dataset column is not shown), and panelCapstoneGuard.test.js forbids panels from reading CAP. Given the constants: 2849.672837 exactly.",
+   "evidence": "W2: Prompt only, no field moves. The prompt called the tubing curve \"the gravity-plus-friction relation supplied with this capstone\" and never stated its constants (3835, 600, 0.000238 lived only in nodalLab.js CAP), nor where the 49 points start (B5 finding 1). The prompt now states the relation, the wellhead pressure and the sampling, and restates the inflow the open flow comes from, so the four tubing fields are spreadsheet work on a form the course teaches (intermediate m03 l03). The two lift gas fields still need a Cullender and Smith march with the engine z; they stay class display for the W4 panel mode. The published inputs reproduce vlp_min_bhp_psia = 2849.67283735105 through the vendored engines against the key 2849.67283735105 (tol 0.0014); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_nodal.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The tubing curve is the gravity-plus-friction relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, with bhp and pWh in psia and q in stb/d, evaluated at a wellhead pressure of 1236 psia at 49 evenly spaced rates from one thousandth of the absolute open flow up to the absolute open flow itself. The open flow is the Associate tier's, from its composite inflow: reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
    "key": "vlp_loaded_end_bhp_psia",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_pd1_nodal_course.sql:139",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/nodal.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "State the three tubing constants in the Professional and Expert prompts ('bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, psia'), and in the Professional prompt state that the 49 points run evenly from one thousandth of the open flow to the open flow. The form is already taught (intermediate/m03-what-moves-the-curve/l03-water-cut-and-density.md:9), and with the constants stated every value is spreadsheet-reproducible: verified here, the sampled minimum and both ends match exactly and bisection roots on the 900-point scan land within 1.3e-6 stb/d of expected."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Amend the two prompts to state the constants (no graded value moves). Without that the six Expert fields and four Professional fields cannot be obtained by any route the course offers.",
-   "evidence": "The prompt says 'the gravity-plus-friction relation supplied with this capstone' but never states its constants (gGrav 3835 psi, qRef 600 stb/d, kFric 0.000238 psi/(stb/d)^2 live only in /root/wt-b5-nextgen/src/components/course/panels/nodal/nodalLab.js:99-120 (CAP)). They are not in any lesson, panel or the capstone card (NodalLearningPage.jsx:317-318 renders only title and prompt; the dataset column is not shown), and panelCapstoneGuard.test.js forbids panels from reading CAP. Given the constants: bhp at AOF x 1e-3 = 5046.565088 exactly. The prompt's 'from just above zero' does not state the 1e-3 x AOF start (nodalLab.js:64 TUBING_CURVE_QMIN_FRACTION); a learner starting at q = 1 stb/d gets a different end value, so the start fraction must be stated too.",
+   "evidence": "W2: Prompt only, no field moves. The prompt called the tubing curve \"the gravity-plus-friction relation supplied with this capstone\" and never stated its constants (3835, 600, 0.000238 lived only in nodalLab.js CAP), nor where the 49 points start (B5 finding 1). The prompt now states the relation, the wellhead pressure and the sampling, and restates the inflow the open flow comes from, so the four tubing fields are spreadsheet work on a form the course teaches (intermediate m03 l03). The two lift gas fields still need a Cullender and Smith march with the engine z; they stay class display for the W4 panel mode. The published inputs reproduce vlp_loaded_end_bhp_psia = 5046.565087663264 through the vendored engines against the key 5046.565087663264 (tol 0.0025); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_nodal.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The tubing curve is the gravity-plus-friction relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, with bhp and pWh in psia and q in stb/d, evaluated at a wellhead pressure of 1236 psia at 49 evenly spaced rates from one thousandth of the absolute open flow up to the absolute open flow itself. The open flow is the Associate tier's, from its composite inflow: reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
    "key": "vlp_friction_end_bhp_psia",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_pd1_nodal_course.sql:139",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/nodal.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "State the three tubing constants in the Professional and Expert prompts ('bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, psia'), and in the Professional prompt state that the 49 points run evenly from one thousandth of the open flow to the open flow. The form is already taught (intermediate/m03-what-moves-the-curve/l03-water-cut-and-density.md:9), and with the constants stated every value is spreadsheet-reproducible: verified here, the sampled minimum and both ends match exactly and bisection roots on the 900-point scan land within 1.3e-6 stb/d of expected."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Amend the two prompts to state the constants (no graded value moves). Without that the six Expert fields and four Professional fields cannot be obtained by any route the course offers.",
-   "evidence": "The prompt says 'the gravity-plus-friction relation supplied with this capstone' but never states its constants (gGrav 3835 psi, qRef 600 stb/d, kFric 0.000238 psi/(stb/d)^2 live only in /root/wt-b5-nextgen/src/components/course/panels/nodal/nodalLab.js:99-120 (CAP)). They are not in any lesson, panel or the capstone card (NodalLearningPage.jsx:317-318 renders only title and prompt; the dataset column is not shown), and panelCapstoneGuard.test.js forbids panels from reading CAP. Given the constants: bhp at the AOF = 5277.411341 exactly.",
+   "evidence": "W2: Prompt only, no field moves. The prompt called the tubing curve \"the gravity-plus-friction relation supplied with this capstone\" and never stated its constants (3835, 600, 0.000238 lived only in nodalLab.js CAP), nor where the 49 points start (B5 finding 1). The prompt now states the relation, the wellhead pressure and the sampling, and restates the inflow the open flow comes from, so the four tubing fields are spreadsheet work on a form the course teaches (intermediate m03 l03). The two lift gas fields still need a Cullender and Smith march with the engine z; they stay class display for the W4 panel mode. The published inputs reproduce vlp_friction_end_bhp_psia = 5277.411341029544 through the vendored engines against the key 5277.411341029544 (tol 0.0026); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_nodal.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The tubing curve is the gravity-plus-friction relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, with bhp and pWh in psia and q in stb/d, evaluated at a wellhead pressure of 1236 psia at 49 evenly spaced rates from one thousandth of the absolute open flow up to the absolute open flow itself. The open flow is the Associate tier's, from its composite inflow: reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
@@ -261,134 +285,170 @@
   {
    "tier": "advanced",
    "key": "node_op_q_stbd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_pd1_nodal_course.sql:150",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/nodal.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "State the three tubing constants in the Professional and Expert prompts ('bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, psia'), and in the Professional prompt state that the 49 points run evenly from one thousandth of the open flow to the open flow. The form is already taught (intermediate/m03-what-moves-the-curve/l03-water-cut-and-density.md:9), and with the constants stated every value is spreadsheet-reproducible: verified here, the sampled minimum and both ends match exactly and bisection roots on the 900-point scan land within 1.3e-6 stb/d of expected."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Amend the two prompts to state the constants (no graded value moves). Without that the six Expert fields and four Professional fields cannot be obtained by any route the course offers.",
-   "evidence": "The prompt says 'the gravity-plus-friction relation supplied with this capstone' but never states its constants (gGrav 3835 psi, qRef 600 stb/d, kFric 0.000238 psi/(stb/d)^2 live only in /root/wt-b5-nextgen/src/components/course/panels/nodal/nodalLab.js:99-120 (CAP)). They are not in any lesson, panel or the capstone card (NodalLearningPage.jsx:317-318 renders only title and prompt; the dataset column is not shown), and panelCapstoneGuard.test.js forbids panels from reading CAP. Given the constants, a spreadsheet root of pwf_ipr(q) - bhp(q) on the upper crossing gives 929.982064051 against expected 929.982063731 (3.2e-7, tol 4.6e-4).",
+   "evidence": "W2: Prompt only, no field moves. The node needs the tubing relation, which no prompt stated, and the grid needed its span: the prompt now states the Associate inflow, the Professional outflow with its constants, and that the 900 points only bracket each crossing, which is then solved exactly. Every field is then a spreadsheet root find (verified: the roots match the key to about 1e-6 stb/d). The published inputs reproduce node_op_q_stbd = 929.9820637311327 through the vendored engines against the key 929.9820637311327 (tol 0.00046); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_nodal.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
    "key": "node_op_pwf_psia",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_pd1_nodal_course.sql:150",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/nodal.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "State the three tubing constants in the Professional and Expert prompts ('bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, psia'), and in the Professional prompt state that the 49 points run evenly from one thousandth of the open flow to the open flow. The form is already taught (intermediate/m03-what-moves-the-curve/l03-water-cut-and-density.md:9), and with the constants stated every value is spreadsheet-reproducible: verified here, the sampled minimum and both ends match exactly and bisection roots on the 900-point scan land within 1.3e-6 stb/d of expected."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Amend the two prompts to state the constants (no graded value moves). Without that the six Expert fields and four Professional fields cannot be obtained by any route the course offers.",
-   "evidence": "The prompt says 'the gravity-plus-friction relation supplied with this capstone' but never states its constants (gGrav 3835 psi, qRef 600 stb/d, kFric 0.000238 psi/(stb/d)^2 live only in /root/wt-b5-nextgen/src/components/course/panels/nodal/nodalLab.js:99-120 (CAP)). They are not in any lesson, panel or the capstone card (NodalLearningPage.jsx:317-318 renders only title and prompt; the dataset column is not shown), and panelCapstoneGuard.test.js forbids panels from reading CAP. Given the constants: 2945.77745926 against 2945.77745940.",
+   "evidence": "W2: Prompt only, no field moves. The node needs the tubing relation, which no prompt stated, and the grid needed its span: the prompt now states the Associate inflow, the Professional outflow with its constants, and that the 900 points only bracket each crossing, which is then solved exactly. Every field is then a spreadsheet root find (verified: the roots match the key to about 1e-6 stb/d). The published inputs reproduce node_op_pwf_psia = 2945.7774594005996 through the vendored engines against the key 2945.7774594005996 (tol 0.0015); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_nodal.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
    "key": "node_unstable_q_stbd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_pd1_nodal_course.sql:150",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/nodal.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "State the three tubing constants in the Professional and Expert prompts ('bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, psia'), and in the Professional prompt state that the 49 points run evenly from one thousandth of the open flow to the open flow. The form is already taught (intermediate/m03-what-moves-the-curve/l03-water-cut-and-density.md:9), and with the constants stated every value is spreadsheet-reproducible: verified here, the sampled minimum and both ends match exactly and bisection roots on the 900-point scan land within 1.3e-6 stb/d of expected."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Amend the two prompts to state the constants (no graded value moves). Without that the six Expert fields and four Professional fields cannot be obtained by any route the course offers.",
-   "evidence": "The prompt says 'the gravity-plus-friction relation supplied with this capstone' but never states its constants (gGrav 3835 psi, qRef 600 stb/d, kFric 0.000238 psi/(stb/d)^2 live only in /root/wt-b5-nextgen/src/components/course/panels/nodal/nodalLab.js:99-120 (CAP)). They are not in any lesson, panel or the capstone card (NodalLearningPage.jsx:317-318 renders only title and prompt; the dataset column is not shown), and panelCapstoneGuard.test.js forbids panels from reading CAP. Given the constants: 905.33676625 against 905.33676759 (1.3e-6, tol 4.5e-4).",
+   "evidence": "W2: Prompt only, no field moves. The node needs the tubing relation, which no prompt stated, and the grid needed its span: the prompt now states the Associate inflow, the Professional outflow with its constants, and that the 900 points only bracket each crossing, which is then solved exactly. Every field is then a spreadsheet root find (verified: the roots match the key to about 1e-6 stb/d). The published inputs reproduce node_unstable_q_stbd = 905.3367675852949 through the vendored engines against the key 905.3367675852949 (tol 0.00045); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_nodal.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
    "key": "node_unstable_pwf_psia",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_pd1_nodal_course.sql:150",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/nodal.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "State the three tubing constants in the Professional and Expert prompts ('bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, psia'), and in the Professional prompt state that the 49 points run evenly from one thousandth of the open flow to the open flow. The form is already taught (intermediate/m03-what-moves-the-curve/l03-water-cut-and-density.md:9), and with the constants stated every value is spreadsheet-reproducible: verified here, the sampled minimum and both ends match exactly and bisection roots on the 900-point scan land within 1.3e-6 stb/d of expected."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Amend the two prompts to state the constants (no graded value moves). Without that the six Expert fields and four Professional fields cannot be obtained by any route the course offers.",
-   "evidence": "The prompt says 'the gravity-plus-friction relation supplied with this capstone' but never states its constants (gGrav 3835 psi, qRef 600 stb/d, kFric 0.000238 psi/(stb/d)^2 live only in /root/wt-b5-nextgen/src/components/course/panels/nodal/nodalLab.js:99-120 (CAP)). They are not in any lesson, panel or the capstone card (NodalLearningPage.jsx:317-318 renders only title and prompt; the dataset column is not shown), and panelCapstoneGuard.test.js forbids panels from reading CAP. Given the constants: 2959.63466513 against 2959.63466435.",
+   "evidence": "W2: Prompt only, no field moves. The node needs the tubing relation, which no prompt stated, and the grid needed its span: the prompt now states the Associate inflow, the Professional outflow with its constants, and that the 900 points only bracket each crossing, which is then solved exactly. Every field is then a spreadsheet root find (verified: the roots match the key to about 1e-6 stb/d). The published inputs reproduce node_unstable_pwf_psia = 2959.6346643478146 through the vendored engines against the key 2959.6346643478146 (tol 0.0015); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_nodal.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
    "key": "sweep_pwh1176_q_stbd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_pd1_nodal_course.sql:150",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/nodal.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "State the three tubing constants in the Professional and Expert prompts ('bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, psia'), and in the Professional prompt state that the 49 points run evenly from one thousandth of the open flow to the open flow. The form is already taught (intermediate/m03-what-moves-the-curve/l03-water-cut-and-density.md:9), and with the constants stated every value is spreadsheet-reproducible: verified here, the sampled minimum and both ends match exactly and bisection roots on the 900-point scan land within 1.3e-6 stb/d of expected."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Amend the two prompts to state the constants (no graded value moves). Without that the six Expert fields and four Professional fields cannot be obtained by any route the course offers.",
-   "evidence": "The prompt says 'the gravity-plus-friction relation supplied with this capstone' but never states its constants (gGrav 3835 psi, qRef 600 stb/d, kFric 0.000238 psi/(stb/d)^2 live only in /root/wt-b5-nextgen/src/components/course/panels/nodal/nodalLab.js:99-120 (CAP)). They are not in any lesson, panel or the capstone card (NodalLearningPage.jsx:317-318 renders only title and prompt; the dataset column is not shown), and panelCapstoneGuard.test.js forbids panels from reading CAP. Given the constants at pWh 1176: 1184.00685054 against 1184.00685092.",
+   "evidence": "W2: Prompt only, no field moves. The node needs the tubing relation, which no prompt stated, and the grid needed its span: the prompt now states the Associate inflow, the Professional outflow with its constants, and that the 900 points only bracket each crossing, which is then solved exactly. Every field is then a spreadsheet root find (verified: the roots match the key to about 1e-6 stb/d). The published inputs reproduce sweep_pwh1176_q_stbd = 1184.0068509231141 through the vendored engines against the key 1184.0068509231141 (tol 0.00057); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_nodal.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
    "key": "sweep_pwh1176_pwf_psia",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_pd1_nodal_course.sql:150",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/nodal.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "State the three tubing constants in the Professional and Expert prompts ('bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, psia'), and in the Professional prompt state that the 49 points run evenly from one thousandth of the open flow to the open flow. The form is already taught (intermediate/m03-what-moves-the-curve/l03-water-cut-and-density.md:9), and with the constants stated every value is spreadsheet-reproducible: verified here, the sampled minimum and both ends match exactly and bisection roots on the 900-point scan land within 1.3e-6 stb/d of expected."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Amend the two prompts to state the constants (no graded value moves). Without that the six Expert fields and four Professional fields cannot be obtained by any route the course offers.",
-   "evidence": "The prompt says 'the gravity-plus-friction relation supplied with this capstone' but never states its constants (gGrav 3835 psi, qRef 600 stb/d, kFric 0.000238 psi/(stb/d)^2 live only in /root/wt-b5-nextgen/src/components/course/panels/nodal/nodalLab.js:99-120 (CAP)). They are not in any lesson, panel or the capstone card (NodalLearningPage.jsx:317-318 renders only title and prompt; the dataset column is not shown), and panelCapstoneGuard.test.js forbids panels from reading CAP. Given the constants at pWh 1176: 2799.43884235 against 2799.43884224.",
+   "evidence": "W2: Prompt only, no field moves. The node needs the tubing relation, which no prompt stated, and the grid needed its span: the prompt now states the Associate inflow, the Professional outflow with its constants, and that the 900 points only bracket each crossing, which is then solved exactly. Every field is then a spreadsheet root find (verified: the roots match the key to about 1e-6 stb/d). The published inputs reproduce sweep_pwh1176_pwf_psia = 2799.4388422395805 through the vendored engines against the key 2799.4388422395805 (tol 0.0015); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_nodal.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
+    ],
+    "lessons": []
+   }
   }
  ]
 }
