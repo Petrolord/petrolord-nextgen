@@ -3033,6 +3033,294 @@ export const fightExplorer = Object.freeze({
 });
 
 // ---------------------------------------------------------------------------
+// SECTION T. A NETWORK THE LEARNER TYPES (B5 follow-on W4, route b).
+//
+// Every other solve in this file runs a network this wave declared. This one
+// runs whatever the learner types: a separator pressure, up to six wells (Vogel
+// qmax and reservoir pressure, an optional facility allocation, a turbulent
+// flowline conductance, an optional flowline capacity limit, the node the line
+// lands on), up to four internal nodes and up to six branches between them.
+// The same consumer relations as the teaching network (`vogelWell`,
+// `allocatedWell`, `turbulentBranch`, `cappedTurbulentBranch`), the same
+// `solveNetwork`, the same `checkConservation` beside the converged flag, the
+// same `propagateStreams` for the tested splits, and `solveLinearNetwork` for
+// a linearised twin when every line is also given a linear conductance.
+//
+// It opens on AGBADA WEST, the teaching network, at the module's documented
+// default tolerance, and that default state is on the swept teaching surface
+// below, so the leak guard proves it lands on no graded answer. Every input is
+// a string or a number, so a panel can hand it React state as typed; every bad
+// input is refused with a plain sentence and nothing here throws to the UI.
+//
+// Node order handed to `buildNetwork` is wells in slot order, then internal
+// nodes in slot order, then the separator; branch order is flowlines in well
+// order, then the typed branches. Newton's iterate depends on that order in its
+// last bits, so it is fixed here rather than left to the typing.
+// ---------------------------------------------------------------------------
+
+export const TYPED_NETWORK_LIMITS = Object.freeze({ wells: 6, nodes: 4, branches: 6 });
+export const TYPED_SEPARATOR_ID = 'sep';
+
+const TYPED_NODE_IDS = Object.freeze(['n1', 'n2', 'n3', 'n4']);
+
+/**
+ * Linear conductances for the teaching network's linearised twin, lb/d per psi.
+ * Declared by this section for the default state only, so the twin has a
+ * teaching case too. Not comparable with the turbulent k in lb/d per root psi.
+ */
+export const TYPED_TEACHING_LINEAR_K = Object.freeze({
+  e1: 26, e2: 34, e3: 21, e4: 14, c1: 74, c2: 39, c3: 45, tk: 58,
+});
+
+const TEACHING_SLOT = Object.freeze({ ha: 'n1', hb: 'n2', hc: 'n3', sep: TYPED_SEPARATOR_ID });
+
+export const TYPED_NETWORK_DEFAULT = Object.freeze({
+  separatorPsia: TEACHING_SEPARATOR_PSIA,
+  tolerance: DEFAULT_TOLERANCE_LB_D,
+  maxIter: DEFAULT_MAX_ITER,
+  wells: Object.freeze(['t1', 't2', 't3', 't4'].map((id) => {
+    const w = TEACHING_WELL_SPECS[id];
+    const line = TEACHING_BRANCHES.find((b) => b.from === id);
+    const s = TEACHING_STREAM_TESTS[id];
+    return Object.freeze({
+      name: w.label,
+      qmax: w.qmax,
+      prPsia: w.prPsia,
+      allocationLbD: id === 't4' ? TEACHING_ALLOCATION_LB_D : '',
+      k: TEACHING_K[line.id],
+      capLbD: id === 't4' ? TEACHING_LINE_CAPACITY_LB_D : '',
+      to: TEACHING_SLOT[line.to],
+      kLinear: TYPED_TEACHING_LINEAR_K[line.id],
+      qoStbd: s.qoStbd,
+      qwStbd: s.qwStbd,
+      qgMscfd: s.qgMscfd,
+    });
+  })),
+  nodes: Object.freeze(TEACHING_NODES.filter((n) => n.kind === 'junction')
+    .map((n) => Object.freeze({ name: n.label }))),
+  branches: Object.freeze(TEACHING_BRANCHES.filter((b) => !b.from.startsWith('t'))
+    .map((b) => Object.freeze({
+      name: b.label,
+      from: TEACHING_SLOT[b.from],
+      to: TEACHING_SLOT[b.to],
+      k: TEACHING_K[b.id],
+      kLinear: TYPED_TEACHING_LINEAR_K[b.id],
+    }))),
+});
+
+const blank = (v) => v === undefined || v === null || String(v).trim() === '';
+const num = (v) => (blank(v) ? NaN : Number(v));
+const txt = (v) => (blank(v) ? '' : String(v).trim());
+
+/**
+ * Solve a typed network. `input` is shaped like TYPED_NETWORK_DEFAULT, with any
+ * field a string as typed. Options: `streams` propagates the tested splits,
+ * `linear` solves the linearised twin by its closed form. Returns
+ * `{ ok, errors, warnings, ... }` and never throws.
+ */
+export const typedNetwork = (input, { streams = false, linear = false } = {}) => {
+  try {
+    return typedNetworkUnsafe(input || {}, { streams, linear });
+  } catch (e) {
+    return { ok: false, errors: [`This network could not be solved: ${e && e.message ? e.message : 'unknown error'}.`], warnings: [] };
+  }
+};
+
+const typedNetworkUnsafe = (input, opts) => {
+  const errors = [];
+  const sepP = num(input.separatorPsia);
+  if (!(Number.isFinite(sepP) && sepP > 0)) errors.push('The separator needs a pressure in psia greater than zero.');
+  const tolerance = blank(input.tolerance) ? DEFAULT_TOLERANCE_LB_D : num(input.tolerance);
+  if (!(Number.isFinite(tolerance) && tolerance > 0)) errors.push('The tolerance must be a number greater than zero, for example 1e-12.');
+  const maxIter = blank(input.maxIter) ? DEFAULT_MAX_ITER : num(input.maxIter);
+  if (!(Number.isInteger(maxIter) && maxIter >= 1)) errors.push('The iteration cap must be a whole number of at least one.');
+
+  // internal nodes, by fixed slot id
+  const nodeRows = (input.nodes || []).slice(0, TYPED_NETWORK_LIMITS.nodes);
+  const nodes = [];
+  nodeRows.forEach((n, i) => {
+    const name = txt(n && n.name);
+    if (name) nodes.push({ id: TYPED_NODE_IDS[i], kind: 'junction', label: name });
+  });
+  const names = new Set();
+  nodes.forEach((n) => {
+    if (names.has(n.label.toLowerCase())) errors.push(`Two internal nodes are both named ${n.label}.`);
+    names.add(n.label.toLowerCase());
+  });
+  const sepLabel = 'Separator';
+  const labelOf = new Map(nodes.map((n) => [n.id, n.label]));
+  labelOf.set(TYPED_SEPARATOR_ID, sepLabel);
+  const endOk = (id) => labelOf.has(id);
+
+  // wells
+  const wellRows = (input.wells || []).slice(0, TYPED_NETWORK_LIMITS.wells);
+  const wells = [];
+  wellRows.forEach((w, i) => {
+    if (!w) return;
+    const fields = ['qmax', 'prPsia', 'k', 'allocationLbD', 'capLbD'];
+    if (!txt(w.name) && fields.every((f) => blank(w[f]))) return;
+    const id = `w${i + 1}`;
+    const label = txt(w.name) || `Well ${i + 1}`;
+    const qmax = num(w.qmax);
+    const prPsia = num(w.prPsia);
+    const k = num(w.k);
+    const alloc = blank(w.allocationLbD) ? null : num(w.allocationLbD);
+    const cap = blank(w.capLbD) ? null : num(w.capLbD);
+    const to = txt(w.to);
+    if (!(Number.isFinite(qmax) && qmax > 0)) errors.push(`${label} needs a Vogel qmax in lb/d greater than zero.`);
+    if (!(Number.isFinite(prPsia) && prPsia > 0)) errors.push(`${label} needs a reservoir pressure in psia greater than zero.`);
+    if (!(Number.isFinite(k) && k > 0)) errors.push(`${label} needs a flowline conductance in lb/d per root psi greater than zero.`);
+    if (alloc !== null && !(Number.isFinite(alloc) && alloc > 0)) errors.push(`${label}: an allocation, if typed, must be greater than zero.`);
+    if (cap !== null && !(Number.isFinite(cap) && cap > 0)) errors.push(`${label}: a flowline capacity limit, if typed, must be greater than zero.`);
+    if (!endOk(to)) errors.push(`${label}'s flowline has to land on a named internal node or on the separator.`);
+    wells.push({
+      id, label, qmax, prPsia, k, alloc, cap, to,
+      kLinear: num(w.kLinear),
+      split: { qoStbd: num(w.qoStbd), qwStbd: num(w.qwStbd), qgMscfd: num(w.qgMscfd) },
+    });
+  });
+  if (!wells.length) errors.push('Type at least one well.');
+
+  // branches between internal nodes and the separator
+  const branchRows = (input.branches || []).slice(0, TYPED_NETWORK_LIMITS.branches);
+  const branches = [];
+  branchRows.forEach((b, i) => {
+    if (!b) return;
+    if (!txt(b.name) && blank(b.k) && !txt(b.from) && !txt(b.to)) return;
+    const id = `b${i + 1}`;
+    const label = txt(b.name) || `Branch ${i + 1}`;
+    const k = num(b.k);
+    const from = txt(b.from);
+    const to = txt(b.to);
+    if (!(Number.isFinite(k) && k > 0)) errors.push(`${label} needs a conductance in lb/d per root psi greater than zero.`);
+    if (!endOk(from) || !endOk(to)) errors.push(`${label} has to run between two named internal nodes or the separator.`);
+    else if (from === to) errors.push(`${label} starts and ends on the same node.`);
+    branches.push({ id, label, from, to, k, kLinear: num(b.kLinear) });
+  });
+
+  if (errors.length) return { ok: false, errors, warnings: [] };
+
+  const netNodes = [
+    ...wells.map((w) => ({ id: w.id, kind: 'well', label: w.label })),
+    ...nodes,
+    { id: TYPED_SEPARATOR_ID, kind: 'sink', label: sepLabel, pressurePsia: sepP },
+  ];
+  const lines = [
+    ...wells.map((w) => ({
+      id: `f${w.id.slice(1)}`, from: w.id, to: w.to, label: `${w.label} flowline`,
+      kind: 'flowline', k: w.k, cap: w.cap, kLinear: w.kLinear,
+    })),
+    ...branches.map((b) => ({ ...b, kind: 'branch', cap: null })),
+  ];
+  const network = buildNetwork({
+    nodes: netNodes,
+    branches: lines.map((l) => ({ id: l.id, from: l.from, to: l.to, label: l.label })),
+  });
+  if (!network.ok) return { ok: false, errors: [network.error], warnings: [] };
+
+  const lineById = new Map(lines.map((l) => [l.id, l]));
+  const wellById = new Map(wells.map((w) => [w.id, w]));
+  const inflow = new Map(wells.map((w) => [w.id, w.alloc === null
+    ? vogelWell({ qmax: w.qmax, prPsia: w.prPsia })
+    : allocatedWell({ allocationLbD: w.alloc, qmax: w.qmax, prPsia: w.prPsia })]));
+  const res = solveNetwork({
+    network,
+    branchFlow: (b, pIn, pOut) => {
+      const l = lineById.get(b.id);
+      return l.cap === null
+        ? turbulentBranch(l.k)(b, pIn, pOut)
+        : cappedTurbulentBranch(l.k, l.cap)(b, pIn, pOut);
+    },
+    wellInflow: (nd, p) => inflow.get(nd.id)(p),
+    tolerance,
+    maxIter,
+  });
+  if (!res.ok) return { ok: false, errors: [res.error || 'The solver refused this network.'], warnings: [] };
+  const verdict = solveVerdict(network, res);
+  const nameOf = (id) => network.nodeById.get(id).label;
+
+  // streams, riding on the solved well masses along the solved directions
+  let streamResult = null;
+  if (opts.streams) {
+    const missing = wells.filter((w) => !['qoStbd', 'qwStbd', 'qgMscfd']
+      .every((f) => Number.isFinite(w.split[f]) && w.split[f] >= 0));
+    if (missing.length) {
+      streamResult = { ok: false, error: `Type an oil, water and gas split of zero or more for ${missing.map((w) => w.label).join(', ')}.` };
+    } else {
+      const wellStreams = Object.fromEntries(wells.map((w) => [w.id, { ...w.split, massLbD: res.wellRates[w.id] }]));
+      const s = propagateStreams({ network, flows: res.flows, wellStreams });
+      streamResult = s.ok ? { ok: true, error: null, branchStreams: s.branchStreams } : { ok: false, error: s.error };
+    }
+  }
+
+  // the linearised twin, by the weighted Laplacian and no iteration
+  let linearResult = null;
+  if (opts.linear) {
+    const missing = lines.filter((l) => !(Number.isFinite(l.kLinear) && l.kLinear > 0));
+    if (missing.length) {
+      linearResult = { ok: false, error: `Type a linear conductance in lb/d per psi greater than zero for ${missing.map((l) => l.label).join(', ')}.`, nodes: [] };
+    } else {
+      const lin = solveLinearNetwork({
+        network,
+        conductance: (b) => lineById.get(b.id).kLinear,
+        wellSlope: (nd) => ({ qmax: wellById.get(nd.id).qmax, prPsia: wellById.get(nd.id).prPsia }),
+      });
+      linearResult = lin.ok
+        ? {
+          ok: true,
+          error: null,
+          nodes: network.nodes.map((n) => ({ id: n.id, label: n.label, kind: n.kind, pressurePsia: lin.pressures[n.id] })),
+        }
+        : { ok: false, error: 'The linearised twin is singular, so it has no closed form answer.', nodes: [] };
+    }
+  }
+
+  return {
+    ok: true,
+    errors: [],
+    warnings: verdict.warnings,
+    ...verdict,
+    toleranceAsked: tolerance,
+    iterationCap: maxIter,
+    separatorPsia: sepP,
+    nodes: network.nodes.map((n) => ({
+      id: n.id,
+      label: n.label,
+      kind: n.kind,
+      pressurePsia: res.pressures[n.id],
+      isPinned: verdict.pinned.includes(n.id),
+    })),
+    wells: wells.map((w) => ({
+      id: w.id,
+      label: w.label,
+      rateOnSystemLbD: res.wellRates[w.id],
+      wellheadPsia: res.pressures[w.id],
+      flowlineMassLbD: res.flows[`f${w.id.slice(1)}`],
+      isPinned: verdict.pinned.includes(w.id),
+    })),
+    branches: lines.map((l) => {
+      const q = res.flows[l.id];
+      const s = streamResult && streamResult.ok ? streamResult.branchStreams[l.id] : null;
+      return {
+        id: l.id,
+        label: l.label,
+        kind: l.kind,
+        drawnFrom: nameOf(l.from),
+        drawnTo: nameOf(l.to),
+        signedMassDrawnSenseLbD: q,
+        runsAsDrawn: q >= 0,
+        oilStbd: s ? s.qoStbd : null,
+        waterStbd: s ? s.qwStbd : null,
+        gasMscfd: s ? s.qgMscfd : null,
+        streamMassLbD: s ? s.massLbD : null,
+      };
+    }),
+    streams: streamResult ? { ok: streamResult.ok, error: streamResult.error } : null,
+    linear: linearResult,
+  };
+};
+
+// ---------------------------------------------------------------------------
 // THE TEACHING SURFACE, for the leak guard.
 //
 // Every accessor a panel or a lesson can reach, by the name a panel reads it
@@ -3119,6 +3407,7 @@ export const teachingAccessors = () => {
     ['cuspWalkRows', cuspWalkRows],
     ['cuspWalkHeadline', cuspWalkHeadline],
     ['oracleCoverage', oracleCoverage],
+    ['typedNetwork.default', () => typedNetwork(TYPED_NETWORK_DEFAULT, { streams: true, linear: true })],
   ];
   ['turbulent_tree', 'looped'].forEach((name) => {
     named.push([`goldenCaseRows ${name}`, () => goldenCaseRows(name)]);
