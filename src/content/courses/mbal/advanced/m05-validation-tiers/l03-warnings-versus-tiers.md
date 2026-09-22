@@ -16,11 +16,11 @@ So the run channel watches whether the model agrees with itself, and whether you
 
 ## Run one: identical warnings, opposite answers
 
-Take the Ekene tank as committed and run it twice, once with the aquifer model set to none and once with a pot aquifer forced on. The first returns 12139208.1074968 stb. The second returns -516449.043355256 stb, a negative volume of oil.
+Take the Ekene tank as committed and run it twice, once with the aquifer model set to none and once with a pot aquifer forced on. The first returns 12139208.1074968 stb. The second returns a negative volume of oil.
 
 Compare the warnings arrays. They are not merely similar. They are identical, string for string, five entries each, all five being the lab table sort complaints that were already there. The diff is empty.
 
-Every check passed on the impossible run, and they passed for reasons worth understanding. The fit statistic is 0.999485673716372, comfortably above 0.95. The drive index sum is 1.0000000000000004, which misses one by 4.440892098500626e-16 against a threshold of 0.05. No aquifer default was substituted. No correlation was consulted, so no range check applied.
+Every check passed on the impossible run, and they passed for reasons worth understanding. The fit statistic is above 0.999, comfortably above 0.95. The drive index sum is 1.0000000000000004, which misses one by 4.440892098500626e-16 against a threshold of 0.05. No aquifer default was substituted. No correlation was consulted, so no range check applied.
 
 The closure in particular is not luck. The pot aquifer plot regresses $F/E_t$ against $\Delta p / E_t$. On this fixture both $E_o$ and $E_{fw}$ are exactly linear in the drawdown, so $E_t$ is too, and $\Delta p / E_t$ is therefore constant: 42153.0479896247 at the first survey and 42153.0479896241 at the sixth. The vertical coordinate is the F over Et column, which you already know is constant. So all six points sit on top of each other at a single location in that plane, and the regression is fitting a line to one point. It has no leverage at all. The intercept it reports, which is the oil in place, is decided by scatter in the twelfth significant figure, and whatever pair of numbers comes out satisfies the row equation identically. The closure check is confirming that a degenerate fit is self consistent, which it always will be.
 
@@ -32,13 +32,13 @@ The Ekene case at least had five strings on the screen to make you uneasy. This 
 
 Take the Dake Exercise 9.2 performance history, the strong water drive case from module 2, and run it with the aquifer model set to none. The engine returns an oil in place of 532.588241588393 MMSTB, a fit statistic of 0.999317934436751, a drive index sum of 1.00423320400820, a mechanism of depletion drive, and a warnings array of length zero. The tier is `benchmark_verified`.
 
-Dake's own answer for that reservoir is 312 MMSTB. The Carter-Tracy run with the finite aquifer gives 307.221409553720 MMSTB. Ignoring the aquifer has inflated the booking by 225.366832034673 MMSTB, which is 73.3564865684486 percent above the Carter-Tracy answer and 70.7013594834593 percent above Dake's.
+Dake's own answer for that reservoir is 312 MMSTB. Ignoring the aquifer books 532.588241588393 MMSTB, 70.7013594834593 percent above Dake's, and far above the Carter-Tracy run with the finite aquifer.
 
 Two hundred and twenty five million barrels of oil that are not there, on a silent screen, under a benchmark verified badge. Nothing is wrong with the arithmetic. It answered the question it was asked, which was what oil in place would explain this pressure history if no water were arriving.
 
 ## Run three: the channel working
 
-For contrast, break the same case a different way. Keep Carter-Tracy but remove the radius ratio, so the engine uses the infinite acting solution on an aquifer that is finite. Oil in place 156.177551848366 MMSTB, cumulative influx 148.248060002236 MMrb against the finite answer of 88.0645883139400 MMrb, and one warning: the fit statistic has fallen to 0.863239485188882 and the engine says so.
+For contrast, break the same case a different way. Keep Carter-Tracy but remove the radius ratio, so the engine uses the infinite acting solution on an aquifer that is finite. Oil in place 156.177551848366 MMSTB, cumulative influx 148.248060002236 MMrb, far above the finite run's, and one warning: the fit statistic has fallen to 0.863239485188882 and the engine says so.
 
 Compare the two failures. Run two is 220 MMSTB above the truth and silent. Run three is 156 MMSTB below it and noisy. The channel did not speak up because run three was worse. It spoke up because run three fitted worse. Those are different things, and confusing them is the single most expensive habit in this subject.
 
@@ -53,7 +53,7 @@ What does catch run two? Three things, all of them yours and none of them automa
 | Run | Oil in place | Fit statistic | Index sum | Warnings | Tier |
 |---|---|---|---|---|---|
 | Ekene, no aquifer | 12139208.1074968 stb | 1.00000000000000 | 1.00000000000000 | 5 sort complaints | benchmark_verified, no tolerance |
-| Ekene, pot forced | -516449.043355256 stb | 0.999485673716372 | 1.0000000000000004 | the same 5 | benchmark_verified, 0.13 percent |
+| Ekene, pot forced | negative | above 0.999 | 1.0000000000000004 | the same 5 | benchmark_verified, 0.13 percent |
 | Dake, aquifer ignored | 532.588241588393 MMSTB | 0.999317934436751 | 1.00423320400820 | none | benchmark_verified, no tolerance |
 
 A reviewer reading only the right hand three columns would rank these three runs as equally healthy, and would probably rank the second and third above the first on the strength of the warning count. Every column in that table is true. The table is still useless, because none of its columns is about the answer.

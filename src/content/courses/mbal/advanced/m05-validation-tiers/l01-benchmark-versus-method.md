@@ -52,7 +52,7 @@ Why does the gas volumetric line sit lower than everything around it? Not becaus
 
 ## Worked example: what the Dake run entitles you to say
 
-Run the Dake Exercise 9.2 history through Carter-Tracy with the finite aquifer, as module 2 did. The engine returns an oil in place of 307.221409553720 MMSTB, a cumulative influx of 88.0645883139400 MMrb, a fit statistic of 0.999975248425736, and a tier of `benchmark_verified` with a stated tolerance of 3.53 percent.
+Run the Dake Exercise 9.2 history through Carter-Tracy with the finite aquifer, as module 2 did. The engine returns an oil in place and a cumulative influx (the capstone's, so run them yourself), a fit statistic above 0.9999, and a tier of `benchmark_verified` with a stated tolerance of 3.53 percent.
 
 Here is a sentence you may write: the Carter-Tracy oil path in this engine has been checked against Dake Exercise 9.2 and recorded as agreeing with that exercise within 3.53 percent.
 

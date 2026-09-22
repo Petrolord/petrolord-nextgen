@@ -15,7 +15,8 @@ const TDS = [0.05, 0.1, 0.25, 0.5, 1, 2, 5, 10, 15, 25, 40, 50, 75, 100];
 const sci = (v, d = 9) => (Number.isFinite(v) ? Number(v).toPrecision(d) : '-');
 
 const PdExplorer = () => {
-  const [reD, setReD] = useState('5');
+  // Opens at reD 10; the Expert capstone's Dake case is reD 5, one select away.
+  const [reD, setReD] = useState('10');
   const r = Number(reD);
 
   const rows = useMemo(() => {

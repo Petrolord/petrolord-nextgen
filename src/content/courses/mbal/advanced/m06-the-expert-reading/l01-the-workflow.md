@@ -30,7 +30,7 @@ Record: the column itself, its percentage drift end to end, and the independent 
 
 Choose it from what you know about the aquifer: its size, its connection, its encroachment angle, how quickly the field responded. If you cannot say why it suits the reservoir before you run it, you are choosing by fit statistic.
 
-The counterfactual here is compulsory and is the single most useful number in the whole reading: run the case again with no aquifer at all. On the Dake Exercise 9.2 history the Carter-Tracy run with a finite aquifer gives 307.221409553720 MMSTB, while ignoring the aquifer gives 532.588241588393 MMSTB, at a fit statistic of 0.999317934436751 and with no warnings whatsoever. The aquifer decision is worth 225.366832034673 MMSTB on that field, and a reader who is not told that has not been told the main thing.
+The counterfactual here is compulsory and is the single most useful number in the whole reading: run the case again with no aquifer at all. On the Dake Exercise 9.2 history, ignoring the aquifer gives 532.588241588393 MMSTB, at a fit statistic of 0.999317934436751 and with no warnings whatsoever, against a Carter-Tracy run with a finite aquifer that books far less. The aquifer decision is worth more than two hundred million barrels on that field, and a reader who is not told that has not been told the main thing.
 
 Record: both numbers, the difference in barrels, and the geometric argument for the model you kept.
 
@@ -38,13 +38,13 @@ Record: both numbers, the difference in barrels, and the geometric argument for 
 
 The decision the lower tiers did not have. Within Carter-Tracy you still choose whether the aquifer is bounded, and at what dimensionless radius. These are not one expression with and without a boundary term; they are different derivations, and module 1 measured how far apart they run.
 
-Its counterfactual on Dake: remove the radius ratio, so the infinite acting solution is used on a finite aquifer, and the influx comes back at 148.248060002236 MMrb instead of 88.0645883139400 MMrb, 68.3401499292189 percent higher, while the oil in place collapses to 156.177551848366 MMSTB. Imported water that is not there does work the oil would have had to do, so the regression needs less oil to close the books.
+Its counterfactual on Dake: remove the radius ratio, so the infinite acting solution is used on a finite aquifer, and the influx comes back at 148.248060002236 MMrb, far above the finite run's, while the oil in place collapses to 156.177551848366 MMSTB. Imported water that is not there does work the oil would have had to do, so the regression needs less oil to close the books.
 
 Record: finite or infinite, the radius ratio and where it came from, and the other family's answer.
 
 ## Five: the benchmark, where one exists
 
-Where a published worked example covers the path you used, run it. Not the tier badge, the case. Take the published inputs through the same code path with the same settings, and quote the disagreement you measured today rather than the one in the provenance string, which module 5 showed still records 301.0 MMSTB and 3.53 percent where the case now gives 307.221409553720 MMSTB and 1.53159950201266 percent.
+Where a published worked example covers the path you used, run it. Not the tier badge, the case. Take the published inputs through the same code path with the same settings, and quote the disagreement you measured today rather than the one in the provenance string, which module 5 showed still records 301.0 MMSTB and 3.53 percent where the case now gives something else.
 
 Record: the case, the printed value, your value, the disagreement, and the date you measured it.
 
@@ -60,7 +60,7 @@ Record: the convention, in the same sentence as the indices.
 
 ## Worked example: the Dake reading as a paired record
 
-Fluid oil, eleven annual surveys, pressure from 2740 to 1460 psia, per row properties throughout. Column rises steadily, a lagging influx, and the level cannot be reconciled independently here, so the aquifer decision rests on the drift and the geometry. Model Carter-Tracy, chosen from a 140 degree wedge aquifer at a radius ratio of 5, not from fit. Result 307.221409553720 MMSTB, influx 88.0645883139400 MMrb, fit 0.999975248425736, indices 0.567843338103932 and 0.417877131928747 summing to 0.997165062762353 under the gross convention. Counterfactuals: no aquifer 532.588241588393 MMSTB, infinite family 156.177551848366 MMSTB. Benchmark: Dake's own 312 MMSTB, disagreement 1.53159950201266 percent, measured today. Exposure: the aquifer model, worth 225 MMSTB, and the solution family, worth 151 MMSTB.
+Fluid oil, eleven annual surveys, pressure from 2740 to 1460 psia, per row properties throughout. Column rises steadily, a lagging influx, and the level cannot be reconciled independently here, so the aquifer decision rests on the drift and the geometry. Model Carter-Tracy, chosen from a 140 degree wedge aquifer at a radius ratio of 5, not from fit. Result [oil in place] MMSTB, influx [cumulative influx] MMrb, fit above 0.9999, drive indices under the gross convention summing a fraction of a percent short of one. Counterfactuals: no aquifer 532.588241588393 MMSTB, infinite family 156.177551848366 MMSTB. Benchmark: Dake's own 312 MMSTB, disagreement measured today. Exposure: the aquifer model and the solution family, each worth well over a hundred million barrels. The bracketed figures are yours from the panel.
 
 Nine sentences, and a reviewer who now knows what your judgment was worth.
 

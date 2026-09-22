@@ -50,7 +50,7 @@ The search runs on the natural logarithms of the parameters, and the bounds are 
 | aquifer permeability | start divided by 100 to start times 100 | 4 orders of magnitude |
 | gas cap ratio $m$ | 0.001 to 10, absolute | 4 orders of magnitude |
 
-Look at what those defaults mean on the Dake tank. The reservoir radius at the oil water contact is 9200 ft, mapped, from a real outline. The default box runs from 306.666666666667 ft to 276000.000000000 ft. The upper end is a reservoir 52 miles across. The lower end is a reservoir you could walk around in a minute. The oil in place, starting from the regression's 307221409.553720 stb, is allowed anywhere from 3072214.09553720 stb to 30722140955.3720 stb.
+Look at what those defaults mean on the Dake tank. The reservoir radius at the oil water contact is 9200 ft, mapped, from a real outline. The default box runs from 306.666666666667 ft to 276000.000000000 ft. The upper end is a reservoir 52 miles across. The lower end is a reservoir you could walk around in a minute. The oil in place, starting from the regression's value, is allowed anywhere from a hundredth of it to a hundred times it.
 
 These are not physical statements. They are numerical guard rails, wide enough that they will not accidentally constrain a search that is behaving. That is the correct default for a library and the wrong default for your case.
 

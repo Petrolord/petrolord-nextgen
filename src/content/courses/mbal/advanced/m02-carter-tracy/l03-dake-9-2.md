@@ -44,22 +44,9 @@ Read the pressures before anything else. They fall by 1280 psi over ten years wh
 
 ## What the engine returns
 
-Running `computeMaterialBalance` with `aquifer_model` set to `carter_tracy`, a radius ratio of 5, and the per row PVT from the table gives this.
+Running `computeMaterialBalance` with `aquifer_model` set to `carter_tracy`, a radius ratio of 5, and the per row PVT from the table returns an oil in place, a cumulative influx, a fit statistic, a drive mechanism of `water_drive_with_depletion`, an aquifer strength of `strong`, and a set of drive indices. The oil in place and the cumulative influx are two of the Expert capstone's fields, so this lesson does not print them: run the case yourself in the tank explorer's Dake mode (Dataset: Dake Exercise 9.2, aquifer: Carter-Tracy, finite), which opens with no aquifer, the counterfactual.
 
-| quantity | value |
-|---|---|
-| OOIP | 307221409.553720 stb, that is 307.221409553720 MMSTB |
-| cumulative We | 88064588.3139400 rb, that is 88.0645883139400 MMrb |
-| R squared | 0.999975248425736 |
-| drive mechanism | water_drive_with_depletion |
-| aquifer strength | strong |
-| final DDI | 0.567843338103932 |
-| final SDI | 0.0114445927296736 |
-| final GDI | 0 |
-| final WDI | 0.417877131928747 |
-| drive index sum | 0.997165062762353 |
-
-The influx history the march produces, year by year, in reservoir barrels.
+The influx history the march produces, year by year, in reservoir barrels, up to year 8:
 
 | yr | tD | cumulative drawdown psi | We rb |
 |---|---|---|---|
@@ -68,32 +55,29 @@ The influx history the march produces, year by year, in reservoir barrels.
 | 4 | 22.6970957209142 | 711 | 34026926.6977129 |
 | 6 | 34.0534112390445 | 980 | 56244693.3766256 |
 | 8 | 45.3941914418285 | 1169 | 74704534.6703933 |
-| 10 | 56.7505069599587 | 1280 | 88064588.3139400 |
 
 Those dimensionless times use the material balance engine's own coefficient of 0.0155353153462794 per day on the calendar spacing of the fixture dates, which includes three leap years, so they differ in the fourth figure from the 365 day values used in the hand calculations of lesson 2. The onset of pseudo steady state for this aquifer is at $t_D = 0.4 r_{eD}^2 = 10$, so the march crosses into the bounded regime between year 1 and year 2 and spends nine tenths of the history there. That is why the finite solution matters so much on this case, and it is what module 1 predicted from the ratio column.
 
-## Worked example: closing the books at year 10
+## Worked example: closing the books at a survey
 
-Take the last row and check the material balance directly rather than trusting the regression.
+Take a survey and check the material balance directly rather than trusting the regression. At year 6 the engine's per timestep terms are an underground withdrawal $F$ of 132292090 rb, an oil expansion $E_o$ of 0.238 rb per stb, a rock and connate water expansion $E_{fw}$ of 0.00601059789473684 rb, a total expansion $E_t$ of 0.244010597894737 rb, and a cumulative influx $W_e$ of 56244693.3766256 rb.
 
-At year 10 the engine's per timestep terms are an underground withdrawal $F$ of 210742779.600000 rb, an oil expansion $E_o$ of 0.389520000000000 rb per stb, a rock and connate water expansion $E_{fw}$ of 0.00785057684210526 rb, and a total expansion $E_t$ of 0.397370576842105 rb.
+The tank statement is that withdrawal equals expansion plus imported water: $F = N E_t + W_e$. Put your own $N$ from the panel into the right hand side and compare it with $F$. The books will not close exactly: a single value of $N$ has to serve all ten surveys, and it cannot fit every one of them exactly.
 
-The tank statement is that withdrawal equals expansion plus imported water. Expansion first: $N E_t = 307221409.553720 \times 0.397370576842105 = 122080748.732607$ rb. Add the influx, 88064588.3139400 rb, and the right hand side comes to 210145337.046547 rb against a withdrawal of 210742779.600000 rb. The books close to within 597442.553453356 rb, which is 0.283493723764739 percent of the withdrawal.
+That residual is also the reason the drive indices do not sum to one. Form them from the same terms, $N E_o / F$, $N E_{fw} / F$ and $W_e / F$, and the sum falls a fraction of a percent short of one. Now note what it is not. No water has been produced on this field, so $W_p B_w$ is zero, and the gross withdrawal denominator the engine uses is identical to the net withdrawal denominator the literature uses. The convention question that separates those two cannot be responsible here. What is left is the least squares residual.
 
-That residual is the reason the drive indices do not sum to one. Form them from the same terms: $N E_o / F = 0.567843338103932$, $N E_{fw} / F = 0.0114445927296736$, and $W_e / F = 0.417877131928747$, giving 0.997165062762353 and a shortfall of 0.00283493723764705. Now note what it is not. No water has been produced on this field, so $W_p B_w$ is zero, and the gross withdrawal denominator the engine uses is identical to the net withdrawal denominator the literature uses. The convention question that separates those two cannot be responsible here. What is left is the least squares residual: a single value of $N$ has to serve all ten surveys, and it cannot fit every one of them exactly.
-
-Look at the residual across the history and it is positive at every survey, running 533108.736888647 rb at year 1, rising to 1082116.79210722 rb at year 6, then falling back to 597442.553453356 rb at year 10. A systematically signed residual with a hump in the middle is not noise. It says the influx model and the data have slightly different shapes in time, which is exactly what you would expect from an approximation to the aquifer response rather than the exact one.
+Work the residual at every survey and it is positive throughout, rising to a hump in the middle of the history and falling back by the end. A systematically signed residual with a hump in the middle is not noise. It says the influx model and the data have slightly different shapes in time, which is exactly what you would expect from an approximation to the aquifer response rather than the exact one.
 
 ## At the panel
 
 {{panel:mb-tank-explorer}}
 
-Be clear about what this panel is: it runs the Ekene tank, not the Dake case. Use it as the control. Set the aquifer selector to **None (the truth)** and read four tiles: **Drive mechanism** shows `depletion_drive`, **Water drive index** shows a value indistinguishable from zero, **Aquifer strength** shows `none`, and **Drive indices sum** shows a number that closes to one.
+The panel opens on the Ekene tank. Use it as the control first: with the aquifer selector on **None (the truth)**, **Drive mechanism** shows `depletion_drive`, **Water drive index** shows a value indistinguishable from zero, **Aquifer strength** shows `none`, and **Drive indices sum** shows a number that closes to one.
 
-Now hold those four beside the Dake results above: `water_drive_with_depletion`, a water drive index of 0.417877131928747, an aquifer strength of `strong` and a sum of 0.997165062762353. The same four fields, filled in by the same code, describing two completely different fields. Then switch the panel's selector to **Pot aquifer (not needed here)** and watch the Ekene numbers move, which is the Professional tier's warning shown against a case where you know the truth.
+Then switch **Dataset** to **Dake Exercise 9.2 (published)**. It opens with no aquifer at all, the counterfactual. Choose **Carter-Tracy, finite** and read the oil in place and the cumulative influx the capstone asks for, then **Carter-Tracy, infinite acting** and watch what an aquifer with no outer boundary does to both.
 
 ## Exercise
 
-Work year 6 of Dake 9.2 the way the worked example handled year 10. You are given $F = 132292090.000000$ rb, $E_t = 0.244010597894737$ rb, $E_o = 0.238000000000000$ rb per stb, $E_{fw} = 0.00601059789473684$ rb and $W_e = 56244693.3766256$ rb, with $N$ as reported above.
+Work year 6 of Dake 9.2 with the terms given in the worked example and the $N$ you read from the panel.
 
-First, compute $N E_t + W_e$ and state the residual against $F$, in barrels and as a percentage of $F$. Second, form the three drive indices at year 6 and their sum, and say whether the water drive index is larger or smaller than its year 10 value of 0.417877131928747. Third, explain in two sentences what a rising water drive index through the middle of a field's life tells you about which mechanism is taking over, and say what you would expect the index to do if the aquifer were infinite instead of bounded at $r_{eD}$ 5.
+First, compute $N E_t + W_e$ and state the residual against $F$, in barrels and as a percentage of $F$. Second, form the three drive indices at year 6 and their sum, and say whether the water drive index is larger or smaller than at year 10. Third, explain in two sentences what a rising water drive index through the middle of a field's life tells you about which mechanism is taking over, and say what you would expect the index to do if the aquifer were infinite instead of bounded at $r_{eD}$ 5.
