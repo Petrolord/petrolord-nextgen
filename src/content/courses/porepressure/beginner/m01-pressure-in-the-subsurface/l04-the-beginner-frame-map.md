@@ -43,7 +43,7 @@ $$dt(z) = dt_{matrix} + (dt_{mudline} - dt_{matrix})\,e^{-cz}$$
 
 The golden well's header gives a mudline transit time of 656 us/m, a matrix transit time of 220 us/m and a compaction constant of 0.0006 per m. On that trend, the transit time at 2500 m below mudline is 317.2847498247154 us/m.
 
-You then do what an interpreter actually does, which is to pick shale points on the log and fit the trend to them. The capstone fits twelve picks with a matrix transit time of 220 us/m, and the least squares fit returns a mudline transit time of 650.0000000000014 us/m and a compaction constant of 0.7000000000000015 per km.
+You then do what an interpreter actually does, which is to pick shale points on the log and fit the trend to them. The teaching case fits twelve picks with a matrix transit time of 220 us/m, and the least squares fit returns a mudline transit time of 650.0000000000014 us/m and a compaction constant of 0.7000000000000015 per km.
 
 Compare those with the header values of 656 us/m and 0.6 per km. They disagree, and neither one is a mistake. The fit is an honest report of the twelve points it was given, and those points were drawn on a different trend from the one written in the header. That is the central teaching point of this tier, and module 4 ends on it. A fitted trend describes the data you handed it. If you hand it the wrong points it returns a confident number describing the wrong points, so check that fitted parameters are physically sensible before a pressure prognosis is built on them.
 

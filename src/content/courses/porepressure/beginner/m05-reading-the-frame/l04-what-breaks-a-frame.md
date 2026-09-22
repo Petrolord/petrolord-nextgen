@@ -6,7 +6,7 @@ The checks in the last lesson tell you that something is wrong. This lesson tell
 
 This is the most common error in offshore pore pressure work and it is worth understanding in detail, because the hydrostatic column on this well is exactly hand checkable.
 
-The column has two parts. Seawater from sea level to the mudline, 1025 kg/m3 through 100 m of water, giving 1005181.625 Pa. Pore fluid from the mudline to total depth, 1030 kg/m3 through 4000 m, giving 40403398 Pa. Add them and you have 41408579.625 Pa, which is the 41.408579625 MPa the capstone grades at 4000 m below mudline.
+The column has two parts. Seawater from sea level to the mudline, 1025 kg/m3 through 100 m of water, giving 1005181.625 Pa. Pore fluid from the mudline to total depth, 1030 kg/m3 through 4000 m, giving 40403398 Pa. Add them and you have 41408579.625 Pa, which is the 41.408579625 MPa the teaching case holds at 4000 m below mudline.
 
 Drop the water column and you are left with 40403398 Pa, the sediment part alone. That shortfall does not shrink with depth, so it is proportionally worst in the shallow section where drilling decisions are tightest. The frame still plots as two rising curves, still passes a monotonic check, and is wrong from the seabed down.
 
@@ -24,7 +24,7 @@ The whole hydrostatic column here weighs 1025 x 100 + 1030 x 4000 = 4222500 kg/m
 | 9.80665 | 41.408579625 MPa | 0, the graded value |
 | 9.81    | 41.422725000 MPa | +0.014145375 MPa |
 
-The capstone tolerance on that field is 0.01 MPa, so both rounded values of g fail it. This is not a pedantic point about decimal places. A learner who uses 9.81 gets 41.422725000 MPa, a number that looks entirely right, is wrong by about 14 kilopascals, and is marked wrong. On the overburden, where the graded value at 4000 m below mudline is 91.12306695073282 MPa, the same relative error is applied to a larger number and the miss is larger still.
+The capstone tolerance on that field is 0.01 MPa, so both rounded values of g fail it. This is not a pedantic point about decimal places. A learner who uses 9.81 gets 41.422725000 MPa, a number that looks entirely right, is wrong by about 14 kilopascals, and is marked wrong. On the overburden, where the teaching value at 4000 m below mudline is 91.12306695073282 MPa, the same relative error is applied to a larger number and the miss is larger still.
 
 Take g from one named constant rather than typing it, and record which value you used alongside the frame.
 

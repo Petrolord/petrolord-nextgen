@@ -3,10 +3,10 @@ import {
   computeWindowExplorer, computeBowersFacts, computeMudWindow, BOWERS_UNLOAD_V_MS,
 } from '@/lib/porepressureTeaching';
 
-// DC27 panel math pinned to the LIVE NG9 Expert capstone answer key and to
+// DC27 panel math pinned to the teaching case (the pre-W5b NG9 Expert capstone key) and to
 // the tier's engine-verified teaching facts (TRUTH digest 2026-08-25).
 
-describe('Window explorer vs the live Expert capstone key', () => {
+describe('Window explorer vs the teaching case (the pre-W5b Expert capstone key)', () => {
   const m = computeWindowExplorer(3.0);
   const b = computeBowersFacts();
 

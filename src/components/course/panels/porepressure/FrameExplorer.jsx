@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  WELL, PARAMS, RAMP_TOP_M, TD_M, computeBasics, emwKgM3,
+  WELL, PARAMS, NCT_PICKS, RAMP_TOP_M, TD_M, computeBasics, emwKgM3,
 } from '@/lib/porepressureTeaching';
 import { nctDt } from '@petrolord/engines/engines/porepressure/nct.js';
 import { gardnerRho } from '@petrolord/engines/engines/porepressure/gardner.js';
@@ -20,11 +20,30 @@ const fmt = (v, d = 4) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 // Snap to the 10 m sample grid the golden well is defined on.
 const snap = (z) => Math.min(TD_M, Math.max(0, Math.round(z / 10) * 10));
 
-const BASICS = computeBasics();
-
 const FrameExplorer = () => {
   const [depth, setDepth] = useState(String(TD_M));
   const [vel, setVel] = useState('1600');
+  // The well setting opens on the golden well's header; a capstone brief
+  // states its own and the learner types it in.
+  const [wd, setWd] = useState(String(PARAMS.waterDepthM));
+  const [rf, setRf] = useState(String(PARAMS.rhoFluidKgM3));
+  const [dma, setDma] = useState(String(NCT_PICKS.dt_ma));
+  const setting = useMemo(() => {
+    const c = { waterDepthM: Number(wd), rhoFluidKgM3: Number(rf), fitDtMa: Number(dma) };
+    const ok = c.waterDepthM >= 0 && c.waterDepthM <= 3000 && c.rhoFluidKgM3 >= 900 && c.rhoFluidKgM3 <= 1300
+      && c.fitDtMa > 100 && c.fitDtMa < 300;
+    return ok ? c : null;
+  }, [wd, rf, dma]);
+  const BASICS = useMemo(() => (setting ? computeBasics(setting) : null), [setting]);
+  const inputs = (
+    <div className="grid gap-3 grid-cols-2 sm:grid-cols-5 items-end">
+      <NumField label="Depth (m below mudline)" value={depth} onChange={setDepth} />
+      <NumField label="Sonic velocity for Gardner (m/s)" value={vel} onChange={setVel} />
+      <NumField label="Water depth (m)" value={wd} onChange={setWd} />
+      <NumField label="Pore fluid density (kg/m3)" value={rf} onChange={setRf} />
+      <NumField label="Matrix transit time for the fit (us/m)" value={dma} onChange={setDma} />
+    </div>
+  );
 
   const zRaw = Number(depth);
   const vRaw = Number(vel);
@@ -32,7 +51,7 @@ const FrameExplorer = () => {
   const vOk = Number.isFinite(vRaw) && vRaw >= 500 && vRaw <= 6000;
 
   const read = useMemo(() => {
-    if (!zOk) return null;
+    if (!zOk || !BASICS) return null;
     const z = snap(zRaw);
     const i = WELL.z_bml_m.indexOf(z);
     if (i < 0) return null;
@@ -44,15 +63,15 @@ const FrameExplorer = () => {
       dtLog: WELL.dt_us_per_m[i],
       rho: WELL.rho_kg_m3[i],
       dtWell: nctDt(z, nct.dtMlUsPerM, nct.dtMaUsPerM, nct.cPerM),
-      dtFit: nctDt(z, BASICS.fit.dtMl, nct.dtMaUsPerM, BASICS.fit.c),
+      dtFit: nctDt(z, BASICS.fit.dtMl, setting.fitDtMa, BASICS.fit.c),
     };
-  }, [zRaw, zOk]);
+  }, [zRaw, zOk, BASICS, setting]);
 
   if (!read) {
     return (
-      <PanelShell title="Frame explorer" subtitle={`Enter a depth between 0 and ${TD_M} m below mudline.`}>
-        <NumField label="Depth (m below mudline)" value={depth} onChange={setDepth} />
-        <Note>The depth must be a number in that range. It snaps to the well's 10 m sample grid.</Note>
+      <PanelShell title="Frame explorer" subtitle={`Enter a depth between 0 and ${TD_M} m below mudline, and a well setting.`}>
+        {inputs}
+        <Note>The depth must be a number in that range; it snaps to the well&apos;s 10 m sample grid. The water depth runs 0 to 3000 m, the pore fluid 900 to 1300 kg/m3 and the fit matrix 100 to 300 us/m.</Note>
       </PanelShell>
     );
   }
@@ -79,19 +98,18 @@ const FrameExplorer = () => {
     obPts.push([sxP(BASICS.prof.overburdenPa[i] / MPA), sy(z)]);
     logPts.push([sxD(WELL.dt_us_per_m[i]), sy(z)]);
     wellPts.push([sxD(nctDt(z, PARAMS.nct.dtMlUsPerM, PARAMS.nct.dtMaUsPerM, PARAMS.nct.cPerM)), sy(z)]);
-    fitPts.push([sxD(nctDt(z, BASICS.fit.dtMl, PARAMS.nct.dtMaUsPerM, BASICS.fit.c)), sy(z)]);
+    fitPts.push([sxD(nctDt(z, BASICS.fit.dtMl, setting.fitDtMa, BASICS.fit.c)), sy(z)]);
   }
 
   return (
     <PanelShell title="Frame explorer"
-      subtitle={`The golden well: ${WELL.z_bml_m.length} samples to ${TD_M} m below mudline in ${PARAMS.waterDepthM} m of water. Left panel is the pressure frame, right overlay is the sonic against both compaction trends.`}>
-      <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
-        <NumField label="Depth (m below mudline)" value={depth} onChange={setDepth} />
-        <NumField label="Sonic velocity for Gardner (m/s)" value={vel} onChange={setVel} />
-        <div className="text-xs text-gray-500 sm:col-span-2">
-          The capstone reads the frame at TD ({TD_M} m) and Gardner at 1600 m/s. The overpressure
-          ramp starts at {RAMP_TOP_M} m.
-        </div>
+      subtitle={`The golden well: ${WELL.z_bml_m.length} samples to ${TD_M} m below mudline in ${setting.waterDepthM} m of water. Left panel is the pressure frame, right overlay is the sonic against both compaction trends.`}>
+      {inputs}
+      <div className="text-xs text-gray-500">
+        The panel opens on the teaching case: the golden well&apos;s header ({PARAMS.waterDepthM} m of
+        water, pore fluid {PARAMS.rhoFluidKgM3} kg/m3, fit matrix {NCT_PICKS.dt_ma} us/m), read at TD
+        ({TD_M} m) with Gardner at 1600 m/s. The overpressure ramp starts at {RAMP_TOP_M} m. A capstone
+        brief states a setting of its own; type it in.
       </div>
 
       <div className="overflow-x-auto">
@@ -138,8 +156,8 @@ const FrameExplorer = () => {
         <Tile label="NCT, well trend" value={fmt(read.dtWell, 6)} unit="us/m" />
         <Tile label="NCT, fitted trend" value={fmt(read.dtFit, 6)} unit="us/m" />
         <Tile label="Log density" value={fmt(read.rho, 4)} unit="kg/m3" />
-        <Tile label="Hydrostatic as EMW" value={fmt(emwKgM3(read.hydroPa, read.z), 4)} unit="kg/m3" />
-        <Tile label="Overburden as EMW" value={fmt(emwKgM3(read.obPa, read.z), 4)} unit="kg/m3" />
+        <Tile label="Hydrostatic as EMW" value={fmt(emwKgM3(read.hydroPa, read.z, setting.waterDepthM), 4)} unit="kg/m3" />
+        <Tile label="Overburden as EMW" value={fmt(emwKgM3(read.obPa, read.z, setting.waterDepthM), 4)} unit="kg/m3" />
         <Tile label={vOk ? `Gardner at ${vRaw} m/s` : 'Gardner (enter 500 to 6000)'}
           value={vOk ? fmt(gardnerRho(vRaw), 6) : '-'} unit="kg/m3" />
         <Tile label="Fitted trend" value={`${fmt(BASICS.fit.dtMl, 2)} us/m, ${fmt(BASICS.fit.c * 1000, 4)} per km`} />

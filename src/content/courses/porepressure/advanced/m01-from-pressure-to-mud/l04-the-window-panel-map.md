@@ -6,7 +6,7 @@ This tier's instrument converts the whole prognosis to mud units and draws the w
 
 ## The one control
 
-A single selector: the Eaton exponent, 3 or 1.2. The capstone's two calibrations, nothing else. The trend, the threshold, the frame are all fixed at their capstone settings, because this tier's questions are downstream of the Professional tier's; if you want to watch a trend destroy a window, the Professional panel still exists and its damage converts to mud units at the usual 24.87 kg/m3 per MPa at TD.
+The Eaton exponent opens at 3; the lessons also use 1.2, the low calibration. The well setting and the Bowers inputs are typed boxes that open on the teaching case, and a capstone brief states its own. The trend and the threshold are fixed at their teaching settings, because this tier's questions are downstream of the Professional tier's; if you want to watch a trend destroy a window, the Professional panel still exists and its damage converts to mud units at the usual 24.87 kg/m3 per MPa at TD.
 
 The Bowers tiles ignore the control entirely, and that is deliberate: Bowers is the second method, computed from its own curves, and nothing about the Eaton calibration should move it. Seeing tiles NOT move when a control changes is information, the panel's way of showing independence.
 
@@ -20,7 +20,7 @@ The dashed curves are the frame in mud units: hydrostatic EMW on the left, overb
 
 ## The tiles
 
-Ten tiles in four groups. The graded trio: floor at TD, ceiling at TD, window at TD, reading 1179.10, 1903.92, 724.82 on the capstone setting. The frame pair: hydrostatic and overburden EMW at TD, the bracket. The pressure tile: pore pressure at TD in MPa, which flips to 43.902 when the exponent control flips, the sixth graded field appearing in its native units. And the Bowers group: loading velocity at 5 MPa, 1949.94 m/s; the unloading inversion at 3125.8 m/s, 10.000 MPa; the loading read of that same velocity, 29.240, whose meaning is module 5's centrepiece; and the cross-check tile, Eaton against Bowers at TD, 0.038 MPa apart.
+Ten tiles in four groups. The graded trio: floor at TD, ceiling at TD, window at TD, reading 1179.10, 1903.92, 724.82 on the teaching setting. The frame pair: hydrostatic and overburden EMW at TD, the bracket. The pressure tile: pore pressure at TD in MPa, which flips to 43.902 when the exponent control flips, the sixth graded field appearing in its native units. And the Bowers group: loading velocity at 5 MPa, 1949.94 m/s; the unloading inversion at 3125.8 m/s, 10.000 MPa; the loading read of that same velocity, 29.240, whose meaning is module 5's centrepiece; and the cross-check tile, Eaton against Bowers at TD, 0.038 MPa apart.
 
 ## Reading the window like a well planner
 

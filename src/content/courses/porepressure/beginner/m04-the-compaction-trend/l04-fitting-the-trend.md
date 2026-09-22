@@ -24,7 +24,7 @@ Fixing $dt_{ma}$ from lithology, at 220 us/m here, removes that ambiguity and le
 
 ## What the fit returns
 
-Run the least squares fit through the twelve picks with the matrix transit time fixed at 220 us/m and it returns a mudline transit time of 650.0000000000014 us/m and a compaction constant of 0.7000000000000015 per km. Both are graded by the capstone, the first with a tolerance of 0.5 us/m and the second with a tolerance of 0.005 per km. Inside the engine that constant is held in per metre, so the fit that reads 0.7000000000000015 per km here is the same fit that the code carries as 0.0007 per m.
+Run the least squares fit through the twelve picks with the matrix transit time fixed at 220 us/m and it returns a mudline transit time of 650.0000000000014 us/m and a compaction constant of 0.7000000000000015 per km. The capstone asks for the same two numbers, on the matrix transit time its brief states, the first with a tolerance of 0.5 us/m and the second with a tolerance of 0.005 per km. Inside the engine that constant is held in per metre, so the fit that reads 0.7000000000000015 per km here is the same fit that the code carries as 0.0007 per m.
 
 Look at the digits. The mudline value is 650 followed by twelve zeros and then a 14. The compaction constant is 0.7 followed by the same pattern. A least squares fit to real data does not do this. What you are seeing is a fit that has recovered its input parameters exactly, to the limit of double precision arithmetic, and the trailing digits are floating point rounding rather than anything about rocks.
 

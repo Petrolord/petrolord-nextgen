@@ -21,12 +21,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Hydrostatic tile 41.408580 MPa at 6 decimals; hand route 1025 g 100 + 1030 g 4000 is taught (beginner m01 l03); tol 0.01.",
    "notes": "LEAK: default state (probe: \"Hydrostatic41.408580\"); listed as the expected value in /root/wt-b5-nextgen/src/content/courses/porepressure/beginner/m06-the-pore-pressure-workflow/l03-the-capstone-walkthrough.md (six graded fields table).",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "hydro_td_mpa",
+     "label": "Hydrostatic pressure at TD",
+     "unit": "MPa",
+     "expected": 43.3086180625,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the frame explorer opened on the golden well at TD. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:26 (depth defaults to TD)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:134 fmt(read.hydroPa / MPA, 6)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -43,12 +67,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Overburden tile 91.123067 at 6 decimals (integrated density log, engine-only); tol 0.01.",
    "notes": "LEAK: default state; listed in the walkthrough table and beginner/m01-pressure-in-the-subsurface/l03-three-pressures.md:23.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "ob_td_mpa",
+     "label": "Overburden stress at TD",
+     "unit": "MPa",
+     "expected": 92.63083938823286,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the frame explorer opened on the golden well at TD. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:26",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:135 fmt(read.obPa / MPA, 6)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -65,12 +113,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Gardner tile 1960.612149 kg/m3; hand route 310 v^0.25 taught; tol 0.5.",
    "notes": "LEAK: default state (v = 1600); listed in the walkthrough table and beginner m01 l04:29.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "gardner_rho",
+     "label": "Gardner density at 1750 m/s",
+     "unit": "kg/m3",
+     "expected": 2005.0315278060425,
+     "tol": 0.5
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the frame explorer opened on the golden well at TD. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:27 (velocity defaults to 1600 m/s)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:144 fmt(gardnerRho(vRaw), 6)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -87,12 +159,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "NCT (well trend) tile at 6 decimals; hand route 220 + 436 exp(-0.0006 x 2500) = 317.2847 taught; tol 0.5.",
    "notes": "LEAK: one edit from default; listed in the walkthrough table and beginner/m01-pressure-in-the-subsurface/l02-the-golden-well.md:34.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "nct_case_depth",
+     "label": "NCT transit time at 2750 m",
+     "unit": "us/m",
+     "expected": 303.7337601586488,
+     "tol": 0.5
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the frame explorer opened on the golden well at TD. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:54 depth box set to 2500",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:138 fmt(read.dtWell, 6)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -109,12 +205,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Fitted trend tile \"650.00 us/m\"; tol 0.5.",
    "notes": "LEAK: default state (probe: \"Fitted trend650.00 us/m, 0.7000 per km\"); listed in the walkthrough table and beginner/m04-the-compaction-trend/l04-fitting-the-trend.md:27.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "fit_dtml",
+     "label": "Fitted NCT mudline transit time",
+     "unit": "us/m",
+     "expected": 634.6745981683341,
+     "tol": 0.5
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the frame explorer opened on the golden well at TD. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:145 fitted-trend tile",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:145 fmt(BASICS.fit.dtMl, 2)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -131,12 +251,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Tile \"0.7000 per km\" (scale 1000 applied from per m); tol 0.005.",
    "notes": "LEAK: default state; listed in the walkthrough table and beginner m04 l04:27.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "fit_c_per_km",
+     "label": "Fitted compaction constant",
+     "unit": "1/km",
+     "expected": 0.6385297904636702,
+     "tol": 0.005
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the frame explorer opened on the golden well at TD. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:145",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/FrameExplorer.jsx:145 fmt(BASICS.fit.c * 1000, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -151,12 +295,34 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "A sample depth, genuinely integer and printed as an integer, so tol 0 is honest; answering the ramp top 2500 fails, as intended.",
    "notes": "LEAK: default state (probe: \"Overpressure onset2520m bml\"); listed as expected 2520 in /root/wt-b5-nextgen/src/content/courses/porepressure/intermediate/m06-the-prognosis-workflow/l03-the-capstone-walkthrough.md.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "onset_m",
+     "label": "Overpressure onset depth (0.25 MPa threshold)",
+     "unit": "m bml",
+     "expected": 2590.0,
+     "tol": 0.0
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the Eaton explorer opened on the n = 3 prognosis. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:23 (threshold defaults to 0.05 MPa)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:77 String(m.onsetM)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -173,12 +339,39 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "NCT at TD tile 259.5530; tol 0.5.",
    "notes": "LEAK: default state; listed in the walkthrough.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "budget_td_mpa",
+     "label": "Overburden minus hydrostatic at TD",
+     "unit": "MPa",
+     "expected": 49.322221325732855,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/porepressure/EatonExplorer.jsx (Tile 'Budget S minus Ph at TD')",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/porepressure/EatonExplorer.jsx fmt(m.budgetTdMpa) (3 dp)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The walkthrough printed all six answers and the Eaton explorer opened on the n = 3 prognosis. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -195,12 +388,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Tile 33.308; tol 0.01 against half a unit of 0.0005.",
    "notes": "LEAK: default state; listed in the walkthrough and intermediate/m02-the-eaton-ratio/l04-worked-pp-at-3000.md:45.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "pp_3000_mpa",
+     "label": "Pore pressure at 3000 m",
+     "unit": "MPa",
+     "expected": 34.57540894296633,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the Eaton explorer opened on the n = 3 prognosis. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:21 (n defaults to CAPSTONE_EATON_N)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:79 fmt(m.pp3000Mpa) (3 dp)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -217,12 +434,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Tile 47.409; tol 0.01.",
    "notes": "LEAK: default state; listed in the walkthrough.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "pp_td_mpa",
+     "label": "Pore pressure at TD",
+     "unit": "MPa",
+     "expected": 47.74799153175756,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the Eaton explorer opened on the n = 3 prognosis. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:21",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:80 fmt(m.ppTdMpa)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -239,12 +480,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Tile 6.000; the fixture encodes a 6 MPa ramp, so the value is exact by construction; tol 0.01.",
    "notes": "LEAK: default state; listed in the walkthrough.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "op_td_mpa",
+     "label": "Overpressure at TD",
+     "unit": "MPa",
+     "expected": 4.439373469257563,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the Eaton explorer opened on the n = 3 prognosis. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:21",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:81 fmt(m.opTdMpa)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -261,12 +526,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Tile 76.552; tol 0.01.",
    "notes": "LEAK: default state; listed in the walkthrough and intermediate/m02-the-eaton-ratio/l03-the-exponent.md:49.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "fp_td_mpa",
+     "label": "Fracture pressure at TD",
+     "unit": "MPa",
+     "expected": 71.9156788390904,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the Eaton explorer opened on the n = 3 prognosis. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:21",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/EatonExplorer.jsx:82 fmt(m.fpTdMpa)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -283,12 +572,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Tile 1179.10; hand route P/(g (4000 + 100)) worked in the walkthrough; tol 0.5.",
    "notes": "LEAK: default state; listed in /root/wt-b5-nextgen/src/content/courses/porepressure/advanced/m06-the-window-workflow/l03-the-capstone-walkthrough.md (\"expected 1179.1048116553065\").",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "pp_emw_td",
+     "label": "Pore pressure as EMW at TD",
+     "unit": "kg/m3",
+     "expected": 1145.6329671074357,
+     "tol": 0.5
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the window explorer opened on the n = 3 window with the golden Bowers pair. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:23 (n defaults to CAPSTONE_EATON_N)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:70 fmt(m.ppEmwTd) (2 dp)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -305,12 +618,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Tile 1903.92; tol 0.5.",
    "notes": "LEAK: default state; listed in the walkthrough.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "fp_emw_td",
+     "label": "Fracture pressure as EMW at TD",
+     "unit": "kg/m3",
+     "expected": 1725.4960865772755,
+     "tol": 0.5
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the window explorer opened on the n = 3 window with the golden Bowers pair. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:23",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:71 fmt(m.fpEmwTd)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -327,12 +664,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Tile 724.82; tol 0.5.",
    "notes": "LEAK: default state; listed in the walkthrough.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "window_td",
+     "label": "Mud-weight window at TD",
+     "unit": "kg/m3",
+     "expected": 579.8631194698398,
+     "tol": 0.5
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the window explorer opened on the n = 3 window with the golden Bowers pair. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:23",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:72 fmt(m.windowTd)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -349,12 +710,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Tile 1949.94 m/s; hand chain (5000 + 10 x (5e6/6894.757)^0.75) x 0.3048 taught; tol 0.5.",
    "notes": "LEAK: default state (a fixed tile); listed in the walkthrough.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "bowers_v_case",
+     "label": "Bowers loading velocity at 8 MPa",
+     "unit": "m/s",
+     "expected": 2063.3848832274025,
+     "tol": 0.5
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the window explorer opened on the n = 3 window with the golden Bowers pair. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:76",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:76 fmt(BOWERS.vLoad5MPa)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -371,12 +756,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Tile 10.000 MPa; the probe velocity 3125.8 m/s was built so the unloading read is exactly 10 (the walkthrough says \"exact at 10 by fixture construction\"); tol 0.01.",
    "notes": "LEAK: default state (fixed tile); listed in the walkthrough. Also equals the prompt's Bowers A of 10 (prompt_numbers_within_tol [\"10\"]), so a learner who copies a prompt number can pass; a probe velocity whose unloading read is not a round number would remove both coincidences.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "bowers_sigma_mpa",
+     "label": "Bowers unloading stress at 2900 m/s",
+     "unit": "MPa",
+     "expected": 10.113305897648297,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the window explorer opened on the n = 3 window with the golden Bowers pair. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:77",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:77 fmt(BOWERS.sigmaUnloadPa / 1e6, 3)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -393,12 +802,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value in this course is printed at full precision in the tier's capstone walkthrough (a table or list of \"expected\" values with tolerances) and repeated across the tier lessons, and each panel opens on the capstone settings (FrameExplorer depth = TD and v = 1600, EatonExplorer and WindowExplorer n = CAPSTONE_EATON_N). Owner to decide whether the walkthrough may keep listing the expected values; the tolerances and displays themselves are sound.",
    "evidence": "Tile 43.902 at n 1.2; hand chain with the fractional power worked in the walkthrough; tol 0.01.",
    "notes": "LEAK: one click from default; listed in the walkthrough and advanced/m01-from-pressure-to-mud/l01-what-this-tier-adds.md:13.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_porepressure.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "pp_td_alt_n_mpa",
+     "label": "Pore pressure at TD with n = 1.5",
+     "unit": "MPa",
+     "expected": 46.38061545588117,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the window explorer opened on the n = 3 window with the golden Bowers pair. Re-cased on an appraisal setting of the same logs (250 m of water, pore fluid 1040 kg/m3, and per tier the fit matrix, exponent, threshold, Poisson ratio and Bowers inputs), which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:41 (n select set to 1.2)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/porepressure/WindowExplorer.jsx:75 fmt(m.ppTdMpa, 3)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   }
  ]
 }

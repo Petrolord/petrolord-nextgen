@@ -6,7 +6,7 @@ Modules 1 and 2 built the machine one depth at a time. This module runs it every
 
 ## Reading the shape
 
-Put the panel on the capstone settings and look only at the red curve for a moment.
+Put the panel on the teaching settings and look only at the red curve for a moment.
 
 From the mudline to 2500 m it lies exactly on the dashed hydrostatic. Not near it: on it. Every sample above the ramp top has a ratio of exactly 1, so the method returns the hydrostatic to the last bit. On a real prognosis this section would wander a little around the hydrostatic, because a real log wanders around its trend; a section that hugs hydrostatic this perfectly is the signature of a synthetic well.
 
@@ -36,6 +36,6 @@ Decompose it: the hydrostatic gradient contributes $1030 \times 9.80665 = 10.100
 
 ## Exercise
 
-From the curve on capstone settings: state the depth interval over which the pore pressure curve is exactly straight, and explain why the interval above the ramp top, where the curve is also straight, has a different slope. Give both slopes in kPa per metre.
+From the curve on teaching settings: state the depth interval over which the pore pressure curve is exactly straight, and explain why the interval above the ramp top, where the curve is also straight, has a different slope. Give both slopes in kPa per metre.
 
 Self check: the curve is straight from 2500 m to total depth at hydrostatic plus ramp, 14.100849 kPa per metre, straight because the encoded ramp is linear and the hydrostatic is linear in depth below the water column. Above the ramp top the curve is the hydrostatic itself, straight at 10.100849 kPa per metre, the pore fluid density times gravity. Both segments are straight but their slopes differ by exactly the 4 kPa per metre of encoding, and the kink at 2500 m is the single most informative point on the plot.

@@ -20,7 +20,7 @@ That last sentence is why this well can teach the method honestly. The overpress
 
 ## What is graded
 
-The capstone runs the full pipeline on the well's own trend with $n = 3$ and grades six numbers: the overpressure onset depth the detection rule reports, the normal-trend transit time at total depth, the pore pressure at 3000 m and at total depth, the overpressure at total depth, and the fracture pressure at total depth.
+The capstone runs the full pipeline on the well's own trend, on a setting its brief states (the lessons work $n = 3$ on the golden header), and grades six numbers: the overpressure onset depth the detection rule reports, the overburden minus hydrostatic at total depth, the pore pressure at 3000 m and at total depth, the overpressure at total depth, and the fracture pressure at total depth.
 
 Two of those six deserve a flag now.
 

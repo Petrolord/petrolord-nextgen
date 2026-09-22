@@ -1,6 +1,6 @@
 # The onset and the detection rule
 
-The capstone grades the overpressure onset at a tolerance of zero, and the answer is 2520 m. The ramp starts at 2500 m. Both statements are true, and the 20 m between them is this lesson.
+The capstone grades the overpressure onset at a tolerance of zero. On the teaching case the answer is 2520 m. The ramp starts at 2500 m. Both statements are true, and the 20 m between them is this lesson.
 
 {{panel:pp-eaton-explorer}}
 

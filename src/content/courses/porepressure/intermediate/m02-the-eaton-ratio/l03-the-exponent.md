@@ -8,9 +8,9 @@ The third part of the machine is the exponent $n$, and it is the strangest of th
 
 The ratio sits just below 1. Powers of such a number fall steadily: $0.9580337483265022$ cubed is $0.8793108342707514$, and the higher the power the smaller the result. So a bigger exponent converts the same slowness into a bigger handover fraction, hence more pressure. The exponent is a volume knob on the evidence.
 
-The engine's overpressure at total depth, for the five exponents the panel offers, with everything else at capstone settings:
+The engine's overpressure at total depth, for the five exponents the panel offers, with everything else at teaching settings:
 
-$n = 1$: 2.0863306869306193 MPa. $n = 2$: 4.085105895179361. $n = 3$: 6, the capstone. $n = 4$: 7.834533176889628. $n = 5$: 9.592077872774526.
+$n = 1$: 2.0863306869306193 MPa. $n = 2$: 4.085105895179361. $n = 3$: 6, the teaching case. $n = 4$: 7.834533176889628. $n = 5$: 9.592077872774526.
 
 Set the panel to each in turn and watch the red curve peel further from the hydrostatic while the log and the trend behind it never change. Nothing about the well is different across those five runs. Only the reading of it is.
 
@@ -18,7 +18,7 @@ Set the panel to each in turn and watch the red curve peel further from the hydr
 
 First, the steps shrink. From 1 to 2 buys 2.00 MPa, from 2 to 3 buys 1.91, from 3 to 4 buys 1.83, from 4 to 5 buys 1.76. Overpressure is not linear in $n$; each increment multiplies the surviving fraction $r^n$ by another factor of $r$, and there is less left to hand over each time. The lever is powerful but it saturates.
 
-Second, $n = 1$ does not switch the amplification off. It leaves the raw ratio, and the raw ratio already carries a third of the capstone's overpressure, 2.09 of 6 MPa. There is no setting on this dial that reads a slow log as normally pressured. The only way to zero the method's output is a ratio of 1, which is the trend's business, not the exponent's. Keep this asymmetry in mind: the trend can silence the method entirely, the exponent can only rescale what the trend lets through.
+Second, $n = 1$ does not switch the amplification off. It leaves the raw ratio, and the raw ratio already carries a third of the teaching case's overpressure, 2.09 of 6 MPa. There is no setting on this dial that reads a slow log as normally pressured. The only way to zero the method's output is a ratio of 1, which is the trend's business, not the exponent's. Keep this asymmetry in mind: the trend can silence the method entirely, the exponent can only rescale what the trend lets through.
 
 ## Why 3
 
@@ -26,7 +26,7 @@ Eaton fitted the exponent to Gulf of Mexico wells where measured pressures exist
 
 On this well, 3 is not a default, it is the truth: the ramp was encoded into the transit times by inverting Eaton at $n = 3$, so running the method at 3 closes the loop exactly. The well cannot tell you 3 is right in general. It can show you, cleanly, what kind of choice the exponent is: with the trend fixed and honest, every one of the five curves you just drew is the same well read at a different volume, and only external information, a measured pressure, a drilling event, a regional calibration, can say which volume is correct.
 
-That external information exists at the next tier. The Expert capstone grades the pore pressure at total depth under $n = 1.2$, a low calibration in real use for velocity data, and then asks what the choice does to the driller's mud window. This tier's job is that you arrive there already knowing the shape of the answer: lower $n$, quieter reading, less pressure.
+That external information exists at the next tier. The Expert tier works the pore pressure at total depth under $n = 1.2$, a low calibration in real use for velocity data, and then asks what the choice does to the driller's mud window. This tier's job is that you arrive there already knowing the shape of the answer: lower $n$, quieter reading, less pressure.
 
 ## The exponent moves the detected onset, not the real one
 

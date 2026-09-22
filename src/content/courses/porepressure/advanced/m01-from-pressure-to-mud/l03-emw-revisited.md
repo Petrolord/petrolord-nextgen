@@ -36,10 +36,10 @@ Onshore the trap inverts: there is no water column, but there is elevation above
 
 ## Worked example
 
-The capstone's first field, computed with the traps deliberately dodged. Datum: sea level, stated. Column at TD: $4000 + 100 = 4100$ m. Conversion: $47408579.625 / (9.80665 \times 4100)$. Denominator: $40207.265$ exactly, since $9.80665 \times 4100 = 40207.265$. Division: $47408579.625 / 40207.265 = 1179.1048116553065$ kg/m3. Tolerance 0.5, so report 1179.1. The engine's emw function performs literally this arithmetic; there is nothing else inside it.
+The capstone's first quantity, computed on the teaching case with the traps deliberately dodged. Datum: sea level, stated. Column at TD: $4000 + 100 = 4100$ m. Conversion: $47408579.625 / (9.80665 \times 4100)$. Denominator: $40207.265$ exactly, since $9.80665 \times 4100 = 40207.265$. Division: $47408579.625 / 40207.265 = 1179.1048116553065$ kg/m3. Tolerance 0.5, so report 1179.1. The engine's emw function performs literally this arithmetic; there is nothing else inside it.
 
 ## Exercise
 
 Convert this tier's other TD pressure, the fracture pressure 76.55157117548856 MPa, stating datum and column, and check both traps.
 
-Self check: sea level, 4100 m, $76551571.17548856 / 40207.265 = 1903.9238599165737$ kg/m3, the capstone's second field. Trap check one: sensible only against other sea-level values, like the floor just computed. Trap check two: the value sits far below the overburden EMW of 2266.333384047207, as a fracture pressure must; dividing by 4000 m instead would have given 1951.5, still below the overburden bracket and therefore NOT caught by the bracket check alone, which is why the column is checked at the input, not inferred from the output.
+Self check: sea level, 4100 m, $76551571.17548856 / 40207.265 = 1903.9238599165737$ kg/m3, the capstone's second quantity on the teaching case. Trap check one: sensible only against other sea-level values, like the floor just computed. Trap check two: the value sits far below the overburden EMW of 2266.333384047207, as a fracture pressure must; dividing by 4000 m instead would have given 1951.5, still below the overburden bracket and therefore NOT caught by the bracket check alone, which is why the column is checked at the input, not inferred from the output.
