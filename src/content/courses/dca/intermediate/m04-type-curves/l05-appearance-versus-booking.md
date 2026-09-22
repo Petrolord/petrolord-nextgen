@@ -67,7 +67,7 @@ Put the two numbers on the screen together. With the default pool and Ekene-6 as
 
 ## Worked example: what the entry should say
 
-The Professional capstone asks for the type-curve booking, 91524.2759502962 stb, because reproducing a stated method exactly is part of the job. Reporting it is a separate job. A defensible entry gives both numbers, the method behind each and a recommendation:
+On the teaching pool the type-curve booking is 91524.2759502962 stb. The Professional capstone asks for a type-curve booking on a pool and target of its own, because reproducing a stated method exactly is part of the job. Reporting it is a separate job. A defensible entry gives both numbers, the method behind each and a recommendation:
 
 > Ekene-6, primary window, 28 monthly points to 2022-12-01. Direct fit: hyperbolic, $b$ 0.35, $D_i$ 0.001 per day, EUR 105266.626461929 stb at a 10 stb/d limit. Fixed-b type-curve match, $b$ 0.05 borrowed from a pooled Ekene-3 plus Ekene-6 curve: EUR 91524.2759502962 stb, 13.0548028121744 percent lower, R2 0.999047938405246 over 24.8214239567890 percent of booked life. Fixed-b sweep across $b$ 0.05 to 0.5 spans 91524 to 113990 stb at R2 above 0.999 throughout. Recommend the direct fit: the well has sufficient history to fit itself, and the pooled curve scores R2 0.615735522363384 against Ekene-6's own points.
 

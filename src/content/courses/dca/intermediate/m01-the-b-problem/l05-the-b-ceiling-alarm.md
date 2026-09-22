@@ -23,7 +23,7 @@ Set the panel to Full history and Auto-Select, and walk the four wells. This is 
 
 Two wells pinned flat against the ceiling, and the other two high in a range that no primary-depletion oil well has any business occupying. The planted exponents are 0, 0.5, 1 and 0.35.
 
-Ekene-1's R2 of **0.818388421218434** is the value the Professional capstone asks you to read back, so obtain it deliberately at least once. Select Ekene-1, set the window to Full history so all 72 monthly rows from 2020-01-01 to 2025-12-01 are in scope, leave the model on Auto-Select and leave the constraints at their defaults. The reported fit is the first row of the table above, and the R2 tile reads 0.818388421218434.
+Ekene-1's R2 of **0.818388421218434** is the teaching case's full-history reading, and the Professional capstone asks you to read back an R2 across the flood on a window of its own, so obtain this one deliberately at least once. Select Ekene-1, set the window to Full history so all 72 monthly rows from 2020-01-01 to 2025-12-01 are in scope, leave the model on Auto-Select and leave the constraints at their defaults. The reported fit is the first row of the table above, and the R2 tile reads 0.818388421218434.
 
 ## Why b runs to the ceiling
 

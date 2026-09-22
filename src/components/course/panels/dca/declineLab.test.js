@@ -1,6 +1,6 @@
 // Pins the DCA teaching lab to the RC1 truth digest (engine-derived from the
-// committed ekene-dynamic goldens). Every capstone value of all three tiers
-// is asserted here, so a drift in the vendored engine or fixtures fails the
+// committed ekene-dynamic goldens). Every teaching value of all three tiers (the capstone key until W5b re-cased
+// each tier onto a case of its own) is asserted here, so a drift in the vendored engine or fixtures fails the
 // build before it can strand a live capstone.
 
 import { describe, it, expect } from 'vitest';
@@ -21,7 +21,7 @@ describe('fixture identity', () => {
   });
 });
 
-describe('Associate capstone values (Fit and book Ekene-1)', () => {
+describe('Associate teaching case (the pre-W5b capstone key: fit and book Ekene-1)', () => {
   const { fit, well } = fitWell('Ekene-1', 'Auto-Select', 'primary');
   const book = bookFromFit(fit.parameters, ECON_LIMIT_BOPD, well.start_date);
 
@@ -39,7 +39,7 @@ describe('Associate capstone values (Fit and book Ekene-1)', () => {
   });
 });
 
-describe('Professional capstone values', () => {
+describe('Professional teaching case (the pre-W5b capstone key)', () => {
   it('Ekene-3 primary fit: b on the grid float, EUR booked', () => {
     const { fit } = fitWell('Ekene-3', 'Auto-Select', 'primary');
     expect(fit.parameters.modelType).toBe('Hyperbolic');
@@ -74,7 +74,7 @@ describe('Professional capstone values', () => {
   });
 });
 
-describe('Expert capstone values', () => {
+describe('Expert teaching case (the pre-W5b capstone key)', () => {
   it('Ekene-5 post-ramp window recovers the designed 0.00035/d exactly', () => {
     const { fit } = fitWell('Ekene-5', 'Auto-Select', 'postRamp');
     expect(fit.parameters.modelType).toBe('Exponential');

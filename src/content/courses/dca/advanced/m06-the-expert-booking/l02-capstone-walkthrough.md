@@ -1,19 +1,17 @@
 # The capstone walkthrough
 
-> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+The Associate capstone booked one clean well. The Professional capstone worked a field as a portfolio. The Expert capstone asks you to produce numbers that are correct and uncomfortable, and to report them as they stand. Six graded fields, one per Expert skill, on the wells, window, b, limit and triangle the brief states. This lesson works the same skills on the teaching case the panels open on; the capstone does not grade these teaching values.
 
-The Associate capstone booked one clean well. The Professional capstone worked a field as a portfolio. The Expert capstone asks you to produce numbers that are correct and uncomfortable, and to report them as they stand. Six graded fields, one per Expert skill.
-
-| Graded field | Unit | Tolerance | Owning lesson |
+| Skill, on the teaching case | Unit | Tolerance | Owning lesson |
 |---|---|---|---|
 | Ekene-5 post-ramp fitted Di, 2024-05-01 on | 1/d | 0.000005 | m05 l02 |
-| Ekene-6 oil decline on the same window | 1/d | 0.00002 | m05 l03 |
+| Ekene-6 oil decline on the same window | 1/d | 0.000002 | m05 l03 |
 | EUR at b 1.2, qi 120, Di 0.0012, limit 10 | stb | 2000 | m02 l01 |
 | Ratio of that EUR to the exponential EUR | - | 0.02 | m02 l02 |
 | Field triangle P90, the low case | stb | 2000 | m04 l03 |
 | Field triangle P10, the high case | stb | 2000 | m04 l04 |
 
-Read the first two tolerances before anything else. The Ekene-5 tolerance of 0.000005 per day is 1.43 percent of the value being graded, and a window start two months early lands 3.66 percent away, which misses by a factor of 2.5621018371390645. That tolerance is tight enough to fail a window whose fit reports R2 0.9887 and a quality tier of Excellent. It is not a generous band around a fussy number. It is the grader refusing to accept a contaminated window.
+Read the first two tolerances before anything else. On the teaching case a tolerance of 0.000005 per day is 1.43 percent of Ekene-5's decline, and a window start two months early lands 3.66 percent away, which misses by a factor of 2.5621018371390645. That tolerance is tight enough to fail a window whose fit reports R2 0.9887 and a quality tier of Excellent. It is not a generous band around a fussy number. It is the grader refusing to accept a contaminated window.
 
 This lesson walks two fields the whole way through the panels and points at the owning lesson for the rest. Copying is not the risk. Producing a number by a route you cannot defend is.
 
@@ -23,9 +21,9 @@ Open the fit explorer. Select Ekene-5, model Exponential, and set the window to 
 
 {{panel:dca-fit-explorer}}
 
-The tiles come back with $q_i$ 47.10215945583964 stb/d, $D_i$ 0.00035000000000000043 per day, R2 1.00000000000000 and RMSE 5.732983582318044e-14. Report the $D_i$ tile as it stands, at whatever precision you carried; 0.00035 passes comfortably.
+The tiles come back with $q_i$ 47.10215945583964 stb/d, $D_i$ 0.00035000000000000043 per day, R2 1.00000000000000 and RMSE 5.732983582318044e-14. That is the teaching reading; on the capstone's well and window you report the $D_i$ tile as it stands, at whatever precision you carried.
 
-Before you write it down, earn it. Switch the window to custom and set the start to 2024-04-01, one month earlier, which is still a clean start because it is the ramp-end row itself. $D_i$ does not move. Now set it to 2024-03-01. $D_i$ falls to 0.00033718949081430467 and R2 to 0.988676698925396, outside the graded tolerance while still reading Excellent on the quality tile.
+Before you write it down, earn it. Switch the window to custom and set the start to 2024-04-01, one month earlier, which is still a clean start because it is the ramp-end row itself. $D_i$ does not move. Now set it to 2024-03-01. $D_i$ falls to 0.00033718949081430467 and R2 to 0.988676698925396, outside the tolerance while still reading Excellent on the quality tile.
 
 That pair of clicks is the defence of the answer: moving the start into the clean regime does not move the constant, and moving it into the ramp does. Note which of the three windows you would have picked on R2 alone. All three clear 0.95.
 
@@ -35,7 +33,7 @@ One more check that costs nothing. Ekene-5 has `wcMax` 0 and no breakthrough dat
 
 Leave the window exactly where it was and change the well selector to Ekene-6. Keep the model on Exponential; auto-select lands on Exponential here anyway.
 
-The tiles now read $q_i$ 58.134557068111256 stb/d, $D_i$ 0.0013275893489185155 per day, R2 0.9477350438026422, quality Good. That $D_i$ is the graded value, and the tolerance of 0.000002 is 0.15 percent of it, tight enough that a decline fitted on a neighbouring well or a neighbouring window will not pass in its place.
+The tiles now read $q_i$ 58.134557068111256 stb/d, $D_i$ 0.0013275893489185155 per day, R2 0.9477350438026422, quality Good. That $D_i$ is the teaching value, and a tolerance of 0.000002 is 0.15 percent of it, tight enough that a decline fitted on a neighbouring well or a neighbouring window will not pass in its place.
 
 This is the field people fail while doing good engineering. Having just learned that the flood's decline constant is 0.00035 per day and that all four wells recover it, the instinct is to report the reservoir's decline. The field does not ask for that. It asks what a fit of this well's oil stream on this window returns, which is 3.793112425481473 times larger, because Ekene-6's water cut climbs toward 45 percent across those twenty rows and every one of them carries water.
 
@@ -49,9 +47,9 @@ Open the uncertainty explorer for all four.
 
 {{panel:dca-uncertainty-explorer}}
 
-**The b 1.2 EUR, and its ratio to the exponential booking.** Module 2, lessons 1 and 2. The panel holds $q_i$ at 120 stb/d, $D_i$ at 0.0012 per day and the limit at 10 stb/d, and gives you a b slider from 0 to 1.2 in steps of 0.05. Move it to 1.20 and read the EUR tile and the ratio tile; the ratio is that EUR divided by the b = 0 booking of the same well, which is the Associate capstone's answer. Do it in two stages: read the tile at b = 0, read it again at b = 1.20, and divide them yourself before looking at the ratio tile. Every barrel of the difference is in the tail, beyond any data.
+**The EUR at a stated b, and its ratio to the exponential booking.** Module 2, lessons 1 and 2. The panel holds $q_i$ at 120 stb/d and $D_i$ at 0.0012 per day, opens the limit at 10 stb/d, and gives you a b slider from 0 to 1.2 in steps of 0.05. On the teaching case, move it to 1.20 and read the EUR tile and the ratio tile; for the capstone, set the b and the limit the brief states; the ratio is that EUR divided by the b = 0 booking of the same well, which is the Associate capstone's answer. Do it in two stages: read the tile at b = 0, read it again at b = 1.20, and divide them yourself before looking at the ratio tile. Every barrel of the difference is in the tail, beyond any data.
 
-**The triangle's P90 and P10.** Module 4, lessons 3 and 4. Scroll to the triangular block. Its three inputs default to the field's primary EUR triangle: minimum 380000 stb, mode 461709.132532792 stb, maximum 580000 stb. The mode is the sum of the four closed-form EURs, which was a graded field one tier down, so the distribution is built on a number you already booked. Read the P90 and P10 tiles.
+**The triangle's P90 and P10.** Module 4, lessons 3 and 4. Scroll to the triangular block. Its three inputs default to the teaching triangle: minimum 380000 stb, mode 461709.132532792 stb, maximum 580000 stb. The mode is the sum of the four closed-form EURs at 10 stb/d, the field total one tier down. The capstone states its own minimum and maximum and a mode at its own limit, which you total yourself and type in. Read the P90 and P10 tiles.
 
 Two traps here and the panel exposes both. The petroleum convention is that P90 is the low case and P10 the high case, which is the reverse of the statistical convention some tools use, so check that your P90 tile is smaller than your P10 tile before submitting. And the mode is not the P50: the panel's F(mode) tile reads the cumulative probability at the mode, and for this right-skewed triangle it is well below 0.5, which means the number you would naturally call "the estimate" sits low in its own distribution.
 

@@ -17,7 +17,7 @@ Set the window to Primary and run all four producers on Auto-Select.
 
 Every planted parameter recovered, every family correctly identified, RMSE at the level of double precision noise. The same engine that produced the ceiling fits of the last lesson produces this. Nothing changed except which rows it was given.
 
-Ekene-6's $D_i$ of 0.00100000000000000 is the value the Professional capstone asks for, graded to a tolerance of 0.00002. It is not a number you estimate or round toward; it is what the engine returns when the window is right, and it is the cleanest demonstration in the course that window discipline is not a matter of taste.
+Ekene-6's $D_i$ of 0.00100000000000000 is the teaching case's windowed value; the Professional capstone asks for a windowed $D_i$ on a window of its own. It is not a number you estimate or round toward; it is what the engine returns when the window is right, and it is the cleanest demonstration in the course that window discipline is not a matter of taste.
 
 Notice Ekene-6's $q_i$: 89.9999999999999, not 90. The hyperbolic fit round-trips $q_i$ through a power transform and back, and the last digit does not always survive. The right way to judge whether that is a real misfit is the RMSE tile, which reads 4.31997628804008e-14 stb/d. If the misfit were real it would be visible in barrels, not in the fifteenth digit. Judge exactness by RMSE, never by how tidy the digits look.
 

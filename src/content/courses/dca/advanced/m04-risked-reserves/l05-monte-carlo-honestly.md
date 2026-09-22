@@ -43,7 +43,7 @@ Apply it to the Ekene triangle at the P90, where $p = 0.10$. The triangular dens
 | 10000 | 606.375375817294 |
 | 100000 | 191.752730462323 |
 
-The engine's default is 1000 iterations. At that setting one standard error on the sampled P90 is 1917.52730462323 stb, which is 0.958763652311616 of the 2000 stb tolerance the Expert capstone allows on that field. Treating the sampling error as approximately normal, that puts the tolerance at 1.04300991969080 standard errors, so 0.296943698531788 of runs would land outside it on sampling noise alone, with the model, the inputs and the code all perfectly correct. Getting the standard error down to 500 stb needs 14707.6438559026 iterations, and down to 100 stb needs 367691.096397564.
+The engine's default is 1000 iterations. At that setting one standard error on the sampled P90 is 1917.52730462323 stb, which is 0.958763652311616 of the 2000 stb tolerance the Expert capstone allows on a triangle quantile. Treating the sampling error as approximately normal, that puts the tolerance at 1.04300991969080 standard errors, so 0.296943698531788 of runs would land outside it on sampling noise alone, with the model, the inputs and the code all perfectly correct. Getting the standard error down to 500 stb needs 14707.6438559026 iterations, and down to 100 stb needs 367691.096397564.
 
 The inverse CDF returns 420425.025054486 stb. Every time. On every machine. That is the entire argument for grading closed forms.
 

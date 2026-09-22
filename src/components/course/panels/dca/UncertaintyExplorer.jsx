@@ -23,9 +23,12 @@ const UncertaintyExplorer = () => {
   const [triMode, setTriMode] = useState(String(FIELD_TRIANGLE.mode));
   const [triMax, setTriMax] = useState(String(FIELD_TRIANGLE.max));
 
+  // The b-lever opens on the teaching limit; a capstone brief may state another.
+  const [limit, setLimit] = useState(String(B_LEVERAGE_BASE.qLimit));
+  const qLimit = Number(limit) > 0 ? Number(limit) : B_LEVERAGE_BASE.qLimit;
   const b = B_STEPS[bIdx];
-  const row = useMemo(() => bLeverageRow(b), [b]);
-  const curve = useMemo(() => B_STEPS.map((bb) => bLeverageRow(bb)), []);
+  const row = useMemo(() => bLeverageRow(b, { qLimit }), [b, qLimit]);
+  const curve = useMemo(() => B_STEPS.map((bb) => bLeverageRow(bb, { qLimit })), [qLimit]);
 
   const tri = { min: Number(triMin), mode: Number(triMode), max: Number(triMax) };
   const triOk = Number.isFinite(tri.min) && Number.isFinite(tri.mode) && Number.isFinite(tri.max)
@@ -39,7 +42,7 @@ const UncertaintyExplorer = () => {
   return (
     <PanelShell
       title="Uncertainty explorer"
-      subtitle={`The b-lever at fixed qi ${B_LEVERAGE_BASE.qi} stb/d, Di ${B_LEVERAGE_BASE.Di}/d, limit ${B_LEVERAGE_BASE.qLimit} stb/d, and the closed-form field triangle.`}
+      subtitle={`The b-lever at fixed qi ${B_LEVERAGE_BASE.qi} stb/d and Di ${B_LEVERAGE_BASE.Di}/d at the limit you set (the teaching case uses ${B_LEVERAGE_BASE.qLimit} stb/d), and the closed-form field triangle.`}
     >
       <svg viewBox={`0 0 ${CW} ${CH}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
         <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={CH - PAD.bottom} stroke="#334155" />
@@ -61,6 +64,9 @@ const UncertaintyExplorer = () => {
         <input type="range" min="0" max={B_STEPS.length - 1} step="1" value={bIdx}
           onChange={(e) => setBIdx(Number(e.target.value))} className="w-full" />
         <span className="text-sm text-white w-14 text-right">{b.toFixed(2)}</span>
+        <div className="w-40 shrink-0">
+          <NumField label="Limit (stb/d)" value={limit} onChange={setLimit} />
+        </div>
       </div>
       <TileGrid>
         <Tile label="EUR at this b" value={fmt(row.eur, 1)} unit="stb" />

@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  WELLS, FLOOD_START, ECON_LIMIT_BOPD, fitWell, bookFromFit, arpsRate, daysBetween,
+  WELLS, FLOOD_START, ECON_LIMIT_BOPD, fitWell, bookFromFit, arpsRate, arpsCum, daysBetween,
 } from './declineLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -35,6 +35,10 @@ const FitExplorer = () => {
   const [customStart, setCustomStart] = useState('2020-01-01');
   const [customEnd, setCustomEnd] = useState('2022-12-15');
   const [semilog, setSemilog] = useState(true);
+  // The booking opens on the teaching case (a 10 stb/d limit, Np to the
+  // flood start); a capstone brief states its own and the learner types it.
+  const [limit, setLimit] = useState(String(ECON_LIMIT_BOPD));
+  const [npDate, setNpDate] = useState(FLOOD_START);
 
   const out = useMemo(() => {
     try {
@@ -42,15 +46,21 @@ const FitExplorer = () => {
       const { well, fit, window } = fitWell(wellName, model, windowKey, custom);
       const params = fit.parameters;
       const usable = params.modelType !== 'None' && params.qi > 0;
-      const book = usable ? bookFromFit(params, ECON_LIMIT_BOPD, fit.t0) : null;
-      return { well, fit, window, book, usable };
+      const qLimit = Number(limit);
+      if (!(qLimit > 0)) return { error: 'the economic limit must be a positive rate' };
+      const book = usable ? bookFromFit(params, qLimit, fit.t0) : null;
+      const npOk = /^\d{4}-\d{2}-\d{2}$/.test(npDate) && Number.isFinite(Date.parse(npDate));
+      const npToDate = usable && npOk
+        ? arpsCum(params.modelType.toLowerCase(), params.qi, params.Di, params.b, daysBetween(fit.t0.slice(0, 10), npDate))
+        : null;
+      return { well, fit, window, book, usable, qLimit, npToDate };
     } catch (e) {
       return { error: e.message };
     }
-  }, [wellName, model, windowKey, customStart, customEnd]);
+  }, [wellName, model, windowKey, customStart, customEnd, limit, npDate]);
 
   if (out.error) return <PanelShell title="Fit explorer"><Note>Engine error: {out.error}</Note></PanelShell>;
-  const { well, fit, window: win, book, usable } = out;
+  const { well, fit, window: win, book, usable, qLimit, npToDate } = out;
   const params = fit.parameters;
 
   const t0Well = well.start_date;
@@ -83,7 +93,6 @@ const FitExplorer = () => {
     : [];
 
   const floodT = daysBetween(t0Well, FLOOD_START);
-  const showNp = usable && fit.t0.slice(0, 10) === t0Well;
 
   return (
     <PanelShell
@@ -97,6 +106,14 @@ const FitExplorer = () => {
         <SelectField label="Fit window" value={windowKey} onChange={setWindowKey} options={WINDOW_OPTIONS} />
         <SelectField label="Rate axis" value={semilog ? 'log' : 'lin'} onChange={(v) => setSemilog(v === 'log')}
           options={[['log', 'Semilog'], ['lin', 'Linear']]} />
+      </div>
+      <div className="grid gap-3 grid-cols-2 sm:grid-cols-4">
+        <NumField label="Economic limit (stb/d)" value={limit} onChange={setLimit} />
+        <NumFieldLike label="Np up to (YYYY-MM-DD)" value={npDate} onChange={setNpDate} />
+        <div className="text-xs text-gray-500 sm:col-span-2">
+          The panel opens on the teaching case: {ECON_LIMIT_BOPD} stb/d and Np to the flood start. A
+          capstone brief states its own well, window, limit and date; set them here.
+        </div>
       </div>
       {windowKey === 'custom' && (
         <div className="grid gap-3 grid-cols-2 sm:grid-cols-4">
@@ -146,9 +163,9 @@ const FitExplorer = () => {
           <Tile label="b (raw)" value={String(params.b)} />
           <Tile label="R2" value={fmt(fit.R2, 6)} />
           <Tile label="RMSE" value={fmt(fit.RMSE, 4)} unit="stb/d" />
-          <Tile label={`EUR @ ${ECON_LIMIT_BOPD} stb/d`} value={fmt(book.eur, 1)} unit="stb" />
+          <Tile label={`EUR @ ${qLimit} stb/d`} value={fmt(book.eur, 1)} unit="stb" />
           <Tile label="Time to limit" value={fmt(book.timeToLimitDays, 1)} unit="days" />
-          {showNp && <Tile label={`Np at ${FLOOD_START}`} value={fmt(book.npAtDate, 1)} unit="stb" />}
+          {npToDate !== null && <Tile label={`Np from the fit start to ${npDate}`} value={fmt(npToDate, 1)} unit="stb" />}
           <Tile label="Tangent effective decline" value={fmt(book.effectiveDeclinePct, 4)} unit="%/yr" />
         </TileGrid>
       ) : (
