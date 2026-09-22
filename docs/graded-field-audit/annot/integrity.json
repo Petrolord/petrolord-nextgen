@@ -171,266 +171,344 @@
   {
    "tier": "intermediate",
    "key": "mawop_a_tubing_row_pa",
-   "source": "unobtainable",
-   "source_ref": "/root/dr-wip-integrity/dr11_fields.mjs:209-257",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/integrity.json",
+   "printed": "full",
    "display_scale": 1e-06,
    "display_ref": "src/components/course/panels/integrity/AnnulusExplorer.jsx:19 (mpa = fmt(pa/1e6, 4)); src/components/course/panels/integrity/AnnulusExplorer.jsx:76, :199",
    "prompt_precision": "in pascals",
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Publish the Kestrel A-7 annulus inputs in the prompt (per row: limit in Pa or psi, role or factor, TVD, backup density; A fluid 1250, B fluid 1150, displacement brine 1650 and gas 150 kg/m3; from /root/dr-wip-integrity/dr11_fields.mjs:127-142, 209-257) with each TVD stated, so every row is the taught closed form factor x limit - (rho_ann - rho_backup) x 9.80665 x TVD (src/content/courses/integrity/intermediate/m02-maasp/l03-the-hydrostatic-term.md:9) worked at full precision."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Supply the inputs in the prompt (hand-calc, full precision, tol 10 Pa then stands). If a panel preset is preferred instead, AnnulusExplorer prints MPa to 4 decimals (100 Pa), so it would also need Pa printed as integers or tol raised to 50.",
-   "evidence": "Expected 16226227.04 Pa comes from 4040 psi x 0.75 at the packer TVD with 1250 over 1000 kg/m3 (/root/dr-wip-integrity/dr11_fields.mjs:220-221); none of limit, TVD or densities is in the prompt ('Each bounding element carries its own pressure limit...' with no values). AnnulusExplorer's only inputs are annulus and backup density on the golden's fixed elements (AnnulusExplorer.jsx:65, :166, :408).",
+   "evidence": "W2: Prompt only, no field moves. The prompt said each bounding element carries a limit, a true vertical depth, a far side density and a role, but gave none of them: the KESTREL A-7 rows, the annulus fluids and the D1 survey existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs (B5 finding 1). The prompt now publishes the survey, both annuli and the displacement case row by row, with g and the psi conversion, so every field is the taught row arithmetic of m02 to m05 worked at full precision. Keys, expected values and tolerances are unchanged, so nobody is re-scored. The published inputs reproduce mawop_a_tubing_row_pa = 16226227.041788332 through the vendored engines against the key 16226227.041788332 (tol 10); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "tol 10 Pa is below half a unit of the panel's 4-decimal MPa print (50 Pa), a second defect if the fix is a panel preset.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_integrity.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
    "key": "mawop_a_shoe_row_pa",
-   "source": "unobtainable",
-   "source_ref": "/root/dr-wip-integrity/dr11_fields.mjs:209-257",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/integrity.json",
+   "printed": "full",
    "display_scale": 1e-06,
    "display_ref": "src/components/course/panels/integrity/AnnulusExplorer.jsx:19 (mpa = fmt(pa/1e6, 4)); src/components/course/panels/integrity/AnnulusExplorer.jsx:76, :199",
    "prompt_precision": "in pascals",
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Publish the Kestrel A-7 annulus inputs in the prompt (per row: limit in Pa or psi, role or factor, TVD, backup density; A fluid 1250, B fluid 1150, displacement brine 1650 and gas 150 kg/m3; from /root/dr-wip-integrity/dr11_fields.mjs:127-142, 209-257) with each TVD stated, so every row is the taught closed form factor x limit - (rho_ann - rho_backup) x 9.80665 x TVD (src/content/courses/integrity/intermediate/m02-maasp/l03-the-hydrostatic-term.md:9) worked at full precision."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Supply the inputs in the prompt (hand-calc, full precision, tol 10 Pa then stands). If a panel preset is preferred instead, AnnulusExplorer prints MPa to 4 decimals (100 Pa), so it would also need Pa printed as integers or tol raised to 50.",
-   "evidence": "Shoe row = 1100 kg/m3 LOT x g x TVD(2265 m MD) less the head over 1015 kg/m3 backup (/root/dr-wip-integrity/dr11_fields.mjs:222-224). The LOT density, the shoe depth and the survey are not published to the learner.",
+   "evidence": "W2: Prompt only, no field moves. The prompt said each bounding element carries a limit, a true vertical depth, a far side density and a role, but gave none of them: the KESTREL A-7 rows, the annulus fluids and the D1 survey existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs (B5 finding 1). The prompt now publishes the survey, both annuli and the displacement case row by row, with g and the psi conversion, so every field is the taught row arithmetic of m02 to m05 worked at full precision. Keys, expected values and tolerances are unchanged, so nobody is re-scored. The published inputs reproduce mawop_a_shoe_row_pa = 16497910.032817762 through the vendored engines against the key 16497910.032817762 (tol 10); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_integrity.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
    "key": "mawop_a_pa",
-   "source": "unobtainable",
-   "source_ref": "/root/dr-wip-integrity/dr11_fields.mjs:209-257",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/integrity.json",
+   "printed": "full",
    "display_scale": 1e-06,
    "display_ref": "src/components/course/panels/integrity/AnnulusExplorer.jsx:19 (mpa = fmt(pa/1e6, 4)); src/components/course/panels/integrity/AnnulusExplorer.jsx:76, :199",
    "prompt_precision": "in pascals",
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Publish the Kestrel A-7 annulus inputs in the prompt (per row: limit in Pa or psi, role or factor, TVD, backup density; A fluid 1250, B fluid 1150, displacement brine 1650 and gas 150 kg/m3; from /root/dr-wip-integrity/dr11_fields.mjs:127-142, 209-257) with each TVD stated, so every row is the taught closed form factor x limit - (rho_ann - rho_backup) x 9.80665 x TVD (src/content/courses/integrity/intermediate/m02-maasp/l03-the-hydrostatic-term.md:9) worked at full precision."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Supply the inputs in the prompt (hand-calc, full precision, tol 10 Pa then stands). If a panel preset is preferred instead, AnnulusExplorer prints MPa to 4 decimals (100 Pa), so it would also need Pa printed as integers or tol raised to 50.",
-   "evidence": "Minimum over four A-annulus rows incl. the 5220 psi outer-casing burst at factor 0.5 and a 5000 psi wellhead rating (/root/dr-wip-integrity/dr11_fields.mjs:215-228); no row input is published. The panel's MAWOP tile (AnnulusExplorer.jsx:199) shows only the golden's 11.9057 MPa.",
+   "evidence": "W2: Prompt only, no field moves. The prompt said each bounding element carries a limit, a true vertical depth, a far side density and a role, but gave none of them: the KESTREL A-7 rows, the annulus fluids and the D1 survey existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs (B5 finding 1). The prompt now publishes the survey, both annuli and the displacement case row by row, with g and the psi conversion, so every field is the taught row arithmetic of m02 to m05 worked at full precision. Keys, expected values and tolerances are unchanged, so nobody is re-scored. The published inputs reproduce mawop_a_pa = 13513225.370183308 through the vendored engines against the key 13513225.370183308 (tol 10); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_integrity.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
    "key": "mawop_a_governing_tvd_m",
-   "source": "unobtainable",
-   "source_ref": "/root/dr-wip-integrity/dr11_fields.mjs:209-257",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/integrity.json",
+   "printed": "full",
    "display_scale": 1e-06,
    "display_ref": "src/components/course/panels/integrity/AnnulusExplorer.jsx:19 (mpa = fmt(pa/1e6, 4)); src/components/course/panels/integrity/AnnulusExplorer.jsx:76, :199",
    "prompt_precision": "in metres",
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Replace with mawop_a_margin_to_runner_up_pa, 'A annulus, margin of the governing row over the next smallest' (Pa), which the generator already computes (/root/dr-wip-integrity/dr11_fields.mjs:350) and which requires every row to be worked, once the row inputs are published as for the other fields."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Publish the row inputs and swap this field for the runner-up margin; keeping a TVD field when TVDs are listed makes it a one-in-three pick.",
-   "evidence": "Expected 1944.877 m is the minimum-curvature TVD of 2265 m MD on the D1 survey (/root/dr-wip-integrity/dr11_fields.mjs:34-50, 209). Neither the shoe MD nor the survey stations are in the prompt, and a learner cannot interpolate minimum curvature by hand from nothing.",
+   "evidence": "W2: Prompt only, no field moves. The prompt said each bounding element carries a limit, a true vertical depth, a far side density and a role, but gave none of them: the KESTREL A-7 rows, the annulus fluids and the D1 survey existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs (B5 finding 1). The prompt now publishes the survey, both annuli and the displacement case row by row, with g and the psi conversion, so every field is the taught row arithmetic of m02 to m05 worked at full precision. Keys, expected values and tolerances are unchanged, so nobody is re-scored. The published inputs reproduce mawop_a_governing_tvd_m = 1944.8770336087282 through the vendored engines against the key 1944.8770336087282 (tol 0.0005); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "If the fix publishes each row's TVD, this field becomes a pick among three listed TVDs (prod shoe, packer, wellhead), guess_p about 0.33. Panel prints TVD with fmt(tvdM, 3) at AnnulusExplorer.jsx:72, half unit 5e-4 = tol.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_integrity.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
    "key": "maasp_b_pa",
-   "source": "unobtainable",
-   "source_ref": "/root/dr-wip-integrity/dr11_fields.mjs:209-257",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/integrity.json",
+   "printed": "full",
    "display_scale": 1e-06,
    "display_ref": "src/components/course/panels/integrity/AnnulusExplorer.jsx:19 (mpa = fmt(pa/1e6, 4)); src/components/course/panels/integrity/AnnulusExplorer.jsx:76, :199",
    "prompt_precision": "in pascals",
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Publish the Kestrel A-7 annulus inputs in the prompt (per row: limit in Pa or psi, role or factor, TVD, backup density; A fluid 1250, B fluid 1150, displacement brine 1650 and gas 150 kg/m3; from /root/dr-wip-integrity/dr11_fields.mjs:127-142, 209-257) with each TVD stated, so every row is the taught closed form factor x limit - (rho_ann - rho_backup) x 9.80665 x TVD (src/content/courses/integrity/intermediate/m02-maasp/l03-the-hydrostatic-term.md:9) worked at full precision."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Supply the inputs in the prompt (hand-calc, full precision, tol 10 Pa then stands). If a panel preset is preferred instead, AnnulusExplorer prints MPa to 4 decimals (100 Pa), so it would also need Pa printed as integers or tol raised to 50.",
-   "evidence": "B annulus MAASP over three rows with explicit design factor 0.72 and wear factor 0.62, 3450 and 5220 psi, 1550 kg/m3 LOT at 1450 m MD (/root/dr-wip-integrity/dr11_fields.mjs:234-245). None of it is in the prompt; the lessons teach only the RP 90 role table and the golden's fixtures.",
+   "evidence": "W2: Prompt only, no field moves. The prompt said each bounding element carries a limit, a true vertical depth, a far side density and a role, but gave none of them: the KESTREL A-7 rows, the annulus fluids and the D1 survey existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs (B5 finding 1). The prompt now publishes the survey, both annuli and the displacement case row by row, with g and the psi conversion, so every field is the taught row arithmetic of m02 to m05 worked at full precision. Keys, expected values and tolerances are unchanged, so nobody is re-scored. The published inputs reproduce maasp_b_pa = 15378302.866843894 through the vendored engines against the key 15378302.866843894 (tol 10); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_integrity.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
    "key": "maasp_gasfilled_tubing_row_pa",
-   "source": "unobtainable",
-   "source_ref": "/root/dr-wip-integrity/dr11_fields.mjs:209-257",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/integrity.json",
+   "printed": "full",
    "display_scale": 1e-06,
    "display_ref": "src/components/course/panels/integrity/AnnulusExplorer.jsx:19 (mpa = fmt(pa/1e6, 4)); src/components/course/panels/integrity/AnnulusExplorer.jsx:76, :199",
    "prompt_precision": "in pascals",
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Publish the Kestrel A-7 annulus inputs in the prompt (per row: limit in Pa or psi, role or factor, TVD, backup density; A fluid 1250, B fluid 1150, displacement brine 1650 and gas 150 kg/m3; from /root/dr-wip-integrity/dr11_fields.mjs:127-142, 209-257) with each TVD stated, so every row is the taught closed form factor x limit - (rho_ann - rho_backup) x 9.80665 x TVD (src/content/courses/integrity/intermediate/m02-maasp/l03-the-hydrostatic-term.md:9) worked at full precision."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Supply the inputs in the prompt (hand-calc, full precision, tol 10 Pa then stands). If a panel preset is preferred instead, AnnulusExplorer prints MPa to 4 decimals (100 Pa), so it would also need Pa printed as integers or tol raised to 50.",
-   "evidence": "-7098210.74 Pa = 0.75 x 4040 psi - (1650 - 150) x g x TVD(packer) (/root/dr-wip-integrity/dr11_fields.mjs:250-257). The brine and gas densities and the packer TVD are not in the prompt, which says only 'heavy brine' and 'GAS'.",
+   "evidence": "W2: Prompt only, no field moves. The prompt said each bounding element carries a limit, a true vertical depth, a far side density and a role, but gave none of them: the KESTREL A-7 rows, the annulus fluids and the D1 survey existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs (B5 finding 1). The prompt now publishes the survey, both annuli and the displacement case row by row, with g and the psi conversion, so every field is the taught row arithmetic of m02 to m05 worked at full precision. Keys, expected values and tolerances are unchanged, so nobody is re-scored. The published inputs reproduce maasp_gasfilled_tubing_row_pa = -7098210.7407652065 through the vendored engines against the key -7098210.7407652065 (tol 10); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "Sign is part of the answer and taught (m05 the clamp); fine once the inputs are published.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_integrity.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
    "key": "plug_slurry_m3",
-   "source": "unobtainable",
-   "source_ref": "/root/dr-wip-integrity/dr11_fields.mjs:259-302",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/integrity.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "src/components/course/panels/integrity/PaExplorer.jsx:72 (fmt(p.slurryM3, 6))",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Publish the P&A inputs in the prompt (P1: 7 in liner ID 0.1594 m, stinger 3.5 in OD / 0.0760 m ID, base 2740 and top 2568.5 m MD, excess 0.35, spacer ahead 1.6 m3, tagged foundation; reservoir top 2611 m; annular cement 2455 to 2528.5 m unlogged; P3 and S1 geometries; from /root/dr-wip-integrity/dr11_fields.mjs:145-177) so each value is the taught closed form (capacities, spacer ratio, settle, margins) worked at full precision."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Supply the inputs in the prompt so the field is a hand-calc; tol then stands.",
-   "evidence": "4.620239 m3 = pi/4 x 0.1594^2 x 171.5 x 1.35; the liner ID, the interval and the excess are not in the prompt (only '35 percent excess'). PaExplorer lets the learner change hole ID and stinger OD only (PaExplorer.jsx:62-63); interval, excess, stinger ID and spacer are fixed to the golden.",
+   "evidence": "W2: Prompt only, no field moves. The P&A inputs (the five plug intervals, the three designed geometries, the zones and the annular cement interval) existed only in /root/dr-wip-integrity/dr11_fields.mjs; the prompt now publishes them, so each field is the taught closed form (capacities, spacer ratio, settle, margins, takeoff). The prompt also said field 6 sums every plug including the two without a designed placement, which was false: the engine sums designed placements only (plugAbandonment.js takeoff) and lists the other two by name. That sentence and the single \"35 percent excess\" (it is P1's; P3 and S1 carry their own) are corrected. Keys, expected values and tolerances are unchanged. The published inputs reproduce plug_slurry_m3 = 4.620238645056858 through the vendored engines against the key 4.620238645056858 (tol 5e-07); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "A panel preset would print 6 decimals, half unit 5e-7 = tol: borderline but passing.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_integrity.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
+     "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
    "key": "plug_spacer_behind_m3",
-   "source": "unobtainable",
-   "source_ref": "/root/dr-wip-integrity/dr11_fields.mjs:259-302",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/integrity.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "src/components/course/panels/integrity/PaExplorer.jsx:75 (fmt(p.spacerBehindM3, 6))",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Publish the P&A inputs in the prompt (P1: 7 in liner ID 0.1594 m, stinger 3.5 in OD / 0.0760 m ID, base 2740 and top 2568.5 m MD, excess 0.35, spacer ahead 1.6 m3, tagged foundation; reservoir top 2611 m; annular cement 2455 to 2528.5 m unlogged; P3 and S1 geometries; from /root/dr-wip-integrity/dr11_fields.mjs:145-177) so each value is the taught closed form (capacities, spacer ratio, settle, margins) worked at full precision."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Supply the inputs in the prompt so the field is a hand-calc; tol then stands.",
-   "evidence": "0.527936 m3 = 1.6 x c_in / c_ann for a 0.0760 m stinger bore in a 3.5 in stinger inside 0.1594 m; spacer ahead and all diameters are unpublished.",
+   "evidence": "W2: Prompt only, no field moves. The P&A inputs (the five plug intervals, the three designed geometries, the zones and the annular cement interval) existed only in /root/dr-wip-integrity/dr11_fields.mjs; the prompt now publishes them, so each field is the taught closed form (capacities, spacer ratio, settle, margins, takeoff). The prompt also said field 6 sums every plug including the two without a designed placement, which was false: the engine sums designed placements only (plugAbandonment.js takeoff) and lists the other two by name. That sentence and the single \"35 percent excess\" (it is P1's; P3 and S1 carry their own) are corrected. Keys, expected values and tolerances are unchanged. The published inputs reproduce plug_spacer_behind_m3 = 0.5279360645295814 through the vendored engines against the key 0.5279360645295814 (tol 5e-08); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "tol 5e-8 is a tenth of the panel's 6-decimal print (half unit 5e-7), so a panel preset would need 7+ decimals or tol 5e-7.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_integrity.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
+     "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
    "key": "plug_top_settle_m",
-   "source": "unobtainable",
-   "source_ref": "/root/dr-wip-integrity/dr11_fields.mjs:259-302",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/integrity.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "src/components/course/panels/integrity/PaExplorer.jsx:179 (fmt(settleM, 4))",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Publish the P&A inputs in the prompt (P1: 7 in liner ID 0.1594 m, stinger 3.5 in OD / 0.0760 m ID, base 2740 and top 2568.5 m MD, excess 0.35, spacer ahead 1.6 m3, tagged foundation; reservoir top 2611 m; annular cement 2455 to 2528.5 m unlogged; P3 and S1 geometries; from /root/dr-wip-integrity/dr11_fields.mjs:145-177) so each value is the taught closed form (capacities, spacer ratio, settle, margins) worked at full precision."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Supply the inputs in the prompt so the field is a hand-calc; tol then stands.",
-   "evidence": "21.154552 m = settled top minus as-pumped top for the unpublished P1 geometry; lesson l03-pulling-the-stinger gives the one-line form but the inputs are absent.",
+   "evidence": "W2: Prompt only, no field moves. The P&A inputs (the five plug intervals, the three designed geometries, the zones and the annular cement interval) existed only in /root/dr-wip-integrity/dr11_fields.mjs; the prompt now publishes them, so each field is the taught closed form (capacities, spacer ratio, settle, margins, takeoff). The prompt also said field 6 sums every plug including the two without a designed placement, which was false: the engine sums designed placements only (plugAbandonment.js takeoff) and lists the other two by name. That sentence and the single \"35 percent excess\" (it is P1's; P3 and S1 carry their own) are corrected. Keys, expected values and tolerances are unchanged. The published inputs reproduce plug_top_settle_m = 21.154551869215993 through the vendored engines against the key 21.154551869215993 (tol 5e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "tol 5e-6 is below half a unit of the panel's 4-decimal settle tiles (5e-5).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_integrity.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
+     "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
    "key": "above_source_margin_m",
-   "source": "unobtainable",
-   "source_ref": "/root/dr-wip-integrity/dr11_fields.mjs:259-302",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/integrity.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "src/components/course/panels/integrity/PaExplorer.jsx:423",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Publish the P&A inputs in the prompt (P1: 7 in liner ID 0.1594 m, stinger 3.5 in OD / 0.0760 m ID, base 2740 and top 2568.5 m MD, excess 0.35, spacer ahead 1.6 m3, tagged foundation; reservoir top 2611 m; annular cement 2455 to 2528.5 m unlogged; P3 and S1 geometries; from /root/dr-wip-integrity/dr11_fields.mjs:145-177) so each value is the taught closed form (capacities, spacer ratio, settle, margins) worked at full precision."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Supply the inputs in the prompt so the field is a hand-calc; tol then stands.",
-   "evidence": "-7.5 = (2611 - 2568.5) - 50; neither the reservoir top nor the plug top is in the prompt. The old dataset text 'FAILS on a 7.5 metre shortfall' leaked the magnitude and was recut on 2026-09-16 (migrations/20260916_labelleak_recut_integrity_advanced.sql).",
+   "evidence": "W2: Prompt only, no field moves. The P&A inputs (the five plug intervals, the three designed geometries, the zones and the annular cement interval) existed only in /root/dr-wip-integrity/dr11_fields.mjs; the prompt now publishes them, so each field is the taught closed form (capacities, spacer ratio, settle, margins, takeoff). The prompt also said field 6 sums every plug including the two without a designed placement, which was false: the engine sums designed placements only (plugAbandonment.js takeoff) and lists the other two by name. That sentence and the single \"35 percent excess\" (it is P1's; P3 and S1 carry their own) are corrected. Keys, expected values and tolerances are unchanged. The published inputs reproduce above_source_margin_m = -7.5 through the vendored engines against the key -7.5 (tol 5e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "Exact half-metre value, tol 5e-6 fine once depths are published.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_integrity.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
+     "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
    "key": "annular_cement_margin_m",
-   "source": "unobtainable",
-   "source_ref": "/root/dr-wip-integrity/dr11_fields.mjs:259-302",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/integrity.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "src/components/course/panels/integrity/PaExplorer.jsx:492-495",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Publish the P&A inputs in the prompt (P1: 7 in liner ID 0.1594 m, stinger 3.5 in OD / 0.0760 m ID, base 2740 and top 2568.5 m MD, excess 0.35, spacer ahead 1.6 m3, tagged foundation; reservoir top 2611 m; annular cement 2455 to 2528.5 m unlogged; P3 and S1 geometries; from /root/dr-wip-integrity/dr11_fields.mjs:145-177) so each value is the taught closed form (capacities, spacer ratio, settle, margins) worked at full precision."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Supply the inputs in the prompt so the field is a hand-calc; tol then stands.",
-   "evidence": "-26.5 = (2528.5 - 2455) - 100 for unlogged cement; the interval and 'no log' are not in the prompt.",
+   "evidence": "W2: Prompt only, no field moves. The P&A inputs (the five plug intervals, the three designed geometries, the zones and the annular cement interval) existed only in /root/dr-wip-integrity/dr11_fields.mjs; the prompt now publishes them, so each field is the taught closed form (capacities, spacer ratio, settle, margins, takeoff). The prompt also said field 6 sums every plug including the two without a designed placement, which was false: the engine sums designed placements only (plugAbandonment.js takeoff) and lists the other two by name. That sentence and the single \"35 percent excess\" (it is P1's; P3 and S1 carry their own) are corrected. Keys, expected values and tolerances are unchanged. The published inputs reproduce annular_cement_margin_m = -26.5 through the vendored engines against the key -26.5 (tol 5e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "Exact, tol fine once the interval is published.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_integrity.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
+     "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
    "key": "program_slurry_takeoff_m3",
-   "source": "unobtainable",
-   "source_ref": "/root/dr-wip-integrity/dr11_fields.mjs:259-302",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/integrity.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "src/components/course/panels/integrity/PaExplorer.jsx:403 (fmt(prog.takeoff.slurryM3, 4))",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Publish the P&A inputs in the prompt (P1: 7 in liner ID 0.1594 m, stinger 3.5 in OD / 0.0760 m ID, base 2740 and top 2568.5 m MD, excess 0.35, spacer ahead 1.6 m3, tagged foundation; reservoir top 2611 m; annular cement 2455 to 2528.5 m unlogged; P3 and S1 geometries; from /root/dr-wip-integrity/dr11_fields.mjs:145-177) so each value is the taught closed form (capacities, spacer ratio, settle, margins) worked at full precision Also rewrite the trap to: 'Field 6 is the takeoff total. The two plugs without a geometry add no volume and are listed by name instead.'"
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Publish P1/P3/S1 geometries and correct the trap sentence to say the takeoff counts designed plugs only and names the two undesigned ones.",
-   "evidence": "18.197179 m3 = P1 4.620239 + P3 7.1434 + S1 6.4335 designed slurries; the engine sums only plugs with a placement (packages/engines/engines/drilling/plugAbandonment.js:248), so the prompt's 'Field 6 sums every plug including the two the programme does not design a placement for, so it is not the sum of the designed slurries alone' is false.",
+   "evidence": "W2: Prompt only, no field moves. The P&A inputs (the five plug intervals, the three designed geometries, the zones and the annular cement interval) existed only in /root/dr-wip-integrity/dr11_fields.mjs; the prompt now publishes them, so each field is the taught closed form (capacities, spacer ratio, settle, margins, takeoff). The prompt also said field 6 sums every plug including the two without a designed placement, which was false: the engine sums designed placements only (plugAbandonment.js takeoff) and lists the other two by name. That sentence and the single \"35 percent excess\" (it is P1's; P3 and S1 carry their own) are corrected. Keys, expected values and tolerances are unchanged. The published inputs reproduce program_slurry_takeoff_m3 = 18.197179289478704 through the vendored engines against the key 18.197179289478704 (tol 5e-07); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "Prompt error: undesigned plugs contribute 0 and are listed in undesignedPlugs (lesson advanced/m05-the-programme/l05-the-takeoff.md says the same). A preset print of 4 decimals (half unit 5e-5) would also sit far above tol 5e-7.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_integrity.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
+     "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
+    ],
+    "lessons": []
+   }
   }
  ]
 }
