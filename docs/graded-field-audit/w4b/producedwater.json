@@ -1,0 +1,146 @@
+{
+ "course": "producedwater",
+ "tiers": {
+  "beginner": {
+   "pointer": "On the course panel, the Water explorer's \"Your stream, typed\" view takes this stream as typed (the water, the crude, the droplets, the basin and the plate pack) and prints every value to at least the precision graded here.",
+   "keys": {
+    "ogulagha_water_viscosity_pas": {
+     "panel": "src/components/course/panels/producedwater/WaterExplorer.jsx",
+     "line": 360,
+     "mode": "typed",
+     "decimals": 12,
+     "formatter": "toFixed(12)",
+     "test": "src/components/course/panels/producedwater/yourCase.test.js",
+     "evidence": "A typed stream mode on WaterExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses."
+    },
+    "ogulagha_water_density_kgm3": {
+     "panel": "src/components/course/panels/producedwater/WaterExplorer.jsx",
+     "line": 362,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "toFixed(6)",
+     "test": "src/components/course/panels/producedwater/yourCase.test.js",
+     "evidence": "A typed stream mode on WaterExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses."
+    },
+    "ogulagha_droplet_rise_ms": {
+     "panel": "src/components/course/panels/producedwater/WaterExplorer.jsx",
+     "line": 365,
+     "mode": "typed",
+     "decimals": 12,
+     "formatter": "toFixed(12)",
+     "test": "src/components/course/panels/producedwater/yourCase.test.js",
+     "evidence": "A typed stream mode on WaterExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses."
+    },
+    "ogulagha_basin_cut_micron": {
+     "panel": "src/components/course/panels/producedwater/WaterExplorer.jsx",
+     "line": 368,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "toFixed(6)",
+     "test": "src/components/course/panels/producedwater/yourCase.test.js",
+     "evidence": "A typed stream mode on WaterExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses."
+    },
+    "ogulagha_plate_cut_micron": {
+     "panel": "src/components/course/panels/producedwater/WaterExplorer.jsx",
+     "line": 370,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "toFixed(6)",
+     "test": "src/components/course/panels/producedwater/yourCase.test.js",
+     "evidence": "A typed stream mode on WaterExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses."
+    }
+   }
+  },
+  "intermediate": {
+   "pointer": "On the course panel, the Device explorer's \"Your stream, typed\" view takes this water, the liner bank, the flotation unit and the media bed as typed and prints every value to at least the precision graded here.",
+   "keys": {
+    "izombe_cyclone_cut_micron": {
+     "panel": "src/components/course/panels/producedwater/DeviceExplorer.jsx",
+     "line": 422,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "toFixed(6)",
+     "test": "src/components/course/panels/producedwater/yourCase.test.js",
+     "evidence": "A typed stream mode on DeviceExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses."
+    },
+    "izombe_bubble_rise_ms": {
+     "panel": "src/components/course/panels/producedwater/DeviceExplorer.jsx",
+     "line": 427,
+     "mode": "typed",
+     "decimals": 12,
+     "formatter": "toFixed(12)",
+     "test": "src/components/course/panels/producedwater/yourCase.test.js",
+     "evidence": "A typed stream mode on DeviceExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses."
+    },
+    "izombe_gas_holdup_ratio": {
+     "panel": "src/components/course/panels/producedwater/DeviceExplorer.jsx",
+     "line": 429,
+     "mode": "typed",
+     "decimals": 12,
+     "formatter": "toFixed(12)",
+     "test": "src/components/course/panels/producedwater/yourCase.test.js",
+     "evidence": "A typed stream mode on DeviceExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses."
+    }
+   }
+  },
+  "advanced": {
+   "pointer": "On the course panel, the Train explorer's \"Your stream, typed\" view takes this water, the inlet distribution and the three stages in order as typed, with the 240 micron droplet, and prints every value to at least the precision graded here.",
+   "keys": {
+    "tunu_cyclone_stage_median_micron": {
+     "panel": "src/components/course/panels/producedwater/TrainExplorer.jsx",
+     "line": 340,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "toFixed(6)",
+     "test": "src/components/course/panels/producedwater/yourCase.test.js",
+     "evidence": "A typed stream mode on TrainExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses."
+    },
+    "tunu_plate_stage_removal_pct": {
+     "panel": "src/components/course/panels/producedwater/TrainExplorer.jsx",
+     "line": 340,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "toFixed(6)",
+     "test": "src/components/course/panels/producedwater/yourCase.test.js",
+     "evidence": "A typed stream mode on TrainExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses."
+    },
+    "tunu_cyclone_stage_removal_pct": {
+     "panel": "src/components/course/panels/producedwater/TrainExplorer.jsx",
+     "line": 340,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "toFixed(6)",
+     "test": "src/components/course/panels/producedwater/yourCase.test.js",
+     "evidence": "A typed stream mode on TrainExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses."
+    },
+    "tunu_train_outlet_ppm": {
+     "panel": "src/components/course/panels/producedwater/TrainExplorer.jsx",
+     "line": 346,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "toFixed(6)",
+     "test": "src/components/course/panels/producedwater/yourCase.test.js",
+     "evidence": "A typed stream mode on TrainExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses."
+    },
+    "tunu_train_outlet_median_micron": {
+     "panel": "src/components/course/panels/producedwater/TrainExplorer.jsx",
+     "line": 347,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "toFixed(6)",
+     "test": "src/components/course/panels/producedwater/yourCase.test.js",
+     "evidence": "A typed stream mode on TrainExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses."
+    },
+    "tunu_coarse_droplet_reynolds": {
+     "panel": "src/components/course/panels/producedwater/TrainExplorer.jsx",
+     "line": 350,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/producedwater/yourCase.test.js",
+     "evidence": "A typed stream mode on TrainExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses."
+    }
+   }
+  }
+ }
+}

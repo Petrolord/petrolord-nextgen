@@ -23996,32 +23996,37 @@
   "expected": 0.0005101915934473397,
   "tol": 1e-12,
   "rel_tol": 1.9600479757869956e-09,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/beginner/m02-the-water-and-the-oil/l01-viscosity-from-temperature.md",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/producedwater/WaterExplorer.jsx:360 (typed mode: the case typed as the prompt states it)",
   "printed": {
    "decimals": 12
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/WaterExplorer.jsx:34 twelve() (teaching stream only)",
+  "display_ref": "src/components/course/panels/producedwater/WaterExplorer.jsx:360 toFixed(12)",
   "prompt_precision": "The viscosity in Pa.s and the rise velocity in m/s, to twelve decimals.",
   "prompt_decimals": 12,
   "prompt_miss": 4.4733964796317416e-13,
   "rounding_miss": 4.4733964796317416e-13,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/WaterExplorer.jsx:324 -> add a 'Your stream' mode with NumFields for rate, temperature, TDS, API and the device inputs, printing viscosity, salinity factor, both densities, rise velocity and both cut sizes with the existing six()/twelve() formatters"
-  },
-  "owner_decision": true,
-  "recommendation": "Ungradable as posed: nothing a learner can reach evaluates the capstone stream at the stated precision. Add a typed-input mode to the panels (formatters already print at 6 and 12 decimals) and accept that panelCapstoneGuard-style tests must then check defaults only; or print the fit constants in the lessons so the chain becomes hand-calc.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "The water viscosity fit, fresh water density fit and salinity term are 'declared constants' the lessons never print (beginner m02 l01:30, l03:22), so no hand route exists. The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_producedwater.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Water explorer's \"Your stream, typed\" view takes this stream as typed (the water, the crude, the droplets, the basin and the plate pack) and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/producedwater/WaterExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/producedwater/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed stream mode on WaterExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses.",
   "notes": null
  },
  {
@@ -24033,32 +24038,37 @@
   "expected": 1013.7286105037547,
   "tol": 0.0001,
   "rel_tol": 9.864573117878833e-08,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/beginner/m02-the-water-and-the-oil/l03-brine-density.md",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/producedwater/WaterExplorer.jsx:362 (typed mode: the case typed as the prompt states it)",
   "printed": {
    "decimals": 6
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/WaterExplorer.jsx:33 six()",
+  "display_ref": "src/components/course/panels/producedwater/WaterExplorer.jsx:362 toFixed(6)",
   "prompt_precision": "The two densities in kg/m3 and the two cut sizes in micron, to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 4.962453203916084e-07,
   "rounding_miss": 4.962453203916084e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/WaterExplorer.jsx:324 -> add a 'Your stream' mode with NumFields for rate, temperature, TDS, API and the device inputs, printing the brine density with the existing six()/twelve() formatters"
-  },
-  "owner_decision": true,
-  "recommendation": "Ungradable as posed: nothing a learner can reach evaluates the capstone stream at the stated precision. Add a typed-input mode to the panels (formatters already print at 6 and 12 decimals) and accept that panelCapstoneGuard-style tests must then check defaults only; or print the fit constants in the lessons so the chain becomes hand-calc.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "The water viscosity fit, fresh water density fit and salinity term are 'declared constants' the lessons never print (beginner m02 l01:30, l03:22), so no hand route exists. The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_producedwater.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Water explorer's \"Your stream, typed\" view takes this stream as typed (the water, the crude, the droplets, the basin and the plate pack) and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/producedwater/WaterExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/producedwater/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed stream mode on WaterExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses.",
   "notes": null
  },
  {
@@ -24116,32 +24126,37 @@
   "expected": 7.82526023252317e-05,
   "tol": 1e-10,
   "rel_tol": 1.2779127725923062e-06,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/beginner/m04-a-droplets-rise/l02-stokes-and-its-reynolds-number.md",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/producedwater/WaterExplorer.jsx:365 (typed mode: the case typed as the prompt states it)",
   "printed": {
    "decimals": 12
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/WaterExplorer.jsx:34 twelve()",
+  "display_ref": "src/components/course/panels/producedwater/WaterExplorer.jsx:365 toFixed(12)",
   "prompt_precision": "The viscosity in Pa.s and the rise velocity in m/s, to twelve decimals.",
   "prompt_decimals": 12,
   "prompt_miss": 3.2523170354764597e-13,
   "rounding_miss": 3.2523170354764597e-13,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/WaterExplorer.jsx:324 -> add a 'Your stream' mode with NumFields for rate, temperature, TDS, API and the device inputs, printing the Stokes rise velocity with the existing six()/twelve() formatters"
-  },
-  "owner_decision": true,
-  "recommendation": "Ungradable as posed: nothing a learner can reach evaluates the capstone stream at the stated precision. Add a typed-input mode to the panels (formatters already print at 6 and 12 decimals) and accept that panelCapstoneGuard-style tests must then check defaults only; or print the fit constants in the lessons so the chain becomes hand-calc.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Stokes is a closed form but needs the undisclosed viscosity and brine density. The water viscosity fit, fresh water density fit and salinity term are 'declared constants' the lessons never print (beginner m02 l01:30, l03:22), so no hand route exists. The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_producedwater.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Water explorer's \"Your stream, typed\" view takes this stream as typed (the water, the crude, the droplets, the basin and the plate pack) and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/producedwater/WaterExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/producedwater/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed stream mode on WaterExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses.",
   "notes": null
  },
  {
@@ -24153,32 +24168,37 @@
   "expected": 113.37669131197052,
   "tol": 1e-06,
   "rel_tol": 8.820155081509405e-09,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/beginner/m05-the-gravity-devices/l01-an-api-421-basin.md",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/producedwater/WaterExplorer.jsx:368 (typed mode: the case typed as the prompt states it)",
   "printed": {
    "decimals": 6
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/WaterExplorer.jsx:33 six()",
+  "display_ref": "src/components/course/panels/producedwater/WaterExplorer.jsx:368 toFixed(6)",
   "prompt_precision": "The two densities in kg/m3 and the two cut sizes in micron, to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 3.11970524080607e-07,
   "rounding_miss": 3.11970524080607e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/WaterExplorer.jsx:324 -> add a 'Your stream' mode with NumFields for rate, temperature, TDS, API and the device inputs, printing the basin cut size with the existing six()/twelve() formatters"
-  },
-  "owner_decision": true,
-  "recommendation": "Ungradable as posed: nothing a learner can reach evaluates the capstone stream at the stated precision. Add a typed-input mode to the panels (formatters already print at 6 and 12 decimals) and accept that panelCapstoneGuard-style tests must then check defaults only; or print the fit constants in the lessons so the chain becomes hand-calc.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Inverting the balance at F needs the undisclosed viscosity and brine density. The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_producedwater.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Water explorer's \"Your stream, typed\" view takes this stream as typed (the water, the crude, the droplets, the basin and the plate pack) and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/producedwater/WaterExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/producedwater/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed stream mode on WaterExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses.",
   "notes": null
  },
  {
@@ -24190,32 +24210,37 @@
   "expected": 69.84080434958841,
   "tol": 1e-06,
   "rel_tol": 1.4318277249421358e-08,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/beginner/m05-the-gravity-devices/l05-a-plate-pack.md",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/producedwater/WaterExplorer.jsx:370 (typed mode: the case typed as the prompt states it)",
   "printed": {
    "decimals": 6
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/WaterExplorer.jsx:33 six()",
+  "display_ref": "src/components/course/panels/producedwater/WaterExplorer.jsx:370 toFixed(6)",
   "prompt_precision": "The two densities in kg/m3 and the two cut sizes in micron, to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 3.4958840444687667e-07,
   "rounding_miss": 3.4958840444687667e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/WaterExplorer.jsx:324 -> add a 'Your stream' mode with NumFields for rate, temperature, TDS, API and the device inputs, printing the plate pack cut size with the existing six()/twelve() formatters"
-  },
-  "owner_decision": true,
-  "recommendation": "Ungradable as posed: nothing a learner can reach evaluates the capstone stream at the stated precision. Add a typed-input mode to the panels (formatters already print at 6 and 12 decimals) and accept that panelCapstoneGuard-style tests must then check defaults only; or print the fit constants in the lessons so the chain becomes hand-calc.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Needs the undisclosed viscosity and brine density. The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_producedwater.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Water explorer's \"Your stream, typed\" view takes this stream as typed (the water, the crude, the droplets, the basin and the plate pack) and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/producedwater/WaterExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/producedwater/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed stream mode on WaterExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses.",
   "notes": null
  },
  {
@@ -24289,32 +24314,37 @@
   "expected": 5.319865594518567,
   "tol": 1e-06,
   "rel_tol": 1.8797467383957418e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/intermediate/m02-the-hydrocyclone/l04-the-cut-the-march-gives.md",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/producedwater/DeviceExplorer.jsx:422 (typed mode: the case typed as the prompt states it)",
   "printed": {
    "decimals": 6
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/DeviceExplorer.jsx:41 six() (KOKORI only)",
+  "display_ref": "src/components/course/panels/producedwater/DeviceExplorer.jsx:422 toFixed(6)",
   "prompt_precision": "The turndown, the shear penalty and the holdup as ratios and the two cut sizes in micron, to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 4.054814333187551e-07,
   "rounding_miss": 4.054814333187551e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/DeviceExplorer.jsx:411 -> add a 'Your stream' mode with NumFields for rate, temperature, TDS, API and the device inputs, printing the liner field, residence, ideal and reported cut with the existing six()/twelve() formatters"
-  },
-  "owner_decision": true,
-  "recommendation": "Ungradable as posed: nothing a learner can reach evaluates the capstone stream at the stated precision. Add a typed-input mode to the panels (formatters already print at 6 and 12 decimals) and accept that panelCapstoneGuard-style tests must then check defaults only; or print the fit constants in the lessons so the chain becomes hand-calc.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "The residence-time march needs the undisclosed viscosity and brine density. The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_producedwater.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Device explorer's \"Your stream, typed\" view takes this water, the liner bank, the flotation unit and the media bed as typed and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/producedwater/DeviceExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/producedwater/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed stream mode on DeviceExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses.",
   "notes": null
  },
  {
@@ -24326,32 +24356,37 @@
   "expected": 0.02505191646373671,
   "tol": 1e-10,
   "rel_tol": 3.991710580096839e-09,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/intermediate/m04-flotation/l03-a-bubble-at-reynolds-twenty.md",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/producedwater/DeviceExplorer.jsx:427 (typed mode: the case typed as the prompt states it)",
   "printed": {
    "decimals": 12
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/DeviceExplorer.jsx:226 twelve(s.cell.bubbleRiseMS) (KOKORI only)",
+  "display_ref": "src/components/course/panels/producedwater/DeviceExplorer.jsx:427 toFixed(12)",
   "prompt_precision": "The rise velocity in m/s, to twelve decimals.",
   "prompt_decimals": 12,
   "prompt_miss": 2.6328939028985587e-13,
   "rounding_miss": 2.6328939028985587e-13,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/DeviceExplorer.jsx:411 -> add a 'Your stream' mode with NumFields for rate, temperature, TDS, API and the device inputs, printing bubble rise, superficial gas velocity, holdup and cut with the existing six()/twelve() formatters"
-  },
-  "owner_decision": true,
-  "recommendation": "Ungradable as posed: nothing a learner can reach evaluates the capstone stream at the stated precision. Add a typed-input mode to the panels (formatters already print at 6 and 12 decimals) and accept that panelCapstoneGuard-style tests must then check defaults only; or print the fit constants in the lessons so the chain becomes hand-calc.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "A full drag balance at Reynolds about 20 (iterative) on the undisclosed water density and viscosity. The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_producedwater.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Device explorer's \"Your stream, typed\" view takes this water, the liner bank, the flotation unit and the media bed as typed and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/producedwater/DeviceExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/producedwater/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed stream mode on DeviceExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses.",
   "notes": null
  },
  {
@@ -24363,32 +24398,37 @@
   "expected": 0.06881952310620194,
   "tol": 5e-07,
   "rel_tol": 7.265380192019095e-06,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/intermediate/m04-flotation/l04-holdup-and-a-swarm.md",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/producedwater/DeviceExplorer.jsx:429 (typed mode: the case typed as the prompt states it)",
   "printed": {
    "decimals": 12
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/DeviceExplorer.jsx:227 twelve(s.cell.gasHoldup) (KOKORI only)",
+  "display_ref": "src/components/course/panels/producedwater/DeviceExplorer.jsx:429 toFixed(12)",
   "prompt_precision": "The turndown, the shear penalty and the holdup as ratios and the two cut sizes in micron, to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 4.768937980625942e-07,
   "rounding_miss": 2.0194956817931597e-13,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/DeviceExplorer.jsx:411 -> add a 'Your stream' mode with NumFields for rate, temperature, TDS, API and the device inputs, printing the gas holdup with the existing six()/twelve() formatters"
-  },
-  "owner_decision": true,
-  "recommendation": "Ungradable as posed: nothing a learner can reach evaluates the capstone stream at the stated precision. Add a typed-input mode to the panels (formatters already print at 6 and 12 decimals) and accept that panelCapstoneGuard-style tests must then check defaults only; or print the fit constants in the lessons so the chain becomes hand-calc.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Depends on the bubble rise velocity, which is unobtainable. The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_producedwater.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Device explorer's \"Your stream, typed\" view takes this water, the liner bank, the flotation unit and the media bed as typed and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/producedwater/DeviceExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/producedwater/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed stream mode on DeviceExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses.",
   "notes": null
  },
  {
@@ -24431,32 +24471,37 @@
   "expected": 4.693996003747812,
   "tol": 1e-06,
   "rel_tol": 2.1303810212057557e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/advanced (train coupling; intermediate m01 l04 removal-as-an-integral)",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/producedwater/TrainExplorer.jsx:340 (typed mode: the case typed as the prompt states it)",
   "printed": {
    "decimals": 6
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/TrainExplorer.jsx:36 six() (teaching train only)",
+  "display_ref": "src/components/course/panels/producedwater/TrainExplorer.jsx:340 toFixed(6)",
   "prompt_precision": "Removals in percent, the concentration in ppm, the medians in micron and the Reynolds number as a ratio, all to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 3.74781183865025e-09,
   "rounding_miss": 3.74781183865025e-09,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/TrainExplorer.jsx:325 -> add a 'Your stream' mode with NumFields for rate, temperature, TDS, API and the device inputs, printing the stage outlet medians with the existing six()/twelve() formatters"
-  },
-  "owner_decision": true,
-  "recommendation": "Ungradable as posed: nothing a learner can reach evaluates the capstone stream at the stated precision. Add a typed-input mode to the panels (formatters already print at 6 and 12 decimals) and accept that panelCapstoneGuard-style tests must then check defaults only; or print the fit constants in the lessons so the chain becomes hand-calc.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "The medians are moments of a 60-bin distribution passed through three grade curves whose cut sizes need the undisclosed fluid fits. The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_producedwater.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Train explorer's \"Your stream, typed\" view takes this water, the inlet distribution and the three stages in order as typed, with the 240 micron droplet, and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/producedwater/TrainExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/producedwater/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed stream mode on TrainExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses.",
   "notes": null
  },
  {
@@ -24468,32 +24513,37 @@
   "expected": 11.801201005213063,
   "tol": 1e-06,
   "rel_tol": 8.473713815723161e-08,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/advanced (train coupling; intermediate m01 l04 removal-as-an-integral)",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/producedwater/TrainExplorer.jsx:340 (typed mode: the case typed as the prompt states it)",
   "printed": {
    "decimals": 6
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/TrainExplorer.jsx:36 six() (teaching train only)",
+  "display_ref": "src/components/course/panels/producedwater/TrainExplorer.jsx:340 toFixed(6)",
   "prompt_precision": "Removals in percent, the concentration in ppm, the medians in micron and the Reynolds number as a ratio, all to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 5.213061982090039e-09,
   "rounding_miss": 5.213061982090039e-09,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/TrainExplorer.jsx:325 -> add a 'Your stream' mode with NumFields for rate, temperature, TDS, API and the device inputs, printing the stage removals with the existing six()/twelve() formatters"
-  },
-  "owner_decision": true,
-  "recommendation": "Ungradable as posed: nothing a learner can reach evaluates the capstone stream at the stated precision. Add a typed-input mode to the panels (formatters already print at 6 and 12 decimals) and accept that panelCapstoneGuard-style tests must then check defaults only; or print the fit constants in the lessons so the chain becomes hand-calc.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Removal integrates the grade curve over 60 log-normal bins against a plate cut that needs the undisclosed fluid fits. The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_producedwater.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Train explorer's \"Your stream, typed\" view takes this water, the inlet distribution and the three stages in order as typed, with the 240 micron droplet, and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/producedwater/TrainExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/producedwater/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed stream mode on TrainExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses.",
   "notes": null
  },
  {
@@ -24505,32 +24555,37 @@
   "expected": 93.8488534141062,
   "tol": 1e-06,
   "rel_tol": 1.0655431191977592e-08,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/advanced (train coupling; intermediate m01 l04 removal-as-an-integral)",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/producedwater/TrainExplorer.jsx:340 (typed mode: the case typed as the prompt states it)",
   "printed": {
    "decimals": 6
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/TrainExplorer.jsx:36 six() (teaching train only)",
+  "display_ref": "src/components/course/panels/producedwater/TrainExplorer.jsx:340 toFixed(6)",
   "prompt_precision": "Removals in percent, the concentration in ppm, the medians in micron and the Reynolds number as a ratio, all to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 4.141061964446635e-07,
   "rounding_miss": 4.141061964446635e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/TrainExplorer.jsx:325 -> add a 'Your stream' mode with NumFields for rate, temperature, TDS, API and the device inputs, printing the stage removals with the existing six()/twelve() formatters"
-  },
-  "owner_decision": true,
-  "recommendation": "Ungradable as posed: nothing a learner can reach evaluates the capstone stream at the stated precision. Add a typed-input mode to the panels (formatters already print at 6 and 12 decimals) and accept that panelCapstoneGuard-style tests must then check defaults only; or print the fit constants in the lessons so the chain becomes hand-calc.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Same 60-bin integration against the liner cut, which needs the undisclosed fluid fits. The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_producedwater.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Train explorer's \"Your stream, typed\" view takes this water, the inlet distribution and the three stages in order as typed, with the 240 micron droplet, and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/producedwater/TrainExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/producedwater/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed stream mode on TrainExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses.",
   "notes": null
  },
  {
@@ -24542,32 +24597,37 @@
   "expected": 45.682546314511974,
   "tol": 1e-06,
   "rel_tol": 2.189019835092533e-08,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/advanced (train coupling; intermediate m01 l04 removal-as-an-integral)",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/producedwater/TrainExplorer.jsx:346 (typed mode: the case typed as the prompt states it)",
   "printed": {
    "decimals": 6
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/TrainExplorer.jsx:36 six() (teaching train only)",
+  "display_ref": "src/components/course/panels/producedwater/TrainExplorer.jsx:346 toFixed(6)",
   "prompt_precision": "Removals in percent, the concentration in ppm, the medians in micron and the Reynolds number as a ratio, all to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 3.1451197202159165e-07,
   "rounding_miss": 3.1451197202159165e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/TrainExplorer.jsx:325 -> add a 'Your stream' mode with NumFields for rate, temperature, TDS, API and the device inputs, printing the train outlet concentration with the existing six()/twelve() formatters"
-  },
-  "owner_decision": true,
-  "recommendation": "Ungradable as posed: nothing a learner can reach evaluates the capstone stream at the stated precision. Add a typed-input mode to the panels (formatters already print at 6 and 12 decimals) and accept that panelCapstoneGuard-style tests must then check defaults only; or print the fit constants in the lessons so the chain becomes hand-calc.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Product of three stage penetrations, each unobtainable. The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_producedwater.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Train explorer's \"Your stream, typed\" view takes this water, the inlet distribution and the three stages in order as typed, with the 240 micron droplet, and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/producedwater/TrainExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/producedwater/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed stream mode on TrainExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses.",
   "notes": null
  },
  {
@@ -24579,32 +24639,37 @@
   "expected": 4.08399589751163,
   "tol": 1e-06,
   "rel_tol": 2.448582283369329e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/advanced (train coupling; intermediate m01 l04 removal-as-an-integral)",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/producedwater/TrainExplorer.jsx:347 (typed mode: the case typed as the prompt states it)",
   "printed": {
    "decimals": 6
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/TrainExplorer.jsx:36 six() (teaching train only)",
+  "display_ref": "src/components/course/panels/producedwater/TrainExplorer.jsx:347 toFixed(6)",
   "prompt_precision": "Removals in percent, the concentration in ppm, the medians in micron and the Reynolds number as a ratio, all to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 1.0248836979087628e-07,
   "rounding_miss": 1.0248836979087628e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/TrainExplorer.jsx:325 -> add a 'Your stream' mode with NumFields for rate, temperature, TDS, API and the device inputs, printing the train outlet median with the existing six()/twelve() formatters"
-  },
-  "owner_decision": true,
-  "recommendation": "Ungradable as posed: nothing a learner can reach evaluates the capstone stream at the stated precision. Add a typed-input mode to the panels (formatters already print at 6 and 12 decimals) and accept that panelCapstoneGuard-style tests must then check defaults only; or print the fit constants in the lessons so the chain becomes hand-calc.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Moment of the surviving distribution after three unobtainable stages. The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_producedwater.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Train explorer's \"Your stream, typed\" view takes this water, the inlet distribution and the three stages in order as typed, with the 240 micron droplet, and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/producedwater/TrainExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/producedwater/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed stream mode on TrainExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses.",
   "notes": null
  },
  {
@@ -24616,32 +24681,37 @@
   "expected": 6.997495185436383,
   "tol": 5e-07,
   "rel_tol": 7.145413991003963e-08,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/advanced (train coupling; intermediate m01 l04 removal-as-an-integral)",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/producedwater/TrainExplorer.jsx:350 (typed mode: the case typed as the prompt states it)",
   "printed": {
-   "decimals": 6
+   "decimals": 9
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/TrainExplorer.jsx:36 six() (teaching train only)",
+  "display_ref": "src/components/course/panels/producedwater/TrainExplorer.jsx:350 toFixed(9)",
   "prompt_precision": "Removals in percent, the concentration in ppm, the medians in micron and the Reynolds number as a ratio, all to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 1.8543638358181624e-07,
-  "rounding_miss": 1.8543638358181624e-07,
+  "rounding_miss": 4.3638337388074433e-10,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/producedwater/TrainExplorer.jsx:325 -> add a 'Your stream' mode with NumFields for rate, temperature, TDS, API and the device inputs, printing the Reynolds number of a typed droplet diameter with the existing six()/twelve() formatters"
-  },
-  "owner_decision": true,
-  "recommendation": "Ungradable as posed: nothing a learner can reach evaluates the capstone stream at the stated precision. Add a typed-input mode to the panels (formatters already print at 6 and 12 decimals) and accept that panelCapstoneGuard-style tests must then check defaults only; or print the fit constants in the lessons so the chain becomes hand-calc.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Re = rho v d / mu with Stokes v needs the undisclosed viscosity and brine density. The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_producedwater.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Train explorer's \"Your stream, typed\" view takes this water, the inlet distribution and the three stages in order as typed, with the 240 micron droplet, and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/producedwater/TrainExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/producedwater/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed stream mode on TrainExplorer.jsx (typedWaterStream / typedDeviceStream / typedTrainStream in producedWaterLab.js, the same engine calls as the capstone derivation) takes the stream the learner types. Typing the prompt's stream prints the value within tol; yourCase.test.js proves it, that the teaching-stream default lands on no graded answer, and that one retyped input misses.",
   "notes": null
  },
  {

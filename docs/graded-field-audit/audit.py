@@ -272,6 +272,72 @@ def _lesson_read(rel):
 
 LESSON_READ = _lesson_read
 
+REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+
+
+def case_mode_errors(rows, repo=REPO):
+    """W4 route (b): a field moved to a typed "your case" panel mode names the panel file,
+    the mode value and the test that proves the typed prompt case reads the graded value.
+    The panel must still carry that mode and the test must still exist and name the key;
+    otherwise the class `none` rests on a view that is not there."""
+    errs = []
+    for r in rows:
+        cm = (r.get('shipped') or {}).get('case_mode') if isinstance(r.get('shipped'), dict) else None
+        if not cm:
+            continue
+        k = (r['course'], r['tier'], r['key'])
+        panel, test = os.path.join(repo, cm.get('panel', '')), os.path.join(repo, cm.get('test', ''))
+        if not cm.get('panel') or not os.path.isfile(panel):
+            errs.append(f'{k}: case mode panel {cm.get("panel")!r} is missing')
+        elif not re.search(r"(value:\s*|\[\s*|mode === )'" + re.escape(cm.get('mode', '')) + r"'", open(panel).read()):
+            errs.append(f'{k}: case mode {cm.get("mode")!r} is not a mode of {cm.get("panel")}')
+        if not cm.get('test') or not os.path.isfile(test):
+            errs.append(f'{k}: case mode test {cm.get("test")!r} is missing')
+        elif r['key'] not in open(test).read():
+            errs.append(f'{k}: case mode test {cm.get("test")} does not name the field')
+        if r.get('source') != 'nextgen-panel' or r.get('class') != 'none':
+            errs.append(f'{k}: a case mode field must be source nextgen-panel, class none (is {r.get("source")}, {r.get("class")})')
+    return errs
+
+
+def case_mode_controls(caps, annots, repo=REPO):
+    """Negative controls for case_mode_errors, on a synthetic panel tree, so they hold
+    whether or not a W4 spec has shipped yet. Returns True when every control holds."""
+    import tempfile
+    ok = True
+    course = next(iter(annots))
+    cap = next(c for c in caps if c['app'] == course)
+    f0 = cap['fields'][0]
+    with tempfile.TemporaryDirectory() as d:
+        os.makedirs(os.path.join(d, 'p'))
+        open(os.path.join(d, 'p', 'X.jsx'), 'w').write("const MODES = [{ value: 'yourcase', label: 'Your case' }];\n")
+        open(os.path.join(d, 'p', 'x.test.js'), 'w').write(f"it('{f0['key']}', () => {{}});\n")
+        good = {'panel': 'p/X.jsx', 'mode': 'yourcase', 'test': 'p/x.test.js'}
+        base = {'course': course, 'tier': cap['tier'], 'key': f0['key'], 'source': 'nextgen-panel', 'class': 'none'}
+        cases = [
+            ('GREEN', 'a case mode that exists, with its test', dict(good)),
+            ('RED', 'a case mode the panel does not carry', {**good, 'mode': 'gone'}),
+            ('RED', 'a case mode whose panel file is missing', {**good, 'panel': 'p/Gone.jsx'}),
+            ('RED', 'a case mode whose test is missing', {**good, 'test': 'p/gone.test.js'}),
+        ]
+        for want, name, cm in cases:
+            errs = case_mode_errors([{**base, 'shipped': {'case_mode': cm}}], d)
+            held = (not errs) if want == 'GREEN' else bool(errs)
+            print(f"  case-mode control {want + ' (good)' if held else ('RED' if want == 'GREEN' else 'GREEN') + ' (BROKEN)'}: {name}")
+            ok &= held
+        # the W4 shape of the display miss: a field moved to a typed panel mode that prints it
+        # more coarsely than its tolerance, and classed none
+        c2, a2 = copy.deepcopy(caps), copy.deepcopy(annots)
+        next(c for c in c2 if c['app'] == course and c['tier'] == cap['tier'])['fields'].append(
+            {'key': 'zz_case', 'label': 'x', 'unit': 'psia', 'expected': 1589.4628665427595, 'tol': 0.00079})
+        a2[course]['fields'].append({'tier': cap['tier'], 'key': 'zz_case', 'source': 'nextgen-panel', 'class': 'none',
+                                     'printed': {'decimals': 2}, 'shipped': {'case_mode': good}})
+        errs = evaluate(c2, a2)[1]
+        held = any('zz_case' in x and 'display_miss' in x for x in errs)
+        print(f"  case-mode control {'RED (good)' if held else 'GREEN (BROKEN)'}: a case mode printing coarser than the tolerance, classed none")
+        ok &= held
+    return ok
+
 
 def selftest(caps, annots):
     ok = True
@@ -427,6 +493,7 @@ def selftest(caps, annots):
     red = bool(post_check(caps, after(move=other), rows, waves))
     print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: a field the recut does not name moved")
     ok &= red
+    ok &= case_mode_controls(caps, annots)
     base = evaluate(caps, annots)[1]
     print(f'  baseline (unplanted) errors: {len(base)}')
     rows, _ = evaluate([], {})
@@ -464,6 +531,10 @@ def main():
     print(f'{len(rows)} fields in {len(caps)} capstones over {len({c["app"] for c in caps})} courses')
     print('classes', counts, 'owner decisions', sum(1 for r in rows if r.get('owner_decision')))
     print('flags', flagc)
+    cme = case_mode_errors(rows)
+    ncm = sum(1 for r in rows if isinstance(r.get('shipped'), dict) and r['shipped'].get('case_mode'))
+    print(f'case modes: {ncm} field(s) read in a typed panel mode, {len(cme)} problem(s)')
+    errors += cme
     if a.post:
         global ANNOTS_FOR_POST
         ANNOTS_FOR_POST = annots

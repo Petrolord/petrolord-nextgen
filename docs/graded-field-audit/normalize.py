@@ -263,6 +263,37 @@ def w4a_shipped():
 overlay(w4a_shipped())
 
 
+# B5 FOLLOW-ON W4 PART B (typed "your case" panel modes), from w4b/<course>.json.
+# A field whose graded value a typed panel mode now prints at the graded precision
+# moves to source `nextgen-panel`, class `none`; `case_mode` names the panel, the
+# mode and the test, and audit.py checks all three still exist. The capstone brief
+# gains one pointer sentence (20261027b_w4_<course>.sql, prompt only); no key,
+# expected value or tolerance moves.
+def w4b_shipped():
+    out = {}
+    for p in sorted(glob.glob(os.path.join(HERE, 'w4b', '*.json'))):
+        s = json.load(open(p))
+        course = s['course']
+        for tier, t in s['tiers'].items():
+            for key, k in t.get('keys', {}).items():
+                ref = f"{k['panel']}:{k['line']}"
+                out[(course, tier, key)] = {
+                    'migration': f'20261027b_w4_{course}.sql', 'wave': 'w4b', 'decided': True, 'class': 'none',
+                    'prompt': t['pointer'][:300],
+                    'case_mode': {'panel': k['panel'], 'mode': k['mode'], 'test': k['test']},
+                    'annot_update': {
+                        'source': 'nextgen-panel',
+                        'source_ref': f"{ref} ({k['mode']} mode: the case typed as the prompt states it)",
+                        'printed': {'decimals': k['decimals']}, 'display_scale': 1,
+                        'display_ref': f"{ref} {k.get('formatter', '')}".strip(),
+                        'fix': None, 'recommendation': None,
+                        'evidence': k['evidence']}}
+    return out
+
+
+overlay(w4b_shipped())
+
+
 def main(raw):
     out = os.path.join(HERE, 'annot')
     os.makedirs(out, exist_ok=True)
