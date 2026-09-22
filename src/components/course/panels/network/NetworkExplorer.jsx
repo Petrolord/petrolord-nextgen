@@ -5,10 +5,11 @@ import {
 } from 'recharts';
 import { networkExplorer } from './networkLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { TypedNetworkView } from './TypedNetworkFields';
 
 // Network explorer, the Professional tier. The SOLVE, and what it decides.
 //
-// Seven modes. The one case with a closed form, a tree of turbulent branches
+// Eight modes, the eighth a network the learner types. The one case with a closed form, a tree of turbulent branches
 // against a method with nothing in common, the teaching system solved with
 // every node and every branch, the loop and the split it decides, the wells
 // fighting each other for a header, the streams that add by rate, and the
@@ -41,6 +42,7 @@ const MODES = [
   ['fight', 'Wells fighting each other for a header'],
   ['streams', 'What arrives at the separator'],
   ['diagnosis', 'The bottleneck against the biggest drop'],
+  ['typed', 'Your network, typed and solved'],
 ];
 
 const AXIS = { fill: '#94a3b8', fontSize: 11 };
@@ -1001,6 +1003,7 @@ const NetworkExplorer = ({ initialMode = 'solve' }) => {
         {mode === 'fight' && <Fight />}
         {mode === 'streams' && <Streams />}
         {mode === 'diagnosis' && <Diagnosis />}
+        {mode === 'typed' && <TypedNetworkView advanced={false} />}
       </div>
     </PanelShell>
   );

@@ -1,0 +1,114 @@
+{
+ "course": "network",
+ "tiers": {
+  "intermediate": {
+   "pointer": "On the course panel, the Network explorer's \"Your network, typed and solved\" view solves this field as you type it (the separator, the five wells with their flowlines, the allocation and the capacity limit, and the four branches in their drawn sense) and prints every node pressure and branch mass to six decimals.",
+   "keys": {
+    "net_header_h1_psia": {
+     "panel": "src/components/course/panels/network/NetworkExplorer.jsx",
+     "line": 1006,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "src/components/course/panels/network/TypedNetworkFields.jsx:147 toFixed(6)",
+     "test": "src/components/course/panels/network/yourCase.test.js",
+     "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. "
+    },
+    "net_satellite_m_psia": {
+     "panel": "src/components/course/panels/network/NetworkExplorer.jsx",
+     "line": 1006,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "src/components/course/panels/network/TypedNetworkFields.jsx:147 toFixed(6)",
+     "test": "src/components/course/panels/network/yourCase.test.js",
+     "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. "
+    },
+    "net_tee_h2_psia": {
+     "panel": "src/components/course/panels/network/NetworkExplorer.jsx",
+     "line": 1006,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "src/components/course/panels/network/TypedNetworkFields.jsx:147 toFixed(6)",
+     "test": "src/components/course/panels/network/yourCase.test.js",
+     "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. "
+    },
+    "net_trunk_mass_lbd": {
+     "panel": "src/components/course/panels/network/NetworkExplorer.jsx",
+     "line": 1006,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "src/components/course/panels/network/TypedNetworkFields.jsx:169 toFixed(6)",
+     "test": "src/components/course/panels/network/yourCase.test.js",
+     "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. "
+    },
+    "net_bypass_mass_lbd": {
+     "panel": "src/components/course/panels/network/NetworkExplorer.jsx",
+     "line": 1006,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "src/components/course/panels/network/TypedNetworkFields.jsx:169 toFixed(6)",
+     "test": "src/components/course/panels/network/yourCase.test.js",
+     "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. "
+    },
+    "net_crosslink_mass_lbd": {
+     "panel": "src/components/course/panels/network/NetworkExplorer.jsx",
+     "line": 1006,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "src/components/course/panels/network/TypedNetworkFields.jsx:169 toFixed(6)",
+     "test": "src/components/course/panels/network/yourCase.test.js",
+     "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. "
+    }
+   }
+  },
+  "advanced": {
+   "pointer": "On the course panel, the Fight explorer's \"Your network, typed, and what its solve hides\" view solves this field as you type it, wells in the order above, with each well's tested split and linear conductances, and prints the rates on the system, the stream on every branch, the linearised twin, and the conservation check to at least the precision graded here.",
+   "keys": {
+    "fight_w1_rate_lbd": {
+     "panel": "src/components/course/panels/network/FightExplorer.jsx",
+     "line": 1069,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "src/components/course/panels/network/TypedNetworkFields.jsx:192 toFixed(6)",
+     "test": "src/components/course/panels/network/yourCase.test.js",
+     "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. "
+    },
+    "fight_w4_rate_lbd": {
+     "panel": "src/components/course/panels/network/FightExplorer.jsx",
+     "line": 1069,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "src/components/course/panels/network/TypedNetworkFields.jsx:192 toFixed(6)",
+     "test": "src/components/course/panels/network/yourCase.test.js",
+     "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. "
+    },
+    "stream_bypass_water_stbd": {
+     "panel": "src/components/course/panels/network/FightExplorer.jsx",
+     "line": 1069,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "src/components/course/panels/network/TypedNetworkFields.jsx:174 toFixed(6)",
+     "test": "src/components/course/panels/network/yourCase.test.js",
+     "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. "
+    },
+    "hidden_produced_lbd": {
+     "panel": "src/components/course/panels/network/FightExplorer.jsx",
+     "line": 1069,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "src/components/course/panels/network/TypedNetworkFields.jsx:131 toFixed(6)",
+     "test": "src/components/course/panels/network/yourCase.test.js",
+     "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. "
+    },
+    "hidden_gap_fraction": {
+     "panel": "src/components/course/panels/network/FightExplorer.jsx",
+     "line": 1069,
+     "mode": "typed",
+     "decimals": 12,
+     "formatter": "src/components/course/panels/network/TypedNetworkFields.jsx:134 toFixed(12)",
+     "test": "src/components/course/panels/network/yourCase.test.js",
+     "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. "
+    }
+   }
+  }
+ }
+}

@@ -5,10 +5,11 @@ import {
 } from 'recharts';
 import { fightExplorer } from './networkLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { TypedNetworkView } from './TypedNetworkFields';
 
 // Fight explorer, the Expert tier. WHAT THE SOLVE HIDES.
 //
-// Seven modes. The node that goes flat and is pinned, the reported residual
+// Eight modes, the eighth a network the learner types. The node that goes flat and is pinned, the reported residual
 // against the conservation gap on the same answer, the initial guess sweep and
 // the one run in it that actually solves, the second mass the stream module
 // carries and the two sign conventions under one word, the tolerance that is
@@ -40,6 +41,7 @@ const MODES = [
   ['tolerance', 'A tolerance that is not in the units its name gives'],
   ['failure', 'Every failure comes back ok, and the message prints zero'],
   ['cusp', 'A branch at the cusp of its own relation'],
+  ['typed', 'Your network, typed, and what its solve hides'],
 ];
 
 const AXIS = { fill: '#94a3b8', fontSize: 11 };
@@ -1064,6 +1066,7 @@ const FightExplorer = ({ initialMode = 'residual' }) => {
         {mode === 'tolerance' && <Tolerance />}
         {mode === 'failure' && <Failure />}
         {mode === 'cusp' && <Cusp />}
+        {mode === 'typed' && <TypedNetworkView advanced={true} />}
       </div>
     </PanelShell>
   );
