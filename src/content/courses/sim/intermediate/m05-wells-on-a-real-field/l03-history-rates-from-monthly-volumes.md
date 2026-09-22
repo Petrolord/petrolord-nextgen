@@ -18,7 +18,7 @@ Because months are not the same length, and a schedule that uses a constant divi
 
 Take the same 998.52 stb and divide by a mean month of 30.4375 days instead of 31. You get 32.804 stb/d, which the simulator will then apply over the 31 days that the DATES block actually spans, producing 1016.9 stb.
 
-That is 1.8 percent too much oil, in one month, from one division. Over 36 months the errors do not cancel, because they follow the calendar rather than anything random: every 31-day month is over-produced and every 30-day month is under-produced, and February is over-produced by nearly ten percent.
+That is 1.8 percent too much oil, in one month, from one division. Over 36 months the errors do not cancel, because they follow the calendar rather than anything random: every 31-day month is over-produced and every 30-day month is under-produced, and a 28-day February, at 28 over 30.4375 days, is under-produced by 8.01 percent.
 
 ## The check
 
