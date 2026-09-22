@@ -3,6 +3,16 @@
 // RC5 truth digest, which was derived by running the vendored engines over the
 // committed fixture. Panels and the learning page import THIS module.
 //
+// The committed Ekene deck (regional mean 1570.026311 m, contact 1560 m, the
+// EK6-ST side-track) is the TEACHING case: the panels open on it and the
+// lessons work it. Since W5b (2026-09) each tier's capstone reads a deck
+// REBUILT at a setting of its own (a regional mean, a contact, a side-track,
+// a booking target, a fluid), stated in the brief and typed into the panels.
+// specAt() rebuilds the deck the way the fixture generator built the teaching
+// one (tools/ekene-dynamic/generate.mjs, the same central engines), and
+// simLab.test.js pins specAt() at the teaching setting to the committed spec
+// byte for byte. Nothing here carries a capstone setting.
+//
 // Scope rule: this package EMITS decks and does grid/trajectory geometry. It
 // has no flow solver, so nothing here returns a simulated result and nothing
 // in the course grades one.
@@ -23,6 +33,9 @@ import { connectionsFromPath, cellAtPoint, cellCenterXY } from '@petrolord/engin
 import { composeDeck, validateSpec } from '@petrolord/engines/engines/sim/composeDeck.js';
 import { referenceSpec } from '@petrolord/engines/engines/sim/referenceSpec.js';
 import { daysBetween } from '@petrolord/engines/engines/sim/deckFormat.js';
+import { simpleKrige } from '@petrolord/engines/engines/earthmodeling/properties.js';
+import { zoneVolumes } from '@petrolord/engines/engines/earthmodeling/volumes.js';
+import { generatePvtTable } from '@petrolord/engines/engines/mbal/mbalEngine.ts';
 
 export const EKENE_SIM = ekeneSim;
 export const FIELD = ekeneField;
@@ -272,4 +285,184 @@ export function validationCases() {
 export function validateMutated(mutate) {
   const next = mutate(JSON.parse(JSON.stringify(SPEC)));
   return validateSpec(next);
+}
+
+// ------------------------------------------------- rebuilding at a setting
+// W5b: every capstone setting runs through these, and at the teaching
+// setting each returns the committed fixture exactly (simLab.test.js).
+export const TEACHING_MEAN_M = DESIGN.regionalMean_m;
+export const TEACHING_OWC_M = FIELD.static.owc_m_tvd;
+export const BOOKED_STOIIP_STB = FIELD.static.stoiip_stb;
+
+const CONTROL = FIELD.wells.map((w) => ({ x: w.x, y: w.y, v: w.top_sand_m }));
+const TARGETS = [];
+for (let j = 1; j <= DESIGN.ny; j += 1) {
+  for (let i = 1; i <= DESIGN.nx; i += 1) TARGETS.push([(i - 1) * DESIGN.cellM, (j - 1) * DESIGN.cellM]);
+}
+
+const _tops = new Map();
+/** TOP_SAND kriged onto the cell centres at a regional mean, in METRES. */
+export function krigedTopsM(mean = TEACHING_MEAN_M) {
+  const key = Number(mean);
+  if (!_tops.has(key)) _tops.set(key, simpleKrige(CONTROL, key, DESIGN.krig, TARGETS));
+  return _tops.get(key);
+}
+
+const columnMidFt = (grid, i, j) => {
+  const ifc = columnInterfaces(grid, i, j);
+  return (ifc[0] + ifc[ifc.length - 1]) / 2;
+};
+
+/**
+ * The Ekene spec rebuilt at a setting: the tops kriged at the regional mean,
+ * the EQUIL datum and contact, the well reference depths and the side-track
+ * re-intersected on the new structure. Nothing else in the deck moves.
+ */
+export function specAt({ regionalMean = TEACHING_MEAN_M, owcM = TEACHING_OWC_M, heel = DESIGN.deviated.from, toe = DESIGN.deviated.to } = {}) {
+  const grid = { ...SPEC.grid, tops: krigedTopsM(regionalMean).map((t) => t * M_TO_FT) };
+  const toDeckFt = (v) => (v + DESIGN.originOffsetM) * M_TO_FT;
+  const a = cellOfFieldXY(heel.x, heel.y);
+  const b = cellOfFieldXY(toe.x, toe.y);
+  const devPath = [
+    { x: toDeckFt(heel.x), y: toDeckFt(heel.y), depth: columnInterfaces(grid, a.i, a.j)[0] + 0.01 },
+    { x: toDeckFt(toe.x), y: toDeckFt(toe.y), depth: columnInterfaces(grid, b.i, b.j)[grid.nz] - 0.01 },
+  ];
+  const wells = SPEC.wells.map((w) => (w.connections
+    ? { ...w, connections: connectionsFromPath(devPath, grid), refDepth: columnMidFt(grid, a.i, a.j) }
+    : { ...w, refDepth: columnMidFt(grid, w.i, w.j) }));
+  return {
+    ...SPEC,
+    grid,
+    equil: { ...SPEC.equil, datumDepth: gridDepthRange(grid).topMean, owc: owcM * M_TO_FT },
+    wells,
+  };
+}
+
+/** The deck text at a setting (the teaching deck when no setting is given). */
+export function deckTextAt(setting) {
+  return setting ? composeDeck(specAt(setting)) : deckText();
+}
+
+/**
+ * The structure and the volumes at a setting: the column tops, the crest,
+ * the deepest top and the datum, a top read at any column, and the
+ * cell-centre oil volume through the same zoneVolumes the NG5 booking used.
+ */
+export function structureAt({ regionalMean = TEACHING_MEAN_M, owcM = TEACHING_OWC_M } = {}) {
+  const topsM = krigedTopsM(regionalMean);
+  const grid = { ...SPEC.grid, tops: topsM.map((t) => t * M_TO_FT) };
+  const range = gridDepthRange(grid);
+  const dzM = SPEC.grid.layers.map((l) => l.dz / M_TO_FT);
+  const oilCol = topsM.map((t) => {
+    let d = t;
+    let oil = 0;
+    dzM.forEach((dz) => { if (d + dz / 2 < owcM) oil += dz; d += dz; });
+    return oil;
+  });
+  const st = FIELD.static;
+  const vol = zoneVolumes({ dx: DESIGN.cellM, dy: DESIGN.cellM, nx: DESIGN.nx, ny: DESIGN.ny }, oilCol, oilCol.map(() => 'SAND'), {
+    ntg: oilCol.map(() => 1),
+    phi: oilCol.map(() => st.phi),
+    sw: oilCol.map(() => st.swi),
+  }).SAND;
+  const stoiip = (vol.hcpv_m3 / st.boi_rb_stb) * st.stb_per_m3;
+  // the alternative convention, the column clipped at the contact
+  const netM = GOLDEN.grid.net_pay_ft / M_TO_FT;
+  const taper = topsM.map((t) => Math.max(0, Math.min(netM, owcM - t)));
+  const volT = zoneVolumes({ dx: DESIGN.cellM, dy: DESIGN.cellM, nx: DESIGN.nx, ny: DESIGN.ny }, taper, taper.map(() => 'SAND'), {
+    ntg: taper.map(() => 1),
+    phi: taper.map(() => st.phi),
+    sw: taper.map(() => st.swi),
+  }).SAND;
+  const stoiipTapered = (volT.hcpv_m3 / st.boi_rb_stb) * st.stb_per_m3;
+  const topAt = (i, j) => columnTopDepth(grid, i, j);
+  return {
+    regionalMean: Number(regionalMean),
+    owcM: Number(owcM),
+    topsFt: grid.tops,
+    crestFt: range.topMin,
+    deepestFt: range.topMax,
+    datumFt: range.topMean,
+    topAt,
+    columnsAboveOwc: topsM.filter((t) => t < owcM).length,
+    oilCells: oilCol.filter((t) => t > 0).length,
+    stoiipStb: stoiip,
+    gapPct: (stoiip / BOOKED_STOIIP_STB - 1) * 100,
+    tapered: {
+      oilCells: taper.filter((t) => t > 0).length,
+      stoiipStb: stoiipTapered,
+      gapPct: (stoiipTapered / BOOKED_STOIIP_STB - 1) * 100,
+    },
+    wellTops: GOLDEN.grid.well_tops.map((r) => ({ well: r.well, i: r.i, j: r.j, deck_top_m: topAt(r.i, r.j) / M_TO_FT })),
+  };
+}
+
+/**
+ * Bisect the regional mean until the cell-centre oil volume at a contact
+ * crosses a booking target. The volume is a step function of the mean (a
+ * layer is oil or water by its centre), so the answer is the mean at which
+ * it crosses the target; `tolM` is how finely the crossing is located.
+ */
+export function calibrateRegionalMean(targetStb, { owcM = TEACHING_OWC_M, lo = 1540, hi = 1600, tolM = 1e-7 } = {}) {
+  let a = lo;
+  let b = hi;
+  const f = (m) => structureAt({ regionalMean: m, owcM }).stoiipStb - targetStb;
+  if (!(f(a) > 0 && f(b) < 0)) throw new Error('the target is not bracketed by the search interval');
+  while (b - a > tolM) {
+    const m = (a + b) / 2;
+    if (f(m) > 0) a = m; else b = m;
+  }
+  return (a + b) / 2;
+}
+
+/** Oil the history carries between two period dates (inclusive), rate times days. */
+export function historyOilBetween(fromIso, toIso) {
+  const periods = historyPeriods();
+  return periods.reduce((s, p, idx) => {
+    if (p.date < fromIso || p.date > toIso) return s;
+    const next = periods[idx + 1];
+    const days = daysBetween(p.date, next ? next.date : SPEC.schedule.history.endDate);
+    return s + p.prod.reduce((t, r) => t + r.orat * days, 0);
+  }, 0);
+}
+
+/** Standing's correlation (the central PVT path) for a stated oil. */
+export function correlatedOil({ api, gasSg, tempF, pbPsia, piPsia, rsiScfStb }) {
+  const t = generatePvtTable({
+    fluid_system: 'oil',
+    oil_gravity_api: api,
+    gas_specific_gravity: gasSg,
+    reservoir_temperature_f: tempF,
+    bubble_point_psia: pbPsia,
+    initial_pressure_psia: piPsia,
+    pressure_min_psia: pbPsia,
+    pressure_max_psia: piPsia,
+    n_steps: 2,
+  });
+  const atPi = t.rows[t.rows.length - 1];
+  const atPb = t.rows[0];
+  return { boAtPi: atPi.Bo, rsAtPb: atPb.Rs, rsGapPct: (atPb.Rs / rsiScfStb - 1) * 100 };
+}
+
+/**
+ * The seven broken specifications, built from the spec at a setting the way
+ * the fixture built them from the teaching spec (each isolates one rule),
+ * and what the validator says of each.
+ */
+export function validationCasesAt(setting = {}) {
+  const spec = specAt(setting);
+  const withOneWellChanged = (patch) => ({ ...spec, wells: spec.wells.map((w, idx) => (idx === 0 ? { ...w, ...patch } : w)) });
+  const periods = spec.schedule.history.periods;
+  return [
+    ['no title', { ...spec, title: '' }],
+    ['no start date', { ...spec, startDate: '' }],
+    ['layer count disagrees with nz', { ...spec, grid: { ...spec.grid, layers: spec.grid.layers.slice(0, spec.grid.nz - 1) } }],
+    ['well outside the grid', withOneWellChanged({ i: spec.grid.nx + 1 })],
+    ['completion below the deepest layer', withOneWellChanged({ k2: spec.grid.nz + 1 })],
+    ['single-node PVT', { ...spec, pvt: { ...spec.pvt, pvtoRecords: [spec.pvt.pvtoRecords[0]] } }],
+    ['history starting off the deck start date', {
+      ...spec,
+      schedule: { ...spec.schedule, history: { ...spec.schedule.history, periods: [{ ...periods[0], date: '2024-01-01' }] } },
+    }],
+  ].map(([label, broken]) => ({ case: label, errors: validateSpec(broken).errors }));
 }

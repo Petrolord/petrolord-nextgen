@@ -438,3 +438,4 @@ A printed number counts as a leak when typing it would pass: it lies within the 
 
 | Course | Tiers | Case (what the brief states) |
 |---|---|---|
+| sim | all | the Ekene deck rebuilt at a setting. beginner: regional mean 1566.5 m; the tops of columns (24, 6), (6, 26), (18, 3) and of Ekene-2's column, the EQUIL datum, and the columns above the contact. intermediate: mean 1573.2 m and contact 1562 m; deck STOIIP, gap, oil cells, the Ekene-2 top, and Standing's correlation on a 35 API / 0.80 / 195 F / 2200 psia / 3400 psia / 450 scf/stb oil. advanced: side-track toe (1500, 1300), calibration to a revised booking of 11500000 stb, the 2024 history periods, W1's validator message count re-computed on the calibrated deck, and the datum at the calibrated mean. `simLab.specAt()` rebuilds the deck the way the fixture generator built it, and at the teaching setting it equals the committed spec byte for byte. |
