@@ -1,0 +1,982 @@
+{
+ "course": "fluid",
+ "migration": "20261029_w6_fluid.sql",
+ "case": {
+  "name": "ISEKI-2",
+  "markers": [
+   "ISEKI-2",
+   "ISEKI"
+  ],
+  "summary": "A 42.3 API oil at 206 F with a CCE bubble point of 2945.65 psia, a two-stage separator test (874 scf/stb, 1.503 rb/stb) and an eleven-entry composition with C7+ MW 207, SG 0.8386. Beginner works its black-oil correlations, intermediate reads its laboratory report against the untuned Peng-Robinson model, advanced flashes and tunes that model."
+ },
+ "literals_ok": {
+  "7": "the component label C7+ (heptanes plus)",
+  "1": "the component label C1 (methane)"
+ },
+ "tiers": {
+  "beginner": [
+   {
+    "ord": 4,
+    "replaces": "24a3e4f2fb28c2cbc4f35e170cc03899",
+    "prompt": "The ISEKI-2 appraisal summary gives {{in_api}} API, a separator gas gravity of {{in_gg}}, a reservoir temperature of {{in_t}} F and {{in_rs}} scf/stb of solution gas. What bubble point does Standing's correlation return?",
+    "correct": "About {{b_pb_st}} psia, with the temperature entered in degrees Fahrenheit as the form requires",
+    "distractors": [
+     "About {{b_pb_st_rankine}} psia, with the temperature entered in degrees Rankine as an absolute scale",
+     "About {{b_pb_vb}} psia, because Standing switches to a separate coefficient set for oils this light",
+     "About {{b_pb_gl}} psia, once the gas gravity is corrected back to separator conditions first"
+    ],
+    "why_wrong": [
+     "Standing's form takes degrees Fahrenheit; Rankine inflates the exponent term.",
+     "That is Vasquez-Beggs, which is the correlation that splits its coefficients by gravity.",
+     "That is Glaso's figure; Standing carries no separator correction."
+    ],
+    "explanation": "Standing's form, with temperature in F, gives {{b_pb_st}} psia on these inputs. Vasquez-Beggs and Glaso give {{b_pb_vb}} and {{b_pb_gl}} psia on the same oil.",
+    "rests_on": [
+     "b_pb_st",
+     "b_pb_st_rankine",
+     "b_pb_vb",
+     "b_pb_gl"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 40,
+    "replaces": "0f1071eeb1e1304ad4e3ee213b2496b4",
+    "prompt": "On ISEKI-2 ({{in_api}} API, gas gravity {{in_gg}}, {{in_t}} F, {{in_rs}} scf/stb), Standing, Vasquez-Beggs and Glaso give {{b_pb_st}}, {{b_pb_vb}} and {{b_pb_gl}} psia. How should that spread be reported?",
+    "correct": "As {{b_pb_spread}} psia, about twelve percent of the middle value, quoted as the uncertainty of a correlated bubble point",
+    "distractors": [
+     "As the average of the three, which cancels the regional bias of each fit and so needs no separate uncertainty",
+     "As {{b_pb_spread_pct_of_min}} percent of the lowest value, since the smallest estimate is the conservative base for a study",
+     "Not at all, since Glaso is a screening correlation and dropping it leaves two that agree closely enough to quote"
+    ],
+    "why_wrong": [
+     "Averaging three fits to three populations is a fit to nothing and hides the disagreement.",
+     "The lesson states the spread against the middle value; the lowest is not a conservative base.",
+     "Standing and Vasquez-Beggs still differ by hundreds of psia; the spread is the information."
+    ],
+    "explanation": "The spread from {{b_pb_st}} to {{b_pb_gl}} psia is {{b_pb_spread}} psia, about twelve percent of the middle value {{b_pb_vb}} psia, and that is a fair statement of how well a correlation knows this bubble point.",
+    "rests_on": [
+     "b_pb_spread",
+     "b_pb_spread_pct",
+     "b_pb_spread_pct_of_min"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 8,
+    "replaces": "1bf73a6cb86baf13f9e8b3d17ec27c8c",
+    "prompt": "A constant composition expansion on ISEKI-2 gives a bubble point of {{in_pb}} psia ({{in_api}} API, gas gravity {{in_gg}}, {{in_t}} F). You want Standing's solution gas ratio to go with it. How do you run the correlation?",
+    "correct": "Feed it the measured bubble point and read Rs, {{b_rs_st_at_pb}} scf/stb, so the measurement is the input",
+    "distractors": [
+     "Feed it the initial pressure of {{in_pi}} psia as the bubble point, giving {{b_rs_st_at_pi_as_pb}} scf/stb for the oil at discovery",
+     "Feed it {{in_rs}} scf/stb and read the bubble point, since Standing's form is only published in that direction",
+     "Use Vasquez-Beggs, {{b_rs_vb_at_pb}} scf/stb, since Standing cannot be inverted"
+    ],
+    "why_wrong": [
+     "The initial pressure is not a bubble point; above Pb, Rs stays at Rsb.",
+     "Standing's Rs form is an exact algebraic rearrangement.",
+     "Standing inverts exactly; switching correlation answers a different question."
+    ],
+    "explanation": "Use the direction the measurement supports: the bubble point goes in, and Standing returns {{b_rs_st_at_pb}} scf/stb at {{in_pb}} psia.",
+    "rests_on": [
+     "b_rs_st_at_pb",
+     "b_rs_st_at_pi_as_pb",
+     "b_rs_vb_at_pb"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 38,
+    "replaces": "f13fee9a00dbb2daf5ad40b7b10443e3",
+    "prompt": "ISEKI-2's laboratory bubble point is {{in_pb}} psia, and Standing on the same summary returns {{b_pb_st}} psia, a gap of {{b_pb_st_err_pct}} percent. Which value belongs in the study?",
+    "correct": "The laboratory's, with Standing quoted beside it and labelled as a published method cross-check",
+    "distractors": [
+     "Standing's, since a correlation with a long track record corrects the scatter of a single laboratory run",
+     "The mean of the two, which splits the difference between the measured and the correlated evidence",
+     "Neither until a third correlation breaks the tie, since two disagreeing sources cannot both keep their tiers"
+    ],
+    "why_wrong": [
+     "A measurement beats a correlation fitted to somebody else's oils.",
+     "Averaging a measurement with a correlation has no provenance.",
+     "Each keeps its tier; a tier records the kind of evidence."
+    ],
+    "explanation": "Where a measurement exists it wins: the {{in_pb}} psia comes from this fluid, while {{b_pb_st}} psia is a fit to Californian oils, {{b_pb_st_err_pct}} percent off.",
+    "rests_on": [
+     "b_pb_st",
+     "b_pb_st_err_pct"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 41,
+    "replaces": "16a5261c138236cc6702e7057dc3642b",
+    "prompt": "For ISEKI-2 ({{in_api}} API, gas gravity {{in_gg}}, {{in_t}} F), Standing gives a saturated Bo of {{b_bo_st}} rb/stb at {{in_rs}} scf/stb, and the separator test measured {{in_bofb}} rb/stb. If the correlated Bo were used, what happens to the booked stock tank oil in place?",
+    "correct": "It falls by about {{b_stoiip_fall_pct}} percent, since oil in place divides reservoir barrels by Bo",
+    "distractors": [
+     "It rises by about {{b_bo_st_err_pct}} percent, because a larger Bo means each barrel came from more rock",
+     "Nothing, since Bo only enters the voidage ledger and never the volumetric booking itself",
+     "It moves by a tenth of that, since Bo errors cancel between the oil and gas terms"
+    ],
+    "why_wrong": [
+     "A larger divisor gives fewer stock tank barrels.",
+     "Oil in place divides by Bo straight through.",
+     "The error is systematic and nothing cancels it."
+    ],
+    "explanation": "Stock tank oil in place is reservoir oil volume over Bo, so a Bo {{b_bo_st_err_pct}} percent high books {{b_stoiip_fall_pct}} percent less oil.",
+    "rests_on": [
+     "b_bo_st",
+     "b_bo_st_err_pct",
+     "b_stoiip_fall_pct"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 39,
+    "replaces": "923cb66733d5737fb674b61292eb210b",
+    "prompt": "ISEKI-2 bubbles at {{in_pb}} psia with Bo {{in_bofb}} rb/stb and starts at {{in_pi}} psia. With an undersaturated compressibility of {{in_co}} per psi, what is Bo at initial pressure?",
+    "correct": "{{b_bo_pi}} rb/stb, below the bubble point value, since above it the oil is only compressed",
+    "distractors": [
+     "{{b_bo_pi_wrong_sign}} rb/stb, above it, since the extra pressure pushes more gas into solution",
+     "{{b_bo_pi_whole_p}} rb/stb, applying the compressibility across the whole initial pressure",
+     "{{in_bofb}} rb/stb, since a correlation's saturated Bo already carries the undersaturated branch"
+    ],
+    "why_wrong": [
+     "Above Pb there is no gas left to dissolve; Bo falls with pressure.",
+     "The exponent uses p minus pb, the 1255.35 psia of undersaturation.",
+     "The saturated correlations return Bob; the undersaturated branch is applied on top."
+    ],
+    "explanation": "Bo = {{in_bofb}} x exp(-{{in_co}} x {{in_undersat}}) = {{b_bo_pi}} rb/stb, a factor of {{b_bo_factor}}.",
+    "rests_on": [
+     "b_bo_pi",
+     "b_bo_factor",
+     "b_bo_pi_wrong_sign",
+     "b_bo_pi_whole_p"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 1,
+    "replaces": "028e4a597c277518a464c190f7dc8349",
+    "prompt": "Run the engine's default viscosity chain on ISEKI-2 ({{in_api}} API, {{in_t}} F, {{in_rs}} scf/stb, bubble point {{in_pb}} psia). What is the oil viscosity at the initial {{in_pi}} psia?",
+    "correct": "{{b_muo_pi}} cp: Beal gives {{b_muod}} cp dead, Beggs-Robinson takes it to {{b_muob}} cp, Vasquez-Beggs adds compression",
+    "distractors": [
+     "{{b_muob}} cp, since above the bubble point the oil keeps all its gas and so its viscosity stays flat",
+     "{{b_muod}} cp, because the dead oil figure already describes the oil at reservoir temperature",
+     "{{b_muod_60f}} cp, from a dead oil viscosity measured on the tank sample at {{in_std_t}} F"
+    ],
+    "why_wrong": [
+     "Above Pb compression thickens the oil; the table has a minimum at Pb.",
+     "Dead oil has no dissolved gas; the live oil is far thinner.",
+     "A tank sample at ambient gives a dead oil viscosity far too high."
+    ],
+    "explanation": "Three stages: Beal {{b_muod}} cp, Beggs-Robinson {{b_muob}} cp at {{in_rs}} scf/stb, Vasquez-Beggs {{b_muo_pi}} cp at {{in_pi}} psia.",
+    "rests_on": [
+     "b_muo_pi",
+     "b_muod",
+     "b_muob",
+     "b_muod_60f"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 3,
+    "replaces": "eb7d34eafcb1d6a4832fdc085d7c0e7b",
+    "prompt": "On ISEKI-2 the chain gives {{b_muod}} cp dead, {{b_muob}} cp at the bubble point and {{b_muo_pi}} cp at {{in_pi}} psia. What do those say about the two effects?",
+    "correct": "Dissolved gas cut the viscosity to {{b_muob_over_muod}} of its dead value, and compression then raised it {{b_muo_thicken_pct}} percent",
+    "distractors": [
+     "Compression thinned the oil by {{b_muo_thicken_pct}} percent, which is why the initial pressure gives the lowest viscosity",
+     "Both effects thickened the oil, dissolved gas by making it denser and compression by squeezing it",
+     "They cancel exactly, so the bubble point and initial viscosities should match"
+    ],
+    "why_wrong": [
+     "Above Pb viscosity rises with pressure; the minimum is at the bubble point.",
+     "Dissolved gas thins the oil.",
+     "The two effects differ in size and direction."
+    ],
+    "explanation": "Gas took the oil from {{b_muod}} to {{b_muob}} cp, a ratio of {{b_muob_over_muod}}; compression to {{in_pi}} psia added {{b_muo_thicken_pct}} percent.",
+    "rests_on": [
+     "b_muob_over_muod",
+     "b_muo_thicken_pct"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 37,
+    "replaces": "8d31a2e96ac4074cc5898a21d2f4980f",
+    "prompt": "ISEKI-2's separator gas has a gravity of {{in_gg}}. At {{in_pi}} psia and {{in_t}} F, what reduced state does the engine place it at on Sutton's pseudo-criticals?",
+    "correct": "A reduced pressure of {{b_ppr}} and a reduced temperature of {{b_tpr}}, from {{b_ppc}} psia and {{b_tpc}} R",
+    "distractors": [
+     "A reduced pressure of {{b_ppr}} and a reduced temperature of {{b_tpr_f}}, dividing the temperature in degrees Fahrenheit",
+     "A reduced temperature above one and a reduced pressure below one, the region where the gas behaves ideally",
+     "The same reduced state as any natural gas at this pressure, since the pseudo-criticals do not depend on gravity"
+    ],
+    "why_wrong": [
+     "Reduced temperature needs absolute temperature, F plus 459.67.",
+     "4150 over 644.220 psia is well above one.",
+     "Sutton's pseudo-criticals are functions of gas gravity."
+    ],
+    "explanation": "Sutton gives {{b_ppc}} psia and {{b_tpc}} R at gravity {{in_gg}}, so ppr = {{b_ppr}} and Tpr = {{b_tpr}}.",
+    "rests_on": [
+     "b_ppr",
+     "b_tpr",
+     "b_ppc",
+     "b_tpc",
+     "b_tpr_f"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 15,
+    "replaces": "0e79ca698c7247b854f3e95688435d8e",
+    "prompt": "At ISEKI-2's initial conditions Hall-Yarborough gives z of {{b_z_hy}} and Dranchuk-Abou-Kassem {{b_z_dak}}, a gap of {{b_z_gap_pct}} percent. What is that gap?",
+    "correct": "A lower bound on how well z is known, since both fit the same chart and share its errors",
+    "distractors": [
+     "The full uncertainty in z, so the gas volume is known to about that fraction of a percent",
+     "Evidence that one implementation is broken, since two fits to one chart should agree exactly",
+     "The error in Hall-Yarborough, since the eleven-constant fit is the accurate one everywhere"
+    ],
+    "why_wrong": [
+     "Errors in the chart and in the pseudo-criticals are common to both and unseen.",
+     "Two fits to one chart differ in functional form; a small gap is expected.",
+     "More constants follow the chart closely; they do not make the other one wrong."
+    ],
+    "explanation": "Both correlations fit the Standing-Katz chart, so their {{b_z_gap_pct}} percent gap bounds the uncertainty from below.",
+    "rests_on": [
+     "b_z_hy",
+     "b_z_dak",
+     "b_z_gap_pct"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 17,
+    "replaces": "550551ce4c42c1ba079d171f3769643e",
+    "prompt": "Using the Hall-Yarborough z of {{b_z_hy}} for ISEKI-2 gas at {{in_pi}} psia and {{in_t}} F, what are Bg and its expansion factor?",
+    "correct": "{{b_bg}} rb/scf, which is {{b_bg_exp}} standard cubic feet per reservoir barrel",
+    "distractors": [
+     "{{b_bg_ideal}} rb/scf, since z drops out of Bg once the pressure is this high",
+     "{{b_bg_exp}} rb/Mscf, the same gas volume written in the deck's own units, which are larger",
+     "{{b_bg_exp}} rb/scf, since the expansion factor and Bg are one number in two conventions"
+    ],
+    "why_wrong": [
+     "That is the ideal-gas figure with z of one; Bg is proportional to z.",
+     "In rb/Mscf Bg is a thousand times the rb/scf figure, near one.",
+     "The expansion factor is the reciprocal of Bg."
+    ],
+    "explanation": "Bg = {{in_bg_const}} z T / p = {{b_bg}} rb/scf, and one reservoir barrel holds {{b_bg_exp}} scf.",
+    "rests_on": [
+     "b_bg",
+     "b_bg_exp",
+     "b_bg_ideal"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 29,
+    "replaces": "eef550dc627c20ad4bf3fdc613c11ec3",
+    "prompt": "At {{in_pi}} psia ISEKI-2's gas viscosity is {{b_mug}} cp against an oil viscosity of {{b_muo_pi}} cp. Once pressure falls below {{in_pb}} psia and free gas passes its critical saturation, what follows?",
+    "correct": "The gas flows preferentially, about {{b_mu_ratio}} times less viscous, so the producing GOR climbs above Rs",
+    "distractors": [
+     "The gas stays behind, since its lower viscosity gives it a lower mobility through the pores",
+     "The producing GOR falls, since the released gas thins the oil and so the oil rate rises",
+     "Nothing changes at the wells until pressure halves, since gas cannot flow before that"
+    ],
+    "why_wrong": [
+     "Mobility is permeability over viscosity; low viscosity means high mobility.",
+     "Oil that has lost gas thickens, and the free gas outruns it.",
+     "Free gas flows once it exceeds its critical saturation."
+    ],
+    "explanation": "The oil is {{b_mu_ratio}} times more viscous than the gas, so free gas outruns it and the producing GOR rises above the solution gas ratio.",
+    "rests_on": [
+     "b_mug",
+     "b_mu_ratio"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 7,
+    "replaces": "95dc4244547f6eb7cd37213581437d05",
+    "prompt": "ISEKI-2's formation water carries {{in_sal}} ppm. At {{in_pi}} psia and {{in_t}} F the engine gives Bw {{b_bw}} rb/stb and a viscosity of {{b_muw_brine}} cp, against {{b_muw_fresh}} cp for fresh water. Which reading is right?",
+    "correct": "Salinity raises the viscosity, and Bw sits just above one because temperature outweighs compression",
+    "distractors": [
+     "Salinity lowers the viscosity, and Bw is below one because the pressure outweighs the temperature",
+     "Both are fixed constants for water, so the engine's figures just restate textbook values",
+     "Salinity raises Bw by the same fraction it raises viscosity, which is why Bw exceeds one"
+    ],
+    "why_wrong": [
+     "0.4339 cp is above 0.3394 cp, and Bw is above one.",
+     "The engine returns pressure and temperature dependent values.",
+     "McCain's Bw takes no salinity; the figure comes from temperature and pressure."
+    ],
+    "explanation": "Brine at {{in_sal}} ppm reads {{b_muw_brine}} cp against {{b_muw_fresh}} cp fresh, and Bw is {{b_bw}} because expansion from temperature beats compression.",
+    "rests_on": [
+     "b_bw",
+     "b_muw_brine",
+     "b_muw_fresh"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 25,
+    "replaces": "e2e0e24a89a976a9ebb3452a7eaf4109",
+    "prompt": "The ISEKI-2 data sheet quotes a bubble point of {{in_pb}} psia from the CCE, {{b_pb_st}} psia from Standing and {{b_pb_gl}} psia from Glaso. Which tier does each carry, and which may this course grade?",
+    "correct": "Measured, published method and screening; the first two are gradable and Glaso's is not",
+    "distractors": [
+     "Measured, oracle gated and published method; all three are gradable, since none is a guess",
+     "All three are published method, because each came out of the same black-oil description of the oil",
+     "Lab tuned, published method and screening; only the laboratory figure is gradable"
+    ],
+    "why_wrong": [
+     "Standing is published_method and Glaso carries the screening label.",
+     "Only the correlations are published methods; the CCE figure is measured.",
+     "A CCE measurement is measured, and published_method figures are gradable too."
+    ],
+    "explanation": "The course grades every tier except screening: the CCE figure is measured, Standing's {{b_pb_st}} psia is published method, and Glaso's {{b_pb_gl}} psia is screening.",
+    "rests_on": [
+     "b_pb_st",
+     "b_pb_gl"
+    ],
+    "lesson": "beginner/m01-where-a-number-comes-from/l02-the-provenance-ladder",
+    "answer_index": 2
+   }
+  ],
+  "intermediate": [
+   {
+    "ord": 21,
+    "replaces": "b627f8415ecef7edebc88dff0cfe0ca5",
+    "prompt": "The ISEKI-2 report prints its bubble point as {{in_pb_psig}} psig and its separator at {{in_sep_psig}} psig, on a stated base of {{in_base}} psia. What absolute pressures go into the model?",
+    "correct": "{{in_pb}} psia and {{in_sep_p}} psia, adding the laboratory's own stated base to each",
+    "distractors": [
+     "{{in_pb_psig}} psia and {{in_sep_psig}} psia, since gauge and absolute differ by less than the scatter",
+     "The printed figures plus {{in_psc}} psia, since standard pressure is the base every report uses",
+     "{{in_pb}} psia for the bubble point only, since separator pressures are always printed absolute"
+    ],
+    "why_wrong": [
+     "A 15 psi shift everywhere looks like scatter and is not.",
+     "The report states its own base; the standard pressure is a different number.",
+     "The separator is printed in psig on the same base."
+    ],
+    "explanation": "Both figures are gauge on a {{in_base}} psia base: {{in_pb_psig}} psig is {{in_pb}} psia and {{in_sep_psig}} psig is {{in_sep_p}} psia.",
+    "rests_on": [
+     "in_pb",
+     "in_sep_p"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 1,
+    "replaces": "40b16ba2bd3f25b00e89c204b45a5be1",
+    "prompt": "For ISEKI-2, Standing on the summary misses the bubble point by {{i_st_pb_err_pct}} percent and Bo by {{i_st_bo_err_pct}} percent, while the untuned model misses the stock tank gravity by {{i_api_err}} API. Where should the study take its stock tank gravity from?",
+    "correct": "The separator test's measured {{in_api}} API, since neither route beats a measurement",
+    "distractors": [
+     "The untuned model's {{i_api_u}} API, since a compositional result outranks a separator reading",
+     "Standing, since it matched Bo to {{i_st_bo_err_pct}} percent and gravity follows the Bo",
+     "The average of the model and the measurement, carrying the model's physics and the lab's level"
+    ],
+    "why_wrong": [
+     "The untuned model is -7.27 API out; a measurement beats it.",
+     "Standing does not return a stock tank gravity; it takes one as input.",
+     "Averaging a measurement with a biased model adds the bias back in."
+    ],
+    "explanation": "The stock tank gravity is a separator test measurement, {{in_api}} API. The untuned model misses it by {{i_api_err}} API, and a correlation only takes it as an input.",
+    "rests_on": [
+     "i_api_err",
+     "i_api_u",
+     "i_st_pb_err_pct",
+     "i_st_bo_err_pct"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 17,
+    "replaces": "df8768eaa0b9f6474d70cfd9d8a11113",
+    "prompt": "The ISEKI-2 differential liberation prints Bod {{in_bodb}} and Rsd {{in_rsdb}} at the bubble point and Bod {{in_bod}} and Rsd {{in_rsd}} at {{in_pdl}} psia. The separator test gives {{in_bofb}} rb/stb and {{in_rs}} scf/stb. What Bo belongs at {{in_pdl}} psia?",
+    "correct": "{{i_amyx_bo}} rb/stb, the differential value scaled by {{i_amyx_ratio}}",
+    "distractors": [
+     "{{in_bod}} rb/stb, the differential column read as printed, since it imitates depletion",
+     "{{i_amyx_bo_inverted}} rb/stb, scaling by the differential over the separator value",
+     "{{in_bofb}} rb/stb, since the separator value holds at every pressure"
+    ],
+    "why_wrong": [
+     "Differential values are referenced to residual oil and overstate Bo.",
+     "The ratio is Bofb over Bodb, the separator level over the differential one.",
+     "Bo shrinks below the bubble point as gas leaves."
+    ],
+    "explanation": "Amyx: Bo = Bod x Bofb / Bodb = {{in_bod}} x {{i_amyx_ratio}} = {{i_amyx_bo}} rb/stb, exact at the bubble point and shaped by the differential below it.",
+    "rests_on": [
+     "i_amyx_bo",
+     "i_amyx_ratio",
+     "i_amyx_bo_inverted"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 7,
+    "replaces": "1ab020de1715da9115ac6928d683753f",
+    "prompt": "With the same ISEKI-2 differential and separator data, what solution gas ratio belongs at {{in_pdl}} psia?",
+    "correct": "{{i_amyx_rs}} scf/stb, removing the liberated gas scaled by the shrinkage ratio {{i_amyx_ratio}}",
+    "distractors": [
+     "{{in_rsd}} scf/stb, the differential column read directly off the report",
+     "{{i_amyx_rs_raw}} scf/stb, subtracting the liberated gas without rescaling it",
+     "{{in_rs}} scf/stb, since the solution gas ratio holds its separator value down to the tank"
+    ],
+    "why_wrong": [
+     "Rsd is per residual barrel and overstates Rs.",
+     "The liberated gas must be rescaled by Bofb over Bodb.",
+     "Below the bubble point Rs falls as gas leaves the oil."
+    ],
+    "explanation": "Rs = Rsfb minus (Rsdb minus Rsd) x Bofb/Bodb = {{in_rs}} minus ({{in_rsdb}} minus {{in_rsd}}) x {{i_amyx_ratio}} = {{i_amyx_rs}} scf/stb.",
+    "rests_on": [
+     "i_amyx_rs",
+     "i_amyx_rs_raw",
+     "i_amyx_ratio"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 26,
+    "replaces": "e1f7be6ad1df0e81f6376de24e8904de",
+    "prompt": "ISEKI-2's wellstream carries methane at {{in_c1}} and C7+ at {{in_c7}} by mole. What kind of reservoir fluid is it, before any other number is read?",
+    "correct": "A black oil, with a large heavy fraction and a moderate methane fraction",
+    "distractors": [
+     "A gas condensate, since methane is the largest single entry in the analysis",
+     "A volatile oil, since the methane fraction is larger than the heavy fraction",
+     "A dry gas once the non-hydrocarbons are removed from the analysis"
+    ],
+    "why_wrong": [
+     "A condensate has methane above about 0.7 and C7+ below about 0.05.",
+     "A volatile oil has methane near 0.6 and C7+ near 0.1.",
+     "A third of the moles are C7+; nothing about this is a gas."
+    ],
+    "explanation": "Methane at {{in_c1}} with C7+ at {{in_c7}} is the black oil signature: a large heavy fraction and a moderate methane fraction.",
+    "rests_on": [
+     "in_c1",
+     "in_c7"
+    ],
+    "lesson": "intermediate/m02-the-good-oil-report/l02-the-composition",
+    "answer_index": 0
+   },
+   {
+    "ord": 42,
+    "replaces": "24740ac817d7c372f5e0cdb8252f0345",
+    "prompt": "Using library molecular weights and {{in_mw}} for the plus fraction, what share of ISEKI-2's mass does its {{in_c7}} mole fraction of C7+ carry?",
+    "correct": "About {{i_c7_mass}}, since the whole fluid's apparent molecular weight is only {{i_mbar}}",
+    "distractors": [
+     "About {{in_c7}}, since mole and mass fractions agree for a fluid that sums to one",
+     "About nine tenths, since per mole the plus fraction outweighs everything else by an order of magnitude",
+     "About half, since the heavy fraction and the methane carry similar numbers of moles"
+    ],
+    "why_wrong": [
+     "Mole fractions weight each molecule equally; mass weights by molecular weight.",
+     "The C7+ is about thirteen times methane per mole and the lights are not all methane; the share is 0.7757.",
+     "Moles are not mass; C7+ is heavier per mole by an order of magnitude."
+    ],
+    "explanation": "The mixture weighs {{i_mbar}} per mole, of which {{in_c7}} x {{in_mw}} is C7+, a mass share of {{i_c7_mass}}.",
+    "rests_on": [
+     "i_c7_mass",
+     "i_mbar"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 34,
+    "replaces": "2cfa3dfda45aa94d93d5362a2e33d957",
+    "prompt": "The ISEKI-2 C7+ has MW {{in_mw}} and SG {{in_sg}}. What does the engine's default characterization chain give for it?",
+    "correct": "Tb {{i_tb}} R from Soreide, then Tc {{i_tc}} R and Pc {{i_pc}} psia, then an acentric factor of {{i_omega}}",
+    "distractors": [
+     "The same boiling point and criticals with an acentric factor of {{i_omega_edm}} from Edmister's method",
+     "Tb {{i_tb_f}} R, Tc {{i_tc}} R and Pc {{i_pc}} psia, with the acentric factor taken from the MW alone",
+     "No criticals, since a plus fraction has none and the equation runs on MW and SG directly"
+    ],
+    "why_wrong": [
+     "The engine's default acentric factor is Lee-Kesler; Edmister is the alternative.",
+     "515.0 is the boiling point in F; the chain works in Rankine and omega comes from Tb and the criticals.",
+     "The equation of state needs criticals for every component; they are manufactured."
+    ],
+    "explanation": "Soreide gives {{i_tb}} R, Kesler-Lee gives {{i_tc}} R and {{i_pc}} psia, and Lee-Kesler gives {{i_omega}} (Edmister would give {{i_omega_edm}}).",
+    "rests_on": [
+     "i_tb",
+     "i_tc",
+     "i_pc",
+     "i_omega",
+     "i_omega_edm"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 2,
+    "replaces": "3e3cee6d8917c42a563136daeb7e1f43",
+    "prompt": "What Watson K does ISEKI-2's C7+ come out at, from its characterized boiling point of {{i_tb}} R and SG {{in_sg}}, and what does it say?",
+    "correct": "{{i_watson}}, an ordinary slightly naphthenic heavy end consistent with its two measurements",
+    "distractors": [
+     "{{i_watson_sg_squared}}, a strongly paraffinic cut, which would flag the gravity as too low",
+     "{{i_watson}}, an aromatic heavy end that the volume shift then has to correct",
+     "It cannot be computed without a measured boiling point, so the check waits for the lab"
+    ],
+    "why_wrong": [
+     "Watson K divides the cube root of Tb by SG once.",
+     "About 12.5 is paraffinic and 10 aromatic; this sits near naphthenic.",
+     "The correlated Tb is enough for the sanity check."
+    ],
+    "explanation": "K = cube root of {{i_tb}} over {{in_sg}} = {{i_watson}}, a normal, slightly naphthenic crude heavy end.",
+    "rests_on": [
+     "i_watson",
+     "i_watson_sg_squared"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 15,
+    "replaces": "8f0951be13b63ec5a8afc3f33faf8449",
+    "prompt": "Untuned, the ISEKI-2 model gives a stock tank gravity of {{i_api_u}} API against the measured {{in_api}}, with a C7+ volume shift of {{i_shift}}. What does that {{i_api_err}} API say about the phase split?",
+    "correct": "Nothing: the shift cancels in the fugacity ratio, so the split stands and only the density is off",
+    "distractors": [
+     "That the saturation pressure is off by the same fraction, since both biases come from the heavy end",
+     "That the flash left too much of the C7+ in the gas phase, which is what makes the tank oil so heavy",
+     "That the composition was recombined wrongly, since one parameter cannot cause an error that large on its own"
+    ],
+    "why_wrong": [
+     "The volume shift cannot move the phase boundary.",
+     "A heavier tank oil comes from a denser liquid.",
+     "The bias is a documented consequence of the volume shift correlation on one pseudo-component."
+    ],
+    "explanation": "The volume translation changes every fugacity in a phase by one factor, so K values and the split are untouched; the {{i_api_err}} API is a density error.",
+    "rests_on": [
+     "i_api_u",
+     "i_api_err",
+     "i_shift"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 20,
+    "replaces": "9adac39e2184cde692f889b23a5a9842",
+    "prompt": "The untuned ISEKI-2 model puts the saturation pressure at {{i_psat_u}} psia at {{in_t}} F. How far is it from the laboratory, and in which direction?",
+    "correct": "{{i_psat_err_pct}} percent above {{in_pb}} psia, the usual direction for an oil on one pseudo-component",
+    "distractors": [
+     "{{i_psat_err_pct_psig}} percent above, measured against the report's printed {{in_pb_psig}} figure",
+     "{{i_psat_err_pct}} percent below, since a single lumped pseudo-component saturates an oil low",
+     "Within the bisection tolerance of the saturation search, so the two agree once rounding is allowed for"
+    ],
+    "why_wrong": [
+     "Compare in absolute pressure; the printed figure is psig.",
+     "The model is above the measurement, and heavy oils saturate high.",
+     "The bisection tolerance is a fraction of a psia; the gap is far larger."
+    ],
+    "explanation": "{{i_psat_u}} against {{in_pb}} psia is {{i_psat_err_pct}} percent high; heavy oils on a single pseudo-component saturate high.",
+    "rests_on": [
+     "i_psat_u",
+     "i_psat_err_pct",
+     "i_psat_err_pct_psig"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 5,
+    "replaces": "3e1a96fdffd635b77fae52b9dd2d6348",
+    "prompt": "Asked for Bo at ISEKI-2's stated reservoir conditions, {{in_t}} F and {{in_pb}} psia, the untuned model returns nothing. Why?",
+    "correct": "Its own saturation pressure is {{i_psat_u}} psia, so at {{in_pb}} psia it sees two phases and no single oil",
+    "distractors": [
+     "The fluid there is above the model's saturation pressure, so no liquid phase exists to measure",
+     "The separator stage at {{in_sep_p}} psia did not converge, so no stock tank volume exists",
+     "The Bo fell outside the correlation's validity range, so the engine suppressed the figure and raised a warning"
+    ],
+    "why_wrong": [
+     "The stated pressure is below the model's saturation pressure.",
+     "The separator train returns a full stock tank result on this fluid.",
+     "Compositional Bo has no correlation range; the null is a two-phase refusal."
+    ],
+    "explanation": "The model's saturation pressure is {{i_psat_u}} psia, above the stated {{in_pb}} psia, so the fluid is two phase there and Bo is undefined.",
+    "rests_on": [
+     "i_psat_u",
+     "i_res_phases",
+     "i_bo_at_lab_pb"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 33,
+    "replaces": "60911f7bd6a2f1a6f19f2344b732cabf",
+    "prompt": "To compare Bo anyway on ISEKI-2, the untuned model is read at its own saturation pressure and gives {{i_bo_at_model_psat}} rb/stb against the measured {{in_bofb}}. What must the report say?",
+    "correct": "That each side is read at its own bubble point, {{i_psat_u}} psia for the model and {{in_pb}} psia for the laboratory",
+    "distractors": [
+     "That the model's Bo at {{in_pb}} psia is {{i_bo_at_model_psat}} rb/stb, since the two bubble points are close enough",
+     "Nothing more, since a Bo read at any pressure above the bubble point is the same number",
+     "That the model under-predicts Bo because of its single pseudo-component, and that is the whole gap"
+    ],
+    "why_wrong": [
+     "The model gives no Bo at 2894.65 psia; relabelling the basis hides that.",
+     "Above the bubble point Bo falls with pressure.",
+     "The comparison basis must be stated before any cause is claimed."
+    ],
+    "explanation": "Comparing at the model's {{i_psat_u}} psia is a different comparison from the laboratory's at {{in_pb}} psia, and the report has to say so.",
+    "rests_on": [
+     "i_bo_at_model_psat",
+     "i_psat_u"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 37,
+    "replaces": "29529d3aa26516127588a343839a5dae",
+    "prompt": "The untuned ISEKI-2 model, run through the two-stage test at separator pressures of {{i_sw_p0}}, {{i_sw_p1}}, {{i_sw_p2}} and {{i_sw_p3}} psia, gives total GORs of {{i_sw_gor0}}, {{i_sw_gor1}}, {{i_sw_gor2}} and {{i_sw_gor3}} scf/stb. Which of the four is the optimum?",
+    "correct": "{{i_sw_p1}} psia, where the least gas and the most stock tank liquid come from one fluid",
+    "distractors": [
+     "{{i_sw_p3}} psia, since the highest separator pressure keeps the most material in the liquid phase",
+     "{{i_sw_p0}} psia, because releasing the gas early at low pressure leaves the lightest tank oil",
+     "None, since total GOR is a property of the fluid and these differences are only laboratory scatter"
+    ],
+    "why_wrong": [
+     "High separator pressure loses the intermediates in the tank.",
+     "Too low a pressure releases intermediates at the first stage.",
+     "GOR depends on the separator train; the optimum is real."
+    ],
+    "explanation": "Total GOR is lowest, {{i_sw_gor1}} scf/stb, at {{i_sw_p1}} psia; both lower and higher separator pressures give more gas and less tank liquid.",
+    "rests_on": [
+     "i_sw_best_p",
+     "i_sw_gor1",
+     "i_sw_gor0",
+     "i_sw_gor3"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 27,
+    "replaces": "858db67499e69831639af39cdd0f019b",
+    "prompt": "Flashing ISEKI-2 from its bubble point straight to the tank gives the model a GOR of {{i_gor_single}} scf/stb, against {{i_gor_u}} scf/stb through the {{in_sep_p}} psia separator and then the tank. What does the gap show?",
+    "correct": "A single flash sends more intermediates to gas, so the staged train keeps more tank liquid",
+    "distractors": [
+     "The staged figure is missing the stock tank gas, which the single flash to the tank counts in full",
+     "The two should agree, so the gap is convergence noise in the separator flash",
+     "The single flash is the laboratory's own separator procedure, so its figure is the one to compare"
+    ],
+    "why_wrong": [
+     "The engine appends the tank stage, so the staged figure includes the tank gas.",
+     "The two processes differ physically; staging is why separators exist.",
+     "The laboratory ran a separator and then a tank."
+    ],
+    "explanation": "Staging holds intermediates in the liquid: {{i_gor_u}} scf/stb staged against {{i_gor_single}} scf/stb in one flash.",
+    "rests_on": [
+     "i_gor_single",
+     "i_gor_u"
+    ],
+    "answer_index": 3
+   }
+  ],
+  "advanced": [
+   {
+    "ord": 11,
+    "replaces": "8ce8e005aad3a4b9abf458d2cbb1d484",
+    "prompt": "ISEKI-2's C7+ pseudo-component characterizes to an acentric factor of {{i_omega}}. Which Peng-Robinson kappa does the engine use for it?",
+    "correct": "{{a_kappa78}}, from the later cubic branch, since the acentric factor is past the {{in_pr_switch}} switch",
+    "distractors": [
+     "{{a_kappa76}}, from the original quadratic, which the engine applies to every component alike",
+     "{{a_kappa78}} for the liquid and {{a_kappa76}} for the vapour, since kappa follows the phase",
+     "None, since a pseudo-component takes its alpha function from its volume shift instead of its acentric factor"
+    ],
+    "why_wrong": [
+     "Components past the switch take the 1978 cubic.",
+     "Kappa is a component property; it does not change with phase.",
+     "The volume shift does not enter the alpha function."
+    ],
+    "explanation": "At an acentric factor of {{i_omega}} the cubic branch applies and kappa is {{a_kappa78}}; the original quadratic would give {{a_kappa76}}.",
+    "rests_on": [
+     "a_kappa78",
+     "a_kappa76"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 42,
+    "replaces": "c4a073a1df6365d5189248e845224d1b",
+    "prompt": "At {{in_pflash}} psia and {{in_t}} F the untuned ISEKI-2 model splits with methane at {{a_y_c1_flash}} in the vapour and {{a_x_c1_flash}} in the liquid. What is methane's K value, and what sets it?",
+    "correct": "{{a_k_c1_flash}}, the ratio of its liquid to vapour fugacity coefficients at equal fugacities",
+    "distractors": [
+     "{{a_wilson_c1}}, the Wilson estimate, which the flash keeps as its converged answer",
+     "One, since equilibrium means methane has the same concentration in each phase",
+     "{{a_k_c1_flash}}, set by the volume shift, which moves each phase's methane"
+    ],
+    "why_wrong": [
+     "Wilson is only the starting estimate for the iteration.",
+     "Equal fugacity is equal escaping tendency; concentrations differ.",
+     "The volume shift cancels in the K values."
+    ],
+    "explanation": "K = y/x = {{a_y_c1_flash}}/{{a_x_c1_flash}} = {{a_k_c1_flash}}, which is the ratio of the fugacity coefficients; Wilson's starting guess was {{a_wilson_c1}}.",
+    "rests_on": [
+     "a_k_c1_flash",
+     "a_y_c1_flash",
+     "a_x_c1_flash",
+     "a_wilson_c1"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 39,
+    "replaces": "459c2906a5eedb7a66cfe3adacbb1efc",
+    "prompt": "The same ISEKI-2 flash at {{in_pflash}} psia returns a vapour fraction beta of {{a_beta_flash}}. How should that be read?",
+    "correct": "{{a_beta_flash}} of the feed moles are vapour and {{a_liq_frac_flash}} liquid, from the monotonic Rachford-Rice root",
+    "distractors": [
+     "{{a_beta_flash}} of the reservoir volume is gas, since beta is a volume split taken at these reservoir conditions",
+     "It is the stability test's starting guess for the split, which the flash discards once it converges",
+     "{{a_liq_frac_flash}} of the feed is vapour, since beta counts the liquid moles in a flash"
+    ],
+    "why_wrong": [
+     "Beta is a mole fraction of the feed.",
+     "The flash solves for beta; the stability test supplies starting K values.",
+     "Beta is the vapour mole fraction."
+    ],
+    "explanation": "Rachford-Rice solves for the vapour mole fraction: {{a_beta_flash}} of the feed is vapour, {{a_liq_frac_flash}} liquid.",
+    "rests_on": [
+     "a_beta_flash",
+     "a_liq_frac_flash"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 14,
+    "replaces": "03d340c8232f1f196b502f2d8bdbb9cb",
+    "prompt": "At {{in_p3500}} psia and {{in_t}} F the untuned ISEKI-2 model reports one phase. With its saturation pressure at {{i_psat_u}} psia, which reading is right?",
+    "correct": "The feed is a stable liquid above its bubble point, so no trial phase lowers the Gibbs energy",
+    "distractors": [
+     "The flash failed to converge at this pressure, which the engine then reports as one phase by default",
+     "The feed is a vapour, because above the saturation pressure the heavy end dissolves into the gas phase",
+     "The stability test ran only from the liquid side, which always reports a single phase for an oil"
+    ],
+    "why_wrong": [
+     "Above the bubble point the stability test finds the feed stable.",
+     "The boundary is a bubble point, so above it the feed is liquid.",
+     "The engine tests from both sides."
+    ],
+    "explanation": "{{in_p3500}} psia is above the model's {{i_psat_u}} psia bubble point, so the stability test finds the liquid stable and the flash returns one phase.",
+    "rests_on": [
+     "a_phases_3500",
+     "i_psat_u"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 5,
+    "replaces": "d6995c1e703eec7335b4a006b6429e5a",
+    "prompt": "The untuned model classifies ISEKI-2's boundary at {{in_t}} F as a {{i_psat_kind}} point at {{i_psat_u}} psia. Where does that put the reservoir temperature on the phase envelope?",
+    "correct": "Left of the critical point, so depletion crosses the bubble branch and gas leaves the oil",
+    "distractors": [
+     "Between the critical point and the cricondentherm, so liquid drops out in the reservoir on depletion",
+     "Right of the cricondentherm, so the fluid stays a single phase at every pressure on the way down",
+     "On the critical point itself, where a bubble point and a dew point coincide"
+    ],
+    "why_wrong": [
+     "That region gives a dew point.",
+     "That region has no boundary at all.",
+     "The classification was a clear bubble point well away from criticality."
+    ],
+    "explanation": "A bubble point at reservoir temperature means the temperature line meets the bubble point branch, left of the critical point: an oil.",
+    "rests_on": [
+     "i_psat_kind",
+     "i_psat_u"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 3,
+    "replaces": "8c9ce0702fa591b667a6abaaec4a0d1d",
+    "prompt": "On ISEKI-2, moving the C7+ volume shift from {{a_splus0}} to {{a_shift_test}} leaves the untuned saturation pressure at {{a_psat_shift}} psia, while moving the methane interaction parameter from {{a_kc10}} to {{a_kc1_test}} raises it to {{a_psat_kc1}} psia. What does that show?",
+    "correct": "The shift cancels in the equilibrium, so a saturation pressure bias needs knobs like kC1",
+    "distractors": [
+     "The volume shift is broken at this temperature and should come out of the tuning set",
+     "Both knobs act on saturation pressure, the shift through the liquid density at the boundary",
+     "Only the interaction parameter is worth tuning, since the others leave every target unchanged"
+    ],
+    "why_wrong": [
+     "The shift works; it moves density and gravity.",
+     "The shift left the saturation pressure at 3097.8 psia.",
+     "The shift moves stock tank gravity, a target."
+    ],
+    "explanation": "A constant volume shift changes both phases' fugacities by one factor, so the boundary stays at {{a_psat_shift}} psia; the interaction parameter moves it to {{a_psat_kc1}} psia.",
+    "rests_on": [
+     "a_psat_s0",
+     "a_psat_shift",
+     "a_psat_kc1"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 17,
+    "replaces": "cad813f5385de3e23a1116037bd91aea",
+    "prompt": "The ISEKI-2 regression against all four measurements converges with fTc {{a_ftc}}, fPc {{a_fpc}}, kC1 and sPlus moved {{a_kc1_move_pct}} and {{a_splus_move_pct}} percent from their starts, with no knob on a bound. What should a reader conclude?",
+    "correct": "Both multipliers within three percent of one, no bound hit, and kC1 and sPlus each moved over a tenth",
+    "distractors": [
+     "The fit wanted to leave its bounds, since a multiplier below one means the correlation failed",
+     "The criticals were driven to their limits, so the pseudo-component is now a different substance",
+     "Nothing at all, since four knobs on four targets always fit exactly and prove nothing either way"
+    ],
+    "why_wrong": [
+     "No bound was hit, and a multiplier near one says the correlation was nearly right.",
+     "The multipliers sit within a few percent of one.",
+     "The fit trades targets and did not fit exactly; the knob moves are information."
+    ],
+    "explanation": "fTc and fPc stay within three percent of one, no bound is hit, kC1 moves {{a_kc1_move_pct}} percent and sPlus {{a_splus_move_pct}} percent: the correlated interaction parameter and volume shift carried the fit.",
+    "rests_on": [
+     "a_ftc",
+     "a_fpc",
+     "a_kc1_move_pct",
+     "a_splus_move_pct"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 12,
+    "replaces": "1b5cced025e197f928c874d05c0c5f51",
+    "prompt": "The ISEKI-2 regression moves the saturation pressure error from {{a_psat_ue}} to {{a_psat_te}} percent, GOR from {{a_totalGor_ue}} to {{a_totalGor_te}} percent, gravity from {{a_stoApi_ue}} to {{a_stoApi_te}} API and Bo from {{a_bo_ue}} to {{a_bo_te}} percent. Which is true?",
+    "correct": "Bo got worse while the other three improved, a trade the joint fit made deliberately",
+    "distractors": [
+     "Every target improved, which is what a converged joint fit on four targets guarantees",
+     "Bo improved most, because the saturation pressure now matches the laboratory",
+     "The gravity got worse, since a lighter tank oil pushes the GOR the wrong way"
+    ],
+    "why_wrong": [
+     "Bo moved from -0.20 to -0.65 percent, further out.",
+     "Bo's error grew.",
+     "The gravity error shrank from -7.27 to -1.30 API."
+    ],
+    "explanation": "Three errors shrank and Bo's grew from {{a_bo_ue}} to {{a_bo_te}} percent; the solver minimised the total and traded one row for the others.",
+    "rests_on": [
+     "a_worse",
+     "a_bo_ue",
+     "a_bo_te"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 28,
+    "replaces": "a9acd9a7f53460d8dc999d7a7c5ca4eb",
+    "prompt": "Why does ISEKI-2's tuned Bo error move from {{a_bo_ue}} to {{a_bo_te}} percent while the gravity improves?",
+    "correct": "All three share the stock tank volume, so the shift that lightens the oil moves GOR and Bo too",
+    "distractors": [
+     "The saturation pressure knobs overshot, so the tuned Bo is now read on the two-phase side of the boundary",
+     "The prior pull held Bo at its untuned value while the other three targets moved",
+     "Bo was left out of the regression, so it drifts with whatever the other knobs do"
+    ],
+    "why_wrong": [
+     "The tuned saturation pressure sits within -0.05 percent of the laboratory.",
+     "Bo did move, from -0.20 to -0.65 percent.",
+     "Bo is one of the four regression targets."
+    ],
+    "explanation": "GOR divides by the stock tank volume, gravity is its density and Bo divides by it again, so the knob that fixes the gravity moves the other two.",
+    "rests_on": [
+     "a_bo_ue",
+     "a_bo_te",
+     "a_stoApi_te"
+    ],
+    "lesson": "advanced/m04-what-tuning-costs/l01-the-ledger",
+    "answer_index": 2
+   },
+   {
+    "ord": 37,
+    "replaces": "9dc9cde65eb2e87bb0682a9569066d6e",
+    "prompt": "The ISEKI-2 fit cuts the sum of squared residuals from {{a_ssr0}} to {{a_ssr}}. Which checks does the tier require before the fit is trusted?",
+    "correct": "No knob on a bound, how far each knob moved, and a residual that fell by a factor of {{a_ssr_ratio}}",
+    "distractors": [
+     "The iteration count, the solver's name and its convergence flag, since those certify the fit",
+     "That the residual reached zero, that every target improved and that no knob moved",
+     "Convergence alone, since the bounds and the prior already guarantee a physical answer"
+    ],
+    "why_wrong": [
+     "Convergence says the solver saw no improvement, which depends on what it could see.",
+     "A joint fit trades targets and never reaches zero here.",
+     "A converged fit can still be pressed on a bound or blind to a knob."
+    ],
+    "explanation": "The tier's three checks: bounds hit (none), knob movement, and the residual fall, here {{a_ssr0}} to {{a_ssr}}, a factor of {{a_ssr_ratio}}.",
+    "rests_on": [
+     "a_ssr0",
+     "a_ssr",
+     "a_ssr_ratio"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 13,
+    "replaces": "cafc46828f556c69149b2016e6bf9d6d",
+    "prompt": "A colleague re-runs the ISEKI-2 tuning with a finite-difference step of one part in a million on every knob, and fTc, fPc and kC1 barely move from the start. What is the likely cause?",
+    "correct": "The saturation pressure is quantized by its bisection tolerance, so the tiny step sees a zero derivative",
+    "distractors": [
+     "Those knobs are well determined, so the solver rightly leaves them at their starting values",
+     "The prior pull pins any knob that would move less than two percent of its range",
+     "The volume shift absorbs the whole saturation pressure bias, leaving nothing for the others"
+    ],
+    "why_wrong": [
+     "A well-determined knob and a knob the derivative cannot see look the same; the step is the difference.",
+     "The prior is weak; it only stops drift when the data do not constrain a knob.",
+     "The volume shift cannot move the saturation pressure at all."
+    ],
+    "explanation": "A step of one part in a million moves the saturation pressure by less than one bisection quantum, so the derivative is zero and the solver never moves those knobs.",
+    "lesson": "advanced/m03-tuning/l05-the-regression",
+    "answer_index": 1
+   },
+   {
+    "ord": 26,
+    "replaces": "72f8e6925dc11770a768682d0b5fd039",
+    "prompt": "To close ISEKI-2's last {{a_stoApi_te}} API, a colleague proposes letting the regression move methane's critical temperature and the reported {{in_c1}} methane fraction. What is wrong with that?",
+    "correct": "Both are measured, so moving them leaves the model wrong about methane everywhere",
+    "distractors": [
+     "Nothing, since more knobs always make the tuned model more reliable everywhere else",
+     "Only the mole fraction is measured, so the critical temperature may move freely",
+     "It is fine inside the bounds, since the prior pull keeps any library property honest"
+    ],
+    "why_wrong": [
+     "More freedom than data fits the noise and predicts worse.",
+     "Methane's critical temperature is a measured constant.",
+     "The bounds and prior apply to the pseudo-component knobs; library properties are not knobs."
+    ],
+    "explanation": "Tuning adjusts only constructed quantities; methane's criticals and the reported composition are measurements, and a model tuned through them is wrong about methane everywhere.",
+    "lesson": "advanced/m03-tuning/l03-why-only-the-pseudo",
+    "answer_index": 0
+   },
+   {
+    "ord": 23,
+    "replaces": "7020770537262e45565186faa1f1b61a",
+    "prompt": "On the tuned ISEKI-2 model at {{in_pflash}} psia, LBC gives the liquid {{a_lbc_liq}} cp, while the black-oil chain gives {{a_bo_chain_flash}} cp at the same pressure. How may the LBC figure be used?",
+    "correct": "As a screening number, quoted with its tier and never graded, since LBC is untuned",
+    "distractors": [
+     "As a lab tuned value, since the model it came from was regressed to four measurements",
+     "As the viscosity for the mobility ratio, since a compositional route outranks a correlation",
+     "As an oracle gated check that proves the black-oil chain wrong by a factor of two"
+    ],
+    "why_wrong": [
+     "No viscosity was among the tuning targets, so the tuning says nothing about it.",
+     "A factor of two disagreement is what untuned LBC can do on an oil.",
+     "Neither figure is checked against a measurement; neither proves the other wrong."
+    ],
+    "explanation": "LBC in compositional mode is untuned and can be out by a factor of two on an oil; here it gives {{a_lbc_liq}} cp against {{a_bo_chain_flash}} cp, so it stays a screening number.",
+    "rests_on": [
+     "a_lbc_liq",
+     "a_bo_chain_flash"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 6,
+    "replaces": "9a2e8d1c56a1a812c55776b3fea36f3c",
+    "prompt": "Which one-line summary reports the tuned ISEKI-2 model honestly?",
+    "correct": "Lab tuned: saturation pressure {{a_psat_te}}, GOR {{a_totalGor_te}} and Bo {{a_bo_te}} percent (Bo worse), gravity {{a_stoApi_te}} API",
+    "distractors": [
+     "Matched to the laboratory data on every target, so any output of the tuned model may now be used freely",
+     "Tuned to within tolerance on all four targets, with the formation volume factor now reproduced exactly as measured",
+     "Oracle gated after tuning, since the regression converged with no knob pressed against a bound and a falling residual"
+    ],
+    "why_wrong": [
+     "That claim has no content and hides the target that got worse.",
+     "Bo moved to -0.65 percent, further from the measurement.",
+     "A tuned model is lab_tuned; convergence is not an independent check."
+    ],
+    "explanation": "The ledger belongs in the report: each target's tuned error, including the Bo that moved from {{a_bo_ue}} to {{a_bo_te}} percent.",
+    "rests_on": [
+     "a_psat_te",
+     "a_totalGor_te",
+     "a_stoApi_te",
+     "a_bo_te"
+    ],
+    "answer_index": 1
+   }
+  ]
+ }
+}
