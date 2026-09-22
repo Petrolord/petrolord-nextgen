@@ -302,6 +302,24 @@ W5 re-cases or strips them with the rest of section 3.
 
 Without `--wave w1`, the same state is red. The round-off dry run, which runs before W1, is unaffected.
 
+## W6 (finals one-third rule, D7), 2026-09-22
+
+Seven courses had finals that mostly restate their module questions: sim, fluid, rockphysics, reservoircalc, geomech, wellcorrelation and corrosion. Under D7, 14 questions in each of their 42-question finals become transfer items on a case that no module and no capstone of the course works. The other 28 stay. Bank items are not capstone fields, so nothing here re-keys a graded field and `audit.py` is unchanged.
+
+Source: `tools/finals-transfer/<course>/`.
+- `case.mjs` works the course's transfer case through the vendored engines and prints the figures every item uses, including each numeric distractor (a named wrong method run through the same engine).
+- `digest.json` is its committed output.
+- `items.json` holds the 42 items. Each names the slot it replaces by the published row's content hash, the digest keys or lesson its key rests on, and one line on why each distractor is wrong.
+
+`w6.py sql <course>` generates `migrations/20261029_w6_<course>.sql`. It retires the published row (`active = false`, text untouched) and inserts the new question at the same slot and the same answer_index. A retired row keeps its id, so open and submitted attempts keep grading and reviewing against what they were served. Stored scores are never recomputed. A slot holding anything else refuses.
+
+**Gates.**
+- `w6.py check` is static and runs in CI. It re-runs every case.mjs against its digest and checks figure provenance, the copy rules, length ties and the outlier rule. It also checks the rank spread of the 14 items and that each migration is byte-identical to its regeneration.
+- `w6.py validate <course>` runs on a scratch replay. It checks the published hashes, the answer-length band and key band of the final after replacement, and capstone leakage (ten tolerances, or equal at the literal's significant figures). It also checks that the case markers appear in no lesson, served question, capstone or other migration of the course, and that no item is a near duplicate of anything the course serves.
+- `w6.py gate` is the near-duplicate heuristic made a gate for these 7 courses. It is RED on production before W6 and GREEN after. Every run plants a module question over a transfer item, verbatim and lightly reworded, and refuses unless both go red.
+
+Owner script: `/root/w6-apply/apply.sh` (verify, dryrun, attempts, prod-status, apply --prod, rows), after W1.
+
 ## Regrade impact
 
 The scratch replay has 0 capstone attempts. Production held 9 at the baseline (the cleanslate record). When the lesson-leak recut was written, the 7 that existed then were all welldata/beginner. `apply.sh attempts --prod` lists them read-only.

@@ -4,6 +4,8 @@ Status: APPROVED 2026-09-21. The owner approved all seven decisions (D1 to D7) a
 
 **W1 status (2026-09-21): BUILT, migrations PENDING owner apply.** 13 files `20261024a_w1_<course>.sql` (15 re-keys, 8 tightenings, prompt copy for integrity, rodpump and seismolord) and 21 files `20261024b_w1_openbook_<course>.sql` (the D4 C label on 57 tiers: the 56 below plus seismolord intermediate, whose new zero-lag field and stated lag are printed in its lessons). Owner script `/root/w1-apply/apply.sh`, after the round-off. The D5 allowlist is empty: W1 re-keys no tier known to hold attempts. The petrophysics beginner auto-submit was already fixed in #194 (verified). Panels and lessons reach learners with the next NextGen zip. See README.md "W1". Written 2026-09-21 after the owner chose to finish the small B4/B5 items now and to cost group 3 as its own programme.
 
+**W6 status (2026-09-22): BUILT per course, migrations PENDING owner apply.** One file `20261029_w6_<course>.sql` per course replaces 14 questions in each final with transfer items on a new case (see README.md "W6"). Owner script `/root/w6-apply/apply.sh`, after W1. No attempts guard: retired rows keep their ids and stored scores are never recomputed.
+
 Sources: this folder (`README.md`, `fields.json`, `annot/<course>.json`), `docs/answer-length-audit/README.md` ("Owner decisions raised"), the panel probe output `/root/b5/probe/`, and a read-only look at the Suite files named below. Every count here is recomputed from `fields.json` on main b9e3683b9.
 
 Effort is in agent-days (d). S is up to 0.5 d, M is 0.5 to 2 d, L is over 2 d. Estimates include the gate or test that proves the change and the migration where one is needed. They exclude owner apply and upload time.

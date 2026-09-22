@@ -65,6 +65,19 @@ jobs:
         python3 tools/course-banks/check-bank-sources.py --selftest
         python3 tools/course-banks/check-bank-sources.py
 
+    # W6 (D7, the one-third rule): the transfer items in the finals of seven
+    # courses. Every figure an item prints comes from its course's case.mjs,
+    # which runs the transfer case through the vendored engines. This re-runs
+    # each case.mjs and refuses if its output differs from the committed
+    # digest, checks every item against the copy, provenance and length rules,
+    # and requires each 20261029_w6 migration to be byte-identical to its
+    # regeneration from items.json. The database gates (published hashes,
+    # length band, capstone leakage, near duplicates) run in the owner's dry run.
+    - name: W6 finals transfer items reproduce
+      run: |
+        python3 tools/finals-transfer/w6.py --selftest
+        python3 tools/finals-transfer/w6.py check
+
     # The wave kit's literal sweep carries its own negative and positive
     # controls, including the 2026-09-21 owner decisions (the m06 onward
     # preview is exempt from the forward-reach rule by role; a sign-flipped
