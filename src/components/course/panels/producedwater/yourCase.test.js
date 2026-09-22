@@ -22,6 +22,7 @@ import { gradedTolerance } from './gradedTolerance.js';
 import WaterExplorer from './WaterExplorer.jsx';
 import DeviceExplorer from './DeviceExplorer.jsx';
 import TrainExplorer from './TrainExplorer.jsx';
+import * as D2 from '../typedCaseGuard.js';
 
 const FIELDS = JSON.parse(fs.readFileSync(waveInput('producedwater', 'fields.json'), 'utf8'));
 const GRADED = L.capstoneValues();
@@ -209,6 +210,61 @@ describe('the typed view renders in every explorer', () => {
       expect(html).toContain(expected);
       expect(html).not.toMatch(/NaN/);
       expect(html).not.toMatch(/Not answered/);
+    });
+  });
+});
+
+// ---- D2 SHARED RULES (typedCaseGuard.js, owner decision D2) ----------------
+// Rule 1: each typed mode's default state, run through the function the panel
+// calls, lands on no graded answer at ten grading bands in five shiftings.
+// Rule 2: no default carries a capstone-distinguishing input. The keys are
+// FROZEN here (every typed input where the capstone case differs from the
+// default when the mode was built), so a default later moved onto a capstone
+// input fails even when its outputs do not collide yet.
+const D2_MODES = [
+  { name: 'water', typed: BEGINNER, defaults: L.TYPED_WATER_DEFAULT, run: L.typedWaterStream },
+  { name: 'device', typed: INTERMEDIATE, defaults: L.TYPED_DEVICE_DEFAULT, run: L.typedDeviceStream },
+  { name: 'train', typed: ADVANCED, defaults: L.TYPED_TRAIN_DEFAULT, run: L.typedTrainStream },
+];
+const D2_KEYS = {"water": ["bwpd", "tC", "tdsPpm", "apiGravity", "oiwPpm", "d50Micron", "sigma", "lengthM", "widthM", "depthM", "shortCircuitF", "nPlates", "plateAreaM2"], "device": ["bwpd", "tC", "tdsPpm", "apiGravity", "nLiners", "nCells", "cellVolumeM3", "cellDepthM", "gasRatio", "bubbleMicron", "filterAreaM2", "bedDepthM", "mediaMicron"], "train": ["bwpd", "tC", "tdsPpm", "apiGravity", "oiwPpm", "d50Micron", "sigma", "nPlates", "plateAreaM2", "nLiners", "filterAreaM2", "bedDepthM", "mediaMicron", "dropletMicron"]};
+const d2Leaves = (v, p = '', out = {}) => {
+  if (v !== null && typeof v === 'object') {
+    Object.entries(v).forEach(([k, x]) => d2Leaves(x, p ? `${p}.${k}` : k, out));
+  } else if (v !== undefined && v !== '') {
+    const n = Number(v);
+    out[p] = typeof v === 'boolean' || v === null || !Number.isFinite(n) ? v : n;
+  }
+  return out;
+};
+// typedCaseGuard reads dotted paths, so a flattened key (wells.0.qmax) is renamed flat
+const flat = (k) => k.replace(/\./g, '__');
+const d2Bundle = (v) => {
+  const o = {};
+  Object.entries(d2Leaves(v)).forEach(([p, x]) => { o[p] = x; });
+  return o;
+};
+
+describe('D2 shared rules (typedCaseGuard.js)', () => {
+  const targets = D2.leakTargets(FIELDS);
+  it('rule 1: no typed default state lands on a graded answer', () => {
+    expect(targets.length).toBeGreaterThan(0);
+    expect(D2.defaultStateHits({ targets, modes: D2_MODES })).toEqual([]);
+  }, 600000);
+  D2_MODES.forEach(({ name, typed, defaults }) => {
+    it(`rule 2: the ${name} default preloads no capstone-distinguishing input`, () => {
+      const capstone = d2Bundle(typed);
+      const bundle = d2Bundle(defaults);
+      const keys = D2_KEYS[name];
+      expect(keys.length, 'the frozen key list guards nothing').toBeGreaterThan(0);
+      const lookup = (o) => Object.fromEntries(keys.map((k) => [flat(k), o[k]]));
+      expect(D2.distinguishingKeyProblems({ capstone: lookup(capstone), teachingCases: [{ name: 'default', inputs: lookup(bundle) }], keys: keys.map(flat) })).toEqual([]);
+      expect(D2.preloadHits({ capstone: lookup(capstone), bundles: [{ name: `${name} default`, inputs: lookup(bundle) }], keys: keys.map(flat) })).toEqual([]);
+    });
+    it(`rule 2 is live on the ${name} mode: the capstone typed as a default is caught`, () => {
+      const capstone = d2Bundle(typed);
+      const keys = D2_KEYS[name];
+      const lookup = (o) => Object.fromEntries(keys.map((k) => [flat(k), o[k]]));
+      expect(D2.preloadHits({ capstone: lookup(capstone), bundles: [{ name: 'planted', inputs: lookup(capstone) }], keys: keys.map(flat) }).length).toBe(keys.length);
     });
   });
 });
