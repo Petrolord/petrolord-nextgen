@@ -44,7 +44,7 @@ Three things to check after a fit.
 
 **Did the residual actually fall?** A fit that reduces the residual by a few percent has not done much, whatever the knobs did.
 
-On Good Oil: no bounds hit, the criticals moved by under two percent, the volume shift moved by about a fifth, and the residual fell by a factor of twenty three.
+On Good Oil: no bounds hit, the criticals moved by about three percent, the volume shift moved by about a quarter, and the residual fell by a factor of twenty seven.
 
 ## Under-determination is normal
 

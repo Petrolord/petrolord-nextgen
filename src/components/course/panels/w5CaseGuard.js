@@ -57,11 +57,13 @@ const WINDOW = 60;
 export const OPEN_BOOK = /open book/i;
 
 /** The course's W5 spec (docs/graded-field-audit/w5/<course>.json) with the
- *  new graded fields of its `fields_file` attached to each pick-A tier. */
-export function loadSpec(course) {
+ *  new graded fields of its `fields_file` attached to each pick-A tier. A later
+ *  wave that re-keys the same fields in place (HD) passes its own fields file. */
+export function loadSpec(course, fieldsFile) {
   const p = path.join(REPO, 'docs', 'graded-field-audit', 'w5', `${course}.json`);
   if (!fs.existsSync(p)) throw new Error(`[w5 guard] no spec at ${p}: this gate would check nothing`);
   const spec = JSON.parse(fs.readFileSync(p, 'utf8'));
+  if (fieldsFile) spec.fields_file = fieldsFile;
   const fp = path.join(REPO, spec.fields_file);
   if (!fs.existsSync(fp)) throw new Error(`[w5 guard] no fields file at ${fp}: this gate would check nothing`);
   const rows = JSON.parse(fs.readFileSync(fp, 'utf8'));

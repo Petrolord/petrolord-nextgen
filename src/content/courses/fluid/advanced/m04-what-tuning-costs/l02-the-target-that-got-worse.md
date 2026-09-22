@@ -1,14 +1,14 @@
 # The target that got worse
 
-Bo went from 0.31 percent out to 1.13 percent out. Why that is the right outcome and not a failure.
+Bo went from 0.31 percent out to 0.60 percent out. Why that is the right outcome and not a failure.
 
 {{panel:fluid-tuning-explorer}}
 
 ## What happened
 
-Before tuning, the formation volume factor was the model's best target: 1.4694525613484382 against a measured 1.474, an error of -0.30851008490921433 percent.
+Before tuning, the formation volume factor was the model's best target: 1.4694451839693354 against a measured 1.474, an error of -0.30901058552676686 percent.
 
-After tuning it is 1.4573161052573853, an error of -1.131878883488105 percent. Nearly four times worse.
+After tuning it is 1.4651753069650213, an error of -0.5986901651952973 percent. Nearly twice as far out.
 
 Everything else improved substantially.
 
