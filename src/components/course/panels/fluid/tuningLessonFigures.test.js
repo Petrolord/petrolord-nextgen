@@ -11,10 +11,12 @@
 // the engine again.
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { describe, it, expect } from 'vitest';
 import { goodOilTuned, tuningLedger } from './fluidLab.js';
 
-const ADV = path.resolve(__dirname, '../../../../content/courses/fluid/advanced');
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const ADV = path.resolve(HERE, '../../../../content/courses/fluid/advanced');
 const read = (rel) => fs.readFileSync(path.join(ADV, rel), 'utf8');
 
 const fit = goodOilTuned();
