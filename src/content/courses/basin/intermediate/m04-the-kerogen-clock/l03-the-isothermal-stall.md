@@ -20,7 +20,7 @@ So the stall is structural, exactly as the ladder arithmetic predicts. Each bin 
 
 Lesson 1 put the occupancy at or below 50 kcal at 0.17, and called it the 100 degC ceiling. The 50 Ma state refines that: the practical ceiling on any human-relevant geological window is nearer the toe occupancy plus a slice of the 50 bin, which is why 100 Ma achieves only 0.074. TR at 100 degC will pass 0.10 eventually, and creep toward 0.17 on timescales that outrun most basins' lifetimes; it will never approach the 0.5 a hot history reaches easily.
 
-For the working intuition, keep the pair of graded numbers: a 40 Ma wait at fixed temperature, 10 to 50 Ma, added just 0.0323 of TR. The next lesson shows a 20 degree warming doing five times that in a quarter of the time.
+For the working intuition, keep the pair of golden numbers: a 40 Ma wait at fixed temperature, 10 to 50 Ma, added just 0.0323 of TR. The next lesson shows a 20 degree warming doing five times that in a quarter of the time.
 
 ## Why basins care
 

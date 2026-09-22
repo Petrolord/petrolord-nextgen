@@ -32,13 +32,13 @@ Notice what "present-day thickness in, solid thickness derived" buys: the model 
 
 ## Reading the ages
 
-The age columns carry more information than they appear to. Deposition windows say when a layer exists: at 130 Ma the basin contains Base Sand and Source Shale only; at 75 Ma, everything but the not-yet-eroded phantom. Gaps in deposition, like 20 Ma to present after Upper Shale, are quiet intervals where geometry sits still and only temperature and kinetics move. And the source's window, 140 to 120, means the layer whose maturity the capstone grades has experienced all but the first ten million years of the basin's history.
+The age columns carry more information than they appear to. Deposition windows say when a layer exists: at 130 Ma the basin contains Base Sand and Source Shale only; at 75 Ma, everything but the not-yet-eroded phantom. Gaps in deposition, like 20 Ma to present after Upper Shale, are quiet intervals where geometry sits still and only temperature and kinetics move. And the source's window, 140 to 120, means the layer whose maturity this tier reads has experienced all but the first ten million years of the basin's history.
 
 One convention to absorb now, because module 2 makes it consequential: the model deposits each layer instantaneously at its ageStart. The 1600 m Upper Shale appears in full at 80 Ma. The consequences of that simplification, a burial staircase rather than a ramp, are a lesson of their own.
 
 ## The source's position
 
-Fix the source's present position: 2800 to 3200 m, centre 3000 m, under 2800 m of overburden of which 1600 m arrived in one model step at 80 Ma. Its graded final temperature, 149.76037539670858 degC at that 3000 m centre, and everything else on the capstone follow from how that position came to be occupied through time. The whole tier is, in one sentence, the biography of this one layer.
+Fix the source's present position: 2800 to 3200 m, centre 3000 m, under 2800 m of overburden of which 1600 m arrived in one model step at 80 Ma. Its golden final temperature, 149.76037539670858 degC at that 3000 m centre, and everything else the tier reads follow from how that position came to be occupied through time. The whole tier is, in one sentence, the biography of this one layer.
 
 ## Exercise
 

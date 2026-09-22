@@ -22,7 +22,7 @@ Neither direction is an artefact to fix; both are the honest physics of a column
 
 The kinetics consume these temperatures step by step, so the lag shapes the reaction. After 80 Ma the source spends its first several steps cooler than steady state, collecting less reaction than a steady-jump model would claim; module 3's hot decade runs the same physics during and after the phantom's arrival and removal. The differences are small against the basin's 150 Ma but they are systematic, and they are exactly what distinguishes this tier's temperatures from applying the Associate tier's formula to each step's geometry.
 
-The present-day check closes the loop: by age zero the basin has been geometrically quiet for 10 Ma and the heat flow nearly constant, so the transient answer has settled onto the steady one, and the graded 149.76037539670858 degC at the source centre is a number a steady solve of today's column would essentially reproduce. Quiet endings converge; busy middles do not.
+The present-day check closes the loop: by age zero the basin has been geometrically quiet for 10 Ma and the heat flow nearly constant, so the transient answer has settled onto the steady one, and the golden 149.76037539670858 degC at the source centre is a number a steady solve of today's column would essentially reproduce. Quiet endings converge; busy middles do not.
 
 ## Worked example
 
@@ -30,6 +30,6 @@ Predict the sign of the transient adjustment for an erosion event, before module
 
 ## Exercise
 
-State what backward Euler needs from the previous step, and what supplies a temperature below the old grid's deepest node. Then answer in one sentence: why does the graded final temperature not depend much on the transient machinery?
+State what backward Euler needs from the previous step, and what supplies a temperature below the old grid's deepest node. Then answer in one sentence: why does the golden final temperature not depend much on the transient machinery?
 
-As a self check: each step starts from the previous profile interpolated onto the new grid, with depths below the old bottom filled by extending the basal gradient. The final temperature is transient-insensitive because the last ten million years are geometrically quiet with near-constant heat flow, so the column has fully relaxed and the transient and steady answers coincide at the 0.1 tolerance.
+As a self check: each step starts from the previous profile interpolated onto the new grid, with depths below the old bottom filled by extending the basal gradient. The final temperature is transient-insensitive because the last ten million years are geometrically quiet with near-constant heat flow, so the column has fully relaxed and the transient and steady answers coincide to a tenth of a degree.

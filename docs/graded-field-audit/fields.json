@@ -24,11 +24,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_solid_sst_1700",
+    "label": "Solid thickness in 100 m of sandstone at 1700 m",
+    "unit": "m",
+    "expected": 69.45042808472611,
+    "tol": 0.005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Solid thickness in 100 m at the burial depth)",
+    "printed": {
+     "decimals": 8
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Solid thickness in 100 m at the burial depth)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "sandstone selected, burial 1700 typed; fmt 8 dp against tol 0.005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Solid thickness in 100 m at surface\" fmt(read.solid100, 8); fmt = v.toFixed(d) (BurialHeatExplorer.jsx:18). Lithology defaults to shale (line 23). Closed-form grain integral is also taught (beginner m02/l04), so a hand-calc is possible. Printed resolution 1e-08 is far inside tol 0.05.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 38.57953418711555 is printed verbatim in beginner/m06-the-basin-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -57,11 +84,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_restored_sst_1700",
+    "label": "100 m sandstone from 1700 m, restored to surface",
+    "unit": "m",
+    "expected": 133.88023365817557,
+    "tol": 0.005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Restored to surface)",
+    "printed": {
+     "decimals": 8
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Restored to surface)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "sandstone, burial 1700; fmt 8 dp against tol 0.005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Restored to surface\" fmt(read.restored, 8); burial depth input defaults to 1000 (line 25), so the capstone value shows on open. Printed resolution 1e-08 is far inside tol 0.05.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 159.79553483785466 is printed verbatim in beginner/m06-the-basin-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -90,11 +144,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_phi_sst_2600",
+    "label": "Sandstone porosity at 2600 m",
+    "unit": "v/v",
+    "expected": 0.2428406315893992,
+    "tol": 0.0001
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Porosity at the depth)",
+    "printed": {
+     "decimals": 8
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Porosity at the depth)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "sandstone, depth 2600; fmt 8 dp against tol 0.0001; also phi0 exp(-cz) by hand.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Porosity at 2000 m\" fmt(read.phi, 8); depth defaults to 2000 (line 24). Also a one-line hand-calc 0.63 exp(-0.00051 x 2000). Printed resolution 1e-08 is far inside tol 0.001.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 0.22717481230903933 is printed verbatim in beginner/m06-the-basin-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -123,11 +204,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_t_first",
+    "label": "Temperature at the first cell (50 m)",
+    "unit": "degC",
+    "expected": 13.625,
+    "tol": 0.005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Temperature at 50 m)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Temperature at 50 m)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "heat column typed (12, 65, 2.0, 3.2); fmt 6 dp against tol 0.005; also 12 + q z / k by hand.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Temperature at 50 m\" fmt(BASE.tFirstNode, 6), fixed golden column; hand-calc T = Ts + Qz/k is taught (beginner m04). Printed resolution 1e-06 is far inside tol 0.05.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 11.666666666666671 is printed verbatim in beginner/m06-the-basin-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -156,11 +264,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_t_lowk_base",
+    "label": "Temperature at the low-k base (950 m)",
+    "unit": "degC",
+    "expected": 42.87500000000002,
+    "tol": 0.005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Temperature at 950 m)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Temperature at 950 m)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed heat column; fmt 6 dp against tol 0.005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Temperature at 950 m\" fmt(BASE.tLayer1Bottom, 6); hand-calc 10 + 0.06 x 950 / 1.8. Printed resolution 1e-06 is far inside tol 0.05.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 41.66666666666673 is printed verbatim in beginner/m06-the-basin-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -189,11 +324,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_t_deepest",
+    "label": "Temperature at the deepest cell (1950 m)",
+    "unit": "degC",
+    "expected": 63.796875000000036,
+    "tol": 0.005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Temperature at 1950 m)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Temperature at 1950 m)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed heat column; fmt 6 dp against tol 0.005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Temperature at 1950 m\" fmt(BASE.tDeepest, 6); hand-calc continues from 43.333 at 1000 m through k 3.5. Printed resolution 1e-06 is far inside tol 0.05.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 59.619047619047684 is printed verbatim in beginner/m06-the-basin-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -222,11 +384,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_ro_145_r2",
+    "label": "Ro at 145 C on the 2 C/Ma ramp",
+    "unit": "%Ro",
+    "expected": 0.9484725312807094,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile Your ramp: Ro)",
+    "printed": {
+     "decimals": 8
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile Your ramp: Ro)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed rate 2 and read temperature 145; fmt 8 dp against tol 0.0005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Ro at zero reaction\" fmt(m.roF0, 8); fmt = v.toFixed(d) (KineticsExplorer.jsx:23). Closed form exp(-1.6) taught in intermediate m02/l02. Printed resolution 1e-08 is far inside tol 0.001.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 0.20189651799465538 is printed verbatim in intermediate/m06-the-kinetics-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -255,11 +444,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_ro_165_r2",
+    "label": "Ro at 165 C on the 2 C/Ma ramp",
+    "unit": "%Ro",
+    "expected": 1.2861150761240832,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile Your ramp: Ro)",
+    "printed": {
+     "decimals": 8
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile Your ramp: Ro)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed rate 2 and read temperature 165; fmt 8 dp against tol 0.0005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Ro at full reaction\" fmt(m.roFull, 8); closed form exp(-1.6 + 3.7 x 0.85). Printed resolution 1e-08 is far inside tol 0.005.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 4.687971627022019 is printed verbatim in intermediate/m06-the-kinetics-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -288,11 +504,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_ro_165_r5",
+    "label": "Ro at 165 C on the 5 C/Ma ramp",
+    "unit": "%Ro",
+    "expected": 1.1764945675571294,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile Your ramp: Ro)",
+    "printed": {
+     "decimals": 8
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile Your ramp: Ro)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed rate 5 and read temperature 165; fmt 8 dp against tol 0.0005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Ro at 150 degC, rate ${rate}\" fmt(m.roAt(rate,150), 8); rate defaults to 3 (line 26), probe shows 0.98714135 on open. Needs the 20-bin Easy%Ro integrator, so the panel is the source. Printed resolution 1e-08 is far inside tol 0.002.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 0.9871413464062039 is printed verbatim in intermediate/m06-the-kinetics-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -321,11 +564,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_tr1_135_100",
+    "label": "Type I TR after 100 Ma at 135 C",
+    "unit": "frac",
+    "expected": 0.6414954483503965,
+    "tol": 0.0001
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile TR at 100 Ma)",
+    "printed": {
+     "decimals": 8
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile TR at 100 Ma)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "Type I selected, isothermal 135 typed; fmt 8 dp against tol 0.0001.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Same tile after one click on the rate 1 button; probe state \"1\" shows 1.11292545. Integrator-only quantity. Printed resolution 1e-08 is far inside tol 0.002.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 1.1129254516555198 is printed verbatim in intermediate/m06-the-kinetics-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -354,11 +624,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_tr2_135_100",
+    "label": "Type II TR after 100 Ma at 135 C",
+    "unit": "frac",
+    "expected": 0.41450323436925496,
+    "tol": 0.0001
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile TR at 100 Ma)",
+    "printed": {
+     "decimals": 8
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile TR at 100 Ma)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "Type II, isothermal 135; fmt 8 dp against tol 0.0001.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"TR at 10 Ma\" fmt(m.trAt(10), 8); defaults isothermal 100 degC (line 27) and Type II (line 28), probe shows 0.02248122 on open. Printed resolution 1e-08 is far inside tol 0.0005.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 0.022481215976523083 is printed verbatim in intermediate/m06-the-kinetics-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -387,11 +684,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_tr3_135_100",
+    "label": "Type III TR after 100 Ma at 135 C",
+    "unit": "frac",
+    "expected": 0.062367273402499146,
+    "tol": 0.0001
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile TR at 100 Ma)",
+    "printed": {
+     "decimals": 8
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile TR at 100 Ma)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "Type III, isothermal 135; fmt 8 dp against tol 0.0001.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"TR at 50 Ma\" fmt(m.trAt(50), 8); probe shows 0.05477927 on open. Printed resolution 1e-08 is far inside tol 0.0005.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 0.05477927380797565 is printed verbatim in intermediate/m06-the-kinetics-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -420,11 +744,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_final_ro",
+    "label": "Source rock final Ro",
+    "unit": "%Ro",
+    "expected": 2.158320921604062,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Final Ro)",
+    "printed": {
+     "decimals": 8
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Final Ro)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed event 760 m at 20 Ma; fmt 8 dp against tol 0.0005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Final Ro\" fmt(m.finalRo, 8); fmt = v.toFixed(d) (ChargeExplorer.jsx:19). Erosion amount defaults to 600 (line 22), the reference case; value from computeErosionScenario (src/lib/basinTeaching.js:205), asserted to 12 dp in chargeLab.test.js:17. Printed resolution 1e-08 is far inside tol 0.002.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 1.6718288798752388 is printed verbatim in advanced/m06-the-charge-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -453,11 +804,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_peak_temp",
+    "label": "Source rock peak temperature",
+    "unit": "degC",
+    "expected": 187.13248934890527,
+    "tol": 0.01
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Peak temperature)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Peak temperature)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed event; the maximum of the source temperature series; fmt 6 dp against tol 0.01.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Final temperature\" fmt(m.finalTempC, 6); default 600 m run. Forward-model output (transient heat), panel is the source. Printed resolution 1e-06 is far inside tol 0.1.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 149.76037539670858 is printed verbatim in advanced/m06-the-charge-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -486,11 +864,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_final_tr",
+    "label": "Final transformation ratio",
+    "unit": "frac",
+    "expected": 0.889910987289655,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Final TR)",
+    "printed": {
+     "decimals": 8
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Final TR)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed event; fmt 8 dp against tol 0.0005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Final TR\" fmt(m.finalTr, 8); default 600 m run. Printed resolution 1e-08 is far inside tol 0.002.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 0.7423743797385286 is printed verbatim in advanced/m06-the-charge-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -519,11 +924,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_generated",
+    "label": "Generated mass at present day",
+    "unit": "kg/m2",
+    "expected": 16718.22900736702,
+    "tol": 0.5
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Generated)",
+    "printed": {
+     "decimals": 3
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Generated)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed event; fmt 3 dp against tol 0.5 kg/m2.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Generated\" fmt(m.generated, 3); tol 5 kg/m2 vs 0.0005 print resolution. Also potential x TR (tile line 126 prints potential to 4 dp). Printed resolution 0.001 is far inside tol 5.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 13946.54641524398 is printed verbatim in advanced/m06-the-charge-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -552,11 +984,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_expelled",
+    "label": "Expelled mass at present day",
+    "unit": "kg/m2",
+    "expected": 13077.581219764983,
+    "tol": 0.5
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Expelled)",
+    "printed": {
+     "decimals": 3
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Expelled)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed event; fmt 3 dp against tol 0.5 kg/m2.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Expelled\" fmt(m.expelled, 3); default 600 m run. Lesson identity g(11 Ma) - cap(11 Ma) uses engine values only the lessons state. Printed resolution 0.001 is far inside tol 5.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 10048.985378825158 is printed verbatim in advanced/m06-the-charge-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },
@@ -585,11 +1044,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Lesson text prints every graded answer to full precision (the capstone walkthrough lesson lists all six values and tolerances, and the values recur in several other lessons), and the course panel opens on the capstone case by default. Recommend the owner decide whether to (a) strip graded values from lessons, keeping the method and a different worked case, and (b) move the capstone to a case the panel does not preload (a different depth, rate, temperature or erosion amount the learner must enter). Tolerance and display need no change.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_basin.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "nkpor_ro_delta",
+    "label": "Erosion signature (delta Ro vs no-erosion run)",
+    "unit": "%Ro",
+    "expected": 0.5431428522511799,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Erosion signature)",
+    "printed": {
+     "decimals": 8
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Erosion signature)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed event against the no-erosion twin; fmt 8 dp against tol 0.0005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile \"Erosion signature (delta Ro)\" fmt(m.roDelta, 8); the no-event twin runs automatically (basinTeaching.js:211), so the difference is printed directly on open. Printed resolution 1e-08 is far inside tol 0.001.",
   "notes": "LEAK: the panel shows this graded value in its default state (or one click), and the value 0.05665081052235643 is printed verbatim in advanced/m06-the-charge-workflow/l03-the-capstone-walkthrough.md (and other lessons in the tier). The checks (tolerance, guessability, display) all pass; the defect is answer disclosure."
  },

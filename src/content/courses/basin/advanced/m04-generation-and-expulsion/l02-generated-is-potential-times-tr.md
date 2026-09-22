@@ -1,6 +1,6 @@
 # Generated is potential times TR
 
-The capstone's generated mass looks like the output of a hundred and fifty steps of machinery. It is, and it is also one multiplication. This lesson establishes the identity, works it, and uses it to place generation in time.
+The generated mass looks like the output of a hundred and fifty steps of machinery. It is, and it is also one multiplication. This lesson establishes the identity, works it, and uses it to place generation in time.
 
 ## The identity
 
@@ -8,7 +8,7 @@ At every step, for the source layer, the engine computes generated mass as poten
 
 $$M_{gen}(t) = M_{pot} \times TR(t)$$
 
-At present day: $18786.405883452077 \times 0.7423743797385286 = 13946.54641524398$ kg/m2, and those are the capstone's third and fourth graded fields, tolerance 0.002 on the TR and 5 kg/m2 on the mass. The multiplication is exact: check it on a calculator and you reproduce the engine's mass to the last digit from the engine's TR.
+At present day: $18786.405883452077 \times 0.7423743797385286 = 13946.54641524398$ kg/m2, the golden TR and generated mass. The multiplication is exact: check it on a calculator and you reproduce the engine's mass to the last digit from the engine's TR.
 
 This identity is the tier's interface with the Professional tier in one line. All the kinetic subtlety, the spectrum, the stall, the hot decade, lives inside TR(t); all the inventory, density, grain, richness, lives inside the constant potential. The forward model's contribution is the temperature history that TR integrated, nothing more.
 
@@ -18,9 +18,9 @@ Because the potential is constant, the generation history is the TR history resc
 
 So the kitchen's story in one sentence: essentially all generation happened between 80 and 40 Ma, driven by the Upper Shale's burial under the young basin's strong heat flow, and everything since has been marginal additions to a nearly finished job. Timing like this, generation versus trap formation, is what charge assessment actually consumes, and the model delivers it as a curve, not an endpoint.
 
-## The two graded fields are one fact
+## The two reported fields are one fact
 
-Grade-craft worth stating plainly: if you have the final TR right, the generated mass is free, and conversely an error in either exposes the other. The examiner's tolerance structure respects the identity, 0.002 of TR being about 37.6 kg/m2 of mass against the 5 kg/m2 mass tolerance; the mass is graded tighter than the TR would imply, which means the expected route to it is the multiplication with a good TR, not an independent estimate. Carry TR at full precision into the product; rounding TR to 0.742 before multiplying loses 7 kg/m2 and the field.
+Grade-craft worth stating plainly: if you have the final TR right, the generated mass is free, and conversely an error in either exposes the other. The precision of the two respects the identity: 0.002 of TR is about 37.6 kg/m2 of mass, far more than the panel's mass digits, which means the expected route to it is the multiplication with a good TR, not an independent estimate. Carry TR at full precision into the product; rounding TR to 0.742 before multiplying loses 7 kg/m2 and the field.
 
 ## Worked example
 
@@ -28,6 +28,6 @@ Compute the mass generated during the hot decade alone, and its share of the tot
 
 ## Exercise
 
-Verify the capstone multiplication at full precision, and compute what mass corresponds to one tolerance unit, 0.002, of TR. Then answer in one sentence: why does the capstone's tight mass tolerance effectively mandate the multiplication route?
+Verify the golden multiplication at full precision, and compute what mass corresponds to 0.002 of TR. Then answer in one sentence: why does quoting the mass to a fraction of a kilogram effectively mandate the multiplication route?
 
-As a self check: $18786.405883452077 \times 0.7423743797385286 = 13946.54641524398$; one 0.002 of TR is $18786.405883452077 \times 0.002 = 37.57$ kg/m2. The mass tolerance of 5 kg/m2 is seven times tighter than the mass equivalent of the TR tolerance, so any route that does not inherit the engine's TR at full precision, through the exact multiplication, risks the mass field even while passing the TR field.
+As a self check: $18786.405883452077 \times 0.7423743797385286 = 13946.54641524398$; one 0.002 of TR is $18786.405883452077 \times 0.002 = 37.57$ kg/m2. A mass quoted to a kilogram is far tighter than the mass equivalent of 0.002 of TR, so any route that does not inherit the engine's TR at full precision, through the exact multiplication, risks the mass field even while passing the TR field.

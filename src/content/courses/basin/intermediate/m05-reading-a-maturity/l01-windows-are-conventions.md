@@ -18,7 +18,7 @@ Module 3 established this and it bears repeating in window language: the same Ro
 
 The subtler misuse: treating position-in-window as fraction-generated. The window is defined on the vitrinite clock; yield lives on the kerogen clock, and module 4 showed the two decouple by type. At mid-window maturity, a Type I source may be substantially converted while a Type III source has barely begun. "Mid oil window" is a statement about thermal history; how much oil it implies depends entirely on whose kerogen sat in that history.
 
-For the fixture's Type II kerogen the coupling is well behaved, which is why the capstone can grade both clocks on shared histories, but the well-behavedness is a property of Type II, not of windows.
+For the fixture's Type II kerogen the coupling is well behaved, which is why a capstone can grade both clocks on shared histories, but the well-behavedness is a property of Type II, not of windows.
 
 ## Using windows well
 

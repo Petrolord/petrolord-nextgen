@@ -12,13 +12,13 @@ Real compaction is dominantly plastic. Grain rearrangement, pressure solution an
 
 ## The footprint in this fixture
 
-Price the simplification where it acts. With hysteresis, the post-erosion source would stay at its 11 Ma state, 390.577400265013 m and phiAvg 0.11620882968385332, instead of re-expanding to 400 m and 0.13712772956463615. Temperature: the source centre would sit 4.7 m deeper mid-layer within an otherwise identical column, a difference of order 0.1 degC, at the edge of the final temperature's tolerance and no more. Maturity: kinetics see temperature, so the effect on the graded Ro is similarly marginal, and the erosion signature would survive essentially intact.
+Price the simplification where it acts. With hysteresis, the post-erosion source would stay at its 11 Ma state, 390.577400265013 m and phiAvg 0.11620882968385332, instead of re-expanding to 400 m and 0.13712772956463615. Temperature: the source centre would sit 4.7 m deeper mid-layer within an otherwise identical column, a difference of order 0.1 degC and no more. Maturity: kinetics see temperature, so the effect on the golden Ro is similarly marginal, and the erosion signature would survive essentially intact.
 
-Where it genuinely bites is module 4's territory: the retention cap is thickness times porosity, so elastic rebound regrows the bucket after the event, from 3858.026119789524 back to 4662.34280519763 kg/m2. With hysteresis the bucket would stay squeezed, and expulsion after 10 Ma would resume at a lower threshold. In this fixture generation after 10 Ma is nearly stalled anyway, so the graded expelled mass is set before the convention matters; but shift the timing, a younger erosion event over a still-generating source, and elastic-versus-plastic becomes a first-order charge question. That conditional sentence is the exam's favourite kind.
+Where it genuinely bites is module 4's territory: the retention cap is thickness times porosity, so elastic rebound regrows the bucket after the event, from 3858.026119789524 back to 4662.34280519763 kg/m2. With hysteresis the bucket would stay squeezed, and expulsion after 10 Ma would resume at a lower threshold. In this fixture generation after 10 Ma is nearly stalled anyway, so the golden expelled mass is set before the convention matters; but shift the timing, a younger erosion event over a still-generating source, and elastic-versus-plastic becomes a first-order charge question. That conditional sentence is the exam's favourite kind.
 
 ## Reading models with known conventions
 
-The general habit this lesson teaches: every forward model carries conventions, and competent reading means knowing which results are convention-robust and which are convention-sensitive. In this fixture, the six graded values are robust, which is checkable because the sensitivity analysis above is arithmetic you can do. A modeller who cannot run that analysis must treat every output as equally trustworthy, which means equally untrustworthy.
+The general habit this lesson teaches: every forward model carries conventions, and competent reading means knowing which results are convention-robust and which are convention-sensitive. In this fixture, the six golden values are robust, which is checkable because the sensitivity analysis above is arithmetic you can do. A modeller who cannot run that analysis must treat every output as equally trustworthy, which means equally untrustworthy.
 
 ## Worked example
 
@@ -26,6 +26,6 @@ State the direction of each error elastic rebound introduces after an unroofing,
 
 ## Exercise
 
-Define max-burial hysteresis in one line. Then answer in one sentence each: why are this fixture's graded values nearly immune to the rebound convention, and what change to the fixture would make the convention decisive?
+Define max-burial hysteresis in one line. Then answer in one sentence each: why are this fixture's golden values nearly immune to the rebound convention, and what change to the fixture would make the convention decisive?
 
-As a self check: hysteresis freezes porosity at its deepest-burial value, letting it fall but never recover. The graded values are immune because the geometry error is metres against kilometres for temperature and Ro, and the expelled mass was locked in at 11 Ma while the bucket was squeezed, before rebound could regrow it. Move the erosion event earlier, while generation is still running strongly, and the regrown bucket would swallow later generation that a hysteretic model would expel, making the convention a first-order control on charge.
+As a self check: hysteresis freezes porosity at its deepest-burial value, letting it fall but never recover. The golden values are immune because the geometry error is metres against kilometres for temperature and Ro, and the expelled mass was locked in at 11 Ma while the bucket was squeezed, before rebound could regrow it. Move the erosion event earlier, while generation is still running strongly, and the regrown bucket would swallow later generation that a hysteretic model would expel, making the convention a first-order control on charge.

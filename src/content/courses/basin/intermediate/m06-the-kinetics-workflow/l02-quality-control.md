@@ -10,9 +10,9 @@ For the kerogen clock, the input interrogation is the spectrum: which type, whos
 
 ## Interrogate the software
 
-New software gets the five checks of module 5 before its first real run: two anchors, monotone range, a rate landmark, a graded fixture row, and the separation test. The separation test earns its place every time software changes hands, because the vitrinite-kerogen conflation has a documented history and no visible symptom in ordinary output: Ro looks plausible right up until a spectrum edit moves it.
+New software gets the five checks of module 5 before its first real run: two anchors, monotone range, a rate landmark, a golden fixture row, and the separation test. The separation test earns its place every time software changes hands, because the vitrinite-kerogen conflation has a documented history and no visible symptom in ordinary output: Ro looks plausible right up until a spectrum edit moves it.
 
-One more software check specific to integration: run a graded ramp row at the standard step, then at half the step, and confirm the answer moves by less than the tolerance. Convergence you have demonstrated beats convergence you were promised.
+One more software check specific to integration: run a golden ramp row at the standard step, then at half the step, and confirm the answer moves by less than the tolerance. Convergence you have demonstrated beats convergence you were promised.
 
 ## Interrogate the answer
 

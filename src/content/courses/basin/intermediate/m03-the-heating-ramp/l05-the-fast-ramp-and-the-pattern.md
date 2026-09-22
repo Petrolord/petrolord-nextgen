@@ -1,6 +1,6 @@
 # The fast ramp and the pattern
 
-The third golden ramp heats at 10 degC per Ma. None of its values are graded, and that is precisely why it completes the module: it turns the graded pair into a pattern you can extrapolate, and patterns are what you will actually use on rocks whose heating rate matches none of the fixtures.
+The third golden ramp heats at 10 degC per Ma. None of its values are among the golden six, and that is precisely why it completes the module: it turns the golden pair into a pattern you can extrapolate, and patterns are what you will actually use on rocks whose heating rate matches none of the fixtures.
 
 {{panel:bs-kinetics-explorer}}
 
@@ -20,7 +20,7 @@ This is the honest way to use the fixtures on a rock that is not a fixture: brac
 
 The evenness has limits, and the table shows one if you look at the low-temperature rows. At 60 degC the three curves read 0.36384483639156284, 0.3462245030986587 and 0.32309490689048337: gaps of five percent, half the size of the gaps at 150. The rate effect grows with maturity, because early on only the fastest bins have begun and they are quick enough to finish at any geological rate; the discrimination happens in the mid-ladder, where residence time decides how deep the front drains. Practical consequence: heating-rate uncertainty matters most exactly in the oil window, and least for calling a rock barely mature versus immature.
 
-The convention lesson flagged the other caveat: at 10 degC per Ma the 0.01 Ma sub-steps span 0.1 degC each, the coarsest integration of the three, part of why this curve is the pattern member rather than a graded one.
+The convention lesson flagged the other caveat: at 10 degC per Ma the 0.01 Ma sub-steps span 0.1 degC each, the coarsest integration of the three, part of why this curve is the pattern member rather than a golden one.
 
 ## Worked example
 

@@ -11,9 +11,15 @@
 // cooling 80 to 60 mW/m2 heat-flow history. Beginner builds burial
 // and heat; Intermediate runs the maturity kinetics; Advanced runs
 // the FULL forward model and reads charge plus the erosion signature
-// (rerunning without the event). The capstone oracle was reproduced
-// by running exactly these pipelines in Node before the migration
-// was seeded.
+// (rerunning without the event).
+//
+// The golden fixtures are the TEACHING case: the panels open on them
+// and the lessons work them. Since W5a (2026-09) each tier's capstone is
+// a case of its own (a lithology and depths, a heat column, heating
+// rates and a kerogen, an erosion event), stated in the brief and typed
+// into the panels. Nothing in this file carries it, and
+// panelCapstoneGuard.test.jsx checks that no number these functions give
+// at their defaults lands on a graded answer.
 import goldens from '@petrolord/engines/test-data/basin/goldens.json';
 import { SimulationEngine } from '@petrolord/engines/engines/basin/SimulationEngine.js';
 import { BurialCompactionEngine } from '@petrolord/engines/engines/basin/BurialCompactionEngine.js';
@@ -29,7 +35,52 @@ export const GOLDEN_SERIES = goldens.reference_basin.series;
 export const HEAT_FIXTURE = goldens.heat_two_layer_steady;
 export const TYPE2_POTENTIALS = goldens.kerogen_isothermal_tr[0].potentials;
 export const RAMP_RATES = [1.0, 3.0, 10.0];
-export const CAPSTONE_RAMP = 3.0;
+export const TEACHING_RAMP = 3.0;
+
+/** A steady two-layer heat column: surface temperature, basal heat flow
+ *  and each layer's thickness, cell count and conductivity. Returns the
+ *  cell-centre temperatures (index 0 is the surface node). */
+export function heatColumn(heat = HEAT_FIXTURE) {
+  const nodes = [{ z: 0, k: heat.layers[0].k, rhoCp: 1, aVol: 0 }]; // Dirichlet surface node
+  let zBase = 0;
+  for (const layer of heat.layers) {
+    const h = layer.h_m / layer.cells;
+    for (let i = 0; i < layer.cells; i++) {
+      nodes.push({ z: zBase + (i + 0.5) * h, k: layer.k, rhoCp: 2.0e6, aVol: 0 });
+    }
+    zBase += layer.h_m;
+  }
+  const temps = HeatTransportEngine.solve(nodes, null, heat.surface_t_c, heat.basal_q_w_m2, null);
+  return {
+    nodes,
+    temps,
+    tFirstNode: temps[1],
+    tLayer1Bottom: temps[heat.layers[0].cells],
+    tDeepest: temps[temps.length - 1],
+  };
+}
+
+/** The golden column with the four numbers a learner types swapped in. */
+export function twoLayerHeat({ surfaceC, basalMwM2, kUpper, kLower }) {
+  return {
+    ...HEAT_FIXTURE,
+    surface_t_c: surfaceC,
+    basal_q_w_m2: basalMwM2 / 1000,
+    layers: [{ ...HEAT_FIXTURE.layers[0], k: kUpper }, { ...HEAT_FIXTURE.layers[1], k: kLower }],
+  };
+}
+
+/** Compaction readings for a lithology: porosity at a depth, the solid in
+ *  100 m at the surface, and 100 m from a burial depth restored. */
+export function compactionReadings(lithology, depthM, burialM) {
+  const p = getCompactionParams(lithology);
+  const solid100 = BurialCompactionEngine.solidThickness(0, 100, p.phi0, p.c);
+  const solidAtB = BurialCompactionEngine.solidThickness(burialM, 100, p.phi0, p.c);
+  const restored = BurialCompactionEngine.calculateLayerProperties(
+    { lithology, solidThickness: solidAtB }, 0,
+  ).thickness;
+  return { phi: BurialCompactionEngine.porosity(depthM, p.phi0, p.c), solid100, solidAtB, restored };
+}
 
 /** Beginner: compaction geometry + the steady two-layer heat column. */
 export function computeBurialHeat() {
@@ -147,8 +198,8 @@ export async function computeReferenceBasin() {
 }
 
 // ---------------------------------------------------------------------------
-// DC30/DC31 panel drivers. Everything below is additive; the capstone
-// drivers above are pinned by the live NG11 keys and stay untouched.
+// DC30/DC31 panel drivers. Everything below is additive; the tier
+// drivers above are pinned by the golden teaching values.
 
 export const KEROGEN_TYPES = ['type1', 'type2', 'type3'];
 
@@ -202,9 +253,9 @@ export function sourcePotentialMass() {
 
 /** Expert panel: the reference basin at a chosen erosion amount, against
  *  the no-erosion baseline. Async; two full forward runs per call. */
-export async function computeErosionScenario(amountM) {
+export async function computeErosionScenario(amountM, ageMa = 10) {
   const project = amountM > 0
-    ? { ...PROJECT, erosionEvents: [{ age: 10, amount: amountM }] }
+    ? { ...PROJECT, erosionEvents: [{ age: ageMa, amount: amountM }] }
     : { ...PROJECT, erosionEvents: [] };
   const run = await SimulationEngine.run(project);
   const base = await SimulationEngine.run({ ...PROJECT, erosionEvents: [] });

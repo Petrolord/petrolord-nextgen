@@ -1,6 +1,6 @@
 # Restoring a buried layer
 
-This lesson works one restoration all the way through, on the fixture the capstone grades. Take 100 m of shale whose top sits at 1000 m today, and put it back at the surface as it was on the day it finished being deposited.
+This lesson works one restoration all the way through, on the golden fixture. Take 100 m of shale whose top sits at 1000 m today, and put it back at the surface as it was on the day it finished being deposited.
 
 ## Step one: how much grain is in it
 
@@ -26,7 +26,7 @@ The answer is
 
 **159.79553483785466 m.**
 
-That is the graded value. The layer that logs 100 m today was 159.79553483785466 m thick when it was deposited.
+That is the golden value. The layer that logs 100 m today was 159.79553483785466 m thick when it was deposited.
 
 ## Step three: read what that means
 

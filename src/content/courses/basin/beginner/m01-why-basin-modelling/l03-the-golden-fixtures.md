@@ -16,7 +16,7 @@ They agree to about 1e-9 on the kinetics and about 1e-4 m on the geometry.
 
 Take a moment over what that buys you. Two people writing the same equation in two languages make different mistakes. They pick different loop structures, different orders of summation, different ways of handling the first and last cell. If either had misread the equation, or dropped a term, or set an index one place off, the two answers would differ in the third significant figure and not in the ninth. Agreement at 1e-9 is not proof that the physics is the right physics for the earth. It is strong evidence that both programs are computing the equation that was written down, which is a different claim and the one you need before you trust a number.
 
-The graded tolerances in this course sit far above that agreement. A thickness is graded to 0.05 m and a porosity to 0.001 v/v, while the two implementations differ by around 1e-4 m on a geometry that is hundreds of metres long. The numerical disagreement between the two codes is orders of magnitude smaller than the tolerance you are marked against, so if your answer is outside tolerance, the cause is your arithmetic and never the fixture.
+The capstone tolerances in this course sit far above that agreement. A thickness is graded to 0.005 m and a porosity to 0.0001 v/v, while the two implementations differ by around 1e-4 m on a geometry that is hundreds of metres long. The numerical disagreement between the two codes is orders of magnitude smaller than the tolerance you are marked against, so if your answer is outside tolerance, the cause is your arithmetic and never the fixture.
 
 ## Fixture one: the decompaction cases
 
@@ -55,6 +55,6 @@ So when your number matches, you have the method right, and you can take that me
 
 ## Exercise
 
-State in one sentence what the agreement of 1e-9 between the two implementations does establish, and in one sentence what it does not. Then say why a graded tolerance of 0.05 m on a thickness is safe given a geometry agreement of about 1e-4 m.
+State in one sentence what the agreement of 1e-9 between the two implementations does establish, and in one sentence what it does not. Then say why a graded tolerance of 0.005 m on a thickness is safe given a geometry agreement of about 1e-4 m.
 
-Self check: the agreement establishes that two independently written programs are evaluating the same equations correctly, so a discrepancy in your answer is your arithmetic rather than a defect in the fixture. It does not establish that the equations are a correct description of any real basin, which is a question about the physics and about the input parameters, not about the code. The tolerance is safe because 0.05 m is orders of magnitude larger than the 1e-4 m disagreement between the implementations, so the numerical noise cannot move an answer across the tolerance boundary.
+Self check: the agreement establishes that two independently written programs are evaluating the same equations correctly, so a discrepancy in your answer is your arithmetic rather than a defect in the fixture. It does not establish that the equations are a correct description of any real basin, which is a question about the physics and about the input parameters, not about the code. The tolerance is safe because 0.005 m is orders of magnitude larger than the 1e-4 m disagreement between the implementations, so the numerical noise cannot move an answer across the tolerance boundary.

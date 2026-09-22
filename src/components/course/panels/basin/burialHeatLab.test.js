@@ -3,12 +3,12 @@ import { HEAT_FIXTURE, computeBurialHeat } from '@/lib/basinTeaching';
 import { BurialCompactionEngine } from '@petrolord/engines/engines/basin/BurialCompactionEngine.js';
 import { getCompactionParams } from '@petrolord/engines/engines/basin/CompactionModelLibrary.js';
 
-// Pins the burial-and-heat panel math to the live NG11 Beginner capstone oracle.
+// Pins the burial-and-heat panel math to the golden teaching case (the NG11 Beginner capstone until W5a).
 
 describe('basin burial and heat explorer: engine math', () => {
   const b = computeBurialHeat();
 
-  it('reproduces the NG11 beginner capstone answer key', () => {
+  it('reproduces the golden teaching case (the pre-W5 capstone key)', () => {
     expect(b.solid100).toBeCloseTo(38.57953418711555, 9);
     expect(b.restoredThickness).toBeCloseTo(159.79553483785466, 9);
     expect(b.phi2000).toBeCloseTo(0.22717481230903933, 12);

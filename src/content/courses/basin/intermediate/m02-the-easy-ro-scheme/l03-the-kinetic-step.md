@@ -1,6 +1,6 @@
 # The kinetic step
 
-Between the twenty-bin state and the graded reflectance sits one function that does all the work. The engine calls it kineticStep, and it advances every bin one time interval at one temperature. This lesson works it by hand, because the ramp results of module 3 and the stall of module 4 both become obvious once you have executed the step yourself.
+Between the twenty-bin state and the golden reflectance sits one function that does all the work. The engine calls it kineticStep, and it advances every bin one time interval at one temperature. This lesson works it by hand, because the ramp results of module 3 and the stall of module 4 both become obvious once you have executed the step yourself.
 
 ## The step
 

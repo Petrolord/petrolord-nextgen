@@ -26,7 +26,7 @@ The practical reading: type uncertainty matters most for marginal, cooler kitche
 
 ## What type does not change
 
-Run the panel across the three types and watch what moves. The transformation curve moves enormously. The reflectance curves do not move at all: 0.9871413464062039 at 150 degC on the capstone ramp for every type, because Ro belongs to the vitrinite clock and the vitrinite clock's parameters are fixed. This is module 1's separation made observable, and it is worth performing deliberately once: it is the diagnostic you would run on unfamiliar software, and the audit precedent says the test is not hypothetical.
+Run the panel across the three types and watch what moves. The transformation curve moves enormously. The reflectance curves do not move at all: 0.9871413464062039 at 150 degC on the reference ramp for every type, because Ro belongs to the vitrinite clock and the vitrinite clock's parameters are fixed. This is module 1's separation made observable, and it is worth performing deliberately once: it is the diagnostic you would run on unfamiliar software, and the audit precedent says the test is not hypothetical.
 
 So a measured Ro constrains the thermal history; the kerogen type then decides what that history did to the source's potential. Two basins with identical Ro profiles and different source types have identical thermal stories and utterly different charge stories.
 

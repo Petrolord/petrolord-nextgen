@@ -3,13 +3,13 @@ import { computeKineticsExplorer, roCrossing } from '@/lib/basinTeaching';
 import { MaturityEngine } from '@petrolord/engines/engines/basin/MaturityEngine.js';
 import { EasyRoWeights } from '@petrolord/engines/engines/basin/KerogenLibrary.js';
 
-// Pins the kinetics panel math to the live NG11 Professional capstone
+// Pins the kinetics panel math to the golden teaching case (the NG11 Professional capstone until W5a)
 // answer key and to the teaching facts the DC30 lessons quote.
 
 describe('basin kinetics explorer: engine math', () => {
   const m = computeKineticsExplorer(100, 'type2');
 
-  it('reproduces the NG11 professional capstone answer key', () => {
+  it('reproduces the golden teaching case (the pre-W5 capstone key)', () => {
     expect(m.roF0).toBeCloseTo(0.20189651799465538, 12);
     expect(m.roFull).toBeCloseTo(4.687971627022019, 12);
     expect(m.roAt(3, 150)).toBeCloseTo(0.9871413464062039, 12);
