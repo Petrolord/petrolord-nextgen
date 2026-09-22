@@ -1,0 +1,237 @@
+{
+ "course": "geomech",
+ "tiers": {
+  "intermediate": {
+   "why": "Collapse, fracture initiation, breakout and the window at 2000 m run the Associate capstone's parameter set and a Horsrud UCS; the At one depth view took only depth, inclination and azimuth. W4a adds a box for every parameter and one for the UCS (blank is published). The brief now names the view and states the two parameters of the set it did not repeat. Prompt only.",
+   "prompt_edits": [
+    [
+     "Free check: field 4 plus field 6 must equal field 5 exactly, because all three are the same pressures divided by the same denominator.",
+     "Free check: field 4 plus field 6 must equal field 5 exactly, because all three are the same pressures divided by the same denominator. The stability explorer's At one depth view takes every parameter of the set as a typed input (including the Associate capstone's Young's modulus of 18000000000 Pa and strains of 0.0002 and 0.0005) and the UCS."
+    ]
+   ],
+   "annot_updates": {
+    "collapse_Pa": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx At one depth view: TVD 2000, inclination 55, azimuth 130, the eight parameter boxes and the UCS box typed",
+     "printed": {
+      "decimals": 5
+     },
+     "display_scale": 1e-06,
+     "display_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx Tile 'Collapse pressure' MPa(v) = fmt(v/1e6, 5)",
+     "evidence": "Typing the capstone's parameter set and the Horsrud UCS into the At one depth view at 2000 m, 55 degrees on 130, prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters and the profile UCS at 2500 m, vertical, which prints no graded answer."
+    },
+    "frac_init_Pa": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx At one depth view: TVD 2000, inclination 55, azimuth 130, the eight parameter boxes and the UCS box typed",
+     "printed": {
+      "decimals": 5
+     },
+     "display_scale": 1e-06,
+     "display_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx Tile 'Fracture initiation' MPa(v) = fmt(v/1e6, 5)",
+     "evidence": "Typing the capstone's parameter set and the Horsrud UCS into the At one depth view at 2000 m, 55 degrees on 130, prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters and the profile UCS at 2500 m, vertical, which prints no graded answer."
+    },
+    "breakout_theta_deg": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx At one depth view: TVD 2000, inclination 55, azimuth 130, the eight parameter boxes and the UCS box typed",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx Tile 'Breakout angle' integer",
+     "evidence": "Typing the capstone's parameter set and the Horsrud UCS into the At one depth view at 2000 m, 55 degrees on 130, prints this value as an integer, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters and the profile UCS at 2500 m, vertical, which prints no graded answer."
+    },
+    "collapse_emw_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx At one depth view: TVD 2000, inclination 55, azimuth 130, the eight parameter boxes and the UCS box typed",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx Tile 'Collapse EMW' fmt(v, 4)",
+     "evidence": "Typing the capstone's parameter set and the Horsrud UCS into the At one depth view at 2000 m, 55 degrees on 130, prints this value at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters and the profile UCS at 2500 m, vertical, which prints no graded answer."
+    },
+    "frac_init_emw_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx At one depth view: TVD 2000, inclination 55, azimuth 130, the eight parameter boxes and the UCS box typed",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx Tile 'Fracture EMW' fmt(v, 4)",
+     "evidence": "Typing the capstone's parameter set and the Horsrud UCS into the At one depth view at 2000 m, 55 degrees on 130, prints this value at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters and the profile UCS at 2500 m, vertical, which prints no graded answer."
+    },
+    "window_width_emw_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx At one depth view: TVD 2000, inclination 55, azimuth 130, the eight parameter boxes and the UCS box typed",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx Tile 'Window width' fmt(v, 4)",
+     "evidence": "Typing the capstone's parameter set and the Horsrud UCS into the At one depth view at 2000 m, 55 degrees on 130, prints this value at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters and the profile UCS at 2500 m, vertical, which prints no graded answer."
+    }
+   }
+  },
+  "advanced": {
+   "why": "The two whole-trajectory walks run the capstone parameter set, and the window view took only Poisson ratio, friction angle and SHmax azimuth, and printed no collapse at the tightest point. W4a adds the other five parameter boxes (all blank by default) and tiles for collapse and fracture initiation at the tightest point. The brief now names the view. Prompt only.",
+   "prompt_edits": [
+    [
+     "You should be able to say which well is which before running anything.",
+     "You should be able to say which well is which before running anything. The mud window explorer's Along the well view takes every parameter as a typed input and prints the collapse and fracture initiation gradients at the tightest point."
+    ]
+   ],
+   "annot_updates": {
+    "slant_tightest_width_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Along the well view: well slant, the eight parameter boxes typed",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Tile 'Window width' fmt(v, 4)",
+     "evidence": "Typing the capstone's parameter set into the Along the well view on the slant well prints this value at 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters, which prints no graded answer."
+    },
+    "slant_collapse_emw_at_tightest_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Along the well view: well slant, the eight parameter boxes typed",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Tile 'Collapse at tightest' fmt(v, 4)",
+     "evidence": "Typing the capstone's parameter set into the Along the well view on the slant well prints this value at 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters, which prints no graded answer."
+    },
+    "slant_frac_init_emw_at_tightest_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Along the well view: well slant, the eight parameter boxes typed",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Tile 'Fracture initiation at tightest' fmt(v, 4)",
+     "evidence": "Typing the capstone's parameter set into the Along the well view on the slant well prints this value at 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters, which prints no graded answer."
+    },
+    "horizontal_tightest_width_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Along the well view: well horizontal, the eight parameter boxes typed",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Tile 'Window width' fmt(v, 4)",
+     "evidence": "Typing the capstone's parameter set into the Along the well view on the horizontal well prints this value at 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters, which prints no graded answer."
+    },
+    "horizontal_collapse_emw_at_tightest_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Along the well view: well horizontal, the eight parameter boxes typed",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Tile 'Collapse at tightest' fmt(v, 4)",
+     "evidence": "Typing the capstone's parameter set into the Along the well view on the horizontal well prints this value at 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters, which prints no graded answer."
+    },
+    "horizontal_frac_init_emw_at_tightest_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Along the well view: well horizontal, the eight parameter boxes typed",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Tile 'Fracture initiation at tightest' fmt(v, 4)",
+     "evidence": "Typing the capstone's parameter set into the Along the well view on the horizontal well prints this value at 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters, which prints no graded answer."
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/geomech/geomechLab.js",
+  "src/components/course/panels/geomech/StabilityExplorer.jsx",
+  "src/components/course/panels/geomech/WindowExplorer.jsx",
+  "src/components/course/panels/geomech/panelCapstoneGuard.test.js",
+  "src/content/courses/geomech/intermediate/m06-the-professional-reading/l02-working-the-capstone.md",
+  "src/content/courses/geomech/advanced/m06-the-expert-reading/l02-working-the-capstone.md"
+ ]
+}

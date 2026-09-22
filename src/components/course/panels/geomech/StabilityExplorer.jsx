@@ -5,6 +5,7 @@ import {
 import {
   PARAMS, PROFILE, atDepth, stability, attitudeSweep, wallStresses,
   farFieldInBoreholeFrame, VERTICAL, verticalCheck, frictionalLimitRatio,
+  PARAM_FIELDS, BLANK_PARAMS, paramsOver,
 } from './geomechLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -25,14 +26,21 @@ const MODES = [
 ];
 const DEPTHS = PROFILE.tvdM.filter((t) => t >= 1000).map((t) => ({ value: String(t), label: `${t} m` }));
 
+// Your case: every parameter box and the UCS box open blank, which is the
+// published parameter set and the profile's own UCS at the chosen depth.
 const Point = () => {
   const [tvd, setTvd] = useState('2500');
   const [inc, setInc] = useState('0');
   const [azi, setAzi] = useState('0');
+  const [typed, setTyped] = useState(BLANK_PARAMS);
+  const [ucs, setUcs] = useState('');
+  const over = useMemo(() => paramsOver(typed), [typed]);
+  const ucsPa = ucs === '' ? null : Number(ucs);
   const s = useMemo(() => {
-    try { return stability(Number(tvd), { incDeg: Number(inc), aziDeg: Number(azi) }); } catch { return null; }
-  }, [tvd, inc, azi]);
-  const a = useMemo(() => { try { return atDepth(Number(tvd)); } catch { return null; } }, [tvd]);
+    if (!over || (ucsPa !== null && !(ucsPa > 0))) return null;
+    try { return stability(Number(tvd), { incDeg: Number(inc), aziDeg: Number(azi), ucsPa, over }); } catch { return null; }
+  }, [tvd, inc, azi, ucsPa, over]);
+  const a = useMemo(() => { try { return over ? atDepth(Number(tvd), over) : null; } catch { return null; } }, [tvd, over]);
   return (
     <>
       <div className="grid grid-cols-3 gap-2">
@@ -40,6 +48,18 @@ const Point = () => {
         <NumField label="Inclination (deg)" value={inc} onChange={setInc} />
         <NumField label="Azimuth (deg)" value={azi} onChange={setAzi} />
       </div>
+      <p className="text-[11px] text-gray-500 mt-2">
+        Your case: type any parameter to replace the published one, and a UCS to replace the
+        profile&apos;s own. Blank boxes keep the published values.
+      </p>
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2 mt-1">
+        {PARAM_FIELDS.map((f) => (
+          <NumField key={f.key} label={f.label} value={typed[f.key]} placeholder={String(PARAMS[f.key])}
+            onChange={(v) => setTyped((t) => ({ ...t, [f.key]: v }))} />
+        ))}
+        <NumField label="UCS (Pa)" value={ucs} onChange={setUcs} placeholder={a ? String(a.ucsPa) : ''} />
+      </div>
+      {!s && <Note>Those inputs do not describe a case: check the numbers typed above.</Note>}
       {s && a && (
         <>
           <TileGrid>

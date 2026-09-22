@@ -13176,13 +13176,13 @@
   "expected": 14628899.208552536,
   "tol": 50.0,
   "rel_tol": 3.417892165855402e-06,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/intermediate/m06-the-professional-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx At one depth view: TVD 2000, inclination 55, azimuth 130, the eight parameter boxes and the UCS box typed",
   "printed": {
    "decimals": 5
   },
   "display_scale": 1e-06,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:46",
+  "display_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx Tile 'Collapse pressure' MPa(v) = fmt(v/1e6, 5)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
@@ -13190,17 +13190,19 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33 -> give the 'At one depth' view inputs for the parameter set (Poisson ratio, friction angle, Young's modulus, epsX, epsY, Biot, SHmax azimuth, tensile strength) and an optional UCS (Pa), passed as stability(tvd, {incDeg, aziDeg, ucsPa, over}); keep the existing tiles (MPa at 5 decimals is 10 Pa, EMW at 4 decimals, breakout integer)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: the lesson (intermediate m06/l02) sends the learner to gm-stability-explorer, but its Point view calls stability() with the published PARAMS and the profile UCS only, so the capstone case cannot be set. Letting the learner type the parameters is not a leak (they must enter them). The deviated collapse is a 1-degree theta scan plus bisection, so hand-calc is not an alternative. Existing print precision already clears every tol once the case can be set.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Engine wellboreStability (theta scan 0..179 then 60-step bisection) at the capstone stresses, UCS 81.46 MPa, inc 55 azi 130. The panel view that prints 'Collapse pressure' (MPa to 5 decimals, StabilityExplorer.jsx:46) cannot take capstone parameters or a UCS.",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_geomech.sql"
+  },
+  "evidence": "Typing the capstone's parameter set and the Horsrud UCS into the At one depth view at 2000 m, 55 degrees on 130, prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters and the profile UCS at 2500 m, vertical, which prints no graded answer.",
+  "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "geomech",
@@ -13211,13 +13213,13 @@
   "expected": 45176234.71145374,
   "tol": 50.0,
   "rel_tol": 1.1067766120695152e-06,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/intermediate/m06-the-professional-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx At one depth view: TVD 2000, inclination 55, azimuth 130, the eight parameter boxes and the UCS box typed",
   "printed": {
    "decimals": 5
   },
   "display_scale": 1e-06,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:47",
+  "display_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx Tile 'Fracture initiation' MPa(v) = fmt(v/1e6, 5)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
@@ -13225,17 +13227,19 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33 -> give the 'At one depth' view inputs for the parameter set (Poisson ratio, friction angle, Young's modulus, epsX, epsY, Biot, SHmax azimuth, tensile strength) and an optional UCS (Pa), passed as stability(tvd, {incDeg, aziDeg, ucsPa, over}); keep the existing tiles (MPa at 5 decimals is 10 Pa, EMW at 4 decimals, breakout integer)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: the lesson (intermediate m06/l02) sends the learner to gm-stability-explorer, but its Point view calls stability() with the published PARAMS and the profile UCS only, so the capstone case cannot be set. Letting the learner type the parameters is not a leak (they must enter them). The deviated collapse is a 1-degree theta scan plus bisection, so hand-calc is not an alternative. Existing print precision already clears every tol once the case can be set.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Same run; tile 'Fracture initiation' MPa(s.fracInitPa) at 5 decimals would clear tol 50 Pa if the case could be set.",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_geomech.sql"
+  },
+  "evidence": "Typing the capstone's parameter set and the Horsrud UCS into the At one depth view at 2000 m, 55 degrees on 130, prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters and the profile UCS at 2500 m, vertical, which prints no graded answer.",
+  "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "geomech",
@@ -13246,29 +13250,31 @@
   "expected": 84.0,
   "tol": 0.5,
   "rel_tol": 0.005952380952380952,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/intermediate/m06-the-professional-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx At one depth view: TVD 2000, inclination 55, azimuth 130, the eight parameter boxes and the UCS box typed",
   "printed": "integer",
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:48",
+  "display_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx Tile 'Breakout angle' integer",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
   "rounding_miss": 0.0,
-  "answer_space": 180,
-  "guess_p": 0.005555555555555556,
+  "answer_space": null,
+  "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33 -> give the 'At one depth' view inputs for the parameter set (Poisson ratio, friction angle, Young's modulus, epsX, epsY, Biot, SHmax azimuth, tensile strength) and an optional UCS (Pa), passed as stability(tvd, {incDeg, aziDeg, ucsPa, over}); keep the existing tiles (MPa at 5 decimals is 10 Pa, EMW at 4 decimals, breakout integer)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: the lesson (intermediate m06/l02) sends the learner to gm-stability-explorer, but its Point view calls stability() with the published PARAMS and the profile UCS only, so the capstone case cannot be set. Letting the learner type the parameters is not a leak (they must enter them). The deviated collapse is a 1-degree theta scan plus bisection, so hand-calc is not an alternative. Existing print precision already clears every tol once the case can be set.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Engine returns the worst theta on a 1-degree grid (integer 84); the tile prints s.breakoutThetaDeg raw (StabilityExplorer.jsx:48). tol 0.5 on an integer the source shows as an integer is honest.",
-  "notes": "Guessability low: about 180 possible integer angles (0..179); a learner guessing the vertical-hole picture would say 90, not 84."
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_geomech.sql"
+  },
+  "evidence": "Typing the capstone's parameter set and the Horsrud UCS into the At one depth view at 2000 m, 55 degrees on 130, prints this value as an integer, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters and the profile UCS at 2500 m, vertical, which prints no graded answer.",
+  "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "geomech",
@@ -13279,13 +13285,13 @@
   "expected": 745.8662850490502,
   "tol": 0.005,
   "rel_tol": 6.703614441657175e-06,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/intermediate/m06-the-professional-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx At one depth view: TVD 2000, inclination 55, azimuth 130, the eight parameter boxes and the UCS box typed",
   "printed": {
    "decimals": 4
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:49",
+  "display_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx Tile 'Collapse EMW' fmt(v, 4)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
@@ -13293,17 +13299,19 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33 -> give the 'At one depth' view inputs for the parameter set (Poisson ratio, friction angle, Young's modulus, epsX, epsY, Biot, SHmax azimuth, tensile strength) and an optional UCS (Pa), passed as stability(tvd, {incDeg, aziDeg, ucsPa, over}); keep the existing tiles (MPa at 5 decimals is 10 Pa, EMW at 4 decimals, breakout integer)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: the lesson (intermediate m06/l02) sends the learner to gm-stability-explorer, but its Point view calls stability() with the published PARAMS and the profile UCS only, so the capstone case cannot be set. Letting the learner type the parameters is not a leak (they must enter them). The deviated collapse is a 1-degree theta scan plus bisection, so hand-calc is not an alternative. Existing print precision already clears every tol once the case can be set.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Collapse pressure / (g x 2000); tile 'Collapse EMW' fmt(s.collapseEmw, 4) clears tol 0.005. Can be derived from field 1 by hand, but field 1 itself is unobtainable.",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_geomech.sql"
+  },
+  "evidence": "Typing the capstone's parameter set and the Horsrud UCS into the At one depth view at 2000 m, 55 degrees on 130, prints this value at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters and the profile UCS at 2500 m, vertical, which prints no graded answer.",
+  "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "geomech",
@@ -13314,13 +13322,13 @@
   "expected": 2303.346948828282,
   "tol": 0.005,
   "rel_tol": 2.170754172550302e-06,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/intermediate/m06-the-professional-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx At one depth view: TVD 2000, inclination 55, azimuth 130, the eight parameter boxes and the UCS box typed",
   "printed": {
    "decimals": 4
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:50",
+  "display_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx Tile 'Fracture EMW' fmt(v, 4)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
@@ -13328,17 +13336,19 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33 -> give the 'At one depth' view inputs for the parameter set (Poisson ratio, friction angle, Young's modulus, epsX, epsY, Biot, SHmax azimuth, tensile strength) and an optional UCS (Pa), passed as stability(tvd, {incDeg, aziDeg, ucsPa, over}); keep the existing tiles (MPa at 5 decimals is 10 Pa, EMW at 4 decimals, breakout integer)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: the lesson (intermediate m06/l02) sends the learner to gm-stability-explorer, but its Point view calls stability() with the published PARAMS and the profile UCS only, so the capstone case cannot be set. Letting the learner type the parameters is not a leak (they must enter them). The deviated collapse is a 1-degree theta scan plus bisection, so hand-calc is not an alternative. Existing print precision already clears every tol once the case can be set.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Frac init / (g x 2000); tile 'Fracture EMW' fmt(s.fracInitEmw, 4).",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_geomech.sql"
+  },
+  "evidence": "Typing the capstone's parameter set and the Horsrud UCS into the At one depth view at 2000 m, 55 degrees on 130, prints this value at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters and the profile UCS at 2500 m, vertical, which prints no graded answer.",
+  "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "geomech",
@@ -13349,13 +13359,13 @@
   "expected": 1557.480663779232,
   "tol": 0.005,
   "rel_tol": 3.210312728934614e-06,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/intermediate/m06-the-professional-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx At one depth view: TVD 2000, inclination 55, azimuth 130, the eight parameter boxes and the UCS box typed",
   "printed": {
    "decimals": 4
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:51",
+  "display_ref": "src/components/course/panels/geomech/StabilityExplorer.jsx Tile 'Window width' fmt(v, 4)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
@@ -13363,17 +13373,19 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/StabilityExplorer.jsx:33 -> give the 'At one depth' view inputs for the parameter set (Poisson ratio, friction angle, Young's modulus, epsX, epsY, Biot, SHmax azimuth, tensile strength) and an optional UCS (Pa), passed as stability(tvd, {incDeg, aziDeg, ucsPa, over}); keep the existing tiles (MPa at 5 decimals is 10 Pa, EMW at 4 decimals, breakout integer)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: the lesson (intermediate m06/l02) sends the learner to gm-stability-explorer, but its Point view calls stability() with the published PARAMS and the profile UCS only, so the capstone case cannot be set. Letting the learner type the parameters is not a leak (they must enter them). The deviated collapse is a 1-degree theta scan plus bisection, so hand-calc is not an alternative. Existing print precision already clears every tol once the case can be set.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "(frac - collapse)/(g x 2000); tile 'Window width' fmt(s.widthEmw, 4).",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_geomech.sql"
+  },
+  "evidence": "Typing the capstone's parameter set and the Horsrud UCS into the At one depth view at 2000 m, 55 degrees on 130, prints this value at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters and the profile UCS at 2500 m, vertical, which prints no graded answer.",
+  "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "geomech",
@@ -13384,13 +13396,13 @@
   "expected": 1317.993874508228,
   "tol": 0.005,
   "rel_tol": 3.79364433834384e-06,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/advanced/m06-the-expert-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Along the well view: well slant, the eight parameter boxes typed",
   "printed": {
    "decimals": 4
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:71",
+  "display_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Tile 'Window width' fmt(v, 4)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
@@ -13398,17 +13410,19 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29 -> add inputs for Young's modulus, epsX, epsY, Biot coefficient and tensile strength (the view already takes Poisson ratio, friction angle and SHmax azimuth) and pass them in the window_ over; add a 'Collapse at tightest' tile = fmt(w.tightRow.collapseEmwKgM3, 4) beside Lower/Upper bound (WindowExplorer.jsx:72-73)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: advanced m06/l02 says 'Nothing here is computed by hand' and sends the learner to gm-window-explorer, which cannot take E, the two strains, Biot or tensile strength, so the capstone walk cannot be run. The 4-decimal tiles clear tol 0.005 once it can. The collapse gradient at the tightest row is not a tile today (only the chart tooltip at 3 decimals), and on the pore-pressure-bound well the Lower bound tile is the pore pressure, so a collapse tile is needed too.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "mudWindowAlongWell over the slant well at capstone parameters; 'Window width' tile fmt(w.tightest.widthKgM3, 4) (WindowExplorer.jsx:71), but window_ is called with only nu, friction angle and SHmax azimuth.",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_geomech.sql"
+  },
+  "evidence": "Typing the capstone's parameter set into the Along the well view on the slant well prints this value at 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters, which prints no graded answer.",
+  "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "geomech",
@@ -13419,31 +13433,33 @@
   "expected": 248.10414286699674,
   "tol": 0.005,
   "rel_tol": 2.0152827527271045e-05,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/advanced/m06-the-expert-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Along the well view: well slant, the eight parameter boxes typed",
   "printed": {
-   "decimals": 3
+   "decimals": 4
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:55",
+  "display_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Tile 'Collapse at tightest' fmt(v, 4)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": 0.00014286699672538816,
+  "rounding_miss": 4.2866996750490216e-05,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29 -> add inputs for Young's modulus, epsX, epsY, Biot coefficient and tensile strength (the view already takes Poisson ratio, friction angle and SHmax azimuth) and pass them in the window_ over; add a 'Collapse at tightest' tile = fmt(w.tightRow.collapseEmwKgM3, 4) beside Lower/Upper bound (WindowExplorer.jsx:72-73)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: advanced m06/l02 says 'Nothing here is computed by hand' and sends the learner to gm-window-explorer, which cannot take E, the two strains, Biot or tensile strength, so the capstone walk cannot be run. The 4-decimal tiles clear tol 0.005 once it can. The collapse gradient at the tightest row is not a tile today (only the chart tooltip at 3 decimals), and on the pore-pressure-bound well the Lower bound tile is the pore pressure, so a collapse tile is needed too.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Slant tightest row collapse gradient (248.1, below the pore pressure, so the Lower bound tile shows the pore pressure instead). Only the chart tooltip shows collapse, at fmt(v, 3) (WindowExplorer.jsx:55), and needs the capstone case anyway.",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_geomech.sql"
+  },
+  "evidence": "Typing the capstone's parameter set into the Along the well view on the slant well prints this value at 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters, which prints no graded answer.",
+  "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "geomech",
@@ -13454,13 +13470,13 @@
   "expected": 2496.6949229689703,
   "tol": 0.005,
   "rel_tol": 2.0026475617830787e-06,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/advanced/m06-the-expert-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Along the well view: well slant, the eight parameter boxes typed",
   "printed": {
    "decimals": 4
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:73",
+  "display_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Tile 'Fracture initiation at tightest' fmt(v, 4)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
@@ -13468,17 +13484,19 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29 -> add inputs for Young's modulus, epsX, epsY, Biot coefficient and tensile strength (the view already takes Poisson ratio, friction angle and SHmax azimuth) and pass them in the window_ over; add a 'Collapse at tightest' tile = fmt(w.tightRow.collapseEmwKgM3, 4) beside Lower/Upper bound (WindowExplorer.jsx:72-73)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: advanced m06/l02 says 'Nothing here is computed by hand' and sends the learner to gm-window-explorer, which cannot take E, the two strains, Biot or tensile strength, so the capstone walk cannot be run. The 4-decimal tiles clear tol 0.005 once it can. The collapse gradient at the tightest row is not a tile today (only the chart tooltip at 3 decimals), and on the pore-pressure-bound well the Lower bound tile is the pore pressure, so a collapse tile is needed too.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "'Upper bound' tile fmt(w.tightest.upperEmwKgM3, 4) is the fracture initiation gradient at the tightest row; not settable to the capstone case.",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_geomech.sql"
+  },
+  "evidence": "Typing the capstone's parameter set into the Along the well view on the slant well prints this value at 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters, which prints no graded answer.",
+  "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "geomech",
@@ -13489,13 +13507,13 @@
   "expected": 1343.3180035349267,
   "tol": 0.005,
   "rel_tol": 3.722126843266118e-06,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/advanced/m06-the-expert-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Along the well view: well horizontal, the eight parameter boxes typed",
   "printed": {
    "decimals": 4
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:71",
+  "display_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Tile 'Window width' fmt(v, 4)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
@@ -13503,17 +13521,19 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29 -> add inputs for Young's modulus, epsX, epsY, Biot coefficient and tensile strength (the view already takes Poisson ratio, friction angle and SHmax azimuth) and pass them in the window_ over; add a 'Collapse at tightest' tile = fmt(w.tightRow.collapseEmwKgM3, 4) beside Lower/Upper bound (WindowExplorer.jsx:72-73)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: advanced m06/l02 says 'Nothing here is computed by hand' and sends the learner to gm-window-explorer, which cannot take E, the two strains, Biot or tensile strength, so the capstone walk cannot be run. The 4-decimal tiles clear tol 0.005 once it can. The collapse gradient at the tightest row is not a tile today (only the chart tooltip at 3 decimals), and on the pore-pressure-bound well the Lower bound tile is the pore pressure, so a collapse tile is needed too.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Same walk on the horizontal well; 'Window width' tile at 4 decimals.",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_geomech.sql"
+  },
+  "evidence": "Typing the capstone's parameter set into the Along the well view on the horizontal well prints this value at 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters, which prints no graded answer.",
+  "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "geomech",
@@ -13524,13 +13544,13 @@
   "expected": 1411.1968938126954,
   "tol": 0.005,
   "rel_tol": 3.5430916989133037e-06,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/advanced/m06-the-expert-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Along the well view: well horizontal, the eight parameter boxes typed",
   "printed": {
    "decimals": 4
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:72",
+  "display_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Tile 'Collapse at tightest' fmt(v, 4)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
@@ -13538,17 +13558,19 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29 -> add inputs for Young's modulus, epsX, epsY, Biot coefficient and tensile strength (the view already takes Poisson ratio, friction angle and SHmax azimuth) and pass them in the window_ over; add a 'Collapse at tightest' tile = fmt(w.tightRow.collapseEmwKgM3, 4) beside Lower/Upper bound (WindowExplorer.jsx:72-73)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: advanced m06/l02 says 'Nothing here is computed by hand' and sends the learner to gm-window-explorer, which cannot take E, the two strains, Biot or tensile strength, so the capstone walk cannot be run. The 4-decimal tiles clear tol 0.005 once it can. The collapse gradient at the tightest row is not a tile today (only the chart tooltip at 3 decimals), and on the pore-pressure-bound well the Lower bound tile is the pore pressure, so a collapse tile is needed too.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Collapse-bound well: 'Lower bound' tile fmt(..., 4) equals the collapse gradient here (1411.197); not settable to the capstone case.",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_geomech.sql"
+  },
+  "evidence": "Typing the capstone's parameter set into the Along the well view on the horizontal well prints this value at 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters, which prints no graded answer.",
+  "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "geomech",
@@ -13559,13 +13581,13 @@
   "expected": 2754.514897347622,
   "tol": 0.005,
   "rel_tol": 1.8152016548593006e-06,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/geomech/advanced/m06-the-expert-reading/l02-working-the-capstone.md; /root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Along the well view: well horizontal, the eight parameter boxes typed",
   "printed": {
    "decimals": 4
   },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:73",
+  "display_ref": "src/components/course/panels/geomech/WindowExplorer.jsx Tile 'Fracture initiation at tightest' fmt(v, 4)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
@@ -13573,17 +13595,19 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/geomech/WindowExplorer.jsx:29 -> add inputs for Young's modulus, epsX, epsY, Biot coefficient and tensile strength (the view already takes Poisson ratio, friction angle and SHmax azimuth) and pass them in the window_ over; add a 'Collapse at tightest' tile = fmt(w.tightRow.collapseEmwKgM3, 4) beside Lower/Upper bound (WindowExplorer.jsx:72-73)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: advanced m06/l02 says 'Nothing here is computed by hand' and sends the learner to gm-window-explorer, which cannot take E, the two strains, Biot or tensile strength, so the capstone walk cannot be run. The 4-decimal tiles clear tol 0.005 once it can. The collapse gradient at the tightest row is not a tile today (only the chart tooltip at 3 decimals), and on the pore-pressure-bound well the Lower bound tile is the pore pressure, so a collapse tile is needed too.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "'Upper bound' tile at 4 decimals; not settable to the capstone case.",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_geomech.sql"
+  },
+  "evidence": "Typing the capstone's parameter set into the Along the well view on the horizontal well prints this value at 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens blank on the published parameters, which prints no graded answer.",
+  "notes": "W4a typed-case mode (parameter boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "heattransfer",

@@ -4,6 +4,8 @@ Six numbers from two whole-trajectory walks.
 
 {{panel:gm-window-explorer}}
 
+**Your case.** The explorer's "Along the well" view has a box for every parameter of the set. Type the capstone's parameters and read the width, the collapse and the fracture initiation at the tightest point on each well. The boxes open blank, which is the published parameter set.
+
 ## What is asked
 
 On the SLANT well, at the tightest point of its walk:

@@ -2,7 +2,9 @@ import React, { useMemo, useState } from 'react';
 import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
-import { WELLS, PARAMS, window_, caseOf } from './geomechLab';
+import {
+  WELLS, PARAMS, window_, caseOf, PARAM_FIELDS, BLANK_PARAMS, paramsOver,
+} from './geomechLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Window explorer: the mud weight window walked along a whole trajectory, the
@@ -20,14 +22,13 @@ const MODES = [
 
 const Window = () => {
   const [id, setId] = useState('slant');
-  const [nu, setNu] = useState(String(PARAMS.nu));
-  const [phi, setPhi] = useState(String(PARAMS.frictionAngleDeg));
-  const [azi, setAzi] = useState(String(PARAMS.shmaxAzimuthDeg));
+  // Your case: every box opens blank, which is the published parameter set.
+  const [typed, setTyped] = useState(BLANK_PARAMS);
+  const over = useMemo(() => paramsOver(typed), [typed]);
   const w = useMemo(() => {
-    const n = Number(nu); const f = Number(phi); const a = Number(azi);
-    if (!(n > 0 && n < 0.5) || !(f >= 0) || !Number.isFinite(a)) return null;
-    try { return window_(id, { nu: n, frictionAngleDeg: f, shmaxAzimuthDeg: a }); } catch { return null; }
-  }, [id, nu, phi, azi]);
+    if (!over) return null;
+    try { return window_(id, over); } catch { return null; }
+  }, [id, over]);
   const rows = useMemo(() => (w ? w.rows.map((r) => ({
     md: r.md,
     lower: Math.max(r.ppEmwKgM3, r.collapseEmwKgM3),
@@ -37,12 +38,15 @@ const Window = () => {
   })) : []), [w]);
   return (
     <>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         <SelectField label="Well" value={id} onChange={setId} options={WELL_OPTIONS} />
-        <NumField label="Poisson ratio" value={nu} onChange={setNu} />
-        <NumField label="Friction angle (deg)" value={phi} onChange={setPhi} />
-        <NumField label="SHmax azimuth (deg)" value={azi} onChange={setAzi} />
+        {PARAM_FIELDS.map((f) => (
+          <NumField key={f.key} label={f.label} value={typed[f.key]} placeholder={String(PARAMS[f.key])}
+            onChange={(v) => setTyped((t) => ({ ...t, [f.key]: v }))} />
+        ))}
       </div>
+      <p className="text-[11px] text-gray-500 mt-1">Blank boxes keep the published values; type any of them to run your own case.</p>
+      {!w && <Note>Those parameters do not describe a case: check the numbers typed above.</Note>}
       <div className="h-64 mt-3">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={rows} margin={{ top: 10, right: 16, bottom: 5, left: 0 }}>
@@ -71,6 +75,8 @@ const Window = () => {
             <Tile label="Window width" value={fmt(w.tightest.widthKgM3, 4)} unit="kg/m3" />
             <Tile label="Lower bound" value={fmt(w.tightest.lowerEmwKgM3, 4)} unit="kg/m3" />
             <Tile label="Upper bound" value={fmt(w.tightest.upperEmwKgM3, 4)} unit="kg/m3" />
+            <Tile label="Collapse at tightest" value={fmt(w.tightRow.collapseEmwKgM3, 4)} unit="kg/m3" />
+            <Tile label="Fracture initiation at tightest" value={fmt(w.tightRow.fracInitEmwKgM3, 4)} unit="kg/m3" />
           </TileGrid>
           <div className="mt-3 text-xs text-slate-300">
             At the tightest point the lower bound is set by the
