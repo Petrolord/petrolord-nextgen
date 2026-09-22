@@ -135,6 +135,16 @@ def evaluate(caps, annots):
                 pass  # a redesign may rest on judgement; the evidence says why
             if cls != 'none' and not a.get('evidence'):
                 errors.append(f'{k}: class {cls} with no evidence')
+            # W4 onward: a field whose fix ships a panel route has left `unobtainable`
+            # (no route) and is gradable as printed, so it is class none with no flag.
+            sh = a.get('shipped')
+            if isinstance(sh, dict) and sh.get('route'):
+                if a.get('source') == 'unobtainable':
+                    errors.append(f'{k}: ships a route ({sh["route"]}) but is still source unobtainable')
+                if cls != 'none':
+                    errors.append(f'{k}: ships a route but is class {cls}')
+                if a.get('printed') is None:
+                    errors.append(f'{k}: ships a route but records no printed precision')
             row.update({
                 'source': a.get('source'), 'source_ref': a.get('source_ref'), 'printed': a.get('printed'),
                 'display_scale': scale, 'display_ref': a.get('display_ref'),
@@ -252,6 +262,14 @@ def selftest(caps, annots):
             {'key': 'zz_plant', 'label': 'x', 'unit': '-', 'expected': 1, 'tol': 0.1}),
         'annotation for a field that is not live': lambda c2, a2: a2[course]['fields'].append(
             {'tier': cap['tier'], 'key': 'zz_ghost', 'class': 'none'}),
+        'a route shipped but the field still has none (W4)': lambda c2, a2: add(c2, a2,
+            {'key': 'zz_plant', 'label': 'x', 'unit': 'Pa', 'expected': 6233731.747831926, 'tol': 50},
+            {'source': 'unobtainable', 'printed': None, 'class': 'none',
+             'shipped': {'wave': 'w4a', 'route': 'typed-case panel print (W4a)'}}),
+        'a route shipped but printed too coarsely for tol (W4)': lambda c2, a2: add(c2, a2,
+            {'key': 'zz_plant', 'label': 'x', 'unit': 'Pa', 'expected': 13362352.096477188, 'tol': 50},
+            {'source': 'nextgen-panel', 'printed': {'decimals': 3}, 'display_scale': 1e-06, 'class': 'none',
+             'shipped': {'wave': 'w4a', 'route': 'typed-case panel print (W4a)'}}),
     }
     for name, mut in controls.items():
         errs = plant(mut)

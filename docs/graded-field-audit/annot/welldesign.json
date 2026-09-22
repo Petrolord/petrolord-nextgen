@@ -141,24 +141,28 @@
   {
    "tier": "intermediate",
    "key": "well1_cov_nn",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/welldesign/UncertaintyExplorer.jsx:44-57 (tiles) and :86-96 (per-source table); /root/wt-b5-nextgen/src/components/course/panels/welldesign/welldesignLab.js:371 (graded value u.cov[0][0])",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/welldesign/UncertaintyExplorer.jsx station selector, total depth (index 267)",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/welldesign/UncertaintyExplorer.jsx Tile 'North-north variance' fmt(u.cov[0][0], 4)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/welldesign/UncertaintyExplorer.jsx:56 -> add <Tile label=\"North-north variance\" value={fmt(u.cov[0][0], 4)} unit=\"m2 (total covariance)\" /> after the 95 percent semi-major tile"
-   },
+   "class": "none",
+   "fix": null,
    "owner_decision": false,
    "recommendation": null,
-   "evidence": "No panel prints the total covariance or its north-north entry: the tiles give H/L/A sigmas and the 1-sigma ellipse, the table gives per-source TRACE (fmt(c.trace, 4)), and uncertaintyAt returns cov but nothing renders it. Rebuilding NN from the printed ellipse (a^2 cos^2 az + b^2 sin^2 az with a 95.6509, b 10.5538, az 165.0521 at 4 dp) carries rounding error up to about 0.013 m2 against tol 0.005, and that reconstruction is not taught.",
-   "notes": "The walkthrough (intermediate m06 l02) says fields 1-3 'come straight out of the model', which a learner does not have outside the panel.",
+   "evidence": "Selecting the total depth station in the uncertainty explorer prints the north-north entry of the total covariance to 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on station 180, which prints no Professional answer.",
+   "notes": "W4a added the tile and moved the opening station from 267 to 180. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel print (W4a)"
+   }
   },
   {
    "tier": "intermediate",

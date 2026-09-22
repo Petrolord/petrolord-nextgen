@@ -131,6 +131,34 @@ def w1_shipped():
 SHIPPED.update(w1_shipped())
 
 
+# B5 FOLLOW-ON W4a (typed-case panel modes, drilling rows of section 1 route b
+# and the casingtubing panel row of section 2), from w4a/<course>.json. Each
+# field gains a panel route: its post-W4a annotation (`annot_update`) names the
+# panel view and the precision it prints, and the entry carries `route`, which
+# audit.py checks: a field that ships a route may no longer be `unobtainable`
+# and must be class none with no flag. No key, expected or tol moves, so
+# `audit.py --post` has nothing extra to check; a prompt pointer, where there
+# is one, is 20261027a_w4_<course>.sql.
+def w4a_shipped():
+    out = {}
+    for p in sorted(glob.glob(os.path.join(HERE, 'w4a', '*.json'))):
+        s = json.load(open(p))
+        course = s['course']
+        has_prompt = any(t.get('prompt_edits') for t in s['tiers'].values())
+        for tier, t in s['tiers'].items():
+            for key, up in t.get('annot_updates', {}).items():
+                up = dict(up)
+                route = up.pop('route')
+                e = {'wave': 'w4a', 'decided': True, 'class': up.pop('class', 'none'), 'annot_update': up, 'route': route}
+                if has_prompt:
+                    e['migration'] = f'20261027a_w4_{course}.sql'
+                out[(course, tier, key)] = e
+    return out
+
+
+SHIPPED.update(w4a_shipped())
+
+
 def main(raw):
     out = os.path.join(HERE, 'annot')
     os.makedirs(out, exist_ok=True)

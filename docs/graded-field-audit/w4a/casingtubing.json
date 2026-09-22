@@ -1,0 +1,83 @@
+{
+ "course": "casingtubing",
+ "tiers": {
+  "beginner": {
+   "why": "The rating explorer's One pipe view is the route the capstone lesson names. It could not be set to 0.55 of yield and printed ratings in MPa to 3 dp (500 Pa steps against tol 50) and the D over t boundaries to 4 dp (tol 5e-7). W4a adds 0.55 to the axial fractions, prints burst, collapse and collapse under tension in whole pascals and the boundaries to 10 dp. The view opens on 9-5/8 inch 47 lb/ft P-110 BTC at 0.4, so its default lands on no graded answer (panelCapstoneGuard). No prompt change.",
+   "prompt_edits": [],
+   "annot_updates": {
+    "burst_rating_Pa": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/casingtubing/RatingExplorer.jsx One pipe view: row 13-3/8 68, grade C-90, connection STC and axial fraction 0.55 all selectable",
+     "printed": {
+      "decimals": 0
+     },
+     "display_ref": "src/components/course/panels/casingtubing/RatingExplorer.jsx Tile 'Burst' Pa() whole pascals",
+     "route": "typed-case panel print (W4a)",
+     "evidence": "Selecting 13-3/8 68, C-90, STC and 0.55 in the One pipe view prints this rating in whole pascals, within tol 50 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on 9-5/8 47 P-110 BTC at 0.4, which lands on no graded answer.",
+     "notes": "W4a (typed-case panel modes). Key, expected and tolerance unchanged."
+    },
+    "collapse_Pa": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/casingtubing/RatingExplorer.jsx One pipe view: row 13-3/8 68, grade C-90, connection STC and axial fraction 0.55 all selectable",
+     "printed": {
+      "decimals": 0
+     },
+     "display_ref": "src/components/course/panels/casingtubing/RatingExplorer.jsx Tile 'Collapse' Pa() whole pascals",
+     "route": "typed-case panel print (W4a)",
+     "evidence": "Selecting 13-3/8 68, C-90, STC and 0.55 in the One pipe view prints this rating in whole pascals, within tol 50 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on 9-5/8 47 P-110 BTC at 0.4, which lands on no graded answer.",
+     "notes": "W4a (typed-case panel modes). Key, expected and tolerance unchanged."
+    },
+    "collapse_at_55pct_tension_Pa": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/casingtubing/RatingExplorer.jsx One pipe view: row 13-3/8 68, grade C-90, connection STC and axial fraction 0.55 all selectable",
+     "printed": {
+      "decimals": 0
+     },
+     "display_ref": "src/components/course/panels/casingtubing/RatingExplorer.jsx Tile 'Collapse under tension' Pa() whole pascals",
+     "route": "typed-case panel print (W4a)",
+     "evidence": "Selecting 13-3/8 68, C-90, STC and 0.55 in the One pipe view prints this rating in whole pascals, within tol 50 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on 9-5/8 47 P-110 BTC at 0.4, which lands on no graded answer.",
+     "notes": "W4a (typed-case panel modes). Key, expected and tolerance unchanged."
+    },
+    "dt_plastic_transition_boundary": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/casingtubing/RatingExplorer.jsx One pipe view: row 13-3/8 68, grade C-90, connection STC and axial fraction 0.55 all selectable",
+     "printed": {
+      "decimals": 10
+     },
+     "display_ref": "src/components/course/panels/casingtubing/RatingExplorer.jsx One pipe view boundaries sentence fmt(r.boundaries.dtPt, 10)",
+     "route": "typed-case panel print (W4a)",
+     "evidence": "Selecting grade C-90 in the One pipe view prints the plastic to transition boundary to 10 dp, within tol 5e-7 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The census table keeps 4 dp. The view opens on 9-5/8 47 P-110 BTC at 0.4, which lands on no graded answer.",
+     "notes": "W4a (typed-case panel modes). Key, expected and tolerance unchanged."
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/casingtubing/RatingExplorer.jsx",
+  "src/components/course/panels/casingtubing/panelCapstoneGuard.test.js"
+ ]
+}
