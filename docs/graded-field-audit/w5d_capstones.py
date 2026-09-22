@@ -25,7 +25,8 @@ tier that W1 never labelled already reads as unlabelled. Copy rule: no em or en
 dash, no new "X, not Y" contrastive. `--check` regenerates in memory and fails
 if a committed migration differs.
 """
-import argparse, json, os, sys
+import argparse
+import difflib, json, os, sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 sys.path.insert(0, HERE)
@@ -41,6 +42,9 @@ STRIP = {
     'welldesign': {
         'beginner': 'the survey listing opened on the feet golden well (TVD and vertical section graded); it now '
                     'opens on the 131-station teaching well',
+        'intermediate': 'the uncertainty explorer opened on station 267, the capstone station, and printed every '
+                        'Professional answer; W4a moved its default to station 180 in the tangent, which no '
+                        'capstone grades from',
         'advanced': 'the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page '
                     'intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro '
                     'prints two decimals',
@@ -85,6 +89,12 @@ def label_of(course, tier):
     return w1.LABEL_SOME + w1.END_B
 
 
+def only_insertions(base, text):
+    """text is base with nothing removed or replaced (a later wave may only have added)."""
+    ops = difflib.SequenceMatcher(None, base, text, autojunk=False).get_opcodes()
+    return all(op in ('equal', 'insert') for op, *_ in ops)
+
+
 def plan(caps, course):
     rows = []
     for tier in sorted(STRIP[course], key=TIERS.index):
@@ -99,7 +109,9 @@ def plan(caps, course):
         if 'Open book' in new:
             sys.exit(f'REFUSED: {course}/{tier}: a second open-book sentence remains')
         base = BASELINE.get((course, tier))
-        if base != new:
+        # the pre-W1 brief, or that brief with text an earlier wave inserted into it
+        # (W4a prompt pointers, 20261027a): stripping takes off the label only
+        if base is None or not only_insertions(base, new):
             sys.exit(f'REFUSED: {course}/{tier}: the stripped brief is not the pre-W1 brief of caps.json')
         w1.check_copy(f'{course}/{tier} prompt', old, new)
         rows.append({'tier': tier, 'old': old, 'new': new, 'fields': w1.dumps(cap['fields']), 'why': STRIP[course][tier]})

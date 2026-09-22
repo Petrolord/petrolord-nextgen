@@ -35,7 +35,7 @@ annotations) exits 2: a gate that examines nothing must never report clean.
 
 Writes fields.json (the machine-readable per-field table) and fields.csv.
 """
-import argparse, copy, csv, glob, json, math, os, re, sys
+import argparse, copy, csv, difflib, glob, json, math, os, re, sys
 
 WORDS = {'zero': 0, 'one': 1, 'two': 2, 'three': 3, 'four': 4, 'five': 5, 'six': 6,
          'seven': 7, 'eight': 8, 'nine': 9, 'ten': 10, 'eleven': 11, 'twelve': 12, 'thirteen': 13,
@@ -244,8 +244,9 @@ def post_check(before, after, rows, waves=()):
             continue
         if 'Open book' in (ca.get('prompt') or ''):
             errs.append(f'{ck}: stripped by {st["migration"]} but the brief still carries the open-book label')
-        elif ca.get('prompt') != cb.get('prompt'):
-            errs.append(f'{ck}: stripped, but the brief is not its pre-W1 text')
+        elif not all(op in ('equal', 'insert') for op, *_ in difflib.SequenceMatcher(
+                None, cb.get('prompt') or '', ca.get('prompt') or '', autojunk=False).get_opcodes()):
+            errs.append(f'{ck}: stripped, but the brief is not its pre-W1 text (plus what an earlier wave inserted)')
     # W2 lesson route: the lesson that now prints the form must carry it (read
     # from the repository this folder sits in; the apply dry run extracts
     # src/content beside it)
@@ -311,7 +312,7 @@ def post_check(before, after, rows, waves=()):
         if not add:
             continue
         ca = idx_a.get((r['course'], r['tier']))
-        if ca is None or not str(ca.get('prompt', '')).rstrip().endswith(add):
+        if ca is None or add not in str(ca.get('prompt', '')):
             errs.append(f"{(r['course'], r['tier'], r['key'])}: the brief does not end with its {r['shipped'].get('wave')} sentence {add[:60]!r}")
     return errs
 
@@ -855,7 +856,7 @@ def selftest(caps, annots):
         ok &= red
         c2 = after()
         cap2 = next(c for c in c2 if (c['app'], c['tier']) == ck)
-        cap2['prompt'] = (cap2.get('prompt') or '') + ' drift'
+        cap2['prompt'] = (cap2.get('prompt') or '')[12:]  # words gone from the pre-W1 text
         red = bool(post_check(caps, c2, rows, waves))
         print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: a stripped tier's brief drifted from its pre-W1 text")
         ok &= red

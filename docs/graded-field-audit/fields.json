@@ -46204,7 +46204,12 @@
    "route": "typed-case panel print (W4a)"
   },
   "evidence": "Selecting the total depth station in the uncertainty explorer prints the north-north entry of the total covariance to 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on station 180, which prints no Professional answer.",
-  "notes": "W4a added the tile and moved the opening station from 267 to 180. Key, expected and tolerance unchanged."
+  "notes": "W4a added the tile and moved the opening station from 267 to 180. Key, expected and tolerance unchanged.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the uncertainty explorer opened on station 267, the capstone station, and printed every Professional answer; W4a moved its default to station 180 in the tangent, which no capstone grades from"
+  }
  },
  {
   "course": "welldesign",
@@ -46233,11 +46238,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile 'Lateral sigma' fmt(u.sigmaL, 4) = 95.6508; tol 0.005. The adjacent 'Ellipse semi-major' 95.6509 at 1 sigma would also pass.",
-  "notes": "LEAK: the panel opens on station 267, the capstone station, so this shows in the default state."
+  "notes": "LEAK: the panel opens on station 267, the capstone station, so this shows in the default state.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the uncertainty explorer opened on station 267, the capstone station, and printed every Professional answer; W4a moved its default to station 180 in the tangent, which no capstone grades from"
+  }
  },
  {
   "course": "welldesign",
@@ -46266,11 +46276,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile 'Highside sigma' fmt(u.sigmaH, 4) = 21.6362; tol 0.005.",
-  "notes": "LEAK: default state (station 267)."
+  "notes": "LEAK: default state (station 267).",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the uncertainty explorer opened on station 267, the capstone station, and printed every Professional answer; W4a moved its default to station 180 in the tangent, which no capstone grades from"
+  }
  },
  {
   "course": "welldesign",
@@ -46299,11 +46314,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile 'Semi-major at 95 percent' fmt(u.ellipse95.semiMajor, 4), unit 'm, k 2.7955'; prints 267.392 (trailing zero trimmed) vs 267.391988; tol 0.005.",
-  "notes": "LEAK: default state (station 267)."
+  "notes": "LEAK: default state (station 267).",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the uncertainty explorer opened on station 267, the capstone station, and printed every Professional answer; W4a moved its default to station 180 in the tangent, which no capstone grades from"
+  }
  },
  {
   "course": "welldesign",
@@ -46332,11 +46352,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile 'Ellipse azimuth' fmt(u.ellipse1.azimuthDeg, 4) = 165.0521; tol 0.005.",
-  "notes": "LEAK: default state (station 267)."
+  "notes": "LEAK: default state (station 267).",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the uncertainty explorer opened on station 267, the capstone station, and printed every Professional answer; W4a moved its default to station 180 in the tangent, which no capstone grades from"
+  }
  },
  {
   "course": "welldesign",
@@ -46365,11 +46390,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Table 'Share' fmt(100 * c.shareOfTrace, 3) percent = 58.295 vs 58.294649 (diff 0.00035); tol 0.005 is 10x half a unit in the 3rd decimal.",
-  "notes": "LEAK: default state (station 267)."
+  "notes": "LEAK: default state (station 267).",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the uncertainty explorer opened on station 267, the capstone station, and printed every Professional answer; W4a moved its default to station 180 in the tangent, which no capstone grades from"
+  }
  },
  {
   "course": "welldesign",

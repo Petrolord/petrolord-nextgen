@@ -11,6 +11,10 @@
 -- beginner:
 --   the survey listing opened on the feet golden well (TVD and vertical section
 --   graded); it now opens on the 131-station teaching well
+-- intermediate:
+--   the uncertainty explorer opened on station 267, the capstone station, and
+--   printed every Professional answer; W4a moved its default to station 180 in
+--   the tangent, which no capstone grades from
 -- advanced:
 --   the clearance ladder opened on offset 10 (its minimum separation factor
 --   graded) and the page intro printed that factor to three decimals; the ladder
@@ -42,6 +46,7 @@ declare
   v_written  integer := 0;
   v_s0       text;
   v_s1       text;
+  v_s2       text;
 begin
   -- W1 (20261024*) must be applied: before it, an unlabelled brief is not evidence of anything
   if not exists (select 1 from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f
@@ -61,20 +66,31 @@ begin
     raise exception 'w5d welldesign refused: welldesign/beginner matches neither its W1-labelled form (prompt md5 443db164c59e8310153d45aff2f3b8a1) nor its stripped form (prompt md5 2d542668d8922a5d989e70fa751efd79), with the fields this file was generated against';
   end if;
 
+  -- welldesign / intermediate
+  select count(*) into v_n from public.academy_capstones where app_slug = 'welldesign' and tier = 'intermediate' and active;
+  if v_n <> 1 then raise exception 'w5d welldesign refused: welldesign/intermediate has % active capstone rows, expected 1', v_n; end if;
+  select case when md5(prompt) = 'b4ae95ab406b65347940e11361588a3b' and fields = '[{"key": "well1_cov_nn", "tol": 0.005, "unit": "m2", "label": "North-north covariance entry", "expected": 8547.77693579118}, {"key": "well1_sigma_lateral", "tol": 0.005, "unit": "m", "label": "Lateral one-sigma", "expected": 95.65082424690361}, {"key": "well1_sigma_highside", "tol": 0.005, "unit": "m", "label": "Highside one-sigma", "expected": 21.636241962526093}, {"key": "well1_ellipse95_semimajor", "tol": 0.005, "unit": "m", "label": "Horizontal ellipse semi-major", "expected": 267.39198828526287}, {"key": "well1_ellipse_azimuth_deg", "tol": 0.005, "unit": "deg", "label": "Ellipse major axis azimuth", "expected": 165.05207648844214}, {"key": "well1_amil_share_pct", "tol": 0.005, "unit": "percent", "label": "Largest source share by trace", "expected": 58.294649231431436}]'::jsonb then 'old'
+              when md5(prompt) = '33c2f04817aa14d6078a1fb5dc8f888f' and fields = '[{"key": "well1_cov_nn", "tol": 0.005, "unit": "m2", "label": "North-north covariance entry", "expected": 8547.77693579118}, {"key": "well1_sigma_lateral", "tol": 0.005, "unit": "m", "label": "Lateral one-sigma", "expected": 95.65082424690361}, {"key": "well1_sigma_highside", "tol": 0.005, "unit": "m", "label": "Highside one-sigma", "expected": 21.636241962526093}, {"key": "well1_ellipse95_semimajor", "tol": 0.005, "unit": "m", "label": "Horizontal ellipse semi-major", "expected": 267.39198828526287}, {"key": "well1_ellipse_azimuth_deg", "tol": 0.005, "unit": "deg", "label": "Ellipse major axis azimuth", "expected": 165.05207648844214}, {"key": "well1_amil_share_pct", "tol": 0.005, "unit": "percent", "label": "Largest source share by trace", "expected": 58.294649231431436}]'::jsonb then 'new'
+              else 'other' end
+    into v_s1 from public.academy_capstones where app_slug = 'welldesign' and tier = 'intermediate' and active;
+  if v_s1 = 'other' then
+    raise exception 'w5d welldesign refused: welldesign/intermediate matches neither its W1-labelled form (prompt md5 b4ae95ab406b65347940e11361588a3b) nor its stripped form (prompt md5 33c2f04817aa14d6078a1fb5dc8f888f), with the fields this file was generated against';
+  end if;
+
   -- welldesign / advanced
   select count(*) into v_n from public.academy_capstones where app_slug = 'welldesign' and tier = 'advanced' and active;
   if v_n <> 1 then raise exception 'w5d welldesign refused: welldesign/advanced has % active capstone rows, expected 1', v_n; end if;
   select case when md5(prompt) = '58320c07b0166e2c4c46909a2467a2b6' and fields = '[{"key": "well01_min_sf", "tol": 0.0005, "unit": "-", "label": "Minimum separation factor, offset 01", "expected": 1.400242036710446}, {"key": "well09_min_sf", "tol": 0.00005, "unit": "-", "label": "Minimum separation factor, offset 09", "expected": 0.009794688844024428}, {"key": "well10_min_sf", "tol": 0.0005, "unit": "-", "label": "Minimum separation factor, offset 10", "expected": -0.6068571428571429}, {"key": "well10_min_sf_at_k5", "tol": 0.0005, "unit": "-", "label": "Offset 10 minimum at k of 5.0", "expected": -0.4248}, {"key": "wmm_max_declination_error_deg", "tol": 0.000005, "unit": "deg", "label": "Worst declination error, 12 points", "expected": 0.00461482429820137}, {"key": "wmm_declination_at_80n_0e", "tol": 0.00005, "unit": "deg", "label": "Declination at 80N 0E, epoch 2025.0", "expected": 1.2814821161348655}]'::jsonb then 'old'
               when md5(prompt) = 'd83bf1f1b460e034b729b0251b51a08e' and fields = '[{"key": "well01_min_sf", "tol": 0.0005, "unit": "-", "label": "Minimum separation factor, offset 01", "expected": 1.400242036710446}, {"key": "well09_min_sf", "tol": 0.00005, "unit": "-", "label": "Minimum separation factor, offset 09", "expected": 0.009794688844024428}, {"key": "well10_min_sf", "tol": 0.0005, "unit": "-", "label": "Minimum separation factor, offset 10", "expected": -0.6068571428571429}, {"key": "well10_min_sf_at_k5", "tol": 0.0005, "unit": "-", "label": "Offset 10 minimum at k of 5.0", "expected": -0.4248}, {"key": "wmm_max_declination_error_deg", "tol": 0.000005, "unit": "deg", "label": "Worst declination error, 12 points", "expected": 0.00461482429820137}, {"key": "wmm_declination_at_80n_0e", "tol": 0.00005, "unit": "deg", "label": "Declination at 80N 0E, epoch 2025.0", "expected": 1.2814821161348655}]'::jsonb then 'new'
               else 'other' end
-    into v_s1 from public.academy_capstones where app_slug = 'welldesign' and tier = 'advanced' and active;
-  if v_s1 = 'other' then
+    into v_s2 from public.academy_capstones where app_slug = 'welldesign' and tier = 'advanced' and active;
+  if v_s2 = 'other' then
     raise exception 'w5d welldesign refused: welldesign/advanced matches neither its W1-labelled form (prompt md5 58320c07b0166e2c4c46909a2467a2b6) nor its stripped form (prompt md5 d83bf1f1b460e034b729b0251b51a08e), with the fields this file was generated against';
   end if;
 
   -- nothing to write: every row is already stripped
-  if v_s0 = 'new' and v_s1 = 'new' then
-    raise notice 'w5d welldesign: 0 of 2 row(s) written, all already applied';
+  if v_s0 = 'new' and v_s1 = 'new' and v_s2 = 'new' then
+    raise notice 'w5d welldesign: 0 of 3 row(s) written, all already applied';
     return;
   end if;
 
@@ -92,6 +108,18 @@ begin
 
   if v_s1 = 'old' then
     update public.academy_capstones
+       set prompt = 'Six quantities from ONE station of the ISCWSA MWD Rev4 validation well: the DEEPEST station, index 267 of 268, at 8000 m measured depth. Run the standard MWD Rev4 parameter set with no corrections applied, using the fixture''s own header: total field 50000 nT, dip 72 degrees, declination minus 4 degrees, convergence zero, azimuths referenced to true north, standard gravity, and the vertical inclination limit the fixture states. Report: (1) the north-north entry of the TOTAL covariance, which is a variance in square metres and not a sigma; (2) the LATERAL one-sigma uncertainty in the borehole frame, which needs the rotation from north-east-vertical and is not the east sigma; (3) the HIGHSIDE one-sigma uncertainty in that same frame; (4) the semi-major axis of the HORIZONTAL ellipse, built from the north-east block''s eigen-decomposition, at the two-dimensional 95 percent confidence factor of 2.7955; (5) the azimuth of that ellipse''s major axis in degrees, which does not depend on the confidence factor because scaling an ellipse does not rotate it; and (6) the percentage of the total variance contributed by the single largest source, measured by TRACE, that source''s three variances summed and divided by the same sum over all sources, times a hundred.'
+     where app_slug = 'welldesign' and tier = 'intermediate' and active and md5(prompt) = 'b4ae95ab406b65347940e11361588a3b';
+    get diagnostics v_count = row_count;
+    if v_count <> 1 then raise exception 'w5d welldesign refused: welldesign/intermediate updated % rows', v_count; end if;
+    v_written := v_written + 1;
+  end if;
+  if (select (md5(prompt) = '33c2f04817aa14d6078a1fb5dc8f888f' and fields = '[{"key": "well1_cov_nn", "tol": 0.005, "unit": "m2", "label": "North-north covariance entry", "expected": 8547.77693579118}, {"key": "well1_sigma_lateral", "tol": 0.005, "unit": "m", "label": "Lateral one-sigma", "expected": 95.65082424690361}, {"key": "well1_sigma_highside", "tol": 0.005, "unit": "m", "label": "Highside one-sigma", "expected": 21.636241962526093}, {"key": "well1_ellipse95_semimajor", "tol": 0.005, "unit": "m", "label": "Horizontal ellipse semi-major", "expected": 267.39198828526287}, {"key": "well1_ellipse_azimuth_deg", "tol": 0.005, "unit": "deg", "label": "Ellipse major axis azimuth", "expected": 165.05207648844214}, {"key": "well1_amil_share_pct", "tol": 0.005, "unit": "percent", "label": "Largest source share by trace", "expected": 58.294649231431436}]'::jsonb) from public.academy_capstones where app_slug = 'welldesign' and tier = 'intermediate' and active) is not true then
+    raise exception 'w5d welldesign refused: welldesign/intermediate does not read back as its stripped form';
+  end if;
+
+  if v_s2 = 'old' then
+    update public.academy_capstones
        set prompt = 'Six numbers from the ISCWSA standard clearance set and the geomagnetic model. Use the published clearance parameters throughout: pedal-curve method, confidence factor 3.5, surface position sigma 0.5 m, tool projection allowance 0.3 m, reference hole radius 0.4572 m, offset hole radius 0.3048 m, and the ISCWSA MWD Rev4 error model with each well''s own header from the fixture. Report: (1) the MINIMUM separation factor over the reference well''s stations against offset 01; (2) the same against offset 09, which is very nearly zero; (3) the same against offset 10, the only case with a kickoff, supplying the kickoff depth the fixture states so the shared uncertainty above it is removed; it is NEGATIVE. (4) Rerun case 3 with the confidence factor raised to 5.0 and nothing else changed, and report that minimum. Compute it by rerunning rather than by scaling field 3. (5) Evaluate the WMM2025 model at each of the publisher''s twelve test points and report the LARGEST absolute declination error in degrees, a maximum and not a mean. (6) Report the declination the model gives at 80 degrees north, 0 degrees east, at sea level, at the epoch 2025.0.'
      where app_slug = 'welldesign' and tier = 'advanced' and active and md5(prompt) = '58320c07b0166e2c4c46909a2467a2b6';
     get diagnostics v_count = row_count;
@@ -102,5 +130,5 @@ begin
     raise exception 'w5d welldesign refused: welldesign/advanced does not read back as its stripped form';
   end if;
 
-  raise notice 'w5d welldesign: % of 2 row(s) written, % already applied', v_written, 2 - v_written;
+  raise notice 'w5d welldesign: % of 3 row(s) written, % already applied', v_written, 3 - v_written;
 end $$;
