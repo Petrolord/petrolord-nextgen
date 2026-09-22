@@ -374,6 +374,15 @@ The graded answers come from the lab's `capstoneValues()`, which runs the vendor
 | perfsand | advanced | nothing, re-measured: four of the five B5 flags came from a sentence saying the lessons print no stress or strength numbers, and the gauge margin is one row of the seven-row gauge table (choosing the row is the work) | label and lesson note removed; no lesson or panel change needed |
 **Held:** welldesign intermediate. `UncertaintyExplorer.jsx` opens on station 267, the capstone station, and the file belongs to W4a's typed-mode work. The gate asserts that tier still leaks and keeps its label.
 **After a strip, the W1 open-book file for that course reads the stripped tier as its published form and would put the label back.** It is SUPERSEDED. Do not re-run `/root/w1-apply/apply.sh apply --prod` after a W5d file is applied.
+## W5 (leak re-case and strip): shared tooling
+Section 3 of [FOLLOW-ON-PROGRAMME.md](FOLLOW-ON-PROGRAMME.md). W5 is built course by course by several agents (W5a, W5b, ...). They share one generator and one audit path, added before any course lands:
+| File | What |
+|---|---|
+| `w5_capstones.py` | Writes each course's migration from `w5/<course>.json` on a scratch replay of the post-W1 state. Pick A (re-case) replaces a tier's prompt, title, dataset and every field; the new fields are read from the course's engine-generated `fields_file`, never typed. Pick B (strip) edits the prompt only (the open-book label comes out). Rows are content-addressed; a file that moves a key carries the attempts guard with the D5 allowlist (`ALLOW`, empty). `--check` fails if a committed file differs from a regeneration. |
+| `normalize.py` `w5_shipped()` | Records each pick-A re-key with its wave and `closes_leak`. A live key that W1 had already re-keyed (rockphysics `brine_max_shuey_err`, earthmodel `fault_jump_y2200`, the mapping pair, seismolord `corr_zero_lag`) is traced back to its baseline key, and W1's fix is kept as `prior`. |
+| `audit.py` | `--post --wave w1 --wave w5x` walks each field's chain back to the newest fix whose wave is named, so a W1-only dry run still checks the W1 state and a W5 dry run checks the W5 keys. A re-key that keeps its key name no longer trips the duplicate-annotation check. A `closes_leak` replacement whose annotation still says a lesson or a panel prints it fails the gate. |
+The per-field `leak` flag in `annot/` and `fields.json` stays as the baseline found it, because `w1_capstones.py` reads it for the open-book tiers it generated (its `--check` must stay green). A closed leak shows as `shipped.closes_leak` with `rekey_annot.leak: false`.
+`--selftest` adds five controls for this: a chained re-key applied and checked with both waves (green); the earlier wave's state checked without the later wave (green); the later wave named but its re-key missing (red); a leak-closing replacement still printed (red); a chained re-key that keeps its key name (green).
 
 ## Regrade impact
 
