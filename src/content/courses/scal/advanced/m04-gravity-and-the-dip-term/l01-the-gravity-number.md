@@ -32,7 +32,7 @@ That is the gravity number for the designed case, and the engine returns exactly
 
 {{panel:sc-design-explorer}}
 
-Switch the panel to dip mode and leave the defaults, which are the designed case. Confirm the gravity coefficient tile reads 0.019367108489507776. Then move the dip slider to zero and watch the coefficient go to zero and every downstream tile collapse onto the flat-case values you know from the Associate tier. Move it back to 10 before the next lesson.
+Switch the panel to dip mode. It opens flat, at 3000 rb/d and zero dip, so the coefficient reads 0 and every tile sits on the flat-case values you know from the Associate tier. Set the rate to 2000 and the dip to 10 and confirm the gravity coefficient tile reads 0.019367108489507776. Then move the dip back to zero and watch the coefficient go to zero and every downstream tile collapse onto the flat case.
 
 ## Two saturations, one correction
 

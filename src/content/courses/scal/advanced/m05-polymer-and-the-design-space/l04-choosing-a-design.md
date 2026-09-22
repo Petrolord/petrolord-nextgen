@@ -4,7 +4,7 @@ You now hold every lever this course installs. This closing lesson of the module
 
 ## The big lever: the viscosity ratio
 
-The polymer case moved breakthrough displacement efficiency by about 0.068, from 0.5088773453049006 to 0.5771964898801638, by dropping the mobility ratio from 1.2 to 0.3. And the Associate tier's sensitivity table shows the same lever swinging the other way with brutal force: leave the water thin and let the oil be heavy instead, and at 5 cp oil the efficiency at breakthrough falls to 0.4299040270894154, at 10 cp to 0.3693282019820123. The spread across the viscosity axis, from heavy-oil worst case to polymer best case, is on the order of twenty saturation points of the column. Nothing else in the model comes within a factor of ten of that.
+A polymer multiplier of 2 moved breakthrough displacement efficiency by about 0.04, from 0.5088773453049006 to 0.5492340379388816, by halving the mobility ratio from 1.2 to 0.6, and the design multiplier of 4 moves it further. And the Associate tier's sensitivity table shows the same lever swinging the other way with brutal force: leave the water thin and let the oil be heavy instead, and at 5 cp oil the efficiency at breakthrough falls to 0.4299040270894154, at 10 cp to 0.3693282019820123. The spread across the viscosity axis, from heavy-oil worst case to polymer best case, is on the order of twenty saturation points of the column. Nothing else in the model comes within a factor of ten of that.
 
 This is why the viscosity ratio earns the word "big." It multiplies the fractional flow ratio at every saturation simultaneously, so the whole curve, and with it the tangent geometry, moves together.
 

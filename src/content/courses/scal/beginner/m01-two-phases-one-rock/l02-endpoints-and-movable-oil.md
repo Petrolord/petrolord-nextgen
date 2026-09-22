@@ -48,7 +48,7 @@ The fraction of the oil in place that is movable is
 
 $$\frac{1 - S_{wc} - S_{or}}{1 - S_{wc}} = \frac{0.4}{0.65}$$
 
-Leave it as a fraction for now. Module 5 returns to this exact ratio, gives it a name, and grades you on it, because it is the ultimate efficiency of the displacement.
+Leave it as a fraction for now. Module 5 returns to this exact ratio, gives it a name, and the capstone grades it on a sand of its own, because it is the ultimate efficiency of the displacement.
 
 ## The misconception to avoid
 

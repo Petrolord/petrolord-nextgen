@@ -49,6 +49,18 @@ export function displacementWith({ muO = EKENE_SCAL.design.muO_cp, nw = EKENE_SC
   return analyzeDisplacement({ krSpec: { ...D.krSpec, nw }, muW: D.muW_cp, muO });
 }
 
+/** Any Corey displacement the learner types (the panel's "your case" mode,
+ *  and the case the Associate capstone is set on). Every value is an input;
+ *  nothing is read from a fixture. */
+export function displacementCase({ Swc, Sor, krwMax, kroMax, nw, no, muW, muO }) {
+  return analyzeDisplacement({ krSpec: { type: 'corey', Swc, Sor, krwMax, kroMax, nw, no }, muW, muO });
+}
+
+/** Days to breakthrough for a typed pore volume and injection rate. */
+export function btDaysFor(Qi, pvBbl, iw_bpd) {
+  return pvToDays(Qi, { pvBbl, iw_bpd });
+}
+
 /** The classroom hand case (sampleFractionalFlowData): M = 4, and at Sw 0.5
  *  every number is closed form (krw 0.1, kro 0.25, fw 0.8). */
 export function textbookCase() {
@@ -111,15 +123,15 @@ export function fitPlugJ(plugIdx = 1, Swirr = EKENE_SCAL.capillary.design.jTrue.
   return fitJPowerLaw(rows.map((r) => ({ Sw: r.Sw, J: r.J })), { Swirr });
 }
 
-/** averageJCurves over the three plugs at the true Swirr. The refit DRIFTS
- *  (a 0.24915..., b 1.01028...) because the mean curve is resampled through
- *  the log-linear tabulated evaluator before refitting; the direct fit on
- *  raw points is exact. The Expert capstone grades the drifted a. */
-export function averageRefit() {
+/** averageJCurves over the three plugs at a Swirr (the true 0.25 by
+ *  default). The refit DRIFTS (a low, b high) because the mean curve is
+ *  resampled through the log-linear tabulated evaluator before refitting; the
+ *  direct fit on raw points is exact. */
+export function averageRefit(Swirr = EKENE_SCAL.capillary.design.jTrue.Swirr) {
   const plugs = plugJTables();
   const avg = averageJCurves(
     plugs.map((p) => ({ name: p.name, jRows: p.jRows.map((r) => ({ Sw: r.Sw, J: r.J })) })),
-    { Swirr: EKENE_SCAL.capillary.design.jTrue.Swirr },
+    { Swirr },
   );
   if (!avg.ok) throw new Error(`averageJCurves failed: ${avg.errors.join('; ')}`);
   return avg;
@@ -128,8 +140,12 @@ export function averageRefit() {
 /** Entry pressure, entry height, FWL and crest saturation on the Ekene sand,
  *  re-derived from the fixture design constants (never read from the
  *  fixture's own expected block, so a fixture edit cannot hide a drift). */
-export function reservoirCapillary() {
-  const { jTrue, reservoir, gammaW } = EKENE_SCAL.capillary.design;
+export function reservoirCapillary(rock = {}) {
+  const { jTrue, gammaW } = EKENE_SCAL.capillary.design;
+  // The Ekene sand's own rock by default (what the capstone carries the plugs
+  // to); the panels pass a teaching rock (k and porosity) so they do not open
+  // on the capstone chain.
+  const reservoir = { ...EKENE_SCAL.capillary.design.reservoir, ...rock };
   const fluids = { gammaW, gammaHc: GAMMA_O };
   const sigmaCos = reservoir.sigma_dyncm * Math.cos((reservoir.thetaDeg * Math.PI) / 180);
   const psiPerJ = sigmaCos / (LEVERETT_C * Math.sqrt(reservoir.k_md / reservoir.phi));
@@ -148,7 +164,7 @@ export function reservoirCapillary() {
   const swAtCrest = jTrue.Swirr + Math.pow(jAtCrest / jTrue.a, -1 / jTrue.b) * (1 - jTrue.Swirr);
   return {
     psiPerJ, gradPsiPerFt, pcEntryPsi, hEntryFt, hEntryM,
-    contactM, fwlM, columnM, hCrestFt, swAtCrest, fluids,
+    contactM, fwlM, columnM, hCrestFt, swAtCrest, fluids, reservoir,
   };
 }
 
@@ -156,8 +172,8 @@ export function reservoirCapillary() {
  *  intervals from the contact (h = entry height above FWL) to the crest.
  *  Re-derived, not read from the fixture. The honest number the flat 0.35
  *  booking replaces for THIS one column. */
-export function swAvgCrestColumn(nIntervals = 2000) {
-  const cap = reservoirCapillary();
+export function swAvgCrestColumn(nIntervals = 2000, rock = {}) {
+  const cap = reservoirCapillary(rock);
   const { jTrue } = EKENE_SCAL.capillary.design;
   let swSum = 0;
   for (let i = 0; i <= nIntervals; i++) {
@@ -303,6 +319,14 @@ export function dipCase(qt_rbd = DIP_CASE.qt_rbd, dipDeg = DIP_CASE.dipDeg) {
 }
 
 export const POLYMER_MULT_DEFAULT = 4;
+
+// The rock the capillary panels open on: a teaching sand, so no panel's
+// opening view carries the Ekene chain the Professional and Expert capstones
+// grade. The learner types the Ekene sand's own 250 md and 0.20 to run it.
+export const TEACHING_ROCK = { k_md: 180, phi: 0.18 };
+// The Swirr the Expert design panel's averaged refit opens at (the capstone
+// asks for the true 0.25).
+export const TEACHING_SWIRR = 0.2;
 
 /** Polymer screening: water viscosity multiplied, nothing else modelled.
  *  The engine says so itself in the warnings array. */

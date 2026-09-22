@@ -1,8 +1,8 @@
 # Working the capstone
 
-> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+The Associate capstone asks you to displace a sand of its own, the OKORO sand, whose relative permeability set, viscosities, pore volume and injection rate are stated in full in the capstone brief. You type that case into the displacement explorer with **Type your own case**, run the fractional flow analysis, and report six numbers, each graded server-side against the engine truth within a stated tolerance. No lesson prints them and no panel opens on them.
 
-The Associate capstone asks you to displace the Ekene sand. You run the fractional flow analysis on the fixture's rock and fluids and report six numbers, each graded server-side against the engine truth within a stated tolerance.
+This lesson works the same six numbers on the Ekene sand you have used all course, as a worked example. Your capstone numbers come from the OKORO inputs, so they will be different.
 
 | Field | Unit | Tolerance | Where it is owned |
 |---|---|---|---|
@@ -11,23 +11,23 @@ The Associate capstone asks you to displace the Ekene sand. You run the fraction
 | Fractional flow at the front $f_{wf}$ | none | 0.001 | module 4 lesson 3 |
 | Pore volumes injected at breakthrough | PV | 0.001 | module 4 lesson 3 |
 | Displacement efficiency at breakthrough | none | 0.001 | module 4 lesson 4 |
-| Days to breakthrough at 8000 bwpd | days | 2 | module 5 lesson 3 |
+| Days to breakthrough at the stated rate | days | 2 | module 5 lesson 3 |
 
 This lesson does not hand you six answers to copy. It works two of them all the way through by hand, and points you at the lesson and the panel tile that own each of the rest. If modules 1 through 5 are behind you, nothing here is new. The capstone is the course, asked back.
 
-Read the tolerances as a promise. Any honest route to each number lands well inside them. Two whole days of slack on a breakthrough time near nine hundred means nobody is grading your decimals. They are grading your method.
+Read the tolerances as a promise. Any honest route to each number lands well inside them. Two whole days of slack on a breakthrough time of hundreds of days means nobody is grading your decimals. They are grading your method.
 
-## Walkthrough one: the mobility ratio, entirely by hand
+## Worked example one: the Ekene mobility ratio, entirely by hand
 
 The mobility ratio needs no curve, no tangent, and no panel. It is built from the four endpoint properties alone:
 
 $$M = \frac{k_{rw,max}/\mu_w}{k_{ro,max}/\mu_o} = \frac{0.3/0.5}{0.9/1.8} = \frac{0.6}{0.5} = 1.2$$
 
-Do the arithmetic once on paper. The two traps that actually cost marks here are both definitional. The endpoint $k_{rw,max}$ is the water curve's value at residual oil, and $k_{ro,max}$ is the oil curve's value at connate water: each phase is measured where it flows best. Evaluate either curve anywhere else, at the front saturation for instance, and you are computing some other ratio the grader has never heard of. And the viscosities enter as a ratio of mobilities, water over oil, so inverting the fraction hands you 0.8333333333333334, which fails the 0.005 tolerance by a wide margin and tells you exactly what you did.
+Do the arithmetic once on paper. The two traps that actually cost marks here are both definitional. The endpoint $k_{rw,max}$ is the water curve's value at residual oil, and $k_{ro,max}$ is the oil curve's value at connate water: each phase is measured where it flows best. Evaluate either curve anywhere else, at the front saturation for instance, and you are computing some other ratio the grader has never heard of. And the viscosities enter as a ratio of mobilities, water over oil, so inverting the fraction hands you five sixths, which fails the 0.005 tolerance by a wide margin and tells you exactly what you did.
 
-## Walkthrough two: days to breakthrough, the one field with a clock in it
+## Worked example two: Ekene days to breakthrough, the one field with a clock in it
 
-The sixth field states its own conditions: a steady 8000 barrels of water per day into the Ekene pore volume. The chain has three links, and you own all three already.
+The sixth field states its own conditions. For the worked example they are a steady 8000 barrels of water per day into the Ekene pore volume; the capstone brief states its own rate and pore volume. The chain has three links, and you own all three already.
 
 First, breakthrough in pore volumes is the reciprocal of the tangent slope: $Q_{iBt} = 1/3.023246274678918 = 0.33077027444818546$ PV.
 
@@ -39,7 +39,7 @@ $$t_{BT} = \frac{0.33077027444818546 \times 22410845.5314109}{8000} = 926.605190
 
 Call it two and a half years. The tolerance of 2 days absorbs any rounding you could plausibly commit, so a miss here is structural: the wrong rate, the wrong pore volume, or breakthrough read from the wrong quantity. The classic error is using the average saturation rise or a recovery-table row instead of $Q_{iBt}$; module 5 lesson 3 works the correct conversion in both directions.
 
-## Where the other four come from
+## Where the other four come from, on the Ekene example
 
 **Front saturation.** Module 4 lesson 3, and the front tile in the displacement explorer you have used since module 2. It reads 0.6372. If you are tempted to report the average behind the front instead, reread module 4 lesson 4; the two differ by 0.0436 here, which is 87 times the tolerance.
 
@@ -51,7 +51,7 @@ Call it two and a half years. The tolerance of 2 days absorbs any rounding you c
 
 ## Submitting
 
-The capstone form sits on the Learning Mode page under the course. Enter the six numbers at whatever precision you carried and submit. Grading is server-side within the tolerances above, and you will see which fields passed.
+The capstone form sits on the Learning Mode page under the course. Type the OKORO case into the displacement explorer, check every input against the brief, then enter the six numbers at whatever precision you carried and submit. Grading is server-side within the tolerances above, and you will see which fields passed.
 
 If a field fails, do not add decimal places. Every tolerance is far wider than rounding. A miss means a method error, and the fix is the lesson named in the table.
 
@@ -61,4 +61,4 @@ Students treat the capstone as a reading test: open the panel, transcribe six ti
 
 ## Exercise
 
-Before you submit, predict the effect of each of these three mistakes on each of the six fields: inverting the mobility ratio; reporting the average saturation behind the front where the front saturation was wanted; and converting days with the movable oil volume instead of the full pore volume. For each mistake, write down which fields fail, which still pass, and what the wrong value would have been. Then check any one of your three predictions against the panel.
+Before you submit, predict the effect of each of these three mistakes on each of the six fields: inverting the mobility ratio; reporting the average saturation behind the front where the front saturation was wanted; and converting days with the movable oil volume instead of the full pore volume. For each mistake, write down which fields fail, which still pass, and what the wrong value would have been. Then check any one of your three predictions against the panel on the Ekene example, and only then work the OKORO case.

@@ -2,11 +2,11 @@
 
 Run the full pipeline on the three Ekene plugs: J tables from the committed lab rows, normalization with the true $S_{wirr} = 0.25$, the 41-point resample, the geometric mean, the refit. The designed curve underneath is $a = 0.25$, $b = 1$. The refit returns
 
-$$a = 0.2491501585202375, \qquad b = 1.0102893566145976$$
+$$b = 1.0102893566145976, \qquad r^2_{\log} = 0.9998442671274563$$
 
-with $r^2_{\log} = 0.9998442671274563$.
+and a fitted $a$ pulled below the design 0.25. The refitted $a$ at the true Swirr is a capstone field, so this lesson gives its direction and its mechanism and leaves the value to your own run of the pipeline.
 
-Read those three numbers slowly. The fitted $a$ is low by 0.0008498414797624976 absolute, which is 0.33993659190499903 percent. The fitted $b$ is high by 1.0289356614597622 percent. And the fit statistic says the power law describes the mean curve almost perfectly. That last part is the sharpest sentence in this module: the $r^2$ looks perfect while both parameters are biased. A fit statistic measures how well a curve tracks the points it was given. It says nothing about whether the points themselves were bent on the way in.
+Read those numbers slowly. The fitted $b$ is high by 1.0289356614597622 percent, the fitted $a$ is low, and the fit statistic says the power law describes the mean curve almost perfectly. That last part is the sharpest sentence in this module: the $r^2$ looks perfect while both parameters are biased. A fit statistic measures how well a curve tracks the points it was given. It says nothing about whether the points themselves were bent on the way in.
 
 ## The mechanism, exactly
 
@@ -20,11 +20,11 @@ So the mean curve handed to the refit is exact at 15 places and systematically h
 
 {{panel:sc-design-explorer}}
 
-Open the panel and find the averaged-refit tile. It runs this exact pipeline on the three plugs and reports the fitted $a$ beside the design value 0.25. Confirm the tile reads 0.2491501585202375, then compare it against the direct single-plug fit from the previous lesson. Same data underneath, two pipelines, two answers: that pair of tiles is this module in miniature.
+Open the panel and find the averaged-refit tile. It runs this exact pipeline on the three plugs at the Swirr in its box, which opens at a teaching 0.2; there the averaged refit reads 0.2357058584681484 against a direct three-plug fit of 0.23464485110808792 at the same Swirr, so the two pipelines disagree even off the true Swirr. Set the box to the true 0.25 to run the capstone's pipeline, then compare the tile against the direct single-plug fit from the previous lesson. Same data underneath, two pipelines, two answers: that pair of tiles is this module in miniature.
 
 ## What the capstone does with this
 
-Your capstone grades the field `avg_refit_a` with expected value 0.2491501585202375 and tolerance 0.0005. The design value 0.25 misses by 0.0008498414797624976, which is outside the tolerance by 0.00034984147976249757. That is deliberate. The graded question is not what the designed curve was; it is what THIS pipeline returns, and the two are measurably different. An answer of 0.25 is the right answer to a different question, and the tolerance is set so the grader can tell.
+Your capstone grades the field `avg_refit_a`, the refitted $a$ at the true Swirr 0.25, at a tolerance of 0.0005. The design value 0.25 misses it by more than that tolerance. That is deliberate. The graded question is not what the designed curve was; it is what THIS pipeline returns, and the two are measurably different. An answer of 0.25 is the right answer to a different question, and the tolerance is set so the grader can tell.
 
 ## The misconception to avoid
 

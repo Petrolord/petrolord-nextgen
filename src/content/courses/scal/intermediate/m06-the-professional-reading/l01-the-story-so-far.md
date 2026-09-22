@@ -4,20 +4,20 @@ The Associate tier taught you how oil is pushed. This tier taught you how oil is
 
 The arc of this tier ran in one direction, from the laboratory toward the field. A capillary pressure curve is measured on a plug a few centimetres long, in a fluid system chosen for the convenience of the lab rather than the truth of the reservoir. Module 1 gave you the curve and its rules. Module 2 gave you the Leverett J-function, the dimensionless form that strips the plug's permeability, porosity and lab fluids out of the measurement, so that three plugs measured three different ways collapse onto one curve for the rock family. Module 3 walked a published example, the Nameless Field of Ahmed's Example 4-7, through the full chain: lab table to J column to reservoir curve. Module 4 taught you to fit the power law and to average several samples into one reservoir candidate. Module 5 cashed the whole chain in for the thing a field team actually wants: saturation as a function of height, a free water level, and a defensible statement about what the rock holds at the crest.
 
-## The six numbers you earned
+## The six chains you earned
 
-Each of the Professional capstone's graded quantities was earned in a specific module, by a specific chain, in specific units. That table is worth reading twice, because the capstone will grade the chain as much as the number.
+Each of the Professional capstone's graded quantities was earned in a specific module, by a specific chain, in specific units. The table names the chain and the worked example that taught it; the capstone's own numbers are yours to produce. It is worth reading twice, because the capstone will grade the chain as much as the number.
 
-| Quantity | Value | Where it was earned |
+| Quantity | Chain | Where it was earned, and the worked example |
 |---|---|---|
-| Lab J-per-psi factor, Ahmed 4-7 | $0.0967993827459659$ | Module 3, from $C \sqrt{k/\phi} / (\sigma \cos\theta)$ on the lab core |
-| $J$ at $S_w = 0.2$, Ahmed 4-7 | $0.16939891980544033$ | Module 3, the full-precision J column |
-| Reservoir $P_c$ at $S_w = 0.2$, Ahmed 4-7 | $1.5534071373580902$ psi | Module 3, the book's own printed-J chain |
-| Ekene entry height | $3.142982863763458$ m | Module 5, entry pressure over the gradient |
-| Ekene free water level | $1563.1429828637636$ m TVD | Module 5, contact plus entry height |
-| Ekene saturation at the crest | $0.35062979402484734$ | Module 5, the J curve read at the crest height |
+| Lab J-per-psi factor, Ahmed 4-7 | $C \sqrt{k/\phi} / (\sigma \cos\theta)$ on the lab core | Module 3, lesson 1 |
+| $J$ at $S_w = 0.2$, Ahmed 4-7 | the lab factor times the lab $P_c$, full precision | Module 3, worked on the $S_w = 0.4$ row |
+| Reservoir $P_c$ at $S_w = 0.2$, Ahmed 4-7 | the book's printed J times the reservoir factor | Module 3, worked on the $S_w = 0.4$ row |
+| Ekene entry height | entry pressure over the gradient, in metres | Module 5, worked on the 180 md teaching sand |
+| Ekene free water level | contact plus entry height | Module 5, worked on the teaching sand |
+| Ekene saturation at the crest | the J curve read at the crest height | Module 5, worked on the teaching sand |
 
-Notice what the table quietly insists on. The reservoir $P_c$ value follows the printed chain, the one the book itself used, rescaling the rounded three-decimal J column rather than the full-precision one. Module 3's last lesson showed that the two chains disagree by more than the grading tolerance, so this is not pedantry, it is the difference between a right answer and a wrong one. The two height quantities are in metres, though the engine works in feet, so the exact factor 0.3048 sits inside both. And the crest saturation is the number that ties this whole tier back to the field you have carried since geoscience: the booking's flat 0.35 turns out to be what the crest, and only the crest, drains to.
+Notice what the table quietly insists on. The reservoir $P_c$ value follows the printed chain, the one the book itself used, rescaling the rounded three-decimal J column rather than the full-precision one. Module 3's last lesson showed that the two chains disagree by more than the grading tolerance, so this is not pedantry, it is the difference between a right answer and a wrong one. The two height quantities are in metres, though the engine works in feet, so the exact factor 0.3048 sits inside both. And the crest saturation is the number that ties this whole tier back to the field you have carried since geoscience: it tells you how close the booking's flat 0.35 comes to what the crest, and only the crest, drains to.
 
 ## Where the two halves meet
 
@@ -35,6 +35,6 @@ The tier's most expensive misconception is that the J-function is a property of 
 
 ## Exercise
 
-First, without opening a panel, write the six capstone quantities from memory with their units, and against each one write the single most likely way to get it wrong: wrong chain, wrong unit, wrong height datum. Check yourself against the table above.
+First, without opening a panel, write the six capstone quantities from memory with their units and their chains, and against each one write the single most likely way to get it wrong: wrong chain, wrong unit, wrong height datum. Check yourself against the table above.
 
 Second, explain in three sentences why the printed-J chain and the full-precision chain give different reservoir curves for the Nameless Field, and why the capstone grades the printed one. If your explanation does not contain the word rounding, start again.
