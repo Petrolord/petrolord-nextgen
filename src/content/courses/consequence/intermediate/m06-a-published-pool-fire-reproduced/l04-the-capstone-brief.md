@@ -23,7 +23,7 @@ Nothing single route is graded. The capstone never asks for a Burgess burning fl
 
 ## How to work it on the panel
 
-Load the capstone's inputs into the fire panel, one view at a time. Start with the burning flux and flame length, then the tilt, then both surface emissive powers. Carry the flame length and tilt into the view factor view with the stated target distance, measured from the pool centre. Finally combine the sooty power, the Fmax and the stated transmissivity in the heat flux view.
+Type the capstone's pool into the heat flux view of the fire panel: the fuel, the pool diameter, the wind at 10 m, the air density and kinematic viscosity, the heat of combustion, the radiative and soot fractions, the target distance measured from the pool centre and the stated transmissivity. That view runs the whole chain with nothing rounded between the steps and prints the flame length, the tilt, both surface emissive powers, the Fmax and the heat flux. The flame view shares the same pool, so you can check the burning flux and the scaled wind speed there first. Read the Fmax from the heat flux view. A flame length and tilt carried by hand into the view factor view at six decimals can move the Fmax in its twelfth decimal.
 
 ## Precision
 
