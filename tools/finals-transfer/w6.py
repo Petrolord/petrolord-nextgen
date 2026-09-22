@@ -464,6 +464,11 @@ def capstones(container, courses):
 
 
 def leak_hits(text, fields):
+    """A literal leaks a graded field when it sits within ten tolerances of the
+    answer as the capstone states it, or when it EQUALS the answer, at any of
+    the unit shiftings, to the literal's own significant figures (at least
+    MIN_SIG). The ten-tolerance window is not applied at shifted scales: there
+    it matched ordinary inputs (30 Hz against an intercept times 1000)."""
     hits = []
     for tokn in NUM.findall(text):
         try:
@@ -475,13 +480,15 @@ def leak_hits(text, fields):
             exp, tol = f.get('expected'), f.get('tol') or 0
             if not isinstance(exp, (int, float)) or isinstance(exp, bool):
                 continue
-            for s in LEAK_SCALES:
-                ev = exp * s
-                if abs(v - ev) <= LEAK_MARGIN * abs(tol) * s and (abs(ev) >= 1e-12 or abs(v) < 1e-12):
-                    if not (abs(v) == float(int(abs(v))) and abs(v) < 20 and sd < MIN_SIG):
-                        hits.append((tokn, f['key'], exp, 'within ten tolerances'))
-                elif sd >= MIN_SIG and ev != 0 and round_sig(ev, sd) == round_sig(v, sd):
-                    hits.append((tokn, f['key'], exp, f'equal at {sd} significant figures'))
+            if abs(v - exp) <= LEAK_MARGIN * abs(tol) and not (float(v).is_integer() and abs(v) < 20 and sd < MIN_SIG):
+                hits.append((tokn, f['key'], exp, 'within ten tolerances'))
+                continue
+            if sd >= MIN_SIG:
+                for s in LEAK_SCALES:
+                    ev = exp * s
+                    if ev != 0 and round_sig(ev, sd) == round_sig(v, sd):
+                        hits.append((tokn, f['key'], exp, f'equal at {sd} significant figures (scale {s:g})'))
+                        break
     return hits
 
 
@@ -935,6 +942,8 @@ def selftest():
     check('a leaked capstone value is caught', leak_hits('Shmin is 33914681 Pa', f))
     check('a leaked capstone value at 4 significant figures is caught', leak_hits('about 33910000 Pa', f))
     check('an unrelated figure is not a leak', not leak_hits('Shmin is 41250000 Pa', f))
+    check('a leak in another unit is caught at its significant figures', leak_hits('33914.68 kPa', f))
+    check('an ordinary input is not a leak at a shifted scale', not leak_hits('a 30 Hz wavelet', [dict(key='a', expected=0.031, tol=0.0005)]))
     d = {'print': {'x': '1.2345'}, 'values': {'x': 1.2345}}
     e = []
     check('a placeholder renders', render_text('value {{x}}', d, 't', e) == 'value 1.2345' and not e)
