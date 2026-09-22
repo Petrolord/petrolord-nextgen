@@ -6,8 +6,11 @@ import {
 import {
   balanceExplorer, ODUMA, NODE_LADDER, NODE_LADDER_QUICK,
   CONVERGENCE_CASE_IDS, DIP_SPM, NODE_NOISE_SPMS,
+  typedWellBalance, TYPED_BALANCE_DEFAULT,
+  DEFAULT_NODES, DEFAULT_CARD_SAMPLES, DEFAULT_MAX_CYCLES, DEFAULT_MARCH_TOL,
 } from './rodPumpLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import TypedWellFields, { draftFrom, BALANCE_FIELDS } from './TypedWellFields.jsx';
 
 // Balance explorer, the Expert tier. What the card hides: the tension envelope
 // against the decimated subsample the loads are actually read off, what
@@ -16,7 +19,7 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 // accepts and never reads, and the stress line and the diagnostic re-reading of
 // the card the march produced.
 //
-// Five modes. Two of them march the wave equation on grids up to sixteen times
+// Six modes. Two of them march the wave equation on grids up to sixteen times
 // the shipped one, so the node ladder is a CHOICE on this panel: the short
 // ladder opens in about a second and the full one, which is the ladder the
 // lessons quote, takes several. Only the selected mode computes.
@@ -28,6 +31,10 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
   : '-');
+
+// Plain decimals for the typed well, with no thousands separator, so a value
+// can be copied straight into an answer box.
+const plain = (v, d) => (Number.isFinite(v) ? Number(v).toFixed(d) : '-');
 
 const tiny = (v) => {
   if (!Number.isFinite(v)) return '-';
@@ -41,6 +48,7 @@ const MODES = [
   { value: 'balance', label: 'The counterbalance' },
   { value: 'ignored', label: 'Three inputs accepted and never read' },
   { value: 'stress', label: 'Stress, and the diagnostic against the design' },
+  { value: 'typed', label: 'Your well, typed: balance, stress and diagnosis' },
 ];
 
 const LADDERS = [
@@ -819,6 +827,97 @@ const Stress = () => {
   );
 };
 
+const TypedBalance = () => {
+  const [draft, setDraft] = useState(() => draftFrom(TYPED_BALANCE_DEFAULT));
+  const [applied, setApplied] = useState(draft);
+  const r = useSafe(() => typedWellBalance(applied), [applied]);
+  return (
+    <>
+      <div className="text-xs text-slate-300">
+        Type a well, its unit and its checks, and march it. The view opens on the {ODUMA.label} teaching
+        well on the published four-bar, and every input can be retyped. The structural unbalance and the
+        crank offset go to the balancing routine, which reads them. The service factor sets the modified
+        Goodman allowable, and the harmonic count sets the Gibbs diagnostic that re-reads the surface card
+        this march produced. Press March this well after typing.
+      </div>
+      <div className="mt-3">
+        <TypedWellFields draft={draft} setDraft={setDraft} extra={BALANCE_FIELDS} designation />
+      </div>
+      <div className="mt-3 flex items-center gap-3">
+        <button type="button" onClick={() => setApplied(draft)}
+          className="rounded-md border border-gray-600 bg-gray-700 px-3 h-8 text-sm text-white">
+          March this well
+        </button>
+        {draft !== applied && <span className="text-xs text-[#f97316]">Inputs changed since the last march.</span>}
+      </div>
+      <Note>
+        Marching parameters stay at the engine defaults: {DEFAULT_NODES} nodes, {DEFAULT_CARD_SAMPLES} card
+        samples, at most {DEFAULT_MAX_CYCLES} cycles, tolerance {DEFAULT_MARCH_TOL}. The balance reads the
+        card at its nearest point.
+      </Note>
+      {(!r || !r.ok) ? (
+        <Note>{r ? r.errors.join(' ') : 'This well cannot be marched.'}</Note>
+      ) : (
+        <>
+          <div className="mt-3">
+            <TileGrid>
+              <Tile label="Counterbalance moment" value={plain(r.momentInLb, 9)} unit="in-lb" />
+              <Tile label="Peak gearbox torque with that counterbalance" value={plain(r.peakTorqueInLb, 9)} unit="in-lb" />
+              <Tile label="Counterbalance effect at the polished rod" value={plain(r.counterbalanceEffectLb, 9)} unit="lb" />
+              <Tile label={`Worst rod loading, section ${r.worstSectionLabel} in`} value={plain(r.worstLoadingPct, 9)} unit="% of allowable" />
+              <Tile label="Diagnostic plunger stroke" value={plain(r.diagPlungerStrokeIn, 9)} unit="in" />
+              <Tile label="Diagnostic peak pump load" value={plain(r.diagPumpLoadMaxLb, 9)} unit="lb" />
+            </TileGrid>
+          </div>
+          <div className="mt-3">
+            <TileGrid>
+              <Tile label="Moment over the front arm" value={plain(r.momentOverFrontArmLb, 9)} unit="lb" />
+              <Tile label="Unit balanced" value={String(r.balanced)} />
+              <Tile label="Plunger stroke, from the march" value={plain(r.plungerStrokeIn, 9)} unit="in" />
+              <Tile label="Fluid load the march assumed" value={plain(r.fluidLoadLb, 9)} unit="lb" />
+              <Tile label="Diagnostic minimum pump load" value={plain(r.diagPumpLoadMinLb, 9)} unit="lb" />
+              <Tile label="Harmonics used" value={String(r.harmonicsUsed)} />
+              {r.rating && <Tile label={`Structure used, ${r.rating.designation}`} value={plain(r.rating.structuralPct, 6)} unit="%" />}
+              {r.rating && <Tile label="Gearbox used" value={plain(r.rating.torquePct, 6)} unit="%" />}
+              {r.rating && <Tile label="Stroke used" value={plain(r.rating.strokePct, 6)} unit="%" />}
+            </TileGrid>
+          </div>
+          <div className="mt-3 overflow-x-auto">
+            <table className="text-xs text-slate-300 w-full">
+              <thead className="text-slate-500">
+                <tr>
+                  <th className="text-left pr-3">section</th>
+                  <th className="text-left pr-3">max stress, psi</th>
+                  <th className="text-left pr-3">min stress, psi</th>
+                  <th className="text-left pr-3">allowable, psi</th>
+                  <th className="text-left">loading, % of allowable</th>
+                </tr>
+              </thead>
+              <tbody>
+                {r.sections.map((s) => (
+                  <tr key={s.label} className={s.label === r.worstSectionLabel ? 'text-[#38bdf8]' : ''}>
+                    <td className="pr-3">{s.label} in</td>
+                    <td className="pr-3">{plain(s.maxStressPsi, 6)}</td>
+                    <td className="pr-3">{plain(s.minStressPsi, 6)}</td>
+                    <td className="pr-3">{plain(s.allowablePsi, 6)}</td>
+                    <td>{plain(s.loadingPct, 9)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {r.warnings.length > 0 && <Note>{r.warnings.map((w) => w.message).join(' ')}</Note>}
+          <Note>
+            The worst section is the one with the largest loading, found across every section. The diagnostic
+            figures come from the Gibbs harmonic solver handed the decimated surface card, so they sit beside the
+            march figures as a second route to the same pump.
+          </Note>
+        </>
+      )}
+    </>
+  );
+};
+
 const BalanceExplorer = ({ initialMode = 'balance' }) => {
   const [mode, setMode] = useState(initialMode);
   return (
@@ -835,6 +934,7 @@ const BalanceExplorer = ({ initialMode = 'balance' }) => {
         {mode === 'balance' && <Balance />}
         {mode === 'ignored' && <Ignored />}
         {mode === 'stress' && <Stress />}
+        {mode === 'typed' && <TypedBalance />}
       </div>
     </PanelShell>
   );

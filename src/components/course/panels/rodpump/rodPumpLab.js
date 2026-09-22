@@ -2880,6 +2880,296 @@ export const balanceExplorer = Object.freeze({
 });
 
 // ---------------------------------------------------------------------------
+// 15b. A WELL THE LEARNER TYPES (B5 follow-on W4, owner decision D2).
+// ---------------------------------------------------------------------------
+
+/**
+ * THE CARD AND THE BALANCE OF A WELL YOU TYPE. Every other accessor in this file
+ * reads a fixed case. These two read whatever the learner types: a taper of up
+ * to four sections, a rod grade, a fluid gravity, the six dimensions of a
+ * conventional four-bar and the crank angle count it is closed at, a plunger,
+ * the two pump pressures, the speed, the damping, the fillage and the pump
+ * efficiency; and for the balance, a structural unbalance, a crank offset, a
+ * unit designation, a service factor and a harmonic count.
+ *
+ * The chain is the one a studio user runs, call for call: `buildRodString`,
+ * `naturalFrequency`, `conventionalGeometry`, `unitKinematics`,
+ * `surfacePositionFn`, `fluidLoadLb`, `rodStretchIn`, then `runRodPumpDesign`
+ * at the engine's own marching defaults (120 nodes, 180 card samples, 20 cycles,
+ * tolerance 1e-4), none of which is exposed. The balance hands the card the
+ * design marched to `balanceUnit` with the typed unbalance and offset, reading
+ * the card at its NEAREST point (`cardLoadNearest`), and hands the same card to
+ * `diagnoseCard`. The design is marched once and shared by both views.
+ *
+ * Both open on ODUMA-4 on the PUBLISHED four-bar, so the default state prints
+ * only the teaching case (the guard sweeps both defaults in teachingAccessors).
+ * Bad input is refused with a plain message and never throws.
+ */
+export const TYPED_WELL_MAX_SECTIONS = TYPED_STRING_MAX_SECTIONS;
+export const TYPED_WELL_GRADES = ROD_GRADE_IDS;
+
+export const TYPED_WELL_DEFAULT = Object.freeze({
+  sections: TYPED_STRING_DEFAULT,
+  gradeId: ODUMA.gradeId,
+  fluidSg: ODUMA.fluidSg,
+  aIn: golden.unit.geometry.aIn,
+  cIn: golden.unit.geometry.cIn,
+  pIn: golden.unit.geometry.pIn,
+  crankBehindIn: golden.unit.geometry.crankBehindIn,
+  crankBelowIn: golden.unit.geometry.crankBelowIn,
+  rIn: golden.unit.geometry.rIn,
+  kinSteps: 360,
+  plungerDIn: ODUMA.plungerDIn,
+  pIntakePsia: ODUMA.pIntakePsia,
+  pDischargePsia: ODUMA.pDischargePsia,
+  spm: ODUMA.spm,
+  dampingRatio: ODUMA.dampingRatio,
+  fillage: ODUMA.fillage,
+  pumpEfficiency: ODUMA.pumpEfficiency,
+});
+
+export const TYPED_BALANCE_DEFAULT = Object.freeze({
+  ...TYPED_WELL_DEFAULT,
+  structuralUnbalanceLb: 0,
+  crankOffsetDeg: 0,
+  unitDesignation: TEACHING_DESIGNATION,
+  serviceFactor: ODUMA.serviceFactor,
+  harmonics: ROUND_TRIP_HARMONICS,
+});
+
+/**
+ * A load reader over a returned card that takes the NEAREST card point, the
+ * reader the balance of a typed well uses. `cardLoadAt` above interpolates
+ * between points; the two agree at the card's own points and differ between
+ * them, which moves a balanced moment in its last places.
+ */
+export const cardLoadNearest = (card) => (frac) => card[
+  Math.min(card.length - 1, Math.max(0, Math.round(frac * card.length) % card.length))
+].loadLb;
+
+const WELL_NUMBERS = Object.freeze([
+  ['fluidSg', 'The fluid specific gravity', 'pos'],
+  ['aIn', 'The front arm', 'pos'],
+  ['cIn', 'The rear arm', 'pos'],
+  ['pIn', 'The pitman', 'pos'],
+  ['crankBehindIn', 'The crank pivot distance behind the saddle bearing', 'pos'],
+  ['crankBelowIn', 'The crank pivot distance below the saddle bearing', 'pos'],
+  ['rIn', 'The crank radius', 'pos'],
+  ['kinSteps', 'The crank angle count', 'count'],
+  ['plungerDIn', 'The plunger diameter', 'pos'],
+  ['pIntakePsia', 'The intake pressure', 'nonneg'],
+  ['pDischargePsia', 'The discharge pressure', 'nonneg'],
+  ['spm', 'The pumping speed', 'pos'],
+  ['dampingRatio', 'The damping ratio', 'pos'],
+  ['fillage', 'The barrel fillage', 'frac'],
+  ['pumpEfficiency', 'The pump efficiency', 'frac'],
+]);
+
+const BALANCE_NUMBERS = Object.freeze([
+  ['structuralUnbalanceLb', 'The structural unbalance', 'any'],
+  ['crankOffsetDeg', 'The crank offset', 'any'],
+  ['serviceFactor', 'The service factor', 'pos'],
+  ['harmonics', 'The harmonic count', 'count'],
+]);
+
+const RULE_TEXT = Object.freeze({
+  pos: 'needs a number greater than zero.',
+  nonneg: 'needs a number of zero or more.',
+  frac: 'needs a number greater than zero and no more than one.',
+  count: 'needs a whole number of at least one.',
+  any: 'needs a number.',
+});
+
+const passesRule = (v, rule) => {
+  if (!Number.isFinite(v)) return false;
+  if (rule === 'pos') return v > 0;
+  if (rule === 'nonneg') return v >= 0;
+  if (rule === 'frac') return v > 0 && v <= 1;
+  if (rule === 'count') return Number.isInteger(v) && v >= 1;
+  return true;
+};
+
+const readNumbers = (input, list, out, errors) => {
+  list.forEach(([key, name, rule]) => {
+    const raw = input[key];
+    const v = (raw === '' || raw === null || raw === undefined) ? NaN : Number(raw);
+    if (!passesRule(v, rule)) errors.push(`${name} ${RULE_TEXT[rule]}`);
+    out[key] = v;
+  });
+};
+
+const normaliseWell = (input) => {
+  const src = input || {};
+  const errors = [];
+  const sections = (src.sections || [])
+    .filter((s) => s && String(s.size || '').trim() !== '')
+    .map((s) => ({ size: String(s.size).trim(), lengthFt: Number(s.lengthFt) }));
+  if (!sections.length) errors.push('Type at least one rod section.');
+  const bad = sections.find((s) => !(Number.isFinite(s.lengthFt) && s.lengthFt > 0));
+  if (bad) errors.push(`Section ${bad.size} needs a length in feet greater than zero.`);
+  const gradeId = String(src.gradeId || '').trim().toUpperCase();
+  if (!ROD_GRADE_IDS.includes(gradeId)) errors.push(`The rod grade must be one of ${ROD_GRADE_IDS.join(', ')}.`);
+  const well = { sections, gradeId };
+  readNumbers(src, WELL_NUMBERS, well, errors);
+  return { well, errors };
+};
+
+/** The design of a normalised well, marched once and cached. */
+const typedDesign = memoize((well) => {
+  const string = buildRodString({ sections: well.sections, fluidSg: well.fluidSg, gradeId: well.gradeId });
+  if (!string.ok) return { ok: false, errors: string.errors };
+  const frequency = naturalFrequency({ string });
+  const geometry = conventionalGeometry({
+    aIn: well.aIn, cIn: well.cIn, pIn: well.pIn,
+    crankBehindIn: well.crankBehindIn, crankBelowIn: well.crankBelowIn, rIn: well.rIn,
+  });
+  const kin = unitKinematics(geometry, { steps: well.kinSteps });
+  if (!kin.ok) return { ok: false, errors: [kin.error || 'This linkage does not close.'] };
+  const surfacePos = surfacePositionFn(kin);
+  const foLb = fluidLoadLb({
+    plungerDIn: well.plungerDIn, pDischargePsi: well.pDischargePsia, pIntakePsi: well.pIntakePsia,
+  });
+  const run = runRodPumpDesign({
+    string,
+    frequency,
+    kin,
+    surfacePosition: surfacePos,
+    strokeIn: kin.strokeIn,
+    spm: well.spm,
+    plungerDIn: well.plungerDIn,
+    pDischargePsi: well.pDischargePsia,
+    pIntakePsi: well.pIntakePsia,
+    fillage: well.fillage,
+    pumpEfficiency: well.pumpEfficiency,
+    dampingRatio: well.dampingRatio,
+  });
+  if (!run.ok) return { ok: false, errors: run.errors };
+  return { ok: true, string, frequency, geometry, kin, foLb, run };
+});
+
+/**
+ * The card of a typed well: the static stretch the fluid load causes, the
+ * spring rule beside the marched plunger stroke, both reported polished rod
+ * loads, the power and what the well produces.
+ */
+export const typedWellCard = (input) => {
+  const { well, errors } = normaliseWell(input);
+  if (errors.length) return { ok: false, errors, warnings: [] };
+  const t = typedDesign(well);
+  if (!t.ok) return { ok: false, errors: t.errors, warnings: [] };
+  const g = t.run.design;
+  const staticStretchIn = rodStretchIn({ string: t.string, loadLb: t.foLb });
+  const springRule = springRuleIn(t.kin.strokeIn, t.foLb, t.string);
+  return {
+    ok: true,
+    errors: [],
+    warnings: g.warnings,
+    sections: well.sections.length,
+    lengthFt: t.string.lengthFt,
+    krLbPerIn: t.string.krLbPerIn,
+    buoyedWeightLb: t.string.weightFluidLb,
+    naturalFreqSpm: t.frequency.nPrimeSpm,
+    surfaceStrokeIn: t.kin.strokeIn,
+    fluidLoadLb: t.foLb,
+    staticStretchIn,
+    springRuleIn: springRule,
+    plungerStrokeIn: g.plungerStrokeIn,
+    overtravelIn: g.plungerStrokeIn - springRule,
+    pprlLb: g.pprlLb,
+    mprlLb: g.mprlLb,
+    cardAreaInLb: g.cardAreaInLb,
+    prhp: g.prhp,
+    ratedBpd: g.ratedBpd,
+    sweptBpd: g.sweptBpd,
+    producedBpd: g.producedBpd,
+    converged: g.dynamics.converged,
+    cycles: g.dynamics.cycles,
+  };
+};
+
+/**
+ * The balance, the rod stress and the diagnostic of a typed well. The typed
+ * unbalance and offset go to `balanceUnit`, which reads them; the design
+ * accepts both and reads neither, so they are not handed to it. The Goodman
+ * check is the design's own formula at the typed service factor, section by
+ * section, over the stresses of the one march (the route `standaloneLoading`
+ * takes). The diagnostic reads the surface card that same march produced.
+ */
+export const typedWellBalance = (input) => {
+  const src = input || {};
+  const { well, errors } = normaliseWell(src);
+  const extra = {};
+  readNumbers(src, BALANCE_NUMBERS, extra, errors);
+  const designation = String(src.unitDesignation || '').trim();
+  const unitRating = designation ? parseUnitDesignation(designation) : null;
+  if (designation && !unitRating) {
+    errors.push('The unit designation reads like C-320D-198-100: type, gearbox rating in thousands of in-lb, structure in hundreds of lb, stroke in inches.');
+  }
+  if (errors.length) return { ok: false, errors, warnings: [] };
+  const t = typedDesign(well);
+  if (!t.ok) return { ok: false, errors: t.errors, warnings: [] };
+  const g = t.run.design;
+  const b = balanceUnit({
+    kin: t.kin,
+    cardLoadAt: cardLoadNearest(g.dynamics.surfaceCard),
+    structuralUnbalanceLb: extra.structuralUnbalanceLb,
+    crankOffsetDeg: extra.crankOffsetDeg,
+    aIn: t.geometry.aIn,
+  });
+  const stresses = g.stresses.map((s) => {
+    const gm = modifiedGoodman({
+      minTensilePsi: t.string.grade.minTensilePsi,
+      minStressPsi: s.minStressPsi,
+      serviceFactor: extra.serviceFactor,
+    });
+    return {
+      label: s.label,
+      maxStressPsi: s.maxStressPsi,
+      minStressPsi: s.minStressPsi,
+      allowablePsi: gm.allowablePsi,
+      loadingPct: (s.maxStressPsi / gm.allowablePsi) * 100,
+    };
+  });
+  const worst = stresses.reduce((a, s) => (s.loadingPct > a.loadingPct ? s : a), stresses[0]);
+  const diag = diagnoseCard({
+    string: t.string,
+    surfaceCard: g.dynamics.surfaceCard,
+    spm: well.spm,
+    dampingRatio: well.dampingRatio,
+    harmonics: extra.harmonics,
+  });
+  if (diag.ok === false) return { ok: false, errors: [diag.error], warnings: [] };
+  const rating = unitRating ? {
+    designation: unitRating.designation,
+    structuralPct: (g.pprlLb / unitRating.structuralCapacityLb) * 100,
+    torquePct: (b.peakTorqueInLb / unitRating.torqueRatingInLb) * 100,
+    strokePct: (t.kin.strokeIn / unitRating.strokeIn) * 100,
+  } : null;
+  return {
+    ok: true,
+    errors: [],
+    warnings: worst.loadingPct > 100
+      ? [{ code: 'rodOverstressed', message: `The ${worst.label} section runs above its modified Goodman allowable at this service factor.` }]
+      : [],
+    balanced: b.balanced,
+    momentInLb: b.momentInLb,
+    peakTorqueInLb: b.peakTorqueInLb,
+    counterbalanceEffectLb: b.counterbalanceEffectLb,
+    momentOverFrontArmLb: b.momentInLb / t.geometry.aIn,
+    rating,
+    sections: stresses,
+    worstSectionLabel: worst.label,
+    worstLoadingPct: worst.loadingPct,
+    plungerStrokeIn: g.plungerStrokeIn,
+    fluidLoadLb: t.foLb,
+    harmonicsUsed: diag.harmonics,
+    diagPlungerStrokeIn: diag.plungerStrokeIn,
+    diagPumpLoadMinLb: diag.pumpLoadRangeLb[0],
+    diagPumpLoadMaxLb: diag.pumpLoadRangeLb[1],
+  };
+};
+
+// ---------------------------------------------------------------------------
 // 16. THE SURFACE THE LEAK GUARD WALKS.
 // ---------------------------------------------------------------------------
 
@@ -2913,6 +3203,8 @@ export const teachingAccessors = () => [
   ['noteRoutes.taper', () => noteRoutes('taper')],
   ['noteRoutes.teaching', () => noteRoutes(ODUMA.label)],
   ['typedStringNote.default', () => typedStringNote(TYPED_STRING_DEFAULT)],
+  ['typedWellCard.default', () => typedWellCard(TYPED_WELL_DEFAULT)],
+  ['typedWellBalance.default', () => typedWellBalance(TYPED_BALANCE_DEFAULT)],
   ['scanGridReplica.taper', () => scanGridReplica('taper')],
   ['scanGridReplica.teaching', () => scanGridReplica(ODUMA.label)],
   ['speedRefusal', () => speedRefusal()],
