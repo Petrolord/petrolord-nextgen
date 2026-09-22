@@ -314,6 +314,17 @@ def post_check(before, after, rows, waves=()):
         ca = idx_a.get((r['course'], r['tier']))
         if ca is None or add not in str(ca.get('prompt', '')):
             errs.append(f"{(r['course'], r['tier'], r['key'])}: the brief does not end with its {r['shipped'].get('wave')} sentence {add[:60]!r}")
+    # HD onward: a prompt-only wave moves no field, so the fields alone cannot tell
+    # its state from the one before it. A brief that already carries the sentence of
+    # a wave that is NOT named is a state ahead of the waves checked.
+    for r in rows:
+        sh = r.get('shipped')
+        if not isinstance(sh, dict) or sh.get('wave') != 'hd' or in_wave(sh, waves):
+            continue
+        add = sh.get('prompt_append')
+        ca = idx_a.get((r['course'], r['tier']))
+        if add and ca is not None and add in str(ca.get('prompt', '')):
+            errs.append(f"{(r['course'], r['tier'], r['key'])}: the brief carries the {sh['wave']} sentence {add[:60]!r} but --wave {sh['wave']} is not named")
     return errs
 
 
@@ -902,6 +913,24 @@ def selftest(caps, annots):
             red = any(repr(k) in e for e in evaluate(caps, a2)[1])
             print(f"  control {'RED (good)' if red else 'GREEN (BROKEN)'}: a {wave_of[k]} class move with the Suite print it replaced ({k[2]})")
             ok &= red
+    hd_appends = [k for k in appends if wave_of.get(k) == 'hd']
+    if hd_appends:
+        # HD (prompt only): its brief without the pointer is caught with --wave hd, and
+        # the brief with the pointer is caught when hd is not named
+        k = hd_appends[0]
+        c2 = after()
+        cap2 = next(c for c in c2 if (c['app'], c['tier']) == k[:2])
+        cap2['prompt'] = cap2['prompt'].replace(appends[k], '').rstrip()
+        red = bool(post_check(caps, c2, rows, waves))
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: an hd brief without its pointer ({k[0]}/{k[1]})")
+        ok &= red
+        rest = tuple(x for x in waves if x != 'hd')
+        clean = not post_check(caps, after(upto=rest), rows, rest)
+        print(f"  post control {'GREEN (good)' if clean else 'RED (BROKEN)'}: the state without hd, checked without --wave hd")
+        ok &= clean
+        red = bool(post_check(caps, after(), rows, rest))
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: the state with hd's pointer, checked without --wave hd")
+        ok &= red
     def moving(sh):
         while isinstance(sh, dict):
             if sh.get('wave') and ('tol' in sh or 'rekey' in sh):

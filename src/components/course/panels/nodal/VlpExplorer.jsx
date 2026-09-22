@@ -7,9 +7,9 @@ import {
   TEACHING_WELLS, FORCADOS_3, CS_STEP_LIST, PUBLISHED_CS_STEPS,
   wellDecomposition, wellTubingCurve, wellOutflowReadings, wellLimbCrossover,
   wellMinimumSensitivity, wellColumnStepStudy, wellColumnVsAverageTz, wellFrictionGroup,
-  teachingColumnTruncationTable,
+  teachingColumnTruncationTable, typedGasColumn, TYPED_COLUMN_DEFAULT,
 } from './nodalLab';
-import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // VLP explorer, the Professional tier. What the tubing will take: the J taken
 // apart into the two terms that make it, the bottom of the J and what moves it,
@@ -36,11 +36,15 @@ const tiny = (v) => {
 
 const yn = (b) => (b ? 'yes' : 'no');
 
+/** A plain decimal print: no thousands separators, so it can be typed back into an answer box. */
+const plain = (v, d) => (Number.isFinite(v) ? Number(v).toFixed(d) : '-');
+
 const MODES = [
   ['shape', 'The J, taken apart'],
   ['minimum', 'The bottom of the J, and what moves it'],
   ['gascolumn', 'The gas column, and what two stations cost'],
   ['secondopinion', 'The same column by a different road'],
+  ['typedcolumn', 'Your gas column, typed'],
 ];
 
 const LEVERS = [
@@ -546,24 +550,89 @@ const SecondOpinion = ({ W }) => {
   );
 };
 
-const VlpExplorer = () => {
-  const [mode, setMode] = useState('shape');
+
+const TYPED_COLUMN_FIELDS = [
+  ['ptf', 'Tubing head pressure, psia'],
+  ['gasSg', 'Gas specific gravity'],
+  ['mdFt', 'Measured depth, ft'],
+  ['tvdFt', 'Vertical depth, ft'],
+  ['whtF', 'Wellhead temperature, degF'],
+  ['bhtF', 'Bottomhole temperature, degF'],
+  ['steps', 'Step count'],
+];
+
+const typedState = (defaults) => Object.fromEntries(
+  Object.entries(defaults).map(([k, v]) => [k, v === null || v === undefined ? '' : String(v)]),
+);
+
+const TypedColumn = () => {
+  const [values, setValues] = useState(() => typedState(TYPED_COLUMN_DEFAULT));
+  const set = (k, v) => setValues((o) => ({ ...o, [k]: v }));
+  const r = useMemo(() => {
+    try { return typedGasColumn(values); } catch { return null; }
+  }, [values]);
+  return (
+    <>
+      <div className="text-xs text-slate-300">
+        Type a static dry gas column and march it by Cullender and Smith. The view opens on the
+        BONNY-7 teaching column, and every input can be retyped. The temperature runs in a straight
+        line from the wellhead to the bottom of the column, and the column is marched in the number
+        of steps you type. The midpoint station is the pressure halfway down the measured depth.
+      </div>
+      <div className="mt-3">
+        <FieldGrid>
+          {TYPED_COLUMN_FIELDS.map(([key, label]) => (
+            <NumField key={key} label={label} value={values[key]} onChange={(v) => set(key, v)} />
+          ))}
+        </FieldGrid>
+      </div>
+      {(!r || !r.ok) ? (
+        <Note>{r && r.errors && r.errors.length ? r.errors.join(' ') : 'This column cannot be run.'}</Note>
+      ) : (
+        <>
+          <div className="mt-3">
+            <TileGrid>
+              <Tile label="Pressure at the bottom of the column" value={plain(r.pwfPsia, 6)} unit="psia" />
+              <Tile label="Pressure at the midpoint station" value={plain(r.pmfPsia, 6)} unit="psia" />
+              <Tile label="Steps marched" value={fmt(r.stepsUsed, 0)} />
+              <Tile label="Average gradient over the vertical depth" value={plain(r.gradientPsiPerFt, 8)} unit="psi/ft" />
+              <Tile label="z at the tubing head" value={plain(r.zAtWellhead, 8)} />
+              <Tile label="Every pair of steps closed" value={yn(r.converged)} />
+            </TileGrid>
+          </div>
+          {r.warnings.length > 0 && <Note>{r.warnings.join(' ')}</Note>}
+          <Note>
+            A static column only gains pressure with depth, so the midpoint station always sits between
+            the tubing head pressure and the pressure at the bottom. Retype the step count to see how
+            little a gravity only column moves between two stations and twenty.
+          </Note>
+        </>
+      )}
+    </>
+  );
+};
+
+const VlpExplorer = ({ initialMode = 'shape' }) => {
+  const [mode, setMode] = useState(initialMode);
   const [wellLabel, setWellLabel] = useState(FORCADOS_3.label);
   const W = wellOf(wellLabel);
   return (
     <PanelShell
       title="Outflow explorer"
-      subtitle="The J taken apart into the two terms that make it, the bottom of the J and the levers that move it, the gas column the engine builds for itself and what the published two station method costs on it"
+      subtitle="The J taken apart into the two terms that make it, the bottom of the J and the levers that move it, the gas column the engine builds for itself and what the published two station method costs on it, and a gas column you type and march yourself"
     >
       <FieldGrid>
         <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
-        <SelectField label="Teaching well" value={wellLabel} onChange={setWellLabel} options={WELLS} />
+        {mode !== 'typedcolumn' && (
+          <SelectField label="Teaching well" value={wellLabel} onChange={setWellLabel} options={WELLS} />
+        )}
       </FieldGrid>
       <div className="mt-3">
         {mode === 'shape' && <Shape W={W} />}
         {mode === 'minimum' && <Minimum W={W} />}
         {mode === 'gascolumn' && <GasColumn W={W} />}
         {mode === 'secondopinion' && <SecondOpinion W={W} />}
+        {mode === 'typedcolumn' && <TypedColumn />}
       </div>
     </PanelShell>
   );
