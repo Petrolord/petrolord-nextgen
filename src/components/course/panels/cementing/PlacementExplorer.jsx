@@ -4,6 +4,7 @@ import {
 } from 'recharts';
 import {
   WELLS, PROGRAMS, caseOf, placementFor, rateSweep, rateWindow, previousShoeMdOf,
+  YOUR_JOB_FIELDS, YOUR_JOB_DEFAULT, jobFromTyped, yourJob,
 } from './cementingLab';
 import { PanelShell, NumField, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -21,6 +22,7 @@ const MODES = [
   { value: 'job', label: 'Through the job' },
   { value: 'compare', label: 'Two programmes' },
   { value: 'window', label: 'The rate window' },
+  { value: 'yours', label: 'Your job' },
 ];
 
 const Job = () => {
@@ -205,6 +207,71 @@ const Window = () => {
   );
 };
 
+// Your job: every input of a lead-and-tail placement as a box. It opens on the
+// lessons' own slant job; change any box to run a job of your own.
+const Yours = () => {
+  const [well, setWell] = useState('slant');
+  const [typed, setTyped] = useState(YOUR_JOB_DEFAULT);
+  const job = useMemo(() => jobFromTyped(typed), [typed]);
+  const r = useMemo(() => {
+    if (!job) return null;
+    try { return yourJob(well, job); } catch { return null; }
+  }, [well, job]);
+  const set = (k) => (v) => setTyped((t) => ({ ...t, [k]: v }));
+  const groups = [
+    ['The string and the hole', YOUR_JOB_FIELDS.slice(0, 8)],
+    ['The job', YOUR_JOB_FIELDS.slice(8, 16)],
+    ['The four Fann sets (dial readings)', YOUR_JOB_FIELDS.slice(16, 32)],
+    ['The rate and the limit', YOUR_JOB_FIELDS.slice(32)],
+  ];
+  return (
+    <>
+      <div className="grid grid-cols-2 gap-2">
+        <SelectField label="Trajectory" value={well} onChange={setWell} options={WELL_OPTIONS} />
+        <button type="button" className="text-xs text-slate-300 underline self-end pb-2 text-left"
+          onClick={() => setTyped(YOUR_JOB_DEFAULT)}>
+          Back to the lessons&apos; job
+        </button>
+      </div>
+      {groups.map(([title, fields]) => (
+        <div key={title} className="mt-3">
+          <p className="text-[11px] text-gray-400 mb-1">{title}</p>
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
+            {fields.map((f) => <NumField key={f.key} label={f.label} value={typed[f.key]} onChange={set(f.key)} />)}
+          </div>
+        </div>
+      ))}
+      {!r && <Note>Those boxes do not describe a job that can be pumped: every box needs a positive number.</Note>}
+      {r && (
+        <>
+          <TileGrid>
+            <Tile label="End pump pressure" value={fmt(r.placement.endPumpPressurePa / 1e6, 6)} unit="MPa" />
+            <Tile label="Float differential" value={fmt(r.placement.floatDiffPa / 1e6, 6)} unit="MPa" />
+            <Tile label="Peak ECD at the previous shoe" value={fmt(r.placement.maxEcdPrevShoeKgM3, 4)} unit="kg/m3" />
+            <Tile label="Free fall at this rate" value={r.placement.freeFall ? 'yes' : 'no'} />
+            <Tile label="Slowest rate with no free fall" value={r.window.minRateNoFreeFallM3s == null ? 'none' : fmt(r.window.minRateNoFreeFallM3s, 8)} unit="m3/s" />
+            <Tile label="Fastest rate under the limit" value={r.window.maxRateUnderEcdM3s == null ? 'none' : fmt(r.window.maxRateUnderEcdM3s, 8)} unit="m3/s" />
+            <Tile label="Window width" value={r.window.widthM3s == null ? '-' : fmt(r.window.widthM3s, 8)} unit="m3/s" />
+            <Tile label="Window" value={r.window.open ? 'open' : 'closed'} />
+            <Tile label="Slurry" value={fmt(r.volumes.slurryM3, 4)} unit="m3" />
+          </TileGrid>
+          {r.placement.warnings.length > 0 && (
+            <div className="mt-3 text-xs text-amber-400">
+              {r.placement.warnings.map((w) => <p key={w} className="mb-1">{w}</p>)}
+            </div>
+          )}
+        </>
+      )}
+      <Note>
+        The same engine runs as in the other views: the job volumes from the geometry, then the
+        placement stepped through 61 positions, then both edges of the rate window by bisection.
+        The rheologies are fitted from the four readings of each fluid, Herschel-Bulkley as
+        everywhere else in this course.
+      </Note>
+    </>
+  );
+};
+
 const PlacementExplorer = () => {
   const [mode, setMode] = useState('job');
   return (
@@ -217,6 +284,7 @@ const PlacementExplorer = () => {
         {mode === 'job' && <Job />}
         {mode === 'compare' && <Compare />}
         {mode === 'window' && <Window />}
+        {mode === 'yours' && <Yours />}
       </div>
     </PanelShell>
   );

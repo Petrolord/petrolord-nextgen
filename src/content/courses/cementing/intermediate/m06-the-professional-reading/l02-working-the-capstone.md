@@ -4,6 +4,8 @@ Six placement numbers for the intermediate string, on a job that cannot be pumpe
 
 {{panel:cm-placement-explorer}}
 
+**Your job.** The explorer's "Your job" view has a box for every input of a lead-and-tail placement: the casing, the shoe and float collar, both hole sections, the top of cement, the excess, the split, the spacer volume, the four densities, the four Fann sets, the rate and the limit at the previous shoe. It opens on the lessons' own slant job. Type the Associate capstone's job and the fluids below, and it prints all six fields, pressures in MPa to six decimals and the rates to eight.
+
 ## What you are given
 
 The Associate capstone's job, simulated. The 9-5/8 inch intermediate string on the slant well: shoe at 1400 m, float collar at 1352, cased to 350 m behind 13-3/8 inch, 12-1/4 inch open hole below that, top of cement at 250 m, 30 percent excess, lead and tail split at 350 m.

@@ -4,7 +4,9 @@ import {
 } from 'recharts';
 import {
   CASES, pressureSplit, holeCleaning, cleaningSweep, minimumFlow, oracleCheck,
+  BLANK_MUD, mudOver,
 } from './hydraulicsLab';
+import MudBoxes from './MudBoxes';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Cleaning explorer: what the annulus is doing with the cuttings, what the ECD
@@ -21,14 +23,14 @@ const MODES = [
 ];
 const CASE_OPTIONS = CASES.map((c) => ({ value: c.id, label: `${c.well} / ${c.mudName}` }));
 
-const Transport = () => {
+const Transport = ({ over }) => {
   const [id, setId] = useState('horizontal_kcl_polymer');
   const [q, setQ] = useState('0.025');
   const hc = useMemo(() => {
     const v = Number(q);
     if (!Number.isFinite(v) || v <= 0) return null;
-    return holeCleaning(id, v);
-  }, [id, q]);
+    return holeCleaning(id, v, over);
+  }, [id, q, over]);
   return (
     <>
       <div className="grid grid-cols-2 gap-2">
@@ -78,15 +80,15 @@ const Transport = () => {
   );
 };
 
-const Ecd = () => {
+const Ecd = ({ over }) => {
   const [id, setId] = useState('slant_kcl_polymer');
   const [q, setQ] = useState('0.025');
   const s = useMemo(() => {
     const v = Number(q);
     if (!Number.isFinite(v) || v <= 0) return null;
-    return pressureSplit(id, v);
-  }, [id, q]);
-  const rho = CASES.find((c) => c.id === id).densityKgM3;
+    return pressureSplit(id, v, over);
+  }, [id, q, over]);
+  const rho = over.densityKgM3 ?? CASES.find((c) => c.id === id).densityKgM3;
   return (
     <>
       <div className="grid grid-cols-2 gap-2">
@@ -128,17 +130,17 @@ const Ecd = () => {
   );
 };
 
-const MinFlow = () => {
+const MinFlow = ({ over }) => {
   const [id, setId] = useState('horizontal_kcl_polymer');
   const [target, setTarget] = useState('0.9');
-  const sweep = useMemo(() => cleaningSweep(id), [id]);
+  const sweep = useMemo(() => cleaningSweep(id, undefined, over), [id, over]);
   const solved = useMemo(() => {
     const t = Number(target);
     if (!Number.isFinite(t) || t <= 0 || t >= 1) return null;
-    const q = minimumFlow(id, t);
+    const q = minimumFlow(id, t, over);
     if (q == null) return null;
-    return { q, split: pressureSplit(id, q), hc: holeCleaning(id, q) };
-  }, [id, target]);
+    return { q, split: pressureSplit(id, q, over), hc: holeCleaning(id, q, over) };
+  }, [id, target, over]);
   const check = useMemo(() => oracleCheck(), []);
   return (
     <>
@@ -183,6 +185,8 @@ const MinFlow = () => {
 
 const CleaningExplorer = () => {
   const [mode, setMode] = useState('transport');
+  const [mud, setMud] = useState(BLANK_MUD);
+  const over = useMemo(() => mudOver(mud), [mud]);
   return (
     <PanelShell
       title="Cleaning and ECD explorer"
@@ -192,10 +196,11 @@ const CleaningExplorer = () => {
       <p className="text-[11px] text-gray-500 mt-2">
         Cuttings at 2600 kg/m3 and 6 mm, rate of penetration 0.005 m/s, Schiller-Naumann slip.
       </p>
+      <MudBoxes typed={mud} setTyped={setMud} valid={over !== null} />
       <div className="mt-3">
-        {mode === 'transport' && <Transport />}
-        {mode === 'ecd' && <Ecd />}
-        {mode === 'minflow' && <MinFlow />}
+        {over && mode === 'transport' && <Transport over={over} />}
+        {over && mode === 'ecd' && <Ecd over={over} />}
+        {over && mode === 'minflow' && <MinFlow over={over} />}
       </div>
     </PanelShell>
   );

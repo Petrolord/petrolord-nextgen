@@ -4,6 +4,8 @@ Six numbers from buckling, capacity and wear.
 
 {{panel:td-buckling-explorer}}
 
+**Your case.** Type 1500 into the explorer's mud density box. Field 3 is the "What the pipe has left" view on the horizontal well, which prints the torsion utilization as a fraction to six decimals. For fields 5 and 6, type the two schedule entries into the casing wear view's rows (150 rpm for 30 hours, then 90 rpm for 20) and leave the third row blank. The box opens blank, which is the lessons' 1440, and the schedule opens on the lessons' 50 hours at 120 rpm.
+
 ## What is asked
 
 1. The drill pipe's sinusoidal buckling limit at 90 degrees in the open hole.

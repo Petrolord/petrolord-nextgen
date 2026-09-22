@@ -339,6 +339,26 @@ The rules live in one place, `src/components/course/panels/typedCaseGuard.js`, a
 3. **Naming and literals (unchanged).** No panel source names a capstone reader or prints a graded answer as a decimal literal at six significant digits or more.
 The route itself is proved too: `typedRouteMiss` types the capstone's stated inputs and reads the graded answer at the panel's print precision. `typedCaseGuard.test.js` carries a negative control for every rule (a capstone default, a coincident default, a unit-shifted default, a preset carrying one capstone input, a renamed input, a coarse print, a named reader, a literal) and runs the rules on the live rod pump typed string view from W1.
 
+## W4a (typed-case panel modes, drilling rows), 2026-09-22
+
+Section 1 route (b) for the drilling rows, and the section 2 casingtubing panel row, built under D2 (see the section above). One PR per course, stacked: #202 (D2 policy), #204 (casingtubing, welldesign, and the `audit.py` route check), #206 (torquedrag, `w4a_capstones.py`), #208 (perfsand), #214 (geomech), #218 (hydraulics), #226 (cementing).
+
+| Course | Tiers | Panel change | Fields leaving no-route or display |
+|---|---|---|---|
+| casingtubing | beg | 0.55 axial fraction; ratings in whole Pa; D over t to 10 dp | 4 |
+| welldesign | int | north-north variance tile; opens on station 180 (was 267, the capstone station) | 1 |
+| torquedrag | beg, int, adv | mud density box on all three explorers; N to 2 dp, N.m to 3 dp; three-row wear schedule | 13 |
+| perfsand | adv | Top and Bottom boxes on the Sanding view; zero-margin boost to 8 dp | 4 |
+| geomech | int, adv | a box per parameter (and UCS) on the stability and window views; collapse and fracture initiation at the tightest point | 12 |
+| hydraulics | beg, int, adv | Your mud boxes (four readings, density) on all three explorers; MPa to 6 dp; open swab tile; yield rule taught in beg m02 l04 | 15 |
+| cementing | int | Your job view: every placement input as a box, rate window bisected | 6 |
+
+Each course has a `panelCapstoneGuard.test.js` on the D2 rules. `w4a/<course>.json` records each field's new annotation and its `route`; `normalize.py` folds them in with `wave: w4a`, and `audit.py` fails a field that ships a route but is still `unobtainable`, is not class none, or records no printed precision (two new selftest controls). Where a brief had to point to the new view, `w4a_capstones.py` writes a prompt-only `20261027a_w4_<course>.sql` (5 files, 10 tiers), applied by the owner with `/root/w4a-apply/apply.sh` after W1. No key, expected value or tolerance moves.
+
+Findings on the way, both pre-existing and pinned as the only known exceptions in their guards:
+- perfsand advanced `gauge_margin_m` (87 um) is an entry of the discrete gauge series that the Gravel view's table prints by default.
+- hydraulics beginner `hb_tau_y_Pa` equals the light mud's measured 3 rpm stress (4 dial degrees) in the rheology explorer's default residual table, because the capstone mud's 2 x theta3 less theta6 is also 4 degrees. Fixing it needs a re-key.
+
 ## Regrade impact
 
 The scratch replay has 0 capstone attempts. Production held 9 at the baseline (the cleanslate record). When the lesson-leak recut was written, the 7 that existed then were all welldata/beginner. `apply.sh attempts --prod` lists them read-only.

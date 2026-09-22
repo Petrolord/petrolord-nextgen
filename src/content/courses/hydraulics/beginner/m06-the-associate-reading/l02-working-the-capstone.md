@@ -4,6 +4,8 @@ Six numbers on a mud you have not seen.
 
 {{panel:hy-rheology-explorer}}
 
+**Your mud.** Type the four readings and the density into the explorer's "Your mud" boxes. The model view then fits this mud, and the pressure chain view on the slant case at 0.030 m3/s prints the four pressures in MPa to six decimals, which is one pascal. The boxes open blank, which is the selected case's own mud.
+
 ## What is asked
 
 1. The power-law flow behaviour index n.

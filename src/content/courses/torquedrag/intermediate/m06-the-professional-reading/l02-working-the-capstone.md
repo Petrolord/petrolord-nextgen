@@ -4,6 +4,8 @@ Six numbers from four wells, and the one that needs a solver.
 
 {{panel:td-friction-explorer}}
 
+**Your case.** Type 1500 into the mud density box of this explorer and of the string explorer. Fields 1 to 5 are rows of the string explorer's "Every operation" view, which prints torques in N.m to three decimals and tensions in newtons to two. Field 6 is this explorer's "Back it out of a trip" view with 1100000 N as the observed pick-up. The boxes open blank, which is the lessons' 1440.
+
 ## What is asked
 
 1. The build-and-hold well's surface torque while rotating on bottom.

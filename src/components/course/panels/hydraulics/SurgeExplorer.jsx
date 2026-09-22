@@ -4,7 +4,9 @@ import {
 } from 'recharts';
 import {
   CASES, surgeSwab, tripSweep, closedOverOpen, speedLimit, pressureSplit, CLINGING_CONSTANT,
+  BLANK_MUD, mudOver,
 } from './hydraulicsLab';
+import MudBoxes from './MudBoxes';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Surge explorer: what moving the string does to the formation, and the window
@@ -21,11 +23,11 @@ const MODES = [
 ];
 const CASE_OPTIONS = CASES.map((c) => ({ value: c.id, label: `${c.well} / ${c.mudName}` }));
 
-const Sweep = () => {
+const Sweep = ({ over }) => {
   const [id, setId] = useState('slant_kcl_polymer');
   const [mode, setMode] = useState('closed');
-  const sw = useMemo(() => tripSweep(id, [0.1, 0.2, 0.3, 0.5, 0.75, 1.0, 1.5], mode), [id, mode]);
-  const rho = CASES.find((c) => c.id === id).densityKgM3;
+  const sw = useMemo(() => tripSweep(id, [0.1, 0.2, 0.3, 0.5, 0.75, 1.0, 1.5], mode, over), [id, mode, over]);
+  const rho = over.densityKgM3 ?? CASES.find((c) => c.id === id).densityKgM3;
   return (
     <>
       <div className="grid grid-cols-2 gap-2">
@@ -81,18 +83,18 @@ const Sweep = () => {
   );
 };
 
-const ClosedOpen = () => {
+const ClosedOpen = ({ over }) => {
   const [id, setId] = useState('slant_kcl_polymer');
   const [v, setV] = useState('0.5');
   const r = useMemo(() => {
     const s = Number(v);
     if (!Number.isFinite(s) || s < 0) return null;
     return {
-      closed: surgeSwab(id, s, 'closed'),
-      open: surgeSwab(id, s, 'open'),
-      ratio: closedOverOpen(id, s),
+      closed: surgeSwab(id, s, 'closed', over),
+      open: surgeSwab(id, s, 'open', over),
+      ratio: closedOverOpen(id, s, over),
     };
-  }, [id, v]);
+  }, [id, v, over]);
   return (
     <>
       <div className="grid grid-cols-2 gap-2">
@@ -106,6 +108,7 @@ const ClosedOpen = () => {
           <Tile label="Closed over open" value={fmt(r.ratio, 8)} />
           <Tile label="Closed surge EMW" value={fmt(r.closed.surgeEmwKgM3, 4)} unit="kg/m3" />
           <Tile label="Open surge EMW" value={fmt(r.open.surgeEmwKgM3, 4)} unit="kg/m3" />
+          <Tile label="Open swab EMW" value={fmt(r.open.swabEmwKgM3, 4)} unit="kg/m3" />
           <Tile label="Clinging constant" value={String(CLINGING_CONSTANT)} />
         </TileGrid>
       )}
@@ -120,19 +123,21 @@ const ClosedOpen = () => {
   );
 };
 
-const Window = () => {
+const Window = ({ over }) => {
   const [id, setId] = useState('slant_kcl_polymer');
   const [frac, setFrac] = useState('1520');
   const [pore, setPore] = useState('1380');
-  const rho = CASES.find((c) => c.id === id).densityKgM3;
+  const rho = over.densityKgM3 ?? CASES.find((c) => c.id === id).densityKgM3;
   const solved = useMemo(() => {
     const f = Number(frac);
     const p = Number(pore);
     if (!Number.isFinite(f) || !Number.isFinite(p)) return null;
-    const vClosed = speedLimit(id, { fracEmwKgM3: f, poreEmwKgM3: p, mode: 'closed' });
-    const vOpen = speedLimit(id, { fracEmwKgM3: f, poreEmwKgM3: p, mode: 'open' });
-    return { vClosed, vOpen, at: surgeSwab(id, vClosed, 'closed'), circ: pressureSplit(id, 0.025) };
-  }, [id, frac, pore]);
+    try {
+      const vClosed = speedLimit(id, { fracEmwKgM3: f, poreEmwKgM3: p, mode: 'closed', over });
+      const vOpen = speedLimit(id, { fracEmwKgM3: f, poreEmwKgM3: p, mode: 'open', over });
+      return { vClosed, vOpen, at: surgeSwab(id, vClosed, 'closed', over), circ: pressureSplit(id, 0.025, over) };
+    } catch { return null; }
+  }, [id, frac, pore, over]);
   return (
     <>
       <div className="grid grid-cols-3 gap-2">
@@ -162,16 +167,19 @@ const Window = () => {
 
 const SurgeExplorer = () => {
   const [mode, setMode] = useState('sweep');
+  const [mud, setMud] = useState(BLANK_MUD);
+  const over = useMemo(() => mudOver(mud), [mud]);
   return (
     <PanelShell
       title="Surge and swab explorer"
       subtitle="What moving the string does to the formation, and the window all four pressures share"
     >
       <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
+      <MudBoxes typed={mud} setTyped={setMud} valid={over !== null} />
       <div className="mt-3">
-        {mode === 'sweep' && <Sweep />}
-        {mode === 'closedopen' && <ClosedOpen />}
-        {mode === 'window' && <Window />}
+        {over && mode === 'sweep' && <Sweep over={over} />}
+        {over && mode === 'closedopen' && <ClosedOpen over={over} />}
+        {over && mode === 'window' && <Window over={over} />}
       </div>
     </PanelShell>
   );

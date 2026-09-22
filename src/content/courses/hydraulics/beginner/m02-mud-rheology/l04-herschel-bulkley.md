@@ -14,6 +14,18 @@ A yield stress plus a power law. It contains both of the previous models: set n 
 
 Three parameters need three readings. The engine uses the 600 and 300 rpm readings for the power-law part and a low-rate reading for the yield.
 
+## The yield rule
+
+The yield comes from the two low-rate readings alone:
+
+    tau_y = (2 x theta3 - theta6) x 0.51040356094 Pa
+
+Twice the 3 rpm reading less the 6 rpm reading extrapolates the curve back to zero shear rate, in dial degrees. The factor 0.51040356094 is 1.066 x 0.47880259, the pascals in one dial degree. Two limits apply: a negative result is taken as zero, and the yield never exceeds 0.99 times the 300 rpm stress.
+
+Check it on the lessons' muds. kcl_polymer reads 7 at 6 rpm and 6 at 3 rpm, so 2 x 6 - 7 = 5 degrees and tau_y = 5 x 0.51040356094 = 2.5520178047 Pa. light_wbm reads 5 and 4, so 3 degrees and 1.53121068282 Pa. Those are the two values below.
+
+The panel's model view does the same with any four readings you type in its "Your mud" boxes.
+
 For kcl_polymer: tau_y = 2.5520178046999997 Pa, n = 0.8382489300033881, K = 0.0904297261728216 Pa.s^n.
 For light_wbm: tau_y = 1.5312106828199998 Pa, n = 0.7484612330040356, K = 0.11992153633052774 Pa.s^n.
 
