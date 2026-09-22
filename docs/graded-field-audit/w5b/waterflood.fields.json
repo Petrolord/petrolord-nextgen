@@ -1,0 +1,150 @@
+[
+ {
+  "tier": "beginner",
+  "key": "field_cum_vrr",
+  "label": "Field cumulative VRR",
+  "unit": "-",
+  "tol": 0.0005,
+  "expected": 1.0639811055975046
+ },
+ {
+  "tier": "beginner",
+  "key": "produced_voidage_rb",
+  "label": "Total produced voidage",
+  "unit": "rb",
+  "tol": 50,
+  "expected": 213561.2936416994
+ },
+ {
+  "tier": "beginner",
+  "key": "injected_voidage_rb",
+  "label": "Total injected voidage",
+  "unit": "rb",
+  "tol": 50,
+  "expected": 227225.18132172863
+ },
+ {
+  "tier": "beginner",
+  "key": "fillup_month_index",
+  "label": "Fill-up period index (zero-based)",
+  "unit": "index",
+  "tol": 0,
+  "expected": 7,
+  "context": "fill",
+  "context_word": "fill-up"
+ },
+ {
+  "tier": "beginner",
+  "key": "months_under_target_band",
+  "label": "Periods under the 0.95 to 1.15 band",
+  "unit": "count",
+  "tol": 0,
+  "expected": 2,
+  "context": "under",
+  "context_word": "months under the band"
+ },
+ {
+  "tier": "beginner",
+  "key": "month_produced_voidage_rb",
+  "label": "June 2024 produced voidage",
+  "unit": "rb",
+  "tol": 1,
+  "expected": 6353.507278415295
+ },
+ {
+  "tier": "intermediate",
+  "key": "out_of_zone_bbl",
+  "label": "Out-of-zone injection",
+  "unit": "bbl",
+  "tol": 20,
+  "expected": 29246.80551665815
+ },
+ {
+  "tier": "intermediate",
+  "key": "north_cum_vrr",
+  "label": "North element cumulative VRR",
+  "unit": "-",
+  "tol": 0.0005,
+  "expected": 1.1616748507042214
+ },
+ {
+  "tier": "intermediate",
+  "key": "south_cum_vrr",
+  "label": "South element cumulative VRR",
+  "unit": "-",
+  "tol": 0.0005,
+  "expected": 0.6307735406413947
+ },
+ {
+  "tier": "intermediate",
+  "key": "south_recommended_wi",
+  "label": "South recommended injection at target 1.10",
+  "unit": "bbl",
+  "tol": 2,
+  "expected": 2915.665334186579
+ },
+ {
+  "tier": "intermediate",
+  "key": "hall_ratio_e4",
+  "label": "Ekene-4 Hall slope ratio above the reference, rows to 2025-06-30",
+  "unit": "-",
+  "tol": 0.0005,
+  "expected": 1.303301717154095
+ },
+ {
+  "tier": "intermediate",
+  "key": "chan_slope_case",
+  "label": "Ekene-6 Chan late-time slope, 5-point smoothing",
+  "unit": "-",
+  "tol": 0.005,
+  "expected": 1.5358261835134785
+ },
+ {
+  "tier": "advanced",
+  "key": "dykstra_parsons_v",
+  "label": "Dykstra-Parsons permeability variation V",
+  "unit": "-",
+  "tol": 0.001,
+  "expected": 0.5108350057773658
+ },
+ {
+  "tier": "advanced",
+  "key": "dp_coverage_first_bt",
+  "label": "Coverage at the first breakthrough, M 1.5",
+  "unit": "fraction",
+  "tol": 0.0005,
+  "expected": 0.53830773439402
+ },
+ {
+  "tier": "advanced",
+  "key": "stiles_wc_first_bt",
+  "label": "Stiles surface water cut at first BT",
+  "unit": "fraction",
+  "tol": 0.0005,
+  "expected": 0.6065200837842389
+ },
+ {
+  "tier": "advanced",
+  "key": "eabt_at_case_mu",
+  "label": "Areal sweep at breakthrough, 2.4 cp oil",
+  "unit": "fraction",
+  "tol": 0.0005,
+  "expected": 0.6187020568266292
+ },
+ {
+  "tier": "advanced",
+  "key": "case_breakthrough_days",
+  "label": "Forecast breakthrough time",
+  "unit": "days",
+  "tol": 2,
+  "expected": 760.9375
+ },
+ {
+  "tier": "advanced",
+  "key": "implied_swept_fraction",
+  "label": "Implied contacted fraction of the element",
+  "unit": "fraction",
+  "tol": 0.0002,
+  "expected": 0.015390012446578026
+ }
+]

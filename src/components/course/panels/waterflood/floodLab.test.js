@@ -1,4 +1,5 @@
-// floodLab pins. Every one of the eighteen RC4 capstone oracles is reproduced
+// floodLab pins. Every one of the eighteen RC4 teaching values (the capstone
+// oracles until W5b re-cased each tier onto a case of its own) is reproduced
 // here THROUGH the teaching lab, so a panel and the live grader can never drift
 // apart, plus the supporting truth the lessons quote at full precision.
 // Source of truth: RC4-TRUTH.md, derived by running the vendored engines.
@@ -8,7 +9,7 @@ import * as lab from './floodLab.js';
 
 const near = (a, b, tol) => expect(Math.abs(a - b)).toBeLessThanOrEqual(tol);
 
-describe('floodLab: Associate capstone oracles', () => {
+describe('floodLab: Associate teaching values (the pre-W5b oracles)', () => {
   it('field cumulative VRR', () => {
     near(lab.fieldLedger().summary.cumulativeVRR, 1.034899536109, 1e-12);
   });
@@ -38,7 +39,7 @@ describe('floodLab: Associate capstone oracles', () => {
   });
 });
 
-describe('floodLab: Professional capstone oracles', () => {
+describe('floodLab: Professional teaching values (the pre-W5b oracles)', () => {
   it('out-of-zone injection', () => {
     const a = lab.allocationAudit();
     near(a.unallocated.winj_stb, 26997.051246145966, 1e-8);
@@ -77,7 +78,7 @@ describe('floodLab: Professional capstone oracles', () => {
   });
 });
 
-describe('floodLab: Expert capstone oracles', () => {
+describe('floodLab: Expert teaching values (the pre-W5b oracles)', () => {
   it('Dykstra-Parsons permeability variation recovers the plant', () => {
     const v = lab.permeabilityVariation();
     near(v.V, 0.5, 1e-15);
@@ -266,5 +267,24 @@ describe('floodLab: supporting truth the lessons quote', () => {
     const loose = lab.forecast({ worLimit: 25 });
     expect(tight.summary.elapsed_days).toBe(loose.summary.elapsed_days);
     near(tight.summary.finalWOR, 31.119000015950355, 1e-9);
+  });
+});
+
+describe('floodLab: a case of its own reproduces the teaching case at its defaults', () => {
+  it('surveillanceWith() with no case is the teaching Hall and Chan read', () => {
+    const s = lab.surveillanceWith({ aboveReference: true });
+    expect(s.hall.find((h) => h.injector === 'Ekene-4').slope_ratio).toBe(lab.hallPlots({ aboveReference: true }).plots.find((h) => h.injector === 'Ekene-4').slope_ratio);
+    expect(s.chan.producers.map((p) => p.lateSlope)).toEqual(lab.chanDiagnostics().producers.map((p) => p.lateSlope));
+  });
+  it('channelBackoutFor() with no case is the committed Ekene-6 back-out', () => {
+    const c = lab.channelBackoutFor();
+    const e = lab.EKENE_FLOOD.expected.channeling;
+    expect(c.allocatedBbl).toBe(e.allocated_injection_bbl);
+    expect(c.fractionOfElement).toBe(e.implied_swept_fraction_of_element);
+  });
+  it('the ledger, patterns and layers at the teaching inputs are the teaching series', () => {
+    expect(lab.ledgerWith({ fvf: lab.LEDGER_FVF }).summary).toEqual(lab.ledgerWith().summary);
+    expect(lab.patternLedger('North', { allocation: lab.ALLOCATION }).cumulativeVRR).toBe(lab.patternLedger('North').cumulativeVRR);
+    expect(lab.layerSweep({ perms: lab.LAYERS.map((l) => l.k_md) }).dykstraParsons).toEqual(lab.layerSweep().dykstraParsons);
   });
 });
