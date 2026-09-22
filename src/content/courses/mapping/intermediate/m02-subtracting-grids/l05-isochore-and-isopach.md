@@ -26,7 +26,7 @@ Compute the dip. The steepest gradient anywhere on the Ekene TOP_SAND surface is
 
 At that steepest point, $\cos(3.19^\circ) = 0.99845$, so a vertical thickness of 32.25 m corresponds to a stratigraphic thickness of 32.20 m. The difference is **0.05 m**, which is 0.16 percent.
 
-That is far below the precision of the picks, which are given to the metre, and far below the 0.1 m tolerance the capstone allows on the thickness fields. On this field the distinction is real, correctly stated, and quantitatively irrelevant.
+That is far below the precision of the picks, which are given to the metre, and far below any tolerance a capstone could allow on a thickness. On this field the distinction is real, correctly stated, and quantitatively irrelevant.
 
 ## When it stops being irrelevant
 

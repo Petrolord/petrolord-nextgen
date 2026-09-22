@@ -19,7 +19,7 @@ The second route is simpler, it involves one gridding instead of two, and it fee
 
 ## What the model reports
 
-Run both on the capstone settings and compare.
+Run both on the teaching settings and compare.
 
 | | Subtraction | Direct gridding |
 | --- | --- | --- |

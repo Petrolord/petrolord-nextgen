@@ -1,82 +1,56 @@
 # The capstone walkthrough
 
-> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
-
-The capstone asks for six numbers. This lesson walks the exercise in the order that produces the fewest mistakes and names the errors that lose fields.
+The capstone gives you a well set of its own, with both SAND picks for every well, a prospect and a cell size, and asks for six numbers from its isochore. This lesson walks the exercise in the order that produces the fewest mistakes, works it on the Ekene teaching wells, and names the errors that lose fields. None of the Ekene numbers is a capstone answer.
 
 {{panel:mp-isochore-explorer}}
 
 ## What is being asked
 
-Grid both SAND surfaces at the capstone settings and subtract them into an isochore. Read the panel: the thickness extremes and mean, the thickness at prospect P-1, how many live isochore nodes sit above the plain mean of the six well thicknesses, and that plain mean itself for comparison.
+Grid both SAND surfaces at the stated cell and subtract them into an isochore. Read the panel: the thickness extremes and mean, the thickness at the prospect, how many live isochore nodes sit above the plain mean of the well thicknesses, and that plain mean itself.
 
-| Field | Unit | Tolerance |
-| --- | --- | --- |
-| Isochore minimum thickness | m | 0.1 |
-| Isochore maximum thickness | m | 0.1 |
-| Isochore mean thickness | m | 0.1 |
-| Thickness at prospect P-1 | m | 0.1 |
-| Live isochore nodes above the well mean | count | 0, exact |
-| Mean of the six well thicknesses | m | 0.05 |
-
-The settings are fixed: a 100 m cell, two pad cells and an 800 m extrapolation limit, exactly as the Associate tier used.
+| Field | Unit |
+| --- | --- |
+| Isochore minimum thickness | m |
+| Isochore maximum thickness | m |
+| Isochore mean thickness | m |
+| Thickness at the prospect | m |
+| Live isochore nodes above the well mean | count, exact |
+| Mean of the well thicknesses | m |
 
 ## The order to run it in
 
-**Set the cell size to 100 m first and leave it alone.** Four of the six fields move if you change it. Confirm the tile reads 100 before recording anything.
+**Type the case first.** Choose "Type a well set", replace the Ekene lines with the brief's wells (name, x, y, TOP_SAND, BASE_SAND), type the prospect and the cell size, and confirm the cell-size tile before recording anything. Four of the six fields move if the cell is wrong.
 
-**Read the well mean without the panel.** It is $(32 + 36 + 29 + 25 + 31 + 34)/6 = 187/6 = 31.166666666666668$ m, and it needs no map at all. Doing it by hand first means the panel is checking you rather than the other way round.
+**Work the well mean by hand.** On Ekene it is $(32 + 36 + 29 + 25 + 31 + 34)/6 = 187/6 = 31.166666666666668$ m, and it needs no map at all. Doing it by hand first means the panel is checking you rather than the other way round.
 
-**Switch the surface to the isochore and read four fields in one panel state.** Minimum 25, maximum 35.897705078125, mean 32.25429068038713 and the value at P-1, 34.050048828125. Taking them together prevents the commonest failure, which is reading one of them from a different cell size.
+**Switch the surface to the isochore and read four fields in one panel state.** On Ekene at 100 m: minimum 25, maximum 35.897705078125, mean 32.25429068038713 and the value at P-1, 34.050048828125. Taking them together prevents the commonest failure, which is reading one of them from a different cell size.
 
-**Read the count above the well mean last.** It sits in the same panel state, on the tile that compares every live node against the well mean you worked by hand, and it is graded exactly. It can never exceed the live total printed beside it.
+**Read the count above the well mean last.** It sits in the same panel state and can never exceed the live total printed beside it.
 
 ## The self-consistency checks
 
-Four relationships hold across the fields and the tiles beside them, and each takes seconds.
-
-$$25 \le 32.2543 \le 35.8977$$
-
 The mean must lie between the extremes. If it does not, two fields came from different settings.
 
-$$32.2543 - 31.1667 = +1.0876$$
+The map mean and the well mean are both honest and they differ: on Ekene the map mean exceeds the well mean by about a metre. A gap of zero means the two means have been crossed.
 
-The map mean should exceed the well mean by about a metre on this field. A gap of zero or a negative gap means the two means have been crossed.
+The live count times the cell area should be a plausible area for the well pattern.
 
-$$201 \times 10{,}000 = 2.01\ \mathrm{km^2}$$
-
-The live count times the cell area should be about two square kilometres, which is a plausible area for a six-well pattern with wells about a kilometre apart.
-
-$$1576.6699 - 1542.6199 = 34.0500$$
-
-The thickness at P-1 should equal the base surface minus the top surface there, which is a route to the same field through two different tiles.
+The thickness at the prospect should equal the base surface minus the top surface there, which is a route to the same field through two different tiles: on Ekene, $1576.6699 - 1542.6199 = 34.0500$.
 
 ## The four ways fields are lost
 
-**Reading the maximum at a 50 m cell.** It is exactly 36 there and 35.8977 at the capstone's 100 m. Both are correct readings of different settings and only one is the graded field. The 0.1 m tolerance does not cover the difference.
+**Reading at the wrong cell size.** On Ekene the maximum is exactly 36 at a 50 m cell and 35.8977 at 100 m. Both are correct readings of different settings and only one answers the brief.
 
-**Reporting the well mean where the map mean is asked, or the reverse.** They are 31.17 and 32.25, and the gap of 1.09 m is more than ten times the 0.1 m tolerance. The ratio check above catches this.
+**Reporting the well mean where the map mean is asked, or the reverse.**
 
-**Reporting the isochore minimum as the difference of the two surface minima.** That is $1570 - 1539.7181 = 30.28$ m, which is wrong by more than 5 m, because the two surfaces reach their extremes at different nodes.
+**Reporting the isochore minimum as the difference of the two surface minima.** The two surfaces reach their extremes at different nodes.
 
-**Reporting the live node count.** The live total, 201, sits on a tile beside the graded one and is the Associate tier's answer. The field asks how many of those nodes lie above the well mean, which is a count only the isochore produces, graded with a tolerance of zero.
+**Reporting the live node count.** The live total sits on a tile beside the graded one. The field asks how many of those nodes lie above the well mean, a count only the isochore produces.
 
 ## Reading the panel honestly
 
-Every field on this capstone is a reading, and none of them is a calculation you can do without the model except the well mean. That makes the panel state the thing to be careful about rather than the arithmetic.
-
-The habit that prevents most losses is to record the conditions with the numbers: *isochore, 100 m cell, 800 m limit, 201 live nodes*, written down once at the top of the answer, and then six values underneath it.
-
-## Worked example
-
-A learner submits 25, 36, 32.25 and 34.05 for the first four fields, reads the count above the well mean correctly, and submits 31.17 for the last. Which field is wrong and how would the checks find it?
-
-The maximum. Thirty six is the 50 m cell reading; the capstone's 100 m cell gives 35.8977, and the difference of 0.102 m is just outside the 0.1 m tolerance.
-
-The consistency checks do not catch it, because 36 sits perfectly well above the mean and below nothing. What catches it is the discipline of reading all four isochore fields in one panel state: a 36 could only have come from a different cell size, and the cell size tile would have said so.
+Record the conditions with the numbers: *isochore, the cell size, 800 m limit, the live count*, written once at the top of the answer, and then six values underneath it.
 
 ## Exercise
 
 Write out the six capstone fields with their units, then state which one requires no gridding at all and which one has a tolerance of zero.
-
-As a self-check: minimum 25 m, maximum 35.897705078125 m, mean 32.25429068038713 m, thickness at P-1 34.050048828125 m, the count of live nodes above the well mean read from its tile, and mean well thickness 31.166666666666668 m. The mean of the six well thicknesses requires no gridding, since it is the average of six subtractions done at the wells, and the count above the well mean is the field graded exactly, because it is a count of nodes rather than a measurement of anything.

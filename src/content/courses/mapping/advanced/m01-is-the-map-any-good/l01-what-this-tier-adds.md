@@ -29,9 +29,9 @@ Six numbers, all from the validation panel.
 - The **six-well prediction at Ekene-7**, 1543.3271484375 m.
 - The **blind residual at Ekene-7**, $-5.6728515625$ m.
 - The **crest with Ekene-7 included**, 1540.70556640625 m.
-- The **live node count with Ekene-7 included**, 201, which is graded exactly.
+- The **live node count with Ekene-7 included**, 201, a count that is either right or wrong.
 
-Two of the six are graded with no tolerance at all: the cross-validatable count and the live node count. Both are counts, and a count is either right or wrong.
+Two of the six are counts: the cross-validatable count and the live node count. Both are counts, and a count is either right or wrong.
 
 ## Three results to carry
 

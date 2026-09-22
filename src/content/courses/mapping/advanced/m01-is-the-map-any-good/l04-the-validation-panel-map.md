@@ -38,7 +38,7 @@ Twelve readings, in three groups.
 
 - **Control points used**, 6, 5 or 7 depending on the setting.
 - **Live nodes**, which is 201 for all six wells, 201 with Ekene-7 added, and between 130 and 183 for the leave-one-out runs.
-- **Cross-validatable wells**, the count of wells that could be dropped and still predicted on the current control geometry. It reads 1 for the six-well set and 2 for the seven-well set, and it is a capstone field.
+- **Cross-validatable wells**, the count of wells that could be dropped and still predicted on the current control geometry. It reads 1 for the six-well set and 2 for the seven-well set, and the capstone asks for it on a well set of its own.
 
 **The surface**, four tiles that are the Associate tier's readings recomputed for the current control set.
 

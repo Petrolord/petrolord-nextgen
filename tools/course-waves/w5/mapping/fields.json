@@ -1,0 +1,146 @@
+[
+ {
+  "tier": "beginner",
+  "key": "adim_grid_nx",
+  "label": "Grid width",
+  "unit": "nodes",
+  "expected": 32,
+  "tol": 0
+ },
+ {
+  "tier": "beginner",
+  "key": "adim_grid_ny",
+  "label": "Grid height",
+  "unit": "nodes",
+  "expected": 24,
+  "tol": 0
+ },
+ {
+  "tier": "beginner",
+  "key": "adim_live_nodes",
+  "label": "Mapped (live) grid nodes",
+  "unit": "count",
+  "expected": 305,
+  "tol": 0
+ },
+ {
+  "tier": "beginner",
+  "key": "adim_crest_depth_m",
+  "label": "Crest (shallowest) depth",
+  "unit": "m",
+  "expected": 1601.9686279296875,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "adim_depth_at_prospect_m",
+  "label": "Depth at the prospect",
+  "unit": "m",
+  "expected": 1604.5677490234373,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "adim_mean_depth_m",
+  "label": "Mean mapped depth",
+  "unit": "m",
+  "expected": 1613.4646856589395,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "adim_iso_min_m",
+  "label": "Isochore minimum thickness",
+  "unit": "m",
+  "expected": 28.653076171875,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "adim_iso_max_m",
+  "label": "Isochore maximum thickness",
+  "unit": "m",
+  "expected": 37.25341796875,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "adim_iso_mean_m",
+  "label": "Isochore mean thickness",
+  "unit": "m",
+  "expected": 33.869257492315576,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "adim_iso_at_prospect_m",
+  "label": "Thickness at the prospect",
+  "unit": "m",
+  "expected": 33.89817979600694,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "adim_iso_nodes_above_well_mean",
+  "label": "Live isochore nodes above the well mean",
+  "unit": "count",
+  "expected": 207,
+  "tol": 0
+ },
+ {
+  "tier": "intermediate",
+  "key": "adim_mean_well_thickness_m",
+  "label": "Mean of the seven well thicknesses",
+  "unit": "m",
+  "expected": 32.57142857142857,
+  "tol": 0.005
+ },
+ {
+  "tier": "advanced",
+  "key": "adim_cross_validatable_wells",
+  "label": "Wells that can be cross-validated",
+  "unit": "count",
+  "expected": 3,
+  "tol": 0
+ },
+ {
+  "tier": "advanced",
+  "key": "adim_loo_resid_adim7",
+  "label": "Leave-one-out residual at Adim-7",
+  "unit": "m",
+  "expected": -3.47149658203125,
+  "tol": 0.005
+ },
+ {
+  "tier": "advanced",
+  "key": "adim_pred_at_adim8",
+  "label": "Seven-well grid prediction at Adim-8",
+  "unit": "m",
+  "expected": 1614.8310546875,
+  "tol": 0.005
+ },
+ {
+  "tier": "advanced",
+  "key": "adim_blind_residual_adim8",
+  "label": "Blind-test residual at Adim-8",
+  "unit": "m",
+  "expected": 3.8310546875,
+  "tol": 0.005
+ },
+ {
+  "tier": "advanced",
+  "key": "adim_crest_with_adim8",
+  "label": "Crest depth with Adim-8 included",
+  "unit": "m",
+  "expected": 1601.9122314453125,
+  "tol": 0.005
+ },
+ {
+  "tier": "advanced",
+  "key": "adim_depth_at_prospect_with_adim8_m",
+  "label": "Depth at the prospect with Adim-8 included",
+  "unit": "m",
+  "expected": 1603.4613037109375,
+  "tol": 0.005
+ }
+]

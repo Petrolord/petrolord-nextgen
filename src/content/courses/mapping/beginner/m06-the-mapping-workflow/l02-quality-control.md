@@ -34,7 +34,7 @@ The failure mode here is a map with values painted all the way out to the frame 
 
 ## The settings check
 
-Never quote a node count without the cell size beside it. The same six picks, the same frame rule and the same method give 794 live nodes at a 50 m cell and 50 live nodes at a 200 m cell, against 201 at the 100 m cell the capstone uses.
+Never quote a node count without the cell size beside it. The same six picks, the same frame rule and the same method give 794 live nodes at a 50 m cell and 50 live nodes at a 200 m cell, against 201 at the 100 m teaching cell.
 
 Those three numbers describe one surface at three sampling densities. A reader given "794 live nodes" without the cell size may conclude the map is better constrained than the 201 node version, which it is not. Six wells is six wells.
 

@@ -8,7 +8,7 @@ The panel below grids both Ekene surfaces on one frame, subtracts them, and repo
 
 **Surface** switches what is displayed and what the tiles describe. Three choices: TOP_SAND, BASE_SAND and the isochore. The first is the Associate tier's map, unchanged, and it is there so that the three can be compared without leaving the page.
 
-**Cell size** offers 50, 100 and 200 m. The capstone uses 100 m. The other two are there because module 3 needs them, and because a reading that changes when the cell size changes is a reading about the settings rather than about the rock.
+**Cell size** is a typed box that opens on 100 m, the teaching cell. Module 3 also uses 50 and 200 m, and because a reading that changes when the cell size changes is a reading about the settings rather than about the rock.
 
 Both controls affect everything below them. Change either and re-read every tile before recording anything.
 
@@ -30,20 +30,20 @@ The first four describe the **frame and the mask**, and change only with the cel
 
 - **Surface** and **cell size**, repeated so a screenshot carries its own conditions.
 - **Frame**, as $n_x \times n_y$ and the total node count.
-- **Live nodes**, the count that survived the 800 m mask. At the capstone cell this is 201 on all three surfaces.
+- **Live nodes**, the count that survived the 800 m mask. At the teaching cell this is 201 on all three surfaces.
 
 The next five are the **map statistics** of whatever surface is displayed.
 
-- **Minimum** and **maximum**. On the isochore these are the thinnest and thickest mapped values, 25 m and 35.897705078125 m at the capstone settings. Both are capstone fields.
-- **Map mean**, the average over the live nodes. On the isochore, 32.25429068038713 m, another capstone field.
-- **Value at P-1**, sampled by bilinear interpolation at (1600, 1600). On the isochore, 34.050048828125 m, another capstone field.
+- **Minimum** and **maximum**. On the isochore these are the thinnest and thickest mapped values, 25 m and 35.897705078125 m at the teaching settings. Both are figures this tier reports.
+- **Map mean**, the average over the live nodes. On the isochore, 32.25429068038713 m, another figure this tier reports.
+- **Value at P-1**, sampled by bilinear interpolation at (1600, 1600). On the isochore, 34.050048828125 m, another figure this tier reports.
 - **Contour interval**, chosen by the panel to give roughly ten intervals across the range. It is 10 m on TOP_SAND and 2 m on the isochore, and the reason it differs is not that the isochore is more precise.
 
 The last three exist for **module 4**, and they are the ones most learners walk past.
 
-- **Mean of the six well values**, computed from the wells alone with no map involved. On the isochore, 31.166666666666668 m, the sixth capstone field.
+- **Mean of the six well values**, computed from the wells alone with no map involved. On the isochore, 31.166666666666668 m, the sixth figure this tier reports.
 - **Map mean minus well mean**, which on the isochore reads $+1.0876$ m.
-- **Live nodes above the well mean**, a count out of the 201 live nodes and the fifth capstone field.
+- **Live nodes above the well mean**, a count out of the 201 live nodes and the fifth figure this tier reports.
 
 Those three together are the whole of module 4, and the fact that the last one is not close to half of 201 is the reason the module exists.
 
@@ -51,7 +51,7 @@ Those three together are the whole of module 4, and the fact that the last one i
 
 Set the cell size to 100 m and step the surface control through all three.
 
-On TOP_SAND, confirm the crest of 1539.72 m and the depth at P-1 of 1542.62 m against the Associate tier. On BASE_SAND, note that its range is 1570 to 1615 m, a spread of 45 m against the top's 50 m. Then switch to the isochore and read the six capstone fields.
+On TOP_SAND, confirm the crest of 1539.72 m and the depth at P-1 of 1542.62 m against the Associate tier. On BASE_SAND, note that its range is 1570 to 1615 m, a spread of 45 m against the top's 50 m. Then switch to the isochore and read the six figures this tier reports.
 
 Finally, look at the live node count on all three. It is 201 every time.
 

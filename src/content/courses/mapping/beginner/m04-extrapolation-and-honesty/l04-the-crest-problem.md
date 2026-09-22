@@ -6,7 +6,7 @@ The number in question is the crest: the shallowest value on the mapped surface.
 
 ## The crest of the Ekene map is not at a well
 
-Grid the six picks at the capstone's 100 m cell and the shallowest mapped value is 1539.72 m. Put that next to the control set. The shallowest pick in the whole dataset is Ekene-3 at 1541 m. The map's crest is 1.28 m shallower than the shallowest measurement that exists.
+Grid the six picks at the teaching 100 m cell and the shallowest mapped value is 1539.72 m. Put that next to the control set. The shallowest pick in the whole dataset is Ekene-3 at 1541 m. The map's crest is 1.28 m shallower than the shallowest measurement that exists.
 
 It is also somewhere else. The crest node sits at (1400, 2000), which is 300 m due south of Ekene-3. No well was drilled there, no pick was made there, and nothing about that location was measured. The map has produced a structural high that is both shallower than any well and displaced from every well.
 

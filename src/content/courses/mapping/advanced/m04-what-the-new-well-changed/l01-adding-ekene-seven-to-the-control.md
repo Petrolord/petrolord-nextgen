@@ -12,7 +12,7 @@ Three things are worth reading immediately.
 
 **The live node count is 201.** Unchanged. Adding a well normally cannot reduce coverage, and here it does not increase it either, because Ekene-7 is interior: it adds no new hull area and every node within 800 m of it was already within 800 m of something.
 
-That is a capstone field and it is graded exactly. A learner expecting the count to rise is expecting an exterior well.
+That is a count, and a count is either right or wrong. A learner expecting the count to rise is expecting an exterior well.
 
 **The map now honours 1549 m at (1500, 1500).** The prediction that was 1543.33 m is gone, replaced by the measurement.
 

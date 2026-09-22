@@ -1,12 +1,12 @@
 # The thickness extremes
 
-Two of the six capstone fields are the ends of the isochore's range. This lesson reads them, finds where they sit, and shows that they get there by two different mechanisms.
+Two of the six figures this tier reports are the ends of the isochore's range. This lesson reads them, finds where they sit, and shows that they get there by two different mechanisms.
 
 {{panel:mp-isochore-explorer}}
 
 ## The two numbers
 
-At the capstone settings, a 100 m cell with the 800 m mask, the isochore runs from a minimum of **25 m** to a maximum of **35.897705078125 m**.
+At the teaching settings, a 100 m cell with the 800 m mask, the isochore runs from a minimum of **25 m** to a maximum of **35.897705078125 m**.
 
 The well thicknesses run from 25 m at Ekene-4 to 36 m at Ekene-2. So the mapped range sits inside the measured range at one end and lands exactly on it at the other.
 
@@ -56,6 +56,6 @@ The test confirms it: refining from 200 m to 100 m brings the minimum back to ex
 
 ## Exercise
 
-State the isochore minimum and maximum at the capstone cell size, say which well each is associated with, and explain in two sentences why refining the cell to 50 m changes the maximum but not the minimum.
+State the isochore minimum and maximum at the teaching cell size, say which well each is associated with, and explain in two sentences why refining the cell to 50 m changes the maximum but not the minimum.
 
 As a self-check: the minimum is 25 m at Ekene-4's node and the maximum is 35.897705078125 m at (2200, 1200), 50 m from Ekene-2. Refining to a 50 m cell puts a node at Ekene-2's own coordinates of (2200, 1150), so the maximum becomes exactly its measured 36 m, while Ekene-4 at (2600, 2500) already lands on a node at 100 m and gains nothing from the refinement, so the minimum stays at 25 m.

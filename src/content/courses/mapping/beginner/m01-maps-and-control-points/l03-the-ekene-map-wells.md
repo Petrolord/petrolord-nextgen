@@ -1,6 +1,6 @@
 # The Ekene map wells
 
-Every worked example in this course uses one small field, so that by the time you reach the capstone the data is familiar and only the mapping decisions are new. The field is Ekene, and the surface being mapped is TOP_SAND.
+Every worked example in this course uses one small field, so that the data becomes familiar and only the mapping decisions are new. The capstone then hands you a field of its own. The field is Ekene, and the surface being mapped is TOP_SAND.
 
 ## The control set
 
@@ -15,7 +15,7 @@ Six wells carry a TOP_SAND pick. Each one reduces to the three numbers from the 
 | Ekene-5 | 600 | 1900 | 1552 |
 | Ekene-6 | 1900 | 1800 | 1546 |
 
-That is six control points, and six is worth committing to memory, because it is one of the six values the Associate capstone grades. It is also a number worth being uneasy about. Six points is a thin basis for a surface covering several square kilometres, and most of what this course teaches is how to be honest about that thinness rather than how to hide it.
+That is six control points, and six is worth committing to memory, because every Ekene map in this course is built on it. It is also a number worth being uneasy about. Six points is a thin basis for a surface covering several square kilometres, and most of what this course teaches is how to be honest about that thinness rather than how to hide it.
 
 Every one of the six wells is treated as vertical, so the coordinates in the table are both the surface location and the location of the pick. No well in the fixture is missing the surface, so nothing has to be dropped.
 
@@ -43,7 +43,7 @@ Put together, that is a crestal area in the centre and north, a mild western fla
 
 One more location matters, and it is not a well. Prospect P-1 sits at (1600, 1600), in the middle of the field, between Ekene-6 to the northeast of it and Ekene-1 to the southwest.
 
-Nothing has been drilled at P-1. There is no pick there, no log, no rock. The capstone nonetheless asks for a mapped depth at P-1, and that is the point of including it. Predicting a depth at an undrilled location is the single most common thing a depth map is actually used for, because it is what a well proposal needs.
+Nothing has been drilled at P-1. There is no pick there, no log, no rock. The course nonetheless reads a mapped depth at P-1, and that is the point of including it. Predicting a depth at an undrilled location is the single most common thing a depth map is actually used for, because it is what a well proposal needs.
 
 P-1 is a fair test of the map rather than an unfair one. Its nearest well is Ekene-6, about 361 m away, comfortably inside the well spacing of the field, so a prediction there rests on genuine nearby control. Later you will meet locations much further from any well, and learn where the map should stop making predictions at all.
 

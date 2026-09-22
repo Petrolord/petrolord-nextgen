@@ -12,7 +12,7 @@ Where does the map cover? The rectangle has to enclose the wells with some margi
 
 How finely is it sampled? That is the cell size, the spacing between neighbouring nodes. A coarse grid is blocky and can miss the crest entirely by stepping over it. A fine grid is smooth and can invite you to believe in detail that six wells cannot possibly support.
 
-The capstone uses a 100 m cell. Module 2 is where you learn what that choice does and how to make it deliberately rather than by accepting a default.
+The Ekene maps in this course use a 100 m cell, and the capstone states a cell of its own. Module 2 is where you learn what that choice does and how to make it deliberately rather than by accepting a default.
 
 ## Decision two: interpolation
 
@@ -28,7 +28,7 @@ Interpolation fills the space between control points. Extrapolation is what happ
 
 The defence is a limit. This course caps extrapolation at 800 m: a grid node further than 800 m from the nearest control point is not given a value at all. It is masked, left blank, and drawn as nothing rather than as a confident colour.
 
-The effect is worth stating now. The capstone grid holds 500 nodes. After the 800 m limit is applied, only 201 of them carry a value, and the other 299 are masked. Less than half the rectangle you drew is supported well enough to map, and the honest product says so on its face. Module 4 is that limit, the live and dead node distinction, and the awkward question of what happens to a crest that sits near the edge of support.
+The effect is worth stating now. The Ekene grid holds 500 nodes. After the 800 m limit is applied, only 201 of them carry a value, and the other 299 are masked. Less than half the rectangle you drew is supported well enough to map, and the honest product says so on its face. Module 4 is that limit, the live and dead node distinction, and the awkward question of what happens to a crest that sits near the edge of support.
 
 ## Decision four: presentation
 
@@ -40,7 +40,7 @@ The other half of presentation is sampling: reading a value off the map at a spe
 
 ## The destination
 
-The Associate capstone grades six numbers from the Ekene TOP_SAND map at a 100 m cell size. Here they are, so that you know from the start what you are working toward.
+The tier reports six numbers from a TOP_SAND map. Here they are on the Ekene map at a 100 m cell size, so that you know from the start what you are working toward. The capstone asks for figures like these on a well set of its own.
 
 1. Six control points, the six Ekene wells with a TOP_SAND pick.
 2. A grid 25 nodes wide.

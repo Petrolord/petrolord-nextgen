@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import {
-  CONTROL_SETS, ALL_SIX, PLUS_SEVEN, TARGET, TOP_NAME, computeValidationMap,
+  ALL_SIX, PLUS_SEVEN, TARGET, TOP_NAME, computeValidationMap, controlSetsFor,
 } from '@/lib/mappingTeaching';
+import { useMappingCase } from '@/components/course/panels/mapping/caseInputs';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 import { GridMap } from '@/components/course/panels/mapping/gridPlot';
 
@@ -14,22 +15,38 @@ const fmt = (v, d = 4) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 
 const ValidationExplorer = () => {
   const [setKey, setSetKey] = useState(ALL_SIX);
+  const c = useMappingCase({ appraisal: true });
+  const sets = useMemo(() => (c.ok ? controlSetsFor(c.kase) : []), [c.ok, c.kase]);
+  const key = sets.some((x) => x.key === setKey) ? setKey : ALL_SIX;
 
   const map = useMemo(() => {
+    if (!c.ok) return null;
     try {
-      return computeValidationMap(setKey);
+      return computeValidationMap(key, c.kase);
     } catch {
       return null;
     }
-  }, [setKey]);
+  }, [key, c.ok, c.kase]);
+
+  const controls = (
+    <>
+      {c.ui}
+      <FieldGrid>
+        <SelectField label="Control set" value={key} onChange={setSetKey}
+          options={sets.map((x) => [x.key, x.label])} />
+      </FieldGrid>
+    </>
+  );
 
   if (!map) {
     return (
       <PanelShell title="Validation explorer" subtitle="Select a control set.">
-        <Note>The grid could not be computed for that control set.</Note>
+        {controls}
+        <Note>The grid could not be computed: every typed well line must read name, x, y, top, base.</Note>
       </PanelShell>
     );
   }
+  const T = c.kase ? c.kase.target : TARGET;
 
   const s = map.summary;
   const markers = [
@@ -40,34 +57,31 @@ const ValidationExplorer = () => {
       key: 'withheld', x: map.withheld.x, y: map.withheld.y, kind: 'withheld',
       text: `${map.withheld.name} ${map.withheld.z} (withheld)`,
     }] : []),
-    { key: 'target', x: TARGET.x, y: TARGET.y, kind: 'target', text: TARGET.label },
+    { key: 'target', x: T.x, y: T.y, kind: 'target', text: T.label },
   ];
 
-  const blind = setKey === PLUS_SEVEN;
+  const blind = key === PLUS_SEVEN;
 
   return (
     <PanelShell title="Validation explorer"
-      subtitle={`The Ekene ${TOP_NAME} surface regridded for a control set you choose, always on the frame the six-well map used. Filled symbols are control, the open amber symbol is the withheld well posted with its actual pick.`}>
-      <FieldGrid>
-        <SelectField label="Control set" value={setKey} onChange={setSetKey}
-          options={CONTROL_SETS.map((c) => [c.key, c.label])} />
-      </FieldGrid>
+      subtitle={`The ${c.typed ? 'typed' : 'Ekene'} ${TOP_NAME} surface regridded for a control set you choose, always on the frame the full well set's map used. Filled symbols are control, the open amber symbol is the withheld well posted with its actual pick.`}>
+      {controls}
 
       <GridMap spec={map.spec} z={map.z} contours={map.contours}
         zMin={s.crest} zMax={s.deepest} ramp="depth" markers={markers}
-        label={`Depth map of the Ekene ${TOP_NAME} surface for the selected control set`} />
+        label={`Depth map of the ${TOP_NAME} surface for the selected control set`} />
 
       <TileGrid>
         <Tile label="Control points used" value={String(s.nControl)} unit="wells" />
-        <Tile label="Live nodes" value={String(s.liveNodes)} unit="of 500" />
+        <Tile label="Live nodes" value={String(s.liveNodes)} unit={`of ${map.spec.nx * map.spec.ny}`} />
         <Tile label="Cross-validatable wells" value={String(s.crossValidatable)} />
         <Tile label="Crest (shallowest mapped)" value={fmt(s.crest)} unit="m" />
         <Tile label="Deepest mapped" value={fmt(s.deepest, 2)} unit="m" />
         <Tile label="Map mean" value={fmt(s.mapMean)} unit="m" />
-        <Tile label={`Depth at ${TARGET.label}`} value={fmt(s.atTarget)} unit="m" />
+        <Tile label={`Depth at ${T.label}`} value={fmt(s.atTarget)} unit="m" />
         <Tile label={blind ? 'New well' : 'Withheld well'} value={s.testedName || '-'} />
         <Tile label="Actual pick" value={s.actual === null ? '-' : fmt(s.actual, 0)} unit="m" />
-        <Tile label={blind ? 'Six-well prediction there' : 'Prediction at that well'}
+        <Tile label={blind ? 'Prediction there before it was drilled' : 'Prediction at that well'}
           value={s.pred === null ? '-' : fmt(s.pred)} unit="m" />
         <Tile label="Residual (predicted minus actual)"
           value={s.resid === null ? '-' : fmt(s.resid)} unit="m" />
@@ -78,11 +92,11 @@ const ValidationExplorer = () => {
       <Note>
         A blank prediction tile is the result rather than a missing feature: the withheld well
         sits outside the area the remaining wells constrain, so the map has no value at its own
-        location to compare the pick against. Only Ekene-6, the one well inside the hull of the
-        others, can be cross-validated on this geometry.
+        location to compare the pick against. On the Ekene wells only Ekene-6, the one well inside
+        the hull of the others, can be cross-validated.
         {' '}{blind
-          ? 'With Ekene-7 in the control set the map honours the new pick exactly, which is why the largest change anywhere equals the blind residual.'
-          : 'Step through the six leave-one-out settings and watch the live node count fall, then read the depth at P-1 on each: that spread is a jackknife uncertainty available before any new well is drilled.'}
+          ? 'With the appraisal well in the control set the map honours the new pick exactly, which is why the largest change anywhere equals the blind residual.'
+          : 'Step through the leave-one-out settings and watch the live node count fall, then read the depth at the prospect on each: that spread is a jackknife uncertainty available before any new well is drilled.'}
       </Note>
     </PanelShell>
   );

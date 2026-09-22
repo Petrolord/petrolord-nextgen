@@ -30,7 +30,7 @@ They are not evidence. An interpolated value cannot confirm anything, cannot res
 
 Precision is part of the trap. A mapped depth of 1542.6199 m looks far more authoritative than a well pick written as 1546 m, because it carries more digits. The digits come from float arithmetic, not from knowledge.
 
-## The case the capstone grades
+## The Ekene case
 
 Location P-1 sits at (1600, 1600). There is no well there. The mapped depth at P-1 is 1542.6199 m. Its nearest control is Ekene-6, at (1900, 1800), about 361 m away, where the pick is 1546 m.
 

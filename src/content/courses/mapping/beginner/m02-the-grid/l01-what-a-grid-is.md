@@ -20,7 +20,7 @@ That is the trade the grid makes. It converts a small set of measurements into a
 
 ## The vocabulary
 
-Four words appear in every lesson from here to the capstone, and this course uses them consistently.
+Four words appear in every lesson from here on, and this course uses them consistently.
 
 A **node** is one lattice position. It is a location plus at most one value. It is not a cell, not a well and not a pick. When a summary panel reports a count of nodes it is counting lattice positions, nothing else.
 
@@ -28,7 +28,7 @@ The **cell size** is the spacing between neighbouring nodes, quoted in metres. T
 
 The **frame**, also called the **spec**, is the geometry of the lattice with no depth values in it yet: an origin, meaning the map coordinates of the first node, a count of nodes across and a count up, and the cell size. Give those numbers to the engine and the position of every node follows. The next lesson computes the frame for the Ekene field explicitly.
 
-A **live node** carries a value. A **null node** was deliberately left blank, because it sits too far from any control point for the map to make a defensible estimate. Null is not an error and it is not a missing number waiting to be filled in. It is a statement: the data does not reach here. Module 4 is entirely about that statement, and the capstone grades how many nodes you allowed to go live.
+A **live node** carries a value. A **null node** was deliberately left blank, because it sits too far from any control point for the map to make a defensible estimate. Null is not an error and it is not a missing number waiting to be filled in. It is a statement: the data does not reach here. Module 4 is entirely about that statement, and the capstone asks how many nodes you allowed to go live.
 
 Notice what the pair implies. A grid always has a total node count fixed by its frame, and a live count that is usually smaller. Both numbers matter, and they mean different things. Total nodes tells you how finely you chose to sample the area. Live nodes tells you how much of that area your six wells were able to support.
 

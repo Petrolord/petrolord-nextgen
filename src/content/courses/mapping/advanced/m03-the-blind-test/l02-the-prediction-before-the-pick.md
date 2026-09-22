@@ -1,6 +1,6 @@
 # The prediction before the pick
 
-One of the six capstone fields is the six-well map's prediction at Ekene-7. This lesson reads it, checks it against its neighbours, and explains why it is the number it is.
+One of the six figures this tier reports is the six-well map's prediction at Ekene-7. This lesson reads it, checks it against its neighbours, and explains why it is the number it is.
 
 {{panel:mp-validation-explorer}}
 
@@ -8,7 +8,7 @@ One of the six capstone fields is the six-well map's prediction at Ekene-7. This
 
 Set the panel to **all six wells**. That is the map as it existed before the appraisal well.
 
-Sample it at (1500, 1500) and it returns **1543.3271484375 m**. The capstone grades that to 0.1 m.
+Sample it at (1500, 1500) and it returns **1543.3271484375 m**.
 
 Read it in that panel state and record it before touching the selector. Once the seven-well setting is chosen the map honours Ekene-7 exactly and this number is no longer on the screen.
 
