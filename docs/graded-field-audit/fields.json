@@ -21127,7 +21127,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "5 x the Associate D50 (hand-calc, full precision), and the Saucier range '5 to 6' is printed (SandExplorer.jsx:127). The Gravel view band tile prints only 2 decimals of um (757.74) against tol 0.0005 um, but the lesson routes the learner through the hand value.",
-  "notes": null
+  "notes": null,
+  "stripped": {
+   "migration": "20261028d_w5_perfsand.sql",
+   "wave": "w5d",
+   "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
+  }
  },
  {
   "course": "perfsand",
@@ -21156,11 +21161,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Typing the capstone D50 into 'Or a D50 directly (um)' gives gravel 16/30, largest gauge 23.4252 thou, gauge 20 thou and 'Gauge margin 87.00 um' (fmt(pack.marginM/UM, 3)); expected 8.7e-5 m is exactly 87 um, tol 5e-10 m.",
-  "notes": "Possible LEAK: the Gravel view's default state (graded sand, also sized to 16/30) shows 'Gauge margin 87.00 um' (probe), and the always-visible gauge table prints every gravel's margin (SandExplorer.jsx:163), so the answer space is the 7 table margins. Picking the right row still needs the Saucier band, so left as none."
+  "notes": "Possible LEAK: the Gravel view's default state (graded sand, also sized to 16/30) shows 'Gauge margin 87.00 um' (probe), and the always-visible gauge table prints every gravel's margin (SandExplorer.jsx:163), so the answer space is the 7 table margins. Picking the right row still needs the Saucier band, so left as none.",
+  "stripped": {
+   "migration": "20261028d_w5_perfsand.sql",
+   "wave": "w5d",
+   "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
+  }
  },
  {
   "course": "perfsand",
@@ -21191,11 +21201,16 @@
   },
   "owner_decision": true,
   "recommendation": "Add the interval inputs to the Sanding view; the golden stress and strength profile only exists inside the engine, so no hand route exists. With the interval inputs the existing 5-decimal MPa tiles (10 Pa resolution) and the 6-decimal boost tile satisfy the current tolerances; verified the engine returns the expected values at 2200-2320 m, open hole, boost 1.15, step 25.",
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "cdpFor defaults topMdM/bottomMdM to PARAMS.interval 2450-2550 m (perfsandLab.js:202-206) and the Sanding view has no interval input (SandExplorer.jsx:203-210), so the panel cannot be set to 2200-2320 m; the advanced m04 lessons print no stress or strength numbers and the Suite Sanding tab runs on the case's own geomech profile, not the golden one.",
-  "notes": null
+  "notes": null,
+  "stripped": {
+   "migration": "20261028d_w5_perfsand.sql",
+   "wave": "w5d",
+   "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
+  }
  },
  {
   "course": "perfsand",
@@ -21226,11 +21241,16 @@
   },
   "owner_decision": true,
   "recommendation": "Add the interval inputs to the Sanding view; the golden stress and strength profile only exists inside the engine, so no hand route exists. With the interval inputs the existing 5-decimal MPa tiles (10 Pa resolution) and the 6-decimal boost tile satisfy the current tolerances; verified the engine returns the expected values at 2200-2320 m, open hole, boost 1.15, step 25.",
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "cdpFor defaults topMdM/bottomMdM to PARAMS.interval 2450-2550 m (perfsandLab.js:202-206) and the Sanding view has no interval input (SandExplorer.jsx:203-210), so the panel cannot be set to 2200-2320 m; the advanced m04 lessons print no stress or strength numbers and the Suite Sanding tab runs on the case's own geomech profile, not the golden one.",
-  "notes": null
+  "notes": null,
+  "stripped": {
+   "migration": "20261028d_w5_perfsand.sql",
+   "wave": "w5d",
+   "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
+  }
  },
  {
   "course": "perfsand",
@@ -21261,11 +21281,16 @@
   },
   "owner_decision": true,
   "recommendation": "Add the interval inputs to the Sanding view; the golden stress and strength profile only exists inside the engine, so no hand route exists. With the interval inputs the existing 5-decimal MPa tiles (10 Pa resolution) and the 6-decimal boost tile satisfy the current tolerances; verified the engine returns the expected values at 2200-2320 m, open hole, boost 1.15, step 25.",
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "cdpFor defaults topMdM/bottomMdM to PARAMS.interval 2450-2550 m (perfsandLab.js:202-206) and the Sanding view has no interval input (SandExplorer.jsx:203-210), so the panel cannot be set to 2200-2320 m; the advanced m04 lessons print no stress or strength numbers and the Suite Sanding tab runs on the case's own geomech profile, not the golden one.",
-  "notes": null
+  "notes": null,
+  "stripped": {
+   "migration": "20261028d_w5_perfsand.sql",
+   "wave": "w5d",
+   "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
+  }
  },
  {
   "course": "perfsand",
@@ -21296,11 +21321,16 @@
   },
   "owner_decision": true,
   "recommendation": "Add the interval inputs to the Sanding view; the golden stress and strength profile only exists inside the engine, so no hand route exists. With the interval inputs the existing 5-decimal MPa tiles (10 Pa resolution) and the 6-decimal boost tile satisfy the current tolerances; verified the engine returns the expected values at 2200-2320 m, open hole, boost 1.15, step 25.",
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "cdpFor defaults topMdM/bottomMdM to PARAMS.interval 2450-2550 m (perfsandLab.js:202-206) and the Sanding view has no interval input (SandExplorer.jsx:203-210), so the panel cannot be set to 2200-2320 m; the advanced m04 lessons print no stress or strength numbers and the Suite Sanding tab runs on the case's own geomech profile, not the golden one. The bisection tile (boostAtZeroMargin, perfsandLab.js:234) likewise runs on the published interval; at 6 decimals it would print 0.789689, within tol 5e-7.",
-  "notes": null
+  "notes": null,
+  "stripped": {
+   "migration": "20261028d_w5_perfsand.sql",
+   "wave": "w5d",
+   "why": "nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, and picking the row is the work), so the label was untrue"
+  }
  },
  {
   "course": "petrophysics",

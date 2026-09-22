@@ -55,6 +55,12 @@ STRIP = {
                     'vertical depths to twelve decimals; they now round them to one decimal and say why. The volume '
                     'explorer already opened on the horizontal well',
     },
+    'perfsand': {
+        'advanced': 'nothing printed its answers: re-measured, no lesson in any tier and no panel first render prints '
+                    'a graded Expert value (four of the five B5 leak flags came from a sentence saying the lessons '
+                    'print NO stress or strength numbers; the gauge margin is one of seven rows of the gauge table, '
+                    'and picking the row is the work), so the label was untrue',
+    },
 }
 
 # W1 must be applied: the gasprocessing beginner re-key (tegReboilerMMBtuHr) is
