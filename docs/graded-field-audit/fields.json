@@ -19719,28 +19719,37 @@
   "expected": 879.9476730307991,
   "tol": 0.00044,
   "rel_tol": 5.00029733000498e-07,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/network/NetworkExplorer.jsx:419",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/network/NetworkExplorer.jsx:1006 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:24",
+  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:1006 src/components/course/panels/network/TypedNetworkFields.jsx:147 toFixed(6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 3.079912858083844e-08,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/network/NetworkExplorer.jsx:419 add an editable/capstone-shaped network; fmt default 4 decimals (:24) is enough for tol 0.00044"
-  },
-  "owner_decision": true,
-  "recommendation": "Give NetworkExplorer/FightExplorer an editable network (wells as Vogel qmax/pr, branches as k, allocation and capacity) or a capstone-shaped builder that runs solveNetwork/checkConservation and prints at least 4 decimals (9 for the gap fraction); otherwise the field is ungradable except by a learner writing their own solver.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "No learner-facing surface runs this network: the NextGen panels are select-only over teaching cases (SelectField only, src/components/course/panels/network/NetworkExplorer.jsx:419, FightExplorer.jsx:301) and networkLab.js carries no capstone material by design (src/components/course/panels/network/panelCapstoneGuard.test.js:1-8); the Suite Production Network Studio (src/utils/production/network.js:406 runNetwork) models wells by nodal curves and pipes by geometry, with no Vogel-in-lb/d or k-root-psi branch input. The lessons teach the engine's Newton solve (intermediate/m01/l02-l03) and never a hand or spreadsheet route for an 8-unknown system with an allocation min() and a capacity limit. Nine-branch looped turbulent solve with OBIAFU-19 allocation and capacity limit.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_network.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Network explorer's \"Your network, typed and solved\" view solves this field as you type it (the separator, the five wells with their flowlines, the allocation and the capacity limit, and the four branches in their drawn sense) and prints every node pressure and branch mass to",
+   "case_mode": {
+    "panel": "src/components/course/panels/network/NetworkExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/network/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. ",
   "notes": null
  },
  {
@@ -19752,28 +19761,37 @@
   "expected": 884.148272605056,
   "tol": 0.00045,
   "rel_tol": 5.089644055675404e-07,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/network/NetworkExplorer.jsx:419",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/network/NetworkExplorer.jsx:1006 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:24",
+  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:1006 src/components/course/panels/network/TypedNetworkFields.jsx:147 toFixed(6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 3.949439815187361e-07,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/network/NetworkExplorer.jsx:419 editable network"
-  },
-  "owner_decision": true,
-  "recommendation": "Give NetworkExplorer/FightExplorer an editable network (wells as Vogel qmax/pr, branches as k, allocation and capacity) or a capstone-shaped builder that runs solveNetwork/checkConservation and prints at least 4 decimals (9 for the gap fraction); otherwise the field is ungradable except by a learner writing their own solver.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "No learner-facing surface runs this network: the NextGen panels are select-only over teaching cases (SelectField only, src/components/course/panels/network/NetworkExplorer.jsx:419, FightExplorer.jsx:301) and networkLab.js carries no capstone material by design (src/components/course/panels/network/panelCapstoneGuard.test.js:1-8); the Suite Production Network Studio (src/utils/production/network.js:406 runNetwork) models wells by nodal curves and pipes by geometry, with no Vogel-in-lb/d or k-root-psi branch input. The lessons teach the engine's Newton solve (intermediate/m01/l02-l03) and never a hand or spreadsheet route for an 8-unknown system with an allocation min() and a capacity limit. Same solve.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_network.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Network explorer's \"Your network, typed and solved\" view solves this field as you type it (the separator, the five wells with their flowlines, the allocation and the capacity limit, and the four branches in their drawn sense) and prints every node pressure and branch mass to",
+   "case_mode": {
+    "panel": "src/components/course/panels/network/NetworkExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/network/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. ",
   "notes": null
  },
  {
@@ -19785,28 +19803,37 @@
   "expected": 704.6819057375309,
   "tol": 0.00036,
   "rel_tol": 5.108688006161e-07,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/network/NetworkExplorer.jsx:419",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/network/NetworkExplorer.jsx:1006 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:24",
+  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:1006 src/components/course/panels/network/TypedNetworkFields.jsx:147 toFixed(6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 2.624691433084081e-07,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/network/NetworkExplorer.jsx:419 editable network"
-  },
-  "owner_decision": true,
-  "recommendation": "Give NetworkExplorer/FightExplorer an editable network (wells as Vogel qmax/pr, branches as k, allocation and capacity) or a capstone-shaped builder that runs solveNetwork/checkConservation and prints at least 4 decimals (9 for the gap fraction); otherwise the field is ungradable except by a learner writing their own solver.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "No learner-facing surface runs this network: the NextGen panels are select-only over teaching cases (SelectField only, src/components/course/panels/network/NetworkExplorer.jsx:419, FightExplorer.jsx:301) and networkLab.js carries no capstone material by design (src/components/course/panels/network/panelCapstoneGuard.test.js:1-8); the Suite Production Network Studio (src/utils/production/network.js:406 runNetwork) models wells by nodal curves and pipes by geometry, with no Vogel-in-lb/d or k-root-psi branch input. The lessons teach the engine's Newton solve (intermediate/m01/l02-l03) and never a hand or spreadsheet route for an 8-unknown system with an allocation min() and a capacity limit. Same solve.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_network.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Network explorer's \"Your network, typed and solved\" view solves this field as you type it (the separator, the five wells with their flowlines, the allocation and the capacity limit, and the four branches in their drawn sense) and prints every node pressure and branch mass to",
+   "case_mode": {
+    "panel": "src/components/course/panels/network/NetworkExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/network/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. ",
   "notes": null
  },
  {
@@ -19818,28 +19845,37 @@
   "expected": 17662.798867634527,
   "tol": 0.0089,
   "rel_tol": 5.038839012263476e-07,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/network/NetworkExplorer.jsx:419",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/network/NetworkExplorer.jsx:1006 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:24",
+  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:1006 src/components/course/panels/network/TypedNetworkFields.jsx:169 toFixed(6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 3.654749889392406e-07,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/network/NetworkExplorer.jsx:419 editable network"
-  },
-  "owner_decision": true,
-  "recommendation": "Give NetworkExplorer/FightExplorer an editable network (wells as Vogel qmax/pr, branches as k, allocation and capacity) or a capstone-shaped builder that runs solveNetwork/checkConservation and prints at least 4 decimals (9 for the gap fraction); otherwise the field is ungradable except by a learner writing their own solver.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "No learner-facing surface runs this network: the NextGen panels are select-only over teaching cases (SelectField only, src/components/course/panels/network/NetworkExplorer.jsx:419, FightExplorer.jsx:301) and networkLab.js carries no capstone material by design (src/components/course/panels/network/panelCapstoneGuard.test.js:1-8); the Suite Production Network Studio (src/utils/production/network.js:406 runNetwork) models wells by nodal curves and pipes by geometry, with no Vogel-in-lb/d or k-root-psi branch input. The lessons teach the engine's Newton solve (intermediate/m01/l02-l03) and never a hand or spreadsheet route for an 8-unknown system with an allocation min() and a capacity limit. Trunk mass = 815 sqrt(h2 - 235) needs h2 from the solve.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_network.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Network explorer's \"Your network, typed and solved\" view solves this field as you type it (the separator, the five wells with their flowlines, the allocation and the capacity limit, and the four branches in their drawn sense) and prints every node pressure and branch mass to",
+   "case_mode": {
+    "panel": "src/components/course/panels/network/NetworkExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/network/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. ",
   "notes": null
  },
  {
@@ -19851,28 +19887,37 @@
   "expected": 12974.021847848679,
   "tol": 0.0065,
   "rel_tol": 5.010011603362464e-07,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/network/NetworkExplorer.jsx:419",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/network/NetworkExplorer.jsx:1006 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:24",
+  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:1006 src/components/course/panels/network/TypedNetworkFields.jsx:169 toFixed(6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 1.513217284809798e-07,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/network/NetworkExplorer.jsx:419 editable network"
-  },
-  "owner_decision": true,
-  "recommendation": "Give NetworkExplorer/FightExplorer an editable network (wells as Vogel qmax/pr, branches as k, allocation and capacity) or a capstone-shaped builder that runs solveNetwork/checkConservation and prints at least 4 decimals (9 for the gap fraction); otherwise the field is ungradable except by a learner writing their own solver.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "No learner-facing surface runs this network: the NextGen panels are select-only over teaching cases (SelectField only, src/components/course/panels/network/NetworkExplorer.jsx:419, FightExplorer.jsx:301) and networkLab.js carries no capstone material by design (src/components/course/panels/network/panelCapstoneGuard.test.js:1-8); the Suite Production Network Studio (src/utils/production/network.js:406 runNetwork) models wells by nodal curves and pipes by geometry, with no Vogel-in-lb/d or k-root-psi branch input. The lessons teach the engine's Newton solve (intermediate/m01/l02-l03) and never a hand or spreadsheet route for an 8-unknown system with an allocation min() and a capacity limit. Needs h1 and h2 from the solve.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_network.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Network explorer's \"Your network, typed and solved\" view solves this field as you type it (the separator, the five wells with their flowlines, the allocation and the capacity limit, and the four branches in their drawn sense) and prints every node pressure and branch mass to",
+   "case_mode": {
+    "panel": "src/components/course/panels/network/NetworkExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/network/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. ",
   "notes": null
  },
  {
@@ -19884,28 +19929,37 @@
   "expected": -942.7867573914898,
   "tol": 0.00048,
   "rel_tol": 5.09128916201653e-07,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/network/NetworkExplorer.jsx:419",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/network/NetworkExplorer.jsx:1006 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:24",
+  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:1006 src/components/course/panels/network/TypedNetworkFields.jsx:169 toFixed(6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 3.9148983432824025e-07,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/network/NetworkExplorer.jsx:419 editable network"
-  },
-  "owner_decision": true,
-  "recommendation": "Give NetworkExplorer/FightExplorer an editable network (wells as Vogel qmax/pr, branches as k, allocation and capacity) or a capstone-shaped builder that runs solveNetwork/checkConservation and prints at least 4 decimals (9 for the gap fraction); otherwise the field is ungradable except by a learner writing their own solver.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "No learner-facing surface runs this network: the NextGen panels are select-only over teaching cases (SelectField only, src/components/course/panels/network/NetworkExplorer.jsx:419, FightExplorer.jsx:301) and networkLab.js carries no capstone material by design (src/components/course/panels/network/panelCapstoneGuard.test.js:1-8); the Suite Production Network Studio (src/utils/production/network.js:406 runNetwork) models wells by nodal curves and pipes by geometry, with no Vogel-in-lb/d or k-root-psi branch input. The lessons teach the engine's Newton solve (intermediate/m01/l02-l03) and never a hand or spreadsheet route for an 8-unknown system with an allocation min() and a capacity limit. Needs h1 and the satellite tee pressure from the solve; sign in the drawn sense.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_network.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Network explorer's \"Your network, typed and solved\" view solves this field as you type it (the separator, the five wells with their flowlines, the allocation and the capacity limit, and the four branches in their drawn sense) and prints every node pressure and branch mass to",
+   "case_mode": {
+    "panel": "src/components/course/panels/network/NetworkExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/network/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. ",
   "notes": null
  },
  {
@@ -19917,28 +19971,37 @@
   "expected": 6161.276989112374,
   "tol": 0.0031,
   "rel_tol": 5.031424500924121e-07,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/network/FightExplorer.jsx:301",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/network/FightExplorer.jsx:1069 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:24",
+  "display_ref": "src/components/course/panels/network/FightExplorer.jsx:1069 src/components/course/panels/network/TypedNetworkFields.jsx:192 toFixed(6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 1.123744368669577e-07,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/network/FightExplorer.jsx:301 editable network"
-  },
-  "owner_decision": true,
-  "recommendation": "Give NetworkExplorer/FightExplorer an editable network (wells as Vogel qmax/pr, branches as k, allocation and capacity) or a capstone-shaped builder that runs solveNetwork/checkConservation and prints at least 4 decimals (9 for the gap fraction); otherwise the field is ungradable except by a learner writing their own solver.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "No learner-facing surface runs this network: the NextGen panels are select-only over teaching cases (SelectField only, src/components/course/panels/network/NetworkExplorer.jsx:419, FightExplorer.jsx:301) and networkLab.js carries no capstone material by design (src/components/course/panels/network/panelCapstoneGuard.test.js:1-8); the Suite Production Network Studio (src/utils/production/network.js:406 runNetwork) models wells by nodal curves and pipes by geometry, with no Vogel-in-lb/d or k-root-psi branch input. The lessons teach the engine's Newton solve (intermediate/m01/l02-l03) and never a hand or spreadsheet route for an 8-unknown system with an allocation min() and a capacity limit. OBIAFU-3 rate on the system needs the full turbulent solve.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_network.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Fight explorer's \"Your network, typed, and what its solve hides\" view solves this field as you type it, wells in the order above, with each well's tested split and linear conductances, and prints the rates on the system, the stream on every branch, the linearised twin, and t",
+   "case_mode": {
+    "panel": "src/components/course/panels/network/FightExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/network/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. ",
   "notes": null
  },
  {
@@ -19950,28 +20013,37 @@
   "expected": 729.3706808145245,
   "tol": 0.00037,
   "rel_tol": 5.072866372785956e-07,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/network/FightExplorer.jsx:301",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/network/FightExplorer.jsx:1069 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:24",
+  "display_ref": "src/components/course/panels/network/FightExplorer.jsx:1069 src/components/course/panels/network/TypedNetworkFields.jsx:192 toFixed(6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 1.854755282693077e-07,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/network/FightExplorer.jsx:301 editable network"
-  },
-  "owner_decision": true,
-  "recommendation": "Give NetworkExplorer/FightExplorer an editable network (wells as Vogel qmax/pr, branches as k, allocation and capacity) or a capstone-shaped builder that runs solveNetwork/checkConservation and prints at least 4 decimals (9 for the gap fraction); otherwise the field is ungradable except by a learner writing their own solver.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "No learner-facing surface runs this network: the NextGen panels are select-only over teaching cases (SelectField only, src/components/course/panels/network/NetworkExplorer.jsx:419, FightExplorer.jsx:301) and networkLab.js carries no capstone material by design (src/components/course/panels/network/panelCapstoneGuard.test.js:1-8); the Suite Production Network Studio (src/utils/production/network.js:406 runNetwork) models wells by nodal curves and pipes by geometry, with no Vogel-in-lb/d or k-root-psi branch input. The lessons teach the engine's Newton solve (intermediate/m01/l02-l03) and never a hand or spreadsheet route for an 8-unknown system with an allocation min() and a capacity limit. Needs the full turbulent solve.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_network.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Fight explorer's \"Your network, typed, and what its solve hides\" view solves this field as you type it, wells in the order above, with each well's tested split and linear conductances, and prints the rates on the system, the stream on every branch, the linearised twin, and t",
+   "case_mode": {
+    "panel": "src/components/course/panels/network/FightExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/network/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. ",
   "notes": null
  },
  {
@@ -19983,28 +20055,37 @@
   "expected": 1470.97340763847,
   "tol": 0.00074,
   "rel_tol": 5.030682377786902e-07,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/network/FightExplorer.jsx:301",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/network/FightExplorer.jsx:1069 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:24",
+  "display_ref": "src/components/course/panels/network/FightExplorer.jsx:1069 src/components/course/panels/network/TypedNetworkFields.jsx:174 toFixed(6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 3.615300556703005e-07,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/network/FightExplorer.jsx:301 editable network plus branchStreams table"
-  },
-  "owner_decision": true,
-  "recommendation": "Give NetworkExplorer/FightExplorer an editable network (wells as Vogel qmax/pr, branches as k, allocation and capacity) or a capstone-shaped builder that runs solveNetwork/checkConservation and prints at least 4 decimals (9 for the gap fraction); otherwise the field is ungradable except by a learner writing their own solver.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "No learner-facing surface runs this network: the NextGen panels are select-only over teaching cases (SelectField only, src/components/course/panels/network/NetworkExplorer.jsx:419, FightExplorer.jsx:301) and networkLab.js carries no capstone material by design (src/components/course/panels/network/panelCapstoneGuard.test.js:1-8); the Suite Production Network Studio (src/utils/production/network.js:406 runNetwork) models wells by nodal curves and pipes by geometry, with no Vogel-in-lb/d or k-root-psi branch input. The lessons teach the engine's Newton solve (intermediate/m01/l02-l03) and never a hand or spreadsheet route for an 8-unknown system with an allocation min() and a capacity limit. Water propagated along solved flow directions with a mass-share split at the satellite tee; needs every solved branch mass.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_network.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Fight explorer's \"Your network, typed, and what its solve hides\" view solves this field as you type it, wells in the order above, with each well's tested split and linear conductances, and prints the rates on the system, the stream on every branch, the linearised twin, and t",
+   "case_mode": {
+    "panel": "src/components/course/panels/network/FightExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/network/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. ",
   "notes": null
  },
  {
@@ -20047,28 +20128,37 @@
   "expected": 17962.798867634523,
   "tol": 0.009,
   "rel_tol": 5.010355048965255e-07,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/network/FightExplorer.jsx:301",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/network/FightExplorer.jsx:1069 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:24",
+  "display_ref": "src/components/course/panels/network/FightExplorer.jsx:1069 src/components/course/panels/network/TypedNetworkFields.jsx:131 toFixed(6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 3.6547862691804767e-07,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/network/FightExplorer.jsx:301 editable network with checkConservation readout"
-  },
-  "owner_decision": true,
-  "recommendation": "Give NetworkExplorer/FightExplorer an editable network (wells as Vogel qmax/pr, branches as k, allocation and capacity) or a capstone-shaped builder that runs solveNetwork/checkConservation and prints at least 4 decimals (9 for the gap fraction); otherwise the field is ungradable except by a learner writing their own solver.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "No learner-facing surface runs this network: the NextGen panels are select-only over teaching cases (SelectField only, src/components/course/panels/network/NetworkExplorer.jsx:419, FightExplorer.jsx:301) and networkLab.js carries no capstone material by design (src/components/course/panels/network/panelCapstoneGuard.test.js:1-8); the Suite Production Network Studio (src/utils/production/network.js:406 runNetwork) models wells by nodal curves and pipes by geometry, with no Vogel-in-lb/d or k-root-psi branch input. The lessons teach the engine's Newton solve (intermediate/m01/l02-l03) and never a hand or spreadsheet route for an 8-unknown system with an allocation min() and a capacity limit. Produced = trunk mass + 300 lb/d (the prompt says so), and the trunk mass needs the turbulent solve.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_network.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Fight explorer's \"Your network, typed, and what its solve hides\" view solves this field as you type it, wells in the order above, with each well's tested split and linear conductances, and prints the rates on the system, the stream on every branch, the linearised twin, and t",
+   "case_mode": {
+    "panel": "src/components/course/panels/network/FightExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/network/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. ",
   "notes": null
  },
  {
@@ -20080,28 +20170,37 @@
   "expected": 0.01670118349655065,
   "tol": 8.4e-09,
   "rel_tol": 5.029583682937728e-07,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/network/FightExplorer.jsx:301",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/network/FightExplorer.jsx:1069 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 12
+  },
   "display_scale": 1.0,
-  "display_ref": "src/components/course/panels/network/NetworkExplorer.jsx:24",
+  "display_ref": "src/components/course/panels/network/FightExplorer.jsx:1069 src/components/course/panels/network/TypedNetworkFields.jsx:134 toFixed(12)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 4.4935236087617625e-13,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/network/FightExplorer.jsx:301 editable network; print relative gap to 9+ decimals"
-  },
-  "owner_decision": true,
-  "recommendation": "Give NetworkExplorer/FightExplorer an editable network (wells as Vogel qmax/pr, branches as k, allocation and capacity) or a capstone-shaped builder that runs solveNetwork/checkConservation and prints at least 4 decimals (9 for the gap fraction); otherwise the field is ungradable except by a learner writing their own solver.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "No learner-facing surface runs this network: the NextGen panels are select-only over teaching cases (SelectField only, src/components/course/panels/network/NetworkExplorer.jsx:419, FightExplorer.jsx:301) and networkLab.js carries no capstone material by design (src/components/course/panels/network/panelCapstoneGuard.test.js:1-8); the Suite Production Network Studio (src/utils/production/network.js:406 runNetwork) models wells by nodal curves and pipes by geometry, with no Vogel-in-lb/d or k-root-psi branch input. The lessons teach the engine's Newton solve (intermediate/m01/l02-l03) and never a hand or spreadsheet route for an 8-unknown system with an allocation min() and a capacity limit. 300 / produced; derivable once field 5 is known, which needs the solve. tol 8.4e-9 needs 9 decimals from any display.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_network.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Fight explorer's \"Your network, typed, and what its solve hides\" view solves this field as you type it, wells in the order above, with each well's tested split and linear conductances, and prints the rates on the system, the stream on every branch, the linearised twin, and t",
+   "case_mode": {
+    "panel": "src/components/course/panels/network/FightExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/network/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed network mode (typedNetwork in networkLab.js: buildNetwork, solveNetwork, checkConservation, propagateStreams and solveLinearNetwork from the vendored engine) solves whatever network the learner types. Typing the prompt's field (separator 235 psia, tolerance 1e-12, the five wells in prompt order with their flowlines, allocation and capacity limit, and the four branches in their drawn sense) prints the value within tol; yourCase.test.js proves it and that the AGBADA WEST default lands on no graded answer. ",
   "notes": null
  },
  {
