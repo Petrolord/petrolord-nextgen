@@ -1,6 +1,6 @@
 # Saturation on the typewell
 
-This lesson assembles the module into the run the app actually performs, from curves to the two graded zone means. Nothing new is introduced; the point is to see the full chain operate and to know every link in it.
+This lesson assembles the module into the run the app actually performs, from curves to the two zone means the capstone grades. Nothing new is introduced; the point is to see the full chain operate and to know every link in it.
 
 ## The inputs, assembled
 
@@ -23,12 +23,14 @@ In SAND_A the three curves run nearly together, split by only a couple of satura
 
 In the water leg (2075 to 2078 m) all three models return exactly 1.0000. The reason is worth spelling out: the leg is clean, so $V_{sh} = 0$, both shaly-sand models collapse to Archie, and Archie in the interval that defined $a R_w$ reads fully wet by construction. The water leg is therefore a three-model QC point: any model that does not read 1.0 there has a broken input.
 
-## The graded means
+## The zone means
 
-The capstone grades the SAND_A zone means over 2010 to 2030 m:
+On the typewell, the worked example, the SAND_A zone means over 2010 to 2030 m are:
 
-* Simandoux mean: $S_w = 0.4335$ (tolerance 0.01)
-* Indonesia mean: $S_w = 0.4280$ (tolerance 0.01)
+* Simandoux mean: $S_w = 0.4335$
+* Indonesia mean: $S_w = 0.4280$
+
+The capstone grades the same two means, each to a tolerance of 0.01, on SAND_A of the capstone's own well, IKPO-3.
 
 The zone mean is the plain average of the per-sample saturations across the zone, skipping any sample where the model returns no value (the same convention as the porosity means in module three). With 0.5 m sampling across a 20 m zone, roughly forty samples contribute, so no single streak dominates.
 

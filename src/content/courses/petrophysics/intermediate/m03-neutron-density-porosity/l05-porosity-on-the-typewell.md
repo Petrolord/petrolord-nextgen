@@ -19,7 +19,7 @@ For SAND_B (2050 to 2080 m) the picture compresses: the mean $\phi_{ND}$ is 0.12
 
 ## What the course books, and why
 
-The intermediate course books $\phi_{ND}$, the neutron-density average, as its porosity. The SAND_A mean of 0.1762 is a capstone number, graded to a tolerance of 0.005.
+The intermediate course books $\phi_{ND}$, the neutron-density average, as its porosity. On the typewell the SAND_A mean is 0.1762. The same mean on the capstone's own well, IKPO-3 is a capstone number, graded to a tolerance of 0.002.
 
 The reasoning, in the order that matters:
 

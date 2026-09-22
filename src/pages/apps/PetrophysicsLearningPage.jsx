@@ -15,12 +15,17 @@ import {
   BookOpen, Award, ArrowRight,
 } from 'lucide-react';
 import {
-  defaultParams, computeWorkflow, chartRows, ZONES,
+  defaultParams, computeWorkflow, chartRows,
 } from '@/lib/petrophysicsTeaching';
 import PorosityLab from '@/components/course/panels/petrophysics/PorosityLab';
 import PickettExplorer from '@/components/course/panels/petrophysics/PickettExplorer';
 import ShalySwLab from '@/components/course/panels/petrophysics/ShalySwLab';
 import RwTriangulator from '@/components/course/panels/petrophysics/RwTriangulator';
+import WellPicker from '@/components/course/panels/petrophysics/WellPicker';
+import { WellProvider } from '@/components/course/panels/petrophysics/wellContext';
+import { TYPEWELL } from '@/components/course/panels/petrophysics/typewellLab';
+import CapstoneCaseFiles from '@/components/course/CapstoneCaseFiles';
+import { PETROPHYSICS_CASE_FILES } from '@/content/capstone-cases/petrophysics';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
   getCourseProgress,
@@ -108,13 +113,21 @@ const PetrophysicsLearningPage = () => {
     || courseProgress?.capstone?.passed === true
     || actualRole === 'super_admin';
 
+  // The well every panel and the workflow run on: the typewell, or a LAS
+  // file the learner opened (the capstone case well downloads from the
+  // capstone card), with the zones its brief states.
+  const [well, setWell] = useState(TYPEWELL);
+  const ZONES = well ? well.ZONES : TYPEWELL.ZONES;
+  const caseFiles = /IKPO/i.test(capstone?.prompt || '') ? PETROPHYSICS_CASE_FILES : null;
+
   const workflow = useMemo(() => {
+    if (!well) return null;
     try {
-      return computeWorkflow(params);
+      return computeWorkflow(params, { curves: well.CURVES, zones: well.ZONES });
     } catch {
       return null;
     }
-  }, [params]);
+  }, [params, well]);
 
   const rows = useMemo(
     () => (workflow ? chartRows(workflow.depth, workflow.curves, 2) : []),
@@ -225,7 +238,7 @@ const PetrophysicsLearningPage = () => {
                 <span className="text-xs px-2 py-0.5 rounded-full bg-[#BFFF00]/20 text-[#BFFF00] border border-[#BFFF00]/40">Learning Mode</span>
               </h1>
               <p className="mt-1 text-gray-400">
-                Bundled teaching dataset (typewell). {gate.quota?.own_data_upload === false && 'Your own data upload unlocks at the Associate tier.'}
+                Bundled teaching dataset (typewell), or a LAS file you open. {gate.quota?.own_data_upload === false && 'Your own data upload unlocks at the Associate tier.'}
               </p>
             </div>
           </div>
@@ -250,6 +263,8 @@ const PetrophysicsLearningPage = () => {
             </CardContent>
           </Card>
           )}
+
+          <WellPicker well={well} onWell={setWell} />
 
           <div className="grid gap-6 lg:grid-cols-3">
             {/* Parameters */}
@@ -323,9 +338,13 @@ const PetrophysicsLearningPage = () => {
               <p className="text-sm text-gray-400 mb-0">
                 Professional workflow: produce the capstone numbers yourself. Multi-method porosity, then the Pickett fit in a window you choose, then shaly-sand saturation. The capstone grades what these panels compute from your inputs.
               </p>
-              <PorosityLab />
-              <PickettExplorer />
-              <ShalySwLab />
+              {well && (
+                <WellProvider well={well}>
+                  <PorosityLab key={`por-${well.name}`} />
+                  <PickettExplorer key={`pick-${well.name}`} />
+                  <ShalySwLab key={`shaly-${well.name}`} />
+                </WellProvider>
+              )}
             </div>
           )}
 
@@ -334,7 +353,11 @@ const PetrophysicsLearningPage = () => {
               <p className="text-sm text-gray-400 mb-0">
                 Expert workflow: triangulate Rw from the lab sample, the SP quicklook and the Pickett fit, validate it in the water leg, then book SAND_A with the Rw you adopt and once more with the raw sample to see the damage.
               </p>
-              <RwTriangulator />
+              {well && (
+                <WellProvider well={well}>
+                  <RwTriangulator key={`rw-${well.name}`} />
+                </WellProvider>
+              )}
             </div>
           )}
 
@@ -346,6 +369,10 @@ const PetrophysicsLearningPage = () => {
                 <CardDescription>{capstone?.prompt}</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
+                {caseFiles && (
+                  <CapstoneCaseFiles files={caseFiles}
+                    note="Download the case well, then open it above with Open a LAS file and type the zones the brief states. No panel loads it for you." />
+                )}
                 {answerBoxes}
                 <Button onClick={submit} disabled={submitting || !capstone}
                   className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
@@ -409,6 +436,12 @@ const PetrophysicsLearningPage = () => {
               <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4">
                 <p className="text-white font-medium">{capstone?.title || 'Capstone'}</p>
                 <p className="text-sm text-gray-400 mt-1">{capstone?.prompt}</p>
+                {caseFiles && (
+                  <div className="mt-3">
+                    <CapstoneCaseFiles files={caseFiles}
+                      note="Download the case well, then open it above with Open a LAS file and type the zones the brief states. No panel loads it for you." />
+                  </div>
+                )}
                 <p className="text-sm text-gray-400 mt-1">Type each figure you have worked. Nothing is filled in for you.</p>
                 <div className="mt-3">{answerBoxes}</div>
                 <Button onClick={submit} disabled={submitting || !capstone}

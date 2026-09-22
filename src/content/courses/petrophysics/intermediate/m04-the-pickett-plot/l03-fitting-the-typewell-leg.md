@@ -27,7 +27,7 @@ For the typewell the fit returns:
 
 $$m = 2.000 \qquad a R_w = 0.0500 \ \text{ohm.m}$$
 
-These two numbers confirm the given parameters, which is why the capstone does not grade them. It grades the same fit over 2072 to 2078 m, a wider window you run yourself, with tolerances of 0.0002 on $m$ and 0.002 ohm.m on $a R_w$. On real data you would quote wider uncertainty.
+These two numbers confirm the given parameters, which is why the capstone does not grade them. It grades a fit on its own well, IKPO-3, over a window that starts three metres above that well's water leg, which you run yourself, with tolerances of 0.0002 on $m$ and 0.002 ohm.m on $a R_w$. On real data you would quote wider uncertainty.
 
 ## Worked example: the fit by hand
 

@@ -12,7 +12,7 @@ Run Archie over the water leg from 2075 to 2078 m using the Arps-corrected Rw of
 
 $$S_w = 0.99910$$
 
-Every sample. The mean over the leg is 0.9991, and this is one of the six numbers the Expert capstone grades, with a tolerance of 0.005.
+Every sample. The mean over the leg is 0.9991. The same water-leg mean, on the capstone's own well with its own corrected $R_w$, is one of the six numbers the Expert capstone grades, with a tolerance of 0.0005.
 
 Two features of this result deserve attention. First, the values sit just below 1, not on it. The deficit is exactly the arithmetic of the small difference between the adopted 0.049910 and the 0.0500 the leg itself implies: Archie gives $S_w \propto \sqrt{R_w}$, and $\sqrt{0.049910/0.0500} = 0.99910$. The check is so clean that its tiny imperfection is itself fully explained. Second, the constancy matters as much as the level. All six samples return the same value because porosity and resistivity move together down the leg exactly as Archie at $S_w = 1$ demands. A leg where the computed saturations drift or scatter is telling you something (shale, invasion, a transition zone) even when the mean looks acceptable.
 

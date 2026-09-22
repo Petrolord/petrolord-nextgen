@@ -1,6 +1,6 @@
 # Meet the typewell
 
-Every module in this course, the module quizzes, the final exam and the graded capstone all work on one dataset: the **typewell**, a synthetic but geologically sensible vertical well built for teaching. Working a single well end to end is deliberate. By the time you sit the capstone you will know this well the way you will later know your first real one.
+Every module in this course, the module quizzes and the final exam work on one dataset: the **typewell**, a synthetic but geologically sensible vertical well built for teaching. Working a single well end to end is deliberate. By the time you sit the capstone you will know this well the way you will later know your first real one, and the capstone then hands you a second well, IKPO-3, to run the same workflow on yourself.
 
 ## The well at a glance
 

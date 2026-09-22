@@ -36,7 +36,7 @@ Why does so much of SAND_B fail? Two compounding reasons. First, porosity in SAN
 
 ## The capstone connection
 
-The capstone practical for this tier asks you to reproduce exactly six of these numbers with the interactive app: $h_{net}$, $\bar{\phi}$ and $\bar{S_w}$ for each of SAND_A and SAND_B. The grading is automatic and tolerance-based, so small rounding differences are fine, but parameter mistakes are not. If your $R_w$, matrix density, clean and clay lines or cutoffs differ from the course parameters, your six numbers will drift out of tolerance in recognisable ways (module 6 walks through those sensitivities). The strong advice: before submitting, sanity-check your SAND_A net against the hand arithmetic above.
+The capstone practical for this tier asks for the same six quantities, $h_{net}$, $\bar{\phi}$ and $\bar{S_w}$ for each of SAND_A and SAND_B, on a well of its own: IKPO-3, a well no panel loads: download its LAS file from the capstone card, open it in the app with **Open a LAS file**, and type the zone depths the brief states. The typewell numbers above are your worked example; the capstone's are yours to produce. The grading is automatic and tolerance-based, so small rounding differences are fine, but parameter mistakes are not. If your $R_w$, matrix density, clean and clay lines or cutoffs differ from the course parameters, your six numbers will drift out of tolerance in recognisable ways (module 6 walks through those sensitivities). The strong advice: before submitting, sanity-check your capstone well's SAND_A net against the same hand arithmetic you did above.
 
 ## Exercise
 
