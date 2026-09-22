@@ -3,13 +3,14 @@ import {
   computePopulation, KRIGE_PARAMS, NUGGET_OPTIONS, RANGE_OPTIONS, POPULATION_METHODS, PROBE_DEFAULT,
 } from '@/lib/earthmodelTeaching';
 
-// Pins the DC29 Expert panel math to the LIVE advanced capstone answer key
+// Pins the DC29 Expert panel math to the golden teaching case (the advanced capstone
+// answer key until W5a moved the capstone to a fault and variogram of its own)
 // and to the tier's sharpest engine-verified teaching facts.
 
 describe('population explorer math (DC29)', () => {
   const base = computePopulation();
 
-  it('reproduces the six graded capstone values', () => {
+  it('reproduces the golden teaching values (the pre-W5 capstone key)', () => {
     expect(base.census['1']).toBe(174);
     expect(base.probes.trendProbe).toBeCloseTo(0.3075, 9);
     expect(base.probes.krigeProbe).toBeCloseTo(0.2914277719922997, 12);
@@ -18,7 +19,7 @@ describe('population explorer math (DC29)', () => {
     expect(base.volsA['1'].bulk_m3).toBeCloseTo(13998749.999999998, 3);
   });
 
-  it('W1 re-key: the fault jump on the y = 2200 row, and no other setting passes', () => {
+  it('the golden fault jump on the y = 2200 row (the W1 key, now teaching), and no other setting reproduces it', () => {
     const jumpOf = (m) => m.profile[12].phi - m.profile[11].phi;
     const want = -0.023016035393453593;
     expect(jumpOf(base)).toBeCloseTo(want, 14);
@@ -95,7 +96,7 @@ describe('population explorer math (DC29)', () => {
     expect(base.trend.a).toBeCloseTo(0.38, 9);
     expect(base.trend.b).toBeCloseTo(-4.0e-5, 12);
     expect(base.trend.c).toBeCloseTo(-1.0e-5, 12);
-    // hand-reachable graded value: 0.38 - 0.00004 x 1250 - 0.00001 x 2250
+    // hand-reachable golden value: 0.38 - 0.00004 x 1250 - 0.00001 x 2250
     expect(0.38 - 0.00004 * 1250 - 0.00001 * 2250).toBeCloseTo(0.3075, 12);
     // and it has no floor: negative porosity at x 9000, y 2500
     expect(base.trend.at(9000, 2500)).toBeLessThan(0);

@@ -1,0 +1,325 @@
+{
+ "course": "earthmodel",
+ "wave": "w5a",
+ "migration": "20261028a_w5_earthmodel.sql",
+ "fields_file": "tools/course-waves/w5/earthmodel/fields.json",
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "title": "Build the framework on the ORUMA frame",
+   "dataset": "earthmodel/golden source surfaces on the ORUMA frame (W5 re-case; the frame is stated in the brief)",
+   "why": "Every field leaked: the walkthrough and the framework lessons printed them and the framework explorer opened on the capstone frame. The capstone keeps the golden source surfaces and moves them onto the ORUMA frame, which the learner types into the framework explorer.",
+   "prompt": "Resample the golden three source surfaces (TopA, TopB and BaseB, each on its own grid) onto the ORUMA model frame: origin (1020, 2040), square 45 m cells, 28 by 22 nodes. Apply the depth-down monotonic clamp and derive the two zone thickness grids. Type the frame into the framework explorer (it opens on the golden 25 by 20 frame, which is the teaching case) and report the mean TopB depth, how many BaseB nodes the clamp fixed, zone A's mean and maximum thickness, zone B's mean thickness over the whole frame, and zone A's bulk rock volume in millions of cubic metres.",
+   "rekey": [
+    "s2_mean",
+    "clamp_s3",
+    "tka_mean",
+    "tka_max",
+    "tkb_mean",
+    "bulk_a_mm3"
+   ],
+   "annot": {
+    "oruma_s2_mean": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Mean TopB depth)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Mean TopB depth)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "frame typed into the framework explorer; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma_clamp_s3": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Clamp fixed on BaseB)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Clamp fixed on BaseB)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "integer count on the typed frame, printed as an integer; tol 0 on a count.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma_tka_mean": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone A mean thickness)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone A mean thickness)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed frame; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma_tka_max": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone A max thickness)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone A max thickness)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed frame; fmt 4 dp against tol 0.001.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma_tkb_mean": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone B mean thickness)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone B mean thickness)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed frame, mean over every node of the frame; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma_bulk_a_mm3": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone A bulk volume)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone A bulk volume)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed frame, 10^6 m3; fmt 4 dp misses by 3.5e-5 against tol 0.001.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "A",
+   "title": "Tie the ORUMA-1 well",
+   "dataset": "earthmodel/ORUMA-1 against the golden framework (W5 re-case; the well is stated in the brief)",
+   "why": "Every field leaked: the walkthrough and the tie-table lessons printed them and the tie explorer opened on W2. The capstone ties a well of its own, ORUMA-1, typed into the tie explorer's \"Type a well\" mode against the golden framework; the golden-set worst residual gives way to the control point y.",
+   "prompt": "Tie the ORUMA-1 well against the golden framework. Its head is at (1750, 2550) with KB 28 m. It is vertical to 1300 m MD, builds to 30 degrees at azimuth 240 by 1500 m MD, and holds that to TD at 1900 m MD. Its picks are TopA at 1585, TopB at 1630 and BaseB at 1650 m MD. Type the well into the tie explorer (Type a well; the panel opens on W2, which is the teaching case), build the minimum-curvature trajectory, land every pick in 3D and tie it against its surface (residual = pick TVDSS minus the surface there). Report ORUMA-1's TVDSS at its TopA pick, its three tie residuals (TopA, TopB, BaseB, sign kept), and the x and y of its zone-A control point (the zone's MD midpoint along the path).",
+   "rekey": [
+    "w2_topa_tvdss",
+    "w1_baseb_res",
+    "w2_topb_res",
+    "w3_topa_res",
+    "worst_res",
+    "w2_cpa_x"
+   ],
+   "annot": {
+    "oruma1_topa_tvdss": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile TopA: pick vs surface)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile TopA: pick vs surface)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well; fmt 3 dp against tol 0.01.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma1_topa_res": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile TopA residual)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile TopA residual)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well; fmt 3 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma1_topb_res": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile TopB residual)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile TopB residual)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well; fmt 3 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma1_baseb_res": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile BaseB residual)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile BaseB residual)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well; fmt 3 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma1_cpa_x": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile Zone A control point)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile Zone A control point)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well; fmt 3 dp against tol 0.01.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma1_cpa_y": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile Zone A control point)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile Zone A control point)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well; fmt 3 dp against tol 0.01.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "advanced": {
+   "pick": "A",
+   "title": "Blocks, properties and per-block volume: the ORUMA fault",
+   "dataset": "earthmodel/golden model with the ORUMA fault and variogram (W5 re-case; stated in the brief)",
+   "why": "Every field leaked: the walkthrough and the population lessons printed them and the population explorer opened on the capstone fault and variogram. The capstone moves to the ORUMA fault polygon, a variogram of its own, a probe at (1700, 2400) and the y = 2300 row, all typed into the population explorer. W1's fault_jump_y2200 (which replaced krige_at_w1) is carried as oruma_fault_jump_y2300 on the new case.",
+   "prompt": "Label the golden model with the ORUMA fault polygon, block 1 inside: 975,1975; 2225,1975; 2225,2180; 1325,2180; 1325,2975; 975,2975. Populate zone A porosity per block by simple kriging on a spherical variogram with sill 0.0025, nugget 0.0005 and range 700 m. Type the case into the population explorer (it opens on the golden fault and variogram, which are the teaching case) and report the block-1 node count, the plane-trend porosity and the kriged porosity at (1700, 2400), the porosity jump across the fault on the y = 2300 row of the per-block kriged map (the block 0 node beside the fault minus the block 1 node beside it, sign kept), zone A's interval-weighted porosity in block 0, and zone A's bulk rock volume in block 1 in millions of cubic metres.",
+   "rekey": [
+    "block1_cells",
+    "trend_probe",
+    "krige_probe",
+    "fault_jump_y2200",
+    "phi_block0",
+    "bulk_a_block1"
+   ],
+   "annot": {
+    "oruma_block1_cells": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Census)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Census)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "integer node count inside the typed polygon; tol 0 on a count.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma_trend_probe": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Trend at the probe point)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Trend at the probe point)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "plane fit through the four zone-A control points, probed at the typed point; also three multiplications by hand from the plane coefficients; fmt 6 dp against tol 0.0001.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma_krige_probe": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Kriged at a probe point)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Kriged at a probe point)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "simple kriging with the typed nugget and range at the typed point; fmt 6 dp against tol 5e-5.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma_fault_jump_y2300": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Jump across the fault on this row)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Jump across the fault on this row)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "per-block kriged map on the typed row with the typed polygon and variogram; block 0 node minus block 1 node; fmt 6 dp against tol 5e-5.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma_phi_block0": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Zone A phi, block 0)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Zone A phi, block 0)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "MD-weighted mean of the control points outside the typed polygon (W2 and W3); fmt 6 dp against tol 2e-5; the single-well values 0.2935651 and 0.277 sit far outside.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oruma_bulk_a_block1": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Zone A bulk, block 0 / block 1)",
+     "printed": {
+      "decimals": 5
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Zone A bulk, block 0 / block 1)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "zone A bulk volume summed over the typed polygon nodes, 10^6 m3; fmt 5 dp against tol 0.001.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  }
+ }
+}

@@ -1,6 +1,6 @@
 # Trend per block
 
-The trend fitted so far used all four wells, which is the capstone's framing for the probe. The population engine, though, never fits across a fault: it runs the trend PER BLOCK, and this lesson follows what that does on the golden model, where the answer is quietly instructive on both sides of the line.
+The trend fitted so far used all four wells, which is how a probe question frames it. The population engine, though, never fits across a fault: it runs the trend PER BLOCK, and this lesson follows what that does on the golden model, where the answer is quietly instructive on both sides of the line.
 
 {{panel:em-population-explorer}}
 

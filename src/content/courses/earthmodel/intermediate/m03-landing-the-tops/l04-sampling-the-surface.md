@@ -14,7 +14,7 @@ W2's landings are the general case. Its TopA pick lands at x 1568.4455110683407,
 
 ## Nulls are reported, never dropped
 
-If a landing falls outside the frame, or inside it but over a null node, the surface sample is null and the tie row carries a null residual, REPORTED in the table rather than silently omitted. The design decision matters for QC: a well whose deviated toe walks off the mapped area should show up as rows with null ties, visible and countable, not as a mysteriously shorter table. In the golden set, every one of the twelve landings samples live nodes, so the golden tie table has no null rows; the capstone's numbers all exist. But the machinery's null path is real, and the Expert tier's blocks will make sampling geography matter even more.
+If a landing falls outside the frame, or inside it but over a null node, the surface sample is null and the tie row carries a null residual, REPORTED in the table rather than silently omitted. The design decision matters for QC: a well whose deviated toe walks off the mapped area should show up as rows with null ties, visible and countable, not as a mysteriously shorter table. In the golden set, every one of the twelve landings samples live nodes, so the golden tie table has no null rows; its numbers all exist. But the machinery's null path is real, and the Expert tier's blocks will make sampling geography matter even more.
 
 ## Two sampling subtleties worth naming
 

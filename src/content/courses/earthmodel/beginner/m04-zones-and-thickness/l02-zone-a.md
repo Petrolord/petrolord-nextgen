@@ -13,7 +13,7 @@ Here is the zone A thickness grid summarised over the model frame.
 | minimum thickness | 30 m | all 500 nodes |
 | nodes with positive thickness | 500 | out of 500 |
 
-Two of those numbers are graded in the capstone. The mean thickness of 36 m is graded to a tolerance of 0.05 m and the maximum of 42 m to the same tolerance. Both are quoted over all 500 nodes of the frame, and the reason that phrase keeps appearing will become the subject of lesson 4.
+The capstone asks for the same two numbers on a frame of its own. On the golden frame the mean thickness is 36 m and the maximum 42 m, both quoted over all 500 nodes of the frame, and the reason that phrase keeps appearing will become the subject of lesson 4.
 
 ## Reading the numbers
 
@@ -41,7 +41,7 @@ So the discrepancy from a round 36 sits in the fourteenth decimal place. Express
 
 Two rules, and they pull in opposite directions on purpose.
 
-When you report, round to a precision the measurement supports. Zone A has a mean thickness of 36 m. Writing 36.00000000000001 m in a report is not more accurate, it is less honest, because it advertises a precision no seismic interpretation possesses. The capstone tolerance of 0.05 m tells you the same thing about how many digits are meaningful.
+When you report, round to a precision the measurement supports. Zone A has a mean thickness of 36 m. Writing 36.00000000000001 m in a report is not more accurate, it is less honest, because it advertises a precision no seismic interpretation possesses. The tolerance any capstone puts on a thickness tells you the same thing about how many digits are meaningful.
 
 When you compare, never edit the stored value. Leave the grid holding what the engine put in it and let the comparison carry a tolerance. Rounding values inside a workflow is how small inconsistencies get baked into a model permanently, and a tolerance based comparison handles the trailing digits without anyone having to touch the data.
 

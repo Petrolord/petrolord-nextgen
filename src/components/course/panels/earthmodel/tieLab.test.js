@@ -1,14 +1,15 @@
 import { describe, it, expect } from 'vitest';
 import { computeTieDetail, WELLS } from '@/lib/earthmodelTeaching';
 
-// Pins the DC28 Professional panel math to the LIVE intermediate capstone
-// answer key and to the tier's sharpest engine-verified teaching facts.
+// Pins the DC28 Professional panel math to the golden teaching wells (the intermediate
+// capstone key until W5a moved the capstone to a well of its own)
+// and to the tier's sharpest engine-verified teaching facts.
 
 describe('tie explorer math (DC28)', () => {
   const w2 = computeTieDetail('W2');
   const row = (m, top) => m.rows.find((r) => r.top === top);
 
-  it('reproduces the six graded capstone values', () => {
+  it('reproduces the golden teaching values (the pre-W5 capstone key)', () => {
     expect(row(w2, 'TopA').tvdss).toBeCloseTo(1496.6634373420557, 9);
     expect(row(w2, 'TopB').residualM).toBeCloseTo(8.318351595797822, 9);
     expect(w2.worstAll.well).toBe('W2');

@@ -20,11 +20,11 @@ $$\phi(x, y) = 0.38 - 0.00004\,x - 0.00001\,y$$
 
 to machine precision: $a = 0.38000000000000367$, $b = -4.000000000000019 \times 10^{-5}$, $c = -1.0000000000001448 \times 10^{-5}$. Porosity declines eastward at 0.004 per 100 m, four times faster than it declines northward. The signs match the raw observation from module three, west high, east low, and put a number on it.
 
-The graded probe evaluates the plane at (1250, 2250):
+The golden probe evaluates the plane at (1250, 2250):
 
 $$0.38 - 0.00004 \times 1250 - 0.00001 \times 2250 = 0.38 - 0.05 - 0.0225 = 0.3075$$
 
-Three multiplications, hand-exact, graded at 0.001. The engine's value is 0.30750000000000016; the arithmetic contains nothing capable of manufacturing error beyond float dust.
+Three multiplications, hand-exact. The engine's value is 0.30750000000000016; the arithmetic contains nothing capable of manufacturing error beyond float dust.
 
 ## Trend answers a different question
 

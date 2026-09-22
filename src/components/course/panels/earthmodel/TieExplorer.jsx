@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { TIE_WELL_NAMES, computeTieDetail } from '@/lib/earthmodelTeaching';
-import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { TIE_WELL_NAMES, computeTieDetail, typedWell } from '@/lib/earthmodelTeaching';
+import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Tie explorer: one well's trajectory drawn through the clamped surface
 // stack in an east-west section at the well's y, with every pick landed in
@@ -14,11 +14,66 @@ const PAD = { left: 56, top: 18, right: 16, bottom: 34 };
 const fmt = (v, d = 2) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 const SURF_COLORS = { topA: '#38BDF8', topB: '#BFFF00', baseB: '#F472B6' };
 
+// "Type a well" ties a well of your own (the capstone states one) against
+// the same golden framework: a head, a three-station survey (vertical to the
+// kick-off, built to an inclination and azimuth, held to TD) and the three
+// picks in MD. It starts from W2's shape so it is never blank; nothing here
+// preloads the capstone's well.
+const TYPED_DEFAULT = {
+  x: '1400', y: '2200', kb: '30', kopMd: '1200', eobMd: '1500', tdMd: '1900', inc: '45', azi: '90',
+  topA: '1580', topB: '1700', baseB: '1760',
+};
+const TYPED_FIELDS = [
+  ['x', 'Head x (m)'], ['y', 'Head y (m)'], ['kb', 'KB above MSL (m)'],
+  ['kopMd', 'Kick-off MD (m)'], ['eobMd', 'End of build MD (m)'], ['tdMd', 'TD MD (m)'],
+  ['inc', 'Inclination (deg)'], ['azi', 'Azimuth (deg)'],
+  ['topA', 'TopA pick MD (m)'], ['topB', 'TopB pick MD (m)'], ['baseB', 'BaseB pick MD (m)'],
+];
+
 const TieExplorer = () => {
   const [well, setWell] = useState('W2');
   const [survey, setSurvey] = useState('survey');
+  const [typed, setTyped] = useState(TYPED_DEFAULT);
+  const setT = (k) => (v) => setTyped((o) => ({ ...o, [k]: v }));
 
-  const m = useMemo(() => computeTieDetail(well, survey === 'vertical'), [well, survey]);
+  const m = useMemo(() => {
+    try {
+      if (well !== 'typed') return computeTieDetail(well, survey === 'vertical');
+      const n = Object.fromEntries(Object.entries(typed).map(([k, v]) => [k, Number(v)]));
+      if (!Object.values(n).every(Number.isFinite)) return null;
+      if (!(n.kopMd < n.eobMd && n.eobMd < n.tdMd && n.topA < n.topB && n.topB < n.baseB && n.baseB <= n.tdMd)) return null;
+      return computeTieDetail(typedWell(n), survey === 'vertical');
+    } catch {
+      return null;
+    }
+  }, [well, survey, typed]);
+
+  const controls = (
+    <div className="space-y-2">
+      <div className="grid gap-3 grid-cols-2 items-end">
+        <SelectField label="Well" value={well} onChange={setWell}
+          options={[...TIE_WELL_NAMES.map((n) => [n, n === 'W2' ? 'W2 (45 degree build)' : `${n} (vertical)`]), ['typed', 'Type a well']]} />
+        <SelectField label="Trajectory" value={survey} onChange={setSurvey}
+          options={[['survey', 'From the survey (minimum curvature)'], ['vertical', 'Assume a straight vertical hole']]} />
+      </div>
+      {well === 'typed' && (
+        <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
+          {TYPED_FIELDS.map(([k, label]) => (
+            <NumField key={k} label={label} value={typed[k]} onChange={setT(k)} />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+
+  if (!m) {
+    return (
+      <PanelShell title="Tie explorer" subtitle="Type a well: a head, a survey and three picks.">
+        {controls}
+        <Note>Every input must be a number, the survey stations must deepen (kick-off, end of build, TD) and the picks must run TopA, TopB, BaseB down to TD.</Note>
+      </PanelShell>
+    );
+  }
 
   const plotW = W - PAD.left - PAD.right;
   const plotH = H - PAD.top - PAD.bottom;
@@ -42,13 +97,8 @@ const TieExplorer = () => {
 
   return (
     <PanelShell title="Tie explorer"
-      subtitle={`${m.well.name} (head ${m.well.x}, ${m.well.y}, KB ${m.well.kb_m} m) against the clamped stack in an east-west section at y = ${m.well.y}. Residual = pick TVDSS minus the surface there; positive means the pick sits deeper than the surface.`}>
-      <div className="grid gap-3 grid-cols-2 items-end">
-        <SelectField label="Well" value={well} onChange={setWell}
-          options={TIE_WELL_NAMES.map((n) => [n, n === 'W2' ? 'W2 (45 degree build)' : `${n} (vertical)`])} />
-        <SelectField label="Trajectory" value={survey} onChange={setSurvey}
-          options={[['survey', 'From the survey (minimum curvature)'], ['vertical', 'Assume a straight vertical hole']]} />
-      </div>
+      subtitle={`${m.well.name} (head ${m.well.x}, ${m.well.y}, KB ${m.well.kb_m} m) against the clamped golden stack in an east-west section at y = ${m.well.y}. Residual = pick TVDSS minus the surface there; positive means the pick sits deeper than the surface.`}>
+      {controls}
 
       <div className="overflow-x-auto">
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
@@ -85,15 +135,15 @@ const TieExplorer = () => {
       <TileGrid>
         {m.rows.map((r) => (
           <Tile key={r.top} label={`${r.top}: pick vs surface`}
-            value={`${fmt(r.tvdss, 2)} / ${r.surfaceZ != null ? fmt(r.surfaceZ, 2) : 'null'}`} unit="m TVDSS" />
+            value={`${fmt(r.tvdss, 3)} / ${r.surfaceZ != null ? fmt(r.surfaceZ, 3) : 'null'}`} unit="m TVDSS" />
         ))}
         {m.rows.map((r) => (
           <Tile key={`${r.top}-res`} label={`${r.top} residual`}
             value={r.residualM != null ? (r.residualM >= 0 ? '+' : '') + fmt(r.residualM, 3) : 'null'} unit="m" />
         ))}
         <Tile label="Lateral reach at deepest pick" value={fmt(m.rows[m.rows.length - 1].lateralM, 2)} unit="m from the head" />
-        <Tile label="Zone A control point" value={m.cp ? `${fmt(m.cp.x, 2)}, ${fmt(m.cp.y, 0)}` : '-'} unit={`x, y (weight ${m.cp ? m.cp.w : '-'} m MD)`} />
-        <Tile label="Worst residual in the well set" value={`${m.worstAll.well} ${m.worstAll.top} ${fmt(m.worstAll.residualM, 3)}`} unit="m (true surveys)" />
+        <Tile label="Zone A control point" value={m.cp ? `${fmt(m.cp.x, 3)}, ${fmt(m.cp.y, 3)}` : '-'} unit={`x, y (weight ${m.cp ? m.cp.w : '-'} m MD)`} />
+        <Tile label="Worst residual in the golden well set" value={`${m.worstAll.well} ${m.worstAll.top} ${fmt(m.worstAll.residualM, 3)}`} unit="m (true surveys)" />
       </TileGrid>
 
       <Note>

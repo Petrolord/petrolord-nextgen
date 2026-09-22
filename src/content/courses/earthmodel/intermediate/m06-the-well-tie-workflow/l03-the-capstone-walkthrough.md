@@ -1,40 +1,34 @@
 # The capstone walkthrough
 
-> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+The capstone gives you a well of its own: a head location and KB, a three-station survey (vertical to a kick-off, built to an inclination and azimuth, held to TD) and three picks in MD. It asks for six numbers from tying that well to the golden framework. This lesson walks the derivation of each on W2, the golden deviated well, with the panel open for verification. None of W2's numbers is a capstone answer; the value of the walkthrough is seeing the six as one connected computation you can then run on the capstone's well.
 
-The capstone asks for six numbers from this model, and this lesson walks the full derivation of each, with the panel open for verification. Everything is a re-run of earlier lessons; the value of the walkthrough is seeing the six as one connected computation.
+The tie explorer opens on W2. For the capstone, choose "Type a well" and type the brief's head, survey and picks.
 
 {{panel:em-tie-explorer}}
 
-## Field one: W2's TVDSS at its TopA pick
+## Field one: the TVDSS at the TopA pick
 
-Trajectory: build endpoint at station 1500 (x 1511.876968573417, TVDSS 1440.0948948471319), then linear interpolation at fraction $0.2$ toward station 1900. TVDSS $= 1440.0948948471319 + 0.2 \times 282.84271247461896 = 1496.6634373420557$. Graded to 0.01, and every digit is closed-form: an arc, a hold and a fraction.
+On W2: build endpoint at station 1500 (x 1511.876968573417, TVDSS 1440.0948948471319), then linear interpolation at fraction $0.2$ toward station 1900. TVDSS $= 1440.0948948471319 + 0.2 \times 282.84271247461896 = 1496.6634373420557$. Every digit is closed-form: an arc, a hold and a fraction. On the capstone's well the arc ends at its own station and the hold runs at its own inclination and azimuth, so the east and north steps both move.
 
-## Fields two through four: three residuals
+## Fields two through four: the well's three residuals
 
-W1 BaseB: vertical shortcut, 1595 minus 25 gives 1570; clamped BaseB at (1100, 2100) reads 1565; residual plus 5.
+Residual = pick TVDSS minus the clamped surface at the pick's landed x and y. On W2 the TopB pick lands at fraction 0.5 into the hold, TVDSS 1581.5162510844414, and the clamped TopB at the landing blends columns 13 and 14 on row 4 to 1573.1978994886435, so the residual is plus 8.318351595797822.
 
-W2 TopB: landed at fraction 0.5 into the hold, TVDSS 1581.5162510844414; clamped TopB at the landing blends columns 13 and 14 on row 4 to 1573.1978994886435; residual plus 8.318351595797822.
+The sign is kept: positive means the pick sits deeper than the surface. The surface is read where the pick LANDS, not at the wellhead. On a deviated well the three picks land at three different places, so each one samples its surface somewhere else.
 
-W3 TopA: 1580 minus 20 gives 1560 against 1559 at the wellhead node; residual plus 1.
+## Fields five and six: the zone A control point
 
-Note what the three jointly certify if you get them right: the vertical shortcut with KB handling (W1, W3), the full deviated chain (W2), and sampling at both node and non-node locations.
+Zone A runs from the TopA pick to the TopB pick. The control point is the zone's MD midpoint, landed along the path. On W2 the interval is 1580 to 1700, midpoint MD 1640, landed at fraction 0.35 into the hold: x $= 1511.876968573417 + 0.35 \times 282.84271247461896 = 1610.8719179395334$, y 2200 because W2 builds due east.
 
-## Field five: the worst residual
-
-Scan all twelve absolute values; the maximum is W2 BaseB at 45.02816332199586. The panel shows it on every well view as the fixed "worst in set" tile. If your pipeline produces a different row as worst, the specific row it produces is diagnostic: W3 or W4 BaseB winning usually means W2's trajectory was never built; W2 TopB winning usually means a sign was dropped in the TopA row.
-
-## Field six: W2's zone A control point x
-
-Zone A interval 1580 to 1700, midpoint MD 1640, landed at fraction 0.35 into the hold: x $= 1511.876968573417 + 0.35 \times 282.84271247461896 = 1610.8719179395334$. Graded to 0.01. The wrong-but-plausible answers each tell a story: 1400 means the vertical assumption; 1568.45 means the TopA landing was reused; 1653.30 means TopB's.
+The capstone asks for both coordinates, because its well does not build along an axis. The wrong but plausible answers each tell a story: the wellhead x and y mean the vertical assumption; the TopA landing reused means the midpoint was never taken; the TopB landing means the same.
 
 ## The connected picture
 
-One trajectory (W2's) feeds four of the six fields; the other two are the vertical controls. The capstone is deliberately structured so that a candidate who has only memorised the worst residual still has to build the machinery for the rest, and a candidate whose machinery is subtly wrong fails specific fields in diagnosable ways. That is what makes it a practical exam rather than a quiz: the six numbers are one pipeline's outputs, and the pipeline is the thing being graded.
+One trajectory feeds all six fields. A candidate whose machinery is subtly wrong fails specific fields in diagnosable ways: a TopA depth that is right with residuals that are wrong points at the surface sampling; residuals right with a wrong control point points at the midpoint. That is what makes it a practical exam rather than a quiz: the six numbers are one pipeline's outputs, and the pipeline is the thing being graded.
 
 ## Worked example
 
-Run the whole set in the panel now. Select W2, survey trajectory: read TopA TVDSS 1496.66 from the pick-versus-surface tile, TopB residual plus 8.318 from its residual tile, the control point x 1610.87 from its tile, and the worst tile's 45.028. Select W1: BaseB residual plus 5. Select W3: TopA residual plus 1. Six fields, three panel selections, under a minute, and every one traceable back through the modules that derived it.
+Run W2 in the panel now: read TopA TVDSS from the pick-versus-surface tile, the three residuals from their tiles, and the control point from its tile. Then switch the trajectory to the straight vertical hole and watch the TopA residual change sign. Then choose "Type a well", which starts from W2's shape, change the azimuth from 90 to 180 and watch the control point move from east of the head to south of it.
 
 ## Exercise
 

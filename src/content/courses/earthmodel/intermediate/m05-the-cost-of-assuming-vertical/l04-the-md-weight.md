@@ -12,7 +12,7 @@ The intent of interval-length weighting is reasonable: a well that crossed more 
 
 For W2 the two quantities part company. Its 120 m of measured depth crosses only 84.8528137423857 m of vertical rock, the factor being $\cos 45^\circ$. Measured against rock sampled, W2 deserves a weight of about 85, not 120: the MD convention overweights it by $1/\cos I$, about 41 percent. The deviated well gets extra votes for the sideways part of its journey, which sampled the same stratigraphic level repeatedly rather than more of the zone.
 
-Is the overweight WRONG? Defensible answers exist on both sides. The hole did log 120 m of the formation, and log statistics computed over that interval average 120 m of measurements; weighting by measurement count is a legitimate convention too. What matters at this tier is to SEE that MD weighting and thickness weighting diverge exactly when deviation appears, know the factor, and know which one your engine uses. This engine uses MD, documented, and the Expert tier's graded value of 0.28631191845445614 for a block's weighted porosity is computed with the 120.
+Is the overweight WRONG? Defensible answers exist on both sides. The hole did log 120 m of the formation, and log statistics computed over that interval average 120 m of measurements; weighting by measurement count is a legitimate convention too. What matters at this tier is to SEE that MD weighting and thickness weighting diverge exactly when deviation appears, know the factor, and know which one your engine uses. This engine uses MD, documented, and the Expert tier's golden value of 0.28631191845445614 for a block's weighted porosity is computed with the 120.
 
 ## Sensitivity, quantified
 

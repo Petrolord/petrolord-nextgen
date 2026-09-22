@@ -18,7 +18,7 @@ They differ by 0.0001227247478801: small here, because W2's heavily weighted val
 
 Simple kriging uses the ARITHMETIC mean. "Simple" kriging means kriging with a KNOWN mean; the engine, given no explicit mean, defaults to the plain average of the data values, weights not consulted. That mean anchors everything: residuals are measured from it, and the far-field estimate relaxes to it, which is why the panel's far tile reads 0.2905162808206047 exactly. Pass an explicit mean and the far field follows it instead; the default is a convention, documented, not a law.
 
-The CONSTANT population method uses the WEIGHTED mean: its whole job is "the best single value for this data", and for that job the engine honours the weights, giving 0.2903935560727246 field-wide, or per block, block 0's graded 0.28631191845445614.
+The CONSTANT population method uses the WEIGHTED mean: its whole job is "the best single value for this data", and for that job the engine honours the weights, giving 0.2903935560727246 field-wide, or per block, block 0's 0.28631191845445614.
 
 So one engine, two means, and the split is principled: the estimator's anchor is a statistical convention about residuals; the constant's value is a data-summary convention about representativeness. But principled or not, the split means a map's far field and the same model's "constant" disagree in the fourth decimal by construction, and anyone diffing the two maps node by node will find a mystery 0.00012 unless they know this lesson.
 

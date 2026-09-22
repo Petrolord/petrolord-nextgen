@@ -26,7 +26,34 @@
    "evidence": "Tile prints 1575.50 (and 1575.5000 on the TopB view); tol 0.1 is far wider than half a printed unit.",
    "notes": "LEAK: the panel is static (computeFramework() on the golden model, FrameworkExplorer.jsx:33, no inputs) so the default state shows this value, and /root/wt-b5-nextgen/src/content/courses/earthmodel/beginner/m06-the-earth-modeling-workflow/l03-the-capstone-walkthrough.md prints it in its 'six graded fields' table.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma_s2_mean",
+     "label": "Mean TopB depth on the ORUMA frame",
+     "unit": "m",
+     "expected": 1577.9,
+     "tol": 0.005
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Mean TopB depth)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Mean TopB depth)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "frame typed into the framework explorer; fmt 4 dp against tol 0.005.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -46,7 +73,32 @@
    "evidence": "A genuine integer count printed as an integer ('180'); tol 0 is honest. Not a small answer space (0..500 nodes).",
    "notes": "LEAK: the panel is static (computeFramework() on the golden model, FrameworkExplorer.jsx:33, no inputs) so the default state shows this value, and /root/wt-b5-nextgen/src/content/courses/earthmodel/beginner/m06-the-earth-modeling-workflow/l03-the-capstone-walkthrough.md prints it in its 'six graded fields' table.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma_clamp_s3",
+     "label": "BaseB nodes fixed by the clamp",
+     "unit": "count",
+     "expected": 242.0,
+     "tol": 0.0
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Clamp fixed on BaseB)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Clamp fixed on BaseB)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "integer count on the typed frame, printed as an integer; tol 0 on a count.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -68,7 +120,34 @@
    "evidence": "Prints 36.00 against tol 0.05.",
    "notes": "LEAK: the panel is static (computeFramework() on the golden model, FrameworkExplorer.jsx:33, no inputs) so the default state shows this value, and /root/wt-b5-nextgen/src/content/courses/earthmodel/beginner/m06-the-earth-modeling-workflow/l03-the-capstone-walkthrough.md prints it in its 'six graded fields' table.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma_tka_mean",
+     "label": "Zone A mean thickness",
+     "unit": "m",
+     "expected": 36.27500000000001,
+     "tol": 0.005
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone A mean thickness)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone A mean thickness)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed frame; fmt 4 dp against tol 0.005.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -90,7 +169,34 @@
    "evidence": "Prints 42.00 against tol 0.05.",
    "notes": "LEAK: the panel is static (computeFramework() on the golden model, FrameworkExplorer.jsx:33, no inputs) so the default state shows this value, and /root/wt-b5-nextgen/src/content/courses/earthmodel/beginner/m06-the-earth-modeling-workflow/l03-the-capstone-walkthrough.md prints it in its 'six graded fields' table.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma_tka_max",
+     "label": "Zone A maximum thickness",
+     "unit": "m",
+     "expected": 42.350000000000364,
+     "tol": 0.001
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone A max thickness)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone A max thickness)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed frame; fmt 4 dp against tol 0.001.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -112,7 +218,34 @@
    "evidence": "Prints 10.24 (all 500 nodes) against tol 0.05; the distractor 16.00 (320 nodes, :122) fails.",
    "notes": "LEAK: the panel is static (computeFramework() on the golden model, FrameworkExplorer.jsx:33, no inputs) so the default state shows this value, and /root/wt-b5-nextgen/src/content/courses/earthmodel/beginner/m06-the-earth-modeling-workflow/l03-the-capstone-walkthrough.md prints it in its 'six graded fields' table.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma_tkb_mean",
+     "label": "Zone B mean thickness over the frame",
+     "unit": "m",
+     "expected": 9.592857142857138,
+     "tol": 0.005
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone B mean thickness)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone B mean thickness)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed frame, mean over every node of the frame; fmt 4 dp against tol 0.005.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -134,7 +267,34 @@
    "evidence": "Prints 45.0000 in 10^6 m3 against tol 0.01; also exact by the taught closed form.",
    "notes": "LEAK: the panel is static (computeFramework() on the golden model, FrameworkExplorer.jsx:33, no inputs) so the default state shows this value, and /root/wt-b5-nextgen/src/content/courses/earthmodel/beginner/m06-the-earth-modeling-workflow/l03-the-capstone-walkthrough.md prints it in its 'six graded fields' table.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma_bulk_a_mm3",
+     "label": "Zone A bulk rock volume",
+     "unit": "10^6 m3",
+     "expected": 45.249435,
+     "tol": 0.001
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone A bulk volume)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/FrameworkExplorer.jsx (Tile Zone A bulk volume)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed frame, 10^6 m3; fmt 4 dp misses by 3.5e-5 against tol 0.001.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -156,7 +316,34 @@
    "evidence": "Tile prints 1496.66 (0.0034 off) against tol 0.01; the arc-plus-hold closed form also gives it exactly.",
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/intermediate/m06-the-well-tie-workflow/l03-the-capstone-walkthrough.md derives and prints this value, and the TieExplorer shows it on the default/one-click well selection (probe).",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma1_topa_tvdss",
+     "label": "ORUMA-1 TVDSS at the TopA pick",
+     "unit": "m",
+     "expected": 1536.5980910319518,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile TopA: pick vs surface)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile TopA: pick vs surface)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well; fmt 3 dp against tol 0.01.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -178,7 +365,34 @@
    "evidence": "Prints +5.000 against tol 0.01.",
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/intermediate/m06-the-well-tie-workflow/l03-the-capstone-walkthrough.md derives and prints this value, and the TieExplorer shows it on the default/one-click well selection (probe). W1 is the default well.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma1_topa_res",
+     "label": "ORUMA-1 TopA tie residual",
+     "unit": "m",
+     "expected": -6.908937738948225,
+     "tol": 0.005
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile TopA residual)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile TopA residual)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well; fmt 3 dp against tol 0.005.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -200,7 +414,34 @@
    "evidence": "Prints +8.318 (0.00035 off) against tol 0.01.",
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/intermediate/m06-the-well-tie-workflow/l03-the-capstone-walkthrough.md derives and prints this value, and the TieExplorer shows it on the default/one-click well selection (probe).",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma1_topb_res",
+     "label": "ORUMA-1 TopB tie residual",
+     "unit": "m",
+     "expected": -3.232415080054807,
+     "tol": 0.005
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile TopB residual)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile TopB residual)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well; fmt 3 dp against tol 0.005.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -222,7 +463,34 @@
    "evidence": "Prints +1.000 against tol 0.01.",
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/intermediate/m06-the-well-tie-workflow/l03-the-capstone-walkthrough.md derives and prints this value, and the TieExplorer shows it on the default/one-click well selection (probe). The prompt_numbers_within_tol hit '1' is the digit in a well name, not a stated answer.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma1_baseb_res",
+     "label": "ORUMA-1 BaseB tie residual",
+     "unit": "m",
+     "expected": 9.336894439044727,
+     "tol": 0.005
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile BaseB residual)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile BaseB residual)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well; fmt 3 dp against tol 0.005.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -244,7 +512,34 @@
    "evidence": "Prints 'W2 BaseB 45.028' (0.0002 off) against tol 0.01.",
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/intermediate/m06-the-well-tie-workflow/l03-the-capstone-walkthrough.md derives and prints this value, and the TieExplorer shows it on the default/one-click well selection (probe). Shown on the default W1 view as well.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma1_cpa_x",
+     "label": "ORUMA-1 zone-A control point x",
+     "unit": "m",
+     "expected": 1659.1326948589228,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile Zone A control point)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile Zone A control point)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well; fmt 3 dp against tol 0.01.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -266,7 +561,34 @@
    "evidence": "Prints 1610.87 (0.0019 off) against tol 0.01; closed form 1511.877 + 0.35 x 282.843 also taught.",
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/intermediate/m06-the-well-tie-workflow/l03-the-capstone-walkthrough.md derives and prints this value, and the TieExplorer shows it on the default/one-click well selection (probe).",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma1_cpa_y",
+     "label": "ORUMA-1 zone-A control point y",
+     "unit": "m",
+     "expected": 2497.5377369162634,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile Zone A control point)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/TieExplorer.jsx (Tile Zone A control point)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well; fmt 3 dp against tol 0.01.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -286,7 +608,32 @@
    "evidence": "Integer node count printed as '326 / 174'; tol 0 honest; hand count 108 + 66 taught in advanced m02 l01.",
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/advanced/m06-per-block-volume-and-the-workflow/l04-the-capstone-walkthrough.md prints this value, and the PopulationExplorer default state shows it (probe). The lesson title itself is 'hand-counting-174'.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma_block1_cells",
+     "label": "Block 1 node count",
+     "unit": "count",
+     "expected": 212.0,
+     "tol": 0.0
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Census)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Census)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "integer node count inside the typed polygon; tol 0 on a count.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -308,7 +655,34 @@
    "evidence": "Prints 0.307500 and the tile unit reads 'v/v (hand: 0.3075)'; tol 0.001.",
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/advanced/m06-per-block-volume-and-the-workflow/l04-the-capstone-walkthrough.md prints this value, and the PopulationExplorer default state shows it (probe). The tile's unit string states the answer outright.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma_trend_probe",
+     "label": "Trend porosity at (1700, 2400)",
+     "unit": "v/v",
+     "expected": 0.28799999999999987,
+     "tol": 0.0001
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Trend at the probe point)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Trend at the probe point)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "plane fit through the four zone-A control points, probed at the typed point; also three multiplications by hand from the plane coefficients; fmt 6 dp against tol 0.0001.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -335,13 +709,46 @@
    "default_state_prints": false,
    "reclassed_from": "display",
    "shipped": {
-    "migration": "20261024a_w1_earthmodel.sql",
-    "wave": "w1",
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
     "prompt": "krige_at_w1 was prompt-given: the prompt called it the exactness check and the tile's unit string printed \"W1 is 0.3150\", so W1's logged porosity passed without kriging anything. It is replaced by a measured per-block kriging output, the porosity jump across the fault on the y = 2200 row (block 0 no",
     "tol": [
      0.001,
      0.0002
-    ]
+    ],
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma_krige_probe",
+     "label": "Kriged porosity at (1700, 2400)",
+     "unit": "v/v",
+     "expected": 0.28692776619579075,
+     "tol": 5e-05
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Kriged at a probe point)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Kriged at a probe point)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "simple kriging with the typed nugget and range at the typed point; fmt 6 dp against tol 5e-5.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    },
+    "prior": {
+     "migration": "20261024a_w1_earthmodel.sql",
+     "wave": "w1",
+     "prompt": "krige_at_w1 was prompt-given: the prompt called it the exactness check and the tile's unit string printed \"W1 is 0.3150\", so W1's logged porosity passed without kriging anything. It is replaced by a measured per-block kriging output, the porosity jump across the fault on the y = 2200 row (block 0 no",
+     "tol": [
+      0.001,
+      0.0002
+     ]
+    }
    }
   },
   {
@@ -367,30 +774,58 @@
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/advanced/m06-per-block-volume-and-the-workflow/l04-the-capstone-walkthrough.md prints this value, and the PopulationExplorer default state shows it (probe). The walkthrough (m06 l04:21) calls it 'a convention detector disguised as an easy lookup', but the learner does not implement the engine, so it detects nothing.",
    "leak": true,
    "shipped": {
-    "migration": "20261024a_w1_earthmodel.sql",
-    "wave": "w1",
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
     "rekey": {
-     "key": "fault_jump_y2200",
-     "label": "Porosity jump across the fault on the y = 2200 row",
+     "key": "oruma_fault_jump_y2300",
+     "label": "Porosity jump across the fault on the y = 2300 row",
      "unit": "v/v",
-     "expected": -0.023016035393453593,
+     "expected": -0.014077279549535582,
      "tol": 5e-05
     },
     "rekey_annot": {
      "source": "nextgen-panel",
-     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:92 (Jump across the fault on this row tile, Simple kriging, nugget 0.00025, range 900)",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Jump across the fault on this row)",
      "printed": {
       "decimals": 6
      },
      "display_scale": 1,
-     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:92 fmt(jump, 6)",
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Jump across the fault on this row)",
      "prompt_precision": null,
      "answer_space": null,
      "guess_p": null,
-     "evidence": "computePopulation() profile[12].phi - profile[11].phi = -0.023016035393453593 (pinned in populationLab.test.js with a sweep over all 48 method/nugget/range settings, every other one more than 5e-5 away: nearest -0.0231041 at range 300 and -0.0228259 at range 600; trend -0.0210, constant -0.028688; unsigned +0.023016 is 0.046 away). Printed at 6 dp, rounding miss 3.5e-8. The panel opens on simple kriging at the golden variogram, so the DEFAULT STATE PRINTS IT (earthmodel is a full W5 re-case). Lessons reworded so no figure within tol survives: m01 l04 printed it to full precision and \"about 0.292\" at x 1600 (0.292 - 0.315 = -0.023 passes), m04 l05 printed \"krige minus 0.0230\".",
+     "evidence": "per-block kriged map on the typed row with the typed polygon and variogram; block 0 node minus block 1 node; fmt 6 dp against tol 5e-5.",
      "class": "none",
      "owner_decision": false,
-     "leak": true
+     "leak": false
+    },
+    "closes_leak": true,
+    "prior": {
+     "migration": "20261024a_w1_earthmodel.sql",
+     "wave": "w1",
+     "rekey": {
+      "key": "fault_jump_y2200",
+      "label": "Porosity jump across the fault on the y = 2200 row",
+      "unit": "v/v",
+      "expected": -0.023016035393453593,
+      "tol": 5e-05
+     },
+     "rekey_annot": {
+      "source": "nextgen-panel",
+      "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:92 (Jump across the fault on this row tile, Simple kriging, nugget 0.00025, range 900)",
+      "printed": {
+       "decimals": 6
+      },
+      "display_scale": 1,
+      "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:92 fmt(jump, 6)",
+      "prompt_precision": null,
+      "answer_space": null,
+      "guess_p": null,
+      "evidence": "computePopulation() profile[12].phi - profile[11].phi = -0.023016035393453593 (pinned in populationLab.test.js with a sweep over all 48 method/nugget/range settings, every other one more than 5e-5 away: nearest -0.0231041 at range 300 and -0.0228259 at range 600; trend -0.0210, constant -0.028688; unsigned +0.023016 is 0.046 away). Printed at 6 dp, rounding miss 3.5e-8. The panel opens on simple kriging at the golden variogram, so the DEFAULT STATE PRINTS IT (earthmodel is a full W5 re-case). Lessons reworded so no figure within tol survives: m01 l04 printed it to full precision and \"about 0.292\" at x 1600 (0.292 - 0.315 = -0.023 passes), m04 l05 printed \"krige minus 0.0230\".",
+      "class": "none",
+      "owner_decision": false,
+      "leak": true
+     }
     }
    }
   },
@@ -414,7 +849,34 @@
    "evidence": "Prints 0.286312 against tol 0.001.",
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/advanced/m06-per-block-volume-and-the-workflow/l04-the-capstone-walkthrough.md prints this value, and the PopulationExplorer default state shows it (probe).",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma_phi_block0",
+     "label": "Zone A weighted porosity, block 0",
+     "unit": "v/v",
+     "expected": 0.28904736238721357,
+     "tol": 2e-05
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Zone A phi, block 0)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Zone A phi, block 0)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "MD-weighted mean of the control points outside the typed polygon (W2 and W3); fmt 6 dp against tol 2e-5; the single-well values 0.2935651 and 0.277 sit far outside.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -436,7 +898,34 @@
    "evidence": "Prints 13.99875 in 10^6 m3 against tol 0.01; closure 45 - 31.00125 also taught.",
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/advanced/m06-per-block-volume-and-the-workflow/l04-the-capstone-walkthrough.md prints this value, and the PopulationExplorer default state shows it (probe).",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028a_w5_earthmodel.sql",
+    "wave": "w5a",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oruma_bulk_a_block1",
+     "label": "Zone A bulk volume in block 1",
+     "unit": "10^6 m3",
+     "expected": 17.82,
+     "tol": 0.001
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Zone A bulk, block 0 / block 1)",
+     "printed": {
+      "decimals": 5
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx (Tile Zone A bulk, block 0 / block 1)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "zone A bulk volume summed over the typed polygon nodes, 10^6 m3; fmt 5 dp against tol 0.001.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   }
  ]
 }

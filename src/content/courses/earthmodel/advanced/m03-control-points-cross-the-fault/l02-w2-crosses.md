@@ -29,7 +29,7 @@ The profile row at y 2200 is W2's own row. The white dot at x 1610.87 with value
 
 ## Worked example
 
-Quantify "with 35.87 m to spare" and its fragility. The midpoint sits at x 1610.8719179395334; the boundary at 1575; margin 35.8719179395334 m. The midpoint moves east at $1/\sqrt 2$ times any MD change of the zone's midpoint, so shifting the zone interval about 50.7 m shallower in MD, or re-surveying the build 5 degrees shallower, would drag the midpoint west of the boundary and flip W2's block assignment, taking 120 weight units and the value 0.2936 from block 0's books to block 1's. Both blocks' porosities, and the graded 0.28631191845445614, would change discontinuously. Statistics that can jump on a 5 degree survey revision deserve the word FRAGILE in a report, and finding such cliffs is an Expert skill this fixture teaches on purpose.
+Quantify "with 35.87 m to spare" and its fragility. The midpoint sits at x 1610.8719179395334; the boundary at 1575; margin 35.8719179395334 m. The midpoint moves east at $1/\sqrt 2$ times any MD change of the zone's midpoint, so shifting the zone interval about 50.7 m shallower in MD, or re-surveying the build 5 degrees shallower, would drag the midpoint west of the boundary and flip W2's block assignment, taking 120 weight units and the value 0.2936 from block 0's books to block 1's. Both blocks' porosities, block 0's 0.28631191845445614 included, would change discontinuously. Statistics that can jump on a 5 degree survey revision deserve the word FRAGILE in a report, and finding such cliffs is an Expert skill this fixture teaches on purpose.
 
 ## Exercise
 

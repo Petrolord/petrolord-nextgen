@@ -1,6 +1,6 @@
 # Volumes per block
 
-The tier's last computation splits the Associate anchor across the fault: zone A's 45,000,000 m3 becomes 31,001,250 in block 0 and 13,998,749.999999998 in block 1, and the split closes EXACTLY. This lesson derives the split and the mechanism of its exactness, because the closure is the tier's quality control and the capstone grades the block 1 figure.
+The tier's last computation splits the Associate anchor across the fault: zone A's 45,000,000 m3 becomes 31,001,250 in block 0 and 13,998,749.999999998 in block 1, and the split closes EXACTLY. This lesson derives the split and the mechanism of its exactness, because the closure is the tier's quality control and the capstone asks for a block 1 figure of its own.
 
 {{panel:em-population-explorer}}
 
@@ -18,7 +18,7 @@ The exactness is architectural, not lucky. Because each node's contribution is a
 
 ## The trailing .999999998
 
-The graded block 1 figure ends in .999999998, and the digits are worth respecting rather than rounding away. Each node contribution is thickness times 2500; zone A thicknesses are stored as resample-derived floats, and 174 additions of such products land infinitesimally shy of the round 13.99875 million a hand calculation produces from the mean thickness route. Both routes are right; the engine's route is the one pinned and graded, with a tolerance of 0.01 million m3 that accepts the hand value too. The Expert habit: when a stored value differs from your hand value in the ninth significant figure, identify WHICH route produced each before deciding anything is wrong.
+The golden block 1 figure ends in .999999998, and the digits are worth respecting rather than rounding away. Each node contribution is thickness times 2500; zone A thicknesses are stored as resample-derived floats, and 174 additions of such products land infinitesimally shy of the round 13.99875 million a hand calculation produces from the mean thickness route. Both routes are right; the engine's route is the one pinned, and any sensible tolerance accepts the hand value too. The Expert habit: when a stored value differs from your hand value in the ninth significant figure, identify WHICH route produced each before deciding anything is wrong.
 
 ## Volume follows labels, not geology
 

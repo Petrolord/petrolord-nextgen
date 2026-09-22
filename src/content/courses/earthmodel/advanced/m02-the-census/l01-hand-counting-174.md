@@ -1,6 +1,6 @@
 # Hand counting 174
 
-The capstone grades the block 1 node count with tolerance zero: 174, exactly, or nothing. A count graded exactly deserves a derivation you can run without a computer, and the golden geometry was built to allow one.
+On the golden fault the block 1 node count is 174, and a capstone grades a count with tolerance zero: exactly, or nothing. A count graded exactly deserves a derivation you can run without a computer, and the golden geometry was built to allow one.
 
 {{panel:em-population-explorer}}
 

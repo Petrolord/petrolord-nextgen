@@ -24,4 +24,4 @@ Answer a review question in the model's own terms: "does the model say the fault
 
 ## Exercise
 
-The block 1 volume will be graded as 13.99875 million m3. Write the two-sentence caveat you would attach to that number in a report, using this lesson's distinctions: one sentence on what the number is conditional on, one on what it does not assert.
+On the golden fault the block 1 volume is 13.99875 million m3. Write the two-sentence caveat you would attach to that number in a report, using this lesson's distinctions: one sentence on what the number is conditional on, one on what it does not assert.

@@ -8,7 +8,7 @@ Three of the four wells tie with arithmetic a person can do without a computer, 
 
 For a vertical well, every step of the landing collapses. The trajectory is one vertical segment, so x and y never move from the wellhead and TVDSS is MD minus KB, a subtraction of integers. The surface is then read at the wellhead's coordinates. In this fixture the wellheads of W1, W3 and W4 sit at positions where the sampled surface values are also exact or half-integer: 1507, 1538 and 1565 at W1; 1559, 1598 and 1598 at W3; 1555.5, 1596 and 1596 at W4.
 
-So the residuals come out as small exact numbers: W1 reads minus 2, plus 2, plus 5; W3 reads plus 1, plus 7, plus 37; W4 reads plus 0.5, plus 6, plus 36. When the capstone grades W1 BaseB at 5 and W3 TopA at 1 with a tolerance of 0.01, it is grading numbers with no rounding in them at all; any disagreement is a mistake, not a precision issue. This mirrors a pattern you have met before in this course family: exact-by-construction values graded tightly, precisely because they are exact.
+So the residuals come out as small exact numbers: W1 reads minus 2, plus 2, plus 5; W3 reads plus 1, plus 7, plus 37; W4 reads plus 0.5, plus 6, plus 36. Numbers like W1 BaseB at 5 and W3 TopA at 1 have no rounding in them at all; any disagreement with them is a mistake, not a precision issue. This mirrors a pattern you have met before in this course family: exact-by-construction values graded tightly, precisely because they are exact.
 
 ## The control-group logic
 
