@@ -23,6 +23,13 @@ A course's W6 source is tools/finals-transfer/<course>/:
                        "explanation", "rests_on": [digest keys] or
                        "lesson": "<tier>/<module>/<lesson>" (a conceptual
                        item), "why_wrong": [3 one-line reasons]}
+               Optional "explanation_fixes": [{"tier", "module_key", "ord",
+                 "old", "new", "reason"}]: an explanation a lesson or engine
+                 check shows is wrong, corrected in place on a served row W6
+                 does not replace. Prompt, options and answer_index stay, so
+                 no answer grades differently. `pin` fills "replaces" (the
+                 row's content hash) and "stem" (the hash without the
+                 explanation).
                Text may carry {{key}}, replaced by digest["print"][key].
                The correct option is placed at the replaced row's own
                answer_index, so a final's key distribution never moves.
@@ -95,6 +102,7 @@ LEAK_SCALES = (1.0, 1e3, 1e-3, 1e6, 1e-6, 100.0, 0.01)
 MIN_SIG = 4
 
 HASH_SQL = "md5(prompt || chr(31) || options::text || chr(31) || answer_index::text || chr(31) || coalesce(explanation, ''))"
+STEM_SQL = "md5(prompt || chr(31) || options::text || chr(31) || answer_index::text)"
 NUM = re.compile(r'(?<![A-Za-z0-9_])-?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?')
 # a digit glued to letters (CO2, H2S, kg/m3, P1) is part of a name or a unit, not a figure
 TOKNUM = re.compile(r'(?<![A-Za-z])\d+(?:[.,]\d+)*')
@@ -398,6 +406,16 @@ def static_check(c, quiet=False):
                                 f'(band {lenaudit.RANK_ANY_FLOOR} to {lenaudit.RANK_ANY_CAP})')
         elif lst:
             errs.append(f'{c} {t}: items carry no answer_index (it is the replaced row\'s own; run `w6.py pin {c}`)')
+    for fx in items.get('explanation_fixes') or []:
+        where = f'{c} explanation fix {fx.get("tier")} {fx.get("module_key") or "final"} ord {fx.get("ord")}'
+        text_rules(where, fx.get('new', ''), errs)
+        if fx.get('tier') not in TIERS or not isinstance(fx.get('ord'), int) or not fx.get('reason') or not fx.get('old'):
+            errs.append(f'{where}: needs tier, ord, old, new and a reason')
+        if not re.fullmatch(r'[0-9a-f]{32}', str(fx.get('replaces', ''))) or not re.fullmatch(r'[0-9a-f]{32}', str(fx.get('stem', ''))):
+            errs.append(f'{where}: replaces and stem must be pinned (run `w6.py pin {c}`)')
+        extra = set(TOKNUM.findall(fx.get('new', ''))) - set(TOKNUM.findall(fx.get('old', ''))) - allowed
+        if extra:
+            errs.append(f'{where}: figure(s) {sorted(extra)} are printed by neither the old text nor the engine digest')
     # prompts unique across the course's new items
     seen = defaultdict(list)
     for t in TIERS:
@@ -544,6 +562,16 @@ def validate(c, container, quiet=False):
                                  explanation=it['explanation']))
             for h in leak_hits(' '.join([it['prompt'], *opts, it['explanation']]), fields):
                 errs.append(f'{c} {t} ord {it["ord"]}: literal {h[0]} leaks capstone field {h[1]} ({h[2]}), {h[3]}')
+    for fx in items.get('explanation_fixes') or []:
+        r = next((x for x in crows if x['tier'] == fx.get('tier') and x['ord'] == fx.get('ord')
+                  and (x.get('module_key') or None) == (fx.get('module_key') or None)), None)
+        where = f'{c} explanation fix {fx.get("tier")} {fx.get("module_key") or "final"} ord {fx.get("ord")}'
+        if r is None:
+            errs.append(f'{where}: no served row')
+        elif r['h'] != fx.get('replaces') or (r['explanation'] or '') != fx.get('old'):
+            errs.append(f'{where}: the served row is not the published row the fix names')
+        elif r['scope'] == 'final' and (r['tier'], r['ord']) in targets:
+            errs.append(f'{where}: that slot is replaced by a transfer item; fix nothing there')
     # post-replacement banks: length band and key band
     post = [r for r in crows if not (r['scope'] == 'final' and (r['tier'], r['ord']) in targets)] + new_rows
     for b in lenaudit.audit(post):
@@ -654,6 +682,27 @@ def sql_text(c, items, rend):
                 f"    raise exception '{tag} refused: {lab} matches neither its published content hash nor its W6 form (drift)';",
                 '  end if;',
             ]
+    fixes = items.get('explanation_fixes') or []
+    for fx in fixes:
+        mk = f"module_key = {q(fx['module_key'])}" if fx.get('module_key') else 'module_key is null'
+        scope = 'module' if fx.get('module_key') else 'final'
+        where = f"app_slug = {q(c)} and tier = {q(fx['tier'])} and scope = '{scope}' and {mk} and ord = {fx['ord']} and active"
+        lab = f"{fx['tier']} {fx.get('module_key') or 'final'} ord {fx['ord']}"
+        lines += [
+            '',
+            f'  -- EXPLANATION FIX {lab}: {fx["reason"]}',
+            f"  select count(*), count(*) filter (where {HASH_SQL} = '{fx['replaces']}'),",
+            f"         count(*) filter (where {STEM_SQL} = '{fx['stem']}' and explanation = {q(fx['new'])})",
+            '    into v_n, v_pub, v_new',
+            f'    from public.academy_quiz_questions where {where};',
+            f"  if v_n <> 1 then raise exception '{tag} refused: {lab} holds % active rows, expected 1', v_n; end if;",
+            '  if v_pub = 1 then',
+            f"    update public.academy_quiz_questions set explanation = {q(fx['new'])} where {where} and {HASH_SQL} = '{fx['replaces']}';",
+            '    v_written := v_written + 1;',
+            '  elsif v_new = 0 then',
+            f"    raise exception '{tag} refused: {lab} matches neither its published content hash nor its corrected form (drift)';",
+            '  end if;',
+        ]
     lines.append('')
     for t in TIERS:
         lines += [
@@ -661,7 +710,7 @@ def sql_text(c, items, rend):
             f"  if v_total <> {FINAL_N} then raise exception '{tag} refused: {t} final holds % active questions, expected {FINAL_N}', v_total; end if;",
         ]
     lines += [
-        f"  raise notice '{tag}: % of {N_TRANSFER * len(TIERS)} slots written, the rest already carried the W6 question', v_written;",
+        f"  raise notice '{tag}: % of {N_TRANSFER * len(TIERS) + len(fixes)} slots written, the rest already carried the W6 question', v_written;",
         'end $$;',
         '',
     ]
@@ -734,6 +783,19 @@ def pin(c, container):
                               'refusing to re-pin over drift')
             it['replaces'] = r['h']
             it['answer_index'] = r['answer_index']
+            n += 1
+    if items.get('explanation_fixes'):
+        allrows = psql_json(container, "select coalesce(json_agg(json_build_object('tier',tier,'module_key',module_key,"
+                            f"'ord',ord,'h',{HASH_SQL},'stem',{STEM_SQL},'explanation',explanation)),'[]') "
+                            f"from academy_quiz_questions where active and app_slug = {q(c)}")
+        for fx in items['explanation_fixes']:
+            r = next((x for x in allrows if x['tier'] == fx['tier'] and x['ord'] == fx['ord']
+                      and (x['module_key'] or None) == (fx.get('module_key') or None)), None)
+            if r is None or (r['explanation'] or '') != fx['old']:
+                raise Refused(f'{c} explanation fix {fx["tier"]} {fx.get("module_key")} ord {fx["ord"]}: served row missing or its explanation is not "old"')
+            if fx.get('replaces') not in (None, '', r['h']):
+                raise Refused(f'{c} explanation fix {fx["tier"]} ord {fx["ord"]}: refusing to re-pin over drift')
+            fx['replaces'], fx['stem'] = r['h'], r['stem']
             n += 1
     json.dump(items, open(p, 'w', encoding='utf-8'), indent=1, ensure_ascii=False)
     open(p, 'a').write('\n')
