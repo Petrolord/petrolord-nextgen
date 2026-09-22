@@ -7,7 +7,7 @@ The fixture carries seven deliberately broken specifications. Each is designed t
 | case | what the validator says |
 |---|---|
 | no title | A title is required. |
-| no start date | A start date is required. |
+| no start date | A start date is required. The first history period (2023-01-01) must start on the deck start date (). |
 | layer count disagrees with nz | One layer entry per NZ layer is required. |
 | well outside the grid | Well Ekene-1 is outside the grid. |
 | completion below the deepest layer | Well Ekene-1 completion is outside the layers. |
@@ -24,7 +24,7 @@ Because the point of the set is to say something about the VALIDATOR, not about 
 
 Seven cases each raising one error tells you the validator has at least seven independent rules and that each fires on its own trigger. Seven cases raising a hundred errors between them tells you only that broken things are broken.
 
-Six of these raise exactly one error. The seventh, the missing start date, raises two, because a deck with no start date also fails the rule that the first history period must match it. That coupling is real rather than an artifact: the two rules genuinely depend on the same field.
+The missing start date is the one case coupled to a second rule: a deck with no start date also fails the rule that the first history period must match it, so its list carries that second message too. That coupling is real rather than an artifact: the two rules genuinely depend on the same field.
 
 ## How the isolation was achieved
 
@@ -60,6 +60,6 @@ Those are properties worth demanding of any validator you write.
 
 ## Exercise
 
-First, six of the seven cases raise exactly one error and one raises two. Explain why the missing start date is genuinely coupled to a second rule.
+First, explain why the missing start date is genuinely coupled to a second rule, and which message in its list comes from that rule.
 
 Second, describe what went wrong when the well cases were first written, and state the general lesson about negative tests.
