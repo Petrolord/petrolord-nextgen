@@ -273,24 +273,30 @@
   {
    "tier": "advanced",
    "key": "min_standoff",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/cementing/advanced/m06-the-expert-reading/l02-working-the-capstone.md:34",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/cementing.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/cementing/StandoffExplorer.jsx:58-64 (teaching wells only)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "No new quantity: state E x I = 12266792.85346564 N m2 (or E = 206.8 GPa and I = pi/64 (OD^4 - ID^4)) in the prompt; the field then becomes hand-calc from m02/l04 and m03/l01."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Amend the Expert prompt to state the stiffness (\"E x I for this casing is 12266792.85346564 N m2\", which is E = 206.8 GPa on I = pi/64 (OD^4 - ID^4)); no graded value moves. Alternative: a panel 'your job' mode on StandoffExplorer.jsx taking casing OD/ID/weight and hole sections.",
-   "evidence": "Closed form per interval (1 - W/k/c - w sin40 L^4/(384 EI)/c) reproduces 0.8556417628346304 exactly with E = 206.8 GPa, but the lessons give E x I only as a number for 7 inch casing (advanced/m03/l01-mid-span-sag.md:27) and never E or the I formula; E = 200 or 207 GPa moves the answer by 1e-3 or 3e-5 against tol 5e-7. The panel cannot take the 9-5/8 casing.",
+   "evidence": "W2: Prompt only, no field moves. Fields 1 and 3 need the mid-span sag, which needs E x I of the 9-5/8 inch casing; the lessons give E x I only as a number for 7 inch casing and never E or the I formula, and E = 200 or 207 GPa moves the answer by 1e-3 or 3e-5 against tol 5e-7 (B5 finding 1). The prompt now states E x I (vendored stringProperties) and how it is built, so both are hand work from m02 l04 and m03 l01. Keys, expected values and tolerances are unchanged. The published inputs reproduce min_standoff = 0.8556417628346304 through the vendored engines against the key 0.8556417628346304 (tol 5e-07); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "A learner can back-solve E = 206.8 GPa from the 7 inch EI and its 0.1570736 m bore, but nothing teaches that step.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_cementing.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "on the same slant trajectory. Its bending stiffness E x I is 12266792.85346564 N m2, which is E = 206.8 GPa on I = pi/64 (OD^4 - ID^4)."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
@@ -315,24 +321,30 @@
   {
    "tier": "advanced",
    "key": "required_spacing_m",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/cementing/advanced/m06-the-expert-reading/l02-working-the-capstone.md:34 (\"Then 3, by bisection\")",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/cementing.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/cementing/StandoffExplorer.jsx:137 (fmt 6 dp, teaching wells only)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Same prompt amendment as min_standoff (state E x I); then a spreadsheet bisection the lesson already asks for reaches it."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Amend the Expert prompt to state the stiffness (\"E x I for this casing is 12266792.85346564 N m2\", which is E = 206.8 GPa on I = pi/64 (OD^4 - ID^4)); no graded value moves. Alternative: a panel 'your job' mode on StandoffExplorer.jsx taking casing OD/ID/weight and hole sections.",
-   "evidence": "Spreadsheet bisection of 0.67 = mid-span standoff(L) reproduces 15.99770776601963 (diff 2e-11), but it needs the same unstated E x I as min_standoff.",
+   "evidence": "W2: Prompt only, no field moves. Fields 1 and 3 need the mid-span sag, which needs E x I of the 9-5/8 inch casing; the lessons give E x I only as a number for 7 inch casing and never E or the I formula, and E = 200 or 207 GPa moves the answer by 1e-3 or 3e-5 against tol 5e-7 (B5 finding 1). The prompt now states E x I (vendored stringProperties) and how it is built, so both are hand work from m02 l04 and m03 l01. Keys, expected values and tolerances are unchanged. The published inputs reproduce required_spacing_m = 15.99770776601963 through the vendored engines against the key 15.99770776601963 (tol 5e-07); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_cementing.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "on the same slant trajectory. Its bending stiffness E x I is 12266792.85346564 N m2, which is E = 206.8 GPa on I = pi/64 (OD^4 - ID^4)."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
