@@ -75,24 +75,52 @@ export const fixtureSeries = (id) => {
 // Associate: the straight line, and the window it is fitted over.
 // ---------------------------------------------------------------------------
 
-/** Horner analysis of the buildup over the points at or after minDt hours. */
-export const buildupWindow = (minDt = 0) => {
-  const bu = FX.buildup;
-  const points = bu.points.filter((p) => p.dt >= minDt).map((p) => ({ dt: p.dt, pws: p.pws }));
-  const r = hornerAnalysis({ points, tp: bu.tp, pwfShutIn: bu.pwfShutIn, ...bu.reservoir });
+/**
+ * Horner analysis of ANY buildup over the points at or after minDt hours: the
+ * teaching buildup, or a test the learner loads (the Associate capstone's is
+ * one). `test` is { points: [{ dt, pws }], tp, pwfShutIn, reservoir }. The
+ * skin pressure drop and the radius of investigation use the permeability and
+ * skin this fit reports.
+ */
+export const buildupWindowFor = (test, minDt = 0) => {
+  const points = test.points.filter((p) => p.dt >= minDt).map((p) => ({ dt: p.dt, pws: p.pws }));
+  const r = hornerAnalysis({ points, tp: test.tp, pwfShutIn: test.pwfShutIn, ...test.reservoir });
   if (!r) return null;
-  const R = bu.reservoir;
+  const R = test.reservoir;
   const dpSkin = skinPressureDrop({ q: R.q, B: R.B, mu: R.mu, k: r.k, h: R.h, skin: r.skin });
   return {
     ...r,
     minDt,
     dpSkin,
-    riAtTp: radiusOfInvestigation({ k: r.k, tHours: bu.tp, phi: R.phi, mu: R.mu, ct: R.ct }),
-    flowEfficiency: flowEfficiency({ pAvg: r.pStar, pwf: bu.pwfShutIn, dpSkin }),
+    riAtTp: radiusOfInvestigation({ k: r.k, tHours: test.tp, phi: R.phi, mu: R.mu, ct: R.ct }),
+    flowEfficiency: flowEfficiency({ pAvg: r.pStar, pwf: test.pwfShutIn, dpSkin }),
+  };
+};
+
+/** Horner analysis of the teaching buildup over the points at or after minDt hours. */
+export const buildupWindow = (minDt = 0) => {
+  const bu = FX.buildup;
+  const r = buildupWindowFor(bu, minDt);
+  if (!r) return null;
+  return {
+    ...r,
     kErrorPct: (100 * (r.k - bu.truth.k)) / bu.truth.k,
     skinError: r.skin - bu.truth.skin,
   };
 };
+
+/**
+ * Shut-in time and pressure pairs from a text file: one pair per line, comma,
+ * tab or space separated; header and comment lines (not starting with a
+ * number) are skipped. Returns [{ dt, pws }] in file order.
+ */
+export const parseBuildupText = (text) => String(text || '')
+  .split(/\r?\n/)
+  .map((l) => l.trim())
+  .filter((l) => /^[0-9.]/.test(l))
+  .map((l) => l.split(/[\s,;]+/).map(Number))
+  .filter((a) => a.length >= 2 && Number.isFinite(a[0]) && Number.isFinite(a[1]))
+  .map(([dt, pws]) => ({ dt, pws }));
 
 /** MDH analysis of the drawdown over the points at or after minT hours. */
 export const drawdownWindow = (minT = 0) => {

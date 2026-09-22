@@ -18,7 +18,7 @@ Nothing else changes. Same data, same software, same reservoir parameters, same 
 | at or after 2 h | 16 | 81.1750471708196 | 5.8681757929772935 | 0.9997269766852961 |
 | at or after 5 h | 13 | you produce this one | and this one | and this one |
 
-The planted values are 85 mD and plus 6.5. The last row is the capstone and the panel will give it to you.
+The planted values are 85 mD and plus 6.5. The last row is the window the worked example of module 6 uses, and the panel will give it to you.
 
 ## Reading the table
 

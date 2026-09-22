@@ -1,0 +1,46 @@
+{
+ "beginner": [
+  {
+   "key": "obodo_horner_k_md",
+   "tol": 0.05,
+   "unit": "mD",
+   "label": "OBODO-4 Horner permeability",
+   "expected": 40.34569148966339
+  },
+  {
+   "key": "obodo_horner_skin",
+   "tol": 0.005,
+   "unit": "-",
+   "label": "OBODO-4 skin from the one-hour pressure",
+   "expected": 2.782737573136271
+  },
+  {
+   "key": "obodo_slope_psi_cycle",
+   "tol": 0.005,
+   "unit": "psi/cycle",
+   "label": "OBODO-4 semilog slope",
+   "expected": 61.82280952202884
+  },
+  {
+   "key": "obodo_pstar_psia",
+   "tol": 0.05,
+   "unit": "psia",
+   "label": "OBODO-4 extrapolated pressure p star",
+   "expected": 5200.545328117058
+  },
+  {
+   "key": "obodo_skin_dp_psi",
+   "tol": 0.05,
+   "unit": "psi",
+   "label": "OBODO-4 skin pressure drop",
+   "expected": 149.39468435825378
+  },
+  {
+   "key": "obodo_ri_at_tp_ft",
+   "tol": 0.5,
+   "unit": "ft",
+   "label": "OBODO-4 radius of investigation at 48 h",
+   "expected": 824.778564872257
+  }
+ ]
+}

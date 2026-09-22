@@ -46624,11 +46624,37 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "The buildup explorer opens with the 5 hour cut (BuildupExplorer.jsx:25 useState('5')), so the whole Associate answer shows before the learner does anything. Owner to decide whether the panel should open on a different cut (for example all 40 points) so that choosing the thirteen-point window is the learner's step; the tolerances and displays are sound.",
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welltest.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "obodo_horner_k_md",
+    "label": "OBODO-4 Horner permeability",
+    "unit": "mD",
+    "expected": 40.34569148966339,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welltest/BuildupExplorer.jsx (Your test mode)",
+    "printed": {
+     "decimals": 3
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welltest/BuildupExplorer.jsx (Your test mode) plain(v, d)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "Permeability tile prints 40.346 mD; an independent Horner least squares on the file agrees to 1e-9. The planted 42 mD misses by 1.65.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 82.49 (up to 3 decimals, trailing zeros dropped); tol 0.05. The least-squares fit needs the fixture pressures, which only the panel carries.",
   "notes": "LEAK: shown in the buildup explorer default state (probe state '')."
  },
@@ -46657,11 +46683,37 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "The buildup explorer opens with the 5 hour cut (BuildupExplorer.jsx:25 useState('5')), so the whole Associate answer shows before the learner does anything. Owner to decide whether the panel should open on a different cut (for example all 40 points) so that choosing the thirteen-point window is the learner's step; the tolerances and displays are sound.",
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welltest.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "obodo_horner_skin",
+    "label": "OBODO-4 skin from the one-hour pressure",
+    "unit": "-",
+    "expected": 2.782737573136271,
+    "tol": 0.005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welltest/BuildupExplorer.jsx (Your test mode)",
+    "printed": {
+     "decimals": 3
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welltest/BuildupExplorer.jsx (Your test mode) plain(v, d)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "Skin tile prints 2.783; tol 0.005. The planted 3.2 misses.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 6.076; tol 0.005 is ten times the half unit.",
   "notes": "LEAK: shown in the buildup explorer default state (probe state '')."
  },
@@ -46690,11 +46742,37 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "The buildup explorer opens with the 5 hour cut (BuildupExplorer.jsx:25 useState('5')), so the whole Associate answer shows before the learner does anything. Owner to decide whether the panel should open on a different cut (for example all 40 points) so that choosing the thirteen-point window is the learner's step; the tolerances and displays are sound.",
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welltest.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "obodo_slope_psi_cycle",
+    "label": "OBODO-4 semilog slope",
+    "unit": "psi/cycle",
+    "expected": 61.82280952202884,
+    "tol": 0.005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welltest/BuildupExplorer.jsx (Your test mode)",
+    "printed": {
+     "decimals": 3
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welltest/BuildupExplorer.jsx (Your test mode) plain(v, d)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "Semilog slope tile prints 61.823 psi per cycle; tol 0.005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 22.175; tol 0.005.",
   "notes": "LEAK: shown in the buildup explorer default state (probe state '')."
  },
@@ -46723,11 +46801,37 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "The buildup explorer opens with the 5 hour cut (BuildupExplorer.jsx:25 useState('5')), so the whole Associate answer shows before the learner does anything. Owner to decide whether the panel should open on a different cut (for example all 40 points) so that choosing the thirteen-point window is the learner's step; the tolerances and displays are sound.",
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welltest.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "obodo_pstar_psia",
+    "label": "OBODO-4 extrapolated pressure p star",
+    "unit": "psia",
+    "expected": 5200.545328117058,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welltest/BuildupExplorer.jsx (Your test mode)",
+    "printed": {
+     "decimals": 3
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welltest/BuildupExplorer.jsx (Your test mode) plain(v, d)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "p star tile prints 5200.545 psia without a thousands separator; tol 0.05. The initial 5200 misses.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 4,800.152; tol 0.05.",
   "notes": "LEAK: shown in the buildup explorer default state (probe state ''). Values of 1000 or more print with a thousands comma, which the learner must strip before typing."
  },
@@ -46756,11 +46860,37 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "The buildup explorer opens with the 5 hour cut (BuildupExplorer.jsx:25 useState('5')), so the whole Associate answer shows before the learner does anything. Owner to decide whether the panel should open on a different cut (for example all 40 points) so that choosing the thirteen-point window is the learner's step; the tolerances and displays are sound.",
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welltest.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "obodo_skin_dp_psi",
+    "label": "OBODO-4 skin pressure drop",
+    "unit": "psi",
+    "expected": 149.39468435825378,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welltest/BuildupExplorer.jsx (Your test mode)",
+    "printed": {
+     "decimals": 2
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welltest/BuildupExplorer.jsx (Your test mode) plain(v, d)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "141.2 q B mu S/(k h) with the reported k and S: 149.39 psi; tol 0.05; the planted k and S miss.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 117.00; also 0.87 m s by hand from the reported slope and skin (0.87 x 22.175 x 6.0757 = 117.2 with rounded inputs, so the tile is the safer route); tol 0.05.",
   "notes": "LEAK: shown in the buildup explorer default state (probe state '')."
  },
@@ -46789,11 +46919,37 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "The buildup explorer opens with the 5 hour cut (BuildupExplorer.jsx:25 useState('5')), so the whole Associate answer shows before the learner does anything. Owner to decide whether the panel should open on a different cut (for example all 40 points) so that choosing the thirteen-point window is the learner's step; the tolerances and displays are sound.",
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welltest.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "obodo_ri_at_tp_ft",
+    "label": "OBODO-4 radius of investigation at 48 h",
+    "unit": "ft",
+    "expected": 824.778564872257,
+    "tol": 0.5
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welltest/BuildupExplorer.jsx (Your test mode)",
+    "printed": {
+     "decimals": 1
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welltest/BuildupExplorer.jsx (Your test mode) plain(v, d)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "sqrt(k t/(948 phi mu ct)) at 48 h with the reported k: 824.8 ft; tol 0.5.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 1,269.4 ft; tol 0.5.",
   "notes": "LEAK: shown in the buildup explorer default state (probe state ''). Values of 1000 or more print with a thousands comma, which the learner must strip before typing."
  },
@@ -46824,7 +46980,7 @@
   "fix": null,
   "owner_decision": true,
   "recommendation": "The diagnostic explorer opens on the buildup at L 0.1 (DiagnosticExplorer.jsx:81-82), which is the capstone case for field 1; the other five are one dataset click away, as intended by a panel-based capstone. Owner to decide whether the default state should stop showing field 1.",
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Late derivative plateau 9.5909 psi; tol 0.005.",
@@ -46857,7 +47013,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Late line permeability 45.257 mD over 200 to 1000 h; tol 0.05.",
@@ -47022,7 +47178,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Fitted distance 793.893756 ft at the catalog defaults; tol 1 ft.",

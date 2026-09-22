@@ -4,13 +4,83 @@ import {
 } from 'recharts';
 import {
   RESERVOIR, fixture, fixtureTruth, buildupWindow, windowWalk, WINDOW_CUTS, timeTransforms,
+  buildupWindowFor, parseBuildupText,
 } from './welltestLab';
-import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Buildup explorer: the learner chooses which shut-in points are in the
 // semilog line and watches the answer move. Nothing else about the test
 // changes. A wrong window gives a wrong permeability and a skin of the wrong
-// sign, and that is the point.
+// sign, and that is the point. "Your test" loads a buildup file of shut-in
+// times and pressures from the learner's computer (the Associate capstone's
+// test downloads from the capstone card), takes the test's own constants as
+// typed inputs, and runs the same Horner analysis over the window typed.
+
+// The typed-test form opens on the teaching buildup's constants.
+const TEACHING_CONSTANTS = {
+  tp: String(fixture('buildup').tp), pwf: String(fixture('buildup').pwfShutIn), minDt: '5',
+  q: String(RESERVOIR.q), B: String(RESERVOIR.B), mu: String(RESERVOIR.mu), h: String(RESERVOIR.h),
+  phi: String(RESERVOIR.phi), ct: String(RESERVOIR.ct), rw: String(RESERVOIR.rw),
+};
+const TYPED_FIELDS = [
+  ['tp', 'Producing time tp (h)'], ['pwf', 'pwf at shut-in (psia)'], ['minDt', 'Fit points from dt (h)'],
+  ['q', 'Rate (stb/d)'], ['B', 'B (rb/stb)'], ['mu', 'Viscosity (cp)'], ['h', 'Net pay h (ft)'],
+  ['phi', 'Porosity'], ['ct', 'ct (1/psi)'], ['rw', 'rw (ft)'],
+];
+
+// No thousands separator: a learner copies these into the answer boxes.
+const plain = (v, d) => (Number.isFinite(v) ? Number(v).toFixed(d) : '-');
+
+const YourTest = () => {
+  const [file, setFile] = useState(null);
+  const [form, setForm] = useState(TEACHING_CONSTANTS);
+  const out = useMemo(() => {
+    if (!file) return { note: 'Open a buildup file: one shut-in time (h) and pressure (psia) per line.' };
+    const v = Object.fromEntries(Object.entries(form).map(([k, x]) => [k, Number(x)]));
+    const bad = TYPED_FIELDS.filter(([k]) => !Number.isFinite(v[k])).map(([, l]) => l);
+    if (bad.length) return { note: `Type a number for: ${bad.join(', ')}.` };
+    const points = parseBuildupText(file.text);
+    if (points.length < 3) return { note: 'That file holds fewer than three time and pressure pairs.' };
+    const fit = buildupWindowFor({
+      points, tp: v.tp, pwfShutIn: v.pwf,
+      reservoir: { q: v.q, B: v.B, mu: v.mu, h: v.h, phi: v.phi, ct: v.ct, rw: v.rw },
+    }, v.minDt);
+    if (!fit) return { note: 'No semilog line could be fitted over that window.' };
+    return { fit, total: points.length, tp: v.tp };
+  }, [file, form]);
+  return (
+    <div className="space-y-3">
+      <label className="inline-flex items-center gap-2 px-3 py-1.5 rounded-md border border-dashed border-gray-500 text-gray-300 text-xs cursor-pointer hover:border-[#BFFF00]">
+        {file ? `Buildup file: ${file.name}` : 'Open a buildup file'}
+        <input type="file" accept=".csv,.txt" className="hidden"
+          onChange={async (e) => {
+            const f = e.target.files?.[0];
+            e.target.value = '';
+            if (f) setFile({ name: f.name, text: await f.text() });
+          }} />
+      </label>
+      <FieldGrid>
+        {TYPED_FIELDS.map(([k, l]) => (
+          <NumField key={k} label={l} value={form[k]} onChange={(x) => setForm((f) => ({ ...f, [k]: x }))} />
+        ))}
+      </FieldGrid>
+      {out.note ? <Note>{out.note}</Note> : (
+        <TileGrid>
+          <Tile label="Points in the fit" value={String(out.fit.n)} unit={`of ${out.total}`} />
+          <Tile label="Permeability" value={plain(out.fit.k, 3)} unit="mD" />
+          <Tile label="Skin" value={plain(out.fit.skin, 3)} />
+          <Tile label="Semilog slope" value={plain(out.fit.m, 3)} unit="psi per cycle" />
+          <Tile label="p star" value={plain(out.fit.pStar, 3)} unit="psia" />
+          <Tile label="p at 1 hour on the line" value={plain(out.fit.p1hr, 3)} unit="psia" />
+          <Tile label="Skin pressure drop" value={plain(out.fit.dpSkin, 2)} unit="psi" />
+          <Tile label="Radius of investigation" value={plain(out.fit.riAtTp, 1)} unit={`ft at ${out.tp} h`} />
+          <Tile label="r squared" value={plain(out.fit.r2, 7)} />
+        </TileGrid>
+      )}
+      <Note>Your test: every number above comes from the file and the constants you typed, through the same Horner analysis.</Note>
+    </div>
+  );
+};
 
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
@@ -23,6 +93,7 @@ const CUT_OPTIONS = WINDOW_CUTS.map((c) => ({
 
 const BuildupExplorer = () => {
   const [cut, setCut] = useState('5');
+  const [mine, setMine] = useState(false);
 
   const view = useMemo(() => {
     const minDt = Number(cut);
@@ -45,12 +116,32 @@ const BuildupExplorer = () => {
 
   const { fit, points, line, truth, used } = view;
   const walk = windowWalk();
+  const modeButtons = (
+    <div className="flex flex-wrap gap-2">
+      {[[false, 'Teaching buildup'], [true, 'Your test']].map(([v, l]) => (
+        <button key={l} type="button" onClick={() => setMine(v)}
+          className={`px-3 py-1.5 rounded-md border text-xs ${mine === v ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
+          {l}
+        </button>
+      ))}
+    </div>
+  );
+
+  if (mine) {
+    return (
+      <PanelShell title="Buildup explorer" subtitle="Your buildup file, your constants, the same Horner line">
+        {modeButtons}
+        <YourTest />
+      </PanelShell>
+    );
+  }
 
   return (
     <PanelShell
       title="Buildup explorer"
       subtitle="One buildup, 40 points, and the only thing you change is which of them are in the line"
     >
+      {modeButtons}
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
         <SelectField label="Points in the semilog fit" value={cut} onChange={setCut} options={CUT_OPTIONS} />
         <div className="text-xs text-gray-400 self-end pb-2">
