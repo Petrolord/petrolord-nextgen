@@ -62,7 +62,7 @@ and the saturated bulk modulus follows from the compressional velocity:
 
 $$K_{sat} = \rho v_p^2 - \tfrac{4}{3}\mu = 2250 \times 3200^2 - \tfrac{4}{3}(7.29 \times 10^9) = 23.04 \times 10^9 - 9.72 \times 10^9 = 13.32 \times 10^9 \ \mathrm{Pa}$$
 
-Both are exact. 7.29 GPa and 13.32 GPa are not rounded values, they are what the arithmetic gives, which is why the capstone grades them to 0.01 GPa and expects you to be able to reach them with a calculator.
+Both are exact. 7.29 GPa and 13.32 GPa are not rounded values, they are what the arithmetic gives, which is why the capstone grades its own pair tightly and expects you to be able to reach them with a calculator.
 
 ## Exercise
 

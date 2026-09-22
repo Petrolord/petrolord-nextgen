@@ -27,7 +27,7 @@ There is a trap hiding in that comparison. Fresh brine at 60 degC gives 2.534420
 
 Salinity is measured, not assumed. A produced water sample sent for analysis is the direct answer. Failing that, the petrophysics course produced formation water resistivity from a Pickett plot or from an SP deflection, and Rw at a known temperature converts to a salinity through standard charts. Nearby wells in the same aquifer are a reasonable fallback, and a regional average from a different aquifer is a guess you should label as one.
 
-The number matters enough to chase. A brine quoted at the wrong salinity fails the capstone tolerance of 0.005 GPa on bulk modulus without coming close.
+The number matters enough to chase. A brine quoted at the wrong salinity fails the capstone's tolerance on bulk modulus without coming close.
 
 ## Gas against gravity
 

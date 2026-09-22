@@ -58,7 +58,7 @@ $$v_p' = \sqrt{\frac{K_{sat}' + \tfrac{4}{3}\mu}{\rho'}} = \sqrt{\frac{7.4929880
 
 $$= \sqrt{\frac{17.212988063073051 \times 10^9}{2038.7104517793223}} = 2905.6972280296195 \ \mathrm{m/s}$$
 
-which is the fourth capstone value. Note that the shear term $\tfrac{4}{3}\mu = 9.72$ GPa is the same in both cases and is now the larger part of the numerator: in the gas case the rock's compressional stiffness is more shear than bulk.
+which is the gas case vp on the Ekene teaching case. Note that the shear term $\tfrac{4}{3}\mu = 9.72$ GPa is the same in both cases and is now the larger part of the numerator: in the gas case the rock's compressional stiffness is more shear than bulk.
 
 ## Exercise
 

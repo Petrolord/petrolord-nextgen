@@ -1,6 +1,6 @@
 # Testing the estimator
 
-The capstone asks for a shear estimate at 3000 m/s, where no measurement exists. The Ekene sand itself logs at 3200 m/s and does have a measured shear. Running the estimator there, where the answer is known, is the most useful thing this module does.
+The Ekene worked case asks for a shear estimate at 3000 m/s, where no measurement exists, and the capstone asks for one at a velocity of its own. The Ekene sand itself logs at 3200 m/s and does have a measured shear. Running the estimator there, where the answer is known, is the most useful thing this module does.
 
 ## The test
 
@@ -12,13 +12,13 @@ The tool measured 1800 m/s.
 
 The estimator under-predicts by 120.05415453482057 m/s, which is 6.7 percent.
 
-## What that means for the capstone answer
+## What that means for a reported estimate
 
-The graded value of 1521.197276567149 m/s at 3000 m/s is the correct output of the method. It is not a correct shear velocity for this rock.
+The estimate of 1521.197276567149 m/s at 3000 m/s is the correct output of the method. It is not a correct shear velocity for this rock.
 
 If the same 6.7 percent bias applies at 3000 m/s, the true shear velocity there would be nearer 1620 m/s than 1521.
 
-That is not a criticism of the capstone, which asks what the method gives. It is the difference between reporting a method's output and reporting a rock property, and knowing which you have is the point of the lesson.
+That is not a criticism of an exercise that asks what the method gives, such as the capstone. It is the difference between reporting a method's output and reporting a rock property, and knowing which you have is the point of the lesson.
 
 ## Why it under-predicts here
 

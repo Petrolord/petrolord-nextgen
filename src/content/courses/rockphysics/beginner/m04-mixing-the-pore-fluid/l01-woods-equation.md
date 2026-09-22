@@ -1,6 +1,6 @@
 # Wood's equation
 
-Module 2 gave you three fluids at reservoir conditions. Module 3 gave you the solid frame. Real pore space rarely holds one fluid, and the Ekene capstone case holds brine and gas together at 80 percent water saturation. Before anything can be said about the rock, the two pore fluids have to be replaced by one effective fluid with a single bulk modulus and a single density. Wood's equation is the rule that does it.
+Module 2 gave you three fluids at reservoir conditions. Module 3 gave you the solid frame. Real pore space rarely holds one fluid, and the Ekene teaching case holds brine and gas together at 80 percent water saturation. Before anything can be said about the rock, the two pore fluids have to be replaced by one effective fluid with a single bulk modulus and a single density. Wood's equation is the rule that does it.
 
 ## The two formulas
 
@@ -46,7 +46,7 @@ Inverting the full precision sum of those two terms gives
 
 $$K_f = 2.573340919366766 \times 10^{8} \text{ Pa} = 257.3340919366766 \text{ MPa}$$
 
-which is the value the capstone grades, with a tolerance of 0.5 MPa. Working from the two rounded terms above rather than the full precision ones lands well inside that tolerance, so hand arithmetic is a valid check on the engine here.
+which is the Wood modulus of the teaching case. Working from the two rounded terms above rather than the full precision ones lands within a small fraction of an MPa, so hand arithmetic is a valid check on the engine here.
 
 The density half of Wood's equation is the subject of the next lesson, and it is far less interesting, which is itself the point.
 

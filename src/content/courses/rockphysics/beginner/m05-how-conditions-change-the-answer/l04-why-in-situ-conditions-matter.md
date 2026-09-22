@@ -22,7 +22,7 @@ Dissolved gas makes the oil lighter and much softer at the same time. Density fa
 
 Here is what makes GOR different from temperature and pressure. When you take an oil sample to surface, it loses its dissolved gas on the way. The sample that arrives at the laboratory is dead oil. If you measure that sample and use the measurement in a reservoir calculation, you have used the GOR 0 row for a fluid that lives on the GOR 50 row.
 
-Size the error against the capstone. The graded live oil density is 777.0630099023522 kg/m3 with a tolerance of 0.5 kg/m3. The dead oil value of 820.9856 kg/m3 misses that by a wide margin. The stiffness error is worse in proportion, 1.475341 GPa in place of 1.142795 GPa, and stiffness is what carries into every velocity the model predicts.
+Size the error on the Ekene teaching case. The live oil density there is 777.0630099023522 kg/m3. The dead oil value of 820.9856 kg/m3 misses it by more than 40 kg/m3, far outside any tolerance a capstone could allow. The stiffness error is worse in proportion, 1.475341 GPa in place of 1.142795 GPa, and stiffness is what carries into every velocity the model predicts.
 
 Nothing about the dead oil measurement is wrong. It is an accurate measurement of a fluid that does not exist in the reservoir. That is the specific failure this module exists to prevent.
 

@@ -8,9 +8,13 @@
 // exact Zoeppritz check) and wedge tuning. Every teaching fixture is
 // anchored to the committed rockphysics goldens
 // (packages/engines/test-data/rockphysics/goldens.json, dual-checked
-// against bruges / open_petro_elastic / rockphypy); the capstone
-// oracle was reproduced by running exactly these pipelines in Node
-// before the migration was seeded.
+// against bruges / open_petro_elastic / rockphypy).
+//
+// The Ekene SAND is the TEACHING case: the panels open on it and the
+// lessons work it. Since W5a (2026-09) each tier's capstone is a case of
+// its own, stated in the brief and typed into the panels; nothing in this
+// file carries it, and panelCapstoneGuard.test.js checks that no number
+// these functions give at their defaults lands on a graded answer.
 import {
   brine, gas, liveOil, woodMix,
 } from '@petrolord/engines/engines/rockphysics/fluids.js';
@@ -42,25 +46,33 @@ export const KMIN = 37e9;
 // opposite reflection pair on a 1 ms grid.
 export const WEDGE = { rcTop: 0.1, rcBase: -0.1, dtMs: 1, maxThicknessMs: 60 };
 export const FREQ_OPTIONS = [25, 40];
-export const CAPSTONE_FREQ_HZ = 25;
+export const TEACHING_FREQ_HZ = 25;
 
-// Saturation the Beginner capstone mixes (80% brine, 20% gas).
-export const CAPSTONE_SW = 0.8;
+// Saturation the Beginner teaching case mixes (80% brine, 20% gas).
+export const TEACHING_SW = 0.8;
 
 export const ROMAN_CLASS = { I: 1, II: 2, III: 3, IV: 4 };
 
-/** Beginner: reservoir fluids + mineral frame at the given saturation. */
-export function computeFluids(sw = CAPSTONE_SW) {
-  const { tC, pMPa, salinity, gasGravity, gorLL } = CONDITIONS;
+/** Beginner: reservoir fluids + mineral frame at the given saturation.
+ *  The conditions, the stock-tank oil density and the frame are the Ekene
+ *  teaching case unless the caller types its own (W5a: the capstone is a
+ *  case of its own that the learner types into the panel). */
+export function computeFluids(sw = TEACHING_SW, cond = CONDITIONS, oilRho0 = OIL_RHO0, frame = FRAME) {
+  const { tC, pMPa, salinity, gasGravity, gorLL } = cond;
   const br = brine(tC, pMPa, salinity);
   const gs = gas(tC, pMPa, gasGravity);
-  const oil = liveOil(tC, pMPa, OIL_RHO0, gorLL, gasGravity);
-  const frame = mixMinerals(FRAME);
+  const oil = liveOil(tC, pMPa, oilRho0, gorLL, gasGravity);
+  const fr = mixMinerals(frame);
   const mixed = woodMix([
     { sat: sw, k: br.k, rho: br.rho },
     { sat: 1 - sw, k: gs.k, rho: gs.rho },
   ]);
-  return { brine: br, gas: gs, oil, frame, mixed, sw };
+  return { brine: br, gas: gs, oil, frame: fr, mixed, sw };
+}
+
+/** A quartz and clay frame at the given quartz volume fraction. */
+export function quartzClayFrame(quartz) {
+  return [{ frac: quartz, name: 'quartz' }, { frac: 1 - quartz, name: 'clay' }];
 }
 
 /** Intermediate: Gassmann substitution of the in-situ brine sand to
@@ -81,7 +93,7 @@ export function computeSubstitution() {
 /** Advanced: the substituted sand under the Ekene shale — AVO
  *  intercept/gradient/class for the brine and gas cases, the exact
  *  Zoeppritz check, and wedge tuning at the chosen frequency. */
-export function computeAvoScreen(freqHz = CAPSTONE_FREQ_HZ) {
+export function computeAvoScreen(freqHz = TEACHING_FREQ_HZ) {
   const { gasCase } = computeSubstitution();
   const sh = SHALE;
   const brineShuey = shuey(sh.vp, sh.vs, sh.rho, SAND_IN_SITU.vp, SAND_IN_SITU.vs, SAND_IN_SITU.rho, 0);
@@ -105,7 +117,7 @@ export function computeAvoScreen(freqHz = CAPSTONE_FREQ_HZ) {
 export { MINERALS };
 
 // ---- DC24 (Professional): the substitution explorer.
-// The same inverse-then-forward Gassmann pass the capstone runs, but with
+// The inverse-then-forward Gassmann pass of the tier, but with
 // the pore fluid mixed at a saturation the learner chooses and with the two
 // assumed inputs (porosity and mineral modulus) exposed, because the tier's
 // argument is about what the answer is sensitive to. Oracle-reproduced in
@@ -121,10 +133,10 @@ export const KMIN_OPTIONS = [35e9, 36e9, 37e9, 38e9, 40e9];
  * Returns the whole chain plus the round-trip check, which is the tier's
  * sharpest quality control: substituting back must return the log exactly.
  */
-export function computeSubstitutionAt(sw = 0, phi = PHI, kmin = KMIN) {
-  const { vp, vs, rho } = SAND_IN_SITU;
-  const base = computeFluids();
-  const mixed = computeFluids(sw).mixed;
+export function computeSubstitutionAt(sw = 0, phi = PHI, kmin = KMIN, logged = SAND_IN_SITU, cond = CONDITIONS) {
+  const { vp, vs, rho } = logged;
+  const base = computeFluids(TEACHING_SW, cond);
+  const mixed = computeFluids(sw, cond).mixed;
   const mu = rho * vs * vs;
   const ksatInSitu = rho * vp * vp - (4 * mu) / 3;
   const kDry = kdry(ksatInSitu, kmin, base.brine.k, phi);
@@ -134,7 +146,7 @@ export function computeSubstitutionAt(sw = 0, phi = PHI, kmin = KMIN) {
   const back = substituteVels(out.vp, out.vs, out.rho, kmin, phi,
     { k: mixed.k, rho: mixed.rho }, { k: base.brine.k, rho: base.brine.rho });
   const curve = SW_OPTIONS.map((s) => {
-    const m = computeFluids(s).mixed;
+    const m = computeFluids(s, cond).mixed;
     const g = substituteVels(vp, vs, rho, kmin, phi,
       { k: base.brine.k, rho: base.brine.rho }, { k: m.k, rho: m.rho });
     return { sw: s, vp: g.vp, vs: g.vs, rho: g.rho, fluidK: m.k };
@@ -152,7 +164,7 @@ export function computeSubstitutionAt(sw = 0, phi = PHI, kmin = KMIN) {
     oil: base.oil,
     frame: base.frame,
     result: out,
-    logged: { ...SAND_IN_SITU },
+    logged: { vp, vs, rho },
     impedanceLogged: rho * vp,
     impedance: out.rho * out.vp,
     vpvsLogged: vp / vs,
@@ -165,8 +177,8 @@ export function computeSubstitutionAt(sw = 0, phi = PHI, kmin = KMIN) {
 }
 
 /** Shear estimation when the log has none, on the frame lithology split. */
-export function computeShearEstimate(vpTarget = 3000) {
-  const fracs = { sandstone: FRAME[0].frac, shale: FRAME[1].frac };
+export function computeShearEstimate(vpTarget = 3000, sandFrac = FRAME[0].frac, logged = SAND_IN_SITU) {
+  const fracs = { sandstone: sandFrac, shale: 1 - sandFrac };
   const sand = gcLithVs(vpTarget, 'sandstone');
   const shale = gcLithVs(vpTarget, 'shale');
   const arith = fracs.sandstone * sand + fracs.shale * shale;
@@ -181,8 +193,8 @@ export function computeShearEstimate(vpTarget = 3000) {
     mudrock: mudrockVs(vpTarget),
     // The same estimator run at the logged velocity, where a measured shear
     // exists to check it against.
-    atLogged: greenbergCastagnaVs(SAND_IN_SITU.vp, fracs),
-    loggedVs: SAND_IN_SITU.vs,
+    atLogged: greenbergCastagnaVs(logged.vp, fracs),
+    loggedVs: logged.vs,
   };
 }
 
@@ -194,12 +206,19 @@ export function computeShearEstimate(vpTarget = 3000) {
 export const CLASS_THRESHOLDS = [0.01, 0.02, 0.04, 0.05];
 export const ANGLE_MAX_DEG = 40;
 
-export function computeAvoDetail(freqHz = CAPSTONE_FREQ_HZ, threshold = 0.02) {
+/** The Ekene teaching interface: the shale, the logged brine sand and its
+ *  gas-substituted twin. A typed case replaces any of the three. */
+export function ekeneInterface() {
   const { gasCase } = computeSubstitution();
-  const sh = SHALE;
+  return { shale: { ...SHALE }, brineSand: { ...SAND_IN_SITU }, gasSand: { vp: gasCase.vp, vs: gasCase.vs, rho: gasCase.rho } };
+}
+
+export function computeAvoDetail(freqHz = TEACHING_FREQ_HZ, threshold = 0.02, iface = null) {
+  const ek = iface || ekeneInterface();
+  const sh = ek.shale;
   const cases = {
-    brine: { label: 'brine', lower: SAND_IN_SITU },
-    gas: { label: 'gas', lower: gasCase },
+    brine: { label: 'brine', lower: ek.brineSand },
+    gas: { label: 'gas', lower: ek.gasSand },
   };
   const out = {};
   for (const [key, c] of Object.entries(cases)) {

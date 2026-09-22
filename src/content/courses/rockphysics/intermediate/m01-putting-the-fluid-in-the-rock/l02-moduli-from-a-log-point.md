@@ -36,7 +36,7 @@ $$\mu = 2250 \times 1800^2 = 7.29 \times 10^9 \ \mathrm{Pa} = 7.29 \ \mathrm{GPa
 
 $$K_{sat} = 2250 \times 3200^2 - \tfrac{4}{3} \times 7.29 \times 10^9 = 23.04 \times 10^9 - 9.72 \times 10^9 = 13.32 \ \mathrm{GPa}$$
 
-Two of the six capstone values, obtained in two lines.
+Two of the six values the tier's workflow reports, obtained in two lines.
 
 The subscript on $K_{sat}$ matters. That is the bulk modulus of the rock **with its brine in it**, which is what a log measures and is not a property of the frame alone. Separating those is module two.
 
@@ -46,7 +46,7 @@ The values 7.29 and 13.32 have no rounding in them at all, and it is worth seein
 
 $1800^2 = 3{,}240{,}000$ and $2250 \times 3{,}240{,}000 = 7{,}290{,}000{,}000$ exactly. $3200^2 = 10{,}240{,}000$ and $2250 \times 10{,}240{,}000 = 23{,}040{,}000{,}000$ exactly. Four thirds of 7.29e9 is 9.72e9 exactly, since $7.29 \times 4 = 29.16$ and $29.16 / 3 = 9.72$.
 
-Every one of those is an exact binary floating point operation. The fixture was built that way on purpose, so that the first two graded values can be reached with a calculator and any disagreement is a mistake rather than a rounding difference.
+Every one of those is an exact binary floating point operation. The fixture was built that way on purpose, so that the first two values of the workflow can be reached with a calculator and any disagreement is a mistake rather than a rounding difference.
 
 ## The reverse direction
 

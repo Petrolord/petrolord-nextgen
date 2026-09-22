@@ -28073,7 +28073,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_brine_rho",
+    "label": "Brine density",
+    "unit": "kg/m3",
+    "expected": 1021.265271544,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:130 (Tile Brine density)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:130 (Tile Brine density)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "Batzle-Wang brine at the UQUO conditions, typed into the fluid explorer (opens on the Ekene teaching case; the UQUO case is typed over it); fmt(br.rho, 4) against tol 0.05.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'Brine density' fmt(br.rho, 4) kg/m3; tol 0.5 is far above half a unit in the 4th decimal.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/beginner/m06-the-rock-physics-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision in its table, and the fluid panel opens at the capstone Sw 0.8 (probe default state shows it)."
  },
@@ -28106,7 +28133,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_brine_k_gpa",
+    "label": "Brine bulk modulus",
+    "unit": "GPa",
+    "expected": 2.8088703086980726,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:131 (Tile Brine K)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:131 (Tile Brine K)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed into the fluid explorer (opens on the Ekene teaching case; the UQUO case is typed over it); fmt(br.k / 1e9, 6) GPa against tol 0.0005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'Brine K' fmt(br.k / GPA, 6) GPa; tol 0.005 is comfortable.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/beginner/m06-the-rock-physics-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision in its table, and the fluid panel opens at the capstone Sw 0.8 (probe default state shows it)."
  },
@@ -28139,7 +28193,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_gas_k_mpa",
+    "label": "Gas bulk modulus",
+    "unit": "MPa",
+    "expected": 77.87656016365912,
+    "tol": 0.01
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:133 (Tile Gas K)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:133 (Tile Gas K)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed into the fluid explorer (opens on the Ekene teaching case; the UQUO case is typed over it); fmt(gs.k / 1e6, 4) MPa against tol 0.01.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'Gas K' fmt(gs.k / MPA, 4) MPa matches the graded MPa unit; tol 0.1.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/beginner/m06-the-rock-physics-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision in its table, and the fluid panel opens at the capstone Sw 0.8 (probe default state shows it)."
  },
@@ -28172,7 +28253,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_oil_rho",
+    "label": "Live-oil density",
+    "unit": "kg/m3",
+    "expected": 761.2776518976759,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:134 (Tile Live-oil density)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:134 (Tile Live-oil density)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed into the fluid explorer (opens on the Ekene teaching case; the UQUO case is typed over it); the stock-tank density 0.87 g/cc and GOR 72 L/L are typed; fmt(oil.rho, 4) against tol 0.05.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'Live-oil density' fmt(oil.rho, 4) kg/m3; tol 0.5.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/beginner/m06-the-rock-physics-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision in its table, and the fluid panel opens at the capstone Sw 0.8 (probe default state shows it)."
  },
@@ -28205,7 +28313,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_vrh_k_gpa",
+    "label": "Frame K, VRH 82/18 quartz/clay",
+    "unit": "GPa",
+    "expected": 33.007289977240156,
+    "tol": 0.005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:136 (Tile Frame K (VRH))",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:136 (Tile Frame K (VRH))",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "the quartz fraction 0.82 is typed; fmt(frame.k / 1e9, 6) GPa against tol 0.005; also a hand-calc from the mineral table in beginner m03.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'Frame K (VRH)' fmt(frame.k / GPA, 6) GPa; tol 0.05. VRH is also a taught closed form (beginner m03 l03).",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/beginner/m06-the-rock-physics-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision in its table, and the fluid panel opens at the capstone Sw 0.8 (probe default state shows it)."
  },
@@ -28238,7 +28373,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_wood_k_mpa",
+    "label": "Wood mixed-fluid K at Sw 0.7",
+    "unit": "MPa",
+    "expected": 243.81557049231546,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:139 (Tile Wood mixed K)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:139 (Tile Wood mixed K)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed into the fluid explorer (opens on the Ekene teaching case; the UQUO case is typed over it) at Sw 0.7; fmt(mixed.k / 1e6, 4) MPa against tol 0.05.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'Wood mixed K' fmt(mixed.k / MPA, 4) MPa at the Sw the learner enters; default is the capstone 0.8; tol 0.5.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/beginner/m06-the-rock-physics-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision in its table, and the fluid panel opens at the capstone Sw 0.8 (probe default state shows it)."
  },
@@ -28269,7 +28431,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_mu_gpa",
+    "label": "Shear modulus (fluid-blind)",
+    "unit": "GPa",
+    "expected": 8.530021,
+    "tol": 0.001
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:123 (Tile Shear modulus)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:123 (Tile Shear modulus)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "rho vs^2 = 2290 x 1930^2 = 8.530021 GPa exactly (hand-calc, intermediate m01 l02); the tile prints 4 dp, which is exact here; tol 0.001.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "rho vs^2 = 2250*1800^2/1e9 = 7.29 exactly from prompt inputs; the panel tile prints fmt(m.mu/1e9, 4). tol 0.01.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/intermediate/m06-the-substitution-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision; the substitution panel opens on the capstone case (Sw 0.00, phi 0.25, Kmin 37)."
  },
@@ -28300,7 +28489,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_ksat_insitu",
+    "label": "In-situ saturated K",
+    "unit": "GPa",
+    "expected": 14.788514666666666,
+    "tol": 0.001
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:124 (Tile Saturated K, as logged)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:124 (Tile Saturated K, as logged)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "rho vp^2 - 4/3 mu (hand-calc, intermediate m01 l02); tile 4 dp misses by 3.3e-5 against tol 0.001.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "rho vp^2 - 4/3 mu = 23.04 - 9.72 = 13.32 exactly; panel tile 'Saturated K, as logged' fmt(.., 4). tol 0.01.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/intermediate/m06-the-substitution-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision; the substitution panel opens on the capstone case (Sw 0.00, phi 0.25, Kmin 37)."
  },
@@ -28333,7 +28549,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_kdry_gpa",
+    "label": "Dry-frame K (inverse Gassmann)",
+    "unit": "GPa",
+    "expected": 8.689430192271049,
+    "tol": 0.001
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:125 (Tile Dry frame K)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:125 (Tile Dry frame K)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "inverse Gassmann on the typed log point, porosity, mineral modulus and brine at the typed conditions; fmt 6 dp against tol 0.001.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'Dry frame K (inverse Gassmann)' fmt(m.kDry / 1e9, 6) GPa at the default phi 0.25 / Kmin 37 GPa; tol 0.01.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/intermediate/m06-the-substitution-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision; the substitution panel opens on the capstone case (Sw 0.00, phi 0.25, Kmin 37)."
  },
@@ -28366,7 +28609,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_gas_vp",
+    "label": "Gas-case vp",
+    "unit": "m/s",
+    "expected": 3097.9059863959733,
+    "tol": 0.1
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:129 (Tile vp)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:129 (Tile vp)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "forward Gassmann to the typed Sw 0; fmt 4 dp against tol 0.1.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'vp' fmt(m.result.vp, 4) m/s at Sw 0.00 (the default); tol 1.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/intermediate/m06-the-substitution-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision; the substitution panel opens on the capstone case (Sw 0.00, phi 0.25, Kmin 37)."
  },
@@ -28399,7 +28669,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_gas_rho",
+    "label": "Gas-case density",
+    "unit": "kg/m3",
+    "expected": 2108.4251095303703,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:131 (Tile Bulk density)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:131 (Tile Bulk density)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "density bookkeeping rho + phi (rho_gas - rho_brine); fmt 4 dp against tol 0.05.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'Bulk density' fmt(m.result.rho, 4) at Sw 0.00; also hand-reachable 2250 + 0.25(rho_gas - rho_brine) as the walkthrough shows; tol 0.5.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/intermediate/m06-the-substitution-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision; the substitution panel opens on the capstone case (Sw 0.00, phi 0.25, Kmin 37)."
  },
@@ -28430,7 +28727,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_gc_vs",
+    "label": "Greenberg-Castagna vs at vp 2860, 60/40",
+    "unit": "m/s",
+    "expected": 1398.9411689336698,
+    "tol": 0.1
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:146 (Tile Greenberg-Castagna vs)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:146 (Tile Greenberg-Castagna vs)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "the four-line hand-calc of intermediate m05 l03 at 2860 m/s on a 60/40 split, and the new shear block of the substitution explorer; fmt 4 dp against tol 0.1.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "No panel renders Greenberg-Castagna at 3000 m/s (computeShearEstimate in src/lib/rockphysicsTeaching.js:168 is not used by any panel); the lesson gives the sand/shale coefficients and the mean-of-arithmetic-and-harmonic mixing rule, a four-line calculator job. tol 1.",
   "notes": "LEAK: l03-greenberg-castagna.md:38 and the walkthrough both print 1521.197276567149 as \"the sixth capstone value\"."
  },
@@ -28463,7 +28787,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_brine_intercept",
+    "label": "Brine-case Shuey intercept A",
+    "unit": "ratio",
+    "expected": 0.0463745160154875,
+    "tol": 0.0002
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:139 (Tile Brine intercept A)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:139 (Tile Brine intercept A)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "AVO explorer in \"Type an interface\" mode with the stated rocks; fmt 6 dp against tol 0.0002; the impedance-contrast estimate sits outside tol.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'Brine intercept A' fmt(d.brine.a, 6); tol 0.001.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/advanced/m06-the-avo-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision; the AVO panel opens on the capstone case (25 Hz, threshold 0.02)."
  },
@@ -28496,7 +28847,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_brine_gradient",
+    "label": "Brine-case Shuey gradient B",
+    "unit": "ratio",
+    "expected": -0.19829138800891705,
+    "tol": 0.0002
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:140 (Tile Brine gradient B)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:140 (Tile Brine gradient B)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed interface; fmt 6 dp against tol 0.0002.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'Brine gradient B' fmt(d.brine.b, 6); tol 0.001.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/advanced/m06-the-avo-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision; the AVO panel opens on the capstone case (25 Hz, threshold 0.02)."
  },
@@ -28529,7 +28907,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_gas_intercept",
+    "label": "Gas-case Shuey intercept A",
+    "unit": "ratio",
+    "expected": -0.04722349798537935,
+    "tol": 0.0002
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:143 (Tile Gas intercept A)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:143 (Tile Gas intercept A)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed interface with the stated gas twin; fmt 6 dp against tol 0.0002.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'Gas intercept A' fmt(d.gas.a, 6); tol 0.001.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/advanced/m06-the-avo-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision; the AVO panel opens on the capstone case (25 Hz, threshold 0.02)."
  },
@@ -28562,7 +28967,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_gas_gradient",
+    "label": "Gas-case Shuey gradient B",
+    "unit": "ratio",
+    "expected": -0.2894539563550345,
+    "tol": 0.0002
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:144 (Tile Gas gradient B)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:144 (Tile Gas gradient B)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed interface; fmt 6 dp against tol 0.0002.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'Gas gradient B' fmt(d.gas.b, 6); tol 0.001.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/advanced/m06-the-avo-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision; the AVO panel opens on the capstone case (25 Hz, threshold 0.02)."
  },
@@ -28598,30 +29030,58 @@
   "leak": true,
   "reclassed_from": null,
   "shipped": {
-   "migration": "20261024a_w1_rockphysics.sql",
-   "wave": "w1",
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
    "rekey": {
-    "key": "brine_max_shuey_err",
+    "key": "uquo_brine_max_shuey_err",
     "label": "Largest Shuey error, brine case, 0 to 40 deg",
     "unit": "ratio",
-    "expected": 0.005972095765271403,
-    "tol": 0.0001
+    "expected": 0.007543857206650099,
+    "tol": 2e-05
    },
    "rekey_annot": {
     "source": "nextgen-panel",
-    "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:99 (Tile 'Largest Shuey error, brine')",
+    "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:149 (Tile Largest Shuey error, brine)",
     "printed": {
      "decimals": 6
     },
     "display_scale": 1,
-    "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:99 fmt(d.brine.maxErr, 6)",
+    "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:149 (Tile Largest Shuey error, brine)",
     "prompt_precision": null,
     "answer_space": null,
     "guess_p": null,
-    "evidence": "rockphysicsTeaching.computeAvoDetail(...).brine.maxErr = 0.005972095765271403 (max |Shuey - Zoeppritz| at whole degrees 0..40); independent of frequency and threshold. Prints 0.005972 (miss 9.6e-8). Neighbours: gas-case tile 0.002192 and gas Shuey minus exact at 30 deg 0.002175 miss by > 0.0037.",
+    "evidence": "max |Shuey - Zoeppritz| at whole degrees 0 to 40 on the typed brine case; fmt 6 dp misses by under 5e-7 against tol 2e-5; the gas tile beside it (0.002930) and the gas Shuey minus exact at 30 deg sit far outside.",
     "class": "none",
     "owner_decision": false,
-    "leak": true
+    "leak": false
+   },
+   "closes_leak": true,
+   "prior": {
+    "migration": "20261024a_w1_rockphysics.sql",
+    "wave": "w1",
+    "rekey": {
+     "key": "brine_max_shuey_err",
+     "label": "Largest Shuey error, brine case, 0 to 40 deg",
+     "unit": "ratio",
+     "expected": 0.005972095765271403,
+     "tol": 0.0001
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:99 (Tile 'Largest Shuey error, brine')",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:99 fmt(d.brine.maxErr, 6)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "rockphysicsTeaching.computeAvoDetail(...).brine.maxErr = 0.005972095765271403 (max |Shuey - Zoeppritz| at whole degrees 0..40); independent of frequency and threshold. Prints 0.005972 (miss 9.6e-8). Neighbours: gas-case tile 0.002192 and gas Shuey minus exact at 30 deg 0.002175 miss by > 0.0037.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": true
+    }
    }
   },
   "evidence": "Tile 'Gas class' shows 'III' with unit '(3)' (klassNum, src/lib/rockphysicsTeaching.js:223). A 1..4 answer space with tol 0 is guessable at 0.25, and the course telegraphs it: lesson advanced/m03-the-class-flip/l03-gas-is-class-three.md, and the capstone title says the substitution 'flips the AVO class' from the brine case (class I per l02-brine-is-class-one).",
@@ -28656,7 +29116,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_zoep30",
+    "label": "Exact Zoeppritz Rpp at 30 deg, gas",
+    "unit": "ratio",
+    "expected": -0.11353586245965772,
+    "tol": 0.0002
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:146 (Tile Exact Zoeppritz at 30 deg, gas)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:146 (Tile Exact Zoeppritz at 30 deg, gas)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed interface; fmt 6 dp against tol 0.0002; the Shuey value at 30 deg beside it fails by more than 10 tol.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'Exact Zoeppritz at 30 deg, gas' fmt(d.gas.zoep30, 6); the adjacent Shuey tile differs by 0.00217 so the tol 0.001 discriminates.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/advanced/m06-the-avo-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision; the AVO panel opens on the capstone case (25 Hz, threshold 0.02)."
  },
@@ -28689,7 +29176,32 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_rockphysics.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "uquo_tuning_ms",
+    "label": "Wedge tuning thickness at 32 Hz",
+    "unit": "ms",
+    "expected": 12.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:150 (Tile Wedge tuning)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:150 (Tile Wedge tuning)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "the frequency is a typed input; the tile prints the integer tuning sample at 32 Hz (12 ms); tol 0 on an integer on the 1 ms grid; theory 389.85/32 = 12.18 ms agrees.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile 'Wedge tuning at 25 Hz' String(d.tuning.tuningMs) ms, an integer count of 1 ms grid samples (WEDGE.dtMs = 1, src/lib/rockphysicsTeaching.js:43). tol 0 is honest for a displayed integer. Plausible integer range without working is roughly 10 to 30 ms.",
   "notes": "LEAK: the walkthrough lesson /root/wt-b5-nextgen/src/content/courses/rockphysics/advanced/m06-the-avo-workflow/l03-the-capstone-walkthrough.md prints the graded value to full precision; the AVO panel opens on the capstone case (25 Hz, threshold 0.02). Lesson file advanced/m05-resolution/l02-tuning-at-sixteen-milliseconds.md names the answer in its title."
  },

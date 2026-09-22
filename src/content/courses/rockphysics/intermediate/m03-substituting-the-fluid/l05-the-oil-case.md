@@ -1,6 +1,6 @@
 # The oil case
 
-The capstone substitutes gas, because gas is the extreme. Oil is the more common case and it behaves very differently, in a way that decides whether a survey can see it at all.
+The tier's worked case substitutes gas, because gas is the extreme. Oil is the more common case and it behaves very differently, in a way that decides whether a survey can see it at all.
 
 ## The three fluids
 

@@ -26,7 +26,7 @@ The dependence on angle is the whole subject. A reflection coefficient is not a 
 
 **The class flip.** What the Rutherford and Williams classes are, why the brine case is class I and the gas case class III, and how far the brine case is from being called something else. The class boundary is a threshold somebody chose, and the Ekene brine case sits only 1.7 times above it.
 
-**Approximation against exact.** Shuey's relation is an approximation. Zoeppritz's solution is exact. This tier measures the gap, and finds that at 30 degrees it is more than twice the tolerance the capstone allows on the approximated values.
+**Approximation against exact.** Shuey's relation is an approximation. Zoeppritz's solution is exact. This tier measures the gap, and finds that at 30 degrees it is large enough to separate the two at the precision this tier works to.
 
 **Resolution.** An anomaly has a thickness. Below the tuning thickness the top and base reflections merge and the amplitude stops meaning what it appears to mean.
 

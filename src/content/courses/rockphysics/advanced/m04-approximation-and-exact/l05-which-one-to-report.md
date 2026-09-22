@@ -26,7 +26,7 @@ The gas intercept of -0.06282494068620303 is not the reflection coefficient at z
 
 That gap is small and it is not zero, and a study that quotes the intercept as the normal incidence reflection has introduced a systematic error of a quarter of a percent for no reason, since the exact value costs nothing to compute.
 
-The same applies more strongly at angle. Quoting the Shuey value at 30 degrees as the reflection at 30 degrees carries an error of 0.0021746462042847164, which this tier has already shown is more than twice the tolerance the capstone applies elsewhere.
+The same applies more strongly at angle. Quoting the Shuey value at 30 degrees as the reflection at 30 degrees carries an error of 0.0021746462042847164, which this tier has already shown is large enough to separate the two at the precision this tier works to.
 
 ## The reporting pattern that works
 
@@ -56,4 +56,4 @@ Shuey's three term form departs from the exact solution by at most 0.006 for the
 
 A colleague's model reports a reflection coefficient of -0.1246 at 30 degrees for a gas sand. State the question you would ask and why it matters.
 
-Self check: ask whether that is a Shuey evaluation or the exact Zoeppritz value. At Ekene the two are -0.124566 and -0.122391, differing by 0.002175, which is more than twice the tolerance applied to the graded coefficients, so the distinction matters at the precision the number is quoted to.
+Self check: ask whether that is a Shuey evaluation or the exact Zoeppritz value. At Ekene the two are -0.124566 and -0.122391, differing by 0.002175, which is more than twice the 0.001 the coefficients are read to, so the distinction matters at the precision the number is quoted to.

@@ -16,7 +16,7 @@ import {
 } from 'lucide-react';
 import {
   CONDITIONS, OIL_RHO0, SAND_IN_SITU, SHALE, PHI, KMIN, WEDGE,
-  FREQ_OPTIONS, CAPSTONE_FREQ_HZ, CAPSTONE_SW, ROMAN_CLASS,
+  FREQ_OPTIONS, TEACHING_FREQ_HZ, TEACHING_SW, ROMAN_CLASS,
   computeFluids, computeSubstitution, computeAvoScreen,
 } from '@/lib/rockphysicsTeaching';
 import {
@@ -112,8 +112,8 @@ const RockPhysicsLearningPage = () => {
   const { actualRole } = useRole();
   const [gate, setGate] = useState({ loading: true, allowed: false, quota: null });
   const [tier, setTier] = useState('beginner');
-  const [sw, setSw] = useState(CAPSTONE_SW);
-  const [freqHz, setFreqHz] = useState(CAPSTONE_FREQ_HZ);
+  const [sw, setSw] = useState(TEACHING_SW);
+  const [freqHz, setFreqHz] = useState(TEACHING_FREQ_HZ);
   const [capstone, setCapstone] = useState(null);
   const [answers, setAnswers] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -167,7 +167,7 @@ const RockPhysicsLearningPage = () => {
       } else {
         toast({
           title: 'Not passing yet',
-          description: `${res.score}/${res.max_score} answers within tolerance. Read the panels at the capstone settings (Sw ${CAPSTONE_SW}, ${CAPSTONE_FREQ_HZ} Hz) and try again.`,
+          description: `${res.score}/${res.max_score} answers within tolerance. Type the case the brief states into the course panels, read each figure at full precision and try again.`,
           variant: 'destructive',
         });
       }
@@ -246,12 +246,12 @@ const RockPhysicsLearningPage = () => {
               <CardHeader>
                 <CardTitle className="text-white">Reservoir fluids and the mineral frame — Sw {sw}</CardTitle>
                 <CardDescription>
-                  The capstone grades the Sw {CAPSTONE_SW} mix. Drop Sw and watch Wood&apos;s equation collapse the mixed-fluid modulus (lesson 3).
+                  The Ekene teaching case at Sw {TEACHING_SW}; the capstone states a case of its own. Drop Sw and watch Wood&apos;s equation collapse the mixed-fluid modulus (lesson 3).
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex gap-2">
-                  {[1.0, CAPSTONE_SW, 0.5, 0.2].map((s) => (
+                  {[1.0, TEACHING_SW, 0.5, 0.2].map((s) => (
                     <button key={s} type="button" onClick={() => setSw(s)}
                       className={`px-3 py-1.5 rounded-md border text-sm ${sw === s ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
                       Sw {s}
@@ -334,7 +334,7 @@ const RockPhysicsLearningPage = () => {
                   <CardTitle className="text-white">AVO screening panel (Advanced)</CardTitle>
                   <CardDescription>
                     Ekene shale (vp {SHALE.vp}, vs {SHALE.vs}, ρ {SHALE.rho}) over the SAND, brine case against
-                    the gas-substituted case. The capstone grades the {CAPSTONE_FREQ_HZ} Hz tuning pick.
+                    the gas-substituted case, the teaching case. The capstone brief states an interface and a frequency of its own.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -443,7 +443,7 @@ const RockPhysicsLearningPage = () => {
                     </>
                   ) : (
                     <p className="text-red-300 font-medium flex items-center gap-2">
-                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance — read the panels at the capstone settings and try again.
+                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Type the case the brief states into the course panels and try again.
                     </p>
                   )}
                 </div>

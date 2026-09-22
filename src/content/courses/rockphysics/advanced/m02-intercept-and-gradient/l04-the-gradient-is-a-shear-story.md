@@ -53,7 +53,7 @@ Those two lists are different, which is exactly why two coefficients carry more 
 
 Confirm the decomposition adds up, and see what a 10 percent error in the sand's shear velocity would do.
 
-The three terms sum to $0.028802610843132695 + 0.12395208861462988 - 0.4093180439179981 = -0.2565633444602355$, which is the graded gradient.
+The three terms sum to $0.028802610843132695 + 0.12395208861462988 - 0.4093180439179981 = -0.2565633444602355$, which is the Ekene gas gradient.
 
 Now suppose the sand's shear velocity were 1701.8783 m/s rather than 1890.9759, a 10 percent under-estimate. The contrast against the shale falls from 496.98 to 307.88 m/s, and the weighting factor $w$ falls from 0.338195 to 0.300380.
 

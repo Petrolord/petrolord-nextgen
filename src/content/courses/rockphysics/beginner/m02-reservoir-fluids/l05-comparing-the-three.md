@@ -44,7 +44,7 @@ Now run the argument backwards, which is the version worth remembering. Suppose 
 
 Module 4 mixes brine with gas in the pore space and quantifies this, but the headline belongs here, because it follows directly from the table above.
 
-At the capstone saturation of Sw 0.8, meaning 80 percent brine and 20 percent gas, the mixed pore fluid has a bulk modulus of 257.3340919366766 MPa and a density of 848.7933489234579 kg/m3.
+At the Ekene saturation of Sw 0.8, meaning 80 percent brine and 20 percent gas, the mixed pore fluid has a bulk modulus of 257.3340919366766 MPa and a density of 848.7933489234579 kg/m3.
 
 Compare each of those against pure brine. The density fell from 1017.8249875 to 848.7933489234579 kg/m3, which is a linear mix and a modest move. The bulk modulus fell from 2.6978112899395996 GPa to 257.3340919366766 MPa, which is a fall by a factor of ten for a change of 20 percent in saturation.
 
