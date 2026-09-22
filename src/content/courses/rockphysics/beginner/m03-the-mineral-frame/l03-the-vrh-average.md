@@ -18,7 +18,7 @@ The engine carries the Reuss bound at full machine precision rather than the six
 
 $$K_{VRH} = 30.87940062475596 \text{ GPa}$$
 
-That is the number the capstone grades, with a tolerance of 0.05 GPa. Your hand arithmetic from the rounded bounds lands well inside that tolerance, which is the point of quoting a tolerance in the first place. Keep both facts in view: the engine's value is the reference, and your arithmetic reproducing it to six digits is the check that you did the right operation.
+That is the frame modulus of the Ekene teaching case. Your hand arithmetic from the rounded bounds lands within a few thousandths of a GPa of it, which is the point of carrying enough digits in the first place. Keep both facts in view: the engine's value is the reference, and your arithmetic reproducing it to six digits is the check that you did the right operation.
 
 The same average applied to the shear bounds of 33.570000 GPa and 16.939444 GPa gives
 

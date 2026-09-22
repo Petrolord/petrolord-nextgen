@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  CONDITIONS, OIL_RHO0, FRAME, CAPSTONE_SW, computeFluids,
+  CONDITIONS, OIL_RHO0, FRAME, TEACHING_SW, computeFluids, quartzClayFrame,
 } from '@/lib/rockphysicsTeaching';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -15,26 +15,61 @@ const H = 190;
 
 const fmt = (v, d = 4) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 
-const FluidExplorer = () => {
-  const [sw, setSw] = useState(String(CAPSTONE_SW));
+// The panel opens on the Ekene teaching case. Every condition is a typed
+// input, so a case of your own (the capstone states one) is worked by
+// typing it in; nothing here preloads it.
+const DEFAULTS = {
+  sw: String(TEACHING_SW),
+  tC: String(CONDITIONS.tC),
+  pMPa: String(CONDITIONS.pMPa),
+  ppm: String(Math.round(CONDITIONS.salinity * 1e6)),
+  gasGravity: String(CONDITIONS.gasGravity),
+  oilRho0: String(OIL_RHO0),
+  gorLL: String(CONDITIONS.gorLL),
+  quartz: String(FRAME[0].frac),
+};
 
-  const swV = Number(sw);
-  const valid = Number.isFinite(swV) && swV >= 0 && swV <= 1;
+const FluidExplorer = () => {
+  const [inp, setInp] = useState(DEFAULTS);
+  const set = (k) => (v) => setInp((o) => ({ ...o, [k]: v }));
+
+  const n = Object.fromEntries(Object.entries(inp).map(([k, v]) => [k, Number(v)]));
+  const swV = n.sw;
+  const valid = Object.values(n).every(Number.isFinite)
+    && swV >= 0 && swV <= 1 && n.quartz >= 0 && n.quartz <= 1
+    && n.pMPa > 0 && n.ppm >= 0 && n.gasGravity > 0 && n.oilRho0 > 0 && n.gorLL >= 0;
 
   const res = useMemo(() => {
     if (!valid) return null;
     try {
-      return computeFluids(swV);
+      const cond = { tC: n.tC, pMPa: n.pMPa, salinity: n.ppm / 1e6, gasGravity: n.gasGravity, gorLL: n.gorLL };
+      const out = computeFluids(swV, cond, n.oilRho0, quartzClayFrame(n.quartz));
+      const finite = [out.brine.rho, out.brine.k, out.gas.k, out.oil.rho, out.frame.k, out.mixed.k].every(Number.isFinite);
+      return finite ? out : null;
     } catch {
       return null;
     }
-  }, [swV, valid]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [valid, inp]);
+
+  const inputs = (
+    <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
+      <NumField label="Water saturation (fraction)" value={inp.sw} onChange={set('sw')} />
+      <NumField label="Temperature (degC)" value={inp.tC} onChange={set('tC')} />
+      <NumField label="Pore pressure (MPa)" value={inp.pMPa} onChange={set('pMPa')} />
+      <NumField label="Brine salinity (ppm)" value={inp.ppm} onChange={set('ppm')} />
+      <NumField label="Gas gravity" value={inp.gasGravity} onChange={set('gasGravity')} />
+      <NumField label="Stock-tank oil density (g/cc)" value={inp.oilRho0} onChange={set('oilRho0')} />
+      <NumField label="Oil GOR (L/L)" value={inp.gorLL} onChange={set('gorLL')} />
+      <NumField label="Quartz fraction (rest clay)" value={inp.quartz} onChange={set('quartz')} />
+    </div>
+  );
 
   if (!res) {
     return (
-      <PanelShell title="Fluid explorer" subtitle="Enter a water saturation between 0 and 1.">
-        <NumField label="Water saturation (fraction)" value={sw} onChange={setSw} />
-        <Note>The saturation must be a number from 0 to 1.</Note>
+      <PanelShell title="Fluid explorer" subtitle="Enter the conditions, the fluids and a water saturation between 0 and 1.">
+        {inputs}
+        <Note>Every input must be a number; saturation and quartz fraction run from 0 to 1, and pressure, gravity and oil density must be positive.</Note>
       </PanelShell>
     );
   }
@@ -50,13 +85,12 @@ const FluidExplorer = () => {
 
   return (
     <PanelShell title="Fluid explorer"
-      subtitle={`The Ekene pore fluid at ${CONDITIONS.tC} degC and ${CONDITIONS.pMPa} MPa, brine ${CONDITIONS.salinity * 1000} ppt, gas gravity ${CONDITIONS.gasGravity}, oil rho0 ${OIL_RHO0} at GOR ${CONDITIONS.gorLL} L/L. Frame ${FRAME[0].frac * 100} percent quartz and ${FRAME[1].frac * 100} percent clay.`}>
-      <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
-        <NumField label="Water saturation (fraction)" value={sw} onChange={setSw} />
-        <div className="text-xs text-gray-500 sm:col-span-3">
-          The capstone mixes at Sw {CAPSTONE_SW}. Try 0.99: one percent of gas still takes a third
-          off the fluid modulus, and the density hardly moves.
-        </div>
+      subtitle={`The pore fluid at ${inp.tC} degC and ${inp.pMPa} MPa, brine ${inp.ppm} ppm, gas gravity ${inp.gasGravity}, oil rho0 ${inp.oilRho0} g/cc at GOR ${inp.gorLL} L/L. Frame ${inp.quartz} quartz, the rest clay. It opens on the Ekene sand.`}>
+      {inputs}
+      <div className="text-xs text-gray-500">
+        The Ekene sand mixes at Sw {TEACHING_SW}. Try 0.99: one percent of gas still takes a third
+        off the fluid modulus, and the density hardly moves. To work another case, type its
+        conditions over the Ekene ones.
       </div>
 
       <div className="overflow-x-auto">

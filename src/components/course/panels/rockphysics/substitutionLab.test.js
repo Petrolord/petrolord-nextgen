@@ -4,13 +4,13 @@ import {
 } from '@/lib/rockphysicsTeaching';
 
 // Pins the substitution-explorer panel math to the live NG6 Professional
-// capstone oracle (rockphysics/goldens) and to the DC24 teaching facts.
+// capstone oracle until W5a (rockphysics/goldens), now the teaching case, and to the DC24 teaching facts.
 
 describe('rockphysics substitution explorer: engine math', () => {
   const s = computeSubstitution();
   const gas = computeSubstitutionAt(0);
 
-  it('reproduces the NG6 capstone answer key', () => {
+  it('reproduces the Ekene teaching case (the pre-W5 capstone key)', () => {
     expect(s.mu / 1e9).toBeCloseTo(7.29, 9);
     expect(s.ksatInSitu / 1e9).toBeCloseTo(13.32, 9);
     expect(s.kDry / 1e9).toBeCloseTo(7.350343061720982, 9);

@@ -2,9 +2,9 @@
 
 The panel draws the approximation and the exact solution together for both cases. This lesson reads that gap.
 
-## The gap at the graded angle
+## The gap at 30 degrees
 
-The capstone asks for the exact Zoeppritz value at 30 degrees for the gas case:
+On the Ekene gas case, the exact Zoeppritz value at 30 degrees is:
 
 $$R_{exact}(30) = -0.12239091302671612$$
 
@@ -14,11 +14,11 @@ The difference is $0.0021746462042847164$.
 
 ## Why the capstone asks for the exact one
 
-Because the difference is larger than the tolerance on the approximated fields.
+Because the difference is larger than the precision this tier reports coefficients to.
 
-The graded intercepts and gradients carry a tolerance of 0.001. The gap between Shuey and exact at 30 degrees is 2.17 times that.
+Intercepts and gradients are read to 0.001 or better. On Ekene the gap between Shuey and exact at 30 degrees is 2.17 times that.
 
-So a capstone that asked for the Shuey value at 30 degrees and graded it to 0.001 would be treating a difference it considers significant elsewhere as though it were noise. Asking for the exact value avoids that, and it makes a point: the approximation and the exact solution are distinguishable at the precision this tier works to.
+So a capstone that asked for the Shuey value at 30 degrees and graded it to a tight tolerance would be treating a difference it considers significant elsewhere as though it were noise. Asking for the exact value avoids that, and it makes a point: the approximation and the exact solution are distinguishable at the precision this tier works to.
 
 ## The gap across the range
 

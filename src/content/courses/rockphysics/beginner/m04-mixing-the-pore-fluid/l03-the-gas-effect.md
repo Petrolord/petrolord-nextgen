@@ -28,7 +28,7 @@ Start with a fully brine saturated sand. The pore fluid modulus is 2697.8113 MPa
 
 That is a fall of about a third, caused by a saturation change that no logging tool can resolve and no core measurement would report as different from fully brine saturated. One percent gas, and the pore fluid has lost a third of its stiffness.
 
-Keep going. At 5 percent gas the modulus is 800.3183 MPa, less than a third of the brine value. At 10 percent gas it is 469.8509 MPa. At 20 percent gas, the capstone case, it is 257.3341 MPa, down by a factor of ten from the brine case.
+Keep going. At 5 percent gas the modulus is 800.3183 MPa, less than a third of the brine value. At 10 percent gas it is 469.8509 MPa. At 20 percent gas, the Ekene teaching case, it is 257.3341 MPa, down by a factor of ten from the brine case.
 
 ## The rest of the range does almost nothing
 

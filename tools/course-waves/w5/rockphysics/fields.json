@@ -1,0 +1,154 @@
+[
+ {
+  "tier": "beginner",
+  "key": "uquo_brine_rho",
+  "label": "Brine density",
+  "unit": "kg/m3",
+  "expected": 1021.265271544,
+  "tol": 0.05
+ },
+ {
+  "tier": "beginner",
+  "key": "uquo_brine_k_gpa",
+  "label": "Brine bulk modulus",
+  "unit": "GPa",
+  "expected": 2.8088703086980726,
+  "tol": 0.0005
+ },
+ {
+  "tier": "beginner",
+  "key": "uquo_gas_k_mpa",
+  "label": "Gas bulk modulus",
+  "unit": "MPa",
+  "expected": 77.87656016365912,
+  "tol": 0.01
+ },
+ {
+  "tier": "beginner",
+  "key": "uquo_oil_rho",
+  "label": "Live-oil density",
+  "unit": "kg/m3",
+  "expected": 761.2776518976759,
+  "tol": 0.05
+ },
+ {
+  "tier": "beginner",
+  "key": "uquo_vrh_k_gpa",
+  "label": "Frame K, VRH 82/18 quartz/clay",
+  "unit": "GPa",
+  "expected": 33.007289977240156,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "uquo_wood_k_mpa",
+  "label": "Wood mixed-fluid K at Sw 0.7",
+  "unit": "MPa",
+  "expected": 243.81557049231546,
+  "tol": 0.05
+ },
+ {
+  "tier": "intermediate",
+  "key": "uquo_mu_gpa",
+  "label": "Shear modulus (fluid-blind)",
+  "unit": "GPa",
+  "expected": 8.530021,
+  "tol": 0.001
+ },
+ {
+  "tier": "intermediate",
+  "key": "uquo_ksat_insitu",
+  "label": "In-situ saturated K",
+  "unit": "GPa",
+  "expected": 14.788514666666666,
+  "tol": 0.001
+ },
+ {
+  "tier": "intermediate",
+  "key": "uquo_kdry_gpa",
+  "label": "Dry-frame K (inverse Gassmann)",
+  "unit": "GPa",
+  "expected": 8.689430192271049,
+  "tol": 0.001
+ },
+ {
+  "tier": "intermediate",
+  "key": "uquo_gas_vp",
+  "label": "Gas-case vp",
+  "unit": "m/s",
+  "expected": 3097.9059863959733,
+  "tol": 0.1
+ },
+ {
+  "tier": "intermediate",
+  "key": "uquo_gas_rho",
+  "label": "Gas-case density",
+  "unit": "kg/m3",
+  "expected": 2108.4251095303703,
+  "tol": 0.05
+ },
+ {
+  "tier": "intermediate",
+  "key": "uquo_gc_vs",
+  "label": "Greenberg-Castagna vs at vp 2860, 60/40",
+  "unit": "m/s",
+  "expected": 1398.9411689336698,
+  "tol": 0.1
+ },
+ {
+  "tier": "advanced",
+  "key": "uquo_brine_intercept",
+  "label": "Brine-case Shuey intercept A",
+  "unit": "ratio",
+  "expected": 0.0463745160154875,
+  "tol": 0.0002
+ },
+ {
+  "tier": "advanced",
+  "key": "uquo_brine_gradient",
+  "label": "Brine-case Shuey gradient B",
+  "unit": "ratio",
+  "expected": -0.19829138800891705,
+  "tol": 0.0002
+ },
+ {
+  "tier": "advanced",
+  "key": "uquo_gas_intercept",
+  "label": "Gas-case Shuey intercept A",
+  "unit": "ratio",
+  "expected": -0.04722349798537935,
+  "tol": 0.0002
+ },
+ {
+  "tier": "advanced",
+  "key": "uquo_gas_gradient",
+  "label": "Gas-case Shuey gradient B",
+  "unit": "ratio",
+  "expected": -0.2894539563550345,
+  "tol": 0.0002
+ },
+ {
+  "tier": "advanced",
+  "key": "uquo_brine_max_shuey_err",
+  "label": "Largest Shuey error, brine case, 0 to 40 deg",
+  "unit": "ratio",
+  "expected": 0.007543857206650099,
+  "tol": 0.00002
+ },
+ {
+  "tier": "advanced",
+  "key": "uquo_zoep30",
+  "label": "Exact Zoeppritz Rpp at 30 deg, gas",
+  "unit": "ratio",
+  "expected": -0.11353586245965772,
+  "tol": 0.0002
+ },
+ {
+  "tier": "advanced",
+  "key": "uquo_tuning_ms",
+  "label": "Wedge tuning thickness at 32 Hz",
+  "unit": "ms",
+  "expected": 12,
+  "tol": 0
+ }
+]

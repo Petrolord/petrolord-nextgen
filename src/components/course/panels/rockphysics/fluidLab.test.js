@@ -1,16 +1,17 @@
 import { describe, it, expect } from 'vitest';
 import {
-  CAPSTONE_SW, FRAME, MINERALS, computeFluids,
+  TEACHING_SW, FRAME, MINERALS, computeFluids,
 } from '@/lib/rockphysicsTeaching';
 
-// Pins the fluid-explorer panel math to the live NG8 Beginner capstone oracle.
+// Pins the fluid-explorer panel math to the Ekene teaching case (the NG8 beginner
+// capstone key until W5a moved the capstone to a case of its own).
 const GPA = 1e9;
 const MPA = 1e6;
 
 describe('rockphysics fluid explorer: engine math', () => {
-  const r = computeFluids(CAPSTONE_SW);
+  const r = computeFluids(TEACHING_SW);
 
-  it('reproduces the NG8 beginner capstone answer key at Sw 0.8', () => {
+  it('reproduces the Ekene teaching case at Sw 0.8 (the pre-W5 capstone key)', () => {
     expect(r.brine.rho).toBeCloseTo(1017.8249875, 6);
     expect(r.brine.k / GPA).toBeCloseTo(2.6978112899395996, 9);
     expect(r.gas.k / MPA).toBeCloseTo(55.71865290286663, 9);
@@ -37,14 +38,14 @@ describe('rockphysics fluid explorer: engine math', () => {
     expect(r.frame.rho).toBe(0.7 * MINERALS.quartz.rho + 0.3 * MINERALS.clay.rho);
     expect(r.frame.rho).toBe(2629);
     expect(r.mixed.rho).toBeCloseTo(
-      CAPSTONE_SW * r.brine.rho + (1 - CAPSTONE_SW) * r.gas.rho, 9,
+      TEACHING_SW * r.brine.rho + (1 - TEACHING_SW) * r.gas.rho, 9,
     );
     expect(r.mixed.rho).toBeCloseTo(848.7933489234579, 6);
   });
 
   it('mixes the fluid modulus harmonically, so the gas dominates', () => {
-    const cBrine = CAPSTONE_SW / r.brine.k;
-    const cGas = (1 - CAPSTONE_SW) / r.gas.k;
+    const cBrine = TEACHING_SW / r.brine.k;
+    const cGas = (1 - TEACHING_SW) / r.gas.k;
     expect(1 / (cBrine + cGas)).toBeCloseTo(r.mixed.k, 3);
     // 20 percent gas carries 92.4 percent of the compliance.
     expect((cGas / (cBrine + cGas)) * 100).toBeCloseTo(92.4, 1);

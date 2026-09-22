@@ -50,7 +50,7 @@ The tuning tile carries the thickness at the selected frequency.
 
 {{panel:rp-avo-explorer}}
 
-At 25 Hz it reads 16 ms. That single number is one of the seven capstone fields, and it is graded exactly, with no tolerance, because it is an integer number of grid samples rather than a measured quantity.
+At 25 Hz it reads 16 ms. The capstone grades this reading at the frequency its own brief states, and it grades it exactly, with no tolerance, because it is an integer number of grid samples rather than a measured quantity.
 
 ## Worked example
 
@@ -71,7 +71,7 @@ Now apply it:
 | 40 Hz | 9.746210015420951 | 10 |
 | 50 Hz | 7.796968012336761 | 8 |
 
-Every reported value is the theoretical one rounded up to the 1 ms grid, and the largest discrepancy is 0.41 ms at 25 Hz.
+Every reported value is the theoretical one moved to the nearest sample on the 1 ms grid, and the largest discrepancy is 0.41 ms at 25 Hz.
 
 ## Exercise
 

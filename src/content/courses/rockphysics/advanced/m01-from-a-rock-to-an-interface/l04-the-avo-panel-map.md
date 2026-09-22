@@ -32,13 +32,13 @@ Those two shapes are what an interpreter looks at on a gather, and they are visi
 
 The first row is the brine case: intercept, gradient, class, and the angle at which its polarity flips.
 
-The second row is the gas case: intercept, gradient, class, and the exact Zoeppritz value at 30 degrees, which is one of the seven capstone fields.
+The second row is the gas case: intercept, gradient, class, and the exact Zoeppritz value at 30 degrees, a reading the capstone also asks for on its own interface.
 
 The third row holds the comparison readings: Shuey at 30 degrees for the gas case, printed beside the exact value so the gap is a subtraction; the largest error between approximation and exact over the whole angle range for each case; and the wedge tuning thickness.
 
 ## What to notice first
 
-Set the frequency to 25 Hz and the threshold to 0.02, which is the capstone configuration, and read across.
+Leave the Ekene interface at 25 Hz and a threshold of 0.02, which is how the panel opens, and read across.
 
 The brine intercept is 0.034344 and the gas intercept -0.062825. Both are close to the exact normal incidence values from the last lesson, 0.034457 and -0.062991, and neither is equal to them.
 

@@ -10,7 +10,7 @@ Inverse Gassmann does that, given the saturated modulus, the mineral modulus, th
 
 $$K_{dry} = \frac{K_{sat}\left(\dfrac{\phi K_{min}}{K_{fl}} + 1 - \phi\right) - K_{min}}{\dfrac{\phi K_{min}}{K_{fl}} + \dfrac{K_{sat}}{K_{min}} - 1 - \phi}$$
 
-For the Ekene sand that returns 7.350343061720982 GPa, which is the third capstone value.
+For the Ekene sand that returns 7.350343061720982 GPa, the dry frame of the teaching case.
 
 The dry frame is the object the rock brings to the problem. It is what the grains and their contacts do, and it is the only part of the answer that does not depend on what is in the pores.
 
@@ -32,7 +32,7 @@ The bulk density changes by simple bookkeeping. Take out a pore volume's worth o
 
 $$\rho' = \rho + \phi(\rho_{fl}' - \rho_{fl})$$
 
-which for Ekene is $2250 + 0.25(172.66679461728904 - 1017.8249875) = 2038.7104517793223$ kg/m3, the fifth capstone value.
+which for Ekene is $2250 + 0.25(172.66679461728904 - 1017.8249875) = 2038.7104517793223$ kg/m3, the gas case density of the teaching case.
 
 ## Putting the four together
 
@@ -58,7 +58,7 @@ A cubic metre of the logged rock weighs 2250 kg. A quarter of that cubic metre i
 
 Replace the brine with gas. The mineral is untouched at 1995.544 kg. The gas weighs $0.25 \times 172.66679461728904 = 43.167$ kg. The total is $1995.544 + 43.167 = 2038.710$ kg.
 
-That reproduces the graded 2038.7104517793223 kg/m3. Nothing in the density step involves Gassmann at all: it is a change of contents in a container of known size.
+That reproduces the panel's 2038.7104517793223 kg/m3. Nothing in the density step involves Gassmann at all: it is a change of contents in a container of known size.
 
 ## Exercise
 

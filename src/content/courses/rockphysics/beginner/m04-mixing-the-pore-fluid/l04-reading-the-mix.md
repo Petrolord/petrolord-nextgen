@@ -6,7 +6,7 @@ You now have the formula, the arithmetic and the saturation table. This lesson t
 
 A harmonic average is pulled toward its smallest input. Whichever fluid has the lowest bulk modulus sets the character of the mixture, and it does so at saturations far below half.
 
-The capstone mix makes the point. Brine at 2697.8113 MPa and gas at 55.7187 MPa, mixed at 80 percent brine, give 257.3340919366766 MPa. Four fifths of the pore volume is the stiff phase and the answer still sits down among the soft phase.
+The Ekene mix makes the point. Brine at 2697.8113 MPa and gas at 55.7187 MPa, mixed at 80 percent brine, give 257.3340919366766 MPa. Four fifths of the pore volume is the stiff phase and the answer still sits down among the soft phase.
 
 This has an immediate practical use. Before you calculate anything, look at your phases, find the softest one, and expect the answer near it. If your calculation comes back near the stiff phase instead, you have made an error, most often by averaging the moduli arithmetically or by mixing a GPa value into an MPa sum.
 
@@ -14,7 +14,7 @@ This has an immediate practical use. Before you calculate anything, look at your
 
 The word average is the trap. People say Wood's equation averages the fluids, then reach for the intuition that goes with an arithmetic mean, which is that the answer lands somewhere sensible between the inputs in proportion to the amounts.
 
-That intuition is right for density and wrong for modulus. The density of the capstone mix is 848.7933489234579 kg/m3, four fifths of the way from gas to brine, exactly where the saturations put it. The modulus is 257.3340919366766 MPa, which is not four fifths of the way from anything to anything.
+That intuition is right for density and wrong for modulus. The density of the Ekene mix is 848.7933489234579 kg/m3, four fifths of the way from gas to brine, exactly where the saturations put it. The modulus is 257.3340919366766 MPa, which is not four fifths of the way from anything to anything.
 
 The honest description is that Wood's equation averages compliances, and compliance is the reciprocal of modulus. Reciprocals invert the sense of large and small, so the phase that is least important by volume becomes the most important in the sum. If you can hold that one sentence, the whole of the saturation table follows from it.
 
