@@ -113,14 +113,14 @@
    {
     "ord": 16,
     "replaces": "531df524e9b4a3d82333116ec48e671d",
-    "prompt": "The UMUOJI gross rock volume at 2120 m is {{b_grv}} million m3. With NTG 0.75, porosity 0.21, Sw 0.30, Bo 1.35 and 6.2898 stb per m3, what STOIIP does the chain give?",
+    "prompt": "The UMUOJI gross rock volume at 2120 m is {{b_grv}} million m3. With NTG 0.80, porosity 0.21, Sw 0.30, Bo 1.35 and 6.2898 stb per m3, what STOIIP does the chain give?",
     "correct": "{{b_stoiip}} MMstb in place",
     "distractors": [
      "{{b_stoiipSwNotSo}} MMstb, times Sw",
      "{{b_stoiipTimesBo}} MMstb, times Bo",
      "{{b_hcpvOverBo}} MMstb, still in m3"
     ],
-    "explanation": "STOIIP is GRV times 0.75 times 0.21 times 0.70, divided by 1.35 and times 6.2898, which is {{b_stoiip}} MMstb. Multiplying by Sw instead of 0.70 gives {{b_stoiipSwNotSo}}.",
+    "explanation": "STOIIP is GRV times 0.80 times 0.21 times 0.70, divided by 1.35 and times 6.2898, which is {{b_stoiip}} MMstb. Multiplying by Sw instead of 0.70 gives {{b_stoiipSwNotSo}}.",
     "why_wrong": [
      "books the connate water: multiply by 1 minus Sw, which is 0.70",
      "Bo converts reservoir to stock tank volume, so the chain divides by it",

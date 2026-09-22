@@ -32,7 +32,7 @@ const PHI_WELL = { 'Umuoji-1': 0.19, 'Umuoji-2': 0.17, 'Umuoji-3': 0.21, 'Umuoji
 const CELL = 50;
 const EXT = 600;
 const OWC = 2120;
-const PROPS = { ntg: 0.75, phi: 0.21, sw: 0.30, bo: 1.35 };
+const PROPS = { ntg: 0.80, phi: 0.21, sw: 0.30, bo: 1.35 };
 const M3_TO_STB = 6.2898;
 const FAULT_X = 1600;
 const KRIGE = { model: 'spherical', range: 1000, sill: 1, nugget: 0 };
@@ -344,7 +344,7 @@ for (const k of ['b_pctSw36', 'b_pctBo15', 'i_eastPctDown', 'i_westPctDown', 'a_
 }
 // the constants as the items quote them
 for (const [k, v] of Object.entries({
-  c_ntg: '0.75', c_phi: '0.21', c_sw: '0.30', c_so: '0.70', c_bo: '1.35', c_bo2: '1.45', c_sw2: '0.40',
+  c_ntg: PROPS.ntg.toFixed(2), c_phi: '0.21', c_sw: '0.30', c_so: '0.70', c_bo: '1.35', c_bo2: '1.45', c_sw2: '0.40',
   c_cell: '50', c_cellArea: '2500', c_ext: '600', c_owc: '2120', c_owcS: '2115', c_owcD: '2125',
   c_fault: '1600', c_conv: '6.2898', c_grid100: '100', c_area100: '10000', c_ten: '10', c_dip: '60',
   c_range: '1000', c_sand34: '34', c_so2: '0.60', c_phi10: '0.231', c_tan60: '1.732', c_pX: '1500', c_pY: '1300', c_krigeY: '2025',

@@ -45,13 +45,13 @@ const BOFB = 1.489;               // separator-test Bo at the bubble point
 const SEP_PSIG = 115;             // separator, psig
 const SEP_P = SEP_PSIG + PSIG_BASE;
 const SEP_T = 80;                 // separator and tank temperature, F
-const CO = 1.3e-5;                // undersaturated oil compressibility, 1/psi
+const CO = 2.2e-5;                // undersaturated oil compressibility, 1/psi
 const SALINITY = 60000;           // formation water, ppm
 // differential liberation, as the report prints it (Amyx inputs)
 const BODB = 1.562;               // differential Bo at the bubble point
 const RSDB = 952;                 // differential Rs at the bubble point
 const P_DL = 2000;                // a depletion step, psia
-const BOD = 1.391;                // differential Bo at that step
+const BOD = 1.372;                // differential Bo at that step
 const RSD = 610;                  // differential Rs at that step
 
 const P_FLASH = 1100;             // the flash the advanced items read, psia
@@ -76,7 +76,7 @@ const inputs = {
 };
 put('in_t', T_F, 0); put('in_pb', PB, 2); put('in_pb_psig', PB_PSIG, 0); put('in_base', PSIG_BASE, 2);
 put('in_pi', PI, 0); put('in_api', API, 1); put('in_gg', GG, 2); put('in_rs', RS, 0); put('in_bofb', BOFB, 3);
-put('in_sep_psig', SEP_PSIG, 0); put('in_sep_p', SEP_P, 2); put('in_sep_t', SEP_T, 0); put('in_co', '0.000013');
+put('in_sep_psig', SEP_PSIG, 0); put('in_sep_p', SEP_P, 2); put('in_sep_t', SEP_T, 0); put('in_co', CO.toFixed(6));
 put('in_sal', SALINITY, 0); put('in_bodb', BODB, 3); put('in_rsdb', RSDB, 0); put('in_pdl', P_DL, 0);
 put('in_bod', BOD, 3); put('in_rsd', RSD, 0); put('in_mw', PLUS.mw, 0); put('in_sg', PLUS.sg, 4);
 put('in_c1', Z[2], 4); put('in_c7', Z[10], 4); put('in_undersat', PI - PB, 2);
