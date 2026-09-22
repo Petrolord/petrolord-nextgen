@@ -340,6 +340,95 @@ export const erhaArgs = () => ({
   transmissivity: S.ERHA_TAU,
 });
 
+/* ------------------------------------------------ a pool fire, as typed */
+
+// The heat view of the fire explorer takes the pool a learner types, the same
+// inputs the flame view takes plus a target distance and a stated
+// transmissivity, and runs the whole solid flame chain through the engine with
+// nothing rounded in between. It opens on ERHA, the heptane teaching fire, at
+// the heat view's teaching distance, and every input can be retyped.
+
+/** The typed pool fire the heat view opens on: ERHA, the heptane teaching fire. */
+export const TYPED_POOL_DEFAULT = Object.freeze({
+  fuel: S.ERHA.fuel,
+  poolDiameterM: String(S.ERHA.poolDiameterM),
+  windSpeed10mMS: String(S.ERHA_WIND),
+  airDensityKgM3: String(S.ERHA.airDensityKgM3),
+  airKinematicViscosityM2S: String(S.ERHA.airKinematicViscosityM2S),
+  heatOfCombustionJKg: String(S.ERHA.heatOfCombustionJKg),
+  radiativeFraction: String(S.ERHA.radiativeFraction),
+  sootFraction: String(S.ERHA.sootFraction),
+  distanceFromCentreM: String(S.ERHA_DISTANCES[2]),
+  transmissivity: String(S.ERHA_TAU),
+});
+
+const TYPED_POOL_NUMBERS = [
+  ['poolDiameterM', 'the pool diameter'],
+  ['windSpeed10mMS', 'the wind at 10 m'],
+  ['airDensityKgM3', 'the air density'],
+  ['airKinematicViscosityM2S', 'the air kinematic viscosity'],
+  ['heatOfCombustionJKg', 'the heat of combustion'],
+  ['radiativeFraction', 'the radiative fraction'],
+  ['sootFraction', 'the soot fraction'],
+  ['distanceFromCentreM', 'the target distance from the pool centre'],
+  ['transmissivity', 'the transmissivity'],
+];
+
+/**
+ * A typed pool fire through the solid flame chain: the Babrauskas burning
+ * flux of the fuel at the diameter, the Thomas flame length with wind, the
+ * tilt, both surface emissive powers (Mudan from the diameter, and the
+ * radiative fraction with soot that the heat flux uses), the view factor at
+ * a ground level target the flame leans toward, and the heat flux with the
+ * stated transmissivity. Returns { ok, errors, warnings, ...values }; a bad
+ * input is refused in plain words, and an engine refusal is its own message.
+ * Nothing is rounded.
+ */
+export const typedPoolFire = (inputs = {}) => {
+  const errors = [];
+  const n = {};
+  TYPED_POOL_NUMBERS.forEach(([k, what]) => {
+    const v = typeof inputs[k] === 'number' ? inputs[k] : parseNumber(inputs[k]);
+    if (v === undefined) errors.push(`Type ${what}.`);
+    else if (!Number.isFinite(v)) errors.push(`${what[0].toUpperCase()}${what.slice(1)} is not a number.`);
+    else n[k] = v;
+  });
+  if (!FUELS.includes(inputs.fuel)) errors.push('Pick a fuel from the Babrauskas table.');
+  const fail = (r) => ({ ok: false, errors: [...errors, ...(r ? [r.error] : [])], warnings: [], field: r ? r.field : undefined });
+  if (errors.length) return fail(null);
+  const b = E.poolBurningRate({ method: 'babrauskas', fuel: inputs.fuel, poolDiameterM: n.poolDiameterM });
+  if (b.error) return fail(b);
+  const common = {
+    poolDiameterM: n.poolDiameterM, burningFluxKgM2S: b.burningFluxKgM2S, heatOfCombustionJKg: n.heatOfCombustionJKg,
+    flameLengthMethod: 'thomas-wind', airDensityKgM3: n.airDensityKgM3, windSpeed10mMS: n.windSpeed10mMS,
+    airKinematicViscosityM2S: n.airKinematicViscosityM2S,
+    sep: { method: 'radiative-fraction-soot', radiativeFraction: n.radiativeFraction, sootFraction: n.sootFraction },
+    transmissivity: n.transmissivity,
+  };
+  const r = E.poolFireSolidFlame({ ...common, distanceFromCentreM: n.distanceFromCentreM });
+  if (r.error) return fail(r);
+  const m = E.surfaceEmissivePower({ method: 'mudan-diameter', poolDiameterM: n.poolDiameterM });
+  if (m.error) return fail(m);
+  const warnings = [b, r, m].filter((x) => x.warning).map((x) => String(x.warning));
+  return {
+    ok: true,
+    errors: [],
+    warnings,
+    args: common,
+    burningFluxKgM2S: b.burningFluxKgM2S,
+    flameLengthM: r.flameLengthM,
+    tiltDeg: r.tiltDeg,
+    surfaceEmissivePowerMudanWM2: m.surfaceEmissivePowerWM2,
+    surfaceEmissivePowerWM2: r.surfaceEmissivePowerWM2,
+    viewFactorVertical: r.viewFactorVertical,
+    viewFactorHorizontal: r.viewFactorHorizontal,
+    viewFactorMax: r.viewFactorMax,
+    transmissivity: r.transmissivity,
+    heatFluxWM2: r.heatFluxWM2,
+    basis: r.basis,
+  };
+};
+
 /** Professional: the ERHA heat flux at distances, and the distance to three heat fluxes. */
 export const solidFlameTeaching = () => {
   const a = erhaArgs();

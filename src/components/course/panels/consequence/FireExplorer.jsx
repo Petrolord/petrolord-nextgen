@@ -1,13 +1,14 @@
 import React, { useMemo, useState } from 'react';
 import {
-  burning, flameLength, tilt, sep, viewFactor, bagster, solidFlame, distanceToHeatFlux, parseNumber, STREAMS, FUELS,
-  burningTeaching, flameTeaching, sepTeaching, viewFactorTeaching, bagsterTeaching, solidFlameTeaching, yellowBookPoolFire, erhaArgs,
+  burning, flameLength, tilt, sep, viewFactor, bagster, distanceToHeatFlux, parseNumber, STREAMS, FUELS,
+  burningTeaching, flameTeaching, sepTeaching, viewFactorTeaching, bagsterTeaching, solidFlameTeaching, yellowBookPoolFire,
+  typedPoolFire, TYPED_POOL_DEFAULT,
 } from './consequenceLab';
 import {
   PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
 import {
-  six, twelve, Tbl, Refusal, Declared, Basis, safe,
+  six, nine, twelve, Tbl, Refusal, Declared, Basis, safe,
 } from './panelBits';
 
 // The fire explorer (Professional): the solid flame model one step at a time,
@@ -18,26 +19,43 @@ import {
 export const MODES = [
   ['flame', 'Burning flux, flame length, tilt and surface emissive power'],
   ['view', 'The view factor and the transmissivity'],
-  ['heat', 'The heat flux, the distance to a heat flux and the worked pool fire'],
+  ['heat', 'The heat flux from the pool you type, the distance to a heat flux and the worked pool fire'],
 ];
 
 const str = (v) => (v === undefined || v === null ? '' : String(v));
 const SEP_METHODS = [['mudan-diameter', 'from the diameter (Mudan)'], ['radiative-fraction', 'radiative fraction, clear flame'], ['radiative-fraction-soot', 'radiative fraction with soot']];
 
-export const FlameMode = ({ t }) => {
-  const R = STREAMS.ERHA;
-  const [fuel, setFuel] = useState(R.fuel);
-  const [d, setD] = useState(str(R.poolDiameterM));
-  const [wind, setWind] = useState(str(STREAMS.ERHA_WIND));
-  const [nu, setNu] = useState(str(R.airKinematicViscosityM2S));
-  const [dhc, setDhc] = useState(str(R.heatOfCombustionJKg));
-  const [fs, setFs] = useState(str(R.radiativeFraction));
-  const [soot, setSoot] = useState(str(R.sootFraction));
+/** The pool, as the learner types it, shared by the flame view and the heat view. */
+const usePool = () => {
+  const [pool, setPool] = useState(() => ({ ...TYPED_POOL_DEFAULT }));
+  const set = (k) => (v) => setPool((p) => ({ ...p, [k]: v }));
+  return [pool, set];
+};
+
+const PoolFields = ({ pool, set }) => (
+  <>
+    <SelectField label="Fuel (Babrauskas table)" value={pool.fuel} onChange={set('fuel')} options={FUELS.map((f) => [f, f])} />
+    <NumField label="Pool diameter, m" value={pool.poolDiameterM} onChange={set('poolDiameterM')} />
+    <NumField label="Wind at 10 m, m/s" value={pool.windSpeed10mMS} onChange={set('windSpeed10mMS')} />
+    <NumField label="Air density, kg/m3" value={pool.airDensityKgM3} onChange={set('airDensityKgM3')} />
+    <NumField label="Air kinematic viscosity, m2/s" value={pool.airKinematicViscosityM2S} onChange={set('airKinematicViscosityM2S')} />
+    <NumField label="Heat of combustion, J/kg" value={pool.heatOfCombustionJKg} onChange={set('heatOfCombustionJKg')} />
+    <NumField label="Radiative fraction" value={pool.radiativeFraction} onChange={set('radiativeFraction')} />
+    <NumField label="Soot fraction" value={pool.sootFraction} onChange={set('sootFraction')} />
+  </>
+);
+
+export const FlameMode = ({ t, pool, set }) => {
   const [method, setMethod] = useState('radiative-fraction-soot');
+  const {
+    fuel, poolDiameterM: d, windSpeed10mMS: wind, airDensityKgM3: rho, airKinematicViscosityM2S: nu,
+    heatOfCombustionJKg: dhc, radiativeFraction: fs, sootFraction: soot,
+  } = pool;
   const b = useMemo(() => burning({ method: 'babrauskas', fuel, poolDiameterM: parseNumber(d) }), [fuel, d]);
   const l = useMemo(() => (b.error ? b : flameLength({
     method: 'thomas-wind', poolDiameterM: parseNumber(d), burningFluxKgM2S: b.burningFluxKgM2S, windSpeed10mMS: parseNumber(wind),
-  })), [b, d, wind]);
+    airDensityKgM3: parseNumber(rho),
+  })), [b, d, wind, rho]);
   const tl = useMemo(() => tilt({ poolDiameterM: parseNumber(d), windSpeed10mMS: parseNumber(wind), airKinematicViscosityM2S: parseNumber(nu) }), [d, wind, nu]);
   const s = useMemo(() => (l.error ? l : sep({
     method, poolDiameterM: parseNumber(d), radiativeFraction: parseNumber(fs), burningFluxKgM2S: b.burningFluxKgM2S,
@@ -46,15 +64,10 @@ export const FlameMode = ({ t }) => {
   return (
     <>
       <FieldGrid>
-        <SelectField label="Fuel (Babrauskas table)" value={fuel} onChange={setFuel} options={FUELS.map((f) => [f, f])} />
-        <NumField label="Pool diameter, m" value={d} onChange={setD} />
-        <NumField label="Wind at 10 m, m/s" value={wind} onChange={setWind} />
-        <NumField label="Air kinematic viscosity, m2/s" value={nu} onChange={setNu} />
-        <NumField label="Heat of combustion, J/kg" value={dhc} onChange={setDhc} />
-        <NumField label="Radiative fraction" value={fs} onChange={setFs} />
-        <NumField label="Soot fraction" value={soot} onChange={setSoot} />
+        <PoolFields pool={pool} set={set} />
         <SelectField label="Surface emissive power method" value={method} onChange={setMethod} options={SEP_METHODS} />
       </FieldGrid>
+      <Note>The pool you type here is the pool the heat view runs.</Note>
       {b.error ? <Refusal r={b} /> : (
         <TileGrid>
           <Tile label="Burning flux" value={six(b.burningFluxKgM2S)} unit="kg/(m2 s)" />
@@ -139,37 +152,45 @@ export const ViewMode = ({ t }) => {
   );
 };
 
-export const HeatMode = ({ t }) => {
-  const [x, setX] = useState('60');
-  const [tau, setTau] = useState(str(STREAMS.ERHA_TAU));
+export const HeatMode = ({ t, pool, set }) => {
   const [target, setTarget] = useState('5000');
-  const base = useMemo(() => erhaArgs(), []);
-  const r = useMemo(() => solidFlame({ ...base, transmissivity: parseNumber(tau), distanceFromCentreM: parseNumber(x) }), [base, tau, x]);
-  const d = useMemo(() => distanceToHeatFlux({ ...base, transmissivity: parseNumber(tau), targetHeatFluxWM2: parseNumber(target) }), [base, tau, target]);
+  const r = useMemo(() => typedPoolFire(pool), [pool]);
+  const d = useMemo(() => (r.ok ? distanceToHeatFlux({ ...r.args, targetHeatFluxWM2: parseNumber(target) }) : null), [r, target]);
   return (
     <>
-      <Note>ERHA end to end: the heptane burning flux, Thomas with wind, the tilt, the soot surface emissive power and a stated transmissivity.</Note>
+      <Note>
+        The whole solid flame chain on the pool you type: the Babrauskas burning flux, Thomas with wind, the tilt, the soot
+        surface emissive power, the view factor at a ground level target the flame leans toward, and a stated transmissivity.
+        Nothing is rounded between the steps. The view opens on ERHA, the heptane teaching fire, and every input can be retyped.
+      </Note>
       <FieldGrid>
-        <NumField label="Target distance from the pool centre, m" value={x} onChange={setX} />
-        <NumField label="Transmissivity, stated" value={tau} onChange={setTau} />
+        <PoolFields pool={pool} set={set} />
+        <NumField label="Target distance from the pool centre, m" value={pool.distanceFromCentreM} onChange={set('distanceFromCentreM')} />
+        <NumField label="Transmissivity, stated" value={pool.transmissivity} onChange={set('transmissivity')} />
         <NumField label="Target heat flux, W/m2" value={target} onChange={setTarget} />
       </FieldGrid>
-      {r.error ? <Refusal r={r} /> : (
+      {!r.ok ? (r.field ? <Refusal r={{ field: r.field, error: r.errors.join(' ') }} /> : <Note>{r.errors.join(' ')}</Note>) : (
         <TileGrid>
-          <Tile label="Surface emissive power" value={six(r.surfaceEmissivePowerWM2)} unit="W/m2" />
+          <Tile label="Flame length with wind" value={nine(r.flameLengthM)} unit="m" />
+          <Tile label="Tilt from the vertical" value={nine(r.tiltDeg)} unit="degrees" />
+          <Tile label="Surface emissive power from the diameter (Mudan)" value={nine(r.surfaceEmissivePowerMudanWM2)} unit="W/m2" />
+          <Tile label="Surface emissive power, radiative fraction with soot" value={nine(r.surfaceEmissivePowerWM2)} unit="W/m2" />
           <Tile label="Fmax" value={twelve(r.viewFactorMax)} />
-          <Tile label="Heat flux" value={six(r.heatFluxWM2)} unit="W/m2" />
+          <Tile label="Heat flux" value={nine(r.heatFluxWM2)} unit="W/m2" />
         </TileGrid>
       )}
-      {d.error ? <Refusal r={d} /> : (
+      {r.ok && r.warnings.length > 0 && <Note>Engine warning: {r.warnings.join(' ')}</Note>}
+      {d && (d.error ? <Refusal r={d} /> : (
         <TileGrid>
           <Tile label="State" value={d.state} />
           <Tile label="Distance from the centre" value={six(d.distanceFromCentreM)} unit="m" />
         </TileGrid>
-      )}
-      <Basis r={r.error ? null : r} />
+      ))}
+      <Note>The heat flux uses the surface emissive power with soot. The flame radius is half the pool diameter.</Note>
+      <Basis r={r.ok ? r : null} />
       {t && (
         <>
+          <Note>ERHA, the heptane teaching fire, at five distances.</Note>
           <Tbl
             head={['distance from centre m', 'Fmax', 'heat flux W/m2 or refusal field']}
             rows={t.s.rows.map((v) => [String(v.distanceFromCentreM), twelve(v.viewFactorMax), v.field ? v.field : six(v.heatFluxWM2)])}
@@ -193,6 +214,7 @@ export const HeatMode = ({ t }) => {
 
 const FireExplorer = ({ initialMode = 'flame' }) => {
   const [mode, setMode] = useState(initialMode);
+  const [pool, set] = usePool();
   const tFlame = useMemo(() => (mode === 'flame' ? safe(() => ({ b: burningTeaching(), f: flameTeaching(), s: sepTeaching() })) : null), [mode]);
   const tView = useMemo(() => (mode === 'view' ? safe(() => ({ v: viewFactorTeaching(), b: bagsterTeaching() })) : null), [mode]);
   const tHeat = useMemo(() => (mode === 'heat' ? safe(() => ({ s: solidFlameTeaching(), y: yellowBookPoolFire() })) : null), [mode]);
@@ -205,9 +227,9 @@ const FireExplorer = ({ initialMode = 'flame' }) => {
         <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
       </FieldGrid>
       <div className="mt-3">
-        {mode === 'flame' && <FlameMode t={tFlame} />}
+        {mode === 'flame' && <FlameMode t={tFlame} pool={pool} set={set} />}
         {mode === 'view' && <ViewMode t={tView} />}
-        {mode === 'heat' && <HeatMode t={tHeat} />}
+        {mode === 'heat' && <HeatMode t={tHeat} pool={pool} set={set} />}
       </div>
       <Note>Every number on this panel is a return value of the vendored consequence engine. The heat flux uses Fmax, the most exposed target.</Note>
     </PanelShell>

@@ -4,6 +4,7 @@ import { Label } from '@/components/ui/label';
 // Small shared pieces for the three H4 panels. Nothing here computes a number.
 
 export const six = (v) => (v === null || v === undefined || !Number.isFinite(Number(v)) ? 'none' : Number(v).toFixed(6));
+export const nine = (v) => (v === null || v === undefined || !Number.isFinite(Number(v)) ? 'none' : Number(v).toFixed(9));
 export const twelve = (v) => (v === null || v === undefined || !Number.isFinite(Number(v)) ? 'none' : Number(v).toFixed(12));
 
 export const Tbl = ({ head, rows }) => (
