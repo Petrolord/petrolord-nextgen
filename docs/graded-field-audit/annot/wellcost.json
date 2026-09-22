@@ -9,332 +9,431 @@
   {
    "tier": "beginner",
    "key": "drill_reservoir_hr",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. Closed form interval/ROP, taught (TimeExplorer.jsx:67 teaching rates); tol 5e-5 h is fine at full precision. (Suite ProgramTab.jsx prints hours to 1 decimal and days to 1 decimal, ProgramTab.jsx:92/183/191, so the studio could not reach this tol either: tolerance mismatch if the studio became the route.)",
+   "evidence": "W2: Prompt only, no field moves. The prompt said the MERLIN A-12 programme was supplied with the capstone, but it existed only in /root/dr-wip-wellcost/dr12_fields.mjs (B5 finding 1). The prompt now lists the seventeen activities in order with their kinds and inputs, so every field is the taught closed form of m03 to m05 worked in a spreadsheet. Keys, expected values and tolerances are unchanged. The published inputs reproduce drill_reservoir_hr = 128.8659793814433 through the vendored engines against the key 128.8659793814433 (tol 5e-05); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "beginner",
    "key": "trip_td_hr",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. 2 x depth / speed; tol 5e-6 h. (Suite ProgramTab.jsx prints hours to 1 decimal and days to 1 decimal, ProgramTab.jsx:92/183/191, so the studio could not reach this tol either: tolerance mismatch if the studio became the route.)",
+   "evidence": "W2: Prompt only, no field moves. The prompt said the MERLIN A-12 programme was supplied with the capstone, but it existed only in /root/dr-wip-wellcost/dr12_fields.mjs (B5 finding 1). The prompt now lists the seventeen activities in order with their kinds and inputs, so every field is the taught closed form of m03 to m05 worked in a spreadsheet. Keys, expected values and tolerances are unchanged. The published inputs reproduce trip_td_hr = 12.725806451612904 through the vendored engines against the key 12.725806451612904 (tol 5e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "beginner",
    "key": "casing_liner_run_hr",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. depth / speed + flat time; tol 2e-5 h. (Suite ProgramTab.jsx prints hours to 1 decimal and days to 1 decimal, ProgramTab.jsx:92/183/191, so the studio could not reach this tol either: tolerance mismatch if the studio became the route.)",
+   "evidence": "W2: Prompt only, no field moves. The prompt said the MERLIN A-12 programme was supplied with the capstone, but it existed only in /root/dr-wip-wellcost/dr12_fields.mjs (B5 finding 1). The prompt now lists the seventeen activities in order with their kinds and inputs, so every field is the taught closed form of m03 to m05 worked in a spreadsheet. Keys, expected values and tolerances are unchanged. The published inputs reproduce casing_liner_run_hr = 41.285714285714285 through the vendored engines against the key 41.285714285714285 (tol 2e-05); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "beginner",
    "key": "productive_hr",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. Sum of seventeen activity hours; tol 5e-4 h. (Suite ProgramTab.jsx prints hours to 1 decimal and days to 1 decimal, ProgramTab.jsx:92/183/191, so the studio could not reach this tol either: tolerance mismatch if the studio became the route.)",
+   "evidence": "W2: Prompt only, no field moves. The prompt said the MERLIN A-12 programme was supplied with the capstone, but it existed only in /root/dr-wip-wellcost/dr12_fields.mjs (B5 finding 1). The prompt now lists the seventeen activities in order with their kinds and inputs, so every field is the taught closed form of m03 to m05 worked in a spreadsheet. Keys, expected values and tolerances are unchanged. The published inputs reproduce productive_hr = 896.5426011394405 through the vendored engines against the key 896.5426011394405 (tol 0.0005); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "beginner",
    "key": "npt_hr",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. 0.285 x productive; tol 2e-4 h. The allowance is stated but the productive hours it multiplies are not. (Suite ProgramTab.jsx prints hours to 1 decimal and days to 1 decimal, ProgramTab.jsx:92/183/191, so the studio could not reach this tol either: tolerance mismatch if the studio became the route.)",
+   "evidence": "W2: Prompt only, no field moves. The prompt said the MERLIN A-12 programme was supplied with the capstone, but it existed only in /root/dr-wip-wellcost/dr12_fields.mjs (B5 finding 1). The prompt now lists the seventeen activities in order with their kinds and inputs, so every field is the taught closed form of m03 to m05 worked in a spreadsheet. Keys, expected values and tolerances are unchanged. The published inputs reproduce npt_hr = 255.51464132474018 through the vendored engines against the key 255.51464132474018 (tol 0.0002); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "beginner",
    "key": "total_days",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. (productive + NPT)/24; tol 2e-5 d. (Suite ProgramTab.jsx prints hours to 1 decimal and days to 1 decimal, ProgramTab.jsx:92/183/191, so the studio could not reach this tol either: tolerance mismatch if the studio became the route.)",
+   "evidence": "W2: Prompt only, no field moves. The prompt said the MERLIN A-12 programme was supplied with the capstone, but it existed only in /root/dr-wip-wellcost/dr12_fields.mjs (B5 finding 1). The prompt now lists the seventeen activities in order with their kinds and inputs, so every field is the taught closed form of m03 to m05 worked in a spreadsheet. Keys, expected values and tolerances are unchanged. The published inputs reproduce total_days = 48.0023851026742 through the vendored engines against the key 48.0023851026742 (tol 2e-05); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
    "key": "tangible_usd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. Sum of tangible lump and per-metre lines; tol 2 USD. Integral value (3140000) but not a guessable space. (Suite CostTab.jsx:22 rounds USD to whole dollars, which is inside this tol.)",
+   "evidence": "W2: Prompt only, no field moves. The line items, their rates, bases and categories, and the cost per metre inputs existed only in the generator; the prompt now lists the programme, the ten line items and the two sections, so every field is the taught AFE and cost per metre arithmetic. Keys, expected values and tolerances are unchanged. The published inputs reproduce tangible_usd = 3140000 through the vendored engines against the key 3140000 (tol 2); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD; Fishing tools and services: intangible, a lump of 158000 USD; Cementing services: intangible, a lump of 372000 USD; Wireline and LWD evaluation: intangible, a lump of 265000 USD; Casing, liner and accessories: tangible, a lump of 1145000 USD; Completion equipment: tangible, a lump of 1380000 USD.",
+     "The contingency is 23.5 percent. THE COST PER METRE of a section takes the bit cost plus the rig rate per hour times the sum of that section's productive drilling hours, its connection hours and the productive hours of its round trip, all over the section length, with the rig rate per hour taken as the rig dayrate plus the integrated services spread, over 24. The intermediate section is activity (d) with a bit cost of 74500 USD, 11.5 connection hours and the round trip (g); the reservoir section is activity (m) with a bit cost of 236000 USD, 9.5 connection hours and the round trip (o)."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
    "key": "intangible_usd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. Per-day lines x total days plus lumps; tol 6 USD. (Suite CostTab.jsx:22 rounds USD to whole dollars, which is inside this tol.)",
+   "evidence": "W2: Prompt only, no field moves. The line items, their rates, bases and categories, and the cost per metre inputs existed only in the generator; the prompt now lists the programme, the ten line items and the two sections, so every field is the taught AFE and cost per metre arithmetic. Keys, expected values and tolerances are unchanged. The published inputs reproduce intangible_usd = 12245809.811338801 through the vendored engines against the key 12245809.811338801 (tol 6); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD; Fishing tools and services: intangible, a lump of 158000 USD; Cementing services: intangible, a lump of 372000 USD; Wireline and LWD evaluation: intangible, a lump of 265000 USD; Casing, liner and accessories: tangible, a lump of 1145000 USD; Completion equipment: tangible, a lump of 1380000 USD.",
+     "The contingency is 23.5 percent. THE COST PER METRE of a section takes the bit cost plus the rig rate per hour times the sum of that section's productive drilling hours, its connection hours and the productive hours of its round trip, all over the section length, with the rig rate per hour taken as the rig dayrate plus the integrated services spread, over 24. The intermediate section is activity (d) with a bit cost of 74500 USD, 11.5 connection hours and the round trip (g); the reservoir section is activity (m) with a bit cost of 236000 USD, 9.5 connection hours and the round trip (o)."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
    "key": "contingency_usd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. 0.235 x base; tol 2 USD. (Suite CostTab.jsx:22 rounds USD to whole dollars, which is inside this tol.)",
+   "evidence": "W2: Prompt only, no field moves. The line items, their rates, bases and categories, and the cost per metre inputs existed only in the generator; the prompt now lists the programme, the ten line items and the two sections, so every field is the taught AFE and cost per metre arithmetic. Keys, expected values and tolerances are unchanged. The published inputs reproduce contingency_usd = 3615665.305664618 through the vendored engines against the key 3615665.305664618 (tol 2); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD; Fishing tools and services: intangible, a lump of 158000 USD; Cementing services: intangible, a lump of 372000 USD; Wireline and LWD evaluation: intangible, a lump of 265000 USD; Casing, liner and accessories: tangible, a lump of 1145000 USD; Completion equipment: tangible, a lump of 1380000 USD.",
+     "The contingency is 23.5 percent. THE COST PER METRE of a section takes the bit cost plus the rig rate per hour times the sum of that section's productive drilling hours, its connection hours and the productive hours of its round trip, all over the section length, with the rig rate per hour taken as the rig dayrate plus the integrated services spread, over 24. The intermediate section is activity (d) with a bit cost of 74500 USD, 11.5 connection hours and the round trip (g); the reservoir section is activity (m) with a bit cost of 236000 USD, 9.5 connection hours and the round trip (o)."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
    "key": "total_usd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. base + contingency; tol 10 USD. (Suite CostTab.jsx:22 rounds USD to whole dollars, which is inside this tol.)",
+   "evidence": "W2: Prompt only, no field moves. The line items, their rates, bases and categories, and the cost per metre inputs existed only in the generator; the prompt now lists the programme, the ten line items and the two sections, so every field is the taught AFE and cost per metre arithmetic. Keys, expected values and tolerances are unchanged. The published inputs reproduce total_usd = 19001475.11700342 through the vendored engines against the key 19001475.11700342 (tol 10); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD; Fishing tools and services: intangible, a lump of 158000 USD; Cementing services: intangible, a lump of 372000 USD; Wireline and LWD evaluation: intangible, a lump of 265000 USD; Casing, liner and accessories: tangible, a lump of 1145000 USD; Completion equipment: tangible, a lump of 1380000 USD.",
+     "The contingency is 23.5 percent. THE COST PER METRE of a section takes the bit cost plus the rig rate per hour times the sum of that section's productive drilling hours, its connection hours and the productive hours of its round trip, all over the section length, with the rig rate per hour taken as the rig dayrate plus the integrated services spread, over 24. The intermediate section is activity (d) with a bit cost of 74500 USD, 11.5 connection hours and the round trip (g); the reservoir section is activity (m) with a bit cost of 236000 USD, 9.5 connection hours and the round trip (o)."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
    "key": "cpm_intermediate_usd_m",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. Section cost / section metres; tol 5e-4 USD/m. Suite CostTab.jsx:126 prints cost per metre toFixed(2), so the studio route would also need a tol of at least 0.005 or a longer print.",
+   "evidence": "W2: Prompt only, no field moves. The line items, their rates, bases and categories, and the cost per metre inputs existed only in the generator; the prompt now lists the programme, the ten line items and the two sections, so every field is the taught AFE and cost per metre arithmetic. Keys, expected values and tolerances are unchanged. The published inputs reproduce cpm_intermediate_usd_m = 1097.8465106873223 through the vendored engines against the key 1097.8465106873223 (tol 0.0005); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD; Fishing tools and services: intangible, a lump of 158000 USD; Cementing services: intangible, a lump of 372000 USD; Wireline and LWD evaluation: intangible, a lump of 265000 USD; Casing, liner and accessories: tangible, a lump of 1145000 USD; Completion equipment: tangible, a lump of 1380000 USD.",
+     "The contingency is 23.5 percent. THE COST PER METRE of a section takes the bit cost plus the rig rate per hour times the sum of that section's productive drilling hours, its connection hours and the productive hours of its round trip, all over the section length, with the rig rate per hour taken as the rig dayrate plus the integrated services spread, over 24. The intermediate section is activity (d) with a bit cost of 74500 USD, 11.5 connection hours and the round trip (g); the reservoir section is activity (m) with a bit cost of 236000 USD, 9.5 connection hours and the round trip (o)."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "intermediate",
    "key": "cpm_reservoir_usd_m",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. Section cost / section metres; tol 2e-3 USD/m. Same Suite toFixed(2) caveat (CostTab.jsx:126).",
+   "evidence": "W2: Prompt only, no field moves. The line items, their rates, bases and categories, and the cost per metre inputs existed only in the generator; the prompt now lists the programme, the ten line items and the two sections, so every field is the taught AFE and cost per metre arithmetic. Keys, expected values and tolerances are unchanged. The published inputs reproduce cpm_reservoir_usd_m = 2520.081523112737 through the vendored engines against the key 2520.081523112737 (tol 0.002); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD; Fishing tools and services: intangible, a lump of 158000 USD; Cementing services: intangible, a lump of 372000 USD; Wireline and LWD evaluation: intangible, a lump of 265000 USD; Casing, liner and accessories: tangible, a lump of 1145000 USD; Completion equipment: tangible, a lump of 1380000 USD.",
+     "The contingency is 23.5 percent. THE COST PER METRE of a section takes the bit cost plus the rig rate per hour times the sum of that section's productive drilling hours, its connection hours and the productive hours of its round trip, all over the section length, with the rig rate per hour taken as the rig dayrate plus the integrated services spread, over 24. The intermediate section is activity (d) with a bit cost of 74500 USD, 11.5 connection hours and the round trip (g); the reservoir section is activity (m) with a bit cost of 236000 USD, 9.5 connection hours and the round trip (o)."
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
    "key": "curve_at_int_casing_usd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. Cumulative base cost at the intermediate casing point; tol 2 USD.",
+   "evidence": "W2: Prompt only, no field moves. The programme, the line items with the activity each lump is booked at, and the declared risk ranges existed only in the generator; the prompt now publishes all three, so the curve fields are spreadsheet work. The three risked fields also need the seeded run to be readable at full precision in the Suite Well Cost and Time studio (W3, Suite); until then they stay class display. The published inputs reproduce curve_at_int_casing_usd = 5421894.326682938 through the vendored engines against the key 5421894.326682938 (tol 2); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "Six values for MERLIN A-12. The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD booked at the end of activity (c); Fishing tools and services: intangible, a lump of 158000 USD booked at the end of activity (e); Cementing services: intangible, a lump of 372000 USD booked at the end of activity (l); Wireline and LWD evaluation: intangible, a lump of 265000 USD booked at the end of activity (n); Casing, liner and accessories: tangible, a lump of 1145000 USD booked at the end of activity (p); Completion equipment: tangible, a lump of 1380000 USD booked at the end of activity (q). THE DECLARED RANGES, each triangular as minimum, most likely and maximum, sampled in this order: the rate of penetration of activity (d), in m/h: 6.4, 9.4, 15.5; the rate of penetration of activity (m), in m/h: 2.9, 4.85, 8.2; the duration of activity (e), in h: 24, 62, 240; the rate of the Rig dayrate line, in USD a day: 121000, 138500, 187500; the value of the Completion equipment line, in USD: 1050000, 1380000, 2150000. The risked run prices the base with no contingency line, because the risk model takes the place of the provision.",
+     "with the declared ranges stated above:"
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
    "key": "curve_at_evaluation_usd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. Cumulative base cost at evaluation; tol 5 USD.",
+   "evidence": "W2: Prompt only, no field moves. The programme, the line items with the activity each lump is booked at, and the declared risk ranges existed only in the generator; the prompt now publishes all three, so the curve fields are spreadsheet work. The three risked fields also need the seeded run to be readable at full precision in the Suite Well Cost and Time studio (W3, Suite); until then they stay class display. The published inputs reproduce curve_at_evaluation_usd = 11152431.73458189 through the vendored engines against the key 11152431.73458189 (tol 5); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "Six values for MERLIN A-12. The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD booked at the end of activity (c); Fishing tools and services: intangible, a lump of 158000 USD booked at the end of activity (e); Cementing services: intangible, a lump of 372000 USD booked at the end of activity (l); Wireline and LWD evaluation: intangible, a lump of 265000 USD booked at the end of activity (n); Casing, liner and accessories: tangible, a lump of 1145000 USD booked at the end of activity (p); Completion equipment: tangible, a lump of 1380000 USD booked at the end of activity (q). THE DECLARED RANGES, each triangular as minimum, most likely and maximum, sampled in this order: the rate of penetration of activity (d), in m/h: 6.4, 9.4, 15.5; the rate of penetration of activity (m), in m/h: 2.9, 4.85, 8.2; the duration of activity (e), in h: 24, 62, 240; the rate of the Rig dayrate line, in USD a day: 121000, 138500, 187500; the value of the Completion equipment line, in USD: 1050000, 1380000, 2150000. The risked run prices the base with no contingency line, because the risk model takes the place of the provision.",
+     "with the declared ranges stated above:"
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
    "key": "curve_final_usd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/wellcost.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Supply the MERLIN A-12 case to the learner; keep key, label, unit and tol."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State the MERLIN A-12 inputs to the learner (a table in the prompt or a downloadable case file for the Suite Well Cost and Time studio). With them the time and cost fields are closed-form spreadsheet work at full precision, so the current tolerances hold.",
-   "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. Equals tangible + intangible from the Professional tier (the prompt's own free check), so it would be hand-derivable from those two if they were obtainable; tol 8 USD.",
+   "evidence": "W2: Prompt only, no field moves. The programme, the line items with the activity each lump is booked at, and the declared risk ranges existed only in the generator; the prompt now publishes all three, so the curve fields are spreadsheet work. The three risked fields also need the seeded run to be readable at full precision in the Suite Well Cost and Time studio (W3, Suite); until then they stay class display. The published inputs reproduce curve_final_usd = 15385809.811338803 through the vendored engines against the key 15385809.811338803 (tol 8); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_wellcost.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "Six values for MERLIN A-12. The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD booked at the end of activity (c); Fishing tools and services: intangible, a lump of 158000 USD booked at the end of activity (e); Cementing services: intangible, a lump of 372000 USD booked at the end of activity (l); Wireline and LWD evaluation: intangible, a lump of 265000 USD booked at the end of activity (n); Casing, liner and accessories: tangible, a lump of 1145000 USD booked at the end of activity (p); Completion equipment: tangible, a lump of 1380000 USD booked at the end of activity (q). THE DECLARED RANGES, each triangular as minimum, most likely and maximum, sampled in this order: the rate of penetration of activity (d), in m/h: 6.4, 9.4, 15.5; the rate of penetration of activity (m), in m/h: 2.9, 4.85, 8.2; the duration of activity (e), in h: 24, 62, 240; the rate of the Rig dayrate line, in USD a day: 121000, 138500, 187500; the value of the Completion equipment line, in USD: 1050000, 1380000, 2150000. The risked run prices the base with no contingency line, because the risk model takes the place of the provision.",
+     "with the declared ranges stated above:"
+    ],
+    "lessons": []
+   }
   },
   {
    "tier": "advanced",
