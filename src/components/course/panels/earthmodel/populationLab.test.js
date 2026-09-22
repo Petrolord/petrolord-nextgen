@@ -19,7 +19,7 @@ describe('population explorer math (DC29)', () => {
     expect(base.volsA['1'].bulk_m3).toBeCloseTo(13998749.999999998, 3);
   });
 
-  it('the golden fault jump on the y = 2200 row (W1's key, now teaching), and no other setting reproduces it', () => {
+  it('the golden fault jump on the y = 2200 row (the W1 key, now teaching), and no other setting reproduces it', () => {
     const jumpOf = (m) => m.profile[12].phi - m.profile[11].phi;
     const want = -0.023016035393453593;
     expect(jumpOf(base)).toBeCloseTo(want, 14);
