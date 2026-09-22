@@ -166,244 +166,354 @@
   {
    "tier": "intermediate",
    "key": "design_plunger_stroke_in",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rodpump/intermediate/m06-the-professional-reading/l02-working-the-capstone.md (plunger stroke from the wave-equation march)",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/rodpump/CardExplorer.jsx:666 (typed mode: the case typed as the prompt states it)",
+   "printed": {
+    "decimals": 9
+   },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/CardExplorer.jsx:315 fmt(t.plungerStrokeIn, 9) (teaching well only)",
+   "display_ref": "src/components/course/panels/rodpump/CardExplorer.jsx:666 toFixed(9)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/CardExplorer.jsx:188 (case select) -> add editable OBAGI-type inputs (taper, unit geometry, plunger, intake/discharge, spm, damping, fillage, efficiency) so the 9-decimal tiles read the stated case"
-   },
-   "owner_decision": true,
-   "recommendation": "Display fix on the NextGen side, owner to approve scope. These are wave-equation march / balancing / Gibbs outputs (engine-only), every rodpump panel is a select-only teaching view (ODUMA-4 and the published cases; panelCapstoneGuard.test.js forbids OBAGI), and the Suite studio cannot be set to the stated case. Preferred: give pd-card-explorer and pd-balance-explorer editable string, unit, pump, damping, fillage, efficiency, unbalance, offset, service factor and harmonics inputs (they print at 9 decimals). A tolerance change alone does not help because no surface reaches the case at any precision.",
-   "evidence": "Marched plunger stroke (damped wave equation at default nodes and tolerance); no hand route, and the spring rule S - Fo Er = 103.040 is the trap the prompt names. Tol is a relative 2e-7 of the value (about seven significant figures); the panels already print 9 decimals, so an editable panel clears it.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "A typed well mode on CardExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses.",
    "notes": "The Suite Rod Pump Design Studio cannot be set to OBAGI-27: it derives intake pressure and fillage from its well model (contexts/RodPumpDesignContext.jsx:139 designFormFrom, utils/production/rodPump.js:69 intake pressure and :127 fillage), so the stated 210/2680 psia, fillage 0.853 and efficiency 0.86 cannot be typed; and it prints 0 to 2 decimals (components/rodpump/LoadsPanel.jsx:73-134, DiagnosticsPanel.jsx:101-107, RodStressPanel.jsx:80). Its diagnostic also re-reads the design card rounded to 2 dp position and whole-lb load (RodPumpDesignContext.jsx useDesignCardForDiagnosis).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261027b_w4_rodpump.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, the Card explorer's \"Your well, typed\" view takes this well as typed (the taper, grade, fluid, unit geometry, pump, speed, damping, fillage and efficiency), marches it at the engine's default parameters and prints every value to nine decimals.",
+    "case_mode": {
+     "panel": "src/components/course/panels/rodpump/CardExplorer.jsx",
+     "mode": "typed",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js"
+    }
+   }
   },
   {
    "tier": "intermediate",
    "key": "design_pprl_lb",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rodpump/intermediate/m06-the-professional-reading/l02-working-the-capstone.md (reported peak polished rod load)",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/rodpump/CardExplorer.jsx:667 (typed mode: the case typed as the prompt states it)",
+   "printed": {
+    "decimals": 9
+   },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/CardExplorer.jsx:312 fmt(t.pprlLb, 9) (teaching well only)",
+   "display_ref": "src/components/course/panels/rodpump/CardExplorer.jsx:667 toFixed(9)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/CardExplorer.jsx:188 (case select) -> add editable OBAGI-type inputs (taper, unit geometry, plunger, intake/discharge, spm, damping, fillage, efficiency) so the 9-decimal tiles read the stated case"
-   },
-   "owner_decision": true,
-   "recommendation": "Display fix on the NextGen side, owner to approve scope. These are wave-equation march / balancing / Gibbs outputs (engine-only), every rodpump panel is a select-only teaching view (ODUMA-4 and the published cases; panelCapstoneGuard.test.js forbids OBAGI), and the Suite studio cannot be set to the stated case. Preferred: give pd-card-explorer and pd-balance-explorer editable string, unit, pump, damping, fillage, efficiency, unbalance, offset, service factor and harmonics inputs (they print at 9 decimals). A tolerance change alone does not help because no surface reaches the case at any precision.",
-   "evidence": "Peak of the marched surface card as the design reports it; engine-only. Tol is a relative 2e-7 of the value (about seven significant figures); the panels already print 9 decimals, so an editable panel clears it.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "A typed well mode on CardExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses.",
    "notes": "The Suite Rod Pump Design Studio cannot be set to OBAGI-27: it derives intake pressure and fillage from its well model (contexts/RodPumpDesignContext.jsx:139 designFormFrom, utils/production/rodPump.js:69 intake pressure and :127 fillage), so the stated 210/2680 psia, fillage 0.853 and efficiency 0.86 cannot be typed; and it prints 0 to 2 decimals (components/rodpump/LoadsPanel.jsx:73-134, DiagnosticsPanel.jsx:101-107, RodStressPanel.jsx:80). Its diagnostic also re-reads the design card rounded to 2 dp position and whole-lb load (RodPumpDesignContext.jsx useDesignCardForDiagnosis).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261027b_w4_rodpump.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, the Card explorer's \"Your well, typed\" view takes this well as typed (the taper, grade, fluid, unit geometry, pump, speed, damping, fillage and efficiency), marches it at the engine's default parameters and prints every value to nine decimals.",
+    "case_mode": {
+     "panel": "src/components/course/panels/rodpump/CardExplorer.jsx",
+     "mode": "typed",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js"
+    }
+   }
   },
   {
    "tier": "intermediate",
    "key": "design_mprl_lb",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rodpump/intermediate/m06-the-professional-reading/l02-working-the-capstone.md (reported minimum polished rod load)",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/rodpump/CardExplorer.jsx:668 (typed mode: the case typed as the prompt states it)",
+   "printed": {
+    "decimals": 9
+   },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/CardExplorer.jsx:313 fmt(t.mprlLb, 9) (teaching well only)",
+   "display_ref": "src/components/course/panels/rodpump/CardExplorer.jsx:668 toFixed(9)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/CardExplorer.jsx:188 (case select) -> add editable OBAGI-type inputs (taper, unit geometry, plunger, intake/discharge, spm, damping, fillage, efficiency) so the 9-decimal tiles read the stated case"
-   },
-   "owner_decision": true,
-   "recommendation": "Display fix on the NextGen side, owner to approve scope. These are wave-equation march / balancing / Gibbs outputs (engine-only), every rodpump panel is a select-only teaching view (ODUMA-4 and the published cases; panelCapstoneGuard.test.js forbids OBAGI), and the Suite studio cannot be set to the stated case. Preferred: give pd-card-explorer and pd-balance-explorer editable string, unit, pump, damping, fillage, efficiency, unbalance, offset, service factor and harmonics inputs (they print at 9 decimals). A tolerance change alone does not help because no surface reaches the case at any precision.",
-   "evidence": "Minimum of the marched surface card; engine-only. Tol is a relative 2e-7 of the value (about seven significant figures); the panels already print 9 decimals, so an editable panel clears it.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "A typed well mode on CardExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses.",
    "notes": "The Suite Rod Pump Design Studio cannot be set to OBAGI-27: it derives intake pressure and fillage from its well model (contexts/RodPumpDesignContext.jsx:139 designFormFrom, utils/production/rodPump.js:69 intake pressure and :127 fillage), so the stated 210/2680 psia, fillage 0.853 and efficiency 0.86 cannot be typed; and it prints 0 to 2 decimals (components/rodpump/LoadsPanel.jsx:73-134, DiagnosticsPanel.jsx:101-107, RodStressPanel.jsx:80). Its diagnostic also re-reads the design card rounded to 2 dp position and whole-lb load (RodPumpDesignContext.jsx useDesignCardForDiagnosis).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261027b_w4_rodpump.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, the Card explorer's \"Your well, typed\" view takes this well as typed (the taper, grade, fluid, unit geometry, pump, speed, damping, fillage and efficiency), marches it at the engine's default parameters and prints every value to nine decimals.",
+    "case_mode": {
+     "panel": "src/components/course/panels/rodpump/CardExplorer.jsx",
+     "mode": "typed",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js"
+    }
+   }
   },
   {
    "tier": "intermediate",
    "key": "design_prhp_hp",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rodpump/intermediate/m06-the-professional-reading/l02-working-the-capstone.md (polished rod horsepower from the card area)",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/rodpump/CardExplorer.jsx:669 (typed mode: the case typed as the prompt states it)",
+   "printed": {
+    "decimals": 9
+   },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/CardExplorer.jsx:433 fmt(prhp, 9) (teaching well only)",
+   "display_ref": "src/components/course/panels/rodpump/CardExplorer.jsx:669 toFixed(9)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/CardExplorer.jsx:188 (case select) -> add editable OBAGI-type inputs (taper, unit geometry, plunger, intake/discharge, spm, damping, fillage, efficiency) so the 9-decimal tiles read the stated case"
-   },
-   "owner_decision": true,
-   "recommendation": "Display fix on the NextGen side, owner to approve scope. These are wave-equation march / balancing / Gibbs outputs (engine-only), every rodpump panel is a select-only teaching view (ODUMA-4 and the published cases; panelCapstoneGuard.test.js forbids OBAGI), and the Suite studio cannot be set to the stated case. Preferred: give pd-card-explorer and pd-balance-explorer editable string, unit, pump, damping, fillage, efficiency, unbalance, offset, service factor and harmonics inputs (they print at 9 decimals). A tolerance change alone does not help because no surface reaches the case at any precision.",
-   "evidence": "Card area x speed / 396000; the card area is a march output. Tol is a relative 2e-7 of the value (about seven significant figures); the panels already print 9 decimals, so an editable panel clears it.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "A typed well mode on CardExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses.",
    "notes": "The Suite Rod Pump Design Studio cannot be set to OBAGI-27: it derives intake pressure and fillage from its well model (contexts/RodPumpDesignContext.jsx:139 designFormFrom, utils/production/rodPump.js:69 intake pressure and :127 fillage), so the stated 210/2680 psia, fillage 0.853 and efficiency 0.86 cannot be typed; and it prints 0 to 2 decimals (components/rodpump/LoadsPanel.jsx:73-134, DiagnosticsPanel.jsx:101-107, RodStressPanel.jsx:80). Its diagnostic also re-reads the design card rounded to 2 dp position and whole-lb load (RodPumpDesignContext.jsx useDesignCardForDiagnosis).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261027b_w4_rodpump.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, the Card explorer's \"Your well, typed\" view takes this well as typed (the taper, grade, fluid, unit geometry, pump, speed, damping, fillage and efficiency), marches it at the engine's default parameters and prints every value to nine decimals.",
+    "case_mode": {
+     "panel": "src/components/course/panels/rodpump/CardExplorer.jsx",
+     "mode": "typed",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js"
+    }
+   }
   },
   {
    "tier": "intermediate",
    "key": "design_produced_bpd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rodpump/intermediate/m06-the-professional-reading/l02-working-the-capstone.md (produced rate)",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/rodpump/CardExplorer.jsx:670 (typed mode: the case typed as the prompt states it)",
+   "printed": {
+    "decimals": 9
+   },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/CardExplorer.jsx:435 fmt(d.perBarrel.producedBpd, 6) (teaching well only)",
+   "display_ref": "src/components/course/panels/rodpump/CardExplorer.jsx:670 toFixed(9)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/CardExplorer.jsx:188 (case select) -> add editable OBAGI-type inputs (taper, unit geometry, plunger, intake/discharge, spm, damping, fillage, efficiency) so the 9-decimal tiles read the stated case"
-   },
-   "owner_decision": true,
-   "recommendation": "Display fix on the NextGen side, owner to approve scope. These are wave-equation march / balancing / Gibbs outputs (engine-only), every rodpump panel is a select-only teaching view (ODUMA-4 and the published cases; panelCapstoneGuard.test.js forbids OBAGI), and the Suite studio cannot be set to the stated case. Preferred: give pd-card-explorer and pd-balance-explorer editable string, unit, pump, damping, fillage, efficiency, unbalance, offset, service factor and harmonics inputs (they print at 9 decimals). A tolerance change alone does not help because no surface reaches the case at any precision.",
-   "evidence": "0.11657116 x 2.25 x plunger stroke x 11.4 x 0.853 x 0.86 reproduces the key exactly, but the plunger stroke is the march output above. Tol is a relative 2e-7 of the value (about seven significant figures); the panels already print 9 decimals, so an editable panel clears it.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "A typed well mode on CardExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses.",
    "notes": "The Suite Rod Pump Design Studio cannot be set to OBAGI-27: it derives intake pressure and fillage from its well model (contexts/RodPumpDesignContext.jsx:139 designFormFrom, utils/production/rodPump.js:69 intake pressure and :127 fillage), so the stated 210/2680 psia, fillage 0.853 and efficiency 0.86 cannot be typed; and it prints 0 to 2 decimals (components/rodpump/LoadsPanel.jsx:73-134, DiagnosticsPanel.jsx:101-107, RodStressPanel.jsx:80). Its diagnostic also re-reads the design card rounded to 2 dp position and whole-lb load (RodPumpDesignContext.jsx useDesignCardForDiagnosis).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261027b_w4_rodpump.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, the Card explorer's \"Your well, typed\" view takes this well as typed (the taper, grade, fluid, unit geometry, pump, speed, damping, fillage and efficiency), marches it at the engine's default parameters and prints every value to nine decimals.",
+    "case_mode": {
+     "panel": "src/components/course/panels/rodpump/CardExplorer.jsx",
+     "mode": "typed",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js"
+    }
+   }
   },
   {
    "tier": "advanced",
    "key": "balance_moment_in_lb",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rodpump/advanced/m06-the-expert-reading/l02-working-the-capstone.md (counterbalance moment)",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/rodpump/BalanceExplorer.jsx:864 (typed mode: the case typed as the prompt states it)",
+   "printed": {
+    "decimals": 9
+   },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/BalanceExplorer.jsx (select-only teaching views, BalanceExplorer.jsx:256-257, :830)",
+   "display_ref": "src/components/course/panels/rodpump/BalanceExplorer.jsx:864 toFixed(9)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/BalanceExplorer.jsx:830 -> add editable inputs for the stated case (string, unit, pump, damping, fillage, efficiency, 810 lb unbalance, 14 deg offset, service factor, harmonics) and print these at 9 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "Display fix on the NextGen side, owner to approve scope. These are wave-equation march / balancing / Gibbs outputs (engine-only), every rodpump panel is a select-only teaching view (ODUMA-4 and the published cases; panelCapstoneGuard.test.js forbids OBAGI), and the Suite studio cannot be set to the stated case. Preferred: give pd-card-explorer and pd-balance-explorer editable string, unit, pump, damping, fillage, efficiency, unbalance, offset, service factor and harmonics inputs (they print at 9 decimals). A tolerance change alone does not help because no surface reaches the case at any precision.",
-   "evidence": "Balancing routine on the marched card with unbalance 810 lb and offset 14 deg; engine-only. Tol is a relative 2e-7 of the value (about seven significant figures); the panels already print 9 decimals, so an editable panel clears it.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "A typed well mode on BalanceExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses.",
    "notes": "The Suite Rod Pump Design Studio cannot be set to OBAGI-27: it derives intake pressure and fillage from its well model (contexts/RodPumpDesignContext.jsx:139 designFormFrom, utils/production/rodPump.js:69 intake pressure and :127 fillage), so the stated 210/2680 psia, fillage 0.853 and efficiency 0.86 cannot be typed; and it prints 0 to 2 decimals (components/rodpump/LoadsPanel.jsx:73-134, DiagnosticsPanel.jsx:101-107, RodStressPanel.jsx:80). Its diagnostic also re-reads the design card rounded to 2 dp position and whole-lb load (RodPumpDesignContext.jsx useDesignCardForDiagnosis).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261027b_w4_rodpump.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, the Balance explorer's \"Your well, typed\" view takes this well as typed, with the unbalance, crank offset, unit designation, service factor and harmonics, and prints the balance, the Goodman loading of every section and the diagnostic read-back to nine decimals.",
+    "case_mode": {
+     "panel": "src/components/course/panels/rodpump/BalanceExplorer.jsx",
+     "mode": "typed",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js"
+    }
+   }
   },
   {
    "tier": "advanced",
    "key": "balance_peak_torque_in_lb",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rodpump/advanced/m06-the-expert-reading/l02-working-the-capstone.md (peak gearbox torque with that counterbalance)",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/rodpump/BalanceExplorer.jsx:865 (typed mode: the case typed as the prompt states it)",
+   "printed": {
+    "decimals": 9
+   },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/BalanceExplorer.jsx (select-only teaching views, BalanceExplorer.jsx:256-257, :830)",
+   "display_ref": "src/components/course/panels/rodpump/BalanceExplorer.jsx:865 toFixed(9)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/BalanceExplorer.jsx:830 -> add editable inputs for the stated case (string, unit, pump, damping, fillage, efficiency, 810 lb unbalance, 14 deg offset, service factor, harmonics) and print these at 9 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "Display fix on the NextGen side, owner to approve scope. These are wave-equation march / balancing / Gibbs outputs (engine-only), every rodpump panel is a select-only teaching view (ODUMA-4 and the published cases; panelCapstoneGuard.test.js forbids OBAGI), and the Suite studio cannot be set to the stated case. Preferred: give pd-card-explorer and pd-balance-explorer editable string, unit, pump, damping, fillage, efficiency, unbalance, offset, service factor and harmonics inputs (they print at 9 decimals). A tolerance change alone does not help because no surface reaches the case at any precision.",
-   "evidence": "Torque factor sweep over the card; engine-only. Tol is a relative 2e-7 of the value (about seven significant figures); the panels already print 9 decimals, so an editable panel clears it.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "A typed well mode on BalanceExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses.",
    "notes": "The Suite Rod Pump Design Studio cannot be set to OBAGI-27: it derives intake pressure and fillage from its well model (contexts/RodPumpDesignContext.jsx:139 designFormFrom, utils/production/rodPump.js:69 intake pressure and :127 fillage), so the stated 210/2680 psia, fillage 0.853 and efficiency 0.86 cannot be typed; and it prints 0 to 2 decimals (components/rodpump/LoadsPanel.jsx:73-134, DiagnosticsPanel.jsx:101-107, RodStressPanel.jsx:80). Its diagnostic also re-reads the design card rounded to 2 dp position and whole-lb load (RodPumpDesignContext.jsx useDesignCardForDiagnosis).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261027b_w4_rodpump.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, the Balance explorer's \"Your well, typed\" view takes this well as typed, with the unbalance, crank offset, unit designation, service factor and harmonics, and prints the balance, the Goodman loading of every section and the diagnostic read-back to nine decimals.",
+    "case_mode": {
+     "panel": "src/components/course/panels/rodpump/BalanceExplorer.jsx",
+     "mode": "typed",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js"
+    }
+   }
   },
   {
    "tier": "advanced",
    "key": "balance_cbe_lb",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rodpump/advanced/m06-the-expert-reading/l02-working-the-capstone.md (counterbalance effect)",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/rodpump/BalanceExplorer.jsx:866 (typed mode: the case typed as the prompt states it)",
+   "printed": {
+    "decimals": 9
+   },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/BalanceExplorer.jsx (select-only teaching views, BalanceExplorer.jsx:256-257, :830)",
+   "display_ref": "src/components/course/panels/rodpump/BalanceExplorer.jsx:866 toFixed(9)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/BalanceExplorer.jsx:830 -> add editable inputs for the stated case (string, unit, pump, damping, fillage, efficiency, 810 lb unbalance, 14 deg offset, service factor, harmonics) and print these at 9 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "Display fix on the NextGen side, owner to approve scope. These are wave-equation march / balancing / Gibbs outputs (engine-only), every rodpump panel is a select-only teaching view (ODUMA-4 and the published cases; panelCapstoneGuard.test.js forbids OBAGI), and the Suite studio cannot be set to the stated case. Preferred: give pd-card-explorer and pd-balance-explorer editable string, unit, pump, damping, fillage, efficiency, unbalance, offset, service factor and harmonics inputs (they print at 9 decimals). A tolerance change alone does not help because no surface reaches the case at any precision.",
-   "evidence": "The prompt's check (field 3 - 810) x TF at the quarter turn = field 1 needs the engine's torque factor; engine-only. Tol is a relative 2e-7 of the value (about seven significant figures); the panels already print 9 decimals, so an editable panel clears it.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "A typed well mode on BalanceExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses.",
    "notes": "The Suite Rod Pump Design Studio cannot be set to OBAGI-27: it derives intake pressure and fillage from its well model (contexts/RodPumpDesignContext.jsx:139 designFormFrom, utils/production/rodPump.js:69 intake pressure and :127 fillage), so the stated 210/2680 psia, fillage 0.853 and efficiency 0.86 cannot be typed; and it prints 0 to 2 decimals (components/rodpump/LoadsPanel.jsx:73-134, DiagnosticsPanel.jsx:101-107, RodStressPanel.jsx:80). Its diagnostic also re-reads the design card rounded to 2 dp position and whole-lb load (RodPumpDesignContext.jsx useDesignCardForDiagnosis).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261027b_w4_rodpump.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, the Balance explorer's \"Your well, typed\" view takes this well as typed, with the unbalance, crank offset, unit designation, service factor and harmonics, and prints the balance, the Goodman loading of every section and the diagnostic read-back to nine decimals.",
+    "case_mode": {
+     "panel": "src/components/course/panels/rodpump/BalanceExplorer.jsx",
+     "mode": "typed",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js"
+    }
+   }
   },
   {
    "tier": "advanced",
    "key": "stress_worst_loading_pct",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rodpump/advanced/m06-the-expert-reading/l02-working-the-capstone.md (worst modified Goodman loading)",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/rodpump/BalanceExplorer.jsx:867 (typed mode: the case typed as the prompt states it)",
+   "printed": {
+    "decimals": 9
+   },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/BalanceExplorer.jsx (select-only teaching views, BalanceExplorer.jsx:256-257, :830)",
+   "display_ref": "src/components/course/panels/rodpump/BalanceExplorer.jsx:867 toFixed(9)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/BalanceExplorer.jsx:830 -> add editable inputs for the stated case (string, unit, pump, damping, fillage, efficiency, 810 lb unbalance, 14 deg offset, service factor, harmonics) and print these at 9 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "Display fix on the NextGen side, owner to approve scope. These are wave-equation march / balancing / Gibbs outputs (engine-only), every rodpump panel is a select-only teaching view (ODUMA-4 and the published cases; panelCapstoneGuard.test.js forbids OBAGI), and the Suite studio cannot be set to the stated case. Preferred: give pd-card-explorer and pd-balance-explorer editable string, unit, pump, damping, fillage, efficiency, unbalance, offset, service factor and harmonics inputs (they print at 9 decimals). A tolerance change alone does not help because no surface reaches the case at any precision.",
-   "evidence": "Section stresses from the marched loads at service factor 0.94; engine-only. Tol is a relative 2e-7 of the value (about seven significant figures); the panels already print 9 decimals, so an editable panel clears it.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "A typed well mode on BalanceExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses.",
    "notes": "The Suite Rod Pump Design Studio cannot be set to OBAGI-27: it derives intake pressure and fillage from its well model (contexts/RodPumpDesignContext.jsx:139 designFormFrom, utils/production/rodPump.js:69 intake pressure and :127 fillage), so the stated 210/2680 psia, fillage 0.853 and efficiency 0.86 cannot be typed; and it prints 0 to 2 decimals (components/rodpump/LoadsPanel.jsx:73-134, DiagnosticsPanel.jsx:101-107, RodStressPanel.jsx:80). Its diagnostic also re-reads the design card rounded to 2 dp position and whole-lb load (RodPumpDesignContext.jsx useDesignCardForDiagnosis).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261027b_w4_rodpump.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, the Balance explorer's \"Your well, typed\" view takes this well as typed, with the unbalance, crank offset, unit designation, service factor and harmonics, and prints the balance, the Goodman loading of every section and the diagnostic read-back to nine decimals.",
+    "case_mode": {
+     "panel": "src/components/course/panels/rodpump/BalanceExplorer.jsx",
+     "mode": "typed",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js"
+    }
+   }
   },
   {
    "tier": "advanced",
    "key": "diag_plunger_stroke_in",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rodpump/advanced/m06-the-expert-reading/l02-working-the-capstone.md (Gibbs diagnostic plunger stroke)",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/rodpump/BalanceExplorer.jsx:868 (typed mode: the case typed as the prompt states it)",
+   "printed": {
+    "decimals": 9
+   },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/BalanceExplorer.jsx (select-only teaching views, BalanceExplorer.jsx:256-257, :830)",
+   "display_ref": "src/components/course/panels/rodpump/BalanceExplorer.jsx:868 toFixed(9)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/BalanceExplorer.jsx:830 -> add editable inputs for the stated case (string, unit, pump, damping, fillage, efficiency, 810 lb unbalance, 14 deg offset, service factor, harmonics) and print these at 9 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "Display fix on the NextGen side, owner to approve scope. These are wave-equation march / balancing / Gibbs outputs (engine-only), every rodpump panel is a select-only teaching view (ODUMA-4 and the published cases; panelCapstoneGuard.test.js forbids OBAGI), and the Suite studio cannot be set to the stated case. Preferred: give pd-card-explorer and pd-balance-explorer editable string, unit, pump, damping, fillage, efficiency, unbalance, offset, service factor and harmonics inputs (they print at 9 decimals). A tolerance change alone does not help because no surface reaches the case at any precision.",
-   "evidence": "Gibbs harmonic solver (36 harmonics) on the marched surface card; engine-only. Tol is a relative 2e-7 of the value (about seven significant figures); the panels already print 9 decimals, so an editable panel clears it.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "A typed well mode on BalanceExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses.",
    "notes": "The Suite Rod Pump Design Studio cannot be set to OBAGI-27: it derives intake pressure and fillage from its well model (contexts/RodPumpDesignContext.jsx:139 designFormFrom, utils/production/rodPump.js:69 intake pressure and :127 fillage), so the stated 210/2680 psia, fillage 0.853 and efficiency 0.86 cannot be typed; and it prints 0 to 2 decimals (components/rodpump/LoadsPanel.jsx:73-134, DiagnosticsPanel.jsx:101-107, RodStressPanel.jsx:80). Its diagnostic also re-reads the design card rounded to 2 dp position and whole-lb load (RodPumpDesignContext.jsx useDesignCardForDiagnosis).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261027b_w4_rodpump.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, the Balance explorer's \"Your well, typed\" view takes this well as typed, with the unbalance, crank offset, unit designation, service factor and harmonics, and prints the balance, the Goodman loading of every section and the diagnostic read-back to nine decimals.",
+    "case_mode": {
+     "panel": "src/components/course/panels/rodpump/BalanceExplorer.jsx",
+     "mode": "typed",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js"
+    }
+   }
   },
   {
    "tier": "advanced",
    "key": "diag_pump_load_max_lb",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/rodpump/advanced/m06-the-expert-reading/l02-working-the-capstone.md (Gibbs diagnostic peak pump load)",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/rodpump/BalanceExplorer.jsx:869 (typed mode: the case typed as the prompt states it)",
+   "printed": {
+    "decimals": 9
+   },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/BalanceExplorer.jsx (select-only teaching views, BalanceExplorer.jsx:256-257, :830)",
+   "display_ref": "src/components/course/panels/rodpump/BalanceExplorer.jsx:869 toFixed(9)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/rodpump/BalanceExplorer.jsx:830 -> add editable inputs for the stated case (string, unit, pump, damping, fillage, efficiency, 810 lb unbalance, 14 deg offset, service factor, harmonics) and print these at 9 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "Display fix on the NextGen side, owner to approve scope. These are wave-equation march / balancing / Gibbs outputs (engine-only), every rodpump panel is a select-only teaching view (ODUMA-4 and the published cases; panelCapstoneGuard.test.js forbids OBAGI), and the Suite studio cannot be set to the stated case. Preferred: give pd-card-explorer and pd-balance-explorer editable string, unit, pump, damping, fillage, efficiency, unbalance, offset, service factor and harmonics inputs (they print at 9 decimals). A tolerance change alone does not help because no surface reaches the case at any precision.",
-   "evidence": "Gibbs harmonic solver on the marched surface card; engine-only. Tol is a relative 2e-7 of the value (about seven significant figures); the panels already print 9 decimals, so an editable panel clears it.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "A typed well mode on BalanceExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses.",
    "notes": "The Suite Rod Pump Design Studio cannot be set to OBAGI-27: it derives intake pressure and fillage from its well model (contexts/RodPumpDesignContext.jsx:139 designFormFrom, utils/production/rodPump.js:69 intake pressure and :127 fillage), so the stated 210/2680 psia, fillage 0.853 and efficiency 0.86 cannot be typed; and it prints 0 to 2 decimals (components/rodpump/LoadsPanel.jsx:73-134, DiagnosticsPanel.jsx:101-107, RodStressPanel.jsx:80). Its diagnostic also re-reads the design card rounded to 2 dp position and whole-lb load (RodPumpDesignContext.jsx useDesignCardForDiagnosis).",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261027b_w4_rodpump.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, the Balance explorer's \"Your well, typed\" view takes this well as typed, with the unbalance, crank offset, unit designation, service factor and harmonics, and prints the balance, the Goodman loading of every section and the diagnostic read-back to nine decimals.",
+    "case_mode": {
+     "panel": "src/components/course/panels/rodpump/BalanceExplorer.jsx",
+     "mode": "typed",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js"
+    }
+   }
   }
  ]
 }
