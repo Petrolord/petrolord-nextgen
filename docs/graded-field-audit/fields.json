@@ -29229,9 +29229,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_scal.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "okoro_m_ratio",
+    "label": "OKORO endpoint mobility ratio M",
+    "unit": "-",
+    "expected": 2.6335470085470085,
+    "tol": 0.005
+   },
+   "rekey_annot": {
+    "source": "hand-calc",
+    "source_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+    "printed": {
+     "sigfigs": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "Mobility ratio tile prints r.M to 6 significant figures (2.63355); also a hand calc (0.34/0.48)/(0.78/2.9).",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "M = (0.3/0.5)/(0.9/1.8) = 1.2 from the four prompt inputs; worked in full in the capstone lesson. Continuous value, tol 0.005, not guessable (inverted answer 0.8333 fails).",
   "notes": "LEAK (by design): DisplacementExplorer opens on the Ekene capstone case (muO and nw default to EKENE_SCAL.design, DisplacementExplorer.jsx:31-32) and prints this on default state; the capstone lesson directs the learner to that tile. Also printed as the worked answer in the lesson (l02:22)."
  },
@@ -29262,9 +29288,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_scal.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "okoro_swf",
+    "label": "OKORO Welge front saturation Swf",
+    "unit": "fraction",
+    "expected": 0.52651,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+    "printed": {
+     "sigfigs": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "Front saturation tile prints bl.Swf (0.52651, a point of the 0.00001 Welge scan); an independent 2e6-point tangent search gives 0.526316, 0.00019 away, inside tol 0.0005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Welge tangent is an engine search; tile sci(bl.Swf, 6) prints 0.637200, error 0 against tol 5e-4.",
   "notes": "LEAK (by design): DisplacementExplorer opens on the Ekene capstone case (muO and nw default to EKENE_SCAL.design, DisplacementExplorer.jsx:31-32) and prints this on default state; the capstone lesson directs the learner to that tile. Lesson l02:42 prints 0.6372."
  },
@@ -29295,9 +29347,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_scal.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "okoro_fwf",
+    "label": "OKORO fractional flow at the front",
+    "unit": "fraction",
+    "expected": 0.8340968276155657,
+    "tol": 0.001
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+    "printed": {
+     "sigfigs": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "fw at the front tile prints 0.834097; the independent tangent search gives 0.83357, 0.0005 away, inside tol 0.001.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "sci(bl.fwf, 6) prints 0.868276, within 3e-7 of 0.8682763 against tol 0.001.",
   "notes": "LEAK (by design): DisplacementExplorer opens on the Ekene capstone case (muO and nw default to EKENE_SCAL.design, DisplacementExplorer.jsx:31-32) and prints this on default state; the capstone lesson directs the learner to that tile. Lesson l02:44 prints 0.8682763300877854."
  },
@@ -29328,9 +29406,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_scal.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "okoro_qi_bt_pv",
+    "label": "OKORO pore volumes injected at breakthrough",
+    "unit": "PV",
+    "expected": 0.3674753216316873,
+    "tol": 0.001
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+    "printed": {
+     "sigfigs": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "PV injected at breakthrough tile prints 0.367475; the independent search agrees to 3e-7.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "sci(bl.QiBt, 6) prints 0.330770 against tol 0.001; also 1/slope by hand from the lesson (l02:30).",
   "notes": "LEAK (by design): DisplacementExplorer opens on the Ekene capstone case (muO and nw default to EKENE_SCAL.design, DisplacementExplorer.jsx:31-32) and prints this on default state; the capstone lesson directs the learner to that tile. Lesson l02:30 prints 0.33077027444818546."
  },
@@ -29361,9 +29465,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_scal.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "okoro_ed_bt",
+    "label": "OKORO displacement efficiency at breakthrough",
+    "unit": "fraction",
+    "expected": 0.4711222072201119,
+    "tol": 0.001
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+    "printed": {
+     "sigfigs": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "ED at breakthrough tile prints 0.471122 = QiBt/(1 - Swc); independent search agrees to 4e-7.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "sci(bl.EDbt, 6) prints 0.508877 against tol 0.001; hand check QiBt/0.65 = 0.5088773453049007 reproduced.",
   "notes": "LEAK (by design): DisplacementExplorer opens on the Ekene capstone case (muO and nw default to EKENE_SCAL.design, DisplacementExplorer.jsx:31-32) and prints this on default state; the capstone lesson directs the learner to that tile. Lesson l02:48 prints 0.5088773453049006."
  },
@@ -29394,9 +29524,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_scal.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "okoro_bt_days",
+    "label": "OKORO days to breakthrough at 7200 bwpd",
+    "unit": "days",
+    "expected": 492.519007464692,
+    "tol": 2.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+    "printed": {
+     "decimals": 1
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "Days tile prints fmt(btDays, 1) = 492.5 at the typed 9650000 bbl and 7200 bwpd; QiBt x PV / rate, tol 2 days.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "fmt(btDays, 1) prints 926.6, rounding error 0.005 against tol 2; hand chain 0.33077027 x 22410845.53 / 8000 = 926.6051908800841 reproduced.",
   "notes": "LEAK (by design): DisplacementExplorer opens on the Ekene capstone case (muO and nw default to EKENE_SCAL.design, DisplacementExplorer.jsx:31-32) and prints this on default state; the capstone lesson directs the learner to that tile. Lesson l02:36 prints 926.6051908800841."
  },
@@ -29520,7 +29676,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "sci(cap.hEntryM, 9) prints 3.14298286 against tol 0.01; hand chain Pc_entry / (0.4335 x dSG) x 0.3048 also given in the lesson.",
@@ -29553,7 +29709,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "fmt(cap.fwlM, 4) prints 1,563.143 (trailing zero trimmed) against tol 0.02; hand: 1560 + entry height.",
@@ -29586,7 +29742,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "sci(cap.swAtCrest, 9) prints 0.350629794 against tol 5e-4; the power-law inversion is also a hand chain with the lesson's intermediates.",
@@ -29621,7 +29777,7 @@
   },
   "owner_decision": false,
   "recommendation": "Redesign: the graded value equals a constant that the panel label and the lesson both print. Removing '(plant 2.5)' from the tile label would not fix it, because lesson l02:9 also states it. The owner can either accept it as a free recover-the-plant check or replace it as proposed.",
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": {
    "migration": "20261024a_w1_scal.sql",
@@ -29680,7 +29836,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "sci(context.avgA, 9) prints 0.249150159 against tol 5e-4; the design 0.25 fails by construction (drift 0.00085).",
@@ -29713,7 +29869,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Gravity/dip mode defaults to qt 2000 and dip +10 (DesignExplorer.jsx:35-36, DIP_CASE scalLab.js:264); sci(EDbt, 9) prints 0.509580717 against tol 5e-4.",
@@ -29779,7 +29935,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Polymer mode defaults to multiplier 4 (DesignExplorer.jsx:37); sci(EDbt, 9) prints 0.577196490 against tol 0.001.",
@@ -29812,7 +29968,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "sci(context.swAvg, 9) prints 0.483450334 against tol 0.002; 2000-interval trapezoid is engine work (spreadsheet possible but the panel is the named route).",

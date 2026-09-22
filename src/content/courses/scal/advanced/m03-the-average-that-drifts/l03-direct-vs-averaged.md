@@ -1,6 +1,6 @@
 # Direct versus averaged
 
-You now hold two pipelines that answer the same question. The direct fit takes one plug's raw J points and returns the plant exactly: $a = 0.25$, $b = 1$, $r^2_{\log} = 1$. The averaging pipeline takes all three plugs and returns $a = 0.2491501585202375$, $b = 1.0102893566145976$. On the Ekene fixture the direct fit wins outright. So when does the average earn its keep, and how do you report either number honestly?
+You now hold two pipelines that answer the same question. The direct fit takes one plug's raw J points and returns the plant exactly: $a = 0.25$, $b = 1$, $r^2_{\log} = 1$. The averaging pipeline takes all three plugs and returns $b = 1.0102893566145976$ and an $a$ pulled below the plant. On the Ekene fixture the direct fit wins outright. So when does the average earn its keep, and how do you report either number honestly?
 
 ## When the direct fit is the right tool
 
@@ -18,9 +18,9 @@ And when you do use the average, treat the refit as a CANDIDATE, not a conclusio
 
 ## Name the chain
 
-The Material Balance course, one door over, learned this rule the hard way with printed constants: a number derived from a rounded print differs from the same number derived from the raw double, and once both are loose in a report nobody can tell which is which. The rule here is the same rule wearing capillary clothes. The quantity called "the fitted a of the Ekene J curve" has at least two legitimate values in this course, 0.25 by the direct chain and 0.2491501585202375 by the averaging chain, and neither is a mistake. They are answers to different questions.
+The Material Balance course, one door over, learned this rule the hard way with printed constants: a number derived from a rounded print differs from the same number derived from the raw double, and once both are loose in a report nobody can tell which is which. The rule here is the same rule wearing capillary clothes. The quantity called "the fitted a of the Ekene J curve" has at least two legitimate values in this course, 0.25 by the direct chain and the averaging chain's own refit, and neither is a mistake. They are answers to different questions.
 
-So never quote a fitted parameter without its provenance. "a = 0.249, averaged refit over three plugs, shared Swirr 0.25, 41-point grid" is a reportable number. "a = 0.249" on its own is a landmine: the next engineer will check it against a direct fit, get 0.25, and burn an afternoon deciding which of you erred, when the true answer is neither. You saw the grading side of this in the previous lesson: the capstone's tolerance of 0.0005 is narrower than the 0.0008498414797624976 gap between the chains, precisely so that naming the wrong chain is detectable.
+So never quote a fitted parameter without its provenance. "a from the averaged refit over three plugs, shared Swirr 0.25, 41-point grid" is a reportable statement of a number. The bare number on its own is a landmine: the next engineer will check it against a direct fit, get 0.25, and burn an afternoon deciding which of you erred, when the true answer is neither. You saw the grading side of this in the previous lesson: the capstone's tolerance of 0.0005 is narrower than the gap between the chains, precisely so that naming the wrong chain is detectable.
 
 ## The misconception to avoid
 
@@ -28,6 +28,6 @@ The misconception is that the averaged number is automatically the deliverable b
 
 ## Exercise
 
-First, write the one-line provenance statement you would attach to each of the two Ekene values, 0.25 and 0.2491501585202375, such that a colleague could reproduce either without asking you anything.
+First, write the one-line provenance statement you would attach to each of the two Ekene values of $a$, the direct 0.25 and the averaged refit, such that a colleague could reproduce either without asking you anything.
 
 Second, describe a plug set, in terms of scatter magnitude relative to the resample bias, for which the averaging pipeline gives a better reservoir curve than any direct single-plug fit, and state the observable you would compute to demonstrate that it does.

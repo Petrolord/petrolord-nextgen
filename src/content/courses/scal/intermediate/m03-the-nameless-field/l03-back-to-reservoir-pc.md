@@ -1,6 +1,6 @@
 # Back to reservoir Pc
 
-The J column travels. This lesson lands it on the reservoir rock: 120 md, 19 percent porosity, the same 50 dyn/cm water system at zero contact angle. Nobody ever ran a capillary experiment on this rock. By the end of the lesson it has a full Pc curve anyway, and the value at $S_w = 0.2$ is your third capstone number.
+The J column travels. This lesson lands it on the reservoir rock: 120 md, 19 percent porosity, the same 50 dyn/cm water system at zero contact angle. Nobody ever ran a capillary experiment on this rock. By the end of the lesson it has a full Pc curve anyway. The value at $S_w = 0.2$ is your third capstone number, so this lesson works every other row and leaves that one to you.
 
 ## The factor, pointed the other way
 
@@ -16,13 +16,13 @@ Here is the detail that decides your capstone answer. Ahmed's step 3 does not go
 
 | $S_w$ | printed $J$ | engine reservoir $P_c$ (psi) | book prints |
 |---|---|---|---|
-| 0.2 | 0.169 | 1.5534071373580902 | 1.553 |
+| 0.2 | 0.169 | yours to compute | yours to compute |
 | 0.4 | 0.102 | 0.9375593373403855 | 0.938 |
 | 0.6 | 0.073 | 0.6709983492730213 | 0.671 |
 | 0.8 | 0.058 | 0.5331219761347291 | 0.533 |
 | 1.0 | 0.048 | 0.4412043940425345 | 0.441 |
 
-Every printed answer is the engine's value rounded to three decimals. The value at $S_w = 0.2$, 1.5534071373580902 psi, is the capstone field `res_pc_sw02`, graded at a tolerance of 0.002. The prompt tells you to use the printed J column, and lesson 4 shows what happens if you do not.
+Every printed answer is the engine's value rounded to three decimals. The value at $S_w = 0.2$ is the capstone field `res_pc_sw02`, graded at a tolerance of 0.002: run the same multiplication on the printed 0.169. The prompt tells you to use the printed J column, and lesson 4 shows what happens if you do not.
 
 ## Worked example: the top row
 
@@ -34,7 +34,7 @@ Compare with the lab measurement at the same saturation: 0.50 psi. The reservoir
 
 ## Two factors, two rocks, no reciprocals
 
-A trap worth naming explicitly. The lab factor was 0.0967993827459659 J per psi. Its reciprocal is $1/0.0967993827459659 = 10.330...$, and that number converts J back to psi ON THE LAB PLUG. It is not the reservoir factor. The reservoir factor, 9.191758209219469, is built from the reservoir's own $k$ and $\phi$. If the two factors had been reciprocals, the exercise would have been pointless: you would have recovered the lab curve you started with. The gap between 10.33 and 9.19 IS the rock correction, the whole reason the J-function exists.
+A trap worth naming explicitly. The lab factor from lesson 1 is in J per psi. Its reciprocal, a little over 10.3, converts J back to psi ON THE LAB PLUG. It is not the reservoir factor. The reservoir factor, 9.191758209219469, is built from the reservoir's own $k$ and $\phi$. If the two factors had been reciprocals, the exercise would have been pointless: you would have recovered the lab curve you started with. The gap between that reciprocal and 9.19 IS the rock correction, the whole reason the J-function exists.
 
 ## The misconception to avoid
 
@@ -44,4 +44,4 @@ Dividing by the lab factor instead of multiplying by the reservoir factor. It fe
 
 First, rebuild the reservoir Pc at $S_w = 0.6$ from the printed J of 0.073 and the reservoir factor, to full calculator precision, and check it against the table above and the book's 0.671.
 
-Second, compute the ratio of the reservoir factor to the lab plug's psi-per-J factor (that is, $9.191758209219469$ against $1/0.0967993827459659$), and state in one sentence what single rock quantity that ratio is measuring.
+Second, compute the ratio of the reservoir factor to the lab plug's psi-per-J factor (that is, $9.191758209219469$ against the reciprocal of the lab factor), and state in one sentence what single rock quantity that ratio is measuring.

@@ -1,8 +1,6 @@
 # Working the capstone
 
-> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update takes them out of the lessons and panels.
-
-The Expert capstone asks for six numbers. None of them is hard to produce once you know exactly which case it belongs to, and all of them are easy to get wrong by producing the right number from the wrong case. This lesson walks the mechanism for each field, restates every designed case in full, and then spends its second half on the discipline the tolerances enforce.
+The Expert capstone asks for six numbers. None of them is hard to produce once you know exactly which case it belongs to, and all of them are easy to get wrong by producing the right number from the wrong case. This lesson walks the mechanism for each field, restates every designed case in full, and then spends its second half on the discipline the tolerances enforce. It does not print the six values: the design explorer opens on teaching settings, and you set each designed case yourself.
 
 ## Field one: fitted_nw_printed_grid
 
@@ -12,31 +10,31 @@ The tolerance is 0.001. The noise-free grid recovers its plant of 2.5 to machine
 
 ## Field two: avg_refit_a
 
-The case: all three Ekene plugs, converted to J tables, averaged by averageJCurves with the shared Swirr override at 0.25, and the power-law refit of the mean curve read off. The value is 0.2491501585202375 at a tolerance of 0.0005.
+The case: all three Ekene plugs, converted to J tables, averaged by averageJCurves with the shared Swirr override at 0.25, and the power-law refit of the mean curve read off. The design explorer's averaged-refit tile runs it once you set its Swirr box to 0.25. The tolerance is 0.0005.
 
-The trap is built into the field on purpose: the design value of the plant is 0.25, the drift is 0.00085, and the tolerance is 0.0005, so writing the plant FAILS. This is the one field in the course where the honest answer is the biased machine output rather than the clean design constant, because the question being graded is whether you ran the averaging workflow and read its actual result, provenance and all.
+The trap is built into the field on purpose: the design value of the plant is 0.25, the drift is larger than the tolerance, so writing the plant FAILS. This is the one field in the course where the honest answer is the biased machine output rather than the clean design constant, because the question being graded is whether you ran the averaging workflow and read its actual result, provenance and all.
 
 ## Fields three and four: the two dip efficiencies
 
-The case, stated once and used twice: permeability 250 md, cross-section 20000 ft2, total rate 2000 rb/d, water gravity 1.03, oil gravity 0.8654434250764526 from the locked API 32 crude, on the base Ekene curves and viscosities. Dip 10 degrees with displacement updip gives gravity_ed_bt 0.5095807170488317. The same case with the dip reversed to minus 10 degrees gives downdip_ed_bt 0.5081700834294871. Both tolerances are 0.0005.
+The case, stated once and used twice: permeability 250 md, cross-section 20000 ft2, total rate 2000 rb/d, water gravity 1.03, oil gravity 0.8654434250764526 from the locked API 32 crude, on the base Ekene curves and viscosities. Dip 10 degrees with displacement updip gives gravity_ed_bt. The same case with the dip reversed to minus 10 degrees gives downdip_ed_bt. Both tolerances are 0.0005. The design explorer's dip mode opens flat at 3000 rb/d; set the rate to 2000 and the dip to plus and then minus 10.
 
-Now place the flat value between them: 0.5088773453049006 sits 0.0007 below the updip answer and 0.0007 above the downdip answer. The tolerance was chosen so that the flat value fails BOTH fields. Submitting the Associate tier's number here is not a rounding problem, it is a case problem: you answered a horizontal question in a dipping exam. Sign discipline is the other half: updip displacement is positive dip in this convention, and if your two answers come out swapped, you have reversed the sign of sin(alpha), not discovered new physics.
+Now place the flat value, 0.5088773453049006, between your two answers. The tolerance was chosen so that the flat value fails BOTH fields. Submitting the Associate tier's number here is not a rounding problem, it is a case problem: you answered a horizontal question in a dipping exam. Sign discipline is the other half: updip displacement is positive dip in this convention, and if your two answers come out swapped, you have reversed the sign of sin(alpha), not discovered new physics.
 
 ## Field five: polymer_ed_bt
 
-The case: the base Ekene displacement with polymerMuMult 4, nothing else changed. Effective water viscosity 2 cp, endpoint mobility ratio 0.3, and the graded efficiency at breakthrough is 0.5771964898801638 at a tolerance of 0.001.
+The case: the base Ekene displacement with polymerMuMult 4, nothing else changed. Effective water viscosity 2 cp, endpoint mobility ratio 0.3, and the graded efficiency at breakthrough at a tolerance of 0.001. The polymer mode opens at a multiplier of 2; set it to 4.
 
-The mechanism check is worth a sentence: the polymer case does not touch the endpoints, so EDmax stays exactly 0.6153846153846154. What the thickened water buys is a later, higher front, 0.7044 against 0.6372, and therefore more of the ceiling banked by breakthrough. If your polymer answer exceeds the ceiling, you have changed an endpoint somewhere, and the engine did not.
+The mechanism check is worth a sentence: the polymer case does not touch the endpoints, so EDmax stays exactly 0.6153846153846154. What the thickened water buys is a later, higher front than the flat 0.6372, and therefore more of the ceiling banked by breakthrough. If your polymer answer exceeds the ceiling, you have changed an endpoint somewhere, and the engine did not.
 
 ## Field six: sw_avg_crest_column
 
-The case: integrate the saturation-height profile over the crest column, from the contact to the crest, by composite trapezoid with 2000 intervals, on the design J curve and the Ekene reservoir rock. The value is 0.48345033394940007 at a tolerance of 0.002, and the design explorer computes it the same way.
+The case: integrate the saturation-height profile over the crest column, from the contact to the crest, by composite trapezoid with 2000 intervals, on the design J curve and the Ekene reservoir rock, 250 md and 0.20. The tolerance is 0.002, and the design explorer computes it the same way once you type that rock into its crest-column boxes, which open on the teaching sand.
 
 Two disciplines here. The integration rule is part of the case: a different rule or a coarse step lands elsewhere inside or outside the tolerance, and the prompt states 2000 intervals so that everyone integrates the same integral. And the scope is one column: this number does not claim to be the 169-cell field average, and nothing in this course derived that.
 
 ## Keeping the three EDbt variants apart
 
-Three graded fields and the flat base value are all the same physical quantity, efficiency at breakthrough, on four different cases. The safe habit is mechanical: never write an EDbt without its case attached. Flat 0.5088773453049006. Updip 0.5095807170488317. Downdip 0.5081700834294871. Polymer 0.5771964898801638. The first three live within a band of 0.0014; the fourth is a different regime. If your notes contain a bare 0.509, you no longer know which flood you ran.
+Three graded fields and the flat base value are all the same physical quantity, efficiency at breakthrough, on four different cases. The safe habit is mechanical: never write an EDbt without its case attached, flat, updip, downdip or polymer. The first three live within a narrow band; the fourth is a different regime. If your notes contain a bare EDbt to three decimals, you no longer know which flood you ran.
 
 ## The misconception to avoid
 

@@ -39,17 +39,17 @@ $$\sqrt{\frac{k}{\phi}} = \sqrt{\frac{80}{0.16}} = \sqrt{500} = 22.3606797749978
 
 so every Pc row is multiplied by one constant:
 
-$$\frac{0.21645 \times 22.360679774997896}{50} = 0.0967993827459659 \ \text{per psi}$$
+$$\text{lab factor} = \frac{0.21645 \times 22.360679774997896}{50} \ \text{per psi}$$
 
-Ahmed prints this step as $J(S_w) = 0.096799 \, p_c$. The engine's `computeJTable` builds exactly the same constant internally, at full double precision. This number is the first of your capstone values: the lab J-per-psi factor, graded at a tolerance of 0.0001.
+Work that division yourself and carry the result at full precision. Ahmed prints the step with the factor to six decimals, and the engine's `computeJTable` builds exactly the same constant internally, at full double precision. This factor is the first of your capstone values, the lab J-per-psi factor, graded at a tolerance of 0.0001, so this course does not print it for you: you compute it, here, from the four inputs.
 
 ## The first row by hand
 
 Take the top of the table, $S_w = 1.0$, $P_c = 0.50$ psi:
 
-$$J(1.0) = 0.0967993827459659 \times 0.50 = 0.04839969137298295$$
+$$J(1.0) = \text{lab factor} \times 0.50$$
 
-The book prints 0.048. One multiplication, and you have reproduced the first entry of a published table to its last printed digit. The remaining four rows are the same multiplication with a different Pc, and lesson 2 walks the whole column.
+The book prints 0.048, and your full-precision factor times 0.50 must round to it. One multiplication, and you have reproduced the first entry of a published table to its last printed digit. The remaining four rows are the same multiplication with a different Pc, and lesson 2 walks the whole column.
 
 ## The shape of the whole example
 
@@ -63,11 +63,11 @@ Lesson 4 then does something the book does not: it runs the chain twice, once fr
 
 ## The misconception to avoid
 
-The factor 0.0967993827459659 is not a property of the J-function, of the fluid pair, or of anything universal. It belongs to this one plug: change $k$, $\phi$, $\sigma$ or $\theta$ and the factor changes with it. Learners who carry "multiply by 0.0968" from one problem to the next are silently assuming every rock is an 80 md, 16 percent plug measured at 50 dyn/cm. The J-function's whole purpose is that the CURVE travels; the factor never does.
+The lab factor is not a property of the J-function, of the fluid pair, or of anything universal. It belongs to this one plug: change $k$, $\phi$, $\sigma$ or $\theta$ and the factor changes with it. Learners who carry this plug's factor from one problem to the next are silently assuming every rock is an 80 md, 16 percent plug measured at 50 dyn/cm. The J-function's whole purpose is that the CURVE travels; the factor never does.
 
 ## Worked check
 
-Confirm the constant is built from the pieces you were given and nothing else. $\sqrt{500}$ is 22.360679774997896. Multiply by the Leverett constant 0.21645 to get 4.839969137298295, divide by 50, and read 0.0967993827459659. If your calculator shows 0.09679938274, you are holding the same number at shorter precision, which is fine as long as you know that is what you hold. That distinction, casual here, becomes the entire point of lesson 4.
+Confirm the constant is built from the pieces you were given and nothing else. $\sqrt{500}$ is 22.360679774997896. Multiply by the Leverett constant 0.21645 to get 4.839969137298295, divide by 50, and read the factor. If your calculator shows fewer digits than the engine carries, you are holding the same number at shorter precision, which is fine as long as you know that is what you hold. That distinction, casual here, becomes the entire point of lesson 4.
 
 ## Exercise
 
