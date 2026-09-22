@@ -4,6 +4,8 @@ Six numbers from moving the string.
 
 {{panel:hy-surge-explorer}}
 
+**Your mud.** Type the four readings and the density into the explorer's "Your mud" boxes. Fields 1 to 5 are the "Closed string and open" view at 0.75 m/s (it prints the open swab as well), and field 6 is "The window and the speed limit" view with the two gradients the brief states. The boxes open blank, which is the selected case's own mud.
+
 ## What is asked
 
 1. The surge pressure on the SLANT well with a CLOSED string.

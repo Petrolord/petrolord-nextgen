@@ -29,68 +29,83 @@
   {
    "tier": "beginner",
    "key": "hb_tau_y_Pa",
-   "source": "unobtainable",
-   "source_ref": "src/content/courses/hydraulics/beginner/m02-mud-rheology/l04-herschel-bulkley.md:14",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Your mud boxes, Three models view; rule taught in src/content/courses/hydraulics/beginner/m02-mud-rheology/l04-herschel-bulkley.md",
+   "printed": {
+    "decimals": 6
+   },
    "display_scale": 1,
-   "display_ref": "src/pages/apps/HydraulicsStudio/components/MudRheologyTab.jsx:99",
+   "display_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Tile 'Herschel-Bulkley tau_y' fmt(v, 6)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/content/courses/hydraulics/beginner/m02-mud-rheology/l04-herschel-bulkley.md:14 -> state the fit: tau_y = (2 x theta3 - theta6) x 0.51040356094 Pa (or add custom dial inputs to RheologyExplorer.jsx:31, which prints tau_y with fmt(...,6) at :37)"
-   },
-   "owner_decision": true,
-   "recommendation": "Teach the yield rule in l04 (one line) so the m06 exercise \"compute fields 1 and 2 by hand\" is possible; otherwise widen tol to 0.005 for the Suite MudRheologyTab tauYPa.toFixed(2).",
-   "evidence": "l04 says only \"a low-rate reading for the yield\" and gives two worked values (2.552, 1.531); the rule (2 theta3 - theta6) x 0.51040356 = 2.04161 must be reverse-engineered. Panels cannot take the new mud; Suite prints `tauYPa.toFixed(2)` = 2.04, off by 0.0016 against tol 0.0005.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the model view, prints this value at 6 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   },
   {
    "tier": "beginner",
    "key": "pipe_dp_Pa",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx:128",
-   "printed": null,
-   "display_scale": 1,
-   "display_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx:16",
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Your mud boxes, The pressure chain view, case slant_kcl_polymer, flow 0.030",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1e-06,
+   "display_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Tile 'Inside the pipe' MPa(v) = fmt(v/1e6, 6)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/hydraulics/RheologyExplorer.jsx:31 add mud inputs; :16 MPa = fmt(v/1e6,4) prints 100 Pa steps (half = 50 = tol, borderline) -> print 5 decimals in MPa or whole Pa"
-   },
-   "owner_decision": true,
-   "recommendation": "Add a \"Capstone mud\" / custom dial-readings + density input to the three NextGen panels (they already format at 4 to 8 decimals); without it these fields are ungradable by a learner. Alternative is teaching the full local power-law march by hand, which is an engine-only element-by-element calculation.",
-   "evidence": "NextGen panels only offer the four fixture cases (CASE_OPTIONS = CASES.map(...), e.g. src/components/course/panels/hydraulics/RheologyExplorer.jsx:23,31); the engine takes `over.fann`/`over.densityKgM3` (src/components/course/panels/hydraulics/hydraulicsLab.js:101, used by capstoneValues at :270) but no panel exposes it, so the capstone mud 52/33/6/5 at 1320 cannot be run. The Suite Hydraulics Studio is never mentioned by the course, would need the fixture survey rebuilt by hand, and prints too coarsely anyway: Suite prints only per-element dP in kPa toFixed(1) (src/pages/apps/HydraulicsStudio/components/HydraulicsTab.jsx:124) and no pipe total. Pipe loss is a local power-law march over the collars/HWDP/DP elements, not a hand formula.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the pressure chain view on the slant case at 0.030 m3/s, prints this value at 6 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   },
   {
    "tier": "beginner",
    "key": "annulus_dp_Pa",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx:129",
-   "printed": null,
-   "display_scale": 1,
-   "display_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx:16",
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Your mud boxes, The pressure chain view, case slant_kcl_polymer, flow 0.030",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1e-06,
+   "display_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Tile 'Up the annulus' MPa(v) = fmt(v/1e6, 6)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/hydraulics/RheologyExplorer.jsx:31 add mud inputs; :16 print MPa to 5 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "Add a \"Capstone mud\" / custom dial-readings + density input to the three NextGen panels (they already format at 4 to 8 decimals); without it these fields are ungradable by a learner. Alternative is teaching the full local power-law march by hand, which is an engine-only element-by-element calculation.",
-   "evidence": "NextGen panels only offer the four fixture cases (CASE_OPTIONS = CASES.map(...), e.g. src/components/course/panels/hydraulics/RheologyExplorer.jsx:23,31); the engine takes `over.fann`/`over.densityKgM3` (src/components/course/panels/hydraulics/hydraulicsLab.js:101, used by capstoneValues at :270) but no panel exposes it, so the capstone mud 52/33/6/5 at 1320 cannot be run. The Suite Hydraulics Studio is never mentioned by the course, would need the fixture survey rebuilt by hand, and prints too coarsely anyway: Suite has no annulus total, only per-element kPa toFixed(1). Annulus loss is the HB local power-law march over four annular intervals.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the pressure chain view on the slant case at 0.030 m3/s, prints this value at 6 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   },
   {
    "tier": "beginner",
@@ -115,46 +130,56 @@
   {
    "tier": "beginner",
    "key": "pump_pressure_Pa",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx:127",
-   "printed": null,
-   "display_scale": 1,
-   "display_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx:16",
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Your mud boxes, The pressure chain view, case slant_kcl_polymer, flow 0.030",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1e-06,
+   "display_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Tile 'Pump pressure' MPa(v) = fmt(v/1e6, 6)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/hydraulics/RheologyExplorer.jsx:31 add mud inputs; :16 print MPa to 5 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "Add a \"Capstone mud\" / custom dial-readings + density input to the three NextGen panels (they already format at 4 to 8 decimals); without it these fields are ungradable by a learner. Alternative is teaching the full local power-law march by hand, which is an engine-only element-by-element calculation.",
-   "evidence": "NextGen panels only offer the four fixture cases (CASE_OPTIONS = CASES.map(...), e.g. src/components/course/panels/hydraulics/RheologyExplorer.jsx:23,31); the engine takes `over.fann`/`over.densityKgM3` (src/components/course/panels/hydraulics/hydraulicsLab.js:101, used by capstoneValues at :270) but no panel exposes it, so the capstone mud 52/33/6/5 at 1320 cannot be run. The Suite Hydraulics Studio is never mentioned by the course, would need the fixture survey rebuilt by hand, and prints too coarsely anyway: Suite KPI prints pump pressure in kPa toFixed(0) (src/pages/apps/HydraulicsStudio/components/HydraulicsTab.jsx:81), 1000 Pa steps against tol 50. Pump = pipe + annulus + bit; two of the three terms are unobtainable.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the pressure chain view on the slant case at 0.030 m3/s, prints this value at 6 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "slant_ecd_at_td_kgm3",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:115",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Your mud boxes, ECD against depth view, case slant_kcl_polymer, flow 0.030",
+   "printed": {
+    "decimals": 5
+   },
    "display_scale": 1,
-   "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:115",
+   "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Tile 'ECD at total depth' fmt(v, 5)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:93 add mud inputs (ECD already fmt(...,5) at :115)"
-   },
-   "owner_decision": true,
-   "recommendation": "Add a \"Capstone mud\" / custom dial-readings + density input to the three NextGen panels (they already format at 4 to 8 decimals); without it these fields are ungradable by a learner. Alternative is teaching the full local power-law march by hand, which is an engine-only element-by-element calculation.",
-   "evidence": "NextGen panels only offer the four fixture cases (CASE_OPTIONS = CASES.map(...), e.g. src/components/course/panels/hydraulics/RheologyExplorer.jsx:23,31); the engine takes `over.fann`/`over.densityKgM3` (src/components/course/panels/hydraulics/hydraulicsLab.js:101, used by capstoneValues at :270) but no panel exposes it, so the capstone mud 52/33/6/5 at 1320 cannot be run. The Suite Hydraulics Studio is never mentioned by the course, would need the fixture survey rebuilt by hand, and prints too coarsely anyway: Suite prints ECD in g/cc toFixed(3) (src/pages/apps/HydraulicsStudio/components/HydraulicsTab.jsx:87), 1 kg/m3 steps against tol 0.005. ECD needs the mud-dependent annulus loss.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the ECD view on the slant case at 0.030 m3/s, prints this value at 5 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   },
   {
    "tier": "intermediate",
@@ -181,222 +206,272 @@
   {
    "tier": "intermediate",
    "key": "horizontal_ecd_at_td_kgm3",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:115",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Your mud boxes, ECD against depth view, case horizontal_kcl_polymer, flow 0.030",
+   "printed": {
+    "decimals": 5
+   },
    "display_scale": 1,
-   "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:115",
+   "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Tile 'ECD at total depth' fmt(v, 5)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:93 add mud inputs"
-   },
-   "owner_decision": true,
-   "recommendation": "Add a \"Capstone mud\" / custom dial-readings + density input to the three NextGen panels (they already format at 4 to 8 decimals); without it these fields are ungradable by a learner. Alternative is teaching the full local power-law march by hand, which is an engine-only element-by-element calculation.",
-   "evidence": "NextGen panels only offer the four fixture cases (CASE_OPTIONS = CASES.map(...), e.g. src/components/course/panels/hydraulics/RheologyExplorer.jsx:23,31); the engine takes `over.fann`/`over.densityKgM3` (src/components/course/panels/hydraulics/hydraulicsLab.js:101, used by capstoneValues at :270) but no panel exposes it, so the capstone mud 52/33/6/5 at 1320 cannot be run. The Suite Hydraulics Studio is never mentioned by the course, would need the fixture survey rebuilt by hand, and prints too coarsely anyway: Suite ECD g/cc toFixed(3). Mud-dependent annulus loss over TVD.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the ECD view on the horizontal case at 0.030 m3/s, prints this value at 5 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "horizontal_min_transport_ratio",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:65",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Your mud boxes, Transport along the annulus view, case horizontal_kcl_polymer, flow 0.030",
+   "printed": {
+    "decimals": 8
+   },
    "display_scale": 1,
-   "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:65",
+   "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Tile 'Worst transport ratio' fmt(v, 8)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:35 add mud inputs (tile already fmt(...,8))"
-   },
-   "owner_decision": true,
-   "recommendation": "Add a \"Capstone mud\" / custom dial-readings + density input to the three NextGen panels (they already format at 4 to 8 decimals); without it these fields are ungradable by a learner. Alternative is teaching the full local power-law march by hand, which is an engine-only element-by-element calculation.",
-   "evidence": "NextGen panels only offer the four fixture cases (CASE_OPTIONS = CASES.map(...), e.g. src/components/course/panels/hydraulics/RheologyExplorer.jsx:23,31); the engine takes `over.fann`/`over.densityKgM3` (src/components/course/panels/hydraulics/hydraulicsLab.js:101, used by capstoneValues at :270) but no panel exposes it, so the capstone mud 52/33/6/5 at 1320 cannot be run. The Suite Hydraulics Studio is never mentioned by the course, would need the fixture survey rebuilt by hand, and prints too coarsely anyway: Suite prints minTransportRatio.toFixed(3) (src/pages/apps/HydraulicsStudio/components/HoleCleaningTab.jsx:55), steps of 0.001 against tol 5e-5. Slip velocity depends on the mud rheology.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the transport view on the horizontal case at 0.030 m3/s, prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "horizontal_worst_cuttings_conc_pct",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:66",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Your mud boxes, Transport along the annulus view, case horizontal_kcl_polymer, flow 0.030",
+   "printed": {
+    "decimals": 6
+   },
    "display_scale": 1,
-   "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:66",
+   "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Tile 'Worst cuttings concentration' fmt(v, 6)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:35 add mud inputs (tile fmt(...,6))"
-   },
-   "owner_decision": true,
-   "recommendation": "Add a \"Capstone mud\" / custom dial-readings + density input to the three NextGen panels (they already format at 4 to 8 decimals); without it these fields are ungradable by a learner. Alternative is teaching the full local power-law march by hand, which is an engine-only element-by-element calculation.",
-   "evidence": "NextGen panels only offer the four fixture cases (CASE_OPTIONS = CASES.map(...), e.g. src/components/course/panels/hydraulics/RheologyExplorer.jsx:23,31); the engine takes `over.fann`/`over.densityKgM3` (src/components/course/panels/hydraulics/hydraulicsLab.js:101, used by capstoneValues at :270) but no panel exposes it, so the capstone mud 52/33/6/5 at 1320 cannot be run. The Suite Hydraulics Studio is never mentioned by the course, would need the fixture survey rebuilt by hand, and prints too coarsely anyway: Suite prints maxCuttingsConcPct.toFixed(2) (src/pages/apps/HydraulicsStudio/components/HoleCleaningTab.jsx:61) against tol 5e-5. Concentration follows from the mud-dependent transport ratio.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the transport view on the horizontal case at 0.030 m3/s, prints this value at 6 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "horizontal_min_flow_tr080_m3s",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:168",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Your mud boxes, The flow rate you need view, case horizontal_kcl_polymer, target 0.80",
+   "printed": {
+    "decimals": 8
+   },
    "display_scale": 1,
-   "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:168",
+   "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Tile 'Flow rate required' fmt(v, 8)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/hydraulics/CleaningExplorer.jsx:146 add mud inputs (tile fmt(...,8))"
-   },
-   "owner_decision": true,
-   "recommendation": "Add a \"Capstone mud\" / custom dial-readings + density input to the three NextGen panels (they already format at 4 to 8 decimals); without it these fields are ungradable by a learner. Alternative is teaching the full local power-law march by hand, which is an engine-only element-by-element calculation.",
-   "evidence": "NextGen panels only offer the four fixture cases (CASE_OPTIONS = CASES.map(...), e.g. src/components/course/panels/hydraulics/RheologyExplorer.jsx:23,31); the engine takes `over.fann`/`over.densityKgM3` (src/components/course/panels/hydraulics/hydraulicsLab.js:101, used by capstoneValues at :270) but no panel exposes it, so the capstone mud 52/33/6/5 at 1320 cannot be run. The Suite Hydraulics Studio is never mentioned by the course, would need the fixture survey rebuilt by hand, and prints too coarsely anyway: Suite prints the minimum flow in L/min or gpm toFixed(0) (src/pages/apps/HydraulicsStudio/components/HoleCleaningTab.jsx:67). A root solve on the mud-dependent transport ratio; the panel solver (target NumField :147) exists but only for the fixture muds.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the flow rate view on the horizontal case with a target of 0.80, prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   },
   {
    "tier": "advanced",
    "key": "slant_surge_dp_closed_Pa",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:104",
-   "printed": null,
-   "display_scale": 1,
-   "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:104",
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Your mud boxes, Closed string and open view, case slant_kcl_polymer, trip speed 0.75",
+   "printed": {
+    "decimals": 6
+   },
+   "display_scale": 1e-06,
+   "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Tile 'Closed string pressure' fmt(v/1e6, 6)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:99 add mud inputs (tile fmt(MPa,6) fine)"
-   },
-   "owner_decision": true,
-   "recommendation": "Add a \"Capstone mud\" / custom dial-readings + density input to the three NextGen panels (they already format at 4 to 8 decimals); without it these fields are ungradable by a learner. Alternative is teaching the full local power-law march by hand, which is an engine-only element-by-element calculation.",
-   "evidence": "NextGen panels only offer the four fixture cases (CASE_OPTIONS = CASES.map(...), e.g. src/components/course/panels/hydraulics/RheologyExplorer.jsx:23,31); the engine takes `over.fann`/`over.densityKgM3` (src/components/course/panels/hydraulics/hydraulicsLab.js:101, used by capstoneValues at :270) but no panel exposes it, so the capstone mud 52/33/6/5 at 1320 cannot be run. The Suite Hydraulics Studio is never mentioned by the course, would need the fixture survey rebuilt by hand, and prints too coarsely anyway: Suite prints only EMW at the fixed 0.5 m/s sweep point, g/cc toFixed(3) (src/pages/apps/HydraulicsStudio/components/SurgeSwabTab.jsx:39). Surge pressure uses the mud rheology.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the closed and open view on the slant case at 0.75 m/s, prints this value at 6 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   },
   {
    "tier": "advanced",
    "key": "slant_surge_emw_closed_kgm3",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:107",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Your mud boxes, Closed string and open view, case slant_kcl_polymer, trip speed 0.75",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:107",
+   "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Tile 'Closed surge EMW' fmt(v, 4)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:99 add mud inputs"
-   },
-   "owner_decision": true,
-   "recommendation": "Add a \"Capstone mud\" / custom dial-readings + density input to the three NextGen panels (they already format at 4 to 8 decimals); without it these fields are ungradable by a learner. Alternative is teaching the full local power-law march by hand, which is an engine-only element-by-element calculation.",
-   "evidence": "NextGen panels only offer the four fixture cases (CASE_OPTIONS = CASES.map(...), e.g. src/components/course/panels/hydraulics/RheologyExplorer.jsx:23,31); the engine takes `over.fann`/`over.densityKgM3` (src/components/course/panels/hydraulics/hydraulicsLab.js:101, used by capstoneValues at :270) but no panel exposes it, so the capstone mud 52/33/6/5 at 1320 cannot be run. The Suite Hydraulics Studio is never mentioned by the course, would need the fixture survey rebuilt by hand, and prints too coarsely anyway: Suite surge EMW g/cc toFixed(3) at 0.5 m/s only. EMW = rho + dp/(g TVD), dp mud-dependent.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the closed and open view on the slant case at 0.75 m/s, prints this value at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   },
   {
    "tier": "advanced",
    "key": "slant_swab_emw_open_kgm3",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:68",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Your mud boxes, Closed string and open view, case slant_kcl_polymer, trip speed 0.75",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:68",
+   "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Tile 'Open swab EMW' fmt(v, 4)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:99 add mud inputs and an open swab EMW tile (fmt 4)"
-   },
-   "owner_decision": true,
-   "recommendation": "Add a \"Capstone mud\" / custom dial-readings + density input to the three NextGen panels (they already format at 4 to 8 decimals); without it these fields are ungradable by a learner. Alternative is teaching the full local power-law march by hand, which is an engine-only element-by-element calculation.",
-   "evidence": "NextGen panels only offer the four fixture cases (CASE_OPTIONS = CASES.map(...), e.g. src/components/course/panels/hydraulics/RheologyExplorer.jsx:23,31); the engine takes `over.fann`/`over.densityKgM3` (src/components/course/panels/hydraulics/hydraulicsLab.js:101, used by capstoneValues at :270) but no panel exposes it, so the capstone mud 52/33/6/5 at 1320 cannot be run. The Suite Hydraulics Studio is never mentioned by the course, would need the fixture survey rebuilt by hand, and prints too coarsely anyway: Suite swab EMW g/cc toFixed(3) at 0.5 m/s only (src/pages/apps/HydraulicsStudio/components/SurgeSwabTab.jsx:45). Open-string swab, mud-dependent.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the closed and open view on the slant case at 0.75 m/s, prints this value at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   },
   {
    "tier": "advanced",
    "key": "closed_over_open_dp_ratio",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:106",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Your mud boxes, Closed string and open view, case slant_kcl_polymer, trip speed 0.75",
+   "printed": {
+    "decimals": 8
+   },
    "display_scale": 1,
-   "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:106",
+   "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Tile 'Closed over open' fmt(v, 8)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:99 add mud inputs (tile fmt(...,8))"
-   },
-   "owner_decision": true,
-   "recommendation": "Add a \"Capstone mud\" / custom dial-readings + density input to the three NextGen panels (they already format at 4 to 8 decimals); without it these fields are ungradable by a learner. Alternative is teaching the full local power-law march by hand, which is an engine-only element-by-element calculation.",
-   "evidence": "NextGen panels only offer the four fixture cases (CASE_OPTIONS = CASES.map(...), e.g. src/components/course/panels/hydraulics/RheologyExplorer.jsx:23,31); the engine takes `over.fann`/`over.densityKgM3` (src/components/course/panels/hydraulics/hydraulicsLab.js:101, used by capstoneValues at :270) but no panel exposes it, so the capstone mud 52/33/6/5 at 1320 cannot be run. The Suite Hydraulics Studio is never mentioned by the course, would need the fixture survey rebuilt by hand, and prints too coarsely anyway: Suite prints no pressures for surge. Ratio of two mud-dependent surge pressures.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the closed and open view on the slant case at 0.75 m/s, prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   },
   {
    "tier": "advanced",
    "key": "horizontal_surge_emw_closed_kgm3",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:107",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Your mud boxes, Closed string and open view, case horizontal_kcl_polymer, trip speed 0.75",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:107",
+   "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Tile 'Closed surge EMW' fmt(v, 4)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:99 add mud inputs"
-   },
-   "owner_decision": true,
-   "recommendation": "Add a \"Capstone mud\" / custom dial-readings + density input to the three NextGen panels (they already format at 4 to 8 decimals); without it these fields are ungradable by a learner. Alternative is teaching the full local power-law march by hand, which is an engine-only element-by-element calculation.",
-   "evidence": "NextGen panels only offer the four fixture cases (CASE_OPTIONS = CASES.map(...), e.g. src/components/course/panels/hydraulics/RheologyExplorer.jsx:23,31); the engine takes `over.fann`/`over.densityKgM3` (src/components/course/panels/hydraulics/hydraulicsLab.js:101, used by capstoneValues at :270) but no panel exposes it, so the capstone mud 52/33/6/5 at 1320 cannot be run. The Suite Hydraulics Studio is never mentioned by the course, would need the fixture survey rebuilt by hand, and prints too coarsely anyway: Suite g/cc toFixed(3). Mud-dependent.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the closed and open view on the horizontal case at 0.75 m/s, prints this value at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   },
   {
    "tier": "advanced",
    "key": "slant_max_trip_speed_ms",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:147",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Your mud boxes, The window and the speed limit view, case slant_kcl_polymer, fracture 1400, pore 1260",
+   "printed": {
+    "decimals": 6
+   },
    "display_scale": 1,
-   "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:147",
+   "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Tile 'Speed limit, closed string' fmt(v, 6)",
    "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/hydraulics/SurgeExplorer.jsx:139 add mud inputs (tile fmt(...,6))"
-   },
-   "owner_decision": true,
-   "recommendation": "Add a \"Capstone mud\" / custom dial-readings + density input to the three NextGen panels (they already format at 4 to 8 decimals); without it these fields are ungradable by a learner. Alternative is teaching the full local power-law march by hand, which is an engine-only element-by-element calculation.",
-   "evidence": "NextGen panels only offer the four fixture cases (CASE_OPTIONS = CASES.map(...), e.g. src/components/course/panels/hydraulics/RheologyExplorer.jsx:23,31); the engine takes `over.fann`/`over.densityKgM3` (src/components/course/panels/hydraulics/hydraulicsLab.js:101, used by capstoneValues at :270) but no panel exposes it, so the capstone mud 52/33/6/5 at 1320 cannot be run. The Suite Hydraulics Studio is never mentioned by the course, would need the fixture survey rebuilt by hand, and prints too coarsely anyway: Suite prints safeSpeed.toFixed(2) m/s (src/pages/apps/HydraulicsStudio/components/SurgeSwabTab.jsx:51) against tol 5e-5. A solve on mud-dependent swab/surge EMW; panel solver (:139-150) exists for fixture muds only.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the window view on the slant case with 1400 and 1260, prints this value at 6 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead.",
+   "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_hydraulics.sql"
+   }
   }
  ]
 }

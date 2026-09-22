@@ -4,7 +4,9 @@ import {
 } from 'recharts';
 import {
   CASES, rheology, rheologyCurve, fitResiduals, pressureSplit, flowSweep, flowElements,
+  BLANK_MUD, mudOver,
 } from './hydraulicsLab';
+import MudBoxes from './MudBoxes';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Rheology explorer: four dial readings, three models, and the pressure chain
@@ -13,7 +15,8 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
   : '-');
-const MPa = (v) => fmt(v / 1e6, 4);
+// Pressures in MPa to 6 dp, which is 1 Pa: the precision the course grades them at.
+const MPa = (v) => fmt(v / 1e6, 6);
 
 const MODES = [
   { value: 'models', label: 'Three models, four readings' },
@@ -22,10 +25,10 @@ const MODES = [
 ];
 const CASE_OPTIONS = CASES.map((c) => ({ value: c.id, label: `${c.well} / ${c.mudName}` }));
 
-const Models = () => {
+const Models = ({ over }) => {
   const [id, setId] = useState('slant_kcl_polymer');
-  const f = useMemo(() => rheology(id), [id]);
-  const res = useMemo(() => fitResiduals(id), [id]);
+  const f = useMemo(() => rheology(over.fann ?? id), [id, over]);
+  const res = useMemo(() => fitResiduals(over.fann ?? id), [id, over]);
   return (
     <>
       <SelectField label="Case" value={id} onChange={setId} options={CASE_OPTIONS} />
@@ -73,9 +76,9 @@ const Models = () => {
   );
 };
 
-const Curve = () => {
+const Curve = ({ over }) => {
   const [id, setId] = useState('slant_kcl_polymer');
-  const curve = useMemo(() => rheologyCurve(id), [id]);
+  const curve = useMemo(() => rheologyCurve(over.fann ?? id), [id, over]);
   return (
     <>
       <SelectField label="Case" value={id} onChange={setId} options={CASE_OPTIONS} />
@@ -106,15 +109,15 @@ const Curve = () => {
   );
 };
 
-const Chain = () => {
+const Chain = ({ over }) => {
   const [id, setId] = useState('slant_kcl_polymer');
   const [q, setQ] = useState('0.025');
-  const sweep = useMemo(() => flowSweep(id), [id]);
+  const sweep = useMemo(() => flowSweep(id, undefined, over), [id, over]);
   const split = useMemo(() => {
     const v = Number(q);
     if (!Number.isFinite(v) || v <= 0) return null;
-    return pressureSplit(id, v);
-  }, [id, q]);
+    return pressureSplit(id, v, over);
+  }, [id, q, over]);
   const el = useMemo(() => flowElements(id), [id]);
   return (
     <>
@@ -161,6 +164,8 @@ const Chain = () => {
 
 const RheologyExplorer = () => {
   const [mode, setMode] = useState('models');
+  const [mud, setMud] = useState(BLANK_MUD);
+  const over = useMemo(() => mudOver(mud), [mud]);
   return (
     <PanelShell
       title="Rheology and pressure explorer"
@@ -171,10 +176,11 @@ const RheologyExplorer = () => {
         Two wells crossed with two muds, one string, one bit at 0.000461814 m2 of nozzle area, and
         a discharge coefficient of 0.95.
       </p>
+      <MudBoxes typed={mud} setTyped={setMud} valid={over !== null} />
       <div className="mt-3">
-        {mode === 'models' && <Models />}
-        {mode === 'curve' && <Curve />}
-        {mode === 'chain' && <Chain />}
+        {over && mode === 'models' && <Models over={over} />}
+        {over && mode === 'curve' && <Curve over={over} />}
+        {over && mode === 'chain' && <Chain over={over} />}
       </div>
     </PanelShell>
   );
