@@ -21520,9 +21520,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_mbal.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "isan_f_last_rb",
+    "label": "ISAN underground withdrawal F at the last survey",
+    "unit": "rb",
+    "expected": 396436.565,
+    "tol": 50.0
+   },
+   "rekey_annot": {
+    "source": "hand-calc",
+    "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, F rb, last row)",
+    "printed": {
+     "decimals": 1
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, F rb, last row)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "F = Np Bo at the last survey, 301000 x 1.317065 = 396436.565 rb; the table prints 1 dp; tol 50.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Last survey row prints F to one decimal (317,926.8) against tol 50 rb; also hand-calc Np*Bo taught in the walkthrough.",
   "notes": "LEAK on default state: probe reads 317,926.8 on the Tank explorer default; /root/wt-b5-nextgen/src/content/courses/mbal/beginner/m06-the-associate-reading/l02-capstone-walkthrough.md also prints 317926.842484584 verbatim. By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value."
  },
@@ -21553,9 +21579,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_mbal.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "isan_et_last_rb",
+    "label": "ISAN total expansion Et at the last survey",
+    "unit": "rb/stb",
+    "expected": 0.04719534957777779,
+    "tol": 5e-05
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, Et rb, last row)",
+    "printed": {
+     "decimals": 7
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, Et rb, last row)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "Eo + Efw at the last survey = 0.04719534957777779; the table prints 7 dp; tol 5e-5.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Et printed to 7 decimals (0.0261901) vs tol 5e-5.",
   "notes": "LEAK on default state: probe reads .026190112 context; value sits in the default survey table. By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value."
  },
@@ -21586,9 +21638,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_mbal.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "isan_ooip_stb",
+    "label": "ISAN OOIP from the Havlena-Odeh slope",
+    "unit": "stb",
+    "expected": 8399861.71546289,
+    "tol": 20000.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (OOIP from the slope tile)",
+    "printed": {
+     "decimals": 1
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (OOIP from the slope tile)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "The Havlena-Odeh slope on the typed table: 8399861.7 stb (the design 8.4 MMstb, moved by the brief's rounding); tol 20000. An independent closed-form least squares with intercept on the brief's table gives the same 8399861.7155 stb; through the origin it gives 8400000.6, inside tol.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile prints 12,139,208.1 vs tol 20000 stb.",
   "notes": "LEAK on default state (probe 12,139,208.1). By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value."
  },
@@ -21619,9 +21697,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_mbal.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "isan_efw_share_pct",
+    "label": "ISAN Efw share of Et at the last survey",
+    "unit": "%",
+    "expected": 32.05898401672607,
+    "tol": 0.2
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (Efw share tile)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (Efw share tile)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "Efw/Et x 100 at the last survey = 32.058984; tol 0.2.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile prints 39.299611 % vs tol 0.2 (displayed = expected, already in percent).",
   "notes": "LEAK on default state (probe 39.299611); /root/wt-b5-nextgen/src/content/courses/mbal/beginner/m06-the-associate-reading/l02-capstone-walkthrough.md prints 39.2996108949418 verbatim. By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value."
  },
@@ -21652,9 +21756,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_mbal.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "isan_ddi_final",
+    "label": "ISAN depletion drive index at the last survey",
+    "unit": "-",
+    "expected": 0.6794064667226587,
+    "tol": 0.005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (Depletion drive index tile)",
+    "printed": {
+     "sigfigs": 9
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (Depletion drive index tile)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "N Eo / F at the last survey = 0.679406467; tol 0.005; with no influx it is 1 less the Efw share.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile prints 0.607003891 vs tol 0.005; hand route Eo/Et of last row taught in the walkthrough.",
   "notes": "LEAK on default state (probe 0.607003891). By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value."
  },
@@ -21689,33 +21819,60 @@
   },
   "owner_decision": false,
   "recommendation": "Replace the field: the expected value is exactly 1 (a synthetic tank on a perfect line), so a learner who types 1 without running anything passes. Eo is read in the same panel and ties to fields 2 and 5.",
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": {
-   "migration": "20261024a_w1_mbal.sql",
-   "wave": "w1",
+   "migration": "20261028c_w5_mbal.sql",
+   "wave": "w5c",
    "rekey": {
-    "key": "eo_last_rb_stb",
-    "label": "Oil expansion Eo at the last survey",
+    "key": "isan_eo_last_rb_stb",
+    "label": "ISAN oil expansion Eo at the last survey",
     "unit": "rb/stb",
-    "expected": 0.01589748101759514,
+    "expected": 0.03206500000000001,
     "tol": 5e-05
    },
    "rekey_annot": {
-    "source": "nextgen-panel",
-    "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx:90 (survey table 'Eo rb/stb', last row)",
+    "source": "hand-calc",
+    "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, Eo, last row)",
     "printed": {
      "decimals": 7
     },
     "display_scale": 1,
-    "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx:90 fmt(r.Eo_rb_stb, 7)",
+    "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, Eo, last row)",
     "prompt_precision": null,
     "answer_space": null,
     "guess_p": null,
-    "evidence": "tankLab.runEkeneTank().last.Eo_rb_stb = 0.01589748101759514 (Bo 1.21589748101760 less Boi 1.2); prints 0.0158975. Neighbours: Efw 0.0102926, Et 0.0261901, previous survey Eo 0.0140221 all miss by > 1.8e-3.",
+    "evidence": "Bo at the last survey less the initial 1.285: 0.03206500000000001; tol 5e-5 (W1 key, re-computed on ISAN).",
     "class": "none",
     "owner_decision": false,
-    "leak": true
+    "leak": false
+   },
+   "prior": {
+    "migration": "20261024a_w1_mbal.sql",
+    "wave": "w1",
+    "rekey": {
+     "key": "eo_last_rb_stb",
+     "label": "Oil expansion Eo at the last survey",
+     "unit": "rb/stb",
+     "expected": 0.01589748101759514,
+     "tol": 5e-05
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx:90 (survey table 'Eo rb/stb', last row)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx:90 fmt(r.Eo_rb_stb, 7)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "tankLab.runEkeneTank().last.Eo_rb_stb = 0.01589748101759514 (Bo 1.21589748101760 less Boi 1.2); prints 0.0158975. Neighbours: Efw 0.0102926, Et 0.0261901, previous survey Eo 0.0140221 all miss by > 1.8e-3.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": true
+    }
    }
   },
   "evidence": "Expected is exactly 1 (integral), tol 0.001; plausible unworked guesses {1, 0.999, 0.99, 0.98}, of which 1 and 0.999 pass.",
@@ -21748,7 +21905,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Wei printed to whole barrels (211,934,254) vs tol 500000; four-step hand route also taught in the walkthrough.",
@@ -21781,7 +21938,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "J printed to 9 sig figs (116.496155) vs tol 0.5; the book's printed 116.5 also passes.",
@@ -21814,7 +21971,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Printed 0.422897625 vs tol 0.002; book's 0.4229 passes.",
@@ -21847,7 +22004,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Engine column prints MMbbl to 6 decimals vs tol 0.4; printed book column 37.971 also passes.",
@@ -21880,7 +22037,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "One selector click gives -516,449 (probe) vs tol 20000.",
@@ -22019,7 +22176,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile prints 9.30886080 vs tol 0.05 on the default reD 5.",
@@ -22081,7 +22238,7 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "WDI = (We - Wp Bw)/A, one-line closed form; tol 0.002, book's 0.2112 passes.",

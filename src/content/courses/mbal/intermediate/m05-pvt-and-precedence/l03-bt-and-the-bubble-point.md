@@ -24,7 +24,7 @@ So $R_s$ holds at 400.000000000000 scf/stb across the whole history, the two pha
 
 $$E_o = 1.215897481017595 - 1.2 = 0.0158974810175951 \ \text{rb/stb}$$
 
-That is the number the Associate capstone graded, and this is where it comes from. It is one barrel of oil swelling as the pressure on it falls, and nothing else.
+That is the Ekene oil expansion at the last survey, the Associate tier's worked example, and this is where it comes from. It is one barrel of oil swelling as the pressure on it falls, and nothing else.
 
 ## What the engine does above the bubble point when nothing was supplied
 

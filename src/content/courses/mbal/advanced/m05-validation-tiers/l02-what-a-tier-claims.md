@@ -44,7 +44,7 @@ Nothing there is dishonest. The reference string reports the spread openly and e
 
 Run the Ekene tank as committed. Oil, no aquifer, no gas cap. Tier `benchmark_verified`, tolerance field empty, reference the Ahmed 11-3 and Dake 3.4 pair above. The answer is 12139208.1074968 stb and it agrees with the independent volumetric booking to 6.13761666407432e-15 relative, which is as right as an answer gets.
 
-Now force a pot aquifer onto the same tank, which the Professional tier showed returns an oil in place of -516449.043355256 stb. The path has changed, so the tier resolves again: still `benchmark_verified`, reference now Pletcher SPE 75354 Tables 10 to 13, and a stated tolerance of **0.13 percent**.
+Now force a pot aquifer onto the same tank, which the Professional tier showed returns a negative oil in place. The path has changed, so the tier resolves again: still `benchmark_verified`, reference now Pletcher SPE 75354 Tables 10 to 13, and a stated tolerance of **0.13 percent**.
 
 Read that carefully. The run that is correct to fourteen digits carries no stated tolerance. The run that returns a negative volume of oil carries the tightest tolerance in the engine. Both are honest statements about their code paths and neither is a statement about the run, which is exactly the confusion lesson 3 exists to kill.
 

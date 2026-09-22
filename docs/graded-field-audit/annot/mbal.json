@@ -25,8 +25,35 @@
    "recommendation": null,
    "evidence": "Last survey row prints F to one decimal (317,926.8) against tol 50 rb; also hand-calc Np*Bo taught in the walkthrough.",
    "notes": "LEAK on default state: probe reads 317,926.8 on the Tank explorer default; /root/wt-b5-nextgen/src/content/courses/mbal/beginner/m06-the-associate-reading/l02-capstone-walkthrough.md also prints 317926.842484584 verbatim. By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": {
+    "migration": "20261028c_w5_mbal.sql",
+    "wave": "w5c",
+    "rekey": {
+     "key": "isan_f_last_rb",
+     "label": "ISAN underground withdrawal F at the last survey",
+     "unit": "rb",
+     "expected": 396436.565,
+     "tol": 50.0
+    },
+    "rekey_annot": {
+     "source": "hand-calc",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, F rb, last row)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, F rb, last row)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "F = Np Bo at the last survey, 301000 x 1.317065 = 396436.565 rb; the table prints 1 dp; tol 50.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   },
+   "leak_closed": "w5c pick A"
   },
   {
    "tier": "beginner",
@@ -47,8 +74,35 @@
    "recommendation": null,
    "evidence": "Et printed to 7 decimals (0.0261901) vs tol 5e-5.",
    "notes": "LEAK on default state: probe reads .026190112 context; value sits in the default survey table. By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": {
+    "migration": "20261028c_w5_mbal.sql",
+    "wave": "w5c",
+    "rekey": {
+     "key": "isan_et_last_rb",
+     "label": "ISAN total expansion Et at the last survey",
+     "unit": "rb/stb",
+     "expected": 0.04719534957777779,
+     "tol": 5e-05
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, Et rb, last row)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, Et rb, last row)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Eo + Efw at the last survey = 0.04719534957777779; the table prints 7 dp; tol 5e-5.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   },
+   "leak_closed": "w5c pick A"
   },
   {
    "tier": "beginner",
@@ -69,8 +123,35 @@
    "recommendation": null,
    "evidence": "Tile prints 12,139,208.1 vs tol 20000 stb.",
    "notes": "LEAK on default state (probe 12,139,208.1). By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": {
+    "migration": "20261028c_w5_mbal.sql",
+    "wave": "w5c",
+    "rekey": {
+     "key": "isan_ooip_stb",
+     "label": "ISAN OOIP from the Havlena-Odeh slope",
+     "unit": "stb",
+     "expected": 8399861.71546289,
+     "tol": 20000.0
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (OOIP from the slope tile)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (OOIP from the slope tile)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The Havlena-Odeh slope on the typed table: 8399861.7 stb (the design 8.4 MMstb, moved by the brief's rounding); tol 20000. An independent closed-form least squares with intercept on the brief's table gives the same 8399861.7155 stb; through the origin it gives 8400000.6, inside tol.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   },
+   "leak_closed": "w5c pick A"
   },
   {
    "tier": "beginner",
@@ -91,8 +172,35 @@
    "recommendation": null,
    "evidence": "Tile prints 39.299611 % vs tol 0.2 (displayed = expected, already in percent).",
    "notes": "LEAK on default state (probe 39.299611); /root/wt-b5-nextgen/src/content/courses/mbal/beginner/m06-the-associate-reading/l02-capstone-walkthrough.md prints 39.2996108949418 verbatim. By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": {
+    "migration": "20261028c_w5_mbal.sql",
+    "wave": "w5c",
+    "rekey": {
+     "key": "isan_efw_share_pct",
+     "label": "ISAN Efw share of Et at the last survey",
+     "unit": "%",
+     "expected": 32.05898401672607,
+     "tol": 0.2
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (Efw share tile)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (Efw share tile)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Efw/Et x 100 at the last survey = 32.058984; tol 0.2.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   },
+   "leak_closed": "w5c pick A"
   },
   {
    "tier": "beginner",
@@ -113,8 +221,35 @@
    "recommendation": null,
    "evidence": "Tile prints 0.607003891 vs tol 0.005; hand route Eo/Et of last row taught in the walkthrough.",
    "notes": "LEAK on default state (probe 0.607003891). By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": {
+    "migration": "20261028c_w5_mbal.sql",
+    "wave": "w5c",
+    "rekey": {
+     "key": "isan_ddi_final",
+     "label": "ISAN depletion drive index at the last survey",
+     "unit": "-",
+     "expected": 0.6794064667226587,
+     "tol": 0.005
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (Depletion drive index tile)",
+     "printed": {
+      "sigfigs": 9
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (Depletion drive index tile)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "N Eo / F at the last survey = 0.679406467; tol 0.005; with no influx it is 1 less the Efw share.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   },
+   "leak_closed": "w5c pick A"
   },
   {
    "tier": "beginner",
@@ -137,34 +272,62 @@
    "recommendation": "Replace the field: the expected value is exactly 1 (a synthetic tank on a perfect line), so a learner who types 1 without running anything passes. Eo is read in the same panel and ties to fields 2 and 5.",
    "evidence": "Expected is exactly 1 (integral), tol 0.001; plausible unworked guesses {1, 0.999, 0.99, 0.98}, of which 1 and 0.999 pass.",
    "notes": "Panel prints 1.00000000000 on default state (probe).",
-   "leak": true,
+   "leak": false,
    "shipped": {
-    "migration": "20261024a_w1_mbal.sql",
-    "wave": "w1",
+    "migration": "20261028c_w5_mbal.sql",
+    "wave": "w5c",
     "rekey": {
-     "key": "eo_last_rb_stb",
-     "label": "Oil expansion Eo at the last survey",
+     "key": "isan_eo_last_rb_stb",
+     "label": "ISAN oil expansion Eo at the last survey",
      "unit": "rb/stb",
-     "expected": 0.01589748101759514,
+     "expected": 0.03206500000000001,
      "tol": 5e-05
     },
     "rekey_annot": {
-     "source": "nextgen-panel",
-     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx:90 (survey table 'Eo rb/stb', last row)",
+     "source": "hand-calc",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, Eo, last row)",
      "printed": {
       "decimals": 7
      },
      "display_scale": 1,
-     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx:90 fmt(r.Eo_rb_stb, 7)",
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, Eo, last row)",
      "prompt_precision": null,
      "answer_space": null,
      "guess_p": null,
-     "evidence": "tankLab.runEkeneTank().last.Eo_rb_stb = 0.01589748101759514 (Bo 1.21589748101760 less Boi 1.2); prints 0.0158975. Neighbours: Efw 0.0102926, Et 0.0261901, previous survey Eo 0.0140221 all miss by > 1.8e-3.",
+     "evidence": "Bo at the last survey less the initial 1.285: 0.03206500000000001; tol 5e-5 (W1 key, re-computed on ISAN).",
      "class": "none",
      "owner_decision": false,
-     "leak": true
+     "leak": false
+    },
+    "prior": {
+     "migration": "20261024a_w1_mbal.sql",
+     "wave": "w1",
+     "rekey": {
+      "key": "eo_last_rb_stb",
+      "label": "Oil expansion Eo at the last survey",
+      "unit": "rb/stb",
+      "expected": 0.01589748101759514,
+      "tol": 5e-05
+     },
+     "rekey_annot": {
+      "source": "nextgen-panel",
+      "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx:90 (survey table 'Eo rb/stb', last row)",
+      "printed": {
+       "decimals": 7
+      },
+      "display_scale": 1,
+      "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx:90 fmt(r.Eo_rb_stb, 7)",
+      "prompt_precision": null,
+      "answer_space": null,
+      "guess_p": null,
+      "evidence": "tankLab.runEkeneTank().last.Eo_rb_stb = 0.01589748101759514 (Bo 1.21589748101760 less Boi 1.2); prints 0.0158975. Neighbours: Efw 0.0102926, Et 0.0261901, previous survey Eo 0.0140221 all miss by > 1.8e-3.",
+      "class": "none",
+      "owner_decision": false,
+      "leak": true
+     }
     }
-   }
+   },
+   "leak_closed": "w5c pick A"
   },
   {
    "tier": "intermediate",
@@ -185,8 +348,9 @@
    "recommendation": null,
    "evidence": "Wei printed to whole barrels (211,934,254) vs tol 500000; four-step hand route also taught in the walkthrough.",
    "notes": "LEAK on default state (probe 211,934,254); /root/wt-b5-nextgen/src/content/courses/mbal/intermediate/m06-the-professional-reading/l02-capstone-walkthrough.md prints 211934253.721285 verbatim. By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "leak_closed": "w5c pick B"
   },
   {
    "tier": "intermediate",
@@ -207,8 +371,9 @@
    "recommendation": null,
    "evidence": "J printed to 9 sig figs (116.496155) vs tol 0.5; the book's printed 116.5 also passes.",
    "notes": "LEAK on default state (probe 116.496155). By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "leak_closed": "w5c pick B"
   },
   {
    "tier": "intermediate",
@@ -229,8 +394,9 @@
    "recommendation": null,
    "evidence": "Printed 0.422897625 vs tol 0.002; book's 0.4229 passes.",
    "notes": "LEAK on default state (probe 0.422897625). By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "leak_closed": "w5c pick B"
   },
   {
    "tier": "intermediate",
@@ -251,8 +417,9 @@
    "recommendation": null,
    "evidence": "Engine column prints MMbbl to 6 decimals vs tol 0.4; printed book column 37.971 also passes.",
    "notes": "Default state renders the capstone march (panel loads at the published geometry); value visible without work. By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "leak_closed": "w5c pick B"
   },
   {
    "tier": "intermediate",
@@ -273,8 +440,9 @@
    "recommendation": null,
    "evidence": "One selector click gives -516,449 (probe) vs tol 20000.",
    "notes": "LEAK one click from default (probe state 'Pot aquifer'); /root/wt-b5-nextgen/src/content/courses/mbal/intermediate/m06-the-professional-reading/l02-capstone-walkthrough.md prints -516449.043355256 verbatim. By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "leak_closed": "w5c pick B"
   },
   {
    "tier": "intermediate",
@@ -305,7 +473,8 @@
      0.002,
      0.0001
     ]
-   }
+   },
+   "leak_closed": "w5c pick B"
   },
   {
    "tier": "advanced",
@@ -325,7 +494,8 @@
    "evidence": "No course panel runs Dake 9.2 (TankExplorer runs Ekene only, per l03 'At the panel'); the lesson table states 'OOIP 307221409.553720 stb, that is 307.221409553720 MMSTB'. Tol 3 MMSTB excludes Dake's own 312.",
    "notes": "Lesson-given giveaway: the only in-course route to this value is reading it in the lesson. Carter-Tracy march is engine-only (not hand-calc). Could be reproduced in the Suite Material Balance app but the prompt does not name it. Owner may want the lesson table to stop printing the graded figures.",
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "leak_closed": "w5c pick B"
   },
   {
    "tier": "advanced",
@@ -345,7 +515,8 @@
    "evidence": "Lesson states 'cumulative We 88064588.3139400 rb, that is 88.0645883139400 MMrb' (also m02/l04); tol 1 MMrb.",
    "notes": "Lesson-given giveaway, same as dake_ooip_mmstb; no panel runs the Carter-Tracy Dake case.",
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "leak_closed": "w5c pick B"
   },
   {
    "tier": "advanced",
@@ -366,8 +537,9 @@
    "recommendation": null,
    "evidence": "Tile prints 9.30886080 vs tol 0.05 on the default reD 5.",
    "notes": "LEAK on default state (probe 9.30886080). By design the course's panels run the graded datasets (Ekene tank on 'None (the truth)', Ahmed 10-10 geometry, reD 5), and the walkthrough lesson also prints this value.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "leak_closed": "w5c pick B"
   },
   {
    "tier": "advanced",
@@ -387,7 +559,8 @@
    "evidence": "Closed form We = F - N(Eo + m Eg + Efw) taught with every term; tol 500 bbl.",
    "notes": "Lesson l03 prints 411281.250000001 bbl and states it is the graded capstone value; book prints 411281. No panel renders Ahmed 11-1.",
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "leak_closed": "w5c pick B"
   },
   {
    "tier": "advanced",
@@ -406,8 +579,9 @@
    "recommendation": null,
    "evidence": "WDI = (We - Wp Bw)/A, one-line closed form; tol 0.002, book's 0.2112 passes.",
    "notes": "Walkthrough prints 0.211250877090399 verbatim.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "leak_closed": "w5c pick B"
   },
   {
    "tier": "advanced",
@@ -453,7 +627,8 @@
      "owner_decision": false,
      "leak": true
     }
-   }
+   },
+   "leak_closed": "w5c pick B"
   }
  ]
 }

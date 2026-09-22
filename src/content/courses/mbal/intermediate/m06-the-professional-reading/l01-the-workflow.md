@@ -46,9 +46,9 @@ Phase one. Provenance: per-row oil formation volume factor and solution gas rati
 
 Phase two. On that diagnosis the model is no aquifer, and there is nothing to choose. Slope 12139208.1074968 stb, fit statistic 1.00000000000000, indices 0.607003891050583 depletion and 0.392996108949419 rock and connate water, water drive exactly zero, sum 1.00000000000000, mechanism depletion drive.
 
-Now the counterfactual, which is where the Professional workflow earns itself. Force a pot aquifer onto the same data and the engine returns an oil in place of -516449.043355256 stb, an aquifer holding 42890161.1573930 rb, a water drive index of 1.04254388249892 and a mechanism reading strong water drive. The fit statistic is 0.999485673716372. If you had skipped phase one and let the fit choose, nothing on the screen would have stopped you except the minus sign.
+Now the counterfactual, which is where the Professional workflow earns itself. Force a pot aquifer onto the same data and the engine returns a negative oil in place, an aquifer holding 42890161.1573930 rb, a water drive index of 1.04254388249892 and a mechanism reading strong water drive. The fit statistic stays above 0.999. If you had skipped phase one and let the fit choose, nothing on the screen would have stopped you except the minus sign.
 
-Phase three. With no aquifer, 12139208.1074968 stb. With an unnecessary pot aquifer, -516449.043355256 stb, a swing of 12655657.1508521 stb from a decision that no data supported. Convention: no aquifer, so none applies. Exposure: the static pressures, and the per-row fluid properties, whose provenance upstream of the file is not recorded.
+Phase three. With no aquifer, 12139208.1074968 stb. With an unnecessary pot aquifer, a negative number, a swing of more than the whole tank from a decision that no data supported. Convention: no aquifer, so none applies. Exposure: the static pressures, and the per-row fluid properties, whose provenance upstream of the file is not recorded.
 
 ## Exercise
 

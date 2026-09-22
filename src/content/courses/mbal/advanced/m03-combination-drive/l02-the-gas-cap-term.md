@@ -70,6 +70,6 @@ The map is re-picked and the gas oil contact moves. The gas cap now works out at
 
 Compute the cap's initial reservoir volume, the standard cubic feet it holds, and its expansion over the 200 psi step. You should find 5530000.00000000 rb, 6912500000.00000 scf and 829500.000000000 rb.
 
-Then compute the water influx the balance now requires, given $F = 1760200$ rb, $E_o = 0.075$ rb/stb and the $(1+m)$ form of $E_{fw}$ above. You should find 173767.750000000 bbl against the 411281.250000001 bbl the published $m$ gives, a fall of 57.7496542815895 percent.
+Then compute the water influx the balance now requires, given $F = 1760200$ rb, $E_o = 0.075$ rb/stb and the $(1+m)$ form of $E_{fw}$ above. You should find 173767.750000000 bbl, less than half of what the published $m$ gives.
 
 Finish with one sentence on the reviewer's question: the gas cap ratio moved by one tenth and the water influx more than halved, so what does that tell you about which of the two numbers this field's reserves case is actually sensitive to?

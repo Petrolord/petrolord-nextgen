@@ -1,6 +1,6 @@
 # The danger of freedom
 
-The Professional tier gave you the cheap version of this lesson. One extra parameter, an aquifer that was not there, six surveys that had no way to object, and an answer that was not merely wrong but negative, at a fit statistic of 0.999485673716372. One freedom, on a regression with two coefficients, on a tank where the two terms were indistinguishable.
+The Professional tier gave you the cheap version of this lesson. One extra parameter, an aquifer that was not there, six surveys that had no way to object, and an answer that was not merely wrong but negative, at a fit statistic above 0.999. One freedom, on a regression with two coefficients, on a tank where the two terms were indistinguishable.
 
 A history match has more freedoms available, a more flexible model behind them, and a fit statistic in units a reviewer finds persuasive. Everything that went wrong there goes wrong here, with better cover.
 

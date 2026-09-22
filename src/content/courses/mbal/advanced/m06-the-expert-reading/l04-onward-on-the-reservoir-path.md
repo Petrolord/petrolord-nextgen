@@ -10,7 +10,7 @@ Material balance produced one number that the rest of reservoir engineering cann
 
 Recovery factor is the plainest case. On the Ekene tank, 261475.039999678 stb produced against an oil in place of 12139208.1074968 stb is a recovery factor of 2.15397114609312 percent, and every sentence anybody ever writes about how Ekene is performing sits on that ratio.
 
-Now watch what happens when the denominator is uncertain. The Dake Exercise 9.2 field had produced 77.43 MMstb by year ten. Against the Carter-Tracy answer of 307.221409553720 MMSTB that is a recovery factor of 25.2033216410527 percent. Against Dake's own 312 MMSTB it is 24.8173076923077 percent. Against the 532.588241588393 MMSTB you get by ignoring the aquifer, the same field, on the same production, has recovered 14.5384358785452 percent.
+Now watch what happens when the denominator is uncertain. The Dake Exercise 9.2 field had produced 77.43 MMstb by year ten. Against Dake's own 312 MMSTB that is a recovery factor of 24.8173076923077 percent, and against the Carter-Tracy answer a little different again. Against the 532.588241588393 MMSTB you get by ignoring the aquifer, the same field, on the same production, has recovered 14.5384358785452 percent.
 
 Same oil out of the ground. Three recovery factors, spanning more than ten percentage points, because the denominator moved. And a recovery factor is not a statistic. It is the input to whether an infill well is drilled, whether a waterflood is expanded, whether a field is abandoned, and what an asset is worth. An error in the oil in place does not stay in the oil in place. It propagates into every decision that is expressed as a fraction of it, which is nearly all of them.
 

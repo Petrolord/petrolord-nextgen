@@ -24,17 +24,17 @@ The Carter-Tracy string is the longest and most detailed in the file, and the on
 
 It records a validation on 2026-05-17 against Dake Exercise 9.2, names the geometry in full, and reports the outcome in numbers: engine oil in place 301.0 MMSTB against Dake's 312 MMSTB, a 3.53 percent error, a fit statistic of 0.9998, and drive indices at year 10 of IDD 0.608, IWD 0.392, GDI 0, SDI 0.011, sum 1.010.
 
-Now run the case today. The engine returns 307.221409553720 MMSTB, which is 2.06691347299667 percent above the recorded 301.0 and now 1.53159950201266 percent below Dake rather than 3.53 percent. The fit statistic is 0.999975248425736, which rounds to 1.0000 and not to 0.9998. The indices are 0.567843338103932 and 0.417877131928747, summing to 0.997165062762353 rather than 1.010. Of the six numbers the string reports, exactly one still holds: the rock and connate water index of 0.0114445927296736 still rounds to 0.011.
+Now run the case today. The engine's oil in place is no longer the recorded 301.0, and its miss against Dake is no longer 3.53 percent. The fit statistic rounds to 1.0000 and not to 0.9998. The indices no longer sum to 1.010. Of the six numbers the string reports, exactly one still holds: the rock and connate water index of 0.0114445927296736 still rounds to 0.011.
 
 This is not fraud. The string was true on the date it names and the code has improved since, so the stated 3.53 percent is now conservative rather than descriptive. But the string has stopped being a record of what the code does. **A provenance string is a snapshot with a date on it. Read the date first.**
 
 ## Failure two: the string names a convention the runtime does not use
 
-The oil pot with gas cap path is anchored on Ahmed Example 11-1, and its string says the engine reproduces the printed influx of 411,281 bbl and the printed indices 0.4385, 0.3465, 0.2112 and 0.0038, in what it calls the book index convention, denominator F minus Wp times Bw.
+The oil pot with gas cap path is anchored on Ahmed Example 11-1, and its string says the engine reproduces the book's printed influx and printed indices, in what it calls the book index convention, denominator F minus Wp times Bw.
 
 Go and read the drive index block that actually runs. It divides every index by gross withdrawal $F$ and folds the produced water into the numerator of the water index instead, giving 0.426087944551755, 0.336609476195887, 0.205250113623452 and 0.00364660265878877, summing to 0.971594137029883. Module 3 showed that sum is not a closure failure; it is exactly the ratio $A/F$.
 
-Read the string a third time and it does not technically lie. It says the engine's per timestep terms reproduce the printed indices, and a harness case recomputes them in the book's convention. Both true. But the string sits on a payload whose `final_wdi` field is 0.205250113623452 while the string prints 0.2112, and a reader who takes the reference as a description of the result fields is wrong by 0.006 and does not know it.
+Read the string a third time and it does not technically lie. It says the engine's per timestep terms reproduce the printed indices, and a harness case recomputes them in the book's convention. Both true. But the string sits on a payload whose `final_wdi` field is the gross convention value while the string prints the book's net one, and a reader who takes the reference as a description of the result fields is wrong in the third decimal and does not know it.
 
 The general rule: **a provenance string describes a test, not necessarily the field next to it.**
 
@@ -54,7 +54,7 @@ One more hazard, recorded in the engine's own comments. The resolver is exported
 
 Take the Carter-Tracy string and answer the five questions in order. What was compared: an oil in place, a fit statistic and a set of drive indices. Against what: Dake 1978, Exercise 9.2, geometry printed out. When: 2026-05-17. With what result: 301.0 against 312, 3.53 percent, four index values. Under what scope: the string also records that the delta p convention and the finite aquifer treatment were corrected in the same release, which tells you the path was unstable at the time of the test.
 
-Verdict for a memo: benchmark verified against Dake Exercise 9.2 as of 2026-05-17 at a stated 3.53 percent, re run on this engine version giving 307.221409553720 MMSTB and 1.53159950201266 percent, provenance not refreshed since. That last clause is what separates a reviewer from a user.
+Verdict for a memo: benchmark verified against Dake Exercise 9.2 as of 2026-05-17 at a stated 3.53 percent, re run on this engine version giving [today's oil in place] and [today's miss], provenance not refreshed since. That last clause is what separates a reviewer from a user.
 
 ## Exercise
 

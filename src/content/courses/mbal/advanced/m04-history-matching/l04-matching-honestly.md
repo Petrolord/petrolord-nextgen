@@ -40,13 +40,13 @@ The Dake match of lessons 1 and 3, written the way it should leave your desk.
 
 > Oil in place is reported as 310198605.412900 stb, from a pressure history match of eleven annual observations on Dake Exercise 9.2, Carter-Tracy aquifer at a dimensionless radius of 5.
 >
-> Fitted: oil in place only. Fixed: aquifer radius at the contact 9200 ft from the mapped outline, permeability 200 md, thickness 100 ft, porosity 0.25, water viscosity 0.55 cp, encroachment angle 140 degrees, all as published with the exercise. Bounds on oil in place were the engine defaults, 3072214.09553720 to 30722140955.3720 stb, and the parameter finished far from both.
+> Fitted: oil in place only. Fixed: aquifer radius at the contact 9200 ft from the mapped outline, permeability 200 md, thickness 100 ft, porosity 0.25, water viscosity 0.55 cp, encroachment angle 140 degrees, all as published with the exercise. Bounds on oil in place were the engine defaults, a factor of a hundred either side of the starting value, and the parameter finished far from both.
 >
 > Fit: root mean square pressure error 4.31298999061806 psi, maximum absolute error 7.16187806899097 psi over a 1280 psi decline, converged in 4 iterations. The residual series changes sign once, positive over years 1 to 7 and negative over years 8 to 10, indicating a small systematic error in the timing of late influx rather than scatter. One warning: per row PVT was converted to an interpolation table for the simulation.
 >
 > Alternative: freeing the reservoir radius as well returns 330212861.271306 stb with the radius at 8660.04101731403 ft, at a root mean square error of 0.533912409817980 psi. That match fits better and is not preferred here, because the mapped outline constrains the radius more tightly than the pressure history does, and because the published truth of 312 MMSTB is approached by the one parameter match and overshot by 5.83745553567499 percent by the two parameter match.
 >
-> The straight line regression on the same data returns 307221409.553720 stb. That is the number the reserves case uses, and the match is quoted as support for it rather than as a replacement.
+> The straight line regression on the same data returns [the regression's oil in place]. That is the number the reserves case uses, and the match is quoted as support for it rather than as a replacement.
 
 Nothing in that is clever. It is a match, its freedoms, its fixings, its fit, its warning and its alternative, in an order a reviewer can follow. It also states the answer under the choice that was not made, which is the thing most match reports refuse to do.
 
