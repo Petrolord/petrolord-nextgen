@@ -28,7 +28,7 @@ Zone A has a mean thickness of 36 m over all 500 nodes of the frame. Put the thr
 
 36 x 500 x 2500 = 45,000,000 m3
 
-That is 45 x 10^6 m3, and it is the graded capstone value for zone A's bulk rock volume with a tolerance of 0.01 in that unit. The engine, running the full pipeline over the thickness grid node by node, returns the same figure. There is no approximation anywhere in the agreement. The closed form and the node sum are the same arithmetic written two ways.
+That is 45 x 10^6 m3, zone A's bulk rock volume on the golden frame. The engine, running the full pipeline over the thickness grid node by node, returns the same figure. There is no approximation anywhere in the agreement. The closed form and the node sum are the same arithmetic written two ways.
 
 ## What the check catches
 
@@ -75,4 +75,4 @@ Try it yourself: read the zone A mean thickness and the frame size from the pane
 
 Take the closed form and run it on zone A from the three inputs alone, then say what factor you would expect to see in the reported volume if a colleague had entered the cell area as 50 rather than 2500. Then answer in one sentence: what property of the model frame makes mean thickness times node count times cell area exact rather than approximate?
 
-As a self check: 36 x 500 x 2500 = 45,000,000 m3, which is 45 x 10^6 m3 and the graded capstone value at a tolerance of 0.01 in that unit. Entering 50 in place of 2500 would report a volume fifty times too small, since 2500 m2 is the area of a 50 m cell rather than its side length. The formula is exact because every node of the frame carries exactly one cell of the same area, so the cell area is a constant that factors out of the sum, leaving the node count times the mean thickness, which is the definition of a mean.
+As a self check: 36 x 500 x 2500 = 45,000,000 m3, which is 45 x 10^6 m3, zone A's bulk rock volume on the golden frame. Entering 50 in place of 2500 would report a volume fifty times too small, since 2500 m2 is the area of a 50 m cell rather than its side length. The formula is exact because every node of the frame carries exactly one cell of the same area, so the cell area is a constant that factors out of the sum, leaving the node count times the mean thickness, which is the definition of a mean.

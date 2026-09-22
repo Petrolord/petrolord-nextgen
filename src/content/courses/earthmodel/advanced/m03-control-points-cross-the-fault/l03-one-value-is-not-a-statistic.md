@@ -4,7 +4,7 @@ Block 1's control set is W1 alone, and so block 1's zone A porosity "is" 0.315. 
 
 ## The arithmetic of one
 
-Every averaging method collapses at n equals 1. The weighted mean of one value is the value: block 1's porosity is 0.315 exactly, and the graded phi_block1 field... does not exist; the capstone grades only block 0's mean, precisely because block 1's is a lookup, not a computation. A plane cannot fit through one point; the trend method is undefined. Kriging technically runs, as module five will show, and produces the constant 0.315 everywhere in the block. Whatever the method dial says, block 1's map is the number 0.315 painted over 174 nodes.
+Every averaging method collapses at n equals 1. The weighted mean of one value is the value: block 1's porosity is 0.315 exactly, and a block 1 porosity field would grade a lookup rather than a computation, which is why the capstone asks for block 0's mean. A plane cannot fit through one point; the trend method is undefined. Kriging technically runs, as module five will show, and produces the constant 0.315 everywhere in the block. Whatever the method dial says, block 1's map is the number 0.315 painted over 174 nodes.
 
 ## What is actually known about block 1
 

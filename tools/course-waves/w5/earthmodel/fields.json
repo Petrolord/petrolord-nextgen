@@ -1,0 +1,146 @@
+[
+ {
+  "tier": "beginner",
+  "key": "oruma_s2_mean",
+  "label": "Mean TopB depth on the ORUMA frame",
+  "unit": "m",
+  "expected": 1577.9,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "oruma_clamp_s3",
+  "label": "BaseB nodes fixed by the clamp",
+  "unit": "count",
+  "expected": 242,
+  "tol": 0
+ },
+ {
+  "tier": "beginner",
+  "key": "oruma_tka_mean",
+  "label": "Zone A mean thickness",
+  "unit": "m",
+  "expected": 36.27500000000001,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "oruma_tka_max",
+  "label": "Zone A maximum thickness",
+  "unit": "m",
+  "expected": 42.350000000000364,
+  "tol": 0.001
+ },
+ {
+  "tier": "beginner",
+  "key": "oruma_tkb_mean",
+  "label": "Zone B mean thickness over the frame",
+  "unit": "m",
+  "expected": 9.592857142857138,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "oruma_bulk_a_mm3",
+  "label": "Zone A bulk rock volume",
+  "unit": "10^6 m3",
+  "expected": 45.249435,
+  "tol": 0.001
+ },
+ {
+  "tier": "intermediate",
+  "key": "oruma1_topa_tvdss",
+  "label": "ORUMA-1 TVDSS at the TopA pick",
+  "unit": "m",
+  "expected": 1536.5980910319518,
+  "tol": 0.01
+ },
+ {
+  "tier": "intermediate",
+  "key": "oruma1_topa_res",
+  "label": "ORUMA-1 TopA tie residual",
+  "unit": "m",
+  "expected": -6.908937738948225,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "oruma1_topb_res",
+  "label": "ORUMA-1 TopB tie residual",
+  "unit": "m",
+  "expected": -3.232415080054807,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "oruma1_baseb_res",
+  "label": "ORUMA-1 BaseB tie residual",
+  "unit": "m",
+  "expected": 9.336894439044727,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "oruma1_cpa_x",
+  "label": "ORUMA-1 zone-A control point x",
+  "unit": "m",
+  "expected": 1659.1326948589228,
+  "tol": 0.01
+ },
+ {
+  "tier": "intermediate",
+  "key": "oruma1_cpa_y",
+  "label": "ORUMA-1 zone-A control point y",
+  "unit": "m",
+  "expected": 2497.5377369162634,
+  "tol": 0.01
+ },
+ {
+  "tier": "advanced",
+  "key": "oruma_block1_cells",
+  "label": "Block 1 node count",
+  "unit": "count",
+  "expected": 212,
+  "tol": 0
+ },
+ {
+  "tier": "advanced",
+  "key": "oruma_trend_probe",
+  "label": "Trend porosity at (1700, 2400)",
+  "unit": "v/v",
+  "expected": 0.28799999999999987,
+  "tol": 0.0001
+ },
+ {
+  "tier": "advanced",
+  "key": "oruma_krige_probe",
+  "label": "Kriged porosity at (1700, 2400)",
+  "unit": "v/v",
+  "expected": 0.28692776619579075,
+  "tol": 0.00005
+ },
+ {
+  "tier": "advanced",
+  "key": "oruma_fault_jump_y2300",
+  "label": "Porosity jump across the fault on the y = 2300 row",
+  "unit": "v/v",
+  "expected": -0.014077279549535582,
+  "tol": 0.00005
+ },
+ {
+  "tier": "advanced",
+  "key": "oruma_phi_block0",
+  "label": "Zone A weighted porosity, block 0",
+  "unit": "v/v",
+  "expected": 0.28904736238721357,
+  "tol": 0.00002
+ },
+ {
+  "tier": "advanced",
+  "key": "oruma_bulk_a_block1",
+  "label": "Zone A bulk volume in block 1",
+  "unit": "10^6 m3",
+  "expected": 17.82,
+  "tol": 0.001
+ }
+]

@@ -11,7 +11,7 @@ Zone B is the rock between TopB and BaseB. It is built by exactly the same subtr
 | minimum thickness | 0 m | all 500 nodes |
 | nodes with positive thickness | 320 | out of 500 |
 
-The mean of 10.24 m is one of the six graded capstone numbers, to a tolerance of 0.05 m. The engine holds the maximum as 31.000000000000455, which is 31 m for every purpose you have, for the reasons the last lesson set out.
+The mean of 10.24 m is one of the six numbers this tier reports. The engine holds the maximum as 31.000000000000455, which is 31 m for every purpose you have, for the reasons the last lesson set out.
 
 Put the last two rows side by side and the whole character of the zone is there. The minimum thickness is zero, and 320 of the 500 nodes carry a positive thickness. At the other 180 nodes the thickness is exactly zero.
 

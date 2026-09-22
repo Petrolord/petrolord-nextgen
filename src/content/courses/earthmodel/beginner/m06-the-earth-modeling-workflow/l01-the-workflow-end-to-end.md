@@ -32,13 +32,13 @@ Every surface is resampled onto the model frame. After that step, all 500 nodes 
 | TopB | 1575.500000 | 1530 | 1620.9999999999998 | 500 |
 | BaseB | 1585.740000 | 1561 | 1620.9999999999998 | 500 |
 
-The TopB mean of 1575.5 m is the first of the six graded capstone numbers.
+The TopB mean of 1575.5 m is the first of the six numbers the tier reports.
 
 ## Step 4: clamp the stack depth-down
 
 Resampled surfaces can cross. The depth-down monotonic clamp enforces that a deeper surface is never shallower than the one above it, and it reports how many nodes it had to fix on each surface.
 
-On this model the counts are 0, 0 and 180. Nothing was fixed on TopA, nothing on TopB, and 180 nodes were fixed on BaseB. That count is the second graded number, and it is the pinch-out of zone B written as a number rather than hidden.
+On this model the counts are 0, 0 and 180. Nothing was fixed on TopA, nothing on TopB, and 180 nodes were fixed on BaseB. That count is the second number, and it is the pinch-out of zone B written as a number rather than hidden.
 
 Its signature is visible in the table above. TopB and BaseB share the same maximum of 1620.9999999999998 m, because where zone B has closed the clamp has moved BaseB down onto TopB. The clamp sets an offending node to the running maximum depth, so the deeper surface moves down onto the one above it.
 
@@ -51,7 +51,7 @@ Zone A is TopA to TopB, zone B is TopB to BaseB.
 | A | 36 m | 42 m | 30 m | 500 |
 | B | 10.24 m | 31 m | 0 m | 320 |
 
-Three more graded numbers sit in that table: zone A's mean of 36 m, zone A's maximum of 42 m, and zone B's mean of 10.24 m over all 500 nodes. Zone B's mean over the 320 nodes where the zone exists is 16 m, which is the same rock described differently.
+Three more reported numbers sit in that table: zone A's mean of 36 m, zone A's maximum of 42 m, and zone B's mean of 10.24 m over all 500 nodes. Zone B's mean over the 320 nodes where the zone exists is 16 m, which is the same rock described differently.
 
 ## Step 6: check the separations
 
@@ -61,7 +61,7 @@ It is the cheapest confirmation there is that steps 3, 4 and 5 were consistent w
 
 ## Step 7: bulk rock volume
 
-Mean thickness times node count times cell area. Zone A gives 36 x 500 x 2500 = 45,000,000 m3, the sixth graded number and a closed-form anchor. Zone B gives 10.24 x 500 x 2500 = 12,800,000 m3, and the two zones together hold 57.8 x 10^6 m3.
+Mean thickness times node count times cell area. Zone A gives 36 x 500 x 2500 = 45,000,000 m3, the sixth number and a closed-form anchor. Zone B gives 10.24 x 500 x 2500 = 12,800,000 m3, and the two zones together hold 57.8 x 10^6 m3.
 
 ## Step 8: hand it on
 

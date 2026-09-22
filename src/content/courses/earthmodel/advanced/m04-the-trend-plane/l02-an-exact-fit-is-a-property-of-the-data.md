@@ -20,7 +20,7 @@ The Expert reflex, on seeing a suspiciously perfect fit: count degrees of freedo
 
 ## What the exact fit licenses and what it does not
 
-On this fixture, the exact fit licenses precise statements about the MODEL: the graded probe is hand-computable, the trend map in block 0 is the generating plane, and the trend-versus-kriging comparisons of module five are clean because both methods see consistent data. It licenses nothing about GEOLOGY: no earth has exactly planar porosity, and the fixture does not claim one; it trades realism for checkability, the same bargain every golden model in this course family makes, stated openly.
+On this fixture, the exact fit licenses precise statements about the MODEL: any probe is hand-computable, the trend map in block 0 is the generating plane, and the trend-versus-kriging comparisons of module five are clean because both methods see consistent data. It licenses nothing about GEOLOGY: no earth has exactly planar porosity, and the fixture does not claim one; it trades realism for checkability, the same bargain every golden model in this course family makes, stated openly.
 
 The practical residue for real work: always PRINT the residuals of a trend fit, never just the coefficients. Residual patterns, not coefficients, carry the diagnosis: random scatter says the trend family is adequate; a bowl or saddle says the family is too simple; machine zeros say look upstream at how the values were made.
 

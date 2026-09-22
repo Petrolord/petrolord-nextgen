@@ -2,14 +2,15 @@ import { describe, it, expect } from 'vitest';
 import { MODEL_SPEC, computeFramework } from '@/lib/earthmodelTeaching';
 import { isNull } from '@petrolord/engines/engines/earthmodeling/framework.js';
 
-// Pins the framework-explorer panel math to the live NG10 Beginner capstone oracle.
+// Pins the framework-explorer panel math to the golden teaching frame (the NG10 beginner
+// capstone key until W5a).
 const NODES = MODEL_SPEC.nx * MODEL_SPEC.ny;
 const CELL_AREA = MODEL_SPEC.dx * MODEL_SPEC.dy;
 
 describe('earthmodel framework explorer: engine math', () => {
   const R = computeFramework();
 
-  it('reproduces the NG10 beginner capstone answer key', () => {
+  it('reproduces the golden teaching frame (the pre-W5 capstone key)', () => {
     expect(R.s2Stats.mean).toBeCloseTo(1575.5, 6);
     expect(R.clampCounts[2]).toBe(180);
     expect(R.tkA.mean).toBeCloseTo(36, 6);

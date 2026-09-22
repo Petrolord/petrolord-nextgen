@@ -8,7 +8,7 @@ One subtraction turns a landed pick and a sampled surface into the tier's unit o
 
 $$r = \mathrm{TVDSS}_{\mathrm{pick}} - z_{\mathrm{surface}}$$
 
-Both terms in metres below sea level, positive down. So a POSITIVE residual means the pick's depth number is larger, the well found the formation DEEPER than the surface claims; a negative residual means the well found it shallower. The convention is arbitrary, its consistency is not: the engine documents it, the capstone grades signed values against it, and half the classic tie-table blunders are sign conventions silently flipped between tools.
+Both terms in metres below sea level, positive down. So a POSITIVE residual means the pick's depth number is larger, the well found the formation DEEPER than the surface claims; a negative residual means the well found it shallower. The convention is arbitrary, its consistency is not: the engine documents it, a capstone grades signed values against it, and half the classic tie-table blunders are sign conventions silently flipped between tools.
 
 A physical mnemonic that survives pressure: the residual is how far you would have to push the surface DOWN, at that point, to touch the pick.
 
@@ -32,7 +32,7 @@ The panel draws each residual as a dashed bar at true section scale, which is de
 
 ## Worked example
 
-Compute W2's TopB residual from its parts, both already derived in this course. Landed TVDSS: 1581.5162510844414 (module two). Sampled clamped TopB at the landing: 1573.1978994886435 (module three's blend machinery, at fractional column 13.066 on row 4). Residual: $1581.5162510844414 - 1573.1978994886435 = 8.318351595797822$ m, positive, pick deeper than surface. This is one of the capstone's graded values, and every digit of it decomposes into trajectory times sampling, which is the point of having built both carefully.
+Compute W2's TopB residual from its parts, both already derived in this course. Landed TVDSS: 1581.5162510844414 (module two). Sampled clamped TopB at the landing: 1573.1978994886435 (module three's blend machinery, at fractional column 13.066 on row 4). Residual: $1581.5162510844414 - 1573.1978994886435 = 8.318351595797822$ m, positive, pick deeper than surface. Every digit of it decomposes into trajectory times sampling, which is the point of having built both carefully.
 
 ## Exercise
 

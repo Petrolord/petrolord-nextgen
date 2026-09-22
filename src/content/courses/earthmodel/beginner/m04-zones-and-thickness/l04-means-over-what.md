@@ -15,7 +15,7 @@ There are two defensible populations to average over, and they give two differen
 | 10.24 m | all 500 nodes of the frame | how much zone B is there per unit of map area, across the whole model |
 | 16 m | the 320 nodes where the zone is present | how thick zone B is where you would actually drill it |
 
-The 10.24 m is the graded value in this course's capstone, to a tolerance of 0.05 m, because a capstone has to fix a convention and this one fixes the frame as the population. That does not make 16 m wrong. It makes it a different question with a different answer.
+This course reports the 10.24 m, the mean over the whole frame, because a report has to fix a convention and this course fixes the frame as the population. The capstone asks for the same convention on a frame of its own. That does not make 16 m wrong. It makes it a different question with a different answer.
 
 ## Neither of them is a mistake
 
@@ -50,7 +50,7 @@ Moving from 10.24 m to 16 m changes the headline number by 56 percent.
 
 Sit with that. Nothing was remapped. No surface was reinterpreted, no new well was drilled, no parameter was tuned. One person divided by 500 and another divided by 320, and the reported thickness of the zone moved by more than half.
 
-There is no tolerance anywhere in this workflow that absorbs a difference of that size. The capstone allows 0.05 m on this mean. A room full of experienced people reviewing a prospect will argue for an afternoon about a difference far smaller than 56 percent, and if the two sides of the argument are quoting means over different populations then the afternoon is wasted before it starts.
+There is no tolerance anywhere in this workflow that absorbs a difference of that size. A capstone tolerance on this mean is a few hundredths of a metre at most. A room full of experienced people reviewing a prospect will argue for an afternoon about a difference far smaller than 56 percent, and if the two sides of the argument are quoting means over different populations then the afternoon is wasted before it starts.
 
 ## The habit, in both directions
 

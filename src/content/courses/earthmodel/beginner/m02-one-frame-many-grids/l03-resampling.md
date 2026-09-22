@@ -43,7 +43,7 @@ Here is what the resampling and the clamp together deliver on this model. The cl
 
 Read the mean carefully, and say it out loud in the form this course insists on. The mean TopB depth is 1575.5 m averaged over all 500 nodes of the model frame. Not over TopB's own 27 by 27 source grid, which covers different ground. Not over the wells. Over the 500 nodes of this frame, which is a denominator chosen by whoever chose the frame.
 
-That number is one of the six the capstone asks for, and the reason it is graded is that it can only be produced by getting the resample onto the right frame and then averaging over the right set of nodes.
+The capstone asks for the same number on a frame of its own, because it can only be produced by getting the resample onto the right frame and then averaging over the right set of nodes.
 
 ## Exercise
 

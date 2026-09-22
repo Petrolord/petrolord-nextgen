@@ -17,7 +17,7 @@ Notice the VALUES' pattern before any geostatistics: porosity falls from west to
 
 ## Precision of the values
 
-W1, W3 and W4 carry round values, 0.315, 0.277, 0.2765: their zone A porosities as logged. W2's 0.2935651232824187 has fifteen significant digits, and it is worth knowing why: it is not a logged number but a DERIVED one, the fixture's zone A porosity evaluated along W2's deviated transit, and it participates in every downstream weighted mean at full precision. When module three of this course computes the graded block 0 porosity of 0.28631191845445614, most of those digits trace back to W2's value and weight. Rounding W2's value to 0.2936 before the weighted mean moves the graded answer in its sixth decimal, inside tolerance but no longer exact; the engine never rounds, and hand checks that want the full digits must not either.
+W1, W3 and W4 carry round values, 0.315, 0.277, 0.2765: their zone A porosities as logged. W2's 0.2935651232824187 has fifteen significant digits, and it is worth knowing why: it is not a logged number but a DERIVED one, the fixture's zone A porosity evaluated along W2's deviated transit, and it participates in every downstream weighted mean at full precision. When module three of this course computes the golden block 0 porosity of 0.28631191845445614, most of those digits trace back to W2's value and weight. Rounding W2's value to 0.2936 before the weighted mean moves that answer in its sixth decimal, small but no longer exact; the engine never rounds, and hand checks that want the full digits must not either.
 
 ## One point per well per zone
 

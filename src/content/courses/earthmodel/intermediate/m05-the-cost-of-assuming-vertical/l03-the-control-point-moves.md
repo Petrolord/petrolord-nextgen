@@ -12,7 +12,7 @@ For vertical wells the convention is invisible: the midpoint of any MD interval 
 
 ## W2's point stands 211 m from its wellhead
 
-W2's zone A runs 1580 to 1700 m MD; the midpoint is MD 1640, which module two landed at x 1610.8719179395334, y 2200, TVDSS 1539.0898442132484. That x is the capstone's sixth graded field, and it sits 210.8719179395334 m east of the wellhead.
+W2's zone A runs 1580 to 1700 m MD; the midpoint is MD 1640, which module two landed at x 1610.8719179395334, y 2200, TVDSS 1539.0898442132484. That x sits 210.8719179395334 m east of the wellhead.
 
 Switch the panel's trajectory control to the vertical assumption with W2 selected and watch the control point tile: the location snaps back to (1400, 2200), the wellhead. The weight stays 120 either way, since MD is measured along the hole regardless of what shape you believe the hole has. The vertical assumption thus corrupts the control point's LOCATION while leaving its weight and value untouched, a quiet 211 m transplant of data from one place to another.
 

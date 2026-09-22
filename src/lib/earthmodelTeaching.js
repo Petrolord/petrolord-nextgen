@@ -11,9 +11,14 @@
 // Advanced runs faults + population and reads per-block BULK rock
 // volume. Division of labour (binding, from the G8 plan): fluids,
 // contacts and STOIIP booking stay in the ReservoirCalc course - this
-// course owns the container, not the barrels. The capstone oracle was
-// reproduced by running exactly these pipelines in Node before the
-// migration was seeded.
+// course owns the container, not the barrels.
+//
+// The golden model is the TEACHING case: the panels open on it and the
+// lessons work it. Since W5a (2026-09) each tier's capstone is a case of
+// its own (a model frame, a well, a fault and variogram), stated in the
+// brief and typed into the panels. Nothing in this file carries it, and
+// panelCapstoneGuard.test.jsx checks that no number these functions give
+// at their defaults lands on a graded answer.
 import goldens from '@petrolord/engines/test-data/earthmodel/goldens.json';
 import { buildFramework, isNull } from '@petrolord/engines/engines/earthmodeling/framework.js';
 import { minCurvature, positionAtMd, wellTies, zoneControlPoints } from '@petrolord/engines/engines/earthmodeling/wellties.js';
@@ -61,12 +66,26 @@ const liveStats = (grid) => {
   return { mean: sum / count, max, min, count };
 };
 
-/** Beginner: resample + clamp the stack, zone thickness, bulk volume. */
-export function computeFramework() {
-  const fw = buildFramework(SURFACES, MODEL_SPEC);
-  const bulkA = zoneVolumes(MODEL_SPEC, fw.thickness[0], null).total.bulk_m3;
-  const bulkB = zoneVolumes(MODEL_SPEC, fw.thickness[1], null).total.bulk_m3;
+/** The model frame the three source surfaces all cover, so a typed frame
+ *  inside it resamples without extrapolation. */
+export const SOURCE_COVER = (() => {
+  const specs = Object.values(goldens.source_specs);
   return {
+    xMin: Math.max(...specs.map((q) => q.x0)),
+    yMin: Math.max(...specs.map((q) => q.y0)),
+    xMax: Math.min(...specs.map((q) => q.x0 + (q.nx - 1) * q.dx)),
+    yMax: Math.min(...specs.map((q) => q.y0 + (q.ny - 1) * q.dy)),
+  };
+})();
+
+/** Beginner: resample + clamp the stack, zone thickness, bulk volume, on
+ *  the golden frame or on any frame the learner types. */
+export function computeFramework(spec = MODEL_SPEC) {
+  const fw = buildFramework(SURFACES, spec);
+  const bulkA = zoneVolumes(spec, fw.thickness[0], null).total.bulk_m3;
+  const bulkB = zoneVolumes(spec, fw.thickness[1], null).total.bulk_m3;
+  return {
+    spec,
     fw,
     s2Stats: liveStats(fw.clamped[1]),
     clampCounts: fw.counts,
@@ -121,7 +140,7 @@ export function computeBlocksAndProperties(fw) {
 
 // ---------------------------------------------------------------------------
 // Deep-course panel drivers (DC28 Professional, DC29 Expert). Pure functions
-// beside the capstone drivers above, which stay untouched.
+// beside the tier drivers above, which stay untouched.
 
 export const TIE_WELL_NAMES = Object.keys(goldens.wells);
 export const KRIGE_PARAMS = goldens.population.krige_spherical.params;
@@ -129,16 +148,32 @@ export const NUGGET_OPTIONS = [0, 0.00025, 0.001, 0.002];
 export const RANGE_OPTIONS = [300, 600, 900, 1800];
 export const POPULATION_METHODS = ['krige', 'trend', 'constant'];
 // The Population explorer's probe readout opens here, away from every graded
-// probe location, so no default panel state prints a capstone answer.
+// probe location and the capstone case, so no default panel state prints a capstone answer.
 export const PROBE_DEFAULT = { x: 2000, y: 2300 };
 
 /** Professional panel: one well tied in detail. The panel's exposed
  *  assumption is the survey itself: vertical=true replaces the well's
  *  deviation with a straight vertical hole, which is what every tie
  *  silently assumes until a trajectory is built. */
-export function computeTieDetail(wellName, vertical = false) {
+/** A well typed by the learner, in the same shape as WELLS: a head, a
+ *  three-station survey (vertical to the kick-off, built to an inclination
+ *  and azimuth, held to TD) and the three top picks in MD. */
+export function typedWell({ x, y, kb, kopMd, eobMd, tdMd, inc, azi, topA, topB, baseB, name = 'Typed well' }) {
+  return {
+    name,
+    x,
+    y,
+    kb_m: kb,
+    deviation: [{ md: kopMd, inc: 0, azi: 0 }, { md: eobMd, inc, azi }, { md: tdMd, inc, azi }],
+    tops: [{ name: 'TopA', md_m: topA }, { name: 'TopB', md_m: topB }, { name: 'BaseB', md_m: baseB }],
+    zones: [{ name: 'A', top_md_m: topA, base_md_m: topB }, { name: 'B', top_md_m: topB, base_md_m: baseB }],
+  };
+}
+
+export function computeTieDetail(wellOrName, vertical = false) {
   const fw = buildFramework(SURFACES, MODEL_SPEC);
-  const w = WELLS.find((x) => x.name === wellName);
+  const w = typeof wellOrName === 'string' ? WELLS.find((x) => x.name === wellOrName) : wellOrName;
+  const wellName = w.name;
   const dev = vertical ? [{ md: 5000, inc: 0, azi: 0 }] : w.deviation;
   const traj = minCurvature(dev, w.kb_m, w.x, w.y);
   const trueTraj = minCurvature(w.deviation, w.kb_m, w.x, w.y);
@@ -186,33 +221,63 @@ export function computeTieDetail(wellName, vertical = false) {
     if (r.residualM == null) continue;
     if (!worstAll || Math.abs(r.residualM) > Math.abs(worstAll.residualM)) worstAll = r;
   }
-  const cpWells = vertical
-    ? WELLS.map((x) => (x.name === wellName ? { ...x, deviation: dev } : x))
-    : WELLS;
-  const cp = zoneControlPoints(cpWells, 'A').find((c) => c.well === wellName);
-  return { well: w, vertical, path, rows, section, worstAll, cp };
+  const cp = zoneControlPoints([{ ...w, deviation: dev }], 'A').find((c) => c.well === wellName);
+  // The worst residual among this well's own picks.
+  let worstOwn = null;
+  for (const r of rows) {
+    if (r.residualM == null) continue;
+    if (!worstOwn || Math.abs(r.residualM) > Math.abs(worstOwn.residualM)) worstOwn = r;
+  }
+  return { well: w, vertical, path, rows, section, worstAll, worstOwn, cp };
 }
 
 /** Expert panel: label the model with the fault polygon and populate
  *  zone-A porosity per block, with the method and the variogram's two
  *  assumed numbers exposed as controls. */
-export function computePopulation(method = 'krige', nugget = KRIGE_PARAMS.nugget, range = KRIGE_PARAMS.range) {
+export const PROFILE_Y_DEFAULT = 2200;
+
+/** Parse "x,y; x,y; ..." into a vertex list; null unless every vertex is two finite numbers and there are at least three. */
+export function parsePolygon(text) {
+  const verts = String(text).split(';').map((pair) => pair.trim()).filter(Boolean)
+    .map((pair) => pair.split(',').map((v) => Number(v.trim())));
+  if (verts.length < 3 || !verts.every((v) => v.length === 2 && v.every(Number.isFinite))) return null;
+  return verts;
+}
+
+export const polygonText = (verts) => verts.map(([x, y]) => `${x},${y}`).join('; ');
+
+export function computePopulation(method = 'krige', nugget = KRIGE_PARAMS.nugget, range = KRIGE_PARAMS.range,
+  polygon = FAULT_POLYGON, rowY = PROFILE_Y_DEFAULT) {
   const fw = buildFramework(SURFACES, MODEL_SPEC);
-  const labels = labelBlocks(MODEL_SPEC, [FAULT_POLYGON]);
+  const labels = labelBlocks(MODEL_SPEC, [polygon]);
   const census = blockCensus(labels);
-  const inBlock1 = (p) => pointInPolygon(p.x, p.y, FAULT_POLYGON);
+  const inBlock1 = (p) => pointInPolygon(p.x, p.y, polygon);
   const pts = CONTROL_POINTS_A.map((p) => ({ x: p.x, y: p.y, v: p.phi, w: p.w, well: p.well }));
   const byBlock = { 0: pts.filter((p) => !inBlock1(p)), 1: pts.filter(inBlock1) };
   const params = { ...KRIGE_PARAMS, nugget, range };
   const { z, provenance } = populateZoneProperty(MODEL_SPEC, labels, byBlock, pts, method, params);
-  const profileRow = Math.round((2200 - MODEL_SPEC.y0) / MODEL_SPEC.dy);
+  const profileRow = Math.max(0, Math.min(MODEL_SPEC.ny - 1, Math.round((rowY - MODEL_SPEC.y0) / MODEL_SPEC.dy)));
   const profile = [];
   for (let c = 0; c < MODEL_SPEC.nx; c++) {
     const j = profileRow * MODEL_SPEC.nx + c;
     profile.push({ x: MODEL_SPEC.x0 + c * MODEL_SPEC.dx, phi: z[j], block: labels[j] });
   }
-  const phiBlock = (b) => weightedMean(byBlock[b].map((p) => p.v), byBlock[b].map((p) => p.w));
+  const phiBlock = (b) => (byBlock[b].length
+    ? weightedMean(byBlock[b].map((p) => p.v), byBlock[b].map((p) => p.w)) : NaN);
   const volsA = zoneVolumes(MODEL_SPEC, fw.thickness[0], labels);
+  // The jump across the fault on this row: at the first place the block
+  // label changes along the row, the block 0 node minus the block 1 node.
+  let jump = null;
+  for (let c = 0; c + 1 < profile.length; c++) {
+    const a = profile[c];
+    const b = profile[c + 1];
+    if (a.block !== b.block && Number.isFinite(a.phi) && Number.isFinite(b.phi)) {
+      const b0 = a.block === 0 ? a : b;
+      const b1 = a.block === 0 ? b : a;
+      jump = { value: b0.phi - b1.phi, xBlock0: b0.x, xBlock1: b1.x };
+      break;
+    }
+  }
   const [ta, tb, tc] = planeFit(pts);
   const krigeAt = (x, y) => simpleKrige(pts, null, params, [[x, y]])[0];
   return {
@@ -225,6 +290,8 @@ export function computePopulation(method = 'krige', nugget = KRIGE_PARAMS.nugget
     provenance,
     profile,
     profileY: MODEL_SPEC.y0 + profileRow * MODEL_SPEC.dy,
+    jump,
+    polygon,
     phiBlock0: phiBlock(0),
     phiBlock1: phiBlock(1),
     volsA,

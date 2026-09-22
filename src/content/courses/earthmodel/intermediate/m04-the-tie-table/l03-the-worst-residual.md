@@ -1,10 +1,10 @@
 # The worst residual
 
-The Associate tier told you the headline: the worst residual in the set is the deviated well's BaseB at 45.028 m, because deviation moves the bottom of the hole. This lesson keeps the number and complicates the slogan, because the graded understanding is the decomposition, not the headline.
+The Associate tier told you the headline: the worst residual in the set is the deviated well's BaseB at 45.028 m, because deviation moves the bottom of the hole. This lesson keeps the number and complicates the slogan, because the understanding worth having is the decomposition, not the headline.
 
 ## The number, derived
 
-W2's BaseB pick lands at (1695.7247316819194, 2200), TVDSS 1623.9426579556343. The clamped BaseB surface there reads 1578.9144946336385. Residual: $1623.9426579556343 - 1578.9144946336385 = 45.02816332199586$ m, the largest absolute value in the table, and the capstone's worst_res field.
+W2's BaseB pick lands at (1695.7247316819194, 2200), TVDSS 1623.9426579556343. The clamped BaseB surface there reads 1578.9144946336385. Residual: $1623.9426579556343 - 1578.9144946336385 = 45.02816332199586$ m, the largest absolute value in the table.
 
 ## The slogan's problem
 
@@ -18,11 +18,11 @@ What deviation did NOT do: create the disagreement itself. The disagreement is m
 
 Next lesson derives an exact ledger identity for vertical wells: the BaseB residual equals the TopB residual plus the zone B disagreement. W2's version carries trajectory effects in both terms, but the same structure holds approximately: of W2's 45.03, about 8.3 belongs to the same mild TopB-level bias every well shows, and the balance, around 36.7, matches the missing-zone signal the eastern wells show. Deviation's distinctive contribution was to move the measurement point east into the pinched region and to make the arithmetic non-integer; the SIZE of the number is mostly the zone story.
 
-This is why the tier bothers with a full table rather than a headline. The largest number in the table is real, graded, and correctly computed, and yet attributing it to "deviation" would misdirect the fix toward the trajectory, when the model's actual defect, if it is one, lives in the clamped zone B. The table's cross-checks, especially the vertical eastern wells, are what stop the misattribution.
+This is why the tier bothers with a full table rather than a headline. The largest number in the table is real and correctly computed, and yet attributing it to "deviation" would misdirect the fix toward the trajectory, when the model's actual defect, if it is one, lives in the clamped zone B. The table's cross-checks, especially the vertical eastern wells, are what stop the misattribution.
 
 ## What "worst" is for
 
-Operationally, the worst residual is a triage pointer: it says where to look first, not what is broken. Its value as a capstone field is that finding it requires the whole pipeline to be right: all four trajectories, all twelve landings, all twelve samples, and the absolute-value comparison across them. It is a pipeline integrity check disguised as a lookup.
+Operationally, the worst residual is a triage pointer: it says where to look first, not what is broken. Its value as a check is that finding it requires the whole pipeline to be right: all four trajectories, all twelve landings, all twelve samples, and the absolute-value comparison across them. It is a pipeline integrity check disguised as a lookup.
 
 ## Worked example
 

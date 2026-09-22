@@ -27,7 +27,7 @@ The panel shows the whole story on the profile: sweep the nugget upward and watc
 
 ## Choosing a nugget with four wells
 
-You cannot, from this data, and the honest posture is the same as the range's: assume, sweep, and report sensitivity. What the sweep shows HERE is reassuring for the capstone and instructive in general: the graded probe at (1500, 2500) moves only from 0.2916 (nugget 0) to 0.2906 (nugget 0.002), about a thousandth across an eightfold nugget swing, because the probe stands 320 m from the nearest well, far from any cliff. Nugget sensitivity concentrates NEAR WELLS; probes and volumes read far from wells barely feel it. Knowing WHERE a parameter matters is worth as much as knowing its value.
+You cannot, from this data, and the honest posture is the same as the range's: assume, sweep, and report sensitivity. What the sweep shows HERE is reassuring and instructive in general: the golden probe at (1500, 2500) moves only from 0.2916 (nugget 0) to 0.2906 (nugget 0.002), about a thousandth across an eightfold nugget swing, because the probe stands 320 m from the nearest well, far from any cliff. Nugget sensitivity concentrates NEAR WELLS; probes and volumes read far from wells barely feel it. Knowing WHERE a parameter matters is worth as much as knowing its value.
 
 ## Worked example
 
