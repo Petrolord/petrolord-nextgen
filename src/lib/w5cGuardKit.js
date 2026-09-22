@@ -69,6 +69,27 @@ export function integerLeaksIn(text, fields) {
   return hits;
 }
 
+/**
+ * Every decimal number printed in a text that lands within a graded
+ * non-integer field's tolerance: a nearby worked value (a neighbouring rate
+ * on a ladder, a rounded print) passes the grader as surely as the value
+ * itself, so a strip must clear these too. `allow` lists printed numbers that
+ * are stated INPUTS of the case (a published table entry the prompt tells the
+ * learner to use), each with its reason; they are reported, not failed.
+ */
+export function nearValuesIn(text, fields, allow = {}) {
+  const hits = [];
+  const nums = [...text.matchAll(/(?<![0-9.])-?\d+\.\d+(?![0-9])/g)].map((m) => m[0]);
+  for (const f of fields) {
+    const v = Number(f.expected);
+    if (Number.isInteger(v) && Number(f.tol) === 0) continue;
+    for (const t of nums) {
+      if (Math.abs(Number(t) - v) <= Number(f.tol) && !(allow[f.key] || []).includes(t)) hits.push({ key: f.key, text: t });
+    }
+  }
+  return hits;
+}
+
 /** Every lesson file of a course's tiers, with its text. */
 export function lessonsOf(course, tiers = TIERS) {
   const out = [];

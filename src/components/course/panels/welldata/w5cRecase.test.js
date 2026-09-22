@@ -15,7 +15,7 @@ import { describe, it, expect } from 'vitest';
 import fs from 'node:fs';
 import path from 'node:path';
 import {
-  REPO, renderingsOf, leaksIn, integerLeaksIn, lessonsOf, sourcesOf, migrationFields, W1_LABEL, W1_LESSON_NOTE, TIERS,
+  REPO, renderingsOf, leaksIn, integerLeaksIn, nearValuesIn, lessonsOf, sourcesOf, migrationFields, W1_LABEL, W1_LESSON_NOTE, TIERS,
 } from '@/lib/w5cGuardKit';
 import { TEACHING_FILES, qcFile, computeImport, computeCampaign } from '@/lib/welldataTeaching';
 import { build, gradedKeys, CASE_FILE_NAMES } from '../../../../../docs/graded-field-audit/w5c/welldata/case.mjs';
@@ -85,6 +85,10 @@ describe('W5c welldata: nothing prints the ODUMA answers before the learner work
       for (const h of leaksIn(s.text, RENDER)) hits.push(`${s.file}: ${h.key} as ${h.text} (${h.shape})`);
       for (const h of integerLeaksIn(s.text, ALL)) hits.push(`${s.file}: ${h.key} as ${h.text}`);
     }
+    // and no printed decimal inside a graded tolerance (a nearby worked value passes as surely)
+    for (const l of LESSONS) {
+      for (const h of nearValuesIn(l.text, ALL)) hits.push(`${l.file}: ${h.text} within tol of ${h.key}`);
+    }
     expect(hits).toEqual([]);
   });
 
@@ -146,6 +150,12 @@ describe('W5c welldata: negative controls (each check must go red on a plant)', 
       expect(integerLeaksIn(`the file holds ${f.expected} samples`, [f]), f.key).toHaveLength(1);
       expect(integerLeaksIn(`depth ${f.expected}1.5 m`, [f]), f.key).toHaveLength(0);
     }
+  });
+
+  it('a nearby decimal inside a graded tolerance is caught', () => {
+    const f = ALL.find((x) => x.key === 'oduma2_gr_mean');
+    expect(nearValuesIn(`the mean reads ${(f.expected + 0.03).toFixed(4)} GAPI`, [f])).toHaveLength(1);
+    expect(nearValuesIn('the mean reads 64.9272 GAPI', [f])).toHaveLength(0);
   });
 
   it('a panel that imports the case is caught', () => {
