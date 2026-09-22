@@ -320,7 +320,9 @@ export const capstoneValues = () => {
   return {
     beginner: {
       pl_n: f.powerLaw.n,
-      hb_tau_y_Pa: f.herschelBulkley.tauYPa,
+      // HD 2026-09-22: the Herschel-Bulkley n, which replaced the yield stress
+      // (that yield, 4 dial degrees, was the light mud's measured 3 rpm stress)
+      hb_n: f.herschelBulkley.n,
       pipe_dp_Pa: ps.pipeDpPa,
       annulus_dp_Pa: ps.annulusDpPa,
       bit_dp_Pa: ps.bitDpPa,
