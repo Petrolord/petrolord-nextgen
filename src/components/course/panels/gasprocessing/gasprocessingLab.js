@@ -871,6 +871,103 @@ export const coldEnd = () => {
   };
 };
 
+// ---------------------------------------------------------------------------
+// THE TYPED SKID (B5 follow-on W4, owner decision D2). The cold end view takes
+// a let-down the learner types: inlet pressure, inlet temperature, separator
+// pressure, gas gravity and molar heat capacity. The chain is the one coldEnd
+// runs on AGBADA, call for call: the coefficient and its derivative at the
+// inlet, the default twenty-step march, and the saturated water content at the
+// inlet and at the separator pressure and the arrival temperature. So a skid
+// typed into the view reads the same numbers the engine gives anywhere else.
+//
+// THE DEFAULT IS THE TEACHING STREAM. The view opens on AGBADA, and because
+// the reader below takes that default when called bare, the lab's own leak
+// gate walks it with every other teaching export.
+// ---------------------------------------------------------------------------
+
+/** The typed view opens on the teaching stream AGBADA. */
+export const TYPED_COLD_END_DEFAULT = Object.freeze({
+  p1Psia: AGBADA.p1Psia,
+  tF: AGBADA.tF,
+  p2Psia: AGBADA.p2Psia,
+  gasSg: AGBADA.gasSg,
+  cpBtuLbmolF: AGBADA.cpBtuLbmolF,
+});
+
+/** The five inputs the typed view asks for, in the order it asks. */
+export const TYPED_COLD_END_FIELDS = [
+  ['p1Psia', 'inlet pressure, psia'],
+  ['tF', 'inlet temperature, degF'],
+  ['p2Psia', 'separator pressure, psia'],
+  ['gasSg', 'gas gravity'],
+  ['cpBtuLbmolF', 'molar heat capacity, Btu/lbmol.degF'],
+];
+
+const typedNumber = (v) => {
+  if (typeof v === 'number') return v;
+  if (typeof v !== 'string' || v.trim() === '') return NaN;
+  return Number(v.trim());
+};
+
+/**
+ * The cold end of a typed skid. Takes numbers or the strings a field holds,
+ * and returns { ok, errors, warnings, ...values }. It never throws: an input
+ * that is not a number is refused here in plain words, and anything the engine
+ * refuses comes back as the engine's own message.
+ */
+export const typedColdEnd = (inputs = TYPED_COLD_END_DEFAULT) => {
+  const src = inputs || {};
+  const errors = [];
+  const v = {};
+  TYPED_COLD_END_FIELDS.forEach(([key, label]) => {
+    const x = typedNumber(src[key]);
+    if (!Number.isFinite(x)) errors.push(`Type a number for the ${label}.`);
+    v[key] = x;
+  });
+  if (errors.length) return { ok: false, errors, warnings: [] };
+  const mu = G.jouleThomsonFPerPsi({
+    pPsia: v.p1Psia, tF: v.tF, gasSg: v.gasSg, cpBtuLbmolF: v.cpBtuLbmolF,
+  });
+  if (mu.error) return { ok: false, errors: [`The coefficient at the inlet refuses: ${mu.error}`], warnings: [] };
+  const march = G.jtDrop({
+    p1Psia: v.p1Psia, p2Psia: v.p2Psia, tF: v.tF, gasSg: v.gasSg, cpBtuLbmolF: v.cpBtuLbmolF,
+  });
+  if (march.error) return { ok: false, errors: [`The march refuses: ${march.error}`], warnings: [] };
+  const waterIn = G.saturatedWaterContent({ pPsia: v.p1Psia, tF: v.tF });
+  const waterOut = G.saturatedWaterContent({ pPsia: v.p2Psia, tF: march.t2F });
+  const warnings = [];
+  const addWarning = (source, w) => {
+    if (w && !warnings.some((x) => x.source === source)) warnings.push({ source, message: w });
+  };
+  addWarning('the coefficient at the inlet', mu.warning);
+  addWarning('the march', march.warning);
+  addWarning('the water at the inlet', waterIn.warning);
+  addWarning('the water at the cold spot', waterOut.warning);
+  const waterErrors = [
+    waterIn.error ? `The water at the inlet refuses: ${waterIn.error}` : null,
+    waterOut.error ? `The water at the cold spot refuses: ${waterOut.error}` : null,
+  ].filter(Boolean);
+  return {
+    ok: true,
+    errors: waterErrors,
+    warnings,
+    inputs: v,
+    z: mu.z,
+    ppr: mu.ppr,
+    tpr: mu.tpr,
+    dzdT: mu.dzdT,
+    muFPerPsi: mu.muFPerPsi,
+    muPer100PsiDerived: mu.muFPerPsi * 100,
+    steps: march.steps,
+    dropF: march.dropF,
+    t2F: march.t2F,
+    muMeanFPerPsi: march.muMeanFPerPsi,
+    waterInLbMMscf: waterIn.error ? null : waterIn.lbPerMMscf,
+    waterOutLbMMscf: waterOut.error ? null : waterOut.lbPerMMscf,
+    dropOutLbMMscfDerived: (waterIn.error || waterOut.error) ? null : waterIn.lbPerMMscf - waterOut.lbPerMMscf,
+  };
+};
+
 /** Every refusal the module makes, as Section 15 lists them. Exported so the
  *  refusal gate has a surface it cannot silently lose. */
 export const REFUSAL_PROBES = [

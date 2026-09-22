@@ -11916,30 +11916,37 @@
   "expected": 0.0009683744638956019,
   "tol": 5e-07,
   "rel_tol": 0.0005163291873564974,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/content/courses/gasprocessing/advanced/m01-dew-point-control-by-expansion/l03-where-the-number-comes-from.md (identity; derivative of the DAK z-factor, engine-only)",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx:332 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 12
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gasprocessing/ColdEndExplorer.jsx:104 twelve(c.dzdT) (teaching stream only)",
+  "display_ref": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx:332 toFixed(12)",
   "prompt_precision": "The derivative per degR, the coefficient in degF a psi, temperatures in degF and water contents in lb a MMscf, all to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 3.7446389560187067e-07,
-  "rounding_miss": null,
+  "rounding_miss": 1.0439815244928097e-13,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:130 -> add a Stat for d.dzdT at fmt(v, 9); or make /root/wt-b5-nextgen/src/components/course/panels/gasprocessing/ColdEndExplorer.jsx inputs editable (it prints twelve(c.dzdT) at :104)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix, owner to choose the surface. The DAK derivative and the 20-step midpoint march are engine-only, the fc-coldend-explorer that prints them at 9 to 12 decimals is fixed on the AGBADA teaching stream, and the Suite dew point card prints 1 decimal or nothing. Preferred: add p1, t, p2, gravity and Cp inputs to the NextGen ColdEndExplorer (it already prints dzdT at 12 and the rest at 9 decimals). Alternative: print six decimals in the Suite card. Loosening tol to the Suite 1-decimal would contradict the prompt's \"all to six decimals\".",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "The Suite dew point card never prints the derivative (SweeteningDewPanels.jsx:127-150); the panel prints it only for AGBADA (0.001161871583). The DAK z-factor is iterative, so it is not a hand step.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gasprocessing.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Cold end explorer's \"Your skid, typed\" view takes the five numbers above (inlet pressure and temperature, separator pressure, gravity and molar heat capacity) and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gasprocessing/yourCase.test.jsx"
+   }
+  },
+  "evidence": "A typed skid mode on ColdEndExplorer.jsx (typedColdEnd in gasprocessingLab.js: jouleThomsonFPerPsi, jtDrop at the default 20 steps and saturatedWaterContent, the calls the capstone derivation makes) takes the let-down the learner types. Typing 935 psia, 87 degF, 405 psia, 0.67 and 10.2 prints the value within tol; yourCase.test.jsx proves it, that the AGBADA default lands on no graded answer, and that one retyped input misses. The Suite dew point card stays a backup route (W3).",
   "notes": null
  },
  {
@@ -11951,38 +11958,39 @@
   "expected": 0.06026080453221084,
   "tol": 5e-07,
   "rel_tol": 8.297267251596982e-06,
-  "source": "suite-app",
-  "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:130 (JT coefficient at the inlet)",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx:333 (typed mode: the case typed as the prompt states it)",
   "printed": {
-   "decimals": 6
+   "decimals": 12
   },
-  "display_scale": 100.0,
-  "display_ref": "src/components/gasprocessing/SweeteningDewPanels.jsx:132 JT coefficient at the inlet, F/100 psi at 6 dp (8 dp in F/psi) with Full precision on",
+  "display_scale": 1.0,
+  "display_ref": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx:333 toFixed(12)",
   "prompt_precision": "The derivative per degR, the coefficient in degF a psi, temperatures in degF and water contents in lb a MMscf, all to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 1.9546778916301744e-07,
-  "rounding_miss": 4.532210835794803e-09,
+  "rounding_miss": 2.1083829127022113e-13,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
   "class": "none",
-  "fix": {
-   "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:130 -> fmt(d.muFPerPsi * 100, 4) (six decimals in degF/psi); or editable inputs on /root/wt-b5-nextgen/src/components/course/panels/gasprocessing/ColdEndExplorer.jsx (nine(c.muFPerPsi) at :105)"
-  },
+  "fix": null,
   "owner_decision": false,
-  "recommendation": "Display fix, owner to choose the surface. The DAK derivative and the 20-step midpoint march are engine-only, the fc-coldend-explorer that prints them at 9 to 12 decimals is fixed on the AGBADA teaching stream, and the Suite dew point card prints 1 decimal or nothing. Preferred: add p1, t, p2, gravity and Cp inputs to the NextGen ColdEndExplorer (it already prints dzdT at 12 and the rest at 9 decimals). Alternative: print six decimals in the Suite card. Loosening tol to the Suite 1-decimal would contradict the prompt's \"all to six decimals\".",
+  "recommendation": null,
   "leak": false,
   "reclassed_from": "display",
   "shipped": {
-   "wave": "w3",
+   "wave": "w4b",
    "suite": "Suite PR #557 (Gas Processing Studio Full precision switch, stacked on #554)",
-   "migration": "20261026_w3_gasprocessing.sql",
+   "migration": "20261027b_w4_gasprocessing.sql",
    "prompt_append": "Read the figures in the Gas Processing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
-   "printed_before": {
-    "decimals": 1
+   "prompt": "On the course panel, the Cold end explorer's \"Your skid, typed\" view takes the five numbers above (inlet pressure and temperature, separator pressure, gravity and molar heat capacity) and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gasprocessing/yourCase.test.jsx"
    }
   },
-  "evidence": "With Full precision on, the Joule-Thomson screening card prints the coefficient in F/100 psi at 6 decimals, 8 in F/psi (jest: dewpointFullPrecision.test.jsx).",
+  "evidence": "A typed skid mode on ColdEndExplorer.jsx (typedColdEnd in gasprocessingLab.js: jouleThomsonFPerPsi, jtDrop at the default 20 steps and saturatedWaterContent, the calls the capstone derivation makes) takes the let-down the learner types. Typing 935 psia, 87 degF, 405 psia, 0.67 and 10.2 prints the value within tol; yourCase.test.jsx proves it, that the AGBADA default lands on no graded answer, and that one retyped input misses. The Suite dew point card stays a backup route (W3).",
   "notes": null
  },
  {
@@ -11994,38 +12002,39 @@
   "expected": 33.72690128392314,
   "tol": 0.0001,
   "rel_tol": 2.9649922226228288e-06,
-  "source": "suite-app",
-  "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:143",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx:334 (typed mode: the case typed as the prompt states it)",
   "printed": {
-   "decimals": 6
+   "decimals": 9
   },
   "display_scale": 1.0,
-  "display_ref": "src/components/gasprocessing/SweeteningDewPanels.jsx:152 Cooling across the drop at 6 dp with Full precision on",
+  "display_ref": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx:334 toFixed(9)",
   "prompt_precision": "The derivative per degR, the coefficient in degF a psi, temperatures in degF and water contents in lb a MMscf, all to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 2.839231427742561e-07,
-  "rounding_miss": 2.839231427742561e-07,
+  "rounding_miss": 7.685940772717004e-11,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
   "class": "none",
-  "fix": {
-   "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:143 -> fmt(d.dropF, 6); or editable inputs on /root/wt-b5-nextgen/src/components/course/panels/gasprocessing/ColdEndExplorer.jsx (nine(c.dropF) at :194)"
-  },
+  "fix": null,
   "owner_decision": false,
-  "recommendation": "Display fix, owner to choose the surface. The DAK derivative and the 20-step midpoint march are engine-only, the fc-coldend-explorer that prints them at 9 to 12 decimals is fixed on the AGBADA teaching stream, and the Suite dew point card prints 1 decimal or nothing. Preferred: add p1, t, p2, gravity and Cp inputs to the NextGen ColdEndExplorer (it already prints dzdT at 12 and the rest at 9 decimals). Alternative: print six decimals in the Suite card. Loosening tol to the Suite 1-decimal would contradict the prompt's \"all to six decimals\".",
+  "recommendation": null,
   "leak": false,
   "reclassed_from": "display",
   "shipped": {
-   "wave": "w3",
+   "wave": "w4b",
    "suite": "Suite PR #557 (Gas Processing Studio Full precision switch, stacked on #554)",
-   "migration": "20261026_w3_gasprocessing.sql",
+   "migration": "20261027b_w4_gasprocessing.sql",
    "prompt_append": "Read the figures in the Gas Processing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
-   "printed_before": {
-    "decimals": 1
+   "prompt": "On the course panel, the Cold end explorer's \"Your skid, typed\" view takes the five numbers above (inlet pressure and temperature, separator pressure, gravity and molar heat capacity) and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gasprocessing/yourCase.test.jsx"
    }
   },
-  "evidence": "With Full precision on, prints at 6 decimals (jest: dewpointFullPrecision.test.jsx).",
+  "evidence": "A typed skid mode on ColdEndExplorer.jsx (typedColdEnd in gasprocessingLab.js: jouleThomsonFPerPsi, jtDrop at the default 20 steps and saturatedWaterContent, the calls the capstone derivation makes) takes the let-down the learner types. Typing 935 psia, 87 degF, 405 psia, 0.67 and 10.2 prints the value within tol; yourCase.test.jsx proves it, that the AGBADA default lands on no graded answer, and that one retyped input misses. The Suite dew point card stays a backup route (W3).",
   "notes": null
  },
  {
@@ -12037,38 +12046,39 @@
   "expected": 53.27309871607686,
   "tol": 0.0001,
   "rel_tol": 1.8771200176088463e-06,
-  "source": "suite-app",
-  "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:145",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx:335 (typed mode: the case typed as the prompt states it)",
   "printed": {
-   "decimals": 6
+   "decimals": 9
   },
   "display_scale": 1.0,
-  "display_ref": "src/components/gasprocessing/SweeteningDewPanels.jsx:154 Downstream temperature at 6 dp with Full precision on",
+  "display_ref": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx:335 toFixed(9)",
   "prompt_precision": "The derivative per degR, the coefficient in degF a psi, temperatures in degF and water contents in lb a MMscf, all to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 2.839231427742561e-07,
-  "rounding_miss": 2.839231427742561e-07,
+  "rounding_miss": 7.685940772717004e-11,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
   "class": "none",
-  "fix": {
-   "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:145 -> fmt(d.t2F, 6); or editable inputs on /root/wt-b5-nextgen/src/components/course/panels/gasprocessing/ColdEndExplorer.jsx (nine(c.t2F) at :193)"
-  },
+  "fix": null,
   "owner_decision": false,
-  "recommendation": "Display fix, owner to choose the surface. The DAK derivative and the 20-step midpoint march are engine-only, the fc-coldend-explorer that prints them at 9 to 12 decimals is fixed on the AGBADA teaching stream, and the Suite dew point card prints 1 decimal or nothing. Preferred: add p1, t, p2, gravity and Cp inputs to the NextGen ColdEndExplorer (it already prints dzdT at 12 and the rest at 9 decimals). Alternative: print six decimals in the Suite card. Loosening tol to the Suite 1-decimal would contradict the prompt's \"all to six decimals\".",
+  "recommendation": null,
   "leak": false,
   "reclassed_from": "display",
   "shipped": {
-   "wave": "w3",
+   "wave": "w4b",
    "suite": "Suite PR #557 (Gas Processing Studio Full precision switch, stacked on #554)",
-   "migration": "20261026_w3_gasprocessing.sql",
+   "migration": "20261027b_w4_gasprocessing.sql",
    "prompt_append": "Read the figures in the Gas Processing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
-   "printed_before": {
-    "decimals": 1
+   "prompt": "On the course panel, the Cold end explorer's \"Your skid, typed\" view takes the five numbers above (inlet pressure and temperature, separator pressure, gravity and molar heat capacity) and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gasprocessing/yourCase.test.jsx"
    }
   },
-  "evidence": "With Full precision on, prints at 6 decimals (jest: dewpointFullPrecision.test.jsx).",
+  "evidence": "A typed skid mode on ColdEndExplorer.jsx (typedColdEnd in gasprocessingLab.js: jouleThomsonFPerPsi, jtDrop at the default 20 steps and saturatedWaterContent, the calls the capstone derivation makes) takes the let-down the learner types. Typing 935 psia, 87 degF, 405 psia, 0.67 and 10.2 prints the value within tol; yourCase.test.jsx proves it, that the AGBADA default lands on no graded answer, and that one retyped input misses. The Suite dew point card stays a backup route (W3).",
   "notes": null
  },
  {
@@ -12111,38 +12121,39 @@
   "expected": 23.519449233233914,
   "tol": 0.0001,
   "rel_tol": 4.251800244484299e-06,
-  "source": "suite-app",
-  "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:148 (Water the cold gas can hold)",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx:337 (typed mode: the case typed as the prompt states it)",
   "printed": {
-   "decimals": 6
+   "decimals": 9
   },
   "display_scale": 1.0,
-  "display_ref": "src/components/gasprocessing/SweeteningDewPanels.jsx:157 Water the cold gas can hold at 6 dp with Full precision on",
+  "display_ref": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx:337 toFixed(9)",
   "prompt_precision": "The derivative per degR, the coefficient in degF a psi, temperatures in degF and water contents in lb a MMscf, all to six decimals.",
   "prompt_decimals": 6,
   "prompt_miss": 2.3323391218355027e-07,
-  "rounding_miss": 2.3323391218355027e-07,
+  "rounding_miss": 2.339142213259038e-10,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
   "class": "none",
-  "fix": {
-   "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:149 -> fmt(d.waterAtOutlet.lbPerMMscf, 6); or editable inputs on /root/wt-b5-nextgen/src/components/course/panels/gasprocessing/ColdEndExplorer.jsx (nine(c.waterOutLbMMscf) at :261)"
-  },
+  "fix": null,
   "owner_decision": false,
-  "recommendation": "Display fix, owner to choose the surface. The DAK derivative and the 20-step midpoint march are engine-only, the fc-coldend-explorer that prints them at 9 to 12 decimals is fixed on the AGBADA teaching stream, and the Suite dew point card prints 1 decimal or nothing. Preferred: add p1, t, p2, gravity and Cp inputs to the NextGen ColdEndExplorer (it already prints dzdT at 12 and the rest at 9 decimals). Alternative: print six decimals in the Suite card. Loosening tol to the Suite 1-decimal would contradict the prompt's \"all to six decimals\".",
+  "recommendation": null,
   "leak": false,
   "reclassed_from": "display",
   "shipped": {
-   "wave": "w3",
+   "wave": "w4b",
    "suite": "Suite PR #557 (Gas Processing Studio Full precision switch, stacked on #554)",
-   "migration": "20261026_w3_gasprocessing.sql",
+   "migration": "20261027b_w4_gasprocessing.sql",
    "prompt_append": "Read the figures in the Gas Processing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
-   "printed_before": {
-    "decimals": 1
+   "prompt": "On the course panel, the Cold end explorer's \"Your skid, typed\" view takes the five numbers above (inlet pressure and temperature, separator pressure, gravity and molar heat capacity) and prints every value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gasprocessing/yourCase.test.jsx"
    }
   },
-  "evidence": "With Full precision on, prints at 6 decimals (jest: dewpointFullPrecision.test.jsx).",
+  "evidence": "A typed skid mode on ColdEndExplorer.jsx (typedColdEnd in gasprocessingLab.js: jouleThomsonFPerPsi, jtDrop at the default 20 steps and saturatedWaterContent, the calls the capstone derivation makes) takes the let-down the learner types. Typing 935 psia, 87 degF, 405 psia, 0.67 and 10.2 prints the value within tol; yourCase.test.jsx proves it, that the AGBADA default lands on no graded answer, and that one retyped input misses. The Suite dew point card stays a backup route (W3).",
   "notes": null
  },
  {
