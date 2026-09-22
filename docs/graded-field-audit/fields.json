@@ -21137,13 +21137,13 @@
   "expected": 11691094.102374725,
   "tol": 500.0,
   "rel_tol": 4.276759690938068e-05,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/perfsand/SandExplorer.jsx:217",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Sanding onset view: Top 2200, Bottom 2320, Step 25, Strength boost 1.15, Cavity open hole",
   "printed": {
    "decimals": 5
   },
   "display_scale": 1e-06,
-  "display_ref": "src/components/course/panels/perfsand/SandExplorer.jsx:217",
+  "display_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Tile 'Critical flowing pressure' fmt(v/1e6, 5)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
@@ -21151,17 +21151,19 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/perfsand/SandExplorer.jsx:179-209 -> add 'Top (m MD)' and 'Bottom (m MD)' NumFields to the Sanding view (defaults PARAMS.interval) and pass topMdM/bottomMdM into cdpFor, stepIndependence, boostSweep and boostAtZeroMargin (all accept the override object, perfsandLab.js:202-245)"
-  },
-  "owner_decision": true,
-  "recommendation": "Add the interval inputs to the Sanding view; the golden stress and strength profile only exists inside the engine, so no hand route exists. With the interval inputs the existing 5-decimal MPa tiles (10 Pa resolution) and the 6-decimal boost tile satisfy the current tolerances; verified the engine returns the expected values at 2200-2320 m, open hole, boost 1.15, step 25.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": true,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "cdpFor defaults topMdM/bottomMdM to PARAMS.interval 2450-2550 m (perfsandLab.js:202-206) and the Sanding view has no interval input (SandExplorer.jsx:203-210), so the panel cannot be set to 2200-2320 m; the advanced m04 lessons print no stress or strength numbers and the Suite Sanding tab runs on the case's own geomech profile, not the golden one.",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_perfsand.sql"
+  },
+  "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
+  "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "perfsand",
@@ -21172,13 +21174,13 @@
   "expected": 8884412.847751666,
   "tol": 500.0,
   "rel_tol": 5.6278339218165946e-05,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/perfsand/SandExplorer.jsx:216",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Sanding onset view: Top 2200, Bottom 2320, Step 25, Strength boost 1.15, Cavity open hole",
   "printed": {
    "decimals": 5
   },
   "display_scale": 1e-06,
-  "display_ref": "src/components/course/panels/perfsand/SandExplorer.jsx:216",
+  "display_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Tile 'Governing margin' fmt(v/1e6, 5)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
@@ -21186,17 +21188,19 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/perfsand/SandExplorer.jsx:179-209 -> add 'Top (m MD)' and 'Bottom (m MD)' NumFields to the Sanding view (defaults PARAMS.interval) and pass topMdM/bottomMdM into cdpFor, stepIndependence, boostSweep and boostAtZeroMargin (all accept the override object, perfsandLab.js:202-245)"
-  },
-  "owner_decision": true,
-  "recommendation": "Add the interval inputs to the Sanding view; the golden stress and strength profile only exists inside the engine, so no hand route exists. With the interval inputs the existing 5-decimal MPa tiles (10 Pa resolution) and the 6-decimal boost tile satisfy the current tolerances; verified the engine returns the expected values at 2200-2320 m, open hole, boost 1.15, step 25.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": true,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "cdpFor defaults topMdM/bottomMdM to PARAMS.interval 2450-2550 m (perfsandLab.js:202-206) and the Sanding view has no interval input (SandExplorer.jsx:203-210), so the panel cannot be set to 2200-2320 m; the advanced m04 lessons print no stress or strength numbers and the Suite Sanding tab runs on the case's own geomech profile, not the golden one.",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_perfsand.sql"
+  },
+  "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
+  "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "perfsand",
@@ -21207,13 +21211,13 @@
   "expected": 12588855.56336058,
   "tol": 500.0,
   "rel_tol": 3.971766913072165e-05,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/perfsand/SandExplorer.jsx:218",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Sanding onset view: Top 2200, Bottom 2320, Step 25, Strength boost 1.15, Cavity open hole",
   "printed": {
    "decimals": 5
   },
   "display_scale": 1e-06,
-  "display_ref": "src/components/course/panels/perfsand/SandExplorer.jsx:218",
+  "display_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Tile 'Margin at the bottom' fmt(v/1e6, 5)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
@@ -21221,17 +21225,19 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/perfsand/SandExplorer.jsx:179-209 -> add 'Top (m MD)' and 'Bottom (m MD)' NumFields to the Sanding view (defaults PARAMS.interval) and pass topMdM/bottomMdM into cdpFor, stepIndependence, boostSweep and boostAtZeroMargin (all accept the override object, perfsandLab.js:202-245)"
-  },
-  "owner_decision": true,
-  "recommendation": "Add the interval inputs to the Sanding view; the golden stress and strength profile only exists inside the engine, so no hand route exists. With the interval inputs the existing 5-decimal MPa tiles (10 Pa resolution) and the 6-decimal boost tile satisfy the current tolerances; verified the engine returns the expected values at 2200-2320 m, open hole, boost 1.15, step 25.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": true,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "cdpFor defaults topMdM/bottomMdM to PARAMS.interval 2450-2550 m (perfsandLab.js:202-206) and the Sanding view has no interval input (SandExplorer.jsx:203-210), so the panel cannot be set to 2200-2320 m; the advanced m04 lessons print no stress or strength numbers and the Suite Sanding tab runs on the case's own geomech profile, not the golden one.",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_perfsand.sql"
+  },
+  "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
+  "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "perfsand",
@@ -21242,31 +21248,33 @@
   "expected": 0.7896888993074376,
   "tol": 5e-07,
   "rel_tol": 6.331607300526869e-07,
-  "source": "unobtainable",
-  "source_ref": "src/components/course/panels/perfsand/SandExplorer.jsx:219",
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Sanding onset view: Top 2200, Bottom 2320, Step 25, Strength boost 1.15, Cavity open hole",
   "printed": {
-   "decimals": 6
+   "decimals": 8
   },
   "display_scale": 1.0,
-  "display_ref": "src/components/course/panels/perfsand/SandExplorer.jsx:219",
+  "display_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Tile 'Boost for zero margin' fmt(v, 8)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": 1.006925623991961e-07,
+  "rounding_miss": 6.925624518316909e-10,
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "display",
-  "fix": {
-   "display": "src/components/course/panels/perfsand/SandExplorer.jsx:179-209 -> add 'Top (m MD)' and 'Bottom (m MD)' NumFields to the Sanding view (defaults PARAMS.interval) and pass topMdM/bottomMdM into cdpFor, stepIndependence, boostSweep and boostAtZeroMargin (all accept the override object, perfsandLab.js:202-245)"
-  },
-  "owner_decision": true,
-  "recommendation": "Add the interval inputs to the Sanding view; the golden stress and strength profile only exists inside the engine, so no hand route exists. With the interval inputs the existing 5-decimal MPa tiles (10 Pa resolution) and the 6-decimal boost tile satisfy the current tolerances; verified the engine returns the expected values at 2200-2320 m, open hole, boost 1.15, step 25.",
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": true,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "cdpFor defaults topMdM/bottomMdM to PARAMS.interval 2450-2550 m (perfsandLab.js:202-206) and the Sanding view has no interval input (SandExplorer.jsx:203-210), so the panel cannot be set to 2200-2320 m; the advanced m04 lessons print no stress or strength numbers and the Suite Sanding tab runs on the case's own geomech profile, not the golden one. The bisection tile (boostAtZeroMargin, perfsandLab.js:234) likewise runs on the published interval; at 6 decimals it would print 0.789689, within tol 5e-7.",
-  "notes": null
+  "reclassed_from": "display",
+  "shipped": {
+   "wave": "w4a",
+   "route": "typed-case panel mode (W4a)",
+   "migration": "20261027a_w4_perfsand.sql"
+  },
+  "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
+  "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged."
  },
  {
   "course": "petrophysics",

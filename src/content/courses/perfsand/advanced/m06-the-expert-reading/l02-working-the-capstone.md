@@ -6,6 +6,8 @@ The six graded values in this tier, and the traps in each.
 
 {{panel:ps-sand-explorer}}
 
+**Your case.** Fields 3 to 6 come from the explorer's "Sanding onset" view. Type the interval top and bottom, the step and the boost the brief states, and pick the open hole cavity. The boxes open blank, which is the published case, and the zero-margin boost prints to eight decimals.
+
 ## The conditions
 
 The capstone sand is the one from the Associate tier, and the interval, the cavity geometry, the boost factor and the step are all new. None of them matches the published case.
