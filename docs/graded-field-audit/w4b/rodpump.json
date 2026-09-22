@@ -1,0 +1,114 @@
+{
+ "course": "rodpump",
+ "tiers": {
+  "intermediate": {
+   "pointer": "On the course panel, the Card explorer's \"Your well, typed\" view takes this well as typed (the taper, grade, fluid, unit geometry, pump, speed, damping, fillage and efficiency), marches it at the engine's default parameters and prints every value to nine decimals.",
+   "keys": {
+    "design_plunger_stroke_in": {
+     "panel": "src/components/course/panels/rodpump/CardExplorer.jsx",
+     "line": 666,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js",
+     "evidence": "A typed well mode on CardExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses."
+    },
+    "design_pprl_lb": {
+     "panel": "src/components/course/panels/rodpump/CardExplorer.jsx",
+     "line": 667,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js",
+     "evidence": "A typed well mode on CardExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses."
+    },
+    "design_mprl_lb": {
+     "panel": "src/components/course/panels/rodpump/CardExplorer.jsx",
+     "line": 668,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js",
+     "evidence": "A typed well mode on CardExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses."
+    },
+    "design_prhp_hp": {
+     "panel": "src/components/course/panels/rodpump/CardExplorer.jsx",
+     "line": 669,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js",
+     "evidence": "A typed well mode on CardExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses."
+    },
+    "design_produced_bpd": {
+     "panel": "src/components/course/panels/rodpump/CardExplorer.jsx",
+     "line": 670,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js",
+     "evidence": "A typed well mode on CardExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses."
+    }
+   }
+  },
+  "advanced": {
+   "pointer": "On the course panel, the Balance explorer's \"Your well, typed\" view takes this well as typed, with the unbalance, crank offset, unit designation, service factor and harmonics, and prints the balance, the Goodman loading of every section and the diagnostic read-back to nine decimals.",
+   "keys": {
+    "balance_moment_in_lb": {
+     "panel": "src/components/course/panels/rodpump/BalanceExplorer.jsx",
+     "line": 864,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js",
+     "evidence": "A typed well mode on BalanceExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses."
+    },
+    "balance_peak_torque_in_lb": {
+     "panel": "src/components/course/panels/rodpump/BalanceExplorer.jsx",
+     "line": 865,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js",
+     "evidence": "A typed well mode on BalanceExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses."
+    },
+    "balance_cbe_lb": {
+     "panel": "src/components/course/panels/rodpump/BalanceExplorer.jsx",
+     "line": 866,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js",
+     "evidence": "A typed well mode on BalanceExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses."
+    },
+    "stress_worst_loading_pct": {
+     "panel": "src/components/course/panels/rodpump/BalanceExplorer.jsx",
+     "line": 867,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js",
+     "evidence": "A typed well mode on BalanceExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses."
+    },
+    "diag_plunger_stroke_in": {
+     "panel": "src/components/course/panels/rodpump/BalanceExplorer.jsx",
+     "line": 868,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js",
+     "evidence": "A typed well mode on BalanceExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses."
+    },
+    "diag_pump_load_max_lb": {
+     "panel": "src/components/course/panels/rodpump/BalanceExplorer.jsx",
+     "line": 869,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/rodpump/yourCase.test.js",
+     "evidence": "A typed well mode on BalanceExplorer.jsx (typedWellCard / typedWellBalance in rodPumpLab.js: buildRodString, conventionalGeometry, runRodPumpDesign at the engine's default marching parameters, balanceUnit, modifiedGoodman and diagnoseCard, the chain of the capstone derivation) marches the well the learner types. Typing the prompt's well prints the value within tol; yourCase.test.js proves it, that the ODUMA-4 default lands on no graded answer, and that a retyped damping, unbalance or service factor misses."
+    }
+   }
+  }
+ }
+}
