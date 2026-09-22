@@ -1,0 +1,1006 @@
+{
+ "course": "sim",
+ "migration": "20261029_w6_sim.sql",
+ "case": {
+  "name": "IKPOBA",
+  "markers": [
+   "IKPOBA",
+   "IKP-1",
+   "IKP2-ST"
+  ],
+  "summary": "IKPOBA: a 24 by 20 by 4 deck on 75 m cells, four mapped wells (IKP-1 to IKP-4, IKP-4 off the lattice and wet), tops kriged and calibrated to an area-clipped booking, a designed 36 API oil, a leap-year 2024 monthly history and a Y-direction side-track IKP2-ST. Built through the vendored sim, earthmodeling, scal and mbal engines by case.mjs."
+ },
+ "literals_ok": {
+  "28": "days in a non-leap February",
+  "31": "days in a 31-day month",
+  "100": "the composer's fixed gas-oil contact offset above the crest (beginner m04 l02)",
+  "1e-13": "floating-point residual scale (intermediate m01 l03)",
+  "1e-15": "double-precision relative scale",
+  "30": "an out-of-grid column index set by the question",
+  "0.1": "rounding bound",
+  "5": "an out-of-range k2 set by the question"
+ },
+ "tiers": {
+  "beginner": [
+   {
+    "ord": 41,
+    "replaces": "92c1a2ae7de0c8bc28068079585a91c3",
+    "prompt": "The IKPOBA deck is 24 cells east, 20 north and 4 layers down. How many values must its PORO block and its TOPS block each carry?",
+    "correct": "PORO carries 1920 values, one for each cell, and TOPS carries 480, one for each column.",
+    "distractors": [
+     "Both carry 480 values, because porosity is written once per column like the top depth.",
+     "Both carry 1920 values, because TOPS gives a top depth for every cell in the grid.",
+     "PORO carries 1920 values and TOPS 7680, one top for each cell in each of the four layers."
+    ],
+    "explanation": "{{cells}} cells need a porosity each, while TOPS gives only the top of layer 1 in each of the {{columns}} columns and the layer thicknesses stack the rest.",
+    "why_wrong": [
+     "porosity is a cell property, so it needs one value per cell",
+     "TOPS is one depth per column; deeper interfaces come from DZ",
+     "treats TOPS as per cell per layer, multiplying the count again"
+    ],
+    "rests_on": [
+     "cells",
+     "columns"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 22,
+    "replaces": "a1e23c519414c35cf2a41f764ccacbed",
+    "prompt": "IKPOBA's EQUIL datum is the mean of its 480 column tops, {{datum_ft}} ft, and its oil-water contact is at {{owc_ft}} ft. What does that datum tell you?",
+    "correct": "Only the depth the 3900 psia is quoted at, which here happens to lie {{datum_above_owc_ft}} ft above the contact.",
+    "distractors": [
+     "That the crest lies at {{datum_ft}} ft, since the datum is always placed at the crest of the structure.",
+     "That the contact is really at the datum, and the mapped contact is set aside by the equilibration.",
+     "That the pressure at the contact is 3900 psia, since the datum and the contact are the same reference."
+    ],
+    "explanation": "A datum is a reference depth for the pressure and nothing more. IKPOBA's mean top, {{datum_ft}} ft, lands {{datum_above_owc_ft}} ft above the {{owc_ft}} ft contact, and a datum in either leg is equally legal.",
+    "why_wrong": [
+     "the crest is the shallowest top, and a datum has no required position",
+     "EQUIL carries the contact separately from the datum",
+     "the datum is above the contact, so the pressure there differs by the fluid gradient"
+    ],
+    "rests_on": [
+     "datum_ft",
+     "datum_above_owc_ft",
+     "owc_ft"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 17,
+    "replaces": "62cc86bcdcdece75dce0aa6e526a46d4",
+    "prompt": "IKPOBA's top PVTO record, Rs {{rs_top_deck}}, has Bo {{bo_pb}} at 2600 psia and continues to 3250, 3900 and 4550 psia with Bo {{bo_3250}}, {{bo_pi}} and {{bo_4550}}. Where is Bo largest, and why?",
+    "correct": "At 2600 psia, the bubble point: below it dissolved gas swells the oil, above it the liquid only compresses.",
+    "distractors": [
+     "At 4550 psia, because Bo always rises with pressure as the oil takes up more and more of its gas.",
+     "At 3900 psia, the initial pressure, since Bo is by definition largest at the initial conditions.",
+     "At 1300 psia, the lowest saturated node, where the oil has given off gas and expanded the most."
+    ],
+    "explanation": "Bo peaks at {{bo_pb}} at the bubble point. Above 2600 psia no more gas can dissolve, so squeezing the oil shrinks it to {{bo_4550}} by 4550 psia.",
+    "why_wrong": [
+     "above the bubble point Bo falls as the liquid compresses",
+     "Bo at 3900 psia is below Bo at 2600 psia",
+     "releasing gas shrinks the oil; Bo is lowest at the lowest node"
+    ],
+    "rests_on": [
+     "bo_pb",
+     "bo_3250",
+     "bo_pi",
+     "bo_4550"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 40,
+    "replaces": "e84bde8fb7070a6521122b65949bc824",
+    "prompt": "IKPOBA's SWOF starts at a water saturation of {{swc}} and its residual oil is {{sor}}. At what gas saturation must its SGOF table close?",
+    "correct": "At {{sg_max}}, one minus the connate water, because connate water never leaves the pores.",
+    "distractors": [
+     "At 1, the same as SWOF, so that the gas table covers any saturation the simulator could ask about.",
+     "At {{sg_one_minus_sor}}, one minus the residual oil, because the oil left behind blocks the gas.",
+     "At {{sg_mobile}}, the movable window, since gas can enter only the space the moving oil vacated."
+    ],
+    "explanation": "Gas cannot enter the {{swc}} of the pore space that connate water holds, so the most gas the rock can carry is {{sg_max}}. The check: {{swc}} plus {{sg_max}} is 1.",
+    "why_wrong": [
+     "describes saturations the rock cannot reach and moves the gas endpoint",
+     "residual oil limits oil displacement; the gas axis closes on connate water",
+     "the movable window is the oil-water range, not the gas axis"
+    ],
+    "rests_on": [
+     "swc",
+     "sg_max"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 32,
+    "replaces": "70ed1e53d87cabcd1bdf99d46270a28e",
+    "prompt": "IKPOBA's history runs monthly through 2024 on DATES. Over how many days does its February rate block apply, and why does the history not use TSTEP steps of 30.4375 days?",
+    "correct": "29 days, since 2024 is a leap year; uniform TSTEP steps cannot follow months of unequal length.",
+    "distractors": [
+     "28 days, because DATES always takes February as 28 days, whatever the year happens to be.",
+     "30.4375 days, because DATES converts every calendar month into a mean month internally.",
+     "31 days, as each rate block runs on to the first day of the month after the next one."
+    ],
+    "explanation": "DATES advances to a calendar date, so the February 2024 block runs {{feb_days}} days to 1 March. Uniform 30.4375 day steps would apply rates over periods that are not the months they were measured in.",
+    "why_wrong": [
+     "2024 is a leap year and DATES counts real days",
+     "DATES is a calendar date; the mean month is a TSTEP convention",
+     "a rate block runs to the next DATES, the first of the following month"
+    ],
+    "rests_on": [
+     "feb_days",
+     "mean_month"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 23,
+    "replaces": "ffa1458ad9f38c0ffa5e837dd67c0dba",
+    "prompt": "IKPOBA's shallowest column top is {{crest_ft}} ft and its oil-water contact is at {{owc_ft}} ft. How far above the contact does the crest sit?",
+    "correct": "{{maxcol_ft}} ft, which is {{maxcol_m}} m of closure above the contact.",
+    "distractors": [
+     "{{maxcol_minus_net}} ft, once the 40 ft of net pay below the crest is taken off.",
+     "{{maxcol_mixed}} ft, taking the crest in metres from the contact in feet.",
+     "40 ft, since a column can never exceed the net pay of its four layers."
+    ],
+    "explanation": "The contact less the crest: {{owc_ft}} minus {{crest_ft}} is {{maxcol_ft}} ft. How much of that closure holds oil in any one column is capped by the 40 ft of layers.",
+    "why_wrong": [
+     "subtracts a thickness that has nothing to do with the crest's height",
+     "mixes metres and feet",
+     "the question asks for closure, which is not limited by the layers"
+    ],
+    "rests_on": [
+     "crest_ft",
+     "owc_ft",
+     "maxcol_ft",
+     "maxcol_m"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 25,
+    "replaces": "4f2e2be1f418736951e697d93cc9a44c",
+    "prompt": "IKPOBA starts at 3900 psia against a bubble point of 2600 psia, and its spec gives no gas-oil contact. What does the composed EQUIL record carry for that contact?",
+    "correct": "{{goc_ft}} ft, 100 ft above the crest, where it can never touch any rock.",
+    "distractors": [
+     "The crest, {{crest_ft}} ft, so that the top of each column starts as a gas cap.",
+     "Nothing, as EQUIL simply leaves the field out for a reservoir without a gas cap.",
+     "The oil-water contact, {{owc_ft}} ft, so that no gas column can exist anywhere."
+    ],
+    "explanation": "The composer places a missing gas-oil contact 100 ft above the shallowest top, {{goc_ft}} ft here, so the whole box stays in the oil leg. The oil starts {{margin_psi}} psi above its bubble point.",
+    "why_wrong": [
+     "a contact at the crest would put gas in the top cells",
+     "the record still carries a value; a contact outside the model is how no gas cap is said",
+     "a gas-oil contact at the oil-water contact describes a different, unphysical state"
+    ],
+    "rests_on": [
+     "goc_ft",
+     "crest_ft"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 27,
+    "replaces": "694794d81073a824ffc8ce169438cf18",
+    "prompt": "IKPOBA starts at 3900 psia with 450 scf/stb dissolved, and its PVTO table says that ratio saturates at 2600 psia. What has to happen in a cell before free gas appears there?",
+    "correct": "Its pressure must fall by more than {{margin_psi}} psi, to below the oil's 2600 psia bubble point.",
+    "distractors": [
+     "Nothing can release it: an undersaturated oil never gives up gas, so the gas table is unused.",
+     "Its pressure must rise above 4550 psia, the top of the undersaturated branch of the table.",
+     "Its water saturation must pass {{swc}}, the point at which water pushes the gas out of the oil."
+    ],
+    "explanation": "Every IKPOBA cell starts {{margin_psi}} psi above its own bubble point. A cell that drops below 2600 psia, next to a producer on its 1500 psia floor for instance, starts to free gas.",
+    "why_wrong": [
+     "undersaturation is a state of the initial pressure, not a property of the oil",
+     "raising pressure keeps gas in solution",
+     "water saturation does not decide whether gas leaves solution"
+    ],
+    "rests_on": [
+     "margin_psi",
+     "pb",
+     "pi"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 37,
+    "replaces": "5babc5e1584dba650f8cb378fb1bfce0",
+    "prompt": "IKPOBA's four layers are {{dz}} ft thick, with horizontal permeabilities of {{permx}} md, from the top down. Which statement is right?",
+    "correct": "Layer 3 is the fastest, at 760 md, although it is the thinnest; layer 2 is the thickest of the four.",
+    "distractors": [
+     "Layer 1 is the fastest, since the top layer of a layer-cake model carries the best rock.",
+     "Layer 2 is the fastest, because the thickest layer in a column carries the most permeability.",
+     "All four flow alike, since a layer-cake model gives every layer the same properties."
+    ],
+    "explanation": "Permeability controls flow: layer 3 at 760 md is the fastest and only 6 ft thick, while layer 2 is 14 ft at 95 md. The fast layer is not the top one.",
+    "why_wrong": [
+     "layer 1 is 420 md, below layer 3's 760 md",
+     "layer 2 is thickest at 14 ft but only 95 md",
+     "layer-cake means constant within a layer, not the same between layers"
+    ],
+    "rests_on": [
+     "dz",
+     "permx"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 7,
+    "replaces": "ed2dbc73f0ad9b0b158fa91d2a582249",
+    "prompt": "In the IKPOBA deck, IKP-1 is completed from k1 1 to k2 4 and IKP-2 from k1 1 to k2 3. How many connections do the two wells carry between them?",
+    "correct": "{{conn_ikp1_ikp2}}: four for IKP-1 and three for IKP-2, counting both ends.",
+    "distractors": [
+     "{{conn_offbyone}}: three for IKP-1 and two for IKP-2, taking k2 minus k1.",
+     "{{conn_full}}: four each, since a vertical well is always opened to the full column.",
+     "12, the maximum connection count that the WELLDIMS record declares."
+    ],
+    "explanation": "A vertical completion spans k1 to k2 inclusive: 4 for IKP-1 and 3 for IKP-2, {{conn_ikp1_ikp2}} in all. Taking k2 minus k1 drops one layer from each well.",
+    "why_wrong": [
+     "off by one: k1 to k2 inclusive",
+     "IKP-2 stops at layer 3",
+     "WELLDIMS gives the largest connection count of any well, the side-track's"
+    ],
+    "rests_on": [
+     "conn_ikp1_ikp2",
+     "conn_offbyone",
+     "welldims"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 10,
+    "replaces": "f67346ddb5df1042f29a1fbdc66c1375",
+    "prompt": "IKPOBA's DX block reads {{dx_token}} /. What does that record state?",
+    "correct": "That each of the 1920 cells is {{dx_ft}} ft across, the grid's 75 m cell size.",
+    "distractors": [
+     "That the grid spans {{dx_product}} ft, the count multiplied by the cell size.",
+     "That 1920 is a scale factor applied to a base cell of {{dx_ft}} ft each way.",
+     "That the first 1920 cells are {{dx_ft}} ft and every later cell takes a default."
+    ],
+    "explanation": "The star is a repeat count: {{dx_token}} is 1920 copies of {{dx_ft}} ft, one per cell. Reading it as multiplication gives {{dx_product}} ft.",
+    "why_wrong": [
+     "reads the star as multiplication",
+     "the star is a repeat count, not a scale",
+     "1920 is the whole grid, so no cell is left over"
+    ],
+    "rests_on": [
+     "dx_token",
+     "dx_ft",
+     "dx_product",
+     "cells"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 26,
+    "replaces": "df61a0584992eab55a5471f5a177432e",
+    "prompt": "IKPOBA's RSVD carries {{rs_top_deck}} at both the crest and the deepest layer base. What must that value match, and in what units is it written?",
+    "correct": "The top Rs node of PVTO, written in Mscf/stb, so that it stands for 450 scf/stb.",
+    "distractors": [
+     "The initial pressure over the bubble point, a pure ratio carrying no units.",
+     "The gas surface density in DENSITY, written in lb/ft3 at stock tank conditions.",
+     "The lowest Rs node of PVTO, in scf/stb, since the deepest oil holds the least gas."
+    ],
+    "explanation": "RSVD's {{rs_top_deck}} is 450 scf/stb written in Mscf/stb: the PVTO record that saturates at 2600 psia. A value outside the PVTO table would make the simulator extrapolate it.",
+    "why_wrong": [
+     "3900 over 2600 is not a solution gas ratio",
+     "RSVD is solution gas, not a density",
+     "the lowest node is 1300 psia's; the reservoir holds the top node's gas"
+    ],
+    "rests_on": [
+     "rs_top_deck",
+     "rs_top_scf"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 15,
+    "replaces": "a5033c9c4c40f89fa1bae2bb10296cf1",
+    "prompt": "IKPOBA's gas table runs from {{pvdg_pmin}} to {{pvdg_pmax}} psia, with Bg {{bg_pmin}} rb/Mscf in its lowest row. A cell beside a producer falls to 300 psia. What Bg does the simulator use there?",
+    "correct": "{{bg_pmin}} rb/Mscf, the lowest row held flat below the table's range.",
+    "distractors": [
+     "{{bg_extrap_300}} rb/Mscf, the first two rows extended in a straight line.",
+     "None: the run stops with an error, since the pressure lies outside the table.",
+     "Zero, as a gas table returns nothing at all below its first pressure."
+    ],
+    "explanation": "Outside its range a table holds its end value, so the 300 psia cell gets {{bg_pmin}} rb/Mscf, just where Bg is changing fastest. The check is that the run's pressures sit inside the table.",
+    "why_wrong": [
+     "simulators hold table ends flat rather than extrapolating",
+     "out-of-range values are held, not refused",
+     "the end value is held, not zeroed"
+    ],
+    "rests_on": [
+     "bg_pmin",
+     "pvdg_pmin",
+     "bg_extrap_300"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 14,
+    "replaces": "ac8d503f4c3179a98d75f8f6107bd39b",
+    "prompt": "Every IKPOBA cell is halved in all three directions. How many cells does the new grid hold, and how many wells supply its property data?",
+    "correct": "{{fine_cells}} cells, still filled from the same four wells as before.",
+    "distractors": [
+     "{{fine_cells_areal}} cells, since only the two horizontal directions are halved.",
+     "{{fine_cells_one}} cells, as halving the size simply doubles the count.",
+     "{{fine_cells}} cells, filled from eight times as many control points."
+    ],
+    "explanation": "Halving in three directions multiplies {{cells}} by eight, to {{fine_cells}}. The data still comes from four wells, so the extra cells are interpolation.",
+    "why_wrong": [
+     "the layers are halved too",
+     "halving in three directions is a factor of eight",
+     "refining adds cells, not wells"
+    ],
+    "rests_on": [
+     "fine_cells",
+     "cells"
+    ],
+    "answer_index": 1
+   }
+  ],
+  "intermediate": [
+   {
+    "ord": 4,
+    "replaces": "eeb0ade2c9c1b33b17de58815a3af979",
+    "prompt": "IKPOBA's tops were kriged with a zero nugget through four wells. IKP-1 comes back at {{ikp1_deck_m}} m against its mapped 2112 m, while IKP-4, mapped at 2135 m at (1500, 660), comes back at {{ikp4_deck_m}} m. Why?",
+    "correct": "IKP-4 lies 15 m south of its cell centre, at y 675, and the grid samples the surface only there.",
+    "distractors": [
+     "The zero nugget makes kriging exact only for producers, and IKP-4 is an injector.",
+     "Converting feet back to metres loses {{ikp4_gap_m}} m in the floating-point arithmetic.",
+     "The regional mean pulls each well toward itself, and IKP-4 is the deepest of the four."
+    ],
+    "explanation": "Kriging passes through (1500, 660), but the deck samples cell {{ikp4_cell}} at its centre, 15 m north. On this dip that is {{ikp4_gap_m}} m, a gridding loss that no better interpolator can fix.",
+    "why_wrong": [
+     "exactness depends on the data point, not the well type",
+     "a floating-point round trip is of order 1e-13 m",
+     "a zero nugget honours every data point whatever the mean"
+    ],
+    "rests_on": [
+     "ikp1_deck_m",
+     "ikp4_deck_m",
+     "ikp4_gap_m",
+     "ikp4_centre_y"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 12,
+    "replaces": "9b59ecc39712d28d7fa14a768bf1fe25",
+    "prompt": "Under the cell-centre rule the IKPOBA deck holds {{stoiip_centre}} stb; clipping each column at the contact gives {{stoiip_column}} stb. Which should be reported as the model's oil in place?",
+    "correct": "The cell-centre figure, because it is what the simulator will equilibrate and produce from.",
+    "distractors": [
+     "The column-clipped figure, since it follows the contact exactly and is the more physical one.",
+     "The average of the two, which cancels the rounding each rule makes at the contact.",
+     "Whichever lies closer to the booking, as the booking is the better constrained number."
+    ],
+    "explanation": "Eclipse assigns each cell by its centre depth, so {{stoiip_centre}} stb is what the model holds. The {{conv_gap_pct}} percent gap to the clipped figure is worth reporting as a measure of vertical resolution.",
+    "why_wrong": [
+     "the simulator does not clip columns",
+     "an average is neither the model nor the physics",
+     "reporting is about what the model holds, not what agrees"
+    ],
+    "rests_on": [
+     "stoiip_centre",
+     "stoiip_column",
+     "conv_gap_pct"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 41,
+    "replaces": "77804e088df14583097398018063c4a0",
+    "prompt": "The IKPOBA deck's SGOF was built from a critical gas saturation of 0.04, a gas endpoint of 0.7 and an exponent of 1.8, none of them measured. How should the deck treat that table?",
+    "correct": "Label it as assumed in a comment, grade nothing on it and test the forecast's sensitivity to it.",
+    "distractors": [
+     "Swap in the SWOF curve mirrored about Sw 0.5, since that one came from the laboratory core.",
+     "Leave it unlabelled, as the simulator reads every PROPS table the same way whatever made it.",
+     "Tune its three parameters until the history match improves, which gives them a measured basis."
+    ],
+    "explanation": "A designed table must say so, carry no graded conclusion and be tested for influence. A forecast sensitive to a curve nobody measured is a finding, and tuning it to history does not make it a measurement.",
+    "why_wrong": [
+     "a water-oil curve does not describe gas-oil flow",
+     "a reader will assume an unlabelled table came from a lab",
+     "tuning absorbs other errors; it is not a measurement"
+    ],
+    "lesson": "intermediate/m04-rock-curves-from-the-lab/l03-the-gas-oil-set",
+    "answer_index": 3
+   },
+   {
+    "ord": 3,
+    "replaces": "9a642225de9545e75da012e04b777bba",
+    "prompt": "A planned IKPOBA well sits at map position (1110, 870). The 75 m grid's origin lies half a cell south-west of the map origin. Which cell does the well fall in, and how far is it from that cell's centre?",
+    "correct": "Cell {{pw_cell}}, whose centre at {{pw_centre}} lies {{pw_dist_m}} m from the well.",
+    "distractors": [
+     "Cell {{pw_cell_nooffset}}, dividing by 75 m with no half-cell offset applied first.",
+     "Cell {{pw_cell_swapped}}, reading the easting as J and the northing as I.",
+     "Cell {{pw_cell}}, with the well exactly on its centre, since both coordinates sit on the lattice."
+    ],
+    "explanation": "Add 37.5 m, divide by 75 and add one: cell {{pw_cell}}, centred at {{pw_centre}}. The well is {{pw_dist_m}} m from that centre, which is where the model places it.",
+    "why_wrong": [
+     "forgets the half-cell origin offset",
+     "swaps the axes",
+     "1110 and 870 are not multiples of 75, so the well is off the lattice"
+    ],
+    "rests_on": [
+     "pw_cell",
+     "pw_centre",
+     "pw_dist_m"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 6,
+    "replaces": "b3d691f10d852417bc61d6d7ecad4330",
+    "prompt": "IKPOBA's cells are 75 m square, and moving IKP-4 15 m to its cell centre changed its top by {{ikp4_gap_m}} m. What bounds a well's lateral move on this grid, and what dip does IKP-4's case imply?",
+    "correct": "Half a cell each way, 37.5 m; roughly {{ikp4_dip_m_per_km}} m per km of dip near IKP-4.",
+    "distractors": [
+     "A full cell each way, 75 m; roughly {{dip_full_cell}} m per km, dividing by the cell size.",
+     "The variogram range, 900 m; roughly {{dip_range}} m per km, dividing by the range.",
+     "Nothing bounds it, since a well may sit anywhere inside the cell it falls in."
+    ],
+    "explanation": "A well moves to the nearest centre, at most half a cell in each direction, 37.5 m here. IKP-4 moved 15 m and its top changed {{ikp4_gap_m}} m, about {{ikp4_dip_m_per_km}} m per km.",
+    "why_wrong": [
+     "the nearest centre is never more than half a cell away each way",
+     "the range sets correlation, not the move",
+     "the move to the centre is bounded by the cell geometry"
+    ],
+    "rests_on": [
+     "half_cell_m",
+     "ikp4_gap_m",
+     "ikp4_dip_m_per_km"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 7,
+    "replaces": "5c09cf36376bb40fc18da2e6c36b8430",
+    "prompt": "IKPOBA's regional mean is {{calib_mean_m}} m and the deck holds {{stoiip_centre}} stb. What does moving the mean 10 m shallower, to {{calib_mean_less}} m, do?",
+    "correct": "It raises the oil in place to {{stoiip_shallower}} stb, as more of the surface floats up past the contact.",
+    "distractors": [
+     "It lowers the oil in place to {{stoiip_deeper}} stb, as the structure closes in more tightly.",
+     "Nothing to the volume, since the mean only scales the uncertainty the kriging reports.",
+     "Nothing to the volume, because the zero nugget pins every column to the four wells."
+    ],
+    "explanation": "Far from the wells the surface reverts to the mean, so a shallower mean lifts more columns above the 2130 m contact: {{stoiip_centre}} becomes {{stoiip_shallower}} stb. That leverage is why the mean is the calibrated parameter.",
+    "why_wrong": [
+     "that is the effect of a deeper mean",
+     "the sill scales uncertainty; the mean moves the surface",
+     "the nugget pins the surface only at the wells"
+    ],
+    "rests_on": [
+     "stoiip_centre",
+     "stoiip_shallower",
+     "stoiip_deeper"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 8,
+    "replaces": "231b090d93e1629def95a4da7bc64ef7",
+    "prompt": "Under the cell-centre rule the IKPOBA deck has a pore volume of {{pv_m3}} m3 and a hydrocarbon pore volume of {{hcpv_m3}} m3. What water saturation does that imply?",
+    "correct": "{{implied_sw}}, the connate water that SWOF's first row carries.",
+    "distractors": [
+     "{{sor}}, the residual oil, since HCPV counts only oil that will move.",
+     "{{implied_so}}, the ratio of the two volumes read as it stands.",
+     "{{sg_mobile}}, the movable window from connate water to residual oil."
+    ],
+    "explanation": "One minus {{hcpv_m3}} over {{pv_m3}} is {{implied_sw}}, the connate water. HCPV counts all the oil in place, movable or not.",
+    "why_wrong": [
+     "HCPV includes the residual oil",
+     "the ratio is the oil saturation",
+     "the movable window is not a saturation of the pore volume"
+    ],
+    "rests_on": [
+     "pv_m3",
+     "hcpv_m3",
+     "implied_sw"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 15,
+    "replaces": "f7be764192d0a700498a774fe2ff8188",
+    "prompt": "Standing's correlation, on IKPOBA's 36 API oil, 0.8 gas gravity and 200 F, returns {{rs_corr_pb}} scf/stb at the 2600 psia bubble point against the designed 450. The tank model and the flood ledger used the designed fluid. What does the deck carry?",
+    "correct": "The designed fluid, since a deck must carry the fluid the rest of the study was matched against.",
+    "distractors": [
+     "The correlated fluid, because a published correlation is more objective than a designed table is.",
+     "An average of the two, which splits the {{rs_gap_pct}} percent difference evenly between the two sources of data.",
+     "Correlated Rs with designed Bo, taking each property from whichever source is judged to be better."
+    ],
+    "explanation": "The deck carries the fluid everything else used. A correlation that differs by {{rs_gap_pct}} percent in Rs would leave the tank model and the ledger describing a different oil.",
+    "why_wrong": [
+     "a correlation is a fit to other fluids",
+     "an average is a third fluid nobody matched against",
+     "mixing sources breaks the consistency of the PVT"
+    ],
+    "rests_on": [
+     "rs_corr_pb",
+     "rs_gap_pct"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 22,
+    "replaces": "751fe250631622923daf1ee03d82a021",
+    "prompt": "IKPOBA's SWOF comes from a Corey model with connate water 0.22, residual oil 0.28, water endpoint 0.32 and water exponent 3. What krw belongs at Sw {{sw_row}}?",
+    "correct": "{{krw_026}}, from a normalised saturation of {{swn_026}} over the mobile window.",
+    "distractors": [
+     "{{krw_026_raw}}, raising {{sw_above_swc}} above connate straight to the third power.",
+     "{{krw_026_1mswc}}, normalising by one minus the connate water only.",
+     "{{krw_026_n2}}, applying an exponent of 2 to the normalised saturation."
+    ],
+    "explanation": "Normalise over the mobile window: {{sw_row}} less 0.22, over 1 less 0.22 less 0.28, is {{swn_026}}, and 0.32 times {{swn_026}} cubed is {{krw_026}}.",
+    "why_wrong": [
+     "skips the normalisation",
+     "ignores residual oil in the mobile window",
+     "uses the wrong exponent"
+    ],
+    "rests_on": [
+     "krw_026",
+     "swn_026",
+     "krw_026_raw",
+     "krw_026_1mswc",
+     "krw_026_n2"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 10,
+    "replaces": "7bfbf69ec128438d655674ee34713a8a",
+    "prompt": "IKPOBA column {{colA_ij}} has its top at {{colA_top}} ft, {{colA_above_owc}} ft above the {{owc_ft}} ft contact, over layers of {{dz}} ft. How much oil column does each clipping rule give it?",
+    "correct": "{{colA_centre}} ft under the cell-centre rule and {{colA_above_owc}} ft clipped at the contact.",
+    "distractors": [
+     "{{colA_above_owc}} ft under both rules, as the contact cuts the column at one depth.",
+     "9 ft under the cell-centre rule and {{colA_above_owc}} ft clipped at the contact.",
+     "{{colA_full}} ft under the cell-centre rule, since the column top is above the contact."
+    ],
+    "explanation": "Layer 2's centre sits just above the contact, so layers 1 and 2 both count: 9 plus 14 is {{colA_centre}} ft. Clipping at the contact gives {{colA_above_owc}} ft, so here the cell-centre rule gives more.",
+    "why_wrong": [
+     "the cell-centre rule counts whole layers",
+     "layer 2's centre is above the contact",
+     "layers 3 and 4 have centres below the contact"
+    ],
+    "rests_on": [
+     "colA_top",
+     "colA_above_owc",
+     "colA_centre"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 38,
+    "replaces": "4f4ad5ede6daec500a96e8e1dd9bcb2c",
+    "prompt": "A colleague's IKPOBA deck carries a gas surface density of {{bad_gas_rho}} lb/ft3, and its gas table was generated at a gravity of 0.8. Air is {{air_rho}} lb/ft3. What does the check show?",
+    "correct": "An implied gravity of {{bad_gas_sg}}, so DENSITY and PVDG describe two different gases.",
+    "distractors": [
+     "A ratio of {{bad_gas_ratio}}, close enough to the table's gravity for the check to pass.",
+     "An implied gravity of 0.8, since DENSITY is rebuilt from the gas table as it is read.",
+     "Nothing useful, as a surface density and a gravity are quantities that cannot be compared."
+    ],
+    "explanation": "{{bad_gas_rho}} over {{air_rho}} is {{bad_gas_sg}}, and the gas table was built at 0.8. Nothing reads the two keywords against each other, so the mismatch runs silently.",
+    "why_wrong": [
+     "divides air by the gas, the wrong way round",
+     "DENSITY is read as written",
+     "gravity is density relative to air, so they compare directly"
+    ],
+    "rests_on": [
+     "bad_gas_rho",
+     "bad_gas_sg",
+     "air_rho"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 17,
+    "replaces": "62a68529af363565b1b17156153ca9e9",
+    "prompt": "Standing gives IKPOBA a Bo of {{bo_corr_pi}} at 3900 psia against the designed 1.28, and the deck holds {{stoiip_centre}} stb. What would using the correlated Bo do to that figure?",
+    "correct": "Lower it to about {{stoiip_corr_bo}} stb, {{bo_swap_abs_pct}} percent less, from the same reservoir volume.",
+    "distractors": [
+     "Raise it to about {{stoiip_corr_bo_wrong}} stb, as a larger Bo means more oil in each barrel.",
+     "Leave it unchanged, because Bo only converts rates and plays no part in oil in place.",
+     "Lower it by {{bo_swap_inverse_pct}} percent, which is the ratio of the two Bo values taken the other way round."
+    ],
+    "explanation": "Stock tank barrels are reservoir volume divided by Bo, so 1.28 over {{bo_corr_pi}} scales {{stoiip_centre}} to {{stoiip_corr_bo}} stb, {{bo_swap_abs_pct}} percent less.",
+    "why_wrong": [
+     "multiplies by Bo instead of dividing",
+     "Bo converts reservoir to stock tank volume in place",
+     "the change is 1.28 over the correlated Bo, less one"
+    ],
+    "rests_on": [
+     "bo_corr_pi",
+     "stoiip_corr_bo",
+     "bo_swap_pct"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 9,
+    "replaces": "7d64e12c41d1809cdf98ebfb2da9e7b0",
+    "prompt": "IKP-1 is open to all four IKPOBA layers: {{dz}} ft thick at {{permx}} md, from the top down. Which layer delivers the largest share of its inflow, and roughly how much?",
+    "correct": "Layer 3, with {{kh3_pct}} percent of the total kh, though it is the thinnest layer.",
+    "distractors": [
+     "Layer 2, the thickest at 14 of the 40 ft, since the thickest layer in a well delivers most.",
+     "Layer 1, with {{kh1_pct}} percent of the kh, because the top connection is listed first.",
+     "Each layer, at {{equal_share_pct}} percent, since COMPDAT counts every connection equally."
+    ],
+    "explanation": "Connections are weighted by kh: 760 md over 6 ft gives layer 3 {{kh3_pct}} percent of the total, ahead of layer 1 at {{kh1_pct}} percent and layer 2 at {{kh2_pct}} percent.",
+    "why_wrong": [
+     "thickness is not transmissibility; layer 2 has the least kh after the 95 md",
+     "layer 1 has less kh than layer 3; listing order does not weight",
+     "connections are weighted by kh"
+    ],
+    "rests_on": [
+     "kh1_pct",
+     "kh2_pct",
+     "kh3_pct",
+     "kh4_pct"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 32,
+    "replaces": "4e08e63e4cdc292b4ce06079edb4721a",
+    "prompt": "IKP-1 produced {{feb_oil}} stb in February 2024 under IKPOBA's monthly ledger. What oil rate does the WCONHIST block for that period carry?",
+    "correct": "{{feb_rate}} stb/d, the volume over the 29 days to 1 March.",
+    "distractors": [
+     "{{feb_rate_28}} stb/d, dividing by a February of 28 days.",
+     "{{feb_rate_mean}} stb/d, dividing by the mean month of 30.4375 days.",
+     "{{feb_rate_31}} stb/d, dividing by 31 days for the period."
+    ],
+    "explanation": "2024 is a leap year and the DATES closing the period advances to 1 March, 29 days on. {{feb_oil}} over 29 is {{feb_rate}} stb/d, and multiplying back returns the ledger volume.",
+    "why_wrong": [
+     "2024 February has 29 days",
+     "the mean month misallocates volume",
+     "February is not 31 days"
+    ],
+    "rests_on": [
+     "feb_oil",
+     "feb_rate",
+     "feb_days"
+    ],
+    "answer_index": 3
+   }
+  ],
+  "advanced": [
+   {
+    "ord": 16,
+    "replaces": "fa2e072af29dae8eef685c880de3b820",
+    "prompt": "IKPOBA's mapping booking is {{booking_stb}} stb. The deck's regional mean was bisected to {{calib_mean_m}} m, where its cell-centre oil lands {{calib_gap_abs_pct}} percent {{calib_side}} the booking. What has the deck's structure had?",
+    "correct": "A calibration of the unconstrained regional mean against the booked volume, and no validation.",
+    "distractors": [
+     "A validation, since the deck now reproduces an independently booked volume to a fraction of a percent.",
+     "A calibration of porosity against the booking, carried out by way of the kriging regional mean.",
+     "A validation of the regional mean, which the booking has now fixed to four decimals."
+    ],
+    "explanation": "The mean was adjusted until the volume agreed, so the agreement could not fail. Only something the model was not tuned to, such as a new well top, could validate it.",
+    "why_wrong": [
+     "an arranged agreement tests nothing",
+     "porosity was held fixed",
+     "the booking constrains the volume, not the mean itself"
+    ],
+    "rests_on": [
+     "booking_stb",
+     "calib_mean_m",
+     "calib_gap_pct"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 17,
+    "replaces": "154e19b7f1d9cdbe5661700f39ba19b6",
+    "prompt": "At IKPOBA's mapping mean of 2150 m the deck held {{centre_at_mapping_mean}} stb against the {{booking_stb}} stb booking. Someone proposes scaling porosity by {{phi_scale_needed}} instead of moving the mean. Why is that indefensible?",
+    "correct": "Porosity is measured and enters the booking itself, while the mean is constrained by nothing.",
+    "distractors": [
+     "Porosity cannot change the volume, since oil in place depends only on the area above the contact.",
+     "It is defensible, since any parameter that closes the gap is as good as any other one.",
+     "A factor of {{phi_scale_needed}} is too small to matter, so the whole gap would remain open."
+    ],
+    "explanation": "Calibrate the unconstrained parameter against the constrained quantity. Scaling a measured porosity by {{phi_scale_needed}} would override the measurement and be wrong wherever porosity is used.",
+    "why_wrong": [
+     "pore volume scales directly with porosity",
+     "the choice decides what the model gets wrong elsewhere",
+     "that factor is exactly what would close the gap"
+    ],
+    "rests_on": [
+     "centre_at_mapping_mean",
+     "booking_stb",
+     "phi_scale_needed"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 34,
+    "replaces": "28df52d9393ae511a4638e26bfd42d55",
+    "prompt": "IKPOBA's history drives IKP-1, IKP-2 and IKP-3 with WCONHIST under ORAT. A report shows the modelled field oil rate lying exactly on the observed one for all 12 months. What does that plot establish?",
+    "correct": "Nothing, because the oil rate was imposed; only the water, gas and pressure can test the model.",
+    "distractors": [
+     "That the sweep is right, since the oil could not have been delivered without the correct water behind it.",
+     "That the history match is good, because the controlled phase agrees in every month of the history.",
+     "That the pressures are matched, since ORAT honours the oil only when pressure allows it."
+    ],
+    "explanation": "Under ORAT the simulator is told the oil rate, so FOPR equals FOPRH by construction. The free responses are the water, the gas and the pressures.",
+    "why_wrong": [
+     "the oil is imposed regardless of the water",
+     "agreement on the controlled phase is construction",
+     "the rate is imposed; pressure is a free response to be compared"
+    ],
+    "lesson": "advanced/m02-the-history-schedule/l01-wconhist-and-observed-rates",
+    "answer_index": 0
+   },
+   {
+    "ord": 26,
+    "replaces": "49489d0ca1f10dfd6e35eb317d686ba3",
+    "prompt": "A negative test on the IKPOBA spec replaces the whole wells list with one IKP-1 moved to I = 30, outside the 24-column grid. validateSpec returns {{err_cascade}} messages. Why so many, and what is the fix?",
+    "correct": "The 12 history periods still name the wells removed; move IKP-1 in place and {{err_inplace}} message remains.",
+    "distractors": [
+     "Each of the 12 periods re-checks IKP-1's position; adding a DATES block ends the repetition.",
+     "The validator reports every cell that IKP-1 misses; shrinking the grid around IKP-1 isolates the rule.",
+     "Moving a well off the grid breaks the TOPS array; restoring the 480 tops leaves two messages."
+    ],
+    "explanation": "Replacing the list leaves 12 periods each naming IKP-2, IKP-3 and IKP-4, which is 36 messages, plus the one for IKP-1. Mutating IKP-1 in place isolates the rule and raises {{err_inplace}}.",
+    "why_wrong": [
+     "the position check runs once per well",
+     "the rule is one message per well outside the grid",
+     "TOPS is untouched by a well edit"
+    ],
+    "rests_on": [
+     "err_cascade",
+     "err_inplace",
+     "periods"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 18,
+    "replaces": "38c51d5b8685d8c904679d465e559b91",
+    "prompt": "Bisecting IKPOBA's regional mean to {{calib_mean_m}} m leaves the deck {{calib_gap_abs_pct}} percent {{calib_side}} the {{booking_stb}} stb booking. Why can the bisection not close that gap?",
+    "correct": "The cell-centre volume moves in jumps as layers cross the contact, so no mean lands on it exactly.",
+    "distractors": [
+     "The bisection stopped too early, and more iterations would take the remaining gap all the way to zero.",
+     "Floating-point arithmetic limits how closely two volumes of this size can agree.",
+     "The booking uses a different porosity from the deck, which leaves a residual of that size in every case."
+    ],
+    "explanation": "Whole layers change sides of the contact as the mean moves, so the volume is a step function of it. The residual is the size of the step nearest the booking.",
+    "why_wrong": [
+     "sixty halvings converge far below the step size",
+     "floating point agrees to about 1e-15 relative",
+     "porosity and saturation are held fixed between the two"
+    ],
+    "rests_on": [
+     "calib_gap_pct",
+     "calib_mean_m"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 29,
+    "replaces": "1599d728d03d12455477905b329ab751",
+    "prompt": "IKPOBA's deck writes 12 DATES steps of history and one TSTEP block of 36 steps of 30.4375 days. How many rows does its summary file hold, and what is a rate in one row?",
+    "correct": "{{report_steps}} rows, each rate the average over its report step.",
+    "distractors": [
+     "{{report_steps}} rows, each rate the value at the step's final instant.",
+     "12 rows, since TSTEP intervals are solver steps that write nothing.",
+     "One row per solver step, however many the run happened to take."
+    ],
+    "explanation": "One row per report step: 12 plus 36 is {{report_steps}}. A rate is averaged over its step, so differencing the totals reproduces it.",
+    "why_wrong": [
+     "rates are step averages",
+     "TSTEP entries are report steps",
+     "solver steps are not written"
+    ],
+    "rests_on": [
+     "report_steps",
+     "hist_steps",
+     "pred_steps"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 23,
+    "replaces": "286e448a7f149ecb66fa33cf11dfd7e3",
+    "prompt": "IKPOBA's grid has 4 layers, and a spec sets IKP-1's k2 to 5. What does the deck builder do with it?",
+    "correct": "Refuses it: \"{{msg_k2five}}\"",
+    "distractors": [
+     "Writes the deck and lets the simulator warn that layer 5 is missing.",
+     "Clips the completion to layer 4 and composes the deck with a warning.",
+     "Adds a fifth layer with default properties so the completion fits."
+    ],
+    "explanation": "The builder is upstream, so it can refuse: the completion sits outside the layers and validateSpec names the well. A simulator receiving decks from anywhere has to warn and carry on instead.",
+    "why_wrong": [
+     "the builder validates before composing",
+     "the builder never edits a spec to fit",
+     "the builder has no defaults for missing layers"
+    ],
+    "rests_on": [
+     "msg_k2five",
+     "err_k2five"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 20,
+    "replaces": "0843eff70d576867521fa557a9d9099a",
+    "prompt": "IKPOBA's calibrated deck holds oil in {{deck_columns}} columns, while the booking's full {{net_ft}} ft isochore covers {{booked_columns}}. With the volumes matched, what average oil column does the deck carry?",
+    "correct": "About {{avg_col_ft}} ft: a thinner column over {{area_ratio_pct}} percent more area.",
+    "distractors": [
+     "{{net_ft}} ft, since matching the volume matches the column in every cell.",
+     "About {{avg_col_wrong}} ft, the net pay scaled by deck count over booked count.",
+     "About {{avg_col_ft}} ft: a thicker column than the booking's over less area."
+    ],
+    "explanation": "Same volume over more columns: 40 times {{booked_columns}} over {{deck_columns}} is {{avg_col_ft}} ft. Matching the volume cost {{area_ratio_pct}} percent more oil area.",
+    "why_wrong": [
+     "only the total is matched",
+     "inverts the ratio",
+     "the average is thinner than 40 ft and the area is larger"
+    ],
+    "rests_on": [
+     "deck_columns",
+     "booked_columns",
+     "avg_col_ft",
+     "area_ratio_pct"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 32,
+    "replaces": "cfc3d4b7f824b00d806dff574ce8193c",
+    "prompt": "An IKPOBA run prints its oil in place at initialisation, before any timestep; on this deck it should read {{stoiip_centre}} stb. Why read that line first?",
+    "correct": "It is the denominator of every recovery factor, and a static-model error shows there at once.",
+    "distractors": [
+     "It confirms the history match, since the oil in place is fitted to the production data.",
+     "It is the only figure the solver computes exactly, all the others being averages.",
+     "It gives the recovery factor directly, as the fraction produced in the first step."
+    ],
+    "explanation": "Every recovery factor is a fraction of the initial oil in place, so a wrong {{stoiip_centre}} stb scales every result. Comparing it with the booking takes seconds.",
+    "why_wrong": [
+     "oil in place comes from initialisation, not history",
+     "totals are also exact",
+     "it is a denominator, not a recovery"
+    ],
+    "rests_on": [
+     "stoiip_centre"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 25,
+    "replaces": "dd01ddab9432f84d992786834da6c3e8",
+    "prompt": "To test the layer-count rule on IKPOBA, one version sets nz to 3 and keeps 4 layer entries; another keeps nz at 4 and drops one entry. The first raises {{err_nzcut}} messages. How many does the second raise, and why?",
+    "correct": "{{err_layerdrop}}, since every completion and connection still fits inside nz.",
+    "distractors": [
+     "{{err_nzcut}}, since the two edits break the same rule the same way.",
+     "{{err_dropwell}}, one for each history period that names a well.",
+     "None, because the validator never counts the layer entries."
+    ],
+    "explanation": "Cutting nz also puts the layer 4 completions of IKP-1, IKP-3 and IKP-4 and three side-track connections outside the grid, so it cascades to {{err_nzcut}}. Dropping an entry trips only the one rule.",
+    "why_wrong": [
+     "only the nz edit strands completions",
+     "no well is removed by a layer edit",
+     "the layer count is one of the rules"
+    ],
+    "rests_on": [
+     "err_nzcut",
+     "err_layerdrop",
+     "nzcut_msgs"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 14,
+    "replaces": "cb9297b875efebd087dc88d2b842d608",
+    "prompt": "IKPOBA's history starts on 2024-01-01, and someone moves the deck start date to 2023-12-01. What does the validator return?",
+    "correct": "\"{{msg_startoff}}\"",
+    "distractors": [
+     "Nothing: the simulator runs December shut in, then starts the history on time as planned.",
+     "A warning that December will take the January rates through keyword persistence.",
+     "\"A start date is required.\", because the new date is not the first history date."
+    ],
+    "explanation": "The first history period must begin on the deck start date, and the message quotes both dates. Without the rule the run would sit shut in for a month nobody asked for.",
+    "why_wrong": [
+     "the builder refuses rather than running a gap",
+     "the validator has errors only, no warnings",
+     "a start date is present, just not the right one"
+    ],
+    "rests_on": [
+     "msg_startoff",
+     "err_startoff"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 3,
+    "replaces": "db0a9d1292b6b6d3096867573cd2fd89",
+    "prompt": "IKPOBA's side-track IKP2-ST runs from (1200, 1050) to (1050, 1290), from the top of the sand down to the base of the column. The intersector returns {{st_conn}} connections in {{st_columns}} distinct columns. What explains the difference?",
+    "correct": "The path changes layer inside columns, so several columns carry a connection in two layers.",
+    "distractors": [
+     "Re-entries: the path crosses some of its cells twice, and each visit is listed on a line of its own.",
+     "Grazing: steps running near the cell faces add short duplicate connections for the same cells.",
+     "Every column adds one connection per layer, whether or not the path reaches that layer."
+    ],
+    "explanation": "Connections are keyed by cell, so a revisit merges into one. The {{st_extra}} extra come from columns entered in one layer and left in the next, which a plan view cannot show.",
+    "why_wrong": [
+     "revisits are merged",
+     "merging collapses grazing alternations",
+     "only penetrated cells are listed"
+    ],
+    "rests_on": [
+     "st_conn",
+     "st_columns",
+     "st_extra"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 12,
+    "replaces": "18dc2ea9e3088f0c5fe34f06abe280b7",
+    "prompt": "IKP-1 made {{feb_oil}} stb in February 2024. If its IKPOBA rate were written as that volume over the mean month of 30.4375 days, how far off would the oil the deck produces that month be?",
+    "correct": "Short by {{feb_mean_error_abs_pct}} percent: the rate runs over 29 real days and delivers {{feb_volume_mean}} stb.",
+    "distractors": [
+     "Over by {{feb_mean_error_inv_pct}} percent, because the mean month is longer than a leap February is.",
+     "Short by {{feb28_error_abs_pct}} percent, the error that a mean-month divisor gives in any February of any year.",
+     "Over by {{m31_error_pct}} percent, as in every month, since the error spreads out evenly."
+    ],
+    "explanation": "{{feb_oil}} over 30.4375 is {{feb_rate_mean}} stb/d, and over 29 days that gives {{feb_volume_mean}} stb, {{feb_mean_error_abs_pct}} percent short. The error follows month length, so it never averages out.",
+    "why_wrong": [
+     "inverts the ratio and the sign",
+     "2024 is a leap year; that figure is a 28-day February's",
+     "the error depends on each month's length"
+    ],
+    "rests_on": [
+     "feb_mean_error_pct",
+     "feb_volume_mean",
+     "feb_rate_mean"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 2,
+    "replaces": "91d486a6fdd112c1209771b80a2ff653",
+    "prompt": "IKPOBA's side-track IKP2-ST has {{st_conn}} connections summing to {{st_len_sum}} ft, while its straight path from heel to toe is {{st_path_len}} ft long. What does the comparison tell you?",
+    "correct": "A few feet of the path lie outside the layers of the columns it crosses, so no cell gets them.",
+    "distractors": [
+     "Nothing, as connection lengths are rounded and rounding explains any shortfall of this size.",
+     "That the list holds a duplicate cell, since merged lengths always exceed the path length.",
+     "That the path lies off the grid areally, so the whole well has fallen out of the model."
+    ],
+    "explanation": "The shortfall, {{st_short}} ft, is far more than rounding {{st_conn}} lengths to hundredths of a foot. Steps whose midpoints fall outside a column's layers are discarded, so part of the path meets no rock.",
+    "why_wrong": [
+     "rounding each length to hundredths is far smaller than the shortfall",
+     "merging never adds length",
+     "connections exist, so the path is on the grid"
+    ],
+    "rests_on": [
+     "st_len_sum",
+     "st_path_len",
+     "st_short"
+    ],
+    "answer_index": 0
+   }
+  ]
+ },
+ "explanation_fixes": [
+  {
+   "tier": "advanced",
+   "module_key": "m02-the-history-schedule",
+   "ord": 8,
+   "old": "Every 31-day month is over-produced and every 30-day month under-produced, and February by nearly ten percent. A history match with that pattern has this bug and nothing else.",
+   "new": "Every 31-day month is over-produced and every 30-day month under-produced, and a 28-day February is under-produced by 8.01 percent. A history match with that pattern has this bug and nothing else.",
+   "reason": "February was said to be over-produced by nearly ten percent; 28 over 30.4375 days under-produces it by 8.01 percent (lesson corrected alongside)",
+   "replaces": "d92159c27d6acee28140a6858d047e5a",
+   "stem": "79ed6197f6658d123a4877bccbf95018"
+  },
+  {
+   "tier": "intermediate",
+   "module_key": "m05-wells-on-a-real-field",
+   "ord": 8,
+   "old": "February is over-produced by nearly ten percent. That is a distinctive symptom: a history match whose residuals correlate with month length has this bug and nothing else. The errors are systematic rather than compounding.",
+   "new": "A 28-day February is under-produced by 8.01 percent. That is a distinctive symptom: a history match whose residuals correlate with month length has this bug and nothing else. The errors are systematic rather than compounding.",
+   "reason": "February was said to be over-produced by nearly ten percent; 28 over 30.4375 days under-produces it by 8.01 percent (lesson corrected alongside)",
+   "replaces": "841f20ad8451a8ff86ff354651972964",
+   "stem": "2ceafe7a8063aa61c9c5f89d0626c3cb"
+  }
+ ]
+}
