@@ -1,0 +1,948 @@
+{
+ "course": "geomech",
+ "migration": "20261029_w6_geomech.sql",
+ "case": {
+  "name": "OSOBA-5",
+  "markers": [
+   "OSOBA"
+  ],
+  "summary": "A sandstone well on a new mechanical earth model (overburden 2250 kg/m3, pore ramp from 1900 m, McNally strength), a new parameter set (nu 0.30, phi 34, E 20 GPa, strains 0.00015/0.0004, Biot 0.95, SHmax 020, T0 1.5 MPa) and a new trajectory (kick-off 1800 m, 55 degrees, TD 3600 m) on a planned 110 azimuth or a 020 alternative."
+ },
+ "literals_ok": {
+  "5": "the case name OSOBA-5"
+ },
+ "tiers": {
+  "beginner": [
+   {
+    "ord": 18,
+    "replaces": "c05b3b5aa93b97cbb752d9286804bddf",
+    "prompt": "OSOBA-5 is a sandstone well whose dipole shear log gives a Poisson ratio of 0.30. What k0 does the burial term of its horizontal stress estimate use?",
+    "correct": "{{k0}}, which is nu over one minus nu",
+    "distractors": [
+     "{{k0_over_one_plus}}, which is nu over one plus nu",
+     "{{k0_inverted}}, which is one minus nu over nu, the burial ratio turned upside down",
+     "{{k0_shale_seed}}, the shale seed's value, because a lithology table is read before any log"
+    ],
+    "explanation": "Under uniaxial strain k0 is nu / (one minus nu), so a logged 0.30 gives {{k0}}. The shale seed would give {{k0_shale_seed}}, and a seed never outranks a measurement.",
+    "why_wrong": [
+     "wrong denominator",
+     "the ratio inverted, which would put horizontal above vertical effective stress",
+     "a seed replaces the measured Poisson ratio"
+    ],
+    "rests_on": [
+     "k0",
+     "k0_shale_seed"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 33,
+    "replaces": "a2484d4d7e4c6a18e56fb790c8cce5a7",
+    "prompt": "OSOBA-5's sandstone has a friction angle of 34 degrees. What frictional limit ratio q does it give?",
+    "correct": "{{q}}, one plus sin phi over one minus sin phi",
+    "distractors": [
+     "{{q_sqrt}}, the tangent form of the ratio left unsquared",
+     "{{q30}}, the textbook ratio that any sandstone is assumed to carry",
+     "{{q_inverse}}, one minus sin phi over one plus sin phi, the ratio read upside down"
+    ],
+    "explanation": "q = (one plus sin 34 degrees) / (one minus sin 34 degrees) = {{q}}. It is larger than the {{q30}} of a 30 degree rock, as a steeper failure line must be.",
+    "why_wrong": [
+     "the square root of q",
+     "the 30 degree default replaces the measured 34",
+     "the inverse of q"
+    ],
+    "rests_on": [
+     "q",
+     "q30"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 36,
+    "replaces": "ad8e02bea2d4c110632d48b266573f54",
+    "prompt": "On OSOBA-5 (E 20 GPa, Poisson ratio 0.30, epsX 0.00015, epsY 0.0004), what is SHmax less Shmin at 1000 m and at 2500 m?",
+    "correct": "{{gap_1000}} MPa at both depths, since burial adds the same to each",
+    "distractors": [
+     "{{gap_no_poisson}} MPa at both depths, E times the strain difference",
+     "{{gap_no_one_minus_nu}} MPa at both depths, E over one minus nu squared times the strain difference",
+     "More at 2500 m, since the gap scales with the effective vertical stress through k0"
+    ],
+    "explanation": "The burial term and the pore pressure are identical in the two formulas, so the gap is E over one plus nu times epsY less epsX, {{gap_2500}} MPa at every depth.",
+    "why_wrong": [
+     "drops the Poisson coupling",
+     "drops the one minus nu factor",
+     "the burial part cancels between the two stresses"
+    ],
+    "rests_on": [
+     "gap_1000",
+     "gap_2500"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 25,
+    "replaces": "5fa84318961d8b8b1ca71af589619445",
+    "prompt": "At 2400 m on OSOBA-5 the overburden is {{sv2400}} MPa and the pore pressure {{pp2400}} MPa. With a Poisson ratio of 0.30, a Biot coefficient of 0.95, E of 20 GPa, epsX 0.00015 and epsY 0.0004, what is Shmin?",
+    "correct": "{{sh2400}} MPa: k0 times effective overburden, plus 0.95 Pp, plus the strain term",
+    "distractors": [
+     "{{sh2400_biot1}} MPa, the same sum with the Biot coefficient taken as exactly one",
+     "{{sH2400}} MPa, the same sum with epsX and epsY swapped in the strain term",
+     "{{sh2400_nostrain}} MPa, the burial term and the Biot pore pressure term alone"
+    ],
+    "explanation": "k0 is {{k0}} and the effective overburden {{sveff2400}} MPa; adding back 0.95 times the pore pressure and the Shmin strain term gives {{sh2400}} MPa, inside both frictional limits.",
+    "why_wrong": [
+     "ignores the stated Biot coefficient",
+     "that is SHmax",
+     "leaves out the tectonic strain term"
+    ],
+    "rests_on": [
+     "sh2400",
+     "sveff2400"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 23,
+    "replaces": "152b6c5b9a6c76ec82514a9e42c29bdb",
+    "prompt": "OSOBA-5's Shmin at 2400 m is {{sh2400}} MPa. What is it as an equivalent mud weight?",
+    "correct": "{{sh2400_emw}} kg/m3, the pressure over 9.80665 times 2400 m",
+    "distractors": [
+     "{{sh2400_emw_g10}} kg/m3, the pressure over ten times 2400 m",
+     "{{sh2400_emw_at2500}} kg/m3, the pressure over g times 2500 m, the next depth quoted",
+     "{{sh2400_gradient_nog}} kg/m3, the pressure over the depth with no g"
+    ],
+    "explanation": "EMW = P / (g x TVD) with g at 9.80665, so {{sh2400}} MPa at 2400 m is {{sh2400_emw}} kg/m3. A mud weight needs the depth it was converted at.",
+    "why_wrong": [
+     "rounds g to 10",
+     "divides at the wrong depth",
+     "a pressure gradient in kPa/m read as a density"
+    ],
+    "rests_on": [
+     "sh2400_emw"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 8,
+    "replaces": "b0a60654610246f6d79ed581e9eb02f1",
+    "prompt": "OSOBA-5's Shmin at 2400 m is {{sh2400}} MPa. The effective overburden there is {{sveff2400}} MPa, the pore pressure {{pp2400}} MPa, the Biot coefficient 0.95 and q {{q}}. Is that Shmin an estimate or a clamped value?",
+    "correct": "An estimate: it sits between the active limit {{lower2400}} MPa and the passive limit {{upper2400}} MPa",
+    "distractors": [
+     "An estimate, inside limits built on the total overburden with the active one at {{lower2400_total}} MPa",
+     "Clamped, because the uniaxial estimate always has to be pulled back to the active limit",
+     "Neither: an estimate and a bound are the same statement once the clamp count is zero"
+    ],
+    "explanation": "The limits are the effective overburden over and times q, plus 0.95 times the pore pressure: {{lower2400}} and {{upper2400}} MPa. {{sh2400}} MPa sits inside, so the engine left the estimate alone.",
+    "why_wrong": [
+     "the limits use the effective overburden",
+     "clamping happens only outside the interval",
+     "a bound says what a stress cannot be, an estimate where it probably is"
+    ],
+    "rests_on": [
+     "lower2400",
+     "upper2400",
+     "sh2400"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 11,
+    "replaces": "70b6ad13dc501f73e491013ed8154f6e",
+    "prompt": "What effective vertical stress does OSOBA-5 carry at 2400 m, with an overburden of {{sv2400}} MPa, a pore pressure of {{pp2400}} MPa and a Biot coefficient of 0.95?",
+    "correct": "{{sveff2400}} MPa, the overburden less 0.95 times the pore pressure",
+    "distractors": [
+     "{{sveff2400_biot1}} MPa, the overburden less the whole pore pressure",
+     "{{sveff2400_alpha_on_sv}} MPa, 0.95 times the overburden less the whole pore pressure",
+     "{{sveff2400_pp_over_alpha}} MPa, the overburden less the pore pressure divided by 0.95"
+    ],
+    "explanation": "Effective stress is total stress less alpha times pore pressure: {{sv2400}} less 0.95 x {{pp2400}} gives {{sveff2400}} MPa.",
+    "why_wrong": [
+     "ignores the Biot coefficient",
+     "applies Biot to the wrong term",
+     "divides where it should multiply"
+    ],
+    "rests_on": [
+     "sveff2400"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 14,
+    "replaces": "265779cd30cca96a92c593e45115d735",
+    "prompt": "OSOBA-5's pore pressure gradient at 2400 m, on its ramp, is {{ppemw2400}} kg/m3. What is the pore pressure there?",
+    "correct": "{{pp2400}} MPa, the gradient times 9.80665 times 2400 m",
+    "distractors": [
+     "{{pp2400_g10}} MPa, the gradient times ten times 2400 m",
+     "{{pp2400_nog}} MPa, the gradient times the depth with no g in it",
+     "{{pp2400_hydro}} MPa, a hydrostatic 1035 kg/m3 column"
+    ],
+    "explanation": "P = EMW x g x TVD: {{ppemw2400}} x 9.80665 x 2400 gives {{pp2400}} MPa. The ramp below 1900 m lifts it above the {{pp2400_hydro}} MPa a 1035 kg/m3 column would give.",
+    "why_wrong": [
+     "rounds g to 10",
+     "forgets g",
+     "ignores the ramp that starts at 1900 m"
+    ],
+    "rests_on": [
+     "pp2400"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 10,
+    "replaces": "aa148e19b0dc45951bf9d8aa0f499b8f",
+    "prompt": "OSOBA-5's stress profile has 70 samples from 50 m to 3500 m, run in a normal faulting regime. How many points does the engine's quality score deduct, and why?",
+    "correct": "{{quality_deduction}}, a flat cut, because {{viol_count}} samples down to {{viol_deepest}} m put SHmax above the overburden",
+    "distractors": [
+     "{{viol_count}}, one point off for each of the samples that break the ordering",
+     "{{quality_deduction}}, because the shallowest {{clamped}} samples were clamped to the frictional limits",
+     "None, because every sample sits inside its frictional bounds once clamped"
+    ],
+    "explanation": "The deduction is a flat twenty for any ordering violation. The fixed tectonic strain term pushes SHmax above the overburden in the {{viol_count}} samples down to {{viol_deepest}} m, and the breach ends by {{viol_first_clean}} m.",
+    "why_wrong": [
+     "the deduction is flat",
+     "clamps are counted apart from the score",
+     "clamping does not repair the ordering"
+    ],
+    "rests_on": [
+     "quality_deduction",
+     "viol_count",
+     "viol_deepest"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 38,
+    "replaces": "8b9bf1c7e2d7e56e647ec616dfe95b2a",
+    "prompt": "At 50 m on OSOBA-5 the engine returns Shmin and SHmax both as {{sh50}} MPa, against an overburden of {{sv50}} MPa. What does that tell you?",
+    "correct": "Both were clamped to the passive limit, so {{sh50}} MPa is the most either of them could be there",
+    "distractors": [
+     "The two stresses really are equal there, the strain having no effect at 50 m",
+     "Both are uniaxial estimates, which agree near surface where the burial term dominates",
+     "Both were clamped to the active limit, so {{sh50}} MPa is the least they could be"
+    ],
+    "explanation": "Two stresses exactly equal is the signature of a clamp. The strain terms pushed both past the passive limit, effective overburden times q plus the pore term, {{upper50}} MPa, and both were pulled back to it.",
+    "why_wrong": [
+     "equal stresses are a clamp signature",
+     "the strain term dominates near surface",
+     "the estimate was above the passive limit"
+    ],
+    "rests_on": [
+     "sh50",
+     "upper50"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 42,
+    "replaces": "fba3508389d9d73027f5cabd45126449",
+    "prompt": "A core plug from OSOBA-5's sandstone reads 270 microseconds per metre. What UCS does the McNally correlation give?",
+    "correct": "{{ucs270_mcnally}} MPa, once the reading is turned into microseconds per foot",
+    "distractors": [
+     "{{ucs270_horsrud}} MPa, from the shale correlation on the same velocity",
+     "{{ucs270_noconv}} MPa, with 270 put into the formula as microseconds per foot",
+     "{{ucs2400}} MPa, the profile's own UCS at 2400 m, which stands in for any plug"
+    ],
+    "explanation": "McNally takes slowness per foot, so the reading becomes 270 x 0.3048, and 1200 exp(-0.036 x 270 x 0.3048) MPa is {{ucs270_mcnally}} MPa. Horsrud would give {{ucs270_horsrud}} MPa.",
+    "why_wrong": [
+     "the shale correlation",
+     "skips the per-foot conversion",
+     "a plug reading replaces the profile's sample"
+    ],
+    "rests_on": [
+     "ucs270_mcnally"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 41,
+    "replaces": "3d8f3b8f7c3e650ba50772d98c142c6a",
+    "prompt": "A shale stringer in OSOBA-5 reads 440 microseconds per metre. Which of the two sonic correlations gives the higher strength there?",
+    "correct": "Horsrud, {{ucs440_horsrud}} MPa against McNally's {{ucs440_mcnally}} MPa, past the upper crossing",
+    "distractors": [
+     "McNally, because the sandstone correlation reads higher at every slowness",
+     "They agree within one percent there, as the two curves do near a crossing",
+     "McNally, because an exponential falls off more slowly than a power law at large slowness"
+    ],
+    "explanation": "At 440 microseconds per metre the reading is beyond the upper crossing of the two curves, where Horsrud reads higher: {{ucs440_horsrud}} against {{ucs440_mcnally}} MPa.",
+    "why_wrong": [
+     "the curves cross twice",
+     "they differ by about a tenth",
+     "the exponential falls faster at large argument"
+    ],
+    "rests_on": [
+     "ucs440_horsrud",
+     "ucs440_mcnally"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 4,
+    "replaces": "70b92e4e181877f7968a57702f0d4e4c",
+    "prompt": "What part of OSOBA-5's Shmin of {{sh500}} MPa at 500 m does the tectonic strain term supply?",
+    "correct": "{{strain_min}} MPa, about {{strain_frac500}} of it, the same addition as at every depth",
+    "distractors": [
+     "{{strain_max}} MPa, the SHmax strain term, which takes epsY plus nu times epsX instead",
+     "{{e_epsx}} MPa, E times epsX with no Poisson coupling",
+     "Almost none, since the strain term grows with depth and is small near surface"
+    ],
+    "explanation": "The Shmin strain term is E / (one minus nu squared) x (epsX + nu x epsY), {{strain_min}} MPa at any depth. At 500 m the burial term is small, so it is about {{strain_frac500}} of Shmin.",
+    "why_wrong": [
+     "that is the SHmax term",
+     "drops the Poisson coupling",
+     "the term has no depth in it"
+    ],
+    "rests_on": [
+     "strain_min",
+     "strain_frac500"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 28,
+    "replaces": "742bf08f590e0dd98d3e781eded1c3c5",
+    "prompt": "If OSOBA-5's friction angle were 28 degrees instead of 34, what would happen to q and to the stress model's clamp count?",
+    "correct": "q falls to {{q28}} and the clamp count rises from {{clamped}} to {{clamped_phi28}} as the frictional bounds narrow",
+    "distractors": [
+     "q falls to {{q28}} and the clamp count holds, as the frictional bounds carry no friction angle",
+     "q rises, since a lower friction angle steepens the Mohr-Coulomb failure line",
+     "q falls to {{q28}} and fewer samples clamp, since narrower bounds catch fewer estimates"
+    ],
+    "explanation": "The one friction angle does two jobs. At 28 degrees q is {{q28}}, and the same q narrows the frictional bounds, so {{clamped_phi28}} samples clamp against {{clamped}} at 34 degrees.",
+    "why_wrong": [
+     "the bounds are built from q",
+     "a lower angle flattens the line",
+     "narrower bounds catch more estimates"
+    ],
+    "rests_on": [
+     "q28",
+     "clamped",
+     "clamped_phi28"
+    ],
+    "answer_index": 3
+   }
+  ],
+  "intermediate": [
+   {
+    "ord": 36,
+    "replaces": "0bde828a382f0e59c017e77d91e87a64",
+    "prompt": "A vertical OSOBA-5 hole at 2400 m sees SHmax {{sH2400}} MPa, Shmin {{sh2400}} MPa, pore pressure {{pp2400}} MPa, UCS {{ucs2400}} MPa, q {{q}} and a Biot coefficient of 0.95. What collapse pressure does the vertical closed form give?",
+    "correct": "{{col2400}} MPa, with one plus q in the denominator of the closed form",
+    "distractors": [
+     "{{col2400_over_q}} MPa, with q alone in the denominator",
+     "{{col2400_biot1}} MPa, with a Biot coefficient of one in the effective stresses",
+     "{{frac2400}} MPa, the pressure where the least hoop stress reaches the tensile limit"
+    ],
+    "explanation": "Collapse Pw = Pp + (3 SH_eff - Sh_eff - UCS) / (one plus q) = {{col2400}} MPa, which the engine reproduces for a vertical hole. Mud lowers the hoop peak and raises the radial stress at once.",
+    "why_wrong": [
+     "loses the one-for-one radial gain",
+     "ignores the stated Biot coefficient",
+     "that is the fracture initiation pressure"
+    ],
+    "rests_on": [
+     "col2400"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 14,
+    "replaces": "a89ae37bfcf71e4237e157c3cfa9a26e",
+    "prompt": "A vertical OSOBA-5 hole at 2400 m sees SHmax {{sH2400}} MPa, Shmin {{sh2400}} MPa, pore pressure {{pp2400}} MPa, a Biot coefficient of 0.95 and a tensile strength of 1.5 MPa. What fracture initiation pressure does the closed form give?",
+    "correct": "{{frac2400}} MPa: pore pressure, plus three Sh_eff less SH_eff, plus T0",
+    "distractors": [
+     "{{frac2400_noT0}} MPa, the same form with the tensile strength left out",
+     "{{frac2400_swapped}} MPa, three effective SHmax less effective Shmin",
+     "{{frac2400_minusT0}} MPa, with the tensile strength taken off"
+    ],
+    "explanation": "Fracture Pw = Pp + (3 Sh_eff - SH_eff) + T0 = {{frac2400}} MPa. The least hoop stress falls one for one with the well pressure, so there is no amplification here.",
+    "why_wrong": [
+     "drops T0",
+     "uses the hoop peak",
+     "T0 enters with a plus sign"
+    ],
+    "rests_on": [
+     "frac2400"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 35,
+    "replaces": "deba8ce9b8942f3082d5d64c5dea2305",
+    "prompt": "The engine gives a vertical OSOBA-5 hole at 2400 m a collapse gradient of {{col2400_emw}} kg/m3, and the pore pressure gradient there is {{ppemw2400}} kg/m3. What sets the bottom of the window?",
+    "correct": "The pore pressure, by {{pp_minus_col2400}} kg/m3, so the floor is a well control number",
+    "distractors": [
+     "The collapse gradient, because it is the stability bound this course computes",
+     "The collapse gradient, by {{pp_minus_col2400}} kg/m3, so the floor is a stability number",
+     "Neither: the two lower candidates sit so close that the window has closed"
+    ],
+    "explanation": "The lower bound is the larger of the two candidates. {{ppemw2400}} exceeds {{col2400_emw}} kg/m3 by {{pp_minus_col2400}}, so the pore pressure binds even though the collapse gradient is close.",
+    "why_wrong": [
+     "the floor is the larger of two",
+     "reads the comparison backwards",
+     "the window closes only when the floor passes fracture initiation"
+    ],
+    "rests_on": [
+     "pp_minus_col2400",
+     "col2400_emw",
+     "ppemw2400"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 6,
+    "replaces": "6d979835bf96de0478fc0950457a8730",
+    "prompt": "At 2000 m a vertical OSOBA-5 hole has a collapse gradient of {{col2000_emw}} kg/m3, a pore pressure gradient of {{pp2000_emw}} kg/m3 and a fracture initiation gradient of {{frac2000_emw}} kg/m3. How wide is its window?",
+    "correct": "{{win2000_vert}} kg/m3, measured from the collapse gradient, which binds by {{col_minus_pp2000}}",
+    "distractors": [
+     "{{win2000_vert_from_pp}} kg/m3, measured up from the pore pressure gradient",
+     "{{frac2000_emw}} kg/m3, the fracture gradient alone, since a collapse floor is only soft",
+     "{{col_minus_pp2000}} kg/m3, the gap between the two lower candidates"
+    ],
+    "explanation": "Here collapse exceeds the pore pressure by {{col_minus_pp2000}} kg/m3, so it is the floor: {{frac2000_emw}} less {{col2000_emw}} leaves {{win2000_vert}} kg/m3.",
+    "why_wrong": [
+     "measures from the lower candidate",
+     "ignores the floor",
+     "that gap is not the window"
+    ],
+    "rests_on": [
+     "win2000_vert",
+     "col_minus_pp2000"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 41,
+    "replaces": "70ddf55ce74dbf4f79cfa7dfae40297c",
+    "prompt": "A vertical OSOBA-5 hole at 2400 m is run with a nominal azimuth of 60 degrees, and SHmax points along 20 degrees. At what angle from the high side does the engine report the breakout?",
+    "correct": "{{bo_vert_az60}} degrees, which with the 60 degree reference is the bearing {{bo_vert_az0}}",
+    "distractors": [
+     "{{bo_vert_az0}} degrees, the compass bearing of Shmin read straight off",
+     "90 degrees, since a breakout always sits a quarter turn from the high side",
+     "20 degrees, along the SHmax direction where the far-field squeeze is largest"
+    ],
+    "explanation": "A vertical hole's high side is its nominal azimuth. The breakout sits along Shmin at bearing {{bo_vert_az0}}, which is {{bo_vert_az60}} degrees on from a 60 degree reference.",
+    "why_wrong": [
+     "a bearing is not a borehole-frame angle",
+     "true only when the reference is SHmax",
+     "breakouts sit a quarter turn from SHmax"
+    ],
+    "rests_on": [
+     "bo_vert_az60",
+     "bo_vert_az0"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 31,
+    "replaces": "8b8b69b1958270807653f8ac5caa4499",
+    "prompt": "Below its collapse pressure, raising the mud pressure in a vertical OSOBA-5 hole by one megapascal improves the Mohr-Coulomb margin by how much, at a friction angle of 34 degrees?",
+    "correct": "{{one_plus_q}} MPa, one plus q, as the hoop stress falls while the radial rises",
+    "distractors": [
+     "{{q}} MPa, q alone, because only the radial stress moves as the mud gets heavier",
+     "One megapascal, the same amount as the fracture margin loses",
+     "{{two_q}} MPa, twice q, one q for each wall stress the mud moves"
+    ],
+    "explanation": "The largest wall stress falls by one and the smallest rises by one, and the margin is sigma1 less q sigma3, so it closes by one plus q = {{one_plus_q}} MPa per MPa.",
+    "why_wrong": [
+     "forgets the hoop stress falls too",
+     "that is the fracture side",
+     "q multiplies only sigma3"
+    ],
+    "rests_on": [
+     "one_plus_q",
+     "q"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 17,
+    "replaces": "a186fd1b539a49edfdf2935cdad661f3",
+    "prompt": "Two horizontal OSOBA-5 holes at 2400 m run along 020, the SHmax azimuth, and along 110. Which has the wider window, and by how much?",
+    "correct": "Along 110, by {{h_win_diff}} kg/m3, nearly all of it at the fracture end",
+    "distractors": [
+     "Along 020, by {{h_win_diff}} kg/m3, because it lies along the largest horizontal stress",
+     "Along 110, by {{h_col_diff}} kg/m3, all of it gained at the collapse end",
+     "Neither: a horizontal hole sees the overburden in its section either way"
+    ],
+    "explanation": "Along 110 the section holds SHmax and the overburden, so the least hoop stress is higher and fracture initiation rises by {{h_frac_diff}} kg/m3; collapse differs by only {{h_col_diff}}. The windows are {{h_plan_win}} and {{h_alt_win}}.",
+    "why_wrong": [
+     "the SHmax direction is the worse one",
+     "the collapse end is the small part",
+     "the second horizontal stress differs"
+    ],
+    "rests_on": [
+     "h_win_diff",
+     "h_frac_diff",
+     "h_col_diff"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 23,
+    "replaces": "d73354961cc019f49d6a35c98da88a0f",
+    "prompt": "At 2000 m OSOBA-5's vertical window is {{win2000_vert}} kg/m3. What does building to 30 degrees of inclination do to it, toward 110 and toward 020?",
+    "correct": "Toward 110 it widens by {{gain2000_30plan}} kg/m3; toward 020 it narrows by {{loss2000_30alt}} kg/m3",
+    "distractors": [
+     "Both directions narrow it, since deviating always costs window",
+     "It narrows by {{gain2000_30plan}} toward 110 and widens by {{loss2000_30alt}} toward 020, helped only along SHmax",
+     "Neither changes, since 30 degrees is too little to rotate the wall stresses"
+    ],
+    "explanation": "The engine gives {{win2000_30plan}} kg/m3 toward 110 and {{win2000_30alt}} toward 020. Deviating toward Shmin brings the overburden into the section in place of SHmax and widens the window here.",
+    "why_wrong": [
+     "the rule of thumb breaks toward Shmin",
+     "the directions are swapped",
+     "the shear term switches on at any deviation"
+    ],
+    "rests_on": [
+     "gain2000_30plan",
+     "loss2000_30alt"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 42,
+    "replaces": "0d1e4d81334aeaef9d9f46aae8d5be0c",
+    "prompt": "An OSOBA-5 hole at 2400 m inclined 30 degrees toward 110 breaks out at what angle from the high side, and where will the cavings come from?",
+    "correct": "{{bo_30plan}} degrees, on the roof with its pair on the floor, so cavings fall in",
+    "distractors": [
+     "{{bo_30alt}} degrees, the flanks, as on the hole toward 020",
+     "{{bo_vert_az0}} degrees, the vertical-well answer carried over unchanged",
+     "It cannot break out once deviated, as the shear term relieves the wall"
+    ],
+    "explanation": "The engine reports {{bo_30plan}} degrees from the high side toward 110 and {{bo_30alt}} toward 020. The breakout moves with the trajectory, and a roof breakout drops its cavings into the hole.",
+    "why_wrong": [
+     "that is the other azimuth",
+     "the vertical rule does not survive deviation",
+     "deviation adds shear loading"
+    ],
+    "rests_on": [
+     "bo_30plan",
+     "bo_30alt"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 21,
+    "replaces": "6cfe58e5195790e2ee9f857d8a2546eb",
+    "prompt": "For a vertical OSOBA-5 hole at 2400 m with no overbalance, SHmax exceeds Shmin by {{far_gap2400}} MPa. How widely does the effective hoop stress vary round the wall?",
+    "correct": "From {{hoop_min_hoop}} to {{hoop_max}} MPa, a spread of {{hoop_spread}} MPa",
+    "distractors": [
+     "A spread of {{hoop_spread_3x}} MPa, three times the far-field difference",
+     "A spread of {{hoop_spread_2x}} MPa, twice the far-field difference",
+     "A spread of {{far_gap2400}} MPa, since the stress is conserved round the hole"
+    ],
+    "explanation": "The hoop stress runs from 3 Sh_eff - SH_eff to 3 SH_eff - Sh_eff, so the spread is four times the far-field gap: {{hoop_spread}} MPa.",
+    "why_wrong": [
+     "the concentration factor is not the spread factor",
+     "half the Kirsch spread",
+     "the hole concentrates stress"
+    ],
+    "rests_on": [
+     "hoop_spread",
+     "hoop_max",
+     "hoop_min_hoop"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 1,
+    "replaces": "09ba88768527401567f5faf0e78b14c8",
+    "prompt": "If OSOBA-5's tensile strength of 1.5 MPa is set to zero, how far does the fracture initiation gradient of a vertical hole at 2400 m move?",
+    "correct": "Down by {{t0_emw2400}} kg/m3, 1.5 MPa over g times 2400 m",
+    "distractors": [
+     "Down by {{t0_emw_at1000}} kg/m3, 1.5 MPa over g times 1000 m",
+     "Not at all, because fracture initiation is a shear criterion",
+     "Up by {{t0_emw2400}} kg/m3, because a weaker wall needs more mud to hold it"
+    ],
+    "explanation": "Fracture initiation carries T0 one for one, so zero tensile strength lowers it by exactly 1.5 MPa, which at 2400 m is {{t0_emw2400}} kg/m3.",
+    "why_wrong": [
+     "converted at the wrong depth",
+     "it is a tension criterion",
+     "the direction is reversed"
+    ],
+    "rests_on": [
+     "t0_emw2400"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 7,
+    "replaces": "fab0fb960926b662033b401803f7e78c",
+    "prompt": "An OSOBA-5 hole at 2400 m is inclined 60 degrees toward 020. The vertical closed form gives a collapse gradient of {{col2400_emw}} kg/m3 there. What does the engine give?",
+    "correct": "{{col2400_60alt}} kg/m3, {{col2400_60alt_gap}} higher, as tilting loads the wall with the overburden",
+    "distractors": [
+     "{{col2400_emw}} kg/m3, since the closed form holds at any inclination",
+     "Less than {{col2400_emw}} kg/m3, since deviating along SHmax relieves the wall",
+     "{{col2400_60alt_gap}} kg/m3, the shear term alone replacing the vertical answer"
+    ],
+    "explanation": "The closed forms are exact only for a vertical hole. At 60 degrees toward 020 the engine gives {{col2400_60alt}} kg/m3, {{col2400_60alt_gap}} above the vertical {{col2400_emw}}.",
+    "why_wrong": [
+     "the closed form is vertical only",
+     "the collapse gradient rises",
+     "the shear term adds to the rotated load"
+    ],
+    "rests_on": [
+     "col2400_60alt",
+     "col2400_60alt_gap"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 8,
+    "replaces": "726c06202ad36005df82c1fdc09d9e3d",
+    "prompt": "An OSOBA-5 offset drilled 2000 m with mud below its {{col2000_emw}} kg/m3 collapse gradient, and its caliper shows modest breakouts with no trouble. What does that say about the model?",
+    "correct": "Nothing against it: the collapse gradient marks where a breakout begins, at zero width",
+    "distractors": [
+     "The model is wrong, since any mud below the collapse gradient loses the hole within hours",
+     "The pore pressure must have been higher, as the collapse gradient is exact",
+     "The friction angle must be higher, since breakouts should have been absent"
+    ],
+    "explanation": "The engine demands the Mohr-Coulomb criterion at every angle, so {{col2000_emw}} kg/m3 is a zero breakout width number. A hole tolerating modest breakouts below it is what that conservatism predicts.",
+    "why_wrong": [
+     "the criterion is the onset of breakout",
+     "modest breakouts are expected",
+     "the observation is consistent as it stands"
+    ],
+    "rests_on": [
+     "col2000_emw"
+    ],
+    "lesson": "intermediate/m02-the-two-criteria/l04",
+    "answer_index": 3
+   },
+   {
+    "ord": 22,
+    "replaces": "8e705a687021f2dfaf68dc1465860cfe",
+    "prompt": "OSOBA-5 reports a vertical window of {{win1000_vert}} kg/m3 at 1000 m, where SHmax is {{sH1000}} MPa and the overburden {{sv1000}} MPa. Which check should stop you using it as it stands?",
+    "correct": "The stress ordering: SHmax above the overburden breaks the assumed normal faulting regime",
+    "distractors": [
+     "The window sign: {{win1000_vert}} kg/m3 is below zero, so the section cannot be drilled at all",
+     "The clamp count: 1000 m is one of the samples pulled back to a frictional limit",
+     "The closed form: a vertical hole never matches its closed form exactly"
+    ],
+    "explanation": "At 1000 m SHmax {{sH1000}} MPa exceeds the overburden {{sv1000}} MPa, one of the samples the quality score flags, so the window there inherits the inconsistency. The clamps sit only at the top five samples.",
+    "why_wrong": [
+     "the window is positive",
+     "only the top five samples are clamped",
+     "a vertical hole matches exactly"
+    ],
+    "rests_on": [
+     "sH1000",
+     "sv1000",
+     "win1000_vert"
+    ],
+    "answer_index": 0
+   }
+  ],
+  "advanced": [
+   {
+    "ord": 42,
+    "replaces": "3357f4a93433a73b17763d726fc4ada8",
+    "prompt": "OSOBA-5 is drilled vertical to a 1800 m kick-off, building 2.5 degrees per 30 m to 55 degrees and holding to 3600 m MD, with SHmax along 020. The walk on the planned 110 azimuth finds its tightest row where?",
+    "correct": "At {{plan_tight_md}} m, still vertical above the kick-off, with {{plan_tight_w}} kg/m3",
+    "distractors": [
+     "At the {{alt_tight_md}} m TD, the deepest row, with {{alt_tight_w}} kg/m3",
+     "At the 1800 m kick-off, with {{plan_w_1800}} kg/m3, where the build begins",
+     "At 2400 m in the build, with {{plan_w_2400}} kg/m3, where the pore ramp bites"
+    ],
+    "explanation": "The window reaches its minimum at {{plan_tight_md}} m, {{plan_tight_w}} kg/m3, while the hole is still vertical, and widens below it as the rock strengthens and then as the hole builds toward Shmin.",
+    "why_wrong": [
+     "that is the 020 answer",
+     "the kick-off row is wider",
+     "the build widens the window"
+    ],
+    "rests_on": [
+     "plan_tight_md",
+     "plan_tight_w"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 12,
+    "replaces": "223f3011f1cd44a985f733099cb0b1d9",
+    "prompt": "OSOBA-5 is drilled vertical to a 1800 m kick-off, building 2.5 degrees per 30 m to 55 degrees and holding to 3600 m MD, with SHmax along 020. On the alternative 020 azimuth, along SHmax, where is the walk tightest and how wide is it there?",
+    "correct": "At the {{alt_tight_md}} m TD, {{alt_tight_inc}} degrees, with {{alt_tight_w}} kg/m3",
+    "distractors": [
+     "At {{plan_tight_md}} m, like the 110 plan, since both share the vertical section",
+     "At the 1800 m kick-off, where the build starts loading the wall",
+     "Nowhere as such: the window closes at the {{alt_tight_md}} m TD"
+    ],
+    "explanation": "Along SHmax the build narrows the window and the pore ramp keeps rising, so the tightest row is total depth, {{alt_tight_w}} kg/m3, below the {{plan_tight_w}} of the shared vertical section.",
+    "why_wrong": [
+     "the TD row is tighter",
+     "the build narrows it further",
+     "the window stays open"
+    ],
+    "rests_on": [
+     "alt_tight_md",
+     "alt_tight_w"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 14,
+    "replaces": "179b1389f60a87e575215927952e51cb",
+    "prompt": "At the 110 plan's tightest row, {{plan_tight_md}} m, OSOBA-5's collapse gradient is {{plan_tight_col}} kg/m3 and its pore pressure gradient {{plan_tight_pp}} kg/m3. What binds, and which remedies are open?",
+    "correct": "Collapse, by {{plan_tight_margin}} kg/m3: mud weight, trajectory, open-hole time and mud chemistry all help",
+    "distractors": [
+     "Pore pressure, by {{plan_tight_margin}} kg/m3: mud weight alone, then a casing point once it narrows",
+     "Collapse, by {{plan_tight_margin}} kg/m3: only mud weight helps, exactly as it does against a kick",
+     "Neither binds: the {{plan_tight_frac}} kg/m3 fracture gradient sets the design"
+    ],
+    "explanation": "{{plan_tight_col}} exceeds {{plan_tight_pp}} kg/m3 by {{plan_tight_margin}}, so stability sets the floor, and a collapse bound has several levers where a pore pressure bound has one.",
+    "why_wrong": [
+     "reads the comparison backwards",
+     "collapse has several levers",
+     "the floor is the binding question"
+    ],
+    "rests_on": [
+     "plan_tight_margin",
+     "plan_tight_col",
+     "plan_tight_pp"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 33,
+    "replaces": "a49498dc69f4d0e1566296a361ff56f7",
+    "prompt": "At the 020 alternative's tightest row OSOBA-5's walk reports a pore pressure of {{alt_tight_pp}}, a collapse gradient of {{alt_tight_col}} and fracture initiation at {{alt_tight_frac}} kg/m3. What is the window width?",
+    "correct": "{{alt_tight_w}} kg/m3, fracture initiation less the pore pressure",
+    "distractors": [
+     "{{alt_w_from_col}} kg/m3, fracture initiation less the collapse gradient",
+     "{{alt_tight_margin}} kg/m3, the gap between the two lower candidates",
+     "{{alt_tight_frac}} kg/m3, the upper bound, as collapse sits below water density"
+    ],
+    "explanation": "The width is measured from the larger lower candidate. The pore pressure binds by {{alt_tight_margin}} kg/m3, so the window is {{alt_tight_w}} kg/m3 and collapse plus width does not reach fracture initiation.",
+    "why_wrong": [
+     "measures from the smaller candidate",
+     "not a window",
+     "the floor still exists"
+    ],
+    "rests_on": [
+     "alt_tight_w",
+     "alt_tight_margin"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 10,
+    "replaces": "fba2eead7883e34641b9d0233d0b27d4",
+    "prompt": "Sweeping OSOBA-5's friction angle from 28 to 40 degrees on the 020 alternative, how far does the tightest window move?",
+    "correct": "Not at all: {{alt_tight_w}} kg/m3 at both ends, as that row is pore pressure bound",
+    "distractors": [
+     "By {{plan_phi_range}} kg/m3, the same amount the 110 plan moves over the sweep",
+     "By {{alt_nu_range}} kg/m3, since the friction angle is the dominant input",
+     "By {{alt_t0_range}} kg/m3, through the friction angle's effect on fracture initiation"
+    ],
+    "explanation": "The pore pressure floor and the tension-based fracture bound contain no friction angle, and no sample near that row is clamped, so the width stays {{alt_tight_w}} kg/m3 to every digit.",
+    "why_wrong": [
+     "that is the collapse-bound plan",
+     "that is the Poisson sweep",
+     "that is the tensile sweep"
+    ],
+    "rests_on": [
+     "alt_tight_w",
+     "alt_phi_range"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 11,
+    "replaces": "a1d9911dd1677626680c62bab5df9401",
+    "prompt": "Sweeping OSOBA-5's friction angle from 28 to 40 degrees on the 110 plan, what happens to the tightest row?",
+    "correct": "It widens from {{plan_phi28}} to {{plan_phi40}} kg/m3 and moves from {{plan_phi28_md}} m to {{plan_phi40_md}} m",
+    "distractors": [
+     "Nothing, since the friction angle enters neither window bound",
+     "It narrows from {{plan_phi40}} to {{plan_phi28}} kg/m3, a higher angle weakening the wall",
+     "It widens by {{plan_phi_range}} kg/m3 and stays put at {{plan_tight_md}} m"
+    ],
+    "explanation": "That row is collapse bound, and the friction angle sets q in the collapse criterion. A higher q lowers the collapse gradient, so the window widens and the tightest row moves down to {{plan_phi40_md}} m.",
+    "why_wrong": [
+     "collapse uses q",
+     "a higher angle strengthens the wall",
+     "the tightest row moves"
+    ],
+    "rests_on": [
+     "plan_phi28",
+     "plan_phi40",
+     "plan_phi40_md"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 22,
+    "replaces": "25b82dc826b3fc36b1b1a18512a85e8d",
+    "prompt": "Moving OSOBA-5's Poisson ratio from 0.22 to 0.34 on the 020 alternative changes its tightest window how?",
+    "correct": "From {{alt_nu22}} to {{alt_nu34}} kg/m3, far beyond what the tensile sweep does",
+    "distractors": [
+     "From {{alt_nu34}} to {{alt_nu22}} kg/m3, since a higher Poisson ratio lowers the horizontal stresses",
+     "Not at all, since the row is pore pressure bound and nu enters neither bound",
+     "By {{alt_t0_range}} kg/m3, about as much as the tensile strength sweep moves it"
+    ],
+    "explanation": "A higher Poisson ratio raises k0, the horizontal stresses and the fracture gradient, so the window grows from {{alt_nu22}} to {{alt_nu34}} kg/m3 against {{alt_t0_range}} for the tensile sweep.",
+    "why_wrong": [
+     "higher nu raises the stresses",
+     "nu moves the fracture bound",
+     "an order of magnitude too small"
+    ],
+    "rests_on": [
+     "alt_nu22",
+     "alt_nu34",
+     "alt_t0_range"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 2,
+    "replaces": "54a545b6b851bba33ef3e6a9f55f5973",
+    "prompt": "OSOBA-5's walk steps 30 m of MD from the first usable depth to the 3600 m TD, and its profile starts at 50 m TVD. How many rows does the 110 plan return?",
+    "correct": "{{plan_rows}}, one per 30 m step from {{plan_first_md}} m down to 3600 m",
+    "distractors": [
+     "{{plan_rows_plus1}}, counting the surface station at 0 m as the first row",
+     "70, one row for each profile sample the stresses come from",
+     "It depends on the build, since the step is in TVD"
+    ],
+    "explanation": "The first 30 m step above the 50 m top of the profile is skipped, so the walk runs from {{plan_first_md}} m to 3600 m in 30 m steps: {{plan_rows}} rows.",
+    "why_wrong": [
+     "the surface is above the profile",
+     "the walk steps in MD",
+     "the step is MD"
+    ],
+    "rests_on": [
+     "plan_rows",
+     "plan_first_md"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 30,
+    "replaces": "9b4178b14cb20400d5c5ff995e63c6ff",
+    "prompt": "The 020 alternative's tightest row sits at {{alt_tight_tvd}} m TVD on OSOBA-5. How does the engine get its stresses there?",
+    "correct": "Linearly, at a fraction of {{alt_interp_frac}} between the {{alt_interp_lo}} m and {{alt_interp_hi}} m samples",
+    "distractors": [
+     "From the {{alt_interp_lo}} m sample held flat until the next sample",
+     "By extrapolating the two deepest samples, since the row lies below the profile",
+     "From the nearest sample in MD, since the walk steps in measured depth"
+    ],
+    "explanation": "The profile is indexed by TVD every 50 m. {{alt_tight_tvd}} m lies {{alt_interp_frac}} of the way from {{alt_interp_lo}} to {{alt_interp_hi}} m, and each quantity is interpolated linearly.",
+    "why_wrong": [
+     "the engine interpolates",
+     "the profile runs to 3500 m",
+     "the profile is indexed by TVD"
+    ],
+    "rests_on": [
+     "alt_interp_frac",
+     "alt_tight_tvd"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 13,
+    "replaces": "3b2f42ba2d78c75f6443cef4170d8ba6",
+    "prompt": "If SHmax at OSOBA-5 actually ran along 110 instead of 020, what would happen to the 110 plan's tightest row?",
+    "correct": "It would jump to the {{plan_saz110_md}} m TD and narrow to {{plan_saz110_w}} kg/m3, the plan then running along SHmax",
+    "distractors": [
+     "Nothing, since its tightest row is vertical and a vertical hole has no azimuth",
+     "It would stay at {{plan_tight_md}} m and narrow to {{plan_saz110_w}} kg/m3, as the vertical rows respond",
+     "It would widen to {{plan_saz0_w}} kg/m3 at {{plan_tight_md}} m, the plan then running along Shmin"
+    ],
+    "explanation": "The vertical rows do not care, but the deviated rows do: with SHmax along 110 the plan is drilled along SHmax, and its TD row becomes the tightest at {{plan_saz110_w}} kg/m3.",
+    "why_wrong": [
+     "the deviated rows change",
+     "the tightest row moves",
+     "the window narrows"
+    ],
+    "rests_on": [
+     "plan_saz110_md",
+     "plan_saz110_w"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 15,
+    "replaces": "88427394b47835b79ab43982c7b78cf8",
+    "prompt": "The 020 alternative is tightest at OSOBA-5's {{alt_tight_md}} m TD, with pore pressure {{alt_tight_pp}} kg/m3 above collapse {{alt_tight_col}} kg/m3. If that window proves too narrow, what is the remedy?",
+    "correct": "A casing point, since the floor is the pore pressure and only mud weight moves it",
+    "distractors": [
+     "A better trajectory, since turning the hole away from SHmax lowers the pore pressure it sees",
+     "Faster drilling, since open-hole time weakens the rock at the floor",
+     "A mud chemistry change, since the floor is a shale stability number"
+    ],
+    "explanation": "The pore pressure binds by {{alt_tight_margin}} kg/m3, so the floor is a fluid property that neither trajectory, time nor chemistry moves. A narrowing pore-pressure window is cased off.",
+    "why_wrong": [
+     "pore pressure ignores the hole",
+     "time acts on collapse",
+     "chemistry acts on collapse"
+    ],
+    "rests_on": [
+     "alt_tight_margin"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 16,
+    "replaces": "6462ce41baa31fd53cab2dfae098541e",
+    "prompt": "Taking OSOBA-5's tensile strength from 0 to 3 MPa on the 110 plan, whose tightest row is collapse bound, what happens to that row?",
+    "correct": "It widens from {{plan_t0_0}} to {{plan_t0_3}} kg/m3, as T0 lifts the fracture bound",
+    "distractors": [
+     "Nothing, since a collapse-bound row ignores the tensile strength entirely",
+     "It narrows from {{plan_t0_3}} to {{plan_t0_0}} kg/m3, since a stronger wall fails at lower pressure",
+     "It widens by {{alt_t0_range}} kg/m3, the same as on the 020 alternative"
+    ],
+    "explanation": "The width is fracture initiation less the floor, and T0 adds to fracture initiation one for one, so the tightest window grows from {{plan_t0_0}} to {{plan_t0_3}} kg/m3 and its row moves.",
+    "why_wrong": [
+     "the upper bound still moves",
+     "direction reversed",
+     "that is the other plan"
+    ],
+    "rests_on": [
+     "plan_t0_0",
+     "plan_t0_3"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 28,
+    "replaces": "5bd0270c185d22bd41dc2283b2d84454",
+    "prompt": "Does either OSOBA-5 walk close its window if the Poisson ratio is 0.22 instead of 0.30?",
+    "correct": "No: the narrowest row is {{alt_nu22}} kg/m3 on the 020 alternative, still open",
+    "distractors": [
+     "Yes, at the 1800 m kick-off, where the build starts on both plans",
+     "Yes, at the {{alt_tight_md}} m TD, where pore pressure meets fracture initiation",
+     "It cannot be known without a leak-off test at every shoe"
+    ],
+    "explanation": "Lowering nu narrows both windows, but neither walk reports an inversion. The tightest row at 0.22 is {{alt_nu22}} kg/m3 on the 020 alternative and {{plan_nu22}} on the 110 plan.",
+    "why_wrong": [
+     "no inversion is reported",
+     "the window stays open",
+     "the walk answers it"
+    ],
+    "rests_on": [
+     "alt_nu22",
+     "plan_nu22"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 7,
+    "replaces": "dedc61bfdf940fe7ff89a03ee4f1f9c6",
+    "prompt": "OSOBA-5's 110 plan carries 1350 kg/m3 mud through its tightest row at {{plan_tight_md}} m, where collapse is {{plan_tight_col}} and fracture initiation {{plan_tight_frac}} kg/m3. Circulating adds 60, surge 90 and swab takes off 70 kg/m3. What threatens the hole?",
+    "correct": "The swab: {{mud_swab}} kg/m3 drops below the collapse gradient",
+    "distractors": [
+     "The circulating density: {{mud_ecd}} kg/m3 passes fracture initiation",
+     "The surge: {{mud_surge}} kg/m3 passes the fracture initiation gradient",
+     "Nothing, since the static mud weight sits inside the window"
+    ],
+    "explanation": "The static window has to hold the swab too: 1350 less 70 is {{mud_swab}} kg/m3, below the {{plan_tight_col}} collapse gradient, while {{mud_surge}} is far under {{plan_tight_frac}}.",
+    "why_wrong": [
+     "far below fracture",
+     "far below fracture",
+     "the transients leave the window"
+    ],
+    "rests_on": [
+     "mud_swab",
+     "plan_tight_col"
+    ],
+    "answer_index": 1
+   }
+  ]
+ }
+}
