@@ -479,22 +479,34 @@
   {
    "tier": "advanced",
    "key": "dake_ooip_mmstb",
-   "source": "prompt-given",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/mbal/advanced/m02-carter-tracy/l03-dake-9-2.md ('What the engine returns' table)",
-   "printed": "full",
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx:96 (Dataset: Dake Exercise 9.2, aquifer Carter-Tracy finite; tile 'OOIP from the regression')",
+   "printed": {
+    "decimals": 6
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx:96 fmt(d.ooip_mmstb, 6)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "none",
-   "fix": null,
+   "class": "tolerance",
+   "fix": {
+    "new_tol": 0.5
+   },
    "owner_decision": false,
    "recommendation": null,
-   "evidence": "No course panel runs Dake 9.2 (TankExplorer runs Ekene only, per l03 'At the panel'); the lesson table states 'OOIP 307221409.553720 stb, that is 307.221409553720 MMSTB'. Tol 3 MMSTB excludes Dake's own 312.",
-   "notes": "Lesson-given giveaway: the only in-course route to this value is reading it in the lesson. Carter-Tracy march is engine-only (not hand-calc). Could be reproduced in the Suite Material Balance app but the prompt does not name it. Owner may want the lesson table to stop printing the graded figures.",
+   "evidence": "HD (tightened 3 -> 0.5 MMSTB, 20261030a_hd_mbal.sql): W5c moved the only route to the tank explorer's Dake mode (the lessons no longer print the value), so the field is read from the panel, which prints 307.22141 (fmt to 6 dp) against the key 307.2214095537205 from runDakeTank({aquifer: 'finite'}). The brief states no value, so the baseline 'prompt-given' meant lesson-given. At 0.5 the textbook 310.2 and the history match 310.1986 fail; the integer 307 passes.",
+   "notes": "Residual of W5c closed by the held decision: the old tol 3 admitted Dake's published least squares fit and the one-parameter history match, two different methods.",
    "leak": false,
-   "shipped": null,
+   "reclassed_from": "none",
+   "shipped": {
+    "migration": "20261030a_hd_mbal.sql",
+    "wave": "hd",
+    "tol": [
+     3.0,
+     0.5
+    ]
+   },
    "leak_closed": "w5c pick B"
   },
   {

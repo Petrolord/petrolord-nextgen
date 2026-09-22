@@ -1,0 +1,33 @@
+{
+ "course": "mbal",
+ "wave": "hd",
+ "file": "20261030a_hd_mbal.sql",
+ "decision": "Held decision on the W5c residual (owner, 2026-09-22: proceed with the lead's recommendations): tighten the Dake 9.2 oil in place tolerance.",
+ "tiers": {
+  "advanced": {
+   "tighten": [
+    {
+     "key": "dake_ooip_mmstb",
+     "expected": 307.221409553720,
+     "tol_old": 3,
+     "tol_new": 0.5,
+     "why": "At tol 3 MMSTB the field passed Dake's own published least squares fit (310.2 MMSTB, 2.98 off) and the course's one-parameter history match (310.1986 MMSTB, 2.98 off), so a learner who copied the textbook number passed without running the engine. The engine is deterministic on the capstone case: the tank explorer's Dake mode with the finite Carter-Tracy aquifer prints 307.22141 MMSTB, 0.00000045 off the key, and every solver choice returns the same value. Tol 0.5 is half a unit of the coarsest honest report, a whole MMSTB: 307 passes (0.22 off), 310.2 fails by 2.48, Dake's truth 312 fails, and the whole 95 percent interval of the history match (308.55 to 311.86 MMSTB) lies outside the band. hdDakeTol.test.js derives all of it from the vendored engine.",
+     "annot_update": {
+      "source": "nextgen-panel",
+      "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx:96 (Dataset: Dake Exercise 9.2, aquifer Carter-Tracy finite; tile 'OOIP from the regression')",
+      "printed": {"decimals": 6},
+      "display_scale": 1,
+      "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx:96 fmt(d.ooip_mmstb, 6)",
+      "prompt_precision": null,
+      "answer_space": null,
+      "guess_p": null,
+      "fix": null,
+      "recommendation": null,
+      "evidence": "HD (tightened 3 -> 0.5 MMSTB, 20261030a_hd_mbal.sql): W5c moved the only route to the tank explorer's Dake mode (the lessons no longer print the value), so the field is read from the panel, which prints 307.22141 (fmt to 6 dp) against the key 307.2214095537205 from runDakeTank({aquifer: 'finite'}). The brief states no value, so the baseline 'prompt-given' meant lesson-given. At 0.5 the textbook 310.2 and the history match 310.1986 fail; the integer 307 passes.",
+      "notes": "Residual of W5c closed by the held decision: the old tol 3 admitted Dake's published least squares fit and the one-parameter history match, two different methods."
+     }
+    }
+   ]
+  }
+ }
+}
