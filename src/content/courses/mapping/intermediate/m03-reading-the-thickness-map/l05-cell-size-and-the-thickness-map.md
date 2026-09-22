@@ -1,6 +1,6 @@
 # Cell size and the thickness map
 
-The Associate tier established that live node counts are a setting rather than knowledge. This lesson runs the same test on the isochore and sorts its six capstone fields into the ones the cell size moves and the ones it cannot touch.
+The Associate tier established that live node counts are a setting rather than knowledge. This lesson runs the same test on the isochore and sorts its six reported figures into the ones the cell size moves and the ones it cannot touch.
 
 {{panel:mp-isochore-explorer}}
 
@@ -21,13 +21,13 @@ Grid both surfaces at 50, 100 and 200 m and read the isochore each time.
 
 ## Three kinds of number
 
-Read the table by row rather than by column and the six capstone fields sort themselves into three groups.
+Read the table by row rather than by column and the six reported figures sort themselves into three groups.
 
 **Fixed by the fit.** The thickness at P-1 is byte-identical at all three settings: 34.050048828125 m. P-1 lands on a node in every frame and a node value is the spline evaluated there, so the grid is only a sampling of a function that never changed.
 
 **Fixed by the wells.** The mean of the six well thicknesses is 31.166666666666668 m at every setting, because no gridding is involved in it at all. It is six numbers averaged.
 
-**A property of the grid.** The live node count is 794, 201 or 50 depending purely on the cell size, and every one of those is a correct answer to the question the count asks, which is how many nodes survived the mask. The count carries no information about the rock, which is why the capstone fixes the cell size at 100 m before grading it exactly.
+**A property of the grid.** The live node count is 794, 201 or 50 depending purely on the cell size, and every one of those is a correct answer to the question the count asks, which is how many nodes survived the mask. The count carries no information about the rock, which is why a brief that grades a count must state its cell size.
 
 The remaining three fields, the minimum, the maximum and the map mean, sit in between: they are statistics over the node set, so the cell size moves them, but only a little and for reasons that can be named.
 
@@ -63,6 +63,6 @@ The response is to check whether the location falls on a node, and if it does no
 
 ## Exercise
 
-Sort the six capstone fields into those that change with cell size and those that do not, then state the total spread of the map mean across the three settings and say what that spread implies.
+Sort the six reported figures into those that change with cell size and those that do not, then state the total spread of the map mean across the three settings and say what that spread implies.
 
 As a self-check: the thickness at P-1 and the mean of the six well thicknesses do not change; the live node count, the minimum, the maximum and the map mean all do. The map mean spans 32.2543 to 32.2873, a spread of 0.033 m across a sixteenfold change in node count, which implies the mean is essentially a property of the surface rather than of the grid and can be quoted with the cell size attached as a condition rather than as a caveat.

@@ -2,7 +2,7 @@
 
 Contours answer the question "what does this surface look like". A different question comes up constantly in practice: "how deep is the horizon at this particular spot". A proposed well location, a platform slot, a lease corner, a prospect crest. The spot is almost never a node and it is almost never a well, so the map has to be interrogated at an arbitrary point.
 
-The operation is called sampling, and the capstone asks you to do it once.
+The operation is called sampling, and the capstone asks you to do it on a prospect of its own.
 
 ## How the engine samples
 
@@ -12,9 +12,9 @@ The whole number part of that fraction identifies the cell the point falls in. T
 
 Two behaviours of the implementation are worth carrying with you. If the point falls outside the grid frame entirely, the sample returns null. And if any one of the four surrounding nodes is dead, the sample returns null as well, even if the other three are live and the point sits close to them. That is deliberate and it matches the contouring rule: the engine will not report a depth built partly from an absence. A location just outside the mapped area does not get a slightly less reliable number, it gets no number. There is one exception built into the arithmetic. If the point lands exactly on a node, the fractional part is zero in both directions, no neighbouring node carries any weight, and only that one node needs to be live.
 
-## The capstone case
+## The Ekene case
 
-Prospect P-1 sits at (1600, 1600). Sampled on the Ekene grid, its mapped depth is 1542.62 m. That is one of the six numbers the capstone grades.
+Prospect P-1 sits at (1600, 1600). Sampled on the Ekene grid, its mapped depth is 1542.62 m. The capstone asks for the same reading at its own prospect.
 
 Do not accept it just because the app printed it. Sanity check it against the control, which is the habit this whole course is trying to build.
 

@@ -30,7 +30,7 @@ TOP_SAND at P-1 is 1542.619873046875 m, the same number the Associate tier read.
 
 BASE_SAND at P-1 is 1576.669921875 m.
 
-The difference is $1576.669921875 - 1542.619873046875 = 34.050048828125$ m, which is the capstone's thickness at P-1.
+The difference is $1576.669921875 - 1542.619873046875 = 34.050048828125$ m, which is the Ekene thickness at P-1.
 
 That arithmetic can be run in either order with the same result: subtract the two grids and then sample the isochore, or sample both surfaces and then subtract. Bilinear interpolation is linear, so it commutes with subtraction. It is a small thing and it is worth knowing, because it means a thickness quoted at a location does not depend on whether the isochore was built first.
 

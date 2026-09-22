@@ -1,9 +1,10 @@
 import React, { useMemo, useState } from 'react';
 import {
-  TEACHING_WELLS, TOP_NAME, CAPSTONE_CELL_M, TARGET, computeMap,
+  TEACHING_WELLS, TOP_NAME, TEACHING_CELL_M, TARGET, computeMap,
 } from '@/lib/mappingTeaching';
 import { isNull } from '@petrolord/engines/lib/gridding/gridmath.js';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { useMappingCase } from '@/components/course/panels/mapping/caseInputs';
 
 // Map explorer: grid the Ekene TOP_SAND surface at a cell size the
 // learner chooses, then read the map. Control points are posted and the
@@ -26,28 +27,32 @@ function depthColor(z, zMin, zMax) {
 }
 
 const MapExplorer = () => {
-  const [cell, setCell] = useState(String(CAPSTONE_CELL_M));
+  const [cell, setCell] = useState(String(TEACHING_CELL_M));
+  const c = useMappingCase();
 
   const cellM = Number(cell);
-  const valid = Number.isFinite(cellM) && cellM >= 25 && cellM <= 500;
+  const valid = Number.isFinite(cellM) && cellM >= 25 && cellM <= 500 && c.ok;
 
   const map = useMemo(() => {
     if (!valid) return null;
     try {
-      return computeMap(cellM);
+      return computeMap(cellM, c.kase);
     } catch {
       return null;
     }
-  }, [cellM, valid]);
+  }, [cellM, valid, c.kase]);
 
   if (!map) {
     return (
-      <PanelShell title="Map explorer" subtitle="Enter a cell size between 25 and 500 m.">
+      <PanelShell title="Map explorer" subtitle="Enter a cell size between 25 and 500 m, and a well set.">
+        {c.ui}
         <NumField label="Cell size (m)" value={cell} onChange={setCell} />
-        <Note>The cell size must be a number in that range.</Note>
+        <Note>The cell size must be a number in that range, and every typed well line must read name, x, y, top, base (at least three wells).</Note>
       </PanelShell>
     );
   }
+  const WELLS = c.kase ? c.kase.wells : TEACHING_WELLS;
+  const T = c.kase ? c.kase.target : TARGET;
 
   const { spec, z, contours, summary: s } = map;
   const plotW = W - PAD.left - PAD.right;
@@ -80,18 +85,19 @@ const MapExplorer = () => {
 
   return (
     <PanelShell title="Map explorer"
-      subtitle={`The Ekene ${TOP_NAME} surface gridded from ${s.nPoints} wells at a ${fmt(cellM, 0)} m cell. Blank areas are beyond the extrapolation limit and are left unmapped on purpose.`}>
+      subtitle={`The ${c.typed ? 'typed' : 'Ekene'} ${TOP_NAME} surface gridded from ${s.nPoints} wells at a ${fmt(cellM, 0)} m cell. Blank areas are beyond the extrapolation limit and are left unmapped on purpose.`}>
+      {c.ui}
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
         <NumField label="Cell size (m)" value={cell} onChange={setCell} />
         <div className="text-xs text-gray-500 sm:col-span-3">
-          The capstone grids at {CAPSTONE_CELL_M} m. Try 50 and 200 m: the crest barely moves,
+          The Ekene map is read at {TEACHING_CELL_M} m. Try 50 and 200 m: the crest barely moves,
           but the node counts change completely.
         </div>
       </div>
 
       <div className="overflow-x-auto">
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"
-          aria-label={`Depth map of the Ekene ${TOP_NAME} surface`}>
+          aria-label={`Depth map of the ${TOP_NAME} surface`}>
           <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
           {cells}
 
@@ -105,7 +111,7 @@ const MapExplorer = () => {
           ))}
 
           {/* control points, posted with their picks */}
-          {TEACHING_WELLS.map((w) => {
+          {WELLS.map((w) => {
             const top = w.tops.find((t) => t.name === TOP_NAME);
             return (
               <g key={w.name}>
@@ -119,9 +125,9 @@ const MapExplorer = () => {
 
           {/* prospect */}
           <g>
-            <path d={`M ${sx(TARGET.x)} ${sy(TARGET.y) - 6} L ${sx(TARGET.x) + 6} ${sy(TARGET.y)} L ${sx(TARGET.x)} ${sy(TARGET.y) + 6} L ${sx(TARGET.x) - 6} ${sy(TARGET.y)} Z`}
+            <path d={`M ${sx(T.x)} ${sy(T.y) - 6} L ${sx(T.x) + 6} ${sy(T.y)} L ${sx(T.x)} ${sy(T.y) + 6} L ${sx(T.x) - 6} ${sy(T.y)} Z`}
               fill="#f472b6" stroke="#fff" strokeWidth="1" />
-            <text x={sx(TARGET.x) + 9} y={sy(TARGET.y) + 12} fill="#f472b6" fontSize="9">{TARGET.label}</text>
+            <text x={sx(T.x) + 9} y={sy(T.y) + 12} fill="#f472b6" fontSize="9">{T.label}</text>
           </g>
 
           <text x={PAD.left} y={H - 14} fill="#64748b" fontSize="9">x {xMin} to {xMax} m</text>
@@ -136,13 +142,14 @@ const MapExplorer = () => {
         <Tile label="Mapped (live) nodes" value={`${s.liveNodes} of ${s.nx * s.ny}`} />
         <Tile label="Crest (shallowest mapped)" value={fmt(s.zMin, 4)} unit="m" />
         <Tile label="Deepest mapped" value={fmt(s.zMax, 2)} unit="m" />
-        <Tile label={`Depth at ${TARGET.label}`} value={fmt(s.depthAtTarget, 4)} unit="m" />
+        <Tile label="Mean mapped depth" value={fmt(s.zMean, 4)} unit="m" />
+        <Tile label={`Depth at ${T.label}`} value={fmt(s.depthAtTarget, 4)} unit="m" />
         <Tile label="Contour interval" value={fmt(s.contourStep, 0)} unit="m" />
       </TileGrid>
 
       <Note>
         White circles are wells, labelled with their own picks; the pink diamond is prospect
-        {' '}{TARGET.label}, where there is no well. Every coloured node is an estimate, not a
+        {' '}{T.label}, where there is no well. Every coloured node is an estimate, not a
         measurement. Compare the crest against the shallowest posted pick: a smooth interpolator
         can bow above every well, and that overshoot is a property of the method rather than a
         discovery.

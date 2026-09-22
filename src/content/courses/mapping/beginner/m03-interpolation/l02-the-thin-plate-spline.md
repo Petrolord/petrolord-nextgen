@@ -1,6 +1,6 @@
 # The thin-plate spline
 
-The Mapping app grids with a thin-plate spline, usually shortened to TPS. It is the fourth family from the previous lesson, the smooth-sheet one, and it is worth understanding properly because every number the capstone grades comes out of it.
+The Mapping app grids with a thin-plate spline, usually shortened to TPS. It is the fourth family from the previous lesson, the smooth-sheet one, and it is worth understanding properly because every number this course maps comes out of it.
 
 ## The bent sheet
 

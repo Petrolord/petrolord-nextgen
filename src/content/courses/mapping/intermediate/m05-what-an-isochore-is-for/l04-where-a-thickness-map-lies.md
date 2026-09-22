@@ -38,7 +38,7 @@ Used in a volume, the wrong one costs 3.4 percent, which is small enough to surv
 
 ## Five: the blanks are silent
 
-The mask leaves 299 of the 500 nodes blank at the capstone settings, and a blank node contributes nothing to any statistic and nothing to any volume.
+The mask leaves 299 of the 500 nodes blank at the teaching settings, and a blank node contributes nothing to any statistic and nothing to any volume.
 
 A volume from 201 nodes and a volume from 260 nodes under a wider mask are not comparable, and neither figure carries its own coverage. Worse, a blank reads as absence rather than as ignorance: a reader looking at the uncoloured margin sees no sand, when what is there is no information.
 
@@ -62,6 +62,6 @@ None of those questions challenge the map. All three are needed before the numbe
 
 ## Exercise
 
-List the five ways a thickness map misleads and give the check for each in a few words. Then state which two of them the Ekene isochore actually exhibits at the capstone settings.
+List the five ways a thickness map misleads and give the check for each in a few words. Then state which two of them the Ekene isochore actually exhibits at the teaching settings.
 
-As a self-check: it looks like a measurement, checked by stating the control count; the contour interval flatters it, checked by quoting the interval with the range and cell size; the extremes are misplaced, checked by refining the cell and re-reading; the mean is not the well average, checked by quoting both labelled; and the blanks are silent, checked by quoting live nodes and mapped area. At the capstone settings Ekene exhibits the misplaced maximum, which sits 50 m from Ekene-2 and moves to exactly 36 m at a 50 m cell, and the mean gap of 1.088 m between the map and the wells.
+As a self-check: it looks like a measurement, checked by stating the control count; the contour interval flatters it, checked by quoting the interval with the range and cell size; the extremes are misplaced, checked by refining the cell and re-reading; the mean is not the well average, checked by quoting both labelled; and the blanks are silent, checked by quoting live nodes and mapped area. At the teaching settings Ekene exhibits the misplaced maximum, which sits 50 m from Ekene-2 and moves to exactly 36 m at a 50 m cell, and the mean gap of 1.088 m between the map and the wells.

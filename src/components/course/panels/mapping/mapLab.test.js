@@ -1,15 +1,15 @@
 import { describe, it, expect } from 'vitest';
 import {
-  TEACHING_WELLS, TOP_NAME, CAPSTONE_CELL_M, TARGET, computeMap,
+  TEACHING_WELLS, TOP_NAME, TEACHING_CELL_M, TARGET, computeMap,
 } from '@/lib/mappingTeaching';
 
-// Pins the map-explorer panel math to the live NG4 capstone oracle.
+// Pins the map-explorer panel math to the Ekene teaching case (the NG4 capstone until W5a).
 
 describe('mapping map explorer: engine math', () => {
-  const m = computeMap(CAPSTONE_CELL_M);
+  const m = computeMap(TEACHING_CELL_M);
   const s = m.summary;
 
-  it('reproduces the NG4 capstone six at a 100 m cell', () => {
+  it('reproduces the Ekene teaching six at a 100 m cell (the pre-W5 capstone key)', () => {
     expect(s.nPoints).toBe(6);
     expect(s.nx).toBe(25);
     expect(s.liveNodes).toBe(201);

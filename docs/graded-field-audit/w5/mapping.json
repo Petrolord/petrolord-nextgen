@@ -1,0 +1,319 @@
+{
+ "course": "mapping",
+ "wave": "w5a",
+ "migration": "20261028a_w5_mapping.sql",
+ "fields_file": "tools/course-waves/w5/mapping/fields.json",
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "title": "Map the ADIM TOP_SAND surface",
+   "dataset": "mapping/ADIM wells (W5 re-case; every well is stated in the brief)",
+   "why": "Every field leaked: the walkthrough and the module lessons printed them and the map explorer opened on the capstone case. The capstone moves to the ADIM well set on a 75 m cell, typed into the map explorer; the control-point count (read off the brief) and the contour interval (a small answer set) give way to the grid height and the mean mapped depth.",
+   "prompt": "Map the ADIM TOP_SAND surface. The wells, as name, x, y, TOP_SAND MD, BASE_SAND MD (one per line in the panel's Type a well set box): Adim-1, 800, 900, 1612, 1641; Adim-2, 2100, 1000, 1630, 1666; Adim-3, 1300, 1850, 1605, 1638; Adim-4, 2500, 2300, 1648, 1676; Adim-5, 500, 1700, 1618, 1650; Adim-6, 1700, 1600, 1603, 1640; Adim-7, 1150, 1400, 1609, 1642. Grid TOP_SAND on a 75 m cell with the course's two-cell pad and 800 m extrapolation limit, and read the map explorer (it opens on the Ekene wells, which are the teaching case): report the grid width and height in nodes, how many nodes were mapped, the crest depth, the depth at the prospect at (1500, 1900), and the mean mapped depth.",
+   "rekey": [
+    "n_control_points",
+    "grid_nx",
+    "live_nodes",
+    "crest_depth_m",
+    "depth_at_p1_m",
+    "contour_step_m"
+   ],
+   "annot": {
+    "adim_grid_nx": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/MapExplorer.jsx (Tile Grid width)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/MapExplorer.jsx (Tile Grid width)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set at a 75 m cell; the padding rule of beginner m02 reproduces it by hand; tol 0 on a count.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_grid_ny": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/MapExplorer.jsx (Tile Grid height)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/MapExplorer.jsx (Tile Grid height)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set at a 75 m cell; tol 0 on a count.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_live_nodes": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/MapExplorer.jsx (Tile Mapped (live) nodes)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/MapExplorer.jsx (Tile Mapped (live) nodes)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set at a 75 m cell with the 800 m limit; tol 0 on a count.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_crest_depth_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/MapExplorer.jsx (Tile Crest)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/MapExplorer.jsx (Tile Crest)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set; fmt 4 dp against tol 0.005; the shallowest pick 1603 misses by about 1.1.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_depth_at_prospect_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/MapExplorer.jsx (Tile Depth at the prospect)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/MapExplorer.jsx (Tile Depth at the prospect)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set and prospect; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_mean_depth_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/MapExplorer.jsx (Tile Mean mapped depth)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/MapExplorer.jsx (Tile Mean mapped depth)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "A",
+   "title": "Isochore of the ADIM SAND",
+   "dataset": "mapping/ADIM wells, isochore (W5 re-case; every well is stated in the brief)",
+   "why": "Every field leaked: the walkthrough and the isochore lessons printed them and the isochore explorer opened on the capstone case. The capstone moves to the ADIM wells on a 75 m cell, typed into the isochore explorer. W1's iso_nodes_above_well_mean is carried as adim_iso_nodes_above_well_mean.",
+   "prompt": "Grid both ADIM SAND surfaces on a 75 m cell (two-cell pad, 800 m extrapolation limit) and subtract them into an isochore. The wells, as name, x, y, TOP_SAND MD, BASE_SAND MD (one per line in the panel's Type a well set box): Adim-1, 800, 900, 1612, 1641; Adim-2, 2100, 1000, 1630, 1666; Adim-3, 1300, 1850, 1605, 1638; Adim-4, 2500, 2300, 1648, 1676; Adim-5, 500, 1700, 1618, 1650; Adim-6, 1700, 1600, 1603, 1640; Adim-7, 1150, 1400, 1609, 1642. Read the isochore explorer (it opens on the Ekene wells, which are the teaching case): the isochore minimum, maximum and mean thickness, the thickness at the prospect at (1500, 1900), how many live isochore nodes sit above the plain mean of the seven well thicknesses, and that plain mean itself.",
+   "rekey": [
+    "iso_min_m",
+    "iso_max_m",
+    "iso_mean_m",
+    "iso_at_p1_m",
+    "iso_nodes_above_well_mean",
+    "mean_well_thickness_m"
+   ],
+   "annot": {
+    "adim_iso_min_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx (Tile Minimum)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx (Tile Minimum)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set, isochore surface, 75 m cell; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_iso_max_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx (Tile Maximum)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx (Tile Maximum)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set, isochore; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_iso_mean_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx (Tile Map mean)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx (Tile Map mean)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set, isochore; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_iso_at_prospect_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx (Tile Value at the prospect)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx (Tile Value at the prospect)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set and prospect, isochore; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_iso_nodes_above_well_mean": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx (Tile Live nodes above the well mean)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx (Tile Live nodes above the well mean)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set, isochore; tol 0 on a count.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_mean_well_thickness_m": {
+     "source": "hand-calc",
+     "source_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx (Tile Mean of the well values)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/IsochoreExplorer.jsx (Tile Mean of the well values)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "(29 + 36 + 33 + 28 + 32 + 37 + 33)/7 = 228/7 by hand from the brief; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "advanced": {
+   "pick": "A",
+   "title": "Validate the ADIM TOP_SAND grid",
+   "dataset": "mapping/ADIM wells, validation (W5 re-case; every well is stated in the brief)",
+   "why": "Every field leaked: the walkthrough and the validation lessons printed them and the validation explorer opened on the capstone case. The capstone moves to the ADIM wells, the interior well Adim-7 and the appraisal well Adim-8, typed into the validation explorer. W1's depth_at_p1_with_e7_m is carried as adim_depth_at_prospect_with_adim8_m.",
+   "prompt": "Validate the ADIM TOP_SAND grid on a 100 m cell (two-cell pad, 800 m extrapolation limit). The wells, as name, x, y, TOP_SAND MD, BASE_SAND MD (one per line in the panel's Type a well set box): Adim-1, 800, 900, 1612, 1641; Adim-2, 2100, 1000, 1630, 1666; Adim-3, 1300, 1850, 1605, 1638; Adim-4, 2500, 2300, 1648, 1676; Adim-5, 500, 1700, 1618, 1650; Adim-6, 1700, 1600, 1603, 1640; Adim-7, 1150, 1400, 1609, 1642. Cross-validate by leave-one-out: only wells inside the control hull can be validated, because the gridder masks to the hull. Report how many wells that is and the residual at Adim-7 (predicted minus actual). Then blind-test the appraisal well Adim-8 at (1900, 2000), actual pick 1611 m: the seven-well grid prediction there, its residual, and the crest and the depth at the prospect at (1500, 1900) after regridding with Adim-8 included. Type the case into the validation explorer (it opens on the Ekene wells, which are the teaching case).",
+   "rekey": [
+    "cross_validatable_wells",
+    "loo_resid_e6",
+    "pred_at_e7",
+    "blind_residual_e7",
+    "zmin_with_e7",
+    "depth_at_p1_with_e7_m"
+   ],
+   "annot": {
+    "adim_cross_validatable_wells": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx (Tile Cross-validatable wells)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx (Tile Cross-validatable wells)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set, all-wells control set; answer space 0 to 7; tol 0 on a count.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_loo_resid_adim7": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx (Tile Residual)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx (Tile Residual)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set, control set without Adim-7; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_pred_at_adim8": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx (Tile Prediction there before it was drilled)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx (Tile Prediction there before it was drilled)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set with the appraisal well; the seven-well prediction; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_blind_residual_adim8": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx (Tile Residual)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx (Tile Residual)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "prediction minus the stated pick 1611; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_crest_with_adim8": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx (Tile Crest)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx (Tile Crest)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set plus the appraisal well; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "adim_depth_at_prospect_with_adim8_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx (Tile Depth at the prospect)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mapping/ValidationExplorer.jsx (Tile Depth at the prospect)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed well set plus the appraisal well, at the typed prospect; fmt 4 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  }
+ }
+}

@@ -1,34 +1,34 @@
 # The capstone walkthrough
 
-> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+The Associate capstone for this course is short. Its brief gives you a well set of its own: every well's name, map position and TOP_SAND pick, a prospect location and a cell size. It grades six numbers, and every one of them is read off the map panel once you have typed that case into it. There is no essay and no hidden data.
 
-The Associate capstone for this course is short. It grades six numbers, and every one of them is read off the map panel with the grid built at a 100 m cell on the Ekene control set. There is no essay, no free interpretation and no hidden data. If you have worked the five previous modules, the six numbers are already familiar.
+The map panel opens on the Ekene wells at a 100 m cell, which is this course's teaching case. None of its numbers is a capstone answer. This lesson walks the six fields, works each one on Ekene so you can see where it is read, and points out where marks are lost.
 
-This lesson walks each one, says where it comes from, and points out where learners lose marks.
+## Setting the case
 
-## The six graded quantities
+Choose "Type a well set". The box takes one well per line: name, x, y, TOP_SAND pick, BASE_SAND pick, separated by commas. It starts from the Ekene wells so it is never blank; replace every line with the brief's wells. Then type the prospect's x and y and the brief's cell size. Read the subtitle: it says how many wells the map was gridded from and at what cell.
 
-**The control-point count: 6.** The number of wells carrying a TOP_SAND pick and a map position. It comes from step 1 of the workflow, before any gridding happens, and it does not change with cell size or frame. This is a count, so it is graded exactly.
+## The six graded fields, worked on Ekene
 
-**The grid width: 25 nodes.** The number of columns across the frame at a 100 m cell, the frame being the control extent plus two cells of padding on each side. The companion number is 20 rows, and the product is the 500 node total. Also a count, also graded exactly.
+**The grid width, 25 nodes, and the grid height, 20 nodes.** The columns and rows of the frame: the control extent plus two cells of padding on each side, at the chosen cell. Both are counts, graded exactly. Module 2 works the rule by hand; run it on the brief's wells as a check on the tiles.
 
-**The mapped node count: 201.** The live nodes, meaning the nodes that survived the 800 m extrapolation limit and carry a depth. The other 299 are masked and blank. Notice that this number depends on the cell size in a way the first two do not, which is exactly why the capstone fixes the cell at 100 m.
+**The mapped node count, 201.** The live nodes, the ones that survived the 800 m extrapolation limit and carry a depth. This number depends on the cell size in a way the well picks do not, which is why every brief states its cell.
 
-**The crest: 1539.72 m.** The shallowest depth anywhere on the mapped, masked surface. Graded to a tolerance of 0.5 m, so anything between roughly 1539.2 and 1540.2 is accepted.
+**The crest, 1539.72 m.** The shallowest depth anywhere on the mapped, masked surface.
 
-**The depth at prospect P-1: 1542.62 m.** The value the map returns at (1600, 1600), where nothing has been drilled. Also graded to 0.5 m.
+**The depth at the prospect, 1542.62 m at P-1.** The value the map returns at the prospect, where nothing has been drilled.
 
-**The contour interval: 10 m.** The spacing between contour lines on the map as drawn at this cell size, chosen to put a readable number of lines across the relief.
+**The mean mapped depth.** The average over the live nodes, printed to four decimals. It weights by area, not by well.
 
 ## Where marks are lost
 
-Two of the six are counts with zero tolerance: the control-point count and the grid width. There is no partial credit on a count. Twenty four columns is wrong, and so is twenty six. If your frame does not come out at 25 by 20 at a 100 m cell, the fault is in the padding rule or the cell size rather than in your arithmetic, and it is worth rebuilding the grid rather than nudging the number.
+Three of the six are counts with zero tolerance. If your frame does not come out where the tiles say, the fault is in the padding rule or the cell size rather than in your arithmetic: rebuild the grid rather than nudging the number.
 
-The mapped node count behaves the same way but has a second trap. It is a count, so it must be exact, and it is the one number of the three counts that moves when the settings move. Read it from the panel with the cell at 100 m, not from a map you built earlier at a finer setting to see more detail.
+The live count has a second trap: it moves when the settings move. Read it with the brief's cell, not from a map you built earlier at a finer setting to see more detail.
 
-The crest is the number most likely to be misunderstood, and it is worth being blunt about why. A learner who reports 1541 m has quoted Ekene-3's pick. That is a real measurement, carefully made, and it is not the answer, because the question asks for the shallowest depth on the map rather than the shallowest depth in the wells. The mapped crest is 1539.72 m, about 1.28 m shallower, because a smooth surface bending through six control points rises slightly above its highest pin. Reporting 1541 m is not a rounding error that the 0.5 m tolerance will absorb. It is the wrong quantity, and it falls outside the tolerance anyway.
+The crest is the number most likely to be misunderstood. On Ekene a learner who reports 1541 m has quoted Ekene-3's pick. That is a real measurement and it is not the answer, because the question asks for the shallowest depth on the map rather than in the wells. A smooth surface bending through its control points rises slightly above its highest pin. On the capstone's wells, check the crest against the shallowest pick before you type it: they should differ.
 
-The two depths are the only numbers where a tolerance exists, and 0.5 m is generous enough that reading carefully off the panel will always clear it. There is no need to chase decimal places.
+The depths are graded tightly because the panel prints them to four decimals. Copy the tile.
 
 ## The order the server enforces
 
@@ -40,14 +40,14 @@ The capstone is the last thing you touch, and the platform makes that literal. T
 4. Pass the final exam at 70 percent. The exam draws across the whole course, not just the last module.
 5. Only then does the capstone unlock.
 
-The cooldown is the rule most worth planning around. It exists so that the quizzes test understanding rather than persistence, and it means the cheapest strategy is also the intended one: read the lesson, work the exercise, then sit the quiz.
+Passing the capstone grants the Associate certification for this course. That certification is a statement that you can take a set of well picks, build a defensible gridded surface, mask it honestly, and read specific numbers off the result.
 
-Passing the capstone grants the Associate certification for this course. That certification is a statement that you can take a set of well picks, build a defensible gridded surface, mask it honestly, and read specific numbers off the result. It is the foundation the Professional and Expert tiers build on.
-
-Try it yourself: all six graded numbers are readable from the panel below with the cell size at 100 m.
+Try it yourself: reproduce the Ekene values on the panel below, then choose "Type a well set", delete one well's line and watch every count move.
 
 {{panel:mp-map-explorer}}
 
 ## Exercise
 
-Without opening the app, list the six graded quantities in the order given above and write the value and tolerance for each. As a self-check: control points 6, exact; grid width 25 nodes, exact; mapped nodes 201, exact; crest 1539.72 m, tolerance 0.5 m; depth at P-1 1542.62 m, tolerance 0.5 m; contour interval 10 m. Then answer in two sentences: why is 1541 m the wrong answer for the crest, and what would have to be true for the capstone to unlock at all? It is Ekene-3's measured pick rather than the shallowest mapped value of 1539.72 m; and the capstone unlocks only after every lesson is read, all six module quizzes are passed at 75 percent, and the final exam is passed at 70 percent.
+Without opening the app, list the six graded quantities in the order given above with the unit of each. Then answer in two sentences: why is the shallowest pick the wrong answer for the crest, and which of the six would change if the brief's cell size were halved?
+
+As a self-check: grid width in nodes, grid height in nodes, mapped nodes as a count, crest in m, depth at the prospect in m, mean mapped depth in m. The shallowest pick is a measurement at one well, while the crest is the shallowest value of the whole mapped surface, which a smooth interpolator can push above every pin. Halving the cell changes the three counts at once and moves the mapped depths slightly; the picks themselves do not move.

@@ -56,6 +56,6 @@ The range is 29.4 m and a tenth of it is 2.94, which rounds **up** to 5. Levels 
 
 ## Exercise
 
-State the contour interval of the Ekene isochore and of the TOP_SAND map at the capstone cell size, explain in one sentence why they differ, and say what happens to the isochore interval at a 200 m cell.
+State the contour interval of the Ekene isochore and of the TOP_SAND map at the teaching cell size, explain in one sentence why they differ, and say what happens to the isochore interval at a 200 m cell.
 
 As a self-check: the isochore is contoured at 2 m and TOP_SAND at 10 m, and they differ only because the isochore's range of 10.90 m is about a fifth of the depth map's 50.28 m, so ten intervals across it are five times narrower. At a 200 m cell the isochore loses the node at Ekene-4, its range falls to 9.16 m, a tenth of that rounds to a nice 1, and the coarsest grid ends up with the finest 1 m contour interval.

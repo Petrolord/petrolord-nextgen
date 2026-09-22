@@ -46,7 +46,7 @@ Choose a cell noticeably finer than your control spacing. The Ekene wells sit ro
 
 Never choose a cell so fine that the map implies detail the data cannot support. A 5 m grid over these six wells would produce hundreds of thousands of nodes and a beautifully smooth image, and every extra node would be interpolation. Fine cells do not add information. They only add places to write the same inference down.
 
-Between those bounds the choice is yours, and the capstone fixes it at 100 m so that everyone's numbers agree. In your own work, state the cell size next to any node count you quote.
+Between those bounds the choice is yours, and a capstone states it so that everyone's numbers agree; the Ekene maps in this course use 100 m. In your own work, state the cell size next to any node count you quote.
 
 Try it yourself: set the cell size in the panel below to 50, then 100, then 200 m, and watch the node counts move while the surface stays where it is.
 
