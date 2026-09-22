@@ -6,8 +6,9 @@ import {
 import {
   PUBLISHED_DESIGN_IDS, KNIFE_EDGE_ID, KNIFE_EDGE_DECREMENTS,
   PUBLISHED_TABULATION_SEGMENTS, INJECTION_POINT_GATE_PSI,
-  unloadingExplorer,
+  unloadingExplorer, typedInjectionPoint, TYPED_TRAVERSE_DEFAULT,
 } from './gasLiftLab';
+import { plain, typedState, TypedDesignFields, TypedFieldList, Refusal } from './TypedDesignFields';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Unloading explorer, the Expert tier. What the design sheet does not show and
@@ -46,6 +47,7 @@ const MODES = [
   ['knifeedge', 'The published knife edge, where one boolean hangs on a fraction of a psi'],
   ['injectionpoint', 'The crossing, on both of its runs, and a residual that cannot see its own error'],
   ['sweep', 'Two sweeps of one verdict, one smooth and one a staircase'],
+  ['typed', 'Your well and traverse, typed'],
 ];
 
 const AXIS = { fill: '#94a3b8', fontSize: 11 };
@@ -716,8 +718,119 @@ const Sweep = () => {
   );
 };
 
-const UnloadingExplorer = () => {
-  const [mode, setMode] = useState('stages');
+const TRAVERSE_FIELDS = [
+  ['pwhFlowPsia', 'Flowing traverse at surface, psia'],
+  ['gTopPsiPerFt', 'Traverse gradient at surface, psi/ft'],
+  ['gBotPsiPerFt', 'Traverse gradient at the packer, psi/ft'],
+  ['fineRows', 'Fine tabulation, rows'],
+  ['coarseRows', 'Coarse tabulation, rows'],
+  ['curveSteps', 'Injection curve sample count'],
+];
+
+const Typed = () => {
+  const [values, setValues] = useState(() => typedState(TYPED_TRAVERSE_DEFAULT));
+  const set = (k, v) => setValues((o) => ({ ...o, [k]: v }));
+  const r = useMemo(() => {
+    try { return typedInjectionPoint(values); } catch { return null; }
+  }, [values]);
+  const crossings = r && r.ok ? [['fine', r.fine], ['coarse', r.coarse]] : [];
+  return (
+    <>
+      <div className="text-xs text-slate-300">
+        Type an installation and the lifted well&apos;s flowing traverse, and find where the gas gets in.
+        The view opens on the AKASO-3 teaching installation with the teaching traverse, and every
+        input can be retyped. The traverse is the intercept plus the surface gradient times depth plus
+        the gradient rise times depth squared over twice the packer depth, so its local gradient climbs
+        in a straight line from the surface gradient to the packer gradient. It is tabulated at evenly
+        spaced rows from surface to the packer, once fine and once coarse, and each tabulation is
+        crossed against the injection line from the kickoff pressure less the transfer differential.
+        The design is then spaced to the fine crossing as its target depth.
+      </div>
+      <div className="mt-3">
+        <TypedFieldList fields={TRAVERSE_FIELDS} values={values} set={set} />
+      </div>
+      <div className="mt-3">
+        <TypedDesignFields values={values} set={set} />
+      </div>
+      {(!r || !r.ok) ? <Refusal result={r} /> : (
+        <>
+          <div className="mt-3 overflow-x-auto">
+            <table className="text-xs text-slate-300 w-full">
+              <thead className="text-slate-500">
+                <tr>
+                  <th className="text-left pr-3">tabulation</th>
+                  <th className="text-left pr-3">rows</th>
+                  <th className="text-left pr-3">row spacing, ft</th>
+                  <th className="text-left pr-3">deepest injection point, ft TVD</th>
+                  <th className="text-left pr-3">injection pressure there, psia</th>
+                  <th className="text-left pr-3">traverse on its chords, psia</th>
+                  <th className="text-left pr-3">residual, psi</th>
+                  <th className="text-left">limited by</th>
+                </tr>
+              </thead>
+              <tbody>
+                {crossings.map(([name, x]) => (
+                  <tr key={name}>
+                    <td className="pr-3">{name}</td>
+                    <td className="pr-3">{x.rows}</td>
+                    <td className="pr-3">{plain(x.rowSpacingFt, 6)}</td>
+                    <td className="pr-3 text-[#BFFF00]">{plain(x.depthFt, 6)}</td>
+                    <td className="pr-3">{plain(x.pInjPsia, 6)}</td>
+                    <td className="pr-3">{plain(x.pProdPsia, 6)}</td>
+                    <td className="pr-3">{plain(x.residualPsi, 9)}</td>
+                    <td>{x.limitedBy}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          <div className="mt-3">
+            <TileGrid>
+              <Tile label="Coarse less fine crossing" value={plain(r.coarseMinusFineFt, 6)} unit="ft" />
+              <Tile label="Operating injection line at the fine crossing" value={plain(r.operatingAtFinePsia, 6)} unit="psia" />
+              <Tile label="Operating line less the traverse there" value={plain(r.operatingMinusTraversePsi, 6)} unit="psi" />
+              <Tile label="Samples on the design's own injection curve" value={String(r.designCurveSamples)} />
+            </TileGrid>
+          </div>
+          <div className="mt-3 overflow-x-auto">
+            <table className="text-xs text-slate-300 w-full">
+              <thead className="text-slate-500">
+                <tr>
+                  <th className="text-left pr-3">valve</th>
+                  <th className="text-left pr-3">depth, ft TVD</th>
+                  <th className="text-left pr-3">opens at surface, psia</th>
+                  <th className="text-left pr-3">closes at surface, psia</th>
+                  <th className="text-left">port, in</th>
+                </tr>
+              </thead>
+              <tbody>
+                {r.valves.map((v) => (
+                  <tr key={v.valve}>
+                    <td className="pr-3">{v.valve}</td>
+                    <td className="pr-3">{plain(v.depthFt, 6)}</td>
+                    <td className="pr-3">{plain(v.surfaceOpenPsia, 6)}</td>
+                    <td className="pr-3 text-[#BFFF00]">{plain(v.closingSurfacePressurePsia, 6)}</td>
+                    <td>{plain(v.portIdIn, 5)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {r.warnings.length > 0 && <Note>Engine warning: {r.warnings.join(' ')}</Note>}
+          <Note>
+            A closing surface pressure is the casing pressure whose column reads the valve&apos;s dome
+            at its depth. The operating line is the design&apos;s own injection curve, driven from the
+            operating pressure and cut on the engine&apos;s default sample count, which the curve sample
+            count above does not change. An orifice at the bottom never closes, so it prints a dash.
+          </Note>
+        </>
+      )}
+    </>
+  );
+};
+
+const UnloadingExplorer = ({ initialMode = 'stages' }) => {
+  const [mode, setMode] = useState(initialMode);
   return (
     <PanelShell
       title="Unloading explorer"
@@ -731,6 +844,7 @@ const UnloadingExplorer = () => {
         {mode === 'knifeedge' && <KnifeEdge />}
         {mode === 'injectionpoint' && <InjectionPoint />}
         {mode === 'sweep' && <Sweep />}
+        {mode === 'typed' && <Typed />}
       </div>
     </PanelShell>
   );

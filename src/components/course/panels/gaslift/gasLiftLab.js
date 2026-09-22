@@ -2314,6 +2314,407 @@ export const unloadingExplorer = Object.freeze({
 });
 
 // ===========================================================================
+// THE TYPED CASES (B5 follow-on W4, route b, owner decision D2).
+//
+// Three views take a case the learner TYPES: a gas column (Associate), a whole
+// installation (Professional) and an installation with its flowing traverse
+// (Expert). Each is one generic function below, fed plain strings or numbers,
+// returning `{ ok, errors, warnings, ...values }` and never throwing to a
+// panel. Each opens on the AKASO-3 teaching well and the teaching traverse,
+// and those default states are on the swept teaching surface
+// (`teachingAccessors`), so the leak gate proves no DEFAULT lands on a graded
+// answer. Typing a well's own conditions and reading its answers is the work;
+// no preset of any graded well exists here or in a panel.
+//
+// The chains are the engine calls a design walks, in the order it walks them:
+//   column   naturalGasZ and gasGradient at the surface pressure and wellhead
+//            temperature, gasColumnPressure down to the packer and
+//            gasColumnSurfacePressure back up from a target, both on the typed
+//            step count; topValveDepth; injectionPressureCurve on the typed
+//            sample count, read by straight line at the typed depth.
+//   design   designGasLift on the typed inputs (the spacing, valve and
+//            unloading routines inside it march 20 steps, and its own
+//            injection curve is cut on its default 40 samples, neither of
+//            which a caller can change).
+//   traverse the flowing traverse p(D) = intercept + gTop D
+//            + (gBot - gTop) D^2 / (2 packer), tabulated at a typed row count
+//            from surface to the packer; deepestInjectionPoint on it from the
+//            kickoff pressure; the design spaced to that crossing as its target
+//            depth, and the design's own operating injection line read there.
+// ===========================================================================
+
+const typedNumber = (v) => {
+  if (v === null || v === undefined) return NaN;
+  if (typeof v === 'number') return v;
+  const s = String(v).trim();
+  if (s === '' || !/^[-+]?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?$/.test(s)) return NaN;
+  return Number(s);
+};
+
+/** Read typed fields against rules, collecting a plain message for every failure. */
+const readTyped = (raw, spec) => {
+  const out = {};
+  const errors = [];
+  spec.forEach(([key, label, rule]) => {
+    const x = typedNumber(raw?.[key]);
+    out[key] = x;
+    if (!Number.isFinite(x)) { errors.push(`${label} needs a number.`); return; }
+    const msg = rule ? rule(x, out) : null;
+    if (msg) errors.push(`${label} ${msg}.`);
+  });
+  return { values: out, errors };
+};
+
+const positive = (x) => (x > 0 ? null : 'must be greater than zero');
+const nonNegative = (x) => (x >= 0 ? null : 'cannot be negative');
+const wholeCount = (lo, hi) => (x) => ((Number.isInteger(x) && x >= lo && x <= hi)
+  ? null : `must be a whole number from ${lo} to ${hi}`);
+const aboveAbsoluteZero = (x) => (x > -R_OFFSET ? null : 'must be above absolute zero');
+const gravity = (x) => ((x > 0 && x < 3) ? null : 'must be above zero and below 3');
+
+/** The largest step or sample count a typed view will march, to keep the page responsive. */
+export const TYPED_MAX_STEPS = 5000;
+
+/** The largest traverse row count a typed view will tabulate. */
+export const TYPED_MAX_ROWS = 20001;
+
+const GEOTHERM_SPEC = [
+  ['gasSg', 'Gas specific gravity', gravity],
+  ['whtF', 'Wellhead temperature', aboveAbsoluteZero],
+  ['bhtF', 'Temperature at the reference depth', aboveAbsoluteZero],
+  ['refDepthFt', 'Reference depth', positive],
+  ['packerFt', 'Packer depth', positive],
+];
+
+const refuse = (errors) => ({ ok: false, errors, warnings: [] });
+
+/** Run an engine chain, turning any engine refusal into a plain message. */
+const guarded = (fn) => {
+  try {
+    const r = fn();
+    if (!r) return refuse(['The engine returned nothing for this case.']);
+    return r;
+  } catch (err) {
+    return refuse([`The engine refused this case: ${err && err.message ? err.message : String(err)}`]);
+  }
+};
+
+const allFinite = (obj, keys) => keys.every((k) => Number.isFinite(obj[k]));
+
+/** The Associate view's teaching case: the AKASO-3 teaching well's gas column. */
+export const TYPED_COLUMN_DEFAULT = Object.freeze({
+  gasSg: TEACHING_WELL.gasSg,
+  whtF: TEACHING_WELL.wht,
+  bhtF: TEACHING_WELL.bht,
+  refDepthFt: TEACHING_WELL.refDepth,
+  packerFt: TEACHING_WELL.maxDepthFt,
+  pKickoffPsia: TEACHING_WELL.pKickoffPsia,
+  steps: ENGINE_CURVE_STEPS,
+  killGradPsiPerFt: TEACHING_WELL.killGradPsiPerFt,
+  pWhUnloadPsia: TEACHING_WELL.pWhUnloadPsia,
+  packerTargetPsia: 1300,
+  curveSteps: ENGINE_CURVE_STEPS,
+  readDepthFt: 3600,
+});
+
+/**
+ * A GAS COLUMN THE LEARNER TYPES. z and the static gradient at the surface
+ * pressure and wellhead temperature, the column marched to the packer on the
+ * typed step count, the same march run upward from a typed packer pressure,
+ * the top valve depth, and the injection pressure curve cut on the typed
+ * sample count and read by straight line at the typed depth.
+ */
+export const typedGasColumn = (raw) => {
+  const { values: v, errors } = readTyped(raw, [
+    ...GEOTHERM_SPEC,
+    ['pKickoffPsia', 'Kickoff pressure', positive],
+    ['steps', 'Column step count', wholeCount(1, TYPED_MAX_STEPS)],
+    ['killGradPsiPerFt', 'Kill fluid gradient', positive],
+    ['pWhUnloadPsia', 'Unloading wellhead pressure', (x, o) => (x >= 0 && !(x >= o.pKickoffPsia)
+      ? null : 'must be zero or more and below the kickoff pressure')],
+    ['packerTargetPsia', 'Target pressure at the packer', positive],
+    ['curveSteps', 'Curve sample count', wholeCount(1, TYPED_MAX_STEPS)],
+    ['readDepthFt', 'Read depth', (x, o) => (x >= 0 && !(x > o.packerFt)
+      ? null : 'must be between surface and the packer')],
+  ]);
+  if (errors.length) return refuse(errors);
+  return guarded(() => {
+    const tempAtDepthF = linearTemperature({ whtF: v.whtF, bhtF: v.bhtF, refDepthFt: v.refDepthFt });
+    const zKickoff = naturalGasZ({ pPsia: v.pKickoffPsia, tF: v.whtF, gasSg: v.gasSg });
+    const gradKickoff = gasGradient({ pPsia: v.pKickoffPsia, tF: v.whtF, gasSg: v.gasSg, z: zKickoff });
+    const colArgs = { gasSg: v.gasSg, tempAtDepthF, steps: v.steps };
+    const col = gasColumnPressure({ pSurfPsia: v.pKickoffPsia, tvdFt: v.packerFt, ...colArgs });
+    const surfForTargetPsia = gasColumnSurfacePressure({
+      pAtDepthPsia: v.packerTargetPsia, tvdFt: v.packerFt, ...colArgs,
+    });
+    const topValveFt = topValveDepth({
+      pKickoffPsia: v.pKickoffPsia, pWhUnloadPsia: v.pWhUnloadPsia,
+      killGradPsiPerFt: v.killGradPsiPerFt, gasSg: v.gasSg, tempAtDepthF, maxDepthFt: v.packerFt,
+    });
+    const curve = injectionPressureCurve({
+      pSurfPsia: v.pKickoffPsia, gasSg: v.gasSg, tempAtDepthF,
+      maxDepthFt: v.packerFt, steps: v.curveSteps,
+    });
+    const out = {
+      ok: true,
+      errors: [],
+      warnings: [],
+      tempAtPackerF: tempAtDepthF(v.packerFt),
+      zKickoff,
+      gradKickoffPsiPerFt: gradKickoff,
+      colAtPackerPsia: col.pBottomPsia,
+      surfForTargetPsia,
+      topValveFt,
+      killLineAtTopValvePsia: v.pWhUnloadPsia + v.killGradPsiPerFt * topValveFt,
+      curveSpacingFt: v.packerFt / v.curveSteps,
+      curveAtReadPsia: curve.at(v.readDepthFt),
+    };
+    if (!allFinite(out, ['zKickoff', 'gradKickoffPsiPerFt', 'colAtPackerPsia', 'surfForTargetPsia', 'topValveFt', 'curveAtReadPsia'])) {
+      return refuse(['This case sends the gas column out of range, so no pressure at depth can be read.']);
+    }
+    if (topValveFt >= v.packerFt) {
+      out.warnings.push('The kill fluid never outweighs the injection gas above the packer, so the top valve is clamped at the packer.');
+    }
+    return out;
+  });
+};
+
+/** The valve types and spacing methods designGasLift takes, as a panel lists them. */
+export const TYPED_VALVE_TYPES = Object.freeze(['IPO', 'PPO']);
+export const TYPED_METHODS = Object.freeze(['surfaceClose', 'constantPressure']);
+
+/** The Professional view's teaching case: the AKASO-3 teaching installation. */
+export const TYPED_DESIGN_DEFAULT = Object.freeze({
+  gasSg: TEACHING_WELL.gasSg,
+  whtF: TEACHING_WELL.wht,
+  bhtF: TEACHING_WELL.bht,
+  refDepthFt: TEACHING_WELL.refDepth,
+  packerFt: TEACHING_WELL.maxDepthFt,
+  pKickoffPsia: TEACHING_WELL.pKickoffPsia,
+  pOperatingPsia: TEACHING_WELL.pOperatingPsia,
+  dpPerValvePsi: TEACHING_WELL.dpPerValvePsi,
+  dpTransferPsi: TEACHING_WELL.dpTransferPsi,
+  killGradPsiPerFt: TEACHING_WELL.killGradPsiPerFt,
+  unloadGradPsiPerFt: TEACHING_WELL.unloadGradPsiPerFt,
+  pWhUnloadPsia: TEACHING_WELL.pWhUnloadPsia,
+  minSpacingFt: TEACHING_WELL.minSpacingFt,
+  maxValves: TEACHING_WELL.maxValves,
+  bellowsAreaIn2: TEACHING_WELL.bellowsAreaIn2,
+  ports: TEACHING_WELL.ports.join(', '),
+  qgiTargetMscfd: TEACHING_WELL.qgiTargetMscfd,
+  orificeIdIn: TEACHING_WELL.orificeIdIn,
+  valveType: TEACHING_WELL.valveType,
+  method: TEACHING_WELL.method,
+  bottomOrifice: TEACHING_WELL.bottomOrifice,
+  targetDepthFt: '',
+});
+
+/** A typed port catalogue: bores in inches, separated by commas or spaces, ascending. */
+export const parseTypedPorts = (text) => {
+  const tokens = String(text ?? '').split(/[\s,;]+/).filter((t) => t !== '');
+  if (!tokens.length) return { ok: false, errors: ['The port catalogue needs at least one bore, in inches.'] };
+  const bores = tokens.map(typedNumber);
+  const bad = tokens.filter((t, i) => !(Number.isFinite(bores[i]) && bores[i] > 0));
+  if (bad.length) return { ok: false, errors: [`Every port bore must be a number above zero; ${bad.join(', ')} is not.`] };
+  const sorted = [...bores].sort((a, b) => a - b);
+  return { ok: true, errors: [], ports: sorted.map((idIn) => ({ idIn, label: `${idIn} in` })) };
+};
+
+const DESIGN_SPEC = [
+  ...GEOTHERM_SPEC,
+  ['pKickoffPsia', 'Kickoff pressure', positive],
+  ['pOperatingPsia', 'Operating pressure', positive],
+  ['dpPerValvePsi', 'Surface decrement per valve', nonNegative],
+  ['dpTransferPsi', 'Transfer differential', nonNegative],
+  ['killGradPsiPerFt', 'Kill fluid gradient', positive],
+  ['unloadGradPsiPerFt', 'Unloading gradient', nonNegative],
+  ['pWhUnloadPsia', 'Unloading wellhead pressure', (x, o) => (x >= 0 && !(x >= o.pKickoffPsia)
+    ? null : 'must be zero or more and below the kickoff pressure')],
+  ['minSpacingFt', 'Minimum spacing', positive],
+  ['maxValves', 'Maximum valve count', wholeCount(1, 40)],
+  ['bellowsAreaIn2', 'Bellows area', positive],
+  ['qgiTargetMscfd', 'Design gas rate', positive],
+];
+
+/**
+ * Read a typed installation into the object designGasLift takes. A blank
+ * target depth means the packer. Returns { ok, errors, cfg }.
+ */
+const readTypedDesign = (raw, targetDepthFt) => {
+  const { values: v, errors } = readTyped(raw, DESIGN_SPEC);
+  const ports = parseTypedPorts(raw?.ports);
+  if (!ports.ok) errors.push(...ports.errors);
+  const valveType = String(raw?.valveType ?? '');
+  if (!TYPED_VALVE_TYPES.includes(valveType)) errors.push(`Valve type must be one of ${TYPED_VALVE_TYPES.join(', ')}.`);
+  const method = String(raw?.method ?? '');
+  if (!TYPED_METHODS.includes(method)) errors.push(`Spacing method must be one of ${TYPED_METHODS.join(', ')}.`);
+  const bottomOrifice = raw?.bottomOrifice === true || raw?.bottomOrifice === 'true';
+  const orificeIdIn = typedNumber(raw?.orificeIdIn);
+  if (bottomOrifice && !(orificeIdIn > 0)) errors.push('Bottom orifice bore must be a number above zero.');
+  let target = targetDepthFt;
+  if (target === undefined) {
+    const t = String(raw?.targetDepthFt ?? '').trim();
+    if (t !== '') {
+      target = typedNumber(t);
+      if (!(target > 0)) errors.push('Target depth must be blank (the packer) or a depth above zero.');
+    }
+  }
+  if (errors.length) return { ok: false, errors };
+  const tempAtDepthF = linearTemperature({ whtF: v.whtF, bhtF: v.bhtF, refDepthFt: v.refDepthFt });
+  const cfg = {
+    pKickoffPsia: v.pKickoffPsia,
+    pOperatingPsia: v.pOperatingPsia,
+    method,
+    dpPerValvePsi: v.dpPerValvePsi,
+    dpTransferPsi: v.dpTransferPsi,
+    killGradPsiPerFt: v.killGradPsiPerFt,
+    unloadGradPsiPerFt: v.unloadGradPsiPerFt,
+    pWhUnloadPsia: v.pWhUnloadPsia,
+    gasSg: v.gasSg,
+    tempAtDepthF,
+    maxDepthFt: v.packerFt,
+    minSpacingFt: v.minSpacingFt,
+    maxValves: v.maxValves,
+    valveType,
+    bellowsAreaIn2: v.bellowsAreaIn2,
+    ports: ports.ports,
+    qgiTargetMscfd: v.qgiTargetMscfd,
+    bottomOrifice,
+    ...(bottomOrifice ? { orificeIdIn } : {}),
+    ...(target === undefined ? {} : { targetDepthFt: target }),
+  };
+  return { ok: true, errors: [], cfg };
+};
+
+const typedValveRows = (d) => d.valves.map((x, k) => ({
+  valve: k + 1,
+  depthFt: x.depthFt,
+  valveType: x.valveType,
+  surfaceOpenPsia: x.pSurfOpenPsia,
+  tempF: x.tempF,
+  pInjAtDepthPsia: x.pInjAtDepthPsia,
+  pProdAtDepthPsia: x.pProdAtDepthPsia,
+  portIdIn: x.portIdIn,
+  domeAtTempPsia: x.domeAtTempPsia,
+  dome60Psia: x.dome60Psia,
+  testRackOpeningPsia: x.testRackOpeningPsia,
+  spreadPsi: x.spreadPsi,
+  closingSurfacePressurePsia: x.closingSurfacePressurePsia,
+  throughputMscfd: x.throughputMscfd,
+  throughputRegime: x.throughputRegime,
+}));
+
+const typedDesignResult = (cfg) => {
+  const d = designGasLift(cfg);
+  return {
+    ok: true,
+    errors: [],
+    warnings: d.warnings.map((w) => w.message),
+    stopReason: d.stopReason,
+    targetDepthFt: cfg.targetDepthFt ?? cfg.maxDepthFt,
+    valves: typedValveRows(d),
+    multipointingStages: d.unloading.filter((s) => s.multipointing).map((s) => s.stage),
+    design: d,
+  };
+};
+
+/**
+ * AN INSTALLATION THE LEARNER TYPES, through designGasLift. Every valve's
+ * depth, dome at valve temperature, test rack opening, spread, port and
+ * throughput, and its closing surface pressure. `design` is the engine's own
+ * return, so a caller can read its injection curve.
+ */
+export const typedGasLiftDesign = (raw) => {
+  const read = readTypedDesign(raw);
+  if (!read.ok) return refuse(read.errors);
+  return guarded(() => typedDesignResult(read.cfg));
+};
+
+/** The Expert view's teaching case: AKASO-3 with the teaching traverse written as two gradients. */
+export const TYPED_TRAVERSE_DEFAULT = Object.freeze({
+  ...TYPED_DESIGN_DEFAULT,
+  pwhFlowPsia: TEACHING_TRAVERSE.interceptPsia,
+  gTopPsiPerFt: TEACHING_TRAVERSE.slopePsiPerFt,
+  gBotPsiPerFt: TEACHING_TRAVERSE.slopePsiPerFt
+    + 2 * TEACHING_TRAVERSE.curvaturePsiPerFt2 * TEACHING_TRAVERSE.maxDepthFt,
+  fineRows: 241,
+  coarseRows: 9,
+  curveSteps: ENGINE_CURVE_STEPS,
+});
+
+/** The typed flowing traverse, tabulated at `rows` evenly spaced rows from surface to the packer. */
+const typedTraverseRows = (t, rows) => Array.from({ length: rows }, (_, i) => {
+  const tvdFt = (t.packerFt * i) / (rows - 1);
+  return {
+    tvdFt,
+    pPsia: t.pwhFlowPsia + t.gTopPsiPerFt * tvdFt
+      + ((t.gBotPsiPerFt - t.gTopPsiPerFt) * tvdFt * tvdFt) / (2 * t.packerFt),
+  };
+});
+
+/**
+ * AN INSTALLATION AND ITS FLOWING TRAVERSE, BOTH TYPED. The deepest injection
+ * point from the kickoff pressure on a fine and a coarse tabulation of the same
+ * traverse, the design spaced to the fine crossing as its target depth, every
+ * valve's closing surface pressure, and the design's own operating injection
+ * line read at the fine crossing.
+ */
+export const typedInjectionPoint = (raw) => {
+  const { values: t, errors } = readTyped(raw, [
+    ['packerFt', 'Packer depth', positive],
+    ['pKickoffPsia', 'Kickoff pressure', positive],
+    ['gasSg', 'Gas specific gravity', gravity],
+    ['dpTransferPsi', 'Transfer differential', nonNegative],
+    ['pwhFlowPsia', 'Flowing wellhead pressure', nonNegative],
+    ['gTopPsiPerFt', 'Traverse gradient at surface', nonNegative],
+    ['gBotPsiPerFt', 'Traverse gradient at the packer', nonNegative],
+    ['fineRows', 'Fine traverse row count', wholeCount(2, TYPED_MAX_ROWS)],
+    ['coarseRows', 'Coarse traverse row count', wholeCount(2, TYPED_MAX_ROWS)],
+    ['curveSteps', 'Curve sample count', wholeCount(1, TYPED_MAX_STEPS)],
+  ]);
+  const probe = readTypedDesign(raw, 1);
+  if (!probe.ok) errors.push(...probe.errors.filter((m) => !errors.includes(m)));
+  if (errors.length) return refuse([...new Set(errors)]);
+  return guarded(() => {
+    const { tempAtDepthF } = probe.cfg;
+    const traverseAt = (tvdFt) => t.pwhFlowPsia + t.gTopPsiPerFt * tvdFt
+      + ((t.gBotPsiPerFt - t.gTopPsiPerFt) * tvdFt * tvdFt) / (2 * t.packerFt);
+    const dip = (rows, pSurfPsia) => deepestInjectionPoint({
+      prodTraverse: typedTraverseRows(t, rows), pSurfPsia, gasSg: t.gasSg, tempAtDepthF,
+      dpTransferPsi: t.dpTransferPsi, maxDepthFt: t.packerFt, steps: t.curveSteps,
+    });
+    const fine = dip(t.fineRows, t.pKickoffPsia);
+    const coarse = dip(t.coarseRows, t.pKickoffPsia);
+    if (!fine || !coarse) return refuse(['The traverse needs at least two rows before a crossing can be located.']);
+    if (!(fine.depthFt > 0)) {
+      return refuse(['The injection line less the transfer differential is already below the traverse at surface, so gas gets in nowhere and there is no target depth to space to.']);
+    }
+    const read = readTypedDesign(raw, fine.depthFt);
+    const r = typedDesignResult(read.cfg);
+    const operatingAtFinePsia = r.design.injectionCurve.at(fine.depthFt);
+    const row = (h, rows) => ({
+      rows,
+      rowSpacingFt: t.packerFt / (rows - 1),
+      depthFt: h.depthFt,
+      pInjPsia: h.pInjPsia,
+      pProdPsia: h.pProdPsia,
+      limitedBy: h.limitedBy,
+      residualPsi: h.pInjPsia - t.dpTransferPsi - h.pProdPsia,
+      traverseAtDepthPsia: traverseAt(h.depthFt),
+    });
+    return {
+      ...r,
+      fine: row(fine, t.fineRows),
+      coarse: row(coarse, t.coarseRows),
+      coarseMinusFineFt: coarse.depthFt - fine.depthFt,
+      operatingAtFinePsia,
+      operatingMinusTraversePsi: operatingAtFinePsia - traverseAt(fine.depthFt),
+      designCurveSamples: r.design.injectionCurve.depths.length - 1,
+    };
+  });
+};
+
+// ===========================================================================
 // THE TEACHING DIGEST.
 //
 // `teachingDigestLines()` renders, line for line, the file the 78 shipped
@@ -3345,6 +3746,9 @@ export const teachingAccessors = () => {
     ['unloadingExplorer.injectionpoint', unloadingExplorer.injectionpoint],
     ['unloadingExplorer.knifeedge', () => unloadingExplorer.knifeedge()],
     ['unloadingExplorer.sweep', unloadingExplorer.sweep],
+    ['typedGasColumn.default', () => typedGasColumn(TYPED_COLUMN_DEFAULT)],
+    ['typedGasLiftDesign.default', () => { const { design, ...rest } = typedGasLiftDesign(TYPED_DESIGN_DEFAULT); return rest; }],
+    ['typedInjectionPoint.default', () => { const { design, ...rest } = typedInjectionPoint(TYPED_TRAVERSE_DEFAULT); return rest; }],
   ];
   golden.columns.forEach((c, i) => {
     named.push([`ruleOfThumbRows ${i + 1}`, () => ruleOfThumbRows(i + 1)]);

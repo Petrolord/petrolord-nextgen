@@ -10756,30 +10756,37 @@
   "expected": 0.8321323612578156,
   "tol": 4.2e-07,
   "rel_tol": 5.047273962103168e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/beginner/m06-the-associate-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/ColumnExplorer.jsx:561 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 8
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx:133 (z printed fmt(r.z, 6))",
+  "display_ref": "src/components/course/panels/gaslift/ColumnExplorer.jsx:561 plain(v, 8)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 1.257815629429615e-09,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx: add a learner-entered column mode (gas sg, wellhead T, bottom T, reference depth, surface pressure) that prints z with fmt(v, 8); note the existing fmt(r.z, 6) at :133 is itself too coarse (half unit 5e-7 > tol 4.2e-7)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "z needs Newton iteration on DAK with Sutton criticals, none of whose coefficients the lessons state. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. Not a hand-calc: the lessons name Sutton pseudo-criticals and Dranchuk-Abou-Kassem (beginner m02/l02) and describe a predictor-trapezoid march (m05/l01) but never give the correlation coefficients or the engine's Rankine/constant conventions, and the tolerance is about 5e-7 relative, so only the engine itself reproduces it (the course itself shows a 4.4e-4 relative constant mismatch between textbook and engine, m02/l04). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Column explorer's \"Your well, typed\" view takes this gas, geotherm, packer, kickoff pressure, step count, kill fluid, unloading wellhead, target and curve samples as typed and prints z to eight decimals and every other value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/ColumnExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on ColumnExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 4.2e-07 absolute (about 5.0e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -10791,30 +10798,37 @@
   "expected": 0.03459262518232471,
   "tol": 1.7e-08,
   "rel_tol": 4.914342265265905e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/beginner/m06-the-associate-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/ColumnExplorer.jsx:562 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 10
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx:131 (local gradient fmt(v, 8))",
+  "display_ref": "src/components/course/panels/gaslift/ColumnExplorer.jsx:562 plain(v, 10)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 1.7675284846863093e-11,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx: same learner-entered column mode, printing the surface local gradient with fmt(v, 8) (half unit 5e-9 < tol 1.7e-8)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Gradient = AIR_MW sg p / (144 R z T) is stated in m02/l04 (0.0187417041 sg p/(zT)), but z is not obtainable, and the tolerance equals z's own relative band, so any z error propagates straight through. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. Not a hand-calc: the lessons name Sutton pseudo-criticals and Dranchuk-Abou-Kassem (beginner m02/l02) and describe a predictor-trapezoid march (m05/l01) but never give the correlation coefficients or the engine's Rankine/constant conventions, and the tolerance is about 5e-7 relative, so only the engine itself reproduces it (the course itself shows a 4.4e-4 relative constant mismatch between textbook and engine, m02/l04). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Column explorer's \"Your well, typed\" view takes this gas, geotherm, packer, kickoff pressure, step count, kill fluid, unloading wellhead, target and curve samples as typed and prints z to eight decimals and every other value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/ColumnExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on ColumnExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 1.7e-08 absolute (about 4.9e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -10826,30 +10840,37 @@
   "expected": 1589.4628665427595,
   "tol": 0.00079,
   "rel_tol": 4.970232501991877e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/beginner/m06-the-associate-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/ColumnExplorer.jsx:564 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx:128 (engine pressure fmt(v, 4)); :338 (step study fmt(v, 8))",
+  "display_ref": "src/components/course/panels/gaslift/ColumnExplorer.jsx:564 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 4.5724050323769916e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx: learner-entered column mode with a step-count input (96) and depth input, printing the packer pressure with fmt(v, 6)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "A 96-step predictor-corrector march with DAK z at every step; a spreadsheet could do it only with the untaught z correlation. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. Not a hand-calc: the lessons name Sutton pseudo-criticals and Dranchuk-Abou-Kassem (beginner m02/l02) and describe a predictor-trapezoid march (m05/l01) but never give the correlation coefficients or the engine's Rankine/constant conventions, and the tolerance is about 5e-7 relative, so only the engine itself reproduces it (the course itself shows a 4.4e-4 relative constant mismatch between textbook and engine, m02/l04). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Column explorer's \"Your well, typed\" view takes this gas, geotherm, packer, kickoff pressure, step count, kill fluid, unloading wellhead, target and curve samples as typed and prints z to eight decimals and every other value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/ColumnExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on ColumnExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.00079 absolute (about 5.0e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -10861,30 +10882,37 @@
   "expected": 1264.8156205292921,
   "tol": 0.00063,
   "rel_tol": 4.980963152055013e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/beginner/m06-the-associate-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/ColumnExplorer.jsx:565 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx:128 (fmt 4); the inverse is only discussed in beginner m02/l05, never rendered for an entered case",
+  "display_ref": "src/components/course/panels/gaslift/ColumnExplorer.jsx:565 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 4.707078460342018e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx: learner-entered column mode that also runs gasColumnSurfacePressure for an entered depth pressure (1585) and prints it with fmt(v, 6)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Secant inverse of the same 96-step march (m02/l05); needs the forward march first. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Column explorer's \"Your well, typed\" view takes this gas, geotherm, packer, kickoff pressure, step count, kill fluid, unloading wellhead, target and curve samples as typed and prints z to eight decimals and every other value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/ColumnExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on ColumnExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.00063 absolute (about 5.0e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -10896,30 +10924,37 @@
   "expected": 2494.025220656208,
   "tol": 0.0012,
   "rel_tol": 4.811499058073942e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/beginner/m06-the-associate-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/ColumnExplorer.jsx:566 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx:459 (THE TOP VALVE tile fmt(x.tvdFt, 4))",
+  "display_ref": "src/components/course/panels/gaslift/ColumnExplorer.jsx:566 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 3.437917257542722e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx (design lines view, :451-463): accept learner inputs (kickoff, sg, geotherm, unloading wellhead, kill gradient) and print the top valve with fmt(v, 4) (half unit 5e-5 < tol 1.2e-3)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Fixed point on the injection column (m04/l01); each iterate is a full column march with DAK z. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Column explorer's \"Your well, typed\" view takes this gas, geotherm, packer, kickoff pressure, step count, kill fluid, unloading wellhead, target and curve samples as typed and prints z to eight decimals and every other value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/ColumnExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on ColumnExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.0012 absolute (about 4.8e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -10931,30 +10966,37 @@
   "expected": 1450.0362742923005,
   "tol": 0.00073,
   "rel_tol": 5.034356815358162e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/beginner/m06-the-associate-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/ColumnExplorer.jsx:569 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx:501-502 (curve rows fmt(r.tvdFt,1) / fmt(r.injectionPsia, 4))",
+  "display_ref": "src/components/course/panels/gaslift/ColumnExplorer.jsx:569 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 2.923004558397224e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ColumnExplorer.jsx: learner-entered column mode with a sample-count input (64) and a read depth, printing injectionPressureCurve.at(depth) with fmt(v, 6) (m04/l04 already asks the learner to 'set the sample count', which no panel allows)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "64-sample curve read by chord (m04/l04); the lesson exercise tells the learner to set the sample count to 4 then 64, but no control exists. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Column explorer's \"Your well, typed\" view takes this gas, geotherm, packer, kickoff pressure, step count, kill fluid, unloading wellhead, target and curve samples as typed and prints z to eight decimals and every other value to at least the precision graded here.",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/ColumnExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on ColumnExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.00073 absolute (about 5.0e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -10966,30 +11008,37 @@
   "expected": 4379.112457100502,
   "tol": 0.0022,
   "rel_tol": 5.023849059717146e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ValveExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/intermediate/m06-the-professional-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/ValveExplorer.jsx:737 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ValveExplorer.jsx:180 (spacing depths fmt(d.depthFt, 6))",
+  "display_ref": "src/components/course/panels/gaslift/ValveExplorer.jsx:737 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 1.0050189303001389e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ValveExplorer.jsx: add a learner-entered design mode (kickoff, operating, decrement, transfer, kill/unloading gradients, unloading wellhead, sg, geotherm, packer, min spacing, max valves, bellows area, port catalogue, gas rate, orifice) printing depths with fmt(v, 6). Alternative: name the Suite Gas Lift Design Studio in the prompt and print depths to 3 decimals at src/components/gaslift/ValveSheetPanel.jsx:89 (spacing does not depend on bellows or ports, so the Suite can reproduce the depth, but it shows whole feet today)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Spacing recursion with a 20-step march per valve (intermediate m01). Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. The Suite Gas Lift Design Studio is never named by the prompt or any lesson, and cannot run this case anyway: runInstallationDesign (src/utils/production/gasLift.js:285-309) takes the bellows and ports from a fixed valve family (r1 0.31 in2, r15 0.77 in2; packages/engines/engines/production/data/gasLiftValveCatalog.js:41-50), not 0.99 in2 with the 9/32..9/16 catalogue, and it prints whole psig/ft (ValveSheetPanel.jsx:10-11 fmt digits 0). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Valve explorer's \"Your installation, typed\" view takes this design as typed (the gas column of the Associate tier, the pressures, gradients, spacing limits, bellows, port catalogue, gas rate and bottom orifice) and prints every valve's depth, dome, test rack opening, spread,",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/ValveExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on ValveExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.0022 absolute (about 5.0e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -11001,30 +11050,37 @@
   "expected": 6997.151937824368,
   "tol": 0.0035,
   "rel_tol": 5.002035158162163e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ValveExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/intermediate/m06-the-professional-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/ValveExplorer.jsx:737 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ValveExplorer.jsx:180 (fmt(d.depthFt, 6))",
+  "display_ref": "src/components/course/panels/gaslift/ValveExplorer.jsx:737 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 1.756316123646684e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/Same ValveExplorer learner-entered design mode as valve2_depth_ft (or the Suite ValveSheetPanel.jsx:89 alternative, depths to 3 decimals)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Spacing recursion, three decrement applications deep. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. The Suite Gas Lift Design Studio is never named by the prompt or any lesson, and cannot run this case anyway: runInstallationDesign (src/utils/production/gasLift.js:285-309) takes the bellows and ports from a fixed valve family (r1 0.31 in2, r15 0.77 in2; packages/engines/engines/production/data/gasLiftValveCatalog.js:41-50), not 0.99 in2 with the 9/32..9/16 catalogue, and it prints whole psig/ft (ValveSheetPanel.jsx:10-11 fmt digits 0). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Valve explorer's \"Your installation, typed\" view takes this design as typed (the gas column of the Associate tier, the pressures, gradients, spacing limits, bellows, port catalogue, gas rate and bottom orifice) and prints every valve's depth, dome, test rack opening, spread,",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/ValveExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on ValveExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.0035 absolute (about 5.0e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -11036,30 +11092,37 @@
   "expected": 1313.645346439994,
   "tol": 0.00066,
   "rel_tol": 5.02418709729086e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ValveExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/intermediate/m06-the-professional-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/ValveExplorer.jsx:740 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ValveExplorer.jsx:346 (dome at temp fmt(v, 6))",
+  "display_ref": "src/components/course/panels/gaslift/ValveExplorer.jsx:740 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 4.3999398258165456e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/Same ValveExplorer learner-entered design mode; dome at temperature already prints fmt(v, 6) (half unit 5e-7 < tol 6.6e-4)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Dome balances injection and production at depth through R = port/bellows area; the ports and 0.99 in2 bellows are not in any Suite valve family. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. The Suite Gas Lift Design Studio is never named by the prompt or any lesson, and cannot run this case anyway: runInstallationDesign (src/utils/production/gasLift.js:285-309) takes the bellows and ports from a fixed valve family (r1 0.31 in2, r15 0.77 in2; packages/engines/engines/production/data/gasLiftValveCatalog.js:41-50), not 0.99 in2 with the 9/32..9/16 catalogue, and it prints whole psig/ft (ValveSheetPanel.jsx:10-11 fmt digits 0). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Valve explorer's \"Your installation, typed\" view takes this design as typed (the gas column of the Associate tier, the pressures, gradients, spacing limits, bellows, port catalogue, gas rate and bottom orifice) and prints every valve's depth, dome, test rack opening, spread,",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/ValveExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on ValveExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.00066 absolute (about 5.0e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -11071,30 +11134,37 @@
   "expected": 1143.8633940736581,
   "tol": 0.00057,
   "rel_tol": 4.983112519844265e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ValveExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/intermediate/m06-the-professional-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/ValveExplorer.jsx:742 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ValveExplorer.jsx:348 (test rack fmt(v, 6))",
+  "display_ref": "src/components/course/panels/gaslift/ValveExplorer.jsx:742 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 7.365815690718591e-08,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/Same ValveExplorer learner-entered design mode; test rack prints fmt(v, 6)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Needs the nitrogen dome corrected to 60 degF with DAK on nitrogen criticals (intermediate m02/l03), an untaught iterative correction. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. The Suite Gas Lift Design Studio is never named by the prompt or any lesson, and cannot run this case anyway: runInstallationDesign (src/utils/production/gasLift.js:285-309) takes the bellows and ports from a fixed valve family (r1 0.31 in2, r15 0.77 in2; packages/engines/engines/production/data/gasLiftValveCatalog.js:41-50), not 0.99 in2 with the 9/32..9/16 catalogue, and it prints whole psig/ft (ValveSheetPanel.jsx:10-11 fmt digits 0). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Valve explorer's \"Your installation, typed\" view takes this design as typed (the gas column of the Associate tier, the pressures, gradients, spacing limits, bellows, port catalogue, gas rate and bottom orifice) and prints every valve's depth, dome, test rack opening, spread,",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/ValveExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on ValveExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.00057 absolute (about 5.0e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -11106,30 +11176,37 @@
   "expected": 45.22330508618348,
   "tol": 2.3e-05,
   "rel_tol": 5.085873302751352e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ValveExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/intermediate/m06-the-professional-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/ValveExplorer.jsx:743 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ValveExplorer.jsx:349 (spread fmt(v, 6))",
+  "display_ref": "src/components/course/panels/gaslift/ValveExplorer.jsx:743 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 8.618347635547252e-08,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/Same ValveExplorer learner-entered design mode; spread prints fmt(v, 6) (half unit 5e-7 < tol 2.3e-5)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Spread depends on R and on the valve 4 pressures at depth from the engine march. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. The Suite Gas Lift Design Studio is never named by the prompt or any lesson, and cannot run this case anyway: runInstallationDesign (src/utils/production/gasLift.js:285-309) takes the bellows and ports from a fixed valve family (r1 0.31 in2, r15 0.77 in2; packages/engines/engines/production/data/gasLiftValveCatalog.js:41-50), not 0.99 in2 with the 9/32..9/16 catalogue, and it prints whole psig/ft (ValveSheetPanel.jsx:10-11 fmt digits 0). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Valve explorer's \"Your installation, typed\" view takes this design as typed (the gas column of the Associate tier, the pressures, gradients, spacing limits, bellows, port catalogue, gas rate and bottom orifice) and prints every valve's depth, dome, test rack opening, spread,",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/ValveExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on ValveExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 2.3e-05 absolute (about 5.1e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -11141,30 +11218,37 @@
   "expected": 2892.4892215328155,
   "tol": 0.0014,
   "rel_tol": 4.840121752495584e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ValveExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/intermediate/m06-the-professional-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/ValveExplorer.jsx:745 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/ValveExplorer.jsx:602 (port ladder q fmt(r.qMscfd, 6))",
+  "display_ref": "src/components/course/panels/gaslift/ValveExplorer.jsx:745 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 4.671846909332089e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/Same ValveExplorer learner-entered design mode, printing each valve's selected port and throughput with fmt(v, 6)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Thornhill-Craver (Cd 0.865 stated in beginner m06/l03) at the engine-computed valve 4 pressures and temperature; the subcritical form and the engine gas constants are not given. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. The Suite Gas Lift Design Studio is never named by the prompt or any lesson, and cannot run this case anyway: runInstallationDesign (src/utils/production/gasLift.js:285-309) takes the bellows and ports from a fixed valve family (r1 0.31 in2, r15 0.77 in2; packages/engines/engines/production/data/gasLiftValveCatalog.js:41-50), not 0.99 in2 with the 9/32..9/16 catalogue, and it prints whole psig/ft (ValveSheetPanel.jsx:10-11 fmt digits 0). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Valve explorer's \"Your installation, typed\" view takes this design as typed (the gas column of the Associate tier, the pressures, gradients, spacing limits, bellows, port catalogue, gas rate and bottom orifice) and prints every valve's depth, dome, test rack opening, spread,",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/ValveExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on ValveExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.0014 absolute (about 4.8e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -11176,30 +11260,37 @@
   "expected": 1213.9289535870623,
   "tol": 0.00061,
   "rel_tol": 5.025005773175597e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/UnloadingExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/advanced/m06-the-expert-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/UnloadingExplorer.jsx:812 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/UnloadingExplorer.jsx:184-185 (dome/margins fmt(v, 6)); closingSurfacePressurePsia itself is rendered by no panel",
+  "display_ref": "src/components/course/panels/gaslift/UnloadingExplorer.jsx:812 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 4.1293765207228716e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/UnloadingExplorer.jsx: add a learner-entered design mode (same inputs as the ValveExplorer mode) and a closing surface pressure column per valve with fmt(v, 6)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Dome at depth taken back up the gas column (advanced m01/l03); needs the full design. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. The Suite Gas Lift Design Studio is never named by the prompt or any lesson, and cannot run this case anyway: runInstallationDesign (src/utils/production/gasLift.js:285-309) takes the bellows and ports from a fixed valve family (r1 0.31 in2, r15 0.77 in2; packages/engines/engines/production/data/gasLiftValveCatalog.js:41-50), not 0.99 in2 with the 9/32..9/16 catalogue, and it prints whole psig/ft (ValveSheetPanel.jsx:10-11 fmt digits 0). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Unloading explorer's \"Your well and traverse, typed\" view takes the installation and this traverse as typed, with its fine and coarse row counts and curve samples, and prints the closing surface pressures, both crossings and the operating injection line to at least the preci",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/UnloadingExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on UnloadingExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.00061 absolute (about 5.0e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -11211,30 +11302,37 @@
   "expected": 1121.4580042974942,
   "tol": 0.00056,
   "rel_tol": 4.993499514507422e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/UnloadingExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/advanced/m06-the-expert-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/UnloadingExplorer.jsx:812 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/UnloadingExplorer.jsx:184-185 (fmt 6); no panel renders closingSurfacePressurePsia",
+  "display_ref": "src/components/course/panels/gaslift/UnloadingExplorer.jsx:812 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 2.974941253341967e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/Same UnloadingExplorer learner-entered design mode, closing surface pressure column with fmt(v, 6)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "As valve 1; sits within one psi of the 1121.6 psia ladder step by design. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. The Suite Gas Lift Design Studio is never named by the prompt or any lesson, and cannot run this case anyway: runInstallationDesign (src/utils/production/gasLift.js:285-309) takes the bellows and ports from a fixed valve family (r1 0.31 in2, r15 0.77 in2; packages/engines/engines/production/data/gasLiftValveCatalog.js:41-50), not 0.99 in2 with the 9/32..9/16 catalogue, and it prints whole psig/ft (ValveSheetPanel.jsx:10-11 fmt digits 0). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Unloading explorer's \"Your well and traverse, typed\" view takes the installation and this traverse as typed, with its fine and coarse row counts and curve samples, and prints the closing surface pressures, both crossings and the operating injection line to at least the preci",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/UnloadingExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on UnloadingExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.00056 absolute (about 5.0e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -11246,30 +11344,37 @@
   "expected": 9139.524034378974,
   "tol": 0.0046,
   "rel_tol": 5.03308485507207e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/UnloadingExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/advanced/m06-the-expert-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/UnloadingExplorer.jsx:777 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/UnloadingExplorer.jsx:426 (depth fmt(v, 6)), :520/:585 tabulation rows fmt 6",
+  "display_ref": "src/components/course/panels/gaslift/UnloadingExplorer.jsx:777 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 3.789737093029544e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/UnloadingExplorer.jsx injection point view: accept a learner-entered analytic traverse (pwh, top and bottom gradients, packer depth, row count) plus kickoff, sg, geotherm, transfer differential and curve samples, and print depth/pInj with fmt(v, 6)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Chord crossing of a 401-row traverse against a 64-sample injection curve (advanced m03-m04); each curve sample is a DAK march. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. The Suite Gas Lift Design Studio is never named by the prompt or any lesson, and cannot run this case anyway: runInstallationDesign (src/utils/production/gasLift.js:285-309) takes the bellows and ports from a fixed valve family (r1 0.31 in2, r15 0.77 in2; packages/engines/engines/production/data/gasLiftValveCatalog.js:41-50), not 0.99 in2 with the 9/32..9/16 catalogue, and it prints whole psig/ft (ValveSheetPanel.jsx:10-11 fmt digits 0). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Unloading explorer's \"Your well and traverse, typed\" view takes the installation and this traverse as typed, with its fine and coarse row counts and curve samples, and prints the closing surface pressures, both crossings and the operating injection line to at least the preci",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/UnloadingExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on UnloadingExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.0046 absolute (about 5.0e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -11281,30 +11386,37 @@
   "expected": 1573.281485043544,
   "tol": 0.00079,
   "rel_tol": 5.0213519164254e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/UnloadingExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/advanced/m06-the-expert-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/UnloadingExplorer.jsx:778 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/UnloadingExplorer.jsx:427 (fmt(v, 6))",
+  "display_ref": "src/components/course/panels/gaslift/UnloadingExplorer.jsx:778 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 4.354410521045793e-08,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/Same UnloadingExplorer learner-entered traverse mode, pInj with fmt(v, 6)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Injection pressure at the crossing; the free check (field 4 - 58.5 = traverse at field 3) is exact only once the depth is known. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. The Suite Gas Lift Design Studio is never named by the prompt or any lesson, and cannot run this case anyway: runInstallationDesign (src/utils/production/gasLift.js:285-309) takes the bellows and ports from a fixed valve family (r1 0.31 in2, r15 0.77 in2; packages/engines/engines/production/data/gasLiftValveCatalog.js:41-50), not 0.99 in2 with the 9/32..9/16 catalogue, and it prints whole psig/ft (ValveSheetPanel.jsx:10-11 fmt digits 0). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Unloading explorer's \"Your well and traverse, typed\" view takes the installation and this traverse as typed, with its fine and coarse row counts and curve samples, and prints the closing surface pressures, both crossings and the operating injection line to at least the preci",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/UnloadingExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on UnloadingExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.00079 absolute (about 5.0e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -11316,30 +11428,37 @@
   "expected": 9113.00140054971,
   "tol": 0.0046,
   "rel_tol": 5.047733230593513e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/UnloadingExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/advanced/m06-the-expert-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/UnloadingExplorer.jsx:777 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/UnloadingExplorer.jsx:520 (tabulation rows fmt(r.depthFt, 6))",
+  "display_ref": "src/components/course/panels/gaslift/UnloadingExplorer.jsx:777 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 4.502890078583732e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/Same UnloadingExplorer learner-entered traverse mode with a row-count input (7), depth with fmt(v, 6)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Same crossing on 7 rows. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. The Suite Gas Lift Design Studio is never named by the prompt or any lesson, and cannot run this case anyway: runInstallationDesign (src/utils/production/gasLift.js:285-309) takes the bellows and ports from a fixed valve family (r1 0.31 in2, r15 0.77 in2; packages/engines/engines/production/data/gasLiftValveCatalog.js:41-50), not 0.99 in2 with the 9/32..9/16 catalogue, and it prints whole psig/ft (ValveSheetPanel.jsx:10-11 fmt digits 0). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Unloading explorer's \"Your well and traverse, typed\" view takes the installation and this traverse as typed, with its fine and coarse row counts and curve samples, and prints the closing surface pressures, both crossings and the operating injection line to at least the preci",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/UnloadingExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on UnloadingExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.0046 absolute (about 5.0e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
@@ -11351,30 +11470,37 @@
   "expected": 1459.3240954891764,
   "tol": 0.00073,
   "rel_tol": 5.00231581357737e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/UnloadingExplorer.jsx (teaching cases only); /root/wt-b5-nextgen/src/content/courses/gaslift/advanced/m06-the-expert-reading/l02-working-the-capstone.md",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/gaslift/UnloadingExplorer.jsx:790 (typed mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/UnloadingExplorer.jsx:141 (injection at depth fmt(v, 6))",
+  "display_ref": "src/components/course/panels/gaslift/UnloadingExplorer.jsx:790 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 4.891765001957538e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/gaslift/Same UnloadingExplorer learner-entered design mode, reading the design's own 41-sample injection curve (driven from the operating pressure) at an entered depth, fmt(v, 6)"
-  },
-  "owner_decision": true,
-  "recommendation": "Display fix: give the tier's panel a learner-entered case mode (inputs, not a capstone preset, so panelCapstoneGuard stays green) at six or more decimals. A tolerance change cannot help because no route prints the value at any precision. If the owner prefers not to extend the panels, the fallback is a redesign of the tier onto quantities the panels can read, which moves every graded value.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "designGasLift injectionCurve at 41 internal samples from 1178.3 psia, read at field 3. Every gaslift panel is a SelectField over published/teaching cases only (ColumnExplorer.jsx:65,177,293,451; ValveExplorer.jsx:80; UnloadingExplorer.jsx:80,240) with no numeric inputs, and panelCapstoneGuard.test.js forbids the okpara* readers, so no panel can be set to OKPARA-9. The Suite Gas Lift Design Studio is never named by the prompt or any lesson, and cannot run this case anyway: runInstallationDesign (src/utils/production/gasLift.js:285-309) takes the bellows and ports from a fixed valve family (r1 0.31 in2, r15 0.77 in2; packages/engines/engines/production/data/gasLiftValveCatalog.js:41-50), not 0.99 in2 with the 9/32..9/16 catalogue, and it prints whole psig/ft (ValveSheetPanel.jsx:10-11 fmt digits 0). ",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261027b_w4_gaslift.sql",
+   "wave": "w4b",
+   "prompt": "On the course panel, the Unloading explorer's \"Your well and traverse, typed\" view takes the installation and this traverse as typed, with its fine and coarse row counts and curve samples, and prints the closing surface pressures, both crossings and the operating injection line to at least the preci",
+   "case_mode": {
+    "panel": "src/components/course/panels/gaslift/UnloadingExplorer.jsx",
+    "mode": "typed",
+    "test": "src/components/course/panels/gaslift/yourCase.test.js"
+   }
+  },
+  "evidence": "A typed mode on UnloadingExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses.",
   "notes": "Continuous value, tol 0.00073 absolute (about 5.0e-07 relative, so roughly seven significant figures needed); no prompt precision stated. Probe: no panel number within tol of this answer in any state (closest 0.1%-band near-misses are teaching values, e.g. UnloadingExplorer 1,214.7 psia vs valve1 closing; not leaks)."
  },
  {
