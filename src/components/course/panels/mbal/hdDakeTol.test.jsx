@@ -29,11 +29,12 @@ import * as L from './tankLab';
 const OPEN = { on: false, n: 0, set: { 1: 'dake', 3: 'finite' } };
 vi.mock('react', async (orig) => {
   const R = await orig();
-  const useState = (init) => {
-    if (!OPEN.on) return R.useState(init);
+  const opening = (init) => {
+    if (!OPEN.on) return init;
     OPEN.n += 1;
-    return R.useState(OPEN.n in OPEN.set ? OPEN.set[OPEN.n] : init);
+    return OPEN.n in OPEN.set ? OPEN.set[OPEN.n] : init;
   };
+  const useState = (init) => R.useState(opening(init));
   return { ...R, default: { ...R, useState }, useState };
 });
 const { default: TankExplorer } = await import('./TankExplorer.jsx');
