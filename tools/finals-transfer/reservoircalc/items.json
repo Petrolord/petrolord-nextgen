@@ -1,0 +1,983 @@
+{
+ "course": "reservoircalc",
+ "migration": "20261029_w6_reservoircalc.sql",
+ "case": {
+  "name": "UMUOJI",
+  "markers": [
+   "UMUOJI",
+   "Umuoji-1",
+   "Umuoji-2",
+   "Umuoji-3",
+   "Umuoji-4",
+   "Umuoji-5"
+  ],
+  "summary": "Five wells on a 50 m grid with a 600 m extrapolation limit and a 2120 m contact; a sealing fault at 1600 m; five well porosities that improve downdip, so the trend model removes barrels. The crest at Umuoji-2 is base limited."
+ },
+ "literals_ok": {},
+ "tiers": {
+  "beginner": [
+   {
+    "ord": 29,
+    "replaces": "f3a8dbe3730e475da4d1b7b8e665b6d8",
+    "prompt": "UMUOJI is gridded at a 50 m cell, so each node stands for 2500 square metres. The mask leaves {{bothLive}} live nodes and the 2120 m contact leaves {{b_cells}} oil bearing cells. What is the oil area?",
+    "correct": "{{b_areaKm2}} square kilometres, from the {{b_cells}} oil bearing cells at 2500 square metres each",
+    "distractors": [
+     "{{b_areaKm2Live}} square kilometres, from all {{bothLive}} live nodes, since each of them carries a mapped top",
+     "{{b_areaKm2WrongCell}} square kilometres, taking each cell as 100 m by 100 m as on a standard grid",
+     "{{b_areaKm2Dry}} square kilometres, the mapped ground left once the oil cells are taken out"
+    ],
+    "explanation": "Oil area is oil bearing cells times cell area: {{b_cells}} times 2500 square metres is {{b_areaKm2}} square kilometres. The other {{b_dryLive}} live nodes have their top below 2120 m.",
+    "why_wrong": [
+     "counts live nodes as oil, though 69 of them sit below the contact",
+     "uses the cell area of a 100 m grid on a 50 m grid",
+     "is the dry live ground, the complement of the oil area"
+    ],
+    "rests_on": [
+     "b_areaKm2",
+     "b_cells",
+     "bothLive"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 32,
+    "replaces": "a52c2317604ae3799bb62bbaf518b14f",
+    "prompt": "On UMUOJI the mapped crest is 2098 m, exactly the Umuoji-2 top pick, and BASE is 2118 m there. At a 2120 m contact the engine reports a maximum oil column of {{b_maxCol}} m. Why is it not 2120 minus 2098, which is {{b_contactMinusCrest}} m?",
+    "correct": "The crest is base limited, so its column is {{b_crestCol}} m; a nearby node with a deeper base is taller",
+    "distractors": [
+     "Thin plate spline overshoot pulls the mapped crest below the pick, which removes some column",
+     "The 600 m extrapolation limit clips the crest node, so the maximum is read at the next live node",
+     "The engine measures columns from BASE upward, and BASE at the crest is deeper than the contact"
+    ],
+    "explanation": "The rule is column equals min(base, contact) minus top. At the crest min(2118, 2120) is 2118, giving {{b_crestCol}} m, while a node at ({{b_maxAtX}}, {{b_maxAtY}}) with its top at {{b_maxAtTop}} m and base below 2120 m carries {{b_maxCol}} m.",
+    "why_wrong": [
+     "on UMUOJI the mapped crest equals the pick, 2098 m, so there is no overshoot",
+     "the crest sits at a well, so it is live whatever the limit",
+     "the column is the shallower of base and contact minus the top; BASE at the crest is 2118 m, above the contact"
+    ],
+    "rests_on": [
+     "b_maxCol",
+     "b_crestCol",
+     "b_maxAtTop",
+     "baseMin",
+     "topMin"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 28,
+    "replaces": "587af4cdd34de94fa2355a70131558e9",
+    "prompt": "At the 2120 m contact, how many of the {{b_cells}} UMUOJI oil bearing cells are base limited, filled with oil from top to base?",
+    "correct": "{{b_baseLimited}}, the few crestal cells whose mapped BASE lies above 2120 m",
+    "distractors": [
+     "None, because a contact below the crest always limits every column",
+     "{{b_baseLimitedDeep}}, which is the count the engine reports at 2125 m",
+     "{{b_contactLimited}}, every cell whose top lies above 2120 m"
+    ],
+    "explanation": "A cell is base limited when its BASE lies above the contact. The shallowest mapped BASE is {{baseMin}} m, so at 2120 m {{b_baseLimited}} crestal cells are full and the other {{b_contactLimited}} are contact limited.",
+    "why_wrong": [
+     "a cell is base limited whenever its base is shallower than the contact, and UMUOJI has four at 2120 m",
+     "is the count at the deeper 2125 m contact",
+     "is the contact limited count, the complement"
+    ],
+    "rests_on": [
+     "b_baseLimited",
+     "b_contactLimited",
+     "baseMin"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 6,
+    "replaces": "c2bb8c3c02a65804ef0449f85790cb6c",
+    "prompt": "Above which contact depth would every oil bearing cell on UMUOJI be contact limited, so that BASE plays no part in the booking?",
+    "correct": "{{baseMin}} m, the shallowest mapped BASE, which is the Umuoji-2 base pick",
+    "distractors": [
+     "{{topMin}} m, the mapped crest of the top surface at Umuoji-2",
+     "2131 m, the Umuoji-1 base pick, the first base deeper than the contact",
+     "{{baseMax}} m, the deepest mapped value of the base surface"
+    ],
+    "explanation": "The base starts to cap columns once the contact passes below the shallowest mapped BASE. On UMUOJI that is {{baseMin}} m, which is why 2120 m already has {{b_baseLimited}} base limited cells.",
+    "why_wrong": [
+     "is the crest of TOP; a contact there holds no oil at all",
+     "is one well pick; the grid is shallower at Umuoji-2",
+     "is the depth below which every cell would be base limited"
+    ],
+    "rests_on": [
+     "baseMin",
+     "topMin",
+     "baseMax"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 16,
+    "replaces": "531df524e9b4a3d82333116ec48e671d",
+    "prompt": "The UMUOJI gross rock volume at 2120 m is {{b_grv}} million m3. With NTG 0.75, porosity 0.21, Sw 0.30, Bo 1.35 and 6.2898 stb per m3, what STOIIP does the chain give?",
+    "correct": "{{b_stoiip}} MMstb in place",
+    "distractors": [
+     "{{b_stoiipSwNotSo}} MMstb, times Sw",
+     "{{b_stoiipTimesBo}} MMstb, times Bo",
+     "{{b_hcpvOverBo}} MMstb, still in m3"
+    ],
+    "explanation": "STOIIP is GRV times 0.75 times 0.21 times 0.70, divided by 1.35 and times 6.2898, which is {{b_stoiip}} MMstb. Multiplying by Sw instead of 0.70 gives {{b_stoiipSwNotSo}}.",
+    "why_wrong": [
+     "books the connate water: multiply by 1 minus Sw, which is 0.70",
+     "Bo converts reservoir to stock tank volume, so the chain divides by it",
+     "drops the 6.2898 barrel conversion and reports stock tank m3 as barrels"
+    ],
+    "rests_on": [
+     "b_stoiip",
+     "b_grv"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 24,
+    "replaces": "3a2e9f5826f6008e86e76cb7de8615a9",
+    "prompt": "Run the mean column check on UMUOJI: {{b_grv}} million m3 of gross rock over {{b_cells}} oil bearing cells of a 50 m grid. What mean oil column comes back?",
+    "correct": "{{b_meanCol}} m, which sits sensibly below the {{b_maxCol}} m maximum",
+    "distractors": [
+     "{{b_meanColWrongArea}} m, dividing by 10000 square metres a cell",
+     "{{b_meanColLive}} m, spreading the rock over all {{bothLive}} live nodes",
+     "{{b_maxCol}} m, since the check returns the tallest column in the field"
+    ],
+    "explanation": "GRV over cells times 2500 square metres gives {{b_meanCol}} m. A result four times smaller, {{b_meanColWrongArea}} m, is the signature of the wrong cell area.",
+    "why_wrong": [
+     "uses a 100 m cell area on a 50 m grid, a factor of four",
+     "spreads the volume over live nodes that hold no oil",
+     "the division returns the mean and never the maximum"
+    ],
+    "rests_on": [
+     "b_meanCol",
+     "b_grv",
+     "b_cells"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 39,
+    "replaces": "63c588adfd70d8861dddccc5e91ac05f",
+    "prompt": "A UMUOJI summary gives a gross average porosity of {{b_grossPhi}} over the whole interval, shales included, and the gross rock volume is {{b_grv}} million m3. What pore volume follows from those two figures?",
+    "correct": "{{b_pore}} million m3, identical to net rock times 0.21",
+    "distractors": [
+     "{{b_poreGrossNet}} million m3, gross rock times the net porosity of 0.21",
+     "{{b_poreNetGross}} million m3, net rock times the gross average, applying NTG twice",
+     "{{b_stoiip}} million m3, the booked oil, since the pore space is the oil"
+    ],
+    "explanation": "A gross average porosity belongs with gross rock: {{b_grv}} times {{b_grossPhi}} gives {{b_pore}} million m3, identical to net times 0.21. Mixing the pairings gives {{b_poreGrossNet}} or {{b_poreNetGross}}.",
+    "why_wrong": [
+     "credits the shales with reservoir porosity",
+     "applies the NTG dilution twice, once in the net volume and once inside the average",
+     "is the STOIIP in MMstb, a different quantity in a different unit"
+    ],
+    "rests_on": [
+     "b_pore",
+     "b_grossPhi",
+     "b_poreGrossNet",
+     "b_poreNetGross"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 40,
+    "replaces": "c6ca30420035d61c79409245a09aebb8",
+    "prompt": "The UMUOJI petrophysicist revises Sw from 0.30 to 0.40, a third higher in relative terms, and nothing else changes. What happens to the {{b_stoiip}} MMstb booking?",
+    "correct": "It falls {{b_pctSw36Abs}} percent to {{b_stoiipSw36}} MMstb, since 1 minus Sw drops from 0.70 to 0.60",
+    "distractors": [
+     "It falls {{b_pctSwRel}} percent, one for one with the relative change in Sw itself",
+     "It rises {{b_pctSw36Abs}} percent, as more water supports the oil column",
+     "It falls {{b_pctBo15Abs}} percent, which is the same leverage as a porosity error"
+    ],
+    "explanation": "The factor is 1 minus Sw: 0.60 over 0.70 is a fall of {{b_pctSw36Abs}} percent, to {{b_stoiipSw36}} MMstb. The damping ratio Sw over 1 minus Sw is below one at 0.30.",
+    "why_wrong": [
+     "the chain multiplies by 1 minus Sw, which moves by less than Sw does",
+     "more water leaves less oil, so the booking falls",
+     "that is the leverage of the Bo revision, a different property"
+    ],
+    "rests_on": [
+     "b_stoiipSw36",
+     "b_pctSw36"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 22,
+    "replaces": "9c824b832e791136d17defe4e9ea19b4",
+    "prompt": "A new PVT study on UMUOJI puts Bo at 1.45 instead of 1.35. What happens to the {{b_stoiip}} MMstb booking?",
+    "correct": "It falls {{b_pctBo15Abs}} percent to {{b_stoiipBo15}} MMstb, because the chain always divides by Bo",
+    "distractors": [
+     "It rises {{b_pctBo15Up}} percent, since a larger Bo means more oil in the ground",
+     "It falls {{b_pctBo15Up}} percent, the relative rise in Bo carried straight through",
+     "It is unchanged, because Bo acts only on the reserves and never on STOIIP"
+    ],
+    "explanation": "STOIIP is HCPV over Bo, so it scales by 1.35 over 1.45, which is a fall of {{b_pctBo15Abs}} percent to {{b_stoiipBo15}} MMstb.",
+    "why_wrong": [
+     "more shrinkage means fewer stock tank barrels from the same HCPV",
+     "the booking scales by 1.35 over 1.45, a smaller fall",
+     "STOIIP is HCPV divided by Bo, so Bo moves it directly"
+    ],
+    "rests_on": [
+     "b_stoiipBo15",
+     "b_pctBo15"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 8,
+    "replaces": "2783935427cfaa8093fc522b6daedc99",
+    "prompt": "UMUOJI books {{b_stoiipShallow}} MMstb at 2115 m and {{b_stoiipDeep}} MMstb at 2125 m. Their average is {{b_midOfEnds}} MMstb. What does the engine give at 2120 m?",
+    "correct": "{{b_stoiip}} MMstb, which lies below the average of the two ends",
+    "distractors": [
+     "{{b_midOfEnds}} MMstb, since the volume grows linearly with the contact depth",
+     "{{b_stepUp}} MMstb, the barrels gained from 2120 m down to 2125 m",
+     "{{b_stoiipPhi10}} MMstb, the booking with porosity raised by a tenth"
+    ],
+    "explanation": "Area and column both grow as the contact deepens, so the curve bends upward and the true mid case, {{b_stoiip}} MMstb, sits below {{b_midOfEnds}}. The step up, {{b_stepUp}}, is larger than the step down, {{b_stepDown}}.",
+    "why_wrong": [
+     "the response is not linear, so a mid case cannot be interpolated",
+     "is the step up between two contacts and is no booking",
+     "is a property case at 2120 m and is no base case"
+    ],
+    "rests_on": [
+     "b_stoiip",
+     "b_midOfEnds",
+     "b_stepUp",
+     "b_stepDown"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 17,
+    "replaces": "9e6cc8850012f2d50cb89c0ac7a37e97",
+    "prompt": "At the 2120 m contact, which statement about the five UMUOJI wells holds?",
+    "correct": "Umuoji-3 has the thickest sand, {{w3_sand}} m, but only {{w3_col}} m of oil column above 2120 m",
+    "distractors": [
+     "Umuoji-2 carries {{b_contactMinusCrest}} m of oil column, the contact minus its top",
+     "Umuoji-1 carries {{w1_sand}} m of oil column, its full sand thickness between top and base",
+     "Umuoji-5, with {{w5_sand}} m of sand, holds the most oil because the sand is thickest there"
+    ],
+    "explanation": "Column is min(base, contact) minus top: {{w1_col}}, {{w2_col}} and {{w3_col}} m at Umuoji-1 to 3, and none at Umuoji-4 and 5, whose tops at 2124 and 2131 m lie below 2120 m. Sand thickness ranks the wells quite differently.",
+    "why_wrong": [
+     "the column there stops at the base, 2118 m, so it is 20 m",
+     "its base at 2131 m lies below the contact, so the column is 15 m",
+     "its top at 2131 m is below the contact, so it is dry"
+    ],
+    "rests_on": [
+     "w3_sand",
+     "w3_col",
+     "w2_col",
+     "w1_col"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 36,
+    "replaces": "c8bf88e09adb0ec953aeedac73ace120",
+    "prompt": "On UMUOJI, raising porosity by a tenth, from 0.21 to 0.231, adds {{b_phi10Gain}} MMstb. Which contact change adds more barrels than that?",
+    "correct": "Deepening 5 m to 2125 m, which adds {{b_stepUp}} MMstb, over four times as much",
+    "distractors": [
+     "None of them, because porosity and the contact each enter the chain once as a factor",
+     "Only a deepening of 10 m or more, since 5 m of contact is worth about half a tenth of porosity",
+     "A 5 m rise to 2115 m, which adds {{b_stepDown}} MMstb by cutting the water leg"
+    ],
+    "explanation": "Porosity scales the booking by the same tenth, {{b_phi10Gain}} MMstb, while 5 m of contact adds cells and column at once: {{b_stepUp}} MMstb. The contact is where to spend effort first.",
+    "why_wrong": [
+     "the contact changes which cells hold oil as well as their columns",
+     "5 m of contact already adds more than four times the porosity gain",
+     "raising the contact removes oil"
+    ],
+    "rests_on": [
+     "b_phi10Gain",
+     "b_stepUp"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 10,
+    "replaces": "ca38e45a7cf67336d49d5da390666183",
+    "prompt": "The UMUOJI well columns at 2120 m, {{w1_col}}, {{w2_col}} and {{w3_col}} m, were all computed from that assumed contact. What do they tell you about where the contact is?",
+    "correct": "Nothing, since they are consequences of the assumed 2120 m and cannot support it",
+    "distractors": [
+     "That the contact is well placed, because three of the five wells find oil above it and two are dry",
+     "That the contact lies at 2118 m, where the Umuoji-2 base caps the column",
+     "That the contact is below 2131 m, since Umuoji-5 has a mapped top there"
+    ],
+    "explanation": "Each column is 2120 m minus a top, so the columns restate the assumption. Evidence for a contact comes from logs, pressure gradients, samples or a flat spot.",
+    "why_wrong": [
+     "counting wells above an assumed depth is circular",
+     "a base limited well says oil fills the sand there and nothing about the contact",
+     "Umuoji-5 is dry at the assumed contact, so it cannot show the contact is deeper"
+    ],
+    "rests_on": [
+     "w1_col",
+     "w2_col",
+     "w3_col"
+    ],
+    "lesson": "beginner/m05-the-contact/l03",
+    "answer_index": 1
+   },
+   {
+    "ord": 31,
+    "replaces": "26bf9b8a87e8ff9d893f868d75cdb294",
+    "prompt": "Deepening the UMUOJI contact from 2120 m to 2125 m lifts the maximum oil column from {{b_maxCol}} m to only {{b_maxColDeep}} m. Why is the rise smaller than 5 m?",
+    "correct": "More crestal cells become base limited ({{b_baseLimitedDeep}} at 2125 m), so the tallest column stops growing",
+    "distractors": [
+     "New cells joining at the flanks pull the maximum down, since they carry thin columns",
+     "The 600 m extrapolation limit removes the deepest nodes once the contact moves down",
+     "Thin plate spline overshoot at the crest shrinks as the contact moves past it"
+    ],
+    "explanation": "Near the crest BASE sits at or just below 2118 m, so columns there are capped by the rock. At 2125 m, {{b_baseLimitedDeep}} cells are base limited against {{b_baseLimited}} at 2120 m.",
+    "why_wrong": [
+     "a maximum is one node; thin new cells cannot lower it",
+     "the mask depends on well positions, not on the contact",
+     "the mapped crest equals the Umuoji-2 pick and does not move with the contact"
+    ],
+    "rests_on": [
+     "b_maxColDeep",
+     "b_baseLimitedDeep"
+    ],
+    "answer_index": 1
+   }
+  ],
+  "intermediate": [
+   {
+    "ord": 35,
+    "replaces": "bda76b5fb374fc64addeed29e0b87c02",
+    "prompt": "The UMUOJI frame starts at an easting of 800 m with 50 m node spacing, and the sealing fault runs north to south at 1600 m. A node is west only if its easting is strictly less than the fault. What happens to the oil cells on the fault easting?",
+    "correct": "All {{i_boundaryCells}} go to the east block, because 1600 m is not strictly less than 1600 m",
+    "distractors": [
+     "All {{i_boundaryCells}} go to the west block, since the fault itself belongs to the upthrown side",
+     "They are split, half to each block, since the fault runs through the cell centres",
+     "They drop out of the booking, because a cell on the fault belongs to neither block"
+    ],
+    "explanation": "(1600 minus 800) over 50 is 16, so the fault sits on column {{i_faultCol}}. Its {{i_boundaryCells}} oil cells fail the strict test and go east.",
+    "why_wrong": [
+     "strictly less sends the column east",
+     "a label is one integer per node, so a cell cannot be split",
+     "every node carries a label and the total never loses cells"
+    ],
+    "rests_on": [
+     "i_boundaryCells",
+     "i_faultCol"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 8,
+    "replaces": "7444b3ad177ccdf1109f4e3fc6ae1db4",
+    "prompt": "On UMUOJI at 2120 m, how much STOIIP does the tie break on the fault column decide, and where does it go if the rule is changed to less than or equal?",
+    "correct": "{{i_conventionWorth}} MMstb, which moves from the east to the west",
+    "distractors": [
+     "{{i_boundaryGrv}} MMstb, moving from east to west with the column",
+     "{{i_stepM50}} MMstb, moving from west to east with the column",
+     "None, because relabelling a column cannot change a booking"
+    ],
+    "explanation": "Less than or equal gives the west {{i_westCellsLe}} cells and {{i_westStoiipLe}} MMstb against {{i_westCells}} and {{i_westStoiip}}: the column is worth {{i_conventionWorth}} MMstb.",
+    "why_wrong": [
+     "is the column gross rock volume in million m3, read as barrels",
+     "is what the column at 1550 m carries, one step west",
+     "the field total is unchanged; each block's booking moves"
+    ],
+    "rests_on": [
+     "i_conventionWorth",
+     "i_westStoiipLe",
+     "i_westStoiip"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 6,
+    "replaces": "a7385309dbc63f9ef110f99d06dd6abf",
+    "prompt": "Split at the 1600 m fault, UMUOJI puts {{i_westCells}} oil cells west and {{i_eastCells}} east. How do the barrels split, and why?",
+    "correct": "West {{i_westBarrelShare}} percent against {{i_westCellShare}} percent of cells, because its mean column is taller",
+    "distractors": [
+     "West {{i_westCellShare}} percent of barrels as of cells, since both blocks share one set of properties",
+     "East {{i_westBarrelShare}} percent of barrels, since the east block holds the crest at Umuoji-2",
+     "West {{i_eastBarrelShare}} percent of barrels, because its cells sit further from the contact"
+    ],
+    "explanation": "Barrels follow area times column. The west mean column is {{i_westMeanCol}} m against {{i_eastMeanCol}} m east, so {{i_westCellShare}} percent of cells hold {{i_westBarrelShare}} percent of the oil.",
+    "why_wrong": [
+     "same properties do not mean same columns",
+     "the east block holds the crest and still the shorter mean column",
+     "swaps the two shares"
+    ],
+    "rests_on": [
+     "i_westBarrelShare",
+     "i_westCellShare",
+     "i_westMeanCol",
+     "i_eastMeanCol"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 33,
+    "replaces": "0ae1750c1e7a787a43dfb2aac06011fb",
+    "prompt": "UMUOJI's east block has {{i_cellRatio}} times the west block's cell count and {{i_colRatio}} times its mean oil column. What is the east to west ratio of STOIIP?",
+    "correct": "{{i_barrelRatio}}, the product of the two ratios",
+    "distractors": [
+     "{{i_cellRatio}}, the cell ratio, since barrels follow area",
+     "{{i_colRatio}}, the column ratio, since barrels follow column",
+     "{{i_barrelRatioInv}}, the product taken west over east"
+    ],
+    "explanation": "Volume is cells times cell area times mean column, and the properties are equal in both blocks, so the STOIIP ratio is {{i_cellRatio}} times {{i_colRatio}}, which is {{i_barrelRatio}}.",
+    "why_wrong": [
+     "ignores the column difference",
+     "ignores the area difference",
+     "inverts the requested ratio"
+    ],
+    "rests_on": [
+     "i_barrelRatio",
+     "i_cellRatio",
+     "i_colRatio"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 22,
+    "replaces": "59e605579f36f25159ba1edef7996573",
+    "prompt": "With the fault at 1600 m and both blocks at 2120 m, which UMUOJI block holds the crest and which holds the tallest oil column?",
+    "correct": "East holds the crest at Umuoji-2; west holds the tallest oil column, {{i_westMaxCol}} m",
+    "distractors": [
+     "The east block holds both, since the tallest column is always found at the crest node",
+     "The west block holds both the crest and the tallest column, {{i_westMaxCol}} m, of the field",
+     "The east block holds both, with the tallest column at {{i_eastMaxCol}} m near Umuoji-2"
+    ],
+    "explanation": "The crest node at Umuoji-2 is capped at 20 m by BASE at 2118 m, so the tallest column, {{i_westMaxCol}} m, is at a node 50 m west of the fault. The east block maximum is {{i_eastMaxCol}} m.",
+    "why_wrong": [
+     "a base limited crest has a shorter column than its neighbour",
+     "Umuoji-2 at 1700 m lies east of the fault",
+     "the east maximum is shorter than the west maximum"
+    ],
+    "rests_on": [
+     "i_westMaxCol",
+     "i_eastMaxCol"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 27,
+    "replaces": "85764528068e0c8c8aa1763e8fb0b8eb",
+    "prompt": "On UMUOJI the mean oil column is {{i_westMeanOverMax}} of the block maximum in the west block and {{i_eastMeanOverMax}} in the east. What does that say about a single well in each block?",
+    "correct": "An east well placed away from the thick area finds far less than the block maximum suggests",
+    "distractors": [
+     "The east block is the more uniform, so any east location finds close to its mean",
+     "Both blocks are equally uniform, since both ratios sit well below one",
+     "The ratio measures the volume, so the east block holds more oil per cell"
+    ],
+    "explanation": "The east block's mean is {{i_eastMeanOverMax}} of its maximum against {{i_westMeanOverMax}} in the west, so most east cells are thin and a small thick area pulls its maximum up.",
+    "why_wrong": [
+     "a higher ratio means a less uniform block",
+     "the east mean sits much further below its maximum",
+     "the ratio says nothing about volume per cell"
+    ],
+    "rests_on": [
+     "i_westMeanOverMax",
+     "i_eastMeanOverMax"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 31,
+    "replaces": "817eaf0060cecabd6f3fb6f89566fcbd",
+    "prompt": "The UMUOJI east block contact is raised from 2120 m to 2115 m and the west block stays at 2120 m. What does the booking do?",
+    "correct": "East falls to {{i_eastCells2115}} cells and {{i_eastStoiip2115}} MMstb; the west stays at {{i_westStoiip}} MMstb",
+    "distractors": [
+     "The field falls to {{b_stoiipShallow}} MMstb, the single contact booking at 2115 m",
+     "Both blocks fall together, the west to {{i_westStoiipM50}} MMstb with the east",
+     "East falls to {{i_eastCells2115}} cells, and the west gains the barrels it lost"
+    ],
+    "explanation": "Each block is clipped against its own contact, so only the east moves: {{i_eastStoiip2115}} MMstb east, {{i_westStoiip}} west, a sum of {{i_fieldSum2115}}.",
+    "why_wrong": [
+     "that booking moves both contacts; the west kept 2120 m",
+     "the west is clipped against its own contact, which did not move",
+     "blocks are booked independently; nothing transfers"
+    ],
+    "rests_on": [
+     "i_eastStoiip2115",
+     "i_eastCells2115",
+     "i_westStoiip2115"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 20,
+    "replaces": "adb5fee5b24ef0bba170f4c462774eb5",
+    "prompt": "On UMUOJI, Umuoji-4 lies east of the 1600 m fault and is dry with its top at 2124 m. Which east contact case does that observation rule out?",
+    "correct": "2125 m, which would put Umuoji-4 in the oil leg and book {{i_eastStoiip2125}} MMstb east",
+    "distractors": [
+     "2115 m, because Umuoji-2 found oil down to its base at 2118 m",
+     "None, since a dry well says nothing about the contact in its own block",
+     "2120 m, because a dry well in the block means the contact is shallower"
+    ],
+    "explanation": "Water at 2124 m in Umuoji-4 means the east contact lies above 2124 m, so the 2125 m case and its {{i_eastStoiip2125}} MMstb are inconsistent with the well data.",
+    "why_wrong": [
+     "oil at Umuoji-2 is compatible with a shallower contact",
+     "a dry top at 2124 m bounds the contact above 2124 m",
+     "a contact at 2120 m keeps Umuoji-4 dry, so it is allowed"
+    ],
+    "rests_on": [
+     "i_eastStoiip2125"
+    ],
+    "lesson": "intermediate/m05-two-blocks-two-contacts/l03",
+    "answer_index": 1
+   },
+   {
+    "ord": 5,
+    "replaces": "0e7ddf6d677f8e81ed71963119576c2f",
+    "prompt": "The UMUOJI west and east STOIIP add to {{i_fieldSumBase}} MMstb and the field total also prints {{i_totalStoiip}}, but at full precision they differ by {{i_closureDiffExp}} MMstb. What does that difference mean?",
+    "correct": "Nothing is wrong: the total is summed in its own register, and floating point addition is not associative",
+    "distractors": [
+     "A cell has been counted in both blocks, and the difference is that one cell's share of the field booking",
+     "A cell on the fault column has fallen into no block, and the difference is its missing volume",
+     "The two blocks were booked at different contacts, and the difference is the column between them"
+    ],
+    "explanation": "A partition error is thousands of times larger than {{i_closureDiffExp}} MMstb. Agreement to about fifteen significant figures is what a clean partition looks like.",
+    "why_wrong": [
+     "a double count would be of the order of thousands of barrels",
+     "a lost cell would show in the cell count and be vastly larger",
+     "both contacts are 2120 m here"
+    ],
+    "rests_on": [
+     "i_closureDiffExp",
+     "i_totalStoiip"
+    ],
+    "lesson": "intermediate/m03-the-block-volumes/l02",
+    "answer_index": 2
+   },
+   {
+    "ord": 37,
+    "replaces": "02479e611f34b54d64dec3a4a4da50c0",
+    "prompt": "On the UMUOJI frame of {{frameNodes}} nodes, which nodes does the labelling routine give a block label to?",
+    "correct": "All {{frameNodes}}, {{i_label0}} west and {{i_label1}} east, dead nodes included",
+    "distractors": [
+     "Only the {{bothLive}} live nodes, since a dead node has no depth to label",
+     "Only the {{b_cells}} oil bearing cells, {{i_westCells}} west and {{i_eastCells}} east",
+     "All {{frameNodes}}, but {{i_label1}} west and {{i_label0}} east"
+    ],
+    "explanation": "The label depends only on easting: 16 columns of 30 nodes, {{i_label0}}, lie west of 1600 m and {{i_label1}} do not. Liveness and oil are separate tests.",
+    "why_wrong": [
+     "labels are a property of position and cover the frame",
+     "those are the oil cells, a subset of the labelled nodes",
+     "swaps the counts: 16 columns lie strictly west of 1600 m"
+    ],
+    "rests_on": [
+     "i_label0",
+     "i_label1",
+     "frameNodes"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 2,
+    "replaces": "94ed27c360cc4f6c181597284184d558",
+    "prompt": "The UMUOJI arrays run east along a row from the south west corner, with {{nx}} columns, a 50 m spacing and an origin easting of 800 m. What are the array position, easting and block of the node at row {{i_rowEx}}, column {{i_colEx}}, both counted from zero?",
+    "correct": "Position {{i_jEx}}, easting {{i_xEx}} m, east block (label 1)",
+    "distractors": [
+     "Position {{i_jExTransposed}}, counting down the columns first, east block (label 1)",
+     "Position {{i_jEx}}, west block (label 0)",
+     "Position {{i_jExW}}, easting {{i_xExW}} m, west (label 0)"
+    ],
+    "explanation": "j is {{i_rowEx}} times {{nx}} plus {{i_colEx}}, which is {{i_jEx}}; the easting is 800 plus 16 times 50, {{i_xEx}} m, which fails the strict test and goes east.",
+    "why_wrong": [
+     "multiplies the column by the row count; the index is row times columns plus column",
+     "1600 m is not strictly less than the fault, so the node is east",
+     "is column 15, one node west"
+    ],
+    "rests_on": [
+     "i_jEx",
+     "i_xEx",
+     "nx"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 26,
+    "replaces": "7ceed8dfb932de1034c339f7e8657bfe",
+    "prompt": "Remove Umuoji-2, the only east discovery, 100 m east of the UMUOJI fault, and regrid on the same frame. The west block falls from {{i_westCells}} to {{i_noU2WestCells}} cells and from {{i_westStoiip}} to {{i_noU2WestStoiip}} MMstb. What does the fall in the cell count tell you?",
+    "correct": "Umuoji-2 also kept western ground live, so the mask shrank ({{bothLive}} to {{i_noU2Live}} live nodes on the frame)",
+    "distractors": [
+     "Only the depths changed, since removing a well never moves the mapped area of either block on the frame",
+     "The fault moved, because removing a well relabels the nodes around it on the frame",
+     "The contact moved, because the east discovery set the depth of the oil water contact"
+    ],
+    "explanation": "Cell counts move when geometry moves. Umuoji-2 sits at the south edge of the hull, so without it {{i_noU2Live}} nodes stay live and the west loses {{i_noU2WestLossPct}} percent of its booking.",
+    "why_wrong": [
+     "the live count fell as well, so the mask moved",
+     "labels depend on easting only",
+     "both blocks were booked at 2120 m throughout"
+    ],
+    "rests_on": [
+     "i_noU2WestCells",
+     "i_noU2Live",
+     "i_noU2WestLossPct"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 19,
+    "replaces": "41edbcefe8cd0ae6664f4787fbbd80c1",
+    "prompt": "The UMUOJI fault is placed at 1600 m give or take 50 m, one node column. Which block's booking is the more uncertain in relative terms?",
+    "correct": "The east block, about {{i_eastPctUp}} percent up and {{i_eastPctDownAbs}} percent down, being smaller",
+    "distractors": [
+     "The west block, about {{i_westPctUp}} percent up and {{i_westPctDownAbs}} percent down, being larger",
+     "Neither, because each block gains exactly what the other one loses",
+     "The west block, because the fault moves its cells and never the east block's"
+    ],
+    "explanation": "Moving the fault one column moves about {{i_stepM50}} to {{i_conventionWorth}} MMstb, which is {{i_westPctUp}} percent of the west but {{i_eastPctUp}} percent of the smaller east block.",
+    "why_wrong": [
+     "the larger block moves less relative to its size",
+     "equal absolute moves are unequal relative moves",
+     "a moved fault transfers cells both ways"
+    ],
+    "rests_on": [
+     "i_eastPctUp",
+     "i_eastPctDown",
+     "i_westPctUp"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 32,
+    "replaces": "b2a2d9500ac541a0d76dbc5034967820",
+    "prompt": "The UMUOJI sand is {{c_sand34}} m thick at Umuoji-3 and the fault dips 60 degrees. How far apart in map view are the fault traces at top and base, and is a vertical fault defensible on the 50 m grid?",
+    "correct": "About {{i_dipOffset34}} m, under half a cell, so a vertical fault is defensible",
+    "distractors": [
+     "About {{i_dipOffsetTan}} m, over a cell, so the partition must name its surface",
+     "About {{i_dipOffset34}} m, which is over a cell, so a vertical fault is not defensible",
+     "Nothing, since a fault that seals must be vertical to seal the whole sand interval"
+    ],
+    "explanation": "The offset is thickness over tan 60, {{c_sand34}} over 1.732, which is {{i_dipOffset34}} m, less than half the 50 m cell, so a vertical plane misassigns little.",
+    "why_wrong": [
+     "multiplies by the tangent instead of dividing by it",
+     "the offset is under the 50 m cell",
+     "sealing does not require a vertical fault"
+    ],
+    "rests_on": [
+     "i_dipOffset34"
+    ],
+    "answer_index": 1
+   }
+  ],
+  "advanced": [
+   {
+    "ord": 18,
+    "replaces": "246fe3280141247034eaeb4efbe1d222",
+    "prompt": "UMUOJI's five well porosities are 0.19, 0.17, 0.21, 0.24 and 0.22 for Umuoji-1 to Umuoji-5, and a trend plane is fitted to them. At 2120 m, which ordering of the three means holds?",
+    "correct": "Well mean {{a_wellMean}}, above the oil node mean {{a_nodeMeanOil}}, above the volume weighted {{a_colWeighted}}",
+    "distractors": [
+     "Well mean {{a_wellMean}}, below the oil node mean {{a_nodeMeanOil}}, below the volume weighted mean {{a_colWeighted}}",
+     "All three equal {{a_wellMean}}, since a trend plane passes through the centroid of the wells",
+     "Oil node mean {{a_nodeMeanOil}} highest, as oil sits on the best rock"
+    ],
+    "explanation": "The oil sits updip where the plane is poorest, so the node mean falls below the well mean, and the thickest cells carry the poorest rock, so the weighted mean falls again.",
+    "why_wrong": [
+     "UMUOJI's oil sits on the poorer, updip rock, so both steps run down",
+     "passing through the centroid does not make the oil average equal the well average",
+     "the crest carries the poorest modelled rock here"
+    ],
+    "rests_on": [
+     "a_wellMean",
+     "a_nodeMeanOil",
+     "a_colWeighted"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 20,
+    "replaces": "81380587de5ac7a39ce8cdb66d8c3bd4",
+    "prompt": "UMUOJI books {{a_stoiipHanded}} MMstb at the handed out porosity of 0.21, {{a_stoiipWellMean}} MMstb at the well mean and {{a_stoiipTrend}} MMstb with the trend. How does the change of {{a_uplift}} MMstb decompose?",
+    "correct": "{{a_stepConst}} MMstb as the well mean is under 0.21, and {{a_stepSpatial}} MMstb from the spatial model",
+    "distractors": [
+     "{{a_stepSpatial}} MMstb from the well mean being below 0.21, and {{a_stepConst}} MMstb from the spatial model",
+     "All of {{a_uplift}} MMstb from the spatial model, since the well mean is a trend output",
+     "{{a_stepSelect}} MMstb from selection and {{a_stepWeight}} MMstb from the handed out constant"
+    ],
+    "explanation": "Booking at the well mean moves {{a_stepConst}} MMstb with no model; letting porosity vary moves a further {{a_stepSpatial}}. Only the second depends on believing the plane.",
+    "why_wrong": [
+     "swaps the two parts",
+     "the constant step needs no spatial model at all",
+     "mislabels the spatial part as the constant step"
+    ],
+    "rests_on": [
+     "a_stepConst",
+     "a_stepSpatial",
+     "a_uplift"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 29,
+    "replaces": "0ed8083e800ee7c9e0ae53fd941d09b2",
+    "prompt": "On UMUOJI the booking at the oil node mean porosity is {{a_stoiipNodeMean}} MMstb. Split the spatial step of {{a_stepSpatial}} MMstb into its two parts.",
+    "correct": "Selection {{a_stepSelect}} MMstb, then weighting {{a_stepWeight}} MMstb, both removing oil",
+    "distractors": [
+     "Selection {{a_stepWeight}} MMstb, then weighting {{a_stepSelect}} MMstb, both negative",
+     "Selection {{a_stepSelect}} MMstb, then weighting of zero, since weighting only ever adds",
+     "Selection {{a_stepConst}} MMstb, then weighting {{a_stepSelect}} MMstb, from the well mean"
+    ],
+    "explanation": "Well mean to node mean is selection, {{a_stepSelect}} MMstb; node mean to the trend booking is weighting, {{a_stepWeight}}. Both are negative because the oil sits on the poorer rock.",
+    "why_wrong": [
+     "swaps the two parts",
+     "weighting follows the sign of the column to porosity covariance",
+     "the first figure is the constant step before any selection"
+    ],
+    "rests_on": [
+     "a_stepSelect",
+     "a_stepWeight",
+     "a_stoiipNodeMean"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 2,
+    "replaces": "3d6f4f2bb1cbdc953bb76bce8f026125",
+    "prompt": "The UMUOJI trend booking reports net volume {{a_netTrend}} million m3 and pore volume {{a_poreTrend}} million m3. What porosity did the booking use?",
+    "correct": "{{a_effTrend}}, recovered as pore volume over net volume",
+    "distractors": [
+     "{{a_nodeMeanOil}}, the plain mean of the grid over the oil",
+     "{{a_wellMean}}, the mean of the five wells",
+     "0.21, the handed out constant for this field"
+    ],
+    "explanation": "Pore over net is {{a_poreTrend}} over {{a_netTrend}}, which is {{a_effTrend}}, inside the oil grid range of {{a_oilMin}} to {{a_oilMax}}.",
+    "why_wrong": [
+     "a plain mean ignores the column weighting",
+     "is a property of the data, not of the booking",
+     "the trend booking replaced the constant"
+    ],
+    "rests_on": [
+     "a_effTrend",
+     "a_poreTrend",
+     "a_netTrend"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 7,
+    "replaces": "f0a6319339477799b6c4c9503134bb72",
+    "prompt": "Switching UMUOJI from the constant 0.21 to the trend grid, which parts of the chain change, and by what factor?",
+    "correct": "Pore, HCPV and STOIIP all by {{a_ratioTrend}}, while {{a_cellsTrend}} cells, GRV and net stay fixed",
+    "distractors": [
+     "Every row including GRV by {{a_ratioTrend}}, since porosity scales the whole chain",
+     "Only STOIIP by {{a_ratioTrend}}, since HCPV is fixed by Sw 0.30 and Bo 1.35",
+     "Pore by {{a_ratioTrend}} and STOIIP by more, as the Bo division compounds it"
+    ],
+    "explanation": "Porosity enters after net, so {{a_cellsTrend}} cells, {{a_grvTrend}} and {{a_netTrend}} million m3 are unchanged, and pore, HCPV and STOIIP all scale by {{a_ratioTrend}}.",
+    "why_wrong": [
+     "porosity enters after the net volume, so GRV cannot move",
+     "HCPV is pore times 0.70, so it moves with pore",
+     "constants below the pore step preserve ratios"
+    ],
+    "rests_on": [
+     "a_ratioTrend",
+     "a_ratioPore",
+     "a_cellsTrend"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 13,
+    "replaces": "1dce2c0c73bf1a62077f4435d8632af5",
+    "prompt": "The UMUOJI porosity plane has an eastward gradient of {{a_gradXkm}} and a northward gradient of {{a_gradYkm}} per kilometre. What does it claim?",
+    "correct": "Porosity improves toward the north east at {{a_gradKm}} per km, mostly northward",
+    "distractors": [
+     "Porosity improves toward the west at {{a_gradXkm}} per km, with no northward trend",
+     "Porosity improves toward the north east at {{a_gradKm}} per km, mostly eastward",
+     "Porosity improves toward the south west, since the intercept of the plane is its largest value"
+    ],
+    "explanation": "Both coefficients are positive and the northward one is larger; the magnitude is {{a_gradKm}} per km, toward the north east and closer to north.",
+    "why_wrong": [
+     "both gradients are positive, so it rises to the east and north",
+     "the northward gradient is the larger",
+     "the intercept is a fitting parameter far off the field"
+    ],
+    "rests_on": [
+     "a_gradXkm",
+     "a_gradYkm",
+     "a_gradKm"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 22,
+    "replaces": "6ecfeaf7b579786d460354e59252040d",
+    "prompt": "UMUOJI prospect P sits at an easting of 1500 m and a northing of 1300 m, on a grid node. What porosity does the trend model assign there?",
+    "correct": "{{a_phiP}}, the plane evaluated at the node",
+    "distractors": [
+     "{{a_phiPKrige}}, the kriged value at P",
+     "{{a_wellMean}}, the mean of the five wells",
+     "{{a_nodeMeanOil}}, the mean over the oil"
+    ],
+    "explanation": "P sits on a node, so the sampler returns the plane value itself, {{a_phiP}}. It is a global fit evaluated at a point, carrying no local detail.",
+    "why_wrong": [
+     "is the kriged grid with a 1000 m range, not the trend",
+     "is the constant method",
+     "is an average over cells, not the value at P"
+    ],
+    "rests_on": [
+     "a_phiP"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 14,
+    "replaces": "a0c1dacc44dfd508c9a2159c4c37d0bb",
+    "prompt": "Where does the UMUOJI trend plane miss its data by the most?",
+    "correct": "At Umuoji-4, where it gives {{a_trendAt4}} against a measured 0.24",
+    "distractors": [
+     "At Umuoji-2, where it gives {{a_trendAt2}} against a measured 0.17 at the crest",
+     "At Umuoji-3, near the centroid, where it misses by {{a_resTrend3}}",
+     "Nowhere, since least squares honours every well it is fitted to"
+    ],
+    "explanation": "The largest residual is {{a_maxRes}} at Umuoji-4. Umuoji-3 sits near the centroid and is missed by only {{a_resTrend3}}.",
+    "why_wrong": [
+     "misses by less than at Umuoji-4",
+     "is nearly exact there",
+     "five points that are not coplanar have no plane through them"
+    ],
+    "rests_on": [
+     "a_trendAt4",
+     "a_maxRes",
+     "a_maxResWell"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 12,
+    "replaces": "2f1e063b4c616803046e0a297c1bca70",
+    "prompt": "With a spherical variogram of 1000 m range, UMUOJI kriging reproduces four wells exactly but reports {{a_krigeAt5}} at Umuoji-5, which measured 0.22. Why?",
+    "correct": "Umuoji-5 lies between grid rows at 2025 m, and bilinear sampling cuts the kriged peak",
+    "distractors": [
+     "Kriging with a guessed variogram only approximates the data, and Umuoji-5 lies furthest out",
+     "The trend residual leaks into the kriged grid, since kriging starts from the fitted plane",
+     "Umuoji-5 is a dry well, and kriging lowers the weight on wells that hold no oil at all"
+    ],
+    "explanation": "Node rows sit every 50 m from 700 m, so 2025 m falls between rows. A plane samples exactly: the trend grid gives {{a_trendAt5}} there, the plane's own value; the kriged surface bends, giving {{a_krigeAt5}}.",
+    "why_wrong": [
+     "this form of kriging is exact at a data location",
+     "simple kriging here starts from the data mean, not the plane",
+     "kriging weights come from distance, not from oil"
+    ],
+    "rests_on": [
+     "a_krigeAt5",
+     "a_resKrige5",
+     "a_planeAtU5"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 28,
+    "replaces": "3dc8e0caf67d5b94dadcfeec6ac14d27",
+    "prompt": "Across the UMUOJI oil cells, oil column and trend porosity co-vary at {{a_cov}}, and the average column is {{a_meanColOil}} m. By how much does the rock weighted porosity differ from the plain cell average?",
+    "correct": "{{a_covOverMean}}, so the rock weighted figure is lower",
+    "distractors": [
+     "{{a_cov}}, the covariance itself",
+     "Zero, since the gap depends only on the spread of columns",
+     "{{a_corr}}, the correlation of column and porosity"
+    ],
+    "explanation": "The weighted mean equals the plain mean plus cov over mean column: {{a_nodeMeanOil}} plus {{a_covOverMean}} gives {{a_colWeighted}}. A negative covariance gives a negative gap.",
+    "why_wrong": [
+     "must be divided by the mean column",
+     "a non zero covariance gives a non zero gap",
+     "the correlation is dimensionless and is not the gap"
+    ],
+    "rests_on": [
+     "a_covOverMean",
+     "a_cov",
+     "a_meanColOil"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 3,
+    "replaces": "951c76fefecb74619b98675a0c59bee9",
+    "prompt": "UMUOJI books {{a_stoiipWellMean}} MMstb with the constant well mean, {{a_stoiipTrend}} with the trend and {{a_stoiipKrige}} with kriging. What is the choice of method worth?",
+    "correct": "{{a_methodSpread}} MMstb across the three, above the trend's spatial step",
+    "distractors": [
+     "{{a_krigeMinusTrendAbs}} MMstb, the gap between kriging and the trend alone",
+     "{{a_upliftAbs}} MMstb, the trend against the handed out 0.21",
+     "Nothing, since all three methods honour the same five wells"
+    ],
+    "explanation": "The highest and lowest are {{a_stoiipWellMean}} and {{a_stoiipKrige}}, a spread of {{a_methodSpread}} MMstb, larger than the trend's spatial step of {{a_stepSpatialAbs}}.",
+    "why_wrong": [
+     "leaves out the constant method",
+     "is the whole property model against a different baseline",
+     "the methods book different volumes from the same data"
+    ],
+    "rests_on": [
+     "a_methodSpread",
+     "a_stoiipKrige",
+     "a_stoiipWellMean"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 6,
+    "replaces": "de4f36509a4ea2ed9673bd5d74c693a1",
+    "prompt": "A UMUOJI report multiplies the oil node mean porosity {{a_nodeMeanOil}} by the net volume {{a_netTrend}} million m3. What pore volume does it get, and how does it compare with the engine's?",
+    "correct": "{{a_poreNodeMeanTimesNet}} million m3, above the engine's {{a_poreTrend}} because thick cells carry poor rock",
+    "distractors": [
+     "{{a_poreTrend}} million m3, identical to the engine's value since any mean times net gives pore",
+     "{{a_poreNodeMeanTimesNet}} million m3, below the engine's {{a_poreTrend}} since the plain mean understates",
+     "{{a_poreHanded}} million m3, as the node mean equals the handed out constant"
+    ],
+    "explanation": "Only the weighted mean, {{a_colWeighted}}, reproduces the sum of products. The plain mean overstates it here because porosity and column are anti correlated.",
+    "why_wrong": [
+     "only the volume weighted mean reproduces the sum",
+     "the product is above the engine value",
+     "the node mean is not the handed out constant"
+    ],
+    "rests_on": [
+     "a_poreNodeMeanTimesNet",
+     "a_poreTrend"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 9,
+    "replaces": "a70a2593f404585caf1d5fd364b4c70f",
+    "prompt": "The UMUOJI plane changes by {{a_gradKm}} per km, the wells average {{a_meanSpacingKm}} km apart and the largest residual is {{a_maxResAbs}}. Beyond what distance do the plane's predicted differences exceed its own misfit?",
+    "correct": "About {{a_resolutionKm}} km, the residual over the gradient",
+    "distractors": [
+     "About {{a_meanSpacingKm}} km, the mean spacing of the wells",
+     "About {{a_changeOverSpacing}} km, the gradient times the spacing",
+     "Any distance, since a fitted plane has no misfit at all"
+    ],
+    "explanation": "The largest residual over the gradient, {{a_maxResAbs}} over {{a_gradKm}}, gives {{a_resolutionKm}} km. Over the well spacing the plane predicts {{a_changeOverSpacing}}, about twice its misfit.",
+    "why_wrong": [
+     "the spacing is an input to the test, not its answer",
+     "that product is a porosity change, not a distance",
+     "the plane misses Umuoji-4 by the largest residual"
+    ],
+    "rests_on": [
+     "a_resolutionKm",
+     "a_changeOverSpacing"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 36,
+    "replaces": "abaa1ffe0d186ce0403a018f0a76aa7f",
+    "prompt": "Why does the UMUOJI trend model take {{a_upliftAbs}} MMstb off the constant booking, where the course field's model added barrels?",
+    "correct": "Porosity is best downdip, so it runs against the column, correlation {{a_corr}}",
+    "distractors": [
+     "The trend plane always lowers a booking, since it misses the high values at the wells",
+     "The handed out 0.21 is above the well mean, and that alone explains the whole change",
+     "The trend grid reaches down to {{a_frameMin}} in the frame, below every measured value"
+    ],
+    "explanation": "The oil cells span {{a_oilMin}} to {{a_oilMax}} in modelled porosity, and the thickest carry the lowest: correlation {{a_corr}}, so selection and weighting both remove barrels.",
+    "why_wrong": [
+     "the sign follows the field, not the method",
+     "the constant step is under a third of the change",
+     "the frame minimum lands on ground outside the booking"
+    ],
+    "rests_on": [
+     "a_corr",
+     "a_uplift",
+     "a_stepConst"
+    ],
+    "answer_index": 1
+   }
+  ]
+ }
+}
