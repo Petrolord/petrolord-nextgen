@@ -5,9 +5,11 @@ import {
 } from 'recharts';
 import {
   kokori, theEnvelope, linerBankAt, flotationKinetics, twoKindsOfCell, theBed, bedAt, heldItems,
-  DECLARED, KOKORI_FILTER, KOKORI_BWPD,
+  DECLARED, KOKORI_FILTER, KOKORI_BWPD, typedDeviceStream, TYPED_DEVICE_DEFAULT,
 } from './producedWaterLab';
-import { Refusal, Warning } from './WaterExplorer';
+import {
+  Refusal, Warning, TypedInputs, TypedMessages, typedStrings,
+} from './WaterExplorer';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
@@ -45,6 +47,7 @@ export const MODES = [
   ['liners', 'The liner sweep: the envelope, the ceiling on the field, the shear penalty and the refusal'],
   ['flotation', 'The flotation chain: gas rate to bubble size to holdup to cut, with the two presets'],
   ['bed', 'The bed against depth, grain size and loading, and the floor it refuses below'],
+  ['typed', 'Your stream, typed: a liner bank, a flotation unit and a media bed on your water'],
 ];
 
 const AXIS = { fill: '#94a3b8', fontSize: 11 };
@@ -387,6 +390,60 @@ export const BedMode = ({
   );
 };
 
+const nine = (v) => (Number.isFinite(v) ? Number(v).toFixed(9) : 'none');
+
+const DEVICE_GROUPS = [
+  ['The water and the oil', ['bwpd', 'tC', 'tdsPpm', 'apiGravity']],
+  ['The liner bank', ['nLiners', 'linerDiameterM', 'linerLengthM', 'designFlowPerLinerM3S', 'gFieldAtDesign',
+    'coreRadiusFraction']],
+  ['The flotation unit', ['nCells', 'cellVolumeM3', 'cellDepthM', 'gasRatio', 'bubbleMicron', 'gasDensityKgM3']],
+  ['The media bed', ['filterAreaM2', 'bedDepthM', 'mediaMicron', 'filterCoefficientPerM', 'referenceDropletMicron']],
+];
+
+export const TypedDeviceMode = () => {
+  const [values, setValues] = useState(() => typedStrings(TYPED_DEVICE_DEFAULT));
+  const setValue = (k, x) => setValues((old) => ({ ...old, [k]: x }));
+  const r = useMemo(() => typedDeviceStream(values), [values]);
+  return (
+    <>
+      <p className="text-xs text-slate-300 mb-0">
+        Type a stream and its three devices. The view opens on the teaching stream KOKORI, and every input can be
+        retyped. The operating envelope of a liner, the drag a bubble rises against, the attachment efficiency and the
+        loading law of the bed are the module&apos;s own.
+      </p>
+      <TypedInputs groups={DEVICE_GROUPS} values={values} setValue={setValue} />
+      <p className="text-xs text-slate-400 mt-3 mb-1">The liner bank</p>
+      <TileGrid>
+        <Tile label="Turndown, flow per liner over rated" value={nine(r.turndownRatio)} />
+        <Tile label="Inlet shear penalty on the cut" value={nine(r.shearPenalty)} />
+        <Tile label="Centrifugal field" value={six(r.gField)} unit="g" />
+        <Tile label="Residence in a liner" value={six(r.linerResidenceS)} unit="s" />
+        <Tile label="Ideal cut before the shear penalty" value={six(r.idealLinerCutMicron)} unit="micron" />
+        <Tile label="Liner bank cut size" value={six(r.linerCutMicron)} unit="micron" />
+        <Tile label="Liners that would run this flow at rated" value={r.linersAtDesignFlow === null || r.linersAtDesignFlow === undefined ? 'none' : String(r.linersAtDesignFlow)} />
+      </TileGrid>
+      <p className="text-xs text-slate-400 mt-3 mb-1">The flotation unit</p>
+      <TileGrid>
+        <Tile label="Rise velocity of one bubble" value={twelve(r.bubbleRiseMS)} unit="m/s" />
+        <Tile label="Superficial gas velocity" value={twelve(r.superficialGasMS)} unit="m/s" />
+        <Tile label="Gas holdup of the swarm" value={twelve(r.gasHoldup)} />
+        <Tile label="Residence in the cells" value={six(r.flotationResidenceS)} unit="s" />
+        <Tile label="Flotation cut size" value={six(r.flotationCutMicron)} unit="micron" />
+      </TileGrid>
+      <p className="text-xs text-slate-400 mt-3 mb-1">The media bed</p>
+      <TileGrid>
+        <Tile label="Bed loading" value={six(r.bedLoadingMHr)} unit="m/hr" />
+        <Tile label="Bed cut size" value={six(r.bedCutMicron)} unit="micron" />
+      </TileGrid>
+      <TypedMessages r={r} />
+      <Note>
+        The flotation cut carries the one calibration in this module, the attachment efficiency, at its declared value.
+        The liner and bed figures do not depend on it.
+      </Note>
+    </>
+  );
+};
+
 const DeviceExplorer = ({ initialMode = 'liners' }) => {
   const [mode, setMode] = useState(initialMode);
   const [nLiners, setLiners] = useState(200);
@@ -414,6 +471,7 @@ const DeviceExplorer = ({ initialMode = 'liners' }) => {
         {mode === 'liners' && <LinerMode s={e} ko={ko} nLiners={nLiners} setLiners={setLiners} />}
         {mode === 'flotation' && <FlotationMode s={flot} preset={preset} setPreset={setPreset} />}
         {mode === 'bed' && <BedMode s={b} ko={ko} areaM2={areaM2} setArea={setArea} />}
+        {mode === 'typed' && <TypedDeviceMode />}
       </div>
       <Note>
         Every number on this page is a return value of the vendored Produced Water Treatment engine on the teaching
