@@ -3,6 +3,15 @@
 // truth digest, which was derived by running the vendored engines over the
 // committed fixtures. Panels and the learning page import THIS module.
 //
+// The committed flood, read on the frozen factor set with the fixture's
+// allocation, layers and design case, is the TEACHING case: the panels open on
+// it and the lessons work it. Since W5b (2026-09) each tier's capstone reads a
+// case of its own (a factor set, a band and month, an allocation matrix, a
+// surveillance window and smoothing, a layer column, an oil viscosity, an
+// injection rate and a breakthrough), stated in the brief and typed into the
+// panels. Every function below takes that case as an option and defaults to
+// the teaching case; nothing here carries a capstone case.
+//
 // Scope rule: displacement physics (Corey, fw, the Welge tangent, ED) belongs to
 // the RC3 SCAL course. This module imports analyzeDisplacement through the
 // waterflood pattern engine and never re-derives it.
@@ -78,16 +87,16 @@ export const SURVEILLANCE_CONFIG_WRONG_CASE = LEDGER_FVF;
 /** Field periods rebuilt from the per-well rows, then the voidage series.
  *  This is the path a real importer takes, not a shortcut through the
  *  committed period table. */
-export function fieldLedger() {
+export function fieldLedger(fvf = LEDGER_FVF) {
   const periods = buildFieldPeriods(EKENE_FLOOD.ledger_rows);
-  const series = computeVRRSeries(periods, LEDGER_FVF);
+  const series = computeVRRSeries(periods, fvf);
   return { periods, series, summary: summarizeVRR(series), wells: classifyLedgerWells(EKENE_FLOOD.ledger_rows) };
 }
 
 /** The ledger read at a chosen rolling window and operator band (the panel's
  *  sliders). Window 1 reproduces the instantaneous series exactly. */
-export function ledgerWith({ window = 3, band = TARGET_BAND } = {}) {
-  const { periods, series, summary } = fieldLedger();
+export function ledgerWith({ window = 3, band = TARGET_BAND, fvf = LEDGER_FVF } = {}) {
+  const { periods, series, summary } = fieldLedger(fvf);
   const rolling = computeRollingVRR(series, window);
   const flags = flagPeriods(series, band);
   return {
@@ -100,14 +109,14 @@ export function ledgerWith({ window = 3, band = TARGET_BAND } = {}) {
 }
 
 /** One period worked end to end, the way the voidage lesson does it. */
-export function periodVoidage(label) {
+export function periodVoidage(label, fvf = LEDGER_FVF) {
   const period = EKENE_FLOOD.ledger_periods.find((p) => p.label === label);
   if (!period) return null;
-  const v = computePeriodVoidage(period, LEDGER_FVF);
+  const v = computePeriodVoidage(period, fvf);
   return {
     period,
     ...v,
-    solutionGasMscf: (LEDGER_FVF.Rs * period.Np) / 1000,
+    solutionGasMscf: (fvf.Rs * period.Np) / 1000,
     classification: classifyVRR(v.instantaneousVRR),
   };
 }
@@ -171,9 +180,9 @@ export const PATTERNS = EKENE_FLOOD.patterns;
 
 /** The conservation audit behind the matrix editor. The residual is exactly
  *  zero, not nearly zero, and that is worth checking rather than assuming. */
-export function allocationAudit() {
-  const validation = validateAllocation(ALLOCATION);
-  const allocated = allocateInjection(EKENE_FLOOD.ledger_rows, ALLOCATION);
+export function allocationAudit(allocation = ALLOCATION) {
+  const validation = validateAllocation(allocation);
+  const allocated = allocateInjection(EKENE_FLOOD.ledger_rows, allocation);
   const totalInjected = EKENE_FLOOD.ledger_rows.reduce((s, r) => s + r.winj_stb, 0);
   const allocatedTotal = Object.values(allocated.perProducer).reduce((s, v) => s + v.winj_stb, 0);
   return {
@@ -191,11 +200,11 @@ const patternByName = (name) => PATTERNS.find((p) => p.name === name || p.name.s
 
 /** One pattern's own ledger. Production is summed over its producers;
  *  injection is the allocation-weighted share of every injector. */
-export function patternLedger(name, { window = 3 } = {}) {
+export function patternLedger(name, { window = 3, allocation = ALLOCATION, fvf = LEDGER_FVF } = {}) {
   const pattern = patternByName(name);
   if (!pattern) return null;
-  const periods = buildPatternPeriods(EKENE_FLOOD.ledger_rows, pattern, ALLOCATION);
-  const series = computeVRRSeries(periods, LEDGER_FVF);
+  const periods = buildPatternPeriods(EKENE_FLOOD.ledger_rows, pattern, allocation);
+  const series = computeVRRSeries(periods, fvf);
   const last = series[series.length - 1];
   return {
     pattern,
@@ -207,15 +216,17 @@ export function patternLedger(name, { window = 3 } = {}) {
     producedVoidage: last.cumProd,
     injectedVoidage: last.cumInj,
     fillUp: findFillUp(series),
-    hasAllocation: patternHasAllocation(pattern, ALLOCATION),
+    hasAllocation: patternHasAllocation(pattern, allocation),
   };
 }
 
 /** Injection advice for one pattern. Withheld, never faked, when nothing
  *  routes to it. */
-export function patternAdvice(name, { targetVRR = 1.0, windowPeriods = 3 } = {}) {
+export function patternAdvice(name, {
+  targetVRR = 1.0, windowPeriods = 3, allocation = ALLOCATION, fvf = LEDGER_FVF,
+} = {}) {
   const pattern = patternByName(name) || { name, producers: [] };
-  return recommendPatternInjection(EKENE_FLOOD.ledger_rows, pattern, ALLOCATION, LEDGER_FVF, { targetVRR, windowPeriods });
+  return recommendPatternInjection(EKENE_FLOOD.ledger_rows, pattern, allocation, fvf, { targetVRR, windowPeriods });
 }
 
 /** The invariant: one pattern holding every producer, with every injector row
@@ -295,9 +306,10 @@ const engineLayers = () => LAYERS.map((l) => ({ h: l.h_ft, k: l.k_md }));
 
 /** Both layered methods at a chosen mobility ratio. A defaults to the surface
  *  form of the same M, which is what the Stiles capacity ratio IS. */
-export function layerSweep({ M = LAYER_DESIGN.mobility_ratio, A } = {}) {
+export function layerSweep({ M = LAYER_DESIGN.mobility_ratio, A, perms } = {}) {
   const capacityRatio = A ?? (M * LEDGER_FVF.Bo) / LEDGER_FVF.Bw;
-  const r = analyzeLayeredSweep({ layers: engineLayers(), M, A: capacityRatio });
+  const layers = perms ? LAYERS.map((l, i) => ({ h: l.h_ft, k: Number(perms[i]) })) : engineLayers();
+  const r = analyzeLayeredSweep({ layers, M, A: capacityRatio });
   return { ...r, M, A: capacityRatio, netPayFt: LAYER_DESIGN.net_pay_ft };
 }
 
@@ -309,8 +321,8 @@ export function permeabilityVariation(perms) {
 
 /** The vertical sweep the forecast borrows: coverage at the first layer
  *  breakthrough. */
-export function evAtFirstBreakthrough(M = LAYER_DESIGN.mobility_ratio) {
-  return layerSweep({ M }).dykstraParsons[0].coverage;
+export function evAtFirstBreakthrough(M = LAYER_DESIGN.mobility_ratio, perms) {
+  return layerSweep({ M, perms }).dykstraParsons[0].coverage;
 }
 
 // ---------------------------------------------------------------------------
@@ -380,5 +392,43 @@ export function poreVolumeUnits() {
     fieldUnits,
     exact: ELEMENT.pv_exact_rb,
     relDiff: (fieldUnits - ELEMENT.pv_exact_rb) / ELEMENT.pv_exact_rb,
+  };
+}
+
+// ---------------------------------------------------------------------------
+// 7. A case of its own (W5b): surveillance read to a date, and the channel
+//    back-out for any producer's breakthrough.
+// ---------------------------------------------------------------------------
+
+/** The daily engine on the surveillance rows up to and including a date, with
+ *  the Hall plots on absolute pressure or on pressure above the reference and
+ *  the Chan derivative smoothed over a chosen number of points. */
+export function surveillanceWith({ throughDate = null, aboveReference = false, chanSmooth = 3 } = {}) {
+  const rows = EKENE_FLOOD.surveillance_rows
+    .filter((r) => throughDate === null || r.date <= throughDate)
+    .map((r) => (aboveReference
+      ? { ...r, whp_psi: r.whp_psi == null ? null : r.whp_psi - HALL_REFERENCE_PSIA }
+      : r));
+  const a = analyzeWaterflood(rows, { ...SURVEILLANCE_CONFIG, chan_smooth: chanSmooth });
+  return { hall: a.hall_plots, chan: a.chan };
+}
+
+/** The contacted pore volume a producer's breakthrough implies: the injection
+ *  the allocation routed to it before that date, over QiBt times the areal
+ *  sweep at breakthrough of the forecast at the stated oil viscosity. */
+export function channelBackoutFor({
+  producer = EKENE_FLOOD.expected.channeling.producer,
+  btDate = EKENE_FLOOD.expected.channeling.breakthrough_date,
+  allocation = ALLOCATION,
+  muO = EKENE_SCAL.design.muO_cp,
+} = {}) {
+  const allocated = EKENE_FLOOD.ledger_rows
+    .filter((r) => r.date < btDate && r.winj_stb > 0)
+    .reduce((acc, r) => acc + r.winj_stb * (allocation[r.well]?.[producer] ?? 0), 0);
+  const bt = forecast({ EV: EKENE_FLOOD.expected.layered_sweep.ev_first_breakthrough, muO }).breakthrough;
+  const impliedPv = (allocated * LEDGER_FVF.Bw) / (bt.QiBt * bt.EAbt);
+  return {
+    producer, btDate, allocatedBbl: allocated, QiBt: bt.QiBt, EAbt: bt.EAbt,
+    impliedSweptPvRb: impliedPv, fractionOfElement: impliedPv / ELEMENT.pv_exact_rb,
   };
 }

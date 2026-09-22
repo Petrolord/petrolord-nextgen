@@ -34653,11 +34653,35 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "field_cum_vrr",
+    "label": "Field cumulative VRR",
+    "unit": "-",
+    "expected": 1.0639811055975046,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "evidence": "The working lesson printed every answer and the ledger explorer opened on the frozen factor set and the 1.00 to 1.20 band. Re-cased on a revised factor set, band and month, which the learner types.",
+    "source": "nextgen-panel",
+    "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/beginner/m06-the-associate-reading/l02-working-the-capstone.md:52-56 (wf-ledger-explorer at window 3, band 1.00-1.20)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/LedgerExplorer.jsx:110 (fmt(cumLast, 6), toLocaleString maximumFractionDigits)",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile uses fmt(v, 6) with maximumFractionDigits 6, so it prints about 1.0349 (probe) up to 1.034900 trimmed; rounding error is at most 5e-7 at 6 dp and still under 5e-5 if only 4 show, against tol 5e-4.",
   "notes": "LEAK (by design): the default-state LedgerExplorer tile shows 1.0349; beginner/m03-reading-vrr/l01-three-vrrs-one-flood.md:23 prints 1.034899536109 in full."
  },
@@ -34686,11 +34710,35 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "produced_voidage_rb",
+    "label": "Total produced voidage",
+    "unit": "rb",
+    "expected": 213561.2936416994,
+    "tol": 50.0
+   },
+   "rekey_annot": {
+    "evidence": "The working lesson printed every answer and the ledger explorer opened on the frozen factor set and the 1.00 to 1.20 band. Re-cased on a revised factor set, band and month, which the learner types.",
+    "source": "nextgen-panel",
+    "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/beginner/m06-the-associate-reading/l02-working-the-capstone.md:52-56",
+    "printed": {
+     "decimals": 0
+    },
+    "display_scale": 1,
+    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/LedgerExplorer.jsx:116 (fmt(..., 0))",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile prints whole rb (221,736); half a unit is 0.5 rb against tol 50.",
   "notes": "LEAK (by design): default tile '221,736'; beginner/m03-reading-vrr/l01-three-vrrs-one-flood.md:25 prints 221736.43680913927."
  },
@@ -34719,11 +34767,35 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "injected_voidage_rb",
+    "label": "Total injected voidage",
+    "unit": "rb",
+    "expected": 227225.18132172863,
+    "tol": 50.0
+   },
+   "rekey_annot": {
+    "evidence": "The working lesson printed every answer and the ledger explorer opened on the frozen factor set and the 1.00 to 1.20 band. Re-cased on a revised factor set, band and month, which the learner types.",
+    "source": "nextgen-panel",
+    "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/beginner/m06-the-associate-reading/l02-working-the-capstone.md:52-56",
+    "printed": {
+     "decimals": 0
+    },
+    "display_scale": 1,
+    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/LedgerExplorer.jsx:117 (fmt(..., 0))",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile prints whole rb (229,475); half a unit 0.5 rb vs tol 50.",
   "notes": "LEAK (by design): default tile '229,475'; beginner/m03-reading-vrr/l01-three-vrrs-one-flood.md:25 prints 229474.93559224083."
  },
@@ -34752,11 +34824,35 @@
   ],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "fillup_month_index",
+    "label": "Fill-up period index (zero-based)",
+    "unit": "index",
+    "expected": 7.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "evidence": "The working lesson printed every answer and the ledger explorer opened on the frozen factor set and the 1.00 to 1.20 band. Re-cased on a revised factor set, band and month, which the learner types.",
+    "source": "nextgen-panel",
+    "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/beginner/m06-the-associate-reading/l02-working-the-capstone.md:25-27",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/LedgerExplorer.jsx:113 (Fill-up month tile shows the label, 2023-12)",
+    "answer_space": 36,
+    "guess_p": 0.028,
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Genuine integer; the tile prints the period label 2023-12, which the learner converts to zero-based index 11 (the prompt says zero-based). tol 0 is honest for an integer.",
   "notes": "LEAK (by design): default tile shows 2023-12; beginner/m06-the-associate-reading/l01-the-story-so-far.md:25 prints 'period index 11' and beginner/m03-reading-vrr/l05-fill-up.md:55 says 'fill-up landed at period index 11'."
  },
@@ -34785,11 +34881,35 @@
   ],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "months_under_target_band",
+    "label": "Periods under the 0.95 to 1.15 band",
+    "unit": "count",
+    "expected": 2.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "evidence": "The working lesson printed every answer and the ledger explorer opened on the frozen factor set and the 1.00 to 1.20 band. Re-cased on a revised factor set, band and month, which the learner types.",
+    "source": "nextgen-panel",
+    "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/beginner/m06-the-associate-reading/l02-working-the-capstone.md:29-31",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/LedgerExplorer.jsx:114 (Months under band tile, raw integer)",
+    "answer_space": 9,
+    "guess_p": 0.111,
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Genuine integer count shown as an integer ('4 of 36'); tol 0 honest. Guess space: the lesson says the count is small and consecutive at the start (ramp 0.85, 0.89, 0.93, 0.97 below 1.00), so roughly 0..8 plausible.",
   "notes": "LEAK (by design): default tile shows 'Months under band 4 of 36'. The capstone lesson's check line (l02:13, 'ran below target for five months') refers to the ramp target profile, not the band; a learner could misread it as 5."
  },
@@ -34816,11 +34936,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "month_produced_voidage_rb",
+    "label": "June 2024 produced voidage",
+    "unit": "rb",
+    "expected": 6353.507278415295,
+    "tol": 1.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/waterflood/LedgerExplorer.jsx (Tile 'Produced voidage, <month>', typed month and factors)",
+    "printed": {
+     "decimals": 2
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/waterflood/LedgerExplorer.jsx (Tile 'Produced voidage, <month>', typed month and factors)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "The working lesson printed every answer and the ledger explorer opened on the frozen factor set and the 1.00 to 1.20 band. Re-cased on a revised factor set, band and month, which the learner types.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Np x Bo = 4727.034315745669 x 1.21584 = 5747.317402456214, reproduced exactly; the free gas cancels (Rs Np/1000 = Gp). Not a panel tile.",
   "notes": "LEAK (by design): beginner/m02-voidage/l02-the-voidage-equation.md:39 prints 5747.317402456214 rb in full, and the capstone lesson prints the month's Np, Wp and Gp."
  },
@@ -34849,11 +34996,35 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "out_of_zone_bbl",
+    "label": "Out-of-zone injection",
+    "unit": "bbl",
+    "expected": 29246.80551665815,
+    "tol": 20.0
+   },
+   "rekey_annot": {
+    "evidence": "The working and story-so-far lessons printed every answer and the pattern explorer opened on the fixture matrix. Re-cased on a revised allocation matrix, target and window, a Hall read to 2025-06-30 and a 5-point Chan smoothing (the panel now carries both diagnostics). hall_ratio_e4 keeps the W1 tolerance of 0.0005.",
+    "source": "nextgen-panel",
+    "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/intermediate/m06-the-professional-reading/l02-working-the-capstone.md:55-59 (wf-pattern-explorer, target 1.0, window 3)",
+    "printed": {
+     "decimals": 0
+    },
+    "display_scale": 1,
+    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/PatternExplorer.jsx:126 (fmt(audit.unallocated.winj_stb, 0))",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile prints whole bbl (26,997); half a unit 0.5 vs tol 20.",
   "notes": "LEAK (by design): default tile '26,997'; intermediate/m01-allocation/l04-the-conservation-audit.md:19 prints 26997.051246145966."
  },
@@ -34882,11 +35053,35 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "north_cum_vrr",
+    "label": "North element cumulative VRR",
+    "unit": "-",
+    "expected": 1.1616748507042214,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "evidence": "The working and story-so-far lessons printed every answer and the pattern explorer opened on the fixture matrix. Re-cased on a revised allocation matrix, target and window, a Hall read to 2025-06-30 and a 5-point Chan smoothing (the panel now carries both diagnostics). hall_ratio_e4 keeps the W1 tolerance of 0.0005.",
+    "source": "nextgen-panel",
+    "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/intermediate/m06-the-professional-reading/l02-working-the-capstone.md:55-59",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/PatternExplorer.jsx:123 (fmt(pat.cumulativeVRR, 6))",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Pattern tile prints 6 decimals (1.202435); error 5e-7 vs tol 5e-4.",
   "notes": "LEAK (by design): default (North) tile shows 1.202435; intermediate/m02-pattern-vrr/l02-north-and-south.md:9 prints 1.2024353717815623."
  },
@@ -34915,11 +35110,35 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "south_cum_vrr",
+    "label": "South element cumulative VRR",
+    "unit": "-",
+    "expected": 0.6307735406413947,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "evidence": "The working and story-so-far lessons printed every answer and the pattern explorer opened on the fixture matrix. Re-cased on a revised allocation matrix, target and window, a Hall read to 2025-06-30 and a 5-point Chan smoothing (the panel now carries both diagnostics). hall_ratio_e4 keeps the W1 tolerance of 0.0005.",
+    "source": "nextgen-panel",
+    "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/intermediate/m06-the-professional-reading/l02-working-the-capstone.md:55-59",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/PatternExplorer.jsx:123",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Pattern tile prints 6 decimals (0.609748) after one click to South.",
   "notes": "LEAK (by design): one click (South) shows 0.609748; intermediate/m02-pattern-vrr/l02-north-and-south.md:9 prints 0.6097477559533482."
  },
@@ -34948,11 +35167,35 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "south_recommended_wi",
+    "label": "South recommended injection at target 1.10",
+    "unit": "bbl",
+    "expected": 2915.665334186579,
+    "tol": 2.0
+   },
+   "rekey_annot": {
+    "evidence": "The working and story-so-far lessons printed every answer and the pattern explorer opened on the fixture matrix. Re-cased on a revised allocation matrix, target and window, a Hall read to 2025-06-30 and a 5-point Chan smoothing (the panel now carries both diagnostics). hall_ratio_e4 keeps the W1 tolerance of 0.0005.",
+    "source": "nextgen-panel",
+    "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/intermediate/m06-the-professional-reading/l02-working-the-capstone.md:55-59",
+    "printed": {
+     "decimals": 1
+    },
+    "display_scale": 1,
+    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/PatternExplorer.jsx:129 (fmt(advice.recommendedWi, 1))",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile prints 1 decimal (2,683.1); error 0.05 vs tol 2.",
   "notes": "LEAK (by design): one click (South) shows 2,683.1; intermediate/m03-advice/l01-scaling-to-a-target.md:17 prints 2683.051749612857."
  },
@@ -34977,21 +35220,47 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "tolerance",
-  "fix": {
-   "new_tol": 0.0005
-  },
+  "class": "none",
+  "fix": null,
   "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
-  "reclassed_from": "none",
+  "reclassed_from": null,
   "shipped": {
-   "migration": "20261024a_w1_waterflood.sql",
-   "wave": "w1",
-   "tol": [
-    0.002,
-    0.0005
-   ]
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "hall_ratio_e4",
+    "label": "Ekene-4 Hall slope ratio above the reference, rows to 2025-06-30",
+    "unit": "-",
+    "expected": 1.303301717154095,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/waterflood/PatternExplorer.jsx (diagnostics block, Tile 'Ekene-4 Hall slope ratio', rows through the typed date, above the reference)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/waterflood/PatternExplorer.jsx (diagnostics block, Tile 'Ekene-4 Hall slope ratio', rows through the typed date, above the reference)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "The working and story-so-far lessons printed every answer and the pattern explorer opened on the fixture matrix. Re-cased on a revised allocation matrix, target and window, a Hall read to 2025-06-30 and a 5-point Chan smoothing (the panel now carries both diagnostics). hall_ratio_e4 keeps the W1 tolerance of 0.0005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   },
+   "prior": {
+    "migration": "20261024a_w1_waterflood.sql",
+    "wave": "w1",
+    "tol": [
+     0.002,
+     0.0005
+    ]
+   }
   },
   "evidence": "Not in any panel (capstone lesson l02:59 says work it from the definitions). The raw surveillance rows are not handed to the learner, but the lesson states II = 0.5 falling to 0.35 in exactly the last third, so the ratio is 0.5/0.35 = 1.4285714285714286 by hand.",
   "notes": "LEAK (by design): intermediate/m04-injectivity/l02-slope-is-one-over-injectivity.md:35 prints 1.4285714285714286 as the slope ratio; the capstone lesson calls the above-reference value 'the graded answer'. Coincidence: the DesignExplorer default tile 'Stiles capacity ratio A' prints 1.4304, which is 0.0018 from this answer and inside tol 0.002. Tightening tol to 5e-4 would exclude it at no cost to the exact 10/7 route (a tightening, flag if adopted)."
@@ -35019,11 +35288,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "chan_slope_case",
+    "label": "Ekene-6 Chan late-time slope, 5-point smoothing",
+    "unit": "-",
+    "expected": 1.5358261835134785,
+    "tol": 0.005
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/waterflood/PatternExplorer.jsx (diagnostics block, Tile 'Ekene-6 Chan late slope', typed smoothing)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/waterflood/PatternExplorer.jsx (diagnostics block, Tile 'Ekene-6 Chan late slope', typed smoothing)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "The working and story-so-far lessons printed every answer and the pattern explorer opened on the fixture matrix. Re-cased on a revised allocation matrix, target and window, a Hall read to 2025-06-30 and a 5-point Chan smoothing (the panel now carries both diagnostics). hall_ratio_e4 keeps the W1 tolerance of 0.0005.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Not in any panel (l02:59). A genuine hand-calc needs the raw Ekene-6 surveillance rows (not provided) plus the engine's 3-point smoothing, centred difference and last-40-percent window; the only route the course offers is the lesson table, which prints 2.348281726147951 in full.",
   "notes": "LEAK (by design): lesson-printed in full at intermediate/m05-water-arrival/l02-reading-the-ekene-producers.md:11 and again in m06/l01 and advanced/m05/l03. Source recorded as prompt-given because the value is a lookup from lesson text rather than a derivation; not in the prompt itself."
  },
@@ -35052,11 +35348,37 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "dykstra_parsons_v",
+    "label": "Dykstra-Parsons permeability variation V",
+    "unit": "-",
+    "expected": 0.5108350057773658,
+    "tol": 0.001
+   },
+   "rekey_annot": {
+    "evidence": "The working lesson printed every answer and the design explorer opened on the planted column and design case. Re-cased on a revised layer column, M, rate and oil viscosity, and the Ekene-1 breakthrough for the back-out (the panel now carries it).",
+    "source": "nextgen-panel",
+    "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/advanced/m06-the-expert-reading/l02-working-the-capstone.md:58-60 (wf-design-explorer Layers mode)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/DesignExplorer.jsx:141 (fmt(sweep.V.V, 6))",
+    "answer_space": 9,
+    "guess_p": 0.111,
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile prints 0.5; also a spreadsheet hand-calc (plotting position (i+0.5)/n, taught in advanced/m01). Continuous in principle, but the capstone lesson says 'the answer is a clean round number', which narrows guesses to clean tenths.",
   "notes": "LEAK (by design): default Layers tile shows 0.5; advanced/m01-heterogeneity/l03-the-planted-column.md:23 derives V = 0.5 exactly for this column."
  },
@@ -35085,11 +35407,35 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "dp_coverage_first_bt",
+    "label": "Coverage at the first breakthrough, M 1.5",
+    "unit": "fraction",
+    "expected": 0.53830773439402,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "evidence": "The working lesson printed every answer and the design explorer opened on the planted column and design case. Re-cased on a revised layer column, M, rate and oil viscosity, and the Ekene-1 breakthrough for the back-out (the panel now carries it).",
+    "source": "nextgen-panel",
+    "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/advanced/m06-the-expert-reading/l02-working-the-capstone.md:58-60",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/DesignExplorer.jsx:145 (fmt(..., 6))",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile prints 6 decimals (0.514691); error 5e-7 vs tol 5e-4. Also hand-calc per advanced/m02.",
   "notes": "LEAK (by design): default tile 0.514691; advanced/m06-the-expert-reading/l01-the-story-so-far.md:21 prints 0.5146907350993352."
  },
@@ -35118,11 +35464,35 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "stiles_wc_first_bt",
+    "label": "Stiles surface water cut at first BT",
+    "unit": "fraction",
+    "expected": 0.6065200837842389,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "evidence": "The working lesson printed every answer and the design explorer opened on the planted column and design case. Re-cased on a revised layer column, M, rate and oil viscosity, and the Ekene-1 breakthrough for the back-out (the panel now carries it).",
+    "source": "nextgen-panel",
+    "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/advanced/m06-the-expert-reading/l02-working-the-capstone.md:58-60",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/DesignExplorer.jsx:148 (fmt(..., 6))",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile prints 6 decimals (0.584373); closed form A C1/(A C1 + Ct - C1) also taught.",
   "notes": "LEAK (by design): default tile 0.584373; advanced/m06-the-expert-reading/l01-the-story-so-far.md:21 prints 0.5843728303284756."
  },
@@ -35151,11 +35521,35 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "eabt_at_case_mu",
+    "label": "Areal sweep at breakthrough, 2.4 cp oil",
+    "unit": "fraction",
+    "expected": 0.6187020568266292,
+    "tol": 0.0005
+   },
+   "rekey_annot": {
+    "evidence": "The working lesson printed every answer and the design explorer opened on the planted column and design case. Re-cased on a revised layer column, M, rate and oil viscosity, and the Ekene-1 breakthrough for the back-out (the panel now carries it).",
+    "source": "nextgen-panel",
+    "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/advanced/m06-the-expert-reading/l02-working-the-capstone.md:58-60 (Forecast mode)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/DesignExplorer.jsx:155 (fmt(f.summary.EAbt, 6))",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile prints 6 decimals (0.657357); the Craig four-term formula (advanced/m03/l01:21) reproduces 0.6573574366303985 exactly by hand.",
   "notes": "LEAK (by design): Forecast mode tile 0.657357; advanced/m06/l01:29 and advanced/m05/l02:11 print 0.6573574366303985."
  },
@@ -35184,11 +35578,35 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "case_breakthrough_days",
+    "label": "Forecast breakthrough time",
+    "unit": "days",
+    "expected": 760.9375,
+    "tol": 2.0
+   },
+   "rekey_annot": {
+    "evidence": "The working lesson printed every answer and the design explorer opened on the planted column and design case. Re-cased on a revised layer column, M, rate and oil viscosity, and the Ekene-1 breakthrough for the back-out (the panel now carries it).",
+    "source": "nextgen-panel",
+    "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/advanced/m06-the-expert-reading/l02-working-the-capstone.md:58-60 (Forecast mode, EV on, 2000 rb/d)",
+    "printed": {
+     "decimals": 2
+    },
+    "display_scale": 1,
+    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/DesignExplorer.jsx:157 (fmt(breakthrough_days, 2))",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile prints 639.19; 639.1875 = 21 x 30.4375 exactly, so the quantised hand route is exact; tol 2 honest (unquantised 626.98 fails, as the lesson intends).",
   "notes": "LEAK (by design): Forecast mode tile 639.19; advanced/m06-the-expert-reading/l01-the-story-so-far.md:35 prints 639.1875 days."
  },
@@ -35215,11 +35633,38 @@
   "flags": [],
   "class": "none",
   "fix": null,
-  "owner_decision": true,
+  "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028b_w5_waterflood.sql",
+   "wave": "w5b",
+   "closes_leak": true,
+   "rekey": {
+    "key": "implied_swept_fraction",
+    "label": "Implied contacted fraction of the element",
+    "unit": "fraction",
+    "expected": 0.015390012446578026,
+    "tol": 0.0002
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/waterflood/DesignExplorer.jsx (channel back-out block, Tile 'Fraction of the element')",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/waterflood/DesignExplorer.jsx (channel back-out block, Tile 'Fraction of the element')",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "The working lesson printed every answer and the design explorer opened on the planted column and design case. Re-cased on a revised layer column, M, rate and oil viscosity, and the Ekene-1 breakthrough for the back-out (the panel now carries it).",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "35106.29313483455 x 1.02 / (0.33077027444818546 x 0.6573574366303985) / 11205422.76570545 = 0.014697005138728762, reproduced exactly; every input is in the prompt or lesson. Not in the panel.",
   "notes": "LEAK (by design): advanced/m05-forecast-against-field/l02-the-channel-back-out.md:31 prints 0.014697005138728762 in full with the same inputs."
  },

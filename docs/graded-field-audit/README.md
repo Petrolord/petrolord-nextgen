@@ -438,3 +438,4 @@ A printed number counts as a leak when typing it would pass: it lies within the 
 
 | Course | Tiers | Case (what the brief states) |
 |---|---|---|
+| waterflood | all | beginner: factor set Bo 1.17 / Bw 1.01 / Rs 360, band 0.95 to 1.15, June 2024. intermediate: a revised allocation matrix, target 1.10 over two periods, the Ekene-4 Hall ratio on rows to 2025-06-30 (W1's tolerance of 0.0005 kept), the Ekene-6 Chan slope at 5-point smoothing. advanced: permeabilities 140/520/230/95/410 md, M 1.5, 1600 rb/d, a 2.4 cp oil, and the Ekene-1 breakthrough (2025-06-01) for the back-out. The panels gain typed factors, band and month, a typed matrix and target, a surveillance diagnostics block, a typed layer column, M, rate and oil, and a channel back-out block. |

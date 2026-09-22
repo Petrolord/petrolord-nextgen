@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  layerSweep, forecast, evAtFirstBreakthrough, LAYERS, LAYER_DESIGN, ELEMENT,
+  layerSweep, forecast, evAtFirstBreakthrough, channelBackoutFor, LAYERS, LAYER_DESIGN, ELEMENT, EKENE_SCAL, EKENE_FLOOD,
 } from './floodLab';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -11,6 +11,17 @@ import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/pet
 const W = 640;
 const H = 300;
 const PAD = { left: 52, top: 14, right: 46, bottom: 34 };
+
+
+// A typed number box, dressed like the sliders (the capstone states values
+// the sliders do not reach).
+const NumBox = ({ label, value, onChange }) => (
+  <div>
+    <p className="text-gray-400 text-xs mb-1">{label}</p>
+    <input value={value} onChange={(e) => onChange(e.target.value)}
+      className="w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5" />
+  </div>
+);
 
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 
@@ -33,20 +44,35 @@ const DesignExplorer = () => {
   const [iw, setIw] = useState(ELEMENT.iw_design_rb_d);
   const [useEv, setUseEv] = useState(true);
   const [sgi, setSgi] = useState(0);
+  // The layer column, M, the rate, the oil viscosity and the breakthrough the
+  // back-out reads open on the teaching case; a capstone brief states its own.
+  const [perms, setPerms] = useState(() => LAYERS.map((l) => String(l.k_md)));
+  const [mT, setMT] = useState('');
+  const [iwT, setIwT] = useState('');
+  const [muO, setMuO] = useState(String(EKENE_SCAL.design.muO_cp));
+  const [prod, setProd] = useState(EKENE_FLOOD.expected.channeling.producer);
+  const [btDate, setBtDate] = useState(EKENE_FLOOD.expected.channeling.breakthrough_date);
 
   const out = useMemo(() => {
     try {
-      const sweep = layerSweep({ M });
-      const EV = useEv ? evAtFirstBreakthrough(M) : 1;
-      const f = forecast({ iw, EV, Sgi: sgi });
-      return { sweep, f, EV };
+      const k = perms.map(Number);
+      if (k.some((v) => !(v > 0))) throw new Error('Every layer permeability must be positive.');
+      const Mv = mT === '' ? M : Number(mT);
+      const iwv = iwT === '' ? iw : Number(iwT);
+      const mu = Number(muO);
+      if (!(Mv > 0 && iwv > 0 && mu > 0)) throw new Error('M, the injection rate and the oil viscosity must be positive.');
+      const sweep = layerSweep({ M: Mv, perms: k });
+      const EV = useEv ? evAtFirstBreakthrough(Mv, k) : 1;
+      const f = forecast({ iw: iwv, EV, Sgi: sgi, muO: mu });
+      const ch = /^\d{4}-\d{2}-\d{2}$/.test(btDate) ? channelBackoutFor({ producer: prod, btDate, muO: mu }) : null;
+      return { sweep, f, EV, ch };
     } catch (e) {
       return { error: e.message };
     }
-  }, [M, iw, useEv, sgi]);
+  }, [M, iw, useEv, sgi, perms, mT, iwT, muO, prod, btDate]);
 
   if (out.error) return <PanelShell title="Design explorer"><Note>Engine error: {out.error}</Note></PanelShell>;
-  const { sweep, f, EV } = out;
+  const { sweep, f, EV, ch } = out;
 
   const maxK = Math.max(...LAYERS.map((l) => l.k_md));
   const totalH = LAYER_DESIGN.net_pay_ft;
@@ -86,6 +112,19 @@ const DesignExplorer = () => {
         <RangeField label="Injection rate (rb/d)" value={iw} min={500} max={4000} step={100} onChange={setIw} />
         <RangeField label="Initial free gas Sgi" value={sgi} min={0} max={0.1} step={0.01} onChange={setSgi} />
       </div>
+
+      <div className="grid gap-4 sm:grid-cols-8 items-end mt-3">
+        {perms.map((p, i) => (
+          <NumBox key={LAYERS[i].name} label={`${LAYERS[i].name} k (md)`} value={p} onChange={(v) => setPerms((a) => a.map((x, j) => (j === i ? v : x)))} />
+        ))}
+        <NumBox label="M (typed)" value={mT} onChange={setMT} />
+        <NumBox label="Rate rb/d (typed)" value={iwT} onChange={setIwT} />
+        <NumBox label="Oil viscosity (cp)" value={muO} onChange={setMuO} />
+      </div>
+      <p className="text-xs text-gray-500 mt-1">
+        The panel opens on the teaching column, M {LAYER_DESIGN.mobility_ratio}, {ELEMENT.iw_design_rb_d} rb/d and the SCAL oil.
+        Typed M and rate override the sliders. A capstone brief states its own; type it in.
+      </p>
 
       <button
         type="button" onClick={() => setUseEv((v) => !v)}
@@ -163,6 +202,26 @@ const DesignExplorer = () => {
           <Tile label="Flooded OOIP" value={fmt(f.summary.ooip_flooded_stb, 0)} unit="stb" />
         </TileGrid>
       )}
+
+      <div className="mt-4">
+        <p className="text-gray-400 text-xs mb-1">Channel back-out: the contacted pore volume a producer&apos;s breakthrough implies (opens on Ekene-6)</p>
+        <div className="grid gap-4 sm:grid-cols-4 items-end">
+          <div>
+            <p className="text-gray-400 text-xs mb-1">Producer</p>
+            <select value={prod} onChange={(e) => setProd(e.target.value)}
+              className="w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5">
+              {['Ekene-1', 'Ekene-3', 'Ekene-5', 'Ekene-6'].map((p) => <option key={p} value={p}>{p}</option>)}
+            </select>
+          </div>
+          <NumBox label="Breakthrough date (YYYY-MM-DD)" value={btDate} onChange={setBtDate} />
+        </div>
+        <TileGrid>
+          <Tile label="Allocated before breakthrough" value={ch ? fmt(ch.allocatedBbl, 2) : '-'} unit="bbl" />
+          <Tile label="QiBt" value={ch ? fmt(ch.QiBt, 6) : '-'} unit="PV" />
+          <Tile label="Implied contacted PV" value={ch ? fmt(ch.impliedSweptPvRb, 0) : '-'} unit="rb" />
+          <Tile label="Fraction of the element" value={ch ? fmt(ch.fractionOfElement, 6) : '-'} unit="-" />
+        </TileGrid>
+      </div>
 
       {f.warnings.length > 0 && <Note>{f.warnings.join(' ')}</Note>}
       <Note>

@@ -1,0 +1,344 @@
+{
+ "course": "waterflood",
+ "wave": "w5b",
+ "migration": "20261028b_w5_waterflood.sql",
+ "fields_file": "docs/graded-field-audit/w5b/waterflood.fields.json",
+ "keys_module": "docs/graded-field-audit/w5b/waterflood.keys.mjs",
+ "sources": [
+  "src/components/course/panels/waterflood/floodLab.js",
+  "src/pages/apps/WaterfloodLearningPage.jsx"
+ ],
+ "capstone_lessons": {
+  "beginner": "beginner/m06-the-associate-reading/l02-working-the-capstone.md",
+  "intermediate": "intermediate/m06-the-professional-reading/l02-working-the-capstone.md",
+  "advanced": "advanced/m06-the-expert-reading/l02-working-the-capstone.md"
+ },
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "title": "Read the flood ledger",
+   "dataset": "ekene-dynamic/waterflood.json (36 periods, factor set Bo 1.17 / Bw 1.01 / Rs 360)",
+   "why": "The working lesson printed every answer and the ledger explorer opened on the frozen factor set and the 1.00 to 1.20 band. Re-cased on a revised factor set, band and month, which the learner types.",
+   "prompt": "Work the Ekene waterflood ledger over its 36 monthly periods, 2023-01 through 2025-12, on a revised frozen factor set: Bo 1.17, Bw 1.01, Bg 0 and Rs 360 scf/stb. Report the cumulative voidage replacement ratio as the ratio of the summed voidages, the total produced and injected voidage in reservoir barrels, the zero-based index of the first period at which the CUMULATIVE ratio reaches or exceeds 1.0, the number of periods whose INSTANTANEOUS ratio falls below an operator target band of 0.95 to 1.15, and the produced voidage of June 2024 alone. Only free produced gas adds voidage: subtract the solution gas Rs*Np/1000 from the metered gas before converting. The ledger explorer opens on the teaching factor set and band; type the case in.",
+   "rekey": [
+    "field_cum_vrr",
+    "produced_voidage_rb",
+    "injected_voidage_rb",
+    "fillup_month_index",
+    "months_under_target_band",
+    "jan_produced_voidage_rb"
+   ],
+   "case": {
+    "fvf": {
+     "Bo": 1.17,
+     "Bw": 1.01,
+     "Rs": 360
+    },
+    "band": {
+     "min": 0.95,
+     "max": 1.15
+    },
+    "month": "2024-06"
+   },
+   "annot": {
+    "field_cum_vrr": {
+     "evidence": "The working lesson printed every answer and the ledger explorer opened on the frozen factor set and the 1.00 to 1.20 band. Re-cased on a revised factor set, band and month, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/beginner/m06-the-associate-reading/l02-working-the-capstone.md:52-56 (wf-ledger-explorer at window 3, band 1.00-1.20)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/LedgerExplorer.jsx:110 (fmt(cumLast, 6), toLocaleString maximumFractionDigits)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "produced_voidage_rb": {
+     "evidence": "The working lesson printed every answer and the ledger explorer opened on the frozen factor set and the 1.00 to 1.20 band. Re-cased on a revised factor set, band and month, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/beginner/m06-the-associate-reading/l02-working-the-capstone.md:52-56",
+     "printed": {
+      "decimals": 0
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/LedgerExplorer.jsx:116 (fmt(..., 0))",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "injected_voidage_rb": {
+     "evidence": "The working lesson printed every answer and the ledger explorer opened on the frozen factor set and the 1.00 to 1.20 band. Re-cased on a revised factor set, band and month, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/beginner/m06-the-associate-reading/l02-working-the-capstone.md:52-56",
+     "printed": {
+      "decimals": 0
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/LedgerExplorer.jsx:117 (fmt(..., 0))",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "fillup_month_index": {
+     "evidence": "The working lesson printed every answer and the ledger explorer opened on the frozen factor set and the 1.00 to 1.20 band. Re-cased on a revised factor set, band and month, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/beginner/m06-the-associate-reading/l02-working-the-capstone.md:25-27",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/LedgerExplorer.jsx:113 (Fill-up month tile shows the label, 2023-12)",
+     "answer_space": 36,
+     "guess_p": 0.028,
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "months_under_target_band": {
+     "evidence": "The working lesson printed every answer and the ledger explorer opened on the frozen factor set and the 1.00 to 1.20 band. Re-cased on a revised factor set, band and month, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/beginner/m06-the-associate-reading/l02-working-the-capstone.md:29-31",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/LedgerExplorer.jsx:114 (Months under band tile, raw integer)",
+     "answer_space": 9,
+     "guess_p": 0.111,
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "month_produced_voidage_rb": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/waterflood/LedgerExplorer.jsx (Tile 'Produced voidage, <month>', typed month and factors)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/waterflood/LedgerExplorer.jsx (Tile 'Produced voidage, <month>', typed month and factors)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The working lesson printed every answer and the ledger explorer opened on the frozen factor set and the 1.00 to 1.20 band. Re-cased on a revised factor set, band and month, which the learner types.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "A",
+   "title": "Allocate, split, diagnose",
+   "dataset": "ekene-dynamic/waterflood.json (a stated allocation matrix, surveillance to 2025-06-30)",
+   "why": "The working and story-so-far lessons printed every answer and the pattern explorer opened on the fixture matrix. Re-cased on a revised allocation matrix, target and window, a Hall read to 2025-06-30 and a 5-point Chan smoothing (the panel now carries both diagnostics). hall_ratio_e4 keeps the W1 tolerance of 0.0005.",
+   "prompt": "Take the Ekene flood apart by geometry on a revised allocation matrix: Ekene-2 to Ekene-6 0.40, Ekene-1 0.35 and Ekene-3 0.10, and Ekene-4 to Ekene-3 0.45, Ekene-6 0.30 and Ekene-5 0.15. The two elements are North, holding Ekene-1 and Ekene-6, and South, holding Ekene-3 and Ekene-5. Report the injected volume that lands on no producer, each element's cumulative VRR on the frozen factor set, and the injection recommended for the South element at a target VRR of 1.10 over a two-period trailing window, scaled from the ALLOCATED injection into that element. Then two diagnostics on the raw well data: the Hall plot slope ratio for Ekene-4 built on pressure ABOVE the 2050 psia injection reference from the daily rows through 2025-06-30 only, and the late-time log-log slope of the water oil ratio derivative for Ekene-6 with the derivative smoothed over 5 points. The pattern explorer opens on the teaching matrix and read; type the case in.",
+   "rekey": [
+    "out_of_zone_bbl",
+    "north_cum_vrr",
+    "south_cum_vrr",
+    "south_recommended_wi",
+    "hall_ratio_e4",
+    "chan_slope_e6"
+   ],
+   "case": {
+    "allocation": {
+     "Ekene-2": {
+      "Ekene-6": 0.4,
+      "Ekene-1": 0.35,
+      "Ekene-3": 0.1
+     },
+     "Ekene-4": {
+      "Ekene-3": 0.45,
+      "Ekene-6": 0.3,
+      "Ekene-5": 0.15
+     }
+    },
+    "target_vrr": 1.1,
+    "window": 2,
+    "hall_through": "2025-06-30",
+    "chan_producer": "Ekene-6",
+    "chan_smooth": 5
+   },
+   "annot": {
+    "out_of_zone_bbl": {
+     "evidence": "The working and story-so-far lessons printed every answer and the pattern explorer opened on the fixture matrix. Re-cased on a revised allocation matrix, target and window, a Hall read to 2025-06-30 and a 5-point Chan smoothing (the panel now carries both diagnostics). hall_ratio_e4 keeps the W1 tolerance of 0.0005.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/intermediate/m06-the-professional-reading/l02-working-the-capstone.md:55-59 (wf-pattern-explorer, target 1.0, window 3)",
+     "printed": {
+      "decimals": 0
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/PatternExplorer.jsx:126 (fmt(audit.unallocated.winj_stb, 0))",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "north_cum_vrr": {
+     "evidence": "The working and story-so-far lessons printed every answer and the pattern explorer opened on the fixture matrix. Re-cased on a revised allocation matrix, target and window, a Hall read to 2025-06-30 and a 5-point Chan smoothing (the panel now carries both diagnostics). hall_ratio_e4 keeps the W1 tolerance of 0.0005.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/intermediate/m06-the-professional-reading/l02-working-the-capstone.md:55-59",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/PatternExplorer.jsx:123 (fmt(pat.cumulativeVRR, 6))",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "south_cum_vrr": {
+     "evidence": "The working and story-so-far lessons printed every answer and the pattern explorer opened on the fixture matrix. Re-cased on a revised allocation matrix, target and window, a Hall read to 2025-06-30 and a 5-point Chan smoothing (the panel now carries both diagnostics). hall_ratio_e4 keeps the W1 tolerance of 0.0005.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/intermediate/m06-the-professional-reading/l02-working-the-capstone.md:55-59",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/PatternExplorer.jsx:123",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "south_recommended_wi": {
+     "evidence": "The working and story-so-far lessons printed every answer and the pattern explorer opened on the fixture matrix. Re-cased on a revised allocation matrix, target and window, a Hall read to 2025-06-30 and a 5-point Chan smoothing (the panel now carries both diagnostics). hall_ratio_e4 keeps the W1 tolerance of 0.0005.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/intermediate/m06-the-professional-reading/l02-working-the-capstone.md:55-59",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/PatternExplorer.jsx:129 (fmt(advice.recommendedWi, 1))",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "hall_ratio_e4": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/waterflood/PatternExplorer.jsx (diagnostics block, Tile 'Ekene-4 Hall slope ratio', rows through the typed date, above the reference)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/waterflood/PatternExplorer.jsx (diagnostics block, Tile 'Ekene-4 Hall slope ratio', rows through the typed date, above the reference)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The working and story-so-far lessons printed every answer and the pattern explorer opened on the fixture matrix. Re-cased on a revised allocation matrix, target and window, a Hall read to 2025-06-30 and a 5-point Chan smoothing (the panel now carries both diagnostics). hall_ratio_e4 keeps the W1 tolerance of 0.0005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "chan_slope_case": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/waterflood/PatternExplorer.jsx (diagnostics block, Tile 'Ekene-6 Chan late slope', typed smoothing)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/waterflood/PatternExplorer.jsx (diagnostics block, Tile 'Ekene-6 Chan late slope', typed smoothing)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The working and story-so-far lessons printed every answer and the pattern explorer opened on the fixture matrix. Re-cased on a revised allocation matrix, target and window, a Hall read to 2025-06-30 and a 5-point Chan smoothing (the panel now carries both diagnostics). hall_ratio_e4 keeps the W1 tolerance of 0.0005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "advanced": {
+   "pick": "A",
+   "title": "Design the flood",
+   "dataset": "ekene-dynamic/waterflood.json (a stated layer column, M 1.5, 1600 rb/d, 2.4 cp oil, Ekene-1 breakthrough)",
+   "why": "The working lesson printed every answer and the design explorer opened on the planted column and design case. Re-cased on a revised layer column, M, rate and oil viscosity, and the Ekene-1 breakthrough for the back-out (the panel now carries it).",
+   "prompt": "Design and then check a flood on a revised layer column. The sand is five non-communicating layers, given in DEPTH order with thicknesses 18, 22, 16, 14 and 14 ft and permeabilities 140, 520, 230, 95 and 410 md; the endpoint mobility ratio is 1.5 and the frozen factors are Bo 1.21584 and Bw 1.02. Report the Dykstra-Parsons permeability variation V, the vertical coverage at the FIRST layer breakthrough at that mobility ratio, and the Stiles surface water cut at the same stage using the capacity ratio A = M*Bo/Bw. Then forecast the five-spot element of 208.8040473397547 acres and 34.585155812896204 ft net at porosity 0.2 for an oil of 2.4 cp, injecting 1600 rb/d with the vertical sweep taken from your own coverage answer and a water oil ratio limit of 25: report the Craig five-spot areal sweep at breakthrough the forecast reports and the breakthrough time as the engine reports it, on whole monthly steps of 30.4375 days. Finally, invert the pattern breakthrough condition on the injection the allocation routed to Ekene-1 before its 2025-06-01 breakthrough, at that forecast's breakthrough state, and report the contacted pore volume as a fraction of the WHOLE element, 11205422.76570545 rb, computed without the vertical sweep multiplier. The design explorer opens on the teaching column and design case; type the case in.",
+   "rekey": [
+    "dykstra_parsons_v",
+    "dp_coverage_first_bt",
+    "stiles_wc_first_bt",
+    "eabt_at_design_m",
+    "design_breakthrough_days",
+    "implied_swept_fraction"
+   ],
+   "case": {
+    "perms": [
+     140,
+     520,
+     230,
+     95,
+     410
+    ],
+    "M": 1.5,
+    "iw_rb_d": 1600,
+    "muO_cp": 2.4,
+    "bt_producer": "Ekene-1",
+    "bt_date": "2025-06-01"
+   },
+   "annot": {
+    "dykstra_parsons_v": {
+     "evidence": "The working lesson printed every answer and the design explorer opened on the planted column and design case. Re-cased on a revised layer column, M, rate and oil viscosity, and the Ekene-1 breakthrough for the back-out (the panel now carries it).",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/advanced/m06-the-expert-reading/l02-working-the-capstone.md:58-60 (wf-design-explorer Layers mode)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/DesignExplorer.jsx:141 (fmt(sweep.V.V, 6))",
+     "answer_space": 9,
+     "guess_p": 0.111,
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "dp_coverage_first_bt": {
+     "evidence": "The working lesson printed every answer and the design explorer opened on the planted column and design case. Re-cased on a revised layer column, M, rate and oil viscosity, and the Ekene-1 breakthrough for the back-out (the panel now carries it).",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/advanced/m06-the-expert-reading/l02-working-the-capstone.md:58-60",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/DesignExplorer.jsx:145 (fmt(..., 6))",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "stiles_wc_first_bt": {
+     "evidence": "The working lesson printed every answer and the design explorer opened on the planted column and design case. Re-cased on a revised layer column, M, rate and oil viscosity, and the Ekene-1 breakthrough for the back-out (the panel now carries it).",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/advanced/m06-the-expert-reading/l02-working-the-capstone.md:58-60",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/DesignExplorer.jsx:148 (fmt(..., 6))",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "eabt_at_case_mu": {
+     "evidence": "The working lesson printed every answer and the design explorer opened on the planted column and design case. Re-cased on a revised layer column, M, rate and oil viscosity, and the Ekene-1 breakthrough for the back-out (the panel now carries it).",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/advanced/m06-the-expert-reading/l02-working-the-capstone.md:58-60 (Forecast mode)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/DesignExplorer.jsx:155 (fmt(f.summary.EAbt, 6))",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "case_breakthrough_days": {
+     "evidence": "The working lesson printed every answer and the design explorer opened on the planted column and design case. Re-cased on a revised layer column, M, rate and oil viscosity, and the Ekene-1 breakthrough for the back-out (the panel now carries it).",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/waterflood/advanced/m06-the-expert-reading/l02-working-the-capstone.md:58-60 (Forecast mode, EV on, 2000 rb/d)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/waterflood/DesignExplorer.jsx:157 (fmt(breakthrough_days, 2))",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "implied_swept_fraction": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/waterflood/DesignExplorer.jsx (channel back-out block, Tile 'Fraction of the element')",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/waterflood/DesignExplorer.jsx (channel back-out block, Tile 'Fraction of the element')",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The working lesson printed every answer and the design explorer opened on the planted column and design case. Re-cased on a revised layer column, M, rate and oil viscosity, and the Ekene-1 breakthrough for the back-out (the panel now carries it).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  }
+ }
+}
