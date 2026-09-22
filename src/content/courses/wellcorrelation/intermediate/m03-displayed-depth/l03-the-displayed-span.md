@@ -1,6 +1,6 @@
 # The displayed span
 
-The displayed span is the deepest displayed pick on the flattened panel minus the shallowest displayed pick. On this tier's datum, TOP_A at 1450 m, the answer is 150 m and it is one of the six graded readings. This lesson gets it, and then spends most of its length on the well that supplies the deep end, because the reason it wins is the useful part.
+The displayed span is the deepest displayed pick on the flattened panel minus the shallowest displayed pick. On this tier's datum, TOP_A at 1450 m, the answer is 150 m and it is one of the six readings this tier reports. This lesson gets it, and then spends most of its length on the well that supplies the deep end, because the reason it wins is the useful part.
 
 ## The shallow end is free
 
@@ -23,7 +23,7 @@ The deepest displayed pick is Ekene-2's TOP_B at 1600 m displayed, and
 
 $$span = 1600 - 1450 = 150$$
 
-The displayed span is 150 m, the graded value.
+The displayed span is 150 m.
 
 ## Why Ekene-2 owns the deep end
 

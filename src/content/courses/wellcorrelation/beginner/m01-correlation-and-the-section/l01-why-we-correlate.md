@@ -34,7 +34,7 @@ That is the asymmetry that makes correlation worth doing slowly. A mis-hung top 
 
 ## What this course does
 
-The rest of this beginner course teaches you to build and read a correlation section on a small, fixed field of four wells. You will pick and inspect formation tops, view them at true measured depth, flatten the section on a chosen surface to strip structure out of the display, and measure how the intervals between tops behave across the field. The graded capstone asks you to read six specific numbers off the section panel, which is a compact way of proving you can both build the display and interpret it correctly.
+The rest of this beginner course teaches you to build and read a correlation section on a small, fixed field of four wells. You will pick and inspect formation tops, view them at true measured depth, flatten the section on a chosen surface to strip structure out of the display, and measure how the intervals between tops behave across the field. The capstone gives you a section of its own and asks you to read six specific numbers off the section panel, which is a compact way of proving you can both build the display and interpret it correctly.
 
 ## Exercise
 

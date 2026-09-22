@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import {
-  TEACHING_WELLS, ZONE, computeSection, structuralRelief, displayGr,
+  ZONE, computeSection, structuralRelief, displayGr,
 } from '@/lib/correlationTeaching';
+import { useSectionWells } from '@/components/course/panels/wellcorrelation/caseInputs';
 import { depthToY, columnX } from '@petrolord/engines/engines/wellcorrelation/section.js';
 import { PanelShell, NumField, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -21,7 +22,7 @@ const W = 640;
 const H = 320;
 const PLOT = { left: 56, top: 24, width: W - 76, height: H - 56 };
 
-const fmt = (v, d = 0) => (Number.isFinite(v) ? v.toFixed(d) : '-');
+const fmt = (v, d = 1) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 
 const SectionExplorer = () => {
   const [mode, setMode] = useState('structural');
@@ -33,27 +34,32 @@ const SectionExplorer = () => {
     : { mode: 'flatten', topName, datumM: Number(datumM) }),
   [mode, topName, datumM]);
 
+  const c = useSectionWells();
+
   const section = useMemo(() => {
+    if (!c.ok) return null;
     try {
-      return computeSection(datum);
+      return computeSection(datum, c.wells);
     } catch {
       return null;
     }
-  }, [datum]);
+  }, [datum, c.ok, c.wells]);
 
-  if (!section) {
+  if (!section || !Number.isFinite(section.range[0])) {
     return (
-      <PanelShell title="Section explorer" subtitle="Enter a finite datum depth to draw the section.">
-        <Note>The datum depth must be a number.</Note>
+      <PanelShell title="Section explorer" subtitle="Enter a finite datum depth and a section to draw.">
+        {c.ui}
+        <Note>The datum depth must be a number, and every typed line must read name, TOP_A, TOP_SAND, BASE_SAND, TOP_B with picks deepening down the well.</Note>
       </PanelShell>
     );
   }
+  const WELLS = c.wells;
 
   const [viewTop, viewBase] = section.range;
   const pad = Math.max(4, (viewBase - viewTop) * 0.08);
   const vTop = viewTop - pad;
   const vBase = viewBase + pad;
-  const n = TEACHING_WELLS.length;
+  const n = WELLS.length;
 
   const yOf = (d) => depthToY(d, vTop, vBase, PLOT.top, PLOT.height);
   const xOf = (i) => columnX(i, n, PLOT.left, PLOT.width);
@@ -73,11 +79,13 @@ const SectionExplorer = () => {
 
   const gridDepths = [];
   const step = (vBase - vTop) > 120 ? 50 : 25;
+  // (grid labels are whole metres; the table and tiles print 0.1 m)
   for (let d = Math.ceil(vTop / step) * step; d <= vBase; d += step) gridDepths.push(d);
 
   return (
     <PanelShell title="Section explorer"
-      subtitle="Four wells, four surfaces, one datum of your choosing. Switch between the structural view and a flattened view and watch what each one reveals.">
+      subtitle={`${n} wells, four surfaces, one datum of your choosing. It opens on the Ekene wells. Switch between the structural view and a flattened view and watch what each one reveals.`}>
+      {c.ui}
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
         <SelectField label="View" value={mode} onChange={setMode}
           options={[['structural', 'Structural (true MD)'], ['flatten', 'Flattened on a top']]} />
@@ -99,7 +107,7 @@ const SectionExplorer = () => {
             <g key={d}>
               <line x1={PLOT.left - 8} y1={yOf(d)} x2={PLOT.left + PLOT.width} y2={yOf(d)}
                 stroke="#334155" strokeDasharray="3 3" />
-              <text x={PLOT.left - 12} y={yOf(d) + 3} fill="#64748b" fontSize="9" textAnchor="end">{d}</text>
+              <text x={PLOT.left - 12} y={yOf(d) + 3} fill="#64748b" fontSize="9" textAnchor="end">{Math.round(d)}</text>
             </g>
           ))}
 
@@ -111,7 +119,7 @@ const SectionExplorer = () => {
           ) : null))}
 
           {/* GR character */}
-          {TEACHING_WELLS.map((w, i) => (
+          {WELLS.map((w, i) => (
             <path key={`gr${w.id}`} d={grPath(w, i)} stroke="#94a3b8" strokeWidth="1" fill="none" opacity="0.8" />
           ))}
 
@@ -178,7 +186,7 @@ const SectionExplorer = () => {
 
       <TileGrid>
         <Tile label="Displayed span" value={fmt(section.range[1] - section.range[0])} unit="m" />
-        <Tile label={`${topName} structural relief`} value={fmt(structuralRelief(topName))} unit="m" />
+        <Tile label={`${topName} structural relief`} value={fmt(structuralRelief(topName, WELLS))} unit="m" />
         {section.polylines.map((pl) => (
           <Tile key={pl.name} label={`${pl.name} line reaches`} value={`${pl.points.length} of ${n}`} unit="wells" />
         ))}

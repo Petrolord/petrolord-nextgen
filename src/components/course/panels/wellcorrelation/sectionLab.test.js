@@ -3,7 +3,7 @@ import {
   TEACHING_WELLS, ZONE, computeSection, structuralRelief,
 } from '@/lib/correlationTeaching';
 
-// Pins the section-explorer panel math to the live NG2 capstone oracle.
+// Pins the section-explorer panel math to the Ekene teaching section (the NG2 capstone until W5a).
 // If any of these drift, the teaching panel would let a learner produce
 // readings the grader rejects.
 
@@ -13,7 +13,7 @@ describe('well correlation section explorer: engine math', () => {
   const section = computeSection(CAPSTONE_DATUM);
   const byName = Object.fromEntries(section.rows.map((r) => [r.name, r]));
 
-  it('reproduces the NG2 capstone six under the TOP_SAND 1500 m datum', () => {
+  it('reproduces the Ekene teaching six under the TOP_SAND 1500 m datum (the pre-W5 capstone key)', () => {
     expect(byName['Ekene-2'].shift).toBe(-65);
     expect(byName['Ekene-3'].thickness).toBe(29);
     expect(byName['Ekene-4'].tops.find((t) => t.name === 'BASE_SAND').displayed).toBe(1525);

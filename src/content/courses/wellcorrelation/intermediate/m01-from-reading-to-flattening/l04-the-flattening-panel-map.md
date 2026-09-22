@@ -1,6 +1,6 @@
 # The flattening panel map
 
-This lesson is the map of the tier. It names the five things the flattening panel reports, says which module owns each one, and puts the six graded numbers in front of you now rather than at the end. Knowing what you are being asked to produce changes how you read everything between here and the capstone.
+This lesson is the map of the tier. It names the five things the flattening panel reports, says which module owns each one, and puts the six reported numbers in front of you now rather than at the end. Knowing what you are being asked to produce changes how you read everything between here and the capstone.
 
 ## The five readings
 
@@ -20,22 +20,22 @@ Module 6 puts the five together as a workflow in the order you would run them on
 
 ## The tier setting
 
-Five of the six graded readings at this tier use one setting: flatten on TOP_A at a 1450 m datum. Set the panel to that and leave it there while you work through the modules. Move it deliberately when a lesson asks you to, then put it back. The sixth reading is taken at a second setting the capstone names, flattened on TOP_SAND at a 1480 m datum, to show that the rules travel to a datum you have not been walked through.
+On the Ekene section, five of the six readings this tier reports use one setting: flatten on TOP_A at a 1450 m datum. Set the panel to that and leave it there while you work through the modules. Move it deliberately when a lesson asks you to, then put it back. The sixth is taken at a second setting, flattened on TOP_SAND at a 1480 m datum, to show that the rules travel to a datum you have not been walked through. The capstone does the same on a section and datums of its own.
 
-## The six graded numbers
+## The six reported numbers
 
-The tolerances are part of the fact, so learn them alongside the values.
+On the Ekene section:
 
-| reading | value | tolerance |
-|---|---|---|
-| Ekene-4 flattening shift | -80 m | 0.01 |
-| Ekene-2 TOP_SAND displayed depth | 1503 m | 0.01 |
-| Ekene-4 TOP_A to TOP_SAND interval | 60 m | 0.01 |
-| A-to-SAND growth range | 14 m | 0.01 |
-| shallowest displayed depth, flattened on TOP_SAND at 1480 m | read at the capstone | 0.5 |
-| displayed depth span of the section | 150 m | 0.01 |
+| reading | Ekene value |
+|---|---|
+| Ekene-4 flattening shift | -80 m |
+| Ekene-2 TOP_SAND displayed depth | 1503 m |
+| Ekene-4 TOP_A to TOP_SAND interval | 60 m |
+| A-to-SAND growth range | 14 m |
+| shallowest displayed depth, flattened on TOP_SAND at 1480 m | 1420 m |
+| displayed depth span of the section | 150 m |
 
-Look at the shape of that table before the values. All six are quantities in metres with a tolerance on them, and five of them come from one setting. The sixth comes from a different flattening top and datum, and it is there because a shift is one subtraction whatever the datum: the arithmetic that reads the tier setting reads any other setting just as well.
+Look at the shape of that table before the values. All six are quantities in metres, and five of them come from one setting. The sixth comes from a different flattening top and datum, and it is there because a shift is one subtraction whatever the datum: the arithmetic that reads the tier setting reads any other setting just as well.
 
 Three of the six are worth flagging now because each has a standard way of going wrong.
 
@@ -59,6 +59,6 @@ The panel below flattens the Ekene section on the top and datum you choose, and 
 
 ## Exercise
 
-Open the panel on TOP_A at 1450 m and find the five graded readings taken at that setting. Beside each one, write the module that will explain it and the kind of number it is from the five kinds above. Then change the datum depth on its own, leaving the flattening top on TOP_A, and note which of the five move and which do not.
+Open the panel on TOP_A at 1450 m and find the five readings taken at that setting. Beside each one, write the module that will explain it and the kind of number it is from the five kinds above. Then change the datum depth on its own, leaving the flattening top on TOP_A, and note which of the five move and which do not.
 
 Self-check: the shift, the displayed depth and the displayed span belong to modules 2 and 3, and the interval and the growth range belong to module 4. By kind, the -80 m is a shift, the 1503 m is a displayed depth, the 60 m and the 150 m are an interval and a displayed span, and the 14 m is a difference between intervals. Changing the datum depth alone moves the shifts and every displayed depth, including the 1503 m, and leaves the interval, the growth range and the 150 m displayed span unchanged.
