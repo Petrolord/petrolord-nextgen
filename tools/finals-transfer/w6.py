@@ -464,11 +464,16 @@ def capstones(container, courses):
 
 
 def leak_hits(text, fields):
-    """A literal leaks a graded field when it sits within ten tolerances of the
-    answer as the capstone states it, or when it EQUALS the answer, at any of
-    the unit shiftings, to the literal's own significant figures (at least
-    MIN_SIG). The ten-tolerance window is not applied at shifted scales: there
-    it matched ordinary inputs (30 Hz against an intercept times 1000)."""
+    """A literal leaks a graded field when:
+      - the grader would accept it as the answer (within one tolerance);
+      - it carries at least MIN_SIG significant figures and sits within ten
+        tolerances of the answer, where that window is tight (at most 1
+        percent of the answer); on a loose tolerance ten of them cover
+        ordinary inputs (an NTG of 0.75 against a 0.657 MMstb field);
+      - or it EQUALS the answer, at any of the unit shiftings, to the
+        literal's own significant figures (at least MIN_SIG).
+    Small whole numbers under 20 printed with fewer than MIN_SIG figures
+    (counts, layer numbers) are exempt from the first two rules."""
     hits = []
     for tokn in NUM.findall(text):
         try:
@@ -476,18 +481,23 @@ def leak_hits(text, fields):
         except ValueError:
             continue
         sd = sig_digits(tokn)
+        small = float(v).is_integer() and abs(v) < 20 and sd < MIN_SIG
         for f in fields:
-            exp, tol = f.get('expected'), f.get('tol') or 0
+            exp, tol = f.get('expected'), abs(f.get('tol') or 0)
             if not isinstance(exp, (int, float)) or isinstance(exp, bool):
                 continue
-            if abs(v - exp) <= LEAK_MARGIN * abs(tol) and not (float(v).is_integer() and abs(v) < 20 and sd < MIN_SIG):
+            d = abs(v - exp)
+            if not small and d <= tol:
+                hits.append((tokn, f['key'], exp, 'within the grading tolerance'))
+                continue
+            if not small and sd >= MIN_SIG and LEAK_MARGIN * tol <= 0.01 * abs(exp) and d <= LEAK_MARGIN * tol:
                 hits.append((tokn, f['key'], exp, 'within ten tolerances'))
                 continue
             if sd >= MIN_SIG:
-                for s in LEAK_SCALES:
-                    ev = exp * s
+                for sc in LEAK_SCALES:
+                    ev = exp * sc
                     if ev != 0 and round_sig(ev, sd) == round_sig(v, sd):
-                        hits.append((tokn, f['key'], exp, f'equal at {sd} significant figures (scale {s:g})'))
+                        hits.append((tokn, f['key'], exp, f'equal at {sd} significant figures (scale {sc:g})'))
                         break
     return hits
 
@@ -943,6 +953,8 @@ def selftest():
     check('a leaked capstone value at 4 significant figures is caught', leak_hits('about 33910000 Pa', f))
     check('an unrelated figure is not a leak', not leak_hits('Shmin is 41250000 Pa', f))
     check('a leak in another unit is caught at its significant figures', leak_hits('33914.68 kPa', f))
+    check('a figure the grader would accept is a leak', leak_hits('about 0.66', [dict(key='d', expected=0.657, tol=0.05)]))
+    check('an ordinary input near a loose field is not a leak', not leak_hits('an NTG of 0.75', [dict(key='d', expected=0.657, tol=0.02)]))
     check('an ordinary input is not a leak at a shifted scale', not leak_hits('a 30 Hz wavelet', [dict(key='a', expected=0.031, tol=0.0005)]))
     d = {'print': {'x': '1.2345'}, 'values': {'x': 1.2345}}
     e = []
