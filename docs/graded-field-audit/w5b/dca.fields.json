@@ -1,0 +1,146 @@
+[
+ {
+  "tier": "beginner",
+  "key": "qi_bpd",
+  "label": "Fitted initial rate qi at the window start",
+  "unit": "stb/d",
+  "tol": 0.05,
+  "expected": 68.68131868131867
+ },
+ {
+  "tier": "beginner",
+  "key": "di_per_day",
+  "label": "Fitted nominal decline Di at the window start",
+  "unit": "1/d",
+  "tol": 2e-06,
+  "expected": 0.00103021978021978
+ },
+ {
+  "tier": "beginner",
+  "key": "eur_limit_stb",
+  "label": "EUR at the 8 stb/d limit",
+  "unit": "stb",
+  "tol": 500,
+  "expected": 143335.71296891742
+ },
+ {
+  "tier": "beginner",
+  "key": "t_limit_days",
+  "label": "Time to the 8 stb/d limit",
+  "unit": "days",
+  "tol": 10,
+  "expected": 7362.666666666667
+ },
+ {
+  "tier": "beginner",
+  "key": "np_to_date_stb",
+  "label": "Cumulative from the window start to 2022-10-01",
+  "unit": "stb",
+  "tol": 400,
+  "expected": 29840.327683366406
+ },
+ {
+  "tier": "beginner",
+  "key": "eff_decline_pct",
+  "label": "Tangent effective annual decline",
+  "unit": "%/yr",
+  "tol": 0.1,
+  "expected": 31.34184156157903
+ },
+ {
+  "tier": "intermediate",
+  "key": "late_di",
+  "label": "Ekene-3 fitted Di, 2021-11-01 window",
+  "unit": "-",
+  "tol": 2e-06,
+  "expected": 0.001242236024844721
+ },
+ {
+  "tier": "intermediate",
+  "key": "well_eur_stb",
+  "label": "Ekene-5 EUR at 8 stb/d (primary fit)",
+  "unit": "stb",
+  "tol": 600,
+  "expected": 168381.90962055034
+ },
+ {
+  "tier": "intermediate",
+  "key": "sub_di",
+  "label": "Ekene-6 fitted Di, 2021-05-01 window",
+  "unit": "1/d",
+  "tol": 2e-06,
+  "expected": 0.0009219138932423719
+ },
+ {
+  "tier": "intermediate",
+  "key": "naive_r2",
+  "label": "Ekene-6 R2 across the flood (2020-01 to 2023-12)",
+  "unit": "-",
+  "tol": 0.001,
+  "expected": 0.7822456367465322
+ },
+ {
+  "tier": "intermediate",
+  "key": "tc_eur_stb",
+  "label": "Ekene-3 EUR from the E3 + E5 type curve at 8 stb/d",
+  "unit": "stb",
+  "tol": 50,
+  "expected": 107761.48159232213
+ },
+ {
+  "tier": "intermediate",
+  "key": "field_eur_stb",
+  "label": "Sum of the four closed-form EURs at 8 stb/d",
+  "unit": "stb",
+  "tol": 2000,
+  "expected": 486822.66991036595
+ },
+ {
+  "tier": "advanced",
+  "key": "late_di_a",
+  "label": "Ekene-1 fitted Di from 2024-10-01",
+  "unit": "1/d",
+  "tol": 5e-06,
+  "expected": 0.0004935544789384426
+ },
+ {
+  "tier": "advanced",
+  "key": "late_di_b",
+  "label": "Ekene-6 oil decline on the same window",
+  "unit": "1/d",
+  "tol": 2e-06,
+  "expected": 0.0015982971065338885
+ },
+ {
+  "tier": "advanced",
+  "key": "b_eur_stb",
+  "label": "EUR at b 1.1 (Ekene-1 primary fit, limit 8)",
+  "unit": "stb",
+  "tol": 2000,
+  "expected": 311019.42303974996
+ },
+ {
+  "tier": "advanced",
+  "key": "b_ratio",
+  "label": "b 1.1 EUR over the exponential EUR",
+  "unit": "-",
+  "tol": 0.02,
+  "expected": 3.332350961140178
+ },
+ {
+  "tier": "advanced",
+  "key": "p90_stb",
+  "label": "Field triangle P90 (low)",
+  "unit": "stb",
+  "tol": 2000,
+  "expected": 443704.67638626386
+ },
+ {
+  "tier": "advanced",
+  "key": "p10_stb",
+  "label": "Field triangle P10 (high)",
+  "unit": "stb",
+  "tol": 2000,
+  "expected": 565871.4376509781
+ }
+]

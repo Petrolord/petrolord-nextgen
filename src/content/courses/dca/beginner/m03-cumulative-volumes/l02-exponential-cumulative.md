@@ -41,7 +41,7 @@ Here is the fixture's full table, every entry from the same three-step chain:
 | 730 | 0.876 | 58355.4633979620 |
 | 1096 | 1.3152 | 73157.9366256283 |
 
-The last row is 2023-01-01, the day the Ekene waterflood starts and the primary decline ends. By then the bracket reads $0.731579366256283$: the well has delivered 73.16 percent of its ceiling in three years. That cumulative, 73157.9366256283 stb, is one of the numbers the Associate capstone asks you to produce, and it is exactly this arithmetic.
+The last row is 2023-01-01, the day the Ekene waterflood starts and the primary decline ends. By then the bracket reads $0.731579366256283$: the well has delivered 73.16 percent of its ceiling in three years. That cumulative, 73157.9366256283 stb, is the teaching case of a quantity the Associate capstone asks you to produce on its own well and dates, and it is exactly this arithmetic.
 
 Stop and reproduce the 730 day row yourself before reading on. Three steps: multiply, exponentiate, subtract from one, then scale by 100000. If you get 58355.46 you have the structure right.
 

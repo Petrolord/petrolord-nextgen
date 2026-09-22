@@ -23,7 +23,7 @@ let s = 0.05; for (let i = 1; i < 10; i++) s += 0.05; s   // 0.49999999999999994
 0.05 * 10                                                 // 0.5
 ```
 
-Two arithmetics that agree in decimal disagree in binary, and the engine uses the first one. The practical rule is short: never test a reported $b$ with an equality comparison. Compare it against a tolerance. The Professional capstone grades Ekene-3's exponent to a tolerance of 0.02, so this float is entirely harmless there, and 0.5 is the right thing to write in a memo. A spreadsheet lookup keyed on an exact 0.5, or a unit test asserting `b === 0.5`, would fail on a number that is correct.
+Two arithmetics that agree in decimal disagree in binary, and the engine uses the first one. The practical rule is short: never test a reported $b$ with an equality comparison. Compare it against a tolerance. A tolerance of 0.02 on an exponent makes this float entirely harmless, and 0.5 is the right thing to write in a memo. A spreadsheet lookup keyed on an exact 0.5, or a unit test asserting `b === 0.5`, would fail on a number that is correct.
 
 **Two: the grid quantises.** The engine can only ever return a $b$ within one step of a multiple of 0.05. A well whose true exponent is 0.37 will be reported at 0.35 or 0.40, and the report will carry no hint that a compromise was made. Ikoku's gas well in Ahmed's Example 16-3 is fitted in the literature at $b = 0.5195$ by a Newton solve; our grid could never produce that value, and the Expert tier makes a whole lesson of the difference between a solver and a grid. At this tier the discipline is to read a reported $b$ as the centre of a 0.05-wide bin, not as five decimal places of knowledge.
 

@@ -4,6 +4,13 @@
 // over the committed ekene-dynamic goldens. Panels and the learning page
 // import THIS module; nothing here re-implements engine math beyond the
 // closed forms the course teaches by hand.
+//
+// The committed Ekene field, booked at a 10 stb/d limit on the named windows,
+// is the TEACHING case: the panels open on it and the lessons work it. Since
+// W5b (2026-09) each tier's capstone books a case of its own (custom fit
+// windows, a different economic limit, dates, pools, b and triangle inputs),
+// stated in the brief and typed into the panels. Nothing here carries that
+// case; panelCapstoneGuard.test.js checks no panel default lands on it.
 
 import ratesFix from '@petrolord/engines/test-data/ekene-dynamic/rates.json';
 import fieldFix from '@petrolord/engines/test-data/ekene-dynamic/field.json';
@@ -96,15 +103,15 @@ export { calculateEUR, getFitQuality };
 // Type curves (Professional): pool -> normalize -> fit -> fixed-b apply
 // ---------------------------------------------------------------------------
 
-export function typeCurvePipeline(poolNames = ['Ekene-3', 'Ekene-6'], targetName = 'Ekene-6') {
+export function typeCurvePipeline(poolNames = ['Ekene-3', 'Ekene-6'], targetName = 'Ekene-6', qLimit = ECON_LIMIT_BOPD) {
   const primaryRows = (n) =>
     wellByName(n).monthly.filter((r) => r.date < FLOOD_START).map((r) => ({ date: r.date, rate: r.oil_bpd }));
   const pooled = poolNames.flatMap((n) => normalizeByTimeAndRate(primaryRows(n)));
   const tc = fitTypeCurve(pooled, 'Hyperbolic');
   if (!tc) return { tc: null };
   const applied = applyTypeCurve(tc, primaryRows(targetName));
-  const eurFixedB = applied ? calculateEUR(applied.qi, applied.Di, applied.b, ECON_LIMIT_BOPD, 'hyperbolic') : null;
-  const eurTrue = wellByName(targetName).closed_form.eur_at_econ_limit_stb;
+  const eurFixedB = applied ? calculateEUR(applied.qi, applied.Di, applied.b, qLimit, 'hyperbolic') : null;
+  const eurTrue = closedFormEur(targetName, qLimit);
   return {
     tc,
     applied,
@@ -120,15 +127,26 @@ export function typeCurvePipeline(poolNames = ['Ekene-3', 'Ekene-6'], targetName
 
 export const B_LEVERAGE_BASE = { qi: 120, Di: 0.0012, qLimit: ECON_LIMIT_BOPD };
 
-export function bLeverageRow(b) {
-  const { qi, Di, qLimit } = B_LEVERAGE_BASE;
+export function bLeverageRow(b, base = B_LEVERAGE_BASE) {
+  const { qi, Di, qLimit } = { ...B_LEVERAGE_BASE, ...base };
   const model = b === 0 ? 'exponential' : Math.abs(b - 1) < 1e-9 ? 'harmonic' : 'hyperbolic';
   const eur = calculateEUR(qi, Di, b, qLimit, model);
   return { b, eur, ratioToExponential: eur / calculateEUR(qi, Di, 0, qLimit, 'exponential') };
 }
 
-// The field EUR triangle the Expert capstone uses (mode = the closed-form
-// sum of the four wells' EURs at the 10 stb/d limit).
+// A well's closed-form EUR from its planted model at any limit (the fixture
+// records it at 10 stb/d; this is the same closed form at the limit given).
+export function closedFormEur(name, qLimit = ECON_LIMIT_BOPD) {
+  const p = wellByName(name).planted;
+  return calculateEUR(p.qi_bpd, p.di_per_day, p.b, qLimit, p.model);
+}
+
+// The field's deterministic booking: the four closed-form EURs summed.
+export const fieldClosedFormEur = (qLimit = ECON_LIMIT_BOPD) =>
+  WELLS.reduce((s, w) => s + closedFormEur(w.name, qLimit), 0);
+
+// The teaching field triangle (mode = the closed-form sum of the four
+// wells' EURs at the 10 stb/d limit).
 export const FIELD_TRIANGLE = {
   min: 380000,
   mode: WELLS.reduce((s, w) => s + w.closed_form.eur_at_econ_limit_stb, 0),

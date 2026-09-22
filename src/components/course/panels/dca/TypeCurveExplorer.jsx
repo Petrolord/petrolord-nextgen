@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import { WELLS, ECON_LIMIT_BOPD, typeCurvePipeline } from './declineLab';
-import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Type-curve explorer: pool producers, normalize by time and peak rate, fit
 // one hyperbolic through the pooled cloud, then apply it fixed-b to a target
@@ -13,17 +13,19 @@ const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toFixed(d) : '-');
 const TypeCurveExplorer = () => {
   const [pool, setPool] = useState({ 'Ekene-1': false, 'Ekene-3': true, 'Ekene-5': false, 'Ekene-6': true });
   const [target, setTarget] = useState('Ekene-6');
+  const [limit, setLimit] = useState(String(ECON_LIMIT_BOPD));
 
   const poolNames = WELLS.map((w) => w.name).filter((n) => pool[n]);
   const out = useMemo(() => {
     if (poolNames.length < 1) return { tc: null };
     try {
-      return typeCurvePipeline(poolNames, target);
+      if (!(Number(limit) > 0)) return { error: 'the economic limit must be a positive rate' };
+      return typeCurvePipeline(poolNames, target, Number(limit));
     } catch (e) {
       return { error: e.message };
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [JSON.stringify(poolNames), target]);
+  }, [JSON.stringify(poolNames), target, limit]);
 
   return (
     <PanelShell
@@ -48,6 +50,9 @@ const TypeCurveExplorer = () => {
           <SelectField label="Apply fixed-b to" value={target} onChange={setTarget}
             options={WELLS.map((w) => [w.name, w.name])} />
         </div>
+        <div className="w-44">
+          <NumField label="Economic limit (stb/d)" value={limit} onChange={setLimit} />
+        </div>
       </div>
 
       {out.error && <Note>Engine error: {out.error}</Note>}
@@ -65,7 +70,7 @@ const TypeCurveExplorer = () => {
               <Tile label={`${target} fixed-b qi`} value={fmt(out.applied.qi, 4)} unit="stb/d" />
               <Tile label={`${target} fixed-b Di`} value={fmt(out.applied.Di, 7)} unit="1/d" />
               <Tile label="Match R2 / quality" value={`${fmt(out.applied.R2, 6)} / ${out.applied.quality}`} />
-              <Tile label={`EUR @ ${ECON_LIMIT_BOPD} (fixed-b)`} value={fmt(out.eurFixedB, 1)} unit="stb" />
+              <Tile label={`EUR @ ${limit} (fixed-b)`} value={fmt(out.eurFixedB, 1)} unit="stb" />
               <Tile label="True closed-form EUR" value={fmt(out.eurTrue, 1)} unit="stb" />
               <Tile label="Booking difference" value={fmt(out.pctOff, 4)} unit="%" />
             </TileGrid>

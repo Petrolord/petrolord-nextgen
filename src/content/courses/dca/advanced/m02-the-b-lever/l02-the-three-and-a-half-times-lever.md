@@ -45,11 +45,11 @@ What the software did was evaluate a fixed set of exponents on a window, compute
 
 The Professional tier taught you to read the ceiling alarm, and the alarm is the extreme case of this: a $b$ that has run out of range. But the everyday case has no alarm at all. A well fitted over eighteen months and returned at $b = 1.15$ raises no flag anywhere in the software, and it books 301134.0243262835 stb where a $b$ one rung higher books 321875.91475861275 stb and one rung lower books less again. The software cannot flag what it cannot distinguish. **The defence of a high $b$ is never the fit statistic. It is the window, the flow regime, and the analog.**
 
-## Obtaining the two numbers the Expert capstone grades
+## Obtaining the two lever numbers
 
-Both values in this lesson are graded fields, so obtain them deliberately at least once rather than copying them off this page.
+The Expert capstone asks for the same two quantities at a $b$ and a limit of its own, so obtain these teaching values deliberately at least once rather than copying them off this page.
 
-The direct route is the engine. Call `calculateEUR` with $q_i = 120$, $D_i = 0.0012$ per day, $b = 1.2$, $q_L = 10$ stb/d and the hyperbolic model. It returns **321875.914758613** stb, which is the `b12_eur_stb` field, graded to a tolerance of 2000. Call it again with $b = 0$ and the exponential model, which returns $(120 - 10)/0.0012 = 91666.6666666667$ stb, and divide. The quotient is **3.5113736155485027**, which is the `b_ratio` field, graded to a tolerance of 0.02.
+The direct route is the engine. Call `calculateEUR` with $q_i = 120$, $D_i = 0.0012$ per day, $b = 1.2$, $q_L = 10$ stb/d and the hyperbolic model. It returns **321875.914758613** stb, the EUR at $b = 1.2$ (the capstone grades its own $b$ to a tolerance of 2000). Call it again with $b = 0$ and the exponential model, which returns $(120 - 10)/0.0012 = 91666.6666666667$ stb, and divide. The quotient is **3.5113736155485027**, the ratio to the exponential (the capstone grades its own to a tolerance of 0.02).
 
 The panel route gives the same two numbers with no code. Leave the fixed parameters at $q_i$ 120, $D_i$ 0.0012 and limit 10, drag the $b$ slider to its top position at 1.2, and read the EUR tile and the ratio tile. The slider steps in 0.05, so 1.2 is a reachable position exactly.
 

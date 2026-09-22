@@ -438,3 +438,4 @@ A printed number counts as a leak when typing it would pass: it lies within the 
 
 | Course | Tiers | Case (what the brief states) |
 |---|---|---|
+| dca | all | beginner: Ekene-5 fitted from 2021-04-01, booked at 8 stb/d, Np to 2022-10-01. intermediate at 8 stb/d: Ekene-3 Di from 2021-11-01, Ekene-5 EUR, Ekene-6 Di from 2021-05-01, Ekene-6 R2 across the flood (2020-01 to 2023-12), the E3 + E5 type curve applied to Ekene-3, the field total. advanced: Ekene-1 and Ekene-6 fitted from 2024-10-01, b 1.1 at 8 stb/d, triangle 400000 to 620000 with the mode at 8 stb/d. New Di, qi and R2 fields tighten to 2e-6, 0.05 and 0.001 (the tiles print 7, 4 and 6 dp), because at 2e-5 a Di band covers most harmonic Di values the course prints. |

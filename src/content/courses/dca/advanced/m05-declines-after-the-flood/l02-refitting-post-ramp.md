@@ -55,7 +55,7 @@ Every decline constant is unchanged. Every $q_i$ has moved down. That split is t
 
 $D_i$ is a property of the regime, so a window wholly inside the regime returns it no matter where the window starts. $q_i$ is the fitted rate at the first row of the window, a bookkeeping convention rather than a physical quantity, so it moves whenever the window start moves. A window start you can shift by a month without moving $D_i$ is inside one regime. A window start you cannot shift without moving $D_i$ is straddling two.
 
-This is also why the Expert capstone asks for Ekene-5's decline from a window starting 2024-05-01 rather than from the earliest clean start on 2024-04-01. Both are correct windows and both return the same constant. The graded quantity is the one that does not depend on which of them you chose, and the $q_i$ that goes with it, 47.10215945583964 stb/d against 47.59933774834437 stb/d from a month earlier, is lower simply because the curve has run one more month downhill.
+This is also why the teaching case reads Ekene-5's decline from a window starting 2024-05-01 rather than from the earliest clean start on 2024-04-01. Both are correct windows and both return the same constant. The decline is the quantity that does not depend on which of them you chose, and the $q_i$ that goes with it, 47.10215945583964 stb/d against 47.59933774834437 stb/d from a month earlier, is lower simply because the curve has run one more month downhill.
 
 ## Worked example: a five-row booking by hand
 
