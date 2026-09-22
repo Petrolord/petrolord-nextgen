@@ -3,7 +3,8 @@ import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import {
-  WELLS, frictionSweep, frictionFromHookload, summaryOf, runCase, oracleCheck, stepStudy,
+  WELLS, frictionSweep, frictionFromHookload, summaryOf, oracleCheck, stepStudy,
+  TEACHING_MUD_KGM3, mudOver,
 } from './torquedragLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -15,6 +16,8 @@ const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
   : '-');
 const kN = (v) => fmt(v / 1000, 3);
+const N = (v) => fmt(v, 2);
+const Nm = (v) => fmt(v, 3);
 
 const MODES = [
   { value: 'sweep', label: 'What friction moves' },
@@ -29,10 +32,10 @@ const OP_OPTIONS = [
   { value: 'backream', label: 'back ream' },
 ];
 
-const Sweep = () => {
+const Sweep = ({ over }) => {
   const [well, setWell] = useState('buildhold');
   const [op, setOp] = useState('trip_out');
-  const rows = useMemo(() => frictionSweep(well, op), [well, op]);
+  const rows = useMemo(() => frictionSweep(well, op, undefined, over), [well, op, over]);
   const base = rows.find((r) => r.frictionOpen === 0.35);
   const span = rows[rows.length - 1].hookloadN - rows[0].hookloadN;
   return (
@@ -59,7 +62,8 @@ const Sweep = () => {
         </ResponsiveContainer>
       </div>
       <TileGrid>
-        <Tile label="At the standard 0.35" value={kN(base.hookloadN)} unit="kN" />
+        <Tile label="At the standard 0.35" value={N(base.hookloadN)} unit="N" />
+        <Tile label="Torque at the standard 0.35" value={Nm(base.surfaceTorqueNm)} unit="N.m" />
         <Tile label="Across 0.15 to 0.50" value={kN(span)} unit="kN" />
         <Tile label="Per 0.01 of friction" value={kN(span / 35)} unit="kN" />
         <Tile label="Max side force" value={fmt(base.maxSideForceNPerM, 4)} unit="N/m" />
@@ -73,22 +77,22 @@ const Sweep = () => {
   );
 };
 
-const Calibrate = () => {
+const Calibrate = ({ over }) => {
   const [well, setWell] = useState('buildhold');
   const [target, setTarget] = useState('1100000');
   const solved = useMemo(() => {
     const t = Number(target);
     if (!Number.isFinite(t)) return null;
     try {
-      const mu = frictionFromHookload({ well, operation: 'trip_out', targetN: t });
+      const mu = frictionFromHookload({ well, operation: 'trip_out', targetN: t, ...over });
       return {
         mu,
-        check: summaryOf(well, 'trip_out', { frictionOpen: mu }).hookloadN,
-        torque: summaryOf(well, 'rotate_on_bottom', { frictionOpen: mu }).surfaceTorqueNm,
-        baseTorque: summaryOf(well, 'rotate_on_bottom').surfaceTorqueNm,
+        check: summaryOf(well, 'trip_out', { ...over, frictionOpen: mu }).hookloadN,
+        torque: summaryOf(well, 'rotate_on_bottom', { ...over, frictionOpen: mu }).surfaceTorqueNm,
+        baseTorque: summaryOf(well, 'rotate_on_bottom', over).surfaceTorqueNm,
       };
     } catch { return null; }
-  }, [well, target]);
+  }, [well, target, over]);
   return (
     <>
       <div className="grid grid-cols-2 gap-2">
@@ -98,9 +102,9 @@ const Calibrate = () => {
       {solved && (
         <TileGrid>
           <Tile label="Open-hole friction factor" value={fmt(solved.mu, 8)} />
-          <Tile label="Hookload it reproduces" value={kN(solved.check)} unit="kN" />
-          <Tile label="Torque it then predicts" value={fmt(solved.torque / 1000, 4)} unit="kN.m" />
-          <Tile label="Torque at the standard 0.35" value={fmt(solved.baseTorque / 1000, 4)} unit="kN.m" />
+          <Tile label="Hookload it reproduces" value={N(solved.check)} unit="N" />
+          <Tile label="Torque it then predicts" value={Nm(solved.torque)} unit="N.m" />
+          <Tile label="Torque at the standard 0.35" value={Nm(solved.baseTorque)} unit="N.m" />
         </TileGrid>
       )}
       <Note>
@@ -163,17 +167,29 @@ const Oracle = () => {
 
 const FrictionExplorer = () => {
   const [mode, setMode] = useState('sweep');
+  const [mud, setMud] = useState('');
+  const over = useMemo(() => mudOver(mud), [mud]);
   return (
     <PanelShell
       title="Friction explorer"
       subtitle="The one calibrated number in the model, and how far this implementation sits from the oracle that generated its goldens"
     >
-      <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
-      <div className="mt-3">
-        {mode === 'sweep' && <Sweep />}
-        {mode === 'calibrate' && <Calibrate />}
-        {mode === 'oracle' && <Oracle />}
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
+        <NumField label={`Mud density (kg/m3), blank for the lessons' ${TEACHING_MUD_KGM3}`} value={mud}
+          onChange={setMud} placeholder={String(TEACHING_MUD_KGM3)} />
       </div>
+      <div className="mt-3">
+        {!over && <Note>Type a mud density between 0 and 7850 kg/m3, or leave it blank.</Note>}
+        {over && mode === 'sweep' && <Sweep over={over} />}
+        {over && mode === 'calibrate' && <Calibrate over={over} />}
+        {over && mode === 'oracle' && <Oracle />}
+      </div>
+      {mode === 'oracle' && (
+        <p className="text-[11px] text-gray-500 mt-2">
+          The oracle comparison always runs on the goldens' own {TEACHING_MUD_KGM3} kg/m3 mud, because that is what the oracle was generated on.
+        </p>
+      )}
     </PanelShell>
   );
 };

@@ -4,6 +4,8 @@ Six numbers from three wells, and the order to take them in.
 
 {{panel:td-string-explorer}}
 
+**Your case.** Type 1500 into the explorer's mud density box. Every view then runs this capstone's mud, and the hookload view prints each hookload in newtons to two decimals. The box opens blank, which is the lessons' 1440.
+
 ## What is asked
 
 1. The buoyancy factor in 1500 kg/m3 mud.

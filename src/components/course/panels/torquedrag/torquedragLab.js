@@ -204,8 +204,8 @@ export const stepStudy = (id = 'horizontal', operation = 'trip_in',
 // ---------------------------------------------------------------------------
 
 export const frictionSweep = (id = 'buildhold', operation = 'trip_out',
-  mus = [0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50]) => mus.map((frictionOpen) => {
-  const s = summaryOf(id, operation, { frictionOpen });
+  mus = [0.15, 0.20, 0.25, 0.30, 0.35, 0.40, 0.45, 0.50], over = {}) => mus.map((frictionOpen) => {
+  const s = summaryOf(id, operation, { ...over, frictionOpen });
   return {
     frictionOpen,
     hookloadN: s.hookloadN,
@@ -265,8 +265,8 @@ export const pipeLimits = ({
 };
 
 export const bucklingLadder = (well = 'horizontal',
-  incs = [0, 15, 30, 45, 60, 75, 90]) => incs.map((incDeg) => {
-  const l = pipeLimits({ well, incDeg });
+  incs = [0, 15, 30, 45, 60, 75, 90], { mudDensityKgM3 } = {}) => incs.map((incDeg) => {
+  const l = pipeLimits({ well, incDeg, ...(mudDensityKgM3 == null ? {} : { mudDensityKgM3 }) });
   return { incDeg, sinusoidalN: l.sinusoidalN, helicalN: l.helicalN };
 });
 
@@ -290,6 +290,17 @@ export const utilization = (well = 'horizontal', operation = 'rotate_on_bottom',
 // lesson printed. The lessons teach on 1440 kg/m3 and 50 h at 120 rpm; the
 // capstone reruns the same wells in 1500 kg/m3 mud with a two-entry schedule.
 export const CAPSTONE_MUD_KGM3 = 1500;
+
+// The mud box on every explorer. Blank means the lessons' own mud; anything
+// typed that is a density a mud can have is passed to the engine as
+// mudDensityKgM3. The explorers open blank, so no default state is the
+// capstone's mud.
+export const TEACHING_MUD_KGM3 = 1440;
+export const mudOver = (typed) => {
+  if (typed === '' || typed == null) return {};
+  const m = Number(typed);
+  return Number.isFinite(m) && m > 0 && m < 7850 ? { mudDensityKgM3: m } : null;
+};
 export const CAPSTONE_SCHEDULE = [{ rpm: 150, hours: 30 }, { rpm: 90, hours: 20 }];
 
 export const WEAR_CASE = {

@@ -51,222 +51,272 @@
   {
    "tier": "beginner",
    "key": "slant_pickup_hookload_N",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/StringExplorer.jsx:115",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Hookload against depth view, well slant",
+   "printed": {
+    "decimals": 2
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Tile 'Pick up' N(v) = fmt(v, 2) newtons",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/StringExplorer.jsx:115-120, :164 -> add a mud density input (default 1440) passed to runCase/summaryOf as mudDensityKgM3, and print hookloads in N with 2 decimals instead of kN(v) = kN to 3 decimals (1 N)"
-   },
-   "owner_decision": true,
-   "recommendation": "No route exists today. The capstone runs the fixture wells at 1500 kg/m3 mud, but no NextGen torque and drag explorer has a mud input (they run the fixture at 1440; the lab already accepts a mudDensityKgM3 override, /root/wt-b5-nextgen/src/components/course/panels/torquedrag/torquedragLab.js:82-94, :222), and the Suite Torque and Drag Studio neither carries the five fixture wells nor prints finely enough (hookload kN toFixed(1) = 100 N, torque kN.m toFixed(2) = 10 N.m, src/pages/apps/TorqueDragStudio/components/AnalysisTab.jsx:56-58; CSV src/pages/apps/TorqueDragStudio/services/tdExport.js:22-25, :46-49). Recommended: add a mud density box to the NextGen explorers (and a two-entry rotating schedule to the wear view) and print at a precision that meets tol. Alternative: redesign the fields at 1440 kg/m3, which the capstone deliberately avoids because the lessons print those values.",
-   "evidence": "Needs a trip_out run on the slant fixture at 1500 kg/m3; the panel runs 1440 only and prints kN to 3 decimals (1 N) against tol 0.5 N; the Suite Studio lacks the fixture wells and prints 0.1 kN.",
-   "notes": "With no weight on bit a tripping hookload is exactly proportional to the buoyancy factor in the soft-string model, so the 1440 figure times BF1500/BF1440 would give it, but no lesson teaches that and the panel's 1 N print could still miss by up to 0.5 N.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 1500 into the string explorer's mud box and selecting the slant well in the hookload view prints this hookload in N to 2 dp, within tol 0.5 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+   "notes": "W4a typed-case mode. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_torquedrag.sql"
+   }
   },
   {
    "tier": "beginner",
    "key": "slant_slackoff_hookload_N",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/StringExplorer.jsx:117",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Hookload against depth view, well slant",
+   "printed": {
+    "decimals": 2
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Tile 'Slack off' N(v) = fmt(v, 2) newtons",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/StringExplorer.jsx:115-120, :164 -> add a mud density input (default 1440) passed to runCase/summaryOf as mudDensityKgM3, and print hookloads in N with 2 decimals instead of kN(v) = kN to 3 decimals (1 N)"
-   },
-   "owner_decision": true,
-   "recommendation": "No route exists today. The capstone runs the fixture wells at 1500 kg/m3 mud, but no NextGen torque and drag explorer has a mud input (they run the fixture at 1440; the lab already accepts a mudDensityKgM3 override, /root/wt-b5-nextgen/src/components/course/panels/torquedrag/torquedragLab.js:82-94, :222), and the Suite Torque and Drag Studio neither carries the five fixture wells nor prints finely enough (hookload kN toFixed(1) = 100 N, torque kN.m toFixed(2) = 10 N.m, src/pages/apps/TorqueDragStudio/components/AnalysisTab.jsx:56-58; CSV src/pages/apps/TorqueDragStudio/services/tdExport.js:22-25, :46-49). Recommended: add a mud density box to the NextGen explorers (and a two-entry rotating schedule to the wear view) and print at a precision that meets tol. Alternative: redesign the fields at 1440 kg/m3, which the capstone deliberately avoids because the lessons print those values.",
-   "evidence": "Needs a trip_in run on the slant fixture at 1500 kg/m3; no learner-facing engine offers it.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 1500 into the string explorer's mud box and selecting the slant well in the hookload view prints this hookload in N to 2 dp, within tol 0.5 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+   "notes": "W4a typed-case mode. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_torquedrag.sql"
+   }
   },
   {
    "tier": "beginner",
    "key": "slant_drag_swing_N",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/StringExplorer.jsx:120",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Hookload against depth view, well slant",
+   "printed": {
+    "decimals": 2
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Tile 'Total swing' N(v) = fmt(v, 2) newtons",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/StringExplorer.jsx:115-120, :164 -> add a mud density input (default 1440) passed to runCase/summaryOf as mudDensityKgM3, and print hookloads in N with 2 decimals instead of kN(v) = kN to 3 decimals (1 N)"
-   },
-   "owner_decision": true,
-   "recommendation": "No route exists today. The capstone runs the fixture wells at 1500 kg/m3 mud, but no NextGen torque and drag explorer has a mud input (they run the fixture at 1440; the lab already accepts a mudDensityKgM3 override, /root/wt-b5-nextgen/src/components/course/panels/torquedrag/torquedragLab.js:82-94, :222), and the Suite Torque and Drag Studio neither carries the five fixture wells nor prints finely enough (hookload kN toFixed(1) = 100 N, torque kN.m toFixed(2) = 10 N.m, src/pages/apps/TorqueDragStudio/components/AnalysisTab.jsx:56-58; CSV src/pages/apps/TorqueDragStudio/services/tdExport.js:22-25, :46-49). Recommended: add a mud density box to the NextGen explorers (and a two-entry rotating schedule to the wear view) and print at a precision that meets tol. Alternative: redesign the fields at 1440 kg/m3, which the capstone deliberately avoids because the lessons print those values.",
-   "evidence": "Difference of fields 3 and 4 at full precision (the prompt says so); both are unobtainable, and the panel's Total swing tile is at 1440 in kN to 3 decimals.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 1500 into the string explorer's mud box and selecting the slant well in the hookload view prints this hookload in N to 2 dp, within tol 0.5 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+   "notes": "W4a typed-case mode. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_torquedrag.sql"
+   }
   },
   {
    "tier": "beginner",
    "key": "horizontal_slackoff_hookload_N",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/StringExplorer.jsx:164",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Hookload against depth view, well horizontal",
+   "printed": {
+    "decimals": 2
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Tile 'Slack off' N(v) = fmt(v, 2) newtons",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/StringExplorer.jsx:115-120, :164 -> add a mud density input (default 1440) passed to runCase/summaryOf as mudDensityKgM3, and print hookloads in N with 2 decimals instead of kN(v) = kN to 3 decimals (1 N)"
-   },
-   "owner_decision": true,
-   "recommendation": "No route exists today. The capstone runs the fixture wells at 1500 kg/m3 mud, but no NextGen torque and drag explorer has a mud input (they run the fixture at 1440; the lab already accepts a mudDensityKgM3 override, /root/wt-b5-nextgen/src/components/course/panels/torquedrag/torquedragLab.js:82-94, :222), and the Suite Torque and Drag Studio neither carries the five fixture wells nor prints finely enough (hookload kN toFixed(1) = 100 N, torque kN.m toFixed(2) = 10 N.m, src/pages/apps/TorqueDragStudio/components/AnalysisTab.jsx:56-58; CSV src/pages/apps/TorqueDragStudio/services/tdExport.js:22-25, :46-49). Recommended: add a mud density box to the NextGen explorers (and a two-entry rotating schedule to the wear view) and print at a precision that meets tol. Alternative: redesign the fields at 1440 kg/m3, which the capstone deliberately avoids because the lessons print those values.",
-   "evidence": "Needs a trip_in run on the horizontal fixture at 1500 kg/m3; no learner-facing engine offers it.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 1500 into the string explorer's mud box and selecting the horizontal well in the hookload view prints this hookload in N to 2 dp, within tol 0.5 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+   "notes": "W4a typed-case mode. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_torquedrag.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "buildhold_rot_torque_Nm",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/FrictionExplorer.jsx:41-65",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Every operation view, well buildhold, row rotate on bottom",
+   "printed": {
+    "decimals": 3
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Every operation table column 'Surface torque (N.m)' at 3 dp",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/FrictionExplorer.jsx:41-65 (operation view) -> add a mud density input and print surface torque in N.m to 3 decimals, max side force N/m to 4 (already), minimum tension in N to 2 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "No route exists today. The capstone runs the fixture wells at 1500 kg/m3 mud, but no NextGen torque and drag explorer has a mud input (they run the fixture at 1440; the lab already accepts a mudDensityKgM3 override, /root/wt-b5-nextgen/src/components/course/panels/torquedrag/torquedragLab.js:82-94, :222), and the Suite Torque and Drag Studio neither carries the five fixture wells nor prints finely enough (hookload kN toFixed(1) = 100 N, torque kN.m toFixed(2) = 10 N.m, src/pages/apps/TorqueDragStudio/components/AnalysisTab.jsx:56-58; CSV src/pages/apps/TorqueDragStudio/services/tdExport.js:22-25, :46-49). Recommended: add a mud density box to the NextGen explorers (and a two-entry rotating schedule to the wear view) and print at a precision that meets tol. Alternative: redesign the fields at 1440 kg/m3, which the capstone deliberately avoids because the lessons print those values.",
-   "evidence": "Rotate on bottom involves the 89000 N weight on bit and 2700 N.m bit torque, so it cannot be scaled from 1440; no learner-facing engine runs the fixture at 1500. Suite torque prints kN.m to 2 decimals (10 N.m) against tol 0.05.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 1500 into the string explorer's mud box and selecting the buildhold well in the Every operation view prints this value on the rotate on bottom row at 3 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+   "notes": "W4a typed-case mode. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_torquedrag.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "horizontal_rot_torque_Nm",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/FrictionExplorer.jsx:41-65",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Every operation view, well horizontal, row rotate on bottom",
+   "printed": {
+    "decimals": 3
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Every operation table column 'Surface torque (N.m)' at 3 dp",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/FrictionExplorer.jsx:41-65 (operation view) -> add a mud density input and print surface torque in N.m to 3 decimals, max side force N/m to 4 (already), minimum tension in N to 2 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "No route exists today. The capstone runs the fixture wells at 1500 kg/m3 mud, but no NextGen torque and drag explorer has a mud input (they run the fixture at 1440; the lab already accepts a mudDensityKgM3 override, /root/wt-b5-nextgen/src/components/course/panels/torquedrag/torquedragLab.js:82-94, :222), and the Suite Torque and Drag Studio neither carries the five fixture wells nor prints finely enough (hookload kN toFixed(1) = 100 N, torque kN.m toFixed(2) = 10 N.m, src/pages/apps/TorqueDragStudio/components/AnalysisTab.jsx:56-58; CSV src/pages/apps/TorqueDragStudio/services/tdExport.js:22-25, :46-49). Recommended: add a mud density box to the NextGen explorers (and a two-entry rotating schedule to the wear view) and print at a precision that meets tol. Alternative: redesign the fields at 1440 kg/m3, which the capstone deliberately avoids because the lessons print those values.",
-   "evidence": "Same as the build and hold torque, horizontal fixture at 1500 kg/m3.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 1500 into the string explorer's mud box and selecting the horizontal well in the Every operation view prints this value on the rotate on bottom row at 3 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+   "notes": "W4a typed-case mode. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_torquedrag.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "buildhold_max_side_force_Npm",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/FrictionExplorer.jsx:65",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Every operation view, well buildhold, row rotate on bottom",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Every operation table column 'Max side force (N/m)' at 4 dp",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/FrictionExplorer.jsx:41-65 (operation view) -> add a mud density input and print surface torque in N.m to 3 decimals, max side force N/m to 4 (already), minimum tension in N to 2 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "No route exists today. The capstone runs the fixture wells at 1500 kg/m3 mud, but no NextGen torque and drag explorer has a mud input (they run the fixture at 1440; the lab already accepts a mudDensityKgM3 override, /root/wt-b5-nextgen/src/components/course/panels/torquedrag/torquedragLab.js:82-94, :222), and the Suite Torque and Drag Studio neither carries the five fixture wells nor prints finely enough (hookload kN toFixed(1) = 100 N, torque kN.m toFixed(2) = 10 N.m, src/pages/apps/TorqueDragStudio/components/AnalysisTab.jsx:56-58; CSV src/pages/apps/TorqueDragStudio/services/tdExport.js:22-25, :46-49). Recommended: add a mud density box to the NextGen explorers (and a two-entry rotating schedule to the wear view) and print at a precision that meets tol. Alternative: redesign the fields at 1440 kg/m3, which the capstone deliberately avoids because the lessons print those values.",
-   "evidence": "FrictionExplorer's Max side force tile prints 4 decimals but only at 1440 kg/m3; Suite CSV side force is kN/m to 4 decimals (0.1 N/m) against tol 0.005.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 1500 into the string explorer's mud box and selecting the buildhold well in the Every operation view prints this value on the rotate on bottom row at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+   "notes": "W4a typed-case mode. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_torquedrag.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "swell3d_backream_torque_Nm",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/FrictionExplorer.jsx:41-65",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Every operation view, well swell3d, row backream",
+   "printed": {
+    "decimals": 3
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Every operation table column 'Surface torque (N.m)' at 3 dp",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/FrictionExplorer.jsx:41-65 (operation view) -> add a mud density input and print surface torque in N.m to 3 decimals, max side force N/m to 4 (already), minimum tension in N to 2 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "No route exists today. The capstone runs the fixture wells at 1500 kg/m3 mud, but no NextGen torque and drag explorer has a mud input (they run the fixture at 1440; the lab already accepts a mudDensityKgM3 override, /root/wt-b5-nextgen/src/components/course/panels/torquedrag/torquedragLab.js:82-94, :222), and the Suite Torque and Drag Studio neither carries the five fixture wells nor prints finely enough (hookload kN toFixed(1) = 100 N, torque kN.m toFixed(2) = 10 N.m, src/pages/apps/TorqueDragStudio/components/AnalysisTab.jsx:56-58; CSV src/pages/apps/TorqueDragStudio/services/tdExport.js:22-25, :46-49). Recommended: add a mud density box to the NextGen explorers (and a two-entry rotating schedule to the wear view) and print at a precision that meets tol. Alternative: redesign the fields at 1440 kg/m3, which the capstone deliberately avoids because the lessons print those values.",
-   "evidence": "Back reaming on the 3D turn fixture at 1500 kg/m3; no learner-facing engine offers it.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 1500 into the string explorer's mud box and selecting the swell3d well in the Every operation view prints this value on the backream row at 3 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+   "notes": "W4a typed-case mode. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_torquedrag.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "horizontal_slide_min_tension_N",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/FrictionExplorer.jsx:41-65",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Every operation view, well horizontal, row slide drill",
+   "printed": {
+    "decimals": 2
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Every operation table column 'Min tension (N)' at 2 dp",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/FrictionExplorer.jsx:41-65 (operation view) -> add a mud density input and print surface torque in N.m to 3 decimals, max side force N/m to 4 (already), minimum tension in N to 2 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "No route exists today. The capstone runs the fixture wells at 1500 kg/m3 mud, but no NextGen torque and drag explorer has a mud input (they run the fixture at 1440; the lab already accepts a mudDensityKgM3 override, /root/wt-b5-nextgen/src/components/course/panels/torquedrag/torquedragLab.js:82-94, :222), and the Suite Torque and Drag Studio neither carries the five fixture wells nor prints finely enough (hookload kN toFixed(1) = 100 N, torque kN.m toFixed(2) = 10 N.m, src/pages/apps/TorqueDragStudio/components/AnalysisTab.jsx:56-58; CSV src/pages/apps/TorqueDragStudio/services/tdExport.js:22-25, :46-49). Recommended: add a mud density box to the NextGen explorers (and a two-entry rotating schedule to the wear view) and print at a precision that meets tol. Alternative: redesign the fields at 1440 kg/m3, which the capstone deliberately avoids because the lessons print those values.",
-   "evidence": "Minimum tension while slide drilling at 1500 kg/m3 (weight on bit applies, so no scaling); Suite prints minTension kN to 1 decimal (tdExport.js:49).",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 1500 into the string explorer's mud box and selecting the horizontal well in the Every operation view prints this value on the slide drill row at 2 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+   "notes": "W4a typed-case mode. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_torquedrag.sql"
+   }
   },
   {
    "tier": "intermediate",
    "key": "buildhold_mu_for_1100kN_pickup",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/FrictionExplorer.jsx:95-103",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/torquedrag/FrictionExplorer.jsx mud density box 1500, Back it out of a trip view, well buildhold, observed pick-up 1100000 N",
+   "printed": {
+    "decimals": 8
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/torquedrag/FrictionExplorer.jsx Tile 'Open-hole friction factor' fmt(solved.mu, 8)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/FrictionExplorer.jsx:95-103 (calibration view) -> add a mud density input passed to the solver's mudDensityKgM3 (torquedragLab.js:222); the fitted factor already prints fmt(mu, 8)"
-   },
-   "owner_decision": true,
-   "recommendation": "No route exists today. The capstone runs the fixture wells at 1500 kg/m3 mud, but no NextGen torque and drag explorer has a mud input (they run the fixture at 1440; the lab already accepts a mudDensityKgM3 override, /root/wt-b5-nextgen/src/components/course/panels/torquedrag/torquedragLab.js:82-94, :222), and the Suite Torque and Drag Studio neither carries the five fixture wells nor prints finely enough (hookload kN toFixed(1) = 100 N, torque kN.m toFixed(2) = 10 N.m, src/pages/apps/TorqueDragStudio/components/AnalysisTab.jsx:56-58; CSV src/pages/apps/TorqueDragStudio/services/tdExport.js:22-25, :46-49). Recommended: add a mud density box to the NextGen explorers (and a two-entry rotating schedule to the wear view) and print at a precision that meets tol. Alternative: redesign the fields at 1440 kg/m3, which the capstone deliberately avoids because the lessons print those values.",
-   "evidence": "The calibration view bisects the open-hole factor to a typed pick-up hookload, but at 1440 kg/m3 only; the capstone lesson says to bisect at 1500.",
-   "notes": "Typing 1100000 x BF1440/BF1500 into the 1440 solver would give the same factor (tripping hookload is proportional to the buoyancy factor), a route no lesson teaches.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 1500 into the friction explorer's mud box and 1100000 N as the observed pick-up on the build and hold well returns the bisected open-hole factor at 8 dp, within tol 0.0005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+   "notes": "W4a typed-case mode. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_torquedrag.sql"
+   }
   },
   {
    "tier": "advanced",
@@ -311,24 +361,29 @@
   {
    "tier": "advanced",
    "key": "hz_max_torsion_utilization",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/BucklingExplorer.jsx:104",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/torquedrag/BucklingExplorer.jsx mud density box 1500, What the pipe has left view, well horizontal",
+   "printed": {
+    "decimals": 6
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/torquedrag/BucklingExplorer.jsx Tile 'As a fraction' fmt(u.maxTorsionUtilization, 6)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/BucklingExplorer.jsx:84-105 (capacity view) -> add a mud density input; the torsion utilization already prints as percent to 4 decimals (fraction to 6)"
-   },
-   "owner_decision": true,
-   "recommendation": "No route exists today. The capstone runs the fixture wells at 1500 kg/m3 mud, but no NextGen torque and drag explorer has a mud input (they run the fixture at 1440; the lab already accepts a mudDensityKgM3 override, /root/wt-b5-nextgen/src/components/course/panels/torquedrag/torquedragLab.js:82-94, :222), and the Suite Torque and Drag Studio neither carries the five fixture wells nor prints finely enough (hookload kN toFixed(1) = 100 N, torque kN.m toFixed(2) = 10 N.m, src/pages/apps/TorqueDragStudio/components/AnalysisTab.jsx:56-58; CSV src/pages/apps/TorqueDragStudio/services/tdExport.js:22-25, :46-49). Recommended: add a mud density box to the NextGen explorers (and a two-entry rotating schedule to the wear view) and print at a precision that meets tol. Alternative: redesign the fields at 1440 kg/m3, which the capstone deliberately avoids because the lessons print those values.",
-   "evidence": "Needs the horizontal rotate-on-bottom run at 1500 kg/m3; the capacity view's Worst torsion utilization tile (percent to 4 decimals) runs the fixture at 1440 only.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 1500 into the buckling explorer's mud box prints the horizontal well's worst torsion utilization as a fraction to 6 dp, within tol 5e-5 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+   "notes": "W4a typed-case mode. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_torquedrag.sql"
+   }
   },
   {
    "tier": "advanced",
@@ -353,46 +408,56 @@
   {
    "tier": "advanced",
    "key": "casing_max_wear_depth_mm",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/BucklingExplorer.jsx:152",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/torquedrag/BucklingExplorer.jsx mud density box 1500, Casing wear view, schedule rows 150 rpm x 30 h and 90 rpm x 20 h, wear factor 2",
+   "printed": {
+    "decimals": 6
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/torquedrag/BucklingExplorer.jsx Tile 'Worst wear depth' fmt(v, 6)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/BucklingExplorer.jsx:121-157 (wear view) -> add a mud density input and a multi-entry rotating schedule (hours, rpm rows) in place of the single 'Rotating hours at 120 rpm' box; wear depth and wall loss already print 6 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "No route exists today. The capstone runs the fixture wells at 1500 kg/m3 mud, but no NextGen torque and drag explorer has a mud input (they run the fixture at 1440; the lab already accepts a mudDensityKgM3 override, /root/wt-b5-nextgen/src/components/course/panels/torquedrag/torquedragLab.js:82-94, :222), and the Suite Torque and Drag Studio neither carries the five fixture wells nor prints finely enough (hookload kN toFixed(1) = 100 N, torque kN.m toFixed(2) = 10 N.m, src/pages/apps/TorqueDragStudio/components/AnalysisTab.jsx:56-58; CSV src/pages/apps/TorqueDragStudio/services/tdExport.js:22-25, :46-49). Recommended: add a mud density box to the NextGen explorers (and a two-entry rotating schedule to the wear view) and print at a precision that meets tol. Alternative: redesign the fields at 1440 kg/m3, which the capstone deliberately avoids because the lessons print those values.",
-   "evidence": "Needs the horizontal rotate-on-bottom side forces at 1500 kg/m3 and the two-entry schedule; the wear view takes hours at a fixed 120 rpm and runs 1440. Suite WearTab prints mm to 2 decimals (TorqueDragStudio/components/WearTab.jsx:23) against tol 0.0005.",
-   "notes": "Typing 52.5 hours at 120 rpm reproduces the schedule's sliding distance, but the mud density still cannot be set.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 1500 into the mud box and the two schedule entries into the casing wear view's rows prints this value to 6 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+   "notes": "W4a typed-case mode. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_torquedrag.sql"
+   }
   },
   {
    "tier": "advanced",
    "key": "casing_worst_wall_loss_pct",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/BucklingExplorer.jsx:153",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/torquedrag/BucklingExplorer.jsx mud density box 1500, Casing wear view, schedule rows 150 rpm x 30 h and 90 rpm x 20 h, wear factor 2",
+   "printed": {
+    "decimals": 6
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/torquedrag/BucklingExplorer.jsx Tile 'Worst wall loss' fmt(v, 6)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/torquedrag/BucklingExplorer.jsx:121-157 (wear view) -> add a mud density input and a multi-entry rotating schedule (hours, rpm rows) in place of the single 'Rotating hours at 120 rpm' box; wear depth and wall loss already print 6 decimals"
-   },
-   "owner_decision": true,
-   "recommendation": "No route exists today. The capstone runs the fixture wells at 1500 kg/m3 mud, but no NextGen torque and drag explorer has a mud input (they run the fixture at 1440; the lab already accepts a mudDensityKgM3 override, /root/wt-b5-nextgen/src/components/course/panels/torquedrag/torquedragLab.js:82-94, :222), and the Suite Torque and Drag Studio neither carries the five fixture wells nor prints finely enough (hookload kN toFixed(1) = 100 N, torque kN.m toFixed(2) = 10 N.m, src/pages/apps/TorqueDragStudio/components/AnalysisTab.jsx:56-58; CSV src/pages/apps/TorqueDragStudio/services/tdExport.js:22-25, :46-49). Recommended: add a mud density box to the NextGen explorers (and a two-entry rotating schedule to the wear view) and print at a precision that meets tol. Alternative: redesign the fields at 1440 kg/m3, which the capstone deliberately avoids because the lessons print those values.",
-   "evidence": "Same run as the wear depth; Suite WearTab prints wall loss to 1 decimal (WearTab.jsx:28) against tol 0.005.",
-   "notes": null,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "Typing 1500 into the mud box and the two schedule entries into the casing wear view's rows prints this value to 6 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+   "notes": "W4a typed-case mode. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel mode (W4a)",
+    "migration": "20261027a_w4_torquedrag.sql"
+   }
   }
  ]
 }
