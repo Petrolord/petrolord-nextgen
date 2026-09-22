@@ -151,9 +151,30 @@ def evaluate(caps, annots):
     return rows, errors
 
 
+def effective(shipped, waves):
+    """The fix a field carries under the named waves. A later wave that re-keys a key an
+    earlier wave already re-keyed (W5 re-casing a W1 replacement) records the earlier fix
+    as `prior`, so the chain is walked back to the newest fix whose wave is named. A fix
+    with no wave (B5, round-off) always applies."""
+    s = shipped
+    while isinstance(s, dict) and s.get('wave') is not None and s['wave'] not in waves:
+        s = s.get('prior')
+    return s if isinstance(s, dict) else None
+
+
 def in_wave(shipped, waves):
     """A shipped fix is checked when it belongs to no wave (B5, round-off) or to a named one."""
-    return isinstance(shipped, dict) and (shipped.get('wave') is None or shipped.get('wave') in waves)
+    return effective(shipped, waves) is not None
+
+
+def chain_waves(shipped):
+    """Every wave named along a fix's chain, newest first."""
+    out, s = [], shipped
+    while isinstance(s, dict):
+        if s.get('wave'):
+            out.append(s['wave'])
+        s = s.get('prior')
+    return out
 
 
 def post_check(before, after, rows, waves=()):
@@ -164,7 +185,7 @@ def post_check(before, after, rows, waves=()):
     errs = []
     idx_b = {(c['app'], c['tier']): c for c in before}
     idx_a = {(c['app'], c['tier']): c for c in after}
-    live = [r for r in rows if in_wave(r.get('shipped'), waves)]
+    live = [dict(r, shipped=effective(r.get('shipped'), waves)) for r in rows if in_wave(r.get('shipped'), waves)]
     fix_tol = {(r['course'], r['tier'], r['key']): r['shipped']['tol'][1] for r in live if 'tol' in r['shipped']}
     rekey = {(r['course'], r['tier'], r['key']): r['shipped']['rekey'] for r in live if 'rekey' in r['shipped']}
     if not fix_tol:
@@ -198,11 +219,15 @@ def post_check(before, after, rows, waves=()):
             elif f0 != f1:
                 errs.append(f'{k}: moved but the recut does not name it')
     # the replacement fields are gated like any live field, under their own annotation
+    # (the annotation of the key it replaces is dropped first, so a re-key that keeps
+    # its key name is not a duplicate annotation)
     ann = copy.deepcopy(ANNOTS_FOR_POST)
     for r in live:
         if 'rekey' in r['shipped']:
-            ann[r['course']]['fields'].append({'tier': r['tier'], 'key': r['shipped']['rekey']['key'],
-                                               **r['shipped'].get('rekey_annot', {'class': 'none'})})
+            fl = ann[r['course']]['fields']
+            fl[:] = [x for x in fl if not (x.get('tier') == r['tier'] and x.get('key') in (r['key'], r['shipped']['rekey']['key']))]
+            fl.append({'tier': r['tier'], 'key': r['shipped']['rekey']['key'],
+                       **r['shipped'].get('rekey_annot', {'class': 'none'})})
     re_rows, re_err = evaluate(after, ann)
     new_keys = {(c, t, nf['key']) for (c, t, _), nf in rekey.items()}
     for r in re_rows:
@@ -214,6 +239,14 @@ def post_check(before, after, rows, waves=()):
                 errs.append(f'{k}: the replacement field is class {r.get("class")} flagged {r.get("flags")}')
             if not r.get('evidence'):
                 errs.append(f'{k}: the replacement field carries no evidence')
+    # a wave that closes a leak (W5 re-case) must leave nothing printed: its replacement
+    # annotation may not say that a lesson or a panel's opening view prints it
+    for r in live:
+        s = r['shipped']
+        if s.get('closes_leak') and 'rekey' in s:
+            a = s.get('rekey_annot', {})
+            if a.get('leak') or a.get('default_state_prints') or a.get('lesson_prints'):
+                errs.append(f"{(r['course'], r['tier'], s['rekey']['key'])}: {s.get('wave')} closes the leak but its replacement is still printed")
     for e in re_err:
         if any(f"'{nk[2]}')" in e for nk in new_keys):
             errs.append(e)
@@ -262,31 +295,43 @@ def selftest(caps, annots):
     global ANNOTS_FOR_POST
     ANNOTS_FOR_POST = annots
     rows = evaluate(caps, annots)[0]
-    waves = tuple(sorted({r['shipped']['wave'] for r in rows if isinstance(r.get('shipped'), dict) and r['shipped'].get('wave')}))
-    shipped = {(r['course'], r['tier'], r['key']): r['shipped']['tol'][1] for r in rows
-               if isinstance(r.get('shipped'), dict) and 'tol' in r['shipped']}
-    rekeys = {(r['course'], r['tier'], r['key']): r['shipped']['rekey'] for r in rows
-              if isinstance(r.get('shipped'), dict) and 'rekey' in r['shipped']}
-    wave_of = {(r['course'], r['tier'], r['key']): r['shipped'].get('wave') for r in rows if isinstance(r.get('shipped'), dict)}
-    def after(skip=None, move=None, upto=waves):
+    waves = tuple(sorted({w for r in rows for w in chain_waves(r.get('shipped'))}))
+
+    def fixes(rows, upto):
+        """(tolerance fixes, re-keys) in force once the named waves are applied."""
+        tol, rk = {}, {}
+        for r in rows:
+            e = effective(r.get('shipped'), upto)
+            if not e:
+                continue
+            k = (r['course'], r['tier'], r['key'])
+            if 'tol' in e:
+                tol[k] = e['tol'][1]
+            if 'rekey' in e:
+                rk[k] = e['rekey']
+        return tol, rk
+    shipped, rekeys = fixes(rows, waves)
+    unwaved = {(r['course'], r['tier'], r['key']) for r in rows
+               if isinstance(r.get('shipped'), dict) and not chain_waves(r['shipped']) and 'tol' in r['shipped']}
+
+    def after(skip=None, move=None, upto=waves, rows_=None):
+        tol, rk = fixes(rows_ or rows, upto)
         c2 = copy.deepcopy(caps)
         for c in c2:
             for i, f in enumerate(c['fields']):
                 k = (c['app'], c['tier'], f['key'])
-                if wave_of.get(k) and wave_of[k] not in upto:
-                    continue
-                if k in shipped and k != skip:
-                    f['tol'] = shipped[k]
+                if k in tol and k != skip:
+                    f['tol'] = tol[k]
                 if k == move:
                     f['tol'] = float(f['tol']) * 2 + 1
-                if k in rekeys and k != skip:
-                    c['fields'][i] = dict(rekeys[k])
+                if k in rk and k != skip:
+                    c['fields'][i] = dict(rk[k])
         return c2
     clean = not post_check(caps, after(), rows, waves)
     print(f"  post control {'GREEN (good)' if clean else 'RED (BROKEN)'}: every shipped fix applied{' (waves ' + ', '.join(waves) + ')' if waves else ''}")
     ok &= clean
-    if shipped:
-        first = next(k for k in shipped if not wave_of.get(k))
+    if unwaved:
+        first = next(iter(sorted(unwaved)))
         red = bool(post_check(caps, after(skip=first), rows, waves))
         print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: one shipped fix not applied")
         ok &= red
@@ -309,6 +354,43 @@ def selftest(caps, annots):
         red = bool(post_check(caps, after(), rows, ()))
         print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: the wave's state checked without --wave")
         ok &= red
+    # CHAINED RE-KEYS. A synthetic later wave ('wtest') re-keys a key an earlier wave
+    # already re-keyed, carrying the earlier fix as `prior`, and closes a leak. Each
+    # wave's own state must pass under its own waves and fail under the other's.
+    w1k = next((r for r in rows if isinstance(r.get('shipped'), dict) and r['shipped'].get('wave')
+                and 'rekey' in r['shipped']), None)
+    if w1k is not None:
+        early = (w1k['shipped']['wave'],)
+        nf = dict(w1k['shipped']['rekey'], key=w1k['shipped']['rekey']['key'] + '_wtest',
+                  expected=float(w1k['shipped']['rekey']['expected']) + 7)
+        good_ann = {**w1k['shipped'].get('rekey_annot', {}), 'class': 'none', 'leak': False,
+                    'evidence': 'selftest: a synthetic later-wave re-key'}
+        def chained(ann):
+            r2 = copy.deepcopy(rows)
+            r = next(x for x in r2 if (x['course'], x['tier'], x['key']) == (w1k['course'], w1k['tier'], w1k['key']))
+            r['shipped'] = {'wave': 'wtest', 'closes_leak': True, 'rekey': nf, 'rekey_annot': ann, 'prior': r['shipped']}
+            return r2
+        r2 = chained(good_ann)
+        both = tuple(sorted(set(waves) | {'wtest'}))
+        clean = not post_check(caps, after(rows_=r2, upto=both), r2, both)
+        print(f"  post control {'GREEN (good)' if clean else 'RED (BROKEN)'}: a chained re-key (a later wave over {early[0]}) applied, checked with both waves")
+        ok &= clean
+        clean = not post_check(caps, after(rows_=r2, upto=waves), r2, waves)
+        print(f"  post control {'GREEN (good)' if clean else 'RED (BROKEN)'}: the earlier wave's state still checks without the later wave")
+        ok &= clean
+        red = bool(post_check(caps, after(rows_=r2, upto=waves), r2, both))
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: the later wave named but its re-key not applied")
+        ok &= red
+        r3 = chained({**good_ann, 'leak': True, 'default_state_prints': True})
+        red = bool(post_check(caps, after(rows_=r3, upto=both), r3, both))
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: a leak-closing re-key whose replacement is still printed")
+        ok &= red
+        r4 = chained(good_ann)
+        r = next(x for x in r4 if (x['course'], x['tier'], x['key']) == (w1k['course'], w1k['tier'], w1k['key']))
+        r['shipped']['rekey'] = dict(r['shipped']['prior']['rekey'], expected=float(r['shipped']['prior']['rekey']['expected']) + 7)
+        clean = not post_check(caps, after(rows_=r4, upto=both), r4, both)
+        print(f"  post control {'GREEN (good)' if clean else 'RED (BROKEN)'}: a chained re-key that keeps its key name (no duplicate annotation)")
+        ok &= clean
     other = next((c['app'], c['tier'], f['key']) for c in caps for f in c['fields']
                  if (c['app'], c['tier'], f['key']) not in shipped and (c['app'], c['tier'], f['key']) not in rekeys)
     red = bool(post_check(caps, after(move=other), rows, waves))
