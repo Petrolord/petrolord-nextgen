@@ -58,23 +58,31 @@
    "tier": "beginner",
    "key": "ogulagha_oil_density_kgm3",
    "source": "hand-calc",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/producedwater/beginner/m02-the-water-and-the-oil/l04-crude-density-from-api-gravity.md",
+   "source_ref": "the capstone prompt (W2 publishes the inputs) and the lessons l04-crude-density-from-api-gravity.md; spec docs/graded-field-audit/w2/producedwater.json",
    "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": "The two densities in kg/m3 and the two cut sizes in micron, to six decimals.",
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "No new quantity: state the reference temperature the 0.0007 per degree thinning is measured from (15.56 C) in the lesson and the prompt; the field then becomes an exact hand-calc."
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "State 15.56 C explicitly (prompt amendment); widening tol to 0.003 would contradict the six-decimal instruction.",
-   "evidence": "The lesson teaches 141.5/(131.5 + API) x 999 thinned at 0.0007 per degree, but never states the reference temperature. The engine uses 15.56 C (packages/engines/engines/facilities/producedWater.js:323); the exact 60 F = 15.5556 C a learner would use gives 862.321424, 0.0028 from 862.324190 against tol 1e-4.",
+   "evidence": "W2: Prompt and lesson, no field moves. The lesson taught 141.5/(131.5 + API) x 999 thinned at 0.0007 per degree but never the reference temperature; the engine uses 15.56 C, and the exact 60 F (15.5556 C) a learner would use gives 862.321424, 0.0028 from the key against tol 1e-4 (B5). The prompt and beginner m02 l04 now state 15.56 C, so the crude density is an exact hand calculation. The other five beginner fields stay with the W4 panel mode. The published inputs reproduce ogulagha_oil_density_kgm3 = 862.3241899811321 through the vendored engines against the key 862.3241899811321 (tol 0.0001); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "Recoverable only by back-solving the lesson table (API 24 at 41 C = 892.869375). The three panels are fixed to the teaching streams (UZERE, KOKORI and the train stream; producedWaterLab.js:2048 'NO PANEL' may carry the capstone, capstoneLeak.test.js) and offer only view/preset selects. The Suite Produced Water Treatment studio accepts every input but is never named, takes temperature in F, and prints viscosity to 3 dp in cp and densities to 1 dp (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/pwtstudio/PwtPanels.jsx:238-242, fields.jsx:28), far short of the stated precision.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_producedwater.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "are the module's own declared choices, and nothing else is looked up. The crude chain takes a specific gravity at 60 F of 141.5 / (131.5 + API) against the declared reference water of 999 kg/m3, thinned by 0.0007 per degree C above a reference temperature of 15.56 C."
+    ],
+    "lessons": [
+     "src/content/courses/producedwater/beginner/m02-the-water-and-the-oil/l04-crude-density-from-api-gravity.md"
+    ]
+   }
   },
   {
    "tier": "beginner",
