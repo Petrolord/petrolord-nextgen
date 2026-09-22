@@ -438,3 +438,4 @@ A printed number counts as a leak when typing it would pass: it lies within the 
 
 | Course | Tiers | Case (what the brief states) |
 |---|---|---|
+| fluid | all | beginner: a second oil (34 API, gas gravity 0.70, 195 F, 480 scf/stb, initial 3600 psia) through the correlations. intermediate: Good Oil on its 200 psig separator test, saturation at 180 F, a plus-fraction sensitivity (MW 205, SG 0.840); the saturation-pressure bias becomes the GOR bias, because the lab measured the bubble point at 220 F only. advanced: the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because every regression lands it within a fraction of a psi of the target. The study and tuning explorers gain a separator-test choice, and the study explorer gains a saturation temperature and plus-fraction boxes. |

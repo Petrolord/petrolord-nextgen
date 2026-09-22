@@ -1,38 +1,36 @@
 # Working the capstone
 
-> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
-
-Six numbers from the tuning, and the mistake most likely to produce a plausible wrong answer on each.
+Six numbers from the tuning, and the mistake most likely to produce a plausible wrong answer on each. The capstone's brief states which of the study's separator tests to tune against; the tuning explorer opens on the teaching regression against the 100 psig optimum, which this lesson works. The capstone does not grade the teaching values.
 
 {{panel:fluid-tuning-explorer}}
 
 ## What you are given
 
-The Good Oil Well No. 4 study: the eleven-component composition, the C7+ molecular weight of 218 and specific gravity of 0.8515, a reservoir temperature of 220 F and a bubble point of 2634.65 psia, and the optimum separator test at 100 psig and 75 F with its measured total gas-oil ratio of 768 scf/stb, stock tank gravity of 40.7 API and formation volume factor of 1.474 rb/stb.
+The Good Oil Well No. 4 study: the eleven-component composition, the C7+ molecular weight of 218 and specific gravity of 0.8515, a reservoir temperature of 220 F and a bubble point of 2634.65 psia, and a separator test with its measured total gas-oil ratio, stock tank gravity and formation volume factor (on the teaching test, 100 psig: 768 scf/stb, 40.7 API and 1.474 rb/stb).
 
 Tune the four bounded knobs jointly against all four targets, with the stock tank stage at 75 F and 14.65 psia appended to the reported separator stage.
 
-## Field 1: the tuned saturation pressure
+## Field 1: the tuned formation volume factor
 
-The model's saturation pressure at 220 F AFTER the regression.
+The model's formation volume factor AFTER the regression, from the separator train at reservoir conditions.
 
-Two mistakes. Reporting the UNTUNED value of 2791.10 psia, which the Professional tier grades and which is the starting point rather than the result. And reporting the measured 2634.65, which is the target the fit was aiming at rather than what it achieved.
+Two mistakes. Looking for an UNTUNED value, which the Professional tier showed the engine withholds, because the untuned model is two phase at reservoir conditions. And reporting the measured value, which is the target the fit was aiming at rather than what it achieved.
 
-The check: it is close to the measurement but not equal to it, and it is slightly BELOW rather than above, because the tuned error is negative.
+The check: it is close to the measurement but not equal to it. The tuned saturation pressure is worth reading beside it: every regression lands it within a fraction of a psi of the 2634.65 target, which is exactly why it makes a poor test of the fit.
 
 ## Field 2: the tuned total gas-oil ratio
 
 The separator train's total after tuning, in scf/stb.
 
-Two mistakes. Omitting the stock tank stage, which is the classic error and pushes the answer well below the truth. And reporting the untuned 793.80, which is above the measurement rather than below it.
+Two mistakes. Omitting the stock tank stage, which is the classic error and pushes the answer well below the truth. And reporting the untuned value, which sits above the measurement.
 
-The check: the tuned value sits BELOW the measured 768, because the tuned error is negative, while the untuned value sat above it. If your answer is above 768 you have the untuned one.
+The check on the teaching test: the tuned value sits BELOW the measured 768, because the tuned error is negative, while the untuned value sat above it.
 
 ## Field 3: the tuned stock tank gravity
 
 The API gravity of the stock tank liquid after tuning.
 
-Two mistakes. Reporting the untuned 31.81, which is nine API light. And reporting the target 40.7, which the fit does not reach.
+Two mistakes. Reporting the untuned gravity, which is about nine API light. And reporting the target, which the fit does not reach.
 
 The check: it is between the two, nearer the measurement, and about two API light.
 
@@ -58,7 +56,7 @@ The sum of squared residuals before the fit divided by the sum after.
 
 Two mistakes. Reporting the difference rather than the ratio, which is a very small number and obviously not what a reduction factor looks like. And reporting the reduction in one target rather than in the objective, which mixes a per-target percentage with an aggregate.
 
-The check: it is a ratio above one, in the twenties, and it is dimensionless.
+The check: it is a ratio above one, and it is dimensionless. On the teaching test it is in the twenties.
 
 ## The general advice
 
