@@ -131,6 +131,65 @@ def w1_shipped():
 SHIPPED.update(w1_shipped())
 
 
+# B5 FOLLOW-ON W2 (publish inputs in prompts and lessons), from the specs
+# w2/<course>.json that w2/build_specs.mjs writes and w2_capstones.py turns into
+# 20261025a_w2_<course>.sql. W2 moves no key, expected value or tolerance: a
+# field it unlocks keeps its key and moves to class none with source
+# hand-calc, and records the published text (`prompt_contains`) that
+# `audit.py --post --wave w2` requires in the live prompt, or the lesson files
+# that carry it (checked by src/lib/w2PublishedInputs.test.js, which also
+# re-runs the vendored engines on the published inputs). A field a spec names
+# but leaves for a later wave (`not_reproduced`) is not moved; a `suite_only`
+# field moves to source suite-app when the spec names its W3 `suite_route`.
+W2_LEFT = {'not_reproduced', 'suite_only'}
+
+
+def w2_shipped():
+    out = {}
+    for p in sorted(glob.glob(os.path.join(HERE, 'w2', '*.json'))):
+        s = json.load(open(p))
+        course = s['course']
+        for tier, t in s['tiers'].items():
+            left = set().union(*[set(t.get(k, [])) for k in W2_LEFT])
+            moves = t.get('fields_moved_class') or [k for k in t.get('expected', {}) if k not in left]
+            edits = t.get('prompt_edits', [])
+            lessons = sorted({e[0] for e in t.get('lesson_edits', [])})
+            where = ' and '.join(x for x in ((
+                'the capstone prompt (W2 publishes the inputs)' if edits else ''),
+                ('the lessons ' + ', '.join(os.path.basename(l) for l in lessons) if lessons else '')) if x)
+            # a field the prompt now routes to a Suite surface W3 built (the
+            # wellcost case file): readable at full precision, source suite-app
+            sr = t.get('suite_route')
+            if sr:
+                for key in t.get('suite_only', []):
+                    out[(course, tier, key)] = {
+                        'migration': f'20261025a_w2_{course}.sql', 'wave': 'w2', 'decided': True, 'class': 'none',
+                        'annot_update': {'source': 'suite-app', 'source_ref': sr['source_ref'], 'printed': 'full',
+                                         'answer_space': None, 'guess_p': None, 'fix': None, 'evidence': sr['evidence']},
+                        'prompt_contains': [b for _, b in edits], 'lessons': [], 'lesson_contains': [],
+                    }
+            for key in moves:
+                e = t['expected'][key]
+                up = {
+                    'source': 'hand-calc', 'source_ref': f'{where}; spec docs/graded-field-audit/w2/{course}.json',
+                    'printed': 'full', 'answer_space': None, 'guess_p': None, 'fix': None,
+                    'evidence': (f"W2: {t['why']} The published inputs reproduce {key} = {e['reproduced']!r} through the "
+                                 f"vendored engines against the key {e['expected']!r} (tol {e['tol']}); "
+                                 'src/lib/w2PublishedInputs.test.js re-runs it.'),
+                }
+                up.update(t.get('annot_updates', {}).get(key, {}))
+                out[(course, tier, key)] = {
+                    'migration': f'20261025a_w2_{course}.sql' if edits else None, 'wave': 'w2', 'decided': True,
+                    'class': 'none', 'annot_update': up,
+                    'prompt_contains': [b for _, b in edits], 'lessons': lessons,
+                    'lesson_contains': [[f, a + ins] for f, a, ins in t.get('lesson_edits', [])],
+                }
+    return out
+
+
+SHIPPED.update(w2_shipped())
+
+
 def main(raw):
     out = os.path.join(HERE, 'annot')
     os.makedirs(out, exist_ok=True)

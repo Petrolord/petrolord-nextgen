@@ -1,0 +1,132 @@
+{
+ "course": "nodal",
+ "wave": "w2",
+ "fixture": "src/components/course/panels/nodal/nodalLab.js (CAP)",
+ "tiers": {
+  "intermediate": {
+   "why": "Prompt only, no field moves. The prompt called the tubing curve \"the gravity-plus-friction relation supplied with this capstone\" and never stated its constants (3835, 600, 0.000238 lived only in nodalLab.js CAP), nor where the 49 points start (B5 finding 1). The prompt now states the relation, the wellhead pressure and the sampling, and restates the inflow the open flow comes from, so the four tubing fields are spreadsheet work on a form the course teaches (intermediate m03 l03). The two lift gas fields still need a Cullender and Smith march with the engine z; they stay class display for the W4 panel mode.",
+   "prompt_edits": [
+    [
+     "The tubing curve is the gravity-plus-friction relation supplied with this capstone, evaluated at a wellhead pressure of 1,236 psia over 49 points from just above zero to the absolute open flow.",
+     "The tubing curve is the gravity-plus-friction relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, with bhp and pWh in psia and q in stb/d, evaluated at a wellhead pressure of 1236 psia at 49 evenly spaced rates from one thousandth of the absolute open flow up to the absolute open flow itself. The open flow is the Associate tier's, from its composite inflow: reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia."
+    ]
+   ],
+   "inputs": {
+    "ipr": {
+     "prPsia": 3450,
+     "pbPsia": 3100,
+     "testQStbd": 1200,
+     "testPwfPsia": 2790
+    },
+    "outflow": {
+     "pWhPsia": 1236,
+     "gGravPsi": 3835,
+     "qRefStbd": 600,
+     "kFricPsiPerStbd2": 0.000238
+    },
+    "vlpPoints": 49
+   },
+   "method": {
+    "iprPoints": 61,
+    "qMinFraction": 0.001
+   },
+   "not_reproduced": [
+    "liftgas_valve_pwf_psia",
+    "liftgas_mid_pmf_psia"
+   ],
+   "expected": {
+    "vlp_min_q_stbd": {
+     "expected": 1285.2338376891341,
+     "tol": 0.00064,
+     "reproduced": 1285.2338376891341
+    },
+    "vlp_min_bhp_psia": {
+     "expected": 2849.67283735105,
+     "tol": 0.0014,
+     "reproduced": 2849.67283735105
+    },
+    "vlp_loaded_end_bhp_psia": {
+     "expected": 5046.565087663264,
+     "tol": 0.0025,
+     "reproduced": 5046.565087663264
+    },
+    "vlp_friction_end_bhp_psia": {
+     "expected": 5277.411341029544,
+     "tol": 0.0026,
+     "reproduced": 5277.411341029544
+    },
+    "liftgas_valve_pwf_psia": {
+     "expected": 1516.5314295864096,
+     "tol": 0.00076,
+     "reproduced": null
+    },
+    "liftgas_mid_pmf_psia": {
+     "expected": 1373.724371881081,
+     "tol": 0.00069,
+     "reproduced": null
+    }
+   }
+  },
+  "advanced": {
+   "why": "Prompt only, no field moves. The node needs the tubing relation, which no prompt stated, and the grid needed its span: the prompt now states the Associate inflow, the Professional outflow with its constants, and that the 900 points only bracket each crossing, which is then solved exactly. Every field is then a spreadsheet root find (verified: the roots match the key to about 1e-6 stb/d).",
+   "prompt_edits": [
+    [
+     "Solve on a 900-point grid.",
+     "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
+    ]
+   ],
+   "inputs": {
+    "ipr": {
+     "prPsia": 3450,
+     "pbPsia": 3100,
+     "testQStbd": 1200,
+     "testPwfPsia": 2790
+    },
+    "outflow": {
+     "pWhPsia": 1236,
+     "gGravPsi": 3835,
+     "qRefStbd": 600,
+     "kFricPsiPerStbd2": 0.000238
+    },
+    "nGrid": 900,
+    "sweepPwhPsia": 1176
+   },
+   "method": {
+    "iprPoints": 61,
+    "qMinFraction": 0.001
+   },
+   "expected": {
+    "node_op_q_stbd": {
+     "expected": 929.9820637311327,
+     "tol": 0.00046,
+     "reproduced": 929.9820637311327
+    },
+    "node_op_pwf_psia": {
+     "expected": 2945.7774594005996,
+     "tol": 0.0015,
+     "reproduced": 2945.7774594005996
+    },
+    "node_unstable_q_stbd": {
+     "expected": 905.3367675852949,
+     "tol": 0.00045,
+     "reproduced": 905.3367675852949
+    },
+    "node_unstable_pwf_psia": {
+     "expected": 2959.6346643478146,
+     "tol": 0.0015,
+     "reproduced": 2959.6346643478146
+    },
+    "sweep_pwh1176_q_stbd": {
+     "expected": 1184.0068509231141,
+     "tol": 0.00057,
+     "reproduced": 1184.0068509231141
+    },
+    "sweep_pwh1176_pwf_psia": {
+     "expected": 2799.4388422395805,
+     "tol": 0.0015,
+     "reproduced": 2799.4388422395805
+    }
+   }
+  }
+ }
+}

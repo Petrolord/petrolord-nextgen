@@ -1,0 +1,33 @@
+{
+ "course": "heattransfer",
+ "wave": "w2",
+ "fixture": "tools/course-waves/heattransfer/fc6_fields_capstone.mjs (UBIT_*)",
+ "tiers": {
+  "intermediate": {
+   "why": "Lesson only, no prompt or field moves. The equivalent single-shell P is printed by no panel or Suite surface, and intermediate m02 l01 tabulated its outputs without the conversion (heatTransfer.js lmtdCorrectionF). The lesson now writes the conversion and its R = 1 limit, so the field is hand work on the four terminal temperatures the prompt states. Reaches learners with the next NextGen zip. The F print (Suite SizingPanels.jsx) stays W3.",
+   "prompt_edits": [],
+   "lesson_edits": [
+    [
+     "src/content/courses/heattransfer/intermediate/m02-shells-in-series/l01-the-equivalent-single-shell-p.md",
+     "so the value the closed form was actually read at is visible rather than implied.",
+     "\n\n## The conversion itself\n\nFor N shells in series at a whole unit P and R, the engine first forms\n\n    S = ((1 - P R) / (1 - P))^(1/N)\n\nand then takes the equivalent single-shell P as\n\n    P1 = (S - 1) / (S - R)\n\nWhere R is 1 that quotient has no value, and the limit is used instead: P1 = P / (N - P (N - 1)). Both are one line in a spreadsheet, and either one reproduces the equivalent single-shell P column of the two tables below from its P, R and shell count."
+    ]
+   ],
+   "inputs": {
+    "hotInF": 405,
+    "hotOutF": 265,
+    "coldInF": 135,
+    "coldOutF": 233,
+    "shells": 2
+   },
+   "method": {},
+   "expected": {
+    "ubit_p1_two_shells": {
+     "expected": 0.23359328643184238,
+     "tol": 5e-7,
+     "reproduced": 0.23359328643184238
+    }
+   }
+  }
+ }
+}

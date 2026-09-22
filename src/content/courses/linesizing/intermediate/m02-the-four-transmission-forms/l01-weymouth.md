@@ -22,6 +22,14 @@ Weymouth takes the bore, the length, the two pressures, the gas gravity, the flo
 
 That is not a fault. It is what a transmission form is: a published correlation fitted to a class of lines, returning a rate for a small set of inputs. Everything it knows about the pipe is the bore and the length.
 
+## The form
+
+The engine evaluates the GPSA Weymouth form:
+
+    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)
+
+Here Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure.
+
 ## What the five cases cover
 
 The set moves one thing at a time. Bores run from 6.065000 in to 16.000000 in and lengths from 10.000000 to 80.000000 miles. Inlets run from 700.000000 psia to 1200.000000 psia. Three of the cases are flat and the last two are the same pipe climbing and descending. A reader checking an implementation against this table can therefore separate a bore error from a length error from an elevation error, which no single case allows.

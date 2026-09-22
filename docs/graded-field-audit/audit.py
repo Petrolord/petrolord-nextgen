@@ -17,6 +17,8 @@ WHAT IT COMPUTES (mechanically, so a human class can be checked against it)
   display_miss   the source prints the value at a precision whose rounding error
                  exceeds tol: |round(expected * scale, d) / scale - expected| > tol
   guessable      guess_p >= 0.5: a coin flip or better beats working
+  no_route       the annotated source is `unobtainable`: no lesson, panel, app
+                 or prompt gives the learner a way to the value (W2 onward)
 
 THE GATE. Every mechanical flag must be answered by a class other than `none`,
 every field must be annotated exactly once, and every annotation must name a
@@ -125,6 +127,8 @@ def evaluate(caps, annots):
             gp = a.get('guess_p')
             if gp is not None and gp >= 0.5:
                 flags.append('guessable')
+            if a.get('source') == 'unobtainable':
+                flags.append('no_route')
             cls = a.get('class')
             if cls not in CLASSES:
                 errors.append(f'{k}: class {cls!r} is not one of {CLASSES}')
@@ -197,6 +201,25 @@ def post_check(before, after, rows, waves=()):
                     errs.append(f'{k}: something other than tol moved')
             elif f0 != f1:
                 errs.append(f'{k}: moved but the recut does not name it')
+    # W2 lesson route: the lesson that now prints the form must carry it (read
+    # from the repository this folder sits in; the apply dry run extracts
+    # src/content beside it)
+    for r in live:
+        for rel, text in r['shipped'].get('lesson_contains') or []:
+            body = LESSON_READ(rel)
+            if body is None or text not in body:
+                errs.append(f"{(r['course'], r['tier'], r['key'])}: the W2 lesson text is not in {rel}")
+    # W2 publishes inputs: every field it unlocks names the text its tier's
+    # live prompt must now carry
+    for r in live:
+        need = r['shipped'].get('prompt_contains') or []
+        if not need:
+            continue
+        ca = idx_a.get((r['course'], r['tier']))
+        text = (ca or {}).get('prompt') or ''
+        missing = [x for x in need if x not in text]
+        if missing:
+            errs.append(f"{(r['course'], r['tier'], r['key'])}: the W2 prompt text is not in place ({len(missing)} of {len(need)} published passage(s) missing)")
     # the replacement fields are gated like any live field, under their own annotation
     ann = copy.deepcopy(ANNOTS_FOR_POST)
     for r in live:
@@ -221,6 +244,15 @@ def post_check(before, after, rows, waves=()):
 
 
 ANNOTS_FOR_POST = {}
+REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+
+
+def _lesson_read(rel):
+    p = os.path.join(REPO, rel)
+    return open(p, encoding='utf-8').read() if os.path.exists(p) else None
+
+
+LESSON_READ = _lesson_read
 
 
 def selftest(caps, annots):
@@ -248,6 +280,9 @@ def selftest(caps, annots):
         'coin flip classed none': lambda c2, a2: add(c2, a2,
             {'key': 'zz_plant', 'label': 'x (1 yes / 0 no)', 'unit': 'flag', 'expected': 1, 'tol': 0},
             {'source': 'suite-app', 'printed': 'integer', 'answer_space': 2, 'guess_p': 0.5, 'class': 'none'}),
+        'unobtainable source classed none': lambda c2, a2: add(c2, a2,
+            {'key': 'zz_plant', 'label': 'x', 'unit': '-', 'expected': 2.5, 'tol': 0.01},
+            {'source': 'unobtainable', 'printed': None, 'class': 'none'}),
         'unannotated live field': lambda c2, a2: next(c for c in c2 if c['app'] == course)['fields'].append(
             {'key': 'zz_plant', 'label': 'x', 'unit': '-', 'expected': 1, 'tol': 0.1}),
         'annotation for a field that is not live': lambda c2, a2: a2[course]['fields'].append(
@@ -268,9 +303,22 @@ def selftest(caps, annots):
     rekeys = {(r['course'], r['tier'], r['key']): r['shipped']['rekey'] for r in rows
               if isinstance(r.get('shipped'), dict) and 'rekey' in r['shipped']}
     wave_of = {(r['course'], r['tier'], r['key']): r['shipped'].get('wave') for r in rows if isinstance(r.get('shipped'), dict)}
-    def after(skip=None, move=None, upto=waves):
+    prompt_text = {}
+    for r in rows:
+        sh = r.get('shipped')
+        if isinstance(sh, dict) and sh.get('prompt_contains'):
+            prompt_text.setdefault((r['course'], r['tier']), {'wave': sh.get('wave'), 'text': [], 'keys': []})
+            for x in sh['prompt_contains']:
+                if x not in prompt_text[(r['course'], r['tier'])]['text']:
+                    prompt_text[(r['course'], r['tier'])]['text'].append(x)
+            prompt_text[(r['course'], r['tier'])]['keys'].append(r['key'])
+
+    def after(skip=None, move=None, upto=waves, unprompted=None):
         c2 = copy.deepcopy(caps)
         for c in c2:
+            pt = prompt_text.get((c['app'], c['tier']))
+            if pt and pt['wave'] in upto and (c['app'], c['tier']) != unprompted:
+                c['prompt'] = (c.get('prompt') or '') + ' ' + ' '.join(pt['text'])
             for i, f in enumerate(c['fields']):
                 k = (c['app'], c['tier'], f['key'])
                 if wave_of.get(k) and wave_of[k] not in upto:
@@ -308,6 +356,23 @@ def selftest(caps, annots):
         ok &= clean
         red = bool(post_check(caps, after(), rows, ()))
         print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: the wave's state checked without --wave")
+        ok &= red
+    lesson_rows = [r for r in rows if isinstance(r.get('shipped'), dict) and r['shipped'].get('lesson_contains')]
+    if lesson_rows:
+        global LESSON_READ
+        cut = lesson_rows[0]['shipped']['lesson_contains'][0][0]
+        saved = LESSON_READ
+        LESSON_READ = lambda rel: '' if rel == cut else saved(rel)
+        try:
+            red = bool(post_check(caps, after(), rows, waves))
+        finally:
+            LESSON_READ = saved
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: a W2 lesson without its printed form ({os.path.basename(cut)})")
+        ok &= red
+    if prompt_text:
+        tier = next(k for k, v in prompt_text.items() if v['wave'] in waves)
+        red = bool(post_check(caps, after(unprompted=tier), rows, waves))
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: a W2 prompt without its published inputs ({tier[0]}/{tier[1]})")
         ok &= red
     other = next((c['app'], c['tier'], f['key']) for c in caps for f in c['fields']
                  if (c['app'], c['tier'], f['key']) not in shipped and (c['app'], c['tier'], f['key']) not in rekeys)

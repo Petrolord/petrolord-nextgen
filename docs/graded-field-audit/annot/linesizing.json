@@ -159,114 +159,222 @@
   {
    "tier": "intermediate",
    "key": "brass_weymouth_scfd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md (prints cases and the exponent 2.6666666667, never the equation or 433.5)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the lessons l01-weymouth.md, l02-the-two-panhandles.md, l03-general-flow-and-its-iteration.md; spec docs/graded-field-audit/w2/linesizing.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/linesizing/GasLineExplorer.jsx:107 four(f.qScfd) (teaching trunk only)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/linesizing/GasLineExplorer.jsx:375 -> add bore, length, p1, p2, gravity, T, z, E, elevation inputs so the four(...) rate at :107 reads the BRASS case; or print the Weymouth equation in intermediate m02 l01"
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Owner choice. The intermediate lessons never write the Weymouth or Panhandle B equations (their constants 433.5, 737, the (Tb/Pb) exponents and d^(8/3) live only in the engine header, lineHydraulics.js:247-291), no panel accepts the BRASS inputs, and the Suite has no forward-rate mode. Verified: with the GPSA forms the engine header states, a spreadsheet reproduces Weymouth, Panhandle B and the Weymouth outlet exactly. Preferred: print the forms in intermediate m02 l01/l02 (hand-calc) and add editable inputs to GasLineExplorer for General Flow, which iterates.",
-   "evidence": "Tol 1000 scfd is a relative 8e-6; any constant or exponent choice other than the engine's (433.5, 520/14.65, d^(8/3)) misses by far more (d^2.667 vs d^(8/3) alone is about 0.1 percent).",
+   "evidence": "W2: Lessons only, no prompt or field moves. The intermediate lessons never wrote the Weymouth, Panhandle B or General Flow forms (their constants lived only in lineHydraulics.js), no panel takes the BRASS inputs and the Suite has no forward-rate mode (B5 finding 1). Intermediate m02 l01, l02 and l03 now print the three forms, the base conditions, the elevation group, Colebrook and the General Flow loop, read from the vendored engine, so the four BRASS rates and the friction factor are spreadsheet work on the inputs the prompt already states, and the Weymouth inversion makes the outlet pressure a hand step too. Reaches learners with the next NextGen zip. The published inputs reproduce brass_weymouth_scfd = 121983243.41355602 through the vendored engines against the key 121983243.41355602 (tol 1000); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "The fc-gasline-explorer has no inputs (GasLineExplorer.jsx:375, view select only) and runs the SOKU trunk. The Suite Line Sizing gas mode only solves outlet pressure from a rate (LineSizingContext.jsx:275 gasOutletPressure) and never returns a forward rate.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": null,
+    "wave": "w2",
+    "prompt_contains": [],
+    "lessons": [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+    ],
+    "lesson_contains": [
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+      "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+      "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+      "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+     ]
+    ]
+   }
   },
   {
    "tier": "intermediate",
    "key": "brass_panhandleb_scfd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md (prints the exponent 2.53, never the equation or 737)",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the lessons l01-weymouth.md, l02-the-two-panhandles.md, l03-general-flow-and-its-iteration.md; spec docs/graded-field-audit/w2/linesizing.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/linesizing/GasLineExplorer.jsx:107 four(f.qScfd) (teaching trunk only)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/linesizing/GasLineExplorer.jsx:375 -> editable inputs (see brass_weymouth_scfd); or print the Panhandle B equation in intermediate m02 l02"
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Owner choice. The intermediate lessons never write the Weymouth or Panhandle B equations (their constants 433.5, 737, the (Tb/Pb) exponents and d^(8/3) live only in the engine header, lineHydraulics.js:247-291), no panel accepts the BRASS inputs, and the Suite has no forward-rate mode. Verified: with the GPSA forms the engine header states, a spreadsheet reproduces Weymouth, Panhandle B and the Weymouth outlet exactly. Preferred: print the forms in intermediate m02 l01/l02 (hand-calc) and add editable inputs to GasLineExplorer for General Flow, which iterates.",
-   "evidence": "737 x E x (Tb/Pb)^1.02 x (driving/(G^0.961 T Le z))^0.51 x d^2.53 reproduces 158089257.2854 exactly, but none of that is in the lessons.",
+   "evidence": "W2: Lessons only, no prompt or field moves. The intermediate lessons never wrote the Weymouth, Panhandle B or General Flow forms (their constants lived only in lineHydraulics.js), no panel takes the BRASS inputs and the Suite has no forward-rate mode (B5 finding 1). Intermediate m02 l01, l02 and l03 now print the three forms, the base conditions, the elevation group, Colebrook and the General Flow loop, read from the vendored engine, so the four BRASS rates and the friction factor are spreadsheet work on the inputs the prompt already states, and the Weymouth inversion makes the outlet pressure a hand step too. Reaches learners with the next NextGen zip. The published inputs reproduce brass_panhandleb_scfd = 158089257.28536567 through the vendored engines against the key 158089257.28536567 (tol 1000); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "The fc-gasline-explorer has no inputs (GasLineExplorer.jsx:375, view select only) and runs the SOKU trunk. The Suite Line Sizing gas mode only solves outlet pressure from a rate (LineSizingContext.jsx:275 gasOutletPressure) and never returns a forward rate.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": null,
+    "wave": "w2",
+    "prompt_contains": [],
+    "lessons": [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+    ],
+    "lesson_contains": [
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+      "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+      "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+      "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+     ]
+    ]
+   }
   },
   {
    "tier": "intermediate",
    "key": "brass_general_scfd",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md (\"the form is iterated until the two agree\")",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the lessons l01-weymouth.md, l02-the-two-panhandles.md, l03-general-flow-and-its-iteration.md; spec docs/graded-field-audit/w2/linesizing.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/linesizing/GasLineExplorer.jsx:107 four(f.qScfd) (teaching trunk only)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/linesizing/GasLineExplorer.jsx:375 -> editable inputs incl. viscosity and roughness (see brass_weymouth_scfd)"
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Owner choice. The intermediate lessons never write the Weymouth or Panhandle B equations (their constants 433.5, 737, the (Tb/Pb) exponents and d^(8/3) live only in the engine header, lineHydraulics.js:247-291), no panel accepts the BRASS inputs, and the Suite has no forward-rate mode. Verified: with the GPSA forms the engine header states, a spreadsheet reproduces Weymouth, Panhandle B and the Weymouth outlet exactly. Preferred: print the forms in intermediate m02 l01/l02 (hand-calc) and add editable inputs to GasLineExplorer for General Flow, which iterates.",
-   "evidence": "General Flow iterates rate and Colebrook friction jointly; engine-only and no surface takes the BRASS inputs.",
+   "evidence": "W2: Lessons only, no prompt or field moves. The intermediate lessons never wrote the Weymouth, Panhandle B or General Flow forms (their constants lived only in lineHydraulics.js), no panel takes the BRASS inputs and the Suite has no forward-rate mode (B5 finding 1). Intermediate m02 l01, l02 and l03 now print the three forms, the base conditions, the elevation group, Colebrook and the General Flow loop, read from the vendored engine, so the four BRASS rates and the friction factor are spreadsheet work on the inputs the prompt already states, and the Weymouth inversion makes the outlet pressure a hand step too. Reaches learners with the next NextGen zip. The published inputs reproduce brass_general_scfd = 135290712.75490567 through the vendored engines against the key 135290712.75490567 (tol 1000); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "The fc-gasline-explorer has no inputs (GasLineExplorer.jsx:375, view select only) and runs the SOKU trunk. The Suite Line Sizing gas mode only solves outlet pressure from a rate (LineSizingContext.jsx:275 gasOutletPressure) and never returns a forward rate.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": null,
+    "wave": "w2",
+    "prompt_contains": [],
+    "lessons": [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+    ],
+    "lesson_contains": [
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+      "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+      "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+      "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+     ]
+    ]
+   }
   },
   {
    "tier": "intermediate",
    "key": "brass_general_friction_factor",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the lessons l01-weymouth.md, l02-the-two-panhandles.md, l03-general-flow-and-its-iteration.md; spec docs/graded-field-audit/w2/linesizing.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/linesizing/GasLineExplorer.jsx:124 ten(t.generalFDarcy) (teaching trunk only)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/linesizing/GasLineExplorer.jsx:375 -> editable inputs; the settled f already prints at ten decimals at :124"
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Owner choice. The intermediate lessons never write the Weymouth or Panhandle B equations (their constants 433.5, 737, the (Tb/Pb) exponents and d^(8/3) live only in the engine header, lineHydraulics.js:247-291), no panel accepts the BRASS inputs, and the Suite has no forward-rate mode. Verified: with the GPSA forms the engine header states, a spreadsheet reproduces Weymouth, Panhandle B and the Weymouth outlet exactly. Preferred: print the forms in intermediate m02 l01/l02 (hand-calc) and add editable inputs to GasLineExplorer for General Flow, which iterates.",
-   "evidence": "Tol 1e-9; the settled friction factor exists only inside the General Flow iteration.",
+   "evidence": "W2: Lessons only, no prompt or field moves. The intermediate lessons never wrote the Weymouth, Panhandle B or General Flow forms (their constants lived only in lineHydraulics.js), no panel takes the BRASS inputs and the Suite has no forward-rate mode (B5 finding 1). Intermediate m02 l01, l02 and l03 now print the three forms, the base conditions, the elevation group, Colebrook and the General Flow loop, read from the vendored engine, so the four BRASS rates and the friction factor are spreadsheet work on the inputs the prompt already states, and the Weymouth inversion makes the outlet pressure a hand step too. Reaches learners with the next NextGen zip. The published inputs reproduce brass_general_friction_factor = 0.010546475636391016 through the vendored engines against the key 0.010546475636391016 (tol 1e-09); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "The fc-gasline-explorer has no inputs (GasLineExplorer.jsx:375, view select only) and runs the SOKU trunk. The Suite Line Sizing gas mode only solves outlet pressure from a rate (LineSizingContext.jsx:275 gasOutletPressure) and never returns a forward rate.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": null,
+    "wave": "w2",
+    "prompt_contains": [],
+    "lessons": [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+    ],
+    "lesson_contains": [
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+      "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+      "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+      "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+     ]
+    ]
+   }
   },
   {
    "tier": "intermediate",
    "key": "brass_outlet_pressure_psia",
-   "source": "suite-app",
-   "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:41 (gas mode, Weymouth outlet at a rate)",
-   "printed": {
-    "decimals": 1
-   },
+   "source": "hand-calc",
+   "source_ref": "the lessons l01-weymouth.md, l02-the-two-panhandles.md, l03-general-flow-and-its-iteration.md; spec docs/graded-field-audit/w2/linesizing.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:41 fmt(sizing.p2Psia, 1)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/linesizing/SizingPanel.jsx:41 -> fmt(sizing.p2Psia, 6) (the course prints pressures to six decimals); or print the Weymouth equation so p2 = sqrt((p1^2 - (Q/K)^2)/e^s) is a hand step"
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Owner choice. The intermediate lessons never write the Weymouth or Panhandle B equations (their constants 433.5, 737, the (Tb/Pb) exponents and d^(8/3) live only in the engine header, lineHydraulics.js:247-291), no panel accepts the BRASS inputs, and the Suite has no forward-rate mode. Verified: with the GPSA forms the engine header states, a spreadsheet reproduces Weymouth, Panhandle B and the Weymouth outlet exactly. Preferred: print the forms in intermediate m02 l01/l02 (hand-calc) and add editable inputs to GasLineExplorer for General Flow, which iterates.",
-   "evidence": "The studio inverts Weymouth at the contracted rate but prints 999.6 against 999.623258 (tol 1e-5). With the Weymouth form, the closed-form inverse reproduces 999.6232578 exactly; the lesson (m04 l01) says the engine bisects and gives no form.",
+   "evidence": "W2: Lessons only, no prompt or field moves. The intermediate lessons never wrote the Weymouth, Panhandle B or General Flow forms (their constants lived only in lineHydraulics.js), no panel takes the BRASS inputs and the Suite has no forward-rate mode (B5 finding 1). Intermediate m02 l01, l02 and l03 now print the three forms, the base conditions, the elevation group, Colebrook and the General Flow loop, read from the vendored engine, so the four BRASS rates and the friction factor are spreadsheet work on the inputs the prompt already states, and the Weymouth inversion makes the outlet pressure a hand step too. Reaches learners with the next NextGen zip. The published inputs reproduce brass_outlet_pressure_psia = 999.6232577666815 through the vendored engines against the key 999.6232577666815 (tol 1e-05); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "The fc-gasline-explorer has no inputs (GasLineExplorer.jsx:375, view select only) and runs the SOKU trunk. The Suite Line Sizing gas mode only solves outlet pressure from a rate (LineSizingContext.jsx:275 gasOutletPressure) and never returns a forward rate.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": null,
+    "wave": "w2",
+    "prompt_contains": [],
+    "lessons": [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+    ],
+    "lesson_contains": [
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+      "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+      "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+     ],
+     [
+      "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+      "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+     ]
+    ]
+   }
   },
   {
    "tier": "advanced",

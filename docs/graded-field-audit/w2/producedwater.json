@@ -1,0 +1,38 @@
+{
+ "course": "producedwater",
+ "wave": "w2",
+ "fixture": "packages/engines/engines/facilities/producedWater.js (oilDensityKgM3)",
+ "tiers": {
+  "beginner": {
+   "why": "Prompt and lesson, no field moves. The lesson taught 141.5/(131.5 + API) x 999 thinned at 0.0007 per degree but never the reference temperature; the engine uses 15.56 C, and the exact 60 F (15.5556 C) a learner would use gives 862.321424, 0.0028 from the key against tol 1e-4 (B5). The prompt and beginner m02 l04 now state 15.56 C, so the crude density is an exact hand calculation. The other five beginner fields stay with the W4 panel mode.",
+   "prompt_edits": [
+    [
+     "are the module's own declared choices, and nothing else is looked up.",
+     "are the module's own declared choices, and nothing else is looked up. The crude chain takes a specific gravity at 60 F of 141.5 / (131.5 + API) against the declared reference water of 999 kg/m3, thinned by 0.0007 per degree C above a reference temperature of 15.56 C."
+    ]
+   ],
+   "lesson_edits": [
+    [
+     "src/content/courses/producedwater/beginner/m02-the-water-and-the-oil/l04-crude-density-from-api-gravity.md",
+     "and the result is then thinned by temperature at a declared rate of 0.0007 for each degree.",
+     " The thinning is measured from a reference temperature of 15.56 C, which is 60 F taken to two decimals, so the whole chain is 141.5 / (131.5 + API) x 999 x (1 - 0.0007 (T - 15.56)) with T in C. Use 15.56 exactly: the unrounded 60 F, 15.5556 C, moves a density by a few thousandths of a kg/m3."
+    ]
+   ],
+   "inputs": {
+    "api": 27.5,
+    "tC": 58.5,
+    "refC": 15.56,
+    "expansionPerC": 0.0007,
+    "referenceWaterKgM3": 999
+   },
+   "method": {},
+   "expected": {
+    "ogulagha_oil_density_kgm3": {
+     "expected": 862.3241899811321,
+     "tol": 0.0001,
+     "reproduced": 862.3241899811321
+    }
+   }
+  }
+ }
+}
