@@ -12,7 +12,7 @@ A tuned model that is not documented is indistinguishable from a fabricated one.
 
 **What was held fixed.** The reported composition, the C7+ molecular weight and specific gravity, and every library component property.
 
-**What it cost.** The formation volume factor moved from 0.31 percent to 1.13 percent, because total gas-oil ratio, stock tank gravity and formation volume factor share the stock-tank volume.
+**What it cost.** The formation volume factor moved from 0.31 percent to 0.60 percent, because total gas-oil ratio, stock tank gravity and formation volume factor share the stock-tank volume.
 
 ## The sentence
 

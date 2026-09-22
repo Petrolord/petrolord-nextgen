@@ -12355,14 +12355,14 @@
   "leak": true,
   "reclassed_from": null,
   "shipped": {
-   "migration": "20261028b_w5_fluid.sql",
-   "wave": "w5b",
+   "migration": "20261030d_hd_fluid.sql",
+   "wave": "hd",
    "closes_leak": true,
    "rekey": {
     "key": "good_oil_tuned_bo_rb_stb",
     "label": "Tuned formation volume factor",
     "unit": "rb/stb",
-    "expected": 1.4621628562343378,
+    "expected": 1.4729609026685642,
     "tol": 0.001
    },
    "rekey_annot": {
@@ -12376,10 +12376,38 @@
     "prompt_precision": null,
     "answer_space": null,
     "guess_p": null,
-    "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+    "evidence": "HD re-key (engines #235, 20261030d_hd_fluid.sql): same key, label, unit and tol; expected 1.4621628562343378 -> 1.4729609026685642. The labTune Bo fallback had returned a null Bo at random during the regression, so the fit met its penalty residual and the W5b key was an artefact of it. The new value is goodOilTuned(2) on the vendored engine, the regression the tuning explorer runs when the learner chooses the 200 psig test (hd/fluid/keys.mjs; panelCapstoneGuard.test.js). W5b's case evidence stands: The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
     "class": "none",
     "owner_decision": false,
     "leak": false
+   },
+   "prior": {
+    "migration": "20261028b_w5_fluid.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "good_oil_tuned_bo_rb_stb",
+     "label": "Tuned formation volume factor",
+     "unit": "rb/stb",
+     "expected": 1.4621628562343378,
+     "tol": 0.001
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx (The ledger, bo row, Tuned column)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx (The ledger, bo row, Tuned column)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
    }
   },
   "evidence": "Ledger (default mode) Tuned column fmt(r.tuned, 3) for psat prints 2,632.642; tol 0.5.",
@@ -12415,18 +12443,18 @@
   "leak": true,
   "reclassed_from": null,
   "shipped": {
-   "migration": "20261028b_w5_fluid.sql",
-   "wave": "w5b",
+   "migration": "20261030d_hd_fluid.sql",
+   "wave": "hd",
    "closes_leak": true,
    "rekey": {
     "key": "good_oil_tuned_gor_scf_stb",
     "label": "Tuned total gas-oil ratio",
     "unit": "scf/stb",
-    "expected": 773.1821351682468,
+    "expected": 771.2991789394007,
     "tol": 1.0
    },
    "rekey_annot": {
-    "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+    "evidence": "HD re-key (engines #235, 20261030d_hd_fluid.sql): same key, label, unit and tol; expected 773.1821351682468 -> 771.2991789394007. The labTune Bo fallback had returned a null Bo at random during the regression, so the fit met its penalty residual and the W5b key was an artefact of it. The new value is goodOilTuned(2) on the vendored engine, the regression the tuning explorer runs when the learner chooses the 200 psig test (hd/fluid/keys.mjs; panelCapstoneGuard.test.js). W5b's case evidence stands: The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
     "source": "nextgen-panel",
     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:103 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
     "printed": {
@@ -12437,6 +12465,31 @@
     "class": "none",
     "owner_decision": false,
     "leak": false
+   },
+   "prior": {
+    "migration": "20261028b_w5_fluid.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "good_oil_tuned_gor_scf_stb",
+     "label": "Tuned total gas-oil ratio",
+     "unit": "scf/stb",
+     "expected": 773.1821351682468,
+     "tol": 1.0
+    },
+    "rekey_annot": {
+     "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:103 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
    }
   },
   "evidence": "Ledger Tuned column fmt(r.tuned, 3) for totalGor prints 761.726; tol 1.",
@@ -12472,18 +12525,18 @@
   "leak": true,
   "reclassed_from": null,
   "shipped": {
-   "migration": "20261028b_w5_fluid.sql",
-   "wave": "w5b",
+   "migration": "20261030d_hd_fluid.sql",
+   "wave": "hd",
    "closes_leak": true,
    "rekey": {
     "key": "good_oil_tuned_sto_api",
     "label": "Tuned stock tank gravity",
     "unit": "API",
-    "expected": 38.24766599188635,
+    "expected": 38.1809083770504,
     "tol": 0.05
    },
    "rekey_annot": {
-    "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+    "evidence": "HD re-key (engines #235, 20261030d_hd_fluid.sql): same key, label, unit and tol; expected 38.24766599188635 -> 38.1809083770504. The labTune Bo fallback had returned a null Bo at random during the regression, so the fit met its penalty residual and the W5b key was an artefact of it. The new value is goodOilTuned(2) on the vendored engine, the regression the tuning explorer runs when the learner chooses the 200 psig test (hd/fluid/keys.mjs; panelCapstoneGuard.test.js). W5b's case evidence stands: The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
     "source": "nextgen-panel",
     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:103 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
     "printed": {
@@ -12494,6 +12547,31 @@
     "class": "none",
     "owner_decision": false,
     "leak": false
+   },
+   "prior": {
+    "migration": "20261028b_w5_fluid.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "good_oil_tuned_sto_api",
+     "label": "Tuned stock tank gravity",
+     "unit": "API",
+     "expected": 38.24766599188635,
+     "tol": 0.05
+    },
+    "rekey_annot": {
+     "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:103 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
    }
   },
   "evidence": "Ledger Tuned column fmt(r.tuned, 3) for stoApi prints 38.755; tol 0.05.",
@@ -12529,18 +12607,18 @@
   "leak": true,
   "reclassed_from": null,
   "shipped": {
-   "migration": "20261028b_w5_fluid.sql",
-   "wave": "w5b",
+   "migration": "20261030d_hd_fluid.sql",
+   "wave": "hd",
    "closes_leak": true,
    "rekey": {
     "key": "tuned_splus_knob",
     "label": "Tuned C7+ volume shift",
     "unit": "-",
-    "expected": 0.0939927272825379,
+    "expected": 0.12330797628493384,
     "tol": 0.0005
    },
    "rekey_annot": {
-    "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+    "evidence": "HD re-key (engines #235, 20261030d_hd_fluid.sql): same key, label, unit and tol; expected 0.0939927272825379 -> 0.12330797628493384. The labTune Bo fallback had returned a null Bo at random during the regression, so the fit met its penalty residual and the W5b key was an artefact of it. The new value is goodOilTuned(2) on the vendored engine, the regression the tuning explorer runs when the learner chooses the 200 psig test (hd/fluid/keys.mjs; panelCapstoneGuard.test.js). W5b's case evidence stands: The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
     "source": "nextgen-panel",
     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:144 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
     "printed": {
@@ -12551,6 +12629,31 @@
     "class": "none",
     "owner_decision": false,
     "leak": false
+   },
+   "prior": {
+    "migration": "20261028b_w5_fluid.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "tuned_splus_knob",
+     "label": "Tuned C7+ volume shift",
+     "unit": "-",
+     "expected": 0.0939927272825379,
+     "tol": 0.0005
+    },
+    "rekey_annot": {
+     "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:144 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
    }
   },
   "evidence": "\"The knobs\" mode Tuned column fmt(f.knobs[k], 6) for sPlus prints 0.122664; tol 0.0005.",
@@ -12586,18 +12689,18 @@
   "leak": true,
   "reclassed_from": null,
   "shipped": {
-   "migration": "20261028b_w5_fluid.sql",
-   "wave": "w5b",
+   "migration": "20261030d_hd_fluid.sql",
+   "wave": "hd",
    "closes_leak": true,
    "rekey": {
     "key": "tuned_kc1_knob",
     "label": "Tuned C1 to C7+ interaction parameter",
     "unit": "-",
-    "expected": 0.03999571242790525,
+    "expected": 0.0746918124744843,
     "tol": 0.0005
    },
    "rekey_annot": {
-    "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+    "evidence": "HD re-key (engines #235, 20261030d_hd_fluid.sql): same key, label, unit and tol; expected 0.03999571242790525 -> 0.0746918124744843. The labTune Bo fallback had returned a null Bo at random during the regression, so the fit met its penalty residual and the W5b key was an artefact of it. The new value is goodOilTuned(2) on the vendored engine, the regression the tuning explorer runs when the learner chooses the 200 psig test (hd/fluid/keys.mjs; panelCapstoneGuard.test.js). W5b's case evidence stands: The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
     "source": "nextgen-panel",
     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:144 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
     "printed": {
@@ -12608,6 +12711,31 @@
     "class": "none",
     "owner_decision": false,
     "leak": false
+   },
+   "prior": {
+    "migration": "20261028b_w5_fluid.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "tuned_kc1_knob",
+     "label": "Tuned C1 to C7+ interaction parameter",
+     "unit": "-",
+     "expected": 0.03999571242790525,
+     "tol": 0.0005
+    },
+    "rekey_annot": {
+     "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:144 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
    }
   },
   "evidence": "\"The knobs\" mode Tuned column fmt(f.knobs[k], 6) for kC1 prints 0.050325; tol 0.0005.",
@@ -12643,18 +12771,18 @@
   "leak": true,
   "reclassed_from": null,
   "shipped": {
-   "migration": "20261028b_w5_fluid.sql",
-   "wave": "w5b",
+   "migration": "20261030d_hd_fluid.sql",
+   "wave": "hd",
    "closes_leak": true,
    "rekey": {
     "key": "tuning_ssr_reduction",
     "label": "Residual reduction factor",
     "unit": "times",
-    "expected": 16.599912822394707,
+    "expected": 20.284904310000233,
     "tol": 0.05
    },
    "rekey_annot": {
-    "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+    "evidence": "HD re-key (engines #235, 20261030d_hd_fluid.sql): same key, label, unit and tol; expected 16.599912822394707 -> 20.284904310000233. The labTune Bo fallback had returned a null Bo at random during the regression, so the fit met its penalty residual and the W5b key was an artefact of it. The new value is goodOilTuned(2) on the vendored engine, the regression the tuning explorer runs when the learner chooses the 200 psig test (hd/fluid/keys.mjs; panelCapstoneGuard.test.js). W5b's case evidence stands: The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
     "source": "nextgen-panel",
     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:116 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
     "printed": {
@@ -12665,6 +12793,31 @@
     "class": "none",
     "owner_decision": false,
     "leak": false
+   },
+   "prior": {
+    "migration": "20261028b_w5_fluid.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "tuning_ssr_reduction",
+     "label": "Residual reduction factor",
+     "unit": "times",
+     "expected": 16.599912822394707,
+     "tol": 0.05
+    },
+    "rekey_annot": {
+     "evidence": "The lessons printed every answer and the tuning explorer opened on the 100 psig regression. Re-cased on the regression against the 200 psig test; the tuned saturation pressure becomes the tuned Bo, because any regression lands the saturation pressure within a fraction of a psi of the 2634.65 target it fits, which is the teaching answer too.",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:116 (directed by src/content/courses/fluid/advanced/m06-the-expert-reading/l02-working-the-capstone.md)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/fluid/TuningExplorer.jsx:14",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
    }
   },
   "evidence": "Tile \"Reduction\" fmt(f.ssrReduction, 3) times (ssr0/ssr, fluidLab.js:300) prints 23.157; tol 0.05.",

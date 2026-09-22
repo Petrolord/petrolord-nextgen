@@ -10,7 +10,10 @@ import { describe, it, expect } from 'vitest';
 import { defineCaseGuard, loadSpec } from '../w5CaseGuard.js';
 import { compute } from '../../../../../docs/graded-field-audit/w5b/fluid.keys.mjs';
 
-const spec = loadSpec('fluid');
+// HD 2026-09-22 (engines #235, the labTune Bo fallback fix) moved the advanced
+// tier's tuned values: the live fields are docs/graded-field-audit/hd/fluid/
+// fields.json (20261030d_hd_fluid.sql); the W5b file stays the W5b state.
+const spec = loadSpec('fluid', 'docs/graded-field-audit/hd/fluid/fields.json');
 
 defineCaseGuard({
   describe,
