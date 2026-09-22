@@ -16,7 +16,7 @@ One habit follows: expect a sign reversal at the base of any body that contrasts
 
 On the teaching well the largest reflection coefficient in the series is $-0.017688$. Impedance falls from 7979.58 at 1580 m to 7702.20 at 1582 m, a drop of 277.38 units, so the section immediately below that interface is acoustically softer than the section immediately above it. In the vocabulary just introduced, the strongest event on this well is a soft event.
 
-This is where learners most often trip, so it is worth stating plainly. The capstone grades the **magnitude** of that coefficient, 0.017688, not the signed value. "Strongest" always means largest in absolute value, regardless of sign. A coefficient of $-0.017688$ is a stronger reflection than one of $+0.0130$, because 0.017688 exceeds 0.0130. The wave that comes back from the negative interface carries more energy; it simply comes back inverted.
+This is where learners most often trip, so it is worth stating plainly. The tier reports the **magnitude** of that coefficient, 0.017688, not the signed value, and so does the capstone. "Strongest" always means largest in absolute value, regardless of sign. A coefficient of $-0.017688$ is a stronger reflection than one of $+0.0130$, because 0.017688 exceeds 0.0130. The wave that comes back from the negative interface carries more energy; it simply comes back inverted.
 
 Keep the two ideas separate and neither will confuse you:
 

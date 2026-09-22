@@ -1,9 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import {
-  computeSynthetic, computeIntermediate, PLANTED_LAG_MS, DT_MS, NS,
+  computeSynthetic, shiftScan, TEACHING_LAG_MS, WITHHELD_LAG_MS, DT_MS,
 } from '@/lib/seismolordTeaching';
-import { suggestBulkShift } from '@petrolord/engines/engines/seismolord/synthetics.js';
-import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Shift explorer: the bulk-shift correlation scan, plus the frequency
 // switch the capstone requires. The scan curve is drawn rather than
@@ -15,20 +14,22 @@ const H = 240;
 const PAD = { left: 44, top: 24, right: 16, bottom: 34 };
 
 const fmt = (v, d = 6) => (Number.isFinite(v) ? v.toFixed(d) : '-');
-const I = computeIntermediate();
+
+// Two observed traces, both the 25 Hz synthetic arriving late. The panel
+// opens on the teaching trace, whose lag is stated so the scan can be
+// checked; the brief's trace withholds its lag, and the scan has to find it.
+const TRACES = [
+  ['teaching', `Teaching trace (arrives ${TEACHING_LAG_MS} ms late)`],
+  ['withheld', 'The brief\u2019s trace (lag withheld)'],
+];
 
 const ShiftExplorer = () => {
   const [freq, setFreq] = useState(25);
+  const [trace, setTrace] = useState('teaching');
 
   const model = useMemo(() => {
     const s = computeSynthetic(freq);
-    // The observed trace is always the 25 Hz synthetic arriving late,
-    // exactly as the capstone sets it up.
-    const s25 = computeSynthetic(25);
-    const lagSamples = PLANTED_LAG_MS / DT_MS;
-    const seis = new Float32Array(NS).fill(NaN);
-    for (let i = 0; i < NS - lagSamples; i++) seis[i + lagSamples] = s25.syn.synthetic[i];
-    const scan = suggestBulkShift(s25.syn.synthetic, seis, DT_MS, 40);
+    const scan = shiftScan(trace === 'teaching' ? TEACHING_LAG_MS : WITHHELD_LAG_MS);
     return {
       peakAbs: s.summary.synPeakAbs,
       peakTwt: s.summary.synPeakTwt,
@@ -36,7 +37,7 @@ const ShiftExplorer = () => {
       rcTwt: s.summary.rcPeakTwt,
       scan,
     };
-  }, [freq]);
+  }, [freq, trace]);
 
   const { scan } = model;
   const plotW = W - PAD.left - PAD.right;
@@ -51,7 +52,10 @@ const ShiftExplorer = () => {
 
   return (
     <PanelShell title="Shift explorer"
-      subtitle={`The observed trace is the 25 Hz synthetic arriving late by a lag the scan has to find. The scan tests ${scan.series.length} lags from ${lagMin} to ${lagMax} ms at a ${DT_MS} ms sample rate.`}>
+      subtitle={`The observed trace is the 25 Hz synthetic arriving late by a lag the scan has to find. The scan tests ${scan.series.length} lags from ${lagMin} to ${lagMax} ms at a ${DT_MS} ms sample rate. It opens on the teaching trace.`}>
+      <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 items-end">
+        <SelectField label="Observed trace" value={trace} onChange={setTrace} options={TRACES} />
+      </div>
       <div className="flex flex-wrap gap-2 items-center">
         <span className="text-xs text-gray-400">wavelet frequency</span>
         {FREQS.map((f) => (
@@ -62,7 +66,7 @@ const ShiftExplorer = () => {
             {f} Hz
           </button>
         ))}
-        <span className="text-xs text-gray-500">the capstone reads 15 and 40 Hz</span>
+        <span className="text-xs text-gray-500">the frequency moves the amplitude tiles, never the scan</span>
       </div>
 
       <div className="overflow-x-auto">

@@ -2,7 +2,7 @@
 
 This tier taught two things and taught them together. You can measure the misalignment between a synthetic and an observed trace with a scan rather than an eye, and report it with the correlation that justifies it. And you can read an amplitude or a peak time off a synthetic knowing that both of them belong to the wavelet as much as to the rock, so that neither leaves your notes without its frequency attached.
 
-On the teaching well that means a suggested bulk shift of 8 ms with a correlation of 1, against 0.621742 at zero lag where nothing was shifted at all. It means a strongest amplitude of 0.1573149710893631 at 1580 ms TWT with a 15 Hz wavelet and 0.0362229160964489 at 1646 ms TWT with a 40 Hz one. And it means a strongest reflection coefficient of 0.017688043415546417 in absolute value at 1582 ms TWT that did not move while all of that was happening.
+On the teaching well that means a suggested bulk shift of 6 ms with a correlation of 1, against 0.771383 at zero lag where nothing was shifted at all. It means a strongest amplitude of 0.1573149710893631 at 1580 ms TWT with a 15 Hz wavelet and 0.0362229160964489 at 1646 ms TWT with a 40 Hz one. And it means a strongest reflection coefficient of 0.017688043415546417 in absolute value at 1582 ms TWT that did not move while all of that was happening.
 
 That is a complete skill, and it is narrow in one direction on purpose. Everything you did was a single trace against a single trace, with a wavelet you chose but never interrogated. The tier above turns the wavelet itself into the subject.
 

@@ -12,7 +12,7 @@ Two conditions make this legitimate. First, the two curves must be on the same d
 
 ## Reading the shape
 
-Across the teaching log, impedance runs from a minimum of **5436.47** to a maximum of **10624.96** in course units. That maximum is one of the six values the capstone grades.
+Across the teaching log, impedance runs from a minimum of **5436.47** to a maximum of **10624.96** in course units. That maximum is one of the six values this tier reports.
 
 Take the measure of that range first. The difference between the extremes is a little over 5188, and the maximum is just under twice the minimum. Compare that with the density curve, which varied by a couple of tenths on a base of about 2.2, a spread of well under twenty percent. Velocity is doing most of the work in shaping this log. Density modulates the result rather than driving it, and the previous lesson showed that modulation is enough to matter at individual boundaries.
 

@@ -1,6 +1,6 @@
 # The shape of the curve
 
-Module 2 got you the answer. The scan runs, the best lag comes back as 8 ms, and the correlation there is 1. That is the number the capstone grades, and if all you ever needed was the number you could stop.
+Module 2 got you the answer. The scan runs, the best lag comes back as 6 ms, and the correlation there is 1. If all you ever needed was the number you could stop.
 
 This module does something different. It ignores the winner for a while and looks at the whole curve the scan built on its way to finding it. The curve carries information the single best lag throws away, and reading it is what separates an interpreter who accepts a shift from one who understands it.
 
@@ -16,23 +16,21 @@ Here is what the engine reports for the nine lags centred on the answer.
 
 | lag (ms) | correlation |
 | --- | --- |
-| 0 | 0.621742 |
-| 2 | 0.771383 |
-| 4 | 0.892968 |
-| 6 | 0.972386 |
-| **8** | **1.000000** |
-| 10 | 0.972386 |
-| 12 | 0.892968 |
-| 14 | 0.771383 |
-| 16 | 0.621742 |
+| 0 | 0.771383 |
+| 2 | 0.892968 |
+| 4 | 0.972386 |
+| **6** | **1.000000** |
+| 8 | 0.972386 |
+| 10 | 0.892968 |
+| 12 | 0.771383 |
 
-Read down the column before you read anything into it. The correlation climbs steadily from 0.621742 at 0 ms, through 0.771383, 0.892968 and 0.972386, reaching 1.000000 at 8 ms. Then it falls back down through exactly the same four values in exactly the reverse order.
+Read down the column before you read anything into it. The correlation climbs steadily from 0.771383 at 0 ms, through 0.892968 and 0.972386, reaching 1.000000 at 6 ms. Then it falls back down through exactly the same three values in exactly the reverse order.
 
 ## It is symmetric, and that is not a coincidence
 
-Cover the answer row and look at what is left. The value at 6 ms is the value at 10 ms. The value at 4 ms is the value at 12 ms. The value at 2 ms is the value at 14 ms. The value at 0 ms is the value at 16 ms. Every pair of lags equally far from 8 ms scores identically, to all six digits the engine prints.
+Cover the answer row and look at what is left. The value at 4 ms is the value at 8 ms. The value at 2 ms is the value at 10 ms. The value at 0 ms is the value at 12 ms. Every pair of lags equally far from 6 ms scores identically, to all six digits the engine prints.
 
-The reason is what the observed trace is. In this exercise the observed seismic is the 25 Hz synthetic copied forward by four samples. So when you slide the synthetic against it, you are sliding a trace against a shifted copy of itself. That operation has a name. It is an autocorrelation, and an autocorrelation is an even function of lag: the value at lag $\tau$ equals the value at lag $-\tau$. Measured from the planted lag of 8 ms rather than from zero, that evenness is the symmetry in the table.
+The reason is what the observed trace is. In this exercise the observed seismic is the 25 Hz synthetic copied forward by three samples. So when you slide the synthetic against it, you are sliding a trace against a shifted copy of itself. That operation has a name. It is an autocorrelation, and an autocorrelation is an even function of lag: the value at lag $\tau$ equals the value at lag $-\tau$. Measured from the planted lag of 6 ms rather than from zero, that evenness is the symmetry in the table.
 
 Put it in words you can carry. Being 2 ms early and being 2 ms late are the same amount of misalignment, so they cost the same amount of correlation. The curve does not know which side of the answer you are on. It only knows how far off you are.
 
@@ -48,9 +46,9 @@ And the symmetry is a property of this exercise rather than a law of well ties. 
 
 ## One more thing to notice
 
-The curve does not fall off a cliff. One sample away from the answer, at 6 ms and at 10 ms, the correlation is still 0.972386, which is a high number by any working standard. Two samples away it is 0.892968, which most people would call a good tie. The peak is real, but its shoulders are broad.
+The curve does not fall off a cliff. One sample away from the answer, at 4 ms and at 8 ms, the correlation is still 0.972386, which is a high number by any working standard. Two samples away it is 0.892968, which most people would call a good tie. The peak is real, but its shoulders are broad.
 
-That broadness is the subject of lesson 3, and the fact that the curve is still at 0.621742 all the way out at zero lag is the subject of lesson 2. For now, register that both facts came from the same table, and that neither of them is visible if you only read the winning number.
+That broadness is the subject of lesson 3, and the fact that the curve is still at 0.771383 all the way out at zero lag is the subject of lesson 2. For now, register that both facts came from the same table, and that neither of them is visible if you only read the winning number.
 
 Open the panel and look at the curve rather than the answer.
 
@@ -58,6 +56,6 @@ Open the panel and look at the curve rather than the answer.
 
 ## Exercise
 
-From the table alone, without using the panel, write down the correlation you expect at a lag of minus 2 ms and at a lag of 18 ms, and say in one sentence what rule let you predict both. Then open the panel, find the scan curve, and describe its shape in one sentence to someone who cannot see it.
+From the table alone, without using the panel, write down the correlation you expect at a lag of minus 4 ms and at a lag of 16 ms, and say in one sentence what rule let you predict both. Then open the panel, find the scan curve, and describe its shape in one sentence to someone who cannot see it.
 
-As a self-check: a lag of minus 2 ms is 10 ms away from the answer of 8 ms, and a lag of 18 ms is also 10 ms away on the other side, so both should score the same as each other. The rule is that the curve is symmetric about the true lag, because sliding a trace against a shifted copy of itself is an autocorrelation and an autocorrelation depends only on how far the lag is from alignment, not on which side of it you sit. A fair description of the shape is a single smooth peak reaching 1.000000 at 8 ms, with flanks that fall away at the same rate on both sides and are still above 0.97 one sample from the top.
+As a self-check: a lag of minus 4 ms is 10 ms away from the answer of 6 ms, and a lag of 16 ms is also 10 ms away on the other side, so both should score the same as each other. The rule is that the curve is symmetric about the true lag, because sliding a trace against a shifted copy of itself is an autocorrelation and an autocorrelation depends only on how far the lag is from alignment, not on which side of it you sit. A fair description of the shape is a single smooth peak reaching 1.000000 at 6 ms, with flanks that fall away at the same rate on both sides and are still above 0.97 one sample from the top.

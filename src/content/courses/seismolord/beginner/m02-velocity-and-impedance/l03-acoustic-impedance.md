@@ -22,7 +22,7 @@ The multiplication needs units, and here the course makes a working choice and s
 
 That is not an SI unit. Strict SI would use kilograms per cubic metre for density, giving impedance in kg per square metre per second, and the numbers would be a thousand times larger. Packages and textbooks differ, and a number quoted without its convention is not a number you can check.
 
-The course states the convention plainly because the capstone grades an impedance value, and a value graded in the wrong units is simply wrong. Confirm which convention any other tool uses before comparing. The engine works in (m/s) times (g/cc) throughout, as recorded in the synthetics module header.
+The course states the convention plainly because the capstone grades an impedance value, and a value in the wrong units is simply wrong. Confirm which convention any other tool uses before comparing. The engine works in (m/s) times (g/cc) throughout, as recorded in the synthetics module header.
 
 ## Worked examples
 

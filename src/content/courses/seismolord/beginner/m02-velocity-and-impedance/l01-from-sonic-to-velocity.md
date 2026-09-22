@@ -46,7 +46,7 @@ Two further checks on the same formula. Note that the shortest transit time of t
 
 ## The whole-log mean
 
-Applying the formula to all 301 samples of the log, from 1500 m to 1650 m at a half metre step, and averaging the finite results gives a mean velocity of **3145.29 m/s**. That number is one of the six values the capstone grades, so it is worth understanding what it represents: the simple arithmetic mean of the sample velocities, taken over finite samples only, with nulls excluded rather than counted as zero.
+Applying the formula to all 301 samples of the log, from 1500 m to 1650 m at a half metre step, and averaging the finite results gives a mean velocity of **3145.29 m/s**. That number is one of the six values this tier reports, so it is worth understanding what it represents: the simple arithmetic mean of the sample velocities, taken over finite samples only, with nulls excluded rather than counted as zero.
 
 It is not the average velocity a wave would experience travelling the interval. That quantity, the time-weighted average, belongs to the depth-to-time module. The distinction matters in real work, and it is a good habit to know which average you are quoting.
 

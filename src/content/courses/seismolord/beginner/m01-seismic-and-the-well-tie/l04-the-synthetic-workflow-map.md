@@ -14,13 +14,13 @@ which makes two-way time in milliseconds numerically equal to depth in metres. T
 
 **Stage 3. Impedance to reflectivity.** Differencing impedance between adjacent samples turns the impedance log into the reflection coefficient series, one coefficient per interface. Because reflections come from contrasts, this is the stage where a smooth impedance trend becomes a sparse series of spikes with signs. 301 impedance samples give 300 coefficients. Built in **module 4**.
 
-**Stage 4. Convolution with a wavelet.** The reflectivity series is convolved with a Ricker wavelet to produce the synthetic trace. Frequency is the interpreter's choice, and the capstone fixes it at 25 Hz. This is the stage where the earth's sharp spikes become the smooth, oscillating, band-limited events that look like seismic, and where nearby reflections start interfering with each other. Built in **module 5**.
+**Stage 4. Convolution with a wavelet.** The reflectivity series is convolved with a Ricker wavelet to produce the synthetic trace. Frequency is the interpreter's choice; the teaching reading uses 25 Hz and the capstone states a frequency of its own. This is the stage where the earth's sharp spikes become the smooth, oscillating, band-limited events that look like seismic, and where nearby reflections start interfering with each other. Built in **module 5**.
 
 **Stage 5. Reading the panel.** The app reports the synthetic and a summary panel of derived numbers. Knowing what each field means, and which of them would reveal a bad input, is the final skill. Built in **module 6**.
 
-## The six graded numbers
+## The six reported numbers
 
-The Associate capstone grades six values computed from this well at a 25 Hz Ricker wavelet. They are listed here at the start rather than the end, so that you can see which stage each one falls out of and recognise it when it appears.
+The tier reports six values computed from this well; on the whole log at 2000 m/s and a 25 Hz Ricker wavelet they are the ones below, and the capstone asks for the same six on a window, a velocity and a wavelet of its own. They are listed here at the start rather than the end, so that you can see which stage each one falls out of and recognise it when it appears.
 
 | # | Quantity | Value | Stage |
 | --- | --- | --- | --- |

@@ -16,9 +16,9 @@ That ratio is the point. The grading is tight because reading a time off a panel
 
 ## Against the scan you just learned
 
-This tier's bulk-shift scan searches lags from minus 40 ms to plus 40 ms in 2 ms steps, and on the teaching exercise it recovers a planted lag of 8 ms.
+This tier's bulk-shift scan searches lags from minus 40 ms to plus 40 ms in 2 ms steps, and on the teaching exercise it recovers a planted lag of 6 ms.
 
-Set 66 ms beside that 8 ms. The misalignment you spend a whole module learning to measure, defend and report is 8 ms. The movement of the brightest event caused by nothing more than a change of wavelet is more than eight times larger. It is also larger than the entire one-sided range of the scan, which reaches only 40 ms, so if two people picked the brightest event at those two frequencies and then tried to reconcile their picks with a bulk-shift scan of this width, the scan could not close the gap between them at all.
+Set 66 ms beside that 6 ms. The misalignment you spend a whole module learning to measure, defend and report is 6 ms. The movement of the brightest event caused by nothing more than a change of wavelet is eleven times larger. It is also larger than the entire one-sided range of the scan, which reaches only 40 ms, so if two people picked the brightest event at those two frequencies and then tried to reconcile their picks with a bulk-shift scan of this width, the scan could not close the gap between them at all.
 
 The lesson is not that the scan is too narrow. The scan is sized for the misalignment it exists to correct. The lesson is that tuning movement and misalignment are different problems, and a shift scan does not fix the first one.
 

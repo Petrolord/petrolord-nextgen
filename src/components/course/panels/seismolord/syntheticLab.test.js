@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  computeSynthetic, CAPSTONE_FREQ_HZ, DT_MS, NS, V_OVERBURDEN_MS, WELL,
+  computeSynthetic, TEACHING_FREQ_HZ, DT_MS, NS, V_OVERBURDEN_MS, WELL,
 } from '@/lib/seismolordTeaching';
 
 // Pins the synthetic-explorer panel math to the live NG3 capstone
@@ -8,7 +8,7 @@ import {
 // produce numbers the grader rejects.
 
 describe('seismolord synthetic explorer: engine math', () => {
-  const r = computeSynthetic(CAPSTONE_FREQ_HZ);
+  const r = computeSynthetic(TEACHING_FREQ_HZ);
   const s = r.summary;
 
   it('reproduces the NG3 capstone six at 25 Hz', () => {

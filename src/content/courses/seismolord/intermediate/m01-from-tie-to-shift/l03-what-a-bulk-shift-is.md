@@ -34,7 +34,7 @@ The useful diagnostic is the shape of the residual misfit. If the misfit is roug
 
 ## In this exercise
 
-Here the observed trace is the synthetic moved bodily by 8 ms in TWT, so the misfit is a constant of 8 ms at every sample. That is the textbook case for a bulk shift, and a bulk shift removes it exactly rather than partially. Applying a shift of 8 ms makes the two traces identical over their overlap.
+Here the observed trace is the synthetic moved bodily by 6 ms in TWT, so the misfit is a constant of 6 ms at every sample. That is the textbook case for a bulk shift, and a bulk shift removes it exactly rather than partially. Applying a shift of 6 ms makes the two traces identical over their overlap.
 
 Notice what that means for how much this exercise can teach. It demonstrates that the method finds the right constant when a constant is the right answer. It cannot demonstrate what a stretch looks like under the same scan, because there is no stretch here to look at. Keep the boundary in mind when you read the result, because the scan will still return a single lag and a single correlation on data where a single lag is the wrong model, and it will not warn you.
 

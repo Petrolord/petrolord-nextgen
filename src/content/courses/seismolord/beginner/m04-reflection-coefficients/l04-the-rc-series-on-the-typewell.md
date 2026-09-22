@@ -14,7 +14,7 @@ The result is a spiky-looking curve that is mostly close to zero, with a scatter
 
 On the teaching well the largest reflection coefficient in the whole series is **0.017688 in absolute value**, and it is **negative** in sign, so impedance drops downward across that interface. It sits at **1582 ms**, which under this course's teaching time to depth function is also **1582 m**, since the function is set up so that milliseconds and metres coincide on this well.
 
-Both of those numbers are capstone answers. The magnitude 0.017688 and the location 1582 are what the exercise asks for, so it is worth being able to reproduce them rather than recall them: they come from differencing 7702.20 at 1582 m against 7979.58 at 1580 m, which is the arithmetic worked step by step in lesson 2.
+Both of those numbers are readings the capstone asks for on a case of its own. The magnitude 0.017688 and the location 1582 are what the teaching exercise gives, so it is worth being able to reproduce them rather than recall them: they come from differencing 7702.20 at 1582 m against 7979.58 at 1580 m, which is the arithmetic worked step by step in lesson 2.
 
 ## Reading the neighbourhood
 
