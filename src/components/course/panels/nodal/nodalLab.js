@@ -2144,6 +2144,105 @@ export const wellFrictionGroup = (W) => {
   };
 };
 
+// ---------------------------------------------------------------------------
+// THE TYPED GAS COLUMN (held decision HD, route b of the follow-on programme,
+// owner decision D2).
+//
+// The Outflow explorer's "Your gas column, typed" view takes a static dry gas
+// column the learner TYPES: tubing head pressure, gas gravity, measured and
+// vertical depth, the two temperatures and the step count. It runs one call,
+// cullenderSmithBhp on exactly those inputs, and returns the pressure at the
+// bottom of the column and at its midpoint station. Nothing else is computed
+// here and no case is preset: the view opens on the BONNY-7 teaching column, so
+// its default state is a teaching number, and typing a well's own column and
+// reading its pressures is the work.
+//
+// Input rules, each with a plain message and never a throw to the panel:
+// pressure, gravity and depths above zero, the vertical depth no deeper than
+// the measured one, temperatures above absolute zero, and a whole step count
+// from 2 to TYPED_COLUMN_MAX_STEPS. The engine marches an even number of
+// sub-intervals, so an odd count is rounded to the next even one and the view
+// says so.
+// ---------------------------------------------------------------------------
+
+/** The largest step count the typed column will march, to keep the page responsive. */
+export const TYPED_COLUMN_MAX_STEPS = 2000;
+
+/** The typed view's opening case: the BONNY-7 teaching column and its own step count. */
+export const TYPED_COLUMN_DEFAULT = Object.freeze({
+  ptf: BONNY_7.column.ptf,
+  gasSg: BONNY_7.column.gasSg,
+  mdFt: BONNY_7.column.mdFt,
+  tvdFt: BONNY_7.column.tvdFt,
+  whtF: BONNY_7.column.whtF,
+  bhtF: BONNY_7.column.bhtF,
+  steps: BONNY_7.columnSteps,
+});
+
+const typedNumber = (v) => {
+  if (v === null || v === undefined) return NaN;
+  if (typeof v === 'number') return v;
+  const s = String(v).trim().replace(/,/g, '');
+  if (s === '' || !/^[-+]?(\d+\.?\d*|\.\d+)([eE][-+]?\d+)?$/.test(s)) return NaN;
+  return Number(s);
+};
+
+const TYPED_COLUMN_SPEC = [
+  ['ptf', 'Tubing head pressure', (x) => (x > 0 ? null : 'must be greater than zero')],
+  ['gasSg', 'Gas specific gravity', (x) => (x > 0 && x < 3 ? null : 'must be above zero and below 3')],
+  ['mdFt', 'Measured depth', (x) => (x > 0 ? null : 'must be greater than zero')],
+  ['tvdFt', 'Vertical depth', (x, o) => (x > 0 && !(x > o.mdFt) ? null : 'must be greater than zero and no deeper than the measured depth')],
+  ['whtF', 'Wellhead temperature', (x) => (x > -NODAL_RANKINE_OFFSET ? null : 'must be above absolute zero')],
+  ['bhtF', 'Bottomhole temperature', (x) => (x > -NODAL_RANKINE_OFFSET ? null : 'must be above absolute zero')],
+  ['steps', 'Step count', (x) => (Number.isInteger(x) && x >= 2 && x <= TYPED_COLUMN_MAX_STEPS
+    ? null : `must be a whole number from 2 to ${TYPED_COLUMN_MAX_STEPS}`)],
+];
+
+/**
+ * A STATIC DRY GAS COLUMN THE LEARNER TYPES, marched by Cullender and Smith on
+ * the typed step count. Returns `{ ok, errors, warnings, pwfPsia, pmfPsia,
+ * stepsRequested, stepsUsed, converged, gradientPsiPerFt, zAtWellhead }`.
+ */
+export const typedGasColumn = (raw) => {
+  const v = {};
+  const errors = [];
+  TYPED_COLUMN_SPEC.forEach(([key, label, rule]) => {
+    const x = typedNumber(raw?.[key]);
+    v[key] = x;
+    if (!Number.isFinite(x)) { errors.push(`${label} needs a number.`); return; }
+    const msg = rule(x, v);
+    if (msg) errors.push(`${label} ${msg}.`);
+  });
+  if (errors.length) return { ok: false, errors, warnings: [] };
+  try {
+    const cs = cullenderSmithBhp({
+      ptf: v.ptf, gasSg: v.gasSg, mdFt: v.mdFt, tvdFt: v.tvdFt, whtF: v.whtF, bhtF: v.bhtF, steps: v.steps,
+    });
+    if (!Number.isFinite(cs.pwf) || !Number.isFinite(cs.pmf)) {
+      return { ok: false, errors: ['This column sends the march out of range, so no pressure at depth can be read.'], warnings: [] };
+    }
+    const warnings = [];
+    if (cs.steps !== v.steps) {
+      warnings.push(`The march works on pairs of sub-intervals, so ${v.steps} steps were marched as ${cs.steps}.`);
+    }
+    if (!cs.converged) warnings.push('At least one pair of sub-intervals did not close its iteration.');
+    return {
+      ok: true,
+      errors: [],
+      warnings,
+      pwfPsia: cs.pwf,
+      pmfPsia: cs.pmf,
+      stepsRequested: v.steps,
+      stepsUsed: cs.steps,
+      converged: cs.converged,
+      gradientPsiPerFt: (cs.pwf - v.ptf) / v.tvdFt,
+      zAtWellhead: nodalGasZ({ pPsia: v.ptf, tF: v.whtF, gasSg: v.gasSg }),
+    };
+  } catch (err) {
+    return { ok: false, errors: [`The engine refused this column: ${err && err.message ? err.message : String(err)}`], warnings: [] };
+  }
+};
+
 /**
  * THE SAME TRUNCATION VERDICT AS `columnTruncationTable`, ON THE TEACHING
  * WELLS, so a panel can put the two-station gap for a GRAVITY ONLY column and

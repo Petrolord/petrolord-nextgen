@@ -23895,30 +23895,37 @@
   "expected": 1516.5314295864096,
   "tol": 0.00076,
   "rel_tol": 5.011435867222799e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/nodal/VlpExplorer.jsx:299 GasColumn (teaching wells only); engine /root/wt-b5-nextgen/packages/engines/engines/production/nodal.js:684 cullenderSmithBhp",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/nodal/VlpExplorer.jsx:595 (typedcolumn mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/nodal/VlpExplorer.jsx:23 fmt (toLocaleString max 4 decimals by default; column readings printed fmt(v, 6))",
+  "display_ref": "src/components/course/panels/nodal/VlpExplorer.jsx:595 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 4.135904418944847e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/nodal/VlpExplorer.jsx:299 -> give the gas column view editable inputs (surface pressure, gas gravity, MD, TVD, wellhead and bottomhole temperature, step count, rate) and print pwf and pmf with fmt(v, 6)"
-  },
-  "owner_decision": true,
-  "recommendation": "Add editable column inputs to the panel (six-decimal print clears the 7.6e-4 tol). Alternative: name and point to a Suite route, but no lesson references one.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "All column inputs are stated (sg 0.72, 1225 psia, 8900 MD, 8300 TVD, 96 to 214 degF, 20 steps) and the vendored engine returns 1516.5314295864 exactly, but the only column the learner can run is the teaching wells' (the GasColumn view has a well selector and no inputs). A hand march needs the engine's z-factor correlation, per-interval fixed-point iteration closed to 0.001 psi and a Simpson refinement (intermediate/m04-the-gas-column/l02-cullender-and-smith.md:27); that closure tolerance is itself comparable to the 7.6e-4 psi grading tol.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261030e_hd_nodal.sql",
+   "wave": "hd",
+   "prompt_append": "On the course panel, the Outflow explorer's \"Your gas column, typed\" view takes this injection column as typed (gravity, tubing head pressure, both depths, both temperatures and the step count) and prints the pressures at the bottom of the column (the valve depth) and at its midpoint station to six decimals.",
+   "case_mode": {
+    "panel": "src/components/course/panels/nodal/VlpExplorer.jsx",
+    "mode": "typedcolumn",
+    "test": "src/components/course/panels/nodal/yourCase.test.js"
+   }
+  },
+  "evidence": "HD (held decision, owner approved the lead recommendation 2026-09-22): a typed mode on VlpExplorer.jsx (\"Your gas column, typed\", typedGasColumn in nodalLab.js: one call to the vendored engine's cullenderSmithBhp on the typed tubing head pressure, gravity, measured and vertical depth, both temperatures and step count) takes the column the learner types. Typing the brief's column (0.72, 1225 psia, 8900 ft MD, 8300 ft TVD, 96 to 214 degF, 20 steps) prints the value at 6 dp within tol; yourCase.test.js proves it, that the BONNY-7 default and the panel's opening view land on no graded answer (D2 rules 1 to 3), and that the two station default or a vertical depth typed as the measured one misses.",
   "notes": null
  },
  {
@@ -23930,30 +23937,37 @@
   "expected": 1373.724371881081,
   "tol": 0.00069,
   "rel_tol": 5.022841656766727e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/nodal/VlpExplorer.jsx:299; nodal.js:684",
-  "printed": null,
+  "source": "nextgen-panel",
+  "source_ref": "src/components/course/panels/nodal/VlpExplorer.jsx:596 (typedcolumn mode: the case typed as the prompt states it)",
+  "printed": {
+   "decimals": 6
+  },
   "display_scale": 1.0,
-  "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/nodal/VlpExplorer.jsx:23",
+  "display_ref": "src/components/course/panels/nodal/VlpExplorer.jsx:596 plain(v, 6)",
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 1.1891893336724024e-07,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "display",
-  "fix": {
-   "display": "/root/wt-b5-nextgen/src/components/course/panels/nodal/VlpExplorer.jsx:299 -> same editable column view, printing the midpoint pressure with fmt(v, 6)"
-  },
-  "owner_decision": true,
-  "recommendation": "Same change as liftgas_valve_pwf_psia.",
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
+  "recommendation": null,
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "Same as the valve pressure: engine returns pmf 1373.7243718811 exactly on the stated inputs, but no learner-settable surface computes it.",
+  "reclassed_from": "display",
+  "shipped": {
+   "migration": "20261030e_hd_nodal.sql",
+   "wave": "hd",
+   "prompt_append": "On the course panel, the Outflow explorer's \"Your gas column, typed\" view takes this injection column as typed (gravity, tubing head pressure, both depths, both temperatures and the step count) and prints the pressures at the bottom of the column (the valve depth) and at its midpoint station to six decimals.",
+   "case_mode": {
+    "panel": "src/components/course/panels/nodal/VlpExplorer.jsx",
+    "mode": "typedcolumn",
+    "test": "src/components/course/panels/nodal/yourCase.test.js"
+   }
+  },
+  "evidence": "HD (held decision, owner approved the lead recommendation 2026-09-22): a typed mode on VlpExplorer.jsx (\"Your gas column, typed\", typedGasColumn in nodalLab.js: one call to the vendored engine's cullenderSmithBhp on the typed tubing head pressure, gravity, measured and vertical depth, both temperatures and step count) takes the column the learner types. Typing the brief's column (0.72, 1225 psia, 8900 ft MD, 8300 ft TVD, 96 to 214 degF, 20 steps) prints the value at 6 dp within tol; yourCase.test.js proves it, that the BONNY-7 default and the panel's opening view land on no graded answer (D2 rules 1 to 3), and that the two station default or a vertical depth typed as the measured one misses.",
   "notes": null
  },
  {
