@@ -1,0 +1,1021 @@
+{
+ "course": "corrosion",
+ "migration": "20261029_w6_corrosion.sql",
+ "case": {
+  "name": "UGADA",
+  "markers": [
+   "UGADA"
+  ],
+  "summary": "The UGADA trunkline: a wet sour gas-condensate line at 52.6 C and 96.4 bar absolute, CO2 0.0418 and H2S 0.00061 mole fraction, pH 4.86, 2.73 m/s in a 0.2545 m line, a 92 percent inhibitor at 87 percent availability, a 3.81 mm allowance with 0.94 mm consumed against a 25 year design life. It screens mixed, mass transfer controlled, below its film onset and binding on the allowance; moderate film risk at 7 m/s, stripped at 9.5 m/s."
+ },
+ "literals_ok": {},
+ "tiers": {
+  "beginner": [
+   {
+    "ord": 2,
+    "replaces": "c4f8fa0d01705d1f0810e6420133605f",
+    "prompt": "The UGADA trunkline runs at 96.4 bar absolute, and its gas analysis gives a CO2 mole fraction of 0.0418 and an H2S mole fraction of 0.00061. What CO2 partial pressure does the engine carry into its chain?",
+    "correct": "{{pco2}} bar, the total pressure times the CO2 mole fraction",
+    "distractors": [
+     "{{fco2}} bar, because the fugacity coefficient is applied before any partial pressure is reported",
+     "{{pco2Pct}} bar, once the fraction is scaled up by a hundred into mole percent",
+     "{{pco2Both}} bar, both acid gases counted as CO2"
+    ],
+    "explanation": "A partial pressure is the total pressure times the mole fraction, so 96.4 bar at 0.0418 gives {{pco2}} bar. The fugacity of {{fco2}} bar comes one step later and feeds the rate.",
+    "rests_on": [
+     "pco2",
+     "fco2",
+     "pco2Pct",
+     "pco2Both"
+    ],
+    "why_wrong": [
+     "reports the fugacity, which is the partial pressure times a coefficient",
+     "multiplies by a hundred as if converting a fraction into mole percent",
+     "adds the H2S fraction into the CO2 fraction"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 5,
+    "replaces": "0a4c6781f9ae85f7de3e5c2171c85c4e",
+    "prompt": "On UGADA, at 96.4 bar absolute with an H2S mole fraction of 0.00061, the sour door prints the H2S partial pressure in psia beside the bar figure. Which psia figure does it print?",
+    "correct": "{{ph2sPsia}} psia, the {{ph2sBar}} bar figure times the engine's bar to psia factor",
+    "distractors": [
+     "{{ph2sFugApplied}} psia, after the CO2 fugacity coefficient of {{fugCoef}} is applied to H2S as well",
+     "{{ph2sDivided}} psia, the bar figure divided by the conversion factor",
+     "{{ph2sBar}} psia, since the comparison is kept in a single unit"
+    ],
+    "explanation": "H2S gets no fugacity correction here: 96.4 bar at 0.00061 is {{ph2sBar}} bar, and the engine's factor turns that into {{ph2sPsia}} psia.",
+    "rests_on": [
+     "ph2sBar",
+     "ph2sPsia",
+     "ph2sFugApplied",
+     "ph2sDivided"
+    ],
+    "why_wrong": [
+     "applies a fugacity coefficient the engine declares it never applies to H2S",
+     "divides by the factor where the conversion multiplies",
+     "relabels the bar figure in psia without converting it"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 6,
+    "replaces": "1912bfc2cd0256e4a4dcbcd4447ef379",
+    "prompt": "UGADA's gas analysis gives CO2 at a mole fraction of 0.0418 and H2S at 0.00061. What H2S to CO2 ratio and regime word does the regime door return?",
+    "correct": "{{ratio}}, mixed, and the rate is issued flagged as an upper bound",
+    "distractors": [
+     "{{ratioFug}}, mixed, formed from the H2S partial pressure over the CO2 fugacity",
+     "{{ratioInv}}, sulphide, so the CO2 rate model stops describing the surface",
+     "{{ratio}}, carbonate, being under the {{mixedMax}} edge"
+    ],
+    "explanation": "The ratio needs no pressure: 0.00061 over 0.0418 is {{ratio}}, which lies between {{carbMax}} and {{mixedMax}}, so the regime is mixed and the CO2 rate is read as a ceiling.",
+    "rests_on": [
+     "ratio",
+     "regime",
+     "ratioFug",
+     "ratioInv",
+     "carbMax",
+     "mixedMax"
+    ],
+    "why_wrong": [
+     "divides by a fugacity where the ratio takes two partial pressures",
+     "turns the ratio upside down",
+     "misreads the carbonate boundary, which sits at the lower edge"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 13,
+    "replaces": "fff58b3f4ced5a2c79961d7af90763fa",
+    "prompt": "At 96.4 bar and 52.6 C the UGADA screen shows a CO2 partial pressure of {{pco2}} bar and a fugacity coefficient of {{fugCoef}}. Which quantity do the reaction and transport terms both take?",
+    "correct": "The fugacity of {{fco2}} bar; the regime ratio keeps the partial pressures",
+    "distractors": [
+     "The partial pressure of {{pco2}} bar, since the coefficient only corrects the H2S comparison",
+     "The fugacity for the reaction term, with the {{pco2}} bar partial pressure sent to transport",
+     "The coefficient of {{fugCoef}} alone, scaling both terms after they are formed"
+    ],
+    "explanation": "The two rate terms, the film factor and its onset all take the fugacity, {{pco2}} bar times {{fugCoef}}, which is {{fco2}} bar. The H2S comparison and the regime ratio run on partial pressures.",
+    "rests_on": [
+     "fco2",
+     "pco2",
+     "fugCoef"
+    ],
+    "why_wrong": [
+     "sends the partial pressure to the rate and the coefficient to H2S, the reverse of the routing",
+     "splits the two terms, which both take the fugacity",
+     "treats the coefficient as a multiplier on the finished terms"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 17,
+    "replaces": "95a2f57979d5be1ad5f390594df50136",
+    "prompt": "The UGADA screen reports a reaction term of {{vr}} mm/yr and a transport term of {{vm}} mm/yr. What combined figure does the series combination give?",
+    "correct": "{{combined}} mm/yr, below both terms and nearest the smaller",
+    "distractors": [
+     "{{vSum}} mm/yr, the two rates added since both steps consume iron",
+     "{{vm}} mm/yr, the smaller term alone setting the whole answer",
+     "{{vMean}} mm/yr, the mean of the two steps given equal weight"
+    ],
+    "explanation": "In series the resistances add, so the reciprocal of the combination is the sum of the reciprocals of {{vr}} and {{vm}}, which gives {{combined}} mm/yr, below the smaller term.",
+    "rests_on": [
+     "combined",
+     "vr",
+     "vm",
+     "vSum",
+     "vMean"
+    ],
+    "why_wrong": [
+     "adds the rates as if the steps ran in parallel",
+     "ignores the slower reaction resistance, which still pulls the combination below the smaller term",
+     "averages two steps that combine by reciprocals"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 21,
+    "replaces": "7ce03826c45b7cda09fa565101480a2b",
+    "prompt": "On UGADA the reaction term is {{vr}} mm/yr and the transport term is {{vm}} mm/yr. Which controlling word and margin does the engine report?",
+    "correct": "Mass transfer, at a margin of {{margin}} measured over the smaller term",
+    "distractors": [
+     "Reaction kinetics, since the reaction term of {{vr}} mm/yr is the larger",
+     "Comparable, because the two terms sit within a factor of three",
+     "Mass transfer, at a margin of {{marginWrong}} against the larger term"
+    ],
+    "explanation": "The smaller term controls, and the margin is the gap between the terms over the smaller one, {{margin}}, far from the band where the engine answers comparable.",
+    "rests_on": [
+     "controlling",
+     "margin",
+     "marginWrong"
+    ],
+    "why_wrong": [
+     "names the larger term, which is the faster step",
+     "the comparable answer needs the terms within ten percent of each other",
+     "divides the gap by the larger term"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 28,
+    "replaces": "c2f6efb4d31c57f729b41419755e3a3a",
+    "prompt": "UGADA's transport term is {{vm}} mm/yr at 2.73 m/s in a 0.2545 m line. What does the engine return for it at 5.46 m/s with nothing else changed?",
+    "correct": "{{vm2}} mm/yr, the velocity entering at the {{velExp}} power",
+    "distractors": [
+     "{{vm2Linear}} mm/yr, twice the term, as velocity enters linearly",
+     "{{vm}} mm/yr, unchanged, since the flow cannot reach the chemistry",
+     "{{vm2Dexp}} mm/yr, the doubling taken at the diameter's {{diaExp}} power"
+    ],
+    "explanation": "The transport term is a power law in velocity, so doubling it multiplies the term by the same ratio at any diameter, taking {{vm}} to {{vm2}} mm/yr.",
+    "rests_on": [
+     "vm2",
+     "velExp",
+     "vm2Linear",
+     "vm2Dexp",
+     "diaExp"
+    ],
+    "why_wrong": [
+     "uses an exponent of one where the engine measures a smaller power",
+     "velocity enters through the transport term, which is exactly where it acts",
+     "applies the diameter exponent to a change in velocity"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 31,
+    "replaces": "51185afc5c74bdb9804b74eb83586fda",
+    "prompt": "UGADA runs at 52.6 C with a CO2 fugacity of {{fco2}} bar, and the panel prints a computed film onset of {{onset}} C. What does the film multiplier do to this rate?",
+    "correct": "Nothing: the line is below its onset, so the multiplier is exactly {{scaleFactor}}",
+    "distractors": [
+     "It cuts the rate, since a high fugacity pulls the onset below 52.6 C",
+     "It raises the rate a little, the factor being allowed above one below the onset",
+     "It refuses, as the factor is undefined below the onset temperature"
+    ],
+    "explanation": "The onset of {{onset}} C sits above the 52.6 C line, so the factor is clamped at {{scaleFactor}} and no film credit is in the rate.",
+    "rests_on": [
+     "onset",
+     "scaleFactor"
+    ],
+    "why_wrong": [
+     "the printed onset is above the line temperature",
+     "the clamp only ever lets the factor fall below one",
+     "below the onset the factor is clamped, never refused"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 35,
+    "replaces": "e7e278bfdb98874b7a6e94a4955fd272",
+    "prompt": "UGADA's in situ pH is 4.86. What pH factor does the engine apply to the rate?",
+    "correct": "{{phFactor}}, one decade per two pH units above the reference of {{phRef}}",
+    "distractors": [
+     "{{phNoRef}}, the slope applied to the whole pH from zero upward",
+     "{{phSlopeOne}}, a full decade per pH unit above the reference",
+     "{{phLin}}, half the distance above the reference read as the factor"
+    ],
+    "explanation": "The correction is relative to the reference pH of {{phRef}}: {{phAbove}} units above it at half a decade per unit is {{phLin}} of a decade, a factor of {{phFactor}}.",
+    "rests_on": [
+     "phFactor",
+     "phRef",
+     "phNoRef",
+     "phSlopeOne",
+     "phLin",
+     "phAbove"
+    ],
+    "why_wrong": [
+     "drops the reference the correction is taken against",
+     "doubles the slope of half a decade per unit",
+     "reports the exponent where the factor is ten to that power"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 36,
+    "replaces": "913d469833974bc6ac26c54d121627c6",
+    "prompt": "An operator types an in situ pH of 3.7 into the UGADA screen. What does the engine return?",
+    "correct": "A refusal naming the reference pH of {{phRef}}, and no factor at all",
+    "distractors": [
+     "A factor of exactly one, leaving the rate at its pH {{phRef}} value",
+     "A factor of {{phLowExtrap}}, the slope carried on below the reference",
+     "The range refusal, as 3.7 falls outside the band of valid readings"
+    ],
+    "explanation": "Below the reference of {{phRef}} the correction is not established, so the engine refuses and names the boundary; 3.7 is still inside the valid pH range.",
+    "rests_on": [
+     "phRef",
+     "phLowExtrap"
+    ],
+    "why_wrong": [
+     "a factor of one is the least limiting answer the engine was repaired to stop giving",
+     "extends a slope the engine declares undefined below the reference",
+     "3.7 passes the range guard and is caught by the reference guard"
+    ],
+    "lesson": "beginner/m05-ph-and-the-water/l03-below-the-reference-it-refuses",
+    "answer_index": 2
+   },
+   {
+    "ord": 37,
+    "replaces": "c07ab9360db1a59112ace6a89bb3ca60",
+    "prompt": "The UGADA engineer sets the wetting regime to oil wet and leaves every other box alone. What does the screen show?",
+    "correct": "A rate of {{oilRate}} mm/yr, category and life withheld, and the model named as not applying",
+    "distractors": [
+     "A rate of {{oilRate}} mm/yr, an unbounded life and a pass against the 25 year design life",
+     "A negligible category beside a corrosion inhibition of zero percent",
+     "The same {{rate}} mm/yr, since the regime only changes the band label"
+    ],
+    "explanation": "Oil wet sets the wetting factor to zero, so the rate is zero by assumption; the engine withholds the category and the life, reports the inhibition as null and names the model as not applying.",
+    "rests_on": [
+     "oilRate",
+     "oilBinding",
+     "rate"
+    ],
+    "why_wrong": [
+     "an unbounded life off a dropdown is exactly what the engine withholds",
+     "the category is withheld and the inhibition figure is null",
+     "the regime multiplies the rate by its wetting factor"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 39,
+    "replaces": "4f969e4f4876d58080f03be6f009740c",
+    "prompt": "UGADA's corrosion inhibitor is 92 percent efficient on its datasheet and available 87 percent of the time. What effective protection and shortfall does the engine report?",
+    "correct": "{{effPct}} percent, which is {{shortfallPp}} percentage points short",
+    "distractors": [
+     "{{effDatasheet}} percent, since efficiency is what the chemical removes",
+     "{{effBothFail}} percent, as loss needs the chemical and the pump to fail together",
+     "{{effAdded}} percent, adding the two percentages and removing one hundred"
+    ],
+    "explanation": "Efficiency only counts while the chemical is there, so 92 percent of 87 percent gives {{effPct}} percent, {{shortfallPp}} points below the datasheet figure.",
+    "rests_on": [
+     "effPct",
+     "shortfallPp",
+     "effDatasheet",
+     "effBothFail",
+     "effAdded"
+    ],
+    "why_wrong": [
+     "ignores the time the inhibitor is absent",
+     "treats efficiency and availability as independent failure chances",
+     "has no basis in the time average"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 41,
+    "replaces": "3b31ef000081922b93c99c9f8da201ba",
+    "prompt": "UGADA carries 812.4 kg/m3 liquid at 2.73 m/s in a 0.2545 m line, with a viscosity of 0.00187 Pa s. What Reynolds number does this module's own definition give?",
+    "correct": "{{re}}, density times velocity times diameter over viscosity",
+    "distractors": [
+     "{{reCp}}, with the viscosity entered as centipoise",
+     "{{reRadius}}, taking the radius of the line for its length scale",
+     "{{reNoRho}}, velocity times diameter over viscosity alone"
+    ],
+    "explanation": "The Reynolds number is a definition: 812.4 times 2.73 times 0.2545 over 0.00187 is {{re}}, far above the laminar branch.",
+    "rests_on": [
+     "re",
+     "reCp",
+     "reRadius",
+     "reNoRho"
+    ],
+    "why_wrong": [
+     "the engine takes viscosity in Pa s",
+     "the definition uses the inside diameter",
+     "drops the density from the definition"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 42,
+    "replaces": "28b1e1827a8ee17b54d1897b9e407954",
+    "prompt": "The UGADA screen reports {{rate}} mm/yr. The course converts a rate by dividing by 25.4 and multiplying by 1000. What does the screen print in mpy?",
+    "correct": "{{mpy}} mpy, the millimetres turned into thousandths of an inch",
+    "distractors": [
+     "{{mpyTimes}} mpy, multiplying by 25.4 in place of dividing",
+     "{{mpyDivOnly}} mpy, the division done and the factor of 1000 left out",
+     "{{mpyInch}} mpy, the thousand applied against centimetres"
+    ],
+    "explanation": "Dividing {{rate}} mm/yr by 25.4 gives inches a year, and multiplying by 1000 gives {{mpy}} mpy.",
+    "rests_on": [
+     "mpy",
+     "mpyTimes",
+     "mpyDivOnly",
+     "mpyInch"
+    ],
+    "why_wrong": [
+     "multiplies where the conversion divides",
+     "leaves the answer in inches a year",
+     "converts through centimetres, ten times too large"
+    ],
+    "answer_index": 1
+   }
+  ],
+  "intermediate": [
+   {
+    "ord": 3,
+    "replaces": "06dc89942a65f90c01eb76daac017d35",
+    "prompt": "UGADA screens at {{rate}} mm/yr water wet. The engineer switches to the intermittent regime at a water cut of 0.46. What rate comes back?",
+    "correct": "{{rateInt}} mm/yr, the water cut becoming the wetting factor",
+    "distractors": [
+     "{{rate}} mm/yr, since the water cut is read only by the oil-wet branch",
+     "{{rateIntComplement}} mm/yr, the oil share of the stream taken as the wetting factor",
+     "{{oilRate}} mm/yr, as leaving water wet removes the wetted wall"
+    ],
+    "explanation": "In the intermittent regime the water cut is the wetting factor, so {{rate}} mm/yr times 0.46 is {{rateInt}} mm/yr.",
+    "rests_on": [
+     "rateInt",
+     "intFactor",
+     "rateIntComplement"
+    ],
+    "why_wrong": [
+     "oil wet ignores the water cut, and intermittent is the regime that reads it",
+     "uses the oil share where the water cut is the factor",
+     "only oil wet or a zero water cut zeroes the rate"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 7,
+    "replaces": "da7bc222921ff1dfeacfddb0743e8d4e",
+    "prompt": "UGADA stays in the water-wet regime, but the operator types a water cut of 0.46 into the box. What wetting factor and rate does the engine use?",
+    "correct": "{{wwTypedFactor}} and {{wwTypedRate}} mm/yr, the box being read only when intermittent",
+    "distractors": [
+     "{{intFactor}} and {{rateInt}} mm/yr, the water cut scaling the rate in every regime",
+     "A refusal, as a water cut below one contradicts the water-wet regime chosen",
+     "{{intFactor}} for the band label only, the rate held at {{rate}} mm/yr"
+    ],
+    "explanation": "Water wet fixes the wetting factor at {{wwTypedFactor}} whatever the box says, so the rate stays {{wwTypedRate}} mm/yr.",
+    "rests_on": [
+     "wwTypedFactor",
+     "wwTypedRate"
+    ],
+    "why_wrong": [
+     "the water cut is read in the intermittent regime only",
+     "the water cut is range checked only where it is read",
+     "the band label comes from the rate, which does not move"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 8,
+    "replaces": "84148d093af739bf5a57914e0b512204",
+    "prompt": "UGADA's corrosion inhibitor is 92 percent efficient and 87 percent available. How many times the datasheet metal loss does the line see?",
+    "correct": "{{lossRatio}} times, a retained {{retained}} against the datasheet's {{retainedDs}}",
+    "distractors": [
+     "{{lossInvAvail}} times, one over the availability of the chemical",
+     "{{lossOffOnly}} times, counting only the hours the pump is off",
+     "{{shortfallPp}} times, the shortfall in points read as a multiple"
+    ],
+    "explanation": "The retained fraction is the 87 percent of time at the datasheet's {{retainedDs}} plus the rest at the full rate, {{retained}}, which is {{lossRatio}} times the datasheet's.",
+    "rests_on": [
+     "lossRatio",
+     "retained",
+     "retainedDs",
+     "lossInvAvail",
+     "lossOffOnly"
+    ],
+    "why_wrong": [
+     "ignores the loss while the chemical is present",
+     "ignores the loss while the chemical is present",
+     "confuses percentage points with a ratio of metal loss"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 9,
+    "replaces": "91cb97afe965093ad8143d87ddb85ccb",
+    "prompt": "At 92 percent efficiency, UGADA's corrosion inhibitor availability is raised from 87 to 97 percent. What metal loss against the datasheet figure follows?",
+    "correct": "{{lossRatioUp}} times, with effective protection at {{effUp}} percent",
+    "distractors": [
+     "{{lossRatio}} times still, since availability never reaches the ratio",
+     "{{lossOffOnlyUp}} times, counting only the remaining off hours",
+     "{{lossInvAvailUp}} times, one over the new availability"
+    ],
+    "explanation": "The ratio is a straight line in the availability: at 97 percent the effective protection is {{effUp}} percent and the loss falls to {{lossRatioUp}} times the datasheet.",
+    "rests_on": [
+     "lossRatioUp",
+     "effUp",
+     "lossOffOnlyUp",
+     "lossInvAvailUp"
+    ],
+    "why_wrong": [
+     "availability is the input that moves the ratio",
+     "drops the loss during the hours the chemical is on",
+     "ignores the efficiency entirely"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 10,
+    "replaces": "a12f4561dd0187f52e4bce307b081c55",
+    "prompt": "A UGADA technician types a corrosion inhibitor efficiency of 115 percent at 87 percent availability. What does the engine report?",
+    "correct": "{{effClamped}} percent effective, with a named clamp from 115 to 100 percent",
+    "distractors": [
+     "{{effUnclamped}} percent, the typed figure applied as it stands",
+     "A refusal, in the way an out-of-range water cut is refused",
+     "{{effPct}} percent, the typed figure dropped silently for the last valid one"
+    ],
+    "explanation": "Above 100 percent the efficiency is clamped to 100 and the clamp is named, so the effective protection equals the availability, {{effClamped}} percent.",
+    "rests_on": [
+     "effClamped",
+     "clampMsg",
+     "effUnclamped"
+    ],
+    "why_wrong": [
+     "the engine clamps an efficiency above 100 percent",
+     "percentages are clamped, where the water cut is refused",
+     "the clamp is declared and moves the figure to 100 percent"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 13,
+    "replaces": "21b03b25f951fe4580fd06e20048b786",
+    "prompt": "UGADA is pushed to 7 m/s and the screen reports a wall shear of {{tauMod}} Pa. What film verdict follows, and what happens to the inhibitor credit?",
+    "correct": "Moderate, and the credit is still taken in the rate",
+    "distractors": [
+     "High, and the credit is removed from the rate",
+     "Low, as only the {{stripPa}} Pa threshold carries a word",
+     "High, since 7 m/s passes this module's erosional velocity"
+    ],
+    "explanation": "{{tauMod}} Pa sits between the {{moderatePa}} Pa band and the {{stripPa}} Pa stripping threshold, so the word is moderate and the credit stands.",
+    "rests_on": [
+     "tauMod",
+     "filmRiskMod",
+     "stripPa",
+     "moderatePa"
+    ],
+    "why_wrong": [
+     "only a shear above the stripping threshold removes the credit",
+     "the moderate band starts at its own lower threshold",
+     "the module has no erosional velocity criterion"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 14,
+    "replaces": "a28811704fc8c8dd0809219975274742",
+    "prompt": "At 9.5 m/s the UGADA wall shear is {{tauStrip}} Pa. Which figure does the screen report as the rate, and what sits beside it?",
+    "correct": "{{rateStrip}} mm/yr, with {{rateCredit}} mm/yr beside it as the credited rate",
+    "distractors": [
+     "{{rateCredit}} mm/yr, with a warning that the film may be gone",
+     "{{rateStripMean}} mm/yr, the mean of the credited and stripped rates",
+     "No rate, since a stripped film stops the screening"
+    ],
+    "explanation": "Above {{stripPa}} Pa the credit is removed, so the rate is the uninhibited {{rateStrip}} mm/yr and the credited {{rateCredit}} mm/yr is printed beside it.",
+    "rests_on": [
+     "rateStrip",
+     "rateCredit",
+     "tauStrip",
+     "rateStripMean"
+    ],
+    "why_wrong": [
+     "the engine removes the credit rather than warning beside a credited rate",
+     "no averaging happens, the two are bounds",
+     "only a shear that cannot be computed stops the screening"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 15,
+    "replaces": "cf9b7feac9ec1700b0d1a2494bed0068",
+    "prompt": "At 9.5 m/s UGADA reports a stripped rate of {{rateStrip}} mm/yr and a credited rate of {{rateCredit}} mm/yr. What is their ratio, and what sets it?",
+    "correct": "{{stripRatio}}, set by the inhibitor programme alone",
+    "distractors": [
+     "{{ratioEffOnly}}, one over what the datasheet efficiency leaves",
+     "{{ratioAvailOnly}}, one over the hours the inhibitor is absent",
+     "{{tauOverThresh}}, the wall shear over the stripping threshold"
+    ],
+    "explanation": "Every factor of the chain divides out, leaving one over the retained fraction {{retained}}, which is {{stripRatio}}.",
+    "rests_on": [
+     "stripRatio",
+     "retained",
+     "ratioEffOnly",
+     "ratioAvailOnly",
+     "tauOverThresh"
+    ],
+    "why_wrong": [
+     "ignores the availability",
+     "ignores the efficiency",
+     "the shear decides whether the credit goes, never its size"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 26,
+    "replaces": "da65c94db9fdda5595b08c654f8d7bd1",
+    "prompt": "UGADA carries a 3.81 mm corrosion allowance with 0.94 mm already gone, and screens at {{rate}} mm/yr. What remaining life does the engine report?",
+    "correct": "{{life}} yr, the {{remainingMm}} mm left divided by the rate",
+    "distractors": [
+     "{{lifeNoConsumed}} yr, the full 3.81 mm allowance divided by the rate",
+     "{{lifeConsumedOnly}} yr, the depth already lost divided by the rate",
+     "{{lifeTimes}} yr, what is left multiplied by the rate in place of divided"
+    ],
+    "explanation": "The life is the remaining allowance over the rate: 3.81 less 0.94 is {{remainingMm}} mm, and {{remainingMm}} over {{rate}} is {{life}} yr.",
+    "rests_on": [
+     "life",
+     "remainingMm",
+     "lifeNoConsumed",
+     "lifeConsumedOnly",
+     "lifeTimes"
+    ],
+    "why_wrong": [
+     "ignores the consumed depth",
+     "divides the wrong part of the allowance",
+     "multiplies where the life divides"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 28,
+    "replaces": "59b55545dc06c16f867b945444fe6dbb",
+    "prompt": "UGADA screens at {{rate}} mm/yr against a 25 year design life, with {{remainingMm}} mm left of its 3.81 mm allowance. What shortfall does the life door report?",
+    "correct": "{{shortfallMm}} mm, the required allowance less what is left",
+    "distractors": [
+     "{{reqAllow}} mm, the whole allowance the design life demands",
+     "{{shortVsCA}} mm, the required allowance less the original 3.81 mm",
+     "{{reqOverLife}} mm, what is left spread over the design life"
+    ],
+    "explanation": "The required allowance is {{rate}} times 25, {{reqAllow}} mm, and the shortfall compares it with the {{remainingMm}} mm left: {{shortfallMm}} mm.",
+    "rests_on": [
+     "shortfallMm",
+     "reqAllow",
+     "shortVsCA",
+     "reqOverLife"
+    ],
+    "why_wrong": [
+     "is the required allowance, before the comparison",
+     "compares with the original allowance and ignores the consumed depth",
+     "is a tolerable rate in mm/yr"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 33,
+    "replaces": "7bf95775c738cac5736bb6a553c7af41",
+    "prompt": "A new UGADA survey revises the consumed depth from 0.94 to 1.62 mm, at the same {{rate}} mm/yr and 25 year design life. What happens to the required allowance and the shortfall?",
+    "correct": "The required allowance stays {{revReq}} mm and the shortfall rises by {{revShortRise}} mm",
+    "distractors": [
+     "The required allowance falls to {{revReqScaled}} mm with what is left",
+     "Both rise by {{revShortRise}} mm, since each carries the consumed depth",
+     "Neither moves, as the consumed depth only changes the remaining life"
+    ],
+    "explanation": "The required allowance is the rate times the design life and knows nothing of the history; the shortfall compares it with what is left, now {{revRemaining}} mm, so it rises by {{revShortRise}} mm.",
+    "rests_on": [
+     "revReq",
+     "revShortRise",
+     "revRemaining",
+     "revReqScaled"
+    ],
+    "why_wrong": [
+     "the required allowance does not read the consumed depth",
+     "only the shortfall carries the consumed depth",
+     "the shortfall compares against what is left"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 36,
+    "replaces": "add951cfcb6a5ed63598ad55e417bbbc",
+    "prompt": "UGADA is rerun with its corrosion inhibitor typed at 100 percent efficiency and 100 percent availability. What does the life door return?",
+    "correct": "No life and no verdict: the years come back null, flagged unbounded",
+    "distractors": [
+     "An unbounded life and a pass against the 25 year design life",
+     "A life of zero years, as a zero rate leaves nothing to divide",
+     "The same {{life}} yr, since a typed 100 percent is clamped"
+    ],
+    "explanation": "The rate is {{perfectRate}} mm/yr, and a zero rate returns no years and no verdict, so the reader must first ask why the rate is zero.",
+    "rests_on": [
+     "perfectRate",
+     "life"
+    ],
+    "why_wrong": [
+     "the engine refuses to turn a zero rate into a passing verdict",
+     "a zero rate gives an unbounded flag, never zero years",
+     "only an efficiency above 100 percent is clamped"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 37,
+    "replaces": "18cbd922f6d555e45a1857cc535233f0",
+    "prompt": "UGADA's pressure is raised from 96.4 to 192.8 bar at the same composition. What H2S to CO2 ratio does the regime door return?",
+    "correct": "{{ratioDbl}}, unchanged, as the total pressure divides out",
+    "distractors": [
+     "{{ratioDoubled}}, doubled along with the pressure",
+     "{{ratioHalved}}, halved as the CO2 side grows",
+     "{{ratioDblFug}}, taken against the CO2 fugacity at the higher pressure"
+    ],
+    "explanation": "Both partial pressures are the total pressure times a mole fraction, so the ratio is 0.00061 over 0.0418, {{ratioDbl}}, at any pressure.",
+    "rests_on": [
+     "ratioDbl",
+     "ratioDoubled",
+     "ratioHalved",
+     "ratioDblFug"
+    ],
+    "why_wrong": [
+     "the pressure sits in both partial pressures",
+     "the pressure sits in both partial pressures",
+     "the ratio takes partial pressures and never a fugacity"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 39,
+    "replaces": "0daaff942b161bfe6222516572434068",
+    "prompt": "UGADA's H2S partial pressure is {{ph2sBar}} bar, or {{ph2sPsia}} psia, against the {{threshBar}} bar threshold. How many decades above does the sour door report?",
+    "correct": "{{decades}}, the base ten logarithm of the bar ratio",
+    "distractors": [
+     "{{decPsiaMix}}, the psia figure set against the bar threshold",
+     "{{decLn}}, the natural logarithm of the ratio",
+     "{{decPlain}}, the plain ratio of the two pressures with no logarithm"
+    ],
+    "explanation": "A decade is a factor of ten, so the count is the base ten logarithm of {{ph2sBar}} over {{threshBar}}, which is {{decades}}.",
+    "rests_on": [
+     "decades",
+     "decPsiaMix",
+     "decLn",
+     "decPlain"
+    ],
+    "why_wrong": [
+     "mixes units across the ratio",
+     "uses the wrong logarithm base",
+     "reports the ratio where the count is its logarithm"
+    ],
+    "answer_index": 3
+   }
+  ],
+  "advanced": [
+   {
+    "ord": 11,
+    "replaces": "c4a3ed33e7033c5139d964071c3271fc",
+    "prompt": "UGADA has 3.81 mm of allowance with 0.94 mm gone and a 25 year design life. Bisecting meetsDesignLife, what is the largest rate at which the design life is still met?",
+    "correct": "{{maxRate}} mm/yr, the remaining {{remainingMm}} mm over 25 years",
+    "distractors": [
+     "{{maxRateCA}} mm/yr, the full 3.81 mm spread over 25 years",
+     "{{maxRateConsumed}} mm/yr, the 0.94 mm already lost over 25 years",
+     "{{rateDatasheet}} mm/yr, the rate at the 92 percent datasheet efficiency"
+    ],
+    "explanation": "The verdict turns where the remaining allowance just lasts the design life, {{remainingMm}} mm over 25 years, which is {{maxRate}} mm/yr.",
+    "rests_on": [
+     "maxRate",
+     "maxRateCA",
+     "maxRateConsumed",
+     "rateDatasheet"
+    ],
+    "why_wrong": [
+     "ignores the consumed depth",
+     "divides the wrong part of the allowance",
+     "is a different rate, the datasheet inhibited rate"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 13,
+    "replaces": "e4d48835bba7471985b7184921c161fd",
+    "prompt": "UGADA's corrosion inhibitor is 92 percent efficient. Bisecting the effective protection the engine returns, what availability first reaches 88 percent effective?",
+    "correct": "{{availNeeded}} percent, the target divided by the efficiency",
+    "distractors": [
+     "{{targetAsAvail}} percent, the target read across as the availability",
+     "{{availAddPoints}} percent, the full availability less the point gap",
+     "{{availWrongAlg}} percent, the missing protection shared over the efficiency"
+    ],
+    "explanation": "Effective protection is efficiency times availability, so 88 percent at 92 percent efficiency needs {{availNeeded}} percent availability.",
+    "rests_on": [
+     "availNeeded",
+     "targetAsAvail",
+     "availAddPoints",
+     "availWrongAlg"
+    ],
+    "why_wrong": [
+     "ignores the efficiency",
+     "subtracts points where the relation multiplies",
+     "inverts the wrong quantity"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 14,
+    "replaces": "0fb33be8058400836e17b9ed6f95219d",
+    "prompt": "UGADA screens at {{rate}} mm/yr with 0.94 mm consumed and a 25 year design life, and the engine's required allowance is {{reqAllow}} mm. Bisecting the total allowance on meetsDesignLife, what allowance reinstates the life?",
+    "correct": "{{reinstate}} mm, the required allowance plus the 0.94 mm already gone",
+    "distractors": [
+     "{{reqAllow}} mm, the required allowance field as it is returned",
+     "{{shortfallMm}} mm, the shortfall the life door reports",
+     "{{reqMinusConsumed}} mm, the required allowance less what is gone"
+    ],
+    "explanation": "The required allowance describes a new line; this line has also lost 0.94 mm, so the bisection lands at {{reqAllow}} plus 0.94, {{reinstate}} mm.",
+    "rests_on": [
+     "reinstate",
+     "reqAllow",
+     "shortfallMm",
+     "reqMinusConsumed"
+    ],
+    "why_wrong": [
+     "ignores the depth already consumed",
+     "is a gap against what is left",
+     "subtracts the consumed depth that must be added"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 16,
+    "replaces": "93cb7569a8750ba69b8f9948faf68f9d",
+    "prompt": "At 9.5 m/s UGADA's film is stripped, and its life of {{lifeStrip}} yr also misses the 25 year design life. Which binding constraint does the screen name?",
+    "correct": "Wall shear on the film, whose test comes before the life test",
+    "distractors": [
+     "The allowance against the design life, as it is the larger miss",
+     "Mass transfer to the wall, as transport still controls the rate",
+     "The model does not apply, as a stripped film voids the CO2 rate"
+    ],
+    "explanation": "The engine walks a fixed order and stops at the first limit that fires: applicability, then the film, then the life. At {{tauStrip}} Pa the film test fires first.",
+    "rests_on": [
+     "bindingStrip",
+     "lifeStrip",
+     "tauStrip"
+    ],
+    "why_wrong": [
+     "the order ranks what to change first, never the size of the miss",
+     "transport sits below the film and life tests in the order",
+     "the model still applies in the mixed regime"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 19,
+    "replaces": "ec66ca3e160bc49ff5ab2ea3963902b2",
+    "prompt": "UGADA's H2S mole fraction is raised from 0.00061 to 0.0025 with everything else unchanged, giving a ratio of {{ratioSul}}. What happens to the rate?",
+    "correct": "It stays {{rateSul}} mm/yr as an upper bound, with the category and life withheld",
+    "distractors": [
+     "It rises to {{rateSulScaled}} mm/yr, in step with the higher ratio",
+     "It is refused outright, as the sulphide regime takes the CO2 model away",
+     "It stays {{rateSul}} mm/yr, with the band label and life issued as before"
+    ],
+    "explanation": "H2S is not in the CO2 correlation, so the rate cannot move; above {{mixedMax}} the regime is sulphide and the category and life are withheld.",
+    "rests_on": [
+     "rateSul",
+     "ratioSul",
+     "regimeSul",
+     "bindingSul",
+     "rateSulScaled"
+    ],
+    "why_wrong": [
+     "H2S does not enter the rate correlation",
+     "the engine keeps the rate as a stated upper bound",
+     "the sulphide regime withholds the category and the life"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 21,
+    "replaces": "19d55f7963f789b6b72551bde090b04a",
+    "prompt": "UGADA screens at {{rate}} mm/yr, labelled {{category}} with categoryHeld true. If all three band edges were set one step tighter, what on the screen would change?",
+    "correct": "Only the word; the rate and the {{life}} yr life stay where they are",
+    "distractors": [
+     "The life would shorten, as the band edges feed the allowance division",
+     "The rate would rise, as the band edges scale the correlation output",
+     "The binding constraint would move onto the band edge instead"
+    ],
+    "explanation": "The label is three comparisons laid over the rate, so moving the edges changes words and nothing else: {{rate}} mm/yr and {{life}} yr are untouched.",
+    "rests_on": [
+     "category",
+     "rate",
+     "life"
+    ],
+    "why_wrong": [
+     "the life divides by the rate and never reads a band",
+     "the bands only label the rate",
+     "the binding constraint never reads the band"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 24,
+    "replaces": "f10d67b7e451a21cd705a9322dda4e52",
+    "prompt": "UGADA run intermittent at a water cut of 0.46 screens at {{rateInt}} mm/yr. What word does the category door return, and why?",
+    "correct": "{{categoryInt}}, since the rate is at or above the {{bandModerate}} mm/yr edge",
+    "distractors": [
+     "moderate, as the moderate band runs up to {{bandHigh}} mm/yr",
+     "severe, the word following the water-wet rate of {{rate}} mm/yr",
+     "withheld, as the intermittent regime holds the label back like oil wet"
+    ],
+    "explanation": "The edges are at-or-above, and {{rateInt}} mm/yr sits between {{bandModerate}} and {{bandHigh}} mm/yr, so the word is {{categoryInt}}.",
+    "rests_on": [
+     "rateInt",
+     "categoryInt",
+     "bandModerate",
+     "bandHigh"
+    ],
+    "why_wrong": [
+     "the moderate band ends at the middle edge",
+     "the door sees only the rate it is handed",
+     "only a wetting factor of zero withholds"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 25,
+    "replaces": "11f5b48548b2cb7356a0af5f0e6c4910",
+    "prompt": "A UGADA survey finds all 3.81 mm of the corrosion allowance consumed. What does the remaining-life door return?",
+    "correct": "A refusal: this is now an inspection and fitness-for-service question",
+    "distractors": [
+     "A life of zero years, with a fail against the 25 year design life recorded",
+     "A negative life, the overshoot divided by the {{rate}} mm/yr rate",
+     "An unbounded life, since nothing is left for the rate to consume"
+    ],
+    "explanation": "With no allowance left the door declines rather than returning a number, because the question has moved outside what an allowance over a rate can answer.",
+    "rests_on": [
+     "goneMsg"
+    ],
+    "why_wrong": [
+     "the door refuses rather than issuing a zero life",
+     "the door refuses rather than issuing a negative life",
+     "unbounded is the zero-rate answer"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 28,
+    "replaces": "4d6907e94f0c3728d89edaf81fc300c7",
+    "prompt": "Before the repair, a blank velocity box made the transport term infinite. On UGADA, with a reaction term of {{vr}} mm/yr, what would the old engine have printed?",
+    "correct": "A combined {{oldBlankRate}} mm/yr, with reaction kinetics named as controlling",
+    "distractors": [
+     "A combined {{vm}} mm/yr, with mass transfer named as controlling",
+     "A rate of zero, a negligible label and an unbounded life",
+     "The same {{combined}} mm/yr, as velocity cannot reach the reaction term"
+    ],
+    "explanation": "An infinite transport term leaves the series combination equal to the reaction term, {{oldBlankRate}} mm/yr, and reaction kinetics named from an input nobody supplied.",
+    "rests_on": [
+     "oldBlankRate",
+     "vr",
+     "vm",
+     "combined",
+     "blankMsg"
+    ],
+    "why_wrong": [
+     "the transport term was infinite, so it could not control",
+     "that was the blank temperature failure",
+     "an infinite transport term changes the combination"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 29,
+    "replaces": "83a6c87f3e794520bbf9920232e03659",
+    "prompt": "UGADA's 92 percent corrosion inhibitor is run at 99.9 percent availability. Does the engine's inhibitor warning fire?",
+    "correct": "No: the shortfall of {{shortNear}} points is under the {{warnTriggerPp}} point trigger",
+    "distractors": [
+     "Yes: the warning fires on any shortfall above zero",
+     "Yes: it fires whenever the efficiency is above 90 percent",
+     "No: an availability this close to full is rounded up to 100 percent"
+    ],
+    "explanation": "The warning tests the shortfall, and at 99.9 percent availability it is {{shortNear}} points, below the {{warnTriggerPp}} point trigger.",
+    "rests_on": [
+     "shortNear",
+     "warnTriggerPp"
+    ],
+    "why_wrong": [
+     "the trigger is a tenth of a point",
+     "that was the old guard on the efficiency input",
+     "the engine only clamps availability above 100 percent"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 31,
+    "replaces": "4119397dbd6b6742a2970422fc3525d3",
+    "prompt": "UGADA binds on its allowance at {{life}} yr of 25 yr. Beneath that, the reaction term is {{vr}} mm/yr and the transport term {{vm}} mm/yr. If a larger allowance cleared the life test, what would the screen name?",
+    "correct": "Mass transfer to the wall, pointing at velocity and line size",
+    "distractors": [
+     "Reaction kinetics, pointing at the temperature and the CO2",
+     "Neither resistance alone, the terms being within a factor of three",
+     "Wall shear on the inhibitor film, pointing at the speed of the line"
+    ],
+    "explanation": "Past the life test the order asks which resistance controls; the transport term {{vm}} mm/yr is below {{vr}} mm/yr at a margin of {{margin}}, so mass transfer is named.",
+    "rests_on": [
+     "vr",
+     "vm",
+     "margin",
+     "tau"
+    ],
+    "why_wrong": [
+     "the smaller term is transport",
+     "comparable needs the terms within ten percent",
+     "the film survives at the base velocity"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 33,
+    "replaces": "524860a89041d2ff6ea333119603bd06",
+    "prompt": "UGADA's remaining life is {{life}} yr. When does this module say the line should next be inspected?",
+    "correct": "It cannot say: an inspection interval is not provided here",
+    "distractors": [
+     "At {{halfLife}} yr, half the remaining life, by the rail's own rule",
+     "At {{life}} yr, the moment the allowance runs out",
+     "Whenever the category word next changes from {{category}}"
+    ],
+    "explanation": "The life is an allowance divided by a rate and nothing more; an inspection interval needs a standard the module does not carry.",
+    "rests_on": [
+     "life",
+     "halfLife",
+     "category"
+    ],
+    "why_wrong": [
+     "no half-life rule exists in the module",
+     "the life is a division, never an inspection date",
+     "the category is a held label"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 39,
+    "replaces": "8b4be9004362a6b598c51a6ab64a92fe",
+    "prompt": "At 9.5 m/s UGADA's wall shear is {{tauStrip}} Pa, above the {{stripPa}} Pa threshold. What does that verdict say about mechanical erosion?",
+    "correct": "Nothing: the verdict judges only the inhibitor film here",
+    "distractors": [
+     "The line is eroding, as {{tauStrip}} Pa is past the erosional limit",
+     "Erosion is ruled out, as the shear sits under the {{moderatePa}} Pa band",
+     "Erosion adds the stripped {{rateStrip}} mm/yr on top of the wall loss"
+    ],
+    "explanation": "The shear decides only whether the inhibitor film survives; this module has no erosional velocity criterion and models no mechanical erosion.",
+    "rests_on": [
+     "tauStrip",
+     "stripPa",
+     "moderatePa",
+     "rateStrip"
+    ],
+    "why_wrong": [
+     "the module has no erosional limit",
+     "the shear is above both bands",
+     "the stripped rate is a corrosion rate"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 42,
+    "replaces": "a75eb8feeb421a9b4f937da53d7a6675",
+    "prompt": "Which of these UGADA figures is free of every de Waard-Milliams constant behind the screening, so that it would stand if all of them were wrong?",
+    "correct": "The stripped to credited rate ratio of {{stripRatio}} at 9.5 m/s",
+    "distractors": [
+     "The remaining life of {{life}} yr at the base velocity of 2.73 m/s",
+     "The computed film onset of {{onset}} C at the base fugacity",
+     "The {{category}} band label on the {{rate}} mm/yr rate"
+    ],
+    "explanation": "Both rates share the whole chain, so every constant divides out and the ratio is one over the retained fraction {{retained}}.",
+    "rests_on": [
+     "stripRatio",
+     "retained",
+     "life",
+     "onset",
+     "category"
+    ],
+    "why_wrong": [
+     "the life divides by a correlation rate",
+     "the onset rests on the held scale constants",
+     "the label is laid over a correlation rate"
+    ],
+    "answer_index": 0
+   }
+  ]
+ }
+}
