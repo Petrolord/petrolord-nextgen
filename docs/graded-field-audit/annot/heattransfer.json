@@ -153,24 +153,30 @@
   {
    "tier": "intermediate",
    "key": "ubit_p1_two_shells",
-   "source": "unobtainable",
-   "source_ref": "packages/engines/engines/facilities/heatTransfer.js:417-424",
-   "printed": null,
+   "source": "hand-calc",
+   "source_ref": "the lessons l01-the-equivalent-single-shell-p.md; spec docs/graded-field-audit/w2/heattransfer.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": null,
    "prompt_precision": "Correction factors and equivalent P as a fraction ... to six decimals",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/heatexchanger/SizingPanels.jsx:160 -> add a Stat 'Equivalent single-shell P' = fmt(thermal.p1, 6) (expose p1 on the thermal result), or state the conversion formula in intermediate/m02-shells-in-series/l01-the-equivalent-single-shell-p.md"
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Write the conversion into m02/l01 (it is one line of algebra) so the field is hand-calc; otherwise expose p1 in the studio at six decimals.",
-   "evidence": "The equivalent single-shell P is not printed by the Suite studio (SizingPanels.jsx shows whole-unit P only, at 3 decimals) and the conversion formula (p1 = (s-1)/(s-r) from heatTransfer.js:421-424) is not written in intermediate/m02/l01, which only tabulates its outputs; the panel has no numeric inputs.",
+   "evidence": "W2: Lesson only, no prompt or field moves. The equivalent single-shell P is printed by no panel or Suite surface, and intermediate m02 l01 tabulated its outputs without the conversion (heatTransfer.js lmtdCorrectionF). The lesson now writes the conversion and its R = 1 limit, so the field is hand work on the four terminal temperatures the prompt states. Reaches learners with the next NextGen zip. The F print (Suite SizingPanels.jsx) stays W3. The published inputs reproduce ubit_p1_two_shells = 0.23359328643184238 through the vendored engines against the key 0.23359328643184238 (tol 5e-07); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": null,
+    "wave": "w2",
+    "prompt_contains": [],
+    "lessons": [
+     "src/content/courses/heattransfer/intermediate/m02-shells-in-series/l01-the-equivalent-single-shell-p.md"
+    ]
+   }
   },
   {
    "tier": "intermediate",
