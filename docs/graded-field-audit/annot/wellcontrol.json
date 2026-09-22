@@ -25,8 +25,13 @@
    "recommendation": null,
    "evidence": "fmt(v.stringVolumeM3, 8) = 26.08360366; tol 5e-4.",
    "notes": "All six beginner values appear on the VolumeExplorer after selecting the slant well; the capstone lesson directs the learner there, so this is the intended reading rather than a leak, but it means the tier grades a readout, not the span walk the prompt describes. Dataset metadata says 'shoe at 1500 m' but the fixture (wellcontrol_cases.json:191) and the capstone lesson use 1400 m; the prompt itself states no shoe depth.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_wellcontrol.sql",
+    "wave": "w5d",
+    "why": "three Expert module 1 lessons (open to every learner) printed the slant shoe and bit true vertical depths to twelve decimals; they now round them to one decimal and say why. The volume explorer already opened on the horizontal well"
+   }
   },
   {
    "tier": "beginner",
@@ -48,7 +53,12 @@
    "evidence": "fmt(v.annulusVolumeM3, 8) = 72.4689441; tol 5e-4.",
    "notes": "Default-state-plus-one-click match in the probe.",
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_wellcontrol.sql",
+    "wave": "w5d",
+    "why": "three Expert module 1 lessons (open to every learner) printed the slant shoe and bit true vertical depths to twelve decimals; they now round them to one decimal and say why. The volume explorer already opened on the horizontal well"
+   }
   },
   {
    "tier": "beginner",
@@ -70,7 +80,12 @@
    "evidence": "string volume / 0.012 printed to 6 decimals = 2,173.633638; tol 0.05.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_wellcontrol.sql",
+    "wave": "w5d",
+    "why": "three Expert module 1 lessons (open to every learner) printed the slant shoe and bit true vertical depths to twelve decimals; they now round them to one decimal and say why. The volume explorer already opened on the horizontal well"
+   }
   },
   {
    "tier": "beginner",
@@ -92,7 +107,12 @@
    "evidence": "annulus volume / 0.012 = 6,039.078675; tol 0.05.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_wellcontrol.sql",
+    "wave": "w5d",
+    "why": "three Expert module 1 lessons (open to every learner) printed the slant shoe and bit true vertical depths to twelve decimals; they now round them to one decimal and say why. The volume explorer already opened on the horizontal well"
+   }
   },
   {
    "tier": "beginner",
@@ -114,7 +134,12 @@
    "evidence": "'TVD at the bit' fmt(v.tvdBhM, 6) = 2,507.919699; tol 5e-4.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_wellcontrol.sql",
+    "wave": "w5d",
+    "why": "three Expert module 1 lessons (open to every learner) printed the slant shoe and bit true vertical depths to twelve decimals; they now round them to one decimal and say why. The volume explorer already opened on the horizontal well"
+   }
   },
   {
    "tier": "beginner",
@@ -136,7 +161,12 @@
    "evidence": "'TVD at the shoe' fmt(v.tvdShoeM, 6) = 1,282.248590; tol 5e-4.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_wellcontrol.sql",
+    "wave": "w5d",
+    "why": "three Expert module 1 lessons (open to every learner) printed the slant shoe and bit true vertical depths to twelve decimals; they now round them to one decimal and say why. The volume explorer already opened on the horizontal well"
+   }
   },
   {
    "tier": "intermediate",

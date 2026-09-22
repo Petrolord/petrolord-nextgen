@@ -50,6 +50,11 @@ STRIP = {
                     '(7 in 32 lb/ft liner, 13-3/8 in 68 lb/ft surface casing) to seven decimals; it now opens on the '
                     'tubing class, and placing each casing in its class is the skill the capstone tests',
     },
+    'wellcontrol': {
+        'beginner': 'three Expert module 1 lessons (open to every learner) printed the slant shoe and bit true '
+                    'vertical depths to twelve decimals; they now round them to one decimal and say why. The volume '
+                    'explorer already opened on the horizontal well',
+    },
 }
 
 # W1 must be applied: the gasprocessing beginner re-key (tegReboilerMMBtuHr) is
