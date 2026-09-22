@@ -1,0 +1,149 @@
+{
+ "course": "separation",
+ "wave": "w2",
+ "fixture": "src/components/course/panels/separation/separationLab.js (ADANGA_*)",
+ "tiers": {
+  "advanced": {
+   "why": "Prompt only, no field moves. The ADANGA item positions existed only in capstone-only code (separationLab.js ADANGA_ITEMS, guarded from panels), so neither layout ranking could be worked (B5 finding 1). The prompt now states each placed item as north and east offsets from the datum, the two scale factors the Mapper uses and the haversine radius, so both shortfalls are a hand calculation (intermediate m05 l02). It also asks for the fraction to six decimals, which is what its tol of 1e-6 needs; \"four decimals or better\" failed a learner who followed it. The Facility Layout Mapper print (SpacingPanel.jsx:179) is W3.",
+   "prompt_edits": [
+    [
+     "with a portable flare that was never placed and a second slop tank carrying no coordinates.",
+     "with a portable flare that was never placed and a second slop tank carrying no coordinates. THE YARD, each item given as its name, its type and its position in metres north and east of the datum at 4.9021 N, 6.8714 E: Wellhead A, wellhead, 0 N 0 E; Wellhead B, wellhead, 4 N 0 E; Manifold, manifold, 26 N 14 E; Test separator, separator, 48 N 30 E; Isolation valve, valve, 50 N 32 E; Custody flow meter, flowmeter, 70 N 44 E; Slop tank, tank, 84 N 55 E; Yard flare, flare, 215 N 150 E; Yard control room, control, 245 N 185 E. Turn an offset into latitude and longitude as the Mapper does, at 110574 m per degree of latitude and 111320 m times the cosine of the datum latitude per degree of longitude, and measure every distance centre to centre by the haversine formula on a sphere of radius 6371008.8 m."
+    ],
+    [
+     "Lengths in ft, times in s, distances in m and the fraction as a fraction, to four decimals or better.",
+     "Lengths in ft, times in s and distances in m to four decimals or better, and the fraction as a fraction to six decimals."
+    ]
+   ],
+   "inputs": {
+    "datum": {
+     "lat": 4.9021,
+     "lon": 6.8714
+    },
+    "mPerDegLat": 110574,
+    "mPerDegLonAtEquator": 111320,
+    "earthRadiusM": 6371008.8,
+    "items": [
+     {
+      "id": "a-wh1",
+      "name": "Wellhead A",
+      "type": "wellhead",
+      "northM": 0,
+      "eastM": 0
+     },
+     {
+      "id": "a-wh2",
+      "name": "Wellhead B",
+      "type": "wellhead",
+      "northM": 4,
+      "eastM": 0
+     },
+     {
+      "id": "a-mf1",
+      "name": "Manifold",
+      "type": "manifold",
+      "northM": 26,
+      "eastM": 14
+     },
+     {
+      "id": "a-sp1",
+      "name": "Test separator",
+      "type": "separator",
+      "northM": 48,
+      "eastM": 30
+     },
+     {
+      "id": "a-vv1",
+      "name": "Isolation valve",
+      "type": "valve",
+      "northM": 50,
+      "eastM": 32
+     },
+     {
+      "id": "a-px1",
+      "name": "Custody flow meter",
+      "type": "flowmeter",
+      "northM": 70,
+      "eastM": 44
+     },
+     {
+      "id": "a-tk1",
+      "name": "Slop tank",
+      "type": "tank",
+      "northM": 84,
+      "eastM": 55
+     },
+     {
+      "id": "a-fl1",
+      "name": "Yard flare",
+      "type": "flare",
+      "northM": 215,
+      "eastM": 150
+     },
+     {
+      "id": "a-cr1",
+      "name": "Yard control room",
+      "type": "control",
+      "northM": 245,
+      "eastM": 185
+     },
+     {
+      "id": "a-tk2",
+      "name": "Second slop tank",
+      "type": "tank",
+      "northM": null,
+      "eastM": null
+     }
+    ],
+    "sources": [
+     {
+      "id": "a-fl1",
+      "label": "Yard flare radiation",
+      "setbackM": 100,
+      "allowableKwM2": 6.31
+     },
+     {
+      "id": "a-tk1",
+      "label": "Slop tank pool fire",
+      "setbackM": 47,
+      "allowableKwM2": 4.73
+     }
+    ]
+   },
+   "method": {
+    "unplacedSources": [
+     {
+      "id": "a-ghost",
+      "label": "Portable flare, not placed",
+      "setbackM": 35,
+      "allowableKwM2": 4.73
+     }
+    ]
+   },
+   "expected": {
+    "adanga_worst_absolute_shortfall_m": {
+     "expected": 53.82226310078884,
+     "tol": 0.0001,
+     "reproduced": 53.82226310078884
+    },
+    "adanga_worst_relative_fraction": {
+     "expected": 0.6200257720948125,
+     "tol": 0.000001,
+     "reproduced": 0.6200257720948125
+    }
+   },
+   "annot_updates": {
+    "adanga_worst_absolute_shortfall_m": {
+     "prompt_precision": "Lengths in ft, times in s and distances in m to four decimals or better",
+     "prompt_decimals": 4,
+     "display_scale": 1
+    },
+    "adanga_worst_relative_fraction": {
+     "prompt_precision": "and the fraction as a fraction to six decimals",
+     "prompt_decimals": 6,
+     "display_scale": 1
+    }
+   }
+  }
+ }
+}
