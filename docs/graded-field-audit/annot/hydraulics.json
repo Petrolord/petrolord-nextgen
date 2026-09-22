@@ -48,9 +48,38 @@
    "leak": false,
    "reclassed_from": "display",
    "shipped": {
-    "wave": "w4a",
-    "route": "typed-case panel mode (W4a)",
-    "migration": "20261027a_w4_hydraulics.sql"
+    "migration": "20261030c_hd_hydraulics.sql",
+    "wave": "hd",
+    "closes_leak": true,
+    "rekey": {
+     "key": "hb_n",
+     "label": "Herschel-Bulkley flow behaviour index",
+     "unit": "-",
+     "expected": 0.7269815055935842,
+     "tol": 5e-07
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Your mud boxes, Three models view, Tile 'Herschel-Bulkley n'; yield rule and n taught in src/content/courses/hydraulics/beginner/m02-mud-rheology/l04-herschel-bulkley.md",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Tile 'Herschel-Bulkley n' fmt(v, 8)",
+     "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "HD re-key. hydraulicsLab.capstoneValues().beginner.hb_n = fitModels(52, 33, 6, 5).herschelBulkley.n = 0.7269815055935842 (vendored engines/drilling/rheology.js). Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the model view prints it at 8 dp, within tol 5e-7 (panelCapstoneGuard.test.js 'THE ROUTE'). With the boxes blank no view of the three explorers at any case prints it (the lesson muds' n are 0.838 and 0.748), and no lesson or panel source carries it (panelCapstoneGuard.test.js 'HD re-key'). The Bingham yield point in place of the Herschel-Bulkley yield gives n = 1 and the 3 rpm reading alone gives 0.747, both far outside tol.",
+     "notes": "HD re-key of hb_tau_y_Pa (2.04161424376 Pa, tol 5e-4), whose value the light mud's default residual table printed.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    },
+    "prior": {
+     "wave": "w4a",
+     "route": "typed-case panel mode (W4a)",
+     "migration": "20261027a_w4_hydraulics.sql"
+    }
    }
   },
   {

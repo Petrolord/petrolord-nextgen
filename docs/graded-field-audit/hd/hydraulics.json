@@ -1,0 +1,49 @@
+{
+ "course": "hydraulics",
+ "wave": "hd",
+ "kind": "rekey",
+ "migration": "20261030c_hd_hydraulics.sql",
+ "decision": "Owner 2026-09-22: proceed with the lead's recommendations on the held decisions. hydraulics beginner hb_tau_y_Pa: RE-KEY (found by W4a, README 'W4a' known coincidences).",
+ "tiers": {
+  "beginner": {
+   "why": [
+    "hb_tau_y_Pa graded the capstone mud's Herschel-Bulkley yield stress, (2 x 5 - 6) = 4 dial degrees = 2.04161424376 Pa. The light mud (light_wbm) reads 4 degrees at 3 rpm, so the rheology explorer's default Three models view on either light_wbm case printed that exact stress in its residual table (Measured, theta3 row) with the Your mud boxes blank.",
+    "Keeping the quantity would need a new capstone mud, which moves all eighteen fields on three tiers. Re-keyed instead onto the Herschel-Bulkley flow behaviour index n of the same capstone mud: it is fitted after the yield stress is taken off the 600 and 300 rpm stresses, so the yield rule is still worked (the Bingham yield point there gives n = 1), and it prints only when the mud is typed into the Your mud boxes (Tile 'Herschel-Bulkley n', 8 dp). The tolerance is pl_n's, 5e-7, which the 8 dp print carries with room to spare."
+   ],
+   "prompt_edits": [
+    [
+     "(1) the POWER LAW flow behaviour index n for that mud, which is not the Herschel-Bulkley n; (2) the HERSCHEL-BULKLEY yield stress in pascals, which is not the Bingham yield point and is less than half of it;",
+     "(1) the POWER LAW flow behaviour index n for that mud, from the 600 and 300 rpm readings alone; (2) the HERSCHEL-BULKLEY flow behaviour index n, fitted to the 600 and 300 rpm stresses once the Herschel-Bulkley yield stress from the 6 and 3 rpm readings is taken off both, which is larger than field 1;"
+    ]
+   ],
+   "fields": {
+    "hb_tau_y_Pa": {
+     "key": "hb_n",
+     "label": "Herschel-Bulkley flow behaviour index",
+     "unit": "-",
+     "expected": 0.7269815055935842,
+     "tol": 5e-07
+    }
+   },
+   "annot": {
+    "hb_n": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Your mud boxes, Three models view, Tile 'Herschel-Bulkley n'; yield rule and n taught in src/content/courses/hydraulics/beginner/m02-mud-rheology/l04-herschel-bulkley.md",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Tile 'Herschel-Bulkley n' fmt(v, 8)",
+     "prompt_precision": "\"Full precision, tight tolerances\" (m06/l02-working-the-capstone.md, \"The precision\")",
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "HD re-key. hydraulicsLab.capstoneValues().beginner.hb_n = fitModels(52, 33, 6, 5).herschelBulkley.n = 0.7269815055935842 (vendored engines/drilling/rheology.js). Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the model view prints it at 8 dp, within tol 5e-7 (panelCapstoneGuard.test.js 'THE ROUTE'). With the boxes blank no view of the three explorers at any case prints it (the lesson muds' n are 0.838 and 0.748), and no lesson or panel source carries it (panelCapstoneGuard.test.js 'HD re-key'). The Bingham yield point in place of the Herschel-Bulkley yield gives n = 1 and the 3 rpm reading alone gives 0.747, both far outside tol.",
+     "notes": "HD re-key of hb_tau_y_Pa (2.04161424376 Pa, tol 5e-4), whose value the light mud's default residual table printed."
+    }
+   },
+   "lessons": [
+    "src/content/courses/hydraulics/beginner/m06-the-associate-reading/l02-working-the-capstone.md"
+   ]
+  }
+ }
+}
