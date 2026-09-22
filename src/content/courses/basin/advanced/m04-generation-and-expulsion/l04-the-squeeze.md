@@ -6,11 +6,11 @@ The erosion event's largest effect on this basin is not the maturity signature. 
 
 ## The identity
 
-Final expelled mass, 10048.985378825158 kg/m2, is graded with tolerance 5. Here is where it comes from, exactly. At 11 Ma, the last step of the phantom decade, generation stands at 13907.011498614682 and the squeezed cap at 3858.026119789524. Their difference:
+Final expelled mass on the golden run is 10048.985378825158 kg/m2. Here is where it comes from, exactly. At 11 Ma, the last step of the phantom decade, generation stands at 13907.011498614682 and the squeezed cap at 3858.026119789524. Their difference:
 
 $$13907.011498614682 - 3858.026119789524 = 10048.985378825158$$
 
-The capstone's fifth field is this subtraction, to the last digit, an exact float64 identity. The final expelled mass was determined at 11 Ma, and nothing after that moment changed it.
+The fifth reported value is this subtraction, to the last digit, an exact float64 identity. The final expelled mass was determined at 11 Ma, and nothing after that moment changed it.
 
 ## Why nothing after changed it
 

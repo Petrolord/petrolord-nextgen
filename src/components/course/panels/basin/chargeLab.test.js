@@ -3,7 +3,7 @@ import {
   computeErosionScenario, retentionCapOf, sourcePotentialMass,
 } from '@/lib/basinTeaching';
 
-// Pins the charge panel math to the live NG11 Expert capstone answer key
+// Pins the charge panel math to the golden teaching case (the NG11 Expert capstone until W5a)
 // and to the teaching facts the DC31 lessons quote: the squeeze identity,
 // the forgetful thermometer, and the amount sensitivity.
 
@@ -13,7 +13,7 @@ describe('basin charge explorer: engine math', () => {
     ref = await computeErosionScenario(600);
   });
 
-  it('reproduces the NG11 expert capstone answer key', () => {
+  it('reproduces the golden teaching case (the pre-W5 capstone key)', () => {
     expect(ref.finalRo).toBeCloseTo(1.6718288798752388, 12);
     expect(ref.finalTempC).toBeCloseTo(149.76037539670858, 10);
     expect(ref.finalTr).toBeCloseTo(0.7423743797385286, 12);

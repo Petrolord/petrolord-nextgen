@@ -4,7 +4,7 @@ The forward model composes every stage of three tiers, so its checklist inherits
 
 ## The closed forms
 
-Free checks first, as always. The potential: $2720 \times 345.33834344581027 \times 0.04 \times 0.5 = 18786.405883452077$, four inputs and a calculator, catching wrong lithology constants, wrong stack, wrong richness. The generation identity: final mass equals potential times final TR exactly, $18786.405883452077 \times 0.7423743797385286 = 13946.54641524398$. The expulsion identity: final expelled equals the 11 Ma generation minus the squeezed cap, $13907.011498614682 - 3858.026119789524 = 10048.985378825158$. Three multiplications and a subtraction verify half the graded surface.
+Free checks first, as always. The potential: $2720 \times 345.33834344581027 \times 0.04 \times 0.5 = 18786.405883452077$, four inputs and a calculator, catching wrong lithology constants, wrong stack, wrong richness. The generation identity: final mass equals potential times final TR exactly, $18786.405883452077 \times 0.7423743797385286 = 13946.54641524398$. The expulsion identity: final expelled equals the 11 Ma generation minus the squeezed cap, $13907.011498614682 - 3858.026119789524 = 10048.985378825158$. Three multiplications and a subtraction verify half the reported surface.
 
 ## The inherited anchors
 
@@ -16,7 +16,7 @@ New at this tier, checks that only exist because stages feed each other. Tempera
 
 ## The convergence and oracle backstops
 
-When the machinery itself is in doubt, two expensive checks close the case. Convergence: halve the time step, or double the thermal cell resolution, and confirm graded values move well inside tolerance. Oracle: the independent Python implementation reproduces the fixture to about 1e-9 on kinetics and 1e-4 m on geometry, and the engine's committed goldens are the standing record of that agreement. You will rarely rerun these yourself; knowing they exist, and what agreement they demonstrated, is what lets the cheaper checks above carry daily weight.
+When the machinery itself is in doubt, two expensive checks close the case. Convergence: halve the time step, or double the thermal cell resolution, and confirm golden values move well inside tolerance. Oracle: the independent Python implementation reproduces the fixture to about 1e-9 on kinetics and 1e-4 m on geometry, and the engine's committed goldens are the standing record of that agreement. You will rarely rerun these yourself; knowing they exist, and what agreement they demonstrated, is what lets the cheaper checks above carry daily weight.
 
 ## Worked example
 

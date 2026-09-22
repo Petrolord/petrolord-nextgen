@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { computeKineticsExplorer, KEROGEN_TYPES, RAMP_RATES } from '@/lib/basinTeaching';
+import { computeKineticsExplorer, KEROGEN_TYPES, RAMP_RATES, easyRoRamp } from '@/lib/basinTeaching';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Kinetics explorer: the three golden Easy%Ro ramps on a log reflectance
@@ -26,6 +26,16 @@ const KineticsExplorer = () => {
   const [rate, setRate] = useState(3);
   const [isoTemp, setIsoTemp] = useState('100');
   const [ktype, setKtype] = useState('type2');
+  // A ramp of your own: any heating rate, read at any whole degree. It
+  // opens on the golden 3 degC/Ma ramp at 150 degC, the teaching reading.
+  const [ownRate, setOwnRate] = useState('3');
+  const [readT, setReadT] = useState('150');
+  const orRaw = Number(ownRate);
+  const rtRaw = Number(readT);
+  const ownOk = Number.isFinite(orRaw) && orRaw >= 0.5 && orRaw <= 20
+    && Number.isInteger(rtRaw) && rtRaw >= 20 && rtRaw <= 200;
+  const ownRamp = useMemo(() => (ownOk ? easyRoRamp(orRaw) : null), [ownOk, orRaw]);
+  const ownRo = ownRamp ? ownRamp.find((e) => e.t_c === rtRaw)?.ro : NaN;
 
   const tRaw = Number(isoTemp);
   const tOk = Number.isFinite(tRaw) && tRaw >= 60 && tRaw <= 180;
@@ -80,9 +90,12 @@ const KineticsExplorer = () => {
       </div>
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
         <NumField label="Isothermal temperature (degC)" value={isoTemp} onChange={setIsoTemp} />
-        <div className="text-xs text-gray-500 sm:col-span-3">
-          The capstone reads the ramps at 150 degC for rates 3 and 1, and the Type II clock at
-          100 degC after 10 and 50 Ma. {tOk ? '' : 'Enter a temperature between 60 and 180.'}
+        <NumField label="Your heating rate (degC/Ma)" value={ownRate} onChange={setOwnRate} />
+        <NumField label="Read Ro at (whole degC)" value={readT} onChange={setReadT} />
+        <div className="text-xs text-gray-500">
+          The worked case reads the golden ramps at 150 degC and the Type II clock at 100 degC.
+          {tOk ? '' : ' Enter an isothermal temperature between 60 and 180.'}
+          {ownOk ? '' : ' Your ramp takes a rate from 0.5 to 20 and a whole degree from 20 to 200.'}
         </div>
       </div>
 
@@ -124,6 +137,7 @@ const KineticsExplorer = () => {
         <Tile label="Ro at zero reaction" value={fmt(m.roF0, 8)} unit="%Ro" />
         <Tile label="Ro at full reaction" value={fmt(m.roFull, 8)} unit="%Ro" />
         <Tile label={`Ro at 150 degC, rate ${rate}`} value={fmt(m.roAt(rate, 150), 8)} unit="%Ro" />
+        <Tile label={ownOk ? `Your ramp: Ro at ${rtRaw} degC, rate ${orRaw}` : 'Your ramp: Ro'} value={fmt(ownRo, 8)} unit="%Ro" />
         <Tile label={`First degree at Ro 0.5, rate ${rate}`} value={cross05 ?? '-'} unit="degC" />
         <Tile label={`First degree at Ro 1.0, rate ${rate}`} value={cross10 ?? '-'} unit="degC" />
         <Tile label="TR at 10 Ma" value={fmt(m.trAt(10), 8)} unit="frac" />

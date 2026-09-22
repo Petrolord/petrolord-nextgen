@@ -8,7 +8,7 @@ First, the step size. The ramp is divided into sub-steps of 0.01 Ma. At 3 degC p
 
 Second, the temperature each step uses. The rock's temperature changes continuously within even a small step, and the kinetic step from module 2 needs one constant value. The convention is the midpoint: a step running from time $t$ to $t + 0.01$ Ma is integrated at the temperature halfway through, $T(t + 0.005\,\mathrm{Ma})$. Midpoint evaluation cancels the first-order error that using the start or end temperature would introduce, which matters because the rate is exponential in temperature and always curls upward: a start-point rule systematically under-reacts, an end-point rule over-reacts, and the midpoint splits the difference to second order.
 
-Third, the reporting grid. The table records Ro at every whole degree, and an entry is written the first time the ramp temperature reaches or passes that degree. The graded values "Ro at 150" are entries of that table, not interpolations.
+Third, the reporting grid. The table records Ro at every whole degree, and an entry is written the first time the ramp temperature reaches or passes that degree. The golden values "Ro at 150" are entries of that table, not interpolations.
 
 ## Why 0.01 Ma
 
@@ -20,7 +20,7 @@ The fast 10 degC per Ma ramp has 0.1 degC of change per step and is the least co
 
 Notice that a ramp is a pure temperature history: no burial, no lithology, no heat flow, no depth. That is deliberate and it is what makes this module checkable. Any real rock's temperature track is some complicated staircase produced by a burial history and a transient heat solver; the Expert tier builds those. A ramp isolates the kinetics, and heating rate is the honest one-parameter summary of any track's pace.
 
-The rates were chosen to bracket geology. Basins mostly heat their source rocks at something of order 1 to 10 degC per Ma; 3 is a defensible middle, and the capstone calls it the reference. When module 5 talks about reading real basins, these three curves are the frame.
+The rates were chosen to bracket geology. Basins mostly heat their source rocks at something of order 1 to 10 degC per Ma; 3 is a defensible middle, and this course calls it the reference. When module 5 talks about reading real basins, these three curves are the frame.
 
 ## Worked example
 

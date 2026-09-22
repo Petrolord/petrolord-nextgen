@@ -1,0 +1,146 @@
+[
+ {
+  "tier": "beginner",
+  "key": "nkpor_solid_sst_1700",
+  "label": "Solid thickness in 100 m of sandstone at 1700 m",
+  "unit": "m",
+  "expected": 69.45042808472611,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "nkpor_restored_sst_1700",
+  "label": "100 m sandstone from 1700 m, restored to surface",
+  "unit": "m",
+  "expected": 133.88023365817557,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "nkpor_phi_sst_2600",
+  "label": "Sandstone porosity at 2600 m",
+  "unit": "v/v",
+  "expected": 0.2428406315893992,
+  "tol": 0.0001
+ },
+ {
+  "tier": "beginner",
+  "key": "nkpor_t_first",
+  "label": "Temperature at the first cell (50 m)",
+  "unit": "degC",
+  "expected": 13.625,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "nkpor_t_lowk_base",
+  "label": "Temperature at the low-k base (950 m)",
+  "unit": "degC",
+  "expected": 42.87500000000002,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "nkpor_t_deepest",
+  "label": "Temperature at the deepest cell (1950 m)",
+  "unit": "degC",
+  "expected": 63.796875000000036,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "nkpor_ro_145_r2",
+  "label": "Ro at 145 C on the 2 C/Ma ramp",
+  "unit": "%Ro",
+  "expected": 0.9484725312807094,
+  "tol": 0.0005
+ },
+ {
+  "tier": "intermediate",
+  "key": "nkpor_ro_165_r2",
+  "label": "Ro at 165 C on the 2 C/Ma ramp",
+  "unit": "%Ro",
+  "expected": 1.2861150761240832,
+  "tol": 0.0005
+ },
+ {
+  "tier": "intermediate",
+  "key": "nkpor_ro_165_r5",
+  "label": "Ro at 165 C on the 5 C/Ma ramp",
+  "unit": "%Ro",
+  "expected": 1.1764945675571294,
+  "tol": 0.0005
+ },
+ {
+  "tier": "intermediate",
+  "key": "nkpor_tr1_135_100",
+  "label": "Type I TR after 100 Ma at 135 C",
+  "unit": "frac",
+  "expected": 0.6414954483503965,
+  "tol": 0.0001
+ },
+ {
+  "tier": "intermediate",
+  "key": "nkpor_tr2_135_100",
+  "label": "Type II TR after 100 Ma at 135 C",
+  "unit": "frac",
+  "expected": 0.41450323436925496,
+  "tol": 0.0001
+ },
+ {
+  "tier": "intermediate",
+  "key": "nkpor_tr3_135_100",
+  "label": "Type III TR after 100 Ma at 135 C",
+  "unit": "frac",
+  "expected": 0.062367273402499146,
+  "tol": 0.0001
+ },
+ {
+  "tier": "advanced",
+  "key": "nkpor_final_ro",
+  "label": "Source rock final Ro",
+  "unit": "%Ro",
+  "expected": 2.158320921604062,
+  "tol": 0.0005
+ },
+ {
+  "tier": "advanced",
+  "key": "nkpor_peak_temp",
+  "label": "Source rock peak temperature",
+  "unit": "degC",
+  "expected": 187.13248934890527,
+  "tol": 0.01
+ },
+ {
+  "tier": "advanced",
+  "key": "nkpor_final_tr",
+  "label": "Final transformation ratio",
+  "unit": "frac",
+  "expected": 0.889910987289655,
+  "tol": 0.0005
+ },
+ {
+  "tier": "advanced",
+  "key": "nkpor_generated",
+  "label": "Generated mass at present day",
+  "unit": "kg/m2",
+  "expected": 16718.22900736702,
+  "tol": 0.5
+ },
+ {
+  "tier": "advanced",
+  "key": "nkpor_expelled",
+  "label": "Expelled mass at present day",
+  "unit": "kg/m2",
+  "expected": 13077.581219764983,
+  "tol": 0.5
+ },
+ {
+  "tier": "advanced",
+  "key": "nkpor_ro_delta",
+  "label": "Erosion signature (delta Ro vs no-erosion run)",
+  "unit": "%Ro",
+  "expected": 0.5431428522511799,
+  "tol": 0.0005
+ }
+]

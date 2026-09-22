@@ -10,13 +10,13 @@ While it exists it is a real layer in every mechanical respect: it takes the top
 
 ## What it does to the source
 
-The decade 20 to 11 Ma is the fixture's hot chapter, and the phantom is its cause. The source's bottom moves from 3200 to 3519.372263771036 m; its thickness compresses from 400 to 390.577400265013 m; its centre temperature climbs from 154.21241437947037 at 21 Ma to a basin-lifetime maximum of 168.51433459340572 degC at 18 Ma, holding near that through 11 Ma, 167.24573484238402. At 10 Ma the phantom vanishes, the stack rebounds, and temperature drops 13.4 degrees in one step, 153.84048634909556, then eases to the graded 149.76037539670858 by present day.
+The decade 20 to 11 Ma is the fixture's hot chapter, and the phantom is its cause. The source's bottom moves from 3200 to 3519.372263771036 m; its thickness compresses from 400 to 390.577400265013 m; its centre temperature climbs from 154.21241437947037 at 21 Ma to a basin-lifetime maximum of 168.51433459340572 degC at 18 Ma, holding near that through 11 Ma, 167.24573484238402. At 10 Ma the phantom vanishes, the stack rebounds, and temperature drops 13.4 degrees in one step, 153.84048634909556, then eases to the golden 149.76037539670858 by present day.
 
-Ten million years at around 167 degrees, in a rock whose ladder was already drained to Ro 1.6: module 4 of the Professional tier says exactly what that buys, a modest further drain of high bins, and the next lessons make it the graded signature.
+Ten million years at around 167 degrees, in a rock whose ladder was already drained to Ro 1.6: module 4 of the Professional tier says exactly what that buys, a modest further drain of high bins, and the next lessons make it the golden signature.
 
 ## The convention inside the mechanism
 
-Notice the phantom's deposition age is inferred, not specified. The event's two numbers say nothing about when the vanished section accumulated, so the engine adopts the simplest consistent reading: deposition began when preserved deposition ended, at 20 Ma. Alternative conventions exist, and real basins might spread the vanished section's accumulation differently, which would spread the heating pulse differently in time. The graded values are defined on this convention; the sensitivity habit from module 2 applies unchanged.
+Notice the phantom's deposition age is inferred, not specified. The event's two numbers say nothing about when the vanished section accumulated, so the engine adopts the simplest consistent reading: deposition began when preserved deposition ended, at 20 Ma. Alternative conventions exist, and real basins might spread the vanished section's accumulation differently, which would spread the heating pulse differently in time. The golden values are defined on this convention; the sensitivity habit from module 2 applies unchanged.
 
 A second convention hides in the lithology: the phantom is always shale, whatever was actually eroded. In this fixture that is also the natural choice, since it caps a shale, and shale's insulating conductivity makes the phantom decade's warmth slightly stronger than a sandy phantom would.
 

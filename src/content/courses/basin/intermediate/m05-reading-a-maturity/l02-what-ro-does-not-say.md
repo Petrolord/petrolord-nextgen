@@ -4,7 +4,7 @@ Reflectance is this tier's headline output and the industry's favourite maturity
 
 ## It does not give a temperature
 
-Ro is a state of the drained ladder, and many histories drain a ladder equally. The graded pair proves it: 0.9871413464062039 belongs to a rock that reached 150 degC at 3 degC per Ma, and almost the same state, 1.006902942398925, belongs to a rock that reached only 144 degC three times slower. A measured Ro of 0.99 cannot distinguish them. Every "geothermometer" use of reflectance smuggles in a heating-rate assumption; module 3's crossing table is the honest version, a temperature per assumed rate, never a temperature.
+Ro is a state of the drained ladder, and many histories drain a ladder equally. The golden pair proves it: 0.9871413464062039 belongs to a rock that reached 150 degC at 3 degC per Ma, and almost the same state, 1.006902942398925, belongs to a rock that reached only 144 degC three times slower. A measured Ro of 0.99 cannot distinguish them. Every "geothermometer" use of reflectance smuggles in a heating-rate assumption; module 3's crossing table is the honest version, a temperature per assumed rate, never a temperature.
 
 The useful inversion runs the other way. Given an independently constrained history shape, from burial reconstruction, the measured Ro selects among candidate heat scenarios. Reflectance constrains histories, not instants.
 

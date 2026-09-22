@@ -1,6 +1,6 @@
 # The transformation ratio
 
-The kerogen clock's read-out is the transformation ratio. This lesson defines it exactly as the engine computes it, fixes the isothermal convention the fixture uses, and works the first graded value of the module.
+The kerogen clock's read-out is the transformation ratio. This lesson defines it exactly as the engine computes it, fixes the isothermal convention the fixture uses, and works the first golden value of the module.
 
 ## The definition
 
@@ -14,13 +14,13 @@ TR is the number the tier above multiplies by a mass. A source rock with a gener
 
 The fixture holds a Type II kerogen at a constant 100 degC and asks for TR at 10, 50 and 100 Ma. Constant temperature makes the convention trivial in one way: module 2 proved step size does not matter when T is fixed, so the fixture takes whole-Ma steps, the engine's native $\Delta t$ of 1 Ma, rather than the 0.01 Ma sub-steps a ramp needs. There is no midpoint to choose because every midpoint is 100 degC.
 
-The graded values are TR at 10 Ma, 0.022481215976523083, and at 50 Ma, 0.05477927380797565, both with tolerance 0.0005. The 100 Ma value, 0.07419624543388115, is tabulated but ungraded, and the next lesson is about what those three numbers say together.
+The golden values are TR at 10 Ma, 0.022481215976523083, and at 50 Ma, 0.05477927380797565. The 100 Ma value, 0.07419624543388115, is tabulated too, and the next lesson is about what those three numbers say together.
 
 ## Working the 10 Ma value by hand
 
 You already did most of this in module 2. At 100 degC over 10 Ma, the 46 kcal bin retains $e^{-3.5988} = 0.027357$ of its content, so from potential 0.01 it contributes $0.01 \times (1 - 0.027357) = 0.0097264$ of reacted potential. The 48 kcal bin retains $e^{-0.24251} = 0.78466$, contributing $0.05 \times 0.21534 = 0.010767$. The 50 kcal bin retains $e^{-0.016341} = 0.983792$, contributing $0.11 \times 0.016208 = 0.0017829$. The 52 bin adds about 0.00019, and higher bins are dust.
 
-Sum: $0.0097264 + 0.010767 + 0.0017829 + 0.00019 = 0.0224663$, against the engine's 0.022481215976523083. Hand arithmetic with four bins reproduces the graded value to within 0.07 percent, comfortably inside tolerance. Notice the composition: at 10 Ma, the tiny 46 kcal bin and the 48 kcal bin each supply almost half the answer, and the 0.11-potential bin at 50 kcal supplies only 8 percent of it. Early TR comes from the toe of the spectrum, not from its bulk.
+Sum: $0.0097264 + 0.010767 + 0.0017829 + 0.00019 = 0.0224663$, against the engine's 0.022481215976523083. Hand arithmetic with four bins reproduces the golden value to within 0.07 percent. Notice the composition: at 10 Ma, the tiny 46 kcal bin and the 48 kcal bin each supply almost half the answer, and the 0.11-potential bin at 50 kcal supplies only 8 percent of it. Early TR comes from the toe of the spectrum, not from its bulk.
 
 ## What TR is not
 

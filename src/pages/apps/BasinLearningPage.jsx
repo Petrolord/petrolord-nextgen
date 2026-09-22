@@ -15,7 +15,7 @@ import {
   BookOpen, Award, ArrowRight,
 } from 'lucide-react';
 import {
-  PROJECT, HEAT_FIXTURE, RAMP_RATES, CAPSTONE_RAMP,
+  PROJECT, HEAT_FIXTURE, RAMP_RATES, TEACHING_RAMP,
   computeBurialHeat, computeKinetics, computeReferenceBasin,
 } from '@/lib/basinTeaching';
 import {
@@ -215,7 +215,7 @@ const BasinLearningPage = () => {
       } else {
         toast({
           title: 'Not passing yet',
-          description: `${res.score}/${res.max_score} answers within tolerance. Read the panels again.`,
+          description: `${res.score}/${res.max_score} answers within tolerance. Type the case the brief states into the course panels and read them again.`,
           variant: 'destructive',
         });
       }
@@ -343,7 +343,7 @@ const BasinLearningPage = () => {
                   <CardTitle className="text-white">Maturity kinetics (Intermediate)</CardTitle>
                   <CardDescription>
                     Easy%Ro along three heating ramps, and the Type II kerogen clock at constant temperature.
-                    The capstone grades the {CAPSTONE_RAMP} °C/Ma ramp.
+                    The worked case reads the {TEACHING_RAMP} °C/Ma ramp; the capstone states rates of its own.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -352,7 +352,7 @@ const BasinLearningPage = () => {
                     {[
                       ['Ro at zero reaction', num(kin.roF0, 4)],
                       ['Ro at full reaction', num(kin.roFull, 4)],
-                      [`Ro at 150 °C, ${CAPSTONE_RAMP} °C/Ma ramp`, num(kin.roAt(CAPSTONE_RAMP, 150), 4)],
+                      [`Ro at 150 °C, ${TEACHING_RAMP} °C/Ma ramp`, num(kin.roAt(TEACHING_RAMP, 150), 4)],
                       ['Ro at 150 °C, 1 °C/Ma ramp', num(kin.roAt(1.0, 150), 4)],
                       ['Type II TR after 10 Ma at 100 °C', num(kin.tr10, 5)],
                       ['Type II TR after 50 Ma at 100 °C', num(kin.tr50, 5)],
@@ -365,7 +365,7 @@ const BasinLearningPage = () => {
                   </div>
                   <p className="text-xs text-gray-500">
                     Lesson 4 in numbers: at the same 150 °C the slow 1 °C/Ma ramp is more mature than the
-                    {' '}{CAPSTONE_RAMP} °C/Ma one, because the rocks spent longer hot. Time is a reagent.
+                    {' '}{TEACHING_RAMP} °C/Ma one, because the rocks spent longer hot. Time is a reagent.
                   </p>
                 </CardContent>
               </Card>
@@ -482,7 +482,7 @@ const BasinLearningPage = () => {
                     </>
                   ) : (
                     <p className="text-red-300 font-medium flex items-center gap-2">
-                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance — read the panels again and resubmit.
+                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Type the case the brief states into the course panels and resubmit.
                     </p>
                   )}
                 </div>

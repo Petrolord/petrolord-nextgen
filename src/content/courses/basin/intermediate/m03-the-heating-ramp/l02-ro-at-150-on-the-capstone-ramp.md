@@ -1,6 +1,6 @@
-# Ro at 150 on the capstone ramp
+# Ro at 150 on the reference ramp
 
-This lesson delivers the first of the two graded ramp values: the reflectance of a rock heated at 3 degC per Ma, read at 150 degC. The number is 0.9871413464062039, and by the end of the lesson you will know what stands behind every part of it.
+This lesson delivers the first of the two golden ramp values: the reflectance of a rock heated at 3 degC per Ma, read at 150 degC. The number is 0.9871413464062039, and by the end of the lesson you will know what stands behind every part of it.
 
 {{panel:bs-kinetics-explorer}}
 
@@ -19,7 +19,7 @@ Set the panel's rate to 3 and follow the middle curve. It leaves 20 degC at the 
 | 180 | 1.5214648867977838 |
 | 200 | 2.0071081015001817 |
 
-The 150 row is the graded value, tolerance 0.002. The rock arrives there 43.333 Ma after the ramp began, having executed 4333 midpoint sub-steps.
+The 150 row is the golden value. The rock arrives there 43.333 Ma after the ramp began, having executed 4333 midpoint sub-steps.
 
 ## What the state looks like at that moment
 
@@ -31,11 +31,11 @@ It is worth saying what the 150 degC row does not represent: an equilibrium, a d
 
 Two observations to take from the table, both of which the exam will probe. Between 60 and 150 degC the reflectance roughly triples; between 150 and 200 it doubles again in only 50 degrees. On the log axis of the panel this is close to a straight line: each degree of the ramp multiplies Ro by a nearly constant factor of about 1.013. The reason is the interaction of two exponentials, the Arrhenius rate sweeping up the ladder and the read-out's $e^{3.7F}$, and the near-cancellation into a loglinear curve is a known and convenient feature of Easy%Ro's design.
 
-Second, the curve enters the conventional oil window band, Ro 0.55, at 100 degC, and reaches Ro 1.0 at 151 degC. Those two rows bracket the capstone value: the graded 150 degC reading is a rock at the very top of the classic window, F at 0.43, and one degree short of the round Ro 1.0 crossing.
+Second, the curve enters the conventional oil window band, Ro 0.55, at 100 degC, and reaches Ro 1.0 at 151 degC. Those two rows bracket the golden value: the golden 150 degC reading is a rock at the very top of the classic window, F at 0.43, and one degree short of the round Ro 1.0 crossing.
 
 ## Worked example
 
-Verify the graded value's plausibility with the loglinear approximation, no integrator. From 100 degC, Ro 0.5525862957151584, apply the constant per-degree factor 1.013 across 50 degrees: $0.55259 \times 1.013^{50} = 0.55259 \times 1.9083 = 1.0546$. The true value is 0.9871413464062039, so the shortcut lands within 7 percent. The approximation is a sanity net, not a substitute: if your integrator ever disagrees with it by a factor of two, you have a bug, and module 2's units lesson tells you which kind to suspect first.
+Verify the golden value's plausibility with the loglinear approximation, no integrator. From 100 degC, Ro 0.5525862957151584, apply the constant per-degree factor 1.013 across 50 degrees: $0.55259 \times 1.013^{50} = 0.55259 \times 1.9083 = 1.0546$. The true value is 0.9871413464062039, so the shortcut lands within 7 percent. The approximation is a sanity net, not a substitute: if your integrator ever disagrees with it by a factor of two, you have a bug, and module 2's units lesson tells you which kind to suspect first.
 
 ## Exercise
 

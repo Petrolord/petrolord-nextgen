@@ -1,6 +1,6 @@
 # The signature is two runs
 
-The capstone's sixth field asks for one number: the difference in final reflectance between the basin as it was and the basin without its erosion event. This lesson computes it, fixes its definition exactly, and establishes why a difference of two model runs is a measurement of something real.
+The tier's sixth value is one number: the difference in final reflectance between the basin as it was and the basin without its erosion event. This lesson computes it, fixes its definition exactly, and establishes why a difference of two model runs is a measurement of something real.
 
 {{panel:bs-charge-explorer}}
 
@@ -10,7 +10,7 @@ Run one: the full reference basin, erosion event included. Final source Ro: 1.67
 
 $$\Delta R_o = 1.6718288798752388 - 1.6151780693528823 = 0.05665081052235643,$$
 
-graded with tolerance 0.001. The Associate tier forward-quoted it rounded, 0.0567; you now own every digit and both parents.
+read to eight decimals on the panel. The Associate tier forward-quoted it rounded, 0.0567; you now own every digit and both parents.
 
 Definition details that grading cares about. The difference is taken with-minus-without, so it is positive. Both runs read the same layer, the source, at the same date, present day. And "without" means the event removed and nothing else touched: same stratigraphy, same heat flow, same conventions. A signature is only meaningful between runs that differ in exactly one cause.
 
@@ -34,6 +34,6 @@ State what the signature would be if the event were moved from 10 Ma to 100 Ma, 
 
 ## Exercise
 
-Write the signature's definition as an equation with both operands' values. Then answer in one sentence each: why do shared simplifications cancel in the difference, and during which interval was the graded signature actually acquired?
+Write the signature's definition as an equation with both operands' values. Then answer in one sentence each: why do shared simplifications cancel in the difference, and during which interval was the golden signature actually acquired?
 
 As a self check: $\Delta R_o = R_o^{with} - R_o^{without} = 1.6718288798752388 - 1.6151780693528823 = 0.05665081052235643$. Shared simplifications bias both runs alike, so subtraction removes their first-order effect, leaving the event's own chain. The signature was acquired essentially between 18 and 11 Ma, the hot decade, and the ratchet carried it unchanged to present day.

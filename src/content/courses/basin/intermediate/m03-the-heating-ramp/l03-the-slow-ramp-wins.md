@@ -1,12 +1,12 @@
 # The slow ramp wins
 
-The Associate tier promised you this lesson. Two rocks are heated to the same 150 degC, one at 3 degC per Ma and one at 1 degC per Ma, and when they are compared at that same temperature the slow one is the more mature. Here are the numbers, the mechanism, and the size of the effect, because all three are graded.
+The Associate tier promised you this lesson. Two rocks are heated to the same 150 degC, one at 3 degC per Ma and one at 1 degC per Ma, and when they are compared at that same temperature the slow one is the more mature. Here are the numbers, the mechanism, and the size of the effect, because all three are read in this tier.
 
 {{panel:bs-kinetics-explorer}}
 
 ## The pair of values
 
-On the 3 degC per Ma ramp, Ro at 150 degC is 0.9871413464062039. On the 1 degC per Ma ramp it is 1.1129254516555198. Both carry tolerance 0.002 on the capstone. The slow rock reads 12.74 percent higher at the same temperature.
+On the 3 degC per Ma ramp, Ro at 150 degC is 0.9871413464062039. On the 1 degC per Ma ramp it is 1.1129254516555198. Both are read to eight decimals on the panel. The slow rock reads 12.74 percent higher at the same temperature.
 
 In reacted weight the gap is plainer: F is 0.4289345833269452 against 0.4613492136231176. The slow rock has reacted 0.0324 more of the scheme's weight, which is more than three whole bins' worth of the light end of the ladder.
 
@@ -26,7 +26,7 @@ There is a cleaner way to say it: on a ladder of staggered exponentials, maturit
 
 ## The comparison that would flip it
 
-Compare the rocks at the same age instead of the same temperature and everything reverses. At 43.333 Ma the fast rock is at 150 degC reading 0.9871, while the slow rock is only at 63.3 degC, barely off the floor. The fast ramp wins any same-age comparison because it is hotter, and heat beats time whenever the two compete. The graded comparison holds temperature equal precisely to isolate the pure time effect, and you should always notice which comparison a claim is making. "Slower heating means higher maturity" is true at equal temperature and false at equal time, and both halves of that sentence are exam material.
+Compare the rocks at the same age instead of the same temperature and everything reverses. At 43.333 Ma the fast rock is at 150 degC reading 0.9871, while the slow rock is only at 63.3 degC, barely off the floor. The fast ramp wins any same-age comparison because it is hotter, and heat beats time whenever the two compete. The golden comparison holds temperature equal precisely to isolate the pure time effect, and you should always notice which comparison a claim is making. "Slower heating means higher maturity" is true at equal temperature and false at equal time, and both halves of that sentence are exam material.
 
 ## Worked example
 
@@ -34,6 +34,6 @@ Predict, before computing, the direction and rough size of Ro at 150 degC on a 1
 
 ## Exercise
 
-State the two graded values and compute their ratio. Then answer in one sentence each: where did the slow rock's factor of three in time go, and in what comparison does the fast ramp win?
+State the two golden values and compute their ratio. Then answer in one sentence each: where did the slow rock's factor of three in time go, and in what comparison does the fast ramp win?
 
 As a self check: $1.1129254516555198 / 0.9871413464062039 = 1.1274$, the 12.74 percent gap. The factor of three was absorbed by the ladder, where extra time only deepens the narrow reacting front, empty bins gaining nothing and inert bins nearly nothing, so time acts logarithmically. The fast ramp wins any comparison at equal age, because it has reached higher temperatures, and heat outweighs time when they compete.

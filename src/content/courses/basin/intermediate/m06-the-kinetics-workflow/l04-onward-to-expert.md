@@ -4,7 +4,7 @@ The kinetics tier is complete. You can take a temperature history and turn it in
 
 ## What you now own
 
-The two clocks and their separation: vitrinite for reflectance, fixed and calibrated; kerogen for transformation, spectrum-driven and editable. The Arrhenius machinery: rates that multiply by five per ten degrees at the front, a ladder spanning twenty-two orders of magnitude, a step that is exact at constant temperature. The graded results: both anchors as closed forms, the ramp pair and the reason the slow ramp wins, the isothermal pair and the stall behind it. And the reading discipline: windows as conventions, reflectance as a ratchet that remembers the maximum, geometry errors amplifying into chemistry errors.
+The two clocks and their separation: vitrinite for reflectance, fixed and calibrated; kerogen for transformation, spectrum-driven and editable. The Arrhenius machinery: rates that multiply by five per ten degrees at the front, a ladder spanning twenty-two orders of magnitude, a step that is exact at constant temperature. The golden results: both anchors as closed forms, the ramp pair and the reason the slow ramp wins, the isothermal pair and the stall behind it. And the reading discipline: windows as conventions, reflectance as a ratchet that remembers the maximum, geometry errors amplifying into chemistry errors.
 
 The Associate tier's forward promise has been kept: "time is a reagent" is now 1.1129254516555198 against 0.9871413464062039, and you can derive both sides of it.
 

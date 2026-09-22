@@ -20,7 +20,7 @@ For a column that starts at the surface, $T_{top}$ is the surface temperature $T
 
 ## The golden fixture
 
-The fixture used throughout this module, and graded in the capstone, is this:
+The golden fixture used throughout this module is this:
 
 | property | value |
 |---|---|
@@ -39,13 +39,13 @@ Take the first cell, whose centre is at 50 m. It sits inside the upper layer, so
 
 $$T = 10 + \frac{0.06 \times 50}{1.8} = 11.666666666666671 \text{ degC}$$
 
-Do the arithmetic in the order the formula is written. The heat flow times the depth is 3 W/m, dividing that by the conductivity of 1.8 W/m/K gives the rise in degrees Celsius over those 50 m, and adding it to the 10 degC at the surface gives 11.666666666666671 degC. That is the value the engine returns at 50 m, and the graded tolerance on it is 0.05 degC, so any correct hand calculation passes comfortably.
+Do the arithmetic in the order the formula is written. The heat flow times the depth is 3 W/m, dividing that by the conductivity of 1.8 W/m/K gives the rise in degrees Celsius over those 50 m, and adding it to the 10 degC at the surface gives 11.666666666666671 degC. That is the value the engine returns at 50 m, and a correct hand calculation reproduces it exactly, because the column is a closed form.
 
 Now take the deepest cell of the upper layer, whose centre is at 950 m. Same layer, same conductivity, same starting point, larger depth.
 
 $$T = 10 + \frac{0.06 \times 950}{1.8} = 41.66666666666673 \text{ degC}$$
 
-The rise from the surface to 950 m is a little under 32 degC, all of it accumulated in one layer at one constant gradient. That is the second graded value.
+The rise from the surface to 950 m is a little under 32 degC, all of it accumulated in one layer at one constant gradient. That is the second golden value.
 
 Two things are worth noticing about that pair. The first is that nothing in either calculation used the lower layer. Heat flow is set at the base of the column and passes upward unchanged, so the temperature inside the upper layer does not depend on what lies below it. The second is that both cells lie on the same straight line through the surface point, which is the signature of constant conductivity.
 

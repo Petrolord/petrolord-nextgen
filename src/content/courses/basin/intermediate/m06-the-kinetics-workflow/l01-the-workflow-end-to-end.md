@@ -24,9 +24,9 @@ From the vitrinite state, F, then $R_o = e^{-1.6+3.7F}$. From the kerogen state,
 
 Run the sanity list before the answer leaves your desk: anchors, monotone range, a rate landmark, a fixture crossing if the machinery is new, and the separation test if the software is. The list is five minutes; every failure mode it catches has cost someone more.
 
-## The workflow on the capstone
+## The workflow on a brief
 
-The capstone is this sequence six times. The two anchors are step four with F fixed at its endpoints, no integration needed. The two ramp values are steps two through four with the golden rates 3 and 1 and a read at 150 degC. The two TR values are the kerogen clock at a constant 100 degC, read at 10 and 50 Ma, Type II spectrum. Nothing on it requires a decision this lesson has not named.
+The golden case is this sequence six times, and so is the capstone. The two golden anchors are step four with F fixed at its endpoints, no integration needed. The two ramp values are steps two through four with the golden rates 3 and 1 and a read at 150 degC. The two TR values are the kerogen clock at a constant 100 degC, read at 10 and 50 Ma, Type II spectrum. Nothing on it requires a decision this lesson has not named.
 
 ## Worked example
 
@@ -34,6 +34,6 @@ Phrase a field task as the workflow. Task: "estimate whether the Miocene source 
 
 ## Exercise
 
-Write the five steps from memory in one line each, and mark which steps the capstone's anchor values skip. Then answer in one sentence: why does step one precede fixing the temperature history?
+Write the five steps from memory in one line each, and mark which steps the golden anchor values skip. Then answer in one sentence: why does step one precede fixing the temperature history?
 
 As a self check: name the clock, fix the track, integrate by convention, read out with assumptions attached, run the checks; the anchors skip steps two and three because their F values are endpoints known without integration. The clock comes first because it decides what parameters the rest of the workflow is obliged to hold fixed and what it is obliged to state, and a history is only worth fixing once you know which state will consume it.

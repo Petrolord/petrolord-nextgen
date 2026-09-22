@@ -1,6 +1,6 @@
 # Porosity at depth
 
-This lesson works one number all the way through, by hand, because it is one of the six the capstone grades and because the method is the same for every depth and every lithology you will ever put through this curve.
+This lesson works one number all the way through, by hand, because it is one of the six this tier reports and because the method is the same for every depth and every lithology you will ever put through this curve.
 
 The question is: what is the porosity of the engine's shale at 2000 m.
 
@@ -36,7 +36,7 @@ There is something worth noticing in that. The surviving fraction is $e^{-cz}$, 
 
 ## How many digits are meaningful
 
-The graded value is 0.22717481230903933 v/v and the tolerance is 0.001. Those two facts together tell you how to handle the number.
+The golden value is 0.22717481230903933 v/v, and a capstone grades a porosity to a ten-thousandth. Those two facts together tell you how to handle the number.
 
 An answer of 0.227 passes comfortably. So does 0.2272. The digits beyond the third or fourth decimal place carry no information about rock, because the parameters that produced them are fitted values with an uncertainty far larger than that. Reporting a porosity to seventeen digits in a document does not make it more accurate, it advertises a precision that the compaction law does not possess.
 

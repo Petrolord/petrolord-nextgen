@@ -4,7 +4,7 @@ The Associate tier computed temperatures from a steady column, and its final les
 
 ## Where steady would have done fine
 
-Be honest about the boring majority first. Through the basin's quiet stretches, 140 to 81 Ma with slow shallow geometry, 60 to 21 Ma with geometry frozen and heat flow drifting gently, the column tracks its steady answer closely: changes arrive slowly enough that relaxation keeps pace. The graded final temperature is the clearest case, 149.76037539670858 in the transient run against essentially the same from a steady solve of today's column, because ten quiet megayears closed the gap. A basin whose history is gentle everywhere is a basin where the Associate tier's arithmetic, applied per step, would grade nearly as well.
+Be honest about the boring majority first. Through the basin's quiet stretches, 140 to 81 Ma with slow shallow geometry, 60 to 21 Ma with geometry frozen and heat flow drifting gently, the column tracks its steady answer closely: changes arrive slowly enough that relaxation keeps pace. The golden final temperature is the clearest case, 149.76037539670858 in the transient run against essentially the same from a steady solve of today's column, because ten quiet megayears closed the gap. A basin whose history is gentle everywhere is a basin where the Associate tier's arithmetic, applied per step, would grade nearly as well.
 
 ## Where steady fails: the arrivals
 
@@ -22,7 +22,7 @@ The comparison yields a working diagnostic for when transient machinery is worth
 
 ## Worked example
 
-A modeller proposes running this fixture with steady heat to save complexity, arguing the graded values would survive. Assess field by field. Final temperature: survives, quiet ending. Final Ro and TR, and both masses: shift by the accumulated arrival-lag and removal-tail differences, small on this fixture but not obviously inside the tight tolerances, and unverifiable without running the transient model anyway. The signature: differences of two steady runs, arrival-lag biases partially cancelling, closest call of the six. Verdict: some fields probably survive, none provably, and the proof requires the machinery being avoided. That is the general shape of shortcut arguments against transient physics.
+A modeller proposes running this fixture with steady heat to save complexity, arguing the golden values would survive. Assess field by field. Final temperature: survives, quiet ending. Final Ro and TR, and both masses: shift by the accumulated arrival-lag and removal-tail differences, small on this fixture but not obviously small enough, and unverifiable without running the transient model anyway. The signature: differences of two steady runs, arrival-lag biases partially cancelling, closest call of the six. Verdict: some fields probably survive, none provably, and the proof requires the machinery being avoided. That is the general shape of shortcut arguments against transient physics.
 
 ## Exercise
 
