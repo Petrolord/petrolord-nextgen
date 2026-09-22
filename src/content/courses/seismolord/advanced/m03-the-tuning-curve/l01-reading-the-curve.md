@@ -54,6 +54,6 @@ The model's peak is 0.11559476, which is slightly below that ceiling because the
 
 ## Exercise
 
-Using the 25 Hz curve, state what range of amplitudes is consistent with a bed known independently to be thicker than 24 ms, and what range is consistent with a bed known to be thinner than 8 ms. Then say which of those two constraints is more useful in practice and why.
+Using the 25 Hz curve, state what range of amplitudes is consistent with a bed known independently to be thicker than 26 ms, and what range is consistent with a bed known to be thinner than 8 ms. Then say which of those two constraints is more useful in practice and why.
 
-As a self-check: above 24 ms the curve runs from 0.09429 at 24 ms down to 0.08 at the thick end, so amplitudes between about 0.080 and 0.094 are consistent, while below 8 ms the curve runs from 0 up to 0.08429, so amplitudes between 0 and about 0.084 are consistent. The thick constraint is more useful because it is narrow, a band about 18 percent wide, whereas the thin constraint spans everything from nothing to slightly above the isolated level and therefore excludes almost nothing.
+As a self-check: above 26 ms the curve runs from 0.08907 at 26 ms down to 0.08 at the thick end, so amplitudes between about 0.080 and 0.089 are consistent, while below 8 ms the curve runs from 0 up to 0.08429, so amplitudes between 0 and about 0.084 are consistent. The thick constraint is more useful because it is narrow, a band about 11 percent wide, whereas the thin constraint spans everything from nothing to slightly above the isolated level and therefore excludes almost nothing.

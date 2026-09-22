@@ -31,16 +31,16 @@ Twelve readings sit under the charts.
 The first six describe the **whole panel** at the selected frequency and do not respond to the thickness slider.
 
 - **Tuning thickness**, the horizontal position of the filled marker. Two of these are capstone fields, at 25 and at 40 Hz, and both are graded exactly.
-- **Amplitude at tuning**, the vertical position of the marker. Two more capstone fields.
+- **Amplitude at tuning**, the vertical position of the marker. The capstone does not grade it, because it barely moves with frequency (module 4).
 - **Theoretical tuning thickness**, $\sqrt{6}/(2\pi f)$ in milliseconds, calculated rather than measured. One capstone field, at 25 Hz.
 - **Grid overshoot**, the measured tuning thickness minus the theoretical one. Module 5 is about this tile.
 - **Frequency times tuning thickness**, in units of Hz times ms. Module 4 is about this tile, and it is the one reading on the panel that most learners walk past.
-- **Isolated reflector amplitude**, the dashed line, read at the thick end of the panel. One capstone field, at 25 Hz.
+- **Isolated reflector amplitude**, the dashed line, read at the thick end of the panel. It is the denominator of the relative amplitude tile below.
 
 The remaining six respond to the **thickness slider**.
 
-- **Selected thickness** and **amplitude at that thickness**, which are the coordinates of the point you are sitting on.
-- **Amplitude relative to isolated**, the same amplitude divided by the dashed line, so 1.00 means the bed is behaving as though the base were not there.
+- **Selected thickness** and **amplitude at that thickness**, which are the coordinates of the point you are sitting on. Two capstone fields are read here, each at a thickness and frequency the brief states.
+- **Amplitude relative to isolated**, the same amplitude divided by the dashed line, so 1.00 means the bed is behaving as though the base were not there. One capstone field is read here, at a stated thickness.
 - **Peak time relative to the top interface**, in milliseconds, negative when the peak arrives early. On thick beds it reads 0. On thin beds it does not.
 - **Apparent thickness**, the time from the peak of the composite to its trough. On thick beds this equals the true thickness. On thin beds it does not, and module 4 shows that it has a floor it cannot go below.
 - **Wavelet frequency**, repeated here so that a screenshot of the tiles carries its own conditions.
@@ -49,7 +49,7 @@ The remaining six respond to the **thickness slider**.
 
 Set the frequency to 25 Hz and the thickness to 60 ms. Read the amplitude and confirm it matches the isolated line. Now walk the thickness down in steps and watch the amplitude rise rather than fall, which is the entire counterintuitive core of this tier. Stop at 16 ms and read the four panel level tiles. Then take the thickness to 2 ms and look at the peak time tile, which will not be zero.
 
-That sequence takes about a minute and produces four of the six capstone fields. The rest of the tier explains why each of them is what it is.
+That sequence takes about a minute and visits every tile the capstone reads. The rest of the tier explains why each reading is what it is.
 
 ## Exercise
 

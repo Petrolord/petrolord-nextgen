@@ -1,6 +1,6 @@
 # Why the two amplitudes match
 
-The capstone asks for the tuning amplitude at 25 Hz and again at 40 Hz, and the two answers are the same digits. Learners who notice usually assume they have made a mistake. This lesson establishes that they have not, separates the two distinct reasons the values agree, and warns against the overgeneralisation that follows most easily from it.
+Read the tuning amplitude at 25 Hz and again at 40 Hz, and the two readings are the same digits. Learners who notice usually assume they have made a mistake. This lesson establishes that they have not, separates the two distinct reasons the values agree, and warns against the overgeneralisation that follows most easily from it.
 
 ## Reason one: the ideal peak does not depend on frequency
 
@@ -40,7 +40,7 @@ This is worth noticing as a habit as much as a fact. A result labelled an artefa
 
 ## The overgeneralisation to avoid
 
-Because the two graded amplitudes agree exactly, it is tempting to conclude that a modelled tuning amplitude is always the same number regardless of frequency. The panel disproves it in one click.
+Because the two tuning amplitudes agree exactly, it is tempting to conclude that a modelled tuning amplitude is always the same number regardless of frequency. The panel disproves it in one click.
 
 At 15 Hz the model reports a tuning amplitude of **0.1157008037** at 26 ms, which is higher than the 25 Hz and 40 Hz value. At 18 Hz it reports 0.1156614646 at 22 ms. Neither equals 0.1155947596.
 

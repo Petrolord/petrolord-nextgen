@@ -36420,7 +36420,34 @@
   "recommendation": null,
   "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261030b_hd_seismolord.sql",
+   "wave": "hd",
+   "closes_leak": true,
+   "rekey": {
+    "key": "amp25_at_24ms",
+    "label": "Amplitude of a 24 ms bed at 25 Hz",
+    "unit": "-",
+    "expected": 0.09428644925355911,
+    "tol": 0.0001
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/seismolord/WedgeExplorer.jsx (Tile Amplitude there, 25 Hz, thickness 24 ms)",
+    "printed": {
+     "decimals": 10
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/seismolord/WedgeExplorer.jsx fmt(row.amp, 10)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "computeWedge(25) row 24 ms amp = 0.09428644925355911 (engine tuningCurve; fields.mjs HD_ADVANCED); prints 0.0942864493, tol 1e-4. Nearest other panel readings: 50 Hz at 12 ms (same f x T, grid fit) 3.0 tol out, 20 Hz at 30 ms 7.7 tol, 40 Hz at 6 ms 10.7 tol; the tuning amplitude 0.1156, the isolated level 0.08 and a thin-bed linear scaling all fail. panelCapstoneGuard.test.jsx measures every one.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "fmt(model.tuneAmp, 10) = 0.1155947596; tol 0.002.",
   "notes": "Identical to tune40_amp (tuning amplitude of an equal and opposite pair is frequency independent on this grid), so one reading answers both fields."
  },
@@ -36545,7 +36572,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261030b_hd_seismolord.sql",
+   "wave": "hd",
+   "closes_leak": true,
+   "rekey": {
+    "key": "ratio25_at_28ms",
+    "label": "Amplitude of a 28 ms bed over the isolated level at 25 Hz",
+    "unit": "-",
+    "expected": 1.0688391753026658,
+    "tol": 0.0002
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/seismolord/WedgeExplorer.jsx (Tile Amplitude relative to isolated, 25 Hz, thickness 28 ms)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/seismolord/WedgeExplorer.jsx fmt(row.amp / model.isoAmp, 4)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "computeWedge(25) row 28 ms amp / isoAmp = 1.0688391753026658; prints 1.0688 (miss 3.9e-5), tol 2e-4; the exact-0.08 route also passes. Nearest other panel readings (f x T law aside, 50 Hz at 14 ms prints it exactly): 15 Hz at 46 ms 12.4 tol out, 20 Hz at 10 ms 19.5 tol; the tuning ratio 1.4449, 1 and the ideal 1.4463 fail.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "'Amplitude relative to isolated' fmt(row.amp / model.isoAmp, 4) = 1.4449 at the default selected 16 ms; |1.4449-1.444935| = 3.5e-5 <= 0.001.",
   "notes": "Default-state panel value equals the answer (probe). By design here: the prompt directs the learner to read this panel, so the capstone at this tier is a readout of the default state with no working."
  },
