@@ -1,0 +1,1036 @@
+{
+ "course": "rockphysics",
+ "migration": "20261029_w6_rockphysics.sql",
+ "case": {
+  "name": "OKIRIKA",
+  "markers": [
+   "OKIRIKA"
+  ],
+  "summary": "A hotter, deeper, saltier sand (90 degC, 34 MPa, 80000 ppm, gas 0.75, 30 API at 90 L/L) with a quartz, calcite and clay frame, logged in brine at 3520/2050/2310 under a 2900/1450/2480 shale, on a 30 Hz survey."
+ },
+ "literals_ok": {
+  "1": "the 1 ms sample grid of the wedge model",
+  "3": "the unit kg/m3"
+ },
+ "tiers": {
+  "beginner": [
+   {
+    "ord": 5,
+    "replaces": "06561d6df076977bff27c86ca063bbeb",
+    "prompt": "The OKIRIKA sand sits at 90 degC and 34 MPa, with a brine of 80000 ppm NaCl. What brine density does the engine return there?",
+    "correct": "{{b_brine_rho}} kg/m3, with the salinity entered as a weight fraction of 0.08",
+    "distractors": [
+     "{{b_brine_rho_slip}} kg/m3, which is what comes back once 80000 ppm is typed as 0.008",
+     "{{b_water_rho}} kg/m3, the pure water density at those conditions with the salt term dropped",
+     "{{b_brine_rho_surface}} kg/m3, the same brine read at 20 degC and surface pressure"
+    ],
+    "explanation": "The engine takes salinity as a weight fraction, so 80000 ppm is 0.08, and at 90 degC and 34 MPa that brine is {{b_brine_rho}} kg/m3. The same brine at the surface reads {{b_brine_rho_surface}} kg/m3, which is why a density must carry its conditions.",
+    "rests_on": [
+     "b_brine_rho",
+     "b_brine_rho_slip",
+     "b_water_rho",
+     "b_brine_rho_surface"
+    ],
+    "why_wrong": [
+     "salinity typed ten times too small",
+     "drops the salt term altogether",
+     "surface conditions instead of in situ"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 32,
+    "replaces": "ee96f9e7a0d20cb3981db27398fa2bbd",
+    "prompt": "The OKIRIKA brine is 0.08 NaCl by weight at 90 degC and 34 MPa. Which bulk modulus belongs on its fluid sheet?",
+    "correct": "{{b_brine_k_gpa}} GPa, the in situ value at the stated temperature and pressure",
+    "distractors": [
+     "{{b_brine_k_surface_gpa}} GPa, the laboratory value measured at 20 degC and surface pressure",
+     "{{b_brine_k_slip_gpa}} GPa, from the salinity typed ten times too small as 0.008",
+     "{{b_brine_k_low_salt_gpa}} GPa, the modulus of the same brine at a salinity of 0.01"
+    ],
+    "explanation": "Batzle-Wang at 90 degC, 34 MPa and 0.08 gives {{b_brine_k_gpa}} GPa. Every other figure is the same engine at the wrong temperature or salinity, and nothing in the number itself would say so.",
+    "rests_on": [
+     "b_brine_k_gpa",
+     "b_brine_k_surface_gpa",
+     "b_brine_k_slip_gpa",
+     "b_brine_k_low_salt_gpa"
+    ],
+    "why_wrong": [
+     "surface temperature and pressure",
+     "salinity slip",
+     "a much lower salinity"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 33,
+    "replaces": "48495ec1ea4d6f9d3ce827873a68a6e5",
+    "prompt": "The OKIRIKA gas has a gravity of 0.75 at 90 degC and 34 MPa. Which bulk modulus should the fluid sheet carry for it?",
+    "correct": "{{b_gas_k_mpa}} MPa, from the Batzle-Wang gas relations at the stated gravity",
+    "distractors": [
+     "{{b_gas_k_light_mpa}} MPa, the value for a 0.6 gravity gas at the same conditions",
+     "{{b_gas_k_isothermal_mpa}} MPa, since a slowly compressed ideal gas has a modulus equal to its pressure",
+     "{{b_gas_k_halfp_mpa}} MPa, the modulus this gas would have at half the pore pressure"
+    ],
+    "explanation": "At 0.75 gravity, 90 degC and 34 MPa the engine gives {{b_gas_k_mpa}} MPa. The isothermal ideal gas figure of 34 MPa ignores both the adiabatic response and the real gas behaviour the correlation carries.",
+    "rests_on": [
+     "b_gas_k_mpa",
+     "b_gas_k_light_mpa",
+     "b_gas_k_isothermal_mpa",
+     "b_gas_k_halfp_mpa"
+    ],
+    "why_wrong": [
+     "default gravity instead of the stated one",
+     "isothermal ideal gas shortcut",
+     "wrong pressure"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 40,
+    "replaces": "de08766fb85c1780b46cf00b4a90d15b",
+    "prompt": "By bulk modulus, how many times stiffer than the OKIRIKA gas is the OKIRIKA brine?",
+    "correct": "{{b_stiff_ratio}} times, the ratio of {{b_brine_k_gpa}} GPa to {{b_gas_k_mpa}} MPa",
+    "distractors": [
+     "{{b_rho_ratio}} times, which is the ratio of the two fluid densities",
+     "{{b_vp_ratio}} times, which is the ratio of their compressional velocities",
+     "{{b_stiff_ratio_iso}} times, taking the gas modulus as equal to its 34 MPa pressure"
+    ],
+    "explanation": "{{b_brine_k_gpa}} GPa over {{b_gas_k_mpa}} MPa is {{b_stiff_ratio}}, once both are in the same unit. The density ratio is only {{b_rho_ratio}}, which is why gas moves stiffness far more than density.",
+    "rests_on": [
+     "b_stiff_ratio",
+     "b_rho_ratio",
+     "b_vp_ratio",
+     "b_stiff_ratio_iso"
+    ],
+    "why_wrong": [
+     "density ratio",
+     "velocity ratio",
+     "isothermal ideal gas modulus"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 14,
+    "replaces": "8c75dd71292643a1e4ace56f9aa0cf7a",
+    "prompt": "The OKIRIKA oil is 30 API with a gas oil ratio of 90 L/L and a 0.75 gravity solution gas. What in situ density belongs on the sheet?",
+    "correct": "{{b_oil_rho}} kg/m3, the live oil with its dissolved gas at 90 degC and 34 MPa",
+    "distractors": [
+     "{{b_rho0}} kg/m3, the stock tank density that 30 API converts to",
+     "{{b_dead_rho}} kg/m3, the gas free oil at the same temperature and pressure",
+     "{{b_oil_rho_light_gas}} kg/m3, the live oil worked with a 0.6 gravity solution gas"
+    ],
+    "explanation": "Dissolved gas swells the oil, so the live oil at 90 L/L is {{b_oil_rho}} kg/m3 against {{b_dead_rho}} kg/m3 for the dead oil and {{b_rho0}} kg/m3 at stock tank.",
+    "rests_on": [
+     "b_oil_rho",
+     "b_rho0",
+     "b_dead_rho",
+     "b_oil_rho_light_gas"
+    ],
+    "why_wrong": [
+     "stock tank density",
+     "gas free oil",
+     "default solution gas gravity"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 19,
+    "replaces": "13ce95859983292977645902c214f5ec",
+    "prompt": "The OKIRIKA frame is 0.62 quartz, 0.2 calcite and 0.18 clay by volume. What Voigt Reuss Hill bulk modulus does the engine give it?",
+    "correct": "{{b_frame_k_gpa}} GPa, the mean of the Voigt and Reuss bounds",
+    "distractors": [
+     "{{b_k_voigt_gpa}} GPa, the volume weighted average of the three moduli",
+     "{{b_k_reuss_gpa}} GPa, the harmonic average of the three mineral moduli",
+     "{{b_frame_k_nocalcite_gpa}} GPa, the same frame with the calcite counted as quartz"
+    ],
+    "explanation": "Voigt gives {{b_k_voigt_gpa}} GPa and Reuss {{b_k_reuss_gpa}} GPa, and their mean is {{b_frame_k_gpa}} GPa. Counting the calcite as quartz drops the value to {{b_frame_k_nocalcite_gpa}} GPa, because calcite is the stiffest mineral in the mix.",
+    "rests_on": [
+     "b_frame_k_gpa",
+     "b_k_voigt_gpa",
+     "b_k_reuss_gpa",
+     "b_frame_k_nocalcite_gpa"
+    ],
+    "why_wrong": [
+     "upper bound only",
+     "lower bound only",
+     "ignores the calcite"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 22,
+    "replaces": "ddc8cf489a2a320c61cdb196f59093e2",
+    "prompt": "On the OKIRIKA frame, how far apart do the Voigt and Reuss bounds sit for the bulk modulus and for the shear modulus?",
+    "correct": "About {{b_k_spread_pct}} percent for bulk and {{b_mu_spread_pct}} percent for shear, so shear is the weaker claim",
+    "distractors": [
+     "About {{b_mu_spread_pct}} percent for bulk and {{b_k_spread_pct}} percent for shear, so bulk is the weaker claim",
+     "About {{b_k_spread_pct}} percent for both, since the same volume fractions weight both averages",
+     "Under a percent for both, since calcite and quartz lie close together in every modulus"
+    ],
+    "explanation": "Voigt over Reuss is {{b_k_voigt_gpa}} over {{b_k_reuss_gpa}} GPa for bulk and {{b_mu_voigt_gpa}} over {{b_mu_reuss_gpa}} GPa for shear. The soft clay pulls the shear Reuss bound down hard, so the shear VRH value is the looser claim.",
+    "rests_on": [
+     "b_k_spread_pct",
+     "b_mu_spread_pct",
+     "b_mu_voigt_gpa",
+     "b_mu_reuss_gpa"
+    ],
+    "why_wrong": [
+     "bulk and shear swapped",
+     "the spread depends on the moduli and not only the fractions",
+     "calcite is far stiffer than quartz in bulk and softer in shear"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 39,
+    "replaces": "700cf980272d85ee86eab2ed10ea5e38",
+    "prompt": "The OKIRIKA frame has VRH moduli of {{b_frame_k_gpa}} GPa bulk and {{b_frame_mu_gpa}} GPa shear, and a density of {{b_frame_rho}} kg/m3. What compressional velocity would the solid mineral carry?",
+    "correct": "{{b_frame_vp}} m/s, the square root of K plus four thirds of mu, over density",
+    "distractors": [
+     "{{b_frame_vp_noshear}} m/s, the square root of the bulk modulus over density alone",
+     "{{b_frame_vp_kmu}} m/s, adding the whole shear modulus to the bulk modulus",
+     "{{b_frame_vs}} m/s, the square root of the shear modulus over density"
+    ],
+    "explanation": "A compressional wave works against both the bulk modulus and four thirds of the shear modulus, which gives {{b_frame_vp}} m/s. Leaving the shear out gives only {{b_frame_vp_noshear}} m/s.",
+    "rests_on": [
+     "b_frame_vp",
+     "b_frame_vp_noshear",
+     "b_frame_vp_kmu",
+     "b_frame_vs"
+    ],
+    "why_wrong": [
+     "drops the shear term",
+     "wrong shear weighting",
+     "that is the shear velocity"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 29,
+    "replaces": "a9f430d1587f1e1a1741779130e11313",
+    "prompt": "The OKIRIKA pore fluid is mixed at Sw 0.9, with the rest gas. What bulk modulus does Wood's equation give for the mix?",
+    "correct": "{{b_mix_k_mpa}} MPa, a harmonic average that the soft gas dominates",
+    "distractors": [
+     "{{b_mix_k_linear_mpa}} MPa, the saturation weighted linear average of the two",
+     "{{b_mix_k_hill_mpa}} MPa, the mean of the linear and harmonic averages",
+     "{{b_mix_k_swapped_mpa}} MPa, from the mix with the two saturations exchanged"
+    ],
+    "explanation": "Wood's equation adds compliances, so the mix at Sw 0.9 is {{b_mix_k_mpa}} MPa, far below the {{b_mix_k_linear_mpa}} MPa a linear average would give.",
+    "rests_on": [
+     "b_mix_k_mpa",
+     "b_mix_k_linear_mpa",
+     "b_mix_k_hill_mpa",
+     "b_mix_k_swapped_mpa"
+    ],
+    "why_wrong": [
+     "linear average",
+     "Hill style average",
+     "saturations swapped"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 30,
+    "replaces": "6935a97304c02c4a17271769ea40cc01",
+    "prompt": "At Sw 0.9 in the OKIRIKA sand, what density does the mixed brine and gas pore fluid carry?",
+    "correct": "{{b_mix_rho}} kg/m3, the saturation weighted sum of the two",
+    "distractors": [
+     "{{b_mix_rho_harm}} kg/m3, a harmonic average in the same way as the modulus",
+     "{{b_mix_rho_swapped}} kg/m3, the weighted sum with the saturations exchanged",
+     "{{b_brine_rho}} kg/m3, since that little gas cannot move the density"
+    ],
+    "explanation": "Density mixes linearly: 0.9 of {{b_brine_rho}} plus the rest of {{b_gas_rho}} is {{b_mix_rho}} kg/m3, only {{b_mix_rho_drop_pct}} percent below the brine.",
+    "rests_on": [
+     "b_mix_rho",
+     "b_mix_rho_harm",
+     "b_mix_rho_swapped",
+     "b_brine_rho"
+    ],
+    "why_wrong": [
+     "harmonic mixing applies to moduli only",
+     "saturations swapped",
+     "ignores the gas"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 10,
+    "replaces": "80918ba1c84f8da803f017562af1b9e7",
+    "prompt": "In the OKIRIKA mix at Sw 0.9, what share of the total compliance does the gas term carry?",
+    "correct": "{{b_gas_compliance_pct}} percent, though the gas fills a tenth of the pore volume",
+    "distractors": [
+     "{{b_brine_compliance_pct}} percent, since the brine fills most of the pore volume",
+     "{{b_mix_k_drop_pct}} percent, the fall in bulk modulus from the pure brine value",
+     "{{b_mix_rho_drop_pct}} percent, the fall in density from the pure brine value"
+    ],
+    "explanation": "The gas term is its saturation over {{b_gas_k_mpa}} MPa, which carries {{b_gas_compliance_pct}} percent of the total, so a tenth of the pore volume does most of the softening.",
+    "rests_on": [
+     "b_gas_compliance_pct",
+     "b_brine_compliance_pct",
+     "b_mix_k_drop_pct",
+     "b_mix_rho_drop_pct"
+    ],
+    "why_wrong": [
+     "that is the brine's share",
+     "answers a different question: modulus drop",
+     "answers a different question: density drop"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 13,
+    "replaces": "fe3b7fb2e0785ac7fbd3e5ec8682aa06",
+    "prompt": "The OKIRIKA pore pressure is 34 MPa. In a depleted block of the same field at 17 MPa, how would the gas bulk modulus compare?",
+    "correct": "{{b_gas_k_halfp_mpa}} MPa, so the undepleted gas at 34 MPa is {{b_gas_k_p_ratio}} times stiffer",
+    "distractors": [
+     "Half of {{b_gas_k_mpa}} MPa, since the modulus scales in proportion with pressure",
+     "{{b_gas_k_mpa}} MPa, since a gas modulus is set by temperature and gravity alone",
+     "About {{b_gas_rho_p_ratio}} times lower, the factor by which the gas density falls"
+    ],
+    "explanation": "The engine gives {{b_gas_k_halfp_mpa}} MPa at 17 MPa against {{b_gas_k_mpa}} MPa at 34 MPa, a factor of {{b_gas_k_p_ratio}}. The modulus falls faster than pressure, and faster than the density, which drops by {{b_gas_rho_p_ratio}}.",
+    "rests_on": [
+     "b_gas_k_halfp_mpa",
+     "b_gas_k_p_ratio",
+     "b_gas_rho_p_ratio",
+     "b_gas_k_mpa"
+    ],
+    "why_wrong": [
+     "modulus does not scale linearly with pressure",
+     "pressure matters",
+     "density ratio is not the modulus ratio"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 34,
+    "replaces": "907a1f9edaa738fa24c7abf6ca7dc10b",
+    "prompt": "The OKIRIKA brine is 0.08 NaCl by weight. How much stiffer is it than the same brine at 0.01, at the same 90 degC and 34 MPa?",
+    "correct": "{{b_salt_k_rise_pct}} percent stiffer, {{b_brine_k_gpa}} GPa at 0.08 against {{b_brine_k_low_salt_gpa}} GPa at 0.01",
+    "distractors": [
+     "About eight times as stiff, since the salinity is eight times higher and the modulus follows",
+     "No stiffer at all, since salt adds mass to the brine and leaves its modulus alone",
+     "{{b_salt_rho_rise}} kg/m3 denser and no stiffer, since salt only adds mass to the water"
+    ],
+    "explanation": "Raising the salinity from 0.01 to 0.08 raises the modulus from {{b_brine_k_low_salt_gpa}} to {{b_brine_k_gpa}} GPa, {{b_salt_k_rise_pct}} percent, and the density by {{b_salt_rho_rise}} kg/m3. Salt stiffens the brine as well as weighting it.",
+    "rests_on": [
+     "b_salt_k_rise_pct",
+     "b_brine_k_gpa",
+     "b_brine_k_low_salt_gpa",
+     "b_salt_rho_rise"
+    ],
+    "why_wrong": [
+     "modulus is not proportional to salinity",
+     "salt raises the velocity and the modulus",
+     "salt raises the velocity and the modulus"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 26,
+    "replaces": "c8285050d3893119499c56c2ddc2df18",
+    "prompt": "An OKIRIKA fluid sheet lists the Sw 0.9 mixed fluid at {{b_mix_k_linear_mpa}} MPa. What does a quality check say about it?",
+    "correct": "It was averaged linearly; Wood's equation gives {{b_mix_k_mpa}} MPa, near the gas end",
+    "distractors": [
+     "It passes, since {{b_mix_k_linear_mpa}} MPa lies between the gas and brine moduli as it must",
+     "The saturations were exchanged, and the correct mixed value is {{b_mix_k_swapped_mpa}} MPa",
+     "The gas was entered in GPa, and the correct gas modulus is {{b_gas_k_mpa}} MPa"
+    ],
+    "explanation": "A Wood mix must sit near the soft end: {{b_mix_k_mpa}} MPa between {{b_gas_k_mpa}} MPa and {{b_brine_k_gpa}} GPa. A value near the middle is the linear average, the error the harmonic check exists for.",
+    "rests_on": [
+     "b_mix_k_linear_mpa",
+     "b_mix_k_mpa",
+     "b_mix_k_swapped_mpa",
+     "b_gas_k_mpa"
+    ],
+    "why_wrong": [
+     "lying between the end members is not enough",
+     "swap gives a lower value",
+     "a GPa slip would be off by a thousand"
+    ],
+    "answer_index": 1
+   }
+  ],
+  "intermediate": [
+   {
+    "ord": 3,
+    "replaces": "91f8d06880da44926a0a861ff1f98ac1",
+    "prompt": "The OKIRIKA sand is logged in brine at vp 3520 m/s, vs 2050 m/s and 2310 kg/m3. What saturated bulk modulus goes into inverse Gassmann?",
+    "correct": "{{i_ksat_gpa}} GPa, rho vp squared less four thirds of the shear modulus",
+    "distractors": [
+     "{{i_rhovp2_gpa}} GPa, rho vp squared, which is the full compressional modulus",
+     "{{i_rho_vp2_minus_vs2_gpa}} GPa, rho times the difference of the squared velocities",
+     "{{i_mu_gpa}} GPa, rho vs squared, which the log gives directly"
+    ],
+    "explanation": "The shear modulus is 2310 times 2050 squared, {{i_mu_gpa}} GPa, and the saturated bulk modulus is rho vp squared less four thirds of it, {{i_ksat_gpa}} GPa.",
+    "rests_on": [
+     "i_ksat_gpa",
+     "i_rhovp2_gpa",
+     "i_rho_vp2_minus_vs2_gpa",
+     "i_mu_gpa"
+    ],
+    "why_wrong": [
+     "forgets the shear term",
+     "subtracts mu once instead of four thirds",
+     "that is the shear modulus"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 10,
+    "replaces": "825e71ec8a52c0bc79578600fa425b02",
+    "prompt": "For the OKIRIKA log point take porosity 0.2, a mineral modulus of {{i_kmin_gpa}} GPa and the brine at {{b_brine_k_gpa}} GPa. What dry frame modulus does inverse Gassmann recover?",
+    "correct": "{{i_kdry_gpa}} GPa, with the brine removed from the logged saturated modulus",
+    "distractors": [
+     "{{i_kdry_asgas_gpa}} GPa, from treating the logged interval as gas bearing",
+     "{{i_ksat_gpa}} GPa, the saturated modulus, since brine adds no stiffness",
+     "{{i_kmin_gpa}} GPa, the mineral frame modulus from the VRH average"
+    ],
+    "explanation": "Inverse Gassmann takes the {{i_ksat_gpa}} GPa saturated modulus and strips the brine, leaving {{i_kdry_gpa}} GPa. The dry frame is the porous rock with empty pores, far softer than the {{i_kmin_gpa}} GPa mineral.",
+    "rests_on": [
+     "i_kdry_gpa",
+     "i_kdry_asgas_gpa",
+     "i_ksat_gpa",
+     "i_kmin_gpa"
+    ],
+    "why_wrong": [
+     "wrong fluid state for the log",
+     "brine does stiffen the rock",
+     "mineral frame is not the dry frame"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 23,
+    "replaces": "668d14d154632cdcd228b32a46f1f849",
+    "prompt": "What Biot coefficient does the recovered OKIRIKA dry frame imply, and what does it say about the substitution?",
+    "correct": "{{i_biot}}, so the sand should respond strongly to its pore fluid",
+    "distractors": [
+     "{{i_biot}}, so the sand should be almost blind to its pore fluid",
+     "{{i_biot_ksat}}, from the saturated modulus over the mineral modulus instead",
+     "{{i_biot_mu}}, from the ratio of the rock and mineral shear moduli taken instead"
+    ],
+    "explanation": "One minus {{i_kdry_gpa}} over {{i_kmin_gpa}} GPa is {{i_biot}}. Near one the fluid matters greatly, so a large gas effect is expected here.",
+    "rests_on": [
+     "i_biot",
+     "i_kdry_gpa",
+     "i_kmin_gpa",
+     "i_biot_ksat",
+     "i_biot_mu"
+    ],
+    "why_wrong": [
+     "a coefficient near one means fluid sensitive",
+     "uses the saturated modulus",
+     "Biot is a bulk modulus ratio"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 4,
+    "replaces": "2365b4e67150bb39a1d85fc04af62805",
+    "prompt": "Replace the OKIRIKA brine with the gas ({{b_gas_k_mpa}} MPa, {{b_gas_rho}} kg/m3) at porosity 0.2. What compressional velocity does Gassmann predict?",
+    "correct": "{{i_gas_vp}} m/s, with the new bulk modulus and the lighter density",
+    "distractors": [
+     "{{i_gas_vp_rhofixed}} m/s, with the density left at the logged brine value of 2310 kg/m3",
+     "{{i_gas_vp_quartz_kmin}} m/s, with the {{i_kmin_quartz_gpa}} GPa of pure quartz as mineral",
+     "{{i_oil_vp}} m/s, which is the Gassmann result for the live OKIRIKA oil"
+    ],
+    "explanation": "Forward Gassmann gives {{i_gas_ksat_gpa}} GPa, the shear modulus stays {{i_mu_gpa}} GPa and the density falls to {{i_gas_rho}} kg/m3, so vp is {{i_gas_vp}} m/s.",
+    "rests_on": [
+     "i_gas_vp",
+     "i_gas_vp_rhofixed",
+     "i_gas_vp_quartz_kmin",
+     "i_oil_vp"
+    ],
+    "why_wrong": [
+     "density not swapped",
+     "wrong mineral modulus",
+     "different fluid"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 11,
+    "replaces": "302359ffd2cc15f4d8da6fea3339872e",
+    "prompt": "After the OKIRIKA brine to gas substitution, what shear velocity should the gas case carry?",
+    "correct": "{{i_gas_vs}} m/s, above the log because the density fell",
+    "distractors": [
+     "{{i_gas_vs_rhofixed}} m/s, unchanged since shear is blind to the fluid",
+     "{{i_gas_vs_rho_up}} m/s, below the log since the density rose",
+     "{{i_gas_vs_mudrock}} m/s, from the mudrock line on the gas case vp"
+    ],
+    "explanation": "The shear modulus stays {{i_mu_gpa}} GPa and the density falls to {{i_gas_rho}} kg/m3, so vs rises to {{i_gas_vs}} m/s.",
+    "rests_on": [
+     "i_gas_vs",
+     "i_gas_vs_rhofixed",
+     "i_gas_vs_rho_up",
+     "i_gas_vs_mudrock"
+    ],
+    "why_wrong": [
+     "the modulus is blind, the velocity is not",
+     "density bookkeeping backwards",
+     "mudrock line assumes brine"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 13,
+    "replaces": "ddc299d6fe0416a7807e365e224ac6e8",
+    "prompt": "What bulk density does the OKIRIKA sand carry once its pores hold the gas ({{b_gas_rho}} kg/m3) in place of the brine ({{b_brine_rho}} kg/m3)?",
+    "correct": "{{i_gas_rho}} kg/m3, the log less 0.2 times the brine to gas density difference",
+    "distractors": [
+     "{{i_gas_rho_graingas}} kg/m3, treating the logged density as the grain density",
+     "{{i_gas_rho_up}} kg/m3, the log plus 0.2 times the density difference",
+     "2310 kg/m3, since Gassmann changes the moduli and leaves density alone"
+    ],
+    "explanation": "Only the pore fraction changes fluid: 2310 less 0.2 times the difference of {{b_brine_rho}} and {{b_gas_rho}} is {{i_gas_rho}} kg/m3.",
+    "rests_on": [
+     "i_gas_rho",
+     "i_gas_rho_graingas",
+     "i_gas_rho_up"
+    ],
+    "why_wrong": [
+     "the log already holds pore fluid",
+     "sign backwards",
+     "density does change"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 17,
+    "replaces": "e96e52d926e0dc1444e45b7917b26078",
+    "prompt": "By how much does the acoustic impedance of the OKIRIKA sand fall from the logged brine case to full gas?",
+    "correct": "{{i_z_drop_pct}} percent, from {{i_z_brine_e6}} to {{i_z_gas_e6}} million in SI units",
+    "distractors": [
+     "{{i_vp_drop_pct}} percent, the fall in compressional velocity on its own",
+     "{{i_rho_drop_pct}} percent, the fall in bulk density on its own",
+     "{{i_vpvs_drop_pct}} percent, the fall in the ratio of vp to vs"
+    ],
+    "explanation": "Impedance is density times vp, and both fall, so it drops {{i_z_drop_pct}} percent, more than either the {{i_vp_drop_pct}} percent in vp or the {{i_rho_drop_pct}} percent in density.",
+    "rests_on": [
+     "i_z_drop_pct",
+     "i_z_brine_e6",
+     "i_z_gas_e6",
+     "i_vp_drop_pct",
+     "i_rho_drop_pct",
+     "i_vpvs_drop_pct"
+    ],
+    "why_wrong": [
+     "velocity only",
+     "density only",
+     "vp over vs is a different attribute"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 27,
+    "replaces": "bcf85af37d4cf8227092ec6389d9e1ce",
+    "prompt": "If the OKIRIKA pores held the live oil ({{b_oil_k_gpa}} GPa, {{b_oil_rho}} kg/m3) in place of brine, what vp would Gassmann predict?",
+    "correct": "{{i_oil_vp}} m/s, only {{i_oil_gas_sep}} m/s above the full gas case",
+    "distractors": [
+     "{{i_dead_vp}} m/s, which is the result for the gas free oil",
+     "{{i_gas_vp}} m/s, as for gas, since every hydrocarbon softens alike",
+     "3520 m/s, since the oil is too stiff to move the logged velocity"
+    ],
+    "explanation": "The live oil gives {{i_oil_vp}} m/s against {{i_gas_vp}} m/s for gas, a separation of {{i_oil_gas_sep}} m/s, smaller than the {{i_phi_range_ms}} m/s a porosity error of 0.05 can make.",
+    "rests_on": [
+     "i_oil_vp",
+     "i_oil_gas_sep",
+     "i_dead_vp",
+     "i_gas_vp",
+     "i_phi_range_ms"
+    ],
+    "why_wrong": [
+     "dead oil is stiffer than live oil",
+     "oil is stiffer than gas",
+     "oil still softens the rock"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 24,
+    "replaces": "dee5d7e8f6cd4da1c8f510ffe5356a82",
+    "prompt": "In the OKIRIKA sand, what share of the whole brine to gas vp drop has already happened at Sw 0.99?",
+    "correct": "{{i_first_pct_share}} percent, with vp already down to {{i_vp_sw99}} m/s",
+    "distractors": [
+     "About one percent, in proportion to the gas saturation reached",
+     "{{i_sw90_share}} percent, which is the share reached by Sw 0.9",
+     "About half, since vp falls in a straight line with saturation"
+    ],
+    "explanation": "At Sw 0.99 vp is {{i_vp_sw99}} m/s, which is {{i_first_pct_share}} percent of the way from 3520 to the {{i_gas_vp}} m/s full gas case: the first percent of gas does a quarter of the work.",
+    "rests_on": [
+     "i_first_pct_share",
+     "i_vp_sw99",
+     "i_sw90_share",
+     "i_gas_vp"
+    ],
+    "why_wrong": [
+     "the response is not proportional",
+     "that is Sw 0.9",
+     "the curve is not linear"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 32,
+    "replaces": "bfdc79ce957e726e302d923b8bfd5745",
+    "prompt": "Scanning the OKIRIKA sand from full brine to full gas in steps of 0.01, where is vp lowest?",
+    "correct": "At Sw {{i_vpmin_sw}}, {{i_vpmin}} m/s, which is {{i_vpmin_below_gas}} m/s below the full gas case",
+    "distractors": [
+     "At full gas, {{i_gas_vp}} m/s, since vp keeps falling as gas replaces brine",
+     "At Sw 0.99, {{i_vp_sw99}} m/s, since the first percent of gas does the work",
+     "At Sw 0.9, {{i_vp_sw90}} m/s, where the density term first overtakes the modulus"
+    ],
+    "explanation": "Once the fluid modulus has collapsed, more gas only lightens the rock and vp recovers, so the minimum of {{i_vpmin}} m/s sits at Sw {{i_vpmin_sw}}, below the full gas {{i_gas_vp}} m/s.",
+    "rests_on": [
+     "i_vpmin_sw",
+     "i_vpmin",
+     "i_vpmin_below_gas",
+     "i_gas_vp",
+     "i_vp_sw99",
+     "i_vp_sw90"
+    ],
+    "why_wrong": [
+     "vp recovers at high gas saturation",
+     "Sw 0.99 is not the minimum",
+     "Sw 0.9 is not the minimum"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 20,
+    "replaces": "beb2923791a65e6c2fc02e1de6f9eb5e",
+    "prompt": "The OKIRIKA porosity is 0.2 with an uncertainty of 0.05 either way. What range does that put on the full gas vp?",
+    "correct": "{{i_gas_vp_phi_lo}} m/s at 0.15 up to {{i_gas_vp_phi_hi}} m/s at 0.25, a spread of {{i_phi_range_ms}} m/s",
+    "distractors": [
+     "{{i_gas_vp_phi_hi}} m/s at 0.15 down to {{i_gas_vp_phi_lo}} m/s at 0.25, since more pore space holds more gas",
+     "None, since the porosity cancels between inverse and forward Gassmann",
+     "A spread of {{i_oil_gas_sep}} m/s, the same as the separation between oil and gas"
+    ],
+    "explanation": "The dry frame is recovered with the porosity, so a lower porosity gives a softer frame and a lower gas vp: {{i_gas_vp_phi_lo}} m/s at 0.15 and {{i_gas_vp_phi_hi}} m/s at 0.25.",
+    "rests_on": [
+     "i_gas_vp_phi_lo",
+     "i_gas_vp_phi_hi",
+     "i_phi_range_ms",
+     "i_oil_gas_sep"
+    ],
+    "why_wrong": [
+     "direction reversed",
+     "porosity does not cancel",
+     "that is the fluid separation"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 28,
+    "replaces": "c32d5490ce89316734b2070189d680eb",
+    "prompt": "An OKIRIKA interval has vp 3350 m/s, no shear log and a sandstone to shale split of 0.8 and 0.2. What vs does Greenberg-Castagna give?",
+    "correct": "{{i_gc_vs}} m/s, the mean of the arithmetic and harmonic averages",
+    "distractors": [
+     "{{i_mudrock_vs}} m/s, from the Castagna mudrock line",
+     "{{i_gc_sand_vs}} m/s, from the sandstone regression taken alone",
+     "{{i_gc_shale_vs}} m/s, from the shale regression taken alone"
+    ],
+    "explanation": "The sandstone and shale regressions give {{i_gc_sand_vs}} and {{i_gc_shale_vs}} m/s, and averaging their arithmetic and harmonic means at 0.8 and 0.2 gives {{i_gc_vs}} m/s.",
+    "rests_on": [
+     "i_gc_vs",
+     "i_mudrock_vs",
+     "i_gc_sand_vs",
+     "i_gc_shale_vs"
+    ],
+    "why_wrong": [
+     "single mudrock line",
+     "ignores the shale",
+     "ignores the sand"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 37,
+    "replaces": "5184d0bdca2869401a523f5fb4cc5a91",
+    "prompt": "Test the same estimator at the logged OKIRIKA brine point, vp 3520 m/s, where vs was measured at 2050 m/s. What does the test show?",
+    "correct": "{{i_gc_at_log}} m/s, an error of {{i_gc_at_log_err_pct}} percent against the measured shear",
+    "distractors": [
+     "Exactly 2050 m/s, since the regression is fitted to this well",
+     "{{i_mudrock_at_log}} m/s, since the mudrock line is the estimator under test",
+     "{{i_gc_at_gas_vp}} m/s, run on the gas case vp after substitution"
+    ],
+    "explanation": "Greenberg-Castagna at 3520 m/s gives {{i_gc_at_log}} m/s, {{i_gc_at_log_err_pct}} percent against the log. Run on the gas case vp it gives {{i_gc_at_gas_vp}} m/s, {{i_gc_at_gas_err_pct}} percent low, which is why shear is estimated on brine first.",
+    "rests_on": [
+     "i_gc_at_log",
+     "i_gc_at_log_err_pct",
+     "i_mudrock_at_log",
+     "i_gc_at_gas_vp",
+     "i_gc_at_gas_err_pct"
+    ],
+    "why_wrong": [
+     "regression is published, not fitted here",
+     "wrong estimator",
+     "must run on the brine case"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 12,
+    "replaces": "2c1c344745efdf8e8c413bf1c8154840",
+    "prompt": "As a check on the assumed porosity of 0.2, what grain density does the OKIRIKA brine log point imply?",
+    "correct": "{{i_grain_rho}} kg/m3, close to the {{b_frame_rho}} kg/m3 of the mineral mix",
+    "distractors": [
+     "{{i_grain_rho_gas}} kg/m3, taking the gas density as the pore fluid",
+     "{{i_grain_rho_nofluid}} kg/m3, the bulk density over one minus porosity",
+     "{{b_frame_rho}} kg/m3 exactly, since the log must return the mineral density"
+    ],
+    "explanation": "Grain density is 2310 less 0.2 times {{b_brine_rho}}, over 0.8, which is {{i_grain_rho}} kg/m3, within a percent of the {{b_frame_rho}} kg/m3 frame. The porosity is consistent with the rock.",
+    "rests_on": [
+     "i_grain_rho",
+     "i_grain_rho_gas",
+     "i_grain_rho_nofluid",
+     "b_frame_rho"
+    ],
+    "why_wrong": [
+     "log was recorded in brine",
+     "ignores the pore fluid mass",
+     "an independent check need not be exact"
+    ],
+    "answer_index": 1
+   }
+  ],
+  "advanced": [
+   {
+    "ord": 4,
+    "replaces": "bd38f9c5cda89ce6fb6e79252e89758a",
+    "prompt": "Put the OKIRIKA shale (vp 2800 m/s, vs 1560 m/s, 2500 kg/m3) over the brine sand (vp 3520 m/s, vs 2050 m/s and 2310 kg/m3). What is the normal incidence reflection coefficient?",
+    "correct": "{{a_ni_brine}}, from the acoustic impedance contrast",
+    "distractors": [
+     "{{a_ni_brine_flip}}, with the two rocks taken the other way up",
+     "{{a_vp_only_brine}}, from the velocity contrast alone",
+     "{{a_rho_only_brine}}, from the density contrast alone"
+    ],
+    "explanation": "The sand impedance is {{i_z_brine_e6}} million against the shale's lower value, so the coefficient is {{a_ni_brine}}. The density contrast alone is negative, and the velocity wins.",
+    "rests_on": [
+     "a_ni_brine",
+     "a_ni_brine_flip",
+     "a_vp_only_brine",
+     "a_rho_only_brine",
+     "i_z_brine_e6"
+    ],
+    "why_wrong": [
+     "rocks transposed",
+     "ignores density",
+     "ignores velocity"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 36,
+    "replaces": "824b87836ff2bb52f3a3623c7c2632f0",
+    "prompt": "Under the OKIRIKA shale, what happens to the normal incidence reflection when the sand's brine is replaced by gas?",
+    "correct": "It flips sign, from {{a_ni_brine}} for brine to {{a_ni_gas}} for gas",
+    "distractors": [
+     "It keeps its sign and grows, since gas raises the sand's shear velocity",
+     "It stays positive and dims, since gas changes only the sand density",
+     "It goes to zero, since the shale and gas sand impedances match"
+    ],
+    "explanation": "The gas sand impedance of {{i_z_gas_e6}} million falls below the shale's, so the coefficient goes from {{a_ni_brine}} to {{a_ni_gas}}.",
+    "rests_on": [
+     "a_ni_brine",
+     "a_ni_gas",
+     "i_z_gas_e6"
+    ],
+    "why_wrong": [
+     "normal incidence ignores shear",
+     "vp falls as well",
+     "impedances do not match"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 35,
+    "replaces": "ab41edba74cb0d350c730e7735ef546d",
+    "prompt": "What Shuey intercept A and gradient B does the OKIRIKA shale over the brine sand give?",
+    "correct": "A {{a_A_brine}} and B {{a_B_brine}}, from the logged brine sand",
+    "distractors": [
+     "A {{a_A_brine_transposed}} and B {{a_B_brine_transposed}}, rocks transposed",
+     "A {{a_A_gas}} and B {{a_B_gas}}, which belong to the gas twin",
+     "A {{a_A_brine_vponly}} and B {{a_B_brine}}, the intercept from vp alone"
+    ],
+    "explanation": "Shuey on the shale over the brine sand gives A {{a_A_brine}}, within a thousandth of the normal incidence {{a_ni_brine}}, and B {{a_B_brine}}.",
+    "rests_on": [
+     "a_A_brine",
+     "a_B_brine",
+     "a_A_brine_transposed",
+     "a_A_gas",
+     "a_A_brine_vponly"
+    ],
+    "why_wrong": [
+     "transposed",
+     "gas case",
+     "intercept uses density too"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 41,
+    "replaces": "3291d2a97b80a859330a3109aeab0dec",
+    "prompt": "At a class threshold of 0.02, which Rutherford-Williams classes do the OKIRIKA brine and gas cases fall in?",
+    "correct": "Brine class I and gas class II, since the gas intercept sits inside the band",
+    "distractors": [
+     "Brine class I and gas class III, since the intercept changes sign once gas is in",
+     "Brine class II and gas class III, since both intercepts are small",
+     "Both class I, since the gas intercept is too small to count"
+    ],
+    "explanation": "The brine intercept {{a_A_brine}} is above 0.02, class I. The gas intercept {{a_A_gas}} is negative but inside the 0.02 band, so it is class II even though the sign flipped.",
+    "rests_on": [
+     "a_class_brine",
+     "a_class_gas",
+     "a_A_brine",
+     "a_A_gas"
+    ],
+    "why_wrong": [
+     "the band decides, and the sign alone does not",
+     "the brine intercept is well above 0.02",
+     "a negative intercept cannot be class I"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 19,
+    "replaces": "77208a2f8d1f89dbc5e8dddec21d7534",
+    "prompt": "How robust is the OKIRIKA gas class II call to the choice of class threshold?",
+    "correct": "Fragile: its intercept is {{a_gas_A_over_thresh}} of the 0.02 band, and at 0.01 it becomes class III",
+    "distractors": [
+     "Robust: it stays class II at every threshold chosen, since its gradient is negative",
+     "Fragile: at 0.01 it becomes class IV, since its gradient is negative",
+     "Robust: it would only leave class II above a threshold of 0.05"
+    ],
+    "explanation": "The gas intercept {{a_A_gas}} is {{a_gas_A_over_thresh}} of the 0.02 threshold, so a threshold of 0.01 makes it class III. The brine call, at {{a_brine_A_over_thresh}} times the threshold, holds at 0.05.",
+    "rests_on": [
+     "a_gas_A_over_thresh",
+     "a_A_gas",
+     "a_class_gas_t01",
+     "a_brine_A_over_thresh",
+     "a_class_brine_t05"
+    ],
+    "why_wrong": [
+     "the class moves with the threshold",
+     "class IV needs a positive gradient",
+     "a higher threshold keeps it class II"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 28,
+    "replaces": "98bb1cc53c7aa496c170bf7ee06dcd58",
+    "prompt": "Split the OKIRIKA gas case gradient into its vp, density and shear terms. Which one drives it?",
+    "correct": "The shear term, {{a_Bg_vs_term}}, against {{a_Bg_vp_term}} for vp and {{a_Bg_rho_term}} for density",
+    "distractors": [
+     "The density term, since replacing brine with gas lowers the density",
+     "The vp term, since replacing brine with gas lowers vp the most",
+     "All three about equally, each near a third of the total {{a_B_gas}}"
+    ],
+    "explanation": "The three terms sum to {{a_B_gas}}, and the shear term {{a_Bg_vs_term}} is larger than the whole: the gradient is a shear story.",
+    "rests_on": [
+     "a_Bg_vs_term",
+     "a_Bg_vp_term",
+     "a_Bg_rho_term",
+     "a_B_gas"
+    ],
+    "why_wrong": [
+     "density term is positive",
+     "vp term is small and positive",
+     "terms are far from equal"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 9,
+    "replaces": "ce67cfc83f124c2e316af6b76fdb5921",
+    "prompt": "What is the exact Zoeppritz PP reflection coefficient at 30 degrees for the OKIRIKA shale over the gas sand?",
+    "correct": "{{a_z30_gas}}, from the exact solution",
+    "distractors": [
+     "{{a_s3_30_gas}}, the three term Shuey value",
+     "{{a_s2_30_gas}}, the two term Shuey value",
+     "{{a_ni_gas}}, since angle leaves it unchanged"
+    ],
+    "explanation": "The exact solution at 30 degrees is {{a_z30_gas}}; three term Shuey gives {{a_s3_30_gas}} and two term {{a_s2_30_gas}}, so an approximation reported as the coefficient is off in the third decimal.",
+    "rests_on": [
+     "a_z30_gas",
+     "a_s3_30_gas",
+     "a_s2_30_gas",
+     "a_ni_gas"
+    ],
+    "why_wrong": [
+     "approximation",
+     "cruder approximation",
+     "reflection varies with angle"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 39,
+    "replaces": "16c840d8f22b3bd06f20c502a9ca023c",
+    "prompt": "Over 0 to 40 degrees, what is the largest departure of three term Shuey from the exact solution on the OKIRIKA brine case?",
+    "correct": "{{a_maxerr_brine}}, larger than the {{a_maxerr_gas}} of the gas case",
+    "distractors": [
+     "{{a_maxerr_brine_2t}}, the largest departure of the two term form",
+     "Zero, since Shuey is exact at every angle below the critical angle",
+     "{{a_err30_brine}}, the signed departure at 30 degrees"
+    ],
+    "explanation": "The brine case departs by up to {{a_maxerr_brine}}, more than the gas case's {{a_maxerr_gas}}, because its contrasts are larger.",
+    "rests_on": [
+     "a_maxerr_brine",
+     "a_maxerr_gas",
+     "a_maxerr_brine_2t",
+     "a_err30_brine"
+    ],
+    "why_wrong": [
+     "two term form",
+     "Shuey is a linearisation",
+     "one angle, not the maximum"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 26,
+    "replaces": "e1b6bdf3ae7e5004375230531282e07a",
+    "prompt": "Does the OKIRIKA brine case reflection change polarity anywhere from 0 to 40 degrees?",
+    "correct": "No: the exact value is still {{a_z40_brine}} at 40 degrees, and two term Shuey crosses falsely at {{a_cross_2t}}",
+    "distractors": [
+     "Yes, at {{a_cross_2t}} degrees, where the two term Shuey curve reaches zero",
+     "Yes, since a class I reflection with a negative gradient always crosses before reaching 40 degrees",
+     "No, and neither Shuey form crosses either, since both keep the positive intercept"
+    ],
+    "explanation": "The exact coefficient stays positive, {{a_z40_brine}} at 40 degrees. Two term Shuey drops to {{a_s2_40_brine}} there and crosses at {{a_cross_2t}} degrees, a polarity change that is not in the physics.",
+    "rests_on": [
+     "a_z40_brine",
+     "a_cross_2t",
+     "a_s2_40_brine"
+    ],
+    "why_wrong": [
+     "that crossing is an artefact of the two term form",
+     "the curvature term holds it up",
+     "the two term form does cross"
+    ],
+    "answer_index": 3
+   },
+   {
+    "ord": 15,
+    "replaces": "32caa9a502a1eb7c06e5f5b47d02567b",
+    "prompt": "Why is the exact coefficient for the OKIRIKA shale over the brine sand purely real from 0 to 40 degrees?",
+    "correct": "Its critical angle is {{a_crit_brine}} degrees, beyond the recorded range",
+    "distractors": [
+     "Its critical angle is {{a_crit_gas}} degrees, set by the gas sand",
+     "A class I interface returns a real coefficient at any angle at all",
+     "The exact solution is linear in the contrasts, so it never turns complex"
+    ],
+    "explanation": "The critical angle is the arcsine of 2800 over 3520, {{a_crit_brine}} degrees; below it the transmitted wave is real, and the imaginary part stays {{a_maxim_brine}} to 40 degrees.",
+    "rests_on": [
+     "a_crit_brine",
+     "a_crit_gas",
+     "a_maxim_brine"
+    ],
+    "why_wrong": [
+     "that is the gas case",
+     "past critical it goes complex whatever the class",
+     "Zoeppritz is not linear"
+    ],
+    "answer_index": 0
+   },
+   {
+    "ord": 12,
+    "replaces": "a5b7278298036779e38d82fd1c32af58",
+    "prompt": "The OKIRIKA survey is centred on 30 Hz. What tuning thickness does the engine's wedge model report for an equal and opposite pair?",
+    "correct": "{{a_tuning_ms}} ms, against {{a_tuning_theory_ms}} ms from the peak to trough time",
+    "distractors": [
+     "{{a_tuning_period_ms}} ms, one full period of the 30 Hz wavelet",
+     "{{a_tuning_45_ms}} ms, the tuning thickness of a 45 Hz wavelet",
+     "{{a_tuning_kw_ms}} ms, since the Kallweit and Wood rule is what it computes"
+    ],
+    "explanation": "The wedge peak sits at {{a_tuning_ms}} ms on the 1 ms grid, within one sample of the theoretical {{a_tuning_theory_ms}} ms.",
+    "rests_on": [
+     "a_tuning_ms",
+     "a_tuning_theory_ms",
+     "a_tuning_period_ms",
+     "a_tuning_45_ms",
+     "a_tuning_kw_ms"
+    ],
+    "why_wrong": [
+     "full period",
+     "wrong frequency",
+     "the engine peak-picks the wedge"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 32,
+    "replaces": "b4d2d1b7db5bf016131a07d6a902c924",
+    "prompt": "At 30 Hz, what bed thickness in metres is the OKIRIKA gas sand at tuning?",
+    "correct": "{{a_tuning_m_gas}} m, half the two way tuning time at the gas sand vp",
+    "distractors": [
+     "{{a_tuning_m_gas_oneway}} m, taking the tuning time as one way time",
+     "{{a_tuning_m_brine}} m, using the logged brine sand velocity instead",
+     "{{a_tuning_m_shale}} m, using the shale velocity instead"
+    ],
+    "explanation": "{{a_tuning_ms}} ms of two way time at {{i_gas_vp}} m/s is {{a_tuning_m_gas}} m, since the wave crosses the bed twice.",
+    "rests_on": [
+     "a_tuning_m_gas",
+     "a_tuning_m_gas_oneway",
+     "a_tuning_m_brine",
+     "a_tuning_m_shale"
+    ],
+    "why_wrong": [
+     "two way time",
+     "wrong fluid case",
+     "wrong layer"
+    ],
+    "answer_index": 1
+   },
+   {
+    "ord": 5,
+    "replaces": "4f843e6ee2206a85657d3947fee01f3e",
+    "prompt": "The OKIRIKA brine sand's shear comes from Greenberg-Castagna ({{a_vs_est_brine}} m/s) in place of the logged 2050 m/s. What happens to its gradient and class?",
+    "correct": "B moves from {{a_B_brine}} to {{a_B_brine_estvs}}, and the class stays I",
+    "distractors": [
+     "Nothing, since the gradient needs only vp and density",
+     "B moves to {{a_B_brine_estvs}}, and the class becomes IV",
+     "B moves to {{a_B_brine_transposed}}, and its sign reverses"
+    ],
+    "explanation": "Shear enters B through the vs contrast, so the uncalibrated estimate moves B from {{a_B_brine}} to {{a_B_brine_estvs}}. The positive intercept {{a_A_brine}} keeps the class at I.",
+    "rests_on": [
+     "a_B_brine",
+     "a_B_brine_estvs",
+     "a_class_brine_estvs",
+     "a_A_brine"
+    ],
+    "why_wrong": [
+     "gradient is a shear story",
+     "class IV needs a negative intercept",
+     "transposed value"
+    ],
+    "answer_index": 2
+   },
+   {
+    "ord": 3,
+    "replaces": "55cf3f66c045a203736b6b157f6518af",
+    "prompt": "At 30 Hz, how does the peak amplitude of an OKIRIKA wedge at tuning compare with the same pair fully separated?",
+    "correct": "About {{a_tune_amp_ratio}} times brighter, which a map could misread as fluid",
+    "distractors": [
+     "The same, since tuning moves the timing of the peak and leaves its size",
+     "About {{a_tune_amp_ratio}} times dimmer, since the two reflections cancel",
+     "Exactly twice as bright, since two reflections add in phase at tuning"
+    ],
+    "explanation": "The engine's tuning curve peaks at {{a_tuning_ms}} ms at {{a_tune_amp_ratio}} times the isolated amplitude, so a thin bed can brighten without any change of fluid.",
+    "rests_on": [
+     "a_tune_amp_ratio",
+     "a_tuning_ms"
+    ],
+    "why_wrong": [
+     "amplitude changes",
+     "constructive interference",
+     "not full in-phase addition"
+    ],
+    "answer_index": 0
+   }
+  ]
+ }
+}
