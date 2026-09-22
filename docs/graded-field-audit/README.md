@@ -302,6 +302,34 @@ W5 re-cases or strips them with the rest of section 3.
 
 Without `--wave w1`, the same state is red. The round-off dry run, which runs before W1, is unaffected.
 
+## W2 (publish inputs in prompts and lessons), 2026-09-22
+
+The second wave of [FOLLOW-ON-PROGRAMME.md](FOLLOW-ON-PROGRAMME.md): every section 1 row routed (a). **No key, expected value or tolerance moves**, so nobody is re-scored and no file carries the attempts guard.
+
+| Course / tier | What is now published | Where |
+|---|---|---|
+| integrity int, adv | the D1 survey, both annuli row by row, the displacement case, g and the psi conversion; the five plugs, three geometries, zones and annular cement. The false field 6 sentence (the takeoff sums designed plugs only) and the single "35 percent excess" are corrected | prompt |
+| wellcost beg, int, adv | the seventeen MERLIN A-12 activities; the ten line items and the cost per metre inputs; the items with the activity each lump is booked at and the five declared risk ranges | prompt |
+| nodal int, adv | `bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2`, the 49 rates from one thousandth of the open flow, the inflow; the 900-point grid brackets exact crossings | prompt |
+| gaswell beg | the Sutton pseudo-criticals and the Dranchuk and Abou-Kassem equation with its eleven constants (read from the vendored engine). z at the wellhead IS field 1, so it is not printed | prompt |
+| gaswell int, adv | z at the four stations below the wellhead and at the plunger conditions, ten decimals (vendored `naturalGasZ`); the "only two values reachable by hand" sentence is corrected | prompt |
+| cementing adv | E x I = 12266792.85346564 N m2 (vendored `stringProperties`) | prompt |
+| stimulation beg | the frac and reservoir pressures at 2033.000 m TVD, the acid viscosity, the mD conversion | prompt |
+| separation adv | the ADANGA yard as offsets from the datum, the Mapper scale factors and haversine radius; the fraction asked to six decimals (it failed at "four or better") | prompt |
+| producedwater beg | the crude chain with its 15.56 C reference | prompt and beginner m02 l04 |
+| linesizing int | the Weymouth, Panhandle B and General Flow forms, base conditions, elevation group, Colebrook and the loop | intermediate m02 l01, l02, l03 |
+| heattransfer int | the shells-in-series conversion and its R = 1 limit | intermediate m02 l01 |
+
+**How the numbers are made.** `w2/build_specs.mjs` reads each capstone's own fixture (the `/root/dr-wip-*` generator, the committed course-wave generator or the course lab's capstone block) and the vendored engines, renders the prompt and lesson text from those values, and refuses to write a spec (`w2/<course>.json`) whose published inputs do not reproduce the live key through the engines (`w2/reproduce.mjs`). Where it prints an equation (DAK, the crude chain, the transmission forms, the shells-in-series conversion) it also evaluates the printed text independently and refuses if that misses the key. `w2_capstones.py` turns the prompt edits into `migrations/20261025a_w2_<course>.sql` (8 files, 14 prompts), guarded like W1: each row's prompt md5 and exact `fields` jsonb, or its W2 form; W1's post-state checked first; re-run writes nothing. Owner script `/root/w2-apply/apply.sh`.
+
+**Gates.** `src/lib/w2PublishedInputs.test.js` (CI) re-runs the engines on every committed spec, checks every published number is in the prompt the migration writes and every lesson insertion is in its file, and carries two negative controls (a perturbed input breaks the reproduction on every tier; a number dropped from a prompt is caught). `audit.py` gains the `no_route` flag (source `unobtainable`; class `none` with it is an error, a new selftest control), and `--post --wave w2` requires each W2 prompt to carry its published text (a selftest control and the dryrun both prove the pre-W2 state is red).
+
+**What moves class.** 65 fields: 63 from `unobtainable` to `hand-calc` class `none` (gaswell 16, wellcost 15, integrity 12, nodal 10, linesizing 4, cementing 2, separation 2, stimulation 1, heattransfer 1), plus producedwater beginner `ogulagha_oil_density_kgm3` (redesign) and linesizing `brass_outlet_pressure_psia` (the Weymouth inversion is now a hand step). `no_route` falls from 185 to 122.
+
+**Left for later waves.** wellcost advanced `mc_cost_p10_usd`, `mc_cost_p90_usd`, `mc_days_p50`: the ranges are published, but the seeded run is the Suite's canonical sampler; W3 makes it readable (case file, seed, `RiskTab.jsx` at full precision). nodal intermediate `liftgas_valve_pwf_psia`, `liftgas_mid_pmf_psia`: a 20-step Cullender and Smith march with z at trial pressures, which the (a) route does not reach; W4 panel mode. The Facility Layout Mapper print (`SpacingPanel.jsx:179`) is W3.
+
+Lessons reach learners with the next NextGen zip: linesizing intermediate m02 l01, l02, l03; heattransfer intermediate m02 l01; producedwater beginner m02 l04.
+
 ## Regrade impact
 
 The scratch replay has 0 capstone attempts. Production held 9 at the baseline (the cleanslate record). When the lesson-leak recut was written, the 7 that existed then were all welldata/beginner. `apply.sh attempts --prod` lists them read-only.
