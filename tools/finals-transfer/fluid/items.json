@@ -803,7 +803,7 @@
     "ord": 17,
     "replaces": "cad813f5385de3e23a1116037bd91aea",
     "prompt": "The ISEKI-2 regression against all four measurements converges with fTc {{a_ftc}}, fPc {{a_fpc}}, kC1 and sPlus moved {{a_kc1_move_pct}} and {{a_splus_move_pct}} percent from their starts, with no knob on a bound. What should a reader conclude?",
-    "correct": "Both multipliers within three percent of one, no bound hit, and kC1 and sPlus each moved over a tenth",
+    "correct": "Both multipliers within three percent of one, no bound hit, and sPlus moved far more than kC1 did",
     "distractors": [
      "The fit wanted to leave its bounds, since a multiplier below one means the correlation failed",
      "The criticals were driven to their limits, so the pseudo-component is now a different substance",
@@ -814,7 +814,7 @@
      "The multipliers sit within a few percent of one.",
      "The fit trades targets and did not fit exactly; the knob moves are information."
     ],
-    "explanation": "fTc and fPc stay within three percent of one, no bound is hit, kC1 moves {{a_kc1_move_pct}} percent and sPlus {{a_splus_move_pct}} percent: the correlated interaction parameter and volume shift carried the fit.",
+    "explanation": "fTc and fPc stay within three percent of one, no bound is hit, kC1 moves {{a_kc1_move_pct}} percent and sPlus {{a_splus_move_pct}} percent: the volume shift carried the fit and the interaction parameter barely moved.",
     "rests_on": [
      "a_ftc",
      "a_fpc",

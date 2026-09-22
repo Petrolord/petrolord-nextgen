@@ -2,7 +2,7 @@
   "$comment": "Vendoring contract for packages/engines. Checked by tools/check-vendored-engines.mjs; see that file for the model. Every deviation from canonical is enumerated below with a reason, and every differing or extra path is pinned to the blob currently vendored, so a second drift on an already-known path still fails.",
   "canonical": {
     "repo": "git@github.com:Petrolord/petrolord-engines.git",
-    "commit": "e972ae755ed8599031e430968b95853a9e163f86",
+    "commit": "54cf7c48cc7fcd03d1f1e99dbcdfd0fbb434724d",
     "manifest": "VENDOR.manifest"
   },
   "floors": {
@@ -22,11 +22,7 @@
       "reason": "NextGen teaches no stratigraphy course; the domain is deliberately not vendored (audit Group 0). The single exception is engines/stratigraphy/lithology.js, which IS vendored because engines/welldata/lasBlocks.js imports it."
     }
   ],
-  "localOnly": [
-    "__tests__/sim.ekene.test.js",
-    "__tests__/waterflood.ekene.test.js",
-    "test-data/ekene-dynamic/sim.json"
-  ],
+  "localOnly": [],
   "knownTestFailures": {
     "$comment": "Suites that already fail against the vendored engines, from before this guard existed. tools/run-vendored-engine-tests.mjs refuses any NEW failing suite and refuses a suite listed here that now passes, so the list can only shrink.",
     "suites": [
@@ -43,6 +39,12 @@
     ]
   },
   "knownDeviations": [
+    {
+      "path": "__tests__/drilling.verticalpoint.test.js",
+      "kind": "missing",
+      "group": "5-unaudited-difference",
+      "reason": "Canonical test for the engines #233 vertical-hold and Point methods of engines/drilling/profileDesign.js. NextGen's profileDesign.js is the older unaudited revision (see its own entry), so this suite would fail against it; it comes in with that file's re-vendor wave, which needs its own welldesign digest rebuild."
+    },
     {
       "path": "__tests__/stratigraphy.agedepth.test.js",
       "kind": "missing",
@@ -423,12 +425,6 @@
     },
     {
       "path": "__tests__/fluid.flash.test.js",
-      "kind": "missing",
-      "group": "1-test-layer-gap",
-      "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
-    },
-    {
-      "path": "__tests__/fluid.labTune.test.js",
       "kind": "missing",
       "group": "1-test-layer-gap",
       "reason": "The engine beside it is vendored but this canonical test, golden or oracle was never pulled. Harmless today and reachable by a test-only pull; it is why 24 vendored tests could fail unnoticed."
@@ -1345,13 +1341,6 @@
       "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
     },
     {
-      "path": "test-data/ekene-dynamic/waterflood.json",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "531ebbddb8c22d0324e92619ba0954feae3bf9d7",
-      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
-    },
-    {
       "path": "test-data/mbal/ahmed-ex-11-1-combination.json",
       "kind": "differing",
       "group": "6-test-layer-drift",
@@ -1441,13 +1430,6 @@
       "group": "6-test-layer-drift",
       "vendoredSha": "191bbdce2d9189a881c096d3c4f48834de242b18",
       "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
-    },
-    {
-      "path": "tools/ekene-dynamic/generate.mjs",
-      "kind": "differing",
-      "group": "6-test-layer-drift",
-      "vendoredSha": "7d8f8d3460c2c826783d77bc2c8fe174e2ae29cc",
-      "reason": "Validation tooling vendored at a different revision from canonical."
     },
     {
       "path": "tools/validation/drilling/oracle_completion.py",
@@ -1553,27 +1535,6 @@
       "group": "7-vendor-readme",
       "vendoredSha": "aa51c0243e29f73ab6c47f70016dd248d6ba4fe6",
       "reason": "The vendored README carries NextGen's own vendoring note rather than the canonical package README. Cosmetic and deliberate."
-    },
-    {
-      "path": "__tests__/sim.ekene.test.js",
-      "kind": "extra",
-      "group": "local-only",
-      "vendoredSha": "07c7b1702ac088f849737b8e32982b0254264f6d",
-      "reason": "Authored in NextGen and never upstreamed to the engines repo. A whole-tree subtree pull would delete it, which is how the Suite lost 24 files on 2026-09-14."
-    },
-    {
-      "path": "__tests__/waterflood.ekene.test.js",
-      "kind": "extra",
-      "group": "local-only",
-      "vendoredSha": "5e4a18db7a0cfb1e3534b1f6644cd30dc8576fdb",
-      "reason": "Authored in NextGen and never upstreamed to the engines repo. A whole-tree subtree pull would delete it, which is how the Suite lost 24 files on 2026-09-14."
-    },
-    {
-      "path": "test-data/ekene-dynamic/sim.json",
-      "kind": "extra",
-      "group": "local-only",
-      "vendoredSha": "e54c1b25a05e2fc5102c020a44ea2957688e7b66",
-      "reason": "Authored in NextGen and never upstreamed to the engines repo. A whole-tree subtree pull would delete it, which is how the Suite lost 24 files on 2026-09-14."
     }
   ]
 }

@@ -33,7 +33,7 @@ It is not a complete decoupling, because stock tank gravity depends on WHAT ends
 
 ## Multipliers against absolutes
 
-fTc and fPc are multipliers because the characterized values are meaningful starting points. A multiplier of 0.996 says the correlation was nearly right, which is a statement a reader can evaluate.
+fTc and fPc are multipliers because the characterized values are meaningful starting points. A multiplier of 0.971 says the correlation was within three percent, which is a statement a reader can evaluate.
 
 kC1 and sPlus are absolute because their correlated starting values are much weaker. The binary interaction parameter for a pseudo-component pair is barely constrained at all, and the volume shift is being applied outside its range. For those, the starting value is a guess and the tuned value is the answer.
 
@@ -45,12 +45,12 @@ The regression converges to:
 
 | knob | value |
 |---|---|
-| fTc | 0.9963403431519178 |
-| fPc | 0.9827953945642255 |
-| kC1 | 0.050325447877585576 |
-| sPlus | 0.12266364195926757 |
+| fTc | 0.9711485523702996 |
+| fPc | 0.9689309282614434 |
+| kC1 | 0.07351203368811994 |
+| sPlus | 0.11614988900654023 |
 
-The two multipliers barely move, which says the Kesler-Lee criticals were close. The volume shift moves from 0.1539 to 0.1227, about a fifth of its value, which is the correction the nine API bias needed.
+The two multipliers move by about three percent, which says the Kesler-Lee criticals were close. The volume shift moves from 0.1539 to 0.1161, about a quarter of its value, which is the correction the nine API bias needed. The binary interaction parameter rises from 0.0643 to 0.0735.
 
 No knob hits a bound.
 
@@ -58,7 +58,7 @@ No knob hits a bound.
 
 They are a report on the characterization, not just a means to an end.
 
-Critical properties within half a percent and two percent of their correlated values say the characterization chain worked. A volume shift that had to move twenty percent says the volume shift correlation did not.
+Critical properties within three percent of their correlated values say the characterization chain worked. A volume shift that had to move twenty five percent says the volume shift correlation did not.
 
 That is exactly what the Professional tier predicted from the mechanisms, and seeing the regression confirm it independently is worth more than either statement alone.
 
