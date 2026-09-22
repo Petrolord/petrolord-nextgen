@@ -1,0 +1,146 @@
+[
+ {
+  "tier": "beginner",
+  "key": "umudi2_shift_m",
+  "label": "Umudi-2: flattening shift",
+  "unit": "m",
+  "expected": -33.09999999999991,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "umudi3_sand_thickness_m",
+  "label": "Umudi-3: SAND zone thickness",
+  "unit": "m",
+  "expected": 29.59999999999991,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "umudi4_base_sand_displayed_m",
+  "label": "Umudi-4: BASE_SAND displayed depth (flattened)",
+  "unit": "m",
+  "expected": 1546.5,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "umudi_sand_relief_m",
+  "label": "TOP_SAND structural relief across the section",
+  "unit": "m",
+  "expected": 57.299999999999955,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "umudi3_top_b_displayed_base_1575_m",
+  "label": "Umudi-3: TOP_B displayed depth, flattened on BASE_SAND at 1575 m",
+  "unit": "m",
+  "expected": 1634.6,
+  "tol": 0.005
+ },
+ {
+  "tier": "beginner",
+  "key": "umudi1_top_b_displayed_m",
+  "label": "Umudi-1: TOP_B displayed depth (flattened)",
+  "unit": "m",
+  "expected": 1611.6000000000001,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "umudi4_shift_m",
+  "label": "Umudi-4: flattening shift",
+  "unit": "m",
+  "expected": -60.299999999999955,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "umudi2_topsand_displayed_m",
+  "label": "Umudi-2: TOP_SAND displayed depth",
+  "unit": "m",
+  "expected": 1510.5,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "umudi4_a_to_sand_m",
+  "label": "Umudi-4: TOP_A to TOP_SAND interval",
+  "unit": "m",
+  "expected": 59.40000000000009,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "umudi_growth_range_m",
+  "label": "A-to-SAND growth range (max minus min)",
+  "unit": "m",
+  "expected": 16.90000000000009,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "umudi_shallowest_displayed_sand_1495_m",
+  "label": "Shallowest displayed depth, flattened on TOP_SAND at 1495 m",
+  "unit": "m",
+  "expected": 1435.6,
+  "tol": 0.005
+ },
+ {
+  "tier": "intermediate",
+  "key": "umudi_displayed_span_m",
+  "label": "Displayed depth span of the section",
+  "unit": "m",
+  "expected": 147.60000000000014,
+  "tol": 0.005
+ },
+ {
+  "tier": "advanced",
+  "key": "umudi_a_to_b_mean",
+  "label": "Mean TOP_A to TOP_B interval",
+  "unit": "m",
+  "expected": 138.4333333333333,
+  "tol": 0.005
+ },
+ {
+  "tier": "advanced",
+  "key": "umudi_sand_to_b_mean",
+  "label": "Mean TOP_SAND to TOP_B interval",
+  "unit": "m",
+  "expected": 92.63333333333337,
+  "tol": 0.005
+ },
+ {
+  "tier": "advanced",
+  "key": "umudi4_topb_layercake",
+  "label": "Umudi-4 TOP_B, layer-cake estimate",
+  "unit": "m",
+  "expected": 1658.7333333333333,
+  "tol": 0.005
+ },
+ {
+  "tier": "advanced",
+  "key": "umudi4_topb_from_sand",
+  "label": "Umudi-4 TOP_B, from TOP_SAND",
+  "unit": "m",
+  "expected": 1672.3333333333335,
+  "tol": 0.005
+ },
+ {
+  "tier": "advanced",
+  "key": "umudi_prediction_spread",
+  "label": "Spread between the two estimates",
+  "unit": "m",
+  "expected": 13.600000000000136,
+  "tol": 0.005
+ },
+ {
+  "tier": "advanced",
+  "key": "umudi_topb_relief",
+  "label": "TOP_B structural relief where it is drilled",
+  "unit": "m",
+  "expected": 38.600000000000136,
+  "tol": 0.005
+ }
+]

@@ -28,7 +28,7 @@ That is a deliberate design choice, and it is the right one. Display code should
 
 ## Worked example: the SAND zone in two views
 
-Take the capstone flattened view, where TOP_SAND is hung on a datum of 1500. In that view the SAND span for Ekene-1 comes back as top 1500, base 1532. For Ekene-4 it comes back as top 1500, base 1525. Both wells start their sand at exactly 1500 because that is what flattening on TOP_SAND does.
+Take the teaching flattened view, where TOP_SAND is hung on a datum of 1500. In that view the SAND span for Ekene-1 comes back as top 1500, base 1532. For Ekene-4 it comes back as top 1500, base 1525. Both wells start their sand at exactly 1500 because that is what flattening on TOP_SAND does.
 
 Now switch the same section to the structural view, where every shift is zero and displayed depth equals measured depth. The same two zones report as 1548 to 1580 for Ekene-1 and 1590 to 1615 for Ekene-4. Nothing about the wells changed. Only the view did.
 
@@ -38,6 +38,6 @@ The span moves with the view. The thickness does not. That single sentence is th
 
 ## Exercise
 
-Using the structural depths for Ekene-2, TOP_SAND at 1565 and BASE_SAND at 1601, write down the SAND span the engine would return in the structural view, then write down what it would return in the capstone flattened view where Ekene-2 carries a shift of -65. Then state what the engine returns for a hypothetical well that has TOP_SAND picked but no BASE_SAND.
+Using the structural depths for Ekene-2, TOP_SAND at 1565 and BASE_SAND at 1601, write down the SAND span the engine would return in the structural view, then write down what it would return in the teaching flattened view where Ekene-2 carries a shift of -65. Then state what the engine returns for a hypothetical well that has TOP_SAND picked but no BASE_SAND.
 
 Self-check: structural span is top 1565, base 1601. Flattened span is top 1500, base 1536, since 1565 minus 65 is 1500 and 1601 minus 65 is 1536. For the well missing BASE_SAND the engine returns null, and that well shows no SAND fill at all.

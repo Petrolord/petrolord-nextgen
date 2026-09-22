@@ -22,7 +22,7 @@ That is the reading that matters for trapping and fluid contacts. In the structu
 
 ## The flattened view: the datum line goes flat
 
-Now hang the section on TOP_SAND at a datum of 1500, which is the capstone view. The TOP_SAND correlation line becomes dead flat, every well at exactly 1500, because that is precisely what the shifts were computed to achieve. It carries no information at all. A flat datum line is a construction, never an observation, and reading structure off it is the single most common misuse of a flattened section.
+Now hang the section on TOP_SAND at a datum of 1500, which is the teaching view. The TOP_SAND correlation line becomes dead flat, every well at exactly 1500, because that is precisely what the shifts were computed to achieve. It carries no information at all. A flat datum line is a construction, never an observation, and reading structure off it is the single most common misuse of a flattened section.
 
 The other lines are where the value is. They no longer show structure. They show geometry relative to the datum surface, which is close to what the layers looked like when the datum was deposited.
 
@@ -30,7 +30,7 @@ TOP_A in the flattened view sits at 1452, 1447, 1454 and 1440 across wells 1 to 
 
 ## BASE_SAND flattened: the thickness story made visual
 
-The most useful line in the capstone view is BASE_SAND. Flattened, it sits at 1532, 1536, 1529 and 1525 across wells 1 to 4.
+The most useful line in the teaching view is BASE_SAND. Flattened, it sits at 1532, 1536, 1529 and 1525 across wells 1 to 4.
 
 Because TOP_SAND is pinned at 1500 everywhere, each of those numbers minus 1500 is exactly that well's gross SAND thickness: 32, 36, 29 and 25 m. The line is the thickness plot. You do not need to compute anything to read the trend, you only need to look at which way the line bends.
 

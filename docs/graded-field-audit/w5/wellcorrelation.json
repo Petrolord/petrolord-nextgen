@@ -1,0 +1,329 @@
+{
+ "course": "wellcorrelation",
+ "wave": "w5a",
+ "migration": "20261028a_w5_wellcorrelation.sql",
+ "fields_file": "tools/course-waves/w5/wellcorrelation/fields.json",
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "title": "Correlate the UMUDI section",
+   "dataset": "correlation/UMUDI section (W5 re-case; every pick is stated in the brief)",
+   "why": "The walkthrough and the module lessons printed the graded values and the section explorer opened on the capstone section (W1 labelled the tier open book, in part). The capstone moves to the UMUDI section, picks to 0.1 m, typed into the section explorer. W1's TOP_B reading on a second datum is carried on the new case.",
+   "prompt": "Correlate the UMUDI section. Its wells, as name, TOP_A, TOP_SAND, BASE_SAND, TOP_B in MD (one per line in the panels' Type a section box, a dash where the well stops above a top): Umudi-1, 1487.4, 1531.8, 1566.3, 1623.4; Umudi-2, 1502.6, 1553.1, 1587.9, 1650.2; Umudi-3, 1479.9, 1522.4, 1552.0, 1611.6; Umudi-4, 1520.3, 1579.7, 1606.2, -. Flatten the section on TOP_SAND at a 1520 m datum and read the section explorer (it opens on the Ekene wells, which are the teaching case): report Umudi-2's flattening shift, Umudi-3's SAND zone thickness, Umudi-4's BASE_SAND displayed depth, the structural relief on TOP_SAND, Umudi-1's TOP_B displayed depth, and Umudi-3's TOP_B displayed depth once the section is re-flattened on BASE_SAND at a 1575 m datum.",
+   "rekey": [
+    "w2_shift_m",
+    "w3_sand_thickness_m",
+    "w4_base_sand_displayed_m",
+    "sand_relief_m",
+    "w3_top_b_displayed_base_1560_m",
+    "w1_top_b_displayed_m"
+   ],
+   "annot": {
+    "umudi2_shift_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/SectionExplorer.jsx (table, Shift)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/SectionExplorer.jsx (table, Shift)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section on the TOP_SAND 1520 datum; prints 0.1 m against tol 0.005. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi3_sand_thickness_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/SectionExplorer.jsx (table, TOP_SAND to BASE_SAND)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/SectionExplorer.jsx (table, TOP_SAND to BASE_SAND)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section; prints 0.1 m. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi4_base_sand_displayed_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/SectionExplorer.jsx (table, BASE_SAND)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/SectionExplorer.jsx (table, BASE_SAND)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section flattened at 1520; prints 0.1 m. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi_sand_relief_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/SectionExplorer.jsx (Tile TOP_SAND structural relief)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/SectionExplorer.jsx (Tile TOP_SAND structural relief)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section; prints 0.1 m. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi3_top_b_displayed_base_1575_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/SectionExplorer.jsx (table, TOP_B)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/SectionExplorer.jsx (table, TOP_B)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section re-flattened on BASE_SAND at 1575; prints 0.1 m. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi1_top_b_displayed_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/SectionExplorer.jsx (table, TOP_B)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/SectionExplorer.jsx (table, TOP_B)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section flattened at 1520; prints 0.1 m. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "A",
+   "title": "Growth analysis of the UMUDI section",
+   "dataset": "correlation/UMUDI section (W5 re-case; every pick is stated in the brief)",
+   "why": "The walkthrough and the growth lessons printed the graded values and the flatten explorer opened on the capstone datum (W1 labelled the tier open book, in part). The capstone moves to the UMUDI section, picks to 0.1 m, with datums of its own. W1's shallowest-displayed reading on a second datum is carried on the new case.",
+   "prompt": "Flatten the UMUDI section on TOP_A at a 1460 m datum and study the A-to-SAND interval. Its wells, as name, TOP_A, TOP_SAND, BASE_SAND, TOP_B in MD (one per line in the panels' Type a section box, a dash where the well stops above a top): Umudi-1, 1487.4, 1531.8, 1566.3, 1623.4; Umudi-2, 1502.6, 1553.1, 1587.9, 1650.2; Umudi-3, 1479.9, 1522.4, 1552.0, 1611.6; Umudi-4, 1520.3, 1579.7, 1606.2, -. Type the section into the flatten explorer (it opens on the Ekene wells, which are the teaching case) and report Umudi-4's flattening shift, Umudi-2's displayed TOP_SAND, Umudi-4's TOP_A to TOP_SAND interval, the growth range across the section, the shallowest displayed depth once the section is re-flattened on TOP_SAND at a 1495 m datum, and the displayed depth span of the section back on the TOP_A datum.",
+   "rekey": [
+    "w4_shift_m",
+    "w2_topsand_displayed_m",
+    "a_to_sand_w4_m",
+    "growth_range_m",
+    "shallowest_displayed_sand_1480_m",
+    "displayed_span_m"
+   ],
+   "annot": {
+    "umudi4_shift_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section on the TOP_A 1460 datum; prints 0.1 m against tol 0.005. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi2_topsand_displayed_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section flattened at 1460; prints 0.1 m. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi4_a_to_sand_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section; prints 0.1 m. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi_growth_range_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx (Tile A to SAND growth range)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx (Tile A to SAND growth range)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section; prints 0.1 m. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi_shallowest_displayed_sand_1495_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx (Tile Shallowest displayed)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx (Tile Shallowest displayed)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section re-flattened on TOP_SAND at 1495; prints 0.1 m. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi_displayed_span_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx (Tile Displayed span)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/FlattenExplorer.jsx (Tile Displayed span)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section on the TOP_A 1460 datum; prints 0.1 m. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "advanced": {
+   "pick": "A",
+   "title": "Predict the missing TOP_B in Umudi-4",
+   "dataset": "correlation/UMUDI section (W5 re-case; every pick is stated in the brief)",
+   "why": "Every field leaked: the walkthrough and the prediction lessons printed them and the prediction explorer opened on the capstone section. The capstone moves to the UMUDI section, picks to 0.1 m, typed into the prediction explorer.",
+   "prompt": "Umudi-4 reached TD above TOP_B. Its wells, as name, TOP_A, TOP_SAND, BASE_SAND, TOP_B in MD (one per line in the panels' Type a section box, a dash where the well stops above a top): Umudi-1, 1487.4, 1531.8, 1566.3, 1623.4; Umudi-2, 1502.6, 1553.1, 1587.9, 1650.2; Umudi-3, 1479.9, 1522.4, 1552.0, 1611.6; Umudi-4, 1520.3, 1579.7, 1606.2, -. Predict the missing pick two ways from the three wells that carry it: project the mean TOP_A to TOP_B interval down from TOP_A (the layer-cake estimate), and the mean TOP_SAND to TOP_B interval down from TOP_SAND. Type the section into the prediction explorer (it opens on the Ekene wells, which are the teaching case) and report both predictions, their spread (the growth uncertainty), the two mean intervals, and the structural relief of TOP_B where it is drilled.",
+   "rekey": [
+    "a_to_b_mean",
+    "sand_to_b_mean",
+    "w4_topb_layercake",
+    "w4_topb_from_sand",
+    "prediction_spread",
+    "topb_relief"
+   ],
+   "annot": {
+    "umudi_a_to_b_mean": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/PredictionExplorer.jsx (Tile Mean TOP_A to TOP_B)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/PredictionExplorer.jsx (Tile Mean TOP_A to TOP_B)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section; mean of three intervals, prints 2 dp (miss under 0.0034) against tol 0.005. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi_sand_to_b_mean": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/PredictionExplorer.jsx (Tile Mean TOP_SAND to TOP_B)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/PredictionExplorer.jsx (Tile Mean TOP_SAND to TOP_B)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section; prints 2 dp against tol 0.005. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi4_topb_layercake": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/PredictionExplorer.jsx (Tile Layer-cake estimate)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/PredictionExplorer.jsx (Tile Layer-cake estimate)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section; prints 2 dp against tol 0.005. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi4_topb_from_sand": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/PredictionExplorer.jsx (Tile From TOP_SAND estimate)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/PredictionExplorer.jsx (Tile From TOP_SAND estimate)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section; prints 2 dp against tol 0.005. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi_prediction_spread": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/PredictionExplorer.jsx (Tile Spread between them)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/PredictionExplorer.jsx (Tile Spread between them)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section; prints 2 dp against tol 0.005. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "umudi_topb_relief": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/wellcorrelation/PredictionExplorer.jsx (Tile TOP_B structural relief)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/wellcorrelation/PredictionExplorer.jsx (Tile TOP_B structural relief)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed section; prints 2 dp against tol 0.005. Also a one-line subtraction of the stated picks (hand-calc).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  }
+ }
+}

@@ -4,7 +4,7 @@ You have the anchor and you have the borrowed interval, so the prediction is one
 
 $$1590 + 92 = 1682$$
 
-The predicted TOP_B in Ekene-4 is 1682 m. It is one of the six graded readings in this tier, to a tolerance of 0.01 m.
+The predicted TOP_B in Ekene-4 is 1682 m. It is one of the six readings this tier reports.
 
 ## The same move on a different anchor
 

@@ -6,13 +6,13 @@ True measured depth is a property of the wellbore. It is what the logging tool r
 
 ## The two numbers, side by side
 
-Under the capstone datum, TOP_SAND at 1500 m, Ekene-1's shift is $-48$. Its TOP_B sits at a true 1640 m and therefore displays at $1640 - 48 = 1592$ m. That 1592 is one of the six graded capstone numbers, and the pair is the point: 1640 is where the surface is, 1592 is where it draws. Similarly, Ekene-4's BASE_SAND is truly at 1615 m and displays at 1525 m under a shift of $-90$.
+Under the teaching datum, TOP_SAND at 1500 m, Ekene-1's shift is $-48$. Its TOP_B sits at a true 1640 m and therefore displays at $1640 - 48 = 1592$ m. The pair is the point: 1640 is where the surface is, 1592 is where it draws. Similarly, Ekene-4's BASE_SAND is truly at 1615 m and displays at 1525 m under a shift of $-90$.
 
 Neither pair of numbers is more correct than the other. They answer different questions. Confusing them is what causes trouble.
 
 ## The full displayed picture
 
-Here is the whole Ekene section under the capstone datum. True depths on the left of each pair, displayed on the right.
+Here is the whole Ekene section under the teaching datum. True depths on the left of each pair, displayed on the right.
 
 | Well | Shift | TOP_A | TOP_SAND | BASE_SAND | TOP_B |
 | --- | --- | --- | --- | --- | --- |
@@ -31,7 +31,7 @@ Read down the displayed TOP_B column and you get the payoff of the whole exercis
 
 **Never hand a displayed depth to a driller.** Or to a completion engineer, a perforation design, a casing programme, or a volumetric calculation. Anything that touches the physical well takes true measured depth. A displayed depth in an operational document is a real and expensive error, and 1525 m looks just as much like a depth as 1615 m does.
 
-**Always state the datum alongside any flattened reading.** A displayed depth without its datum is meaningless, because the same surface displays at different numbers under different datums. Ekene-1's TOP_SAND displays at 1500 m under the capstone datum and at 1498 m under the TOP_A datum. The number alone cannot tell you which view produced it.
+**Always state the datum alongside any flattened reading.** A displayed depth without its datum is meaningless, because the same surface displays at different numbers under different datums. Ekene-1's TOP_SAND displays at 1500 m under the teaching datum and at 1498 m under the TOP_A datum. The number alone cannot tell you which view produced it.
 
 ## The section range moves too
 
@@ -45,6 +45,6 @@ Try it yourself: the panel below draws the Ekene section from the same engine, w
 
 ## Exercise
 
-Under the capstone datum, Ekene-2's TOP_A displays at 1447 m. Give its true depth, then give the displayed depth of the same surface under the TOP_A datum at 1450 m, and say in one sentence why the two displayed numbers differ.
+Under the teaching datum, Ekene-2's TOP_A displays at 1447 m. Give its true depth, then give the displayed depth of the same surface under the TOP_A datum at 1450 m, and say in one sentence why the two displayed numbers differ.
 
 Self-check: the true depth is $1447 + 65 = 1512$ m. Under the TOP_A datum, Ekene-2's shift is $1450 - 1512 = -62$, so TOP_A displays at $1512 - 62 = 1450$ m, the datum, by construction. They differ because the displayed depth is a property of the chosen datum and not of the well, while the true 1512 m is the same in both views.

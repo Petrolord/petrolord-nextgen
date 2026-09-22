@@ -4,7 +4,7 @@ The growth range is the maximum interval across the section minus the minimum in
 
 $$60 - 46 = 14$$
 
-so the growth range is 14 m. It is one of the six graded readings, to a tolerance of 0.01 m. This lesson gets the number, then spends the rest of its length on what the number carries and what it does not, because a range is a summary and every summary throws something away.
+so the growth range is 14 m. It is one of the six readings this tier reports. This lesson gets the number, then spends the rest of its length on what the number carries and what it does not, because a range is a summary and every summary throws something away.
 
 ## Getting it
 

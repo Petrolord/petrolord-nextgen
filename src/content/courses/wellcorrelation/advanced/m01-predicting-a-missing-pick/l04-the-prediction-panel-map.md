@@ -1,6 +1,6 @@
 # The prediction panel map
 
-This lesson is the map of the tier. It names what the prediction panel reports, says which module owns each part, and puts the six graded numbers in front of you now rather than at the end. Seeing the destination early changes how you read the arithmetic that gets you there, and at this tier the destination is unusual: the answer is a range with a method attached, not a depth.
+This lesson is the map of the tier. It names what the prediction panel reports, says which module owns each part, and puts the six reported numbers in front of you now rather than at the end. Seeing the destination early changes how you read the arithmetic that gets you there, and at this tier the destination is unusual: the answer is a range with a method attached, not a depth.
 
 ## What the panel does
 
@@ -20,18 +20,18 @@ Then it does something the tier depends on. Whichever marker you selected, it dr
 
 Module 6 puts the whole thing together as a workflow and walks the capstone.
 
-## The six graded numbers
+## The six reported numbers
 
-The tolerances are part of the fact, so learn them beside the values.
+On the Ekene section, and the capstone asks for the same six on a section of its own:
 
-| reading | value | tolerance |
-| --- | --- | --- |
-| mean TOP_A to TOP_B interval | 141 m | 0.01 |
-| mean TOP_SAND to TOP_B interval | 92 m | 0.01 |
-| Ekene-4 TOP_B, layer-cake estimate | 1671 m | 0.01 |
-| Ekene-4 TOP_B, from TOP_SAND | 1682 m | 0.01 |
-| spread between the two estimates | 11 m | 0.01 |
-| TOP_B structural relief across the three wells | 34 m | 0.01 |
+| reading | Ekene value |
+| --- | --- |
+| mean TOP_A to TOP_B interval | 141 m |
+| mean TOP_SAND to TOP_B interval | 92 m |
+| Ekene-4 TOP_B, layer-cake estimate | 1671 m |
+| Ekene-4 TOP_B, from TOP_SAND | 1682 m |
+| spread between the two estimates | 11 m |
+| TOP_B structural relief across the three wells | 34 m |
 
 Look at the shape of that table before the values. Two means, two predicted depths, and then two numbers that are both differences in metres and are not the same kind of thing at all. That last pair is where this tier is won or lost.
 
@@ -57,6 +57,6 @@ The panel below predicts Ekene-4's TOP_B from the marker you choose and shows bo
 
 ## Exercise
 
-Open the panel and find all six graded readings on it. Beside each, write the module that will explain it and the kind of number it is from the six kinds above. Then switch the marker from TOP_A to TOP_SAND and note carefully which readings change and which do not.
+Open the panel and find all six readings on it. Beside each, write the module that will explain it and the kind of number it is from the six kinds above. Then switch the marker from TOP_A to TOP_SAND and note carefully which readings change and which do not.
 
 Self-check: the two means and the layer-cake estimate belong to modules 2 and 3, the from-TOP_SAND estimate and the spread belong to modules 3 and 4, and the relief belongs to module 5. By kind, 141 m and 92 m are means of intervals, 1671 m and 1682 m are predicted depths, 11 m is a spread between predictions, and 34 m is a structural relief. Switching the marker changes the interval table, the mean, the anchor depth and the prediction that the panel is working through step by step, and it leaves both final estimates, the spread of 11 m and the relief of 34 m unchanged, because those are properties of the dataset rather than of your current selection.

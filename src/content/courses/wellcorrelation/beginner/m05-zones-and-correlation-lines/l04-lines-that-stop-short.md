@@ -22,7 +22,7 @@ TOP_B relief across the Ekene section is 34 m, from 1662 in Ekene-2 down to 1628
 
 So write it as "TOP_B relief 34 m over 3 wells", not "TOP_B relief 34 m". The extra two words carry the entire caveat. Anybody who then wants to know about Ekene-4 knows immediately that they have to go and look rather than assume it was covered.
 
-The same caution applies to statistics computed off a flattened section. In the capstone view TOP_B displays at 1592, 1597 and 1587, and the difference between the extremes there is 10 m, not 34. That is not a contradiction. Relief is a structural quantity and must be quoted from the structural view, exactly as the previous lessons argued. The flattened spread of 10 m describes relative geometry with respect to TOP_SAND, and it is a three-well number too.
+The same caution applies to statistics computed off a flattened section. In the teaching view TOP_B displays at 1592, 1597 and 1587, and the difference between the extremes there is 10 m, not 34. That is not a contradiction. Relief is a structural quantity and must be quoted from the structural view, exactly as the previous lessons argued. The flattened spread of 10 m describes relative geometry with respect to TOP_SAND, and it is a three-well number too.
 
 ## Why a line stops
 

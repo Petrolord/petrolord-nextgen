@@ -1,6 +1,6 @@
 # The A to SAND interval
 
-One interval carries this tier. It runs from TOP_A down to TOP_SAND, it is present in all four wells, and it is the interval the flattening datum was chosen to display. Across the Ekene section it measures 48, 53, 46 and 60 m. Ekene-4 carries the thickest at 60 m, which is one of the six graded readings, and Ekene-3 the thinnest at 46 m.
+One interval carries this tier. It runs from TOP_A down to TOP_SAND, it is present in all four wells, and it is the interval the flattening datum was chosen to display. Across the Ekene section it measures 48, 53, 46 and 60 m. Ekene-4 carries the thickest at 60 m, which is one of the six readings this tier reports, and Ekene-3 the thinnest at 46 m.
 
 ## What the interval represents
 
@@ -19,7 +19,7 @@ Compute each one from the pick table as TOP_SAND measured minus TOP_A measured.
 | Ekene-3 | 1495 | 1541 | 46 | 1496 |
 | Ekene-4 | 1530 | 1590 | 60 | 1510 |
 
-Ekene-4's 60 m is graded to 0.01 m, so reproduce it cold: 1590 minus 1530. It is the largest of the four. Ekene-3's 46 m is the smallest. The two are 14 m apart, which is the subject of the next lesson.
+Reproduce Ekene-4's 60 m cold: 1590 minus 1530. It is the largest of the four. Ekene-3's 46 m is the smallest. The two are 14 m apart, which is the subject of the next lesson.
 
 Read the last column against the third and the relationship from the previous lesson is visible: 1450 plus 48 is 1498, 1450 plus 53 is 1503, 1450 plus 46 is 1496, and 1450 plus 60 is 1510. The displayed sand line is the interval, drawn from the datum.
 
@@ -51,4 +51,4 @@ The panel below flattens on the top and datum you choose and lists each well's i
 
 Compute all four A-to-SAND intervals from the measured picks without looking at the table, then name the well with the thickest and the well with the thinnest. Then compute, for each well, the displayed depth of TOP_SAND as 1450 plus that well's interval, and check the four answers against the table.
 
-Self-check: Ekene-1 gives 1548 minus 1500, which is 48 m. Ekene-2 gives 1565 minus 1512, which is 53 m. Ekene-3 gives 1541 minus 1495, which is 46 m. Ekene-4 gives 1590 minus 1530, which is 60 m, the graded value. The thickest is Ekene-4 at 60 m and the thinnest is Ekene-3 at 46 m. Adding each to the datum gives 1498, 1503, 1496 and 1510 m displayed, matching the table in every row. If one row disagrees, the shift used for that well was not 1450 minus its own TOP_A.
+Self-check: Ekene-1 gives 1548 minus 1500, which is 48 m. Ekene-2 gives 1565 minus 1512, which is 53 m. Ekene-3 gives 1541 minus 1495, which is 46 m. Ekene-4 gives 1590 minus 1530, which is 60 m. The thickest is Ekene-4 at 60 m and the thinnest is Ekene-3 at 46 m. Adding each to the datum gives 1498, 1503, 1496 and 1510 m displayed, matching the table in every row. If one row disagrees, the shift used for that well was not 1450 minus its own TOP_A.

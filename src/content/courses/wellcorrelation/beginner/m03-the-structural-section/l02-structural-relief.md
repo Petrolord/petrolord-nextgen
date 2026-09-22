@@ -30,7 +30,7 @@ The reason is not pedantry. Ekene-4 is the deepest well on every surface it reac
 
 The habit to build is to carry the sample size alongside the statistic. Write it as 34 m over three wells, or 34 m excluding Ekene-4, and the number becomes honest instead of misleading.
 
-The TOP_SAND relief of 49 m is one of the six numbers the Associate capstone grades, so make sure you can reproduce it without notes: 1590 in Ekene-4 minus 1541 in Ekene-3.
+Make sure you can reproduce the TOP_SAND relief of 49 m without notes: 1590 in Ekene-4 minus 1541 in Ekene-3.
 
 ## Different surfaces, different relief
 

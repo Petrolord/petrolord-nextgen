@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { TEACHING_WELLS, INTERMEDIATE_DATUM } from '@/lib/correlationTeaching';
+import { INTERMEDIATE_DATUM } from '@/lib/correlationTeaching';
+import { useSectionWells } from '@/components/course/panels/wellcorrelation/caseInputs';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Flatten explorer: pick a flattening top and a datum, and read the
@@ -11,19 +12,20 @@ const W = 560;
 const H = 300;
 const PAD = { left: 54, top: 26, right: 16, bottom: 28 };
 
-const fmt = (v, d = 0) => (Number.isFinite(v) ? v.toFixed(d) : '-');
+const fmt = (v, d = 1) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 const pickOf = (w, name) => w.tops.find((t) => t.name === name)?.md_m ?? null;
 
 const FlattenExplorer = () => {
   const [topName, setTopName] = useState(INTERMEDIATE_DATUM.topName);
   const [datum, setDatum] = useState(String(INTERMEDIATE_DATUM.datumM));
 
+  const c = useSectionWells();
   const datumM = Number(datum);
-  const ok = Number.isFinite(datumM) && datumM >= 1000 && datumM <= 2000;
+  const ok = Number.isFinite(datumM) && datumM >= 1000 && datumM <= 2000 && c.ok;
 
   const rows = useMemo(() => {
     if (!ok) return null;
-    return TEACHING_WELLS.map((w) => {
+    return c.wells.map((w) => {
       const anchor = pickOf(w, topName);
       const shift = anchor == null ? null : datumM - anchor;
       const a = pickOf(w, 'TOP_A');
@@ -40,13 +42,14 @@ const FlattenExplorer = () => {
         allFour: w.tops.length === 4,
       };
     });
-  }, [topName, datumM, ok]);
+  }, [topName, datumM, ok, c.wells]);
 
   if (!rows) {
     return (
-      <PanelShell title="Flatten explorer" subtitle="Enter a datum between 1000 and 2000 m.">
+      <PanelShell title="Flatten explorer" subtitle="Enter a datum between 1000 and 2000 m, and a section.">
+        {c.ui}
         <NumField label="Datum (m)" value={datum} onChange={setDatum} />
-        <Note>The datum must be a number in that range.</Note>
+        <Note>The datum must be a number in that range, and every typed line must read name, TOP_A, TOP_SAND, BASE_SAND, TOP_B with picks deepening down the well.</Note>
       </PanelShell>
     );
   }
@@ -67,7 +70,8 @@ const FlattenExplorer = () => {
 
   return (
     <PanelShell title="Flatten explorer"
-      subtitle={`The four Ekene wells flattened on ${topName} at a ${fmt(datumM)} m datum. The capstone flattens on TOP_A at 1450 m and names one second datum for a single reading.`}>
+      subtitle={`The ${rows.length} ${c.typed ? 'typed' : 'Ekene'} wells flattened on ${topName} at a ${fmt(datumM)} m datum. It opens on the Ekene wells.`}>
+      {c.ui}
       <div className="flex flex-wrap gap-2 items-end">
         {TOPS.map((t) => (
           <button key={t} type="button" onClick={() => setTopName(t)}

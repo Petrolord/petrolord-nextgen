@@ -4,10 +4,15 @@
 // teaching fixture and orchestrates it for Learning Mode.
 //
 // The section engine's math is exact closed-form arithmetic (per-well
-// additive shifts), so the capstone oracle is this fixture run through
-// the engine in Node before the migration was seeded (the NG
-// discipline) — an honest learner reading the section panel reaches
-// exactly those numbers.
+// additive shifts), so an honest learner reading the section panel
+// reaches exactly the engine's numbers.
+//
+// The Ekene section is the TEACHING case: the panels open on it and the
+// lessons work it. Since W5a (2026-09) each tier's capstone is a section
+// of its own, stated in the brief and typed into the panels (every
+// function below takes an optional well list). Nothing in this file
+// carries it, and panelCapstoneGuard.test.jsx checks that no number these
+// functions give at their defaults lands on a graded answer.
 import {
   computeFlattening, correlationPolyline, zoneSpan, displayedRange,
   allTopNames, topMd, displayedDepth,
@@ -39,17 +44,46 @@ export const ZONE = { top: 'TOP_SAND', base: 'BASE_SAND' };
 export const DEFAULT_DATUM = { mode: 'structural' };
 export const FLATTEN_DATUM_M = 1500;
 
-// Everything the section view and the capstone reading need, for a
-// given datum setting.
-export function computeSection(datum) {
-  const flattening = computeFlattening(TEACHING_WELLS, datum);
+export const TOP_ORDER = ['TOP_A', 'TOP_SAND', 'BASE_SAND', 'TOP_B'];
+
+/** One well per line: name, TOP_A, TOP_SAND, BASE_SAND, TOP_B (MD in m; a dash for a top the well did not reach). */
+export function parseSectionTable(text) {
+  const rows = String(text).split('\n').map((l) => l.trim()).filter(Boolean);
+  const wells = [];
+  for (const [i, row] of rows.entries()) {
+    const cells = row.split(',').map((c) => c.trim());
+    if (cells.length !== 5 || !cells[0]) return null;
+    const tops = [];
+    for (let k = 0; k < 4; k++) {
+      const c = cells[k + 1];
+      if (c === '-' || c === '') continue;
+      const v = Number(c);
+      if (!Number.isFinite(v)) return null;
+      tops.push({ name: TOP_ORDER[k], md_m: v });
+    }
+    if (tops.length < 2) return null;
+    for (let k = 1; k < tops.length; k++) if (!(tops[k].md_m > tops[k - 1].md_m)) return null;
+    wells.push({ id: `W${i + 1}`, name: cells[0], tops });
+  }
+  if (wells.length < 2 || new Set(wells.map((w) => w.name)).size !== wells.length) return null;
+  return wells;
+}
+
+export const sectionTableText = (wells) => wells.map((w) => [
+  w.name, ...TOP_ORDER.map((n) => { const t = w.tops.find((x) => x.name === n); return t ? t.md_m : '-'; }),
+].join(', ')).join('\n');
+
+// Everything the section view reads, for a given datum setting.
+export function computeSection(datum, wells = TEACHING_WELLS) {
+  const TEACHING_WELLS_ = wells;
+  const flattening = computeFlattening(TEACHING_WELLS_, datum);
   const byId = new Map(flattening.map((f) => [f.id, f.shift]));
-  const topNames = allTopNames(TEACHING_WELLS);
+  const topNames = allTopNames(TEACHING_WELLS_);
   const polylines = topNames.map((name) => ({
     name,
-    points: correlationPolyline(TEACHING_WELLS, flattening, name),
+    points: correlationPolyline(TEACHING_WELLS_, flattening, name),
   }));
-  const rows = TEACHING_WELLS.map((w) => {
+  const rows = TEACHING_WELLS_.map((w) => {
     const shift = byId.get(w.id);
     const span = zoneSpan(w, shift, ZONE.top, ZONE.base);
     return {
@@ -62,14 +96,14 @@ export function computeSection(datum) {
       tops: w.tops.map((t) => ({ ...t, displayed: displayedDepth(t.md_m, shift) })),
     };
   });
-  const range = displayedRange(TEACHING_WELLS, flattening);
+  const range = displayedRange(TEACHING_WELLS_, flattening);
   return { flattening, topNames, polylines, rows, range };
 }
 
 // Structural relief of a top across the section: max MD minus min MD
 // over the wells that have it (read in structural mode).
-export function structuralRelief(topName) {
-  const mds = TEACHING_WELLS.map((w) => topMd(w, topName)).filter((v) => v !== null);
+export function structuralRelief(topName, wells = TEACHING_WELLS) {
+  const mds = wells.map((w) => topMd(w, topName)).filter((v) => v !== null);
   return Math.max(...mds) - Math.min(...mds);
 }
 
@@ -90,8 +124,8 @@ export function displayGr(well, md) {
 // between the estimates is the growth uncertainty. Closed-form on the
 // fixture through the engine's top reads; oracle-reproduced in Node
 // before the NG7 migration was seeded.
-export function computeAdvanced() {
-  const withB = TEACHING_WELLS.filter((w) => topMd(w, 'TOP_B') !== null);
+export function computeAdvanced(wells = TEACHING_WELLS) {
+  const withB = wells.filter((w) => topMd(w, 'TOP_B') !== null);
   const mean = (arr) => arr.reduce((a, b) => a + b, 0) / arr.length;
   const rows = withB.map((w) => ({
     id: w.id,
@@ -102,11 +136,13 @@ export function computeAdvanced() {
   }));
   const aToBMean = mean(rows.map((r) => r.aToB));
   const sandToBMean = mean(rows.map((r) => r.sandToB));
-  const w4 = TEACHING_WELLS.find((w) => w.id === 'W4');
+  // the well that reached TD above TOP_B
+  const w4 = wells.find((w) => topMd(w, 'TOP_B') === null);
   const layercake = topMd(w4, 'TOP_A') + aToBMean;
   const fromSand = topMd(w4, 'TOP_SAND') + sandToBMean;
   const bMds = rows.map((r) => r.topB);
   return {
+    target: w4,
     rows,
     aToBMean,
     sandToBMean,
@@ -121,11 +157,11 @@ export function computeAdvanced() {
 // Oracle-reproduced in Node before the NG6 migration was seeded.
 export const INTERMEDIATE_DATUM = { topName: 'TOP_A', datumM: 1450 };
 
-export function computeIntermediate() {
-  const datum = { mode: 'flatten', ...INTERMEDIATE_DATUM };
-  const flattening = computeFlattening(TEACHING_WELLS, datum);
+export function computeIntermediate(wells = TEACHING_WELLS, datumSpec = INTERMEDIATE_DATUM) {
+  const datum = { mode: 'flatten', ...datumSpec };
+  const flattening = computeFlattening(wells, datum);
   const byId = new Map(flattening.map((f) => [f.id, f.shift]));
-  const rows = TEACHING_WELLS.map((w) => {
+  const rows = wells.map((w) => {
     const a = topMd(w, 'TOP_A');
     const sand = topMd(w, 'TOP_SAND');
     return {
@@ -138,7 +174,7 @@ export function computeIntermediate() {
     };
   });
   const growths = rows.map((r) => r.aToSand);
-  const range = displayedRange(TEACHING_WELLS, flattening);
+  const range = displayedRange(wells, flattening);
   return {
     rows,
     growthRange: Math.max(...growths) - Math.min(...growths),

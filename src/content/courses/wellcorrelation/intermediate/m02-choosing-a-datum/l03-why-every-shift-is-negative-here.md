@@ -34,7 +34,7 @@ A shift of exactly zero is the boundary case. It means that well's flattening pi
 
 Three practical points follow from taking the sign seriously.
 
-**The sign is part of the answer.** The graded Ekene-4 reading is -80 m. Writing 80 m is not a rounding difference or a presentation choice. It is the claim that the well moved down the display when it moved up, and at this tier it is wrong.
+**The sign is part of the answer.** The Ekene-4 reading is -80 m. Writing 80 m is not a rounding difference or a presentation choice. It is the claim that the well moved down the display when it moved up, and at this tier it is wrong.
 
 **A sign that surprises you is a check worth running.** If you expect all-negative shifts on a shallow datum and one comes back positive, either that well's flattening pick is shallower than the datum, which is a fact you can verify in the table, or the pick itself is wrong. Both are worth two minutes.
 
@@ -50,6 +50,6 @@ So the sign discipline in this lesson is about reporting a shift correctly and r
 
 ## Exercise
 
-State in one sentence the condition under which a flattening shift is negative, and in one more the condition under which it is positive. Then answer this without arithmetic: if you kept TOP_A as the flattening top and moved the datum to a depth deeper than all four picks, which of the six graded readings would change and which would not.
+State in one sentence the condition under which a flattening shift is negative, and in one more the condition under which it is positive. Then answer this without arithmetic: if you kept TOP_A as the flattening top and moved the datum to a depth deeper than all four picks, which of the six readings this tier reports would change and which would not.
 
 Self-check: a shift is negative when the datum is shallower than that well's pick of the flattening top, so the well moves up the display, and positive when the datum is deeper than that pick, so the well moves down. Moving the datum below all four picks changes the four shifts, which all turn positive, and changes every displayed depth including the 1503 m against Ekene-2's TOP_SAND. It leaves the 60 m interval, the 14 m growth range, the count of 3 wells and the 150 m displayed span exactly as they were.

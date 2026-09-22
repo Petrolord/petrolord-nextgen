@@ -4,7 +4,7 @@ Subtract one prediction from the other.
 
 $$1682 - 1671 = 11$$
 
-The spread between the two estimates is 11 m. It is one of the six graded readings in this tier, to a tolerance of 0.01 m, and it is the number the rest of the course is built on. This lesson finds out exactly where it comes from, because a quantity you can only observe is much less useful than one you can account for.
+The spread between the two estimates is 11 m. It is one of the six readings this tier reports, and it is the number the rest of the course is built on. This lesson finds out exactly where it comes from, because a quantity you can only observe is much less useful than one you can account for.
 
 ## It is not arithmetic error
 

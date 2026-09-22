@@ -4,7 +4,7 @@ The mean interval is in hand and Ekene-4 has a TOP_A. Putting the two together i
 
 $$1530 + 141 = 1671$$
 
-The layer-cake estimate for Ekene-4's TOP_B is 1671 m, predicted. It is graded to a tolerance of 0.01 m. The rest of this lesson is about what each of those three numbers is, because the addition is trivial and the bookkeeping around it is not.
+The layer-cake estimate for Ekene-4's TOP_B is 1671 m, predicted. The rest of this lesson is about what each of those three numbers is, because the addition is trivial and the bookkeeping around it is not.
 
 ## What each term is
 

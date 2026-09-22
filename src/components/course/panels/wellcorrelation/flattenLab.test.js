@@ -6,12 +6,12 @@ import {
 const pick = (id, name) => TEACHING_WELLS.find((w) => w.id === id).tops.find((t) => t.name === name)?.md_m ?? null;
 
 // Pins the two wellcorrelation panels to the live NG6 Professional and
-// NG7 Expert capstone oracles.
+// NG7 Expert capstone oracles until W5a, now the Ekene teaching case.
 describe('wellcorrelation professional: flattening and growth', () => {
   const I = computeIntermediate();
   const row = (id) => I.rows.find((r) => r.id === id);
 
-  it('reproduces the NG6 professional capstone answer key', () => {
+  it('reproduces the Ekene teaching case at the intermediate datum (the pre-W5 capstone key)', () => {
     expect(row('W4').shift).toBe(-80);
     expect(row('W2').sandDisplayed).toBe(1503);
     expect(row('W4').aToSand).toBe(60);
@@ -81,7 +81,7 @@ describe('wellcorrelation professional: flattening and growth', () => {
 describe('wellcorrelation expert: predicting the missing pick', () => {
   const A = computeAdvanced();
 
-  it('reproduces the NG7 expert capstone answer key', () => {
+  it('reproduces the Ekene teaching case for the prediction (the pre-W5 capstone key)', () => {
     expect(A.aToBMean).toBe(141);
     expect(A.sandToBMean).toBe(92);
     expect(A.w4TopBLayercake).toBe(1671);
