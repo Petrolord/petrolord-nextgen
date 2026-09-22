@@ -2938,7 +2938,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Sum of the fourteen lengths from a surface hanger = 2600.65 exactly; the prompt states the identity. tol 5e-7 is fine for an exact two-decimal sum.",
-  "notes": null
+  "notes": null,
+  "stripped": {
+   "migration": "20261028d_w5_completion.sql",
+   "wave": "w5d",
+   "why": "the string explorer drift table opened on every catalog row and printed both graded casing drifts (7 in 32 lb/ft liner, 13-3/8 in 68 lb/ft surface casing) to seven decimals; it now opens on the tubing class, and placing each casing in its class is the skill the capstone tests"
+  }
  },
  {
   "course": "completion",
@@ -2969,7 +2974,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Running sum through the packer row = 2594.4 exactly; a terminating decimal the learner types in full.",
-  "notes": null
+  "notes": null,
+  "stripped": {
+   "migration": "20261028d_w5_completion.sql",
+   "wave": "w5d",
+   "why": "the string explorer drift table opened on every catalog row and printed both graded casing drifts (7 in 32 lb/ft liner, 13-3/8 in 68 lb/ft surface casing) to seven decimals; it now opens on the tubing class, and placing each casing in its class is the skill the capstone tests"
+  }
  },
  {
   "course": "completion",
@@ -2996,11 +3006,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "(6.094 - 0.125) x 0.0254 = 0.1516126 exactly (7 decimals); tol 5e-8 is half a unit of the 7th decimal and the value is exact at 7 decimals.",
-  "notes": "Possible LEAK: the ClearanceExplorer size matrix prints '7.00 in 32.0 lb/ft 0.1516126' in its default state (probe). It is the catalog drift the lessons teach, so it is a lookup more than a leak, but the capstone's own 'trap' (32 lb/ft not 29) is answered on screen."
+  "notes": "Possible LEAK: the ClearanceExplorer size matrix prints '7.00 in 32.0 lb/ft 0.1516126' in its default state (probe). It is the catalog drift the lessons teach, so it is a lookup more than a leak, but the capstone's own 'trap' (32 lb/ft not 29) is answered on screen.",
+  "stripped": {
+   "migration": "20261028d_w5_completion.sql",
+   "wave": "w5d",
+   "why": "the string explorer drift table opened on every catalog row and printed both graded casing drifts (7 in 32 lb/ft liner, 13-3/8 in 68 lb/ft surface casing) to seven decimals; it now opens on the tubing class, and placing each casing in its class is the skill the capstone tests"
+  }
  },
  {
   "course": "completion",
@@ -3029,7 +3044,7 @@
   },
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": {
    "migration": "20261022_b5_graded_tolerances.sql",
@@ -3039,7 +3054,12 @@
    ]
   },
   "evidence": "(12.415 - 5/32) x 0.0254 = 0.31137225 exactly, an 8-decimal value sitting exactly on the 7-decimal rounding boundary; stored expected 0.31137224999999996, tol 5e-8. The panel prints drifts to 7 decimals (fmt(r.driftM, 7)) and shows 0.3113722, which passes by 4e-17; a learner who rounds half up to 0.3113723 fails by 4e-17.",
-  "notes": "Possible LEAK: StringExplorer's drift table prints '13.375 68.00 -0.15625 0.3113722' in default state (probe), which is this field's answer (12.415 in bore is 13-3/8 68 lb/ft). Loosening only; cannot flip a pass."
+  "notes": "Possible LEAK: StringExplorer's drift table prints '13.375 68.00 -0.15625 0.3113722' in default state (probe), which is this field's answer (12.415 in bore is 13-3/8 68 lb/ft). Loosening only; cannot flip a pass.",
+  "stripped": {
+   "migration": "20261028d_w5_completion.sql",
+   "wave": "w5d",
+   "why": "the string explorer drift table opened on every catalog row and printed both graded casing drifts (7 in 32 lb/ft liner, 13-3/8 in 68 lb/ft surface casing) to seven decimals; it now opens on the tubing class, and placing each casing in its class is the skill the capstone tests"
+  }
  },
  {
   "course": "completion",
@@ -3070,7 +3090,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Sum of pi/4 x ID^2 x L over 14 rows; 7.852067852872 rounds to 7.852068 at the panel's 6-decimal volume convention (diff 1.5e-7 <= 5e-7).",
-  "notes": "tol 5e-7 is exactly half a unit of the 6-decimal print convention (panel fmt 6); it demands full-precision pi and no rounding of intermediate areas (pi = 3.14159 alone moves the answer by 7e-6). Honest by the rule, but unforgiving; owner may prefer 5e-4 for a 14-row hand sum."
+  "notes": "tol 5e-7 is exactly half a unit of the 6-decimal print convention (panel fmt 6); it demands full-precision pi and no rounding of intermediate areas (pi = 3.14159 alone moves the answer by 7e-6). Honest by the rule, but unforgiving; owner may prefer 5e-4 for a 14-row hand sum.",
+  "stripped": {
+   "migration": "20261028d_w5_completion.sql",
+   "wave": "w5d",
+   "why": "the string explorer drift table opened on every catalog row and printed both graded casing drifts (7 in 32 lb/ft liner, 13-3/8 in 68 lb/ft surface casing) to seven decimals; it now opens on the tubing class, and placing each casing in its class is the skill the capstone tests"
+  }
  },
  {
   "course": "completion",
@@ -3101,7 +3126,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Sum of pi/4 x OD^2 x L; 17.767445424 rounds to 17.767445 at 6 decimals (diff 4.2e-7 <= 5e-7, close to the edge).",
-  "notes": "Same fragility as capacity: 6-decimal rounding passes by 8e-8 only; 5 decimals fails."
+  "notes": "Same fragility as capacity: 6-decimal rounding passes by 8e-8 only; 5 decimals fails.",
+  "stripped": {
+   "migration": "20261028d_w5_completion.sql",
+   "wave": "w5d",
+   "why": "the string explorer drift table opened on every catalog row and printed both graded casing drifts (7 in 32 lb/ft liner, 13-3/8 in 68 lb/ft surface casing) to seven decimals; it now opens on the tubing class, and placing each casing in its class is the skill the capstone tests"
+  }
  },
  {
   "course": "completion",

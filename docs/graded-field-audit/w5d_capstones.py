@@ -45,6 +45,11 @@ STRIP = {
                     'intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro '
                     'prints two decimals',
     },
+    'completion': {
+        'beginner': 'the string explorer drift table opened on every catalog row and printed both graded casing drifts '
+                    '(7 in 32 lb/ft liner, 13-3/8 in 68 lb/ft surface casing) to seven decimals; it now opens on the '
+                    'tubing class, and placing each casing in its class is the skill the capstone tests',
+    },
 }
 
 # W1 must be applied: the gasprocessing beginner re-key (tegReboilerMMBtuHr) is

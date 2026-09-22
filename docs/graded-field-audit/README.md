@@ -319,6 +319,7 @@ The graded answers come from the lab's `capstoneValues()`, which runs the vendor
 | Course | Tiers stripped | What printed the answers | Fix |
 |---|---|---|---|
 | welldesign | beginner, advanced | the survey listing opened on the feet golden well; the clearance ladder opened on offset 10; the page intro printed offset 10's separation factor to 3 dp (-0.607, inside tol 0.0005; found by this build) | listing opens on the 131-station teaching well; ladder on offset 05; the intro prints 2 dp |
+| completion | beginner | the string explorer's drift table opened on every catalog row and printed both graded casing drifts to 7 dp | the table opens on the tubing class; placing each casing in its class is what the capstone tests |
 
 **Held:** welldesign intermediate. `UncertaintyExplorer.jsx` opens on station 267, the capstone station, and the file belongs to W4a's typed-mode work. The gate asserts that tier still leaks and keeps its label.
 
