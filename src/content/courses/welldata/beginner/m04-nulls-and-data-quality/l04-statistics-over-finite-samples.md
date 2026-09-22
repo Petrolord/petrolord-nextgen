@@ -6,7 +6,7 @@ Every number the QC panel quotes for a curve, its mean, its first reading and it
 
 A curve's column has two populations in it: real measurements and sentinel values standing in for measurements that do not exist. A statistic describes a population, so the first job is to say which population. The answer is always the finite samples: the cells that carry a reading. The sentinels are not small readings or extreme readings, they are not readings at all, and including them does not make a statistic noisier, it makes it meaningless.
 
-For basic_20's gamma ray the split is: 301 samples in the column, 8 of them flagged null, so $301 - 8 = 293$ finite samples. The mean over those 293 is 64.9272 GAPI. That is the value the QC panel shows, and it is one of the six numbers the Associate capstone grades, to a tolerance of 0.05.
+For basic_20's gamma ray the split is: 301 samples in the column, 8 of them flagged null, so $301 - 8 = 293$ finite samples. The mean over those 293 is 64.9272 GAPI. That is the value the QC panel shows. A finite-sample mean is one of the six readings the Associate capstone grades on its own case files, to a tolerance of 0.05.
 
 ## What inclusion costs
 

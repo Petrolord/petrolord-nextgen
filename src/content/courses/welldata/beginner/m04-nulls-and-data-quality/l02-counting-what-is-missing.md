@@ -15,7 +15,7 @@ Engine truth for the gamma ray curve in all six files, plus the other curves of 
 | quirks_20 | 81 | 3 | 9 | 0 | 0 |
 | wrapped_12 | 161 | 5 | 9 | 0 | 0 |
 
-Two of these numbers are worth memorising for the capstone: basic_20's GR null count of 8 is one of the six graded values, and nullheavy_20's NPHI count of 201 is another (it gets its own lesson next).
+Two of these readings are the kind the capstone asks for: a GR null count, which basic_20 puts at 8, and the null count of a dead curve, which nullheavy_20's NPHI puts at 201 (it gets its own lesson next). The capstone asks for the same two readings on its own case files, so learn where they come from rather than the numbers.
 
 ## Reading the patterns
 

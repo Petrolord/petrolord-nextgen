@@ -38,7 +38,7 @@ Volumes move. Any thickness or column height computed against a datum inherits t
 
 There is a third case, and it is the most instructive of the three. The depth column is converted correctly, and a per-length curve is missed.
 
-On feet_20.las this shows up as a count. The pipeline converts two curves: the depth column, and the sonic, which arrives in microseconds per foot with a length in its denominator and whose unit string is in the importer's conversion table. Convert the depth alone and the count is one. That is why the graded reading is a count with no tolerance: it is not measuring your arithmetic, it is measuring whether your model of unit trouble includes curves other than depth.
+On feet_20.las this shows up as a count. The pipeline converts two curves: the depth column, and the sonic, which arrives in microseconds per foot with a length in its denominator and whose unit string is in the importer's conversion table. Convert the depth alone and the count is one. That is why the capstone's reading is a count with no tolerance: it is not measuring your arithmetic, it is measuring whether your model of unit trouble includes curves other than depth.
 
 Converted the wrong way round, a sonic lands outside its plausible range by more than a factor of ten, which is loud enough to catch if anyone looks at the values. Left unconverted, it is quiet, because a transit time in microseconds per foot and a transit time in microseconds per metre are both numbers that look like transit times. The well then has correct depths and a curve that is wrong by a fixed factor, and anything computed from that curve, an acoustic impedance, a synthetic seismogram, a porosity from sonic, carries the factor forward.
 

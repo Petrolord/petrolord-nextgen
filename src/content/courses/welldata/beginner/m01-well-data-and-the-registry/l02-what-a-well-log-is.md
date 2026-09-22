@@ -27,9 +27,9 @@ The most basic QC number for any log is how many samples it holds, and it is als
 2. Intervals: 150 / 0.5 = 300 steps.
 3. Samples: 300 + 1 = 301, because both end points carry a sample.
 
-The +1 is the fence-post rule: a fence with 300 gaps has 301 posts. The parser confirms it; basic_20 carries exactly 301 depth samples, and 301 is one of the six numbers the capstone grades.
+The +1 is the fence-post rule: a fence with 300 gaps has 301 posts. The parser confirms it; basic_20 carries exactly 301 depth samples. A depth sample count is one of the six readings the capstone grades, on its own case files.
 
-Run the same arithmetic on wrapped_12, which logs 1500 to 1580 m at the same 0.5 m step: (1580 - 1500) / 0.5 = 160 intervals, so 160 + 1 = 161 samples. That 161 is another capstone number, and when you meet the file in module 2 you will see why counting its samples takes more than eyeballing the data section: its rows wrap across several lines.
+Run the same arithmetic on wrapped_12, which logs 1500 to 1580 m at the same 0.5 m step: (1580 - 1500) / 0.5 = 160 intervals, so 160 + 1 = 161 samples. The capstone asks for this count on a wrapped file of its own, and when you meet the file in module 2 you will see why counting its samples takes more than eyeballing the data section: its rows wrap across several lines.
 
 Forgetting the +1 gives 300 and 160, which are exactly the kind of almost-right numbers that pass a glance and fail an audit. Count the posts, not the gaps.
 

@@ -3,13 +3,15 @@ import { TEACHING_FILES } from '@/lib/welldataTeaching';
 import { parseLas } from '@petrolord/engines/engines/welldata/lasParse.js';
 import { depthUnitToMetres, prepareLogs, uniformStepM } from '@petrolord/engines/engines/welldata/lasImport.js';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import UserLasPicker, { mergeFiles } from './UserLasPicker';
 
 // Import explorer: run the prepareLogs pipeline on any teaching file and
 // show what it decided. The converted flag and the kind are the two
 // columns the Professional capstone is counted from, and the uniformity
 // verdict is deliberately shown next to the first two consecutive
 // differences, because the test compares differences rather than
-// averaging them.
+// averaging them. It opens on a teaching file; the learner's own files (the
+// capstone case) run through the same pipeline once they open them.
 const fmt = (v, d = 6) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 
 function runImport(file) {
@@ -40,7 +42,9 @@ function runImport(file) {
 
 const ImportExplorer = () => {
   const [fileId, setFileId] = useState('feet_20');
-  const file = TEACHING_FILES.find((f) => f.id === fileId) || TEACHING_FILES[0];
+  const [userFiles, setUserFiles] = useState([]);
+  const allFiles = [...TEACHING_FILES, ...userFiles];
+  const file = allFiles.find((f) => f.id === fileId) || TEACHING_FILES[0];
   const r = useMemo(() => {
     try {
       return runImport(file);
@@ -52,7 +56,13 @@ const ImportExplorer = () => {
   if (!r) {
     return (
       <PanelShell title="Import explorer" subtitle="That file could not be parsed.">
-        <Note>Pick another teaching file.</Note>
+        <Note>Pick another file.</Note>
+        <div className="flex flex-wrap gap-2">
+          {allFiles.map((f) => (
+            <button key={f.id} type="button" onClick={() => setFileId(f.id)}
+              className="px-3 py-1.5 rounded-md border text-sm bg-gray-800 text-gray-300 border-gray-600">{f.label}</button>
+          ))}
+        </div>
       </PanelShell>
     );
   }
@@ -60,8 +70,9 @@ const ImportExplorer = () => {
   return (
     <PanelShell title="Import explorer"
       subtitle={`${file.label} through the full import pipeline: parse, convert units, assign kinds, test the depth step. ${file.hint}`}>
+      <UserLasPicker onFiles={(files) => { setUserFiles((prev) => mergeFiles(prev, files)); setFileId(files[0].id); }} />
       <div className="flex flex-wrap gap-2">
-        {TEACHING_FILES.map((f) => (
+        {allFiles.map((f) => (
           <button key={f.id} type="button" onClick={() => setFileId(f.id)}
             className={`px-3 py-1.5 rounded-md border text-sm ${fileId === f.id
               ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'

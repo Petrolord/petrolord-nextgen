@@ -505,6 +505,7 @@
    "shipped": {
     "migration": "20261028a_w5_mapping.sql",
     "wave": "w5a",
+    "closes_leak": true,
     "rekey": {
      "key": "adim_iso_nodes_above_well_mean",
      "label": "Live isochore nodes above the well mean",
@@ -526,7 +527,6 @@
      "owner_decision": false,
      "leak": false
     },
-    "closes_leak": true,
     "prior": {
      "migration": "20261024a_w1_mapping.sql",
      "wave": "w1",
@@ -867,6 +867,7 @@
    "shipped": {
     "migration": "20261028a_w5_mapping.sql",
     "wave": "w5a",
+    "closes_leak": true,
     "rekey": {
      "key": "adim_depth_at_prospect_with_adim8_m",
      "label": "Depth at the prospect with Adim-8 included",
@@ -890,7 +891,6 @@
      "owner_decision": false,
      "leak": false
     },
-    "closes_leak": true,
     "prior": {
      "migration": "20261024a_w1_mapping.sql",
      "wave": "w1",

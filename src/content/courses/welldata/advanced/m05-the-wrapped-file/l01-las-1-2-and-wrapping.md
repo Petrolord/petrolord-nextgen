@@ -22,7 +22,7 @@ The constraint that motivated it is long gone. LAS 2.0 made one line per depth s
 
 The file in this teaching set is LAS version 1.2, with wrap YES, and its curve section declares 5 curves including the depth index. Excluding the depth index, that is 4 curves, which is what the file contributes to the campaign total. It holds 161 depth samples.
 
-That count of 161 samples is one of the six numbers the Expert capstone grades, and it carries a tolerance of zero. It is the reason this module exists rather than being a footnote in the previous one. Everything else in the campaign is a roll-up of a check you already know. This one number depends on how the parser reassembles a file whose line breaks do not line up with its records.
+A wrapped file's sample count is one of the six readings the Expert capstone grades, on its own case file, and it carries a tolerance of zero. It is the reason this module exists rather than being a footnote in the previous one. Everything else in the campaign is a roll-up of a check you already know. This one number depends on how the parser reassembles a file whose line breaks do not line up with its records.
 
 ## Wrap is declared once and governs everything
 
@@ -48,6 +48,6 @@ The campaign grades the sample count of the one file where the wrong reason give
 
 ## Exercise
 
-Write down, in your own words, what changes and what stays the same when a file is written in wrapped mode rather than one record per line. Then answer two questions. First, given a single line taken out of the middle of the data section of `wrapped_12.las`, what can you tell about whether it starts a record? Second, why does the count of 161 depth samples make a better graded field than the same count taken on `basic_20.las`?
+Write down, in your own words, what changes and what stays the same when a file is written in wrapped mode rather than one record per line. Then answer two questions. First, given a single line taken out of the middle of the data section of `wrapped_12.las`, what can you tell about whether it starts a record? Second, why does the sample count of `wrapped_12.las` make a better graded field than the same count taken on `basic_20.las`?
 
-As a self check: what changes is where the line breaks fall, and what stays the same is the order of the values, the curve contract they follow, the completeness of each record and the treatment of nulls. Given one line out of the middle of the data section you can tell nothing about whether it starts a record, because wrapping is declared once in the version section and no marker appears in the data lines themselves. And 161 is the better graded field because `wrapped_12.las` is the only file in the delivery where the physical line count and the depth sample count differ, so a reader that counts lines gets the wrong answer here and the right answer everywhere else.
+As a self check: what changes is where the line breaks fall, and what stays the same is the order of the values, the curve contract they follow, the completeness of each record and the treatment of nulls. Given one line out of the middle of the data section you can tell nothing about whether it starts a record, because wrapping is declared once in the version section and no marker appears in the data lines themselves. And the wrapped file's count is the better graded field because `wrapped_12.las` is the only file in the delivery where the physical line count and the depth sample count differ, so a reader that counts lines gets the wrong answer here and the right answer everywhere else.

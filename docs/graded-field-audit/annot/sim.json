@@ -825,6 +825,7 @@
    "shipped": {
     "migration": "20261028b_w5_sim.sql",
     "wave": "w5b",
+    "closes_leak": true,
     "rekey": {
      "key": "validator_error_messages",
      "label": "Validator error messages across the seven cases",
@@ -846,7 +847,6 @@
      "owner_decision": false,
      "leak": false
     },
-    "closes_leak": true,
     "prior": {
      "migration": "20261024a_w1_sim.sql",
      "wave": "w1",

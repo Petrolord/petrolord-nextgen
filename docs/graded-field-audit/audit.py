@@ -901,6 +901,22 @@ def selftest(caps, annots):
             red = any(repr(k) in e for e in evaluate(caps, a2)[1])
             print(f"  control {'RED (good)' if red else 'GREEN (BROKEN)'}: a {wave_of[k]} class move with the Suite print it replaced ({k[2]})")
             ok &= red
+    def moving(sh):
+        while isinstance(sh, dict):
+            if sh.get('wave') and ('tol' in sh or 'rekey' in sh):
+                yield sh['wave']
+            sh = sh.get('prior')
+    movers = sorted({w for r in rows for w in moving(r.get('shipped'))})
+    for w in movers:
+        # each wave that moves a key or a tol, on its own (W5c): the state before it (every other wave) still checks
+        # clean without it, and its own state is red until it is named
+        rest = tuple(x for x in waves if x != w)
+        clean = not post_check(caps, after(upto=rest), rows, rest)
+        print(f"  post control {'GREEN (good)' if clean else 'RED (BROKEN)'}: the state without {w}, checked without --wave {w}")
+        ok &= clean
+        red = bool(post_check(caps, after(), rows, rest))
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: the state with {w}, checked without --wave {w}")
+        ok &= red
     # CHAINED RE-KEYS. A synthetic later wave ('wtest') re-keys a key an earlier wave
     # already re-keyed, carrying the earlier fix as `prior`, and closes a leak. Each
     # wave's own state must pass under its own waves and fail under the other's.

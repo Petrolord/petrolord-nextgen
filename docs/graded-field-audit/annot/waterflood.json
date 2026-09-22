@@ -474,23 +474,16 @@
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "tolerance",
-   "fix": {
-    "new_tol": 0.0005
-   },
+   "class": "none",
+   "fix": null,
    "owner_decision": false,
    "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
    "evidence": "Not in any panel (capstone lesson l02:59 says work it from the definitions). The raw surveillance rows are not handed to the learner, but the lesson states II = 0.5 falling to 0.35 in exactly the last third, so the ratio is 0.5/0.35 = 1.4285714285714286 by hand.",
    "notes": "LEAK (by design): intermediate/m04-injectivity/l02-slope-is-one-over-injectivity.md:35 prints 1.4285714285714286 as the slope ratio; the capstone lesson calls the above-reference value 'the graded answer'. Coincidence: the DesignExplorer default tile 'Stiles capacity ratio A' prints 1.4304, which is 0.0018 from this answer and inside tol 0.002. Tightening tol to 5e-4 would exclude it at no cost to the exact 10/7 route (a tightening, flag if adopted).",
    "leak": true,
-   "reclassed_from": "none",
    "shipped": {
     "migration": "20261028b_w5_waterflood.sql",
     "wave": "w5b",
-    "tol": [
-     0.002,
-     0.0005
-    ],
     "closes_leak": true,
     "rekey": {
      "key": "hall_ratio_e4",

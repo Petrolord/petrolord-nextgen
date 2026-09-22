@@ -13,7 +13,7 @@ nullheavy_20.las, 201 depth samples, null flag -9999 as declared in the file's o
 | NPHI | V/V | 201 | 201 |
 | DT | US/M | 0 | 201 |
 
-Add the null column: 71 plus 0 plus 201 plus 0 is 272. The parts reconcile to the graded total exactly, as they must, because the total was formed by adding them.
+Add the null column: 71 plus 0 plus 201 plus 0 is 272. The parts reconcile to the file's total exactly, as they must, because the total was formed by adding them.
 
 Now read the table rather than the sum, and three facts arrive that the total could not carry.
 
@@ -47,7 +47,7 @@ Verify the composition yourself rather than trusting the table, because the reco
 
 Take each of the four value curves and count its flagged samples against its 201 depth samples. GR gives 71 of 201. RHOB gives 0 of 201. NPHI gives 201 of 201. DT gives 0 of 201. Write each one with its denominator attached, every time, so that a count and a proportion never get confused when the row is copied somewhere else.
 
-Add them: 71 plus 0 is 71, plus 201 is 272, plus 0 is 272. That matches the graded field, so your breakdown accounts for the whole aggregate with nothing left over and nothing counted twice.
+Add them: 71 plus 0 is 71, plus 201 is 272, plus 0 is 272. That matches the campaign field, so your breakdown accounts for the whole aggregate with nothing left over and nothing counted twice.
 
 Then apply the deadness test from the previous module to each row, since you now have the numbers in front of you. A curve is dead when it has no finite samples at all. RHOB and DT have no nulls, so they are alive. GR has 71 of 201 flagged and the remainder finite, so it is alive and gapped. NPHI has 201 flagged of 201, so it has no finite samples and it is dead. One dead curve, which is exactly what the campaign's dead curve field reported for this file.
 
@@ -57,6 +57,6 @@ Open the panel below on nullheavy_20 and read the per-curve breakdown behind the
 
 ## Exercise
 
-Write out the four curve rows with their units and their null counts, each with its denominator, then show the addition that reconciles them to the graded total. Then answer in two sentences: which single row accounts for most of the total, and what would the file's null total become if that row were resolved and nothing else changed.
+Write out the four curve rows with their units and their null counts, each with its denominator, then show the addition that reconciles them to the file's total. Then answer in two sentences: which single row accounts for most of the total, and what would the file's null total become if that row were resolved and nothing else changed.
 
-Self-check: the rows are GR in GAPI with 71 nulls of 201, RHOB in G/C3 with 0 nulls of 201, NPHI in V/V with 201 nulls of 201, and DT in US/M with 0 nulls of 201, and 71 plus 0 plus 201 plus 0 is 272, which is the graded value with a tolerance of zero. NPHI accounts for most of the total, contributing 201 of the 272 because every one of its 201 samples holds the file's declared null flag of -9999. If that curve were delivered populated and nothing else changed, the file's null total would be 71, which is GR's contribution, and that remaining number would describe an ordinary gapped curve rather than an absent one.
+Self-check: the rows are GR in GAPI with 71 nulls of 201, RHOB in G/C3 with 0 nulls of 201, NPHI in V/V with 201 nulls of 201, and DT in US/M with 0 nulls of 201, and 71 plus 0 plus 201 plus 0 is 272, the campaign's reading for that file. NPHI accounts for most of the total, contributing 201 of the 272 because every one of its 201 samples holds the file's declared null flag of -9999. If that curve were delivered populated and nothing else changed, the file's null total would be 71, which is GR's contribution, and that remaining number would describe an ordinary gapped curve rather than an absent one.

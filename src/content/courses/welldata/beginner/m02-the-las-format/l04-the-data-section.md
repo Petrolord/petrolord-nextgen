@@ -22,7 +22,7 @@ So every data row must carry exactly five numbers, in that order. Here is the fi
 
 Read it across against the curve contract: depth 1500.0 m, gamma ray 43.1351 GAPI, bulk density 2.1893 g/cc, neutron porosity 0.2338 v/v, sonic transit time 399.7369 us/m. That is the entire trick to reading LAS data by eye: the `~C` section is the column key, and the columns never change order mid-file.
 
-The file spans 1500 to 1650 m at a 0.5 m step, which is (1650 - 1500) / 0.5 + 1 = 301 rows. That 301 is one of the six numbers the capstone grades, and now you can verify it from first principles instead of trusting a panel.
+The file spans 1500 to 1650 m at a 0.5 m step, which is (1650 - 1500) / 0.5 + 1 = 301 rows. A sample count is one of the readings the capstone grades on its own case files, and now you can verify one from first principles instead of trusting a panel.
 
 ## Nulls are numbers in the grid
 

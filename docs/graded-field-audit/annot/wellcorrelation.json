@@ -229,6 +229,7 @@
    "shipped": {
     "migration": "20261028a_w5_wellcorrelation.sql",
     "wave": "w5a",
+    "closes_leak": true,
     "rekey": {
      "key": "umudi3_top_b_displayed_base_1575_m",
      "label": "Umudi-3: TOP_B displayed depth, flattened on BASE_SAND at 1575 m",
@@ -252,7 +253,6 @@
      "owner_decision": false,
      "leak": false
     },
-    "closes_leak": true,
     "prior": {
      "migration": "20261024a_w1_wellcorrelation.sql",
      "wave": "w1",
@@ -553,6 +553,7 @@
    "shipped": {
     "migration": "20261028a_w5_wellcorrelation.sql",
     "wave": "w5a",
+    "closes_leak": true,
     "rekey": {
      "key": "umudi_shallowest_displayed_sand_1495_m",
      "label": "Shallowest displayed depth, flattened on TOP_SAND at 1495 m",
@@ -576,7 +577,6 @@
      "owner_decision": false,
      "leak": false
     },
-    "closes_leak": true,
     "prior": {
      "migration": "20261024a_w1_wellcorrelation.sql",
      "wave": "w1",

@@ -687,35 +687,27 @@
   {
    "tier": "advanced",
    "key": "krige_probe",
-   "source": "nextgen-panel",
-   "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:96 (Kriged at a probe point tile; type x 1500, y 2500 with Simple kriging, nugget 0.00025, range 900)",
-   "printed": {
-    "decimals": 6
-   },
+   "source": "unobtainable",
+   "source_ref": "/root/wt-b5-nextgen/src/lib/earthmodelTeaching.js:228 krigeProbe computed but never rendered; PopulationExplorer.jsx:81-92 has no tile for it",
+   "printed": null,
    "display_scale": 1,
-   "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:96 fmt(probe, 6), probe = m.krigeAt(px, py) (src/lib/earthmodelTeaching.js computePopulation.krigeAt)",
+   "display_ref": null,
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "tolerance",
+   "class": "display",
    "fix": {
+    "display": "/root/wt-b5-nextgen/src/components/course/panels/earthmodel/PopulationExplorer.jsx:87 -> add a tile 'Kriged at (1500, 2500)' = fmt(m.probes.krigeProbe, 6)",
     "new_tol": 0.0002
    },
    "owner_decision": false,
    "recommendation": "Add the tile at 6 decimals and tighten tol to 0.0002 so the mean no longer passes; owner to accept the tightening.",
-   "evidence": "New probe readout with x/y inputs; krigeAt(1500, 2500) = 0.2914277719922997 exactly (populationLab.test.js). Its default location is PROBE_DEFAULT (2000, 2300), which reads 0.279119 and, under every nugget/range option, stays > 0.0017 from the key, so no default state prints it (D2). At tol 0.0002 the mean 0.290516 (0.00091 away) fails; the nugget-0 value 0.291597 (1.7e-4) still passes, as the B5 annotation noted. Rounding miss at 6 dp 2.3e-7. The advanced m06 l04 walkthrough now names the readout and the 0.0002 tolerance; m05 l03/l05 no longer describe the nugget sweep as \"one tolerance\".",
+   "evidence": "No panel prints (1500, 2500); a 4x4 simple-kriging solve is not taught as a hand method, and the walkthrough admits 'The panel's default probe tile is not this one' (advanced m06 l04:17). Worse, tol 0.001 admits the MEAN: the default 'Kriged far from all wells' tile prints 0.2905162808 (PopulationExplorer.jsx:87) and 'Arithmetic vs weighted mean' 0.290516, both 0.00091 from 0.29143, so the collapse-to-the-mean answer the walkthrough names as wrong passes.",
    "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/advanced/m06-per-block-volume-and-the-workflow/l04-the-capstone-walkthrough.md prints this value, and the PopulationExplorer default state shows it (probe). The m05 l05 lesson prints 0.2914277719922997 verbatim. Tightening tol to 0.0002 can flip a pass to a fail (flag); it would still admit the nugget sweep (0 gives 0.29160) but reject the mean, the trend (0.295) and the per-block value (0.28627).",
    "leak": true,
-   "default_state_prints": false,
-   "reclassed_from": "display",
    "shipped": {
     "migration": "20261028a_w5_earthmodel.sql",
     "wave": "w5a",
-    "prompt": "krige_at_w1 was prompt-given: the prompt called it the exactness check and the tile's unit string printed \"W1 is 0.3150\", so W1's logged porosity passed without kriging anything. It is replaced by a measured per-block kriging output, the porosity jump across the fault on the y = 2200 row (block 0 no",
-    "tol": [
-     0.001,
-     0.0002
-    ],
     "closes_leak": true,
     "rekey": {
      "key": "oruma_krige_probe",
@@ -776,6 +768,7 @@
    "shipped": {
     "migration": "20261028a_w5_earthmodel.sql",
     "wave": "w5a",
+    "closes_leak": true,
     "rekey": {
      "key": "oruma_fault_jump_y2300",
      "label": "Porosity jump across the fault on the y = 2300 row",
@@ -799,7 +792,6 @@
      "owner_decision": false,
      "leak": false
     },
-    "closes_leak": true,
     "prior": {
      "migration": "20261024a_w1_earthmodel.sql",
      "wave": "w1",

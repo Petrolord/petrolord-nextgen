@@ -1,6 +1,6 @@
 # One file converts
 
-The campaign runs all six teaching files through the same import pipeline and returns a field that reads: files needing depth unit conversion, 1. One number, drawn from six files, graded with a tolerance of zero like every other field in this capstone. This lesson is about why one is the answer that matters, and how you would reach it without opening a single file.
+The campaign runs all six teaching files through the same import pipeline and returns a field that reads: files needing depth unit conversion, 1. One number, drawn from six files, and the capstone grades the same field on the ODUMA campaign with a tolerance of zero, like every other field in it. This lesson is about why one is the answer that matters, and how you would reach it without opening a single file.
 
 ## The field counts files, not curves
 
@@ -17,7 +17,7 @@ The campaign asks a smaller question of a larger set. Of the six files delivered
 | quirks_20.las | no |
 | wrapped_12.las | no |
 
-Five no, one yes, so the graded count is 1 and the file is feet_20.las.
+Five no, one yes, so the count is 1 and the file is feet_20.las.
 
 Note what the field does with that file. It adds one. More than one curve inside feet_20 was restated by the pipeline, and the campaign still adds one, because the question was how many files, not how many curves. A learner who reports a curve count has answered a question nobody asked, and with a tolerance of zero there is no partial credit for a right answer to the wrong question.
 

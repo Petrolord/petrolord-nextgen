@@ -1,6 +1,6 @@
 # Why the index curve is not a kind
 
-DEPT carries the kind depth. The importer assigns it, stores it, and will tell you about it. And the graded count of recognised kinds on feet_20 is 4 rather than 5, because DEPT is not counted.
+DEPT carries the kind depth. The importer assigns it, stores it, and will tell you about it. And the count of recognised kinds on feet_20 is 4 rather than 5, because DEPT is not counted.
 
 That looks like an inconsistency until you see what the index curve is, at which point it stops looking like one. This lesson is about that difference.
 
@@ -26,7 +26,7 @@ The index derives the shape of the well. The start depth, the stop depth and the
 
 ## Why the count excludes it
 
-Now the count. The question the graded number answers is how many measurements the importer recognised, and the index is not a measurement.
+Now the count. The question the count answers is how many measurements the importer recognised, and the index is not a measurement.
 
 Counting it would make the number mean something less useful. Every well ever imported has exactly one index, so including it adds one to every count and tells you nothing you did not already know. It would also make the number harder to reason about, because a count that mixes the axis with the things sampled on it cannot be compared across files without first subtracting the constant.
 

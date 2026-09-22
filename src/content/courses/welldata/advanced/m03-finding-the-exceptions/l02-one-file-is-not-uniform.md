@@ -1,6 +1,6 @@
 # One file is not uniform
 
-The campaign field reads: files with a uniform depth step, 5. Five of the six teaching files have a depth column whose sampling is constant, and one does not. The one that does not is irregular_20.las. Both halves of that sentence are true, and only one of them is the graded answer.
+On the teaching campaign the field reads: files with a uniform depth step, 5. Five of the six teaching files have a depth column whose sampling is constant, and one does not. The one that does not is irregular_20.las. Both halves of that sentence are true, and only one of them answers the field.
 
 ## The field is a pass count
 
@@ -47,16 +47,16 @@ And a pass count forces you to confirm the quiet files. Reporting the failure me
 
 ## Worked example
 
-Work the field in the order the panel presents it. Take each file, read the uniform column, and keep a running count of yes entries: basic_20 yes, one. feet_20 yes, two. irregular_20 no, still two. nullheavy_20 yes, three. quirks_20 yes, four. wrapped_12 yes, five. The graded value is 5.
+Work the field in the order the panel presents it. Take each file, read the uniform column, and keep a running count of yes entries: basic_20 yes, one. feet_20 yes, two. irregular_20 no, still two. nullheavy_20 yes, three. quirks_20 yes, four. wrapped_12 yes, five. The field reads 5.
 
-Then state the finding in one sentence that carries both numbers: 5 of the 6 files have a uniform depth step, and the exception is irregular_20.las. That sentence answers the graded field and names the file to chase, and it cannot be misread as either 5 failures or 1 pass.
+Then state the finding in one sentence that carries both numbers: 5 of the 6 files have a uniform depth step, and the exception is irregular_20.las. That sentence answers the field and names the file to chase, and it cannot be misread as either 5 failures or 1 pass.
 
-Open the panel below and read the uniform column down the six files, then check your count against the graded field.
+Open the panel below and read the uniform column down the six files, then check your count against the campaign field.
 
 {{panel:wd-campaign-explorer}}
 
 ## Exercise
 
-Write down the graded value for files with a uniform depth step, and beside it write the value a learner would report if they answered the question of how many files fail the test. Then write the single sentence you would put in a delivery note so that neither number can be mistaken for the other. Finally, state what the graded field would read if a seventh file arrived and it too had an irregular depth column.
+Write down the teaching campaign's value for files with a uniform depth step, and beside it write the value a learner would report if they answered the question of how many files fail the test. Then write the single sentence you would put in a delivery note so that neither number can be mistaken for the other. Finally, state what the field would read if a seventh file arrived and it too had an irregular depth column.
 
-Self-check: the graded value is 5, the failure count is 1, and both describe the same campaign over six files. A sentence that survives being copied reads that 5 of the 6 files have a uniform depth step and the exception is irregular_20.las, because it carries the count, the denominator and the name of the file to chase. A seventh irregular file would leave the pass count at 5 while the batch became 7, so the pass count alone would no longer describe the delivery, which is the reason a count of this kind should always travel with its denominator.
+Self-check: the field reads 5, the failure count is 1, and both describe the same campaign over six files. A sentence that survives being copied reads that 5 of the 6 files have a uniform depth step and the exception is irregular_20.las, because it carries the count, the denominator and the name of the file to chase. A seventh irregular file would leave the pass count at 5 while the batch became 7, so the pass count alone would no longer describe the delivery, which is the reason a count of this kind should always travel with its denominator.

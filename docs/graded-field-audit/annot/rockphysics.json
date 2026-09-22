@@ -807,6 +807,7 @@
    "shipped": {
     "migration": "20261028a_w5_rockphysics.sql",
     "wave": "w5a",
+    "closes_leak": true,
     "rekey": {
      "key": "uquo_brine_max_shuey_err",
      "label": "Largest Shuey error, brine case, 0 to 40 deg",
@@ -830,7 +831,6 @@
      "owner_decision": false,
      "leak": false
     },
-    "closes_leak": true,
     "prior": {
      "migration": "20261024a_w1_rockphysics.sql",
      "wave": "w1",

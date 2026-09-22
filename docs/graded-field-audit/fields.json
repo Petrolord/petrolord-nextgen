@@ -8932,36 +8932,32 @@
   "expected": 0.2914277719922997,
   "tol": 0.001,
   "rel_tol": 0.0034313819618619693,
-  "source": "nextgen-panel",
-  "source_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:96 (Kriged at a probe point tile; type x 1500, y 2500 with Simple kriging, nugget 0.00025, range 900)",
-  "printed": {
-   "decimals": 6
-  },
+  "source": "unobtainable",
+  "source_ref": "/root/wt-b5-nextgen/src/lib/earthmodelTeaching.js:228 krigeProbe computed but never rendered; PopulationExplorer.jsx:81-92 has no tile for it",
+  "printed": null,
   "display_scale": 1.0,
-  "display_ref": "src/components/course/panels/earthmodel/PopulationExplorer.jsx:96 fmt(probe, 6), probe = m.krigeAt(px, py) (src/lib/earthmodelTeaching.js computePopulation.krigeAt)",
+  "display_ref": null,
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": 2.2800770033137852e-07,
+  "rounding_miss": null,
   "answer_space": null,
   "guess_p": null,
-  "flags": [],
-  "class": "tolerance",
+  "flags": [
+   "no_route"
+  ],
+  "class": "display",
   "fix": {
+   "display": "/root/wt-b5-nextgen/src/components/course/panels/earthmodel/PopulationExplorer.jsx:87 -> add a tile 'Kriged at (1500, 2500)' = fmt(m.probes.krigeProbe, 6)",
    "new_tol": 0.0002
   },
   "owner_decision": false,
   "recommendation": "Add the tile at 6 decimals and tighten tol to 0.0002 so the mean no longer passes; owner to accept the tightening.",
   "leak": true,
-  "reclassed_from": "display",
+  "reclassed_from": null,
   "shipped": {
    "migration": "20261028a_w5_earthmodel.sql",
    "wave": "w5a",
-   "prompt": "krige_at_w1 was prompt-given: the prompt called it the exactness check and the tile's unit string printed \"W1 is 0.3150\", so W1's logged porosity passed without kriging anything. It is replaced by a measured per-block kriging output, the porosity jump across the fault on the y = 2200 row (block 0 no",
-   "tol": [
-    0.001,
-    0.0002
-   ],
    "closes_leak": true,
    "rekey": {
     "key": "oruma_krige_probe",
@@ -8996,7 +8992,7 @@
     ]
    }
   },
-  "evidence": "New probe readout with x/y inputs; krigeAt(1500, 2500) = 0.2914277719922997 exactly (populationLab.test.js). Its default location is PROBE_DEFAULT (2000, 2300), which reads 0.279119 and, under every nugget/range option, stays > 0.0017 from the key, so no default state prints it (D2). At tol 0.0002 the mean 0.290516 (0.00091 away) fails; the nugget-0 value 0.291597 (1.7e-4) still passes, as the B5 annotation noted. Rounding miss at 6 dp 2.3e-7. The advanced m06 l04 walkthrough now names the readout and the 0.0002 tolerance; m05 l03/l05 no longer describe the nugget sweep as \"one tolerance\".",
+  "evidence": "No panel prints (1500, 2500); a 4x4 simple-kriging solve is not taught as a hand method, and the walkthrough admits 'The panel's default probe tile is not this one' (advanced m06 l04:17). Worse, tol 0.001 admits the MEAN: the default 'Kriged far from all wells' tile prints 0.2905162808 (PopulationExplorer.jsx:87) and 'Arithmetic vs weighted mean' 0.290516, both 0.00091 from 0.29143, so the collapse-to-the-mean answer the walkthrough names as wrong passes.",
   "notes": "LEAK: /root/wt-b5-nextgen/src/content/courses/earthmodel/advanced/m06-per-block-volume-and-the-workflow/l04-the-capstone-walkthrough.md prints this value, and the PopulationExplorer default state shows it (probe). The m05 l05 lesson prints 0.2914277719922997 verbatim. Tightening tol to 0.0002 can flip a pass to a fail (flag); it would still admit the nugget sweep (0 gives 0.29160) but reject the mean, the trend (0.295) and the per-block value (0.28627)."
  },
  {
@@ -9033,6 +9029,7 @@
   "shipped": {
    "migration": "20261028a_w5_earthmodel.sql",
    "wave": "w5a",
+   "closes_leak": true,
    "rekey": {
     "key": "oruma_fault_jump_y2300",
     "label": "Porosity jump across the fault on the y = 2300 row",
@@ -9056,7 +9053,6 @@
     "owner_decision": false,
     "leak": false
    },
-   "closes_leak": true,
    "prior": {
     "migration": "20261024a_w1_earthmodel.sql",
     "wave": "w1",
@@ -20998,6 +20994,7 @@
   "shipped": {
    "migration": "20261028a_w5_mapping.sql",
    "wave": "w5a",
+   "closes_leak": true,
    "rekey": {
     "key": "adim_iso_nodes_above_well_mean",
     "label": "Live isochore nodes above the well mean",
@@ -21019,7 +21016,6 @@
     "owner_decision": false,
     "leak": false
    },
-   "closes_leak": true,
    "prior": {
     "migration": "20261024a_w1_mapping.sql",
     "wave": "w1",
@@ -21442,6 +21438,7 @@
   "shipped": {
    "migration": "20261028a_w5_mapping.sql",
    "wave": "w5a",
+   "closes_leak": true,
    "rekey": {
     "key": "adim_depth_at_prospect_with_adim8_m",
     "label": "Depth at the prospect with Adim-8 included",
@@ -21465,7 +21462,6 @@
     "owner_decision": false,
     "leak": false
    },
-   "closes_leak": true,
    "prior": {
     "migration": "20261024a_w1_mapping.sql",
     "wave": "w1",
@@ -32216,6 +32212,7 @@
   "shipped": {
    "migration": "20261028a_w5_rockphysics.sql",
    "wave": "w5a",
+   "closes_leak": true,
    "rekey": {
     "key": "uquo_brine_max_shuey_err",
     "label": "Largest Shuey error, brine case, 0 to 40 deg",
@@ -32239,7 +32236,6 @@
     "owner_decision": false,
     "leak": false
    },
-   "closes_leak": true,
    "prior": {
     "migration": "20261024a_w1_rockphysics.sql",
     "wave": "w1",
@@ -37471,6 +37467,7 @@
   "shipped": {
    "migration": "20261028b_w5_sim.sql",
    "wave": "w5b",
+   "closes_leak": true,
    "rekey": {
     "key": "validator_error_messages",
     "label": "Validator error messages across the seven cases",
@@ -37492,7 +37489,6 @@
     "owner_decision": false,
     "leak": false
    },
-   "closes_leak": true,
    "prior": {
     "migration": "20261024a_w1_sim.sql",
     "wave": "w1",
@@ -41212,21 +41208,15 @@
   "answer_space": null,
   "guess_p": null,
   "flags": [],
-  "class": "tolerance",
-  "fix": {
-   "new_tol": 0.0005
-  },
+  "class": "none",
+  "fix": null,
   "owner_decision": false,
   "recommendation": "Course-level: the capstone reuses the lesson dataset (Ekene flood, fixture waterflood.json), the working-the-capstone lesson tells the learner to read the answers off the panel tiles at the capstone settings, and the lessons print the graded value in full. Precision and tolerance are fine; the question for the owner is whether to re-base the three capstones on an unseen case (as the cementing and newer wave courses do) so the panel is a tool rather than an answer sheet.",
   "leak": true,
-  "reclassed_from": "none",
+  "reclassed_from": null,
   "shipped": {
    "migration": "20261028b_w5_waterflood.sql",
    "wave": "w5b",
-   "tol": [
-    0.002,
-    0.0005
-   ],
    "closes_leak": true,
    "rekey": {
     "key": "hall_ratio_e4",
@@ -42554,6 +42544,7 @@
   "shipped": {
    "migration": "20261028a_w5_wellcorrelation.sql",
    "wave": "w5a",
+   "closes_leak": true,
    "rekey": {
     "key": "umudi3_top_b_displayed_base_1575_m",
     "label": "Umudi-3: TOP_B displayed depth, flattened on BASE_SAND at 1575 m",
@@ -42577,7 +42568,6 @@
     "owner_decision": false,
     "leak": false
    },
-   "closes_leak": true,
    "prior": {
     "migration": "20261024a_w1_wellcorrelation.sql",
     "wave": "w1",
@@ -42941,6 +42931,7 @@
   "shipped": {
    "migration": "20261028a_w5_wellcorrelation.sql",
    "wave": "w5a",
+   "closes_leak": true,
    "rekey": {
     "key": "umudi_shallowest_displayed_sand_1495_m",
     "label": "Shallowest displayed depth, flattened on TOP_SAND at 1495 m",
@@ -42964,7 +42955,6 @@
     "owner_decision": false,
     "leak": false
    },
-   "closes_leak": true,
    "prior": {
     "migration": "20261024a_w1_wellcorrelation.sql",
     "wave": "w1",
@@ -44155,9 +44145,33 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata_beginner.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma2_n_samples",
+    "label": "oduma2_main: depth samples",
+    "unit": "count",
+    "expected": 437.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/LasInspector.jsx (Samples / NULL tile)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/LasInspector.jsx (Samples / NULL tile)",
+    "prompt_precision": "Report the requested values exactly as the parser shows them: sample and null counts are integers",
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "Samples / NULL tile prints qc.depth.nSamples for oduma2_main once opened: 437. lasio 0.32 reads the same count (w5c/welldata/oracle_lasio.py). Integer count at tol 0.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Samples / NULL tile prints qc.depth.nSamples as a raw integer ('301 / -999.25' style); an integer count graded at tol 0 is honest.",
   "notes": "Lesson giveaway: src/content/courses/welldata/beginner/m06-the-qc-workflow/l03-the-capstone-walkthrough.md states every graded value (301, 8, 64.9272, 0.6096, 201, 161) in the walkthrough and its self-check. The panel reading is the designed task, so the class stays none, but the lesson hands the answer over."
  },
@@ -44188,9 +44202,33 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata_beginner.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma2_gr_nulls",
+    "label": "oduma2_main: GR null samples",
+    "unit": "count",
+    "expected": 13.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/LasInspector.jsx (per-curve nulls column)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/LasInspector.jsx (per-curve nulls column)",
+    "prompt_precision": "Report the requested values exactly as the parser shows them: sample and null counts are integers",
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "GR row nulls column prints c.nullCount = 13; RHOB beside it carries 5. lasio agrees.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Per-curve table nulls column prints c.nullCount as an integer (8 for GR on basic_20); tol 0 on a true count is honest, and the value is not a small guessable class.",
   "notes": "Lesson giveaway: src/content/courses/welldata/beginner/m06-the-qc-workflow/l03-the-capstone-walkthrough.md states every graded value (301, 8, 64.9272, 0.6096, 201, 161) in the walkthrough and its self-check. The panel reading is the designed task, so the class stays none, but the lesson hands the answer over."
  },
@@ -44221,9 +44259,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata_beginner.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma2_gr_mean",
+    "label": "oduma2_main: mean GR (finite samples)",
+    "unit": "GAPI",
+    "expected": 76.99698143635156,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/LasInspector.jsx (Mean (finite) column)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/LasInspector.jsx num(v, 4)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "num(v, 4) prints 76.9970 against 76.99698143635156; tol 0.05 is far wider than half a unit of the 4th decimal. lasio's float32 nanmean is identical.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Mean (finite) column uses num(v, 4) = toFixed(4), printing 64.9272 against expected 64.92719962...; tol 0.05 is far wider than half a unit of the 4th decimal.",
   "notes": "Lesson giveaway: src/content/courses/welldata/beginner/m06-the-qc-workflow/l03-the-capstone-walkthrough.md states every graded value (301, 8, 64.9272, 0.6096, 201, 161) in the walkthrough and its self-check. The panel reading is the designed task, so the class stays none, but the lesson hands the answer over."
  },
@@ -44254,9 +44318,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata_beginner.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma3_step_m",
+    "label": "oduma3_feet: depth step, converted",
+    "unit": "m",
+    "expected": 0.0762,
+    "tol": 0.001
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/LasInspector.jsx (Step tile)",
+    "printed": {
+     "decimals": 4
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/LasInspector.jsx (Step tile)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "Step tile prints the average native step 0.2500 F and 0.0762 m (0.25 x 0.3048); graded 0.0762 tol 0.001. The float32 first difference 0.07617 also passes; the 0.3048 factor unapplied (0.25) fails.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Step tile prints `${num(stepNative,4)} F / ${num(stepM,4)} m` = '2.0000 F / 0.6096 m'; stepM is the average native step x 0.3048 (src/lib/welldataTeaching.js:57-72). tol 0.001 covers the 4-decimal print and the float32 first difference 0.609619.",
   "notes": "Lesson giveaway: src/content/courses/welldata/beginner/m06-the-qc-workflow/l03-the-capstone-walkthrough.md states every graded value (301, 8, 64.9272, 0.6096, 201, 161) in the walkthrough and its self-check. The panel reading is the designed task, so the class stays none, but the lesson hands the answer over."
  },
@@ -44287,9 +44377,33 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata_beginner.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma5_pef_nulls",
+    "label": "oduma5_nulls: PEF null samples",
+    "unit": "count",
+    "expected": 241.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/LasInspector.jsx (dead curve row, red)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/LasInspector.jsx (dead curve row, red)",
+    "prompt_precision": "Report the requested values exactly as the parser shows them: sample and null counts are integers",
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "oduma5_nulls PEF row (dead, red) prints nulls 241; the file flags nulls with -9999, which the parser reads from ~Well NULL. NPHI is also dead with the same count, so the field checks the dead-curve reading.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "nullheavy_20 NPHI row (rendered red as dead) prints nulls 201 as an integer; tol 0 on a count is honest.",
   "notes": "Lesson giveaway: src/content/courses/welldata/beginner/m06-the-qc-workflow/l03-the-capstone-walkthrough.md states every graded value (301, 8, 64.9272, 0.6096, 201, 161) in the walkthrough and its self-check. The panel reading is the designed task, so the class stays none, but the lesson hands the answer over. The dead row also shows samples 201 in the adjacent column, so the value is doubly visible, but it is still a reading."
  },
@@ -44320,9 +44434,33 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata_beginner.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma1_n_samples",
+    "label": "oduma1_wrapped: depth samples",
+    "unit": "count",
+    "expected": 207.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/LasInspector.jsx (Samples / NULL tile)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/LasInspector.jsx (Samples / NULL tile)",
+    "prompt_precision": "Report the requested values exactly as the parser shows them: sample and null counts are integers",
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "oduma1_wrapped (LAS 1.2, WRAP YES) Samples tile prints 207; the data section has four physical lines per sample, the taught trap.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "wrapped_12 Samples / NULL tile prints 161 as an integer; tol 0 on a count is honest, and 483 (physical lines) is the taught trap.",
   "notes": "Lesson giveaway: src/content/courses/welldata/beginner/m06-the-qc-workflow/l03-the-capstone-walkthrough.md states every graded value (301, 8, 64.9272, 0.6096, 201, 161) in the walkthrough and its self-check. The panel reading is the designed task, so the class stays none, but the lesson hands the answer over."
  },
@@ -44353,9 +44491,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma3_start_md_m",
+    "label": "oduma3_feet: start depth (converted)",
+    "unit": "m",
+    "expected": 2139.696044921875,
+    "tol": 0.01
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/ImportExplorer.jsx (Start converted tile)",
+    "printed": {
+     "decimals": 8
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/ImportExplorer.jsx (Start converted tile)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "fmt(prep.startMdM, 8) prints 2139.69604492 m; tol 0.01 also passes the hand answer 7020 x 0.3048 = 2139.696.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "'Start converted' tile prints fmt(prep.startMdM, 8) = 1493.52001953 m; tol 0.01 also passes the hand answer 4900 x 0.3048 = 1493.52.",
   "notes": "Lesson giveaway: src/content/courses/welldata/intermediate/m06-the-import-workflow/l03-the-capstone-walkthrough.md states the five feet_20 values in its walkthrough and self-check; possible LEAK: ImportExplorer opens on feet_20 by default (ImportExplorer.jsx:42) and the probe shows these values on first render."
  },
@@ -44386,9 +44550,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma3_stop_md_m",
+    "label": "oduma3_feet: stop depth (converted)",
+    "unit": "m",
+    "expected": 2169.26171875,
+    "tol": 0.01
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/ImportExplorer.jsx (Stop converted tile)",
+    "printed": {
+     "decimals": 8
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/ImportExplorer.jsx (Stop converted tile)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "fmt(prep.stopMdM, 8) prints 2169.26171875 m; tol 0.01 also passes 7117 x 0.3048 = 2169.2616.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "'Stop converted' tile prints fmt(prep.stopMdM, 8) = 1584.95996094 m; tol 0.01 also passes 5200 x 0.3048 = 1584.96.",
   "notes": "Lesson giveaway: src/content/courses/welldata/intermediate/m06-the-import-workflow/l03-the-capstone-walkthrough.md states the five feet_20 values in its walkthrough and self-check; possible LEAK: ImportExplorer opens on feet_20 by default (ImportExplorer.jsx:42) and the probe shows these values on first render."
  },
@@ -44419,9 +44609,35 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma3_import_step_m",
+    "label": "oduma3_feet: depth step (converted)",
+    "unit": "m",
+    "expected": 0.076171875,
+    "tol": 0.001
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/ImportExplorer.jsx (Reported step tile)",
+    "printed": {
+     "decimals": 12
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/ImportExplorer.jsx (Reported step tile)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "fmt(r.step, 12) prints 0.076171875000 m exactly (the float32 first difference); tol 0.001 also passes 0.0762.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "'Reported step' tile prints fmt(r.step, 12) = 0.609619140625 m exactly; tol 0.001 also passes 0.6096, the average step and the other float32 differences.",
   "notes": "Lesson giveaway: src/content/courses/welldata/intermediate/m06-the-import-workflow/l03-the-capstone-walkthrough.md states the five feet_20 values in its walkthrough and self-check; possible LEAK: ImportExplorer opens on feet_20 by default (ImportExplorer.jsx:42) and the probe shows these values on first render."
  },
@@ -44452,9 +44668,33 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma3_converted_curves",
+    "label": "oduma3_feet: curves unit-converted",
+    "unit": "count",
+    "expected": 3.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/ImportExplorer.jsx (Curves unit-converted tile)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/ImportExplorer.jsx (Curves unit-converted tile)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "prints 3: DEPT (F), DT (US/F) and TVD (F) are flagged YES in the table. A metre-only reader who counts the sonic alone gives 2.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "'Curves unit-converted' tile prints String(r.converted) = 2 (DEPT F->M and DT US/F->US/M, both flagged YES in the table at :92-93). A true count shown as an integer, tol 0 honest; 0..5 of five columns gives 1/6 by guessing.",
   "notes": "Lesson giveaway: src/content/courses/welldata/intermediate/m06-the-import-workflow/l03-the-capstone-walkthrough.md states the five feet_20 values in its walkthrough and self-check; possible LEAK: ImportExplorer opens on feet_20 by default (ImportExplorer.jsx:42) and the probe shows these values on first render."
  },
@@ -44485,9 +44725,33 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma3_recognized_kinds",
+    "label": "oduma3_feet: curve kinds recognised",
+    "unit": "count",
+    "expected": 6.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/ImportExplorer.jsx (Curve kinds recognised tile)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/ImportExplorer.jsx (Curve kinds recognised tile)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "prints 6: GR, RHOB, NPHI, DT, ILD and SP recognised; TVD and TENS read 'not recognised'. Eight curves after the index, so a curve count gives 8.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "'Curve kinds recognised' tile prints String(r.kinds) = 4 with unit 'count (index excluded)'. Integer count, tol 0 honest; 0..4 non-index curves gives 1/5 by guessing, below the 0.25 bar.",
   "notes": "Lesson giveaway: src/content/courses/welldata/intermediate/m06-the-import-workflow/l03-the-capstone-walkthrough.md states the five feet_20 values in its walkthrough and self-check; possible LEAK: ImportExplorer opens on feet_20 by default (ImportExplorer.jsx:42) and the probe shows these values on first render. A learner who assumes every standard curve is recognised would guess 4 (the maximum), so the effective guess rate is higher than 1/5; worth watching but not a redesign on its own."
  },
@@ -44518,9 +44782,33 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma4_n_samples",
+    "label": "oduma4_irregular: depth samples",
+    "unit": "count",
+    "expected": 173.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/ImportExplorer.jsx (Samples tile)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/ImportExplorer.jsx (Samples tile)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "with oduma4_irregular open the Samples tile prints 173 rows; the uniform-step tile prints 0 beside it. lasio agrees.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "With irregular_20 selected the 'Samples' tile prints String(r.samples) = 121 rows (probe state irregular_20.las: 'Samples121rows'); LasInspector.jsx:54 prints the same. A measured count at tol 0, honest.",
   "notes": "This is the already-applied redesign of irregular_uniform '(1 yes / 0 no)' (migrations/20260916_labelleak_recut_welldata_intermediate.sql; docs/gate-audit/promptleak.md:566). Needs one click off the feet_20 default, so not a default-state leak. STALE LESSON: src/content/courses/welldata/intermediate/m06-the-import-workflow/l03-the-capstone-walkthrough.md still documents the retired field ('irregular_20 has a uniform step (1 yes / 0 no)', value 0, tolerance 0) in its table, section 6, the 'three of the six must be exact' paragraph and the self-check; it should be rewritten to irregular_samples = 121 read from the Samples tile on irregular_20."
  },
@@ -44551,9 +44839,33 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma_campaign_curves",
+    "label": "Curves imported across the ODUMA campaign",
+    "unit": "count",
+    "expected": 31.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/CampaignExplorer.jsx (campaign row and Curves imported tile)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/CampaignExplorer.jsx (campaign row and Curves imported tile)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "prints 31 for the six ODUMA files (5+8+4+5+5+4, depth excluded). lasio agrees.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "'Curves imported' tile prints String(A.campaignCurves) = 24 (depth excluded), also in the campaign row at :197. Integer count, tol 0 honest; the taught trap is 30.",
   "notes": "Lesson giveaway: src/content/courses/welldata/advanced/m06-the-campaign-workflow/l03-the-capstone-walkthrough.md prints an Expected column with all six answers; possible LEAK: CampaignExplorer prints all six campaign tiles on its default render (probe: 'Curves imported24 ... Files needing conversion1 ... Dead curves1 ... uniform step5of 6 ... wrapped_12 depth samples161 ... flagged nulls272'), and several lesson slugs name the answers (m02 l01-twenty-four-curves, m03 l01-one-file-converts, l02-one-file-is-not-uniform, l03-one-curve-is-dead, m04 l01-the-two-hundred-and-seventy-two)."
  },
@@ -44584,9 +44896,33 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma_converted_files",
+    "label": "Files needing depth unit conversion",
+    "unit": "count",
+    "expected": 3.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/CampaignExplorer.jsx (Files needing conversion tile)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/CampaignExplorer.jsx (Files needing conversion tile)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "prints 3: oduma1_wrapped, oduma3_feet and oduma6_spliced log depth in feet; no metre file carries a feet-referenced curve, so the tile counts depth conversions only.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "'Files needing conversion' tile prints 1; integer count of 0..6 files, tol 0 honest, guess 1/7.",
   "notes": "Lesson giveaway: src/content/courses/welldata/advanced/m06-the-campaign-workflow/l03-the-capstone-walkthrough.md prints an Expected column with all six answers; possible LEAK: CampaignExplorer prints all six campaign tiles on its default render (probe: 'Curves imported24 ... Files needing conversion1 ... Dead curves1 ... uniform step5of 6 ... wrapped_12 depth samples161 ... flagged nulls272'), and several lesson slugs name the answers (m02 l01-twenty-four-curves, m03 l01-one-file-converts, l02-one-file-is-not-uniform, l03-one-curve-is-dead, m04 l01-the-two-hundred-and-seventy-two)."
  },
@@ -44617,9 +44953,33 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma_dead_curves",
+    "label": "Dead curves detected",
+    "unit": "count",
+    "expected": 2.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/CampaignExplorer.jsx (Dead curves tile)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/CampaignExplorer.jsx (Dead curves tile)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "prints 2: NPHI and PEF in oduma5_nulls. A file count gives 1.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "'Dead curves' tile prints 1; integer count, tol 0 honest. Plausible guesses cluster at 0..6, so about 1/7.",
   "notes": "Lesson giveaway: src/content/courses/welldata/advanced/m06-the-campaign-workflow/l03-the-capstone-walkthrough.md prints an Expected column with all six answers; possible LEAK: CampaignExplorer prints all six campaign tiles on its default render (probe: 'Curves imported24 ... Files needing conversion1 ... Dead curves1 ... uniform step5of 6 ... wrapped_12 depth samples161 ... flagged nulls272'), and several lesson slugs name the answers (m02 l01-twenty-four-curves, m03 l01-one-file-converts, l02-one-file-is-not-uniform, l03-one-curve-is-dead, m04 l01-the-two-hundred-and-seventy-two)."
  },
@@ -44650,9 +45010,33 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma_uniform_files",
+    "label": "Files with a uniform depth step",
+    "unit": "count",
+    "expected": 4.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/CampaignExplorer.jsx (Files with a uniform step tile)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/CampaignExplorer.jsx (Files with a uniform step tile)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "prints 4 of 6: oduma4_irregular and oduma6_spliced (two runs at 0.5 and 0.25 ft) fail. Counting the failures gives 2.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "'Files with a uniform step' tile prints '5' with unit 'of 6'; integer count, tol 0 honest, guess 1/7.",
   "notes": "Lesson giveaway: src/content/courses/welldata/advanced/m06-the-campaign-workflow/l03-the-capstone-walkthrough.md prints an Expected column with all six answers; possible LEAK: CampaignExplorer prints all six campaign tiles on its default render (probe: 'Curves imported24 ... Files needing conversion1 ... Dead curves1 ... uniform step5of 6 ... wrapped_12 depth samples161 ... flagged nulls272'), and several lesson slugs name the answers (m02 l01-twenty-four-curves, m03 l01-one-file-converts, l02-one-file-is-not-uniform, l03-one-curve-is-dead, m04 l01-the-two-hundred-and-seventy-two). The intermediate prompt itself calls irregular_20 'the one teaching file whose depth step is NOT uniform', so a learner who passed that tier can infer 5 without working."
  },
@@ -44683,9 +45067,33 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma1_wrapped_samples",
+    "label": "Depth samples in oduma1_wrapped",
+    "unit": "count",
+    "expected": 207.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/CampaignExplorer.jsx (per-file samples column)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/CampaignExplorer.jsx (per-file samples column)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "the per-file table prints samples 207 for oduma1_wrapped; the data section holds four times as many physical lines.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "'wrapped_12 depth samples' tile prints String(A.wrappedSamples) = 161; integer count at tol 0, honest. Same value as the beginner field wrapped_n_samples.",
   "notes": "Lesson giveaway: src/content/courses/welldata/advanced/m06-the-campaign-workflow/l03-the-capstone-walkthrough.md prints an Expected column with all six answers; possible LEAK: CampaignExplorer prints all six campaign tiles on its default render (probe: 'Curves imported24 ... Files needing conversion1 ... Dead curves1 ... uniform step5of 6 ... wrapped_12 depth samples161 ... flagged nulls272'), and several lesson slugs name the answers (m02 l01-twenty-four-curves, m03 l01-one-file-converts, l02-one-file-is-not-uniform, l03-one-curve-is-dead, m04 l01-the-two-hundred-and-seventy-two). Also graded identically at beginner (wrapped_n_samples = 161), so anyone holding the Associate certificate already knows it."
  },
@@ -44716,9 +45124,33 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028c_w5_welldata.sql",
+   "wave": "w5c",
+   "rekey": {
+    "key": "oduma5_flagged_nulls",
+    "label": "Flagged nulls in oduma5_nulls",
+    "unit": "count",
+    "expected": 525.0,
+    "tol": 0.0
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/welldata/CampaignExplorer.jsx (per-file nulls column; per-curve total)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/welldata/CampaignExplorer.jsx (per-file nulls column; per-curve total)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "prints 525 = GR 37 + RHOB 6 + NPHI 241 + PEF 241 in the per-curve composition. lasio agrees.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "'nullheavy_20 flagged nulls' tile prints 272; the lower table (open by default on nullheavy_20, :158) totals 71+0+201+0 = 272 at :238. Integer count, tol 0 honest.",
   "notes": "Lesson giveaway: src/content/courses/welldata/advanced/m06-the-campaign-workflow/l03-the-capstone-walkthrough.md prints an Expected column with all six answers; possible LEAK: CampaignExplorer prints all six campaign tiles on its default render (probe: 'Curves imported24 ... Files needing conversion1 ... Dead curves1 ... uniform step5of 6 ... wrapped_12 depth samples161 ... flagged nulls272'), and several lesson slugs name the answers (m02 l01-twenty-four-curves, m03 l01-one-file-converts, l02-one-file-is-not-uniform, l03-one-curve-is-dead, m04 l01-the-two-hundred-and-seventy-two). The panel Note text (:256) also states '272 nulls ... 201 of them are NPHI'."
  },

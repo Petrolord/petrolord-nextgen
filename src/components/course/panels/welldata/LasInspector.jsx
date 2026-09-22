@@ -1,18 +1,22 @@
 import React, { useMemo, useState } from 'react';
 import { TEACHING_FILES, qcFile, headerRows } from '@/lib/welldataTeaching';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import UserLasPicker, { mergeFiles } from './UserLasPicker';
 
 // LAS inspector: the six golden teaching files through the real parser,
-// with the QC panel the capstone is read from. Shared by the Well Data
-// Manager learning page and the DC5 lesson embeds. The learner drives
-// the file choice; every number on screen is parsed live.
+// with the QC panel. Shared by the Well Data Manager learning page and the
+// DC5 lesson embeds. The learner drives the file choice; every number on
+// screen is parsed live. It opens on a teaching file; the capstone case files
+// are never preloaded, and appear only when the learner opens them.
 const num = (v, dp = 4) => (v == null || Number.isNaN(v) ? '-' : Number(v).toFixed(dp));
 
 const LasInspector = () => {
   const [fileId, setFileId] = useState(TEACHING_FILES[0].id);
   const [showRaw, setShowRaw] = useState(false);
+  const [userFiles, setUserFiles] = useState([]);
 
-  const file = TEACHING_FILES.find((f) => f.id === fileId);
+  const allFiles = [...TEACHING_FILES, ...userFiles];
+  const file = allFiles.find((f) => f.id === fileId) || TEACHING_FILES[0];
   const qc = useMemo(() => {
     try {
       return qcFile(file);
@@ -28,9 +32,10 @@ const LasInspector = () => {
 
   return (
     <PanelShell title="LAS inspector"
-      subtitle="Load each teaching file with the real parser and read its QC panel. The capstone numbers are read from exactly these tiles and rows.">
+      subtitle="Load each file with the real parser and read its QC panel. The capstone asks for the same tiles and rows on its own case files: download them from the capstone card and open them here.">
+      <UserLasPicker onFiles={(files) => { setUserFiles((prev) => mergeFiles(prev, files)); setFileId(files[0].id); }} />
       <div className="flex flex-wrap gap-2">
-        {TEACHING_FILES.map((f) => (
+        {allFiles.map((f) => (
           <button key={f.id} type="button" onClick={() => setFileId(f.id)}
             className={`px-3 py-1.5 rounded-md border text-sm transition-colors ${
               f.id === fileId

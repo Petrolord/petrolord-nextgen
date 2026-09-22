@@ -1,6 +1,6 @@
 # Counting the conversions
 
-The graded number for this module is a count. Run the import pipeline on feet_20 and report how many curves were unit-converted. The answer is 2, it is graded exactly, and there is no tolerance to hide in.
+The reading this module grades is a count. Run the import pipeline on feet_20 and report how many curves were unit-converted. On feet_20 the answer is 2. The capstone asks the same count of its own feet file, graded exactly, with no tolerance to hide in.
 
 The two are DEPT and DT. This lesson is about how to arrive at that count reliably, and about the two wrong answers that are common enough to be worth naming.
 

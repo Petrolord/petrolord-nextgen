@@ -1,6 +1,6 @@
 # Converting the depth column
 
-Two of the six graded readings come out of this one operation, so it is worth doing slowly and out loud. The operation is: take the depth column of feet_20.las, multiply every sample by the factor for feet, and read the start and stop off the result.
+Two of the six readings the capstone grades come out of this one operation, so it is worth doing slowly and out loud. The operation is: take the depth column of feet_20.las, multiply every sample by the factor for feet, and read the start and stop off the result.
 
 ## The column, not the header
 
@@ -28,18 +28,18 @@ so the converted stop depth is 1584.96 m.
 
 Now a closure check, which is a habit worth keeping for every conversion you ever do. The native span is 5200 minus 4900, or 300 ft. Converting the span directly gives 300 x 0.3048 = 91.44 m. Subtracting the two converted depths gives 1584.96 minus 1493.52, which is also 91.44 m. The span converts the same way whether you convert the ends and subtract or subtract and then convert, because multiplication by a constant is linear. If those two routes ever disagree, you have made an arithmetic slip, because the mathematics does not permit the disagreement.
 
-## The two values as graded
+## The two values as the pipeline reports them
 
-The panel and the capstone carry more digits than your calculator gave you.
+The panel carries more digits than your calculator gave you, and so does the capstone's key on its own feet file.
 
-| reading | your hand answer | the graded value | tolerance |
+| reading | your hand answer | the pipeline value | tolerance |
 |---|---|---|---|
 | start depth converted | 1493.52 m | 1493.52001953125 m | 0.01 |
 | stop depth converted | 1584.96 m | 1584.9599609375 m | 0.01 |
 
-Read the two columns against the tolerance before you read anything into the extra digits. The tolerance on each reading is 0.01 m, which is a centimetre. Your hand answer and the graded value agree through the fourth decimal place in both rows, so both hand answers are inside the tolerance with a very large margin, and both pass.
+Read the two columns against the tolerance before you read anything into the extra digits. The tolerance on each reading is 0.01 m, which is a centimetre. Your hand answer and the pipeline value agree through the fourth decimal place in both rows, so both hand answers are inside the tolerance with a very large margin, and both pass.
 
-Say that plainly, because it is the point of the table. The hand arithmetic is not an approximation to the graded answer in any sense that matters here. It is a correct answer, and the pipeline's answer differs from it by an amount smaller than the width of a pencil line on a log plot. Nothing you did was wrong.
+Say that plainly, because it is the point of the table. The hand arithmetic is not an approximation to the pipeline's answer in any sense that matters here. It is a correct answer, and the pipeline's answer differs from it by an amount smaller than the width of a pencil line on a log plot. Nothing you did was wrong.
 
 The extra digits are also not noise or sloppiness. They are exactly reproducible: run the pipeline a thousand times and you get the same trailing digits every time. They come from how the numbers are stored, which is the subject of the next lesson, and the reason that lesson exists is that a data manager who cannot explain those digits will eventually be asked to and will guess.
 
