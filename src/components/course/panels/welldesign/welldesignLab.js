@@ -41,11 +41,22 @@ export const GOLDEN_WELLS = [
   { id: 'metric', label: 'The metric well', mdUnit: 'm' },
 ];
 
+// A third published well for the listing to open on: the 131-station
+// build-and-hold that the TVD-crossing goldens are measured on. It is a
+// teaching well; no capstone grades a figure from it, so the panel's opening
+// view prints nothing a capstone asks for.
+export const TEACHING_WELL = { id: 'crossings', label: 'The 131-station well', mdUnit: 'm' };
+export const LISTING_WELLS = [TEACHING_WELL, ...GOLDEN_WELLS];
+
 const stationsOf = (g) => g.stations.map(([md, inc, azi]) => ({ md, inc, azi }));
 
-/** The full Compass-style listing for one golden well. */
+const listingSource = (id) => (id === TEACHING_WELL.id
+  ? { stations: tvdCrossings.stations, mdUnit: 'm', vsAzimuthDeg: tvdCrossings.stations[tvdCrossings.stations.length - 1][2] }
+  : surveyTable[id]);
+
+/** The full Compass-style listing for one golden well, or the teaching well. */
 export const surveyListing = (id = 'feet') => {
-  const g = surveyTable[id];
+  const g = listingSource(id);
   const stations = stationsOf(g);
   const rows = computeSurveyTable(stations, { mdUnit: g.mdUnit, vsAzimuthDeg: g.vsAzimuthDeg });
   const last = rows[rows.length - 1];
@@ -345,6 +356,30 @@ export const azimuthConversion = ({ magneticAzi, declinationDeg, convergenceDeg 
   true: normalizeAzi(magneticAzi + declinationDeg),
   grid: normalizeAzi(magneticAzi + declinationDeg - convergenceDeg),
 });
+
+// ---------------------------------------------------------------------------
+// The figures the Learning Mode page opens with, as it prints them. They sit
+// here so the course's leakage gate can check exactly what the page shows:
+// the clearance figure is printed to two decimals, which is the teaching point
+// (it is negative) and is not an answer the Expert capstone accepts.
+// ---------------------------------------------------------------------------
+
+export const pageIntroFigures = () => {
+  const methods = surveyMethods();
+  const tangential = methods.methods.find((x) => x.name === 'Tangential');
+  const td = uncertaintyAt();
+  const dominant = td.contributions[0];
+  const kicked = clearanceCase('10 - well');
+  return {
+    tangentialTvdShallowFt: Math.abs(tangential.tvdError).toFixed(1),
+    tangentialNorthFt: tangential.northError.toFixed(1),
+    minimumCurvatureWithinFt: Math.abs(methods.methods[0].tvdError).toFixed(3),
+    lateralOverHighside: (td.sigmaL / td.sigmaH).toFixed(1),
+    dominantCode: dominant.code,
+    dominantSharePct: (100 * dominant.shareOfTrace).toFixed(1),
+    kickoffMinSf: kicked.minSf.toFixed(2),
+  };
+};
 
 // ---------------------------------------------------------------------------
 // The eighteen graded values, computed rather than transcribed.

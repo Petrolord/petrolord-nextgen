@@ -24,8 +24,13 @@ const WELL_OPTIONS = OFFSET_WELLS.map((w) => ({ value: w, label: w }));
 
 const STATUS_COLOUR = { 'no-go': 'text-red-400', review: 'text-amber-400', clear: 'text-emerald-400' };
 
-const Ladder = () => {
-  const [well, setWell] = useState('10 - well');
+// The ladder opens on offset 05, a review case. Offsets 01, 09 and 10 are
+// graded by the Expert capstone and sit one select away. `initialWell` exists
+// for the leakage gate's negative control and is never passed by the host.
+const LADDER_DEFAULT_WELL = '05 - well';
+
+const Ladder = ({ initialWell = LADDER_DEFAULT_WELL }) => {
+  const [well, setWell] = useState(initialWell);
   const c = useMemo(() => clearanceCase(well), [well]);
   const series = c.md.map((md, i) => ({ md, sf: c.sf[i], dist: c.distanceCC[i] }));
   return (
@@ -183,8 +188,8 @@ const Magnetics = () => {
   );
 };
 
-const ClearanceExplorer = () => {
-  const [mode, setMode] = useState('ladder');
+const ClearanceExplorer = ({ initialMode = 'ladder', initialWell } = {}) => {
+  const [mode, setMode] = useState(initialMode);
   return (
     <PanelShell
       title="Clearance explorer"
@@ -197,7 +202,7 @@ const ClearanceExplorer = () => {
         reference radius {CLEARANCE_PARAMS.refRadius} m, offset radius {CLEARANCE_PARAMS.offRadius} m.
       </p>
       <div className="mt-3">
-        {mode === 'ladder' && <Ladder />}
+        {mode === 'ladder' && <Ladder initialWell={initialWell} />}
         {mode === 'sensitivity' && <Sensitivity />}
         {mode === 'magnetics' && <Magnetics />}
       </div>

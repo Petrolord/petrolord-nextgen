@@ -37672,7 +37672,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Methods table prints fmt(x.tvd, 4) = 1,653.9867 against expected 1653.986686; tol 0.002 is 40x half a unit in the 4th decimal. The panel also prints the published 1653.99, which fails (lesson warns).",
-  "notes": "One click from default (View select). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma."
+  "notes": "One click from default (View select). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+  }
  },
  {
   "course": "welldesign",
@@ -37705,7 +37710,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "TVD error column is computed against the PUBLISHED 1653.99 (welldesignLab.js:97), exactly the prompt's definition; prints -25.3812 vs expected -25.381206, tol 0.005.",
-  "notes": "One click from default. Also hand-computable (sum d cos(inc_lower)) but the panel does not list the 21 ADE stations, so the panel is the practical source."
+  "notes": "One click from default. Also hand-computable (sum d cos(inc_lower)) but the panel does not list the 21 ADE stations, so the panel is the practical source.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+  }
  },
  {
   "course": "welldesign",
@@ -37734,11 +37744,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile 'TVD at TD' fmt(s.tvd, 4) = 3,686.9805; tol 0.005.",
-  "notes": "LEAK: the panel opens on the listing view of the feet well, so this graded value shows in the default state (probe state ''). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma."
+  "notes": "LEAK: the panel opens on the listing view of the feet well, so this graded value shows in the default state (probe state ''). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+  }
  },
  {
   "course": "welldesign",
@@ -37767,11 +37782,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile 'Vertical section' fmt(s.vs, 4) with unit 'on 75.0 deg' (the fixture's own azimuth, welldesignLab.js:50); prints 1,255.8726; tol 0.005.",
-  "notes": "LEAK: shown in the default state (feet well listing). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma."
+  "notes": "LEAK: shown in the default state (feet well listing). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+  }
  },
  {
   "course": "welldesign",
@@ -37804,7 +37824,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile 'North' fmt(s.n, 4) = -1,320.5052 on the metric well (vs azimuth from fixture, 200 deg); tol 0.005.",
-  "notes": "One click from default. The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma."
+  "notes": "One click from default. The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+  }
  },
  {
   "course": "welldesign",
@@ -37837,7 +37862,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile 'End TVD' fmt(bh.end.tvd, 4) = 1,481.1257 for the first published build-and-hold case; tol 0.005.",
-  "notes": "One click from default. The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma."
+  "notes": "One click from default. The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+  }
  },
  {
   "course": "welldesign",
@@ -38068,7 +38098,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Tile 'Minimum separation factor' fmt(c.minSf, 6) = 1.400242; tol 0.0005. Published minimum shown beside it (line 52) also passes.",
-  "notes": "One click from default."
+  "notes": "One click from default.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+  }
  },
  {
   "course": "welldesign",
@@ -38101,7 +38136,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Prints 0.009795 vs 0.0097947 (diff 3e-7); tol 5e-5.",
-  "notes": "One click from default."
+  "notes": "One click from default.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+  }
  },
  {
   "course": "welldesign",
@@ -38130,11 +38170,16 @@
   "fix": null,
   "owner_decision": false,
   "recommendation": null,
-  "leak": true,
+  "leak": false,
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Prints -0.606857; tol 0.0005; kickoff depth is applied from the fixture (welldesignLab.js:285).",
-  "notes": "LEAK: the ladder view opens on offset 10, so this graded value shows in the default state."
+  "notes": "LEAK: the ladder view opens on offset 10, so this graded value shows in the default state.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+  }
  },
  {
   "course": "welldesign",
@@ -38167,7 +38212,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Sensitivity table prints fmt(r.minSf, 6) = -0.4248 (value -0.4248 exactly, trailing zeros trimmed); tol 0.0005.",
-  "notes": "One click from default; the sensitivity view defaults to offset 10 (line 81)."
+  "notes": "One click from default; the sensitivity view defaults to offset 10 (line 81).",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+  }
  },
  {
   "course": "welldesign",
@@ -38200,7 +38250,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Note line prints fmt(check.maxDeclinationError, 8) = 0.00461482 vs 0.004614824; tol 5e-6. The per-point table (line 170) also prints dError to 6 dp.",
-  "notes": "One click from default."
+  "notes": "One click from default.",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+  }
  },
  {
   "course": "welldesign",
@@ -38233,7 +38288,12 @@
   "reclassed_from": null,
   "shipped": null,
   "evidence": "Entering 80 / 0 gives Tile 'Declination' fmt(f.declinationDeg, 5) = 1.28148 at the default decimalYear 2025, heightKm 0 (welldesignLab.js:319); the NOAA table's first row prints the same 5 dp. Diff 2e-6, tol 5e-5.",
-  "notes": "One click from default; no leak in the default state (lat 60, lon 2)."
+  "notes": "One click from default; no leak in the default state (lat 60, lon 2).",
+  "stripped": {
+   "migration": "20261028d_w5_welldesign.sql",
+   "wave": "w5d",
+   "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+  }
  },
  {
   "course": "welltest",

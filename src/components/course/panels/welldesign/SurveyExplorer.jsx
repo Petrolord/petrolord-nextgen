@@ -3,7 +3,7 @@ import {
   ResponsiveContainer, ComposedChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend,
 } from 'recharts';
 import {
-  GOLDEN_WELLS, surveyListing, surveyMethods, ADE_PUBLISHED, buildHoldCase,
+  LISTING_WELLS, TEACHING_WELL, surveyListing, surveyMethods, ADE_PUBLISHED, buildHoldCase,
   sProfileCase, S_PROFILE_COUNT, tvdCrossingCases,
 } from './welldesignLab';
 import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
@@ -21,10 +21,14 @@ const MODES = [
   { value: 'methods', label: 'The four methods' },
   { value: 'design', label: 'Trajectory design' },
 ];
-const WELLS = GOLDEN_WELLS.map((w) => ({ value: w.id, label: w.label }));
+const WELLS = LISTING_WELLS.map((w) => ({ value: w.id, label: w.label }));
 
-const Listing = () => {
-  const [id, setId] = useState('feet');
+// The listing opens on the teaching well. The feet and metric golden wells are
+// one select away; the Associate capstone grades figures from both, so neither
+// is what a learner sees before choosing. `initialWell` exists for the
+// leakage gate's negative control and is never passed by the host.
+const Listing = ({ initialWell = TEACHING_WELL.id }) => {
+  const [id, setId] = useState(initialWell);
   const s = useMemo(() => surveyListing(id), [id]);
   const crossings = useMemo(() => tvdCrossingCases(), []);
   return (
@@ -202,8 +206,8 @@ const Design = () => {
   );
 };
 
-const SurveyExplorer = () => {
-  const [mode, setMode] = useState('listing');
+const SurveyExplorer = ({ initialMode = 'listing', initialWell } = {}) => {
+  const [mode, setMode] = useState(initialMode);
   return (
     <PanelShell
       title="Survey explorer"
@@ -211,7 +215,7 @@ const SurveyExplorer = () => {
     >
       <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
       <div className="mt-3">
-        {mode === 'listing' && <Listing />}
+        {mode === 'listing' && <Listing initialWell={initialWell} />}
         {mode === 'methods' && <Methods />}
         {mode === 'design' && <Design />}
       </div>
