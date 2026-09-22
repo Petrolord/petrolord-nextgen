@@ -1,0 +1,182 @@
+{
+ "course": "gaslift",
+ "tiers": {
+  "beginner": {
+   "pointer": "On the course panel, the Column explorer's \"Your well, typed\" view takes this gas, geotherm, packer, kickoff pressure, step count, kill fluid, unloading wellhead, target and curve samples as typed and prints z to eight decimals and every other value to at least the precision graded here.",
+   "keys": {
+    "gas_z_at_kickoff": {
+     "panel": "src/components/course/panels/gaslift/ColumnExplorer.jsx",
+     "line": 561,
+     "mode": "typed",
+     "decimals": 8,
+     "formatter": "plain(v, 8)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on ColumnExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "gas_gradient_at_kickoff_psi_per_ft": {
+     "panel": "src/components/course/panels/gaslift/ColumnExplorer.jsx",
+     "line": 562,
+     "mode": "typed",
+     "decimals": 10,
+     "formatter": "plain(v, 10)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on ColumnExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "inj_column_at_packer_psia": {
+     "panel": "src/components/course/panels/gaslift/ColumnExplorer.jsx",
+     "line": 564,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on ColumnExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "inj_surface_for_1585psia_psia": {
+     "panel": "src/components/course/panels/gaslift/ColumnExplorer.jsx",
+     "line": 565,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on ColumnExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "top_valve_depth_ft": {
+     "panel": "src/components/course/panels/gaslift/ColumnExplorer.jsx",
+     "line": 566,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on ColumnExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "inj_curve_at_5375ft_psia": {
+     "panel": "src/components/course/panels/gaslift/ColumnExplorer.jsx",
+     "line": 569,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on ColumnExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    }
+   }
+  },
+  "intermediate": {
+   "pointer": "On the course panel, the Valve explorer's \"Your installation, typed\" view takes this design as typed (the gas column of the Associate tier, the pressures, gradients, spacing limits, bellows, port catalogue, gas rate and bottom orifice) and prints every valve's depth, dome, test rack opening, spread, port and throughput to at least the precision graded here.",
+   "keys": {
+    "valve2_depth_ft": {
+     "panel": "src/components/course/panels/gaslift/ValveExplorer.jsx",
+     "line": 737,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on ValveExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "valve4_depth_ft": {
+     "panel": "src/components/course/panels/gaslift/ValveExplorer.jsx",
+     "line": 737,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on ValveExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "valve2_dome_at_temp_psia": {
+     "panel": "src/components/course/panels/gaslift/ValveExplorer.jsx",
+     "line": 740,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on ValveExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "valve2_test_rack_opening_psia": {
+     "panel": "src/components/course/panels/gaslift/ValveExplorer.jsx",
+     "line": 742,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on ValveExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "valve4_spread_psi": {
+     "panel": "src/components/course/panels/gaslift/ValveExplorer.jsx",
+     "line": 743,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on ValveExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "valve4_throughput_mscfd": {
+     "panel": "src/components/course/panels/gaslift/ValveExplorer.jsx",
+     "line": 745,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on ValveExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    }
+   }
+  },
+  "advanced": {
+   "pointer": "On the course panel, the Unloading explorer's \"Your well and traverse, typed\" view takes the installation and this traverse as typed, with its fine and coarse row counts and curve samples, and prints the closing surface pressures, both crossings and the operating injection line to at least the precision graded here.",
+   "keys": {
+    "valve1_closing_surface_psia": {
+     "panel": "src/components/course/panels/gaslift/UnloadingExplorer.jsx",
+     "line": 812,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on UnloadingExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "valve3_closing_surface_psia": {
+     "panel": "src/components/course/panels/gaslift/UnloadingExplorer.jsx",
+     "line": 812,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on UnloadingExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "injection_point_depth_ft": {
+     "panel": "src/components/course/panels/gaslift/UnloadingExplorer.jsx",
+     "line": 777,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on UnloadingExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "injection_point_pinj_psia": {
+     "panel": "src/components/course/panels/gaslift/UnloadingExplorer.jsx",
+     "line": 778,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on UnloadingExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "injection_point_depth_coarse_ft": {
+     "panel": "src/components/course/panels/gaslift/UnloadingExplorer.jsx",
+     "line": 777,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on UnloadingExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    },
+    "operating_inj_at_injection_pt_psia": {
+     "panel": "src/components/course/panels/gaslift/UnloadingExplorer.jsx",
+     "line": 790,
+     "mode": "typed",
+     "decimals": 6,
+     "formatter": "plain(v, 6)",
+     "test": "src/components/course/panels/gaslift/yourCase.test.js",
+     "evidence": "A typed mode on UnloadingExplorer.jsx (typedGasColumn / typedGasLiftDesign / typedInjectionPoint in gasLiftLab.js: naturalGasZ, gasGradient, gasColumnPressure, gasColumnSurfacePressure, injectionPressureCurve, deepestInjectionPoint and designGasLift, the chain of the capstone derivation) takes the case the learner types. Typing the prompt's case prints the value within tol; yourCase.test.js proves it, that the AKASO-3 default lands on no graded answer, and that a retyped step count, geotherm anchor, decrement or row count misses."
+    }
+   }
+  }
+ }
+}
