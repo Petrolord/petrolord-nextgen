@@ -240,6 +240,14 @@ def post_check(before, after, rows, waves=()):
     for e in re_err:
         if any(f"'{nk[2]}')" in e for nk in new_keys):
             errs.append(e)
+    # W3 onward: a prompt-only fix (the Full precision sentence) must be on the brief
+    for r in live:
+        add = r['shipped'].get('prompt_append')
+        if not add:
+            continue
+        ca = idx_a.get((r['course'], r['tier']))
+        if ca is None or not str(ca.get('prompt', '')).rstrip().endswith(add):
+            errs.append(f"{(r['course'], r['tier'], r['key'])}: the brief does not end with its {r['shipped'].get('wave')} sentence {add[:60]!r}")
     return errs
 
 
@@ -313,6 +321,8 @@ def selftest(caps, annots):
                     prompt_text[(r['course'], r['tier'])]['text'].append(x)
             prompt_text[(r['course'], r['tier'])]['keys'].append(r['key'])
 
+    appends = {(r['course'], r['tier'], r['key']): r['shipped']['prompt_append'] for r in rows
+               if isinstance(r.get('shipped'), dict) and r['shipped'].get('prompt_append')}
     def after(skip=None, move=None, upto=waves, unprompted=None):
         c2 = copy.deepcopy(caps)
         for c in c2:
@@ -329,6 +339,8 @@ def selftest(caps, annots):
                     f['tol'] = float(f['tol']) * 2 + 1
                 if k in rekeys and k != skip:
                     c['fields'][i] = dict(rekeys[k])
+                if k in appends and k != skip and not c['prompt'].rstrip().endswith(appends[k]):
+                    c['prompt'] = c['prompt'].rstrip() + ' ' + appends[k]
         return c2
     clean = not post_check(caps, after(), rows, waves)
     print(f"  post control {'GREEN (good)' if clean else 'RED (BROKEN)'}: every shipped fix applied{' (waves ' + ', '.join(waves) + ')' if waves else ''}")
@@ -374,6 +386,24 @@ def selftest(caps, annots):
         red = bool(post_check(caps, after(unprompted=tier), rows, waves))
         print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: a W2 prompt without its published inputs ({tier[0]}/{tier[1]})")
         ok &= red
+    if appends:
+        # W3: a brief left without its Full precision sentence is caught
+        first = next(iter(appends))
+        red = bool(post_check(caps, after(skip=first), rows, waves))
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: a {wave_of[first]} brief without its Full precision sentence")
+        ok &= red
+        # W3: a field moved to class none because the switch prints it finely goes red
+        # again when its annotation says the old Suite print (the class move rests on it)
+        before = {k: r['shipped']['printed_before'] for r in rows for k in [(r['course'], r['tier'], r['key'])]
+                  if isinstance(r.get('shipped'), dict) and 'printed_before' in r['shipped']}
+        if before:
+            k = next(iter(before))
+            a2 = copy.deepcopy(annots)
+            f = next(x for x in a2[k[0]]['fields'] if (x['tier'], x['key']) == k[1:])
+            f['printed'] = before[k]
+            red = any(repr(k) in e for e in evaluate(caps, a2)[1])
+            print(f"  control {'RED (good)' if red else 'GREEN (BROKEN)'}: a {wave_of[k]} class move with the Suite print it replaced ({k[2]})")
+            ok &= red
     other = next((c['app'], c['tier'], f['key']) for c in caps for f in c['fields']
                  if (c['app'], c['tier'], f['key']) not in shipped and (c['app'], c['tier'], f['key']) not in rekeys)
     red = bool(post_check(caps, after(move=other), rows, waves))

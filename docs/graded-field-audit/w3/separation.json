@@ -1,0 +1,57 @@
+{
+ "course": "separation",
+ "suite": "Suite PR #559 (Separator Studio and Facility Layout Mapper Full precision switch, stacked on #554)",
+ "tiers": {
+  "beginner": {
+   "why": "The Vessel tab rounds density to 3 decimals, rate to 2 and diameter to 1; the prompt asks 4.",
+   "keys": [
+    "ejulebe1_gas_density_lbft3",
+    "ejulebe1_gas_actual_ft3s",
+    "ejulebe1_gas_diameter_ft"
+   ],
+   "annot_updates": {
+    "ejulebe1_gas_density_lbft3": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx ConditionsCard, Gas density",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: separationFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "ejulebe1_gas_actual_ft3s": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx ConditionsCard, Actual gas rate",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: separationFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "ejulebe1_gas_diameter_ft": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx SelectedCard, Diameter the gas needs",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: separationFullPrecision.test.jsx, the engine result through formatFull)."
+    }
+   },
+   "append": "Read the figures in the Separator Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping."
+  },
+  "advanced": {
+   "why": "Class move only. The advanced brief is W2 territory (it publishes the ADANGA yard offsets); the Full precision sentence is handed to W2 so the two waves do not rewrite one prompt twice. The ADANGA shortfall fields stay open until W2 ships.",
+   "keys": [
+    "ejulebe4_preferred_height_ft"
+   ],
+   "annot_updates": {
+    "ejulebe4_preferred_height_ft": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx SelectedCard and SweepTable, Height/Length",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: separationFullPrecision.test.jsx, the engine result through formatFull)."
+    }
+   }
+  }
+ }
+}

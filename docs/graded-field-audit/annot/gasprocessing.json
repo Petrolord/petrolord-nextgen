@@ -303,23 +303,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:130 (JT coefficient at the inlet)",
    "printed": {
-    "decimals": 1
+    "decimals": 6
    },
    "display_scale": 100,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:130 fmt(d.muFPerPsi * 100, 1) F/100 psi",
+   "display_ref": "src/components/gasprocessing/SweeteningDewPanels.jsx:132 JT coefficient at the inlet, F/100 psi at 6 dp (8 dp in F/psi) with Full precision on",
    "prompt_precision": "The derivative per degR, the coefficient in degF a psi, temperatures in degF and water contents in lb a MMscf, all to six decimals.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:130 -> fmt(d.muFPerPsi * 100, 4) (six decimals in degF/psi); or editable inputs on /root/wt-b5-nextgen/src/components/course/panels/gasprocessing/ColdEndExplorer.jsx (nine(c.muFPerPsi) at :105)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix, owner to choose the surface. The DAK derivative and the 20-step midpoint march are engine-only, the fc-coldend-explorer that prints them at 9 to 12 decimals is fixed on the AGBADA teaching stream, and the Suite dew point card prints 1 decimal or nothing. Preferred: add p1, t, p2, gravity and Cp inputs to the NextGen ColdEndExplorer (it already prints dzdT at 12 and the rest at 9 decimals). Alternative: print six decimals in the Suite card. Loosening tol to the Suite 1-decimal would contradict the prompt's \"all to six decimals\".",
-   "evidence": "Suite shows 6.0 F/100 psi, i.e. 0.060 against 0.06026080 with tol 5e-7. Hand route needs dz/dT (engine-only).",
+   "evidence": "With Full precision on, the Joule-Thomson screening card prints the coefficient in F/100 psi at 6 decimals, 8 in F/psi (jest: dewpointFullPrecision.test.jsx).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #557 (Gas Processing Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_gasprocessing.sql",
+    "prompt_append": "Read the figures in the Gas Processing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -327,23 +336,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:143",
    "printed": {
-    "decimals": 1
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:143 fmt(d.dropF, 1)",
+   "display_ref": "src/components/gasprocessing/SweeteningDewPanels.jsx:152 Cooling across the drop at 6 dp with Full precision on",
    "prompt_precision": "The derivative per degR, the coefficient in degF a psi, temperatures in degF and water contents in lb a MMscf, all to six decimals.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:143 -> fmt(d.dropF, 6); or editable inputs on /root/wt-b5-nextgen/src/components/course/panels/gasprocessing/ColdEndExplorer.jsx (nine(c.dropF) at :194)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix, owner to choose the surface. The DAK derivative and the 20-step midpoint march are engine-only, the fc-coldend-explorer that prints them at 9 to 12 decimals is fixed on the AGBADA teaching stream, and the Suite dew point card prints 1 decimal or nothing. Preferred: add p1, t, p2, gravity and Cp inputs to the NextGen ColdEndExplorer (it already prints dzdT at 12 and the rest at 9 decimals). Alternative: print six decimals in the Suite card. Loosening tol to the Suite 1-decimal would contradict the prompt's \"all to six decimals\".",
-   "evidence": "Suite prints 33.7 against 33.726901 (tol 1e-4). The 20-step midpoint march re-evaluates the DAK derivative at every step, which is not a hand route.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: dewpointFullPrecision.test.jsx).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #557 (Gas Processing Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_gasprocessing.sql",
+    "prompt_append": "Read the figures in the Gas Processing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -351,23 +369,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:145",
    "printed": {
-    "decimals": 1
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:145 fmt(d.t2F, 1)",
+   "display_ref": "src/components/gasprocessing/SweeteningDewPanels.jsx:154 Downstream temperature at 6 dp with Full precision on",
    "prompt_precision": "The derivative per degR, the coefficient in degF a psi, temperatures in degF and water contents in lb a MMscf, all to six decimals.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:145 -> fmt(d.t2F, 6); or editable inputs on /root/wt-b5-nextgen/src/components/course/panels/gasprocessing/ColdEndExplorer.jsx (nine(c.t2F) at :193)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix, owner to choose the surface. The DAK derivative and the 20-step midpoint march are engine-only, the fc-coldend-explorer that prints them at 9 to 12 decimals is fixed on the AGBADA teaching stream, and the Suite dew point card prints 1 decimal or nothing. Preferred: add p1, t, p2, gravity and Cp inputs to the NextGen ColdEndExplorer (it already prints dzdT at 12 and the rest at 9 decimals). Alternative: print six decimals in the Suite card. Loosening tol to the Suite 1-decimal would contradict the prompt's \"all to six decimals\".",
-   "evidence": "Suite prints 53.3 against 53.273099 (tol 1e-4).",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: dewpointFullPrecision.test.jsx).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #557 (Gas Processing Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_gasprocessing.sql",
+    "prompt_append": "Read the figures in the Gas Processing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -395,23 +422,32 @@
    "source": "suite-app",
    "source_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:148 (Water the cold gas can hold)",
    "printed": {
-    "decimals": 1
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:149 fmt(d.waterAtOutlet.lbPerMMscf, 1)",
+   "display_ref": "src/components/gasprocessing/SweeteningDewPanels.jsx:157 Water the cold gas can hold at 6 dp with Full precision on",
    "prompt_precision": "The derivative per degR, the coefficient in degF a psi, temperatures in degF and water contents in lb a MMscf, all to six decimals.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/components/gasprocessing/SweeteningDewPanels.jsx:149 -> fmt(d.waterAtOutlet.lbPerMMscf, 6); or editable inputs on /root/wt-b5-nextgen/src/components/course/panels/gasprocessing/ColdEndExplorer.jsx (nine(c.waterOutLbMMscf) at :261)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix, owner to choose the surface. The DAK derivative and the 20-step midpoint march are engine-only, the fc-coldend-explorer that prints them at 9 to 12 decimals is fixed on the AGBADA teaching stream, and the Suite dew point card prints 1 decimal or nothing. Preferred: add p1, t, p2, gravity and Cp inputs to the NextGen ColdEndExplorer (it already prints dzdT at 12 and the rest at 9 decimals). Alternative: print six decimals in the Suite card. Loosening tol to the Suite 1-decimal would contradict the prompt's \"all to six decimals\".",
-   "evidence": "Magnus at t2 over 405 psia is a hand step, but t2 is only available at 1 decimal: Magnus at 53.3 degF gives 23.5426 against 23.519449 (tol 1e-4). Suite prints 23.5.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: dewpointFullPrecision.test.jsx).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #557 (Gas Processing Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_gasprocessing.sql",
+    "prompt_append": "Read the figures in the Gas Processing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   }
  ]
 }

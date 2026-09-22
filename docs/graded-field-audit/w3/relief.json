@@ -1,0 +1,100 @@
+{
+ "course": "relief",
+ "suite": "Suite PR #562 (Relief and Flare Studio Full precision switch, flare back pressure input, stacked on #554)",
+ "tiers": {
+  "beginner": {
+   "why": "The PSV tab rounds areas to 3 decimals and printed neither the critical ratio nor C; the prompt asks 6 decimals.",
+   "keys": [
+    "kolocreek_gas_critical_area_in2",
+    "kolocreek_gas_subcritical_area_in2",
+    "kolocreek_liquid_area_in2",
+    "kolocreek_steam_area_in2",
+    "kolocreek_critical_pressure_ratio",
+    "kolocreek_gas_coefficient_c"
+   ],
+   "annot_updates": {
+    "kolocreek_gas_critical_area_in2": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx Required area (gas)",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "kolocreek_gas_subcritical_area_in2": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx Required area (gas, subcritical back pressure)",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "kolocreek_liquid_area_in2": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx Required area (liquid)",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "kolocreek_steam_area_in2": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx Required area (steam)",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "kolocreek_critical_pressure_ratio": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx Critical pressure ratio (shown only with Full precision on)",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull).",
+     "source": "suite-app",
+     "source_ref": "src/components/reliefstudio/PsvResultsPanel.jsx Critical pressure ratio (shown only with Full precision on)"
+    },
+    "kolocreek_gas_coefficient_c": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/reliefstudio/PsvResultsPanel.jsx Gas coefficient C (shown only with Full precision on; engine gasConstantC)",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull).",
+     "source": "suite-app",
+     "source_ref": "src/components/reliefstudio/PsvResultsPanel.jsx Gas coefficient C (shown only with Full precision on; engine gasConstantC)"
+    }
+   },
+   "append": "Read the figures in the Relief and Flare Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping."
+  },
+  "advanced": {
+   "why": "The Blowdown tab rounds the time to 1 decimal and never showed the choked floor; its engine call also ignored the flare back pressure (fixed in the same Suite PR with a Flare back pressure (psia) input, default 14.7).",
+   "keys": [
+    "gbaran_blowdown_time_s",
+    "gbaran_choked_floor_psia"
+   ],
+   "annot_updates": {
+    "gbaran_blowdown_time_s": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/reliefstudio/BlowdownPanel.jsx Time to end pressure, seconds (shown only with Full precision on)",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "gbaran_choked_floor_psia": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/reliefstudio/BlowdownPanel.jsx Choked floor (shown only with Full precision on), against the new Flare back pressure (psia) input",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: reliefFullPrecision.test.jsx, the engine result through formatFull).",
+     "source": "suite-app",
+     "source_ref": "src/components/reliefstudio/BlowdownPanel.jsx Choked floor (shown only with Full precision on), against the new Flare back pressure (psia) input"
+    }
+   },
+   "append": "On the Blowdown tab, type the start and end pressures as gauge pressures (each psia figure less 14.7) and the 16.5 psia flare back pressure into Flare back pressure (psia). Read the figures in the Relief and Flare Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping."
+  }
+ }
+}

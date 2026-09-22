@@ -12,23 +12,32 @@
    "source": "suite-app",
    "source_ref": "src/components/decisiontree/TreeDiagram.jsx:108-110",
    "printed": {
-    "decimals": 0
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "src/components/decisiontree/TreeDiagram.jsx:17-21",
+   "display_ref": "src/components/decisiontree/TreeDiagram.jsx node label",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/pages/apps/DecisionTreeBuilder.jsx:26 -> fmtMM prints minimumFractionDigits 4, maximumFractionDigits 4 (KPI cards: Optimal EMV, Next best alternative, Decision advantage); src/components/decisiontree/TreeDiagram.jsx:17-21 -> node and branch labels print 4 decimals (or add a selected-node readout at 4 decimals if the diagram gets too busy)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The prompt names the Decision Tree Builder and asks for four decimals, but its KPI cards print at most 2 decimals (toLocaleString maximumFractionDigits 2) and the diagram prints 0 decimals at or above 100 and 1 decimal from 10 to 100. The rollback is also a hand-calc taught in beginner m04 and m06/l02, which passes at full precision, so no learner is locked out today; a learner who reads the app is. Widening tol cannot rescue the 0-decimal node labels without making the field meaningless.",
-   "evidence": "Diagram node label `EMV ${fmt(emv)}` uses 0 decimals at or above 100, printing 469 against 469.386 (tol 0.001). Hand rollback 0.62 x 684.2 + 0.38 x 118.9 = 469.386 exactly.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: decisiontree/__tests__/w3FullPrecision.test.jsx, rollback through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #567 (Decision Tree Builder and Decision Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_decision.sql",
+    "prompt_append": "Read the figures in the Decision Tree Builder with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 0
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -36,23 +45,32 @@
    "source": "suite-app",
    "source_ref": "src/components/decisiontree/TreeDiagram.jsx:108-110",
    "printed": {
-    "decimals": 0
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "src/components/decisiontree/TreeDiagram.jsx:17-21",
+   "display_ref": "src/components/decisiontree/TreeDiagram.jsx node label",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/pages/apps/DecisionTreeBuilder.jsx:26 -> fmtMM prints minimumFractionDigits 4, maximumFractionDigits 4 (KPI cards: Optimal EMV, Next best alternative, Decision advantage); src/components/decisiontree/TreeDiagram.jsx:17-21 -> node and branch labels print 4 decimals (or add a selected-node readout at 4 decimals if the diagram gets too busy)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The prompt names the Decision Tree Builder and asks for four decimals, but its KPI cards print at most 2 decimals (toLocaleString maximumFractionDigits 2) and the diagram prints 0 decimals at or above 100 and 1 decimal from 10 to 100. The rollback is also a hand-calc taught in beginner m04 and m06/l02, which passes at full precision, so no learner is locked out today; a learner who reads the app is. Widening tol cannot rescue the 0-decimal node labels without making the field meaningless.",
-   "evidence": "Diagram node label prints 106 against 106.196. Hand rollback 0.37 x 256.786 + 0.21 x 96.4 + 0.42 x -31.8 = 106.196.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: decisiontree/__tests__/w3FullPrecision.test.jsx, rollback through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #567 (Decision Tree Builder and Decision Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_decision.sql",
+    "prompt_append": "Read the figures in the Decision Tree Builder with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 0
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -60,23 +78,32 @@
    "source": "suite-app",
    "source_ref": "src/pages/apps/DecisionTreeBuilder.jsx:217",
    "printed": {
-    "decimals": 2
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "src/pages/apps/DecisionTreeBuilder.jsx:26",
+   "display_ref": "src/pages/apps/DecisionTreeBuilder.jsx Optimal EMV card",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/pages/apps/DecisionTreeBuilder.jsx:26 -> fmtMM prints minimumFractionDigits 4, maximumFractionDigits 4 (KPI cards: Optimal EMV, Next best alternative, Decision advantage); src/components/decisiontree/TreeDiagram.jsx:17-21 -> node and branch labels print 4 decimals (or add a selected-node readout at 4 decimals if the diagram gets too busy)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The prompt names the Decision Tree Builder and asks for four decimals, but its KPI cards print at most 2 decimals (toLocaleString maximumFractionDigits 2) and the diagram prints 0 decimals at or above 100 and 1 decimal from 10 to 100. The rollback is also a hand-calc taught in beginner m04 and m06/l02, which passes at full precision, so no learner is locked out today; a learner who reads the app is. Widening tol cannot rescue the 0-decimal node labels without making the field meaningless.",
-   "evidence": "Optimal EMV card fmtMM (toLocaleString maximumFractionDigits 2) prints 58.9 against 58.896, off by 0.004 > tol 0.001. Hand: 106.196 - 47.3 = 58.896.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: decisiontree/__tests__/w3FullPrecision.test.jsx, rollback through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #567 (Decision Tree Builder and Decision Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_decision.sql",
+    "prompt_append": "Read the figures in the Decision Tree Builder with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -84,23 +111,32 @@
    "source": "suite-app",
    "source_ref": "src/pages/apps/DecisionTreeBuilder.jsx:219-223",
    "printed": {
-    "decimals": 2
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "src/pages/apps/DecisionTreeBuilder.jsx:26",
+   "display_ref": "src/pages/apps/DecisionTreeBuilder.jsx Next best alternative card",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/pages/apps/DecisionTreeBuilder.jsx:26 -> fmtMM prints minimumFractionDigits 4, maximumFractionDigits 4 (KPI cards: Optimal EMV, Next best alternative, Decision advantage); src/components/decisiontree/TreeDiagram.jsx:17-21 -> node and branch labels print 4 decimals (or add a selected-node readout at 4 decimals if the diagram gets too busy)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The prompt names the Decision Tree Builder and asks for four decimals, but its KPI cards print at most 2 decimals (toLocaleString maximumFractionDigits 2) and the diagram prints 0 decimals at or above 100 and 1 decimal from 10 to 100. The rollback is also a hand-calc taught in beginner m04 and m06/l02, which passes at full precision, so no learner is locked out today; a learner who reads the app is. Widening tol cannot rescue the 0-decimal node labels without making the field meaningless.",
-   "evidence": "Next best alternative card prints 48.61 against 48.612 (off 0.002); diagram prints EMV 48.6. Hand: 0.37 x 118.5 + 0.21 x 22.7 = 48.612.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: decisiontree/__tests__/w3FullPrecision.test.jsx, rollback through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #567 (Decision Tree Builder and Decision Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_decision.sql",
+    "prompt_append": "Read the figures in the Decision Tree Builder with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -108,23 +144,32 @@
    "source": "suite-app",
    "source_ref": "src/pages/apps/DecisionTreeBuilder.jsx:217",
    "printed": {
-    "decimals": 2
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "src/pages/apps/DecisionTreeBuilder.jsx:26",
+   "display_ref": "src/pages/apps/DecisionTreeBuilder.jsx Optimal EMV card (tree without the Sell branch)",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/pages/apps/DecisionTreeBuilder.jsx:26 -> fmtMM prints minimumFractionDigits 4, maximumFractionDigits 4 (KPI cards: Optimal EMV, Next best alternative, Decision advantage); src/components/decisiontree/TreeDiagram.jsx:17-21 -> node and branch labels print 4 decimals (or add a selected-node readout at 4 decimals if the diagram gets too busy)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The prompt names the Decision Tree Builder and asks for four decimals, but its KPI cards print at most 2 decimals (toLocaleString maximumFractionDigits 2) and the diagram prints 0 decimals at or above 100 and 1 decimal from 10 to 100. The rollback is also a hand-calc taught in beginner m04 and m06/l02, which passes at full precision, so no learner is locked out today; a learner who reads the app is. Widening tol cannot rescue the 0-decimal node labels without making the field meaningless.",
-   "evidence": "With Sell deleted, the Optimal EMV card prints 54.6 against 54.59882 (off 0.0012). Hand rollback gives full precision.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: decisiontree/__tests__/w3FullPrecision.test.jsx, rollback through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #567 (Decision Tree Builder and Decision Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_decision.sql",
+    "prompt_append": "Read the figures in the Decision Tree Builder with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -132,23 +177,32 @@
    "source": "suite-app",
    "source_ref": "src/pages/apps/DecisionTreeBuilder.jsx:217-223",
    "printed": {
-    "decimals": 2
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "src/pages/apps/DecisionTreeBuilder.jsx:26",
+   "display_ref": "src/pages/apps/DecisionTreeBuilder.jsx Optimal EMV card (edited tree)",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/pages/apps/DecisionTreeBuilder.jsx:26 -> fmtMM prints minimumFractionDigits 4, maximumFractionDigits 4 (KPI cards: Optimal EMV, Next best alternative, Decision advantage); src/components/decisiontree/TreeDiagram.jsx:17-21 -> node and branch labels print 4 decimals (or add a selected-node readout at 4 decimals if the diagram gets too busy)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The prompt names the Decision Tree Builder and asks for four decimals, but its KPI cards print at most 2 decimals (toLocaleString maximumFractionDigits 2) and the diagram prints 0 decimals at or above 100 and 1 decimal from 10 to 100. The rollback is also a hand-calc taught in beginner m04 and m06/l02, which passes at full precision, so no learner is locked out today; a learner who reads the app is. Widening tol cannot rescue the 0-decimal node labels without making the field meaningless.",
-   "evidence": "With success 0.3 and dry hole 0.49, the Drill branch value reads 37.88 on a card against 37.882 (off 0.002). Hand rollback gives full precision.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: decisiontree/__tests__/w3FullPrecision.test.jsx, rollback through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #567 (Decision Tree Builder and Decision Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_decision.sql",
+    "prompt_append": "Read the figures in the Decision Tree Builder with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -316,23 +370,32 @@
    "source": "suite-app",
    "source_ref": "src/pages/apps/DecisionTreeBuilder.jsx:217",
    "printed": {
-    "decimals": 2
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "src/pages/apps/DecisionTreeBuilder.jsx:26",
+   "display_ref": "src/pages/apps/DecisionTreeBuilder.jsx Optimal EMV card",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/pages/apps/DecisionTreeBuilder.jsx:26 -> fmtMM prints minimumFractionDigits 4, maximumFractionDigits 4 (KPI cards: Optimal EMV, Next best alternative, Decision advantage); src/components/decisiontree/TreeDiagram.jsx:17-21 -> node and branch labels print 4 decimals (or add a selected-node readout at 4 decimals if the diagram gets too busy)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix. The prompt names the Decision Tree Builder and asks for four decimals, but its KPI cards print at most 2 decimals (toLocaleString maximumFractionDigits 2) and the diagram prints 0 decimals at or above 100 and 1 decimal from 10 to 100. The rollback is also a hand-calc taught in beginner m04 and m06/l02, which passes at full precision, so no learner is locked out today; a learner who reads the app is. Widening tol cannot rescue the 0-decimal node labels without making the field meaningless.",
-   "evidence": "Linked Large payoff enters as the MC mean 760.5; the Optimal EMV card prints 72.1 against 72.10204 (off 0.002). Hand rollback with 760.5 gives full precision (TreeNodeEditor.jsx:103 prints the linked mean toFixed(1), 760.5, exact).",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: decisiontree/__tests__/w3FullPrecision.test.jsx, rollback through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #567 (Decision Tree Builder and Decision Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_decision.sql",
+    "prompt_append": "Read the figures in the Decision Tree Builder and the Decision Studio with their Full precision switch on (at the top of each page): they print them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -340,23 +403,32 @@
    "source": "suite-app",
    "source_ref": "src/components/decisionstudio/briefModel.js:87-89",
    "printed": {
-    "decimals": 1
+    "decimals": 4
    },
    "display_scale": 1,
-   "display_ref": "src/components/decisionstudio/briefModel.js:30-34",
+   "display_ref": "src/components/decisionstudio/briefModel.js decisionSection Decision advantage row (brief PDF with Full precision on)",
    "prompt_precision": "Money to four decimals in million USD",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/decisionstudio/briefModel.js:87-89 -> print the Decision advantage row (and Optimal EMV / Next best rows) with Number(mm).toFixed(4) instead of fmtMM's toFixed(1); update briefModel.test.js:77 expectation"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Display fix on the brief row the label names. The brief prints $23.5M against 23.49004 (off 0.00996 > tol 0.001). The Decision Tree Builder's own Decision advantage card prints 23.49 (passes) and the hand difference 72.10204 - 48.612 passes, so a learner can recover, but only by ignoring the source the label names.",
-   "evidence": "briefModel fmtMM returns `$${Number(mm).toFixed(1)}M`, so the row prints 23.5 against 23.49004; prompt asks money to four decimals.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: decisiontree/__tests__/w3FullPrecision.test.jsx, rollback through formatFull, checked against the key first).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #567 (Decision Tree Builder and Decision Studio Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_decision.sql",
+    "prompt_append": "Read the figures in the Decision Tree Builder and the Decision Studio with their Full precision switch on (at the top of each page): they print them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "advanced",

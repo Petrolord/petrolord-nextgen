@@ -1,0 +1,68 @@
+{
+ "course": "crude",
+ "suite": "Suite PR #563 (Product Blending Optimizer Full precision switch, stacked on #554)",
+ "tiers": {
+  "advanced": {
+   "append": "Read the figures in the Product Blending Optimizer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+   "why": "The cards print cost to whole dollars, volumes to 1 decimal and shadow prices to 2; the prompt asks 4.",
+   "keys": [
+    "onne_total_cost_usd",
+    "onne_fcc_volume_bbl",
+    "onne_butane_volume_bbl",
+    "onne_sulfur_relief_usd_per_ppm",
+    "onne_rvp_relief_usd_per_psi",
+    "onne_ron_relief_usd_per_octane"
+   ],
+   "annot_updates": {
+    "onne_total_cost_usd": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/blendoptimizer/RecipeResults.jsx:56 Total at 6 dp with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: blendFullPrecision.test.jsx, the solver result through formatFull)."
+    },
+    "onne_fcc_volume_bbl": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/blendoptimizer/PoolPanel.jsx:60 In the recipe (bbl) at 6 dp with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: blendFullPrecision.test.jsx, the solver result through formatFull)."
+    },
+    "onne_butane_volume_bbl": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/blendoptimizer/PoolPanel.jsx:60 In the recipe (bbl) at 6 dp with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: blendFullPrecision.test.jsx, the solver result through formatFull)."
+    },
+    "onne_sulfur_relief_usd_per_ppm": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/blendoptimizer/RecipeResults.jsx:199 What each constraint is costing, at 6 dp with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: blendFullPrecision.test.jsx, the solver result through formatFull)."
+    },
+    "onne_rvp_relief_usd_per_psi": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/blendoptimizer/RecipeResults.jsx:199 What each constraint is costing, at 6 dp with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: blendFullPrecision.test.jsx, the solver result through formatFull)."
+    },
+    "onne_ron_relief_usd_per_octane": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/blendoptimizer/RecipeResults.jsx:199 What each constraint is costing, at 6 dp with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: blendFullPrecision.test.jsx, the solver result through formatFull)."
+    }
+   }
+  }
+ }
+}

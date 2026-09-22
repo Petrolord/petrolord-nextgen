@@ -1,0 +1,23 @@
+{
+ "course": "refinery",
+ "suite": "Suite PR #561 (Refinery Planning & Scheduling Studio Full precision switch, stacked on #554)",
+ "tiers": {
+  "intermediate": {
+   "append": "Read the figures in the Refinery Planning & Scheduling Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+   "why": "The plan table rounds utilisation to whole percent; the prompt asks 2 decimals.",
+   "keys": [
+    "amassoma_cdu_utilisation_pct"
+   ],
+   "annot_updates": {
+    "amassoma_cdu_utilisation_pct": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/refineryplanning/PlanResults.jsx:100 unit utilisation at 6 dp with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, the plan table prints each unit utilisation at 6 decimals (jest: utilisationFullPrecision.test.jsx)."
+    }
+   }
+  }
+ }
+}

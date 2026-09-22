@@ -433,3 +433,11 @@ The annotations were written by separate reviewers, course by course. `normalize
 | welldata | 18 | 0 | 0 | 0 | 0 | 0 | 18 |
 | welldesign | 17 | 0 | 1 | 0 | 1 | 0 | 8 |
 | welltest | 18 | 0 | 0 | 0 | 0 | 0 | 9 |
+
+## W3 (Suite Full precision), 2026-09-22
+
+The third wave of [FOLLOW-ON-PROGRAMME.md](FOLLOW-ON-PROGRAMME.md) (section 2 and the section 1 Suite rows, D3). The Suite gains one shared "Full precision" switch (Suite #554), off by default so product cards print exactly as before; with it on, graded quantities print at 6 decimals (money in million USD at 4, more where a tolerance needs it) with no digit grouping. It is wired per app in Suite #555 to #568. Two apps also gained the as-of date the section 1 rows needed (AFE Cost Control Manager, Project Management Pro), the NPV Scenario Builder gained its Monte Carlo settings and a sorted sample export, and the Relief and Flare Studio a flare back pressure input (its blowdown call ignored the back pressure, so the choked floor at 16.5 psia could not be read).
+
+`w3_capstones.py` generates `migrations/20261026_w3_<course>.sql` from `w3/<course>.json`: one sentence appended to 25 capstone briefs in 15 courses, naming the app and the switch. Prompt only (fields asserted identical before and after), content-addressed on the post-W1 row, refuses without W1. They apply only after the Suite zip carrying the switch is live (`/root/w3-apply/apply.sh markers <zip>` checks it). `normalize.py` folds each `annot_updates` entry into `annot/` (the print the switch gives, class `none`, `printed_before` keeps the old print); `audit.py --post --wave w3` checks every W3 brief ends with its sentence, and `--selftest` gains two controls: a W3 brief without its sentence, and a W3 class move put back on the Suite print it replaced (both go red).
+
+Not in W3: the separation advanced brief (W2 publishes the ADANGA offsets there, so the Full precision sentence is handed to W2; the class move for `ejulebe4_preferred_height_ft` is recorded here), wellcost (W2's prompt; Suite #568 adds the studio's Full precision and the downloadable MERLIN A-12 case file with its seed), fiscal FC6 (already shipped by the round-off, verified on the scratch replay), and the NextGen panel rows (W4).

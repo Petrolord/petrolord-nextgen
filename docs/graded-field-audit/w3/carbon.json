@@ -1,0 +1,23 @@
+{
+ "course": "carbon",
+ "suite": "Suite PR #561 (Energy & Utilities Efficiency Studio Full precision switch, stacked on #554)",
+ "tiers": {
+  "intermediate": {
+   "append": "Read the figures in the Energy & Utilities Efficiency Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+   "why": "The headline rounds the efficiency to 2 decimals; the prompt asks 4 at tol 1e-4.",
+   "keys": [
+    "igrita_efficiency_lhv_pct"
+   ],
+   "annot_updates": {
+    "igrita_efficiency_lhv_pct": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/energyefficiency/CombustionResults.jsx:74 (also :122, :123) efficiency on LHV at 6 dp with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, the Combustion & heaters headline prints the LHV efficiency at 6 decimals (jest: efficiencyFullPrecision.test.jsx)."
+    }
+   }
+  }
+ }
+}
