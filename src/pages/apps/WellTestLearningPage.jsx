@@ -15,6 +15,8 @@ import { useRole } from '@/contexts/RoleContext';
 import { hasDeepCourse } from '@/lib/courseContent';
 import DeepCourseBanner from '@/components/course/DeepCourseBanner';
 import BuildupExplorer from '@/components/course/panels/welltest/BuildupExplorer';
+import CapstoneCaseFiles from '@/components/course/CapstoneCaseFiles';
+import { WELLTEST_CASE_FILES } from '@/content/capstone-cases/welltest';
 import DiagnosticExplorer from '@/components/course/panels/welltest/DiagnosticExplorer';
 import RegressionExplorer from '@/components/course/panels/welltest/RegressionExplorer';
 import { buildupWindow, faultLines, fixtureTruth, multiRateCase } from '@/components/course/panels/welltest/welltestLab';
@@ -168,7 +170,7 @@ const WellTestLearningPage = () => {
               well is stimulated when it is damaged: wrong by a factor of{' '}
               {test.kFactor.toFixed(2)} and wrong in the conclusion. Narrow the window and it walks
               back up. Past a sealing fault the late line reports{' '}
-              {test.fault.late.k.toFixed(1)} mD on rock that is {test.fault.truth.k}. Ignore a rate
+              {test.fault.late.k.toFixed(0)} mD on rock that is {test.fault.truth.k}. Ignore a rate
               history and it reports {test.mr.naive.k.toFixed(0)} mD. This course is how you tell
               which of those you are holding.
               {gate.quota?.own_data_upload === false && ' Your own data upload unlocks at the Associate tier.'}            </p>
@@ -215,6 +217,10 @@ const WellTestLearningPage = () => {
               <CardDescription>{capstone?.prompt}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
+              {/OBODO/i.test(capstone?.prompt || '') && (
+                <CapstoneCaseFiles files={WELLTEST_CASE_FILES}
+                  note="Download the buildup file, then open it in the buildup explorer's Your test mode and type the constants the brief states. No panel loads it for you." />
+              )}
               {!capstoneOpen ? (
                 <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4 text-sm text-gray-300 flex items-start gap-2">
                   <Lock className="h-4 w-4 text-[#BFFF00] mt-0.5 shrink-0" />

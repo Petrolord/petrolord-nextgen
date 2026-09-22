@@ -22,7 +22,7 @@ The engine's `flowEfficiency` takes whatever average pressure you hand it. Which
 
 A flow efficiency of 1 is an undamaged well. Of 0.5, a well spending half its drawdown crossing the skin. Of 1.4, a well that has been fractured or acidised successfully.
 
-The well in this course is well below 1, and you will compute exactly how far below in the capstone. The interpretation is direct: if the damage were removed, this well would deliver its current rate at a substantially higher flowing pressure, or a substantially higher rate at its current flowing pressure.
+The well in this course is well below 1, and the panel shows exactly how far below. The interpretation is direct: if the damage were removed, this well would deliver its current rate at a substantially higher flowing pressure, or a substantially higher rate at its current flowing pressure.
 
 That second form is what the production engineer wants, and getting from flow efficiency to a rate gain needs one more assumption: that the well's productivity is proportional to drawdown, which is true for single-phase liquid flow and not true once free gas appears near the wellbore.
 

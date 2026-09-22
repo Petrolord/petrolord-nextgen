@@ -78,7 +78,8 @@ const extras = (id) => {
 };
 
 const DiagnosticExplorer = () => {
-  const [id, setId] = useState('buildup');
+  // Opens on the drawdown; the Professional capstone's buildup plateau is one select away.
+  const [id, setId] = useState('drawdown');
   const [L, setL] = useState('0.1');
 
   const view = useMemo(() => {
