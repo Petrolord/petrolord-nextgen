@@ -13,10 +13,13 @@
 // it by (GPa as MPa, a fraction as a percent, ...). The band travels with the
 // value. A unit with no entry is checked as graded only.
 //
-// INTEGER FIELDS (tol 0) are exact counts. Small integers are everywhere in
-// prose and in SVG layout, so they are swept only in lessons and rendered text,
-// where an exact match is a real statement; each course adds its own check of
-// what would leak the count (the input that produces it).
+// INTEGER FIELDS (tol 0) are exact counts. Integers are everywhere in SVG
+// layout, so they are swept only in lessons and rendered text, where an exact
+// match is a real statement. A count below SMALL_COUNT (100 by default) is not
+// swept at all: numbers like 2, 24 or 32 turn up in any prose ("24 hour
+// cooldown") and a match says nothing. For every count, swept or not, each
+// course also checks that the input that produces it (a frame, a polygon, a
+// well table, a frequency) appears nowhere a learner reads first.
 //
 // This module is test support: nothing a learner loads imports it.
 import * as fs from 'node:fs';
@@ -25,8 +28,11 @@ import * as path from 'node:path';
 export const LEAK_GUARD_MARGIN = 10;
 export const NUMBER = /-?\d+(?:\.\d+)?(?:[eE][+-]?\d+)?/g;
 
-export function makeLeakGuard(fields, restate = {}) {
-  const targets = fields.flatMap((f) => (restate[f.unit] || [1]).map((factor) => ({
+export const SMALL_COUNT = 100;
+
+export function makeLeakGuard(fields, restate = {}, { smallCount = SMALL_COUNT } = {}) {
+  const swept = fields.filter((f) => f.tol > 0 || Math.abs(f.expected) >= smallCount);
+  const targets = swept.flatMap((f) => (restate[f.unit] || [1]).map((factor) => ({
     tier: f.tier,
     key: f.key,
     factor,
