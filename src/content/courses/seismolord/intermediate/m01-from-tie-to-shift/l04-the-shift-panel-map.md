@@ -6,7 +6,7 @@ This lesson is the map of the tier. It names what the shift panel shows, says wh
 
 The panel runs the real pipeline, the same code the capstone is graded against, and reports three things.
 
-**The scan and its answer.** It builds the 25 Hz synthetic from the teaching well, constructs the observed trace as that synthetic arriving 8 ms late in TWT, then slides the synthetic across every lag in the search window and scores the agreement at each one. It reports the winning lag as a bulk shift in ms of TWT and the correlation achieved there. Module 2 owns this: what the correlation measures, how the lags are stepped, and how to read the winning peak including its sign.
+**The scan and its answer.** It builds the 25 Hz synthetic from the teaching well, constructs the observed trace as that synthetic arriving late in TWT (the teaching trace, 6 ms, when it opens; the brief's trace, lag withheld, when you select it), then slides the synthetic across every lag in the search window and scores the agreement at each one. It reports the winning lag as a bulk shift in ms of TWT and the correlation achieved there. Module 2 owns this: what the correlation measures, how the lags are stepped, and how to read the winning peak including its sign.
 
 **The correlation curve.** Every lag tested is plotted against the correlation it scored, so you see the whole scan rather than only its winner. Module 3 owns this. The curve is where the tier's most useful caution lives, because the value at zero lag, meaning a tie you never shifted at all, is not a number that looks broken.
 
@@ -20,7 +20,7 @@ The tolerances are part of the fact, so learn them alongside the values.
 
 | reading | value | tolerance |
 |---|---|---|
-| suggested bulk shift | 8 ms of TWT | 0.5 |
+| suggested bulk shift | read from the scan on the brief's trace | 0.5 |
 | correlation at zero lag, before any shift | read from the scan | 0.0005 |
 | strongest synthetic amplitude at 15 Hz | 0.1573149710893631 | 0.002 |
 | strongest synthetic amplitude at 40 Hz | 0.0362229160964489 | 0.001 |
@@ -29,7 +29,7 @@ The tolerances are part of the fact, so learn them alongside the values.
 
 Read the table as three pairs rather than six items.
 
-The first pair is the tie. The shift is 8 ms of TWT with a tolerance of 0.5, which is well inside one sample of the 2 ms grid, so the answer is effectively exact and the tolerance exists only to accept a rounded write-up. Its partner is the correlation at zero lag, the score the tie earns if you never shift it at all, graded to 0.0005 from the six decimals the scan prints. The correlation at the winning lag is exactly 1 here, which is why it is not graded: module 2 spends a whole lesson on why it is 1 on this exercise and why you should never expect it on real data. The zero lag score is the number that tells you how respectable a wrong tie can look.
+The first pair is the tie. The shift is a whole number of 2 ms samples, graded with a tolerance of 0.5, which is well inside one sample of the grid, so the answer is effectively exact and the tolerance exists only to accept a rounded write-up. Its partner is the correlation at zero lag, the score the tie earns if you never shift it at all, graded to 0.0005 from the six decimals the scan prints. The correlation at the winning lag is exactly 1 here, which is why it is not graded: module 2 spends a whole lesson on why it is 1 on this exercise and why you should never expect it on real data. The zero lag score is the number that tells you how respectable a wrong tie can look.
 
 The second pair is amplitude at two frequencies. Both are dimensionless, both are the largest absolute value anywhere on the synthetic trace, and the only difference between the two runs is the dominant frequency of the wavelet. The lower frequency gives the larger amplitude, 0.1573149710893631 at 15 Hz against 0.0362229160964489 at 40 Hz, which is more than a factor of four. That direction is backwards from the common expectation that a sharper wavelet gives a bigger event, and module 4 explains why the expectation is wrong.
 
@@ -39,7 +39,7 @@ The third pair is the TWT at which each of those peaks sits, 1580 ms at 15 Hz an
 
 Use it to check yourself rather than to find out. The productive loop is to predict a reading from what you understand of the mechanism, write the prediction down, then open the panel and compare. A prediction that lands confirms the rule you used. A prediction that misses tells you which rule is wrong, and the curve and the trace give you enough detail to work out which.
 
-Two habits are worth starting now. Always write a shift with its unit and say that it is TWT, because a bare 8 in a notebook could be metres, milliseconds of one-way time or milliseconds of two-way time, and only the label separates them. And whenever you write down an amplitude or a peak time, write the wavelet frequency beside it, because both of those numbers belong to the wavelet as much as to the rock, which is the single hardest idea in this tier.
+Two habits are worth starting now. Always write a shift with its unit and say that it is TWT, because a bare 6 in a notebook could be metres, milliseconds of one-way time or milliseconds of two-way time, and only the label separates them. And whenever you write down an amplitude or a peak time, write the wavelet frequency beside it, because both of those numbers belong to the wavelet as much as to the rock, which is the single hardest idea in this tier.
 
 The panel below runs the correlation scan on the planted case, plots the correlation against every lag it tested, and rebuilds the synthetic at any wavelet frequency you choose.
 
@@ -49,4 +49,4 @@ The panel below runs the correlation scan on the planted case, plots the correla
 
 Open the panel and locate all six of the graded readings, three of them by changing the wavelet frequency. For each one write a sentence naming the module that will explain it and a sentence saying what you would have to believe to get it wrong. Then answer without looking: which four of the six are readings about the wavelet, and which two are readings about the tie.
 
-Self-check: the four wavelet readings are the two amplitudes and the two peak times, which is the whole point of modules 4 and 5, and each of them has to be quoted with the frequency it belongs to. The two tie readings are the shift of 8 ms of TWT and the correlation of 1, both graded on the capstone's 25 Hz construction. To get the amplitudes wrong you have to believe a sharper wavelet gives a bigger peak. To get the peak times wrong you have to believe the strongest event on a trace marks the strongest interface, which would put both of them at the reflection coefficient at 1582 ms of TWT rather than at 1580 ms and 1646 ms.
+Self-check: the four wavelet readings are the two amplitudes and the two peak times, which is the whole point of modules 4 and 5, and each of them has to be quoted with the frequency it belongs to. The two tie readings are the shift in ms of TWT and the correlation at zero lag, both read from the scan on the brief's trace. To get the amplitudes wrong you have to believe a sharper wavelet gives a bigger peak. To get the peak times wrong you have to believe the strongest event on a trace marks the strongest interface, which would put both of them at the reflection coefficient at 1582 ms of TWT rather than at 1580 ms and 1646 ms.

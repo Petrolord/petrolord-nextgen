@@ -3,7 +3,7 @@ import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ReferenceLine, Legend,
 } from 'recharts';
 import {
-  computeSynthetic, waveletRows, traceRows, CAPSTONE_FREQ_HZ, DT_MS, NS,
+  computeSynthetic, waveletRows, traceRows, TEACHING_FREQ_HZ, DT_MS, NS, V_OVERBURDEN_MS, WELL,
 } from '@/lib/seismolordTeaching';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -13,29 +13,52 @@ import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/
 // frequency and every number below moves.
 const fmt = (v, d = 4) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 
+// The panel opens on the whole teaching log at 2000 m/s and 25 Hz. The
+// overburden velocity and a depth window of the log are typed inputs, so a
+// case of your own (the capstone states one) is worked by typing it in;
+// nothing here preloads it.
+const LOG_TOP = WELL.md[0];
+const LOG_BASE = WELL.md[WELL.md.length - 1];
+
 const SyntheticExplorer = () => {
-  const [freq, setFreq] = useState(String(CAPSTONE_FREQ_HZ));
+  const [freq, setFreq] = useState(String(TEACHING_FREQ_HZ));
+  const [vel, setVel] = useState(String(V_OVERBURDEN_MS));
+  const [top, setTop] = useState(String(LOG_TOP));
+  const [base, setBase] = useState(String(LOG_BASE));
 
   const f = Number(freq);
-  const valid = Number.isFinite(f) && f > 0 && f <= 200;
+  const v = Number(vel);
+  const t = Number(top);
+  const b = Number(base);
+  const valid = Number.isFinite(f) && f > 0 && f <= 200 && Number.isFinite(v) && v >= 1000 && v <= 6000
+    && Number.isFinite(t) && Number.isFinite(b) && t >= LOG_TOP && b <= LOG_BASE && b - t >= 10;
 
   const result = useMemo(() => {
     if (!valid) return null;
     try {
-      return computeSynthetic(f);
+      return computeSynthetic(f, { vOverburden: v, topMd: t, baseMd: b });
     } catch {
       return null;
     }
-  }, [f, valid]);
+  }, [f, v, t, b, valid]);
+
+  const inputs = (
+    <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
+      <NumField label="Wavelet frequency (Hz)" value={freq} onChange={setFreq} />
+      <NumField label="Overburden velocity (m/s)" value={vel} onChange={setVel} />
+      <NumField label="Window top MD (m)" value={top} onChange={setTop} />
+      <NumField label="Window base MD (m)" value={base} onChange={setBase} />
+    </div>
+  );
 
   const wRows = useMemo(() => (result ? waveletRows(result.wavelet) : []), [result]);
   const tRows = useMemo(() => (result ? traceRows(result.syn) : []), [result]);
 
   if (!result) {
     return (
-      <PanelShell title="Synthetic explorer" subtitle="Enter a wavelet frequency between 1 and 200 Hz.">
-        <NumField label="Wavelet frequency (Hz)" value={freq} onChange={setFreq} />
-        <Note>The frequency must be a positive number.</Note>
+      <PanelShell title="Synthetic explorer" subtitle="Enter a wavelet frequency, an overburden velocity and a depth window of the log.">
+        {inputs}
+        <Note>The frequency must be 1 to 200 Hz, the velocity 1000 to 6000 m/s, and the window at least 10 m inside the log ({LOG_TOP} to {LOG_BASE} m).</Note>
       </PanelShell>
     );
   }
@@ -44,19 +67,17 @@ const SyntheticExplorer = () => {
 
   return (
     <PanelShell title="Synthetic explorer"
-      subtitle={`The teaching well through the full pipeline: velocity and density to impedance, impedance to reflection coefficients, convolved with a ${fmt(f, 0)} Hz Ricker wavelet on a ${DT_MS} ms grid.`}>
-      <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
-        <NumField label="Wavelet frequency (Hz)" value={freq} onChange={setFreq} />
-        <div className="text-xs text-gray-500 sm:col-span-3">
-          The capstone is read at {CAPSTONE_FREQ_HZ} Hz. Try 15 and 40 Hz too and watch both the
-          strongest amplitude and its time move.
-        </div>
+      subtitle={`The teaching well from ${top} to ${base} m through the full pipeline: velocity and density to impedance, impedance to reflection coefficients, placed in time at a ${vel} m/s overburden and convolved with a ${fmt(f, 0)} Hz Ricker wavelet on a ${DT_MS} ms grid. It opens on the whole log at 2000 m/s and 25 Hz.`}>
+      {inputs}
+      <div className="text-xs text-gray-500">
+        The whole-log reading is at {TEACHING_FREQ_HZ} Hz. Try 15 and 40 Hz too and watch both the
+        strongest amplitude and its time move; then narrow the window and change the velocity.
       </div>
 
       <TileGrid>
         <Tile label="Mean sonic velocity" value={fmt(s.meanVelocity, 2)} unit="m/s" />
-        <Tile label="TWT at the top of the log" value={fmt(s.twtLogTop, 0)} unit="ms" />
-        <Tile label="TWT at the base of the log" value={fmt(s.twtLogBase, 0)} unit="ms" />
+        <Tile label="TWT at the top of the window" value={fmt(s.twtLogTop, 2)} unit="ms" />
+        <Tile label="TWT at the base of the window" value={fmt(s.twtLogBase, 2)} unit="ms" />
         <Tile label="Maximum impedance" value={fmt(s.impMax, 2)} />
         <Tile label="Strongest reflection coefficient" value={fmt(s.rcPeakAbs, 6)} />
         <Tile label="TWT of that reflection" value={fmt(s.rcPeakTwt, 0)} unit="ms" />

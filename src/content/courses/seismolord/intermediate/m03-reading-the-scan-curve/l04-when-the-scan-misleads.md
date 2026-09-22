@@ -28,7 +28,7 @@ In all four cases you get a lag, you get a correlation, and neither one announce
 
 You might hope a bad model shows up as a bad number. It often does not, and lesson 2 already told you why. Seismic traces are oscillatory and smooth, so partial agreement produces respectable correlations. A stretched synthetic still has most of its events near most of the right reflectors, so the best constant shift still scores well.
 
-It is worth knowing how far down the number could go if things really did disagree. Across all 41 lags in this scan, the lowest correlation anywhere is -0.409277. That is the other end of the range: a lag at which the synthetic sits so badly against the observed trace that peaks are landing on troughs and the correlation goes negative. The scan explores that whole range every time it runs, from -0.409277 up to the peak, and reports only the top of it.
+It is worth knowing how far down the number could go if things really did disagree. Across all 41 lags in this scan, the lowest correlation anywhere is -0.404217. That is the other end of the range: a lag at which the synthetic sits so badly against the observed trace that peaks are landing on troughs and the correlation goes negative. The scan explores that whole range every time it runs, from -0.404217 up to the peak, and reports only the top of it.
 
 The practical reading is that the correlation has a lot of room in it. A returned value can sit far from the best the pair can achieve and still sound acceptable when quoted alone, which is why the shape of the curve matters more than the single number.
 
@@ -48,6 +48,6 @@ And keep the model in mind. A bulk shift is the right correction when the whole 
 
 ## Exercise
 
-For each of stretch, phase rotation and a mis-picked marker, write one sentence saying what the scan will return and one sentence saying what evidence in your own workflow would expose it. Then answer: why does the fact that this scan ranges from -0.409277 up to its peak make the reported correlation less informative on its own than it first appears?
+For each of stretch, phase rotation and a mis-picked marker, write one sentence saying what the scan will return and one sentence saying what evidence in your own workflow would expose it. Then answer: why does the fact that this scan ranges from -0.404217 up to its peak make the reported correlation less informative on its own than it first appears?
 
 As a self-check: in every one of the three cases the scan returns a lag and a correlation that look ordinary, because it can only express a constant shift and will always pick the constant shift that leaves the least disagreement. Stretch is exposed by correlating an upper and a lower window separately and finding they want different shifts, or by overlaying the shifted traces and seeing the ends drift apart while the middle ties. Phase rotation is exposed by comparing the character of events rather than their position, since a shift moves an event without changing its shape and a rotation changes it. A mis-picked marker is exposed by checking the tie against independent geological control. As for the range, the scan explores everything from -0.409277 up to its peak and reports only the top, so a correlation quoted alone tells you where one lag landed without telling you how the alternatives scored, and only the curve carries that.

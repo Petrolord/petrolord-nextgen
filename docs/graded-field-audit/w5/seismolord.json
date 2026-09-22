@@ -1,0 +1,121 @@
+{
+ "course": "seismolord",
+ "wave": "w5a",
+ "migration": "20261028a_w5_seismolord.sql",
+ "fields_file": "tools/course-waves/w5/seismolord/fields.json",
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "title": "Tie the basic_20 well: the UBIMA window",
+   "dataset": "wells/las/basic_20, UBIMA window and time-depth (W5 re-case; every setting is stated in the brief)",
+   "why": "Every field leaked: the walkthrough and the synthetic lessons printed them and the synthetic explorer opened on the capstone setting (whole log, 2000 m/s, 25 Hz). The capstone moves to the UBIMA case, a depth window of the log with an overburden velocity and a wavelet of its own, typed into the synthetic explorer (the velocity and the window are new inputs).",
+   "prompt": "Build the synthetic for the UBIMA window of the basic_20 teaching well: the log from 1560 to 1640 m MD, a vertical well with the KB at MSL and a single 2400 m/s overburden velocity (so TWT = 2z/2400 s), and a 30 Hz Ricker wavelet on the 2 ms grid. Type the window, the velocity and the frequency into the synthetic explorer (it opens on the whole log at 2000 m/s and 25 Hz, which is the teaching case) and read the summary: report the mean sonic velocity in the window, the two-way time at the top of the window, the maximum impedance, the strongest reflection coefficient (absolute value) and its two-way time, and the two-way time of the strongest synthetic amplitude.",
+   "rekey": [
+    "mean_velocity_ms",
+    "twt_at_log_top_ms",
+    "imp_max",
+    "rc_peak_abs",
+    "rc_peak_twt_ms",
+    "syn_peak_twt_ms"
+   ],
+   "annot": {
+    "ubima_mean_velocity_ms": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile Mean sonic velocity)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile Mean sonic velocity)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed window 1560 to 1640 m; fmt 2 dp against tol 0.05; the whole-log value 3145.29 is far outside.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ubima_twt_at_window_top_ms": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile TWT at the top of the window)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile TWT at the top of the window)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "2 x 1560 / 2400 x 1000 = 1300 ms by hand; fmt 2 dp against tol 0.05.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ubima_imp_max": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile Maximum impedance)",
+     "printed": {
+      "decimals": 2
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile Maximum impedance)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed window; fmt 2 dp against tol 0.05.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ubima_rc_peak_abs": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile Strongest reflection coefficient)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile Strongest reflection coefficient)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed window and velocity (the velocity decides which depth samples share a 2 ms cell); fmt 6 dp against tol 5e-5.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ubima_rc_peak_twt_ms": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile TWT of that reflection)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile TWT of that reflection)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed window and velocity; a 2 ms grid time printed as an integer; tol 0.5.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ubima_syn_peak_twt_ms": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile TWT of that amplitude)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile TWT of that amplitude)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed window, velocity and 30 Hz wavelet; a 2 ms grid time printed as an integer; tol 0.5.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "B",
+   "why": "B strip. The lessons now work a teaching trace arriving 6 ms late (they said 8 ms, the answer, in 17 places) and never print the brief trace's zero-lag correlation; the shift explorer opens on the teaching trace and runs the brief's trace, lag withheld, only when selected. The brief names that setting. Keys, values and tolerances do not move. The open-book label stays, because the module lessons still print the 15 and 40 Hz peak readings, which the B5 audit did not classify as leaks.",
+   "prompt_edits": [
+    [
+     "Run the bulk-shift scan and read the panel:",
+     "Run the bulk-shift scan on this trace (the shift explorer's Observed trace setting \"The brief's trace\"; the panel opens on a teaching trace) and read the panel:"
+    ]
+   ]
+  }
+ }
+}

@@ -19,8 +19,9 @@ const plotH = H - PAD.top - PAD.bottom;
 const fmt = (v, d = 6) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 
 const WedgeExplorer = () => {
-  const [freq, setFreq] = useState(25);
-  const [thickness, setThickness] = useState(16);
+  // Opens at 15 Hz, off the capstone's 25 and 40 Hz (W5a strip).
+  const [freq, setFreq] = useState(15);
+  const [thickness, setThickness] = useState(26);
 
   const model = useMemo(() => computeWedge(freq), [freq]);
   const k = Math.min(Math.round(thickness / WEDGE.dtMs), model.rows.length - 1);

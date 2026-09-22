@@ -36,9 +36,9 @@ The engine marks those samples as gaps rather than numbers, and carries a validi
 
 ## Quantisation, and why times are even
 
-A time on this grid can only land on a multiple of 2 ms. There is no sample at 1583 ms, so no picked event can be reported there. Every graded time in this course is an even number of milliseconds for that reason: 1500, 1582 and 1642 are all even, and they have to be.
+A time on this grid can only land on a multiple of 2 ms. There is no sample at 1583 ms, so no picked event can be reported there. Every time this tier reads off the grid is an even number of milliseconds for that reason: 1500, 1582 and 1642 are all even, and they have to be.
 
-This is also why the capstone allows 2 ms of tolerance on the two peak times. One sample either way is the smallest distinguishable difference on the grid, so demanding better would be demanding a precision the data does not carry. The two-way time of the log top is held to a tighter 0.5 ms because it is not a grid search result; it comes straight out of the time-depth function applied to a depth, so it is exact arithmetic rather than a sample index.
+This is also why a tolerance on a peak time never needs to be finer than one sample. One sample either way is the smallest distinguishable difference on the grid, so demanding better would be demanding a precision the data does not carry. The two-way time of the log top is held to a tighter 0.5 ms because it is not a grid search result; it comes straight out of the time-depth function applied to a depth, so it is exact arithmetic rather than a sample index.
 
 Keep the distinction. Quantities read off the grid inherit the grid's resolution. Quantities computed from a formula do not.
 

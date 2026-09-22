@@ -33,7 +33,7 @@ The app follows the recipe directly. Reflectivity and wavelet go in, and a trace
 
 **Every amplitude in the trace is a sum, not a measurement.** This is the sentence to carry forward. When you read a value off the synthetic at some time, you are not reading the strength of the reflection at that time. You are reading the total of every wavelet copy that reaches that sample: the local reflection's own contribution, plus a side lobe from a reflection a few tens of milliseconds above it, plus a shoulder from another below it, and so on, each carrying its own sign.
 
-## The point that sets up the capstone
+## The point that sets up the last two readings
 
 Follow that third consequence to its conclusion. If amplitude at any time is a sum of contributions from many reflections, then nothing guarantees that the largest total lands where the largest single contribution lands.
 

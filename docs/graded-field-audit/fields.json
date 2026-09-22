@@ -29847,7 +29847,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_seismolord.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "ubima_mean_velocity_ms",
+    "label": "Mean sonic velocity in the window",
+    "unit": "m/s",
+    "expected": 2991.2286066090837,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile Mean sonic velocity)",
+    "printed": {
+     "decimals": 2
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile Mean sonic velocity)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed window 1560 to 1640 m; fmt 2 dp against tol 0.05; the whole-log value 3145.29 is far outside.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile prints fmt(s.meanVelocity, 2) = 3145.29; tol 1.",
   "notes": "Default-state panel value equals the answer (probe). By design here: the prompt directs the learner to read this panel, so the capstone at this tier is a readout of the default state with no working."
  },
@@ -29878,7 +29905,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_seismolord.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "ubima_twt_at_window_top_ms",
+    "label": "TWT at the top of the window",
+    "unit": "ms",
+    "expected": 1300.0,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile TWT at the top of the window)",
+    "printed": {
+     "decimals": 2
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile TWT at the top of the window)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "2 x 1560 / 2400 x 1000 = 1300 ms by hand; fmt 2 dp against tol 0.05.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "Tile prints fmt(s.twtLogTop, 0) = 1500; integer, tol 0.5.",
   "notes": "Default-state panel value equals the answer (probe). By design here: the prompt directs the learner to read this panel, so the capstone at this tier is a readout of the default state with no working."
  },
@@ -29911,7 +29965,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_seismolord.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "ubima_imp_max",
+    "label": "Maximum impedance in the window",
+    "unit": "(m/s)\u00b7(g/cc)",
+    "expected": 10474.98046875,
+    "tol": 0.05
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile Maximum impedance)",
+    "printed": {
+     "decimals": 2
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile Maximum impedance)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed window; fmt 2 dp against tol 0.05.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "fmt(s.impMax, 2) = 10624.96; tol 10.",
   "notes": "Default-state panel value equals the answer (probe). By design here: the prompt directs the learner to read this panel, so the capstone at this tier is a readout of the default state with no working."
  },
@@ -29944,7 +30025,34 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_seismolord.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "ubima_rc_peak_abs",
+    "label": "Strongest reflection coefficient (abs)",
+    "unit": "-",
+    "expected": 0.021212393417954445,
+    "tol": 5e-05
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile Strongest reflection coefficient)",
+    "printed": {
+     "decimals": 6
+    },
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile Strongest reflection coefficient)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed window and velocity (the velocity decides which depth samples share a 2 ms cell); fmt 6 dp against tol 5e-5.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "fmt(s.rcPeakAbs, 6) = 0.017688; tol 0.0005.",
   "notes": "Default-state panel value equals the answer (probe). By design here: the prompt directs the learner to read this panel, so the capstone at this tier is a readout of the default state with no working."
  },
@@ -29975,7 +30083,32 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_seismolord.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "ubima_rc_peak_twt_ms",
+    "label": "TWT of the strongest reflection",
+    "unit": "ms",
+    "expected": 1318.0,
+    "tol": 0.5
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile TWT of that reflection)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile TWT of that reflection)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed window and velocity; a 2 ms grid time printed as an integer; tol 0.5.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "fmt(s.rcPeakTwt, 0) = 1582; tol 2.",
   "notes": "Default-state panel value equals the answer (probe). By design here: the prompt directs the learner to read this panel, so the capstone at this tier is a readout of the default state with no working."
  },
@@ -30006,7 +30139,32 @@
   "recommendation": null,
   "leak": true,
   "reclassed_from": null,
-  "shipped": null,
+  "shipped": {
+   "migration": "20261028a_w5_seismolord.sql",
+   "wave": "w5a",
+   "closes_leak": true,
+   "rekey": {
+    "key": "ubima_syn_peak_twt_ms",
+    "label": "TWT of the strongest synthetic amplitude (30 Hz)",
+    "unit": "ms",
+    "expected": 1360.0,
+    "tol": 0.5
+   },
+   "rekey_annot": {
+    "source": "nextgen-panel",
+    "source_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile TWT of that amplitude)",
+    "printed": "integer",
+    "display_scale": 1,
+    "display_ref": "src/components/course/panels/seismolord/SyntheticExplorer.jsx (Tile TWT of that amplitude)",
+    "prompt_precision": null,
+    "answer_space": null,
+    "guess_p": null,
+    "evidence": "typed window, velocity and 30 Hz wavelet; a 2 ms grid time printed as an integer; tol 0.5.",
+    "class": "none",
+    "owner_decision": false,
+    "leak": false
+   }
+  },
   "evidence": "fmt(s.synPeakTwt, 0) = 1642 at 25 Hz; tol 2.",
   "notes": "Default-state panel value equals the answer (probe). By design here: the prompt directs the learner to read this panel, so the capstone at this tier is a readout of the default state with no working."
  },

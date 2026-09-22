@@ -2,9 +2,15 @@
 // drives the central @petrolord/engines synthetics engine over the
 // basic_20 teaching well (the same golden LAS the Well Data Manager
 // course QCs). The engine is consumed as-is; this module fixes the
-// teaching time-depth function and computes the summary-panel numbers
-// the capstone grades. The oracle was reproduced by running exactly
-// this pipeline in Node before the migration was seeded.
+// teaching time-depth function and computes the summary-panel numbers.
+//
+// The whole basic_20 log at 2000 m/s and 25 Hz is the TEACHING case: the
+// panels open on it and the lessons work it. Since W5a (2026-09) the
+// Associate capstone is a case of its own (a depth window of the log, an
+// overburden velocity and a wavelet), stated in the brief and typed into
+// the synthetic explorer. Nothing in this file carries it, and
+// panelCapstoneGuard.test.jsx checks that no number these functions give
+// at their defaults lands on a graded answer.
 import { parseLas } from '@petrolord/engines/engines/welldata/lasParse.js';
 import {
   buildSynthetic, rickerWavelet, slownessToVelocity, isGap, suggestBulkShift,
@@ -17,11 +23,12 @@ import basicLas from '@petrolord/engines/test-data/wells/las/basic_20.las?raw';
 export const V_OVERBURDEN_MS = 2000;
 export const DT_MS = 2;                 // synthetic sample rate
 export const NS = 900;                  // 0–1798 ms grid
-export const CAPSTONE_FREQ_HZ = 25;     // the capstone's wavelet
+export const TEACHING_FREQ_HZ = 25;     // the teaching wavelet
 export const WAVELET_HALF_MS = 60;
 
 const mdToTvdss = (m) => m;
-const tvdssToTwt = (z) => (2 * z / V_OVERBURDEN_MS) * 1000;
+const twtFor = (vOverburden) => (z) => (2 * z / vOverburden) * 1000;
+const tvdssToTwt = twtFor(V_OVERBURDEN_MS);
 
 const parsed = parseLas(basicLas);
 const curve = (m) => parsed.curves.find((c) => c.mnemonic === m).data;
@@ -32,16 +39,28 @@ export const WELL = {
   gr: curve('GR'),
 };
 
-// Build the synthetic at a given wavelet frequency. Returns the engine
-// result plus the summary-panel numbers (validity-masked).
-export function computeSynthetic(freqHz) {
+/** The log restricted to a depth window (inclusive), as the engine takes it. */
+export function wellWindow(topMd = WELL.md[0], baseMd = WELL.md[WELL.md.length - 1]) {
+  const keep = [];
+  WELL.md.forEach((m, i) => { if (m >= topMd && m <= baseMd) keep.push(i); });
+  const pick = (arr) => Float64Array.from(keep, (i) => arr[i]);
+  return { md: pick(WELL.md), dt: pick(WELL.dt), rhob: pick(WELL.rhob), gr: pick(WELL.gr) };
+}
+
+// Build the synthetic at a given wavelet frequency, on the whole log at the
+// teaching overburden velocity unless a window and a velocity are typed.
+// Returns the engine result plus the summary-panel numbers (validity-masked).
+export function computeSynthetic(freqHz, opts = {}) {
+  const vOverburden = opts.vOverburden ?? V_OVERBURDEN_MS;
+  const toTwt = twtFor(vOverburden);
+  const w = (opts.topMd != null || opts.baseMd != null) ? wellWindow(opts.topMd, opts.baseMd) : WELL;
   const wavelet = rickerWavelet(Number(freqHz), DT_MS, WAVELET_HALF_MS);
   const syn = buildSynthetic({
-    dtCurve: WELL.dt, rhobCurve: WELL.rhob, mdArray: WELL.md,
-    mdToTvdss, tvdssToTwt, dtMs: DT_MS, ns: NS, wavelet,
+    dtCurve: w.dt, rhobCurve: w.rhob, mdArray: w.md,
+    mdToTvdss, tvdssToTwt: toTwt, dtMs: DT_MS, ns: NS, wavelet,
   });
 
-  const vel = slownessToVelocity(WELL.dt);
+  const vel = slownessToVelocity(w.dt);
   let vSum = 0;
   let vN = 0;
   for (const v of vel) if (!isGap(v)) { vSum += v; vN += 1; }
@@ -67,8 +86,8 @@ export function computeSynthetic(freqHz) {
     syn,
     summary: {
       meanVelocity: vSum / vN,
-      twtLogTop: tvdssToTwt(WELL.md[0]),
-      twtLogBase: tvdssToTwt(WELL.md[WELL.md.length - 1]),
+      twtLogTop: toTwt(w.md[0]),
+      twtLogBase: toTwt(w.md[w.md.length - 1]),
       impMax,
       rcPeakAbs: rcPeak.maxAbs,
       rcPeakTwt: rcPeak.twtMs,
@@ -193,24 +212,32 @@ export function tuningRows(adv) {
 }
 
 // ---- Intermediate tier: bulk shift + tuning.
-// The "observed seismic" is the 25 Hz synthetic arriving 8 ms late (a
-// known planted lag, so the scan's answer is checkable). Oracle
-// reproduced in Node before the NG6 migration was seeded.
-export const PLANTED_LAG_MS = 8;
+// Two observed traces, both the 25 Hz synthetic arriving late. The
+// TEACHING trace arrives 6 ms late, stated, so the lessons can check the
+// scan against a known answer; the panel opens on it. The capstone's
+// trace arrives late by a lag the brief withholds (WITHHELD_LAG_MS), which
+// the panel runs only when the learner selects it (W5a strip, 2026-09).
+export const TEACHING_LAG_MS = 6;
+export const WITHHELD_LAG_MS = 8;
 
-export function computeIntermediate() {
+/** The bulk-shift scan of the 25 Hz synthetic against itself delayed by lagMs. */
+export function shiftScan(lagMs) {
   const s25 = computeSynthetic(25);
-  const s15 = computeSynthetic(15);
-  const s40 = computeSynthetic(40);
-  const lagSamples = PLANTED_LAG_MS / DT_MS;
+  const lagSamples = lagMs / DT_MS;
   const seis = new Float32Array(NS).fill(NaN);
   for (let i = 0; i < NS - lagSamples; i++) seis[i + lagSamples] = s25.syn.synthetic[i];
-  const shift = suggestBulkShift(s25.syn.synthetic, seis, DT_MS, 40);
+  return suggestBulkShift(s25.syn.synthetic, seis, DT_MS, 40);
+}
+
+export function computeIntermediate(lagMs = WITHHELD_LAG_MS) {
+  const s15 = computeSynthetic(15);
+  const s40 = computeSynthetic(40);
+  const shift = shiftScan(lagMs);
   return {
     bulkShiftMs: shift?.lagMs ?? null,
     corr: shift?.corr ?? null,
-    // The graded correlation (W1, 2026-09-21): the score at zero lag, before
-    // any shift. The score at the winning lag is exactly 1 by construction.
+    // The correlation at zero lag, before any shift (W1, 2026-09-21). The
+    // score at the winning lag is exactly 1 by construction.
     corrZeroLag: shift?.series?.find((e) => e.lagMs === 0)?.corr ?? null,
     peak15: { abs: s15.summary.synPeakAbs, twt: s15.summary.synPeakTwt },
     peak40: { abs: s40.summary.synPeakAbs, twt: s40.summary.synPeakTwt },

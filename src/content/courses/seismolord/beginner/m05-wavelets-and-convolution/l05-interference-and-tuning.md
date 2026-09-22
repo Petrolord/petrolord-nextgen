@@ -1,6 +1,6 @@
 # Interference and tuning
 
-This lesson closes the module by naming the effect that has been building through it, and by explaining the pair of numbers from the teaching well that the capstone asks about.
+This lesson closes the module by naming the effect that has been building through it, and by explaining the pair of numbers from the teaching well that this tier's last two readings are about.
 
 ## Constructive and destructive interference
 
@@ -28,7 +28,7 @@ Nothing is wrong. Convolution explains it completely. The coefficient at 1582 ms
 
 The 15 Hz case behaves differently again. Its strongest amplitude of 0.157315 falls at 1580 ms, within one 2 ms sample of the strongest coefficient at 1582 ms, because the longer wavelet gathers a different set of neighbours into its sum. Same earth, same reflectivity, different wavelet, different answer about where the trace is brightest.
 
-Both 1642 ms and 1582 ms are capstone numbers, and the capstone accepts times to within 2 ms, one sample. Stating them is half the requirement. Explaining why they differ is the other half, and the sentence is: amplitude on a synthetic is the sum of overlapping wavelet copies, so a constructive cluster can outproduce a single larger reflection.
+Both 1642 ms and 1582 ms are teaching readings, each good to one sample. Stating them is half the requirement. Explaining why they differ is the other half, and the sentence is: amplitude on a synthetic is the sum of overlapping wavelet copies, so a constructive cluster can outproduce a single larger reflection.
 
 ## Tuning, and where it becomes quantitative
 

@@ -20,7 +20,7 @@ Take an interface at $z = 1500$ m with an average overburden velocity of $v = 20
 2. Divide by velocity: $3000 / 2000 = 1.5$ s.
 3. Convert to milliseconds: $1.5 \times 1000 = 1500$ ms.
 
-So the reflection arrives at 1500 ms of two-way time. That number reappears throughout this course: it is the two-way time of the top of the teaching well's logged interval, and one of the six numbers the capstone grades.
+So the reflection arrives at 1500 ms of two-way time. That number reappears throughout this course: it is the two-way time of the top of the teaching well's logged interval, and one of the six numbers this tier reports.
 
 ## The single most common beginner error
 

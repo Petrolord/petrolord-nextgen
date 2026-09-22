@@ -20,7 +20,7 @@ Three rules define $L$, and each one exists for a reason you can state.
 
 **The sample must overlap.** When the synthetic is offset by a lag, its ends hang past the ends of the observed trace. Any position $i$ where $i + \ell$ falls outside the observed trace has no partner and is skipped. This is why the sums are recomputed at every lag rather than once: the set of positions changes as the lag changes.
 
-**Neither sample may be a gap.** A gap is a sample with no value, and the platform writes it as a declared non-value rather than a zero. That distinction matters here. Treating a gap as zero would silently add a term of zero to the numerator and a term of zero to the sum of squares, which quietly dilutes the correlation with samples that carry no information. So a position where either trace is a gap is excluded from all three sums, not zeroed. In this exercise the observed trace begins with four gap samples, because it was made by copying the synthetic forward by four samples and nothing filled the space left behind.
+**Neither sample may be a gap.** A gap is a sample with no value, and the platform writes it as a declared non-value rather than a zero. That distinction matters here. Treating a gap as zero would silently add a term of zero to the numerator and a term of zero to the sum of squares, which quietly dilutes the correlation with samples that carry no information. So a position where either trace is a gap is excluded from all three sums, not zeroed. In this exercise the observed trace begins with three gap samples, because it was made by copying the synthetic forward by three samples and nothing filled the space left behind.
 
 **There must be at least eight live overlapping samples.** If fewer than eight positions survive the first two rules, the engine does not score that lag at all. It returns no value for it rather than a poor value. This guards the far ends of the scan, where the traces barely overlap and a correlation computed on two or three samples could easily reach a large value by accident. A high score from a handful of samples is not evidence, and the cleanest way to prevent it from winning a scan is to refuse to compute it.
 
@@ -38,7 +38,7 @@ A value near $0$ means no consistent linear relationship over $L$. Positive prod
 
 A value of $-1$ means the two series are identical in shape but opposite in sign. That is a polarity problem, and a strongly negative correlation at a plausible lag is a signal to check polarity conventions before touching anything else, because moving the trace will never fix it.
 
-The values in between are the ones that require judgement, and the tier keeps returning to that. A correlation of 0.6 says the traces have a good deal in common and does not say the alignment is right. Module 3 shows exactly that situation in this very exercise, where the completely unshifted comparison scores 0.621742 while sitting a full 8 ms wrong in TWT.
+The values in between are the ones that require judgement, and the tier keeps returning to that. A correlation of 0.6 says the traces have a good deal in common and does not say the alignment is right. Module 3 shows exactly that situation in this very exercise, where the completely unshifted comparison scores 0.771383 while sitting a full 6 ms wrong in TWT.
 
 ## Exercise
 

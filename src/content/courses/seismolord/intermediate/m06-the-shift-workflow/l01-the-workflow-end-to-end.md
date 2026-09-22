@@ -16,19 +16,19 @@ Everything above assumes those steps were done correctly, which is why the Assoc
 
 The Professional workflow begins where the Associate tier stopped. You have a synthetic and you have an observed seismic trace at the well, and the first honest statement you can make about them is that you do not yet know how they relate.
 
-In this course the observed trace is controlled on purpose. It is the 25 Hz synthetic arriving 8 ms late. The lag is known to the engine and hidden from you, so the scan has a right answer to recover and you can check the method rather than take it on faith.
+In this course the observed trace is controlled on purpose. In the lessons it is the 25 Hz synthetic arriving 6 ms late; in the capstone it is the same synthetic arriving late by a lag the brief withholds. The lag is known to the engine and hidden from the scan, so the scan has a right answer to recover and you can check the method rather than take it on faith.
 
 ## Step two: scan for the shift
 
 You do not slide the synthetic by eye. The scan walks every lag from minus 40 ms to plus 40 ms in one-sample steps at the 2 ms sample rate, which is 41 lags in all. At each lag it computes a normalised cross-correlation over the samples that overlap and are not gaps, and it requires at least 8 overlapping live samples before it will score a lag at all. It returns the lag with the highest correlation.
 
-On the teaching exercise the answer is a suggested bulk shift of 8 ms, and the correlation at that shift is 1.
+On the teaching exercise the answer is a suggested bulk shift of 6 ms, and the correlation at that shift is 1.
 
 ## Step three: read the scan curve, not only its peak
 
 The single best number is not the whole result. The curve around the answer is symmetric, because correlating a trace with a shifted copy of itself is an autocorrelation, and that symmetry is why the correlation at the answer is exactly 1.
 
-The curve also carries the trap this tier keeps returning to. At lag 0, meaning you never shifted at all, the correlation is 0.621742. That is not a number that looks broken. Somebody looking at a single figure and no scan would accept it, while sitting a full 8 ms wrong. Across the whole 41-lag scan the worst correlation anywhere is -0.409277, so the range the peak stands out from is wide, and it is the shape of the curve that tells you the peak is real.
+The curve also carries the trap this tier keeps returning to. At lag 0, meaning you never shifted at all, the correlation is 0.771383. That is not a number that looks broken. Somebody looking at a single figure and no scan would accept it, while sitting a full 6 ms wrong. Across the whole 41-lag scan the worst correlation anywhere is -0.404217, so the range the peak stands out from is wide, and it is the shape of the curve that tells you the peak is real.
 
 ## Step four: read amplitude and time with the wavelet stated
 
@@ -48,4 +48,4 @@ The Expert tier takes two things from here. It takes a measured shift rather tha
 
 ## Exercise
 
-Write the Professional workflow as an ordered list of steps, starting from the synthetic the Associate tier delivered and ending with the recorded tie, and name the single number that comes out of each step on the teaching exercise. As a self-check: place the synthetic against the observed trace, scan 41 lags from minus 40 ms to plus 40 ms and get a suggested shift of 8 ms, read the curve and note the correlation of 1 at that shift against 0.621742 at zero lag, then read amplitude and time at a stated frequency, and record the shift, the correlation, the wavelet and the feature tied to. Then state in one sentence what the Expert tier needs from this tier before it can begin.
+Write the Professional workflow as an ordered list of steps, starting from the synthetic the Associate tier delivered and ending with the recorded tie, and name the single number that comes out of each step on the teaching exercise. As a self-check: place the synthetic against the observed trace, scan 41 lags from minus 40 ms to plus 40 ms and get a suggested shift of 6 ms, read the curve and note the correlation of 1 at that shift against 0.771383 at zero lag, then read amplitude and time at a stated frequency, and record the shift, the correlation, the wavelet and the feature tied to. Then state in one sentence what the Expert tier needs from this tier before it can begin.

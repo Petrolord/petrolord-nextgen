@@ -20,7 +20,7 @@ That is the entire point. The velocity was not chosen because it describes any r
 
 The logged interval of the teaching well runs from 1500 m to 1650 m, sampled every 0.5 m, which is 301 samples.
 
-* Top of the logged interval, 1500 m. $TWT = 2 \times 1500 / 2000 = 1.5$ s, or 1500 ms. This is one of the six numbers the capstone grades, to a tolerance of 0.5 ms.
+* Top of the logged interval, 1500 m. $TWT = 2 \times 1500 / 2000 = 1.5$ s, or 1500 ms. This is one of the six numbers this tier reports; the capstone asks for it under a velocity of its own.
 * Base of the logged interval, 1650 m. $TWT = 2 \times 1650 / 2000 = 1.65$ s, or 1650 ms.
 * The logged interval is 150 m thick, so it occupies 150 ms of two-way time.
 * A reflection observed at 1582 ms comes from 1582 m, which is 82 m below the top of the log.
