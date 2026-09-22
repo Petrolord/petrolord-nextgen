@@ -105,11 +105,11 @@
  },
  {
   "tier": "advanced",
-  "key": "tune25_amp",
-  "label": "Peak amplitude at 25 Hz tuning",
+  "key": "amp25_at_24ms",
+  "label": "Amplitude of a 24 ms bed at 25 Hz",
   "unit": "-",
-  "expected": 0.1155947595834732,
-  "tol": 0.002
+  "expected": 0.09428644925355911,
+  "tol": 0.0001
  },
  {
   "tier": "advanced",
@@ -129,11 +129,11 @@
  },
  {
   "tier": "advanced",
-  "key": "tune25_iso_ratio",
-  "label": "Tuning amplitude over the isolated level at 25 Hz",
+  "key": "ratio25_at_28ms",
+  "label": "Amplitude of a 28 ms bed over the isolated level at 25 Hz",
   "unit": "-",
-  "expected": 1.4449345270902185,
-  "tol": 0.001
+  "expected": 1.0688391753026658,
+  "tol": 0.0002
  },
  {
   "tier": "advanced",

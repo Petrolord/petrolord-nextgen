@@ -235,26 +235,26 @@ describe('Good Oil: the Expert tier teaching values (the pre-W5b capstone fields
 
   // CAPSTONE tuned_splus_knob and tuned_kc1_knob (tol 0.0005)
   it('lands the four knobs', () => {
-    expect(fit.knobs.sPlus).toBe(0.12266364195926757);
-    expect(fit.knobs.kC1).toBe(0.050325447877585576);
-    expect(fit.knobs.fTc).toBe(0.9963403431519178);
-    expect(fit.knobs.fPc).toBe(0.9827953945642255);
+    expect(fit.knobs.sPlus).toBe(0.11614988900654023);
+    expect(fit.knobs.kC1).toBe(0.07351203368811994);
+    expect(fit.knobs.fTc).toBe(0.9711485523702996);
+    expect(fit.knobs.fPc).toBe(0.9689309282614434);
   });
 
   // CAPSTONE tuning_ssr_reduction (tol 0.05)
-  it('cuts the residual by a factor of twenty three', () => {
-    expect(fit.ssrBefore).toBe(0.007631032308112891);
-    expect(fit.ssrAfter).toBe(0.00032953309314853003);
-    expect(fit.ssrReduction).toBe(23.157104602764026);
+  it('cuts the residual by a factor of twenty seven', () => {
+    expect(fit.ssrBefore).toBe(0.007631063215060582);
+    expect(fit.ssrAfter).toBe(0.00028244025295302806);
+    expect(fit.ssrReduction).toBe(27.01832736401665);
   });
 
   // CAPSTONE good_oil_tuned_psat_psia, _gor_scf_stb, _sto_api
   it('lands the four targets', () => {
     const t = Object.fromEntries(tuningLedger().map((r) => [r.name, r]));
-    expect(t.psat.tuned).toBe(2632.64216695564);           // tol 0.5
-    expect(t.totalGor.tuned).toBe(761.7262989883229);      // tol 1
-    expect(t.stoApi.tuned).toBe(38.755039373806255);       // tol 0.05
-    expect(t.bo.tuned).toBe(1.4573161052573853);
+    expect(t.psat.tuned).toBe(2633.4411177203724);           // tol 0.5
+    expect(t.totalGor.tuned).toBe(760.5314999368053);      // tol 1
+    expect(t.stoApi.tuned).toBe(38.75119059639621);       // tol 0.05
+    expect(t.bo.tuned).toBe(1.4651753069650213);
   });
 
   it('THE TIER\'S SHARPEST RESULT: the joint fit trades Bo away', () => {
@@ -264,8 +264,8 @@ describe('Good Oil: the Expert tier teaching values (the pre-W5b capstone fields
     expect(t.stoApi.improved).toBe(true);
     // Bo was the best-matched target untuned and the tuning gave it up.
     expect(t.bo.improved).toBe(false);
-    expect(t.bo.untunedErr).toBe(-0.30851008490921433);
-    expect(t.bo.tunedErr).toBe(-1.131878883488105);
+    expect(t.bo.untunedErr).toBe(-0.30901058552676686);
+    expect(t.bo.tunedErr).toBe(-0.5986901651952973);
     // Four knobs cannot make four targets exact, and this is what that costs.
     expect(tuningLedger().filter((r) => !r.improved)).toHaveLength(1);
   });

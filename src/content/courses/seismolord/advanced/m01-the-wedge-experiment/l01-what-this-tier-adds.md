@@ -19,10 +19,10 @@ The model is deliberately plain. A layer is thinned from 60 ms of two way time d
 From that model you will read five numbers and calculate a sixth.
 
 - The **tuning thickness** at 25 Hz, the thickness at which the composite amplitude is largest, which the model reports as 16 ms.
-- The **peak amplitude** at that thickness, 0.1155947595834732.
+- The **amplitude of a 24 ms bed** at 25 Hz, read above tuning with the thickness selector. The peak amplitude at tuning, 0.1155947595834732, is not graded: module 4 shows it barely moves with frequency, so reading it proves little.
 - The **tuning thickness** at 40 Hz, 10 ms.
-- The **amplitude of a 6 ms bed** at 40 Hz, read on the thin side of tuning with the thickness selector. The 40 Hz tuning amplitude itself is 0.1155947595834732 again, the same number as at 25 Hz, which is one of the results this tier exists to explain and the reason it is not graded twice.
-- The **tuning amplitude relative to the isolated level** at 25 Hz, 1.4449345270902185. The isolated level is the reading at the thick end of the wedge, 0.07999999821186066, which is the top coefficient on its own once the base is too far away to interfere. The graded number is the ratio of the tuning amplitude to that level, because the ratio is what the interference decides: it is the same figure for any pair of coefficients, while the level is just the pair you were given.
+- The **amplitude of a 6 ms bed** at 40 Hz, read on the thin side of tuning with the thickness selector. The 40 Hz tuning amplitude itself is 0.1155947595834732 again, the same number as at 25 Hz, which is one of the results this tier exists to explain and the reason the tuning amplitude is not graded.
+- The **amplitude of a 28 ms bed relative to the isolated level** at 25 Hz. The isolated level is the reading at the thick end of the wedge, 0.07999999821186066, which is the top coefficient on its own once the base is too far away to interfere. The graded number is a ratio to that level, because the ratio is what the interference decides: it is the same figure for any pair of coefficients, while the level is just the pair you were given. At tuning the ratio is 1.4449345270902185 at every capstone frequency, which is why the capstone reads it at a stated thickness instead.
 - The **theoretical tuning thickness** for a Ricker wavelet, $\sqrt{6}/(2\pi f)$, which at 25 Hz is 15.593936024673521 ms.
 
 Two of those fields are graded with no tolerance at all. The tuning thicknesses must be exactly 16 and 10, because they are readings off a 2 ms grid and there is no such thing as being nearly right about which sample the maximum sits on.

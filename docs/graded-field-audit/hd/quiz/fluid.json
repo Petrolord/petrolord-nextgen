@@ -1,0 +1,32 @@
+{
+ "course": "fluid",
+ "wave": "hd",
+ "kind": "quiz",
+ "migration": "20261030f_hd_fluid_quiz.sql",
+ "figures": "docs/graded-field-audit/hd/fluid/figures.mjs",
+ "decision": "Owner 2026-09-22: fix the labTune Bo fallback in the engine (engines #235); lead decision 2026-09-22, Option A: the fluid course follows the fixed engine. Its Bo fallback had returned a null Bo at random during the Good Oil regression, so the regression met its penalty residual and the tuned figures the advanced tier teaches were artefacts of that. These served questions print the old figures or a claim the fixed engine no longer supports; each is retired and re-inserted at its slot with the same answer_index and every figure rendered from the vendored engine.",
+ "rows": [
+  {"tier": "advanced", "scope": "module", "module_key": "m03-tuning", "ord": 9, "replaces": "d23e85389b960ccff4df5b505129a23a",
+   "edits": [["A multiplier of 0.996 says the correlation was nearly right,", "A multiplier of {{ftc_3dp}} says the correlation was within {{crit_pct_words}} percent,"]]},
+  {"tier": "advanced", "scope": "module", "module_key": "m03-tuning", "ord": 10, "replaces": "4468517815dfdb07285bd127a5404619",
+   "edits": [["The tuned criticals barely move and the volume shift moves by about a fifth.", "The tuned criticals move by about {{crit_pct_words}} percent and the volume shift moves by about {{shift_fraction}}."]]},
+  {"tier": "advanced", "scope": "module", "module_key": "m04-what-tuning-costs", "ord": 3, "replaces": "64fcba2c213ca65f57bfbdb5625ee6af",
+   "edits": [["from plus 3.4 percent to minus 0.82,", "from plus {{gor_ue_out}} percent to minus {{gor_te_out}},"],
+             ["a 1.9 API residual", "a {{api_te_out}} API residual"],
+             ["a factor of twenty three in the residual", "a factor of {{red_words}} in the residual"],
+             ["from minus 0.31 percent to minus 1.13.", "from minus {{bo_ue_out}} percent to minus {{bo_te_out}}."]]},
+  {"tier": "advanced", "scope": "module", "module_key": "m04-what-tuning-costs", "ord": 8, "replaces": "11f60ba8b1f433c0907ac173a822b95e",
+   "edits": [["The residual falls by a factor of 23.157104602764026.", "The residual falls by a factor of {{red_full}}."],
+             ["within roughly a twenty-third of the untuned", "within roughly a {{red_ordinal}} of the untuned"]]},
+  {"tier": "advanced", "scope": "module", "module_key": "m06-the-expert-reading", "ord": 9, "replaces": "4416fa3d8c68b46e55f219c5627b9591",
+   "edits": [["a factor of twenty three in the residual", "a factor of {{red_words}} in the residual"],
+             ["The multipliers barely move and the shift moves by about a fifth.", "The multipliers move by about {{crit_pct_words}} percent and the shift moves by about {{shift_fraction}}."]]},
+  {"tier": "advanced", "scope": "module", "module_key": "m06-the-expert-reading", "ord": 12, "replaces": "ef4d724c1ec181e1ef6b29935f477331",
+   "edits": [["a twenty-three-fold residual reduction", "a {{red_words_hyphen}}-fold residual reduction"]]},
+  {"tier": "advanced", "scope": "final", "module_key": null, "ord": 22, "replaces": "419e142f7b4cdd6111f50c4995758857",
+   "edits": [["from plus 3.4 percent to minus 0.82.", "from plus {{gor_ue_out}} percent to minus {{gor_te_out}}."],
+             ["since 1.9 API is", "since {{api_te_out}} API is"],
+             ["a twenty-three-fold residual reduction", "a {{red_words_hyphen}}-fold residual reduction"],
+             ["from minus 0.31 percent to minus 1.13.", "from minus {{bo_ue_out}} percent to minus {{bo_te_out}}."]]}
+ ]
+}

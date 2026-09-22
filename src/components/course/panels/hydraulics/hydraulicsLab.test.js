@@ -211,7 +211,7 @@ describe('the eighteen graded values', () => {
 
   it('reproduces the Associate six', () => {
     near(v.beginner.pl_n, 0.6560455987826389, 1e-12);
-    near(v.beginner.hb_tau_y_Pa, 2.04161424376, 1e-9);
+    near(v.beginner.hb_n, 0.7269815055935842, 1e-12);
     near(v.beginner.pipe_dp_Pa, 8990804.931422047, 1e-3);
     near(v.beginner.annulus_dp_Pa, 1531961.9814624505, 1e-3);
     near(v.beginner.bit_dp_Pa, 3086064.831211029, 1e-3);
@@ -238,7 +238,7 @@ describe('the eighteen graded values', () => {
 
   it('keeps every graded value clear of every other one at its own tolerance', () => {
     const TOL = {
-      pl_n: 5e-7, hb_tau_y_Pa: 5e-4, pipe_dp_Pa: 50, annulus_dp_Pa: 50,
+      pl_n: 5e-7, hb_n: 5e-7, pipe_dp_Pa: 50, annulus_dp_Pa: 50,
       bit_dp_Pa: 50, pump_pressure_Pa: 50,
       slant_ecd_at_td_kgm3: 0.005, slant_min_annular_velocity_ms: 5e-5,
       horizontal_ecd_at_td_kgm3: 0.005, horizontal_min_transport_ratio: 5e-5,

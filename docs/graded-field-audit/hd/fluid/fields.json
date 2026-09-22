@@ -1,0 +1,146 @@
+[
+ {
+  "tier": "beginner",
+  "key": "ekene_pb_standing_psia",
+  "label": "Standing bubble point at 480 scf/stb",
+  "unit": "psia",
+  "tol": 0.05,
+  "expected": 2300.0408722832944
+ },
+ {
+  "tier": "beginner",
+  "key": "ekene_bo_at_designed_rs",
+  "label": "Standing saturated Bo at 480 scf/stb",
+  "unit": "rb/stb",
+  "tol": 0.0005,
+  "expected": 1.283936228388159
+ },
+ {
+  "tier": "beginner",
+  "key": "ekene_muod_beal_cp",
+  "label": "Beal dead oil viscosity",
+  "unit": "cp",
+  "tol": 0.0005,
+  "expected": 1.5460324253882518
+ },
+ {
+  "tier": "beginner",
+  "key": "ekene_z_hy_at_pi",
+  "label": "Hall-Yarborough z at 3600 psia",
+  "unit": "-",
+  "tol": 0.0005,
+  "expected": 0.9052822188344655
+ },
+ {
+  "tier": "beginner",
+  "key": "ekene_bg_at_pi_rb_scf",
+  "label": "Gas FVF at 3600 psia",
+  "unit": "rb/scf",
+  "tol": 5e-7,
+  "expected": 0.0008289024138552641
+ },
+ {
+  "tier": "beginner",
+  "key": "ekene_z_correlation_gap_pct",
+  "label": "z disagreement, HY against DAK",
+  "unit": "percent",
+  "tol": 0.002,
+  "expected": -0.28438199270689335
+ },
+ {
+  "tier": "intermediate",
+  "key": "plus_tc_r",
+  "label": "Plus-fraction critical temperature, stated MW and SG",
+  "unit": "degR",
+  "tol": 0.05,
+  "expected": 1295.7891123916502
+ },
+ {
+  "tier": "intermediate",
+  "key": "untuned_psat_case_psia",
+  "label": "Untuned saturation pressure at the stated temperature",
+  "unit": "psia",
+  "tol": 0.5,
+  "expected": 2637.752970132605
+ },
+ {
+  "tier": "intermediate",
+  "key": "gor_bias_pct",
+  "label": "Untuned total GOR above the lab value",
+  "unit": "percent",
+  "tol": 0.02,
+  "expected": 2.978994905404897
+ },
+ {
+  "tier": "intermediate",
+  "key": "good_oil_untuned_gor_scf_stb",
+  "label": "Untuned total gas-oil ratio",
+  "unit": "scf/stb",
+  "tol": 1,
+  "expected": 803.2361602621583
+ },
+ {
+  "tier": "intermediate",
+  "key": "good_oil_untuned_sto_api",
+  "label": "Untuned stock tank gravity",
+  "unit": "API",
+  "tol": 0.05,
+  "expected": 31.581245628852542
+ },
+ {
+  "tier": "intermediate",
+  "key": "good_oil_api_bias",
+  "label": "Gravity minus the lab value",
+  "unit": "API",
+  "tol": 0.05,
+  "expected": -8.818754371147456
+ },
+ {
+  "tier": "advanced",
+  "key": "good_oil_tuned_bo_rb_stb",
+  "label": "Tuned formation volume factor",
+  "unit": "rb/stb",
+  "tol": 0.001,
+  "expected": 1.4729609026685642
+ },
+ {
+  "tier": "advanced",
+  "key": "good_oil_tuned_gor_scf_stb",
+  "label": "Tuned total gas-oil ratio",
+  "unit": "scf/stb",
+  "tol": 1,
+  "expected": 771.2991789394007
+ },
+ {
+  "tier": "advanced",
+  "key": "good_oil_tuned_sto_api",
+  "label": "Tuned stock tank gravity",
+  "unit": "API",
+  "tol": 0.05,
+  "expected": 38.1809083770504
+ },
+ {
+  "tier": "advanced",
+  "key": "tuned_splus_knob",
+  "label": "Tuned C7+ volume shift",
+  "unit": "-",
+  "tol": 0.0005,
+  "expected": 0.12330797628493384
+ },
+ {
+  "tier": "advanced",
+  "key": "tuned_kc1_knob",
+  "label": "Tuned C1 to C7+ interaction parameter",
+  "unit": "-",
+  "tol": 0.0005,
+  "expected": 0.0746918124744843
+ },
+ {
+  "tier": "advanced",
+  "key": "tuning_ssr_reduction",
+  "label": "Residual reduction factor",
+  "unit": "times",
+  "tol": 0.05,
+  "expected": 20.284904310000233
+ }
+]

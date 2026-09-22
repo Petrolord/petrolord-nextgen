@@ -26,12 +26,12 @@ Four bounded knobs on the C7+ pseudo-component and nothing else, because those a
 
 | knob | tuned |
 |---|---|
-| fTc | 0.9963403431519178 |
-| fPc | 0.9827953945642255 |
-| kC1 | 0.050325447877585576 |
-| sPlus | 0.12266364195926757 |
+| fTc | 0.9711485523702996 |
+| fPc | 0.9689309282614434 |
+| kC1 | 0.07351203368811994 |
+| sPlus | 0.11614988900654023 |
 
-The criticals barely move, which says the Kesler-Lee characterization was close. The volume shift moves by about a fifth, which says the Jhaveri-Youngren correlation was not, and that is exactly what the Professional tier predicted from the mechanism.
+The criticals move by about three percent, which says the Kesler-Lee characterization was close. The volume shift moves by about a quarter, which says the Jhaveri-Youngren correlation was not, and that is exactly what the Professional tier predicted from the mechanism.
 
 No knob hits a bound.
 
@@ -43,16 +43,18 @@ The regression converged, reported success, and left them almost untouched. Noth
 
 The fix was an explicit absolute Jacobian step of one part in a thousand, which required a backward-compatible per-parameter option on the shared Levenberg-Marquardt kernel. A quantized objective is a general trap and its symptom is always a parameter the solver decides has no effect.
 
+A second trap of the same family sat in the formation volume factor. When the model is two phase at the laboratory conditions, Bo is read just above the engine's own saturation pressure, and a step of one part in a million above a boundary known only to 0.05 psia could land back inside the two-phase region. The regression then met a missing Bo at random and paid a penalty for it. The engine now steps five bisection tolerances above the boundary, and the fit converges in 10 iterations.
+
 ## The ledger
 
 | target | untuned error | tuned error |
 |---|---|---|
-| saturation pressure | +5.938198064045652 pct | -0.0762087201093226 pct |
-| total GOR | +3.3599319244332757 pct | -0.8168881525621193 pct |
-| stock tank gravity | -8.894358353620603 API | -1.9449606261937475 API |
-| formation volume factor | -0.30851008490921433 pct | -1.131878883488105 pct |
+| saturation pressure | +5.938198064045652 pct | -0.04588398002116741 pct |
+| total GOR | +3.3599319244332757 pct | -0.972460945728478 pct |
+| stock tank gravity | -8.894358353620603 API | -1.9488094036037893 API |
+| formation volume factor | -0.30901058552676686 pct | -0.5986901651952973 pct |
 
-Residual down by a factor of 23.157104602764026.
+Residual down by a factor of 27.01832736401665.
 
 Three targets improved and one got worse, and the one that got worse was the best-matched target before tuning. Total gas-oil ratio, stock tank gravity and formation volume factor all divide by the same stock-tank volume, so no setting of four knobs makes all four exact. That frontier is physical rather than numerical, and running the solver longer does not move it.
 

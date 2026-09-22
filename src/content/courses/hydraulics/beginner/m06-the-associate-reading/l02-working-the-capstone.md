@@ -9,7 +9,7 @@ Six numbers on a mud you have not seen.
 ## What is asked
 
 1. The power-law flow behaviour index n.
-2. The Herschel-Bulkley yield stress in pascals.
+2. The Herschel-Bulkley flow behaviour index n.
 3. The pipe pressure loss.
 4. The annulus pressure loss.
 5. The bit pressure drop.
@@ -37,9 +37,9 @@ Field 6 last, and check it against the sum of the other three. If they do not ad
 
 ## The traps
 
-**Field 1 is the POWER LAW n, not the Herschel-Bulkley n.** They are different numbers on the same mud, and the Herschel-Bulkley one is larger.
+**Field 1 is the POWER LAW n and field 2 is the Herschel-Bulkley n.** They are different numbers on the same mud, and the Herschel-Bulkley one is larger.
 
-**Field 2 is the Herschel-Bulkley YIELD STRESS, not the Bingham yield point.** The Bingham value is more than twice it, and both are in pascals, so the units do not distinguish them.
+**Field 2 needs the Herschel-Bulkley yield stress first.** Work it from the 6 and 3 rpm readings with the yield rule of module 2, take it off the 600 and 300 rpm stresses, and fit n to what is left. The Bingham yield point in its place gives n = 1 exactly, which is the Bingham plastic again.
 
 **The pressure losses are in pascals.** They are megapascal-scale numbers and quoting them in MPa is a factor of a million.
 
@@ -59,6 +59,6 @@ Full precision, tight tolerances, for the reason every capstone in this series g
 
 ## Exercise
 
-Compute fields 1 and 2 by hand from the four dial readings and the two conversion constants.
+Compute fields 1 and 2 by hand from the four dial readings. Both come from ratios of stresses, so the conversion to pascals cancels, and field 2 needs the yield stress only in dial degrees.
 
 Then predict, before running anything, whether the new mud's pump pressure at 0.030 m3/s will be above or below kcl_polymer's at 0.035, and say why.

@@ -1,6 +1,6 @@
 # The amplitude at tuning
 
-Two capstone fields are amplitudes read at the tuning thickness, and both of them are the number **0.1155947595834732**. This lesson derives that number by hand, explains what its ratio to the isolated level means, and sets up the fact that the 25 Hz and 40 Hz readings are identical rather than merely similar.
+The amplitude at the tuning thickness is the number **0.1155947595834732**, at 25 Hz and at 40 Hz alike. This lesson derives that number by hand, explains what its ratio to the isolated level means, and sets up the fact that the 25 Hz and 40 Hz readings are identical rather than merely similar.
 
 ## The derivation
 
@@ -32,13 +32,15 @@ That ratio is the **tuning brightening factor**, and it is the part of the resul
 
 It is also the number to carry into an argument about a map. If a horizon is known from well control to have a reflection pair of about $\pm 0.06$, then its isolated amplitude is 0.06 and no thickness can push it past $0.06 \times 1.445 = 0.0867$. A mapped amplitude of 0.12 over that horizon is not a tuned thin bed. It is something else.
 
-## Why the tolerance is 0.002
+## Why the capstone does not grade it
 
-The capstone accepts either amplitude within 0.002 of the graded value, which is 1.7 percent of it. That is generous compared with what the model itself is capable of, and the generosity has a specific purpose.
+The capstone once graded this amplitude to within 0.002, which is 1.7 percent of it. That band is wider than the amplitude's whole spread across every frequency the panel offers (0.1155948 at 20, 25, 40 and 50 Hz and 0.1157008 at 15 Hz), so any run of the wedge passed it. The capstone now reads amplitudes at stated thicknesses away from tuning, where the curve is steep and each reading belongs to one frequency and one bed.
 
-The stored traces are 32 bit floats, so the last several digits of any amplitude depend on rounding inside the engine rather than on the physics. A learner who computes the answer by hand from the Ricker formula, as above, gets 0.11559476 and stops there. A learner who reads the tile gets 0.1155947595834732. A learner who works in double precision throughout and never rounds gets 0.1155947617. All three are the same answer and the tolerance is wide enough to hold all three.
+The digits themselves still need care.
 
-What the tolerance is **not** wide enough to hold is the continuous ideal. The largest amplitude a 25 Hz Ricker could theoretically produce against an opposite pair is $0.08 \times (1 + 2e^{-3/2}) = 0.11570083$, which differs from the graded value by 0.000106. That is inside the tolerance too, so it also passes, and module 5 explains why the two differ at all.
+The stored traces are 32 bit floats, so the last several digits of any amplitude depend on rounding inside the engine rather than on the physics. A learner who computes the answer by hand from the Ricker formula, as above, gets 0.11559476 and stops there. A learner who reads the tile gets 0.1155947595834732. A learner who works in double precision throughout and never rounds gets 0.1155947617. All three are the same answer, and the differences sit far below anything a reading could be graded on.
+
+The continuous ideal is a different claim. The largest amplitude a 25 Hz Ricker could theoretically produce against an opposite pair is $0.08 \times (1 + 2e^{-3/2}) = 0.11570083$, which differs from the model's value by 0.000106, and module 5 explains why the two differ at all.
 
 ## What is not the answer
 
@@ -46,9 +48,9 @@ Three wrong values are close enough to be tempting.
 
 **0.16**, which is the sum of the two coefficients in absolute value. The reflections never add at full strength, because the wavelet's value at the tuning lag is $-0.4449$ and not $-1$. Only a same signed pair at zero thickness reaches 0.16.
 
-**0.08**, the isolated level. This is the answer to a different capstone field and mixing the two is the most common way to lose both.
+**0.08**, the isolated level. It is the reference every ratio in this tier is taken against, and mixing the two is the commonest slip in the tier.
 
-**0.1157**, the continuous ideal. It passes the tolerance, but it is a theoretical maximum rather than a reading off this model, and quoting it as a measurement is the kind of small dishonesty that a reviewer will notice.
+**0.1157**, the continuous ideal. It is close, but it is a theoretical maximum rather than a reading off this model, and quoting it as a measurement is the kind of small dishonesty that a reviewer will notice.
 
 ## Worked example
 

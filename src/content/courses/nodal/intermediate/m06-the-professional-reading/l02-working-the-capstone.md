@@ -36,4 +36,6 @@ And solving a node: an intersection is not one of the readings, and such a well 
 
 Take either teaching well in the panel and work it in order: curve at a stated sample count, minimum, both ends, then the column at a stated step count with both its pressures.
 
+The panel's "Your gas column, typed" view marches a static gas column you type, at the step count you type, and prints its bottom and midpoint pressures to six decimals.
+
 Write the choice that produced each beside it, and say which would move most if you doubled the sample count.

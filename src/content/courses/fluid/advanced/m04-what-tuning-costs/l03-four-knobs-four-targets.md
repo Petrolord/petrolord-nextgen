@@ -34,9 +34,9 @@ Neither is obviously an improvement. Both are worth knowing as options.
 
 ## The relationship to the residual
 
-The sum of squared residuals fell by a factor of 23.157104602764026, from 0.007631032308112891 to 0.00032953309314853003.
+The sum of squared residuals fell by a factor of 27.01832736401665, from 0.007631063215060582 to 0.00028244025295302806.
 
-That remaining residual is not solver error. It is where the frontier is. Running the solver longer, or from a different start, lands in the same place, because the limit is the parameterisation rather than the optimisation.
+That remaining residual is not solver error. It is where the frontier is. Running the solver longer, or from a different start, lands on the same residual, because the limit is the parameterisation rather than the optimisation.
 
 Distinguishing "the solver stopped early" from "the model cannot do better" matters, and the way to tell is to restart from a different point and see whether it converges to the same residual.
 

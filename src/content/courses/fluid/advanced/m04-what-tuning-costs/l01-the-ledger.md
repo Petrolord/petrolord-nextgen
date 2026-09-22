@@ -8,14 +8,14 @@ Four targets, before and after. The table is the tier's central object.
 
 | target | measured | untuned | tuned | error before | error after |
 |---|---|---|---|---|---|
-| saturation pressure (psia) | 2634.65 | 2791.100735294379 | 2632.64216695564 | +5.938198064045652 pct | -0.0762087201093226 pct |
-| total GOR (scf/stb) | 768 | 793.8042771796476 | 761.7262989883229 | +3.3599319244332757 pct | -0.8168881525621193 pct |
-| stock tank gravity (API) | 40.7 | 31.8056416463794 | 38.755039373806255 | -8.894358353620603 | -1.9449606261937475 |
-| formation volume factor (rb/stb) | 1.474 | 1.4694525613484382 | 1.4573161052573853 | -0.30851008490921433 pct | -1.131878883488105 pct |
+| saturation pressure (psia) | 2634.65 | 2791.100735294379 | 2633.4411177203724 | +5.938198064045652 pct | -0.04588398002116741 pct |
+| total GOR (scf/stb) | 768 | 793.8042771796476 | 760.5314999368053 | +3.3599319244332757 pct | -0.972460945728478 pct |
+| stock tank gravity (API) | 40.7 | 31.8056416463794 | 38.75119059639621 | -8.894358353620603 | -1.9488094036037893 |
+| formation volume factor (rb/stb) | 1.474 | 1.4694451839693354 | 1.4651753069650213 | -0.30901058552676686 pct | -0.5986901651952973 pct |
 
-Sum of squared residuals falls from 0.007631032308112891 to 0.00032953309314853003, a factor of
+Sum of squared residuals falls from 0.007631063215060582 to 0.00028244025295302806, a factor of
 
-$$23.157104602764026$$
+$$27.01832736401665$$
 
 No knob hits a bound.
 
@@ -27,7 +27,7 @@ No knob hits a bound.
 
 **Total gas-oil ratio** went from three percent out to under one. A real improvement.
 
-**Formation volume factor** went from 0.31 percent out to 1.13 percent out. It got WORSE.
+**Formation volume factor** went from 0.31 percent out to 0.60 percent out. It got WORSE.
 
 ## The one that got worse
 
@@ -35,7 +35,7 @@ That is the row this module exists for.
 
 Bo was the best-matched target before tuning. It was the only one of the four that an untuned model got right to within half a percent, and the regression gave it up in order to improve the other three.
 
-Nothing went wrong. The solver minimised the total squared residual and it found a point where the sum is twenty three times smaller, and reaching that point required moving Bo from 0.31 percent to 1.13 percent. Traded, deliberately, by an algorithm doing exactly what it was asked.
+Nothing went wrong. The solver minimised the total squared residual and it found a point where the sum is twenty seven times smaller, and reaching that point required moving Bo from 0.31 percent to 0.60 percent. Traded, deliberately, by an algorithm doing exactly what it was asked.
 
 ## Why the trade exists
 
@@ -57,7 +57,7 @@ It also tells a reader which of the model's outputs to trust for their question.
 
 ## The misconception to avoid
 
-"A twenty-three-fold reduction in the residual means the model is twenty-three times better." It means the sum of squared relative errors is twenty three times smaller, which is dominated by the two targets that were worst. A single aggregate number hides that one target degraded, which is why the ledger is per target and the aggregate is a footnote.
+"A twenty-seven-fold reduction in the residual means the model is twenty-seven times better." It means the sum of squared relative errors is twenty seven times smaller, which is dominated by the two targets that were worst. A single aggregate number hides that one target degraded, which is why the ledger is per target and the aggregate is a footnote.
 
 ## Exercise
 
