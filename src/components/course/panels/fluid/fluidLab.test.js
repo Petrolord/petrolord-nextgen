@@ -1,5 +1,6 @@
 /**
- * RC6 truth pins. Every graded capstone field is pinned here THROUGH the
+ * RC6 truth pins. Every teaching value (the graded capstone field until W5b
+ * re-cased each tier onto a case of its own) is pinned here THROUGH the
  * teaching lab, so a panel and the live grader cannot drift apart, plus the
  * supporting truth the lessons state.
  *
@@ -14,6 +15,7 @@ import {
   GOOD_OIL, goodOilStagesF, goodOilMeasured, goodOilComposition,
   goodOilCharacterization, goodOilUntuned, goodOilTuned, tuningLedger,
   goodOilFlash, TIER, TIER_ORDER, isGradable,
+  GOOD_OIL_TESTS, TEACHING_TEST,
 } from './fluidLab';
 
 const EK = { api: 32, gasSg: 0.75, tempF: 180, pbPsia: 2000, rsScfStb: 400 };
@@ -32,7 +34,7 @@ describe('the provenance ladder', () => {
   });
 });
 
-describe('Ekene: the Associate tier capstone fields', () => {
+describe('Ekene: the Associate tier teaching values (the pre-W5b capstone fields)', () => {
   it('oil specific gravity from API', () => {
     expect(oilSg(EKENE.api)).toBe(0.8654434250764526);
   });
@@ -176,7 +178,7 @@ describe('Good Oil Well No. 4: what the laboratory measured', () => {
   });
 });
 
-describe('Good Oil: the Professional tier capstone fields', () => {
+describe('Good Oil: the Professional tier teaching values (the pre-W5b capstone fields)', () => {
   // CAPSTONE good_oil_c7plus_tc_r (tol 0.05)
   it('characterizes C7+ from MW and SG alone', () => {
     const ch = goodOilCharacterization();
@@ -222,7 +224,7 @@ describe('Good Oil: the Professional tier capstone fields', () => {
   });
 });
 
-describe('Good Oil: the Expert tier capstone fields', () => {
+describe('Good Oil: the Expert tier teaching values (the pre-W5b capstone fields)', () => {
   const fit = goodOilTuned();
 
   it('converges without hitting a bound', () => {
@@ -277,5 +279,14 @@ describe('the flash the Expert tier reads', () => {
     const above = goodOilFlash(220, 5000);
     expect(above.twoPhase).toBe(false);
     expect(above.tier).toBe('oracle_gated');
+  });
+});
+
+describe('fluidLab: a case of its own reproduces the teaching read at its defaults', () => {
+  it('the teaching test is the fixture the course always read', () => {
+    expect(GOOD_OIL_TESTS[TEACHING_TEST]).toBe(GOOD_OIL);
+    expect(goodOilUntuned({ test: TEACHING_TEST })).toEqual(goodOilUntuned());
+    expect(goodOilCharacterization(GOOD_OIL.plus)).toEqual(goodOilCharacterization());
+    expect(goodOilTuned(TEACHING_TEST)).toBe(goodOilTuned());
   });
 });

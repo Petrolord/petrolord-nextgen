@@ -109,26 +109,31 @@
   {
    "tier": "beginner",
    "key": "q_max_matrix_m3s",
-   "source": "unobtainable",
-   "source_ref": "src/content/courses/stimulation/beginner/m06-the-associate-reading/l02-working-the-capstone.md; generator /root/dr-wip-stimulation/dr10_fields.mjs:56-88",
-   "printed": {
-    "sigfigs": 5
-   },
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/stimulation.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "src/components/course/panels/stimulation/AcidExplorer.jsx:398",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/course/panels/stimulation/AcidExplorer.jsx:385-406 (ceiling view) -> add a measured-depth NumField and print, from STATIONS and CURVES already exported by stimulationLab.js:33-37, the TVD, the Shmin (frac pressure) and Pp at that MD in Pa to full precision, plus rw/re/k/h inputs; the ceiling tile at :398 prints toExponential(4), 5 sig figs, which is coarser than tol 5e-11 on 9.644e-5 (half a unit is 5e-10), so also print it as toExponential(7)"
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Simplest and recommended: state the two pressures in the prompt (frac pressure 36554842.99 Pa and reservoir pressure 22468999.12 Pa at 2033.000 m TVD), which makes the field a full-precision hand-calc with no tol change. The panel change is the heavier alternative; if chosen, the tol also needs max(5e-11, 5e-10) or a more precise print.",
-   "evidence": "q = 2 pi k h (pFrac - pRes)/(mu (ln(re/rw) + s)) needs pFrac and pRes at the TVD of 2380 m MD. The generator gets them by average-angle TVD over the golden survey stations (2033.000192 m) and linear interpolation of the golden Shmin and Pp profiles (36554842.99 Pa, 22468999.12 Pa). No lesson or panel prints the survey, the profile or those two pressures: the only printed pressures are the published case's 38.13195 MPa / 23.73069 MPa at 2124.9 m TVD (AcidExplorer.jsx:405-406, beginner m05 l02 table). A learner using them gets 9.8601e-5 m3/s, 2.2 percent off against tol 5e-11 (0.05 percent).",
+   "evidence": "W2: Prompt only, no field moves. Field 6 needs the fracturing and reservoir pressures at the true vertical depth of 2380 m MD, which the generator interpolated from the golden survey and profiles and no lesson or panel prints (B5 finding 1). The prompt now states both at 2033.000 m TVD, with the exact acid viscosity and the mD conversion, so the Darcy ceiling of m05 l02 is a hand calculation. Keys, expected values and tolerances are unchanged. The published inputs reproduce q_max_matrix_m3s = 9.644175015204811e-05 through the vendored engines against the key 9.644175015806953e-05 (tol 5e-11); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": "Unobtainable as posed. The prompt's own sentence 'the closure stress at the true vertical depth of 2380 m measured, which is not 2380 m' points at data the learner never sees. The other five beginner fields are independent of it.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261025a_w2_stimulation.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "The job is placed at 2380 m measured depth. At the job's true vertical depth of 2033.000 m the fracturing pressure, the closure stress there, is 36554842.99 Pa and the reservoir pressure is 22468999.12 Pa. Take the acid viscosity as exactly 0.001 Pa.s and 1 mD as 9.869233e-16 m2."
+    ],
+    "lessons": [],
+    "lesson_contains": []
+   }
   },
   {
    "tier": "intermediate",

@@ -1,0 +1,303 @@
+{
+ "course": "petrophysics",
+ "case": "IKPO-3: a 201-sample analytic well (1700 to 1800 m) built by w5c/petrophysics/case.mjs, delivered as src/content/capstone-cases/petrophysics/ikpo3.las and opened through the page's well picker",
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "fields_from": "w5c/petrophysics/fields.json",
+   "dataset": "IKPO-3 capstone well (ikpo3.las, downloaded from the capstone card) with the course given parameters",
+   "prompt": "The IKPO-3 well: download its LAS file from the capstone card and open it in the app with Open a LAS file, with SAND_A from 1712 to 1734 m, SAND_B from 1752 to 1781 m and the water leg from 1776 to 1779 m. Using the course's given parameters (matrix density 2.65 and fluid density 1.0 g/cc, GR clean 20 and clay 120 API, Rw 0.05 ohm.m, a 1, m 2, n 2, and the cutoffs porosity 0.08, Vsh 0.5 and Sw 0.6), compute Vsh (Larionov tertiary), density porosity and Archie water saturation, apply the cutoffs, and report the net pay, average porosity and average Sw for SAND_A and for SAND_B.",
+   "why": "Section 3 pick A: the beginner walkthrough and the net-pay summary printed all six typewell answers. The capstone moves to IKPO-3, a well no panel loads, opened from its LAS file with the zones the brief states.",
+   "annot": {
+    "ikpo3_sand_a_net_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/pages/apps/PetrophysicsLearningPage.jsx (Net-pay summary, SAND_A net)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/pages/apps/PetrophysicsLearningPage.jsx (Net-pay summary, SAND_A net)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "net_m.toFixed(1) prints 21.0 m on IKPO-3 (0.5 m samples, midpoint thickness).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_sand_a_phi_avg": {
+     "source": "nextgen-panel",
+     "source_ref": "src/pages/apps/PetrophysicsLearningPage.jsx (Net-pay summary, SAND_A avg phi, percent)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 100,
+     "display_ref": "src/pages/apps/PetrophysicsLearningPage.jsx (Net-pay summary, SAND_A avg phi, percent)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "prints 27.6% against 0.2760532518141886; tol 0.01.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_sand_a_sw_avg": {
+     "source": "nextgen-panel",
+     "source_ref": "src/pages/apps/PetrophysicsLearningPage.jsx (Net-pay summary, SAND_A avg Sw, percent)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 100,
+     "display_ref": "src/pages/apps/PetrophysicsLearningPage.jsx (Net-pay summary, SAND_A avg Sw, percent)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "prints 33.6%; tol 0.02.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_sand_b_net_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/pages/apps/PetrophysicsLearningPage.jsx (Net-pay summary, SAND_B net)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/pages/apps/PetrophysicsLearningPage.jsx (Net-pay summary, SAND_B net)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "prints 2.0 m.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_sand_b_phi_avg": {
+     "source": "nextgen-panel",
+     "source_ref": "src/pages/apps/PetrophysicsLearningPage.jsx (Net-pay summary, SAND_B avg phi, percent)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 100,
+     "display_ref": "src/pages/apps/PetrophysicsLearningPage.jsx (Net-pay summary, SAND_B avg phi, percent)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "prints 18.2%; tol 0.01.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_sand_b_sw_avg": {
+     "source": "nextgen-panel",
+     "source_ref": "src/pages/apps/PetrophysicsLearningPage.jsx (Net-pay summary, SAND_B avg Sw, percent)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 100,
+     "display_ref": "src/pages/apps/PetrophysicsLearningPage.jsx (Net-pay summary, SAND_B avg Sw, percent)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "prints 58.3%; tol 0.02.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "A",
+   "fields_from": "w5c/petrophysics/fields.json",
+   "dataset": "IKPO-3 capstone well (ikpo3.las, downloaded from the capstone card) with the course given parameters",
+   "prompt": "The IKPO-3 well: download its LAS file from the capstone card and open it in the app with Open a LAS file, with SAND_A from 1712 to 1734 m, SAND_B from 1752 to 1781 m and the water leg from 1776 to 1779 m. Using the course's given parameters (matrix density 2.65 and fluid density 1.0 g/cc, sonic matrix 182 and fluid 656 us/m, GR clean 20 and clay 120 API, Rw 0.05 and Rsh 2 ohm.m, a 1, m 2, n 2): compute neutron-density (average) and Wyllie sonic porosity, fit a Pickett line over 1773 to 1779 m, a window that starts three metres above the water leg, and evaluate Simandoux and Indonesia water saturation with linear Vsh. Report the SAND_A zone means and the Pickett fit over 1773 to 1779 m.",
+   "why": "Section 3 pick A: the intermediate lessons printed the typewell porosity and saturation means and the panels opened on the typewell. The capstone moves to IKPO-3; W1's Pickett window rule (three metres above the water leg) and tightened tolerances carry over, re-computed on the new well.",
+   "annot": {
+    "ikpo3_phind_avg_sand_a": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/petrophysics/PorosityLab.jsx (SAND_A mean, N-D tile)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/PorosityLab.jsx (SAND_A mean, N-D tile)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "fmt 4 dp prints 0.2208; the independent oracle (oracle.py) agrees to 1e-16. The density mean beside it and the RMS combine miss by more than 0.002.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_phiw_avg_sand_a": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/petrophysics/PorosityLab.jsx (SAND_A mean, Wyllie tile)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/PorosityLab.jsx (SAND_A mean, Wyllie tile)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "prints 0.2415; oracle agrees.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_pickett_a_rw": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/petrophysics/PickettExplorer.jsx (Fitted a x Rw tile, window typed)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/PickettExplorer.jsx (Fitted a x Rw tile, window typed)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "13-point fit over 1773 to 1779 m prints 0.5257; a numpy polyfit oracle agrees to 1e-12. The water-leg-only window gives the given 0.05, far outside tol.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_pickett_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/petrophysics/PickettExplorer.jsx (Fitted m tile, window typed)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/PickettExplorer.jsx (Fitted m tile, window typed)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "prints 0.8503; oracle agrees to 1e-12. The water-leg-only window gives the given 2.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_sw_sim_sand_a": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/petrophysics/ShalySwLab.jsx (SAND_A mean, Simandoux row)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/ShalySwLab.jsx (SAND_A mean, Simandoux row)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "prints 0.4166; tol 0.01.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_sw_ind_sand_a": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/petrophysics/ShalySwLab.jsx (SAND_A mean, Indonesia row)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/ShalySwLab.jsx (SAND_A mean, Indonesia row)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "prints 0.4133; tol 0.01.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "advanced": {
+   "pick": "A",
+   "fields_from": "w5c/petrophysics/fields.json",
+   "dataset": "IKPO-3 capstone well (ikpo3.las) + its lab water sample and SP reading, stated in the brief",
+   "prompt": "The IKPO-3 well: download its LAS file from the capstone card and open it in the app with Open a LAS file, with SAND_A from 1712 to 1734 m, SAND_B from 1752 to 1781 m and the water leg from 1776 to 1779 m. A lab measured its formation water sample at 0.1128 ohm.m at 72 degF; formation temperature is 172 degF. The SP quicklook reads SSP = -90 mV with Rmfe = 0.6 ohm.m at formation temperature. Correct the sample with Arps, convert the SSP, confirm both against a Pickett fit on the well's water leg, and validate in the water leg. Then book SAND_A twice with the course's Associate recipe and given parameters: with the corrected Rw and with the raw sample value, and watch what the wrong Rw does to pay.",
+   "why": "Section 3 pick A: the advanced lessons printed every typewell Rw-triangulation answer and the triangulator opened on the typewell sample. The capstone moves to IKPO-3 with its own sample and SP reading; W1's tightened tolerances carry over.",
+   "annot": {
+    "ikpo3_rw_arps": {
+     "source": "hand-calc",
+     "source_ref": "src/components/course/panels/petrophysics/RwTriangulator.jsx (Route 1 tile, typed sample)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/RwTriangulator.jsx (Route 1 tile, typed sample)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "0.1128 x (72 + 6.77)/(172 + 6.77) = 0.049702164792750456; the tile prints 4 dp, 2e-6 off, inside tol 5e-5.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_rwe_ssp": {
+     "source": "hand-calc",
+     "source_ref": "src/components/course/panels/petrophysics/RwTriangulator.jsx (Route 2 tile, typed SSP)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/RwTriangulator.jsx (Route 2 tile, typed SSP)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "0.6 x 10^(-90/K), K = 61 + 0.133 x 172 = 0.05071526604329182; prints 4 dp, 1.5e-5 off, inside tol 5e-5.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_sw_waterleg_mean": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/petrophysics/RwTriangulator.jsx (Water-leg mean Sw tile)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/RwTriangulator.jsx (Water-leg mean Sw tile)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Archie on N-D porosity over 1776 to 1779 m with the Arps Rw: 0.9970; oracle agrees; a blind 1 misses by 0.003.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_sand_a_net_arps": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/petrophysics/RwTriangulator.jsx (booking table, net)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/RwTriangulator.jsx (booking table, net)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Book SAND_A with the Arps Rw: net 21.0 m.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_sand_a_sw_avg_arps": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/petrophysics/RwTriangulator.jsx (booking table, pay-avg Sw)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/RwTriangulator.jsx (booking table, pay-avg Sw)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "prints 0.3347; tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ikpo3_sand_a_net_uncorrected": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/petrophysics/RwTriangulator.jsx (booking table, net with the raw 0.1128)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/petrophysics/RwTriangulator.jsx (booking table, net with the raw 0.1128)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "net 20.0 m against 21.0 m corrected.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  }
+ }
+}

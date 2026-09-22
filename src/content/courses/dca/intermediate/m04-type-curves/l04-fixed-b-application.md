@@ -49,7 +49,7 @@ $$q_i^{\,0.95} - 10^{\,0.95} = 70.9653781476684 - 8.91250938133745 = 62.05286876
 
 $$EUR = 1474.94028511307 \times 62.0528687663309 = 91524.2759502962 \text{ stb}$$
 
-Stop and run that chain yourself, with the full-precision $q_i$ and $D_i$ rather than rounded ones. Two power keys, one division, one subtraction, one multiplication. If you land on 91524.3 stb you have it, and you have reproduced the number the Professional capstone asks for.
+Stop and run that chain yourself, with the full-precision $q_i$ and $D_i$ rather than rounded ones. Two power keys, one division, one subtraction, one multiplication. If you land on 91524.3 stb you have it, and you have reproduced the teaching booking by hand.
 
 Two notes on the form. $b = 0.05$ is safely below 1, so the $(1-b)$ in the denominator is harmless; a borrowed $b$ of exactly 1 would need the harmonic logarithm instead. And the same parameters give the life from the time-to-limit formula:
 

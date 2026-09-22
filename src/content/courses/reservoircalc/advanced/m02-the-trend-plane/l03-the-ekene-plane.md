@@ -48,7 +48,7 @@ $$\phi = 0.241071 - 2.043685 \times 10^{-5} \times 1600 - 7.691320 \times 10^{-7
 
 $$= 0.241071 - 0.032699 - 0.001231 = 0.207142$$
 
-which is the graded capstone value of 0.20714187889686578, and the panel's P-1 label reads 0.207142.
+which the engine holds as 0.20714187889686578, and the panel's P-1 label reads 0.207142.
 
 Note what that means. The porosity assigned to the prospect is a plane evaluated at a location, computed from six wells the nearest of which is 300 m away. It carries none of the local detail that a well at P-1 would give, and it is not an average of the nearby wells either. It is the value of a global fit at a point.
 

@@ -21,13 +21,12 @@ Here is the full sweep the panel plots, at $r_{eD}$ 5.
 | 40 | 2.25209917806353 | 4.31198218870627 | 1.91465022087256 |
 | 50 | 2.36304771266407 | 5.14233216847433 | 2.17614402828833 |
 | 75 | 2.56494867317444 | 7.22552783016789 | 2.81702628428249 |
-| 100 | 2.70837365292708 | 9.30886079703705 | 3.43706666433432 |
 
 The ratio falls, reaches a floor, and climbs again. A fine numerical search puts the minimum at about 1.1118, near a $t_D$ of 6.06. The panel sweep does not carry that exact point, so the smallest value you can read off the tiles is the one at $t_D$ 5, which is 1.11701268357594, close enough for the purpose.
 
 The two branches have nothing to do with each other. On the left, the falling branch is the point source idealisation dying out, and lesson 2 showed that it is indifferent to $r_{eD}$. On the right, the rising branch is the outer wall taking over, and lesson 3 showed that it is linear in $t_D$ with slope $2/(r_{eD}^2 - 1)$. The minimum is simply where the second overtakes the first. It is not a physical event and nothing special happens in the aquifer when you pass it.
 
-You can confirm the split by dividing out the idealisation floor, which is what the same ratio reads for an effectively infinite aquifer. At $t_D$ 25 the floor is 1.02133856311489 and the $r_{eD}$ 5 ratio is 1.51481490503516, so the boundary is contributing a factor of 1.48316626801524, or 48.3166268015243 percent. At $t_D$ 50 the boundary contributes 115.307252422280 percent, and at $t_D$ 100 it contributes 241.873702563470 percent, against an idealisation contribution that has fallen to half a percent. Past the minimum, the column is essentially a pure boundary measurement.
+You can confirm the split by dividing out the idealisation floor, which is what the same ratio reads for an effectively infinite aquifer. At $t_D$ 25 the floor is 1.02133856311489 and the $r_{eD}$ 5 ratio is 1.51481490503516, so the boundary is contributing a factor of 1.48316626801524, or 48.3166268015243 percent. At $t_D$ 50 the boundary contributes 115.307252422280 percent, and it keeps growing with time, against an idealisation contribution that has fallen below one percent. Past the minimum, the column is essentially a pure boundary measurement.
 
 ## Where the minimum sits, and why you care
 
@@ -56,7 +55,7 @@ Read that as a story. The first survey lands almost exactly on the floor of the 
 
 {{panel:mb-pd-explorer}}
 
-Keep the selector at $r_{eD}$ 5 and read the three ratio tiles across the top row, which are shown to six figures: 25.2235 at $t_D$ 0.1, 1.11701 at $t_D$ 5, 3.43707 at $t_D$ 100. Those three numbers are the left branch, the floor and the right branch of the curve you have just read. On the plot, put your eye on the vertical gap between the blue and orange curves and sweep left to right: wide, narrowing, narrowest a little past the middle, then widening again. That gap is the ratio column drawn as a picture.
+Set the selector to $r_{eD}$ 5 (the panel opens at 10) and read the three ratio tiles across the top row, which are shown to six figures: 25.2235 at $t_D$ 0.1, 1.11701 at $t_D$ 5, and the $t_D$ 100 tile, the right branch. Those three numbers are the left branch, the floor and the right branch of the curve you have just read. On the plot, put your eye on the vertical gap between the blue and orange curves and sweep left to right: wide, narrowing, narrowest a little past the middle, then widening again. That gap is the ratio column drawn as a picture.
 
 ## Exercise
 

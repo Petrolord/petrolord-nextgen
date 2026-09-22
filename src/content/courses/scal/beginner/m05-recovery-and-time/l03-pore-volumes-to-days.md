@@ -18,7 +18,7 @@ about seven and two thirds years. Breakthrough arrives at a third of that:
 
 $$t_{bt} = 0.33077027444818546 \times 2801.3556914263622 = 926.6051908800841 \text{ days}$$
 
-call it two and a half years of clean oil before the water shows up. That breakthrough time at 8000 barrels per day is a graded capstone number, so know its chain: front slope to $Q_i$, $Q_i$ times pore volume, divided by rate.
+call it two and a half years of clean oil before the water shows up. A breakthrough time is one of the numbers the capstone grades, on its own sand and rate, so know its chain: front slope to $Q_i$, $Q_i$ times pore volume, divided by rate.
 
 ## Rate changes the clock, not the curve
 

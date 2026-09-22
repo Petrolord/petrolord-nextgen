@@ -1,0 +1,64 @@
+{
+ "course": "consequence",
+ "tiers": {
+  "intermediate": {
+   "pointer": "On the course panel, type this pool, the 72 m target and the 0.765 transmissivity into the Fire explorer's heat flux view: it runs the whole chain unrounded and prints every value to at least the precision graded here.",
+   "keys": {
+    "yokri_flame_length_with_wind_m": {
+     "panel": "src/components/course/panels/consequence/FireExplorer.jsx",
+     "line": 174,
+     "mode": "heat",
+     "decimals": 9,
+     "formatter": "nine()",
+     "test": "src/components/course/panels/consequence/yourCase.test.jsx",
+     "evidence": "The Heat view now runs on the pool the learner types (typedPoolFire in consequenceLab.js: poolBurningRate, poolFireSolidFlame and surfaceEmissivePower, nothing rounded between steps). Typing the prompt's pool (kerosene, 31.5 m, 6 m/s, 1.2 kg/m3, 1.48e-5 m2/s, 43000000 J/kg, 0.235, 0.8) with the target at 72 m and transmissivity 0.765 prints the value within tol; yourCase.test.jsx proves it and that the ERHA default lands on no graded answer."
+    },
+    "yokri_flame_tilt_deg": {
+     "panel": "src/components/course/panels/consequence/FireExplorer.jsx",
+     "line": 175,
+     "mode": "heat",
+     "decimals": 9,
+     "formatter": "nine()",
+     "test": "src/components/course/panels/consequence/yourCase.test.jsx",
+     "evidence": "The Heat view now runs on the pool the learner types (typedPoolFire in consequenceLab.js: poolBurningRate, poolFireSolidFlame and surfaceEmissivePower, nothing rounded between steps). Typing the prompt's pool (kerosene, 31.5 m, 6 m/s, 1.2 kg/m3, 1.48e-5 m2/s, 43000000 J/kg, 0.235, 0.8) with the target at 72 m and transmissivity 0.765 prints the value within tol; yourCase.test.jsx proves it and that the ERHA default lands on no graded answer."
+    },
+    "yokri_surface_emissive_power_mudan_w_m2": {
+     "panel": "src/components/course/panels/consequence/FireExplorer.jsx",
+     "line": 176,
+     "mode": "heat",
+     "decimals": 9,
+     "formatter": "nine()",
+     "test": "src/components/course/panels/consequence/yourCase.test.jsx",
+     "evidence": "The Heat view now runs on the pool the learner types (typedPoolFire in consequenceLab.js: poolBurningRate, poolFireSolidFlame and surfaceEmissivePower, nothing rounded between steps). Typing the prompt's pool (kerosene, 31.5 m, 6 m/s, 1.2 kg/m3, 1.48e-5 m2/s, 43000000 J/kg, 0.235, 0.8) with the target at 72 m and transmissivity 0.765 prints the value within tol; yourCase.test.jsx proves it and that the ERHA default lands on no graded answer."
+    },
+    "yokri_surface_emissive_power_actual_w_m2": {
+     "panel": "src/components/course/panels/consequence/FireExplorer.jsx",
+     "line": 177,
+     "mode": "heat",
+     "decimals": 9,
+     "formatter": "nine()",
+     "test": "src/components/course/panels/consequence/yourCase.test.jsx",
+     "evidence": "The Heat view now runs on the pool the learner types (typedPoolFire in consequenceLab.js: poolBurningRate, poolFireSolidFlame and surfaceEmissivePower, nothing rounded between steps). Typing the prompt's pool (kerosene, 31.5 m, 6 m/s, 1.2 kg/m3, 1.48e-5 m2/s, 43000000 J/kg, 0.235, 0.8) with the target at 72 m and transmissivity 0.765 prints the value within tol; yourCase.test.jsx proves it and that the ERHA default lands on no graded answer."
+    },
+    "yokri_view_factor_max": {
+     "panel": "src/components/course/panels/consequence/FireExplorer.jsx",
+     "line": 178,
+     "mode": "heat",
+     "decimals": 12,
+     "formatter": "twelve()",
+     "test": "src/components/course/panels/consequence/yourCase.test.jsx",
+     "evidence": "The Heat view now runs on the pool the learner types (typedPoolFire in consequenceLab.js: poolBurningRate, poolFireSolidFlame and surfaceEmissivePower, nothing rounded between steps). Typing the prompt's pool (kerosene, 31.5 m, 6 m/s, 1.2 kg/m3, 1.48e-5 m2/s, 43000000 J/kg, 0.235, 0.8) with the target at 72 m and transmissivity 0.765 prints the value within tol; yourCase.test.jsx proves it and that the ERHA default lands on no graded answer."
+    },
+    "yokri_solid_flame_heat_flux_w_m2": {
+     "panel": "src/components/course/panels/consequence/FireExplorer.jsx",
+     "line": 179,
+     "mode": "heat",
+     "decimals": 9,
+     "formatter": "nine()",
+     "test": "src/components/course/panels/consequence/yourCase.test.jsx",
+     "evidence": "The Heat view now runs on the pool the learner types (typedPoolFire in consequenceLab.js: poolBurningRate, poolFireSolidFlame and surfaceEmissivePower, nothing rounded between steps). Typing the prompt's pool (kerosene, 31.5 m, 6 m/s, 1.2 kg/m3, 1.48e-5 m2/s, 43000000 J/kg, 0.235, 0.8) with the target at 72 m and transmissivity 0.765 prints the value within tol; yourCase.test.jsx proves it and that the ERHA default lands on no graded answer."
+    }
+   }
+  }
+ }
+}

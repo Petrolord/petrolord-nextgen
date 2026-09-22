@@ -1,6 +1,6 @@
 # The import panel map
 
-This lesson is the map of the tier. It names the four readings the import panel produces, says which module owns each one, and puts the six graded numbers in front of you at the start rather than at the end. Knowing what you are being asked to produce changes how you read everything between here and the capstone.
+This lesson is the map of the tier. It names the four readings the import panel produces, says which module owns each one, and puts the six graded readings in front of you at the start rather than at the end, worked on the teaching files. Knowing what you are being asked to produce changes how you read everything between here and the capstone.
 
 ## The four readings
 
@@ -16,11 +16,11 @@ The panel runs the real pipeline on whichever teaching file you choose and repor
 
 Module 6 then puts the four together as a workflow, in the order you would actually run them on a file that arrived this morning, and walks the capstone.
 
-## The six graded numbers
+## The six graded readings
 
-Five of these come from feet_20.las and one comes from irregular_20.las. The tolerances are part of the fact, so learn them alongside the values.
+The capstone asks for these six readings on its own case files, the ODUMA campaign: five from oduma3_feet.las and one from oduma4_irregular.las, which you download from the capstone card and open in the import panel with Open your own LAS files. Here they are worked on the teaching files, five from feet_20.las and one from irregular_20.las. Your capstone values will be different. The tolerances are the ones the capstone uses, so learn them alongside the readings.
 
-| reading | value | tolerance |
+| reading | worked example (teaching files) | tolerance |
 |---|---|---|
 | start depth converted | 1493.52001953125 m | 0.01 |
 | stop depth converted | 1584.9599609375 m | 0.01 |
@@ -33,9 +33,9 @@ Notice the shape of that table. The first three are continuous quantities with a
 
 Both halves have a trap in them, and both traps are worth naming now.
 
-The continuous readings are graded on values with far more digits than any calculator will give you. Hand arithmetic on the start depth gives 1493.52 m converted, and the graded value carries digits beyond that. Both pass, comfortably, and module 2 explains exactly where the extra digits come from and why the hand answer is a correct answer rather than a near miss.
+The continuous readings are graded on pipeline values with far more digits than any calculator will give you. Hand arithmetic on the start depth gives 1493.52 m converted, and the pipeline value carries digits beyond that. Both pass, comfortably, and module 2 explains exactly where the extra digits come from and why the hand answer is a correct answer rather than a near miss.
 
-The counted readings are graded on definitions rather than on arithmetic. Two curves are converted, and getting one means you assumed unit trouble is a depth problem. Four kinds are recognised out of five curves, and getting five means you counted the index curve as a measurement. Neither mistake is a slip. Each is a wrong model of what the pipeline is doing, which is why they are graded with no tolerance.
+The counted readings are graded on definitions rather than on arithmetic. On feet_20 two curves are converted, and getting one means you assumed unit trouble is a depth problem. Four kinds are recognised out of five curves, and getting five means you counted the index curve as a measurement. Neither mistake is a slip. Each is a wrong model of what the pipeline is doing, which is why they are graded with no tolerance.
 
 ## How to use the panel
 
@@ -43,7 +43,7 @@ Use it to check yourself, in that order, rather than to find out. The productive
 
 There is one particular habit to build now. Whenever you read a converted depth off the panel, say the word converted when you write it down. The panel shows the native and converted values side by side precisely because a depth without its unit and its provenance is a number that will mislead someone later, and the discipline of saying which one you mean is cheap here and expensive to acquire after a mistake.
 
-The panel below runs the import pipeline on any of the six teaching files and reports the native and converted depths, each curve's unit, kind and converted flag, and the uniformity verdict.
+The panel below runs the import pipeline on any of the six teaching files, or on any LAS file you open with Open your own LAS files, and reports the native and converted depths, each curve's unit, kind and converted flag, and the uniformity verdict.
 
 {{panel:wd-import-explorer}}
 
@@ -51,4 +51,4 @@ The panel below runs the import pipeline on any of the six teaching files and re
 
 Open the panel on feet_20.las and locate all five of its readings, then open it on irregular_20.las and locate the sixth. For each reading, write one sentence naming the module that will explain it and one sentence saying what you would have to believe to get it wrong. Then answer this without looking: which three of the six are graded with no tolerance at all, and what those three have in common.
 
-Self-check: the three with no tolerance are the two curves unit-converted, the four curve kinds recognised and the 121 depth samples in irregular_20. All three are counts, and a count is right or it is wrong. To get the converted count wrong you have to believe unit conversion is a property of the depth column alone; to get the kind count wrong you have to believe the index curve is a measurement like the others; and to get the sample count wrong you have to have opened the wrong file, since irregular_20 is the only one of the six whose reading this tier takes.
+Self-check: the three with no tolerance are the two curves unit-converted, the four curve kinds recognised and the 121 depth samples in irregular_20. All three are counts, and a count is right or it is wrong. To get the converted count wrong you have to believe unit conversion is a property of the depth column alone; to get the kind count wrong you have to believe the index curve is a measurement like the others; and to get the sample count wrong you have to have opened the wrong file, since irregular_20 is the only one of the six whose reading this tier takes. Once you have done this on the teaching files, repeat it on the ODUMA files for the capstone.

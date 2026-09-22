@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import {
-  FREQ_OPTIONS, CLASS_THRESHOLDS, ANGLE_MAX_DEG, computeAvoDetail,
+  TEACHING_FREQ_HZ, CLASS_THRESHOLDS, ANGLE_MAX_DEG, computeAvoDetail, ekeneInterface,
 } from '@/lib/rockphysicsTeaching';
-import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // AVO explorer: both fluid cases screened under the Ekene shale across
 // angle, with the Shuey approximation drawn against the exact Zoeppritz
@@ -15,22 +15,80 @@ const PAD = { left: 58, top: 18, right: 18, bottom: 42 };
 const fmt = (v, d = 4) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 const COLOR = { brine: '#38bdf8', gas: '#fbbf24' };
 
+// The panel opens on the Ekene teaching interface, with the gas twin carried
+// from the substitution at full precision. "Type an interface" swaps in
+// typed rocks for all three layers (it starts from the Ekene values, the
+// twin to 0.1), so a case of your own is worked by typing it in; nothing
+// here preloads one.
+const r1 = (v) => String(Math.round(v * 10) / 10);
+const EK = ekeneInterface();
+const TYPED_DEFAULTS = {
+  shVp: r1(EK.shale.vp), shVs: r1(EK.shale.vs), shRho: r1(EK.shale.rho),
+  brVp: r1(EK.brineSand.vp), brVs: r1(EK.brineSand.vs), brRho: r1(EK.brineSand.rho),
+  gsVp: r1(EK.gasSand.vp), gsVs: r1(EK.gasSand.vs), gsRho: r1(EK.gasSand.rho),
+};
+const LAYERS = [
+  ['sh', 'Shale (upper)'],
+  ['br', 'Brine sand (lower)'],
+  ['gs', 'Gas sand (lower)'],
+];
+
 const AvoExplorer = () => {
-  const [freq, setFreq] = useState('25');
+  const [freq, setFreq] = useState(String(TEACHING_FREQ_HZ));
   const [threshold, setThreshold] = useState('0.02');
+  const [mode, setMode] = useState('ekene');
+  const [typed, setTyped] = useState(TYPED_DEFAULTS);
+  const set = (k) => (v) => setTyped((o) => ({ ...o, [k]: v }));
 
   const d = useMemo(() => {
     try {
-      return computeAvoDetail(Number(freq), Number(threshold));
+      const f = Number(freq);
+      if (!(f > 0)) return null;
+      let iface = null;
+      if (mode === 'typed') {
+        const t = Object.fromEntries(Object.entries(typed).map(([k, v]) => [k, Number(v)]));
+        if (!Object.values(t).every((v) => Number.isFinite(v) && v > 0)) return null;
+        iface = {
+          shale: { vp: t.shVp, vs: t.shVs, rho: t.shRho },
+          brineSand: { vp: t.brVp, vs: t.brVs, rho: t.brRho },
+          gasSand: { vp: t.gsVp, vs: t.gsVs, rho: t.gsRho },
+        };
+      }
+      const out = computeAvoDetail(f, Number(threshold), iface);
+      return [out.brine.a, out.gas.a, out.gas.zoep30, out.tuning.tuningMs].every(Number.isFinite) ? out : null;
     } catch {
       return null;
     }
-  }, [freq, threshold]);
+  }, [freq, threshold, mode, typed]);
+
+  const controls = (
+    <div className="space-y-2">
+      <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
+        <SelectField label="Interface" value={mode} onChange={setMode}
+          options={[['ekene', 'Ekene shale over sand'], ['typed', 'Type an interface']]} />
+        <NumField label="Wavelet frequency (Hz)" value={freq} onChange={setFreq} />
+        <SelectField label="Class II band on |A|" value={threshold} onChange={setThreshold}
+          options={CLASS_THRESHOLDS.map((v) => [String(v), v.toFixed(2)])} />
+        <div className="text-xs text-gray-500">
+          The class II band is a documented convention. Widen it and watch which case changes name.
+        </div>
+      </div>
+      {mode === 'typed' && LAYERS.map(([p, name]) => (
+        <div key={p} className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
+          <div className="text-xs text-gray-400">{name}</div>
+          <NumField label="vp (m/s)" value={typed[`${p}Vp`]} onChange={set(`${p}Vp`)} />
+          <NumField label="vs (m/s)" value={typed[`${p}Vs`]} onChange={set(`${p}Vs`)} />
+          <NumField label="Density (kg/m3)" value={typed[`${p}Rho`]} onChange={set(`${p}Rho`)} />
+        </div>
+      ))}
+    </div>
+  );
 
   if (!d) {
     return (
-      <PanelShell title="AVO explorer" subtitle="Choose a wavelet frequency and a class threshold.">
-        <Note>That combination could not be screened.</Note>
+      <PanelShell title="AVO explorer" subtitle="Choose an interface, a wavelet frequency and a class threshold.">
+        {controls}
+        <Note>That combination could not be screened: every velocity, density and the frequency must be a positive number.</Note>
       </PanelShell>
     );
   }
@@ -46,16 +104,8 @@ const AvoExplorer = () => {
 
   return (
     <PanelShell title="AVO explorer"
-      subtitle="The Ekene shale over the sand, screened for the logged brine case and its gas-substituted twin. Solid lines are the exact Zoeppritz solution and dashed lines are the Shuey approximation, so the gap between them is a reading rather than a claim.">
-      <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 items-end">
-        <SelectField label="Wavelet frequency" value={freq} onChange={setFreq}
-          options={[...new Set([...FREQ_OPTIONS, 15, 50])].sort((a, b) => a - b).map((v) => [String(v), `${v} Hz`])} />
-        <SelectField label="Class II band on |A|" value={threshold} onChange={setThreshold}
-          options={CLASS_THRESHOLDS.map((v) => [String(v), v.toFixed(2)])} />
-        <div className="text-xs text-gray-500">
-          The class II band is a documented convention. Widen it and watch which case changes name.
-        </div>
-      </div>
+      subtitle="A shale over a sand, screened for the brine case and its gas-substituted twin; it opens on the Ekene shale and sand. Solid lines are the exact Zoeppritz solution and dashed lines are the Shuey approximation, so the gap between them is a reading rather than a claim.">
+      {controls}
 
       <div className="overflow-x-auto">
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 420 }} role="img"

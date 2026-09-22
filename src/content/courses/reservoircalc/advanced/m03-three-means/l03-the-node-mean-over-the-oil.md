@@ -1,6 +1,6 @@
 # The node mean over the oil
 
-The second mean averages the model rather than the data, over the cells that hold oil. At Ekene it is 0.209368, and it is one of the six graded capstone values.
+The second mean averages the model rather than the data, over the cells that hold oil. At Ekene it is 0.209368, and the node mean is one of the six values the capstone asks for, on its own case.
 
 ## The number
 

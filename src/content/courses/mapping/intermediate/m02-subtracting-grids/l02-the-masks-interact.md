@@ -22,7 +22,7 @@ A node is live if two geometric tests pass: it is inside the convex hull of the 
 
 The six Ekene wells carry both a TOP_SAND and a BASE_SAND pick, at the same six coordinates. So the control geometry of the two surfaces is identical, both masks are computed from the same six points, and the two live sets are not merely the same size, they are the same set of nodes.
 
-The isochore therefore keeps all 201, and the capstone grades that count exactly.
+The isochore therefore keeps all 201, and a count like that is either right or wrong.
 
 ## When it does not hold
 
@@ -38,7 +38,7 @@ Volumetrics multiplies thickness by area. A blank node contributes no thickness 
 
 That is the honest behaviour and it is better than the alternative, which is a gridder that fills the gap with an extrapolated guess and reports a volume that includes rock nobody has any evidence for. But it has to be said out loud in the report, because a volume from 133 nodes and a volume from 201 nodes are not comparable and neither figure carries its own coverage.
 
-The habit is to quote the live node count with every mapped statistic. The capstone grades it for that reason.
+The habit is to quote the live node count with every mapped statistic.
 
 ## Worked example
 
@@ -50,6 +50,6 @@ The report should state the 340, state that it is 71 percent of the top surface'
 
 ## Exercise
 
-Explain in one sentence why the Ekene isochore keeps all 201 live nodes, then state what its live count would be if the BASE_SAND pick were missing from Ekene-4 and say which of the six capstone fields would change as a result.
+Explain in one sentence why the Ekene isochore keeps all 201 live nodes, then state what its live count would be if the BASE_SAND pick were missing from Ekene-4 and say which of the six figures this tier reports would change as a result.
 
 As a self-check: it keeps all 201 because the mask is computed from the control locations alone and both surfaces use the same six well positions, so the two live sets are identical rather than merely equal in size. Without Ekene-4's base pick the isochore would fall to 133 live nodes, and the live count, the minimum, the maximum and the map mean would all change, while the mean of the six well thicknesses would change too since only five wells would carry a thickness; the depth at P-1 on the top surface would be untouched.

@@ -16,8 +16,11 @@ const MODES = [
 ];
 const WELL_OPTIONS = WELLS.map((w) => ({ value: w.id, label: w.id }));
 
-const Volumes = () => {
-  const [id, setId] = useState('horizontal');
+// The volumes view opens on the horizontal well, the lessons' well. The
+// Associate capstone grades the slant well, one select away. `initialWell`
+// exists for the leakage gate's negative control and is never passed by the host.
+const Volumes = ({ initialWell = 'horizontal' }) => {
+  const [id, setId] = useState(initialWell);
   const [pump, setPump] = useState('0.012');
   const v = useMemo(() => volumes(id), [id]);
   const q = Number(pump);
@@ -143,8 +146,8 @@ const Hand = () => {
   );
 };
 
-const VolumeExplorer = () => {
-  const [mode, setMode] = useState('volumes');
+const VolumeExplorer = ({ initialMode = 'volumes', initialWell } = {}) => {
+  const [mode, setMode] = useState(initialMode);
   return (
     <PanelShell
       title="Volume explorer"
@@ -152,7 +155,7 @@ const VolumeExplorer = () => {
     >
       <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
       <div className="mt-3">
-        {mode === 'volumes' && <Volumes />}
+        {mode === 'volumes' && <Volumes initialWell={initialWell} />}
         {mode === 'rows' && <Rows />}
         {mode === 'hand' && <Hand />}
       </div>

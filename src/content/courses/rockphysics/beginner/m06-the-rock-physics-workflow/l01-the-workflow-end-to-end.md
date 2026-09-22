@@ -18,7 +18,7 @@ Brine is the reference fluid for everything downstream, because it is the fluid 
 
 ## Step 3: the gas
 
-Density 172.66679461728904 kg/m3 and bulk modulus 55.71865290286663 MPa. Note the unit. This one is graded in MPa and the brine in GPa.
+Density 172.66679461728904 kg/m3 and bulk modulus 55.71865290286663 MPa. Note the unit. This one is quoted and graded in MPa and the brine in GPa.
 
 At these conditions the brine is 48.42 times stiffer than the gas. That single ratio is the reason a small gas saturation changes everything further down the chain.
 
@@ -36,7 +36,7 @@ The bound spread is the part worth carrying. The two bulk modulus bounds sit abo
 
 ## Step 6: mix the pore fluid
 
-At the capstone saturation of 80 percent brine and 20 percent gas, Wood's equation gives a mixed fluid bulk modulus of 257.3340919366766 MPa and a mixed density of 848.7933489234579 kg/m3.
+At the Ekene saturation of 80 percent brine and 20 percent gas, Wood's equation gives a mixed fluid bulk modulus of 257.3340919366766 MPa and a mixed density of 848.7933489234579 kg/m3.
 
 The modulus mixes as a harmonic average of the phases, so the soft phase dominates. The brine term contributes 7.6 percent of the total compliance and the gas term contributes 92.4 percent, which is to say that 20 percent gas does 92 percent of the softening. The density mixes linearly, so it lands exactly at $0.8 \times 1017.8249875 + 0.2 \times 172.66679461728904$.
 

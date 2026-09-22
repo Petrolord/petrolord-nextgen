@@ -37,7 +37,7 @@ Ekene-4 reached total depth above TOP_B, so it carries three tops rather than fo
 
 Three consequences follow, and all three are readings this tier asks you to produce.
 
-The count of wells carrying all four tops is 3. That number is graded with no tolerance at all, which is the grader's way of saying it is a definition rather than a calculation. Any analysis that needs the complete column from TOP_A to TOP_B is a three-well analysis on this section, and saying so is part of reporting the result.
+The count of wells carrying all four tops is 3. That number is a definition rather than a calculation. Any analysis that needs the complete column from TOP_A to TOP_B is a three-well analysis on this section, and saying so is part of reporting the result.
 
 The TOP_B correlation line reaches three wells and stops. It is not carried across the gap, not interpolated, and not dragged to a default depth. A line that stops short is a correct statement about what has been observed.
 

@@ -28,13 +28,9 @@ One trap in that result object, and it is documented in the source rather than h
 
 ## Worked example: the Dake tank, matched on one parameter
 
-Take Exercise 9.2 from module 2, the wedge reservoir with the finite Carter-Tracy aquifer and eleven annual pressure observations. Module 2 read it the usual way: the regression returns an oil in place of 307221409.553720 stb, and that is the number the Expert capstone grades.
+Take Exercise 9.2 from module 2, the wedge reservoir with the finite Carter-Tracy aquifer and eleven annual pressure observations. Module 2 read it the usual way: the regression returns an oil in place, and that is the number the Expert capstone grades (run it in the tank explorer's Dake mode).
 
-Now match it instead, with the oil in place as the only free parameter and the aquifer held exactly as configured. The search converges in 4 iterations and returns
-
-$$N = 310198605.412900 \ \text{stb}$$
-
-with a root mean square pressure error of 4.31298999061806 psi and a worst single miss of 7.16187806899097 psi, across a history that falls 1280 psi. The residuals, observed minus simulated, run
+Now match it instead, with the oil in place as the only free parameter and the aquifer held exactly as configured. The search converges in 4 iterations and returns a matched oil in place (run it; the panel's Dake mode gives you the regression's side of the comparison) with a root mean square pressure error of 4.31298999061806 psi and a worst single miss of 7.16187806899097 psi, across a history that falls 1280 psi. The residuals, observed minus simulated, run
 
 | year | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 |
 |---|---|---|---|---|---|---|---|---|---|---|
@@ -42,9 +38,9 @@ with a root mean square pressure error of 4.31298999061806 psi and a worst singl
 
 Three things to take from that.
 
-First, the matched oil in place is 310198605.412900 stb against the regression's 307221409.553720 stb. They differ by 2977195.85917908 stb, or 0.969071739988384 percent. Same data, same engine, same aquifer model, two different questions, two answers a million barrels apart. Neither is a mistake.
+First, the matched oil in place and the regression's oil in place are not the same number. Same data, same engine, same aquifer model, two different questions, two answers millions of barrels apart. Neither is a mistake.
 
-Second, the matched value lands on Dake's own answer. Dake solved this exercise by least squares against the Hurst and van Everdingen unsteady state solution and reported 310.2 MMSTB. The match returns 310198605.412900 stb, which is 1394.58710044622 stb away from that, a relative agreement of 0.000449576757074863 percent. Dake's stated truth for the field is 312 MMSTB, so the match sits 0.577370059968092 percent below the truth and reproduces the published fit almost exactly. It is matching what Dake matched.
+Second, the matched value lands on Dake's own least squares answer. Dake solved this exercise by least squares against the Hurst and van Everdingen unsteady state solution, and a pressure match on the same history reproduces his published fit almost exactly, a little below his stated truth for the field. It is matching what Dake matched.
 
 Third, look at the sign pattern in the residual row. Positive early, crossing over around year 7, negative late. That is not noise. Noise alternates. A run of one sign followed by a run of the other is the signature of a model that has the wrong shape in time, and it is telling you something the root mean square error alone would not: the fit is spending its error budget on a systematic drift rather than scattering it. Whether that drift is the aquifer arriving on a slightly wrong clock, or the finite aquifer's boundary being felt at a slightly wrong time, is a question for the next lessons. The point here is that the residual series carries information the summary statistic throws away, and you look at it every time.
 

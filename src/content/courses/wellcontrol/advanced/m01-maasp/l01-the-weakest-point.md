@@ -30,8 +30,10 @@ The shoe's true vertical depth and the fracture gradient there are the two input
 
 | well | shoe TVD | bit TVD | gap |
 |---|---|---|---|
-| slant | 1282.248590311 m | 2507.919699301 m | 1225.671108990 m |
+| slant | about 1282.2 m | about 2507.9 m | about 1225.7 m |
 | horizontal | 1172.343525979 m | 1214.859173174 m | 42.515647195 m |
+
+The slant well's depths are rounded here because the Associate capstone grades them. The volume explorer prints them in full when you select the slant well.
 
 That gap is the single most important number in this module. It is how much true vertical depth of mud stands between the weakest point and the bottom of the hole.
 

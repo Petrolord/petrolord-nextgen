@@ -1,24 +1,24 @@
 # The probe value
 
-The capstone's kriging probe asks for the estimate at (1500, 2500) with the golden parameters: 0.2914277719922997. This lesson walks the estimate's anatomy, then stress-tests it against every assumption in reach, because a graded number you can only produce, not perturb, is half-learned.
+The golden kriging probe asks for the estimate at (1500, 2500) with the golden parameters: 0.2914277719922997. This lesson walks the estimate's anatomy, then stress-tests it against every assumption in reach, because a number you can only produce, not perturb, is half-learned.
 
 {{panel:em-population-explorer}}
 
 ## Anatomy of 0.29142777
 
-The probe stands 319.83 m from W2's control point, 447.2 m from W3, 651.9 m from W4, 565.7 m from W1. All four wells enter the system; simple kriging has no search radius here, and W1 participates from across the fault line because THIS computation is the whole-data krigeAt the capstone frames, not the per-block population. The distinction is worth 0.005 of porosity: the per-block map's value at this same location, kriged from block 0's three wells with their own mean, is 0.2862746100855956. Knowing which of the two a question asks for is part of reading a capstone precisely.
+The probe stands 319.83 m from W2's control point, 447.2 m from W3, 651.9 m from W4, 565.7 m from W1. All four wells enter the system; simple kriging has no search radius here, and W1 participates from across the fault line because THIS computation is the whole-data krigeAt a probe question frames, not the per-block population. The distinction is worth 0.005 of porosity: the per-block map's value at this same location, kriged from block 0's three wells with their own mean, is 0.2862746100855956. Knowing which of the two a question asks for is part of reading a brief precisely.
 
-The estimate decomposes as the mean 0.2905162808206047 plus weighted residuals. The residuals from the mean: W1 plus 0.02448, W2 plus 0.00305, W3 minus 0.01352, W4 minus 0.01402. The correlations to the target: W2 at about 0.49, W3 at 0.32, W1 at 0.18, W4 at 0.10. The positive pull of nearby W2 and distant W1 nearly cancels the negative pull of W3 and W4, landing the estimate 0.0009 above the mean. The probe is a genuinely mixed, four-well answer: no single well explains it, which is what makes it a good graded value.
+The estimate decomposes as the mean 0.2905162808206047 plus weighted residuals. The residuals from the mean: W1 plus 0.02448, W2 plus 0.00305, W3 minus 0.01352, W4 minus 0.01402. The correlations to the target: W2 at about 0.49, W3 at 0.32, W1 at 0.18, W4 at 0.10. The positive pull of nearby W2 and distant W1 nearly cancels the negative pull of W3 and W4, landing the estimate 0.0009 above the mean. The probe is a genuinely mixed, four-well answer: no single well explains it, which is what makes it a good test of the method.
 
 ## Stress tests, one assumption at a time
 
-Range: 300 gives 0.2905162808206047, the mean EXACTLY, because every well is beyond 300 m and all covariances to the target vanish; 600 gives 0.29047270952788345, marginally BELOW the mean; 900 the graded 0.29142777199229974; 1800 gives 0.2924708301904079. The value is range-sensitive at the 0.001 level, and the direction is not monotone toward any well: at 600, W3 and W4's negative residuals reach the probe while W1's positive one still barely does; widening further lets W1 pull the estimate back up. Weight geometry, not folklore.
+Range: 300 gives 0.2905162808206047, the mean EXACTLY, because every well is beyond 300 m and all covariances to the target vanish; 600 gives 0.29047270952788345, marginally BELOW the mean; 900 the golden 0.29142777199229974; 1800 gives 0.2924708301904079. The value is range-sensitive at the 0.001 level, and the direction is not monotone toward any well: at 600, W3 and W4's negative residuals reach the probe while W1's positive one still barely does; widening further lets W1 pull the estimate back up. Weight geometry, not folklore.
 
 Nugget: 0 gives 0.2915971137588124, 0.002 gives 0.29060333792448684: a slide toward the mean as individual wells are discounted, spanning about a thousandth across the whole valid sweep, as the nugget lesson explained for far probes.
 
 Model: exponential at the same parameters gives 0.291000548626652, 0.0004 below spherical, the tail trading nearby dominance for far-field reach.
 
-The summary a reviewer wants: the graded value moves by about a thousandth across the nugget sweep, is mildly sensitive to the range with a non-monotone signature, and shifts by 0.0004 with the model family. Each is small against the porosity itself, and most of them are larger than the 0.0002 the capstone grades to, which is why the capstone states its variogram. An answer that can produce THAT sentence understands the probe.
+The summary a reviewer wants: the probe value moves by about a thousandth across the nugget sweep, is mildly sensitive to the range with a non-monotone signature, and shifts by 0.0004 with the model family. Each is small against the porosity itself, and most of them are larger than the precision the panel prints, which is why any brief that asks for a kriged value must state its variogram. An answer that can produce THAT sentence understands the probe.
 
 ## The probe against the trend
 

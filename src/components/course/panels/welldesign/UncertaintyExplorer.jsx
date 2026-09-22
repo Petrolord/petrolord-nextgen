@@ -21,7 +21,7 @@ const STATIONS = [
 ];
 
 const UncertaintyExplorer = () => {
-  const [idx, setIdx] = useState('267');
+  const [idx, setIdx] = useState('180');
   const u = useMemo(() => uncertaintyAt(Number(idx)), [idx]);
   const check = useMemo(() => workbookCheck(), []);
   const top = u.contributions.slice(0, 8).map((c) => ({
@@ -54,6 +54,7 @@ const UncertaintyExplorer = () => {
         <Tile label="Ellipse semi-minor" value={fmt(u.ellipse1.semiMinor, 4)} unit="m at 1 sigma" />
         <Tile label="Ellipse azimuth" value={fmt(u.ellipse1.azimuthDeg, 4)} unit="deg" />
         <Tile label="Semi-major at 95 percent" value={fmt(u.ellipse95.semiMajor, 4)} unit="m, k 2.7955" />
+        <Tile label="North-north variance" value={fmt(u.cov[0][0], 4)} unit="m2, total covariance" />
       </TileGrid>
 
       <p className="text-[11px] text-gray-400 mt-4">

@@ -6,7 +6,7 @@ Every measured vitrinite reflectance you will ever see quoted sits between about
 
 The scheme's floor is unreacted vitrinite, $e^{-1.6} = 0.20189651799465538$. Its ceiling is fully reacted vitrinite, $e^{-1.6+3.7 \times 0.85} = 4.687971627022019$ as the engine evaluates it. No history can produce a value outside them, because F cannot leave $[0, 0.85]$.
 
-Both are graded on your capstone with tolerances of 0.001 and 0.005, and both are hand arithmetic. The examiners are not testing whether you can run an integrator; they are testing whether you know that the range of the entire scheme is two constants and an exponential, and that everything else this tier computes lives strictly between them.
+Both are hand arithmetic. The examiners are not testing whether you can run an integrator; they are testing whether you know that the range of the entire scheme is two constants and an exponential, and that everything else this tier computes lives strictly between them.
 
 ## The bands people actually use
 
@@ -16,7 +16,7 @@ Put those on the model's scale using the inverse map $F = (\ln R_o + 1.6)/3.7$. 
 
 ## What the fixtures deliver into this range
 
-Preview where module 3's graded values will land. The capstone ramp at 3 degC per Ma reaches 150 degC with Ro at 0.9871413464062039: mid oil window. The slow 1 degC per Ma ramp at the same temperature reads 1.1129254516555198: still in the window, but noticeably further along. The fast 10 degC per Ma ramp reads 0.8795791051334334. One temperature, three positions in the band, and none of the three is "the" maturity of 150 degC. That is the point the next module exists to drive home.
+Preview where module 3's golden values will land. The reference ramp at 3 degC per Ma reaches 150 degC with Ro at 0.9871413464062039: mid oil window. The slow 1 degC per Ma ramp at the same temperature reads 1.1129254516555198: still in the window, but noticeably further along. The fast 10 degC per Ma ramp reads 0.8795791051334334. One temperature, three positions in the band, and none of the three is "the" maturity of 150 degC. That is the point the next module exists to drive home.
 
 ## A habit for reading reported values
 

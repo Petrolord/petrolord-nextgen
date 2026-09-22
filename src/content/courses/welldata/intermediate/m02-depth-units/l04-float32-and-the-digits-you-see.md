@@ -2,7 +2,7 @@
 
 The previous lesson left a loose end on purpose. You computed 4900 x 0.3048 = 1493.52 and the panel reported 1493.52001953125 m converted. This lesson closes it, and the first thing to settle is which of the two answers is wrong.
 
-Neither is wrong. Say it in full, because the wrong lesson is easy to draw here. The hand answers 1493.52 m and 1584.96 m converted are correct answers, they agree with the graded values through the fourth decimal place, they sit far inside the 0.01 m tolerance, and they pass. The graded values 1493.52001953125 m and 1584.9599609375 m converted are also correct, and they are what the pipeline reports because of how a log is stored. Both answers describe the same place in the ground to a precision no logging tool can resolve.
+Neither is wrong. Say it in full, because the wrong lesson is easy to draw here. The hand answers 1493.52 m and 1584.96 m converted are correct answers, they agree with the pipeline values through the fourth decimal place, they sit far inside the 0.01 m tolerance, and they pass. The pipeline values 1493.52001953125 m and 1584.9599609375 m converted are also correct, and they are what the pipeline reports because of how a log is stored. Both answers describe the same place in the ground to a precision no logging tool can resolve.
 
 What is worth your attention is not which number to prefer. It is why the second one has that shape at all, because you will meet the shape again in every array of samples the platform handles.
 

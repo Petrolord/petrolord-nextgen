@@ -16,7 +16,7 @@ Check three: rates should reproduce module 1's landmarks within arithmetic error
 
 ## Fixture crossings
 
-Check four: run the ramp machinery and confirm the graded rows. 0.9871413464062039 at 150 degC and rate 3; 1.1129254516555198 at rate 1; TR 0.022481215976523083 and 0.05477927380797565 at 100 degC, 10 and 50 Ma. Beyond the graded rows, confirm the slow ramp sits above the fast one at every temperature and the crossings shift 6 to 9 degrees per factor of 3 in rate. The independent Python oracle agrees with the engine to about 1e-9 here; the tolerance the capstone gives you is orders of magnitude wider, so a disagreement at the third digit is yours.
+Check four: run the ramp machinery and confirm the golden rows. 0.9871413464062039 at 150 degC and rate 3; 1.1129254516555198 at rate 1; TR 0.022481215976523083 and 0.05477927380797565 at 100 degC, 10 and 50 Ma. Beyond the golden rows, confirm the slow ramp sits above the fast one at every temperature and the crossings shift 6 to 9 degrees per factor of 3 in rate. The independent Python oracle agrees with the engine to about 1e-9 here; any tolerance a capstone gives you is orders of magnitude wider, so a disagreement at the third digit is yours.
 
 ## Consistency between the clocks
 
@@ -24,10 +24,10 @@ Check five: the separation test. Switch kerogen type and confirm TR moves while 
 
 ## Worked example
 
-You port the scheme to a new tool and get Ro at 150 degC, rate 3, of 0.912 instead of 0.9871413464062039. Both anchors check out exactly. Diagnose in order. Anchors passing clears the constants, weights and read-out. Monotonicity and range give nothing. The 7 percent deficit at a graded row with correct endpoints suggests the integration itself: step size or the temperature rule. A start-of-step temperature convention systematically under-reacts, module 3 said, and 7 percent low at rate 3 is its signature; switching to midpoint evaluation, or shrinking steps and watching the value climb toward 0.987, confirms it. The check list did not just catch the error, it localised it.
+You port the scheme to a new tool and get Ro at 150 degC, rate 3, of 0.912 instead of 0.9871413464062039. Both anchors check out exactly. Diagnose in order. Anchors passing clears the constants, weights and read-out. Monotonicity and range give nothing. The 7 percent deficit at a golden row with correct endpoints suggests the integration itself: step size or the temperature rule. A start-of-step temperature convention systematically under-reacts, module 3 said, and 7 percent low at rate 3 is its signature; switching to midpoint evaluation, or shrinking steps and watching the value climb toward 0.987, confirms it. The check list did not just catch the error, it localised it.
 
 ## Exercise
 
 Name the five checks in one line each. Then answer in one sentence: why are the two closed-form anchors the first check and not the last?
 
-As a self check: anchors (two exact endpoint reflectances), monotone range (Ro and TR rise within bounds), rate landmarks (half-lives and ladder ratios at 100 degC), fixture crossings (graded rows plus curve ordering), and clock separation (type moves TR, never Ro). The anchors come first because they are free, exact and catastrophic-failure-sensitive: thirty seconds of arithmetic that must pass before any longer computation deserves attention.
+As a self check: anchors (two exact endpoint reflectances), monotone range (Ro and TR rise within bounds), rate landmarks (half-lives and ladder ratios at 100 degC), fixture crossings (golden rows plus curve ordering), and clock separation (type moves TR, never Ro). The anchors come first because they are free, exact and catastrophic-failure-sensitive: thirty seconds of arithmetic that must pass before any longer computation deserves attention.

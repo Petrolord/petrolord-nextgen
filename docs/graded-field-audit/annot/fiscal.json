@@ -219,24 +219,33 @@
   {
    "tier": "intermediate",
    "key": "psc_total_tax_musd",
-   "source": "unobtainable",
-   "source_ref": "src/pages/apps/FiscalRegimeDesigner.jsx:11",
-   "printed": null,
+   "source": "suite-app",
+   "source_ref": "src/components/fiscaldesigner/ResultsPanel.jsx Summary tab, Total tax ($MM) column (shown only with Full precision on)",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": "src/components/fiscaldesigner/ResultsPanel.jsx:129-166",
+   "display_ref": "src/components/fiscaldesigner/ResultsPanel.jsx Summary tab, Total tax ($MM) column (shown only with Full precision on)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/fiscaldesigner/ResultsPanel.jsx:129-166 -> add a per-regime total tax column (4 decimals), or a full-precision per-year ledger table/export"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The Designer summary has NPV, IRR, payback, government cash flow and the two shares but no tax, and no chart separates tax from royalty and profit share. Either print total tax (and ideally the ledger) in the Designer, or accept that the learner builds the full 25-row PSC ledger by hand (a spreadsheet can, but the lessons direct life totals to the engine).",
-   "evidence": "Searched ResultsPanel.jsx: columns are npv, irr, payback, govTake, government take %, share of net revenue; no tax anywhere in the rendered output. Hand-calc needs the whole 25-year PSC ledger with the R-factor fallback in year 25.",
+   "evidence": "With Full precision on, prints at 4 decimals (jest: fiscal Full precision test (Suite PR #565), the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #565 (Fiscal Regime Designer Full precision switch and total tax per regime, stacked on #554)",
+    "migration": "20261026_w3_fiscal.sql",
+    "prompt_append": "Read the figures in the Fiscal Regime Designer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping. Its Summary tab then shows the total tax for each regime.",
+    "printed_before": null
+   }
   },
   {
    "tier": "intermediate",

@@ -1,6 +1,6 @@
 # The campaign panel map
 
-This lesson is the map of the tier. It names what the campaign panel reports, says which module owns each part, and puts the six graded numbers in front of you now rather than at the end. Seeing the destination early changes how you read everything between here and the capstone, and at this tier the destination has an unusual property: nothing in it has any margin at all.
+This lesson is the map of the tier. It names what the campaign panel reports, says which module owns each part, and puts the six graded readings in front of you now rather than at the end, worked on the teaching campaign. Seeing the destination early changes how you read everything between here and the capstone, and at this tier the destination has an unusual property: nothing in it has any margin at all.
 
 ## What the panel does
 
@@ -20,11 +20,11 @@ That pairing is the design of the panel and the design of the tier. An aggregate
 
 **The workflow.** Module 6 puts the whole thing together in the order you would run it on a delivery that arrived this morning, sets out the quality control on the campaign itself, and walks the capstone.
 
-## The six graded numbers
+## The six graded readings
 
-The tolerances are part of the fact, so learn them beside the values.
+The capstone asks for these six readings on its own case, the ODUMA campaign: six LAS files you download from the capstone card and open together in the campaign panel with Open your own LAS files as a campaign. The wrapped file there is oduma1_wrapped and the null-heavy file is oduma5_nulls. Here the readings are worked on the teaching campaign, so your capstone values will be different. The tolerances are the ones the capstone uses, so learn them beside the readings.
 
-| reading | value | tolerance |
+| reading | worked example (teaching campaign) | tolerance |
 | --- | --- | --- |
 | curves imported across the campaign, depth excluded | 24 | 0 |
 | files needing depth unit conversion | 1 | 0 |
@@ -59,6 +59,6 @@ The panel below runs all six teaching files as one campaign and shows the table 
 
 ## Exercise
 
-Open the panel and find all six graded numbers on it. Beside each, write the module that will explain it, the unit it counts, and whether it is an aggregate over the delivery or a reading inside one named file. Then, without computing anything, write down for each of the four aggregates what a plausible wrong answer would be and what a person would have to believe to produce it.
+Open the panel and find all six graded readings on it, first on the teaching campaign and then on the ODUMA files. Beside each, write the module that will explain it, the unit it counts, and whether it is an aggregate over the delivery or a reading inside one named file. Then, without computing anything, write down for each of the four aggregates what a plausible wrong answer would be and what a person would have to believe to produce it.
 
 Self-check: curve counts belong to module 2, the three exception readings to module 3, the null total to module 4 and the wrapped sample count to module 5, with module 6 assembling all of them. By unit, the readings count curves, files, curves, files, samples and samples in that order, and the last two are readings inside wrapped_12 and nullheavy_20 rather than aggregates. The reachable wrong answers include 30 curves from counting the depth index in every file, 0 or 2 conversions from reading the delivery as uniform in units, 6 uniform files from trusting the declared steps, and a dead-curve count of 0 from testing a curve for many nulls rather than for no finite samples at all.

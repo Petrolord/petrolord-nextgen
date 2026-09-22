@@ -1,0 +1,120 @@
+{
+ "course": "portfolio",
+ "suite": "Suite PR #558 (Capital Portfolio Studio and AFE Cost Control Manager Full precision switch and AFE As of input, stacked on #554)",
+ "tiers": {
+  "beginner": {
+   "append": "Read the figures in the Capital Portfolio Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+   "why": "The cards print whole $MM against a tolerance of 0.001.",
+   "keys": [
+    "id_emv_at_first_limit_musd",
+    "id_emv_at_second_limit_musd",
+    "id_emv_at_third_limit_musd",
+    "id_success_npv_at_first_limit_musd",
+    "id_value_of_excluded_project_musd",
+    "id_risked_emv_tie_back_musd"
+   ],
+   "annot_updates": {
+    "id_emv_at_first_limit_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx Risked EMV card",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first)."
+    },
+    "id_emv_at_second_limit_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx Risked EMV card",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first)."
+    },
+    "id_emv_at_third_limit_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx Risked EMV card",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first)."
+    },
+    "id_success_npv_at_first_limit_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx Success-case NPV card",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first)."
+    },
+    "id_value_of_excluded_project_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx Risked EMV card (difference of two runs)",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first)."
+    },
+    "id_risked_emv_tie_back_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/pages/apps/CapitalPortfolioStudio.jsx inventory Risked EMV column",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first)."
+    }
+   }
+  },
+  "intermediate": {
+   "append": "Read the figures in the AFE Cost Control Manager with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping. Type the as-of date above into its As of box first.",
+   "why": "The tiles print CPI and SPI to 2 decimals, and SPI was always measured at today; the prompt asks 5. The new As of input (default today) measures SPI at the stated date.",
+   "keys": [
+    "id_cpi",
+    "id_spi"
+   ],
+   "annot_updates": {
+    "id_cpi": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/afe/AFEDashboard.jsx CPI (Cost Efficiency) tile",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first)."
+    },
+    "id_spi": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/afe/AFEDashboard.jsx SPI (Schedule Efficiency) tile, measured at the new As of input",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, calculateEVM at 2028-10-03 through formatFull, checked against the key first)."
+    }
+   }
+  },
+  "advanced": {
+   "append": "Read the figures in the Capital Portfolio Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+   "why": "The card prints whole $MM against a tolerance of 0.001.",
+   "keys": [
+    "id_p90_npv_second_limit_independent_musd",
+    "id_p90_npv_second_limit_correlated_musd"
+   ],
+   "annot_updates": {
+    "id_p90_npv_second_limit_independent_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx NPV P90 (low) / P10 (high) card",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first)."
+    },
+    "id_p90_npv_second_limit_correlated_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/capitalportfoliostudio/OptimizationResults.jsx NPV P90 (low) / P10 (high) card",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: capitalportfoliostudio/__tests__/w3FullPrecision.test.jsx, the engine result through formatFull, checked against the key first)."
+    }
+   }
+  }
+ }
+}

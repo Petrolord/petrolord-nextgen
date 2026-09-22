@@ -1,0 +1,269 @@
+{
+ "course": "torquedrag",
+ "tiers": {
+  "beginner": {
+   "why": "The slant and horizontal hookloads need the capstone's 1500 kg/m3 mud, which no explorer took, and printed in kN to 3 dp against tol 0.5 N. W4a gives all three explorers a mud density box (blank means the lessons' 1440) and prints hookloads in N to 2 dp. The brief now names the box. Prompt only.",
+   "prompt_edits": [
+    [
+     "Six numbers from three wells, at a mud density of 1500 kg/m3.",
+     "Six numbers from three wells, at a mud density of 1500 kg/m3. Type 1500 into the string explorer's mud density box and its views run this case, with hookloads in newtons to two decimals."
+    ]
+   ],
+   "annot_updates": {
+    "slant_pickup_hookload_N": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Hookload against depth view, well slant",
+     "printed": {
+      "decimals": 2
+     },
+     "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Tile 'Pick up' N(v) = fmt(v, 2) newtons",
+     "evidence": "Typing 1500 into the string explorer's mud box and selecting the slant well in the hookload view prints this hookload in N to 2 dp, within tol 0.5 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+     "notes": "W4a typed-case mode. Key, expected and tolerance unchanged."
+    },
+    "slant_slackoff_hookload_N": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Hookload against depth view, well slant",
+     "printed": {
+      "decimals": 2
+     },
+     "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Tile 'Slack off' N(v) = fmt(v, 2) newtons",
+     "evidence": "Typing 1500 into the string explorer's mud box and selecting the slant well in the hookload view prints this hookload in N to 2 dp, within tol 0.5 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+     "notes": "W4a typed-case mode. Key, expected and tolerance unchanged."
+    },
+    "slant_drag_swing_N": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Hookload against depth view, well slant",
+     "printed": {
+      "decimals": 2
+     },
+     "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Tile 'Total swing' N(v) = fmt(v, 2) newtons",
+     "evidence": "Typing 1500 into the string explorer's mud box and selecting the slant well in the hookload view prints this hookload in N to 2 dp, within tol 0.5 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+     "notes": "W4a typed-case mode. Key, expected and tolerance unchanged."
+    },
+    "horizontal_slackoff_hookload_N": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Hookload against depth view, well horizontal",
+     "printed": {
+      "decimals": 2
+     },
+     "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Tile 'Slack off' N(v) = fmt(v, 2) newtons",
+     "evidence": "Typing 1500 into the string explorer's mud box and selecting the horizontal well in the hookload view prints this hookload in N to 2 dp, within tol 0.5 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+     "notes": "W4a typed-case mode. Key, expected and tolerance unchanged."
+    }
+   }
+  },
+  "intermediate": {
+   "why": "Torques, side force, minimum tension and the calibrated friction factor all need the 1500 kg/m3 mud. W4a adds the mud box, prints torques in N.m to 3 dp and tensions in N to 2 dp, and passes the mud to the friction calibration. The brief now says where each field is read. Prompt only.",
+   "prompt_edits": [
+    [
+     "(6) the OPEN-HOLE friction factor that makes the build and hold well's pick-up hookload exactly 1100000 N at that mud density, holding the cased-hole factor at 0.25.",
+     "(6) the OPEN-HOLE friction factor that makes the build and hold well's pick-up hookload exactly 1100000 N at that mud density, holding the cased-hole factor at 0.25. Type 1500 into the mud density box of the string and friction explorers: fields 1 to 5 are rows of the string explorer's Every operation view, and field 6 is the friction explorer's Back it out of a trip view."
+    ]
+   ],
+   "annot_updates": {
+    "buildhold_rot_torque_Nm": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Every operation view, well buildhold, row rotate on bottom",
+     "printed": {
+      "decimals": 3
+     },
+     "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Every operation table column 'Surface torque (N.m)' at 3 dp",
+     "evidence": "Typing 1500 into the string explorer's mud box and selecting the buildhold well in the Every operation view prints this value on the rotate on bottom row at 3 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+     "notes": "W4a typed-case mode. Key, expected and tolerance unchanged."
+    },
+    "horizontal_rot_torque_Nm": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Every operation view, well horizontal, row rotate on bottom",
+     "printed": {
+      "decimals": 3
+     },
+     "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Every operation table column 'Surface torque (N.m)' at 3 dp",
+     "evidence": "Typing 1500 into the string explorer's mud box and selecting the horizontal well in the Every operation view prints this value on the rotate on bottom row at 3 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+     "notes": "W4a typed-case mode. Key, expected and tolerance unchanged."
+    },
+    "buildhold_max_side_force_Npm": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Every operation view, well buildhold, row rotate on bottom",
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Every operation table column 'Max side force (N/m)' at 4 dp",
+     "evidence": "Typing 1500 into the string explorer's mud box and selecting the buildhold well in the Every operation view prints this value on the rotate on bottom row at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+     "notes": "W4a typed-case mode. Key, expected and tolerance unchanged."
+    },
+    "swell3d_backream_torque_Nm": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Every operation view, well swell3d, row backream",
+     "printed": {
+      "decimals": 3
+     },
+     "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Every operation table column 'Surface torque (N.m)' at 3 dp",
+     "evidence": "Typing 1500 into the string explorer's mud box and selecting the swell3d well in the Every operation view prints this value on the backream row at 3 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+     "notes": "W4a typed-case mode. Key, expected and tolerance unchanged."
+    },
+    "horizontal_slide_min_tension_N": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx mud density box 1500, Every operation view, well horizontal, row slide drill",
+     "printed": {
+      "decimals": 2
+     },
+     "display_ref": "src/components/course/panels/torquedrag/StringExplorer.jsx Every operation table column 'Min tension (N)' at 2 dp",
+     "evidence": "Typing 1500 into the string explorer's mud box and selecting the horizontal well in the Every operation view prints this value on the slide drill row at 2 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+     "notes": "W4a typed-case mode. Key, expected and tolerance unchanged."
+    },
+    "buildhold_mu_for_1100kN_pickup": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/torquedrag/FrictionExplorer.jsx mud density box 1500, Back it out of a trip view, well buildhold, observed pick-up 1100000 N",
+     "printed": {
+      "decimals": 8
+     },
+     "display_ref": "src/components/course/panels/torquedrag/FrictionExplorer.jsx Tile 'Open-hole friction factor' fmt(solved.mu, 8)",
+     "evidence": "Typing 1500 into the friction explorer's mud box and 1100000 N as the observed pick-up on the build and hold well returns the bisected open-hole factor at 8 dp, within tol 0.0005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+     "notes": "W4a typed-case mode. Key, expected and tolerance unchanged."
+    }
+   }
+  },
+  "advanced": {
+   "why": "The torsion utilization and the wear need the 1500 kg/m3 mud, and the wear needs the two-entry schedule, where the wear view took one entry at 120 rpm. W4a adds the mud box, a fraction tile for the torsion utilization at 6 dp, and three schedule rows (the lessons' 50 h at 120 rpm and two blank). The brief now names the views. Prompt only.",
+   "prompt_edits": [
+    [
+     "(6) the worst WALL LOSS as a percentage from the same run.",
+     "(6) the worst WALL LOSS as a percentage from the same run. Type 1500 into the buckling and wear explorer's mud density box: field 3 is its What the pipe has left view, and fields 5 and 6 are its casing wear view with the two schedule entries typed into its rows."
+    ]
+   ],
+   "annot_updates": {
+    "hz_max_torsion_utilization": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/torquedrag/BucklingExplorer.jsx mud density box 1500, What the pipe has left view, well horizontal",
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/course/panels/torquedrag/BucklingExplorer.jsx Tile 'As a fraction' fmt(u.maxTorsionUtilization, 6)",
+     "evidence": "Typing 1500 into the buckling explorer's mud box prints the horizontal well's worst torsion utilization as a fraction to 6 dp, within tol 5e-5 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+     "notes": "W4a typed-case mode. Key, expected and tolerance unchanged."
+    },
+    "casing_max_wear_depth_mm": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/torquedrag/BucklingExplorer.jsx mud density box 1500, Casing wear view, schedule rows 150 rpm x 30 h and 90 rpm x 20 h, wear factor 2",
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/course/panels/torquedrag/BucklingExplorer.jsx Tile 'Worst wear depth' fmt(v, 6)",
+     "evidence": "Typing 1500 into the mud box and the two schedule entries into the casing wear view's rows prints this value to 6 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+     "notes": "W4a typed-case mode. Key, expected and tolerance unchanged."
+    },
+    "casing_worst_wall_loss_pct": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/torquedrag/BucklingExplorer.jsx mud density box 1500, Casing wear view, schedule rows 150 rpm x 30 h and 90 rpm x 20 h, wear factor 2",
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/course/panels/torquedrag/BucklingExplorer.jsx Tile 'Worst wall loss' fmt(v, 6)",
+     "evidence": "Typing 1500 into the mud box and the two schedule entries into the casing wear view's rows prints this value to 6 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the mud box blank (the lessons' 1440 kg/m3), and no view at any well or operation it offers lands on a graded answer (panelCapstoneGuard).",
+     "notes": "W4a typed-case mode. Key, expected and tolerance unchanged."
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/torquedrag/torquedragLab.js",
+  "src/components/course/panels/torquedrag/StringExplorer.jsx",
+  "src/components/course/panels/torquedrag/FrictionExplorer.jsx",
+  "src/components/course/panels/torquedrag/BucklingExplorer.jsx",
+  "src/components/course/panels/torquedrag/panelCapstoneGuard.test.js",
+  "src/content/courses/torquedrag/beginner/m06-the-associate-reading/l02-working-the-capstone.md",
+  "src/content/courses/torquedrag/intermediate/m06-the-professional-reading/l02-working-the-capstone.md",
+  "src/content/courses/torquedrag/advanced/m06-the-expert-reading/l02-working-the-capstone.md"
+ ]
+}

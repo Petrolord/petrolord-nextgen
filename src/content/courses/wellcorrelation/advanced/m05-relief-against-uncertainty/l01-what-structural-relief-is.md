@@ -19,7 +19,7 @@ The first three come straight from the Professional tier and they are unchanged,
 
 ## TOP_B is the one that matters here
 
-TOP_B relief across the three wells that carry it is 1662 minus 1628, which is 34 m. That is the graded relief in the Expert capstone, and two features of it deserve stating out loud every time you write it down.
+TOP_B relief across the three wells that carry it is 1662 minus 1628, which is 34 m. Two features of it deserve stating out loud every time you write it down.
 
 The first is the denominator. Ekene-4 reached total depth above TOP_B, so the surface is picked in three wells and not four. Relief is defined over the wells that carry the surface, so the honest way to write this number is 34 m over three wells. Write it bare and a reader will assume four, which is the assumption the whole tier is built to prevent.
 

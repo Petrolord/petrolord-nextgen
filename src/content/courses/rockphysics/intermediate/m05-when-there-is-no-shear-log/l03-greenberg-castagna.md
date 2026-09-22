@@ -1,6 +1,6 @@
 # Greenberg-Castagna
 
-The lithology aware estimator fits a separate curve to each rock type and then mixes them. It is the method the capstone uses, and its mixing rule is unusual enough to be worth doing by hand.
+The lithology aware estimator fits a separate curve to each rock type and then mixes them. It is the method the capstone asks for, and its mixing rule is unusual enough to be worth doing by hand.
 
 ## The per lithology curves
 
@@ -37,7 +37,7 @@ $$\text{harmonic} = \left(\frac{0.7}{1556.6} + \frac{0.3}{1441.72}\right)^{-1} =
 
 $$v_s = \tfrac{1}{2}(1522.136 + 1520.2585531342977) = 1521.197276567149 \ \mathrm{m/s}$$
 
-which is the sixth capstone value, reachable with a calculator in four lines.
+which is the Greenberg-Castagna estimate for the teaching case, reachable with a calculator in four lines. The capstone runs the same four lines at a velocity and a split of its own.
 
 ## Why that mixing rule
 

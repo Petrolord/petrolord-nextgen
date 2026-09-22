@@ -21,12 +21,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "Fit explorer on Ekene-1, Auto-select, Primary returns qi 120.0000; tol 0.5 on an integer-valued truth, far above the half unit of the 4 printed decimals.",
    "notes": "LEAK: shown in the fit explorer default state (probe state '': \"qi120.0000\"), and stated as \"qi = 120 stb/d\" in beginner/m06-the-associate-booking/l02-capstone-walkthrough.md.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "qi_bpd",
+     "label": "Fitted initial rate qi at the window start",
+     "unit": "stb/d",
+     "expected": 68.68131868131867,
+     "tol": 0.05
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the fit explorer opened on Ekene-1 primary at 10 stb/d. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:32-34 (defaults well Ekene-1, window primary)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:144 fmt(params.qi, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -43,12 +67,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "Di tile prints 0.0012000 (7 decimals); tol 2e-5 is far above half a unit (5e-8).",
    "notes": "LEAK: default state of the fit explorer and stated as Di = 0.0012 in the capstone walkthrough (beginner m06 l02) and 38 other lesson lines.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "di_per_day",
+     "label": "Fitted nominal decline Di at the window start",
+     "unit": "1/d",
+     "expected": 0.00103021978021978,
+     "tol": 2e-06
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the fit explorer opened on Ekene-1 primary at 10 stb/d. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:32-34",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:145 fmt(params.Di, 7)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -65,12 +113,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "EUR tile 91666.7 at 1 decimal; tol 500. Hand route (qi - qlim)/Di is also taught (beginner m05 l02).",
    "notes": "LEAK: default state of the fit explorer; 91666.6666666667 printed in beginner/m03-cumulative-volumes/l04-snapshots-versus-the-integral.md:43.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "eur_limit_stb",
+     "label": "EUR at the 8 stb/d limit",
+     "unit": "stb",
+     "expected": 143335.71296891742,
+     "tol": 500.0
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the fit explorer opened on Ekene-1 primary at 10 stb/d. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:149 EUR tile",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:149 fmt(book.eur, 1)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -87,12 +159,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "Tile 2070.8 days; tol 10. Hand route ln(qi/qlim)/Di taught in beginner m05 l03.",
    "notes": "LEAK: default state of the fit explorer; 2070.75554149000 printed in beginner/m05-eur-and-the-limit/l03-time-to-limit.md:15.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "t_limit_days",
+     "label": "Time to the 8 stb/d limit",
+     "unit": "days",
+     "expected": 7362.666666666667,
+     "tol": 10.0
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the fit explorer opened on Ekene-1 primary at 10 stb/d. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:150 Time to limit tile",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:150 fmt(book.timeToLimitDays, 1)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -109,12 +205,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "Tile 73157.9 at 1 decimal; tol 400.",
    "notes": "LEAK: default state of the fit explorer; 73157.9366256283 printed in beginner/m03-cumulative-volumes/l02-exponential-cumulative.md:42.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "np_to_date_stb",
+     "label": "Cumulative from the window start to 2022-10-01",
+     "unit": "stb",
+     "expected": 29840.327683366406,
+     "tol": 400.0
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the fit explorer opened on Ekene-1 primary at 10 stb/d. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:151 Np tile",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:151 fmt(book.npAtDate, 1)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -129,12 +249,34 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "1 - exp(-0.0012 x 365) = 35.4674 percent; tile also prints 35.4674 at 4 decimals; tol 0.1.",
    "notes": "LEAK: the capstone walkthrough works this field to 35.4674217142705 in full; also default state of the fit explorer.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "eff_decline_pct",
+     "label": "Tangent effective annual decline",
+     "unit": "%/yr",
+     "expected": 31.34184156157903,
+     "tol": 0.1
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the fit explorer opened on Ekene-1 primary at 10 stb/d. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "hand-calc",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/dca/beginner/m06-the-associate-booking/l02-capstone-walkthrough.md (walkthrough 2)",
+     "printed": "full",
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:152 fmt(book.effectiveDeclinePct, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -149,12 +291,39 @@
    "guess_p": 0.11,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "b tile prints the raw engine float; tol 0.02 is below the 0.05 grid step so neighbouring grid points fail (intended, per the walkthrough).",
    "notes": "LEAK: the type-curve explorer default state labels the pool checkbox \"E3 (b 0.5)\" (/root/wt-b5-nextgen/src/components/course/panels/dca/TypeCurveExplorer.jsx:42 renders w.planted.b), the fit-explorer well select reads \"Ekene-3 (hyperbolic)\" (/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:95), and the walkthrough (intermediate m06 l02) prints b 0.49999999999999994.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "late_di",
+     "label": "Ekene-3 fitted Di, 2021-11-01 window",
+     "unit": "-",
+     "expected": 0.001242236024844721,
+     "tol": 2e-06
+    },
+    "rekey_annot": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/dca/FitExplorer.jsx (Tile 'Di', custom window)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/dca/FitExplorer.jsx fmt(params.Di, 7)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The walkthrough printed all six answers and the panels opened on the primary windows, the E3 + E6 type curve and the 10 stb/d limit. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -169,12 +338,34 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "Hyperbolic closed form worked in the lesson; tile 111270.2; tol 600.",
    "notes": "LEAK: the walkthrough computes 111270.166537926 in full; also intermediate/m03-forecast-mechanics/l02-daily-sum-versus-closed-form.md:49.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "well_eur_stb",
+     "label": "Ekene-5 EUR at 8 stb/d (primary fit)",
+     "unit": "stb",
+     "expected": 168381.90962055034,
+     "tol": 600.0
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the panels opened on the primary windows, the E3 + E6 type curve and the 10 stb/d limit. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "hand-calc",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/dca/intermediate/m06-the-professional-booking/l02-capstone-walkthrough.md (walkthrough 1)",
+     "printed": "full",
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:149 fmt(book.eur, 1)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -191,12 +382,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "Di tile 0.0010000; tol 2e-5.",
    "notes": "LEAK: one click (well select) from default; 0.001 printed in intermediate m01 lessons (l02-the-grid-search.md:30).",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "sub_di",
+     "label": "Ekene-6 fitted Di, 2021-05-01 window",
+     "unit": "1/d",
+     "expected": 0.0009219138932423719,
+     "tol": 2e-06
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the panels opened on the primary windows, the E3 + E6 type curve and the 10 stb/d limit. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:94-97 (Ekene-6, Primary)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:145 fmt(params.Di, 7)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -213,12 +428,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "R2 tile at 6 decimals; tol 0.01.",
    "notes": "LEAK: one click (window) from default; 0.818388421218434 printed in intermediate/m01-the-b-problem/l05-the-b-ceiling-alarm.md:19.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "naive_r2",
+     "label": "Ekene-6 R2 across the flood (2020-01 to 2023-12)",
+     "unit": "-",
+     "expected": 0.7822456367465322,
+     "tol": 0.001
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the panels opened on the primary windows, the E3 + E6 type curve and the 10 stb/d limit. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:97 (Ekene-1, window Full history)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:147 fmt(fit.R2, 6)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -235,12 +474,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "EUR (fixed-b) tile 91524.3; tol 50.",
    "notes": "LEAK: the type-curve explorer opens on exactly this case (probe state '': \"EUR @ 10 (fixed-b)91524.3\"); 91524.2759502962 printed in the walkthrough and intermediate/m04-type-curves/l04-fixed-b-application.md:50.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "tc_eur_stb",
+     "label": "Ekene-3 EUR from the E3 + E5 type curve at 8 stb/d",
+     "unit": "stb",
+     "expected": 107761.48159232213,
+     "tol": 50.0
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the panels opened on the primary windows, the E3 + E6 type curve and the 10 stb/d limit. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/TypeCurveExplorer.jsx:14-15 (defaults pool E3+E6, target Ekene-6)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/TypeCurveExplorer.jsx:68 fmt(out.eurFixedB, 1)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -255,12 +518,33 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "Four closed-form EURs added; tol 2000 also admits the scenario roll-up total (461475.5), as the walkthrough states.",
    "notes": "LEAK: 461709.132532792 printed in intermediate/m03-forecast-mechanics/l04-choosing-the-honest-number.md:25; it is also the default Mode box of the advanced uncertainty explorer (/root/wt-b5-nextgen/src/components/course/panels/dca/declineLab.js:132 FIELD_TRIANGLE).",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "field_eur_stb",
+     "label": "Sum of the four closed-form EURs at 8 stb/d",
+     "unit": "stb",
+     "expected": 486822.66991036595,
+     "tol": 2000.0
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the panels opened on the primary windows, the E3 + E6 type curve and the 10 stb/d limit. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "hand-calc",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/dca/intermediate/m05-portfolio-rollups (sum of four closed-form EURs)",
+     "printed": "full",
+     "display_scale": 1,
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -277,12 +561,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "Di tile 0.0003500; tol 5e-6.",
    "notes": "LEAK: two clicks from default; 0.00035 printed throughout advanced m05 and the walkthrough (advanced m06 l02).",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "late_di_a",
+     "label": "Ekene-1 fitted Di from 2024-10-01",
+     "unit": "1/d",
+     "expected": 0.0004935544789384426,
+     "tol": 5e-06
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the uncertainty explorer opened on b 1.2 and the teaching triangle. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:25 (Post-ramp preset, Ekene-5)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:145 fmt(params.Di, 7)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -299,12 +607,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "Di tile 0.0013276; tol 2e-6 is 40x the half unit of the 7 printed decimals.",
    "notes": "LEAK: 0.0013275893489185155 printed in advanced/m05-declines-after-the-flood/l03-oil-versus-gross.md:10 and the walkthrough.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "late_di_b",
+     "label": "Ekene-6 oil decline on the same window",
+     "unit": "1/d",
+     "expected": 0.0015982971065338885,
+     "tol": 2e-06
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the uncertainty explorer opened on b 1.2 and the teaching triangle. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:25 (Post-ramp preset, Ekene-6)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:145 fmt(params.Di, 7)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -321,12 +653,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "EUR tile 321,875.9; tol 2000. The prompt asks the learner to fit qi and Di \"yourself\", but the panel fixes them at 120 and 0.0012 (declineLab.js:121).",
    "notes": "LEAK: the uncertainty explorer opens at b = 1.2 so this value shows in the default state; 321875.914758613 printed in advanced/m02-the-b-lever/l01-eur-versus-b.md:14. The tile prints a thousands comma, which a type=number input will not accept as typed.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "b_eur_stb",
+     "label": "EUR at b 1.1 (Ekene-1 primary fit, limit 8)",
+     "unit": "stb",
+     "expected": 311019.42303974996,
+     "tol": 2000.0
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the uncertainty explorer opened on b 1.2 and the teaching triangle. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:21 (bIdx default 24 = b 1.2)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:66 fmt(row.eur, 1) toLocaleString en-US",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -343,12 +699,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "Ratio tile 3.511374; tol 0.02.",
    "notes": "LEAK: default state of the uncertainty explorer (b 1.2); the ratio follows from lesson-printed 321875.914758613 / 91666.6666666667.",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "b_ratio",
+     "label": "b 1.1 EUR over the exponential EUR",
+     "unit": "-",
+     "expected": 3.332350961140178,
+     "tol": 0.02
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the uncertainty explorer opened on b 1.2 and the teaching triangle. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:21",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:67 row.ratioToExponential.toFixed(6)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -365,12 +745,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "Closed-form triangular quantile (taught advanced m04 l02-l03) reproduced exactly: 420425.03; tile 420,425; tol 2000.",
    "notes": "LEAK: the triangle defaults are the capstone min/mode/max, so P90 shows in the default state; 420425.025054486 printed in advanced/m04-risked-reserves/l03-p90-p50-p10.md:37. The tile prints a thousands comma (toLocaleString en-US).",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "p90_stb",
+     "label": "Field triangle P90 (low)",
+     "unit": "stb",
+     "expected": 443704.67638626386,
+     "tol": 2000.0
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the uncertainty explorer opened on b 1.2 and the teaching triangle. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:22-24 (triangle boxes default to FIELD_TRIANGLE = the capstone triangle)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:81 fmt(summary.p90, 1)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -387,12 +791,36 @@
    "guess_p": null,
    "class": "none",
    "fix": null,
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "The whole DCA course grades the teaching wells: every graded value is printed at full precision in the tier lessons (including the capstone walkthrough) and most show in a panel default state. Owner to decide whether that is acceptable for this course (\"the capstone is the course, asked back\", beginner m06 l02) or whether the capstone needs its own well/window and triangle that the lessons and panel defaults do not already carry.",
    "evidence": "Closed-form quantile reproduced exactly: 531360.33; tile 531,360.3; tol 2000.",
    "notes": "LEAK: default state of the uncertainty explorer; 531360.331525141 printed in advanced/m04-risked-reserves/l03-p90-p50-p10.md:49. The tile prints a thousands comma (toLocaleString en-US).",
    "leak": true,
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_dca.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "p10_stb",
+     "label": "Field triangle P10 (high)",
+     "unit": "stb",
+     "expected": 565871.4376509781,
+     "tol": 2000.0
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the uncertainty explorer opened on b 1.2 and the teaching triangle. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:22-24",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:83 fmt(summary.p10, 1)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   }
  ]
 }

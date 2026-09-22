@@ -4,15 +4,15 @@ Every course on this field eventually meets the number 0.35. The volumetric book
 
 ## Climbing to the crest
 
-The mapped crest of the structure sits $20.2818603515625$ m above the 1560 m contact, the maximum oil column the geoscience ladder booked. Add the entry height and the crest stands
+The mapped crest of the structure sits $20.2818603515625$ m above the 1560 m contact, the maximum oil column the geoscience ladder booked. The Ekene sand's crest saturation is a capstone number, so climb it here on lesson 2's teaching sand (180 md, 18 percent porosity, the same plugs, fluids and column). Add its entry height and the crest stands
 
-$$20.2818603515625 + 3.142982863763458 = 23.424843215325957 \ \text{m} = 76.85316015526888 \ \text{ft}$$
+$$20.2818603515625 + 3.513961667746027 = 23.795822019308527 \ \text{m} = 78.07028221557916 \ \text{ft}$$
 
-above the free water level. Run the chain from lesson 1 in reverse order: the capillary pressure there is $76.85316015526888 \times 0.07133527522935783 = 5.482341331922022$ psi, the dimensionless value is $J = 5.482341331922022 / 2.942330021361175 = 1.8632652666833722$, and the designed power law solves for saturation:
+above the free water level. Run the chain from lesson 1 in reverse order: the capillary pressure there is $78.07028221557916 \times 0.07133527522935783 = 5.569165069081978$ psi, the dimensionless value is $J = 5.569165069081978 / 3.289624970000998 = 1.6929483208173388$, and the designed power law solves for saturation:
 
-$$S_w = 0.25 + \frac{0.25}{1.8632652666833722} \times 0.75 = 0.35062979402484734$$
+$$S_w = 0.25 + \frac{0.25}{1.6929483208173388} \times 0.75 = 0.3607535284417169$$
 
-The crest of the Ekene field drains to $S_w = 0.35062979402484734$. The booking's flat 0.35, to within the third decimal, is the CREST value.
+The crest of the teaching sand drains to $S_w = 0.3607535284417169$. Run the same chain on the Ekene sand's own factor and you find how close its crest comes to the booking's flat 0.35: that comparison is the point of this lesson, and the number is yours to produce.
 
 ## What that means for the flat model
 
@@ -26,7 +26,7 @@ There is also a gentler reading, worth giving the original booking. On a structu
 
 {{panel:sc-jfunction-explorer}}
 
-The Sw-at-crest tile shows $0.35062979402484734$. Put the profile plot beside the ladder from lesson 3 and find the crest: it sits on the flattest part of the curve, where the 0.36 rung already needed $18.28644575280558$ m. Notice how insensitive the crest saturation is: the last two metres of column buy less than one saturation point of drying. Then look down the curve and ask the flat model's question of every depth: where else does the profile read 0.35? Nowhere. The crest is the only point in the field where the booking's number and the physics agree exactly.
+On the teaching sand the Sw-at-crest tile shows $0.3607535284417169$; type 250 md and 0.20 to see the Ekene crest. Put the profile plot beside the ladder from lesson 3 and find the crest: it sits on the flattest part of the curve, where the 0.36 rung of the Ekene ladder already needed $18.28644575280558$ m. Notice how insensitive the crest saturation is: the last two metres of column buy less than one saturation point of drying. Then look down the curve and ask the flat model's question of every depth: where else does the profile read 0.35? Nowhere. The crest is the only point in the field where the booking's number and the physics agree exactly.
 
 ## The misconception to avoid
 
@@ -34,4 +34,4 @@ Do not flip the correction's sign. Hearing "there is a transition zone" some peo
 
 ## Exercise
 
-First, redo the crest chain with the numbers in this lesson but stop at each rung: height above FWL in feet, capillary pressure in psi, $J$, then saturation, quoting each intermediate to full precision. Second, a colleague proposes fixing the flat model by repainting every cell at $S_w = 0.40$ instead of 0.35. In two or three sentences, say what this gets right, what it still gets wrong, and why no single flat value can reproduce a column that varies with height.
+First, redo the crest chain for the Ekene sand, from its own psi-per-J factor, and stop at each rung: height above FWL in feet, capillary pressure in psi, $J$, then saturation, quoting each intermediate to full precision. Second, a colleague proposes fixing the flat model by repainting every cell at $S_w = 0.40$ instead of 0.35. In two or three sentences, say what this gets right, what it still gets wrong, and why no single flat value can reproduce a column that varies with height.

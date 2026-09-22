@@ -4,7 +4,7 @@ Two lessons have shown that the contact carries the booking. The obvious next qu
 
 ## In this fixture the contact is given
 
-The Ekene dataset does not contain a contact. The wells carry a TOP_SAND pick and a BASE_SAND pick and nothing else. The capstone tells you to set the oil water contact to 1560 m, and the panel offers 1550, 1560 and 1570 m as options. None of those three depths was measured. They were chosen so that you could see what a contact does.
+The Ekene dataset does not contain a contact. The wells carry a TOP_SAND pick and a BASE_SAND pick and nothing else. The teaching case sets the oil water contact to 1560 m, the lessons compare 1550 and 1570 m, and the capstone brief states a contact of its own. None of those depths was measured. They were chosen so that you could see what a contact does.
 
 This is a teaching simplification and it should be named as one, because the way it fails is subtle. Look at the well table and it is tempting to read the oil columns of 12, 19, 8 and 14 m at Ekene-1, Ekene-3, Ekene-5 and Ekene-6 as evidence about the contact. They are not evidence. Every one of those columns was produced by subtracting the well's top from the assumed contact of 1560 m. They are consequences of the assumption, not support for it. The same goes for the observation that Ekene-2 and Ekene-4 are dry, which is true only because their tops of 1565 m and 1590 m happen to lie below the depth somebody chose.
 

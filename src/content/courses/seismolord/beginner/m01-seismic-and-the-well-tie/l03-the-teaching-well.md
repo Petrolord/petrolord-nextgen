@@ -55,11 +55,11 @@ Read those four values as a story about the section. DT falls from about 400 to 
 
 ## The mean sonic velocity
 
-One summary statistic from this well is graded directly in the Associate capstone, so it deserves its own definition.
+One summary statistic from this well is one of the six readings this tier reports, so it deserves its own definition.
 
 The **mean sonic velocity** over the log is 3145.29 m/s. Two details of that definition matter more than the value.
 
-First, it is computed over all 301 finite DT samples, so it is an average over the whole logged interval from 1500 to 1650 m with nothing trimmed. Second, it is a mean of velocities, not the reciprocal of a mean of slownesses. Those are different quantities and they do not agree, because averaging is not preserved by taking reciprocals. If you average DT first and then invert, you get a different answer, and the capstone will mark it wrong. Compute velocity sample by sample, then average.
+First, it is computed over all 301 finite DT samples, so it is an average over the whole logged interval from 1500 to 1650 m with nothing trimmed. Second, it is a mean of velocities, not the reciprocal of a mean of slownesses. Those are different quantities and they do not agree, because averaging is not preserved by taking reciprocals. If you average DT first and then invert, you get a different answer, and a capstone will mark it wrong. Compute velocity sample by sample, then average.
 
 The word finite in that definition is doing real work. A curve with nulls in it must have those samples excluded before averaging, or the sentinel value contaminates the result. In `basic_20.las` the DT curve is complete, so all 301 samples are finite and the denominator is 301. That is a property of this well, not a rule. In your own data the count will usually be lower than the sample count.
 

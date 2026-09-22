@@ -181,32 +181,39 @@ const Sanding = () => {
   const [boost, setBoost] = useState('');
   const [step, setStep] = useState('');
   const [weak, setWeak] = useState('published');
+  const [top, setTop] = useState('');
+  const [bottom, setBottom] = useState('');
   const boostFactor = boost === '' ? PARAMS.boostFactor : Number(boost);
   const stepMdM = step === '' ? PARAMS.stepMdM : Number(step);
+  // The interval: blank is the published one; a typed top and bottom run your own.
+  const topMdM = top === '' ? PARAMS.interval.topMdM : Number(top);
+  const bottomMdM = bottom === '' ? PARAMS.interval.bottomMdM : Number(bottom);
   const curves = useMemo(() => (weak === 'published' ? undefined : weakenedCurves()), [weak]);
   const r = useMemo(() => {
-    try { return cdpFor({ geometry, boostFactor, stepMdM, ...(curves ? { curves } : {}) }); } catch { return null; }
-  }, [geometry, boostFactor, stepMdM, curves]);
+    try { return cdpFor({ topMdM, bottomMdM, geometry, boostFactor, stepMdM, ...(curves ? { curves } : {}) }); } catch { return null; }
+  }, [topMdM, bottomMdM, geometry, boostFactor, stepMdM, curves]);
   const steps = useMemo(() => {
-    try { return stepIndependence(undefined, { geometry, boostFactor, ...(curves ? { curves } : {}) }); } catch { return []; }
-  }, [geometry, boostFactor, curves]);
+    try { return stepIndependence(undefined, { topMdM, bottomMdM, geometry, boostFactor, ...(curves ? { curves } : {}) }); } catch { return []; }
+  }, [topMdM, bottomMdM, geometry, boostFactor, curves]);
   const bs = useMemo(() => {
-    try { return boostSweep(undefined, { geometry, stepMdM, ...(curves ? { curves } : {}) }); } catch { return []; }
-  }, [geometry, stepMdM, curves]);
+    try { return boostSweep(undefined, { topMdM, bottomMdM, geometry, stepMdM, ...(curves ? { curves } : {}) }); } catch { return []; }
+  }, [topMdM, bottomMdM, geometry, stepMdM, curves]);
   const zero = useMemo(() => {
-    try { return boostAtZeroMargin({ geometry, stepMdM, ...(curves ? { curves } : {}) }); } catch { return null; }
-  }, [geometry, stepMdM, curves]);
+    try { return boostAtZeroMargin({ topMdM, bottomMdM, geometry, stepMdM, ...(curves ? { curves } : {}) }); } catch { return null; }
+  }, [topMdM, bottomMdM, geometry, stepMdM, curves]);
   if (!r) return <Note>That interval, step or boost does not describe a sweep.</Note>;
   const data = r.rows.map((x) => ({ md: x.mdM, cdpMPa: x.cdpPa / 1e6, ppMPa: x.ppPa / 1e6, pwfMPa: x.pwfCritPa / 1e6 }));
   return (
     <>
-      <div className="grid grid-cols-4 gap-2">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
         <SelectField label="Cavity" value={geometry} onChange={setGeometry}
           options={[{ value: 'perf-tunnel', label: 'Perf tunnel' }, { value: 'openhole', label: 'Open hole' }]} />
         <SelectField label="Profile" value={weak} onChange={setWeak}
           options={[{ value: 'published', label: 'Published' }, { value: 'weak', label: 'Weak at the base' }]} />
         <NumField label={`Strength boost (default ${PARAMS.boostFactor})`} value={boost} onChange={setBoost} placeholder={String(PARAMS.boostFactor)} />
         <NumField label={`Step (m, default ${PARAMS.stepMdM})`} value={step} onChange={setStep} placeholder={String(PARAMS.stepMdM)} />
+        <NumField label={`Top (m MD, default ${PARAMS.interval.topMdM})`} value={top} onChange={setTop} placeholder={String(PARAMS.interval.topMdM)} />
+        <NumField label={`Bottom (m MD, default ${PARAMS.interval.bottomMdM})`} value={bottom} onChange={setBottom} placeholder={String(PARAMS.interval.bottomMdM)} />
       </div>
       <TileGrid>
         <Tile label="Rows" value={r.rows.length} />
@@ -216,7 +223,7 @@ const Sanding = () => {
         <Tile label="Governing margin" value={fmt(r.governing.cdpPa / 1e6, 5)} unit="MPa" />
         <Tile label="Critical flowing pressure" value={fmt(r.governing.pwfCritPa / 1e6, 5)} unit="MPa" />
         <Tile label="Margin at the bottom" value={fmt(r.rows[r.rows.length - 1].cdpPa / 1e6, 5)} unit="MPa" />
-        <Tile label="Boost for zero margin" value={zero == null ? '-' : fmt(zero, 6)} />
+        <Tile label="Boost for zero margin" value={zero == null ? '-' : fmt(zero, 8)} />
         <Tile label="Screening grade" value="yes" />
       </TileGrid>
       <div className="h-64 mt-3">

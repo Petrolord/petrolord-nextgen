@@ -7,9 +7,9 @@
 // one, so a select, a chart or a table inside any other mode is unproved. On
 // PD4 twelve of fifteen modes would otherwise have shipped unproved.
 //
-// These three panels have nineteen modes between them, each with its own
+// These three panels have twenty-one modes between them, each with its own
 // tables, most with their own charts and several with a second select of their
-// own. This file mounts all nineteen, which is why the panels take an
+// own. This file mounts all twenty-one, which is why the panels take an
 // `initialMode` prop: the host renders them with no props and gets the default,
 // and this gate renders them one mode at a time.
 //
@@ -28,15 +28,15 @@ const PANELS = [
   ['pd-trunk-explorer', TrunkExplorer,
     ['table', 'wall', 'fittings', 'topology', 'solo']],
   ['pd-network-explorer', NetworkExplorer,
-    ['linear', 'tree', 'solve', 'loop', 'fight', 'streams', 'diagnosis']],
+    ['linear', 'tree', 'solve', 'loop', 'fight', 'streams', 'diagnosis', 'typed']],
   ['pd-fight-explorer', FightExplorer,
-    ['pinned', 'residual', 'guess', 'streammass', 'tolerance', 'failure', 'cusp']],
+    ['pinned', 'residual', 'guess', 'streammass', 'tolerance', 'failure', 'cusp', 'typed']],
 ];
 
 describe('every mode of every production network panel renders', () => {
-  it('there are three panels and nineteen modes to check', () => {
+  it('there are three panels and twenty-one modes to check', () => {
     expect(PANELS).toHaveLength(3);
-    expect(PANELS.flatMap(([, , modes]) => modes)).toHaveLength(19);
+    expect(PANELS.flatMap(([, , modes]) => modes)).toHaveLength(21);
     // and every mode name is distinct within its own panel, so a typo in the
     // list above cannot quietly cover one mode twice and another not at all
     PANELS.forEach(([id, , modes]) => {

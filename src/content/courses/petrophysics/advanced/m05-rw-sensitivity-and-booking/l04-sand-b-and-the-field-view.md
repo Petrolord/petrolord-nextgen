@@ -1,6 +1,6 @@
 # SAND_B and the field view
 
-SAND_A has carried this module so far because the capstone grades it. But a booking is a field decision, and the field has two sands. This lesson books SAND_B with the corrected Rw and reads the result the way an Expert reads it: not as a smaller version of SAND_A, but as a different kind of object with a different sensitivity to parameter quality.
+SAND_A has carried this module so far because the capstone grades its booking, on the capstone's own well. But a booking is a field decision, and the field has two sands. This lesson books SAND_B with the corrected Rw and reads the result the way an Expert reads it: not as a smaller version of SAND_A, but as a different kind of object with a different sensitivity to parameter quality.
 
 ## Booking SAND_B
 

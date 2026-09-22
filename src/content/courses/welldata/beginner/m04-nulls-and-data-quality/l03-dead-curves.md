@@ -4,7 +4,7 @@ The extreme case of missing data deserves its own name and its own lesson. A dea
 
 ## The teaching case
 
-nullheavy_20 carries the set's dead curve: NPHI. The QC panel reports it as 201 nulls out of 201 samples, with no first finite sample, no last finite sample, and no mean, because there is nothing to compute a mean over. That null count of 201 is one of the six numbers the capstone grades, and it is graded exactly: a reader that miscounts by even one has mishandled either the NULL declaration or the column alignment.
+nullheavy_20 carries the set's dead curve: NPHI. The QC panel reports it as 201 nulls out of 201 samples, with no first finite sample, no last finite sample, and no mean, because there is nothing to compute a mean over. A dead curve's null count is one of the six readings the capstone grades on its own case files, and it is graded exactly: a reader that miscounts by even one has mishandled either the NULL declaration or the column alignment.
 
 Note what makes this case sharp: nullheavy_20 is also the file that declares NULL as -9999 instead of the classic -999.25. A hard-coded reader would see the NPHI column as 201 perfectly valid readings of -9999 and happily average them. The dead curve and the nonstandard flag are the same trap wearing two faces.
 

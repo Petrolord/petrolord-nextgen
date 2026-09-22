@@ -44,7 +44,7 @@ That is not a bug in the mask. It is the mask doing its job, which is to say whe
 
 ## Worked example
 
-Take the numbers apart at the capstone settings and confirm that they only ever describe one of the three tests each.
+Take the numbers apart at the teaching settings and confirm that they only ever describe one of the three tests each.
 
 The frame holds 500 nodes. 201 of them are live, so 299 fail the first test and are blank on the map. Of the 201 live nodes, 169 carry oil at 1560 m, so 32 live nodes fail the second test: these are mapped ground whose top lies below the contact, and they are the blank cells inside the coloured area rather than outside it.
 

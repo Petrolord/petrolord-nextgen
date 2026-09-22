@@ -1,6 +1,6 @@
 # The kinetics panel map
 
-This tier has one panel and you will use it in almost every module. It runs the same engine code the capstone grades against, on the same fixtures, so every number it shows is a number you can be asked for. This lesson is a guided tour.
+This tier has one panel and you will use it in almost every module. It runs the same engine code the capstone grades against, opening on the golden fixtures, and every box it takes is a box a capstone brief can fill. This lesson is a guided tour.
 
 {{panel:bs-kinetics-explorer}}
 
@@ -18,7 +18,7 @@ Second, the three curves are ordered, and the slowest ramp sits highest at every
 
 Third, the vertical gaps between the curves widen as temperature rises. Heating rate matters more, not less, as a rock matures.
 
-The 150 degC marker line is drawn because two of your graded values live on it.
+The 150 degC marker line is drawn because two of your golden values live on it.
 
 ## The transformation chart
 
@@ -28,12 +28,12 @@ Move the temperature control up by 20 degC and watch the whole curve change char
 
 ## The tiles
 
-The tiles under the charts are the graded surface. The first pair is the closed-form anchors, Ro at zero reaction and at full reaction, which the panel computes from $e^{-1.6+3.7F}$ and not from a lookup. The ramp tiles read Ro at 150 degC for the selected rate. The clock tiles read TR at 10 and at 50 Ma for the selected temperature and type. Set the rate to 3, the temperature to 100 and the type to II and the six tiles in view are exactly the six fields of your capstone.
+The tiles under the charts are the reported surface. The first pair is the closed-form anchors, Ro at zero reaction and at full reaction, which the panel computes from $e^{-1.6+3.7F}$ and not from a lookup. The ramp tiles read Ro at 150 degC for the selected rate. The clock tiles read TR at 10 and at 50 Ma for the selected temperature and type. Set the rate to 3, the temperature to 100 and the type to II and the six tiles in view are the six golden values this tier reads.
 
-One quality-control habit to start now: whenever you change a control, predict the direction of every tile before you look. Slower rate, higher Ro. Hotter clock, higher TR. Type III instead of II, lower TR. The panel is not there to give you numbers, it is there to correct your predictions, and by the capstone you should not need it.
+One quality-control habit to start now: whenever you change a control, predict the direction of every tile before you look. Slower rate, higher Ro. Hotter clock, higher TR. Type III instead of II, lower TR. The panel is not there to give you numbers, it is there to correct your predictions, and by the end of the tier you should not need it.
 
 ## Exercise
 
-Set the panel to the capstone configuration and read off all six values. Then set the heating rate to 10 and answer: did the Ro tile at 150 degC rise or fall, and by roughly how much relative to the rate-3 value?
+Set the panel to the golden configuration and read off all six values. Then set the heating rate to 10 and answer: did the Ro tile at 150 degC rise or fall, and by roughly how much relative to the rate-3 value?
 
-As a self check: at the capstone configuration the tiles read 0.20189651799465538 and 4.687971627022019 for the anchors, 0.9871413464062039 for Ro at 150 on the 3 degC per Ma ramp, and 0.022481215976523083 and 0.05477927380797565 for TR at 10 and 50 Ma. Switching the rate to 10 drops the 150 degC reflectance to 0.8795791051334334, about 11 percent below the rate-3 value, because the faster ramp gives every temperature on the way less time to react.
+As a self check: at the golden configuration the tiles read 0.20189651799465538 and 4.687971627022019 for the anchors, 0.9871413464062039 for Ro at 150 on the 3 degC per Ma ramp, and 0.022481215976523083 and 0.05477927380797565 for TR at 10 and 50 Ma. Switching the rate to 10 drops the 150 degC reflectance to 0.8795791051334334, about 11 percent below the rate-3 value, because the faster ramp gives every temperature on the way less time to react.

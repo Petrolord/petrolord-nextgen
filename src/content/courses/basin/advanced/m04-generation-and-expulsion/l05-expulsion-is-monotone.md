@@ -18,7 +18,7 @@ That third one is subtler than the second, and the squeeze showed why. Ro's maxi
 
 This gives the interpretation habit for real basins with complicated histories: ask, for each monotone state, when its maximum was set. In the fixture: Ro's effective maximum-setting era is the hot decade, 18 to 11 Ma, module 3. Expulsion's was 11 Ma exactly, the last squeezed step. Temperature's "record" is just the present. Three dates, three instruments. A basin study that reports only present-day values has collapsed three diaries into one line and lost the plot, literally: the plot against time is the deliverable.
 
-The engine's output format respects this, carrying full series for every quantity, and the panel draws them; the capstone grades endpoints because endpoints are gradable, but every endpoint in it is the closing entry of a diary you can now read whole.
+The engine's output format respects this, carrying full series for every quantity, and the panel draws them; a capstone grades endpoints because endpoints are gradable, but every endpoint in it is the closing entry of a diary you can now read whole.
 
 ## What the valve ignores
 

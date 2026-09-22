@@ -1,6 +1,6 @@
 # Worked: pore pressure at 3000 m
 
-One graded number, assembled end to end with every digit accounted for. The capstone asks for the pore pressure at 3000 m below mudline; this lesson computes it the way you will in the exam, from the frame, the trend, the log and the exponent, and nothing else.
+One number, assembled end to end with every digit accounted for, on the teaching case. The capstone asks for the pore pressure at 3000 m below mudline on a setting of its own; this lesson computes it the way you will in the exam, from the frame, the trend, the log and the exponent, and nothing else.
 
 ## Step 1: the frame at 3000 m
 
@@ -16,7 +16,7 @@ Nothing new so far; this is the tier below doing its job. Notice the hydrostatic
 
 ## Step 2: the trend at 3000 m
 
-The well's own trend, the one the capstone specifies:
+The well's own trend, the one the tier uses:
 
 $$\Delta t_n(3000) = 220 + (656 - 220)\, e^{-0.0006 \times 3000} = 220 + 436 \times e^{-1.8}$$
 

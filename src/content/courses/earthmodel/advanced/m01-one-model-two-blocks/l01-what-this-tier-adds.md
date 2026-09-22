@@ -12,11 +12,11 @@ This tier's machinery is exactly that relabelling. A fault polygon in world coor
 
 From the Associate tier: the census 326 and 174, hand counted, and the block volumes 31.00125 and 13.99875 million m3 summing back to the 45 million anchor. From the Professional tier: four zone A control points with MD weights, one of which, W2's at x 1610.8719179395334, stands on the far side of the fault line from its own wellhead. This tier does not rediscover those; it derives the machinery that makes them inevitable and then builds on top.
 
-## What is graded
+## What the tier measures
 
-The Expert capstone reads six values off this model: the block 1 node count (174, exact), the plane-trend porosity at (1250, 2250), the kriged porosity at (1500, 2500), the kriged porosity jump across the fault on the y = 2200 row, zone A's weighted porosity in block 0, and zone A's bulk volume in block 1. Two are about labelling, three about population, one about volume: the tier in miniature.
+The tier reads six kinds of value off a faulted model: the block 1 node count, the plane-trend porosity at a probe point, the kriged porosity at a probe point, the kriged porosity jump across the fault on a model row, zone A's weighted porosity in block 0, and zone A's bulk volume in block 1. On the golden model they are 174 (exact), the trend at (1250, 2250), the krige at (1500, 2500), the jump on the y = 2200 row, and the block 0 porosity and block 1 volume the later modules derive. The Expert capstone asks for the same six on a fault and a variogram of its own. Two are about labelling, three about population, one about volume: the tier in miniature.
 
-Two of the six deserve a flag now. The fault jump on the y = 2200 row is graded with the tightest tolerance in the ladder, 0.00005, because the panel prints it to six decimals and a neighbouring variogram setting moves it by as little as a ten-thousandth: it checks that you read the kriged map at the stated assumptions and keep its sign. And the trend probe at (1250, 2250) is graded at 0.001 but is hand-reachable in three multiplications, for reasons module four will make embarrassing to forget.
+Two of the six deserve a flag now. The fault jump is read to six decimals, because a neighbouring variogram setting moves it by as little as a ten-thousandth: reading it means reading the kriged map at the stated assumptions and keeping its sign. And the trend probe is hand-reachable in three multiplications, for reasons module four will make embarrassing to forget.
 
 ## Worked example
 

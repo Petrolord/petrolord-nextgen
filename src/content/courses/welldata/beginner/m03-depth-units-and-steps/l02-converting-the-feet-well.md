@@ -18,7 +18,7 @@ Multiply each depth quantity by the exact factor 0.3048:
 2. Stop: 5200 x 0.3048 = 1584.96 m.
 3. Step: 2 x 0.3048 = 0.6096 m.
 
-So the well spans 1493.52 to 1584.96 m at a 0.6096 m step. The converted step is one of the six numbers the Associate capstone grades, with a tolerance of 0.001 m, and now you can produce it with nothing but the header and a calculator. As a closure check, the converted range should still hold 151 samples: (1584.96 - 1493.52) / 0.6096 + 1 = 91.44 / 0.6096 + 1 = 150 + 1 = 151. It does.
+So the well spans 1493.52 to 1584.96 m at a 0.6096 m step. A converted step is one of the six readings the Associate capstone grades, on a feet file of its own, with a tolerance of 0.001 m, and now you can produce one with nothing but the header and a calculator. As a closure check, the converted range should still hold 151 samples: (1584.96 - 1493.52) / 0.6096 + 1 = 91.44 / 0.6096 + 1 = 150 + 1 = 151. It does.
 
 Remember from the previous lesson that depth is not the only converted curve in this file. The sonic arrives as US/F and becomes US/M by dividing by 0.3048, which is why the import summary for feet_20 reports two curves converted, not one.
 

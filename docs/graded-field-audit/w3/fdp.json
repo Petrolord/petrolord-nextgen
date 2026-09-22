@@ -1,0 +1,83 @@
+{
+ "course": "fdp",
+ "suite": "Suite PR #564 (FDP Accelerator and Project Management Pro Full precision switch and PMP As of input, stacked on #554)",
+ "tiers": {
+  "intermediate": {
+   "append": "Read the figures in the FDP Accelerator with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+   "why": "The Wells table prints well cost in $MM at 1 decimal (a 37500 USD miss) and the facility cards $MM at 1 decimal.",
+   "keys": [
+    "ukot_uk01_well_cost_usd",
+    "ukot_campaign_cost_usd",
+    "ukot_platform_capex_mm",
+    "ukot_platform_decommissioning_mm"
+   ],
+   "annot_updates": {
+    "ukot_uk01_well_cost_usd": {
+     "printed": {
+      "decimals": 0
+     },
+     "display_ref": "src/components/fdp/modules/wells/WellInventory.jsx Est. Cost (USD), whole USD",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 0 decimals (jest: fdp/__tests__/w3FullPrecision.test.jsx, calculateDrillingCost through formatFull, checked against the key first).",
+     "display_scale": 1
+    },
+    "ukot_campaign_cost_usd": {
+     "printed": {
+      "decimals": 0
+     },
+     "display_ref": "src/components/fdp/modules/wells/WellInventory.jsx Campaign total row (shown only with Full precision on), whole USD",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 0 decimals (jest: fdp/__tests__/w3FullPrecision.test.jsx, calculateDrillingCost through formatFull, checked against the key first).",
+     "display_scale": 1
+    },
+    "ukot_platform_capex_mm": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx Total CAPEX card",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: fdp/__tests__/w3FullPrecision.test.jsx, calculateFacilityCost through formatFull, checked against the key first)."
+    },
+    "ukot_platform_decommissioning_mm": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/fdp/modules/facilities/FacilitiesCostEstimation.jsx Decommissioning card",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: fdp/__tests__/w3FullPrecision.test.jsx, calculateFacilityCost through formatFull, checked against the key first)."
+    }
+   }
+  },
+  "advanced": {
+   "append": "Read the figures in the Project Management Pro studio and the FDP Accelerator with their Full precision switch on (at the top of each page): they print them to the precision this capstone grades, with no digit grouping. In Project Management Pro, type the as-of date above into the As of box in the header first.",
+   "why": "Project Management Pro pinned the as-of to today, so neither planned value nor SPI at 2030-03-31 could be read; SPI printed at 2 decimals.",
+   "keys": [
+    "meren_planned_value_usd",
+    "meren_spi"
+   ],
+   "annot_updates": {
+    "meren_planned_value_usd": {
+     "printed": {
+      "decimals": 2
+     },
+     "display_ref": "src/components/projectmanagement/SnapshotCard.jsx PV (shown only with Full precision on), at the new As of input",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 2 decimals (jest: fdp/__tests__/w3FullPrecision.test.jsx, calculateEVM at 2030-03-31 through formatFull, checked against the key first).",
+     "display_scale": 1,
+     "source": "suite-app",
+     "source_ref": "src/components/projectmanagement/SnapshotCard.jsx PV (shown only with Full precision on), at the new As of input"
+    },
+    "meren_spi": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/projectmanagement/SnapshotCard.jsx SPI, at the new As of input",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: fdp/__tests__/w3FullPrecision.test.jsx, calculateEVM at 2030-03-31 through formatFull, checked against the key first).",
+     "source": "suite-app",
+     "source_ref": "src/components/projectmanagement/SnapshotCard.jsx SPI, at the new As of input"
+    }
+   }
+  }
+ }
+}

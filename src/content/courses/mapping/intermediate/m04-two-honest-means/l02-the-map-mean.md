@@ -1,16 +1,15 @@
 # The map mean
 
-The other average in the capstone is taken over the map. This lesson is about what it actually averages, which is not what most people assume.
+The other average this tier reports is taken over the map. This lesson is about what it actually averages, which is not what most people assume.
 
 {{panel:mp-isochore-explorer}}
 
 ## The number
 
-The isochore has 201 live nodes at the capstone settings. Add their thickness values and divide by 201:
+The isochore has 201 live nodes at the teaching settings. Add their thickness values and divide by 201:
 
 $$\bar{t}_{map} = 32.25429068038713\ \mathrm{m}$$
 
-The capstone grades it to 0.1 m.
 
 ## What is being averaged
 
@@ -46,7 +45,7 @@ Two things move a map mean and neither of them is geology.
 
 **The area itself.** If the mapped area is not the area you intend to book, the mean is over the wrong region. On Ekene the 201 live nodes cover 2.01 km², which is the hull of six wells clipped at 800 m and has no relationship to a licence boundary, a fault block or a hydrocarbon contact.
 
-Both are reasons to quote the mean with its live node count and its mask setting, and the capstone grades that node count exactly for the same reason.
+Both are reasons to quote the mean with its live node count and its mask setting, and a node count is quoted exactly for the same reason.
 
 ## Worked example
 

@@ -42,7 +42,7 @@ Then break the check deliberately in your head: if the field total had risen as 
 
 ## Worked example
 
-Run the full check set on the capstone configuration and record each result.
+Run the full check set on the teaching configuration and record each result.
 
 Completeness: 117 plus 52 is 169, and the field reports 169. Pass.
 

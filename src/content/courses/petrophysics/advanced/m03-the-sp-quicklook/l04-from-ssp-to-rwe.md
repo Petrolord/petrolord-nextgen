@@ -14,13 +14,13 @@ The signs take care of themselves. A negative SSP makes the exponent negative, t
 
 ## Worked example
 
-Run the typewell numbers, which are the capstone's second graded value. Givens: $SSP = -93$ mV, $R_{mfe} = 0.62$ ohm.m at formation temperature, $K = 84.94$ at 180 degF.
+Run the typewell numbers, the worked example for the capstone's second graded value. Givens: $SSP = -93$ mV, $R_{mfe} = 0.62$ ohm.m at formation temperature, $K = 84.94$ at 180 degF.
 
 1. Exponent: $SSP/K = -93 / 84.94 = -1.094891$.
 2. Power of ten: $10^{-1.094891} = 0.080373$.
 3. Scale by the filtrate: $R_{we} = 0.62 \times 0.080373 = 0.049831$ ohm.m.
 
-So the SP quicklook delivers $R_{we} = 0.0498$ ohm.m. The capstone grades this number with a tolerance of 0.0005 ohm.m, so carry at least four decimals through the arithmetic and round only at the end.
+So the SP quicklook delivers $R_{we} = 0.0498$ ohm.m on the typewell. The capstone grades the same chain on its own well's SP reading with a tolerance of 0.00005 ohm.m, so carry at least four decimals through the arithmetic and round only at the end.
 
 Sanity-check it against lesson 3's decade logic: $-93$ mV is $93/84.94 = 1.095$ decades, a little more than one, so the answer had to sit a little below $0.62/10 = 0.062$. It does.
 

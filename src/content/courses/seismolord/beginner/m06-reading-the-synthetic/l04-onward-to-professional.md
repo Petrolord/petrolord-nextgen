@@ -6,7 +6,7 @@ You can now build a synthetic seismogram from a sonic and a density curve, place
 
 The beginner tier stops at the moment the synthetic exists. The Professional tier starts by putting it next to a real trace and asking the question every interpreter eventually has to answer: do these two line up, and how do you know?
 
-The tier works on a controlled version of that problem. The observed seismic it hands you is the 25 Hz synthetic you already built, planted 8 ms late. The lag is known to the engine and hidden from you, which is what makes the exercise honest: there is a right answer to recover.
+The tier works on a controlled version of that problem. The observed seismic it hands you is the 25 Hz synthetic you already built, planted 6 ms late. The lag is known to the engine and hidden from you, which is what makes the exercise honest: there is a right answer to recover.
 
 The method is a cross-correlation scan. Rather than sliding the synthetic by eye until the peaks look aligned, the app shifts it across a range of lags, measures how well the two traces agree at each lag, and reports the best shift together with the strength of that agreement. Applied to the planted case, the scan returns the 8 ms it was given.
 
@@ -42,4 +42,4 @@ Above it sit mapping and volumetrics. A tied well turns a seismic horizon into a
 
 ## Exercise
 
-State in one sentence each what the Professional tier adds and what the Expert tier adds, then explain why the Professional tier plants a known 8 ms lag rather than an unknown one. As a self-check: Professional aligns the synthetic to observed seismic by cross-correlation and examines how frequency moves the peak; Expert models a wedge to find the tuning thickness and checks it against the classical theoretical value; the lag is planted so the scan's answer can be verified against a known truth rather than accepted on trust. Finally, name one thing the Well Data Manager course contributed to the synthetic you built.
+State in one sentence each what the Professional tier adds and what the Expert tier adds, then explain why the Professional tier's lessons plant a known 6 ms lag rather than an unknown one. As a self-check: Professional aligns the synthetic to observed seismic by cross-correlation and examines how frequency moves the peak; Expert models a wedge to find the tuning thickness and checks it against the classical theoretical value; the lag is planted so the scan's answer can be verified against a known truth rather than accepted on trust. Finally, name one thing the Well Data Manager course contributed to the synthetic you built.

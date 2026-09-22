@@ -10,17 +10,17 @@ The engine implements this with a single screening knob. A displacement spec may
 
 $$\mu_{w,\text{eff}} = \mu_w \times \text{polymerMuMult}$$
 
-At the design multiplier of 4 the Ekene water becomes $0.5 \times 4 = 2$ cp of effective viscosity, and the engine reports exactly that through `analyzeDisplacement` as `muWeff` 2. Nothing else in the spec changes: the Corey set keeps Swc 0.35, Sor 0.25, krwMax 0.3, kroMax 0.9, nw 2.5, no 2.0, and the oil stays at 1.8 cp.
+The capstone's design multiplier is 4, and its efficiency is a graded field, so this module works a multiplier of 2. The Ekene water becomes $0.5 \times 2 = 1$ cp of effective viscosity, and the engine reports exactly that through `analyzeDisplacement` as `muWeff` 1. Nothing else in the spec changes: the Corey set keeps Swc 0.35, Sor 0.25, krwMax 0.3, kroMax 0.9, nw 2.5, no 2.0, and the oil stays at 1.8 cp.
 
 Now push the substitution through the endpoint mobility ratio:
 
-$$M = \frac{k_{rw,max}/\mu_{w,\text{eff}}}{k_{ro,max}/\mu_o} = \frac{0.3/2}{0.9/1.8} = \frac{0.15}{0.5} = 0.3$$
+$$M = \frac{k_{rw,max}/\mu_{w,\text{eff}}}{k_{ro,max}/\mu_o} = \frac{0.3/1}{0.9/1.8} = \frac{0.3}{0.5} = 0.6$$
 
-The ratio falls from 1.2 to 0.3, a factor of exactly the multiplier, because $\mu_{w,\text{eff}}$ sits alone in the water mobility's denominator. A flood that was mildly unfavorable-to-neutral is now strongly favorable: at the endpoints, oil is more than three times as mobile as the thickened water chasing it. The chase car has been slowed below the car it is chasing.
+The ratio falls from 1.2 to 0.6, a factor of exactly the multiplier, because $\mu_{w,\text{eff}}$ sits alone in the water mobility's denominator. A flood that was mildly unfavorable-to-neutral is now favorable: at the endpoints, oil is more mobile than the thickened water chasing it, and at the design multiplier of 4 the ratio falls a further factor of two. The chase car has been slowed below the car it is chasing.
 
 ## What the fw curve does with a slower water
 
-Recall the shape logic from the fractional flow equation. Water's share of the flow at any saturation is set by the ratio $(k_{ro}\,\mu_w)/(k_{rw}\,\mu_o)$, and multiplying $\mu_w$ by 4 multiplies the whole ratio by 4 at every saturation simultaneously. Water finds it uniformly harder to claim its share, so the entire fw curve slides down and to the right: at any given saturation less water flows, and any given fractional flow is reached only at a higher saturation.
+Recall the shape logic from the fractional flow equation. Water's share of the flow at any saturation is set by the ratio $(k_{ro}\,\mu_w)/(k_{rw}\,\mu_o)$, and multiplying $\mu_w$ by a factor multiplies the whole ratio by that factor at every saturation simultaneously. Water finds it uniformly harder to claim its share, so the entire fw curve slides down and to the right: at any given saturation less water flows, and any given fractional flow is reached only at a higher saturation.
 
 A curve pushed to the right meets its Welge tangent later. That is the geometric seed of everything the next lesson quantifies, and it is worth predicting before you measure: a lower M must raise the front saturation, raise the fractional flow at the front, and delay breakthrough in pore volume terms.
 
@@ -28,7 +28,7 @@ A curve pushed to the right meets its Welge tangent later. That is the geometric
 
 {{panel:sc-design-explorer}}
 
-Switch the panel to its polymer mode and leave the multiplier at its default of 4. Read the tiles first: `muWeff` shows 2 and M shows 0.3, the two numbers this lesson derived by hand. Then look at the two fw curves drawn together, the base case and the polymer case. Slide the multiplier from 1 up to 6 and watch the polymer curve peel away from the base curve, always downward and rightward, while M in the tile falls in exact inverse proportion to the slider. At a multiplier of 1 the two curves are the same curve, which is the cleanest possible check that the knob does nothing but scale $\mu_w$.
+Switch the panel to its polymer mode and leave the multiplier at its default of 2. Read the tiles first: `muWeff` shows 1 and M shows 0.6, the two numbers this lesson derived by hand. Then look at the two fw curves drawn together, the base case and the polymer case. Slide the multiplier from 1 up to 6 and watch the polymer curve peel away from the base curve, always downward and rightward, while M in the tile falls in exact inverse proportion to the slider. At a multiplier of 1 the two curves are the same curve, which is the cleanest possible check that the knob does nothing but scale $\mu_w$.
 
 ## The misconception to avoid
 

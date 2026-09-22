@@ -1,0 +1,306 @@
+{
+ "course": "hydraulics",
+ "tiers": {
+  "beginner": {
+   "why": "The pipe, annulus and pump pressures need the capstone mud, which no explorer took, and printed in MPa to 4 dp (100 Pa) against tol 50 Pa; the Herschel-Bulkley yield rule was not taught. W4a adds Your mud boxes (four readings and a density, blank is the case's own mud) to all three explorers, prints pressures in MPa to 6 dp, and teaches the yield rule in beginner m02 l04. The brief now names the boxes. Prompt only.",
+   "prompt_edits": [
+    [
+     "Use the Herschel-Bulkley fit for the pressure calculation, which is what the engine does.",
+     "Use the Herschel-Bulkley fit for the pressure calculation, which is what the engine does. Type this mud into the rheology explorer's Your mud boxes: its model view fits it and its pressure chain view prints the four pressures in MPa to six decimals."
+    ]
+   ],
+   "annot_updates": {
+    "hb_tau_y_Pa": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Your mud boxes, Three models view; rule taught in src/content/courses/hydraulics/beginner/m02-mud-rheology/l04-herschel-bulkley.md",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Tile 'Herschel-Bulkley tau_y' fmt(v, 6)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the model view, prints this value at 6 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    },
+    "pipe_dp_Pa": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Your mud boxes, The pressure chain view, case slant_kcl_polymer, flow 0.030",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1e-06,
+     "display_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Tile 'Inside the pipe' MPa(v) = fmt(v/1e6, 6)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the pressure chain view on the slant case at 0.030 m3/s, prints this value at 6 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    },
+    "annulus_dp_Pa": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Your mud boxes, The pressure chain view, case slant_kcl_polymer, flow 0.030",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1e-06,
+     "display_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Tile 'Up the annulus' MPa(v) = fmt(v/1e6, 6)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the pressure chain view on the slant case at 0.030 m3/s, prints this value at 6 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    },
+    "pump_pressure_Pa": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Your mud boxes, The pressure chain view, case slant_kcl_polymer, flow 0.030",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1e-06,
+     "display_ref": "src/components/course/panels/hydraulics/RheologyExplorer.jsx Tile 'Pump pressure' MPa(v) = fmt(v/1e6, 6)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the pressure chain view on the slant case at 0.030 m3/s, prints this value at 6 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    }
+   }
+  },
+  "intermediate": {
+   "why": "ECD, transport, cuttings and the minimum flow for a 0.80 transport ratio all need the capstone mud. W4a adds the Your mud boxes to the cleaning explorer (the tiles already print at the graded precision). The brief now names the boxes. Prompt only.",
+   "prompt_edits": [
+    [
+     "(6) the flow rate, in m3/s, that reaches a transport ratio of exactly 0.80 on the horizontal well, which is a solve rather than a run and therefore does not use 0.030.",
+     "(6) the flow rate, in m3/s, that reaches a transport ratio of exactly 0.80 on the horizontal well, which is a solve rather than a run and therefore does not use 0.030. Type this mud into the cleaning explorer's Your mud boxes and every view runs it."
+    ]
+   ],
+   "annot_updates": {
+    "slant_ecd_at_td_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Your mud boxes, ECD against depth view, case slant_kcl_polymer, flow 0.030",
+     "printed": {
+      "decimals": 5
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Tile 'ECD at total depth' fmt(v, 5)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the ECD view on the slant case at 0.030 m3/s, prints this value at 5 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    },
+    "horizontal_ecd_at_td_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Your mud boxes, ECD against depth view, case horizontal_kcl_polymer, flow 0.030",
+     "printed": {
+      "decimals": 5
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Tile 'ECD at total depth' fmt(v, 5)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the ECD view on the horizontal case at 0.030 m3/s, prints this value at 5 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    },
+    "horizontal_min_transport_ratio": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Your mud boxes, Transport along the annulus view, case horizontal_kcl_polymer, flow 0.030",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Tile 'Worst transport ratio' fmt(v, 8)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the transport view on the horizontal case at 0.030 m3/s, prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    },
+    "horizontal_worst_cuttings_conc_pct": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Your mud boxes, Transport along the annulus view, case horizontal_kcl_polymer, flow 0.030",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Tile 'Worst cuttings concentration' fmt(v, 6)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the transport view on the horizontal case at 0.030 m3/s, prints this value at 6 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    },
+    "horizontal_min_flow_tr080_m3s": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Your mud boxes, The flow rate you need view, case horizontal_kcl_polymer, target 0.80",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/hydraulics/CleaningExplorer.jsx Tile 'Flow rate required' fmt(v, 8)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the flow rate view on the horizontal case with a target of 0.80, prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    }
+   }
+  },
+  "advanced": {
+   "why": "Surge, swab, the closed over open ratio and the speed limit need the capstone mud, and no view printed the open-string swab. W4a adds the Your mud boxes to the surge explorer and an open swab EMW tile. The brief now names the boxes. Prompt only.",
+   "prompt_edits": [
+    [
+     "which is a solve and therefore does not use 0.75.",
+     "which is a solve and therefore does not use 0.75. Type this mud into the surge explorer's Your mud boxes: fields 1 to 5 are its Closed string and open view, and field 6 its window view."
+    ]
+   ],
+   "annot_updates": {
+    "slant_surge_dp_closed_Pa": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Your mud boxes, Closed string and open view, case slant_kcl_polymer, trip speed 0.75",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1e-06,
+     "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Tile 'Closed string pressure' fmt(v/1e6, 6)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the closed and open view on the slant case at 0.75 m/s, prints this value at 6 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    },
+    "slant_surge_emw_closed_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Your mud boxes, Closed string and open view, case slant_kcl_polymer, trip speed 0.75",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Tile 'Closed surge EMW' fmt(v, 4)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the closed and open view on the slant case at 0.75 m/s, prints this value at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    },
+    "slant_swab_emw_open_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Your mud boxes, Closed string and open view, case slant_kcl_polymer, trip speed 0.75",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Tile 'Open swab EMW' fmt(v, 4)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the closed and open view on the slant case at 0.75 m/s, prints this value at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    },
+    "closed_over_open_dp_ratio": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Your mud boxes, Closed string and open view, case slant_kcl_polymer, trip speed 0.75",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Tile 'Closed over open' fmt(v, 8)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the closed and open view on the slant case at 0.75 m/s, prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    },
+    "horizontal_surge_emw_closed_kgm3": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Your mud boxes, Closed string and open view, case horizontal_kcl_polymer, trip speed 0.75",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Tile 'Closed surge EMW' fmt(v, 4)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the closed and open view on the horizontal case at 0.75 m/s, prints this value at 4 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    },
+    "slant_max_trip_speed_ms": {
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "notes": "W4a typed-case mode (Your mud boxes). Key, expected and tolerance unchanged.",
+     "source_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Your mud boxes, The window and the speed limit view, case slant_kcl_polymer, fracture 1400, pore 1260",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/hydraulics/SurgeExplorer.jsx Tile 'Speed limit, closed string' fmt(v, 6)",
+     "evidence": "Typing 52, 33, 6, 5 and 1320 into the Your mud boxes, the window view on the slant case with 1400 and 1260, prints this value at 6 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The explorers open with the boxes blank (each case's own mud); the guard pins two pre-existing coincidences of the light mud, reported to the lead."
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/hydraulics/hydraulicsLab.js",
+  "src/components/course/panels/hydraulics/MudBoxes.jsx",
+  "src/components/course/panels/hydraulics/RheologyExplorer.jsx",
+  "src/components/course/panels/hydraulics/CleaningExplorer.jsx",
+  "src/components/course/panels/hydraulics/SurgeExplorer.jsx",
+  "src/components/course/panels/hydraulics/panelCapstoneGuard.test.js",
+  "src/content/courses/hydraulics/beginner/m02-mud-rheology/l04-herschel-bulkley.md",
+  "src/content/courses/hydraulics/beginner/m06-the-associate-reading/l02-working-the-capstone.md",
+  "src/content/courses/hydraulics/intermediate/m06-the-professional-reading/l02-working-the-capstone.md",
+  "src/content/courses/hydraulics/advanced/m06-the-expert-reading/l02-working-the-capstone.md"
+ ],
+ "notes": "Finding (pre-existing, not a W4a change): the rheology explorer's residual table prints the light mud's measured 3 rpm stress, 4 x 0.51040356094 = 2.04161424376 Pa, which is numerically the graded beginner hb_tau_y_Pa, in a default state (the capstone mud's 2 x theta3 - theta6 is also 4 degrees). Pinned as a known exception in the guard; fixing it needs a re-key (W5 or owner)."
+}

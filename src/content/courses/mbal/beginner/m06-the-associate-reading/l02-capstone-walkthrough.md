@@ -1,8 +1,8 @@
 # The capstone walkthrough
 
-> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+The Associate capstone asks you to close a tank of its own, the ISAN tank, whose initial state and six surveys are stated in full in the capstone brief. You type them into the tank explorer (Dataset: Your tank), run material balance, and report six numbers, each graded server-side within a stated tolerance. No lesson prints them and no panel opens on them.
 
-The Associate capstone asks you to close the Ekene tank. You run material balance on the six survey history and report six numbers, each graded server-side within a stated tolerance.
+This lesson walks the same six numbers on the Ekene tank you have used all course, as a worked example. Your capstone numbers come from the ISAN table, so they will be different.
 
 | Field | Unit | Tolerance | Where it is derived |
 |---|---|---|---|
@@ -15,7 +15,7 @@ The Associate capstone asks you to close the Ekene tank. You run material balanc
 
 This lesson does not hand you six answers to copy. It walks two of them all the way through the panel and by hand, and points you at the lesson that owns each of the rest. If you worked modules 1 through 5 there is nothing new here. The capstone is the course, asked back.
 
-Read the tolerances as a promise: any honest route to each number lands well inside them. The tolerance on the oil in place is 20000 stb on an answer near twelve million, so nobody is grading your decimal places. They are grading whether you used the right method.
+Read the tolerances as a promise: any honest route to each number lands well inside them. The tolerance on the oil in place is 20000 stb on an answer of millions, so nobody is grading your decimal places. They are grading whether you used the right method.
 
 ## Set the panel up correctly
 
@@ -23,13 +23,13 @@ Open the tank explorer.
 
 {{panel:mb-tank-explorer}}
 
-There is exactly one control, the aquifer model given to the engine, and it must be left on "None (the truth)". That is the Ekene tank as it actually is: a closed, undersaturated, depletion drive tank with no water support, which is why the water drive index tile reads zero and the aquifer strength tile reads none.
+The dataset selector opens on the Ekene survey history, the worked example; choose "Your tank (typed)" and type the ISAN table for the capstone. The aquifer model given to the engine must be left on "None (the truth)". That is the Ekene tank as it actually is, and the ISAN tank is closed too: a closed, undersaturated, depletion drive tank with no water support, which is why the water drive index tile reads zero and the aquifer strength tile reads none.
 
 The other option puts an aquifer term into a tank that does not have one, and it exists so the Professional tier can show what an unnecessary model does to an answer. Select it if you are curious, watch the oil in place tile move, then put it back. Every graded number here comes from the "None" setting, and numbers read with the selector on will fail several fields at once while the fit statistic stays high enough to reassure you.
 
-## Walkthrough one: underground withdrawal, from the panel and by hand
+## Worked example one: Ekene underground withdrawal, from the panel and by hand
 
-Underground withdrawal is the volume that left the tank, measured at reservoir conditions. The capstone wants it at the last survey, the row dated 2023-01-01.
+Underground withdrawal is the volume that left the tank, measured at reservoir conditions. The capstone wants it at the last survey; on Ekene that is the row dated 2023-01-01.
 
 Find that row in the panel's survey table and read the column headed "F rb". It reads 317926.842484584 rb, displayed to one decimal, which against a tolerance of 50 rb is more precision than you need.
 
@@ -43,7 +43,7 @@ $$F = 261475.039999678 \times 1.21589748101760 = 317926.842484584 \text{ rb}$$
 
 Do that multiplication on a calculator now. Two things to notice. Stock tank barrels went in and reservoir barrels came out, which is the unit conversion the whole tank model turns on. And the answer exceeds the naive product of 261475.039999678 and the initial 1.2, which is 313770.047999614 rb, by 4156.79448497016 rb, because the oil swelled as pressure fell towards the bubble point. That difference is not rounding. It is the physics the capstone is testing.
 
-## Walkthrough two: the rock and water share, from the tile and by hand
+## Worked example two: the Ekene rock and water share, from the tile and by hand
 
 The fourth field asks what fraction of the total expansion at the last survey came from rock compaction and connate water expansion rather than from the oil. The panel has a tile for it, labelled "Efw share of Et at the last survey", and it reads 39.2996108949418 percent.
 
@@ -51,7 +51,7 @@ By hand, take the last row of the survey table, divide the cell in the "Efw rb" 
 
 Take the result seriously, because it is the most surprising number in this tier. Nearly two fifths of everything that pushed oil out of the Ekene tank came from rock compaction and connate water expansion, not from the oil. Students routinely expect this term to be negligible and drop it. The next lesson shows what dropping it does.
 
-## Where the other four come from
+## Where the other four come from, on the Ekene example
 
 **Total expansion at the last survey.** Module 2 lesson 5, and the "Et rb" column. Check it rather than copy it: add the "Eo rb/stb" cell to the "Efw rb" cell of that row and confirm you get the "Et rb" cell exactly.
 
@@ -59,11 +59,11 @@ Take the result seriously, because it is the most surprising number in this tier
 
 **Depletion drive index.** Module 4 lesson 2, and its own tile. The hand route is the oil expansion divided by the total expansion in the last row, because the withdrawal cancels: the index is $N E_o / F$ and $F$ is $N E_t$. That gives you a free check: on a tank with no water influx and no gas cap, the depletion drive index and the rock and water share must add to exactly 1.
 
-**Oil expansion at the last survey.** Module 2 lesson 2, and the "Eo rb/stb" column of the last row. Check it by hand: it is the oil formation volume factor at the last survey less the initial 1.2 rb/stb, and it must equal the "Et rb" cell less the "Efw rb" cell of the same row. The R-squared tile beside the slope is not graded. It says how tightly six points sit on a line and nothing more, and the next lesson explains why a superb value is not evidence that your model is correct.
+**Oil expansion at the last survey.** Module 2 lesson 2, and the "Eo rb/stb" column of the last row. Check it by hand: it is the oil formation volume factor at the last survey less the initial one (1.2 rb/stb on Ekene), and it must equal the "Et rb" cell less the "Efw rb" cell of the same row. The R-squared tile beside the slope is not graded. It says how tightly six points sit on a line and nothing more, and the next lesson explains why a superb value is not evidence that your model is correct.
 
 ## Submitting
 
-The capstone form sits on the Learning Mode page under the course. Enter the six numbers at whatever precision you carried and submit. Grading is server-side against the engine truth within the tolerances in the table, and you will see which fields passed.
+The capstone form sits on the Learning Mode page under the course. Type the ISAN table into the tank explorer, check every row against the brief, then enter the six numbers at whatever precision you carried and submit. Grading is server-side against the engine truth within the tolerances in the table, and you will see which fields passed.
 
 If a field fails, do not add decimal places. Every tolerance here is far wider than any rounding you could plausibly commit, so a miss means a method error, and the fix is the lesson named in the table.
 
@@ -71,4 +71,4 @@ If a field fails, do not add decimal places. Every tolerance here is far wider t
 
 Before you submit, predict the effect of each of these four mistakes on each of the six fields: reporting cumulative oil where the withdrawal was wanted; leaving the aquifer selector on the pot setting; grouping the compressibilities as $S_{wi}(c_w + c_f)$; and reading the slope from a plot with the axes swapped.
 
-For each, write down which fields would fail and in which direction, then check two of your predictions in the panel. The next lesson works all four out in full.
+For each, write down which fields would fail and in which direction, then check two of your predictions in the panel on the Ekene example. The next lesson works all four out in full.

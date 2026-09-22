@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import {
-  TD_M, RAMP_TOP_M, CAPSTONE_EATON_N,
+  TD_M, RAMP_TOP_M, TEACHING_EATON_N, PARAMS, BOWERS_TEACHING,
   computeWindowExplorer, computeBowersFacts,
 } from '@/lib/porepressureTeaching';
-import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Window explorer: the prognosis converted to the driller's unit. The two
 // walls of the mud-weight window are drawn in equivalent mud weight against
@@ -17,11 +17,57 @@ const PAD = { left: 54, top: 22, right: 16, bottom: 34 };
 
 const fmt = (v, d = 2) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 
-const BOWERS = computeBowersFacts();
-
 const WindowExplorer = () => {
-  const [n, setN] = useState(String(CAPSTONE_EATON_N));
-  const m = useMemo(() => computeWindowExplorer(Number(n)), [n]);
+  const [n, setN] = useState(String(TEACHING_EATON_N));
+  // The well setting and the Bowers inputs open on the teaching case; a
+  // capstone brief states its own and the learner types them in.
+  const [wd, setWd] = useState(String(PARAMS.waterDepthM));
+  const [rf, setRf] = useState(String(PARAMS.rhoFluidKgM3));
+  const [nu, setNu] = useState(String(PARAMS.nu));
+  const [bA, setBA] = useState(String(BOWERS_TEACHING.A));
+  const [bB, setBB] = useState(String(BOWERS_TEACHING.B));
+  const [bS, setBS] = useState(String(BOWERS_TEACHING.stressMPa));
+  const [bV, setBV] = useState(String(BOWERS_TEACHING.vUnloadMs));
+  const [bMax, setBMax] = useState(String(BOWERS_TEACHING.sigmaMaxMPa));
+  const [bU, setBU] = useState(String(BOWERS_TEACHING.U));
+
+  const m = useMemo(() => {
+    const c = { waterDepthM: Number(wd), rhoFluidKgM3: Number(rf), nu: Number(nu) };
+    const ok = Number(n) > 0 && Number(n) <= 10 && c.waterDepthM >= 0 && c.waterDepthM <= 3000
+      && c.rhoFluidKgM3 >= 900 && c.rhoFluidKgM3 <= 1300 && c.nu > 0 && c.nu < 0.5;
+    if (!ok) return null;
+    try { return computeWindowExplorer(Number(n), c); } catch { return null; }
+  }, [n, wd, rf, nu]);
+  const BOWERS = useMemo(() => {
+    const b = { A: Number(bA), B: Number(bB), stressMPa: Number(bS), vUnloadMs: Number(bV), sigmaMaxMPa: Number(bMax), U: Number(bU) };
+    if (!(b.A > 0 && b.B > 0 && b.stressMPa > 0 && b.vUnloadMs > 1600 && b.sigmaMaxMPa > 0 && b.U >= 1)) return null;
+    try { return computeBowersFacts(b); } catch { return null; }
+  }, [bA, bB, bS, bV, bMax, bU]);
+
+  const inputs = (
+    <div className="grid gap-3 grid-cols-2 sm:grid-cols-5 items-end">
+      <NumField label="Eaton exponent n" value={n} onChange={setN} />
+      <NumField label="Water depth (m)" value={wd} onChange={setWd} />
+      <NumField label="Pore fluid density (kg/m3)" value={rf} onChange={setRf} />
+      <NumField label="Poisson's ratio" value={nu} onChange={setNu} />
+      <div />
+      <NumField label="Bowers A" value={bA} onChange={setBA} />
+      <NumField label="Bowers B" value={bB} onChange={setBB} />
+      <NumField label="Loading stress (MPa)" value={bS} onChange={setBS} />
+      <NumField label="Unloading velocity (m/s)" value={bV} onChange={setBV} />
+      <NumField label="sigma max (MPa)" value={bMax} onChange={setBMax} />
+      <NumField label="Unloading U" value={bU} onChange={setBU} />
+    </div>
+  );
+
+  if (!m || !BOWERS) {
+    return (
+      <PanelShell title="Window explorer" subtitle="Enter an exponent, a well setting and the Bowers inputs.">
+        {inputs}
+        <Note>The exponent must lie between 0 and 10, the water depth 0 to 3000 m, the pore fluid 900 to 1300 kg/m3, Poisson&apos;s ratio between 0 and 0.5; the Bowers inputs must be positive, the unloading velocity above the mudline velocity and U at least 1.</Note>
+      </PanelShell>
+    );
+  }
 
   const plotW = W - PAD.left - PAD.right;
   const plotH = H - PAD.top - PAD.bottom;
@@ -37,9 +83,12 @@ const WindowExplorer = () => {
   return (
     <PanelShell title="Window explorer"
       subtitle="The mud-weight window down the golden well, referenced to sea level. The shaded band is where a mud weight may sit; the exponent moves its floor.">
-      <div className="grid gap-3 grid-cols-2 items-end">
-        <SelectField label="Eaton exponent n" value={n} onChange={setN}
-          options={[['3', '3 (capstone)'], ['1.2', '1.2 (the low calibration)']]} />
+      {inputs}
+      <div className="text-xs text-gray-500">
+        The panel opens on the teaching case: n = {TEACHING_EATON_N} (try 1.2, the low calibration) on the
+        golden well&apos;s header, and the golden Bowers fixture (A {BOWERS_TEACHING.A}, B {BOWERS_TEACHING.B},
+        sigma max {BOWERS_TEACHING.sigmaMaxMPa} MPa, U {BOWERS_TEACHING.U}). A capstone brief states a setting of
+        its own; type it in.
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full mt-3" role="img"
@@ -73,8 +122,8 @@ const WindowExplorer = () => {
         <Tile label="Hydrostatic EMW at TD" value={fmt(m.hydroEmwTd)} unit="kg/m3" />
         <Tile label="Overburden EMW at TD" value={fmt(m.obEmwTd)} unit="kg/m3" />
         <Tile label="PP at TD" value={fmt(m.ppTdMpa, 3)} unit="MPa" />
-        <Tile label="Bowers loading v at 5 MPa" value={fmt(BOWERS.vLoad5MPa)} unit="m/s" />
-        <Tile label="Bowers unloading stress at 3125.8 m/s" value={fmt(BOWERS.sigmaUnloadPa / 1e6, 3)} unit="MPa" />
+        <Tile label={`Bowers loading v at ${BOWERS.bowers.stressMPa} MPa`} value={fmt(BOWERS.vLoad5MPa)} unit="m/s" />
+        <Tile label={`Bowers unloading stress at ${BOWERS.bowers.vUnloadMs.toFixed(1)} m/s`} value={fmt(BOWERS.sigmaUnloadPa / 1e6, 3)} unit="MPa" />
         <Tile label="Loading read of that same velocity" value={fmt(BOWERS.sigmaLoadSameVPa / 1e6, 3)} unit="MPa" />
         <Tile label="Eaton vs Bowers PP at TD" value={fmt(Math.abs(BOWERS.agreementPa) / 1e6, 3)} unit="MPa apart" />
       </TileGrid>

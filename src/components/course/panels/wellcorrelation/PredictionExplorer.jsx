@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from 'react';
-import { TEACHING_WELLS, computeAdvanced } from '@/lib/correlationTeaching';
+import { computeAdvanced } from '@/lib/correlationTeaching';
+import { useSectionWells } from '@/components/course/panels/wellcorrelation/caseInputs';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Prediction explorer: predict Ekene-4's missing TOP_B from a marker the
@@ -13,17 +14,26 @@ const MARKERS = [
 const W = 560;
 const H = 260;
 
-const fmt = (v, d = 0) => (Number.isFinite(v) ? v.toFixed(d) : '-');
+const fmt = (v, d = 2) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 const pickOf = (w, n) => w.tops.find((t) => t.name === n)?.md_m ?? null;
-
-const A = computeAdvanced();
-const TARGET = TEACHING_WELLS.find((w) => w.tops.length === 3);
 
 const PredictionExplorer = () => {
   const [marker, setMarker] = useState('TOP_A');
+  const c = useSectionWells();
+  const A = useMemo(() => {
+    if (!c.ok) return null;
+    try {
+      const a = computeAdvanced(c.wells);
+      return a.target && a.rows.length && ['TOP_A', 'TOP_SAND'].every((m) => pickOf(a.target, m) != null) ? a : null;
+    } catch {
+      return null;
+    }
+  }, [c.ok, c.wells]);
+  const TARGET = A ? A.target : null;
 
   const model = useMemo(() => {
-    const carriers = TEACHING_WELLS.filter((w) => pickOf(w, 'TOP_B') != null);
+    if (!A) return null;
+    const carriers = c.wells.filter((w) => pickOf(w, 'TOP_B') != null);
     const intervals = carriers.map((w) => ({
       id: w.id, name: w.name, from: pickOf(w, marker), topB: pickOf(w, 'TOP_B'),
       interval: pickOf(w, 'TOP_B') - pickOf(w, marker),
@@ -31,7 +41,16 @@ const PredictionExplorer = () => {
     const mean = intervals.reduce((s, r) => s + r.interval, 0) / intervals.length;
     const anchor = pickOf(TARGET, marker);
     return { carriers, intervals, mean, anchor, prediction: anchor + mean };
-  }, [marker]);
+  }, [marker, A, TARGET, c.wells]);
+
+  if (!A || !model) {
+    return (
+      <PanelShell title="Prediction explorer" subtitle="Type a section in which exactly one well stops above TOP_B.">
+        {c.ui}
+        <Note>The prediction needs a well that reached TD above TOP_B but carries TOP_A and TOP_SAND, and at least one well that carries TOP_B.</Note>
+      </PanelShell>
+    );
+  }
 
   const lo = Math.min(A.w4TopBLayercake, A.w4TopBFromSand);
   const hi = Math.max(A.w4TopBLayercake, A.w4TopBFromSand);
@@ -41,7 +60,8 @@ const PredictionExplorer = () => {
 
   return (
     <PanelShell title="Prediction explorer"
-      subtitle={`${TARGET.name} reached total depth above TOP_B. Predict it from a marker the well does have, using the three wells that carry TOP_B.`}>
+      subtitle={`${TARGET.name} reached total depth above TOP_B. Predict it from a marker the well does have, using the ${model.carriers.length} wells that carry TOP_B. It opens on the Ekene wells.`}>
+      {c.ui}
       <div className="flex flex-wrap gap-2">
         {MARKERS.map((m) => (
           <button key={m.key} type="button" onClick={() => setMarker(m.key)}
@@ -108,7 +128,7 @@ const PredictionExplorer = () => {
       </div>
 
       <TileGrid>
-        <Tile label="Wells carrying TOP_B" value={String(model.carriers.length)} unit="of 4" />
+        <Tile label="Wells carrying TOP_B" value={String(model.carriers.length)} unit={`of ${c.wells.length}`} />
         <Tile label={`Mean ${marker} to TOP_B`} value={fmt(model.mean)} unit="m" />
         <Tile label={`${TARGET.name} ${marker}`} value={String(model.anchor)} unit="m" />
         <Tile label="Prediction from this marker" value={fmt(model.prediction)} unit="m" />
@@ -117,7 +137,7 @@ const PredictionExplorer = () => {
         <Tile label="Layer-cake estimate" value={fmt(A.w4TopBLayercake)} unit="m" />
         <Tile label="From TOP_SAND estimate" value={fmt(A.w4TopBFromSand)} unit="m" />
         <Tile label="Spread between them" value={fmt(A.predictionSpread)} unit="m" />
-        <Tile label="TOP_B structural relief" value={fmt(A.topBRelief)} unit="m (3 wells)" />
+        <Tile label="TOP_B structural relief" value={fmt(A.topBRelief)} unit={`m (${model.carriers.length} wells)`} />
       </TileGrid>
 
       <Note>

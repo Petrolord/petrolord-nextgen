@@ -12,7 +12,7 @@ Three criteria matter, in this order.
 
 ## The two settings this course uses
 
-**Flatten on TOP_SAND at 1500 m** is the capstone view. Its question is: how do the reservoir and the surfaces below it behave once the sand is levelled. Levelling the top of the sand puts all four sand bodies on a common line so the sand itself, and the TOP_B interval beneath it, can be compared without structural depth in the way. The shifts, from lesson two, are $-48$, $-65$, $-41$ and $-90$, and the displayed section spans 1440 to 1597 m.
+**Flatten on TOP_SAND at 1500 m** is the teaching view. Its question is: how do the reservoir and the surfaces below it behave once the sand is levelled. Levelling the top of the sand puts all four sand bodies on a common line so the sand itself, and the TOP_B interval beneath it, can be compared without structural depth in the way. The shifts, from lesson two, are $-48$, $-65$, $-41$ and $-90$, and the displayed section spans 1440 to 1597 m.
 
 **Flatten on TOP_A at 1450 m** is the growth view used at the Professional tier. Its question is about the interval between TOP_A and the sand: does it thicken systematically across the section, which is the classic signature of sediment filling accommodation as it was created. The four TOP_A picks are 1500, 1512, 1495 and 1530 m in wells 1 through 4, so:
 

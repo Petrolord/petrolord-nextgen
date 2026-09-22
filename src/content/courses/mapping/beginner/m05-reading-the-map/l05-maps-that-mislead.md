@@ -12,7 +12,7 @@ Look at the control set. Ekene-4 picks TOP_SAND at 1590 m. The deepest well in t
 
 The reason is arithmetic rather than geology. At a 200 m cell the frame starts at (200, 600), so Ekene-4 at (2600, 2500) lands 12 cells across and 9.5 cells up. Nodes exist at whole cell counts, so there is no node at Ekene-4, and the surface is never evaluated at the one location where the deepest measurement was made. At that cell size only Ekene-1 falls exactly on a node. The other five wells all sit between nodes, and the map reports the smoothed surface near them rather than their picks.
 
-At the 100 m capstone cell the same map reports a deepest value of exactly 1590 m, because five of the six wells land on nodes there and Ekene-4 is one of them.
+At the 100 m teaching cell the same map reports a deepest value of exactly 1590 m, because five of the six wells land on nodes there and Ekene-4 is one of them.
 
 So the mapped extremes are not the data extremes, and the gap between them grows with cell size. A map that never touches its own deepest well will understate depth across the deepest part of the field, and if a gross rock volume is computed above a contact from that surface, the missing 12 m becomes rock that was never there.
 

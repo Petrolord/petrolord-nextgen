@@ -6,7 +6,7 @@ The Associate tier had a QC checklist for building a synthetic, and it worked st
 
 Start here because everything else rests on it. A shift produced by dragging the synthetic until the peaks look aligned is an opinion. It cannot be reproduced by a second person, it cannot be defended when the section is redisplayed at a different gain, and there is no way to arbitrate between two interpreters who disagree.
 
-A shift produced by a scan is a measurement. It has a stated search range and a stated step, and anybody can rerun it. On the teaching exercise the scan walks 41 lags from minus 40 ms to plus 40 ms in one-sample steps at the 2 ms sample rate and returns a suggested bulk shift of 8 ms.
+A shift produced by a scan is a measurement. It has a stated search range and a stated step, and anybody can rerun it. On the teaching exercise the scan walks 41 lags from minus 40 ms to plus 40 ms in one-sample steps at the 2 ms sample rate and returns a suggested bulk shift of 6 ms.
 
 The check has a practical form. Ask what the search range was. If nobody can tell you, the shift was not scanned.
 
@@ -14,9 +14,9 @@ The check has a practical form. Ask what the search range was. If nobody can tel
 
 A shift on its own is half a result. The scan returns the best lag it found, and it will always return something, including on data where no lag is any good. The correlation is what tells you whether the best lag was worth having.
 
-So a tie record carries both. On the teaching exercise the correlation at the suggested shift of 8 ms is 1.
+So a tie record carries both. On the teaching exercise the correlation at the suggested shift of 6 ms is 1.
 
-This check has a second half that is easy to skip. A correlation is only meaningful next to the correlations the scan rejected. At lag 0 on this exercise, which means no shift applied at all, the correlation is 0.621742. That is a number many people would accept if they saw it on its own, and it belongs to a tie sitting a full 8 ms wrong. The worst correlation anywhere across the 41 lags is -0.409277. Seeing the whole curve is what makes the peak convincing, and a single number quoted without its curve proves less than it appears to.
+This check has a second half that is easy to skip. A correlation is only meaningful next to the correlations the scan rejected. At lag 0 on this exercise, which means no shift applied at all, the correlation is 0.771383. That is a number many people would accept if they saw it on its own, and it belongs to a tie sitting a full 6 ms wrong. The worst correlation anywhere across the 41 lags is -0.404217. Seeing the whole curve is what makes the peak convincing, and a single number quoted without its curve proves less than it appears to.
 
 ## Check three: is the wavelet frequency stated alongside any amplitude or pick
 
@@ -48,4 +48,4 @@ Run the checks against the panel below, which shows the scan curve and lets you 
 
 ## Exercise
 
-Take a tie record that says only "shifted 8 ms, looks good" and list every one of the five checks it fails, then rewrite it as a record that passes all five using the teaching exercise numbers. As a self-check: it fails check one because no search range is stated, check two because no correlation is given, check three because no wavelet frequency appears, check four because there is no peak reading to pair with a frequency, and check five because it does not say what feature the tie was hung on. Then state why a correlation of 0.621742 quoted on its own is not evidence that a tie is aligned.
+Take a tie record that says only "shifted 6 ms, looks good" and list every one of the five checks it fails, then rewrite it as a record that passes all five using the teaching exercise numbers. As a self-check: it fails check one because no search range is stated, check two because no correlation is given, check three because no wavelet frequency appears, check four because there is no peak reading to pair with a frequency, and check five because it does not say what feature the tie was hung on. Then state why a correlation of 0.771383 quoted on its own is not evidence that a tie is aligned.

@@ -26,7 +26,7 @@ $S_w$ is not the end product; it is the last log-derived input to the decisions 
 
 - Net pay. In the next module, the three cutoffs ($\phi \ge 0.08$, $V_{sh} \le 0.5$, $S_w \le 0.6$) flag which samples count, and the flagged thickness with its averages becomes the zone summary you report.
 - Volumetrics. Beyond this course, hydrocarbon pore volume scales with $\phi (1 - S_w) $ integrated over the net pay. Every barrel in a resource estimate passes through the saturation you computed here.
-- The capstone. The graded practical asks you for the net thickness, average porosity and average saturation of SAND_A and SAND_B computed from these exact curves and givens, so the numbers in this lesson are the ones your own workflow should reproduce.
+- The capstone. The graded practical asks you for the net thickness, average porosity and average saturation of SAND_A and SAND_B on its own well, IKPO-3, with these same givens. The numbers in this lesson are the worked example your workflow should reproduce on the typewell first.
 
 ## Exercise
 

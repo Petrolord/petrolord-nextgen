@@ -22,7 +22,7 @@ Pore pressure then falls out through Terzaghi, the same partition as always: mea
 
 ## The parameters, and this course's values
 
-$V_{ml}$ is the velocity of unconsolidated mudline sediment, defaulting to 5000 feet per second, of which more in lesson 3, since that unit is a story. $A$ and $B$ shape the power law and are calibration constants fitted per basin, exactly as Eaton's $n$ is; the golden fixture uses $A = 10$ and $B = 0.75$, and the capstone grades one point of the resulting curve: at 5 MPa of effective stress, the loading velocity is 1949.944709834568 m/s.
+$V_{ml}$ is the velocity of unconsolidated mudline sediment, defaulting to 5000 feet per second, of which more in lesson 3, since that unit is a story. $A$ and $B$ shape the power law and are calibration constants fitted per basin, exactly as Eaton's $n$ is; the golden fixture uses $A = 10$ and $B = 0.75$, and at 5 MPa of effective stress its loading velocity is 1949.944709834568 m/s. The capstone grades one point of a curve with coefficients its brief states.
 
 The unloading form adds two more parameters, a maximum past stress and an elastic exponent, and one more lesson's worth of meaning; module 5 owns it. This module stays on the loading curve, the form for rock whose effective stress has only ever increased.
 

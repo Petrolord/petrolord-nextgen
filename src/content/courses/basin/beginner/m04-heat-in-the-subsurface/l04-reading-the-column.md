@@ -20,7 +20,7 @@ The engine solves the fixture on twenty-one nodes: the surface plus twenty cell 
 | 850 m | 38.33333333333339 | 1950 m | 59.619047619047684 |
 | 950 m | 41.66666666666673 | | |
 
-The trailing digits are floating point noise from the solver. The values at 50 m, 950 m and 1950 m are graded in the capstone, each to a tolerance of 0.05 degC, which is far wider than that noise.
+The trailing digits are floating point noise from the solver. The values at 50 m, 950 m and 1950 m are the three this tier reports, and any tolerance a capstone sets on a temperature is far wider than that noise.
 
 ## Two straight segments
 

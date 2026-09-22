@@ -26,9 +26,9 @@ It is in the normally pressured section, or at least in a section you are willin
 
 The picks as a set span the depth range. An exponential is defined by a starting value and a decay rate, so picks clustered over a few hundred metres constrain neither. You want them spread from as shallow as the log allows down to the deepest normally compacted shale you trust.
 
-## The twelve picks this capstone uses
+## The twelve picks this course uses
 
-The capstone fits its trend to twelve picks, with the matrix transit time fixed at 220 us/m.
+The course fits its trend to twelve picks. The teaching case fixes the matrix transit time at 220 us/m, and the capstone brief states the matrix it uses.
 
 | z (m) | dt (us/m) |
 |---|---|

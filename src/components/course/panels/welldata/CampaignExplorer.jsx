@@ -1,18 +1,20 @@
 import React, { useMemo, useState } from 'react';
-import { TEACHING_FILES, computeAdvanced } from '@/lib/welldataTeaching';
+import { TEACHING_FILES, computeAdvanced, computeCampaign } from '@/lib/welldataTeaching';
 import { parseLas } from '@petrolord/engines/engines/welldata/lasParse.js';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import UserLasPicker, { mergeFiles } from './UserLasPicker';
 
 // Campaign explorer: all six teaching files at once, with each aggregate
 // shown beside the composition behind it. The point of the tier is that
 // a total hides what it is made of, so the per-curve breakdown of the
-// null count is one click away rather than buried.
+// null count is one click away rather than buried. It opens on the teaching
+// campaign; a campaign of the learner's own files (the capstone case) runs
+// through the same pipeline once they open the files.
 const fmt = (v) => (Number.isFinite(v) ? String(v) : '-');
 
-const A = computeAdvanced();
+const TEACHING = computeAdvanced();
 
-function curveBreakdown(fileId) {
-  const f = TEACHING_FILES.find((x) => x.id === fileId);
+function curveBreakdown(f) {
   const parsed = parseLas(f.text);
   const rows = [];
   for (let i = 1; i < parsed.curves.length; i++) {
@@ -28,13 +30,61 @@ function curveBreakdown(fileId) {
 }
 
 const CampaignExplorer = () => {
+  const [userFiles, setUserFiles] = useState([]);
+  const [useOwn, setUseOwn] = useState(false);
+  const own = useOwn && userFiles.length > 0;
+  const files = own ? userFiles : TEACHING_FILES;
+  const A = useMemo(() => {
+    if (!own) return TEACHING;
+    try {
+      return computeCampaign(userFiles);
+    } catch (e) {
+      return { error: e.message };
+    }
+  }, [own, userFiles]);
   const [openFile, setOpenFile] = useState('nullheavy_20');
-  const detail = useMemo(() => curveBreakdown(openFile), [openFile]);
+  const openF = files.find((x) => x.id === openFile) || files[0];
+  const detail = useMemo(() => {
+    try {
+      return curveBreakdown(openF);
+    } catch {
+      return { nullValue: null, rows: [] };
+    }
+  }, [openF]);
   const detailTotal = detail.rows.reduce((s, r) => s + r.nulls, 0);
+
+  const picker = (
+    <div className="flex flex-wrap items-center gap-2">
+      <UserLasPicker label="Open your own LAS files as a campaign"
+        onFiles={(fs) => { setUserFiles((prev) => mergeFiles(prev, fs)); setUseOwn(true); setOpenFile(fs[0].id); }} />
+      {userFiles.length > 0 && (
+        <>
+          {[[false, 'Teaching campaign'], [true, `Your campaign (${userFiles.length} files)`]].map(([v, l]) => (
+            <button key={l} type="button" onClick={() => setUseOwn(v)}
+              className={`px-3 py-1.5 rounded-md border text-xs ${useOwn === v
+                ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'
+                : 'bg-gray-800 text-gray-300 border-gray-600'}`}>{l}</button>
+          ))}
+          <button type="button" onClick={() => { setUserFiles([]); setUseOwn(false); }}
+            className="text-xs text-gray-400 hover:underline">Clear your files</button>
+        </>
+      )}
+    </div>
+  );
+
+  if (A.error) {
+    return (
+      <PanelShell title="Campaign explorer" subtitle="One of your files could not be imported.">
+        {picker}
+        <p className="text-red-400 text-sm mb-0">Import failed: {A.error}</p>
+      </PanelShell>
+    );
+  }
 
   return (
     <PanelShell title="Campaign explorer"
-      subtitle={`All ${A.perFile.length} teaching files through the import pipeline at once. Every aggregate below is shown beside the composition behind it.`}>
+      subtitle={`All ${A.perFile.length} ${own ? 'of your' : 'teaching'} files through the import pipeline at once. Every aggregate below is shown beside the composition behind it.`}>
+      {picker}
       <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
@@ -52,7 +102,7 @@ const CampaignExplorer = () => {
             {A.perFile.map((f) => (
               <tr key={f.id} className="border-b border-gray-800 cursor-pointer hover:bg-gray-800"
                 onClick={() => setOpenFile(f.id)}>
-                <td className={`py-2 pr-4 ${openFile === f.id ? 'text-[#BFFF00] font-semibold' : 'text-white'}`}>{f.label}</td>
+                <td className={`py-2 pr-4 ${openF.id === f.id ? 'text-[#BFFF00] font-semibold' : 'text-white'}`}>{f.label}</td>
                 <td className="py-2 pr-4 text-gray-300">{f.curves}</td>
                 <td className={`py-2 pr-4 ${f.converted ? 'text-[#BFFF00] font-semibold' : 'text-gray-500'}`}>
                   {f.converted ? 'YES' : 'no'}
@@ -86,7 +136,7 @@ const CampaignExplorer = () => {
         <table className="w-full text-sm">
           <thead>
             <tr className="text-gray-400 border-b border-gray-700">
-              <th className="text-left py-2 pr-4">{openFile}: curve</th>
+              <th className="text-left py-2 pr-4">{openF.label}: curve</th>
               <th className="text-left py-2 pr-4">unit</th>
               <th className="text-left py-2 pr-4">nulls</th>
               <th className="text-left py-2 pr-4">of samples</th>
@@ -121,10 +171,16 @@ const CampaignExplorer = () => {
         <Tile label="Files needing conversion" value={String(A.convertedFiles)} unit="count" />
         <Tile label="Dead curves" value={String(A.deadCurves)} unit="count" />
         <Tile label="Files with a uniform step" value={String(A.uniformFiles)} unit={`of ${A.perFile.length}`} />
-        <Tile label="wrapped_12 depth samples" value={String(A.wrappedSamples)} unit="samples" />
-        <Tile label="nullheavy_20 flagged nulls" value={String(A.nullheavyNulls)} unit="count" />
+        {!own && <Tile label="wrapped_12 depth samples" value={String(A.wrappedSamples)} unit="samples" />}
+        {!own && <Tile label="nullheavy_20 flagged nulls" value={String(A.nullheavyNulls)} unit="count" />}
       </TileGrid>
 
+      {own ? (
+      <Note>
+        Your campaign: the per-file table above gives each file's samples and flagged nulls, and a
+        click opens its per-curve composition below.
+      </Note>
+      ) : (
       <Note>
         Open nullheavy_20 in the lower table. Its 272 nulls are not 272 scattered bad readings: 201
         of them are NPHI, which has no finite sample at all and is the campaign's one dead curve,
@@ -133,6 +189,7 @@ const CampaignExplorer = () => {
         aggregate on this panel behaves the same way, which is why each one is shown beside what it
         is made of.
       </Note>
+      )}
     </PanelShell>
   );
 };

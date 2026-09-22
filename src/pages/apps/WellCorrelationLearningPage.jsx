@@ -115,7 +115,7 @@ const WellCorrelationLearningPage = () => {
       } else {
         toast({
           title: 'Not passing yet',
-          description: `${res.score}/${res.max_score} answers within tolerance. Read the section panel again.`,
+          description: `${res.score}/${res.max_score} answers within tolerance. Type the section the brief states into the course panels (Type a section) and read them again.`,
           variant: 'destructive',
         });
       }
@@ -363,7 +363,7 @@ const WellCorrelationLearningPage = () => {
                     </>
                   ) : (
                     <p className="text-red-300 font-medium flex items-center gap-2">
-                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance — flatten the section and read the panel again.
+                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Type the section the brief states into the course panels and read them again.
                     </p>
                   )}
                 </div>

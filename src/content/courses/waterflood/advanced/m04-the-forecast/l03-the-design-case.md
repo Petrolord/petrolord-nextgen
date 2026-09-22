@@ -1,6 +1,6 @@
 # The design case
 
-This lesson runs the forecast on the Ekene element at a design injection rate and reads the result end to end. It is the tier's reference case and the source of two of the capstone numbers.
+This lesson runs the forecast on the Ekene element at a design injection rate and reads the result end to end. It is the tier's reference case, and the capstone asks for the same two quantities on a case of its own.
 
 ## The inputs
 

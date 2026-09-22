@@ -23,7 +23,7 @@ This tier flattens on TOP_A at a 1450 m datum. The four TOP_A picks are 1500, 15
 
 Four subtractions, four shifts, and the flattening operation is finished. Nothing else about the wells is consulted. The TOP_SAND picks played no part, the BASE_SAND picks played no part, and the fact that Ekene-4 has no TOP_B played no part, because the shift is derived from the flattening top and from nothing else.
 
-That Ekene-4 value of -80 m is one of the six graded numbers, with a tolerance of 0.01, so reproduce it cold. It is negative. It is not 80, and it is not $1530 - 1450$. Write the sign every time you write the number.
+That Ekene-4 value of -80 m is one of the six numbers this tier reports, so reproduce it cold. It is negative. It is not 80, and it is not $1530 - 1450$. Write the sign every time you write the number.
 
 ## Why the sign carries information
 
@@ -41,7 +41,7 @@ Ekene-2's shift is -62 m, and its TOP_SAND is picked at a measured 1565 m, so:
 
 $$displayed = 1565 + (-62) = 1503$$
 
-Ekene-2's TOP_SAND draws at a displayed depth of 1503 m on the section flattened on TOP_A at 1450 m. That value is graded, with a tolerance of 0.01, and the full sentence is the answer rather than the bare number. Nothing in the Ekene-2 wellbore is at 1503 m. Its TOP_SAND is at a measured 1565 m and always was.
+Ekene-2's TOP_SAND draws at a displayed depth of 1503 m on the section flattened on TOP_A at 1450 m. The full sentence is the answer rather than the bare number. Nothing in the Ekene-2 wellbore is at 1503 m. Its TOP_SAND is at a measured 1565 m and always was.
 
 Do the same for the other three TOP_SAND picks and they display at 1498, 1496 and 1510 m for Ekene-1, Ekene-3 and Ekene-4. Read those four displayed depths as a group: 1498, 1503, 1496 and 1510 m. They are not equal, and they should not be, because TOP_SAND is not the surface that was levelled. What separates them on the display is the thickness of the interval between TOP_A and TOP_SAND, which is the reading this tier is built toward.
 

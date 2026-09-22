@@ -8,7 +8,6 @@ $$\text{residual} = \text{predicted} - \text{actual} = 1543.3271484375 - 1549 = 
 
 Negative, so the six-well map put the horizon **too shallow**. The real horizon at Ekene-7 is 5.67 m deeper than the map said.
 
-The capstone grades this field to 0.1 m.
 
 ## What it establishes
 

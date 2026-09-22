@@ -1,0 +1,55 @@
+{
+ "course": "gasprocessing",
+ "tiers": {
+  "advanced": {
+   "pointer": "On the course panel, the Cold end explorer's \"Your skid, typed\" view takes the five numbers above (inlet pressure and temperature, separator pressure, gravity and molar heat capacity) and prints every value to at least the precision graded here.",
+   "keys": {
+    "dzdT": {
+     "panel": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx",
+     "line": 332,
+     "mode": "typed",
+     "decimals": 12,
+     "formatter": "toFixed(12)",
+     "test": "src/components/course/panels/gasprocessing/yourCase.test.jsx",
+     "evidence": "A typed skid mode on ColdEndExplorer.jsx (typedColdEnd in gasprocessingLab.js: jouleThomsonFPerPsi, jtDrop at the default 20 steps and saturatedWaterContent, the calls the capstone derivation makes) takes the let-down the learner types. Typing 935 psia, 87 degF, 405 psia, 0.67 and 10.2 prints the value within tol; yourCase.test.jsx proves it, that the AGBADA default lands on no graded answer, and that one retyped input misses. The Suite dew point card stays a backup route (W3)."
+    },
+    "muFPerPsi": {
+     "panel": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx",
+     "line": 333,
+     "mode": "typed",
+     "decimals": 12,
+     "formatter": "toFixed(12)",
+     "test": "src/components/course/panels/gasprocessing/yourCase.test.jsx",
+     "evidence": "A typed skid mode on ColdEndExplorer.jsx (typedColdEnd in gasprocessingLab.js: jouleThomsonFPerPsi, jtDrop at the default 20 steps and saturatedWaterContent, the calls the capstone derivation makes) takes the let-down the learner types. Typing 935 psia, 87 degF, 405 psia, 0.67 and 10.2 prints the value within tol; yourCase.test.jsx proves it, that the AGBADA default lands on no graded answer, and that one retyped input misses. The Suite dew point card stays a backup route (W3)."
+    },
+    "dropF": {
+     "panel": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx",
+     "line": 334,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/gasprocessing/yourCase.test.jsx",
+     "evidence": "A typed skid mode on ColdEndExplorer.jsx (typedColdEnd in gasprocessingLab.js: jouleThomsonFPerPsi, jtDrop at the default 20 steps and saturatedWaterContent, the calls the capstone derivation makes) takes the let-down the learner types. Typing 935 psia, 87 degF, 405 psia, 0.67 and 10.2 prints the value within tol; yourCase.test.jsx proves it, that the AGBADA default lands on no graded answer, and that one retyped input misses. The Suite dew point card stays a backup route (W3)."
+    },
+    "t2F": {
+     "panel": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx",
+     "line": 335,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/gasprocessing/yourCase.test.jsx",
+     "evidence": "A typed skid mode on ColdEndExplorer.jsx (typedColdEnd in gasprocessingLab.js: jouleThomsonFPerPsi, jtDrop at the default 20 steps and saturatedWaterContent, the calls the capstone derivation makes) takes the let-down the learner types. Typing 935 psia, 87 degF, 405 psia, 0.67 and 10.2 prints the value within tol; yourCase.test.jsx proves it, that the AGBADA default lands on no graded answer, and that one retyped input misses. The Suite dew point card stays a backup route (W3)."
+    },
+    "waterOutLbMMscf": {
+     "panel": "src/components/course/panels/gasprocessing/ColdEndExplorer.jsx",
+     "line": 337,
+     "mode": "typed",
+     "decimals": 9,
+     "formatter": "toFixed(9)",
+     "test": "src/components/course/panels/gasprocessing/yourCase.test.jsx",
+     "evidence": "A typed skid mode on ColdEndExplorer.jsx (typedColdEnd in gasprocessingLab.js: jouleThomsonFPerPsi, jtDrop at the default 20 steps and saturatedWaterContent, the calls the capstone derivation makes) takes the let-down the learner types. Typing 935 psia, 87 degF, 405 psia, 0.67 and 10.2 prints the value within tol; yourCase.test.jsx proves it, that the AGBADA default lands on no graded answer, and that one retyped input misses. The Suite dew point card stays a backup route (W3)."
+    }
+   }
+  }
+ }
+}

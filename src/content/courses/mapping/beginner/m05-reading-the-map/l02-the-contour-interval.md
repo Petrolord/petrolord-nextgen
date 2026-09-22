@@ -16,7 +16,7 @@ Work it through with the fixture numbers. The mapped surface runs from a crest o
 
 Now lay out the levels. The first multiple of 10 at or above 1539.72 is 1540. Add the step repeatedly: 1550, 1560, 1570, 1580, 1590. That is six contour lines to cover a 50 m range that asked for ten, and the shortfall is entirely the price of round numbers. Six readable lines beat ten awkward ones at 5.03 m spacing.
 
-That 10 m interval is one of the six numbers the capstone asks you to report, so it is worth being able to reconstruct rather than remember. Range about 50, target ten, raw step just over 5, rounded up to 10.
+That 10 m interval is worth being able to reconstruct rather than remember. Range about 50, target ten, raw step just over 5, rounded up to 10.
 
 ## The choice follows the data
 

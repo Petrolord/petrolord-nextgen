@@ -1,0 +1,32 @@
+{
+ "course": "rodpump",
+ "suite": "Suite PR #566 (Rod Pump Design Studio Full precision switch, stacked on #554)",
+ "tiers": {
+  "beginner": {
+   "why": "The Unit and Loads panels round the stroke and the rated displacement to 1 decimal against tolerances of 2.5e-5 and 7.3e-5.",
+   "keys": [
+    "unit_stroke_in",
+    "pump_rated_displacement_bpd"
+   ],
+   "annot_updates": {
+    "unit_stroke_in": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/rodpump/UnitPanel.jsx This linkage gives a X in stroke",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rodpumpHeatxFullPrecision.test.jsx, the engine result through formatFull)."
+    },
+    "pump_rated_displacement_bpd": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/rodpump/LoadsPanel.jsx Production hint, rated",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: rodpumpHeatxFullPrecision.test.jsx, the engine result through formatFull)."
+    }
+   },
+   "append": "Read the figures in the Rod Pump Design Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping."
+  }
+ }
+}

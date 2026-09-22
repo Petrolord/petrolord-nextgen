@@ -1,6 +1,6 @@
 # The two hundred and seventy two
 
-The last graded field of the campaign reads: flagged nulls in nullheavy_20, 272. It is one number, it is exact, and it is the number a report about that file would carry. This lesson takes it entirely at face value, because you have to understand what it honestly says before you can see what it quietly withholds.
+The last graded field of the campaign is the flagged nulls in one named file. On the teaching campaign it reads: flagged nulls in nullheavy_20, 272. It is one number, it is exact, and it is the number a report about that file would carry. This lesson takes it entirely at face value, because you have to understand what it honestly says before you can see what it quietly withholds.
 
 ## What the field counts
 
@@ -43,7 +43,7 @@ Hold on to how ordinary that all feels, because the rest of this module is about
 
 Form the count the way the campaign forms it, so you know exactly what it is a count of.
 
-Take the file's curves in order and skip the first, which is the depth index. For each of the remaining 4 curves, walk its 201 samples and count the ones that are not finite, which after parsing means the ones that held the declared null flag. Keep a running total across the four curves. When you reach the end of the fourth curve, the total is 272 and the field is graded on that integer with a tolerance of zero.
+Take the file's curves in order and skip the first, which is the depth index. For each of the remaining 4 curves, walk its 201 samples and count the ones that are not finite, which after parsing means the ones that held the declared null flag. Keep a running total across the four curves. When you reach the end of the fourth curve, the total is 272, and the capstone grades the same total on its own file as an integer with a tolerance of zero.
 
 Then run two checks on your own arithmetic. If your total came out at 0, your reader is using the wrong null value and you should go back to the file's header before doing anything else. If your total came out well above 272, check that you did not include the depth column in the sweep.
 

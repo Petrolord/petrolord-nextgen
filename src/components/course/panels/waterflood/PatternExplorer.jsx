@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  patternLedger, patternAdvice, allocationAudit, fieldLedger, PATTERNS,
+  patternLedger, patternAdvice, allocationAudit, fieldLedger, surveillanceWith, PATTERNS, ALLOCATION,
 } from './floodLab';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -12,6 +12,17 @@ import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/pet
 const W = 640;
 const H = 280;
 const PAD = { left: 46, top: 14, right: 16, bottom: 34 };
+
+
+// A typed number box, dressed like the sliders (the capstone states values
+// the sliders do not reach).
+const NumBox = ({ label, value, onChange }) => (
+  <div>
+    <p className="text-gray-400 text-xs mb-1">{label}</p>
+    <input value={value} onChange={(e) => onChange(e.target.value)}
+      className="w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5" />
+  </div>
+);
 
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 
@@ -32,22 +43,40 @@ const PatternExplorer = () => {
   const [name, setName] = useState(PATTERNS[0].name);
   const [target, setTarget] = useState(1.0);
   const [win, setWin] = useState(3);
+  // The allocation, the target and the surveillance read open on the teaching
+  // case; a capstone brief states its own and the learner types them in.
+  const [alloc, setAlloc] = useState(() => Object.fromEntries(Object.entries(ALLOCATION).flatMap(
+    ([inj, row]) => Object.entries(row).map(([prod, f]) => [`${inj}|${prod}`, String(f)]),
+  )));
+  const [targetT, setTargetT] = useState('');
+  const [through, setThrough] = useState('');
+  const [above, setAbove] = useState(true);
+  const [smooth, setSmooth] = useState('3');
 
   const out = useMemo(() => {
     try {
+      const allocation = {};
+      Object.entries(alloc).forEach(([k, v]) => {
+        const [inj, prod] = k.split('|');
+        allocation[inj] = { ...(allocation[inj] || {}), [prod]: Number(v) };
+      });
+      const t = targetT === '' ? target : Number(targetT);
+      const sw = surveillanceWith({ throughDate: through === '' ? null : through, aboveReference: above, chanSmooth: Number(smooth) || 3 });
       return {
-        pat: patternLedger(name, { window: win }),
-        advice: patternAdvice(name, { targetVRR: target, windowPeriods: win }),
-        audit: allocationAudit(),
+        pat: patternLedger(name, { window: win, allocation }),
+        advice: patternAdvice(name, { targetVRR: t, windowPeriods: win, allocation }),
+        audit: allocationAudit(allocation),
         field: fieldLedger(),
+        sw,
+        t,
       };
     } catch (e) {
       return { error: e.message };
     }
-  }, [name, target, win]);
+  }, [name, target, win, alloc, targetT, through, above, smooth]);
 
   if (out.error) return <PanelShell title="Pattern explorer"><Note>Engine error: {out.error}</Note></PanelShell>;
-  const { pat, advice, audit, field } = out;
+  const { pat, advice, audit, field, sw } = out;
 
   const n = field.series.length;
   const vMin = 0.4;
@@ -85,6 +114,16 @@ const PatternExplorer = () => {
         <RangeField label="Target VRR" value={target} min={0.8} max={1.3} step={0.05} onChange={setTarget} />
         <RangeField label="Rolling window (periods)" value={win} min={1} max={6} step={1} onChange={setWin} />
       </div>
+
+      <div className="grid gap-4 sm:grid-cols-7 items-end mt-3">
+        {Object.keys(alloc).map((k) => (
+          <NumBox key={k} label={`${k.replace('|', ' to ')}`} value={alloc[k]} onChange={(v) => setAlloc((a) => ({ ...a, [k]: v }))} />
+        ))}
+        <NumBox label="Target VRR (typed)" value={targetT} onChange={setTargetT} />
+      </div>
+      <p className="text-xs text-gray-500 mt-1">
+        The allocation opens on the teaching matrix and the target on the slider. A capstone brief states its own; type it in.
+      </p>
 
       {pat ? (
         <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
@@ -128,6 +167,28 @@ const PatternExplorer = () => {
         <Tile label="Advice scale" value={advice.withheld ? 'withheld' : fmt(advice.scale, 4)} unit={advice.clamped ? 'clamped' : ''} />
         <Tile label="Recommended injection" value={advice.withheld ? '-' : fmt(advice.recommendedWi, 1)} unit="bbl/period" />
       </TileGrid>
+
+      <div className="mt-4">
+        <p className="text-gray-400 text-xs mb-1">Surveillance diagnostics on the daily rows (opens on the whole record, pressure above the reference, smoothing 3)</p>
+        <div className="grid gap-4 sm:grid-cols-4 items-end">
+          <NumBox label="Rows through (YYYY-MM-DD, blank for all)" value={through} onChange={setThrough} />
+          <NumBox label="Chan smoothing (points)" value={smooth} onChange={setSmooth} />
+          <button
+            type="button" onClick={() => setAbove((v) => !v)}
+            className={`px-3 py-1.5 rounded-md border text-xs ${above ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}
+          >
+            {above ? 'Hall on pressure above the reference' : 'Hall on absolute pressure'}
+          </button>
+        </div>
+        <TileGrid>
+          {sw.hall.map((h) => (
+            <Tile key={h.injector} label={`${h.injector} Hall slope ratio`} value={fmt(h.slope_ratio, 6)} unit="-" />
+          ))}
+          {sw.chan.producers.map((c) => (
+            <Tile key={c.producer} label={`${c.producer} Chan late slope`} value={fmt(c.lateSlope, 6)} unit="-" />
+          ))}
+        </TileGrid>
+      </div>
 
       {advice.withheld ? (
         <Note>Advice withheld: {advice.reason}</Note>

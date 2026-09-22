@@ -10,13 +10,13 @@ The Expert tier converts the prognosis into the numbers a rig acts on, and the c
 
 Equivalent mud weight, which the Associate tier defined and bracketed, becomes the working language: every pressure divided by g times its sea-level-referenced column height. The pore pressure curve becomes the FLOOR of the mud-weight window, the fracture curve its CEILING, and the window between them at TD, on this well, is the headline number of the tier. You already know the bracket those walls must sit inside: 1029.878049 to 2266.333384 kg/m3.
 
-The exponent question this tier deferred gets its graded answer there: the Expert capstone runs the prognosis at n 1.2 as well as 3 and prices the difference in mud units, where it becomes a decision about what to pump rather than a curve on a plot.
+The exponent question this tier deferred gets its graded answer there: the Expert tier runs the prognosis at a second, low exponent and prices the difference in mud units, where it becomes a decision about what to pump rather than a curve on a plot.
 
 And the mechanism question from module 2's blind-spot lesson gets its instrument. Bowers' velocity-to-effective-stress relations, a loading curve for rock that only ever compacted and an unloading curve for rock whose stress was reduced after burial, give an entirely independent route from the same sonic to the same pore pressure. Run both routes and compare: agreement is evidence the mechanism is the one Eaton assumes. On this well the comparison lands within a few hundredths of a megapascal, and the Expert tier makes you compute exactly that.
 
 ## What carries forward unchanged
 
-The frame, untouched, a third tier now standing on it. The trend discipline: everything module 4 taught applies verbatim, since the Expert tier's floor is this tier's curve divided by a column height. The QC list, which gains Bowers as a second-method check and the window as a new object to inspect. And the six graded values, which become inputs: the Expert capstone's EMW fields are THIS capstone's pressures, converted.
+The frame, untouched, a third tier now standing on it. The trend discipline: everything module 4 taught applies verbatim, since the Expert tier's floor is this tier's curve divided by a column height. The QC list, which gains Bowers as a second-method check and the window as a new object to inspect. And the six graded values, which become inputs: the Expert tier's EMW figures are THIS tier's pressures, converted.
 
 That last point is worth sitting with. Your 47.408579625 MPa at TD is about to be divided by 9.80665 times 4100 m and become a mud density. Every digit of care this tier spent survives the division; so does every error it would have made. Tiers do not restart the problem, they compound it.
 
@@ -26,6 +26,6 @@ The honest case for stopping here: a Professional-tier holder can produce and de
 
 ## Exercise
 
-Before starting the Expert tier, make its first computation yourself, from numbers you already own, at a depth the Expert capstone does not grade. Convert your 3000 m pore pressure to an equivalent mud weight referenced to sea level: divide 33.307730125 MPa by g times the column height there, 9.80665 times 3100 m.
+Before starting the Expert tier, make its first computation yourself, from numbers you already own, at a depth the Expert tier does not dwell on. Convert your 3000 m pore pressure to an equivalent mud weight referenced to sea level: divide 33.307730125 MPa by g times the column height there, 9.80665 times 3100 m.
 
-Self check: $33307730.125 / (9.80665 \times 3100) = 1095.6268524501886$ kg/m3, about 66 kg/m3 over the hydrostatic EMW at that depth; that excess is the overpressure at 3000 m wearing mud units. If your value differs, check that the column height includes the 100 m of water: dividing by 3000 m of sediment alone gives 1132.1, wrong by about 37 kg/m3, which on a rig is the difference between a correct mud program and a guess. The Expert capstone opens with this same conversion carried out at TD, on the TD pore pressure this tier already reports. The arithmetic is the one you just did; run it there yourself rather than reading it here.
+Self check: $33307730.125 / (9.80665 \times 3100) = 1095.6268524501886$ kg/m3, about 66 kg/m3 over the hydrostatic EMW at that depth; that excess is the overpressure at 3000 m wearing mud units. If your value differs, check that the column height includes the 100 m of water: dividing by 3000 m of sediment alone gives 1132.1, wrong by about 37 kg/m3, which on a rig is the difference between a correct mud program and a guess. The Expert tier opens with this same conversion carried out at TD, on the TD pore pressure this tier already reports. The arithmetic is the one you just did; run it there yourself rather than reading it here.

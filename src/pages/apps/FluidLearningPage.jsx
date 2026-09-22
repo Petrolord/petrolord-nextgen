@@ -133,7 +133,7 @@ const FluidLearningPage = () => {
       } else {
         toast({
           title: 'Not passing yet',
-          description: `${res.score}/${res.max_score} answers within tolerance. Work the panels at the capstone settings and try again.`,
+          description: `${res.score}/${res.max_score} answers within tolerance. Set the case the brief states in the course panels and try again.`,
           variant: 'destructive',
         });
       }
@@ -280,7 +280,7 @@ const FluidLearningPage = () => {
                     </>
                   ) : (
                     <p className="text-red-300 font-medium flex items-center gap-2">
-                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Work the panels at the capstone settings and try again.
+                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Set the case the brief states in the course panels and try again.
                     </p>
                   )}
                 </div>

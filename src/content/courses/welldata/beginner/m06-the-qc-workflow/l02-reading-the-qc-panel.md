@@ -12,16 +12,16 @@ Directly below the selector sit four tiles that answer the framing questions in 
 
 * **LAS version / wrap** tells you the structural story: 2 / NO for the five modern files, 1.2 / YES for wrapped_12.
 * **Depth range** shows the first and last depth in the file's NATIVE unit, with that unit named in the tile heading. For feet_20 this reads 4900.0 to 5200.0 in F; the tile does not silently convert.
-* **Step (native / metres)** shows the step twice: once in the native unit and once converted. This is the tile where feet_20 shows 2.0000 F / 0.6096 m, and that second number is a capstone reading.
+* **Step (native / metres)** shows the step twice: once in the native unit and once converted. This is the tile where feet_20 shows 2.0000 F / 0.6096 m, and the second number is the kind of reading the capstone asks for.
 * **Samples / NULL flag** shows how many depth samples the file carries and which null value it declares. basic_20 reads 301 / -999.25 here; wrapped_12 reads 161 / -999.25; nullheavy_20 shows its unusual -9999.
 
 ## The per-curve table
 
 The table below the tiles has one row per curve and seven columns: mnemonic, unit, samples, nulls, first finite, last finite, and mean over finite samples. This is where completeness and plausibility live.
 
-Read basic_20's GR row and you find 301 samples, 8 nulls, and a finite mean of 64.9272 GAPI. Both the null count and the mean are capstone readings, and they sit side by side in one row. The first and last finite columns tell you where real data begins and ends, which exposes curves that only cover part of the well.
+Read basic_20's GR row and you find 301 samples, 8 nulls, and a finite mean of 64.9272 GAPI. The null count and the mean are both kinds of reading the capstone asks for, and they sit side by side in one row. The first and last finite columns tell you where real data begins and ends, which exposes curves that only cover part of the well.
 
-A dead curve announces itself in red. Switch to nullheavy_20 and the NPHI row turns red: 201 samples, 201 nulls, no first finite, no last finite, no mean. That 201 in the nulls column is another capstone reading, and the colour means you cannot miss it.
+A dead curve announces itself in red. Switch to nullheavy_20 and the NPHI row turns red: 201 samples, 201 nulls, no first finite, no last finite, no mean. A dead curve's null count is another kind of reading the capstone asks for, and the colour means you cannot miss it.
 
 ## The header table
 
@@ -29,7 +29,7 @@ At the bottom, the header table lists the well section entries worth reading: WE
 
 ## Where each capstone reading lives
 
-Putting the tour together, here is the map you will use in the capstone walkthrough next lesson:
+Putting the tour together, here is the map you will use in the capstone walkthrough next lesson, shown on the teaching files. The capstone's own case files open in the same panel with Open your own LAS files:
 
 * basic_20 depth samples: the Samples / NULL tile, with basic_20 selected, reads 301.
 * basic_20 GR nulls and finite mean: the GR row of the curve table, 8 and 64.9272.

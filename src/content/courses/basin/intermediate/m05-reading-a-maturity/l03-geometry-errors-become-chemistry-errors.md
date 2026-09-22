@@ -18,7 +18,7 @@ The direction is systematic, not random. Compaction always thins with depth, so 
 
 ## Where calibration catches it, and where it cannot
 
-Measured reflectances are the safety net: a model that under-buries history will sit below its calibration wells, and the modeller will notice. The trap is what happens next. The tempting fix is to raise heat flow until the model matches, and it will match, because more heat can imitate more burial over most of a profile. Now two errors cancel at the calibration well and disagree everywhere else: away from the well, in the flanks where burial differs, the compensating heat is wrong. The honest fix is upstream, in the geometry, which is why this course put decompaction two tiers below and made it graded.
+Measured reflectances are the safety net: a model that under-buries history will sit below its calibration wells, and the modeller will notice. The trap is what happens next. The tempting fix is to raise heat flow until the model matches, and it will match, because more heat can imitate more burial over most of a profile. Now two errors cancel at the calibration well and disagree everywhere else: away from the well, in the flanks where burial differs, the compensating heat is wrong. The honest fix is upstream, in the geometry, which is why this course put decompaction two tiers below and made it examined.
 
 The Expert tier sharpens this once more: its erosion signature is read from reflectance that a correct geometry, including a vanished section, explains and a wrong one cannot.
 

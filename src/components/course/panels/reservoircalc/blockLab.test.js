@@ -1,16 +1,16 @@
 import { describe, it, expect } from 'vitest';
 import {
-  FAULT_X_M, CAPSTONE_OWC_M, computeBlockModel, computeVolumes,
+  FAULT_X_M, TEACHING_OWC_M, computeBlockModel, computeVolumes,
 } from '@/lib/reservoircalcTeaching';
 
-// Pins the block-explorer panel math to the live NG6 Professional capstone
+// Pins the block-explorer panel math to the teaching case, the pre-W5b NG6 Professional capstone
 // oracle (reservoircalc/ekene-fault-blocks) and to the teaching facts the
 // DC22 lessons state as engine truth.
 
 describe('reservoircalc block explorer: engine math', () => {
-  const b = computeBlockModel(FAULT_X_M, CAPSTONE_OWC_M, CAPSTONE_OWC_M);
+  const b = computeBlockModel(FAULT_X_M, TEACHING_OWC_M, TEACHING_OWC_M);
 
-  it('reproduces the NG6 capstone answer key at the 1800 m fault', () => {
+  it('reproduces the teaching case (the pre-W5b NG6 key) at the 1800 m fault', () => {
     expect(b.west.cells).toBe(117);
     expect(b.east.cells).toBe(52);
     expect(b.west.grvMm3).toBeCloseTo(18.079852294921874, 9);
@@ -20,7 +20,7 @@ describe('reservoircalc block explorer: engine math', () => {
   });
 
   it('partitions the Associate booking without changing it', () => {
-    const field = computeVolumes(CAPSTONE_OWC_M).summary;
+    const field = computeVolumes(TEACHING_OWC_M).summary;
     expect(b.west.cells + b.east.cells).toBe(field.oilCells);
     expect(b.total.stoiipMmstb).toBe(field.stoiipMmstb);
     // Cells and gross rock volume add bit for bit; the barrels do not,
@@ -46,7 +46,7 @@ describe('reservoircalc block explorer: engine math', () => {
     expect(b.faultOnNode).toBe(true);
     expect(b.onFaultColumnCells).toBe(13);
     // The same fault one column further east is the inclusive convention.
-    const inclusive = computeBlockModel(FAULT_X_M + 100, CAPSTONE_OWC_M, CAPSTONE_OWC_M);
+    const inclusive = computeBlockModel(FAULT_X_M + 100, TEACHING_OWC_M, TEACHING_OWC_M);
     expect(inclusive.west.cells).toBe(130);
     expect(inclusive.east.cells).toBe(39);
     expect(inclusive.west.stoiipMmstb - b.west.stoiipMmstb)
@@ -54,7 +54,7 @@ describe('reservoircalc block explorer: engine math', () => {
   });
 
   it('moves the split monotonically as the fault moves, and mirrors mid field', () => {
-    const at = (fx) => computeBlockModel(fx, CAPSTONE_OWC_M, CAPSTONE_OWC_M);
+    const at = (fx) => computeBlockModel(fx, TEACHING_OWC_M, TEACHING_OWC_M);
     expect(at(1500).west.cells).toBe(78);
     expect(at(1500).east.cells).toBe(91);
     expect(at(1600).west.cells).toBe(91);
@@ -81,7 +81,7 @@ describe('reservoircalc block explorer: engine math', () => {
     const east = b.wells.filter((w) => !w.west);
     expect(west.map((w) => w.name)).toEqual(['Ekene-1', 'Ekene-3', 'Ekene-5']);
     expect(east.map((w) => w.name)).toEqual(['Ekene-2', 'Ekene-4', 'Ekene-6']);
-    expect(west.every((w) => w.top < CAPSTONE_OWC_M)).toBe(true);
-    expect(east.filter((w) => w.top < CAPSTONE_OWC_M).map((w) => w.name)).toEqual(['Ekene-6']);
+    expect(west.every((w) => w.top < TEACHING_OWC_M)).toBe(true);
+    expect(east.filter((w) => w.top < TEACHING_OWC_M).map((w) => w.name)).toEqual(['Ekene-6']);
   });
 });

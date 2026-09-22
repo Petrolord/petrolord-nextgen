@@ -18,9 +18,9 @@ The Associate tier's closing lesson told you the answer to one question this tie
 
 What this tier adds is the mechanism, and the mechanism turns out to be less tidy than the slogan. Two vertical wells in this same set carry BaseB residuals of 37 and 36 m, nearly as large, and deviation cannot be the reason for those. Working out what is actually in the BaseB column, and how much of W2's 45.028 is trajectory and how much is something else, is where this tier earns its keep.
 
-## What is graded
+## What the tier measures
 
-The capstone asks for six numbers, all of which this course derives and the panel displays: W2's TVDSS at its TopA pick (1496.6634373420557 m), three residuals from the tie table (W1 BaseB, W2 TopB, W3 TopA), the largest absolute residual in the set, and the x coordinate of W2's zone A control point, which is where the well's zone A information will sit when the Expert tier populates properties.
+The tier ties wells, and on the golden set it derives, and the panel displays, W2's TVDSS at its TopA pick (1496.6634373420557 m), the residuals of the tie table, the largest absolute residual in the set, and W2's zone A control point, which is where the well's zone A information will sit when the Expert tier populates properties. The capstone asks for the same kind of numbers on a well of its own: its landed TopA depth, its three residuals and its zone A control point.
 
 That last item is the bridge upward. A control point is a location, and for a deviated well the location is not the wellhead. The Expert tier inherits the consequences.
 

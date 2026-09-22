@@ -4,8 +4,9 @@ import {
 } from 'recharts';
 import {
   WELLS, wellSummary, stringWeights, broomstick, operationTable, runCase, verticalClosedForm,
+  TEACHING_MUD_KGM3, mudOver,
 } from './torquedragLab';
-import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // String explorer: one string, five holes, and the hookload each of them
 // returns. The broomstick view is the plot a drilling engineer actually reads.
@@ -14,6 +15,10 @@ const fmt = (v, d = 2) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: Math.min(d, 2) })
   : '-');
 const kN = (v) => fmt(v / 1000, 3);
+// Hookloads and tensions in newtons to 2 dp, torques in N.m to 3 dp: the
+// precision the course grades them at.
+const N = (v) => fmt(v, 2);
+const Nm = (v) => fmt(v, 3);
 
 const MODES = [
   { value: 'weights', label: 'The string and its weight' },
@@ -22,10 +27,10 @@ const MODES = [
 ];
 const WELL_OPTIONS = WELLS.map((w) => ({ value: w.id, label: w.label }));
 
-const Weights = () => {
+const Weights = ({ over }) => {
   const [well, setWell] = useState('vertical');
   const s = useMemo(() => wellSummary(well), [well]);
-  const w = useMemo(() => stringWeights(well), [well]);
+  const w = useMemo(() => stringWeights(well, over), [well, over]);
   const closed = useMemo(() => verticalClosedForm(), []);
   return (
     <>
@@ -58,9 +63,9 @@ const Weights = () => {
       </div>
       <TileGrid>
         <Tile label="Buoyancy factor" value={fmt(w.buoyancyFactor, 10)} />
-        <Tile label="Air weight" value={kN(w.airWeightN)} unit="kN" />
-        <Tile label="Buoyed weight" value={kN(w.buoyedWeightN)} unit="kN" />
-        <Tile label="Mud density" value={fmt(s.mudDensityKgM3, 0)} unit="kg/m3" />
+        <Tile label="Air weight" value={N(w.airWeightN)} unit="N" />
+        <Tile label="Buoyed weight" value={N(w.buoyedWeightN)} unit="N" />
+        <Tile label="Mud density" value={fmt(over.mudDensityKgM3 ?? s.mudDensityKgM3, 3)} unit="kg/m3" />
         <Tile label="Total depth" value={fmt(s.totalDepthM, 0)} unit="m" />
         <Tile label="Maximum inclination" value={fmt(s.maxIncDeg, 1)} unit="deg" />
       </TileGrid>
@@ -76,20 +81,20 @@ const Weights = () => {
   );
 };
 
-const Broomstick = () => {
+const Broomstick = ({ over }) => {
   const [well, setWell] = useState('buildhold');
   const rows = useMemo(() => {
-    const pu = runCase(well, 'trip_out').profile;
-    const so = runCase(well, 'trip_in').profile;
-    const ro = runCase(well, 'rotate_off_bottom').profile;
+    const pu = runCase(well, 'trip_out', over).profile;
+    const so = runCase(well, 'trip_in', over).profile;
+    const ro = runCase(well, 'rotate_off_bottom', over).profile;
     return pu.map((r, i) => ({
       md: r.md,
       pickup: r.tensionN / 1000,
       slackoff: so[i]?.tensionN / 1000,
       rotating: ro[i]?.tensionN / 1000,
     }));
-  }, [well]);
-  const b = useMemo(() => broomstick(well), [well]);
+  }, [well, over]);
+  const b = useMemo(() => broomstick(well, over), [well, over]);
   return (
     <>
       <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
@@ -112,12 +117,12 @@ const Broomstick = () => {
         </ResponsiveContainer>
       </div>
       <TileGrid>
-        <Tile label="Pick up" value={kN(b.pickupN)} unit="kN" />
-        <Tile label="Rotate off bottom" value={kN(b.rotatingN)} unit="kN" />
-        <Tile label="Slack off" value={kN(b.slackoffN)} unit="kN" />
-        <Tile label="Pick-up drag" value={kN(b.pickupDragN)} unit="kN" />
-        <Tile label="Slack-off drag" value={kN(b.slackoffDragN)} unit="kN" />
-        <Tile label="Total swing" value={kN(b.dragSwingN)} unit="kN" />
+        <Tile label="Pick up" value={N(b.pickupN)} unit="N" />
+        <Tile label="Rotate off bottom" value={N(b.rotatingN)} unit="N" />
+        <Tile label="Slack off" value={N(b.slackoffN)} unit="N" />
+        <Tile label="Pick-up drag" value={N(b.pickupDragN)} unit="N" />
+        <Tile label="Slack-off drag" value={N(b.slackoffDragN)} unit="N" />
+        <Tile label="Total swing" value={N(b.dragSwingN)} unit="N" />
       </TileGrid>
       {b.slackoffN < 0 && (
         <div className="mt-3 rounded border border-amber-700/60 bg-amber-950/30 p-3">
@@ -139,9 +144,9 @@ const Broomstick = () => {
   );
 };
 
-const Operations = () => {
+const Operations = ({ over }) => {
   const [well, setWell] = useState('horizontal');
-  const t = useMemo(() => operationTable(well), [well]);
+  const t = useMemo(() => operationTable(well, over), [well, over]);
   return (
     <>
       <SelectField label="Well" value={well} onChange={setWell} options={WELL_OPTIONS} />
@@ -150,9 +155,9 @@ const Operations = () => {
           <thead className="bg-black/40 text-gray-400">
             <tr>
               <th className="text-left p-2">Operation</th>
-              <th className="text-right p-2">Hookload (kN)</th>
-              <th className="text-right p-2">Surface torque (kN.m)</th>
-              <th className="text-right p-2">Min tension (kN)</th>
+              <th className="text-right p-2">Hookload (N)</th>
+              <th className="text-right p-2">Surface torque (N.m)</th>
+              <th className="text-right p-2">Min tension (N)</th>
               <th className="text-right p-2">Max side force (N/m)</th>
               <th className="text-right p-2">Buckles from</th>
             </tr>
@@ -161,9 +166,9 @@ const Operations = () => {
             {t.map((r) => (
               <tr key={r.operation} className="border-t border-gray-800">
                 <td className="p-2 text-white">{r.operation.replace(/_/g, ' ')}</td>
-                <td className={`p-2 text-right ${r.hookloadN < 0 ? 'text-red-400' : 'text-gray-200'}`}>{kN(r.hookloadN)}</td>
-                <td className="p-2 text-right text-gray-200">{fmt(r.surfaceTorqueNm / 1000, 4)}</td>
-                <td className="p-2 text-right text-gray-400">{kN(r.minTensionN)}</td>
+                <td className={`p-2 text-right ${r.hookloadN < 0 ? 'text-red-400' : 'text-gray-200'}`}>{N(r.hookloadN)}</td>
+                <td className="p-2 text-right text-gray-200">{Nm(r.surfaceTorqueNm)}</td>
+                <td className="p-2 text-right text-gray-400">{N(r.minTensionN)}</td>
                 <td className="p-2 text-right text-gray-400">{fmt(r.maxSideForceNPerM, 4)}</td>
                 <td className={`p-2 text-right ${r.bucklingFirstMd == null ? 'text-gray-600' : 'text-amber-400'}`}>
                   {r.bucklingFirstMd == null ? 'none' : `${fmt(r.bucklingFirstMd, 0)} m`}
@@ -185,20 +190,28 @@ const Operations = () => {
 
 const StringExplorer = () => {
   const [mode, setMode] = useState('weights');
+  const [mud, setMud] = useState('');
+  const over = useMemo(() => mudOver(mud), [mud]);
   return (
     <PanelShell
       title="String explorer"
       subtitle="One string and one mud in five different holes, and the hookload each of them returns"
     >
-      <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
+      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+        <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
+        <NumField label={`Mud density (kg/m3), blank for the lessons' ${TEACHING_MUD_KGM3}`} value={mud}
+          onChange={setMud} placeholder={String(TEACHING_MUD_KGM3)} />
+      </div>
       <p className="text-[11px] text-gray-500 mt-2">
-        Drill collars, heavy weight and drill pipe in 1440 kg/m3 mud, friction 0.25 cased and 0.35
-        open hole, 120 rpm, 0.3 m/s trip speed, 89 kN weight on bit, 2.7 kN.m bit torque.
+        Drill collars, heavy weight and drill pipe in {over?.mudDensityKgM3 ?? TEACHING_MUD_KGM3} kg/m3 mud,
+        friction 0.25 cased and 0.35 open hole, 120 rpm, 0.3 m/s trip speed, 89 kN weight on bit,
+        2.7 kN.m bit torque. Type a mud density to run your own case.
       </p>
       <div className="mt-3">
-        {mode === 'weights' && <Weights />}
-        {mode === 'broomstick' && <Broomstick />}
-        {mode === 'operations' && <Operations />}
+        {!over && <Note>Type a mud density between 0 and 7850 kg/m3, or leave it blank.</Note>}
+        {over && mode === 'weights' && <Weights over={over} />}
+        {over && mode === 'broomstick' && <Broomstick over={over} />}
+        {over && mode === 'operations' && <Operations over={over} />}
       </div>
     </PanelShell>
   );

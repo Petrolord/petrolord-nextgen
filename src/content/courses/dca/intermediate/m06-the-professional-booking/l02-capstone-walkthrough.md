@@ -1,19 +1,17 @@
 # The capstone walkthrough
 
-> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+The Professional capstone does not ask you to book one well. It asks you to work the Ekene field the way a portfolio engineer does: pin down a decline exponent, book a well from it, window a second well, read the number that proves a third well's naive fit invalid, book a well from a borrowed curve, and total the field. Six graded fields, one per skill this tier taught, on the wells, windows, pool and limit the brief states. This lesson works the same skills on the teaching case the panels open on (the primary windows, the E3 + E6 pool, 10 stb/d); the capstone does not grade these teaching values.
 
-The Professional capstone does not ask you to book one well. It asks you to work the Ekene field the way a portfolio engineer does: pin down a decline exponent, book a well from it, window a second well, read the number that proves a third well's naive fit invalid, book a well from a borrowed curve, and total the field. Six graded fields, one per skill this tier taught.
-
-| Graded field | Unit | Tolerance |
+| Skill | On the teaching case | Capstone tolerance |
 |---|---|---|
-| Ekene-3 fitted decline exponent b | - | 0.02 |
-| Ekene-3 EUR at 10 stb/d | stb | 600 |
-| Ekene-6 windowed-to-primary Di | 1/d | 0.00002 |
-| Ekene-1 full-history fit R2 | - | 0.01 |
-| Ekene-6 EUR from the fixed-b type curve | stb | 600 |
-| Sum of the four closed-form EURs at 10 stb/d | stb | 2000 |
+| A fitted parameter on a window | Ekene-3's decline exponent b | 0.000002 on a Di |
+| A well's EUR at the limit | Ekene-3 EUR at 10 stb/d | 600 |
+| A windowed Di | Ekene-6 windowed to primary | 0.00002 |
+| The R2 of an invalid fit | Ekene-1 full history | 0.001 |
+| An EUR from a fixed-b type curve | Ekene-6 from the E3 + E6 curve | 50 |
+| The field total at the limit | four closed-form EURs at 10 stb/d | 2000 |
 
-Read those tolerances as diagnostics rather than as generosity. The b tolerance of 0.02 is smaller than the engine's grid step of 0.05 by a factor of 2.5, so a fit landing one grid step from the truth fails. The Di tolerance of 0.00002 is 2 percent of the value graded. The field-total tolerance of 2000 stb is 8.56174397362720 times the difference between the two legitimate ways of totalling the field, which is the tolerance telling you that either route passes and you still have to know which one you used.
+Read those tolerances as diagnostics rather than as generosity. A tolerance of 0.02 on a b would be smaller than the engine's grid step of 0.05 by a factor of 2.5, so a fit landing one grid step from the truth fails. A Di tolerance of 0.00002 is 2 percent of a typical Di. The field-total tolerance of 2000 stb is 8.56174397362720 times the difference between the two legitimate ways of totalling the field, which is the tolerance telling you that either route passes and you still have to know which one you used.
 
 This lesson walks two of the six fields the whole way, one through each panel, and points you at the lesson that owns each of the rest. Copying answers is not the risk here. The risk is producing a number by a route you cannot defend.
 
@@ -25,9 +23,9 @@ Open the fit explorer. Select Ekene-3, model Auto-select, window Primary.
 
 The engine returns Hyperbolic with $q_i$ 150.000000000000 stb/d, $D_i$ 0.00200000000000000 per day, R2 1.00000000000000, and a b tile reading 0.49999999999999994.
 
-That b tile is not a display bug and you should not round it in your head before understanding it. The grid search steps b by repeated addition of 0.05, so the value the engine actually carries is the accumulated float, not the decimal 0.5. The graded tolerance of 0.02 absorbs it comfortably. What the tolerance does not absorb is a neighbouring grid point: 0.45 or 0.55 are both 0.05 away, and both fail.
+That b tile is not a display bug and you should not round it in your head before understanding it. The grid search steps b by repeated addition of 0.05, so the value the engine actually carries is the accumulated float, not the decimal 0.5. A tolerance of 0.02 absorbs it comfortably. What the tolerance does not absorb is a neighbouring grid point: 0.45 or 0.55 are both 0.05 away, and both fail.
 
-Now book the EUR by hand, because the second graded field is the one place in this capstone where the arithmetic is entirely yours. The hyperbolic cumulative to an economic limit is
+Now book the EUR by hand, because a well's EUR is the one place in this capstone where the arithmetic is entirely yours. The hyperbolic cumulative to an economic limit is
 
 $$EUR = \frac{q_i^{\,b}}{(1-b)\,D_i}\left(q_i^{\,1-b} - q_{lim}^{\,1-b}\right)$$
 
@@ -41,11 +39,11 @@ $$EUR = 12247.4487139159 \times (12.2474487139159 - 3.16227766016838) = 12247.44
 
 $$EUR = 111270.166537926 \text{ stb}$$
 
-Stop and run that on a calculator before reading on. If you land on the same 111270.17, you have reproduced a graded field from first principles, and the panel's EUR tile is arithmetic rather than magic. Note that the engine's daily forecast for the same scenario accumulates 111190.357687804 stb, a difference of 79.8088501215243 stb that sits well inside the 600 stb tolerance. Both routes pass. Only one is the number you should say you reported.
+Stop and run that on a calculator before reading on. If you land on the same 111270.17, you have reproduced the teaching booking from first principles, and the panel's EUR tile is arithmetic rather than magic. Note that the engine's daily forecast for the same scenario accumulates 111190.357687804 stb, a difference of 79.8088501215243 stb that sits well inside the 600 stb tolerance. Both routes pass. Only one is the number you should say you reported.
 
 ## Walkthrough 2: Ekene-6 from the borrowed curve
 
-The fifth field is the one people get wrong while feeling confident, so work it slowly. Open the type curve explorer.
+The type-curve field is the one people get wrong while feeling confident, so work it slowly, here on the teaching pool. Open the type curve explorer.
 
 {{panel:dca-typecurve-explorer}}
 
@@ -55,15 +53,15 @@ Read the two R2 values against each other before you read the EUR. The pooled cu
 
 The EUR tile from that match reads 91524.2759502962 stb. The panel shows Ekene-6's true closed-form EUR of 105266.626461929 stb beside it, and the percentage difference, -13.0548028121742 percent, which is 13742.3505116328 stb of oil.
 
-The graded field asks for the type-curve EUR of 91524.2759502962. The trap is submitting 105266.63 because it is the better number and it sits on the same panel. The capstone is testing whether you can report what a method produced while knowing it is wrong by 13 percent, which is exactly the situation a borrowed curve puts you in on a well with no history to check against.
+On the teaching pool the type-curve EUR is 91524.2759502962. The trap is submitting the true closed-form EUR because it is the better number and it sits on the same panel. The capstone is testing whether you can report what a method produced while knowing it is wrong by 13 percent, which is exactly the situation a borrowed curve puts you in on a well with no history to check against.
 
 ## Where the other four come from
 
-**Ekene-6's windowed Di.** Module 2 lesson 3. Fit explorer, well Ekene-6, window Primary, model Auto: read the $D_i$ tile. The graded tolerance of 0.00002 is tight enough that fitting the full history instead fails the field outright, which is the entire point of the module.
+**A windowed Di.** Module 2 lesson 3. Fit explorer, the well and window the brief states, model Auto: read the $D_i$ tile. On the teaching case, Ekene-6 on its primary window, it reads 0.001. The tolerance is tight enough that fitting the full history instead fails the field outright, which is the entire point of the module.
 
-**Ekene-1's full-history R2.** Module 2 lesson 2. Same panel, well Ekene-1, window Full history, model Auto. You are asked to report the goodness of fit of a fit you have been taught to reject, so read the R2 tile and submit it as it stands. Note while you are there that the same fit pins b at the search ceiling and returns a $q_i$ below the well's first recorded rate: those are the symptoms, the R2 is merely the number.
+**The R2 of an invalid fit.** Module 2 lesson 2. Same panel; on the teaching case, well Ekene-1, window Full history, model Auto. The capstone states its own well and a custom window across the flood. You are asked to report the goodness of fit of a fit you have been taught to reject, so read the R2 tile and submit it as it stands. Note while you are there that the same fit pins b at the search ceiling and returns a $q_i$ below the well's first recorded rate: those are the symptoms, the R2 is merely the number.
 
-**The field total.** Module 5 lesson 2. Add the four closed-form EURs at the 10 stb/d limit: four values, three additions, no engine required. The roll-up total from the four saved scenarios also passes inside the 2000 stb tolerance, and you should be able to say which you entered and why they differ.
+**The field total.** Module 5 lesson 2. Add the four closed-form EURs at the limit the brief states: four values, three additions. At 10 stb/d the fixture records them; at another limit, book each well's closed form at that limit first. The roll-up total from the four saved scenarios also passes inside the 2000 stb tolerance, and you should be able to say which you entered and why they differ.
 
 ## Submitting
 

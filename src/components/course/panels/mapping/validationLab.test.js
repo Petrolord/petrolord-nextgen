@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest';
 import {
   computeAdvanced, computeValidationMap, CONTROL_SETS, ALL_SIX, PLUS_SEVEN, E7,
-  TEACHING_WELLS, TOP_NAME, CAPSTONE_CELL_M, PAD_CELLS, MAX_EXTRAP_M, TARGET,
+  TEACHING_WELLS, TOP_NAME, TEACHING_CELL_M, PAD_CELLS, MAX_EXTRAP_M, TARGET,
 } from '@/lib/mappingTeaching';
 import { topsToPoints, specForPoints } from '@petrolord/engines/engines/mapping/surface.js';
 import { gridSurface } from '@petrolord/engines/lib/gridding/gridding.js';
 import { sampleAtXY } from '@petrolord/engines/lib/gridding/gridmath.js';
 
-// Pins the validation-explorer panel math to the live NG7 Expert capstone
+// Pins the validation-explorer panel math to the Ekene teaching case (the NG7 Expert capstone until W5a)
 // oracle, and to the readings the lessons quote.
 const A = computeAdvanced();
 const all6 = computeValidationMap(ALL_SIX);
@@ -15,7 +15,7 @@ const plus7 = computeValidationMap(PLUS_SEVEN);
 const drop = (n) => computeValidationMap(`drop:Ekene-${n}`);
 
 describe('mapping expert: validating the map', () => {
-  it('reproduces the NG7 expert capstone answer key', () => {
+  it('reproduces the Ekene teaching case (the pre-W5 capstone key)', () => {
     expect(A.crossValidatableWells).toBe(1);
     expect(A.looResidE6).toBeCloseTo(9.8438720703125, 12);
     expect(A.predAtE7).toBeCloseTo(1543.3271484375, 12);
@@ -24,7 +24,7 @@ describe('mapping expert: validating the map', () => {
     expect(A.liveWithE7).toBe(201);
   });
 
-  it('reproduces the W1 re-key: depth at P-1 with Ekene-7 included, and no neighbour passes', () => {
+  it('reproduces the W1 key on the Ekene teaching case: depth at P-1 with Ekene-7 included, and no neighbour matches', () => {
     const want = 1547.105224609375;
     expect(plus7.summary.atTarget).toBeCloseTo(want, 12);
     // tol 0.01: every other control set's P-1 reading fails, the closest being
@@ -143,10 +143,10 @@ describe('mapping expert: validating the map', () => {
     // subsets derive a different frame, and the interior well's does not move,
     // which is why the one cross-validatable run agrees either way.
     const pts = topsToPoints(TEACHING_WELLS, TOP_NAME);
-    const shared = specForPoints(pts, CAPSTONE_CELL_M, PAD_CELLS);
+    const shared = specForPoints(pts, TEACHING_CELL_M, PAD_CELLS);
     const moved = [];
     for (let i = 0; i < pts.length; i++) {
-      const own = specForPoints(pts.filter((_, k) => k !== i), CAPSTONE_CELL_M, PAD_CELLS);
+      const own = specForPoints(pts.filter((_, k) => k !== i), TEACHING_CELL_M, PAD_CELLS);
       if (JSON.stringify(own) !== JSON.stringify(shared)) moved.push(TEACHING_WELLS[i].name);
     }
     expect(moved).toEqual(['Ekene-1', 'Ekene-4', 'Ekene-5']);
@@ -157,18 +157,18 @@ describe('mapping expert: validating the map', () => {
       gridSurface(pts.filter((_, k) => k !== i), spec, { maxExtrapolation: MAX_EXTRAP_M }).z,
       spec, TARGET.x, TARGET.y,
     );
-    const own0 = specForPoints(pts.filter((_, k) => k !== 0), CAPSTONE_CELL_M, PAD_CELLS);
+    const own0 = specForPoints(pts.filter((_, k) => k !== 0), TEACHING_CELL_M, PAD_CELLS);
     expect(own0.y0).toBe(950);
     expect(at(0, own0) - at(0, shared)).toBeCloseTo(0.0351562, 6);
     for (const i of [3, 4]) {
-      const own = specForPoints(pts.filter((_, k) => k !== i), CAPSTONE_CELL_M, PAD_CELLS);
+      const own = specForPoints(pts.filter((_, k) => k !== i), TEACHING_CELL_M, PAD_CELLS);
       expect(at(i, own)).toBeCloseTo(at(i, shared), 9);
     }
   });
 
   it('reproduces the blind residual through the seven-well leave-one-out', () => {
     const pts = topsToPoints(TEACHING_WELLS, TOP_NAME);
-    const spec = specForPoints(pts, CAPSTONE_CELL_M, PAD_CELLS);
+    const spec = specForPoints(pts, TEACHING_CELL_M, PAD_CELLS);
     const pts7 = [...pts, { x: E7.x, y: E7.y, z: E7.actual }];
     // Removing Ekene-7 from the seven-well set restores the original six, so
     // the prediction there is the same calculation as the blind test.

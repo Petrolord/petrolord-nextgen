@@ -1,6 +1,6 @@
 # The sonic trap
 
-This lesson is one worked curve. It is the curve that decides whether you get the graded conversion count right, and it is the curve that most learners get wrong on the first attempt.
+This lesson is one worked curve. It is the curve that decides whether you get the conversion count right, and it is the curve that most learners get wrong on the first attempt.
 
 The curve is DT in feet_20. It arrives with the unit US/F. It leaves the import pipeline with the unit US/M, and it is flagged as converted.
 
@@ -38,7 +38,7 @@ Notice the direction once more, because it is the single most common arithmetic 
 
 Here is the mistake this lesson is named for.
 
-A learner reasons that converting a file to metres is a depth-column job, looks at feet_20, sees one depth column, and answers that one curve was converted. The graded answer is 2.
+A learner reasons that converting a file to metres is a depth-column job, looks at feet_20, sees one depth column, and answers that one curve was converted. The pipeline's answer is 2.
 
 The two are DEPT and DT. DEPT converts because F is a length. DT converts because US/F has a length in its denominator. The mistake is not carelessness about arithmetic; it is a wrong mental model of what a unit conversion is. Once you hold the rule that the unit string decides, and that a length counts wherever it appears in the unit, the sonic stops being a trap and becomes an ordinary case.
 

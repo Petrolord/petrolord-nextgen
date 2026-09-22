@@ -20,7 +20,7 @@ With $R_w = 0.049910$ ohm.m, the SAND_A zone (2010 to 2030 m) books as follows:
 | Pay-average porosity | 0.2081 |
 | Pay-average Sw | 0.3609 |
 
-Two of these are graded in the Expert capstone: the net pay of 18.0 m (tolerance 0.01 m) and the pay-average water saturation of 0.3609 (tolerance 0.005).
+The same two quantities, on the capstone's own well, are graded in the Expert capstone: the net pay (tolerance 0.01 m) and the pay-average water saturation (tolerance 0.005).
 
 ## Worked example at 2020 m
 

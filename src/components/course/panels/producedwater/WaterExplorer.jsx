@@ -6,9 +6,10 @@ import {
 import {
   temperatureAndSalinity, theDistribution, riseAndItsBand, gravityDevices, heldItems,
   UZERE_WATER, UZERE_OIL, UZERE_INLET, UZERE_BASIN, UZERE_BWPD,
+  typedWaterStream, TYPED_WATER_DEFAULT, TYPED_FIELD_LABELS,
 } from './producedWaterLab';
 import {
-  PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
+  PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
 
 // The water explorer, the Associate tier. The water and the oil first, then the
@@ -38,6 +39,7 @@ export const MODES = [
   ['droplets', 'The droplets: the bins, the grid they are reported on, and the truncated tail'],
   ['rise', 'A droplet rising, and the creeping flow band it is honest in'],
   ['gravity', 'The two gravity cuts against plan area, plate count and the short circuit allowance'],
+  ['typed', 'Your stream, typed: the water, the oil, one droplet and the two gravity cuts'],
 ];
 
 const AXIS = { fill: '#94a3b8', fontSize: 11 };
@@ -307,6 +309,79 @@ export const GravityMode = ({ s }) => {
   );
 };
 
+/** A typed stream's inputs, held as the strings the learner typed. */
+export const typedStrings = (defaults) => Object.fromEntries(Object.entries(defaults).map(([k, v]) => [k, String(v)]));
+
+/** One NumField per typed input, in the order the lab declares them, grouped under headings. */
+export const TypedInputs = ({ groups, values, setValue }) => (
+  <>
+    {groups.map(([heading, keys]) => (
+      <div key={heading} className="mt-3">
+        <p className="text-xs text-slate-400 mb-1">{heading}</p>
+        <FieldGrid>
+          {keys.map((k) => (
+            <NumField key={k} label={TYPED_FIELD_LABELS[k]} value={values[k]} onChange={(x) => setValue(k, x)} />
+          ))}
+        </FieldGrid>
+      </div>
+    ))}
+  </>
+);
+
+/** The engine's refusals and warnings for a typed stream, as the engine worded them. */
+export const TypedMessages = ({ r }) => (
+  <>
+    {r.errors.map((e) => <Refusal key={e} label="Not answered" message={e} />)}
+    {r.warnings.map((w) => <Warning key={w}>Engine warning: {w}</Warning>)}
+  </>
+);
+
+const WATER_GROUPS = [
+  ['The water and the oil', ['bwpd', 'tC', 'tdsPpm', 'apiGravity']],
+  ['The droplets at the inlet', ['oiwPpm', 'd50Micron', 'sigma']],
+  ['The basin', ['lengthM', 'widthM', 'depthM', 'shortCircuitF']],
+  ['The plate pack', ['nPlates', 'plateAreaM2', 'efficiencyFactor']],
+];
+
+export const TypedWaterMode = () => {
+  const [values, setValues] = useState(() => typedStrings(TYPED_WATER_DEFAULT));
+  const setValue = (k, x) => setValues((old) => ({ ...old, [k]: x }));
+  const r = useMemo(() => typedWaterStream(values), [values]);
+  return (
+    <>
+      <p className="text-xs text-slate-300 mb-0">
+        Type a stream and its two gravity devices. The view opens on the teaching stream UZERE, and every input can
+        be retyped. The rate is taken to m3/s with the exact barrel, the crude is read at the water temperature, and
+        the three fluid fits are the module&apos;s own.
+      </p>
+      <TypedInputs groups={WATER_GROUPS} values={values} setValue={setValue} />
+      <div className="mt-3">
+        <TileGrid>
+          <Tile label="Water viscosity" value={twelve(r.muPaS)} unit="Pa.s" />
+          <Tile label="Salinity factor on the viscosity" value={six(r.salinityFactor)} />
+          <Tile label="Brine density" value={six(r.rhoWaterKgM3)} unit="kg/m3" />
+          <Tile label="Crude density at the water temperature" value={six(r.rhoOilKgM3)} unit="kg/m3" />
+          <Tile label="Density difference" value={six(r.densityDifferenceKgM3)} unit="kg/m3" />
+          <Tile label="Stokes rise at the inlet volume median" value={twelve(r.riseMS)} unit="m/s" />
+          <Tile label="Reynolds number of that droplet" value={six(r.riseReynolds)} />
+          <Tile label="Water flow" value={twelve(r.flowM3S)} unit="m3/s" />
+          <Tile label="Basin cut size" value={six(r.basinCutMicron)} unit="micron" />
+          <Tile label="Basin horizontal velocity" value={twelve(r.basinHorizontalVelocityMS)} unit="m/s" />
+          <Tile label="Plate pack cut size" value={six(r.plateCutMicron)} unit="micron" />
+          <Tile label="Plate area credited as settling" value={six(r.plateEffectiveAreaM2)} unit="m2" />
+          <Tile label="Inlet through the basin alone" value={six(r.basinAloneOutletPpm)} unit="ppm" />
+          <Tile label="Inlet through the plate pack alone" value={six(r.plateAloneOutletPpm)} unit="ppm" />
+        </TileGrid>
+      </div>
+      <TypedMessages r={r} />
+      <Note>
+        Both cut sizes come from the flow over an area, so the basin depth moves the horizontal velocity and leaves the
+        cut alone. The last two tiles run the typed inlet through each device on its own, on the module&apos;s grid.
+      </Note>
+    </>
+  );
+};
+
 const WaterExplorer = ({ initialMode = 'fluids' }) => {
   const [mode, setMode] = useState(initialMode);
   const f = useMemo(() => (mode === 'fluids' ? safe(temperatureAndSalinity) : null), [mode]);
@@ -328,6 +403,7 @@ const WaterExplorer = ({ initialMode = 'fluids' }) => {
         {mode === 'droplets' && <DropletsMode s={d} />}
         {mode === 'rise' && <RiseMode s={r} />}
         {mode === 'gravity' && <GravityMode s={g} />}
+        {mode === 'typed' && <TypedWaterMode />}
       </div>
       <Note>
         Every number on this page is a return value of the vendored Produced Water Treatment engine on the teaching

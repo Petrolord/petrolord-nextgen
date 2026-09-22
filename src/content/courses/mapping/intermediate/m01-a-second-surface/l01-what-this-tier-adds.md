@@ -26,7 +26,7 @@ Six numbers, all from the isochore panel.
 - The **maximum thickness**, 35.897705078125 m.
 - The **mean thickness** over the map, 32.25429068038713 m.
 - The **thickness at prospect P-1**, 34.050048828125 m.
-- The **live node count** of the isochore, 201, which is graded exactly.
+- The **live node count** of the isochore, 201, a count that is either right or wrong.
 - The **plain arithmetic mean of the six well thicknesses**, 31.166666666666668 m.
 
 The last two are the interesting ones. The live count is 201, the same as both input surfaces, and understanding why that is not a coincidence is module 2. And the two means, 32.254 from the map and 31.167 from the wells, are both honest averages of the same rock and they are not the same number. Module 4 exists for that gap.
@@ -47,6 +47,6 @@ It does not validate anything. Whether the isochore is any good, whether the map
 
 ## Exercise
 
-Name three project questions that cannot be answered from a single depth surface, and say for each one which two surfaces would answer it. Then state, in one sentence, why the two means in the capstone differ.
+Name three project questions that cannot be answered from a single depth surface, and say for each one which two surfaces would answer it. Then state, in one sentence, why the tier's two means differ.
 
 As a self-check: reservoir thickness needs the base and the top of the same interval; gross rock volume needs a thickness map and an area, which is the same pair plus the mask; and whether an interval thins toward a flank needs the thickness map read against the depth map. The two means differ because the well mean weights six wells equally while the map mean weights 201 nodes equally, which is a weighting by area rather than by well, and the area each well happens to control is set by the well spacing and by where the mask falls.

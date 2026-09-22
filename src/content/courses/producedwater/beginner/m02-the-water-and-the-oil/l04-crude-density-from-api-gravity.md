@@ -4,7 +4,7 @@ API gravity is how the industry talks about how heavy a crude is, and it is the 
 
 ## From a degree to a specific gravity to a density
 
-The API figure becomes a specific gravity at 60 degrees Fahrenheit by the standard relation, that specific gravity is taken against a declared reference water of 999 kg/m3, and the result is then thinned by temperature at a declared rate of 0.0007 for each degree. Run six crudes at the UZERE temperature of 41 C:
+The API figure becomes a specific gravity at 60 degrees Fahrenheit by the standard relation, that specific gravity is taken against a declared reference water of 999 kg/m3, and the result is then thinned by temperature at a declared rate of 0.0007 for each degree. The thinning is measured from a reference temperature of 15.56 C, which is 60 F taken to two decimals, so the whole chain is 141.5 / (131.5 + API) x 999 x (1 - 0.0007 (T - 15.56)) with T in C. Use 15.56 exactly: the unrounded 60 F, 15.5556 C, moves a density by a few thousandths of a kg/m3. Run six crudes at the UZERE temperature of 41 C:
 
 | API | sg at 60 F | kg/m3 |
 | --- | --- | --- |

@@ -8,7 +8,7 @@ Density mixes as a plain volume-weighted sum:
 
 $$\rho_f = \sum_i S_i \rho_i$$
 
-For the capstone mix of 80 percent brine and 20 percent gas:
+For the Ekene mix of 80 percent brine and 20 percent gas:
 
 $$0.8 \times 1017.8249875 + 0.2 \times 172.66679461728904 = 848.7933489234579 \text{ kg/m3}$$
 
@@ -51,7 +51,7 @@ There is a rule of thumb in this that is worth carrying. Anything that adds, suc
 
 The practical consequence is that saturation shows up much more strongly in seismic velocity than in density.
 
-Velocity depends on modulus divided by density. Between full brine and the capstone mix, the fluid modulus falls by a factor of about ten while the fluid density falls from 1017.8249875 to 848.7933489234579 kg/m3, a change of well under a fifth. The modulus term moves an order of magnitude further than the density term, so the velocity change is driven almost entirely by the modulus.
+Velocity depends on modulus divided by density. Between full brine and the Ekene mix, the fluid modulus falls by a factor of about ten while the fluid density falls from 1017.8249875 to 848.7933489234579 kg/m3, a change of well under a fifth. The modulus term moves an order of magnitude further than the density term, so the velocity change is driven almost entirely by the modulus.
 
 That is why a gas sand is a seismic anomaly at all, and it is also why the density log and the sonic log react so differently to gas. The next lesson follows the modulus down the full saturation range and shows how quickly the collapse happens.
 

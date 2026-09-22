@@ -28,8 +28,15 @@ const CLASS_LABEL = {
   '0.18750': 'casing over 13-3/8 in, 3/16 in',
 };
 
-const Drift = () => {
-  const [kind, setKind] = useState('all');
+// The drift table opens on the tubing class. The Associate capstone grades two
+// casing drifts, and placing each casing in its deduction class is the skill it
+// tests, so the casing rows are one select away rather than on first render.
+// `initialKind` exists for the leakage gate's negative control and is never
+// passed by the host.
+const TUBING_CLASS = '0.09375';
+
+const Drift = ({ initialKind = TUBING_CLASS }) => {
+  const [kind, setKind] = useState(initialKind);
   const rows = useMemo(() => driftTable().filter(
     (r) => kind === 'all' || String(r.deductionIn.toFixed(5)) === kind,
   ), [kind]);
@@ -192,8 +199,8 @@ const Profile = () => {
   );
 };
 
-const StringExplorer = () => {
-  const [mode, setMode] = useState('drift');
+const StringExplorer = ({ initialMode = 'drift', initialKind } = {}) => {
+  const [mode, setMode] = useState(initialMode);
   return (
     <PanelShell
       title="Completion string explorer"
@@ -201,7 +208,7 @@ const StringExplorer = () => {
     >
       <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
       <div className="mt-3">
-        {mode === 'drift' && <Drift />}
+        {mode === 'drift' && <Drift initialKind={initialKind} />}
         {mode === 'stack' && <Stack />}
         {mode === 'profile' && <Profile />}
       </div>

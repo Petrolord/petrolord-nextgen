@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
@@ -14,8 +14,11 @@ import {
   Loader2, HardDrive, GraduationCap, Lock, CheckCircle2, XCircle,
   BookOpen, Award, ArrowRight,
 } from 'lucide-react';
-import { computeIntermediate, computeAdvanced } from '@/lib/welldataTeaching';
 import LasInspector from '@/components/course/panels/welldata/LasInspector';
+import ImportExplorer from '@/components/course/panels/welldata/ImportExplorer';
+import CampaignExplorer from '@/components/course/panels/welldata/CampaignExplorer';
+import CapstoneCaseFiles from '@/components/course/CapstoneCaseFiles';
+import { WELLDATA_CASE_FILES } from '@/content/capstone-cases/welldata';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
   getCourseProgress,
@@ -52,7 +55,6 @@ function ScopeGate() {
   );
 }
 
-const num = (v, dp = 4) => (v == null || Number.isNaN(v) ? '—' : Number(v).toFixed(dp));
 
 const WellDataLearningPage = () => {
   const { toast } = useToast();
@@ -93,15 +95,10 @@ const WellDataLearningPage = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tier, gate.allowed]);
 
-  const intermediate = useMemo(
-    () => (tier === 'intermediate' ? computeIntermediate() : null),
-    [tier],
-  );
-
-  const advanced = useMemo(
-    () => (tier === 'advanced' ? computeAdvanced() : null),
-    [tier],
-  );
+  // The capstone case files are offered only on a tier whose brief is set on
+  // them (the ODUMA campaign), so a tier still on its earlier brief is never
+  // shown files it does not ask about.
+  const caseFiles = /oduma/i.test(capstone?.prompt || '') ? WELLDATA_CASE_FILES : null;
 
   const watermark = gate.quota?.export_watermark;
 
@@ -118,11 +115,11 @@ const WellDataLearningPage = () => {
           className: 'bg-[#BFFF00] text-slate-900',
         });
       } else if (res.passed) {
-        toast({ title: 'Passed — you were already certified', className: 'bg-[#BFFF00] text-slate-900' });
+        toast({ title: 'Passed. You were already certified', className: 'bg-[#BFFF00] text-slate-900' });
       } else {
         toast({
           title: 'Not passing yet',
-          description: `${res.score}/${res.max_score} answers within tolerance. Check the QC panel again.`,
+          description: `${res.score}/${res.max_score} answers within tolerance. Check the panels again.`,
           variant: 'destructive',
         });
       }
@@ -206,95 +203,8 @@ const WellDataLearningPage = () => {
             ))}
           </div>
 
-          {intermediate && (
-            <Card className="bg-[#1E293B] border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-white">SI import panel (Intermediate)</CardTitle>
-                <CardDescription>The full import pipeline on feet_20: unit conversion to metres, step detection, curve-kind recognition.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
-                  {[
-                    ['Converted depth range', `${num(intermediate.startMdM, 2)} – ${num(intermediate.stopMdM, 2)} m`],
-                    ['Converted step', `${num(intermediate.stepM, 4)} m`],
-                    ['Curves unit-converted', `${intermediate.convertedCurves}`],
-                    ['Curve kinds recognised', `${intermediate.recognizedKinds}`],
-                    ['irregular_20 uniform step?', intermediate.irregularUniform ? 'yes (1)' : 'no (0)'],
-                  ].map(([k, v]) => (
-                    <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                      <p className="text-gray-500 text-xs">{k}</p>
-                      <p className="text-white">{v}</p>
-                    </div>
-                  ))}
-                </div>
-                <div className="overflow-x-auto">
-                  <table className="w-full text-xs text-gray-400">
-                    <thead><tr className="text-left text-gray-500 border-b border-gray-700">
-                      <th className="py-1 pr-3">Curve</th><th className="py-1 pr-3">Kind</th><th className="py-1 pr-3">Unit (source → SI)</th>
-                    </tr></thead>
-                    <tbody>
-                      {intermediate.logs.map((l) => (
-                        <tr key={l.mnemonic} className="border-b border-gray-800/60">
-                          <td className="py-1 pr-3 text-white font-mono">{l.mnemonic}</td>
-                          <td className="py-1 pr-3">{l.kind || '—'}</td>
-                          <td className="py-1 pr-3">{l.converted ? `${l.sourceUnit} → ${l.unit}` : l.unit}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-              </CardContent>
-            </Card>
-          )}
-
-          {advanced && (
-            <Card className="bg-[#1E293B] border-gray-700">
-              <CardHeader>
-                <CardTitle className="text-white">Import campaign panel (Advanced)</CardTitle>
-                <CardDescription>All six teaching files through the full pipeline, aggregated. Depth curves are excluded from the curve counts.</CardDescription>
-              </CardHeader>
-              <CardContent className="space-y-4">
-                <div className="overflow-x-auto">
-                  <table className="w-full text-xs text-gray-400">
-                    <thead><tr className="text-left text-gray-500 border-b border-gray-700">
-                      <th className="py-1 pr-3">File</th><th className="py-1 pr-3">Curves</th>
-                      <th className="py-1 pr-3">Converted?</th><th className="py-1 pr-3">Uniform step?</th>
-                      <th className="py-1 pr-3">Dead curves</th><th className="py-1 pr-3">Nulls</th>
-                      <th className="py-1 pr-3">Samples</th>
-                    </tr></thead>
-                    <tbody>
-                      {advanced.perFile.map((f) => (
-                        <tr key={f.id} className="border-b border-gray-800/60">
-                          <td className="py-1 pr-3 text-white font-mono">{f.label}</td>
-                          <td className="py-1 pr-3">{f.curves}</td>
-                          <td className="py-1 pr-3">{f.converted ? 'yes' : 'no'}</td>
-                          <td className="py-1 pr-3">{f.uniform ? 'yes' : <span className="text-amber-400">no</span>}</td>
-                          <td className="py-1 pr-3">{f.dead ? <span className="text-red-400">{f.dead}</span> : '0'}</td>
-                          <td className="py-1 pr-3">{f.nulls}</td>
-                          <td className="py-1 pr-3">{f.samples}</td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
-                </div>
-                <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
-                  {[
-                    ['Curves imported across the campaign', `${advanced.campaignCurves}`],
-                    ['Files needing depth unit conversion', `${advanced.convertedFiles}`],
-                    ['Dead curves detected', `${advanced.deadCurves}`],
-                    ['Files with a uniform depth step', `${advanced.uniformFiles}`],
-                    ['Depth samples in wrapped_12', `${advanced.wrappedSamples}`],
-                    ['Flagged nulls in nullheavy_20', `${advanced.nullheavyNulls}`],
-                  ].map(([k, v]) => (
-                    <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
-                      <p className="text-gray-500 text-xs">{k}</p>
-                      <p className="text-white">{v}</p>
-                    </div>
-                  ))}
-                </div>
-              </CardContent>
-            </Card>
-          )}
+          {tier === 'intermediate' && <ImportExplorer />}
+          {tier === 'advanced' && <CampaignExplorer />}
 
           {/* Capstone */}
           <Card className="bg-[#1E293B] border-gray-700">
@@ -303,6 +213,10 @@ const WellDataLearningPage = () => {
               <CardDescription>{capstone?.prompt}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
+              {caseFiles && (
+                <CapstoneCaseFiles files={caseFiles}
+                  note="Download the case files, then open them in the panels above with Open your own LAS files. No panel loads them for you." />
+              )}
               {!capstoneOpen ? (
                 <div className="rounded-md border border-gray-700 bg-[#0F172A] p-4 text-sm text-gray-300 flex items-start gap-2">
                   <Lock className="h-4 w-4 text-[#BFFF00] mt-0.5 shrink-0" />
@@ -366,7 +280,7 @@ const WellDataLearningPage = () => {
                     </>
                   ) : (
                     <p className="text-red-300 font-medium flex items-center gap-2">
-                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance — re-read the QC panel for each file and try again.
+                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Open each case file in the panels again and re-read them.
                     </p>
                   )}
                 </div>

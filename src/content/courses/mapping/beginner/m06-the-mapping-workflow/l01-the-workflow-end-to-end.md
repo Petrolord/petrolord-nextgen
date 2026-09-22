@@ -10,7 +10,7 @@ Reduce every well to three numbers: an easting, a northing, and a picked depth o
 
 The important part of this step is the bookkeeping about wells that do not make it in. A well drilled short of the surface, a well where the top was not picked because the section was faulted out, a well where the pick exists but the coordinate does not, all of these have to be recorded as absent rather than quietly filled in. A missing pick entered as zero is not a small error. It is a control point claiming the surface comes to sea level, and a spline will honour it.
 
-On Ekene, all six wells carry a TOP_SAND pick and a map position, so the control set is six points and nothing has to be dropped. Six is the number the capstone grades first, and it is the number every later step is built on.
+On Ekene, all six wells carry a TOP_SAND pick and a map position, so the control set is six points and nothing has to be dropped. Six is the number every later step is built on.
 
 ## Step 2: choose the frame and cell size
 

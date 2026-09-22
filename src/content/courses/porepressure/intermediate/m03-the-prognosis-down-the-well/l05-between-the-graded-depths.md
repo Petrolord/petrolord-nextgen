@@ -4,7 +4,7 @@ The capstone grades values at 3000 m and total depth, but a prognosis is used at
 
 ## The table
 
-Engine values at five depths spanning the ramp, all on capstone settings:
+Engine values at five depths spanning the ramp, all on teaching settings:
 
 At 2600 m: log 313.01471963830767 us/m, trend 311.6193270435334, ratio 0.9955420863389854, budget 30.04308796385235 MPa, overpressure 0.4 MPa.
 

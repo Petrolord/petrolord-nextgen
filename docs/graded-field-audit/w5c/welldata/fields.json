@@ -1,0 +1,134 @@
+{
+ "beginner": [
+  {
+   "key": "oduma2_n_samples",
+   "tol": 0,
+   "unit": "count",
+   "label": "oduma2_main: depth samples",
+   "expected": 437
+  },
+  {
+   "key": "oduma2_gr_nulls",
+   "tol": 0,
+   "unit": "count",
+   "label": "oduma2_main: GR null samples",
+   "expected": 13
+  },
+  {
+   "key": "oduma2_gr_mean",
+   "tol": 0.05,
+   "unit": "GAPI",
+   "label": "oduma2_main: mean GR (finite samples)",
+   "expected": 76.99698143635156
+  },
+  {
+   "key": "oduma3_step_m",
+   "tol": 0.001,
+   "unit": "m",
+   "label": "oduma3_feet: depth step, converted",
+   "expected": 0.0762
+  },
+  {
+   "key": "oduma5_pef_nulls",
+   "tol": 0,
+   "unit": "count",
+   "label": "oduma5_nulls: PEF null samples",
+   "expected": 241
+  },
+  {
+   "key": "oduma1_n_samples",
+   "tol": 0,
+   "unit": "count",
+   "label": "oduma1_wrapped: depth samples",
+   "expected": 207
+  }
+ ],
+ "intermediate": [
+  {
+   "key": "oduma3_start_md_m",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "oduma3_feet: start depth (converted)",
+   "expected": 2139.696044921875
+  },
+  {
+   "key": "oduma3_stop_md_m",
+   "tol": 0.01,
+   "unit": "m",
+   "label": "oduma3_feet: stop depth (converted)",
+   "expected": 2169.26171875
+  },
+  {
+   "key": "oduma3_import_step_m",
+   "tol": 0.001,
+   "unit": "m",
+   "label": "oduma3_feet: depth step (converted)",
+   "expected": 0.076171875
+  },
+  {
+   "key": "oduma3_converted_curves",
+   "tol": 0,
+   "unit": "count",
+   "label": "oduma3_feet: curves unit-converted",
+   "expected": 3
+  },
+  {
+   "key": "oduma3_recognized_kinds",
+   "tol": 0,
+   "unit": "count",
+   "label": "oduma3_feet: curve kinds recognised",
+   "expected": 6
+  },
+  {
+   "key": "oduma4_n_samples",
+   "tol": 0,
+   "unit": "count",
+   "label": "oduma4_irregular: depth samples",
+   "expected": 173
+  }
+ ],
+ "advanced": [
+  {
+   "key": "oduma_campaign_curves",
+   "tol": 0,
+   "unit": "count",
+   "label": "Curves imported across the ODUMA campaign",
+   "expected": 31
+  },
+  {
+   "key": "oduma_converted_files",
+   "tol": 0,
+   "unit": "count",
+   "label": "Files needing depth unit conversion",
+   "expected": 3
+  },
+  {
+   "key": "oduma_dead_curves",
+   "tol": 0,
+   "unit": "count",
+   "label": "Dead curves detected",
+   "expected": 2
+  },
+  {
+   "key": "oduma_uniform_files",
+   "tol": 0,
+   "unit": "count",
+   "label": "Files with a uniform depth step",
+   "expected": 4
+  },
+  {
+   "key": "oduma1_wrapped_samples",
+   "tol": 0,
+   "unit": "count",
+   "label": "Depth samples in oduma1_wrapped",
+   "expected": 207
+  },
+  {
+   "key": "oduma5_flagged_nulls",
+   "tol": 0,
+   "unit": "count",
+   "label": "Flagged nulls in oduma5_nulls",
+   "expected": 525
+  }
+ ]
+}

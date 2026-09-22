@@ -6,9 +6,9 @@ A well pick is a measurement. A node value is a computed estimate. They are prin
 
 ## The count
 
-The Ekene capstone grid holds 500 nodes. The field has six wells. So at least 494 of the values on that map were produced by an algorithm rather than observed by any tool in any hole.
+The Ekene teaching grid holds 500 nodes. The field has six wells. So at least 494 of the values on that map were produced by an algorithm rather than observed by any tool in any hole.
 
-Even that count is generous to the map. Only 201 of the 500 nodes are live at all, so the printed surface carries 201 numbers, of which at most six could coincide with a measurement. And a node only lines up with a well when the well happens to sit exactly on the lattice. At the capstone frame, origin (400, 800) with 100 m cells, five of the six wells do land on nodes. Ekene-2 does not: its y coordinate of 1150 is 350 m above the origin, which is three and a half cells, so the nearest nodes sit 50 m to either side of it.
+Even that count is generous to the map. Only 201 of the 500 nodes are live at all, so the printed surface carries 201 numbers, of which at most six could coincide with a measurement. And a node only lines up with a well when the well happens to sit exactly on the lattice. On the teaching frame, origin (400, 800) with 100 m cells, five of the six wells do land on nodes. Ekene-2 does not: its y coordinate of 1150 is 350 m above the origin, which is three and a half cells, so the nearest nodes sit 50 m to either side of it.
 
 That is the first consequence. A node near a well is still not the well. It is a value the algorithm wrote at a lattice position, and the fact that a measurement happens to be 50 m away does not convert it into one.
 
@@ -26,13 +26,13 @@ Remember that a map redrawn with different settings changes its numbers while th
 
 ## Preview: P-1
 
-The capstone ends with a question in this shape. A prospect location called P-1 sits at map coordinates (1600, 1600), and you are asked for the mapped depth of TOP_SAND there. The answer is 1542.62 m.
+The capstone ends with a question in this shape, on a prospect of its own. A prospect location called P-1 sits at map coordinates (1600, 1600), and you are asked for the mapped depth of TOP_SAND there. The answer is 1542.62 m.
 
 Look at what that number is. There is no well at (1600, 1600). Nothing has been drilled there, nothing has been logged there, and the 1542.62 was computed by sampling the gridded surface at that position, between the four nodes that surround it.
 
 How far is the nearest real information? The closest control point is Ekene-6, at (1900, 1800). The offset is 300 m in x and 200 m in y, so the distance is the square root of 300 squared plus 200 squared, which is the square root of 130000, about 361 m. Every other well is further: Ekene-3 is about 728 m away, Ekene-2 about 750 m, Ekene-1 about 849 m.
 
-So the honest reading of the capstone answer is this. At a location 361 m from the nearest measurement, the model estimates TOP_SAND at 1542.62 m, based on six control points and a thin-plate interpolation. That sentence is longer than "P-1 is at 1542.62 m", and it is the one you should be able to write. Module 4 will sharpen it further by asking whether the map should have offered a value at that location at all.
+So the honest reading of that answer is this. At a location 361 m from the nearest measurement, the model estimates TOP_SAND at 1542.62 m, based on six control points and a thin-plate interpolation. That sentence is longer than "P-1 is at 1542.62 m", and it is the one you should be able to write. Module 4 will sharpen it further by asking whether the map should have offered a value at that location at all.
 
 ## Exercise
 

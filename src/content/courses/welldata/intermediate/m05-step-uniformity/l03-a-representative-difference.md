@@ -1,6 +1,6 @@
 # A representative difference
 
-This is the subtlest number in the course, and it is worth slowing down for. The graded step for feet_20 is 0.609619140625 m. There are three other numbers within a whisker of it, all of them defensible, all of them reachable by sensible arithmetic, and none of them the value the pipeline reports. Understanding which one is graded, and why, is understanding what the uniformity test actually returns.
+This is the subtlest number in the course, and it is worth slowing down for. The reported step for feet_20 is 0.609619140625 m. There are three other numbers within a whisker of it, all of them defensible, all of them reachable by sensible arithmetic, and none of them the value the pipeline reports. Understanding which one the pipeline reports, and why, is understanding what the uniformity test actually returns.
 
 ## The differences are not all the same
 
@@ -21,9 +21,9 @@ This is the case the second term of the tolerance formula and the one percent te
 
 Say that out loud in the form the pipeline means it: this log is uniform to within a tolerance rather than exactly uniform. That is the strongest claim any converted file can support.
 
-## Which number is graded
+## Which number is reported
 
-The test returns the first difference, so the reported step for feet_20 is 0.609619140625 m, and that is the graded value.
+The test returns the first difference, so the reported step for feet_20 is 0.609619140625 m. On the capstone's own feet file the step it grades is the same kind of number, the reported first difference.
 
 It is a representative difference. It is one real interval, observed between the first two samples, that the test has certified as describing every other interval to within the tolerance. It is not a summary of the column and it was never intended to be one.
 
@@ -33,7 +33,7 @@ Three near neighbours are worth naming, because each is a number a careful learn
 
 **0.609599609375** is the average step, the last converted depth minus the first, divided by the 150 intervals. It is a perfectly sensible summary of the column and it is what most people write when asked for the step. The test does not average, so this is not the reported value.
 
-**0.6094970703125** is another consecutive difference from the same column. It is a real observed interval, exactly as real as the graded one. It is not reported only because it is not the first.
+**0.6094970703125** is another consecutive difference from the same column. It is a real observed interval, exactly as real as the reported one. It is not reported only because it is not the first.
 
 All three sit inside the capstone tolerance of 0.001 on the step field, so a learner who reports any of them passes that field. That is deliberate and it is not a reason to be vague. The tolerance is there so that the grade does not turn on float32 bookkeeping, while the value the pipeline reports is specifically the first difference, 0.609619140625 m.
 
@@ -49,6 +49,6 @@ The panel below runs the pipeline on any teaching file and shows the reported st
 
 ## Exercise
 
-Open the panel on feet_20 and write down the reported step and the first differences it lists. Then, without looking, write the three near neighbours of the graded value and say where each one comes from. Finally answer in one sentence: why does the reported step differ from the average step even though the file is uniform?
+Open the panel on feet_20 and write down the reported step and the first differences it lists. Then, without looking, write the three near neighbours of the reported value and say where each one comes from. Finally answer in one sentence: why does the reported step differ from the average step even though the file is uniform?
 
-As a self check: the reported and graded step is 0.609619140625 m, and the differences in the column include both 0.609619140625 m and 0.6094970703125 m, about 0.000122 m apart, well inside the tolerance of about 0.006096 m. The three near neighbours are 0.6096, the exact hand answer of 2 feet times 0.3048; 0.609599609375, the average step taken as the last converted depth minus the first over 150 intervals; and 0.6094970703125, another consecutive difference from the column. All three fall inside the capstone tolerance of 0.001, so all three would pass, and the value the pipeline reports is specifically the first difference. It differs from the average because the test never averages: it adopts the first difference as a candidate, checks the rest against it, and returns that first difference.
+As a self check: the reported step is 0.609619140625 m, and the differences in the column include both 0.609619140625 m and 0.6094970703125 m, about 0.000122 m apart, well inside the tolerance of about 0.006096 m. The three near neighbours are 0.6096, the exact hand answer of 2 feet times 0.3048; 0.609599609375, the average step taken as the last converted depth minus the first over 150 intervals; and 0.6094970703125, another consecutive difference from the column. All three fall inside the capstone tolerance of 0.001, so all three would pass, and the value the pipeline reports is specifically the first difference. It differs from the average because the test never averages: it adopts the first difference as a candidate, checks the rest against it, and returns that first difference.

@@ -1,0 +1,360 @@
+{
+ "course": "sim",
+ "wave": "w5b",
+ "migration": "20261028b_w5_sim.sql",
+ "fields_file": "docs/graded-field-audit/w5b/sim.fields.json",
+ "keys_module": "docs/graded-field-audit/w5b/sim.keys.mjs",
+ "sources": [
+  "src/components/course/panels/sim/simLab.js",
+  "src/pages/apps/SimLearningPage.jsx"
+ ],
+ "capstone_lessons": {
+  "beginner": "beginner/m06-the-associate-reading/l02-working-the-capstone.md",
+  "intermediate": "intermediate/m06-the-professional-reading/l02-working-the-capstone.md",
+  "advanced": "advanced/m06-the-expert-reading/l02-working-the-capstone.md"
+ },
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "title": "Read the deck",
+   "dataset": "ekene-dynamic/sim.json rebuilt at regional mean 1566.5 m",
+   "why": "The story-so-far and working lessons printed every answer and the panels opened on the committed deck. Re-cased on the deck rebuilt at a regional mean of 1566.5 m, read at three stated columns, the Ekene-2 column, the EQUIL datum and a column count; the cell count, layer thickness and table end points it replaces are fixed by the deck design and cannot move with any setting.",
+   "prompt": "A re-map moves the Ekene regional mean to 1566.5 m TVD; the contact stays at 1560 m. Rebuild the deck at that mean (type it into the deck and structure explorers, which open on the committed deck) and read it: the top depth in feet of column (24, 6), of column (6, 26) and of column (18, 3), the top of the Ekene-2 column in feet, the EQUIL datum depth in feet, and how many of the 900 columns have their top above the contact. Every one is read or counted from the rebuilt deck.",
+   "rekey": [
+    "deck_cell_count",
+    "crest_top_ft",
+    "layer1_dz_ft",
+    "swof_first_sw",
+    "sgof_last_sg",
+    "vertical_connection_count"
+   ],
+   "case": {
+    "regional_mean_m": 1566.5,
+    "owc_m": 1560,
+    "col_a": [
+     24,
+     6
+    ],
+    "col_b": [
+     6,
+     26
+    ],
+    "col_c": [
+     18,
+     3
+    ]
+   },
+   "annot": {
+    "col_top_c_ft": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Top at column (i, j)')",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Top at column (i, j)')",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far and working lessons printed every answer and the panels opened on the committed deck. Re-cased on the deck rebuilt at a regional mean of 1566.5 m, read at three stated columns, the Ekene-2 column, the EQUIL datum and a column count; the cell count, layer thickness and table end points it replaces are fixed by the deck design and cannot move with any setting.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ekene2_top_ft": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Top at column (i, j)' at Ekene-2's cell (23, 13))",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Top at column (i, j)' at Ekene-2's cell (23, 13))",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far and working lessons printed every answer and the panels opened on the committed deck. Re-cased on the deck rebuilt at a regional mean of 1566.5 m, read at three stated columns, the Ekene-2 column, the EQUIL datum and a column count; the cell count, layer thickness and table end points it replaces are fixed by the deck design and cannot move with any setting.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "equil_datum_ft": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Datum'); DeckExplorer.jsx SOLUTION EQUIL at the typed mean",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Datum'); DeckExplorer.jsx SOLUTION EQUIL at the typed mean",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far and working lessons printed every answer and the panels opened on the committed deck. Re-cased on the deck rebuilt at a regional mean of 1566.5 m, read at three stated columns, the Ekene-2 column, the EQUIL datum and a column count; the cell count, layer thickness and table end points it replaces are fixed by the deck design and cannot move with any setting.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "col_top_a_ft": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Top at column (i, j)', typed column and regional mean)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Top at column (i, j)', typed column and regional mean)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far and working lessons printed every answer and the panels opened on the committed deck. Re-cased on the deck rebuilt at a regional mean of 1566.5 m, read at three stated columns, the Ekene-2 column, the EQUIL datum and a column count; the cell count, layer thickness and table end points it replaces are fixed by the deck design and cannot move with any setting.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "col_top_b_ft": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Top at column (i, j)')",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Top at column (i, j)')",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far and working lessons printed every answer and the panels opened on the committed deck. Re-cased on the deck rebuilt at a regional mean of 1566.5 m, read at three stated columns, the Ekene-2 column, the EQUIL datum and a column count; the cell count, layer thickness and table end points it replaces are fixed by the deck design and cannot move with any setting.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "columns_above_owc": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Columns with top above the contact')",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Columns with top above the contact')",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far and working lessons printed every answer and the panels opened on the committed deck. Re-cased on the deck rebuilt at a regional mean of 1566.5 m, read at three stated columns, the Ekene-2 column, the EQUIL datum and a column count; the cell count, layer thickness and table end points it replaces are fixed by the deck design and cannot move with any setting.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "A",
+   "title": "Reconcile the model against the field",
+   "dataset": "ekene-dynamic/sim.json rebuilt at regional mean 1573.2 m, contact 1562 m, a stated oil",
+   "why": "The story-so-far lesson printed every answer and the structure explorer opened on the committed deck. Re-cased on a deck rebuilt at a regional mean of 1573.2 m and a 1562 m contact, and a stated oil for the correlation check the panel now carries (the correlated Bo was unobtainable before).",
+   "prompt": "Audit a rebuilt Ekene deck against everything outside it: the regional mean is 1573.2 m TVD and the contact 1562 m. Report the deck's stock tank oil initially in place under the ECLIPSE CELL-CENTRE rule, where a layer contributes oil only if its own centre depth lies above the contact; the gap between that and the NG5 volumetric booking of 12139208.107496763 stb, as a percentage OF THE BOOKING, signed so a smaller deck reads negative; the number of grid cells that rule assigns to oil; and the top depth in metres the deck gives at Ekene-2, whose logged top is 1565 m at map position (2200, 1150). Then run Standing's correlation for a 35 API oil with 450 scf/stb of designed solution gas, a gas gravity of 0.80, 195 degrees Fahrenheit, a bubble point of 2200 psia and an initial pressure of 3400 psia: report the oil formation volume factor at the initial pressure and the percentage by which the correlated solution gas at the bubble point exceeds the designed 450 scf/stb. The structure explorer opens on the committed deck and the teaching oil; type the setting in.",
+   "rekey": [
+    "deck_stoiip_stb",
+    "stoiip_vs_booking_pct",
+    "oil_cells_centre_rule",
+    "ekene2_deck_top_m",
+    "correlated_bo_at_pi",
+    "correlated_rs_gap_pct"
+   ],
+   "case": {
+    "regional_mean_m": 1573.2,
+    "owc_m": 1562,
+    "fluid": {
+     "api": 35,
+     "gasSg": 0.8,
+     "tempF": 195,
+     "pbPsia": 2200,
+     "piPsia": 3400,
+     "rsiScfStb": 450
+    }
+   },
+   "annot": {
+    "deck_stoiip_stb": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Deck STOIIP' at the typed mean and contact)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Deck STOIIP' at the typed mean and contact)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far lesson printed every answer and the structure explorer opened on the committed deck. Re-cased on a deck rebuilt at a regional mean of 1573.2 m and a 1562 m contact, and a stated oil for the correlation check the panel now carries (the correlated Bo was unobtainable before).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "stoiip_vs_booking_pct": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Gap')",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Gap')",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far lesson printed every answer and the structure explorer opened on the committed deck. Re-cased on a deck rebuilt at a regional mean of 1573.2 m and a 1562 m contact, and a stated oil for the correlation check the panel now carries (the correlated Bo was unobtainable before).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "oil_cells_centre_rule": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Oil cells')",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Oil cells')",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far lesson printed every answer and the structure explorer opened on the committed deck. Re-cased on a deck rebuilt at a regional mean of 1573.2 m and a 1562 m contact, and a stated oil for the correlation check the panel now carries (the correlated Bo was unobtainable before).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "ekene2_deck_top_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/StructureExplorer.jsx (well table, Deck (m) column)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/StructureExplorer.jsx (well table, Deck (m) column)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far lesson printed every answer and the structure explorer opened on the committed deck. Re-cased on a deck rebuilt at a regional mean of 1573.2 m and a 1562 m contact, and a stated oil for the correlation check the panel now carries (the correlated Bo was unobtainable before).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "correlated_bo_at_pi": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/StructureExplorer.jsx (correlation check, Tile 'Correlated Bo at initial pressure')",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/StructureExplorer.jsx (correlation check, Tile 'Correlated Bo at initial pressure')",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far lesson printed every answer and the structure explorer opened on the committed deck. Re-cased on a deck rebuilt at a regional mean of 1573.2 m and a 1562 m contact, and a stated oil for the correlation check the panel now carries (the correlated Bo was unobtainable before).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "correlated_rs_gap_pct": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/StructureExplorer.jsx (correlation check, Tile 'Rs gap to the designed Rs')",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/StructureExplorer.jsx (correlation check, Tile 'Rs gap to the designed Rs')",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far lesson printed every answer and the structure explorer opened on the committed deck. Re-cased on a deck rebuilt at a regional mean of 1573.2 m and a 1562 m contact, and a stated oil for the correlation check the panel now carries (the correlated Bo was unobtainable before).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "advanced": {
+   "pick": "A",
+   "title": "Build one and prove it",
+   "dataset": "ekene-dynamic/sim.json (side-track toe (1500, 1300), booking target 11500000 stb, 2024 history)",
+   "why": "The story-so-far lesson printed every answer and the build explorer opened on the EK6-ST toe. Re-cased on a toe at (1500, 1300), a booking target of 11500000 stb (the structure explorer now takes the regional mean, so the bisection can be run), the 2024 history periods, the W1 validator message count re-computed on the calibrated deck, and the datum at the calibrated mean.",
+   "prompt": "Build the parts of the Ekene deck that require a decision. First intersect a new side-track against the committed grid: it runs from Ekene-6's heel at map position (1900, 1800) to a toe at (1500, 1300), descending from the top of the sand to the base of the column, on a 100 m grid whose origin sits half a cell south-west of the field origin. Report the number of merged connections and the number of distinct (i, j) columns they fall in. Then calibrate: bisect on the kriging regional mean, in metres true vertical depth, until the deck's CELL-CENTRE oil volume at the 1560 m contact crosses a revised booking of 11500000 stb, and report the mean you converge on. Then take the history: convert the RC4 monthly ledger to rates by each period's own calendar day count, and report the total oil the twelve periods dated 2024-01-01 through 2024-12-01 carry when each rate is multiplied back by the days it spans. Then count the error messages the validator raises across the fixture's seven deliberately broken specifications, rebuilt at your calibrated mean, every MESSAGE it lists under each case. Finally report the equilibration datum depth in feet at your calibrated mean, computed as the mean of all 900 column top depths.",
+   "rekey": [
+    "deviated_connection_count",
+    "deviated_distinct_columns",
+    "calibration_regional_mean_m",
+    "history_total_oil_stb",
+    "validator_error_messages",
+    "equil_datum_depth_ft"
+   ],
+   "case": {
+    "toe": {
+     "x": 1500,
+     "y": 1300
+    },
+    "booking_target_stb": 11500000,
+    "history_from": "2024-01-01",
+    "history_to": "2024-12-01"
+   },
+   "annot": {
+    "deviated_connection_count": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/BuildExplorer.jsx (Tile 'Connections', toe sliders)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/BuildExplorer.jsx (Tile 'Connections', toe sliders)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far lesson printed every answer and the build explorer opened on the EK6-ST toe. Re-cased on a toe at (1500, 1300), a booking target of 11500000 stb (the structure explorer now takes the regional mean, so the bisection can be run), the 2024 history periods, the W1 validator message count re-computed on the calibrated deck, and the datum at the calibrated mean.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "deviated_distinct_columns": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/BuildExplorer.jsx (Tile 'Distinct columns')",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/BuildExplorer.jsx (Tile 'Distinct columns')",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far lesson printed every answer and the build explorer opened on the EK6-ST toe. Re-cased on a toe at (1500, 1300), a booking target of 11500000 stb (the structure explorer now takes the regional mean, so the bisection can be run), the 2024 history periods, the W1 validator message count re-computed on the calibrated deck, and the datum at the calibrated mean.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "calibration_regional_mean_m": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/StructureExplorer.jsx (typed regional mean against the 'Deck STOIIP' tile; the learner bisects)",
+     "printed": "full",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/StructureExplorer.jsx (typed regional mean against the 'Deck STOIIP' tile; the learner bisects)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far lesson printed every answer and the build explorer opened on the EK6-ST toe. Re-cased on a toe at (1500, 1300), a booking target of 11500000 stb (the structure explorer now takes the regional mean, so the bisection can be run), the 2024 history periods, the W1 validator message count re-computed on the calibrated deck, and the datum at the calibrated mean.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "history_oil_stb": {
+     "source": "hand-calc",
+     "source_ref": "src/content/courses/sim/intermediate/m05-wells-on-a-real-field/l03-history-rates-from-monthly-volumes.md (rates x calendar days from the deck's WCONHIST and DATES)",
+     "printed": "full",
+     "display_scale": 1,
+     "display_ref": "src/content/courses/sim/intermediate/m05-wells-on-a-real-field/l03-history-rates-from-monthly-volumes.md (rates x calendar days from the deck's WCONHIST and DATES)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far lesson printed every answer and the build explorer opened on the EK6-ST toe. Re-cased on a toe at (1500, 1300), a booking target of 11500000 stb (the structure explorer now takes the regional mean, so the bisection can be run), the 2024 history periods, the W1 validator message count re-computed on the calibrated deck, and the datum at the calibrated mean.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "validator_error_messages": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/BuildExplorer.jsx (Validation mode lists each case's messages)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/BuildExplorer.jsx (Validation mode lists each case's messages)",
+     "prompt_precision": null,
+     "answer_space": 8,
+     "guess_p": 0.125,
+     "evidence": "The story-so-far lesson printed every answer and the build explorer opened on the EK6-ST toe. Re-cased on a toe at (1500, 1300), a booking target of 11500000 stb (the structure explorer now takes the regional mean, so the bisection can be run), the 2024 history periods, the W1 validator message count re-computed on the calibrated deck, and the datum at the calibrated mean.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "equil_datum_depth_ft": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Datum' at the typed regional mean)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/sim/StructureExplorer.jsx (Tile 'Datum' at the typed regional mean)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The story-so-far lesson printed every answer and the build explorer opened on the EK6-ST toe. Re-cased on a toe at (1500, 1300), a booking target of 11500000 stb (the structure explorer now takes the regional mean, so the bisection can be run), the 2024 history periods, the W1 validator message count re-computed on the calibrated deck, and the datum at the calibrated mean.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  }
+ }
+}

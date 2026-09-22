@@ -20,7 +20,7 @@ The **step** is one sample. The engine converts the window from ms to samples by
 
 At the 2 ms sample rate used here, 40 ms is 20 samples, so the search runs from lag $-20$ to lag $+20$ in steps of one. That is 20 negative lags, 20 positive lags, and zero lag itself: **41 lags tested**, covering $-40$ ms to $+40$ ms in 2 ms steps.
 
-Two consequences follow directly. The reported shift is always a whole number of samples, so on this grid it is always an even number of ms, and 8 ms qualifies while 7 ms could never be returned. And the resolution of the answer is the sample rate, so a scan on a 2 ms grid cannot distinguish a true offset of 8 ms from one of 8.4 ms. That is why the graded tolerance on the shift is 0.5 ms, comfortably inside a single sample.
+Two consequences follow directly. The reported shift is always a whole number of samples, so on this grid it is always an even number of ms, and 6 ms qualifies while 7 ms could never be returned. And the resolution of the answer is the sample rate, so a scan on a 2 ms grid cannot distinguish a true offset of 6 ms from one of 6.4 ms. That is why the graded tolerance on the shift is 0.5 ms, comfortably inside a single sample.
 
 ## Choosing the winner
 
@@ -32,7 +32,7 @@ Notice also what the winner does not tell you on its own. It is the best of 41, 
 
 ## Running the scan here
 
-On the planted case, the scan builds the 25 Hz synthetic, takes the observed trace that is that same synthetic arriving 8 ms late in TWT, and scores all 41 lags. The answer it returns is a shift of 8 ms of TWT with a correlation of 1. The next lesson works through why the sign is positive, and the lesson after that works through why the correlation is exactly 1 and why that value belongs to this exercise rather than to well ties in general.
+On the planted case, the scan builds the 25 Hz synthetic, takes the observed trace that is that same synthetic arriving 6 ms late in TWT, and scores all 41 lags. The answer it returns is a shift of 6 ms of TWT with a correlation of 1. The next lesson works through why the sign is positive, and the lesson after that works through why the correlation is exactly 1 and why that value belongs to this exercise rather than to well ties in general.
 
 Try shifting your attention across the curve rather than staring only at its top. The panel below runs the full scan and plots the correlation against every lag it tested.
 

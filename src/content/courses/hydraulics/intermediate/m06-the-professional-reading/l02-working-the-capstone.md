@@ -4,6 +4,8 @@ Six numbers on two wells, with the new mud.
 
 {{panel:hy-cleaning-explorer}}
 
+**Your mud.** Type the four readings and the density into the explorer's "Your mud" boxes. Fields 1 to 3 are the "ECD against depth" view, fields 4 and 5 the "Transport along the annulus" view on the horizontal case, and field 6 the "The flow rate you need" view with a target of 0.80. The boxes open blank, which is the selected case's own mud.
+
 ## What is asked
 
 1. The equivalent circulating density at total depth on the SLANT well.

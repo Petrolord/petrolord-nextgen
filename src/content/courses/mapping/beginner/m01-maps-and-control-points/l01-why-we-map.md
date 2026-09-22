@@ -32,9 +32,9 @@ Volumetrics then integrates the map. It takes the surface, a contact, an area an
 
 Here is the sentence that runs through every module that follows. A map is mostly interpolation.
 
-Count it on the fixture you are about to meet. Six wells provide six known depths. The grid you build in the capstone has hundreds of nodes. Every node that is not a well is a value that no measurement produced. The algorithm made it up, in a controlled and defensible way, but it made it up. A printed map hides that distinction completely: the contour drawn through hard data and the contour drawn through pure inference are the same weight of line on the same sheet of paper.
+Count it on the fixture you are about to meet. Six wells provide six known depths. The grid you build from them has hundreds of nodes. Every node that is not a well is a value that no measurement produced. The algorithm made it up, in a controlled and defensible way, but it made it up. A printed map hides that distinction completely: the contour drawn through hard data and the contour drawn through pure inference are the same weight of line on the same sheet of paper.
 
-So the honesty of a map is not a matter of how smooth or how pretty it is. It is a matter of whether the map says where it is supported by data and where it is not. That is why this course spends a whole module on extrapolation limits, and why the capstone grades how many of the grid's nodes were allowed to carry a value at all. A map that stops at the edge of its support is more useful than one that confidently covers the whole licence block on the strength of six picks.
+So the honesty of a map is not a matter of how smooth or how pretty it is. It is a matter of whether the map says where it is supported by data and where it is not. That is why this course spends a whole module on extrapolation limits, and why the capstone asks how many of the grid's nodes were allowed to carry a value at all. A map that stops at the edge of its support is more useful than one that confidently covers the whole licence block on the strength of six picks.
 
 Keep the question in your head from here on. For any point on the map, how far is it from the nearest well, and how much of what I am reading is measurement rather than assumption?
 

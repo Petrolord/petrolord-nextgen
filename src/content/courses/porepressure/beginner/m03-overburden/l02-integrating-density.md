@@ -20,7 +20,7 @@ Forgetting the water column entirely is the commonest error in this whole calcul
 
 ## Gravity is not a place to round
 
-The seed above used $g = 9.80665$ m/s2, and so does every pressure in this course. Rounding it looks harmless and is not. The whole hydrostatic column of this well is $1025 \times 100 + 1030 \times 4000 = 4222500$ kg/m2, so the pressure at TD is that mass per unit area times whatever $g$ you chose. With $g = 9.8$ the answer is 41.380500000 MPa, low by 0.028079625 MPa. With $g = 9.81$ it is 41.422725000 MPa, high by 0.014145375 MPa. With 9.80665 it is the graded 41.408579625 MPa. The capstone tolerance on that field is 0.01 MPa, so both rounded values of gravity are marked wrong. The 9.81 answer is the awkward one, because it looks right and is out by about 14 kilopascals.
+The seed above used $g = 9.80665$ m/s2, and so does every pressure in this course. Rounding it looks harmless and is not. The whole hydrostatic column of this well is $1025 \times 100 + 1030 \times 4000 = 4222500$ kg/m2, so the pressure at TD is that mass per unit area times whatever $g$ you chose. With $g = 9.8$ the answer is 41.380500000 MPa, low by 0.028079625 MPa. With $g = 9.81$ it is 41.422725000 MPa, high by 0.014145375 MPa. With 9.80665 it is the engine's 41.408579625 MPa. The capstone tolerance on that field is 0.01 MPa, so both rounded values of gravity are marked wrong. The 9.81 answer is the awkward one, because it looks right and is out by about 14 kilopascals.
 
 ## Sample by sample
 

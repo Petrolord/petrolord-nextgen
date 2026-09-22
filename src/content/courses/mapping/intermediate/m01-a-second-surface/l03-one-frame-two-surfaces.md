@@ -4,7 +4,7 @@ Two grids can only be combined if they agree, node for node, about where they ar
 
 ## What a frame is
 
-The Associate tier called it the grid frame and it is five numbers: an origin $(x_0, y_0)$, a cell size $(dx, dy)$, and a node count $(n_x, n_y)$. For the Ekene capstone those are $(400, 800)$, $(100, 100)$ and $(25, 20)$, giving 500 nodes covering 2400 m east to west and 1900 m north to south.
+The Associate tier called it the grid frame and it is five numbers: an origin $(x_0, y_0)$, a cell size $(dx, dy)$, and a node count $(n_x, n_y)$. For the Ekene teaching frame those are $(400, 800)$, $(100, 100)$ and $(25, 20)$, giving 500 nodes covering 2400 m east to west and 1900 m north to south.
 
 Node $(r, c)$ of that grid sits at $x_0 + c\,dx$ and $y_0 + r\,dy$, and nowhere else. The frame is what turns an array of numbers into a map.
 
@@ -46,6 +46,6 @@ The check that catches it is to compare the two frames field by field before sub
 
 ## Exercise
 
-State the five numbers that define the Ekene capstone frame, then explain in two sentences why subtracting grids with different origins produces a map that looks correct but is not.
+State the five numbers that define the Ekene teaching frame, then explain in two sentences why subtracting grids with different origins produces a map that looks correct but is not.
 
 As a self-check: the frame is origin (400, 800), cell 100 m by 100 m, and 25 by 20 nodes, giving 500 nodes over 2400 m by 1900 m. Subtracting misaligned grids pairs each node of one surface with a node of the other that sits somewhere else on the ground, so every value in the result is a difference between two unrelated locations; it looks correct because a smooth surface minus a shifted smooth surface is still smooth, so the output contours cleanly and nothing about its appearance announces the problem.

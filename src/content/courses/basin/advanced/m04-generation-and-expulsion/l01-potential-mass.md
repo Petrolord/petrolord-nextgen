@@ -1,6 +1,6 @@
 # Potential mass
 
-Everything with units of mass in this model descends from one closed-form number: the source rock's generative potential per square metre of basin. This lesson derives it by hand, because the capstone's generated mass is this number times a TR you already understand.
+Everything with units of mass in this model descends from one closed-form number: the source rock's generative potential per square metre of basin. This lesson derives it by hand, because the generated mass the tier reports is this number times a TR you already understand.
 
 ## The formula
 

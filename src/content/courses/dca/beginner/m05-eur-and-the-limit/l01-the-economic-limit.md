@@ -18,7 +18,7 @@ This course uses 10 stb/d as the working limit for every Ekene producer. Hold on
 
 You might hope to sidestep the whole question by integrating the decline curve to infinity. For an exponential decline that integral exists, but for the harmonic model it diverges: the area under q = qi / (1 + Di t) grows without bound as t grows. A harmonic well produces an infinite volume on paper. On paper only, because long before infinity the rate has dropped below what anyone will pay to produce.
 
-So the limit is not an accounting nicety bolted onto the physics. It is the thing that makes EUR a finite, meaningful number at all for fat-tailed declines, and it is part of the definition for every model. Module 5 writes every EUR as EUR at a stated limit, and the capstone grades EUR at the 10 stb/d limit, with the limit named in the field label.
+So the limit is not an accounting nicety bolted onto the physics. It is the thing that makes EUR a finite, meaningful number at all for fat-tailed declines, and it is part of the definition for every model. Module 5 writes every EUR as EUR at a stated limit, and the capstone grades EUR at the limit its brief states, with the limit named in the field label.
 
 ## The limit moves
 

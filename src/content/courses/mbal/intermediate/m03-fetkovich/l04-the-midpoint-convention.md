@@ -30,9 +30,9 @@ The drawdown driving the influx is $\bar{p}_a[n-1] - p_{wf}[n]$. The aquifer pre
 
 That gives the errors a direction you can predict before you compute anything:
 
-**The start-of-step pressure understates the influx.** In step 1 it is catastrophic. The aquifer starts at 2740 and the reservoir starts at 2740, so the drawdown is zero and the model delivers no water at all in the first year, which is plainly false: the reservoir dropped 240 psi during that year and the aquifer felt it. Every later step inherits the deficit, and the cumulative influx after four steps comes out at $31.7496087853307$ MMbbl against the correct $37.9731544101719$, an error of $-16.3893300978283$ percent.
+**The start-of-step pressure understates the influx.** In step 1 it is catastrophic. The aquifer starts at 2740 and the reservoir starts at 2740, so the drawdown is zero and the model delivers no water at all in the first year, which is plainly false: the reservoir dropped 240 psi during that year and the aquifer felt it. Every later step inherits the deficit, and on module 3's teaching aquifer the cumulative influx after four steps comes out at $20.58107123454052$ MMbbl against the correct $23.729965552293255$, an error of $-13.269696118241637$ percent.
 
-**The end-of-step pressure overstates the influx.** In step 1 the drawdown becomes $2740 - 2500 = 240$ psi, exactly double the midpoint's 120 psi, so the step delivers exactly double the water: $7850495.69460241$ bbl instead of $3925247.84730120$ bbl. Cumulative influx after four steps reaches $44.1967000350130$ MMbbl, an error of $+16.3893300978283$ percent.
+**The end-of-step pressure overstates the influx.** In step 1 the drawdown becomes $2740 - 2500 = 240$ psi, exactly double the midpoint's 120 psi, so the step delivers exactly double the water: on the teaching aquifer $6239050.990544785$ bbl instead of $3119525.4952723924$ bbl. Cumulative influx after four steps reaches $26.878859870046004$ MMbbl, an error of $+13.269696118241692$ percent.
 
 Read those two percentages again. They are the same magnitude with opposite signs, and that is not a coincidence: the midpoint sits exactly halfway between the two alternatives at every step, and the influx is linear in $p_{wf}$, so the two errors are mirror images. The midpoint is not a compromise between two reasonable options. It is the only one of the three that does not bias the answer.
 
@@ -40,21 +40,21 @@ There is a common misstatement of this point that you should be able to correct 
 
 ## Worked example: step 1 three ways
 
-Constants for the published case: the reduced marching constant is $32710.3987275100$ bbl per psi and the aquifer starts at 2740 psia.
+Constants for the teaching aquifer: the reduced marching constant is $25996.045793936602$ bbl per psi and the aquifer starts at 2740 psia.
 
 Start-of-step, $p_{wf} = 2740$:
 
-$$\Delta p = 2740 - 2740 = 0, \qquad \Delta W_e = 32710.3987275100 \times 0 = 0 \ \text{bbl}$$
+$$\Delta p = 2740 - 2740 = 0, \qquad \Delta W_e = 25996.045793936602 \times 0 = 0 \ \text{bbl}$$
 
 Midpoint, $p_{wf} = 2620$:
 
-$$\Delta p = 120, \qquad \Delta W_e = 32710.3987275100 \times 120 = 3925247.84730120 \ \text{bbl}$$
+$$\Delta p = 120, \qquad \Delta W_e = 25996.045793936602 \times 120 = 3119525.4952723924 \ \text{bbl}$$
 
 End-of-step, $p_{wf} = 2500$:
 
-$$\Delta p = 240, \qquad \Delta W_e = 32710.3987275100 \times 240 = 7850495.69460241 \ \text{bbl}$$
+$$\Delta p = 240, \qquad \Delta W_e = 25996.045793936602 \times 240 = 6239050.990544785 \ \text{bbl}$$
 
-The book prints 3.925 MMbbl for this step. Only the midpoint reproduces it, and it does so to four figures.
+On the published geometry the book's first printed step, to four figures, is reproduced only by the midpoint.
 
 Follow the three marches to the end and the ordering holds, though the gap narrows in relative terms because the aquifer's own pressure adjusts. The start-of-step march takes less water out, so its aquifer stays stronger and pushes harder later. Neither self-correction rescues the answer, and both leave the shape of the influx curve wrong even where the final total looks tolerable.
 
@@ -68,13 +68,13 @@ This also tells you when to worry. If the pressure moves in a strongly curved wa
 
 {{panel:mb-aquifer-explorer}}
 
-The table at the foot of the panel prints the book's own **printed pr_bar** column beside the engine's influx. Check the four entries 2620, 2395, 2199 and 2029 against the four midpoints computed above, and satisfy yourself that the only discrepancy is the rounding of 2199.5.
+Type the published geometry and the table at the foot of the panel prints the book's own **printed pr_bar** column beside the engine's influx. Check the four entries 2620, 2395, 2199 and 2029 against the four midpoints computed above, and satisfy yourself that the only discrepancy is the rounding of 2199.5.
 
 The panel always marches with the midpoint, because the engine does. To see the alternatives you have to do the arithmetic yourself, which is the exercise.
 
 ## Exercise
 
-Take step 2 and work it three ways by hand. The aquifer enters the step at $2689.25228502350$ psia, the reservoir was at 2500 psia at the start of the step and 2290 psia at the end, and the reduced marching constant is $32710.3987275100$ bbl per psi.
+Take step 2 on the teaching aquifer and work it three ways by hand. The aquifer enters the step at $2656.8259994345226$ psia, the reservoir was at 2500 psia at the start of the step and 2290 psia at the end, and the reduced marching constant is $25996.045793936602$ bbl per psi.
 
 Compute the drawdown and the step influx for the start-of-step, midpoint and end-of-step choices. Confirm that the midpoint result is the average of the other two, and confirm that the midpoint result matches the panel's second step.
 

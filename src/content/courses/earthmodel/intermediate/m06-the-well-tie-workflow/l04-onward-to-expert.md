@@ -8,7 +8,7 @@ The Expert tier cuts the model with a fault polygon and fills the blocks with pr
 
 The fault polygon crosses the map at x equals 1575 in the region that matters, and the first thing block labelling does to the wells is decide which side each one's CONTROL POINT stands on. W2's wellhead is west of that line; the zone A control point you computed at x 1610.8719179395334 is east of it. The consequence, worked in full up there, is that one block ends up with two wellheads but only one control value, and every property statistic in it follows from that single fact. The 211 m migration this tier derived stops being a curiosity and becomes the shape of the data.
 
-Population then runs two methods through the control points: a least-squares plane and simple kriging, per block, with the MD weights this tier attached. The per-block weighted porosity that the Expert capstone grades, 0.286 in the larger block, is a weighted mean over exactly the points and weights you built here.
+Population then runs two methods through the control points: a least-squares plane and simple kriging, per block, with the MD weights this tier attached. The per-block weighted porosity the Expert tier reports, 0.286 in the golden model's larger block, is a weighted mean over exactly the points and weights you built here.
 
 Finally, volumes go per block, and the whole-model 45,000,000 m3 anchor from the Associate tier becomes the closure check: the block volumes must sum back to it, node for node.
 

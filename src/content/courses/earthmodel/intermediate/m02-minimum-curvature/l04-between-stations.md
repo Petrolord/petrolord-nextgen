@@ -1,6 +1,6 @@
 # Between stations
 
-Stations are sparse and picks are not obliged to land on them. W2's TopA pick at 1580 m MD falls between the stations at 1500 and 1900. The engine needs a position there, and how it gets one is a documented convention worth knowing exactly, because the capstone's headline value depends on it.
+Stations are sparse and picks are not obliged to land on them. W2's TopA pick at 1580 m MD falls between the stations at 1500 and 1900. The engine needs a position there, and how it gets one is a documented convention worth knowing exactly, because every deviated tie, the capstone's included, depends on it.
 
 ## Linear in MD
 
@@ -16,7 +16,7 @@ Beyond the surveyed range the engine clamps: an MD above the last station return
 
 Within a hold segment, the true path IS a straight line in MD, so linear interpolation is exact. All three of W2's picks sit in the hold, which is why their positions are exact to the last digit:
 
-TopA, MD 1580: x 1568.4455110683407, TVDSS 1496.6634373420557, the capstone's graded value.
+TopA, MD 1580: x 1568.4455110683407, TVDSS 1496.6634373420557, W2's TopA landing.
 TopB, MD 1700: x 1653.2983248107264, TVDSS 1581.5162510844414.
 BaseB, MD 1760: x 1695.7247316819194, TVDSS 1623.9426579556343.
 
@@ -26,11 +26,11 @@ Within a build segment, the true path is an arc, and a straight chord between st
 
 Do TopA fully by hand. Station 1500: x 1511.876968573417, TVDSS 1440.0948948471319. Station 1900: x 1794.719681048036, TVDSS 1722.9376073217509. With $f = 0.2$: x $= 1511.876968573417 + 0.2 \times 282.84271247461896 = 1568.4455110683407$, and TVDSS $= 1440.0948948471319 + 0.2 \times 282.84271247461896 = 1496.6634373420557$.
 
-Equivalently, since this is a hold at 45 degrees: 80 m of hole past station 1500 is $80/\sqrt{2} = 56.568542494923804$ m east and the same down. Both routes give the same digits. The graded number is nothing more mysterious than that, but every piece of it, the arc endpoint, the hold slope, the fraction, had to be right.
+Equivalently, since this is a hold at 45 degrees: 80 m of hole past station 1500 is $80/\sqrt{2} = 56.568542494923804$ m east and the same down. Both routes give the same digits. The landed depth is nothing more mysterious than that, but every piece of it, the arc endpoint, the hold slope, the fraction, had to be right.
 
 ## Worked example
 
-Land W2's zone A midpoint. Zone A runs 1580 to 1700 m MD, midpoint MD 1640, $f = (1640 - 1500)/400 = 0.35$. East: $1511.876968573417 + 0.35 \times 282.84271247461896 = 1610.8719179395334$. That x coordinate is the sixth graded value of the capstone, and it belongs to the Expert tier's story: it is where W2's zone A information will stand when properties are populated. TVDSS there: $1440.0948948471319 + 0.35 \times 282.84271247461896 = 1539.0898442132484$.
+Land W2's zone A midpoint. Zone A runs 1580 to 1700 m MD, midpoint MD 1640, $f = (1640 - 1500)/400 = 0.35$. East: $1511.876968573417 + 0.35 \times 282.84271247461896 = 1610.8719179395334$. That x coordinate belongs to the Expert tier's story: it is where W2's zone A information will stand when properties are populated. TVDSS there: $1440.0948948471319 + 0.35 \times 282.84271247461896 = 1539.0898442132484$.
 
 ## Exercise
 

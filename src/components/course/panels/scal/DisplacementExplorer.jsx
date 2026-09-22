@@ -1,11 +1,29 @@
 import React, { useMemo, useState } from 'react';
-import { displacementWith, textbookCase, btDaysAt, EKENE_SCAL } from './scalLab';
-import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import {
+  displacementWith, textbookCase, btDaysAt, displacementCase, btDaysFor, EKENE_SCAL,
+} from './scalLab';
+import { PanelShell, Tile, TileGrid, Note, NumField, FieldGrid } from '@/components/course/panels/petrophysics/panelKit';
 
 // Displacement explorer: the Ekene rel-perm set through the real
 // fractional-flow engine, with the Welge tangent drawn from (Swc, 0). The
 // sliders bend the fw curve one factor at a time; the textbook preset swaps
-// in the classroom hand case (M = 4, closed forms at Sw 0.5).
+// in the classroom hand case (M = 4, closed forms at Sw 0.5). "Your case"
+// takes every input typed (the Associate capstone's case is one), and opens
+// prefilled with the Ekene design, so no capstone value is ever preset.
+
+// The typed-case form opens on the Ekene teaching design.
+const EKENE_TYPED = {
+  Swc: EKENE_SCAL.design.krSpec.Swc, Sor: EKENE_SCAL.design.krSpec.Sor,
+  krwMax: EKENE_SCAL.design.krSpec.krwMax, kroMax: EKENE_SCAL.design.krSpec.kroMax,
+  nw: EKENE_SCAL.design.krSpec.nw, no: EKENE_SCAL.design.krSpec.no,
+  muW: EKENE_SCAL.design.muW_cp, muO: EKENE_SCAL.design.muO_cp,
+  pvBbl: EKENE_SCAL.pore_volume.pv_bbl, iw: 8000,
+};
+const TYPED_FIELDS = [
+  ['Swc', 'Connate water Swc'], ['Sor', 'Residual oil Sor'], ['krwMax', 'krw endpoint'], ['kroMax', 'kro endpoint'],
+  ['nw', 'Water exponent nw'], ['no', 'Oil exponent no'], ['muW', 'Water viscosity (cp)'], ['muO', 'Oil viscosity (cp)'],
+  ['pvBbl', 'Pore volume (bbl)'], ['iw', 'Injection rate (bwpd)'],
+];
 
 const W = 620;
 const H = 320;
@@ -31,20 +49,54 @@ const DisplacementExplorer = () => {
   const [muO, setMuO] = useState(EKENE_SCAL.design.muO_cp);
   const [nw, setNw] = useState(EKENE_SCAL.design.krSpec.nw);
   const [textbook, setTextbook] = useState(false);
+  const [typed, setTyped] = useState(false);
+  const [form, setForm] = useState(() => Object.fromEntries(Object.entries(EKENE_TYPED).map(([k, v]) => [k, String(v)])));
 
   const out = useMemo(() => {
     try {
+      if (typed) {
+        const v = Object.fromEntries(Object.entries(form).map(([k, x]) => [k, Number(x)]));
+        const bad = TYPED_FIELDS.filter(([k]) => !Number.isFinite(v[k]) || v[k] < 0).map(([, l]) => l);
+        if (bad.length) return { error: `Enter a non-negative number for: ${bad.join(', ')}.` };
+        if (v.Swc + v.Sor >= 1) return { error: 'Swc plus Sor must be below 1.' };
+        const r = displacementCase(v);
+        return { r, Swc: v.Swc, btDays: btDaysFor(r.bl.QiBt, v.pvBbl, v.iw), rate: v.iw };
+      }
       const r = textbook ? textbookCase() : displacementWith({ muO, nw });
       const Swc = textbook ? r.spec.params.Swc : EKENE_SCAL.design.krSpec.Swc;
       const btDays = textbook ? null : btDaysAt(8000, r.bl.QiBt);
-      return { r, Swc, btDays };
+      return { r, Swc, btDays, rate: 8000 };
     } catch (e) {
       return { error: e.message };
     }
-  }, [muO, nw, textbook]);
+  }, [muO, nw, textbook, typed, form]);
 
-  if (out.error) return <PanelShell title="Displacement explorer"><Note>Engine error: {out.error}</Note></PanelShell>;
-  const { r, Swc, btDays } = out;
+  const typedForm = typed && (
+    <FieldGrid>
+      {TYPED_FIELDS.map(([k, l]) => (
+        <NumField key={k} label={l} value={form[k]} onChange={(x) => setForm((f) => ({ ...f, [k]: x }))} />
+      ))}
+    </FieldGrid>
+  );
+  const modeButton = (
+    <button
+      type="button" onClick={() => { setTyped((v) => !v); setTextbook(false); }}
+      className={`px-3 py-1.5 rounded-md border text-xs ${typed ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold' : 'bg-gray-800 text-gray-300 border-gray-600'}`}
+    >
+      {typed ? 'Your case: every input typed' : 'Type your own case'}
+    </button>
+  );
+
+  if (out.error) {
+    return (
+      <PanelShell title="Displacement explorer">
+        {modeButton}
+        {typedForm}
+        <Note>{typed ? out.error : `Engine error: ${out.error}`}</Note>
+      </PanelShell>
+    );
+  }
+  const { r, Swc, btDays, rate } = out;
   const { curves, bl } = r;
 
   const x = (Sw) => PAD.left + Sw * (W - PAD.left - PAD.right);
@@ -56,6 +108,9 @@ const DisplacementExplorer = () => {
       title="Displacement explorer"
       subtitle="Corey rel perm to fractional flow to the Welge tangent. The tangent from (Swc, 0) touches the fw curve at the front saturation; where it reaches fw = 1 is the average saturation behind the front."
     >
+      {modeButton}
+      {typedForm}
+      {!typed && (
       <div className="grid gap-4 sm:grid-cols-3 items-end">
         <RangeField label="Oil viscosity muO (cp)" value={muO} min={0.5} max={10} step={0.1} onChange={setMuO} disabled={textbook} />
         <RangeField label="Water Corey exponent nw" value={nw} min={1} max={4} step={0.1} onChange={setNw} disabled={textbook} />
@@ -66,6 +121,7 @@ const DisplacementExplorer = () => {
           {textbook ? 'Textbook case (M = 4) active' : 'Load the textbook case'}
         </button>
       </div>
+      )}
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
         <line x1={PAD.left} y1={PAD.top} x2={PAD.left} y2={H - PAD.bottom} stroke="#334155" />
@@ -99,10 +155,15 @@ const DisplacementExplorer = () => {
         <Tile label="Average Sw behind the front" value={sci(bl.SwAvgBt, 6)} />
         <Tile label="ED at breakthrough" value={sci(bl.EDbt, 6)} />
         <Tile label="ED ceiling (endpoints only)" value={sci(bl.EDmax, 6)} />
-        <Tile label="Days to breakthrough at 8000 bwpd" value={btDays == null ? '-' : fmt(btDays, 1)} unit={btDays == null ? '' : 'days'} />
+        <Tile label={`Days to breakthrough at ${fmt(rate, 0)} bwpd`} value={btDays == null ? '-' : fmt(btDays, 1)} unit={btDays == null ? '' : 'days'} />
       </TileGrid>
 
-      {textbook ? (
+      {typed ? (
+        <Note>
+          Your case: every number above comes from the inputs you typed, through the same engine.
+          Check each input against its source before you read a tile.
+        </Note>
+      ) : textbook ? (
         <Note>
           The classroom case: M = 4 is unfavorable, so the front is low and early. At Sw 0.5 every
           number is closed form (krw 0.1, kro 0.25, fw 0.8), which is why this case is worked by

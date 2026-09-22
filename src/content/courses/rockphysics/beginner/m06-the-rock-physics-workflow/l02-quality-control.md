@@ -53,7 +53,7 @@ Density does not have bounds, because it mixes exactly. The 70/30 quartz and cla
 
 An exact check is worth more than an approximate one, because it fails loudly. If the frame density is not 2629 kg/m3 the mineral fractions are not 70 and 30, and every modulus in check 5 is being computed for a different rock than the one you meant.
 
-Try it yourself: run checks 2 through 6 against the panel below at the capstone saturation of Sw 0.8, then move the saturation and watch check 3 stay true while the numbers change.
+Try it yourself: run checks 2 through 6 against the panel below at the Ekene saturation of Sw 0.8, then move the saturation and watch check 3 stay true while the numbers change.
 
 {{panel:rp-fluid-explorer}}
 

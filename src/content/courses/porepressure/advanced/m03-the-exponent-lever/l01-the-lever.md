@@ -1,10 +1,10 @@
 # The lever
 
-The Professional tier ran the exponent dial from 1 to 5 and called it a volume knob on the evidence, then deferred the question of which volume is right. This module is where the question lands, because the capstone grades a specific alternative: the pore pressure at total depth under n 1.2, and the tier's job is to understand that number as a calibration decision with mud-program consequences.
+The Professional tier ran the exponent dial from 1 to 5 and called it a volume knob on the evidence, then deferred the question of which volume is right. This module is where the question lands, because the capstone grades a specific alternative exponent. On the teaching case it is the pore pressure at total depth under n 1.2, and the tier's job is to understand that number as a calibration decision with mud-program consequences.
 
 ## Why 1.2 specifically
 
-Eaton's original exponents were fitted pairs: 3 for the sonic form, and lower values for other data types. In modern practice a family of calibrations is in live use, and 1.2 is the classic low calibration, associated with prediction from seismic interval velocities and with basins where the velocity-to-stress response is gentler than Eaton's Gulf Coast shales. The capstone's pairing of 3 and 1.2 therefore brackets the practical range: the standard sonic calibration against the low end of common use.
+Eaton's original exponents were fitted pairs: 3 for the sonic form, and lower values for other data types. In modern practice a family of calibrations is in live use, and 1.2 is the classic low calibration, associated with prediction from seismic interval velocities and with basins where the velocity-to-stress response is gentler than Eaton's Gulf Coast shales. The teaching case's pairing of 3 and 1.2 therefore brackets the practical range: the standard sonic calibration against the low end of common use.
 
 The honest framing from the Professional tier carries over: nothing in this well can tell you 1.2 is wrong in general. The well was built at 3, so 3 closes the loop HERE; on a well without an encoded answer, 1.2 versus 3 is an empirical question about the basin, answered by measured pressures.
 
@@ -30,7 +30,7 @@ Worth cataloguing, since a lever's fixed points are as diagnostic as its throw. 
 
 ## Worked example
 
-Reproduce the graded value's key step. The ratio at TD is 0.9580337483265022. Raise to 1.2 via logarithms: $\ln(0.9580337483265022) = -0.04287227373353654$, times 1.2 is $-0.05144672848024385$, exponentiate: $r^{1.2} = 0.9498542487938293$. Fraction: $1 - 0.9498542487938293 = 0.0501457512061707$. Times the budget: $49.714487325732826 \times 0.0501457512061707 = 2.492970312778525$ MPa. Plus hydrostatic: $41.408579625 + 2.492970312778525 = 43.901549937778525$, and the engine holds ...526: agreement at the fourteenth digit. The non-integer exponent is the only new arithmetic in the whole capstone, and the logarithm route is the one your calculator is silently taking.
+Reproduce the teaching value's key step. The ratio at TD is 0.9580337483265022. Raise to 1.2 via logarithms: $\ln(0.9580337483265022) = -0.04287227373353654$, times 1.2 is $-0.05144672848024385$, exponentiate: $r^{1.2} = 0.9498542487938293$. Fraction: $1 - 0.9498542487938293 = 0.0501457512061707$. Times the budget: $49.714487325732826 \times 0.0501457512061707 = 2.492970312778525$ MPa. Plus hydrostatic: $41.408579625 + 2.492970312778525 = 43.901549937778525$, and the engine holds ...526: agreement at the fourteenth digit. The non-integer exponent is the only new arithmetic in the whole tier, and the logarithm route is the one your calculator is silently taking.
 
 ## Exercise
 

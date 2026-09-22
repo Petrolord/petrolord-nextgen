@@ -16,7 +16,7 @@ This course began with a rock holding two fluids and ended with a schedule: how 
 
 ## The Ekene six
 
-These are the six numbers the capstone grades, all derived in modules 3 through 5 and all visible in the displacement explorer you have been using since module 2.
+These are the Ekene values of the six numbers the capstone grades, all derived in modules 3 through 5 and all visible in the displacement explorer you have been using since module 2. The capstone asks for the same six on the OKORO sand, which you type into the explorer yourself.
 
 | Quantity | Symbol | Value |
 |---|---|---|

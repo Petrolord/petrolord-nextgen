@@ -1,6 +1,6 @@
 # Exceptions are the product
 
-This is the lesson the module exists for. Three of the campaign's graded numbers ask, in different words, how many files differ from the rest. In every case the answer is one. That is not a coincidence about this teaching set. It is what a campaign is for.
+This is the lesson the module exists for. Three of the campaign's graded numbers ask, in different words, how many files differ from the rest. On the teaching set the answer is one in every case. The ODUMA campaign the capstone uses has answers of its own, so count them there file by file. Either way, finding the exceptions is what a campaign is for.
 
 ## Three findings, each of size one
 

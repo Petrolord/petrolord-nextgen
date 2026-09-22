@@ -15,7 +15,7 @@ import {
   BookOpen, Award, ArrowRight,
 } from 'lucide-react';
 import {
-  TEACHING_WELLS, TOP_NAME, CAPSTONE_CELL_M, MAX_EXTRAP_M, TARGET, computeMap,
+  TEACHING_WELLS, TOP_NAME, TEACHING_CELL_M, MAX_EXTRAP_M, TARGET, computeMap,
   computeIntermediate, computeAdvanced, E7,
 } from '@/lib/mappingTeaching';
 import {
@@ -105,7 +105,7 @@ const MappingLearningPage = () => {
   const { actualRole } = useRole();
   const [gate, setGate] = useState({ loading: true, allowed: false, quota: null });
   const [tier, setTier] = useState('beginner');
-  const [cell, setCell] = useState(CAPSTONE_CELL_M);
+  const [cell, setCell] = useState(TEACHING_CELL_M);
   const [capstone, setCapstone] = useState(null);
   const [answers, setAnswers] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -163,7 +163,7 @@ const MappingLearningPage = () => {
       } else {
         toast({
           title: 'Not passing yet',
-          description: `${res.score}/${res.max_score} answers within tolerance. Set the cell to ${CAPSTONE_CELL_M} m and re-read the map panel.`,
+          description: `${res.score}/${res.max_score} answers within tolerance. Type the well set the brief states into the course panels (Type a well set) and read them again.`,
           variant: 'destructive',
         });
       }
@@ -241,7 +241,7 @@ const MappingLearningPage = () => {
             <Card className="bg-[#1E293B] border-gray-700">
               <CardHeader>
                 <CardTitle className="text-white">Structure map — {cell} m cell</CardTitle>
-                <CardDescription>The capstone grades the {CAPSTONE_CELL_M} m grid. Toggle the cell size and watch resolution and node counts change.</CardDescription>
+                <CardDescription>The Ekene teaching wells at {TEACHING_CELL_M} m; the capstone states a well set of its own. Toggle the cell size and watch resolution and node counts change.</CardDescription>
               </CardHeader>
               <CardContent className="space-y-4">
                 <div className="flex gap-2">
@@ -295,7 +295,7 @@ const MappingLearningPage = () => {
                 <CardHeader>
                   <CardTitle className="text-white">Isochore panel (Intermediate)</CardTitle>
                   <CardDescription>
-                    Two-surface math: BASE_SAND minus TOP_SAND on the shared {CAPSTONE_CELL_M} m frame. Compare the gridded mean against the plain well average.
+                    Two-surface math: BASE_SAND minus TOP_SAND on the shared {TEACHING_CELL_M} m frame. Compare the gridded mean against the plain well average.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -340,7 +340,7 @@ const MappingLearningPage = () => {
                 <CardHeader>
                   <CardTitle className="text-white">Grid validation panel (Advanced)</CardTitle>
                   <CardDescription>
-                    Leave-one-out cross-validation on the {CAPSTONE_CELL_M} m frame, then a blind test at the new appraisal well {E7.name} ({E7.x}, {E7.y}), actual pick {E7.actual} m.
+                    Leave-one-out cross-validation on the {TEACHING_CELL_M} m frame, then a blind test at the new appraisal well {E7.name} ({E7.x}, {E7.y}), actual pick {E7.actual} m.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -451,7 +451,7 @@ const MappingLearningPage = () => {
                     </>
                   ) : (
                     <p className="text-red-300 font-medium flex items-center gap-2">
-                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance — set the cell to {CAPSTONE_CELL_M} m and read the map panel again.
+                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Type the well set the brief states into the course panels and read them again.
                     </p>
                   )}
                 </div>

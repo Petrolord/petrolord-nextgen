@@ -1,0 +1,580 @@
+{
+ "course": "cementing",
+ "wave": "w2",
+ "fixture": "/root/dr-wip-cementing/dr7_fields.mjs",
+ "tiers": {
+  "advanced": {
+   "why": "Prompt only, no field moves. Fields 1 and 3 need the mid-span sag, which needs E x I of the 9-5/8 inch casing; the lessons give E x I only as a number for 7 inch casing and never E or the I formula, and E = 200 or 207 GPa moves the answer by 1e-3 or 3e-5 against tol 5e-7 (B5 finding 1). The prompt now states E x I (vendored stringProperties) and how it is built, so both are hand work from m02 l04 and m03 l01. Keys, expected values and tolerances are unchanged.",
+   "prompt_edits": [
+    [
+     "on the same slant trajectory.",
+     "on the same slant trajectory. Its bending stiffness E x I is 12266792.85346564 N m2, which is E = 206.8 GPa on I = pi/64 (OD^4 - ID^4)."
+    ]
+   ],
+   "inputs": {
+    "casing": {
+     "odM": 0.244475,
+     "idM": 0.2204974,
+     "weightKgM": 69.9437033
+    },
+    "bendingStiffnessNm2": 12266792.85346564,
+    "steelEGpa": 206.8,
+    "casedToMdM": 350,
+    "casedIdM": 0.315341,
+    "openToMdM": 1400,
+    "openHoleIdM": 0.31115,
+    "spacingM": 10.5,
+    "restoringForceN": 11000,
+    "standoffAtForce": 0.67,
+    "mudKgM3": 1300,
+    "rigidBladeOdM": 0.29
+   },
+   "method": {
+    "stations": [
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 0
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 30
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 60
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 90
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 120
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 150
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 180
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 210
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 240
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 270
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 300
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 330
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 360
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 390
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 420
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 450
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 480
+     },
+     {
+      "azi": 45,
+      "inc": 0,
+      "md": 500
+     },
+     {
+      "azi": 45,
+      "inc": 2,
+      "md": 530
+     },
+     {
+      "azi": 45,
+      "inc": 4,
+      "md": 560
+     },
+     {
+      "azi": 45,
+      "inc": 6,
+      "md": 590
+     },
+     {
+      "azi": 45,
+      "inc": 8,
+      "md": 620
+     },
+     {
+      "azi": 45,
+      "inc": 10,
+      "md": 650
+     },
+     {
+      "azi": 45,
+      "inc": 12,
+      "md": 680
+     },
+     {
+      "azi": 45,
+      "inc": 14,
+      "md": 710
+     },
+     {
+      "azi": 45,
+      "inc": 16,
+      "md": 740
+     },
+     {
+      "azi": 45,
+      "inc": 18,
+      "md": 770
+     },
+     {
+      "azi": 45,
+      "inc": 20,
+      "md": 800
+     },
+     {
+      "azi": 45,
+      "inc": 22,
+      "md": 830
+     },
+     {
+      "azi": 45,
+      "inc": 24,
+      "md": 860
+     },
+     {
+      "azi": 45,
+      "inc": 26,
+      "md": 890
+     },
+     {
+      "azi": 45,
+      "inc": 28,
+      "md": 920
+     },
+     {
+      "azi": 45,
+      "inc": 30,
+      "md": 950
+     },
+     {
+      "azi": 45,
+      "inc": 32,
+      "md": 980
+     },
+     {
+      "azi": 45,
+      "inc": 34,
+      "md": 1010
+     },
+     {
+      "azi": 45,
+      "inc": 36,
+      "md": 1040
+     },
+     {
+      "azi": 45,
+      "inc": 38,
+      "md": 1070
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1100
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1130
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1160
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1190
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1220
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1250
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1280
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1310
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1340
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1370
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1400
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1430
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1460
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1490
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1520
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1550
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1580
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1610
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1640
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1670
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1700
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1730
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1760
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1790
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1820
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1850
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1880
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1910
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1940
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 1970
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2000
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2030
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2060
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2090
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2120
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2150
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2180
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2210
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2240
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2270
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2300
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2330
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2360
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2390
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2420
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2450
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2480
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2510
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2540
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2570
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2600
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2630
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2660
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2690
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2720
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2750
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2780
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2810
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2840
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2870
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2900
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2930
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2960
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 2990
+     },
+     {
+      "azi": 45,
+      "inc": 40,
+      "md": 3000
+     }
+    ],
+    "casedHoleIdM": 0.4445,
+    "casingDepths": {
+     "shoeMd": 1400,
+     "floatCollarMd": 1352,
+     "hangerMd": 0
+    }
+   },
+   "expected": {
+    "min_standoff": {
+     "expected": 0.8556417628346304,
+     "tol": 5e-7,
+     "reproduced": 0.8556417628346304
+    },
+    "standoff_at_centralizer_at_min": {
+     "expected": 0.8841171967314949,
+     "tol": 5e-7,
+     "reproduced": 0.8841171967314949
+    },
+    "required_spacing_m": {
+     "expected": 15.99770776601963,
+     "tol": 5e-7,
+     "reproduced": 15.99770776601963
+    },
+    "min_standoff_rigid": {
+     "expected": 0.6424096181525695,
+     "tol": 5e-7,
+     "reproduced": 0.6424096181525695
+    }
+   },
+   "fields_moved_class": [
+    "min_standoff",
+    "required_spacing_m"
+   ]
+  }
+ }
+}

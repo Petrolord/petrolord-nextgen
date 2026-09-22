@@ -29,8 +29,10 @@ export const ZONES = typewell.params.zones; // { SAND_A: [top,base], SAND_B: [to
 
 // Run the full VSH → PHI → SW → net-pay workflow with the learner's
 // parameters. Returns per-depth curves and the two zone summaries.
-export function computeWorkflow(params) {
-  const c = typewell.curves;
+// `well` is typewell-shaped ({ curves, zones }): the bundled typewell by
+// default, or a LAS file the learner opened with the zones the brief states.
+export function computeWorkflow(params, well = { curves: typewell.curves, zones: typewell.params.zones }) {
+  const c = well.curves;
   const depth = c.DEPT;
   const phi = c.RHOB.map((r) => phiDensity(r, Number(params.rhoMa), Number(params.rhoFl)));
   const vsh = Array.from(vshFromGr(c.GR, {
@@ -47,7 +49,7 @@ export function computeWorkflow(params) {
     cutSw: Number(params.cutSw),
   };
   const zoneSummary = (name) => {
-    const [top, base] = ZONES[name];
+    const [top, base] = well.zones[name];
     return netPay({ depth, phi, vsh, sw }, { ...opts, top, base }).summary;
   };
 

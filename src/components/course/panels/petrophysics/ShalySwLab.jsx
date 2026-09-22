@@ -1,7 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import {
-  TW, DEPTH, ZONES, porosityCurves, vshLinearCurve, swCurve, zoneMean, sampleIndexAt, fmt, num,
+  TW, porosityCurves, vshLinearCurve, swCurve, zoneMean, sampleIndexAt, fmt, num,
 } from './typewellLab';
+import { useWell } from './wellContext';
 import { PanelShell, NumField, Tile, TileGrid, FieldGrid, Note } from './panelKit';
 
 // Shaly-sand saturation lab: Archie, Simandoux and Indonesia side by
@@ -14,9 +15,11 @@ const METHODS = [
 ];
 
 const ShalySwLab = () => {
+  const well = useWell();
+  const { DEPTH, ZONES } = well;
   const [p, setP] = useState({
     rw: String(TW.rw), rsh: String(TW.rsh), a: String(TW.a), m: String(TW.m), n: String(TW.n),
-    grClean: String(TW.gr_clean), grClay: String(TW.gr_clay), sampleDepth: '2020',
+    grClean: String(TW.gr_clean), grClay: String(TW.gr_clay), sampleDepth: '',
   });
   const set = (k) => (v) => setP((s) => ({ ...s, [k]: v }));
 
@@ -27,26 +30,26 @@ const ShalySwLab = () => {
   const valid = Object.values(parsed).every(Number.isFinite);
 
   const phi = useMemo(
-    () => porosityCurves({ rhoMa: TW.rho_ma, rhoFl: TW.rho_fl, dtMa: TW.dt_ma, dtFl: TW.dt_fl }).phiNdArr,
-    [],
+    () => porosityCurves({ rhoMa: TW.rho_ma, rhoFl: TW.rho_fl, dtMa: TW.dt_ma, dtFl: TW.dt_fl }, well).phiNdArr,
+    [well],
   );
   const vsh = useMemo(
-    () => (valid ? vshLinearCurve(parsed.grClean, parsed.grClay) : null),
+    () => (valid ? vshLinearCurve(parsed.grClean, parsed.grClay, well) : null),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [p.grClean, p.grClay, valid],
+    [p.grClean, p.grClay, valid, well],
   );
 
   const sw = useMemo(() => {
     if (!valid || !vsh) return null;
     const out = {};
     for (const [method] of METHODS) {
-      out[method] = swCurve({ method, phi, vsh, ...parsed });
+      out[method] = swCurve({ method, phi, vsh, ...parsed }, well);
     }
     return out;
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [vsh, p.rw, p.rsh, p.a, p.m, p.n, valid]);
 
-  const iSample = sampleIndexAt(num(p.sampleDepth) || 2020);
+  const iSample = sampleIndexAt(num(p.sampleDepth) || (ZONES.SAND_A[0] + ZONES.SAND_A[1]) / 2, well);
 
   return (
     <PanelShell title="Shaly-sand saturation lab"
@@ -79,8 +82,8 @@ const ShalySwLab = () => {
                   <tr key={method} className="border-b border-gray-800">
                     <td className="py-2 pr-4 text-white">{label}</td>
                     <td className="py-2 pr-4">{fmt(sw[method][iSample])}</td>
-                    <td className="py-2 pr-4">{fmt(zoneMean(sw[method], ZONES.SAND_A))}</td>
-                    <td className="py-2 pr-4">{fmt(zoneMean(sw[method], ZONES.SAND_B))}</td>
+                    <td className="py-2 pr-4">{fmt(zoneMean(sw[method], ZONES.SAND_A, well))}</td>
+                    <td className="py-2 pr-4">{fmt(zoneMean(sw[method], ZONES.SAND_B, well))}</td>
                   </tr>
                 ))}
               </tbody>

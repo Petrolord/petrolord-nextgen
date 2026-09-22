@@ -2045,6 +2045,372 @@ export const repairHistory = () => ({
 });
 
 // ---------------------------------------------------------------------------
+// THE TYPED STREAM VIEWS (B5 follow-on W4, owner decision D2). Each explorer
+// has a "Your stream, typed" view: the learner types a stream and its devices
+// and the engine answers on exactly what was typed. The chain is the one the
+// three teaching streams above use, call for call, so a stream typed from any
+// prompt reads what the engine gives for that stream, and nothing else.
+//
+// Each view OPENS ON A TEACHING STREAM: UZERE for the water, KOKORI for the
+// devices and OGBOTOBO's water and inlet through a plate pack, a liner bank and
+// a bed for the train. Where a teaching stream leaves an input to the engine's
+// default, the default is read off DECLARED rather than restated. The defaults
+// are swept by the leak gate like every other teaching number.
+//
+// These readers NEVER THROW. A value that is not a number is named in plain
+// words, and a refusal is the engine's own message, carried through unchanged.
+// ---------------------------------------------------------------------------
+
+/** The water view's opening stream: UZERE, as the gravity mode runs it. */
+export const TYPED_WATER_DEFAULT = Object.freeze({
+  bwpd: UZERE_BWPD,
+  tC: UZERE_WATER.tC,
+  tdsPpm: UZERE_WATER.tdsPpm,
+  apiGravity: UZERE_OIL.apiGravity,
+  oiwPpm: UZERE_INLET.oiwPpm,
+  d50Micron: UZERE_INLET.d50Micron,
+  sigma: UZERE_INLET.sigma,
+  lengthM: UZERE_BASIN.lengthM,
+  widthM: UZERE_BASIN.widthM,
+  depthM: UZERE_BASIN.depthM,
+  shortCircuitF: DECLARED.shortCircuitFDefault,
+  nPlates: UZERE_PLATES.nPlates,
+  plateAreaM2: UZERE_PLATES.plateAreaM2,
+  efficiencyFactor: DECLARED.plateEfficiencyFactor,
+});
+
+const LINER_DEFAULTS = {
+  linerDiameterM: DECLARED.linerDiameterM,
+  linerLengthM: DECLARED.linerLengthM,
+  designFlowPerLinerM3S: DECLARED.designFlowPerLinerM3S,
+  gFieldAtDesign: DECLARED.gFieldAtDesign,
+  coreRadiusFraction: DECLARED.coreRadiusFraction,
+};
+
+/** The device view's opening stream: KOKORI, as the device modes run it. */
+export const TYPED_DEVICE_DEFAULT = Object.freeze({
+  bwpd: KOKORI_BWPD,
+  tC: KOKORI_WATER.tC,
+  tdsPpm: KOKORI_WATER.tdsPpm,
+  apiGravity: KOKORI_OIL.apiGravity,
+  nLiners: KOKORI_LINERS.nLiners,
+  ...LINER_DEFAULTS,
+  nCells: KOKORI_FLOTATION.nCells,
+  cellVolumeM3: KOKORI_FLOTATION.cellVolumeM3,
+  cellDepthM: KOKORI_FLOTATION.cellDepthM,
+  gasRatio: KOKORI_FLOTATION.gasRatio,
+  bubbleMicron: KOKORI_FLOTATION.bubbleMicron,
+  gasDensityKgM3: DECLARED.flotationGasDensityKgM3,
+  filterAreaM2: KOKORI_FILTER.areaM2,
+  bedDepthM: KOKORI_FILTER.bedDepthM,
+  mediaMicron: KOKORI_FILTER.mediaMicron,
+  filterCoefficientPerM: DECLARED.filterCoefficientPerM,
+  referenceDropletMicron: DECLARED.filterReferenceDropletMicron,
+});
+
+/**
+ * The train view's opening stream: OGBOTOBO's water and inlet through a plate
+ * pack of UZERE's plates, a bank of OGBOTOBO's liners and OGBOTOBO's bed, on
+ * the module's own grid, with a Reynolds read at the Stokes probe droplet.
+ */
+export const TYPED_TRAIN_DEFAULT = Object.freeze({
+  bwpd: OGBOTOBO_BWPD,
+  tC: OGBOTOBO_WATER.tC,
+  tdsPpm: OGBOTOBO_WATER.tdsPpm,
+  apiGravity: OGBOTOBO_OIL.apiGravity,
+  oiwPpm: OGBOTOBO_INLET.oiwPpm,
+  d50Micron: OGBOTOBO_INLET.d50Micron,
+  sigma: OGBOTOBO_INLET.sigma,
+  nBins: DECLARED.defaultNBins,
+  spanSigma: DECLARED.defaultSpanSigma,
+  nPlates: UZERE_PLATES.nPlates,
+  plateAreaM2: UZERE_PLATES.plateAreaM2,
+  efficiencyFactor: DECLARED.plateEfficiencyFactor,
+  nLiners: OGBOTOBO_LINERS.nLiners,
+  ...LINER_DEFAULTS,
+  filterAreaM2: OGBOTOBO_FILTER.areaM2,
+  bedDepthM: OGBOTOBO_FILTER.bedDepthM,
+  mediaMicron: OGBOTOBO_FILTER.mediaMicron,
+  filterCoefficientPerM: DECLARED.filterCoefficientPerM,
+  referenceDropletMicron: DECLARED.filterReferenceDropletMicron,
+  dropletMicron: STOKES_PROBE_MICRON,
+});
+
+/** What each typed input is called on screen, with its unit. */
+export const TYPED_FIELD_LABELS = Object.freeze({
+  bwpd: 'Water rate, bwpd',
+  tC: 'Temperature, C',
+  tdsPpm: 'Total dissolved solids, ppm',
+  apiGravity: 'Crude gravity, degrees API',
+  oiwPpm: 'Inlet oil in water, ppm',
+  d50Micron: 'Inlet volume median, micron',
+  sigma: 'Inlet log spread sigma',
+  nBins: 'Bins on the droplet grid',
+  spanSigma: 'Grid span, sigma either side',
+  lengthM: 'Basin length, m',
+  widthM: 'Basin width, m',
+  depthM: 'Basin water depth, m',
+  shortCircuitF: 'Short circuit allowance F',
+  nPlates: 'Plate count',
+  plateAreaM2: 'Projected area per plate, m2',
+  efficiencyFactor: 'Fraction of plate area credited as settling',
+  nLiners: 'Liner count',
+  linerDiameterM: 'Liner bore, m',
+  linerLengthM: 'Liner length, m',
+  designFlowPerLinerM3S: 'Rated flow per liner, m3/s',
+  gFieldAtDesign: 'Field at rated flow, g',
+  coreRadiusFraction: 'Oil core, fraction of liner radius',
+  nCells: 'Flotation cells',
+  cellVolumeM3: 'Volume per cell, m3',
+  cellDepthM: 'Cell depth, m',
+  gasRatio: 'Gas to water ratio per cell',
+  bubbleMicron: 'Bubble size, micron',
+  gasDensityKgM3: 'Gas density, kg/m3',
+  filterAreaM2: 'Bed area, m2',
+  bedDepthM: 'Bed depth, m',
+  mediaMicron: 'Media grain size, micron',
+  filterCoefficientPerM: 'Filter coefficient, per m',
+  referenceDropletMicron: 'Droplet the coefficient is declared at, micron',
+  dropletMicron: 'Droplet for the Reynolds read, micron',
+});
+
+/** Every typed value as a number, or a plain message naming the one that is not. */
+const typedNumbers = (typed, keys) => {
+  const values = {};
+  const errors = [];
+  keys.forEach((k) => {
+    const raw = typed ? typed[k] : undefined;
+    const text = typeof raw === 'string' ? raw.trim() : raw;
+    if (text === '' || text === null || text === undefined) {
+      errors.push(`Type a value for ${TYPED_FIELD_LABELS[k] || k}.`);
+      return;
+    }
+    const x = Number(text);
+    if (!Number.isFinite(x)) {
+      errors.push(`${TYPED_FIELD_LABELS[k] || k} is not a number.`);
+      return;
+    }
+    values[k] = x;
+  });
+  return { values, errors };
+};
+
+/** An engine return, or null with the engine's own refusal recorded against a label. */
+const engineAnswer = (errors, label, r) => {
+  if (!r || typeof r !== 'object') {
+    errors.push(`The ${label} returned no answer.`);
+    return null;
+  }
+  if (typeof r.error === 'string') {
+    errors.push(`The engine refuses the ${label}: ${r.error}`);
+    return null;
+  }
+  return r;
+};
+
+const warningsOf = (...returns) => returns.filter((r) => r && typeof r.warning === 'string' && r.warning)
+  .map((r) => r.warning);
+
+/** The water and the oil of a typed stream, through the same three fits the teaching streams use. */
+const typedFluid = (v, errors) => {
+  const water = { tC: v.tC, tdsPpm: v.tdsPpm };
+  const mu = engineAnswer(errors, 'water viscosity', P.waterViscosityPaS(water));
+  const rhoW = engineAnswer(errors, 'brine density', P.waterDensityKgM3(water));
+  const rhoO = engineAnswer(errors, 'crude density', P.oilDensityKgM3({ apiGravity: v.apiGravity, tC: v.tC }));
+  if (!mu || !rhoW || !rhoO) return null;
+  return {
+    flowM3S: m3PerSecond(v.bwpd),
+    mu,
+    rhoW,
+    rhoO,
+    fluid: { rhoWater: rhoW.rhoKgM3, rhoOil: rhoO.rhoKgM3, muPaS: mu.muPaS },
+  };
+};
+
+const guarded = (fn) => {
+  try {
+    return fn();
+  } catch (e) {
+    return { ok: false, errors: [`This stream could not be run: ${e && e.message ? e.message : String(e)}`], warnings: [] };
+  }
+};
+
+/**
+ * THE WATER VIEW. The water and the oil, a droplet at the typed median, the
+ * basin and the plate pack, each device also run alone on the typed inlet.
+ */
+export const typedWaterStream = (typed) => guarded(() => {
+  const { values: v, errors } = typedNumbers(typed, Object.keys(TYPED_WATER_DEFAULT));
+  if (errors.length) return { ok: false, errors, warnings: [] };
+  const f = typedFluid(v, errors);
+  if (!f) return { ok: false, errors, warnings: [] };
+  const rise = engineAnswer(errors, 'droplet rise', P.stokesRiseMS({ dMicron: v.d50Micron, ...f.fluid }));
+  const basin = engineAnswer(errors, 'basin', P.apiSeparator({
+    flowM3S: f.flowM3S, lengthM: v.lengthM, widthM: v.widthM, depthM: v.depthM,
+    shortCircuitF: v.shortCircuitF, ...f.fluid,
+  }));
+  const plate = engineAnswer(errors, 'plate pack', P.plateInterceptor({
+    flowM3S: f.flowM3S, plateAreaM2: v.plateAreaM2, nPlates: v.nPlates,
+    efficiencyFactor: v.efficiencyFactor, ...f.fluid,
+  }));
+  const alone = (label, device, name) => (device ? engineAnswer(errors, label, P.treatmentTrain({
+    inletOiwPpm: v.oiwPpm, inletD50Micron: v.d50Micron, sigma: v.sigma, devices: [{ name, ...device }],
+  })) : null);
+  const basinAlone = alone('inlet through the basin', basin, 'API 421 basin');
+  const plateAlone = alone('inlet through the plate pack', plate, 'CPI plate pack');
+  return {
+    ok: errors.length === 0,
+    errors,
+    warnings: warningsOf(rise, basin, plate),
+    flowM3S: f.flowM3S,
+    muPaS: f.mu.muPaS,
+    salinityFactor: f.mu.salinityFactor,
+    rhoWaterKgM3: f.rhoW.rhoKgM3,
+    rhoOilKgM3: f.rhoO.rhoKgM3,
+    densityDifferenceKgM3: f.rhoW.rhoKgM3 - f.rhoO.rhoKgM3,
+    riseMS: rise ? rise.vMS : null,
+    riseReynolds: rise ? rise.reynolds : null,
+    basinCutMicron: basin ? basin.d50cMicron : null,
+    basinHorizontalVelocityMS: basin ? basin.horizontalVelocityMS : null,
+    plateCutMicron: plate ? plate.d50cMicron : null,
+    plateEffectiveAreaM2: plate ? plate.effectiveAreaM2 : null,
+    basinAloneOutletPpm: basinAlone ? basinAlone.outletOiwPpm : null,
+    plateAloneOutletPpm: plateAlone ? plateAlone.outletOiwPpm : null,
+  };
+});
+
+/** THE DEVICE VIEW. A liner bank, a flotation unit and a media bed, each on the typed water. */
+export const typedDeviceStream = (typed) => guarded(() => {
+  const { values: v, errors } = typedNumbers(typed, Object.keys(TYPED_DEVICE_DEFAULT));
+  if (errors.length) return { ok: false, errors, warnings: [] };
+  const f = typedFluid(v, errors);
+  if (!f) return { ok: false, errors, warnings: [] };
+  const liner = engineAnswer(errors, 'liner bank', P.hydrocyclone({
+    flowM3S: f.flowM3S,
+    nLiners: v.nLiners,
+    linerDiameterM: v.linerDiameterM,
+    linerLengthM: v.linerLengthM,
+    designFlowPerLinerM3S: v.designFlowPerLinerM3S,
+    gFieldAtDesign: v.gFieldAtDesign,
+    coreRadiusFraction: v.coreRadiusFraction,
+    ...f.fluid,
+  }));
+  const flot = engineAnswer(errors, 'flotation unit', P.flotation({
+    flowM3S: f.flowM3S,
+    nCells: v.nCells,
+    cellVolumeM3: v.cellVolumeM3,
+    cellDepthM: v.cellDepthM,
+    gasRatio: v.gasRatio,
+    bubbleMicron: v.bubbleMicron,
+    gasDensityKgM3: v.gasDensityKgM3,
+    attachmentEfficiency: DECLARED.attachmentEfficiency,
+    ...f.fluid,
+  }));
+  const bed = engineAnswer(errors, 'media bed', P.mediaFilter({
+    flowM3S: f.flowM3S,
+    areaM2: v.filterAreaM2,
+    bedDepthM: v.bedDepthM,
+    mediaMicron: v.mediaMicron,
+    filterCoefficientPerM: v.filterCoefficientPerM,
+    referenceDropletMicron: v.referenceDropletMicron,
+  }));
+  const pick = (r, k) => (r ? r[k] : null);
+  return {
+    ok: errors.length === 0,
+    errors,
+    warnings: warningsOf(liner, flot, bed),
+    flowM3S: f.flowM3S,
+    muPaS: f.mu.muPaS,
+    rhoWaterKgM3: f.rhoW.rhoKgM3,
+    rhoOilKgM3: f.rhoO.rhoKgM3,
+    turndownRatio: pick(liner, 'turndownRatio'),
+    shearPenalty: pick(liner, 'shearPenalty'),
+    gField: pick(liner, 'gField'),
+    linerResidenceS: pick(liner, 'residenceS'),
+    idealLinerCutMicron: pick(liner, 'idealD50cMicron'),
+    linerCutMicron: pick(liner, 'd50cMicron'),
+    linersAtDesignFlow: pick(liner, 'linersAtDesignFlow'),
+    bubbleRiseMS: pick(flot, 'bubbleRiseMS'),
+    superficialGasMS: pick(flot, 'superficialGasMS'),
+    gasHoldup: pick(flot, 'gasHoldup'),
+    flotationResidenceS: pick(flot, 'residenceS'),
+    flotationCutMicron: pick(flot, 'd50cMicron'),
+    bedLoadingMHr: pick(bed, 'loadingMHr'),
+    bedCutMicron: pick(bed, 'd50cMicron'),
+  };
+});
+
+/**
+ * THE TRAIN VIEW. A plate pack, then a liner bank, then a media bed, in that
+ * order, on the typed inlet and grid, and a Reynolds read at one typed droplet.
+ */
+export const typedTrainStream = (typed) => guarded(() => {
+  const { values: v, errors } = typedNumbers(typed, Object.keys(TYPED_TRAIN_DEFAULT));
+  if (errors.length) return { ok: false, errors, warnings: [] };
+  const f = typedFluid(v, errors);
+  if (!f) return { ok: false, errors, warnings: [] };
+  const plate = engineAnswer(errors, 'plate pack', P.plateInterceptor({
+    flowM3S: f.flowM3S, plateAreaM2: v.plateAreaM2, nPlates: v.nPlates,
+    efficiencyFactor: v.efficiencyFactor, ...f.fluid,
+  }));
+  const liner = engineAnswer(errors, 'liner bank', P.hydrocyclone({
+    flowM3S: f.flowM3S,
+    nLiners: v.nLiners,
+    linerDiameterM: v.linerDiameterM,
+    linerLengthM: v.linerLengthM,
+    designFlowPerLinerM3S: v.designFlowPerLinerM3S,
+    gFieldAtDesign: v.gFieldAtDesign,
+    coreRadiusFraction: v.coreRadiusFraction,
+    ...f.fluid,
+  }));
+  const bed = engineAnswer(errors, 'media bed', P.mediaFilter({
+    flowM3S: f.flowM3S,
+    areaM2: v.filterAreaM2,
+    bedDepthM: v.bedDepthM,
+    mediaMicron: v.mediaMicron,
+    filterCoefficientPerM: v.filterCoefficientPerM,
+    referenceDropletMicron: v.referenceDropletMicron,
+  }));
+  const droplet = engineAnswer(errors, 'droplet rise', P.stokesRiseMS({ dMicron: v.dropletMicron, ...f.fluid }));
+  const train = (plate && liner && bed) ? engineAnswer(errors, 'train', P.treatmentTrain({
+    inletOiwPpm: v.oiwPpm,
+    inletD50Micron: v.d50Micron,
+    sigma: v.sigma,
+    nBins: v.nBins,
+    spanSigma: v.spanSigma,
+    devices: [
+      { name: 'CPI plate pack', ...plate },
+      { name: 'Hydrocyclone bank', ...liner },
+      { name: 'Walnut shell filter', ...bed },
+    ],
+  })) : null;
+  return {
+    ok: errors.length === 0,
+    errors,
+    warnings: warningsOf(plate, liner, bed, droplet, train),
+    flowM3S: f.flowM3S,
+    muPaS: f.mu.muPaS,
+    rhoWaterKgM3: f.rhoW.rhoKgM3,
+    rhoOilKgM3: f.rhoO.rhoKgM3,
+    stages: train ? train.stages.map((s) => ({
+      name: s.name,
+      ran: s.ran,
+      d50cMicron: s.d50cMicron,
+      removalPct: s.removalPct,
+      outletOiwPpm: s.outletOiwPpm,
+      outletMedianMicron: s.outletMedianMicron,
+    })) : [],
+    inletMedianMicron: train ? train.inletMedianMicron : null,
+    outletOiwPpm: train ? train.outletOiwPpm : null,
+    outletMedianMicron: train ? train.outletMedianMicron : null,
+    overallRemovalPct: train ? train.overallRemovalPct : null,
+    dropletMicron: v.dropletMicron,
+    dropletRiseMS: droplet ? droplet.vMS : null,
+    dropletReynolds: droplet ? droplet.reynolds : null,
+  };
+});
+
+// ---------------------------------------------------------------------------
 // THE CAPSTONE. Below this line nothing is a teaching value, and NO PANEL AND
 // NO COURSE PAGE MAY IMPORT ANY OF IT. capstoneLeak.test.js greps every panel
 // source, this file and the learning page for a graded answer in five string

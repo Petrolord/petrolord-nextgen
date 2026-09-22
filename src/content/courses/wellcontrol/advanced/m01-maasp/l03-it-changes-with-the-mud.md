@@ -12,7 +12,7 @@ The mud density is subtracted. So a heavier mud gives a SMALLER MAASP.
 
 ## The numbers on the slant well
 
-At a 1750 kg/m3 fracture equivalent and a shoe at 1282.248590311 m:
+At a 1750 kg/m3 fracture equivalent and a shoe at about 1282.2 m of true vertical depth:
 
 | mud density | MAASP |
 |---|---|

@@ -6,7 +6,7 @@ Time to run the experiment this module exists for. Same log, same density column
 
 ## The damage, item by item
 
-Switch the panel's trend control to the fitted setting and read the tiles against the capstone values.
+Switch the panel's trend control to the fitted setting and read the tiles against the teaching values.
 
 Pore pressure at TD: 53.83775710501359 MPa, against the true 47.408579625. Overpressure at TD: 12.429177480013587 MPa, against the true 6. The trend choice more than doubled the overpressure; the error, 6.43 MPa, is larger than the entire true anomaly. If a rig crew planned kill mud for this number they would be carrying more than twice the needed overbalance at TD.
 

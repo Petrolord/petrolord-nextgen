@@ -64,7 +64,7 @@ The contrasts are $\Delta v_p = 162.69722802961946$ and $\Delta \rho = -411.2895
 
 $$A = \tfrac{1}{2}\left(\frac{162.69722802961946}{2824.3486140148097} + \frac{-411.2895482206777}{2244.3552258896612}\right) = \tfrac{1}{2}(0.05760522 - 0.18325509) = -0.06282494$$
 
-which is the graded gas intercept of -0.06282494068620303.
+which is the Ekene gas intercept of -0.06282494068620303.
 
 Compare that with the exact normal incidence value of -0.0629911815139045 from the last module. They differ by 0.00016624, in the fourth decimal, and that gap is already the approximation showing at zero degrees where it is supposed to be best.
 

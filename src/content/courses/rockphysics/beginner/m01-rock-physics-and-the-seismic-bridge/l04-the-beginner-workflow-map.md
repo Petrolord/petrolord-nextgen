@@ -41,18 +41,18 @@ The two bulk modulus bounds sit about 6.8 percent apart. The two shear modulus b
 
 A pore does not usually contain one fluid. Module 4 uses Wood's equation to combine brine and gas at a chosen water saturation into a single effective pore fluid.
 
-Bulk modulus mixes as a harmonic average, which means the compliances add rather than the stiffnesses. Density mixes linearly. At the capstone saturation of Sw 0.8, that is 80 percent brine and 20 percent gas, the engine returns
+Bulk modulus mixes as a harmonic average, which means the compliances add rather than the stiffnesses. Density mixes linearly. At the Ekene saturation of Sw 0.8, that is 80 percent brine and 20 percent gas, the engine returns
 
 - mixed fluid bulk modulus: 257.3340919366766 MPa
 - mixed fluid density: 848.7933489234579 kg/m3
 
 Compare those two lines against the pure brine values in step 2. The density fell from 1017.8249875 to 848.7933489234579 kg/m3, a modest move. The bulk modulus fell from 2.6978112899395996 GPa to 257.3340919366766 MPa, which is a fall of about a factor of ten for a 20 percent change in saturation. That asymmetry is the whole of module 4 and it is why saturation is detectable.
 
-## What the six graded numbers are
+## What the six reported numbers are
 
-The capstone at the end of this tier asks for six values, and every one of them is produced by the four steps above.
+The capstone at the end of this tier states a sand of its own and asks for six values, and every one of them is produced by the four steps above. On the Ekene teaching case they are:
 
-| Number | Value |
+| Number | Ekene value |
 | --- | --- |
 | brine density | 1017.8249875 kg/m3 |
 | brine bulk modulus | 2.6978112899395996 GPa |
@@ -75,6 +75,6 @@ The panel below runs the whole path at once. Move the water saturation and read 
 
 ## Exercise
 
-Write the four steps in order and, beside each, write what it needs as an input and what it hands to the next step. Then answer two questions in one sentence each. Which step could you carry out knowing nothing about the fluids at all? Which of the six capstone numbers would change if the reservoir turned out to be at 40 MPa rather than 25 MPa?
+Write the four steps in order and, beside each, write what it needs as an input and what it hands to the next step. Then answer two questions in one sentence each. Which step could you carry out knowing nothing about the fluids at all? Which of the six numbers the tier reports would change if the Ekene reservoir turned out to be at 40 MPa rather than 25 MPa?
 
 Self check: the four steps are state the conditions, build the three fluids from those conditions, mix the mineral frame from the lithology split, and mix brine with gas into an effective pore fluid at a chosen saturation. Step 3, the mineral frame, needs only the 70 to 30 quartz to clay split and the mineral constants, so it can be done with no knowledge of the fluids whatever. A change of pressure to 40 MPa would move all five of the fluid derived numbers, which are the brine density, the brine bulk modulus, the gas bulk modulus, the live oil density and the Wood mixed fluid modulus, while the frame K of 30.87940062475596 GPa would be untouched, because the mineral constants and the lithology split do not depend on pressure at this tier.

@@ -2,9 +2,16 @@
 // surface + gridding engines over the Ekene teaching wells (the same
 // field the Well Correlation course sections; here with map
 // coordinates and two extra wells beyond the section line). The engine
-// is consumed as-is; this module holds the fixture, the fixed capstone
-// settings and the summary-panel numbers. The oracle was reproduced by
-// running exactly this pipeline in Node before the migration was seeded.
+// is consumed as-is; this module holds the fixture, the teaching
+// settings and the summary-panel numbers.
+//
+// The Ekene wells are the TEACHING case: the panels open on them and the
+// lessons work them. Since W5a (2026-09) each tier's capstone is a well
+// set of its own, stated in the brief and typed into the panels (every
+// function below takes an optional case: wells, prospect and appraisal
+// well). Nothing in this file carries it, and panelCapstoneGuard.test.jsx
+// checks that no number these functions give at their defaults lands on a
+// graded answer.
 import { topsToPoints, specForPoints } from '@petrolord/engines/engines/mapping/surface.js';
 import { gridSurface } from '@petrolord/engines/lib/gridding/gridding.js';
 import { surfaceStats, sampleAtXY, isNull, isochore } from '@petrolord/engines/lib/gridding/gridmath.js';
@@ -20,19 +27,48 @@ export const TEACHING_WELLS = [
 ];
 
 export const TOP_NAME = 'TOP_SAND';
-export const CAPSTONE_CELL_M = 100;      // the capstone's grid cell
+export const TEACHING_CELL_M = 100;      // the teaching grid cell
 export const PAD_CELLS = 2;
 export const MAX_EXTRAP_M = 800;         // wells are ~1 km apart
 export const TARGET = { x: 1600, y: 1600, label: 'P-1' }; // prospect location
 
-// Grid the teaching surface at a given cell size and compute everything
-// the map view and the capstone reading need.
-export function computeMap(cellM) {
-  const points = topsToPoints(TEACHING_WELLS, TOP_NAME);
+// A case: the wells, the prospect and the appraisal well. The Ekene
+// teaching case unless the learner types one.
+export const E7 = { name: 'Ekene-7', x: 1500, y: 1500, actual: 1549 };
+export const TEACHING_CASE = { wells: TEACHING_WELLS, target: TARGET, e7: E7 };
+const caseOf = (c) => ({ ...TEACHING_CASE, ...(c || {}) });
+
+/** One well per line: name, x, y, TOP_SAND MD, BASE_SAND MD. Null unless every line parses and there are at least three wells. */
+export function parseWellTable(text) {
+  const rows = String(text).split('\n').map((l) => l.trim()).filter(Boolean);
+  const wells = [];
+  for (const row of rows) {
+    const cells = row.split(',').map((c) => c.trim());
+    if (cells.length !== 5) return null;
+    const [name, ...nums] = cells;
+    const [x, y, top, base] = nums.map(Number);
+    if (!name || ![x, y, top, base].every(Number.isFinite) || !(base > top)) return null;
+    wells.push({ name, surface_x: x, surface_y: y, tops: [{ name: TOP_NAME, md_m: top }, { name: 'BASE_SAND', md_m: base }] });
+  }
+  if (wells.length < 3 || new Set(wells.map((w) => w.name)).size !== wells.length) return null;
+  return wells;
+}
+
+export const wellTableText = (wells) => wells.map((w) => [
+  w.name, w.surface_x, w.surface_y,
+  w.tops.find((t) => t.name === TOP_NAME).md_m, w.tops.find((t) => t.name === 'BASE_SAND').md_m,
+].join(', ')).join('\n');
+
+// Grid the surface at a given cell size and compute everything the map
+// view reads.
+export function computeMap(cellM, kase = null) {
+  const { wells, target } = caseOf(kase);
+  const TARGET_ = target;
+  const points = topsToPoints(wells, TOP_NAME);
   const spec = specForPoints(points, Number(cellM), PAD_CELLS);
   const result = gridSurface(points, spec, { maxExtrapolation: MAX_EXTRAP_M });
   const stats = surfaceStats(result.z);
-  const zAtTarget = sampleAtXY(result.z, spec, TARGET.x, TARGET.y);
+  const zAtTarget = sampleAtXY(result.z, spec, TARGET_.x, TARGET_.y);
   const { levels, step } = contourLevels(stats.min, stats.max, 10);
   const contours = levels.map((level) => ({
     level,
@@ -72,11 +108,9 @@ export function computeMap(cellM) {
 // Ekene-6 is the only interior well. Then a blind test at the new
 // appraisal well Ekene-7. Oracle-reproduced in Node before the NG7
 // migration was seeded.
-export const E7 = { name: 'Ekene-7', x: 1500, y: 1500, actual: 1549 };
-
 export function computeAdvanced() {
   const pts = topsToPoints(TEACHING_WELLS, TOP_NAME);
-  const spec = specForPoints(pts, CAPSTONE_CELL_M, PAD_CELLS);
+  const spec = specForPoints(pts, TEACHING_CELL_M, PAD_CELLS);
   const loo = pts.map((p, i) => {
     const rest = pts.filter((_, k) => k !== i);
     const z = gridSurface(rest, spec, { maxExtrapolation: MAX_EXTRAP_M }).z;
@@ -93,7 +127,7 @@ export function computeAdvanced() {
   const base6 = gridSurface(pts, spec, { maxExtrapolation: MAX_EXTRAP_M }).z;
   const predE7 = sampleAtXY(base6, spec, E7.x, E7.y);
   const pts7 = [...pts, { x: E7.x, y: E7.y, z: E7.actual }];
-  const spec7 = specForPoints(pts7, CAPSTONE_CELL_M, PAD_CELLS); // interior: frame unchanged
+  const spec7 = specForPoints(pts7, TEACHING_CELL_M, PAD_CELLS); // interior: frame unchanged
   const with7 = gridSurface(pts7, spec7, { maxExtrapolation: MAX_EXTRAP_M });
   let zmin7 = Infinity;
   for (const v of with7.z) if (!isNull(v) && v < zmin7) zmin7 = v;
@@ -112,7 +146,7 @@ export function computeAdvanced() {
 // Oracle-reproduced in Node before the NG6 migration was seeded.
 export function computeIntermediate() {
   const topPts = topsToPoints(TEACHING_WELLS, TOP_NAME);
-  const spec = specForPoints(topPts, CAPSTONE_CELL_M, PAD_CELLS);
+  const spec = specForPoints(topPts, TEACHING_CELL_M, PAD_CELLS);
   const topZ = gridSurface(topPts, spec, { maxExtrapolation: MAX_EXTRAP_M }).z;
   const baseZ = gridSurface(
     topsToPoints(TEACHING_WELLS, 'BASE_SAND'), spec, { maxExtrapolation: MAX_EXTRAP_M },
@@ -138,8 +172,8 @@ export function computeIntermediate() {
 
 // ---- Panel drivers -------------------------------------------------------
 // The two deep tiers each get one explorer panel. Both drive the same
-// engines the capstones do, so a tile a learner reads is the number the
-// grader holds. Neither of these is used by the capstone itself.
+// engines on whichever case the learner types, so a tile read on the
+// capstone's case is the number the grader holds.
 
 const BASE_NAME = 'BASE_SAND';
 
@@ -167,27 +201,28 @@ function contoursFor(z, spec, zMin, zMax) {
 const wellPick = (w, name) => w.tops.find((t) => t.name === name).md_m;
 
 // ---- Intermediate panel: one frame, two surfaces, and their difference.
-export const ISO_CELLS = [50, CAPSTONE_CELL_M, 200];
+export const ISO_CELLS = [50, TEACHING_CELL_M, 200];
 export const SURFACE_KEYS = [TOP_NAME, BASE_NAME, 'ISOCHORE'];
 
 // Grid both Ekene surfaces on one frame at the given cell, subtract them,
 // and return whichever of the three the learner asked to see. The well
 // posting is the measured value: a pick on the depth surfaces, and base
 // minus top on the isochore, computed without any gridding.
-export function computeIsochoreMap(cellM, surfaceKey) {
-  const topPts = topsToPoints(TEACHING_WELLS, TOP_NAME);
+export function computeIsochoreMap(cellM, surfaceKey, kase = null) {
+  const { wells, target: TARGET_ } = caseOf(kase);
+  const topPts = topsToPoints(wells, TOP_NAME);
   const spec = specForPoints(topPts, Number(cellM), PAD_CELLS);
   const opts = { maxExtrapolation: MAX_EXTRAP_M };
   const topZ = gridSurface(topPts, spec, opts).z;
-  const baseZ = gridSurface(topsToPoints(TEACHING_WELLS, BASE_NAME), spec, opts).z;
+  const baseZ = gridSurface(topsToPoints(wells, BASE_NAME), spec, opts).z;
   const isoZ = isochore(baseZ, topZ);
 
   const z = surfaceKey === TOP_NAME ? topZ : (surfaceKey === BASE_NAME ? baseZ : isoZ);
   const stats = surfaceStats(z);
-  const sampled = sampleAtXY(z, spec, TARGET.x, TARGET.y);
+  const sampled = sampleAtXY(z, spec, TARGET_.x, TARGET_.y);
   const { contours, step } = contoursFor(z, spec, stats.min, stats.max);
 
-  const posted = TEACHING_WELLS.map((w) => {
+  const posted = wells.map((w) => {
     const top = wellPick(w, TOP_NAME);
     const base = wellPick(w, BASE_NAME);
     const value = surfaceKey === TOP_NAME ? top : (surfaceKey === BASE_NAME ? base : base - top);
@@ -229,23 +264,30 @@ export function computeIsochoreMap(cellM, surfaceKey) {
 export const ALL_SIX = 'all6';
 export const PLUS_SEVEN = 'plus7';
 
-export const CONTROL_SETS = [
-  { key: ALL_SIX, label: 'All six wells' },
-  ...TEACHING_WELLS.map((w) => ({ key: `drop:${w.name}`, label: `Without ${w.name}` })),
-  { key: PLUS_SEVEN, label: `Six plus ${E7.name}` },
-];
+/** The control sets for a case: all its wells, each one withheld, and all plus the appraisal well. */
+export function controlSetsFor(kase = null) {
+  const { wells, e7 } = caseOf(kase);
+  return [
+    { key: ALL_SIX, label: `All ${wells.length} wells` },
+    ...wells.map((w) => ({ key: `drop:${w.name}`, label: `Without ${w.name}` })),
+    { key: PLUS_SEVEN, label: `All plus ${e7.name}` },
+  ];
+}
+
+export const CONTROL_SETS = controlSetsFor();
 
 const dist = (ax, ay, bx, by) => Math.hypot(ax - bx, ay - by);
 
 // Every control set is gridded on the SAME frame as the six-well map, so
 // a change in the live node count is a change in what the control
 // supports rather than a change of frame.
-export function computeValidationMap(setKey) {
-  const sixPts = topsToPoints(TEACHING_WELLS, TOP_NAME);
-  const spec = specForPoints(sixPts, CAPSTONE_CELL_M, PAD_CELLS);
+export function computeValidationMap(setKey, kase = null, cellM = TEACHING_CELL_M) {
+  const { wells, target: TARGET_, e7: E7_ } = caseOf(kase);
+  const sixPts = topsToPoints(wells, TOP_NAME);
+  const spec = specForPoints(sixPts, Number(cellM), PAD_CELLS);
   const opts = { maxExtrapolation: MAX_EXTRAP_M };
-  const e7pt = { x: E7.x, y: E7.y, z: E7.actual, name: E7.name };
-  const named = sixPts.map((p, i) => ({ ...p, name: TEACHING_WELLS[i].name }));
+  const e7pt = { x: E7_.x, y: E7_.y, z: E7_.actual, name: E7_.name };
+  const named = sixPts.map((p, i) => ({ ...p, name: wells[i].name }));
 
   let control = named;
   let withheld = null;
@@ -260,7 +302,7 @@ export function computeValidationMap(setKey) {
 
   const grid = gridSurface(control, spec, opts);
   const stats = surfaceStats(grid.z);
-  const atTarget = sampleAtXY(grid.z, spec, TARGET.x, TARGET.y);
+  const atTarget = sampleAtXY(grid.z, spec, TARGET_.x, TARGET_.y);
   const { contours, step } = contoursFor(grid.z, spec, stats.min, stats.max);
 
   // How many of the current control wells could be dropped and still be

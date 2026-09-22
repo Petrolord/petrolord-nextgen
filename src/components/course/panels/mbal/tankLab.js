@@ -28,7 +28,43 @@ export { pD, pDFinite };
 /** Run the real engine over the Ekene survey history, optionally forcing an
  *  aquifer model the data does not need (the Professional "wrong model" case). */
 export function runEkeneTank({ aquiferModel = 'none', potW = 1e7 } = {}) {
+  return runTank(EKENE.inputs, { aquiferModel, potW });
+}
+
+/** Engine inputs for a tank the learner types (the Associate capstone's case
+ *  is one): initial pressure, Swi, cf and cw, and the survey table, the first
+ *  row being the initial state (Np 0). Every row is above the bubble point, so
+ *  the produced gas-oil ratio stays at the solution value and F is Np times Bo.
+ *  The Ekene run's fluid description supplies everything the tank does not state. */
+export function typedTankInputs({ pi, swi, cf, cw, rows }) {
   const inputs = JSON.parse(JSON.stringify(EKENE.inputs));
+  const rs = EKENE.inputs.pvt_lab_table[0].rs_scf_stb;
+  const bw = EKENE.inputs.pvt_lab_table[0].bw_rb_stb;
+  inputs.initial_pressure_psia = pi;
+  inputs.initial_water_saturation = swi;
+  inputs.formation_compressibility_psi = cf;
+  inputs.water_compressibility_psi = cw;
+  inputs.bubble_point_psia = Math.min(...rows.map((r) => r.p)) - 200;
+  inputs.pvt_lab_table = rows.map((r) => ({
+    pressure_psia: r.p, bo_rb_stb: r.bo, rs_scf_stb: rs, bw_rb_stb: bw, oil_viscosity_cp: 2,
+  }));
+  inputs.production_data = rows.map((r, i) => ({
+    timestep_index: i,
+    observation_date: `survey ${i}`,
+    pressure_psia: r.p,
+    cum_oil_stb: r.np,
+    cum_gas_scf: r.np * rs,
+    cum_water_stb: 0,
+    bo_rb_stb: r.bo,
+    rs_scf_stb: rs,
+    bw_rb_stb: bw,
+  }));
+  return inputs;
+}
+
+/** The engine over any tank's inputs, with the per-survey table the panel prints. */
+export function runTank(baseInputs, { aquiferModel = 'none', potW = 1e7 } = {}) {
+  const inputs = JSON.parse(JSON.stringify(baseInputs));
   if (aquiferModel !== 'none') {
     inputs.has_aquifer = true;
     inputs.aquifer_model = aquiferModel;

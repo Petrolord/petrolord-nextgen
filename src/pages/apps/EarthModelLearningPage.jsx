@@ -187,7 +187,7 @@ const EarthModelLearningPage = () => {
       } else {
         toast({
           title: 'Not passing yet',
-          description: `${res.score}/${res.max_score} answers within tolerance. Read the panels again.`,
+          description: `${res.score}/${res.max_score} answers within tolerance. Type the case the brief states into the course panels and try again.`,
           variant: 'destructive',
         });
       }
@@ -465,7 +465,7 @@ const EarthModelLearningPage = () => {
                     </>
                   ) : (
                     <p className="text-red-300 font-medium flex items-center gap-2">
-                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance — read the panels again and resubmit.
+                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Type the case the brief states into the course panels and resubmit.
                     </p>
                   )}
                 </div>

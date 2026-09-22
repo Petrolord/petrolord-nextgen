@@ -1,6 +1,6 @@
-// simLab pins. Every one of the eighteen RC5 capstone oracles is reproduced
-// here THROUGH the teaching lab, so a panel and the live grader can never
-// drift apart, plus the supporting truth the lessons quote at full precision.
+// simLab pins. Every one of the eighteen RC5 teaching values (the capstone
+// oracles until W5b re-cased each tier onto a deck rebuilt at a setting of its
+// own) is reproduced here THROUGH the teaching lab, plus the supporting truth the lessons quote at full precision.
 // Source of truth: RC5-TRUTH.md, derived by running the vendored engines.
 
 import { describe, it, expect } from 'vitest';
@@ -8,7 +8,7 @@ import * as lab from './simLab.js';
 
 const near = (a, b, tol) => expect(Math.abs(a - b)).toBeLessThanOrEqual(tol);
 
-describe('simLab: Associate capstone oracles', () => {
+describe('simLab: Associate teaching values (the pre-W5b oracles)', () => {
   it('deck cell count', () => {
     expect(lab.gridSummary().cellCount).toBe(4500);
     expect(lab.gridSummary().nx).toBe(30);
@@ -44,7 +44,7 @@ describe('simLab: Associate capstone oracles', () => {
   });
 });
 
-describe('simLab: Professional capstone oracles', () => {
+describe('simLab: Professional teaching values (the pre-W5b oracles)', () => {
   it('the deck STOIIP under the Eclipse cell-centre rule', () => {
     near(lab.volumetrics('centre').stoiip_stb, 12132366.897955146, 1e-6);
   });
@@ -83,7 +83,7 @@ describe('simLab: Professional capstone oracles', () => {
   });
 });
 
-describe('simLab: Expert capstone oracles', () => {
+describe('simLab: Expert teaching values (the pre-W5b oracles)', () => {
   it('the deviated connection list, re-intersected from the trajectory', () => {
     const d = lab.deviatedPath();
     expect(d.connections).toHaveLength(11);
@@ -178,5 +178,38 @@ describe('simLab: supporting truth the lessons quote', () => {
     const ref = lab.referenceSpec();
     expect(ref.grid.nx).toBe(10);
     expect(ref.wells.map((w) => w.name)).toEqual(['PROD', 'INJ']);
+  });
+});
+
+describe('simLab: rebuilding at a setting reproduces the committed fixture at the teaching setting', () => {
+  it('specAt() with no setting is the committed spec, byte for byte', () => {
+    expect(JSON.stringify(lab.specAt())).toBe(JSON.stringify(lab.SPEC));
+    expect(lab.deckTextAt({ regionalMean: lab.TEACHING_MEAN_M, owcM: lab.TEACHING_OWC_M })).toBe(lab.deckText());
+  });
+  it('structureAt() at the teaching setting is the committed volumetrics and structure', () => {
+    const s = lab.structureAt();
+    const g = lab.GOLDEN;
+    expect(s.stoiipStb).toBe(g.volumetrics.centre_rule.stoiip_stb);
+    expect(s.gapPct).toBe(g.volumetrics.centre_vs_booking_pct);
+    expect(s.oilCells).toBe(g.volumetrics.oil_cells_centre_rule);
+    expect(s.tapered.stoiipStb).toBe(g.volumetrics.column_tapered.stoiip_stb);
+    expect(s.crestFt).toBe(g.grid.depth_range_ft.topMin);
+    expect(s.datumFt).toBe(g.grid.depth_range_ft.topMean);
+    g.grid.well_tops.forEach((w) => {
+      expect(s.wellTops.find((x) => x.well === w.well).deck_top_m).toBe(w.deck_top_m);
+    });
+  });
+  it('the correlation check on the teaching oil is the committed divergence', () => {
+    const o = lab.correlatedOil({ api: 32, gasSg: 0.75, tempF: 180, pbPsia: 2000, piPsia: 3200, rsiScfStb: 400 });
+    const d = lab.pvtDivergence();
+    expect(o.boAtPi).toBe(d.correlated_bo_at_pi);
+    expect(o.rsGapPct).toBe(d.rs_gap_pct);
+  });
+  it('bisecting to the NG5 booking lands on the designed regional mean', () => {
+    near(lab.calibrateRegionalMean(lab.BOOKED_STOIIP_STB), lab.TEACHING_MEAN_M, 1e-6);
+  });
+  it('the whole history round-trips to the ledger, and the broken specs rebuild as committed', () => {
+    expect(lab.historyOilBetween('2023-01-01', '2025-12-01')).toBe(lab.historySummary().totalOilStb);
+    expect(lab.validationCasesAt()).toEqual(lab.validationCases());
   });
 });

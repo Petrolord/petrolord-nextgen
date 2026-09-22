@@ -16,7 +16,7 @@ The numerator and the denominator are the same quantity, so the ratio is 1 by co
 
 Correlating a series with a shifted copy of itself is an autocorrelation. That is the correct name for the operation this exercise performed, and it explains the result completely.
 
-It also explains a feature of the curve you will meet in the next module. An autocorrelation is symmetric about the lag that undoes the shift, because sliding two identical shapes past each other looks the same from either side. So the curve rises to 1 at 8 ms and falls away at the same rate on both sides of it. Two genuinely different traces have no reason to do that, and a real scan curve is usually lopsided.
+It also explains a feature of the curve you will meet in the next module. An autocorrelation is symmetric about the lag that undoes the shift, because sliding two identical shapes past each other looks the same from either side. So the curve rises to 1 at 6 ms and falls away at the same rate on both sides of it. Two genuinely different traces have no reason to do that, and a real scan curve is usually lopsided.
 
 The scan did not measure a tie. It measured a copy. Everything about the method was exercised correctly, which is what the exercise was for, but the quality number that came out is a statement about the construction rather than about the earth.
 

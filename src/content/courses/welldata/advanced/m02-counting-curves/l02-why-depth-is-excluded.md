@@ -1,6 +1,6 @@
 # Why depth is excluded
 
-The graded reading is 24 rather than 30 because the depth column is not counted in any file. This lesson gives the reason, and then gives the arithmetic consequence, because at campaign scale the exclusion is not a small tidying convention. It moves the answer by six.
+On the teaching campaign the curve count is 24 rather than 30 because the depth column is not counted in any file. This lesson gives the reason, and then gives the arithmetic consequence, because at campaign scale the exclusion is not a small tidying convention. It moves the answer by six.
 
 ## Depth is the axis, not a measurement
 
@@ -10,13 +10,13 @@ The depth column is a different kind of object. It says where each of those read
 
 That asymmetry is what the word index names. The index is the axis. The measurements live on it.
 
-You met this at the Professional tier, where the pipeline forced the kind of the first curve to depth by position rather than by looking its mnemonic up, and where the graded count of recognised kinds on feet_20 was 4 out of 5 declared curves. The reasoning there was that the count exists to say how many measurements the platform understood, and the index is not a measurement. The campaign count uses the identical rule, for the identical reason, applied to six files instead of one.
+You met this at the Professional tier, where the pipeline forced the kind of the first curve to depth by position rather than by looking its mnemonic up, and where the count of recognised kinds on feet_20 was 4 out of 5 declared curves. The reasoning there was that the count exists to say how many measurements the platform understood, and the index is not a measurement. The campaign count uses the identical rule, for the identical reason, applied to six files instead of one.
 
 ## The arithmetic consequence
 
 Here is the part that is specific to a campaign.
 
-Counting the index inflates every file by exactly one, because the LAS standard puts exactly one index first in every file. Six files therefore inflate the campaign by six. The graded 24 becomes 30, and 30 is a number that looks entirely reasonable, divides neatly by 6, and is wrong.
+Counting the index inflates every file by exactly one, because the LAS standard puts exactly one index first in every file. Six files therefore inflate the campaign by six. The correct 24 becomes 30, and 30 is a number that looks entirely reasonable, divides neatly by 6, and is wrong.
 
 That is what makes this error dangerous at this tier rather than merely incorrect. On a single file, counting 5 where 4 was wanted is a small visible slip in a small visible number. Across a delivery, the same slip compounds silently and lands as a plausible total. There is nothing about 30 that announces itself.
 
@@ -36,7 +36,7 @@ In every case, including the index adds a quantity that is fixed by the file cou
 
 ## The honest objection
 
-There is a real objection to all of this and it deserves an answer. The depth column is data. It was recorded, it can be wrong, it can be in the wrong unit, and this very tier grades a reading about it, since 5 of the 6 files have a uniform depth step and one does not.
+There is a real objection to all of this and it deserves an answer. The depth column is data. It was recorded, it can be wrong, it can be in the wrong unit, and this very tier grades a reading about it: on the teaching campaign, 5 of the 6 files have a uniform depth step and one does not.
 
 All of that is true, and it does not make the index a measurement. The index gets more scrutiny than any value curve in the pipeline, not less. Its unit governs whether the file can be imported at all. Its regularity is tested and reported. Its first and last values become the frame of the imported well. Excluding it from a count of measured curves is not a claim that it is unimportant. It is a claim that it belongs to a different category, and the campaign reports on it in the columns where it belongs, which are the converted column, the uniform step column and the samples column.
 

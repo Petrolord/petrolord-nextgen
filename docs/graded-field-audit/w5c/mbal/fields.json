@@ -1,0 +1,46 @@
+{
+ "beginner": [
+  {
+   "key": "isan_f_last_rb",
+   "tol": 50,
+   "unit": "rb",
+   "label": "ISAN underground withdrawal F at the last survey",
+   "expected": 396436.565
+  },
+  {
+   "key": "isan_et_last_rb",
+   "tol": 0.00005,
+   "unit": "rb/stb",
+   "label": "ISAN total expansion Et at the last survey",
+   "expected": 0.04719534957777779
+  },
+  {
+   "key": "isan_ooip_stb",
+   "tol": 20000,
+   "unit": "stb",
+   "label": "ISAN OOIP from the Havlena-Odeh slope",
+   "expected": 8399861.71546289
+  },
+  {
+   "key": "isan_efw_share_pct",
+   "tol": 0.2,
+   "unit": "%",
+   "label": "ISAN Efw share of Et at the last survey",
+   "expected": 32.05898401672607
+  },
+  {
+   "key": "isan_ddi_final",
+   "tol": 0.005,
+   "unit": "-",
+   "label": "ISAN depletion drive index at the last survey",
+   "expected": 0.6794064667226587
+  },
+  {
+   "key": "isan_eo_last_rb_stb",
+   "tol": 0.00005,
+   "unit": "rb/stb",
+   "label": "ISAN oil expansion Eo at the last survey",
+   "expected": 0.03206500000000001
+  }
+ ]
+}

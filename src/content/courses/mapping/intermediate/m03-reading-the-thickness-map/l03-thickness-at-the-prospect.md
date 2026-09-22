@@ -1,12 +1,12 @@
 # Thickness at the prospect
 
-One capstone field is a single number at a single location: the mapped thickness at prospect P-1. This lesson derives it two ways, checks it against the wells, and states what it is and is not evidence for.
+One figure this tier reports is a single number at a single location: the mapped thickness at prospect P-1. This lesson derives it two ways, checks it against the wells, and states what it is and is not evidence for.
 
 {{panel:mp-isochore-explorer}}
 
 ## The number
 
-P-1 sits at (1600, 1600). The isochore there reads **34.050048828125 m**, and the capstone grades it to 0.1 m.
+P-1 sits at (1600, 1600). The isochore there reads **34.050048828125 m**.
 
 It can be reached from either end of the workflow, and both routes are worth running once.
 

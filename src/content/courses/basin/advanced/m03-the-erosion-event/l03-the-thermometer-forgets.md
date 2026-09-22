@@ -1,6 +1,6 @@
 # The thermometer forgets
 
-Here is the fixture's most quotable pair of numbers. Present-day source temperature with the erosion event: 149.76037539670858 degC. Without it: 149.76027256253775. The difference is one ten-thousandth of a degree. Present-day reflectance: 1.6718288798752388 with, 1.6151780693528823 without. The difference is fifty-seven times the capstone's tolerance. This lesson is about why one instrument forgets and the other remembers, and what that asymmetry licenses you to conclude in real basins.
+Here is the fixture's most quotable pair of numbers. Present-day source temperature with the erosion event: 149.76037539670858 degC. Without it: 149.76027256253775. The difference is one ten-thousandth of a degree. Present-day reflectance: 1.6718288798752388 with, 1.6151780693528823 without. The difference is fifty-seven thousandths of a percent Ro, far larger than the precision reflectance is read to. This lesson is about why one instrument forgets and the other remembers, and what that asymmetry licenses you to conclude in real basins.
 
 {{panel:bs-charge-explorer}}
 
@@ -18,7 +18,7 @@ So the two runs end thermally identical and kinetically distinct, and the distin
 
 ## What this licenses
 
-The practical inversion, the one real basin modellers run constantly: measured reflectance that is too high for any plausible history built from the preserved section is evidence of missing section or vanished heat. The workflow is exactly the fixture's, run backward. Model the preserved stack, honestly calibrated; if measured Ro at the source horizon reads 1.67 where the model of the preserved section tops out at 1.62, the residual 0.05 wants an explanation, and a few hundred metres of eroded overburden is the standard candidate. The next lesson turns the forward version of that statement into the graded number; the sensitivity lesson calibrates the inverse reading, how much missing section per unit of excess Ro.
+The practical inversion, the one real basin modellers run constantly: measured reflectance that is too high for any plausible history built from the preserved section is evidence of missing section or vanished heat. The workflow is exactly the fixture's, run backward. Model the preserved stack, honestly calibrated; if measured Ro at the source horizon reads 1.67 where the model of the preserved section tops out at 1.62, the residual 0.05 wants an explanation, and a few hundred metres of eroded overburden is the standard candidate. The next lesson turns the forward version of that statement into the reported number; the sensitivity lesson calibrates the inverse reading, how much missing section per unit of excess Ro.
 
 The license has conditions. The excess must exceed measurement scatter, the preserved-section model must be trusted, and other suspects, transient heat events and hotter paleo-heat-flow, produce the same symptom, which is why real studies use multiple maturity indicators and multiple horizons. What the fixture isolates is the mechanism: erosion leaves no thermal trace and a permanent kinetic one.
 

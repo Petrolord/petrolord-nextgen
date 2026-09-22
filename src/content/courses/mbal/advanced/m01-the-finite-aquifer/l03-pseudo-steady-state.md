@@ -22,25 +22,25 @@ The intercept $\ln r_{eD} - 0.75$ is the same group that sits in the denominator
 
 The panel makes this concrete. The tile marked **ln(reD) - 0.75** reads 0.859437912 at $r_{eD}$ 5, which to the precision the tile shows is the number the Professional lesson used to build $J$, 0.859437912434100. Step the selector down to $r_{eD}$ 2 and it reads $-0.0568528194$. A negative resistance is not physical, and it is the clearest possible signal that the pseudo steady state form has been pushed outside the geometry it was derived for. The values at 3, 10 and 20 are 0.348612289, 1.55258509 and 2.24573227.
 
-## Worked example: obtaining the capstone value
+## Worked example: the asymptote against the exact value
 
-The Expert capstone asks for the bounded circle dimensionless pressure at $t_D$ 100 and $r_{eD}$ 5. Build the asymptote first, by hand, because it is the check on everything else.
+The Expert capstone asks for the bounded circle dimensionless pressure at $t_D$ 100 and $r_{eD}$ 5. Work the method here at $t_D$ 100 and $r_{eD}$ 3, and run the capstone's own case on the panel. Build the asymptote first, by hand, because it is the check on everything else.
 
-The slope term is $2 \times 100 / (25 - 1) = 200/24 = 8.33333333333333$. The intercept term is $\ln 5 - 0.75 = 1.60943791243410 - 0.75 = 0.859437912434100$. Adding them gives
+The slope term is $2 \times 100 / (9 - 1) = 200/8 = 25$. The intercept term is $\ln 3 - 0.75 = 1.0986122886681098 - 0.75 = 0.3486122886681098$. Adding them gives
 
-$$p_{D,\text{pss}}(100, 5) = 9.19277124576743$$
+$$p_{D,\text{pss}}(100, 3) = 25.34861228866811$$
 
-The engine's Stehfest inversion of the bounded circle Laplace form returns 9.30886079703705, which is the capstone value. The two differ by 0.116089551269612 in dimensionless pressure, which is 1.26283520133346 percent.
+The engine's Stehfest inversion of the bounded circle Laplace form returns 25.577955313403997. The two differ by 0.2293430247358863 in dimensionless pressure, which is 0.8966433083714876 percent.
 
-Now be precise about the sense in which the one converges on the other, because it is easy to state this loosely. Track the difference as time runs on at $r_{eD}$ 5: it is 0.115787685376095 at $t_D$ 10, 0.115586657343752 at $t_D$ 25, 0.116227589373564 at $t_D$ 50, 0.116089551269612 at $t_D$ 100, 0.116096560849726 at $t_D$ 200 and 0.116160994910047 at $t_D$ 1000. The absolute gap does not close at all. It sits at about 0.1161 and stays there. What closes is the relative gap, from 6.84012595710185 percent at $t_D$ 10 to 3.92781659498677 percent at $t_D$ 25, 1.26283520133346 percent at $t_D$ 100 and 0.137970271308638 percent at $t_D$ 1000, and it closes only because the quantity itself is growing linearly while the offset stays put.
+Now be precise about the sense in which the one converges on the other, because it is easy to state this loosely. Track the difference as time runs on at $r_{eD}$ 3: it is 0.22646341905930223 at $t_D$ 10, 0.2293258731955854 at $t_D$ 25, 0.2293308650557897 at $t_D$ 50, 0.2293430247358863 at $t_D$ 100, 0.22936713451390034 at $t_D$ 200 and 0.22955957989321973 at $t_D$ 1000. The absolute gap does not close at all. It sits at about 0.229 and stays there. What closes is the relative gap, from 7.3644827179447425 percent at $t_D$ 10 to 3.3586401598720776 percent at $t_D$ 25, 0.8966433083714876 percent at $t_D$ 100 and 0.09161196212000193 percent at $t_D$ 1000, and it closes only because the quantity itself is growing linearly while the offset stays put.
 
-So the exact solution runs parallel to the asymptote, displaced upward by a constant. The displacement is a property of the approximation rather than a leftover transient: the $\ln r_{eD} - 0.75$ form drops terms that shrink as the aquifer grows relative to the reservoir. Measured deep inside pseudo steady state, that constant offset is 0.372488978901778 at $r_{eD}$ 2, 0.229353650056950 at $r_{eD}$ 3, 0.116112803804420 at $r_{eD}$ 5, 0.0417324084764346 at $r_{eD}$ 10 and 0.0138127208957854 at $r_{eD}$ 20. Small aquifers are where the shorthand costs you most, which is unfortunate, because small aquifers are where you needed the finite solution in the first place.
+So the exact solution runs parallel to the asymptote, displaced upward by a constant. The displacement is a property of the approximation rather than a leftover transient: the $\ln r_{eD} - 0.75$ form drops terms that shrink as the aquifer grows relative to the reservoir. Measured deep inside pseudo steady state, that constant offset is 0.372488978901778 at $r_{eD}$ 2, 0.229353650056950 at $r_{eD}$ 3, 0.0417324084764346 at $r_{eD}$ 10 and 0.0138127208957854 at $r_{eD}$ 20, and it falls monotonically with $r_{eD}$ in between. Small aquifers are where the shorthand costs you most, which is unfortunate, because small aquifers are where you needed the finite solution in the first place.
 
 ## At the panel
 
 {{panel:mb-pd-explorer}}
 
-At $r_{eD}$ 5 the yellow dashed asymptote is below the orange bounded curve on the right hand side of the plot, and the two run parallel. Read the pair of tiles **pD finite at tD 100** and **PSS asymptote at tD 100**, which are shown to nine figures: 9.30886080 and 9.19277125, the full values being 9.30886079703705 and 9.19277124576743.
+Set the selector to $r_{eD}$ 3: the yellow dashed asymptote is below the orange bounded curve on the right hand side of the plot, and the two run parallel. Read the pair of tiles **pD finite at tD 100** and **PSS asymptote at tD 100**, which are shown to nine figures: 25.5779553 and 25.3486123. At $r_{eD}$ 5, the capstone's case, the same two tiles give you its value and its check.
 
 Now set the selector to $r_{eD}$ 20 and read the same two tiles again: 2.74197107 and 2.74698541. The order has reversed, and the dashed line now sits above the curve at the right hand edge of the plot. Nothing is broken. The onset of pseudo steady state moves out in time as $r_{eD}^2$, so at $r_{eD}$ 20 the aquifer has not finished its transient by $t_D$ 100 and the asymptote is describing a regime the aquifer has not entered yet. An asymptote is a statement about late time, and late is measured relative to the size of the thing.
 
@@ -48,4 +48,4 @@ Now set the selector to $r_{eD}$ 20 and read the same two tiles again: 2.7419710
 
 Set the panel to $r_{eD}$ 10 and record the two late time tiles, 3.61406650 for the bounded solution and 3.57278711 for the asymptote. Then work three things out on paper.
 
-First, rebuild the asymptote yourself from $2 t_D / (r_{eD}^2 - 1) + \ln r_{eD} - 0.75$ at $t_D$ 100 and $r_{eD}$ 10, and confirm you land on the tile. Second, compute the absolute and relative gaps between the two tiles and compare them with the corresponding gaps at $r_{eD}$ 5, which are 0.116089551269612 and 1.26283520133346 percent. Say which of the two aquifers is better served by the shorthand and why. Third, write down the depletion slope $2/(r_{eD}^2 - 1)$ for $r_{eD}$ 5 and for $r_{eD}$ 10, and use them to state, in one sentence, how much extra dimensionless time the larger aquifer buys you before its dimensionless pressure reaches the value the smaller one reaches at $t_D$ 100.
+First, rebuild the asymptote yourself from $2 t_D / (r_{eD}^2 - 1) + \ln r_{eD} - 0.75$ at $t_D$ 100 and $r_{eD}$ 10, and confirm you land on the tile. Second, compute the absolute and relative gaps between the two tiles and compare them with the corresponding gaps at $r_{eD}$ 3, which are 0.2293430247358863 and 0.8966433083714876 percent. Say which of the two aquifers is better served by the shorthand and why. Third, write down the depletion slope $2/(r_{eD}^2 - 1)$ for $r_{eD}$ 3 and for $r_{eD}$ 10, and use them to state, in one sentence, how much extra dimensionless time the larger aquifer buys you before its dimensionless pressure reaches the value the smaller one reaches at $t_D$ 100.

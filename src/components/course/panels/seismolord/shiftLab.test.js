@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import {
-  computeSynthetic, computeIntermediate, PLANTED_LAG_MS, DT_MS, NS,
+  computeSynthetic, computeIntermediate, WITHHELD_LAG_MS, DT_MS, NS,
 } from '@/lib/seismolordTeaching';
 import { suggestBulkShift } from '@petrolord/engines/engines/seismolord/synthetics.js';
 
@@ -9,7 +9,7 @@ const I = computeIntermediate();
 
 function scan() {
   const s25 = computeSynthetic(25);
-  const lagSamples = PLANTED_LAG_MS / DT_MS;
+  const lagSamples = WITHHELD_LAG_MS / DT_MS;
   const seis = new Float32Array(NS).fill(NaN);
   for (let i = 0; i < NS - lagSamples; i++) seis[i + lagSamples] = s25.syn.synthetic[i];
   return suggestBulkShift(s25.syn.synthetic, seis, DT_MS, 40);
@@ -30,8 +30,8 @@ describe('seismolord professional: bulk shift and tuning', () => {
 
   it('recovers the planted lag exactly, because the scan is an autocorrelation', () => {
     const s = scan();
-    expect(PLANTED_LAG_MS / DT_MS).toBe(4);
-    expect(s.lagMs).toBe(PLANTED_LAG_MS);
+    expect(WITHHELD_LAG_MS / DT_MS).toBe(4);
+    expect(s.lagMs).toBe(WITHHELD_LAG_MS);
     // Exactly 1: the observed trace IS this synthetic shifted, so a real
     // tie can never reproduce this number.
     expect(s.corr).toBeCloseTo(1, 12);
@@ -44,7 +44,7 @@ describe('seismolord professional: bulk shift and tuning', () => {
     expect(s.series[s.series.length - 1].lagMs).toBe(40);
     const at = (ms) => s.series.find((e) => e.lagMs === ms).corr;
     for (const d of [2, 4, 6, 8]) {
-      expect(at(PLANTED_LAG_MS - d)).toBeCloseTo(at(PLANTED_LAG_MS + d), 12);
+      expect(at(WITHHELD_LAG_MS - d)).toBeCloseTo(at(WITHHELD_LAG_MS + d), 12);
     }
     expect(at(6)).toBeCloseTo(0.972386, 5);
     expect(at(0)).toBeCloseTo(0.621742, 5);

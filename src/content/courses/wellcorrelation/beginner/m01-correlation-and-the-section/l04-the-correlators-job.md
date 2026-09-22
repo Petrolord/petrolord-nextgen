@@ -24,7 +24,7 @@ What the structural view hides is thickness. A sand whose thickness varies by 11
 
 ## How the section looks once a surface is pinned flat
 
-Flattening is the answer to what the structural view hides. You choose one surface, declare a datum depth, and shift each well vertically by exactly the amount needed to put that surface on the datum. The Associate capstone flattens on TOP_SAND at a 1500 m datum, which is a deliberate choice: it puts the top of the reservoir on a horizontal line so that everything about the reservoir below it can be compared well to well.
+Flattening is the answer to what the structural view hides. You choose one surface, declare a datum depth, and shift each well vertically by exactly the amount needed to put that surface on the datum. The Ekene worked view flattens on TOP_SAND at a 1500 m datum, which is a deliberate choice: it puts the top of the reservoir on a horizontal line so that everything about the reservoir below it can be compared well to well.
 
 The arithmetic is simple, one additive shift per well. A well whose TOP_SAND is deeper than the datum moves up the display; a well whose TOP_SAND is shallower moves down. A well that lacks the datum surface cannot be shifted at all, and the correct behaviour is to draw it unflattened and flag it rather than to guess a shift.
 

@@ -6,8 +6,9 @@ import {
 import {
   PUBLISHED_DESIGN_IDS, CATALOGUE_PORTS_IN, GAS_LIFT_THRESHOLDS,
   SPACING_MAX_ITERATES, TC_K,
-  valveExplorer, designInputs,
+  valveExplorer, designInputs, typedGasLiftDesign, TYPED_DESIGN_DEFAULT,
 } from './gasLiftLab';
+import { plain, typedState, TypedDesignFields, Refusal } from './TypedDesignFields';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Valve explorer, the Professional tier. Where the mandrels go and what the
@@ -43,6 +44,7 @@ const MODES = [
   ['valve', 'Dome, bellows and port, read at two temperatures'],
   ['spread', 'Spread across the string, and the case where it comes out negative'],
   ['throughput', 'What a port passes, and why the design rate moves in steps'],
+  ['typed', 'Your installation, typed'],
 ];
 
 const AXIS = { fill: '#94a3b8', fontSize: 11 };
@@ -682,8 +684,86 @@ const Throughput = () => {
   );
 };
 
-const ValveExplorer = () => {
-  const [mode, setMode] = useState('spacing');
+const Typed = () => {
+  const [values, setValues] = useState(() => typedState(TYPED_DESIGN_DEFAULT));
+  const set = (k, v) => setValues((o) => ({ ...o, [k]: v }));
+  const r = useMemo(() => {
+    try { return typedGasLiftDesign(values); } catch { return null; }
+  }, [values]);
+  return (
+    <>
+      <div className="text-xs text-slate-300">
+        Type an installation and run the whole design on it: spacing, dome charges, ports and the
+        unloading walk. The view opens on the AKASO-3 teaching installation, and every input can be
+        retyped. The spacing, valve and closing routines march the gas column on the engine&apos;s own
+        fixed step count, which no input here changes.
+      </div>
+      <div className="mt-3">
+        <TypedDesignFields values={values} set={set} withTarget />
+      </div>
+      {(!r || !r.ok) ? <Refusal result={r} /> : (
+        <>
+          <div className="mt-3">
+            <TileGrid>
+              <Tile label="Valves set" value={String(r.valves.length)} />
+              <Tile label="Why the spacing stopped" value={r.stopReason} />
+              <Tile label="Target depth handed to the spacing" value={plain(r.targetDepthFt, 6)} unit="ft TVD" />
+              <Tile label="Stages that multipoint" value={r.multipointingStages.length ? r.multipointingStages.join(', ') : 'none'} />
+            </TileGrid>
+          </div>
+          <div className="mt-3 overflow-x-auto">
+            <table className="text-xs text-slate-300 w-full">
+              <thead className="text-slate-500">
+                <tr>
+                  <th className="text-left pr-3">valve</th>
+                  <th className="text-left pr-3">type</th>
+                  <th className="text-left pr-3">depth, ft TVD</th>
+                  <th className="text-left pr-3">opens at surface, psia</th>
+                  <th className="text-left pr-3">temperature, degF</th>
+                  <th className="text-left pr-3">dome at valve temperature, psia</th>
+                  <th className="text-left pr-3">dome at 60 degF, psia</th>
+                  <th className="text-left pr-3">test rack opening, psia</th>
+                  <th className="text-left pr-3">spread, psi</th>
+                  <th className="text-left pr-3">port, in</th>
+                  <th className="text-left pr-3">throughput, Mscf/d</th>
+                  <th className="text-left">regime</th>
+                </tr>
+              </thead>
+              <tbody>
+                {r.valves.map((v) => (
+                  <tr key={v.valve}>
+                    <td className="pr-3">{v.valve}</td>
+                    <td className="pr-3">{v.valveType}</td>
+                    <td className="pr-3 text-[#BFFF00]">{plain(v.depthFt, 6)}</td>
+                    <td className="pr-3">{plain(v.surfaceOpenPsia, 6)}</td>
+                    <td className="pr-3">{plain(v.tempF, 4)}</td>
+                    <td className="pr-3">{plain(v.domeAtTempPsia, 6)}</td>
+                    <td className="pr-3">{plain(v.dome60Psia, 6)}</td>
+                    <td className="pr-3">{plain(v.testRackOpeningPsia, 6)}</td>
+                    <td className="pr-3">{plain(v.spreadPsi, 6)}</td>
+                    <td className="pr-3">{plain(v.portIdIn, 5)}</td>
+                    <td className="pr-3">{plain(v.throughputMscfd, 6)}</td>
+                    <td>{v.throughputRegime || '-'}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+          {r.warnings.length > 0 && <Note>Engine warning: {r.warnings.join(' ')}</Note>}
+          <Note>
+            The dome is charged cold at 60 degF and read hot at the valve, and the test rack opening
+            divides the cold dome by one minus the port to bellows ratio. The port is the one
+            selectPort picked for each valve, and the throughput is read on that port. An orifice at
+            the bottom carries no dome, so its dome and spread print as a dash.
+          </Note>
+        </>
+      )}
+    </>
+  );
+};
+
+const ValveExplorer = ({ initialMode = 'spacing' }) => {
+  const [mode, setMode] = useState(initialMode);
   return (
     <PanelShell
       title="Valve explorer"
@@ -697,6 +777,7 @@ const ValveExplorer = () => {
         {mode === 'valve' && <Valve />}
         {mode === 'spread' && <Spread />}
         {mode === 'throughput' && <Throughput />}
+        {mode === 'typed' && <Typed />}
       </div>
     </PanelShell>
   );

@@ -40,7 +40,7 @@ On this well: first sample more than 0.05 MPa over hydrostatic, on the 10 m grid
 
 Inputs: the prognosis, the overburden, and $K$ with its provenance. Output: the green curve.
 
-On this well: $K = \nu/(1-\nu)$ at $\nu = 0.4$, exactly two thirds, by capstone specification; on a real well, back-calculated from leak-off tests with its depth trend. TD value 76.55157117548856 MPa, and the mixture check, two thirds of 91.123 plus one third of 47.409, audits it in one line.
+On this well: $K = \nu/(1-\nu)$ at $\nu = 0.4$, exactly two thirds, by the teaching specification; on a real well, back-calculated from leak-off tests with its depth trend. TD value 76.55157117548856 MPa, and the mixture check, two thirds of 91.123 plus one third of 47.409, audits it in one line.
 
 ## Step 7: close whatever loop the well affords
 

@@ -12,7 +12,7 @@ So the forward run is a test with a known answer. If the pipeline is implemented
 
 ## The receipt
 
-It does. The worst disagreement across all 401 samples, on capstone settings, is 2.2351741790771484 times $10^{-8}$ pascals. Two hundredths of a millionth of a millipascal-scale error on pressures of tens of megapascals: fifteen significant figures of agreement, which is double precision saying exactly.
+It does. The worst disagreement across all 401 samples, on teaching settings, is 2.2351741790771484 times $10^{-8}$ pascals. Two hundredths of a millionth of a millipascal-scale error on pressures of tens of megapascals: fifteen significant figures of agreement, which is double precision saying exactly.
 
 Above the ramp top the recovered overpressure is similarly zero to within $10^{-8}$ Pa. The loop tile on the panel reports this number live, and it is worth looking at once with the settings correct just to see what a truly closed loop reads like.
 

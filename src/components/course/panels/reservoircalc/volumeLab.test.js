@@ -1,15 +1,16 @@
 import { describe, it, expect } from 'vitest';
 import {
-  TEACHING_WELLS, CAPSTONE_OWC_M, PROPS, M3_TO_STB, computeVolumes,
+  TEACHING_WELLS, TEACHING_OWC_M, PROPS, M3_TO_STB, computeVolumes,
 } from '@/lib/reservoircalcTeaching';
 
-// Pins the volume-explorer panel math to the live NG5 capstone oracle.
+// Pins the volume-explorer panel math to the Ekene teaching case (the NG5
+// capstone key until W5b moved the capstone to a case of its own).
 
 describe('reservoircalc volume explorer: engine math', () => {
-  const v = computeVolumes(CAPSTONE_OWC_M);
+  const v = computeVolumes(TEACHING_OWC_M);
   const s = v.summary;
 
-  it('reproduces the NG5 capstone answer key at a 1560 m contact', () => {
+  it('reproduces the teaching case (the pre-W5b NG5 key) at a 1560 m contact', () => {
     expect(s.oilCells).toBe(169);
     expect(s.maxOilColumn).toBeCloseTo(20.2818603515625, 6);
     expect(s.grvMm3).toBeCloseTo(22.26903564453125, 6);
@@ -32,26 +33,26 @@ describe('reservoircalc volume explorer: engine math', () => {
       ...TEACHING_WELLS.map((w) => w.tops.find((t) => t.name === 'TOP_SAND').md_m),
     );
     expect(shallowestPick).toBe(1541);
-    expect(s.maxOilColumn).toBeCloseTo(CAPSTONE_OWC_M - crest, 9);
+    expect(s.maxOilColumn).toBeCloseTo(TEACHING_OWC_M - crest, 9);
     // Booking from the shallowest PICK instead would lose 1.2819 m of column.
-    expect(s.maxOilColumn - (CAPSTONE_OWC_M - shallowestPick)).toBeCloseTo(1.2819, 4);
+    expect(s.maxOilColumn - (TEACHING_OWC_M - shallowestPick)).toBeCloseTo(1.2819, 4);
   });
 
-  it('is contact-limited everywhere at the capstone contact', () => {
+  it('is contact-limited everywhere at the teaching contact', () => {
     // Every oil cell is clipped by the contact, so the column is owc - top
     // and the base surface contributes nothing to this booking.
     const maxThickness = Math.max(...v.oilNodes.map((n) => n.t));
     expect(v.oilNodes).toHaveLength(169);
     expect(maxThickness).toBeCloseTo(s.maxOilColumn, 9);
     // The base crest is deeper than the contact, which is why.
-    expect(CAPSTONE_OWC_M).toBeLessThan(1570);
+    expect(TEACHING_OWC_M).toBeLessThan(1570);
   });
 
   it('books only part of the mapped area, and leaves two wells dry', () => {
     expect(s.oilCells).toBe(169);
     expect(s.oilCells).toBeLessThan(201); // 201 mapped nodes from the Mapping course
     const dry = TEACHING_WELLS.filter(
-      (w) => w.tops.find((t) => t.name === 'TOP_SAND').md_m >= CAPSTONE_OWC_M,
+      (w) => w.tops.find((t) => t.name === 'TOP_SAND').md_m >= TEACHING_OWC_M,
     ).map((w) => w.name);
     expect(dry).toEqual(['Ekene-2', 'Ekene-4']);
   });

@@ -1,0 +1,172 @@
+{
+ "course": "uncertainty",
+ "suite": "Suite PR #560 (NPV Scenario Builder and Probabilistic Breakeven Analyzer Full precision switch, Monte Carlo settings and sorted sample export, stacked on #554)",
+ "tiers": {
+  "beginner": {
+   "append": "Read the figures in the NPV Scenario Builder with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+   "why": "The cards and cashflow print compact money (\"$45M\") that cannot carry a 0.001 $MM tolerance; the tornado prints 1 decimal.",
+   "keys": [
+    "um_y5_royalty_musd",
+    "um_y4_tax_musd",
+    "um_y11_ncf_musd",
+    "um_payback_year_cum_ncf_musd",
+    "um_npv_musd",
+    "um_npv_price_up_30_musd"
+   ],
+   "annot_updates": {
+    "um_y5_royalty_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/npv/ResultsPanel.jsx Cashflow tab, royalty column in $MM",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
+     "display_scale": 1
+    },
+    "um_y4_tax_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/npv/ResultsPanel.jsx Cashflow tab, tax column in $MM",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
+     "display_scale": 1
+    },
+    "um_y11_ncf_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/npv/ResultsPanel.jsx Cashflow tab, net cash flow column in $MM",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
+     "display_scale": 1
+    },
+    "um_payback_year_cum_ncf_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/npv/ResultsPanel.jsx Cashflow tab, cumulative column in $MM",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
+     "display_scale": 1
+    },
+    "um_npv_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/npv/ResultsPanel.jsx Dashboard, Net Present Value card",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
+     "display_scale": 1
+    },
+    "um_npv_price_up_30_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/npv/ResultsPanel.jsx Sensitivity tab, Sensitivity sweep table (shown only with Full precision on), Oil Price, At 30 percent higher",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
+     "display_scale": 1
+    }
+   }
+  },
+  "intermediate": {
+   "append": "Read the figures in the Probabilistic Breakeven Analyzer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+   "why": "The summary cards print 2 decimals and the tornado tooltip 2; the prompt asks 4.",
+   "keys": [
+    "um_breakeven_10th_percentile_usd_bbl",
+    "um_breakeven_90th_percentile_usd_bbl",
+    "um_tornado_capex_high_side_usd_bbl"
+   ],
+   "annot_updates": {
+    "um_breakeven_10th_percentile_usd_bbl": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/breakevenanalyzer/ResultsPanel.jsx Breakeven Summary card",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
+     "display_scale": 1
+    },
+    "um_breakeven_90th_percentile_usd_bbl": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/breakevenanalyzer/ResultsPanel.jsx Breakeven Summary card",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
+     "display_scale": 1
+    },
+    "um_tornado_capex_high_side_usd_bbl": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/breakevenanalyzer tornado table (shown only with Full precision on), Total CAPEX, Adverse end",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
+     "display_scale": 1
+    }
+   }
+  },
+  "advanced": {
+   "append": "Read the figures in the NPV Scenario Builder and the Probabilistic Breakeven Analyzer with their Full precision switch on (at the top of each page): they print them to the precision this capstone grades, with no digit grouping. With it on, the Builder's Risk tab shows the Monte Carlo settings (iterations, the three ranges and the seed) and an Export sorted sample button, a CSV of every NPV in rank order.",
+   "why": "The Builder hard-coded 1000 iterations, 20 percent ranges and its default seed, so the stated Monte Carlo could not be run, and the sample was never shown or exported; the cards print compact money.",
+   "keys": [
+    "um_mc_low_case_p90_npv_musd",
+    "um_mc_high_case_p10_npv_musd",
+    "um_mc_emv_musd",
+    "um_mc_10th_percentile_floor_rule_musd",
+    "um_breakeven_median_next_seed_usd_bbl"
+   ],
+   "annot_updates": {
+    "um_mc_low_case_p90_npv_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/npv/ResultsPanel.jsx Risk tab, Low case P90 card, after the Monte Carlo settings (shown only with Full precision on)",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
+     "display_scale": 1
+    },
+    "um_mc_high_case_p10_npv_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/npv/ResultsPanel.jsx Risk tab, High case P10 card",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
+     "display_scale": 1
+    },
+    "um_mc_emv_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/npv/ResultsPanel.jsx Risk tab, EMV card",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
+     "display_scale": 1
+    },
+    "um_mc_10th_percentile_floor_rule_musd": {
+     "printed": {
+      "decimals": 10
+     },
+     "display_ref": "src/components/npv/ResultsPanel.jsx Risk tab, Export sorted sample CSV (npv-monte-carlo-sorted-sample-seed-9031.csv), ranked rows at 10 decimals",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 10 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the seeded Monte Carlo sample through formatFull).",
+     "display_scale": 1,
+     "source": "suite-app",
+     "source_ref": "src/components/npv/ResultsPanel.jsx Risk tab, Export sorted sample CSV (npv-monte-carlo-sorted-sample-seed-9031.csv), ranked rows at 10 decimals"
+    },
+    "um_breakeven_median_next_seed_usd_bbl": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/breakevenanalyzer/ResultsPanel.jsx Breakeven Summary card, 50th percentile at seed 9032",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: npv and breakevenanalyzer Full precision tests (Suite PR #560), the engine result through formatFull).",
+     "display_scale": 1
+    }
+   }
+  }
+ }
+}

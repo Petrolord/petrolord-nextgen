@@ -38,7 +38,7 @@ Converting to megapascals by dividing by one million,
 
 $$41408579.625 \text{ Pa} = 41.408579625 \text{ MPa}$$
 
-That is the hydrostatic pressure at 4000 m below mudline in this well, and it is one of the six numbers the capstone grades, to a tolerance of 0.01 MPa.
+That is the hydrostatic pressure at 4000 m below mudline in this well, and hydrostatic at TD is one of the six quantities the capstone asks for, on a setting of its own, to a tolerance of 0.01 MPa.
 
 Stop and do it yourself now, on paper or on a calculator, before reading on. Multiply the two products, add them, divide by a million. If you get 41.408579625 MPa you have the structure right. If you do not, the fault is almost certainly one of the three things below.
 

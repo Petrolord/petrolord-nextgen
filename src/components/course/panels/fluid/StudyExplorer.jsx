@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import {
   goodOilMeasured, goodOilComposition, goodOilCharacterization,
-  goodOilUntuned, goodOilStagesF, TIER,
+  goodOilUntuned, goodOilStagesF, TIER, GOOD_OIL, GOOD_OIL_TESTS, TEACHING_TEST,
 } from './fluidLab';
-import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, Tile, TileGrid, Note, NumField } from '@/components/course/panels/petrophysics/panelKit';
 
 // Study explorer: Good Oil Co. Well No. 4 as a laboratory report, and what an
 // untuned equation of state makes of it. The point is the gap between the two
@@ -11,29 +11,64 @@ import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/pet
 
 const VIEWS = ['Composition', 'What the lab measured', 'What the model says'];
 
+
+const TEST_OPTIONS = GOOD_OIL_TESTS.map((t, i) => [String(i), `${Math.round(t.stagesF[0][1] - 14.65)} psig separator`]);
+
+const Select = ({ label, value, onChange, options }) => (
+  <div>
+    <p className="text-gray-400 text-xs mb-1">{label}</p>
+    <select value={value} onChange={(e) => onChange(e.target.value)}
+      className="w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5">
+      {options.map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+    </select>
+  </div>
+);
+
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d })
   : '-');
 
 const StudyExplorer = () => {
   const [view, setView] = useState(VIEWS[1]);
+  // The study opens on the teaching read: the 100 psig optimum separator test,
+  // saturation at the 220 F reservoir temperature, the reported C7+. A capstone
+  // brief states its own test, temperature and plus fraction; set them here.
+  const [test, setTest] = useState(String(TEACHING_TEST));
+  const [satT, setSatT] = useState(String(GOOD_OIL.resTP[0]));
+  const [plusMw, setPlusMw] = useState(String(GOOD_OIL.plus.mw));
+  const [plusSg, setPlusSg] = useState(String(GOOD_OIL.plus.sg));
 
   const out = useMemo(() => {
     try {
+      const k = Number(test);
+      const t = Number(satT);
+      const plus = { mw: Number(plusMw), sg: Number(plusSg) };
+      if (!(t > 0 && t < 500)) throw new Error('Type a saturation temperature in degrees F.');
+      if (!(plus.mw > 100 && plus.sg > 0.6 && plus.sg < 1.2)) throw new Error('Type a plus-fraction molecular weight above 100 and a specific gravity between 0.6 and 1.2.');
       return {
-        lab: goodOilMeasured(),
+        lab: goodOilMeasured(k),
         comp: goodOilComposition(),
-        chr: goodOilCharacterization(),
-        model: goodOilUntuned(),
-        stages: goodOilStagesF(),
+        chr: goodOilCharacterization(plus),
+        model: goodOilUntuned({ test: k, satTempF: t }),
+        stages: goodOilStagesF(k),
+        satT: t,
       };
     } catch (e) {
       return { error: e.message };
     }
-  }, []);
+  }, [test, satT, plusMw, plusSg]);
+
+  const inputs = (
+    <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end mt-3">
+      <Select label="Separator test" value={test} onChange={setTest} options={TEST_OPTIONS} />
+      <NumField label="Saturation temperature (F)" value={satT} onChange={setSatT} />
+      <NumField label="Plus-fraction MW (characterization)" value={plusMw} onChange={setPlusMw} />
+      <NumField label="Plus-fraction SG (characterization)" value={plusSg} onChange={setPlusSg} />
+    </div>
+  );
 
   if (out.error) {
-    return <PanelShell title="Study explorer"><Note>{out.error}</Note></PanelShell>;
+    return <PanelShell title="Study explorer">{inputs}<Note>{out.error}</Note></PanelShell>;
   }
 
   const {
@@ -46,6 +81,11 @@ const StudyExplorer = () => {
       title="Study explorer"
       subtitle="Good Oil Co. Well No. 4, Core Laboratories RFL 88001, against an untuned equation of state"
     >
+      {inputs}
+      <p className="text-xs text-gray-500 mt-1">
+        The panel opens on the teaching read: the 100 psig optimum test, saturation at 220 F and the reported
+        C7+ (MW {GOOD_OIL.plus.mw}, SG {GOOD_OIL.plus.sg}). A capstone brief states its own; set it here.
+      </p>
       <div className="flex flex-wrap gap-1">
         {VIEWS.map((v) => (
           <button
@@ -140,7 +180,7 @@ const StudyExplorer = () => {
               </thead>
               <tbody>
                 <tr className="border-t border-gray-800">
-                  <td className="p-2 text-white">Saturation pressure (psia)</td>
+                  <td className="p-2 text-white">Saturation pressure at {fmt(out.satT, 1)} F (psia)</td>
                   <td className="p-2 text-right text-gray-200">{fmt(lab.bubblePointPsia, 2)}</td>
                   <td className="p-2 text-right text-gray-200">{fmt(model.saturationPressurePsia, 2)}</td>
                   <td className="p-2 text-right text-amber-400">

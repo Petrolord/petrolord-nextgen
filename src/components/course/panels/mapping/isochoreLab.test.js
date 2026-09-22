@@ -1,17 +1,17 @@
 import { describe, it, expect } from 'vitest';
 import {
-  computeIntermediate, computeIsochoreMap, CAPSTONE_CELL_M, TARGET,
+  computeIntermediate, computeIsochoreMap, TEACHING_CELL_M, TARGET,
 } from '@/lib/mappingTeaching';
 
 // Pins the isochore-explorer panel math to the live NG6 Professional
-// capstone oracle, and to the readings the lessons quote.
+// capstone oracle until W5a (now the Ekene teaching case), and to the readings the lessons quote.
 const I = computeIntermediate();
-const iso = computeIsochoreMap(CAPSTONE_CELL_M, 'ISOCHORE');
-const top = computeIsochoreMap(CAPSTONE_CELL_M, 'TOP_SAND');
-const base = computeIsochoreMap(CAPSTONE_CELL_M, 'BASE_SAND');
+const iso = computeIsochoreMap(TEACHING_CELL_M, 'ISOCHORE');
+const top = computeIsochoreMap(TEACHING_CELL_M, 'TOP_SAND');
+const base = computeIsochoreMap(TEACHING_CELL_M, 'BASE_SAND');
 
 describe('mapping professional: the isochore', () => {
-  it('reproduces the NG6 professional capstone answer key', () => {
+  it('reproduces the Ekene teaching case (the pre-W5 capstone key)', () => {
     expect(I.isoMin).toBeCloseTo(25, 12);
     expect(I.isoMax).toBeCloseTo(35.897705078125, 12);
     expect(I.isoMean).toBeCloseTo(32.25429068038713, 12);
@@ -30,7 +30,7 @@ describe('mapping professional: the isochore', () => {
     expect(s.wellMean).toBeCloseTo(I.meanWellThickness, 12);
   });
 
-  it('reproduces the W1 re-key: live isochore nodes above the well mean at the capstone cell', () => {
+  it('reproduces the W1 key on the Ekene teaching case: live isochore nodes above the well mean at 100 m', () => {
     // iso_live (201) re-graded the Associate live count; its replacement is a
     // count only the isochore produces, read from the same panel state
     expect(iso.summary.nodesAboveWellMean).toBe(146);

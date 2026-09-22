@@ -135,6 +135,45 @@ export const pressureSplit = (id = 'slant_kcl_polymer', flowRateM3s = 0.025, ove
   };
 };
 
+// ---------------------------------------------------------------------------
+// Your mud: the boxes every hydraulics explorer carries.
+// ---------------------------------------------------------------------------
+
+// The four dial readings and the density a learner can type. Every box opens
+// blank, which means the selected case's own mud. The four readings go
+// together (all typed or all blank); the density can be typed on its own.
+export const MUD_FIELDS = [
+  { key: 'theta600', label: '600 rpm reading' },
+  { key: 'theta300', label: '300 rpm reading' },
+  { key: 'theta6', label: '6 rpm reading' },
+  { key: 'theta3', label: '3 rpm reading' },
+  { key: 'densityKgM3', label: 'Density (kg/m3)' },
+];
+export const BLANK_MUD = Object.freeze(Object.fromEntries(MUD_FIELDS.map((f) => [f.key, ''])));
+
+/** Typed boxes to an `over` object ({} when all are blank), or null when the
+ *  boxes do not describe a mud (some readings typed and some not, a number
+ *  that is not one, 600 not above 300, or a density outside 0 to 7850). */
+export const mudOver = (typed) => {
+  const dials = ['theta600', 'theta300', 'theta6', 'theta3'];
+  const filled = dials.filter((k) => typed[k] !== '' && typed[k] != null);
+  const over = {};
+  if (filled.length === dials.length) {
+    const fann = Object.fromEntries(dials.map((k) => [k, Number(typed[k])]));
+    if (!Object.values(fann).every((v) => Number.isFinite(v) && v >= 0)) return null;
+    if (!(fann.theta600 > fann.theta300 && fann.theta300 > 0)) return null;
+    over.fann = fann;
+  } else if (filled.length > 0) {
+    return null;
+  }
+  if (typed.densityKgM3 !== '' && typed.densityKgM3 != null) {
+    const rho = Number(typed.densityKgM3);
+    if (!(rho > 0 && rho < 7850)) return null;
+    over.densityKgM3 = rho;
+  }
+  return over;
+};
+
 export const flowSweep = (id = 'slant_kcl_polymer',
   rates = [0.010, 0.015, 0.020, 0.025, 0.035, 0.040, 0.050], over = {}) =>
   rates.map((q) => pressureSplit(id, q, over));

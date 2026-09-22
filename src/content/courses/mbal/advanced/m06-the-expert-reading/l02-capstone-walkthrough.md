@@ -1,7 +1,5 @@
 # The capstone walkthrough
 
-> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update takes them out of the lessons and panels.
-
 The Expert capstone is called "The finite aquifer and the published benchmark". It runs on two datasets. First you take Dake Exercise 9.2 through Carter-Tracy with a finite aquifer and report what the engine recovers, together with the dimensionless pressure drop that made the finite treatment necessary. Then you work the combination drive terms of Ahmed Example 11-1 and apportion the drive correctly, which means apportioning it in a convention you have stated.
 
 Six fields, graded server side.
@@ -15,29 +13,29 @@ Six fields, graded server side.
 | Ahmed 11-1 water drive index, net convention | none | 0.002 | module 3 lesson 4, and below |
 | Ahmed 11-1 depletion drive index, net convention | none | 0.002 | module 3 lesson 4, and below |
 
-This lesson does not hand you six answers. It takes two of them all the way through, by panel and by hand, and points at the lesson that owns each of the rest.
+This lesson does not hand you six answers. It takes two of them all the way through on worked examples beside the graded cases, by panel and by hand, and points at the lesson that owns each of the rest. The six values are yours to produce.
 
-## Walkthrough one: the dimensionless pressure drop, by tile and by formula
+## Worked example one: the dimensionless pressure drop, by tile and by formula
 
 {{panel:mb-pd-explorer}}
 
-The panel has exactly one control, a selector labelled **Aquifer radius ratio reD**, offering reD 2, 3, 5, 10 and 20. Only one of them is the graded case. The Dake aquifer has an outer radius five times the reservoir radius, so the selector must read `reD = 5 (Dake 9.2)`, which is where it loads.
+The panel has exactly one control, a selector labelled **Aquifer radius ratio reD**, offering reD 2, 3, 5, 10 and 20; it opens on 10. Only one of them is the graded case: the Dake aquifer has an outer radius five times the reservoir radius, so for the capstone the selector must read `reD = 5 (Dake 9.2)`. Work the method here on reD 3, then run it on 5.
 
-With that set, read the tile labelled **pD finite at tD 100**. It gives the graded value to nine significant figures, against a tolerance of 0.05. Now earn it, because a number you can only read is a number you cannot defend.
+The tile labelled **pD finite at tD 100** gives the value to nine significant figures, against a tolerance of 0.05 on the graded case. Now earn it, because a number you can only read is a number you cannot defend.
 
 **The asymptote first.** Once a bounded circular aquifer has felt its outer boundary everywhere, it depletes at a uniform rate and its dimensionless pressure drop climbs linearly with dimensionless time:
 
 $$p_D \to \frac{2 t_D}{r_{eD}^2 - 1} + \ln(r_{eD}) - 0.75$$
 
-At reD 5 the first term is $200/24 = 8.33333333333333$. The second group is on the panel: the tile labelled **ln(reD) - 0.75** reads 0.859437912434100, the same group that sits in the denominator of the Fetkovich productivity index, for the same physical reason. Add them and the asymptote is 9.19277124576743, which is what the tile labelled **PSS asymptote at tD 100** shows and what the dashed yellow line on the chart is drawing.
+At reD 3 the first term is $200/8 = 25$. The second group is on the panel: the tile labelled **ln(reD) - 0.75** reads 0.348612289, the same group that sits in the denominator of the Fetkovich productivity index, for the same physical reason. Add them and the asymptote is 25.34861228866811, which is what the tile labelled **PSS asymptote at tD 100** shows and what the dashed yellow line on the chart is drawing.
 
-**Then the real solution.** The graded number is not the asymptote. It is the bounded circle van Everdingen and Hurst constant terminal rate solution, obtained by Stehfest inversion of the radial Laplace form, and at tD 100 it sits 0.116089551269612 above the asymptote, which is 1.26283520133346 percent high. It is converging on the asymptote from above as the last of the transient dies. Read that as a sanity check on both tiles: the solution should be a little above the straight line and closing.
+**Then the real solution.** The graded kind of number is not the asymptote. It is the bounded circle van Everdingen and Hurst constant terminal rate solution, obtained by Stehfest inversion of the radial Laplace form; at reD 3 and tD 100 it is 25.577955313403997, a little above the asymptote and running parallel to it. Read that as a sanity check on both tiles: the solution should be a little above the straight line. Module 1 lesson 3 showed that the offset is a property of $r_{eD}$, so at reD 5 expect a different, smaller offset.
 
-**And the family it is not.** The tile labelled **tD 100, finite / line source** reads 3.43706666433432. The line source solution at the same dimensionless time is 2.70837365292708, so the finite aquifer is delivering water at a dimensionless pressure drop nearly three and a half times larger, which means far less water per psi of drawdown. Module 1 established the direction and it is the whole reason this field is graded.
+**And the family it is not.** The tile labelled **tD 100, finite / line source** compares the bounded solution with the line source at the same dimensionless time, 2.70837365292708. A bounded aquifer delivers water at a much larger dimensionless pressure drop, which means far less water per psi of drawdown. Module 1 established the direction and it is the whole reason this field is graded.
 
-**The one way to fail this field.** Not arithmetic. The selector. Leave it on reD 10 and the tile reads 3.61406650389498, which misses the 0.05 tolerance by 113.895885862841 times over. On reD 3 it reads 25.5779553134040, missing by 325.381890327339 times. If this field fails, check the selector before you check anything else.
+**The one way to fail this field.** Not arithmetic. The selector. The panel opens on reD 10, and every other setting misses the 0.05 tolerance by a wide margin. If this field fails, check the selector before you check anything else.
 
-## Walkthrough two: the water drive index, and the convention that decides it
+## Worked example two: the water drive index, and the convention that decides it
 
 {{panel:mb-tank-explorer}}
 
@@ -45,7 +43,7 @@ Start at the tank panel on its default setting, `None (the truth)`, and look at 
 
 That tile is the reason this capstone field exists. The engine forms every index over gross withdrawal $F$ and folds the produced water into the numerator of the water index. Ahmed apportions net withdrawal $A = F - W_p B_w$ instead. On Ekene no water has been produced, so $A$ and $F$ are the same number and the two conventions are indistinguishable. Five modules of this course went by without the question arising, and this tile is why.
 
-Ahmed Example 11-1 produced 50000 stb of water, and now the conventions separate.
+Ahmed Example 11-1 produced 50000 stb of water, and now the conventions separate. Work it on module 3's variant, with the oil in place at 9200000 stb; the capstone asks for the published case.
 
 **Step one, the produced gas ratio.** The case produced 1000000 stb of oil and 1100000000 scf of gas, so
 
@@ -61,21 +59,19 @@ $$F = 1000000 \times \left[ 1.655 + 0.00092 (1100 - 1040) \right] + 50000 = 1760
 
 $$A = F - W_p B_w = 1760200.00000000 - 50000.0000000000 = 1710200.00000000 \ \text{rb}$$
 
-The book prints 1710000 rb, an agreement of 0.0116959064327485 percent, which is its rounding.
+**Step four, the index.** Take the water influx the balance requires, 519194.75 bbl on the variant, subtract the water produced back, and divide by the net withdrawal:
 
-**Step four, the index.** Take the water influx that module 3 lesson 3 derives, which is the fourth graded field, subtract the water produced back, and divide by the net withdrawal:
+$$WDI = \frac{W_e - W_p B_w}{A} = \frac{469194.75}{1710200} = 0.27435080692316716$$
 
-$$WDI = \frac{W_e - W_p B_w}{A} = \frac{361281.250000001}{1710200.00000000} = 0.211250877090399$$
+On the published case the same four steps give the graded value, which agrees with the book's printed four decimals to within one unit in the last place. Do not tighten that comparison further. Ahmed divided a rounded influx by a rounded withdrawal, so a tight relative tolerance would be a test of his rounding rather than of the physics.
 
-Against a tolerance of 0.002, and against the book's printed 0.2112 that is a difference of 0.0000508770903991929, comfortably inside one unit in the last place the book printed. Do not tighten that comparison further. Ahmed divided a rounded influx by a rounded withdrawal, so a tight relative tolerance would be a test of his rounding rather than of the physics.
-
-**The trap, priced.** Divide by gross $F$ instead and the same influx gives 0.205250113623452. That is 0.00600076346694700 away from the graded value, missing the 0.002 tolerance by 3.00038173347350 times over. The sixth field goes with it. It is the depletion drive index, the oil expansion term $N E_o$ over the same net withdrawal, and the gross denominator moves it by the same factor $A/F$, far outside its own 0.002 tolerance. The four indices then sum to 0.971594137029883 instead of 1. And 0.971594137029883 is not a closure failure. It is exactly $A/F$, the two denominators divided, which is what module 3 proved.
+**The trap, priced.** Divide by gross $F$ instead and the variant's influx gives 0.2665576354959666, 0.0078 away, far outside a 0.002 tolerance. The depletion drive index goes with it: the oil expansion term $N E_o$ over the same net withdrawal, moved by the same factor $A/F$ when the gross denominator is used. The four indices then sum to 0.9715941370298828 instead of 1. And that sum is not a closure failure. It is exactly $A/F$, the two denominators divided, which is what module 3 proved.
 
 ## Where the other three come from
 
-**The Dake oil in place and the Dake influx.** Module 2 lesson 3, the Carter-Tracy run on the Exercise 9.2 performance history with the radius ratio set to 5. Both fields come from the same run, so if one is wrong they usually both are, and the usual cause is the aquifer geometry rather than the method. Watch the units: one field wants MMSTB and one wants MMrb, and the engine reports both in single barrels.
+**The Dake oil in place and the Dake influx.** Module 2 lesson 3, the Carter-Tracy run on the Exercise 9.2 performance history with the radius ratio set to 5: the tank explorer's Dake mode with Carter-Tracy, finite. Both fields come from the same run, so if one is wrong they usually both are, and the usual cause is the aquifer geometry rather than the method. Watch the units: one field wants MMSTB and one wants MMrb, and the engine reports both in single barrels.
 
-**The Ahmed influx.** Module 3 lesson 3, solved out of the combined material balance equation with the oil in place given as 10000000 stb. It is graded in barrels, not million barrels.
+**The Ahmed influx.** Module 3 lesson 3, solved out of the combined material balance equation with the published oil in place of 10000000 stb (the lesson worked it at 9200000). It is graded in barrels, not million barrels.
 
 ## Submitting
 

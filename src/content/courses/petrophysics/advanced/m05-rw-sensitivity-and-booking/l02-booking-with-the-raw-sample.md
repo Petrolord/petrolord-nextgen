@@ -14,7 +14,7 @@ Same recipe as the previous lesson: density porosity, Larionov tertiary Vsh, Arc
 | Pay-average porosity | 0.2081 | 0.2099 |
 | Pay-average Sw | 0.3609 | 0.5303 |
 
-The raw-sample net of 16.5 m is the third booking number the Expert capstone grades (tolerance 0.01 m). The capstone asks for it precisely because producing the wrong answer on purpose, and understanding why it is wrong, is stronger evidence of mastery than producing the right one.
+A raw-sample net is the third booking number the Expert capstone grades (tolerance 0.01 m), on its own well; on the typewell it is 16.5 m. The capstone asks for it precisely because producing the wrong answer on purpose, and understanding why it is wrong, is stronger evidence of mastery than producing the right one.
 
 ## The same sample, revisited
 

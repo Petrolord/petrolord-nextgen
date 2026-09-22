@@ -1,0 +1,113 @@
+{
+ "course": "scal",
+ "case": "OKORO sand (beginner): Corey set, fluids, pore volume and rate stated in full in the brief; typed into the displacement explorer",
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "fields_from": "w5c/scal/fields.json",
+   "dataset": "OKORO sand: Corey set, viscosities, pore volume and injection rate stated in the brief",
+   "prompt": "Displace the OKORO sand, stated here in full: a Corey relative permeability set with connate water Swc 0.22, residual oil Sor 0.27, a water endpoint krw of 0.34, an oil endpoint kro of 0.78, a water exponent of 2.7 and an oil exponent of 2.2; water viscosity 0.48 cp and oil viscosity 2.9 cp; a pore volume of 9650000 bbl flooded at a steady 7200 bwpd. Type the case into the displacement explorer with Type your own case and read the flood: the endpoint mobility ratio, the Welge front saturation and the fractional flow at the front, the pore volumes injected at breakthrough, the displacement efficiency at breakthrough, and the days to breakthrough at 7200 bwpd on that pore volume.",
+   "why": "Section 3 pick A: the displacement explorer opened on the Ekene design and every beginner lesson worked it, so all six answers printed before the learner worked. The capstone moves to the OKORO sand, stated in the brief and typed into the new own-case mode.",
+   "annot": {
+    "okoro_m_ratio": {
+     "source": "hand-calc",
+     "source_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+     "printed": {
+      "sigfigs": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Mobility ratio tile prints r.M to 6 significant figures (2.63355); also a hand calc (0.34/0.48)/(0.78/2.9).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "okoro_swf": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+     "printed": {
+      "sigfigs": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Front saturation tile prints bl.Swf (0.52651, a point of the 0.00001 Welge scan); an independent 2e6-point tangent search gives 0.526316, 0.00019 away, inside tol 0.0005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "okoro_fwf": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+     "printed": {
+      "sigfigs": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "fw at the front tile prints 0.834097; the independent tangent search gives 0.83357, 0.0005 away, inside tol 0.001.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "okoro_qi_bt_pv": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+     "printed": {
+      "sigfigs": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "PV injected at breakthrough tile prints 0.367475; the independent search agrees to 3e-7.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "okoro_ed_bt": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+     "printed": {
+      "sigfigs": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "ED at breakthrough tile prints 0.471122 = QiBt/(1 - Swc); independent search agrees to 4e-7.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "okoro_bt_days": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/scal/DisplacementExplorer.jsx (Type your own case mode)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Days tile prints fmt(btDays, 1) = 492.5 at the typed 9650000 bbl and 7200 bwpd; QiBt x PV / rate, tol 2 days.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "B",
+   "why": "Section 3 pick B: the Ahmed 4-7 values and the Ekene entry height, free water level and crest saturation were printed in module 3, module 5 and the walkthrough, and the J-function explorer opened on the Ekene chain. The lessons now work the Ahmed chain on the Sw 0.4 row and the Ekene chain on a 180 md teaching sand; the explorer opens on that teaching sand (type 250 md and 0.20 to run the capstone chain). Keys unchanged. Residual: the book's printed J at Sw 0.2 (0.169), a stated input of field 3, sits inside field 2's tolerance by the original design."
+  },
+  "advanced": {
+   "pick": "B",
+   "why": "Section 3 pick B: the averaged-refit a, both dip efficiencies, the polymer efficiency and the crest-column average were printed in modules 3 to 6, and the design explorer opened on them (dip and polymer one select away at the capstone settings). The lessons now work 5 degrees at 500 rb/d, a polymer multiplier of 2, Swirr 0.2 and the teaching sand; the explorer opens flat at 3000 rb/d, at a multiplier of 2, Swirr 0.2 and the teaching sand. Keys unchanged."
+  }
+ }
+}

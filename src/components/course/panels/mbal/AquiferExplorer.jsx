@@ -6,7 +6,12 @@ import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/
 // between the pseudo-steady-state denominator and plain ln(reD) so the 47
 // percent error in the productivity index is something the learner can see
 // rather than be told about. The marching table is checked against the
-// printed column of Ahmed Example 10-10.
+// printed column of Ahmed Example 10-10 once the learner types the book's own
+// geometry. It opens on a teaching geometry (TEACHING below), so its opening
+// view carries none of the Professional capstone's Ahmed 10-10 answers.
+
+// A wider-angle, thinner, tighter teaching aquifer on the same reservoir.
+const TEACHING = { h_ft: 80, phi: 0.22, ct_psi: 6e-6, pi_psia: 2740, k_md: 150, theta_deg: 180, muw_cp: 0.55, re_ft: 9200, ra_ft: 36800, reD: 4, dt_days: 365 };
 
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 const sci = (v, d = 6) => (Number.isFinite(v) ? Number(v).toPrecision(d) : '-');
@@ -27,7 +32,7 @@ const FIELDS = [
 
 const AquiferExplorer = () => {
   const g = AHMED_1010.given;
-  const [vals, setVals] = useState(() => Object.fromEntries(FIELDS.map(([k]) => [k, String(g[k])])));
+  const [vals, setVals] = useState(() => Object.fromEntries(FIELDS.map(([k]) => [k, String(TEACHING[k])])));
   const [pss, setPss] = useState(true);
 
   const out = useMemo(() => {
@@ -51,7 +56,7 @@ const AquiferExplorer = () => {
   return (
     <PanelShell
       title="Aquifer explorer (Fetkovich)"
-      subtitle="Constants from geometry, then the engine's own marching scheme, against the printed table of Ahmed Example 10-10."
+      subtitle="Constants from geometry, then the engine's own marching scheme. It opens on a teaching aquifer; type the geometry of Ahmed Example 10-10 to check the march against the book's printed table."
     >
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 lg:grid-cols-4">
         {FIELDS.map(([k, label]) => <NumField key={k} label={label} value={vals[k]} onChange={set(k)} />)}
@@ -91,7 +96,7 @@ const AquiferExplorer = () => {
               </thead>
               <tbody>
                 {out.We.map((w, i) => {
-                  const p = out.printed.find((r) => r.n === i);
+                  const p = atBook ? out.printed.find((r) => r.n === i) : null;
                   return (
                     <tr key={i} className="border-t border-gray-800">
                       <td className="py-1 pr-3">{i}</td>
@@ -110,7 +115,7 @@ const AquiferExplorer = () => {
             {atBook && pss
               ? 'At the book\'s own geometry with the pseudo-steady-state denominator, the engine reproduces the printed influx column. Two bookkeeping traps sit in these tiles: the angle fraction belongs to Wei rather than to the quoted Wi, and the denominator carries the 0.75.'
               : pss
-                ? 'You have moved off the published geometry, so the printed column no longer applies. Change one input at a time and watch which constant it moves.'
+                ? 'This is not the published geometry, so the printed column is blank. Type the book\'s own geometry to check the engine against it; change one input at a time and watch which constant it moves.'
                 : 'The denominator is now plain ln(reD). Compare J against the pseudo-steady-state value: the error is not a rounding difference, it is close to half, and it propagates into every influx step.'}
           </Note>
         </>

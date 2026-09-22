@@ -21,7 +21,7 @@ This step produces no result of its own and it controls every number that follow
 
 ## Step 2: read porosity at depth
 
-With phi0 and c fixed, porosity at any depth is $\phi(z) = \phi_0 e^{-cz}$. For shale that gives 0.63 at 0 m, 0.37831221465172754 at 1000 m and 0.22717481230903933 at 2000 m, the last of which is one of the six graded capstone numbers.
+With phi0 and c fixed, porosity at any depth is $\phi(z) = \phi_0 e^{-cz}$. For shale that gives 0.63 at 0 m, 0.37831221465172754 at 1000 m and 0.22717481230903933 at 2000 m, the last of which is one of the six numbers this tier reports.
 
 Porosity is a fraction in v/v at every stage of this workflow. Nothing downstream accepts a percentage.
 
@@ -29,7 +29,7 @@ Porosity is a fraction in v/v at every stage of this workflow. Nothing downstrea
 
 Porosity at a point is not yet a thickness. Integrating the pore space out of an interval leaves the solid thickness, the rock with the pores removed.
 
-In 100 m of freshly deposited surface shale the solid thickness is 38.57953418711555 m, another graded number. The other three lithologies give 51.655586470092686 m for sandstone, 55.77839233115688 m for limestone and 50.98679894040397 m for dolomite in the same 100 m. So 100 m of fresh shale is only about 38.6 m of grain and the rest is pore.
+In 100 m of freshly deposited surface shale the solid thickness is 38.57953418711555 m, another reported number. The other three lithologies give 51.655586470092686 m for sandstone, 55.77839233115688 m for limestone and 50.98679894040397 m for dolomite in the same 100 m. So 100 m of fresh shale is only about 38.6 m of grain and the rest is pore.
 
 ## Step 4: take the grain of the buried layer
 
@@ -39,7 +39,7 @@ Compare that with step 3. The same 100 m of rock holds more grain at 1000 m than
 
 ## Step 5: restore the layer
 
-Hold the grain constant and ask what thickness it occupies at a shallower depth. Restoring the 63.11728183077296 m of grain to the surface gives 159.79553483785466 m, the third graded number. The layer has lost 59.79553483785466 m to compaction, which is 37.42 percent of its original thickness.
+Hold the grain constant and ask what thickness it occupies at a shallower depth. Restoring the 63.11728183077296 m of grain to the surface gives 159.79553483785466 m, the third reported number. The layer has lost 59.79553483785466 m to compaction, which is 37.42 percent of its original thickness.
 
 The check runs immediately. Taking the solid thickness of that restored 159.79553483785466 m at the surface returns 63.117281830772924 m, the same grain to within 1e-13.
 
@@ -49,7 +49,7 @@ Geometry is done. The heat column is a separate build with its own inputs: a sur
 
 ## Step 7: solve and read
 
-In steady state with no internal heat production the solution is exactly $T = T_s + Qz/k$, applied layer by layer. Three readings from it are graded.
+In steady state with no internal heat production the solution is exactly $T = T_s + Qz/k$, applied layer by layer. Three readings from it are reported.
 
 | depth | temperature |
 | --- | --- |

@@ -1,6 +1,6 @@
 # The crest moves
 
-One of the six capstone fields is the crest of the map with Ekene-7 included. This lesson reads it, compares it against the Associate tier's crest, and connects the change to a problem that tier identified and could not resolve.
+One of the six figures this tier reports is the crest of the map with Ekene-7 included. This lesson reads it, compares it against the Associate tier's crest, and connects the change to a problem that tier identified and could not resolve.
 
 {{panel:mp-validation-explorer}}
 
@@ -11,7 +11,7 @@ One of the six capstone fields is the crest of the map with Ekene-7 included. Th
 | Six wells | 1539.7181396484375 m | (1400, 2000) |
 | Seven wells | 1540.70556640625 m | (1400, 2200) |
 
-The crest moved **0.9874 m deeper** and **200 m north**, from a node 300 m from Ekene-3 to one only 100 m from it. The capstone grades the seven-well figure to 0.1 m.
+The crest moved **0.9874 m deeper** and **200 m north**, from a node 300 m from Ekene-3 to one only 100 m from it.
 
 The deepest point did not move at all: it is 1590 m on both maps, because that is Ekene-4's own pick and an exact interpolator does not move a control point.
 

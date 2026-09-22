@@ -131,6 +131,263 @@ def w1_shipped():
 SHIPPED.update(w1_shipped())
 
 
+# B5 FOLLOW-ON W2 (publish inputs in prompts and lessons), from the specs
+# w2/<course>.json that w2/build_specs.mjs writes and w2_capstones.py turns into
+# 20261025a_w2_<course>.sql. W2 moves no key, expected value or tolerance: a
+# field it unlocks keeps its key and moves to class none with source
+# hand-calc, and records the published text (`prompt_contains`) that
+# `audit.py --post --wave w2` requires in the live prompt, or the lesson files
+# that carry it (checked by src/lib/w2PublishedInputs.test.js, which also
+# re-runs the vendored engines on the published inputs). A field a spec names
+# but leaves for a later wave (`not_reproduced`) is not moved; a `suite_only`
+# field moves to source suite-app when the spec names its W3 `suite_route`.
+W2_LEFT = {'not_reproduced', 'suite_only'}
+
+
+def w2_shipped():
+    out = {}
+    for p in sorted(glob.glob(os.path.join(HERE, 'w2', '*.json'))):
+        s = json.load(open(p))
+        course = s['course']
+        for tier, t in s['tiers'].items():
+            left = set().union(*[set(t.get(k, [])) for k in W2_LEFT])
+            moves = t.get('fields_moved_class') or [k for k in t.get('expected', {}) if k not in left]
+            edits = t.get('prompt_edits', [])
+            lessons = sorted({e[0] for e in t.get('lesson_edits', [])})
+            where = ' and '.join(x for x in ((
+                'the capstone prompt (W2 publishes the inputs)' if edits else ''),
+                ('the lessons ' + ', '.join(os.path.basename(l) for l in lessons) if lessons else '')) if x)
+            # a field the prompt now routes to a Suite surface W3 built (the
+            # wellcost case file): readable at full precision, source suite-app
+            sr = t.get('suite_route')
+            if sr:
+                for key in t.get('suite_only', []):
+                    out[(course, tier, key)] = {
+                        'migration': f'20261025a_w2_{course}.sql', 'wave': 'w2', 'decided': True, 'class': 'none',
+                        'annot_update': {'source': 'suite-app', 'source_ref': sr['source_ref'], 'printed': 'full',
+                                         'answer_space': None, 'guess_p': None, 'fix': None, 'evidence': sr['evidence']},
+                        'prompt_contains': [b for _, b in edits], 'lessons': [], 'lesson_contains': [],
+                    }
+            for key in moves:
+                e = t['expected'][key]
+                up = {
+                    'source': 'hand-calc', 'source_ref': f'{where}; spec docs/graded-field-audit/w2/{course}.json',
+                    'printed': 'full', 'answer_space': None, 'guess_p': None, 'fix': None,
+                    'evidence': (f"W2: {t['why']} The published inputs reproduce {key} = {e['reproduced']!r} through the "
+                                 f"vendored engines against the key {e['expected']!r} (tol {e['tol']}); "
+                                 'src/lib/w2PublishedInputs.test.js re-runs it.'),
+                }
+                up.update(t.get('annot_updates', {}).get(key, {}))
+                out[(course, tier, key)] = {
+                    'migration': f'20261025a_w2_{course}.sql' if edits else None, 'wave': 'w2', 'decided': True,
+                    'class': 'none', 'annot_update': up,
+                    'prompt_contains': [b for _, b in edits], 'lessons': lessons,
+                    'lesson_contains': [[f, a + ins] for f, a, ins in t.get('lesson_edits', [])],
+                }
+    return out
+
+
+SHIPPED.update(w2_shipped())
+
+
+# B5 FOLLOW-ON W3 (Suite Full precision), from w3/<course>.json. The Suite app a
+# field is read in gains a Full precision switch (Suite PRs named in the spec);
+# the brief gains one sentence naming it (20261026_w3_<course>.sql, prompt only).
+# Each field the switch now prints at its graded precision records its post-W3
+# annotation (`annot_update`: printed, display_ref, evidence) and moves class;
+# `printed_before` keeps the Suite print it replaced, so audit.py --selftest can
+# prove the class move rests on the new print. `prompt_append` is checked by
+# audit.py --post --wave w3.
+def w3_shipped():
+    out = {}
+    for p in sorted(glob.glob(os.path.join(HERE, 'w3', '*.json'))):
+        s = json.load(open(p))
+        course = s['course']
+        for tier, t in s['tiers'].items():
+            for key, up in t.get('annot_updates', {}).items():
+                up = dict(up)
+                e = {'wave': 'w3', 'decided': True, 'class': up.pop('class', 'none'), 'annot_update': up,
+                     'suite': s.get('suite', '')}
+                if t.get('append'):
+                    e['migration'] = f'20261026_w3_{course}.sql'
+                    e['prompt_append'] = t['append'].strip()
+                out[(course, tier, key)] = e
+    return out
+
+
+def overlay(later):
+    # a key two waves both ship (W2 publishes a lesson route, W3 a Suite print):
+    # the later wave's annotation lands on top, the earlier wave's checks
+    # (prompt_contains, lesson_contains, migration) are kept
+    for k, e in later.items():
+        prev = SHIPPED.get(k)
+        # an entry that chains the earlier fix itself (`prior`, W5 re-keys) replaces it
+        if isinstance(prev, dict) and prev.get('wave') != e.get('wave') and 'prior' not in e:
+            merged = dict(prev)
+            merged.update({x: v for x, v in e.items() if x != 'annot_update'})
+            merged['annot_update'] = {**prev.get('annot_update', {}), **e.get('annot_update', {})}
+            if not e.get('migration') and prev.get('migration'):
+                merged['migration'] = prev['migration']
+            SHIPPED[k] = merged
+        else:
+            SHIPPED[k] = e
+
+
+overlay(w3_shipped())
+
+
+# B5 FOLLOW-ON W4a (typed-case panel modes, drilling rows of section 1 route b
+# and the casingtubing panel row of section 2), from w4a/<course>.json. Each
+# field gains a panel route: its post-W4a annotation (`annot_update`) names the
+# panel view and the precision it prints, and the entry carries `route`, which
+# audit.py checks: a field that ships a route may no longer be `unobtainable`
+# and must be class none with no flag. No key, expected or tol moves, so
+# `audit.py --post` has nothing extra to check; a prompt pointer, where there
+# is one, is 20261027a_w4_<course>.sql.
+def w4a_shipped():
+    out = {}
+    for p in sorted(glob.glob(os.path.join(HERE, 'w4a', '*.json'))):
+        s = json.load(open(p))
+        course = s['course']
+        has_prompt = any(t.get('prompt_edits') for t in s['tiers'].values())
+        for tier, t in s['tiers'].items():
+            for key, up in t.get('annot_updates', {}).items():
+                up = dict(up)
+                route = up.pop('route')
+                e = {'wave': 'w4a', 'decided': True, 'class': up.pop('class', 'none'), 'annot_update': up, 'route': route}
+                if has_prompt:
+                    e['migration'] = f'20261027a_w4_{course}.sql'
+                out[(course, tier, key)] = e
+    return out
+
+
+overlay(w4a_shipped())
+
+
+# B5 FOLLOW-ON W4 PART B (typed "your case" panel modes), from w4b/<course>.json.
+# A field whose graded value a typed panel mode now prints at the graded precision
+# moves to source `nextgen-panel`, class `none`; `case_mode` names the panel, the
+# mode and the test, and audit.py checks all three still exist. The capstone brief
+# gains one pointer sentence (20261027b_w4_<course>.sql, prompt only); no key,
+# expected value or tolerance moves.
+def w4b_shipped():
+    out = {}
+    for p in sorted(glob.glob(os.path.join(HERE, 'w4b', '*.json'))):
+        s = json.load(open(p))
+        course = s['course']
+        for tier, t in s['tiers'].items():
+            for key, k in t.get('keys', {}).items():
+                ref = f"{k['panel']}:{k['line']}"
+                out[(course, tier, key)] = {
+                    'migration': f'20261027b_w4_{course}.sql', 'wave': 'w4b', 'decided': True, 'class': 'none',
+                    'prompt': t['pointer'][:300],
+                    'case_mode': {'panel': k['panel'], 'mode': k['mode'], 'test': k['test']},
+                    'annot_update': {
+                        'source': 'nextgen-panel',
+                        'source_ref': f"{ref} ({k['mode']} mode: the case typed as the prompt states it)",
+                        'printed': {'decimals': k['decimals']}, 'display_scale': 1,
+                        'display_ref': f"{ref} {k.get('formatter', '')}".strip(),
+                        'fix': None, 'recommendation': None,
+                        'evidence': k['evidence']}}
+    return out
+
+
+overlay(w4b_shipped())
+
+
+# B5 FOLLOW-ON W5, builder D (section 3 pick B, strip), generated by
+# w5d_capstones.py. A stripped tier keeps every key; what changes is that
+# nothing prints its answers before the learner works (each course's
+# capstoneLeak.test.jsx) and its brief loses the W1 open-book label. Every
+# field on the tier records `stripped` (wave w5d) and `leak: false`, beside any
+# fix it already carries. `audit.py --post --wave w5d` checks the brief.
+def w5d_stripped():
+    sys.path.insert(0, HERE)
+    import w5d_capstones as w5d
+    return {(course, tier): {'migration': f'20261028d_w5_{course}.sql', 'wave': 'w5d', 'why': why}
+            for course, tiers in w5d.STRIP.items() for tier, why in tiers.items()}
+
+
+STRIPPED = w5d_stripped()
+
+
+# B5 FOLLOW-ON W5 (leak re-case A and strip B), generated by w5_capstones.py from
+# w5/<course>.json. A pick-A tier re-keys every field onto a case of its own; each
+# entry carries its wave (w5a, w5b, ...) and `closes_leak`, so `audit.py --post
+# --wave <w5x>` also proves the replacement is printed nowhere. A live key that W1
+# had already re-keyed is traced back to its baseline key, and W1's fix is kept as
+# `prior`, so a W1-only dry run still checks W1's state. The per-field `leak` flag
+# in the annotation (and so in fields.json) is left as the baseline found it:
+# w1_capstones.py reads it for the open-book tiers it generated.
+def w5_shipped(shipped):
+    sys.path.insert(0, HERE)
+    import w5_capstones as w5
+    out = {}
+    for course, s in sorted(w5.load_specs().items()):
+        # a W1 replacement key, traced to the baseline key it replaced
+        back = {(c, t, v['rekey']['key']): k for (c, t, k), v in shipped.items()
+                if c == course and isinstance(v, dict) and 'rekey' in v}
+        for tier, t in s['tiers'].items():
+            if t['pick'] != 'A':
+                continue
+            nf = w5.new_fields(s, tier)
+            for live_key, f in zip(t['rekey'], nf):
+                base_key = back.get((course, tier, live_key), live_key)
+                ann = dict(t.get('annot', {}).get(f['key'], {}))
+                printed = ann.pop('default_state_prints', False) or ann.pop('lesson_prints', False)
+                entry = {'migration': s['migration'], 'wave': s['wave'], 'decided': True, 'closes_leak': True,
+                         'rekey': {'key': f['key'], 'label': f['label'], 'unit': f['unit'],
+                                   'expected': float(f['expected']), 'tol': float(f['tol'])},
+                         'rekey_annot': {**ann, 'class': 'none', 'owner_decision': False, 'leak': bool(printed)}}
+                prior = shipped.get((course, tier, base_key))
+                if prior:
+                    entry['prior'] = {k: v for k, v in prior.items() if k not in ('decided', 'class', 'annot_update')}
+                out[(course, tier, base_key)] = entry
+    return out
+
+
+overlay(w5_shipped(SHIPPED))
+
+
+# B5 FOLLOW-ON W5 part c (section 3 leak re-case and strip), generated by
+# w5c_capstones.py from w5c/<course>.json. A pick A tier re-keys every field
+# onto its new case: each baseline key records its W5 replacement with
+# `wave: w5c`, and any earlier (W1) fix on the same key rides along as `prior` (audit.py effective),
+# so `audit.py --post --wave w1` still checks the W1 state and `--wave w1
+# --wave w5c` checks this one. A pick B tier moves no field; its leak closes.
+def w5c_shipped(prev):
+    sys.path.insert(0, HERE)
+    import w5c_capstones as w5
+    base = {(c['app'], c['tier']): c for c in json.load(open(os.path.join(HERE, 'caps.json')))}
+    out, closed = {}, {}
+    for course, s in sorted(w5.load_specs().items()):
+        for tier, t in s['tiers'].items():
+            closed[(course, tier)] = f"w5c pick {t['pick']}"
+            if t['pick'] != 'A':
+                continue
+            mig = t.get('file', f'{w5.PREFIX}{course}.sql')
+            for f0, nf in zip(base[(course, tier)]['fields'], w5.spec_fields(s, tier)):
+                k = (course, tier, f0['key'])
+                ann = {x: v for x, v in t['annot'][nf['key']].items() if x not in ('default_state_prints', 'lesson_prints')}
+                e = {'migration': mig, 'wave': 'w5c', 'decided': True,
+                     'rekey': {'key': nf['key'], 'label': nf['label'], 'unit': nf['unit'],
+                               'expected': float(nf['expected']), 'tol': float(nf['tol'])},
+                     'rekey_annot': {**ann, 'class': 'none', 'owner_decision': False, 'leak': False}}
+                if k in prev:
+                    p = prev[k]
+                    e['prior'] = {x: v for x, v in p.items() if x not in ('decided', 'class', 'annot_update')}
+                    if p.get('class'):
+                        e['class'] = p['class']
+                    if p.get('annot_update'):
+                        e['annot_update'] = p['annot_update']
+                out[k] = e
+    return out, closed
+
+
+_W5C, W5C_CLOSED = w5c_shipped(SHIPPED)
+SHIPPED.update(_W5C)
+
+
 def main(raw):
     out = os.path.join(HERE, 'annot')
     os.makedirs(out, exist_ok=True)
@@ -150,6 +407,8 @@ def main(raw):
                     f['leak'] = True
             s = SHIPPED.get((c, f['tier'], f['key']))
             if s and s.get('annot_update'):
+                if s.get('wave') == 'w3' and 'printed' in s['annot_update']:
+                    s = {**s, 'printed_before': f.get('printed')}
                 f.update(s['annot_update'])
             if s and s.get('decided'):
                 f['owner_decision'] = False
@@ -158,6 +417,13 @@ def main(raw):
                 f['class'] = s['class']
             s = {k: v for k, v in s.items() if k not in ('decided', 'class', 'annot_update')} if s else s
             f['shipped'] = s
+            st = STRIPPED.get((c, f['tier']))
+            if st:
+                f['stripped'] = st
+                f['leak'] = False
+            if (c, f['tier']) in W5C_CLOSED:
+                f['leak'] = False
+                f['leak_closed'] = W5C_CLOSED[(c, f['tier'])]
             if s and 'tol' in s:
                 f['fix'] = {'new_tol': s['tol'][1]}
                 if f['class'] == 'none':

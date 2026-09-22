@@ -1,0 +1,146 @@
+[
+ {
+  "tier": "beginner",
+  "key": "ubima_mean_velocity_ms",
+  "label": "Mean sonic velocity in the window",
+  "unit": "m/s",
+  "expected": 2991.2286066090837,
+  "tol": 0.05
+ },
+ {
+  "tier": "beginner",
+  "key": "ubima_twt_at_window_top_ms",
+  "label": "TWT at the top of the window",
+  "unit": "ms",
+  "expected": 1300,
+  "tol": 0.05
+ },
+ {
+  "tier": "beginner",
+  "key": "ubima_imp_max",
+  "label": "Maximum impedance in the window",
+  "unit": "(m/s)·(g/cc)",
+  "expected": 10474.98046875,
+  "tol": 0.05
+ },
+ {
+  "tier": "beginner",
+  "key": "ubima_rc_peak_abs",
+  "label": "Strongest reflection coefficient (abs)",
+  "unit": "-",
+  "expected": 0.021212393417954445,
+  "tol": 0.00005
+ },
+ {
+  "tier": "beginner",
+  "key": "ubima_rc_peak_twt_ms",
+  "label": "TWT of the strongest reflection",
+  "unit": "ms",
+  "expected": 1318,
+  "tol": 0.5
+ },
+ {
+  "tier": "beginner",
+  "key": "ubima_syn_peak_twt_ms",
+  "label": "TWT of the strongest synthetic amplitude (30 Hz)",
+  "unit": "ms",
+  "expected": 1360,
+  "tol": 0.5
+ },
+ {
+  "tier": "intermediate",
+  "key": "bulk_shift_ms",
+  "label": "Suggested bulk shift",
+  "unit": "ms",
+  "expected": 8,
+  "tol": 0.5
+ },
+ {
+  "tier": "intermediate",
+  "key": "corr_zero_lag",
+  "label": "Correlation at zero lag, before any shift",
+  "unit": "-",
+  "expected": 0.6217418028775199,
+  "tol": 0.0005
+ },
+ {
+  "tier": "intermediate",
+  "key": "peak15_abs",
+  "label": "Strongest synthetic amplitude at 15 Hz",
+  "unit": "-",
+  "expected": 0.1573149710893631,
+  "tol": 0.002
+ },
+ {
+  "tier": "intermediate",
+  "key": "peak40_abs",
+  "label": "Strongest synthetic amplitude at 40 Hz",
+  "unit": "-",
+  "expected": 0.0362229160964489,
+  "tol": 0.001
+ },
+ {
+  "tier": "intermediate",
+  "key": "peak15_twt",
+  "label": "TWT of the 15 Hz peak",
+  "unit": "ms",
+  "expected": 1580,
+  "tol": 2
+ },
+ {
+  "tier": "intermediate",
+  "key": "peak40_twt",
+  "label": "TWT of the 40 Hz peak",
+  "unit": "ms",
+  "expected": 1646,
+  "tol": 2
+ },
+ {
+  "tier": "advanced",
+  "key": "tune25_ms",
+  "label": "Tuning thickness at 25 Hz",
+  "unit": "ms",
+  "expected": 16,
+  "tol": 0
+ },
+ {
+  "tier": "advanced",
+  "key": "tune25_amp",
+  "label": "Peak amplitude at 25 Hz tuning",
+  "unit": "-",
+  "expected": 0.1155947595834732,
+  "tol": 0.002
+ },
+ {
+  "tier": "advanced",
+  "key": "tune40_ms",
+  "label": "Tuning thickness at 40 Hz",
+  "unit": "ms",
+  "expected": 10,
+  "tol": 0
+ },
+ {
+  "tier": "advanced",
+  "key": "amp40_at_6ms",
+  "label": "Amplitude of a 6 ms bed at 40 Hz",
+  "unit": "-",
+  "expected": 0.09535394608974457,
+  "tol": 0.0005
+ },
+ {
+  "tier": "advanced",
+  "key": "tune25_iso_ratio",
+  "label": "Tuning amplitude over the isolated level at 25 Hz",
+  "unit": "-",
+  "expected": 1.4449345270902185,
+  "tol": 0.001
+ },
+ {
+  "tier": "advanced",
+  "key": "theory25_ms",
+  "label": "Theoretical tuning thickness at 25 Hz",
+  "unit": "ms",
+  "expected": 15.593936024673521,
+  "tol": 0.05
+ }
+]

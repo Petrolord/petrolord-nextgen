@@ -20,7 +20,7 @@ So when you quote a mean depth, a minimum, a maximum, or an area from a gridded 
 
 ## The live count belongs to the settings, not to the geology
 
-The live count is one of the six capstone numbers you will report at the end of this course, and it is the one most easily misread, because it sounds like a property of the field. It is not. It is a property of how you set up the grid.
+The live count is one of the six numbers this tier reports, and it is the one most easily misread, because it sounds like a property of the field. It is not. It is a property of how you set up the grid.
 
 Same six wells, same picks, same 800 m extrapolation limit, three cell sizes:
 

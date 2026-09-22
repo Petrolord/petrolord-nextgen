@@ -4,11 +4,11 @@ This course runs on six LAS files from the synthetic KETA field, onshore Ghana. 
 
 ## basic_20.las: the clean reference
 
-A well-behaved LAS 2.0 export from well KETA G1-1: depth in metres from 1500 to 1650 at a 0.5 m step, 301 samples, null flag -999.25, a complete header. This is what a file looks like when nothing is wrong, and it is the baseline you compare every other file against. Its QC facts anchor the capstone: 301 depth samples, 8 null GR samples, and a finite-sample GR mean of 64.9272 GAPI.
+A well-behaved LAS 2.0 export from well KETA G1-1: depth in metres from 1500 to 1650 at a 0.5 m step, 301 samples, null flag -999.25, a complete header. This is what a file looks like when nothing is wrong, and it is the baseline you compare every other file against. Its QC facts are the worked example for three of the capstone's readings: 301 depth samples, 8 null GR samples, and a finite-sample GR mean of 64.9272 GAPI.
 
 ## feet_20.las: the unit trap
 
-The same field, but depth runs from 4900 to 5200 in feet at a 2 ft step, 151 samples, and the sonic curve arrives in us/ft rather than us/m. Nothing about the file is broken; it is simply denominated in the other unit system, as a large fraction of the world's log data is. The platform works in metres, so the import must convert: a 2 ft step becomes 0.6096 m, another capstone number. Miss the unit and every depth in the well is wrong by a factor of about 3.28.
+The same field, but depth runs from 4900 to 5200 in feet at a 2 ft step, 151 samples, and the sonic curve arrives in us/ft rather than us/m. Nothing about the file is broken; it is simply denominated in the other unit system, as a large fraction of the world's log data is. The platform works in metres, so the import must convert: a 2 ft step becomes 0.6096 m, the worked example for the capstone's converted-step reading. Miss the unit and every depth in the well is wrong by a factor of about 3.28.
 
 ## irregular_20.las: the broken rhythm
 
@@ -16,7 +16,7 @@ A metric well from 1500 to 1560 m, 121 samples, but the depth step is not consta
 
 ## nullheavy_20.las: the missing data
 
-A metric well from 1500 to 1600 m, 201 samples, with two twists. First, its null flag is -9999, not the usual -999.25; a reader that assumes the common flag would treat every missing sample as a real, very negative measurement. Second, it is missing a lot: the GR curve has 71 null samples, and the NPHI curve is null at all 201 depths. A curve with no finite samples at all is called a dead curve, and the 201 null NPHI samples are another capstone number.
+A metric well from 1500 to 1600 m, 201 samples, with two twists. First, its null flag is -9999, not the usual -999.25; a reader that assumes the common flag would treat every missing sample as a real, very negative measurement. Second, it is missing a lot: the GR curve has 71 null samples, and the NPHI curve is null at all 201 depths. A curve with no finite samples at all is called a dead curve, and the 201 null NPHI samples are the worked example for the capstone's dead-curve reading.
 
 ## quirks_20.las: the messy header
 
@@ -24,7 +24,7 @@ A short metric well (1500 to 1540 m, 81 samples) whose data section is fine but 
 
 ## wrapped_12.las: the old format
 
-The oldest layout you will still meet in archives: LAS version 1.2 with wrapped mode switched on, meaning each depth step's values span several physical lines instead of one row per depth. From well KETA G1-2, 1500 to 1580 m, 161 samples. You cannot count its samples by counting lines in the data section; only a parser that understands wrapping gets 161, and that count is the last of the capstone's six numbers.
+The oldest layout you will still meet in archives: LAS version 1.2 with wrapped mode switched on, meaning each depth step's values span several physical lines instead of one row per depth. From well KETA G1-2, 1500 to 1580 m, 161 samples. You cannot count its samples by counting lines in the data section; only a parser that understands wrapping gets 161, and that count is the worked example for the last of the capstone's six readings.
 
 ## Why these six
 

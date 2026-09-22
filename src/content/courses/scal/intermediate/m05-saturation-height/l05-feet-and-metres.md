@@ -10,19 +10,19 @@ $$1 \ \text{ft} = 0.3048 \ \text{m, exactly}$$
 
 Not approximately. The international foot is defined as 0.3048 m, so dividing by 0.3048 to go from metres to feet, or multiplying to come back, introduces no rounding at all. Both worked conversions this module relies on are exact round trips:
 
-The entry height: $10.31162356877775 \ \text{ft} \times 0.3048 = 3.142982863763458 \ \text{m}$, and back again by division.
+The teaching sand's entry height: $11.528745629088014 \ \text{ft} \times 0.3048 = 3.513961667746027 \ \text{m}$, and back again by division.
 
-The crest height above the FWL: $76.85316015526888 \ \text{ft} \times 0.3048 = 23.424843215325957 \ \text{m}$, which is exactly the mapped column of $20.2818603515625$ m plus the entry height.
+Its crest height above the FWL: $78.07028221557916 \ \text{ft} \times 0.3048 = 23.795822019308527 \ \text{m}$, which is exactly the mapped column of $20.2818603515625$ m plus the entry height.
 
 When a chain of yours disagrees with the engine's, check the unit border first; a conversion done twice, or not at all, survives a surprising number of readings because the digits themselves look reasonable.
 
 ## The classic error, priced
 
-The gradient $0.07133527522935783$ is in psi per FOOT. Feed it metres and nothing warns you. Take the crest height in metres, $23.424843215325957$, and multiply by the psi-per-foot gradient as if the units matched:
+The gradient $0.07133527522935783$ is in psi per FOOT. Feed it metres and nothing warns you. Take the teaching sand's crest height in metres, $23.795822019308527$, and multiply by the psi-per-foot gradient as if the units matched:
 
-$$23.424843215325957 \times 0.07133527522935783 = 1.6710176379698325 \ \text{psi} \quad \text{(wrong)}$$
+$$23.795822019308527 \times 0.07133527522935783 = 1.697481513056187 \ \text{psi} \quad \text{(wrong)}$$
 
-The correct capillary pressure at the crest, from lesson 4, is $5.482341331922022$ psi. The mistake understates it by exactly the conversion factor, $1/0.3048 = 3.2808...$, and the damage flows downstream: the too-low $P_c$ gives a too-low $J$, which lands high on the drainage curve and reports the crest far wetter than it is. A modeler who makes this slip concludes the structure barely drains at all. The reverse slip, feeding feet into a per-metre gradient, paints the whole transition zone three times thinner than it is and reports crest-dry rock a metre above the contact.
+The correct capillary pressure at that crest, from lesson 4, is $5.569165069081978$ psi. The mistake understates it by exactly the conversion factor, $1/0.3048 = 3.2808...$, and the damage flows downstream: the too-low $P_c$ gives a too-low $J$, which lands high on the drainage curve and reports the crest far wetter than it is. A modeler who makes this slip concludes the structure barely drains at all. The reverse slip, feeding feet into a per-metre gradient, paints the whole transition zone three times thinner than it is and reports crest-dry rock a metre above the contact.
 
 If you prefer to work in metres end to end, convert the GRADIENT once instead of every height:
 
@@ -40,4 +40,4 @@ Write the unit on every height the moment you write the number, even in scratch 
 
 ## Exercise
 
-First, an engineer reports the Ekene entry height as "10.31 m" after reading the engine output. State the two distinct errors compounded in that single reported value, and give the correct figure in metres to full precision. Second, redo lesson 3's halfway rung in pure metric: convert the gradient to psi/m as above, then compute the capillary pressure at the height where $S_w$ first reaches 0.50, which is $6.285965727526915$ m above the contact, remembering to measure from the free water level. Confirm you land on the same psi as the field-unit chain.
+First, an engineer reports the teaching sand's entry height as "11.53 m" after reading the engine output. State the two distinct errors compounded in that single reported value, and give the correct figure in metres to full precision. Second, redo lesson 3's halfway rung in pure metric: convert the gradient to psi/m as above, then compute the capillary pressure at the height where $S_w$ first reaches 0.50, which is $6.285965727526915$ m above the contact, remembering to measure from the free water level. Confirm you land on the same psi as the field-unit chain.

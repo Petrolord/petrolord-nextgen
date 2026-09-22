@@ -1,0 +1,270 @@
+{
+ "course": "integrity",
+ "wave": "w2",
+ "fixture": "/root/dr-wip-integrity/dr11_fields.mjs",
+ "tiers": {
+  "intermediate": {
+   "why": "Prompt only, no field moves. The prompt said each bounding element carries a limit, a true vertical depth, a far side density and a role, but gave none of them: the KESTREL A-7 rows, the annulus fluids and the D1 survey existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs (B5 finding 1). The prompt now publishes the survey, both annuli and the displacement case row by row, with g and the psi conversion, so every field is the taught row arithmetic of m02 to m05 worked at full precision. Keys, expected values and tolerances are unchanged, so nobody is re-scored.",
+   "prompt_edits": [
+    [
+     "Each bounding element carries its own pressure limit, its true vertical depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up.",
+     "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
+    ]
+   ],
+   "inputs": {
+    "g": 9.80665,
+    "paPerPsi": 6894.757293168,
+    "survey": {
+     "kickoffMdM": 500,
+     "buildDegPer30m": 2,
+     "holdIncDeg": 40,
+     "aziDeg": 45
+    },
+    "aAnnulus": {
+     "fluidKgM3": 1250,
+     "rows": [
+      {
+       "name": "9-5/8 production casing burst",
+       "role": "outer-casing-burst",
+       "limitPsi": 5220,
+       "where": "at the production shoe",
+       "mdM": 2265,
+       "backupKgM3": 1015
+      },
+      {
+       "name": "5-1/2 completion tubing collapse",
+       "role": "inner-tubing-collapse",
+       "limitPsi": 4040,
+       "where": "at the packer",
+       "mdM": 2210,
+       "backupKgM3": 1000
+      },
+      {
+       "name": "9-5/8 shoe formation strength",
+       "role": "shoe-formation",
+       "lotKgM3": 1100,
+       "where": "at the production shoe",
+       "mdM": 2265,
+       "backupKgM3": 1015
+      },
+      {
+       "name": "Subsea wellhead annulus access rating",
+       "role": "rating",
+       "limitPsi": 5000,
+       "where": "at the wellhead on the seabed",
+       "mdM": 320,
+       "backupKgM3": 1025
+      }
+     ]
+    },
+    "bAnnulus": {
+     "fluidKgM3": 1150,
+     "rows": [
+      {
+       "name": "13-3/8 surface casing burst",
+       "kind": "casing",
+       "factor": 0.72,
+       "limitPsi": 3450,
+       "where": "at the surface shoe",
+       "mdM": 1450,
+       "backupKgM3": 1015
+      },
+      {
+       "name": "9-5/8 production casing burst wear derated",
+       "kind": "casing",
+       "factor": 0.62,
+       "limitPsi": 5220,
+       "where": "at the production shoe",
+       "mdM": 2265,
+       "backupKgM3": 1250
+      },
+      {
+       "name": "13-3/8 shoe formation strength",
+       "kind": "formation",
+       "factor": 1,
+       "lotKgM3": 1550,
+       "where": "at the surface shoe",
+       "mdM": 1450,
+       "backupKgM3": 1015
+      }
+     ]
+    },
+    "displacement": {
+     "fluidKgM3": 1650,
+     "rows": [
+      {
+       "name": "5-1/2 completion tubing collapse with the tubing gas filled",
+       "kind": "completion-string",
+       "role": "inner-tubing-collapse",
+       "limitPsi": 4040,
+       "where": "at the packer",
+       "mdM": 2210,
+       "backupKgM3": 150
+      }
+     ]
+    }
+   },
+   "method": {
+    "surveyStations": {
+     "stepM": 30,
+     "endMdM": 3000
+    }
+   },
+   "expected": {
+    "mawop_a_tubing_row_pa": {
+     "expected": 16226227.041788332,
+     "tol": 10,
+     "reproduced": 16226227.041788332
+    },
+    "mawop_a_shoe_row_pa": {
+     "expected": 16497910.032817762,
+     "tol": 10,
+     "reproduced": 16497910.032817762
+    },
+    "mawop_a_pa": {
+     "expected": 13513225.370183308,
+     "tol": 10,
+     "reproduced": 13513225.370183308
+    },
+    "mawop_a_governing_tvd_m": {
+     "expected": 1944.8770336087282,
+     "tol": 0.0005,
+     "reproduced": 1944.8770336087282
+    },
+    "maasp_b_pa": {
+     "expected": 15378302.866843894,
+     "tol": 10,
+     "reproduced": 15378302.866843894
+    },
+    "maasp_gasfilled_tubing_row_pa": {
+     "expected": -7098210.7407652065,
+     "tol": 10,
+     "reproduced": -7098210.7407652065
+    }
+   }
+  },
+  "advanced": {
+   "why": "Prompt only, no field moves. The P&A inputs (the five plug intervals, the three designed geometries, the zones and the annular cement interval) existed only in /root/dr-wip-integrity/dr11_fields.mjs; the prompt now publishes them, so each field is the taught closed form (capacities, spacer ratio, settle, margins, takeoff). The prompt also said field 6 sums every plug including the two without a designed placement, which was false: the engine sums designed placements only (plugAbandonment.js takeoff) and lists the other two by name. That sentence and the single \"35 percent excess\" (it is P1's; P3 and S1 carry their own) are corrected. Keys, expected values and tolerances are unchanged.",
+   "prompt_edits": [
+    [
+     "FIVE plugs are proposed across two flowing zones plus a surface phase, at 35 percent excess.",
+     "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it."
+    ],
+    [
+     "Field 6 sums every plug including the two the programme does not design a placement for, so it is not the sum of the designed slurries alone.",
+     "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
+    ]
+   ],
+   "inputs": {
+    "stingerOdM": 0.0889,
+    "stingerIdM": 0.076,
+    "plugs": [
+     {
+      "name": "P1 reservoir primary",
+      "topMdM": 2568.5,
+      "bottomMdM": 2740,
+      "foundation": "tagged",
+      "isSurfacePlug": false,
+      "bore": "in the 7 in liner",
+      "geometry": {
+       "holeIdM": 0.1594,
+       "excessPct": 35,
+       "spacerAheadM3": 1.6
+      }
+     },
+     {
+      "name": "P2 reservoir secondary",
+      "topMdM": 2020,
+      "bottomMdM": 2115.5,
+      "foundation": "none",
+      "isSurfacePlug": false,
+      "geometry": null
+     },
+     {
+      "name": "P3 gas stringer primary",
+      "topMdM": 1148,
+      "bottomMdM": 1292.5,
+      "foundation": "none",
+      "isSurfacePlug": false,
+      "bore": "in the 9-5/8 casing",
+      "geometry": {
+       "holeIdM": 0.2244,
+       "excessPct": 25,
+       "spacerAheadM3": 1.2
+      }
+     },
+     {
+      "name": "P4 gas stringer secondary",
+      "topMdM": 946,
+      "bottomMdM": 1062.5,
+      "foundation": "none",
+      "isSurfacePlug": false,
+      "geometry": null
+     },
+     {
+      "name": "S1 environmental plug",
+      "topMdM": 0,
+      "bottomMdM": 55,
+      "foundation": "none",
+      "isSurfacePlug": true,
+      "bore": "in the 13-3/8 casing",
+      "geometry": {
+       "holeIdM": 0.3151,
+       "excessPct": 50,
+       "spacerAheadM3": 0.8
+      }
+     }
+    ],
+    "zones": [
+     {
+      "name": "Kestrel reservoir sand",
+      "topMdM": 2611,
+      "bottomMdM": 2742
+     },
+     {
+      "name": "Shallow gas stringer",
+      "topMdM": 1240,
+      "bottomMdM": 1272
+     }
+    ],
+    "annularCement": {
+     "topMdM": 2455,
+     "bottomMdM": 2528.5,
+     "logged": false
+    }
+   },
+   "expected": {
+    "plug_slurry_m3": {
+     "expected": 4.620238645056858,
+     "tol": 5e-7,
+     "reproduced": 4.620238645056858
+    },
+    "plug_spacer_behind_m3": {
+     "expected": 0.5279360645295814,
+     "tol": 5e-8,
+     "reproduced": 0.5279360645295814
+    },
+    "plug_top_settle_m": {
+     "expected": 21.154551869215993,
+     "tol": 0.000005,
+     "reproduced": 21.154551869215993
+    },
+    "above_source_margin_m": {
+     "expected": -7.5,
+     "tol": 0.000005,
+     "reproduced": -7.5
+    },
+    "annular_cement_margin_m": {
+     "expected": -26.5,
+     "tol": 0.000005,
+     "reproduced": -26.5
+    },
+    "program_slurry_takeoff_m3": {
+     "expected": 18.197179289478704,
+     "tol": 5e-7,
+     "reproduced": 18.197179289478704
+    }
+   }
+  }
+ }
+}

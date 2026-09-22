@@ -1,0 +1,26 @@
+{
+ "course": "fiscal",
+ "suite": "Suite PR #565 (Fiscal Regime Designer Full precision switch and total tax per regime, stacked on #554)",
+ "tiers": {
+  "intermediate": {
+   "append": "Read the figures in the Fiscal Regime Designer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping. Its Summary tab then shows the total tax for each regime.",
+   "why": "The Designer printed no total tax per regime.",
+   "keys": [
+    "psc_total_tax_musd"
+   ],
+   "annot_updates": {
+    "psc_total_tax_musd": {
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/fiscaldesigner/ResultsPanel.jsx Summary tab, Total tax ($MM) column (shown only with Full precision on)",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 4 decimals (jest: fiscal Full precision test (Suite PR #565), the engine result through formatFull).",
+     "display_scale": 1,
+     "source": "suite-app",
+     "source_ref": "src/components/fiscaldesigner/ResultsPanel.jsx Summary tab, Total tax ($MM) column (shown only with Full precision on)"
+    }
+   }
+  }
+ }
+}

@@ -1,0 +1,50 @@
+{
+ "course": "gasprocessing",
+ "suite": "Suite PR #557 (Gas Processing Studio Full precision switch, stacked on #554)",
+ "tiers": {
+  "advanced": {
+   "append": "Read the figures in the Gas Processing Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+   "why": "The Dew point tab rounds the chain to 1 decimal against tolerances of 5e-7 to 1e-4.",
+   "keys": [
+    "muFPerPsi",
+    "dropF",
+    "t2F",
+    "waterOutLbMMscf"
+   ],
+   "annot_updates": {
+    "muFPerPsi": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/gasprocessing/SweeteningDewPanels.jsx:132 JT coefficient at the inlet, F/100 psi at 6 dp (8 dp in F/psi) with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, the Joule-Thomson screening card prints the coefficient in F/100 psi at 6 decimals, 8 in F/psi (jest: dewpointFullPrecision.test.jsx)."
+    },
+    "dropF": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/gasprocessing/SweeteningDewPanels.jsx:152 Cooling across the drop at 6 dp with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: dewpointFullPrecision.test.jsx)."
+    },
+    "t2F": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/gasprocessing/SweeteningDewPanels.jsx:154 Downstream temperature at 6 dp with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: dewpointFullPrecision.test.jsx)."
+    },
+    "waterOutLbMMscf": {
+     "printed": {
+      "decimals": 6
+     },
+     "display_ref": "src/components/gasprocessing/SweeteningDewPanels.jsx:157 Water the cold gas can hold at 6 dp with Full precision on",
+     "class": "none",
+     "evidence": "With Full precision on, prints at 6 decimals (jest: dewpointFullPrecision.test.jsx)."
+    }
+   }
+  }
+ }
+}

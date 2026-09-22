@@ -26,7 +26,12 @@
    "evidence": "Methods table prints fmt(x.tvd, 4) = 1,653.9867 against expected 1653.986686; tol 0.002 is 40x half a unit in the 4th decimal. The panel also prints the published 1653.99, which fails (lesson warns).",
    "notes": "One click from default (View select). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+   }
   },
   {
    "tier": "beginner",
@@ -48,7 +53,12 @@
    "evidence": "TVD error column is computed against the PUBLISHED 1653.99 (welldesignLab.js:97), exactly the prompt's definition; prints -25.3812 vs expected -25.381206, tol 0.005.",
    "notes": "One click from default. Also hand-computable (sum d cos(inc_lower)) but the panel does not list the 21 ADE stations, so the panel is the practical source.",
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+   }
   },
   {
    "tier": "beginner",
@@ -69,8 +79,13 @@
    "recommendation": null,
    "evidence": "Tile 'TVD at TD' fmt(s.tvd, 4) = 3,686.9805; tol 0.005.",
    "notes": "LEAK: the panel opens on the listing view of the feet well, so this graded value shows in the default state (probe state ''). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+   }
   },
   {
    "tier": "beginner",
@@ -91,8 +106,13 @@
    "recommendation": null,
    "evidence": "Tile 'Vertical section' fmt(s.vs, 4) with unit 'on 75.0 deg' (the fixture's own azimuth, welldesignLab.js:50); prints 1,255.8726; tol 0.005.",
    "notes": "LEAK: shown in the default state (feet well listing). The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+   }
   },
   {
    "tier": "beginner",
@@ -114,7 +134,12 @@
    "evidence": "Tile 'North' fmt(s.n, 4) = -1,320.5052 on the metric well (vs azimuth from fixture, 200 deg); tol 0.005.",
    "notes": "One click from default. The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+   }
   },
   {
    "tier": "beginner",
@@ -136,29 +161,43 @@
    "evidence": "Tile 'End TVD' fmt(bh.end.tvd, 4) = 1,481.1257 for the first published build-and-hold case; tol 0.005.",
    "notes": "One click from default. The fmt helper uses toLocaleString('en-US'), so values of 1000 or more print with a thousands comma (e.g. '1,653.9867'); pasting that into the capstone's type=number input fails, the learner must retype without the comma.",
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the survey listing opened on the feet golden well (TVD and vertical section graded); it now opens on the 131-station teaching well"
+   }
   },
   {
    "tier": "intermediate",
    "key": "well1_cov_nn",
-   "source": "unobtainable",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/welldesign/UncertaintyExplorer.jsx:44-57 (tiles) and :86-96 (per-source table); /root/wt-b5-nextgen/src/components/course/panels/welldesign/welldesignLab.js:371 (graded value u.cov[0][0])",
-   "printed": null,
+   "source": "nextgen-panel",
+   "source_ref": "src/components/course/panels/welldesign/UncertaintyExplorer.jsx station selector, total depth (index 267)",
+   "printed": {
+    "decimals": 4
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/course/panels/welldesign/UncertaintyExplorer.jsx Tile 'North-north variance' fmt(u.cov[0][0], 4)",
    "prompt_precision": null,
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/welldesign/UncertaintyExplorer.jsx:56 -> add <Tile label=\"North-north variance\" value={fmt(u.cov[0][0], 4)} unit=\"m2 (total covariance)\" /> after the 95 percent semi-major tile"
-   },
+   "class": "none",
+   "fix": null,
    "owner_decision": false,
    "recommendation": null,
-   "evidence": "No panel prints the total covariance or its north-north entry: the tiles give H/L/A sigmas and the 1-sigma ellipse, the table gives per-source TRACE (fmt(c.trace, 4)), and uncertaintyAt returns cov but nothing renders it. Rebuilding NN from the printed ellipse (a^2 cos^2 az + b^2 sin^2 az with a 95.6509, b 10.5538, az 165.0521 at 4 dp) carries rounding error up to about 0.013 m2 against tol 0.005, and that reconstruction is not taught.",
-   "notes": "The walkthrough (intermediate m06 l02) says fields 1-3 'come straight out of the model', which a learner does not have outside the panel.",
+   "evidence": "Selecting the total depth station in the uncertainty explorer prints the north-north entry of the total covariance to 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on station 180, which prints no Professional answer.",
+   "notes": "W4a added the tile and moved the opening station from 267 to 180. Key, expected and tolerance unchanged.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w4a",
+    "route": "typed-case panel print (W4a)"
+   },
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the uncertainty explorer opened on station 267, the capstone station, and printed every Professional answer; W4a moved its default to station 180 in the tangent, which no capstone grades from"
+   }
   },
   {
    "tier": "intermediate",
@@ -179,8 +218,13 @@
    "recommendation": null,
    "evidence": "Tile 'Lateral sigma' fmt(u.sigmaL, 4) = 95.6508; tol 0.005. The adjacent 'Ellipse semi-major' 95.6509 at 1 sigma would also pass.",
    "notes": "LEAK: the panel opens on station 267, the capstone station, so this shows in the default state.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the uncertainty explorer opened on station 267, the capstone station, and printed every Professional answer; W4a moved its default to station 180 in the tangent, which no capstone grades from"
+   }
   },
   {
    "tier": "intermediate",
@@ -201,8 +245,13 @@
    "recommendation": null,
    "evidence": "Tile 'Highside sigma' fmt(u.sigmaH, 4) = 21.6362; tol 0.005.",
    "notes": "LEAK: default state (station 267).",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the uncertainty explorer opened on station 267, the capstone station, and printed every Professional answer; W4a moved its default to station 180 in the tangent, which no capstone grades from"
+   }
   },
   {
    "tier": "intermediate",
@@ -223,8 +272,13 @@
    "recommendation": null,
    "evidence": "Tile 'Semi-major at 95 percent' fmt(u.ellipse95.semiMajor, 4), unit 'm, k 2.7955'; prints 267.392 (trailing zero trimmed) vs 267.391988; tol 0.005.",
    "notes": "LEAK: default state (station 267).",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the uncertainty explorer opened on station 267, the capstone station, and printed every Professional answer; W4a moved its default to station 180 in the tangent, which no capstone grades from"
+   }
   },
   {
    "tier": "intermediate",
@@ -245,8 +299,13 @@
    "recommendation": null,
    "evidence": "Tile 'Ellipse azimuth' fmt(u.ellipse1.azimuthDeg, 4) = 165.0521; tol 0.005.",
    "notes": "LEAK: default state (station 267).",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the uncertainty explorer opened on station 267, the capstone station, and printed every Professional answer; W4a moved its default to station 180 in the tangent, which no capstone grades from"
+   }
   },
   {
    "tier": "intermediate",
@@ -267,8 +326,13 @@
    "recommendation": null,
    "evidence": "Table 'Share' fmt(100 * c.shareOfTrace, 3) percent = 58.295 vs 58.294649 (diff 0.00035); tol 0.005 is 10x half a unit in the 3rd decimal.",
    "notes": "LEAK: default state (station 267).",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the uncertainty explorer opened on station 267, the capstone station, and printed every Professional answer; W4a moved its default to station 180 in the tangent, which no capstone grades from"
+   }
   },
   {
    "tier": "advanced",
@@ -290,7 +354,12 @@
    "evidence": "Tile 'Minimum separation factor' fmt(c.minSf, 6) = 1.400242; tol 0.0005. Published minimum shown beside it (line 52) also passes.",
    "notes": "One click from default.",
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+   }
   },
   {
    "tier": "advanced",
@@ -312,7 +381,12 @@
    "evidence": "Prints 0.009795 vs 0.0097947 (diff 3e-7); tol 5e-5.",
    "notes": "One click from default.",
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+   }
   },
   {
    "tier": "advanced",
@@ -333,8 +407,13 @@
    "recommendation": null,
    "evidence": "Prints -0.606857; tol 0.0005; kickoff depth is applied from the fixture (welldesignLab.js:285).",
    "notes": "LEAK: the ladder view opens on offset 10, so this graded value shows in the default state.",
-   "leak": true,
-   "shipped": null
+   "leak": false,
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+   }
   },
   {
    "tier": "advanced",
@@ -356,7 +435,12 @@
    "evidence": "Sensitivity table prints fmt(r.minSf, 6) = -0.4248 (value -0.4248 exactly, trailing zeros trimmed); tol 0.0005.",
    "notes": "One click from default; the sensitivity view defaults to offset 10 (line 81).",
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+   }
   },
   {
    "tier": "advanced",
@@ -378,7 +462,12 @@
    "evidence": "Note line prints fmt(check.maxDeclinationError, 8) = 0.00461482 vs 0.004614824; tol 5e-6. The per-point table (line 170) also prints dError to 6 dp.",
    "notes": "One click from default.",
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+   }
   },
   {
    "tier": "advanced",
@@ -400,7 +489,12 @@
    "evidence": "Entering 80 / 0 gives Tile 'Declination' fmt(f.declinationDeg, 5) = 1.28148 at the default decimalYear 2025, heightKm 0 (welldesignLab.js:319); the NOAA table's first row prints the same 5 dp. Diff 2e-6, tol 5e-5.",
    "notes": "One click from default; no leak in the default state (lat 60, lon 2).",
    "leak": false,
-   "shipped": null
+   "shipped": null,
+   "stripped": {
+    "migration": "20261028d_w5_welldesign.sql",
+    "wave": "w5d",
+    "why": "the clearance ladder opened on offset 10 (its minimum separation factor graded) and the page intro printed that factor to three decimals; the ladder now opens on offset 05 and the intro prints two decimals"
+   }
   }
  ]
 }

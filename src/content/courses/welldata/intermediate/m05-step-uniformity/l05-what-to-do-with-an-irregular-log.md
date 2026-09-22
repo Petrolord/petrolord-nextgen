@@ -1,6 +1,6 @@
 # What to do with an irregular log
 
-The test has returned nothing. The step field comes back null and the capstone field for this file is the integer 0. That is a finding, not a verdict on the well, and what you do in the next ten minutes decides whether the finding survives to the people who need it. This lesson is about the response, and it is deliberately qualitative. There is no arithmetic here to memorise.
+The test has returned nothing. The step field comes back null and the uniformity verdict for this file is the integer 0. That is a finding, not a verdict on the well, and what you do in the next ten minutes decides whether the finding survives to the people who need it. This lesson is about the response, and it is deliberately qualitative. There is no arithmetic here to memorise.
 
 ## Do not silently resample
 

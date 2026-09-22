@@ -16,11 +16,13 @@ const fmt = (v, d = 3) => (Number.isFinite(v)
   : '-');
 const MPa = (v) => fmt(v / 1e6, 3);
 const kN = (v) => fmt(v / 1e3, 1);
+// Ratings in whole pascals, the precision the course grades them at.
+const Pa = (v) => (Number.isFinite(v) ? Math.round(v).toLocaleString('en-US') : '-');
 
 const ROW_OPTIONS = ROWS.map((r) => ({ value: `${r.odIn}|${r.weightLbFt}`, label: `${r.designation} (${r.kind})` }));
 const GRADE_OPTIONS = CASING_GRADES.map((g) => ({ value: g.name, label: g.name }));
 const CONN_OPTIONS = CONNECTION_EFFICIENCIES.map((c) => ({ value: c.name, label: `${c.name} (${c.efficiency})` }));
-const FRACTIONS = ['0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.6', '0.7', '0.8'].map((v) => ({ value: v, label: v }));
+const FRACTIONS = ['0', '0.1', '0.2', '0.3', '0.4', '0.5', '0.55', '0.6', '0.7', '0.8'].map((v) => ({ value: v, label: v }));
 const MODES = [
   { value: 'one', label: 'One pipe' },
   { value: 'grades', label: 'Across the grades' },
@@ -57,14 +59,14 @@ const One = () => {
         <SelectField label="Axial, as a fraction of yield" value={frac} onChange={setFrac} options={FRACTIONS} />
       </div>
       <TileGrid>
-        <Tile label="D over t" value={fmt(r.dt, 4)} />
+        <Tile label="D over t" value={fmt(r.dt, 10)} />
         <Tile label="Wall" value={fmt(r.wallM * 1000, 3)} unit="mm" />
-        <Tile label="Burst" value={MPa(r.burstPa)} unit="MPa" />
+        <Tile label="Burst" value={Pa(r.burstPa)} unit="Pa" />
         <Tile label="Body yield" value={kN(r.bodyYieldN)} unit="kN" />
         <Tile label="Joint strength" value={kN(r.jointStrengthN)} unit="kN" />
-        <Tile label="Collapse" value={MPa(r.collapsePa)} unit="MPa" />
+        <Tile label="Collapse" value={Pa(r.collapsePa)} unit="Pa" />
         <Tile label="Regime" value={r.regime} />
-        <Tile label="Collapse under tension" value={MPa(r.collapseDeratedPa)} unit="MPa" />
+        <Tile label="Collapse under tension" value={Pa(r.collapseDeratedPa)} unit="Pa" />
         <Tile label="Regime under tension" value={r.regimeDerated} />
         <Tile label="Derated by" value={fmt(100 * r.deratedFraction, 3)} unit="pct" />
         <Tile label="Adjusted yield" value={MPa(r.adjustedYieldPa)} unit="MPa" />
@@ -89,8 +91,8 @@ const One = () => {
       </div>
       <div className="mt-3 text-xs text-slate-300">
         The three D over t boundaries at this grade are
-        {' '}{fmt(r.boundaries.dtYp, 4)}, {fmt(r.boundaries.dtPt, 4)} and {fmt(r.boundaries.dtTe, 4)},
-        and this pipe sits at {fmt(r.dt, 4)}, which is why it collapses in the
+        {' '}{fmt(r.boundaries.dtYp, 10)}, {fmt(r.boundaries.dtPt, 10)} and {fmt(r.boundaries.dtTe, 10)},
+        and this pipe sits at {fmt(r.dt, 10)}, which is why it collapses in the
         {' '}<span className="text-[#BFFF00]">{r.regime}</span> regime. Those three numbers belong to the
         GRADE and not to the pipe: change the grade and they all move, change the weight and they do not.
       </div>

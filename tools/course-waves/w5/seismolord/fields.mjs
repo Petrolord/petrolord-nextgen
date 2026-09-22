@@ -1,0 +1,62 @@
+// W5a RE-CASE (beginner) and STRIP (intermediate, advanced), seismolord.
+//
+// Beginner (pick A): the whole basic_20 log at 2000 m/s and 25 Hz is the
+// teaching case. The capstone is the UBIMA case below: a depth window of the
+// log, an overburden velocity and a wavelet of its own, stated in the brief
+// and typed into the synthetic explorer. Its keys are whatever the vendored
+// synthetics engine returns through the same teaching function the panel
+// calls:
+//
+//   npx vite-node -c vitest.config.js tools/course-waves/w5/seismolord/fields.mjs --write
+//
+// Intermediate and advanced (pick B) keep their keys; this file pins them
+// too, from the engine, so the guard can prove the stripped lessons and the
+// moved panel defaults no longer print them.
+//
+// src/components/course/panels/seismolord/panelCapstoneGuard.test.jsx
+// recomputes everything in CI and fails if fields.json drifts. No panel,
+// lesson or learning page may import this file.
+import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { computeSynthetic, computeIntermediate, computeWedge } from '@/lib/seismolordTeaching';
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+
+export const BEGINNER = { vOverburden: 2400, topMd: 1560, baseMd: 1640, freqHz: 30 };
+
+/** The beginner fields (re-keyed) and the intermediate and advanced fields (kept), from the engine. */
+export function capstoneFields() {
+  const b = computeSynthetic(BEGINNER.freqHz, BEGINNER).summary;
+  const i = computeIntermediate();
+  const w25 = computeWedge(25);
+  const w40 = computeWedge(40);
+  const f = (tier, key, label, unit, expected, tol) => ({ tier, key, label, unit, expected, tol });
+  return [
+    f('beginner', 'ubima_mean_velocity_ms', 'Mean sonic velocity in the window', 'm/s', b.meanVelocity, 0.05),
+    f('beginner', 'ubima_twt_at_window_top_ms', 'TWT at the top of the window', 'ms', b.twtLogTop, 0.05),
+    f('beginner', 'ubima_imp_max', 'Maximum impedance in the window', '(m/s)·(g/cc)', b.impMax, 0.05),
+    f('beginner', 'ubima_rc_peak_abs', 'Strongest reflection coefficient (abs)', '-', b.rcPeakAbs, 0.00005),
+    f('beginner', 'ubima_rc_peak_twt_ms', 'TWT of the strongest reflection', 'ms', b.rcPeakTwt, 0.5),
+    f('beginner', 'ubima_syn_peak_twt_ms', 'TWT of the strongest synthetic amplitude (30 Hz)', 'ms', b.synPeakTwt, 0.5),
+    f('intermediate', 'bulk_shift_ms', 'Suggested bulk shift', 'ms', i.bulkShiftMs, 0.5),
+    f('intermediate', 'corr_zero_lag', 'Correlation at zero lag, before any shift', '-', i.corrZeroLag, 0.0005),
+    f('intermediate', 'peak15_abs', 'Strongest synthetic amplitude at 15 Hz', '-', i.peak15.abs, 0.002),
+    f('intermediate', 'peak40_abs', 'Strongest synthetic amplitude at 40 Hz', '-', i.peak40.abs, 0.001),
+    f('intermediate', 'peak15_twt', 'TWT of the 15 Hz peak', 'ms', i.peak15.twt, 2),
+    f('intermediate', 'peak40_twt', 'TWT of the 40 Hz peak', 'ms', i.peak40.twt, 2),
+    f('advanced', 'tune25_ms', 'Tuning thickness at 25 Hz', 'ms', w25.tuneMs, 0),
+    f('advanced', 'tune25_amp', 'Peak amplitude at 25 Hz tuning', '-', w25.tuneAmp, 0.002),
+    f('advanced', 'tune40_ms', 'Tuning thickness at 40 Hz', 'ms', w40.tuneMs, 0),
+    f('advanced', 'amp40_at_6ms', 'Amplitude of a 6 ms bed at 40 Hz', '-', w40.amplitudes[3], 0.0005),
+    f('advanced', 'tune25_iso_ratio', 'Tuning amplitude over the isolated level at 25 Hz', '-', w25.tuneAmp / w25.isoAmp, 0.001),
+    f('advanced', 'theory25_ms', 'Theoretical tuning thickness at 25 Hz', 'ms', w25.theoryMs, 0.05),
+  ];
+}
+
+export const FIELDS_PATH = path.join(HERE, 'fields.json');
+
+if (process.argv.includes('--write')) {
+  fs.writeFileSync(FIELDS_PATH, `${JSON.stringify(capstoneFields(), null, 1)}\n`);
+  console.log(`wrote ${FIELDS_PATH}`);
+}

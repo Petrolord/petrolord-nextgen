@@ -1,0 +1,156 @@
+[
+ {
+  "tier": "beginner",
+  "key": "col_top_c_ft",
+  "label": "Top of the third stated column",
+  "unit": "ft",
+  "tol": 0.05,
+  "expected": 5138.443568664314
+ },
+ {
+  "tier": "beginner",
+  "key": "ekene2_top_ft",
+  "label": "Top of the Ekene-2 column",
+  "unit": "ft",
+  "tol": 0.05,
+  "expected": 5131.9078703170535
+ },
+ {
+  "tier": "beginner",
+  "key": "equil_datum_ft",
+  "label": "EQUIL datum depth",
+  "unit": "ft",
+  "tol": 0.05,
+  "expected": 5123.841733185081
+ },
+ {
+  "tier": "beginner",
+  "key": "col_top_a_ft",
+  "label": "Top of the first stated column",
+  "unit": "ft",
+  "tol": 0.05,
+  "expected": 5141.314073228021
+ },
+ {
+  "tier": "beginner",
+  "key": "col_top_b_ft",
+  "label": "Top of the second stated column",
+  "unit": "ft",
+  "tol": 0.05,
+  "expected": 5122.558807654924
+ },
+ {
+  "tier": "beginner",
+  "key": "columns_above_owc",
+  "label": "Columns with their top above the contact",
+  "unit": "count",
+  "tol": 0,
+  "expected": 341,
+  "context": "column",
+  "context_word": "columns"
+ },
+ {
+  "tier": "intermediate",
+  "key": "deck_stoiip_stb",
+  "label": "Deck STOIIP, cell-centre rule",
+  "unit": "stb",
+  "tol": 5000,
+  "expected": 14102551.091138717
+ },
+ {
+  "tier": "intermediate",
+  "key": "stoiip_vs_booking_pct",
+  "label": "Gap against the NG5 booking",
+  "unit": "percent",
+  "tol": 0.005,
+  "expected": 16.17356722329737
+ },
+ {
+  "tier": "intermediate",
+  "key": "oil_cells_centre_rule",
+  "label": "Oil cells under the cell-centre rule",
+  "unit": "cells",
+  "tol": 0,
+  "expected": 286,
+  "context": "cell",
+  "context_word": "oil cells"
+ },
+ {
+  "tier": "intermediate",
+  "key": "ekene2_deck_top_m",
+  "label": "Deck top depth at Ekene-2",
+  "unit": "m",
+  "tol": 0.005,
+  "expected": 1564.4198361764543
+ },
+ {
+  "tier": "intermediate",
+  "key": "correlated_bo_at_pi",
+  "label": "Correlated Bo at initial pressure",
+  "unit": "rb/stb",
+  "tol": 0.0005,
+  "expected": 1.3084084939279073
+ },
+ {
+  "tier": "intermediate",
+  "key": "correlated_rs_gap_pct",
+  "label": "Correlated Rs above the designed 400",
+  "unit": "percent",
+  "tol": 0.02,
+  "expected": 19.694177483394792
+ },
+ {
+  "tier": "advanced",
+  "key": "deviated_connection_count",
+  "label": "Side-track merged connections",
+  "unit": "count",
+  "tol": 0,
+  "expected": 17,
+  "context": "connection",
+  "context_word": "connections"
+ },
+ {
+  "tier": "advanced",
+  "key": "deviated_distinct_columns",
+  "label": "Side-track distinct columns",
+  "unit": "count",
+  "tol": 0,
+  "expected": 9,
+  "context": "column",
+  "context_word": "distinct columns"
+ },
+ {
+  "tier": "advanced",
+  "key": "calibration_regional_mean_m",
+  "label": "Calibrated kriging regional mean",
+  "unit": "m TVD",
+  "tol": 0.005,
+  "expected": 1571.9123467151076
+ },
+ {
+  "tier": "advanced",
+  "key": "history_oil_stb",
+  "label": "History oil total, 2024 periods, round trip",
+  "unit": "stb",
+  "tol": 50,
+  "expected": 65203.29641281776
+ },
+ {
+  "tier": "advanced",
+  "key": "validator_error_messages",
+  "label": "Validator error messages across the seven cases",
+  "unit": "count",
+  "tol": 0,
+  "expected": 8,
+  "context": "message|error",
+  "context_word": "error messages"
+ },
+ {
+  "tier": "advanced",
+  "key": "equil_datum_depth_ft",
+  "label": "Equilibration datum depth",
+  "unit": "ft",
+  "tol": 0.05,
+  "expected": 5133.247882750887
+ }
+]

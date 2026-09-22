@@ -5,8 +5,9 @@ import {
 } from 'recharts';
 import {
   RULE_OF_THUMB_PSI_PER_FT, REFINEMENT_STEPS, CLOSED_FORM_STEPS, PUBLISHED_DESIGN_IDS,
-  columnExplorer, refinementTargets,
+  columnExplorer, refinementTargets, typedGasColumn, TYPED_COLUMN_DEFAULT,
 } from './gasLiftLab';
+import { plain, typedState, GEOTHERM_FIELDS, TypedFieldList, Refusal } from './TypedDesignFields';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Column explorer, the Associate tier. The layer every depth and every dome
@@ -37,6 +38,7 @@ const MODES = [
   ['gradient', 'The local gradient, and the same column with its temperature held'],
   ['convergence', 'Three references against one march'],
   ['lines', 'Three straight lines, and where the first two meet'],
+  ['typed', 'Your well, typed'],
 ];
 
 const AXIS = { fill: '#94a3b8', fontSize: 11 };
@@ -521,8 +523,67 @@ const Lines = () => {
   );
 };
 
-const ColumnExplorer = () => {
-  const [mode, setMode] = useState('column');
+const COLUMN_FIELDS = [
+  ['pKickoffPsia', 'Kickoff pressure at surface, psia'],
+  ['steps', 'Column step count'],
+  ['killGradPsiPerFt', 'Kill fluid gradient, psi/ft'],
+  ['pWhUnloadPsia', 'Unloading wellhead pressure, psia'],
+  ['packerTargetPsia', 'Target pressure at the packer, psia'],
+  ['curveSteps', 'Injection curve sample count'],
+  ['readDepthFt', 'Read the curve at, ft TVD'],
+];
+
+const Typed = () => {
+  const [values, setValues] = useState(() => typedState(TYPED_COLUMN_DEFAULT));
+  const set = (k, v) => setValues((o) => ({ ...o, [k]: v }));
+  const r = useMemo(() => {
+    try { return typedGasColumn(values); } catch { return null; }
+  }, [values]);
+  return (
+    <>
+      <div className="text-xs text-slate-300">
+        Type a well and weigh its injection gas. The view opens on the AKASO-3 teaching well, and
+        every input can be retyped. The temperature runs in a straight line from the wellhead to the
+        reference depth, which need not be the packer. The column is marched on the step count you
+        type, and the injection curve is cut on its own sample count and read by straight line
+        between its samples.
+      </div>
+      <div className="mt-3">
+        <TypedFieldList fields={GEOTHERM_FIELDS} values={values} set={set} />
+      </div>
+      <div className="mt-3">
+        <TypedFieldList fields={COLUMN_FIELDS} values={values} set={set} />
+      </div>
+      {(!r || !r.ok) ? <Refusal result={r} /> : (
+        <>
+          <div className="mt-3">
+            <TileGrid>
+              <Tile label="z at the kickoff pressure and wellhead temperature" value={plain(r.zKickoff, 8)} />
+              <Tile label="Static gas gradient there" value={plain(r.gradKickoffPsiPerFt, 10)} unit="psi/ft" />
+              <Tile label="Temperature at the packer" value={plain(r.tempAtPackerF, 4)} unit="degF" />
+              <Tile label="Injection pressure at the packer" value={plain(r.colAtPackerPsia, 6)} unit="psia" />
+              <Tile label="Surface pressure for the target at the packer" value={plain(r.surfForTargetPsia, 6)} unit="psia" />
+              <Tile label="Top valve depth" value={plain(r.topValveFt, 6)} unit="ft TVD" />
+              <Tile label="Kill line at the top valve" value={plain(r.killLineAtTopValvePsia, 6)} unit="psia" />
+              <Tile label="Curve sample spacing" value={plain(r.curveSpacingFt, 6)} unit="ft" />
+              <Tile label="Injection curve read at the read depth" value={plain(r.curveAtReadPsia, 6)} unit="psia" />
+            </TileGrid>
+          </div>
+          {r.warnings.length > 0 && <Note>{r.warnings.join(' ')}</Note>}
+          <Note>
+            The packer pressure and the surface pressure for the target are one march run in two
+            directions on the same step count. The top valve is where the injection column first
+            balances a full column of kill fluid above the unloading wellhead pressure, marched on
+            the engine&apos;s own fixed step count.
+          </Note>
+        </>
+      )}
+    </>
+  );
+};
+
+const ColumnExplorer = ({ initialMode = 'column' }) => {
+  const [mode, setMode] = useState(initialMode);
   return (
     <PanelShell
       title="Column explorer"
@@ -536,6 +597,7 @@ const ColumnExplorer = () => {
         {mode === 'gradient' && <Gradient />}
         {mode === 'convergence' && <Convergence />}
         {mode === 'lines' && <Lines />}
+        {mode === 'typed' && <Typed />}
       </div>
     </PanelShell>
   );

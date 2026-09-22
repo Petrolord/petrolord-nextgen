@@ -1,6 +1,6 @@
 # The basin panel map
 
-This tier's panel runs the full forward model, live, twice: once with the erosion amount you choose and once with no event, so that every view is a comparison. It is the same engine the capstone grades, on the same fixture. This lesson is the tour.
+This tier's panel runs the full forward model, live, twice: once with the erosion amount you choose and once with no event, so that every view is a comparison. It is the same engine the capstone grades, opening on the golden fixture. This lesson is the tour.
 
 {{panel:bs-charge-explorer}}
 
@@ -14,7 +14,7 @@ The first chart is the source layer's burial history: depth of its top and botto
 
 ## The temperature and maturity tracks
 
-The second chart carries two curves against age: the source's centre temperature, and its reflectance, with the no-erosion run's reflectance drawn faintly behind. Watch three episodes. The temperature spike at 80 Ma when the overburden lands, then the slow transient catch-up. The hot decade, 20 to 10 Ma, where temperature peaks at 168.51433459340572 degC. And the endgame: temperature falls back to 149.76037539670858, while the reflectance, a ratchet, holds everything it earned; the gap between the solid and faint Ro curves at age zero is the erosion signature itself, visible as a picture before module 3 makes it a graded number.
+The second chart carries two curves against age: the source's centre temperature, and its reflectance, with the no-erosion run's reflectance drawn faintly behind. Watch three episodes. The temperature spike at 80 Ma when the overburden lands, then the slow transient catch-up. The hot decade, 20 to 10 Ma, where temperature peaks at 168.51433459340572 degC. And the endgame: temperature falls back to 149.76037539670858, while the reflectance, a ratchet, holds everything it earned; the gap between the solid and faint Ro curves at age zero is the erosion signature itself, visible as a picture before module 3 makes it a reported number.
 
 ## The mass chart and the cap
 
@@ -22,10 +22,10 @@ The third chart is generation and expulsion, cumulative kilograms per square met
 
 ## The tiles
 
-The tiles are the graded surface and its supports: final Ro, final temperature, final TR, generated, expelled, and the erosion signature against the no-erosion baseline, plus the closed-form potential 18786.405883452077 kg/m2 as the QC anchor. At the 600 m setting the six graded values read exactly as the capstone expects; at any other setting the signature tile shows what module 3's sensitivity lesson will have you predict before looking.
+The tiles are the reported surface and its supports: final Ro, final temperature, final TR, generated, expelled, and the erosion signature against the no-erosion baseline, plus the closed-form potential 18786.405883452077 kg/m2 as the QC anchor. At the 600 m setting the six golden values read exactly as this tier quotes them; at any other setting the signature tile shows what module 3's sensitivity lesson will have you predict before looking.
 
 ## Exercise
 
-Set the erosion amount to 0 and note which tiles move and which stay. Then answer in one sentence each: why does the burial track move in steps rather than ramps, and what single visual feature of the temperature-maturity chart encodes the capstone's sixth graded field?
+Set the erosion amount to 0 and note which tiles move and which stay. Then answer in one sentence each: why does the burial track move in steps rather than ramps, and what single visual feature of the temperature-maturity chart encodes the sixth reported value, the erosion signature?
 
 As a self check: at 0 m the signature tile goes to zero, final Ro falls to 1.6151780693528823, expelled falls to 8790.335784168848, while the potential tile and the final temperature barely move, the latter because the thermometer forgets. The burial track steps because the model deposits each layer instantaneously at its start age. The sixth field is the terminal gap between the solid reflectance curve and the faint no-erosion one: the erosion signature, 0.05665081052235643 at the reference setting.

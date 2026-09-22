@@ -4,6 +4,8 @@ Six numbers at one depth, on a hole attitude the lessons never ran.
 
 {{panel:gm-stability-explorer}}
 
+**Your case.** The explorer's "At one depth" view has a box for every parameter of the set and one for the UCS. Type the Associate capstone's parameters and your Horsrud UCS, choose 2000 m, and set the inclination and azimuth the brief states. The boxes open blank, which is the published parameter set and the profile's own UCS.
+
 ## What is asked
 
 At 2000 m of true vertical depth, on the capstone's own parameter set:

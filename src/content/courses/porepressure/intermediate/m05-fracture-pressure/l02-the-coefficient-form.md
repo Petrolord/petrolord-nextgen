@@ -8,7 +8,7 @@ $$FP = K\,(S - PP) + PP$$
 
 The effective stress $S - PP$ is the load the grain framework carries vertically. An elastic rock confined sideways converts a fraction of any vertical effective load into horizontal effective stress; $K$ is that fraction. The minimum pressure that can hold open a vertical crack must overcome the horizontal effective confinement, $K(S - PP)$, plus the pore fluid already pushing back, $PP$. Add them: the coefficient form.
 
-For $K$ the capstone uses the elastic plane-strain value
+For $K$ the course uses the elastic plane-strain value
 
 $$K = \frac{\nu}{1 - \nu}$$
 
@@ -38,7 +38,7 @@ so $\partial (FP - PP) / \partial PP = -K$: every megapascal of overpressure NAR
 
 ## The numbers, assembled once more
 
-At TD on the capstone settings: $FP = \tfrac{2}{3} \times 91.12306695073282 + \tfrac{1}{3} \times 47.408579625 = 60.74871130048855 + 15.802859875 = 76.55157117548855$ MPa, agreeing with the subtractive route in all but the sixteenth digit. Weights two thirds and one third, and both partial products are worth writing once, because the mixture reading makes mental arithmetic possible: the fracture pressure moves a third of any floor move, two thirds of any ceiling move, forever.
+At TD on the teaching settings: $FP = \tfrac{2}{3} \times 91.12306695073282 + \tfrac{1}{3} \times 47.408579625 = 60.74871130048855 + 15.802859875 = 76.55157117548855$ MPa, agreeing with the subtractive route in all but the sixteenth digit. Weights two thirds and one third, and both partial products are worth writing once, because the mixture reading makes mental arithmetic possible: the fracture pressure moves a third of any floor move, two thirds of any ceiling move, forever.
 
 ## What K is, and is not
 
@@ -46,7 +46,7 @@ Everything above treated $K$ as an elastic constant, and the derivation from $\n
 
 ## Worked example
 
-A leak-off test at a shoe at 3000 m measures fracture initiation at 55.0 MPa. Back-calculate the implied $K$ on the capstone prognosis. At 3000 m, $S = 66.83114254343904$ and $PP = 33.307730125$ MPa. $K = (FP - PP)/(S - PP) = (55.0 - 33.307730125) / (66.83114254343904 - 33.307730125) = 21.692269875 / 33.523412418439044 = 0.6471$. Slightly below the elastic 2/3; the calibrated value would then be carried downward in place of 0.6667, lowering the TD fracture estimate to $0.6471 \times 43.714487325732826 + 47.408579625 = 75.695$ MPa.
+A leak-off test at a shoe at 3000 m measures fracture initiation at 55.0 MPa. Back-calculate the implied $K$ on the teaching prognosis. At 3000 m, $S = 66.83114254343904$ and $PP = 33.307730125$ MPa. $K = (FP - PP)/(S - PP) = (55.0 - 33.307730125) / (66.83114254343904 - 33.307730125) = 21.692269875 / 33.523412418439044 = 0.6471$. Slightly below the elastic 2/3; the calibrated value would then be carried downward in place of 0.6667, lowering the TD fracture estimate to $0.6471 \times 43.714487325732826 + 47.408579625 = 75.695$ MPa.
 
 ## Exercise
 

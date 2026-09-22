@@ -1,7 +1,5 @@
 # Working the capstone
 
-> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update takes them out of the lessons and panels.
-
 Six numbers from four different tests, and the settings that make them reproducible.
 
 {{panel:wt-diagnostic-explorer}}
@@ -71,4 +69,4 @@ The area tolerance is 50 square feet on 2.8 million, which is about two parts in
 
 Before opening the panel, write down for each of the six fields which engine function produces it and what its inputs are.
 
-Then open the panel and produce the six. Any field whose function you could not name beforehand is one to go back to.
+Then open the panel and produce the six. It opens on the drawdown; select each fixture the fields name, starting with the buildup. Any field whose function you could not name beforehand is one to go back to.

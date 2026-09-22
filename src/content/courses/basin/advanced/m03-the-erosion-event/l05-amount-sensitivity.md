@@ -1,6 +1,6 @@
 # Amount sensitivity
 
-One event, four amounts: 0, 300, 600 and 900 m, all removed at 10 Ma. The panel runs them; this lesson tabulates them and extracts the two facts the capstone examiner wants you to own: the signature grows faster than linearly, and the reason lives in the Arrhenius exponent.
+One event, four amounts: 0, 300, 600 and 900 m, all removed at 10 Ma. The panel runs them; this lesson tabulates them and extracts the two facts worth owning: the signature grows faster than linearly, and the reason lives in the Arrhenius exponent.
 
 {{panel:bs-charge-explorer}}
 

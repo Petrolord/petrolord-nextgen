@@ -3,14 +3,15 @@ import {
   SHALE, SAND_IN_SITU, WEDGE, ROMAN_CLASS, computeAvoScreen, computeAvoDetail,
 } from '@/lib/rockphysicsTeaching';
 
-// Pins the AVO-explorer panel math to the live NG7 Expert capstone oracle
+// Pins the AVO-explorer panel math to the Ekene teaching interface (the NG7 Expert
+// capstone key until W5a)
 // (rockphysics/ekene shale-over-sand + wedge) and to the DC25 teaching facts.
 
 describe('rockphysics AVO explorer: engine math', () => {
   const a = computeAvoScreen(25);
   const d = computeAvoDetail(25, 0.02);
 
-  it('reproduces the NG7 capstone answer key, all seven fields', () => {
+  it('reproduces the Ekene teaching interface, all seven fields (the pre-W5 capstone key)', () => {
     expect(a.brineShuey.a).toBeCloseTo(0.03434399848203321, 12);
     expect(a.brineShuey.b).toBeCloseTo(-0.16766246414664518, 12);
     expect(a.gasShuey.a).toBeCloseTo(-0.06282494068620303, 12);
@@ -66,7 +67,7 @@ describe('rockphysics AVO explorer: engine math', () => {
     expect(Math.abs(t.vsTerm)).toBeGreaterThan(Math.abs(t.rhoTerm) + Math.abs(t.vpTerm));
   });
 
-  it('misses the exact solution by more than the capstone tolerance', () => {
+  it('misses the exact solution by more than the 0.001 the coefficients are read to', () => {
     expect(d.gas.shuey30).toBeCloseTo(-0.12456555923100084, 12);
     expect(d.gas.zoep30).toBeCloseTo(-0.12239091302671612, 12);
     const gap = Math.abs(d.gas.shuey30 - d.gas.zoep30);

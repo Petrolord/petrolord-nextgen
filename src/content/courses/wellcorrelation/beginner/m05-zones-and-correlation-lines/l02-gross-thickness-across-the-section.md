@@ -27,9 +27,9 @@ Work the four wells in section order, using structural depths for TOP_SAND and B
 * Ekene-3: 1570 - 1541 = **29 m**
 * Ekene-4: 1615 - 1590 = **25 m**
 
-That 29 m for Ekene-3 is one of the six numbers you will be asked to reproduce in the capstone, so it is worth checking the subtraction now rather than at the end.
+That 29 m for Ekene-3 is worth checking by subtraction now, because the capstone asks for the same reading on a section of its own.
 
-Now prove the view-independence with real numbers instead of algebra. In the capstone flattened view, TOP_SAND is hung at a datum of 1500, so Ekene-3 displays TOP_SAND at 1500 and BASE_SAND at 1529. The subtraction becomes 1529 - 1500 = 29. Identical to the structural answer, as it must be. Repeat the exercise for Ekene-1 and you get 1532 - 1500 = 32, again identical.
+Now prove the view-independence with real numbers instead of algebra. In the teaching flattened view, TOP_SAND is hung at a datum of 1500, so Ekene-3 displays TOP_SAND at 1500 and BASE_SAND at 1529. The subtraction becomes 1529 - 1500 = 29. Identical to the structural answer, as it must be. Repeat the exercise for Ekene-1 and you get 1532 - 1500 = 32, again identical.
 
 ## Reading the story in the numbers
 

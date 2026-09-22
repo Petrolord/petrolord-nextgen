@@ -1,10 +1,10 @@
 # One well of six
 
-One of the six capstone fields is the count of wells that can honestly be cross validated. It is 1, and it is graded with no tolerance. This lesson is about why that number is the answer and why reporting 6 would be worse than reporting nothing.
+One of the six figures this tier reports is the count of wells that can honestly be cross validated. On Ekene it is 1, and a count is either right or wrong. This lesson is about why that number is the answer and why reporting 6 would be worse than reporting nothing.
 
 ## The field
 
-The capstone asks how many wells can be cross validated, and the answer is **1**.
+How many Ekene wells can be cross validated? The answer is **1**.
 
 A tolerance of zero is right for it, because it is a count. Either a well's location survives inside the hull of the others or it does not, and there is no partial credit for a location that nearly survives.
 
@@ -61,4 +61,4 @@ The root mean square value cannot be interpreted at all until that count is know
 
 State the cross-validatable count on the Ekene six-well set and its tolerance, then give two reasons why reporting six residuals instead would be worse than reporting one.
 
-As a self-check: the count is 1, graded exactly, because a well either lies inside the hull of the others or it does not. Reporting six would be worse because five of them would be extrapolations outside the reduced control hulls, so they would measure the spline's behaviour beyond its data rather than the map's predictive skill inside the field, and because six numbers invite a reader to treat them as a sample with a mean and a spread when only one of them is a sample of anything relevant.
+As a self-check: the count is 1, exactly, because a well either lies inside the hull of the others or it does not. Reporting six would be worse because five of them would be extrapolations outside the reduced control hulls, so they would measure the spline's behaviour beyond its data rather than the map's predictive skill inside the field, and because six numbers invite a reader to treat them as a sample with a mean and a spread when only one of them is a sample of anything relevant.

@@ -4,22 +4,22 @@ Of the six inputs to the gravity number, five are properties of the rock, the fl
 
 ## The ladder
 
-Hold the designed case fixed (k 250 md, A 20000 ft2, dip 10 degrees updip, gammaW 1.03, gammaO 0.8654434250764526, muW 0.5, muO 1.8) and vary only the rate:
+Hold the geometry fixed at the worked example of lesson 2 (k 250 md, A 20000 ft2, dip 5 degrees updip, gammaW 1.03, gammaO 0.8654434250764526, muW 0.5, muO 1.8) and vary only the rate:
 
 | qt (rb/d) | G | Swf | EDbt |
 | --- | --- | --- | --- |
-| 500 | 0.0774684339580311 | 0.6392 | 0.511665846741284 |
-| 1000 | 0.03873421697901555 | 0.6379999999999999 | 0.5102801711629814 |
-| 2000 | 0.019367108489507776 | 0.6376 | 0.5095807170488317 |
-| 8000 | 0.004841777122376944 | 0.6372 | 0.5090537496023166 |
+| 250 | 0.07776435079048831 | 0.6392 | 0.5116763590144309 |
+| 500 | 0.038882175395244155 | 0.6379999999999999 | 0.5102855131161252 |
+| 4000 | 0.004860271924405519 | 0.6372 | 0.5090544236725548 |
+| 8000 | 0.0024301359622027597 | 0.6372 | 0.5089658690865421 |
 
-Check the scaling first: halving the rate exactly doubles $G$, because nothing else in the formula moved. 0.0774684339580311 is exactly four times 0.019367108489507776. The engine is doing no modelling here, only arithmetic; the modelling is in what the enlarged $G$ does to the curve.
+Check the scaling first: halving the rate exactly doubles $G$, because nothing else in the formula moved. 0.07776435079048831 is exactly twice 0.038882175395244155. The designed case of the capstone, 10 degrees at 2000 rb/d, sits on a ladder of its own with $G$ 0.019367108489507776. The engine is doing no modelling here, only arithmetic; the modelling is in what the enlarged $G$ does to the curve.
 
-Now read the efficiency column. Cutting the rate from 8000 to 500 rb/d, a factor of sixteen, lifts EDbt from 0.5090537496023166 to 0.511665846741284. That is 0.0026 of displacement efficiency, about a quarter of a saturation point, purchased by making the flood sixteen times slower. Recall from the Associate tier that at 8000 bwpd the Ekene pattern reaches breakthrough in roughly nine hundred days; at 500 the same pore-volume throughput takes sixteen times as long. Slow floods harvest gravity. Whether the harvest pays for the calendar is an economics question, and on this favorable flood the answer is plainly no.
+Now read the efficiency column. Cutting the rate from 8000 to 250 rb/d, a factor of thirty two, lifts EDbt from 0.5089658690865421 to 0.5116763590144309. That is 0.0027 of displacement efficiency, about a quarter of a saturation point, purchased by making the flood thirty two times slower. Recall from the Associate tier that at 8000 bwpd the Ekene pattern reaches breakthrough in roughly nine hundred days; at 250 the same pore-volume throughput takes thirty two times as long. Slow floods harvest gravity. Whether the harvest pays for the calendar is an economics question, and on this favorable flood the answer is plainly no.
 
 ## The vanishing act at field rate
 
-Look at the 8000 rb/d row. The front saturation reads 0.6372, which is exactly the flat-case front. Gravity has not switched off: $G$ is 0.004841777122376944, not zero, and EDbt still reads 0.5090537496023166 against the flat 0.5088773453049006. What happened is quantization. The Welge scan reports the front on a grid of 0.0004, and at this rate the corrected tangency no longer clears the next grid point, so the front snaps back onto the flat value while the efficiency, a continuous quantity, still carries the correction. Two lessons ago you were told to distrust small differences in Swf between similar cases; here is the concrete instance. When you want to detect a small physical effect, read EDbt, not Swf.
+Look at the 4000 and 8000 rb/d rows. The front saturation reads 0.6372, which is exactly the flat-case front. Gravity has not switched off: at 8000 rb/d $G$ is 0.0024301359622027597, not zero, and EDbt still reads 0.5089658690865421 against the flat 0.5088773453049006. What happened is quantization. The Welge scan reports the front on a grid of 0.0004, and at this rate the corrected tangency no longer clears the next grid point, so the front snaps back onto the flat value while the efficiency, a continuous quantity, still carries the correction. Two lessons ago you were told to distrust small differences in Swf between similar cases; here is the concrete instance. When you want to detect a small physical effect, read EDbt, not Swf.
 
 {{panel:sc-design-explorer}}
 
@@ -35,6 +35,6 @@ Because $G$ is presented as "the gravity number of the case," it is tempting to 
 
 ## Exercise
 
-First, using only the 1/qt scaling and the designed-case value 0.019367108489507776, write down $G$ at 4000 rb/d, then state which two rows of the ladder bracket the rate at which $G$ crosses 0.05.
+First, using only the 1/qt scaling and the 5 degree value at 500 rb/d, 0.038882175395244155, write down $G$ at 2000 rb/d, then state which two rows of the ladder bracket the rate at which $G$ crosses 0.05.
 
-Second, the EDbt gain from 8000 down to 500 rb/d is 0.0026. Using the Associate tier's breakthrough time of 926.6051908800841 days at 8000 bwpd, estimate the breakthrough time at 500 bwpd in years, and write the one-sentence recommendation you would actually give the asset team.
+Second, the EDbt gain from 8000 down to 250 rb/d on this ladder is 0.0027. Using the Associate tier's breakthrough time of 926.6051908800841 days at 8000 bwpd, estimate the breakthrough time at 250 bwpd in years, and write the one-sentence recommendation you would actually give the asset team.

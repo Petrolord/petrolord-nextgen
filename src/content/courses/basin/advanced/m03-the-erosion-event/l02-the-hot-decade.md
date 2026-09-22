@@ -1,6 +1,6 @@
 # The hot decade
 
-Between 20 and 10 Ma the reference basin ran hotter at the source than at any other time in its 150 million years. This lesson reads that decade quantitatively, because the capstone's signature field is its residue, and because it teaches how burial and heat flow negotiate a maximum.
+Between 20 and 10 Ma the reference basin ran hotter at the source than at any other time in its 150 million years. This lesson reads that decade quantitatively, because the erosion signature is its residue, and because it teaches how burial and heat flow negotiate a maximum.
 
 {{panel:bs-charge-explorer}}
 

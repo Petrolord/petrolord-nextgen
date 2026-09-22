@@ -3,6 +3,14 @@
 // fluidLab.test.js to the RC6 truth digest, which was derived by running the
 // vendored engines. Panels and the learning page import THIS module.
 //
+// The Ekene fluid (the correlations) and Good Oil Co. Well No. 4 read on its
+// 100 psig optimum separator test are the TEACHING cases: the panels open on
+// them and the lessons work them. Since W5b (2026-09) each tier's capstone
+// reads a case of its own (a stated fluid, another of the study's separator
+// tests, a saturation temperature, a plus fraction), stated in the brief and
+// set in the panels. Every function below takes that case as an option and
+// defaults to the teaching case; nothing here carries a capstone case.
+//
 // The course's spine is the provenance ladder the engine publishes: a number
 // is measured, correlated, computed by a tuned equation of state, or a
 // screening estimate nobody has checked. Everything this module returns
@@ -206,22 +214,29 @@ export const validityReport = ({
 // Core Laboratories RFL 88001, reproduced in McCain and in Whitson & Brule.
 // ---------------------------------------------------------------------------
 
-/** The published study as the fixture carries it. */
-export const GOOD_OIL = literature.separatorTests.fluids[1];
+/** The study's four separator tests (50, 100, 200 and 300 psig at 75 F),
+ *  one fixture row each; the fluid is the same in all four. */
+export const GOOD_OIL_TESTS = literature.separatorTests.fluids;
+/** The teaching test: the 100 psig optimum. */
+export const TEACHING_TEST = 1;
+
+/** The published study as the fixture carries it (the teaching test). */
+export const GOOD_OIL = GOOD_OIL_TESTS[TEACHING_TEST];
 
 /** The stock tank stage the report implies but does not list as a stage. */
 export const STOCK_TANK_STAGE_F = [75, 14.65];
 
 /** Separator stages including the stock tank, in the [degF, psia] fixture form. */
-export const goodOilStagesF = () => [...GOOD_OIL.stagesF, STOCK_TANK_STAGE_F];
+export const goodOilStagesF = (test = TEACHING_TEST) => [...GOOD_OIL_TESTS[test].stagesF, STOCK_TANK_STAGE_F];
 
 /** What the laboratory measured. Every one of these is tier 'measured'. */
-export const goodOilMeasured = () => ({
+export const goodOilMeasured = (test = TEACHING_TEST) => ({
+  separatorPsia: GOOD_OIL_TESTS[test].stagesF[0][1],
   reservoirTempF: GOOD_OIL.resTP[0],
   bubblePointPsia: GOOD_OIL.resTP[1],
-  totalGorScfStb: GOOD_OIL.expected.totalGor,
-  stockTankApi: GOOD_OIL.expected.stoApi,
-  boRbStb: GOOD_OIL.expected.boMultistage,
+  totalGorScfStb: GOOD_OIL_TESTS[test].expected.totalGor,
+  stockTankApi: GOOD_OIL_TESTS[test].expected.stoApi,
+  boRbStb: GOOD_OIL_TESTS[test].expected.boMultistage,
   plusMw: GOOD_OIL.plus.mw,
   plusSg: GOOD_OIL.plus.sg,
   componentCount: GOOD_OIL.keys.length + 1,
@@ -240,21 +255,21 @@ export const goodOilComposition = () => {
 };
 
 /** The C7+ pseudo-component the engine builds from MW and SG alone. */
-export const goodOilCharacterization = () => {
-  const ch = characterizePlusFraction(GOOD_OIL.plus);
+export const goodOilCharacterization = (plus = GOOD_OIL.plus) => {
+  const ch = characterizePlusFraction(plus);
   return { ...ch.comp, ...ch.meta, tier: 'published_method' };
 };
 
 const goodOilMixture = () => mixtureWithPlusFraction(GOOD_OIL.keys, GOOD_OIL.plus);
 
 /** The untuned equation of state run against the study's own conditions. */
-export const goodOilUntuned = () => {
+export const goodOilUntuned = ({ test = TEACHING_TEST, satTempF = GOOD_OIL.resTP[0] } = {}) => {
   const mix = goodOilMixture();
-  const tR = degFtoR(GOOD_OIL.resTP[0]);
+  const tR = degFtoR(satTempF);
   const psat = saturationPressure(mix, GOOD_OIL.z, tR, {});
   const sep = separatorTrain(
     mix, GOOD_OIL.z,
-    goodOilStagesF().map(([tF, pPsia]) => ({ tR: degFtoR(tF), pPsia })),
+    goodOilStagesF(test).map(([tF, pPsia]) => ({ tR: degFtoR(tF), pPsia })),
   );
   return {
     saturationPressurePsia: psat.pPsia,
@@ -274,22 +289,25 @@ export const goodOilUntuned = () => {
 };
 
 /** The four bounded C7+ knobs regressed jointly against all four lab targets. */
-export const goodOilTuned = () => {
+const _tuned = new Map();
+export const goodOilTuned = (test = TEACHING_TEST) => {
+  if (_tuned.has(test)) return _tuned.get(test);
+  const t = GOOD_OIL_TESTS[test];
   const fit = tuneToLab(
     { keys: GOOD_OIL.keys, plus: GOOD_OIL.plus, z: GOOD_OIL.z },
     {
       psat: { tF: GOOD_OIL.resTP[0], pPsia: GOOD_OIL.resTP[1] },
       separatorTest: {
-        stagesF: goodOilStagesF(),
+        stagesF: goodOilStagesF(test),
         resTF: GOOD_OIL.resTP[0],
         resPPsia: GOOD_OIL.resTP[1],
-        totalGor: GOOD_OIL.expected.totalGor,
-        stoApi: GOOD_OIL.expected.stoApi,
-        bo: GOOD_OIL.expected.boMultistage,
+        totalGor: t.expected.totalGor,
+        stoApi: t.expected.stoApi,
+        bo: t.expected.boMultistage,
       },
     },
   );
-  return {
+  const out = {
     converged: fit.converged,
     iterations: fit.iterations,
     knobs: fit.tuning,
@@ -301,6 +319,8 @@ export const goodOilTuned = () => {
     targets: fit.report,
     tier: 'lab_tuned',
   };
+  _tuned.set(test, out);
+  return out;
 };
 
 /**
@@ -308,7 +328,7 @@ export const goodOilTuned = () => {
  * The point of the tier is that a joint fit trades targets against each
  * other, so the list is expected to contain a loser.
  */
-export const tuningLedger = () => goodOilTuned().targets.map((t) => ({
+export const tuningLedger = (test = TEACHING_TEST) => goodOilTuned(test).targets.map((t) => ({
   name: t.name,
   unit: t.unit,
   measured: t.measured,

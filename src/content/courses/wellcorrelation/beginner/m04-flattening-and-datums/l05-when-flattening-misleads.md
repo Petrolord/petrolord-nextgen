@@ -20,7 +20,7 @@ An unconformity does not. An erosional surface is a record of removal, and the m
 
 This one follows straight from lesson one, but it is the most common misreading in practice. You removed the datum surface's relief deliberately. It cannot then be recovered from the panel.
 
-On the capstone view, TOP_SAND draws as a perfectly horizontal line at 1500 m in all four wells. Nothing on that panel tells you the sand surface has 49 m of relief, from 1541 m in Ekene-3 to 1590 m in Ekene-4. That relief exists only in the structural view. So a flattened panel is never evidence that a surface is flat, and a statement like "the sand is structurally uniform" cannot be supported by the view that made it uniform.
+On the teaching view, TOP_SAND draws as a perfectly horizontal line at 1500 m in all four wells. Nothing on that panel tells you the sand surface has 49 m of relief, from 1541 m in Ekene-3 to 1590 m in Ekene-4. That relief exists only in the structural view. So a flattened panel is never evidence that a surface is flat, and a statement like "the sand is structurally uniform" cannot be supported by the view that made it uniform.
 
 ## An audience without the datum reads structure
 
@@ -38,6 +38,6 @@ Two habits close all four.
 
 ## Exercise
 
-Ekene-3's TOP_SAND is picked at 1541 m and its TOP_B at 1628 m, so under the capstone datum TOP_B displays at 1587 m. Suppose the sand pick was 7 m too shallow and should have been 1548 m. Recompute the shift and the displayed TOP_B, and say what the true BASE_SAND to TOP_B interval does under the correction.
+Ekene-3's TOP_SAND is picked at 1541 m and its TOP_B at 1628 m, so under the teaching datum TOP_B displays at 1587 m. Suppose the sand pick was 7 m too shallow and should have been 1548 m. Recompute the shift and the displayed TOP_B, and say what the true BASE_SAND to TOP_B interval does under the correction.
 
 Self-check: the corrected shift is $1500 - 1548 = -48$, so TOP_B displays at $1628 - 48 = 1580$ m, 7 m higher than before. The true BASE_SAND to TOP_B interval is unchanged at $1628 - 1570 = 58$ m, because neither of those two picks moved; only the datum pick did, and it moved the whole column on the display.

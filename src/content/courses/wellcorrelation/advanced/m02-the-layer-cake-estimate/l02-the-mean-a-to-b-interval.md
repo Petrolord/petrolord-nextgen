@@ -18,7 +18,7 @@ Both depths in each subtraction come from the same hole, which is what makes eac
 
 $$\frac{140 + 150 + 133}{3} = \frac{423}{3} = 141$$
 
-The mean TOP_A to TOP_B interval is 141 m. It is graded to a tolerance of 0.01 m, so the value is expected exactly rather than approximately. The sum of 423 is worth writing down as you go, because a mean quoted with no visible sum cannot be checked by a reader and cannot be checked by you a week later.
+The mean TOP_A to TOP_B interval is 141 m, exactly rather than approximately. The sum of 423 is worth writing down as you go, because a mean quoted with no visible sum cannot be checked by a reader and cannot be checked by you a week later.
 
 The result is an interval, so it is in metres, it is positive, and it is not a depth. Nothing is at 141 m. The number is a distance between two surfaces, and treating it as a depth is the first way this calculation goes wrong.
 
@@ -46,7 +46,7 @@ The mean also has one property that matters for what follows. It is the value th
 
 The division comes out even. 423 divided by 3 is 141 with nothing left over, so the mean is exact and there is no rounding decision to make and none to disclose. That is a property of this fixture rather than of the method, and it is convenient, because it means any disagreement between your answer and the panel is a mistake rather than a difference in how the two of you rounded.
 
-It also explains the tolerance. A graded tolerance of 0.01 m on a number that is exactly 141 is not there to accommodate rounding. It is there so that a learner who carries a value through a spreadsheet is not failed by floating-point noise. Treat the target as 141 exactly, and if your working produces anything else, look for the arithmetic slip rather than reaching for the tolerance.
+It also explains the precision. A capstone tolerance of a hundredth of a metre on a mean like this is not there to accommodate rounding. It is there so that a learner who carries a value through a spreadsheet is not failed by floating-point noise. Treat the Ekene mean as 141 exactly, and if your working produces anything else, look for the arithmetic slip rather than reaching for the tolerance.
 
 ## Checking it
 

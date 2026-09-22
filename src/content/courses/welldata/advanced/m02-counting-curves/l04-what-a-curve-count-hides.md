@@ -1,6 +1,6 @@
 # What a curve count hides
 
-The campaign imported 24 curves. That number is correct, it is graded with no tolerance, and on its own it is close to useless as a statement about the delivery.
+The teaching campaign imported 24 curves. That number is correct, a count of this kind is graded with no tolerance, and on its own it is close to useless as a statement about the delivery.
 
 This lesson applies the second of the two questions from module 1 to the first graded reading. What does a curve count hide, and what would you have to look at instead to answer the questions it cannot.
 
@@ -26,7 +26,7 @@ A count answers how many. Nothing else.
 
 nullheavy_20 contributes 4 curves to the campaign total of 24, the same contribution as basic_20 and the same as every other file. Those four curves are GR in GAPI, RHOB in G/C3, NPHI in V/V and DT in US/M.
 
-One of the four is entirely dead. It is declared, it occupies a full column across all 201 depth samples of that file, it was imported, it is counted, and there is not one measurement in it. It is the only dead curve anywhere in the delivery, which is why the graded dead-curve reading is 1.
+One of the four is entirely dead. It is declared, it occupies a full column across all 201 depth samples of that file, it was imported, it is counted, and there is not one measurement in it. It is the only dead curve anywhere in the delivery, which is why the dead-curve reading on this campaign is 1.
 
 Hold those two facts together, because the whole lesson is in the pair. In the curve count, nullheavy_20 and basic_20 are indistinguishable. Both contribute 4. In the delivery, one of them holds a curve that promises data and delivers none, and the other does not.
 

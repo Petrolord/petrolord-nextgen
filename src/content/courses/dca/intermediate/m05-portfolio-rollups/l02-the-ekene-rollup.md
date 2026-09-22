@@ -40,7 +40,7 @@ Close enough to be a real check, and the residue is the truncated last step, whe
 
 ## Stop and check it yourself
 
-Add the four closed-form EURs on a calculator: 91666.6666666667 plus 111270.166537926 plus 153505.672866270 plus 105266.626461929. You should land on 461709.132532792 stb. Do it now, because that total is a graded capstone field and it is one of the few in the whole course you can produce with nothing but the Associate closed forms and four keystrokes.
+Add the four closed-form EURs on a calculator: 91666.6666666667 plus 111270.166537926 plus 153505.672866270 plus 105266.626461929. You should land on 461709.132532792 stb. Do it now, because the capstone asks for this total at a limit of its own, and it is one of the few numbers in the whole course you can produce with nothing but the Associate closed forms and four keystrokes.
 
 ## Which total do you report?
 

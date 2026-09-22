@@ -1,0 +1,343 @@
+{
+ "course": "rockphysics",
+ "wave": "w5a",
+ "migration": "20261028a_w5_rockphysics.sql",
+ "fields_file": "tools/course-waves/w5/rockphysics/fields.json",
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "title": "Reservoir fluids and the mineral frame: the UQUO sand",
+   "dataset": "rockphysics/UQUO case (W5 re-case; every input is stated in the brief)",
+   "why": "Every field leaked: the walkthrough printed all six at full precision and the fluid explorer opened on the capstone case. The capstone moves to the UQUO sand, whose conditions, oil, frame and saturation the learner types into the fluid explorer; the panel opens on the Ekene teaching case.",
+   "prompt": "The UQUO sand sits at 78 degC and 31 MPa with 50,000 ppm brine, a 0.68-gravity gas and a live oil of stock-tank density 0.87 g/cc at GOR 72 L/L. Its mineral frame is 82 percent quartz and 18 percent clay, and its pore fluid is mixed at Sw 0.7. Type this case into the fluid explorer (it opens on the Ekene sand, which is the teaching case), then report the brine density and bulk modulus, the gas bulk modulus, the live-oil density, the Voigt-Reuss-Hill frame bulk modulus and the Wood mixed-fluid bulk modulus. Mind the units: brine and frame moduli in GPa, gas and mixed-fluid moduli in MPa.",
+   "rekey": [
+    "brine_rho",
+    "brine_k_gpa",
+    "gas_k_mpa",
+    "oil_rho",
+    "vrh_k_gpa",
+    "wood_k_mpa"
+   ],
+   "annot": {
+    "uquo_brine_rho": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:130 (Tile Brine density)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:130 (Tile Brine density)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Batzle-Wang brine at the UQUO conditions, typed into the fluid explorer (opens on the Ekene teaching case; the UQUO case is typed over it); fmt(br.rho, 4) against tol 0.05.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_brine_k_gpa": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:131 (Tile Brine K)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:131 (Tile Brine K)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed into the fluid explorer (opens on the Ekene teaching case; the UQUO case is typed over it); fmt(br.k / 1e9, 6) GPa against tol 0.0005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_gas_k_mpa": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:133 (Tile Gas K)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:133 (Tile Gas K)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed into the fluid explorer (opens on the Ekene teaching case; the UQUO case is typed over it); fmt(gs.k / 1e6, 4) MPa against tol 0.01.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_oil_rho": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:134 (Tile Live-oil density)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:134 (Tile Live-oil density)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed into the fluid explorer (opens on the Ekene teaching case; the UQUO case is typed over it); the stock-tank density 0.87 g/cc and GOR 72 L/L are typed; fmt(oil.rho, 4) against tol 0.05.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_vrh_k_gpa": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:136 (Tile Frame K (VRH))",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:136 (Tile Frame K (VRH))",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "the quartz fraction 0.82 is typed; fmt(frame.k / 1e9, 6) GPa against tol 0.005; also a hand-calc from the mineral table in beginner m03.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_wood_k_mpa": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:139 (Tile Wood mixed K)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/FluidExplorer.jsx:139 (Tile Wood mixed K)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed into the fluid explorer (opens on the Ekene teaching case; the UQUO case is typed over it) at Sw 0.7; fmt(mixed.k / 1e6, 4) MPa against tol 0.05.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "A",
+   "title": "Gassmann substitution on the UQUO sand",
+   "dataset": "rockphysics/UQUO case (W5 re-case; every input is stated in the brief)",
+   "why": "Every field leaked: the walkthrough and four module lessons printed them and the substitution explorer opened on the capstone case. The capstone moves to the logged UQUO sand with its own porosity, mineral modulus and fluid conditions, typed into the substitution explorer; the Greenberg-Castagna estimate moves to 2860 m/s on a 60/40 split.",
+   "prompt": "The logged UQUO sand is brine-saturated at vp 3380 m/s, vs 1930 m/s and density 2290 kg/m3, with porosity 0.22 and a mineral modulus of 36 GPa. Its fluids sit at 70 degC and 28 MPa, with 45,000 ppm brine and a 0.64-gravity gas. Type the case into the substitution explorer (it opens on the Ekene sand, which is the teaching case), recover the dry frame with inverse Gassmann and substitute to full gas (Sw 0). Report the shear modulus, the in-situ saturated bulk modulus and the dry-frame bulk modulus in GPa, and the gas-case vp and density. Where the sonic has no shear, predict vs at vp 2860 m/s with Greenberg-Castagna for a 60/40 sand/shale mix.",
+   "rekey": [
+    "mu_gpa",
+    "ksat_insitu",
+    "kdry_gpa",
+    "gas_vp",
+    "gas_rho",
+    "gc_vs"
+   ],
+   "annot": {
+    "uquo_mu_gpa": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:123 (Tile Shear modulus)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:123 (Tile Shear modulus)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "rho vs^2 = 2290 x 1930^2 = 8.530021 GPa exactly (hand-calc, intermediate m01 l02); the tile prints 4 dp, which is exact here; tol 0.001.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_ksat_insitu": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:124 (Tile Saturated K, as logged)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:124 (Tile Saturated K, as logged)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "rho vp^2 - 4/3 mu (hand-calc, intermediate m01 l02); tile 4 dp misses by 3.3e-5 against tol 0.001.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_kdry_gpa": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:125 (Tile Dry frame K)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:125 (Tile Dry frame K)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "inverse Gassmann on the typed log point, porosity, mineral modulus and brine at the typed conditions; fmt 6 dp against tol 0.001.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_gas_vp": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:129 (Tile vp)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:129 (Tile vp)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "forward Gassmann to the typed Sw 0; fmt 4 dp against tol 0.1.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_gas_rho": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:131 (Tile Bulk density)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:131 (Tile Bulk density)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "density bookkeeping rho + phi (rho_gas - rho_brine); fmt 4 dp against tol 0.05.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_gc_vs": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:146 (Tile Greenberg-Castagna vs)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/SubstitutionExplorer.jsx:146 (Tile Greenberg-Castagna vs)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "the four-line hand-calc of intermediate m05 l03 at 2860 m/s on a 60/40 split, and the new shear block of the substitution explorer; fmt 4 dp against tol 0.1.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "advanced": {
+   "pick": "A",
+   "title": "Fluid substitution flips the AVO class: the UQUO sand",
+   "dataset": "rockphysics/UQUO case (W5 re-case; every input is stated in the brief)",
+   "why": "Every field leaked: the walkthrough and the m02 to m05 lessons printed them and the AVO explorer opened on the capstone interface. The capstone moves to the UQUO shale over the UQUO sand and its gas twin, all stated in the brief and typed into the AVO explorer, with tuning at 32 Hz. W1's brine_max_shuey_err (which replaced gas_class) is carried as uquo_brine_max_shuey_err on the new case.",
+   "prompt": "Put the UQUO shale (vp 2750 m/s, vs 1400 m/s, density 2455 kg/m3) over the UQUO sand and screen both cases: the logged brine sand (vp 3250 m/s, vs 1850 m/s, density 2280 kg/m3) and its gas twin (vp 2964.0 m/s, vs 1940.8 m/s, density 2071.7 kg/m3, which is the full-gas Gassmann substitution at porosity 0.25 and a 38 GPa mineral modulus, to 0.1). Type the interface into the AVO explorer (it opens on the Ekene shale and sand, which are the teaching case). Report the Shuey intercept and gradient for each case, the largest absolute gap between Shuey and exact Zoeppritz on the brine case at whole degrees from 0 to 40, the exact Zoeppritz Rpp at 30 degrees for the gas case, and the wedge tuning thickness at 32 Hz.",
+   "rekey": [
+    "brine_intercept",
+    "brine_gradient",
+    "gas_intercept",
+    "gas_gradient",
+    "brine_max_shuey_err",
+    "zoep30",
+    "tuning_ms"
+   ],
+   "annot": {
+    "uquo_brine_intercept": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:139 (Tile Brine intercept A)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:139 (Tile Brine intercept A)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "AVO explorer in \"Type an interface\" mode with the stated rocks; fmt 6 dp against tol 0.0002; the impedance-contrast estimate sits outside tol.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_brine_gradient": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:140 (Tile Brine gradient B)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:140 (Tile Brine gradient B)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed interface; fmt 6 dp against tol 0.0002.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_gas_intercept": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:143 (Tile Gas intercept A)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:143 (Tile Gas intercept A)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed interface with the stated gas twin; fmt 6 dp against tol 0.0002.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_gas_gradient": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:144 (Tile Gas gradient B)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:144 (Tile Gas gradient B)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed interface; fmt 6 dp against tol 0.0002.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_brine_max_shuey_err": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:149 (Tile Largest Shuey error, brine)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:149 (Tile Largest Shuey error, brine)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "max |Shuey - Zoeppritz| at whole degrees 0 to 40 on the typed brine case; fmt 6 dp misses by under 5e-7 against tol 2e-5; the gas tile beside it (0.002930) and the gas Shuey minus exact at 30 deg sit far outside.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_zoep30": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:146 (Tile Exact Zoeppritz at 30 deg, gas)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:146 (Tile Exact Zoeppritz at 30 deg, gas)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed interface; fmt 6 dp against tol 0.0002; the Shuey value at 30 deg beside it fails by more than 10 tol.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "uquo_tuning_ms": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:150 (Tile Wedge tuning)",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/rockphysics/AvoExplorer.jsx:150 (Tile Wedge tuning)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "the frequency is a typed input; the tile prints the integer tuning sample at 32 Hz (12 ms); tol 0 on an integer on the 1 ms grid; theory 389.85/32 = 12.18 ms agrees.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  }
+ }
+}

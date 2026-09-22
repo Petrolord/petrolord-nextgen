@@ -17,6 +17,12 @@ The two sit near one another and both stand well above Weymouth, and above Gener
 
 Panhandle A and Panhandle B are separate published correlations rather than a form and a revision of it. They were fitted to different behaviour and they carry different diameter exponents, 2.6182000000 and 2.5300000000, so neither supersedes the other and the engine offers both. A reader who treats them as a single Panhandle method has collapsed two answers into one, and will not be able to say which of them a quoted rate came from.
 
+## The Panhandle B form
+
+    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53
+
+with the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed.
+
 ## The efficiency, on both
 
 | efficiency | panhandleA scfd | panhandleB scfd |

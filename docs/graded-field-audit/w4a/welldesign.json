@@ -1,0 +1,32 @@
+{
+ "course": "welldesign",
+ "tiers": {
+  "intermediate": {
+   "why": "No view printed the north-north entry of the total covariance. W4a adds a North-north variance tile to the uncertainty explorer at 4 dp, and moves the opening station from total depth (267, the capstone station) to 180 so the new tile, like the other five, is read by selecting the station the prompt names. No prompt change.",
+   "prompt_edits": [],
+   "annot_updates": {
+    "well1_cov_nn": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/welldesign/UncertaintyExplorer.jsx station selector, total depth (index 267)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_ref": "src/components/course/panels/welldesign/UncertaintyExplorer.jsx Tile 'North-north variance' fmt(u.cov[0][0], 4)",
+     "route": "typed-case panel print (W4a)",
+     "evidence": "Selecting the total depth station in the uncertainty explorer prints the north-north entry of the total covariance to 4 dp, within tol 0.005 of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens on station 180, which prints no Professional answer.",
+     "notes": "W4a added the tile and moved the opening station from 267 to 180. Key, expected and tolerance unchanged."
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/welldesign/UncertaintyExplorer.jsx",
+  "src/components/course/panels/welldesign/panelCapstoneGuard.test.js"
+ ]
+}

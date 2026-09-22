@@ -12,23 +12,32 @@
    "source": "suite-app",
    "source_ref": "src/pages/apps/SeparatorSlugCatcherDesigner.jsx:15",
    "printed": {
-    "decimals": 3
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx:123",
+   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx ConditionsCard, Gas density",
    "prompt_precision": "\"Densities in lb/ft3, rates in ft3/s, velocities in ft/s and lengths in ft, to four decimals.\"",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/separatorstudio/SeparatorPanels.jsx:123 -> fmt(conditions.rhoGas, 6)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Print the Separator & Slug Catcher Designer readouts at the six decimals the course says vessel work prints to (intermediate/m06/l02, \"Quote a vessel figure the way the engine prints it, to six decimals\"), at least behind a full-precision toggle; widening tol to half a unit of what the studio prints instead would let a mis-keyed case pass.",
-   "evidence": "Needs z from the pseudo-reduced pair, which the course gives as an engine step (beginner/m06/l02 step two) with no hand correlation; NextGen panels are select-only (SelectField \"View\", src/components/course/panels/separation/SeparatorExplorer.jsx:304). Studio prints `fmt(conditions.rhoGas, 3)`; tol 1e-4 needs 4. Recomputing from the printed z (fmt 4, :121) carries ~1.7e-4 of error.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: separationFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #559 (Separator Studio and Facility Layout Mapper Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_separation.sql",
+    "prompt_append": "Read the figures in the Separator Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 3
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -36,23 +45,32 @@
    "source": "suite-app",
    "source_ref": "src/pages/apps/SeparatorSlugCatcherDesigner.jsx:15",
    "printed": {
-    "decimals": 2
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx:126",
+   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx ConditionsCard, Actual gas rate",
    "prompt_precision": "\"Densities in lb/ft3, rates in ft3/s, velocities in ft/s and lengths in ft, to four decimals.\"",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/separatorstudio/SeparatorPanels.jsx:126 -> fmt(conditions.qGasActFt3S, 6)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Print the Separator & Slug Catcher Designer readouts at the six decimals the course says vessel work prints to (intermediate/m06/l02, \"Quote a vessel figure the way the engine prints it, to six decimals\"), at least behind a full-precision toggle; widening tol to half a unit of what the studio prints instead would let a mis-keyed case pass.",
-   "evidence": "Needs z from the pseudo-reduced pair, which the course gives as an engine step (beginner/m06/l02 step two) with no hand correlation; NextGen panels are select-only (SelectField \"View\", src/components/course/panels/separation/SeparatorExplorer.jsx:304). Studio prints `fmt(conditions.qGasActFt3S, 2)` against tol 1e-4.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: separationFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #559 (Separator Studio and Facility Layout Mapper Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_separation.sql",
+    "prompt_append": "Read the figures in the Separator Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 2
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -90,23 +108,32 @@
    "source": "suite-app",
    "source_ref": "src/pages/apps/SeparatorSlugCatcherDesigner.jsx:15",
    "printed": {
-    "decimals": 1
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx:262",
+   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx SelectedCard, Diameter the gas needs",
    "prompt_precision": "\"Densities in lb/ft3, rates in ft3/s, velocities in ft/s and lengths in ft, to four decimals.\"",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/separatorstudio/SeparatorPanels.jsx:262 -> fmt(detail.diameterGasFt, 6)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Print the Separator & Slug Catcher Designer readouts at the six decimals the course says vessel work prints to (intermediate/m06/l02, \"Quote a vessel figure the way the engine prints it, to six decimals\"), at least behind a full-precision toggle; widening tol to half a unit of what the studio prints instead would let a mis-keyed case pass.",
-   "evidence": "Needs z from the pseudo-reduced pair, which the course gives as an engine step (beginner/m06/l02 step two) with no hand correlation; NextGen panels are select-only (SelectField \"View\", src/components/course/panels/separation/SeparatorExplorer.jsx:304). Studio prints \"Diameter the gas needs\" `fmt(detail.diameterGasFt, 1)` against tol 1e-4.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: separationFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #559 (Separator Studio and Facility Layout Mapper Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_separation.sql",
+    "prompt_append": "Read the figures in the Separator Studio with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -362,71 +389,92 @@
    "source": "suite-app",
    "source_ref": "src/pages/apps/SeparatorSlugCatcherDesigner.jsx:15",
    "printed": {
-    "decimals": 1
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx:190",
+   "display_ref": "src/components/separatorstudio/SeparatorPanels.jsx SelectedCard and SweepTable, Height/Length",
    "prompt_precision": "\"Lengths in ft, times in s, distances in m and the fraction as a fraction, to four decimals or better.\"",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/separatorstudio/SeparatorPanels.jsx:190 -> fmt(r.lengthFt, 6) (and :220)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Print the Separator & Slug Catcher Designer readouts at the six decimals the course says vessel work prints to (intermediate/m06/l02, \"Quote a vessel figure the way the engine prints it, to six decimals\"), at least behind a full-precision toggle; widening tol to half a unit of what the studio prints instead would let a mis-keyed case pass.",
-   "evidence": "Needs z from the pseudo-reduced pair, which the course gives as an engine step (beginner/m06/l02 step two) with no hand correlation; NextGen panels are select-only (SelectField \"View\", src/components/course/panels/separation/SeparatorExplorer.jsx:304). Preferred = smallest in-band feasible diameter; feasibility at 3 and 3.5 ft is a gas-capacity verdict that needs z. The sweep table prints `fmt(r.lengthFt, 1)` and the selected Height fmt 1 (src/components/separatorstudio/SeparatorPanels.jsx:220) against tol 1e-4.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: separationFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": "Without the studio a learner can hand-compute the liquid-plus-allowance height of each offered size and the L/D band leaves three (3, 3.5, 4 ft: 10.72, 9.74, 9.09 ft), so a guess among them has p about 1/3.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #559 (Separator Studio and Facility Layout Mapper Full precision switch, stacked on #554)",
+    "printed_before": {
+     "decimals": 1
+    }
+   }
   },
   {
    "tier": "advanced",
    "key": "adanga_worst_absolute_shortfall_m",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/separation/separationLab.js:1359",
-   "printed": {
-    "decimals": 1
-   },
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/separation.json",
+   "printed": "full",
    "display_scale": 1,
    "display_ref": "src/components/facilitylayoutmapper/SpacingPanel.jsx:173",
-   "prompt_precision": "\"Lengths in ft, times in s, distances in m and the fraction as a fraction, to four decimals or better.\"",
+   "prompt_precision": "Lengths in ft, times in s and distances in m to four decimals or better",
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Keep the key; state the yard in the prompt as north/east offsets in m from the datum 4.9021 N, 6.8714 E for the ten items (Wellhead A 0,0 ... Yard control room 245,185; Second slop tank no coordinates), or seed an ADANGA layout the learner opens in the Facility Layout Mapper, and print the shortfall at 4 decimals (SpacingPanel.jsx:173 fmt 1)"
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Ungradable as posed: the item positions exist only in capstone-only code (separationLab.js:1359-1370, guarded from panels) and no Suite project named ADANGA exists (grep of Suite src/ and supabase/). Add the coordinates to the prompt (a haversine or flat-offset hand calc then works, intermediate/m05/l02) and fix the Layout Mapper precision.",
-   "evidence": "Prompt gives only the two setbacks and \"a portable flare that was never placed and a second slop tank carrying no coordinates\"; no coordinates for any item. Facility Layout Mapper prints `short {fmt(result.worstAbsolute.shortfallM, 1)} m`.",
+   "evidence": "W2: Prompt only, no field moves. The ADANGA item positions existed only in capstone-only code (separationLab.js ADANGA_ITEMS, guarded from panels), so neither layout ranking could be worked (B5 finding 1). The prompt now states each placed item as north and east offsets from the datum, the two scale factors the Mapper uses and the haversine radius, so both shortfalls are a hand calculation (intermediate m05 l02). It also asks for the fraction to six decimals, which is what its tol of 1e-6 needs; \"four decimals or better\" failed a learner who followed it. The Facility Layout Mapper print (SpacingPanel.jsx:179) is W3. The published inputs reproduce adanga_worst_absolute_shortfall_m = 53.82226310078884 through the vendored engines against the key 53.82226310078884 (tol 0.0001); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "prompt_decimals": 4,
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_separation.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "with a portable flare that was never placed and a second slop tank carrying no coordinates. THE YARD, each item given as its name, its type and its position in metres north and east of the datum at 4.9021 N, 6.8714 E: Wellhead A, wellhead, 0 N 0 E; Wellhead B, wellhead, 4 N 0 E; Manifold, manifold, 26 N 14 E; Test separator, separator, 48 N 30 E; Isolation valve, valve, 50 N 32 E; Custody flow meter, flowmeter, 70 N 44 E; Slop tank, tank, 84 N 55 E; Yard flare, flare, 215 N 150 E; Yard control room, control, 245 N 185 E. Turn an offset into latitude and longitude as the Mapper does, at 110574 m per degree of latitude and 111320 m times the cosine of the datum latitude per degree of longitude, and measure every distance centre to centre by the haversine formula on a sphere of radius 6371008.8 m. Read the figures in the Separator Studio and the Facility Layout Mapper with their Full precision switch on (at the top of the page): they print them to the precision this capstone grades, with no digit grouping.",
+     "Lengths in ft, times in s and distances in m to four decimals or better, and the fraction as a fraction to six decimals."
+    ],
+    "lessons": [],
+    "lesson_contains": []
+   }
   },
   {
    "tier": "advanced",
    "key": "adanga_worst_relative_fraction",
-   "source": "unobtainable",
-   "source_ref": "src/components/course/panels/separation/separationLab.js:1359",
-   "printed": {
-    "decimals": 0
-   },
-   "display_scale": 100,
+   "source": "hand-calc",
+   "source_ref": "the capstone prompt (W2 publishes the inputs); spec docs/graded-field-audit/w2/separation.json",
+   "printed": "full",
+   "display_scale": 1,
    "display_ref": "src/components/facilitylayoutmapper/SpacingPanel.jsx:179",
-   "prompt_precision": "\"Lengths in ft, times in s, distances in m and the fraction as a fraction, to four decimals or better.\"",
+   "prompt_precision": "and the fraction as a fraction to six decimals",
    "answer_space": null,
    "guess_p": null,
-   "class": "redesign",
-   "fix": {
-    "redesign": "Same prompt change (state the ten item offsets); and Facility Layout Mapper SpacingPanel.jsx:179 prints fmt(shortfallFraction*100, 0) percent, so print the fraction to 6 decimals"
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Same as the absolute shortfall. Also note tol 1e-6 needs six decimals while the prompt says \"four decimals or better\": at four decimals 0.6200 misses by 2.6e-5, so either widen to 5e-5 or say six decimals in the prompt.",
-   "evidence": "No coordinates in the prompt; the Layout Mapper prints the relative shortfall as a whole percent (display_scale 100).",
+   "evidence": "W2: Prompt only, no field moves. The ADANGA item positions existed only in capstone-only code (separationLab.js ADANGA_ITEMS, guarded from panels), so neither layout ranking could be worked (B5 finding 1). The prompt now states each placed item as north and east offsets from the datum, the two scale factors the Mapper uses and the haversine radius, so both shortfalls are a hand calculation (intermediate m05 l02). It also asks for the fraction to six decimals, which is what its tol of 1e-6 needs; \"four decimals or better\" failed a learner who followed it. The Facility Layout Mapper print (SpacingPanel.jsx:179) is W3. The published inputs reproduce adanga_worst_relative_fraction = 0.6200257720948125 through the vendored engines against the key 0.6200257720948125 (tol 1e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "prompt_decimals": 6,
+   "reclassed_from": "redesign",
+   "shipped": {
+    "migration": "20261025a_w2_separation.sql",
+    "wave": "w2",
+    "prompt_contains": [
+     "with a portable flare that was never placed and a second slop tank carrying no coordinates. THE YARD, each item given as its name, its type and its position in metres north and east of the datum at 4.9021 N, 6.8714 E: Wellhead A, wellhead, 0 N 0 E; Wellhead B, wellhead, 4 N 0 E; Manifold, manifold, 26 N 14 E; Test separator, separator, 48 N 30 E; Isolation valve, valve, 50 N 32 E; Custody flow meter, flowmeter, 70 N 44 E; Slop tank, tank, 84 N 55 E; Yard flare, flare, 215 N 150 E; Yard control room, control, 245 N 185 E. Turn an offset into latitude and longitude as the Mapper does, at 110574 m per degree of latitude and 111320 m times the cosine of the datum latitude per degree of longitude, and measure every distance centre to centre by the haversine formula on a sphere of radius 6371008.8 m. Read the figures in the Separator Studio and the Facility Layout Mapper with their Full precision switch on (at the top of the page): they print them to the precision this capstone grades, with no digit grouping.",
+     "Lengths in ft, times in s and distances in m to four decimals or better, and the fraction as a fraction to six decimals."
+    ],
+    "lessons": [],
+    "lesson_contains": []
+   }
   }
  ]
 }

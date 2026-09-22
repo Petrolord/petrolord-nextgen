@@ -1,6 +1,6 @@
 # The well mean
 
-One of the six capstone fields involves no map at all. This lesson is about that number: what it is, what it is good for, and why it is graded to a tighter tolerance than anything gridded.
+One of the six figures this tier reports involves no map at all. This lesson is about that number: what it is, what it is good for, and why it is quoted more precisely than anything gridded.
 
 ## The number
 
@@ -12,7 +12,7 @@ That is the whole calculation. No frame, no spline, no mask, no cell size.
 
 ## Why the tolerance is tighter
 
-The capstone grades this field to 0.05 m, half the 0.1 m allowed on the four gridded thickness fields.
+It is a closed form from the picks alone, so it can be quoted to any precision the picks support, which is more than any gridded figure can claim.
 
 The reason is that there is nothing in it to be uncertain about. The picks are exact integers, the subtraction is exact, and the division by six is exact to the precision of a float. Any answer other than 31.1667 comes from an arithmetic slip or from averaging the wrong six numbers, not from a modelling choice.
 

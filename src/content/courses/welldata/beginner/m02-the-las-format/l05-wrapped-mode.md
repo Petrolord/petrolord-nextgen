@@ -39,7 +39,7 @@ You do not have to trust any of this. The header states the answer. `wrapped_12.
 
 (1580 - 1500) / 0.5 + 1 = 161
 
-depth samples. If the parser reports 161, the reassembly is correct. That 161 is one of the six numbers the Associate capstone grades, and it is the most useful check you can run on any LAS file: compute the expected sample count from the header, then compare it with what the reader produced. A mismatch means either the header lies or the reader misread the data, and both are worth knowing before the curves reach an interpretation.
+depth samples. If the parser reports 161, the reassembly is correct. A wrapped file's sample count is one of the six readings the Associate capstone grades on its own case files, and it is the most useful check you can run on any LAS file: compute the expected sample count from the header, then compare it with what the reader produced. A mismatch means either the header lies or the reader misread the data, and both are worth knowing before the curves reach an interpretation.
 
 ## The failure mode
 

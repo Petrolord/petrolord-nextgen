@@ -1,6 +1,6 @@
 # The mean SAND to B interval
 
-This lesson produces one number, the mean TOP_SAND to TOP_B interval across the three wells that carry both surfaces. It is 92 m, and it is one of the six graded readings in this tier, to a tolerance of 0.01 m. Getting it takes three subtractions and a division. Understanding what it is worth takes the rest of the lesson, and that part matters more, because this average is the assumption the next prediction rests on.
+This lesson produces one number, the mean TOP_SAND to TOP_B interval across the three wells that carry both surfaces. It is 92 m, and it is one of the six readings this tier reports. Getting it takes three subtractions and a division. Understanding what it is worth takes the rest of the lesson, and that part matters more, because this average is the assumption the next prediction rests on.
 
 ## The three intervals
 

@@ -1,16 +1,16 @@
 import { describe, it, expect } from 'vitest';
 import {
-  CAPSTONE_OWC_M, PROPS, WELL_PHI, computePropertyModel,
+  TEACHING_OWC_M, PROPS, WELL_PHI, computePropertyModel,
 } from '@/lib/reservoircalcTeaching';
 
-// Pins the property-explorer panel math to the live NG7 Expert capstone
+// Pins the property-explorer panel math to the teaching case, the pre-W5b NG7 Expert capstone
 // oracle (reservoircalc/ekene-property-model) and to the teaching facts the
 // DC23 lessons state as engine truth.
 
 describe('reservoircalc property explorer: engine math', () => {
-  const t = computePropertyModel('trend', CAPSTONE_OWC_M);
+  const t = computePropertyModel('trend', TEACHING_OWC_M);
 
-  it('reproduces the NG7 capstone answer key', () => {
+  it('reproduces the teaching case (the pre-W5b NG7 key)', () => {
     expect(t.phiAtP1).toBeCloseTo(0.20714187889686578, 12);
     expect(t.means.nodeMeanOverOil).toBeCloseTo(0.20936760570720417, 12);
     expect(t.model.poreMm3).toBeCloseTo(3.7558468705687864, 9);
@@ -71,7 +71,7 @@ describe('reservoircalc property explorer: engine math', () => {
   });
 
   it('contrasts a plane with a method that honours the data', () => {
-    const k = computePropertyModel('krige', CAPSTONE_OWC_M);
+    const k = computePropertyModel('krige', TEACHING_OWC_M);
     const exact = k.residuals.filter((r) => Math.abs(r.modelled - r.measured) < 1e-12);
     expect(exact.map((r) => r.name).sort())
       .toEqual(['Ekene-1', 'Ekene-3', 'Ekene-4', 'Ekene-5', 'Ekene-6']);
@@ -86,7 +86,7 @@ describe('reservoircalc property explorer: engine math', () => {
   });
 
   it('falls back to the arithmetic well mean for the constant method', () => {
-    const c = computePropertyModel('constant', CAPSTONE_OWC_M);
+    const c = computePropertyModel('constant', TEACHING_OWC_M);
     expect(c.grid[0]).toBeCloseTo(0.20666666666666667, 12);
     expect(Object.values(WELL_PHI).reduce((s, v) => s + v, 0) / 6)
       .toBeCloseTo(0.20666666666666667, 12);

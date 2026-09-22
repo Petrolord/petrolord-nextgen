@@ -1,6 +1,6 @@
 # Reading a displayed pick
 
-One of the six graded readings in this tier is a displayed depth: Ekene-2's TOP_SAND on the section flattened on TOP_A at 1450 m. The answer is 1503 m and it is graded to 0.01 m, so there is no room to be nearly right. This lesson works it, gives the whole displayed column, and names the three ways people get it wrong.
+One of the six readings this tier reports is a displayed depth: Ekene-2's TOP_SAND on the section flattened on TOP_A at 1450 m. The answer is 1503 m, and there is no room to be nearly right. This lesson works it, gives the whole displayed column, and names the three ways people get it wrong.
 
 ## The formula is one addition
 
@@ -12,7 +12,7 @@ $$displayed = md(pick) + shift$$
 
 The shift is computed once per well from that well's own flattening top. Then every pick in that well, TOP_A included, uses the same shift. There is no second subtraction and no per-pick adjustment. A well has one number, and the number is applied everywhere in that column.
 
-## The graded one, worked
+## The Ekene one, worked
 
 Ekene-2's TOP_A is at a measured 1512 m, so its shift is
 
@@ -22,7 +22,7 @@ Its TOP_SAND is at a measured 1565 m, so
 
 $$displayed = 1565 + (-62) = 1503$$
 
-The displayed depth is 1503 m, which is the graded value. Say the addition out loud once: measured pick plus the well's shift, and the shift is negative here, so the pick moves up the display by 62 m.
+The displayed depth is 1503 m. Say the addition out loud once: measured pick plus the well's shift, and the shift is negative here, so the pick moves up the display by 62 m.
 
 ## The displayed column
 
@@ -57,9 +57,9 @@ So every well's TOP_A displays at exactly 1450 m, in every well, by construction
 
 The lead-in habit that avoids all three is to name the well, write its shift, then add. Well, shift, add.
 
-## Why an integer is graded to a hundredth
+## Why a whole metre is read to a hundredth
 
-The graded answer is 1503 m and the tolerance on it is 0.01 m. Every number in this section is a whole metre, so the tolerance never comes into play here, and that is the point of it. The tolerance is there because the flattening arithmetic runs on real picks in real projects, where a top might be at 1565.4 m and a datum at 1450.0 m, and the same two lines of arithmetic still apply. Nothing about the method changes when the decimals arrive. If your answer differs from 1503 by more than a centimetre, the cause is one of the three errors above rather than rounding.
+The answer is 1503 m, and a capstone would grade it to a hundredth of a metre. Every number in the Ekene section is a whole metre, so that precision never comes into play here, and that is the point of it. It is there because the flattening arithmetic runs on real picks in real projects, where a top might be at 1565.4 m and a datum at 1450.0 m, and the same two lines of arithmetic still apply. Nothing about the method changes when the decimals arrive. If your answer differs from 1503 by more than a centimetre, the cause is one of the three errors above rather than rounding.
 
 The panel below flattens the section on a top and datum you choose, and lists the shift, the displayed depth and the interval for every pick.
 

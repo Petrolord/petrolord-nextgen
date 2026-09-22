@@ -1,0 +1,90 @@
+{
+ "course": "perfsand",
+ "tiers": {
+  "advanced": {
+   "why": "Fields 3 to 6 screen 2200 to 2320 m MD, and the Sanding onset view took the cavity, step and boost but not the interval. W4a adds Top and Bottom boxes (blank is the published 2450 to 2550 m) passed to all four sanding calls, and prints the zero-margin boost to 8 dp. The brief now names the view. Prompt only.",
+   "prompt_edits": [
+    [
+     "Report: (1) the MINIMUM of the Saucier gravel band in metres;",
+     "The sand control explorer's Sanding onset view takes this interval, step, cavity and boost as typed inputs. Report: (1) the MINIMUM of the Saucier gravel band in metres;"
+    ]
+   ],
+   "annot_updates": {
+    "pwf_crit_pa": {
+     "display_scale": 1e-06,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Sanding onset view: Top 2200, Bottom 2320, Step 25, Strength boost 1.15, Cavity open hole",
+     "printed": {
+      "decimals": 5
+     },
+     "display_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Tile 'Critical flowing pressure' fmt(v/1e6, 5)",
+     "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
+     "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged."
+    },
+    "cdp_governing_pa": {
+     "display_scale": 1e-06,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Sanding onset view: Top 2200, Bottom 2320, Step 25, Strength boost 1.15, Cavity open hole",
+     "printed": {
+      "decimals": 5
+     },
+     "display_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Tile 'Governing margin' fmt(v/1e6, 5)",
+     "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
+     "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged."
+    },
+    "cdp_bottom_pa": {
+     "display_scale": 1e-06,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Sanding onset view: Top 2200, Bottom 2320, Step 25, Strength boost 1.15, Cavity open hole",
+     "printed": {
+      "decimals": 5
+     },
+     "display_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Tile 'Margin at the bottom' fmt(v/1e6, 5)",
+     "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 5 dp in MPa, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
+     "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged."
+    },
+    "boost_at_zero_margin": {
+     "display_scale": 1,
+     "answer_space": null,
+     "guess_p": null,
+     "fix": null,
+     "owner_decision": false,
+     "recommendation": null,
+     "route": "typed-case panel mode (W4a)",
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Sanding onset view: Top 2200, Bottom 2320, Step 25, Strength boost 1.15, Cavity open hole",
+     "printed": {
+      "decimals": 8
+     },
+     "display_ref": "src/components/course/panels/perfsand/SandExplorer.jsx Tile 'Boost for zero margin' fmt(v, 8)",
+     "evidence": "Typing the stated interval, step and boost into the Sanding onset view with the open hole cavity prints this value at 8 dp, within its tol of the key (panelCapstoneGuard.test.js 'THE ROUTE'). The view opens with every box blank, the published 2450 to 2550 m case, which prints no graded answer.",
+     "notes": "W4a typed-case mode (Top and Bottom boxes). Key, expected and tolerance unchanged."
+    }
+   }
+  }
+ },
+ "files_changed": [
+  "src/components/course/panels/perfsand/SandExplorer.jsx",
+  "src/components/course/panels/perfsand/panelCapstoneGuard.test.js",
+  "src/content/courses/perfsand/advanced/m06-the-expert-reading/l02-working-the-capstone.md"
+ ],
+ "notes": "Finding for W5 (section 3, perfsand strip B): the Gravel view's gauge table prints the discrete gauge series, one entry of which is the advanced gauge_margin_m answer (87 um), in its default state. Pre-existing; the guard pins it as the one known exception."
+}

@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  plugJTables, fitPlugJ, reservoirCapillary, makeJFunction,
+  plugJTables, fitPlugJ, reservoirCapillary, makeJFunction, TEACHING_ROCK,
 } from './scalLab';
 import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -8,7 +8,9 @@ import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/compo
 // mercury-air, oil-brine) whose Pc curves disagree by an order of magnitude,
 // collapsed onto one dimensionless J(Sw) curve. The fitted power law is then
 // scaled back to reservoir rock: entry pressure, free water level, and the
-// saturation the crest drains to.
+// saturation the crest drains to. The field tiles open on a teaching sand
+// (TEACHING_ROCK); type the Ekene sand's own permeability and porosity to
+// carry the plugs to it.
 
 const W = 620;
 const H = 300;
@@ -22,6 +24,8 @@ const PLUG_COLORS = ['#38bdf8', '#f97316', '#a78bfa'];
 const JFunctionExplorer = () => {
   const [plugSel, setPlugSel] = useState('all');
   const [swirrText, setSwirrText] = useState('0.25');
+  const [kText, setKText] = useState(String(TEACHING_ROCK.k_md));
+  const [phiText, setPhiText] = useState(String(TEACHING_ROCK.phi));
 
   const out = useMemo(() => {
     try {
@@ -35,15 +39,18 @@ const JFunctionExplorer = () => {
       const idx = plugSel === 'all' ? null : Number(plugSel);
       const fit = fitPlugJ(idx, Swirr);
       if (!fit.ok) return { error: fit.errors.join('; ') };
-      const cap = reservoirCapillary();
+      const k = Number(kText);
+      const phi = Number(phiText);
+      if (!(k > 0) || !(phi > 0 && phi < 1)) return { error: 'Enter a positive reservoir permeability and a porosity between 0 and 1.' };
+      const cap = reservoirCapillary({ k_md: k, phi });
       return { plugs, fit, cap, Swirr, idx };
     } catch (e) {
       return { error: e.message };
     }
-  }, [plugSel, swirrText]);
+  }, [plugSel, swirrText, kText, phiText]);
 
   const controls = (
-    <div className="grid gap-3 grid-cols-2 sm:w-96">
+    <div className="grid gap-3 grid-cols-2 sm:grid-cols-4">
       <SelectField
         label="Plug"
         value={plugSel}
@@ -51,6 +58,8 @@ const JFunctionExplorer = () => {
         options={[['all', 'All three plugs'], ['0', 'EK1-P (air-brine)'], ['1', 'EK3-P (mercury-air)'], ['2', 'EK5-P (oil-brine)']]}
       />
       <NumField label="Swirr for the fit" value={swirrText} onChange={setSwirrText} />
+      <NumField label="Reservoir k (md), field tiles" value={kText} onChange={setKText} />
+      <NumField label="Reservoir porosity, field tiles" value={phiText} onChange={setPhiText} />
     </div>
   );
 
@@ -91,7 +100,7 @@ const JFunctionExplorer = () => {
   return (
     <PanelShell
       title="J-function explorer"
-      subtitle="Lab Pc curves on the left, an order of magnitude apart; the same points collapsed to J(Sw) on the right, with the fitted power law scaled back to the Ekene reservoir rock in the tiles."
+      subtitle="Lab Pc curves on the left, an order of magnitude apart; the same points collapsed to J(Sw) on the right, with the fitted power law scaled back to a reservoir rock in the tiles. The field tiles use the permeability and porosity you type; they open on a teaching sand."
     >
       {controls}
 
@@ -140,10 +149,11 @@ const JFunctionExplorer = () => {
       <Note>
         Three different laboratories measured three different Pc curves on the same rock type, and
         every one of them collapses onto the same J curve: pick a single plug and the fit does not
-        change. The tiles carry the collapse back to the field: the mapped 1560 m contact is where
-        Sw reaches 1, the free water level sits one entry height below it, and the crest of the
-        structure drains to the booking saturation. Move Swirr off 0.25 and watch the fitted
-        exponent absorb the distortion of the normalized axis.
+        change. The tiles carry the collapse back to the field on the rock you type (the Ekene
+        fluids, 26 dyn/cm at 30 degrees, brine 1.03 against the 32 API oil): the mapped 1560 m
+        contact is where Sw reaches 1, the free water level sits one entry height below it, and the
+        crest of the structure drains toward the booking saturation. Move Swirr off 0.25 and watch
+        the fitted exponent absorb the distortion of the normalized axis.
       </Note>
     </PanelShell>
   );

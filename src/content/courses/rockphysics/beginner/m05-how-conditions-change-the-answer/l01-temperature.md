@@ -44,7 +44,7 @@ The habit this lesson is trying to break is the mental picture of a fluid proper
 
 Treat each property as a value on a surface over temperature, pressure, salinity and composition. You evaluate it at the conditions you are working at. You do not extrapolate from a slope you measured somewhere else.
 
-The practical bite is easy to size. Suppose you had taken brine properties from a bench measurement at 20 degC and used them for the Ekene sand at 60 degC. You would carry 2.511437 GPa instead of 2.697811 GPa, and 1032.1697 kg/m3 instead of 1017.8250 kg/m3. The capstone grades brine bulk modulus to a tolerance of 0.005 GPa and brine density to 0.5 kg/m3, so both of those would be wrong by a wide margin, and every mixed fluid built from them would be wrong too.
+The practical bite is easy to size. Suppose you had taken brine properties from a bench measurement at 20 degC and used them for the Ekene sand at 60 degC. You would carry 2.511437 GPa instead of 2.697811 GPa, and 1032.1697 kg/m3 instead of 1017.8250 kg/m3. Both errors are many times wider than any tolerance the capstone allows on a brine property, so both numbers would be wrong by a wide margin, and every mixed fluid built from them would be wrong too.
 
 ## Exercise
 

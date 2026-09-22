@@ -1,12 +1,12 @@
 import { describe, it, expect } from 'vitest';
 import {
-  computeEatonExplorer, computePrognosis, CAPSTONE_EATON_N,
+  computeEatonExplorer, computePrognosis, TEACHING_EATON_N,
 } from '@/lib/porepressureTeaching';
 
-// DC26 panel math pinned to the LIVE NG9 Professional capstone answer key
+// DC26 panel math pinned to the teaching case (the pre-W5b NG9 Professional capstone key)
 // and to the tier's engine-verified teaching facts (TRUTH digest 2026-08-25).
 
-describe('Eaton explorer vs the live Professional capstone key', () => {
+describe('Eaton explorer vs the teaching case (the pre-W5b Professional capstone key)', () => {
   const m = computeEatonExplorer(3.0, 'well', 0.05);
 
   it('reproduces all six graded values on the well trend at n = 3', () => {
@@ -19,7 +19,7 @@ describe('Eaton explorer vs the live Professional capstone key', () => {
   });
 
   it('matches the untouched capstone driver sample-for-sample at TD', () => {
-    const drv = computePrognosis(CAPSTONE_EATON_N);
+    const drv = computePrognosis(TEACHING_EATON_N);
     expect(m.ppTdMpa * 1e6).toBeCloseTo(drv.ppTdPa, 6);
     expect(m.dtnTd).toBeCloseTo(drv.dtnTd, 12);
   });

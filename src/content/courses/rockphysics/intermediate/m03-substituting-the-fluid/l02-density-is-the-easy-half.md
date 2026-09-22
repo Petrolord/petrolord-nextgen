@@ -12,7 +12,7 @@ For Ekene, with gas replacing brine:
 
 $$\rho' = 2250 + 0.25(172.66679461728904 - 1017.8249875) = 2250 - 211.2895482206777 = 2038.7104517793223 \ \mathrm{kg/m^3}$$
 
-which is the fifth capstone value, reached in one line with no equation at all.
+which is the gas case density of the teaching case, reached in one line with no equation at all.
 
 ## The long way round
 

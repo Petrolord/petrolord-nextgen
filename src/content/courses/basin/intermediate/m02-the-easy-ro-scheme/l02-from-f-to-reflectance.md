@@ -10,9 +10,9 @@ That is the entire read-out. No lookup tables, no branches. F enters linearly in
 
 ## The two anchors
 
-Set F = 0 and the formula gives $e^{-1.6} = 0.20189651799465538$. That is the reflectance the scheme assigns to completely unreacted vitrinite, and it is your first graded value. It is a closed form: you can reproduce it on any calculator from the two published constants alone.
+Set F = 0 and the formula gives $e^{-1.6} = 0.20189651799465538$. That is the reflectance the scheme assigns to completely unreacted vitrinite, and it is the first golden value. It is a closed form: you can reproduce it on any calculator from the two published constants alone.
 
-Set F to its maximum, 0.85, and the formula gives $e^{-1.6 + 3.7 \times 0.85} = e^{1.545} = 4.687971627022013$ by direct hand evaluation. The engine reports 4.687971627022019 for the same quantity, your second graded value. The two differ in the fifteenth digit because the engine obtains 0.85 by summing the twenty weights in floating point, which lands on 0.8500000000000003 rather than 0.85 exactly. Both values sit inside the 0.005 grading tolerance by twelve orders of magnitude. The discrepancy is worth a sentence because it teaches the right habit: when a graded number and your hand arithmetic differ in the fifteenth digit, you are looking at the arithmetic of summation order, not at an error.
+Set F to its maximum, 0.85, and the formula gives $e^{-1.6 + 3.7 \times 0.85} = e^{1.545} = 4.687971627022013$ by direct hand evaluation. The engine reports 4.687971627022019 for the same quantity, your second golden value. The two differ in the fifteenth digit because the engine obtains 0.85 by summing the twenty weights in floating point, which lands on 0.8500000000000003 rather than 0.85 exactly. The two agree to twelve orders of magnitude inside any tolerance a capstone could set. The discrepancy is worth a sentence because it teaches the right habit: when a reported number and your hand arithmetic differ in the fifteenth digit, you are looking at the arithmetic of summation order, not at an error.
 
 So the published range of the scheme, roughly 0.2 to 4.7 percent, is not folklore. It is these two closed forms, and you now own both.
 
@@ -24,7 +24,7 @@ Notice the division of labour inside the scheme. All the physics of time and tem
 
 ## Reading the map both ways
 
-Because the map is monotonic it inverts cleanly: $F = (\ln R_o + 1.6)/3.7$. A reported Ro of 1.0 corresponds to F = 0.4324, so a rock at the classic top of the oil window has reacted about half of its vitrinite weight. On the capstone ramp, the engine's F at 150 degC is 0.4289345833269452, giving Ro 0.9871413464062039, just short of 1. The inverse map is how you turn a measured reflectance from a well back into model space when calibrating, and the exam will expect you to move in either direction.
+Because the map is monotonic it inverts cleanly: $F = (\ln R_o + 1.6)/3.7$. A reported Ro of 1.0 corresponds to F = 0.4324, so a rock at the classic top of the oil window has reacted about half of its vitrinite weight. On the reference ramp, the engine's F at 150 degC is 0.4289345833269452, giving Ro 0.9871413464062039, just short of 1. The inverse map is how you turn a measured reflectance from a well back into model space when calibrating, and the exam will expect you to move in either direction.
 
 ## Worked example
 

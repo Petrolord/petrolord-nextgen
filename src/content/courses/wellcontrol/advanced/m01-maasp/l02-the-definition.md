@@ -16,7 +16,7 @@ At 1440 kg/m3 mud and a 1750 kg/m3 fracture equivalent:
 
 | well | shoe TVD | MAASP |
 |---|---|---|
-| slant | 1282.248590311 m | 3898114.5728331697 Pa |
+| slant | about 1282.2 m | 3898114.5728331697 Pa |
 | horizontal | 1172.343525979 m | 3563996.418103266 Pa |
 
 ## Why the slant well's is higher

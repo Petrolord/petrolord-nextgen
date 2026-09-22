@@ -142,12 +142,12 @@
    "tier": "intermediate",
    "key": "yokri_flame_length_with_wind_m",
    "source": "nextgen-panel",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:62 (Flame view)",
+   "source_ref": "src/components/course/panels/consequence/FireExplorer.jsx:174 (heat mode: the case typed as the prompt states it)",
    "printed": {
-    "decimals": 6
+    "decimals": 9
    },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "display_ref": "src/components/course/panels/consequence/FireExplorer.jsx:174 nine()",
    "prompt_precision": "Every value to six decimals.",
    "answer_space": null,
    "guess_p": null,
@@ -155,21 +155,30 @@
    "fix": null,
    "owner_decision": false,
    "recommendation": null,
-   "evidence": "Fuel kerosene (Babrauskas 0.039), D, wind editable; air density is the engine default 1.2 (not a panel input but equals the prompt). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "evidence": "The Heat view now runs on the pool the learner types (typedPoolFire in consequenceLab.js: poolBurningRate, poolFireSolidFlame and surfaceEmissivePower, nothing rounded between steps). Typing the prompt's pool (kerosene, 31.5 m, 6 m/s, 1.2 kg/m3, 1.48e-5 m2/s, 43000000 J/kg, 0.235, 0.8) with the target at 72 m and transmissivity 0.765 prints the value within tol; yourCase.test.jsx proves it and that the ERHA default lands on no graded answer.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261027b_w4_consequence.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, type this pool, the 72 m target and the 0.765 transmissivity into the Fire explorer's heat flux view: it runs the whole chain unrounded and prints every value to at least the precision graded here.",
+    "case_mode": {
+     "panel": "src/components/course/panels/consequence/FireExplorer.jsx",
+     "mode": "heat",
+     "test": "src/components/course/panels/consequence/yourCase.test.jsx"
+    }
+   }
   },
   {
    "tier": "intermediate",
    "key": "yokri_flame_tilt_deg",
    "source": "nextgen-panel",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:63 (Flame view)",
+   "source_ref": "src/components/course/panels/consequence/FireExplorer.jsx:175 (heat mode: the case typed as the prompt states it)",
    "printed": {
-    "decimals": 6
+    "decimals": 9
    },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "display_ref": "src/components/course/panels/consequence/FireExplorer.jsx:175 nine()",
    "prompt_precision": "Every value to six decimals.",
    "answer_space": null,
    "guess_p": null,
@@ -177,21 +186,30 @@
    "fix": null,
    "owner_decision": false,
    "recommendation": null,
-   "evidence": "D, wind, kinematic viscosity editable; prints six(tl.tiltDeg). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "evidence": "The Heat view now runs on the pool the learner types (typedPoolFire in consequenceLab.js: poolBurningRate, poolFireSolidFlame and surfaceEmissivePower, nothing rounded between steps). Typing the prompt's pool (kerosene, 31.5 m, 6 m/s, 1.2 kg/m3, 1.48e-5 m2/s, 43000000 J/kg, 0.235, 0.8) with the target at 72 m and transmissivity 0.765 prints the value within tol; yourCase.test.jsx proves it and that the ERHA default lands on no graded answer.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261027b_w4_consequence.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, type this pool, the 72 m target and the 0.765 transmissivity into the Fire explorer's heat flux view: it runs the whole chain unrounded and prints every value to at least the precision graded here.",
+    "case_mode": {
+     "panel": "src/components/course/panels/consequence/FireExplorer.jsx",
+     "mode": "heat",
+     "test": "src/components/course/panels/consequence/yourCase.test.jsx"
+    }
+   }
   },
   {
    "tier": "intermediate",
    "key": "yokri_surface_emissive_power_mudan_w_m2",
    "source": "nextgen-panel",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:64 (Flame view, method = from the diameter (Mudan))",
+   "source_ref": "src/components/course/panels/consequence/FireExplorer.jsx:176 (heat mode: the case typed as the prompt states it)",
    "printed": {
-    "decimals": 6
+    "decimals": 9
    },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "display_ref": "src/components/course/panels/consequence/FireExplorer.jsx:176 nine()",
    "prompt_precision": "Every value to six decimals.",
    "answer_space": null,
    "guess_p": null,
@@ -199,21 +217,30 @@
    "fix": null,
    "owner_decision": false,
    "recommendation": null,
-   "evidence": "Method selector switches the SEP tile; prints six(). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "evidence": "The Heat view now runs on the pool the learner types (typedPoolFire in consequenceLab.js: poolBurningRate, poolFireSolidFlame and surfaceEmissivePower, nothing rounded between steps). Typing the prompt's pool (kerosene, 31.5 m, 6 m/s, 1.2 kg/m3, 1.48e-5 m2/s, 43000000 J/kg, 0.235, 0.8) with the target at 72 m and transmissivity 0.765 prints the value within tol; yourCase.test.jsx proves it and that the ERHA default lands on no graded answer.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261027b_w4_consequence.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, type this pool, the 72 m target and the 0.765 transmissivity into the Fire explorer's heat flux view: it runs the whole chain unrounded and prints every value to at least the precision graded here.",
+    "case_mode": {
+     "panel": "src/components/course/panels/consequence/FireExplorer.jsx",
+     "mode": "heat",
+     "test": "src/components/course/panels/consequence/yourCase.test.jsx"
+    }
+   }
   },
   {
    "tier": "intermediate",
    "key": "yokri_surface_emissive_power_actual_w_m2",
    "source": "nextgen-panel",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:64 (Flame view, method = radiative fraction with soot)",
+   "source_ref": "src/components/course/panels/consequence/FireExplorer.jsx:177 (heat mode: the case typed as the prompt states it)",
    "printed": {
-    "decimals": 6
+    "decimals": 9
    },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "display_ref": "src/components/course/panels/consequence/FireExplorer.jsx:177 nine()",
    "prompt_precision": "Every value to six decimals.",
    "answer_space": null,
    "guess_p": null,
@@ -221,58 +248,83 @@
    "fix": null,
    "owner_decision": false,
    "recommendation": null,
-   "evidence": "Chained internally from the unrounded flame length; prints six(). Reproduced exactly (difference 0) by the vendored engine on the prompt inputs typed into the panel; tol 5e-7 is half a unit of the six decimals the panel prints and the prompt asks for.",
+   "evidence": "The Heat view now runs on the pool the learner types (typedPoolFire in consequenceLab.js: poolBurningRate, poolFireSolidFlame and surfaceEmissivePower, nothing rounded between steps). Typing the prompt's pool (kerosene, 31.5 m, 6 m/s, 1.2 kg/m3, 1.48e-5 m2/s, 43000000 J/kg, 0.235, 0.8) with the target at 72 m and transmissivity 0.765 prints the value within tol; yourCase.test.jsx proves it and that the ERHA default lands on no graded answer.",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "shipped": {
+    "migration": "20261027b_w4_consequence.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, type this pool, the 72 m target and the 0.765 transmissivity into the Fire explorer's heat flux view: it runs the whole chain unrounded and prints every value to at least the precision graded here.",
+    "case_mode": {
+     "panel": "src/components/course/panels/consequence/FireExplorer.jsx",
+     "mode": "heat",
+     "test": "src/components/course/panels/consequence/yourCase.test.jsx"
+    }
+   }
   },
   {
    "tier": "intermediate",
    "key": "yokri_view_factor_max",
    "source": "nextgen-panel",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:115 (View view, Fmax tile; inputs typed at :103-106)",
+   "source_ref": "src/components/course/panels/consequence/FireExplorer.jsx:178 (heat mode: the case typed as the prompt states it)",
    "printed": {
     "decimals": 12
    },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:7 twelve = toFixed(12)",
+   "display_ref": "src/components/course/panels/consequence/FireExplorer.jsx:178 twelve()",
    "prompt_precision": "The view factor to twelve decimals",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:146 -> make the Heat view take the Flame view's pool inputs (fuel, diameter, wind, viscosity, heat of combustion, radiative and soot fractions) instead of erhaArgs(), so it prints Fmax (twelve) and the heat flux (six) from the unrounded chain; alternatively print flame length and tilt to twelve decimals at FireExplorer.jsx:62-63"
-   },
-   "owner_decision": true,
-   "recommendation": "Display fix (Heat view driven by the learner's pool). The tolerance alternative would be about 2.5e-9 (sensitivities: 1.6e-9 for half a unit in L, 3.1e-10 for half a unit in tilt), which throws away the twelve-decimal design the wave chose for this class.",
-   "evidence": "The View view takes flame length and tilt as TYPED numbers, and the Flame view prints them to six decimals only. Running the engine on the printed L = 20.618159 m and tilt = 53.023688 deg gives Fmax 0.046024297336 against expected 0.046024298275 (difference 9.4e-10, tol 5e-13). The Heat view that chains unrounded is hard-wired to ERHA (FireExplorer.jsx:146 erhaArgs()), so it cannot be set to YOKRI.",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "The Heat view now runs on the pool the learner types (typedPoolFire in consequenceLab.js: poolBurningRate, poolFireSolidFlame and surfaceEmissivePower, nothing rounded between steps). Typing the prompt's pool (kerosene, 31.5 m, 6 m/s, 1.2 kg/m3, 1.48e-5 m2/s, 43000000 J/kg, 0.235, 0.8) with the target at 72 m and transmissivity 0.765 prints the value within tol; yourCase.test.jsx proves it and that the ERHA default lands on no graded answer.",
    "notes": "The capstone brief (intermediate/m06.../l04-the-capstone-brief.md) tells the learner to 'carry the flame length and tilt into the view factor view' and 'round nothing on the way', which the six-decimal print makes impossible. A learner who follows the brief fails.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261027b_w4_consequence.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, type this pool, the 72 m target and the 0.765 transmissivity into the Fire explorer's heat flux view: it runs the whole chain unrounded and prints every value to at least the precision graded here.",
+    "case_mode": {
+     "panel": "src/components/course/panels/consequence/FireExplorer.jsx",
+     "mode": "heat",
+     "test": "src/components/course/panels/consequence/yourCase.test.jsx"
+    }
+   }
   },
   {
    "tier": "intermediate",
    "key": "yokri_solid_flame_heat_flux_w_m2",
    "source": "nextgen-panel",
-   "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:161 (Heat view, ERHA only) / hand calc q = tau SEP Fmax",
+   "source_ref": "src/components/course/panels/consequence/FireExplorer.jsx:179 (heat mode: the case typed as the prompt states it)",
    "printed": {
-    "decimals": 6
+    "decimals": 9
    },
    "display_scale": 1,
-   "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/consequence/panelBits.jsx:6 six = toFixed(6)",
+   "display_ref": "src/components/course/panels/consequence/FireExplorer.jsx:179 nine()",
    "prompt_precision": "Every value to six decimals.",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "/root/wt-b5-nextgen/src/components/course/panels/consequence/FireExplorer.jsx:146 -> Heat view driven by the learner's pool inputs (same change as yokri_view_factor_max), printing six(r.heatFluxWM2) for YOKRI directly"
-   },
-   "owner_decision": true,
-   "recommendation": "Same display fix as the view factor; one change repairs both. Tolerance alternative would be about 6e-5 W/m2.",
-   "evidence": "The Heat view is fixed to ERHA (FireExplorer.jsx:146 base = erhaArgs(); only distance and tau are editable), so YOKRI's flux must be multiplied by hand from the printed SEP and the View view's Fmax. With the Fmax the panel yields (see view factor), 0.765 x 37784.162898 x 0.046024297336 = 1330.327004 against expected 1330.327031 (difference 2.7e-5, tol 5e-7). With an exact Fmax the hand product would pass (2.5e-8).",
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
+   "recommendation": null,
+   "evidence": "The Heat view now runs on the pool the learner types (typedPoolFire in consequenceLab.js: poolBurningRate, poolFireSolidFlame and surfaceEmissivePower, nothing rounded between steps). Typing the prompt's pool (kerosene, 31.5 m, 6 m/s, 1.2 kg/m3, 1.48e-5 m2/s, 43000000 J/kg, 0.235, 0.8) with the target at 72 m and transmissivity 0.765 prints the value within tol; yourCase.test.jsx proves it and that the ERHA default lands on no graded answer.",
    "notes": "Defect is inherited from the view factor chain.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261027b_w4_consequence.sql",
+    "wave": "w4b",
+    "prompt": "On the course panel, type this pool, the 72 m target and the 0.765 transmissivity into the Fire explorer's heat flux view: it runs the whole chain unrounded and prints every value to at least the precision graded here.",
+    "case_mode": {
+     "panel": "src/components/course/panels/consequence/FireExplorer.jsx",
+     "mode": "heat",
+     "test": "src/components/course/panels/consequence/yourCase.test.jsx"
+    }
+   }
   },
   {
    "tier": "advanced",

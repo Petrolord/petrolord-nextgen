@@ -1,5 +1,7 @@
 import React, { useMemo, useState } from 'react';
-import { ledgerWith, pressureView, trackedFvfLedger, TARGET_BAND } from './floodLab';
+import {
+  ledgerWith, pressureView, trackedFvfLedger, periodVoidage, TARGET_BAND, LEDGER_FVF,
+} from './floodLab';
 import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Ledger explorer: the Ekene flood read through the real voidage engine. The
@@ -10,6 +12,17 @@ import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/pet
 const W = 640;
 const H = 300;
 const PAD = { left: 46, top: 14, right: 46, bottom: 34 };
+
+
+// A typed number box, dressed like the sliders (the capstone states values
+// the sliders do not reach).
+const NumBox = ({ label, value, onChange }) => (
+  <div>
+    <p className="text-gray-400 text-xs mb-1">{label}</p>
+    <input value={value} onChange={(e) => onChange(e.target.value)}
+      className="w-full bg-gray-800 border border-gray-600 rounded-md text-white text-xs px-2 py-1.5" />
+  </div>
+);
 
 const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d }) : '-');
 
@@ -31,21 +44,34 @@ const LedgerExplorer = () => {
   const [bandMin, setBandMin] = useState(TARGET_BAND.min);
   const [bandMax, setBandMax] = useState(TARGET_BAND.max);
   const [tracked, setTracked] = useState(false);
+  // The factor set, the band and the month open on the teaching case; a
+  // capstone brief states its own and the learner types them in.
+  const [bo, setBo] = useState(String(LEDGER_FVF.Bo));
+  const [bw, setBw] = useState(String(LEDGER_FVF.Bw));
+  const [rs, setRs] = useState(String(LEDGER_FVF.Rs));
+  const [bandMinT, setBandMinT] = useState('');
+  const [bandMaxT, setBandMaxT] = useState('');
+  const [month, setMonth] = useState('2023-01');
 
   const out = useMemo(() => {
     try {
-      const band = { min: bandMin, max: Math.max(bandMax, bandMin) };
-      const led = ledgerWith({ window: win, band });
+      const fvf = { ...LEDGER_FVF, Bo: Number(bo), Bw: Number(bw), Rs: Number(rs) };
+      if (!(fvf.Bo > 0 && fvf.Bw > 0 && fvf.Rs >= 0)) throw new Error('Bo and Bw must be positive and Rs zero or more.');
+      const lo = bandMinT === '' ? bandMin : Number(bandMinT);
+      const hi = bandMaxT === '' ? bandMax : Number(bandMaxT);
+      const band = { min: lo, max: Math.max(hi, lo) };
+      const led = ledgerWith({ window: win, band, fvf });
       const pv = pressureView();
       const tr = tracked ? trackedFvfLedger() : null;
-      return { led, pv, tr, band };
+      const one = periodVoidage(month, fvf);
+      return { led, pv, tr, band, one };
     } catch (e) {
       return { error: e.message };
     }
-  }, [win, bandMin, bandMax, tracked]);
+  }, [win, bandMin, bandMax, tracked, bo, bw, rs, bandMinT, bandMaxT, month]);
 
   if (out.error) return <PanelShell title="Ledger explorer"><Note>Engine error: {out.error}</Note></PanelShell>;
-  const { led, pv, tr, band } = out;
+  const { led, pv, tr, band, one } = out;
 
   const n = led.series.length;
   const vMin = 0.5;
@@ -82,6 +108,19 @@ const LedgerExplorer = () => {
         </button>
       </div>
 
+      <div className="grid gap-4 sm:grid-cols-6 items-end mt-3">
+        <NumBox label="Bo (rb/stb)" value={bo} onChange={setBo} />
+        <NumBox label="Bw (rb/stb)" value={bw} onChange={setBw} />
+        <NumBox label="Rs (scf/stb)" value={rs} onChange={setRs} />
+        <NumBox label="Band minimum (typed)" value={bandMinT} onChange={setBandMinT} />
+        <NumBox label="Band maximum (typed)" value={bandMaxT} onChange={setBandMaxT} />
+        <NumBox label="Read month (YYYY-MM)" value={month} onChange={setMonth} />
+      </div>
+      <p className="text-xs text-gray-500 mt-1">
+        The panel opens on the teaching factor set (Bo {LEDGER_FVF.Bo}, Bw {LEDGER_FVF.Bw}, Rs {LEDGER_FVF.Rs}) and the
+        1.00 to 1.20 band. A typed band overrides the sliders. A capstone brief states its own factors, band and month.
+      </p>
+
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
         <rect
           x={PAD.left} y={y(band.max)} width={W - PAD.left - PAD.right}
@@ -110,11 +149,12 @@ const LedgerExplorer = () => {
         <Tile label="Cumulative VRR" value={fmt(cumLast, 6)} unit="rb/rb" />
         <Tile label="Latest instantaneous" value={fmt(led.series[n - 1].instantaneousVRR, 4)} unit="rb/rb" />
         <Tile label={`Rolling ${win}`} value={fmt(led.rolling[n - 1], 4)} unit="rb/rb" />
-        <Tile label="Fill-up month" value={led.fillUp ? led.fillUp.label : 'never'} unit="" />
+        <Tile label="Fill-up month" value={led.fillUp ? `${led.fillUp.label} (index ${led.fillUp.index})` : 'never'} unit="" />
         <Tile label="Months under band" value={led.monthsUnder} unit="of 36" />
         <Tile label="Months over band" value={led.monthsOver} unit="of 36" />
         <Tile label="Produced voidage" value={fmt(led.summary.totalProducedVoidage, 0)} unit="rb" />
         <Tile label="Injected voidage" value={fmt(led.summary.totalInjectedVoidage, 0)} unit="rb" />
+        <Tile label={`Produced voidage, ${month}`} value={one ? fmt(one.producedVoidage, 2) : '-'} unit="rb" />
         <Tile label="Pressure trough" value={pv.trough.label} unit={`${fmt(pv.trough.p_end_psia, 1)} psia`} />
         <Tile label="Trough the surveys see" value={pv.interpolatedTrough.label} unit={`${fmt(pv.troughMissedByPsi, 2)} psi high`} />
       </TileGrid>

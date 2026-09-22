@@ -146,6 +146,37 @@ export const window_ = (id = 'slant', over = {}) => {
   return { ...w, tightRow: tight, boundAtTightest: tight.ppEmwKgM3 > tight.collapseEmwKgM3 ? 'pore pressure' : 'collapse' };
 };
 
+// The typed parameter set a learner can run in the stability and window
+// explorers. Every box opens blank, which means the published value; a typed
+// number replaces that one parameter (the regime stays the published one).
+export const PARAM_FIELDS = [
+  { key: 'nu', label: 'Poisson ratio' },
+  { key: 'frictionAngleDeg', label: 'Friction angle (deg)' },
+  { key: 'ePa', label: "Young's modulus (Pa)" },
+  { key: 'epsX', label: 'Tectonic strain epsX' },
+  { key: 'epsY', label: 'Tectonic strain epsY' },
+  { key: 'alphaBiot', label: 'Biot coefficient' },
+  { key: 'shmaxAzimuthDeg', label: 'SHmax azimuth (deg)' },
+  { key: 'tensileStrengthPa', label: 'Tensile strength (Pa)' },
+];
+export const BLANK_PARAMS = Object.freeze(Object.fromEntries(PARAM_FIELDS.map((f) => [f.key, ''])));
+
+/** Typed boxes to an `over` object: blank boxes are left out, a box that is
+ *  not a number, or a Poisson ratio outside (0, 0.5), gives null. */
+export const paramsOver = (typed) => {
+  const over = {};
+  for (const { key } of PARAM_FIELDS) {
+    const t = typed[key];
+    if (t === '' || t == null) continue;
+    const v = Number(t);
+    if (!Number.isFinite(v)) return null;
+    over[key] = v;
+  }
+  if (over.nu != null && !(over.nu > 0 && over.nu < 0.5)) return null;
+  if (over.frictionAngleDeg != null && !(over.frictionAngleDeg >= 0)) return null;
+  return over;
+};
+
 // Verification against the published oracle: the horizontal stresses, both
 // wells' row counts and both tightest points.
 export const oracleCheck = () => {

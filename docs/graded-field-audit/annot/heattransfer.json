@@ -132,45 +132,71 @@
    "source": "suite-app",
    "source_ref": "src/components/heatexchanger/SizingPanels.jsx:164-166",
    "printed": {
-    "decimals": 3
+    "decimals": 6
    },
    "display_scale": 1,
-   "display_ref": "src/components/heatexchanger/SizingPanels.jsx:166",
+   "display_ref": "src/components/heatexchanger/SizingPanels.jsx SizingResults, F correction",
    "prompt_precision": "Correction factors and equivalent P as a fraction ... all to six decimals",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
+   "class": "none",
    "fix": {
     "display": "src/components/heatexchanger/SizingPanels.jsx:166 -> fmt(thermal.f, 6) (and P, R at :160-161 to 6)"
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Either print F to six decimals in the Suite studio, or write the one-shell closed form (and the shell-series conversion) into intermediate/m01/l02 and m02/l01 so the field is a genuine hand-calc as the course's 'closed form' framing implies. Preferred: write the formula into the lesson; the prompt does not name the studio.",
-   "evidence": "The course says F comes from 'a closed form in P, R and the shell pass count' (intermediate/m01/l02) but never writes it, and the panel takes no inputs. The Suite studio prints `fmt(thermal.f, 3)` = 0.888, 3.8e-5 from 0.887962 with tol 5e-7.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: rodpumpHeatxFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": "A learner with a textbook Bowman formula can reach it; the course does not give it.",
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "wave": "w3",
+    "suite": "Suite PR #566 (Heat Exchanger Sizer Full precision switch, stacked on #554)",
+    "migration": "20261026_w3_heattransfer.sql",
+    "prompt_append": "Read the figures in the Heat Exchanger Sizer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": {
+     "decimals": 3
+    }
+   }
   },
   {
    "tier": "intermediate",
    "key": "ubit_p1_two_shells",
-   "source": "unobtainable",
-   "source_ref": "packages/engines/engines/facilities/heatTransfer.js:417-424",
-   "printed": null,
+   "source": "suite-app",
+   "source_ref": "src/components/heatexchanger/SizingPanels.jsx SizingResults, Equivalent single-shell P (shown only with Full precision on and 2 or more shells; engine p1)",
+   "printed": {
+    "decimals": 6
+   },
    "display_scale": 1,
-   "display_ref": null,
+   "display_ref": "src/components/heatexchanger/SizingPanels.jsx SizingResults, Equivalent single-shell P (shown only with Full precision on and 2 or more shells; engine p1)",
    "prompt_precision": "Correction factors and equivalent P as a fraction ... to six decimals",
    "answer_space": null,
    "guess_p": null,
-   "class": "display",
-   "fix": {
-    "display": "src/components/heatexchanger/SizingPanels.jsx:160 -> add a Stat 'Equivalent single-shell P' = fmt(thermal.p1, 6) (expose p1 on the thermal result), or state the conversion formula in intermediate/m02-shells-in-series/l01-the-equivalent-single-shell-p.md"
-   },
-   "owner_decision": true,
+   "class": "none",
+   "fix": null,
+   "owner_decision": false,
    "recommendation": "Write the conversion into m02/l01 (it is one line of algebra) so the field is hand-calc; otherwise expose p1 in the studio at six decimals.",
-   "evidence": "The equivalent single-shell P is not printed by the Suite studio (SizingPanels.jsx shows whole-unit P only, at 3 decimals) and the conversion formula (p1 = (s-1)/(s-r) from heatTransfer.js:421-424) is not written in intermediate/m02/l01, which only tabulates its outputs; the panel has no numeric inputs.",
+   "evidence": "With Full precision on, prints at 6 decimals (jest: rodpumpHeatxFullPrecision.test.jsx, the engine result through formatFull).",
    "notes": null,
    "leak": false,
-   "shipped": null
+   "reclassed_from": "display",
+   "shipped": {
+    "migration": "20261026_w3_heattransfer.sql",
+    "wave": "w3",
+    "prompt_contains": [],
+    "lessons": [
+     "src/content/courses/heattransfer/intermediate/m02-shells-in-series/l01-the-equivalent-single-shell-p.md"
+    ],
+    "lesson_contains": [
+     [
+      "src/content/courses/heattransfer/intermediate/m02-shells-in-series/l01-the-equivalent-single-shell-p.md",
+      "so the value the closed form was actually read at is visible rather than implied.\n\n## The conversion itself\n\nFor N shells in series at a whole unit P and R, the engine first forms\n\n    S = ((1 - P R) / (1 - P))^(1/N)\n\nand then takes the equivalent single-shell P as\n\n    P1 = (S - 1) / (S - R)\n\nWhere R is 1 that quotient has no value, and the limit is used instead: P1 = P / (N - P (N - 1)). Both are one line in a spreadsheet, and either one reproduces the equivalent single-shell P column of the two tables below from its P, R and shell count."
+     ]
+    ],
+    "suite": "Suite PR #566 (Heat Exchanger Sizer Full precision switch, stacked on #554)",
+    "prompt_append": "Read the figures in the Heat Exchanger Sizer with its Full precision switch on (at the top of the page): it prints them to the precision this capstone grades, with no digit grouping.",
+    "printed_before": null
+   }
   },
   {
    "tier": "intermediate",

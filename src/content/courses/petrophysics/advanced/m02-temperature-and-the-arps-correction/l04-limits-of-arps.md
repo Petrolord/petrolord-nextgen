@@ -1,6 +1,6 @@
 # The limits of Arps
 
-The Arps correction is compact, salinity-free and reversible, and it just produced a capstone-grade number in three lines of arithmetic. It is also easy to over-trust. This lesson draws the boundary around what the formula actually does, because the Expert workflow's whole architecture (three independent Rw routes instead of one) exists to defend against the failure modes listed here.
+The Arps correction is compact, salinity-free and reversible, and it just produced, in three lines of arithmetic, the kind of number the capstone grades. It is also easy to over-trust. This lesson draws the boundary around what the formula actually does, because the Expert workflow's whole architecture (three independent Rw routes instead of one) exists to defend against the failure modes listed here.
 
 ## Calibrated for NaCl
 

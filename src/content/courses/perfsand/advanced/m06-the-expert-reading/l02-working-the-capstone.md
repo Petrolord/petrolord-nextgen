@@ -1,10 +1,10 @@
 # Working the capstone
 
-> **Open book, in part.** Some of the figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now those check that you can find, read and report them correctly. A later update takes them out of the lessons and panels.
-
 The six graded values in this tier, and the traps in each.
 
 {{panel:ps-sand-explorer}}
+
+**Your case.** Fields 3 to 6 come from the explorer's "Sanding onset" view. Type the interval top and bottom, the step and the boost the brief states, and pick the open hole cavity. The boxes open blank, which is the published case, and the zero-margin boost prints to eight decimals.
 
 ## The conditions
 

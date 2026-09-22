@@ -1,6 +1,6 @@
 # The Ekene section
 
-Every course on this path works a single fixture from beginning to end, so that by the time you reach the capstone the data is familiar and only the technique is being tested. For Well Correlation that fixture is the Ekene section: four wells, four named tops, one reservoir sand, and a structural story that the section will tell you if you read it properly.
+Every course on this path works a single fixture from beginning to end, so that the data becomes familiar and only the technique is new; the capstone then hands you a section of its own to test the technique. For Well Correlation that fixture is the Ekene section: four wells, four named tops, one reservoir sand, and a structural story that the section will tell you if you read it properly.
 
 ## The four wells
 

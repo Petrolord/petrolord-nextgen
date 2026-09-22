@@ -8,11 +8,11 @@ Stratigraphy in deposition order with lithologies, present thicknesses and age w
 
 ## Step two: run forward, and run the comparisons
 
-One run answers nothing but "what does this model say". The workflow's unit of meaning is the comparison set: the reference run plus the runs that isolate causes and price uncertainties. For the capstone: the reference basin and its no-erosion twin. In practice: variants over heat-flow scenarios, erosion amounts, source richness, whatever the register and the inputs' error bars nominate. Module 3's rule governs every pair: one difference per comparison, or the difference measures nothing.
+One run answers nothing but "what does this model say". The workflow's unit of meaning is the comparison set: the reference run plus the runs that isolate causes and price uncertainties. For the golden case and the capstone: the reference basin with its event, and its no-erosion twin. In practice: variants over heat-flow scenarios, erosion amounts, source richness, whatever the register and the inputs' error bars nominate. Module 3's rule governs every pair: one difference per comparison, or the difference measures nothing.
 
 ## Step three: verify before reading
 
-The checklist of module 5, in cost order: closed forms, inherited anchors, composition checks. Three multiplications and a subtraction validate half the graded surface before any interpretation begins, and the two-run discipline validates the comparison itself. A run that fails a check is not "approximately right"; the checks are chosen precisely because failures localise causes.
+The checklist of module 5, in cost order: closed forms, inherited anchors, composition checks. Three multiplications and a subtraction validate half the reported surface before any interpretation begins, and the two-run discipline validates the comparison itself. A run that fails a check is not "approximately right"; the checks are chosen precisely because failures localise causes.
 
 ## Step four: read the diaries
 
@@ -22,9 +22,9 @@ Extract the series, not just endpoints. Burial staircase per layer; temperature 
 
 The deliverable is module 5's charge statement: potential, conversion, generation, expulsion with efficiency and dates, retained mass, all at stated precision, with the limitations register attached and the sensitivity runs that price its entries. Plus, where erosion or uplift is in play, the signature analysis: what the maturity excess measures, on what convention, with what error bars from the amount-sensitivity curve.
 
-## The workflow on the capstone
+## The workflow on a brief
 
-The capstone is the workflow with step one handed to you. Assemble: the golden description, module 1. Run: reference plus no-erosion twin. Verify: the three identities. Read: final temperature, Ro, TR from the reference run's source diary. State: generated, expelled, and the signature from the twin comparison. Six fields, five steps, nothing improvised.
+A capstone brief is the workflow with step one handed to you. Assemble: the golden description, module 1. Run: reference plus no-erosion twin. Verify: the three identities. Read: final temperature, Ro, TR from the reference run's source diary. State: generated, expelled, and the signature from the twin comparison. Six fields, five steps, nothing improvised.
 
 ## Worked example
 

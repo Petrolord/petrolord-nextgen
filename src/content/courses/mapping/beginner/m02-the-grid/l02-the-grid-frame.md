@@ -1,6 +1,6 @@
 # The grid frame
 
-The frame is the geometry the map is written onto: an origin, a count of nodes across, a count of nodes up, and the cell size. You do not type those numbers into the app. The engine derives them from the control points and one setting you do choose, the cell size, plus a fixed padding margin. This lesson works the derivation through by hand for the Ekene field, because the numbers it produces reappear in the capstone.
+The frame is the geometry the map is written onto: an origin, a count of nodes across, a count of nodes up, and the cell size. You do not type those numbers into the app. The engine derives them from the control points and one setting you do choose, the cell size, plus a fixed padding margin. This lesson works the derivation through by hand for the Ekene field, because the capstone asks you to run the same derivation on a well set of its own.
 
 ## What the engine is given
 
@@ -12,13 +12,13 @@ Note what the pad is measured in. It is two cells, not a fixed distance, so its 
 
 ## The arithmetic across
 
-Take the capstone setting, a cell size of 100 m, and work the x direction first.
+Take the teaching setting, a cell size of 100 m, and work the x direction first.
 
 The control spans x from 600 to 2600, which is 2000 m wide. The pad is two cells at 100 m, so 200 m, subtracted from the western edge and added to the eastern one. The origin x is therefore 600 minus 200, which is **400**, and the eastern edge is 2600 plus 200, which is **2800**.
 
 Now count the nodes. The frame runs from 400 to 2800, a span of 2400 m. At 100 m spacing that span contains 2400 divided by 100, which is 24 intervals. Nodes sit at both ends of every interval, so the node count is 24 plus 1, which is **25**.
 
-That 25 is one of the six numbers the capstone asks you for, so it is worth being able to reproduce it two ways. The second way is the engine's own formula: take the control span of 2000 m, divide by the cell size to get 20, add 1 for the fence-post, then add two cells of pad on each side, which is 4 more. That gives 20 plus 1 plus 4, which is 25 again.
+That 25 is worth being able to reproduce two ways. The second way is the engine's own formula: take the control span of 2000 m, divide by the cell size to get 20, add 1 for the fence-post, then add two cells of pad on each side, which is 4 more. That gives 20 plus 1 plus 4, which is 25 again.
 
 ## The arithmetic up
 
@@ -28,7 +28,7 @@ The frame spans 2700 minus 800, which is 1900 m. At 100 m spacing that is 19 int
 
 By the engine's formula: 1500 divided by 100 is 15, plus 1 is 16, plus 4 for the pad is 20. The two routes agree.
 
-So the Ekene capstone frame is an origin at (400, 800), 25 nodes across and 20 nodes up, at a 100 m cell. The map covers x from 400 to 2800 and y from 800 to 2700. Multiply the counts and the grid holds 25 times 20, which is 500 nodes in total.
+So the Ekene teaching frame is an origin at (400, 800), 25 nodes across and 20 nodes up, at a 100 m cell. The map covers x from 400 to 2800 and y from 800 to 2700. Multiply the counts and the grid holds 25 times 20, which is 500 nodes in total.
 
 ## The fence-post rule
 
@@ -42,7 +42,7 @@ Whenever you convert a distance to a node count, add the one. Whenever you conve
 
 ## What the frame does not tell you
 
-The frame is geometry only. It fixes where the 500 nodes sit and says nothing about which of them carry a depth. Only 201 of these 500 end up live at the capstone setting, and that split comes from the extrapolation rule in module 4, not from anything in this lesson. Keep the two apart in your head: the frame is a decision about coverage and resolution, and liveness is a decision about honesty.
+The frame is geometry only. It fixes where the 500 nodes sit and says nothing about which of them carry a depth. Only 201 of these 500 end up live at the teaching setting, and that split comes from the extrapolation rule in module 4, not from anything in this lesson. Keep the two apart in your head: the frame is a decision about coverage and resolution, and liveness is a decision about honesty.
 
 ## Exercise
 

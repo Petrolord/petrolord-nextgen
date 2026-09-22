@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from 'react';
-import { HEAT_FIXTURE, computeBurialHeat } from '@/lib/basinTeaching';
+import { HEAT_FIXTURE, heatColumn, twoLayerHeat } from '@/lib/basinTeaching';
 import { BurialCompactionEngine } from '@petrolord/engines/engines/basin/BurialCompactionEngine.js';
 import { getCompactionParams } from '@petrolord/engines/engines/basin/CompactionModelLibrary.js';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
@@ -17,12 +17,28 @@ const MAX_Z = 4000;
 
 const fmt = (v, d = 4) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 
-const BASE = computeBurialHeat();
+// The heat column opens on the golden fixture, the teaching case; its four
+// numbers are typed inputs, so a column of your own (the capstone states
+// one) is worked by typing it in. Nothing here preloads it.
+const HEAT_DEFAULTS = {
+  surfaceC: String(HEAT_FIXTURE.surface_t_c),
+  basalMwM2: String(HEAT_FIXTURE.basal_q_w_m2 * 1000),
+  kUpper: String(HEAT_FIXTURE.layers[0].k),
+  kLower: String(HEAT_FIXTURE.layers[1].k),
+};
 
 const BurialHeatExplorer = () => {
   const [lith, setLith] = useState('shale');
   const [depth, setDepth] = useState('2000');
   const [burial, setBurial] = useState('1000');
+  const [heatIn, setHeatIn] = useState(HEAT_DEFAULTS);
+  const setH = (k) => (v) => setHeatIn((o) => ({ ...o, [k]: v }));
+  const hn = Object.fromEntries(Object.entries(heatIn).map(([k, v]) => [k, Number(v)]));
+  const heatOk = Number.isFinite(hn.surfaceC) && hn.basalMwM2 > 0 && hn.kUpper > 0 && hn.kLower > 0;
+  const heat = useMemo(() => (heatOk ? twoLayerHeat(hn) : HEAT_FIXTURE),
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [heatOk, heatIn]);
+  const BASE = useMemo(() => heatColumn(heat), [heat]);
 
   const zRaw = Number(depth);
   const bRaw = Number(burial);
@@ -62,20 +78,21 @@ const BurialHeatExplorer = () => {
   const sxPhi = (phi) => PAD.left + (phi / 0.7) * halfW;
   const zHeatMax = 2000;
   const syH = (z) => PAD.top + (z / zHeatMax) * plotH;
-  const tMax = 65;
+  const tMax = Math.max(65, Math.ceil(BASE.tDeepest / 5) * 5);
+  const tMaxPlot = tMax;
   const sxT = (t) => PAD.left + halfW + 24 + (t / tMax) * halfW;
 
   const phiPts = [];
   for (let z = 0; z <= MAX_Z; z += 50) {
     phiPts.push(`${sxPhi(BurialCompactionEngine.porosity(z, p.phi0, p.c))},${syZ(z)}`);
   }
-  const heatPts = HEAT_FIXTURE.profile.map((e) => `${sxT(e.t_c)},${syH(e.z_m)}`);
-  const gradTop = (HEAT_FIXTURE.basal_q_w_m2 * 1000) / HEAT_FIXTURE.layers[0].k;
-  const gradBot = (HEAT_FIXTURE.basal_q_w_m2 * 1000) / HEAT_FIXTURE.layers[1].k;
+  const heatPts = BASE.nodes.map((n, i) => `${sxT(Math.min(BASE.temps[i], tMaxPlot))},${syH(n.z)}`);
+  const gradTop = (heat.basal_q_w_m2 * 1000) / heat.layers[0].k;
+  const gradBot = (heat.basal_q_w_m2 * 1000) / heat.layers[1].k;
 
   return (
     <PanelShell title="Burial and heat explorer"
-      subtitle={`Left: the Sclater-Christie curve for the lithology you pick. Right: the golden steady heat column, ${HEAT_FIXTURE.surface_t_c} degC at surface with ${HEAT_FIXTURE.basal_q_w_m2 * 1000} mW/m2 through k ${HEAT_FIXTURE.layers[0].k} over k ${HEAT_FIXTURE.layers[1].k}.`}>
+      subtitle={`Left: the Sclater-Christie curve for the lithology you pick. Right: a steady two-layer heat column, ${heatIn.surfaceC} degC at surface with ${heatIn.basalMwM2} mW/m2 through k ${heatIn.kUpper} over k ${heatIn.kLower}, two 1000 m layers of ten cells each. It opens on the golden column.`}>
       <div className="flex flex-wrap gap-2">
         {LITHS.map((l) => (
           <button key={l} type="button" onClick={() => setLith(l)}
@@ -90,13 +107,19 @@ const BurialHeatExplorer = () => {
         <NumField label="Depth for porosity (m)" value={depth} onChange={setDepth} />
         <NumField label="Burial depth of a 100 m layer (m)" value={burial} onChange={setBurial} />
         <div className="text-xs text-gray-500 sm:col-span-2">
-          The capstone reads shale porosity at 2000 m and restores a 100 m shale from 1000 m.
+          The worked case reads shale porosity at 2000 m and restores a 100 m shale from 1000 m.
         </div>
+      </div>
+      <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
+        <NumField label="Surface temperature (degC)" value={heatIn.surfaceC} onChange={setH('surfaceC')} />
+        <NumField label="Basal heat flow (mW/m2)" value={heatIn.basalMwM2} onChange={setH('basalMwM2')} />
+        <NumField label="Upper layer k (W/m/K)" value={heatIn.kUpper} onChange={setH('kUpper')} />
+        <NumField label="Lower layer k (W/m/K)" value={heatIn.kLower} onChange={setH('kLower')} />
       </div>
 
       <div className="overflow-x-auto">
         <svg viewBox={`0 0 ${W} ${H}`} width="100%" style={{ minWidth: 460 }} role="img"
-          aria-label={`Compaction curve for ${lith} and the golden steady heat column`}>
+          aria-label={`Compaction curve for ${lith} and the steady heat column`}>
           <rect x="0" y="0" width={W} height={H} fill="#0F172A" />
 
           <polyline points={phiPts.join(' ')} fill="none" stroke="#38bdf8" strokeWidth="1.8" />
@@ -133,8 +156,8 @@ const BurialHeatExplorer = () => {
       </TileGrid>
 
       <Note>
-        The same {HEAT_FIXTURE.basal_q_w_m2 * 1000} mW/m2 flows through both layers of the column,
-        and the gradient still changes by nearly a factor of two at 1000 m, because the gradient is
+        The same {heatIn.basalMwM2} mW/m2 flows through both layers of the column, and the gradient
+        still changes at 1000 m, by the ratio of the two conductivities, because the gradient is
         the heat flow divided by the conductivity. Temperature itself stays continuous across that
         boundary; it is the slope that kinks. On the left, switch lithology and watch which rock is
         most porous at the surface and which is most porous at 2000 m. They are not the same rock.

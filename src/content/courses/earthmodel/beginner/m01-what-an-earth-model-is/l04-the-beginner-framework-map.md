@@ -41,7 +41,7 @@ Module 4 subtracts. Zone A thickness is TopB minus TopA at every node, and zone 
 
 Two checks fall out of the surface table above. The difference of the surface means equals the mean thickness exactly: 1575.5 minus 1539.5 is 36 for zone A, and 1585.74 minus 1575.5 is 10.24 for zone B. That is a free quality control step and you should take it every time.
 
-Zone B is where this tier earns its keep. It has positive thickness at 320 nodes and zero thickness at the other 180, and its mean is therefore either 10.24 m averaged over all 500 nodes of the frame, or 16 m averaged over only the 320 nodes where the zone exists. Both describe the same rock. Only the denominator changed, and it moved the headline number by 56 percent. Module 4 ends on that point and the capstone tests it.
+Zone B is where this tier earns its keep. It has positive thickness at 320 nodes and zero thickness at the other 180, and its mean is therefore either 10.24 m averaged over all 500 nodes of the frame, or 16 m averaged over only the 320 nodes where the zone exists. Both describe the same rock. Only the denominator changed, and it moved the headline number by 56 percent. Module 4 ends on that point and the capstone tests it on a frame of its own.
 
 ## Step 4: integrate to bulk volume
 
@@ -51,9 +51,9 @@ Zone A gives 36 times 500 times 2500, which is 45,000,000 m3, or 45 x 10^6 m3. Z
 
 That volume is where this course stops and hands over.
 
-## The six graded numbers
+## The six reported numbers
 
-The capstone asks for six values, and each comes from a step above.
+The tier reports six values, and each comes from a step above. The capstone asks for the same six on a frame of its own.
 
 | Number | Value |
 | --- | --- |
@@ -72,6 +72,6 @@ The panel below runs the whole path at once, showing the three clamped surfaces,
 
 ## Exercise
 
-Write the four steps in order and note beside each what it takes in and what it hands on. Then answer two questions in one sentence each. Which step would change the number 180? Which of the six graded numbers is unaffected by the choice of denominator for zone B?
+Write the four steps in order and note beside each what it takes in and what it hands on. Then answer two questions in one sentence each. Which step would change the number 180? Which of the six reported numbers is unaffected by the choice of denominator for zone B?
 
 Self check: the steps are resample onto one frame, clamp depth down, difference into zone thicknesses, and integrate to bulk volume, each taking the previous step's output as its input. The count of 180 is produced by the clamp, so it would change if the resampled surfaces changed, which means a different frame, a different resampling or a different source grid, and not by anything done after the clamp. Zone A bulk rock volume of 45 x 10^6 m3 is unaffected, since zone A is present at all 500 nodes and has only one possible denominator, and in any case the zone B volume of 12,800,000 m3 is the same whichever denominator is used for its mean.

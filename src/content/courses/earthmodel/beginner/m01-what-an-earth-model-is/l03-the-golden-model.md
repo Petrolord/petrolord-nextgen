@@ -4,7 +4,7 @@ Every number in this course comes from one model. It is worth knowing exactly wh
 
 ## A committed fixture
 
-The model is a synthetic. Nobody drilled it and nobody interpreted it. It was constructed as a committed test fixture, so that the answer to each step of the build is known in advance and can be checked against an independent implementation written in a different language. The capstone answer key at the end of this tier was produced by running the same pipeline you are learning, and it agrees with that independent oracle.
+The model is a synthetic. Nobody drilled it and nobody interpreted it. It was constructed as a committed test fixture, so that the answer to each step of the build is known in advance and can be checked against an independent implementation written in a different language. Every number this tier quotes for it was produced by running the same pipeline you are learning, and it agrees with that independent oracle. The capstone at the end of the tier runs that pipeline on a frame of its own.
 
 The practical consequence is the same one every good teaching fixture gives you. If your arithmetic returns something else, your arithmetic is wrong. On a real field you never have that comfort, because a wrong framework looks exactly like a right one until a well proves otherwise.
 
@@ -12,7 +12,7 @@ The practical consequence is the same one every good teaching fixture gives you.
 
 The model frame is 25 by 20 nodes at 50 m cells, with its origin at (1000, 2000). That is 500 nodes in total, and each node accounts for a cell area of 2500 square metres.
 
-That frame is a decision, made once, and everything in the model is written onto it. The next module is about how that decision is made and what it commits you to. For now, hold on to two numbers, because they turn up in every calculation from here to the capstone: 500 nodes, and 2500 square metres per cell.
+That frame is a decision, made once, and everything in the model is written onto it. The next module is about how that decision is made and what it commits you to. For now, hold on to two numbers, because they turn up in every calculation on this frame: 500 nodes, and 2500 square metres per cell.
 
 ## Three surfaces, three grids
 

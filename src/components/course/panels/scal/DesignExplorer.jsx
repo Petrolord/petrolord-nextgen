@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import {
   ekeneDisplacement, fitLabGrid, fitPrintedLabGrid, dipCase, polymerCase, averageRefit,
-  swAvgCrestColumn, EKENE_SCAL,
+  swAvgCrestColumn, EKENE_SCAL, TEACHING_ROCK, TEACHING_SWIRR,
 } from './scalLab';
-import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Design explorer (Expert): three ways to interrogate the same displacement.
 // Fit-the-lab recovers the Corey plant from the 13-row grid, and the printed
@@ -11,6 +11,8 @@ import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/cour
 // prices the gravity term at a chosen rate and angle; the polymer mode
 // thickens the water and moves the front. The base Ekene fw curve stays on
 // the plot throughout so every case is read against the same reference.
+// The rate, dip, multiplier, averaging Swirr and crest-column rock all open on
+// teaching values; the Expert capstone's own settings are typed or dialled in.
 
 const W = 620;
 const H = 320;
@@ -33,14 +35,23 @@ const RangeField = ({ label, value, min, max, step, onChange }) => (
 
 const DesignExplorer = () => {
   const [mode, setMode] = useState('fit');
-  const [qt, setQt] = useState(2000);
-  const [dip, setDip] = useState(10);
-  const [mult, setMult] = useState(4);
+  const [qt, setQt] = useState(3000);
+  const [dip, setDip] = useState(0);
+  const [mult, setMult] = useState(2);
+  const [swirrText, setSwirrText] = useState(String(TEACHING_SWIRR));
+  const [kText, setKText] = useState(String(TEACHING_ROCK.k_md));
+  const [phiText, setPhiText] = useState(String(TEACHING_ROCK.phi));
 
   const out = useMemo(() => {
     try {
       const base = ekeneDisplacement();
-      const context = { avgA: averageRefit().fit.a, swAvg: swAvgCrestColumn() };
+      const Swirr = Number(swirrText);
+      const k = Number(kText);
+      const phi = Number(phiText);
+      if (!(Swirr >= 0 && Swirr < 0.3)) return { error: 'Enter an averaging Swirr from 0 up to the lowest measured Sw, 0.3.' };
+      if (!(k > 0) || !(phi > 0 && phi < 1)) return { error: 'Enter a positive permeability and a porosity between 0 and 1 for the crest column.' };
+      const avg = averageRefit(Swirr);
+      const context = { avgA: avg.fit.a, swAvg: swAvgCrestColumn(2000, { k_md: k, phi }) };
       if (mode === 'fit' || mode === 'fitPrinted') {
         const { fit } = mode === 'fit' ? fitLabGrid() : fitPrintedLabGrid();
         if (!fit.ok) return { error: fit.errors.join('; ') };
@@ -53,9 +64,20 @@ const DesignExplorer = () => {
     } catch (e) {
       return { error: e.message };
     }
-  }, [mode, qt, dip, mult]);
+  }, [mode, qt, dip, mult, swirrText, kText, phiText]);
 
-  if (out.error) return <PanelShell title="Design explorer"><Note>Engine error: {out.error}</Note></PanelShell>;
+  if (out.error) {
+    return (
+      <PanelShell title="Design explorer">
+        <div className="grid gap-3 grid-cols-3 sm:w-[36rem]">
+          <NumField label="Swirr for the averaged refit" value={swirrText} onChange={setSwirrText} />
+          <NumField label="Crest column: reservoir k (md)" value={kText} onChange={setKText} />
+          <NumField label="Crest column: porosity" value={phiText} onChange={setPhiText} />
+        </div>
+        <Note>{out.error}</Note>
+      </PanelShell>
+    );
+  }
   const { base, context, fit, caseOut } = out;
   const Swc = EKENE_SCAL.design.krSpec.Swc;
 
@@ -89,6 +111,11 @@ const DesignExplorer = () => {
         {mode === 'polymer' && (
           <RangeField label="Water viscosity multiplier" value={mult} min={1} max={6} step={0.5} onChange={setMult} />
         )}
+      </div>
+      <div className="grid gap-3 grid-cols-3 sm:w-[36rem]">
+        <NumField label="Swirr for the averaged refit" value={swirrText} onChange={setSwirrText} />
+        <NumField label="Crest column: reservoir k (md)" value={kText} onChange={setKText} />
+        <NumField label="Crest column: porosity" value={phiText} onChange={setPhiText} />
       </div>
 
       <svg viewBox={`0 0 ${W} ${H}`} className="w-full h-auto bg-[#0F172A] rounded-md border border-gray-700">
@@ -144,8 +171,8 @@ const DesignExplorer = () => {
             <Tile label="Delta EDbt vs base" value={sci(caseOut.bl.EDbt - base.bl.EDbt, 4)} />
           </>
         )}
-        <Tile label="Averaged-refit a (design 0.25)" value={sci(context.avgA, 9)} />
-        <Tile label="Crest-column average Sw" value={sci(context.swAvg, 9)} />
+        <Tile label={`Averaged-refit a at Swirr ${swirrText}`} value={sci(context.avgA, 9)} />
+        <Tile label={`Crest-column average Sw (${kText} md, ${phiText})`} value={sci(context.swAvg, 9)} />
       </TileGrid>
 
       {caseOut.warnings?.length > 0 && (
@@ -157,8 +184,9 @@ const DesignExplorer = () => {
           The fit reads 24 log-space points (the two endpoint zeros are definitional and sit under
           the kr floor) and recovers the planted exponents to machine precision, because the grid
           is noise free. The two context tiles are the honest numbers of this tier: the averaged
-          J refit drifts off the design 0.25 through log-linear resampling, and the crest column
-          averages far wetter than the flat 0.35 booking.
+          J refit drifts off the direct fit through log-linear resampling, and the crest column
+          averages far wetter than a flat booking. Both open on teaching settings; type the Swirr
+          and the rock you want them for.
         </Note>
       )}
       {mode === 'fitPrinted' && (
@@ -171,8 +199,8 @@ const DesignExplorer = () => {
       )}
       {mode === 'dip' && (
         <Note>
-          The gravity term scales with one over the rate: at 2000 rb/d the dip is worth about
-          0.0007 in EDbt either side of flat, and at field rate it nearly vanishes. Updip
+          The gravity term scales with one over the rate: slow the flood and the dip is worth more
+          in EDbt either side of flat, and at field rate it nearly vanishes. Updip
           displacement holds the water back and lands the front slightly higher; downdip does the
           opposite. Sign discipline matters more than magnitude here.
         </Note>

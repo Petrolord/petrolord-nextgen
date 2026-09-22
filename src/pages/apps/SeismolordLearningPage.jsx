@@ -18,8 +18,8 @@ import {
   BookOpen, Award, ArrowRight,
 } from 'lucide-react';
 import {
-  computeSynthetic, waveletRows, traceRows, CAPSTONE_FREQ_HZ, V_OVERBURDEN_MS, DT_MS,
-  computeIntermediate, computeAdvanced, tuningRows, WEDGE,
+  computeSynthetic, waveletRows, traceRows, TEACHING_FREQ_HZ, V_OVERBURDEN_MS, DT_MS,
+  computeIntermediate, computeWedge, tuningRows, WEDGE, TEACHING_LAG_MS,
 } from '@/lib/seismolordTeaching';
 import {
   hasScope, getQuota, getCapstone, submitCapstone, verificationUrl,
@@ -67,7 +67,7 @@ const SeismolordLearningPage = () => {
   const { actualRole } = useRole();
   const [gate, setGate] = useState({ loading: true, allowed: false, quota: null });
   const [tier, setTier] = useState('beginner');
-  const [freq, setFreq] = useState(CAPSTONE_FREQ_HZ);
+  const [freq, setFreq] = useState(TEACHING_FREQ_HZ);
   const [capstone, setCapstone] = useState(null);
   const [answers, setAnswers] = useState({});
   const [submitting, setSubmitting] = useState(false);
@@ -127,7 +127,7 @@ const SeismolordLearningPage = () => {
       } else {
         toast({
           title: 'Not passing yet',
-          description: `${res.score}/${res.max_score} answers within tolerance. Check the wavelet frequency and re-read the summary panel.`,
+          description: `${res.score}/${res.max_score} answers within tolerance. Type the case the brief states into the course panels and read them again.`,
           variant: 'destructive',
         });
       }
@@ -230,7 +230,7 @@ const SeismolordLearningPage = () => {
                       </LineChart>
                     </ResponsiveContainer>
                   </div>
-                  <p className="text-xs text-gray-500">The capstone grades the {CAPSTONE_FREQ_HZ} Hz synthetic.</p>
+                  <p className="text-xs text-gray-500">The teaching reading is the whole log at {TEACHING_FREQ_HZ} Hz; the capstone states a window, a velocity and a wavelet of its own.</p>
                 </CardContent>
               </Card>
 
@@ -265,7 +265,7 @@ const SeismolordLearningPage = () => {
             <Card className="bg-[#1E293B] border-gray-700">
               <CardHeader>
                 <CardTitle className="text-white">Synthetic summary — {freq} Hz</CardTitle>
-                <CardDescription>This is the panel the capstone asks you to read (at {CAPSTONE_FREQ_HZ} Hz).</CardDescription>
+                <CardDescription>The teaching reading, at {TEACHING_FREQ_HZ} Hz on the whole log. For the capstone, type its case into the synthetic explorer in the course.</CardDescription>
               </CardHeader>
               <CardContent>
                 <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4 text-sm">
@@ -299,13 +299,13 @@ const SeismolordLearningPage = () => {
           </div>
 
           {tier === 'intermediate' && (() => {
-            const inter = computeIntermediate();
+            const inter = computeIntermediate(TEACHING_LAG_MS);
             return (
               <Card className="bg-[#1E293B] border-gray-700">
                 <CardHeader>
                   <CardTitle className="text-white">Bulk shift and tuning (Intermediate)</CardTitle>
                   <CardDescription>
-                    The observed seismic is the 25 Hz synthetic arriving late by a lag the scan has to find. Tuning: compare the 15 Hz and 40 Hz peaks.
+                    The teaching trace: the 25 Hz synthetic arriving late by a lag the scan has to find (the capstone's trace withholds its own lag; select it in the course's shift explorer). Tuning: compare the 15 Hz and 40 Hz peaks.
                   </CardDescription>
                 </CardHeader>
                 <CardContent>
@@ -332,14 +332,14 @@ const SeismolordLearningPage = () => {
           })()}
 
           {tier === 'advanced' && (() => {
-            const adv = computeAdvanced();
+            const adv = { f25: computeWedge(15), f40: computeWedge(30) };
             const rows = tuningRows(adv);
             return (
               <Card className="bg-[#1E293B] border-gray-700">
                 <CardHeader>
                   <CardTitle className="text-white">Wedge tuning panel (Advanced)</CardTitle>
                   <CardDescription>
-                    The SAND top and base as an equal and opposite pair (RC {WEDGE.rcTop} / {WEDGE.rcBase}), wedged 0 to {WEDGE.maxThicknessMs} ms at {WEDGE.dtMs} ms. Peak amplitude near the top interface per thickness.
+                    The SAND top and base as an equal and opposite pair (RC {WEDGE.rcTop} / {WEDGE.rcBase}), wedged 0 to {WEDGE.maxThicknessMs} ms at {WEDGE.dtMs} ms, at two teaching frequencies (the capstone reads 25 and 40 Hz in the course's wedge explorer). Peak amplitude near the top interface per thickness.
                   </CardDescription>
                 </CardHeader>
                 <CardContent className="space-y-4">
@@ -353,19 +353,19 @@ const SeismolordLearningPage = () => {
                         <Tooltip contentStyle={{ background: '#0F172A', border: '1px solid #334155', color: '#fff' }} />
                         <ReferenceLine x={adv.f25.tuneMs} stroke="#BFFF00" strokeDasharray="4 3" />
                         <ReferenceLine x={adv.f40.tuneMs} stroke="#38bdf8" strokeDasharray="4 3" />
-                        <Line type="monotone" dataKey="a25" name="25 Hz" stroke="#BFFF00" dot={false} strokeWidth={1.5} />
-                        <Line type="monotone" dataKey="a40" name="40 Hz" stroke="#38bdf8" dot={false} strokeWidth={1.5} />
+                        <Line type="monotone" dataKey="a25" name="15 Hz" stroke="#BFFF00" dot={false} strokeWidth={1.5} />
+                        <Line type="monotone" dataKey="a40" name="30 Hz" stroke="#38bdf8" dot={false} strokeWidth={1.5} />
                       </LineChart>
                     </ResponsiveContainer>
                   </div>
                   <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3 text-sm">
                     {[
-                      ['Tuning thickness at 25 Hz', `${adv.f25.tuneMs} ms`],
-                      ['Peak amplitude at 25 Hz tuning', num(adv.f25.tuneAmp, 6)],
-                      ['Tuning thickness at 40 Hz', `${adv.f40.tuneMs} ms`],
-                      ['Peak amplitude at 40 Hz tuning', num(adv.f40.tuneAmp, 6)],
-                      ['Isolated-reflector amplitude (25 Hz)', num(adv.f25.isoAmp, 6)],
-                      ['Theoretical tuning at 25 Hz', `${num(adv.f25.theoryMs, 4)} ms`],
+                      ['Tuning thickness at 15 Hz', `${adv.f25.tuneMs} ms`],
+                      ['Peak amplitude at 15 Hz tuning', num(adv.f25.tuneAmp, 6)],
+                      ['Tuning thickness at 30 Hz', `${adv.f40.tuneMs} ms`],
+                      ['Peak amplitude at 30 Hz tuning', num(adv.f40.tuneAmp, 6)],
+                      ['Isolated-reflector amplitude (15 Hz)', num(adv.f25.isoAmp, 6)],
+                      ['Theoretical tuning at 15 Hz', `${num(adv.f25.theoryMs, 4)} ms`],
                     ].map(([k, v]) => (
                       <div key={k} className="rounded-md border border-gray-700 bg-[#0F172A] p-3">
                         <p className="text-gray-500 text-xs">{k}</p>
@@ -447,7 +447,7 @@ const SeismolordLearningPage = () => {
                     </>
                   ) : (
                     <p className="text-red-300 font-medium flex items-center gap-2">
-                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance — set the wavelet to {CAPSTONE_FREQ_HZ} Hz and read the summary panel again.
+                      <XCircle className="h-5 w-5" /> {result.score}/{result.max_score} within tolerance. Type the case the brief states into the course panels and read them again.
                     </p>
                   )}
                 </div>

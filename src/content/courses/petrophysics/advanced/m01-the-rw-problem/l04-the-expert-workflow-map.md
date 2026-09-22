@@ -1,6 +1,6 @@
 # The Expert workflow map
 
-You have the brief; this lesson lays out the route through it. The Expert workflow is five steps, each owned by one of the modules ahead. Learn the shape now and every later lesson will slot into place.
+You have the brief; this lesson lays out the route through it, worked on the typewell. The capstone runs the same five steps on a well of its own, IKPO-3, with its own water sample and SP reading, so its numbers are yours to produce. The Expert workflow is five steps, each owned by one of the modules ahead. Learn the shape now and every later lesson will slot into place.
 
 ## Step 1: correct the lab sample (module 2)
 
@@ -8,7 +8,7 @@ The bottle says 0.114 ohm.m at 75 degF; the reservoir sits at 180 degF. The Arps
 
 $$R_w(180) = 0.114 \times \frac{75 + 6.77}{180 + 6.77} = 0.114 \times \frac{81.77}{186.77} = 0.0499 \text{ ohm.m}$$
 
-This is the first capstone number, `rw_arps`, graded to a tolerance of 0.0005 ohm.m. The factor 0.437811 is worth pausing on: temperature alone cut the sample's resistivity by more than half. Skipping this step is the single most damaging quicklook error in saturation work.
+On the capstone well this step is the first graded number, graded to a tolerance of 0.00005 ohm.m. The factor 0.437811 is worth pausing on: temperature alone cut the sample's resistivity by more than half. Skipping this step is the single most damaging quicklook error in saturation work.
 
 ## Step 2: convert the SP reading (module 3)
 
@@ -16,7 +16,7 @@ The SP quicklook chain turns the static deflection and the filtrate resistivity 
 
 $$R_{we} = R_{mfe} \times 10^{SSP/K}$$
 
-With $SSP = -93$ mV, $R_{mfe} = 0.62$ ohm.m and the temperature coefficient $K$ evaluated at 180 degF, the chain lands at 0.0498 ohm.m. That is the second capstone number, `rwe_ssp`, same tolerance. It comes from a completely different physical measurement than the bottle: an electrochemical potential logged in the borehole.
+With $SSP = -93$ mV, $R_{mfe} = 0.62$ ohm.m and the temperature coefficient $K$ evaluated at 180 degF, the chain lands at 0.0498 ohm.m. On the capstone well this step is the second graded number, same tolerance. It comes from a completely different physical measurement than the bottle: an electrochemical potential logged in the borehole.
 
 ## Step 3: compare with the Pickett fit (module 4)
 
@@ -36,7 +36,7 @@ Agreement among estimates is necessary but not sufficient; the adopted value mus
 
 $$\bar{S}_w^{leg} = 0.9991$$
 
-Effectively unity, sample after sample. This is the third capstone number, `sw_waterleg_mean` (tolerance 0.005). If your adopted $R_w$ cannot make the water leg read water, it is wrong no matter how it was derived.
+Effectively unity, sample after sample. On the capstone well this step is the third graded number (tolerance 0.0005). If your adopted $R_w$ cannot make the water leg read water, it is wrong no matter how it was derived.
 
 ## Step 5: book, then book again (module 5)
 
@@ -44,13 +44,13 @@ Finally the payoff. Book SAND_A with the Associate recipe and the corrected $R_w
 
 * Net pay 18.0 m, NTG 0.878, pay-average $S_w$ 0.3609.
 
-These are capstone numbers four and five (`sand_a_net_arps`, tolerance 0.01 m, and `sand_a_sw_avg_arps`, tolerance 0.005). Reassuringly, booking with the parameter-block 0.05 gives the same 18.0 m net with $S_w$ 0.3613: the corrected sample lands on the Associate booking, closing the loop across all three tiers.
+On the capstone well these are graded numbers four and five (net pay, tolerance 0.01 m, and pay-average $S_w$, tolerance 0.005). Reassuringly, booking with the parameter-block 0.05 gives the same 18.0 m net with $S_w$ 0.3613: the corrected sample lands on the Associate booking, closing the loop across all three tiers.
 
 Then book once more with the raw, uncorrected 0.114:
 
 * Net pay 16.5 m, pay-average $S_w$ 0.5303.
 
-The 16.5 m is the sixth capstone number, `sand_a_net_uncorrected`. The pair of bookings is the course's closing argument: 1.5 m of net pay hangs on one temperature correction.
+On the capstone well the raw-sample net is the sixth graded number. The pair of bookings is the course's closing argument: 1.5 m of net pay hangs on one temperature correction.
 
 ## The map in one sentence
 
@@ -66,4 +66,4 @@ Correct the sample, convert the SP, confirm against Pickett, prove the water leg
 
 ## Exercise
 
-Without looking back: list the six graded quantities and match each to its workflow step. Self-check: `rw_arps` 0.0499 (step 1), `rwe_ssp` 0.0498 (step 2), `sw_waterleg_mean` 0.9991 (step 4), `sand_a_net_arps` 18.0 m and `sand_a_sw_avg_arps` 0.3609 (step 5, corrected booking), `sand_a_net_uncorrected` 16.5 m (step 5, raw booking). The Pickett value is graded nowhere at this tier; it was graded at the Professional tier and serves here as the third voice in step 3. As a final arithmetic check, the pay lost to the uncorrected sample is $18.0 - 16.5 = 1.5$ m and the pay-average saturation shift is $0.5303 - 0.3609 = 0.1694$.
+Without looking back: list the six graded quantities and match each to its workflow step. Self-check on the typewell: Arps $R_w$ 0.0499 (step 1), SP $R_{we}$ 0.0498 (step 2), water-leg mean 0.9991 (step 4), corrected net 18.0 m and pay-average $S_w$ 0.3609 (step 5, corrected booking), raw-sample net 16.5 m (step 5, raw booking). The Pickett value is graded nowhere at this tier; it was graded at the Professional tier and serves here as the third voice in step 3. As a final arithmetic check, the pay lost to the uncorrected sample is $18.0 - 16.5 = 1.5$ m and the pay-average saturation shift is $0.5303 - 0.3609 = 0.1694$.

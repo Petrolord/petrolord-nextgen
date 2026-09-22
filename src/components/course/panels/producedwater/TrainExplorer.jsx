@@ -4,9 +4,11 @@ import {
 } from 'recharts';
 import {
   theTrain, twoMedians, notAnswering, heldForLiterature, heldItems,
-  OGBOTOBO_INLET, OGBOTOBO_BWPD,
+  OGBOTOBO_INLET, OGBOTOBO_BWPD, typedTrainStream, TYPED_TRAIN_DEFAULT,
 } from './producedWaterLab';
-import { Refusal, Warning } from './WaterExplorer';
+import {
+  Refusal, Warning, TypedInputs, TypedMessages, typedStrings,
+} from './WaterExplorer';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
@@ -42,6 +44,7 @@ export const MODES = [
   ['coupling', 'The coupling isolated: identical devices in series, and the order identity'],
   ['medians', 'Both medians on one basis, and the median that tracks the cut'],
   ['silence', 'The three ways this engine declines to answer'],
+  ['typed', 'Your stream, typed: a plate pack, a liner bank and a media bed in series, and one droplet'],
 ];
 
 const AXIS = { fill: '#94a3b8', fontSize: 11 };
@@ -308,6 +311,54 @@ export const SilenceMode = ({ s, h }) => {
   );
 };
 
+const nine = (v) => (Number.isFinite(v) ? Number(v).toFixed(9) : 'none');
+
+const TRAIN_GROUPS = [
+  ['The water and the oil', ['bwpd', 'tC', 'tdsPpm', 'apiGravity']],
+  ['The inlet and its grid', ['oiwPpm', 'd50Micron', 'sigma', 'nBins', 'spanSigma']],
+  ['Stage 1, the plate pack', ['nPlates', 'plateAreaM2', 'efficiencyFactor']],
+  ['Stage 2, the liner bank', ['nLiners', 'linerDiameterM', 'linerLengthM', 'designFlowPerLinerM3S', 'gFieldAtDesign',
+    'coreRadiusFraction']],
+  ['Stage 3, the media bed', ['filterAreaM2', 'bedDepthM', 'mediaMicron', 'filterCoefficientPerM', 'referenceDropletMicron']],
+  ['One droplet in this water', ['dropletMicron']],
+];
+
+export const TypedTrainMode = () => {
+  const [values, setValues] = useState(() => typedStrings(TYPED_TRAIN_DEFAULT));
+  const setValue = (k, x) => setValues((old) => ({ ...old, [k]: x }));
+  const r = useMemo(() => typedTrainStream(values), [values]);
+  return (
+    <>
+      <p className="text-xs text-slate-300 mb-0">
+        Type a stream and a three stage train, run in the order shown. The view opens on the teaching stream
+        OGBOTOBO&apos;s water and inlet, and every input can be retyped. Every cut size is the engine&apos;s own for its
+        device, and no dissolved oil floor and no discharge limit is applied.
+      </p>
+      <TypedInputs groups={TRAIN_GROUPS} values={values} setValue={setValue} />
+      <Tbl
+        head={['stage', 'cut micron', 'removal percent of the oil reaching it', 'outlet ppm', 'outlet median micron']}
+        rows={r.stages ? r.stages.map((st) => [st.name, six(st.d50cMicron), six(st.removalPct), six(st.outletOiwPpm),
+          six(st.outletMedianMicron)]) : []}
+      />
+      <div className="mt-3">
+        <TileGrid>
+          <Tile label="Inlet volume median on the grid" value={six(r.inletMedianMicron)} unit="micron" />
+          <Tile label="Train outlet" value={six(r.outletOiwPpm)} unit="ppm" />
+          <Tile label="Droplet median leaving the train" value={six(r.outletMedianMicron)} unit="micron" />
+          <Tile label="Train removal" value={six(r.overallRemovalPct)} unit="percent" />
+          <Tile label="Stokes rise of the typed droplet" value={twelve(r.dropletRiseMS)} unit="m/s" />
+          <Tile label="Reynolds number of the typed droplet" value={nine(r.dropletReynolds)} />
+        </TileGrid>
+      </div>
+      <TypedMessages r={r} />
+      <Note>
+        Each stage removes a percentage of the oil that reaches it, so the stage figures compound: what leaves the
+        train is the inlet times what each stage lets through, in turn. The Reynolds number is the one the module reports with the Stokes rise, and above one it warns.
+      </Note>
+    </>
+  );
+};
+
 const TrainExplorer = ({ initialMode = 'stages' }) => {
   const [mode, setMode] = useState(initialMode);
   const t = useMemo(() => ((mode === 'stages' || mode === 'coupling') ? safe(theTrain) : null), [mode]);
@@ -329,6 +380,7 @@ const TrainExplorer = ({ initialMode = 'stages' }) => {
         {mode === 'coupling' && <CouplingMode s={t} />}
         {mode === 'medians' && <MediansMode s={m} />}
         {mode === 'silence' && <SilenceMode s={s} h={h} />}
+        {mode === 'typed' && <TypedTrainMode />}
       </div>
       <Note>
         Every number on this page is a return value of the vendored Produced Water Treatment engine on the teaching

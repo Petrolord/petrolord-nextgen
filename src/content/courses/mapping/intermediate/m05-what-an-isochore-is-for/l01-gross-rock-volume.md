@@ -22,7 +22,7 @@ Three numbers went into that and each of them should be quotable on its own.
 
 **The mean thickness**, 32.254 m, area-weighted over the live nodes. The previous module was about why this is the right mean and not the well mean.
 
-**The live node count**, 201, which the capstone grades exactly. It is the count of nodes the mask left, and it is a setting as much as a fact.
+**The live node count**, 201, a count that is either right or wrong. It is the count of nodes the mask left, and it is a setting as much as a fact.
 
 **The cell area**, 10,000 m². Change the cell size and this changes, but so does the node count, in the opposite direction. At a 50 m cell the map has 794 live nodes of 2,500 m² each, giving a mapped area of 1.985 km² against the 2.010 km² at a 100 m cell. The two agree to about one percent, and the small difference is the mask boundary being drawn at a different resolution.
 
@@ -62,6 +62,6 @@ More importantly the extra volume is the least defensible part of the total, sin
 
 ## Exercise
 
-Compute the gross rock volume of the Ekene SAND from the capstone numbers, state the mapped area, and list three multipliers that stand between this figure and a recoverable hydrocarbon volume.
+Compute the gross rock volume of the Ekene SAND from the tier's numbers, state the mapped area, and list three multipliers that stand between this figure and a recoverable hydrocarbon volume.
 
 As a self-check: $32.25429068 \times 201 \times 10{,}000 = 64{,}831{,}124$ m³ over a mapped area of $201 \times 10{,}000 = 2.01$ km². Between it and a recoverable volume stand at least net-to-gross, which removes non-reservoir rock inside the interval, porosity, which reduces rock volume to pore volume, and hydrocarbon saturation together with a contact, which restrict the pore volume to the part actually holding hydrocarbons; a recovery factor and a formation volume factor follow after those.

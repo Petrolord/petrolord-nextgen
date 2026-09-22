@@ -24,6 +24,6 @@ The traditional close, one last time, and then the capstone.
 
 ## Exercise
 
-Write one sentence per tier of the basin ladder stating its capability, and one sentence placing the course in the geoscience path. Then answer, from memory: the six Expert capstone values, and the one habit this path considers its true curriculum.
+Write one sentence per tier of the basin ladder stating its capability, and one sentence placing the course in the geoscience path. Then answer, from memory: the six values the Expert tier reports, and the one habit this path considers its true curriculum.
 
 As a self check: the Associate tier builds burial and heat as hand-checkable snapshots; the Professional tier turns temperature histories into maturity and conversion through calibrated kinetics; the Expert tier produces the histories from a forward model and states generation, expulsion and their dates. This course closes the ten-app geoscience path at all tiers, the last rung of the last ladder. The values: 1.6718288798752388, 149.76037539670858 degC, 0.7423743797385286, 13946.54641524398, 10048.985378825158, 0.05665081052235643. The habit: trust numbers only where a fixture, a closed form or an independent implementation lets you check them, and carry the conventions with the answer everywhere.

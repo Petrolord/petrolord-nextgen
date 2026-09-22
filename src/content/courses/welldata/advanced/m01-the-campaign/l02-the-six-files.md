@@ -53,7 +53,7 @@ In the campaign table quirks_20 is unexceptional in every column. That is itself
 
 ## A wrapped file: wrapped_12.las
 
-LAS version 1.2 with wrap switched on, so each depth step spans several physical lines. It reports 161 samples, and that count is graded.
+LAS version 1.2 with wrap switched on, so each depth step spans several physical lines. It reports 161 samples, and the capstone grades the same count on its own wrapped file.
 
 The interesting part is not that the count is 161. It is how a parser with no wrap branch arrives at 161, which module 5 works through. For the campaign, wrapped_12 is another ordinary row: 4 curves, no conversion, a uniform step, no dead curve.
 

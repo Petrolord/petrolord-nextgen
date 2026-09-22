@@ -16,7 +16,7 @@ Watch three shapes as you play with the controls. Block 1's segment never moves:
 
 ## The tiles
 
-The tiles are the tier's graded quantities and their cross-checks: the census pair; the two per-block porosities; the jump across the fault on the profile row; the provenance line, which reports the method ACTUALLY used per block with a star when a fallback fired; the kriged value at W1 against W1's own 0.3150; the far-field kriged value; a kriged probe readout at any point you type, which opens on (2000, 2300); the arithmetic against weighted means, which module five will show are two different numbers used by two different parts of one engine; the trend probe with its hand value; and the per-block bulk volumes with the closure check that must read zero.
+The tiles are the tier's quantities and their cross-checks: the census pair; the two per-block porosities; the jump across the fault on the profile row; the provenance line, which reports the method ACTUALLY used per block with a star when a fallback fired; the kriged value at W1 against W1's own 0.3150; the far-field kriged value; a kriged probe readout and a trend readout at any point you type, which open on (2000, 2300); the arithmetic against weighted means, which module five will show are two different numbers used by two different parts of one engine; the trend probe with its hand value; and the per-block bulk volumes with the closure check that must read zero.
 
 ## First experiments
 

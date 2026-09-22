@@ -4,7 +4,7 @@ Module 1 promised that the fitted trend would return with consequences. This mod
 
 ## The candidates
 
-The header trend: 656 us/m at the mudline, decaying at 0.6 per km toward the matrix time of 220 us/m. This is the trend the well's sonic was constructed on, and the capstone's specified choice. Above the ramp top the log sits on it exactly.
+The header trend: 656 us/m at the mudline, decaying at 0.6 per km toward the matrix time of 220 us/m. This is the trend the well's sonic was constructed on, and the choice the capstone specifies. Above the ramp top the log sits on it exactly.
 
 The fitted trend: 650.0000000000014 us/m and 0.7000000000000015 per km, the exact least-squares fit through the twelve shale picks, sharing the 220 us/m matrix time. The Associate tier established that the fit is clean: all twelve picks lie exactly on this curve, the residuals are zero, and re-fitting reproduces it to fourteen decimals. Nothing about the FIT is wrong.
 

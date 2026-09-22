@@ -8,6 +8,12 @@ General Flow reads 73861363.0502 scfd on the SOKU trunk, 1.117335 against Weymou
 
 The other three forms are evaluated. Their inputs go in and a rate comes out in one pass. General Flow cannot work that way, because the rate it is computing and the friction factor it needs depend on each other: the friction factor belongs to the flow, and the flow is what the friction factor is there to find. So the form is iterated until the two agree, and the friction factor it settled on is returned beside the rate rather than discarded.
 
+## The form, and the loop
+
+    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5
+
+with f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns.
+
 That returned factor is the only statement any of these four forms makes about the surface of the pipe, and it is why a Weymouth answer cannot be asked what pipe it assumed.
 
 ## Why the other three cannot iterate

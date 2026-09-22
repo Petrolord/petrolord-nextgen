@@ -16,7 +16,7 @@ Convert to exploration units to feel the size. Ten thousand kilograms per square
 
 The statement's dates are its sharpest commercial content. Essentially all expulsion here predates 60 Ma, with a final increment at 11 Ma. A trap formed at 90 Ma waited through the entire charge; a trap formed at 40 Ma missed three-quarters of it; structure formed today receives nothing but what remigrates. And the 11 Ma increment, the squeeze, is charge delivered by unroofing, a mechanism worth screening for wherever inversion postdates a mature kitchen: late uplift over a stalled source is not just a preservation risk, it is a last act of charge.
 
-The general template: state the expulsion window's start, its bulk, and its last act, then place each prospect's trap-formation date against them. The model's series make all three dates readable; the capstone grades the endpoint masses, and this lesson's discipline is remembering the endpoint is the least of it.
+The general template: state the expulsion window's start, its bulk, and its last act, then place each prospect's trap-formation date against them. The model's series make all three dates readable; a capstone grades the endpoint masses, and this lesson's discipline is remembering the endpoint is the least of it.
 
 ## What the statement does not claim
 

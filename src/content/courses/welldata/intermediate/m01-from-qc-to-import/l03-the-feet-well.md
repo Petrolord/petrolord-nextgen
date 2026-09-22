@@ -34,7 +34,7 @@ Here is what the pipeline does to feet_20, curve by curve.
 | NPHI | neutron | V/V | V/V | no |
 | DT | sonic | US/F | US/M | YES |
 
-Two facts are worth reading off that table now, because they are graded later and because both of them are places where a careful learner still gets the wrong answer.
+Two facts are worth reading off that table now, because the capstone grades the same readings on its own feet file and because both of them are places where a careful learner still gets the wrong answer.
 
 **Two curves are converted, and one of them is not the depth column.** DT is a sonic transit time in microseconds per foot, so its unit carries a length in the denominator. The importer reaches that conclusion by looking the unit string up in a fixed table rather than by reasoning about dimensions, and US/F is in that table. GR in GAPI, RHOB in G/C3 and NPHI in V/V carry no length at all, so they pass through untouched. Anyone who assumes only the depth column needs converting arrives at one converted curve instead of two.
 

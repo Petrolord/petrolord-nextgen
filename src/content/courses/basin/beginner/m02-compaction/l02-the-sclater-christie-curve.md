@@ -56,7 +56,7 @@ The exponent is easiest to handle per kilometre. A thousand metres of burial giv
 | 3000 m | 0.13641747040908445 |
 | 4000 m | 0.08191808785340832 |
 
-The value at 2000 m is graded in the capstone, to a tolerance of 0.001 v/v, and the next lesson works it from the formula step by step.
+The next lesson works the value at 2000 m from the formula step by step.
 
 Notice what the ladder does at the bottom. The step from 3000 m to 4000 m takes the porosity from 0.13641747040908445 to 0.08191808785340832, which is a far smaller change in absolute terms than the first kilometre made, even though it is exactly the same proportional loss. The curve has gone flat, not because anything switched off, but because a fixed proportion of a small number is a small number.
 

@@ -1,8 +1,8 @@
 import React, { useMemo, useState } from 'react';
 import {
-  deckLines, deckSections, keywordCounts, gridSummary, SECTIONS,
+  deckTextAt, keywordCounts, gridSummary, SECTIONS, TEACHING_MEAN_M, TEACHING_OWC_M,
 } from './simLab';
-import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, Tile, TileGrid, Note, NumField } from '@/components/course/panels/petrophysics/panelKit';
 
 // Deck explorer: the composed Ekene deck, section by section. The point is
 // that a deck is an ordered text file with six sections, and every number in
@@ -13,11 +13,24 @@ const fmt = (v, d = 4) => (Number.isFinite(v) ? Number(v).toLocaleString('en-US'
 const DeckExplorer = () => {
   const [section, setSection] = useState('GRID');
   const [maxLines, setMaxLines] = useState(24);
+  // The deck opens as committed; a capstone brief may state a regional mean
+  // and a contact to rebuild it at, and the learner types them in.
+  const [mean, setMean] = useState(String(TEACHING_MEAN_M));
+  const [owc, setOwc] = useState(String(TEACHING_OWC_M));
 
   const out = useMemo(() => {
     try {
-      const lines = deckLines();
-      const sections = deckSections();
+      const m = Number(mean);
+      const c = Number(owc);
+      if (!(m > 1400 && m < 1700) || !(c > 1400 && c < 1700)) throw new Error('Type a regional mean and a contact in metres TVD, both between 1400 and 1700.');
+      const teaching = m === TEACHING_MEAN_M && c === TEACHING_OWC_M;
+      const lines = deckTextAt(teaching ? null : { regionalMean: m, owcM: c }).split('\n');
+      const starts = SECTIONS.map((name) => ({ name, line: lines.indexOf(name) }));
+      const sections = starts.map((st, idx) => ({
+        ...st,
+        endLine: idx + 1 < starts.length ? starts[idx + 1].line - 1 : lines.length - 1,
+        lineCount: (idx + 1 < starts.length ? starts[idx + 1].line - 1 : lines.length - 1) - st.line + 1,
+      }));
       const active = sections.find((s) => s.name === section) || sections[0];
       const body = lines.slice(active.line, Math.min(active.endLine + 1, active.line + maxLines));
       return {
@@ -26,10 +39,17 @@ const DeckExplorer = () => {
     } catch (e) {
       return { error: e.message };
     }
-  }, [section, maxLines]);
+  }, [section, maxLines, mean, owc]);
+
+  const inputs = (
+    <div className="grid gap-3 grid-cols-2 items-end">
+      <NumField label="Regional mean (m TVD)" value={mean} onChange={setMean} />
+      <NumField label="Oil water contact (m TVD)" value={owc} onChange={setOwc} />
+    </div>
+  );
 
   if (out.error) {
-    return <PanelShell title="Deck explorer"><Note>{out.error}</Note></PanelShell>;
+    return <PanelShell title="Deck explorer">{inputs}<Note>{out.error}</Note></PanelShell>;
   }
 
   const { lines, sections, active, body, counts, grid } = out;
@@ -39,6 +59,12 @@ const DeckExplorer = () => {
       title="Deck explorer"
       subtitle="The composed Ekene deck: six sections, in order, in field units"
     >
+      {inputs}
+      <div className="text-xs text-gray-500">
+        The deck opens as committed (regional mean {TEACHING_MEAN_M} m, contact {TEACHING_OWC_M} m). Type another
+        setting and the deck is rebuilt: the tops kriged at that mean, the EQUIL datum and contact, and the well
+        reference depths.
+      </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
           <div>
             <p className="text-gray-400 text-xs mb-1">Section</p>

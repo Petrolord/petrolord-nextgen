@@ -36,7 +36,7 @@ A difference at the fifteenth significant figure is arithmetic. A difference at 
 
 Divide by 30.4375 instead of the real month and the deck's rate for January comes out 1.8 percent high. The simulator then applies that rate over the 31 days the DATES block spans and produces 1.8 percent too much oil.
 
-The errors do not cancel over a year. Every 31-day month is over-produced and every 30-day month under-produced, and February is over-produced by nearly ten percent. The annual total drifts and the monthly pattern acquires a spurious seasonality that follows the calendar.
+The errors do not cancel over a year. Every 31-day month is over-produced and every 30-day month under-produced, and a 28-day February, at 28 over 30.4375 days, is under-produced by 8.01 percent. The annual total drifts and the monthly pattern acquires a spurious seasonality that follows the calendar.
 
 That is a distinctive symptom: a history match whose residuals correlate with month length has this bug and nothing else.
 

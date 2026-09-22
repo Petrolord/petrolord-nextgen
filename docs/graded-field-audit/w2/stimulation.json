@@ -1,0 +1,39 @@
+{
+ "course": "stimulation",
+ "wave": "w2",
+ "fixture": "/root/dr-wip-stimulation/dr10_fields.mjs",
+ "tiers": {
+  "beginner": {
+   "why": "Prompt only, no field moves. Field 6 needs the fracturing and reservoir pressures at the true vertical depth of 2380 m MD, which the generator interpolated from the golden survey and profiles and no lesson or panel prints (B5 finding 1). The prompt now states both at 2033.000 m TVD, with the exact acid viscosity and the mD conversion, so the Darcy ceiling of m05 l02 is a hand calculation. Keys, expected values and tolerances are unchanged.",
+   "prompt_edits": [
+    [
+     "The job is placed at 2380 m measured depth.",
+     "The job is placed at 2380 m measured depth. At the job's true vertical depth of 2033.000 m the fracturing pressure, the closure stress there, is 36554842.99 Pa and the reservoir pressure is 22468999.12 Pa. Take the acid viscosity as exactly 0.001 Pa.s and 1 mD as 9.869233e-16 m2."
+    ]
+   ],
+   "inputs": {
+    "rwIn": 4.875,
+    "reM": 260,
+    "kMd": 0.4,
+    "m2PerMd": 9.869233e-16,
+    "hM": 65,
+    "kOverKs": 8,
+    "rsM": 1.2,
+    "tvdM": "2033.000",
+    "pFracPa": 36554842.99,
+    "pResPa": 22468999.12,
+    "acidMuPaS": 0.001
+   },
+   "method": {
+    "mPerIn": 0.0254
+   },
+   "expected": {
+    "q_max_matrix_m3s": {
+     "expected": 0.00009644175015806953,
+     "tol": 5e-11,
+     "reproduced": 0.00009644175015204811
+    }
+   }
+  }
+ }
+}

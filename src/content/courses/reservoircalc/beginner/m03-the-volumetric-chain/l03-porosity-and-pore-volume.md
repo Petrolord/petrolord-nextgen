@@ -24,7 +24,7 @@ $$\text{pore} = \text{net} \times \phi$$
 
 $$17.815229 \times 0.20 = 3.563046 \text{ million m}^3$$
 
-The engine carries more digits than that and reports the pore volume as 3.563045809312045 million cubic metres, which is the figure the capstone grades.
+The engine carries more digits than that and reports the pore volume as 3.563045809312045 million cubic metres, which is the figure the panel's pore volume line prints for the teaching case.
 
 That is the total volume of connected void space in the reservoir quality rock above the contact. It is the first quantity in the chain that is not rock at all. Everything up to here measured solid material. From this point on you are counting space, and then fluid in that space.
 

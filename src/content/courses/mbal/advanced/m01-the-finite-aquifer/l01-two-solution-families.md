@@ -24,7 +24,6 @@ If `pDFinite` were `pD` with a boundary added, the two would agree at early time
 | 1 | 0.522141348689828 | 0.806338198206283 | 1.54429102431663 |
 | 5 | 1.23394913648790 | 1.37833683634457 | 1.11701268357594 |
 | 25 | 2.01896475466764 | 3.05835790311119 | 1.51481490503516 |
-| 100 | 2.70837365292708 | 9.30886079703705 | 3.43706666433432 |
 
 The worst disagreement in the whole table is the first row, at the earliest time, when no pressure signal has been anywhere near the outer wall. A factor of twenty five. Whatever is causing that, it is not the boundary.
 

@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { computeErosionScenario } from '@/lib/basinTeaching';
-import { PanelShell, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Charge explorer: the full reference-basin forward model, run live at an
 // erosion amount the learner picks, always against the no-erosion twin.
@@ -18,21 +18,38 @@ const AGE_MAX = 150;
 
 const fmt = (v, d = 4) => (Number.isFinite(v) ? v.toFixed(d) : '-');
 
+// The panel opens on the golden reference event, 600 m at 10 Ma, the
+// teaching case. The amount buttons keep the age at 10 Ma; the typed boxes
+// set any amount and age, so an event of your own (the capstone states one)
+// is worked by typing it in. Nothing here preloads it.
 const ChargeExplorer = () => {
   const [amount, setAmount] = useState(600);
+  const [ageIn, setAgeIn] = useState('10');
+  const [amountIn, setAmountIn] = useState('600');
   const [runs, setRuns] = useState({});
+
+  const ageMa = Number(ageIn);
+  const ageOk = Number.isFinite(ageMa) && ageMa >= 1 && ageMa <= 100;
+  const key = `${amount}@${ageOk ? ageMa : 10}`;
 
   useEffect(() => {
     let cancelled = false;
-    if (!runs[amount]) {
-      computeErosionScenario(amount).then((res) => {
-        if (!cancelled) setRuns((prev) => ({ ...prev, [amount]: res }));
+    if (!runs[key]) {
+      computeErosionScenario(amount, ageOk ? ageMa : 10).then((res) => {
+        if (!cancelled) setRuns((prev) => ({ ...prev, [key]: res }));
       });
     }
     return () => { cancelled = true; };
-  }, [amount, runs]);
+  }, [key, amount, ageMa, ageOk, runs]);
 
-  const m = runs[amount];
+  const pick = (a) => { setAmount(a); setAmountIn(String(a)); setAgeIn('10'); };
+  const typeAmount = (v) => {
+    setAmountIn(v);
+    const n = Number(v);
+    if (Number.isFinite(n) && n >= 0 && n <= 3000) setAmount(n);
+  };
+
+  const m = runs[key];
 
   const geom = useMemo(() => {
     const plotW = W - PAD.left - PAD.right;
@@ -43,7 +60,7 @@ const ChargeExplorer = () => {
   if (!m) {
     return (
       <PanelShell title="Charge explorer"
-        subtitle={`Running the forward model at ${amount} m of erosion, twice (with the event and without it).`}>
+        subtitle={`Running the forward model at ${amount} m of erosion at ${ageOk ? ageMa : 10} Ma, twice (with the event and without it).`}>
         <Note>Marching 150 Ma of basin history in 1 Ma steps. This takes a moment.</Note>
       </PanelShell>
     );
@@ -71,12 +88,16 @@ const ChargeExplorer = () => {
 
   return (
     <PanelShell title="Charge explorer"
-      subtitle="The golden reference basin run forward, source layer highlighted, against its no-erosion twin. Pick the erosion amount; the reference event is 600 m at 10 Ma.">
+      subtitle="The golden reference basin run forward, source layer highlighted, against its no-erosion twin. It opens on the reference event, 600 m at 10 Ma; pick another amount or type an event of your own.">
+      <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
+        <NumField label="Erosion amount (m)" value={amountIn} onChange={typeAmount} />
+        <NumField label="Erosion age (Ma)" value={ageIn} onChange={setAgeIn} />
+      </div>
       <div className="flex flex-wrap gap-2 items-center">
         <span className="text-xs text-gray-400">Erosion at 10 Ma (m):</span>
         {AMOUNTS.map((a) => (
-          <button key={a} type="button" onClick={() => setAmount(a)}
-            className={`px-3 py-1.5 rounded-md border text-sm ${amount === a
+          <button key={a} type="button" onClick={() => pick(a)}
+            className={`px-3 py-1.5 rounded-md border text-sm ${amount === a && ageMa === 10
               ? 'bg-[#BFFF00] text-[#0F172A] border-[#BFFF00] font-semibold'
               : 'bg-gray-800 text-gray-300 border-gray-600'}`}>
             {a}
@@ -117,6 +138,7 @@ const ChargeExplorer = () => {
       <TileGrid>
         <Tile label="Final Ro" value={fmt(m.finalRo, 8)} unit="%Ro" />
         <Tile label="Final temperature" value={fmt(m.finalTempC, 6)} unit="degC" />
+        <Tile label="Peak temperature" value={fmt(Math.max(...m.temperature.map((e) => e.value)), 6)} unit="degC" />
         <Tile label="Final TR" value={fmt(m.finalTr, 8)} unit="frac" />
         <Tile label="Generated" value={fmt(m.generated, 3)} unit="kg/m2" />
         <Tile label="Expelled" value={fmt(m.expelled, 3)} unit="kg/m2" />

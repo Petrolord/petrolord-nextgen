@@ -1,0 +1,113 @@
+{
+ "course": "mbal",
+ "case": "ISAN tank (beginner): initial state and six surveys stated in full in the brief, typed into the tank explorer's Your tank mode",
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "fields_from": "w5c/mbal/fields.json",
+   "dataset": "ISAN tank: initial state and six surveys stated in the brief",
+   "prompt": "Close the ISAN tank, stated here in full: a closed, undersaturated oil tank with no aquifer and no gas cap, initial pressure 3650 psia, initial Bo 1.285 rb/stb, connate water saturation 0.28, formation compressibility 0.0000042 per psi and water compressibility 0.0000032 per psi, and six pressure surveys, every one above the bubble point: survey 1: 3368.4 psia, Np 52000 stb, Bo 1.290427 rb/stb; survey 2: 3007.6 psia, Np 118000 stb, Bo 1.297382 rb/stb; survey 3: 2687.3 psia, Np 176000 stb, Bo 1.303557 rb/stb; survey 4: 2403.1 psia, Np 227000 stb, Bo 1.309034 rb/stb; survey 5: 2172.9 psia, Np 268000 stb, Bo 1.313472 rb/stb; survey 6: 1986.4 psia, Np 301000 stb, Bo 1.317065 rb/stb. Type the tank into the tank explorer (Dataset: Your tank) and read the tank: the underground withdrawal and the total expansion at the last survey, the oil in place the Havlena-Odeh straight line gives, the share of that expansion carried by rock and connate water, the depletion drive index, and the oil expansion Eo at the last survey.",
+   "why": "Section 3 pick A: the tank explorer opened on the Ekene history and every beginner lesson worked it, so all six answers printed before the learner worked (W1's eo_last key included). The capstone moves to the ISAN tank, stated in full and typed into the new Your tank mode. W1's Eo key carries over, re-computed on ISAN.",
+   "annot": {
+    "isan_f_last_rb": {
+     "source": "hand-calc",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, F rb, last row)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, F rb, last row)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "F = Np Bo at the last survey, 301000 x 1.317065 = 396436.565 rb; the table prints 1 dp; tol 50.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "isan_et_last_rb": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, Et rb, last row)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, Et rb, last row)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Eo + Efw at the last survey = 0.04719534957777779; the table prints 7 dp; tol 5e-5.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "isan_ooip_stb": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (OOIP from the slope tile)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (OOIP from the slope tile)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The Havlena-Odeh slope on the typed table: 8399861.7 stb (the design 8.4 MMstb, moved by the brief's rounding); tol 20000. An independent closed-form least squares with intercept on the brief's table gives the same 8399861.7155 stb; through the origin it gives 8400000.6, inside tol.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "isan_efw_share_pct": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (Efw share tile)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (Efw share tile)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Efw/Et x 100 at the last survey = 32.058984; tol 0.2.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "isan_ddi_final": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (Depletion drive index tile)",
+     "printed": {
+      "sigfigs": 9
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (Depletion drive index tile)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "N Eo / F at the last survey = 0.679406467; tol 0.005; with no influx it is 1 less the Efw share.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "isan_eo_last_rb_stb": {
+     "source": "hand-calc",
+     "source_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, Eo, last row)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/mbal/TankExplorer.jsx (survey table, Eo, last row)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Bo at the last survey less the initial 1.285: 0.03206500000000001; tol 5e-5 (W1 key, re-computed on ISAN).",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "B",
+   "why": "Section 3 pick B: the Ahmed 10-10 Fetkovich values and the forced pot aquifer answers were printed in modules 2, 3 and 6 and the aquifer explorer opened on the published geometry. Module 3 now works a teaching aquifer (180 degrees, 150 md, reD 4) and the book comparison qualitatively; the explorer opens on that teaching aquifer and shows the printed column only at the published geometry; the pot aquifer answers are described without their values. Keys unchanged."
+  },
+  "advanced": {
+   "pick": "B",
+   "why": "Section 3 pick B: the Dake 9.2 oil in place and influx, the reD 5 pD and the Ahmed 11-1 influx and indices were printed across modules 1 to 6, and the pD explorer opened on reD 5. Lessons now work reD 3, an Ahmed 11-1 variant at N 9.2 MMstb, and leave the Dake results to a run; the tank explorer gains a Dake Exercise 9.2 mode that opens with no aquifer (the only in-course route to the Dake fields was the lessons), and the pD explorer opens on reD 10. Keys unchanged. Residual: the 3 MMSTB tolerance on the Dake oil in place admits Dake's own published least squares fit (310.2 MMSTB) and the history-match module's one-parameter match; both are different methods, reported as a tolerance finding."
+  }
+ }
+}

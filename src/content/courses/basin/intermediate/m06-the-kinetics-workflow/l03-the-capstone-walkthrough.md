@@ -1,37 +1,35 @@
 # The capstone walkthrough
 
-> **Open book.** The figures this capstone grades can be read in this tier's lessons or on a panel as it opens, so for now it checks that you can find, read and report each one correctly. A later update moves it to a case of its own.
+The Professional capstone gives you heating rates, read temperatures and an isothermal clock of its own, and grades six values: reflectance read on the brief's ramps, and transformation ratios on the brief's clock. This lesson works the method on the golden case, the teaching fixtures, with the shortest defensible route to each kind of value. None of the golden numbers is a capstone answer.
 
-The Professional capstone grades six values. This lesson works all six in order, with the tolerance each carries and the shortest defensible route to it. Treat it as a rehearsal: every number here has been derived somewhere in the course, and each section names where.
+The kinetics explorer opens on the golden 3 degC/Ma ramp and the Type II clock at 100 degC. For the capstone, type the brief's heating rate and read temperature into "Your heating rate" and "Read Ro at", and type the clock temperature and pick the kerogen type for the clock.
 
 {{panel:bs-kinetics-explorer}}
 
-## The two anchors
+## Reflectance on a ramp
 
-Ro at zero reaction, tolerance 0.001. The read-out at F = 0: $e^{-1.6} = 0.20189651799465538$. Calculator arithmetic, module 2 lesson 2.
+On the golden case: Ro at 150 degC on the 3 degC per Ma ramp is 0.9871413464062039, and on the 1 degC per Ma ramp it is 1.1129254516555198. Both are rows of ramps generated with the module 3 conventions: 0.01 Ma midpoint sub-steps from 20 degC, whole-degree reporting. The "Your ramp" tile runs exactly that integrator at the rate you type and reads it at the whole degree you type.
 
-Ro at full reaction, tolerance 0.005. F at the weight sum 0.85: $e^{-1.6 + 3.7 \times 0.85} = e^{1.545}$. By hand this is 4.687971627022013; the engine's summation order gives 4.687971627022019, and either lands mid-tolerance. If your value differs in the third digit instead of the fifteenth, module 2 lesson 4 tells you where to look.
+The order of two readings is itself understanding: at equal temperature the slow ramp wins, module 3 lesson 3, because its rock spent longer at every degree of the climb. At equal rate the hotter reading wins. A capstone answer that breaks either order has been read at the wrong setting.
 
-## The ramp pair
+## Transformation on a clock
 
-Ro at 150 degC on the 3 degC per Ma ramp, tolerance 0.002: 0.9871413464062039. Ro at 150 on the 1 degC per Ma ramp, same tolerance: 1.1129254516555198. Both are rows of the golden tables, generated with the module 3 conventions: 0.01 Ma midpoint sub-steps, whole-degree reporting. If you are reproducing them with your own integrator, the checks are the convergence halving test and the expectation that the slow ramp reads 12.74 percent higher; if you are reading them from the panel, set the rate control and read the 150 tile.
+On the golden case: Type II TR at 100 degC is 0.022481215976523083 at 10 Ma and 0.05477927380797565 at 50 Ma. Constant temperature, so whole-Ma steps suffice, module 4 lesson 2. Type the brief's clock temperature, pick each kerogen type in turn, and read the TR tiles at the ages it names.
 
-The order of the two is itself gradeable understanding: slow wins at equal temperature, module 3 lesson 3, because its rock spent three times as long at every degree of the climb.
+Reflectance does not move when you change the kerogen type. If a Ro tile changes when you switch type, you are reading the wrong tile.
 
-## The clock pair
+## The anchors are checks, not answers
 
-Type II transformation ratio at 100 degC, tolerance 0.0005 each: 0.022481215976523083 at 10 Ma, 0.05477927380797565 at 50 Ma. Constant temperature, so whole-Ma steps suffice, module 4 lesson 2. The four-bin hand route reproduces the 10 Ma value to 0.07 percent: bins 46 through 52, survival factors from the 100 degC rates, contributions summed. The 50 Ma value's dominant term is the 48 kcal bin at seventy percent drained; the pair's ratio, 2.44 for five times the time, is the stall of module 4 lesson 3, and quoting it is the fastest way to show an examiner you know why the numbers sit where they sit.
+Ro at zero reaction, $e^{-1.6} = 0.20189651799465538$, and at full reaction, $e^{-1.6 + 3.7 \times 0.85}$, are closed forms no history can move. They sit on the panel as quality control: if they are wrong, nothing else is right.
 
 ## The traps, collected
 
-Four ways this capstone is failed by people who can integrate. Normalising F to 1, which corrupts both anchors and every ramp value; module 2 lesson 1. Reporting the Python oracle's digits where they differ from the engine's in the last places, harmless inside tolerance but a sign of quoting rather than computing; the fixtures lesson of the Associate tier. Start-of-step temperature evaluation, 7 percent low at rate 3; module 5 lesson 4 diagnosed exactly this. And answering the TR fields with the vitrinite state or the Ro fields with the kerogen state: the separation is the tier's first lesson and the grader's favourite distinction.
+Normalising F to 1, which corrupts both anchors and every ramp value; module 2 lesson 1. Start-of-step temperature evaluation, 7 percent low at rate 3; module 5 lesson 4 diagnosed exactly this. Reading a ramp at a temperature that is not a whole degree. And answering the TR fields with the vitrinite state or the Ro fields with the kerogen state: the separation is the tier's first lesson.
 
 ## Worked example
 
-Rehearse the full submission in the panel. Rate control to 3: read 0.9871413464062039 at the 150 marker. Rate to 1: read 1.1129254516555198. Anchor tiles: 0.20189651799465538 and 4.687971627022019, unchanged by any control, and say why in one sentence: they are endpoint states, independent of history. Temperature control to 100, type to II: clock tiles read 0.022481215976523083 and 0.05477927380797565. Six values, four controls touched, and every movement predicted before it was observed.
+Rehearse on the golden case. Your heating rate 3, read at 150: 0.9871413464062039. Rate 1: 1.1129254516555198. Clock temperature 100, type II: TR tiles 0.022481215976523083 at 10 Ma and 0.05477927380797565 at 50 Ma. Then change the type to III and confirm the Ro tiles do not move.
 
 ## Exercise
 
-Write the six values from memory with their tolerances, then check them against this lesson. For any you missed, name the module and lesson that derives it.
-
-As a self check: 0.20189651799465538 (0.001) and 4.687971627022019 (0.005), module 2; 0.9871413464062039 and 1.1129254516555198 (0.002 each), module 3; 0.022481215976523083 and 0.05477927380797565 (0.0005 each), module 4. If the anchors slipped, revisit the closed forms; if the ramp pair's order slipped, reread the slow-ramp lesson; if the TR pair's magnitudes slipped, the stall lesson is the cure.
+For each kind of value, name the module and lesson that derives it, and the one control on the panel that sets it.

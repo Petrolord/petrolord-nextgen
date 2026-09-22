@@ -2,6 +2,18 @@
 
 Shells in series are not handled by a second closed form. They are handled by a conversion. The whole unit P is converted into the P that a single shell inside the train would see, and then the same one shell closed form is read at that smaller value. The engine reports the converted number on the answer, on a key of its own, so the value the closed form was actually read at is visible rather than implied.
 
+## The conversion itself
+
+For N shells in series at a whole unit P and R, the engine first forms
+
+    S = ((1 - P R) / (1 - P))^(1/N)
+
+and then takes the equivalent single-shell P as
+
+    P1 = (S - 1) / (S - R)
+
+Where R is 1 that quotient has no value, and the limit is used instead: P1 = P / (N - P (N - 1)). Both are one line in a spreadsheet, and either one reproduces the equivalent single-shell P column of the two tables below from its P, R and shell count.
+
 ## One duty bought with more shells
 
 At a P of 0.720000 and an R of 0.850000, one shell pass is refused outright. From two shells upward the same duty is reachable, and this is what the conversion does to it.

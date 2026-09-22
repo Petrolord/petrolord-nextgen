@@ -26,7 +26,7 @@ The first exponential is 1 exactly, since the top of the layer is at the surface
 
 $$h_s = 38.57953418711555\ \text{m}$$
 
-and that is the first of the six graded numbers, to a tolerance of 0.05 m.
+and that is the first of the six reported numbers.
 
 Stop on what it says. A 100 m bed of fresh shale contains less than 40 m of actual mineral. The rest of it is water. Fresh shale is more pore than grain, by a wide margin, and every intuition you have about rock being solid has to be set aside for the shallow part of a section.
 

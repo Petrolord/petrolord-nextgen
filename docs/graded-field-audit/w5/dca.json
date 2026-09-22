@@ -1,0 +1,326 @@
+{
+ "course": "dca",
+ "wave": "w5b",
+ "migration": "20261028b_w5_dca.sql",
+ "fields_file": "docs/graded-field-audit/w5b/dca.fields.json",
+ "keys_module": "docs/graded-field-audit/w5b/dca.keys.mjs",
+ "sources": [
+  "src/components/course/panels/dca/declineLab.js",
+  "src/pages/apps/DcaLearningPage.jsx"
+ ],
+ "capstone_lessons": {
+  "beginner": "beginner/m06-the-associate-booking/l02-capstone-walkthrough.md",
+  "intermediate": "intermediate/m06-the-professional-booking/l02-capstone-walkthrough.md",
+  "advanced": "advanced/m06-the-expert-booking/l02-capstone-walkthrough.md"
+ },
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "title": "Fit and book Ekene-1",
+   "dataset": "ekene-dynamic/rates.json (Ekene-5, window from 2021-04-01, limit 8)",
+   "why": "The walkthrough printed all six answers and the fit explorer opened on Ekene-1 primary at 10 stb/d. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+   "prompt": "A late booking of Ekene-5: fit its monthly rates from 2021-04-01 through 2022-12-15 only (a custom window in the fit explorer, Auto-Select model), then book the well at an 8 stb/d economic limit. Report the fitted initial rate and nominal decline at the window start, the EUR and the time to the 8 stb/d limit, the cumulative production from the window start to 2022-10-01, and the tangent effective annual decline. The fit explorer opens on the teaching case (Ekene-1, the primary window, 10 stb/d), so set every input.",
+   "rekey": [
+    "qi_bpd",
+    "di_per_day",
+    "eur_10_stb",
+    "t_limit_days",
+    "np_flood_stb",
+    "eff_decline_pct"
+   ],
+   "case": {
+    "well": "Ekene-5",
+    "window": [
+     "2021-04-01",
+     "2022-12-15"
+    ],
+    "limit_bpd": 8,
+    "np_date": "2022-10-01"
+   },
+   "annot": {
+    "qi_bpd": {
+     "evidence": "The walkthrough printed all six answers and the fit explorer opened on Ekene-1 primary at 10 stb/d. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:32-34 (defaults well Ekene-1, window primary)",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:144 fmt(params.qi, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "di_per_day": {
+     "evidence": "The walkthrough printed all six answers and the fit explorer opened on Ekene-1 primary at 10 stb/d. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:32-34",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:145 fmt(params.Di, 7)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "eur_limit_stb": {
+     "evidence": "The walkthrough printed all six answers and the fit explorer opened on Ekene-1 primary at 10 stb/d. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:149 EUR tile",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:149 fmt(book.eur, 1)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "t_limit_days": {
+     "evidence": "The walkthrough printed all six answers and the fit explorer opened on Ekene-1 primary at 10 stb/d. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:150 Time to limit tile",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:150 fmt(book.timeToLimitDays, 1)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "np_to_date_stb": {
+     "evidence": "The walkthrough printed all six answers and the fit explorer opened on Ekene-1 primary at 10 stb/d. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:151 Np tile",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:151 fmt(book.npAtDate, 1)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "eff_decline_pct": {
+     "evidence": "The walkthrough printed all six answers and the fit explorer opened on Ekene-1 primary at 10 stb/d. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "hand-calc",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/dca/beginner/m06-the-associate-booking/l02-capstone-walkthrough.md (walkthrough 2)",
+     "printed": "full",
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:152 fmt(book.effectiveDeclinePct, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "A",
+   "title": "Windows, models and the portfolio",
+   "dataset": "ekene-dynamic/rates.json (custom windows, limit 8)",
+   "why": "The walkthrough printed all six answers and the panels opened on the primary windows, the E3 + E6 type curve and the 10 stb/d limit. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+   "prompt": "Work the Ekene field like a portfolio at an 8 stb/d economic limit: fit Ekene-3 on 2021-11-01 through 2022-12-15 and report its fitted Di; book Ekene-5's EUR from its primary-window fit; fit Ekene-6 on 2021-05-01 through 2022-12-15 and report its fitted Di; read the R2 of an invalid fit of Ekene-6 over 2020-01-01 through 2023-12-15, across the flood; book Ekene-3 from the pooled Ekene-3 + Ekene-5 type curve applied fixed-b; and total the four wells' closed-form EURs. Use Auto-Select throughout. The panels open on the teaching case (10 stb/d, the primary windows, the E3 + E6 pool), so set every input.",
+   "rekey": [
+    "e3_b",
+    "e3_eur_stb",
+    "e6_win_di",
+    "e1_naive_r2",
+    "tc_eur_stb",
+    "field_eur_stb"
+   ],
+   "case": {
+    "late_well": "Ekene-3",
+    "late_window": [
+     "2021-11-01",
+     "2022-12-15"
+    ],
+    "eur_well": "Ekene-5",
+    "sub_well": "Ekene-6",
+    "sub_window": [
+     "2021-05-01",
+     "2022-12-15"
+    ],
+    "naive_well": "Ekene-6",
+    "naive_window": [
+     "2020-01-01",
+     "2023-12-15"
+    ],
+    "tc_pool": [
+     "Ekene-3",
+     "Ekene-5"
+    ],
+    "tc_target": "Ekene-3",
+    "limit_bpd": 8
+   },
+   "annot": {
+    "late_di": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/dca/FitExplorer.jsx (Tile 'Di', custom window)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/dca/FitExplorer.jsx fmt(params.Di, 7)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "The walkthrough printed all six answers and the panels opened on the primary windows, the E3 + E6 type curve and the 10 stb/d limit. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "well_eur_stb": {
+     "evidence": "The walkthrough printed all six answers and the panels opened on the primary windows, the E3 + E6 type curve and the 10 stb/d limit. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "hand-calc",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/dca/intermediate/m06-the-professional-booking/l02-capstone-walkthrough.md (walkthrough 1)",
+     "printed": "full",
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:149 fmt(book.eur, 1)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "sub_di": {
+     "evidence": "The walkthrough printed all six answers and the panels opened on the primary windows, the E3 + E6 type curve and the 10 stb/d limit. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:94-97 (Ekene-6, Primary)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:145 fmt(params.Di, 7)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "naive_r2": {
+     "evidence": "The walkthrough printed all six answers and the panels opened on the primary windows, the E3 + E6 type curve and the 10 stb/d limit. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:97 (Ekene-1, window Full history)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:147 fmt(fit.R2, 6)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "tc_eur_stb": {
+     "evidence": "The walkthrough printed all six answers and the panels opened on the primary windows, the E3 + E6 type curve and the 10 stb/d limit. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/TypeCurveExplorer.jsx:14-15 (defaults pool E3+E6, target Ekene-6)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/TypeCurveExplorer.jsx:68 fmt(out.eurFixedB, 1)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "field_eur_stb": {
+     "evidence": "The walkthrough printed all six answers and the panels opened on the primary windows, the E3 + E6 type curve and the 10 stb/d limit. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "hand-calc",
+     "source_ref": "/root/wt-b5-nextgen/src/content/courses/dca/intermediate/m05-portfolio-rollups (sum of four closed-form EURs)",
+     "printed": "full",
+     "display_scale": 1,
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "advanced": {
+   "pick": "A",
+   "title": "Uncertainty, governance and honesty",
+   "dataset": "ekene-dynamic/rates.json (post-ramp from 2024-10-01, b 1.1, limit 8)",
+   "why": "The walkthrough printed all six answers and the uncertainty explorer opened on b 1.2 and the teaching triangle. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+   "prompt": "Refit Ekene-1 on the window from 2024-10-01 onward (through 2025-12-15) and report its fitted nominal decline. On that SAME window, refit Ekene-6, whose water cut is climbing, and report its fitted decline: the two wells share a reservoir and a gross decline, so the difference is the water cut. Then book the b = 1.1 EUR on Ekene-1's pre-flood primary window, fitting its qi and Di yourself before you book, at an 8 stb/d limit, with its ratio to the exponential booking of the same data. Finally compute the field triangle's P90 and P10, petroleum convention with P90 low, from a minimum of 400000 stb, a maximum of 620000 stb, and a mode that is the field's deterministic booking: the sum of the four producers' closed-form EURs at the same 8 stb/d limit, which you must total yourself.",
+   "rekey": [
+    "e5_late_di",
+    "e6_oil_di",
+    "b12_eur_stb",
+    "b_ratio",
+    "p90_stb",
+    "p10_stb"
+   ],
+   "case": {
+    "late_well_a": "Ekene-1",
+    "late_well_b": "Ekene-6",
+    "late_window": [
+     "2024-10-01",
+     "2025-12-15"
+    ],
+    "b": 1.1,
+    "limit_bpd": 8,
+    "tri_min": 400000,
+    "tri_max": 620000
+   },
+   "annot": {
+    "late_di_a": {
+     "evidence": "The walkthrough printed all six answers and the uncertainty explorer opened on b 1.2 and the teaching triangle. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:25 (Post-ramp preset, Ekene-5)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:145 fmt(params.Di, 7)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "late_di_b": {
+     "evidence": "The walkthrough printed all six answers and the uncertainty explorer opened on b 1.2 and the teaching triangle. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:25 (Post-ramp preset, Ekene-6)",
+     "printed": {
+      "decimals": 7
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/FitExplorer.jsx:145 fmt(params.Di, 7)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "b_eur_stb": {
+     "evidence": "The walkthrough printed all six answers and the uncertainty explorer opened on b 1.2 and the teaching triangle. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:21 (bIdx default 24 = b 1.2)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:66 fmt(row.eur, 1) toLocaleString en-US",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "b_ratio": {
+     "evidence": "The walkthrough printed all six answers and the uncertainty explorer opened on b 1.2 and the teaching triangle. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:21",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:67 row.ratioToExponential.toFixed(6)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "p90_stb": {
+     "evidence": "The walkthrough printed all six answers and the uncertainty explorer opened on b 1.2 and the teaching triangle. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:22-24 (triangle boxes default to FIELD_TRIANGLE = the capstone triangle)",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:81 fmt(summary.p90, 1)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "p10_stb": {
+     "evidence": "The walkthrough printed all six answers and the uncertainty explorer opened on b 1.2 and the teaching triangle. Re-cased on custom fit windows, an 8 stb/d limit and new wells, pools, b and triangle inputs, which the learner sets. The Di, qi and R2 tolerances tighten to 2e-6, 0.05 and 0.001 on these new fields (the tiles print 7, 4 and 6 decimals), because at 2e-5 a Di band covers most harmonic Di values the course prints.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:22-24",
+     "printed": {
+      "decimals": 1
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/dca/UncertaintyExplorer.jsx:83 fmt(summary.p10, 1)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  }
+ }
+}

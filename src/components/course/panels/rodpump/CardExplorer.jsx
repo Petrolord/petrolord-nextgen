@@ -3,8 +3,12 @@ import {
   ResponsiveContainer, LineChart, ComposedChart, Line, Scatter, ScatterChart,
   XAxis, YAxis, ZAxis, CartesianGrid, Tooltip, Legend, ReferenceLine,
 } from 'recharts';
-import { cardExplorer, ODUMA } from './rodPumpLab';
+import {
+  cardExplorer, ODUMA, typedWellCard, TYPED_WELL_DEFAULT,
+  DEFAULT_NODES, DEFAULT_CARD_SAMPLES, DEFAULT_MAX_CYCLES, DEFAULT_MARCH_TOL,
+} from './rodPumpLab';
 import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import TypedWellFields, { draftFrom } from './TypedWellFields.jsx';
 
 // Card explorer, the Professional tier. The design IS the card, so this panel is
 // the card: what the march computes and what it then throws away, the static
@@ -12,7 +16,7 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 // polished rod loads and what moves them, the power the loop costs, and what the
 // well actually makes.
 //
-// Five modes, and every one of them marches the damped wave equation at least
+// Six modes, and every one of them marches the damped wave equation at least
 // once, so a mode takes a moment to open. Only the selected mode computes.
 //
 // Every figure on this page is a return value from rodPumpLab, which is a return
@@ -22,6 +26,10 @@ import { PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note } from '@/comp
 const fmt = (v, d = 4) => (Number.isFinite(v)
   ? Number(v).toLocaleString('en-US', { maximumFractionDigits: d, minimumFractionDigits: 0 })
   : '-');
+
+// Plain decimals for the typed well, with no thousands separator, so a value
+// can be copied straight into an answer box.
+const plain = (v, d) => (Number.isFinite(v) ? Number(v).toFixed(d) : '-');
 
 const tiny = (v) => {
   if (!Number.isFinite(v)) return '-';
@@ -35,6 +43,7 @@ const MODES = [
   { value: 'loads', label: 'The two loads, and what moves them' },
   { value: 'power', label: 'Power, and what power does not include' },
   { value: 'fillage', label: 'Fillage, the cliff and the effective factor' },
+  { value: 'typed', label: 'Your well, typed: the card' },
 ];
 
 const AXIS = { fill: '#94a3b8', fontSize: 11 };
@@ -620,6 +629,77 @@ const Fillage = () => {
   );
 };
 
+const TypedCard = () => {
+  const [draft, setDraft] = useState(() => draftFrom(TYPED_WELL_DEFAULT));
+  const [applied, setApplied] = useState(draft);
+  const r = useSafe(() => typedWellCard(applied), [applied]);
+  return (
+    <>
+      <div className="text-xs text-slate-300">
+        Type a well and march it. The view opens on the {ODUMA.label} teaching well on the published
+        four-bar, and every input can be retyped: the taper top section first, the grade, the fluid,
+        the six linkage dimensions, the pump, the speed, the damping, the fillage and the efficiency.
+        Press March this well after typing; a march takes about a second.
+      </div>
+      <div className="mt-3">
+        <TypedWellFields draft={draft} setDraft={setDraft} />
+      </div>
+      <div className="mt-3 flex items-center gap-3">
+        <button type="button" onClick={() => setApplied(draft)}
+          className="rounded-md border border-gray-600 bg-gray-700 px-3 h-8 text-sm text-white">
+          March this well
+        </button>
+        {draft !== applied && <span className="text-xs text-[#f97316]">Inputs changed since the last march.</span>}
+      </div>
+      <Note>
+        Marching parameters stay at the engine defaults: {DEFAULT_NODES} nodes, {DEFAULT_CARD_SAMPLES} card
+        samples, at most {DEFAULT_MAX_CYCLES} cycles, tolerance {DEFAULT_MARCH_TOL}. These are the numbers a
+        studio user receives.
+      </Note>
+      {(!r || !r.ok) ? (
+        <Note>{r ? r.errors.join(' ') : 'This well cannot be marched.'}</Note>
+      ) : (
+        <>
+          <div className="mt-3">
+            <TileGrid>
+              <Tile label="Static stretch under the fluid load" value={plain(r.staticStretchIn, 9)} unit="in" />
+              <Tile label="Plunger stroke, from the march" value={plain(r.plungerStrokeIn, 9)} unit="in" />
+              <Tile label="Peak polished rod load, reported" value={plain(r.pprlLb, 9)} unit="lb" />
+              <Tile label="Minimum polished rod load, reported" value={plain(r.mprlLb, 9)} unit="lb" />
+              <Tile label="Polished rod horsepower" value={plain(r.prhp, 9)} unit="hp" />
+              <Tile label="Produced" value={plain(r.producedBpd, 9)} unit="bbl/d" />
+            </TileGrid>
+          </div>
+          <div className="mt-3">
+            <TileGrid>
+              <Tile label="Surface stroke from the linkage" value={plain(r.surfaceStrokeIn, 9)} unit="in" />
+              <Tile label="Spring rule plunger stroke" value={plain(r.springRuleIn, 9)} unit="in" />
+              <Tile label="Overtravel, march less spring rule" value={plain(r.overtravelIn, 9)} unit="in" />
+              <Tile label="Fluid load on the plunger" value={plain(r.fluidLoadLb, 9)} unit="lb" />
+              <Tile label="Buoyed string weight" value={plain(r.buoyedWeightLb, 9)} unit="lb" />
+              <Tile label="String spring rate" value={plain(r.krLbPerIn, 9)} unit="lb/in" />
+              <Tile label="Natural frequency" value={plain(r.naturalFreqSpm, 9)} unit="spm" />
+              <Tile label="Work per cycle, card area" value={plain(r.cardAreaInLb, 6)} unit="in-lb" />
+              <Tile label="Rated displacement" value={plain(r.ratedBpd, 9)} unit="bbl/d" />
+              <Tile label="Swept by the plunger" value={plain(r.sweptBpd, 9)} unit="bbl/d" />
+              <Tile label="Cycles to settle" value={String(r.cycles)} />
+              <Tile label="Converged" value={String(r.converged)} />
+            </TileGrid>
+          </div>
+          {r.warnings.length > 0 && <Note>Engine warning: {r.warnings.map((w) => w.message).join(' ')}</Note>}
+          <Note>
+            The static stretch is the fluid load times the elastic constant of the taper. The plunger stroke
+            is the peak to trough travel of the pump node over a settled marched cycle, and the two loads are
+            the ones the design reports, read off the decimated surface card. Produced is the pump constant
+            times the plunger diameter squared, the marched plunger stroke, the speed, the fillage and the
+            efficiency.
+          </Note>
+        </>
+      )}
+    </>
+  );
+};
+
 const CardExplorer = ({ initialMode = 'march' }) => {
   const [mode, setMode] = useState(initialMode);
   return (
@@ -636,6 +716,7 @@ const CardExplorer = ({ initialMode = 'march' }) => {
         {mode === 'loads' && <Loads />}
         {mode === 'power' && <Power />}
         {mode === 'fillage' && <Fillage />}
+        {mode === 'typed' && <TypedCard />}
       </div>
     </PanelShell>
   );

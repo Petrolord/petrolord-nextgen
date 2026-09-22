@@ -32,13 +32,13 @@ Two tiles give the mean column for each block. Read them together with the map s
 
 {{panel:rc-block-explorer}}
 
-At the capstone settings the strongest blue cells cluster in the middle west of the field, and the amber cells are almost uniformly pale. Step the fault west to 1500 m and watch the crest change hands: at that position the crestal cells fall east of the fault, so the amber block takes the field maximum and the blue block is left with a flank.
+At the teaching settings the strongest blue cells cluster in the middle west of the field, and the amber cells are almost uniformly pale. Step the fault west to 1500 m and watch the crest change hands: at that position the crestal cells fall east of the fault, so the amber block takes the field maximum and the blue block is left with a flank.
 
 Notice that the cell counts at 1500 m are 78 west and 91 east, so the east block now holds more area and more barrels. The crest travels with the barrels, which is the general pattern.
 
 ## Worked example
 
-Compare the two blocks on three measures at once at the capstone settings.
+Compare the two blocks on three measures at once at the teaching settings.
 
 The west has 117 cells, a mean column of 15.452865 m and a maximum of 20.281860 m. The ratio of its maximum to its mean is 1.31.
 

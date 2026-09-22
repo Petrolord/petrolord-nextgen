@@ -1,0 +1,329 @@
+{
+ "course": "basin",
+ "wave": "w5a",
+ "migration": "20261028a_w5_basin.sql",
+ "fields_file": "tools/course-waves/w5/basin/fields.json",
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "title": "Burial and heat: the NKPOR case",
+   "dataset": "basin/NKPOR sandstone and heat column (W5 re-case; every input is stated in the brief)",
+   "why": "Every field leaked: the walkthrough and the burial and heat lessons printed them and the burial and heat explorer opened on the capstone shale and heat column. The capstone moves to a sandstone at its own depths and a heat column of its own, typed into the explorer (the heat column is now a typed input).",
+   "prompt": "Work the NKPOR compaction and heat case. For sandstone on the Sclater-Christie curve (the course's sandstone parameters): the solid (grain) thickness inside 100 m of sandstone buried at 1700 m; that same 100 m restored from 1700 m to the surface; and sandstone porosity at 2600 m. Then the NKPOR steady two-layer heat column (12 C surface, 65 mW/m2 basal, k 2.0 over k 3.2, two 1000 m layers of ten 100 m cells each): the temperature at the first cell (50 m), at the base of the low-conductivity layer (950 m), and at the deepest cell (1950 m). Type the case into the burial and heat explorer (it opens on the golden shale and heat column, which are the teaching case).",
+   "rekey": [
+    "solid_100",
+    "restored",
+    "phi_2000",
+    "t_first",
+    "t_lowk_base",
+    "t_deepest"
+   ],
+   "annot": {
+    "nkpor_solid_sst_1700": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Solid thickness in 100 m at the burial depth)",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Solid thickness in 100 m at the burial depth)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "sandstone selected, burial 1700 typed; fmt 8 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_restored_sst_1700": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Restored to surface)",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Restored to surface)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "sandstone, burial 1700; fmt 8 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_phi_sst_2600": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Porosity at the depth)",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Porosity at the depth)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "sandstone, depth 2600; fmt 8 dp against tol 0.0001; also phi0 exp(-cz) by hand.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_t_first": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Temperature at 50 m)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Temperature at 50 m)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "heat column typed (12, 65, 2.0, 3.2); fmt 6 dp against tol 0.005; also 12 + q z / k by hand.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_t_lowk_base": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Temperature at 950 m)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Temperature at 950 m)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed heat column; fmt 6 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_t_deepest": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Temperature at 1950 m)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/BurialHeatExplorer.jsx (Tile Temperature at 1950 m)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed heat column; fmt 6 dp against tol 0.005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "A",
+   "title": "Maturity kinetics: the NKPOR ramps and clock",
+   "dataset": "basin/NKPOR heating ramps and isothermal clock (W5 re-case; every input is stated in the brief)",
+   "why": "Every field leaked: the walkthrough and the kinetics lessons printed them and the kinetics explorer opened on the capstone ramps and clock; Ro at zero and at full reaction are model constants no case can move, so they give way to a third ramp reading. The capstone moves to ramps, read temperatures and a clock temperature of its own, typed into the kinetics explorer (a typed ramp is new).",
+   "prompt": "Run the Sweeney-Burnham Easy%Ro integrator on the NKPOR heating ramps: Ro at 145 C and at 165 C on a 2 C/Ma ramp, and Ro at 165 C on a 5 C/Ma ramp (each ramp from 20 C, reported at whole degrees). Then run the isothermal kerogen clock at 135 C and report the transformation ratio after 100 Ma for Type I, Type II and Type III kerogen. Type the rates, the read temperatures and the clock temperature into the kinetics explorer (it opens on the golden 3 C/Ma ramp and the Type II clock at 100 C, which are the teaching case).",
+   "rekey": [
+    "ro_f0",
+    "ro_full",
+    "ro_150_r3",
+    "ro_150_r1",
+    "tr_10",
+    "tr_50"
+   ],
+   "annot": {
+    "nkpor_ro_145_r2": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile Your ramp: Ro)",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile Your ramp: Ro)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed rate 2 and read temperature 145; fmt 8 dp against tol 0.0005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_ro_165_r2": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile Your ramp: Ro)",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile Your ramp: Ro)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed rate 2 and read temperature 165; fmt 8 dp against tol 0.0005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_ro_165_r5": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile Your ramp: Ro)",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile Your ramp: Ro)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed rate 5 and read temperature 165; fmt 8 dp against tol 0.0005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_tr1_135_100": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile TR at 100 Ma)",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile TR at 100 Ma)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Type I selected, isothermal 135 typed; fmt 8 dp against tol 0.0001.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_tr2_135_100": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile TR at 100 Ma)",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile TR at 100 Ma)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Type II, isothermal 135; fmt 8 dp against tol 0.0001.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_tr3_135_100": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile TR at 100 Ma)",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/KineticsExplorer.jsx (Tile TR at 100 Ma)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "Type III, isothermal 135; fmt 8 dp against tol 0.0001.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "advanced": {
+   "pick": "A",
+   "title": "The kitchen and the erosion signature: the NKPOR event",
+   "dataset": "basin/reference basin with the NKPOR erosion event, run twice (W5 re-case; the event is stated in the brief)",
+   "why": "Every field leaked: the walkthrough and the charge lessons printed them and the charge explorer opened on the capstone event. The capstone moves to an erosion event of its own, 760 m at 20 Ma, typed into the charge explorer (the event age is now a typed input). The present-day source temperature is set by present burial and heat flow and barely moves with the event (it matches the teaching value within its old tolerance), so it gives way to the peak temperature over the source history.",
+   "prompt": "Run the full forward model on the golden reference basin (four layers over 150 Ma, cooling 80 to 60 mW/m2 heat flow) with the NKPOR erosion event in place of the reference one: 760 m of erosion at 20 Ma. Read the source shale: its final reflectance, its peak temperature over the whole history, its final transformation ratio, and the generated and expelled mass at present day. Then rerun WITHOUT the erosion event and report the erosion signature, the difference in final Ro between the two runs. Type the event into the charge explorer (it opens on the reference event, 600 m at 10 Ma, which is the teaching case).",
+   "rekey": [
+    "final_ro",
+    "final_temp",
+    "final_tr",
+    "generated",
+    "expelled",
+    "ro_delta"
+   ],
+   "annot": {
+    "nkpor_final_ro": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Final Ro)",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Final Ro)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed event 760 m at 20 Ma; fmt 8 dp against tol 0.0005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_peak_temp": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Peak temperature)",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Peak temperature)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed event; the maximum of the source temperature series; fmt 6 dp against tol 0.01.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_final_tr": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Final TR)",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Final TR)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed event; fmt 8 dp against tol 0.0005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_generated": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Generated)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Generated)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed event; fmt 3 dp against tol 0.5 kg/m2.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_expelled": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Expelled)",
+     "printed": {
+      "decimals": 3
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Expelled)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed event; fmt 3 dp against tol 0.5 kg/m2.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "nkpor_ro_delta": {
+     "source": "nextgen-panel",
+     "source_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Erosion signature)",
+     "printed": {
+      "decimals": 8
+     },
+     "display_scale": 1,
+     "display_ref": "src/components/course/panels/basin/ChargeExplorer.jsx (Tile Erosion signature)",
+     "prompt_precision": null,
+     "answer_space": null,
+     "guess_p": null,
+     "evidence": "typed event against the no-erosion twin; fmt 8 dp against tol 0.0005.",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  }
+ }
+}

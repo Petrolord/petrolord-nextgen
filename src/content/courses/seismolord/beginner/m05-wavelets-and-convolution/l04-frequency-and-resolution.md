@@ -44,7 +44,7 @@ That is the general lesson, and it survives beyond this well.
 
 Notice the times as well as the amplitudes. The 25 Hz and 40 Hz peaks land at 1642 ms and 1646 ms, within 4 ms of each other, while the 15 Hz peak lands 62 ms earlier at 1580 ms. Changing nothing but the wavelet moved the brightest part of the trace to a different part of the well. It marks wherever this particular wavelet happened to sum most effectively, not the most significant interface.
 
-The next lesson takes the 25 Hz case apart, because the gap between where its peak sits and where the strongest reflection coefficient sits is what the capstone asks you to explain.
+The next lesson takes the 25 Hz case apart, because the gap between where its peak sits and where the strongest reflection coefficient sits is what this tier asks you to explain.
 
 Try it yourself: the panel below builds the synthetic from the teaching well at a frequency you choose.
 

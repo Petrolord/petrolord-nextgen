@@ -22,7 +22,7 @@ The round trip is the check: rate times days summed over the history gives
 
 $$176923.83644033302 \text{ stb}$$
 
-against the ledger's 176923.83644033293. Agreement in the last bits of a double is what an exact conversion looks like, and a mean-month divisor instead would have put February nearly ten percent out.
+against the ledger's 176923.83644033293. Agreement in the last bits of a double is what an exact conversion looks like, and a mean-month divisor instead would have put a 28-day February 8.01 percent short.
 
 ## The calibration
 
