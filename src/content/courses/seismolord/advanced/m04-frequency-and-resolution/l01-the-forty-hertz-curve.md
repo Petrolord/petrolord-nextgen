@@ -66,9 +66,9 @@ $$25 \times 48 = 1200 \qquad 40 \times 30 = 1200$$
 
 ## Worked example
 
-Predict, without running the model, a 40 Hz thickness whose amplitude will match the 25 Hz amplitude at 24 ms.
+Predict, without running the model, a 40 Hz thickness whose amplitude will match the 25 Hz amplitude at 12 ms.
 
-The product is $25 \times 24 = 600$, so the matching 40 Hz thickness is $600/40 = 15$ ms. That is not on the 2 ms grid, so the model cannot show it directly; the nearest grid thicknesses at 40 Hz are 14 ms and 16 ms, and the 25 Hz value at 24 ms, 0.09428645, does indeed lie between the 40 Hz values there, 0.09879693 and 0.08994870.
+The product is $25 \times 12 = 300$, so the matching 40 Hz thickness is $300/40 = 7.5$ ms. That is not on the 2 ms grid, so the model cannot show it directly; the nearest grid thicknesses at 40 Hz are 6 ms and 8 ms, and the 25 Hz value at 12 ms, 0.10806032, does indeed lie between the 40 Hz values there, 0.09535395 and 0.10973874.
 
 ## Exercise
 

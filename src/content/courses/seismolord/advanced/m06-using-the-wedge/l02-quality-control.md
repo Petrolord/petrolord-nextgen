@@ -26,7 +26,7 @@ These catch mistakes in what is done with a correct model.
 
 **Has the modelled value been confused with the theoretical one?** At 25 Hz they are 16 and 15.5939, and both appear on the panel. The modelled value is the reading; the theoretical value is the check.
 
-**Has the tuning amplitude been confused with the isolated amplitude?** At 25 Hz they are 0.1156 and 0.0800. The capstone grades the tuning amplitude and the RATIO between the two, 1.4449, which is the result that matters; swap them and the ratio comes back as 0.69, so both fields fail together.
+**Has the tuning amplitude been confused with the isolated amplitude?** At 25 Hz they are 0.1156 and 0.0800. The RATIO between the two, 1.4449, is the result that matters; swap them and the ratio comes back as 0.69. The capstone's ratio field is taken against the isolated level in the same way, so the same swap loses it.
 
 ## The three interpretation checks
 

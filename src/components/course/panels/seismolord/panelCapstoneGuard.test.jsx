@@ -26,6 +26,16 @@
 // amplitude is left out: its 0.002 tolerance is wider than its spread over
 // every frequency, a field defect reported for a re-key decision), and
 // requires the walkthrough to print none of the six values.
+//
+// ADVANCED, HD RE-KEY (2026-09-22, migration 20261030b_hd_seismolord.sql).
+// The two fields that did not discriminate are re-keyed: tune25_amp becomes
+// the 25 Hz amplitude of a stated 24 ms bed and tune25_iso_ratio the 25 Hz
+// ratio to the isolated level of a stated 28 ms bed, both on the falling
+// side of the curve. The gate below measures, on the engine, that the old
+// fields passed on every panel frequency and that no other panel reading and
+// no guess passes the new ones, and that neither new answer (as graded, or
+// restated through the isolated level) is printed anywhere a learner reads
+// before working. The planted controls prove the sweep is live.
 import { describe, it, expect } from 'vitest';
 import * as fs from 'node:fs';
 import * as os from 'node:os';
@@ -40,7 +50,7 @@ import {
 import SyntheticExplorer from './SyntheticExplorer';
 import ShiftExplorer from './ShiftExplorer';
 import WedgeExplorer from './WedgeExplorer';
-import { capstoneFields, BEGINNER } from '../../../../../tools/course-waves/w5/seismolord/fields.mjs';
+import { capstoneFields, BEGINNER, HD_ADVANCED } from '../../../../../tools/course-waves/w5/seismolord/fields.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, '..', '..', '..', '..', '..');
@@ -155,11 +165,11 @@ describe('ADVANCED (strip): the wedge explorer opens off the brief\'s frequencie
   it('the panel opens at a frequency the brief does not read', () => {
     const text = render(WedgeExplorer).replace(/<[^>]*>/g, ' ');
     expect(text).not.toMatch(/Wedge tuning at 25 Hz|at 40 Hz/);
-    // tune25_amp is left out on purpose: its tolerance (0.002) is wider than the
-    // spread of the tuning amplitude over EVERY frequency on this grid (0.11469
-    // to 0.11570), so any wedge run prints a passing value. That is a defect of
-    // the field, reported for a re-key decision; no strip can remove it.
-    const checked = adv.filter((f) => f.tol > 0 && f.key !== 'tune25_amp');
+    // Every advanced field with a tolerance is checked. W5a had to leave
+    // tune25_amp out (its 0.002 was wider than the tuning amplitude's spread
+    // over every frequency); the HD re-key replaced it.
+    const checked = adv.filter((f) => f.tol > 0);
+    expect(checked.map((f) => f.key)).toEqual(['amp25_at_24ms', 'amp40_at_6ms', 'ratio25_at_28ms', 'theory25_ms']);
     const G1 = {
       hit: (x) => checked.find((f) => Math.abs(x - f.expected) <= f.tol) || null,
     };
@@ -168,12 +178,118 @@ describe('ADVANCED (strip): the wedge explorer opens off the brief\'s frequencie
   });
 
   it('the advanced walkthrough prints none of the six values', () => {
-    const G = makeLeakGuard(adv.filter((f) => !['tune25_amp', 'tune25_iso_ratio'].includes(f.key)));
+    const G = makeLeakGuard(adv);
     const walk = path.join(LESSONS, 'advanced/m06-using-the-wedge/l03-the-capstone-walkthrough.md');
     expect(G.scanFiles([walk], ROOT)).toEqual([]);
     const text = fs.readFileSync(walk, 'utf8');
-    ['0.1155', '1.4449', '15.59', '0.0953'].forEach((t) => expect(text.includes(t), t).toBe(false));
+    ['0.0942', '1.0688', '15.59', '0.0953'].forEach((t) => expect(text.includes(t), t).toBe(false));
     expect(text).not.toMatch(/\b16 ms\b|\b10 ms\b/);
+  });
+});
+
+describe('ADVANCED (HD re-key): the new fields discriminate and are printed nowhere', () => {
+  const W = Object.fromEntries(L.WEDGE_FREQS.map((f) => [f, L.computeWedge(f)]));
+  const amp = field('amp25_at_24ms');
+  const ratio = field('ratio25_at_28ms');
+  const hd = W[HD_ADVANCED.freqHz];
+  const iso = hd.isoAmp;
+  // Every reading the panel can print on its two tiles: 5 frequencies x 31 beds.
+  const readings = L.WEDGE_FREQS.flatMap((f) => W[f].rows.map((r) => ({
+    f, t: r.thicknessMs, amp: r.amp, ratio: r.amp / W[f].isoAmp,
+  })));
+  const passes = (fld, x) => Math.abs(x - fld.expected) <= fld.tol;
+
+  it('the replaced fields passed on every panel frequency (the defect, measured)', () => {
+    // tune25_amp 0.1155947595834732 tol 0.002 and tune25_iso_ratio 1.4449345270902185
+    // tol 0.001 were the W5a keys; any frequency's tuning reading passed the amplitude.
+    L.WEDGE_FREQS.forEach((f) => expect(Math.abs(W[f].tuneAmp - 0.1155947595834732), `${f} Hz`).toBeLessThanOrEqual(0.002));
+    expect(L.WEDGE_FREQS.filter((f) => Math.abs(W[f].tuneAmp / W[f].isoAmp - 1.4449345270902185) <= 0.001))
+      .toEqual([20, 25, 40, 50]);
+    expect(FIELDS.map((f) => f.key)).not.toContain('tune25_amp');
+    expect(FIELDS.map((f) => f.key)).not.toContain('tune25_iso_ratio');
+  });
+
+  it('the new keys are the stated beds on the 25 Hz run, read the way the tiles read them', () => {
+    const r24 = hd.rows.find((r) => r.thicknessMs === HD_ADVANCED.ampBedMs);
+    const r28 = hd.rows.find((r) => r.thicknessMs === HD_ADVANCED.ratioBedMs);
+    expect(amp.expected).toBe(r24.amp);
+    expect(ratio.expected).toBe(r28.amp / iso);
+    // both beds are thicker than tuning, on the falling side
+    expect(HD_ADVANCED.ampBedMs).toBeGreaterThan(hd.tuneMs);
+    expect(HD_ADVANCED.ratioBedMs).toBeGreaterThan(HD_ADVANCED.ampBedMs);
+    // the tiles print 10 and 4 decimals; the printed value passes, as it should
+    expect(passes(amp, Number(r24.amp.toFixed(10)))).toBe(true);
+    expect(passes(ratio, Number((r28.amp / iso).toFixed(4)))).toBe(true);
+    // against the exact 0.08 the ratio still passes
+    expect(passes(ratio, r28.amp / L.WEDGE.rcTop)).toBe(true);
+  });
+
+  it('no other panel reading and no guess passes a new field', () => {
+    // A reading at the same frequency times thickness (module 4's law) is the
+    // same bed in wavelet units, a correct route by another frequency: 50 Hz at
+    // 14 ms prints the 28 ms ratio exactly, 50 Hz at 12 ms misses the 24 ms
+    // amplitude by the grid fit. Every other reading is a different bed.
+    const law = (t0) => (x) => x.f * x.t !== HD_ADVANCED.freqHz * t0;
+    const others = readings.filter(law(HD_ADVANCED.ampBedMs));
+    expect(others.filter((x) => passes(amp, x.amp)).map((x) => `${x.f}Hz ${x.t}ms`)).toEqual([]);
+    const othersR = readings.filter(law(HD_ADVANCED.ratioBedMs));
+    expect(othersR.filter((x) => passes(ratio, x.ratio)).map((x) => `${x.f}Hz ${x.t}ms`)).toEqual([]);
+    expect(passes(ratio, W[50].rows[7].amp / W[50].isoAmp)).toBe(true);
+    expect(passes(amp, W[50].rows[6].amp)).toBe(false);
+    // wrong methods and guesses: the tuning reading, the isolated level, a thin-bed
+    // linear scaling, the other tile, the continuous ideal, and 1
+    const ideal = 1 + 2 * Math.exp(-1.5);
+    [hd.tuneAmp, iso, 0.08, hd.tuneAmp * (HD_ADVANCED.ampBedMs / hd.tuneMs), amp.expected / iso, 0.08 * ideal]
+      .forEach((g) => expect(passes(amp, g), `amp guess ${g}`).toBe(false));
+    [hd.tuneAmp / iso, ideal, 1, ratio.expected * iso, amp.expected / iso]
+      .forEach((g) => expect(passes(ratio, g), `ratio guess ${g}`).toBe(false));
+    // the nearest wrong reading is several tolerances out, not a hair
+    const gap = (fld, k, list) => Math.min(...list.map((x) => Math.abs(x[k] - fld.expected))) / fld.tol;
+    expect(gap(amp, 'amp', others)).toBeGreaterThan(5);
+    expect(gap(ratio, 'ratio', othersR)).toBeGreaterThan(10);
+  });
+
+  // The new answers, as graded and restated through the isolated level (an
+  // amplitude printed in a lesson divides to the ratio, and back).
+  const HD = makeLeakGuard([
+    amp, ratio,
+    { tier: 'advanced', key: 'amp25_at_24ms as a ratio', tol: amp.tol / iso, expected: amp.expected / iso },
+    { tier: 'advanced', key: 'ratio25_at_28ms as an amplitude', tol: ratio.tol * iso, expected: ratio.expected * iso },
+  ]);
+
+  it('the gate is live: planted prints of each answer and each restatement are caught', () => {
+    expect(LEAK_GUARD_MARGIN).toBe(10);
+    const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'hd-sl-'));
+    const planted = [
+      amp.expected.toFixed(8), (amp.expected / iso).toFixed(4), ratio.expected.toFixed(4), (ratio.expected * iso).toFixed(8),
+    ].map((v, i) => {
+      const p = path.join(dir, `planted${i}.md`);
+      fs.writeFileSync(p, `| 24 ms | ${v} |\n`);
+      return p;
+    });
+    planted.forEach((p) => expect(HD.scanFiles([p], ROOT), p).toHaveLength(1));
+    // and the old lesson rows this re-key stripped would have been caught
+    const old = path.join(dir, 'old.md');
+    fs.writeFileSync(old, '| 28 ms | 0.08550713 | 0.07449286 |\nthe 25 Hz value at 24 ms, 0.09428645, does indeed lie\n');
+    expect(HD.scanFiles([old], ROOT)).toHaveLength(2);
+    fs.rmSync(dir, { recursive: true });
+  });
+
+  it('no lesson, panel source, page, rendered panel or opening scalar prints a new answer', () => {
+    expect(HD.scanFiles([...lessonFiles(LESSONS), ...panelSources(HERE), PAGE], ROOT)).toEqual([]);
+    const rendered = [['SyntheticExplorer', SyntheticExplorer], ['ShiftExplorer', ShiftExplorer], ['WedgeExplorer', WedgeExplorer]]
+      .flatMap(([n, C]) => HD.scanRendered(n, render(C)).hits);
+    expect(rendered).toEqual([]);
+    expect(HD.scanValues(beginnerOpeningStates())).toEqual([]);
+  });
+
+  it('the migration writes the new keys and the brief names both beds', () => {
+    const mig = fs.readFileSync(path.join(ROOT, 'migrations', '20261030b_hd_seismolord.sql'), 'utf8');
+    [amp, ratio].forEach((f) => expect(mig, f.key).toContain(`"key": "${f.key}"`));
+    const spec = JSON.parse(fs.readFileSync(path.join(ROOT, 'docs/graded-field-audit/hd/seismolord.json'), 'utf8'));
+    const brief = spec.tiers.advanced.prompt_edits.map((e) => e[1]).join(' ');
+    expect(brief).toContain(`${HD_ADVANCED.ampBedMs} ms bed at ${HD_ADVANCED.freqHz} Hz`);
+    expect(brief).toContain(`${HD_ADVANCED.ratioBedMs} ms bed at ${HD_ADVANCED.freqHz} Hz`);
   });
 });
 
