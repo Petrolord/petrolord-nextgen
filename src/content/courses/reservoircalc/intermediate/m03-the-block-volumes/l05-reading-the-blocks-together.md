@@ -4,7 +4,7 @@ Two columns of numbers invite two separate readings, and separate readings miss 
 
 ## Four comparisons
 
-At the capstone settings the four readings worth taking are these.
+At the teaching settings the four readings worth taking are these.
 
 The first is the sum against the field. The blocks must reproduce the total, which they do: 117 and 52 cells give 169, and 9.855617 and 2.283591 MMstb give 12.139208. That is a check, not a finding.
 
@@ -34,7 +34,7 @@ Do the two compartments share a contact? This tier can compute the consequences 
 
 ## Reading it off the panel
 
-Set the capstone configuration and take all four readings in one pass.
+Set the teaching configuration and take all four readings in one pass.
 
 {{panel:rc-block-explorer}}
 

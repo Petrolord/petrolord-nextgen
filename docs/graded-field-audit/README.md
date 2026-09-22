@@ -495,3 +495,19 @@ The third wave of [FOLLOW-ON-PROGRAMME.md](FOLLOW-ON-PROGRAMME.md) (section 2 an
 `w3_capstones.py` generates `migrations/20261026_w3_<course>.sql` from `w3/<course>.json`: one sentence appended to 25 capstone briefs in 15 courses, naming the app and the switch. Prompt only (fields asserted identical before and after), content-addressed on the post-W1 row, refuses without W1. They apply only after the Suite zip carrying the switch is live (`/root/w3-apply/apply.sh markers <zip>` checks it). `normalize.py` folds each `annot_updates` entry into `annot/` (the print the switch gives, class `none`, `printed_before` keeps the old print); `audit.py --post --wave w3` checks every W3 brief ends with its sentence, and `--selftest` gains two controls: a W3 brief without its sentence, and a W3 class move put back on the Suite print it replaced (both go red).
 
 Not in W3: the separation advanced brief (W2 publishes the ADANGA offsets there, so the Full precision sentence is handed to W2; the class move for `ejulebe4_preferred_height_ft` is recorded here), wellcost (W2's prompt; Suite #568 adds the studio's Full precision and the downloadable MERLIN A-12 case file with its seed), fiscal FC6 (already shipped by the round-off, verified on the scratch replay), and the NextGen panel rows (W4).
+## W5b (re-case, section 3 pick A), 2026-09-22
+Courses: reservoircalc, porepressure, dca, sim, waterflood, fluid, every tier. These courses use the shared W5 generator and audit path above. Each capstone moves off the teaching case that the panels open on and the lessons work. The brief now states a case of its own, and the learner types it into the panels. W1's open-book label comes off the brief and the lesson. W5b adds two files:
+| File | What |
+|---|---|
+| `w5_keys.mjs` | `npx vite-node --config vitest.config.js docs/graded-field-audit/w5_keys.mjs <course> [--write]` regenerates every value in the course's `fields_file` from the vendored engine. It does this through the spec's `keys_module`, which calls the same teaching function the panel calls, on the `case` each tier states. Nothing is hand-typed. |
+| `src/components/course/panels/w5CaseGuard.js` | The gate each W5b course's `panelCapstoneGuard.test.js` runs in CI. |
+The guard checks five things:
+1. Every committed value equals the engine's value on the stated case.
+2. No panel, rendered with no props (what the learner sees before typing), prints a graded answer (D2).
+3. No lesson in any tier prints one.
+4. No panel, lab or page source carries one as a literal.
+5. The brief carries no open-book label and prints no answer.
+A printed number counts as a leak when typing it would pass: it lies within the grader's own tol. A fraction is also checked as a percentage. A zero-tolerance count counts only where the words around it name what it counts. The FC waves used ten tolerances under five unit shifts. That works at their 1e-6 relative tolerances. At these courses' percent-level tolerances it would flag most numbers in the course. Positive controls plant a value inside each band, and it must fire.
+| Course | Tiers | Case (what the brief states) |
+|---|---|---|
+| reservoircalc | all | beginner: contact 1563 m, NTG 0.72, porosity 0.22, Sw 0.25, Bo 1.25. intermediate: fault at 2100 m, contacts 1553 m west and 1572 m east. advanced: six new well porosities, contact 1562 m. |

@@ -1,6 +1,6 @@
 # Moving the fault
 
-The fault at 1800 m is given to you by the capstone. In real work its position is interpreted, and interpretations have uncertainty. This lesson maps out what that uncertainty is worth by walking the fault across the field.
+The fault at 1800 m is given to you by the teaching case. In real work its position is interpreted, and interpretations have uncertainty. This lesson maps out what that uncertainty is worth by walking the fault across the field.
 
 ## The sweep
 

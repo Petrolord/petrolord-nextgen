@@ -21,13 +21,35 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "Integer count printed as an integer; tol 0 is honest for a count. 169 of 500 cells is not a guessable space. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/beginner/m06-the-volumetrics-workflow/l03-the-capstone-walkthrough.md:9-16 (a table of all six fields with value and tolerance) prints this graded value.",
    "notes": "Probe default state prints 'Oil-bearing cells 169 of 500'. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "oil_cells",
+     "label": "Oil-bearing grid cells",
+     "unit": "count",
+     "expected": 177.0,
+     "tol": 0.0
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the volume explorer opened on the 1560 m contact with the capstone properties, so every field could be read before any work. Re-cased on a 1563 m contact with NTG 0.72, porosity 0.22, Sw 0.25 and Bo 1.25, which the learner types; no panel opens there and no lesson prints the results.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:124",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:124 String(s.oilCells)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -46,13 +68,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "Tile 'Maximum oil column'; printed fmt(v, 4) = toFixed(4) (VolumeExplorer.jsx:17 fmt), half a unit 5e-5 is far inside tol (tol 0.1). LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/beginner/m06-the-volumetrics-workflow/l03-the-capstone-walkthrough.md:9-16 (a table of all six fields with value and tolerance) prints this graded value.",
    "notes": "Probe default state prints 20.2819 m. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "max_oil_column_m",
+     "label": "Maximum oil column",
+     "unit": "m",
+     "expected": 23.2818603515625,
+     "tol": 0.1
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the volume explorer opened on the 1560 m contact with the capstone properties, so every field could be read before any work. Re-cased on a 1563 m contact with NTG 0.72, porosity 0.22, Sw 0.25 and Bo 1.25, which the learner types; no panel opens there and no lesson prints the results.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:126",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:126 fmt(s.maxOilColumn, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -71,13 +117,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "Tile 'Gross rock volume'; printed fmt(v, 4) = toFixed(4) (VolumeExplorer.jsx:17 fmt), half a unit 5e-5 is far inside tol (tol 0.05). LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/beginner/m06-the-volumetrics-workflow/l03-the-capstone-walkthrough.md:9-16 (a table of all six fields with value and tolerance) prints this graded value.",
    "notes": "Probe default state prints 22.2690. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "grv_mm3",
+     "label": "Gross rock volume",
+     "unit": "10^6 m3",
+     "expected": 27.46473388671875,
+     "tol": 0.05
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the volume explorer opened on the 1560 m contact with the capstone properties, so every field could be read before any work. Re-cased on a 1563 m contact with NTG 0.72, porosity 0.22, Sw 0.25 and Bo 1.25, which the learner types; no panel opens there and no lesson prints the results.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:128",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:128 fmt(s.grvMm3, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -96,13 +166,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "Tile 'Pore volume (phi 0.2)'; printed fmt(v, 4) = toFixed(4) (VolumeExplorer.jsx:17 fmt), half a unit 5e-5 is far inside tol (tol 0.01). LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/beginner/m06-the-volumetrics-workflow/l03-the-capstone-walkthrough.md:9-16 (a table of all six fields with value and tolerance) prints this graded value.",
    "notes": "Probe default state prints 3.5630. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "pore_mm3",
+     "label": "Pore volume",
+     "unit": "10^6 m3",
+     "expected": 4.350413996952986,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the volume explorer opened on the 1560 m contact with the capstone properties, so every field could be read before any work. Re-cased on a 1563 m contact with NTG 0.72, porosity 0.22, Sw 0.25 and Bo 1.25, which the learner types; no panel opens there and no lesson prints the results.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:130",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:130 fmt(s.poreMm3, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -121,13 +215,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "Tile 'HCPV (Sw 0.35)'; printed fmt(v, 4) = toFixed(4) (VolumeExplorer.jsx:17 fmt), half a unit 5e-5 is far inside tol (tol 0.01). LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/beginner/m06-the-volumetrics-workflow/l03-the-capstone-walkthrough.md:9-16 (a table of all six fields with value and tolerance) prints this graded value.",
    "notes": "Probe default state prints 2.3160. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "hcpv_mm3",
+     "label": "Hydrocarbon pore volume",
+     "unit": "10^6 m3",
+     "expected": 3.262810497714745,
+     "tol": 0.01
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the volume explorer opened on the 1560 m contact with the capstone properties, so every field could be read before any work. Re-cased on a 1563 m contact with NTG 0.72, porosity 0.22, Sw 0.25 and Bo 1.25, which the learner types; no panel opens there and no lesson prints the results.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:131",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:131 fmt(s.hcpvMm3, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "beginner",
@@ -146,13 +264,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "Tile 'STOIIP (Bo 1.2)'; printed fmt(v, 4) = toFixed(4) (VolumeExplorer.jsx:17 fmt), half a unit 5e-5 is far inside tol (tol 0.05). LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/beginner/m06-the-volumetrics-workflow/l03-the-capstone-walkthrough.md:9-16 (a table of all six fields with value and tolerance) prints this graded value.",
    "notes": "Probe default state prints 12.1392 (and 12.139208 in BlockExplorer 'Field total'). LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "stoiip_mmstb",
+     "label": "STOIIP",
+     "unit": "MMstb",
+     "expected": 16.41794037482096,
+     "tol": 0.05
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the volume explorer opened on the 1560 m contact with the capstone properties, so every field could be read before any work. Re-cased on a 1563 m contact with NTG 0.72, porosity 0.22, Sw 0.25 and Bo 1.25, which the learner types; no panel opens there and no lesson prints the results.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:132",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:132 fmt(s.stoiipMmstb, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -169,13 +311,35 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "Integer count printed as an integer; tol 0 honest. Not guessable (0..169). LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/intermediate/m06-the-compartment-workflow/l03-the-capstone-walkthrough.md:19-23 prints this graded value.",
    "notes": "Probe default state prints 'West block: cells 117 of 169'. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "west_cells",
+     "label": "West block: oil-bearing cells",
+     "unit": "count",
+     "expected": 146.0,
+     "tol": 0.0
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the block explorer opened on the 1800 m fault with both contacts at 1560 m. Re-cased on a fault at 2100 m with block contacts of 1553 m west and 1572 m east, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:116",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:116 String(west.cells)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -192,13 +356,35 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "Integer count printed as an integer; tol 0 honest. Equals 169 minus west, so it carries no independent information once west_cells is read. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/intermediate/m06-the-compartment-workflow/l03-the-capstone-walkthrough.md:19-23 prints this graded value.",
    "notes": "Probe default state prints 'East block: cells 52 of 169'. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "east_cells",
+     "label": "East block: oil-bearing cells",
+     "unit": "count",
+     "expected": 37.0,
+     "tol": 0.0
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the block explorer opened on the 1800 m fault with both contacts at 1560 m. Re-cased on a fault at 2100 m with block contacts of 1553 m west and 1572 m east, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:117",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:117 String(east.cells)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -217,13 +403,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "toFixed(4) (BlockExplorer.jsx:18); tol 0.05. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/intermediate/m06-the-compartment-workflow/l03-the-capstone-walkthrough.md:19-23 prints this graded value.",
    "notes": "Probe default state prints 18.0799. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "west_grv_mm3",
+     "label": "West block: gross rock volume",
+     "unit": "10^6 m3",
+     "expected": 11.219761962890624,
+     "tol": 0.05
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the block explorer opened on the 1800 m fault with both contacts at 1560 m. Re-cased on a fault at 2100 m with block contacts of 1553 m west and 1572 m east, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:118",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:118 fmt(west.grvMm3, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -242,13 +452,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "toFixed(4); tol 0.02. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/intermediate/m06-the-compartment-workflow/l03-the-capstone-walkthrough.md:19-23 prints this graded value.",
    "notes": "Probe default state prints 4.1892. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "east_grv_mm3",
+     "label": "East block: gross rock volume",
+     "unit": "10^6 m3",
+     "expected": 3.813426513671875,
+     "tol": 0.02
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the block explorer opened on the 1800 m fault with both contacts at 1560 m. Re-cased on a fault at 2100 m with block contacts of 1553 m west and 1572 m east, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:119",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:119 fmt(east.grvMm3, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -267,13 +501,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "toFixed(4); tol 0.05. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/intermediate/m06-the-compartment-workflow/l03-the-capstone-walkthrough.md:19-23 prints this graded value.",
    "notes": "Probe default state prints 9.8556. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "west_stoiip_mmstb",
+     "label": "West block: STOIIP",
+     "unit": "MMstb",
+     "expected": 6.116072000520286,
+     "tol": 0.05
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the block explorer opened on the 1800 m fault with both contacts at 1560 m. Re-cased on a fault at 2100 m with block contacts of 1553 m west and 1572 m east, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:120",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:120 fmt(west.stoiipMmstb, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "intermediate",
@@ -292,13 +550,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "toFixed(4); tol 0.02. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/intermediate/m06-the-compartment-workflow/l03-the-capstone-walkthrough.md:19-23 prints this graded value.",
    "notes": "Probe default state prints 2.2836. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "east_stoiip_mmstb",
+     "label": "East block: STOIIP",
+     "unit": "MMstb",
+     "expected": 2.078759888440742,
+     "tol": 0.02
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the block explorer opened on the 1800 m fault with both contacts at 1560 m. Re-cased on a fault at 2100 m with block contacts of 1553 m west and 1572 m east, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:121",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:121 fmt(east.stoiipMmstb, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -317,13 +599,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "Tile 'Porosity at P-1' toFixed(6) (also 4 decimals on the map label :123); tol 0.001. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/advanced/m06-the-property-workflow/l03-the-capstone-walkthrough.md:17-27 prints this graded value.",
    "notes": "Probe default state prints 0.2071 (map label) with the six-decimal tile beside it. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "phi_at_p1",
+     "label": "Trend porosity at P-1",
+     "unit": "v/v",
+     "expected": 0.2335680276477857,
+     "tol": 0.001
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the property explorer opened on the capstone trend at 1560 m. Re-cased on six new well porosities and a 1562 m contact, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:135",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:135 fmt(m.phiAtP1, 6)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -342,13 +648,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "Tile 'Node mean over the oil' toFixed(6); tol 2e-4. The neighbouring 'Arithmetic mean of the wells' 0.206667 and 'Volume weighted mean' 0.210822 sit outside tol, so the label choice is what is tested. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/advanced/m06-the-property-workflow/l03-the-capstone-walkthrough.md:17-27 prints this graded value.",
    "notes": "Probe default state prints 0.209368. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "phi_mean_oil",
+     "label": "Mean trend porosity over oil nodes",
+     "unit": "v/v",
+     "expected": 0.2363793013067084,
+     "tol": 0.0002
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the property explorer opened on the capstone trend at 1560 m. Re-cased on six new well porosities and a 1562 m contact, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:133",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:133 fmt(m.means.nodeMeanOverOil, 6)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -367,13 +697,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "toFixed(4) (PropertyExplorer.jsx:15); tol 0.02. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/advanced/m06-the-property-workflow/l03-the-capstone-walkthrough.md:17-27 prints this graded value.",
    "notes": "Probe default state prints 3.7558. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "pore_trend_mm3",
+     "label": "Pore volume, trend model",
+     "unit": "10^6 m3",
+     "expected": 4.9149173123359065,
+     "tol": 0.02
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the property explorer opened on the capstone trend at 1560 m. Re-cased on six new well porosities and a 1562 m contact, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:140",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:140 fmt(m.model.poreMm3, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -392,13 +746,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "toFixed(4); tol 0.02. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/advanced/m06-the-property-workflow/l03-the-capstone-walkthrough.md:17-27 prints this graded value.",
    "notes": "Probe default state prints 2.4413. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "hcpv_trend_mm3",
+     "label": "HCPV, trend model",
+     "unit": "10^6 m3",
+     "expected": 3.194696282313528,
+     "tol": 0.02
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the property explorer opened on the capstone trend at 1560 m. Re-cased on six new well porosities and a 1562 m contact, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:141",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:141 fmt(m.model.hcpvMm3, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -417,13 +795,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "toFixed(4); tol 0.05. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/advanced/m06-the-property-workflow/l03-the-capstone-walkthrough.md:17-27 prints this graded value.",
    "notes": "Probe default state prints 12.7961. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "stoiip_trend_mmstb",
+     "label": "STOIIP, trend model",
+     "unit": "MMstb",
+     "expected": 16.74500056374636,
+     "tol": 0.05
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the property explorer opened on the capstone trend at 1560 m. Re-cased on six new well porosities and a 1562 m contact, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:142",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:142 fmt(m.model.stoiipMmstb, 4)",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   },
   {
    "tier": "advanced",
@@ -442,13 +844,37 @@
    "fix": {
     "redesign": "Keep key, label, unit and tol; re-case the capstone input so the value is not printed in the lessons or on the default panel state."
    },
-   "owner_decision": true,
+   "owner_decision": false,
    "recommendation": "Every graded value of all three reservoircalc capstones is printed in that tier's own capstone walkthrough lesson (the Associate one as a table of field, value and tolerance) and in earlier lessons, and every panel opens on the capstone case. Re-case the capstones on a contact, fault position or well set the lessons do not work (fields, units and tolerances can stay), or accept these as open-book reading checks and say so in the course. Tolerances and displays are otherwise sound.",
    "evidence": "Tile 'Against the constant 0.2' prints '+0.6569'; tol 0.02. LESSON LEAK: /root/wt-b5-nextgen/src/content/courses/reservoircalc/advanced/m06-the-property-workflow/l03-the-capstone-walkthrough.md:17-27 prints this graded value.",
    "notes": "Probe default state prints +0.6569. LEAK NOTE: the panel's DEFAULT state is the capstone case (OWC default CAPSTONE_OWC_M = 1560, /root/wt-b5-nextgen/src/lib/reservoircalcTeaching.js:27; fault default FAULT_X_M = 1800, :150; porosity method default 'trend', PropertyExplorer.jsx:34), so the probe reads this answer on first render with no input. The prompt directs the learner to exactly this reading, so it is by design, but the capstone then tests only opening the panel.",
    "leak": true,
    "reclassed_from": "redesign",
-   "shipped": null
+   "shipped": {
+    "migration": "20261028b_w5_reservoircalc.sql",
+    "wave": "w5b",
+    "closes_leak": true,
+    "rekey": {
+     "key": "stoiip_delta_mmstb",
+     "label": "STOIIP added over the constant model",
+     "unit": "MMstb",
+     "expected": 2.728495924102713,
+     "tol": 0.02
+    },
+    "rekey_annot": {
+     "evidence": "The walkthrough printed all six answers and the property explorer opened on the capstone trend at 1560 m. Re-cased on six new well porosities and a 1562 m contact, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:143",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:143 fmt(m.deltaMmstb, 4) with a + sign",
+     "class": "none",
+     "owner_decision": false,
+     "leak": false
+    }
+   }
   }
  ]
 }

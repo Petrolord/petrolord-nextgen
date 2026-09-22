@@ -28,7 +28,7 @@ For Ekene those four are all quantities this tier has already produced.
 
 ## A worked report
 
-Here is the whole thing written out for the capstone configuration.
+Here is the whole thing written out for the teaching configuration.
 
 The Ekene SAND is cut by a north to south sealing fault at an easting of about 1800 m into a western and an eastern compartment.
 

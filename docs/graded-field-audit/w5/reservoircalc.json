@@ -1,0 +1,302 @@
+{
+ "course": "reservoircalc",
+ "wave": "w5b",
+ "migration": "20261028b_w5_reservoircalc.sql",
+ "fields_file": "docs/graded-field-audit/w5b/reservoircalc.fields.json",
+ "keys_module": "docs/graded-field-audit/w5b/reservoircalc.keys.mjs",
+ "sources": [
+  "src/lib/reservoircalcTeaching.js",
+  "src/pages/apps/ReservoirCalcLearningPage.jsx"
+ ],
+ "capstone_lessons": {
+  "beginner": "beginner/m06-the-volumetrics-workflow/l03-the-capstone-walkthrough.md",
+  "intermediate": "intermediate/m06-the-compartment-workflow/l03-the-capstone-walkthrough.md",
+  "advanced": "advanced/m06-the-property-workflow/l03-the-capstone-walkthrough.md"
+ },
+ "tiers": {
+  "beginner": {
+   "pick": "A",
+   "title": "Volumes of the Ekene SAND accumulation",
+   "dataset": "reservoircalc/ekene-sand-owc-1563",
+   "why": "The walkthrough printed all six answers and the volume explorer opened on the 1560 m contact with the capstone properties, so every field could be read before any work. Re-cased on a 1563 m contact with NTG 0.72, porosity 0.22, Sw 0.25 and Bo 1.25, which the learner types; no panel opens there and no lesson prints the results.",
+   "prompt": "An appraisal pressure survey moves the Ekene SAND oil-water contact to 1563 m, and new core puts the properties at NTG 0.72, porosity 0.22, Sw 0.25 and Bo 1.25 rb/stb. Type that case into the volume explorer (the panel opens on the teaching case, so change every input) and report the oil-bearing cell count, the maximum oil column, the gross rock volume, the pore volume, the hydrocarbon pore volume and the STOIIP.",
+   "rekey": [
+    "oil_cells",
+    "max_oil_column_m",
+    "grv_mm3",
+    "pore_mm3",
+    "hcpv_mm3",
+    "stoiip_mmstb"
+   ],
+   "case": {
+    "owc_m": 1563,
+    "ntg": 0.72,
+    "phi": 0.22,
+    "sw": 0.25,
+    "bo": 1.25
+   },
+   "annot": {
+    "oil_cells": {
+     "evidence": "The walkthrough printed all six answers and the volume explorer opened on the 1560 m contact with the capstone properties, so every field could be read before any work. Re-cased on a 1563 m contact with NTG 0.72, porosity 0.22, Sw 0.25 and Bo 1.25, which the learner types; no panel opens there and no lesson prints the results.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:124",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:124 String(s.oilCells)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "max_oil_column_m": {
+     "evidence": "The walkthrough printed all six answers and the volume explorer opened on the 1560 m contact with the capstone properties, so every field could be read before any work. Re-cased on a 1563 m contact with NTG 0.72, porosity 0.22, Sw 0.25 and Bo 1.25, which the learner types; no panel opens there and no lesson prints the results.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:126",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:126 fmt(s.maxOilColumn, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "grv_mm3": {
+     "evidence": "The walkthrough printed all six answers and the volume explorer opened on the 1560 m contact with the capstone properties, so every field could be read before any work. Re-cased on a 1563 m contact with NTG 0.72, porosity 0.22, Sw 0.25 and Bo 1.25, which the learner types; no panel opens there and no lesson prints the results.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:128",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:128 fmt(s.grvMm3, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "pore_mm3": {
+     "evidence": "The walkthrough printed all six answers and the volume explorer opened on the 1560 m contact with the capstone properties, so every field could be read before any work. Re-cased on a 1563 m contact with NTG 0.72, porosity 0.22, Sw 0.25 and Bo 1.25, which the learner types; no panel opens there and no lesson prints the results.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:130",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:130 fmt(s.poreMm3, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "hcpv_mm3": {
+     "evidence": "The walkthrough printed all six answers and the volume explorer opened on the 1560 m contact with the capstone properties, so every field could be read before any work. Re-cased on a 1563 m contact with NTG 0.72, porosity 0.22, Sw 0.25 and Bo 1.25, which the learner types; no panel opens there and no lesson prints the results.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:131",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:131 fmt(s.hcpvMm3, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "stoiip_mmstb": {
+     "evidence": "The walkthrough printed all six answers and the volume explorer opened on the 1560 m contact with the capstone properties, so every field could be read before any work. Re-cased on a 1563 m contact with NTG 0.72, porosity 0.22, Sw 0.25 and Bo 1.25, which the learner types; no panel opens there and no lesson prints the results.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:132",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/VolumeExplorer.jsx:132 fmt(s.stoiipMmstb, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "intermediate": {
+   "pick": "A",
+   "title": "Fault-block volumes of the Ekene SAND",
+   "dataset": "reservoircalc/ekene-fault-blocks-2100",
+   "why": "The walkthrough printed all six answers and the block explorer opened on the 1800 m fault with both contacts at 1560 m. Re-cased on a fault at 2100 m with block contacts of 1553 m west and 1572 m east, which the learner types.",
+   "prompt": "A sealing fault at x = 2100 m splits the Ekene SAND into a west and an east block, and the two blocks carry different contacts: 1553 m in the west and 1572 m in the east. Properties are the course's (NTG 0.8, porosity 0.20, Sw 0.35, Bo 1.2). Type that case into the block explorer (it opens on the teaching case) and report each block's oil-bearing cell count, gross rock volume and STOIIP.",
+   "rekey": [
+    "west_cells",
+    "east_cells",
+    "west_grv_mm3",
+    "east_grv_mm3",
+    "west_stoiip_mmstb",
+    "east_stoiip_mmstb"
+   ],
+   "case": {
+    "fault_x_m": 2100,
+    "owc_west_m": 1553,
+    "owc_east_m": 1572
+   },
+   "annot": {
+    "west_cells": {
+     "evidence": "The walkthrough printed all six answers and the block explorer opened on the 1800 m fault with both contacts at 1560 m. Re-cased on a fault at 2100 m with block contacts of 1553 m west and 1572 m east, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:116",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:116 String(west.cells)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "east_cells": {
+     "evidence": "The walkthrough printed all six answers and the block explorer opened on the 1800 m fault with both contacts at 1560 m. Re-cased on a fault at 2100 m with block contacts of 1553 m west and 1572 m east, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:117",
+     "printed": "integer",
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:117 String(east.cells)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "west_grv_mm3": {
+     "evidence": "The walkthrough printed all six answers and the block explorer opened on the 1800 m fault with both contacts at 1560 m. Re-cased on a fault at 2100 m with block contacts of 1553 m west and 1572 m east, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:118",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:118 fmt(west.grvMm3, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "east_grv_mm3": {
+     "evidence": "The walkthrough printed all six answers and the block explorer opened on the 1800 m fault with both contacts at 1560 m. Re-cased on a fault at 2100 m with block contacts of 1553 m west and 1572 m east, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:119",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:119 fmt(east.grvMm3, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "west_stoiip_mmstb": {
+     "evidence": "The walkthrough printed all six answers and the block explorer opened on the 1800 m fault with both contacts at 1560 m. Re-cased on a fault at 2100 m with block contacts of 1553 m west and 1572 m east, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:120",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:120 fmt(west.stoiipMmstb, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "east_stoiip_mmstb": {
+     "evidence": "The walkthrough printed all six answers and the block explorer opened on the 1800 m fault with both contacts at 1560 m. Re-cased on a fault at 2100 m with block contacts of 1553 m west and 1572 m east, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:121",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/BlockExplorer.jsx:121 fmt(east.stoiipMmstb, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  },
+  "advanced": {
+   "pick": "A",
+   "title": "Property-model the Ekene SAND",
+   "dataset": "reservoircalc/ekene-property-model-1562",
+   "why": "The walkthrough printed all six answers and the property explorer opened on the capstone trend at 1560 m. Re-cased on six new well porosities and a 1562 m contact, which the learner types.",
+   "prompt": "Re-logging the six Ekene wells gives new porosities: 0.25, 0.20, 0.26, 0.18, 0.24 and 0.27 for Ekene-1 to Ekene-6, and the contact is 1562 m. Fit the porosity trend plane to those values with the population engine and rerun the volumetrics (NTG 0.8, Sw 0.35, Bo 1.2). Type the case into the property explorer (it opens on the teaching case) and report the trend porosity at prospect P-1 and its mean over the oil-bearing nodes, the pore volume and HCPV, the STOIIP, and how much the trend model adds over a constant porosity of 0.20 at the same contact.",
+   "rekey": [
+    "phi_at_p1",
+    "phi_mean_oil",
+    "pore_trend_mm3",
+    "hcpv_trend_mm3",
+    "stoiip_trend_mmstb",
+    "stoiip_delta_mmstb"
+   ],
+   "case": {
+    "owc_m": 1562,
+    "well_phi": {
+     "Ekene-1": 0.25,
+     "Ekene-2": 0.2,
+     "Ekene-3": 0.26,
+     "Ekene-4": 0.18,
+     "Ekene-5": 0.24,
+     "Ekene-6": 0.27
+    }
+   },
+   "annot": {
+    "phi_at_p1": {
+     "evidence": "The walkthrough printed all six answers and the property explorer opened on the capstone trend at 1560 m. Re-cased on six new well porosities and a 1562 m contact, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:135",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:135 fmt(m.phiAtP1, 6)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "phi_mean_oil": {
+     "evidence": "The walkthrough printed all six answers and the property explorer opened on the capstone trend at 1560 m. Re-cased on six new well porosities and a 1562 m contact, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:133",
+     "printed": {
+      "decimals": 6
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:133 fmt(m.means.nodeMeanOverOil, 6)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "pore_trend_mm3": {
+     "evidence": "The walkthrough printed all six answers and the property explorer opened on the capstone trend at 1560 m. Re-cased on six new well porosities and a 1562 m contact, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:140",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:140 fmt(m.model.poreMm3, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "hcpv_trend_mm3": {
+     "evidence": "The walkthrough printed all six answers and the property explorer opened on the capstone trend at 1560 m. Re-cased on six new well porosities and a 1562 m contact, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:141",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:141 fmt(m.model.hcpvMm3, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "stoiip_trend_mmstb": {
+     "evidence": "The walkthrough printed all six answers and the property explorer opened on the capstone trend at 1560 m. Re-cased on six new well porosities and a 1562 m contact, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:142",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:142 fmt(m.model.stoiipMmstb, 4)",
+     "default_state_prints": false,
+     "lesson_prints": false
+    },
+    "stoiip_delta_mmstb": {
+     "evidence": "The walkthrough printed all six answers and the property explorer opened on the capstone trend at 1560 m. Re-cased on six new well porosities and a 1562 m contact, which the learner types.",
+     "source": "nextgen-panel",
+     "source_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:143",
+     "printed": {
+      "decimals": 4
+     },
+     "display_scale": 1,
+     "display_ref": "/root/wt-b5-nextgen/src/components/course/panels/reservoircalc/PropertyExplorer.jsx:143 fmt(m.deltaMmstb, 4) with a + sign",
+     "default_state_prints": false,
+     "lesson_prints": false
+    }
+   }
+  }
+ }
+}

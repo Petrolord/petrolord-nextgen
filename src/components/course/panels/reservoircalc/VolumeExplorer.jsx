@@ -1,6 +1,6 @@
 import React, { useMemo, useState } from 'react';
 import {
-  TEACHING_WELLS, CAPSTONE_OWC_M, PROPS, computeVolumes,
+  TEACHING_WELLS, TEACHING_OWC_M, PROPS, computeVolumes,
 } from '@/lib/reservoircalcTeaching';
 import { PanelShell, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
@@ -27,26 +27,41 @@ function columnColor(t, tMax) {
 }
 
 const VolumeExplorer = () => {
-  const [owc, setOwc] = useState(String(CAPSTONE_OWC_M));
+  const [owc, setOwc] = useState(String(TEACHING_OWC_M));
+  // The properties open on the teaching case; a capstone brief states its own.
+  const [ntg, setNtg] = useState(String(PROPS.ntg));
+  const [phi, setPhi] = useState(String(PROPS.phi));
+  const [sw, setSw] = useState(String(PROPS.sw));
+  const [bo, setBo] = useState(String(PROPS.bo));
 
   const owcM = Number(owc);
-  const valid = Number.isFinite(owcM) && owcM >= MIN_OWC && owcM <= MAX_OWC;
+  const props = { ntg: Number(ntg), phi: Number(phi), sw: Number(sw), bo: Number(bo) };
+  const propsOk = props.ntg > 0 && props.ntg <= 1 && props.phi > 0 && props.phi < 1
+    && props.sw >= 0 && props.sw < 1 && props.bo > 0;
+  const valid = Number.isFinite(owcM) && owcM >= MIN_OWC && owcM <= MAX_OWC && propsOk;
 
   const vol = useMemo(() => {
     if (!valid) return null;
     try {
-      return computeVolumes(owcM);
+      return computeVolumes(owcM, props);
     } catch {
       return null;
     }
-  }, [owcM, valid]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [owcM, valid, ntg, phi, sw, bo]);
 
   if (!vol) {
     return (
       <PanelShell title="Volume explorer"
-        subtitle={`Enter an oil water contact between ${MIN_OWC} and ${MAX_OWC} m.`}>
-        <NumField label="Oil water contact (m)" value={owc} onChange={setOwc} />
-        <Note>The contact must be a number in that range.</Note>
+        subtitle={`Enter an oil water contact between ${MIN_OWC} and ${MAX_OWC} m and properties as fractions.`}>
+        <div className="grid gap-3 grid-cols-2 sm:grid-cols-5 items-end">
+          <NumField label="Oil water contact (m)" value={owc} onChange={setOwc} />
+          <NumField label="Net to gross" value={ntg} onChange={setNtg} />
+          <NumField label="Porosity" value={phi} onChange={setPhi} />
+          <NumField label="Water saturation" value={sw} onChange={setSw} />
+          <NumField label="Bo (rb/stb)" value={bo} onChange={setBo} />
+        </div>
+        <Note>The contact must be a number in that range; net to gross, porosity and water saturation are fractions and Bo is positive.</Note>
       </PanelShell>
     );
   }
@@ -83,12 +98,18 @@ const VolumeExplorer = () => {
   return (
     <PanelShell title="Volume explorer"
       subtitle={`The Ekene SAND accumulation above a ${fmt(owcM, 0)} m contact, on the same 201 node grid the Mapping course built. Blank ground either lies outside the mapped area or has its top below the contact.`}>
-      <div className="grid gap-3 grid-cols-2 sm:grid-cols-4 items-end">
+      <div className="grid gap-3 grid-cols-2 sm:grid-cols-5 items-end">
         <NumField label="Oil water contact (m)" value={owc} onChange={setOwc} />
-        <div className="text-xs text-gray-500 sm:col-span-3">
-          The capstone books at {CAPSTONE_OWC_M} m. Try 1550 and 1570 m: the properties never
-          change, and the volume moves by a factor of five.
-        </div>
+        <NumField label="Net to gross" value={ntg} onChange={setNtg} />
+        <NumField label="Porosity" value={phi} onChange={setPhi} />
+        <NumField label="Water saturation" value={sw} onChange={setSw} />
+        <NumField label="Bo (rb/stb)" value={bo} onChange={setBo} />
+      </div>
+      <div className="text-xs text-gray-500">
+        The panel opens on the teaching case: a {TEACHING_OWC_M} m contact with NTG {PROPS.ntg},
+        porosity {PROPS.phi}, Sw {PROPS.sw} and Bo {PROPS.bo}. Try 1550 and 1570 m: the properties
+        never change, and the volume moves by a factor of five. A capstone brief states its own
+        contact and properties; type them in here.
       </div>
 
       <div className="overflow-x-auto">
@@ -126,10 +147,10 @@ const VolumeExplorer = () => {
         <Tile label="Maximum oil column" value={fmt(s.maxOilColumn, 4)} unit="m" />
         <Tile label="Mean oil column" value={fmt(meanCol, 4)} unit="m" />
         <Tile label="Gross rock volume" value={fmt(s.grvMm3, 4)} unit="10^6 m3" />
-        <Tile label={`Net volume (NTG ${PROPS.ntg})`} value={fmt(s.netMm3, 4)} unit="10^6 m3" />
-        <Tile label={`Pore volume (phi ${PROPS.phi})`} value={fmt(s.poreMm3, 4)} unit="10^6 m3" />
-        <Tile label={`HCPV (Sw ${PROPS.sw})`} value={fmt(s.hcpvMm3, 4)} unit="10^6 m3" />
-        <Tile label={`STOIIP (Bo ${PROPS.bo})`} value={fmt(s.stoiipMmstb, 4)} unit="MMstb" />
+        <Tile label={`Net volume (NTG ${props.ntg})`} value={fmt(s.netMm3, 4)} unit="10^6 m3" />
+        <Tile label={`Pore volume (phi ${props.phi})`} value={fmt(s.poreMm3, 4)} unit="10^6 m3" />
+        <Tile label={`HCPV (Sw ${props.sw})`} value={fmt(s.hcpvMm3, 4)} unit="10^6 m3" />
+        <Tile label={`STOIIP (Bo ${props.bo})`} value={fmt(s.stoiipMmstb, 4)} unit="MMstb" />
       </TileGrid>
 
       <Note>

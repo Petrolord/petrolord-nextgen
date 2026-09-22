@@ -41,7 +41,7 @@ This is the sense in which the Professional tier is harder than the Associate ti
 
 ## Reading it off the panel
 
-Open the panel at the capstone settings and read the six block tiles against the table above.
+Open the panel at the teaching settings and read the six block tiles against the table above.
 
 {{panel:rc-block-explorer}}
 

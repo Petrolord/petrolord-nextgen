@@ -46,7 +46,7 @@ Now put those property sensitivities beside the one thing this course keeps retu
 | 1560 m | 12.139208 MMstb |
 | 1570 m | 22.044451 MMstb |
 
-Moving the contact 10 m deeper from the capstone case takes the booking from 12.139208 to 22.044451 MMstb. Moving it 10 m shallower takes it to 3.835815 MMstb. Those are not 10 percent effects. The step down is a fall to less than a third, and the step up is close to a doubling.
+Moving the contact 10 m deeper from the teaching case takes the booking from 12.139208 to 22.044451 MMstb. Moving it 10 m shallower takes it to 3.835815 MMstb. Those are not 10 percent effects. The step down is a fall to less than a third, and the step up is close to a doubling.
 
 The reason is structural. Every property in the chain multiplies a fixed volume by a fixed fraction, so it can only ever produce a proportional change. The contact does something else. It changes which cells are in the accumulation at all, from 128 cells to 169 to 190, and at the same time it adds column to every cell that was already contributing. Two effects compound, and the response is much steeper than linear.
 

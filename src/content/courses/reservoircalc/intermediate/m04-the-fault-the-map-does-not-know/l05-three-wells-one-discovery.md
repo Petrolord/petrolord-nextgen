@@ -44,7 +44,7 @@ A model built strictly block by block, with each compartment mapped from its own
 
 ## Reading it off the panel
 
-Set the capstone configuration and read the well posts.
+Set the teaching configuration and read the well posts.
 
 {{panel:rc-block-explorer}}
 

@@ -1,9 +1,9 @@
 import React, { useMemo, useState } from 'react';
 import {
-  FAULT_X_M, FAULT_SWEEP_M, BLOCK_OWC_OPTIONS, CAPSTONE_OWC_M,
+  FAULT_X_M, FAULT_SWEEP_M, BLOCK_OWC_OPTIONS, TEACHING_OWC_M,
   computeBlockModel,
 } from '@/lib/reservoircalcTeaching';
-import { PanelShell, SelectField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
+import { PanelShell, SelectField, NumField, Tile, TileGrid, Note } from '@/components/course/panels/petrophysics/panelKit';
 
 // Block explorer: partition the Ekene accumulation with a sealing fault the
 // learner can move, and give each block its own contact. The map colours
@@ -20,8 +20,8 @@ const pct = (v) => `${fmt(v * 100, 1)} pct`;
 
 const BlockExplorer = () => {
   const [faultX, setFaultX] = useState(String(FAULT_X_M));
-  const [owcWest, setOwcWest] = useState(String(CAPSTONE_OWC_M));
-  const [owcEast, setOwcEast] = useState(String(CAPSTONE_OWC_M));
+  const [owcWest, setOwcWest] = useState(String(TEACHING_OWC_M));
+  const [owcEast, setOwcEast] = useState(String(TEACHING_OWC_M));
 
   const model = useMemo(() => {
     try {
@@ -74,10 +74,13 @@ const BlockExplorer = () => {
       <div className="grid gap-3 grid-cols-2 sm:grid-cols-3 items-end">
         <SelectField label="Fault easting (m)" value={faultX} onChange={setFaultX}
           options={FAULT_SWEEP_M.map((v) => [String(v), `${v} m`])} />
-        <SelectField label="West block contact (m)" value={owcWest} onChange={setOwcWest}
-          options={BLOCK_OWC_OPTIONS.map((v) => [String(v), `${v} m`])} />
-        <SelectField label="East block contact (m)" value={owcEast} onChange={setOwcEast}
-          options={BLOCK_OWC_OPTIONS.map((v) => [String(v), `${v} m`])} />
+        <NumField label="West block contact (m)" value={owcWest} onChange={setOwcWest} />
+        <NumField label="East block contact (m)" value={owcEast} onChange={setOwcEast} />
+      </div>
+      <div className="text-xs text-gray-500">
+        The panel opens on the teaching case: the fault at {FAULT_X_M} m and both contacts at
+        {' '}{TEACHING_OWC_M} m. Try {BLOCK_OWC_OPTIONS.join(', ')} m on either side. A capstone brief
+        states its own fault and contacts; type them in here.
       </div>
 
       <div className="overflow-x-auto">
@@ -128,8 +131,8 @@ const BlockExplorer = () => {
       </TileGrid>
 
       <Note>
-        The two blocks always cover the same 169 cells the Associate tier booked when both
-        contacts are 1560 m, and the barrels still add up. What changes is who owns them.
+        With both contacts at the teaching {TEACHING_OWC_M} m the two blocks cover the same cells
+        the Associate tier booked, and the barrels still add up. What changes is who owns them.
         Move the fault one column and watch how many barrels change hands on a tie break;
         give the east block its own contact and watch the field total stop being a single
         number you can quote.

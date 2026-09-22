@@ -4,7 +4,7 @@ Every oil bearing node on Ekene is contact limited, so the column at each of the
 
 $$1560 - 1539.7181396484375 = 20.2818603515625 \text{ m}$$
 
-That is the maximum oil column at the capstone contact, and it is one of the six numbers the capstone grades, to a tolerance of 0.1 m.
+That is the maximum oil column at the teaching contact. The maximum column is one of the six numbers the capstone asks for, on its own contact, to a tolerance of 0.1 m.
 
 ## Where that crest came from
 

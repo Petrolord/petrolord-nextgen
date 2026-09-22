@@ -4,7 +4,7 @@ The first check on any partition is that the parts reproduce the whole. This les
 
 ## The check at full precision
 
-Take the west and east figures at the capstone settings and add them, keeping every digit the machine holds rather than the six the tiles print.
+Take the west and east figures at the teaching settings and add them, keeping every digit the machine holds rather than the six the tiles print.
 
 | Row | West plus east | Field total | Difference |
 | --- | --- | --- | --- |

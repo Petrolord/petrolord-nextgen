@@ -22,7 +22,7 @@ That is the entire calculation. Everything else in this lesson is about which no
 
 The Ekene map has 201 live nodes. Those are the nodes that survived the 800 m extrapolation limit and carry a depth on both surfaces. They are the only nodes that can contribute anything, because a node with no mapped depth has no column to compute.
 
-At the capstone contact of 1560 m, 169 of those 201 nodes have TOP_SAND above the contact. The other 32 have their top below 1560 m, which means the entire sand at that location is under the contact and full of water. They hold no oil and drop out of the sum.
+At the teaching contact of 1560 m, 169 of those 201 nodes have TOP_SAND above the contact. The other 32 have their top below 1560 m, which means the entire sand at that location is under the contact and full of water. They hold no oil and drop out of the sum.
 
 So the accumulation covers 169 cells. Its plan area is
 
@@ -36,13 +36,13 @@ At a node that has oil, the column is the vertical distance from the top of the 
 
 $$h_j = \min(\text{base}_j, \text{OWC}) - \text{top}_j$$
 
-At the capstone contact, BASE_SAND is deeper than 1560 m at every one of the 169 oil cells, so the minimum is always the contact and the expression collapses to $h_j = 1560 - \text{top}_j$. The accumulation is contact limited everywhere. The base surface contributes nothing to this booking. It would only start to matter if the contact were deeper than the base crest of 1570 m, at which point some cells would run out of sand before they ran out of oil column.
+At the teaching contact, BASE_SAND is deeper than 1560 m at every one of the 169 oil cells, so the minimum is always the contact and the expression collapses to $h_j = 1560 - \text{top}_j$. The accumulation is contact limited everywhere. The base surface contributes nothing to this booking. It would only start to matter if the contact were deeper than the base crest of 1570 m, at which point some cells would run out of sand before they ran out of oil column.
 
 The largest column is at the crest of the mapped surface:
 
 $$1560 - 1539.7181396484375 = 20.2818603515625 \text{ m}$$
 
-That crest, as the mapping course explained at length, is 1.2819 m shallower than any well pick, because a spline bending through six control points rises slightly above its highest pin. The maximum oil column therefore inherits an artefact of the interpolator. It is the right answer to the question the capstone asks, and it is also a reminder that the tallest column on a map is usually the least supported number on it.
+That crest, as the mapping course explained at length, is 1.2819 m shallower than any well pick, because a spline bending through six control points rises slightly above its highest pin. The maximum oil column therefore inherits an artefact of the interpolator. It is the right answer to the question the panel asks, and it is also a reminder that the tallest column on a map is usually the least supported number on it.
 
 ## The sum
 
@@ -66,6 +66,6 @@ The panel below builds the grid, applies the contact you choose, and reports the
 
 ## Exercise
 
-Using only the cell count and the cell size, work out the plan area of the accumulation at the capstone contact in square metres and in square kilometres. Then divide the gross rock volume by that area and say what the result is, and what it would have told you if it had come out at 1300.
+Using only the cell count and the cell size, work out the plan area of the accumulation at the teaching contact in square metres and in square kilometres. Then divide the gross rock volume by that area and say what the result is, and what it would have told you if it had come out at 1300.
 
 Self check: the area is $169 \times 10{,}000 = 1{,}690{,}000$ square metres, which is 1.69 square kilometres. Dividing 22,269,035.64453125 cubic metres by that area gives a mean oil column of 13.176944 m, which is a sensible thickness for this sand and sits comfortably below the maximum column of 20.2818603515625 m. A result of 1300 would mean the volume and the area disagree by a factor of about a hundred, so one of the two was entered in the wrong units.
