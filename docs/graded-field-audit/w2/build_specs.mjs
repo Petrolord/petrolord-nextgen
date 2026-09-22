@@ -216,7 +216,7 @@ async function wellcost() {
   const uLabel = (u) => (u.target === 'activity'
     ? `the ${u.field === 'ropMPerHr' ? 'rate of penetration' : 'duration'} of activity (${letter(u.id)}), in ${u.field === 'ropMPerHr' ? 'm/h' : 'h'}`
     : `the ${u.field === 'rate' ? 'rate' : 'value'} of the ${items.find((i) => i.id === u.id).label} line, in ${u.field === 'rate' ? 'USD a day' : 'USD'}`);
-  const riskText = `THE DECLARED RANGES, each triangular as minimum, most likely and maximum, sampled in this order: ${risk.uncertainties.map((u) => `${uLabel(u)}: ${num(u.dist.min)}, ${num(u.dist.mode)}, ${num(u.dist.max)}`).join('; ')}. The risked run prices the base with no contingency line, because the risk model takes the place of the provision.`;
+  const riskText = `THE DECLARED RANGES, each triangular as minimum, most likely and maximum, sampled in this order: ${risk.uncertainties.map((u) => `${uLabel(u)}: ${num(u.dist.min)}, ${num(u.dist.mode)}, ${num(u.dist.max)}`).join('; ')}. The risked run prices the base with no contingency line, because the risk model takes the place of the provision. The same case, with these ranges in this order, seed ${num(risk.seed)} and ${num(risk.iterations)} iterations, is the Suite case file ${W3_WELLCOST_CASE}: in the Well Cost and Time Estimator pick a wellbore, choose Import case and that file, open the Risk tab, run the Monte Carlo and switch on Full precision to read fields 4 to 6.`;
   if (risk.uncertainties.some((u) => u.dist.type !== 'triangular')) throw new Error('wellcost: a non-triangular range');
 
   const graded = {
@@ -240,7 +240,7 @@ async function wellcost() {
       inputs: { ...base, items, contingencyPct, cpm },
     },
     advanced: {
-      why: 'Prompt only, no field moves. The programme, the line items with the activity each lump is booked at, and the declared risk ranges existed only in the generator; the prompt now publishes all three, so the curve fields are spreadsheet work. The three risked fields also need the seeded run to be readable at full precision in the Suite Well Cost and Time studio (W3, Suite); until then they stay class display.',
+      why: 'Prompt only, no field moves. The programme, the line items with the activity each lump is booked at, and the declared risk ranges existed only in the generator; the prompt now publishes all three, so the curve fields are spreadsheet work. The three risked fields are a seeded run of the Suite canonical sampler: the prompt now points at W3\'s case file (Suite #568), which the Well Cost and Time Estimator imports and runs at seed 20260904 and prints at full precision behind its Full precision switch (W3 verified all 16 keys through wctRun, wctFullPrecision.test.jsx). This file must not go live before the Suite zip carrying #554 to #568.',
       prompt_edits: [
         ['Six values for MERLIN A-12.', `Six values for MERLIN A-12. The non-productive allowance is ${num(nptPct)} percent. ${progText} ${itemsText(true)} ${riskText}`],
         ['with the declared ranges supplied:', 'with the declared ranges stated above:'],
@@ -248,6 +248,10 @@ async function wellcost() {
       inputs: { ...base, items, uncertainties: risk.uncertainties },
       method: { graded, risk: { iterations: risk.iterations, seed: risk.seed } },
       suite_only: ['mc_cost_p10_usd', 'mc_cost_p90_usd', 'mc_days_p50'],
+      suite_route: {
+        source_ref: `Suite Well Cost and Time Estimator, Risk tab with Full precision on, case file public/course-cases/wellcost-merlin-a12-advanced.wct.json (${W3_WELLCOST_CASE}), Suite PR #568`,
+        evidence: 'W3 (Suite #568): the case file carries the MERLIN A-12 programme, items and the five ranges in generator order at seed 20260904 and 20000 iterations; loaded through the studio\'s wctRun it reproduces all 16 wellcost keys within tol (wctFullPrecision.test.jsx), and RiskTab prints them at full precision behind the switch. The prompt now names the file and the route.',
+      },
     },
   };
   for (const [tier, t] of Object.entries(tiers)) {
@@ -519,6 +523,13 @@ async function stimulation() {
   };
 }
 
+// W3 (Suite #554 to #568) gives the Separator Studio and the Facility Layout
+// Mapper a Full precision switch; W3 left this brief to W2 so that one wave
+// writes it, and supplied the sentence (/root/w3-apply/STATUS.md).
+const W3_SEPARATION = 'Read the figures in the Separator Studio and the Facility Layout Mapper with their Full precision switch on (at the top of the page): they print them to the precision this capstone grades, with no digit grouping.';
+// W3's wellcost case file (Suite #568, public/course-cases/), served by the Suite.
+const W3_WELLCOST_CASE = 'https://petrolord.com/course-cases/wellcost-merlin-a12-advanced.wct.json';
+
 // ---------------------------------------------------------------------------
 // separation (FC1) advanced: publish the ADANGA yard
 async function separation() {
@@ -543,7 +554,7 @@ async function separation() {
   const got = REPRODUCE.separation.advanced(inputs, sepMethod);
   check('separation', 'advanced', got, f);
   const placed = items.filter((it) => it.northM != null);
-  const text = `THE YARD, each item given as its name, its type and its position in metres north and east of the datum at ${num(datum.lat)} N, ${num(datum.lon)} E: ${placed.map((it) => `${it.name}, ${it.type}, ${num(it.northM)} N ${num(it.eastM)} E`).join('; ')}. Turn an offset into latitude and longitude as the Mapper does, at ${num(mPerDegLat)} m per degree of latitude and ${num(mPerDegLonAtEquator)} m times the cosine of the datum latitude per degree of longitude, and measure every distance centre to centre by the haversine formula on a sphere of radius ${num(rEarth)} m.`;
+  const text = `THE YARD, each item given as its name, its type and its position in metres north and east of the datum at ${num(datum.lat)} N, ${num(datum.lon)} E: ${placed.map((it) => `${it.name}, ${it.type}, ${num(it.northM)} N ${num(it.eastM)} E`).join('; ')}. Turn an offset into latitude and longitude as the Mapper does, at ${num(mPerDegLat)} m per degree of latitude and ${num(mPerDegLonAtEquator)} m times the cosine of the datum latitude per degree of longitude, and measure every distance centre to centre by the haversine formula on a sphere of radius ${num(rEarth)} m. ${W3_SEPARATION}`;
   checkCopy('separation', text);
   return {
     course: 'separation', wave: 'w2', fixture: 'src/components/course/panels/separation/separationLab.js (ADANGA_*)',

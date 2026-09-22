@@ -2760,7 +2760,8 @@
    "prompt_contains": [
     "on the same slant trajectory. Its bending stiffness E x I is 12266792.85346564 N m2, which is E = 206.8 GPa on I = pi/64 (OD^4 - ID^4)."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. Fields 1 and 3 need the mid-span sag, which needs E x I of the 9-5/8 inch casing; the lessons give E x I only as a number for 7 inch casing and never E or the I formula, and E = 200 or 207 GPa moves the answer by 1e-3 or 3e-5 against tol 5e-7 (B5 finding 1). The prompt now states E x I (vendored stringProperties) and how it is built, so both are hand work from m02 l04 and m03 l01. Keys, expected values and tolerances are unchanged. The published inputs reproduce min_standoff = 0.8556417628346304 through the vendored engines against the key 0.8556417628346304 (tol 5e-07); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "A learner can back-solve E = 206.8 GPa from the 7 inch EI and its 0.1570736 m bore, but nothing teaches that step."
@@ -2829,7 +2830,8 @@
    "prompt_contains": [
     "on the same slant trajectory. Its bending stiffness E x I is 12266792.85346564 N m2, which is E = 206.8 GPa on I = pi/64 (OD^4 - ID^4)."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. Fields 1 and 3 need the mid-span sag, which needs E x I of the 9-5/8 inch casing; the lessons give E x I only as a number for 7 inch casing and never E or the I formula, and E = 200 or 207 GPa moves the answer by 1e-3 or 3e-5 against tol 5e-7 (B5 finding 1). The prompt now states E x I (vendored stringProperties) and how it is built, so both are hand work from m02 l04 and m03 l01. Keys, expected values and tolerances are unchanged. The published inputs reproduce required_spacing_m = 15.99770776601963 through the vendored engines against the key 15.99770776601963 (tol 5e-07); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -12492,7 +12494,8 @@
    "prompt_contains": [
     "Take the compressibility factor from the package's own natural gas correlation, Sutton pseudo-criticals with Dranchuk and Abou-Kassem, and NOT from a flat assumption. For this gas Sutton gives a pseudo-critical temperature Tpc of 378.081504 degR and a pseudo-critical pressure Ppc of 663.063906 psia (a sweet gas, so no acid gas correction). Dranchuk and Abou-Kassem then make z the root of z = 1 + (A1 + A2/Tpr + A3/Tpr^3 + A4/Tpr^4 + A5/Tpr^5) rr + (A6 + A7/Tpr + A8/Tpr^2) rr^2 - A9 (A7/Tpr + A8/Tpr^2) rr^5 + A10 (1 + A11 rr^2) (rr^2/Tpr^3) exp(-A11 rr^2), where rr = 0.27 Ppr / (z Tpr), Tpr is the absolute temperature over Tpc, Ppr is the pressure over Ppc, and A1 to A11 are 0.3265, -1.07, -0.5339, 0.01569, -0.05165, 0.5475, -0.7361, 0.1844, 0.1056, 0.6134, 0.721; solve it by goal seek or iteration."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. Every beginner field needs z from Sutton and Dranchuk and Abou-Kassem, which no lesson or panel gives (B5 finding 1). z at the wellhead IS field 1, so printing it would hand that field over; the prompt instead states the Sutton pseudo-criticals for this gas and the DAK equation with its eleven constants (read from the vendored engine), so z is a spreadsheet goal seek and the other five fields are the taught closed forms on it. Keys, expected values and tolerances are unchanged. The published inputs reproduce wh_z_dak = 0.8476852259028838 through the vendored engines against the key 0.847685225820759 (tol 1e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "Tol 1e-6 on z needs 7 significant figures."
@@ -12530,7 +12533,8 @@
    "prompt_contains": [
     "Take the compressibility factor from the package's own natural gas correlation, Sutton pseudo-criticals with Dranchuk and Abou-Kassem, and NOT from a flat assumption. For this gas Sutton gives a pseudo-critical temperature Tpc of 378.081504 degR and a pseudo-critical pressure Ppc of 663.063906 psia (a sweet gas, so no acid gas correction). Dranchuk and Abou-Kassem then make z the root of z = 1 + (A1 + A2/Tpr + A3/Tpr^3 + A4/Tpr^4 + A5/Tpr^5) rr + (A6 + A7/Tpr + A8/Tpr^2) rr^2 - A9 (A7/Tpr + A8/Tpr^2) rr^5 + A10 (1 + A11 rr^2) (rr^2/Tpr^3) exp(-A11 rr^2), where rr = 0.27 Ppr / (z Tpr), Tpr is the absolute temperature over Tpc, Ppr is the pressure over Ppc, and A1 to A11 are 0.3265, -1.07, -0.5339, 0.01569, -0.05165, 0.5475, -0.7361, 0.1844, 0.1056, 0.6134, 0.721; solve it by goal seek or iteration."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. Every beginner field needs z from Sutton and Dranchuk and Abou-Kassem, which no lesson or panel gives (B5 finding 1). z at the wellhead IS field 1, so printing it would hand that field over; the prompt instead states the Sutton pseudo-criticals for this gas and the DAK equation with its eleven constants (read from the vendored engine), so z is a spreadsheet goal seek and the other five fields are the taught closed forms on it. Keys, expected values and tolerances are unchanged. The published inputs reproduce wh_gas_density_lbmft3 = 4.0180240067663675 through the vendored engines against the key 4.018024007155638 (tol 4.2e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -12568,7 +12572,8 @@
    "prompt_contains": [
     "Take the compressibility factor from the package's own natural gas correlation, Sutton pseudo-criticals with Dranchuk and Abou-Kassem, and NOT from a flat assumption. For this gas Sutton gives a pseudo-critical temperature Tpc of 378.081504 degR and a pseudo-critical pressure Ppc of 663.063906 psia (a sweet gas, so no acid gas correction). Dranchuk and Abou-Kassem then make z the root of z = 1 + (A1 + A2/Tpr + A3/Tpr^3 + A4/Tpr^4 + A5/Tpr^5) rr + (A6 + A7/Tpr + A8/Tpr^2) rr^2 - A9 (A7/Tpr + A8/Tpr^2) rr^5 + A10 (1 + A11 rr^2) (rr^2/Tpr^3) exp(-A11 rr^2), where rr = 0.27 Ppr / (z Tpr), Tpr is the absolute temperature over Tpc, Ppr is the pressure over Ppc, and A1 to A11 are 0.3265, -1.07, -0.5339, 0.01569, -0.05165, 0.5475, -0.7361, 0.1844, 0.1056, 0.6134, 0.721; solve it by goal seek or iteration."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. Every beginner field needs z from Sutton and Dranchuk and Abou-Kassem, which no lesson or panel gives (B5 finding 1). z at the wellhead IS field 1, so printing it would hand that field over; the prompt instead states the Sutton pseudo-criticals for this gas and the DAK equation with its eleven constants (read from the vendored engine), so z is a spreadsheet goal seek and the other five fields are the taught closed forms on it. Keys, expected values and tolerances are unchanged. The published inputs reproduce wh_terminal_velocity_brine_fts = 6.426936066420216 through the vendored engines against the key 6.42693606609917 (tol 6.8e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -12606,7 +12611,8 @@
    "prompt_contains": [
     "Take the compressibility factor from the package's own natural gas correlation, Sutton pseudo-criticals with Dranchuk and Abou-Kassem, and NOT from a flat assumption. For this gas Sutton gives a pseudo-critical temperature Tpc of 378.081504 degR and a pseudo-critical pressure Ppc of 663.063906 psia (a sweet gas, so no acid gas correction). Dranchuk and Abou-Kassem then make z the root of z = 1 + (A1 + A2/Tpr + A3/Tpr^3 + A4/Tpr^4 + A5/Tpr^5) rr + (A6 + A7/Tpr + A8/Tpr^2) rr^2 - A9 (A7/Tpr + A8/Tpr^2) rr^5 + A10 (1 + A11 rr^2) (rr^2/Tpr^3) exp(-A11 rr^2), where rr = 0.27 Ppr / (z Tpr), Tpr is the absolute temperature over Tpc, Ppr is the pressure over Ppc, and A1 to A11 are 0.3265, -1.07, -0.5339, 0.01569, -0.05165, 0.5475, -0.7361, 0.1844, 0.1056, 0.6134, 0.721; solve it by goal seek or iteration."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. Every beginner field needs z from Sutton and Dranchuk and Abou-Kassem, which no lesson or panel gives (B5 finding 1). z at the wellhead IS field 1, so printing it would hand that field over; the prompt instead states the Sutton pseudo-criticals for this gas and the DAK equation with its eleven constants (read from the vendored engine), so z is a spreadsheet goal seek and the other five fields are the taught closed forms on it. Keys, expected values and tolerances are unchanged. The published inputs reproduce wh_terminal_velocity_cond_fts = 4.446421214859661 through the vendored engines against the key 4.446421214633396 (tol 4.7e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -12644,7 +12650,8 @@
    "prompt_contains": [
     "Take the compressibility factor from the package's own natural gas correlation, Sutton pseudo-criticals with Dranchuk and Abou-Kassem, and NOT from a flat assumption. For this gas Sutton gives a pseudo-critical temperature Tpc of 378.081504 degR and a pseudo-critical pressure Ppc of 663.063906 psia (a sweet gas, so no acid gas correction). Dranchuk and Abou-Kassem then make z the root of z = 1 + (A1 + A2/Tpr + A3/Tpr^3 + A4/Tpr^4 + A5/Tpr^5) rr + (A6 + A7/Tpr + A8/Tpr^2) rr^2 - A9 (A7/Tpr + A8/Tpr^2) rr^5 + A10 (1 + A11 rr^2) (rr^2/Tpr^3) exp(-A11 rr^2), where rr = 0.27 Ppr / (z Tpr), Tpr is the absolute temperature over Tpc, Ppr is the pressure over Ppc, and A1 to A11 are 0.3265, -1.07, -0.5339, 0.01569, -0.05165, 0.5475, -0.7361, 0.1844, 0.1056, 0.6134, 0.721; solve it by goal seek or iteration."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. Every beginner field needs z from Sutton and Dranchuk and Abou-Kassem, which no lesson or panel gives (B5 finding 1). z at the wellhead IS field 1, so printing it would hand that field over; the prompt instead states the Sutton pseudo-criticals for this gas and the DAK equation with its eleven constants (read from the vendored engine), so z is a spreadsheet goal seek and the other five fields are the taught closed forms on it. Keys, expected values and tolerances are unchanged. The published inputs reproduce wh_critical_rate_mscfd = 2032.588473663082 through the vendored engines against the key 2032.5884737584674 (tol 0.0021); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -12682,7 +12689,8 @@
    "prompt_contains": [
     "Take the compressibility factor from the package's own natural gas correlation, Sutton pseudo-criticals with Dranchuk and Abou-Kassem, and NOT from a flat assumption. For this gas Sutton gives a pseudo-critical temperature Tpc of 378.081504 degR and a pseudo-critical pressure Ppc of 663.063906 psia (a sweet gas, so no acid gas correction). Dranchuk and Abou-Kassem then make z the root of z = 1 + (A1 + A2/Tpr + A3/Tpr^3 + A4/Tpr^4 + A5/Tpr^5) rr + (A6 + A7/Tpr + A8/Tpr^2) rr^2 - A9 (A7/Tpr + A8/Tpr^2) rr^5 + A10 (1 + A11 rr^2) (rr^2/Tpr^3) exp(-A11 rr^2), where rr = 0.27 Ppr / (z Tpr), Tpr is the absolute temperature over Tpc, Ppr is the pressure over Ppc, and A1 to A11 are 0.3265, -1.07, -0.5339, 0.01569, -0.05165, 0.5475, -0.7361, 0.1844, 0.1056, 0.6134, 0.721; solve it by goal seek or iteration."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. Every beginner field needs z from Sutton and Dranchuk and Abou-Kassem, which no lesson or panel gives (B5 finding 1). z at the wellhead IS field 1, so printing it would hand that field over; the prompt instead states the Sutton pseudo-criticals for this gas and the DAK equation with its eleven constants (read from the vendored engine), so z is a spreadsheet goal seek and the other five fields are the taught closed forms on it. Keys, expected values and tolerances are unchanged. The published inputs reproduce wh_actual_velocity_fts = 8.067074175968118 through the vendored engines against the key 8.067074175186569 (tol 8.3e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -12720,7 +12728,8 @@
    "prompt_contains": [
     "Take z from the package's own natural gas correlation at EVERY station, and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt asked for z at every station from the package correlation, which only the engine could supply (B5 finding 1). It now states z at the four stations below the wellhead and at the plunger's average conditions (vendored naturalGasZ, ten decimals), so the critical rates, the sizing and the plunger balance are the taught closed forms. The wellhead z is left out: it is the beginner key. The published inputs reproduce mid_critical_rate_mscfd = 2381.9152406146345 through the vendored engines against the key 2381.915240563656 (tol 0.0025); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -12758,7 +12767,8 @@
    "prompt_contains": [
     "Take z from the package's own natural gas correlation at EVERY station, and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt asked for z at every station from the package correlation, which only the engine could supply (B5 finding 1). It now states z at the four stations below the wellhead and at the plunger's average conditions (vendored naturalGasZ, ten decimals), so the critical rates, the sizing and the plunger balance are the taught closed forms. The wellhead z is left out: it is the beginner key. The published inputs reproduce shoe_critical_rate_mscfd = 2757.4013449873296 through the vendored engines against the key 2757.4013450247076 (tol 0.0029); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -12796,7 +12806,8 @@
    "prompt_contains": [
     "Take z from the package's own natural gas correlation at EVERY station, and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt asked for z at every station from the package correlation, which only the engine could supply (B5 finding 1). It now states z at the four stations below the wellhead and at the plunger's average conditions (vendored naturalGasZ, ten decimals), so the critical rates, the sizing and the plunger balance are the taught closed forms. The wellhead z is left out: it is the beginner key. The published inputs reproduce shoe_actual_velocity_fts = 4.259303792015355 through the vendored engines against the key 4.259303791892167 (tol 4.4e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -12834,7 +12845,8 @@
    "prompt_contains": [
     "Take z from the package's own natural gas correlation at EVERY station, and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt asked for z at every station from the package correlation, which only the engine could supply (B5 finding 1). It now states z at the four stations below the wellhead and at the plunger's average conditions (vendored naturalGasZ, ten decimals), so the critical rates, the sizing and the plunger balance are the taught closed forms. The wellhead z is left out: it is the beginner key. The published inputs reproduce sized_tubing_critical_rate_mscfd = 2329.3899229794024 through the vendored engines against the key 2329.389923010978 (tol 0.0024); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -12872,7 +12884,8 @@
    "prompt_contains": [
     "Take z from the package's own natural gas correlation at EVERY station, and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt asked for z at every station from the package correlation, which only the engine could supply (B5 finding 1). It now states z at the four stations below the wellhead and at the plunger's average conditions (vendored naturalGasZ, ten decimals), so the critical rates, the sizing and the plunger balance are the taught closed forms. The wellhead z is left out: it is the beginner key. The published inputs reproduce plunger_required_lift_psia = 333.42363379766374 through the vendored engines against the key 333.42363379741835 (tol 0.00035); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "Tol 0.00035 psi."
@@ -12910,7 +12923,8 @@
    "prompt_contains": [
     "Take z from the package's own natural gas correlation at EVERY station, and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt asked for z at every station from the package correlation, which only the engine could supply (B5 finding 1). It now states z at the four stations below the wellhead and at the plunger's average conditions (vendored naturalGasZ, ten decimals), so the critical rates, the sizing and the plunger balance are the taught closed forms. The wellhead z is left out: it is the beginner key. The published inputs reproduce plunger_required_glr_scfbbl = 9306.717126601103 through the vendored engines against the key 9306.71712654132 (tol 0.0098); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -12949,7 +12963,8 @@
     "Take z from the package's own natural gas correlation at every station and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it.",
     "Field 3 needs no z at all, and neither does field 6, and doing field 3 by hand with the textbook water gradient FAILS:"
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. As intermediate: z at the four stations below the wellhead and at the plunger conditions is stated, so every field is a closed form. The sentence calling field 3 one of the only two values reachable by hand is no longer true and now says fields 3 and 6 need no z at all. The published inputs reproduce shoe_critical_velocity_turner_fts = 5.524059109385539 through the vendored engines against the key 5.524059109300652 (tol 5.8e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -12988,7 +13003,8 @@
     "Take z from the package's own natural gas correlation at every station and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it.",
     "Field 3 needs no z at all, and neither does field 6, and doing field 3 by hand with the textbook water gradient FAILS:"
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. As intermediate: z at the four stations below the wellhead and at the plunger conditions is stated, so every field is a closed form. The sentence calling field 3 one of the only two values reachable by hand is no longer true and now says fields 3 and 6 need no z at all. The published inputs reproduce rejected_tubing_critical_rate_mscfd = 2629.887845441543 through the vendored engines against the key 2629.8878454771925 (tol 0.0028); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -13027,7 +13043,8 @@
     "Take z from the package's own natural gas correlation at every station and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it.",
     "Field 3 needs no z at all, and neither does field 6, and doing field 3 by hand with the textbook water gradient FAILS:"
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. As intermediate: z at the four stations below the wellhead and at the plunger conditions is stated, so every field is a closed form. The sentence calling field 3 one of the only two values reachable by hand is no longer true and now says fields 3 and 6 need no z at all. The published inputs reproduce plunger_slug_hydrostatic_psi = 78.232275 through the vendored engines against the key 78.232275 (tol 8.2e-05); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "The prompt spells out the whole formula and constant, so it is nearly prompt-given (three numbers multiplied); still a genuine check of the 0.433 versus 0.4335275 trap."
@@ -13066,7 +13083,8 @@
     "Take z from the package's own natural gas correlation at every station and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it.",
     "Field 3 needs no z at all, and neither does field 6, and doing field 3 by hand with the textbook water gradient FAILS:"
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. As intermediate: z at the four stations below the wellhead and at the plunger conditions is stated, so every field is a closed form. The sentence calling field 3 one of the only two values reachable by hand is no longer true and now says fields 3 and 6 need no z at all. The published inputs reproduce plunger_max_slug_ft = 1041.9317152414003 through the vendored engines against the key 1041.9317152418678 (tol 0.0011); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -13105,7 +13123,8 @@
     "Take z from the package's own natural gas correlation at every station and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it.",
     "Field 3 needs no z at all, and neither does field 6, and doing field 3 by hand with the textbook water gradient FAILS:"
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. As intermediate: z at the four stations below the wellhead and at the plunger conditions is stated, so every field is a closed form. The sentence calling field 3 one of the only two values reachable by hand is no longer true and now says fields 3 and 6 need no z at all. The published inputs reproduce plunger_gas_per_cycle_scf = 11281.211169214954 through the vendored engines against the key 11281.211169142487 (tol 0.012); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -13144,7 +13163,8 @@
     "Take z from the package's own natural gas correlation at every station and convert temperature at the door: z at each station below the wellhead, from the package's own natural gas correlation (Sutton with Dranchuk and Abou-Kassem) at that station's pressure and temperature, is: 2105 ft 0.8443510213; 4210 ft 0.8466418981; 6315 ft 0.8536633916; 8420 ft 0.8677419755. For the plunger, z at the 214 psia line pressure and the 142.8 degF average tubing temperature is 0.9740548796. The wellhead z is the Associate tier's own graded answer and nothing in this tier needs it.",
     "Field 3 needs no z at all, and neither does field 6, and doing field 3 by hand with the textbook water gradient FAILS:"
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. As intermediate: z at the four stations below the wellhead and at the plunger conditions is stated, so every field is a closed form. The sentence calling field 3 one of the only two values reachable by hand is no longer true and now says fields 3 and 6 need no z at all. The published inputs reproduce plunger_liquid_per_day_bbl = 18.79621249139511 through the vendored engines against the key 18.79621249139511 (tol 2e-05); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "The prompt says field 3 is 'the ONE graded value in this course reachable by hand'; this field is also reachable by hand. Consider correcting that sentence."
@@ -14033,6 +14053,12 @@
    "prompt_contains": [],
    "lessons": [
     "src/content/courses/heattransfer/intermediate/m02-shells-in-series/l01-the-equivalent-single-shell-p.md"
+   ],
+   "lesson_contains": [
+    [
+     "src/content/courses/heattransfer/intermediate/m02-shells-in-series/l01-the-equivalent-single-shell-p.md",
+     "so the value the closed form was actually read at is visible rather than implied.\n\n## The conversion itself\n\nFor N shells in series at a whole unit P and R, the engine first forms\n\n    S = ((1 - P R) / (1 - P))^(1/N)\n\nand then takes the equivalent single-shell P as\n\n    P1 = (S - 1) / (S - R)\n\nWhere R is 1 that quotient has no value, and the limit is used instead: P1 = P / (N - P (N - 1)). Both are one line in a spreadsheet, and either one reproduces the equivalent single-shell P column of the two tables below from its P, R and shell count."
+    ]
    ]
   },
   "evidence": "W2: Lesson only, no prompt or field moves. The equivalent single-shell P is printed by no panel or Suite surface, and intermediate m02 l01 tabulated its outputs without the conversion (heatTransfer.js lmtdCorrectionF). The lesson now writes the conversion and its R = 1 limit, so the field is hand work on the four terminal temperatures the prompt states. Reaches learners with the next NextGen zip. The F print (Suite SizingPanels.jsx) stays W3. The published inputs reproduce ubit_p1_two_shells = 0.23359328643184238 through the vendored engines against the key 0.23359328643184238 (tol 5e-07); src/lib/w2PublishedInputs.test.js re-runs it.",
@@ -15781,7 +15807,8 @@
    "prompt_contains": [
     "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt said each bounding element carries a limit, a true vertical depth, a far side density and a role, but gave none of them: the KESTREL A-7 rows, the annulus fluids and the D1 survey existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs (B5 finding 1). The prompt now publishes the survey, both annuli and the displacement case row by row, with g and the psi conversion, so every field is the taught row arithmetic of m02 to m05 worked at full precision. Keys, expected values and tolerances are unchanged, so nobody is re-scored. The published inputs reproduce mawop_a_tubing_row_pa = 16226227.041788332 through the vendored engines against the key 16226227.041788332 (tol 10); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "tol 10 Pa is below half a unit of the panel's 4-decimal MPa print (50 Pa), a second defect if the fix is a panel preset."
@@ -15819,7 +15846,8 @@
    "prompt_contains": [
     "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt said each bounding element carries a limit, a true vertical depth, a far side density and a role, but gave none of them: the KESTREL A-7 rows, the annulus fluids and the D1 survey existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs (B5 finding 1). The prompt now publishes the survey, both annuli and the displacement case row by row, with g and the psi conversion, so every field is the taught row arithmetic of m02 to m05 worked at full precision. Keys, expected values and tolerances are unchanged, so nobody is re-scored. The published inputs reproduce mawop_a_shoe_row_pa = 16497910.032817762 through the vendored engines against the key 16497910.032817762 (tol 10); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -15857,7 +15885,8 @@
    "prompt_contains": [
     "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt said each bounding element carries a limit, a true vertical depth, a far side density and a role, but gave none of them: the KESTREL A-7 rows, the annulus fluids and the D1 survey existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs (B5 finding 1). The prompt now publishes the survey, both annuli and the displacement case row by row, with g and the psi conversion, so every field is the taught row arithmetic of m02 to m05 worked at full precision. Keys, expected values and tolerances are unchanged, so nobody is re-scored. The published inputs reproduce mawop_a_pa = 13513225.370183308 through the vendored engines against the key 13513225.370183308 (tol 10); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -15895,7 +15924,8 @@
    "prompt_contains": [
     "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt said each bounding element carries a limit, a true vertical depth, a far side density and a role, but gave none of them: the KESTREL A-7 rows, the annulus fluids and the D1 survey existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs (B5 finding 1). The prompt now publishes the survey, both annuli and the displacement case row by row, with g and the psi conversion, so every field is the taught row arithmetic of m02 to m05 worked at full precision. Keys, expected values and tolerances are unchanged, so nobody is re-scored. The published inputs reproduce mawop_a_governing_tvd_m = 1944.8770336087282 through the vendored engines against the key 1944.8770336087282 (tol 0.0005); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "If the fix publishes each row's TVD, this field becomes a pick among three listed TVDs (prod shoe, packer, wellhead), guess_p about 0.33. Panel prints TVD with fmt(tvdM, 3) at AnnulusExplorer.jsx:72, half unit 5e-4 = tol."
@@ -15933,7 +15963,8 @@
    "prompt_contains": [
     "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt said each bounding element carries a limit, a true vertical depth, a far side density and a role, but gave none of them: the KESTREL A-7 rows, the annulus fluids and the D1 survey existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs (B5 finding 1). The prompt now publishes the survey, both annuli and the displacement case row by row, with g and the psi conversion, so every field is the taught row arithmetic of m02 to m05 worked at full precision. Keys, expected values and tolerances are unchanged, so nobody is re-scored. The published inputs reproduce maasp_b_pa = 15378302.866843894 through the vendored engines against the key 15378302.866843894 (tol 10); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -15971,7 +16002,8 @@
    "prompt_contains": [
     "Each bounding element carries its own pressure limit, its depth, the density of whatever stands on the FAR side of it, and a role from which the RP 90 design factor is looked up, or a factor stated with it. THE WELL. The survey is vertical to 500 m MD, builds at 2 degrees per 30 m on an azimuth of 45 degrees to 40 degrees at 1100 m MD, and holds 40 degrees below that; take each true vertical depth from it by minimum curvature. Take g as 9.80665 m/s2 and 1 psi as 6894.757293168 Pa. THE A ANNULUS holds 1250 kg/m3 packer fluid and is bounded by four rows, each given as name, role, limit, depth and far side density: 9-5/8 production casing burst, role outer-casing-burst, 5220 psi, at the production shoe at 2265 m MD, far side 1015 kg/m3; 5-1/2 completion tubing collapse, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 1000 kg/m3; 9-5/8 shoe formation strength, role shoe-formation, a leak off equivalent of 1100 kg/m3 times g times the shoe TVD, at the production shoe at 2265 m MD, far side 1015 kg/m3; Subsea wellhead annulus access rating, role rating, 5000 psi, at the wellhead on the seabed at 320 m MD, far side 1025 kg/m3. THE B ANNULUS holds 1150 kg/m3 and its three rows carry stated design and wear factors in place of the RP 90 roles: 13-3/8 surface casing burst, factor 0.72, 3450 psi, at the surface shoe at 1450 m MD, far side 1015 kg/m3; 9-5/8 production casing burst wear derated, factor 0.62, 5220 psi, at the production shoe at 2265 m MD, far side 1250 kg/m3; 13-3/8 shoe formation strength, factor 1, a leak off equivalent of 1550 kg/m3 times g times the shoe TVD, at the surface shoe at 1450 m MD, far side 1015 kg/m3. THE DISPLACEMENT CASE puts 1650 kg/m3 brine in the A annulus while the tubing unloads to gas of 150 kg/m3, and has one row: 5-1/2 completion tubing collapse with the tubing gas filled, role inner-tubing-collapse, 4040 psi, at the packer at 2210 m MD, far side 150 kg/m3."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt said each bounding element carries a limit, a true vertical depth, a far side density and a role, but gave none of them: the KESTREL A-7 rows, the annulus fluids and the D1 survey existed only in the generator /root/dr-wip-integrity/dr11_fields.mjs (B5 finding 1). The prompt now publishes the survey, both annuli and the displacement case row by row, with g and the psi conversion, so every field is the taught row arithmetic of m02 to m05 worked at full precision. Keys, expected values and tolerances are unchanged, so nobody is re-scored. The published inputs reproduce maasp_gasfilled_tubing_row_pa = -7098210.7407652065 through the vendored engines against the key -7098210.7407652065 (tol 10); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "Sign is part of the answer and taught (m05 the clamp); fine once the inputs are published."
@@ -16010,7 +16042,8 @@
     "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
     "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The P&A inputs (the five plug intervals, the three designed geometries, the zones and the annular cement interval) existed only in /root/dr-wip-integrity/dr11_fields.mjs; the prompt now publishes them, so each field is the taught closed form (capacities, spacer ratio, settle, margins, takeoff). The prompt also said field 6 sums every plug including the two without a designed placement, which was false: the engine sums designed placements only (plugAbandonment.js takeoff) and lists the other two by name. That sentence and the single \"35 percent excess\" (it is P1's; P3 and S1 carry their own) are corrected. Keys, expected values and tolerances are unchanged. The published inputs reproduce plug_slurry_m3 = 4.620238645056858 through the vendored engines against the key 4.620238645056858 (tol 5e-07); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "A panel preset would print 6 decimals, half unit 5e-7 = tol: borderline but passing."
@@ -16049,7 +16082,8 @@
     "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
     "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The P&A inputs (the five plug intervals, the three designed geometries, the zones and the annular cement interval) existed only in /root/dr-wip-integrity/dr11_fields.mjs; the prompt now publishes them, so each field is the taught closed form (capacities, spacer ratio, settle, margins, takeoff). The prompt also said field 6 sums every plug including the two without a designed placement, which was false: the engine sums designed placements only (plugAbandonment.js takeoff) and lists the other two by name. That sentence and the single \"35 percent excess\" (it is P1's; P3 and S1 carry their own) are corrected. Keys, expected values and tolerances are unchanged. The published inputs reproduce plug_spacer_behind_m3 = 0.5279360645295814 through the vendored engines against the key 0.5279360645295814 (tol 5e-08); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "tol 5e-8 is a tenth of the panel's 6-decimal print (half unit 5e-7), so a panel preset would need 7+ decimals or tol 5e-7."
@@ -16088,7 +16122,8 @@
     "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
     "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The P&A inputs (the five plug intervals, the three designed geometries, the zones and the annular cement interval) existed only in /root/dr-wip-integrity/dr11_fields.mjs; the prompt now publishes them, so each field is the taught closed form (capacities, spacer ratio, settle, margins, takeoff). The prompt also said field 6 sums every plug including the two without a designed placement, which was false: the engine sums designed placements only (plugAbandonment.js takeoff) and lists the other two by name. That sentence and the single \"35 percent excess\" (it is P1's; P3 and S1 carry their own) are corrected. Keys, expected values and tolerances are unchanged. The published inputs reproduce plug_top_settle_m = 21.154551869215993 through the vendored engines against the key 21.154551869215993 (tol 5e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "tol 5e-6 is below half a unit of the panel's 4-decimal settle tiles (5e-5)."
@@ -16127,7 +16162,8 @@
     "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
     "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The P&A inputs (the five plug intervals, the three designed geometries, the zones and the annular cement interval) existed only in /root/dr-wip-integrity/dr11_fields.mjs; the prompt now publishes them, so each field is the taught closed form (capacities, spacer ratio, settle, margins, takeoff). The prompt also said field 6 sums every plug including the two without a designed placement, which was false: the engine sums designed placements only (plugAbandonment.js takeoff) and lists the other two by name. That sentence and the single \"35 percent excess\" (it is P1's; P3 and S1 carry their own) are corrected. Keys, expected values and tolerances are unchanged. The published inputs reproduce above_source_margin_m = -7.5 through the vendored engines against the key -7.5 (tol 5e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "Exact half-metre value, tol 5e-6 fine once depths are published."
@@ -16166,7 +16202,8 @@
     "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
     "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The P&A inputs (the five plug intervals, the three designed geometries, the zones and the annular cement interval) existed only in /root/dr-wip-integrity/dr11_fields.mjs; the prompt now publishes them, so each field is the taught closed form (capacities, spacer ratio, settle, margins, takeoff). The prompt also said field 6 sums every plug including the two without a designed placement, which was false: the engine sums designed placements only (plugAbandonment.js takeoff) and lists the other two by name. That sentence and the single \"35 percent excess\" (it is P1's; P3 and S1 carry their own) are corrected. Keys, expected values and tolerances are unchanged. The published inputs reproduce annular_cement_margin_m = -26.5 through the vendored engines against the key -26.5 (tol 5e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "Exact, tol fine once the interval is published."
@@ -16205,7 +16242,8 @@
     "FIVE plugs are proposed across two flowing zones plus a surface phase, each designed plug at its own stated excess. THE PLUGS are balanced through a stinger of 0.0889 m outside diameter (3-1/2 in) and 0.076 m inside: P1 reservoir primary, 2568.5 to 2740 m MD, in the 7 in liner of inside diameter 0.1594 m, at 35 percent excess with 1.6 m3 of spacer ahead, set on a tagged foundation; P2 reservoir secondary, 2020 to 2115.5 m MD, with no placement designed; P3 gas stringer primary, 1148 to 1292.5 m MD, in the 9-5/8 casing of inside diameter 0.2244 m, at 25 percent excess with 1.2 m3 of spacer ahead; P4 gas stringer secondary, 946 to 1062.5 m MD, with no placement designed; S1 environmental plug, 0 to 55 m MD, in the 13-3/8 casing of inside diameter 0.3151 m, at 50 percent excess with 0.8 m3 of spacer ahead, the surface plug. THE ZONES, both able to flow: Kestrel reservoir sand, 2611 to 2742 m MD; Shallow gas stringer, 1240 to 1272 m MD. THE ANNULAR CEMENT behind the 7 in liner opposite P1 runs from 2455 to 2528.5 m MD, and no cement evaluation log has been run on it.",
     "Field 6 is the programme takeoff: it sums the slurry of every plug with a designed placement, and the two plugs without one add no volume and are listed by name instead."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The P&A inputs (the five plug intervals, the three designed geometries, the zones and the annular cement interval) existed only in /root/dr-wip-integrity/dr11_fields.mjs; the prompt now publishes them, so each field is the taught closed form (capacities, spacer ratio, settle, margins, takeoff). The prompt also said field 6 sums every plug including the two without a designed placement, which was false: the engine sums designed placements only (plugAbandonment.js takeoff) and lists the other two by name. That sentence and the single \"35 percent excess\" (it is P1's; P3 and S1 carry their own) are corrected. Keys, expected values and tolerances are unchanged. The published inputs reproduce program_slurry_takeoff_m3 = 18.197179289478704 through the vendored engines against the key 18.197179289478704 (tol 5e-07); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "Prompt error: undesigned plugs contribute 0 and are listed in undesignedPlugs (lesson advanced/m05-the-programme/l05-the-takeoff.md says the same). A preset print of 4 decimals (half unit 5e-5) would also sit far above tol 5e-7."
@@ -17034,6 +17072,20 @@
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+   ],
+   "lesson_contains": [
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+     "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+    ],
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+     "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+    ],
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+     "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+    ]
    ]
   },
   "evidence": "W2: Lessons only, no prompt or field moves. The intermediate lessons never wrote the Weymouth, Panhandle B or General Flow forms (their constants lived only in lineHydraulics.js), no panel takes the BRASS inputs and the Suite has no forward-rate mode (B5 finding 1). Intermediate m02 l01, l02 and l03 now print the three forms, the base conditions, the elevation group, Colebrook and the General Flow loop, read from the vendored engine, so the four BRASS rates and the friction factor are spreadsheet work on the inputs the prompt already states, and the Weymouth inversion makes the outlet pressure a hand step too. Reaches learners with the next NextGen zip. The published inputs reproduce brass_weymouth_scfd = 121983243.41355602 through the vendored engines against the key 121983243.41355602 (tol 1000); src/lib/w2PublishedInputs.test.js re-runs it.",
@@ -17074,6 +17126,20 @@
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+   ],
+   "lesson_contains": [
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+     "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+    ],
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+     "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+    ],
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+     "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+    ]
    ]
   },
   "evidence": "W2: Lessons only, no prompt or field moves. The intermediate lessons never wrote the Weymouth, Panhandle B or General Flow forms (their constants lived only in lineHydraulics.js), no panel takes the BRASS inputs and the Suite has no forward-rate mode (B5 finding 1). Intermediate m02 l01, l02 and l03 now print the three forms, the base conditions, the elevation group, Colebrook and the General Flow loop, read from the vendored engine, so the four BRASS rates and the friction factor are spreadsheet work on the inputs the prompt already states, and the Weymouth inversion makes the outlet pressure a hand step too. Reaches learners with the next NextGen zip. The published inputs reproduce brass_panhandleb_scfd = 158089257.28536567 through the vendored engines against the key 158089257.28536567 (tol 1000); src/lib/w2PublishedInputs.test.js re-runs it.",
@@ -17114,6 +17180,20 @@
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+   ],
+   "lesson_contains": [
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+     "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+    ],
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+     "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+    ],
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+     "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+    ]
    ]
   },
   "evidence": "W2: Lessons only, no prompt or field moves. The intermediate lessons never wrote the Weymouth, Panhandle B or General Flow forms (their constants lived only in lineHydraulics.js), no panel takes the BRASS inputs and the Suite has no forward-rate mode (B5 finding 1). Intermediate m02 l01, l02 and l03 now print the three forms, the base conditions, the elevation group, Colebrook and the General Flow loop, read from the vendored engine, so the four BRASS rates and the friction factor are spreadsheet work on the inputs the prompt already states, and the Weymouth inversion makes the outlet pressure a hand step too. Reaches learners with the next NextGen zip. The published inputs reproduce brass_general_scfd = 135290712.75490567 through the vendored engines against the key 135290712.75490567 (tol 1000); src/lib/w2PublishedInputs.test.js re-runs it.",
@@ -17154,6 +17234,20 @@
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+   ],
+   "lesson_contains": [
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+     "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+    ],
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+     "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+    ],
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+     "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+    ]
    ]
   },
   "evidence": "W2: Lessons only, no prompt or field moves. The intermediate lessons never wrote the Weymouth, Panhandle B or General Flow forms (their constants lived only in lineHydraulics.js), no panel takes the BRASS inputs and the Suite has no forward-rate mode (B5 finding 1). Intermediate m02 l01, l02 and l03 now print the three forms, the base conditions, the elevation group, Colebrook and the General Flow loop, read from the vendored engine, so the four BRASS rates and the friction factor are spreadsheet work on the inputs the prompt already states, and the Weymouth inversion makes the outlet pressure a hand step too. Reaches learners with the next NextGen zip. The published inputs reproduce brass_general_friction_factor = 0.010546475636391016 through the vendored engines against the key 0.010546475636391016 (tol 1e-09); src/lib/w2PublishedInputs.test.js re-runs it.",
@@ -17194,6 +17288,20 @@
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md"
+   ],
+   "lesson_contains": [
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l01-weymouth.md",
+     "Everything it knows about the pipe is the bore and the length.\n\n## The form\n\nThe engine evaluates the GPSA Weymouth form:\n\n    Q = 433.5 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z)]^0.5 d^(8/3)\n\nHere Q is in scfd at the base conditions of 520 degR and 14.65 psia, E is the transmission efficiency, p1 and p2 are the inlet and outlet pressures in psia, G the gas gravity, T the average flowing temperature in degR, Z the average compressibility, d the bore in inches and Le the equivalent length in miles. The elevation group is module 3's: s = 0.0375 G dH / (T Z) with dH in ft, positive when the outlet sits higher, and Le = L (e^s - 1) / s, which is L itself on a flat line where e^s is 1. The diameter exponent 8/3 is the 2.6666666667 quoted above. Solving the same form for p2 at a stated rate is one line of algebra, p2 = [(p1^2 - (Q / (433.5 E (Tb/Pb) d^(8/3)))^2 G T Le Z) / e^s]^0.5; the engine bisects instead (module 4) and lands on the same pressure."
+    ],
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l02-the-two-panhandles.md",
+     "and will not be able to say which of them a quoted rate came from.\n\n## The Panhandle B form\n\n    Q = 737 E (Tb/Pb)^1.02 [(p1^2 - e^s p2^2) / (G^0.961 T Le Z)]^0.51 d^2.53\n\nwith the same symbols, base conditions and elevation group as Weymouth in the previous lesson. Every exponent in it is part of the correlation, so a spreadsheet has to carry each one exactly as printed."
+    ],
+    [
+     "src/content/courses/linesizing/intermediate/m02-the-four-transmission-forms/l03-general-flow-and-its-iteration.md",
+     "and the friction factor it settled on is returned beside the rate rather than discarded.\n\n## The form, and the loop\n\n    Q = 77.54 E (Tb/Pb) [(p1^2 - e^s p2^2) / (G T Le Z f)]^0.5 d^2.5\n\nwith f the Darcy friction factor and the other symbols as in the Weymouth lesson. The friction factor is Colebrook's, 1/f^0.5 = -2 log10(e/(3.7 d) + 2.51/(Re f^0.5)) with e the absolute roughness in inches, at the gas Reynolds number Re = 0.0201 Q G / (d mu) with mu in cP. The loop starts from f = 0.015: compute Q, then Re from that Q, then solve Colebrook for a new f by repeating its right hand side until it stops changing, and go round again until f settles. The rate and the friction factor it settles on are the pair the engine returns."
+    ]
    ]
   },
   "evidence": "W2: Lessons only, no prompt or field moves. The intermediate lessons never wrote the Weymouth, Panhandle B or General Flow forms (their constants lived only in lineHydraulics.js), no panel takes the BRASS inputs and the Suite has no forward-rate mode (B5 finding 1). Intermediate m02 l01, l02 and l03 now print the three forms, the base conditions, the elevation group, Colebrook and the General Flow loop, read from the vendored engine, so the four BRASS rates and the friction factor are spreadsheet work on the inputs the prompt already states, and the Weymouth inversion makes the outlet pressure a hand step too. Reaches learners with the next NextGen zip. The published inputs reproduce brass_outlet_pressure_psia = 999.6232577666815 through the vendored engines against the key 999.6232577666815 (tol 1e-05); src/lib/w2PublishedInputs.test.js re-runs it.",
@@ -20665,7 +20773,8 @@
    "prompt_contains": [
     "The tubing curve is the gravity-plus-friction relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, with bhp and pWh in psia and q in stb/d, evaluated at a wellhead pressure of 1236 psia at 49 evenly spaced rates from one thousandth of the absolute open flow up to the absolute open flow itself. The open flow is the Associate tier's, from its composite inflow: reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt called the tubing curve \"the gravity-plus-friction relation supplied with this capstone\" and never stated its constants (3835, 600, 0.000238 lived only in nodalLab.js CAP), nor where the 49 points start (B5 finding 1). The prompt now states the relation, the wellhead pressure and the sampling, and restates the inflow the open flow comes from, so the four tubing fields are spreadsheet work on a form the course teaches (intermediate m03 l03). The two lift gas fields still need a Cullender and Smith march with the engine z; they stay class display for the W4 panel mode. The published inputs reproduce vlp_min_q_stbd = 1285.2338376891341 through the vendored engines against the key 1285.2338376891341 (tol 0.00064); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -20703,7 +20812,8 @@
    "prompt_contains": [
     "The tubing curve is the gravity-plus-friction relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, with bhp and pWh in psia and q in stb/d, evaluated at a wellhead pressure of 1236 psia at 49 evenly spaced rates from one thousandth of the absolute open flow up to the absolute open flow itself. The open flow is the Associate tier's, from its composite inflow: reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt called the tubing curve \"the gravity-plus-friction relation supplied with this capstone\" and never stated its constants (3835, 600, 0.000238 lived only in nodalLab.js CAP), nor where the 49 points start (B5 finding 1). The prompt now states the relation, the wellhead pressure and the sampling, and restates the inflow the open flow comes from, so the four tubing fields are spreadsheet work on a form the course teaches (intermediate m03 l03). The two lift gas fields still need a Cullender and Smith march with the engine z; they stay class display for the W4 panel mode. The published inputs reproduce vlp_min_bhp_psia = 2849.67283735105 through the vendored engines against the key 2849.67283735105 (tol 0.0014); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -20741,7 +20851,8 @@
    "prompt_contains": [
     "The tubing curve is the gravity-plus-friction relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, with bhp and pWh in psia and q in stb/d, evaluated at a wellhead pressure of 1236 psia at 49 evenly spaced rates from one thousandth of the absolute open flow up to the absolute open flow itself. The open flow is the Associate tier's, from its composite inflow: reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt called the tubing curve \"the gravity-plus-friction relation supplied with this capstone\" and never stated its constants (3835, 600, 0.000238 lived only in nodalLab.js CAP), nor where the 49 points start (B5 finding 1). The prompt now states the relation, the wellhead pressure and the sampling, and restates the inflow the open flow comes from, so the four tubing fields are spreadsheet work on a form the course teaches (intermediate m03 l03). The two lift gas fields still need a Cullender and Smith march with the engine z; they stay class display for the W4 panel mode. The published inputs reproduce vlp_loaded_end_bhp_psia = 5046.565087663264 through the vendored engines against the key 5046.565087663264 (tol 0.0025); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -20779,7 +20890,8 @@
    "prompt_contains": [
     "The tubing curve is the gravity-plus-friction relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2, with bhp and pWh in psia and q in stb/d, evaluated at a wellhead pressure of 1236 psia at 49 evenly spaced rates from one thousandth of the absolute open flow up to the absolute open flow itself. The open flow is the Associate tier's, from its composite inflow: reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt called the tubing curve \"the gravity-plus-friction relation supplied with this capstone\" and never stated its constants (3835, 600, 0.000238 lived only in nodalLab.js CAP), nor where the 49 points start (B5 finding 1). The prompt now states the relation, the wellhead pressure and the sampling, and restates the inflow the open flow comes from, so the four tubing fields are spreadsheet work on a form the course teaches (intermediate m03 l03). The two lift gas fields still need a Cullender and Smith march with the engine z; they stay class display for the W4 panel mode. The published inputs reproduce vlp_friction_end_bhp_psia = 5277.411341029544 through the vendored engines against the key 5277.411341029544 (tol 0.0026); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -20887,7 +20999,8 @@
    "prompt_contains": [
     "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The node needs the tubing relation, which no prompt stated, and the grid needed its span: the prompt now states the Associate inflow, the Professional outflow with its constants, and that the 900 points only bracket each crossing, which is then solved exactly. Every field is then a spreadsheet root find (verified: the roots match the key to about 1e-6 stb/d). The published inputs reproduce node_op_q_stbd = 929.9820637311327 through the vendored engines against the key 929.9820637311327 (tol 0.00046); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -20925,7 +21038,8 @@
    "prompt_contains": [
     "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The node needs the tubing relation, which no prompt stated, and the grid needed its span: the prompt now states the Associate inflow, the Professional outflow with its constants, and that the 900 points only bracket each crossing, which is then solved exactly. Every field is then a spreadsheet root find (verified: the roots match the key to about 1e-6 stb/d). The published inputs reproduce node_op_pwf_psia = 2945.7774594005996 through the vendored engines against the key 2945.7774594005996 (tol 0.0015); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -20963,7 +21077,8 @@
    "prompt_contains": [
     "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The node needs the tubing relation, which no prompt stated, and the grid needed its span: the prompt now states the Associate inflow, the Professional outflow with its constants, and that the 900 points only bracket each crossing, which is then solved exactly. Every field is then a spreadsheet root find (verified: the roots match the key to about 1e-6 stb/d). The published inputs reproduce node_unstable_q_stbd = 905.3367675852949 through the vendored engines against the key 905.3367675852949 (tol 0.00045); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -21001,7 +21116,8 @@
    "prompt_contains": [
     "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The node needs the tubing relation, which no prompt stated, and the grid needed its span: the prompt now states the Associate inflow, the Professional outflow with its constants, and that the 900 points only bracket each crossing, which is then solved exactly. Every field is then a spreadsheet root find (verified: the roots match the key to about 1e-6 stb/d). The published inputs reproduce node_unstable_pwf_psia = 2959.6346643478146 through the vendored engines against the key 2959.6346643478146 (tol 0.0015); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -21039,7 +21155,8 @@
    "prompt_contains": [
     "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The node needs the tubing relation, which no prompt stated, and the grid needed its span: the prompt now states the Associate inflow, the Professional outflow with its constants, and that the 900 points only bracket each crossing, which is then solved exactly. Every field is then a spreadsheet root find (verified: the roots match the key to about 1e-6 stb/d). The published inputs reproduce sweep_pwh1176_q_stbd = 1184.0068509231141 through the vendored engines against the key 1184.0068509231141 (tol 0.00057); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -21077,7 +21194,8 @@
    "prompt_contains": [
     "The inflow is the Associate tier's composite relation (reservoir pressure 3450 psia, bubble point 3100 psia and one test of 1200 stb/d at 2790 psia) and the outflow is the Professional tier's tubing relation bhp(q) = pWh + 3835 / (1 + q/600) + 0.000238 q^2 psia at a wellhead pressure of 1236 psia. Solve on a 900-point grid of rates evenly spaced from one thousandth to 0.999 of the absolute open flow: the grid only brackets each crossing, and a crossing is the exact rate at which the two pressures agree, with its flowing pressure read off the inflow."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The node needs the tubing relation, which no prompt stated, and the grid needed its span: the prompt now states the Associate inflow, the Professional outflow with its constants, and that the 900 points only bracket each crossing, which is then solved exactly. Every field is then a spreadsheet root find (verified: the roots match the key to about 1e-6 stb/d). The published inputs reproduce sweep_pwh1176_pwf_psia = 2799.4388422395805 through the vendored engines against the key 2799.4388422395805 (tol 0.0015); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -23700,6 +23818,12 @@
    ],
    "lessons": [
     "src/content/courses/producedwater/beginner/m02-the-water-and-the-oil/l04-crude-density-from-api-gravity.md"
+   ],
+   "lesson_contains": [
+    [
+     "src/content/courses/producedwater/beginner/m02-the-water-and-the-oil/l04-crude-density-from-api-gravity.md",
+     "and the result is then thinned by temperature at a declared rate of 0.0007 for each degree. The thinning is measured from a reference temperature of 15.56 C, which is 60 F taken to two decimals, so the whole chain is 141.5 / (131.5 + API) x 999 x (1 - 0.0007 (T - 15.56)) with T in C. Use 15.56 exactly: the unrounded 60 F, 15.5556 C, moves a density by a few thousandths of a kg/m3."
+    ]
    ]
   },
   "evidence": "W2: Prompt and lesson, no field moves. The lesson taught 141.5/(131.5 + API) x 999 thinned at 0.0007 per degree but never the reference temperature; the engine uses 15.56 C, and the exact 60 F (15.5556 C) a learner would use gives 862.321424, 0.0028 from the key against tol 1e-4 (B5). The prompt and beginner m02 l04 now state 15.56 C, so the crude density is an exact hand calculation. The other five beginner fields stay with the W4 panel mode. The published inputs reproduce ogulagha_oil_density_kgm3 = 862.3241899811321 through the vendored engines against the key 862.3241899811321 (tol 0.0001); src/lib/w2PublishedInputs.test.js re-runs it.",
@@ -31525,10 +31649,11 @@
    "migration": "20261025a_w2_separation.sql",
    "wave": "w2",
    "prompt_contains": [
-    "with a portable flare that was never placed and a second slop tank carrying no coordinates. THE YARD, each item given as its name, its type and its position in metres north and east of the datum at 4.9021 N, 6.8714 E: Wellhead A, wellhead, 0 N 0 E; Wellhead B, wellhead, 4 N 0 E; Manifold, manifold, 26 N 14 E; Test separator, separator, 48 N 30 E; Isolation valve, valve, 50 N 32 E; Custody flow meter, flowmeter, 70 N 44 E; Slop tank, tank, 84 N 55 E; Yard flare, flare, 215 N 150 E; Yard control room, control, 245 N 185 E. Turn an offset into latitude and longitude as the Mapper does, at 110574 m per degree of latitude and 111320 m times the cosine of the datum latitude per degree of longitude, and measure every distance centre to centre by the haversine formula on a sphere of radius 6371008.8 m.",
+    "with a portable flare that was never placed and a second slop tank carrying no coordinates. THE YARD, each item given as its name, its type and its position in metres north and east of the datum at 4.9021 N, 6.8714 E: Wellhead A, wellhead, 0 N 0 E; Wellhead B, wellhead, 4 N 0 E; Manifold, manifold, 26 N 14 E; Test separator, separator, 48 N 30 E; Isolation valve, valve, 50 N 32 E; Custody flow meter, flowmeter, 70 N 44 E; Slop tank, tank, 84 N 55 E; Yard flare, flare, 215 N 150 E; Yard control room, control, 245 N 185 E. Turn an offset into latitude and longitude as the Mapper does, at 110574 m per degree of latitude and 111320 m times the cosine of the datum latitude per degree of longitude, and measure every distance centre to centre by the haversine formula on a sphere of radius 6371008.8 m. Read the figures in the Separator Studio and the Facility Layout Mapper with their Full precision switch on (at the top of the page): they print them to the precision this capstone grades, with no digit grouping.",
     "Lengths in ft, times in s and distances in m to four decimals or better, and the fraction as a fraction to six decimals."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The ADANGA item positions existed only in capstone-only code (separationLab.js ADANGA_ITEMS, guarded from panels), so neither layout ranking could be worked (B5 finding 1). The prompt now states each placed item as north and east offsets from the datum, the two scale factors the Mapper uses and the haversine radius, so both shortfalls are a hand calculation (intermediate m05 l02). It also asks for the fraction to six decimals, which is what its tol of 1e-6 needs; \"four decimals or better\" failed a learner who followed it. The Facility Layout Mapper print (SpacingPanel.jsx:179) is W3. The published inputs reproduce adanga_worst_absolute_shortfall_m = 53.82226310078884 through the vendored engines against the key 53.82226310078884 (tol 0.0001); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -31564,10 +31689,11 @@
    "migration": "20261025a_w2_separation.sql",
    "wave": "w2",
    "prompt_contains": [
-    "with a portable flare that was never placed and a second slop tank carrying no coordinates. THE YARD, each item given as its name, its type and its position in metres north and east of the datum at 4.9021 N, 6.8714 E: Wellhead A, wellhead, 0 N 0 E; Wellhead B, wellhead, 4 N 0 E; Manifold, manifold, 26 N 14 E; Test separator, separator, 48 N 30 E; Isolation valve, valve, 50 N 32 E; Custody flow meter, flowmeter, 70 N 44 E; Slop tank, tank, 84 N 55 E; Yard flare, flare, 215 N 150 E; Yard control room, control, 245 N 185 E. Turn an offset into latitude and longitude as the Mapper does, at 110574 m per degree of latitude and 111320 m times the cosine of the datum latitude per degree of longitude, and measure every distance centre to centre by the haversine formula on a sphere of radius 6371008.8 m.",
+    "with a portable flare that was never placed and a second slop tank carrying no coordinates. THE YARD, each item given as its name, its type and its position in metres north and east of the datum at 4.9021 N, 6.8714 E: Wellhead A, wellhead, 0 N 0 E; Wellhead B, wellhead, 4 N 0 E; Manifold, manifold, 26 N 14 E; Test separator, separator, 48 N 30 E; Isolation valve, valve, 50 N 32 E; Custody flow meter, flowmeter, 70 N 44 E; Slop tank, tank, 84 N 55 E; Yard flare, flare, 215 N 150 E; Yard control room, control, 245 N 185 E. Turn an offset into latitude and longitude as the Mapper does, at 110574 m per degree of latitude and 111320 m times the cosine of the datum latitude per degree of longitude, and measure every distance centre to centre by the haversine formula on a sphere of radius 6371008.8 m. Read the figures in the Separator Studio and the Facility Layout Mapper with their Full precision switch on (at the top of the page): they print them to the precision this capstone grades, with no digit grouping.",
     "Lengths in ft, times in s and distances in m to four decimals or better, and the fraction as a fraction to six decimals."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The ADANGA item positions existed only in capstone-only code (separationLab.js ADANGA_ITEMS, guarded from panels), so neither layout ranking could be worked (B5 finding 1). The prompt now states each placed item as north and east offsets from the datum, the two scale factors the Mapper uses and the haversine radius, so both shortfalls are a hand calculation (intermediate m05 l02). It also asks for the fraction to six decimals, which is what its tol of 1e-6 needs; \"four decimals or better\" failed a learner who followed it. The Facility Layout Mapper print (SpacingPanel.jsx:179) is W3. The published inputs reproduce adanga_worst_relative_fraction = 0.6200257720948125 through the vendored engines against the key 0.6200257720948125 (tol 1e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -32408,7 +32534,8 @@
    "prompt_contains": [
     "The job is placed at 2380 m measured depth. At the job's true vertical depth of 2033.000 m the fracturing pressure, the closure stress there, is 36554842.99 Pa and the reservoir pressure is 22468999.12 Pa. Take the acid viscosity as exactly 0.001 Pa.s and 1 mD as 9.869233e-16 m2."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. Field 6 needs the fracturing and reservoir pressures at the true vertical depth of 2380 m MD, which the generator interpolated from the golden survey and profiles and no lesson or panel prints (B5 finding 1). The prompt now states both at 2033.000 m TVD, with the exact acid viscosity and the mD conversion, so the Darcy ceiling of m05 l02 is a hand calculation. Keys, expected values and tolerances are unchanged. The published inputs reproduce q_max_matrix_m3s = 9.644175015204811e-05 through the vendored engines against the key 9.644175015806953e-05 (tol 5e-11); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": "Unobtainable as posed. The prompt's own sentence 'the closure stress at the true vertical depth of 2380 m measured, which is not 2380 m' points at data the learner never sees. The other five beginner fields are independent of it."
@@ -36989,7 +37116,8 @@
    "prompt_contains": [
     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt said the MERLIN A-12 programme was supplied with the capstone, but it existed only in /root/dr-wip-wellcost/dr12_fields.mjs (B5 finding 1). The prompt now lists the seventeen activities in order with their kinds and inputs, so every field is the taught closed form of m03 to m05 worked in a spreadsheet. Keys, expected values and tolerances are unchanged. The published inputs reproduce drill_reservoir_hr = 128.8659793814433 through the vendored engines against the key 128.8659793814433 (tol 5e-05); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -37027,7 +37155,8 @@
    "prompt_contains": [
     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt said the MERLIN A-12 programme was supplied with the capstone, but it existed only in /root/dr-wip-wellcost/dr12_fields.mjs (B5 finding 1). The prompt now lists the seventeen activities in order with their kinds and inputs, so every field is the taught closed form of m03 to m05 worked in a spreadsheet. Keys, expected values and tolerances are unchanged. The published inputs reproduce trip_td_hr = 12.725806451612904 through the vendored engines against the key 12.725806451612904 (tol 5e-06); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -37065,7 +37194,8 @@
    "prompt_contains": [
     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt said the MERLIN A-12 programme was supplied with the capstone, but it existed only in /root/dr-wip-wellcost/dr12_fields.mjs (B5 finding 1). The prompt now lists the seventeen activities in order with their kinds and inputs, so every field is the taught closed form of m03 to m05 worked in a spreadsheet. Keys, expected values and tolerances are unchanged. The published inputs reproduce casing_liner_run_hr = 41.285714285714285 through the vendored engines against the key 41.285714285714285 (tol 2e-05); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -37103,7 +37233,8 @@
    "prompt_contains": [
     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt said the MERLIN A-12 programme was supplied with the capstone, but it existed only in /root/dr-wip-wellcost/dr12_fields.mjs (B5 finding 1). The prompt now lists the seventeen activities in order with their kinds and inputs, so every field is the taught closed form of m03 to m05 worked in a spreadsheet. Keys, expected values and tolerances are unchanged. The published inputs reproduce productive_hr = 896.5426011394405 through the vendored engines against the key 896.5426011394405 (tol 0.0005); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -37141,7 +37272,8 @@
    "prompt_contains": [
     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt said the MERLIN A-12 programme was supplied with the capstone, but it existed only in /root/dr-wip-wellcost/dr12_fields.mjs (B5 finding 1). The prompt now lists the seventeen activities in order with their kinds and inputs, so every field is the taught closed form of m03 to m05 worked in a spreadsheet. Keys, expected values and tolerances are unchanged. The published inputs reproduce npt_hr = 255.51464132474018 through the vendored engines against the key 255.51464132474018 (tol 0.0002); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -37179,7 +37311,8 @@
    "prompt_contains": [
     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The prompt said the MERLIN A-12 programme was supplied with the capstone, but it existed only in /root/dr-wip-wellcost/dr12_fields.mjs (B5 finding 1). The prompt now lists the seventeen activities in order with their kinds and inputs, so every field is the taught closed form of m03 to m05 worked in a spreadsheet. Keys, expected values and tolerances are unchanged. The published inputs reproduce total_days = 48.0023851026742 through the vendored engines against the key 48.0023851026742 (tol 2e-05); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -37218,7 +37351,8 @@
     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD; Fishing tools and services: intangible, a lump of 158000 USD; Cementing services: intangible, a lump of 372000 USD; Wireline and LWD evaluation: intangible, a lump of 265000 USD; Casing, liner and accessories: tangible, a lump of 1145000 USD; Completion equipment: tangible, a lump of 1380000 USD.",
     "The contingency is 23.5 percent. THE COST PER METRE of a section takes the bit cost plus the rig rate per hour times the sum of that section's productive drilling hours, its connection hours and the productive hours of its round trip, all over the section length, with the rig rate per hour taken as the rig dayrate plus the integrated services spread, over 24. The intermediate section is activity (d) with a bit cost of 74500 USD, 11.5 connection hours and the round trip (g); the reservoir section is activity (m) with a bit cost of 236000 USD, 9.5 connection hours and the round trip (o)."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The line items, their rates, bases and categories, and the cost per metre inputs existed only in the generator; the prompt now lists the programme, the ten line items and the two sections, so every field is the taught AFE and cost per metre arithmetic. Keys, expected values and tolerances are unchanged. The published inputs reproduce tangible_usd = 3140000 through the vendored engines against the key 3140000 (tol 2); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -37257,7 +37391,8 @@
     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD; Fishing tools and services: intangible, a lump of 158000 USD; Cementing services: intangible, a lump of 372000 USD; Wireline and LWD evaluation: intangible, a lump of 265000 USD; Casing, liner and accessories: tangible, a lump of 1145000 USD; Completion equipment: tangible, a lump of 1380000 USD.",
     "The contingency is 23.5 percent. THE COST PER METRE of a section takes the bit cost plus the rig rate per hour times the sum of that section's productive drilling hours, its connection hours and the productive hours of its round trip, all over the section length, with the rig rate per hour taken as the rig dayrate plus the integrated services spread, over 24. The intermediate section is activity (d) with a bit cost of 74500 USD, 11.5 connection hours and the round trip (g); the reservoir section is activity (m) with a bit cost of 236000 USD, 9.5 connection hours and the round trip (o)."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The line items, their rates, bases and categories, and the cost per metre inputs existed only in the generator; the prompt now lists the programme, the ten line items and the two sections, so every field is the taught AFE and cost per metre arithmetic. Keys, expected values and tolerances are unchanged. The published inputs reproduce intangible_usd = 12245809.811338801 through the vendored engines against the key 12245809.811338801 (tol 6); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -37296,7 +37431,8 @@
     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD; Fishing tools and services: intangible, a lump of 158000 USD; Cementing services: intangible, a lump of 372000 USD; Wireline and LWD evaluation: intangible, a lump of 265000 USD; Casing, liner and accessories: tangible, a lump of 1145000 USD; Completion equipment: tangible, a lump of 1380000 USD.",
     "The contingency is 23.5 percent. THE COST PER METRE of a section takes the bit cost plus the rig rate per hour times the sum of that section's productive drilling hours, its connection hours and the productive hours of its round trip, all over the section length, with the rig rate per hour taken as the rig dayrate plus the integrated services spread, over 24. The intermediate section is activity (d) with a bit cost of 74500 USD, 11.5 connection hours and the round trip (g); the reservoir section is activity (m) with a bit cost of 236000 USD, 9.5 connection hours and the round trip (o)."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The line items, their rates, bases and categories, and the cost per metre inputs existed only in the generator; the prompt now lists the programme, the ten line items and the two sections, so every field is the taught AFE and cost per metre arithmetic. Keys, expected values and tolerances are unchanged. The published inputs reproduce contingency_usd = 3615665.305664618 through the vendored engines against the key 3615665.305664618 (tol 2); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -37335,7 +37471,8 @@
     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD; Fishing tools and services: intangible, a lump of 158000 USD; Cementing services: intangible, a lump of 372000 USD; Wireline and LWD evaluation: intangible, a lump of 265000 USD; Casing, liner and accessories: tangible, a lump of 1145000 USD; Completion equipment: tangible, a lump of 1380000 USD.",
     "The contingency is 23.5 percent. THE COST PER METRE of a section takes the bit cost plus the rig rate per hour times the sum of that section's productive drilling hours, its connection hours and the productive hours of its round trip, all over the section length, with the rig rate per hour taken as the rig dayrate plus the integrated services spread, over 24. The intermediate section is activity (d) with a bit cost of 74500 USD, 11.5 connection hours and the round trip (g); the reservoir section is activity (m) with a bit cost of 236000 USD, 9.5 connection hours and the round trip (o)."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The line items, their rates, bases and categories, and the cost per metre inputs existed only in the generator; the prompt now lists the programme, the ten line items and the two sections, so every field is the taught AFE and cost per metre arithmetic. Keys, expected values and tolerances are unchanged. The published inputs reproduce total_usd = 19001475.11700342 through the vendored engines against the key 19001475.11700342 (tol 10); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -37374,7 +37511,8 @@
     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD; Fishing tools and services: intangible, a lump of 158000 USD; Cementing services: intangible, a lump of 372000 USD; Wireline and LWD evaluation: intangible, a lump of 265000 USD; Casing, liner and accessories: tangible, a lump of 1145000 USD; Completion equipment: tangible, a lump of 1380000 USD.",
     "The contingency is 23.5 percent. THE COST PER METRE of a section takes the bit cost plus the rig rate per hour times the sum of that section's productive drilling hours, its connection hours and the productive hours of its round trip, all over the section length, with the rig rate per hour taken as the rig dayrate plus the integrated services spread, over 24. The intermediate section is activity (d) with a bit cost of 74500 USD, 11.5 connection hours and the round trip (g); the reservoir section is activity (m) with a bit cost of 236000 USD, 9.5 connection hours and the round trip (o)."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The line items, their rates, bases and categories, and the cost per metre inputs existed only in the generator; the prompt now lists the programme, the ten line items and the two sections, so every field is the taught AFE and cost per metre arithmetic. Keys, expected values and tolerances are unchanged. The published inputs reproduce cpm_intermediate_usd_m = 1097.8465106873223 through the vendored engines against the key 1097.8465106873223 (tol 0.0005); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -37413,7 +37551,8 @@
     "The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD; Fishing tools and services: intangible, a lump of 158000 USD; Cementing services: intangible, a lump of 372000 USD; Wireline and LWD evaluation: intangible, a lump of 265000 USD; Casing, liner and accessories: tangible, a lump of 1145000 USD; Completion equipment: tangible, a lump of 1380000 USD.",
     "The contingency is 23.5 percent. THE COST PER METRE of a section takes the bit cost plus the rig rate per hour times the sum of that section's productive drilling hours, its connection hours and the productive hours of its round trip, all over the section length, with the rig rate per hour taken as the rig dayrate plus the integrated services spread, over 24. The intermediate section is activity (d) with a bit cost of 74500 USD, 11.5 connection hours and the round trip (g); the reservoir section is activity (m) with a bit cost of 236000 USD, 9.5 connection hours and the round trip (o)."
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
   "evidence": "W2: Prompt only, no field moves. The line items, their rates, bases and categories, and the cost per metre inputs existed only in the generator; the prompt now lists the programme, the ten line items and the two sections, so every field is the taught AFE and cost per metre arithmetic. Keys, expected values and tolerances are unchanged. The published inputs reproduce cpm_reservoir_usd_m = 2520.081523112737 through the vendored engines against the key 2520.081523112737 (tol 0.002); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
@@ -37449,12 +37588,13 @@
    "migration": "20261025a_w2_wellcost.sql",
    "wave": "w2",
    "prompt_contains": [
-    "Six values for MERLIN A-12. The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD booked at the end of activity (c); Fishing tools and services: intangible, a lump of 158000 USD booked at the end of activity (e); Cementing services: intangible, a lump of 372000 USD booked at the end of activity (l); Wireline and LWD evaluation: intangible, a lump of 265000 USD booked at the end of activity (n); Casing, liner and accessories: tangible, a lump of 1145000 USD booked at the end of activity (p); Completion equipment: tangible, a lump of 1380000 USD booked at the end of activity (q). THE DECLARED RANGES, each triangular as minimum, most likely and maximum, sampled in this order: the rate of penetration of activity (d), in m/h: 6.4, 9.4, 15.5; the rate of penetration of activity (m), in m/h: 2.9, 4.85, 8.2; the duration of activity (e), in h: 24, 62, 240; the rate of the Rig dayrate line, in USD a day: 121000, 138500, 187500; the value of the Completion equipment line, in USD: 1050000, 1380000, 2150000. The risked run prices the base with no contingency line, because the risk model takes the place of the provision.",
+    "Six values for MERLIN A-12. The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD booked at the end of activity (c); Fishing tools and services: intangible, a lump of 158000 USD booked at the end of activity (e); Cementing services: intangible, a lump of 372000 USD booked at the end of activity (l); Wireline and LWD evaluation: intangible, a lump of 265000 USD booked at the end of activity (n); Casing, liner and accessories: tangible, a lump of 1145000 USD booked at the end of activity (p); Completion equipment: tangible, a lump of 1380000 USD booked at the end of activity (q). THE DECLARED RANGES, each triangular as minimum, most likely and maximum, sampled in this order: the rate of penetration of activity (d), in m/h: 6.4, 9.4, 15.5; the rate of penetration of activity (m), in m/h: 2.9, 4.85, 8.2; the duration of activity (e), in h: 24, 62, 240; the rate of the Rig dayrate line, in USD a day: 121000, 138500, 187500; the value of the Completion equipment line, in USD: 1050000, 1380000, 2150000. The risked run prices the base with no contingency line, because the risk model takes the place of the provision. The same case, with these ranges in this order, seed 20260904 and 20000 iterations, is the Suite case file https://petrolord.com/course-cases/wellcost-merlin-a12-advanced.wct.json: in the Well Cost and Time Estimator pick a wellbore, choose Import case and that file, open the Risk tab, run the Monte Carlo and switch on Full precision to read fields 4 to 6.",
     "with the declared ranges stated above:"
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
-  "evidence": "W2: Prompt only, no field moves. The programme, the line items with the activity each lump is booked at, and the declared risk ranges existed only in the generator; the prompt now publishes all three, so the curve fields are spreadsheet work. The three risked fields also need the seeded run to be readable at full precision in the Suite Well Cost and Time studio (W3, Suite); until then they stay class display. The published inputs reproduce curve_at_int_casing_usd = 5421894.326682938 through the vendored engines against the key 5421894.326682938 (tol 2); src/lib/w2PublishedInputs.test.js re-runs it.",
+  "evidence": "W2: Prompt only, no field moves. The programme, the line items with the activity each lump is booked at, and the declared risk ranges existed only in the generator; the prompt now publishes all three, so the curve fields are spreadsheet work. The three risked fields are a seeded run of the Suite canonical sampler: the prompt now points at W3's case file (Suite #568), which the Well Cost and Time Estimator imports and runs at seed 20260904 and prints at full precision behind its Full precision switch (W3 verified all 16 keys through wctRun, wctFullPrecision.test.jsx). This file must not go live before the Suite zip carrying #554 to #568. The published inputs reproduce curve_at_int_casing_usd = 5421894.326682938 through the vendored engines against the key 5421894.326682938 (tol 2); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
  },
  {
@@ -37488,12 +37628,13 @@
    "migration": "20261025a_w2_wellcost.sql",
    "wave": "w2",
    "prompt_contains": [
-    "Six values for MERLIN A-12. The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD booked at the end of activity (c); Fishing tools and services: intangible, a lump of 158000 USD booked at the end of activity (e); Cementing services: intangible, a lump of 372000 USD booked at the end of activity (l); Wireline and LWD evaluation: intangible, a lump of 265000 USD booked at the end of activity (n); Casing, liner and accessories: tangible, a lump of 1145000 USD booked at the end of activity (p); Completion equipment: tangible, a lump of 1380000 USD booked at the end of activity (q). THE DECLARED RANGES, each triangular as minimum, most likely and maximum, sampled in this order: the rate of penetration of activity (d), in m/h: 6.4, 9.4, 15.5; the rate of penetration of activity (m), in m/h: 2.9, 4.85, 8.2; the duration of activity (e), in h: 24, 62, 240; the rate of the Rig dayrate line, in USD a day: 121000, 138500, 187500; the value of the Completion equipment line, in USD: 1050000, 1380000, 2150000. The risked run prices the base with no contingency line, because the risk model takes the place of the provision.",
+    "Six values for MERLIN A-12. The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD booked at the end of activity (c); Fishing tools and services: intangible, a lump of 158000 USD booked at the end of activity (e); Cementing services: intangible, a lump of 372000 USD booked at the end of activity (l); Wireline and LWD evaluation: intangible, a lump of 265000 USD booked at the end of activity (n); Casing, liner and accessories: tangible, a lump of 1145000 USD booked at the end of activity (p); Completion equipment: tangible, a lump of 1380000 USD booked at the end of activity (q). THE DECLARED RANGES, each triangular as minimum, most likely and maximum, sampled in this order: the rate of penetration of activity (d), in m/h: 6.4, 9.4, 15.5; the rate of penetration of activity (m), in m/h: 2.9, 4.85, 8.2; the duration of activity (e), in h: 24, 62, 240; the rate of the Rig dayrate line, in USD a day: 121000, 138500, 187500; the value of the Completion equipment line, in USD: 1050000, 1380000, 2150000. The risked run prices the base with no contingency line, because the risk model takes the place of the provision. The same case, with these ranges in this order, seed 20260904 and 20000 iterations, is the Suite case file https://petrolord.com/course-cases/wellcost-merlin-a12-advanced.wct.json: in the Well Cost and Time Estimator pick a wellbore, choose Import case and that file, open the Risk tab, run the Monte Carlo and switch on Full precision to read fields 4 to 6.",
     "with the declared ranges stated above:"
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
-  "evidence": "W2: Prompt only, no field moves. The programme, the line items with the activity each lump is booked at, and the declared risk ranges existed only in the generator; the prompt now publishes all three, so the curve fields are spreadsheet work. The three risked fields also need the seeded run to be readable at full precision in the Suite Well Cost and Time studio (W3, Suite); until then they stay class display. The published inputs reproduce curve_at_evaluation_usd = 11152431.73458189 through the vendored engines against the key 11152431.73458189 (tol 5); src/lib/w2PublishedInputs.test.js re-runs it.",
+  "evidence": "W2: Prompt only, no field moves. The programme, the line items with the activity each lump is booked at, and the declared risk ranges existed only in the generator; the prompt now publishes all three, so the curve fields are spreadsheet work. The three risked fields are a seeded run of the Suite canonical sampler: the prompt now points at W3's case file (Suite #568), which the Well Cost and Time Estimator imports and runs at seed 20260904 and prints at full precision behind its Full precision switch (W3 verified all 16 keys through wctRun, wctFullPrecision.test.jsx). This file must not go live before the Suite zip carrying #554 to #568. The published inputs reproduce curve_at_evaluation_usd = 11152431.73458189 through the vendored engines against the key 11152431.73458189 (tol 5); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
  },
  {
@@ -37527,12 +37668,13 @@
    "migration": "20261025a_w2_wellcost.sql",
    "wave": "w2",
    "prompt_contains": [
-    "Six values for MERLIN A-12. The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD booked at the end of activity (c); Fishing tools and services: intangible, a lump of 158000 USD booked at the end of activity (e); Cementing services: intangible, a lump of 372000 USD booked at the end of activity (l); Wireline and LWD evaluation: intangible, a lump of 265000 USD booked at the end of activity (n); Casing, liner and accessories: tangible, a lump of 1145000 USD booked at the end of activity (p); Completion equipment: tangible, a lump of 1380000 USD booked at the end of activity (q). THE DECLARED RANGES, each triangular as minimum, most likely and maximum, sampled in this order: the rate of penetration of activity (d), in m/h: 6.4, 9.4, 15.5; the rate of penetration of activity (m), in m/h: 2.9, 4.85, 8.2; the duration of activity (e), in h: 24, 62, 240; the rate of the Rig dayrate line, in USD a day: 121000, 138500, 187500; the value of the Completion equipment line, in USD: 1050000, 1380000, 2150000. The risked run prices the base with no contingency line, because the risk model takes the place of the provision.",
+    "Six values for MERLIN A-12. The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD booked at the end of activity (c); Fishing tools and services: intangible, a lump of 158000 USD booked at the end of activity (e); Cementing services: intangible, a lump of 372000 USD booked at the end of activity (l); Wireline and LWD evaluation: intangible, a lump of 265000 USD booked at the end of activity (n); Casing, liner and accessories: tangible, a lump of 1145000 USD booked at the end of activity (p); Completion equipment: tangible, a lump of 1380000 USD booked at the end of activity (q). THE DECLARED RANGES, each triangular as minimum, most likely and maximum, sampled in this order: the rate of penetration of activity (d), in m/h: 6.4, 9.4, 15.5; the rate of penetration of activity (m), in m/h: 2.9, 4.85, 8.2; the duration of activity (e), in h: 24, 62, 240; the rate of the Rig dayrate line, in USD a day: 121000, 138500, 187500; the value of the Completion equipment line, in USD: 1050000, 1380000, 2150000. The risked run prices the base with no contingency line, because the risk model takes the place of the provision. The same case, with these ranges in this order, seed 20260904 and 20000 iterations, is the Suite case file https://petrolord.com/course-cases/wellcost-merlin-a12-advanced.wct.json: in the Well Cost and Time Estimator pick a wellbore, choose Import case and that file, open the Risk tab, run the Monte Carlo and switch on Full precision to read fields 4 to 6.",
     "with the declared ranges stated above:"
    ],
-   "lessons": []
+   "lessons": [],
+   "lesson_contains": []
   },
-  "evidence": "W2: Prompt only, no field moves. The programme, the line items with the activity each lump is booked at, and the declared risk ranges existed only in the generator; the prompt now publishes all three, so the curve fields are spreadsheet work. The three risked fields also need the seeded run to be readable at full precision in the Suite Well Cost and Time studio (W3, Suite); until then they stay class display. The published inputs reproduce curve_final_usd = 15385809.811338803 through the vendored engines against the key 15385809.811338803 (tol 8); src/lib/w2PublishedInputs.test.js re-runs it.",
+  "evidence": "W2: Prompt only, no field moves. The programme, the line items with the activity each lump is booked at, and the declared risk ranges existed only in the generator; the prompt now publishes all three, so the curve fields are spreadsheet work. The three risked fields are a seeded run of the Suite canonical sampler: the prompt now points at W3's case file (Suite #568), which the Well Cost and Time Estimator imports and runs at seed 20260904 and prints at full precision behind its Full precision switch (W3 verified all 16 keys through wctRun, wctFullPrecision.test.jsx). This file must not go live before the Suite zip carrying #554 to #568. The published inputs reproduce curve_final_usd = 15385809.811338803 through the vendored engines against the key 15385809.811338803 (tol 8); src/lib/w2PublishedInputs.test.js re-runs it.",
   "notes": null
  },
  {
@@ -37544,30 +37686,35 @@
   "expected": 15111064.647716,
   "tol": 8.0,
   "rel_tol": 5.294133925374464e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-  "printed": null,
+  "source": "suite-app",
+  "source_ref": "Suite Well Cost and Time Estimator, Risk tab with Full precision on, case file public/course-cases/wellcost-merlin-a12-advanced.wct.json (https://petrolord.com/course-cases/wellcost-merlin-a12-advanced.wct.json), Suite PR #568",
+  "printed": "full",
   "display_scale": 1.0,
   "display_ref": null,
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 0.0,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "redesign",
-  "fix": {
-   "redesign": "Supply the MERLIN A-12 case and risk ranges, and make the seeded run readable at full precision (Suite RiskTab.jsx:24 and :171) or set tol to half a unit of its print."
-  },
-  "owner_decision": true,
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
   "recommendation": "State the inputs AND name the route for the seeded run. Only the Suite Well Cost and Time studio reproduces the seed-20260904 run bit-identically (dr12_fields.mjs:43-48), and it prints risked cost as $MM to 2 decimals (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/pages/apps/WellCostTime/components/RiskTab.jsx:24 musd) and risked days to 1 decimal (RiskTab.jsx:171), against tols of a few USD and 3e-5 d. So either print full precision there or widen tol to half a unit of what it prints (5000 USD, 0.05 d).",
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. Fixed-seed 20000-iteration run through the canonical sampler (src/lib/monteCarlo.js); not hand-calculable. AFE P10 is the low cost (the sampler's crossed label).",
+  "reclassed_from": "redesign",
+  "shipped": {
+   "migration": "20261025a_w2_wellcost.sql",
+   "wave": "w2",
+   "prompt_contains": [
+    "Six values for MERLIN A-12. The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD booked at the end of activity (c); Fishing tools and services: intangible, a lump of 158000 USD booked at the end of activity (e); Cementing services: intangible, a lump of 372000 USD booked at the end of activity (l); Wireline and LWD evaluation: intangible, a lump of 265000 USD booked at the end of activity (n); Casing, liner and accessories: tangible, a lump of 1145000 USD booked at the end of activity (p); Completion equipment: tangible, a lump of 1380000 USD booked at the end of activity (q). THE DECLARED RANGES, each triangular as minimum, most likely and maximum, sampled in this order: the rate of penetration of activity (d), in m/h: 6.4, 9.4, 15.5; the rate of penetration of activity (m), in m/h: 2.9, 4.85, 8.2; the duration of activity (e), in h: 24, 62, 240; the rate of the Rig dayrate line, in USD a day: 121000, 138500, 187500; the value of the Completion equipment line, in USD: 1050000, 1380000, 2150000. The risked run prices the base with no contingency line, because the risk model takes the place of the provision. The same case, with these ranges in this order, seed 20260904 and 20000 iterations, is the Suite case file https://petrolord.com/course-cases/wellcost-merlin-a12-advanced.wct.json: in the Well Cost and Time Estimator pick a wellbore, choose Import case and that file, open the Risk tab, run the Monte Carlo and switch on Full precision to read fields 4 to 6.",
+    "with the declared ranges stated above:"
+   ],
+   "lessons": [],
+   "lesson_contains": []
+  },
+  "evidence": "W3 (Suite #568): the case file carries the MERLIN A-12 programme, items and the five ranges in generator order at seed 20260904 and 20000 iterations; loaded through the studio's wctRun it reproduces all 16 wellcost keys within tol (wctFullPrecision.test.jsx), and RiskTab prints them at full precision behind the switch. The prompt now names the file and the route.",
   "notes": null
  },
  {
@@ -37579,30 +37726,35 @@
   "expected": 17776363.724421192,
   "tol": 10.0,
   "rel_tol": 5.625447450910327e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-  "printed": null,
+  "source": "suite-app",
+  "source_ref": "Suite Well Cost and Time Estimator, Risk tab with Full precision on, case file public/course-cases/wellcost-merlin-a12-advanced.wct.json (https://petrolord.com/course-cases/wellcost-merlin-a12-advanced.wct.json), Suite PR #568",
+  "printed": "full",
   "display_scale": 1.0,
   "display_ref": null,
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 0.0,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "redesign",
-  "fix": {
-   "redesign": "Supply the MERLIN A-12 case and risk ranges, and make the seeded run readable at full precision (Suite RiskTab.jsx:24 and :171) or set tol to half a unit of its print."
-  },
-  "owner_decision": true,
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
   "recommendation": "State the inputs AND name the route for the seeded run. Only the Suite Well Cost and Time studio reproduces the seed-20260904 run bit-identically (dr12_fields.mjs:43-48), and it prints risked cost as $MM to 2 decimals (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/pages/apps/WellCostTime/components/RiskTab.jsx:24 musd) and risked days to 1 decimal (RiskTab.jsx:171), against tols of a few USD and 3e-5 d. So either print full precision there or widen tol to half a unit of what it prints (5000 USD, 0.05 d).",
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. Same seeded run; tol 10 USD.",
+  "reclassed_from": "redesign",
+  "shipped": {
+   "migration": "20261025a_w2_wellcost.sql",
+   "wave": "w2",
+   "prompt_contains": [
+    "Six values for MERLIN A-12. The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD booked at the end of activity (c); Fishing tools and services: intangible, a lump of 158000 USD booked at the end of activity (e); Cementing services: intangible, a lump of 372000 USD booked at the end of activity (l); Wireline and LWD evaluation: intangible, a lump of 265000 USD booked at the end of activity (n); Casing, liner and accessories: tangible, a lump of 1145000 USD booked at the end of activity (p); Completion equipment: tangible, a lump of 1380000 USD booked at the end of activity (q). THE DECLARED RANGES, each triangular as minimum, most likely and maximum, sampled in this order: the rate of penetration of activity (d), in m/h: 6.4, 9.4, 15.5; the rate of penetration of activity (m), in m/h: 2.9, 4.85, 8.2; the duration of activity (e), in h: 24, 62, 240; the rate of the Rig dayrate line, in USD a day: 121000, 138500, 187500; the value of the Completion equipment line, in USD: 1050000, 1380000, 2150000. The risked run prices the base with no contingency line, because the risk model takes the place of the provision. The same case, with these ranges in this order, seed 20260904 and 20000 iterations, is the Suite case file https://petrolord.com/course-cases/wellcost-merlin-a12-advanced.wct.json: in the Well Cost and Time Estimator pick a wellbore, choose Import case and that file, open the Risk tab, run the Monte Carlo and switch on Full precision to read fields 4 to 6.",
+    "with the declared ranges stated above:"
+   ],
+   "lessons": [],
+   "lesson_contains": []
+  },
+  "evidence": "W3 (Suite #568): the case file carries the MERLIN A-12 programme, items and the five ranges in generator order at seed 20260904 and 20000 iterations; loaded through the studio's wctRun it reproduces all 16 wellcost keys within tol (wctFullPrecision.test.jsx), and RiskTab prints them at full precision behind the switch. The prompt now names the file and the route.",
   "notes": null
  },
  {
@@ -37614,30 +37766,35 @@
   "expected": 49.37724886122158,
   "tol": 3e-05,
   "rel_tol": 6.075672641122074e-07,
-  "source": "unobtainable",
-  "source_ref": "/root/wt-b5-nextgen/migrations/20260904_dr12_wellcost_course.sql (capstone prompt); data only in /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk)",
-  "printed": null,
+  "source": "suite-app",
+  "source_ref": "Suite Well Cost and Time Estimator, Risk tab with Full precision on, case file public/course-cases/wellcost-merlin-a12-advanced.wct.json (https://petrolord.com/course-cases/wellcost-merlin-a12-advanced.wct.json), Suite PR #568",
+  "printed": "full",
   "display_scale": 1.0,
   "display_ref": null,
   "prompt_precision": null,
   "prompt_decimals": null,
   "prompt_miss": null,
-  "rounding_miss": null,
+  "rounding_miss": 0.0,
   "answer_space": null,
   "guess_p": null,
-  "flags": [
-   "no_route"
-  ],
-  "class": "redesign",
-  "fix": {
-   "redesign": "Supply the MERLIN A-12 case and risk ranges, and make the seeded run readable at full precision (Suite RiskTab.jsx:24 and :171) or set tol to half a unit of its print."
-  },
-  "owner_decision": true,
+  "flags": [],
+  "class": "none",
+  "fix": null,
+  "owner_decision": false,
   "recommendation": "State the inputs AND name the route for the seeded run. Only the Suite Well Cost and Time studio reproduces the seed-20260904 run bit-identically (dr12_fields.mjs:43-48), and it prints risked cost as $MM to 2 decimals (/opt/petrolord-studio/workspaces/dev1/projects/petrolord-suite/src/pages/apps/WellCostTime/components/RiskTab.jsx:24 musd) and risked days to 1 decimal (RiskTab.jsx:171), against tols of a few USD and 3e-5 d. So either print full precision there or widen tol to half a unit of what it prints (5000 USD, 0.05 d).",
   "leak": false,
-  "reclassed_from": null,
-  "shipped": null,
-  "evidence": "The prompt says the MERLIN A-12 programme, line items and declared ranges are 'supplied with this capstone', but none of them is: the seventeen activities (intervals, ROPs, trip and running speeds, flat times), the priced line items with basis and category, and the five risk distributions exist only in the wave generator /root/dr-wip-wellcost/dr12_fields.mjs:66-186 (CAP, activities, items, risk). The capstone card renders only title and prompt (WellCostLearningPage.jsx:330-331), no lesson prints them (scan of src/content/courses/wellcost found no graded value), and the panels (/root/wt-b5-nextgen/src/components/course/panels/wellcost/) run teaching cases only. Same seeded run; tol 3e-5 d.",
+  "reclassed_from": "redesign",
+  "shipped": {
+   "migration": "20261025a_w2_wellcost.sql",
+   "wave": "w2",
+   "prompt_contains": [
+    "Six values for MERLIN A-12. The non-productive allowance is 28.5 percent. THE PROGRAMME, in order, each activity given as its label, then its kind and its inputs: (a) Rig move and spud: flat, 31 h; (b) Drill 26in surface hole: drill from 0 to 640 m at 34.5 m/h; (c) Run and cement 20in casing: run to 640 m at 445 m/h plus 13.5 h flat; (d) Drill 17-1/2in intermediate hole: drill from 640 to 2180 m at 9.4 m/h; (e) Stuck pipe, jarring and fishing: flat, 62 h; (f) Wait on weather: flat, 18.5 h; (g) Round trip at 2180 m: round trip from 2180 m at 620 m/h; (h) Run and cement 13-3/8in casing: run to 2180 m at 385 m/h plus 26.5 h flat; (i) Remedial cement squeeze on the 13-3/8in shoe: flat, 27 h; (j) Drill 12-1/4in production hole: drill from 2180 to 3320 m at 7.4 m/h; (k) Round trip at 3320 m: round trip from 3320 m at 620 m/h; (l) Run and cement 9-5/8in casing: run to 3320 m at 268 m/h plus 31 h flat; (m) Drill 8-1/2in reservoir hole: drill from 3320 to 3945 m at 4.85 m/h; (n) Wireline evaluation at TD: flat, 34.5 h; (o) Round trip at TD: round trip from 3945 m at 620 m/h; (p) Run and cement 7in liner: run to 3945 m at 210 m/h plus 22.5 h flat; (q) Completion and handover: flat, 96 h. THE LINE ITEMS, each given as its label, then its category and its basis with its rate or value: Rig dayrate: intangible, per day at 138500 USD a day; Integrated services spread: intangible, per day at 74200 USD a day; Mud and consumables: intangible, per metre at 218 USD a metre drilled; Bits and downhole tools: intangible, per metre at 96.5 USD a metre drilled; Wellhead and tree: tangible, a lump of 615000 USD booked at the end of activity (c); Fishing tools and services: intangible, a lump of 158000 USD booked at the end of activity (e); Cementing services: intangible, a lump of 372000 USD booked at the end of activity (l); Wireline and LWD evaluation: intangible, a lump of 265000 USD booked at the end of activity (n); Casing, liner and accessories: tangible, a lump of 1145000 USD booked at the end of activity (p); Completion equipment: tangible, a lump of 1380000 USD booked at the end of activity (q). THE DECLARED RANGES, each triangular as minimum, most likely and maximum, sampled in this order: the rate of penetration of activity (d), in m/h: 6.4, 9.4, 15.5; the rate of penetration of activity (m), in m/h: 2.9, 4.85, 8.2; the duration of activity (e), in h: 24, 62, 240; the rate of the Rig dayrate line, in USD a day: 121000, 138500, 187500; the value of the Completion equipment line, in USD: 1050000, 1380000, 2150000. The risked run prices the base with no contingency line, because the risk model takes the place of the provision. The same case, with these ranges in this order, seed 20260904 and 20000 iterations, is the Suite case file https://petrolord.com/course-cases/wellcost-merlin-a12-advanced.wct.json: in the Well Cost and Time Estimator pick a wellbore, choose Import case and that file, open the Risk tab, run the Monte Carlo and switch on Full precision to read fields 4 to 6.",
+    "with the declared ranges stated above:"
+   ],
+   "lessons": [],
+   "lesson_contains": []
+  },
+  "evidence": "W3 (Suite #568): the case file carries the MERLIN A-12 programme, items and the five ranges in generator order at seed 20260904 and 20000 iterations; loaded through the studio's wctRun it reproduces all 16 wellcost keys within tol (wctFullPrecision.test.jsx), and RiskTab prints them at full precision behind the switch. The prompt now names the file and the route.",
   "notes": null
  },
  {

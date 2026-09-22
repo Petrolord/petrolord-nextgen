@@ -2,7 +2,7 @@
 
 Status: APPROVED 2026-09-21. The owner approved all seven decisions (D1 to D7) as recommended ("Follow your recommended options for the seven decisions"). Building starts with W1.
 
-**W2 status (2026-09-22): BUILT, migrations PENDING owner apply.** 8 files `20261025a_w2_<course>.sql` (14 prompts, prompt copy only, no key/expected/tol moves) and 5 lesson edits (NextGen zip); 65 fields leave the no-route class. Owner script `/root/w2-apply/apply.sh`. Left: wellcost advanced risked fields (W3 Suite), nodal lift gas fields (W4 panel). See README.md "W2".
+**W2 status (2026-09-22): BUILT, migrations PENDING owner apply.** 8 files `20261025a_w2_<course>.sql` (14 prompts, prompt copy only, no key/expected/tol moves) and 5 lesson edits (NextGen zip); 68 fields move class and no_route falls from 185 to 119. Owner script `/root/w2-apply/apply.sh`; the separation and wellcost files wait for the W3 Suite zip. Left: nodal lift gas fields (W4 panel). See README.md "W2".
 
 **W1 status (2026-09-21): BUILT, migrations PENDING owner apply.** 13 files `20261024a_w1_<course>.sql` (15 re-keys, 8 tightenings, prompt copy for integrity, rodpump and seismolord) and 21 files `20261024b_w1_openbook_<course>.sql` (the D4 C label on 57 tiers: the 56 below plus seismolord intermediate, whose new zero-lag field and stated lag are printed in its lessons). Owner script `/root/w1-apply/apply.sh`, after the round-off. The D5 allowlist is empty: W1 re-keys no tier known to hold attempts. The petrophysics beginner auto-submit was already fixed in #194 (verified). Panels and lessons reach learners with the next NextGen zip. See README.md "W1". Written 2026-09-21 after the owner chose to finish the small B4/B5 items now and to cost group 3 as its own programme.
 

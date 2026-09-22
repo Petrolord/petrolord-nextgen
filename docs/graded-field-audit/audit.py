@@ -201,6 +201,14 @@ def post_check(before, after, rows, waves=()):
                     errs.append(f'{k}: something other than tol moved')
             elif f0 != f1:
                 errs.append(f'{k}: moved but the recut does not name it')
+    # W2 lesson route: the lesson that now prints the form must carry it (read
+    # from the repository this folder sits in; the apply dry run extracts
+    # src/content beside it)
+    for r in live:
+        for rel, text in r['shipped'].get('lesson_contains') or []:
+            body = LESSON_READ(rel)
+            if body is None or text not in body:
+                errs.append(f"{(r['course'], r['tier'], r['key'])}: the W2 lesson text is not in {rel}")
     # W2 publishes inputs: every field it unlocks names the text its tier's
     # live prompt must now carry
     for r in live:
@@ -236,6 +244,15 @@ def post_check(before, after, rows, waves=()):
 
 
 ANNOTS_FOR_POST = {}
+REPO = os.path.abspath(os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', '..'))
+
+
+def _lesson_read(rel):
+    p = os.path.join(REPO, rel)
+    return open(p, encoding='utf-8').read() if os.path.exists(p) else None
+
+
+LESSON_READ = _lesson_read
 
 
 def selftest(caps, annots):
@@ -339,6 +356,18 @@ def selftest(caps, annots):
         ok &= clean
         red = bool(post_check(caps, after(), rows, ()))
         print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: the wave's state checked without --wave")
+        ok &= red
+    lesson_rows = [r for r in rows if isinstance(r.get('shipped'), dict) and r['shipped'].get('lesson_contains')]
+    if lesson_rows:
+        global LESSON_READ
+        cut = lesson_rows[0]['shipped']['lesson_contains'][0][0]
+        saved = LESSON_READ
+        LESSON_READ = lambda rel: '' if rel == cut else saved(rel)
+        try:
+            red = bool(post_check(caps, after(), rows, waves))
+        finally:
+            LESSON_READ = saved
+        print(f"  post control {'RED (good)' if red else 'GREEN (BROKEN)'}: a W2 lesson without its printed form ({os.path.basename(cut)})")
         ok &= red
     if prompt_text:
         tier = next(k for k, v in prompt_text.items() if v['wave'] in waves)

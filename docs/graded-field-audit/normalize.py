@@ -139,7 +139,8 @@ SHIPPED.update(w1_shipped())
 # `audit.py --post --wave w2` requires in the live prompt, or the lesson files
 # that carry it (checked by src/lib/w2PublishedInputs.test.js, which also
 # re-runs the vendored engines on the published inputs). A field a spec names
-# but leaves for a later wave (`not_reproduced`, `suite_only`) is not moved.
+# but leaves for a later wave (`not_reproduced`) is not moved; a `suite_only`
+# field moves to source suite-app when the spec names its W3 `suite_route`.
 W2_LEFT = {'not_reproduced', 'suite_only'}
 
 
@@ -156,6 +157,17 @@ def w2_shipped():
             where = ' and '.join(x for x in ((
                 'the capstone prompt (W2 publishes the inputs)' if edits else ''),
                 ('the lessons ' + ', '.join(os.path.basename(l) for l in lessons) if lessons else '')) if x)
+            # a field the prompt now routes to a Suite surface W3 built (the
+            # wellcost case file): readable at full precision, source suite-app
+            sr = t.get('suite_route')
+            if sr:
+                for key in t.get('suite_only', []):
+                    out[(course, tier, key)] = {
+                        'migration': f'20261025a_w2_{course}.sql', 'wave': 'w2', 'decided': True, 'class': 'none',
+                        'annot_update': {'source': 'suite-app', 'source_ref': sr['source_ref'], 'printed': 'full',
+                                         'answer_space': None, 'guess_p': None, 'fix': None, 'evidence': sr['evidence']},
+                        'prompt_contains': [b for _, b in edits], 'lessons': [], 'lesson_contains': [],
+                    }
             for key in moves:
                 e = t['expected'][key]
                 up = {
@@ -170,6 +182,7 @@ def w2_shipped():
                     'migration': f'20261025a_w2_{course}.sql' if edits else None, 'wave': 'w2', 'decided': True,
                     'class': 'none', 'annot_update': up,
                     'prompt_contains': [b for _, b in edits], 'lessons': lessons,
+                    'lesson_contains': [[f, a + ins] for f, a, ins in t.get('lesson_edits', [])],
                 }
     return out
 

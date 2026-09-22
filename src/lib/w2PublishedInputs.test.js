@@ -17,9 +17,11 @@
 //      each engine call; no graded formula is restated there or here);
 //   2. every published number is in the W2 prompt the migration writes, and
 //      every lesson insertion is in its lesson file;
-//   3. the fields a spec leaves for a later wave are exactly the documented
-//      ones (wellcost's three seeded Monte Carlo fields are the Suite's, W3;
-//      nodal's two lift gas fields need a panel mode, W4).
+//   3. the fields this gate cannot reproduce are exactly the documented ones:
+//      wellcost's three seeded Monte Carlo fields run on the Suite's canonical
+//      sampler, and the prompt points at W3's case file (Suite #568, whose
+//      wctFullPrecision.test.jsx reproduces them); nodal's two lift gas fields
+//      need a panel mode (W4).
 // Negative controls: a perturbed input must break the reproduction of some key
 // on every tier, and a number dropped from the prompt must be caught.
 import { describe, it, expect } from 'vitest';
