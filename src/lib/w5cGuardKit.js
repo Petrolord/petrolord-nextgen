@@ -73,18 +73,24 @@ export function integerLeaksIn(text, fields) {
  * Every decimal number printed in a text that lands within a graded
  * non-integer field's tolerance: a nearby worked value (a neighbouring rate
  * on a ladder, a rounded print) passes the grader as surely as the value
- * itself, so a strip must clear these too. `allow` lists printed numbers that
- * are stated INPUTS of the case (a published table entry the prompt tells the
- * learner to use), each with its reason; they are reported, not failed.
+ * itself, so a strip must clear these too. Only PRECISE graded fields are
+ * swept (tolerance within `maxRel` of the value, 1 percent by default) and
+ * only printed numbers carrying at least `minDp` decimals: a loose field (a
+ * net pay to 0.75 m, a saturation to 0.02) sits near half the numbers any
+ * lesson prints, and a coincidence there says nothing. `allow` lists printed
+ * numbers that are not the answer (a stated input, a different quantity),
+ * each with its reason in the calling test.
  */
-export function nearValuesIn(text, fields, allow = {}) {
+export function nearValuesIn(text, fields, allow = {}, { maxRel = 0.01, minDp = 3 } = {}) {
   const hits = [];
-  const nums = [...text.matchAll(/(?<![0-9.])-?\d+\.\d+(?![0-9])/g)].map((m) => m[0]);
+  const nums = [...text.matchAll(/(?<![0-9.])-?\d+\.(\d+)(?![0-9])/g)].filter((m) => m[1].length >= minDp).map((m) => m[0]);
   for (const f of fields) {
     const v = Number(f.expected);
-    if (Number.isInteger(v) && Number(f.tol) === 0) continue;
+    const tol = Number(f.tol);
+    if (Number.isInteger(v) && tol === 0) continue;
+    if (!(tol <= maxRel * Math.abs(v))) continue;
     for (const t of nums) {
-      if (Math.abs(Number(t) - v) <= Number(f.tol) && !(allow[f.key] || []).includes(t)) hits.push({ key: f.key, text: t });
+      if (Math.abs(Number(t) - v) <= tol && !(allow[f.key] || []).includes(t)) hits.push({ key: f.key, text: t });
     }
   }
   return hits;
