@@ -7,13 +7,13 @@
 // graded), and the Learning Mode page intro printed that same factor to three
 // decimals, inside the grader's band. The listing now opens on the 131-station
 // teaching well, the ladder on offset 05, and the intro prints the factor to
-// two decimals. The W1 open-book note comes off both capstone lessons and both
-// briefs (migration 20261028d_w5_welldesign.sql).
+// two decimals. The W1 open-book note comes off the three capstone lessons and
+// the three briefs (migration 20261028d_w5_welldesign.sql).
 //
-// The Professional tier is NOT stripped here: its panel (UncertaintyExplorer)
-// opens on station 267, the capstone station, and that file belongs to the W4a
-// typed-mode work. This gate proves the leak is still there and the label is
-// still honest, so the tier cannot be declared clean by accident.
+// The Professional tier is stripped too: its panel (UncertaintyExplorer) used
+// to open on station 267, the capstone station, and printed every Professional
+// answer. W4a (#204) moved its default to station 180 in the tangent, a
+// station no capstone grades from, so this gate sweeps all three tiers.
 //
 // Every graded answer comes from capstoneValues(), which runs the vendored
 // engine; the tolerances are the live published ones (the audit's
@@ -33,8 +33,8 @@ import { gradedTargets, leakHits, htmlText, publishedFields, OPEN_BOOK } from '.
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REPO = path.resolve(HERE, '../../../../..');
 const COURSE = 'welldesign';
-const STRIPPED = ['beginner', 'advanced'];
-const HELD = ['intermediate'];
+const STRIPPED = ['beginner', 'intermediate', 'advanced'];
+const HELD = [];
 const CAPSTONE_LESSON = {
   beginner: 'beginner/m06-the-associate-reading/l02-working-the-capstone.md',
   intermediate: 'intermediate/m06-the-professional-reading/l02-working-the-capstone.md',
@@ -129,24 +129,13 @@ describe('NEGATIVE CONTROLS: the gate sees a leak when there is one', () => {
     expect(leakHits(shipped, targets, 'intro').some((h) => h.includes('advanced/well10_min_sf'))).toBe(true);
   });
 
+  it('a Professional answer printed as station 267 printed it is caught', () => {
+    const planted = `Lateral sigma at this station ${engine.intermediate.well1_sigma_lateral.toFixed(4)} m`;
+    expect(leakHits(planted, targets, 'station 267').some((h) => h.includes('intermediate/well1_sigma_lateral'))).toBe(true);
+  });
+
   it('a graded answer planted in a lesson, printed with a thousands comma as the panels print it, is caught', () => {
     const planted = `${lessons[0].text}\nThe TVD at TD is ${engine.beginner.golden_ft_tvd.toLocaleString('en-US', { maximumFractionDigits: 4 })} ft.`;
     expect(leakHits(planted, targets, 'planted').some((h) => h.includes('beginner/golden_ft_tvd'))).toBe(true);
-  });
-});
-
-describe(`the held tier (${HELD.join(', ')}) still leaks, so it keeps its open-book label`, () => {
-  const targets = targetsFor(HELD);
-
-  it('UncertaintyExplorer still opens on the capstone station (W4a owns the file)', () => {
-    const hits = leakHits(render(UncertaintyExplorer), targets, 'wd-uncertainty-explorer');
-    expect(hits.some((h) => h.includes('intermediate/well1_sigma_lateral'))).toBe(true);
-  }, 60000);
-
-  HELD.forEach((tier) => {
-    it(`${tier}: the capstone lesson still carries the open-book note`, () => {
-      const text = fs.readFileSync(path.join(lessonRoot, CAPSTONE_LESSON[tier]), 'utf8');
-      expect(OPEN_BOOK.test(text)).toBe(true);
-    });
   });
 });
