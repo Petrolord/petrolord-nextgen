@@ -13,11 +13,13 @@ import {
   TIER_LABELS, TIERS, seatsRemaining, poolState, canAssign, daysLeft, formatPrice, poolCovers, summarizeAssignments, seatScopeLabel,
 } from '@/lib/sponsorPools';
 import { isBonusTier, assignToast } from '@/lib/prereqWaiver';
+import SponsorProgressPanel from '@/components/academy/SponsorProgressPanel';
 
 // The sponsor console (Breeze Energy onboarding, 2026-09-07): a training or
 // technical lead runs the employer's block of enrolments here. Assign a
 // named learner to a course and tier, cancel and reassign when roles change,
-// apply seats to new joiners, and read the pool report. Petrolord admins
+// apply seats to new joiners, read the pool report and (2026-09-23) follow
+// each sponsored learner's progress and scores. Petrolord admins
 // see every sponsor. All mutations are definer functions; this page is a
 // shell over them, not the enforcement layer.
 
@@ -49,6 +51,7 @@ const SponsorConsolePage = () => {
   const [tier, setTier] = useState('beginner');
   const [note, setNote] = useState('');
   const [cancelling, setCancelling] = useState(null); // { id, reason }
+  const [progressKey, setProgressKey] = useState(0); // bumps to reload the progress panel
 
   const pools = useMemo(() => groups.flatMap((g) => (g.pools || []).map((p) => ({ ...p, sponsor_name: g.sponsor?.name }))), [groups]);
   const pool = pools.find((p) => p.id === poolId) || null;
@@ -85,7 +88,7 @@ const SponsorConsolePage = () => {
       const res = await sponsorAssign({ poolId: pool.id, email: email.trim(), appSlug, tier, note: note || null });
       toast({ title: res.seat_consumed === false ? 'Enrolled, no seat used' : 'Seat assigned', description: assignToast({ ...res, email }, apps.find((a) => a.slug === appSlug)?.name || appSlug, TIER_LABELS[tier]), className: 'bg-[#BFFF00] text-slate-900' });
       setEmail(''); setNote('');
-      await refresh(); await loadReport(pool.id);
+      await refresh(); await loadReport(pool.id); setProgressKey((k) => k + 1);
     } catch (err) {
       toast({ title: 'Could not assign', description: err.message, variant: 'destructive' });
     } finally { setBusy(false); }
@@ -98,7 +101,7 @@ const SponsorConsolePage = () => {
       const res = await sponsorCancel(cancelling.id, cancelling.reason || null);
       toast({ title: res.seat_returned ? 'Seat returned to the pool' : 'Assignment closed', description: res.seat_returned ? 'The enrollment is cancelled and the seat can be assigned again.' : 'The learner had already earned the certification, so the seat is consumed.' });
       setCancelling(null);
-      await refresh(); await loadReport(poolId);
+      await refresh(); await loadReport(poolId); setProgressKey((k) => k + 1);
     } catch (err) {
       toast({ title: 'Could not cancel', description: err.message, variant: 'destructive' });
     } finally { setBusy(false); }
@@ -135,9 +138,9 @@ const SponsorConsolePage = () => {
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div>
             <h1 className="text-3xl font-bold text-white">Sponsor console</h1>
-            <p className="mt-1 text-gray-400">Assign your organisation's enrolments, reassign them when roles change, and see where every seat went.</p>
+            <p className="mt-1 text-gray-400">Assign your organisation's enrolments, reassign them when roles change, see where every seat went, and follow each learner's progress and scores.</p>
           </div>
-          <Button variant="outline" onClick={() => { refresh(); loadReport(poolId); }} className="border-gray-600 text-gray-200"><RefreshCw className="h-4 w-4 mr-2" />Refresh</Button>
+          <Button variant="outline" onClick={() => { refresh(); loadReport(poolId); setProgressKey((k) => k + 1); }} className="border-gray-600 text-gray-200"><RefreshCw className="h-4 w-4 mr-2" />Refresh</Button>
         </div>
 
         <div className="grid gap-4 md:grid-cols-3">
@@ -259,6 +262,14 @@ const SponsorConsolePage = () => {
               </CardContent>
             </Card>
           </div>
+        )}
+
+        {pool && (
+          <SponsorProgressPanel
+            key={`${pool.id}-${progressKey}`}
+            poolId={pool.id}
+            fileStem={`${(pool.sponsor_name || 'sponsor').replace(/\W+/g, '-')}-${(pool.name || 'pool').replace(/\W+/g, '-')}`}
+          />
         )}
       </motion.div>
     </>

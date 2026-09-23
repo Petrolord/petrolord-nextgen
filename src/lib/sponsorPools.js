@@ -77,3 +77,89 @@ export const BLOCK_OFFERS = Object.freeze([
   { key: 'standard', name: 'Standard', seats: 50, price_minor: 540000000 },
   { key: 'programme', name: 'Programme', seats: 100, price_minor: 960000000 },
 ]);
+
+// ---------------------------------------------------------------------------
+// Learner progress (owner decision 2026-09-23): what a training lead sees
+// about each learner they sponsor, from academy_sponsor_learner_progress.
+// Scores and attempt counts only, never answers; the server returns only
+// the assigned course and tier, and nothing for a cancelled seat.
+
+/** Days without activity after which a learner is flagged. */
+export const INACTIVE_DAYS = 14;
+
+/** Whole percent of the course's lessons read (0 when there is no structure). */
+export function progressPct(row) {
+  const total = Number(row?.lessons_total) || 0;
+  if (!total) return 0;
+  return Math.min(100, Math.round((100 * (Number(row.lessons_read) || 0)) / total));
+}
+
+/** "4/6", or "no attempt". */
+export function scoreText(best, max) {
+  if (best == null || max == null) return 'no attempt';
+  return `${best}/${max}`;
+}
+
+/** Module quizzes: how many passed, and the mean of the best scores (percent) over the quizzes attempted. */
+export function quizSummary(row) {
+  const mods = Array.isArray(row?.modules) ? row.modules : [];
+  const tried = mods.filter((m) => Number(m.quiz_attempts) > 0 && Number(m.quiz_max_score) > 0);
+  const avg = tried.length
+    ? Math.round(tried.reduce((s, m) => s + (100 * Number(m.quiz_best_score)) / Number(m.quiz_max_score), 0) / tried.length)
+    : null;
+  return { passed: mods.filter((m) => m.quiz_passed).length, total: mods.length, attempted: tried.length, avgPct: avg };
+}
+
+/** Whole days since the last activity in the sponsored course, or null when there is none. */
+export function daysSinceActive(row, nowMs = Date.now()) {
+  if (!row?.last_active_at) return null;
+  return Math.max(0, Math.floor((nowMs - Date.parse(row.last_active_at)) / 86400000));
+}
+
+/**
+ * Flag a learner who has gone quiet: an active, uncertified seat with no
+ * activity for INACTIVE_DAYS, counting from the assignment when there has
+ * been no activity at all.
+ */
+export function isInactive(row, nowMs = Date.now(), days = INACTIVE_DAYS) {
+  if (!row || row.status !== 'active' || row.certificate) return false;
+  const since = row.last_active_at || row.assigned_at;
+  if (!since) return false;
+  return nowMs - Date.parse(since) >= days * 86400000;
+}
+
+/** Headline figures for the progress card (active seats only). */
+export function summarizeProgress(rows, nowMs = Date.now()) {
+  const active = (Array.isArray(rows) ? rows : []).filter((r) => r.status === 'active');
+  const avg = active.length ? Math.round(active.reduce((s, r) => s + progressPct(r), 0) / active.length) : 0;
+  return {
+    learners: active.length,
+    avgProgressPct: avg,
+    finalPassed: active.filter((r) => r.final_exam?.passed).length,
+    capstonePassed: active.filter((r) => r.capstone?.passed).length,
+    certified: active.filter((r) => r.certificate).length,
+    inactive: active.filter((r) => isInactive(r, nowMs)).length,
+    ended: (Array.isArray(rows) ? rows : []).length - active.length,
+  };
+}
+
+const csvCell = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
+const isoDay = (iso) => (iso ? String(iso).slice(0, 10) : '');
+
+/** The progress CSV: one line per active seat. */
+export function progressCsv(rows, nowMs = Date.now()) {
+  const head = ['learner', 'email', 'course', 'tier', 'progress_pct', 'lessons_read', 'lessons_total', 'modules_complete', 'modules_total',
+    'module_quizzes_passed', 'module_quiz_avg_best_pct', 'final_exam_best', 'final_exam_attempts', 'final_exam_passed',
+    'capstone_best', 'capstone_attempts', 'capstone_passed', 'certificate', 'certificate_valid_until', 'last_active', 'inactive'];
+  const lines = (Array.isArray(rows) ? rows : []).filter((r) => r.status === 'active').map((r) => {
+    const q = quizSummary(r);
+    return [r.display_name, r.email, r.course_name || r.app_slug, TIER_LABELS[r.course_tier] || r.course_tier,
+      progressPct(r), r.lessons_read, r.lessons_total, r.modules_complete, r.modules_total,
+      `${q.passed}/${q.total}`, q.avgPct ?? '',
+      scoreText(r.final_exam?.best_score, r.final_exam?.max_score), r.final_exam?.attempts ?? 0, r.final_exam?.passed ? 'yes' : 'no',
+      scoreText(r.capstone?.best_score, r.capstone?.max_score), r.capstone?.attempts ?? 0, r.capstone?.passed ? 'yes' : 'no',
+      r.certificate?.certificate_number || '', isoDay(r.certificate?.valid_until), isoDay(r.last_active_at),
+      isInactive(r, nowMs) ? 'yes' : 'no'].map(csvCell).join(',');
+  });
+  return [head.join(','), ...lines].join('\n');
+}
