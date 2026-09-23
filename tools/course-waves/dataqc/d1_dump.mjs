@@ -1145,7 +1145,7 @@ table(['setting', 'default', 'whose choice'], [
   ['waterCutCheck tolerance', eTxt(wcDef.basis.tolerance), 'Petrolord'],
   ['indexCheck stepTolerance', ix.basis.stepTolerance, 'Petrolord'],
   ['indexCheck expected step', ix.expectedStepSource, 'Petrolord'],
-  ['duplicateIdentifiers maxDistance and the digit rule', `${idDef.basis.maxDistance}, digits must match ${idDef.basis.digitsMustMatch}`, 'Petrolord'],
+  ['duplicateIdentifiers maxDistance and the digit rule', `${idDef.basis.maxDistance}, ${idDef.basis.digitsMustMatch ? 'digits must match' : 'digits need not match'}`, 'Petrolord'],
   ['mahalanobis alpha', f6(mh.alpha), 'Petrolord'],
   ['zScores threshold', S(zg.threshold), 'the usual convention'],
   ['modifiedZScores threshold', f6(mg.threshold), 'Iglewicz and Hoaglin, as NIST prints it'],
