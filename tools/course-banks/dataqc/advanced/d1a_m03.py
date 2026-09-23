@@ -93,7 +93,7 @@ q(2, "From day 16 to day 40 on EKENE-3, each chart with its own settings, how ma
   "Individuals 0, EWMA 11 and CUSUM 20, since a single chart point cannot see a shift at all"],
  "Section 28 prints 1, 11 and 20 low signals from day 16 to day 40. 5, 15 and 28 are the days with any signal, high or low, over all forty days, which includes the glitch. The individuals chart does signal low once, on day 22, where a single day falls past three sigma.")
 
-q(0, "Which chart first signals low on EKENE-3 at or after day 16, each with the settings of its own module?",
+q(0, "Of the individuals chart, the EWMA and the CUSUM, which is the first to mark the planted downward shift?",
  "The CUSUM, on day 21; the EWMA and the individuals chart first signal low on day 22",
  ["The EWMA, on day 16, since its memory gathers the shift from the very day it begins",
   "The individuals chart, on day 16, since its three sigma limit is the narrowest of the three",
