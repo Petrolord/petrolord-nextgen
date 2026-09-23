@@ -8,7 +8,7 @@
    "Whichever of the two gives the larger z, so the test is as sensitive as the data allow."
   ],
   "answer": 2,
-  "explanation": "Digest Section 17 states z = (x - mean) / s with the sample standard deviation (n - 1) by default, as NIST/SEMATECH 1.3.5.17 defines it. The population SD is available only when the caller asks for it, the MAD belongs to the modified z-score, and the engine never picks a spread by the result it gives."
+  "explanation": "The z-score module states z = (x - mean) / s with the sample standard deviation (n - 1) by default, as NIST/SEMATECH 1.3.5.17 defines it. The population SD is available only when the caller asks for it, the MAD belongs to the modified z-score, and the engine never picks a spread by the result it gives."
  },
  {
   "prompt": "EKENE-3's ten gauge readings have a mean of 215.250000 and a sample SD of 8.732220. What z does `zScores` return for entry 7, the glitch at 240.100000?",
@@ -30,7 +30,7 @@
    "(n - 1) / sqrt(n)"
   ],
   "answer": 3,
-  "explanation": "Section 17 gives the ceiling (n - 1) / sqrt(n) for the sample SD. The ceiling sqrt(n - 1) belongs to the population SD, which the engine names in its basis block when that choice is made. However far out a value sits, it drags the mean and widens the SD, and the engine caps nothing at the threshold."
+  "explanation": "The z-score module gives the ceiling (n - 1) / sqrt(n) for the sample SD. The ceiling sqrt(n - 1) belongs to the population SD, which the engine names in its basis block when that choice is made. However far out a value sits, it drags the mean and widens the SD, and the engine caps nothing at the threshold."
  },
  {
   "prompt": "On the ten gauge readings the engine returns `maxPossibleAbsZ` 2.846050 and `thresholdReachable` false, with 0 flags at 3. What does that zero say?",
@@ -41,7 +41,7 @@
    "That the engine refused the call for a short series and returned a default result in its place."
   ],
   "answer": 1,
-  "explanation": "Section 17: at n = 10 no value can pass |z| > 3 with the sample SD, however wild. A zero from a test that could not fire is silence and carries no verdict. Entry 7 was in the call and reached 2.845783, and the engine returned a result with no refusal."
+  "explanation": "The z-score module: at n = 10 no value can pass |z| > 3 with the sample SD, however wild. A zero from a test that could not fire is silence and carries no verdict. Entry 7 was in the call and reached 2.845783, and the engine returned a result with no refusal."
  },
  {
   "prompt": "In the ceiling table, what is the smallest sample size at which a z beyond 3 becomes reachable with the sample SD?",
@@ -52,7 +52,7 @@
    "20 values, where the ceiling is 4.248529 and 3 is clear."
   ],
   "answer": 1,
-  "explanation": "The table reads false at 10 values, ceiling 2.846050, and true at 11, ceiling 3.015113. At 12 it is already true a second time, and 20 values is well past the point where 3 can be reached."
+  "explanation": "The table reads false at 10 values, ceiling 2.846050, and true at 11, ceiling 3.015113. At 12 it is true as well, and 20 values is well past the point where 3 can be reached."
  },
  {
   "prompt": "The caller switches the gauge call to the population standard deviation. What changes?",
@@ -63,7 +63,7 @@
    "The SD falls to 8.284111 and entry 7's z rises to 2.999718, and nothing is flagged at 3."
   ],
   "answer": 3,
-  "explanation": "The mean is 215.250000 in both columns of Section 17; only the spread changes. Dividing by n gives the smaller SD, 8.284111, so every z grows, and entry 7 reaches 2.999718, still short of 3, with 0 flags."
+  "explanation": "The mean is 215.250000 in both columns of the z-score module; only the spread changes. Dividing by n gives the smaller SD, 8.284111, so every z grows, and entry 7 reaches 2.999718, still short of 3, with 0 flags."
  },
  {
   "prompt": "Nine zeros and a one are run with `sd: 'population'` at a stated threshold of 2.9. What ceiling does the engine report?",
@@ -74,7 +74,7 @@
    "2.999718, the population z of the gauge glitch in its ten readings."
   ],
   "answer": 0,
-  "explanation": "Section 31: the ceiling follows the chosen standard deviation. With the population SD the ten values reach 3.000000, `thresholdReachable` is true and 1 flag fires at 2.9. The sample SD on the same values stops at 2.846050; the other two figures belong to other rows."
+  "explanation": "The engine notes: the ceiling follows the chosen standard deviation. With the population SD the ten values reach 3.000000, `thresholdReachable` is true and 1 flag fires at 2.9. The sample SD on the same values stops at 2.846050; the other two figures belong to other rows."
  },
  {
   "prompt": "EKENE-7's fourteen core plugs could reach a z of 3.474396. The fractured plug at entry 8 reaches 2.985356 and nothing is flagged. Why?",
@@ -85,7 +85,7 @@
    "Entry 8 is not the plug farthest from the mean, so its z is not the largest one in the set."
   ],
   "answer": 2,
-  "explanation": "At fourteen values 3 is reachable, so the ceiling is not the cause. Section 17 prints the sample SD at 0.019859 with all fourteen and 0.010574 with entry 8 left out: the plug widens the yardstick that measures it. The default stays the sample SD, and entry 8 carries the largest z, 2.985356."
+  "explanation": "At fourteen values 3 is reachable, so the ceiling is not the cause. The z-score module prints the sample SD at 0.019859 with all fourteen and 0.010574 with entry 8 left out: the plug widens the yardstick that measures it. The default stays the sample SD, and entry 8 carries the largest z, 2.985356."
  },
  {
   "prompt": "Measured against the mean and sample SD of the other thirteen plugs, where does the fractured plug at entry 8 sit?",
@@ -96,7 +96,7 @@
    "6.038080"
   ],
   "answer": 3,
-  "explanation": "Section 17 derives 6.038080 against the other thirteen. Measured against a spread that includes itself the plug reads 2.985356, which is what `zScores` returns. 2.066042 is the largest z among the thirteen, and 5.890633 is the modified z-score."
+  "explanation": "The z-score module derives 6.038080 against the other thirteen. Measured against a spread that includes itself the plug reads 2.985356, which is what `zScores` returns. 2.066042 is the largest z among the thirteen, and 5.890633 is the modified z-score."
  },
  {
   "prompt": "With the fractured plug left out, what do the thirteen remaining plugs return?",
@@ -107,7 +107,7 @@
    "A refusal, since thirteen values sit under the ceiling and no z can be computed."
   ],
   "answer": 0,
-  "explanation": "Section 17 prints the second row: 0.217154, 0.010574 and 2.066042, and no flag. The full-set figures are 0.221714 and 0.019859. The 6.038080 belongs to entry 8 itself against the thirteen, and a series of thirteen raises no refusal."
+  "explanation": "The z-score module prints the second row: 0.217154, 0.010574 and 2.066042, and no flag. The full-set figures are 0.221714 and 0.019859. The 6.038080 belongs to entry 8 itself against the thirteen, and a series of thirteen raises no refusal."
  },
  {
   "prompt": "A report states that the gauge glitch sits 'almost three sigma out'. What does this course require the report to add?",
@@ -118,7 +118,7 @@
    "The same distance converted to a percentage of the mean, so it reads without units."
   ],
   "answer": 2,
-  "explanation": "Section 32 makes sigma a standard deviation with its source named: sample SD, 1.4826 x MAD or another stated source. Here the z was measured against the sample SD, 8.732220. The course uses no P label at all, and a percentage of the mean is a different quantity."
+  "explanation": "The course vocabulary makes sigma a standard deviation with its source named: sample SD, 1.4826 x MAD or another stated source. Here the z was measured against the sample SD, 8.732220. The course uses no P label at all, and a percentage of the mean is a different quantity."
  },
  {
   "prompt": "Which reading of a flag from `zScores` does this course accept?",
@@ -151,7 +151,7 @@
    "A flag needs |z| strictly beyond 3, and 2.999718 sits just below it."
   ],
   "answer": 3,
-  "explanation": "Section 17 flags a value when |z| > 3. 2.999718 is below that, and the population column shows 0 flags. The engine accepts the population SD and compares the unrounded figure; the population ceiling at ten values is 3.000000."
+  "explanation": "The z-score module flags a value when |z| > 3. 2.999718 is below that, and the population column shows 0 flags. The engine accepts the population SD and compares the unrounded figure; the population ceiling at ten values is 3.000000."
  },
  {
   "prompt": "Twenty daily rates are screened with `zScores` at 3 and the sample SD. Can any of them be flagged?",
@@ -162,6 +162,6 @@
    "Only with the population SD, whose ceiling at 20 is 3.000000."
   ],
   "answer": 2,
-  "explanation": "The ceiling table prints 4.248529 at 20 values, reachable at 3. 2.846050 is the ten-value row, the ceiling first passes 3 at eleven values, and 3.000000 is the population ceiling for the ten-value case in Section 31."
+  "explanation": "The ceiling table prints 4.248529 at 20 values, reachable at 3. 2.846050 is the ten-value row, the ceiling first passes 3 at eleven values, and 3.000000 is the population ceiling for the ten-value case in the engine notes."
  }
 ]

@@ -17,7 +17,7 @@ q(2, "Gauge entry 7 reads 2.845783 by the z-score and 186.162000 by the modified
  ["The modified z-score squares each deviation from the median before it divides by the MAD.",
   "The z-score defaults to the population SD, which damps the distance of every reading.",
   "The modified z-score counts the glitch twice, once in the median and once in the MAD."],
- "Section 18: the median is 212.500000 and the MAD 0.100000 with or without entry 7, while the sample SD is 8.732220 with it and 0.126930 without. The z default is the sample SD, and the modified z-score is linear in the deviation.")
+ "The median and MAD module: the median is 212.500000 and the MAD 0.100000 with or without entry 7, while the sample SD is 8.732220 with it and 0.126930 without. The z default is the sample SD, and the modified z-score is linear in the deviation.")
 
 # 2 TWO-MODULE m01 + m05
 q(0, "On the fourteen core plugs the z-score flags nothing and Grubbs' test rejects, yet both measure the same 2.985356. What differs?",
@@ -25,7 +25,7 @@ q(0, "On the fourteen core plugs the z-score flags nothing and Grubbs' test reje
  ["The spread: Grubbs recomputes the SD with the suspect plug left out before it divides.",
   "The centre: Grubbs measures from the median of the plugs, which the fractured plug cannot move.",
   "The sample: Grubbs tests the thirteen ordinary plugs and compares entry 8 with them."],
- "Section 22: G is the largest |Y - mean| / s with the sample SD, 2.985356 on these plugs, the same as the largest |z| of Section 17. The z-score compares it with 3; Grubbs with 2.507321 for n = 14 at alpha 0.05, two-sided.")
+ "The Grubbs lesson: G is the largest |Y - mean| / s with the sample SD, 2.985356 on these plugs, the same as the largest |z| of the z-score module. The z-score compares it with 3; Grubbs with 2.507321 for n = 14 at alpha 0.05, two-sided.")
 
 # 3 TWO-MODULE m02 + m05
 q(3, "On the two-plug copy, the modified z-score flags entries 2 and 8 while Grubbs' test rejects nothing. Why do the two families part?",
@@ -33,7 +33,7 @@ q(3, "On the two-plug copy, the modified z-score flags entries 2 and 8 while Gru
  ["The modified z-score uses a lower threshold than Grubbs' critical value of 2.507321.",
   "Grubbs' test refuses a set with two outliers in it, so it returns a null result there instead.",
   "The modified z-score runs on the population SD, which the second plug cannot move."],
- "Section 24: the modified z and the fences measure against a median and quartiles the outliers barely move, and z and Grubbs against a mean and SD they help set. Section 22 prints the sample SD rising from 0.019859 to 0.024800 with the second plug, and G falling below the critical value.")
+ "The method comparison: the modified z and the fences measure against a median and quartiles the outliers barely move, and z and Grubbs against a mean and SD they help set. The Grubbs lesson prints the sample SD rising from 0.019859 to 0.024800 with the second plug, and G falling below the critical value.")
 
 # 4
 q(1, "At R7 and k 1.5, which gauge entries do Tukey's fences flag?",
@@ -41,7 +41,7 @@ q(1, "At R7 and k 1.5, which gauge entries do Tukey's fences flag?",
  ["Entries 1 and 7",
   "No entry",
   "Entry 1 alone"],
- "Section 24's gauge row reads 7 under Tukey fences, R7 k 1.5. Entries 1 and 7 is the Hampel cell, and the z-score is the method that flags none.")
+ "The method comparison's gauge row reads 7 under Tukey fences, R7 k 1.5. Entries 1 and 7 is the Hampel cell, and the z-score is the method that flags none.")
 
 # 5 TWO-MODULE m03 + m04
 q(2, "Which two runs catch the gamma ray spike at entry 170?",
@@ -49,7 +49,7 @@ q(2, "Which two runs catch the gamma ray spike at entry 170?",
  ["Tukey's fences on the whole log, and the z-score on the whole channel.",
   "The z-score on the whole channel, and the Hampel window on the same channel.",
   "Only the Hampel window, since no global rule can see a spike inside a sand."],
- "Section 20: on the water sand the default fences flag entry 170, and on the whole log they flag 0. Section 21: Hampel flags entry 170 at halfWindow 3 and nSigma 3, while the z-score on the whole channel reads 0.900269 and flags nothing.")
+ "The fences lesson: on the water sand the default fences flag entry 170, and on the whole log they flag 0. The Hampel module: Hampel flags entry 170 at halfWindow 3 and nSigma 3, while the z-score on the whole channel reads 0.900269 and flags nothing.")
 
 # 6 TWO-MODULE m01 + m03
 q(3, "Entry 170 reads z 0.900269 on the whole gamma ray channel. Where does its reading of 90.590000 sit against the water sand's default fences?",
@@ -57,15 +57,15 @@ q(3, "Entry 170 reads z 0.900269 on the whole gamma ray channel. Where does its 
  ["Inside the upper fence, since a z below 3 cannot cross a fence.",
   "Beyond the R6 upper fence of 49.117500 alone, and inside the R7 fence.",
   "Inside, because the fences are built on the whole log's spread."],
- "Section 20 prints the default R7, k 1.5 fences on the water sand as 21.905000 and 48.685000, flagging entry 170. 90.590000 lies beyond both the R7 and the R6 upper fence; the whole-log fences, -57.070000 and 186.810000, belong to a different run.")
+ "The fences lesson prints the default R7, k 1.5 fences on the water sand as 21.905000 and 48.685000, flagging entry 170. 90.590000 lies beyond both the R7 and the R6 upper fence; the whole-log fences, -57.070000 and 186.810000, belong to a different run.")
 
 # 7 TWO-MODULE m02 + m04
 q(1, "Which statement about the constants 0.6745 and 1.4826 is correct?",
- "The modified z uses 0.6745 as printed and Hampel uses 1.4826, so the two are close without being reciprocals.",
+ "The modified z uses 0.6745 as printed and Hampel uses 1.4826, so the two are close without being exact reciprocals.",
  ["The engine computes 0.6745 as 1 / 1.4826 at run time, so the two are exact reciprocals.",
   "Both come from the petrophysics conditioning engine, which is why they pair so neatly.",
   "The modified z-score divides by 1.4826 x MAD, and Hampel multiplies the raw MAD by 0.6745."],
- "Section 18: 1 / 1.4826 is 0.674491, and the engine uses 0.6745 as printed, from Iglewicz and Hoaglin. Section 1 gives 1.4826 as the conditioning engine's `HAMPEL_MAD_SCALE`, and Section 21 multiplies the raw MAD by it.")
+ "The median and MAD module: 1 / 1.4826 is 0.674491, and the engine uses 0.6745 as printed, from Iglewicz and Hoaglin. The engine's export list gives 1.4826 as the conditioning engine's `HAMPEL_MAD_SCALE`, and the Hampel module multiplies the raw MAD by it.")
 
 # 8 TWO-MODULE m03 + m04
 q(0, "Two golden cases place a value exactly on its line: -4 and 12 on Tukey fences, and entry 2 at 1.482600 on its Hampel threshold. Which does the engine flag?",
@@ -73,7 +73,7 @@ q(0, "Two golden cases place a value exactly on its line: -4 and 12 on Tukey fen
  ["All three, since reaching a line counts as crossing it.",
   "The fence values -4 and 12, and not the Hampel entry.",
   "The Hampel entry, and neither fence value."],
- "Section 20: iqr-exactly-on-both-fences returns 0 flags; Section 21: entry 2 sits on its threshold and is not flagged, the case flagging entry 4. A value strictly outside a fence, or strictly beyond a threshold, is what fires.")
+ "The fences lesson: iqr-exactly-on-both-fences returns 0 flags; the Hampel module: entry 2 sits on its threshold and is not flagged, the case flagging entry 4. A value strictly outside a fence, or strictly beyond a threshold, is what fires.")
 
 # 9 TWO-MODULE m01 + m05
 q(1, "Eight values cannot pass a z of 3 with the sample SD. What two-sided Grubbs critical value do they face at alpha 0.05?",
@@ -89,7 +89,7 @@ q(2, "Which comparison decides the Hampel flag at gamma ray entry 70?",
  ["Its z of 1.058062 on the whole channel against the z threshold of 3.",
   "Its reading of 95.420000 against the water sand's upper fence of 48.685000.",
   "Its deviation of 52.180000 against a threshold of 14.766696 in its window."],
- "Section 21's row for entry 70: window median 37.000000, MAD 7.700000, threshold 34.248060 and a derived deviation of 58.420000. 52.180000 and 14.766696 belong to entry 170, and entry 70 sits in the oil sand, outside the water sand run.")
+ "The Hampel module's row for entry 70: window median 37.000000, MAD 7.700000, threshold 34.248060 and a derived deviation of 58.420000. 52.180000 and 14.766696 belong to entry 170, and entry 70 sits in the oil sand, outside the water sand run.")
 
 # 11
 q(3, "Keeping the seven-sample window, a caller asks for a sample to sit four scaled MADs out before it is flagged. How many gamma ray flags remain?",
@@ -105,7 +105,7 @@ q(1, "Gamma ray entries 49 and 50 both carry a Hampel threshold of 6.582744. Wha
  ["The same reading, which puts the two of them the same distance from any median.",
   "A window truncated at the top of the log, which fixes the threshold.",
   "A MAD of zero, which the engine replaces with a default spread."],
- "Section 21 prints both rows with window median 36.540000 and MAD 1.480000; the threshold is nSigma x 1.4826 x MAD, so it matches. The readings differ, 24.810000 and 24.830000, and entries 49 and 50 sit far from the top of the log.")
+ "The Hampel module prints both rows with window median 36.540000 and MAD 1.480000; the threshold is nSigma x 1.4826 x MAD, so it matches. The readings differ, 24.810000 and 24.830000, and entries 49 and 50 sit far from the top of the log.")
 
 # 13
 q(0, "Entry 30 reads 90.540000 gAPI against a window median of 96.290000. How can the Hampel rule flag a reading below its neighbours?",
@@ -113,7 +113,7 @@ q(0, "Entry 30 reads 90.540000 gAPI against a window median of 96.290000. How ca
  ["It cannot; entry 30 is flagged by the z-score and reported through the Hampel output.",
   "Low readings are compared with a halved threshold, which 5.750000 clears.",
   "The engine flags any reading below its window median in a shale."],
- "Section 21: a sample is flagged when |x - window median| > nSigma x 1.4826 x MAD, strictly, in either direction. Entry 30's derived deviation is 5.750000 and its threshold 4.848102; the z-score on the channel flags nothing.")
+ "The Hampel module: a sample is flagged when |x - window median| > nSigma x 1.4826 x MAD, strictly, in either direction. Entry 30's derived deviation is 5.750000 and its threshold 4.848102; the z-score on the channel flags nothing.")
 
 # 14
 q(2, "At halfWindow 3, which is the first gamma ray entry whose window holds all 7 samples?",
@@ -121,7 +121,7 @@ q(2, "At halfWindow 3, which is the first gamma ray entry whose window holds all
  ["Entry 0",
   "Entry 6",
   "Entry 1"],
- "Section 21's edge table prints `windowCount` 4, 5, 6 and 7 for entries 0 to 3. Entry 3 is the first with three samples on each side.")
+ "The Hampel module's edge table prints `windowCount` 4, 5, 6 and 7 for entries 0 to 3. Entry 3 is the first with three samples on each side.")
 
 # 15
 q(2, "Tightening alpha to 0.001000 moves the density and neutron cutoff up to 13.815511. What happens to the planted row?",
@@ -137,7 +137,7 @@ q(0, "What centre does `mahalanobis` use for the oil sand density?",
  ["The median density, so entry 60 cannot pull it.",
   "A robust centre reweighted away from entry 60.",
   "Entry 60's own density."],
- "Section 23 prints the centre RHOB as 2.280625 g/cm3 from the classical mean, and states the classical estimates are pulled by outliers; a robust covariance is not built.")
+ "The Mahalanobis lesson prints the centre RHOB as 2.280625 g/cm3 from the classical mean, and states the classical estimates are pulled by outliers; a robust covariance is not built.")
 
 # 17
 q(1, "The oil sand's density and neutron have a derived correlation of -0.836264. What does that say about entry 60?",
@@ -145,7 +145,7 @@ q(1, "The oil sand's density and neutron have a derived correlation of -0.836264
  ["Density and neutron rise together, and entry 60 follows that trend.",
   "The two channels are unrelated, so entry 60 is judged one channel at a time.",
   "Entry 60 is the row that makes the correlation negative in the first place."],
- "Section 2: inside a sand density and neutron move against each other. Entry 60 reads RHOB 2.221000 against a centre of 2.280625 and NPHI 0.188000 against 0.243313, low on both, with z -1.074527 and -1.645167.")
+ "The Ekene dataset table: inside a sand density and neutron move against each other. Entry 60 reads RHOB 2.221000 against a centre of 2.280625 and NPHI 0.188000 against 0.243313, low on both, with z -1.074527 and -1.645167.")
 
 # 18
 q(2, "A caller passes three complete rows of density and neutron to `mahalanobis`. What comes back?",
@@ -153,7 +153,7 @@ q(2, "A caller passes three complete rows of density and neutron to `mahalanobis
  ["Three squared distances with a warning that the covariance is uncertain.",
   "A refusal naming `alpha`, since the cutoff needs more degrees of freedom.",
   "A refusal for a singular covariance, since three points always lie in a plane."],
- "Section 4 tables the refusal for too few rows, field `rows`: \"rows need at least p + 2 = 4 complete rows for a sample covariance of 2 variables\". The engine returns no partial result.")
+ "The refusal table lists the refusal for too few rows, field `rows`: \"rows need at least p + 2 = 4 complete rows for a sample covariance of 2 variables\". Too few rows is the first refusal the three rows meet, and no distances come back.")
 
 # 19
 q(3, "Meaning five percent, an analyst types alpha 5 into `grubbsTest`. How does the engine respond?",
@@ -161,7 +161,7 @@ q(3, "Meaning five percent, an analyst types alpha 5 into `grubbsTest`. How does
  ["It divides by 100 and runs the test at 0.05.",
   "It runs the test at alpha 5 and rejects every sample.",
   "It clamps alpha to 1 and reports that nothing is rejected."],
- "Section 4 tables the refusal for alpha as a percentage, field `alpha`: \"alpha must be a significance level strictly between 0 and 1\". The engine refuses by name and never rescales an input.")
+ "The refusal table lists the refusal for alpha as a percentage, field `alpha`: \"alpha must be a significance level strictly between 0 and 1\". The engine refuses by name and does not divide the 5 by 100.")
 
 # 20
 q(2, "Twenty values are screened with Grubbs' test at alpha 0.05, looking in both directions. Which bar must G clear?",
@@ -177,7 +177,7 @@ q(1, "In the two-plug copy, which entry does Grubbs' test name as its suspect?",
  ["Entry 2",
   "Both 2 and 8",
   "No suspect"],
- "Section 22's masking row names suspect entry 8 with reject false. The test names one suspect, the value farthest from the mean, whether or not it rejects.")
+ "The Grubbs lesson's masking row names suspect entry 8 with reject false. The test names one suspect, the value farthest from the mean, whether or not it rejects.")
 
 # 22 TWO-MODULE m01 + m05
 q(2, "On the gauge, Grubbs' test rejects entry 7 while `zScores` flags nothing, and G is the largest |z|. How can both be right?",
@@ -185,7 +185,7 @@ q(2, "On the gauge, Grubbs' test rejects entry 7 while `zScores` flags nothing, 
  ["Grubbs uses the population SD on the gauge, which lifts entry 7 above the z ceiling of 2.846050.",
   "The z-score was run with entry 7 left out, so its largest z belongs to an ordinary reading.",
   "Grubbs rejects on the median, so it sees the glitch in the way the modified z-score does."],
- "Section 22: G is the largest |z| with the sample SD, and the two-sided critical at n = 10 is 2.289954. Section 17 gives entry 7's z as 2.845783, below 3; Section 24 has Grubbs rejecting entry 7 on the gauge.")
+ "The Grubbs lesson: G is the largest |z| with the sample SD, and the two-sided critical at n = 10 is 2.289954. The z-score module gives entry 7's z as 2.845783, below 3; the method comparison has Grubbs rejecting entry 7 on the gauge.")
 
 # 23
 q(3, "Hampel flags gauge entry 1 as well as the glitch. Which description of entry 1 does the course support?",
@@ -193,7 +193,7 @@ q(3, "Hampel flags gauge entry 1 as well as the glitch. Which description of ent
  ["A second planted glitch, placed to test whether a method can find two.",
   "A reading the engine has marked wrong and replaced in the input.",
   "A sentinel value that completeness counts as present."],
- "Section 2 plants one gauge defect, at entry 7, and Section 24 shows Hampel flagging 1 and 7. Section 1: the engine does not decide a flagged value is wrong and does not repair it.")
+ "The Ekene dataset table plants one gauge defect, at entry 7, and the method comparison shows Hampel flagging 1 and 7. The engine's export list: the engine does not decide a flagged value is wrong and does not repair it.")
 
 # 24
 q(0, "At alpha 0.100000 three oil sand rows are flagged. Which row joins entries 60 and 62?",
@@ -201,7 +201,7 @@ q(0, "At alpha 0.100000 three oil sand rows are flagged. Which row joins entries
  ["Entry 80, the first density gap row, now counted.",
   "Entry 70, the gamma ray spike in the oil sand.",
   "Entry 61, the row beside the planted row at entry 60 in depth."],
- "Section 23 prints entry 56's d^2 as 5.442663, the third largest, and the cutoff at 0.100000 as 4.605170. Entries 80 to 91 are skipped rows, and the gamma ray is not an input to this distance.")
+ "The Mahalanobis lesson prints entry 56's d^2 as 5.442663, the third largest, and the cutoff at 0.100000 as 4.605170. Entries 80 to 91 are skipped rows, and the gamma ray is not an input to this distance.")
 
 # 25
 q(1, "Two analysts quote 48.685000 and 186.810000 as the R7, k 1.5 upper gamma ray fence, and both ran the engine correctly. What differs?",
@@ -209,7 +209,7 @@ q(1, "Two analysts quote 48.685000 and 186.810000 as the R7, k 1.5 upper gamma r
  ["The quartile rule: one used R7 and the other R6 on the same series.",
   "The multiplier: one used k 1.5 and the other the outer fence multiplier of 3.",
   "The spread: one used the population SD in place of the sample SD."],
- "Same rule, same k: 48.685000 comes from the seventy water sand samples and 186.810000 from the full 240-sample log with the shale in it. A switch to R6 would give 49.117500 on the sand, k 3 gives 58.727500, and a Tukey fence uses no standard deviation.")
+ "Same rule, same k: 48.685000 comes from the seventy water sand samples and 186.810000 from the whole log with the shale in it. A switch to R6 would give 49.117500 on the sand, k 3 gives 58.727500, and a Tukey fence uses no standard deviation.")
 
 # 26
 q(2, "What is the water sand gamma ray's third quartile by R6?",
@@ -225,7 +225,7 @@ q(3, "Excel, R and numpy share a default quantile rule. Which one is it, and wha
  ["R6, with h = p(N + 1).",
   "R8, with h = p(N + 1/3) + 1/3.",
   "R7, with h = p(N + 1)."],
- "Section 19: R7 is the default of Excel, R and numpy, with h = 1 + p(N - 1). p(N + 1) is R6's position, NIST's rule, and p(N + 1/3) + 1/3 is R8's.")
+ "The quantile rules lesson: R7 is the default of Excel, R and numpy, with h = 1 + p(N - 1). p(N + 1) is R6's position, NIST's rule, and p(N + 1/3) + 1/3 is R8's.")
 
 # 28
 q(0, "On the fourteen core plugs, which pair is the centre and spread of the modified z-score?",
@@ -233,7 +233,7 @@ q(0, "On the fourteen core plugs, which pair is the centre and spread of the mod
  ["Mean 0.221714 and sample SD 0.019859.",
   "Median 0.215500 and sample SD 0.019859.",
   "Mean 0.217154 and raw MAD 0.007500."],
- "Section 18 prints the core median 0.215500 and MAD 0.007500. 0.221714 and 0.019859 are the mean and sample SD of Section 17, and 0.217154 the mean with entry 8 left out.")
+ "The median and MAD module prints the core median 0.215500 and MAD 0.007500. 0.221714 and 0.019859 are the mean and sample SD of the z-score module, and 0.217154 the mean with entry 8 left out.")
 
 # 29 TWO-MODULE m01 + m06
 q(1, "NIST's uranium example has eight values, and the engine's largest |z| is 2.468765. How close is that to what eight values allow?",
@@ -241,7 +241,7 @@ q(1, "NIST's uranium example has eight values, and the engine's largest |z| is 2
  ["Well past the ceiling, which the population SD lifts to 3 at eight values.",
   "Level with the Grubbs critical value of 2.031652, which is the ceiling.",
   "Far below any ceiling, since the uranium values are close together."],
- "Section 17 prints the uranium largest |z| as 2.468765 and the sample SD ceiling at n = 8 as 2.474874. 2.031652 is the one-sided Grubbs critical, a separate quantity, and the test rejects because G is above it.")
+ "The z-score module prints the uranium largest |z| as 2.468765 and the sample SD ceiling at n = 8 as 2.474874. 2.031652 is the one-sided Grubbs critical, a separate quantity, and the test rejects because G is above it.")
 
 # 30
 q(3, "The engine's reason for the gauge flag prints the modified z with every digit. Which figure does a report quote?",
@@ -249,7 +249,7 @@ q(3, "The engine's reason for the gauge flag prints the modified z with every di
  ["The reason's full string of digits, since it is the more exact figure.",
   "186.159450, the figure the exact reciprocal of 1.4826 would give.",
   "2.845783, the z of the same reading, which needs no rounding."],
- "Section 18 quotes the reason verbatim as the engine's words and gives the field as 186.162000. Section 31: a lesson quotes the field at six decimals and a reason only as the engine's own words. 186.159450 is derived with 0.674491.")
+ "The median and MAD module quotes the reason verbatim as the engine's words and gives the field as 186.162000. The engine notes: a lesson quotes the field at six decimals and a reason only as the engine's own words. 186.159450 is derived with 0.674491.")
 
 # 31
 q(2, "Density and neutron should move against each other in a sand. Which method measures a row against that relationship?",
@@ -257,7 +257,7 @@ q(2, "Density and neutron should move against each other in a sand. Which method
  ["The Hampel window, run on each channel",
   "Tukey's fences on each channel",
   "Grubbs' test on each channel"],
- "Section 24: Mahalanobis measures against a correlation. Section 23: entry 60 is ordinary on each channel alone, with 0 flags from each single-channel z-score, and only the distance sees the pair.")
+ "The method comparison: Mahalanobis measures against a correlation. The Mahalanobis lesson: entry 60 is ordinary on each channel alone, with 0 flags from each single-channel z-score, and only the distance sees the pair.")
 
 # 32
 q(0, "How should a report treat the nine gamma ray Hampel flags that are not planted spikes?",
@@ -273,7 +273,7 @@ q(1, "The gauge's two standard deviations are 8.732220 and 8.284111. Which one d
  ["8.732220, the larger of the two.",
   "Neither; both divide by n - 1.",
   "8.732220, the sample SD."],
- "Section 17: the sample SD, which divides by n - 1, is 8.732220, and the population SD, which divides by n, is 8.284111. Dividing by the larger number gives the smaller spread.")
+ "The z-score module: the sample SD, which divides by n - 1, is 8.732220, and the population SD, which divides by n, is 8.284111. Dividing by the larger number gives the smaller spread.")
 
 # 34
 q(1, "At R7 and k 3, where is the lower fence on the water sand gamma ray?",
@@ -281,7 +281,7 @@ q(1, "At R7 and k 3, where is the lower fence on the water sand gamma ray?",
  ["21.905000",
   "21.437500",
   "-57.070000"],
- "Section 20 prints the R7, k 3 lower fence as 11.862500. 21.905000 is the R7, k 1.5 fence, 21.437500 the R6, k 1.5 fence, and -57.070000 the whole-log fence at the defaults.")
+ "The fences lesson prints the R7, k 3 lower fence as 11.862500. 21.905000 is the R7, k 1.5 fence, 21.437500 the R6, k 1.5 fence, and -57.070000 the whole-log fence at the defaults.")
 
 # 35
 q(2, "At n = 6 the two-sided Grubbs critical is 1.887145 and the largest possible G is 2.041241. What follows for a set of six values?",
@@ -289,7 +289,7 @@ q(2, "At n = 6 the two-sided Grubbs critical is 1.887145 and the largest possibl
  ["No rejection is possible, since G can never exceed the critical value.",
   "The test is refused below ten values, whatever G reads.",
   "Only a one-sided test can reject, at 1.822120."],
- "Section 22 prints 1.887145 two-sided, 1.822120 one-sided and a largest possible G of 2.041241 at n = 6. The critical value sits below the ceiling on every row of the table, so a large enough G rejects either way.")
+ "The Grubbs lesson prints 1.887145 two-sided, 1.822120 one-sided and a largest possible G of 2.041241 at n = 6. The critical value sits below the ceiling on every row of the table, so a large enough G rejects either way.")
 
 # 36
 q(2, "On the EKENE-7 density, entry 79 sits beside the twelve-sample gap. How many present samples does its window hold at halfWindow 3?",
@@ -305,7 +305,7 @@ q(3, "The z-score misses both the gamma ray spike at entry 70 and the fractured 
  ["Yes: both series are too short for the z ceiling to pass 3 with the sample SD.",
   "Yes: both are measured with the population SD, which damps every distance.",
   "No: the spike is negative, and the z-score looks only above the mean."],
- "Section 21: a sand spike looks like shale to a global mean and SD. Section 17: the plug is measured against a spread that includes itself, 0.019859 against 0.010574 without it. Fourteen plugs could reach 3.474396, and the gamma ray holds 240 samples.")
+ "The Hampel module: a sand spike looks like shale to a global mean and SD. The z-score module: the plug is measured against a spread that includes itself, 0.019859 against 0.010574 without it. Fourteen plugs could reach 3.474396, and the gamma ray log runs to 240 entries.")
 
 # 38
 q(1, "Count the methods in the comparison table that find the gauge glitch at entry 7.",
@@ -329,7 +329,7 @@ q(0, "NIST prints the uranium critical value as 2.032. How does it relate to the
  ["It is a different formula, one-sided where the engine is two-sided.",
   "It is truncated, the same way NIST prints the uranium G.",
   "It comes from a larger sample than the eight values the engine used."],
- "Section 22 prints the engine's critical 2.031652 against the printed 2.032 for the one-sided test, and the test rejects either way. Section 31's truncation erratum concerns the printed G, 2.4687.")
+ "The Grubbs lesson prints the engine's critical 2.031652 against the printed 2.032 for the one-sided test, and the test rejects either way. The truncation erratum in the engine notes concerns the printed G, 2.4687.")
 
 # 41
 q(3, "In the golden on-the-fence case, -4, 2, 2, 3, 4, 5, 6, 6, 12, what quartiles does R7 return?",
@@ -337,7 +337,7 @@ q(3, "In the golden on-the-fence case, -4, 2, 2, 3, 4, 5, 6, 6, 12, what quartil
  ["Q1 -4 and Q3 12, the extreme values.",
   "Q1 3 and Q3 5, the inner values.",
   "Q1 2 and Q3 12, an IQR of 10."],
- "Section 20: the engine returns Q1 2, Q3 6 and IQR 4, which with k 1.5 put the fences at -4 and 12. -4 and 12 are the fences and the extremes of the data.")
+ "The fences lesson: the engine returns Q1 2, Q3 6 and IQR 4, which with k 1.5 put the fences at -4 and 12. -4 and 12 are the fences and the extremes of the data.")
 
 # 42
 q(1, "Hampel flags gamma ray entry 145. What does the `cleaned` series carry at that entry?",
@@ -345,7 +345,7 @@ q(1, "Hampel flags gamma ray entry 145. What does the `cleaned` series carry at 
  ["29.570000, the reading itself.",
   "3.691674, the threshold.",
   "Nothing, since it is deleted."],
- "Section 21 prints entry 145 with reading 29.570000, window median 36.810000 and replacement 36.810000. The cleaned series carries the replacement, and the engine deletes nothing.")
+ "The Hampel module prints entry 145 with reading 29.570000, window median 36.810000 and replacement 36.810000. The cleaned series carries the replacement, and the engine deletes nothing.")
 
 emit(Q, '/root/wt-dai-d1-nextgen/tools/course-banks/dataqc/intermediate/d1i_exam.json', expect_n=42)
 finish()

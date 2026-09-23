@@ -8,7 +8,7 @@
    "Grubbs' test, two-sided at alpha 0.05."
   ],
   "answer": 1,
-  "explanation": "Section 24's gauge row reads 7 for the modified z-score, 7 for the fences, 1 and 7 for Hampel and 7 for Grubbs. Only the moving window adds entry 1."
+  "explanation": "The method comparison's gauge row reads 7 for the modified z-score, 7 for the fences, 1 and 7 for Hampel and 7 for Grubbs. Only the moving window adds entry 1."
  },
  {
   "prompt": "On the core plugs with two high plugs, which methods flag nothing at all?",
@@ -19,7 +19,7 @@
    "The z-score and Grubbs' test."
   ],
   "answer": 3,
-  "explanation": "Section 24: on the two-plug copy the z-score and Grubbs return none, while the modified z-score, the fences and Hampel each flag entries 2 and 8. The methods that measure from a mean and SD the plugs help set are the ones masked."
+  "explanation": "The method comparison: on the two-plug copy the z-score and Grubbs return none, while the modified z-score, the fences and Hampel each flag entries 2 and 8. The methods that measure from a mean and SD the plugs help set are the ones masked."
  },
  {
   "prompt": "On the single fractured plug set, which of the five methods in the comparison table misses entry 8?",
@@ -30,7 +30,7 @@
    "Tukey's fences, since the IQR widens around a high plug."
   ],
   "answer": 0,
-  "explanation": "Section 24's core row reads none for z beyond 3, and 8 for the modified z-score, the fences, Hampel and Grubbs. Grubbs compares G 2.985356 with 2.507321 and rejects."
+  "explanation": "The method comparison's core row reads none for z beyond 3, and 8 for the modified z-score, the fences, Hampel and Grubbs. Grubbs compares G 2.985356 with 2.507321 and rejects."
  },
  {
   "prompt": "According to the course's comparison, what does the Hampel window measure a value against?",
@@ -41,7 +41,7 @@
    "A median and quartiles over the whole series."
   ],
   "answer": 2,
-  "explanation": "Section 24: z and Grubbs measure against a mean and SD the outlier helps set, the modified z and the fences against a median and quartiles it barely moves, Hampel against a local window and Mahalanobis against a correlation."
+  "explanation": "The method comparison: z and Grubbs measure against a mean and SD the outlier helps set, the modified z and the fences against a median and quartiles it barely moves, Hampel against a local window and Mahalanobis against a correlation."
  },
  {
   "prompt": "NIST prints the uranium example's Grubbs G as 2.4687; the engine returns 2.468765. What does the difference show?",
@@ -52,7 +52,7 @@
    "The engine rounds G down to protect the one-sided test from a false rejection at the edge."
   ],
   "answer": 1,
-  "explanation": "Section 31 tables the Grubbs G erratum: printed 2.4687, engine 2.468765, truncated rather than rounded, with 2.4688 as the four-decimal rounding. It is a note about a published page, and the engine reproduces the printed figure within the stated allowance."
+  "explanation": "The engine notes table the Grubbs G erratum: printed 2.4687, engine 2.468765, truncated rather than rounded, with 2.4688 as the four-decimal rounding. It is a note about a published page, and the engine reproduces the printed figure within the stated allowance."
  },
  {
   "prompt": "The population case of nine zeros and a one at threshold 2.9 returns a flag whose `statistic` field reads 3.000000 at six decimals. What does this course quote in a report?",
@@ -63,7 +63,7 @@
    "The numeric field at six decimals, with the reason quoted only verbatim as the engine's words."
   ],
   "answer": 3,
-  "explanation": "Section 31: a reason prints every figure as the shortest decimal that reads back to the field it quotes, so a computed statistic prints every digit. A lesson quotes the field at six decimals, 3.000000 here, and quotes a reason only as the engine's own words."
+  "explanation": "The engine notes: a reason prints every figure as the shortest decimal that reads back to the field it quotes, so a computed statistic prints every digit. A lesson quotes the field at six decimals, 3.000000 here, and quotes a reason only as the engine's own words."
  },
  {
   "prompt": "What is the uranium example's Grubbs result in the engine, one-sided max at alpha 0.05?",
@@ -74,7 +74,7 @@
    "G 2.4687 against a critical 2.032, so it does not reject."
   ],
   "answer": 0,
-  "explanation": "Section 22 prints G 2.468765 against the printed 2.4687 and the critical 2.031652 against the printed 2.032, reject true. 2.126645 is the two-sided critical at n = 8 and 2.474874 the largest possible G at eight values."
+  "explanation": "The Grubbs lesson prints G 2.468765 against the printed 2.4687 and the critical 2.031652 against the printed 2.032, reject true. 2.126645 is the two-sided critical at n = 8 and 2.474874 the largest possible G at eight values."
  },
  {
   "prompt": "Which of these does the engine build?",
@@ -85,7 +85,7 @@
    "A fallback spread for when the MAD is zero"
   ],
   "answer": 2,
-  "explanation": "Section 31's list of what is not built holds the generalised ESD test, a robust covariance and a fallback for a MAD of zero, the last answered with a refusal. Grubbs for one outlier is built, with the masking it suffers."
+  "explanation": "The engine notes' list of what is not built holds the generalised ESD test, a robust covariance and a fallback for a MAD of zero, the last answered with a refusal. Grubbs for one outlier is built, with the masking it suffers."
  },
  {
   "prompt": "A flag from any of this tier's rules comes back on an entry. Which statement about it matches the engine?",
@@ -96,7 +96,7 @@
    "The value is a planted defect, since the Ekene series were built to carry them."
   ],
   "answer": 1,
-  "explanation": "Section 1: the engine does not decide whether a flagged value is wrong; a flag is a rule that fired, with its reason, and the engine does not fill, repair or delete a value. On the gamma ray, 9 of the 11 Hampel flags are not planted defects."
+  "explanation": "The engine's export list: the engine does not decide whether a flagged value is wrong; a flag is a rule that fired, with its reason, and the engine does not fill, repair or delete a value. On the gamma ray, 9 of the 11 Hampel flags are not planted defects."
  },
  {
   "prompt": "In the oil sand at alpha 0.05, entry 62 is flagged beside entry 60. What is entry 62?",
@@ -107,7 +107,7 @@
    "A sand row flagged by the stated cutoff, with no planted defect behind it."
   ],
   "answer": 3,
-  "explanation": "Section 2 lists entry 60 as the Mahalanobis defect and no other oil sand row. Entry 62's d^2 of 6.581737 is above the alpha 0.05 cutoff of 5.991465, so it is flagged by the rule at that setting; the skipped rows are entries 80 to 91."
+  "explanation": "The Ekene dataset table lists entry 60 as the Mahalanobis defect and no other oil sand row. Entry 62's d^2 of 6.581737 is above the alpha 0.05 cutoff of 5.991465, so it is flagged by the rule at that setting; the skipped rows are entries 80 to 91."
  },
  {
   "prompt": "Which of these is an examination that the rule actually made and passed?",
@@ -118,7 +118,7 @@
    "A Mahalanobis row skipped for a missing value."
   ],
   "answer": 2,
-  "explanation": "Section 21: `judged` is true when a window holds three or more present samples, so a judged, unflagged point was examined and passed. A z run with `thresholdReachable` false could not flag anything, an unjudged point was never examined, and a skipped row never entered the distance."
+  "explanation": "The Hampel module: `judged` is true when a window holds three or more present samples, so a judged, unflagged point was examined and passed. A z run with `thresholdReachable` false could not flag anything, an unjudged point was never examined, and a skipped row never entered the distance."
  },
  {
   "prompt": "In this course, what does the word outlier have to carry?",
@@ -129,7 +129,7 @@
    "The deletion that followed it in the dataset."
   ],
   "answer": 0,
-  "explanation": "Section 32: an outlier is a value a stated rule flags, and the rule is named; a flag is a question about the value. No P label is used anywhere in the course, and the engine deletes nothing."
+  "explanation": "The course vocabulary: an outlier is a value a stated rule flags, and the rule is named; a flag is a question about the value. No P label is used anywhere in the course, and the engine deletes nothing."
  },
  {
   "prompt": "A report quotes a spread built from a Hampel window. How does the course require it to be named?",
@@ -140,7 +140,7 @@
    "As the sample SD of the whole channel."
   ],
   "answer": 1,
-  "explanation": "Section 32 lists the sources a sigma may carry: sample SD, MRbar / 1.128, 1.4826 x MAD, or historical in-control data. Section 21 builds the Hampel threshold on nSigma x 1.4826 x MAD of the window, so the raw MAD is the modified z-score's spread."
+  "explanation": "The course vocabulary lists the sources a sigma may carry: sample SD, MRbar / 1.128, 1.4826 x MAD, or historical in-control data. The Hampel module builds the Hampel threshold on nSigma x 1.4826 x MAD of the window, so the raw MAD is the modified z-score's spread."
  },
  {
   "prompt": "A caller's two variables have very small variances in their own units, and `mahalanobis` refuses them as singular. What does the course say about it?",
@@ -151,7 +151,7 @@
    "The refusal means there are fewer than p + 2 complete rows, and more rows will clear it."
   ],
   "answer": 2,
-  "explanation": "Section 31: the refusal for a singular covariance uses an absolute pivot test inside lib/linalg, so variables with very small variance in the caller's units can be refused as singular, and rescaling avoids it. The engine converts no units, and too few rows raise a different refusal."
+  "explanation": "The engine notes: the refusal for a singular covariance uses an absolute pivot test inside lib/linalg, so variables with very small variance in the caller's units can be refused as singular, and rescaling avoids it. The engine converts no units, and too few rows raise a different refusal."
  },
  {
   "prompt": "NIST prints the silicon wafer 0.9 quantile as 95.1981 by R6, 95.1957 by R7 and 95.1972 by R8. How do the engine's figures compare?",
@@ -162,6 +162,6 @@
    "Each equals its golden, and each rounds to the figure NIST printed."
   ],
   "answer": 3,
-  "explanation": "Section 19 prints 95.198070, 95.195680 and 95.197243, each with a relative difference of 0 against its golden, and each rounds to 95.1981, 95.1957 and 95.1972. The truncation erratum belongs to the Grubbs G."
+  "explanation": "The quantile rules lesson prints 95.198070, 95.195680 and 95.197243, each with a relative difference of 0 against its golden, and each rounds to 95.1981, 95.1957 and 95.1972. The truncation erratum belongs to the Grubbs G."
  }
 ]
