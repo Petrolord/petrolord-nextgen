@@ -19,7 +19,7 @@
    "A refusal naming `target`: target is required: EWMA_0, the historical in-control mean or target"
   ],
   "answer": 3,
-  "explanation": "Section 26: target and sigma are REQUIRED and come from historical in-control data; the chart does not estimate them from the data it monitors. The engine refuses and names the field in its own words. 609.960000 is the individuals chart's own-averages centre, which is exactly the default EWMA declines. The engine never takes a first reading as EWMA_0, and it has no way to know which days were phase one."
+  "explanation": "Target and sigma are REQUIRED and come from historical in-control data; the chart does not estimate them from the data it monitors. The engine refuses and names the field in its own words. 609.960000 is the individuals chart's own-averages centre, which is exactly the default EWMA declines. The engine never takes a first reading as EWMA_0, and it has no way to know which days were phase one."
  },
  {
   "prompt": "A call to `ewmaChart` passes a target, a sigma and the series, and leaves lambda out. What happens?",
@@ -30,7 +30,7 @@
    "The engine uses lambda 1, which reduces the chart to the individuals chart"
   ],
   "answer": 0,
-  "explanation": "Section 26: NO ENGINE DEFAULT FOR LAMBDA. A call without it is refused and the field is named. 0.2 is the value stated for the EKENE-3 chart, 0.3 is NIST's example, and lambda 1 is a legal input the caller would have to choose; none of them is supplied for the caller. The refusal's advice about 0.2 to 0.3 is advice, and the choice stays with the plan."
+  "explanation": "NO ENGINE DEFAULT FOR LAMBDA. A call without it is refused and the field is named. 0.2 is the value stated for the EKENE-3 chart, 0.3 is NIST's example, and lambda 1 is a legal input the caller would have to choose; none of them is supplied for the caller. The refusal's advice about 0.2 to 0.3 is advice, and the choice stays with the plan."
  },
  {
   "prompt": "Which EWMA inputs does the engine decline to estimate from the monitored series itself?",
@@ -41,7 +41,7 @@
    "Only lambda; target and sigma default to the monitored mean and MRbar / 1.128"
   ],
   "answer": 2,
-  "explanation": "The method line in Section 26 says target and sigma are REQUIRED and come from historical in-control data, and the chart does not estimate them from the data it monitors. L does have a default, 3, cited to NIST 6.3.2.4 in Section 30. lambda is refused when absent too, so no input silently falls back to the monitored series."
+  "explanation": "The method line in the course says target and sigma are REQUIRED and come from historical in-control data, and the chart does not estimate them from the data it monitors. L does have a default, 3, cited to NIST 6.3.2.4 in the course. lambda is refused when absent too, so no input silently falls back to the monitored series."
  },
  {
   "prompt": "EKENE-3's EWMA at lambda 0.2 and L 3 carries limits of 607.605937 and 615.154063 psig on every day. What are they?",
@@ -74,7 +74,7 @@
    "The exact run signals low from day 16, the start of the shift, since its early limits are tighter"
   ],
   "answer": 1,
-  "explanation": "Section 26 lists both runs and prints them as the same days: the exact limits are narrower, most of all in the first days, and on no day does the EWMA fall between an exact and an asymptotic limit. Days 1 to 3 carry no signal in either run. On day 22 the exact lower limit, 607.606040, is inside the asymptotic 607.605937 by a hair, and the EWMA of 606.394191 is below both. Day 16 signals in neither."
+  "explanation": "The course lists both runs and prints them as the same days: the exact limits are narrower, most of all in the first days, and on no day does the EWMA fall between an exact and an asymptotic limit. Days 1 to 3 carry no signal in either run. On day 22 the exact lower limit, 607.606040, is inside the asymptotic 607.605937 by a hair, and the EWMA of 606.394191 is below both. Day 16 signals in neither."
  },
  {
   "prompt": "On which day does EKENE-3's EWMA, at lambda 0.2 with phase one's target and sigma, first signal low?",
@@ -107,7 +107,7 @@
    "0.065536, which is lambda (1 - lambda)^(t - 8) at t = 13"
   ],
   "answer": 3,
-  "explanation": "Derived in Section 26: a reading enters with weight lambda, 0.200000, and keeps lambda (1 - lambda)^(t - 8) on day t, which is 0.065536 on day 13. The weight shrinks by a factor of 1 - lambda a day and never reaches zero, so the glitch still lifts the EWMA on day 13 when it signals high again. The weight belongs to day 8's reading and never passes to another."
+  "explanation": "Derived in A reading enters with weight lambda, 0.200000, and keeps lambda (1 - lambda)^(t - 8) on day t, which is 0.065536 on day 13. The weight shrinks by a factor of 1 - lambda a day and never reaches zero, so the glitch still lifts the EWMA on day 13 when it signals high again. The weight belongs to day 8's reading and never passes to another."
  },
  {
   "prompt": "Across the table of lambda on EKENE-3, which setting gives the latest first low signal, and how many days does it signal on?",
@@ -129,7 +129,7 @@
    "A chart whose limits close to zero width, since sqrt(lambda / (2 - lambda)) vanishes"
   ],
   "answer": 2,
-  "explanation": "At lambda 1 the recursion gives EWMA_t = x_t, and sqrt(1 / 1) is 1, so the limits are target +/- 3.000000 sigma, derived in Section 26: the individuals chart. The whole weight goes on the newest reading. The CUSUM is a different recursion with its own floor at zero. The half-width grows with lambda, to 11.322188 psi at lambda 1.000000."
+  "explanation": "At lambda 1 the recursion gives EWMA_t = x_t, and sqrt(1 / 1) is 1, so the limits are target +/- 3.000000 sigma, derived in The individuals chart. The whole weight goes on the newest reading. The CUSUM is a different recursion with its own floor at zero. The half-width grows with lambda, to 11.322188 psi at lambda 1.000000."
  },
  {
   "prompt": "Down the table of lambda, from 0.100000 to 1.000000, what happens to the asymptotic half-width and to the number of days signalling?",
@@ -151,7 +151,7 @@
    "The target plus and minus 3 times 2.0539, with no factor"
   ],
   "answer": 2,
-  "explanation": "The engine prints 52.588432 and 47.411568 against NIST's 52.5884 and 47.4115. It keeps full precision, and the printed lower limit carries NIST's early rounding, read in Section 31. 50.600000 and 49.520000 are the engine's first two EWMA values, points on the chart. Plus and minus 3 s is the individuals chart; the EWMA limits carry the factor sqrt(lambda / (2 - lambda))."
+  "explanation": "The engine prints 52.588432 and 47.411568 against NIST's 52.5884 and 47.4115. It keeps full precision, and the printed lower limit carries NIST's early rounding, read in the course. 50.600000 and 49.520000 are the engine's first two EWMA values, points on the chart. Plus and minus 3 s is the individuals chart; the EWMA limits carry the factor sqrt(lambda / (2 - lambda))."
  },
  {
   "prompt": "An EWMA call gives lambda, target and sigma and says nothing about L or the limits. What does the engine draw?",
@@ -162,6 +162,6 @@
    "L 3 with asymptotic limits, both cited to NIST 6.3.2.4"
   ],
   "answer": 3,
-  "explanation": "Section 30 lists ewmaChart L and limits as 3, asymptotic, whose choice is NIST 6.3.2.4, read from the basis block of a call that left them unset. The exact limits are a stated option. Unlike lambda, L has a default and is not refused. 3.500000 is the modified z threshold of Iglewicz and Hoaglin and has nothing to do with the EWMA."
+  "explanation": "The course lists ewmaChart L and limits as 3, asymptotic, whose choice is NIST 6.3.2.4, read from the basis block of a call that left them unset. The exact limits are a stated option. Unlike lambda, L has a default and is not refused. 3.500000 is the modified z threshold of Iglewicz and Hoaglin and has nothing to do with the EWMA."
  }
 ]
