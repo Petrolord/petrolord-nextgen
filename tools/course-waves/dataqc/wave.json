@@ -1,0 +1,60 @@
+{
+ "slug": "dataqc",
+ "prefix": "d1",
+ "name": "Oilfield Data Quality",
+ "pathOrder": 66,
+ "module": "data_ai",
+ "prerequisite": null,
+ "repo": "/root/wt-dai-d1-nextgen",
+ "branch": "feat/d1-dataqc-course",
+ "goldens": [
+  "dataai/goldens/quality_cases.json"
+ ],
+ "engines": [
+  "engines/dataai/quality.js"
+ ],
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines cc82bf3 (engines PR #248). TWELVE paths walked by vendor_dataqc.sh over a git-archive export of the commit with the jest suite as the only seed: six reached by the walk (the suite, quality.js, lib/stats/stats.js, engines/petrophysics/conditioning.js, engines/hse/safetyStats.js, lib/linalg/solveDense.js) and six NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; oracle_quality.py, pin_quality.py, FINDINGS-quality.md, negcontrol_quality.sh mode 755). 12 paths x 4 proofs = 48, all IDENTICAL. The canonical pin STAYS at 54cf7c4: 54cf7c4..cc82bf3 also moves economics cashflow goldens, facilities, production, seismolord and wellsite paths other courses grade. The four imported dependencies already match the pinned manifest byte for byte; the eight new paths are ledgered in VENDOR.json as kind extra, group d1-dataqc-course, pinned to their vendored blobs, and clear as STALE when the pin moves to cc82bf3 or later. Guard clean, 762 paths compared; vendored engine suites 160, the quality suite 854 of 854.",
+ "constants": {
+  "$comment": "The engine exports CONSTANTS (0.6745, 3.5, 1.4826, 1.128, 3.267, 1.5), DEFINITIONAL_LIMITS and DIMENSIONS. Digest section 1 prints CONSTANTS from the export and section 7 prints DEFINITIONAL_LIMITS. None is graded."
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3",
+  "x1e2",
+  "x1e-2"
+ ],
+ "plan": {
+  "state": "FOUNDATION COMPLETE when run_gates.py is green: engine vendored at cc82bf3, the Ekene dataset generator with 22 planted defects, digest built (32 sections), fields.json and precision.json generated from the one tolerance derivation, 18 graded fields discriminating, lab and three panels shipped with vitest, 78 lesson stubs scaffolded. No lesson prose, bank, key truth or migration is written yet.",
+  "thesis": "Data quality is a set of stated rules applied to a well log or a production series, every flag carrying the rule that fired and its reason. Associate owns IS THE DATA FIT TO USE (completeness, validity, the index, consistency, uniqueness), Professional owns WHICH VALUES STAND APART (the plausibility dimension), Expert owns HAS THE PROCESS CHANGED AND WHAT IS THE POLICY (charts, scorecard, defaults as choices, the engine read honestly). Each capstone grades only its own tier's question.",
+  "tiers": {
+   "beginner": "Associate: m01 what data quality means (a rule, a flag and a reason; the five dimensions; missing and the sentinel; refusals), m02 is it there (completeness, gap runs, coverage), m03 is it valid (definitional limits, caller plausibility ranges, units never converted, rate rules), m04 the depth and time index, m05 does it agree with itself (cumulative, water cut, phase sum, frozen runs), m06 names and one dataset end to end. Digest sections 1 to 16.",
+   "intermediate": "Professional: m01 the z-score and its ceiling, m02 the median and the MAD, m03 quartiles and Tukey fences, m04 a moving window (Hampel), m05 formal tests and many variables (Grubbs, Mahalanobis), m06 outliers in a report. Digest sections 17 to 24.",
+   "advanced": "Expert: m01 the individuals chart, m02 the EWMA chart, m03 the tabular CUSUM, m04 the scorecard, m05 designing a QC policy, m06 reading the engine honestly. Digest sections 25 to 31."
+  }
+ },
+ "history": {
+  "position": "THIS ENGINE HAS NO REPAIR HISTORY: written, oracle-gated and merged in one pull request. The NIST printed-figure errata are errata in a published source and are taught as such in Expert m06."
+ },
+ "scopeSeams": {
+  "u-chart and the Poisson count model": "OWNED BY H1 safetystats. D1 charts measured values only (individuals, EWMA, CUSUM).",
+  "regression fit quality": "OWNED BY dca and D2 mlcore.",
+  "Monte Carlo": "OWNED BY the uncertainty course. Nothing in D1 samples.",
+  "moving-average surveillance": "OWNED BY surveillance. EWMA here is a control chart with limits from historical sigma (NIST 6.3.2.4).",
+  "percentile ranges": "OWNED BY the economics uncertainty course and lib/conventions/percentile.js. D1 names a quantile by its probability and its rule; no P label."
+ },
+ "namingCollisions": {
+  "outlier": "a value a stated rule flags, never a value proven wrong; the engine's own label is potential outlier. Section 32.",
+  "sigma": "always with its source named. Section 32.",
+  "control limit": "never a specification or a plausibility range. Section 32.",
+  "missing": "null, undefined or NaN only; a sentinel is present. Section 32.",
+  "percentile": "no P label anywhere. Gated by gate_vocabulary.py."
+ },
+ "openItems": {
+  "zScores population ceiling": "ENGINE FINDING, reported to the lead, engine not edited. With sd 'population', maxPossibleAbsZ and thresholdReachable still use the sample-SD ceiling (n - 1)/sqrt(n). The population ceiling is sqrt(n - 1). On nine zeros and a one at threshold 2.9 the engine returns thresholdReachable false AND one flag at z 3.000000: its output contradicts itself. Digest section 31 prints it as a care point. Fix belongs in petrolord-engines.",
+  "reason strings round to six significant figures": "ENGINE FINDING (copy), reported. fmt uses toPrecision(6), so a cumulative of 1338506.2 prints as 1338510 in the cumulativeCheck reason and the printed figures differ by 7500 where the drop field is 7496.7. Digest section 11 prints both and tells writers to quote the field. Consider more digits for large magnitudes in the engines repo.",
+  "FINDINGS open questions": "despikeHampel turns null into 0 (quality.hampel converts to NaN first, D1 unaffected); solveDense absolute pivot test; generalised ESD and robust covariance not built. Printed as care points in section 31."
+ },
+ "cleared_claims": [],
+ "gates": {}
+}

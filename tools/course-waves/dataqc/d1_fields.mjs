@@ -227,7 +227,7 @@ export const SLOW_DRIFT = Object.freeze([410.0, 410.1, 410.2, 410.3, 410.4, 410.
 export const PLANTED = Object.freeze([
   ['EKENE-7 log', 'RHOB', 'entries 80 to 91', 'twelve samples set missing (a pad lift)', 'completeness: one gap run of twelve'],
   ['EKENE-7 log', 'NPHI', 'entries 25, 118 and 205', 'single samples set missing', 'completeness: three gap runs of one'],
-  ['EKENE-7 log', 'GR', 'entries 236 to 239', 'the LAS null value -999.25 left in place', 'rangeCheck gammaRay: below the minimum; completeness counts them present'],
+  ['EKENE-7 log', 'GR', 'entries 236 to 239', 'the LAS missing-value sentinel -999.25 left in place', 'rangeCheck gammaRay: below the minimum; completeness counts them present'],
   ['EKENE-7 log', 'NPHI', 'entries 150 to 159', 'written in percent', 'rangeCheck fraction v/v: above the maximum'],
   ['EKENE-7 log', 'RT', 'entry 120', 'a resistivity of zero', 'rangeCheck resistivity ohm.m: the minimum itself is not allowed'],
   ['EKENE-7 log', 'GR', 'entries 70 and 170', 'sixty gAPI added inside a sand', 'hampel: a local spike the global z-score cannot see'],

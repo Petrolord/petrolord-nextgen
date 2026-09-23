@@ -71,6 +71,7 @@ import MeteringLearningPage from '@/pages/apps/MeteringLearningPage';
 import ProducedWaterLearningPage from '@/pages/apps/ProducedWaterLearningPage';
 import CorrosionLearningPage from '@/pages/apps/CorrosionLearningPage';
 import SafetyStatsLearningPage from '@/pages/apps/SafetyStatsLearningPage';
+import DataQcLearningPage from '@/pages/apps/DataQcLearningPage';
 import HygieneLearningPage from '@/pages/apps/HygieneLearningPage';
 import RiskChangeLearningPage from '@/pages/apps/RiskChangeLearningPage';
 import ComplianceLearningPage from '@/pages/apps/ComplianceLearningPage';
@@ -454,6 +455,7 @@ const DashboardPage = () => {
     <Route path="apps/producedwater" element={<ProducedWaterLearningPage />} />
     <Route path="apps/corrosion" element={<CorrosionLearningPage />} />
     <Route path="apps/safetystats" element={<SafetyStatsLearningPage />} />
+    <Route path="apps/dataqc" element={<DataQcLearningPage />} />
     <Route path="apps/hygiene" element={<HygieneLearningPage />} />
     <Route path="apps/riskchange" element={<RiskChangeLearningPage />} />
     <Route path="apps/compliance" element={<ComplianceLearningPage />} />

@@ -267,6 +267,9 @@ export const PANELS = {
   'ss-rates-explorer': React.lazy(() => import('@/components/course/panels/safetystats/RatesExplorer')),
   'ss-intervals-explorer': React.lazy(() => import('@/components/course/panels/safetystats/IntervalsExplorer')),
   'ss-uchart-explorer': React.lazy(() => import('@/components/course/panels/safetystats/UChartExplorer')),
+  'dq-checks-explorer': React.lazy(() => import('@/components/course/panels/dataqc/ChecksExplorer')),
+  'dq-outliers-explorer': React.lazy(() => import('@/components/course/panels/dataqc/OutliersExplorer')),
+  'dq-monitor-explorer': React.lazy(() => import('@/components/course/panels/dataqc/MonitorExplorer')),
 };
 
 export function resolvePanel(id) {
