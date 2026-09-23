@@ -20,7 +20,7 @@ A policy has four parts. The first is the data: which stream, which unit, which 
 
 ## Settings chosen before the data
 
-Every chart setting in the table was fixed before phase two was charted. A lambda, a k or an h chosen after looking at which one gives the signals someone wanted would make the chart say what its author hoped. The same holds for the standard: phase one is chosen for being in control, and it is not re-estimated from the days being monitored. The first module showed what that costs: on its own averages the individuals chart signalled only on days 8 and 9.
+Every chart setting in the table was fixed before phase two was charted. A lambda, a k or an h chosen after seeing the signals would make the chart say what its author hoped. Phase one, likewise, is never re-estimated from the days being monitored. The first module showed what that costs: on its own averages the individuals chart signalled only on days 8 and 9.
 
 ## What a signal triggers
 
@@ -28,7 +28,7 @@ A signal is a question about the process. The policy says who answers it and how
 
 ## The scorecard line
 
-The scorecard's weights say what the data are for, and the policy states them with the use they serve. It names no grade band, because the engine has none to offer. If the plan needs a decision rule, it writes one in its own words, for example a threshold on the weakest dimension, and it gives the reason for the threshold.
+The policy states the scorecard's weights with the use they serve, and names no grade band. If the plan needs a decision rule, it writes one in its own words, for example a threshold on the weakest dimension, and it gives the reason for the threshold.
 
 ## Keeping the policy honest
 
