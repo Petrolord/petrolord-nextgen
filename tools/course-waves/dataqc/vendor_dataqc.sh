@@ -22,7 +22,7 @@ set -euo pipefail
 ENG=/root/petrolord-engines
 NG=${NG:-/root/wt-dai-d1-nextgen}
 PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
-REV=${REV:-a4e9592}
+REV=${REV:-c7eba2270f}
 FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 EXP=$(mktemp -d)
 LEDGER_PY=$(mktemp)
@@ -132,7 +132,7 @@ for p in paths:
     added.append({
         'path': p, 'kind': kind, 'group': GROUP, 'vendoredSha': blob,
         'reason': (f"D1 dataqc course: vendored sha-identical from petrolord-engines {full[:7]} "
-                   f"(PR #248 and #249: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, "
+                   f"(PR #248, #249 and #251: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, "
                    f"negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. "
                    f"{'New since' if kind == 'extra' else 'Differing from'} the canonical pin {pin[:7]}, which stays: moving it "
                    f"would also move economics, facilities, production, seismolord and wellsite paths other courses grade. "
