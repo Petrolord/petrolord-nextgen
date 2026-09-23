@@ -347,5 +347,5 @@ q(1, "Hampel flags gamma ray entry 145. What does the `cleaned` series carry at 
   "Nothing, since it is deleted."],
  "Section 21 prints entry 145 with reading 29.570000, window median 36.810000 and replacement 36.810000. The cleaned series carries the replacement, and the engine deletes nothing.")
 
-emit(Q, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'd1i_exam.json'), expect_n=42)
+emit(Q, '/root/wt-dai-d1-nextgen/tools/course-banks/dataqc/intermediate/d1i_exam.json', expect_n=42)
 finish()

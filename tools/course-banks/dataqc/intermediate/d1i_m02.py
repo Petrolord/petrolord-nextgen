@@ -114,5 +114,5 @@ q(2, "A value has a modified z-score of exactly 3.5. Is it labelled?",
   "The engine refuses, because a statistic equal to its threshold is ambiguous."],
  "Section 18 labels a potential outlier when |M| > 3.5. The comparison is strict, as every flag in the engine is, so a value exactly on 3.5 carries no label and no refusal is raised.")
 
-emit(Q, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'd1i_m02.json'), expect_n=15)
+emit(Q, '/root/wt-dai-d1-nextgen/tools/course-banks/dataqc/intermediate/d1i_m02.json', expect_n=15)
 finish()

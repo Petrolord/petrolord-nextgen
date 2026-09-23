@@ -113,5 +113,5 @@ q(2, "Twenty daily rates are screened with `zScores` at 3 and the sample SD. Can
   "Only with the population SD, whose ceiling at 20 is 3.000000."],
  "The ceiling table prints 4.248529 at 20 values, reachable at 3. 2.846050 is the ten-value row, the ceiling first passes 3 at eleven values, and 3.000000 is the population ceiling for the ten-value case in Section 31.")
 
-emit(Q, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'd1i_m01.json'), expect_n=15)
+emit(Q, '/root/wt-dai-d1-nextgen/tools/course-banks/dataqc/intermediate/d1i_m01.json', expect_n=15)
 finish()

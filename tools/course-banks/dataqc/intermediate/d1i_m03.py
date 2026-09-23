@@ -115,5 +115,5 @@ q(0, "What does the engine do when a quantile position h falls below the first s
   "It switches to R6."],
  "Section 19: with h = k + d the quantile is Y[k] + d (Y[k+1] - Y[k]) on the ordered values, clamped to the minimum and maximum. No refusal and no change of rule is involved.")
 
-emit(Q, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'd1i_m03.json'), expect_n=15)
+emit(Q, '/root/wt-dai-d1-nextgen/tools/course-banks/dataqc/intermediate/d1i_m03.json', expect_n=15)
 finish()

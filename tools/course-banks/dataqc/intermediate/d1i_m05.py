@@ -114,5 +114,5 @@ q(0, "A caller passes four rows in which the neutron is exactly twice the densit
   "Four flags, one per row, because the correlation is perfect."],
  "Section 4 tables the refusal for one variable a multiple of the other, field `rows`: \"rows have a singular covariance matrix: a variable is constant or one is a linear combination of others\". Four rows meet the minimum of p + 2 = 4, so the singular matrix is what refuses.")
 
-emit(Q, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'd1i_m05.json'), expect_n=15)
+emit(Q, '/root/wt-dai-d1-nextgen/tools/course-banks/dataqc/intermediate/d1i_m05.json', expect_n=15)
 finish()

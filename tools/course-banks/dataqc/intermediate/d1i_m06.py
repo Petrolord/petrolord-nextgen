@@ -115,5 +115,5 @@ q(3, "NIST prints the silicon wafer 0.9 quantile as 95.1981 by R6, 95.1957 by R7
   "They match NIST only after the engine is switched to R6."],
  "Section 19 prints 95.198070, 95.195680 and 95.197243, each with a relative difference of 0 against its golden, and each rounds to 95.1981, 95.1957 and 95.1972. The truncation erratum belongs to the Grubbs G.")
 
-emit(Q, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'd1i_m06.json'), expect_n=15)
+emit(Q, '/root/wt-dai-d1-nextgen/tools/course-banks/dataqc/intermediate/d1i_m06.json', expect_n=15)
 finish()

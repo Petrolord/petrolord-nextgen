@@ -116,5 +116,5 @@ q(0, "At nSigma 3, the window is widened from halfWindow 3 to halfWindow 5. What
   "It falls to 4, the count at the widest window in the table."],
  "Widening the window alone leaves the count unchanged at 11 while nSigma stays at 3. The drop to 3 flags needs nSigma 5 as well, and the count of 4 comes from the twenty-one sample window.")
 
-emit(Q, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'd1i_m04.json'), expect_n=15)
+emit(Q, '/root/wt-dai-d1-nextgen/tools/course-banks/dataqc/intermediate/d1i_m04.json', expect_n=15)
 finish()
