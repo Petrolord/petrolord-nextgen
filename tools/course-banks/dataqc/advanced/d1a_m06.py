@@ -15,7 +15,7 @@ q(0, "NIST/SEMATECH 1.3.5.17.1 prints Grubbs' G on its uranium example as 2.4687
  ["The engine uses the population SD for G, which moves the fourth decimal of the result",
   "The page rounds correctly, and the engine's G carries a small error in its last digits",
   "The engine rounds G up to 2.4688 before it compares G with the critical 2.031652"],
- "Truncated rather than rounded; rounded to four decimals the engine reads 2.4688. G uses the sample SD, as NIST defines it. The engine keeps full precision and compares 2.468765 with its critical value of 2.031652, and the test rejects either way, as NIST says. The note is about a published page.")
+ "The printed figure is truncated; rounded to four decimals the engine reads 2.4688. G uses the sample SD, as NIST defines it. The engine keeps full precision and compares 2.468765 with its critical value of 2.031652, and the test rejects either way, as NIST says. The note is about a published page.")
 
 q(2, "NIST 6.3.2.4 prints the EWMA lower limit as 47.4115, and the engine reads 47.411568. Where does the difference come from?",
  "The page rounds sqrt(0.3 / 1.7) to 0.4201 before multiplying; the engine reads 47.4116 at four decimals",
@@ -104,7 +104,7 @@ q(0, "A quality note wants to report the gamma ray's upper quartile on EKENE-7's
 q(3, "The cumulative oil flag's reason, in the engine's words, reads \"cumulative falls from 1338506.2 at entry 67 to 1331009.5\". Which day is entry 67, and which day is flagged?",
  "Entry 67 is day 68; the flag falls on day 70, compared with day 68",
  ["Entry 67 is day 67; the flag falls on day 69, the day after it",
-  "Entry 67 is day 66, since the engine counts two days for every entry after a gap in the series",
+  "Entry 67 is day 70, the flagged day itself, since a reason names the entry it flags",
   "Entry 67 is day 69, the missing day, since the engine skips a missing entry when it counts entries"],
  "The engine counts entries from 0, so entry 67 in the reason is day 68. Day 69 is missing, so day 70 is compared with the last present value, day 68, and the `drop` field is 7496.700000 bbl. Entries are positions, one per day, and a missing value keeps its position.")
 

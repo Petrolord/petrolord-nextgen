@@ -8,7 +8,7 @@
    "The engine rounds G up to 2.4688 before it compares G with the critical 2.031652"
   ],
   "answer": 0,
-  "explanation": "Truncated rather than rounded; rounded to four decimals the engine reads 2.4688. G uses the sample SD, as NIST defines it. The engine keeps full precision and compares 2.468765 with its critical value of 2.031652, and the test rejects either way, as NIST says. The note is about a published page."
+  "explanation": "The printed figure is truncated; rounded to four decimals the engine reads 2.4688. G uses the sample SD, as NIST defines it. The engine keeps full precision and compares 2.468765 with its critical value of 2.031652, and the test rejects either way, as NIST says. The note is about a published page."
  },
  {
   "prompt": "NIST 6.3.2.4 prints the EWMA lower limit as 47.4115, and the engine reads 47.411568. Where does the difference come from?",
@@ -146,7 +146,7 @@
   "prompt": "The cumulative oil flag's reason, in the engine's words, reads \"cumulative falls from 1338506.2 at entry 67 to 1331009.5\". Which day is entry 67, and which day is flagged?",
   "options": [
    "Entry 67 is day 67; the flag falls on day 69, the day after it",
-   "Entry 67 is day 66, since the engine counts two days for every entry after a gap in the series",
+   "Entry 67 is day 70, the flagged day itself, since a reason names the entry it flags",
    "Entry 67 is day 69, the missing day, since the engine skips a missing entry when it counts entries",
    "Entry 67 is day 68; the flag falls on day 70, compared with day 68"
   ],
