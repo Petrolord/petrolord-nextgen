@@ -27,12 +27,16 @@ import {
 } from '@/services/academyService';
 import { buildCapstoneAnswers } from '@/lib/capstoneAnswer';
 import LearningModeGate from '@/components/academy/LearningModeGate';
+import CapstoneCaseFiles from '@/components/course/CapstoneCaseFiles';
+import { DATAQC_CASE_FILES } from '@/content/capstone-cases/dataqc';
 
 // The Oilfield Data Quality course page, the first course of the academy's
 // Data & AI module. Every number it prints is a return value from the teaching
 // lab (dataqcLab), which is a return value from the vendored data quality
 // engine on the Ekene teaching dataset. It never reads the capstone:
-// panelCapstoneGuard.test.js and dataqcLab.test.js both grep this file.
+// panelCapstoneGuard.test.js and dataqcLab.test.js both grep this file. The
+// capstone case files are imported from src/content/capstone-cases/dataqc and
+// offered on the capstone card only, as the welltest course offers its buildup.
 
 const APP = 'dataqc';
 const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -250,6 +254,10 @@ const DataQcLearningPage = () => {
               <CardDescription>{capstone?.prompt}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
+              {capstone && DATAQC_CASE_FILES[tier] && (
+                <CapstoneCaseFiles files={DATAQC_CASE_FILES[tier]}
+                  note="Download the case files the brief names, then paste each column into the panel it belongs to. A missing value is written null, and no panel loads a case for you." />
+              )}
               {!(!hasDeepCourse(APP, tier)
                 || courseProgress?.capstone?.unlocked === true
                 || courseProgress?.capstone?.passed === true
