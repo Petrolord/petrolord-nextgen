@@ -16,105 +16,105 @@ q(1, "A QC policy for EKENE-3's pressure must decide whether completeness runs b
  ["The charts find gaps themselves and flag each missing day, so completeness can run after them as a cross-check",
   "Completeness is first in DIMENSIONS, and checks run in that order",
   "The charts fill a gap with the target, so completeness reports it"],
- "Section 30, THE ORDER OF CHECKS: the control charts refuse a series with a gap, so completeness comes first, and the engine's own words are quoted there for values[30]. A chart returns a refusal and no flag. DIMENSIONS is a display order, and the engine runs only the checks the caller calls. The engine never fills a value.")
+ "The control charts refuse a series with a gap, so completeness comes first, and the engine's own words are quoted there for values[30]. A chart returns a refusal and no flag. DIMENSIONS is a display order, and the engine runs only the checks the caller calls. The engine never fills a value.")
 
 q(3, "Why does a policy run `indexCheck` on EKENE-7's splice index before it asks for `coverage`?",
  "Coverage refuses an index that steps back and names indexCheck as the check that finds it",
  ["Coverage repairs a reversed index by sorting it, and indexCheck is needed to say which entries it moved",
   "indexCheck converts the missing entry at 12 into a depth, and coverage cannot run until every entry is present",
   "The two checks give the same answer on a spliced index, and indexCheck is simply the cheaper of the two to run"],
- "Coverage refuses the splice at index[5], in the engine's own words: index[5] must be strictly increasing: sort and de-duplicate the index first (indexCheck finds the offenders). Section 30 draws the order from it. Coverage repairs nothing, indexCheck converts nothing, and on the splice the two do not agree: one refuses and the other returns 2 duplicates, 1 reversal, 3 irregular steps and 1 missing entry.")
+ "Coverage refuses the splice at index[5], in the engine's own words: index[5] must be strictly increasing: sort and de-duplicate the index first (indexCheck finds the offenders). The course draws the order from it. Coverage repairs nothing, indexCheck converts nothing, and on the splice the two do not agree: one refuses and the other returns 2 duplicates, 1 reversal, 3 irregular steps and 1 missing entry.")
 
 q(0, "EKENE-7's gamma ray carries -999.25 at entries 236 to 239. Why does a policy put the range check before any statistic?",
  "A sentinel is present to completeness, which reads 1.000000, and invalid to the range check, which fails 4 values; any statistic run first would take -999.25 as a reading",
  ["Completeness converts -999.25 to null on its own, so the range check only has to confirm that nothing remains",
   "The range check converts each sentinel it finds to null, which the statistics then leave out",
   "A statistic refuses a negative gamma ray, so the order only matters for the message the caller sees"],
- "Section 3: missing is null, undefined or NaN, and -999.25 is a present number until someone converts it, so completeness reads 1.000000 and the range check reads 4 failures below the gamma ray minimum. Section 30 draws the order from that. No check converts anything: the conversion is the caller's, and converted to null the channel reads 0.983333 and 0 range failures.")
+ "Missing is null, undefined or NaN, and -999.25 is a present number until someone converts it, so completeness reads 1.000000 and the range check reads 4 failures below the gamma ray minimum. The course draws the order from that. No check converts anything: the conversion is the caller's, and converted to null the channel reads 0.983333 and 0 range failures.")
 
 q(2, "The modified z-score is run on EKENE-7's sonic, entries 174 to 189, which hold the stuck run. What does the engine return?",
  "A refusal: values have MAD = 0: at least half the present values equal the median, so the modified z-score is undefined",
  ["A flag on each of the nine stuck entries, since a value repeated nine times is a potential outlier",
   "No flags, since a flat stretch is the quietest possible data and every modified z-score in it is zero",
   "A modified z-score with 1.4826 x MAD as its fallback scale"],
- "Section 30 prints the refusal on those entries. With the stuck value at more than half the entries, the MAD is zero and the modified z-score is undefined, and Section 31 lists a fallback when the MAD is zero as not built. That is why a frozen run is found first, by frozenRuns, which names it as a run of nine.")
+ "The course prints the refusal on those entries. With the stuck value at more than half the entries, the MAD is zero and the modified z-score is undefined, and the course lists a fallback when the MAD is zero as not built. That is why a frozen run is found first, by frozenRuns, which names it as a run of nine.")
 
 q(3, "On EKENE-3 day 40, oil plus water is 1737.500000 bbl/d against a gross of 1774.000000. At the defaults, how does `phaseSumCheck` judge it?",
  "Flagged: the difference of -36.500000 is outside an allowed 8.870000, which is 0.005 of the total",
  ["Flagged: the difference of -36.500000 is outside an allowed 8.991000, the allowance the check applies to every day",
   "Passed: the default tolerance is absolute, and 36.500000 bbl/d is small against a gross of 1774.000000",
   "Passed: the parts sum to more than 0.005 of the total, which is all the default asks of them"],
- "Section 13: the parts must add to the total within max(absTolerance, relTolerance x |total|), with the Petrolord defaults relTolerance 0.005 of the TOTAL and absTolerance 0. 0.005 times 1774.000000 is the allowed 8.870000. The default tolerance is relative, on the total. 8.991000 is day 41's own allowance, 0.005 of its gross of 1798.200000, since each day's allowance follows its own total.")
+ "The parts must add to the total within max(absTolerance, relTolerance x |total|), with the Petrolord defaults relTolerance 0.005 of the TOTAL and absTolerance 0. 0.005 times 1774.000000 is the allowed 8.870000. The default tolerance is relative, on the total. 8.991000 is day 41's own allowance, 0.005 of its gross of 1798.200000, since each day's allowance follows its own total.")
 
 q(0, "A policy considers two alternatives to the phase-sum default on EKENE-3: relTolerance 0.01, and relTolerance 0.005 with absTolerance 50 bbl/d. What does each flag?",
  "At 0.01, day 40 alone is still flagged; with absTolerance 50 added, no day is flagged",
  ["At 0.01, no day is flagged; with absTolerance 50 added, day 40 alone is still flagged",
   "At 0.01, days 40 and 41 are flagged; with absTolerance 50 added, only day 41 is",
   "Both flag day 40 alone, since a tolerance moves the allowed difference and never the answer"],
- "Section 13's table: relTolerance 0.01 fails 1 day, day 40; relTolerance 0.005 with absTolerance 50 bbl/d fails 0. The allowed difference is the larger of the two terms, and 50 bbl/d exceeds day 40's 36.500000. Day 41 is flagged under none of the three settings. The choice of tolerance changed the answer, which is why a policy states it.")
+ "The course's table: relTolerance 0.01 fails 1 day, day 40; relTolerance 0.005 with absTolerance 50 bbl/d fails 0. The allowed difference is the larger of the two terms, and 50 bbl/d exceeds day 40's 36.500000. Day 41 is flagged under none of the three settings. The choice of tolerance changed the answer, which is why a policy states it.")
 
 q(1, "The stated readings 410.000000 to 410.600000 rise 0.100000 at a time. At tolerance 0.15 and minRun 5, how many frozen runs does the engine find?",
  "0, because each value is compared with the run's first value, and the drift leaves it",
  ["1 run of all 7 readings, because each reading lies within 0.15 of the reading before it",
   "1 run of 5 readings, the shortest run minRun allows, from 410.000000 to 410.400000",
   "0, because frozenRuns refuses any tolerance above 0 on a series in which no value repeats"],
- "Section 14: a frozen run is at least minRun consecutive present values each within tolerance of the run's FIRST value. From 410.000000, the values stay within 0.15 only up to 410.100000, far short of 5. Chaining all 7 is the neighbour rule, which Section 14 derives and states the engine does not use. frozenRuns accepts a tolerance above 0; its refusal is for a minRun below 2.")
+ "A frozen run is at least minRun consecutive present values each within tolerance of the run's FIRST value. From 410.000000, the values stay within 0.15 only up to 410.100000, far short of 5. Chaining all 7 is the neighbour rule, which the course derives and states the engine does not use. frozenRuns accepts a tolerance above 0; its refusal is for a minRun below 2.")
 
 q(2, "At the default water cut tolerance of 1e-6 the check fails 83 days on EKENE-3, and at 1e-4 it fails 6. Why does a policy for this sheet state 1e-4?",
  "The sheet reports water cut to four decimals, so the default flags rounding; at 1e-4 only the 6 planted days remain",
  ["The default is too loose for a production sheet, and 1e-4 is tight enough to find the 83 real defects",
   "At 1e-4 the check stops testing the range, so the five days written in percent are no longer flagged",
   "1e-4 is the tolerance NIST prints for a ratio, and the engine's 1e-6 is kept only for log data"],
- "Section 12: the EKENE-3 sheet reports water cut to four decimals, so a correct value can differ from water / (oil + water) by up to half a unit in the fourth decimal, and 1e-6 flags that rounding. At 1e-4 the 5 out-of-range days and the day 55 mismatch remain. 1e-4 is the looser of the two, and the range test runs at any tolerance. Section 30 lists 1e-6 as a Petrolord choice, with no NIST source.")
+ "The EKENE-3 sheet reports water cut to four decimals, so a correct value can differ from water / (oil + water) by up to half a unit in the fourth decimal, and 1e-6 flags that rounding. At 1e-4 the 5 out-of-range days and the day 55 mismatch remain. 1e-4 is the looser of the two, and the range test runs at any tolerance. The course lists 1e-6 as a Petrolord choice, with no NIST source.")
 
 q(0, "With no expectedStep or stepTolerance passed, what does `indexCheck` use on EKENE-7's depth index?",
  "The median of the steps in the stated direction, 0.500000 ft, with a tolerance of 1e-6 times that step",
  ["The first step in the index, with a tolerance of half a step, so that a skipped sample is still read as regular",
   "The mean of all the steps, pulled up by the one skipped sample, with a tolerance of 1e-6 ft",
   "No default: the check refuses until the caller states the expected step, since a log step is a tool setting"],
- "Section 10 and Section 30: the expected step defaults to the median of the steps in the stated direction, and the step tolerance to 1e-6 x expectedStep, so the depth index reads an expected step of 0.500000 ft, a tolerance of 5.00e-7 ft and 1 irregular step. Both are Petrolord choices written in the basis. The engine uses neither the first step nor the mean of the steps.")
+ "The expected step defaults to the median of the steps in the stated direction, and the step tolerance to 1e-6 x expectedStep, so the depth index reads an expected step of 0.500000 ft, a tolerance of 5.00e-7 ft and 1 irregular step. Both are Petrolord choices written in the basis. The engine uses neither the first step nor the mean of the steps.")
 
 q(3, "The Tukey fences default to R7 quartiles. On EKENE-7's water sand gamma ray, what does switching to R6 do?",
  "The upper fence moves from 48.685000 to 49.117500, and both flag entry 170",
  ["The upper fence moves from 48.685000 to 49.117500, and the move clears entry 170, which sits between them",
   "The fences do not move, since R6 and R7 give the same quartiles on any series of more than twelve values",
   "The upper fence moves from 49.117500 to 48.685000, since R6 is the default of Excel, R and numpy"],
- "Section 20 prints the R7 fence at 48.685000 and the R6 fence at 49.117500 and entry 170 flagged by both; it reads 90.590000, far above either. R7 and R6 give different quartiles, 31.947500 and 31.817500 for the first. R7 is the default of Excel, R and numpy, chosen so a spreadsheet reproduces the fences, and R6 is NIST's.")
+ "The course prints the R7 fence at 48.685000 and the R6 fence at 49.117500 and entry 170 flagged by both; it reads 90.590000, far above either. R7 and R6 give different quartiles, 31.947500 and 31.817500 for the first. R7 is the default of Excel, R and numpy, chosen so a spreadsheet reproduces the fences, and R6 is NIST's.")
 
 q(2, "EKENE-7's gamma ray is run through `hampel`, which flags the spikes at entries 70 and 170. What does the engine do about the flagged values?",
  "It flags them and returns a `cleaned` series beside the flags; whether to use it is the caller's decision",
  ["It replaces each flagged value with its window median in the input, so the caller's series comes back repaired",
   "It deletes the flagged entries and returns the series with those two entries removed",
   "It refuses to return a result until the caller confirms which flags are real defects"],
- "Section 1: the engine does not fill, repair or delete a value. hampel returns a cleaned series beside its flags, and choosing to use it is the caller's decision. The replacement in the cleaned series is the window median, and the input is left as it was. A flag is a rule that fired; the engine does not decide whether a flagged value is wrong.")
+ "The engine does not fill, repair or delete a value. hampel returns a cleaned series beside its flags, and choosing to use it is the caller's decision. The replacement in the cleaned series is the window median, and the input is left as it was. A flag is a rule that fired; the engine does not decide whether a flagged value is wrong.")
 
 q(1, "A policy sets the cumulative check's tolerance to 8000 bbl. What happens to EKENE-3's day 70, which falls 7496.700000 bbl against day 68?",
  "It is no longer flagged; a tolerance wide enough to swallow a keying error hides it",
  ["It is still flagged, since a cumulative that falls is flagged at any tolerance",
   "It is flagged against day 69 in place of day 68, since the tolerance changes which day it is compared with",
   "It is flagged as a frozen run, since a cumulative held within 8000 bbl counts as stuck"],
- "Section 11: with a tolerance of 8000 bbl the same drop is not flagged, because a drop must be larger than the tolerance. A tolerance is for meter noise. Day 69 is missing, and the comparison is always with the last present value, day 68. The cumulative check has no frozen-run rule; frozenRuns is a separate check.")
+ "With a tolerance of 8000 bbl the same drop is not flagged, because a drop must be larger than the tolerance. A tolerance is for meter noise. Day 69 is missing, and the comparison is always with the last present value, day 68. The cumulative check has no frozen-run rule; frozenRuns is a separate check.")
 
 q(0, "The Ekene generator plants 22 documented defects. What happens to the course build if a check fails to find one of them?",
  "The build fails: each defect is stated with the check that finds it, and the section that finds it asserts so",
  ["The build passes and lists the defect as a known miss, since a real check can miss a real defect",
   "The build replaces that defect with a larger one of the same kind until the check finds it",
   "The build drops the defect from the table, since only defects that a check finds count as planted"],
- "Section 2: every planted defect is stated by the generator, each is found by the check named, the section that finds it asserts so, and the build fails if any defect is not found. The generator plants documented defects on stated seeds; it does not resize one, and the table of 22 is fixed.")
+ "Every planted defect is stated by the generator, each is found by the check named, the section that finds it asserts so, and the build fails if any defect is not found. The generator plants documented defects on stated seeds; it does not resize one, and the table of 22 is fixed.")
 
 q(3, "EKENE-3's pressure carries two planted events: a glitch on day 8, and a shift of 1.2 process standard deviations down from day 16. Which checks does the defect table name for them?",
  "individualsChart sees the glitch; ewmaChart and cusumChart see the shift",
  ["individualsChart sees both, since the glitch and the shift each carry the pressure past three sigma",
   "zScores sees the glitch and the modified z-score sees the shift, since both events are single values",
   "ewmaChart sees the glitch and individualsChart the shift, since the shift is the larger of the two events"],
- "Section 2's last row names individualsChart for the glitch and ewmaChart and cusumChart for the shift. Section 28 adds the counts: the individuals chart signals low on 1 day from day 16 to day 40, where one day falls past three sigma. Outlier tests read values as a set with no order. The shift is a run of days, and the glitch is one reading.")
+ "The course's last row names individualsChart for the glitch and ewmaChart and cusumChart for the shift. The course adds the counts: the individuals chart signals low on 1 day from day 16 to day 40, where one day falls past three sigma. Outlier tests read values as a set with no order. The shift is a run of days, and the glitch is one reading.")
 
 q(2, "Which of these settings, left unset, is a Petrolord choice with no published source behind it?",
  "frozenRuns minRun 5, the run length a stuck value needs before it is flagged",
  ["modifiedZScores threshold 3.500000, the level above which a modified z-score is labelled a potential outlier",
   "grubbsTest alpha 0.050000, the significance level at which the Grubbs test rejects its one suspect",
   "ewmaChart L 3 with asymptotic limits, the multiplier and pair that the EWMA draws when the caller is silent"],
- "Section 30 lists frozenRuns minRun 5 as Petrolord. The modified z threshold 3.500000 is Iglewicz and Hoaglin as NIST prints it, grubbsTest alpha 0.050000 is NIST 1.3.5.17.1, and ewmaChart's L 3 and asymptotic limits are NIST 6.3.2.4. Every default is written in a basis block, and the table names whose choice each one is.")
+ "The course lists frozenRuns minRun 5 as Petrolord. The modified z threshold 3.500000 is Iglewicz and Hoaglin as NIST prints it, grubbsTest alpha 0.050000 is NIST 1.3.5.17.1, and ewmaChart's L 3 and asymptotic limits are NIST 6.3.2.4. Every default is written in a basis block, and the table names whose choice each one is.")
 
 emit(Q, '/root/dai-wip-dataqc/banks/d1a_m05.json', expect_n=15)
 finish()
