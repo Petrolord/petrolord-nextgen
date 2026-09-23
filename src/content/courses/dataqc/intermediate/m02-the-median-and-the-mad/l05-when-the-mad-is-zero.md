@@ -2,9 +2,9 @@
 
 {{panel:dq-outliers-explorer}}
 
-The MAD is the median of the absolute deviations from the median. If at least half of the values equal the median exactly, at least half of those deviations are zero, the middle one is zero, and the MAD is zero. The modified z-score divides by the MAD, so it is undefined.
+The MAD is the median of the absolute deviations from the median. If more than half of the values equal the median exactly, more than half of those deviations are zero, the middle one is zero, and the MAD is zero. Exactly half is not enough: on 1, 5, 5, 9, two of four values sit at the median 5, and the engine returns a MAD of 2. The modified z-score divides by the MAD, so it is undefined.
 
-The engine's worked case is the series 5, 5, 5, 6, 7, stated. Three of its five values are the same, and they sit in the middle of the sorted series, so at least half the values equal the median.
+The engine's worked case is the series 5, 5, 5, 6, 7, stated. Three of its five values are the same, and they sit in the middle of the sorted series, so more than half the values equal the median.
 
 | function | field named | result |
 | --- | --- | --- |
@@ -12,7 +12,7 @@ The engine's worked case is the series 5, 5, 5, 6, 7, stated. Three of its five 
 
 The engine's refusal, in its own words:
 
-> values have MAD = 0: at least half the present values equal the median, so the modified z-score is undefined
+> values have MAD = 0: more than half the present values equal the median, so the modified z-score is undefined
 
 ## Why a refusal
 
@@ -26,7 +26,7 @@ Three kinds of data produce a MAD of zero:
 
 * a channel that reports to a coarse resolution, so most readings land on the same few values;
 * a meter or sensor that held one value for a stretch, which the Associate tier's frozen run check is built to find;
-* a series that is mostly a single constant, such as a status or a choke setting, where half the entries are the same number.
+* a series that is mostly a single constant, such as a status or a choke setting, where more than half the entries are the same number.
 
 In each case the refusal says something about the data before any outlier question is asked. A held value is a consistency problem first.
 

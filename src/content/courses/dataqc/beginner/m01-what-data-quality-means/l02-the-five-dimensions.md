@@ -30,7 +30,7 @@ Uniqueness asks whether one real object hides under several names. `duplicateIde
 
 ## Plausibility: which values stand apart
 
-The fifth dimension asks a different kind of question: among values that are present, valid and consistent, which ones sit far from the rest, and by which measure? That is the Professional tier's question, and this tier leaves it alone. You can use every Associate check without it, and the next tier uses every Associate check first.
+The fifth dimension asks a different kind of question: among values that are present, valid and consistent, which ones sit far from the rest, and by which measure? That is the Professional tier's question, and this tier leaves it alone. You can use every Associate check without it.
 
 ## Why split the question at all
 

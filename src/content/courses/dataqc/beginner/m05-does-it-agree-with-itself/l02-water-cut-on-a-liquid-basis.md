@@ -26,15 +26,15 @@ Days 20 to 24 are written in percent, the same slip module three found in the ne
 
 ## The tolerance is a statement about the file
 
-The default is a choice: 1e-6 treats the reported cut as if it carried full precision. It suits a cut stored by a program. The engine cannot know how your file was written; you can, and the tolerance you pass should match the precision the file was written to. A tolerance tighter than the reporting precision flags the rounding; a tolerance matched to it leaves only the disagreements that are real.
+The default is a choice: 1e-6 treats the reported cut as if it carried full precision. The engine cannot know how your file was written; you can, and the tolerance you pass should match it. A tolerance tighter than the reporting precision flags the rounding; a tolerance matched to it leaves only the disagreements that are real.
 
 ## The basis matters
 
-A water cut can be defined more than one way, and they are not interchangeable. On day 10 the computed liquid-basis cut is 0.183105. Derived on the same day, water over oil, the water-oil ratio, is 0.224147, and oil over liquid, the oil cut, is 0.816895. Only the first is what the engine checks. If your sheet reports a water-oil ratio in the water cut column, it will mismatch day after day, and the fix is a relabelled column.
+A water cut can be defined more than one way, and they are not interchangeable. On day 10 the computed liquid-basis cut is 0.183105. Derived on the same day, water over oil, the water-oil ratio, is 0.224147, and oil over liquid, the oil cut, is 0.816895. Only the first is what the engine checks. On EKENE-3, where water is below oil on every day the course prints, a water-oil ratio in the water cut column would mismatch day after day; where water exceeds oil it rises above 1 and the out-of-range rule fires instead.
 
 ## Days it cannot compute
 
-Where the engine cannot compute a liquid-basis cut, because a rate is missing or negative or there is no liquid, the computed entry is null. On EKENE-3 that is days 31, 32, 33, 47 and 60: the meter outage, the negative allocation entry and a shut-in day. The check does not judge those days, and the earlier checks already flagged each for its own reason.
+Where the engine cannot compute a liquid-basis cut, because a rate is missing or negative or there is no liquid, the computed entry is null. On EKENE-3 that is days 31, 32, 33, 47 and 60: the meter outage, the negative allocation entry and a shut-in day. The check does not judge those days; each is also a gap in the reported water cut column. Day 60 is a correct shut-in day that rateCheck does not flag.
 
 ## Exercise
 

@@ -32,7 +32,7 @@ On EKENE-7's fourteen core plugs the median is 0.215500 v/v and the MAD is 0.007
 
 ## Where the MAD breaks
 
-The MAD has one weakness, and it is the mirror of its strength. Because it looks only at the middle of the deviations, if half or more of the values sit exactly on the median, the middle deviation is zero. A spread of zero cannot be divided by, and the last lesson of this module shows the engine's refusal in that case.
+The MAD has one weakness, and it is the mirror of its strength. Because it looks only at the middle of the deviations, if more than half of the values sit exactly on the median, the middle deviation is zero. A spread of zero cannot be divided by, and the last lesson of this module shows the engine's refusal in that case.
 
 ## Exercise
 

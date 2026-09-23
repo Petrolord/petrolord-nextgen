@@ -25,9 +25,9 @@ The median of the steps is the middle step once they are sorted. On a log steppe
 
 ## The tolerance that comes with it
 
-A step is regular when it differs from the expected step by no more than the step tolerance. The default tolerance is 1e-6 x expectedStep, which on EKENE-7 is 5.00e-7 ft. That is tight on purpose: room for rounding in a stored depth and little else.
+A step is regular when it differs from the expected step by no more than the step tolerance. The default tolerance is 1e-6 x expectedStep, which on EKENE-7 is 5.00e-7 ft. The expected step there is not supplied: it is the median of the steps in the stated direction, 0.500000 ft, so the tolerance follows the data's own step.
 
-The default is a choice. A looser tolerance would pass small wobbles in a depth column recorded by a tool that does not step perfectly evenly; a tighter one would flag rounding. The engine picks a default that treats a regularly sampled log as regular and states it in the result, so a caller who needs a different one can pass it.
+The default is a choice, a Petrolord default the result states in its basis block. A looser tolerance would pass small wobbles in a depth column recorded by a tool that does not step perfectly evenly. A caller who needs a different tolerance, or a stated expected step, can pass either.
 
 ## Stating the step yourself
 

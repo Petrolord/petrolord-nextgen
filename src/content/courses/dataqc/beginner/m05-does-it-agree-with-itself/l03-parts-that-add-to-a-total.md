@@ -19,7 +19,7 @@ Day 41 carries a small difference, -5.400000, inside its 8.991000 allowance. It 
 
 ## Why the tolerance is on the total
 
-The tolerance could be taken on the sum of the parts, on one part, or as a fixed number of barrels. The engine takes it as a fraction of the total by default. The total is one figure every day has, and scaling by it means a high-rate day gets a proportionally wider allowance than a low-rate day. The absolute tolerance is there for the other case, a floor of barrels below which you do not care, and its default of 0 means no floor.
+The tolerance could be taken on the sum of the parts, on one part, or as a fixed number of barrels. The engine takes it as a fraction of the total by default. The total scales with the day's rate, so scaling by it means a high-rate day gets a proportionally wider allowance than a low-rate day. The absolute tolerance is there for the other case, a floor of barrels below which you do not care, and its default of 0 means no floor.
 
 These are the choices the engine makes; a caller with different meters states different ones. Whatever you choose, the allowed figure is only meaningful beside the rule that made it.
 

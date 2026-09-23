@@ -14,7 +14,7 @@ Before the engine can say whether a value is there, it needs a rule for what "no
 
 ## Three spellings of absence
 
-Null, undefined and NaN are the three ways a program ends up holding "no number here". A spreadsheet blank read into a program becomes one of them, a column that was never filled becomes another, and a failed parse of a text cell becomes the third. The engine treats all three the same, because in every case nobody recorded a value.
+Null, undefined and NaN are the three ways a program ends up holding "no number here". Each can arise when a program reads a spreadsheet blank, a column that was never filled or a text cell it cannot parse. The engine treats all three the same, because in every case nobody recorded a value.
 
 ## Zero is a value
 

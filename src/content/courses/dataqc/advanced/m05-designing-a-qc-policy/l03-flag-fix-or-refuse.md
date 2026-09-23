@@ -3,7 +3,7 @@
 {{panel:dq-checks-explorer}}
 {{panel:dq-outliers-explorer}}
 
-For every question it is asked, the engine does one of two things: it flags, or it refuses. It never fixes. On the Ekene teaching data, 22 defects were planted, and every one is found by a flag from a named check. Where an input makes the question unanswerable, such as a MAD of zero, a unit it does not list or a chart series with a gap, the engine refuses and names the field. Fixing, whether by converting a sentinel, filling a gap or dropping a reading, is the caller's decision.
+When a check meets a problem, the engine does one of two things: it flags, or it refuses. Charts and the scorecard also return values, and the engine never fixes. On the Ekene teaching data, 22 defects were planted, and every one is found by a flag from a named check. Where an input makes the question unanswerable, such as a MAD of zero, a unit it does not list or a chart series with a gap, the engine refuses and names the field. Fixing, whether by converting a sentinel, filling a gap or dropping a reading, is the caller's decision.
 
 | situation | what the engine does | the caller's decision |
 | --- | --- | --- |

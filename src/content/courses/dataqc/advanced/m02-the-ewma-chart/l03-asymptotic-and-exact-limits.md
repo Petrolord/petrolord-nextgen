@@ -2,7 +2,7 @@
 
 {{panel:dq-monitor-explorer}}
 
-The EWMA chart has two sets of limits. The asymptotic limits are target +/- L sigma sqrt(lambda / (2 - lambda)), the same every day. The exact limits multiply the variance by 1 - (1 - lambda)^(2t), so they start narrow and widen towards the asymptotic pair. On EKENE-3 with lambda 0.2, L 3, a target of 611.380000 psig and sigma 3.774063 psi from phase one, the asymptotic limits are 607.605937 and 615.154063. The exact limits on day 1 are 609.115562 and 613.644438, and by day 35 they read 607.605937 and 615.154063.
+The EWMA chart has two sets of limits. The asymptotic limits are target +/- L sigma sqrt(lambda / (2 - lambda)), the same every day. The exact limits multiply the variance by 1 - (1 - lambda)^(2t), so they start narrow and widen towards the asymptotic pair. On EKENE-3 with lambda 0.2, L 3, a target of 611.380000 psig and sigma 3.774063 psi from phase one, the asymptotic limits are 607.605937 and 615.154063. The exact limits on day 1 are 609.115562 and 613.644438, and from day 35 they print as the asymptotic pair; on day 34 they still print 607.605938 and 615.154062.
 
 | day | exact lower | exact upper | asymptotic lower | asymptotic upper |
 | --- | --- | --- | --- | --- |
@@ -16,7 +16,7 @@ The EWMA chart has two sets of limits. The asymptotic limits are target +/- L si
 
 ## Why the early days are narrower
 
-The EWMA starts at the target. On day 1 it holds lambda of one reading and 1 - lambda of the target, which has no scatter of its own, so the EWMA on day 1 varies less than it will once several readings have entered. The exact variance says this in its factor 1 - (1 - lambda)^(2t): small at t = 1, and closer to 1 every day. The asymptotic limits use the factor's final value from the start. On EKENE-3 the two pairs agree to six decimals by day 35.
+The EWMA starts at the target. On day 1 it holds lambda of one reading and 1 - lambda of the target, which has no scatter of its own, so the EWMA on day 1 varies less than it will once several readings have entered. The exact variance says this in its factor 1 - (1 - lambda)^(2t): small at t = 1, and closer to 1 every day. The asymptotic limits use the factor's final value from the start. The exact pair always stays inside; from day 35 the gap is below the last printed digit.
 
 ## The engine's default
 
@@ -24,7 +24,7 @@ The engine's default is asymptotic, with L 3, and it cites NIST/SEMATECH 6.3.2.4
 
 ## What the choice changes
 
-Only the early days differ, and only near a limit can the choice change a signal. An early reading that moves the EWMA sharply can cross an exact limit that sits inside the asymptotic one. A chart started just after a process change, or restarted on a new phase one, spends its first days in that narrow stretch, and that is where the exact limits earn their place. A chart that has run for weeks reads the same either way, because the two pairs have met.
+Only the early days differ, and only near a limit can the choice change a signal. An early reading that moves the EWMA sharply can cross an exact limit that sits inside the asymptotic one. A chart started just after a process change, or restarted on a new phase one, spends its first days in that narrow stretch, and that is where the exact limits earn their place. A chart that has run for weeks reads the same either way at the printed precision, though the pairs never meet.
 
 On EKENE-3 the asymptotic chart signals on days 8, 9, 13, 14, 22, 27 to 34, 36 and 38. Whether the exact chart signals on the same days is something to read from the panel, and the exercise asks you to.
 

@@ -38,7 +38,7 @@ EKENE-7's gamma ray carries -999.25 at entries 236 to 239, the LAS null value le
 
 EKENE-7's sonic holds one value, 83.200000, for 9 entries from 175 to 183. On entries 174 to 189, which contain that run, the modified z-score refuses:
 
-> values have MAD = 0: at least half the present values equal the median, so the modified z-score is undefined
+> values have MAD = 0: more than half the present values equal the median, so the modified z-score is undefined
 
 A stuck meter is an agreement of the meter with itself. Found first, it is named as a frozen run; found by an outlier test, it produces a refusal or reads as the quietest stretch of the log.
 

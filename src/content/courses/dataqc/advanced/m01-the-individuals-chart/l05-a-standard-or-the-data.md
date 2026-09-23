@@ -23,7 +23,7 @@ A standard is only as good as the days it came from. Phase one on EKENE-3 is 50 
 
 ## What this does to the other charts
 
-EWMA and the tabular CUSUM in the next two modules take the same view further. Neither of them estimates its target or its sigma from the data it monitors: both are required inputs, taken from history. The individuals chart is the one chart here where the data's own averages are the default, and this lesson is the reason to override that default in phase two.
+EWMA and the tabular CUSUM in the next two modules take the same view further. Neither of them estimates its target from the data it monitors. EWMA requires a target and a sigma from history; the CUSUM a target, and a sigma only when k and h are in sigma units. The individuals chart is the one chart here where the data's own averages are the default, and this lesson is the reason to override that default in phase two.
 
 ## Exercise
 

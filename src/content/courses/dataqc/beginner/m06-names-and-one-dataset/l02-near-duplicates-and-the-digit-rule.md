@@ -36,7 +36,7 @@ With the digit rule off, the near count on these 13 names rises to 41, from a li
 
 The rule is a choice, and it has a price. A slip in the number itself will never be reported as near: had EKENE-7 been a mistyped EKENE-1, the table above shows the pair would still read false. The digit rule assumes the number is the part people get right and the stem is the part they mistype. For a list where that assumption is wrong, set `digitsMustMatch` to false, and expect to read many more pairs.
 
-The same goes for `maxDistance`. The default of 1 catches one dropped, added or replaced character. A larger value reaches further and pairs more names that are merely similar.
+The same goes for `maxDistance`. The default of 1 catches one dropped, added or replaced character. A larger value reaches further and can pair more names that are merely similar.
 
 ## Strongest class only
 

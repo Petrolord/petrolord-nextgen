@@ -2,7 +2,7 @@
 
 {{panel:dq-outliers-explorer}}
 
-Every flag in this engine fires strictly beyond its limit. A value exactly on a Tukey fence is inside, a value exactly on a Hampel threshold is inside, and in the Associate tier a step exactly equal to maxStep in coverage was covered. The rule is the same everywhere, and it is written into the engine as a choice.
+Every statistical flag in this engine fires strictly beyond its limit. A value exactly on a Tukey fence is inside, and a value exactly on a Hampel threshold is inside. The Associate checks drew the boundary on purpose in three places: an exclusive definitional minimum flags the bound itself, so a resistivity of 0 fails; a frozen run includes a value exactly at its tolerance; and a step exactly equal to maxStep in coverage covers.
 
 The golden case the engine is checked against, `iqr-exactly-on-both-fences`:
 
@@ -21,7 +21,7 @@ The series is built so that its smallest value, -4, lands exactly on the lower f
 
 ## Why strictly beyond
 
-A boundary has to belong to one side, and either convention can be defended. The engine chose strictly beyond for every flag, so no reader has to remember which rule includes its boundary. The same sentence describes the z-score threshold, the modified z threshold, the Tukey fences, the Hampel threshold and the Mahalanobis cutoff.
+A boundary has to belong to one side, and either convention can be defended. The engine chose strictly beyond for every statistical flag, so no reader of a statistic has to remember which rule includes its boundary. The same sentence describes the z-score threshold, the modified z threshold, the Tukey fences, the Hampel threshold and the Mahalanobis cutoff.
 
 The practical effect is small on real data, where a measured value rarely lands exactly on a computed fence. It matters on data written to a coarse resolution, where many values share a few levels and a fence can fall on one of them. It also matters when a figure is reproduced by hand, because a reader who assumes the other convention will count one flag too many whenever a value sits on the line.
 

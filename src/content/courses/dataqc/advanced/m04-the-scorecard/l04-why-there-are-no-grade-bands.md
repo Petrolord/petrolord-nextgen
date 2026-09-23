@@ -2,7 +2,7 @@
 
 {{panel:dq-monitor-explorer}}
 
-The engine's scorecard returns a total and the weakest dimension, and nothing else. It does not say that 0.927390 is good, or that 0.889531 is fair, or that either passes. On EKENE-3 those two totals come from the same five scores under two weightings, and both name uniqueness as the weakest dimension at 0.538462. A grade band would have to put a line somewhere between them or around them, and the engine has no number to put there.
+The engine's scorecard returns a total, the weakest dimension, a row for each dimension and a basis block, and no grade. It does not say that 0.927390 is good, or that 0.889531 is fair, or that either passes. On EKENE-3 those two totals come from the same five scores under two weightings, and both name uniqueness as the weakest dimension at 0.538462. A grade band would have to put a line somewhere between them or around them, and the engine has no number to put there.
 
 | what the scorecard returns | EKENE-3, stated weights | EKENE-3, equal weights |
 | --- | --- | --- |

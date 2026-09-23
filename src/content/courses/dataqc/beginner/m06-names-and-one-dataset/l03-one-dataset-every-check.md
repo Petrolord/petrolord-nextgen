@@ -41,7 +41,7 @@ Start with completeness and the index, and check the index before coverage, beca
 
 ## What this tier does not ask
 
-A value that passes these checks has cleared every rule this tier states. None of that says which values stand apart from the rest. That is the next tier's question, and it uses every check in this lesson first. This tier's answer to its own question, whether the data are fit to use, is this pair of tables with their settings, and a note on what the owner of the file must decide.
+A value that passes these checks has cleared every rule this tier states. None of that says which values stand apart from the rest. That is the next tier's question. This tier's answer to its own question, whether the data are fit to use, is this pair of tables with their settings, and a note on what the owner of the file must decide.
 
 ## Exercise
 

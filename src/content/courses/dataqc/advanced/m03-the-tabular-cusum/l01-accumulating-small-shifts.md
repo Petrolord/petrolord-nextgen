@@ -14,7 +14,7 @@ The tabular CUSUM keeps two running sums, one for readings above target and one 
 
 ## What each term does
 
-x_i - target is how far the reading sits above target. Subtracting k takes away an allowance, so a reading only adds to S_hi when it exceeds the target by more than k. The max(0, ...) keeps the sum from going negative: readings below target drain S_hi back towards zero and no further. S_lo does the same on the low side. Between them, a run of readings a little above target builds S_hi a step at a time, while scatter around target keeps being reset to zero.
+x_i - target is how far the reading sits above target. Subtracting k takes away an allowance, so a reading only adds to S_hi when it exceeds the target by more than k. The max(0, ...) keeps the sum from going negative: readings below target + k drain S_hi back towards zero and no further. S_lo does the same on the low side. Between them, a run of readings a little above target builds S_hi a step at a time, while scatter around target keeps being reset to zero.
 
 ## Why it sees a small shift
 

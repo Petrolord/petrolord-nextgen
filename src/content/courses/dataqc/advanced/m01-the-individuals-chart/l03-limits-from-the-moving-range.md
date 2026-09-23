@@ -22,7 +22,7 @@ The limits describe how EKENE-3's pressure behaved on 50 days chosen as in contr
 
 ## Strictly outside
 
-A point signals when it lies strictly outside its limits. A reading exactly on 622.702188 would sit inside the band and raise nothing. This is the same boundary rule the engine uses for every flag in the course: strictly beyond. NIST's data and EKENE-3's phase one each raise 0 flags.
+A point signals when it lies strictly outside its limits. A reading exactly on 622.702188 would sit inside the band and raise nothing. This is the boundary rule the engine uses for every statistical flag in the course: strictly beyond. An exclusive definitional minimum flags its bound itself. NIST's data and EKENE-3's phase one each raise 0 flags.
 
 ## Why the flags on phase one matter
 
