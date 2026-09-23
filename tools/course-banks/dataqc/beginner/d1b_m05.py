@@ -1,0 +1,116 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D1 Associate m05, Does It Agree with Itself.
+# Sources: digest sections 11, 12, 13 and 14, and the minRun refusal in section 4.
+# Every figure is printed there.
+
+q(1, "EKENE-3's cumulative oil reads 1338506.200000 bbl on day 68, null on day 69 and 1331009.500000 bbl on day 70. What does `cumulativeCheck` compare day 70 with?",
+ "Day 68, the last present value before it, so the fall is found even though day 69 is missing.",
+ ["Day 69, its neighbour, and since day 69 is null the comparison is skipped and day 70 passes unflagged.",
+  "Day 67, since that is the day the reason means when it names entry 67 in the engine's own words.",
+  "The mean of the present days on either side of it, so one missing day does not stop the comparison."],
+ "Each present value is compared with the LAST PRESENT value before it, so day 70 is measured against day 68 and flagged. A neighbour-only check that skipped comparisons touching a null would never look at day 70. The reason's \"entry 67\" is day 68, since the engine counts entries from 0."),
+
+q(3, "The day 70 flag's reason reads \"cumulative falls from 1338506.2 at entry 67 to 1331009.5\". Which day is entry 67?",
+ "Day 68, because the engine counts entries from 0 and the sheet counts days from 1.",
+ ["Day 67, because entries and days are one and the same count on a daily production sheet.",
+  "Day 70, because the entry number in the reason always names the flagged day itself.",
+  "Day 69, because the reason names the missing day that caused the comparison to reach back."],
+ "Day 1 is entry 0, so entry 67 is day 68, the last present value before day 70. The count does not shift for a missing day; entries are positions in the array whether their value is present or not. Say which count you mean every time you quote a position."),
+
+q(2, "The day 70 flag carries a `drop` field. What does it hold, and what is it?",
+ "7496.700000 bbl: the fall from day 68 to day 70 as the sheet shows it, which is the planted error less two days' production.",
+ ["Ten thousand barrels, the size of the keying error planted on day 70, recovered by the engine from the fall it measured across the missing day.",
+  "2503.300000 bbl, the oil produced on days 69 and 70, which the engine subtracts from the planted error to leave the remainder it reports.",
+  "7496.700000 bbl, the true size of the keying slip once the missing day is filled in."],
+ "The `drop` field is 7496.700000 bbl, previous 1338506.200000 less value 1331009.500000. The planted keying error is ten thousand barrels; the flag measures what the sheet shows, and the error less the drop, 2503.300000 bbl, is derived as the two days' production. The engine does not know the error, and it is not the drop."),
+
+q(0, "You rerun the EKENE-3 cumulative with a tolerance of 8000 bbl. What happens to the day 70 flag, and what does that teach?",
+ "It disappears: a tolerance wide enough to swallow a keying error hides it, so a tolerance should come from what the meters do.",
+ ["It stays, since a tolerance applies to rates and a cumulative is checked with no allowance.",
+  "It stays, and the reported drop falls by 8000 bbl to show what exceeds the allowance.",
+  "It moves to day 71, where the cumulative recovers past the day 68 value."],
+ "The drop, 7496.700000 bbl, is smaller than 8000 bbl, so at that tolerance it is not flagged. A tolerance exists for meter noise and small corrections; one wide enough to cover a keying error hides it. The `drop` field reports the fall as measured whatever the tolerance, and a rise on day 71 is never flagged."),
+
+q(3, "What is the engine's water cut, the one `waterCutCheck` computes from the rates?",
+ "Water / (oil + water), a water cut on a liquid basis.",
+ ["Water / oil, the water-oil ratio of the day's rates.",
+  "Oil / (oil + water), subtracted from 1 to give the water share.",
+  "Water / (oil + water + gas), a water share on a total production basis."],
+ "The engine's water cut is water / (oil + water). On day 10 it is 0.183105; the water-oil ratio on the same day is 0.224147 and the oil cut 0.816895, and only the first is what the engine checks. Gas is not part of the liquid basis."),
+
+q(1, "EKENE-3's water cut is checked at the default tolerance of 1e-6. It fails 83 days: 5 out of range and 78 mismatches. Where do the 78 come from?",
+ "The sheet reports water cut to four decimals, and a tolerance tighter than that precision flags the rounding itself.",
+ ["78 days where the water was typed from the day before, as on day 55.",
+  "78 days on which the reported cut is in percent, like days 20 to 24.",
+  "78 days on which the oil or water rate is missing, so no cut could be computed."],
+ "A correct value rounded to four decimals can differ from water / (oil + water) by up to half a unit in the fourth decimal, and 1e-6 is tighter than that. At 1e-4, one unit in the fourth decimal, the count falls to 6, the 5 percent days and day 55, which are the planted defects. Days with no computed cut are not judged."),
+
+q(0, "Days 20 to 24 of EKENE-3 report water cuts such as 20.430000 against a computed 0.204348. Under which rule are they flagged?",
+ "water-cut-out-of-range, since a reported cut outside [0, 1] fails before any comparison with the rates.",
+ ["water-cut-mismatch, since the reported and computed cuts differ by more than the tolerance allowed at 1e-6.",
+  "above-maximum, from the fraction limit in v/v that the range check applies inside the water cut check first.",
+  "rate-while-shut-in, since a cut above 1 means more water than liquid."],
+ "A reported water cut outside [0, 1] is flagged as out of range, and all five percent days carry water-cut-out-of-range. The mismatch rule is day 55's, a value inside [0, 1] that disagrees with the computed cut. above-maximum is the range check's rule name, and rate-while-shut-in belongs to the rate check."),
+
+q(2, "On day 55 EKENE-3 reports a water cut of 0.248100, typed from day 54. What does the check report?",
+ "A water-cut-mismatch, since 0.248100 disagrees with the computed 0.248871 by more than the tolerance.",
+ ["Nothing at 1e-4, since the two cuts agree to the fourth decimal.",
+  "A water-cut-out-of-range, since a value copied from another day falls outside the range the engine accepts for that day.",
+  "Nothing at either tolerance, since both cuts round to a quarter."],
+ "Day 55 is flagged at both tolerances as a mismatch: 0.248100 against 0.248871 differ in the fourth decimal by more than one unit, so even 1e-4 flags it, and it is the 1 mismatch left at that setting. The value is inside [0, 1], so it is no out-of-range case, and the engine does not know where a value was copied from."),
+
+q(3, "On which EKENE-3 days is the `computed` water cut null, and why?",
+ "Days 31, 32, 33, 47 and 60, where a rate is missing or negative or there is no liquid, so no liquid-basis cut exists.",
+ ["Days 20 to 24, where the reported cut is in percent and the engine will not compute a liquid-basis cut beside a reported value it has already flagged.",
+  "Day 55 alone, where the cut was typed from day 54 and the engine discards it.",
+  "Every day at the default tolerance, until a tolerance matched to the file is given."],
+ "The computed cut is null where the engine cannot compute a liquid-basis cut: the meter outage on days 31 to 33, the negative allocation entry on day 47, and the shut-in day 60 with no liquid. Those days are not judged by this check; earlier checks flagged each for its own reason. The percent days and day 55 all carry a computed cut."),
+
+q(0, "On EKENE-3's day 40 the oil and water add to 1737.500000 bbl/d against a gross total of 1774.000000. Why is the day flagged at the default tolerance?",
+ "The difference, -36.500000, is beyond the allowed 8.870000, which is 0.005 of the total.",
+ ["The difference, -36.500000, is beyond an allowance of 0.005 of the sum of the parts, 1737.500000.",
+  "Any difference at all is flagged on the day, since the absolute tolerance defaults to 0 bbl/d.",
+  "The difference is beyond 50 bbl/d, the absolute tolerance the engine applies to a gross total by default."],
+ "The allowed difference is max(absTolerance, relTolerance x |total|), with the Petrolord defaults 0 and 0.005 of the TOTAL, so 0.005 x 1774.000000 = 8.870000. A zero absolute tolerance adds no floor; it does not flag every difference, as day 41 shows. 50 bbl/d is a stated alternative that clears day 40, and no default."),
+
+q(1, "Day 41 of EKENE-3 has parts of 1792.800000 bbl/d against a gross of 1798.200000. Is it flagged?",
+ "No: the difference of -5.400000 is inside its allowed 8.991000, so the tolerance passes an ordinary disagreement.",
+ ["Yes: any difference below zero means a part was lost between the meters, and the engine flags every such loss on the day.",
+  "Yes: the allowance is taken from day 40's total, 8.870000, and the difference comes close to it.",
+  "No: day 41 is not checked at all, since the day before it was flagged and the engine skips the day after a flag on the sheet."],
+ "Day 41's allowance is 0.005 x 1798.200000 = 8.991000, and -5.400000 is inside it, so it is not flagged. Gross and its parts are often measured or allocated separately, and a small disagreement is ordinary. Each day's allowance comes from that day's total, and every day with a complete sum is checked."),
+
+q(2, "Which phase sum setting clears EKENE-3's day 40 flag?",
+ "relTolerance 0.005 with absTolerance 50 bbl/d, since the allowed difference becomes the larger of the two.",
+ ["relTolerance 0.01, which doubles the allowance on the total.",
+  "relTolerance 0.005 alone, once the day's missing parts are filled.",
+  "absTolerance 0, which removes the floor on the allowance."],
+ "At relTolerance 0.01 day 40 is still flagged; adding absTolerance 50 bbl/d clears it, because the allowance becomes max(50, 0.005 x total) and the truck load fits inside it. absTolerance 0 is already the default, and day 40 has no missing part. An absolute floor chosen without looking at the size of the errors can hide them."),
+
+q(0, "EKENE-3's gas meter held 748.700000 Mscf/d from day 74 through day 81. What does `frozenRuns` report at the defaults?",
+ "One run of 8, from day 74 to day 81, since each value equals the run's first value within a tolerance of 0.",
+ ["One run of 7, days 75 to 81, since the first held day is a real reading.",
+  "Eight runs of one day each, one per day the meter held its value.",
+  "No run, since minRun 5 needs a run of five or fewer."],
+ "A frozen run is at least minRun consecutive present values each within tolerance of the run's FIRST value, and the day 74 value belongs to it, so the run is eight days, days 74 to 81. The reason reads \"8 values in a row from entry 73 to 80 stay at 748.7\", with entries counted from 0. A run is one flag, and minRun is a minimum length."),
+
+q(3, "The readings 410.000000, 410.100000 and so on rise 0.100000 at a time to 410.600000. At tolerance 0.15 and minRun 5, how many frozen runs does the engine find, and why?",
+ "0, because each value is compared with the run's first value, and the readings soon move beyond 0.15 of it.",
+ ["1 run of 7, because every step between neighbouring readings is 0.100000, which sits inside the tolerance of 0.15.",
+  "1 run of 5, because the first five readings all sit within 0.15 of the middle reading of those five.",
+  "0, because a drifting series is refused when its tolerance exceeds its step."],
+ "The rule compares every value with the run's first value, so 410.000000 admits only 410.100000 before the readings leave the tolerance, far short of 5. Comparing each value with the one before it, a rule the engine does not use, would chain all 7 into one run and report a drift as stuck. Nothing is refused."),
+
+q(1, "A caller asks `frozenRuns` for runs with minRun 1. What does the engine return?",
+ "A refusal naming `minRun`, since a run of one is every value and the minimum must be a whole number, 2 or more.",
+ ["A flag on every value in the series, since each value on its own is a run of one and so meets a minRun of 1 exactly.",
+  "A result with 0 runs, since the engine raises minRun to its default of 5.",
+  "A refusal naming `tolerance`, since a run of one has no tolerance to test."],
+ "The engine's own words are: minRun must be a whole number, 2 or more. A run of one would be every value, so the engine refuses rather than flag the whole series or silently substitute its default. The field it names is `minRun`."),
+
+emit(Q, '/root/dai-wip-dataqc/banks/d1b_m05.json', expect_n=15)
+finish()
