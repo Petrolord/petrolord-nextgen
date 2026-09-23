@@ -13,6 +13,7 @@ import PrereqWaiverPage from '@/pages/PrereqWaiverPage';
 import GetStartedPage from '@/pages/GetStartedPage';
 import { useActivation } from '@/hooks/useActivation';
 import { enrollmentAction } from '@/lib/learningGate';
+import { hasDeepCourse } from '@/lib/courseContent';
 import DevicesPage from '@/pages/DevicesPage';
 import AdminCertificationsPage from '@/pages/AdminCertificationsPage';
 import AdminCourseHandbookPage from '@/pages/AdminCourseHandbookPage';
@@ -178,7 +179,7 @@ const YourCourses = ({ enrollments, apps, isLearner, activation }) => {
             <p className="text-slate-400 text-sm mb-4">Courses with an active enrollment on your account, newest first.</p>
             <div className="space-y-2">
                 {enrollments.map((e) => {
-                    const act = enrollmentAction(e, { isLearner, activation });
+                    const act = enrollmentAction(e, { isLearner, activation, hasCourse: hasDeepCourse });
                     return (
                         <div key={e.id} className="flex flex-wrap items-center justify-between gap-2 rounded-md border border-slate-700 bg-slate-800 px-4 py-3">
                             <div>
