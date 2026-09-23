@@ -19,7 +19,7 @@
    "Only the exact repeat, EKENE-3 at entry 3"
   ],
   "answer": 0,
-  "explanation": "Section 29: uniqueness comes from the well names, and a name is failed when it duplicates an earlier one, which gives 6 of 13 and the printed 0.538462. The first name of a pair is the original and is not counted. Section 15's 1 exact, 8 normalised and 1 near pairs are pairs; the scorecard counts names. The normalised and near duplicates count as well as the one exact repeat."
+  "explanation": "Uniqueness comes from the well names, and a name is failed when it duplicates an earlier one, which gives 6 of 13 and the printed 0.538462. The first name of a pair is the original and is not counted. The course's 1 exact, 8 normalised and 1 near pairs are pairs; the scorecard counts names. The normalised and near duplicates count as well as the one exact repeat."
  },
  {
   "prompt": "With no weights passed, what does EKENE-3's scorecard return as its total?",
@@ -30,7 +30,7 @@
    "0.889531, the plain mean of the five scores"
   ],
   "answer": 3,
-  "explanation": "Section 29: with no weights every listed dimension weighs the same, 0.200000 each for five, and the total is 0.889531. 0.927390 is the total at the stated weights 3, 2, 2, 1 and 1, which a caller states; the engine has no default set of unequal weights. The weakest dimension is reported beside the total. A refusal comes when some weights are given and one is missing."
+  "explanation": "With no weights every listed dimension weighs the same, 0.200000 each for five, and the total is 0.889531. 0.927390 is the total at the stated weights 3, 2, 2, 1 and 1, which a caller states; the engine has no default set of unequal weights. The weakest dimension is reported beside the total. A refusal comes when some weights are given and one is missing."
  },
  {
   "prompt": "EKENE-3's weights are stated as 3, 2, 2, 1 and 1. What does the engine do with them before it forms the total of 0.927390?",
@@ -74,7 +74,7 @@
    "A total with all five dimensions at equal weights, since a partial set of weights is discarded"
   ],
   "answer": 2,
-  "explanation": "Section 4 prints the refusal in the engine's own words. A weight must be given for every listed dimension or for none. A zero would drop the dimension silently, the mean of the others would be a weight nobody chose, and falling back to equal weights would ignore the four the caller did state, so the engine refuses and names the field."
+  "explanation": "The course prints the refusal in the engine's own words. A weight must be given for every listed dimension or for none. A zero would drop the dimension silently, the mean of the others would be a weight nobody chose, and falling back to equal weights would ignore the four the caller did state, so the engine refuses and names the field."
  },
  {
   "prompt": "RHOB completeness is passed as a direct score of 0.950000, beside NPHI validity counted as 237 checked and 10 failed. What does the scorecard return?",
@@ -85,7 +85,7 @@
    "A total of 0.950000, since a direct score replaces the counts"
   ],
   "answer": 1,
-  "explanation": "Section 29: each dimension scores either `score` directly or 1 - failed / checked, and a direct score and a counted one mix; the digest prints a total of 0.953903. Each row carries its own rule, so the engine accepts two kinds together and rows from two channels together. A direct score is one row's score and the counted row still enters the total."
+  "explanation": "Each dimension scores either `score` directly or 1 - failed / checked, and a direct score and a counted one mix; the digest prints a total of 0.953903. Each row carries its own rule, so the engine accepts two kinds together and rows from two channels together. A direct score is one row's score and the counted row still enters the total."
  },
  {
   "prompt": "Which dimension adds least to EKENE-3's total at the stated weights 3, 2, 2, 1 and 1, and by how much?",
@@ -107,7 +107,7 @@
    "A count of distinct failed entries across dimensions"
   ],
   "answer": 2,
-  "explanation": "Section 29: the total is the weighted mean and the weakest dimension is the lowest score; there are no grade bands, since a band would be an invented number, and Section 31 lists grade bands as not built. The engine returns no interval and no full ranking. It counts flags from checks per dimension, and two checks can flag the same entry, so it does not produce a distinct-entry count."
+  "explanation": "The total is the weighted mean and the weakest dimension is the lowest score; there are no grade bands, since a band would be an invented number, and the course lists grade bands as not built. The engine returns no interval and no full ranking. It counts flags from checks per dimension, and two checks can flag the same entry, so it does not produce a distinct-entry count."
  },
  {
   "prompt": "EKENE-3's plausibility row counts the modified z-score's flags on oil, entries 46 and 59. What does that mean for how the scorecard counts day 47?",
@@ -118,7 +118,7 @@
    "Day 47 is counted under validity and again under plausibility"
   ],
   "answer": 3,
-  "explanation": "Entries 46 and 59 are days 47 and 60, because the engine counts entries from 0: the negative rate and the shut-in day. The negative rate, day 47, is flagged under validity too, and Section 29 says a scorecard counts flags from checks and two checks can flag the same entry. Nothing is removed between dimensions. A negative rate is a present value, so completeness does not count it."
+  "explanation": "Entries 46 and 59 are days 47 and 60, because the engine counts entries from 0: the negative rate and the shut-in day. The negative rate, day 47, is flagged under validity too, and the course says a scorecard counts flags from checks and two checks can flag the same entry. Nothing is removed between dimensions. A negative rate is a present value, so completeness does not count it."
  },
  {
   "prompt": "Which check is EKENE-3's consistency score of 0.988506 counted from?",
@@ -129,7 +129,7 @@
    "frozenRuns on gas, the stuck meter from day 74 to day 81"
   ],
   "answer": 1,
-  "explanation": "Section 29 lists consistency from phaseSumCheck, and 1 - 1 / 87 is the printed 0.988506: day 40 is the one failure, and 3 days carry no sum. The water cut, cumulative and frozen-run checks are consistency checks too, and the EKENE-3 scorecard was counted from none of them. A scorecard collects counts from checks already run, one stated check per dimension."
+  "explanation": "The course lists consistency from phaseSumCheck, and 1 - 1 / 87 is the printed 0.988506: day 40 is the one failure, and 3 days carry no sum. The water cut, cumulative and frozen-run checks are consistency checks too, and the EKENE-3 scorecard was counted from none of them. A scorecard collects counts from checks already run, one stated check per dimension."
  },
  {
   "prompt": "Which dimension names does the engine export in `DIMENSIONS`, in display order?",
@@ -140,7 +140,7 @@
    "accuracy, validity, consistency, uniqueness, plausibility"
   ],
   "answer": 0,
-  "explanation": "Section 1 prints the five names in display order: completeness, validity, consistency, uniqueness and plausibility. The engine has no timeliness or accuracy dimension, and uniqueness is one of the five. The order matters only for display, and a tie for weakest is broken by the order of the call, which the caller controls."
+  "explanation": "The course prints the five names in display order: completeness, validity, consistency, uniqueness and plausibility. The engine has no timeliness or accuracy dimension, and uniqueness is one of the five. The order matters only for display, and a tie for weakest is broken by the order of the call, which the caller controls."
  },
  {
   "prompt": "EKENE-3's validity row is counted from rateCheck on oil, 87 checked and 2 failed. Why 87 and not 90?",
@@ -151,7 +151,7 @@
    "The three missing oil days are not checked, so 87 days are"
   ],
   "answer": 3,
-  "explanation": "Section 9: 87 days checked, 2 failed; the three missing days are not checked. Day 60 is shut in with an oil rate of 0.000000 and is checked and not flagged, and day 61's positive rate while shut in is one of the 2 failures. Outlier tests are a different check. The scorecard takes the counts the check returned."
+  "explanation": "87 days checked, 2 failed; the three missing days are not checked. Day 60 is shut in with an oil rate of 0.000000 and is checked and not flagged, and day 61's positive rate while shut in is one of the 2 failures. Outlier tests are a different check. The scorecard takes the counts the check returned."
  },
  {
   "prompt": "Four of EKENE-3's five scores lie between 0.966667 and 0.988506 and uniqueness is 0.538462. What does the equal-weights total of 0.889531 show on its own?",
