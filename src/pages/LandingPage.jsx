@@ -124,8 +124,8 @@ const MODULES = [{
   icon: BrainCircuit,
   color: 'text-violet-400',
   bg: 'bg-violet-500/10',
-  desc: 'Oilfield data management and applied AI workflows.',
-  coming: ['Oilfield Data & AI Studio', 'Production Forecasting ML Workbench'],
+  desc: 'Oilfield data quality, machine learning on well data and applied AI.',
+  coming: ['Oilfield Data Quality', 'Machine Learning on Well Data', 'Electrofacies', 'Data-Driven Production Forecasting', 'Applied AI and Language Models'],
   isNew: true
 }];
 
