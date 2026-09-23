@@ -315,7 +315,7 @@ Shut in means `status` is 'shut-in' or `hoursOn` is 0. A negative rate is flagge
 
 # SECTION 10: The depth and time index: duplicates, reversals and irregular steps (owned by Associate m04)
 
-A duplicate is a value equal to ANY earlier value. A reversal is a step against the stated direction. An irregular step is a step in the right direction whose size differs from the expected step by more than the tolerance. The expected step defaults to the median of the steps in the stated direction, and the tolerance to 1e-6 times the expected step.
+A duplicate is a value equal to ANY earlier value. A reversal is a step against the stated direction. An irregular step is a step in the right direction whose size differs from the expected step by more than the tolerance. The expected step defaults to the median of the steps in the stated direction, and the tolerance to 1e-6 x expectedStep.
 
 | EKENE-7 depth index | value |
 | --- | --- |
@@ -444,7 +444,7 @@ The gas meter held its day 74 value for the seven days after it (stated), so the
 | water | 0 |
 | gross | 0 |
 
-A SLOW DRIFT. The readings 410.000000, 410.100000, 410.200000, 410.300000, 410.400000, 410.500000, 410.600000 (stated) rise 0.1 at a time. At tolerance 0.15 and minRun 5 the engine finds 0 runs, because each value is compared with the run's first value.
+A SLOW DRIFT. The readings 410.000000, 410.100000, 410.200000, 410.300000, 410.400000, 410.500000, 410.600000 (stated) rise 0.100000 at a time. At tolerance 0.15 and minRun 5 the engine finds 0 runs, because each value is compared with the run's first value.
 Derived, and a rule the engine does not use: comparing each value with the one before it would chain all 7 readings into one run.
 
 # SECTION 15: Well names: normalisation, near duplicates and the digit rule (owned by Associate m06)
@@ -855,7 +855,7 @@ At lambda 1 the EWMA is the observation itself and the limits are target +/- 3.0
 
 # SECTION 27: The tabular CUSUM: k, h, stated units, and no reset (owned by Expert m03)
 
-S_hi(i) = max(0, S_hi(i-1) + x_i - target - k) and S_lo(i) = max(0, S_lo(i-1) + target - k - x_i), both starting at 0. A signal is S_hi or S_lo strictly above h. `units` is required: 'sigma' (k and h in multiples of sigma, which is then required; the rule of thumb is k 0.5 and h 4 or 5) or 'data' (k and h in the data's own units). No reset after a signal. The plain cumulative sum of x - target is returned too.
+S_hi(i) = max(0, S_hi(i-1) + x_i - target - k) and S_lo(i) = max(0, S_lo(i-1) + target - k - x_i), both starting at 0. A signal is S_hi or S_lo strictly above h. `units` is required, and the engine's own refusal (section 4) names the two choices, sigma and data, with its rule of thumb. No reset after a signal. The plain cumulative sum of x - target is returned too.
 
 NIST 6.3.2.3, target 325, k 0.317500 and h 4.195900 in data units (golden): the first upper signal is group 14.
 
@@ -920,7 +920,7 @@ NIST's design line, derived here with its own printed inputs (alpha 0.0027, beta
 
 # SECTION 28: Which chart sees what (owned by Expert m03 l05)
 
-EKENE-3 phase two carries two planted events: a glitch on day 8 and a downward shift from day 16 (stated, 1.2 process standard deviations in the generator). Each chart with its settings from the sections above:
+EKENE-3 phase two carries two planted events: a glitch on day 8 and a downward shift from day 16 (stated in the generator). Each chart with its settings from the sections above:
 
 | chart | first signal at or after day 16, low side | signals on day 8 | days with any signal |
 | --- | --- | --- | --- |
@@ -957,7 +957,7 @@ EKENE-3, each dimension counted from a check printed above: completeness from th
 
 The oil column's modified z flags entries 46, 59, which are days 47, 60: the negative rate and the shut-in day. The negative rate, day 47, is flagged under validity too. A scorecard counts flags from checks, and two checks can flag the same entry.
 
-A TIE. Scores 0.9, 0.9 and 0.95 for validity, completeness and consistency (stated, listed in that order): weakest validity, total 0.916667.
+A TIE. Scores 0.9, 0.9, 0.95 for validity, completeness, consistency (stated, listed in that order): weakest validity, total 0.916667.
 
 A direct score and a counted one mix: RHOB completeness 0.950000 as a score beside NPHI validity (237 checked, 10 failed) gives a total of 0.953903.
 
@@ -967,6 +967,8 @@ The basis block, verbatim: weights "caller weights, normalised by their sum"; sc
 
 Every default below is a choice written in a basis block, open to change by the caller. Where a published source states the number, it is named; where none does, the row says Petrolord.
 
+Each default below is read from the basis block of a call that left it unset, except the Hampel nSigma, whose default the result does not echo.
+
 | setting | default | whose choice |
 | --- | --- | --- |
 | phaseSumCheck relTolerance, on the TOTAL | 0.005000 | Petrolord |
@@ -974,13 +976,13 @@ Every default below is a choice written in a basis block, open to change by the 
 | frozenRuns minRun | 5 | Petrolord |
 | frozenRuns tolerance, against the run's first value | 0 | Petrolord |
 | waterCutCheck tolerance | 1e-6 | Petrolord |
-| indexCheck stepTolerance | 1e-6 x the expected step | Petrolord |
+| indexCheck stepTolerance | 1e-6 x expectedStep | Petrolord |
 | indexCheck expected step | median of the steps in the stated direction | Petrolord |
-| duplicateIdentifiers maxDistance and the digit rule | 1, digits must match | Petrolord |
+| duplicateIdentifiers maxDistance and the digit rule | 1, digits must match true | Petrolord |
 | mahalanobis alpha | 0.025000 | Petrolord |
 | zScores threshold | 3 | the usual convention |
 | modifiedZScores threshold | 3.500000 | Iglewicz and Hoaglin, as NIST prints it |
-| iqrFences k and quartile rule | 1.500000, R7 | Tukey for k; Petrolord for R7, so a spreadsheet reproduces it |
+| iqrFences k and quartile rule | 1.500000, R7 | Tukey for k; Petrolord for the rule, so a spreadsheet reproduces it |
 | hampel nSigma | 3 | the petrophysics conditioning engine |
 | ewmaChart L and limits | 3, asymptotic | NIST 6.3.2.4 |
 | grubbsTest alpha | 0.050000 | NIST 1.3.5.17.1 |

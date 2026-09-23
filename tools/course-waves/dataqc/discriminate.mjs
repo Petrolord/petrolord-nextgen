@@ -56,7 +56,7 @@ const sdP = (a) => { const m = mean(a); return Math.sqrt(sum(a.map((v) => (v - m
 
 /* ---- shared scenario arithmetic ---- */
 const rhob = O.log.rhob;
-const steps = O.scada.hours.slice(1).map((v, i) => v - O.scada.hours[i]);
+const steps = O.scada.minutes.slice(1).map((v, i) => v - O.scada.minutes[i]);
 const wc = (i) => O.production.water[i] / (O.production.oil[i] + O.production.water[i]);
 const cum = O.production.cumOil;
 const core = K.core;
@@ -101,13 +101,13 @@ const ROUTES = {
       },
     },
   },
-  odudu_scada_expected_step_h: {
-    truth: () => Q.indexCheck({ index: O.scada.hours }).expectedStep,
+  odudu_scada_expected_step_min: {
+    truth: () => Q.indexCheck({ index: O.scada.minutes }).expectedStep,
     wrong: {
       mean_of_every_step: () => mean(steps),
       median_of_every_step: () => median(steps),
       median_of_absolute_steps: () => median(steps.map(Math.abs)),
-      span_over_entries: () => (O.scada.hours.at(-1) - O.scada.hours[0]) / (O.scada.hours.length - 1),
+      span_over_entries: () => (O.scada.minutes.at(-1) - O.scada.minutes[0]) / (O.scada.minutes.length - 1),
     },
   },
   odudu_water_cut_day23: {

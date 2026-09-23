@@ -51,7 +51,7 @@ OD, IK, AM = inp['ODUDU'], inp['IKORO'], inp['AMASIRI']
 # ---- ODUDU
 comp = O.o_completeness(OD['log']['rhob'])
 cov = O.o_coverage(OD['log']['depth'], OD['log']['nphi'], OD['log']['coverageStart'], OD['log']['coverageEnd'], OD['log']['maxStep'])
-idx = O.o_index(OD['scada']['hours'])
+idx = O.o_index(OD['scada']['minutes'])
 prod = OD['production']
 wc = O.o_watercut(prod['waterCut'], prod['oil'], prod['water'], 1e-4)
 cum = O.o_cumulative(prod['cumOil'])
@@ -78,7 +78,7 @@ sc = O.o_scorecard(AM['scorecard']['dimensions'], AM['scorecard']['weights'])
 ORACLE = {
     'odudu_rhob_completeness': comp['completeness'],
     'odudu_nphi_coverage': cov['coverage'],
-    'odudu_scada_expected_step_h': idx['expectedStep'],
+    'odudu_scada_expected_step_min': idx['expectedStep'],
     'odudu_water_cut_day23': wc['computed'][22],
     'odudu_cumulative_drop_bbl': cum['flags'][0]['drop'] if cum['flags'] else float('nan'),
     'odudu_phase_sum_allowed_day44_bbl_d': allowed44,

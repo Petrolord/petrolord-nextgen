@@ -41,7 +41,7 @@ export const GRADED_FIELDS = [
   // statistic and no chart.
   ['beginner', 'odudu_rhob_completeness', 'fraction', 1e-9],
   ['beginner', 'odudu_nphi_coverage', 'fraction', 1e-9],
-  ['beginner', 'odudu_scada_expected_step_h', 'measure', 1e-9],
+  ['beginner', 'odudu_scada_expected_step_min', 'measure', 1e-9],
   ['beginner', 'odudu_water_cut_day23', 'fraction', 1e-9],
   ['beginner', 'odudu_cumulative_drop_bbl', 'measure', 1e-9],
   ['beginner', 'odudu_phase_sum_allowed_day44_bbl_d', 'measure', 1e-9],

@@ -1,0 +1,361 @@
+{
+ "app_slug": "dataqc",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-z-score-and-its-ceiling",
+   "title": "The z-Score and Its Ceiling",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-a-distance-in-standard-deviations",
+     "title": "A distance in standard deviations",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-sample-or-population",
+     "title": "Sample or population standard deviation",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-largest-possible-z",
+     "title": "The largest possible z",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-one-outlier-inflates-the-spread",
+     "title": "One outlier inflates the spread",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-median-and-the-mad",
+   "title": "The Median and the MAD",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-a-centre-outliers-barely-move",
+     "title": "A centre that outliers barely move",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-median-absolute-deviation",
+     "title": "The median absolute deviation",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-modified-z-score",
+     "title": "The modified z-score",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-printed-constant",
+     "title": "The printed constant and its reciprocal",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-when-the-mad-is-zero",
+     "title": "When the MAD is zero",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-quartiles-and-fences",
+   "title": "Quartiles and Tukey Fences",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-three-quantile-rules",
+     "title": "Three quantile rules",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-inner-fences",
+     "title": "The inner fences",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-far-out-values",
+     "title": "Far out values and the outer fences",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-on-the-fence-is-inside",
+     "title": "On the fence is inside",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-a-moving-window",
+   "title": "A Moving Window",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-local-against-global",
+     "title": "Local against global",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-hampel-window",
+     "title": "The Hampel window",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-edges-gaps-and-thin-windows",
+     "title": "Edges, gaps and windows too thin to judge",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-flag-or-replace",
+     "title": "Flag or replace",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-formal-tests-and-many-variables",
+   "title": "Formal Tests and Many Variables",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-grubbs-for-one-outlier",
+     "title": "Grubbs for one outlier",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-critical-value",
+     "title": "The critical value from the t distribution",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-masking",
+     "title": "Masking",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-mahalanobis-distance",
+     "title": "The Mahalanobis distance",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-chi-square-cutoff",
+     "title": "The chi-square cutoff and its limits",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-outliers-in-a-report",
+   "title": "Outliers in a Report",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-nist-worked-examples",
+     "title": "The NIST worked examples",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-which-method-for-which-question",
+     "title": "Which method for which question",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-flag-is-a-question",
+     "title": "A flag is a question",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

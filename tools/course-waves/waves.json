@@ -1151,5 +1151,47 @@
       "digest.txt": "e55155a458df235bd6184b6f9bd3d6bf93721eda649a898985dd8893ee182941",
       "fields.json": "17cb9d2bebf9b7bff6e5978d8c9e74cfb370f1470ade5286f3390d97817837f9"
     }
+  },
+  "dataqc": {
+    "course": "D1",
+    "live": "/root/dai-wip-dataqc",
+    "kit": "full",
+    "kitNote": "Full kit at the FOUNDATION stage. The mirror carries everything the wave is rebuilt and gated from so far: the digest, its generator and the Ekene dataset generator; the eighteen graded answers, the capstone generator, the precision declaration and the tolerance derivation's writer; the discriminate sweep and the oracle cross-check that replays the vendored stdlib oracle on the capstone; every wave gate with its negative control and the runner that pins every gate's md5 into wave.json; the prose rules; the structure and the scaffold that writes the 78 lesson stubs and three manifests; the vendoring script and this mirror script; the five writer briefs; and the three tier headers. The seed ladder (course generator, go-live generator, seeds, verifier, dry run, apply script) is added when the migrations are written.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "d1_dump.mjs",
+      "d1_fields.mjs",
+      "d1_capstone.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "oracle_check.py",
+      "structure.py",
+      "scaffold.py",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "gate_capstone_leak.mjs",
+      "gate_claims.mjs",
+      "gate_copy_rule.py",
+      "gate_typed_literals.py",
+      "gate_vocabulary.py",
+      "run_gates.py",
+      "vendor_dataqc.sh",
+      "mirror.sh",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt"
+    ],
+    "pins": {
+      "digest.txt": "cfb535c762a8f2d52f965abf23d3349eb2682dca595007e2e49f853e4d5252d3",
+      "fields.json": "f58d26ae3492faa3599e16a78a8e091633658f76415609d63dfdd94129d15670"
+    }
   }
 }

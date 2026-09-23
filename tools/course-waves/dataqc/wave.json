@@ -56,5 +56,295 @@
   "FINDINGS open questions": "despikeHampel turns null into 0 (quality.hampel converts to NaN first, D1 unaffected); solveDense absolute pivot test; generalised ESD and robust covariance not built. Printed as care points in section 31."
  },
  "cleared_claims": [],
- "gates": {}
+ "gates": {
+  "structure.py": {
+   "md5": "37a36796a566ddb1d12327f62762d3be",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "scaffold.py --check": {
+   "md5": "d8ffbc08960ae458b7db83d0e7579080",
+   "command": "python3 scaffold.py --check",
+   "expected": 0,
+   "exit": 0,
+   "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
+  },
+  "d1_capstone.mjs": {
+   "md5": "d53662b0b7c9c0dfc6fb325942fab646",
+   "command": "node d1_capstone.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d1_capstone: 88 label-and-call and scenario assertions run, 0 failed"
+  },
+  "make_fields.mjs": {
+   "md5": "cf4f379180569d8224cc3052672dcaf2",
+   "command": "node make_fields.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d1_capstone: 88 label-and-call and scenario assertions run, 0 failed"
+  },
+  "make_fields.mjs NEGATIVE CONTROL": {
+   "md5": "cf4f379180569d8224cc3052672dcaf2",
+   "command": "node make_fields.mjs --bare-stated-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "d1_capstone: 88 label-and-call and scenario assertions run, 0 failed"
+  },
+  "oracle_check.py": {
+   "md5": "acc6e3a095f5c5424d8ccece135ee5ac",
+   "command": "python3 oracle_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "oracle_check: 18 graded fields replayed through the vendored oracle, worst relative difference 5.60e-15; 12 scenario claims checked; 0 problem(s)"
+  },
+  "oracle_check.py NEGATIVE CONTROL": {
+   "md5": "acc6e3a095f5c5424d8ccece135ee5ac",
+   "command": "python3 oracle_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: one field was perturbed by ten tolerances; this run must fail naming it."
+  },
+  "discriminate.mjs": {
+   "md5": "ca17a7da9bbdc4eb7ff80149ba357972",
+   "command": "node discriminate.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "CLOSEST MISS ACROSS THE WHOLE SWEEP: ikoro_core_max_abs_modified_z via reciprocal_of_1_4826, 9.745e+1 tolerances away"
+  },
+  "discriminate.mjs NEGATIVE CONTROL": {
+   "md5": "ca17a7da9bbdc4eb7ff80149ba357972",
+   "command": "node discriminate.mjs --slack-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: tolerances multiplied by 1000000000000. Expected 18 WEAK routes, got 18."
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "command": "/root/dc-wavekit/digestrepro.sh dai-wip-dataqc /root/wt-dai-d1-nextgen",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d1_dump: 678 label-and-call, measurement and claim assertions run, 0 failed; 32 sections"
+  },
+  "digestprose.mjs": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] /root/dai-wip-dataqc/digest.txt: 1044 line(s), 32 section title(s) and 36 in-body marker(s) swept against their blocks, 32 history framings, 22 engine pin(s); 0 warned for a human read and 0 framed as curri"
+  },
+  "digestprose.mjs --selftest": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] selftest OK: the founding heading case is caught by the corrected pairing and missed by the broken one; both real keyword cases fail inside a teaching section; FC3 line 683 WARNS where the keyword family ca"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "digestfigures.py --selftest": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] selftest OK"
+  },
+  "digestpromise.py": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 completeness problem(s), all checks applied"
+  },
+  "digestpromise.py --selftest": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "command": "python3 /root/dc-wavekit/digestleak.py dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "command": "python3 /root/dc-wavekit/collisions.py dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[gradeprecision] /root/dai-wip-dataqc: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 5 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "command": "python3 /root/dc-wavekit/briefleak.py dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 graded answer(s) reachable from this brief"
+  },
+  "briefcheck.py": {
+   "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
+   "command": "python3 /root/dc-wavekit/briefcheck.py dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
+  },
+  "gate_capstone_leak.mjs": {
+   "md5": "5ec211a7602c351ed275bea942e771ba",
+   "command": "node gate_capstone_leak.mjs --no-banks",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
+   "md5": "5ec211a7602c351ed275bea942e771ba",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-value",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
+   "md5": "5ec211a7602c351ed275bea942e771ba",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-input",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
+   "md5": "5ec211a7602c351ed275bea942e771ba",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-name",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
+   "md5": "5ec211a7602c351ed275bea942e771ba",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
+  },
+  "gate_copy_rule.py": {
+   "md5": "3b4943c8da8f802748fae5316022d1e8",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "3b4943c8da8f802748fae5316022d1e8",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got 2"
+  },
+  "gate_typed_literals.py": {
+   "md5": "9d13cb623435500644ef9ba7ca05b55a",
+   "command": "python3 gate_typed_literals.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "UNEXPLAINED TYPED NUMBERS: 0"
+  },
+  "gate_typed_literals.py NEGATIVE CONTROL": {
+   "md5": "9d13cb623435500644ef9ba7ca05b55a",
+   "command": "python3 gate_typed_literals.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a typed 4.217 was planted in a printed line; caught 1"
+  },
+  "gate_vocabulary.py": {
+   "md5": "8a31b243019b10b95905280762245e0c",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "exemptions declared: 1, dead: []"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "8a31b243019b10b95905280762245e0c",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected a P label and an AI claim caught; got ['a P label', 'an AI claim']"
+  },
+  "gate_claims.mjs": {
+   "md5": "5cbd0ff5da49f3970dce8c948b71ae93",
+   "command": "node gate_claims.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_claims.mjs NEGATIVE CONTROL": {
+   "md5": "5cbd0ff5da49f3970dce8c948b71ae93",
+   "command": "node gate_claims.mjs --plant-a-recon-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 1."
+  }
+ },
+ "digest": {
+  "lines": 1044,
+  "sections": 32,
+  "md5": "2abced782a123e70fcf2a791427d88c6",
+  "sha256": "cfb535c762a8f2d52f965abf23d3349eb2682dca595007e2e49f853e4d5252d3"
+ },
+ "fieldsDiscrimination": {
+  "odudu_rhob_completeness": "sentinels counted missing, only the long run counted, missing over present, null fraction quoted",
+  "odudu_nphi_coverage": "missing values ignored, max step one foot, whole log interval, fraction of samples present",
+  "odudu_scada_expected_step_min": "mean of every step, median of every step, median of absolute steps, span over entries",
+  "odudu_water_cut_day23": "reported value quoted, water over oil, oil cut, day 22 computed, in percent",
+  "odudu_cumulative_drop_bbl": "against day 36, rise to day 40, as a percent of day 37, against the largest before",
+  "odudu_phase_sum_allowed_day44_bbl_d": "tolerance on the sum, five percent, half a barrel, tolerance on the oil",
+  "ikoro_core_max_abs_z": "population sd, centred on the median, the ceiling quoted, leave one out",
+  "ikoro_core_max_abs_modified_z": "reciprocal of 1 4826, mad scaled by 1 4826, mean in place of median, sd in place of mad",
+  "ikoro_rhob_upper_fence_g_cm3": "r6 quartiles, r8 quartiles, outer fence k3, from the median",
+  "ikoro_rhob_hampel_threshold_entry57_g_cm3": "window one wider, no 1 4826 scale, missing read as zero, whole series mad, two sigma",
+  "ikoro_core_grubbs_critical": "one sided alpha over n, t on n minus 1 df, alpha not divided by n, the ceiling quoted",
+  "ikoro_max_mahalanobis_d2": "population covariance, distance not squared, sum of squared z, the cutoff quoted",
+  "amasiri_phase1_individuals_ucl_psig": "sample sd for sigma, two sigma, d2 rounded to 1 13, mrbar over n",
+  "amasiri_phase1_mr_ucl_psig": "d4 as three, d4 times sigma, three sigma above mrbar, d4 times sample sd",
+  "amasiri_ewma_day14_psig": "started at the first value, weights swapped, target from phase two, lambda 0 3",
+  "amasiri_ewma_exact_ucl_day2_psig": "asymptotic limit, exponent t for 2t, day counted from zero, variance lambda over 2",
+  "amasiri_cusum_upper_day18_psi": "no floor at zero, k read in psi, plain cumulative sum, target from phase two",
+  "amasiri_scorecard_total": "equal weights, weights not normalised, pooled failures, weakest score quoted",
+  "summary": "74 wrong methods over 18 routes, 0 WEAK, closest miss 97.5 tolerances (ikoro_core_max_abs_modified_z via reciprocal of 1 4826). Negative control at tolerance x1e12: 18 of 18 WEAK."
+ },
+ "fields": {
+  "count": 18,
+  "sha256": "f58d26ae3492faa3599e16a78a8e091633658f76415609d63dfdd94129d15670",
+  "keys": [
+   "odudu_rhob_completeness",
+   "odudu_nphi_coverage",
+   "odudu_scada_expected_step_min",
+   "odudu_water_cut_day23",
+   "odudu_cumulative_drop_bbl",
+   "odudu_phase_sum_allowed_day44_bbl_d",
+   "ikoro_core_max_abs_z",
+   "ikoro_core_max_abs_modified_z",
+   "ikoro_rhob_upper_fence_g_cm3",
+   "ikoro_rhob_hampel_threshold_entry57_g_cm3",
+   "ikoro_core_grubbs_critical",
+   "ikoro_max_mahalanobis_d2",
+   "amasiri_phase1_individuals_ucl_psig",
+   "amasiri_phase1_mr_ucl_psig",
+   "amasiri_ewma_day14_psig",
+   "amasiri_ewma_exact_ucl_day2_psig",
+   "amasiri_cusum_upper_day18_psi",
+   "amasiri_scorecard_total"
+  ]
+ }
 }

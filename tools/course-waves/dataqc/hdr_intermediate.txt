@@ -1,0 +1,21 @@
+-- ============================================================================
+-- D1 PROFESSIONAL DEEP SEED: Oilfield Data Quality, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/dataqc/intermediate.
+--
+-- What this tier owns: WHICH VALUES STAND APART, the plausibility dimension.
+-- The z-score with the sample standard deviation and its ceiling
+-- (n - 1) / sqrt(n); the median, the raw MAD and the modified z-score with
+-- 0.6745 as printed; the R6, R7 and R8 quantile rules and Tukey fences; the
+-- Hampel window with its edges, gaps and thin windows; Grubbs for one outlier
+-- and the masking a second one causes; the Mahalanobis distance with a
+-- chi-square cutoff on classical estimates. Digest sections 17 to 24, and
+-- section 32.
+--
+-- THE TRAP THE TIER IS BUILT ON. Each method answers its own question, and an
+-- outlier helps set the mean and SD that measure it. The Professional capstone
+-- grades six plausibility quantities and grades no chart and no scorecard.
+-- ============================================================================

@@ -45,7 +45,9 @@ export const SEEDS = Object.freeze({
    neutron and sonic follow it, so density and neutron are negatively
    correlated inside a sand, as they are in rock. */
 
-const LITH = (i) => (i < 40 || (i >= 100 && i < 130) || i >= 200 ? 'shale' : (i < 100 ? 'oil sand' : 'water sand'));
+/** The lithology by entry, stated: [name, first entry, last entry]. */
+export const LITH_RANGES = Object.freeze([['shale', 0, 39], ['oil sand', 40, 99], ['shale', 100, 129], ['water sand', 130, 199], ['shale', 200, 239]]);
+const LITH = (i) => LITH_RANGES.find(([, a, b]) => i >= a && i <= b)[0];
 
 const buildLog = () => {
   const g = mulberry32(SEEDS.log);

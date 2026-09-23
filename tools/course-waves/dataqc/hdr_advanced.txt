@@ -1,0 +1,22 @@
+-- ============================================================================
+-- D1 EXPERT DEEP SEED: Oilfield Data Quality, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/dataqc/advanced.
+--
+-- What this tier owns: HAS THE PROCESS CHANGED, AND WHAT IS THE POLICY. The
+-- individuals and moving range chart with d2 and D4 as NIST prints them; EWMA
+-- with target and sigma from in-control history, asymptotic and exact limits;
+-- the tabular CUSUM with k and h in a stated unit and no reset; the scorecard
+-- with weights normalised by their sum, the weakest dimension and no grade
+-- bands; the Petrolord defaults presented as choices and the order of checks;
+-- the NIST printed-figure errata and what the engine does not build. Digest
+-- sections 25 to 31, and section 32.
+--
+-- THE TRAP THE TIER IS BUILT ON. A chart drawn on the data it monitors absorbs
+-- the shift it is looking for, and a small shift is seen by EWMA and CUSUM and
+-- missed by the individuals chart. The Expert capstone grades phase-one
+-- limits, EWMA, CUSUM and a weighted scorecard.
+-- ============================================================================

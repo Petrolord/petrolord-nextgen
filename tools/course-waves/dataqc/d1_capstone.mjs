@@ -58,13 +58,12 @@ const success = (label, r) => {
 const r1 = (x) => Math.round(x * 10) / 10;
 const r3 = (x) => Math.round(x * 1000) / 1000;
 const r4 = (x) => Math.round(x * 10000) / 10000;
-const r6 = (x) => Math.round(x * 1e6) / 1e6;
 const freeze = (o) => Object.freeze(JSON.parse(JSON.stringify(o)));
 
 /* ========================================================= ODUDU, Associate
 
    ODUDU-2: a 180-sample log at a half-foot step from 6200 ft (density and
-   neutron), a 48-entry SCADA time index in hours at a nominal quarter hour
+   neutron), a 48-entry SCADA time index in minutes at a nominal fifteen
    with timestamp jitter, and a 60-day production sheet. */
 
 const buildOdudu = () => {
@@ -82,10 +81,10 @@ const buildOdudu = () => {
   [175, 176, 177].forEach((i) => { rhob[i] = -999.25; });
   for (let i = 60; i <= 63; i += 1) nphi[i] = null;
   nphi[150] = null;
-  // The SCADA index, decimal hours to six places: quarter-hour steps with jitter; entry 17 is lost (a half
+  // The SCADA index, minutes to four places: quarter-hour steps with jitter; entry 17 is lost (a half
   // hour step), two timestamps are written twice, one entry steps back.
   const t = [0];
-  for (let i = 1; i < 48; i += 1) t.push(r6(t[i - 1] + 0.25 + 0.002 * nz()));
+  for (let i = 1; i < 48; i += 1) t.push(r4(t[i - 1] + 15 + 0.12 * nz()));
   const scada = t.slice();
   scada.splice(17, 1);
   scada.splice(29, 0, scada[29]);
@@ -109,7 +108,7 @@ const buildOdudu = () => {
   return {
     well: 'ODUDU-2',
     log: { depth, rhob, nphi, coverageStart: 6210, coverageEnd: 6280, maxStep: 0.5 },
-    scada: { hours: scada },
+    scada: { minutes: scada },
     production: { oil, water, gross, waterCut, cumOil },
   };
 };
@@ -122,7 +121,7 @@ const odCov = success('Odudu coverage of NPHI', Q.coverage({
   index: ODUDU.log.depth, values: ODUDU.log.nphi, start: ODUDU.log.coverageStart, end: ODUDU.log.coverageEnd, maxStep: ODUDU.log.maxStep,
 }));
 must('Odudu: the coverage interval holds three holes (the neutron run, the index skip, the single dropout)', odCov.uncovered.length === 3, JSON.stringify(odCov.uncovered));
-const odIdx = success('Odudu indexCheck of the SCADA index', Q.indexCheck({ index: ODUDU.scada.hours }));
+const odIdx = success('Odudu indexCheck of the SCADA index', Q.indexCheck({ index: ODUDU.scada.minutes }));
 must('Odudu: the SCADA index carries two duplicates and a reversal', odIdx.duplicates === 2 && odIdx.reversals === 1, `${odIdx.duplicates} ${odIdx.reversals}`);
 const odWc = success('Odudu waterCutCheck', Q.waterCutCheck({
   waterCut: ODUDU.production.waterCut, oil: ODUDU.production.oil, water: ODUDU.production.water, tolerance: 1e-4,
@@ -224,7 +223,7 @@ const amS = success('Amasiri scorecard', Q.scorecard(AMASIRI.scorecard));
 const ROWS = [
   ['beginner', 'odudu_rhob_completeness', 'fraction', odComp.completeness],
   ['beginner', 'odudu_nphi_coverage', 'fraction', odCov.coverage],
-  ['beginner', 'odudu_scada_expected_step_h', 'measure', odIdx.expectedStep],
+  ['beginner', 'odudu_scada_expected_step_min', 'measure', odIdx.expectedStep],
   ['beginner', 'odudu_water_cut_day23', 'fraction', odWc.computed[22]],
   ['beginner', 'odudu_cumulative_drop_bbl', 'measure', odCum.flags[0].drop],
   ['beginner', 'odudu_phase_sum_allowed_day44_bbl_d', 'measure', odPh.flags[0].allowed],

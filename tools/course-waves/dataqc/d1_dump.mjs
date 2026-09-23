@@ -137,7 +137,36 @@ const LOG = T.EKENE_LOG;
 const CH = LOG.channels;
 const PROD = T.EKENE_PROD;
 const day = (i) => i + 1;
-const GR_CLEAN = CH.GR.values.map((v) => (v === -999.25 ? null : v));
+const SENTINEL = -999.25; // the LAS null value the generator leaves in the gamma ray, stated
+const GR_CLEAN = CH.GR.values.map((v) => (v === SENTINEL ? null : v));
+const K = Q.CONSTANTS;
+const S = (x) => String(x);
+// Stated teaching inputs, each passed to the engine AND printed from here, so
+// the prose cannot drift from the call.
+const CUM_TOL = 8000;
+const WC_TOL = 1e-4;
+const PS_REL_WIDE = 0.01;
+const PS_ABS = 50;
+const DRIFT_TOL = 0.15;
+const SPLICE_STEP = 0.5;
+const SPLICE_TOL = 0.6;
+const UPLOG = [8410, 8409.5, 8409, 8408.5, 8408];
+const MAD0 = [5, 5, 5, 6, 7];
+const THIN = [2.3, null, null, 2.9, null, null, 2.31];
+const TIE = [['validity', 0.9], ['completeness', 0.9], ['consistency', 0.95]];
+const ZPOP_THR = 2.9;
+const LAMBDA = 0.2;
+const LM = 3;
+const K_S = 0.5;
+const H_S = 4;
+const NIST_ALPHA = 0.0027; // the printed design inputs of the CUSUM page
+const NIST_BETA = 0.01;
+const COV_START = 8400;
+const COV_END = 8515;
+const WSAND = [130, 199]; // the water sand, asserted against LITH_RANGES below
+const OSAND = [40, 99];
+const DAY10 = 9;
+const eTxt = (x) => x.toExponential(0);
 
 /* ================================================================ HEADER */
 
@@ -240,7 +269,8 @@ table(['stream', 'what it is', 'entries'], [
   ['EKENE-3 pressure', `flowing wellhead pressure, psig: ${T.EKENE_WHP.history.length} in-control days, then ${T.EKENE_WHP.monitored.length} monitored days`, String(T.EKENE_WHP.history.length + T.EKENE_WHP.monitored.length)],
 ]);
 w();
-w('The EKENE-7 lithology by entry (stated): shale 0 to 39, oil sand 40 to 99, shale 100 to 129, water sand 130 to 199, shale 200 to 239. Inside a sand the porosity is drawn first and density, neutron and sonic follow it, so density and neutron move against each other there.');
+w(`The EKENE-7 lithology by entry (stated): ${T.LITH_RANGES.map(([l, a, b]) => `${l} ${a} to ${b}`).join(', ')}. Inside a sand the porosity is drawn first and density, neutron and sonic follow it, so density and neutron move against each other there.`);
+must('the water and oil sand ranges printed here are the generator\'s', T.LITH_RANGES[3][1] === WSAND[0] && T.LITH_RANGES[3][2] === WSAND[1] && T.LITH_RANGES[1][1] === OSAND[0] && T.LITH_RANGES[1][2] === OSAND[1], 'ranges');
 w();
 w('THE PLANTED DEFECTS, every one stated by the generator. Each is found by the check named, and the section that finds it asserts so; the build fails if any defect is not found.');
 w();
@@ -251,13 +281,13 @@ w(`${T.PLANTED.length} defects are planted.`);
 /* ============================================================ SECTION 3 */
 
 section('missing', 'What missing means, and the sentinel that counts as present', ['Associate m01']);
-w('The engine\'s missing value is null, undefined or NaN. Plus or minus infinity is refused as invalid. A number such as -999.25, the null value a LAS file declares, is a present number until someone converts it.');
+w(`The engine's missing value is null, undefined or NaN. Plus or minus infinity is refused as invalid. A number such as ${S(SENTINEL)}, the null value a LAS file declares, is a present number until someone converts it.`);
 w();
 const probe = [
   ['`null`', [1, null, 3]],
   ['`undefined`', [1, undefined, 3]],
   ['`NaN`', [1, NaN, 3]],
-  ['-999.25', [1, -999.25, 3]],
+  [S(SENTINEL), [1, SENTINEL, 3]],
   ['0', [1, 0, 3]],
 ];
 table(['middle entry', 'missing', 'present', 'completeness'], probe.map(([label, v]) => {
@@ -273,11 +303,11 @@ w();
 const grComp = success('GR completeness with the sentinel', Q.completeness({ values: CH.GR.values }));
 const grRange = success('GR range with the sentinel', Q.rangeCheck({ values: CH.GR.values, channel: 'gammaRay', unit: 'gAPI' }));
 const grCompClean = success('GR completeness with the sentinel converted', Q.completeness({ values: GR_CLEAN }));
-w(`On EKENE-7 the gamma ray carries -999.25 at entries ${list(CH.GR.values.map((v, i) => (v === -999.25 ? i : -1)).filter((i) => i >= 0))} (stated). Completeness reads it as present; the definitional range check reads it as a value below the gamma ray minimum.`);
+w(`On EKENE-7 the gamma ray carries ${S(SENTINEL)} at entries ${list(CH.GR.values.map((v, i) => (v === SENTINEL ? i : -1)).filter((i) => i >= 0))} (stated). Completeness reads it as present; the definitional range check reads it as a value below the gamma ray minimum.`);
 w();
 table(['gamma ray, as delivered or converted', 'completeness', 'missing', 'range failures'], [
-  ['as delivered, -999.25 in place', f6(grComp.completeness), String(grComp.missing), String(grRange.failed)],
-  ['with -999.25 converted to null', f6(grCompClean.completeness), String(grCompClean.missing), String(success('GR range converted', Q.rangeCheck({ values: GR_CLEAN, channel: 'gammaRay', unit: 'gAPI' })).failed)],
+  [`as delivered, ${S(SENTINEL)} in place`, f6(grComp.completeness), String(grComp.missing), String(grRange.failed)],
+  [`with ${S(SENTINEL)} converted to null`, f6(grCompClean.completeness), String(grCompClean.missing), String(success('GR range converted', Q.rangeCheck({ values: GR_CLEAN, channel: 'gammaRay', unit: 'gAPI' })).failed)],
 ]);
 planted(2, grComp.missing === 0 && grRange.failed === 4 && idxs(grRange.flags).join() === '236,237,238,239', idxs(grRange.flags));
 w();
@@ -357,7 +387,7 @@ w(`RHOB loses ${rhobC.missing} samples in ${rhobC.gapRuns.length} run and NPHI $
 section('coverage', 'Coverage of an interval, and a step too long', ['Associate m02']);
 w('A step between two consecutive PRESENT samples covers the index between them when it is at most `maxStep`, inclusive; a longer step is a hole. The stretch before the first and after the last present sample is uncovered.');
 w();
-const covStart = 8400; const covEnd = 8515;
+const covStart = COV_START; const covEnd = COV_END;
 const covs = [['RHOB', 0.5], ['NPHI', 0.5], ['NPHI', 1.0], ['GR', 0.5], ['GR', 1.0]].map(([ch, ms]) => {
   const vals = ch === 'GR' ? GR_CLEAN : CH[ch].values;
   const r = success(`coverage ${ch} ${ms}`, Q.coverage({ index: LOG.depth, values: vals, start: covStart, end: covEnd, maxStep: ms }));
@@ -374,8 +404,9 @@ planted(8, grHalf.uncovered.length === 1, 'the index skip is a hole at maxStep 0
 w();
 w(`The gamma ray has no missing value inside the interval once the sentinel is converted, and at a half-foot maxStep it still has one hole, from ${f6(grHalf.uncovered[0].from)} to ${f6(grHalf.uncovered[0].to)} ft: the depth index skips a sample there. At a one-foot maxStep the same step covers. The hole's reason, verbatim: "${grHalf.flags[0].reason}".`);
 w();
-const onB = success('coverage with a step exactly maxStep', Q.coverage({ index: [0, 1, 2], values: [5, 5, 5], start: 0, end: 2, maxStep: 1 }));
-w(`ON THE BOUNDARY. An index 0, 1, 2 with every value present and maxStep 1 reads coverage ${f6(onB.coverage)}: a step equal to maxStep covers.`);
+const BOUND = { index: [0, 1, 2], values: [5, 5, 5], start: 0, end: 2, maxStep: 1 };
+const onB = success('coverage with a step exactly maxStep', Q.coverage(BOUND));
+w(`ON THE BOUNDARY. An index ${BOUND.index.join(', ')} with every value present and maxStep ${S(BOUND.maxStep)} reads coverage ${f6(onB.coverage)}: a step equal to maxStep covers.`);
 must('a step equal to maxStep covers', onB.coverage === 1, onB.coverage);
 w();
 const cvRef = refusal('coverage on the splice index', Q.coverage({ index: T.EKENE_SPLICE.index, values: T.EKENE_SPLICE.index, start: 8520, end: 8526, maxStep: 0.5 }), 'index[5]');
@@ -407,7 +438,7 @@ table(['EKENE-7 channel', 'checked', 'failed', 'entries flagged', 'rule'], range
 const rtR = rangeRows.find((x) => x.name === 'RT').r;
 planted(4, rtR.failed === 1 && rtR.flags[0].index === 120, JSON.stringify(idxs(rtR.flags)));
 w();
-w(`RT at entry 120 is zero (stated), and the resistivity minimum is exclusive. Its reason, verbatim: "${rtR.flags[0].reason}".`);
+w(`RT at entry ${rtR.flags[0].index} is zero (stated), and the resistivity minimum is exclusive. Its reason, verbatim: "${rtR.flags[0].reason}".`);
 w();
 w('PLAUSIBILITY RANGES ARE THE CALLER\'S. A gamma ray above some value, a density below some value, are claims about a basin and a tool, and the engine carries none. Passed by the caller as min and max, a range is checked the same way:');
 w();
@@ -423,7 +454,7 @@ table(['channel', 'caller minimum, stated', 'caller maximum, stated', 'checked',
 section('units', 'Units are never converted, and a fraction written in percent', ['Associate m03']);
 const nphiR = rangeRows.find((x) => x.name === 'NPHI').r;
 planted(3, nphiR.failed === 10 && idxs(nphiR.flags).join() === '150,151,152,153,154,155,156,157,158,159', idxs(nphiR.flags));
-w(`EKENE-7 NPHI entries 150 to 159 were written in percent (stated). Against the fraction limit in v/v they fail as above the maximum:`);
+w(`EKENE-7 NPHI entries ${nphiR.flags[0].index} to ${nphiR.flags.at(-1).index} were written in percent (stated). Against the fraction limit in v/v they fail as above the maximum:`);
 w();
 table(['entry', 'NPHI as delivered', 'the engine reason'], nphiR.flags.slice(0, 3).map((f) => [String(f.index), f6(f.value), f.reason]));
 w();
@@ -448,7 +479,9 @@ table(['day', 'oil, bbl/d', 'hours on', 'status', 'rule', 'the engine reason'], 
 planted(11, rc.flags.some((f) => f.index === 46 && f.rule === 'negative-rate'), JSON.stringify(rc.flags));
 planted(12, rc.flags.some((f) => f.index === 60 && f.rule === 'rate-while-shut-in'), JSON.stringify(rc.flags));
 w();
-w(`${rc.checked} days checked, ${rc.failed} failed; the three missing days are not checked. Day 60 is shut in with an oil rate of ${f6(PROD.oil[59])} and is not flagged. Day 59 ran ${f6(PROD.hoursOn[58])} hours (stated) and is not shut in.`);
+const shutI = PROD.status.indexOf('shut-in');
+const partI = PROD.hoursOn.findIndex((h) => h > 0 && h < 24);
+w(`${rc.checked} days checked, ${rc.failed} failed; the three missing days are not checked. Day ${day(shutI)} is shut in with an oil rate of ${f6(PROD.oil[shutI])} and is not flagged. Day ${day(partI)} ran ${f6(PROD.hoursOn[partI])} hours (stated) and is not shut in.`);
 must('day 60 is shut in and not flagged', PROD.status[59] === 'shut-in' && !rc.flags.some((f) => f.index === 59), 'day 60');
 w();
 const statusOnly = success('rateCheck with status only', Q.rateCheck({ rates: PROD.oil, status: PROD.status }));
@@ -464,7 +497,7 @@ table(['what the check is given', 'failed'], [
 
 section('index', 'The depth and time index: duplicates, reversals and irregular steps', ['Associate m04']);
 const ix = success('EKENE-7 depth indexCheck', Q.indexCheck({ index: LOG.depth }));
-w('A duplicate is a value equal to ANY earlier value. A reversal is a step against the stated direction. An irregular step is a step in the right direction whose size differs from the expected step by more than the tolerance. The expected step defaults to the median of the steps in the stated direction, and the tolerance to 1e-6 times the expected step.');
+w(`A duplicate is a value equal to ANY earlier value. A reversal is a step against the stated direction. An irregular step is a step in the right direction whose size differs from the expected step by more than the tolerance. The expected step defaults to the ${ix.expectedStepSource}, and the tolerance to ${ix.basis.stepTolerance}.`);
 w();
 table(['EKENE-7 depth index', 'value'], [
   ['entries', String(ix.n)],
@@ -491,21 +524,21 @@ w();
 table(['splice summary', 'count'], [['missing', String(sp.missing)], ['duplicates', String(sp.duplicates)], ['reversals', String(sp.reversals)], ['irregular steps', String(sp.irregularSteps)], ['monotonic', String(sp.monotonic)]]);
 must('entry 5 is both a duplicate and a reversal', sp.flags.filter((f) => f.index === 5).map((f) => f.rule).join() === 'duplicate-index,reversal', JSON.stringify(sp.flags.filter((f) => f.index === 5)));
 w();
-w('Entry 5 returns to a depth entry 3 already holds, so it is flagged twice: as a duplicate and as a reversal. The step after the lost entry is measured from the last present entry.');
+const dupRev = sp.flags.find((f) => f.rule === 'duplicate-index' && sp.flags.some((g) => g.index === f.index && g.rule === 'reversal'));
+w(`Entry ${dupRev.index} returns to a depth entry ${dupRev.firstIndex} already holds, so it is flagged twice: as a duplicate and as a reversal. The step after the lost entry is measured from the last present entry.`);
 w();
-const spStated = success('splice with a stated step', Q.indexCheck({ index: T.EKENE_SPLICE.index, expectedStep: 0.5, stepTolerance: 0.6 }));
-w(`A STATED EXPECTED STEP AND A LOOSE TOLERANCE. With expectedStep 0.5 and stepTolerance 0.6 (stated) the splice reads ${spStated.irregularSteps} irregular steps and still ${spStated.duplicates} duplicates and ${spStated.reversals} reversal: a tolerance loosens the step test only.`);
+const spStated = success('splice with a stated step', Q.indexCheck({ index: T.EKENE_SPLICE.index, expectedStep: SPLICE_STEP, stepTolerance: SPLICE_TOL }));
+w(`A STATED EXPECTED STEP AND A LOOSE TOLERANCE. With expectedStep ${S(SPLICE_STEP)} and stepTolerance ${S(SPLICE_TOL)} (stated) the splice reads ${spStated.irregularSteps} irregular steps and still ${spStated.duplicates} duplicates and ${spStated.reversals} reversal: a tolerance loosens the step test only.`);
 must('a loose tolerance clears the irregular steps and keeps the rest', spStated.irregularSteps === 0 && spStated.duplicates === 2 && spStated.reversals === 1, JSON.stringify(spStated));
 w();
-const down = success('an index logged upward, declared decreasing', Q.indexCheck({ index: [8410, 8409.5, 8409, 8408.5, 8408], direction: 'decreasing' }));
-const downWrong = success('an index logged upward, declared increasing', Q.indexCheck({ index: [8410, 8409.5, 8409, 8408.5, 8408] }).error ? { reversals: null } : Q.indexCheck({ index: [8410, 8409.5, 8409, 8408.5, 8408] }));
-w(`A LOG RECORDED UPWARD. The index 8410, 8409.5, 8409, 8408.5, 8408 (stated) declared decreasing reads ${down.reversals} reversals and expected step ${f6(down.expectedStep)}.`);
+const down = success('an index logged upward, declared decreasing', Q.indexCheck({ index: UPLOG, direction: 'decreasing' }));
+w(`A LOG RECORDED UPWARD. The index ${UPLOG.join(', ')} (stated) declared decreasing reads ${down.reversals} reversals and expected step ${f6(down.expectedStep)}.`);
 must('an upward log declared decreasing is clean', down.reversals === 0 && down.irregularSteps === 0, JSON.stringify(down));
-const upRef = refusal('an upward log declared increasing', Q.indexCheck({ index: [8410, 8409.5, 8409, 8408.5, 8408] }), 'index');
+const upRef = refusal('an upward log declared increasing', Q.indexCheck({ index: UPLOG }), 'index');
 w('Declared increasing, the same index is refused, because no step runs in the stated direction:');
 w();
 w(`> ${upRef.error}`);
-must('the declared-increasing call on the upward log refuses', !!downWrong && upRef.error.includes('no step'), upRef.error);
+must('the declared-increasing call on the upward log refuses', upRef.error.includes('no step'), upRef.error);
 
 /* ============================================================ SECTION 11 */
 
@@ -518,26 +551,27 @@ w();
 table(['flagged day', 'compared with day', 'drop, bbl', 'the engine reason'], cc.flags.map((f) => [String(day(f.index)), String(day(f.previousIndex)), f6(f.drop), f.reason]));
 planted(17, cc.flags.length === 1 && cc.flags[0].index === 69 && cc.flags[0].previousIndex === 67, JSON.stringify(cc.flags));
 w();
-w(`Day 69 is missing (stated), so day 70 is measured against day 68. The keying error planted on day 70 is ten thousand barrels (stated); the drop the engine reports is the error less the two days of production between the readings, derived ${f6(10000 - cc.flags[0].drop)} bbl.`);
+const cf = cc.flags[0];
+w(`Day ${day(cf.index - 1)} is missing (stated), so day ${day(cf.index)} is measured against day ${day(cf.previousIndex)}. The keying error planted on day ${day(cf.index)} is ten thousand barrels (stated); the drop the engine reports is the error less the two days of production between the readings, derived ${f6(10000 - cc.flags[0].drop)} bbl.`);
 w();
-const ccTol = success('cumulativeCheck with a meter tolerance', Q.cumulativeCheck({ cumulative: PROD.cumOil, tolerance: 8000 }));
+const ccTol = success('cumulativeCheck with a meter tolerance', Q.cumulativeCheck({ cumulative: PROD.cumOil, tolerance: CUM_TOL }));
 const printedDrop = Number(cc.flags[0].reason.match(/from ([\d.]+) at/)[1]) - Number(cc.flags[0].reason.match(/to ([\d.]+)$/)[1]);
-w(`READING THE REASON. The engine writes each value in a reason to six significant figures and counts entries from 0, so "entry 67" is day 68, and the two cumulatives print as ${cc.flags[0].reason.match(/from ([\d.]+) at/)[1]} and ${cc.flags[0].reason.match(/to ([\d.]+)$/)[1]}. Derived: those printed figures differ by ${f6(printedDrop)}; the \`drop\` field carries the unrounded ${f6(cc.flags[0].drop)}. Quote the field.`);
+w(`READING THE REASON. The engine writes each value in a reason to six significant figures and counts entries from 0, so "entry ${cf.previousIndex}" is day ${day(cf.previousIndex)}, and the two cumulatives print as ${cc.flags[0].reason.match(/from ([\d.]+) at/)[1]} and ${cc.flags[0].reason.match(/to ([\d.]+)$/)[1]}. Derived: those printed figures differ by ${f6(printedDrop)}; the \`drop\` field carries the unrounded ${f6(cc.flags[0].drop)}. Quote the field.`);
 must('the printed reason figures differ from the drop field', Math.abs(printedDrop - cc.flags[0].drop) > 1, printedDrop);
 w();
-w(`With a tolerance of 8000 bbl (stated) the same drop is ${ccTol.failed === 0 ? 'not flagged' : 'flagged'}: a tolerance is for meter noise, and a tolerance wide enough to swallow a keying error hides it.`);
-must('a tolerance above the drop clears it', ccTol.failed === 0 && cc.flags[0].drop < 8000, ccTol.failed);
+w(`With a tolerance of ${S(CUM_TOL)} bbl (stated) the same drop is ${ccTol.failed === 0 ? 'not flagged' : 'flagged'}: a tolerance is for meter noise, and a tolerance wide enough to swallow a keying error hides it.`);
+must('a tolerance above the drop clears it', ccTol.failed === 0 && cc.flags[0].drop < CUM_TOL, ccTol.failed);
 
 /* ============================================================ SECTION 12 */
 
 section('watercut', 'Water cut on a liquid basis, and the reporting tolerance', ['Associate m05']);
-w('The engine\'s water cut is water / (oil + water), a liquid basis. A reported water cut outside [0, 1] is flagged as out of range; one that disagrees with the computed value by more than the tolerance is a mismatch. The default tolerance is 1e-6.');
+w(`The engine's water cut is water / (oil + water), a liquid basis. A reported water cut outside [0, 1] is flagged as out of range; one that disagrees with the computed value by more than the tolerance is a mismatch. The default tolerance is ${eTxt(Q.waterCutCheck({ waterCut: [0.5] }).basis.tolerance)}.`);
 w();
 const wcDef = success('waterCutCheck default tolerance', Q.waterCutCheck({ waterCut: PROD.waterCut, oil: PROD.oil, water: PROD.water }));
-const wcRep = success('waterCutCheck at the reporting tolerance', Q.waterCutCheck({ waterCut: PROD.waterCut, oil: PROD.oil, water: PROD.water, tolerance: 1e-4 }));
+const wcRep = success('waterCutCheck at the reporting tolerance', Q.waterCutCheck({ waterCut: PROD.waterCut, oil: PROD.oil, water: PROD.water, tolerance: WC_TOL }));
 table(['tolerance', 'failed', 'out of range', 'mismatch'], [
-  ['1e-6, the default', String(wcDef.failed), String(wcDef.flags.filter((f) => f.rule === 'water-cut-out-of-range').length), String(wcDef.flags.filter((f) => f.rule === 'water-cut-mismatch').length)],
-  ['1e-4, one unit in the fourth decimal', String(wcRep.failed), String(wcRep.flags.filter((f) => f.rule === 'water-cut-out-of-range').length), String(wcRep.flags.filter((f) => f.rule === 'water-cut-mismatch').length)],
+  [`${eTxt(wcDef.basis.tolerance)}, the default`, String(wcDef.failed), String(wcDef.flags.filter((f) => f.rule === 'water-cut-out-of-range').length), String(wcDef.flags.filter((f) => f.rule === 'water-cut-mismatch').length)],
+  [`${eTxt(WC_TOL)}, one unit in the fourth decimal`, String(wcRep.failed), String(wcRep.flags.filter((f) => f.rule === 'water-cut-out-of-range').length), String(wcRep.flags.filter((f) => f.rule === 'water-cut-mismatch').length)],
 ]);
 w();
 w('The EKENE-3 sheet reports water cut to four decimals (stated), so a correct value can differ from water / (oil + water) by up to half a unit in the fourth decimal. At the default tolerance that rounding is flagged as a mismatch; at one unit in the fourth decimal only the planted defects remain:');
@@ -547,10 +581,10 @@ planted(13, wcRep.flags.filter((f) => f.rule === 'water-cut-out-of-range').map((
 planted(14, wcRep.flags.some((f) => f.index === 54 && f.rule === 'water-cut-mismatch'), JSON.stringify(wcRep.flags));
 w();
 const d55 = wcRep.flags.find((f) => f.index === 54);
-w(`Day 55's reason, verbatim: "${d55.reason}".`);
+w(`Day ${day(d55.index)}'s reason, verbatim: "${d55.reason}".`);
 w();
-const d10 = 9;
-w(`THE BASIS MATTERS. On day 10 the computed liquid-basis water cut is ${f6(wcRep.computed[d10])}. Derived on the same day: water over oil, the water-oil ratio, is ${f6(PROD.water[d10] / PROD.oil[d10])}, and oil over liquid, the oil cut, is ${f6(1 - wcRep.computed[d10])}. Only the first is what the engine checks.`);
+const d10 = DAY10;
+w(`THE BASIS MATTERS. On day ${day(d10)} the computed liquid-basis water cut is ${f6(wcRep.computed[d10])}. Derived on the same day: water over oil, the water-oil ratio, is ${f6(PROD.water[d10] / PROD.oil[d10])}, and oil over liquid, the oil cut, is ${f6(1 - wcRep.computed[d10])}. Only the first is what the engine checks.`);
 w();
 w(`Where the engine cannot compute a liquid-basis cut (a missing or negative rate, or no liquid) the \`computed\` entry is null: on EKENE-3 that is days ${list(wcRep.computed.map((v, i) => (v === null ? day(i) : null)).filter((v) => v !== null))}.`);
 
@@ -558,26 +592,26 @@ w(`Where the engine cannot compute a liquid-basis cut (a missing or negative rat
 
 section('phasesum', 'Parts that add to a total, and the tolerance on the total', ['Associate m05', 'Expert m05']);
 const ps = success('EKENE-3 phaseSumCheck', Q.phaseSumCheck({ parts: { oil: PROD.oil, water: PROD.water }, total: PROD.gross }));
-w('The parts must add to the total within max(absTolerance, relTolerance x |total|). The Petrolord default is relTolerance 0.005 of the TOTAL and absTolerance 0; both are choices, stated in the basis.');
+w(`The parts must add to the total within max(absTolerance, relTolerance x |total|). The Petrolord default is relTolerance ${S(ps.basis.relTolerance)} of the TOTAL and absTolerance ${S(ps.basis.absTolerance)}; both are choices, stated in the basis.`);
 w();
 table(['day', 'oil + water, bbl/d', 'gross total, bbl/d', 'difference', 'allowed', 'flagged'], [39, 40].map((i) => {
   const s = PROD.oil[i] + PROD.water[i];
-  const allowed = Math.max(0, 0.005 * Math.abs(PROD.gross[i]));
+  const allowed = Math.max(ps.basis.absTolerance, ps.basis.relTolerance * Math.abs(PROD.gross[i]));
   return [String(day(i)), f6(ps.sums[i]), f6(PROD.gross[i]), f6(s - PROD.gross[i]), f6(allowed), String(ps.flags.some((f) => f.index === i))];
 }));
 planted(15, ps.flags.length === 1 && ps.flags[0].index === 39, JSON.stringify(idxs(ps.flags)));
 must('day 41 is inside tolerance', !ps.flags.some((f) => f.index === 40), 'day 41');
 w();
-w('The difference and allowed columns are derived (the sum less the total, and 0.005 times the total); the flagged column is the engine\'s.');
+w(`The difference and allowed columns are derived (the sum less the total, and ${S(ps.basis.relTolerance)} times the total); the flagged column is the engine's.`);
 w();
-w(`Day 40's reason, verbatim: "${ps.flags[0].reason}".`);
+w(`Day ${day(ps.flags[0].index)}'s reason, verbatim: "${ps.flags[0].reason}".`);
 w();
-const psRel = success('phaseSumCheck at one percent', Q.phaseSumCheck({ parts: { oil: PROD.oil, water: PROD.water }, total: PROD.gross, relTolerance: 0.01 }));
-const psAbs = success('phaseSumCheck with an absolute floor', Q.phaseSumCheck({ parts: { oil: PROD.oil, water: PROD.water }, total: PROD.gross, absTolerance: 50 }));
+const psRel = success('phaseSumCheck at one percent', Q.phaseSumCheck({ parts: { oil: PROD.oil, water: PROD.water }, total: PROD.gross, relTolerance: PS_REL_WIDE }));
+const psAbs = success('phaseSumCheck with an absolute floor', Q.phaseSumCheck({ parts: { oil: PROD.oil, water: PROD.water }, total: PROD.gross, absTolerance: PS_ABS }));
 table(['tolerance, stated', 'failed', 'days flagged'], [
-  ['relTolerance 0.005, the default', String(ps.failed), list(ps.flags.map((f) => day(f.index)))],
-  ['relTolerance 0.01', String(psRel.failed), list(psRel.flags.map((f) => day(f.index))) || 'none'],
-  ['relTolerance 0.005 with absTolerance 50 bbl/d', String(psAbs.failed), list(psAbs.flags.map((f) => day(f.index))) || 'none'],
+  [`relTolerance ${S(ps.basis.relTolerance)}, the default`, String(ps.failed), list(ps.flags.map((f) => day(f.index)))],
+  [`relTolerance ${S(PS_REL_WIDE)}`, String(psRel.failed), list(psRel.flags.map((f) => day(f.index))) || 'none'],
+  [`relTolerance ${S(ps.basis.relTolerance)} with absTolerance ${S(PS_ABS)} bbl/d`, String(psAbs.failed), list(psAbs.flags.map((f) => day(f.index))) || 'none'],
 ]);
 w();
 w(`${ps.sums.filter((v) => v === null).length} days carry no sum (\`null\`): a day with any part or the total missing is not checked.`);
@@ -585,7 +619,7 @@ w(`${ps.sums.filter((v) => v === null).length} days carry no sum (\`null\`): a d
 /* ============================================================ SECTION 14 */
 
 section('frozen', 'Frozen values, and a slow drift that is not one', ['Associate m05']);
-w('A frozen run is at least `minRun` consecutive present values each within `tolerance` of the run\'s FIRST value. A missing value ends a run. The Petrolord defaults are minRun 5 and tolerance 0.');
+w(`A frozen run is at least \`minRun\` consecutive present values each within \`tolerance\` of the run's FIRST value. A missing value ends a run. The Petrolord defaults are minRun ${Q.frozenRuns({ values: [1] }).basis.minRun} and tolerance ${S(Q.frozenRuns({ values: [1] }).basis.tolerance)}.`);
 w();
 const fzG = success('frozen gas', Q.frozenRuns({ values: PROD.gas }));
 const fzD = success('frozen DT', Q.frozenRuns({ values: CH.DT.values }));
@@ -596,16 +630,16 @@ table(['series', 'runs', 'start', 'end', 'length', 'value held'], [
 planted(6, fzD.runs.length === 1 && fzD.runs[0].start === 175 && fzD.runs[0].length === 9, JSON.stringify(fzD.runs));
 planted(16, fzG.runs.length === 1 && fzG.runs[0].start === 73 && fzG.runs[0].length === 8, JSON.stringify(fzG.runs));
 w();
-w(`The gas meter held its day 74 value for the seven days after it (stated), so the run is eight days long, days ${day(fzG.runs[0].start)} to ${day(fzG.runs[0].end)}. The reason, verbatim: "${fzG.flags[0].reason}".`);
+w(`The gas meter held its day ${day(fzG.runs[0].start)} value for the seven days after it (stated), so the run is eight days long, days ${day(fzG.runs[0].start)} to ${day(fzG.runs[0].end)}. The reason, verbatim: "${fzG.flags[0].reason}".`);
 w();
 const others = ['oil', 'water', 'gross'].map((k) => [k, Q.frozenRuns({ values: PROD[k] }).runs.length]);
 table(['EKENE-3 column', 'frozen runs at the defaults'], others.map(([k, n]) => [k, String(n)]));
 w();
 const drift = T.SLOW_DRIFT;
-const dr = success('slow drift at tolerance 0.15', Q.frozenRuns({ values: drift, tolerance: 0.15, minRun: 5 }));
-w(`A SLOW DRIFT. The readings ${drift.map(f6).join(', ')} (stated) rise 0.1 at a time. At tolerance 0.15 and minRun 5 the engine finds ${dr.runs.length} runs, because each value is compared with the run's first value.`);
+const dr = success('slow drift at the stated tolerance', Q.frozenRuns({ values: drift, tolerance: DRIFT_TOL }));
+w(`A SLOW DRIFT. The readings ${drift.map(f6).join(', ')} (stated) rise ${f6(drift[1] - drift[0])} at a time. At tolerance ${S(DRIFT_TOL)} and minRun ${dr.basis.minRun} the engine finds ${dr.runs.length} runs, because each value is compared with the run's first value.`);
 must('the slow drift is not a frozen run', dr.runs.length === 0, dr.runs.length);
-const prevRule = (() => { let best = 1; let cur = 1; for (let i = 1; i < drift.length; i += 1) { if (Math.abs(drift[i] - drift[i - 1]) <= 0.15) { cur += 1; best = Math.max(best, cur); } else cur = 1; } return best; })();
+const prevRule = (() => { let best = 1; let cur = 1; for (let i = 1; i < drift.length; i += 1) { if (Math.abs(drift[i] - drift[i - 1]) <= DRIFT_TOL) { cur += 1; best = Math.max(best, cur); } else cur = 1; } return best; })();
 w(`Derived, and a rule the engine does not use: comparing each value with the one before it would chain all ${prevRule} readings into one run.`);
 must('the previous-value rule would chain the whole drift', prevRule === drift.length, prevRule);
 
@@ -643,7 +677,8 @@ table(['setting, stated', 'exact', 'normalised', 'near'], [
   ['stripLeadingZeros false', String(keepZeros.exact), String(keepZeros.normalisedDuplicates), String(keepZeros.near)],
 ]);
 w();
-w(`The accented entry 10 normalises to ${du.normalised[10]}: NFKD separates the accent and the letter filter drops it.`);
+const accent = ids.findIndex((x) => x.normalize('NFKD') !== x);
+w(`The accented entry ${accent} normalises to ${du.normalised[accent]}: NFKD separates the accent and the letter filter drops it.`);
 
 /* ============================================================ SECTION 16 */
 
@@ -653,10 +688,10 @@ w();
 table(['check', 'column', 'setting, stated', 'checked or n', 'failed or flags'], [
   ['completeness', 'oil', 'none', String(oilC.n), String(oilC.missing)],
   ['rateCheck', 'oil', 'hours on and status', String(rc.checked), String(rc.failed)],
-  ['cumulativeCheck', 'cumOil', 'tolerance 0', String(PROD.cumOil.filter((v) => v !== null).length), String(cc.failed)],
-  ['waterCutCheck', 'waterCut', 'tolerance 1e-4', String(PROD.n), String(wcRep.failed)],
-  ['phaseSumCheck', 'oil + water against gross', 'relTolerance 0.005', String(ps.sums.filter((v) => v !== null).length), String(ps.failed)],
-  ['frozenRuns', 'gas', 'minRun 5, tolerance 0', String(PROD.n), String(fzG.runs.length)],
+  ['cumulativeCheck', 'cumOil', `tolerance ${S(cc.basis.tolerance)}`, String(PROD.cumOil.filter((v) => v !== null).length), String(cc.failed)],
+  ['waterCutCheck', 'waterCut', `tolerance ${eTxt(WC_TOL)}`, String(PROD.n), String(wcRep.failed)],
+  ['phaseSumCheck', 'oil + water against gross', `relTolerance ${S(ps.basis.relTolerance)}`, String(ps.sums.filter((v) => v !== null).length), String(ps.failed)],
+  ['frozenRuns', 'gas', `minRun ${fzG.basis.minRun}, tolerance ${S(fzG.basis.tolerance)}`, String(PROD.n), String(fzG.runs.length)],
 ]);
 w();
 w('EKENE-7\'s log through the same checks:');
@@ -681,17 +716,18 @@ const zg = success('z on the gauge', Q.zScores({ values: G }));
 const zgP = success('z on the gauge, population SD', Q.zScores({ values: G, sd: 'population' }));
 w(`z = (x - mean) / s, with the SAMPLE standard deviation (n - 1) by default, as NIST/SEMATECH 1.3.5.17 defines it. A value is flagged when |z| > 3. The largest |z| any value can reach with the sample SD is (n - 1) / sqrt(n).`);
 w();
-w(`EKENE-3's ten gauge readings (stated): ${G.map(f6).join(', ')}. Entry 7 is a gauge glitch.`);
+const GL = G.indexOf(Math.max(...G));
+w(`EKENE-3's ten gauge readings (stated): ${G.map(f6).join(', ')}. Entry ${GL} is a gauge glitch.`);
 w();
 table(['what', 'sample SD', 'population SD'], [
   ['mean', f6(zg.mean), f6(zgP.mean)],
   ['standard deviation', f6(zg.sd), f6(zgP.sd)],
-  ['z of entry 7', f6(zg.z[7]), f6(zgP.z[7])],
+  [`z of entry ${GL}`, f6(zg.z[GL]), f6(zgP.z[GL])],
   ['largest |z|', f6(zg.maxAbsZ), f6(zgP.maxAbsZ)],
   ['flags at |z| > 3', String(zg.flags.length), String(zgP.flags.length)],
 ]);
 w();
-w(`THE CEILING. At n = ${zg.n} the engine reports \`maxPossibleAbsZ\` ${f6(zg.maxPossibleAbsZ)} and \`thresholdReachable\` ${zg.thresholdReachable}: no value in ten can pass |z| > 3 with the sample SD, however wild. Entry 7 reaches ${f6(zg.z[7])}.`);
+w(`THE CEILING. At n = ${zg.n} the engine reports \`maxPossibleAbsZ\` ${f6(zg.maxPossibleAbsZ)} and \`thresholdReachable\` ${zg.thresholdReachable}: no value in ten can pass |z| > 3 with the sample SD, however wild. Entry ${GL} reaches ${f6(zg.z[GL])}.`);
 must('the gauge glitch is not flagged by z and the threshold is unreachable', zg.flags.length === 0 && zg.thresholdReachable === false, `${zg.flags.length} ${zg.thresholdReachable}`);
 planted(20, zg.flags.length === 0, 'z cannot flag the glitch');
 w();
@@ -705,18 +741,19 @@ w();
 w('Each row is one value of 1 among zeros, which is how a value sits as far out as the sample allows.');
 w();
 const C = T.EKENE_CORE;
+const FR = C.porosity.indexOf(Math.max(...C.porosity));
 const zc = success('z on the core', Q.zScores({ values: C.porosity }));
-const coreOut = C.porosity.filter((_, i) => i !== 8);
+const coreOut = C.porosity.filter((_, i) => i !== FR);
 const zco = success('z on the core without plug 9', Q.zScores({ values: coreOut }));
-w(`ONE OUTLIER INFLATES THE SPREAD. EKENE-7's ${C.porosity.length} core plugs (stated): ${C.porosity.map(f6).join(', ')}. Entry 8 is a fractured plug.`);
+w(`ONE OUTLIER INFLATES THE SPREAD. EKENE-7's ${C.porosity.length} core plugs (stated): ${C.porosity.map(f6).join(', ')}. Entry ${FR} is a fractured plug.`);
 w();
 table(['plugs', 'mean', 'sample SD', 'largest |z|', 'flags'], [
   ['all fourteen', f6(zc.mean), f6(zc.sd), f6(zc.maxAbsZ), String(zc.flags.length)],
-  ['entry 8 left out', f6(zco.mean), f6(zco.sd), f6(zco.maxAbsZ), String(zco.flags.length)],
+  [`entry ${FR} left out`, f6(zco.mean), f6(zco.sd), f6(zco.maxAbsZ), String(zco.flags.length)],
 ]);
 w();
-const zOut8 = (C.porosity[8] - zco.mean) / zco.sd;
-w(`Derived: entry 8 measured against the other thirteen plugs' mean and SD sits at ${f6(zOut8)}. Measured against a spread that includes itself, it reads ${f6(zc.z[8])} and is not flagged.`);
+const zOut8 = (C.porosity[FR] - zco.mean) / zco.sd;
+w(`Derived: entry ${FR} measured against the other thirteen plugs' mean and SD sits at ${f6(zOut8)}. Measured against a spread that includes itself, it reads ${f6(zc.z[FR])} and is not flagged.`);
 must('entry 8 against the rest passes 3, and against all does not', zOut8 > 3 && zc.flags.length === 0, `${zOut8} ${zc.flags.length}`);
 w();
 const nistZ = golden('nist-1.3.5.17-zscore-uranium');
@@ -726,7 +763,7 @@ w(`NIST's uranium isotope example (golden, ${nistZ.args.values.length} values): 
 /* ============================================================ SECTION 18 */
 
 section('modz', 'The median, the MAD and the modified z-score', ['Professional m02']);
-w('MAD is the raw median of |x - median|. The modified z-score is M = 0.6745 (x - median) / MAD, and |M| > 3.5 labels a potential outlier (Iglewicz and Hoaglin, as NIST/SEMATECH 1.3.5.17 prints them).');
+w(`MAD is the raw median of |x - median|. The modified z-score is M = ${S(K.MODIFIED_Z_SCALE)} (x - median) / MAD, and |M| > ${S(K.MODIFIED_Z_THRESHOLD)} labels a potential outlier (Iglewicz and Hoaglin, as NIST/SEMATECH 1.3.5.17 prints them).`);
 w();
 const mg = success('modified z on the gauge', Q.modifiedZScores({ values: G }));
 const mc = success('modified z on the core', Q.modifiedZScores({ values: C.porosity }));
@@ -734,24 +771,24 @@ table(['series', 'median', 'MAD', 'largest |M|', 'entries flagged'], [
   ['EKENE-3 gauge', f6(mg.median), f6(mg.mad), f6(Math.max(...mg.scores.map(Math.abs))), list(idxs(mg.flags))],
   ['EKENE-7 core', f6(mc.median), f6(mc.mad), f6(Math.max(...mc.scores.map(Math.abs))), list(idxs(mc.flags))],
 ]);
-planted(20, mg.flags.length === 1 && mg.flags[0].index === 7, JSON.stringify(mg.flags));
-must('the modified z flags the fractured plug that z does not', mc.flags.some((f) => f.index === 8) && zc.flags.length === 0, 'core');
+planted(20, mg.flags.length === 1 && mg.flags[0].index === GL, JSON.stringify(mg.flags));
+must('the modified z flags the fractured plug that z does not', mc.flags.some((f) => f.index === FR) && zc.flags.length === 0, 'core');
 w();
-w(`On the gauge the median is ${f6(mg.median)} with or without the glitch, and the modified z of entry 7 is ${f6(mg.scores[7])}. Its reason, verbatim: "${mg.flags[0].reason}".`);
+w(`On the gauge the median is ${f6(mg.median)} with or without the glitch, and the modified z of entry ${GL} is ${f6(mg.scores[GL])}. Its reason, verbatim: "${mg.flags[0].reason}".`);
 w();
-const mgOut = success('modified z on the gauge without entry 7', Q.modifiedZScores({ values: G.filter((_, i) => i !== 7) }));
+const mgOut = success('modified z on the gauge without the glitch', Q.modifiedZScores({ values: G.filter((_, i) => i !== GL) }));
 table(['gauge readings', 'mean, derived', 'median', 'sample SD', 'MAD'], [
   ['all ten', f6(ST.mean(G)), f6(mg.median), f6(zg.sd), f6(mg.mad)],
-  ['entry 7 left out', f6(ST.mean(G.filter((_, i) => i !== 7))), f6(mgOut.median), f6(success('z gauge without 7', Q.zScores({ values: G.filter((_, i) => i !== 7) })).sd), f6(mgOut.mad)],
+  [`entry ${GL} left out`, f6(ST.mean(G.filter((_, i) => i !== GL))), f6(mgOut.median), f6(success('z gauge without the glitch', Q.zScores({ values: G.filter((_, i) => i !== GL) })).sd), f6(mgOut.mad)],
 ]);
 w();
 w('The mean column is lib/stats `mean`, the function the engine itself imports.');
 w();
-const scale = 1 / 1.4826;
-w(`THE PRINTED CONSTANT. The engine uses 0.6745 as printed. Derived: 1 / 1.4826 is ${f6(scale)}, and entry 7 on the gauge with that constant would read ${f6((scale * (G[7] - mg.median)) / mg.mad)} against the engine's ${f6(mg.scores[7])}. Hampel's scale, 1.4826 x MAD, is the same idea from the other side (${ref('hampel')}).`);
+const scale = 1 / K.HAMPEL_MAD_SCALE;
+w(`THE PRINTED CONSTANT. The engine uses ${S(K.MODIFIED_Z_SCALE)} as printed. Derived: 1 / ${S(K.HAMPEL_MAD_SCALE)} is ${f6(scale)}, and entry ${GL} on the gauge with that constant would read ${f6((scale * (G[GL] - mg.median)) / mg.mad)} against the engine's ${f6(mg.scores[GL])}. Hampel's scale, ${S(K.HAMPEL_MAD_SCALE)} x MAD, is the same idea from the other side (${ref('hampel')}).`);
 w();
-const mad0 = refusal('modified z with MAD zero', Q.modifiedZScores({ values: [5, 5, 5, 6, 7] }), 'values');
-w('WHEN THE MAD IS ZERO. At least half the values equal the median, and the engine refuses rather than invent a fallback. On 5, 5, 5, 6, 7 (stated):');
+const mad0 = refusal('modified z with MAD zero', Q.modifiedZScores({ values: MAD0 }), 'values');
+w(`WHEN THE MAD IS ZERO. At least half the values equal the median, and the engine refuses rather than invent a fallback. On ${MAD0.join(', ')} (stated):`);
 w();
 table(['function', 'the engine\'s refusal, verbatim'], [['`modifiedZScores`', mad0.error]]);
 
@@ -761,7 +798,7 @@ section('quantiles', 'Three quantile rules, R6, R7 and R8', ['Professional m03']
 w('The engine implements Hyndman and Fan R6, R7 and R8 exactly as NIST/SEMATECH 7.2.6.2 states them: h = p(N + 1) for R6, 1 + p(N - 1) for R7 and p(N + 1/3) + 1/3 for R8; with h = k + d the quantile is Y[k] + d (Y[k+1] - Y[k]) on the ordered values, clamped to the minimum and maximum. R7 is the default of Excel, R and numpy; R6 is NIST\'s.');
 w();
 const qn = ['R6', 'R7', 'R8'].map((m) => golden(`nist-7.2.6.2-p90-${m}`));
-table(['rule', 'engine 0.9 quantile', 'golden', 'NIST printed', 'relative difference against golden'], qn.map((g) => {
+table(['rule', `engine ${S(qn[0].args[1])} quantile`, 'golden', 'NIST printed', 'relative difference against golden'], qn.map((g) => {
   const v = Q.sampleQuantile(...g.args);
   must(`NIST 7.2.6.2 ${g.args[2]} reproduces`, Math.abs(v - g.published[0].value) < 0.00005 + 1e-9, v);
   return [g.args[2], f6(v), f6(g.expected), String(g.published[0].value), relE(v, g.expected)];
@@ -769,8 +806,8 @@ table(['rule', 'engine 0.9 quantile', 'golden', 'NIST printed', 'relative differ
 w();
 w(`The NIST silicon wafer resistivities (golden, ${qn[0].args[0].length} values), 90th percentile by each rule.`);
 w();
-const wsand = GR_CLEAN.slice(130, 200);
-w('THE SAME QUESTION ON EKENE-7. The water sand gamma ray, entries 130 to 199:');
+const wsand = GR_CLEAN.slice(WSAND[0], WSAND[1] + 1);
+w(`THE SAME QUESTION ON EKENE-7. The water sand gamma ray, entries ${WSAND[0]} to ${WSAND[1]}:`);
 w();
 table(['rule', 'first quartile', 'third quartile', 'IQR, derived'], ['R6', 'R7', 'R8'].map((m) => {
   const a = Q.sampleQuantile(wsand, 0.25, m); const b = Q.sampleQuantile(wsand, 0.75, m);
@@ -784,19 +821,20 @@ section('fences', 'Tukey fences: inner, outer and on the fence', ['Professional 
 const fz = success('fences water sand', Q.iqrFences({ values: wsand }));
 const fz3 = success('fences water sand k 3', Q.iqrFences({ values: wsand, k: 3 }));
 const fz6 = success('fences water sand R6', Q.iqrFences({ values: wsand, method: 'R6' }));
-w('The fences are Q1 - k IQR and Q3 + k IQR, k = 1.5 by default (3 for far out values), quartiles by the stated rule, R7 by default. A value strictly outside a fence is flagged.');
+w(`The fences are Q1 - k IQR and Q3 + k IQR, k = ${S(K.TUKEY_K)} by default (3 for far out values), quartiles by the stated rule, ${fz.method} by default. A value strictly outside a fence is flagged.`);
 w();
 table(['setting, stated', 'Q1', 'Q3', 'IQR', 'lower fence', 'upper fence', 'entries flagged'], [
-  ['R7, k 1.5 (the defaults)', f6(fz.q1), f6(fz.q3), f6(fz.iqr), f6(fz.lower), f6(fz.upper), list(idxs(fz.flags).map((i) => i + 130))],
-  ['R6, k 1.5', f6(fz6.q1), f6(fz6.q3), f6(fz6.iqr), f6(fz6.lower), f6(fz6.upper), list(idxs(fz6.flags).map((i) => i + 130))],
-  ['R7, k 3', f6(fz3.q1), f6(fz3.q3), f6(fz3.iqr), f6(fz3.lower), f6(fz3.upper), list(idxs(fz3.flags).map((i) => i + 130))],
+  [`${fz.method}, k ${S(fz.k)} (the defaults)`, f6(fz.q1), f6(fz.q3), f6(fz.iqr), f6(fz.lower), f6(fz.upper), list(idxs(fz.flags).map((i) => i + WSAND[0]))],
+  [`${fz6.method}, k ${S(fz6.k)}`, f6(fz6.q1), f6(fz6.q3), f6(fz6.iqr), f6(fz6.lower), f6(fz6.upper), list(idxs(fz6.flags).map((i) => i + WSAND[0]))],
+  [`${fz3.method}, k ${S(fz3.k)}`, f6(fz3.q1), f6(fz3.q3), f6(fz3.iqr), f6(fz3.lower), f6(fz3.upper), list(idxs(fz3.flags).map((i) => i + WSAND[0]))],
 ]);
-planted(5, fz.flags.some((f) => f.index + 130 === 170), 'the fence catches entry 170 inside the water sand');
+const SPIKES = [70, 170]; // the two planted gamma ray spikes, stated in the generator
+planted(5, fz.flags.some((f) => f.index + WSAND[0] === SPIKES[1]), 'the fence catches the second spike inside the water sand');
 w();
-w('The flagged entries are EKENE-7 entries, the water sand read from entry 130. Entry 170 is a planted spike.');
+w(`The flagged entries are EKENE-7 entries, the water sand read from entry ${WSAND[0]}. Entry ${SPIKES[1]} is a planted spike.`);
 w();
 const fAll = success('fences on the whole GR', Q.iqrFences({ values: GR_CLEAN }));
-w(`On the whole log, shale and sand together, the gamma ray fences are ${f6(fAll.lower)} and ${f6(fAll.upper)} and flag ${fAll.flags.length} entries: the spike at entry 170 reads ${f6(GR_CLEAN[170])}, inside a spread that includes the shale.`);
+w(`On the whole log, shale and sand together, the gamma ray fences are ${f6(fAll.lower)} and ${f6(fAll.upper)} and flag ${fAll.flags.length} entries: the spike at entry ${SPIKES[1]} reads ${f6(GR_CLEAN[SPIKES[1]])}, inside a spread that includes the shale.`);
 must('the whole-log fences flag nothing', fAll.flags.length === 0, fAll.flags.length);
 w();
 const onf = golden('iqr-exactly-on-both-fences');
@@ -807,32 +845,33 @@ must('a value on a fence is not flagged', onr.flags.length === 0 && onf.args.val
 /* ============================================================ SECTION 21 */
 
 section('hampel', 'The Hampel window: local against global', ['Professional m04']);
-w('For each sample, the window is 2 x halfWindow + 1 samples centred on it, truncated at the ends; missing values never enter a window; a window with fewer than three present samples is not judged. A sample is flagged when |x - window median| > nSigma x 1.4826 x MAD of the window, strictly. The decision is the petrophysics engine\'s despikeHampel, imported; the replacement is the window median.');
+w(`For each sample, the window is 2 x halfWindow + 1 samples centred on it, truncated at the ends; missing values never enter a window; a window with fewer than three present samples is not judged. A sample is flagged when |x - window median| > nSigma x ${S(K.HAMPEL_MAD_SCALE)} x MAD of the window, strictly. The decision is the petrophysics engine's despikeHampel, imported; the replacement is the window median.`);
 w();
 const hp = success('hampel GR hw 3', Q.hampel({ values: GR_CLEAN, halfWindow: 3 }));
 table(['entry', 'GR', 'window median', 'window MAD', 'threshold', '|x - median|, derived', 'replacement'], hp.flags.map((f) => {
   const p = hp.points[f.index];
   return [String(f.index), f6(p.value), f6(p.median), f6(p.mad), f6(p.threshold), f6(Math.abs(p.value - p.median)), f6(f.replacement)];
 }));
-planted(5, hp.flags.some((f) => f.index === 70) && hp.flags.some((f) => f.index === 170), JSON.stringify(idxs(hp.flags)));
+planted(5, SPIKES.every((sp0) => hp.flags.some((f) => f.index === sp0)), JSON.stringify(idxs(hp.flags)));
 w();
-w(`EKENE-7 gamma ray, sentinel converted, halfWindow 3 and nSigma 3: ${hp.flags.length} flags. Entries 70 and 170 are the planted spikes. The other ${hp.flags.length - 2} are not planted defects: each is a sample farther from its window median than three scaled MADs of a seven-sample window, which is what the rule flags.`);
+w(`EKENE-7 gamma ray, sentinel converted, halfWindow 3 and nSigma 3: ${hp.flags.length} flags. Entries ${SPIKES.join(' and ')} are the planted spikes. The other ${hp.flags.length - 2} are not planted defects: each is a sample farther from its window median than three scaled MADs of a seven-sample window, which is what the rule flags.`);
 w();
 const zGR = success('z on GR', Q.zScores({ values: GR_CLEAN }));
-w(`GLOBAL AGAINST LOCAL. On the same channel the z-score flags ${zGR.flags.length}: entry 70 reads z ${f6(zGR.z[70])} and entry 170 ${f6(zGR.z[170])}, because a sand spike to ${f6(GR_CLEAN[70])} gAPI looks like shale to a global mean and SD.`);
+w(`GLOBAL AGAINST LOCAL. On the same channel the z-score flags ${zGR.flags.length}: entry ${SPIKES[0]} reads z ${f6(zGR.z[SPIKES[0]])} and entry ${SPIKES[1]} ${f6(zGR.z[SPIKES[1]])}, because a sand spike to ${f6(GR_CLEAN[SPIKES[0]])} gAPI looks like shale to a global mean and SD.`);
 must('z flags no GR sample', zGR.flags.length === 0, zGR.flags.length);
 w();
 const hpSweep = [[3, 3], [3, 4], [3, 5], [5, 3], [5, 5], [10, 3]].map(([hw, ns]) => {
   const r = success(`hampel hw ${hw} ns ${ns}`, Q.hampel({ values: GR_CLEAN, halfWindow: hw, nSigma: ns }));
-  return [String(hw), String(ns), String(2 * hw + 1), String(r.flags.length), String(r.flags.some((f) => f.index === 70) && r.flags.some((f) => f.index === 170))];
+  return [String(hw), String(ns), String(2 * hw + 1), String(r.flags.length), String(SPIKES.every((sp0) => r.flags.some((f) => f.index === sp0)))];
 });
 table(['halfWindow, stated', 'nSigma, stated', 'window samples', 'flags', 'both spikes flagged'], hpSweep);
 w();
 const edge = hp.points[0];
 const gapPt = success('hampel next to a gap', Q.hampel({ values: CH.RHOB.values, halfWindow: 3 }));
-w(`EDGES AND GAPS. At entry 0 the window is truncated to ${edge.windowCount} samples. On the density, entry 79 sits beside the twelve-sample gap and its window holds ${gapPt.points[79].windowCount} present samples; entry 80 is missing and is not judged (\`judged\` ${gapPt.points[80].judged}).`);
-const thin = success('hampel on a thin window', Q.hampel({ values: [2.3, null, null, 2.9, null, null, 2.31], halfWindow: 1 }));
-w(`A window too thin to judge: on 2.3, null, null, 2.9, null, null, 2.31 (stated) with halfWindow 1, entry 3 has ${thin.points[3].windowCount} present sample in its window and \`judged\` ${thin.points[3].judged}.`);
+const g0 = rhobC.gapRuns[0].start;
+w(`EDGES AND GAPS. At entry 0 the window is truncated to ${edge.windowCount} samples. On the density, entry ${g0 - 1} sits beside the twelve-sample gap and its window holds ${gapPt.points[g0 - 1].windowCount} present samples; entry ${g0} is missing and is not judged (\`judged\` ${gapPt.points[g0].judged}).`);
+const thin = success('hampel on a thin window', Q.hampel({ values: THIN, halfWindow: 1 }));
+w(`A window too thin to judge: on ${THIN.map((v) => (v === null ? 'null' : S(v))).join(', ')} (stated) with halfWindow 1, entry 3 has ${thin.points[3].windowCount} present sample in its window and \`judged\` ${thin.points[3].judged}.`);
 must('entry 3 of the thin series is not judged', thin.points[3].judged === false && thin.flags.length === 0, JSON.stringify(thin.points[3]));
 w();
 const ht = golden('hampel-on-the-threshold');
@@ -847,17 +886,18 @@ w('Grubbs\' G is the largest |Y - mean| / s (two-sided), with the sample SD. It 
 w();
 const g1 = success('grubbs core', Q.grubbsTest({ values: C.porosity }));
 const g2 = success('grubbs core two spikes', Q.grubbsTest({ values: C.twoSpikes }));
-table(['core plugs', 'n', 'sample SD', 'G', 'critical at alpha 0.05', 't', 'tail probability', 'reject', 'suspect entry'], [
+table(['core plugs', 'n', 'sample SD', 'G', `critical at alpha ${S(g1.basis.alpha)}`, 't', 'tail probability', 'reject', 'suspect entry'], [
   ['one fractured plug', String(g1.n), f6(g1.sd), f6(g1.statistic), f6(g1.critical), f6(g1.tCritical), f6(g1.tailProbability), String(g1.reject), String(g1.suspectIndex)],
   ['two high plugs', String(g2.n), f6(g2.sd), f6(g2.statistic), f6(g2.critical), f6(g2.tCritical), f6(g2.tailProbability), String(g2.reject), String(g2.suspectIndex)],
 ]);
-planted(19, g1.reject && g1.suspectIndex === 8 && !g2.reject, `${g1.reject} ${g2.reject}`);
+planted(19, g1.reject && g1.suspectIndex === FR && !g2.reject, `${g1.reject} ${g2.reject}`);
 w();
-w(`MASKING. With a second high plug at entry 2 (stated ${f6(C.twoSpikes[2])}), G falls to ${f6(g2.statistic)} and the test no longer rejects: the sample SD rises from ${f6(g1.sd)} to ${f6(g2.sd)} with the second plug in it. G is the largest |z|: on the single-spike plugs G is ${f6(g1.statistic)} and the largest |z| in ${ref('zscore')} is ${f6(zc.maxAbsZ)}.`);
+const SEC = C.twoSpikes.findIndex((v, i) => v !== C.porosity[i]);
+w(`MASKING. With a second high plug at entry ${SEC} (stated ${f6(C.twoSpikes[SEC])}), G falls to ${f6(g2.statistic)} and the test no longer rejects: the sample SD rises from ${f6(g1.sd)} to ${f6(g2.sd)} with the second plug in it. G is the largest |z|: on the single-spike plugs G is ${f6(g1.statistic)} and the largest |z| in ${ref('zscore')} is ${f6(zc.maxAbsZ)}.`);
 must('the two-plug SD is larger', g2.sd > g1.sd, `${g1.sd} ${g2.sd}`);
 must('G equals the largest |z|', Math.abs(g1.statistic - zc.maxAbsZ) < 1e-12, `${g1.statistic} ${zc.maxAbsZ}`);
 w();
-table(['n', 'two-sided critical at 0.05', 'one-sided critical at 0.05', 'largest possible G'], [6, 8, 10, 14, 20, 30].map((n) => {
+table(['n', `two-sided critical at ${S(g1.basis.alpha)}`, `one-sided critical at ${S(g1.basis.alpha)}`, 'largest possible G'], [6, 8, 10, 14, 20, 30].map((n) => {
   const v = Array.from({ length: n }, (_, i) => i * i);
   const a = success(`grubbs critical two n=${n}`, Q.grubbsTest({ values: v }));
   const b = success(`grubbs critical one n=${n}`, Q.grubbsTest({ values: v, side: 'max' }));
@@ -868,44 +908,45 @@ w('The critical value depends on n, alpha and the side only; the values the rows
 w();
 const ng = golden('nist-1.3.5.17.1-grubbs-max');
 const ngr = success('NIST Grubbs', Q.grubbsTest(ng.args));
-w(`NIST 1.3.5.17.1, the uranium example (golden, one-sided max, alpha 0.05): G ${f6(ngr.statistic)} against the printed ${ng.published[0].value}; critical ${f6(ngr.critical)} against the printed ${ng.published[1].value}; reject ${ngr.reject}.`);
+w(`NIST 1.3.5.17.1, the uranium example (golden, one-sided max, alpha ${S(ng.args.alpha)}): G ${f6(ngr.statistic)} against the printed ${ng.published[0].value}; critical ${f6(ngr.critical)} against the printed ${ng.published[1].value}; reject ${ngr.reject}.`);
 must('NIST Grubbs rejects', ngr.reject === true, ngr.reject);
 
 /* ============================================================ SECTION 23 */
 
 section('mahalanobis', 'The Mahalanobis distance and its chi-square cutoff', ['Professional m05']);
-w('For each complete row, d^2 = (x - mean)\' S^-1 (x - mean), with the classical mean and the SAMPLE covariance S (n - 1). A row is flagged when d^2 exceeds the chi-square quantile at 1 - alpha on p degrees of freedom, alpha 0.025 by default; the quantile is safetyStats\' chiSquareQuantile, imported. Rows with a missing value are skipped and listed. The classical estimates are themselves pulled by outliers; a robust covariance is not built.');
+w(`For each complete row, d^2 = (x - mean)' S^-1 (x - mean), with the classical mean and the SAMPLE covariance S (n - 1). A row is flagged when d^2 exceeds the chi-square quantile at 1 - alpha on p degrees of freedom, alpha ${S(Q.mahalanobis({ rows: [[1, 2], [2, 1], [3, 5], [4, 3]] }).alpha)} by default; the quantile is safetyStats' chiSquareQuantile, imported. Rows with a missing value are skipped and listed. The classical estimates are themselves pulled by outliers; a robust covariance is not built.`);
 w();
 const osRows = [];
-for (let i = 40; i < 100; i += 1) osRows.push([CH.RHOB.values[i], CH.NPHI.values[i]]);
+for (let i = OSAND[0]; i <= OSAND[1]; i += 1) osRows.push([CH.RHOB.values[i], CH.NPHI.values[i]]);
 const mh = success('mahalanobis oil sand', Q.mahalanobis({ rows: osRows }));
 const flagged = idxs(mh.flags);
 table(['EKENE-7 oil sand, RHOB and NPHI', 'value'], [
   ['rows', String(osRows.length)],
   ['complete rows used', String(mh.n)],
-  ['rows skipped (EKENE-7 entries)', list(mh.skippedRows.map((i) => i + 40))],
+  ['rows skipped (EKENE-7 entries)', list(mh.skippedRows.map((i) => i + OSAND[0]))],
   ['centre RHOB, g/cm3', f6(mh.centre[0])], ['centre NPHI, v/v', f6(mh.centre[1])],
   ['covariance RHOB RHOB', f6(mh.covariance[0][0])], ['covariance RHOB NPHI', f6(mh.covariance[0][1])], ['covariance NPHI NPHI', f6(mh.covariance[1][1])],
   ['correlation, derived', f6(mh.covariance[0][1] / Math.sqrt(mh.covariance[0][0] * mh.covariance[1][1]))],
-  ['cutoff, chi-square 0.975 on 2 degrees of freedom', f6(mh.cutoff)],
-  ['rows flagged (EKENE-7 entries)', list(flagged.map((i) => i + 40))],
+  [`cutoff, chi-square ${S(1 - mh.alpha)} on ${mh.p} degrees of freedom`, f6(mh.cutoff)],
+  ['rows flagged (EKENE-7 entries)', list(flagged.map((i) => i + OSAND[0]))],
 ]);
-planted(7, flagged.length === 1 && flagged[0] + 40 === 60, JSON.stringify(flagged));
+const OFF = flagged[0];
+planted(7, flagged.length === 1 && OFF + OSAND[0] === 60, JSON.stringify(flagged));
 w();
 const zR = success('z RHOB oil sand', Q.zScores({ values: osRows.map((r) => r[0]) }));
 const zN = success('z NPHI oil sand', Q.zScores({ values: osRows.map((r) => r[1]) }));
-w(`Entry 60 (stated RHOB ${f6(CH.RHOB.values[60])}, NPHI ${f6(CH.NPHI.values[60])}) has d^2 ${f6(mh.d2[20])}. Each of its values alone is ordinary: z ${f6(zR.z[20])} on density and ${f6(zN.z[20])} on neutron, and neither z-score flags anything in the oil sand (${zR.flags.length} and ${zN.flags.length} flags). The pair sits off the density-neutron trend, and only a distance that knows the correlation sees it.`);
-must('neither univariate z flags entry 60', Math.abs(zR.z[20]) < 3 && Math.abs(zN.z[20]) < 3, `${zR.z[20]} ${zN.z[20]}`);
+w(`Entry ${OFF + OSAND[0]} (stated RHOB ${f6(CH.RHOB.values[OFF + OSAND[0]])}, NPHI ${f6(CH.NPHI.values[OFF + OSAND[0]])}) has d^2 ${f6(mh.d2[OFF])}. Each of its values alone is ordinary: z ${f6(zR.z[OFF])} on density and ${f6(zN.z[OFF])} on neutron, and neither z-score flags anything in the oil sand (${zR.flags.length} and ${zN.flags.length} flags). The pair sits off the density-neutron trend, and only a distance that knows the correlation sees it.`);
+must('neither univariate z flags the off-trend entry', Math.abs(zR.z[OFF]) < 3 && Math.abs(zN.z[OFF]) < 3, `${zR.z[OFF]} ${zN.z[OFF]}`);
 w();
 w(`The flag's reason, verbatim: "${mh.flags[0].reason}".`);
 w();
-table(['alpha, stated', 'cutoff on 2 degrees of freedom', 'rows flagged'], [0.1, 0.05, 0.025, 0.01, 0.001].map((a) => {
+table(['alpha, stated', `cutoff on ${mh.p} degrees of freedom`, 'rows flagged'], [0.1, 0.05, 0.025, 0.01, 0.001].map((a) => {
   const r = success(`mahalanobis alpha ${a}`, Q.mahalanobis({ rows: osRows, alpha: a }));
   return [f6(a), f6(r.cutoff), String(r.flags.length)];
 }));
 w();
 const top = mh.d2.map((d, i) => [i, d]).filter(([, d]) => d !== null).sort((a, b) => b[1] - a[1]).slice(0, 3);
-table(['EKENE-7 entry', 'd^2'], top.map(([i, d]) => [String(i + 40), f6(d)]));
+table(['EKENE-7 entry', 'd^2'], top.map(([i, d]) => [String(i + OSAND[0]), f6(d)]));
 w();
 w('The three largest squared distances in the oil sand.');
 
@@ -920,7 +961,7 @@ const methods = (label, v) => {
   [z, m, f, h, g].forEach((r, i) => success(`${label} method ${i}`, r));
   return [label, list(idxs(z.flags)) || 'none', list(idxs(m.flags)) || 'none', list(idxs(f.flags)) || 'none', list(idxs(h.flags)) || 'none', g.reject ? String(g.suspectIndex) : 'none'];
 };
-table(['series', 'z beyond 3', 'modified z beyond 3.5', 'Tukey fences, R7 k 1.5', 'Hampel', 'Grubbs rejects'], [
+table(['series', 'z beyond 3', `modified z beyond ${S(K.MODIFIED_Z_THRESHOLD)}`, `Tukey fences, R7 k ${S(K.TUKEY_K)}`, 'Hampel', 'Grubbs rejects'], [
   methods('EKENE-3 gauge', G),
   methods('EKENE-7 core', C.porosity),
   methods('EKENE-7 core, two high plugs', C.twoSpikes),
@@ -928,17 +969,17 @@ table(['series', 'z beyond 3', 'modified z beyond 3.5', 'Tukey fences, R7 k 1.5'
 w();
 w('The entries are positions in each series. Each method answers its own question: z and Grubbs measure against a mean and SD the outlier helps set; the modified z and the fences against a median and quartiles it barely moves; Hampel against a local window; Mahalanobis (the section before) against a correlation. A flag from any of them is a question about that entry, and none of them deletes it.');
 const gc2 = Q.modifiedZScores({ values: C.twoSpikes });
-must('on two high plugs the modified z flags both and Grubbs rejects neither', idxs(gc2.flags).includes(2) && idxs(gc2.flags).includes(8) && !g2.reject, idxs(gc2.flags));
+must('on two high plugs the modified z flags both and Grubbs rejects neither', idxs(gc2.flags).includes(SEC) && idxs(gc2.flags).includes(FR) && !g2.reject, idxs(gc2.flags));
 
 /* ============================================================ SECTION 25 */
 
 section('individuals', 'The individuals and moving range chart', ['Expert m01']);
-w('MR_i = |x_i - x_(i-1)|, sigma = MRbar / 1.128 (d2 for a moving range of two), limits centre +/- 3 sigma; the moving range chart has upper limit 3.267 MRbar (D4) and lower limit 0. Centre and MRbar default to the data\'s own averages, and either may be given as a standard. A point strictly outside its limits signals. A chart refuses a series with a gap.');
+w(`MR_i = |x_i - x_(i-1)|, sigma = MRbar / ${S(K.D2_N2)} (d2 for a moving range of two), limits centre +/- 3 sigma; the moving range chart has upper limit ${S(K.D4_N2)} MRbar (D4) and lower limit 0. Centre and MRbar default to the data's own averages, and either may be given as a standard. A point strictly outside its limits signals. A chart refuses a series with a gap.`);
 w();
 const ni = golden('nist-6.3.2.2-individuals-flowrate');
 const nir = success('NIST individuals', Q.individualsChart(ni.args));
 const at = (o, pathStr) => pathStr.split('.').reduce((a, k) => (a === undefined || a === null ? a : a[k]), o);
-table(['NIST 6.3.2.2 flow rate, 10 batches', 'engine', 'NIST printed'], ni.published.map((p) => {
+table([`NIST 6.3.2.2 flow rate, ${ni.args.values.length} batches`, 'engine', 'NIST printed'], ni.published.map((p) => {
   const v = at(nir, p.field);
   must(`NIST individuals ${p.field} reproduces to its printed decimals`, Math.abs(v - p.value) <= 0.5 * 10 ** -p.decimals + 1e-9, v);
   return [p.field, f6(v), String(p.value)];
@@ -951,7 +992,7 @@ const ph1 = success('EKENE phase one', Q.individualsChart({ values: W.history })
 w(`EKENE-3 FLOWING WELLHEAD PRESSURE, PHASE ONE: ${W.history.length} in-control days, psig (stated in the generator).`);
 w();
 table(['phase one', 'value'], [
-  ['centre, psig', f6(ph1.centre)], ['MRbar, psi', f6(ph1.mrBar)], ['sigma = MRbar / 1.128, psi', f6(ph1.sigma)],
+  ['centre, psig', f6(ph1.centre)], ['MRbar, psi', f6(ph1.mrBar)], [`sigma = MRbar / ${S(K.D2_N2)}, psi`, f6(ph1.sigma)],
   ['upper limit, psig', f6(ph1.ucl)], ['lower limit, psig', f6(ph1.lcl)], ['moving range upper limit, psi', f6(ph1.mrUcl)],
   ['flags', String(ph1.flags.length)],
   ['sample SD of phase one, lib/stats, derived', f6(ST.ss.sampleStandardDeviation(W.history))],
@@ -966,9 +1007,9 @@ table(['chart', 'centre', 'upper limit', 'lower limit', 'days signalling (rule)'
   ['phase one as the standard', f6(ph2.centre), f6(ph2.ucl), f6(ph2.lcl), ph2.flags.map((f) => `${f.index + 1} (${f.rule})`).join('; ')],
   ['phase two on its own averages', f6(ph2own.centre), f6(ph2own.ucl), f6(ph2own.lcl), ph2own.flags.map((f) => `${f.index + 1} (${f.rule})`).join('; ') || 'none'],
 ]);
-planted(21, ph2.flags.some((f) => f.index === 7 && f.rule === 'individuals-above-ucl'), JSON.stringify(ph2.flags));
+planted(21, ph2.flags.some((f) => f.index === W.glitchDay - 1 && f.rule === 'individuals-above-ucl'), JSON.stringify(ph2.flags));
 w();
-w(`Day 8 is the planted gauge glitch (${f6(W.monitored[7])} psig). A chart drawn on the monitored data's own averages takes its centre from data that include the shift from day 16.`);
+w(`Day ${W.glitchDay} is the planted gauge glitch (${f6(W.monitored[W.glitchDay - 1])} psig). A chart drawn on the monitored data's own averages takes its centre from data that include the shift from day ${W.shiftStartsDay}.`);
 
 /* ============================================================ SECTION 26 */
 
@@ -977,21 +1018,21 @@ w('EWMA_t = lambda x_t + (1 - lambda) EWMA_(t-1), starting at EWMA_0 = the targe
 w();
 const ne = golden('nist-6.3.2.4-ewma');
 const ner = success('NIST EWMA', Q.ewmaChart(ne.args));
-table(['NIST 6.3.2.4, lambda 0.3, target 50, s 2.0539', 'engine', 'NIST printed'], ne.published.filter((p) => ['ucl', 'lcl'].includes(p.field)).map((p) => [p.field, f6(ner[p.field]), String(p.value)]));
+table([`NIST 6.3.2.4, lambda ${S(ne.args.lambda)}, target ${S(ne.args.target)}, s ${S(ne.args.sigma)}`, 'engine', 'NIST printed'], ne.published.filter((p) => ['ucl', 'lcl'].includes(p.field)).map((p) => [p.field, f6(ner[p.field]), String(p.value)]));
 w();
 w(`The NIST EWMA values (engine, first five): ${ner.ewma.slice(0, 5).map(f6).join(', ')}. ${Ref('errata')} reads the printed lower limit.`);
 w();
-const ewA = success('EKENE EWMA asymptotic', Q.ewmaChart({ values: W.monitored, lambda: 0.2, target: ph1.centre, sigma: ph1.sigma }));
-const ewX = success('EKENE EWMA exact', Q.ewmaChart({ values: W.monitored, lambda: 0.2, target: ph1.centre, sigma: ph1.sigma, limits: 'exact' }));
-w(`EKENE-3 PHASE TWO, lambda 0.2 and L 3 (stated), target ${f6(ph1.centre)} and sigma ${f6(ph1.sigma)} from phase one:`);
+const ewA = success('EKENE EWMA asymptotic', Q.ewmaChart({ values: W.monitored, lambda: LAMBDA, target: ph1.centre, sigma: ph1.sigma, L: LM }));
+const ewX = success('EKENE EWMA exact', Q.ewmaChart({ values: W.monitored, lambda: LAMBDA, target: ph1.centre, sigma: ph1.sigma, L: LM, limits: 'exact' }));
+w(`EKENE-3 PHASE TWO, lambda ${S(LAMBDA)} and L ${S(LM)} (stated), target ${f6(ph1.centre)} and sigma ${f6(ph1.sigma)} from phase one:`);
 w();
 table(['day', 'pressure', 'EWMA', 'asymptotic lower', 'asymptotic upper', 'exact lower', 'exact upper', 'signal'], ewA.points.map((p, i) => [
   String(i + 1), f6(p.value), f6(p.ewma), f6(p.lcl), f6(p.ucl), f6(ewX.points[i].lcl), f6(ewX.points[i].ucl),
   ewA.flags.find((f) => f.index === i) ? ewA.flags.find((f) => f.index === i).rule : 'none']));
-planted(21, ewA.flags.some((f) => f.rule === 'ewma-below-lcl' && f.index >= 15), JSON.stringify(ewA.flags));
+planted(21, ewA.flags.some((f) => f.rule === 'ewma-below-lcl' && f.index >= W.shiftStartsDay - 1), JSON.stringify(ewA.flags));
 w();
 const firstLowE = ewA.flags.find((f) => f.rule === 'ewma-below-lcl');
-w(`The first low signal is day ${firstLowE.index + 1}. The days with an upper signal are ${list(ewA.flags.filter((f) => f.rule === 'ewma-above-ucl').map((f) => f.index + 1))}. Derived: day 8's value enters the EWMA with weight lambda, 0.200000, and keeps weight lambda (1 - lambda)^(t - 8) on day t, which is ${f6(0.2 * 0.8 ** 5)} on day 13.`);
+w(`The first low signal is day ${firstLowE.index + 1}. The days with an upper signal are ${list(ewA.flags.filter((f) => f.rule === 'ewma-above-ucl').map((f) => f.index + 1))}. Derived: day ${W.glitchDay}'s value enters the EWMA with weight lambda, ${f6(LAMBDA)}, and keeps weight lambda (1 - lambda)^(t - ${W.glitchDay}) on day t, which is ${f6(LAMBDA * (1 - LAMBDA) ** 5)} on day ${W.glitchDay + 5}.`);
 w();
 table(['lambda, stated', 'asymptotic half-width, psi, derived', 'first low signal day', 'days signalling'], [0.1, 0.2, 0.3, 0.5, 1].map((lam) => {
   const r = success(`EKENE EWMA lambda ${lam}`, Q.ewmaChart({ values: W.monitored, lambda: lam, target: ph1.centre, sigma: ph1.sigma }));
@@ -1006,45 +1047,47 @@ must('lambda 1 gives three sigma limits', Math.abs((lam1.ucl - ph1.centre) / ph1
 /* ============================================================ SECTION 27 */
 
 section('cusum', 'The tabular CUSUM: k, h, stated units, and no reset', ['Expert m03']);
-w('S_hi(i) = max(0, S_hi(i-1) + x_i - target - k) and S_lo(i) = max(0, S_lo(i-1) + target - k - x_i), both starting at 0. A signal is S_hi or S_lo strictly above h. `units` is required: \'sigma\' (k and h in multiples of sigma, which is then required; the rule of thumb is k 0.5 and h 4 or 5) or \'data\' (k and h in the data\'s own units). No reset after a signal. The plain cumulative sum of x - target is returned too.');
+w('S_hi(i) = max(0, S_hi(i-1) + x_i - target - k) and S_lo(i) = max(0, S_lo(i-1) + target - k - x_i), both starting at 0. A signal is S_hi or S_lo strictly above h. `units` is required, and the engine\'s own refusal (section 4) names the two choices, sigma and data, with its rule of thumb. No reset after a signal. The plain cumulative sum of x - target is returned too.');
 w();
 const nc = golden('nist-6.3.2.3-cusum-tabular');
 const ncr = success('NIST CUSUM', Q.cusumChart(nc.args));
 w(`NIST 6.3.2.3, target ${num(nc.args.target)}, k ${num(nc.args.k)} and h ${num(nc.args.h)} in data units (golden): the first upper signal is group ${ncr.firstSignalHigh + 1}.`);
 must('NIST CUSUM first signals at group 14', ncr.firstSignalHigh === 13, ncr.firstSignalHigh);
 w();
-table(['group', 'x - 325', 'S_hi', 'S_lo', 'cumulative sum'], ncr.points.slice(10, 15).map((p, i) => [String(i + 11), f6(p.deviation), f6(p.sHigh), f6(p.sLow), f6(p.cusum)]));
+table(['group', `x - ${S(nc.args.target)}`, 'S_hi', 'S_lo', 'cumulative sum'], ncr.points.slice(10, 15).map((p, i) => [String(i + 11), f6(p.deviation), f6(p.sHigh), f6(p.sLow), f6(p.cusum)]));
 w();
-const cu = success('EKENE CUSUM', Q.cusumChart({ values: W.monitored, target: ph1.centre, k: 0.5, h: 4, units: 'sigma', sigma: ph1.sigma }));
-w(`EKENE-3 PHASE TWO, k 0.5 and h 4 in sigma units (stated), target and sigma from phase one: k is ${f6(cu.kData)} psi and h is ${f6(cu.hData)} psi.`);
+const cu = success('EKENE CUSUM', Q.cusumChart({ values: W.monitored, target: ph1.centre, k: K_S, h: H_S, units: 'sigma', sigma: ph1.sigma }));
+w(`EKENE-3 PHASE TWO, k ${S(K_S)} and h ${S(H_S)} in sigma units (stated), target and sigma from phase one: k is ${f6(cu.kData)} psi and h is ${f6(cu.hData)} psi.`);
 w();
 table(['day', 'pressure', 'S_hi', 'S_lo', 'cumulative sum', 'signal'], cu.points.map((p, i) => [String(i + 1), f6(p.value), f6(p.sHigh), f6(p.sLow), f6(p.cusum), p.signalHigh ? 'high' : (p.signalLow ? 'low' : 'none')]));
-planted(21, cu.firstSignalLow !== null && cu.firstSignalLow >= 15, cu.firstSignalLow);
+planted(21, cu.firstSignalLow !== null && cu.firstSignalLow >= W.shiftStartsDay - 1, cu.firstSignalLow);
 w();
 w(`The first upper signal is day ${cu.firstSignalHigh + 1} and the first lower signal is day ${cu.firstSignalLow + 1}. NO RESET: S_hi is above h on ${cu.points.filter((p) => p.signalHigh).length} days from day ${cu.firstSignalHigh + 1} to day ${cu.points.map((p, i) => (p.signalHigh ? i + 1 : 0)).reduce((a, b) => Math.max(a, b), 0)}; after a signal the sum carries on from where it stood.`);
 w();
-const cuData = success('EKENE CUSUM, k and h read in psi', Q.cusumChart({ values: W.monitored, target: ph1.centre, k: 0.5, h: 4, units: 'data' }));
-w(`THE UNIT MATTERS. The same k 0.5 and h 4 read as psi give a first upper signal on day ${cuData.firstSignalHigh + 1}, a first lower signal on day ${cuData.firstSignalLow + 1}, and ${cuData.flags.length} flags against ${cu.flags.length}.`);
+const cuData = success('EKENE CUSUM, k and h read in psi', Q.cusumChart({ values: W.monitored, target: ph1.centre, k: K_S, h: H_S, units: 'data' }));
+w(`THE UNIT MATTERS. The same k ${S(K_S)} and h ${S(H_S)} read as psi give a first upper signal on day ${cuData.firstSignalHigh + 1}, a first lower signal on day ${cuData.firstSignalLow + 1}, and ${cuData.flags.length} flags against ${cu.flags.length}.`);
 w();
-const hDesign = (alpha) => (2 / 1) * Math.log((1 - 0.01) / alpha) * nc.args.k;
-w(`NIST's design line, derived here with its own printed inputs (alpha 0.0027, beta 0.01, delta 1 sigma, and the printed k ${num(nc.args.k)}): h = (2 / delta^2) ln((1 - beta) / alpha) k gives ${f6(hDesign(0.0027))}, and ${f6(hDesign(0.0027 / 2))} with alpha halved, both in the data's units. The table uses h ${num(nc.args.h)}. The engine has no design helper: k and h are inputs (${ref('errata')}).`);
+const hDesign = (alpha) => (2 / 1) * Math.log((1 - NIST_BETA) / alpha) * nc.args.k;
+w(`NIST's design line, derived here with its own printed inputs (alpha ${S(NIST_ALPHA)}, beta ${S(NIST_BETA)}, delta 1 sigma, and the printed k ${num(nc.args.k)}): h = (2 / delta^2) ln((1 - beta) / alpha) k gives ${f6(hDesign(NIST_ALPHA))}, and ${f6(hDesign(NIST_ALPHA / 2))} with alpha halved, both in the data's units. The table uses h ${num(nc.args.h)}. The engine has no design helper: k and h are inputs (${ref('errata')}).`);
 
 /* ============================================================ SECTION 28 */
 
 section('whichchart', 'Which chart sees what', ['Expert m03 l05']);
-w(`EKENE-3 phase two carries two planted events: a glitch on day ${W.glitchDay} and a downward shift from day ${W.shiftStartsDay} (stated, 1.2 process standard deviations in the generator). Each chart with its settings from the sections above:`);
+w(`EKENE-3 phase two carries two planted events: a glitch on day ${W.glitchDay} and a downward shift from day ${W.shiftStartsDay} (stated in the generator). Each chart with its settings from the sections above:`);
 w();
 const firstOf = (flags, pred) => { const f = flags.find(pred); return f ? String(f.index + 1) : 'none'; };
-table(['chart', 'first signal at or after day 16, low side', 'signals on day 8', 'days with any signal'], [
-  ['individuals, phase one standard', firstOf(ph2.flags, (f) => f.index >= 15 && f.rule === 'individuals-below-lcl'), String(ph2.flags.some((f) => f.index === 7)), String(new Set(idxs(ph2.flags)).size)],
-  ['EWMA, lambda 0.2, asymptotic', firstOf(ewA.flags, (f) => f.index >= 15 && f.rule === 'ewma-below-lcl'), String(ewA.flags.some((f) => f.index === 7)), String(new Set(idxs(ewA.flags)).size)],
-  ['CUSUM, k 0.5 and h 4 sigma', firstOf(cu.flags, (f) => f.index >= 15 && f.rule === 'cusum-low'), String(cu.flags.some((f) => f.index === 7)), String(new Set(idxs(cu.flags)).size)],
+const SH = W.shiftStartsDay - 1;
+const GD = W.glitchDay - 1;
+table(['chart', `first signal at or after day ${W.shiftStartsDay}, low side`, `signals on day ${W.glitchDay}`, 'days with any signal'], [
+  ['individuals, phase one standard', firstOf(ph2.flags, (f) => f.index >= SH && f.rule === 'individuals-below-lcl'), String(ph2.flags.some((f) => f.index === GD)), String(new Set(idxs(ph2.flags)).size)],
+  [`EWMA, lambda ${S(LAMBDA)}, asymptotic`, firstOf(ewA.flags, (f) => f.index >= SH && f.rule === 'ewma-below-lcl'), String(ewA.flags.some((f) => f.index === GD)), String(new Set(idxs(ewA.flags)).size)],
+  [`CUSUM, k ${S(K_S)} and h ${S(H_S)} sigma`, firstOf(cu.flags, (f) => f.index >= SH && f.rule === 'cusum-low'), String(cu.flags.some((f) => f.index === GD)), String(new Set(idxs(cu.flags)).size)],
 ]);
 w();
-const indLow = ph2.flags.filter((f) => f.index >= 15 && f.rule === 'individuals-below-lcl').length;
-const ewLowDays = ewA.flags.filter((f) => f.index >= 15 && f.rule === 'ewma-below-lcl').length;
-const cuLowDays = cu.flags.filter((f) => f.index >= 15 && f.rule === 'cusum-low').length;
-table(['chart', 'low signals from day 16 to day 40'], [['individuals', String(indLow)], ['EWMA', String(ewLowDays)], ['CUSUM', String(cuLowDays)]]);
+const indLow = ph2.flags.filter((f) => f.index >= SH && f.rule === 'individuals-below-lcl').length;
+const ewLowDays = ewA.flags.filter((f) => f.index >= SH && f.rule === 'ewma-below-lcl').length;
+const cuLowDays = cu.flags.filter((f) => f.index >= SH && f.rule === 'cusum-low').length;
+table(['chart', `low signals from day ${W.shiftStartsDay} to day ${W.monitored.length}`], [['individuals', String(indLow)], ['EWMA', String(ewLowDays)], ['CUSUM', String(cuLowDays)]]);
 must('the individuals chart sees fewer shifted days than EWMA and CUSUM', indLow < ewLowDays && indLow < cuLowDays, `${indLow} ${ewLowDays} ${cuLowDays}`);
 w();
 w('All three see the glitch. The individuals chart signals on the shifted days only where a single day falls past three sigma; EWMA and CUSUM accumulate the shift and hold it.');
@@ -1070,18 +1113,18 @@ const scW = success('EKENE-3 scorecard, weighted', Q.scorecard({ dimensions: ek3
 table(['dimension', 'checked', 'failed', 'score', 'weight, equal', 'weight, stated', 'normalised weight', 'contribution, weighted'], scW.dimensions.map((d, i) => [
   d.name, String(d.checked), String(d.failed), f6(d.score), f6(scEq.dimensions[i].weight), String(WTS[d.name]), f6(d.weight), f6(d.contribution)]));
 w();
-table(['scorecard', 'total', 'weakest'], [['equal weights', f6(scEq.total), scEq.weakest], ['stated weights 3, 2, 2, 1, 1', f6(scW.total), scW.weakest]]);
+table(['scorecard', 'total', 'weakest'], [['equal weights', f6(scEq.total), scEq.weakest], [`stated weights ${Object.values(WTS).join(', ')}`, f6(scW.total), scW.weakest]]);
 must('the weakest EKENE-3 dimension is uniqueness', scW.weakest === 'uniqueness' && scEq.weakest === 'uniqueness', scW.weakest);
 w();
-w(`The oil column's modified z flags entries ${list(idxs(oilMz.flags))}, which are days ${list(idxs(oilMz.flags).map(day))}: the negative rate and the shut-in day. The negative rate, day 47, is flagged under validity too. A scorecard counts flags from checks, and two checks can flag the same entry.`);
+w(`The oil column's modified z flags entries ${list(idxs(oilMz.flags))}, which are days ${list(idxs(oilMz.flags).map(day))}: the negative rate and the shut-in day. The negative rate, day ${day(rc.flags.find((f) => f.rule === 'negative-rate').index)}, is flagged under validity too. A scorecard counts flags from checks, and two checks can flag the same entry.`);
 w();
-const tie = success('scorecard tie', Q.scorecard({ dimensions: [{ name: 'validity', score: 0.9 }, { name: 'completeness', score: 0.9 }, { name: 'consistency', score: 0.95 }] }));
-w(`A TIE. Scores 0.9, 0.9 and 0.95 for validity, completeness and consistency (stated, listed in that order): weakest ${tie.weakest}, total ${f6(tie.total)}.`);
+const tie = success('scorecard tie', Q.scorecard({ dimensions: TIE.map(([name, score]) => ({ name, score })) }));
+w(`A TIE. Scores ${TIE.map(([, v]) => S(v)).join(', ')} for ${TIE.map(([nm]) => nm).join(', ')} (stated, listed in that order): weakest ${tie.weakest}, total ${f6(tie.total)}.`);
 must('day 47 is flagged by both rateCheck and the modified z on oil', rc.flags.some((f) => f.index === 46) && oilMz.flags.some((f) => f.index === 46), 'day 47');
 must('a tie goes to the first listed', tie.weakest === 'validity', tie.weakest);
 w();
-const direct = success('scorecard with direct scores', Q.scorecard({ dimensions: [{ name: 'completeness', score: rhobC.completeness }, { name: 'validity', checked: 237, failed: 10 }] }));
-w(`A direct score and a counted one mix: RHOB completeness ${f6(rhobC.completeness)} as a score beside NPHI validity (237 checked, 10 failed) gives a total of ${f6(direct.total)}.`);
+const direct = success('scorecard with direct scores', Q.scorecard({ dimensions: [{ name: 'completeness', score: rhobC.completeness }, { name: 'validity', checked: nphiR.checked, failed: nphiR.failed }] }));
+w(`A direct score and a counted one mix: RHOB completeness ${f6(rhobC.completeness)} as a score beside NPHI validity (${nphiR.checked} checked, ${nphiR.failed} failed) gives a total of ${f6(direct.total)}.`);
 w();
 w(`The basis block, verbatim: weights "${scW.basis.weights}"; score "${scW.basis.score}"; tie break "${scW.basis.tieBreak}".`);
 
@@ -1090,22 +1133,26 @@ w(`The basis block, verbatim: weights "${scW.basis.weights}"; score "${scW.basis
 section('policy', 'The Petrolord defaults, presented as choices, and the order of checks', ['Expert m05']);
 w('Every default below is a choice written in a basis block, open to change by the caller. Where a published source states the number, it is named; where none does, the row says Petrolord.');
 w();
+const ewDef = Q.ewmaChart({ values: [1, 2], lambda: LAMBDA, target: 1, sigma: 1 });
+const idDef = Q.duplicateIdentifiers({ ids: ['A'] });
+w('Each default below is read from the basis block of a call that left it unset, except the Hampel nSigma, whose default the result does not echo.');
+w();
 table(['setting', 'default', 'whose choice'], [
-  ['phaseSumCheck relTolerance, on the TOTAL', f6(0.005), 'Petrolord'],
-  ['phaseSumCheck absTolerance', '0', 'Petrolord'],
-  ['frozenRuns minRun', '5', 'Petrolord'],
-  ['frozenRuns tolerance, against the run\'s first value', '0', 'Petrolord'],
-  ['waterCutCheck tolerance', '1e-6', 'Petrolord'],
-  ['indexCheck stepTolerance', '1e-6 x the expected step', 'Petrolord'],
-  ['indexCheck expected step', 'median of the steps in the stated direction', 'Petrolord'],
-  ['duplicateIdentifiers maxDistance and the digit rule', '1, digits must match', 'Petrolord'],
-  ['mahalanobis alpha', f6(0.025), 'Petrolord'],
-  ['zScores threshold', '3', 'the usual convention'],
-  ['modifiedZScores threshold', f6(Q.CONSTANTS.MODIFIED_Z_THRESHOLD), 'Iglewicz and Hoaglin, as NIST prints it'],
-  ['iqrFences k and quartile rule', `${f6(Q.CONSTANTS.TUKEY_K)}, R7`, 'Tukey for k; Petrolord for R7, so a spreadsheet reproduces it'],
+  ['phaseSumCheck relTolerance, on the TOTAL', f6(ps.basis.relTolerance), 'Petrolord'],
+  ['phaseSumCheck absTolerance', S(ps.basis.absTolerance), 'Petrolord'],
+  ['frozenRuns minRun', S(fzG.basis.minRun), 'Petrolord'],
+  ['frozenRuns tolerance, against the run\'s first value', S(fzG.basis.tolerance), 'Petrolord'],
+  ['waterCutCheck tolerance', eTxt(wcDef.basis.tolerance), 'Petrolord'],
+  ['indexCheck stepTolerance', ix.basis.stepTolerance, 'Petrolord'],
+  ['indexCheck expected step', ix.expectedStepSource, 'Petrolord'],
+  ['duplicateIdentifiers maxDistance and the digit rule', `${idDef.basis.maxDistance}, digits must match ${idDef.basis.digitsMustMatch}`, 'Petrolord'],
+  ['mahalanobis alpha', f6(mh.alpha), 'Petrolord'],
+  ['zScores threshold', S(zg.threshold), 'the usual convention'],
+  ['modifiedZScores threshold', f6(mg.threshold), 'Iglewicz and Hoaglin, as NIST prints it'],
+  ['iqrFences k and quartile rule', `${f6(fz.k)}, ${fz.method}`, 'Tukey for k; Petrolord for the rule, so a spreadsheet reproduces it'],
   ['hampel nSigma', '3', 'the petrophysics conditioning engine'],
-  ['ewmaChart L and limits', '3, asymptotic', 'NIST 6.3.2.4'],
-  ['grubbsTest alpha', f6(0.05), 'NIST 1.3.5.17.1'],
+  ['ewmaChart L and limits', `${ewDef.basis.L}, ${ewDef.basis.limits}`, 'NIST 6.3.2.4'],
+  ['grubbsTest alpha', f6(g1.basis.alpha), 'NIST 1.3.5.17.1'],
 ]);
 w();
 w('THE ORDER OF CHECKS. The control charts refuse a series with a gap, so completeness comes first:');
@@ -1115,8 +1162,9 @@ w(`> ${orderRef.error}`);
 w();
 w('An index that steps back is refused by coverage, so indexCheck comes before coverage. A sentinel is present to completeness and invalid to the range check, so the range check runs before any statistic. A frozen run is an agreement of a meter with itself, and it is found before any outlier test that would read a flat stretch as a perfectly quiet one.');
 w();
-const flatMz = Q.modifiedZScores({ values: CH.DT.values.slice(174, 190) });
-w('On the EKENE-7 sonic, entries 174 to 189, which hold the stuck run, the modified z-score refuses:');
+const FZ = [fzD.runs[0].start - 1, fzD.runs[0].end + 6];
+const flatMz = Q.modifiedZScores({ values: CH.DT.values.slice(FZ[0], FZ[1] + 1) });
+w(`On the EKENE-7 sonic, entries ${FZ[0]} to ${FZ[1]}, which hold the stuck run, the modified z-score refuses:`);
 w();
 table(['function', 'the engine\'s refusal, verbatim'], [['`modifiedZScores`', refusal('modified z on the frozen stretch', flatMz, 'values').error]]);
 
@@ -1127,18 +1175,21 @@ w('NIST/SEMATECH printed figures, read against the engine. Each is a note about 
 w();
 const gNist = success('NIST Grubbs again', Q.grubbsTest(golden('nist-1.3.5.17.1-grubbs-max').args));
 const eLcl = ner.lcl;
-const roundedFactor = Math.round(Math.sqrt(0.3 / 1.7) * 10000) / 10000;
+const roundedFactor = Math.round(Math.sqrt(ne.args.lambda / (2 - ne.args.lambda)) * 10000) / 10000;
+const pubOf = (g, field) => g.published.find((x) => x.field === field).value;
+const gNistCase = golden('nist-1.3.5.17.1-grubbs-max');
 table(['page', 'printed', 'engine', 'what differs'], [
-  ['1.3.5.17.1 Grubbs G', '2.4687', f6(gNist.statistic), 'truncated rather than rounded; rounded to four decimals the engine reads ' + gNist.statistic.toFixed(4)],
-  ['6.3.2.4 EWMA lower limit', '47.4115', f6(eLcl), `NIST rounds sqrt(0.3 / 1.7) to ${roundedFactor.toFixed(4)} before multiplying; to four decimals the engine reads ${eLcl.toFixed(4)}`],
-  ['6.3.2.3 CUSUM design h', '4.1959', `${f6(hDesign(0.0027))} or ${f6(hDesign(0.0027 / 2))}, derived`, 'the page\'s own design formula gives neither; the table is reproduced from the printed k and h'],
+  ['1.3.5.17.1 Grubbs G', S(pubOf(gNistCase, 'statistic')), f6(gNist.statistic), 'truncated rather than rounded; rounded to four decimals the engine reads ' + gNist.statistic.toFixed(4)],
+  ['6.3.2.4 EWMA lower limit', S(pubOf(ne, 'lcl')), f6(eLcl), `NIST rounds sqrt(${S(ne.args.lambda)} / ${S(2 - ne.args.lambda)}) to ${roundedFactor.toFixed(4)} before multiplying; to four decimals the engine reads ${eLcl.toFixed(4)}`],
+  ['6.3.2.3 CUSUM design h', S(nc.args.h), `${f6(hDesign(NIST_ALPHA))} or ${f6(hDesign(NIST_ALPHA / 2))}, derived`, 'the page\'s own design formula gives neither; the table is reproduced from the printed k and h'],
 ]);
 must('the Grubbs G rounds to 2.4688', gNist.statistic.toFixed(4) === '2.4688', gNist.statistic);
-must('the CUSUM design formula gives neither printed h', Math.abs(hDesign(0.0027) - 3.749) < 0.001 && Math.abs(hDesign(0.00135) - 4.1896) < 0.001 && Math.abs(hDesign(0.0027) - nc.args.h) > 0.001, `${hDesign(0.0027)} ${hDesign(0.00135)}`);
+must('the CUSUM design formula gives neither printed h', Math.abs(hDesign(NIST_ALPHA) - nc.args.h) > 0.001 && Math.abs(hDesign(NIST_ALPHA / 2) - nc.args.h) > 0.001, `${hDesign(NIST_ALPHA)} ${hDesign(NIST_ALPHA / 2)}`);
 must('the EWMA lower limit rounds to 47.4116', eLcl.toFixed(4) === '47.4116', eLcl);
 w();
-const n9 = ncr.points[8]; const n12 = ncr.points[11];
-w(`The CUSUM page's "325 - k - x" column prints 0.54 and 0.47 at groups 9 and 12. Derived with the printed k: ${f6(nc.args.target - nc.args.k - nc.args.values[8])} and ${f6(nc.args.target - nc.args.k - nc.args.values[11])}. The S_lo the engine returns at those groups is ${f6(n9.sLow)} and ${f6(n12.sLow)}. That column is not an engine output.`);
+const TYPO = [[9, '0.54'], [12, '0.47']]; // the two cells the NIST page prints with the wrong sign, quoted as printed
+const n9 = ncr.points[TYPO[0][0] - 1]; const n12 = ncr.points[TYPO[1][0] - 1];
+w(`The CUSUM page's "${S(nc.args.target)} - k - x" column prints ${TYPO[0][1]} and ${TYPO[1][1]} at groups ${TYPO[0][0]} and ${TYPO[1][0]}. Derived with the printed k: ${f6(nc.args.target - nc.args.k - nc.args.values[TYPO[0][0] - 1])} and ${f6(nc.args.target - nc.args.k - nc.args.values[TYPO[1][0] - 1])}. The S_lo the engine returns at those groups is ${f6(n9.sLow)} and ${f6(n12.sLow)}. That column is not an engine output.`);
 w();
 w('WHAT IS NOT BUILT, and the engine says so in its basis blocks and messages:');
 w();
@@ -1154,8 +1205,8 @@ table(['not built', 'what the engine does instead'], [
 w();
 w('WHERE THE OUTPUT NEEDS READING WITH CARE:');
 w();
-const zPop = success('z population ceiling probe', Q.zScores({ values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1], sd: 'population', threshold: 2.9 }));
-w(`- With \`sd: 'population'\`, \`maxPossibleAbsZ\` still reports the sample-SD ceiling (n - 1) / sqrt(n). On nine zeros and a one (stated) at threshold 2.9 the engine returns maxPossibleAbsZ ${f6(zPop.maxPossibleAbsZ)}, \`thresholdReachable\` ${zPop.thresholdReachable}, and ${zPop.flags.length} flag at z ${f6(zPop.maxAbsZ)}. Derived: the population-SD ceiling is sqrt(n - 1), ${f6(Math.sqrt(9))} at n = 10. The basis note names the sample SD.`);
+const zPop = success('z population ceiling probe', Q.zScores({ values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1], sd: 'population', threshold: ZPOP_THR }));
+w(`- With \`sd: 'population'\`, \`maxPossibleAbsZ\` still reports the sample-SD ceiling (n - 1) / sqrt(n). On nine zeros and a one (stated) at threshold ${S(ZPOP_THR)} the engine returns maxPossibleAbsZ ${f6(zPop.maxPossibleAbsZ)}, \`thresholdReachable\` ${zPop.thresholdReachable}, and ${zPop.flags.length} flag at z ${f6(zPop.maxAbsZ)}. Derived: the population-SD ceiling is sqrt(n - 1), ${f6(Math.sqrt(zPop.n - 1))} at n = ${zPop.n}. The basis note names the sample SD.`);
 must('population z: the flag fires while thresholdReachable is false', zPop.flags.length === 1 && zPop.thresholdReachable === false, JSON.stringify([zPop.flags.length, zPop.thresholdReachable]));
 w('- The Mahalanobis refusal for a singular covariance uses an absolute pivot test inside lib/linalg; variables with very small variance in the caller\'s units can be refused as singular, and rescaling avoids it.');
 w('- The Hampel decision is imported from the petrophysics engine, whose own entry point turns a null into 0; `hampel` converts missing values to NaN before the call, so this engine is unaffected.');
@@ -1167,9 +1218,9 @@ w('Five words in this course carry a narrower meaning than they have in conversa
 w();
 table(['word', 'what it can mean elsewhere', 'the rule here'], [
   ['outlier', 'a value that is wrong', 'a value a STATED RULE flags; say which rule. The engine\'s word for the modified z is "potential outlier". A flag is a question about the value'],
-  ['sigma', 'any standard deviation', 'a standard deviation with its source named: sample SD, MRbar / 1.128, 1.4826 x MAD, or historical in-control data'],
+  ['sigma', 'any standard deviation', `a standard deviation with its source named: sample SD, MRbar / ${S(K.D2_N2)}, ${S(K.HAMPEL_MAD_SCALE)} x MAD, or historical in-control data`],
   ['control limit', 'a specification or an acceptable range', 'a limit computed from in-control data; never a specification and never a plausibility range'],
-  ['missing', 'any bad or absent value', 'null, undefined or NaN; a sentinel such as -999.25 is a present value until converted'],
+  ['missing', 'any bad or absent value', `null, undefined or NaN; a sentinel such as ${S(SENTINEL)} is a present value until converted`],
   ['percentile', 'a P label, whose meaning differs between exceedance and non-exceedance conventions', 'a quantile at a stated probability by a stated rule (R6, R7 or R8); no P label is used anywhere in this course'],
 ]);
 w();

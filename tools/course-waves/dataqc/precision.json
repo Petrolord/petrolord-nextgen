@@ -9,7 +9,7 @@
  },
  "measure": {
   "decimals": 6,
-  "match": "^(?:odudu_cumulative_drop_bbl|odudu_phase_sum_allowed_day44_bbl_d|odudu_scada_expected_step_h)$"
+  "match": "^(?:odudu_cumulative_drop_bbl|odudu_phase_sum_allowed_day44_bbl_d|odudu_scada_expected_step_min)$"
  },
  "score": {
   "decimals": 6,
