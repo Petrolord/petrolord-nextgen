@@ -43,7 +43,17 @@
 -- ATTEMPTS. Tiers this file re-keys: welltest/beginner. Before it writes, the
 -- file counts academy_capstone_attempts on each and REFUSES if any exist,
 -- unless D5 allowlists that tier with the exact attempt ids (allowlist:
--- empty). Stored scores are never touched.
+-- {"petrophysics/beginner": ["4d4e7c7b-5907-44fd-b79a-db381bfefb7b",
+-- "85712d45-1ea6-4b3e-a2fe-add4f23e8bd1",
+-- "fd1e594d-4963-4ddf-abdf-0bf375c9aa26",
+-- "6ab22d5e-b5e0-4bd6-aa92-3d529d5e175e"], "welldata/beginner":
+-- ["494f7d7d-af88-48f9-abaa-683d922164a7",
+-- "09b0d455-b4a5-4cb8-b9c0-b22e12d2ae54",
+-- "dfa55a33-f21f-44ef-8d90-56bef52c47fa",
+-- "b8fc9345-4063-4dc8-bf4c-8e3f57a68144",
+-- "1d3834e3-ce9a-44ce-88c1-458e082067ad",
+-- "f5e4dfe0-f46d-43f2-a26c-ac5087efcc8f",
+-- "0a216e47-7970-4e0a-9ac6-18c7094469b6"]}). Stored scores are never touched.
 --
 -- GUARDS. Each row must hold EITHER its post-W1 prompt and dataset (by md5)
 -- and fields (exact jsonb), as production holds them after the W1 34 files
@@ -62,7 +72,7 @@ declare
   v_ids      jsonb;
   v_extra    jsonb;
   v_idtxt    text;
-  v_allow    jsonb := '{}'::jsonb;  -- D5 allowlist: 'course/tier' -> attempt ids signed off
+  v_allow    jsonb := '{"petrophysics/beginner": ["4d4e7c7b-5907-44fd-b79a-db381bfefb7b", "85712d45-1ea6-4b3e-a2fe-add4f23e8bd1", "fd1e594d-4963-4ddf-abdf-0bf375c9aa26", "6ab22d5e-b5e0-4bd6-aa92-3d529d5e175e"], "welldata/beginner": ["494f7d7d-af88-48f9-abaa-683d922164a7", "09b0d455-b4a5-4cb8-b9c0-b22e12d2ae54", "dfa55a33-f21f-44ef-8d90-56bef52c47fa", "b8fc9345-4063-4dc8-bf4c-8e3f57a68144", "1d3834e3-ce9a-44ce-88c1-458e082067ad", "f5e4dfe0-f46d-43f2-a26c-ac5087efcc8f", "0a216e47-7970-4e0a-9ac6-18c7094469b6"]}'::jsonb;  -- D5 allowlist: 'course/tier' -> attempt ids signed off
   v_s0       text;
   v_s1       text;
   v_s2       text;

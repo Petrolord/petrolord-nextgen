@@ -48,11 +48,30 @@ PREFIX = '20261028c_w5_'
 TIERS = ('beginner', 'intermediate', 'advanced')
 
 # D5: tiers signed off for a re-key although attempts exist, with the exact
-# attempt ids expected. EMPTY: no tier is signed off. welldata beginner holds
-# attempts in production, so its file refuses until the owner signs its ids
-# off. To sign a tier off: add 'course/tier': ['<uuid>', ...] from
+# attempt ids expected. To sign a tier off: add 'course/tier': ['<uuid>', ...] from
 # `/root/w5c-apply/apply.sh attempts` and regenerate. Any id not listed refuses.
-ALLOW = {}
+# Signed off by the owner 2026-09-23 from `/root/w2w6-apply/apply.sh attempts`
+# on production: the petrophysics beginner ids are the pioneer cohort's
+# capstone attempts (3 passed, 1 failed); the welldata beginner ids are one
+# run of test attempts on 2026-08-21. Stored scores and certificates are not
+# touched; a retry is graded on the new case.
+ALLOW = {
+    'petrophysics/beginner': [
+        '4d4e7c7b-5907-44fd-b79a-db381bfefb7b',
+        '85712d45-1ea6-4b3e-a2fe-add4f23e8bd1',
+        'fd1e594d-4963-4ddf-abdf-0bf375c9aa26',
+        '6ab22d5e-b5e0-4bd6-aa92-3d529d5e175e',
+    ],
+    'welldata/beginner': [
+        '494f7d7d-af88-48f9-abaa-683d922164a7',
+        '09b0d455-b4a5-4cb8-b9c0-b22e12d2ae54',
+        'dfa55a33-f21f-44ef-8d90-56bef52c47fa',
+        'b8fc9345-4063-4dc8-bf4c-8e3f57a68144',
+        '1d3834e3-ce9a-44ce-88c1-458e082067ad',
+        'f5e4dfe0-f46d-43f2-a26c-ac5087efcc8f',
+        '0a216e47-7970-4e0a-9ac6-18c7094469b6',
+    ],
+}
 
 W1_LABELS = [a + b for a in (LABEL_ALL, LABEL_SOME) for b in (END_A, END_B)]
 
