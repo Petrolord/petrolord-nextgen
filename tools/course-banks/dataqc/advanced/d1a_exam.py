@@ -1,0 +1,324 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D1 Expert final exam, 42 questions across the six Expert modules, with the
+# lower tiers' checks recalled where a policy or a note needs them. Questions
+# marked CROSS need two modules at once. Every figure is printed in the digest
+# (Sections 1 to 32); none is derived here beyond the arithmetic the digest
+# itself prints.
+
+# --- the individuals chart (m01) ---
+q(2, "On EKENE-3's phase one standard, days 23 and 25 signal. Which rule fires on those two days?",
+ "moving-range-above-ucl, a large step from one day to the next inside the shifted stretch",
+ ["individuals-below-lcl, since both days read below the phase one centre of 611.380000 psig",
+  "individuals-above-ucl, since day 23's 615.200000 psig sits above the upper limit of the chart",
+  "ewma-below-lcl, which the individuals chart reports when a day falls inside the shifted stretch"],
+ "The course lists day 23 and day 25 under moving-range-above-ucl. Day 23's 615.200000 is inside the individuals limits of 600.057812 and 622.702188, and so is day 25's 602.900000; the moving range chart sees the size of the step from the day before. ewma-below-lcl is a rule of a different chart.")
+
+# CROSS m01 + m02
+q(0, "The lambda table's row at 1.000000 gives an asymptotic half-width of 11.322188 psi. What is that distance on the individuals chart drawn on phase one?",
+ "The distance from the centre, 611.380000, to each individuals limit: 3 sigma with sigma 3.774063 psi",
+ ["The moving range upper limit, since at lambda 1 the EWMA charts the step between neighbours",
+  "The width of the whole band, from the lower limit to the upper limit of the chart",
+  "Nothing on that chart: the EWMA half-width and the individuals limits share no figure"],
+ "At lambda 1 the EWMA is the observation itself and the limits are target +/- 3.000000 sigma, the individuals chart. 622.702188 less 611.380000 is 11.322188, one half-width. The moving range limit is 13.908086 psi, and the whole band from 600.057812 to 622.702188 is twice the half-width.")
+
+q(3, "Can the moving range chart on EKENE-3 ever signal low?",
+ "No: its lower limit is 0, a moving range is never below 0, and a signal needs a point strictly outside",
+ ["Yes, whenever two neighbouring days read the same value, since a moving range of zero lies on the lower limit",
+  "Yes, on any day whose step is smaller than MRbar, 4.257143 psi, the average step of phase one",
+  "Yes, below minus 13.908086 psi, the mirror of the upper limit that the chart draws around zero"],
+ "The moving range chart has upper limit 3.267 MRbar and lower limit 0, and a point strictly outside its limits signals. A moving range is an absolute value, so it can reach 0 and never pass below it, and a point on a limit is inside. Most steps are smaller than MRbar by design, and the band has no negative half.")
+
+# --- the EWMA chart (m02) ---
+q(1, "The day 8 glitch reaches the smoothed chart. Which monitored days end up above its upper limit of 615.154063?",
+ "Days 8, 9, 13 and 14",
+ ["Day 8 only, the glitch itself, since the EWMA takes only lambda of the reading",
+  "Days 8 and 9 only, the glitch and the day after it, before the memory fades",
+  "Days 13 and 14 only, since the glitch enters the EWMA too gently to signal on day 8"],
+ "The days with an upper signal are 8, 9, 13 and 14. Day 8's 633.800000 lifts the EWMA to 617.677385, above 615.154063, and it is still at 615.741908 on day 9. Days 13 and 14 signal at 615.375726 and 615.440581, after high readings on days 12 and 13 on top of what remained of day 8.")
+
+q(0, "The engine's first EWMA values on NIST 6.3.2.4's example are 50.600000, 49.520000 and 50.564000. What did the recursion start from?",
+ "EWMA_0 = 50, the target the page supplies as an input",
+ ["The first sample on the page, which the engine takes as EWMA_0 when a target is given",
+  "The mean of the page's samples, which the engine computes before it runs the recursion",
+  "Zero, from which the EWMA climbs towards the data over the first few samples of the chart"],
+ "EWMA_t = lambda x_t + (1 - lambda) EWMA_(t-1), starting at EWMA_0 = the target, and the NIST example is run at lambda 0.3 with a target of 50. The engine never estimates a starting value from the data it monitors, and a start at zero would put the first EWMA far below 50.600000.")
+
+q(2, "EKENE-3's exact EWMA limits start narrow and widen. On which day do they first agree with the asymptotic 607.605937 and 615.154063 to six decimals?",
+ "Day 35",
+ ["Day 1, since the exact variance factor starts at its final value",
+  "Day 10, the day the EWMA first falls back inside the limits after the glitch",
+  "Never, since 1 - (1 - lambda)^(2t) stays below 1 on every day"],
+ "The course's table prints the exact pair as 607.605938 and 615.154062 on days 32 to 34 and as 607.605937 and 615.154063 from day 35. On day 1 the exact pair is 609.115562 and 613.644438. The factor stays below 1, and at six decimals the difference vanishes by day 35. Day 10 is when the EWMA returns inside, which does not move a limit.")
+
+q(3, "Suppose the EKENE-3 plan had chosen a smoothing constant of 0.500000. What half-width, first low day and count of signalling days would its chart show?",
+ "A half-width of 6.536869 psi, a first low signal on day 22 and 5 days signalling",
+ ["A half-width of 6.536869 psi, a first low signal on day 28 and 18 days signalling, the longest memory in the table",
+  "A half-width of 4.756270 psi, a first low signal on day 22 and 10 days signalling",
+  "A half-width of 11.322188 psi and 2 days signalling"],
+ "The course's row at 0.500000 prints 6.536869, 22 and 5. Day 28 and 18 days belong to lambda 0.100000, the longest memory. 4.756270 psi and 10 days are the row at 0.300000, and 11.322188 psi and 2 days the row at 1.000000, the individuals chart.")
+
+# CROSS m01 + m02
+q(1, "The individuals chart on phase one's standard and the EWMA at lambda 0.2 both first signal low on day 22. Which of them also signals low on every day from 27 to 34?",
+ "The EWMA, which gathers the shifted days; the individuals chart signals low on day 22 alone",
+ ["The individuals chart, since from day 27 every reading falls below its lower limit of 600.057812",
+  "Both of them, since the two charts share phase one's target and sigma",
+  "Neither, since each signals low only once, on the first day of a shift"],
+ "The course lists EWMA low signals on 22, 27 to 34, 36 and 38. The course lists day 22 as the individuals chart's only individuals-below-lcl, and the course counts its low signals from day 16 to day 40 as 1. Readings from day 27 are mostly above 600.057812, day 27 at 601.900000 among them. Sharing a standard does not give the charts the same statistic.")
+
+# --- the tabular CUSUM (m03) ---
+q(0, "Group 11 of the NIST page leaves the lower sum at 0.312500, and group 12 reads 0.150000 above the target of 325. Where does the lower sum go?",
+ "0.000000, since S_lo = max(0, S_lo(i-1) + target - k - x_i) and the bracket falls below zero",
+ ["0.312500, since a reading above the target leaves the lower sum where it stood",
+  "0.150000, since S_lo takes the size of the latest deviation from the target",
+  "0.312500 less 0.150000, since S_lo simply takes off a reading's excess over target"],
+ "The course's recursion floors S_lo at zero. 0.312500 plus 325 less 0.317500 less the group 12 reading is negative, because that reading sits 0.150000 above target, so the printed S_lo at group 12 is 0.000000. A reading above target always pulls S_lo down, and k is subtracted in the recursion. The sum is floored at zero; it never holds its value.")
+
+q(3, "By the fortieth monitored day, where have the lower tabular sum and the running total of x - target ended up?",
+ "S_lo 62.324215 and a cumulative sum of -56.800000",
+ ["S_lo 0.000000 and a cumulative sum of -56.800000, since S_lo was reset after its first signal on day 21",
+  "S_lo -56.800000 and a cumulative sum of 62.324215, since the lower sum is kept negative by convention",
+  "S_lo 62.324215 and a cumulative sum of 0.000000, since the plain sum is floored at zero in the same way"],
+ "The course prints day 40 as S_hi 0.000000, S_lo 62.324215 and a cumulative sum of -56.800000, signal low. The engine never resets a sum after a signal. S_lo is floored at zero and is never negative, while the plain cumulative sum of x - target has no floor and carries the sign of the shift.")
+
+# CROSS m02 + m03
+q(2, "Which sigma do EKENE-3's EWMA and its CUSUM both work with, and where does it come from?",
+ "3.774063 psi, MRbar / 1.128 from phase one, passed to each chart as an input",
+ ["3.862060 psi, the sample SD of phase one, which both charts compute from the history they are handed",
+  "A sigma each chart estimates from the forty monitored days, since both are drawn in phase two",
+  "3.774063 psi for the EWMA, and 15.096251 psi for the CUSUM, whose sigma is h"],
+ "The course runs the EWMA with target 611.380000 and sigma 3.774063 from phase one, and the course runs the CUSUM with target and sigma from phase one. Neither chart estimates sigma; the EWMA requires it and the CUSUM needs it to convert sigma units. 15.096251 psi is h, 4 times sigma. 3.862060 is the sample SD, printed as a derived figure beside the chart's sigma.")
+
+q(1, "The engine's units refusal quotes a rule of thumb for the tabular CUSUM. What does it say, and in which unit?",
+ "It is written in sigma units: an allowance of 0.5 and a decision interval of 4 or 5",
+ ["It is written in the data's own units: an allowance of 0.5 and a decision interval of 4 or 5",
+  "It is written in sigma units: an allowance of 4 or 5 and a decision interval of 0.5",
+  "It is NIST's pair, 0.317500 and 4.195900, in the data's own units"],
+ "The course quotes the engine's own words: units is required: 'sigma' (k and h in multiples of sigma, rule of thumb k = 0.5, h = 4 or 5) or 'data' (k and h in the data's own units). Read as psi, the same numbers make a much tighter chart. 0.317500 and 4.195900 are the NIST example's inputs, and the engine uses neither by default.")
+
+q(0, "Counting every day with a signal of either kind over the whole forty-day watch, how busy is each chart?",
+ "Individuals 5, EWMA 15 and CUSUM 28",
+ ["Individuals 1, EWMA 11 and CUSUM 20, counting both sides over the forty days",
+  "Individuals 6, EWMA 15 and CUSUM 45, one for each signal each chart returns",
+  "Individuals 5, EWMA 18 and CUSUM 28, with the EWMA at lambda 0.2"],
+ "The comparison table's last column reads 5 for the individuals chart, 15 for the EWMA and 28 for the CUSUM. The low-side counts after day 16, 1, 11 and 20, cover a narrower window. 45 is the CUSUM flag count with k and h read as psi, and 18 days is the EWMA at lambda 0.100000. The individuals chart returns six signals over its five days.")
+
+q(3, "EKENE-3's day 1 reads 615.500000 psig. With target 611.380000 and k 1.887031 psi, what does S_hi read on day 1?",
+ "2.232969",
+ ["4.120000, the reading less the target, since k is taken off only from day 2",
+  "0.000000, since both sums start at zero and day 1 only initialises them",
+  "15.096251, since S_hi starts at h and counts down towards a signal"],
+ "Both sums start at 0, and S_hi(1) = max(0, 0 + 615.500000 - 611.380000 - 1.887031), the printed 2.232969. 4.120000 is day 1's plain cumulative sum, which carries no allowance. k is subtracted on every day including the first, and h is the height a sum must pass, never a starting value.")
+
+q(2, "On the NIST CUSUM table, S_hi first passes h at group 14 with 4.940000. What does it read at group 15, where x - 325 = 2.825000?",
+ "7.447500, since the sum carries on from 4.940000 with no reset",
+ ["2.507500, since the engine restarts the sum at zero after a signal and adds only group 15",
+  "2.825000, the latest deviation alone",
+  "4.940000, since the sum is held at its signalling value until an operator clears it"],
+ "No reset after a signal. 4.940000 plus 2.825000 less 0.317500 is the printed 7.447500. A restart would give a different and smaller figure, and the engine has no hold state; the recursion runs on every group, and the signal is reported beside the sum.")
+
+# --- the scorecard (m04) ---
+q(1, "Two of EKENE-3's five dimension scores are equal. Which, and does the tie rule decide the weakest dimension here?",
+ "Validity and plausibility, both 0.977011; the tie rule does not come into it, since uniqueness at 0.538462 is lowest",
+ ["Validity and plausibility, both 0.977011; the tie rule names validity weakest, since it is listed first",
+  "Completeness and consistency, both 0.966667; the tie rule names completeness weakest",
+  "No two scores are equal, so the tie rule has nothing to decide on this scorecard"],
+ "The course prints validity at 0.977011 (2 failed in 87) and plausibility at 0.977011 (2 flagged in 87). The tie rule applies to the LOWEST score, and the lowest is uniqueness at 0.538462, so uniqueness is weakest under both weightings. Completeness is 0.966667 and consistency 0.988506.")
+
+# CROSS m04 + Associate m03 (Section 9)
+q(0, "EKENE-3's plausibility row flags day 60, a shut-in day. Is day 60 also a failure under validity?",
+ "No: day 60 is shut in with an oil rate of 0.000000, which rateCheck does not flag; validity's 2 failures are days 47 and 61",
+ ["Yes: rateCheck flags every shut-in day, so day 60 is one of validity's 2 failures",
+  "Yes: a day the modified z-score flags is counted under every dimension",
+  "No: day 60 is missing, so it is not checked"],
+ "A zero rate while shut in is correct, and day 60 is not flagged; the two failures are day 47's negative rate and day 61's 1271.700000 bbl/d while shut in. The course lists entries 46 and 59, days 47 and 60, under the modified z-score, so day 47 is counted twice and day 60 once. Day 60's oil is present: the three missing days are 31 to 33.")
+
+q(3, "How much of the 0.927390 total comes from consistency, and how is that share formed?",
+ "0.219668, its score 0.988506 times its normalised weight 0.222222",
+ ["0.988506, its score, which the total takes in full from every dimension",
+  "0.222222, its normalised weight alone",
+  "0.217114, its score times its weight of 2, divided by the five dimensions listed"],
+ "The contribution is the score times its normalised weight, and consistency's is printed at 0.219668; the five contributions make the total of 0.927390. 0.217114 is validity's contribution, 0.977011 times 0.222222. The weights are divided by their sum, which is never the number of dimensions.")
+
+q(2, "EKENE-3's scorecard totals 0.927390 at the stated weights. What does the engine say about whether that total is good enough?",
+ "Nothing: it returns the total and the weakest dimension, and any decision rule is the caller's to write",
+ ["That it is the share of all checks the data passed, weighted by use",
+  "That the data improved, since the total rose from 0.889531 at equal weights",
+  "That uniqueness should be dropped, since its weight of 1 marks it as minor"],
+ "There are no grade bands, since a band would be an invented number, and the course lists grade bands for a scorecard as not built; the engine returns a total and the weakest dimension. The same scores give 0.889531 at equal weights, so the total moves with the caller's weights while the data stay the same.")
+
+# CROSS m04 + Associate m02 (Section 5)
+q(1, "The mixed scorecard example passes RHOB completeness as a direct score of 0.950000. Which count on EKENE-7 does that score match?",
+ "228 present of 240, the RHOB channel with its twelve-sample gap from entry 80",
+ ["237 present of 240, the NPHI channel with its three single-sample gaps",
+  "240 present of 240, the gamma ray with -999.25 in place",
+  "236 present of 240, the gamma ray with its sentinel converted to null"],
+ "The course prints RHOB at 240 samples, 12 missing, 228 present, completeness 0.950000, with one gap run from entry 80. NPHI reads 0.987500 and the delivered gamma ray 1.000000. Converted, the gamma ray reads 0.983333 over the whole log. The scorecard accepted 0.950000 as a direct score, and a counted row would have produced the same figure from 1 - 12 / 240.")
+
+# CROSS m04 + Associate m06 (Section 15)
+q(3, "EKENE-3's uniqueness row fails 6 of 13 names. What pairs does `duplicateIdentifiers` report on those names at its defaults?",
+ "1 exact, 8 normalised and 1 near",
+ ["6 exact pairs, one for each name that fails the uniqueness row of the scorecard",
+  "1 exact, 8 normalised and 41 near, since every one edit pair is reported as near",
+  "1 exact, 5 normalised and 1 near, since leading zeros are kept as written"],
+ "The course prints 1 exact, 8 normalised and 1 near at the defaults. 41 near pairs is the count with digitsMustMatch false, and 5 normalised the count with stripLeadingZeros false. The scorecard counts names that duplicate an earlier one, which is a different count from pairs.")
+
+# --- designing a QC policy (m05) ---
+# CROSS m05 + m03
+q(0, "A policy copies the refusal's rule of thumb, k 0.5 and h 4, into a CUSUM whose inputs are read in psi. What does that chart do on EKENE-3?",
+ "It first signals high on day 4, before the day 8 glitch, and flags 45 days where the sigma reading flags 28",
+ ["It signals exactly as the sigma chart does, since the rule of thumb works in either unit",
+  "It signals less often, since 0.5 psi is a looser allowance than 0.5 sigma",
+  "It refuses, since psi is not one of the units the engine lists for k and h"],
+ "Read in the data's own units, the rule of thumb makes k and h far smaller than the sigma chart's 1.887031 and 15.096251 psi. The first upper signal then comes on day 4, where no event was planted, the first lower on day 11, and the flags number 45 against 28. The rule of thumb is written in multiples of sigma, and 'data' is one of the two units the engine lists.")
+
+q(2, "A policy turns `digitsMustMatch` off for the 13 well names. What happens to the near pairs?",
+ "They rise from 1 to 41",
+ ["They fall from 1 to 0, since only EKNE-4 against EKENE-4 was a near pair",
+  "They stay at 1, since the digit rule only affects normalised pairs",
+  "They rise from 1 to 8, the count of normalised pairs"],
+ "The course's settings table prints the defaults at 1 exact, 8 normalised and 1 near, and digitsMustMatch false at 1, 8 and 41. The digit rule is why EKENE-2 and EKENE-12, two real wells one edit apart, are kept apart; without it every one edit pair of names with different numbers joins the near list.")
+
+# CROSS m05 + m06
+q(1, "At the defaults, what does `frozenRuns` find on EKENE-3's gas, and how does its reason number the stretch?",
+ "One run of 8 days, days 74 to 81 at 748.700000, which the reason gives as entry 73 to 80",
+ ["One run of 7 days, days 75 to 81, since the day the meter held is not part of the run",
+  "One run of 8 days, days 73 to 80, the numbers the reason prints, since entries and days coincide",
+  "No run, since gas is metered to one decimal and small changes break a run at tolerance 0"],
+ "The course prints the gas run from day 74 to day 81, length 8, value 748.700000: the meter held its day 74 value for the seven days after it, so day 74 opens the run. The reason reads \"8 values in a row from entry 73 to 80 stay at 748.7\", because the engine counts entries from 0, and day 1 is entry 0.")
+
+q(3, "A policy changes the Mahalanobis alpha from its default 0.025000 to 0.050000 on EKENE-7's oil sand. What changes?",
+ "The cutoff falls from 7.377759 to 5.991465, and 2 rows are flagged",
+ ["The cutoff rises from 7.377759 to 9.210340, and 1 row is flagged",
+  "The cutoff stays at 7.377759, since alpha only changes the reason",
+  "The cutoff falls to 4.605170, and 3 rows are flagged"],
+ "The course's alpha table prints 5.991465 and 2 rows at 0.050000 against 7.377759 and 1 row at the default. A larger alpha lowers the chi-square quantile. 9.210340 is the cutoff at 0.010000 and 4.605170 with 3 rows at 0.100000. The default 0.025000 is a Petrolord choice in the course.")
+
+q(0, "A policy raises Hampel's nSigma from 3 to 5 on EKENE-7's gamma ray, keeping halfWindow 3. What happens?",
+ "The flags fall from 11 to 6, and both planted spikes are still flagged",
+ ["The flags fall from 11 to 3, and only the spike at entry 70 is still flagged",
+  "The flags rise from 11 to 21, since a wider threshold gathers more samples",
+  "The flags stay at 11, since nSigma sets the window"],
+ "The course's table prints halfWindow 3 with nSigma 5 at 6 flags, both spikes flagged. 3 flags is halfWindow 5 with nSigma 5. nSigma multiplies the scaled MAD in the threshold, so raising it can only clear flags. The window is set by halfWindow, 2 x halfWindow + 1 samples.")
+
+q(1, "Which basis does `waterCutCheck` compute a water cut on, and what does it read on EKENE-3's day 10?",
+ "Water over oil plus water, a liquid basis: 0.183105",
+ ["Water over oil, the water-oil ratio: 0.224147",
+  "Oil over oil plus water, the oil cut: 0.816895",
+  "Water over gas, the ratio the sheet reports beside the rates"],
+ "The engine's water cut is water / (oil + water), a liquid basis, 0.183105 on day 10. The water-oil ratio, 0.224147, and the oil cut, 0.816895, are derived beside it for contrast, and only the first is what the engine checks. The check takes oil and water rates; gross belongs to the phase-sum check.")
+
+q(2, "The keying error planted on EKENE-3's cumulative oil on day 70 is ten thousand barrels, yet the flag's `drop` field is 7496.700000 bbl. Why?",
+ "The drop is measured against day 68, so it is the error less the oil produced on days 69 and 70, 2503.300000 bbl",
+ ["The engine caps a drop at the largest daily rate seen before it",
+  "The drop is measured against day 69, whose missing value the engine fills first",
+  "The tolerance of 2503.300000 bbl is taken off the drop before it is printed"],
+ "Each value is compared with the last present value before it; day 69 is missing, so day 70 is measured against day 68, and the drop is the error less two days of production, 2503.300000 bbl derived. The engine fills nothing and caps nothing, and the check here runs at tolerance 0.")
+
+q(3, "The splice is checked again with a stated step of 0.5 ft and a step allowance of 0.6 ft. Which faults survive?",
+ "0 irregular steps, and still 2 duplicates and 1 reversal",
+ ["0 irregular steps, 0 duplicates and 0 reversals, since the loose tolerance absorbs every fault in the splice",
+  "3 irregular steps, 2 duplicates and 1 reversal, since a stated tolerance is ignored when it exceeds the step",
+  "A refusal, since the tolerance exceeds the step"],
+ "With expectedStep 0.5 and stepTolerance 0.6 the splice reads 0 irregular steps and still 2 duplicates and 1 reversal; a tolerance loosens the step test only. The 3 irregular steps are the reading at the defaults. The engine accepts the stated tolerance and returns the rest of its findings unchanged.")
+
+q(0, "EKENE-7's gamma ray, sentinel converted, is checked for coverage of 8400 to 8515 ft. What do a half-foot and a one-foot maxStep read?",
+ "0.991304 with a hole from 8474.500000 to 8475.500000 ft, and 1.000000",
+ ["1.000000 at both, since the converted gamma ray has no missing value inside the interval",
+  "0.991304 at both, since a hole in the depth index stays a hole at any maxStep",
+  "0.983333 at both, the completeness of the converted channel"],
+ "At a half-foot maxStep the gamma ray covers 0.991304 with one hole where the depth index skips a sample, and at one foot the same step covers and coverage is 1.000000. A step equal to maxStep covers, inclusive. 0.983333 is completeness over the whole log, which counts present values without looking at the index.")
+
+# CROSS m01 + m05
+q(1, "Across the engine, where does a value that lands exactly on a limit fall?",
+ "Inside: every flag fires strictly beyond its limit, on a control limit, a Tukey fence or a Hampel threshold alike",
+ ["Outside, since the engine counts a value on a limit as having reached it",
+  "Outside on the control charts and inside on the outlier tests",
+  "It depends on the limit's source, NIST or Petrolord, as each basis states"],
+ "A point strictly outside its limits signals. A golden case with values on both Tukey fences flags nothing, and a value exactly on its Hampel threshold is not flagged. In coverage a step equal to maxStep covers. The rule is the same on every check in the engine, whoever chose the limit.")
+
+# CROSS m01 + m02
+q(2, "The individuals chart takes its centre from the data unless a standard is passed. What does `ewmaChart` do with its centre?",
+ "It requires a target and sigma from history and refuses a call without a target",
+ ["It follows the individuals chart and takes the data's own mean when no target is passed",
+  "It takes the median of the monitored days, which a glitch cannot pull",
+  "It takes the first reading as its centre and EWMA_0"],
+ "Centre and MRbar default to the data's own averages. Target and sigma are REQUIRED and come from historical in-control data, and the course prints the refusal: target is required: EWMA_0, the historical in-control mean or target. The EWMA takes neither a median nor a first reading.")
+
+# --- reading the engine honestly (m06) ---
+q(3, "On NIST's uranium example the engine's Grubbs critical value is 2.031652 against the printed 2.032. Does the test decision differ from NIST's?",
+ "No: G is 2.468765 either way and the test rejects, as NIST says",
+ ["Yes: at the printed 2.032 the test does not reject, and the engine's full-precision value flips it",
+  "Yes: the engine uses a two-sided critical value, and NIST's is one-sided",
+  "No, since the engine takes NIST's printed value"],
+ "The uranium example is one-sided max at alpha 0.05, G 2.468765 against the printed 2.4687, critical 2.031652 against the printed 2.032, reject true. G sits well above both critical figures. The engine computes its own critical value from Student's t, one-sided here as on the page.")
+
+q(0, "Which of these does the quality engine build?",
+ "A `cleaned` series from hampel, returned beside its flags",
+ ["A generalised ESD test for several outliers at once",
+  "A CUSUM design helper that turns alpha and beta into h",
+  "A unit conversion from us/ft to us/m for the sonic"],
+ "Hampel returns a cleaned series beside its flags, and choosing to use it is the caller's decision. The course lists a test for several outliers, a CUSUM design helper from alpha and beta, and unit conversion among what is not built; an unlisted unit is refused.")
+
+# CROSS m06 + Professional m01 (Section 17)
+q(1, "At ten readings, why can no z-score on EKENE-3's gauge pass 3, however wild entry 7 is?",
+ "With the sample SD the largest possible |z| is (n - 1) / sqrt(n), 2.846050 at ten; entry 7 reaches 2.845783",
+ ["The engine caps every z-score at 3 to keep a single value from dominating",
+  "Entry 7 is not wild enough; a reading much further from the rest would pass 3 even at ten readings, whatever the spread",
+  "The glitch is removed from the mean before z is formed, so it reads near zero"],
+ "The largest |z| any value can reach with the sample SD is (n - 1) / sqrt(n), and at n = 10 the engine reports maxPossibleAbsZ 2.846050 and thresholdReachable false, however wild the value. Entry 7 reaches 2.845783. The engine caps nothing and removes nothing; the ceiling is arithmetic.")
+
+q(2, "What does every flag the engine returns carry?",
+ "The rule that fired and a reason sentence, beside its numeric fields",
+ ["A severity grade from low to high, which the engine sets for each flag it returns",
+  "A corrected value to use in place of the flagged one",
+  "A probability that the flagged value is wrong"],
+ "Every flag carries the rule that fired and a reason sentence, and every result carries a basis block. The negative-rate flag printed there carries index 1, rule negative-rate, a reason and value -3. The engine does not decide whether a flagged value is wrong, and it corrects nothing.")
+
+q(0, "What does the engine return when it refuses an input?",
+ "An object with `error` and `field`, where field names the input refused; a refusal carries no number",
+ ["A result with every number set to zero and a warning attached",
+  "The last good result the function produced, returned once more with the refused input simply left out of it",
+  "A partial result with the refused entries set to null"],
+ "Every function returns either a result object or an object with `error` and `field`, where `field` names the input it refused. A refusal carries no number. The engine does not substitute zeros, earlier results or nulls.")
+
+q(1, "Under the course vocabulary, which sources may a sigma name?",
+ "The sample SD, MRbar / 1.128, 1.4826 x MAD, or historical in-control data",
+ ["Any standard deviation, since the source of a sigma is a detail for the appendix",
+  "Only historical in-control data, since a sigma from any other source is not a sigma",
+  "Only the population SD, since sigma is the population symbol"],
+ "Sigma is a standard deviation with its source named: sample SD, MRbar / 1.128, 1.4826 x MAD, or historical in-control data. On EKENE-3 the chart sigma is MRbar / 1.128, 3.774063 psi, and the sample SD of the same days is 3.862060, two sources and two figures.")
+
+q(2, "Which of null, undefined, NaN, -999.25 and 0 does `completeness` count as missing?",
+ "null, undefined and NaN",
+ ["null, undefined, NaN and -999.25, the LAS null value",
+  "null and undefined only, since NaN is a number",
+  "All five, since each marks a value that is not a reading"],
+ "The course's table: null, undefined and NaN each read 1 missing, while -999.25 and 0 read present. A sentinel is a present number until someone converts it. Infinity is refused outright.")
+
+q(3, "EKENE-3's ten gauge readings are run through every Professional method at its defaults. Which methods flag entry 7?",
+ "The modified z-score, the Tukey fences, Hampel and Grubbs; the z-score flags nothing",
+ ["All five, the z-score included, since 240.100000 sits far from every other one of the ten readings",
+  "Only the modified z-score, since the others measure against a mean the glitch sets",
+  "The z-score and Grubbs, since both use the sample SD of all ten readings"],
+ "The course's gauge row: z beyond 3 none; modified z 7; the fences 7; Hampel 1 and 7; Grubbs 7. The z-score cannot pass 3 at ten readings. Grubbs rejects: its critical value at n = 10, 2.289954 two-sided, sits under the ceiling that holds z below 3.")
+
+q(0, "EKENE-7's gamma ray spike at entry 70 reads 95.420000 gAPI inside an oil sand. Why does the Hampel window flag it while the global z-score does not?",
+ "The z-score is 1.058062 against the whole log, shale included, while the window median beside it is 37.000000",
+ ["The z-score refuses the channel, since a spike makes its spread undefined",
+  "Hampel carries a fixed gamma ray limit for sands, and a spike of 95.420000 gAPI lies above it, whatever the window median",
+  "The z-score flags it too, at 3 or more, once the sentinel is converted"],
+ "On the same channel the z-score flags 0, with entry 70 at z 1.058062, because a sand spike to 95.420000 gAPI looks like shale to a global mean and SD. The window median at entry 70 is 37.000000 and the threshold 34.248060, which 58.420000 exceeds. The engine carries no gamma ray limit for a sand.")
+
+q(1, "A reviewer reads EKENE-3's day 22 EWMA signal, at 606.394191, and asks whether the pressure broke its specification. What does the course's vocabulary say the lower limit of 607.605937 is?",
+ "A control limit computed from phase one's in-control target and sigma, which is never a specification",
+ ["The well's minimum allowed wellhead pressure, set from 50 days of history",
+  "A plausibility range for a wellhead pressure gauge, which the engine carries for every pressure channel it knows",
+  "The definitional minimum for absolutePressure in psia"],
+ "A control limit is computed from in-control data, never a specification and never a plausibility range. The course computes 607.605937 from target 611.380000 and sigma 3.774063 at lambda 0.2 and L 3. The engine carries no plausibility range, and the definitional absolute pressure minimum is 0.")
+
+emit(Q, '/root/dai-wip-dataqc/banks/d1a_exam.json', expect_n=42)
+finish()
