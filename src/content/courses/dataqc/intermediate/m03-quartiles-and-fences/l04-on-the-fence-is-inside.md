@@ -37,4 +37,4 @@ For a value near a fence, report the value, the fence and the setting together, 
 
 ## Exercise
 
-Open the explorer's fences view and type -4, 2, 2, 3, 4, 5, 6, 6, 12. At R7 and k 1.5, confirm the fences of -4 and 12 and that no entry is flagged. Then change the last value to 13 and run it again. Say whether the upper fence moved, and whether the new value is flagged, and explain your answer in one sentence using the strictly beyond rule.
+Open the explorer's fences view and type -4, 2, 2, 3, 4, 5, 6, 6, 12. At R7 and k 1.5, confirm the fences of -4 and 12 and that no entry is flagged. Then raise the last value a little above 12 and run it again. Say whether the upper fence moved, and whether the new value is flagged, and explain your answer in one sentence using the strictly beyond rule.
