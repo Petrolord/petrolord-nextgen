@@ -110,7 +110,7 @@ q(1, "A caller asks `frozenRuns` for runs with minRun 1. What does the engine re
  ["A flag on every value in the series, since each value on its own is a run of one and so meets a minRun of 1 exactly.",
   "A result with 0 runs, since the engine raises minRun to its default of 5.",
   "A refusal naming `tolerance`, since a run of one has no tolerance to test."],
- "The engine's own words are: minRun must be a whole number, 2 or more. A run of one would be every value, so the engine refuses rather than flag the whole series or silently substitute its default. The field it names is `minRun`."),
+ "The engine's own words are: minRun must be a whole number, 2 or more. A run of one would be every value, so the engine refuses. It neither flags the whole series nor silently substitutes its default. The field it names is `minRun`."),
 
 emit(Q, '/root/dai-wip-dataqc/banks/d1b_m05.json', expect_n=15)
 finish()

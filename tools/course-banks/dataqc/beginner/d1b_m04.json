@@ -162,6 +162,6 @@
    "A refusal naming `expectedStep`, since the engine cannot infer one from a single entry and needs it stated."
   ],
   "answer": 2,
-  "explanation": "The engine's own words are: index must be an array of at least two numbers. One entry has no step, so there is nothing for any of the step rules to judge, and the engine refuses rather than report a clean result it has not earned. Stating an expected step would not help: the field named is `index`."
+  "explanation": "The engine's own words are: index must be an array of at least two numbers. One entry has no step, so there is nothing for any of the step rules to judge, so the engine refuses: a clean result here would be one it has not earned. Stating an expected step would not help: the field named is `index`."
  }
 ]

@@ -41,7 +41,7 @@
    "It cannot be computed until the twelve separate gap runs are merged."
   ],
   "answer": 2,
-  "explanation": "Completeness is present over n, so twelve missing of 240 is 0.950000 however they fall. What would change is the gap runs: twelve flags of one sample each instead of one flag of twelve. That is why the engine returns the runs beside the fraction."
+  "explanation": "Completeness is present over n, so twelve missing of 240 is 0.950000 however they fall. What would change is the gap runs: twelve flags of one sample each, where the single run gives one flag of twelve. That is why the engine returns the runs beside the fraction."
  },
  {
   "prompt": "In the middle of EKENE-7's twelve-sample density gap you type one real value in place of a null. What happens to the missing count and the gap runs?",

@@ -203,7 +203,7 @@
    "The four sentinels fall outside the caller range and are removed before the count.",
    "The four converted samples are missing, and a missing value is never checked against a limit.",
    "The caller range excludes the bottom four samples, which lie below the logged interval of the channel.",
-   "Four samples read above 150 gAPI and are counted as failed instead of as checked."
+   "Four samples read above 150 gAPI and are counted as failed and left out of the checked count."
   ],
   "answer": 1,
   "explanation": "240 samples less the 4 converted to null leaves 236 present values, and the check reports 236 checked and 0 failed. Failed values are still counted as checked, and nothing is removed; the basis reads \"limits supplied by the caller\"."
@@ -286,7 +286,7 @@
   "explanation": "A duplicate is a value equal to any earlier value. Entry 5 at 8521.500000 ft repeats entry 3, and a neighbour-only check would have missed it; deleting entry 8 does not touch it. Only earlier values count, and no remaining depth repeats its neighbour."
  },
  {
-  "prompt": "When is it worth passing `expectedStep` to `indexCheck` yourself, instead of letting it infer one?",
+  "prompt": "When is it worth passing `expectedStep` to `indexCheck` yourself?",
   "options": [
    "Only when the index is decreasing, since the engine infers a step for increasing indexes alone and refuses the rest.",
    "Only when duplicates are present, since a stated step is what lets the engine find them.",

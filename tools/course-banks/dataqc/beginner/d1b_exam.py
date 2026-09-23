@@ -140,7 +140,7 @@ q(1, "With its sentinels converted to null, EKENE-7's gamma ray is checked again
  "The four converted samples are missing, and a missing value is never checked against a limit.",
  ["The four sentinels fall outside the caller range and are removed before the count.",
   "The caller range excludes the bottom four samples, which lie below the logged interval of the channel.",
-  "Four samples read above 150 gAPI and are counted as failed instead of as checked."],
+  "Four samples read above 150 gAPI and are counted as failed and left out of the checked count."],
  "240 samples less the 4 converted to null leaves 236 present values, and the check reports 236 checked and 0 failed. Failed values are still counted as checked, and nothing is removed; the basis reads \"limits supplied by the caller\"."),
 
 q(1, "EKENE-3's day 59 ran 18.500000 hours with a positive oil rate. What does the rate check make of the rate's size for a partial day?",
@@ -193,7 +193,7 @@ q(0, "On the splice you delete the second 8523.000000 ft, the depth at entry 8. 
   "The one at entry 9, which moves up one row after the deletion and repeats its new neighbour."],
  "A duplicate is a value equal to any earlier value. Entry 5 at 8521.500000 ft repeats entry 3, and a neighbour-only check would have missed it; deleting entry 8 does not touch it. Only earlier values count, and no remaining depth repeats its neighbour."),
 
-q(2, "When is it worth passing `expectedStep` to `indexCheck` yourself, instead of letting it infer one?",
+q(2, "When is it worth passing `expectedStep` to `indexCheck` yourself?",
  "When the index is short, when most of it is irregular, or when the logging step is known from the header.",
  ["Only when the index is decreasing, since the engine infers a step for increasing indexes alone and refuses the rest.",
   "Only when duplicates are present, since a stated step is what lets the engine find them.",

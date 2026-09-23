@@ -33,7 +33,7 @@ q(2, "Suppose EKENE-7's density had lost the same twelve samples scattered throu
  ["Lower than 0.950000, since scattered losses break the log in more places.",
   "Higher than 0.950000, since each isolated loss has present neighbours.",
   "It cannot be computed until the twelve separate gap runs are merged."],
- "Completeness is present over n, so twelve missing of 240 is 0.950000 however they fall. What would change is the gap runs: twelve flags of one sample each instead of one flag of twelve. That is why the engine returns the runs beside the fraction."),
+ "Completeness is present over n, so twelve missing of 240 is 0.950000 however they fall. What would change is the gap runs: twelve flags of one sample each, where the single run gives one flag of twelve. That is why the engine returns the runs beside the fraction."),
 
 q(1, "In the middle of EKENE-7's twelve-sample density gap you type one real value in place of a null. What happens to the missing count and the gap runs?",
  "The missing count falls by one, and the one gap run splits into two.",

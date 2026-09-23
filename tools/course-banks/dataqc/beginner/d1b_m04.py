@@ -110,7 +110,7 @@ q(2, "`indexCheck` is handed an index with a single entry. What comes back?",
  ["A result with 0 flags and monotonic true.",
   "A result whose expected step is null, with a note that one entry has no step to take a median of.",
   "A refusal naming `expectedStep`, since the engine cannot infer one from a single entry and needs it stated."],
- "The engine's own words are: index must be an array of at least two numbers. One entry has no step, so there is nothing for any of the step rules to judge, and the engine refuses rather than report a clean result it has not earned. Stating an expected step would not help: the field named is `index`."),
+ "The engine's own words are: index must be an array of at least two numbers. One entry has no step, so there is nothing for any of the step rules to judge, so the engine refuses: a clean result here would be one it has not earned. Stating an expected step would not help: the field named is `index`."),
 
 emit(Q, '/root/dai-wip-dataqc/banks/d1b_m04.json', expect_n=15)
 finish()

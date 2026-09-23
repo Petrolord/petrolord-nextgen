@@ -162,6 +162,6 @@
    "A refusal naming `tolerance`, since a run of one has no tolerance to test."
   ],
   "answer": 1,
-  "explanation": "The engine's own words are: minRun must be a whole number, 2 or more. A run of one would be every value, so the engine refuses rather than flag the whole series or silently substitute its default. The field it names is `minRun`."
+  "explanation": "The engine's own words are: minRun must be a whole number, 2 or more. A run of one would be every value, so the engine refuses. It neither flags the whole series nor silently substitutes its default. The field it names is `minRun`."
  }
 ]
