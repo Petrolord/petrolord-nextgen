@@ -1,0 +1,117 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D1 Expert m01, The individuals chart.
+# Figures from digest Section 25 (the NIST 6.3.2.2 flow rate example and
+# EKENE-3's two phases), Section 1 (CONSTANTS), Section 4 (the chart refusal),
+# Section 26 (the EWMA limits, named as a wrong source) and Section 32.
+
+q(2, "EKENE-3's forty monitored days are passed to `individualsChart` with day 2 left as null. What does the engine return?",
+ "A refusal naming `values[1]`, in the engine's own words: values[1] is missing: a control chart needs a complete series, so fill or drop the gap first",
+ ["A chart with day 2 skipped, and the moving range for day 3 measured across the gap from the day 1 reading",
+  "A chart with day 2 filled at the phase one centre of 611.380000 psig, the value the engine uses to close a gap in a series",
+  "A chart of the other thirty nine days, with a missing-value flag on day 2 set beside the individuals signals"],
+ "The chart needs a complete series, so the engine refuses and names the entry; day 2 is entry 1 because entries count from 0. It never fills a gap, and a moving range across a gap would span two steps. Filling or dropping the day is the caller's decision, made before the chart is drawn, and the engine returns no partial chart with a flag in place of the refusal.")
+
+q(0, "NIST/SEMATECH 6.3.2.2 charts a flow rate over 10 batches. How many moving ranges does the engine return, and what is MRbar?",
+ "Nine, one for each batch after the first, and MRbar is their average, 1.877778, against NIST's printed 1.8778",
+ ["Ten, the first measured from the centre of 50.810000, and MRbar is their average, 1.877778",
+  "Nine, and MRbar is the largest of them, 3.500000, since the chart must allow for the biggest step",
+  "Nine, and MRbar is 50.810000 less 45.815910, the distance from the centre down to the lower limit"],
+ "MR_i = |x_i - x_(i-1)| needs a reading before it, so ten batches give nine moving ranges, printed from 2.000000 to 1.500000, and MRbar is their mean. The first batch has no neighbour, and the centre is never a neighbour. 3.500000 is the fourth moving range, one step among nine. The distance from the centre to a limit is 3 sigma, which is built from MRbar and is a different figure.")
+
+q(3, "EKENE-3's 50 in-control days give an MRbar of 4.257143 psi and a sample SD of 3.862060 psi. Which sigma does the individuals chart draw its limits with?",
+ "3.774063 psi, MRbar / 1.128, the d2 for a moving range of two",
+ ["3.862060 psi, the sample standard deviation with n - 1, which is the same spread the z-score in the Professional tier uses",
+  "4.257143 psi, MRbar itself, because a moving range of two already measures one standard deviation of the process",
+  "3.862060 psi, because phase one is in control and its sample SD is then the one spread the NIST chart page prescribes"],
+ "The digest's method line is sigma = MRbar / 1.128, and on phase one that is 3.774063 psi. The sample SD, 3.862060 psi, is printed beside it as a derived figure from lib/stats and is a different source: it measures scatter around the phase one mean. MRbar is a mean step between neighbours, and d2 = 1.128 is what converts it to a standard deviation.")
+
+q(1, "Which limits does the individuals chart draw on EKENE-3's phase one, and from what?",
+ "600.057812 and 622.702188 psig, the centre of 611.380000 plus and minus 3 times 3.774063 psi",
+ ["595.080022 and 624.839978 psig, the centre plus and minus 3 sigma once the forty monitored days are pooled with the history",
+  "607.605937 and 615.154063 psig, the band the chart draws when it takes phase one's centre as its standard",
+  "600.057812 and 622.702188 psig, the centre plus and minus 3 times the sample SD of phase one"],
+ "Limits are centre +/- 3 sigma with sigma = MRbar / 1.128, 3.774063 psi, and the digest prints 600.057812 and 622.702188. 595.080022 and 624.839978 are the limits of the forty monitored days charted on their own averages. 607.605937 and 615.154063 are the EWMA's asymptotic limits at lambda 0.2, a narrower band for a smoothed statistic. The sample SD, 3.862060, would give a different pair of lines.")
+
+q(1, "Beside the individuals chart the engine draws a chart of the moving ranges. Where does it put that chart's limits for EKENE-3?",
+ "An upper limit of 13.908086 psi, which is 3.267 times MRbar, and a lower limit of 0",
+ ["An upper limit of 13.908086 psi and a lower limit of minus the same amount, a band set symmetrically about zero",
+  "An upper limit of 3.267 times sigma, 3.774063 psi, and no lower limit",
+  "The individuals upper limit less the centre, 3 sigma, over a lower limit of 0"],
+ "The moving range chart's upper limit is D4 MRbar, with D4 = 3.267 for a moving range of two, and its lower limit is 0: 3.267 times 4.257143 is the printed 13.908086 psi. A moving range cannot be negative, so there is no band below zero. D4 multiplies MRbar, never sigma, and the individuals chart's 3 sigma belongs to the other chart.")
+
+q(3, "On the phase one standard, day 9 reads 608.000000 psig, well inside the individuals limits, and still signals. Which rule fires, and why?",
+ "moving-range-above-ucl: the step back from day 8's 633.800000 is above 13.908086",
+ ["individuals-below-lcl, because 608.000000 psig is below the centre of 611.380000 and any day below the centre signals low",
+  "ewma-above-ucl, because the individuals chart carries the smoothed memory of the day 8 glitch on into day 9",
+  "moving-range-above-ucl, as day 9 itself sits far from the phase one centre"],
+ "Day 8's glitch makes two large steps, one up into it and one back down, and the digest lists day 9 under moving-range-above-ucl. A moving range is the change from the day before, so it is the step from 633.800000 that fires. Being below the centre is ordinary; the individuals lower limit is 600.057812. ewma-above-ucl is the EWMA chart's rule, and that chart is a different call.")
+
+q(0, "EKENE-3's forty monitored days are charted with phase one's centre and MRbar as the standard. On which days does the chart signal?",
+ "Days 8, 9, 22, 23 and 25, with day 8 appearing twice: once on each chart",
+ ["Days 8 and 9 only, the glitch and the return from it, since the shift from day 16 lies inside the band",
+  "Every day from day 16 onward, as each sits below the phase one centre",
+  "Days 8 and 22 only, since the moving range chart returns no signal"],
+ "The digest prints 8 (individuals-above-ucl), 8 (moving-range-above-ucl), 9, 22 (individuals-below-lcl), 23 and 25, the last three by the moving range rule. Days 8 and 9 alone is what the chart on the monitored days' own averages returns. Sitting below the centre is not a signal, and the moving range chart's signals are rules the engine returns.")
+
+q(2, "The same forty monitored days are charted on their own averages, with no standard supplied. What does the engine return?",
+ "A centre of 609.960000, limits of 595.080022 and 624.839978, and signals on days 8 and 9 only",
+ ["A centre of 611.380000, the in-control history's, which the chart always uses",
+  "A centre of 609.960000 and signals on days 8, 9, 22, 23 and 25, since the centre moved while the limits kept phase one's",
+  "A refusal naming `centre`, because an individuals chart without a standard has no in-control history to draw on"],
+ "Centre and MRbar default to the data's own averages. The forty days include the shift from day 16, so the centre moves down to 609.960000, the limits widen, and only the glitch on day 8 and the step back on day 9 remain. 611.380000 is phase one's centre and is used only when passed as a standard. The limits move with the new MRbar, and the chart accepts no standard without refusing: that requirement belongs to EWMA's target.")
+
+q(3, "Against phase one's limits, which monitored day is the individuals chart's only low signal?",
+ "Day 22, at 598.600000 psig, below 600.057812",
+ ["Day 16, the first day of the planted shift, because the chart knows the stated start of the event from the generator",
+  "Day 25, at 602.900000 psig, the day after the pressure stepped down from 618.500000 psig on day 24",
+  "Day 21, the day the tabular CUSUM first signals low, since the two charts share phase one's target and sigma"],
+ "Day 22 is listed under individuals-below-lcl, and the individuals chart signals low on 1 day from day 16 to day 40. It signals only where a single day falls past three sigma. Day 16 raised nothing, since the chart reads values and knows nothing the generator states. Day 25 signals by the moving range rule, and 602.900000 lies above 600.057812. Day 21 is the CUSUM's first low signal, a different chart.")
+
+q(0, "A reviewer writes that phase one's upper limit of 622.702188 psig is the highest wellhead pressure the well is allowed. What does the course's vocabulary say about that?",
+ "It misreads the figure: a control limit is computed from in-control data and is never a specification or a plausibility range",
+ ["It is right, because a 3 sigma limit from 50 in-control days is how an operating envelope is set",
+  "It is right in part: a control limit is a plausibility range for the gauge, though it is no specification",
+  "It is right, because the engine checks every limit against the definitional limits of absolutePressure"],
+ "Section 32: a control limit is a limit computed from in-control data; never a specification and never a plausibility range. 622.702188 says only what phase one produced. Plausibility ranges are the caller's, passed as min and max to rangeCheck. The definitional limits for absolutePressure are in psia, kPa and bara, and a chart does not consult them.")
+
+q(1, "A monitored reading lands exactly on phase one's upper limit, 622.702188 psig. What does the individuals chart return for that day?",
+ "No individuals signal, because a point signals only strictly outside its limits",
+ ["individuals-above-ucl, because a point on its limit is counted with the points beyond it on this chart",
+  "A refusal naming the entry, since a value on a limit sits on neither side",
+  "individuals-above-ucl on that day and again on the next day"],
+ "Section 25: a point strictly outside its limits signals, so a reading on the limit sits inside. The same boundary rule runs through the engine: on a Tukey fence, on a Hampel threshold or at maxStep is inside. Nothing about a value on a limit is refused, and the next day's signal would depend on that day's own reading and step.")
+
+q(3, "On NIST/SEMATECH 6.3.2.2's flow rate data, what does the engine return beside the printed page?",
+ "An upper limit of 55.804090 against the printed 55.8041, and 0 flags",
+ ["An upper limit of 55.804090 against the printed 55.8041, and a flag on the batch whose moving range is 3.500000",
+  "An upper limit of 50.810000 plus 3 times 1.877778, because the NIST page puts its limits at 3 MRbar from the centre",
+  "A lower limit of 45.815910 that NIST prints as 45.8159 after truncating, which the course records as an erratum"],
+ "The engine reads centre 50.810000, upper 55.804090 and lower 45.815910 against NIST's 50.81, 55.8041 and 45.8159, and flags 0 points. The largest moving range, 3.500000, is under 3.267 times 1.877778. The limits are 3 sigma with sigma = MRbar / 1.128, never 3 MRbar. The course's three errata are Grubbs G, the EWMA lower limit and the CUSUM design h; the individuals page carries none.")
+
+q(1, "Which two published constants does the engine export for the individuals and moving range charts?",
+ "D2_N2 1.128000 from NIST/SEMATECH 6.3.2.2, and D4_N2 3.267000 from the 6.3.2.1 table",
+ ["HAMPEL_MAD_SCALE 1.482600 as d2, and D4_N2 3.267000 from the 6.3.2.1 table, both applied to MRbar",
+  "MODIFIED_Z_SCALE 0.674500 as d2, and MODIFIED_Z_THRESHOLD 3.500000 as D4",
+  "D2_N2 1.128000 and TUKEY_K 1.500000, which set the moving range band"],
+ "The CONSTANTS table prints D2_N2 1.128000 (d2 for a moving range of two, NIST 6.3.2.2) and D4_N2 3.267000 (D4 for a moving range of two, the 6.3.2.1 table). 1.482600 is the Hampel MAD scale from the petrophysics engine, 0.674500 and 3.500000 belong to the modified z-score, and 1.500000 is the Tukey inner fence multiplier.")
+
+q(2, "An analyst calls `individualsChart` with values only, passing no centre and no mrBar. Where do the centre and MRbar come from?",
+ "From the data's own averages, which is the engine's default; either may be given as a standard",
+ ["From nowhere: the engine refuses, naming `centre`, in the same way that the EWMA chart refuses a call with no target",
+  "From the first 50 entries of the series, which the engine treats as phase one before it charts the rest",
+  "From the median of the values and the median moving range"],
+ "Section 25: centre and MRbar default to the data's own averages, and either may be given as a standard. That default is how a phase one chart is drawn, and on monitored data it absorbs a shift. The target refusal belongs to ewmaChart. The engine has no notion of a first 50 days, and the chart uses averages, never medians.")
+
+q(0, "Day 8's glitch reads 633.800000 psig. Which rules fire on day 8 on the phase one standard chart, and which on the chart drawn on the monitored days' own averages?",
+ "Both individuals-above-ucl and moving-range-above-ucl on the standard; only individuals-above-ucl on the own-averages chart, whose moving range signal falls on day 9",
+ ["individuals-above-ucl alone on both charts, since a single high reading can only ever break the level limit",
+  "Both rules on both charts, since a glitch this large breaks every limit however the centre is drawn",
+  "moving-range-above-ucl alone on both charts, since 633.800000 lies inside 624.839978 on each"],
+ "The digest's two rows list day 8 twice on the standard, once per rule, and on the own-averages chart list 8 (individuals-above-ucl) and 9 (moving-range-above-ucl). The own-averages chart draws its limits wider, from the monitored days' own MRbar, and the digest lists its moving range signal on day 9 alone. 633.800000 is above both upper limits, 622.702188 and 624.839978.")
+
+emit(Q, '/root/dai-wip-dataqc/banks/d1a_m01.json', expect_n=15)
+finish()
