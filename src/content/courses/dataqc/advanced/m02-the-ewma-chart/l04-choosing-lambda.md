@@ -30,4 +30,4 @@ lambda does not appear among the engine's defaults. The chart takes it as an inp
 
 ## Exercise
 
-In the panel's EWMA view, set lambda to 0.1 and confirm the first low signal on day 28. Then set it to 0.3 and to 0.5, and for each, list the days that signal. Write down which of the shifted days, from day 16 on, still signal at 0.5, and explain in two sentences what the chart lost as lambda rose.
+In the panel's EWMA view, set lambda to 0.100000 and confirm the first low signal on day 28. Then set it to 0.3 and to 0.5, and for each, list the days that signal. Write down which of the shifted days, from day 16 on, still signal at 0.5, and explain in two sentences what the chart lost as lambda rose.
