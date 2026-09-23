@@ -85,7 +85,7 @@
    "A refusal naming `centre`, because an individuals chart without a standard has no in-control history to draw on"
   ],
   "answer": 2,
-  "explanation": "Centre and MRbar default to the data's own averages. The forty days include the shift from day 16, so the centre moves down to 609.960000, the limits widen, and only the glitch on day 8 and the step back on day 9 remain. 611.380000 is phase one's centre and is used only when passed as a standard. The limits move with the new MRbar, and the chart accepts no standard without refusing: that requirement belongs to EWMA's target."
+  "explanation": "Centre and MRbar default to the data's own averages. The forty days include the shift from day 16, so the centre moves down to 609.960000, the limits widen, and only the glitch on day 8 and the step back on day 9 remain. 611.380000 is phase one's centre and is used only when passed as a standard. The limits move with the new MRbar, and a call with no standard is accepted; the refusal of a missing target belongs to the EWMA chart."
  },
  {
   "prompt": "Against phase one's limits, which monitored day is the individuals chart's only low signal?",
@@ -118,7 +118,7 @@
    "individuals-above-ucl on that day and again on the next day"
   ],
   "answer": 1,
-  "explanation": "A point strictly outside its limits signals, so a reading on the limit sits inside. The same boundary rule runs through the engine: on a Tukey fence, on a Hampel threshold or at maxStep is inside. Nothing about a value on a limit is refused, and the next day's signal would depend on that day's own reading and step."
+  "explanation": "A point strictly outside its limits signals, so a reading on the limit sits inside. The same boundary rule holds on a Tukey fence, on a Hampel threshold and at maxStep, where a value on the line is inside. Nothing about a value on a limit is refused, and the next day's signal would depend on that day's own reading and step."
  },
  {
   "prompt": "On NIST/SEMATECH 6.3.2.2's flow rate data, what does the engine return beside the printed page?",

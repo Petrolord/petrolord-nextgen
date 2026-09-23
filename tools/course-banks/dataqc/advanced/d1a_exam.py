@@ -30,7 +30,7 @@ q(3, "Can the moving range chart on EKENE-3 ever signal low?",
  ["Yes, whenever two neighbouring days read the same value, since a moving range of zero lies on the lower limit",
   "Yes, on any day whose step is smaller than MRbar, 4.257143 psi, the average step of phase one",
   "Yes, below minus 13.908086 psi, the mirror of the upper limit that the chart draws around zero"],
- "The moving range chart has upper limit 3.267 MRbar and lower limit 0, and a point strictly outside its limits signals. A moving range is an absolute value, so it can reach 0 and never pass below it, and a point on a limit is inside. Most steps are smaller than MRbar by design, and the band has no negative half.")
+ "The moving range chart has upper limit 3.267 MRbar and lower limit 0, and a point strictly outside its limits signals. A moving range is an absolute value, so it can reach 0 and never pass below it, and a point on a limit is inside. A step smaller than MRbar is ordinary, since MRbar is the average step, and the band has no negative half.")
 
 # --- the EWMA chart (m02) ---
 q(1, "The day 8 glitch reaches the smoothed chart. Which monitored days end up above its upper limit of 615.154063?",
@@ -47,12 +47,12 @@ q(0, "The engine's first EWMA values on NIST 6.3.2.4's example are 50.600000, 49
   "Zero, from which the EWMA climbs towards the data over the first few samples of the chart"],
  "EWMA_t = lambda x_t + (1 - lambda) EWMA_(t-1), starting at EWMA_0 = the target, and the NIST example is run at lambda 0.3 with a target of 50. The engine never estimates a starting value from the data it monitors, and a start at zero would put the first EWMA far below 50.600000.")
 
-q(2, "EKENE-3's exact EWMA limits start narrow and widen. On which day do they first agree with the asymptotic 607.605937 and 615.154063 to six decimals?",
- "Day 35",
- ["Day 1, since the exact variance factor starts at its final value",
-  "Day 10, the day the EWMA first falls back inside the limits after the glitch",
-  "Never, since 1 - (1 - lambda)^(2t) stays below 1 on every day"],
- "The course's table prints the exact pair as 607.605938 and 615.154062 on days 32 to 34 and as 607.605937 and 615.154063 from day 35. On day 1 the exact pair is 609.115562 and 613.644438. The factor stays below 1, and at six decimals the difference vanishes by day 35. Day 10 is when the EWMA returns inside, which does not move a limit.")
+q(2, "EKENE-3's exact EWMA limits start narrow and widen towards the asymptotic 607.605937 and 615.154063. On which of the forty days does the exact band reach the asymptotic band?",
+ "None of them: the factor 1 - (1 - lambda)^(2t) stays below 1, so the exact band sits inside on every day",
+ ["Day 35, the first day the table prints the exact pair as 607.605937 and 615.154063, so the bands have met",
+  "Day 1, since the exact variance factor starts at its final value and the two bands begin as one",
+  "Day 22, when the exact lower limit of 607.606040 comes down to meet the asymptotic 607.605937"],
+ "The exact limits multiply the variance by 1 - (1 - lambda)^(2t), which is below 1 for every t, so the exact pair lies inside the asymptotic pair on every day. From day 35 the gap is too small to show at six decimals, and the table prints the two pairs alike: that match is in the printing. On day 1 the exact pair is 609.115562 and 613.644438, and on day 22 the exact lower limit, 607.606040, is still inside 607.605937.")
 
 q(3, "Suppose the EKENE-3 plan had chosen a smoothing constant of 0.500000. What half-width, first low day and count of signalling days would its chart show?",
  "A half-width of 6.536869 psi, a first low signal on day 22 and 5 days signalling",
@@ -67,7 +67,7 @@ q(1, "The individuals chart on phase one's standard and the EWMA at lambda 0.2 b
  ["The individuals chart, since from day 27 every reading falls below its lower limit of 600.057812",
   "Both of them, since the two charts share phase one's target and sigma",
   "Neither, since each signals low only once, on the first day of a shift"],
- "The course lists EWMA low signals on 22, 27 to 34, 36 and 38. The course lists day 22 as the individuals chart's only individuals-below-lcl, and the course counts its low signals from day 16 to day 40 as 1. Readings from day 27 are mostly above 600.057812, day 27 at 601.900000 among them. Sharing a standard does not give the charts the same statistic.")
+ "The course lists EWMA low signals on 22, 27 to 34, 36 and 38. The course lists day 22 as the individuals chart's only individuals-below-lcl, and the course counts its low signals from day 16 to day 40 as 1. Every reading from day 27 to day 34 lies above 600.057812, the lowest being day 27's 601.900000. Sharing a standard does not give the charts the same statistic.")
 
 # --- the tabular CUSUM (m03) ---
 q(0, "Group 11 of the NIST page leaves the lower sum at 0.312500, and group 12 reads 0.150000 above the target of 325. Where does the lower sum go?",
@@ -75,7 +75,7 @@ q(0, "Group 11 of the NIST page leaves the lower sum at 0.312500, and group 12 r
  ["0.312500, since a reading above the target leaves the lower sum where it stood",
   "0.150000, since S_lo takes the size of the latest deviation from the target",
   "0.312500 less 0.150000, since S_lo simply takes off a reading's excess over target"],
- "The course's recursion floors S_lo at zero. 0.312500 plus 325 less 0.317500 less the group 12 reading is negative, because that reading sits 0.150000 above target, so the printed S_lo at group 12 is 0.000000. A reading above target always pulls S_lo down, and k is subtracted in the recursion. The sum is floored at zero; it never holds its value.")
+ "The course's recursion floors S_lo at zero. 0.312500 plus 325 less 0.317500 less the group 12 reading is negative, because that reading sits 0.150000 above target, so the printed S_lo at group 12 is 0.000000. A reading above target never raises S_lo, and k is subtracted in the recursion. The sum is floored at zero; it never holds its value.")
 
 q(3, "By the fortieth monitored day, where have the lower tabular sum and the running total of x - target ended up?",
  "S_lo 62.324215 and a cumulative sum of -56.800000",
@@ -169,7 +169,7 @@ q(3, "EKENE-3's uniqueness row fails 6 of 13 names. What pairs does `duplicateId
 # --- designing a QC policy (m05) ---
 # CROSS m05 + m03
 q(0, "A policy copies the refusal's rule of thumb, k 0.5 and h 4, into a CUSUM whose inputs are read in psi. What does that chart do on EKENE-3?",
- "It first signals high on day 4, before the day 8 glitch, and flags 45 days where the sigma reading flags 28",
+ "It first signals high on day 4, before the day 8 glitch, and returns 45 flags where the sigma reading returns 28",
  ["It signals exactly as the sigma chart does, since the rule of thumb works in either unit",
   "It signals less often, since 0.5 psi is a looser allowance than 0.5 sigma",
   "It refuses, since psi is not one of the units the engine lists for k and h"],
@@ -233,12 +233,12 @@ q(0, "EKENE-7's gamma ray, sentinel converted, is checked for coverage of 8400 t
  "At a half-foot maxStep the gamma ray covers 0.991304 with one hole where the depth index skips a sample, and at one foot the same step covers and coverage is 1.000000. A step equal to maxStep covers, inclusive. 0.983333 is completeness over the whole log, which counts present values without looking at the index.")
 
 # CROSS m01 + m05
-q(1, "Across the engine, where does a value that lands exactly on a limit fall?",
- "Inside: every flag fires strictly beyond its limit, on a control limit, a Tukey fence or a Hampel threshold alike",
+q(1, "Where does a value that lands exactly on a control limit, a Tukey fence or a Hampel threshold fall?",
+ "Inside, on all three: each of them flags only a value strictly beyond its limit",
  ["Outside, since the engine counts a value on a limit as having reached it",
   "Outside on the control charts and inside on the outlier tests",
   "It depends on the limit's source, NIST or Petrolord, as each basis states"],
- "A point strictly outside its limits signals. A golden case with values on both Tukey fences flags nothing, and a value exactly on its Hampel threshold is not flagged. In coverage a step equal to maxStep covers. The rule is the same on every check in the engine, whoever chose the limit.")
+ "A point strictly outside its limits signals. A golden case with values on both Tukey fences flags nothing, and a value exactly on its Hampel threshold is not flagged. In coverage a step equal to maxStep covers. The rule holds whoever chose the limit. A definitional minimum marked exclusive works the other way: the resistivity minimum itself is not allowed, so RT at 0 on entry 120 is flagged.")
 
 # CROSS m01 + m02
 q(2, "The individuals chart takes its centre from the data unless a standard is passed. What does `ewmaChart` do with its centre?",
@@ -304,7 +304,7 @@ q(3, "EKENE-3's ten gauge readings are run through every Professional method at 
  ["All five, the z-score included, since 240.100000 sits far from every other one of the ten readings",
   "Only the modified z-score, since the others measure against a mean the glitch sets",
   "The z-score and Grubbs, since both use the sample SD of all ten readings"],
- "The course's gauge row: z beyond 3 none; modified z 7; the fences 7; Hampel 1 and 7; Grubbs 7. The z-score cannot pass 3 at ten readings. Grubbs rejects: its critical value at n = 10, 2.289954 two-sided, sits under the ceiling that holds z below 3.")
+ "The course's gauge row: z beyond 3 none; modified z 7; the fences 7; Hampel 1 and 7; Grubbs 7. The z-score cannot pass 3 at ten readings. Grubbs rejects: its G is the largest |z|, 2.845783 here, and its two-sided critical value at n = 10 and alpha 0.05 is 2.289954, a line the ceiling of 2.846050 leaves room to pass.")
 
 q(0, "EKENE-7's gamma ray spike at entry 70 reads 95.420000 gAPI inside an oil sand. Why does the Hampel window flag it while the global z-score does not?",
  "The z-score is 1.058062 against the whole log, shale included, while the window median beside it is 37.000000",

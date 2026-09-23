@@ -62,7 +62,7 @@ q(2, "The same forty monitored days are charted on their own averages, with no s
  ["A centre of 611.380000, the in-control history's, which the chart always uses",
   "A centre of 609.960000 and signals on days 8, 9, 22, 23 and 25, since the centre moved while the limits kept phase one's",
   "A refusal naming `centre`, because an individuals chart without a standard has no in-control history to draw on"],
- "Centre and MRbar default to the data's own averages. The forty days include the shift from day 16, so the centre moves down to 609.960000, the limits widen, and only the glitch on day 8 and the step back on day 9 remain. 611.380000 is phase one's centre and is used only when passed as a standard. The limits move with the new MRbar, and the chart accepts no standard without refusing: that requirement belongs to EWMA's target.")
+ "Centre and MRbar default to the data's own averages. The forty days include the shift from day 16, so the centre moves down to 609.960000, the limits widen, and only the glitch on day 8 and the step back on day 9 remain. 611.380000 is phase one's centre and is used only when passed as a standard. The limits move with the new MRbar, and a call with no standard is accepted; the refusal of a missing target belongs to the EWMA chart.")
 
 q(3, "Against phase one's limits, which monitored day is the individuals chart's only low signal?",
  "Day 22, at 598.600000 psig, below 600.057812",
@@ -83,7 +83,7 @@ q(1, "A monitored reading lands exactly on phase one's upper limit, 622.702188 p
  ["individuals-above-ucl, because a point on its limit is counted with the points beyond it on this chart",
   "A refusal naming the entry, since a value on a limit sits on neither side",
   "individuals-above-ucl on that day and again on the next day"],
- "A point strictly outside its limits signals, so a reading on the limit sits inside. The same boundary rule runs through the engine: on a Tukey fence, on a Hampel threshold or at maxStep is inside. Nothing about a value on a limit is refused, and the next day's signal would depend on that day's own reading and step.")
+ "A point strictly outside its limits signals, so a reading on the limit sits inside. The same boundary rule holds on a Tukey fence, on a Hampel threshold and at maxStep, where a value on the line is inside. Nothing about a value on a limit is refused, and the next day's signal would depend on that day's own reading and step.")
 
 q(3, "On NIST/SEMATECH 6.3.2.2's flow rate data, what does the engine return beside the printed page?",
  "An upper limit of 55.804090 against the printed 55.8041, and 0 flags",

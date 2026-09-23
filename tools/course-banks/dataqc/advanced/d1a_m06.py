@@ -29,7 +29,7 @@ q(1, "The NIST CUSUM page prints a \"325 - k - x\" column reading 0.54 and 0.47 
  ["It is the engine's S_lo column rounded to two decimals, and the course reproduces it to the printed digits",
   "It is the plain cumulative sum at those groups, which the engine returns beside the tabular sums",
   "It is the design line's h at those groups, derived again from alpha and beta at each step of the table"],
- "The course derives the entries with the printed k as -0.542500 and -0.467500, a minus sign the printed column lacks, and gives the engine's S_lo at groups 9 and 12 as 0.172500 and 0.000000. Nothing in the engine is compared with the column. The plain cumulative sum at group 12 is -2.500000, and the design line gives one h, which the engine does not compute.")
+ "The course derives the entries with the printed k as -0.542500 and -0.467500, a minus sign the printed column lacks, and gives the engine's S_lo at groups 9 and 12 as 0.172500 and 0.000000. Nothing in the engine is compared with the column. The plain cumulative sum at group 12 is -2.500000, and the design line gives h for the whole table, with no value per group, and the engine does not compute it.")
 
 q(3, "EKENE-7's core plugs are given a second high plug at entry 2, and Grubbs no longer rejects. What does the engine offer for several outliers?",
  "Nothing built: Grubbs tests for one, and the generalised ESD test that NIST points to is not built",

@@ -77,7 +77,7 @@ q(3, "A tabular sum on some day equals h exactly. What does the CUSUM return for
  ["A signal, because the engine counts a sum at h together with the sums beyond it",
   "A signal and a reset of the sum to zero",
   "A refusal naming `h`, because a sum equal to the decision interval sits on neither side of it"],
- "A signal is S_hi or S_lo strictly above h, the same boundary rule as every flag in the engine. A sum at h is inside. The engine never resets a sum after a signal, and nothing about a sum's value is refused; refusals are about inputs, such as a missing k, h or unit.")
+ "A signal is S_hi or S_lo strictly above h, the same boundary rule as the control limits, the Tukey fences and the Hampel threshold. A sum at h is inside. The engine never resets a sum after a signal, and nothing about a sum's value is refused; refusals are about inputs, such as a missing k, h or unit.")
 
 q(1, "NIST 6.3.2.3's design line, h = (2 / delta^2) ln((1 - beta) / alpha) k, is fed the page's own alpha 0.0027, beta 0.01, delta 1 and k 0.317500. What does it give, and what does the engine do about it?",
  "3.749328, or 4.189476 with alpha halved, neither of them the table's 4.195900; the engine has no design helper and reproduces the table from the printed k and h",

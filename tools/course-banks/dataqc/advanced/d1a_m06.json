@@ -30,7 +30,7 @@
    "It is the design line's h at those groups, derived again from alpha and beta at each step of the table"
   ],
   "answer": 1,
-  "explanation": "The course derives the entries with the printed k as -0.542500 and -0.467500, a minus sign the printed column lacks, and gives the engine's S_lo at groups 9 and 12 as 0.172500 and 0.000000. Nothing in the engine is compared with the column. The plain cumulative sum at group 12 is -2.500000, and the design line gives one h, which the engine does not compute."
+  "explanation": "The course derives the entries with the printed k as -0.542500 and -0.467500, a minus sign the printed column lacks, and gives the engine's S_lo at groups 9 and 12 as 0.172500 and 0.000000. Nothing in the engine is compared with the column. The plain cumulative sum at group 12 is -2.500000, and the design line gives h for the whole table, with no value per group, and the engine does not compute it."
  },
  {
   "prompt": "EKENE-7's core plugs are given a second high plug at entry 2, and Grubbs no longer rejects. What does the engine offer for several outliers?",

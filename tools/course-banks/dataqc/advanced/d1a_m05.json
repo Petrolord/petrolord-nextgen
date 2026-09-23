@@ -151,7 +151,7 @@
    "individualsChart sees the glitch; ewmaChart and cusumChart see the shift"
   ],
   "answer": 3,
-  "explanation": "The course's last row names individualsChart for the glitch and ewmaChart and cusumChart for the shift. The course adds the counts: the individuals chart signals low on 1 day from day 16 to day 40, where one day falls past three sigma. Outlier tests read values as a set with no order. The shift is a run of days, and the glitch is one reading."
+  "explanation": "The course's last row names individualsChart for the glitch and ewmaChart and cusumChart for the shift. The course adds the counts: the individuals chart signals low on 1 day from day 16 to day 40, where one day falls past three sigma. The z-score and the modified z-score read values as a set with no order. The shift is a run of days, and the glitch is one reading."
  },
  {
   "prompt": "Which of these settings, left unset, is a Petrolord choice with no published source behind it?",

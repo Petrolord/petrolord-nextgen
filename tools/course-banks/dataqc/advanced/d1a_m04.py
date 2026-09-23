@@ -72,7 +72,7 @@ q(0, "Which dimension adds least to EKENE-3's total at the stated weights 3, 2, 
   "Consistency, with 0.219668, since it failed on only 1 day and so contributes least to what the total measures"],
  "The contribution is the score times its normalised weight: uniqueness is 0.538462 times 0.111111, the printed 0.059829, the smallest of the five. Plausibility has the same weight and a far higher score, 0.977011, so its 0.108557 is larger. Completeness contributes the most, 0.322222. Consistency's 0.219668 is the second largest; a low failure count raises a contribution.")
 
-q(2, "Beside its total of 0.927390 at the stated weights, which other output comes back from the call?",
+q(2, "Beside its total of 0.927390 at the stated weights, which of these also comes back from the call?",
  "The weakest dimension, and nothing that grades the total",
  ["A confidence interval on the total, drawn from the counts checked in each of the five dimensions",
   "A ranking of all five dimensions, strongest first",

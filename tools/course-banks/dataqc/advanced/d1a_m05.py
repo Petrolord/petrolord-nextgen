@@ -107,7 +107,7 @@ q(3, "EKENE-3's pressure carries two planted events: a glitch on day 8, and a sh
  ["individualsChart sees both, since the glitch and the shift each carry the pressure past three sigma",
   "zScores sees the glitch and the modified z-score sees the shift, since both events are single values",
   "ewmaChart sees the glitch and individualsChart the shift, since the shift is the larger of the two events"],
- "The course's last row names individualsChart for the glitch and ewmaChart and cusumChart for the shift. The course adds the counts: the individuals chart signals low on 1 day from day 16 to day 40, where one day falls past three sigma. Outlier tests read values as a set with no order. The shift is a run of days, and the glitch is one reading.")
+ "The course's last row names individualsChart for the glitch and ewmaChart and cusumChart for the shift. The course adds the counts: the individuals chart signals low on 1 day from day 16 to day 40, where one day falls past three sigma. The z-score and the modified z-score read values as a set with no order. The shift is a run of days, and the glitch is one reading.")
 
 q(2, "Which of these settings, left unset, is a Petrolord choice with no published source behind it?",
  "frozenRuns minRun 5, the run length a stuck value needs before it is flagged",

@@ -30,7 +30,7 @@ q(0, "A call to `ewmaChart` passes a target, a sigma and the series, and leaves 
   "The engine uses lambda 1, which reduces the chart to the individuals chart"],
  "NO ENGINE DEFAULT FOR LAMBDA. A call without it is refused and the field is named. 0.2 is the value stated for the EKENE-3 chart, 0.3 is NIST's example, and lambda 1 is a legal input the caller would have to choose; none of them is supplied for the caller. The refusal's advice about 0.2 to 0.3 is advice, and the choice stays with the plan.")
 
-q(2, "Which EWMA inputs does the engine decline to estimate from the monitored series itself?",
+q(2, "Which EWMA inputs must come from historical in-control data, and are never estimated from the monitored series itself?",
  "The target and sigma, both of which are required and come from historical in-control data",
  ["None of them: every input falls back to the monitored series, the way the individuals chart's centre does",
   "Only L, which has no default because NIST prints several multipliers",
@@ -49,7 +49,7 @@ q(3, "On day 1 the exact limits read 609.115562 and 613.644438 psig, inside the 
  ["The engine narrows the exact limits on any day the EWMA has not yet signalled, and widens them after a signal",
   "The exact limits use the first day's reading as sigma, which is a smaller spread than phase one's MRbar / 1.128",
   "The exact limits apply a smaller L on the early days and move to L 3 once the chart has run for a week"],
- "The digest's method line: the exact limits multiply the variance by 1 - (1 - lambda)^(2t). At t = 1 the factor is small, so the band is narrow, and it approaches the asymptotic pair as t grows; by day 35 the two agree to six decimals. The limits depend on t, lambda, L, target and sigma only. A signal does not move them, sigma is phase one's throughout, and L stays at its stated value.")
+ "The digest's method line: the exact limits multiply the variance by 1 - (1 - lambda)^(2t). At t = 1 the factor is small, so the band is narrow, and it approaches the asymptotic pair as t grows; from day 35 the two print alike at six decimals, while the factor stays below 1 on every day. The limits depend on t, lambda, L, target and sigma only. A signal does not move them, sigma is phase one's throughout, and L stays at its stated value.")
 
 q(1, "EKENE-3's forty monitored days are run once with asymptotic limits and once with exact limits. Which days signal in each run?",
  "The same days in both: high on 8, 9, 13 and 14, and low on 22, 27 to 34, 36 and 38",
@@ -77,7 +77,7 @@ q(3, "Day 8's reading enters EKENE-3's EWMA at lambda 0.2. What weight does it s
  ["0.200000, since a reading keeps its entry weight lambda for as long as the chart runs",
   "None, since by day 10 the EWMA of 614.813527 is back inside the limits and the glitch is forgotten",
   "0.065536 of the day 13 reading, since the weight passes to whichever reading is the newest"],
- "Derived in A reading enters with weight lambda, 0.200000, and keeps lambda (1 - lambda)^(t - 8) on day t, which is 0.065536 on day 13. The weight shrinks by a factor of 1 - lambda a day and never reaches zero, so the glitch still lifts the EWMA on day 13 when it signals high again. The weight belongs to day 8's reading and never passes to another.")
+ "The course derives it: a reading enters with weight lambda, 0.200000, and keeps lambda (1 - lambda)^(t - 8) on day t, which is 0.065536 on day 13. The weight shrinks by a factor of 1 - lambda a day and never reaches zero, so the glitch still lifts the EWMA on day 13 when it signals high again. The weight belongs to day 8's reading and never passes to another.")
 
 q(0, "Across the table of lambda on EKENE-3, which setting gives the latest first low signal, and how many days does it signal on?",
  "lambda 0.100000: first low signal on day 28, and 18 days signalling, the most in the table",
