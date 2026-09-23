@@ -49,7 +49,7 @@ q(3, "The series 5, 5, 5, 6, 7 is passed to `modifiedZScores`. What does the eng
  ["It falls back to the sample SD and reports the result as a modified z-score.",
   "It returns an M of zero for every entry, since each sits within one MAD.",
   "It flags 6 and 7, the only values that are not equal to the median."],
- "The refusal table and the median and MAD module: three of the five values equal the median, so the MAD is 0 and the engine refuses with \"values have MAD = 0: at least half the present values equal the median, so the modified z-score is undefined\". The engine notes lists a fallback for a MAD of zero as not built.")
+ "The refusal table and the median and MAD module: three of the five values equal the median, so the MAD is 0 and the engine refuses with \"values have MAD = 0: more than half the present values equal the median, so the modified z-score is undefined\". The engine notes lists a fallback for a MAD of zero as not built.")
 
 q(0, "The series 5, 5, 5, 6, 7 has a spread, yet its median absolute deviation is zero. What makes it zero?",
  "Three of the five values sit on the median, 5, so the middle absolute deviation is 0.",

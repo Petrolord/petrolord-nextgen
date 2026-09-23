@@ -63,7 +63,7 @@
    "It refuses, naming the field `values`, because the MAD is zero."
   ],
   "answer": 3,
-  "explanation": "The refusal table and the median and MAD module: three of the five values equal the median, so the MAD is 0 and the engine refuses with \"values have MAD = 0: at least half the present values equal the median, so the modified z-score is undefined\". The engine notes lists a fallback for a MAD of zero as not built."
+  "explanation": "The refusal table and the median and MAD module: three of the five values equal the median, so the MAD is 0 and the engine refuses with \"values have MAD = 0: more than half the present values equal the median, so the modified z-score is undefined\". The engine notes lists a fallback for a MAD of zero as not built."
  },
  {
   "prompt": "The series 5, 5, 5, 6, 7 has a spread, yet its median absolute deviation is zero. What makes it zero?",

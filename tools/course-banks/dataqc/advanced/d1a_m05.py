@@ -33,7 +33,7 @@ q(0, "EKENE-7's gamma ray carries -999.25 at entries 236 to 239. Why does a poli
  "Missing is null, undefined or NaN, and -999.25 is a present number until someone converts it, so completeness reads 1.000000 and the range check reads 4 failures below the gamma ray minimum. The course draws the order from that. No check converts anything: the conversion is the caller's, and converted to null the channel reads 0.983333 and 0 range failures.")
 
 q(2, "The modified z-score is run on EKENE-7's sonic, entries 174 to 189, which hold the stuck run. What does the engine return?",
- "A refusal: values have MAD = 0: at least half the present values equal the median, so the modified z-score is undefined",
+ "A refusal: values have MAD = 0: more than half the present values equal the median, so the modified z-score is undefined",
  ["A flag on each of the nine stuck entries, since a value repeated nine times is a potential outlier",
   "No flags, since a flat stretch is the quietest possible data and every modified z-score in it is zero",
   "A modified z-score with 1.4826 x MAD as its fallback scale"],
