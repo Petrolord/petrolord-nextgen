@@ -8,7 +8,7 @@
    "The engine rounds G up to 2.4688 before it compares G with the critical 2.031652"
   ],
   "answer": 0,
-  "explanation": "Section 31: truncated rather than rounded; rounded to four decimals the engine reads 2.4688. G uses the sample SD, as NIST defines it. The engine keeps full precision and compares 2.468765 with its critical value of 2.031652, and the test rejects either way, as NIST says. The note is about a published page."
+  "explanation": "Truncated rather than rounded; rounded to four decimals the engine reads 2.4688. G uses the sample SD, as NIST defines it. The engine keeps full precision and compares 2.468765 with its critical value of 2.031652, and the test rejects either way, as NIST says. The note is about a published page."
  },
  {
   "prompt": "NIST 6.3.2.4 prints the EWMA lower limit as 47.4115, and the engine reads 47.411568. Where does the difference come from?",
@@ -19,7 +19,7 @@
    "The page uses L 3 and the engine uses a slightly larger multiplier for the lower limit only"
   ],
   "answer": 2,
-  "explanation": "Section 31's row for 6.3.2.4 names the early rounding of the factor. The engine keeps full precision, and its upper limit, 52.588432, agrees with the printed 52.5884. Both limits in the example are the asymptotic pair, the engine takes s as given, and L is 3 on both sides."
+  "explanation": "The course's row for 6.3.2.4 names the early rounding of the factor. The engine keeps full precision, and its upper limit, 52.588432, agrees with the printed 52.5884. Both limits in the example are the asymptotic pair, the engine takes s as given, and L is 3 on both sides."
  },
  {
   "prompt": "The NIST CUSUM page prints a \"325 - k - x\" column reading 0.54 and 0.47 at groups 9 and 12. How does the course read that column?",
@@ -30,7 +30,7 @@
    "It is the design line's h at those groups, derived again from alpha and beta at each step of the table"
   ],
   "answer": 1,
-  "explanation": "Section 31 derives the entries with the printed k as -0.542500 and -0.467500, a minus sign the printed column lacks, and gives the engine's S_lo at groups 9 and 12 as 0.172500 and 0.000000. Nothing in the engine is compared with the column. The plain cumulative sum at group 12 is -2.500000, and the design line gives one h, which the engine does not compute."
+  "explanation": "The course derives the entries with the printed k as -0.542500 and -0.467500, a minus sign the printed column lacks, and gives the engine's S_lo at groups 9 and 12 as 0.172500 and 0.000000. Nothing in the engine is compared with the column. The plain cumulative sum at group 12 is -2.500000, and the design line gives one h, which the engine does not compute."
  },
  {
   "prompt": "EKENE-7's core plugs are given a second high plug at entry 2, and Grubbs no longer rejects. What does the engine offer for several outliers?",
@@ -41,7 +41,7 @@
    "Nothing built: Grubbs tests for one, and the generalised ESD test that NIST points to is not built"
   ],
   "answer": 3,
-  "explanation": "Section 22: the test is for ONE outlier, and NIST points to the generalised ESD test for several, which the engine does not build. With the second plug, G falls to 2.275359 against a critical 2.507321, because the sample SD rises from 0.019859 to 0.024800. The engine never removes a value and never swaps one test for another; a policy that expects more than one outlier runs a median based test beside Grubbs."
+  "explanation": "The test is for ONE outlier, and NIST points to the generalised ESD test for several, which the engine does not build. With the second plug, G falls to 2.275359 against a critical 2.507321, because the sample SD rises from 0.019859 to 0.024800. The engine never removes a value and never swaps one test for another; a policy that expects more than one outlier runs a median based test beside Grubbs."
  },
  {
   "prompt": "What covariance does the engine's Mahalanobis distance use, and how does its basis block describe it?",
@@ -52,7 +52,7 @@
    "The median covariance of the rows, labelled as the multivariate form of the MAD"
   ],
   "answer": 2,
-  "explanation": "Section 23: each complete row's d^2 uses the classical mean and the SAMPLE covariance S (n - 1), and a robust covariance is not built. Section 31 quotes the label. The classical estimates are themselves pulled by outliers, which is why the label says so. The engine has no median covariance."
+  "explanation": "Each complete row's d^2 uses the classical mean and the SAMPLE covariance S (n - 1), and a robust covariance is not built. The course quotes the label. The classical estimates are themselves pulled by outliers, which is why the label says so. The engine has no median covariance."
  },
  {
   "prompt": "With `sd: 'population'`, the stated series of nine zeros and a one is run through zScores at threshold 2.9. What does the engine return?",
@@ -63,7 +63,7 @@
    "A refusal, since a series that is nine parts zero has zero spread"
   ],
   "answer": 0,
-  "explanation": "Section 31: the ceiling follows the chosen standard deviation. With the population SD it is sqrt(n - 1), 3.000000 at ten values, the threshold 2.9 is reachable, and the one reaches z 3.000000 and is flagged. With the sample SD the same ten values reach 2.846050 at most. The spread is not zero, since one value differs."
+  "explanation": "The ceiling follows the chosen standard deviation. With the population SD it is sqrt(n - 1), 3.000000 at ten values, the threshold 2.9 is reachable, and the one reaches z 3.000000 and is flagged. With the sample SD the same ten values reach 2.846050 at most. The spread is not zero, since one value differs."
  },
  {
   "prompt": "A flag's reason sentence prints its computed statistic as the shortest decimal that reads back to the field, which can run to every digit. How does a quality note quote the figure?",
@@ -74,7 +74,7 @@
    "It quotes the numeric field at six decimals, and a reason only verbatim, as the engine's own words"
   ],
   "answer": 3,
-  "explanation": "Section 31: a reason string prints every figure as the shortest decimal that reads back to its field, so the population z example's reason prints the statistic with all its digits while its `statistic` field at six decimals is 3.000000. A note quotes the field at the digest's precision and quotes a reason only as the engine's own words. The field and the reason hold the same number."
+  "explanation": "A reason string prints every figure as the shortest decimal that reads back to its field, so the population z example's reason prints the statistic with all its digits while its `statistic` field at six decimals is 3.000000. A note quotes the field at the digest's precision and quotes a reason only as the engine's own words. The field and the reason hold the same number."
  },
  {
   "prompt": "Two variables with very small variance in the caller's units are passed to `mahalanobis`, and it refuses them as singular. What should a reader of that refusal know?",
@@ -85,7 +85,7 @@
    "The refusal comes from the chi-square cutoff, which cannot be formed when a variance is small"
   ],
   "answer": 1,
-  "explanation": "Section 31: the Mahalanobis refusal for a singular covariance uses an absolute pivot test inside lib/linalg; variables with very small variance in the caller's units can be refused as singular, and rescaling avoids it. The engine does not rescale, and the chi-square cutoff depends only on alpha and the degrees of freedom."
+  "explanation": "The Mahalanobis refusal for a singular covariance uses an absolute pivot test inside lib/linalg; variables with very small variance in the caller's units can be refused as singular, and rescaling avoids it. The engine does not rescale, and the chi-square cutoff depends only on alpha and the degrees of freedom."
  },
  {
   "prompt": "The Hampel decision is imported from the petrophysics engine, whose own entry point turns a null into 0. What does that do to `hampel` in the quality engine?",
@@ -96,7 +96,7 @@
    "Missing samples are judged as zeros and flagged, which is why the 11 flags include gap edges"
   ],
   "answer": 2,
-  "explanation": "Section 31: hampel converts missing values to NaN before the call, so this engine is unaffected. Section 21 confirms it: missing values never enter a window, entry 80 of the density is missing and not judged, and entry 79 beside the gap is judged on 4 present samples. The engine refuses no null here; the chart refusal of a gap belongs to the control charts."
+  "explanation": "Hampel converts missing values to NaN before the call, so this engine is unaffected. The course confirms it: missing values never enter a window, entry 80 of the density is missing and not judged, and entry 79 beside the gap is judged on 4 present samples. The engine refuses no null here; the chart refusal of a gap belongs to the control charts."
  },
  {
   "prompt": "EKENE-7's sonic is range-checked with its unit declared as us/m in place of us/ft. What does `rangeCheck` return, and what does that say?",
@@ -107,7 +107,7 @@
    "240 checked and 0 failed, which confirms that the sonic was in us/m all along"
   ],
   "answer": 0,
-  "explanation": "Section 8: the same sonic declared in us/m passes 240 checked with 0 failed, because the definitional limit is positive in either unit. The engine carries no plausibility range and converts nothing. A pass says the values are positive; it says nothing about which unit they are in, so it confirms nothing about the label."
+  "explanation": "The same sonic declared in us/m passes 240 checked with 0 failed, because the definitional limit is positive in either unit. The engine carries no plausibility range and converts nothing. A pass says the values are positive; it says nothing about which unit they are in, so it confirms nothing about the label."
  },
  {
   "prompt": "A caller wants to flag gamma ray readings above 150 gAPI on EKENE-7. Where does that limit come from, and what does the engine record?",
@@ -118,7 +118,7 @@
    "The caller cannot supply one, since the engine refuses any limit that is not definitional"
   ],
   "answer": 1,
-  "explanation": "Section 7: plausibility ranges are the caller's, passed as min and max and checked the same way; the basis source reads limits supplied by the caller, and GR with its sentinel converted reads 236 checked and 0 failed at 0 to 150. The definitional gamma ray limit has a minimum of 0 and no maximum. Section 31 lists plausibility ranges for any basin or tool as not built."
+  "explanation": "Plausibility ranges are the caller's, passed as min and max and checked the same way; the basis source reads limits supplied by the caller, and GR with its sentinel converted reads 236 checked and 0 failed at 0 to 150. The definitional gamma ray limit has a minimum of 0 and no maximum. The course lists plausibility ranges for any basin or tool as not built."
  },
  {
   "prompt": "A draft quality note says entry 7 of EKENE-3's gauge readings \"is an outlier\". What does the course's vocabulary ask of that sentence?",
@@ -129,7 +129,7 @@
    "That it names the rule: the modified z-score flags entry 7 at 186.162000, beyond 3.5, as a potential outlier"
   ],
   "answer": 3,
-  "explanation": "Section 32: an outlier is a value a STATED RULE flags; say which rule, and the engine's word for the modified z is potential outlier. Section 18 prints entry 7's modified z as 186.162000. The z-score does not flag it: 2.845783 is under 3, and at ten readings no z can pass 3. Missing is null, undefined or NaN, and a flag is a question about the value; the engine deletes nothing."
+  "explanation": "An outlier is a value a STATED RULE flags; say which rule, and the engine's word for the modified z is potential outlier. The course prints entry 7's modified z as 186.162000. The z-score does not flag it: 2.845783 is under 3, and at ten readings no z can pass 3. Missing is null, undefined or NaN, and a flag is a question about the value; the engine deletes nothing."
  },
  {
   "prompt": "A quality note wants to report the gamma ray's upper quartile on EKENE-7's water sand. How does the course's vocabulary say it should be named?",
@@ -140,7 +140,7 @@
    "By its rank in the sample, since a quantile rule is a spreadsheet detail with no bearing on the value"
   ],
   "answer": 0,
-  "explanation": "Section 32: a quantile at a stated probability by a stated rule (R6, R7 or R8); no P label is used anywhere in this course, since P labels differ between exceedance and non-exceedance conventions. Section 19 prints the third quartile as 38.642500 by R7, 38.737500 by R6 and 38.725833 by R8, so the rule changes the value."
+  "explanation": "A quantile at a stated probability by a stated rule (R6, R7 or R8); no P label is used anywhere in this course, since P labels differ between exceedance and non-exceedance conventions. The course prints the third quartile as 38.642500 by R7, 38.737500 by R6 and 38.725833 by R8, so the rule changes the value."
  },
  {
   "prompt": "The cumulative oil flag's reason, in the engine's words, reads \"cumulative falls from 1338506.2 at entry 67 to 1331009.5\". Which day is entry 67, and which day is flagged?",
@@ -151,7 +151,7 @@
    "Entry 67 is day 68; the flag falls on day 70, compared with day 68"
   ],
   "answer": 3,
-  "explanation": "Section 11: the engine counts entries from 0, so entry 67 in the reason is day 68. Day 69 is missing, so day 70 is compared with the last present value, day 68, and the `drop` field is 7496.700000 bbl. Entries are positions, one per day, and a missing value keeps its position."
+  "explanation": "The engine counts entries from 0, so entry 67 in the reason is day 68. Day 69 is missing, so day 70 is compared with the last present value, day 68, and the `drop` field is 7496.700000 bbl. Entries are positions, one per day, and a missing value keeps its position."
  },
  {
   "prompt": "On EKENE-3, day 47's oil rate of -18.500000 bbl/d is flagged negative-rate. What does the flag tell the reader about the value?",
@@ -162,6 +162,6 @@
    "That the value is missing, since a negative rate cannot be a reading and the engine treats it as absent"
   ],
   "answer": 2,
-  "explanation": "Section 1: the engine does not decide whether a flagged value is wrong; a flag is a rule that fired, with its reason. Section 2 states day 47 is an allocation back-out booked as -18.5 bbl/d, a real entry. The engine does not fill, repair or delete a value, and a negative number is present: missing is null, undefined or NaN."
+  "explanation": "The engine does not decide whether a flagged value is wrong; a flag is a rule that fired, with its reason. The course states day 47 is an allocation back-out booked as -18.5 bbl/d, a real entry. The engine does not fill, repair or delete a value, and a negative number is present: missing is null, undefined or NaN."
  }
 ]
