@@ -115,7 +115,7 @@ q(3, "EKENE-3's day 1 reads 615.500000 psig. With target 611.380000 and k 1.8870
 
 q(2, "On the NIST CUSUM table, S_hi first passes h at group 14 with 4.940000. What does it read at group 15, where x - 325 = 2.825000?",
  "7.447500, since the sum carries on from 4.940000 with no reset",
- ["2.507500, since the engine restarts the sum at zero after a signal and adds only group 15",
+ ["A smaller sum, since the engine restarts at zero after a signal and adds only group 15",
   "2.825000, the latest deviation alone",
   "4.940000, since the sum is held at its signalling value until an operator clears it"],
  "No reset after a signal. 4.940000 plus 2.825000 less 0.317500 is the printed 7.447500. A restart would give a different and smaller figure, and the engine has no hold state; the recursion runs on every group, and the signal is reported beside the sum.")
