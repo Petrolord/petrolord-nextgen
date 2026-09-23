@@ -4,7 +4,7 @@
 
 # PRECISION. Every measured value, statistic, limit, fraction, score, step and difference prints to SIX decimals; counts, entry numbers and days are whole numbers; relative differences print in exponent form.
 
-# ENGINE. engines/dataai/quality.js, vendored sha-identical with petrolord-engines a4e9592, 1090 lines. It imports lib/stats (mean, median, standard deviations), engines/petrophysics/conditioning.js (despikeHampel), engines/hse/safetyStats.js (chiSquareQuantile, logGamma) and lib/linalg/solveDense.js. The vendored golden test-data/dataai/goldens/quality_cases.json carries 402 cases, 46 of them refusals and 8 of them NIST/SEMATECH published anchors, written by the standard library oracle.
+# ENGINE. engines/dataai/quality.js, vendored sha-identical with petrolord-engines c7eba22, 1095 lines. It imports lib/stats (mean, median, standard deviations), engines/petrophysics/conditioning.js (despikeHampel), engines/hse/safetyStats.js (chiSquareQuantile, logGamma) and lib/linalg/solveDense.js. The vendored golden test-data/dataai/goldens/quality_cases.json carries 406 cases, 48 of them refusals and 8 of them NIST/SEMATECH published anchors, written by the standard library oracle.
 
 # WHAT IS NEVER IN THIS FILE. No capstone field, no capstone well, no capstone series and no graded answer. The capstones run their own datasets and the digest never names them.
 
@@ -173,7 +173,7 @@ Each row is a real call. The message column is the engine's `error` string, verb
 | `frozenRuns` | a run of one | `minRun` | minRun must be a whole number, 2 or more |
 | `duplicateIdentifiers` | no names | `ids` | ids must be a non-empty array of strings |
 | `zScores` | no spread | `values` | values have zero spread: every present value is the same, so a z-score is undefined |
-| `modifiedZScores` | a MAD of zero | `values` | values have MAD = 0: at least half the present values equal the median, so the modified z-score is undefined |
+| `modifiedZScores` | a MAD of zero | `values` | values have MAD = 0: more than half the present values equal the median, so the modified z-score is undefined |
 | `iqrFences` | a multiplier of zero | `k` | k must be a finite number above zero |
 | `hampel` | a half window of zero | `halfWindow` | halfWindow must be a whole number, 1 or more (the window is 2 x halfWindow + 1 samples) |
 | `grubbsTest` | alpha as a percentage | `alpha` | alpha must be a significance level strictly between 0 and 1 |
@@ -591,11 +591,11 @@ The mean column is lib/stats `mean`, the function the engine itself imports.
 
 THE PRINTED CONSTANT. The engine uses 0.6745 as printed. Derived: 1 / 1.4826 is 0.674491, and entry 7 on the gauge with that constant would read 186.159450 against the engine's 186.162000. Hampel's scale, 1.4826 x MAD, is the same idea from the other side (section 21).
 
-WHEN THE MAD IS ZERO. At least half the values equal the median, and the engine refuses rather than invent a fallback. On 5, 5, 5, 6, 7 (stated):
+WHEN THE MAD IS ZERO. The MAD is zero exactly when MORE than half the present values equal the median: at least (n + 1) / 2 of them when n is odd, at least n / 2 + 1 when n is even. Exactly half is not enough: on 1, 5, 5, 9 (stated), two of four values sit at the median 5 and the engine returns MAD 2 and scores the series. When the MAD is zero the engine refuses rather than invent a fallback. On 5, 5, 5, 6, 7 (stated), three of five values equal the median:
 
 | function | the engine's refusal, verbatim |
 | --- | --- |
-| `modifiedZScores` | values have MAD = 0: at least half the present values equal the median, so the modified z-score is undefined |
+| `modifiedZScores` | values have MAD = 0: more than half the present values equal the median, so the modified z-score is undefined |
 
 # SECTION 19: Three quantile rules, R6, R7 and R8 (owned by Professional m03)
 
@@ -632,6 +632,16 @@ The flagged entries are EKENE-7 entries, the water sand read from entry 130. Ent
 On the whole log, shale and sand together, the gamma ray fences are -57.070000 and 186.810000 and flag 0 entries: the spike at entry 170 reads 90.590000, inside a spread that includes the shale.
 
 ON THE FENCE IS INSIDE. The golden case iqr-exactly-on-both-fences: values -4, 2, 2, 3, 4, 5, 6, 6, 12 (n = 9), at the defaults, rule R7 and k 1.5. The engine returns Q1 2, Q3 6 and IQR 4, fences -4 and 12, and 0 flags: the lowest and highest values sit exactly on the fences.
+
+WHERE THE BOUNDARY FALLS. The statistical flags (a Tukey fence, a Hampel threshold, a z or modified z threshold, a control limit, a CUSUM decision interval, the Grubbs critical value, the Mahalanobis cutoff) all fire strictly beyond their limit, so a value exactly on the limit is inside. Three Associate checks draw the boundary differently, each on purpose: an EXCLUSIVE definitional minimum flags the bound itself, a frozen-run tolerance includes a value exactly at tolerance, and a coverage step exactly equal to maxStep covers. Each row below is a real call, beside an inclusive maximum and a CUSUM exactly on h for contrast:
+
+| check | what was passed | the engine's answer | what it means |
+| --- | --- | --- | --- |
+| `rangeCheck`, resistivity in ohm.m | a value of 0, its EXCLUSIVE minimum | 1 failed | an exclusive minimum flags the bound itself |
+| `rangeCheck`, fraction in v/v | a value of 1, its inclusive maximum | 0 failed | an inclusive bound is allowed |
+| `frozenRuns`, tolerance 0.5 | 5, 5.5, 5, 5.5, 5, stated | 1 run of 5 | a value exactly at tolerance from the run's first value stays in the run |
+| `coverage`, maxStep 1 | an index 0, 1, 2 with every value present | coverage 1.000000 | a step exactly equal to maxStep covers |
+| `cusumChart`, golden cusum-exactly-on-h | S_hi reaches h = 4 | 0 signals | a CUSUM exactly on h does not signal |
 
 # SECTION 21: The Hampel window: local against global (owned by Professional m04)
 
@@ -1021,7 +1031,7 @@ On the EKENE-7 sonic, entries 174 to 189, which hold the stuck run, the modified
 
 | function | the engine's refusal, verbatim |
 | --- | --- |
-| `modifiedZScores` | values have MAD = 0: at least half the present values equal the median, so the modified z-score is undefined |
+| `modifiedZScores` | values have MAD = 0: more than half the present values equal the median, so the modified z-score is undefined |
 
 # SECTION 31: Reading the engine honestly: printed-figure errata and what is not built (owned by Expert m06 and Professional m06 l01)
 

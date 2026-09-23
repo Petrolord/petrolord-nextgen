@@ -65,9 +65,14 @@ wellhead pressure in two phases.
 2. **Limits are definitional only**, keyed by unit, and a unit the engine does
    not list is refused and never converted. Plausibility ranges are the
    caller's (sections 7 and 8).
-3. **Strictly beyond.** Every flag fires strictly beyond its limit: a value on a
-   Tukey fence, on a Hampel threshold or equal to maxStep in coverage is inside
-   (sections 6, 20 and 21).
+3. **Where the boundary falls.** Every statistical flag (a fence, a Hampel
+   threshold, a z threshold, a control limit, a CUSUM decision interval) fires
+   strictly beyond its limit, so a value exactly on it is inside. Three
+   Associate checks draw the boundary differently, each on purpose: an
+   EXCLUSIVE definitional minimum flags the bound itself (RT of 0 at entry
+   120 fails); a frozen run includes a value exactly at tolerance from the
+   run's first value; a coverage step exactly equal to maxStep covers
+   (sections 6, 7, 14 and 20; the boundary table is in section 20).
 4. **The last present value.** A cumulative is compared with the last present
    value before it: EKENE-3's day 70 falls 7496.700000 bbl against day 68
    (section 11).

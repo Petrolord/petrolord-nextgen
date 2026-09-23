@@ -179,7 +179,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Every measured value, statistic, limit, fraction, score, step and difference prints to SIX decimals; counts, entry numbers and days are whole numbers; relative differences print in exponent form.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines a4e9592, ${engineLines} lines. It imports lib/stats (mean, median, standard deviations), engines/petrophysics/conditioning.js (despikeHampel), engines/hse/safetyStats.js (chiSquareQuantile, logGamma) and lib/linalg/solveDense.js. The vendored golden test-data/dataai/goldens/quality_cases.json carries ${CASES.length} cases, ${refusalsInGolden} of them refusals and ${publishedInGolden} of them NIST/SEMATECH published anchors, written by the standard library oracle.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines c7eba22, ${engineLines} lines. It imports lib/stats (mean, median, standard deviations), engines/petrophysics/conditioning.js (despikeHampel), engines/hse/safetyStats.js (chiSquareQuantile, logGamma) and lib/linalg/solveDense.js. The vendored golden test-data/dataai/goldens/quality_cases.json carries ${CASES.length} cases, ${refusalsInGolden} of them refusals and ${publishedInGolden} of them NIST/SEMATECH published anchors, written by the standard library oracle.`);
 w();
 w('# WHAT IS NEVER IN THIS FILE. No capstone field, no capstone well, no capstone series and no graded answer. The capstones run their own datasets and the digest never names them.');
 w();
@@ -791,7 +791,10 @@ const scale = 1 / K.HAMPEL_MAD_SCALE;
 w(`THE PRINTED CONSTANT. The engine uses ${S(K.MODIFIED_Z_SCALE)} as printed. Derived: 1 / ${S(K.HAMPEL_MAD_SCALE)} is ${f6(scale)}, and entry ${GL} on the gauge with that constant would read ${f6((scale * (G[GL] - mg.median)) / mg.mad)} against the engine's ${f6(mg.scores[GL])}. Hampel's scale, ${S(K.HAMPEL_MAD_SCALE)} x MAD, is the same idea from the other side (${ref('hampel')}).`);
 w();
 const mad0 = refusal('modified z with MAD zero', Q.modifiedZScores({ values: MAD0 }), 'values');
-w(`WHEN THE MAD IS ZERO. At least half the values equal the median, and the engine refuses rather than invent a fallback. On ${MAD0.join(', ')} (stated):`);
+const HALF = [1, 5, 5, 9]; // exactly half the values at the median, stated
+const halfM = success('modified z with exactly half at the median', Q.modifiedZScores({ values: HALF }));
+must('exactly half at the median leaves a positive MAD', halfM.mad > 0, halfM.mad);
+w(`WHEN THE MAD IS ZERO. The MAD is zero exactly when MORE than half the present values equal the median: at least (n + 1) / 2 of them when n is odd, at least n / 2 + 1 when n is even. Exactly half is not enough: on ${HALF.join(', ')} (stated), two of four values sit at the median ${num(halfM.median)} and the engine returns MAD ${num(halfM.mad)} and scores the series. When the MAD is zero the engine refuses rather than invent a fallback. On ${MAD0.join(', ')} (stated), three of five values equal the median:`);
 w();
 table(['function', 'the engine\'s refusal, verbatim'], [['`modifiedZScores`', mad0.error]]);
 
@@ -844,6 +847,28 @@ const onf = golden('iqr-exactly-on-both-fences');
 const onr = success('golden on both fences', Q.iqrFences(onf.args));
 w(`ON THE FENCE IS INSIDE. The golden case ${onf.id}: values ${onf.args.values.map(num).join(', ')} (n = ${onf.args.values.length}), at the defaults, rule ${onr.method} and k ${S(onr.k)}. The engine returns Q1 ${num(onr.q1)}, Q3 ${num(onr.q3)} and IQR ${num(onr.iqr)}, fences ${num(onr.lower)} and ${num(onr.upper)}, and ${onr.flags.length} flags: the lowest and highest values sit exactly on the fences.`);
 must('a value on a fence is not flagged', onr.flags.length === 0 && onf.args.values.includes(onr.lower) && onf.args.values.includes(onr.upper), JSON.stringify(onr));
+w();
+{
+  const cOnH = golden('cusum-exactly-on-h');
+  const cOnHr = success('golden CUSUM on h', Q.cusumChart(cOnH.args));
+  const rtB = success('an exclusive minimum at its bound', Q.rangeCheck({ values: [0], channel: 'resistivity', unit: 'ohm.m' }));
+  const frB = success('an inclusive maximum at its bound', Q.rangeCheck({ values: [1], channel: 'fraction', unit: 'v/v' }));
+  const FRZ = [5, 5.5, 5, 5.5, 5]; // stated: every value within 0.5 of the first
+  const fzB = success('a frozen run at its tolerance', Q.frozenRuns({ values: FRZ, tolerance: 0.5 }));
+  const cvB = success('coverage at maxStep', Q.coverage({ index: [0, 1, 2], values: [5, 5, 5], start: 0, end: 2, maxStep: 1 }));
+  must('the exclusive minimum flags its bound, the inclusive maximum does not', rtB.failed === 1 && frB.failed === 0, `${rtB.failed} ${frB.failed}`);
+  must('a value exactly at tolerance stays in a frozen run', fzB.runs.length === 1 && fzB.runs[0].length === FRZ.length, JSON.stringify(fzB.runs));
+  must('the CUSUM exactly on h does not signal', cOnHr.flags.length === 0 && cOnHr.points.some((pt) => pt.sHigh === cOnH.args.h), JSON.stringify(cOnHr.flags));
+  w('WHERE THE BOUNDARY FALLS. The statistical flags (a Tukey fence, a Hampel threshold, a z or modified z threshold, a control limit, a CUSUM decision interval, the Grubbs critical value, the Mahalanobis cutoff) all fire strictly beyond their limit, so a value exactly on the limit is inside. Three Associate checks draw the boundary differently, each on purpose: an EXCLUSIVE definitional minimum flags the bound itself, a frozen-run tolerance includes a value exactly at tolerance, and a coverage step exactly equal to maxStep covers. Each row below is a real call, beside an inclusive maximum and a CUSUM exactly on h for contrast:');
+  w();
+  table(['check', 'what was passed', 'the engine\'s answer', 'what it means'], [
+    ['`rangeCheck`, resistivity in ohm.m', `a value of ${num(0)}, its EXCLUSIVE minimum`, `${rtB.failed} failed`, 'an exclusive minimum flags the bound itself'],
+    ['`rangeCheck`, fraction in v/v', `a value of ${num(1)}, its inclusive maximum`, `${frB.failed} failed`, 'an inclusive bound is allowed'],
+    [`\`frozenRuns\`, tolerance ${S(fzB.basis.tolerance)}`, `${FRZ.join(', ')}, stated`, `${fzB.runs.length} run of ${fzB.runs[0].length}`, 'a value exactly at tolerance from the run\'s first value stays in the run'],
+    ['`coverage`, maxStep 1', 'an index 0, 1, 2 with every value present', `coverage ${f6(cvB.coverage)}`, 'a step exactly equal to maxStep covers'],
+    ['`cusumChart`, golden cusum-exactly-on-h', `S_hi reaches h = ${num(cOnH.args.h)}`, `${cOnHr.flags.length} signals`, 'a CUSUM exactly on h does not signal'],
+  ]);
+}
 
 /* ============================================================ SECTION 21 */
 

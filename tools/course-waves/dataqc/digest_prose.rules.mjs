@@ -129,7 +129,7 @@ const PINNED = [
   'must be an object of named arrays, for example { oil: [...], water: [...] }',
   'must be a whole number, 2 or more',
   'have zero spread: every present value is the same, so a z-score is undefined',
-  'have MAD = 0: at least half the present values equal the median, so the modified z-score is undefined',
+  'have MAD = 0: more than half the present values equal the median, so the modified z-score is undefined',
   'must be a significance level strictly between 0 and 1',
   'have a singular covariance matrix: a variable is constant or one is a linear combination of others',
   'is missing: a control chart needs a complete series, so fill or drop the gap first',

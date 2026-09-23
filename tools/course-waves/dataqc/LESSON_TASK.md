@@ -102,7 +102,7 @@ message in a blockquote.** The ones each tier must teach:
 
 Every tier names the engine's choices as choices, in the digest's words:
 missing is null, undefined or NaN; limits are definitional and units are never
-converted; strictly beyond; the last present value; the Petrolord defaults in
+converted; where the boundary falls (section 20's table); the last present value; the Petrolord defaults in
 section 30; the sample standard deviation and its ceiling; target and sigma
 from history; no reset; no grade bands. Say what the alternative is and why the
 engine did not take it.

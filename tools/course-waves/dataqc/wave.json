@@ -13,7 +13,7 @@
  "engines": [
   "engines/dataai/quality.js"
  ],
- "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines cc82bf3 (engines PR #248). TWELVE paths walked by vendor_dataqc.sh over a git-archive export of the commit with the jest suite as the only seed: six reached by the walk (the suite, quality.js, lib/stats/stats.js, engines/petrophysics/conditioning.js, engines/hse/safetyStats.js, lib/linalg/solveDense.js) and six NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; oracle_quality.py, pin_quality.py, FINDINGS-quality.md, negcontrol_quality.sh mode 755). 12 paths x 4 proofs = 48, all IDENTICAL. The canonical pin STAYS at 54cf7c4: 54cf7c4..cc82bf3 also moves economics cashflow goldens, facilities, production, seismolord and wellsite paths other courses grade. The four imported dependencies already match the pinned manifest byte for byte; the eight new paths are ledgered in VENDOR.json as kind extra, group d1-dataqc-course, pinned to their vendored blobs, and clear as STALE when the pin moves to cc82bf3 or later. Guard clean, 762 paths compared; vendored engine suites 160, the quality suite 854 of 854. RE-VENDORED 2026-09-23 at petrolord-engines a4e9592 (engines PR #249, the repair of this wave's three engine findings) by the same script with REV=a4e9592: 12 paths x 4 proofs = 48, all IDENTICAL; the pin stays at 54cf7c4 and the eight d1-dataqc-course extra entries are re-pinned to the new blobs; guard clean, 762 paths compared. The quality suite passes 903 of 903. fields.json is byte-identical to the cut at cc82bf3 (no graded value moved).",
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines cc82bf3 (engines PR #248). TWELVE paths walked by vendor_dataqc.sh over a git-archive export of the commit with the jest suite as the only seed: six reached by the walk (the suite, quality.js, lib/stats/stats.js, engines/petrophysics/conditioning.js, engines/hse/safetyStats.js, lib/linalg/solveDense.js) and six NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; oracle_quality.py, pin_quality.py, FINDINGS-quality.md, negcontrol_quality.sh mode 755). 12 paths x 4 proofs = 48, all IDENTICAL. The canonical pin STAYS at 54cf7c4: 54cf7c4..cc82bf3 also moves economics cashflow goldens, facilities, production, seismolord and wellsite paths other courses grade. The four imported dependencies already match the pinned manifest byte for byte; the eight new paths are ledgered in VENDOR.json as kind extra, group d1-dataqc-course, pinned to their vendored blobs, and clear as STALE when the pin moves to cc82bf3 or later. Guard clean, 762 paths compared; vendored engine suites 160, the quality suite 854 of 854. RE-VENDORED 2026-09-23 at petrolord-engines a4e9592 (engines PR #249, the repair of this wave's three engine findings) by the same script with REV=a4e9592: 12 paths x 4 proofs = 48, all IDENTICAL; the pin stays at 54cf7c4 and the eight d1-dataqc-course extra entries are re-pinned to the new blobs; guard clean, 762 paths compared. The quality suite passes 903 of 903. fields.json is byte-identical to the cut at cc82bf3 (no graded value moved). RE-VENDORED 2026-09-23 at petrolord-engines c7eba2270f (engines PR #251: the zero-MAD refusal now reads 'more than half the present values equal the median'; 406 goldens; a Hampel comment in petrophysics/conditioning.js) by the same script: 12 paths x 4 proofs, all IDENTICAL. conditioning.js now differs from the pinned manifest in a comment only and is ledgered as kind differing in group d1-dataqc-course. Guard clean. fields.json byte-identical.",
  "constants": {
   "$comment": "The engine exports CONSTANTS (0.6745, 3.5, 1.4826, 1.128, 3.267, 1.5), DEFINITIONAL_LIMITS and DIMENSIONS. Digest section 1 prints CONSTANTS from the export and section 7 prints DEFINITIONAL_LIMITS. None is graded."
  },
@@ -124,14 +124,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh dai-wip-dataqc /root/wt-dai-d1-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "d1_dump: 693 label-and-call, measurement and claim assertions run, 0 failed; 32 sections"
+   "summary": "d1_dump: 710 label-and-call, measurement and claim assertions run, 0 failed; 32 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-dataqc",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/dai-wip-dataqc/digest.txt: 1069 line(s), 32 section title(s) and 38 in-body marker(s) swept against their blocks, 32 history framings, 22 engine pin(s); 0 warned for a human read and 0 framed as curri"
+   "summary": "[digestprose] /root/dai-wip-dataqc/digest.txt: 1079 line(s), 32 section title(s) and 39 in-body marker(s) swept against their blocks, 32 history framings, 22 engine pin(s); 0 warned for a human read and 0 framed as curri"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -285,7 +285,7 @@
    "command": "python3 truth_check.py",
    "expected": 0,
    "exit": 0,
-   "summary": "truth_check: truth-dataqc.json (534 digest lines) IS the harvest of digest.txt"
+   "summary": "truth_check: truth-dataqc.json (539 digest lines) IS the harvest of digest.txt"
   },
   "truth_check.py NEGATIVE CONTROL": {
    "md5": "f6d33a913f9a25ceae1d0a5abb56a6c3",
@@ -338,10 +338,10 @@
   }
  },
  "digest": {
-  "lines": 1069,
+  "lines": 1079,
   "sections": 32,
-  "md5": "c6262cc116f6520d887ae9d6bc796fdb",
-  "sha256": "ca72f59604260e34350ae8237e44a3d5f8881b5fba84dd6de3dd537070c8c14f"
+  "md5": "2d34cd2c4c73aa762ee775f6c5ba67c1",
+  "sha256": "990d0072359495b3d6f708982bcd4e3ee68f25dff744b844e48b913c45f4e746"
  },
  "fieldsDiscrimination": {
   "odudu_rhob_completeness": "sentinels counted missing, only the long run counted, missing over present, null fraction quoted",
