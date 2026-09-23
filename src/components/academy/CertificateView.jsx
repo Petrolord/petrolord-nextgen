@@ -189,7 +189,7 @@ const CertificateView = ({ cert, holderName, onClose }) => {
               </header>
               <section className="title-wrap">
                 <p className="eyebrow">Professional Credential</p>
-                <h1>Certificate of Professional Certification</h1>
+                <h1>Certificate of Competence</h1>
                 <div className="title-line" />
               </section>
               <section className="award">

@@ -23,6 +23,7 @@ import { supabase } from '@/lib/customSupabaseClient';
 import { useActivation } from '@/hooks/useActivation';
 import { useRole } from '@/contexts/RoleContext';
 import { enrollmentAction } from '@/lib/learningGate';
+import { hasDeepCourse } from '@/lib/courseContent';
 
 // One identity, four doors (NextGen-Academy-PLAN §1): same account, same
 // courses, same certificates — only the payer differs. Learning-Mode
@@ -570,7 +571,7 @@ const EnrollPage = () => {
                         ) : e.status}
                       </span>
                       {(() => {
-                        const act = enrollmentAction(e, { isLearner: !!isViewAsStudent, activation });
+                        const act = enrollmentAction(e, { isLearner: !!isViewAsStudent, activation, hasCourse: hasDeepCourse });
                         if (!act || act.kind === 'pay') return null;
                         return (
                           <Link to={act.to}>
