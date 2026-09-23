@@ -38,7 +38,7 @@ q(1, "On the water sand gamma ray, which rule gives the widest interquartile ran
   "None: all three give one IQR."],
  "Section 19 prints the derived IQR as 6.920000 by R6, 6.900000 by R8 and 6.695000 by R7. R6 is the widest, R8 close behind, R7 the narrowest; the three are not equal even on seventy samples.")
 
-q(2, "What is the upper fence on the water sand gamma ray at the defaults, R7 and k 1.5?",
+q(2, "Where does `iqrFences` put the upper Tukey fence for the water sand gamma ray at its default settings?",
  "48.685000",
  ["49.117500",
   "58.727500",
@@ -59,7 +59,7 @@ q(3, "The caller changes the water sand run from R7 to R6, keeping k 1.5. What h
   "Entry 170 drops inside the wider R6 fences, and the run returns no flag at all on the water sand."],
  "Section 20 prints R6, k 1.5 with IQR 6.920000 and fences 21.437500 and 49.117500, flagging entry 170, against the defaults' 6.695000, 21.905000 and 48.685000. The rule moves the quartiles and so the fences, and the spike at 90.590000 sits beyond either upper fence.")
 
-q(1, "At R7 the caller raises k from 1.5 to 3. What changes on the water sand?",
+q(1, "Keeping the default R7 quartiles, an analyst asks for far out fences by passing k 3. Which outputs move?",
  "Only the fences, which move to 11.862500 and 58.727500; the quartiles and IQR are unchanged.",
  ["The quartiles as well, because k is applied to the positions before the quartiles are computed.",
   "The IQR doubles, and the fences then sit 1.5 of the doubled IQR outside the quartiles.",
@@ -111,7 +111,7 @@ q(3, "The R7 lower fence on the water sand is 21.905000. How is it formed?",
 q(0, "What does the engine do when a quantile position h falls below the first sorted value or beyond the last?",
  "It clamps the quantile to the minimum or the maximum.",
  ["It extrapolates past the end.",
-  "It refuses, naming the probability p as the field at fault.",
+  "It refuses, naming p.",
   "It switches to R6."],
  "Section 19: with h = k + d the quantile is Y[k] + d (Y[k+1] - Y[k]) on the ordered values, clamped to the minimum and maximum. No refusal and no change of rule is involved.")
 

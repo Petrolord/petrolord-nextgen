@@ -77,7 +77,7 @@ q(0, "What cutoff does `mahalanobis` compare squared distances with on the EKENE
  ["5.991465",
   "9.210340",
   "22.397696"],
- "Section 23: the default alpha is 0.025 and the cutoff is the chi-square 0.975 quantile on 2 degrees of freedom, 7.377759. 5.991465 is the cutoff at alpha 0.05, 9.210340 at 0.01, and 22.397696 is entry 60's squared distance.")
+ "Section 23: the default alpha is 0.025 and the cutoff is the chi-square 0.975 quantile on 2 degrees of freedom, 7.377759. 5.991465 is the cutoff at alpha 0.05, 9.210340 at 0.010000, and 22.397696 is entry 60's squared distance.")
 
 q(0, "Oil sand entry 60 reads z -1.074527 on density and -1.645167 on neutron, and neither channel's z-score flags anything. Why does `mahalanobis` flag it at 22.397696?",
  "The pair sits off the density-neutron trend, which only a distance that knows the correlation sees.",
@@ -89,7 +89,7 @@ q(0, "Oil sand entry 60 reads z -1.074527 on density and -1.645167 on neutron, a
 q(2, "Of the 60 oil sand rows, how many enter the Mahalanobis calculation, and why?",
  "48: rows with a missing value, EKENE-7 entries 80 to 91, are skipped and listed.",
  ["60: missing densities are filled with the column mean before the covariance is built.",
-  "58: the two rows beside the density gap are dropped as well as the gap rows.",
+  "50: the gap's two edge rows are kept, carrying a neutron value alone.",
   "12: only rows beside the density gap are used, so the covariance reflects the pad lift."],
  "Section 23: 60 rows, 48 complete rows used, and the skipped entries are 80 to 91, the twelve-sample density gap. The engine fills nothing, and rows with a missing value are skipped and listed.")
 

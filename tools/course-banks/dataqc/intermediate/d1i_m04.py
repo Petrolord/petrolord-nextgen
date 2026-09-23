@@ -95,7 +95,7 @@ q(2, "Hampel flags gamma ray entry 170 and returns a `cleaned` series. What happ
   "It is replaced by the mean of the whole channel, which the global z-score had already computed."],
  "Section 21 gives the replacement as the window median, 38.410000 for entry 170. Section 1: the engine does not fill, repair or delete a value, and `hampel` returns a cleaned series beside its flags; choosing to use it is the caller's decision.")
 
-q(1, "A caller passes halfWindow 0 to `hampel`. What does the engine return?",
+q(1, "Asked for a Hampel screen with halfWindow set to 0, how does the engine respond?",
  "A refusal naming `halfWindow`: it must be a whole number, 1 or more.",
  ["A window of one sample, which flags nothing because its MAD is zero.",
   "The default halfWindow of 3, recorded in the basis block as a substitution.",
@@ -114,7 +114,7 @@ q(0, "At nSigma 3, the window is widened from halfWindow 3 to halfWindow 5. What
  ["It falls to 3, since a wider window holds a steadier median.",
   "It rises, since more neighbours bring more chances to stand apart.",
   "It falls to 4, the count at the widest window in the table."],
- "Section 21 prints 11 flags at halfWindow 3 and 11 at halfWindow 5, both at nSigma 3. The count of 3 belongs to halfWindow 5 at nSigma 5, and 4 to halfWindow 10 at nSigma 3.")
+ "Widening the window alone leaves the count unchanged at 11 while nSigma stays at 3. The drop to 3 flags needs nSigma 5 as well, and the count of 4 comes from the twenty-one sample window.")
 
 emit(Q, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'd1i_m04.json'), expect_n=15)
 finish()

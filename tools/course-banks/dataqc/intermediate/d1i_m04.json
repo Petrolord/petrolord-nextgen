@@ -132,7 +132,7 @@
   "explanation": "Section 21 gives the replacement as the window median, 38.410000 for entry 170. Section 1: the engine does not fill, repair or delete a value, and `hampel` returns a cleaned series beside its flags; choosing to use it is the caller's decision."
  },
  {
-  "prompt": "A caller passes halfWindow 0 to `hampel`. What does the engine return?",
+  "prompt": "Asked for a Hampel screen with halfWindow set to 0, how does the engine respond?",
   "options": [
    "A window of one sample, which flags nothing because its MAD is zero.",
    "A refusal naming `halfWindow`: it must be a whole number, 1 or more.",
@@ -162,6 +162,6 @@
    "It falls to 4, the count at the widest window in the table."
   ],
   "answer": 0,
-  "explanation": "Section 21 prints 11 flags at halfWindow 3 and 11 at halfWindow 5, both at nSigma 3. The count of 3 belongs to halfWindow 5 at nSigma 5, and 4 to halfWindow 10 at nSigma 3."
+  "explanation": "Widening the window alone leaves the count unchanged at 11 while nSigma stays at 3. The drop to 3 flags needs nSigma 5 as well, and the count of 4 comes from the twenty-one sample window."
  }
 ]

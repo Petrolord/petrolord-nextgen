@@ -107,7 +107,7 @@
    "22.397696"
   ],
   "answer": 0,
-  "explanation": "Section 23: the default alpha is 0.025 and the cutoff is the chi-square 0.975 quantile on 2 degrees of freedom, 7.377759. 5.991465 is the cutoff at alpha 0.05, 9.210340 at 0.01, and 22.397696 is entry 60's squared distance."
+  "explanation": "Section 23: the default alpha is 0.025 and the cutoff is the chi-square 0.975 quantile on 2 degrees of freedom, 7.377759. 5.991465 is the cutoff at alpha 0.05, 9.210340 at 0.010000, and 22.397696 is entry 60's squared distance."
  },
  {
   "prompt": "Oil sand entry 60 reads z -1.074527 on density and -1.645167 on neutron, and neither channel's z-score flags anything. Why does `mahalanobis` flag it at 22.397696?",
@@ -124,7 +124,7 @@
   "prompt": "Of the 60 oil sand rows, how many enter the Mahalanobis calculation, and why?",
   "options": [
    "60: missing densities are filled with the column mean before the covariance is built.",
-   "58: the two rows beside the density gap are dropped as well as the gap rows.",
+   "50: the gap's two edge rows are kept, carrying a neutron value alone.",
    "48: rows with a missing value, EKENE-7 entries 80 to 91, are skipped and listed.",
    "12: only rows beside the density gap are used, so the covariance reflects the pad lift."
   ],

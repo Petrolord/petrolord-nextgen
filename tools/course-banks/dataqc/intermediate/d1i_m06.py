@@ -81,7 +81,7 @@ q(3, "In the oil sand at alpha 0.05, entry 62 is flagged beside entry 60. What i
  "Section 2 lists entry 60 as the Mahalanobis defect and no other oil sand row. Entry 62's d^2 of 6.581737 is above the alpha 0.05 cutoff of 5.991465, so it is flagged by the rule at that setting; the skipped rows are entries 80 to 91.")
 
 q(2, "Which of these is an examination that the rule actually made and passed?",
- "A Hampel point with `judged` true and no flag.",
+ "A point the Hampel rule judged, with no flag raised.",
  ["A z-score run with `thresholdReachable` false and zero flags.",
   "A Hampel point with `judged` false and no flag.",
   "A Mahalanobis row skipped for a missing value."],

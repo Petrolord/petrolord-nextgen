@@ -51,12 +51,12 @@ q(3, "The series 5, 5, 5, 6, 7 is passed to `modifiedZScores`. What does the eng
   "It flags 6 and 7, the only values that are not equal to the median."],
  "Section 4 and Section 18: at least half the values equal the median, so the MAD is 0 and the engine refuses with \"values have MAD = 0: at least half the present values equal the median, so the modified z-score is undefined\". Section 31 lists a fallback for a MAD of zero as not built.")
 
-q(0, "What makes the MAD of a series zero?",
+q(0, "Under which condition does a median absolute deviation come out at zero?",
  "At least half the present values equal the median.",
  ["Every present value is the same, and nothing less than that will do it.",
   "The series has fewer than five present values in it.",
   "The mean and the median of the series coincide exactly."],
- "The engine's own refusal says it: \"values have MAD = 0: at least half the present values equal the median, so the modified z-score is undefined\". 5, 5, 5, 6, 7 has a spread and still has a MAD of zero, because three of five values sit on the median.")
+ "The middle of the absolute deviations is zero once half or more of them are zero, which happens as soon as at least half the present values sit on the median. The 5, 5, 5, 6, 7 case shows that a spread in the data does not prevent it, and neither the length of the series nor the mean has anything to do with it.")
 
 q(2, "What is the engine's own label for a value whose modified z-score is beyond 3.5?",
  "A potential outlier",
@@ -100,12 +100,12 @@ q(1, "Once the glitch is dropped, how widely do the nine ordinary gauge readings
   "8.284111"],
  "Section 18 prints 0.126930 for the nine readings. 0.100000 is the MAD, 8.732220 the sample SD with the glitch in, and 8.284111 the population SD of all ten. One reading takes the sample SD from 0.126930 to 8.732220.")
 
-q(1, "Where does the threshold 3.5 of the modified z-score come from?",
- "Iglewicz and Hoaglin, as NIST/SEMATECH 1.3.5.17 prints it.",
- ["Tukey, who set it as the multiplier of the inner fence.",
-  "A Petrolord choice, recorded in the basis block as a default.",
-  "The petrophysics conditioning engine, which uses it for despiking."],
- "Section 1 exports `MODIFIED_Z_THRESHOLD` 3.500000 with the source Iglewicz and Hoaglin, and Section 30 lists it as theirs, as NIST prints it. Tukey's multiplier is 1.5, and the conditioning engine supplies the Hampel scale 1.4826.")
+q(1, "Where does the Hampel scale 1.4826, the other constant that works with a raw MAD, come from?",
+ "The petrophysics conditioning engine, despikeHampel.",
+ ["Iglewicz and Hoaglin, as NIST/SEMATECH prints it.",
+  "Tukey, as the multiplier of the inner fence.",
+  "A Petrolord choice, fitted to the gauge readings."],
+ "Section 1 exports `HAMPEL_MAD_SCALE` 1.482600 with the petrophysics conditioning engine's despikeHampel as its source. Iglewicz and Hoaglin supply 0.6745 and the threshold 3.5, Tukey's multiplier is 1.5, and no constant was fitted to Ekene data.")
 
 q(2, "A value has a modified z-score of exactly 3.5. Is it labelled?",
  "No. The label needs |M| strictly beyond 3.5.",

@@ -114,7 +114,7 @@
   "options": [
    "A z-score run with `thresholdReachable` false and zero flags.",
    "A Hampel point with `judged` false and no flag.",
-   "A Hampel point with `judged` true and no flag.",
+   "A point the Hampel rule judged, with no flag raised.",
    "A Mahalanobis row skipped for a missing value."
   ],
   "answer": 2,

@@ -90,7 +90,7 @@ q(1, "Which reading of a flag from `zScores` does this course accept?",
  ["The value is wrong, since only a faulty reading or a failed sensor can sit that far from the mean of the rest.",
   "The value is removed from the series and the mean and SD are recomputed without it.",
   "The value is one of the defects the Ekene generator planted."],
- "Section 32: an outlier is a value a stated rule flags, and a flag is a question about the value. Section 1 says the engine does not fill, repair or delete a value and does not decide whether a flagged value is wrong. Flags and planted defects are separate lists.")
+ "The course's word for such a value names its rule, and the flag asks a question about the reading. `zScores` returns flags and leaves the series untouched, and a flag need not land on a planted defect: on the gauge the planted glitch is not even flagged by this rule.")
 
 q(0, "Eight core plugs are screened with `zScores` at 3. What is the most that any z among them can reach with the sample SD?",
  "2.474874",
@@ -102,16 +102,16 @@ q(0, "Eight core plugs are screened with `zScores` at 3. What is the most that a
 q(3, "The gauge glitch reaches 2.999718 against the population SD. Why is it still not flagged at a threshold of 3?",
  "A flag needs |z| strictly beyond 3, and 2.999718 sits just below it.",
  ["The engine falls back to the sample SD at ten values.",
-  "The engine rounds each z to two decimals before comparing, so it reads 3.00.",
+  "The engine rounds each z to two decimals first, so the glitch compares as 3.",
   "Values equal to the ceiling are exempt from flagging."],
  "Section 17 flags a value when |z| > 3. 2.999718 is below that, and the population column shows 0 flags. The engine accepts the population SD and compares the unrounded figure; the population ceiling at ten values is 3.000000.")
 
-q(2, "Which ceiling does the engine's basis block name when the caller chooses `sd: 'population'`?",
- "sqrt(n - 1), population SD",
- ["(n - 1) / sqrt(n), as for the sample SD",
-  "None: only the sample SD carries a ceiling",
-  "n / sqrt(n - 1), by the n divisor"],
- "Section 31 prints the population case: maxPossibleAbsZ 3.000000 with the basis naming the ceiling \"sqrt(n - 1), population SD\". (n - 1) / sqrt(n) is the sample SD's ceiling, and both choices carry one.")
+q(2, "Twenty daily rates are screened with `zScores` at 3 and the sample SD. Can any of them be flagged?",
+ "Yes: the ceiling at 20 values is 4.248529, above 3.",
+ ["No: twenty values put the ceiling at 2.846050, below 3.",
+  "No: with the sample SD the ceiling stays below 3 at any n.",
+  "Only with the population SD, whose ceiling at 20 is 3.000000."],
+ "The ceiling table prints 4.248529 at 20 values, reachable at 3. 2.846050 is the ten-value row, the ceiling first passes 3 at eleven values, and 3.000000 is the population ceiling for the ten-value case in Section 31.")
 
 emit(Q, os.path.join(os.path.dirname(os.path.abspath(__file__)), 'd1i_m01.json'), expect_n=15)
 finish()
