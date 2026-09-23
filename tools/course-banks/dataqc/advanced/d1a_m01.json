@@ -107,7 +107,7 @@
    "It is right, because the engine checks every limit against the definitional limits of absolutePressure"
   ],
   "answer": 0,
-  "explanation": "Section 32: a control limit is a limit computed from in-control data; never a specification and never a plausibility range. 622.702188 says only what phase one produced. Plausibility ranges are the caller's, passed as min and max to rangeCheck. The definitional limits for absolutePressure are in psia, kPa and bara, and a chart does not consult them."
+  "explanation": "A control limit is a limit computed from in-control data; never a specification and never a plausibility range. 622.702188 says only what phase one produced. Plausibility ranges are the caller's, passed as min and max to rangeCheck. The definitional limits for absolutePressure are in psia, kPa and bara, and a chart does not consult them."
  },
  {
   "prompt": "A monitored reading lands exactly on phase one's upper limit, 622.702188 psig. What does the individuals chart return for that day?",
@@ -118,7 +118,7 @@
    "individuals-above-ucl on that day and again on the next day"
   ],
   "answer": 1,
-  "explanation": "Section 25: a point strictly outside its limits signals, so a reading on the limit sits inside. The same boundary rule runs through the engine: on a Tukey fence, on a Hampel threshold or at maxStep is inside. Nothing about a value on a limit is refused, and the next day's signal would depend on that day's own reading and step."
+  "explanation": "A point strictly outside its limits signals, so a reading on the limit sits inside. The same boundary rule runs through the engine: on a Tukey fence, on a Hampel threshold or at maxStep is inside. Nothing about a value on a limit is refused, and the next day's signal would depend on that day's own reading and step."
  },
  {
   "prompt": "On NIST/SEMATECH 6.3.2.2's flow rate data, what does the engine return beside the printed page?",
@@ -151,7 +151,7 @@
    "From the median of the values and the median moving range"
   ],
   "answer": 2,
-  "explanation": "Section 25: centre and MRbar default to the data's own averages, and either may be given as a standard. That default is how a phase one chart is drawn, and on monitored data it absorbs a shift. The target refusal belongs to ewmaChart. The engine has no notion of a first 50 days, and the chart uses averages, never medians."
+  "explanation": "Centre and MRbar default to the data's own averages, and either may be given as a standard. That default is how a phase one chart is drawn, and on monitored data it absorbs a shift. The target refusal belongs to ewmaChart. The engine has no notion of a first 50 days, and the chart uses averages, never medians."
  },
  {
   "prompt": "Day 8's glitch reads 633.800000 psig. Which rules fire on day 8 on the phase one standard chart, and which on the chart drawn on the monitored days' own averages?",

@@ -76,14 +76,14 @@ q(0, "A reviewer writes that phase one's upper limit of 622.702188 psig is the h
  ["It is right, because a 3 sigma limit from 50 in-control days is how an operating envelope is set",
   "It is right in part: a control limit is a plausibility range for the gauge, though it is no specification",
   "It is right, because the engine checks every limit against the definitional limits of absolutePressure"],
- "Section 32: a control limit is a limit computed from in-control data; never a specification and never a plausibility range. 622.702188 says only what phase one produced. Plausibility ranges are the caller's, passed as min and max to rangeCheck. The definitional limits for absolutePressure are in psia, kPa and bara, and a chart does not consult them.")
+ "A control limit is a limit computed from in-control data; never a specification and never a plausibility range. 622.702188 says only what phase one produced. Plausibility ranges are the caller's, passed as min and max to rangeCheck. The definitional limits for absolutePressure are in psia, kPa and bara, and a chart does not consult them.")
 
 q(1, "A monitored reading lands exactly on phase one's upper limit, 622.702188 psig. What does the individuals chart return for that day?",
  "No individuals signal, because a point signals only strictly outside its limits",
  ["individuals-above-ucl, because a point on its limit is counted with the points beyond it on this chart",
   "A refusal naming the entry, since a value on a limit sits on neither side",
   "individuals-above-ucl on that day and again on the next day"],
- "Section 25: a point strictly outside its limits signals, so a reading on the limit sits inside. The same boundary rule runs through the engine: on a Tukey fence, on a Hampel threshold or at maxStep is inside. Nothing about a value on a limit is refused, and the next day's signal would depend on that day's own reading and step.")
+ "A point strictly outside its limits signals, so a reading on the limit sits inside. The same boundary rule runs through the engine: on a Tukey fence, on a Hampel threshold or at maxStep is inside. Nothing about a value on a limit is refused, and the next day's signal would depend on that day's own reading and step.")
 
 q(3, "On NIST/SEMATECH 6.3.2.2's flow rate data, what does the engine return beside the printed page?",
  "An upper limit of 55.804090 against the printed 55.8041, and 0 flags",
@@ -104,7 +104,7 @@ q(2, "An analyst calls `individualsChart` with values only, passing no centre an
  ["From nowhere: the engine refuses, naming `centre`, in the same way that the EWMA chart refuses a call with no target",
   "From the first 50 entries of the series, which the engine treats as phase one before it charts the rest",
   "From the median of the values and the median moving range"],
- "Section 25: centre and MRbar default to the data's own averages, and either may be given as a standard. That default is how a phase one chart is drawn, and on monitored data it absorbs a shift. The target refusal belongs to ewmaChart. The engine has no notion of a first 50 days, and the chart uses averages, never medians.")
+ "Centre and MRbar default to the data's own averages, and either may be given as a standard. That default is how a phase one chart is drawn, and on monitored data it absorbs a shift. The target refusal belongs to ewmaChart. The engine has no notion of a first 50 days, and the chart uses averages, never medians.")
 
 q(0, "Day 8's glitch reads 633.800000 psig. Which rules fire on day 8 on the phase one standard chart, and which on the chart drawn on the monitored days' own averages?",
  "Both individuals-above-ucl and moving-range-above-ucl on the standard; only individuals-above-ucl on the own-averages chart, whose moving range signal falls on day 9",
