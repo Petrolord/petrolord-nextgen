@@ -78,7 +78,7 @@ q(2, "What step tolerance does `indexCheck` use on EKENE-7's full depth index by
  "The default tolerance is 1e-6 x expectedStep, which on a 0.500000 ft step is 5.00e-7 ft. It is scaled by the step, it is a stated default, and it is chosen to treat a regularly sampled log as regular while flagging a skipped sample. It is not measured from the data."),
 
 q(1, "With expectedStep 0.5 and stepTolerance 0.6 stated, what does the splice read?",
- "0 irregular steps, with 2 duplicates and 1 reversal still flagged.",
+ "No irregular step; the two repeats and the backward step stay.",
  ["0 irregular steps, 0 duplicates and 0 reversals, since the loose tolerance lets every step pass as regular.",
   "3 irregular steps as before, since a stated tolerance cannot be larger than the expected step.",
   "0 irregular steps and 0 duplicates, with the reversal alone remaining, since duplicates sit within the tolerance."],

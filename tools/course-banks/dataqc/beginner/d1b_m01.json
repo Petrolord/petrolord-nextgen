@@ -143,15 +143,15 @@
   "explanation": "The engine's own words are: values must be a non-empty array. With n of 0 there is nothing to divide by and nothing to describe. It could return 1 or 0 on either argument, and either would be a number a report could quote with confidence it has not earned, so it refuses and names the whole argument."
  },
  {
-  "prompt": "Asked to check a sonic log in a unit it does not list, the range check refuses. Which field does it name?",
+  "prompt": "The engine tables 23 refusals across 20 functions. When one arrives in your script, which part should you read first, and why?",
   "options": [
-   "`channel`, and the message lists the ten channels the engine knows, sonic among them.",
-   "`values`, and the message says the values cannot be read without a unit the engine lists.",
-   "`unit`, and the message says the engine converted the values to us/ft and asks the caller to confirm.",
-   "`unit`, and the message lists us/ft and us/m and adds that units are never converted here."
+   "The message, because the field is only a code number that points into the engine's list of messages.",
+   "The basis block, because a refusal keeps its convention there beside the partial result it managed to compute on the way.",
+   "The number it carries, which is the value it could not use.",
+   "The `field`, because it names the exact input the engine refused, so you know where to look before reading the message."
   ],
   "answer": 3,
-  "explanation": "The engine's own words are: unit must be one of us/ft, us/m for channel sonic: units are never converted here. The field is `unit`. The `channel` refusal is the one for an unlisted channel, and the engine converts nothing, so there is no conversion to confirm."
+  "explanation": "A refusal is an object with `error` and `field`, and the field names the input to fix: `values`, `values[1]`, `unit` and so on, spelled as the function spells the input. A refusal carries no number and no basis block, since a basis arrives only with a result, and the field is a name with no code number behind it."
  },
  {
   "prompt": "Why can every lesson and question in this course quote the Ekene data to the last printed digit?",
