@@ -532,6 +532,15 @@ export async function sponsorPoolReport(poolId) {
   return data || [];
 }
 
+// Progress and scores of the learners a pool sponsors (2026-09-23): the
+// assigned course and tier only, scores for attempts made while the seat was
+// active, never answers. Training leads of the sponsor and admins only.
+export async function sponsorLearnerProgress(poolId) {
+  const { data, error } = await supabase.rpc('academy_sponsor_learner_progress', { p_pool_id: poolId });
+  if (error) throw error;
+  return data || [];
+}
+
 export async function sponsorAssign({ poolId, email, appSlug, tier, note = null }) {
   const { data, error } = await supabase.rpc('academy_sponsor_assign', {
     p_pool_id: poolId, p_email: email, p_app_slug: appSlug, p_tier: tier, p_note: note,

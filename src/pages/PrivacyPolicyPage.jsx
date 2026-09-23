@@ -28,7 +28,7 @@ const PrivacyPolicyPage = () => {
   return (
     <LegalPageLayout 
       title="Privacy Policy" 
-      lastUpdated="December 18, 2025" 
+      lastUpdated="September 23, 2026" 
       tocItems={tocItems}
     >
       <div className="flex justify-start mb-6">
@@ -110,6 +110,20 @@ const PrivacyPolicyPage = () => {
           <li><strong>Performance of a Contract:</strong> Where we have entered into a contract with you, we may process your personal information to fulfill the terms of our contract.</li>
           <li><strong>Legal Obligations:</strong> We may disclose your information where we are legally required to do so in order to comply with applicable law, governmental requests, a judicial proceeding, court order, or legal process.</li>
         </ul>
+        <h3 id="sponsored-learning" className="text-white font-semibold mt-6 mb-2">Sponsored learning</h3>
+        <p>
+          When an employer or other organisation sponsors your enrolment in a course, that sponsor's training leads can see your
+          progress and results in that course for as long as your sponsored seat is active. This covers your name and email address,
+          the course and level they assigned, the lessons you have read and the modules you have completed, your module quiz, final
+          exam and capstone scores together with the number of attempts, whether you passed, the certificate you earned for that
+          course, and the date you were last active in it.
+        </p>
+        <p>
+          Your sponsor cannot see the answers you gave, the questions you were asked, any other course you take with us, or your
+          device, session and login details. Scores are shared only for attempts made while the sponsored seat is active, and
+          sharing stops when the sponsorship ends. We share this information to fulfil the sponsorship arrangement under which your
+          place is provided. If you have questions about how your sponsor uses it, please contact them or us using the details below.
+        </p>
         <p className="mt-4 text-[#BFFF00] font-medium">We do not sell your personal data to advertisers or third parties.</p>
       </PolicySection>
 
