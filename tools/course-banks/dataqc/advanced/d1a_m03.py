@@ -18,7 +18,7 @@ q(3, "On the NIST/SEMATECH 6.3.2.3 table, with target 325 and k 0.317500 in the 
 
 q(1, "On the same NIST table, with h 4.195900 in the data's units, which group gives the first upper signal?",
  "Group 14, where S_hi of 4.940000 is above 4.195900",
- ["Group 13, where S_hi rises from zero to 3.007500, the largest single step in the table",
+ ["Group 13, where S_hi rises from zero to 3.007500 in a single step",
   "Group 15, where S_hi reaches 7.447500, the first group at which the upper sum is more than h plus k",
   "Group 13, where the plain sum turns positive"],
  "A signal is S_hi or S_lo strictly above h. At group 13 S_hi is 3.007500, below 4.195900; at group 14 it is 4.940000, above it, and the golden prints group 14 as the first upper signal. Group 15 signals too, after group 14 has. The plain cumulative sum is returned beside the tabular sums and is not what signals.")

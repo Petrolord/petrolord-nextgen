@@ -13,7 +13,7 @@
  {
   "prompt": "On the same NIST table, with h 4.195900 in the data's units, which group gives the first upper signal?",
   "options": [
-   "Group 13, where S_hi rises from zero to 3.007500, the largest single step in the table",
+   "Group 13, where S_hi rises from zero to 3.007500 in a single step",
    "Group 14, where S_hi of 4.940000 is above 4.195900",
    "Group 15, where S_hi reaches 7.447500, the first group at which the upper sum is more than h plus k",
    "Group 13, where the plain sum turns positive"
