@@ -17,6 +17,41 @@ export const doorLabel = (door) => DOOR_LABELS[door] || 'enrolment';
 /** The course page a learner starts in. */
 export const coursePath = (appSlug) => `/dashboard/apps/${appSlug}`;
 
+/** The deep course home for one tier of a course. */
+export const courseTierPath = (appSlug, tier) => `/dashboard/apps/${appSlug}/course/${tier}`;
+
+// Course tiers in ladder order (lowest first).
+const TIER_ORDER = ['beginner', 'intermediate', 'advanced'];
+
+/**
+ * Every tier of `app` the viewer holds an ACTIVE enrolment for. A learner
+ * who moves up keeps the lower tier's row active (certifying does not
+ * close it), so one course can carry several active tiers at once
+ * (2026-09-23: sponsored Intermediate learners were shown "not enrolled"
+ * because the course page kept only one tier per course).
+ */
+export function activeTiers(enrollments, app) {
+  const set = new Set();
+  (Array.isArray(enrollments) ? enrollments : []).forEach((e) => {
+    if (e && e.app_slug === app && e.status === 'active' && e.course_tier) set.add(e.course_tier);
+  });
+  return set;
+}
+
+/**
+ * Which tier the course home shows. An explicit choice wins (the ?tier=
+ * tab, then the /course/:tier link); otherwise the HIGHEST tier the
+ * learner is enrolled in, since that is the one in progress; otherwise
+ * the first tier with content. Only tiers in `tiers` (authored) count.
+ */
+export function pickCourseTier({ tiers = [], queryTier = null, pathTier = null, enrollments = [], app } = {}) {
+  if (queryTier && tiers.includes(queryTier)) return queryTier;
+  if (pathTier && tiers.includes(pathTier)) return pathTier;
+  const enrolled = activeTiers(enrollments, app);
+  const highest = [...TIER_ORDER].reverse().find((t) => enrolled.has(t) && tiers.includes(t));
+  return highest || tiers[0] || null;
+}
+
 /** Get Started, returning to `next` (a dashboard path) once activated. */
 export function getStartedPath(next) {
   return next && isDashboardPath(next)
@@ -52,14 +87,23 @@ export function gateState({ isLearner = true, activation = null, enrollments = [
   return { kind: 'enrol', door: null };
 }
 
-/** The action for a row in "My enrollments" or "Your courses". */
-export function enrollmentAction(enrollment, { isLearner = true, activation = null } = {}) {
+/**
+ * The action for a row in "My enrollments" or "Your courses". `hasCourse`
+ * (app, tier) says whether that tier has a deep course; when it does,
+ * Start course opens that tier's course home rather than the app page
+ * (which opens on its Beginner tab whatever tier was assigned).
+ */
+export function enrollmentAction(enrollment, { isLearner = true, activation = null, hasCourse = null } = {}) {
   if (!enrollment) return null;
   const activated = !isLearner || !!(activation && activation.activated);
   if (enrollment.status === 'active') {
+    const { app_slug: app, course_tier: tier } = enrollment;
+    const to = tier && typeof hasCourse === 'function' && hasCourse(app, tier)
+      ? courseTierPath(app, tier)
+      : coursePath(app);
     return activated
-      ? { kind: 'start', to: coursePath(enrollment.app_slug), label: 'Start course' }
-      : { kind: 'activate', to: getStartedPath(coursePath(enrollment.app_slug)), label: 'Activate account' };
+      ? { kind: 'start', to, label: 'Start course' }
+      : { kind: 'activate', to: getStartedPath(to), label: 'Activate account' };
   }
   if (enrollment.status === 'pending') return { kind: 'pay', to: null, label: 'Complete payment' };
   return null;

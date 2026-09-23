@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { Link, useParams, useSearchParams } from 'react-router-dom';
+import { Link, useNavigate, useParams, useSearchParams } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import {
   BookOpen, Lock, CheckCircle2, GraduationCap, Award, ArrowRight, Clock, FileQuestion,
@@ -12,24 +12,25 @@ import { getManifest, hasDeepCourse, flatLessons, estMinutes } from '@/lib/cours
 import { listAcademyApps, listMyEnrollments, TIERS } from '@/services/academyService';
 import { useCourse, moduleState, TIER_LABELS } from '@/components/course/useCourse';
 import LockedCard from '@/components/course/LockedCard';
+import { activeTiers, pickCourseTier, courseTierPath } from '@/lib/learningGate';
 
 // Course home: syllabus + per-module progress for one (app, tier). The
 // tier tabs only list tiers that have authored content; enrollment (and
 // every unlock) is enforced server-side.
 const CourseHomePage = () => {
-  const { appSlug } = useParams();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const { appSlug, tier: pathTier } = useParams();
+  const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
   const [apps, setApps] = useState([]);
   const [enrollments, setEnrollments] = useState([]);
 
   const tiers = TIERS.filter((t) => getManifest(appSlug, t));
-  const requestedTier = searchParams.get('tier');
-  const enrolledTier = useMemo(() => {
-    const active = enrollments.filter((e) => e.app_slug === appSlug && e.status === 'active');
-    return active.length ? active[active.length - 1].course_tier : null;
-  }, [enrollments, appSlug]);
-  const tier = tiers.includes(requestedTier) ? requestedTier
-    : (tiers.includes(enrolledTier) ? enrolledTier : tiers[0]);
+  // A learner can hold several active tiers of one course (the lower
+  // tier's row stays active after certifying), so enrolment is per tier.
+  const enrolledTiers = useMemo(() => activeTiers(enrollments, appSlug), [enrollments, appSlug]);
+  const tier = pickCourseTier({
+    tiers, queryTier: searchParams.get('tier'), pathTier, enrollments, app: appSlug,
+  });
 
   const { manifest, progress, loading } = useCourse(appSlug, tier);
 
@@ -43,7 +44,7 @@ const CourseHomePage = () => {
   }
 
   const appName = apps.find((a) => a.slug === appSlug)?.name || appSlug;
-  const isEnrolled = enrolledTier === tier;
+  const isEnrolled = enrolledTiers.has(tier);
   const base = `/dashboard/apps/${appSlug}/course/${tier}`;
   const allLessons = manifest ? flatLessons(manifest) : [];
   const totalMinutes = estMinutes(allLessons);
@@ -75,7 +76,7 @@ const CourseHomePage = () => {
         </div>
 
         {tiers.length > 1 && (
-          <Tabs value={tier} onValueChange={(t) => setSearchParams({ tier: t })}>
+          <Tabs value={tier} onValueChange={(t) => navigate(courseTierPath(appSlug, t))}>
             <TabsList className="bg-[#1E293B] border border-gray-700">
               {tiers.map((t) => (
                 <TabsTrigger key={t} value={t} className="data-[state=active]:bg-[#BFFF00] data-[state=active]:text-[#0F172A]">
