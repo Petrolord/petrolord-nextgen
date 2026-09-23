@@ -79,7 +79,7 @@ q(0, "At a half-foot maxStep, EKENE-7's neutron has four holes in the interval 8
   "Each is a step equal to maxStep, which coverage counts as uncovered whenever the step is exactly half a foot long."],
  "Each single missing sample makes a step of 1 ft between present neighbours, which a half-foot maxStep calls a hole, and the index skip after entry 149 makes the fourth. A step equal to maxStep covers. The neutron has only 3 missing samples, and the density's gap is the density's own."),
 
-q(2, "At maxStep 1.000000 ft, what does EKENE-7's gamma ray report over the interval 8400 to 8515 ft, with its sentinel converted?",
+q(2, "Over the stated interval of the log, the gamma ray, its placeholders already nulled, is run through coverage with a one-foot maxStep. What comes back?",
  "Coverage 1.000000 with 115.000000 ft covered and no holes, since the 1 ft step at the index skip now covers.",
  ["Coverage 0.991304 with 114.000000 ft covered, since a skipped index sample stays a hole at any maxStep at all.",
   "Coverage 0.983333, the same as its completeness once the four sentinels at the bottom are converted to null.",

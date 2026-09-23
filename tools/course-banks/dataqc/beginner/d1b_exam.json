@@ -110,7 +110,7 @@
   "explanation": "Each single missing sample makes a step of 1 ft between present neighbours, which a half-foot maxStep calls a hole, and the index skip after entry 149 makes the fourth. A step equal to maxStep covers. The neutron has only 3 missing samples, and the density's gap is the density's own."
  },
  {
-  "prompt": "At maxStep 1.000000 ft, what does EKENE-7's gamma ray report over the interval 8400 to 8515 ft, with its sentinel converted?",
+  "prompt": "Over the stated interval of the log, the gamma ray, its placeholders already nulled, is run through coverage with a one-foot maxStep. What comes back?",
   "options": [
    "Coverage 0.991304 with 114.000000 ft covered, since a skipped index sample stays a hole at any maxStep at all.",
    "Coverage 0.983333, the same as its completeness once the four sentinels at the bottom are converted to null.",
