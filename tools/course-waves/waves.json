@@ -1191,7 +1191,15 @@
       "truth-dataqc.json",
       "truth_check.py",
       "numsweep_dataqc.mjs",
-      "lengths.py"
+      "lengths.py",
+      "gen_course.py",
+      "gen_golive.py",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "scratch_db.sh",
+      "dryrun_d1.sh",
+      "cut_block.py",
+      "apply_d1_dataqc.sh"
     ],
     "pins": {
       "digest.txt": "990d0072359495b3d6f708982bcd4e3ee68f25dff744b844e48b913c45f4e746",
