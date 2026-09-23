@@ -124,14 +124,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh dai-wip-dataqc /root/wt-dai-d1-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "d1_dump: 682 label-and-call, measurement and claim assertions run, 0 failed; 32 sections"
+   "summary": "d1_dump: 693 label-and-call, measurement and claim assertions run, 0 failed; 32 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-dataqc",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/dai-wip-dataqc/digest.txt: 1045 line(s), 32 section title(s) and 36 in-body marker(s) swept against their blocks, 32 history framings, 22 engine pin(s); 0 warned for a human read and 0 framed as curri"
+   "summary": "[digestprose] /root/dai-wip-dataqc/digest.txt: 1069 line(s), 32 section title(s) and 38 in-body marker(s) swept against their blocks, 32 history framings, 22 engine pin(s); 0 warned for a human read and 0 framed as curri"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -280,6 +280,48 @@
    "exit": 1,
    "summary": "NEGATIVE CONTROL: expected a P label and an AI claim caught; got ['a P label', 'an AI claim']"
   },
+  "truth_check.py": {
+   "md5": "f6d33a913f9a25ceae1d0a5abb56a6c3",
+   "command": "python3 truth_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "truth_check: truth-dataqc.json (534 digest lines) IS the harvest of digest.txt"
+  },
+  "truth_check.py NEGATIVE CONTROL": {
+   "md5": "f6d33a913f9a25ceae1d0a5abb56a6c3",
+   "command": "python3 truth_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a line was planted in the scratch digest; expected a mismatch, caught"
+  },
+  "numsweep_dataqc.mjs": {
+   "md5": "66804d61e6ae29618ccb2b5962b1b1aa",
+   "command": "node numsweep_dataqc.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "serialised floats outside an exact reason quote: 0"
+  },
+  "numsweep_dataqc.mjs --selftest": {
+   "md5": "66804d61e6ae29618ccb2b5962b1b1aa",
+   "command": "node numsweep_dataqc.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "numsweep_dataqc selftest OK"
+  },
+  "lengths.py": {
+   "md5": "359da98d6e20c8b7552d2fde13fe86e3",
+   "command": "python3 lengths.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "tiers read: 3  out of band: 0  not written yet: 0"
+  },
+  "lengths.py --selftest": {
+   "md5": "359da98d6e20c8b7552d2fde13fe86e3",
+   "command": "python3 lengths.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
+  },
   "gate_claims.mjs": {
    "md5": "98af821a830c94fed907175bbb61bc33",
    "command": "node gate_claims.mjs",
@@ -296,10 +338,10 @@
   }
  },
  "digest": {
-  "lines": 1045,
+  "lines": 1069,
   "sections": 32,
-  "md5": "a3c62d8e0ef2d83a97c214c5d556c6d1",
-  "sha256": "930b60bc94f49693f5795193dd6502d2bd5598611bc2d7da749bdce52fbee6bd"
+  "md5": "c6262cc116f6520d887ae9d6bc796fdb",
+  "sha256": "ca72f59604260e34350ae8237e44a3d5f8881b5fba84dd6de3dd537070c8c14f"
  },
  "fieldsDiscrimination": {
   "odudu_rhob_completeness": "sentinels counted missing, only the long run counted, missing over present, null fraction quoted",

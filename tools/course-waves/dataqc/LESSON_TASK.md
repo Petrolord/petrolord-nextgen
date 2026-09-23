@@ -60,6 +60,13 @@ marks or a blockquote, as the engine's own words, and never as the source of a
 figure the lesson then reasons with. Section 11 shows the pattern: the drop is
 7496.700000 from the `drop` field.
 
+HOW THE GATE KNOWS. `numsweep_dataqc.mjs` exempts a quoted span only when its
+text is EXACTLY a reason or message the digest prints: double quotation marks on
+one line, or a `> ` blockquote line. A quote that differs by one character is
+swept like any other text, and any figure of more than fifteen significant
+figures outside such a quote fails as FLOAT NOISE even where the truth file
+would resolve it.
+
 ## THE REFUSALS, BY NAME
 
 Digest section 4 tables 23 refusals across 20 functions. **Quote the engine's
@@ -122,8 +129,11 @@ No em dashes, no en dashes, no "X, not Y" contrastive. Headings included.
 
 `gate_copy_rule.py` over every lesson body and manifest title;
 `gate_vocabulary.py` for the legislated words; the kit's `leakage.mjs` for
-graded answers and cross-tier reaches; the kit's `numsweep.mjs` and
-`litsweep.py` for literals that resolve against nothing; `gate_capstone_leak.mjs`
+graded answers and cross-tier reaches; `numsweep_dataqc.mjs` (the kit's
+`numsweep.mjs` against `truth-dataqc.json`, the harvest of the digest, with the
+reason-quote rule above) and the kit's `litsweep.py` for literals that resolve
+against nothing; `lengths.py --tier <tier>` for the prose-word band;
+`gate_capstone_leak.mjs`
 for any capstone field name, series, stated input or answer; and
 `gate_claims.mjs` for every number in every brief. Read the counts rather than
 the exit code.

@@ -21,7 +21,7 @@ The mean moves as well, from 0.217154 without the plug to 0.221714 with it. The 
 
 ## Measured against the others
 
-The digest also derives the distance the other way round. Measured against the mean and sample standard deviation of the other thirteen plugs, entry 8 sits at 6.038080. Measured against a spread that includes itself, it reads 2.985356 and is not flagged. Both figures are correct. They answer different questions, and only the second is what `zScores` computes.
+The course also derives the distance the other way round. Measured against the mean and sample standard deviation of the other thirteen plugs, entry 8 sits at 6.038080. Measured against a spread that includes itself, it reads 2.985356 and is not flagged. Both figures are correct. They answer different questions, and only the second is what `zScores` computes.
 
 With entry 8 left out, the largest absolute z among the remaining thirteen is 2.066042. Nothing in that set stands out by this rule either.
 

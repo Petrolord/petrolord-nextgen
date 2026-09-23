@@ -374,7 +374,7 @@ Each present value is compared with the LAST PRESENT value before it; a drop lar
 | --- | --- | --- | --- |
 | 70 | 68 | 7496.700000 | cumulative falls from 1338506.2 at entry 67 to 1331009.5 |
 
-Day 69 is missing (stated), so day 70 is measured against day 68. The keying error planted on day 70 is ten thousand barrels (stated); the drop the engine reports is the error less the two days of production between the readings, derived 2503.300000 bbl.
+Day 69 is missing (stated), so day 70 is measured against day 68. The keying error planted on day 70 is ten thousand barrels (stated); the `drop` field is 7496.700000 bbl, which is that error less the oil produced on days 69 and 70. Derived: ten thousand less the drop is 2503.300000 bbl, the two days of production, and it is not the drop.
 
 READING THE FLAG. The engine counts entries from 0, so "entry 67" in the reason is day 68. The flag carries its figures as fields: `previous` 1338506.200000, `value` 1331009.500000 and `drop` 7496.700000. The reason prints each cumulative as the shortest decimal that reads back to its field, and a lesson quotes the fields at six decimals.
 
@@ -507,26 +507,28 @@ The accented entry 10 normalises to EKENE7: NFKD separates the accent and the le
 
 EKENE-3's production sheet through every Associate check, with the settings stated in the sections above:
 
-| check | column | setting, stated | checked or n | failed or flags |
-| --- | --- | --- | --- | --- |
-| completeness | oil | none | 90 | 3 |
-| rateCheck | oil | hours on and status | 87 | 2 |
-| cumulativeCheck | cumOil | tolerance 0 | 89 | 1 |
-| waterCutCheck | waterCut | tolerance 1e-4 | 90 | 6 |
-| phaseSumCheck | oil + water against gross | relTolerance 0.005 | 87 | 1 |
-| frozenRuns | gas | minRun 5, tolerance 0 | 90 | 1 |
+Two different counts appear below and are kept in separate columns. ENTRIES FAILED is the number of entries (days, samples) the check faults: missing values for completeness, failed entries for the others. FLAGS is the number of flag objects the engine returns: completeness returns one flag per gap run, and frozenRuns one flag per run, so a run of several entries is one flag.
+
+| check | column | setting, stated | checked or n | entries failed | flags |
+| --- | --- | --- | --- | --- | --- |
+| completeness | oil | none | 90 | 3 | 1 |
+| rateCheck | oil | hours on and status | 87 | 2 | 2 |
+| cumulativeCheck | cumOil | tolerance 0 | 89 | 1 | 1 |
+| waterCutCheck | waterCut | tolerance 1e-4 | 90 | 6 | 6 |
+| phaseSumCheck | oil + water against gross | relTolerance 0.005 | 87 | 1 | 1 |
+| frozenRuns | gas | minRun 5, tolerance 0 | 90 | 8 | 1 |
 
 EKENE-7's log through the same checks:
 
-| check | channel | failed or flags |
-| --- | --- | --- |
-| completeness | RHOB | 1 |
-| completeness | NPHI | 3 |
-| rangeCheck | GR as delivered | 4 |
-| rangeCheck | NPHI | 10 |
-| rangeCheck | RT | 1 |
-| indexCheck | depth | 1 |
-| frozenRuns | DT | 1 |
+| check | channel | entries failed | flags |
+| --- | --- | --- | --- |
+| completeness | RHOB | 12 | 1 |
+| completeness | NPHI | 3 | 3 |
+| rangeCheck | GR as delivered | 4 | 4 |
+| rangeCheck | NPHI | 10 | 10 |
+| rangeCheck | RT | 1 | 1 |
+| indexCheck | depth | 1 | 1 |
+| frozenRuns | DT | 9 | 1 |
 
 Every one of these flags is a planted defect. The Associate tier checks whether data are fit to use; which values stand apart from the rest is the next tier's question.
 
@@ -629,7 +631,7 @@ The flagged entries are EKENE-7 entries, the water sand read from entry 130. Ent
 
 On the whole log, shale and sand together, the gamma ray fences are -57.070000 and 186.810000 and flag 0 entries: the spike at entry 170 reads 90.590000, inside a spread that includes the shale.
 
-ON THE FENCE IS INSIDE. The golden case iqr-exactly-on-both-fences: values -4, 2, 2, 3, 4, 5, 6, 6, 12, fences -4 and 12, flags 0.
+ON THE FENCE IS INSIDE. The golden case iqr-exactly-on-both-fences: values -4, 2, 2, 3, 4, 5, 6, 6, 12 (n = 9), at the defaults, rule R7 and k 1.5. The engine returns Q1 2, Q3 6 and IQR 4, fences -4 and 12, and 0 flags: the lowest and highest values sit exactly on the fences.
 
 # SECTION 21: The Hampel window: local against global (owned by Professional m04)
 
@@ -662,7 +664,16 @@ GLOBAL AGAINST LOCAL. On the same channel the z-score flags 0: entry 70 reads z 
 | 5 | 5 | 11 | 3 | true |
 | 10 | 3 | 21 | 4 | true |
 
-EDGES AND GAPS. At entry 0 the window is truncated to 4 samples. On the density, entry 79 sits beside the twelve-sample gap and its window holds 4 present samples; entry 80 is missing and is not judged (`judged` false).
+EDGES. The engine returns one point per entry, and a point carries `windowCount` (present samples in its window) and `judged` (true when that count is three or more). The first four EKENE-7 gamma ray points, halfWindow 3, as returned:
+
+| entry | windowCount | judged | window median | window MAD | threshold | flagged |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | 4 | true | 96.090000 | 3.055000 | 13.588029 | false |
+| 1 | 5 | true | 96.510000 | 2.990000 | 13.298922 | false |
+| 2 | 6 | true | 97.685000 | 2.560000 | 11.386368 | false |
+| 3 | 7 | true | 98.860000 | 2.130000 | 9.473814 | false |
+
+EDGES AND GAPS. At entry 0 the window is truncated to 4 samples, which is at least three, so entry 0 is judged (`judged` true) and is not flagged. On the density, entry 79 sits beside the twelve-sample gap and its window holds 4 present samples; entry 80 is missing and is not judged (`judged` false).
 A window too thin to judge: on 2.3, null, null, 2.9, null, null, 2.31 (stated) with halfWindow 1, entry 3 has 1 present sample in its window and `judged` false.
 
 ON THE THRESHOLD. The golden case hampel-on-the-threshold: values -1, 0, 1.482600, 1, 0, halfWindow 2 and nSigma 1. Entry 2 sits exactly on its threshold (window median 0, MAD 1, threshold 1.482600) and is not flagged; the case flags entry 4.
@@ -789,6 +800,10 @@ Day 8 is the planted gauge glitch (633.800000 psig). A chart drawn on the monito
 
 EWMA_t = lambda x_t + (1 - lambda) EWMA_(t-1), starting at EWMA_0 = the target. Limits are target +/- L sigma sqrt(lambda / (2 - lambda)) (asymptotic), or the exact ones, which multiply the variance by 1 - (1 - lambda)^(2t). Target and sigma are REQUIRED and come from historical in-control data; the chart does not estimate them from the data it monitors.
 
+NO ENGINE DEFAULT FOR LAMBDA. The engine takes no default smoothing constant: a call without `lambda` is refused, naming the field, in the engine's own words:
+
+> lambda must be in (0, 1]; 0.2 to 0.3 is usual (NIST 6.3.2.4)
+
 | NIST 6.3.2.4, lambda 0.3, target 50, s 2.0539 | engine | NIST printed |
 | --- | --- | --- |
 | ucl | 52.588432 | 52.5884 |
@@ -841,6 +856,8 @@ EKENE-3 PHASE TWO, lambda 0.2 and L 3 (stated), target 611.380000 and sigma 3.77
 | 39 | 609.900000 | 607.860445 | 607.605937 | 615.154063 | 607.605937 | 615.154063 | none |
 | 40 | 608.700000 | 608.028356 | 607.605937 | 615.154063 | 607.605937 | 615.154063 | none |
 
+The signal column is the asymptotic chart's. With the EXACT limits the engine signals low on days 22, 27, 28, 29, 30, 31, 32, 33, 34, 36, 38 and high on days 8, 9, 13, 14; with the asymptotic limits, low on days 22, 27, 28, 29, 30, 31, 32, 33, 34, 36, 38 and high on days 8, 9, 13, 14. The two sets are the same days: the exact limits are narrower, most of all in the first days, and on no day does the EWMA fall between an exact and an asymptotic limit.
+
 The first low signal is day 22. The days with an upper signal are 8, 9, 13, 14. Derived: day 8's value enters the EWMA with weight lambda, 0.200000, and keeps weight lambda (1 - lambda)^(t - 8) on day t, which is 0.065536 on day 13.
 
 | lambda, stated | asymptotic half-width, psi, derived | first low signal day | days signalling |
@@ -856,6 +873,13 @@ At lambda 1 the EWMA is the observation itself and the limits are target +/- 3.0
 # SECTION 27: The tabular CUSUM: k, h, stated units, and no reset (owned by Expert m03)
 
 S_hi(i) = max(0, S_hi(i-1) + x_i - target - k) and S_lo(i) = max(0, S_lo(i-1) + target - k - x_i), both starting at 0. A signal is S_hi or S_lo strictly above h. `units` is required, and the engine's own refusal (section 4) names the two choices, sigma and data, with its rule of thumb. No reset after a signal. The plain cumulative sum of x - target is returned too.
+
+NO ENGINE DEFAULT FOR K OR H. The engine takes neither the reference value nor the decision interval by default; the rule of thumb in its units refusal is advice, and a call without either is refused, naming the field:
+
+| what was left out | field named | the engine's message |
+| --- | --- | --- |
+| k | `k` | k must be a finite number, zero or more |
+| h | `h` | h must be a finite number above zero |
 
 NIST 6.3.2.3, target 325, k 0.317500 and h 4.195900 in data units (golden): the first upper signal is group 14.
 

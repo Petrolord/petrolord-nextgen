@@ -24,7 +24,7 @@ The engine counts entries from 0, so "entry 67" in the reason is day 68. The fla
 
 ## What the drop is
 
-The planted defect on day 70 is a keying error of ten thousand barrels, a stated input. The drop the engine reports is smaller: it is the error less the two days of production between the readings, and those two days, derived, come to 2503.300000 bbl. In other words, the flag measures what the sheet shows, a fall from day 68 to day 70, and the true size of the keying slip is only recoverable once you know how much the well produced in between. The engine reports the first; the second takes your reading of the sheet.
+The planted defect on day 70 is a keying error of ten thousand barrels, a stated input. The drop the engine reports is smaller: the `drop` field is 7496.700000 bbl, the error less the oil produced on days 69 and 70. Those two days of production, derived, come to 2503.300000 bbl, and that figure is not the drop. In other words, the flag measures what the sheet shows, a fall from day 68 to day 70, and the true size of the keying slip is only recoverable once you know how much the well produced in between. The engine reports the first; the second takes your reading of the sheet.
 
 ## The tolerance
 

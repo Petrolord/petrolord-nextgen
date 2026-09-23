@@ -9,6 +9,8 @@ The golden case the engine is checked against, `iqr-exactly-on-both-fences`:
 | what | value |
 | --- | --- |
 | values, stated | -4, 2, 2, 3, 4, 5, 6, 6, 12 |
+| settings | the defaults, rule R7 and k 1.5 |
+| Q1, Q3 and IQR | 2, 6 and 4 |
 | lower fence | -4 |
 | upper fence | 12 |
 | entries flagged | 0 |

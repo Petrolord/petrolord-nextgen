@@ -15,15 +15,15 @@ Each module of this tier took one question and one check at a time. A real file 
 
 And EKENE-7's log through the same checks:
 
-| check | channel | failed or flags |
-| --- | --- | --- |
-| completeness | RHOB | 1 |
-| completeness | NPHI | 3 |
-| rangeCheck | GR as delivered | 4 |
-| rangeCheck | NPHI | 10 |
-| rangeCheck | RT | 1 |
-| indexCheck | depth | 1 |
-| frozenRuns | DT | 1 |
+| check | channel | entries failed | flags |
+| --- | --- | --- | --- |
+| completeness | RHOB | 12 | 1 |
+| completeness | NPHI | 3 | 3 |
+| rangeCheck | GR as delivered | 4 | 4 |
+| rangeCheck | NPHI | 10 | 10 |
+| rangeCheck | RT | 1 | 1 |
+| indexCheck | depth | 1 | 1 |
+| frozenRuns | DT | 9 | 1 |
 
 Every one of these flags is a planted defect.
 

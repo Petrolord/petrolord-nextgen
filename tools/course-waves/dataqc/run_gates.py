@@ -69,6 +69,12 @@ RUNS = [
     ('gate_typed_literals.py NEGATIVE CONTROL', f'{HERE}/gate_typed_literals.py', ['python3', f'{HERE}/gate_typed_literals.py', '--plant'], 1),
     ('gate_vocabulary.py', f'{HERE}/gate_vocabulary.py', ['python3', f'{HERE}/gate_vocabulary.py'], 0),
     ('gate_vocabulary.py NEGATIVE CONTROL', f'{HERE}/gate_vocabulary.py', ['python3', f'{HERE}/gate_vocabulary.py', '--plant'], 1),
+    ('truth_check.py', f'{HERE}/truth_check.py', ['python3', f'{HERE}/truth_check.py'], 0),
+    ('truth_check.py NEGATIVE CONTROL', f'{HERE}/truth_check.py', ['python3', f'{HERE}/truth_check.py', '--plant'], 1),
+    ('numsweep_dataqc.mjs', f'{HERE}/numsweep_dataqc.mjs', ['node', f'{HERE}/numsweep_dataqc.mjs'], 0),
+    ('numsweep_dataqc.mjs --selftest', f'{HERE}/numsweep_dataqc.mjs', ['node', f'{HERE}/numsweep_dataqc.mjs', '--selftest'], 0),
+    ('lengths.py', f'{HERE}/lengths.py', ['python3', f'{HERE}/lengths.py'], 0),
+    ('lengths.py --selftest', f'{HERE}/lengths.py', ['python3', f'{HERE}/lengths.py', '--selftest'], 0),
     ('gate_claims.mjs', f'{HERE}/gate_claims.mjs', ['node', f'{HERE}/gate_claims.mjs'], 0),
     ('gate_claims.mjs NEGATIVE CONTROL', f'{HERE}/gate_claims.mjs', ['node', f'{HERE}/gate_claims.mjs', '--plant-a-recon-figure'], 1),
 ]

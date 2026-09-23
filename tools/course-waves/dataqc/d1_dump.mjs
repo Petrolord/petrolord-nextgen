@@ -552,7 +552,7 @@ table(['flagged day', 'compared with day', 'drop, bbl', 'the engine reason'], cc
 planted(17, cc.flags.length === 1 && cc.flags[0].index === 69 && cc.flags[0].previousIndex === 67, JSON.stringify(cc.flags));
 w();
 const cf = cc.flags[0];
-w(`Day ${day(cf.index - 1)} is missing (stated), so day ${day(cf.index)} is measured against day ${day(cf.previousIndex)}. The keying error planted on day ${day(cf.index)} is ten thousand barrels (stated); the drop the engine reports is the error less the two days of production between the readings, derived ${f6(10000 - cc.flags[0].drop)} bbl.`);
+w(`Day ${day(cf.index - 1)} is missing (stated), so day ${day(cf.index)} is measured against day ${day(cf.previousIndex)}. The keying error planted on day ${day(cf.index)} is ten thousand barrels (stated); the \`drop\` field is ${f6(cc.flags[0].drop)} bbl, which is that error less the oil produced on days ${day(cf.index - 1)} and ${day(cf.index)}. Derived: ten thousand less the drop is ${f6(10000 - cc.flags[0].drop)} bbl, the two days of production, and it is not the drop.`);
 w();
 const ccTol = success('cumulativeCheck with a meter tolerance', Q.cumulativeCheck({ cumulative: PROD.cumOil, tolerance: CUM_TOL }));
 w(`READING THE FLAG. The engine counts entries from 0, so "entry ${cf.previousIndex}" in the reason is day ${day(cf.previousIndex)}. The flag carries its figures as fields: \`previous\` ${f6(cf.previous)}, \`value\` ${f6(cf.value)} and \`drop\` ${f6(cf.drop)}. The reason prints each cumulative as the shortest decimal that reads back to its field, and a lesson quotes the fields at six decimals.`);
@@ -686,25 +686,27 @@ w(`The accented entry ${accent} normalises to ${du.normalised[accent]}: NFKD sep
 section('endtoend', 'One dataset, every check', ['Associate m06']);
 w('EKENE-3\'s production sheet through every Associate check, with the settings stated in the sections above:');
 w();
-table(['check', 'column', 'setting, stated', 'checked or n', 'failed or flags'], [
-  ['completeness', 'oil', 'none', String(oilC.n), String(oilC.missing)],
-  ['rateCheck', 'oil', 'hours on and status', String(rc.checked), String(rc.failed)],
-  ['cumulativeCheck', 'cumOil', `tolerance ${S(cc.basis.tolerance)}`, String(PROD.cumOil.filter((v) => v !== null).length), String(cc.failed)],
-  ['waterCutCheck', 'waterCut', `tolerance ${eTxt(WC_TOL)}`, String(PROD.n), String(wcRep.failed)],
-  ['phaseSumCheck', 'oil + water against gross', `relTolerance ${S(ps.basis.relTolerance)}`, String(ps.sums.filter((v) => v !== null).length), String(ps.failed)],
-  ['frozenRuns', 'gas', `minRun ${fzG.basis.minRun}, tolerance ${S(fzG.basis.tolerance)}`, String(PROD.n), String(fzG.runs.length)],
+w('Two different counts appear below and are kept in separate columns. ENTRIES FAILED is the number of entries (days, samples) the check faults: missing values for completeness, failed entries for the others. FLAGS is the number of flag objects the engine returns: completeness returns one flag per gap run, and frozenRuns one flag per run, so a run of several entries is one flag.');
+w();
+table(['check', 'column', 'setting, stated', 'checked or n', 'entries failed', 'flags'], [
+  ['completeness', 'oil', 'none', String(oilC.n), String(oilC.missing), String(oilC.flags.length)],
+  ['rateCheck', 'oil', 'hours on and status', String(rc.checked), String(rc.failed), String(rc.flags.length)],
+  ['cumulativeCheck', 'cumOil', `tolerance ${S(cc.basis.tolerance)}`, String(PROD.cumOil.filter((v) => v !== null).length), String(cc.failed), String(cc.flags.length)],
+  ['waterCutCheck', 'waterCut', `tolerance ${eTxt(WC_TOL)}`, String(PROD.n), String(wcRep.failed), String(wcRep.flags.length)],
+  ['phaseSumCheck', 'oil + water against gross', `relTolerance ${S(ps.basis.relTolerance)}`, String(ps.sums.filter((v) => v !== null).length), String(ps.failed), String(ps.flags.length)],
+  ['frozenRuns', 'gas', `minRun ${fzG.basis.minRun}, tolerance ${S(fzG.basis.tolerance)}`, String(PROD.n), String(fzG.runs.reduce((a, r) => a + r.length, 0)), String(fzG.flags.length)],
 ]);
 w();
 w('EKENE-7\'s log through the same checks:');
 w();
-table(['check', 'channel', 'failed or flags'], [
-  ['completeness', 'RHOB', String(rhobC.gapRuns.length)],
-  ['completeness', 'NPHI', String(nphiC.gapRuns.length)],
-  ['rangeCheck', 'GR as delivered', String(grRange.failed)],
-  ['rangeCheck', 'NPHI', String(nphiR.failed)],
-  ['rangeCheck', 'RT', String(rtR.failed)],
-  ['indexCheck', 'depth', String(ix.flags.length)],
-  ['frozenRuns', 'DT', String(fzD.runs.length)],
+table(['check', 'channel', 'entries failed', 'flags'], [
+  ['completeness', 'RHOB', String(rhobC.missing), String(rhobC.flags.length)],
+  ['completeness', 'NPHI', String(nphiC.missing), String(nphiC.flags.length)],
+  ['rangeCheck', 'GR as delivered', String(grRange.failed), String(grRange.flags.length)],
+  ['rangeCheck', 'NPHI', String(nphiR.failed), String(nphiR.flags.length)],
+  ['rangeCheck', 'RT', String(rtR.failed), String(rtR.flags.length)],
+  ['indexCheck', 'depth', String(new Set(idxs(ix.flags)).size), String(ix.flags.length)],
+  ['frozenRuns', 'DT', String(fzD.runs.reduce((a, r) => a + r.length, 0)), String(fzD.flags.length)],
 ]);
 w();
 w('Every one of these flags is a planted defect. The Associate tier checks whether data are fit to use; which values stand apart from the rest is the next tier\'s question.');
@@ -840,7 +842,7 @@ must('the whole-log fences flag nothing', fAll.flags.length === 0, fAll.flags.le
 w();
 const onf = golden('iqr-exactly-on-both-fences');
 const onr = success('golden on both fences', Q.iqrFences(onf.args));
-w(`ON THE FENCE IS INSIDE. The golden case ${onf.id}: values ${onf.args.values.map(num).join(', ')}, fences ${num(onr.lower)} and ${num(onr.upper)}, flags ${onr.flags.length}.`);
+w(`ON THE FENCE IS INSIDE. The golden case ${onf.id}: values ${onf.args.values.map(num).join(', ')} (n = ${onf.args.values.length}), at the defaults, rule ${onr.method} and k ${S(onr.k)}. The engine returns Q1 ${num(onr.q1)}, Q3 ${num(onr.q3)} and IQR ${num(onr.iqr)}, fences ${num(onr.lower)} and ${num(onr.upper)}, and ${onr.flags.length} flags: the lowest and highest values sit exactly on the fences.`);
 must('a value on a fence is not flagged', onr.flags.length === 0 && onf.args.values.includes(onr.lower) && onf.args.values.includes(onr.upper), JSON.stringify(onr));
 
 /* ============================================================ SECTION 21 */
@@ -870,7 +872,12 @@ w();
 const edge = hp.points[0];
 const gapPt = success('hampel next to a gap', Q.hampel({ values: CH.RHOB.values, halfWindow: 3 }));
 const g0 = rhobC.gapRuns[0].start;
-w(`EDGES AND GAPS. At entry 0 the window is truncated to ${edge.windowCount} samples. On the density, entry ${g0 - 1} sits beside the twelve-sample gap and its window holds ${gapPt.points[g0 - 1].windowCount} present samples; entry ${g0} is missing and is not judged (\`judged\` ${gapPt.points[g0].judged}).`);
+w('EDGES. The engine returns one point per entry, and a point carries `windowCount` (present samples in its window) and `judged` (true when that count is three or more). The first four EKENE-7 gamma ray points, halfWindow 3, as returned:');
+w();
+table(['entry', 'windowCount', 'judged', 'window median', 'window MAD', 'threshold', 'flagged'], hp.points.slice(0, 4).map((pt) => [String(pt.index), String(pt.windowCount), String(pt.judged), f6(pt.median), f6(pt.mad), f6(pt.threshold), String(hp.flags.some((f) => f.index === pt.index))]));
+must('entry 0 is judged on a truncated window of four', edge.windowCount === 4 && edge.judged === true, JSON.stringify(edge));
+w();
+w(`EDGES AND GAPS. At entry 0 the window is truncated to ${edge.windowCount} samples, which is at least three, so entry 0 is judged (\`judged\` ${edge.judged}) and is not flagged. On the density, entry ${g0 - 1} sits beside the twelve-sample gap and its window holds ${gapPt.points[g0 - 1].windowCount} present samples; entry ${g0} is missing and is not judged (\`judged\` ${gapPt.points[g0].judged}).`);
 const thin = success('hampel on a thin window', Q.hampel({ values: THIN, halfWindow: 1 }));
 w(`A window too thin to judge: on ${THIN.map((v) => (v === null ? 'null' : S(v))).join(', ')} (stated) with halfWindow 1, entry 3 has ${thin.points[3].windowCount} present sample in its window and \`judged\` ${thin.points[3].judged}.`);
 must('entry 3 of the thin series is not judged', thin.points[3].judged === false && thin.flags.length === 0, JSON.stringify(thin.points[3]));
@@ -1016,6 +1023,11 @@ w(`Day ${W.glitchDay} is the planted gauge glitch (${f6(W.monitored[W.glitchDay 
 
 section('ewma', 'The EWMA chart: a weighted memory with limits from history', ['Expert m02']);
 w('EWMA_t = lambda x_t + (1 - lambda) EWMA_(t-1), starting at EWMA_0 = the target. Limits are target +/- L sigma sqrt(lambda / (2 - lambda)) (asymptotic), or the exact ones, which multiply the variance by 1 - (1 - lambda)^(2t). Target and sigma are REQUIRED and come from historical in-control data; the chart does not estimate them from the data it monitors.');
+const noLam = refusal('ewmaChart with no lambda', Q.ewmaChart({ values: [1, 2], target: 1, sigma: 1 }), 'lambda');
+w();
+w('NO ENGINE DEFAULT FOR LAMBDA. The engine takes no default smoothing constant: a call without `lambda` is refused, naming the field, in the engine\'s own words:');
+w();
+w(`> ${noLam.error}`);
 w();
 const ne = golden('nist-6.3.2.4-ewma');
 const ner = success('NIST EWMA', Q.ewmaChart(ne.args));
@@ -1033,6 +1045,11 @@ table(['day', 'pressure', 'EWMA', 'asymptotic lower', 'asymptotic upper', 'exact
 planted(21, ewA.flags.some((f) => f.rule === 'ewma-below-lcl' && f.index >= W.shiftStartsDay - 1), JSON.stringify(ewA.flags));
 w();
 const firstLowE = ewA.flags.find((f) => f.rule === 'ewma-below-lcl');
+const exLow = ewX.flags.filter((f) => f.rule === 'ewma-below-lcl').map((f) => f.index + 1);
+const exHigh = ewX.flags.filter((f) => f.rule === 'ewma-above-ucl').map((f) => f.index + 1);
+w(`The signal column is the asymptotic chart's. With the EXACT limits the engine signals low on days ${list(exLow)} and high on days ${list(exHigh)}; with the asymptotic limits, low on days ${list(ewA.flags.filter((f) => f.rule === 'ewma-below-lcl').map((f) => f.index + 1))} and high on days ${list(ewA.flags.filter((f) => f.rule === 'ewma-above-ucl').map((f) => f.index + 1))}. ${JSON.stringify(ewX.flags.map((f) => [f.index, f.rule])) === JSON.stringify(ewA.flags.map((f) => [f.index, f.rule])) ? 'The two sets are the same days: the exact limits are narrower, most of all in the first days, and on no day does the EWMA fall between an exact and an asymptotic limit.' : 'The two sets differ.'}`);
+must('the exact chart signals on at least the asymptotic chart\'s days', ewA.flags.every((f) => ewX.flags.some((g) => g.index === f.index && g.rule === f.rule)), 'exact contains asymptotic');
+w();
 w(`The first low signal is day ${firstLowE.index + 1}. The days with an upper signal are ${list(ewA.flags.filter((f) => f.rule === 'ewma-above-ucl').map((f) => f.index + 1))}. Derived: day ${W.glitchDay}'s value enters the EWMA with weight lambda, ${f6(LAMBDA)}, and keeps weight lambda (1 - lambda)^(t - ${W.glitchDay}) on day t, which is ${f6(LAMBDA * (1 - LAMBDA) ** 5)} on day ${W.glitchDay + 5}.`);
 w();
 table(['lambda, stated', 'asymptotic half-width, psi, derived', 'first low signal day', 'days signalling'], [0.1, 0.2, 0.3, 0.5, 1].map((lam) => {
@@ -1049,6 +1066,12 @@ must('lambda 1 gives three sigma limits', Math.abs((lam1.ucl - ph1.centre) / ph1
 
 section('cusum', 'The tabular CUSUM: k, h, stated units, and no reset', ['Expert m03']);
 w('S_hi(i) = max(0, S_hi(i-1) + x_i - target - k) and S_lo(i) = max(0, S_lo(i-1) + target - k - x_i), both starting at 0. A signal is S_hi or S_lo strictly above h. `units` is required, and the engine\'s own refusal (section 4) names the two choices, sigma and data, with its rule of thumb. No reset after a signal. The plain cumulative sum of x - target is returned too.');
+const noK = refusal('cusumChart with no k', Q.cusumChart({ values: [1, 2], target: 1, units: 'data', h: 4 }), 'k');
+const noH = refusal('cusumChart with no h', Q.cusumChart({ values: [1, 2], target: 1, units: 'data', k: 0.5 }), 'h');
+w();
+w('NO ENGINE DEFAULT FOR K OR H. The engine takes neither the reference value nor the decision interval by default; the rule of thumb in its units refusal is advice, and a call without either is refused, naming the field:');
+w();
+table(['what was left out', 'field named', 'the engine\'s message'], [['k', `\`${noK.field}\``, noK.error], ['h', `\`${noH.field}\``, noH.error]]);
 w();
 const nc = golden('nist-6.3.2.3-cusum-tabular');
 const ncr = success('NIST CUSUM', Q.cusumChart(nc.args));
