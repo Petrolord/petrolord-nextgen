@@ -9,18 +9,18 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # m01, what data quality means
 q(3, "You receive a log whose gamma ray reads fully complete and yet fails the definitional range check at the same bottom entries. What does that pattern usually mean?",
- "A file placeholder such as -999.25 was left in place: completeness counts it present and the range check sees a value below the limit.",
+ "The file's placeholder, such as -999.25, was left in place: completeness counts it present and the range check sees a value below the limit.",
  ["The gamma ray tool saturated at the bottom of the hole and wrote its largest reading there.",
   "The index skipped samples at the bottom, so the range check compared values against the wrong depths.",
   "The range check ran before completeness, and the engine flags whatever an earlier check did not."],
  "A channel that reads complete and fails its range check at the same entries is what a sentinel left in place looks like. On EKENE-7 the four -999.25 values at entries 236 to 239 read completeness 1.000000 and 4 range failures. The practical habit is to run the two checks side by side before converting anything; neither check depends on the other's order, and the index plays no part in a range check."),
 
 q(0, "A shut-in day is recorded with an oil rate of 0. Why does it matter that the engine counts that zero as a present value?",
- "A zero rate while shut in is the correct record, and counting zeros as missing would make every shut-in day look like a lost reading.",
- ["Because the rate check flags every zero as a rate while shut in, and it needs the zero present to do so.",
+ "Because a zero rate while shut in is the correct record, and counting zeros as missing would make every shut-in day look like a lost reading.",
+ ["Because the rate check flags every zero as a rate while shut in, and it needs the zero present in the column to do so.",
   "Because a zero is the engine's own marker for a missing rate, and the completeness check counts it as missing in every column it reads.",
   "Because zero is the definitional minimum of a rate, so a zero rate has to be present in the column to be flagged as falling below it."],
- "Missing is null, undefined or NaN, and a zero is present. EKENE-3's day 60 is shut in with 0.000000 oil and is not flagged; the rate check depends on exactly that. The rate minimum of 0 is inclusive, so a zero is inside it, and a zero is never the engine's marker for anything."),
+ "Missing is null, undefined or NaN, and a zero is present. EKENE-3's day 60 is shut in with 0.000000 oil: the rate check counts it among the 87 days checked and does not flag it, since a zero rate while shut in is correct. The rate minimum of 0 is inclusive, so a zero is inside it, and a zero is never the engine's marker for anything."),
 
 q(0, "Where does a result from the engine record the convention the check used, such as a tolerance or where its limits came from?",
  "In its `basis` block, which every result carries beside its figures.",
@@ -34,10 +34,10 @@ q(3, "A flag carries its figure twice: as a numeric field such as `value` or `dr
  ["The reason, since it prints the figure exactly as the engine computed it, with every digit it has.",
   "Either, since the field and the reason always print a figure the same way.",
   "The reason, since the field is rounded to six decimals before it is returned."],
- "The flag's numeric fields are what a lesson reasons with, at the digest's six decimals: the day 70 `drop` is 7496.700000. The reason prints each figure as the shortest decimal that reads back to its field, written for a person scanning a list, so the two can look different: the day 70 reason prints 1338506.2 where the `previous` field is quoted as 1338506.200000."),
+ "The flag's numeric fields are what a lesson reasons with, at six decimals: the day 70 `drop` is 7496.700000. The reason prints each figure as the shortest decimal that reads back to its field, written for a person scanning a list, so the two can look different: the day 70 reason prints 1338506.2 where the `previous` field is quoted as 1338506.200000."),
 
 q(2, "A production engineer asks the engine to hand back EKENE-3's sheet with the bad days corrected. What will it give?",
- "Flags with their rules and reasons on the sheet as delivered; it does not fill, repair or delete a value.",
+ "A set of flags with their rules and reasons on the sheet as delivered; it does not fill, repair or delete a value.",
  ["A corrected sheet, with each negative rate set to zero and each missing day filled in from its present neighbours.",
   "A corrected sheet for the flagged days only, with a basis note listing every value it changed.",
   "A refusal, since a sheet carrying planted defects has to be cleaned before any check will run on it."],
@@ -74,17 +74,17 @@ q(2, "EKENE-3's cumulative oil column reads a completeness of 0.988889. What lie
 
 q(0, "At a half-foot maxStep, EKENE-7's neutron has four holes in the interval 8400 to 8515 ft. Where do they come from?",
  "Three straddle its three single missing samples, and the fourth is the index skip at 8474.500000 to 8475.500000 ft.",
- ["All four straddle missing neutron samples, one of them a fourth neutron sample lost where the index skips a depth.",
+ ["All four straddle missing neutron samples, one of them a fourth neutron sample lost at the depth where the index skips a row.",
   "Two come from its missing samples and two from the density's pad lift, which the neutron shares.",
   "Each is a step equal to maxStep, which coverage counts as uncovered whenever the step is exactly half a foot long."],
- "Each single missing sample makes a step of 1 ft between present neighbours, which a half-foot maxStep calls a hole, and the index skip after entry 149 makes the fourth. A step equal to maxStep covers. The neutron has only 3 missing samples, and the density's gap is the density's own."),
+ "Each single missing sample leaves a step between its present neighbours longer than half a foot, which a half-foot maxStep calls a hole, and the index skip after entry 149 makes the fourth. A step equal to maxStep covers. The neutron has only 3 missing samples, and the density's gap is the density's own."),
 
 q(2, "Over the stated interval of the log, the gamma ray, its placeholders already nulled, is run through coverage with a one-foot maxStep. What comes back?",
- "Coverage 1.000000 with 115.000000 ft covered and no holes, since the 1 ft step at the index skip now covers.",
- ["Coverage 0.991304 with 114.000000 ft covered, since a skipped index sample stays a hole at any maxStep at all.",
+ "Coverage 1.000000 with 115.000000 ft covered and no holes, since the step across the index skip is now within maxStep.",
+ ["Coverage 0.991304 with 114.000000 ft covered, since a skipped index sample stays a hole at any maxStep the caller states.",
   "Coverage 0.983333, the same as its completeness once the four sentinels at the bottom are converted to null.",
   "A refusal, since a maxStep longer than the logging step would hide the skipped sample."],
- "At a one-foot maxStep the step from 8474.500000 to 8475.500000 ft is equal to maxStep and covers, so the gamma ray reads 1.000000 and 115.000000 ft. 0.991304 is the half-foot reading. The converted sentinels sit at entries 236 to 239, below the interval's end, and the engine refuses no maxStep for being generous."),
+ "At a one-foot maxStep the step from 8474.500000 to 8475.500000 ft covers, so the gamma ray reads 1.000000 and 115.000000 ft. 0.991304 is the half-foot reading. The converted sentinels sit at entries 236 to 239, below the interval's end, and the engine refuses no maxStep for being generous."),
 
 q(0, "How should a caller choose the `maxStep` for a coverage figure going into a report?",
  "From the question: the logging step if every sample matters, something longer if a single dropout does no harm, and state it beside the figure.",
@@ -122,12 +122,12 @@ q(1, "The engine's limit table holds 16 channel and unit pairs. How does it reac
   "The rate and cumulative channels are each listed once per phase, oil, water and gas."],
  "The table has 16 channel and unit pairs across 10 channels because sonic, caliper, absolutePressure and temperature each appear in more than one unit; rate and cumulative are listed once each, in any unit. The engine ships no plausibility ranges, and limits are columns of a row."),
 
-q(0, "A channel whose true values are small fractions is written in percent, and every percent value it carries is at or below one. What does the fraction limit report?",
+q(0, "A channel whose true values are small fractions is written in percent while the call still names v/v, and every percent value it carries is at or below one. What does the fraction limit report?",
  "Nothing: each value sits inside [0, 1], so the percent slip passes without a flag.",
  ["An above-maximum flag on each value, since the engine checks the unit label against the size.",
   "A refusal naming `unit`, since percent is not a unit the fraction channel lists.",
   "A below-minimum flag on each value, since a percent is read against a minimum of 1."],
- "The fraction check catches a percent value only when it is larger than one. A value at or below one sits inside the definitional range and passes. The engine checks values against limits and cannot see how a number was meant; the fraction channel's range is 0 to 1."),
+ "The fraction check catches a percent value only when it is larger than one. A value at or below one sits inside the definitional range and passes, and v/v is a listed unit, so nothing is refused. The engine checks values against limits and cannot see how a number was meant; the fraction channel's range is 0 to 1."),
 
 q(2, "Which EKENE-7 channel fails the definitional range check at exactly one entry, and why?",
  "The resistivity, at entry 120, where a zero meets an exclusive minimum.",
@@ -144,9 +144,9 @@ q(1, "With its sentinels converted to null, EKENE-7's gamma ray is checked again
  "240 samples less the 4 converted to null leaves 236 present values, and the check reports 236 checked and 0 failed. Failed values are still counted as checked, and nothing is removed; the basis reads \"limits supplied by the caller\"."),
 
 q(1, "EKENE-3's day 59 ran 18.500000 hours with a positive oil rate. What does the rate check make of the rate's size for a partial day?",
- "Nothing: the day is not shut in, and the engine carries no rule for whether a rate suits the hours flowed.",
+ "It flags nothing: the day is not shut in, and the engine carries no rule for whether a rate suits the hours flowed.",
  ["It flags the rate as rate-while-shut-in, since fewer than 24.000000 hours on marks the day as a shut-in day.",
-  "It scales the rate up to 24.000000 hours and flags the day if the scaled figure exceeds its neighbours' rates.",
+  "It scales the rate up to 24.000000 hours and flags the day if the scaled figure exceeds either of its neighbours' rates.",
   "It refuses the call, since hoursOn must be 0 or 24.000000 for the shut-in rule to apply."],
  "Only a status of 'shut-in' or zero hours makes a day shut in, so day 59 is not, and a positive rate on it is allowed. Whether the rate is plausible for 18.500000 hours of flow is a different question, and the engine has no rule for it. It scales nothing and refuses no partial day."),
 
@@ -155,7 +155,7 @@ q(3, "The same EKENE-3 oil column is checked once with the status column and onc
  ["Status fails 2 days and hours on fails 1, since an hours on column alone cannot mark any day as shut in.",
   "Status fails 1 day and hours on fails 2, since the status column never names day 61.",
   "Both fail 3 days, since each column adds its own flag to the negative rate on day 47."],
- "The digest table reads 2 failed with rates and status, 2 with rates and hours on, and 2 with both. Day 61 is 'shut-in' in the status column and has 0.000000 hours on, and either marks it shut in. With rates alone the count is 1, the negative rate."),
+ "The course's table reads 2 failed with rates and status, 2 with rates and hours on, and 2 with both. Day 61 is 'shut-in' in the status column and has 0.000000 hours on, and either marks it shut in. With rates alone the count is 1, the negative rate."),
 
 # m04, the depth and time index
 q(0, "Why does the engine take the median of the steps as the expected step, when it could take their mean?",
@@ -180,9 +180,9 @@ q(3, "On the splice you replace the null at entry 12 with the depth that correct
  "The step after a lost entry is measured from the last present entry, so entry 12's loss showed up twice: once as missing and once as the long step from entry 11 to entry 13. Filling it removes both. Entry 6 follows the reversal at entry 5, which is present, and the expected step is the median of the forward steps, which one entry does not set."),
 
 q(2, "The log's own depth column, all of it, goes through the index check. How many repeated depths and backward steps turn up, and is it monotonic?",
- "0 duplicates, 0 reversals and monotonic true: both of the log's duplicates are at the splice.",
+ "0 duplicates, 0 reversals and monotonic true: the two duplicates belong to the separate splice index.",
  ["2 duplicates, 1 reversal and monotonic false, since the full log index includes the splice.",
-  "0 duplicates, 1 reversal and monotonic false, since the skipped sample after entry 149 steps back.",
+  "0 duplicates, 1 reversal and monotonic false, since the skipped sample after entry 149 steps back onto an earlier depth.",
   "1 duplicate, 0 reversals and monotonic true, since the skipped sample leaves one depth repeated."],
  "The full log index reads 0 duplicates, 0 reversals, 1 irregular step and monotonic true. The skipped sample is a step forward that is too long, which is an irregular step. The splice is a separate 15-entry index where two runs meet."),
 
@@ -209,13 +209,13 @@ q(3, "A caller sets a step tolerance of 0.6 on a half-foot splice to quiet its f
 
 # m05, does it agree with itself
 q(0, "Why does a cumulative check carry a tolerance at all, when a cumulative can never fall?",
- "Meters and allocation systems make small corrections that can nudge a cumulative down, and the tolerance says how large a fall counts as noise.",
+ "So the small corrections meters and allocation systems make, which can nudge a cumulative down, are read as noise up to a stated size.",
  ["So the check can ignore the missing days, which would otherwise count as falls to zero.",
   "So the check can accept a keying error of a few thousand barrels as ordinary meter drift.",
   "So a rise of more than the tolerance is flagged as well, catching gains that are too large."],
  "A tolerance exists because small corrections are real; the dataset tables use 0, which accepts no fall at all. A tolerance wide enough to swallow a keying error hides it: at 8000 bbl the day 70 drop of 7496.700000 bbl is not flagged. Missing days are skipped by the last-present-value rule, and a rise is never flagged."),
 
-q(3, "A sheet's water cut column actually holds water over oil, the water-oil ratio. What will `waterCutCheck` report?",
+q(3, "Suppose EKENE-3's water cut column held water over oil, the water-oil ratio, in place of the cut. What will `waterCutCheck` report?",
  "A mismatch day after day, since the engine's cut is water / (oil + water); the fix is a relabelled column.",
  ["Nothing, since the engine accepts any of the three water cut definitions when the rates agree.",
   "An out-of-range flag on every day, since a water-oil ratio is always above 1.",
@@ -230,15 +230,15 @@ q(1, "On day 10 of EKENE-3 the engine computes a water cut of 0.183105. What is 
  "0.816895 is derived as oil over liquid, the oil cut; with the water cut it makes up the whole liquid. The water-oil ratio on day 10 is 0.224147. The engine checks only the liquid-basis water cut, and a phase sum's allowance is 0.005 of that day's gross total."),
 
 q(2, "Why does the engine scale its default phase sum allowance by the gross total?",
- "Every day has a total, and scaling by it gives a high-rate day a proportionally wider allowance than a low-rate day.",
+ "Because a relative allowance grows with the day's total, giving a high-rate day a proportionally wider allowance than a low-rate day.",
  ["Because the total is the most accurate figure on the sheet, so errors are always in the parts.",
   "Because an allowance on the parts would flag every day on which a part was zero.",
   "Because a fixed number of barrels is refused by the engine as a tolerance."],
- "The default allowance is 0.005 of the TOTAL: on day 40 that is 8.870000 and on day 41 8.991000. The absolute tolerance is there for a floor of barrels and defaults to 0; 50 bbl/d is an allowed stated setting. The engine makes no claim about which figure is more accurate."),
+ "The default allowance is 0.005 of the TOTAL: on day 40 that is 8.870000 and on day 41 8.991000. The absolute tolerance is there for a floor of barrels and defaults to 0; 50 bbl/d is an allowed stated setting. Days 31 to 33 carry no total and are not checked at all. The engine makes no claim about which figure is more accurate."),
 
 q(3, "EKENE-7's sonic holds 83.200000 us/ft from entry 175 to entry 183. Why does `frozenRuns` treat that as a sign of trouble in a log?",
- "The rock changes every half foot, so nine identical readings in a row suggest the tool stopped responding.",
- ["Because 83.200000 us/ft falls outside the definitional limit for a slowness recorded in us/ft on that log run.",
+ "Because the rock changes every half foot, nine identical readings in a row suggest the tool stopped responding.",
+ ["Because 83.200000 us/ft falls outside the definitional limit for a slowness recorded in us/ft on the logging run that recorded it.",
   "Because the nine readings are missing values, which the frozen-run check counts as a run of missing samples.",
   "Because any repeated reading in a log is a defect in itself, whatever the length of the run it belongs to."],
  "The run of 9 is present, valid and in range; its only sign is that the value does not move, where the rock under a logging tool changes every sample. The slowness is positive, so it is inside its limit, and a run must reach minRun, 5 by default, before it is flagged."),
@@ -270,16 +270,16 @@ q(2, "EKENE-1 and EKENE-10 normalise to EKENE1 and EKENE10, one edit apart. What
  ["A near pair, since one added digit is a single Levenshtein edit, within the default maxDistance of 1.",
   "A normalised pair, since stripping leading zeros turns 10 into 1.",
   "An exact pair, since both names share the stem EKENE-1 as written."],
- "The normalised forms are 1 edit apart but carry 1 and 10, so the digit rule fails and they are not near; the digest's table reads false for the pair. Leading zeros are stripped only at the front of a digit group, so 10 stays 10. The raw strings differ, so nothing is exact."),
+ "The normalised forms are 1 edit apart but carry 1 and 10, so the digit rule fails and they are not near; the course's table reads false for the pair. Leading zeros are stripped only at the front of a digit group, so 10 stays 10. The raw strings differ, so nothing is exact."),
 
 q(0, "What happens to the pairs reported on a list when `maxDistance` is raised above its default of 1?",
- "The near rule reaches further and pairs more names that are merely similar, so the list to review grows.",
+ "The near rule reaches further, so the list to review can grow as names that are merely similar get paired.",
  ["The engine reports fewer pairs, since a larger distance merges near pairs into the normalised class above them.",
-  "Nothing changes, since the digit rule decides every near pair whatever the distance.",
+  "Nothing can change, since the digit rule alone decides every near pair and the distance is never consulted.",
   "The engine refuses, since maxDistance must stay at 1 for well names."],
- "The default of 1 catches one dropped, added or replaced character; a larger value reaches further and pairs more names that are merely similar. The digit rule still applies, but among names with matching digits a wider distance admits more. Classes are decided by the rule each pair meets, and maxDistance is a caller setting."),
+ "The default of 1 catches one dropped, added or replaced character; a larger value reaches further and can pair names that are merely similar, and it never removes a pair. The digit rule still applies, but among names with matching digits a wider distance admits more. Classes are decided by the rule each pair meets, and maxDistance is a caller setting."),
 
-q(3, "Put EKENE-3's flags in date order. Which comes first on the sheet?",
+q(3, "With the settings of the one-dataset table, put EKENE-3's flags in date order. Which comes first on the sheet?",
  "The water cut written in percent on days 20 to 24.",
  ["The oil meter outage on days 31 to 33, which empties the oil and gross columns.",
   "The truck load booked into the gross total on day 40, the first phase sum failure.",
@@ -301,7 +301,7 @@ q(1, "At the end of this tier, what is the answer to whether EKENE-3's sheet is 
  "The tier's answer is the pair of tables with their settings and a note on what the owner must decide, since every flag is a question and a count without its setting cannot be reproduced. The engine removes nothing and gives no single verdict, and which values stand apart is the next tier's question."),
 
 q(2, "`duplicateIdentifiers` reports EKENE-7, EKENE 7 and ÉKENE-7 as normalised pairs. Which spelling does it keep as the master record?",
- "None: it reports the pairs with their class and reason, and choosing the master spelling is for whoever owns the well list.",
+ "The choice is left open: it reports the pairs with their class and reason, and choosing the master spelling is for whoever owns the well list.",
  ["The first spelling in the list, EKENE-7, which the engine keeps and marks the others as copies.",
   "The normalised form, EKENE7, which the engine writes back over all three entries.",
   "The spelling that appears in the most databases, which the engine counts across the three lists."],

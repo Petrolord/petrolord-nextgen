@@ -47,7 +47,7 @@ q(3, "The engine exports five dimension names in a fixed display order. Which li
  ["Validity, completeness, consistency, plausibility, uniqueness.",
   "Completeness, consistency, validity, uniqueness, plausibility.",
   "Completeness, validity, uniqueness, consistency, plausibility, with plausibility shown last."],
- "`DIMENSIONS` lists completeness, validity, consistency, uniqueness and plausibility, in that order. The other orders swap a pair, and the one that places plausibility last still puts uniqueness ahead of consistency."),
+ "`DIMENSIONS` lists completeness, validity, consistency, uniqueness and plausibility, in that order. Each other order moves at least one dimension out of place, and the one that places plausibility last still puts uniqueness ahead of consistency."),
 
 q(0, "This tier asks whether data are fit to use. Which of the five dimensions does it leave to the next tier?",
  "Plausibility, which asks which present, valid, consistent values sit far from the rest.",

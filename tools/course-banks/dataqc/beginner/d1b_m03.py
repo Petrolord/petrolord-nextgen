@@ -64,7 +64,7 @@ q(2, "Asked to check a sonic log in a unit it does not list, what does the engin
  "The engine's own words are: unit must be one of us/ft, us/m for channel sonic: units are never converted here. Unit names in files are not reliable enough to act on silently, so the engine refuses and leaves the decision to a person who can read the header. Sonic is listed in both us/ft and us/m."),
 
 q(3, "EKENE-7's sonic, declared in us/m, passes the range check with 240 checked and 0 failed. What does this show about a unit mislabel?",
- "A mislabel between the two listed sonic units is invisible to the definitional limit, since a slowness is positive in either unit.",
+ "That a mislabel between the two listed sonic units is invisible to the definitional limit, since a slowness is positive in either unit.",
  ["That the engine detected the us/m label and converted the sonic before checking it.",
   "That EKENE-7's sonic was recorded in us/m, since a wrong unit would fail the limit.",
   "That the us/m limit is wider than the us/ft limit and admits every sonic value."],
@@ -107,7 +107,7 @@ q(0, "When does `rateCheck` treat a day as shut in?",
 
 q(1, "The same EKENE-3 oil column goes through `rateCheck` given the rates alone, with no status and no hours on. How many days fail?",
  "1, the negative rate on day 47, since without status or hours the check cannot know day 61 was shut in.",
- ["2, the same as with full context, since the engine infers the shut-in day from the rates on the days around it.",
+ ["2, since the engine infers that day 61 was shut in from the rates on the days around it and flags it anyway.",
   "0, since the check needs a status column before it applies either rule.",
   "3, since the three missing days count as failures when no hours are given."],
  "With rates alone the check fails 1; with the status it fails 2, with the hours on 2, and with both 2. Either column reveals the carried-forward rate. The negative-rate rule needs only the rate, and missing days are never judged by this check. A check is only as good as the context you hand it."),

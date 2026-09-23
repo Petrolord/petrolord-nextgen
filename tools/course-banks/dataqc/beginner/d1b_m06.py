@@ -57,7 +57,7 @@ q(2, "With `digitsMustMatch` set to false, how many near pairs does the Ekene li
  "The settings table reads 1 exact, 8 normalised and 41 near with the digit rule off. Distance alone pairs many real wells that share a stem and differ by number. The digit rule trades a little reach for a list short enough to act on. Exact and normalised counts do not move."),
 
 q(1, "What does the digit rule cost you?",
- "A slip in the well number itself is never reported as near, as a mistyped EKENE-1 for EKENE-7 would read false.",
+ "It never reports a slip in the well number itself as near, as a mistyped EKENE-1 for EKENE-7 would read false.",
  ["It hides every typing slip in the letters of a name, such as EKNE-4 for EKENE-4.",
   "It doubles the near count on a list of wells sharing a stem, as the 41 near pairs show.",
   "It stops accented names from matching their plain spellings, as ÉKENE-7 shows."],

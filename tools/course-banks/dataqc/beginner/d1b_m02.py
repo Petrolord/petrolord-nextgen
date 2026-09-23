@@ -71,14 +71,14 @@ q(1, "At a half-foot maxStep, EKENE-7's density has a long hole from 8439.500000
  "Coverage measures the steps between present samples, so a hole runs from the last present sample to the next one. The twelve missing samples sit between those two depths. The hole every channel shares is the other one, 8474.500000 to 8475.500000 ft, where the index skips a sample."),
 
 q(3, "At a half-foot maxStep the neutron covers 0.965217 of the interval 8400 to 8515 ft. At maxStep 1.000000 ft it covers 1.000000. What changed in the data?",
- "Nothing in the data: every step across a single missing sample is 1 ft, which a 1 ft maxStep covers.",
+ "The maxStep alone: no neutron step, across a missing sample or the skipped index depth, is longer than 1.000000 ft.",
  ["The three missing neutron samples were filled by the engine from their neighbours once the maxStep was raised.",
-  "The engine inserted the skipped index depth.",
+  "The engine inserted the skipped index depth into the index, so the step across it became an ordinary half-foot step.",
   "The neutron's completeness rose to 1.000000 too."],
  "maxStep is the caller's statement of the longest step that still counts as data; raising it changed no sample. The engine does not fill or insert values. The neutron still has 3 missing samples and a completeness of 0.987500, which is how a channel can lose samples without losing coverage."),
 
 q(0, "With its sentinel converted, EKENE-7's gamma ray has no missing value inside 8400 to 8515 ft, yet at a half-foot maxStep it covers 0.991304. Where does the hole come from?",
- "The depth index skips a sample after entry 149, so the step from 8474.500000 to 8475.500000 ft is 1 ft long.",
+ "The depth index skips a sample after entry 149, so the step from 8474.500000 to 8475.500000 ft is longer than half a foot.",
  ["The four converted sentinels at the bottom of the log, entries 236 to 239.",
   "A missing gamma ray sample between those two depths that completeness also counts.",
   "The coverage rule, which leaves a step equal to maxStep uncovered."],

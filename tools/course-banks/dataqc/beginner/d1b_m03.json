@@ -93,7 +93,7 @@
    "That the engine detected the us/m label and converted the sonic before checking it.",
    "That EKENE-7's sonic was recorded in us/m, since a wrong unit would fail the limit.",
    "That the us/m limit is wider than the us/ft limit and admits every sonic value.",
-   "A mislabel between the two listed sonic units is invisible to the definitional limit, since a slowness is positive in either unit."
+   "That a mislabel between the two listed sonic units is invisible to the definitional limit, since a slowness is positive in either unit."
   ],
   "answer": 3,
   "explanation": "Both units carry the same definitional limit, positive with the minimum excluded, so a log labelled with the wrong one passes at every sample. The label is the caller's responsibility. The engine converts nothing, a pass proves nothing about the unit the tool used, and the two limits are identical."
@@ -156,7 +156,7 @@
  {
   "prompt": "The same EKENE-3 oil column goes through `rateCheck` given the rates alone, with no status and no hours on. How many days fail?",
   "options": [
-   "2, the same as with full context, since the engine infers the shut-in day from the rates on the days around it.",
+   "2, since the engine infers that day 61 was shut in from the rates on the days around it and flags it anyway.",
    "1, the negative rate on day 47, since without status or hours the check cannot know day 61 was shut in.",
    "0, since the check needs a status column before it applies either rule.",
    "3, since the three missing days count as failures when no hours are given."

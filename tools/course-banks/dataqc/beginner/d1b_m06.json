@@ -80,7 +80,7 @@
   "prompt": "What does the digit rule cost you?",
   "options": [
    "It hides every typing slip in the letters of a name, such as EKNE-4 for EKENE-4.",
-   "A slip in the well number itself is never reported as near, as a mistyped EKENE-1 for EKENE-7 would read false.",
+   "It never reports a slip in the well number itself as near, as a mistyped EKENE-1 for EKENE-7 would read false.",
    "It doubles the near count on a list of wells sharing a stem, as the 41 near pairs show.",
    "It stops accented names from matching their plain spellings, as ÉKENE-7 shows."
   ],

@@ -70,12 +70,12 @@ q(0, "On the splice, the step from entry 4 to entry 5 runs backward. What happen
   "It stops the inference, and the engine asks for an expected step."],
  "The expected step is the median of the steps in the stated direction. The reversal is a step backward, so it is left out of the median, and it is flagged under its own rule instead. Inference runs on the forward steps and needs no stated step here."),
 
-q(2, "What step tolerance does `indexCheck` use on EKENE-7's full depth index by default, and why so tight?",
- "5.00e-7 ft, which is 1e-6 x the expected step: room for rounding in a stored depth and little else.",
+q(2, "What step tolerance does `indexCheck` use on EKENE-7's full depth index by default, and where does it come from?",
+ "5.00e-7 ft, which is 1e-6 x the expected step: a stated default that scales with the step.",
  ["0.500000 ft, half a step either side, so only a doubled step is irregular.",
   "1e-6 ft whatever the step, a fixed allowance for floating-point error.",
-  "5.00e-7 ft, measured as the mean difference between the delivered index and a perfect half-foot grid."],
- "The default tolerance is 1e-6 x expectedStep, which on a 0.500000 ft step is 5.00e-7 ft. It is scaled by the step, it is a stated default, and it is chosen to treat a regularly sampled log as regular while flagging a skipped sample. It is not measured from the data."),
+  "A figure measured from the scatter of the delivered steps about their median, so a noisy index earns a looser test."],
+ "The default tolerance is 1e-6 x expectedStep, which on a 0.500000 ft step is 5.00e-7 ft. It is a Petrolord default, stated in the basis as 1e-6 x expectedStep, so it scales with the expected step, which here is the median of the forward steps. It is no measure of how much the steps scatter, and it is no fixed allowance: a stated step of a different size carries its own tolerance."),
 
 q(1, "With expectedStep 0.5 and stepTolerance 0.6 stated, what does the splice read?",
  "No irregular step; the two repeats and the backward step stay.",

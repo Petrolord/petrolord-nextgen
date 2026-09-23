@@ -63,7 +63,7 @@
    "Completeness, validity, consistency, uniqueness, plausibility."
   ],
   "answer": 3,
-  "explanation": "`DIMENSIONS` lists completeness, validity, consistency, uniqueness and plausibility, in that order. The other orders swap a pair, and the one that places plausibility last still puts uniqueness ahead of consistency."
+  "explanation": "`DIMENSIONS` lists completeness, validity, consistency, uniqueness and plausibility, in that order. Each other order moves at least one dimension out of place, and the one that places plausibility last still puts uniqueness ahead of consistency."
  },
  {
   "prompt": "This tier asks whether data are fit to use. Which of the five dimensions does it leave to the next tier?",

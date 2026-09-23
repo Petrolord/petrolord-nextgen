@@ -27,7 +27,7 @@
    "Ten thousand barrels, the size of the keying error planted on day 70, recovered by the engine from the fall it measured across the missing day.",
    "2503.300000 bbl, the oil produced on days 69 and 70, which the engine subtracts from the planted error to leave the remainder it reports.",
    "7496.700000 bbl: the fall from day 68 to day 70 as the sheet shows it, which is the planted error less two days' production.",
-   "7496.700000 bbl, the true size of the keying slip once the missing day is filled in."
+   "The fall from day 69 to day 70 alone, which the engine estimates by splitting the two-day fall evenly across the missing day."
   ],
   "answer": 2,
   "explanation": "The `drop` field is 7496.700000 bbl, previous 1338506.200000 less value 1331009.500000. The planted keying error is ten thousand barrels; the flag measures what the sheet shows, and the error less the drop, 2503.300000 bbl, is derived as the two days' production. The engine does not know the error, and it is not the drop."
@@ -58,7 +58,7 @@
   "prompt": "EKENE-3's water cut is checked at the default tolerance of 1e-6. It fails 83 days: 5 out of range and 78 mismatches. Where do the 78 come from?",
   "options": [
    "78 days where the water was typed from the day before, as on day 55.",
-   "The sheet reports water cut to four decimals, and a tolerance tighter than that precision flags the rounding itself.",
+   "78 days of rounding: the sheet reports water cut to four decimals, and a tolerance tighter than that precision flags the rounding itself.",
    "78 days on which the reported cut is in percent, like days 20 to 24.",
    "78 days on which the oil or water rate is missing, so no cut could be computed."
   ],
@@ -96,7 +96,7 @@
    "Days 31, 32, 33, 47 and 60, where a rate is missing or negative or there is no liquid, so no liquid-basis cut exists."
   ],
   "answer": 3,
-  "explanation": "The computed cut is null where the engine cannot compute a liquid-basis cut: the meter outage on days 31 to 33, the negative allocation entry on day 47, and the shut-in day 60 with no liquid. Those days are not judged by this check; earlier checks flagged each for its own reason. The percent days and day 55 all carry a computed cut."
+  "explanation": "The computed cut is null where the engine cannot compute a liquid-basis cut: the meter outage on days 31 to 33, the negative allocation entry on day 47, and the shut-in day 60 with no liquid. Those days are not judged by this check, and each is also a gap in the reported water cut column, which completeness already counts. The percent days and day 55 all carry a computed cut."
  },
  {
   "prompt": "On EKENE-3's day 40 the oil and water add to 1737.500000 bbl/d against a gross total of 1774.000000. Why is the day flagged at the default tolerance?",
@@ -132,7 +132,7 @@
   "explanation": "At relTolerance 0.01 day 40 is still flagged; adding absTolerance 50 bbl/d clears it, because the allowance becomes max(50, 0.005 x total) and the truck load fits inside it. absTolerance 0 is already the default, and day 40 has no missing part. An absolute floor chosen without looking at the size of the errors can hide them."
  },
  {
-  "prompt": "EKENE-3's gas meter held 748.700000 Mscf/d from day 74 through day 81. What does `frozenRuns` report at the defaults?",
+  "prompt": "EKENE-3's gas meter held its day 74 value of 748.700000 Mscf/d for the seven days after it. What does `frozenRuns` report at the defaults?",
   "options": [
    "One run of 8, from day 74 to day 81, since each value equals the run's first value within a tolerance of 0.",
    "One run of 7, days 75 to 81, since the first held day is a real reading.",
@@ -147,7 +147,7 @@
   "options": [
    "1 run of 7, because every step between neighbouring readings is 0.100000, which sits inside the tolerance of 0.15.",
    "1 run of 5, because the first five readings all sit within 0.15 of the middle reading of those five.",
-   "0, because a drifting series is refused when its tolerance exceeds its step.",
+   "A refusal naming `tolerance`, since a tolerance wider than the step between readings would let a drift pass as stuck.",
    "0, because each value is compared with the run's first value, and the readings soon move beyond 0.15 of it."
   ],
   "answer": 3,
