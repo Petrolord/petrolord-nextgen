@@ -67,8 +67,8 @@
 # "X, not Y" contrastive anywhere a learner reads, headings and module titles
 # included.
 #
-# THIS ENGINE HAS NO REPAIR HISTORY. It was written, oracle-gated and merged in
-# one pull request, so there is no history module and no framed history
+# THIS COURSE TEACHES NO REPAIR HISTORY. The engine's one repair after its first
+# merge landed before any lesson was written, so there is no history module and no framed history
 # section. The NIST printed-figure errata are errata in a PUBLISHED SOURCE,
 # read against the engine, and are taught as such in Expert m06.
 #
@@ -298,13 +298,13 @@ def check(quiet=False):
             problems.append(f'{tier}: title carries a digit, which is a measurement rather than a count: {t}')
         if re.search(r'\bAI\b|AI-powered|artificial intelligence', t, re.I):
             problems.append(f'{tier}: title claims AI, and this course is statistics: {t}')
-    # NO HISTORY: this engine has none, so nothing may read like it.
+    # NO HISTORY: the course teaches none, so nothing may read like it.
     for tier, mods in TIERS.items():
         for mkey, mtitle, lessons in mods:
             for k, t in [(mkey, mtitle)] + [(l[0], l[1]) for l in lessons]:
                 if re.search(r'used-to|was-repaired|repair-history|no-longer', k) or \
                    re.search(r'\bused to\b|\bno longer\b|\bwas repaired\b', t, re.I):
-                    problems.append(f'{tier}/{k}: reads as repair history, and this engine has none')
+                    problems.append(f'{tier}/{k}: reads as repair history, and this course teaches none')
     # ONE CAPSTONE BRIEF A TIER, and it is the last lesson of the last module.
     for tier, mods in TIERS.items():
         briefs = [(m[0], l[0]) for m in mods for l in m[2] if l[0].endswith('the-capstone-brief')]
@@ -340,7 +340,7 @@ def check(quiet=False):
         print(f'  total estimated minutes: {sum(r[7] for r in rows)}, '
               f'total minimum prose words: {sum(r[9] for r in rows)}')
         print(f'  panels declared: {PANEL_IDS}')
-        print('  history modules: none (this engine has no repair history)')
+        print('  history modules: none (this course teaches no repair history)')
         print(f'  PROBLEMS: {len(problems)}')
         for p in problems:
             print(f'   {p}')

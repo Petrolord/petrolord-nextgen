@@ -4,8 +4,8 @@
 //   node /root/dc-wavekit/digestprose.mjs /root/dai-wip-dataqc/digest.txt \
 //        --rules /root/dai-wip-dataqc
 //
-// THIS WAVE'S HISTORY POSITION. The engine has no repair history: it was
-// written, oracle-gated and merged in one pull request. The NIST errata in the
+// THIS WAVE'S HISTORY POSITION. The course teaches no repair history: the
+// engine's one repair after its first merge is provenance. The NIST errata in the
 // digest are about a published page, and they are written in the present tense.
 //
 // THIS FILE REFUSES RATHER THAN PASSING. Everything it declares about the
@@ -33,7 +33,7 @@ try {
 if (DIGEST_LINES.length < 600) refuse(`${DIGEST} has ${DIGEST_LINES.length} lines, which is too few to be the whole digest`);
 
 const historyish = DIGEST_LINES.filter((l) => /^# SECTION \d+:/.test(l) && /USED TO|NO LONGER|REPAIR HISTORY/i.test(l));
-if (historyish.length) refuse(`a section heading frames repair history in a wave that has none: ${historyish[0]}`);
+if (historyish.length) refuse(`a section heading frames repair history in a wave that teaches none: ${historyish[0]}`);
 
 const tableRows = (body) => body
   .split('\n')

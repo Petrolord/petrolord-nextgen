@@ -13,7 +13,7 @@
  "engines": [
   "engines/dataai/quality.js"
  ],
- "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines cc82bf3 (engines PR #248). TWELVE paths walked by vendor_dataqc.sh over a git-archive export of the commit with the jest suite as the only seed: six reached by the walk (the suite, quality.js, lib/stats/stats.js, engines/petrophysics/conditioning.js, engines/hse/safetyStats.js, lib/linalg/solveDense.js) and six NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; oracle_quality.py, pin_quality.py, FINDINGS-quality.md, negcontrol_quality.sh mode 755). 12 paths x 4 proofs = 48, all IDENTICAL. The canonical pin STAYS at 54cf7c4: 54cf7c4..cc82bf3 also moves economics cashflow goldens, facilities, production, seismolord and wellsite paths other courses grade. The four imported dependencies already match the pinned manifest byte for byte; the eight new paths are ledgered in VENDOR.json as kind extra, group d1-dataqc-course, pinned to their vendored blobs, and clear as STALE when the pin moves to cc82bf3 or later. Guard clean, 762 paths compared; vendored engine suites 160, the quality suite 854 of 854.",
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines cc82bf3 (engines PR #248). TWELVE paths walked by vendor_dataqc.sh over a git-archive export of the commit with the jest suite as the only seed: six reached by the walk (the suite, quality.js, lib/stats/stats.js, engines/petrophysics/conditioning.js, engines/hse/safetyStats.js, lib/linalg/solveDense.js) and six NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; oracle_quality.py, pin_quality.py, FINDINGS-quality.md, negcontrol_quality.sh mode 755). 12 paths x 4 proofs = 48, all IDENTICAL. The canonical pin STAYS at 54cf7c4: 54cf7c4..cc82bf3 also moves economics cashflow goldens, facilities, production, seismolord and wellsite paths other courses grade. The four imported dependencies already match the pinned manifest byte for byte; the eight new paths are ledgered in VENDOR.json as kind extra, group d1-dataqc-course, pinned to their vendored blobs, and clear as STALE when the pin moves to cc82bf3 or later. Guard clean, 762 paths compared; vendored engine suites 160, the quality suite 854 of 854. RE-VENDORED 2026-09-23 at petrolord-engines a4e9592 (engines PR #249, the repair of this wave's three engine findings) by the same script with REV=a4e9592: 12 paths x 4 proofs = 48, all IDENTICAL; the pin stays at 54cf7c4 and the eight d1-dataqc-course extra entries are re-pinned to the new blobs; guard clean, 762 paths compared. The quality suite passes 903 of 903. fields.json is byte-identical to the cut at cc82bf3 (no graded value moved).",
  "constants": {
   "$comment": "The engine exports CONSTANTS (0.6745, 3.5, 1.4826, 1.128, 3.267, 1.5), DEFINITIONAL_LIMITS and DIMENSIONS. Digest section 1 prints CONSTANTS from the export and section 7 prints DEFINITIONAL_LIMITS. None is graded."
  },
@@ -34,7 +34,7 @@
   }
  },
  "history": {
-  "position": "THIS ENGINE HAS NO REPAIR HISTORY: written, oracle-gated and merged in one pull request. The NIST printed-figure errata are errata in a published source and are taught as such in Expert m06."
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The engine was repaired once after its first merge (engines PR #249, before any lesson was written): reason strings print the shortest round-trip decimal, the population z ceiling is sqrt(n - 1), Hampel echoes halfWindow, nSigma and madScale. That repair is provenance; the digest describes the engine as it is. The NIST printed-figure errata are errata in a published source and are taught as such in Expert m06."
  },
  "scopeSeams": {
   "u-chart and the Poisson count model": "OWNED BY H1 safetystats. D1 charts measured values only (individuals, EWMA, CUSUM).",
@@ -51,14 +51,13 @@
   "percentile": "no P label anywhere. Gated by gate_vocabulary.py."
  },
  "openItems": {
-  "zScores population ceiling": "ENGINE FINDING, reported to the lead, engine not edited. With sd 'population', maxPossibleAbsZ and thresholdReachable still use the sample-SD ceiling (n - 1)/sqrt(n). The population ceiling is sqrt(n - 1). On nine zeros and a one at threshold 2.9 the engine returns thresholdReachable false AND one flag at z 3.000000: its output contradicts itself. Digest section 31 prints it as a care point. Fix belongs in petrolord-engines.",
-  "reason strings round to six significant figures": "ENGINE FINDING (copy), reported. fmt uses toPrecision(6), so a cumulative of 1338506.2 prints as 1338510 in the cumulativeCheck reason and the printed figures differ by 7500 where the drop field is 7496.7. Digest section 11 prints both and tells writers to quote the field. Consider more digits for large magnitudes in the engines repo.",
-  "FINDINGS open questions": "despikeHampel turns null into 0 (quality.hampel converts to NaN first, D1 unaffected); solveDense absolute pivot test; generalised ESD and robust covariance not built. Printed as care points in section 31."
+  "FINDINGS open questions": "despikeHampel turns null into 0 (quality.hampel converts to NaN first, D1 unaffected); solveDense absolute pivot test; generalised ESD and robust covariance not built. Printed as care points in section 31.",
+  "closed by engines PR #249": "The population z ceiling (now sqrt(n - 1), basis.ceiling names it), the six-significant-figure reason strings (now shortest round-trip decimals), and the unechoed Hampel nSigma (now in the result and basis) were fixed in engines a4e9592 and re-vendored. Digest sections 11, 30 and 31 describe the repaired behaviour; LESSON_TASK.md states the quoting rule: the numeric field at six decimals, a reason string only verbatim as the engine's words."
  },
  "cleared_claims": [],
  "gates": {
   "structure.py": {
-   "md5": "37a36796a566ddb1d12327f62762d3be",
+   "md5": "30c7058410d7b75d6dd4cf30f14c774d",
    "command": "python3 structure.py",
    "expected": 0,
    "exit": 0,
@@ -125,14 +124,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh dai-wip-dataqc /root/wt-dai-d1-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "d1_dump: 678 label-and-call, measurement and claim assertions run, 0 failed; 32 sections"
+   "summary": "d1_dump: 682 label-and-call, measurement and claim assertions run, 0 failed; 32 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-dataqc",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/dai-wip-dataqc/digest.txt: 1044 line(s), 32 section title(s) and 36 in-body marker(s) swept against their blocks, 32 history framings, 22 engine pin(s); 0 warned for a human read and 0 framed as curri"
+   "summary": "[digestprose] /root/dai-wip-dataqc/digest.txt: 1045 line(s), 32 section title(s) and 36 in-body marker(s) swept against their blocks, 32 history framings, 22 engine pin(s); 0 warned for a human read and 0 framed as curri"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -282,14 +281,14 @@
    "summary": "NEGATIVE CONTROL: expected a P label and an AI claim caught; got ['a P label', 'an AI claim']"
   },
   "gate_claims.mjs": {
-   "md5": "5cbd0ff5da49f3970dce8c948b71ae93",
+   "md5": "98af821a830c94fed907175bbb61bc33",
    "command": "node gate_claims.mjs",
    "expected": 0,
    "exit": 0,
    "summary": "FINDINGS: 0"
   },
   "gate_claims.mjs NEGATIVE CONTROL": {
-   "md5": "5cbd0ff5da49f3970dce8c948b71ae93",
+   "md5": "98af821a830c94fed907175bbb61bc33",
    "command": "node gate_claims.mjs --plant-a-recon-figure",
    "expected": 1,
    "exit": 1,
@@ -297,10 +296,10 @@
   }
  },
  "digest": {
-  "lines": 1044,
+  "lines": 1045,
   "sections": 32,
-  "md5": "9a11ee72061bcc1f73acd85117d60fd7",
-  "sha256": "48d83d5577f2a4fa8b6a2a4e331378894e0373f4f1935031d2c7083b8e4fc2d6"
+  "md5": "a3c62d8e0ef2d83a97c214c5d556c6d1",
+  "sha256": "930b60bc94f49693f5795193dd6502d2bd5598611bc2d7da749bdce52fbee6bd"
  },
  "fieldsDiscrimination": {
   "odudu_rhob_completeness": "sentinels counted missing, only the long run counted, missing over present, null fraction quoted",

@@ -4,11 +4,11 @@
 
 # PRECISION. Every measured value, statistic, limit, fraction, score, step and difference prints to SIX decimals; counts, entry numbers and days are whole numbers; relative differences print in exponent form.
 
-# ENGINE. engines/dataai/quality.js, vendored sha-identical with petrolord-engines cc82bf3, 1070 lines. It imports lib/stats (mean, median, standard deviations), engines/petrophysics/conditioning.js (despikeHampel), engines/hse/safetyStats.js (chiSquareQuantile, logGamma) and lib/linalg/solveDense.js. The vendored golden test-data/dataai/goldens/quality_cases.json carries 387 cases, 46 of them refusals and 8 of them NIST/SEMATECH published anchors, written by the standard library oracle.
+# ENGINE. engines/dataai/quality.js, vendored sha-identical with petrolord-engines a4e9592, 1090 lines. It imports lib/stats (mean, median, standard deviations), engines/petrophysics/conditioning.js (despikeHampel), engines/hse/safetyStats.js (chiSquareQuantile, logGamma) and lib/linalg/solveDense.js. The vendored golden test-data/dataai/goldens/quality_cases.json carries 402 cases, 46 of them refusals and 8 of them NIST/SEMATECH published anchors, written by the standard library oracle.
 
 # WHAT IS NEVER IN THIS FILE. No capstone field, no capstone well, no capstone series and no graded answer. The capstones run their own datasets and the digest never names them.
 
-# THIS ENGINE HAS NO REPAIR HISTORY. Every section below describes what the engine does today.
+# THIS COURSE TEACHES NO REPAIR HISTORY. Every section below describes what the engine does today.
 
 # SECTION 1: What this engine computes, and what it declines to compute (owned by Associate m01 and Expert m06)
 
@@ -372,11 +372,11 @@ Each present value is compared with the LAST PRESENT value before it; a drop lar
 
 | flagged day | compared with day | drop, bbl | the engine reason |
 | --- | --- | --- | --- |
-| 70 | 68 | 7496.700000 | cumulative falls from 1338510 at entry 67 to 1331010 |
+| 70 | 68 | 7496.700000 | cumulative falls from 1338506.2 at entry 67 to 1331009.5 |
 
 Day 69 is missing (stated), so day 70 is measured against day 68. The keying error planted on day 70 is ten thousand barrels (stated); the drop the engine reports is the error less the two days of production between the readings, derived 2503.300000 bbl.
 
-READING THE REASON. The engine writes each value in a reason to six significant figures and counts entries from 0, so "entry 67" is day 68, and the two cumulatives print as 1338510 and 1331010. Derived: those printed figures differ by 7500.000000; the `drop` field carries the unrounded 7496.700000. Quote the field.
+READING THE FLAG. The engine counts entries from 0, so "entry 67" in the reason is day 68. The flag carries its figures as fields: `previous` 1338506.200000, `value` 1331009.500000 and `drop` 7496.700000. The reason prints each cumulative as the shortest decimal that reads back to its field, and a lesson quotes the fields at six decimals.
 
 With a tolerance of 8000 bbl (stated) the same drop is not flagged: a tolerance is for meter noise, and a tolerance wide enough to swallow a keying error hides it.
 
@@ -400,7 +400,7 @@ The EKENE-3 sheet reports water cut to four decimals (stated), so a correct valu
 | 24 | 21.340000 | 0.213353 | water-cut-out-of-range |
 | 55 | 0.248100 | 0.248871 | water-cut-mismatch |
 
-Day 55's reason, verbatim: "water cut 0.2481 disagrees with water / (oil + water) = 0.248871".
+Day 55's reason, verbatim: "water cut 0.2481 disagrees with water / (oil + water) = 0.2488714659063911".
 
 THE BASIS MATTERS. On day 10 the computed liquid-basis water cut is 0.183105. Derived on the same day: water over oil, the water-oil ratio, is 0.224147, and oil over liquid, the oil cut, is 0.816895. Only the first is what the engine checks.
 
@@ -417,7 +417,7 @@ The parts must add to the total within max(absTolerance, relTolerance x |total|)
 
 The difference and allowed columns are derived (the sum less the total, and 0.005 times the total); the flagged column is the engine's.
 
-Day 40's reason, verbatim: "parts sum to 1737.5 against a total of 1774 (allowed difference 8.87)".
+Day 40's reason, verbatim: "parts sum to 1737.5 against a total of 1774 (allowed difference 8.870000000000001)".
 
 | tolerance, stated | failed | days flagged |
 | --- | --- | --- |
@@ -578,7 +578,7 @@ MAD is the raw median of |x - median|. The modified z-score is M = 0.6745 (x - m
 | EKENE-3 gauge | 212.500000 | 0.100000 | 186.162000 | 7 |
 | EKENE-7 core | 0.215500 | 0.007500 | 5.890633 | 8 |
 
-On the gauge the median is 212.500000 with or without the glitch, and the modified z of entry 7 is 186.162000. Its reason, verbatim: "value 240.1 has modified z = 186.162, beyond 3.5".
+On the gauge the median is 212.500000 with or without the glitch, and the modified z of entry 7 is 186.162000. Its reason, verbatim: "value 240.1 has modified z = 186.16200000001055, beyond 3.5".
 
 | gauge readings | mean, derived | median | sample SD | MAD |
 | --- | --- | --- | --- | --- |
@@ -711,7 +711,7 @@ For each complete row, d^2 = (x - mean)' S^-1 (x - mean), with the classical mea
 
 Entry 60 (stated RHOB 2.221000, NPHI 0.188000) has d^2 22.397696. Each of its values alone is ordinary: z -1.074527 on density and -1.645167 on neutron, and neither z-score flags anything in the oil sand (0 and 0 flags). The pair sits off the density-neutron trend, and only a distance that knows the correlation sees it.
 
-The flag's reason, verbatim: "row 20 has squared distance 22.3977, beyond the chi-square 0.975 quantile 7.37776 on 2 degrees of freedom".
+The flag's reason, verbatim: "row 20 has squared distance 22.397696013934816, beyond the chi-square 0.975 quantile 7.3777589082278725 on 2 degrees of freedom".
 
 | alpha, stated | cutoff on 2 degrees of freedom | rows flagged |
 | --- | --- | --- |
@@ -967,7 +967,7 @@ The basis block, verbatim: weights "caller weights, normalised by their sum"; sc
 
 Every default below is a choice written in a basis block, open to change by the caller. Where a published source states the number, it is named; where none does, the row says Petrolord.
 
-Each default below is read from the basis block of a call that left it unset, except the Hampel nSigma, whose default the result does not echo.
+Each default below is read from the basis block of a call that left it unset.
 
 | setting | default | whose choice |
 | --- | --- | --- |
@@ -983,7 +983,7 @@ Each default below is read from the basis block of a call that left it unset, ex
 | zScores threshold | 3 | the usual convention |
 | modifiedZScores threshold | 3.500000 | Iglewicz and Hoaglin, as NIST prints it |
 | iqrFences k and quartile rule | 1.500000, R7 | Tukey for k; Petrolord for the rule, so a spreadsheet reproduces it |
-| hampel nSigma | 3 | the petrophysics conditioning engine |
+| hampel nSigma and MAD scale | 3, 1.4826 | the petrophysics conditioning engine |
 | ewmaChart L and limits | 3, asymptotic | NIST 6.3.2.4 |
 | grubbsTest alpha | 0.050000 | NIST 1.3.5.17.1 |
 
@@ -1025,7 +1025,8 @@ WHAT IS NOT BUILT, and the engine says so in its basis blocks and messages:
 
 WHERE THE OUTPUT NEEDS READING WITH CARE:
 
-- With `sd: 'population'`, `maxPossibleAbsZ` still reports the sample-SD ceiling (n - 1) / sqrt(n). On nine zeros and a one (stated) at threshold 2.9 the engine returns maxPossibleAbsZ 2.846050, `thresholdReachable` false, and 1 flag at z 3.000000. Derived: the population-SD ceiling is sqrt(n - 1), 3.000000 at n = 10. The basis note names the sample SD.
+- The ceiling follows the chosen standard deviation. With `sd: 'population'` on nine zeros and a one (stated) at threshold 2.9, the engine returns maxPossibleAbsZ 3.000000, `thresholdReachable` true and 1 flag at z 3.000000; its basis names the ceiling "sqrt(n - 1), population SD". With the sample SD the same ten values reach 2.846050 at most (section 17).
+- A reason string prints every figure as the shortest decimal that reads back to the field it quotes, so a computed statistic prints every digit. The flag above reads, verbatim: "value 1 has z = 2.9999999999999996, beyond the threshold 2.9". Its `statistic` field printed at the digest's precision is 3.000000. A lesson quotes the field at six decimals, and quotes a reason only as the engine's own words.
 - The Mahalanobis refusal for a singular covariance uses an absolute pivot test inside lib/linalg; variables with very small variance in the caller's units can be refused as singular, and rescaling avoids it.
 - The Hampel decision is imported from the petrophysics engine, whose own entry point turns a null into 0; `hampel` converts missing values to NaN before the call, so this engine is unaffected.
 

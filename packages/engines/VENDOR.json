@@ -1540,57 +1540,57 @@
       "path": "__tests__/dataai.quality.test.js",
       "kind": "extra",
       "group": "d1-dataqc-course",
-      "vendoredSha": "1f920655b499ee6ae251c2f83d836abbdee04b66",
-      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines cc82bf3 (PR #248: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to cc82bf3 or later."
+      "vendoredSha": "69e15e7bc7e6c607e47630798fd288bb8f1a10c2",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines a4e9592 (PR #248 and #249: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to a4e9592 or later."
     },
     {
       "path": "engines/dataai/quality.js",
       "kind": "extra",
       "group": "d1-dataqc-course",
-      "vendoredSha": "5eaf73ebd26c3b3af42c67d77289c05a083fff37",
-      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines cc82bf3 (PR #248: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to cc82bf3 or later."
+      "vendoredSha": "5ab0e0151b19433b244c8dde38840ef37d55dec5",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines a4e9592 (PR #248 and #249: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to a4e9592 or later."
     },
     {
       "path": "test-data/dataai/goldens/quality_cases.json",
       "kind": "extra",
       "group": "d1-dataqc-course",
-      "vendoredSha": "d8d692f2cbc50a97f19d4680178a118359793583",
-      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines cc82bf3 (PR #248: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to cc82bf3 or later."
+      "vendoredSha": "d13e77c5606056463532e5f6787b32a1de13e26a",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines a4e9592 (PR #248 and #249: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to a4e9592 or later."
     },
     {
       "path": "test-data/dataai/pins/quality_pins.json",
       "kind": "extra",
       "group": "d1-dataqc-course",
-      "vendoredSha": "dddf585d9592b4f55c1d3c2f410b1ba49ba2bf45",
-      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines cc82bf3 (PR #248: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to cc82bf3 or later."
+      "vendoredSha": "ac0a0586a995dbe982f76450abaaa0397186285f",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines a4e9592 (PR #248 and #249: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to a4e9592 or later."
     },
     {
       "path": "tools/validation/dataai/FINDINGS-quality.md",
       "kind": "extra",
       "group": "d1-dataqc-course",
-      "vendoredSha": "3235f3d0b3a81e78841470293d5f8b1258298611",
-      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines cc82bf3 (PR #248: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to cc82bf3 or later."
+      "vendoredSha": "b4fdf1fcd73e7dd0d8dc7c2c69d9f6b15cbbce40",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines a4e9592 (PR #248 and #249: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to a4e9592 or later."
     },
     {
       "path": "tools/validation/dataai/negcontrol_quality.sh",
       "kind": "extra",
       "group": "d1-dataqc-course",
-      "vendoredSha": "8949b38169a84efae7494773d851789426be55dc",
-      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines cc82bf3 (PR #248: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to cc82bf3 or later."
+      "vendoredSha": "419c17f28e623f52f67bd3da32e89d6052acf01d",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines a4e9592 (PR #248 and #249: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to a4e9592 or later."
     },
     {
       "path": "tools/validation/dataai/oracle_quality.py",
       "kind": "extra",
       "group": "d1-dataqc-course",
-      "vendoredSha": "ce1b41a57fbb45f96e350e263ac900b11eb89b40",
-      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines cc82bf3 (PR #248: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to cc82bf3 or later."
+      "vendoredSha": "3e699a9f158beeae8410d1523cdfaede95600bb6",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines a4e9592 (PR #248 and #249: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to a4e9592 or later."
     },
     {
       "path": "tools/validation/dataai/pin_quality.py",
       "kind": "extra",
       "group": "d1-dataqc-course",
-      "vendoredSha": "ef770f90a515a846ca68637ad7943d9ceb4b6f8e",
-      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines cc82bf3 (PR #248: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to cc82bf3 or later."
+      "vendoredSha": "1b07648eb99b766cd09be392dac1e257ebb03746",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines a4e9592 (PR #248 and #249: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to a4e9592 or later."
     }
   ]
 }

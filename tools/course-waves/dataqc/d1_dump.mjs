@@ -33,7 +33,7 @@
 // THE DIGEST IS NOT THE CAPSTONE. This file never reads d1_capstone.mjs,
 // fields.json or the capstone datasets, and the capstone never reads this.
 //
-// THIS ENGINE HAS NO REPAIR HISTORY, so no section of this digest describes
+// THIS COURSE TEACHES NO REPAIR HISTORY, so no section of this digest describes
 // former behaviour. The NIST errata are errata in a published source.
 import fs from 'node:fs';
 import process from 'node:process';
@@ -179,11 +179,11 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Every measured value, statistic, limit, fraction, score, step and difference prints to SIX decimals; counts, entry numbers and days are whole numbers; relative differences print in exponent form.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines cc82bf3, ${engineLines} lines. It imports lib/stats (mean, median, standard deviations), engines/petrophysics/conditioning.js (despikeHampel), engines/hse/safetyStats.js (chiSquareQuantile, logGamma) and lib/linalg/solveDense.js. The vendored golden test-data/dataai/goldens/quality_cases.json carries ${CASES.length} cases, ${refusalsInGolden} of them refusals and ${publishedInGolden} of them NIST/SEMATECH published anchors, written by the standard library oracle.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines a4e9592, ${engineLines} lines. It imports lib/stats (mean, median, standard deviations), engines/petrophysics/conditioning.js (despikeHampel), engines/hse/safetyStats.js (chiSquareQuantile, logGamma) and lib/linalg/solveDense.js. The vendored golden test-data/dataai/goldens/quality_cases.json carries ${CASES.length} cases, ${refusalsInGolden} of them refusals and ${publishedInGolden} of them NIST/SEMATECH published anchors, written by the standard library oracle.`);
 w();
 w('# WHAT IS NEVER IN THIS FILE. No capstone field, no capstone well, no capstone series and no graded answer. The capstones run their own datasets and the digest never names them.');
 w();
-w('# THIS ENGINE HAS NO REPAIR HISTORY. Every section below describes what the engine does today.');
+w('# THIS COURSE TEACHES NO REPAIR HISTORY. Every section below describes what the engine does today.');
 
 /* ============================================================ SECTION 1 */
 
@@ -555,9 +555,10 @@ const cf = cc.flags[0];
 w(`Day ${day(cf.index - 1)} is missing (stated), so day ${day(cf.index)} is measured against day ${day(cf.previousIndex)}. The keying error planted on day ${day(cf.index)} is ten thousand barrels (stated); the drop the engine reports is the error less the two days of production between the readings, derived ${f6(10000 - cc.flags[0].drop)} bbl.`);
 w();
 const ccTol = success('cumulativeCheck with a meter tolerance', Q.cumulativeCheck({ cumulative: PROD.cumOil, tolerance: CUM_TOL }));
-const printedDrop = Number(cc.flags[0].reason.match(/from ([\d.]+) at/)[1]) - Number(cc.flags[0].reason.match(/to ([\d.]+)$/)[1]);
-w(`READING THE REASON. The engine writes each value in a reason to six significant figures and counts entries from 0, so "entry ${cf.previousIndex}" is day ${day(cf.previousIndex)}, and the two cumulatives print as ${cc.flags[0].reason.match(/from ([\d.]+) at/)[1]} and ${cc.flags[0].reason.match(/to ([\d.]+)$/)[1]}. Derived: those printed figures differ by ${f6(printedDrop)}; the \`drop\` field carries the unrounded ${f6(cc.flags[0].drop)}. Quote the field.`);
-must('the printed reason figures differ from the drop field', Math.abs(printedDrop - cc.flags[0].drop) > 1, printedDrop);
+w(`READING THE FLAG. The engine counts entries from 0, so "entry ${cf.previousIndex}" in the reason is day ${day(cf.previousIndex)}. The flag carries its figures as fields: \`previous\` ${f6(cf.previous)}, \`value\` ${f6(cf.value)} and \`drop\` ${f6(cf.drop)}. The reason prints each cumulative as the shortest decimal that reads back to its field, and a lesson quotes the fields at six decimals.`);
+must('the reason carries previous and value exactly as their fields', cf.reason.includes(String(cf.previous)) && cf.reason.includes(String(cf.value)), cf.reason);
+must('every figure in the reason parses back to a field of the flag', (cf.reason.match(/-?\d+(?:\.\d+)?(?:e[-+]?\d+)?/g) || []).map(Number).every((x) => [cf.previous, cf.value, cf.previousIndex].includes(x)), cf.reason);
+must('drop is previous less value', cf.drop === cf.previous - cf.value, cf.drop);
 w();
 w(`With a tolerance of ${S(CUM_TOL)} bbl (stated) the same drop is ${ccTol.failed === 0 ? 'not flagged' : 'flagged'}: a tolerance is for meter noise, and a tolerance wide enough to swallow a keying error hides it.`);
 must('a tolerance above the drop clears it', ccTol.failed === 0 && cc.flags[0].drop < CUM_TOL, ccTol.failed);
@@ -1135,7 +1136,8 @@ w('Every default below is a choice written in a basis block, open to change by t
 w();
 const ewDef = Q.ewmaChart({ values: [1, 2], lambda: LAMBDA, target: 1, sigma: 1 });
 const idDef = Q.duplicateIdentifiers({ ids: ['A'] });
-w('Each default below is read from the basis block of a call that left it unset, except the Hampel nSigma, whose default the result does not echo.');
+const hpDef = Q.hampel({ values: [1, 2, 3], halfWindow: 1 });
+w('Each default below is read from the basis block of a call that left it unset.');
 w();
 table(['setting', 'default', 'whose choice'], [
   ['phaseSumCheck relTolerance, on the TOTAL', f6(ps.basis.relTolerance), 'Petrolord'],
@@ -1150,7 +1152,7 @@ table(['setting', 'default', 'whose choice'], [
   ['zScores threshold', S(zg.threshold), 'the usual convention'],
   ['modifiedZScores threshold', f6(mg.threshold), 'Iglewicz and Hoaglin, as NIST prints it'],
   ['iqrFences k and quartile rule', `${f6(fz.k)}, ${fz.method}`, 'Tukey for k; Petrolord for the rule, so a spreadsheet reproduces it'],
-  ['hampel nSigma', '3', 'the petrophysics conditioning engine'],
+  ['hampel nSigma and MAD scale', `${S(hpDef.basis.nSigma)}, ${S(hpDef.basis.madScale)}`, 'the petrophysics conditioning engine'],
   ['ewmaChart L and limits', `${ewDef.basis.L}, ${ewDef.basis.limits}`, 'NIST 6.3.2.4'],
   ['grubbsTest alpha', f6(g1.basis.alpha), 'NIST 1.3.5.17.1'],
 ]);
@@ -1206,8 +1208,10 @@ w();
 w('WHERE THE OUTPUT NEEDS READING WITH CARE:');
 w();
 const zPop = success('z population ceiling probe', Q.zScores({ values: [0, 0, 0, 0, 0, 0, 0, 0, 0, 1], sd: 'population', threshold: ZPOP_THR }));
-w(`- With \`sd: 'population'\`, \`maxPossibleAbsZ\` still reports the sample-SD ceiling (n - 1) / sqrt(n). On nine zeros and a one (stated) at threshold ${S(ZPOP_THR)} the engine returns maxPossibleAbsZ ${f6(zPop.maxPossibleAbsZ)}, \`thresholdReachable\` ${zPop.thresholdReachable}, and ${zPop.flags.length} flag at z ${f6(zPop.maxAbsZ)}. Derived: the population-SD ceiling is sqrt(n - 1), ${f6(Math.sqrt(zPop.n - 1))} at n = ${zPop.n}. The basis note names the sample SD.`);
-must('population z: the flag fires while thresholdReachable is false', zPop.flags.length === 1 && zPop.thresholdReachable === false, JSON.stringify([zPop.flags.length, zPop.thresholdReachable]));
+w(`- The ceiling follows the chosen standard deviation. With \`sd: 'population'\` on nine zeros and a one (stated) at threshold ${S(ZPOP_THR)}, the engine returns maxPossibleAbsZ ${f6(zPop.maxPossibleAbsZ)}, \`thresholdReachable\` ${zPop.thresholdReachable} and ${zPop.flags.length} flag at z ${f6(zPop.maxAbsZ)}; its basis names the ceiling "${zPop.basis.ceiling}". With the sample SD the same ten values reach ${f6(zg.maxPossibleAbsZ)} at most (${ref('zscore')}).`);
+must('population z: the ceiling is sqrt(n - 1) and the flag is reachable', Math.abs(zPop.maxPossibleAbsZ - Math.sqrt(zPop.n - 1)) < 1e-12 && zPop.thresholdReachable === true && zPop.flags.length === 1, JSON.stringify([zPop.maxPossibleAbsZ, zPop.thresholdReachable]));
+w(`- A reason string prints every figure as the shortest decimal that reads back to the field it quotes, so a computed statistic prints every digit. The flag above reads, verbatim: "${zPop.flags[0].reason}". Its \`statistic\` field printed at the digest's precision is ${f6(zPop.flags[0].statistic)}. A lesson quotes the field at six decimals, and quotes a reason only as the engine's own words.`);
+must('the population flag reason carries the full statistic', zPop.flags[0].reason.includes(String(zPop.flags[0].statistic)) && String(zPop.flags[0].statistic).length > 10, zPop.flags[0].reason);
 w('- The Mahalanobis refusal for a singular covariance uses an absolute pivot test inside lib/linalg; variables with very small variance in the caller\'s units can be refused as singular, and rescaling avoids it.');
 w('- The Hampel decision is imported from the petrophysics engine, whose own entry point turns a null into 0; `hampel` converts missing values to NaN before the call, so this engine is unaffected.');
 

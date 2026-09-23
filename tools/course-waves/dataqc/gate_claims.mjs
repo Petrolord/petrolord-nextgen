@@ -100,7 +100,7 @@ BRIEFS.forEach((f) => {
   if (PLANT && f === 'BRIEF.md') {
     // THE NEGATIVE CONTROL. A figure taken from the recon report rather than the
     // digest, which is exactly the FC1 defect.
-    text += '\n\nThe engine gate runs 854 tests and 36 of 36 engine plants went red.\n';
+    text += '\n\nThe engine gate runs 903 tests.\n';
   }
   briefsRead += 1;
   // Strip fenced blocks and inline code, because a brief quoting a field KEY or a

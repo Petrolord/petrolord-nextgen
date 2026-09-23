@@ -117,11 +117,13 @@ The u-chart and the Poisson count model belong to the safety statistics
 course; regression fit quality to the decline and machine learning courses;
 Monte Carlo to the uncertainty course. The charts here are for measured values.
 
-## THIS ENGINE HAS NO REPAIR HISTORY
+## THIS COURSE TEACHES NO REPAIR HISTORY
 
-It was written, oracle-gated and merged in one pull request. The NIST errata in
-section 31 are about a published page. A sentence about
-former engine behaviour anywhere in this course is a defect.
+The engine had one repair after its first merge, before any lesson was
+written: its reason strings, the population z ceiling and the Hampel basis.
+That repair is provenance; the digest describes only the engine as it is. The
+NIST errata in section 31 are about a published page. A sentence about former
+engine behaviour anywhere in this course is a defect.
 
 ## THE COPY RULE
 

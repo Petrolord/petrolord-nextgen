@@ -47,6 +47,19 @@ The engine counts entries from 0. The digest prints EKENE-3 by DAY (day 1 is
 entry 0) and EKENE-7 by ENTRY. Section 11 shows a reason string that says
 "entry 67" for day 68: say which you mean every time.
 
+## QUOTING A FLAG: THE FIELD, NEVER THE REASON STRING
+
+Every flag carries its figures twice: as numeric fields (`value`, `previous`,
+`drop`, `statistic`, `limit`, `threshold`, `allowed` and the rest) and inside a
+`reason` sentence. The reason prints each figure as the shortest decimal that
+reads back to its field, so a computed statistic prints every digit (section
+31 shows "z = 2.9999999999999996" beside its field, 3.000000). THE RULE:
+a lesson quotes the NUMERIC FIELD at the digest's precision, six decimals, as
+the digest prints it. A reason string may appear only verbatim, in quotation
+marks or a blockquote, as the engine's own words, and never as the source of a
+figure the lesson then reasons with. Section 11 shows the pattern: the drop is
+7496.700000 from the `drop` field.
+
 ## THE REFUSALS, BY NAME
 
 Digest section 4 tables 23 refusals across 20 functions. **Quote the engine's
@@ -96,8 +109,9 @@ machine learning.
 
 ## NO HISTORY
 
-This engine has none. A sentence that begins "the engine used to" is a defect
-anywhere in these 78 lessons. The NIST errata (section 31) are about a
+The course teaches none. The engine had one repair before any lesson was
+written, and it is provenance. A sentence that begins "the engine used to" is a
+defect anywhere in these 78 lessons. The NIST errata (section 31) are about a
 published page.
 
 ## THE COPY RULE
