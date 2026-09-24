@@ -38,9 +38,9 @@ q(3, "Why does the engine run 10 k-means starts by default, and what does the co
 
 q(1, "The engine counts k-means passes as assignment passes, the confirming pass included. What does that choice match?",
  "scikit-learn's n_iter_ when the stop is by labels",
- ["The number of centre updates, one fewer than the passes",
+ ["Centre updates, one fewer than the passes",
   "The number of starts, 10 by default, times the passes",
-  "The maxIter setting, 300, which every run reaches"],
+  "Its maxIter setting of 300, which every run reaches"],
  "The conventions table: k-means passes, this engine \"counted as assignment passes, the confirming pass included\", alternative \"centre updates\", reason \"matches scikit-learn n_iter_ when the stop is by labels\". Starts are counted separately in `runs`, and maxIter 300 is a ceiling; the teaching clustering's winning start took 6 passes.")
 
 q(2, "The teaching clusters score a mean silhouette of 0.545063 on the scaled logs and 0.443238 on the raw logs. Why does the engine default to the scaled logs?",

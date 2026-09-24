@@ -111,7 +111,7 @@ q(0, "A k-means call at seed 3, k 4 and maxIter 2 on the cored rows returns `con
  ["Yes: maxIter below the number of passes needed is refused, naming `maxIter` as its field",
   "No: it is a result with no warning, since `converged` false already carries the whole message",
   "Yes: the engine refuses any start that has not converged and asks the caller to allow it more passes"],
- "The engine's warning: \"did not converge in 2 assignment passes: the labels printed come from one more pass against the last centres\". A run stopped at maxIter is a result, never a refusal; the only maxIter refusal is for a value below 1. The warning describes the winning start; each start's own flag is in `runs`.")
+ "The engine's warning: \"did not converge in 2 assignment passes: the labels printed come from one more pass against the last centres\". A run stopped at maxIter is a result, never a refusal; the only maxIter refusal is for a value below 1. The labels still come back, one per row.")
 
 emit(Q, '/root/dai-wip-facies/banks/d3a_m05.json', expect_n=15)
 finish()

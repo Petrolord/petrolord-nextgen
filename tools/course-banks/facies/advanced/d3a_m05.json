@@ -162,6 +162,6 @@
    "Yes: the engine refuses any start that has not converged and asks the caller to allow it more passes"
   ],
   "answer": 0,
-  "explanation": "The engine's warning: \"did not converge in 2 assignment passes: the labels printed come from one more pass against the last centres\". A run stopped at maxIter is a result, never a refusal; the only maxIter refusal is for a value below 1. The warning describes the winning start; each start's own flag is in `runs`."
+  "explanation": "The engine's warning: \"did not converge in 2 assignment passes: the labels printed come from one more pass against the last centres\". A run stopped at maxIter is a result, never a refusal; the only maxIter refusal is for a value below 1. The labels still come back, one per row."
  }
 ]

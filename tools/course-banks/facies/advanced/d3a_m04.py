@@ -57,7 +57,7 @@ q(1, "With the stated 30 gAPI taken off every EKENE-8 GR value, kNN at k 5 score
   "Proof the tree was worse on EKENE-8, as the tree was not corrected and still reads 0.933333 on that well"],
  "In a real field the offset is unknown, and the fix is a gamma ray normalisation between wells, which is the data quality course's, done before any facies is predicted. The engine builds no gamma ray normalisation and repairs nothing. A flag says rows left the range; it measures no offset, and 30 gAPI is a figure the generator stated for this one well. The tree's 0.933333 was scored on the uncorrected well, so nothing is compared like for like.")
 
-q(3, "Why does the course flag the whole of EKENE-8 for a gamma ray to be normalised, and not only the 10 rows above the cored GR maximum?",
+q(3, "Why does the course flag the whole of EKENE-8 for a gamma ray to be normalised, beyond the 10 rows above the cored GR maximum?",
  "The offset sits on every row, flagged or not, and the check sees only rows that leave the range",
  ["A well with more than a third of its rows flagged is failed as a whole by the course's stated rule",
   "The engine refuses to predict a well once any of its rows maps above 1, so all rows must be flagged",
@@ -97,7 +97,7 @@ q(2, "Which item stands in the write-back as \"what is not claimed\"?",
  ["No method, since the channel name already carries it",
   "No range flags, which belong in a separate QC report",
   "No training wells, as they are listed in the core log"],
- "The course's table: \"what is not claimed | no core facies and no accuracy for an uncored well\". The method, the training wells and the range flags are all items the write-back carries in full, because a predicted facies written back without its method, its training wells, its held-out score and its range flags will be read later as core.")
+ "The course's table: \"what is not claimed | no core facies and no accuracy for an uncored well\". The method, the training wells and the range flags are items the write-back carries in full, beside the held-out score; the last line of the table keeps the note from claiming what no uncored well can give.")
 
 q(0, "The course writes back the kNN prediction and not the tree's. On what evidence?",
  "kNN at k 5 scored 0.833333 on EKENE-6, held out, against the tree's 0.766667 at its default depth",
