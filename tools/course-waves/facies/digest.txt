@@ -101,7 +101,7 @@ Names sort by character, so every list the engine returns puts the facies in the
 | shale | 29 |
 | shaly-sand | 47 |
 
-THE UNCORED WELLS, stated: EKENE-7 and EKENE-8 were never cored, so FACIES is null on every one of their rows. The generator keeps the facies it drew for them apart from the rows, as `withheld`; a real field has no such record, and this course reads it once, in section 24, to check a prediction.
+THE UNCORED WELLS, stated: EKENE-7 and EKENE-8 have no core, so FACIES is null on every one of their rows. The generator keeps the facies it drew for them apart from the rows, as `withheld`; a real field has no such record, and this course reads it once, in section 24, to check a prediction.
 
 THE LIMESTONE BOUNDS, stated: limestone NPHI is held at or below 0.12 and every other facies' NPHI at or above 0.13; limestone PEF is held at or above 4.2 and every other facies' PEF at or below 3.9.
 
@@ -311,7 +311,7 @@ SCORES. A row's score on a component is its standardised logs times the componen
 | 1 | sandstone | 0.761765 | -0.812918 | -0.320589 | -0.286006 |
 | 2 | sandstone | 1.150625 | -0.681537 | 0.007768 | 0.170947 |
 
-The sample variance of each score column is its eigenvalue (derived and checked to 1e-9 on all four columns): PC1 scores vary with variance 2.729404.
+The sample variance of each score column is its eigenvalue (derived and checked to 1.00e-9 on all four columns): PC1 scores vary with variance 2.729404.
 
 A NEW WELL PROJECTED. `pcaTransform` scores new rows with the centre, scale and components fitted on the cored rows, never refitted; the basis reads: "rows centred and standardised with the fitted parameters, times the 2 unit components". The first three rows of EKENE-7, on the two-component model:
 
@@ -402,7 +402,7 @@ The teaching clustering, used from here on: k 4, seed 3, 10 starts, standard sca
 | 2 | 54 | 26.879630 | 2.642481 | 0.069037 | 4.909259 |
 | 3 | 38 | 69.426316 | 2.402789 | 0.245263 | 2.243684 |
 
-Each centre in log units is the mean of its member rows (checked to 1e-9). A cluster is described by its centre: high GR, high NPHI and low PEF, or low GR, low NPHI and high PEF, and so on. A name such as shale belongs to a cluster only after it is compared with core.
+Each centre in log units is the mean of its member rows (checked to 1.00e-9). A cluster is described by its centre: high GR, high NPHI and low PEF, or low GR, low NPHI and high PEF, and so on. A name such as shale belongs to a cluster only after it is compared with core.
 
 CLUSTER NUMBERS ARE NAMES. The same partition can come back numbered differently. With ten starts, seed 1 reaches the same inertia as seed 3; each row's cluster under seed 3 and under seed 1 (derived, counted from the two label lists):
 
@@ -463,7 +463,7 @@ Facies on the cored rows, for comparison: limestone 54, sandstone 50, shale 29, 
 
 # SECTION 12: Fisher's iris: a published check on the engine (owned by Associate m06 l02)
 
-Fisher's iris data (Fisher, 1936, Annals of Eugenics 7(2), 179-188): 150 flowers, four measurements in cm (sepal_length, sepal_width, petal_length, petal_width), three species. The vendored copy is the file scikit-learn ships, test-data/dataai/iris/iris.csv. It has nothing to do with rock; it is here because a published figure for it exists, and an engine that reproduces it can be trusted on the logs.
+Fisher's iris data (Fisher, 1936, The use of multiple measurements in taxonomic problems, Annals of Eugenics, volume seven, pages 179-188): 150 flowers, four measurements in cm (sepal_length, sepal_width, petal_length, petal_width), three species. The vendored copy is the file scikit-learn ships, test-data/dataai/iris/iris.csv. It has nothing to do with rock; it is here because a published figure for it exists, and an engine that reproduces it can be trusted on the logs.
 
 THE PUBLISHED FIGURE. The scikit-learn example "Comparison of LDA and PCA 2D projection of Iris dataset" prints the explained variance ratio of the first two covariance components as [0.92461872 0.05306648] (golden, recorded with its source). The engine, covariance matrix, all 150 flowers:
 

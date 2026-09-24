@@ -165,12 +165,13 @@ const W8 = E.withheld[UN2];
 // the prose cannot drift from the call.
 const K4 = 4; // the teaching number of clusters: four core facies
 const SEED = 3; // the teaching seed
-const KMAX = 8; // the elbow's largest k
+const KMAX = 8; // the largest k of the elbow
 const KNN_K = 5; // the teaching number of neighbours
 const KNN_KS = [1, 3, 5, 7, 9, 15];
 const DEPTHS = [0, 1, 2, 3, 4, 5, 6];
 const HELD = 'EKENE-6'; // the cored well held out to score a prediction, stated
 const SAMPLE = 60; // a seeded silhouette sample, stated
+const CHECK_TOL = 1e-9; // the tolerance of the derived checks the digest names
 const accOf = (yTrue, yPred) => ML.classificationReport({ yTrue, yPred });
 let STEP = 0;
 const step = () => { STEP += 1; return STEP; };
@@ -264,7 +265,7 @@ w(`THE FACIES, stated. Each sample belongs to one of four facies. A well keeps t
 w();
 table(['facies', 'GR (gAPI)', 'RHOB (g/cm3)', 'NPHI (v/v)', 'PEF (b/e)'], T.FACIES.map(([n, ...p]) => [n, ...p.map(([m, s]) => `${S(m)} (SD ${S(s)})`)]));
 w();
-w(`CALI is drawn as 8.5 in plus the size of a normal draw with SD 0.35 in, whatever the facies (stated).`);
+w(`CALI is drawn as ${S(T.CALI_BASE)} in plus the size of a normal draw with SD ${S(T.CALI_SD)} in, whatever the facies (stated).`);
 w();
 const fc = count(YC);
 w(`Names sort by character, so every list the engine returns puts the facies in the order ${list(FACIES_SORTED)}. On the ${CORED_ROWS.length} cored rows of the ${T.CORED.length} cored wells the facies count:`);
@@ -273,7 +274,7 @@ table(['facies', 'cored rows'], FACIES_SORTED.map((f) => [f, S(fc.get(f))]));
 must('the four facies are present on the cored rows', FACIES_SORTED.length === 4, FACIES_SORTED.join(','));
 must('the facies counts sum to the cored rows', sum([...fc.values()]) === CORED_ROWS.length, CORED_ROWS.length);
 w();
-w(`THE UNCORED WELLS, stated: ${UN1} and ${UN2} were never cored, so FACIES is null on every one of their rows. The generator keeps the facies it drew for them apart from the rows, as \`withheld\`; a real field has no such record, and this course reads it once, in ${ref('uncored')}, to check a prediction.`);
+w(`THE UNCORED WELLS, stated: ${UN1} and ${UN2} have no core, so FACIES is null on every one of their rows. The generator keeps the facies it drew for them apart from the rows, as \`withheld\`; a real field has no such record, and this course reads it once, in ${ref('uncored')}, to check a prediction.`);
 must('FACIES is null on the uncored wells and on no other row', ROWS.every((r) => T.UNCORED.includes(r.well) === (r.FACIES === null)), 'null pattern');
 must('the withheld facies has one value per uncored row', W7.length === T.N_PER_WELL && W8.length === T.N_PER_WELL, `${W7.length} ${W8.length}`);
 w();
@@ -509,9 +510,9 @@ w(`SCORES. A row's score on a component is its standardised logs times the compo
 w();
 table(['row', 'core facies', 'PC1 score', 'PC2 score', 'PC3 score', 'PC4 score'], [0, 1, 2].map((i) => [S(i), YC[i], ...PC.scores[i].map(f6)]));
 const sv = PC.scores[0].map((_, k) => { const col = PC.scores.map((r) => r[k]); const m = mean(col); return sum(col.map((v) => (v - m) ** 2)) / (col.length - 1); });
-must('the sample variance of each score column equals its eigenvalue to 1e-9', sv.every((v, k) => Math.abs(v - PC.eigenvalues[k]) < 1e-9), sv.join(','));
+must('the sample variance of each score column equals its eigenvalue to 1e-9', sv.every((v, k) => Math.abs(v - PC.eigenvalues[k]) < CHECK_TOL), sv.join(','));
 w();
-w(`The sample variance of each score column is its eigenvalue (derived and checked to 1e-9 on all four columns): PC1 scores vary with variance ${f6(sv[0])}.`);
+w(`The sample variance of each score column is its eigenvalue (derived and checked to ${eX(CHECK_TOL)} on all four columns): PC1 scores vary with variance ${f6(sv[0])}.`);
 w();
 const PT = success(`pcaTransform, ${UN1}`, CL.pcaTransform({ model: PC2, X: X7 }));
 w(`A NEW WELL PROJECTED. \`pcaTransform\` scores new rows with the centre, scale and components fitted on the cored rows, never refitted; the basis reads: "${PT.basis.rule}". The first three rows of ${UN1}, on the two-component model:`);
@@ -588,7 +589,7 @@ w();
 table(['cluster', 'rows', ...LOGS.map((f, j) => `${f} (${T.CHANNELS[j][1]})`)], KM.centresOriginal.map((c, k) => [S(k), S(KM.sizes[k]), ...c.map(f6)]));
 KM.centresOriginal.forEach((c, k) => must(`centre ${k} in log units is the member mean`, c.every((v, j) => Math.abs(v - mean(XC.filter((_, i) => KM.labels[i] === k).map((r) => r[j]))) < 1e-9), k));
 w();
-w(`Each centre in log units is the mean of its member rows (checked to 1e-9). A cluster is described by its centre: high GR, high NPHI and low PEF, or low GR, low NPHI and high PEF, and so on. A name such as shale belongs to a cluster only after it is compared with core.`);
+w(`Each centre in log units is the mean of its member rows (checked to ${eX(CHECK_TOL)}). A cluster is described by its centre: high GR, high NPHI and low PEF, or low GR, low NPHI and high PEF, and so on. A name such as shale belongs to a cluster only after it is compared with core.`);
 w();
 const KS1 = ten[0].r;
 const cross = KM.labels.reduce((m, a, i) => { const key = `${a}->${KS1.labels[i]}`; m.set(key, (m.get(key) || 0) + 1); return m; }, new Map());
@@ -646,7 +647,7 @@ const IX = IRIS.map((r) => r.slice(0, 4));
 const ISP = IRIS.map((r) => irisHead[2 + r[4]]);
 const IRIS_NAMES = ['sepal_length', 'sepal_width', 'petal_length', 'petal_width'];
 must('the iris file carries 150 rows of four measurements and a species', IX.length === Number(irisHead[0]) && IX.every((r) => r.length === Number(irisHead[1])), IX.length);
-w(`Fisher's iris data (Fisher, 1936, Annals of Eugenics 7(2), 179-188): ${IX.length} flowers, four measurements in cm (${list(IRIS_NAMES)}), three species. The vendored copy is the file scikit-learn ships, test-data/dataai/iris/iris.csv. It has nothing to do with rock; it is here because a published figure for it exists, and an engine that reproduces it can be trusted on the logs.`);
+w(`Fisher's iris data (Fisher, 1936, The use of multiple measurements in taxonomic problems, Annals of Eugenics, volume seven, pages 179-188): ${IX.length} flowers, four measurements in cm (${list(IRIS_NAMES)}), three species. The vendored copy is the file scikit-learn ships, test-data/dataai/iris/iris.csv. It has nothing to do with rock; it is here because a published figure for it exists, and an engine that reproduces it can be trusted on the logs.`);
 w();
 const PI = success('pca, covariance, iris', CL.pca({ X: IX, names: IRIS_NAMES, matrix: 'covariance' }));
 const pubCase = golden('pca-iris-covariance');
@@ -710,7 +711,7 @@ must('the inertia falls at every k here', EL.inertiaRises.length === 0 && !EL.wa
 w();
 w(`At k 1 every row sits in one cluster about the mean, and in standard units the inertia is the number of rows times the number of logs, ${f6(firstRow.inertia)} (each standardised log contributes n). The basis reads: "${EL.basis.drop}". The largest drop fraction is at k ${bigFrac.k}, ${f6(bigFrac.dropFraction)}; at k ${K4} it is ${f6(EL.table[K4 - 1].dropFraction)} and at k ${K4 + 1} ${f6(EL.table[K4].dropFraction)}.`);
 w();
-w(`NO ELBOW IS PICKED FOR YOU. Inertia always falls as k grows when every k is fitted well, down to 0 at one cluster per distinct row, so the smallest inertia is never the answer. The engine prints the drops and picks nothing; the basis reads: "${EL.basis.pick}". The core describes ${FACIES_SORTED.length} facies. The drop fraction reads ${f6(EL.table[2].dropFraction)} at k 3, ${f6(EL.table[K4 - 1].dropFraction)} at k ${K4} and ${f6(EL.table[K4].dropFraction)} at k ${K4 + 1}, and no larger k shown reaches the k ${K4 + 1} figure again. Where the elbow sits is a reading of that table, and the reading is written down with the table.`);
+w(`NO ELBOW IS PICKED FOR YOU. Inertia always falls as k grows when every k is fitted well, down to 0 at one cluster per distinct row, so the smallest inertia is never the answer. The engine prints the drops and picks nothing; the basis reads: "${EL.basis.pick}". The core describes ${FACIES_SORTED.length} facies. The drop fraction reads ${f6(EL.table[K4 - 2].dropFraction)} at k ${K4 - 1}, ${f6(EL.table[K4 - 1].dropFraction)} at k ${K4} and ${f6(EL.table[K4].dropFraction)} at k ${K4 + 1}, and no larger k shown reaches the k ${K4 + 1} figure again. Where the elbow sits is a reading of that table, and the reading is written down with the table.`);
 must('no drop fraction beyond k 5 reaches the k 5 figure', EL.table.slice(K4 + 1).every((r) => r.dropFraction < EL.table[K4].dropFraction), 'below');
 w();
 const RISE_SEED = 265; const RISE_KMAX = KMAX;
@@ -727,7 +728,7 @@ w(`With the default ${CL.DEFAULTS.KMEANS_N_INIT} starts the same seed shows no r
 w();
 const single = success(`kmeans k 6 seed ${SEED}`, CL.kmeans({ X: XC, k: 6, seed: SEED }));
 must('an elbow row equals the single kmeans call at that k and seed', EL.table[5].inertia === single.inertia, `${EL.table[5].inertia} ${single.inertia}`);
-w(`ONE SEED STREAM FOR EACH K. Each k runs with its own fresh mulberry32(seed), so an elbow row is exactly the single \`kmeans\` call at that k and seed: at k 6 both return ${f6(single.inertia)}. The basis reads: "${EL.basis.runs}".`);
+w(`ONE SEED STREAM FOR EACH K. Each k runs with its own fresh mulberry32(seed), so an elbow row is exactly the single \`kmeans\` call at that k and seed: at k ${single.k} both return ${f6(single.inertia)}. The basis reads: "${EL.basis.runs}".`);
 
 /* ============================================================ SECTION 15 */
 
@@ -855,7 +856,7 @@ const K5 = success('kmeans k 5 seed 3', CL.kmeans({ X: XC, k: 5, seed: SEED, nam
 const MJ5 = success('matchClusters majority, k 5', CL.matchClusters({ yTrue: YC, clusters: K5.labels, mode: 'majority' }));
 const dup5 = [...count(MJ5.mapping.map((m) => m.facies)).entries()].filter(([, v]) => v > 1);
 must('majority matching at k 5 gives one facies to two clusters', dup5.length === 1 && dup5[0][1] === 2, JSON.stringify(dup5));
-w(`MORE CLUSTERS THAN FACIES. At k 5 one-to-one matching is refused, because a cluster would be left without a facies (${ref('refusals')}). MAJORITY MATCHING gives each cluster its most common facies, so two clusters can share one; the basis reads: "${MJ5.basis.mode}".`);
+w(`MORE CLUSTERS THAN FACIES. At k ${K5.k} one-to-one matching is refused, because a cluster would be left without a facies (${ref('refusals')}). MAJORITY MATCHING gives each cluster its most common facies, so two clusters can share one; the basis reads: "${MJ5.basis.mode}".`);
 w();
 table(['cluster', 'majority facies', 'rows of that facies', 'rows in the cluster'], MJ5.mapping.map((m) => [S(m.cluster), m.facies, S(m.rows), S(m.clusterSize)]));
 w();
@@ -868,7 +869,7 @@ const missing3 = M3.faciesLabels.filter((f) => !M3.mapping.some((m) => m.facies 
 must('one-to-one at k 3 leaves one facies with no cluster', missing3.length === 1, missing3.join(','));
 const recall0 = M3.report.perClass.find((c) => c.label === missing3[0]).recall;
 must('the facies with no cluster has recall 0', recall0 === 0, recall0);
-w(`FEWER CLUSTERS THAN FACIES. At k 3, one-to-one matching leaves ${missing3[0]} with no cluster: its recall is ${f6(recall0)}. Accuracy ${f6(M3.report.accuracy)}.`);
+w(`FEWER CLUSTERS THAN FACIES. At k ${K3.k}, one-to-one matching leaves ${missing3[0]} with no cluster: its recall is ${f6(recall0)}. Accuracy ${f6(M3.report.accuracy)}.`);
 w();
 const TIEm = golden('match-tie-first-mapping');
 const MT = success('matchClusters, the tied golden', CL.matchClusters(TIEm.args));
@@ -1199,7 +1200,7 @@ brow('knnClassify', 'training rows x new rows', `${KP} x ${KP} = ${CL.DEFAULTS.K
 brow('cartFit', 'maxDepth', '0 accepted (a single leaf)', '-1 refused', ok('cart depth 0', CL.cartFit({ X: XC, y: YC, maxDepth: 0 })) && no(CL.cartFit({ X: XC, y: YC, maxDepth: -1 })), 'depth');
 brow('cartFit', 'minSamplesLeaf, minSamplesSplit', '1 and 2 accepted', '0 and 1 refused', ok('cart leaf 1', CL.cartFit({ X: XC, y: YC, minSamplesLeaf: 1, minSamplesSplit: 2 })) && no(CL.cartFit({ X: XC, y: YC, minSamplesLeaf: 0 })) && no(CL.cartFit({ X: XC, y: YC, minSamplesSplit: 1 })), 'leaf');
 brow('cartFit', 'a split', 'a decrease above zero splits', `a decrease of exactly zero leaves a leaf (golden \`cart-xor-no-split\`)`, TX.nLeaves === 1 && T5.nLeaves > 1, 'decrease');
-brow('matchClusters', 'one-to-one', 'clusters equal to facies accepted', 'more clusters than facies refused; majority mode accepts them', ok('match one-to-one k 4', CL.matchClusters({ yTrue: YC, clusters: KM.labels })) && no(CL.matchClusters({ yTrue: YC, clusters: K5.labels })) && ok('majority k 5', CL.matchClusters({ yTrue: YC, clusters: K5.labels, mode: 'majority' })), 'match');
+brow('matchClusters', 'one-to-one', 'clusters equal to facies accepted', 'more clusters than facies refused; majority mode accepts them', ok(`match one-to-one k ${K4}`, CL.matchClusters({ yTrue: YC, clusters: KM.labels })) && no(CL.matchClusters({ yTrue: YC, clusters: K5.labels })) && ok(`majority k ${K5.k}`, CL.matchClusters({ yTrue: YC, clusters: K5.labels, mode: 'majority' })), 'match');
 brow('kmeans, agglomerative, knnClassify', 'a tie in distance or height', `within ${eX(CL.DEFAULTS.TIE_REL)} of the smallest, relative, inclusive: tied`, 'beyond it: ordered by size', true, 'band stated');
 brow('pca', 'the sign rule', `a weight within ${eX(CL.DEFAULTS.SIGN_TIE_REL)} of the largest, relative, inclusive, counts as largest`, 'the first such weight is made positive', true, 'sign stated');
 brow('elbow', 'bestSilhouetteK', 'the highest mean silhouette', 'a tie goes to the smaller k', EL.basis.pick.includes('smaller k'), 'best k');

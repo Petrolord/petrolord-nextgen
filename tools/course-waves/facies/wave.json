@@ -1,0 +1,83 @@
+{
+ "slug": "facies",
+ "prefix": "d3",
+ "name": "Electrofacies",
+ "pathOrder": 68,
+ "module": "data_ai",
+ "prerequisite": null,
+ "repo": "/root/wt-dai-d3-nextgen",
+ "branch": "feat/d3-facies-course",
+ "goldens": [],
+ "goldensNote": "EMPTY BY DECISION. The vendored golden test-data/dataai/goldens/cluster_cases.json carries 126 cases of oracle output (Ekene rows of the oracle's own generator, iris, grids). Naming it here would let numsweep resolve a lesson literal against a figure the digest never prints. Every golden figure a lesson may quote (the iris ratios and inertia, the tie goldens) is recomputed by the engine and printed in the digest, so the harvested truth file carries it.",
+ "engines": [
+  "engines/dataai/cluster.js",
+  "engines/dataai/ml.js"
+ ],
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines 4dfbb29 (engines PR #253). FOURTEEN paths walked by vendor_facies.sh over a git-archive export of the commit with the jest suite as the only seed: six reached by the walk (the suite, cluster.js, ml.js, lib/stats/stats.js, lib/lp/simplex.js, tools/validation/dataai/synthetic_wells.js) and eight NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; Fisher's iris; oracle_cluster.py, pin_cluster.py, timing_cluster.mjs, FINDINGS-cluster.md, negcontrol_cluster.sh). 14 paths x 4 proofs = 56, all IDENTICAL. The canonical pin stays 54cf7c4; 11 paths are ledgered as kind extra, group d3-facies-course (synthetic_wells.js moved there from d2-mlcore-course at its new blob, syntheticFacies appended); ml.js stays with D2's group at the same blob; lib/stats and lib/lp already match the manifest. Vendored jest suites: cluster 316/316, ml 614/614.",
+ "constants": {
+  "$comment": "The engine exports DEFAULTS (JACOBI_MAX_SWEEPS 50, SIGN_TIE_REL 1e-9, REPEATED_EIGEN_REL 1e-10, KMEANS_MAX_ITER 300, KMEANS_N_INIT 10, SILHOUETTE_MAX_ROWS 10000, AGGLOMERATIVE_MAX_ROWS 3000, TIE_REL 1e-12, KNN_MAX_PAIRS 1e8, CART_MAX_DEPTH 5, MATCH_MAX_LABELS 50). Digest section 1 prints them from the export. None is graded."
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3",
+  "x1e2",
+  "x1e-2"
+ ],
+ "plan": {
+  "state": "FOUNDATION COMPLETE when run_gates.py is green: engine vendored at 4dfbb29, the Ekene facies dataset generator with 6 planted structures, digest built (28 sections), fields.json and precision.json generated from the one tolerance derivation, 18 graded fields discriminating, oracle cross-check against the vendored stdlib oracle, lab and three panels shipped with vitest, 78 lesson stubs scaffolded. No lesson prose, bank, key truth or migration is written yet.",
+  "thesis": "An electrofacies is a group of depth samples whose logs look alike, and it is worth something only when it is checked against the rock. Associate owns GROUPING LOGS INTO ELECTROFACIES (logs as features, distance and why a raw distance is ruled by GR, standard and min-max scaling, principal components from the correlation matrix, k-means with seeded k-means++ and several starts, centres in log units, new rows at the nearest centre, the published iris check), Professional owns JUDGING GROUPS AGAINST CORE (the elbow, the silhouette, agglomerative Ward, complete and average linkage with the linkage matrix and its cut, matching clusters to core facies one to one and by majority, the adjusted Rand index), Expert owns PREDICTING FACIES AND THE ENGINE'S OWN RULES (k nearest neighbours with the scaler fitted on the training rows and its tie rules, the CART tree, its exact tie-break and importances, the uncored wells predicted and written back, boundaries rule by rule, the tie band, the sign rule, the row caps, conventions that are choices). Each capstone grades only its own tier's question.",
+  "tiers": {
+   "beginner": "Associate: m01 what electrofacies are (logs as a signature of rock, core facies and electrofacies, the Ekene facies wells, rows features and distance, refusals), m02 scaling before distance, m03 principal components, m04 k-means, m05 reading clusters (centres in log units, cluster numbers are names, new rows, covariance against correlation), m06 one field clustered end to end (with Fisher's iris as the published check). Digest sections 1 to 13, and section 28.",
+   "intermediate": "Professional: m01 choosing k with the elbow, m02 the silhouette, m03 agglomerative clustering, m04 matching clusters to core facies, m05 the adjusted Rand index, m06 electrofacies against core end to end. Digest sections 14 to 20. Precision, recall and F1 of a mapped facies are D2's ratios, read with a pointer and never re-derived.",
+   "advanced": "Expert: m01 k nearest neighbours, m02 classification trees, m03 ties and exact comparisons, m04 predicting uncored wells, m05 boundaries, bands and caps, m06 reading the engine honestly. Digest sections 21 to 27."
+  },
+  "tierScopeDecisions": "Refined from the lead's split: the sign convention of a PCA component is NAMED in Associate (section 7 prints the basis) and its banded tie rule is Expert (section 26); the refusals are owned across all three tiers; the uncalibrated gamma ray tool and the withheld facies belong to Expert m04 only; Fisher's iris is Associate (the published PCA ratio and the k-means inertia) while its tied one-leaf tree is an Expert golden. Nothing in a lower tier needs a higher tier's section.",
+  "stage": "FOUNDATION. run_gates.py expects numsweep_facies.mjs and lengths.py to refuse on the 78 stubs for their stated stub reasons; D3_STAGE=lessons flips both to must-pass."
+ },
+ "history": {
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The engine's review changes (the banded ties, the robust sign rule, the kNN pair cap) landed before its merge and before any lesson was written; they are provenance. The digest describes the engine as it is."
+ },
+ "scopeSeams": {
+  "splits, cross-validation and scores": "OWNED BY D2 mlcore (groupSplit, groupKFold, leakage, regression metrics, precision, recall, F1 and their averages). D3 states which cored well is held out and reads the classification report of a mapped or predicted facies with a pointer; it never re-derives a ratio.",
+  "log conditioning and outliers": "OWNED BY D1 dataqc. D3 takes clean logs, refuses a missing value by name, and names gamma ray normalisation between wells as a conditioning step it does not do.",
+  "petrophysical interpretation": "OWNED BY the petrophysics course (porosity, saturation, net pay). A facies here is a label on a row.",
+  "forecasting a rate series": "OWNED BY D4 forecastml."
+ },
+ "namingCollisions": {
+  "cluster": "a group the engine made without core, numbered from 0; the number is a name. Section 28.",
+  "facies": "a core facies, or one predicted from core and called predicted; an electrofacies takes a facies name only after matching. Section 28.",
+  "standard deviation": "names its divisor: the clustering scaler's population SD against the correlation PCA's sample SD. Sections 5, 6, 28.",
+  "distance": "Euclidean on the scaled logs unless raw is said. Section 28.",
+  "accuracy": "names its rows: training, a held-out cored well, or the withheld facies of the synthetic field. Section 28.",
+  "machine learning": "a method named by what it is; no AI claim. Gated by gate_vocabulary.py."
+ },
+ "openItems": {
+  "ENGINE FINDING E1 (repair first)": "The constant-log refusal cluster.js inherits from ml.js calls the rows the scaler was fitted on 'training rows' when pca (correlation), kmeans, silhouette, elbow and agglomerative refuse: 'X.CALI has zero variance on the 30 training rows (every value is 8.5): standardising would divide by zero, so drop the feature or fit on rows where it varies'. Clustering and PCA have no training rows; the digest (section 3) states the wording as it is. Reported to the lead for an engines PR; the foundation re-cuts after it.",
+  "FINDINGS open question 1, nInit default 10": "Taught as a choice (sections 9 and 27): one start stops above the ten-start inertia on 8 of 10 seeds.",
+  "FINDINGS open question 2, one-to-one refuses more clusters than facies": "Taught (section 18) with majority matching beside it.",
+  "FINDINGS open question 3, no SOM": "Taught as not built (section 27).",
+  "prerequisite": "wave.json carries prerequisite null, as D1 and D2 do. Whether D3 should require D2 is a go-live decision for the lead."
+ },
+ "cleared_claims": [],
+ "fieldsDiscrimination": {
+  "ihiala_gr_scale_gapi": "sample sd, min max range, first well only, centre quoted, variance not rooted",
+  "ihiala_pc1_ratio": "covariance matrix, second component, cumulative of two, eigenvalue quoted, caliper included",
+  "ihiala_pc1_nphi_loading": "unit weight quoted, sign flipped, covariance matrix, weight times eigenvalue, second component",
+  "ihiala_pc1_score_first_row": "population sd, covariance matrix, sign flipped, loadings as weights, last row",
+  "ihiala_kmeans_inertia": "one start, raw logs, min max, k three, k five, sample sd scaling",
+  "ihiala_row24_cluster_gr_centre_gapi": "standard units quoted, first row cluster read, raw logs, one start, k three, min max, the row gr quoted",
+  "nkwelle_elbow_drop_fraction_k4": "drop not fraction, divided by inertia k, k three row, k five row, raw logs, one start",
+  "nkwelle_kmeans_silhouette": "raw logs, core facies labels, squared distances, a over cluster size, k three, a sample of sixty",
+  "nkwelle_ward_height_above_cut": "height below the cut, complete linkage, average linkage, without the factor two, raw logs, cut at three",
+  "nkwelle_complete_ari": "ward linkage, k means, average linkage, unadjusted rand index, cut at three",
+  "nkwelle_one_to_one_macro_f1": "accuracy quoted, weighted f1, k three, ward clusters, raw logs",
+  "nkwelle_majority_accuracy_k6": "one to one at k four, macro f1 quoted, k five, ward at the same k, raw logs",
+  "ogbunike_knn_heldout_accuracy": "k one, new rows on their own scaler, no scaling, held out well in training, min max",
+  "ogbunike_knn_nearest_distance": "squared distance, raw logs, scaler on every cored row, new rows on their own scaler, second neighbour",
+  "ogbunike_cart_root_threshold_vv": "pef taken on the tie, lower value not midpoint, upper value not midpoint, next split quoted, min max scaled logs",
+  "ogbunike_cart_nphi_importance": "pef first column order, depth three, root decrease quoted, min leaf five, training wells only",
+  "ogbunike_cart_depth3_heldout_accuracy": "depth four, depth two, held out well in training, training accuracy quoted, k nearest instead",
+  "ogbunike_uncored_gr_minmax_max": "uncored well in the fit, standard score instead, mean not highest, stated offset removed, raw gr over cored max"
+ }
+}

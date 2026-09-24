@@ -1,0 +1,22 @@
+-- ============================================================================
+-- D3 EXPERT DEEP SEED: Electrofacies, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam), generated as the Associate tier's are.
+--
+-- What this tier owns: PREDICTING FACIES, AND THE ENGINE'S OWN RULES. k
+-- nearest neighbours with the scaler fitted on the training rows, a tied vote
+-- and equidistant neighbours; the CART tree with Gini impurity, midpoint
+-- thresholds, depth and leaf limits, a printed tree; the root tie decided by
+-- column order, a split that needs a decrease above zero, a tied leaf,
+-- importances; the uncored wells predicted, checked against the synthetic
+-- field's withheld facies once, and written back; every boundary rule by rule,
+-- the tie band, the sign rule and the row caps; conventions that are choices
+-- and what is not built. Digest sections 21 to 27.
+--
+-- THE TRAP THE TIER IS BUILT ON. A prediction is only as good as the rows it
+-- was scaled and trained on: a well scaled on its own statistics, a gamma ray
+-- read hot, or a tie broken by column order all change the answer, and a
+-- range check sees only the rows that leave the range. The Expert capstone
+-- grades six Expert quantities.
+-- ============================================================================

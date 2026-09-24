@@ -1,0 +1,19 @@
+-- ============================================================================
+-- D3 PROFESSIONAL DEEP SEED: Electrofacies, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam), generated as the Associate tier's are.
+--
+-- What this tier owns: JUDGING GROUPS AGAINST CORE. The elbow, its drops and
+-- drop fractions, an inertia that rises; the silhouette, its mean and each
+-- cluster's, a row alone in its cluster; agglomerative Ward, complete and
+-- average linkage, the linkage matrix, the cut and a re-cut; the contingency
+-- table, one-to-one and majority matching of clusters to core facies; the
+-- adjusted Rand index. Digest sections 14 to 20.
+--
+-- THE TRAP THE TIER IS BUILT ON. No figure chooses k alone: the elbow picks
+-- nothing, the silhouette can prefer another k than the core, majority
+-- matching rewards splitting a facies, and agreement is counted in pairs so
+-- renamed clusters score the same. The Professional capstone grades six
+-- Professional quantities and grades no neighbour rule and no tree.
+-- ============================================================================

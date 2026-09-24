@@ -1,0 +1,366 @@
+{
+ "app_slug": "facies",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-k-nearest-neighbours",
+   "title": "k Nearest Neighbours",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-the-nearest-training-rows",
+     "title": "The nearest training rows",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-scaling-on-the-training-rows",
+     "title": "A scaler fitted on the training rows",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-vote-and-a-tied-vote",
+     "title": "The vote, and a tied vote",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-equidistant-neighbours",
+     "title": "Equidistant neighbours",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-choosing-k-for-neighbours",
+     "title": "Choosing k for neighbours",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-classification-trees",
+   "title": "Classification Trees",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-gini-impurity",
+     "title": "Gini impurity",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-midpoint-thresholds",
+     "title": "Midpoint thresholds",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-depth-leaves-and-minimum-rows",
+     "title": "Depth, leaves and minimum rows",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-reading-a-printed-tree",
+     "title": "Reading a printed tree",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-ties-and-exact-comparisons",
+   "title": "Ties and Exact Comparisons",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-root-tie",
+     "title": "The root tie between two logs",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-split-needs-a-decrease",
+     "title": "A split needs a decrease above zero",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-tied-leaf",
+     "title": "A tied leaf and the class that sorts first",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-feature-importances",
+     "title": "Feature importances",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-predicting-uncored-wells",
+   "title": "Predicting Uncored Wells",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-training-on-the-cored-wells",
+     "title": "Training on the cored wells",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-an-uncalibrated-tool",
+     "title": "An uncalibrated gamma ray tool",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-checking-against-withheld-core",
+     "title": "Checking against the withheld core",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-neighbours-against-the-tree",
+     "title": "Neighbours against the tree",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ef-classify-explorer",
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-writing-facies-back",
+     "title": "Writing a predicted facies back honestly",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-boundaries-and-caps",
+   "title": "Boundaries, Bands and Caps",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-boundaries-rule-by-rule",
+     "title": "Boundaries, rule by rule",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-tie-band",
+     "title": "The tie band on distances and heights",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ef-classify-explorer",
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-sign-rule",
+     "title": "The sign rule of a component",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ef-classify-explorer",
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-row-caps",
+     "title": "Row caps and a seeded sample",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ef-classify-explorer",
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-reading-the-engine-honestly",
+   "title": "Reading the Engine Honestly",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-conventions-that-are-choices",
+     "title": "Conventions that are choices",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-what-is-not-built",
+     "title": "What is not built",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-the-facies-note",
+     "title": "Writing the facies note",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ef-classify-explorer",
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ef-classify-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

@@ -1259,5 +1259,46 @@
       "digest.txt": "1d50fa63c629d42f209e683558932bc8da74c06bb751f2fa8c3fdd96ed9f8db9",
       "fields.json": "a603076ff1c85769bf467e954175906d865900e0e75477cdabdca3019166c16d"
     }
+  },
+  "facies": {
+    "course": "D3",
+    "live": "/root/dai-wip-facies",
+    "kit": "full",
+    "kitNote": "Full kit at the FOUNDATION stage. The mirror carries everything the wave is rebuilt and gated from so far: the digest, its generator and the Ekene facies dataset generator; the eighteen graded answers, the capstone generator, the precision declaration and the tolerance derivation's writer; the discriminate sweep and the oracle cross-check that replays the vendored stdlib oracle on the capstone; every wave gate with its negative control and the runner that pins every gate's md5 into wave.json; the prose rules; the harvested truth file with its check, the wave numsweep wrapper and the tier-scoped lengths gate; the structure and the scaffold that writes the 78 lesson stubs and three manifests; the vendoring script and this mirror script; the five writer briefs; and the three tier headers. The seed ladder is mirrored with the migrations, after the banks.",
+    "inputs": [
+      "digest.txt",
+      "fields.json",
+      "precision.json",
+      "wave.json",
+      "d3_dump.mjs",
+      "d3_fields.mjs",
+      "d3_capstone.mjs",
+      "make_fields.mjs",
+      "discriminate.mjs",
+      "oracle_check.py",
+      "structure.py",
+      "scaffold.py",
+      "build_digest.sh",
+      "digest_prose.rules.mjs",
+      "gate_capstone_leak.mjs",
+      "gate_claims.mjs",
+      "gate_copy_rule.py",
+      "gate_typed_literals.py",
+      "gate_vocabulary.py",
+      "run_gates.py",
+      "vendor_facies.sh",
+      "mirror.sh",
+      "hdr_beginner.txt",
+      "hdr_intermediate.txt",
+      "hdr_advanced.txt",
+      "truth-facies.json",
+      "truth_check.py",
+      "numsweep_facies.mjs",
+      "lengths.py"
+    ],
+    "pins": {
+      "digest.txt": "0cb6c4715ed463f08361c1ae0addd072ed5486898bb63acd5889e5d3690aafbd",
+      "fields.json": "0b6079bf45eeb500475076737fd79659e5195358acbb652e6e34466aa8d19fb1"
+    }
   }
 }

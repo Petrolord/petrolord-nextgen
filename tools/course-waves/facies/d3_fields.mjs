@@ -88,6 +88,10 @@ export const OTHER_NPHI_MIN = 0.13;
 export const LIME_PEF_MIN = 4.2;
 export const OTHER_PEF_MAX = 3.9;
 
+/** The caliper: CALI_BASE in plus the size of a normal draw with SD CALI_SD, stated. */
+export const CALI_BASE = 8.5;
+export const CALI_SD = 0.35;
+
 const clamp = (v, lo, hi) => Math.min(hi, Math.max(lo, v));
 
 const build = () => {
@@ -107,7 +111,7 @@ const build = () => {
       const RHOB = r3(rhob[0] + rhob[1] * nz());
       const NPHI = r3(lime ? clamp(nphi[0] + nphi[1] * nz(), 0.01, LIME_NPHI_MAX) : Math.max(OTHER_NPHI_MIN, nphi[0] + nphi[1] * nz()));
       const PEF = r2(lime ? Math.max(LIME_PEF_MIN, pef[0] + pef[1] * nz()) : clamp(pef[0] + pef[1] * nz(), 1.2, OTHER_PEF_MAX));
-      const CALI = r2(8.5 + Math.abs(0.35 * nz()));
+      const CALI = r2(CALI_BASE + Math.abs(CALI_SD * nz()));
       drawn.push(name);
       rows.push({ well: W.id, depth: W.top + i, GR, RHOB, NPHI, PEF, CALI, FACIES: UNCORED.includes(W.id) ? null : name });
     }

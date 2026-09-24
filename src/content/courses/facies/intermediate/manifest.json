@@ -1,0 +1,361 @@
+{
+ "app_slug": "facies",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-elbow",
+   "title": "Choosing k with the Elbow",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-inertia-against-k",
+     "title": "Inertia against k",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-drops-and-drop-fractions",
+     "title": "Drops and drop fractions",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-no-elbow-is-picked-for-you",
+     "title": "No elbow is picked for you",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-an-inertia-that-rises",
+     "title": "An inertia that rises with k",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-one-seed-per-k",
+     "title": "One seed stream for each k",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-silhouette",
+   "title": "The Silhouette",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-a-and-b-for-one-row",
+     "title": "The two distances behind one row",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-mean-and-each-cluster",
+     "title": "The mean and each cluster",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-row-alone-in-its-cluster",
+     "title": "A row alone in its cluster",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-when-silhouette-and-elbow-disagree",
+     "title": "When the silhouette and the elbow disagree",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-agglomerative-clustering",
+   "title": "Agglomerative Clustering",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-merging-from-single-rows",
+     "title": "Merging from single rows",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-ward-complete-and-average",
+     "title": "Ward, complete and average linkage",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-linkage-matrix",
+     "title": "The linkage matrix",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-cutting-the-tree",
+     "title": "Cutting the tree at k clusters",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-re-cutting-a-tree",
+     "title": "Re-cutting a tree without re-running it",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-matching-clusters-to-core",
+   "title": "Matching Clusters to Core Facies",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-contingency-table",
+     "title": "The contingency table",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-one-to-one-matching",
+     "title": "One-to-one matching",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-majority-matching",
+     "title": "Majority matching and split facies",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-scoring-a-mapped-facies",
+     "title": "Scoring a mapped facies",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-adjusted-rand-index",
+   "title": "The Adjusted Rand Index",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-pairs-of-rows",
+     "title": "Agreement counted in pairs of rows",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-chance-agreement",
+     "title": "Chance agreement and the adjustment",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-renamed-clusters",
+     "title": "Renamed clusters score the same",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-two-methods-on-the-same-rows",
+     "title": "Two methods on the same rows",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-electrofacies-against-core",
+   "title": "Electrofacies Against Core, End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-whole-workflow",
+     "title": "The judging workflow in order",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-facies-the-logs-cannot-see",
+     "title": "A facies the logs barely separate",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-up-a-comparison",
+     "title": "Writing up a comparison with core",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ef-judge-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
