@@ -10,7 +10,7 @@ The intercept is the fitted target where every feature is zero. For the teaching
 
 ## Why it is there anyway
 
-No rock has a bulk density of zero, so the intercept is a point far outside the data, where the fitted plane happens to cross the zero of every feature. It is there so the plane need not pass through the origin. Without it, the plane would be forced through zero DT at zero logs, and every other coefficient would bend to make up for that forced point. With it, the plane can sit wherever the data put it.
+No rock has a bulk density of zero, so the intercept is a point far outside the data, where the fitted plane happens to cross the zero of every feature. It is there so the plane need not pass through the origin. Without it, the plane would be forced through zero DT at zero logs, and the other coefficients would bend to make up for it.
 
 So the intercept is a construction number: fitted, needed, and without a physical reading here. Its large standard error, 30.261214 us/ft against a coefficient of -0.552686, says the data pin it down poorly, which is what you expect of a point this far from every row.
 
@@ -26,7 +26,7 @@ It does not mean each well is centred. The same fit leaves whole wells above or 
 
 ## Scaled features, the same plane
 
-Fitted on standardised features, the intercept changes meaning along with the coefficients: it becomes the fitted target where every feature sits at its training centre. On the one-well workflow of module six, with EKENE-8 held out, the standardised fit reads 105.119167 us/ft for the intercept. The predictions are the same as the raw fit's up to rounding, 1.42e-14 us/ft at most. Only the reading of the numbers changed.
+Fitted on standardised features, the intercept changes meaning along with the coefficients: it becomes the fitted target where every feature sits at its training centre. On the one-well workflow of module six, with EKENE-8 held out, the standardised fit reads 105.119167 us/ft for the intercept. The predictions are the same as the raw fit's up to rounding, 1.42e-14 us/ft at most. 
 
 ## Reading an intercept in a report
 

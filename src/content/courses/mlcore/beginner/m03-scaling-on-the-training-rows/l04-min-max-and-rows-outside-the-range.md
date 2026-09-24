@@ -38,7 +38,7 @@ As with the standard scaler, the refusal is about the rows it was fitted on.
 
 ## Choosing between the two scalers
 
-A standard scaler reads in training standard deviations from the training centre, and it has no natural bounds. Min-max reads as a position inside the training range, which makes out-of-range rows easy to count. Both are fitted on the training rows only, and both are applied unchanged.
+A standard scaler reads in training population standard deviations (divisor n) from the training centre. Min-max reads as a position inside the training range, which makes out-of-range rows easy to count. Both are fitted on the training rows only, and both are applied unchanged.
 
 ## Exercise
 

@@ -25,7 +25,7 @@ The sentence "holding the others fixed" is part of every reading. The plane is f
 
 A large coefficient does not mean an important feature. NPHI's 138.783590 is large because a unit of v/v is large; RHOB's 22.499915 is large for the same reason. GR's 0.288005 looks small because a gAPI is small. The size of a coefficient says nothing about how much a feature matters until the feature's own spread is known.
 
-One way to set the features side by side is to fit on standardised features, where every coefficient reads in us/ft per training standard deviation. On the one-well workflow of module six, EKENE-8 held out and 240 training rows, those read 6.898926 for GR, 2.402069 for RHOB and 4.610720 for NPHI. That is a different split from the teaching fit, so its numbers are quoted with their own split. The Expert tier measures importance directly with a stated method.
+One way to set the features side by side is to fit on standardised features, where every coefficient reads in us/ft per unit of the standardised feature. On the one-well workflow of module six, EKENE-8 held out and 240 training rows, those read 6.898926 for GR, 2.402069 for RHOB and 4.610720 for NPHI. That is a different split from the teaching fit, so its numbers are quoted with their own split. The Expert tier measures importance directly with a stated method.
 
 ## A coefficient belongs to its company
 

@@ -2,7 +2,7 @@
 
 {{panel:ml-fit-explorer}}
 
-Least squares chooses its coefficients to make the misses on the training rows as small as possible. No other set of coefficients could miss those rows by less, because they chose the coefficients. Scoring a model on them tells you how well it was fitted. It does not tell you how well it will predict the next well, which is the only reason anyone builds it.
+Least squares chooses its coefficients to make the misses on the training rows as small as possible. No other set of coefficients could miss those rows by less, because they chose the coefficients. Scoring a model on them tells you how well it was fitted. It does not tell you how well it will predict the next well.
 
 | scored on | rows | RMSE (us/ft) | R-squared | reference mean (us/ft) |
 | --- | --- | --- | --- | --- |
@@ -19,11 +19,11 @@ The training row score answers: how closely does the plane sit on the rows that 
 
 Rows are not independent of each other inside a well. Each Ekene well carries its own sonic offset, added to every DT sample, so a well sits above or below the others as a block. Module five measures those blocks in the residuals of a fit on all 270 sonic rows: the mean residual of a well ranges over 12.562737 us/ft from the lowest well to the highest.
 
-So a row one foot away from a training row in the same well is barely new. It shares the well's offset, and it sits a foot from a row the model already saw. A score on such rows mixes two things: how the rule does on the rock, and how much it has already met this well. A new well brings its own offset, and nothing in the training rows can have seen it. That is why this course holds out whole wells.
+So a row from a training well is barely new: it shares that well's offset. A score on such rows mixes two things: how the rule does on the rock, and how much it has already met this well. A new well brings its own offset, and nothing in the training rows can have seen it. That is why this course holds out whole wells.
 
 ## A test score is still one draw
 
-The teaching split holds out EKENE-4, EKENE-5 and EKENE-8. On those three wells the test RMSE, 4.282693 us/ft, is lower than the training RMSE of 5.758010. The held-out wells happen to sit close to the fitted plane. A different seed holds out different wells and gives a different score. Module five comes back to this; for now, the lesson is that "unseen" makes a score honest about its question, and one split still gives one reading.
+The teaching split holds out EKENE-4, EKENE-5 and EKENE-8. On those three wells the test RMSE, 4.282693 us/ft, is lower than the training RMSE of 5.758010. The held-out wells happen to sit close to the fitted plane. A different seed holds out different wells and gives a different score. Module five comes back to this: one split gives one reading.
 
 ## The engine's side of the bargain
 

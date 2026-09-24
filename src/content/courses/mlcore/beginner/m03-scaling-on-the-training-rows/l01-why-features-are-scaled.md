@@ -12,23 +12,21 @@ The three Ekene logs live on very different scales. Over the 180 training rows o
 
 ## What a scaled value says
 
-After scaling, a value reads in training standard deviations from the training centre. The first test row of the teaching split, sonic row 90, is EKENE-4 at 7966 ft, with GR 48.200000, RHOB 2.348000 and NPHI 0.243000. The training scaler turns it into z = -0.520420, -0.303186 and -0.360332. All three logs of that row sit a little below their training centres, and the three numbers can now be compared directly, which the raw values could not be.
+After scaling, a value reads in training population standard deviations (divisor n) from the training centre. The first test row of the teaching split, sonic row 90, is EKENE-4 at 7966 ft, with GR 48.200000, RHOB 2.348000 and NPHI 0.243000. The training scaler turns it into z = -0.520420, -0.303186 and -0.360332. All three logs of that row sit a little below their training centres, and the three numbers can now be compared directly, which the raw values could not be.
 
 ## Scaling does not move a least squares prediction
 
-Take the one-well workflow of module six: EKENE-8 held out, eight wells trained, 240 rows. Fit least squares on the raw logs, then again on standardised logs. The coefficients change completely, because they change units: on standardised features they are in us/ft per training standard deviation, 105.119167, 6.898926, 2.402069 and 4.610720 for the intercept, GR, RHOB and NPHI. The predictions for the held-out well differ between the two fits by at most 1.42e-14 us/ft, which is rounding. Least squares with an intercept gives the same fitted plane under any rescaling of a feature.
+Take the one-well workflow of module six: EKENE-8 held out, eight wells trained, 240 rows. Fit least squares on the raw logs, then again on standardised logs. The coefficients change completely, because they change units: on standardised features they are in us/ft per unit of the standardised feature, 105.119167, 6.898926, 2.402069 and 4.610720 for the intercept, GR, RHOB and NPHI. The predictions for the held-out well differ between the two fits by at most 1.42e-14 us/ft, which is rounding. Least squares with an intercept gives the same fitted plane under any rescaling of a feature.
 
 So for this tier's model, scaling changes how the coefficients read and leaves the predictions alone.
 
 ## Then why scale at all
 
-Three reasons, all of them real.
-
-First, a coefficient on standardised features says how far the target moves for one training standard deviation of the feature, so the sizes of the coefficients can be set side by side. A coefficient in raw units cannot be compared that way: its size says nothing until the feature's own spread is known.
+First, a coefficient on standardised features says how far the target moves for one unit of the standardised feature, one training scale, so the sizes of the coefficients can be set side by side. A coefficient in raw units cannot be compared that way: its size says nothing until the feature's own spread is known.
 
 Second, other fits are not indifferent to scale. The Professional tier adds fits whose answers depend on it, and the scaling habits built here carry straight over.
 
-Third, a scaler is a small fitted model in its own right. It has parameters, a centre and a scale per feature, fitted on some rows and applied to others. That makes it subject to the same rule as any model: fit it on the training rows only. The rest of this module is about that rule and what it catches.
+Third, a scaler is a small fitted model in its own right, with a centre and a scale per feature fitted on some rows and applied to others. So it obeys the rule every model obeys: fit it on the training rows only.
 
 ## The scaler's two numbers
 

@@ -34,7 +34,7 @@ A target that never varies leaves the plane nothing to explain, and its R-square
 
 > y has zero variance about its mean (every value is equal), so R-squared is undefined
 
-All three refusals share one idea. A fit needs the data to pin down every number it returns, with some left over to measure the misses. When the data cannot, the engine says so and names the input.
+All three refusals share one idea: a fit needs the data to pin down every number it returns, with rows left over to measure the misses.
 
 ## Exercise
 
