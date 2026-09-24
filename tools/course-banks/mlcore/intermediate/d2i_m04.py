@@ -94,7 +94,7 @@ q(3, "`predict` returns a probability of exactly 0.500000 for a logistic row. Wh
  "The basis reads, in the engine's own words, \"class 1 when the probability is above 0.5, class 0 at exactly 0.5\", and the engine's own half case returns 0.500000 and class 0. At or above belongs to `rocCurve`, `predict` refuses nothing here, and it draws nothing at random.")
 
 q(0, "A training set passed to `logistic` holds one class only. What does the engine return?",
- "A refusal naming `y`: \"y must contain both classes, 0 and 1\".",
+ "It refuses, naming `y`: \"y must contain both classes, 0 and 1\".",
  ["A fit whose intercept runs off toward infinity, returned with a warning.",
   "Coefficients of zero, with a probability of 1 on every row of that class.",
   "A fit on the single class, each probability its share."],

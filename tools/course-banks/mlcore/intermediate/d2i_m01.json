@@ -123,7 +123,7 @@
  {
   "prompt": "A caller passes a negative lambda to `ridge`. What does the engine return?",
   "options": [
-   "A refusal naming `lambda`: \"lambda must be a finite number, zero or more\".",
+   "The engine refuses by name: \"lambda must be a finite number, zero or more\".",
    "A fit with the penalty's sign reversed, rewarding large coefficients.",
    "The least squares fit, reading a negative lambda as 0.",
    "A fit at the absolute value of lambda, with a warning."

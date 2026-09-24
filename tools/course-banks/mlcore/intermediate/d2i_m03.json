@@ -101,10 +101,10 @@
  {
   "prompt": "On the logs alone, which seed gives the most negative optimism?",
   "options": [
-   "Seed 8, at -1.838526 us/ft.",
-   "Seed 5, at -1.747549 us/ft.",
-   "Seed 7, at -1.511070 us/ft.",
-   "Seed 1, at -0.047942 us/ft."
+   "-1.838526 us/ft, from seed 8",
+   "-1.747549 us/ft, from seed 5",
+   "-1.511070 us/ft, from seed 7",
+   "-0.047942 us/ft, from seed 1"
   ],
   "answer": 0,
   "explanation": "Of the 7 negative optimisms on the logs alone, seed 8 reads -1.838526, below seed 5's -1.747549 and seed 7's -1.511070. Seed 1's -0.047942 is the negative figure closest to zero."

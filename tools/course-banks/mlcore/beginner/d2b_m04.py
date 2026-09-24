@@ -1,0 +1,119 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D2 Associate m04, Ordinary Least Squares.
+# Sources: digest sections 3 (the ols refusals), 6 (the sample divisor, for a
+# distractor), 7 (the teaching fit: coefficients, standard errors, t values,
+# n, p, RSS, TSS, R-squared, the NPHI-alone fit, the intercept, the standard
+# error formula and its assumption) and 8 (the training RMSE and the test
+# R-squared values). Every figure is printed there.
+
+q(0, "What does least squares make as small as it can on the training rows?",
+ "The sum of squared residuals, sum (y - yhat)^2.",
+ ["The sum of the absolute residuals, which is why its training score is the MAE of the rows.",
+  "Its largest single residual, so that no training row is missed by much more than the rest.",
+  "How many rows the plane misses by more than one residual standard error."],
+ "Least squares finds the coefficients that make sum (y - yhat)^2 as small as it can be: 5967.842781 on the 180 training rows of the teaching split, and no other intercept and three coefficients give a smaller sum on those rows. It does not minimise absolute misses, the largest miss or a count of rows; MAE is a score computed afterwards."),
+
+q(2, "The teaching fit gives GR a coefficient of 0.288005 us/ft per gAPI. How does the course read it?",
+ "Holding RHOB and NPHI fixed, one more gAPI moves the fitted DT by 0.288005 us/ft.",
+ ["One more gAPI moves the measured DT by 0.288005 us/ft in every well of the field, whatever the other logs do.",
+  "GR explains 0.288005 of the variation in DT about the training mean.",
+  "It marks GR as the least important feature, its coefficient being smallest."],
+ "A coefficient is a rate on the fitted target with every other feature pinned: us/ft per gAPI, holding RHOB and NPHI fixed. It describes the plane fitted to these rows, so it says nothing about the measured DT in every well, and it is no share of variation (that is R-squared's job). Its size says nothing about importance until the feature's spread is known: a gAPI is a small unit."),
+
+q(1, "NPHI's coefficient in the teaching fit is 138.783590 us/ft per v/v. By how much does one porosity unit, 0.01 v/v, move the fitted DT, holding the others fixed?",
+ "1.387836 us/ft, the coefficient over 100.",
+ ["138.783590 us/ft, since the coefficient already reads per porosity unit of 0.01 v/v.",
+  "11.127468 us/ft, the NPHI coefficient per hundredth once the other two logs are dropped.",
+  "0.288005 us/ft, the same as one gAPI of gamma ray, since both are per unit of a log."],
+ "NPHI is a fraction, so its coefficient is per whole unit of v/v, a porosity of one. Per 0.01 v/v it is 138.783590 over 100, which is 1.387836 us/ft. 11.127468 is the NPHI coefficient of a different fit, NPHI alone, and still per whole v/v. 0.288005 is GR's coefficient, per gAPI."),
+
+q(3, "Fitted on NPHI alone over the same 180 training rows, the NPHI coefficient is 11.127468; beside GR and RHOB it is 138.783590. Which reading is right?",
+ "Both, each for its own feature list: the second holds GR and RHOB fixed, and the first has no others to hold.",
+ ["The single-feature figure, because GR and RHOB distort the NPHI coefficient once they join the fit.",
+  "The three-feature figure, because the single-feature fit has a training R-squared of only 0.001327.",
+  "Neither, since the NPHI coefficient is the mean of the two fits, weighted by how many rows each used."],
+ "The NPHI column is identical in both fits. Beside GR and RHOB its coefficient describes how DT moves with NPHI while the other two are held fixed; on its own it describes something else. Neither is wrong, and a low R-squared does not make a coefficient false. So a coefficient is quoted with its features, its rows and its unit. No averaging of fits is involved."),
+
+q(3, "The teaching fit's intercept is -0.552686 us/ft with a standard error of 30.261214. What is it?",
+ "The fitted DT where every feature is zero: a point far outside the data that frees the plane from the origin.",
+ ["The sonic slowness of a rock with no porosity, measured by the fit to within 30.261214 us/ft.",
+  "The mean training DT, since the intercept centres the plane on the rows it was fitted on.",
+  "It is the average residual of the fit, which least squares drives to a value near zero."],
+ "The intercept is the fitted DT at zero gamma ray, zero density and zero porosity, a row no rock supplies. It is there so the plane need not pass through the origin, and its large standard error says the data pin it down poorly. It is no rock property, the mean training DT is 105.883333 us/ft, and the residuals, which average close to zero, are a different quantity from the intercept."),
+
+q(1, "NPHI's coefficient, 138.783590, is far larger than GR's, 0.288005. What does that say about which feature matters more?",
+ "Nothing yet: a coefficient's size depends on its feature's unit and spread, which must be known first.",
+ ["NPHI matters far more, since a larger coefficient moves the prediction further on every row.",
+  "GR matters more, since a small coefficient marks a feature the plane can lean on without large corrections.",
+  "They matter equally, since least squares scales each coefficient so every feature pulls the same weight."],
+ "A coefficient carries the target's unit over the feature's unit. NPHI's is large because a whole v/v is a large step, and GR's looks small because a gAPI is small. Its size says nothing about importance until the feature's own spread is known, and least squares does no rescaling of its own. Importance is measured directly with a stated method in a later tier."),
+
+q(0, "The teaching fit has 180 rows, three features and an intercept. How many residual degrees of freedom does it have?",
+ "176, since n - p counts the intercept among the 4 coefficients.",
+ ["179, the n - 1 that the sample standard deviation divides by on 180 rows.",
+  "180, since degrees of freedom count the rows, and the coefficients use none of them.",
+  "90, since the residual degrees of freedom are the rows held back to test the fit."],
+ "The residual degrees of freedom are n - p, with p counting the intercept: 180 - 4 = 176, as the engine prints. Each coefficient the fit estimates uses up one row's worth of freedom. 179 is the sample divisor on 180 rows and has nothing to do with the coefficients, and the 90 test rows are not part of this fit at all."),
+
+q(2, "On the 180 training rows the residual standard error is 5.823075 us/ft and the training RMSE is 5.758010. Why is s the larger of the two?",
+ "Both root the same RSS, but s divides it by n - p = 176 and RMSE by n = 180.",
+ ["s is measured on the test wells, whose misses run larger than the misses on the training rows.",
+  "s squares each miss twice before it takes the root, so it reads above the RMSE of the same rows.",
+  "RMSE drops the intercept's residual first, which lowers it below s."],
+ "s^2 = RSS / (n - p) and RMSE^2 = RSS / n, on the same RSS of 5967.842781, so the smaller divisor gives the larger figure. Dividing by n - p allows for the coefficients the fit spent on making those misses small. Both are training figures, neither squares twice, and no residual is dropped; the test RMSE, 4.282693, is smaller than both."),
+
+q(0, "The teaching fit's RSS is 5967.842781 and its TSS about the training mean is 18853.190000. Which R-squared follows, and how is it named?",
+ "0.683457, the R-squared of the training fit about the training mean.",
+ ["0.815322, the R-squared of the training fit taken about the mean of the test targets.",
+  "0.678062, the R-squared of the training fit with no adjustment for the coefficients spent.",
+  "0.816151, which this RSS gives for the test wells about the training mean."],
+ "The training R-squared is 1 - RSS / TSS on the 180 rows that chose the plane: 0.683457, named in full as the training fit about the training mean. 0.815322 and 0.816151 are the test wells' R-squared values, about the test mean and about the training mean, and they use the test rows' own squared misses. 0.678062 is the adjusted R-squared, the version that is corrected for the coefficients."),
+
+q(3, "Beside the training R-squared of 0.683457 the engine prints an adjusted R-squared of 0.678062. What is the adjusted figure?",
+ "The same training R-squared, corrected for the number of coefficients the fit spent.",
+ ["The R-squared of the three test wells, adjusted to the training mean so the two can be compared.",
+  "The training R-squared once the intercept is removed from the fit.",
+  "It is the training R-squared recomputed with the sample standard deviation in place of the population one."],
+ "The adjusted R-squared is the same idea as the training R-squared, measured on the same 180 rows, corrected for the coefficients the fit spent. The test R-squared about the training mean is 0.816151, a different figure. No intercept is removed, and no scaler divisor enters an R-squared."),
+
+q(2, "The standard error formula behind GR's 0.066103 assumes independent residuals. Why does the course say the printed standard errors are exact only under that assumption?",
+ "Rows of one Ekene well share its sonic offset, so residuals within a well are not independent.",
+ ["The standard errors are computed on the test wells, whose residuals depend on the training fit.",
+  "Least squares forces each well's residuals to sum to zero, which ties them together row by row.",
+  "GR, RHOB and NPHI are logged on one tool string, so their errors are shared by construction."],
+ "The basis states the formula, s x sqrt(diag((X'X)^-1)) with s^2 = RSS / (n - p), and it assumes residuals independent row to row. Each Ekene well carries its own offset, so its residuals sit above or below the plane together. The standard errors are training figures. Least squares balances the residuals over all the fitted rows, never well by well, and no shared tool error is part of the Ekene field."),
+
+q(1, "In the teaching fit, GR's t value is 4.356927 and RHOB's is 1.830825. What is a t value?",
+ "The coefficient divided by its standard error: a reading of the coefficient against its own uncertainty.",
+ ["The coefficient times its standard error, a measure of how far the prediction moves per unit of log.",
+  "The share of DT's variation that each feature explains on its own, scaled up by the number of training rows used.",
+  "How many training wells keep the coefficient's sign when the fit is repeated one well at a time."],
+ "A t value is the coefficient over its standard error: GR's 0.288005 over 0.066103 gives 4.356927, several standard errors from zero, and RHOB's 1.830825 is closer to zero. It is read under the formula's assumptions. It is no product, no share of variation and no count of wells."),
+
+q(1, "Why does the engine refuse a least squares fit when the rows equal the coefficients, n = p?",
+ "The plane passes through every row, leaving no residual degree of freedom to estimate s from.",
+ ["The design becomes a column of zeros, and a zero column's coefficient cannot be identified.",
+  "With n = p the target has zero variance, so the R-squared of the fit would divide by zero.",
+  "Least squares needs at least 30 rows, one well's worth, before it can estimate any coefficient."],
+ "With n = p the plane passes through every row exactly, every residual is zero, and n - p leaves nothing to measure the misses with. The fit would look perfect and say nothing. The engine refuses n <= p and names `X`. A zero column and a constant target are separate refusals with their own fields, and the rule is n - p at least 1, with no fixed row minimum."),
+
+q(3, "A CALI column that is zero on every row is passed to `ols`. What does the engine return, and why?",
+ "A refusal on `X.CALI`: its coefficient could take any value without changing a prediction, so it is not identifiable.",
+ ["A coefficient of zero for CALI, since a column of zeros can only ever contribute nothing to the plane.",
+  "A fit with CALI dropped without notice and three features reported in the basis block of the result.",
+  "A CALI coefficient equal to the intercept, since both of them multiply a constant column in the design."],
+ "The engine's own words are: \"X.CALI is zero in every row, so its coefficient is not identifiable\". Any value of that coefficient gives the same predictions, so the engine cannot choose one and returns none. It drops no feature silently, and the intercept's column is ones, which a column of zeros does not match."),
+
+q(0, "The teaching split trains on 180 rows, far more than its 4 coefficients. What does that row rule leave for you to check?",
+ "How many wells the rows come from: 180 rows from six wells is little independent evidence.",
+ ["Nothing more, since the engine's rule that n exceeds p already guarantees the evidence is enough.",
+  "Whether the rows number 30 times the coefficients, which the engine leaves to you.",
+  "That every row comes from a different well, which the splits make certain."],
+ "The engine checks rows, because rows are what least squares counts. Rows inside a well share its offset, so a model can clear the row rule easily and still have seen very few independent wells. Counting wells is the caller's job, and it is why the course states wells beside rows. No thirty-times rule exists, and a whole-well split keeps a well's rows together."),
+
+emit(Q, '/root/dai-wip-mlcore/banks/d2b_m04.json', expect_n=15)
+finish()

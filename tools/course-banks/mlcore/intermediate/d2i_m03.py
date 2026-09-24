@@ -72,10 +72,10 @@ q(3, "Across seeds 1 to 12 with the attributes, which seed shows the largest opt
  "The twelve optimisms with the attributes run from 0.701626 at seed 1 to 11.687949 at seed 5. Seed 2 at 11.095034 and seed 8 at 10.636928 come next, and seed 1 is the smallest of the twelve.")
 
 q(0, "On the logs alone, which seed gives the most negative optimism?",
- "Seed 8, at -1.838526 us/ft.",
- ["Seed 5, at -1.747549 us/ft.",
-  "Seed 7, at -1.511070 us/ft.",
-  "Seed 1, at -0.047942 us/ft."],
+ "-1.838526 us/ft, from seed 8",
+ ["-1.747549 us/ft, from seed 5",
+  "-1.511070 us/ft, from seed 7",
+  "-0.047942 us/ft, from seed 1"],
  "Of the 7 negative optimisms on the logs alone, seed 8 reads -1.838526, below seed 5's -1.747549 and seed 7's -1.511070. Seed 1's -0.047942 is the negative figure closest to zero.")
 
 q(2, "Logistic regression with l2 = 1 on standardised pay features scores a test log loss of 0.126480 with a scaler fitted on the training wells and 0.126152 with one fitted on all ten. What do you conclude?",

@@ -86,7 +86,7 @@ q(3, "How does the engine compute the effective degrees of freedom of a ridge fi
  "The engine sums d_i^2 / (d_i^2 + lambda) over the singular values d_i of the standardised features, so each term lies between 0 and 1 and the total is 7.000000 at lambda 0 with seven features. The intercept is not counted because it is not penalised, the count is never a comparison of coefficients with lambda, and n - p is the residual degrees of freedom of least squares.")
 
 q(0, "A caller passes a negative lambda to `ridge`. What does the engine return?",
- "A refusal naming `lambda`: \"lambda must be a finite number, zero or more\".",
+ "The engine refuses by name: \"lambda must be a finite number, zero or more\".",
  ["A fit with the penalty's sign reversed, rewarding large coefficients.",
   "The least squares fit, reading a negative lambda as 0.",
   "A fit at the absolute value of lambda, with a warning."],
