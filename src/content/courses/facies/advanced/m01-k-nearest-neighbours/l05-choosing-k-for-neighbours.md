@@ -35,4 +35,4 @@ The boundary is drawn for this rule alone: k 1 and k equal to the number of trai
 
 ## Exercise
 
-Open the view "k nearest neighbours on a held-out well" with EKENE-6 held out and standard scaling. Step k through 1, 3, 5, 7, 9 and 15 and confirm the table. Then hold out EKENE-2 instead, repeat the same k, and write down which k scores highest on that well. Finally set k to 150 with EKENE-6 held out, read the votes for held-out row 0 and the accuracy on EKENE-6, and say in one sentence why those votes no longer depend on that row's logs.
+Open the view "k nearest neighbours on a held-out well" with EKENE-6 held out and standard scaling. Step k through 1, 3, 5, 7, 9 and 15 and confirm the table. Then hold out EKENE-2 instead, repeat the same k, and write down which k scores highest on that well. Finally set k to 150 with EKENE-6 held out, read the votes for held-out row 0 and the accuracy on EKENE-6, and say in one sentence why those votes do not depend on that row's logs.

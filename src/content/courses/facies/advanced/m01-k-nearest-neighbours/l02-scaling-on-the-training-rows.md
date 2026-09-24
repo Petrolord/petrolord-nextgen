@@ -17,7 +17,7 @@ The standard scaler is the machine learning engine's own: each log centred on it
 | NPHI | 0.180420 | 0.193239 | 0.099094 | 0.096603 |
 | PEF | 3.264067 | 3.114444 | 1.330401 | 1.275647 |
 
-The second pair of columns includes EKENE-6. Fitting on them would let the held-out well shape the space it is then scored in, and the score would no longer describe a well the model had never seen. The training centre of GR is 54.556667 gAPI; EKENE-6's rows are measured against that figure, whatever EKENE-6 itself averages.
+The second pair of columns includes EKENE-6. Fitting on them would let the held-out well shape the space it is then scored in, and the score would stop describing a well the model had never seen. The training centre of GR is 54.556667 gAPI; EKENE-6's rows are measured against that figure, whatever EKENE-6 itself averages.
 
 ## Two wrong ways on the same well
 
