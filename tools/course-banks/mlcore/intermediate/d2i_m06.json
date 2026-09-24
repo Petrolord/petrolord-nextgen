@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "On the 90 pay test rows, which hold 90 distinct probabilities, how many points does the engine's ROC curve carry?",
+  "options": [
+   "90, one per test row, with no separate starting point.",
+   "91: one per distinct score, plus the start at (0, 0).",
+   "24, one per pay row, at each place the curve steps up.",
+   "1584, one for every pair of a pay and a non-pay row."
+  ],
+  "answer": 1,
+  "explanation": "The engine places one point per distinct score and starts at (0, 0) with threshold null, so 90 distinct probabilities give 91 points. The curve moves right as well as up, so it has more points than pay rows, and the 1584 pairs are how the AUC reads as a probability, with no point for each pair."
+ },
+ {
+  "prompt": "In the tie case, yTrue 0, 1, 0, 1, 1, 0 against scores 0.1, 0.4, 0.4, 0.8, 0.8, 0.2, where does the curve stand at threshold 0.4?",
+  "options": [
+   "FPR 0.000000 and TPR 0.666667, where the two rows scored 0.8 take it.",
+   "FPR 0.666667 and TPR 1.000000, once the row at 0.2 is called positive.",
+   "At two points, one per row at 0.4.",
+   "FPR 0.333333 and TPR 1.000000, after a diagonal step."
+  ],
+  "answer": 3,
+  "explanation": "At 0.4 a positive and a negative share the score and are called together, so the curve moves up and right at once to (0.333333, 1.000000). (0, 0.666667) is the point at 0.8 and (0.666667, 1) the point at 0.2. In the engine's own words, \"equal scores are one threshold: their rows move together, a diagonal step when the classes are mixed\"."
+ },
+ {
+  "prompt": "What AUC does the engine return for that six-row tie case, and for a case in which every score is equal?",
+  "options": [
+   "0.944444, and 0.500000 when every score is equal.",
+   "1.000000, and 0 for equal scores.",
+   "0.944444, with equal scores refused.",
+   "0.997475 for the tie case, and 0.500000 for equal scores."
+  ],
+  "answer": 0,
+  "explanation": "The tie case has nine (positive, negative) pairs: eight won and one tied at 0.4, which counts one half, so the area is 0.944444. Every score equal gives a single diagonal step and 0.500000, a model that cannot rank at all. Ties are counted, never refused, and 0.997475 is the pay test wells' AUC."
+ },
+ {
+  "prompt": "On the pay test wells, 1580 of the 1584 (pay, non-pay) pairs have the pay row scoring higher, a tie counting one half. What does that fraction equal?",
+  "options": [
+   "The accuracy at one half, 0.955556.",
+   "The recall of pay, 1.000000, as every pay row outranks.",
+   "The trapezoid AUC, 0.997475, to within 1.11e-16.",
+   "The precision of pay, 0.857143, read from pairs won."
+  ],
+  "answer": 2,
+  "explanation": "The basis says the trapezoid AUC \"equals the Mann-Whitney probability with ties counted one half\", and on these rows the two agree to 1.11e-16, which is rounding. Accuracy and precision are read at one threshold, and a recall of 1 at one half does not mean every pay row outranks every non-pay row: four pairs are lost."
+ },
+ {
+  "prompt": "Every probability on the pay test rows is squared before `rocCurve` is called. What happens to the AUC?",
+  "options": [
+   "It falls, since every probability shrinks toward zero when squared.",
+   "Nothing: squaring keeps the order of the scores, and AUC reads only the order.",
+   "A rise, because the pay rows' high scores now stand further apart.",
+   "It is refused, since the squared values are no longer probabilities between 0 and 1."
+  ],
+  "answer": 1,
+  "explanation": "Any change that keeps the scores in the same order leaves the curve's points in the same order and the AUC unchanged; squaring numbers between 0 and 1 keeps their order. `rocCurve` takes scores, so it has no reason to refuse them. Log loss, which reads the probabilities themselves, would change."
+ },
+ {
+  "prompt": "A model scores every pay row just above one half and every non-pay row just below it. What do AUC and log loss make of it?",
+  "options": [
+   "AUC reads 1 for the perfect ranking; log loss sees how little confidence the probabilities claim.",
+   "Both read perfect, because every row falls on its own correct side of one half.",
+   "AUC reads 0.500000, because every score sits so close to one half.",
+   "Log loss reads 0, since every call at the one half threshold is right."
+  ],
+  "answer": 0,
+  "explanation": "AUC reads only the order, and every pay row outranks every non-pay row, so it is 1. Log loss charges each row -ln of the probability put on its label, and a probability near one half costs near ln 2 per row whatever the calls. 0.500000 is the AUC of a model whose scores are all equal, and log loss is 0 only for certain, correct probabilities."
+ },
+ {
+  "prompt": "What log loss does the engine return for a probability of one half on every row?",
+  "options": [
+   "0.5, the probability given to each row",
+   "0, since no row is confident and wrong",
+   "0.693147, which is ln 2",
+   "34.538776, the charge on a clipped row"
+  ],
+  "answer": 2,
+  "explanation": "Each row is charged -ln(0.5) = ln 2 whatever its label, so the mean is 0.693147, the engine's own case. 0.5 is the probability and never the loss, 0 is the loss of a certain, correct model, and 34.538776 is the charge on a row clipped at the wrong end."
+ },
+ {
+  "prompt": "`logLoss` is given yTrue 1, 0, 1, 0 and probabilities 1, 0, 0 and 0.3. What does it return?",
+  "options": [
+   "Infinity, because a pay row was given a probability of 0",
+   "34.538776, the charge carried by the third row alone",
+   "8.723863, with 1 row clipped, the certain and wrong one",
+   "8.723863, with 3 rows clipped"
+  ],
+  "answer": 3,
+  "explanation": "The engine clips every probability to [eps, 1 - eps], so the mean of the four charges is 8.723863 and the three probabilities of exactly 0 or 1 are all counted as clipped, the two certain and right rows among them. Without the clip the answer would be infinite, and 34.538776 is the third row's charge alone, one of the four that are averaged."
+ },
+ {
+  "prompt": "In that case, why is the third row, a pay row given exactly 0, charged 34.538776?",
+  "options": [
+   "Every row's charge is capped at 34.538776 by a fixed ceiling in the engine.",
+   "It is clipped to eps = 1.00e-15, and -ln(1.00e-15) is 34.538776.",
+   "It is clipped to 2.22e-16, the machine epsilon.",
+   "Its charge is ln 2 times the rows clipped."
+  ],
+  "answer": 1,
+  "explanation": "The engine clips p to [eps, 1 - eps] with eps = 1.00e-15, so the row is charged -ln(1.00e-15) = 34.538776; there is no ceiling on the charge beyond what the clip implies. 2.22e-16 is where scikit-learn 1.9 clips, and ln 2 is the charge of a probability of one half."
+ },
+ {
+  "prompt": "Where does the engine's log loss clip draw its boundary?",
+  "options": [
+   "At eps itself, which is clipped: p = 1.00e-15 counts as 1 clipped row in the engine's tally.",
+   "Only probabilities of exactly 0 or 1 are clipped by the engine, whatever the value of eps is.",
+   "A probability equal to eps is kept: p = 1.00e-15 clips 0 rows, and p = 1.00e-16 clips 1.",
+   "No clip is applied at all unless the caller passes an eps of its own."
+  ],
+  "answer": 2,
+  "explanation": "The clip is to [eps, 1 - eps], and a probability equal to eps is inside it: 1.00e-15 clips 0 rows and 1.00e-16 clips 1. Any probability below eps is clipped, whether or not it is exactly 0, and the default eps of 1.00e-15 applies when the caller passes none."
+ },
+ {
+  "prompt": "scikit-learn 1.9 clips at the float64 machine epsilon, 2.22e-16. What would it charge that certain-and-wrong pay row, and what follows?",
+  "options": [
+   "36.043653, against the engine's 34.538776, so a log loss is compared only with its clip stated.",
+   "34.538776, the same charge, since both tools clip at the same eps of 1.00e-15.",
+   "Infinity, since scikit-learn applies no clip of any kind to a probability of exactly 0 or exactly 1.",
+   "36.043653 on every row of the case, whether that row was clipped or not."
+  ],
+  "answer": 0,
+  "explanation": "-ln(2.22e-16) is 36.043653, so a row clipped at the wrong end is charged more there than the engine's 34.538776, and the clip is a stated choice. An unclipped row is charged the same by both tools, so the difference sits only in clipped rows, and scikit-learn does clip."
+ },
+ {
+  "prompt": "`rocCurve` is given yTrue holding 2 positives and 0 negatives. What does the engine return?",
+  "options": [
+   "A curve that climbs straight up the true positive rate axis and stops there, returned with an AUC of 1.",
+   "An AUC of 0.500000, the value the engine gives any model that is unable to rank its rows at all.",
+   "A curve whose false positive rate is scored by the zeroDivision setting, and listed as undefined.",
+   "A refusal naming `yTrue`, in the engine's words: \"yTrue must contain both classes (found 2 positive and 0 negative), or the ROC curve is undefined\"."
+  ],
+  "answer": 3,
+  "explanation": "With no negatives the false positive rate divides by zero, and the engine refuses by name, naming the counts it found. It returns no curve and no AUC, and zeroDivision belongs to `classificationReport`."
+ },
+ {
+  "prompt": "What threshold does the engine print for the ROC curve's first point, and why?",
+  "options": [
+   "0, the lowest score any row could carry.",
+   "Null, because JSON has no infinity.",
+   "1, the highest probability any row can have.",
+   "The highest test probability, where the first row is called."
+  ],
+  "answer": 1,
+  "explanation": "The first point is (0, 0), where the threshold sits above every score and nothing is called positive. scikit-learn prints that threshold as infinity; the engine prints null, because JSON has no infinity. A threshold at the highest score already calls that row positive, and it is the second point."
+ },
+ {
+  "prompt": "On the pay test wells the AUC is 0.997475, the accuracy at one half is 0.955556 and the log loss is 0.115676. Which question does the log loss answer?",
+  "options": [
+   "Whether the probabilities themselves can be taken at face value.",
+   "How many calls are right at the one half threshold on the rows.",
+   "How well the model ranks pay above non-pay at any threshold.",
+   "What share of the test rows had to be clipped before scoring."
+  ],
+  "answer": 0,
+  "explanation": "Accuracy asks how many calls were right at one threshold, AUC asks how well the model ranks at any threshold, and log loss asks whether the probabilities can be believed as probabilities. No row was clipped on these test wells, and the clip count is reported beside the loss."
+ },
+ {
+  "prompt": "Row 61 of EKENE-3, a non-pay row, carries a probability of pay of 0.817561. What does log loss charge it?",
+  "options": [
+   "-ln(0.817561), the charge a pay row takes",
+   "Nothing, as only clipped rows are charged",
+   "-ln(1 - 0.817561), since its label is 0",
+   "34.538776, the clip's charge on a confident miss"
+  ],
+  "answer": 2,
+  "explanation": "A non-pay row (y = 0) is charged -ln(1 - p). -ln(p) is the charge for a pay row, every row is charged and clipping only bounds the extremes, and 34.538776 is the charge of a row clipped at eps, which 0.817561 is far from."
+ }
+]
