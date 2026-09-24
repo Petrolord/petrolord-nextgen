@@ -30,7 +30,7 @@
    "Complete, because the labels rise with x through every row of the table and never once fall back to 0"
   ],
   "answer": 0,
-  "explanation": "No threshold divides the classes strictly, because the two rows at 3 carry one label each, and one of them lies below any threshold between 3 and 4. The threshold at 3 puts every row on its own side or on the plane, with rows of both classes on it, and the engine refuses: \"y is quasi-completely separated by a linear combination of the features (every row lies on or on its own class side of a hyperplane, some exactly on it), so the maximum likelihood coefficients are infinite: add an L2 penalty (l2 > 0) or remove the separating feature\"."
+  "explanation": "No threshold divides the classes strictly, because the two rows at 3 carry one label each, and one of them lies below any threshold between 3 and 4. The threshold at 3 puts every row on its own side or on the plane, with rows of both classes on it, so the engine refuses with the words \"y is quasi-completely separated\" at the head of its message. Complete separation would need a threshold with no row on it, and the pair at 3 rules that out."
  },
  {
   "prompt": "The two separation refusals share their remedy. Which clause of the quasi-complete message tells it apart from the complete one?",

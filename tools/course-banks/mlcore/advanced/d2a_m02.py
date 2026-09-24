@@ -32,7 +32,7 @@ q(0, "The engine's own six rows are X [[1],[2],[3],[3],[4],[5]] with y [0,0,0,1,
  ["Complete, as a threshold between 3 and 4 puts every class 1 row above it and every class 0 row below",
   "None, since the two rows at x = 3 share an x and differ in label, so no hyperplane can hold them apart at all",
   "Complete, because the labels rise with x through every row of the table and never once fall back to 0"],
- "No threshold divides the classes strictly, because the two rows at 3 carry one label each, and one of them lies below any threshold between 3 and 4. The threshold at 3 puts every row on its own side or on the plane, with rows of both classes on it, and the engine refuses: \"y is quasi-completely separated by a linear combination of the features (every row lies on or on its own class side of a hyperplane, some exactly on it), so the maximum likelihood coefficients are infinite: add an L2 penalty (l2 > 0) or remove the separating feature\".")
+ "No threshold divides the classes strictly, because the two rows at 3 carry one label each, and one of them lies below any threshold between 3 and 4. The threshold at 3 puts every row on its own side or on the plane, with rows of both classes on it, so the engine refuses with the words \"y is quasi-completely separated\" at the head of its message. Complete separation would need a threshold with no row on it, and the pair at 3 rules that out.")
 
 q(2, "The two separation refusals share their remedy. Which clause of the quasi-complete message tells it apart from the complete one?",
  "every row lies on or on its own class side of a hyperplane, some exactly on it",
