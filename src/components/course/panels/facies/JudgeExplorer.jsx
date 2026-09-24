@@ -33,19 +33,21 @@ const useTable = (initial) => {
 const SCALES = [['standard', 'standard (population SD, n)'], ['minmax', 'min-max'], ['none', 'none (raw logs)']];
 const LINKS = [['ward', 'Ward'], ['complete', 'complete'], ['average', 'average']];
 
-export const ElbowMode = () => {
+export const ElbowMode = ({ kMin0 = '1', kMax0 = '8' }) => {
   const [text, setText, t] = useTable(coredTableText());
   const [feats, setFeats] = useState(TEACHING.logs.join(', '));
-  const [kMax, setKMax] = useState('8');
+  const [kMin, setKMin] = useState(kMin0);
+  const [kMax, setKMax] = useState(kMax0);
   const [seed, setSeed] = useState(String(TEACHING.seed));
   const [nInit, setNInit] = useState('');
   const features = names(feats);
-  const r = t.error ? null : elbowOf({ X: matrixOf(t.rows, features), kMin: 1, kMax: parseNumber(kMax), seed: parseNumber(seed), nInit: parseNumber(nInit), names: features, withSilhouette: true });
+  const r = t.error ? null : elbowOf({ X: matrixOf(t.rows, features), kMin: parseNumber(kMin), kMax: parseNumber(kMax), seed: parseNumber(seed), nInit: parseNumber(nInit), names: features, withSilhouette: true });
   return (
     <>
       <FieldGrid>
         <TextField label="Your table" value={text} onChange={setText} rows={4} />
         <WordField label="Logs" value={feats} onChange={setFeats} />
+        <NumField label="Smallest k" value={kMin} onChange={setKMin} />
         <NumField label="Largest k" value={kMax} onChange={setKMax} />
         <NumField label="Seed" value={seed} onChange={setSeed} />
         <NumField label="Starts (blank for the default)" value={nInit} onChange={setNInit} />

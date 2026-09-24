@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import {
   parseTable, parseNumber, matrixOf, coredLogsText, uncoredTableText, TEACHING, DEFAULTS,
-  standardScalerOf, minMaxScalerOf, applyScalerOf, knnOf, pcaOf, pcaTransformOf, kmeansOf, assignOf, kmeansReader,
+  standardScalerOf, minMaxScalerOf, applyScalerOf, knnOf, pcaOf, pcaTransformOf, kmeansOf, assignOf, kmeansReader, fittedRows,
 } from './faciesLab';
 import {
   PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note,
@@ -93,8 +93,9 @@ export const DistanceMode = () => {
   );
 };
 
-export const PcaMode = () => {
+export const PcaMode = ({ from0 = '0' }) => {
   const [text, setText, t] = useTable(coredLogsText());
+  const [from, setFrom] = useState(from0);
   const [feats, setFeats] = useState(TEACHING.logs.join(', '));
   const [matrix, setMatrix] = useState('correlation');
   const [nComp, setNComp] = useState('');
@@ -111,6 +112,7 @@ export const PcaMode = () => {
         <SelectField label="Matrix" value={matrix} onChange={setMatrix} options={[['correlation', 'correlation (the default)'], ['covariance', 'covariance']]} />
         <NumField label="Components kept (blank for all)" value={nComp} onChange={setNComp} />
         <TextField label="New rows to project (the same logs)" value={newText} onChange={setNewText} rows={3} />
+        <NumField label="First fitted row to list (counted from 0)" value={from} onChange={setFrom} />
       </FieldGrid>
       {t.error && <Note>{t.error}</Note>}
       {p && p.error && <Refusal r={p} />}
@@ -118,6 +120,7 @@ export const PcaMode = () => {
         <>
           <Tbl head={['component', 'eigenvalue', 'explained variance ratio', 'cumulative']} rows={p.explainedVariance.map((v, k) => [`PC${k + 1}`, six(v), six(p.explainedVarianceRatio[k]), six(p.cumulativeRatio[k])])} />
           <Tbl head={['log', ...p.loadings.map((_, k) => `PC${k + 1} loading`)]} rows={features.map((f, j) => [f, ...p.loadings.map((l) => six(l[j]))])} />
+          <Tbl head={['fitted row', 'well', ...p.scores[0].map((_, k) => `PC${k + 1} score`)]} rows={fittedRows({ wells: t.rows.map((r) => r.well), scores: p.scores, from: parseNumber(from) }).map((f) => [String(f.row), String(f.well ?? ''), ...f.scores.map(six)])} />
           {p.warning && <Warning text={p.warning} />}
           <Declared title="THE MATRIX, in the engine's words">{p.basis.matrix}</Declared>
           <Declared title="THE SIGN, in the engine's words">{p.basis.sign}</Declared>
@@ -128,20 +131,22 @@ export const PcaMode = () => {
       {pt && !pt.error && (
         <Tbl head={['new row', ...pt.scores[0].map((_, k) => `PC${k + 1} score`)]} rows={pt.scores.slice(0, 10).map((s, i) => [String(i), ...s.map(six)])} />
       )}
-      <Note>New rows are scored with the centre, scale and components fitted on your table, never refitted. The first ten are shown.</Note>
+      <Note>The fitted scores of ten rows of your table are listed from the row you choose. New rows are scored with the centre, scale and components fitted on your table, never refitted; a row of your own table projected this way gets its fitted score back. The first ten new rows are shown.</Note>
     </>
   );
 };
 
-export const KmeansMode = ({ k0 }) => {
+export const KmeansMode = ({ k0, from0 = '0', maxIter0 = String(DEFAULTS.KMEANS_MAX_ITER) }) => {
   const [text, setText, t] = useTable(coredLogsText());
   const [feats, setFeats] = useState(TEACHING.logs.join(', '));
   const [k, setK] = useState(String(TEACHING.k));
   const [seed, setSeed] = useState(String(TEACHING.seed));
   const [nInit, setNInit] = useState(String(DEFAULTS.KMEANS_N_INIT));
   const [scale, setScale] = useState('standard');
+  const [maxIter, setMaxIter] = useState(maxIter0);
+  const [from, setFrom] = useState(from0);
   const features = names(feats);
-  const r = t.error ? null : kmeansOf({ X: matrixOf(t.rows, features), k: parseNumber(k), seed: parseNumber(seed), nInit: parseNumber(nInit), scale, names: features });
+  const r = t.error ? null : kmeansOf({ X: matrixOf(t.rows, features), k: parseNumber(k), seed: parseNumber(seed), nInit: parseNumber(nInit), maxIter: parseNumber(maxIter), scale, names: features });
   const best = r && !r.error ? r.runs[r.bestRun] : null;
   return (
     <>
@@ -152,6 +157,8 @@ export const KmeansMode = ({ k0 }) => {
         <NumField label="Seed" value={seed} onChange={setSeed} />
         <NumField label="Starts (nInit)" value={nInit} onChange={setNInit} />
         <SelectField label="Scaling" value={scale} onChange={setScale} options={SCALES} />
+        <NumField label="Most passes per start (maxIter)" value={maxIter} onChange={setMaxIter} />
+        <NumField label="First fitted row to list (counted from 0)" value={from} onChange={setFrom} />
       </FieldGrid>
       {t.error && <Note>{t.error}</Note>}
       {r && r.error && <Refusal r={r} />}
@@ -166,6 +173,7 @@ export const KmeansMode = ({ k0 }) => {
           <Tbl head={['start', 'starting rows', 'passes', 'inertia']} rows={r.runs.map((s) => [String(s.run), list(s.initialRows), String(s.iterations), six(s.inertia)])} />
           <Tbl head={['pass of the winning start', 'inertia', 'rows that changed']} rows={r.trace.map((p) => [String(p.pass), six(p.inertia), String(p.changed)])} />
           <Tbl head={['cluster', 'rows', ...features.map((f) => `${f} centre`)]} rows={r.centresOriginal.map((c, i) => [String(i), String(r.sizes[i]), ...c.map(six)])} />
+          <Tbl head={['fitted row', 'well', 'cluster']} rows={fittedRows({ wells: t.rows.map((x) => x.well), labels: r.labels, from: parseNumber(from) }).map((f) => [String(f.row), String(f.well ?? ''), String(f.label)])} />
           {r.warning && <Warning text={r.warning} />}
           {best && <Declared title="THE BEST START, in the engine's words">{r.basis.best}</Declared>}
           <Declared title="SEEDING, in the engine's words">{r.basis.init}</Declared>

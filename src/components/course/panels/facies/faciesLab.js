@@ -111,6 +111,22 @@ export const minMaxScalerOf = (args) => ML.fitMinMaxScaler(args);
 export const applyScalerOf = (args) => ML.applyScaler(args);
 export const reportOf = (args) => ML.classificationReport(args);
 
+/**
+ * A window of FITTED rows, as a panel lists them: from the row a learner asks
+ * for (counted from 0, clamped into range), `count` rows, each with its well,
+ * and its fitted cluster label and/or its fitted component scores exactly as
+ * the engine returned them. Nothing is recomputed.
+ */
+export const fittedRows = ({ wells, labels, scores, from = 0, count = 10 }) => {
+  const n = labels ? labels.length : (scores ? scores.length : 0);
+  if (n === 0) return [];
+  const a = Number.isInteger(from) ? Math.min(Math.max(from, 0), n - 1) : 0;
+  return Array.from({ length: Math.min(count, n - a) }, (_, q) => {
+    const i = a + q;
+    return { row: i, well: wells ? wells[i] : undefined, ...(labels ? { label: labels[i] } : {}), ...(scores ? { scores: scores[i] } : {}) };
+  });
+};
+
 const pick = (a, idx) => idx.map((i) => a[i]);
 
 /**
