@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The root of the tree holds the 180 cored rows, 54, 50, 29 and 47 of limestone, sandstone, shale and shaly-sand. What is its Gini impurity, and how is it formed?",
+  "options": [
+   "0.283413: the drop the root split achieves on those rows",
+   "0.300000: the share of the largest facies, limestone, 54 of 180",
+   "0.738704: 1 less the sum of the squared share of each facies",
+   "0.650416: the impurity left once the limestone rows are split off"
+  ],
+  "answer": 2,
+  "explanation": "Gini impurity is 1 - sum p_c^2, and the engine returns 0.738704 for the root, matching 1 - ((54/180)^2 + (50/180)^2 + (29/180)^2 + (47/180)^2). 0.283413 is the decrease of the root's split, a property of a split and never of a node. 0.300000 is the training accuracy of a single leaf predicting limestone, on the rows it was grown on. 0.650416 is the Gini of node 2, the 126 rows the root sends right."
+ },
+ {
+  "prompt": "The root splits on NPHI at 0.123000 with a weighted impurity decrease of 0.283413. Its right child, node 2, holds 126 rows with Gini 0.650416. What is the Gini of the left child?",
+  "options": [
+   "0, because it holds the 54 limestone rows and nothing else",
+   "0.283413, the decrease the split achieved, carried by the left side",
+   "0.499522, the Gini the engine prints for the next split node down",
+   "0.300000, the share of the rows the split sends to the left"
+  ],
+  "answer": 0,
+  "explanation": "The root split sends exactly the 54 limestone rows left, and a node of one facies has impurity 0. The decrease is a property of the split, measured against the root: 0.738704 less the rows-weighted impurity of the two children, (126/180) x 0.650416. Subtracting the two Gini figures unweighted gives no child's impurity, and a share of rows is not an impurity."
+ },
+ {
+  "prompt": "Node 2 splits its 126 rows on GR at 95.600000 with a weighted impurity decrease of 0.186104, while node 10, deep in the tree, splits 16 rows with a decrease of 0.031566. Why is node 2's figure so much larger?",
+  "options": [
+   "GR is in gAPI, the log with the largest unit, and a decrease is measured in the unit of its log",
+   "Deeper nodes subtract the impurity of every node above them, so their decreases shrink by design",
+   "Node 10 is split on RHOB, and any split on density is scaled down by the sample SD before scoring",
+   "The decrease is weighted by each node's share of all 180 rows, so a split near the root counts for more"
+  ],
+  "answer": 3,
+  "explanation": "A node's impurity enters the decrease weighted by its rows over the whole tree's rows, so a split that moves many rows near the root can show a larger decrease than a cleaner split deep down. Gini is computed on facies counts and has no log unit, and no scaling enters a tree. A node's decrease compares it with its own two children only."
+ },
+ {
+  "prompt": "Within a node, where may the engine place a candidate threshold on a log?",
+  "options": [
+   "Every distinct value of the log in the node is a candidate, so a threshold always equals some training value exactly",
+   "At a/2 + b/2 for each pair of consecutive distinct values a and b, or at a when that midpoint rounds to b",
+   "Only at the mean of the log over the node's rows",
+   "On a grid of quantiles of the log, stepping in tenths"
+  ],
+  "answer": 1,
+  "explanation": "The basis: \"midpoints a/2 + b/2 of consecutive distinct values of the node (a when that rounds to b); x <= threshold goes left\". Any threshold between two neighbouring values sends the same rows each way, so the midpoint stands for the whole gap. A training value sits on its threshold only in the guarded case, where the threshold is a. A mean or a quantile grid is another method."
+ },
+ {
+  "prompt": "A new row reads NPHI 0.123000, exactly the root threshold of the five-channel tree. Which way does the root send it?",
+  "options": [
+   "Left, with the limestone rows, because x <= threshold goes left",
+   "Right, because a value on the threshold belongs with the larger side of the gap",
+   "Neither way: the row sits on a boundary and `cartPredict` refuses it by name",
+   "Left or right by the tie band, since 1.00e-12 of the threshold counts as either side"
+  ],
+  "answer": 0,
+  "explanation": "The basis draws this boundary for this rule: \"x <= threshold goes left\", so a value exactly at the threshold goes left, where the root sends the limestone rows. `cartPredict` returns the facies of the leaf every new row reaches; it has no refusal for a value on a threshold. The 1.00e-12 band governs distance and merge-height ties, and a threshold comparison uses none."
+ },
+ {
+  "prompt": "The printed tree carries the line `|   |   |   |   |--- RHOB <= 2.3810000000000002`, and the node table prints the same threshold as 2.381000. How does the course quote it?",
+  "options": [
+   "Quote 2.3810000000000002 in working, as the longer form is the more exact value of the threshold",
+   "Round the printed line to three decimals and treat the tail as a rounding error the engine should have cleared",
+   "Quote 2.381000, the field at six decimals; use the printed line only verbatim as the engine's words",
+   "Treat the two as different thresholds, one used to fit the tree and one printed for the learner"
+  ],
+  "answer": 2,
+  "explanation": "The printed tree shows each threshold as the shortest decimal that reads back to the stored number, so a midpoint that is not exact in binary prints with a tail. Both forms describe one stored threshold. A figure a learner reasons with is the numeric field at the course's precision; the printed line may appear only verbatim, as the engine's words. The tail is how binary represents that midpoint, and nothing in the engine is at fault."
+ },
+ {
+  "prompt": "Grown on all 180 cored rows, the five-channel tree reads a training accuracy of 0.927778 at maxDepth 3, 0.950000 at 4, 0.988889 at 5 and 0.988889 at 6. What is the stated behaviour of that column?",
+  "options": [
+   "Training accuracy rises at every step of depth until every leaf is pure",
+   "Training accuracy peaks at the default depth and falls beyond it on these rows",
+   "Training accuracy tracks the held-out score, rising and falling with it",
+   "Training accuracy never falls as the tree deepens, on the rows it was grown on"
+  ],
+  "answer": 3,
+  "explanation": "Splitting a leaf never lowers the count of its own rows predicted right, so the training accuracy never falls; it holds at 0.988889 from depth 5 to 6, so it does not rise at every step. Grown without EKENE-6 and scored on it, the held-out accuracy moves up and down: 0.900000 at maxDepth 4, 0.766667 at 5 and 0.900000 at 6. The two columns answer different questions."
+ },
+ {
+  "prompt": "Trees grown on EKENE-1 to EKENE-5 and scored on EKENE-6, held out, read 0.633333 at maxDepth 3, 0.900000 at 4, 0.766667 at 5 and 0.900000 at 6. What does the course conclude?",
+  "options": [
+   "maxDepth 4 is the best depth for any facies tree, since it is the shallowest one to reach 0.900000",
+   "Held-out accuracy moves up and down with depth, and one held-out well is what says how far a deep tree carries",
+   "The default depth of 5 overfits these wells, so the engine lowers it to 4 whenever a well is held out",
+   "maxDepth 6 is preferred over 4 because at 0.900000 on both it also reaches the higher training accuracy"
+  ],
+  "answer": 1,
+  "explanation": "The held-out accuracy is highest, 0.900000, at maxDepth 4 and 6, and moves with depth; a deep tree fits its own rows, and the held-out well says how far that carries, as one draw. Nothing makes one depth best for every study, and the engine never changes maxDepth: it grows to the default 5 when maxDepth is left out. Preferring a depth by its training accuracy is the reading the held-out column exists to check."
+ },
+ {
+  "prompt": "With `minSamplesLeaf` 5, stated, the five-channel tree on the 180 cored rows has 8 leaves, the smallest holding 5 rows, and a training accuracy of 0.972222. What does that setting forbid?",
+  "options": [
+   "Any node of fewer than 5 rows from being split again",
+   "Any leaf whose most common facies holds fewer than 5 rows",
+   "Any split that would leave fewer than 5 rows on either side",
+   "Growing more than 5 leaves below any one split node of the tree"
+  ],
+  "answer": 2,
+  "explanation": "`minSamplesLeaf` forbids any split that leaves fewer than it on a side; without it, at the default 1, the smallest leaf holds 2 rows and the training accuracy on the rows it was grown on is 0.988889. Refusing to split a small node is `minSamplesSplit`, a different setting whose default is 2. The setting counts rows on each side of a split; it does not count a facies inside a leaf or cap the leaves."
+ },
+ {
+  "prompt": "`cartFit` is passed maxDepth -1. What comes back?",
+  "options": [
+   "A refusal: \"maxDepth must be a whole number, 0 or more (0 is a single leaf)\"",
+   "One single leaf, since the engine reads any depth below 0 as the smallest one",
+   "The default tree of depth 5, with a warning that the depth given was ignored",
+   "A refusal naming `minSamplesSplit`, as a negative depth leaves no row to split"
+  ],
+  "answer": 0,
+  "explanation": "The boundary table: maxDepth 0 is accepted and gives a single leaf, and -1 is refused. The refusal names its own field, `maxDepth`, and the engine's words are quoted in full in the key. A setting outside its range is never replaced by a default and never answered with a warning."
+ },
+ {
+  "prompt": "In the printed five-channel tree, the sandstone leaf reads `class: sandstone (n = 45, counts 0/44/0/1)`. What do the counts say?",
+  "options": [
+   "Of its 45 rows, 44 were predicted right on EKENE-6, held out, and 1 was predicted wrong",
+   "The leaf sits at depth 0, 44 rows below the root, with 1 row still to split beneath it",
+   "Of its 45 rows, 44 are sandstone and 1 is shale, counted in the order the logs were passed",
+   "Of its 45 rows, 44 are sandstone and 1 is shaly-sand, in the order limestone, sandstone, shale, shaly-sand"
+  ],
+  "answer": 3,
+  "explanation": "A leaf line names its facies, its rows and each facies' count in the order the engine sorts them, limestone, sandstone, shale, shaly-sand. The fourth count is shaly-sand, and shale is the third. The tree was grown on all 180 cored rows, so the counts are training rows; EKENE-6 was not held out here. The order of the counts follows the facies names, whatever order the logs came in."
+ },
+ {
+  "prompt": "Two leaves of the five-channel tree are mixed: 0/44/0/1 of 45 rows and 0/1/0/10 of 11 rows. Every other leaf is pure. What training accuracy does that give, on the rows the tree was grown on?",
+  "options": [
+   "0.950000: the 11-row leaf is scored as a whole miss",
+   "0.988889: 2 of the 180 cored rows are predicted wrong",
+   "0.972222: each mixed leaf costs two rows, one per side",
+   "0.833333: the held-out score of the same tree on EKENE-6"
+  ],
+  "answer": 1,
+  "explanation": "Each mixed leaf holds one row of another facies, 1 shaly-sand in the sandstone leaf and 1 sandstone in the shaly-sand leaf, so all but 2 of the 180 rows are predicted as their core facies, and the engine returns 0.988889. A leaf predicts its most common facies, so its majority rows are right. 0.833333 is the kNN score at k 5 on EKENE-6, held out, a different method on different rows."
+ },
+ {
+  "prompt": "The engine numbers the nodes of the five-channel tree depth first, left before right. The root is node 0. Which node is the GR split at 95.600000?",
+  "options": [
+   "Node 1, as the first split below the root always takes number 1",
+   "Node 3, as the leaves are numbered only after every split node",
+   "Node 14, as the numbering runs upward, starting from the deepest node",
+   "Node 2, since node 1 is the limestone leaf to the root's left"
+  ],
+  "answer": 3,
+  "explanation": "The basis: \"numbered depth first, left before right (scikit-learn tree_ order)\". The root's left child, the limestone leaf, is visited first and is node 1; the right child, the GR split, is node 2, as the node table shows. Leaves take their numbers in that same walk. The shale leaf, reached last, is node 14."
+ },
+ {
+  "prompt": "Which of these is one of the engine's stated reasons for making a node a leaf?",
+  "options": [
+   "The best split available lowers the Gini impurity by exactly zero",
+   "Its training accuracy, on the rows it holds, has reached the default target of 0.950000",
+   "All of its rows come from a single well, so any split would only fit that one well",
+   "The node's Gini is below the default floor of 1.00e-12, relative"
+  ],
+  "answer": 0,
+  "explanation": "The basis lists every rule: \"a node is a leaf when pure, at depth maxDepth 5 (the root is depth 0), with fewer than minSamplesSplit 2 rows, when no split leaves minSamplesLeaf 1 rows each side, or when the best decrease is zero\". There is no accuracy target and no rule about wells. 1.00e-12 is the distance and merge-height tie band; a tree compares decreases exactly on integer counts."
+ },
+ {
+  "prompt": "`cartFit` is passed the facies as a mix of names and numbers, and refuses with the field `y[2]`. What is its message?",
+  "options": [
+   "\"y[2] must be a string or a finite number\", because a name is not a number",
+   "\"y must be an array of 180 labels, one per row\"",
+   "\"y[2] must be the same type as y[0]: all strings or all numbers\"",
+   "\"names must be an array of 4 feature names, one per column\""
+  ],
+  "answer": 2,
+  "explanation": "cartFit refuses a mixed label list with the words in the key: every label must share the type of the first. \"y[1] must be a string or a finite number\" is kNN's refusal of a null facies. The length refusal and the names refusal are real messages about other faults, with other fields: `y` in knnClassify and `names` in cartFit."
+ }
+]
