@@ -274,6 +274,10 @@ export const PANELS = {
   'ml-fit-explorer': React.lazy(() => import('@/components/course/panels/mlcore/FitExplorer')),
   'ml-validate-explorer': React.lazy(() => import('@/components/course/panels/mlcore/ValidateExplorer')),
   'ml-diagnose-explorer': React.lazy(() => import('@/components/course/panels/mlcore/DiagnoseExplorer')),
+  // D3 Electrofacies (academy module data_ai)
+  'ef-cluster-explorer': React.lazy(() => import('@/components/course/panels/facies/ClusterExplorer')),
+  'ef-judge-explorer': React.lazy(() => import('@/components/course/panels/facies/JudgeExplorer')),
+  'ef-classify-explorer': React.lazy(() => import('@/components/course/panels/facies/ClassifyExplorer')),
 };
 
 export function resolvePanel(id) {
