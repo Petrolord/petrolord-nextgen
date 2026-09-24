@@ -33,8 +33,8 @@ At k 5 with majority matching, shaly-sand takes two clusters of its own, of 24 a
 
 A clustering is judged by where it fails as much as by its score. For this field the honest sentence is: on GR, RHOB, NPHI and PEF, k-means at k 4 separates limestone, sandstone and shale cleanly and puts 9 of the 47 shaly-sand rows with sandstone. That sentence tells a reader where to trust an electrofacies and where to check against core.
 
-The remedy, if one is needed, lies outside the clustering: another log that responds to shale volume differently, or a finer core description. Neither is something a choice of k or linkage can supply. The mean logs of a facies set a limit on what any method working from those logs can separate.
+The remedy, if one is needed, lies outside the clustering: another log that responds to shale volume differently, or a finer core description. Neither is something a choice of k or linkage can supply. The overlap of a facies with its neighbours in these logs limits what any method working from those logs can separate.
 
 ## Exercise
 
-In the matching view, run the Ekene cored rows with k-means at k 4 and one-to-one matching, and find the shaly-sand rows in the sandstone cluster in the contingency table. Then remove one log at a time from the logs list and rerun, recording the recall of shaly-sand each time. Name the log whose removal hurts shaly-sand most, and say what that suggests about which log carries the distinction.
+In the matching view, run the Ekene cored rows with k-means at k 4 and one-to-one matching, and find the shaly-sand rows in the sandstone cluster in the contingency table. Then remove one log at a time from the logs list and rerun, working out the recall of shaly-sand each time by hand from the contingency table and the mapping. Name the log whose removal hurts shaly-sand most, and say what that suggests about which log carries the distinction.

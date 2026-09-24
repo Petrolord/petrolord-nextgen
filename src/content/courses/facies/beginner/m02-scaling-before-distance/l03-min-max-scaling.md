@@ -38,7 +38,7 @@ EKENE-7's highest PEF scales to 1.035264, above 1, so at least one of its rows r
 
 ## The same k-means, min-max scaled
 
-k-means with k 4, seed 3 and ten starts, min-max scaled, gives clusters of 29, 54, 54 and 43 rows and an inertia of 4.258929. Standard scaling gives 29, 59, 54 and 38 rows and 58.289042. Two of the clusters come back with the same centres in log units under both scalings; the other two shift. The two inertias are in different units and cannot be compared with each other.
+k-means with k 4, seed 3 and ten starts, min-max scaled, gives clusters of 29, 54, 54 and 43 rows and an inertia of 4.258929. Standard scaling gives 29, 59, 54 and 38 rows and 58.289042. Two of the clusters hold exactly the same rows under both scalings, so their centres in log units print alike; the other two shift. The two inertias are in different units and cannot be compared with each other.
 
 ## Choosing between them
 

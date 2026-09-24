@@ -136,6 +136,7 @@ Each row is a real call. The message column is the engine's `error` string, verb
 | `pca` | no Jacobi sweeps | `maxSweeps` | maxSweeps must be a whole number, 1 or more |
 | `pcaTransform` | a k-means result where a PCA was expected | `model` | model must be the result of pca |
 | `pcaTransform` | new rows with two logs for a PCA of four | `X` | X must have 4 columns, as the PCA was fitted on |
+| `pcaTransform` | a new row whose GR is null | `X[0][0]` | X[0][0] must be a finite number: fill or drop missing values first |
 | `kmeans` | k of 0 | `k` | k must be a whole number from 1 to 180 (the number of rows) |
 | `kmeans` | three clusters of two rows | `k` | k must be a whole number from 1 to 2 (the number of rows) |
 | `kmeans` | two cored rows passed twice each, three clusters | `X` | X has 2 distinct rows after scaling, fewer than k = 3: k-means++ cannot place 3 distinct centres |
@@ -165,9 +166,10 @@ Each row is a real call. The message column is the engine's `error` string, verb
 | `agglomerative` | one row | `X` | X must be an array of at least 2 rows |
 | `agglomerative` | 3001 rows (the cored rows repeated) | `X` | X has 3001 rows, above the 3000 agglomerative clustering accepts (it holds every pairwise distance, n(n - 1)/2 of them): cluster a sample or use kmeans |
 | `cutTree` | k of 0 on the Ward tree of the cored rows | `k` | k must be a whole number from 1 to 180 (the number of rows) |
-| `cutTree` | a merge that names a cluster not yet made | `linkageMatrix[1]` | linkageMatrix[1] must be [id1, id2, height, size] with whole ids 0 <= id1 < id2 < 4 |
+| `cutTree` | a merge that names a cluster not yet made, in a matrix over three rows (two merges) | `linkageMatrix[1]` | linkageMatrix[1] must be [id1, id2, height, size] with whole ids 0 <= id1 < id2 < 4 |
+| `cutTree` | the same fault in a matrix over four rows (three merges) | `linkageMatrix[1]` | linkageMatrix[1] must be [id1, id2, height, size] with whole ids 0 <= id1 < id2 < 5 |
 | `cutTree` | an empty matrix | `linkageMatrix` | linkageMatrix must be the non-empty linkageMatrix of agglomerative |
-| `cutTree` | row 0 merged a second time | `linkageMatrix[1]` | linkageMatrix[1] merges id 0, which linkageMatrix[0] already merged: each row id (0 to 3) and each cluster id (4 to 5) may be merged once only |
+| `cutTree` | row 0 merged a second time, in a matrix over four rows (three merges) | `linkageMatrix[1]` | linkageMatrix[1] merges id 0, which linkageMatrix[0] already merged: each row id (0 to 3) and each cluster id (4 to 5) may be merged once only |
 | `knnClassify` | more neighbours than training rows | `k` | k must be a whole number from 1 to 180 (the training rows) |
 | `knnClassify` | new rows with one log for training rows of four | `Xnew` | Xnew must have 4 columns, like X |
 | `knnClassify` | one facies too few | `y` | y must be an array of 180 labels, one per row |
@@ -178,17 +180,19 @@ Each row is a real call. The message column is the engine's `error` string, verb
 | `cartFit` | a leaf of no rows | `minSamplesLeaf` | minSamplesLeaf must be a whole number, 1 or more |
 | `cartFit` | a split of one row | `minSamplesSplit` | minSamplesSplit must be a whole number, 2 or more |
 | `cartFit` | a name and a number mixed | `y[2]` | y[2] must be the same type as y[0]: all strings or all numbers |
+| `cartFit` | a null facies | `y[2]` | y[2] must be a string or a finite number |
 | `cartFit` | two names for four logs | `names` | names must be an array of 4 feature names, one per column |
 | `cartPredict` | a k-means result where a tree was expected | `model` | model must be the result of cartFit |
 | `cartPredict` | new rows with two logs for a tree of four | `X` | X must have 4 columns, as the tree was fitted on |
-| `adjustedRandIndex` | one row | `a` | a must be an array of at least 2 labels |
+| `adjustedRandIndex` | two labellings of one row each | `a` | a must be an array of at least 2 labels |
+| `adjustedRandIndex` | a labelling of 180 rows against one of one row | `b` | b must be an array of 180 labels, one per row |
 | `adjustedRandIndex` | one label too few | `b` | b must be an array of 180 labels, one per row |
 | `matchClusters` | five clusters, four facies, one-to-one | `clusters` | clusters has 5 clusters, more than the 4 core facies: one-to-one matching would leave clusters unmatched; use mode 'majority' or fewer clusters |
 | `matchClusters` | a mode it does not offer | `mode` | mode must be 'one-to-one' or 'majority' |
 | `matchClusters` | one label too few | `clusters` | clusters must be an array of 180 labels, one per row |
 | `matchClusters` | a zero division score of one half, which ml.js refuses | `zeroDivision` | zeroDivision must be 0 or 1 |
 
-61 refusals are tabled above, across 13 functions.
+65 refusals are tabled above, across 13 functions.
 
 A CONSTANT LOG IS REFUSED BY THE SCALER. pca (correlation), kmeans, silhouette, elbow, agglomerative and knnClassify scale through the machine learning engine's own scalers, so a constant log is refused in that engine's words, and the words name the rows the scaler was fitted on. In pca, kmeans, silhouette, elbow and agglomerative those are every row passed, and the message says "on the N rows passed"; silhouette, elbow and agglomerative give, on the EKENE-1 caliper rows, the same message as kmeans above. In knnClassify they are the labelled training rows, and the message says "on the N training rows" (section 21). A min-max scaler says "zero range" where the standard scaler says "zero variance".
 
@@ -203,7 +207,9 @@ When both apply the engine keeps both, the non-convergence warning first, joined
 
 > Jacobi did not converge in 1 sweep (the last sweep still rotated): the eigenvalues and components shown are those after sweep 1; eigenvalues 1 and 2, 3 and 4 differ by at most 1e-10 times the largest eigenvalue, so the directions of those components are not unique: the loadings shown are one valid choice
 
-A MISSING VALUE IS REFUSED BY NAME at the first row and column it meets, counting from 0: row 40, column 1 (RHOB) above. Nothing is filled.
+A MISSING VALUE IS REFUSED BY NAME at the first row and column it meets, counting from 0: row 40, column 1 (RHOB) above. Nothing is filled. A table with several gaps shows one at a time: with row 90's GR also null, `pca` still names `X[40][1]`; with row 40 filled again it names `X[90][0]`:
+
+> X[90][0] must be a finite number: fill or drop missing values first
 
 # SECTION 4: Rows, features and a distance between two rows (owned by Associate m01 l04 and Associate m02 l01)
 
@@ -299,6 +305,8 @@ Its eigenvalues, largest first, are the variances of the component scores; their
 | PC4 | 0.071294 | 0.017823 | 1.000000 |
 
 The eigenvalues sum to 4.000000, the number of logs, because each standardised log has variance 1. The first two components carry 0.957731 of the variance of the four logs, and the last two 0.042269 (derived, 1 less the cumulative ratio). Jacobi rotations took 6 sweeps and converged (`converged` true); the basis reads: "cyclic Jacobi rotations; an off-diagonal entry at or below 2^-52 x sqrt(|a_pp a_qq|) is set to zero; stops after the first sweep needing no rotation (at most 50 sweeps); eigenvalues sorted descending, equal values keep column order, a rounding value below zero reported as 0".
+
+PRINTED ALIKE. The basis states the sum as exact arithmetic. The engine's `totalVariance`, a sum of floating point numbers, is 3.9999999999999987 as returned: equal to 4 at six decimals, never keyed as exactly 4.
 
 The ratio is taken over all four components even when fewer are kept: `nComponents` 2 returns the same first two ratios.
 
@@ -414,6 +422,8 @@ ONE START AGAINST TEN, seed by seed (seeds stated):
 
 The lowest inertia in the table is 58.289042. With ten starts, 9 of the 10 seeds reach it and one stops above it (seed 5 at 58.297079); with one start, 8 of the 10 seeds stop above it, the highest printed figure being 78.775612 (seed 5 and seed 7), with clusters of 32, 96, 30, 22 rows at seed 5. More starts make a poor stop less likely and do not rule it out; a result is quoted with its seed and its number of starts. A lower inertia is a better fit of the same k; it says nothing yet about rock types.
 
+MORE STARTS AT THE SEED THAT STOPPED ABOVE. Seed 5 with 20 starts reaches inertia 58.289042, won by start 14.
+
 # SECTION 10: Reading the clusters: centres in log units, numbers as names, new rows (owned by Associate m05 l01 and Associate m05 l02 and Associate m05 l03)
 
 The teaching clustering, used from here on: k 4, seed 3, 10 starts, standard scaling, the 180 cored rows; inertia 58.289042, 6 passes in the winning start. `centresOriginal` puts each centre back in log units (derived by the engine as centre x scale + mean):
@@ -461,6 +471,8 @@ THE FITTED LABEL OF A NAMED ROW. `labels` holds one cluster per clustered row, i
 | 120 | EKENE-5 | 6447 | limestone | 2 |
 | 150 | EKENE-6 | 6507 | shaly-sand | 3 |
 
+ONE CLUSTER READ AGAINST THE CORE FACIES OF ITS ROWS (derived from `labels` and the core facies): the 29 rows of cluster 0 are exactly the 29 cored shale rows, every one of them and no other row. That is a fact found by looking at the core; the cluster number and the size alone could never show it.
+
 # SECTION 11: Covariance against correlation, and clustering the raw logs (owned by Associate m05 l04 and Associate m02 l01)
 
 `matrix: 'covariance'` centres each log and keeps its unit, divisor n - 1. The basis reads: "covariance matrix of the centred features, divisor n - 1 (as scikit-learn PCA explained_variance_)". On the 180 cored rows:
@@ -491,6 +503,8 @@ THE SAME CHOICE IN K-MEANS. k 4, seed 3, ten starts, three scalings. Sizes are t
 | minmax | 2 | 54 | 26.879630 | 2.642481 | 0.069037 | 4.909259 |
 | minmax | 3 | 43 | 66.686047 | 2.403023 | 0.243930 | 2.214884 |
 
+SAME ROWS, PRINTED ALIKE. Standard clusters 0, 2 and min-max clusters 0, 2, in that order, hold exactly the same rows (derived from the two label lists), so their centres in log units are the same means in exact arithmetic. As returned they differ by at most 4.26e-14 (largest over the four logs), rounding in the two scalings' arithmetic: the centres print alike at six decimals, and the same rows are the reason they agree.
+
 Raw, the four centres spread over 93.344030 gAPI of GR and 2.218682 b/e of PEF (derived, largest centre less smallest), and their sizes are 67, 24, 65, 24 rows against the facies counts below. The inertias are in different units and cannot be compared across the three: standard 58.289042, raw 10331.820703, min-max 4.258929.
 
 Facies on the cored rows, for comparison: limestone 54, sandstone 50, shale 29, shaly-sand 47.
@@ -512,6 +526,8 @@ The engine agrees with the published figure at all eight printed decimals, on bo
 
 On the correlation matrix the same flowers give eigenvalues 2.918498, 0.914030, 0.146757, 0.020715 and a first ratio of 0.729624: the choice of matrix moves the figure, and the published one is the covariance form.
 
+Their float sum, `totalVariance`, is 4.000000000000001 as returned: 4 at six decimals, and never exactly 4 in the engine's arithmetic.
+
 K-MEANS ON IRIS, raw measurements (all four in cm, so no scaling is needed), k 3 (one per species), seed 3, ten starts: inertia 78.851441 in squared cm, clusters of 50, 38, 62 flowers. The oracle's golden for the same call reads 78.851441. The species hold 50 flowers each; the sizes alone show that the clusters and the species differ.
 
 # SECTION 13: One field clustered end to end, and written up (owned by Associate m06)
@@ -525,6 +541,8 @@ The Associate workflow, every step an engine call, on the Ekene cored wells:
 | 3 | `kmeans` k 4, seed 3, 10 starts, standard scaling | inertia 58.289042; clusters of 29, 59, 54, 38 rows |
 | 4 | read `centresOriginal` | cluster centres in gAPI, g/cm3, v/v and b/e (section 10) |
 | 5 | `assignClusters` for EKENE-7 | 30 rows placed at the nearest of the 4 centres |
+
+THE SCALING, STATED OR NOT. Rows standardised with the SAMPLE SD (n - 1) instead, then clustered with `scale: 'none'`, k 4, seed 3, ten starts: every log is divided by the same extra factor, 1.002789 (derived, sample SD over population SD), so every distance shrinks by it, the labels are identical to the teaching clustering's, and the inertia is 57.965214 (derived check: 58.289042 x 179 / 180). Min-max scaling moves the clusters themselves (section 11). A write-up that leaves the scaling out leaves the inertia unreadable either way.
 
 WRITING UP A CLUSTERING. Everything a reader needs to reproduce it and nothing it has not earned:
 
@@ -554,6 +572,8 @@ WRITING UP A CLUSTERING. Everything a reader needs to reproduce it and nothing i
 At k 1 every row sits in one cluster about the mean, and in standard units the inertia is the number of rows times the number of logs, 720.000000 (each standardised log contributes n). The basis reads: "inertia(k - 1) - inertia(k); dropFraction divides by inertia(k - 1)". The largest drop fraction is at k 3, 0.668972; at k 4 it is 0.282430 and at k 5 0.112303.
 
 NO ELBOW IS PICKED FOR YOU. Inertia always falls as k grows when every k is fitted well, down to 0 at one cluster per distinct row, so the smallest inertia is never the answer. The engine prints the drops and picks nothing; the basis reads: "bestSilhouetteK has the highest mean silhouette; a tie goes to the smaller k. No elbow is picked automatically: read the drops". The core describes 4 facies. The drop fraction reads 0.668972 at k 3, 0.282430 at k 4 and 0.112303 at k 5, and no larger k shown reaches the k 5 figure again. Where the elbow sits is a reading of that table, and the reading is written down with the table.
+
+Called without `withSilhouette`, the elbow computes no silhouette, `bestSilhouetteK` is null, and the basis reads: "no k is picked automatically: read the drops".
 
 AN INERTIA THAT RISES. With one start per k, seed 265 (stated), k 1 to 8, the inertia at k 8 is 45.270437 against 45.153181 at k 7: a larger k fitted worse. The engine lists it in `inertiaRises` and warns, verbatim:
 
@@ -654,6 +674,8 @@ RE-CUTTING WITHOUT RE-RUNNING. `cutTree` cuts a returned linkage matrix at any k
 | 4 | 52, 44, 54, 30 | 6.612020 |
 | 5 | 52, 22, 22, 54, 30 | 3.659186 |
 | 6 | 52, 22, 8, 14, 54, 30 | 2.814872 |
+
+WHICH CLUSTER SPLITS. Going from k 5 to k 6 undoes merge 174 (the cluster it made has id 354): [335, 346, 2.814872, 22]. Its two children hold 8 and 14 rows. So cluster 2 of the k 5 cut, the 22-row one, splits into clusters 2 and 3 of the k 6 cut, of 8 and 14 rows; every other cluster carries over whole.
 
 A cluster of the k cut is always the union of clusters of the k + 1 cut: the tree nests (checked on every pair of cuts above). k-means has no such rule: at seed 3, one of the 4 k-means clusters at k 4 has rows in more than one cluster at k 3 (derived from the two label lists).
 
@@ -775,6 +797,8 @@ WRITING UP A COMPARISON WITH CORE. What a reader needs, taken from the steps abo
 
 `knnClassify` gives a new row the facies most common among its k nearest TRAINING rows. To see how well it predicts a well it has not seen, one cored well is held out, stated: EKENE-6, 30 rows; the model trains on the 150 rows of EKENE-1, EKENE-2, EKENE-3, EKENE-4, EKENE-5. Choosing which wells to hold out, and scoring every well in turn, is the machine learning course's subject; here the held-out well is stated.
 
+EKENE-6's core facies, the truth every held-out score in this tier is measured against: shaly-sand 27, shale 3 (of 30 rows); no limestone and no sandstone.
+
 THE SCALER IS FITTED ON THE TRAINING ROWS ONLY and applied unchanged to the new rows. The basis reads: "standard scaler (ml.js) fitted on the TRAINING rows only and applied unchanged to the new rows". The fitted centre and scale:
 
 | log | centre, the 150 training rows | centre, all 180 cored rows | scale, training rows | scale, all cored rows |
@@ -876,6 +900,8 @@ STOPPING. The basis reads: "a node is a leaf when pure, at depth maxDepth 5 (the
 | 5 | 15 | 8 | 0.988889 | 0.766667 |
 | 6 | 19 | 10 | 0.988889 | 0.900000 |
 
+WHY THE SHALLOW TREES SCORE WHAT THEY DO on EKENE-6 (core facies shaly-sand 27, shale 3): the tree grown without it predicts, from its leaves, at maxDepth 0 limestone; at maxDepth 1 limestone, sandstone; at maxDepth 2 limestone, sandstone, shale. A leaf can only give its own facies, so while no leaf predicts shaly-sand or shale the held-out accuracy is exactly 0.
+
 Training accuracy never falls as the tree deepens; the held-out accuracy is highest, 0.900000, at maxDepth 4 and 6, and moves up and down with depth. A deep tree fits its own rows; the held-out well is what says how far that carries. At maxDepth 0 the tree is one leaf predicting the most common facies, limestone.
 
 MINIMUM ROWS. `minSamplesLeaf` 5 (stated) forbids any split that leaves fewer than 5 rows on a side: 8 leaves, the smallest holding 5 rows, training accuracy 0.972222; without it the smallest leaf holds 2.
@@ -924,6 +950,21 @@ The two methods give the same facies on 28 of 30 rows of EKENE-7 and 29 of 30 ro
 
 STEP 2, CHECK THE NEW WELLS AGAINST THE TRAINING RANGE. Min-max scaling fitted on the cored rows (section 5) maps 10 of the 30 EKENE-8 rows above 1 on GR, the highest to 1.241800; EKENE-7's highest GR maps to 0.656751. EKENE-8 was logged with an uncalibrated tool (stated, section 2): its GR reads 30 gAPI high on every row.
 
+The same check over EVERY log, min-max fitted on the cored rows; a row outside [0, 1] on a log is outside the cored range of that log:
+
+| well | log | rows above 1 | rows below 0 | highest | lowest |
+| --- | --- | --- | --- | --- | --- |
+| EKENE-7 | GR | 0 | 0 | 0.656751 | 0.058734 |
+| EKENE-7 | RHOB | 0 | 0 | 0.970588 | 0.044118 |
+| EKENE-7 | NPHI | 0 | 0 | 0.844784 | 0.040712 |
+| EKENE-7 | PEF | 1 | 0 | 1.035264 | 0.068010 |
+| EKENE-8 | GR | 10 | 0 | 1.241800 | 0.299771 |
+| EKENE-8 | RHOB | 0 | 0 | 0.991597 | 0.153361 |
+| EKENE-8 | NPHI | 0 | 0 | 0.895674 | 0.045802 |
+| EKENE-8 | PEF | 2 | 0 | 1.083123 | 0.075567 |
+
+Rows leave the cored range on PEF in EKENE-7 (1 row), GR in EKENE-8 (10 rows), PEF in EKENE-8 (2 rows). The GR rows of EKENE-8 are the stated offset; the others are rows of rock a little outside what the cores sampled.
+
 STEP 3, ONLY BECAUSE THIS FIELD IS SYNTHETIC: CHECK AGAINST THE WITHHELD FACIES. A real uncored well gives no such check; the generator kept the facies it drew (section 2).
 
 | well | method | rows predicted as the withheld facies | accuracy |
@@ -939,7 +980,7 @@ MISSED BY BOTH (derived, counted row by row from the two prediction lists and th
 
 With the stated 30 gAPI taken off every EKENE-8 GR value (possible here only because the offset was planted and stated), kNN scores 1.000000 on the same well. In a real field the fix is a gamma ray normalisation between wells, which is the data quality course's, done before any facies is predicted.
 
-A RANGE CHECK SEES ONLY THE ROWS THAT LEAVE THE RANGE. Min-max flagged 10 rows of EKENE-8; kNN missed 3, and all 3 of the misses sit inside the GR range. Every row of EKENE-8 carries the same offset, flagged or not.
+A RANGE CHECK SEES ONLY THE ROWS THAT LEAVE THE RANGE. Min-max flagged 10 rows of EKENE-8 on GR; kNN missed 3, and all 3 of the misses sit inside the GR range. Every row of EKENE-8 carries the same offset, flagged or not.
 
 STEP 4, WRITE IT BACK HONESTLY. The course's rule for a predicted facies, every value in it taken from the steps above:
 
@@ -949,14 +990,14 @@ STEP 4, WRITE IT BACK HONESTLY. The course's rule for a predicted facies, every 
 | method | kNN, k 5, standard scaling fitted on the training rows, logs GR, RHOB, NPHI, PEF |
 | wells trained on | EKENE-1, EKENE-2, EKENE-3, EKENE-4, EKENE-5, EKENE-6, 180 cored rows |
 | expected agreement | on EKENE-6 held out, kNN k 5 trained on the other five cored wells scored 0.833333 (section 21) |
-| rows outside the training range | EKENE-8: 10 of 30 rows above the cored GR maximum 141.200000 gAPI; flagged row by row, and the whole well flagged for a gamma ray to be normalised |
+| rows outside the training range | every log checked; EKENE-7 PEF: 1 of 30 row; EKENE-8 GR: 10 of 30 rows; EKENE-8 PEF: 2 of 30 rows; flagged row by row, and EKENE-8 flagged as a whole well for a gamma ray to be normalised (its GR maximum is above the cored 141.200000 gAPI) |
 | what is not claimed | no core facies and no accuracy for an uncored well |
 
 A predicted facies written back without its method, its training wells, its held-out score and its range flags will be read later as core.
 
 # SECTION 25: Where each boundary falls, rule by rule (owned by Expert m05 l01 and Expert m05 l04)
 
-Each rule draws its own boundary; nothing here is global. Every row is a real call, and the refused side is also in the refusal table.
+Each rule draws its own boundary; nothing here is global. Every row is a real call. Where the far side of a boundary is a refusal, that refusal is also in the refusal table (section 3); where it is a behaviour (a leaf, a tie, a sign, a warning, a pick), the row states the behaviour.
 
 | function | rule | at the boundary | across it |
 | --- | --- | --- | --- |

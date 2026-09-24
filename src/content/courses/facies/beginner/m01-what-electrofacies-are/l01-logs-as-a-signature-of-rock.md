@@ -2,7 +2,7 @@
 
 {{panel:ef-cluster-explorer}}
 
-A wireline log reads the rock beside the borehole one depth sample at a time. A shale is rich in clay and reads a high gamma ray. A clean limestone is dense and reads a high photoelectric factor. A sandstone sits between them on most logs. Put four logs side by side and each kind of rock leaves its own pattern across them, a signature. This course groups depth samples by that signature, and then asks what the groups are worth.
+A wireline log reads the rock beside the borehole one depth sample at a time. A shale is rich in clay and reads a high gamma ray. A clean limestone is dense and reads a high photoelectric factor. A sandstone sits between them on the gamma ray and the neutron, and reads the lowest density and photoelectric factor of the four. Put four logs side by side and each kind of rock leaves its own pattern across them, a signature. This course groups depth samples by that signature, and then asks what the groups are worth.
 
 | row, counted from 0 | core facies | GR (gAPI) | RHOB (g/cm3) | NPHI (v/v) | PEF (b/e) |
 | --- | --- | --- | --- | --- | --- |

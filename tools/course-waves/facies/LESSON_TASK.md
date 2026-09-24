@@ -77,7 +77,7 @@ FLOAT NOISE even where the truth file would resolve it.
 
 ## THE REFUSALS, BY NAME
 
-Digest section 3 tables 61 refusals across 13 functions. **Quote the engine's
+Digest section 3 tables 65 refusals across 13 functions. **Quote the engine's
 message in a blockquote.** The wording changed at engines ef4058f; quote the
 digest as rebuilt, never an older copy:
 

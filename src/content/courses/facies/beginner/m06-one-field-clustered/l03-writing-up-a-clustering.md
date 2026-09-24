@@ -18,7 +18,7 @@ Name the wells and the number of rows. Here that is the 180 rows of the six core
 
 ## The logs and the scaling
 
-Name every log and say which were left out. Name the scaling and its divisor: standard scaling with the population standard deviation (n), fitted on the rows clustered. A reader who scales with the sample standard deviation (n - 1), or with min-max, will get different distances, a different inertia and possibly different clusters.
+Name every log and say which were left out. Name the scaling and its divisor: standard scaling with the population standard deviation (n), fitted on the rows clustered. A reader who scales with the sample standard deviation (n - 1) gets every distance shrunk by the same factor, identical clusters and an inertia of 57.965214; one who uses min-max gets different clusters.
 
 ## The method
 

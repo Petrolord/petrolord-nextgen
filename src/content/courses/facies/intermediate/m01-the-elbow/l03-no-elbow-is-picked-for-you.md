@@ -23,7 +23,7 @@ On the 180 cored rows, standard scaling, seed 3, 10 starts, the drop fractions r
 | 5 | 0.112303 |
 | 6 | 0.079256 |
 
-A rule such as "take the k with the largest drop fraction" returns k 3. A rule such as "take the last k before the fraction falls below some share" returns k 4 or k 5 depending on the share chosen. Each rule is a choice, and each would print a single number that looks like a finding. The core of these wells describes 4 facies. An automatic pick of k 3 would disagree with the rock without anyone having decided to disagree with it.
+A rule such as "take the k with the largest drop fraction" returns k 3. A rule such as "take the last k before the fraction falls below some share" returns k 3, 4, 5 or 6 depending on the share chosen. Each rule is a choice, and each would print a single number that looks like a finding. The core of these wells describes 4 facies. An automatic pick of k 3 would disagree with the rock without anyone having decided to disagree with it.
 
 Inertia also cannot choose on its own terms: it keeps falling as k grows, down to 0 at one cluster per distinct row. Any rule on the curve is a rule about how much fall is enough, and that is a judgement about the purpose of the clustering, which the curve does not know.
 

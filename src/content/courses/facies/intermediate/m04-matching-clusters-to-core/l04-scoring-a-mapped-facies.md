@@ -43,4 +43,4 @@ At k 3 (k-means, seed 3, 10 starts, standard scaling) under one-to-one matching,
 
 ## Exercise
 
-In the matching view, run the Ekene cored rows with k-means at k 4 and one-to-one matching. For each figure in the report below 1, point to the cell of the contingency table that causes it. Then switch to Ward linkage at k 4 and read its accuracy and macro F1, and name the facies with the lowest recall under that clustering.
+In the matching view, run the Ekene cored rows with k-means at k 4 and one-to-one matching. For each figure in the report below 1, point to the cell of the contingency table that causes it. Then switch to Ward linkage at k 4 and read its accuracy and macro F1. The view prints no per-facies report, so work out the recall of each facies by hand from the contingency table and the mapping, and name the lowest.

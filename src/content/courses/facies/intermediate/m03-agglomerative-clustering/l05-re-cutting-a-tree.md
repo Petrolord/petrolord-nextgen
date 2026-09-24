@@ -32,7 +32,7 @@ An empty matrix:
 
 > linkageMatrix must be the non-empty linkageMatrix of agglomerative
 
-A merge that names a cluster not yet made, in a small matrix of four rows:
+A merge that names a cluster not yet made, in a small matrix over three rows (two merges):
 
 > linkageMatrix[1] must be [id1, id2, height, size] with whole ids 0 <= id1 < id2 < 4
 

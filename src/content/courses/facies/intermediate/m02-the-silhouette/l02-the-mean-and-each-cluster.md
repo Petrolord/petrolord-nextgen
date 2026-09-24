@@ -44,7 +44,7 @@ The core facies score 0.528711, a little below the k-means clusters at 0.545063.
 
 ## Measured in a space
 
-The same k-means labels scored on the raw logs read 0.443238. On raw logs gamma ray dominates every distance, so the figure measures a different geometry. A silhouette is quoted with its scaling, and the engine's default scores the standardised logs.
+The same k-means labels scored on the raw logs read 0.443238. On raw logs gamma ray mostly dominates the distance, so the figure measures a different geometry. A silhouette is quoted with its scaling, and the engine's default scores the standardised logs.
 
 ## A seeded sample
 

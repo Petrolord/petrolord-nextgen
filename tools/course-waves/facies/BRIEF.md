@@ -96,7 +96,7 @@ cored wells train.
 
 ## THE REFUSALS
 
-Digest section 3 tables 61 refusals across 13 functions, each with the field it
+Digest section 3 tables 65 refusals across 13 functions, each with the field it
 names and the engine's message verbatim. **Quote a refusal in a blockquote as
 the engine's own words.** A k-means that stops at maxIter, a PCA with a
 repeated eigenvalue and an elbow whose inertia rises are results with a

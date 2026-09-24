@@ -27,7 +27,7 @@ All four iris measurements are in centimetres, so there is no unit problem to fi
 
 ## k-means on iris
 
-k-means on the raw measurements, k 3, one per species, seed 3 and ten starts, gives an inertia of 78.851441 in squared centimetres, with clusters of 50, 38 and 62 flowers. The standard library oracle that checks the engine's arithmetic gives the same inertia for the same call.
+k-means on the raw measurements, k 3, one per species, seed 3 and ten starts, gives an inertia of 78.851441 in squared centimetres, with clusters of 50, 38 and 62 flowers. The standard library oracle that checks the engine's arithmetic reads the same figure, 78.851441, at six decimals for the same call.
 
 No scaling is needed, because all four measurements share a unit. The species hold 50 flowers each, and the clusters hold 50, 38 and 62. The sizes alone show that the clusters and the species differ: at least one cluster mixes two species. It is the lesson of the whole tier. A clustering can be computed exactly right and still not recover the groups a specialist would draw.
 

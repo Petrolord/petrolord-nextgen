@@ -37,7 +37,7 @@ The first five merges each join two data rows: every id is below 180, and every 
 
 The heights of the last merges climb steeply: 3.659186, 6.612020, 18.119587, 30.809387. A large step between successive heights means two well separated groups were forced together. That is the tree's own version of the elbow, and like the elbow it is read, with the reading written down.
 
-The column "tied steps" in the agglomerative view counts merges that met a tie between candidate pairs. On the Ekene rows it reads 0 for all three linkages. How the engine orders a tie is taught in the Expert tier.
+The tile "Tied merges" in the agglomerative view counts merges that met a tie between candidate pairs. On the Ekene rows it reads 0 for all three linkages. How the engine orders a tie is taught in the Expert tier.
 
 ## Why this layout
 
@@ -45,4 +45,4 @@ The layout is the one scipy returns, so a tree from this engine can be drawn or 
 
 ## Exercise
 
-In the agglomerative view, run the Ekene cored rows with Ward linkage and read the linkage matrix. Starting from the last row, follow the ids down: find which merge made each of the two clusters the last merge joins, and write down their sizes. Check that the two sizes add to 180. Then find the first merge whose two ids are both 180 or above.
+In the agglomerative view, run the Ekene cored rows with Ward linkage and read the linkage matrix. The view prints the first five and the last five merges. In the first five, check that every id is below 180, so each joins two rows of data. The last merge joins two ids: find the merge among the last five that made one of them and read its size, then work out the size of the other, made earlier than the five shown, from the 180 rows the last merge holds.

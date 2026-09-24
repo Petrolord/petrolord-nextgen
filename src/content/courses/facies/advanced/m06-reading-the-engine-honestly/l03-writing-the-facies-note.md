@@ -15,7 +15,7 @@ Each tier of this course ended with a write-up: a clustering, a comparison with 
 | agreement with core | ARI k-means 0.872413, Ward 0.873388, complete 0.897678, average 0.676404; one-to-one accuracy of k-means 0.950000 on the 180 cored rows |
 | where it fails | shaly-sand: 9 of 47 rows fall with sandstone |
 | prediction | kNN, k 5, standard scaling fitted on the 180 training rows, written to FACIES_PRED; held-out score on EKENE-6 0.833333 |
-| range flags | EKENE-8: 10 of 30 rows above the cored GR maximum 141.200000 gAPI, and the whole well flagged for a gamma ray to be normalised |
+| range flags | every log checked; EKENE-8: 10 of 30 rows above the cored GR maximum 141.200000 gAPI and 2 above the cored PEF maximum; EKENE-7: 1 row above the cored PEF maximum; EKENE-8 flagged as a whole well for a gamma ray to be normalised |
 | what is not claimed | no cluster named as a facies before matching; no core facies and no accuracy for an uncored well |
 
 ## Why this order

@@ -2,7 +2,7 @@
 
 {{panel:ef-classify-explorer}}
 
-Every setting the engine checks has an edge: a value it accepts, and a value next to it that it refuses. No single rule, such as "limits are inclusive", holds for all of them. Each rule draws its own boundary, and the only safe way to know where one sits is to read that rule. Every row below is a real call, and the refused side of each is also in the course's table of refusals.
+Every setting the engine checks has an edge: a value it accepts, and a value next to it that it refuses. No single rule, such as "limits are inclusive", holds for all of them. Each rule draws its own boundary; read the rule to know where. Every row below is a real call. Where the far side is a refusal it is also in the course's table of refusals; where it is a behaviour, such as a leaf or a tie, the row states it.
 
 | function | rule | at the boundary | across it |
 | --- | --- | --- | --- |
@@ -31,7 +31,7 @@ Some are exact comparisons: a tree splits on any decrease above zero, and a decr
 
 > linkageMatrix[1] merges id 0, which linkageMatrix[0] already merged: each row id (0 to 3) and each cluster id (4 to 5) may be merged once only
 
-The message counts the ids of that small matrix: rows 0 to 3 and the clusters it made, 4 and 5.
+The message counts the ids that may be merged in a matrix over four rows: rows 0 to 3 and clusters 4 and 5. The last cluster, 6, is the whole tree, and no merge joins it.
 
 ## A limit on the Jacobi sweeps
 
@@ -43,11 +43,11 @@ A run that uses every sweep it was allowed and still needed a rotation is a resu
 
 ## A warning returns the result
 
-A refusal returns no result. A warning returns the result and adds a sentence. With one start per k and seed 265, the elbow over k 1 to 8 reads an inertia of 45.270437 at k 8 against 45.153181 at k 7: a larger k fitted worse. The engine returns every row of the elbow, and warns, in its own words:
+A refusal returns no result. A warning returns the result and adds a sentence. With one start per k and seed 265, the elbow over k 1 to 8 reads an inertia of 45.270437 at k 8 against 45.153181 at k 7: a larger k fitted worse. The engine returns every row and warns:
 
 > inertia rises at k = 8: those runs stopped in a local minimum; raise nInit
 
-With the default 10 starts the same seed shows no rise. The figures are all returned, and the warning says which of them to distrust.
+With the default 10 starts the same seed shows no rise. The warning says which figures to distrust.
 
 ## Exercise
 

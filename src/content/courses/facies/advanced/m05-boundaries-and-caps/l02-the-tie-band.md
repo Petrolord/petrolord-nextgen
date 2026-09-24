@@ -28,11 +28,9 @@ The band also decides which of several k-means starts wins. On the 180 cored row
 
 > lowest inertia over the runs; a run within 1e-12 (relative) of the best so far does not replace it
 
-Without the band, a difference in the last bits could hand the win to either start.
-
 ## Printed alike is not the same as tied
 
-Two figures that agree at six decimals are equal only where the engine says so. The course prints distances, heights and inertias to six decimals, which hide differences far larger than a band of 1.00e-12 relative, so a pair can agree at that precision and still fall outside the band. When a lesson or a report says two values tie, the evidence is the engine's own comparison: a tied-vote count, a count of tied steps in the merge history, or a win kept by the earlier start.
+Two figures that agree at six decimals are equal only where the engine says so. The course prints distances, heights and inertias to six decimals, which hide differences far larger than a band of 1.00e-12 relative, so a pair can agree at that precision and still fall outside the band. When a lesson or a report says two values tie, the evidence is the engine's own comparison: a tied-vote count, a count of tied steps in the merge history, or a difference from the winner inside the band, such as the 0 printed for starts 3, 5 and 8. A win kept by an earlier start alone shows nothing: it is also kept when a later start is plainly worse.
 
 ## Exercise
 

@@ -2,7 +2,7 @@
 
 {{panel:ef-cluster-explorer}}
 
-A distance adds squared differences across the logs, and it has no idea what units they are in. A difference of ten gAPI on the gamma ray and a difference of ten hundredths of a g/cm3 on the density enter the sum as ten and as one tenth. So the log with the largest numbers dominates the distance, whether or not it is the log that separates the rocks best. On the Ekene cored rows that log is GR.
+A distance adds squared differences across the logs, and it has no idea what units they are in. A difference of ten gAPI on the gamma ray and a difference of ten hundredths of a g/cm3 on the density enter the sum squared, as 100 and as 0.01, a factor of 10000 apart. So the log with the largest numbers dominates the distance, whether or not it is the log that separates the rocks best. On the Ekene cored rows that log is GR.
 
 | log | variance on the 180 cored rows (covariance matrix diagonal, divisor n - 1) |
 | --- | --- |

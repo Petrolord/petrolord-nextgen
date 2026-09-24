@@ -23,7 +23,7 @@ Each well carries 30 samples at a one foot step from its own top depth, 240 rows
 
 Each sample belongs to one of four facies. A well keeps the facies of the sample above with probability 0.8 and otherwise draws a facies at random, so the facies come in blocky runs down each well, as beds do. Each facies then draws each log from its own normal distribution. Shale is centred on a gamma ray of 118 gAPI, sandstone on 45, shaly-sand on 66 and limestone on 28. Limestone is centred on a density of 2.64 g/cm3 and a photoelectric factor of 4.9 b/e, well above the other three.
 
-Two bounds are held exactly. Limestone NPHI is held at or below 0.12 and every other facies at or above 0.13; limestone PEF at or above 4.2 and every other facies at or below 3.9. The caliper is drawn around 8.5 in whatever the facies, so it carries no facies signal.
+Two bounds are held exactly. Limestone NPHI is held at or below 0.12 and every other facies at or above 0.13; limestone PEF at or above 4.2 and every other facies at or below 3.9. The caliper is 8.5 in plus the size of a normal draw, so at or above 8.5 in, whatever the facies: it carries no facies signal.
 
 ## Why the caliper is left out
 

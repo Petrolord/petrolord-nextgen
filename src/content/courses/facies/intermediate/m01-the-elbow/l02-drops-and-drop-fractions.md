@@ -24,7 +24,7 @@ The first row has no k before it, so both columns read none at k 1. On the 180 c
 
 ## The two columns rank the k differently
 
-The largest drop is at k 2, 474.609153, because it is taken from the largest inertia, the one-cluster figure. The largest drop fraction is at k 3, 0.668972: the third centre removed a slightly larger share of what was left than the second did. A raw drop is always biggest early, whatever the rows hold, because it is measured against a larger starting figure. The fraction removes that scale and makes the steps comparable.
+The largest drop is at k 2, 474.609153, because it is taken from the largest inertia, the one-cluster figure. The largest drop fraction is at k 3, 0.668972: the third centre removed a slightly larger share of what was left than the second did. A raw drop is usually biggest early, because it is measured against a larger starting figure. The fraction removes that scale and makes the steps comparable.
 
 After k 3 the fractions shrink: 0.282430 at k 4 and 0.112303 at k 5. The k 5 figure is never reached again by any larger k shown. The fraction at k 8, 0.068791, is a little above the fraction at k 7, 0.056380, so the column does not fall smoothly either. A drop fraction is a property of two fitted runs, and a run that stops in a slightly better or worse arrangement moves it.
 

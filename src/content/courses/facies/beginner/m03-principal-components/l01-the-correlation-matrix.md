@@ -23,7 +23,7 @@ The clustering scaler divides by n, so name the divisor whenever you quote a sta
 
 A correlation runs from minus one to one. Near one, two logs rise together; near minus one, one rises as the other falls; near zero, they move independently.
 
-On the 180 cored rows RHOB and PEF correlate at 0.915911, the strongest pair: dense rows here also read a high photoelectric factor, which is the limestone. GR and NPHI correlate at 0.840604: high gamma ray rows also read high neutron porosity, which is where the shale sits. NPHI and PEF correlate at -0.622647. GR and RHOB, at -0.192943, are the weakest pair.
+On the 180 cored rows RHOB and PEF correlate at 0.915911, the strongest pair: dense rows here also read a high photoelectric factor. GR and NPHI correlate at 0.840604: high gamma ray rows also read high neutron porosity. NPHI and PEF correlate at -0.622647. GR and RHOB, at -0.192943, are the weakest pair.
 
 Those strong pairs are why fewer directions than four can describe most of the spread. The next lesson measures how much.
 

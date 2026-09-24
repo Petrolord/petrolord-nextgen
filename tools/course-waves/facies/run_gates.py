@@ -13,6 +13,7 @@ count the digest does not have.
     python3 run_gates.py            run, and write wave.json only if every gate met its expectation
     python3 run_gates.py --dry      run and report, write nothing
     D3_STAGE=lessons python3 run_gates.py   the same, once lesson prose exists
+    D3_STAGE=banks python3 run_gates.py     and every bank gate over the 21 banks
 
 THE STAGE. At the FOUNDATION the 78 lessons are stubs (an H1 and a panel line),
 so the two lesson gates cannot pass and must not be allowed to: numsweep
@@ -96,6 +97,29 @@ RUNS = [
     ('gate_claims.mjs', f'{HERE}/gate_claims.mjs', ['node', f'{HERE}/gate_claims.mjs'], 0),
     ('gate_claims.mjs NEGATIVE CONTROL', f'{HERE}/gate_claims.mjs', ['node', f'{HERE}/gate_claims.mjs', '--plant-a-recon-figure'], 1),
 ]
+
+# THE BANK STAGE. D3_STAGE=banks (or full) runs everything above AND every bank
+# gate over the 21 banks: each bank source re-emitted (bankkit gates inside),
+# the repository's check-bank-sources, and per prefix the length tails, the
+# near-duplicate audit at Jaccard 0.45, the literal sweep and the leakage audit,
+# plus the numsweep and capstone-leak gates with the banks read.
+BANKS = STAGE in ('banks', 'full')
+if BANKS:
+    BK = f'{HERE}/banks'
+    TIERS = [('d3b', 'beginner'), ('d3i', 'intermediate'), ('d3a', 'advanced')]
+    for pre, tier in TIERS:
+        for b in ['m01', 'm02', 'm03', 'm04', 'm05', 'm06', 'exam']:
+            RUNS.append((f'bank {pre}_{b}.py', f'{BK}/{pre}_{b}.py', ['python3', f'{BK}/{pre}_{b}.py'], 0))
+        RUNS.append((f'lengthtails.py {pre}', f'{KIT}/lengthtails.py', ['python3', f'{KIT}/lengthtails.py', BK, '--prefix', pre], 0))
+        RUNS.append((f'dupaxes.py {pre}', f'{KIT}/dupaxes.py', ['python3', f'{KIT}/dupaxes.py', BK, '--prefix', pre, '--threshold', '0.45'], 0))
+        RUNS.append((f'litsweep.py {pre}', f'{KIT}/litsweep.py', ['python3', f'{KIT}/litsweep.py', HERE, '--prefix', pre], 0))
+        RUNS.append((f'leakage.mjs {tier}', f'{KIT}/leakage.mjs', ['node', f'{KIT}/leakage.mjs', HERE, '--banks', BK, '--tier', tier], 0))
+    RUNS += [
+        ('check-bank-sources.py', f'{REPO}/tools/course-banks/check-bank-sources.py', ['python3', f'{REPO}/tools/course-banks/check-bank-sources.py'], 0),
+        ('numsweep_facies.mjs --banks', f'{HERE}/numsweep_facies.mjs', ['node', f'{HERE}/numsweep_facies.mjs', '--banks', BK], 0),
+        ('numsweep.mjs (kit) --banks', f'{KIT}/numsweep.mjs', ['node', f'{KIT}/numsweep.mjs', HERE, '--banks', BK], 0),
+        ('gate_capstone_leak.mjs --banks', f'{HERE}/gate_capstone_leak.mjs', ['node', f'{HERE}/gate_capstone_leak.mjs', '--banks', BK], 0),
+    ]
 
 
 def last_line(out):

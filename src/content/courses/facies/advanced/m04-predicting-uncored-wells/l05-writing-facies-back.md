@@ -10,7 +10,7 @@ A predicted facies outlives the session that made it. It goes into a well databa
 | method | kNN, k 5, standard scaling fitted on the training rows, logs GR, RHOB, NPHI, PEF |
 | wells trained on | EKENE-1, EKENE-2, EKENE-3, EKENE-4, EKENE-5, EKENE-6, 180 cored rows |
 | expected agreement | on EKENE-6 held out, kNN k 5 trained on the other five cored wells scored 0.833333 |
-| rows outside the training range | EKENE-8: 10 of 30 rows above the cored GR maximum 141.200000 gAPI; flagged row by row, and the whole well flagged for a gamma ray to be normalised |
+| rows outside the training range | every log checked; EKENE-7 PEF: 1 of 30 rows; EKENE-8 GR: 10 of 30 rows; EKENE-8 PEF: 2 of 30 rows; flagged row by row, and EKENE-8 flagged as a whole well for a gamma ray to be normalised |
 | what is not claimed | no core facies and no accuracy for an uncored well |
 
 ## Item by item
@@ -23,7 +23,7 @@ A predicted facies outlives the session that made it. It goes into a well databa
 
 **The expected agreement.** The only accuracy the prediction can honestly carry is the held-out score, 0.833333 on EKENE-6, named as a score on one held-out cored well. It is an expectation for wells like the training wells. It says nothing about a well whose logs leave the training range.
 
-**The range flags.** EKENE-8's 10 rows above the cored GR maximum of 141.200000 gAPI are flagged one by one, and the whole well is flagged for its gamma ray to be normalised. The whole-well flag is the one that matters, because the offset sits on every row and the range check sees only the rows that leave the range.
+**The range flags.** Every log is checked. EKENE-8's 10 rows above the cored GR maximum of 141.200000 gAPI, its 2 rows and EKENE-7's 1 row above the cored PEF maximum are flagged one by one, and the whole well is flagged for its gamma ray to be normalised. The whole-well flag is the one that matters, because the offset sits on every row and the range check sees only the rows that leave the range.
 
 **What is not claimed.** No core facies for an uncored well, and no accuracy for one. The withheld facies that scored EKENE-7 and EKENE-8 exist only because this field is synthetic, and they never enter the write-up.
 

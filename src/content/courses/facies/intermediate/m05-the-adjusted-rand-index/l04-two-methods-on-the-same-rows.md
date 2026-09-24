@@ -20,7 +20,7 @@ Of the four methods, complete linkage agrees best with the core here, at 0.89767
 
 ## Two methods against each other
 
-The index needs no core. k-means against Ward, neither of them the core, scores 0.863179. They agree closely with each other and about equally with the core, and yet they are not the same grouping. That is a common pattern: two methods can reach similar agreement with the rock by getting different rows wrong. The contingency tables of the matching view show which.
+The index needs no core. k-means against Ward, neither of them the core, scores 0.863179. They agree closely with each other and about equally with the core, and yet they are not the same grouping. Two methods can reach similar agreement with the rock by getting different rows wrong. The contingency tables of the matching view show which.
 
 ## What the ranking is worth
 

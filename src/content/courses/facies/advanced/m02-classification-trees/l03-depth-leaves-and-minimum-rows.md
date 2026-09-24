@@ -2,7 +2,7 @@
 
 {{panel:ef-classify-explorer}}
 
-Left alone, a tree keeps splitting until every leaf is pure, and a tree with a leaf for every awkward row fits its own rows and little else. The engine stops a branch by stated rules, and three of them are settings you choose: the depth, the fewest rows a leaf may hold, and the fewest rows a node needs before it may split. The basis names every rule, in the engine's words:
+Left alone, a tree keeps splitting until every leaf is pure or no split lowers the impurity, and a tree with a leaf for every awkward row fits its own rows and little else. The engine stops a branch by stated rules, and three of them are settings you choose: the depth, the fewest rows a leaf may hold, and the fewest rows a node needs before it may split. The basis names every rule, in the engine's words:
 
 > a node is a leaf when pure, at depth maxDepth 5 (the root is depth 0), with fewer than minSamplesSplit 2 rows, when no split leaves minSamplesLeaf 1 rows each side, or when the best decrease is zero
 

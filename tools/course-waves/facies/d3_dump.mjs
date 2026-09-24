@@ -321,6 +321,7 @@ const REFUSALS = [
   ['pca', { X: XC, names: LOGS, maxSweeps: 0 }, 'maxSweeps', 'no Jacobi sweeps'],
   ['pcaTransform', { model: KM, X: X7 }, 'model', 'a k-means result where a PCA was expected'],
   ['pcaTransform', { model: PCM, X: X(R7, ['GR', 'RHOB']) }, 'X', 'new rows with two logs for a PCA of four'],
+  ['pcaTransform', { model: PCM, X: [[null, ...X7[0].slice(1)]] }, 'X[0][0]', 'a new row whose GR is null'],
   ['kmeans', { X: XC, k: 0, seed: SEED }, 'k', 'k of 0'],
   ['kmeans', { X: [XC[0], XC[1]], k: 3, seed: SEED, scale: 'none' }, 'k', 'three clusters of two rows'],
   ['kmeans', { X: [XC[0], XC[0], XC[1], XC[1]], k: 3, seed: SEED }, 'X', 'two cored rows passed twice each, three clusters'],
@@ -350,9 +351,10 @@ const REFUSALS = [
   ['agglomerative', { X: [XC[0]] }, 'X', 'one row'],
   ['agglomerative', { X: TILE(CL.DEFAULTS.AGGLOMERATIVE_MAX_ROWS + 1) }, 'X', `${CL.DEFAULTS.AGGLOMERATIVE_MAX_ROWS + 1} rows (the cored rows repeated)`],
   ['cutTree', { linkageMatrix: WARD.linkageMatrix, k: 0 }, 'k', 'k of 0 on the Ward tree of the cored rows'],
-  ['cutTree', { linkageMatrix: [[0, 1, 1, 2], [3, 5, 2, 3]], k: 2 }, 'linkageMatrix[1]', 'a merge that names a cluster not yet made'],
+  ['cutTree', { linkageMatrix: [[0, 1, 1, 2], [3, 5, 2, 3]], k: 2 }, 'linkageMatrix[1]', 'a merge that names a cluster not yet made, in a matrix over three rows (two merges)'],
+  ['cutTree', { linkageMatrix: [[0, 1, 1, 2], [2, 5, 2, 3], [3, 6, 3, 4]], k: 2 }, 'linkageMatrix[1]', 'the same fault in a matrix over four rows (three merges)'],
   ['cutTree', { linkageMatrix: [], k: 1 }, 'linkageMatrix', 'an empty matrix'],
-  ['cutTree', { linkageMatrix: [[0, 1, 1, 2], [0, 2, 2, 2], [3, 5, 3, 4]], k: 2 }, 'linkageMatrix[1]', 'row 0 merged a second time'],
+  ['cutTree', { linkageMatrix: [[0, 1, 1, 2], [0, 2, 2, 2], [3, 5, 3, 4]], k: 2 }, 'linkageMatrix[1]', 'row 0 merged a second time, in a matrix over four rows (three merges)'],
   ['knnClassify', { X: XC, y: YC, Xnew: X7, k: CORED_ROWS.length + 1 }, 'k', 'more neighbours than training rows'],
   ['knnClassify', { X: XC, y: YC, Xnew: X(R7, ['GR']) }, 'Xnew', 'new rows with one log for training rows of four'],
   ['knnClassify', { X: XC, y: YC.slice(1), Xnew: X7 }, 'y', 'one facies too few'],
@@ -363,10 +365,12 @@ const REFUSALS = [
   ['cartFit', { X: XC, y: YC, minSamplesLeaf: 0 }, 'minSamplesLeaf', 'a leaf of no rows'],
   ['cartFit', { X: XC, y: YC, minSamplesSplit: 1 }, 'minSamplesSplit', 'a split of one row'],
   ['cartFit', { X: XC.slice(0, 3), y: ['shale', 'shale', 2] }, 'y[2]', 'a name and a number mixed'],
+  ['cartFit', { X: XC.slice(0, 3), y: ['shale', 'shale', null] }, 'y[2]', 'a null facies'],
   ['cartFit', { X: XC, y: YC, names: ['GR', 'RHOB'] }, 'names', 'two names for four logs'],
   ['cartPredict', { model: KM, X: X7 }, 'model', 'a k-means result where a tree was expected'],
   ['cartPredict', { model: CT, X: X(R7, ['GR', 'RHOB']) }, 'X', 'new rows with two logs for a tree of four'],
-  ['adjustedRandIndex', { a: ['shale'], b: ['shale'] }, 'a', 'one row'],
+  ['adjustedRandIndex', { a: ['shale'], b: ['shale'] }, 'a', 'two labellings of one row each'],
+  ['adjustedRandIndex', { a: YC, b: ['shale'] }, 'b', `a labelling of ${CORED_ROWS.length} rows against one of one row`],
   ['adjustedRandIndex', { a: YC, b: KM.labels.slice(1) }, 'b', 'one label too few'],
   ['matchClusters', { yTrue: YC, clusters: CL.kmeans({ X: XC, k: 5, seed: SEED }).labels }, 'clusters', 'five clusters, four facies, one-to-one'],
   ['matchClusters', { yTrue: YC, clusters: KM.labels, mode: 'greedy' }, 'mode', 'a mode it does not offer'],
@@ -413,7 +417,14 @@ w(`When both apply the engine keeps both, the non-convergence warning first, joi
 w();
 w(`> ${GW.warning}`);
 w();
-w(`A MISSING VALUE IS REFUSED BY NAME at the first row and column it meets, counting from 0: row ${NULL_ROW}, column 1 (RHOB) above. Nothing is filled.`);
+const NULL_ROW2 = 90; // a second gap, stated: this row's GR set null
+const twoGaps = withNull.map((r, i) => (i === NULL_ROW2 ? [null, r[1], r[2], r[3]] : r));
+const gapFirst = CL.pca({ X: twoGaps, names: LOGS });
+const gapSecond = CL.pca({ X: twoGaps.map((r, i) => (i === NULL_ROW ? XC[i] : r)), names: LOGS });
+must('two gaps: the first is named, then the second once the first is filled', gapFirst.field === `X[${NULL_ROW}][1]` && gapSecond.field === `X[${NULL_ROW2}][0]`, `${gapFirst.field} ${gapSecond.field}`);
+w(`A MISSING VALUE IS REFUSED BY NAME at the first row and column it meets, counting from 0: row ${NULL_ROW}, column 1 (RHOB) above. Nothing is filled. A table with several gaps shows one at a time: with row ${NULL_ROW2}'s GR also null, \`pca\` still names \`${gapFirst.field}\`; with row ${NULL_ROW} filled again it names \`${gapSecond.field}\`:`);
+w();
+w(`> ${gapSecond.error}`);
 
 
 /* ============================================================ SECTION 4 */
@@ -511,6 +522,9 @@ must('the eigenvalues of a correlation matrix sum to the number of logs', Math.a
 must('the eigenvalues are sorted descending', PC.eigenvalues.every((v, k) => k === 0 || v <= PC.eigenvalues[k - 1]), 'sorted');
 w();
 w(`The eigenvalues sum to ${f6(PC.totalVariance)}, the number of logs, because each standardised log has variance 1. The first two components carry ${f6(PC.cumulativeRatio[1])} of the variance of the four logs, and the last two ${f6(1 - PC.cumulativeRatio[1])} (derived, 1 less the cumulative ratio). Jacobi rotations took ${PC.jacobiSweeps} sweeps and converged (\`converged\` ${S(PC.converged)}); the basis reads: "${PC.basis.eigen}".`);
+must('the float sum of the correlation eigenvalues prints as the number of logs', f6(PC.totalVariance) === f6(LOGS.length), PC.totalVariance);
+w();
+w(`PRINTED ALIKE. The basis states the sum as exact arithmetic. The engine's \`totalVariance\`, a sum of floating point numbers, is ${S(PC.totalVariance)} as returned: equal to ${LOGS.length} at six decimals, never keyed as exactly ${LOGS.length}.`);
 must('the Jacobi sweeps converged', PC.converged === true, PC.converged);
 must('no repeated eigenvalues are flagged on the cored rows', PC.repeatedEigenvalues.length === 0 && !PC.warning, PC.warning);
 w();
@@ -628,6 +642,12 @@ must('ten starts reach the lowest inertia on most seeds shown and miss it on at 
 must('one start is worse than the lowest on more seeds than ten starts are', oneWorse > tenOff.length, `${oneWorse} ${tenOff.length}`);
 w();
 w(`The lowest inertia in the table is ${f6(tenMin)}. With ten starts, ${tenAtMin.length} of the ${seedsOne.length} seeds reach it and ${tenOff.length === 1 ? 'one stops' : `${tenOff.length} stop`} above it (${tenOff.map((t) => `seed ${t.s} at ${f6(t.r.inertia)}`).join(', ')}); with one start, ${oneWorse} of the ${seedsOne.length} seeds stop above it, the highest printed figure being ${f6(oneWorst.r.inertia)} (seed ${oneWorstSeeds.join(' and seed ')}), with clusters of ${list(oneWorst.r.sizes)} rows at seed ${oneWorst.s}. More starts make a poor stop less likely and do not rule it out; a result is quoted with its seed and its number of starts. A lower inertia is a better fit of the same k; it says nothing yet about rock types.`);
+const TWENTY = 20; // stated: twice the default starts
+const SEED_ABOVE = 5; // stated: the seed whose ten starts stopped above the lowest inertia
+must('the seed that stopped above is the one the table printed', tenOff.length === 1 && tenOff[0].s === SEED_ABOVE, tenOff.map((t) => t.s));
+const K5x20 = success('kmeans k 4, seed 5, twenty starts', CL.kmeans({ X: XC, k: K4, seed: SEED_ABOVE, nInit: TWENTY, names: LOGS }));
+w();
+w(`MORE STARTS AT THE SEED THAT STOPPED ABOVE. Seed ${SEED_ABOVE} with ${TWENTY} starts reaches inertia ${f6(K5x20.inertia)}, won by start ${K5x20.bestRun}.`);
 
 /* ============================================================ SECTION 10 */
 
@@ -665,6 +685,10 @@ must('every cored well has a first row among the cored rows', firstIdx.every((i)
 w(`THE FITTED LABEL OF A NAMED ROW. \`labels\` holds one cluster per clustered row, in row order (rows counted from 0 over the ${KM.n} cored rows). The first row of each cored well, under the teaching clustering:`);
 w();
 table(['row', 'well', 'depth (ft)', 'core facies', 'cluster'], firstIdx.map((i) => [S(i), GC[i], S(CORED_ROWS[i].depth), YC[i], S(KM.labels[i])]));
+const c0Facies = count(YC.filter((_, i) => KM.labels[i] === 0));
+must('teaching cluster 0 is exactly the shale rows', c0Facies.size === 1 && c0Facies.get('shale') === fc.get('shale') && KM.sizes[0] === fc.get('shale'), JSON.stringify([...c0Facies]));
+w();
+w(`ONE CLUSTER READ AGAINST THE CORE FACIES OF ITS ROWS (derived from \`labels\` and the core facies): the ${KM.sizes[0]} rows of cluster 0 are exactly the ${fc.get('shale')} cored shale rows, every one of them and no other row. That is a fact found by looking at the core; the cluster number and the size alone could never show it.`);
 
 /* ============================================================ SECTION 11 */
 
@@ -684,6 +708,15 @@ w(`THE SAME CHOICE IN K-MEANS. k ${K4}, seed ${SEED}, ten starts, three scalings
 w();
 const centreRows = (res, lab) => res.centresOriginal.map((c, k) => [lab, S(k), S(res.sizes[k]), ...c.map(f6)]);
 table(['scaling', 'cluster', 'rows', 'GR', 'RHOB', 'NPHI', 'PEF'], [...centreRows(KM, 'standard'), ...centreRows(KR, 'none'), ...centreRows(KMM, 'minmax')]);
+const sameRows = [];
+KM.centresOriginal.forEach((_, a) => KMM.centresOriginal.forEach((__, b) => {
+  const A = KM.labels.map((l, i) => (l === a ? i : -1)).filter((i) => i >= 0);
+  const B = KMM.labels.map((l, i) => (l === b ? i : -1)).filter((i) => i >= 0);
+  if (A.length === B.length && A.every((v, q) => v === B[q])) sameRows.push([a, b, Math.max(...KM.centresOriginal[a].map((v, j) => Math.abs(v - KMM.centresOriginal[b][j])))]);
+}));
+must('some standard and min-max clusters hold the same rows, with centres equal only to rounding', sameRows.length >= 1 && sameRows.every(([, , d]) => d < 1e-9), JSON.stringify(sameRows));
+w();
+w(`SAME ROWS, PRINTED ALIKE. Standard ${sameRows.length === 1 ? 'cluster' : 'clusters'} ${list(sameRows.map(([a]) => S(a)))} and min-max ${sameRows.length === 1 ? 'cluster' : 'clusters'} ${list(sameRows.map(([, b]) => S(b)))}, in that order, hold exactly the same rows (derived from the two label lists), so their centres in log units are the same means in exact arithmetic. As returned they differ by at most ${eX(Math.max(...sameRows.map(([, , d]) => d)))} (largest over the four logs), rounding in the two scalings' arithmetic: the centres print alike at six decimals, and the same rows are the reason they agree.`);
 const grSpanRaw = Math.max(...KR.centresOriginal.map((c) => c[0])) - Math.min(...KR.centresOriginal.map((c) => c[0]));
 const pefSpanRaw = Math.max(...KR.centresOriginal.map((c) => c[3])) - Math.min(...KR.centresOriginal.map((c) => c[3]));
 w();
@@ -716,6 +749,9 @@ w(`The engine agrees with the published figure at all eight printed decimals, on
 w();
 const PIc = success('pca, correlation, iris', CL.pca({ X: IX, names: IRIS_NAMES }));
 w(`On the correlation matrix the same flowers give eigenvalues ${list(PIc.eigenvalues.map(f6))} and a first ratio of ${f6(PIc.explainedVarianceRatio[0])}: the choice of matrix moves the figure, and the published one is the covariance form.`);
+must('the iris correlation eigenvalue sum prints as 4', f6(PIc.totalVariance) === f6(IRIS_NAMES.length), PIc.totalVariance);
+w();
+w(`Their float sum, \`totalVariance\`, is ${S(PIc.totalVariance)} as returned: ${IRIS_NAMES.length} at six decimals, and never exactly ${IRIS_NAMES.length} in the engine's arithmetic.`);
 w();
 const IRIS_K = 3; // three species, stated
 const IK = success('kmeans k 3, iris, raw, seed 3', CL.kmeans({ X: IX, k: IRIS_K, seed: SEED, scale: 'none' }));
@@ -738,6 +774,15 @@ table(['step', 'call', 'what it returns here'], [
   [S(step()), 'read `centresOriginal`', `cluster centres in gAPI, g/cm3, v/v and b/e (${ref('reading')})`],
   [S(step()), `\`assignClusters\` for ${UN1}`, `${R7.length} rows placed at the nearest of the ${K4} centres`],
 ]);
+w();
+const SSD = success('the sample-SD scaler on the cored rows', ML.fitStandardScaler({ X: XC, names: LOGS, sd: 'sample' }));
+const XSS = ML.applyScaler({ scaler: SSD, X: XC }).X;
+const KSS = success('kmeans k 4, seed 3, ten starts, rows scaled with the sample SD', CL.kmeans({ X: XSS, k: K4, seed: SEED, scale: 'none', names: LOGS }));
+const ssdRatio = SSD.scale[0] / KM.scaler.scale[0];
+must('sample-SD scaling divides every log by the same factor', SSD.scale.every((v, j) => Math.abs(v / KM.scaler.scale[j] - ssdRatio) < 1e-12), ssdRatio);
+must('the sample-SD clustering gives the same labels', KSS.labels.every((l, i) => l === KM.labels[i]), 'labels');
+must('its inertia is the teaching inertia times (n - 1) / n', Math.abs(KSS.inertia - KM.inertia * (KM.n - 1) / KM.n) < 1e-9, `${KSS.inertia}`);
+w(`THE SCALING, STATED OR NOT. Rows standardised with the SAMPLE SD (n - 1) instead, then clustered with \`scale: 'none'\`, k ${K4}, seed ${SEED}, ten starts: every log is divided by the same extra factor, ${f6(ssdRatio)} (derived, sample SD over population SD), so every distance shrinks by it, the labels are identical to the teaching clustering's, and the inertia is ${f6(KSS.inertia)} (derived check: ${f6(KM.inertia)} x ${KM.n - 1} / ${KM.n}). Min-max scaling moves the clusters themselves (${ref('covariance')}). A write-up that leaves the scaling out leaves the inertia unreadable either way.`);
 w();
 w(`WRITING UP A CLUSTERING. Everything a reader needs to reproduce it and nothing it has not earned:`);
 w();
@@ -766,6 +811,10 @@ w();
 w(`At k 1 every row sits in one cluster about the mean, and in standard units the inertia is the number of rows times the number of logs, ${f6(firstRow.inertia)} (each standardised log contributes n). The basis reads: "${EL.basis.drop}". The largest drop fraction is at k ${bigFrac.k}, ${f6(bigFrac.dropFraction)}; at k ${K4} it is ${f6(EL.table[K4 - 1].dropFraction)} and at k ${K4 + 1} ${f6(EL.table[K4].dropFraction)}.`);
 w();
 w(`NO ELBOW IS PICKED FOR YOU. Inertia always falls as k grows when every k is fitted well, down to 0 at one cluster per distinct row, so the smallest inertia is never the answer. The engine prints the drops and picks nothing; the basis reads: "${EL.basis.pick}". The core describes ${FACIES_SORTED.length} facies. The drop fraction reads ${f6(EL.table[K4 - 2].dropFraction)} at k ${K4 - 1}, ${f6(EL.table[K4 - 1].dropFraction)} at k ${K4} and ${f6(EL.table[K4].dropFraction)} at k ${K4 + 1}, and no larger k shown reaches the k ${K4 + 1} figure again. Where the elbow sits is a reading of that table, and the reading is written down with the table.`);
+const ELn = success(`elbow k 1 to ${KMAX}, seed ${SEED}, no silhouette`, CL.elbow({ X: XC, kMin: 1, kMax: KMAX, seed: SEED, names: LOGS }));
+must('without withSilhouette no k is named', ELn.bestSilhouetteK === null, ELn.bestSilhouetteK);
+w();
+w(`Called without \`withSilhouette\`, the elbow computes no silhouette, \`bestSilhouetteK\` is null, and the basis reads: "${ELn.basis.pick}".`);
 must('no drop fraction beyond k 5 reaches the k 5 figure', EL.table.slice(K4 + 1).every((r) => r.dropFraction < EL.table[K4].dropFraction), 'below');
 w();
 const RISE_SEED = 265; const RISE_KMAX = KMAX;
@@ -880,6 +929,16 @@ RECUT.forEach(({ k, c }) => must(`cutTree at k ${k} equals agglomerative with k 
 w(`RE-CUTTING WITHOUT RE-RUNNING. \`cutTree\` cuts a returned linkage matrix at any k, and gives exactly the labels \`agglomerative\` gives with that k (checked at k ${RECUT[0].k} to ${RECUT[RECUT.length - 1].k}):`);
 w();
 table(['k', 'cluster sizes, in cluster order', 'height of the merge undone first'], RECUT.map(({ k, c }) => [S(k), list(sizesOf(c.labels).map(S)), f6(LM[nC - k][2])]));
+const KS5 = 5; const KS6 = KS5 + 1; // stated: the re-cut from k 5 to k 6
+const U6 = nC - KS6; // the merge undone going from k 5 to k 6
+const u6 = LM[U6];
+const childSize = (id) => (id < nC ? 1 : LM[id - nC][3]);
+const k5l = RECUT.find((r) => r.k === KS5).c.labels; const k6l = RECUT.find((r) => r.k === KS6).c.labels;
+const splitFrom = [...new Set(k5l)].filter((c) => new Set(k6l.filter((_, r) => k5l[r] === c)).size > 1);
+must('exactly one k 5 cluster splits at k 6, into the two children of the merge undone', splitFrom.length === 1 && sizesOf(k5l)[splitFrom[0]] === u6[3] && childSize(u6[0]) + childSize(u6[1]) === u6[3], JSON.stringify(u6));
+const into = [...new Set(k6l.filter((_, r) => k5l[r] === splitFrom[0]))].sort((a, b) => a - b);
+w();
+w(`WHICH CLUSTER SPLITS. Going from k ${KS5} to k ${KS6} undoes merge ${U6} (the cluster it made has id ${nC + U6}): [${u6[0]}, ${u6[1]}, ${f6(u6[2])}, ${u6[3]}]. Its two children hold ${childSize(u6[0])} and ${childSize(u6[1])} rows. So cluster ${splitFrom[0]} of the k ${KS5} cut, the ${u6[3]}-row one, splits into clusters ${into.map(S).join(' and ')} of the k ${KS6} cut, of ${into.map((c) => S(k6l.filter((l) => l === c).length)).join(' and ')} rows; every other cluster carries over whole.`);
 w();
 const K3m = success('kmeans k 3 seed 3', CL.kmeans({ X: XC, k: 3, seed: SEED }));
 const splitK = (fine, coarse) => { const m = new Map(); fine.forEach((l, r) => { if (!m.has(l)) m.set(l, new Set()); m.get(l).add(coarse[r]); }); return [...m.values()].filter((v) => v.size > 1).length; };
@@ -1033,7 +1092,11 @@ const TRI = GC.map((g, i) => (g !== HELD ? i : -1)).filter((i) => i >= 0);
 const TEI = GC.map((g, i) => (g === HELD ? i : -1)).filter((i) => i >= 0);
 const XTR = pick(XC, TRI); const YTR = pick(YC, TRI); const XTE = pick(XC, TEI); const YTE = pick(YC, TEI);
 const TRW = [...new Set(pick(GC, TRI))];
+const heldMix = [...count(YTE).entries()].sort((x, y) => y[1] - x[1] || byChar(x[0], y[0]));
 w(`\`knnClassify\` gives a new row the facies most common among its k nearest TRAINING rows. To see how well it predicts a well it has not seen, one cored well is held out, stated: ${HELD}, ${TEI.length} rows; the model trains on the ${TRI.length} rows of ${list(TRW)}. Choosing which wells to hold out, and scoring every well in turn, is the machine learning course's subject; here the held-out well is stated.`);
+w();
+w(`${HELD}'s core facies, the truth every held-out score in this tier is measured against: ${heldMix.map(([f, c]) => `${f} ${c}`).join(', ')} (of ${TEI.length} rows); no limestone and no sandstone.`);
+must('the held-out well holds no limestone and no sandstone', !YTE.includes('limestone') && !YTE.includes('sandstone'), JSON.stringify(heldMix));
 w();
 const KN = success(`knnClassify k ${KNN_K}, ${HELD} held out`, CL.knnClassify({ X: XTR, y: YTR, Xnew: XTE, k: KNN_K, names: LOGS }));
 const KNrep = success(`accuracy of kNN k ${KNN_K} on ${HELD}`, accOf(YTE, KN.predictions));
@@ -1120,6 +1183,11 @@ const XTR5 = pick(XC5, TRI); const XTE5 = pick(XC5, TEI);
 const DS = DEPTHS.map((d) => { const t = TREE_ON(d, XC5, YC); const h = TREE_ON(d, XTR5, YTR); const p = success('cartPredict held out', CL.cartPredict({ model: h, X: XTE5 })); return { d, t, h, a: accOf(YTE, p.predictions).accuracy }; });
 table(['maxDepth', 'nodes', 'leaves', 'training accuracy, all cored rows', `accuracy on ${HELD}, grown without it`], DS.map(({ d, t, a }) => [S(d), S(t.nNodes), S(t.nLeaves), f6(t.trainingAccuracy), f6(a)]));
 const bestD = DS.reduce((b, x) => (x.a > b.a ? x : b));
+const leafFacies = (t) => [...new Set(t.nodes.filter((nd) => nd.leaf).map((nd) => nd.prediction))].sort(byChar);
+const shallow = DS.filter((x) => x.d <= 2);
+shallow.forEach((x) => must(`held-out depth ${x.d}: accuracy 0 exactly when no leaf predicts a facies of ${HELD}`, (x.a === 0) === !leafFacies(x.h).some((f) => YTE.includes(f)), leafFacies(x.h).join(',')));
+w();
+w(`WHY THE SHALLOW TREES SCORE WHAT THEY DO on ${HELD} (core facies ${heldMix.map(([f, c]) => `${f} ${c}`).join(', ')}): the tree grown without it predicts, from its leaves, ${shallow.map((x) => `at maxDepth ${x.d} ${list(leafFacies(x.h))}`).join('; ')}. A leaf can only give its own facies, so while no leaf predicts shaly-sand or shale the held-out accuracy is exactly 0.`);
 must('training accuracy never falls with depth', DS.every((x, i) => i === 0 || x.t.trainingAccuracy >= DS[i - 1].t.trainingAccuracy), 'monotone');
 w();
 const bestDs = DS.filter((x) => x.a === bestD.a).map((x) => x.d);
@@ -1192,6 +1260,15 @@ w();
 const mm8 = success(`applyScaler min-max, ${UN2}`, ML.applyScaler({ scaler: MM, X: X8 }));
 const hot = mm8.X.filter((r) => r[0] > 1).length;
 w(`STEP ${step()}, CHECK THE NEW WELLS AGAINST THE TRAINING RANGE. Min-max scaling fitted on the cored rows (${ref('scaling')}) maps ${hot} of the ${R8.length} ${UN2} rows above 1 on GR, the highest to ${f6(colMax(mm8.X, 0))}; ${UN1}'s highest GR maps to ${f6(colMax(mm7.X, 0))}. ${UN2} was logged with an uncalibrated tool (stated, ${ref('dataset')}): its GR reads ${S(T.HOT_GR_ADD)} gAPI high on every row.`);
+const RANGE = [[UN1, mm7], [UN2, mm8]].flatMap(([wid, m]) => LOGS.map((f, jx) => ({ wid, f, above: m.X.filter((r) => r[jx] > 1).length, below: m.X.filter((r) => r[jx] < 0).length, hi: colMax(m.X, jx), lo: Math.min(...m.X.map((r) => r[jx])) })));
+const flagged = RANGE.filter((r) => r.above + r.below > 0);
+must('the range check over every log flags GR on the hot well', flagged.some((r) => r.wid === UN2 && r.f === 'GR' && r.above === hot), JSON.stringify(flagged));
+w();
+w(`The same check over EVERY log, min-max fitted on the cored rows; a row outside [0, 1] on a log is outside the cored range of that log:`);
+w();
+table(['well', 'log', 'rows above 1', 'rows below 0', 'highest', 'lowest'], RANGE.map((r) => [r.wid, r.f, S(r.above), S(r.below), f6(r.hi), f6(r.lo)]));
+w();
+w(`Rows leave the cored range on ${flagged.map((r) => `${r.f} in ${r.wid} (${r.above + r.below} ${r.above + r.below === 1 ? 'row' : 'rows'})`).join(', ')}. The GR rows of ${UN2} are the stated offset; the others are rows of rock a little outside what the cores sampled.`);
 w();
 const A7k = accOf(W7, KU7.predictions); const A8k = accOf(W8, KU8.predictions);
 const A7c = accOf(W7, CU7.predictions); const A8c = accOf(W8, CU8.predictions);
@@ -1227,7 +1304,7 @@ w(`With the stated ${S(T.HOT_GR_ADD)} gAPI taken off every ${UN2} GR value (poss
 must('removing the stated offset raises the hot well accuracy', A8fix.accuracy > A8k.accuracy, `${A8fix.accuracy} ${A8k.accuracy}`);
 w();
 const inside8 = KU8.predictions.filter((p, i) => p !== W8[i] && mm8.X[i][0] <= 1).length;
-w(`A RANGE CHECK SEES ONLY THE ROWS THAT LEAVE THE RANGE. Min-max flagged ${hot} rows of ${UN2}; kNN missed ${wrong8.length}, and ${inside8 === wrong8.length ? `all ${inside8}` : inside8} of the misses sit inside the GR range. Every row of ${UN2} carries the same offset, flagged or not.`);
+w(`A RANGE CHECK SEES ONLY THE ROWS THAT LEAVE THE RANGE. Min-max flagged ${hot} rows of ${UN2} on GR; kNN missed ${wrong8.length}, and ${inside8 === wrong8.length ? `all ${inside8}` : inside8} of the misses sit inside the GR range. Every row of ${UN2} carries the same offset, flagged or not.`);
 w();
 w(`STEP ${step()}, WRITE IT BACK HONESTLY. The course's rule for a predicted facies, every value in it taken from the steps above:`);
 w();
@@ -1236,7 +1313,7 @@ table(['item', 'what is written'], [
   ['method', `kNN, k ${KNN_K}, standard scaling fitted on the training rows, logs ${list(LOGS)}`],
   ['wells trained on', `${list(T.CORED)}, ${CORED_ROWS.length} cored rows`],
   ['expected agreement', `on ${HELD} held out, kNN k ${KNN_K} trained on the other five cored wells scored ${f6(KNrep.accuracy)} (${ref('knn')})`],
-  ['rows outside the training range', `${UN2}: ${hot} of ${R8.length} rows above the cored GR maximum ${f6(MM.max[0])} gAPI; flagged row by row, and the whole well flagged for a gamma ray to be normalised`],
+  ['rows outside the training range', `every log checked; ${flagged.map((r) => `${r.wid} ${r.f}: ${r.above + r.below} of ${r.wid === UN1 ? R7.length : R8.length} ${r.above + r.below === 1 ? 'row' : 'rows'}`).join('; ')}; flagged row by row, and ${UN2} flagged as a whole well for a gamma ray to be normalised (its GR maximum is above the cored ${f6(MM.max[0])} gAPI)`],
   ['what is not claimed', 'no core facies and no accuracy for an uncored well'],
 ]);
 w();
@@ -1245,7 +1322,7 @@ w('A predicted facies written back without its method, its training wells, its h
 /* ============================================================ SECTION 25 */
 
 section('boundaries', 'Where each boundary falls, rule by rule', ['Expert m05 l01', 'Expert m05 l04']);
-w('Each rule draws its own boundary; nothing here is global. Every row is a real call, and the refused side is also in the refusal table.');
+w(`Each rule draws its own boundary; nothing here is global. Every row is a real call. Where the far side of a boundary is a refusal, that refusal is also in the refusal table (${ref('refusals')}); where it is a behaviour (a leaf, a tie, a sign, a warning, a pick), the row states the behaviour.`);
 w();
 const ok = (label, r) => !!success(label, r) && !r.error;
 const no = (r) => !!(r && r.error);

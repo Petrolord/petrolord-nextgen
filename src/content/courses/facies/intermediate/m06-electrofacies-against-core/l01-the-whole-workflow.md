@@ -44,4 +44,4 @@ Each step uses what the one before produced, and the order keeps the core out of
 
 ## Exercise
 
-Run the five steps yourself in the judge explorer on the Ekene cored rows. At each step, write down the figure from the table above that the step produces, and check it against the view. Then change one choice, the seed of k-means or the linkage, and rerun steps 3 to 5 only. Note which figures moved.
+Run the five steps yourself in the judge explorer on the Ekene cored rows. At each step, write down the figure from the table above that the step produces, and check it against the view. Then change one choice, the linkage, and rerun steps 3 to 5 only. Note which figures moved. The silhouette and matching views run k-means at seed 3; the elbow view is where a seed can be changed.
