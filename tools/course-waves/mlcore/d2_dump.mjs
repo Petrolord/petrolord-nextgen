@@ -164,6 +164,14 @@ const REPEATS = 5;
 const L2_SEP = 1;
 const COUNTS = [1, 2, 3, 4, 5, 6];
 const MAXITER_SHORT = 3;
+const K4 = 4;
+const L2_WEAK = 0.1;
+const PROBE_ALMOST = [2, 2, 2.0000000001];
+const PROBE_SAME = [2, 2, 2];
+const P_BELOW_EPS = 1e-16;
+const COND_OPEN = 1e300;
+let STEP = 0;
+const step = () => { STEP += 1; return STEP; };
 
 /* ================================================================ HEADER */
 
@@ -261,7 +269,7 @@ const PAYN = PAY10.filter((v) => v === 1).length;
 w(`THE PAY RULE, stated: a sample is pay (PAY = 1) when PHIC is at least ${S(T.PAY_PHIC)} and RT is at least ${S(T.PAY_RT)} ohm.m; otherwise PAY = 0. ${PAYN} of the ${ROWS.length} samples are pay. A label is the output of a stated rule, and this course always states it.`);
 must('the pay label follows its stated rule on every row', ROWS.every((r) => r.PAY === (r.PHIC >= T.PAY_PHIC && r.RT >= T.PAY_RT ? 1 : 0)), 'every row');
 w();
-w(`THE NO-SONIC WELL, stated: ${T.NO_SONIC_WELL} was never logged with a sonic, so every one of its DT samples is null. ${SONIC.length} rows in ${SONIC_WELLS.length} wells carry a DT. The generator keeps the sonic it drew for ${T.NO_SONIC_WELL} apart from the rows, as \`withheld\`; a real field has no such record, and this course reads it once, in ${ref('missinglog')}, to check a prediction.`);
+w(`THE NO-SONIC WELL, stated: ${T.NO_SONIC_WELL} has no sonic log, so every one of its DT samples is null. ${SONIC.length} rows in ${SONIC_WELLS.length} wells carry a DT. The generator keeps the sonic it drew for ${T.NO_SONIC_WELL} apart from the rows, as \`withheld\`; a real field has no such record, and this course reads it once, in ${ref('missinglog')}, to check a prediction.`);
 must('the no-sonic well has no DT and every other well has all of its DT', ROWS.every((r) => (r.well === T.NO_SONIC_WELL) === (r.DT === null)), 'split');
 must('the withheld sonic has one value per no-sonic row', E.withheld.DT.length === T.N_PER_WELL, E.withheld.DT.length);
 w();
@@ -327,7 +335,7 @@ must('every exported function except the three it cannot refuse by input appears
 const r0 = ML.ols({ X: X(NEAR, LOGS), y: NEAR.map((r) => r.DT), names: LOGS });
 planted(3, r0.field === 'y[20]' && firstNull === T.WELL_IDS.indexOf(T.NO_SONIC_WELL) * T.N_PER_WELL, `${r0.field} at ${firstNull}`);
 w();
-w(`The no-sonic target is refused at the first null it meets. Row ${firstNull} of the ${ROWS.length} rows (counted from 0) is the first ${T.NO_SONIC_WELL} sample; passing the forty rows from ${firstNull - 20} to ${firstNull + 19}, the last twenty of ${T.WELL_IDS[T.WELL_IDS.indexOf(T.NO_SONIC_WELL) - 1]} and the first twenty of ${T.NO_SONIC_WELL}, gives the refusal at \`y[20]\`, the twenty-first row passed.`);
+w(`The no-sonic target is refused at the first null it meets. The first ${T.NO_SONIC_WELL} sample is dataset row ${firstNull}, counting from 0; passing the forty rows from ${firstNull - 20} to ${firstNull + 19}, the last twenty of ${T.WELL_IDS[T.WELL_IDS.indexOf(T.NO_SONIC_WELL) - 1]} and the first twenty of ${T.NO_SONIC_WELL}, gives the refusal at \`y[20]\`, the twenty-first row passed.`);
 w();
 w('Two more refusals are the Expert tier\'s subject and sit where it teaches them: an ill-conditioned design in ' + ref('conditioning') + ' and separated labels in ' + ref('separation') + '. A logistic fit that stops before it converges returns a result with a `warning`, in ' + ref('convergence') + '.');
 
@@ -385,7 +393,7 @@ w();
 }
 w();
 const nT = Math.ceil(TF * ids9.length);
-w(`THE TEST SIZE is ceil(testFraction x count): here ceil(${S(TF)} x ${ids9.length}) = ${GS.nTestGroups} wells. A product within 1e-9 of a whole number is taken as that number before the ceiling. The engine's own case:`);
+w(`THE TEST SIZE is ceil(testFraction x count): here ceil(${S(TF)} x ${ids9.length}) = ${GS.nTestGroups} wells. A product within ${eX(ML.DEFAULTS.WHOLE_TOL)} of a whole number is taken as that number before the ceiling. The engine's own case:`);
 must('the teaching split holds out ceil(0.3 x 9) wells', GS.nTestGroups === nT && nT === 3, GS.nTestGroups);
 w();
 {
@@ -393,14 +401,16 @@ w();
   const r = success('groupSplit 0.28 of 25', ML.groupSplit(c.args));
   const c2 = golden('random-rows-0.28-of-25');
   const r2 = success('randomRowSplit 0.28 of 25', ML.randomRowSplit(c2.args));
-  const prod = 0.28 * 25;
+  const nG = new Set(c.args.groups).size;
+  const prod = c.args.testFraction * nG;
+  const whole = Math.round(prod);
   table(['call', 'testFraction x count in float, derived', 'test size'], [
-    ['`groupSplit`, 25 groups, fraction 0.28 (golden)', S(prod), S(r.nTestGroups)],
-    ['`randomRowSplit`, 25 rows, fraction 0.28 (golden)', S(prod), S(r2.nTest)],
+    [`\`groupSplit\`, ${nG} groups, fraction ${S(c.args.testFraction)} (golden)`, S(prod), S(r.nTestGroups)],
+    [`\`randomRowSplit\`, ${c2.args.n ?? c2.args.groups.length} rows, fraction ${S(c2.args.testFraction)} (golden)`, S(c2.args.testFraction * (c2.args.n ?? c2.args.groups.length)), S(r2.nTest)],
   ]);
-  must('0.28 x 25 is not 7 in float, and the engine holds out 7', prod !== 7 && r.nTestGroups === 7 && r2.nTest === 7, `${prod} ${r.nTestGroups} ${r2.nTest}`);
+  must('the golden product is not whole in float, and the engine holds out the whole number', prod !== whole && r.nTestGroups === whole && r2.nTest === whole, `${prod} ${r.nTestGroups} ${r2.nTest}`);
   w();
-  w(`In float, 0.28 x 25 is ${S(prod)}; a plain ceiling would hold out 8. The engine's basis states the rule: "${r.basis.testSize}".`);
+  w(`In float, ${S(c.args.testFraction)} x ${nG} is ${S(prod)}; a plain ceiling would hold out ${Math.ceil(prod)}. The engine's basis states the rule: "${r.basis.testSize}".`);
 }
 
 /* ============================================================ SECTION 6 */
@@ -621,8 +631,9 @@ w();
 table(['fold', 'test wells', 'test rows', 'training rows'], KF.folds.map((f) => [S(f.fold), list(f.testGroups), S(f.testIndices.length), S(f.trainIndices.length)]));
 must('every sonic well is tested exactly once', ids9.every((wl) => KF.folds.filter((f) => f.testGroups.includes(wl)).length === 1), 'once');
 w();
-w(`The shuffled order is ${list(KF.order)}: positions 0, 3 and 6 go to fold 0, positions 1, 4 and 7 to fold 1, positions 2, 5 and 8 to fold 2.`);
-must('fold 0 holds shuffled positions 0, 3 and 6', [0, 3, 6].map((q) => KF.order[q]).sort().join() === [...KF.folds[0].testGroups].sort().join(), 'round robin');
+const posOf = (f) => KF.order.map((_, q) => q).filter((q) => q % K3 === f);
+w(`The shuffled order is ${list(KF.order)}: ${KF.folds.map((f) => `positions ${list(posOf(f.fold))} go to fold ${f.fold}`).join('; ')}.`);
+must('each fold holds the shuffled positions q with q mod k equal to its number', KF.folds.every((f) => posOf(f.fold).map((q) => KF.order[q]).sort().join() === [...f.testGroups].sort().join()), 'round robin');
 w();
 const cvScore = (Xm, lam, folds) => folds.map((f) => {
   const r = ML.ridge({ X: pick(Xm, f.trainIndices), y: pick(Y9, f.trainIndices), lambda: lam });
@@ -658,9 +669,9 @@ const looA = mean(cvScore(XA9, Number(bAttrs), LOO.folds));
 w(`LEAVE ONE WELL OUT is k equal to the number of wells, ${ids9.length}, which the engine allows (${ref('boundaries')}). Mean test RMSE over the nine folds (derived): the logs at lambda 0 ${f6(looL0)}, the logs at lambda ${bLogs} ${f6(looL)}, the logs with the attributes at lambda ${bAttrs} ${f6(looA)} us/ft.`);
 must('leave one well out ranks the logs ahead of the attributes', looL < looA, `${looL} ${looA}`);
 w();
-const KF4 = success('groupKFold k 4', ML.groupKFold({ groups: G9, k: 4, seed: SEED }));
-w(`ROUND ROBIN BALANCES WELLS. With k = 4 on nine wells the folds hold ${KF4.folds.map((f) => f.testGroups.length).join(', ')} wells (${KF4.folds.map((f) => f.testIndices.length).join(', ')} rows): fold sizes differ by at most one well. The engine balances the count of wells; scikit-learn's GroupKFold balances rows and is not seeded (${ref('choices')}).`);
-must('k 4 fold sizes differ by at most one well', Math.max(...KF4.folds.map((f) => f.testGroups.length)) - Math.min(...KF4.folds.map((f) => f.testGroups.length)) === 1, 'balanced');
+const KF4 = success(`groupKFold k ${K4}`, ML.groupKFold({ groups: G9, k: K4, seed: SEED }));
+w(`ROUND ROBIN BALANCES WELLS. With k = ${K4} on nine wells the folds hold ${KF4.folds.map((f) => f.testGroups.length).join(', ')} wells (${KF4.folds.map((f) => f.testIndices.length).join(', ')} rows): fold sizes differ by at most one well. The engine balances the count of wells; scikit-learn's GroupKFold balances rows and takes no seed (${ref('choices')}).`);
+must('k four fold sizes differ by at most one well', Math.max(...KF4.folds.map((f) => f.testGroups.length)) - Math.min(...KF4.folds.map((f) => f.testGroups.length)) === 1, 'balanced');
 
 /* ============================================================ SECTION 13 */
 
@@ -687,7 +698,7 @@ must('adding the attributes raises the group RMSE on every seed', worseG === LEA
 w();
 const L5a = LK.find((x) => x.sd === SEED).a;
 const L5b = LK.find((x) => x.sd === SEED).b;
-w(`WHY. The four attributes are constant down each well, so together they name the well. Under a random-row split every well has rows on both sides (\`sharedGroups\` lists ${L5b.randomRow.sharedGroups.length} wells at seed ${S(SEED)}), and the model learns each well's sonic offset (${ref('residuals')}) from its training rows and meets it again in the test rows. Under a group split the test wells' offsets were never seen, and the attribute coefficients fitted to six wells extrapolate. At seed ${S(SEED)}: with the attributes, random-row RMSE ${f6(L5b.randomRow.testScore)} against group RMSE ${f6(L5b.group.testScore)}; on the logs alone, ${f6(L5a.randomRow.testScore)} against ${f6(L5a.group.testScore)}.`);
+w(`WHY. The four attributes are constant down each well, so together they name the well. Under a random-row split every well has rows on both sides (\`sharedGroups\` lists ${L5b.randomRow.sharedGroups.length} wells at seed ${S(SEED)}), and the model learns each well's sonic offset (${ref('residuals')}) from its training rows and meets it again in the test rows. Under a group split the test wells' offsets are absent from the training rows, and the attribute coefficients fitted to six wells extrapolate. At seed ${S(SEED)}: with the attributes, random-row RMSE ${f6(L5b.randomRow.testScore)} against group RMSE ${f6(L5b.group.testScore)}; on the logs alone, ${f6(L5a.randomRow.testScore)} against ${f6(L5a.group.testScore)}.`);
 w();
 w(`A RANDOM SPLIT DOES NOT ALWAYS FLATTER. On the logs alone no feature names a well, the model cannot learn a well's offset, and the random-row score is neither systematically better nor worse: the optimism is negative on ${negL} of the ${LEAK_SEEDS.length} seeds and positive on the rest, as the draw of test wells falls. Leakage needs a path from the test rows' identity to the prediction.`);
 w();
@@ -731,7 +742,7 @@ w();
 table(['quantity', 'value'], [
   ['rows', S(LG.n)], ['pay rows in training', S(pick(PAY10, PTR).filter((v) => v === 1).length)],
   ['Newton iterations', S(LG.iterations)], ['converged', S(LG.converged)], ['step halvings', S(LG.stepHalvings)],
-  ['log likelihood', f6(LG.logLikelihood)], ['deviance, -2 x log likelihood', f6(LG.deviance)], ['null deviance (intercept only)', f6(LG.nullDeviance)],
+  ['log likelihood', f6(LG.logLikelihood)], ['deviance, -2 x log likelihood', f6(LG.deviance)], ['deviance of the intercept-only model (`nullDeviance`)', f6(LG.nullDeviance)],
   ['separation', LG.separation.type],
 ]);
 must('the pay fit converged without separation or halving', LG.converged && LG.separation.type === 'none' && LG.stepHalvings === 0, `${LG.converged} ${LG.separation.type} ${LG.stepHalvings}`);
@@ -784,7 +795,7 @@ const R0 = success('classificationReport zero division 0 (golden)', ML.classific
 const R1 = success('classificationReport zero division 1 (golden)', ML.classificationReport(ZD1.args));
 w(`A ZERO DENOMINATOR. When a label is never predicted its precision is 0 / 0. The engine scores it \`zeroDivision\` (0 by default, or 1) and lists it in \`undefinedRatios\`. The engine's own case (golden \`report-never-predicted-zd0\` and \`-zd1\`): yTrue ${JSON.stringify(ZD0.args.yTrue)}, yPred ${JSON.stringify(ZD0.args.yPred)}.`);
 w();
-table(['zeroDivision', 'undefined ratios', 'macro precision', 'macro F1'], [[S(R0.zeroDivision), R0.undefinedRatios.map((u) => `${u.metric} of ${JSON.stringify(u.label)}`).join('; '), f6(R0.macro.precision), f6(R0.macro.f1)], [S(R1.zeroDivision), R1.undefinedRatios.map((u) => `${u.metric} of ${JSON.stringify(u.label)}`).join('; '), f6(R1.macro.precision), f6(R1.macro.f1)]]);
+table(['zeroDivision', 'ratios scored zeroDivision (`undefinedRatios`)', 'macro precision', 'macro F1'], [[S(R0.zeroDivision), R0.undefinedRatios.map((u) => `${u.metric} of ${JSON.stringify(u.label)}`).join('; '), f6(R0.macro.precision), f6(R0.macro.f1)], [S(R1.zeroDivision), R1.undefinedRatios.map((u) => `${u.metric} of ${JSON.stringify(u.label)}`).join('; '), f6(R1.macro.precision), f6(R1.macro.f1)]]);
 must('the two zero-division settings give different macro precision', R0.macro.precision !== R1.macro.precision, `${R0.macro.precision} ${R1.macro.precision}`);
 w();
 w('The choice moves the macro average, so a report states it. The basis says: "' + R0.basis.zeroDivision + '".');
@@ -853,15 +864,15 @@ const eMean = eCol.reduce((a, v) => a + v, 0) / eCol.length;
 const eSd = Math.sqrt(eCol.reduce((a, v) => a + (v - eMean) ** 2, 0) / eCol.length);
 w(`The raw number mixes units: a column in thousands of feet beside one in g/cm3 reads as ill-conditioned whatever the data. The scaled number removes the units and measures near-collinearity. Easting sits far from zero and varies little (over the training rows its mean is ${f6(eMean)} km and its population SD ${f6(eSd)} km, derived), so with an intercept it is nearly a multiple of the column of ones, and northing the same: the scaled number of the attribute design is ${f6(cA.scaledConditionNumber)}. Centring every feature on its training mean (arithmetic done here, stated) brings it to ${f6(cC.scaledConditionNumber)} and leaves the fit itself unchanged: R-squared moves by ${eX(dRC)}. The refusal message names that remedy.`);
 w();
-const COL = success('ols with a column twice NPHI', ML.ols({ X: trM(LOGS).map((r) => [...r, 2 * r[2]]), y: yTr, names: [...LOGS, 'NPHI2'], maxCondition: 1e300 }));
+const COL = success('ols with a column twice NPHI', ML.ols({ X: trM(LOGS).map((r) => [...r, 2 * r[2]]), y: yTr, names: [...LOGS, 'NPHI2'], maxCondition: COND_OPEN }));
 const COLr = refusal('ols with a column twice NPHI, default limit', ML.ols({ X: trM(LOGS).map((r) => [...r, 2 * r[2]]), y: yTr, names: [...LOGS, 'NPHI2'] }), 'X');
-w(`AN EXACT COPY. Add a fifth column that is exactly twice NPHI. The scaled condition number becomes ${eX(COL.scaledConditionNumber)} (read with maxCondition raised to 1e300 so the number is returned), and at the default the fit is refused. The engine's own words:`);
+w(`AN EXACT COPY. Add a fifth column that is exactly twice NPHI. The scaled condition number becomes ${eX(COL.scaledConditionNumber)} (read with maxCondition raised to ${eX(COND_OPEN)} so the number is returned), and at the default the fit is refused. The engine's own words:`);
 w();
 w(`> ${COLr.error}`);
 must('the doubled column drives the scaled condition number above 1e13', COL.scaledConditionNumber > 1e13, COL.scaledConditionNumber);
 w();
 const kap2 = ML.DEFAULTS.MAX_CONDITION ** 2 * Number.EPSILON;
-w(`WHY 1e8. A least squares solution can lose up to about kappa^2 x machine epsilon of relative accuracy in the worst case. At kappa = ${eX(ML.DEFAULTS.MAX_CONDITION)}, kappa^2 x ${S(Number.EPSILON)} = ${f6(kap2)} (derived): the worst-case error bound reaches the size of the coefficient, so no digit of some coefficient can be guaranteed. The basis says: "${OL.basis.scaledConditionNumber}".`);
+w(`WHY ${eX(ML.DEFAULTS.MAX_CONDITION)}. A least squares solution can lose up to about kappa^2 x machine epsilon of relative accuracy in the worst case. At kappa = ${eX(ML.DEFAULTS.MAX_CONDITION)}, kappa^2 x ${S(Number.EPSILON)} = ${f6(kap2)} (derived): the worst-case error bound reaches the size of the coefficient, so no digit of some coefficient can be guaranteed. The basis says: "${OL.basis.scaledConditionNumber}".`);
 w();
 const LB1 = golden('ols-longley-below-limit');
 const LB2 = golden('ols-longley-limit-44000');
@@ -879,7 +890,7 @@ w();
 w('A DIGIT OF AGREEMENT is the log relative error, LRE = -log10(|estimate - certified| / |certified|), capped at 16 when the two are identical in float; derived here from the engine value and the certified string. An LRE of 14 means the first fourteen significant digits agree.');
 w();
 const LRE = (est, cert) => { const c = Number(cert); if (est === c) return 16; if (c === 0) return Math.min(16, -Math.log10(Math.abs(est))); return Math.min(16, -Math.log10(Math.abs(est - c) / Math.abs(c))); };
-const NIST = [['Norris', 'nist-norris'], ['Pontius', 'nist-pontius'], ['NoInt1', 'nist-noint1'], ['NoInt2', 'nist-noint2'], ['Longley', 'nist-longley'], ['Wampler1', 'nist-wampler1'], ['Wampler2', 'nist-wampler2'], ['Wampler3', 'nist-wampler3'], ['Wampler4', 'nist-wampler4'], ['Wampler5', 'nist-wampler5'], ['Filip, maxCondition 1e10', 'nist-filip-forced']];
+const NIST = [['Norris', 'nist-norris'], ['Pontius', 'nist-pontius'], ['NoInt1', 'nist-noint1'], ['NoInt2', 'nist-noint2'], ['Longley', 'nist-longley'], ['Wampler1', 'nist-wampler1'], ['Wampler2', 'nist-wampler2'], ['Wampler3', 'nist-wampler3'], ['Wampler4', 'nist-wampler4'], ['Wampler5', 'nist-wampler5'], [`Filip, maxCondition ${eX(golden('nist-filip-forced').args.maxCondition)}`, 'nist-filip-forced']];
 const nistRows = NIST.map(([name, id]) => {
   const c = golden(id);
   const r = success(`ols ${id} (golden)`, ML.ols(c.args));
@@ -903,7 +914,7 @@ w(`FILIP, REFUSED AT THE DEFAULT. Filip is a degree ten polynomial in one variab
 w();
 w(`> ${rFR.error}`);
 w();
-w(`Raised knowingly to maxCondition 1e10 it is fitted, and its smallest coefficient LRE is ${filip.minCoef.toFixed(2)} against a float-design limit of ${f6(floatLim.Filip).replace(/0+$/, '')}: the certified values cannot be reached from float64 data by any method to more digits than that, so the missing digits are an input limit. A refusal at the default is the engine declining to print coefficients it cannot vouch for.`);
+w(`Raised knowingly to maxCondition ${eX(golden('nist-filip-forced').args.maxCondition)} it is fitted, and its smallest coefficient LRE is ${filip.minCoef.toFixed(2)} against a float-design limit of ${f6(floatLim.Filip).replace(/0+$/, '')}: the certified values cannot be reached from float64 data by any method to more digits than that, so the missing digits are an input limit. A refusal at the default is the engine declining to print coefficients it cannot vouch for.`);
 must('forced Filip agrees to between 7 and 9 digits', filip.minCoef > 7 && filip.minCoef < 9, filip.minCoef);
 const LNG = nistRows.find((x) => x.id === 'nist-longley');
 w();
@@ -923,9 +934,9 @@ w();
 const SEPl = success('logistic, PHIC, rows above the RT cutoff, l2 1', ML.logistic({ X: HC.map((r) => [r.PHIC]), y: HC.map((r) => r.PAY), names: ['PHIC'], l2: L2_SEP }));
 w(`WITH A PENALTY the fit is finite. With l2 = ${S(L2_SEP)} on the same rows: PHIC coefficient ${f6(SEPl.coefficients[1])} log odds per v/v, intercept ${f6(SEPl.coefficients[0])}, ${SEPl.iterations} iterations, converged ${S(SEPl.converged)}, and the result reports \`separation.type\` ${SEPl.separation.type}. The penalty (l2 / 2) x sum b_j^2 on the non-intercept coefficients makes the objective bounded; the separation is still there, and the coefficient is set by the penalty rather than by the data.`);
 must('the penalised fit converges and reports complete separation', SEPl.converged && SEPl.separation.type === 'complete', `${SEPl.converged} ${SEPl.separation.type}`);
-const SEPl2 = success('logistic, same rows, l2 0.1', ML.logistic({ X: HC.map((r) => [r.PHIC]), y: HC.map((r) => r.PAY), names: ['PHIC'], l2: 0.1 }));
+const SEPl2 = success('logistic, same rows, the weaker l2', ML.logistic({ X: HC.map((r) => [r.PHIC]), y: HC.map((r) => r.PAY), names: ['PHIC'], l2: L2_WEAK }));
 w();
-w(`At l2 = 0.1 the PHIC coefficient is ${f6(SEPl2.coefficients[1])}: a weaker penalty, a larger coefficient, and no finite limit as l2 goes to zero.`);
+w(`At l2 = ${S(L2_WEAK)} the PHIC coefficient is ${f6(SEPl2.coefficients[1])}: a weaker penalty, a larger coefficient, and no finite limit as l2 goes to zero.`);
 must('a weaker penalty gives a larger coefficient', SEPl2.coefficients[1] > SEPl.coefficients[1], `${SEPl2.coefficients[1]} ${SEPl.coefficients[1]}`);
 w();
 const QS = golden('logistic-quasi-separation');
@@ -959,7 +970,7 @@ const CP = golden('logistic-compressibility-per-pa');
 const rCP = success('logistic compressibility, golden tol', ML.logistic(CP.args));
 const { tol: _t, ...cpDefault } = CP.args;
 const rCP0 = success('logistic compressibility, default tol', ML.logistic(cpDefault));
-w(`THE STOPPING RULE IS IN COEFFICIENT UNITS. A feature in very small units has a very large coefficient, and an absolute tol must be set to match. The engine's own case (golden \`logistic-compressibility-per-pa\`): rock compressibility in 1/Pa, a feature near 6e-10, ${rCP.n} rows. With the golden's tol ${S(CP.args.tol)} it converges in ${rCP.iterations} iterations with the compressibility coefficient ${eX(rCP.coefficients[1])}; at the default tol ${eX(ML.DEFAULTS.LOGISTIC_TOL)} it runs to ${rCP0.iterations} updates, converged ${S(rCP0.converged)}, and warns:`);
+w(`THE STOPPING RULE IS IN COEFFICIENT UNITS. A feature in very small units has a very large coefficient, and an absolute tol must be set to match. The engine's own case (golden \`logistic-compressibility-per-pa\`): rock compressibility in 1/Pa, a feature whose largest value is ${eX(Math.max(...CP.args.X.map((r) => Math.abs(r[0]))))} (golden), ${rCP.n} rows. With the golden's tol ${S(CP.args.tol)} it converges in ${rCP.iterations} iterations with the compressibility coefficient ${eX(rCP.coefficients[1])}; at the default tol ${eX(ML.DEFAULTS.LOGISTIC_TOL)} it runs to ${rCP0.iterations} updates, converged ${S(rCP0.converged)}, and warns:`);
 w();
 w(`> ${rCP0.warning}`);
 must('the compressibility case converges at its tol and not at the default', rCP.converged && !rCP0.converged, `${rCP.converged} ${rCP0.converged}`);
@@ -1016,28 +1027,28 @@ w(`The test RMSE ${lcMonotone ? 'falls at every added well here' : 'does not fal
 section('missinglog', 'Missing-log prediction end to end, and writing it back', ['Expert m05']);
 w(`${T.NO_SONIC_WELL} has no sonic (${ref('dataset')}). The task: predict its DT from the logs it does have, say how good the prediction is expected to be, and write it back so no one mistakes it for a measurement. Every step below is a call to the engine.`);
 w();
-w(`STEP 1, CHOOSE THE FEATURES AND LAMBDA BY WHOLE WELLS. The k-fold of ${ref('kfold')} (k ${K3}, seed ${S(SEED)}) compared feature sets on wells the model had not seen. One more candidate is scored here on the same folds, the logs with the caliper:`);
+w(`STEP ${step()}, CHOOSE THE FEATURES AND LAMBDA BY WHOLE WELLS. The k-fold of ${ref('kfold')} (k ${K3}, seed ${S(SEED)}) compared feature sets on wells the model had not seen. One more candidate is scored here on the same folds, the logs with the caliper:`);
 w();
 const cvC = {};
-[0, 10].forEach((lam) => { cvC[lam] = mean(cvScore(XC9, lam, KF.folds)); });
+[RL[0], Number(bLogs)].forEach((lam) => { cvC[lam] = mean(cvScore(XC9, lam, KF.folds)); });
 table(['features', 'lambda', 'mean test RMSE over the three folds (us/ft), derived'], [
-  ['GR, RHOB, NPHI', '0', f6(CV.logs[0])], ['GR, RHOB, NPHI', bLogs, f6(vLogs)],
-  ['GR, RHOB, NPHI, CALI', '0', f6(cvC[0])], ['GR, RHOB, NPHI, CALI', '10', f6(cvC[10])],
+  ['GR, RHOB, NPHI', S(RL[0]), f6(CV.logs[RL[0]])], ['GR, RHOB, NPHI', bLogs, f6(vLogs)],
+  ['GR, RHOB, NPHI, CALI', S(RL[0]), f6(cvC[RL[0]])], ['GR, RHOB, NPHI, CALI', bLogs, f6(cvC[bLogs])],
   ['the logs and the four attributes', bAttrs, f6(vAttrs)],
 ]);
-must('the chosen set is the logs alone at their best lambda', vLogs <= Math.min(cvC[0], cvC[10], vAttrs, CV.logs[0]), 'lowest');
+must('the chosen set is the logs alone at their best lambda', vLogs <= Math.min(cvC[RL[0]], cvC[bLogs], vAttrs, CV.logs[RL[0]]), 'lowest');
 w();
 w(`The lowest is the three logs at lambda ${bLogs}, ${f6(vLogs)} us/ft. That mean is the expected error for a NEW well LIKE the nine, and it is the number the write-back carries.`);
 w();
 const RF = success(`ridge on all nine wells, lambda ${bLogs}`, ML.ridge({ X: XL9, y: Y9, lambda: Number(bLogs), names: LOGS }));
 const XN = X(NOS, LOGS);
 const PN = success(`predict ${T.NO_SONIC_WELL}`, ML.predict({ model: RF, X: XN }));
-w(`STEP 2, FIT ON EVERY WELL THAT HAS THE LOG. Ridge at lambda ${bLogs} on all ${RF.n} sonic rows: coefficients in original units ${RF.coefficients.map(f6).join(', ')} (intercept, GR, RHOB, NPHI).`);
+w(`STEP ${step()}, FIT ON EVERY WELL THAT HAS THE LOG. Ridge at lambda ${bLogs} on all ${RF.n} sonic rows: coefficients in original units ${RF.coefficients.map(f6).join(', ')} (intercept, GR, RHOB, NPHI).`);
 w();
-w(`STEP 3, CHECK THE NEW WELL AGAINST THE TRAINING RANGE. Min-max scaling fitted on the nine wells (${ref('scaling')}) maps ${hotAbove} of the ${NOS.length} ${T.NO_SONIC_WELL} rows above 1 on GR, the highest to ${f6(colMax(mm6.X, 0))}. On those rows the model extrapolates. The well was drilled through a hot shale (stated, ${ref('dataset')}): its GR reads ${S(T.HOT_GR_ADD)} gAPI above what the rock alone gives on every row, and GR carries a positive coefficient.`);
+w(`STEP ${step()}, CHECK THE NEW WELL AGAINST THE TRAINING RANGE. Min-max scaling fitted on the nine wells (${ref('scaling')}) maps ${hotAbove} of the ${NOS.length} ${T.NO_SONIC_WELL} rows above 1 on GR, the highest to ${f6(colMax(mm6.X, 0))}. On those rows the model extrapolates. The well was drilled through a hot shale (stated, ${ref('dataset')}): its GR reads ${S(T.HOT_GR_ADD)} gAPI above what the rock alone gives on every row, and GR carries a positive coefficient.`);
 w();
 const hotIdx = mm6.X.map((r, i) => (r[0] > 1 ? i : -1)).filter((i) => i >= 0);
-w(`STEP 4, PREDICT. ${PN.values.length} predicted DT values, from ${f6(Math.min(...PN.values))} to ${f6(Math.max(...PN.values))} us/ft.`);
+w(`STEP ${step()}, PREDICT. ${PN.values.length} predicted DT values, from ${f6(Math.min(...PN.values))} to ${f6(Math.max(...PN.values))} us/ft.`);
 w();
 const WH = E.withheld.DT;
 const MW = success('metrics against the withheld sonic', ML.regressionMetrics({ yTrue: WH, yPred: PN.values }));
@@ -1045,7 +1056,7 @@ const bias = mean(PN.values.map((v, i) => v - WH[i]));
 const inIdx = PN.values.map((_, i) => i).filter((i) => !hotIdx.includes(i));
 const MWin = success('metrics against the withheld sonic, rows inside the range', ML.regressionMetrics({ yTrue: pick(WH, inIdx), yPred: pick(PN.values, inIdx) }));
 const MWhot = success('metrics against the withheld sonic, rows above the range', ML.regressionMetrics({ yTrue: pick(WH, hotIdx), yPred: pick(PN.values, hotIdx) }));
-w(`STEP 5, ONLY BECAUSE THIS FIELD IS SYNTHETIC: CHECK AGAINST THE WITHHELD SONIC. A real well gives no such check; the generator kept the DT it drew (${ref('dataset')}).`);
+w(`STEP ${step()}, ONLY BECAUSE THIS FIELD IS SYNTHETIC: CHECK AGAINST THE WITHHELD SONIC. A real well gives no such check; the generator kept the DT it drew (${ref('dataset')}).`);
 w();
 table(['rows of ' + T.NO_SONIC_WELL, 'rows', 'RMSE against the withheld DT (us/ft)', 'MAE (us/ft)'], [
   ['all', S(MW.n), f6(MW.rmse), f6(MW.mae)],
@@ -1062,7 +1073,7 @@ must('the hot shale term less the offset accounts for the bias to within 1.5 us/
 w();
 w(`A RANGE CHECK SEES ONLY THE ROWS THAT LEAVE THE RANGE. Min-max flagged ${hotAbove} rows, and those read ${f6(MWhot.rmse)} against ${f6(MWin.rmse)} inside the range: the ${MWin.n} rows inside it are shifted by the same hot shale and pass the check. The RMSE on the whole well, ${f6(MW.rmse)}, is above the k-fold estimate of ${f6(vLogs)}, which holds for a well like the nine. A shift that keeps a well inside the training range is found by comparing its logs with its neighbours' (the data quality course) and by the geology, and never by the scaler.`);
 w();
-w('STEP 6, WRITE IT BACK HONESTLY. The course\'s rule for a predicted log, every value in it taken from the steps above:');
+w(`STEP ${step()}, WRITE IT BACK HONESTLY. The course's rule for a predicted log, every value in it taken from the steps above:`);
 w();
 table(['item', 'what is written'], [
   ['channel name', 'a new channel, DT_PRED, beside the measured DT; the measured DT stays null'],
@@ -1080,12 +1091,14 @@ w('A prediction written back without its method, its training wells, its expecte
 section('boundaries', 'Where each boundary falls, rule by rule', ['Expert m06', 'Professional m04 l04']);
 w('Each rule draws its own boundary; nothing here is global. Every row is a real call or quotes the engine\'s basis.');
 w();
-const bConstOk = ML.fitStandardScaler({ X: [[2], [2], [2.0000000001]] });
-const bConstNo = ML.fitStandardScaler({ X: [[2], [2], [2]] });
-const bNp = ML.ols({ X: [[1], [2]], y: [1, 3] });
-const bNp1 = ML.ols({ X: [[1], [2], [3]], y: [1, 3, 4] });
+const bConstOk = ML.fitStandardScaler({ X: PROBE_ALMOST.map((v) => [v]) });
+const bConstNo = ML.fitStandardScaler({ X: PROBE_SAME.map((v) => [v]) });
+const NP_X = [[1], [2], [3]];
+const NP_Y = [1, 3, 4];
+const bNp = ML.ols({ X: NP_X.slice(0, 2), y: NP_Y.slice(0, 2) });
+const bNp1 = ML.ols({ X: NP_X, y: NP_Y });
 const bEps = ML.logLoss({ yTrue: [1, 0], probabilities: [ML.DEFAULTS.LOG_LOSS_EPS, 0.5] });
-const bEps2 = ML.logLoss({ yTrue: [1, 0], probabilities: [1e-16, 0.5] });
+const bEps2 = ML.logLoss({ yTrue: [1, 0], probabilities: [P_BELOW_EPS, 0.5] });
 const bZd = ML.classificationReport({ yTrue: [0, 1, 1], yPred: [0, 1, 0] });
 must('a column with any difference is fitted', !bConstOk.error, bConstOk.error);
 must('an identical column is refused', !!bConstNo.error, 'refused');
@@ -1093,19 +1106,19 @@ must('n = p is refused and n = p + 1 fitted', !!bNp.error && !bNp1.error, 'n p')
 must('a probability equal to eps is kept and one below it clipped', bEps.clipped === 0 && bEps2.clipped === 1, `${bEps.clipped} ${bEps2.clipped}`);
 must('a report with every denominator non-zero lists no undefined ratio', bZd.undefinedRatios.length === 0, bZd.undefinedRatios.length);
 table(['function', 'rule', 'boundary', 'shown by'], [
-  ['`fitStandardScaler`, `fitMinMaxScaler`', 'refuse a constant feature', 'only when every training value is identical', `[2, 2, 2.0000000001] is fitted (scale ${eX(bConstOk.scale[0])}); [2, 2, 2] is refused`],
+  ['`fitStandardScaler`, `fitMinMaxScaler`', 'refuse a constant feature', 'only when every training value is identical', `[${list(PROBE_ALMOST.map(S))}] is fitted (scale ${eX(bConstOk.scale[0])}); [${list(PROBE_SAME.map(S))}] is refused`],
   ['`applyScaler` (min-max)', 'no clipping', 'a new row outside the training range maps outside [0, 1]', `${T.NO_SONIC_WELL} GR to ${f6(colMax(mm6.X, 0))} (${ref('scaling')})`],
-  ['`groupSplit`, `randomRowSplit`', 'test size ceil(f x count)', 'a product within 1e-9 of a whole number is that number', `0.28 x 25 holds out 7 (${ref('shuffle')})`],
-  ['`groupKFold`', '2 <= k <= number of groups', 'k equal to the number of groups is allowed (leave one out)', `k 9 on nine wells is fitted; k 10 is refused (${ref('kfold')}, ${ref('refusals')})`],
-  ['`ols`', 'more rows than coefficients', 'n = p is refused', `2 rows for 2 coefficients refused; 3 rows fitted, residual degrees of freedom ${bNp1.dfResidual}`],
-  ['`ols`, `ridge`', 'refuse the scaled condition number above maxCondition', 'exactly at the limit is fitted', `Longley refused at 43000, fitted at 44000 (${ref('conditioning')})`],
+  ['`groupSplit`, `randomRowSplit`', 'test size ceil(f x count)', `a product within ${eX(ML.DEFAULTS.WHOLE_TOL)} of a whole number is that number`, `the golden product holds out the whole number (${ref('shuffle')})`],
+  ['`groupKFold`', '2 <= k <= number of groups', 'k equal to the number of groups is allowed (leave one out)', `k ${ids9.length} on nine wells is fitted; k ${ids9.length + 1} is refused (${ref('kfold')}, ${ref('refusals')})`],
+  ['`ols`', 'more rows than coefficients', 'n = p is refused', `${NP_X.length - 1} rows for ${NP_X[0].length + 1} coefficients refused; ${NP_X.length} rows fitted, residual degrees of freedom ${bNp1.dfResidual}`],
+  ['`ols`, `ridge`', 'refuse the scaled condition number above maxCondition', 'exactly at the limit is fitted', `Longley refused at ${S(LB1.args.maxCondition)}, fitted at ${S(LB2.args.maxCondition)} (${ref('conditioning')})`],
   ['`logistic`', 'converged when the largest full Newton step is at most tol', 'inclusive', `the pay fit stops at a step of ${eX(lastT.maxChange)} (${ref('convergence')})`],
   ['`logistic`', 'halve a step that lowers the penalised log likelihood', 'a fall of more than 1e-12 x (1 + |l|); strict', `the pay fit halved ${LG.stepHalvings} times`],
   ['`solveSPD`', 'singular', 'a diagonal entry at or below zero, or a scaled pivot at or below p x machine epsilon; inclusive', `the rank one matrix of ${ref('refusals')}`],
   ['`predict` (logistic)', 'class 1', 'a probability above 0.5; exactly 0.5 is class 0', `golden \`predict-logistic-half\` (${ref('logistic')})`],
   ['`rocCurve`', 'a row is called positive', 'at a score at or above the threshold; equal scores move together', `golden \`roc-ties\` (${ref('roc')})`],
-  ['`logLoss`', 'clip to [eps, 1 - eps]', 'a probability equal to eps is kept', `p = ${eX(ML.DEFAULTS.LOG_LOSS_EPS)} clips ${bEps.clipped} rows; p = 1e-16 clips ${bEps2.clipped}`],
-  ['`classificationReport`', 'score zeroDivision', 'only when a denominator is 0', `yTrue [0, 1, 1], yPred [0, 1, 0]: ${bZd.undefinedRatios.length} undefined ratios`],
+  ['`logLoss`', 'clip to [eps, 1 - eps]', 'a probability equal to eps is kept', `p = ${eX(ML.DEFAULTS.LOG_LOSS_EPS)} clips ${bEps.clipped} rows; p = ${eX(P_BELOW_EPS)} clips ${bEps2.clipped}`],
+  ['`classificationReport`', 'score zeroDivision', 'only when a denominator is 0', `yTrue [0, 1, 1], yPred [0, 1, 0]: ${bZd.undefinedRatios.length} ratios scored zeroDivision`],
 ]);
 
 /* ============================================================ SECTION 25 */
@@ -1117,9 +1130,9 @@ table(['convention', 'this engine', 'a common alternative', 'why the engine chos
   ['scaler divisor', 'population SD (n)', 'sample SD (n - 1), which the data quality course uses for its z-score', 'ridge lambda then equals scikit-learn alpha on the same features'],
   ['random draws', 'mulberry32(seed), Fisher-Yates from the end', 'a library generator (numpy, scikit-learn)', 'one canonical generator across the platform; no library reproduces its draws, so splits are compared by well list'],
   ['group names', 'sorted by UTF-16 code unit before the shuffle', 'natural order (EKENE-2 before EKENE-10)', 'a stated order that needs no parsing of names'],
-  ['k-fold', 'round robin over shuffled groups: balances the number of wells', 'scikit-learn GroupKFold: balances rows, not seeded', 'seeded and reproducible; every well tested once'],
+  ['k-fold', 'round robin over shuffled groups: balances the number of wells', 'scikit-learn GroupKFold: balances rows and takes no seed', 'seeded and reproducible; every well tested once'],
   ['test R-squared', 'about the mean of the test targets', 'about the training mean (referenceMean)', 'matches scikit-learn r2_score; the option is there'],
-  ['OLS refusal', `scaled condition number above ${eX(ML.DEFAULTS.MAX_CONDITION)}`, 'fit anything and warn', 'at 1e8 the worst-case bound reaches the coefficient itself'],
+  ['OLS refusal', `scaled condition number above ${eX(ML.DEFAULTS.MAX_CONDITION)}`, 'fit anything and warn', `at ${eX(ML.DEFAULTS.MAX_CONDITION)} the worst-case bound reaches the coefficient itself`],
   ['logistic stop', `largest full Newton step at most ${eX(ML.DEFAULTS.LOGISTIC_TOL)}, in coefficient units`, 'a relative or column-scaled rule', 'the full step cannot be faked by halving; the unit is stated in the basis'],
   ['separation', 'decided exactly by two linear programmes before iterating, refused at l2 = 0', 'iterate and watch the coefficients grow', 'a separated maximum likelihood fit has no finite answer to print'],
   ['F1', '2TP / (2TP + FP + FN)', 'the harmonic mean of precision and recall', 'equal wherever both are defined, and defined in more cases'],
@@ -1156,6 +1169,8 @@ const allMods = Object.entries(MODULES).flatMap(([tier, mods]) => Object.keys(mo
 const unowned = allMods.filter((m) => !OWNED.has(m));
 must('every module of every tier is owned by at least one section', unowned.length === 0, unowned.join(', ') || 'all owned');
 must('every declared section was written', SECTION === ORDER.length, `${SECTION} of ${ORDER.length}`);
+
+must('no unrendered template placeholder reaches the digest', !OUT.some((l) => l.includes('${')), OUT.find((l) => l.includes('${')));
 
 const failed = ASSERTS.filter((a) => !a.pass);
 if (failed.length) {

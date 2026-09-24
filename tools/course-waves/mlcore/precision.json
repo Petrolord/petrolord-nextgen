@@ -1,0 +1,26 @@
+{
+ "coefficient": {
+  "decimals": 6,
+  "match": "^(?:akpara_ols_nphi_coef_us_ft_per_vv|isuama_l2_phic_coef_per_vv|isuama_nphi_coef_after_three_updates_per_vv|oboria_logistic_rt_coef_per_ohmm|oboria_ridge_gr_coef_us_ft_per_gapi)$"
+ },
+ "condition": {
+  "decimals": 6,
+  "match": "^(?:isuama_scaled_condition_attrs)$"
+ },
+ "error": {
+  "decimals": 6,
+  "match": "^(?:akpara_ols_residual_se_us_ft|akpara_test_rmse_us_ft|isuama_lc_test_rmse_three_wells_us_ft|isuama_perm_nphi_mean_drop_us_ft|oboria_fold2_test_rmse_us_ft|oboria_leak_optimism_rmse_us_ft)$"
+ },
+ "prediction": {
+  "decimals": 6,
+  "match": "^(?:isuama_pred_dt_first_row_us_ft)$"
+ },
+ "scaler": {
+  "decimals": 6,
+  "match": "^(?:akpara_gr_train_scale_gapi|akpara_rhob_train_centre_g_cm3)$"
+ },
+ "score": {
+  "decimals": 6,
+  "match": "^(?:akpara_test_r2|oboria_pay_f1|oboria_test_log_loss)$"
+ }
+}

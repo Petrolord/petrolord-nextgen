@@ -1,0 +1,361 @@
+{
+ "app_slug": "mlcore",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-ridge-and-the-bias-variance-trade",
+   "title": "Ridge and the Bias-Variance Trade",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-a-penalty-on-the-coefficients",
+     "title": "A penalty on the coefficients",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-standardised-and-original-units",
+     "title": "Standardised and original units",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-an-unpenalised-intercept",
+     "title": "An unpenalised intercept",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-effective-degrees-of-freedom",
+     "title": "Effective degrees of freedom",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-bias-and-variance",
+     "title": "Bias and variance as lambda grows",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-k-fold-by-wells",
+   "title": "Cross-Validation by Wells",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-every-well-tested-once",
+     "title": "Every well tested once",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-round-robin-folds",
+     "title": "Round robin folds and their sizes",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-leave-one-well-out",
+     "title": "Leave one well out",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-choosing-lambda-by-wells",
+     "title": "Choosing lambda by wells",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-leakage",
+   "title": "Leakage",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-what-leakage-is",
+     "title": "What leakage is",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-features-that-name-a-well",
+     "title": "Features that name a well",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-optimism-of-a-random-split",
+     "title": "The optimism of a random split",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-when-a-random-split-flatters-nothing",
+     "title": "When a random split flatters nothing",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-scaling-can-leak-too",
+     "title": "Scaling can leak too",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-logistic-regression",
+   "title": "Logistic Regression",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-a-label-from-a-stated-rule",
+     "title": "A label from a stated rule",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-probabilities-and-log-odds",
+     "title": "Probabilities and log odds",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-reading-the-fitted-coefficients",
+     "title": "Reading the fitted coefficients",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-threshold-at-one-half",
+     "title": "The threshold at one half",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-confusion-matrix",
+   "title": "The Confusion Matrix and Its Ratios",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-rows-true-columns-predicted",
+     "title": "Rows true, columns predicted",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-precision-and-recall",
+     "title": "Precision and recall",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-harmonic-mean-and-its-averages",
+     "title": "The harmonic mean, macro and weighted",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-zero-denominator",
+     "title": "A zero denominator",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-roc-auc-and-log-loss",
+   "title": "ROC, AUC and Log Loss",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-roc-curve-and-tied-scores",
+     "title": "The ROC curve and tied scores",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-auc-as-a-probability",
+     "title": "AUC as a probability",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-log-loss-and-its-clip",
+     "title": "Log loss and its clip",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

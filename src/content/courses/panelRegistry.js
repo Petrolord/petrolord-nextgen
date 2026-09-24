@@ -270,6 +270,10 @@ export const PANELS = {
   'dq-checks-explorer': React.lazy(() => import('@/components/course/panels/dataqc/ChecksExplorer')),
   'dq-outliers-explorer': React.lazy(() => import('@/components/course/panels/dataqc/OutliersExplorer')),
   'dq-monitor-explorer': React.lazy(() => import('@/components/course/panels/dataqc/MonitorExplorer')),
+  // D2 Machine Learning on Well Data (academy module data_ai)
+  'ml-fit-explorer': React.lazy(() => import('@/components/course/panels/mlcore/FitExplorer')),
+  'ml-validate-explorer': React.lazy(() => import('@/components/course/panels/mlcore/ValidateExplorer')),
+  'ml-diagnose-explorer': React.lazy(() => import('@/components/course/panels/mlcore/DiagnoseExplorer')),
 };
 
 export function resolvePanel(id) {

@@ -1,0 +1,23 @@
+-- ============================================================================
+-- D2 EXPERT DEEP SEED: Machine Learning on Well Data, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/mlcore/advanced.
+--
+-- What this tier owns: WHEN THE ENGINE REFUSES, STOPS OR EXTRAPOLATES. The
+-- condition number raw and scaled, the refusal limit and the NIST reference
+-- problems (Longley, Filip refused, what a digit means); complete and
+-- quasi-complete separation and the exact test before any iteration; Newton
+-- steps, the stopping rule in coefficient units, step halving and a fit that
+-- stops early; permutation importance with its seed and repeats, and the
+-- learning curve counted in wells; a missing log predicted, range checked and
+-- written back; conventions that are choices. Digest sections 17 to 25, and
+-- section 26.
+--
+-- THE TRAP THE TIER IS BUILT ON. A number the engine returns is only as good as
+-- the rule it states: a refusal declines digits nobody can vouch for, a warning
+-- says the fit stopped early, and a range check sees only the rows that leave
+-- the range. The Expert capstone grades six Expert quantities.
+-- ============================================================================

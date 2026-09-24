@@ -1,0 +1,22 @@
+-- ============================================================================
+-- D2 PROFESSIONAL DEEP SEED: Machine Learning on Well Data, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/mlcore/intermediate.
+--
+-- What this tier owns: VALIDATING A MODEL. Ridge, its unpenalised intercept,
+-- effective degrees of freedom and the bias-variance trade; cross-validation by
+-- whole wells, round robin folds and leave one well out; leakage through
+-- features that name a well, and a random split that flatters nothing;
+-- logistic regression on a stated pay rule, log odds and the threshold at one
+-- half; the confusion matrix, precision, recall and F1, macro and weighted, and
+-- a zero denominator; ROC with tied scores, AUC as a probability, and log loss
+-- with its clip. Digest sections 11 to 16, and section 26.
+--
+-- THE TRAP THE TIER IS BUILT ON. Every validation number carries its split and
+-- its seed, and a leak needs a path from a test row's well to the prediction.
+-- The Professional capstone grades six Professional quantities and grades no
+-- condition number, separation test, Newton trace or importance.
+-- ============================================================================
