@@ -31,13 +31,13 @@ The one split pointed at lambda 100 for the attribute set, where it scored 5.759
 
 ## The one row where the attributes read lower
 
-At lambda 1000 the attribute set reads 8.982593 against 9.044393 for the logs. That is no evidence for the attributes. A penalty that strong has shrunk every coefficient toward zero and every prediction toward the training mean. Both figures read higher than the logs at any lower lambda. Compare settings where the models are doing work.
+At lambda 1000 the attribute set reads 8.982593 against 9.044393 for the logs. That is no evidence for the attributes. A penalty that strong has shrunk every coefficient toward zero and every prediction toward the training mean. Both figures read higher than the logs at any lower lambda.
 
 ## What a choice made this way means
 
 The chosen setting, GR, RHOB and NPHI at lambda 10, is the lowest mean of twelve tried, on one set of folds. The gap between lambda 10 and lambda 0 for the logs, 5.826789 against 5.888677, is small, and the previous lesson showed that leave one well out reverses those two. The gap between the logs and the attribute set holds under both schemes. Report the grid you searched, k and the seed, and the mean you chose, so a reader can see how close the runner-up was.
 
-The grid itself is part of the choice. Twelve settings were compared here, six lambdas on each of two feature sets, and every one of them was scored on the same three folds. A setting that was never tried cannot win, and a grid searched until something scores well has used the folds to choose, and the winning mean can then flatter the choice. Decide the grid before you look at the scores, and print all of it.
+The grid itself is part of the choice. Twelve settings were compared here, six lambdas on each of two feature sets, all scored on the same three folds. A setting that was never tried cannot win, and a grid searched until something scores well has used the folds to choose, and the winning mean can then flatter the choice. Decide the grid before you look at the scores, and print all of it.
 
 The fold mean of the chosen setting is also the expected error you carry forward: an estimate for a new well like the nine, quoted as "k-fold by wells, k 3, seed 5".
 
