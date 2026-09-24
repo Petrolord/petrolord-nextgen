@@ -54,7 +54,7 @@ WHAT THE ENGINE DOES NOT DO, checked here against its exports:
 
 # SECTION 2: The Ekene production wells, their seed and their planted structure (owned by Associate m01 and Associate m06 and Professional m06 and Expert m03)
 
-Every series in this course comes from one generator, d4_fields.mjs, which draws through the canonical mulberry32 and randomNormal of lib/stats on one stated seed, 20260925, shapes each decline with engines/dca/arps.js calculateArpsHyperbolic, and rounds every rate to 0.1 bbl/d. The same inputs give the same series anywhere. The Ekene field is synthetic.
+Every series in this course comes from one generator, d4_fields.mjs, which draws through the canonical mulberry32 and randomNormal of lib/stats on one stated seed, 20260925, shapes each decline with engines/dca/arps.js calculateArpsHyperbolic, and rounds every rate to the tenth of a bbl/d. The same inputs give the same series anywhere. The Ekene field is synthetic.
 
 6 producing wells carry a monthly average oil rate in bbl/d, oldest month first. Month index 0 is the first month on production, and every index in this course counts from 0.
 
@@ -119,7 +119,7 @@ Each row is a real call. The message column is the engine's `error` string, verb
 | `fitSmoothing` | one month, damped with an initialTrend | `y` | y has 1 value: 'damped' with an initialTrend needs at least 2 (the first sets the level, the second is the first scored forecast) |
 | `fitSmoothing` | alpha of 1.2 | `alpha` | alpha must be a number from 0 to 1 (inclusive) |
 | `fitSmoothing` | alpha of -0.1 | `alpha` | alpha must be a number from 0 to 1 (inclusive) |
-| `fitSmoothing` | beta as text | `beta` | beta must be a number from 0 to 1 (inclusive) |
+| `fitSmoothing` | beta as a word | `beta` | beta must be a number from 0 to 1 (inclusive) |
 | `fitSmoothing` | a beta on ses | `beta` | beta applies to 'holt' and 'damped' only: 'ses' has no trend |
 | `fitSmoothing` | an initialTrend on ses | `initialTrend` | initialTrend applies to 'holt' and 'damped' only: 'ses' has no trend |
 | `fitSmoothing` | a phi on ses | `phi` | phi applies to 'damped' only: 'ses' has no trend to damp |
@@ -272,7 +272,7 @@ WITH AN initialTrend GIVEN, y_2 is not spent: an `initialTrend` of -25.000000 (s
 
 THE MEAN SQUARED ERROR divides the SSE by the scored errors only; the basis reads: "SSE / number of scored errors". Here SSE 29230.297102 over 46 errors is MSE 635.441241 (derived check: 635.441241).
 
-THE h-STEP FORECAST is l_n + h b_n, a straight line from the final state: l_n 207.198880, b_n -5.798385. Steps 1, 2, 3 and 12: 201.400495, 195.602110, 189.803725, 137.618258.
+THE h-STEP FORECAST is l_n + h b_n, a straight line from the final state: l_n 207.198880, b_n -5.798385. Steps 1: 201.400495, 2: 195.602110, 3: 189.803725, 12: 137.618258.
 
 A TREND THAT RUNS BELOW ZERO. EKENE-P5 declines steeply to a low tail (its last month 11.100000 bbl/d). Holt fitted on it (alpha 0.704467, beta 0.473028) ends on a trend of -0.702187 bbl/d per month, and its straight-line forecast crosses zero: step 16 is 0.078646 and step 17 is -0.623541. A rate cannot be negative; the method does not know that, and the engine returns the line as computed. The damped trend fitted on the same well (section 7) is 6.569332 at step 24.
 
@@ -340,7 +340,7 @@ A parameter on its bound is a fitted value like any other; it says the SSE was s
 
 A FLAT SSE SURFACE. Golden `holt-linear-exact`: the exact line 10, 12, 14, 16, 18, 20, 22, 24. Every alpha and beta give SSE 0, so the grid tie keeps its first point, alpha 0 and beta 0, and the search makes 0 moves. The parameters are not identified: any pair would fit as well. The forecasts 26.000000, 28.000000, 30.000000 continue the line.
 
-# SECTION 9: One well forecast, end to end (owned by Associate m06 l01 and Associate m06 l03)
+# SECTION 9: The Associate workflow, end to end (owned by Associate m06 l01 and Associate m06 l03)
 
 The Associate workflow on EKENE-P4, the noisy allocation, in order:
 
@@ -441,9 +441,9 @@ A SHUT-IN MONTH IN THE ACTUALS. EKENE-P2, holt fitted on months 0 to 19, forecas
 | 24 | 0.000000 | 339.129629 | -339.129629 | 200.000000 |
 | 25 | 456.100000 | 322.579918 | 133.520082 | 34.293958 |
 
-MAPE is null, and the reason reads: "MAPE is undefined: actual[2] is 0 and MAPE divides by each actual". MAPE divides by each actual, and a shut-in month has none to divide by; the engine reports no number rather than drop the month. sMAPE is 108.172490: every shut-in term scores 200, the top of its scale, whatever non-zero forecast is made. The other metrics are numbers: MAE 209.968065, RMSE 258.102385, MASE 5.427746.
+MAPE is null, and the reason reads: "MAPE is undefined: actual[2] is 0 and MAPE divides by each actual". MAPE divides by each actual, and a shut-in month has none to divide by; the engine reports no number rather than drop the month. sMAPE is 108.172490: every shut-in term scores 200.000000, the top of its scale, whatever non-zero forecast is made. The other metrics are numbers: MAE 209.968065, RMSE 258.102385, MASE 5.427746.
 
-THE 0/0 TERM. A month with actual 0 and forecast 0 scores 0 in sMAPE. Stated actuals 0 and 100: forecasts 0 and 90 give sMAPE 5.263158; forecasts 5 and 90 give 105.263158. MAPE is null in both (the first actual is 0).
+THE 0/0 TERM. A month with actual 0 and forecast 0 scores 0 in sMAPE. Stated actuals 0, 100: forecasts 0, 90 give sMAPE 5.263158; forecasts 5, 90 give 105.263158. MAPE is null in both (the first actual is 0).
 
 A LOW RATE TAIL. EKENE-P5, fitted on months 0 to 35 and scored on months 36 to 47, where the rate runs from 24.600000 to 11.100000 bbl/d:
 
@@ -498,7 +498,7 @@ PARAMETERS HELD FROM THE FIRST WINDOW. With `refit` false the parameters are est
 
 Held parameters are cheaper and test one parameter set on later data; refitting tests the whole procedure as it would be run each month. Either is honest, because at every origin only months before the origin were used. Say which was run.
 
-THE LAST ORIGIN. Origin 42 with horizon 6 on 48 months is accepted (42 + 6 = 48); origin 43 is refused (section 3).
+THE LAST ORIGIN. Origin 42 with horizon 6 on 48 months is accepted (42 + 6 = 48); origin 43 is refused (section 22).
 
 # SECTION 15: Leakage: scoring months the fit has already seen (owned by Professional m04 l05 and Professional m01 l05)
 
@@ -635,7 +635,7 @@ The basis reads: "per step, lib/stats quantile at 0.1, 0.5, 0.9 of the simulated
 
 THE QUANTILE RULE, shown with lib/stats quantile (the function the engine calls) on stated sorted values 1, 2, ..., n:
 
-| n (stated) | idx = n x 0.1 | 10th percentile | 50th percentile | 90th percentile |
+| n (stated) | idx = n x p at p = 0.1 | 10th percentile | 50th percentile | 90th percentile |
 | --- | --- | --- | --- | --- |
 | 10 | 1.000000 | 1.500000 | 5.500000 | 9.500000 |
 | 9 | 0.900000 | 1.000000 | 5.000000 | 9.000000 |
@@ -646,7 +646,7 @@ With n 10 the 10th percentile is the mean of the 1st and 2nd smallest (idx 1 who
 
 THE LABELS. Production is an outcome where more is better, and the platform labels outcomes by exceedance: "P90 means a 90% probability the actual quantity meets or exceeds this value, per SPE PRMS." So P90 is the LOW case, the 10th percentile of the simulated paths, and P10 the HIGH case, the 90th percentile. Keys `P90`, `P50` and `P10` carry those values, and P90 <= P50 <= P10 at every step (checked in section 18).
 
-NEGATIVE RATES REPORTED AS ZERO. With `nonNegative` true (the default) a percentile below 0 is reported as 0 and counted in `clippedToZero`; the basis reads: "a negative percentile is reported as 0 (clippedToZero counts them)". EKENE-P5, holt, h 12, seed 11: 11 of the 36 percentiles (derived, 3 per step x 12 steps) are reported as 0. The last three steps, both ways:
+NEGATIVE RATES REPORTED AS ZERO. With `nonNegative` true (the default) a percentile below 0 is reported as 0 and counted in `clippedToZero`; the basis reads: "a negative percentile is reported as 0 (clippedToZero counts them)". EKENE-P5, holt, h 12, seed 11: 11 of the 36 percentiles (derived, three per step x 12 steps) are reported as 0. The last three steps, both ways:
 
 | step | P90, nonNegative true | P90, nonNegative false | P50, nonNegative true | P50, nonNegative false |
 | --- | --- | --- | --- | --- |
@@ -672,7 +672,7 @@ INTERVALS WIDEN WITH EVERY STEP. The P10 less the P90 of the damped EKENE-P1 int
 
 A MONTH PASSED AS A DAY. fitArpsModel reads dated rates and measures time in days. The engine passes month k as day k, so qi is per month-step and Di is per month; the basis reads: "step k is passed as day k, so qi is per step and Di per step; t = 0 at index 0, the first positive value". EKENE-P1's Di 0.060069 is per month (the generator stated 0.06 per month and b 0.5). Quoted per day, per year or as an effective decline it is a different number; this course quotes it per month.
 
-PRINTED ALIKE. EKENE-P1's b prints 0.500000 and is 0.49999999999999994 as returned: fitArpsModel's b grid accumulates steps of 0.05 in floating point, so a grid value is not the decimal it prints as. It differs from 0.500000 by 5.55e-17.
+PRINTED ALIKE. EKENE-P1's b prints 0.500000 and is 0.49999999999999994 as returned: fitArpsModel's b grid accumulates its steps in floating point, so a grid value is not the decimal it prints as. It differs from 0.500000 by 5.55e-17.
 
 SHUT-IN MONTHS DROPPED. fitArpsModel drops zero and negative rates before fitting; the basis reads: "fitArpsModel drops zero and negative values (shut-in months) before fitting". EKENE-P2 uses 45 of its 48 months: the 3 shut-in months are dropped, and the months after them keep their own time index, so the gap stays in the time axis.
 
@@ -724,30 +724,30 @@ A boundary is where a rule changes its answer. Every rule has its own, and each 
 
 | function | rule | at the boundary | across it |
 | --- | --- | --- | --- |
-| `fitSmoothing` | ses length | 2 values fitted | 1 refused |
-| `fitSmoothing` | holt and damped length | 3 values fitted | 2 refused |
-| `fitSmoothing` | holt and damped with an initialTrend | 2 values fitted | 1 refused |
-| `fitSmoothing` | alpha and beta given | 0 and 1 accepted (inclusive) | -0.1 and 1.2 refused |
-| `fitSmoothing` | phi given | any value above 0 and at most 1 (0.01 and 1 accepted) | 0 and 1.05 refused |
+| `fitSmoothing` | ses length | 2 values accepted | 1 refused |
+| `fitSmoothing` | holt and damped length | 3 values accepted | 2 refused |
+| `fitSmoothing` | holt and damped with an initialTrend | 2 values accepted | 1 refused |
+| `fitSmoothing` | alpha and beta given | 0 and 1 accepted (inclusive) | -0.1, 1.2 refused |
+| `fitSmoothing` | phi given | any value above 0 and at most 1 (0.01, 1 accepted) | 0, 1.05 refused |
 | `fitSmoothing` | phi fitted | 0.8 and 0.98 reached (inclusive: EKENE-P4 on 0.8, golden `damped-phi-at-upper-bound` on 0.98) | never searched outside |
-| `fitSmoothing, arpsForecast` | h | 0 and 10000 accepted | -1, 1.5 and 10001 refused |
+| `fitSmoothing, arpsForecast` | h | 0 and 10000 accepted | -1, 1.5, 10001 refused |
 | `forecastIntervals` | h | 1 accepted | 0 refused |
 | `forecastIntervals` | nSims | 1 and 100000 accepted | 0 and 100001 refused |
-| `forecastIntervals` | seed | 0 and 4294967295 accepted | -1 and 2.5 refused |
+| `forecastIntervals` | seed | 0 and 4294967295 accepted | -1, 2.5 refused |
 | `forecastIntervals` | the residual pool | 2 scored residuals accepted (holt on 4 values, ses on 3) | 1 refused (holt on 3, ses on 2) |
 | `every function` | series length | 100000 values fitted by fitSmoothing | 100001 refused by all six |
 | `backtest, compareWithArps` | the last origin | o + horizon = n accepted | o + horizon > n refused |
-| `backtest` | the first origin | the method's minimum length accepted (ses 2, holt and damped 3) | one less refused |
+| `backtest` | the first origin | the method's fitting length accepted (ses 2, holt and damped 3) | one less refused |
 | `compareWithArps` | the first origin | 3 accepted for every method list | 2 refused, even for ses alone |
 | `backtest` | origins | 5000 origins accepted | 5001 refused |
 | `accuracy` | MAPE | every actual non-zero: a number | any actual 0: null with the reason |
 | `accuracy, backtest` | MASE scale | Q > 0 and more than m training values: a number | Q = 0, or m values or fewer: null with the reason |
-| `arpsForecast` | positive values | 3 fitted | 2 refused |
+| `arpsForecast` | positive values | 3 fitted (zeros around them dropped) | 2 refused |
 | `forecastIntervals` | nonNegative | a percentile at or above 0 reported as simulated | below 0 reported as 0 and counted in clippedToZero |
 
 THE CAPS trade time for size: a series stops at 100000 values, h at 10000, the bootstrap at 100000 paths, a backtest or comparison at 5000 origins and a fit at 200000 SSE evaluations. A longer study is split into calls, or its step raised.
 
-LENGTH RULES, per function (the minimum a call needs):
+LENGTH RULES, per function, each probed by the engine (the fewest values a call accepts; one fewer is refused):
 
 | function | method | fewest values accepted |
 | --- | --- | --- |
@@ -799,7 +799,7 @@ Every convention below is a choice the engine states in its basis. Each has a re
 
 WHAT IS NOT BUILT. No seasonal smoothing (Holt-Winters); no multiplicative error or trend forms; no ARIMA; no regression of rate on other variables such as choke, pressure or water cut (the machine learning course regresses); no neural network; no analytic prediction interval; no parameter uncertainty in the bootstrap; no filling of a missing month (refused); no EUR or cumulative (the decline curve analysis course); no Arps of its own (engines/dca/arps.js, imported).
 
-WRITING THE FORECAST NOTE names: the well and months; the method and parameters, fitted or given, with any bound; the backtest that tested it (origins, horizon, step, refit) and its MASE with m against the Arps baseline on the same origins; the intervals with method, nSims, seed and nonNegative, and the P90 read as the low case; every null metric with its reason.
+WRITING THE FORECAST NOTE names: the well and months; the method and parameters, fitted or given, with any bound; the backtest that tested it (origins, horizon, step, refit) and its MASE with m against the Arps baseline on the same origins; the intervals with method, nSims, seed and nonNegative, and the P90 read as the low case; every metric the engine could not give, with its reason from notes.
 
 # SECTION 25: Vocabulary this course legislates before a word is written (owned by Associate m01 and Professional m01 and Expert m01)
 

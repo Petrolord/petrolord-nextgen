@@ -33,7 +33,21 @@ export const PRINTED_DECIMALS = {
 
 /**
  * The eighteen graded fields in their published order: tier, key, quantity
- * class, and the tolerance this wave STATED. A key names what it measures and
+ * class, and the tolerance this wave STATED.
+ *
+ * WHY SOME STATED TOLERANCES ARE WIDER THAN 1e-9. A field computed with every
+ * smoothing parameter given (or not from a smoothing fit at all) is exact
+ * arithmetic, and is stated at 1e-9 so the printed precision sets it. A field
+ * that rests on FITTED parameters rests on where a search stops on a flat SSE
+ * surface: the engine's compass search and the stdlib oracle's zoom grid reach
+ * the same minimum by different roads and agree on the parameters to about
+ * 1e-8 relative, which a forecast 24 steps out or a bootstrap percentile
+ * carries as up to 1e-5 bbl/d. Each such field is stated at 10 x the worst
+ * engine-oracle disagreement oracle_check.py measured on it, rounded up to a
+ * power of ten, so an answer from any correct optimiser at six decimals grades
+ * the same; oracle_check.py re-measures and requires the disagreement to stay
+ * within a tenth of the tolerance, and discriminate.mjs requires every wrong
+ * method to land outside it. A key names what it measures and
  * carries its unit as a suffix where it has one (bopd: bbl/d; bopd2: (bbl/d)^2;
  * pct: percent; per_month: a decline per month; MASE and alpha have no unit).
  */
@@ -45,24 +59,24 @@ export const GRADED_FIELDS = [
   ['beginner', 'agulu2_ses_alpha', 'parameter', 1e-9],
   ['beginner', 'agulu1_holt_fixed_mse_bopd2', 'mse', 1e-9],
   ['beginner', 'agulu1_holt_beta', 'parameter', 1e-9],
-  ['beginner', 'agulu1_holt_forecast_h12_bopd', 'rate', 1e-9],
+  ['beginner', 'agulu1_holt_forecast_h12_bopd', 'rate', 1e-5],
   ['beginner', 'agulu1_damped_phi', 'parameter', 1e-9],
-  ['beginner', 'agulu1_damped_forecast_h24_bopd', 'rate', 1e-9],
+  ['beginner', 'agulu1_damped_forecast_h24_bopd', 'rate', 1e-4],
   // Professional: two wells, one shut in inside its hold-out. TESTING A
   // FORECAST HONESTLY: a hold-out sMAPE, MASE and mean error, a backtest RMSE,
   // a held-parameter backtest MASE and a by-horizon MAE.
-  ['intermediate', 'nanka1_holdout_damped_smape_pct', 'percent', 1e-9],
+  ['intermediate', 'nanka1_holdout_damped_smape_pct', 'percent', 1e-5],
   ['intermediate', 'nanka1_holdout_damped_mase', 'scaled', 1e-9],
-  ['intermediate', 'nanka1_holdout_damped_me_bopd', 'rate', 1e-9],
-  ['intermediate', 'nanka2_backtest_holt_rmse_bopd', 'rate', 1e-9],
+  ['intermediate', 'nanka1_holdout_damped_me_bopd', 'rate', 1e-5],
+  ['intermediate', 'nanka2_backtest_holt_rmse_bopd', 'rate', 1e-5],
   ['intermediate', 'nanka2_backtest_holt_held_mase', 'scaled', 1e-9],
-  ['intermediate', 'nanka2_backtest_holt_step6_mae_bopd', 'rate', 1e-9],
+  ['intermediate', 'nanka2_backtest_holt_step6_mae_bopd', 'rate', 1e-5],
   // Expert: two wells, one shut in and worked over. UNCERTAINTY, THE ARPS
   // BASELINE AND THE ENGINE'S RULES: a seeded bootstrap P90, P10 and P50, an
   // Arps Di per month, and a comparison's Arps MASE and best MASE.
-  ['advanced', 'umunze1_damped_p90_h12_bopd', 'rate', 1e-9],
-  ['advanced', 'umunze1_damped_p10_h12_bopd', 'rate', 1e-9],
-  ['advanced', 'umunze1_damped_p50_h6_bopd', 'rate', 1e-9],
+  ['advanced', 'umunze1_damped_p90_h12_bopd', 'rate', 1e-4],
+  ['advanced', 'umunze1_damped_p10_h12_bopd', 'rate', 1e-5],
+  ['advanced', 'umunze1_damped_p50_h6_bopd', 'rate', 1e-5],
   ['advanced', 'umunze1_arps_di_per_month', 'decline', 1e-9],
   ['advanced', 'umunze2_compare_arps_mase', 'scaled', 1e-9],
   ['advanced', 'umunze2_compare_best_mase', 'scaled', 1e-9],

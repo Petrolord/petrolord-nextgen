@@ -1,0 +1,361 @@
+{
+ "app_slug": "forecastml",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-forecast-errors",
+   "title": "Forecast Errors",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-actual-minus-forecast",
+     "title": "Actual minus forecast",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-bias-and-the-mean-error",
+     "title": "Bias and the mean error",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-mae-and-rmse",
+     "title": "The mean absolute error and the root mean squared error",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-scoring-against-actuals",
+     "title": "Scoring a forecast against actuals",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-in-sample-and-out-of-sample",
+     "title": "In-sample and out-of-sample errors",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-percentage-errors",
+   "title": "Percentage Errors",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-the-mean-absolute-percentage-error",
+     "title": "The mean absolute percentage error",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-shut-in-month-in-the-actuals",
+     "title": "A shut-in month in the actuals",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-symmetric-percentage-error",
+     "title": "The symmetric percentage error",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-low-rate-tail",
+     "title": "A low rate tail",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-the-scaled-error",
+   "title": "The Scaled Error",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-naive-forecast-as-a-yardstick",
+     "title": "The naive forecast as a yardstick",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-mase-and-its-scale",
+     "title": "The mean absolute scaled error and its scale",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-lag-of-the-naive-forecast",
+     "title": "The lag of the naive forecast",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-flat-training-window",
+     "title": "A flat training window",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-rolling-origin-backtests",
+   "title": "Rolling-Origin Backtests",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-origins-and-the-expanding-window",
+     "title": "Origins and the expanding window",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-horizon-and-step",
+     "title": "Horizon and step",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-refitting-at-every-origin",
+     "title": "Refitting at every origin",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-parameters-held-from-the-first-window",
+     "title": "Parameters held from the first window",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-leakage-from-the-future",
+     "title": "Leakage from the future",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-pooling-backtest-errors",
+   "title": "Pooling Backtest Errors",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-pooled-over-origins-and-steps",
+     "title": "Pooled over origins and steps",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-errors-by-horizon",
+     "title": "Errors by horizon",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-each-origin-its-own-scale",
+     "title": "Each origin scaled by its own training window",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-one-origin-can-leave-a-metric-undefined",
+     "title": "One origin can leave a metric undefined",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-methods-compared",
+   "title": "Methods Compared, End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-whole-workflow",
+     "title": "The testing workflow in order",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-workover-changes-the-winner",
+     "title": "A workover changes the winner",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-up-a-backtest",
+     "title": "Writing up a backtest",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

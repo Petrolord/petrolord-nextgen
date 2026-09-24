@@ -160,6 +160,7 @@ const TRAIN = 36; // the teaching hold-out: train on months 0 to 35, score month
 const BT = { firstOrigin: 24, horizon: 6, step: 6 }; // the teaching backtest
 const SEED_PI = 11; // the teaching bootstrap seed
 const CHECK_TOL = 1e-9; // the tolerance of the derived checks the digest names
+const MINSTEP = `2^-${-Math.log2(FC.DEFAULTS.PS_MIN_STEP)}`; // the stop step, printed from the export
 let STEP = 0;
 const step = () => { STEP += 1; return STEP; };
 
@@ -222,7 +223,7 @@ must('DEFAULTS carries fourteen values, each described here', Object.keys(FC.DEF
 must('DEFAULTS is frozen', Object.isFrozen(FC.DEFAULTS), 'frozen');
 must('PS_MIN_STEP is 2^-30', FC.DEFAULTS.PS_MIN_STEP === 2 ** -30, FC.DEFAULTS.PS_MIN_STEP);
 w();
-w(`\`PS_MIN_STEP\` is 2^-30 of each parameter's range (${eX(FC.DEFAULTS.PS_MIN_STEP)}).`);
+w(`\`PS_MIN_STEP\` is 2^-${S(-Math.log2(FC.DEFAULTS.PS_MIN_STEP))} of each parameter's range (${eX(FC.DEFAULTS.PS_MIN_STEP)}).`);
 w();
 w('WHAT THE ENGINE DOES NOT DO, checked here against its exports:');
 must('no export fills or imputes a missing value', !Object.keys(FC).some((k) => /impute|fill|interpolat/i.test(k)), Object.keys(FC).join(','));
@@ -238,7 +239,7 @@ w(`- Its exported names are, in full: ${Object.keys(FC).sort().join(', ')}.`);
 /* ============================================================ SECTION 2 */
 
 section('dataset', 'The Ekene production wells, their seed and their planted structure', ['Associate m01', 'Associate m06', 'Professional m06', 'Expert m03']);
-w(`Every series in this course comes from one generator, d4_fields.mjs, which draws through the canonical mulberry32 and randomNormal of lib/stats on one stated seed, ${S(T.SEED)}, shapes each decline with engines/dca/arps.js calculateArpsHyperbolic, and rounds every rate to 0.1 bbl/d. The same inputs give the same series anywhere. The Ekene field is synthetic.`);
+w(`Every series in this course comes from one generator, d4_fields.mjs, which draws through the canonical mulberry32 and randomNormal of lib/stats on one stated seed, ${S(T.SEED)}, shapes each decline with engines/dca/arps.js calculateArpsHyperbolic, and rounds every rate to the tenth of a bbl/d. The same inputs give the same series anywhere. The Ekene field is synthetic.`);
 w();
 w(`${WELLS.length} producing wells carry a monthly average oil rate in bbl/d, oldest month first. Month index 0 is the first month on production, and every index in this course counts from 0.`);
 w();
@@ -284,47 +285,47 @@ const REFUSALS = [
   ['fitSmoothing', { y: Y6.slice(0, 1), method: 'ses' }, 'y', 'one month, ses'],
   ['fitSmoothing', { y: Y6.slice(0, 2), method: 'holt' }, 'y', 'two months, holt'],
   ['fitSmoothing', { y: Y6.slice(0, 1), method: 'damped', initialTrend: -100 }, 'y', 'one month, damped with an initialTrend'],
-  ['fitSmoothing', { y: Y1, method: 'ses', alpha: 1.2 }, 'alpha', 'alpha of 1.2'],
-  ['fitSmoothing', { y: Y1, method: 'ses', alpha: -0.1 }, 'alpha', 'alpha of -0.1'],
-  ['fitSmoothing', { y: Y1, method: 'holt', beta: '0.2' }, 'beta', 'beta as text'],
+  ['fitSmoothing', { y: Y1, method: 'ses', alpha: 1.2 }, 'alpha', (a) => `alpha of ${S(a.alpha)}`],
+  ['fitSmoothing', { y: Y1, method: 'ses', alpha: -0.1 }, 'alpha', (a) => `alpha of ${S(a.alpha)}`],
+  ['fitSmoothing', { y: Y1, method: 'holt', beta: 'high' }, 'beta', 'beta as a word'],
   ['fitSmoothing', { y: Y1, method: 'ses', beta: 0.2 }, 'beta', 'a beta on ses'],
   ['fitSmoothing', { y: Y1, method: 'ses', initialTrend: -20 }, 'initialTrend', 'an initialTrend on ses'],
   ['fitSmoothing', { y: Y1, method: 'ses', phi: 0.9 }, 'phi', 'a phi on ses'],
   ['fitSmoothing', { y: Y1, method: 'holt', phi: 0.9 }, 'phi', 'a phi on holt'],
-  ['fitSmoothing', { y: Y1, method: 'damped', phi: 0 }, 'phi', 'phi of 0'],
-  ['fitSmoothing', { y: Y1, method: 'damped', phi: 1.05 }, 'phi', 'phi of 1.05'],
+  ['fitSmoothing', { y: Y1, method: 'damped', phi: 0 }, 'phi', (a) => `phi of ${S(a.phi)}`],
+  ['fitSmoothing', { y: Y1, method: 'damped', phi: 1.05 }, 'phi', (a) => `phi of ${S(a.phi)}`],
   ['fitSmoothing', { y: Y1, method: 'ses', initialLevel: Number.NaN }, 'initialLevel', 'an initialLevel that is not a number'],
   ['fitSmoothing', { y: Y1, method: 'holt', initialTrend: 'down' }, 'initialTrend', 'an initialTrend given as a word'],
-  ['fitSmoothing', { y: Y1, method: 'ses', h: -1 }, 'h', 'h of -1'],
-  ['fitSmoothing', { y: Y1, method: 'ses', h: 1.5 }, 'h', 'h of 1.5'],
+  ['fitSmoothing', { y: Y1, method: 'ses', h: -1 }, 'h', (a) => `h of ${S(a.h)}`],
+  ['fitSmoothing', { y: Y1, method: 'ses', h: 1.5 }, 'h', (a) => `h of ${S(a.h)}`],
   ['fitSmoothing', { y: Y1, method: 'ses', h: FC.DEFAULTS.MAX_H + 1 }, 'h', `h of ${FC.DEFAULTS.MAX_H + 1}`],
   ['fitSmoothing', { y: TILE(FC.DEFAULTS.MAX_POINTS + 1), method: 'ses', alpha: 0.5 }, 'y', `${FC.DEFAULTS.MAX_POINTS + 1} values (EKENE-P1 repeated)`],
   ['accuracy', { actual: [], forecast: [] }, 'actual', 'no actuals'],
   ['accuracy', { actual: Y1.slice(36, 39), forecast: Y1.slice(33, 35) }, 'forecast', 'three actuals and two forecasts'],
   ['accuracy', { actual: Y1.slice(36, 39), forecast: [230, null, 220] }, 'forecast[1]', 'a null forecast'],
-  ['accuracy', { actual: Y1.slice(36, 39), forecast: Y1.slice(33, 36), m: 0 }, 'm', 'a lag of 0'],
+  ['accuracy', { actual: Y1.slice(36, 39), forecast: Y1.slice(33, 36), m: 0 }, 'm', (a) => `a lag of ${S(a.m)}`],
   ['accuracy', { actual: Y1.slice(36, 39), forecast: Y1.slice(33, 36), insample: [] }, 'insample', 'an empty training series'],
-  ['forecastIntervals', { y: Y1, method: 'holt', h: 0, seed: SEED_PI }, 'h', 'h of 0'],
+  ['forecastIntervals', { y: Y1, method: 'holt', h: 0, seed: SEED_PI }, 'h', (a) => `h of ${S(a.h)}`],
   ['forecastIntervals', { y: Y1, method: 'holt', h: H }, 'seed', 'no seed'],
   ['forecastIntervals', { y: Y1, method: 'holt', h: H, seed: -1 }, 'seed', 'a negative seed'],
-  ['forecastIntervals', { y: Y1, method: 'holt', h: H, seed: 2.5 }, 'seed', 'a seed of 2.5'],
+  ['forecastIntervals', { y: Y1, method: 'holt', h: H, seed: 2.5 }, 'seed', (a) => `a seed of ${S(a.seed)}`],
   ['forecastIntervals', { y: Y1, method: 'holt', h: H, seed: SEED_PI, nSims: 0 }, 'nSims', 'no paths'],
   ['forecastIntervals', { y: Y1, method: 'holt', h: H, seed: SEED_PI, nSims: FC.DEFAULTS.MAX_SIMS + 1 }, 'nSims', `${FC.DEFAULTS.MAX_SIMS + 1} paths`],
   ['forecastIntervals', { y: Y1, method: 'holt', h: H, seed: SEED_PI, nonNegative: 'yes' }, 'nonNegative', 'a word where true or false belongs'],
   ['forecastIntervals', { y: Y6, method: 'holt', h: H, seed: SEED_PI }, 'y', `EKENE-P6, ${Y6.length} months, holt`],
   ['forecastIntervals', { y: Y6.slice(0, 2), method: 'ses', h: H, seed: SEED_PI }, 'y', 'two months, ses'],
-  ['backtest', { y: Y1, method: 'holt', firstOrigin: 24, horizon: 0 }, 'horizon', 'a horizon of 0'],
-  ['backtest', { y: Y1, method: 'holt', firstOrigin: 24, horizon: 6, step: 0 }, 'step', 'a step of 0'],
+  ['backtest', { y: Y1, method: 'holt', firstOrigin: 24, horizon: 0 }, 'horizon', (a) => `a horizon of ${S(a.horizon)}`],
+  ['backtest', { y: Y1, method: 'holt', firstOrigin: 24, horizon: 6, step: 0 }, 'step', (a) => `a step of ${S(a.step)}`],
   ['backtest', { y: Y6, method: 'holt', firstOrigin: 3, horizon: 1 }, 'y', `EKENE-P6, ${Y6.length} months, holt, horizon 1`],
-  ['backtest', { y: Y1, method: 'holt', firstOrigin: 2, horizon: 6 }, 'firstOrigin', 'holt from origin 2'],
-  ['backtest', { y: Y1, method: 'ses', firstOrigin: 45, horizon: 6 }, 'firstOrigin', 'origin 45 with a horizon of 6 on 48 months'],
+  ['backtest', { y: Y1, method: 'holt', firstOrigin: 2, horizon: 6 }, 'firstOrigin', (a) => `holt from origin ${S(a.firstOrigin)}`],
+  ['backtest', { y: Y1, method: 'ses', firstOrigin: 45, horizon: 6 }, 'firstOrigin', (a) => `origin ${S(a.firstOrigin)} with a horizon of ${S(a.horizon)} on ${S(a.y.length)} months`],
   ['backtest', { y: Y1, method: 'ses', firstOrigin: 24, horizon: 6, refit: 'no' }, 'refit', 'a word where true or false belongs'],
-  ['backtest', { y: Y1, method: 'ses', firstOrigin: 24, horizon: 6, m: 1.5 }, 'm', 'a lag of 1.5'],
+  ['backtest', { y: Y1, method: 'ses', firstOrigin: 24, horizon: 6, m: 1.5 }, 'm', (a) => `a lag of ${S(a.m)}`],
   ['backtest', { y: TILE(nOrig + 2), method: 'ses', alpha: 0.5, firstOrigin: 2, horizon: 1 }, 'step', `${nOrig + 2} values (EKENE-P1 repeated), step 1`],
   ['backtest', { y: Y1, method: 'ses', firstOrigin: 24, horizon: 6, beta: 0.2 }, 'beta', 'a beta on ses'],
   ['arpsForecast', { y: Y6.slice(0, 2) }, 'y', 'two months'],
   ['arpsForecast', { y: Y1, modelType: 'Duong' }, 'modelType', 'a model it does not offer'],
-  ['arpsForecast', { y: Y1, h: -1 }, 'h', 'h of -1'],
+  ['arpsForecast', { y: Y1, h: -1 }, 'h', (a) => `h of ${S(a.h)}`],
   ['arpsForecast', { y: TWO_POS }, 'y', `${TWO_POS.length} months, two of them producing`],
   ['arpsForecast', { y: RISING }, 'y', `a rising series (${list(RISING.map(S))})`],
   ['arpsForecast', { y: RISING, modelType: 'Exponential' }, 'y', 'the same rising series, exponential only'],
@@ -334,11 +335,12 @@ const REFUSALS = [
   ['compareWithArps', { y: Y1, firstOrigin: 24, horizon: 6, rankBy: 'r2' }, 'rankBy', 'a metric it does not rank by'],
   ['compareWithArps', { y: Y1, firstOrigin: 24, horizon: 6, arpsModel: 'Duong' }, 'arpsModel', 'an Arps model it does not offer'],
   ['compareWithArps', { y: Y1, firstOrigin: 24, horizon: 6, refit: 1 }, 'refit', 'a number where true or false belongs'],
-  ['compareWithArps', { y: Y1, firstOrigin: 24, horizon: 6, m: 0 }, 'm', 'a lag of 0'],
-  ['compareWithArps', { y: Y1, firstOrigin: 2, horizon: 6 }, 'firstOrigin', 'origin 2'],
+  ['compareWithArps', { y: Y1, firstOrigin: 24, horizon: 6, m: 0 }, 'm', (a) => `a lag of ${S(a.m)}`],
+  ['compareWithArps', { y: Y1, firstOrigin: 2, horizon: 6 }, 'firstOrigin', (a) => `origin ${S(a.firstOrigin)}`],
   ['compareWithArps', { y: withNull, firstOrigin: 24, horizon: 6 }, `y[${NULL_AT}]`, `EKENE-P1 with month ${NULL_AT} null`],
 ];
-const REF_OUT = REFUSALS.map(([fn, args, field, what]) => {
+const REF_OUT = REFUSALS.map(([fn, args, field, what0]) => {
+  const what = typeof what0 === 'function' ? what0(args) : what0;
   const r = refusal(`${fn} with ${what}`, FC[fn](args), field);
   return [fn, what, r.field, r.error];
 });
@@ -358,23 +360,27 @@ w('A MISSING MONTH IS REFUSED BY NAME at the first index it meets, counting from
 w();
 w(`UNDEFINED METRICS ARE NOT REFUSALS. A MAPE or a MASE the arithmetic cannot give is returned as \`null\`, and its reason goes in \`notes\`; the other metrics are still returned. Every such reason this course meets, each from a real call, verbatim:`);
 w();
-const accZero = success('accuracy with a zero actual', FC.accuracy({ actual: Y2.slice(20, 26), forecast: Y2.slice(14, 20), insample: Y2.slice(0, 20) }));
+const Z2 = [20, 26]; // stated: EKENE-P2 months 20 to 25, the shut-in inside
+const accZero = success('accuracy with a zero actual', FC.accuracy({ actual: Y2.slice(...Z2), forecast: Y2.slice(Z2[0] - 6, Z2[0]), insample: Y2.slice(0, Z2[0]) }));
 const accNoIns = success('accuracy with no insample', FC.accuracy({ actual: Y1.slice(36, 39), forecast: Y1.slice(33, 36) }));
 const accShort = success('accuracy with a one-month insample', FC.accuracy({ actual: Y1.slice(36, 39), forecast: Y1.slice(33, 36), insample: Y1.slice(0, 1) }));
-const accFlat = success('accuracy with a flat insample', FC.accuracy({ actual: Y3.slice(9, 12), forecast: [1500, 1500, 1500], insample: Y3.slice(0, 9) }));
-const accLag = success('accuracy with a lag of 12 on 12 months', FC.accuracy({ actual: Y1.slice(12, 15), forecast: Y1.slice(9, 12), insample: Y1.slice(0, 12), m: 12 }));
-const btFlat = success('backtest with an origin inside the plateau', FC.backtest({ y: Y3, method: 'ses', alpha: A_SES, firstOrigin: 6, horizon: 3, step: 6 }));
-const btLag = success('backtest with a lag of 12 at origin 12', FC.backtest({ y: Y1, method: 'ses', alpha: A_SES, firstOrigin: 12, horizon: 3, step: 12, m: 12 }));
-const btShut = success('backtest whose actuals include the shut-in', FC.backtest({ y: Y2, method: 'ses', alpha: A_SES, firstOrigin: 20, horizon: 3, step: 6 }));
+const PLAT = WSPEC['EKENE-P3'].plateau;
+const accFlat = success('accuracy with a flat insample', FC.accuracy({ actual: Y3.slice(PLAT, PLAT + 3), forecast: [1500, 1500, 1500], insample: Y3.slice(0, PLAT) }));
+const LAG = 12; // stated: a monthly seasonal lag
+const accLag = success('accuracy with a lag of 12 on 12 months', FC.accuracy({ actual: Y1.slice(LAG, LAG + 3), forecast: Y1.slice(LAG - 3, LAG), insample: Y1.slice(0, LAG), m: LAG }));
+const O_FLAT = 6; // stated: an origin inside the plateau
+const btFlat = success('backtest with an origin inside the plateau', FC.backtest({ y: Y3, method: 'ses', alpha: A_SES, firstOrigin: O_FLAT, horizon: 3, step: 6 }));
+const btLag = success('backtest with a lag of 12 at origin 12', FC.backtest({ y: Y1, method: 'ses', alpha: A_SES, firstOrigin: LAG, horizon: 3, step: LAG, m: LAG }));
+const btShut = success('backtest whose actuals include the shut-in', FC.backtest({ y: Y2, method: 'ses', alpha: A_SES, firstOrigin: Z2[0], horizon: 3, step: 6 }));
 const NOTES = [
-  ['`accuracy`', 'EKENE-P2 months 20 to 25 as actuals (the shut-in inside)', 'mape', accZero],
+  ['`accuracy`', `EKENE-P2 months ${Z2[0]} to ${Z2[1] - 1} as actuals (the shut-in inside)`, 'mape', accZero],
   ['`accuracy`', 'no insample', 'mase', accNoIns],
   ['`accuracy`', 'an insample of one month', 'mase', accShort],
-  ['`accuracy`', 'EKENE-P3 months 0 to 8 (the plateau) as insample', 'mase', accFlat],
-  ['`accuracy`', 'a lag m of 12 on an insample of 12 months', 'mase', accLag],
-  ['`backtest`', 'EKENE-P3, ses, first origin 6 (inside the plateau)', 'mase', btFlat.overall],
-  ['`backtest`', 'EKENE-P1, ses, lag m 12, first origin 12', 'mase', btLag.overall],
-  ['`backtest`', 'EKENE-P2, ses, first origin 20 (the shut-in in the actuals)', 'mape', btShut.overall],
+  ['`accuracy`', `EKENE-P3 months 0 to ${PLAT - 1} (the plateau) as insample`, 'mase', accFlat],
+  ['`accuracy`', `a lag m of ${LAG} on an insample of ${LAG} months`, 'mase', accLag],
+  ['`backtest`', `EKENE-P3, ses, first origin ${O_FLAT} (inside the plateau)`, 'mase', btFlat.overall],
+  ['`backtest`', `EKENE-P1, ses, lag m ${LAG}, first origin ${LAG}`, 'mase', btLag.overall],
+  ['`backtest`', `EKENE-P2, ses, first origin ${Z2[0]} (the shut-in in the actuals)`, 'mape', btShut.overall],
 ];
 NOTES.forEach(([fn, what, k, r]) => must(`${fn} ${what}: ${k} is null with a note`, r[k] === null && r.notes && typeof r.notes[k] === 'string', r.notes && r.notes[k]));
 table(['function', 'what was passed', 'metric returned as null', 'the reason in notes, verbatim'], NOTES.map(([fn, what, k, r]) => [fn, what, k, r.notes[k]]));
@@ -382,7 +388,7 @@ w();
 w('A backtest reason names the origin it comes from; an `accuracy` reason names the input. Every other metric of those calls is a number.');
 must('the other metrics of the null-MAPE accuracy call are numbers', ['me', 'mae', 'rmse', 'smape', 'mase'].every((k) => typeof accZero[k] === 'number'), 'numbers');
 w();
-w(`WARNINGS. \`fitSmoothing\`, \`forecastIntervals\` and \`backtest\` add \`warnings\` when the compass search stops at ${FC.DEFAULTS.PS_MAX_EVALS} SSE evaluations before its step falls to 2^-30 of the range (\`converged\` false). No fit in this course reaches that cap: every optimiser record this digest reads reports \`converged\` true (asserted at the end of the build).`);
+w(`WARNINGS. \`fitSmoothing\`, \`forecastIntervals\` and \`backtest\` add \`warnings\` when the compass search stops at ${FC.DEFAULTS.PS_MAX_EVALS} SSE evaluations before its step falls to ${MINSTEP} of the range (\`converged\` false). No fit in this course reaches that cap: every optimiser record this digest reads reports \`converged\` true (asserted at the end of the build).`);
 
 /* ============================================================ SECTION 4 */
 
@@ -433,7 +439,7 @@ w();
 w(`At alpha 0 the level never moves from y_1: the forecast is month 0's ${f6(Y1[0])} for ever. At alpha 1 the level is always the newest rate, so each one-step forecast is the month before and the h-step forecast is the last month's ${f6(Y1[Y1.length - 1])}: that is the NAIVE forecast.`);
 w();
 const SESF = Object.fromEntries(WELLS.filter((x) => x.rate.length === T.N_MONTHS).map((x) => [x.well, success(`fitSmoothing ses fitted on ${x.well}`, FC.fitSmoothing({ y: x.rate, method: 'ses', h: 1 }))]));
-w(`ALPHA FITTED, every 48-month well (the fit of ${ref('fit')}):`);
+w(`ALPHA FITTED, every ${T.N_MONTHS}-month well (the fit of ${ref('fit')}):`);
 w();
 table(['well', 'fitted alpha', 'atBounds', 'SSE', 'MSE'], Object.entries(SESF).map(([id, r]) => [id, f6(r.params.alpha), r.optimiser.atBounds.length ? list(r.optimiser.atBounds) : 'none', f6(r.sse), f6(r.mse)]));
 const onOne = Object.entries(SESF).filter(([, r]) => r.params.alpha === 1).map(([id]) => id);
@@ -463,7 +469,7 @@ w(`THE MEAN SQUARED ERROR divides the SSE by the scored errors only; the basis r
 must('mse is sse over nScored', HOLT.mse === HOLT.sse / HOLT.nScored, HOLT.mse);
 w();
 const lastL = HOLT.level[Y1.length - 1]; const lastB = HOLT.trend[Y1.length - 1];
-w(`THE h-STEP FORECAST is l_n + h b_n, a straight line from the final state: l_n ${f6(lastL)}, b_n ${f6(lastB)}. Steps 1, 2, 3 and ${H}: ${[0, 1, 2, H - 1].map((j) => f6(HOLT.forecast[j])).join(', ')}.`);
+w(`THE h-STEP FORECAST is l_n + h b_n, a straight line from the final state: l_n ${f6(lastL)}, b_n ${f6(lastB)}. Steps ${[0, 1, 2, H - 1].map((j) => `${j + 1}: ${f6(HOLT.forecast[j])}`).join(', ')}.`);
 must('the holt forecast is l_n + h b_n', HOLT.forecast.every((v, j) => nearly(v, lastL + (j + 1) * lastB, 1e-12)), 'line');
 w();
 const HOLT5 = success('fitSmoothing holt fitted on EKENE-P5, h 24', FC.fitSmoothing({ y: Y5, method: 'holt', h: 24 }));
@@ -487,24 +493,26 @@ w();
 w(`The first change is phi b_n = ${f6(dsteps[0])} from the final level l_n ${f6(dl)} (final trend b_n ${f6(db)}), and every later change is ${S(PHI_T)} times the one before (checked to ${eX(CHECK_TOL)} on the steps shown).`);
 w();
 const LIMIT = dl + db * PHI_T / (1 - PHI_T);
-const DFAR = success('fitSmoothing damped, the same parameters, h 400', FC.fitSmoothing({ y: Y1, method: 'damped', alpha: A_HOLT, beta: B_HOLT, phi: PHI_T, h: 400 }));
-must('the forecast at step 400 is the limit to 1e-9', nearly(DFAR.forecast[399], LIMIT, 1e-9), `${DFAR.forecast[399]} ${LIMIT}`);
-w(`THE LIMIT. The damped forecast l_n + (phi + phi^2 + ... + phi^h) b_n approaches l_n + b_n phi / (1 - phi) as h grows: ${f6(LIMIT)} here (derived from the final state). The engine's own forecast is ${f6(DAMP.forecast[H - 1])} at step ${H} and ${f6(DFAR.forecast[399])} at step 400 (h 400, stated), the limit to ${eX(CHECK_TOL)}. The damped forecast levels off at a rate; a Holt forecast on the same parameters falls by b_n every step without end.`);
+const HFAR = 400; // stated: a far horizon
+const DFAR = success('fitSmoothing damped, the same parameters, h 400', FC.fitSmoothing({ y: Y1, method: 'damped', alpha: A_HOLT, beta: B_HOLT, phi: PHI_T, h: HFAR }));
+must('the forecast at step 400 is the limit to 1e-9', nearly(DFAR.forecast[HFAR - 1], LIMIT, 1e-9), `${DFAR.forecast[HFAR - 1]} ${LIMIT}`);
+w(`THE LIMIT. The damped forecast l_n + (phi + phi^2 + ... + phi^h) b_n approaches l_n + b_n phi / (1 - phi) as h grows: ${f6(LIMIT)} here (derived from the final state). The engine's own forecast is ${f6(DAMP.forecast[H - 1])} at step ${H} and ${f6(DFAR.forecast[HFAR - 1])} at step ${HFAR} (h ${HFAR}, stated), the limit to ${eX(CHECK_TOL)}. The damped forecast levels off at a rate; a Holt forecast on the same parameters falls by b_n every step without end.`);
 w();
 const PHI1 = success('fitSmoothing damped phi 1', FC.fitSmoothing({ y: Y1, method: 'damped', alpha: A_HOLT, beta: B_HOLT, phi: 1, h: H }));
 must('damped with phi 1 is holt exactly', PHI1.sse === HOLT.sse && PHI1.forecast.every((v, j) => v === HOLT.forecast[j]), `${PHI1.sse} ${HOLT.sse}`);
 w(`DAMPED WITH PHI 1 IS HOLT. With phi 1 given, the damped fit returns the same SSE (${f6(PHI1.sse)}) and the same ${H} forecasts as Holt at the same alpha and beta, bit for bit: Holt is the damped method with phi = 1.`);
 w();
 const DFIT = Object.fromEntries(WELLS.filter((x) => x.rate.length === T.N_MONTHS).map((x) => [x.well, success(`fitSmoothing damped fitted on ${x.well}`, FC.fitSmoothing({ y: x.rate, method: 'damped', h: H }))]));
-w(`PHI FITTED AND PHI GIVEN. A FITTED phi is searched from ${S(FC.DEFAULTS.PHI_MIN)} to ${S(FC.DEFAULTS.PHI_MAX)} inclusive; a GIVEN phi may be any number above 0 and at most 1. Every 48-month well, damped fitted:`);
+w(`PHI FITTED AND PHI GIVEN. A FITTED phi is searched from ${S(FC.DEFAULTS.PHI_MIN)} to ${S(FC.DEFAULTS.PHI_MAX)} inclusive; a GIVEN phi may be any number above 0 and at most 1. Every ${T.N_MONTHS}-month well, damped fitted:`);
 w();
 table(['well', 'alpha', 'beta', 'phi', 'atBounds', 'SSE', `forecast at step ${H}`], Object.entries(DFIT).map(([id, r]) => [id, f6(r.params.alpha), f6(r.params.beta), f6(r.params.phi), r.optimiser.atBounds.length ? list(r.optimiser.atBounds) : 'none', f6(r.sse), f6(r.forecast[H - 1])]));
 must('every fitted phi is inside the search range', Object.values(DFIT).every((r) => r.params.phi >= FC.DEFAULTS.PHI_MIN && r.params.phi <= FC.DEFAULTS.PHI_MAX), 'range');
 const phiLow = Object.entries(DFIT).filter(([, r]) => r.params.phi === FC.DEFAULTS.PHI_MIN).map(([id]) => id);
 must('EKENE-P4 fits phi on its lower bound', phiLow.includes('EKENE-P4'), phiLow.join(','));
 w();
-const PHI05 = success('fitSmoothing damped phi 0.5 given', FC.fitSmoothing({ y: Y1, method: 'damped', phi: 0.5, h: H }));
-w(`${list(phiLow)} ${phiLow.length === 1 ? 'fits' : 'fit'} phi on the lower bound ${S(FC.DEFAULTS.PHI_MIN)}, listed in \`atBounds\`. A phi below the range can only be given: phi 0.5 (stated) is accepted, held fixed (\`fixed\` lists ${list(PHI05.fixed)}), and alpha and beta are fitted around it: alpha ${f6(PHI05.params.alpha)}, beta ${f6(PHI05.params.beta)}, SSE ${f6(PHI05.sse)}.`);
+const PHI_LOW = 0.5; // stated: a phi below the search range
+const PHI05 = success('fitSmoothing damped phi 0.5 given', FC.fitSmoothing({ y: Y1, method: 'damped', phi: PHI_LOW, h: H }));
+w(`${list(phiLow)} ${phiLow.length === 1 ? 'fits' : 'fit'} phi on the lower bound ${S(FC.DEFAULTS.PHI_MIN)}, listed in \`atBounds\`. A phi below the range can only be given: phi ${S(PHI_LOW)} (stated) is accepted, held fixed (\`fixed\` lists ${list(PHI05.fixed)}), and alpha and beta are fitted around it: alpha ${f6(PHI05.params.alpha)}, beta ${f6(PHI05.params.beta)}, SSE ${f6(PHI05.sse)}.`);
 must('phi 0.5 given is fixed and alpha, beta free', PHI05.fixed.join() === 'phi' && PHI05.free.join() === 'alpha,beta', PHI05.fixed);
 
 /* ============================================================ SECTION 8 */
@@ -523,14 +531,14 @@ w();
 w(`The final SSE is at most the grid SSE on every method (the search only moves downhill). The grid alone has ${FC.DEFAULTS.GRID_ALPHA.length} points for ses, ${FC.DEFAULTS.GRID_ALPHA.length ** 2} for holt and ${FC.DEFAULTS.GRID_ALPHA.length ** 2 * FC.DEFAULTS.GRID_PHI.length} for damped (derived, ${FC.DEFAULTS.GRID_ALPHA.length} alpha values, ${FC.DEFAULTS.GRID_ALPHA.length} beta values, ${FC.DEFAULTS.GRID_PHI.length} phi values); the remaining evaluations are the compass search.`);
 FITS3.forEach(([m, r]) => must(`${m}: evaluations exceed the grid`, r.optimiser.evaluations > FC.DEFAULTS.GRID_ALPHA.length ** r.free.filter((f) => f !== 'phi').length * (r.free.includes('phi') ? FC.DEFAULTS.GRID_PHI.length : 1), r.optimiser.evaluations));
 w();
-w(`THE STOP RULE. The search stops, \`converged\` true, when a sweep at a step of at most 2^-30 of each range improves nothing; \`finalStep\` is that fraction. Holt on EKENE-P1 ends at ${eX(HF.optimiser.finalStep)} after ${HF.optimiser.halvings} halvings from ${S(FC.DEFAULTS.PS_STEP)}. A search that reaches ${FC.DEFAULTS.PS_MAX_EVALS} evaluations first stops with \`converged\` false and a warning (${ref('refusals')}).`);
-must('holt final step is at most 2^-30', HF.optimiser.finalStep <= 2 ** -30, HF.optimiser.finalStep);
+w(`THE STOP RULE. The search stops, \`converged\` true, when a sweep at a step of at most ${MINSTEP} of each range improves nothing; \`finalStep\` is that fraction. Holt on EKENE-P1 ends at ${eX(HF.optimiser.finalStep)} after ${HF.optimiser.halvings} halvings from ${S(FC.DEFAULTS.PS_STEP)}. A search that reaches ${FC.DEFAULTS.PS_MAX_EVALS} evaluations first stops with \`converged\` false and a warning (${ref('refusals')}).`);
+must('holt final step is at most the stop step', HF.optimiser.finalStep <= FC.DEFAULTS.PS_MIN_STEP, HF.optimiser.finalStep);
 w();
 const HELD = success('fitSmoothing holt with the fitted parameters given', FC.fitSmoothing({ y: Y1, method: 'holt', ...HF.params, h: H }));
 must('holding the fitted parameters reproduces the fit exactly', HELD.sse === HF.sse && HELD.forecast.every((v, j) => v === HF.forecast[j]) && HELD.optimiser === null, `${HELD.sse} ${HF.sse}`);
 w(`HOLDING THE FIT. Giving the fitted alpha and beta back as fixed parameters returns the same SSE and forecasts bit for bit, with \`optimiser\` null and the basis "${HELD.basis.fit}".`);
 w();
-w('PARAMETERS ON THEIR BOUNDS. `optimiser.atBounds` lists every fitted parameter that ended exactly on a bound of its box (alpha and beta 0 or 1, phi 0.8 or 0.98). Across the fits of this digest:');
+w(`PARAMETERS ON THEIR BOUNDS. \`optimiser.atBounds\` lists every fitted parameter that ended exactly on a bound of its box (alpha and beta 0 or 1, phi ${S(FC.DEFAULTS.PHI_MIN)} or ${S(FC.DEFAULTS.PHI_MAX)}). Across the fits of this digest:`);
 w();
 const BOUNDROWS = [
   ...Object.entries(SESF).map(([id, r]) => [id, 'ses', r]),
@@ -539,7 +547,7 @@ const BOUNDROWS = [
 ].filter(([, , r]) => r.optimiser.atBounds.length);
 table(['well', 'method', 'atBounds'], BOUNDROWS.map(([id, m, r]) => [id, m, list(r.optimiser.atBounds)]));
 w();
-w('A parameter on its bound is a fitted value like any other; it says the SSE was still falling at the edge of the box. For alpha at 1 that is the naive forecast; for phi at 0.8 it is the strongest damping the fit may choose.');
+w(`A parameter on its bound is a fitted value like any other; it says the SSE was still falling at the edge of the box. For alpha at 1 that is the naive forecast; for phi at ${S(FC.DEFAULTS.PHI_MIN)} it is the strongest damping the fit may choose.`);
 w();
 const gHL = golden('holt-linear-exact');
 const HL = success('golden holt-linear-exact', FC.fitSmoothing(clone(gHL.args)));
@@ -548,7 +556,7 @@ w(`A FLAT SSE SURFACE. Golden \`holt-linear-exact\`: the exact line ${list(gHL.a
 
 /* ============================================================ SECTION 9 */
 
-section('workflow', 'One well forecast, end to end', ['Associate m06 l01', 'Associate m06 l03']);
+section('workflow', 'The Associate workflow, end to end', ['Associate m06 l01', 'Associate m06 l03']);
 w(`The Associate workflow on EKENE-P4, the noisy allocation, in order:`);
 w();
 const WF = ['ses', 'holt', 'damped'].map((m) => [m, success(`fitSmoothing ${m} fitted on EKENE-P4, h ${H}`, FC.fitSmoothing({ y: Y4, method: m, h: H }))]);
@@ -592,7 +600,7 @@ table(['golden case', 'engine field', 'NIST printed', 'engine, six decimals', 'd
 ]);
 const g61 = golden('nist-6431-ses-alpha-0.1');
 w();
-w(`The first case is the handbook's 12-point series ${list(g61.args.y.map(S))} at alpha ${S(g61.args.alpha)}: the same start (l_1 = y_1) and the same MSE divisor (the scored errors) as this engine, which is why the figures agree.`);
+w(`The first case is the handbook's ${g61.args.y.length}-point series ${list(g61.args.y.map(S))} at alpha ${S(g61.args.alpha)}: the same start (l_1 = y_1) and the same MSE divisor (the scored errors) as this engine, which is why the figures agree.`);
 const gHF = golden('nist-6434-holt-fit');
 const HFN = success('golden nist-6434-holt-fit', FC.fitSmoothing(clone(gHF.args)));
 w();
@@ -621,7 +629,7 @@ w();
 const INS = Object.fromEntries(Object.entries(HO).map(([m, r]) => [m, absMean(r.residuals.slice(r.scoredFrom))]));
 w(`IN-SAMPLE AND OUT-OF-SAMPLE. The in-sample MAE is the mean absolute one-step residual over the fitted months (derived from \`residuals\` from \`scoredFrom\` on); the out-of-sample MAE is the hold-out's, above:`);
 w();
-table(['method', 'in-sample one-step MAE, months 0 to 35 (derived)', `out-of-sample MAE, ${H} steps ahead`], Object.keys(HO).map((m) => [m, f6(INS[m]), f6(ACC[m].mae)]));
+table(['method', `in-sample one-step MAE, months 0 to ${TRAIN - 1} (derived)`, `out-of-sample MAE, ${H} steps ahead`], Object.keys(HO).map((m) => [m, f6(INS[m]), f6(ACC[m].mae)]));
 w();
 w(`The two answer different questions: the in-sample figure scores forecasts one month ahead on months the fit was chosen on; the hold-out scores forecasts up to ${H} months ahead on months it never saw. A method is judged on the second.`);
 
@@ -632,27 +640,29 @@ w(`MAPE is "${ACC.holt.basis.mape}"; sMAPE is "${ACC.holt.basis.smape}". On the 
 w();
 table(['method', 'MAPE (percent)', 'sMAPE (percent)'], Object.entries(ACC).map(([m, a]) => [m, f6(a.mape), f6(a.smape)]));
 w();
-const P2F = success('fitSmoothing holt fitted on EKENE-P2 months 0 to 19, h 6', FC.fitSmoothing({ y: Y2.slice(0, 20), method: 'holt', h: 6 }));
-const P2A = success('accuracy of that forecast on months 20 to 25', FC.accuracy({ actual: Y2.slice(20, 26), forecast: P2F.forecast, insample: Y2.slice(0, 20) }));
+const P2F = success('fitSmoothing holt fitted on EKENE-P2 months 0 to 19, h 6', FC.fitSmoothing({ y: Y2.slice(0, Z2[0]), method: 'holt', h: Z2[1] - Z2[0] }));
+const P2A = success('accuracy of that forecast on months 20 to 25', FC.accuracy({ actual: Y2.slice(...Z2), forecast: P2F.forecast, insample: Y2.slice(0, Z2[0]) }));
 planted(1, P2A.mape === null && /is 0 and MAPE divides by each actual/.test(P2A.notes.mape), P2A.notes && P2A.notes.mape);
-w(`A SHUT-IN MONTH IN THE ACTUALS. EKENE-P2, holt fitted on months 0 to 19, forecast 6 steps, scored on months 20 to 25, which include the shut-in months 22 to 24 at rate 0 (stated):`);
+const SH2 = WSPEC['EKENE-P2'].shutIn;
+w(`A SHUT-IN MONTH IN THE ACTUALS. EKENE-P2, holt fitted on months 0 to ${Z2[0] - 1}, forecast ${Z2[1] - Z2[0]} steps, scored on months ${Z2[0]} to ${Z2[1] - 1}, which include the shut-in months ${SH2[0]} to ${SH2[1]} at rate 0 (stated):`);
 w();
-table(['month', 'actual', 'holt forecast', 'error', 'term of sMAPE, 200 |e| / (|y| + |f|) (derived)'], Y2.slice(20, 26).map((a, j) => [S(20 + j), f6(a), f6(P2F.forecast[j]), f6(a - P2F.forecast[j]), f6((200 * Math.abs(a - P2F.forecast[j])) / (Math.abs(a) + Math.abs(P2F.forecast[j])))]));
+table(['month', 'actual', 'holt forecast', 'error', 'term of sMAPE, 200 |e| / (|y| + |f|) (derived)'], Y2.slice(...Z2).map((a, j) => [S(Z2[0] + j), f6(a), f6(P2F.forecast[j]), f6(a - P2F.forecast[j]), f6((200 * Math.abs(a - P2F.forecast[j])) / (Math.abs(a) + Math.abs(P2F.forecast[j])))]));
 w();
-w(`MAPE is null, and the reason reads: "${P2A.notes.mape}". MAPE divides by each actual, and a shut-in month has none to divide by; the engine reports no number rather than drop the month. sMAPE is ${f6(P2A.smape)}: every shut-in term scores 200, the top of its scale, whatever non-zero forecast is made. The other metrics are numbers: MAE ${f6(P2A.mae)}, RMSE ${f6(P2A.rmse)}, MASE ${f6(P2A.mase)}.`);
-must('each shut-in term of sMAPE is 200', [22, 23, 24].every((t) => (200 * Math.abs(Y2[t] - P2F.forecast[t - 20])) / (Math.abs(Y2[t]) + Math.abs(P2F.forecast[t - 20])) === 200 || nearly((200 * Math.abs(Y2[t] - P2F.forecast[t - 20])) / (Math.abs(Y2[t]) + Math.abs(P2F.forecast[t - 20])), 200, 1e-12)), '200');
+w(`MAPE is null, and the reason reads: "${P2A.notes.mape}". MAPE divides by each actual, and a shut-in month has none to divide by; the engine reports no number rather than drop the month. sMAPE is ${f6(P2A.smape)}: every shut-in term scores ${f6(200)}, the top of its scale, whatever non-zero forecast is made. The other metrics are numbers: MAE ${f6(P2A.mae)}, RMSE ${f6(P2A.rmse)}, MASE ${f6(P2A.mase)}.`);
+must('each shut-in term of sMAPE is 200', [SH2[0], SH2[0] + 1, SH2[1]].every((t) => (200 * Math.abs(Y2[t] - P2F.forecast[t - 20])) / (Math.abs(Y2[t]) + Math.abs(P2F.forecast[t - 20])) === 200 || nearly((200 * Math.abs(Y2[t] - P2F.forecast[t - 20])) / (Math.abs(Y2[t]) + Math.abs(P2F.forecast[t - 20])), 200, 1e-12)), '200');
 w();
-const Z0 = success('accuracy with a matched zero', FC.accuracy({ actual: [0, 100], forecast: [0, 90] }));
-const Z1 = success('accuracy with an unmatched zero', FC.accuracy({ actual: [0, 100], forecast: [5, 90] }));
-w(`THE 0/0 TERM. A month with actual 0 and forecast 0 scores 0 in sMAPE. Stated actuals 0 and 100: forecasts 0 and 90 give sMAPE ${f6(Z0.smape)}; forecasts 5 and 90 give ${f6(Z1.smape)}. MAPE is null in both (the first actual is 0).`);
+const ZA = [0, 100]; const ZF0 = [0, 90]; const ZF1 = [5, 90]; // stated
+const Z0 = success('accuracy with a matched zero', FC.accuracy({ actual: ZA, forecast: ZF0 }));
+const Z1 = success('accuracy with an unmatched zero', FC.accuracy({ actual: ZA, forecast: ZF1 }));
+w(`THE 0/0 TERM. A month with actual 0 and forecast 0 scores 0 in sMAPE. Stated actuals ${list(ZA.map(S))}: forecasts ${list(ZF0.map(S))} give sMAPE ${f6(Z0.smape)}; forecasts ${list(ZF1.map(S))} give ${f6(Z1.smape)}. MAPE is null in both (the first actual is 0).`);
 must('the matched zero term scores 0 and the unmatched 200', nearly(Z0.smape, (0 + 200 * 10 / 190) / 2, 1e-12) && nearly(Z1.smape, (200 + 200 * 10 / 190) / 2, 1e-12) && Z0.mape === null && Z1.mape === null, `${Z0.smape} ${Z1.smape}`);
 w();
-const LOWT = Y5.slice(36);
-const L5 = success('fitSmoothing damped fitted on EKENE-P5 months 0 to 35, h 12', FC.fitSmoothing({ y: Y5.slice(0, 36), method: 'damped', h: 12 }));
-const L5A = success('accuracy on EKENE-P5 months 36 to 47', FC.accuracy({ actual: LOWT, forecast: L5.forecast, insample: Y5.slice(0, 36) }));
-const L5H = success('fitSmoothing holt fitted on EKENE-P5 months 0 to 35, h 12', FC.fitSmoothing({ y: Y5.slice(0, 36), method: 'holt', h: 12 }));
-const L5HA = success('accuracy of holt on EKENE-P5 months 36 to 47', FC.accuracy({ actual: LOWT, forecast: L5H.forecast, insample: Y5.slice(0, 36) }));
-w(`A LOW RATE TAIL. EKENE-P5, fitted on months 0 to 35 and scored on months 36 to 47, where the rate runs from ${f6(LOWT[0])} to ${f6(LOWT[LOWT.length - 1])} bbl/d:`);
+const LOWT = Y5.slice(TRAIN);
+const L5 = success('fitSmoothing damped fitted on EKENE-P5 months 0 to 35, h 12', FC.fitSmoothing({ y: Y5.slice(0, TRAIN), method: 'damped', h: H }));
+const L5A = success('accuracy on EKENE-P5 months 36 to 47', FC.accuracy({ actual: LOWT, forecast: L5.forecast, insample: Y5.slice(0, TRAIN) }));
+const L5H = success('fitSmoothing holt fitted on EKENE-P5 months 0 to 35, h 12', FC.fitSmoothing({ y: Y5.slice(0, TRAIN), method: 'holt', h: H }));
+const L5HA = success('accuracy of holt on EKENE-P5 months 36 to 47', FC.accuracy({ actual: LOWT, forecast: L5H.forecast, insample: Y5.slice(0, TRAIN) }));
+w(`A LOW RATE TAIL. EKENE-P5, fitted on months 0 to ${TRAIN - 1} and scored on months ${TRAIN} to ${Y5.length - 1}, where the rate runs from ${f6(LOWT[0])} to ${f6(LOWT[LOWT.length - 1])} bbl/d:`);
 w();
 table(['method', 'MAE (bbl/d)', 'MAPE (percent)', 'sMAPE (percent)', 'MASE'], [['damped', L5A], ['holt', L5HA]].map(([m, a]) => [m, f6(a.mae), f6(a.mape), f6(a.smape), f6(a.mase)]));
 w();
@@ -660,9 +670,10 @@ w(`A small error on a small rate is a large percentage: holt's MAE of ${f6(L5HA.
 must('the low tail holt MAE is below the P1 holt MAE and its MAPE above', L5HA.mae < ACC.holt.mae && L5HA.mape > ACC.holt.mape, `${L5HA.mae} ${ACC.holt.mae}`);
 w();
 const ASYM_A = 100; // stated actual
-const OVER = success('accuracy, a forecast 50 over', FC.accuracy({ actual: [ASYM_A], forecast: [ASYM_A + 50] }));
-const UNDER = success('accuracy, a forecast 50 under', FC.accuracy({ actual: [ASYM_A], forecast: [ASYM_A - 50] }));
-w(`sMAPE IS NOT SYMMETRIC IN THE ERROR. Stated actual ${ASYM_A}: a forecast of ${ASYM_A + 50} (50 high) scores sMAPE ${f6(OVER.smape)}, and a forecast of ${ASYM_A - 50} (50 low) scores ${f6(UNDER.smape)}; MAPE is ${f6(OVER.mape)} for both. The same size of error costs more when the forecast is low, because the forecast is in the denominator.`);
+const ASYM_E = 50; // stated error size
+const OVER = success('accuracy, a forecast 50 over', FC.accuracy({ actual: [ASYM_A], forecast: [ASYM_A + ASYM_E] }));
+const UNDER = success('accuracy, a forecast 50 under', FC.accuracy({ actual: [ASYM_A], forecast: [ASYM_A - ASYM_E] }));
+w(`sMAPE IS NOT SYMMETRIC IN THE ERROR. Stated actual ${ASYM_A}: a forecast of ${ASYM_A + ASYM_E} (${ASYM_E} high) scores sMAPE ${f6(OVER.smape)}, and a forecast of ${ASYM_A - ASYM_E} (${ASYM_E} low) scores ${f6(UNDER.smape)}; MAPE is ${f6(OVER.mape)} for both. The same size of error costs more when the forecast is low, because the forecast is in the denominator.`);
 must('the low forecast costs more sMAPE and the same MAPE', UNDER.smape > OVER.smape && OVER.mape === UNDER.mape, `${OVER.smape} ${UNDER.smape}`);
 
 /* ============================================================ SECTION 13 */
@@ -679,8 +690,8 @@ Object.entries(ACC).forEach(([m, a]) => must(`${m}: MASE is MAE over Q`, nearly(
 w();
 w(`THE SCALE COMES FROM THE TRAINING SERIES, never from the actuals being scored. Scaled instead by the naive error of the hold-out months themselves (derived, a wrong method), holt would read ${f6(ACC.holt.mae / absMean(ACT.slice(1).map((v, j) => v - ACT[j])))}: the scale then depends on the months being forecast, and the figure is not MASE.`);
 w();
-const M12 = success('accuracy of holt with lag 12', FC.accuracy({ actual: ACT, forecast: HO.holt.forecast, insample: Y1.slice(0, TRAIN), m: 12 }));
-w(`THE LAG. \`m\` is 1 by default, the month before. With m 12 (stated), the naive forecast is the same month a year before: Q = ${f6(M12.maseScale)} over ${TRAIN - 12} differences, and holt's MASE becomes ${f6(M12.mase)} against ${f6(ACC.holt.mase)} at m 1. A declining well has no season, and on a decline the year-old month is far from this month, so the lag-12 scale is larger and MASE smaller. The lag is part of the figure: quote MASE with its m.`);
+const M12 = success('accuracy of holt with lag 12', FC.accuracy({ actual: ACT, forecast: HO.holt.forecast, insample: Y1.slice(0, TRAIN), m: LAG }));
+w(`THE LAG. \`m\` is 1 by default, the month before. With m ${LAG} (stated), the naive forecast is the same month a year before: Q = ${f6(M12.maseScale)} over ${TRAIN - LAG} differences, and holt's MASE becomes ${f6(M12.mase)} against ${f6(ACC.holt.mase)} at m 1. A declining well has no season, and on a decline the year-old month is far from this month, so the lag-${LAG} scale is larger and MASE smaller. The lag is part of the figure: quote MASE with its m.`);
 must('the lag 12 scale is larger than the lag 1 scale', M12.maseScale > ACC.holt.maseScale, `${M12.maseScale} ${ACC.holt.maseScale}`);
 w();
 w(`A FLAT TRAINING WINDOW. EKENE-P3's first ${WSPEC['EKENE-P3'].plateau} months are the plateau, exactly ${f6(WSPEC['EKENE-P3'].plateauRate)} each. As a training series every difference is 0, so Q = 0 and MASE would divide by zero; the engine returns null and says so: "${accFlat.notes.mase}". A training series of m values or fewer has no naive difference at all: "${accShort.notes.mase}".`);
@@ -708,9 +719,10 @@ table(['refit', 'ME', 'MAE', 'RMSE', 'MASE'], [['true', B1], ['false', B1H]].map
 w();
 w('Held parameters are cheaper and test one parameter set on later data; refitting tests the whole procedure as it would be run each month. Either is honest, because at every origin only months before the origin were used. Say which was run.');
 w();
-const bExact = success('backtest ses, the last origin exact', FC.backtest({ y: Y1, method: 'ses', alpha: A_SES, firstOrigin: 42, horizon: 6 }));
-must('an origin with o + H = n is the last one', bExact.origins.join() === '42', bExact.origins);
-w(`THE LAST ORIGIN. Origin ${bExact.origins[0]} with horizon 6 on ${Y1.length} months is accepted (${bExact.origins[0]} + 6 = ${Y1.length}); origin 43 is refused (${ref('refusals')}).`);
+const bExact = success('backtest ses, the last origin exact', FC.backtest({ y: Y1, method: 'ses', alpha: A_SES, firstOrigin: Y1.length - BT.horizon, horizon: BT.horizon }));
+must('an origin with o + H = n is the last one', bExact.origins.length === 1 && bExact.origins[0] + BT.horizon === Y1.length, bExact.origins);
+must('one origin later is refused', !!FC.backtest({ y: Y1, method: 'ses', alpha: A_SES, firstOrigin: Y1.length - BT.horizon + 1, horizon: BT.horizon }).error, 'refused');
+w(`THE LAST ORIGIN. Origin ${bExact.origins[0]} with horizon ${BT.horizon} on ${Y1.length} months is accepted (${bExact.origins[0]} + ${BT.horizon} = ${Y1.length}); origin ${bExact.origins[0] + 1} is refused (${ref('boundaries')}).`);
 
 /* ============================================================ SECTION 15 */
 
@@ -718,7 +730,7 @@ section('leakage', 'Leakage: scoring months the fit has already seen', ['Profess
 w(`LEAKAGE is any route by which the months being scored reach the fit. A backtest has none by construction: at every origin only months 0 to o - 1 are fitted. Two leaky routes a learner can take, each run through the engine on EKENE-P1, against the honest one-step backtest from origin ${TRAIN} (horizon 1, step 1, holt refitted):`);
 w();
 const LB = success(`backtest holt EKENE-P1 firstOrigin ${TRAIN} horizon 1 step 1`, FC.backtest({ y: Y1, method: 'holt', firstOrigin: TRAIN, horizon: 1, step: 1 }));
-const FULL = success('fitSmoothing holt fitted on all 48 months', FC.fitSmoothing({ y: Y1, method: 'holt' }));
+const FULL = success('fitSmoothing holt fitted on every month', FC.fitSmoothing({ y: Y1, method: 'holt' }));
 const leakInSample = absMean(FULL.residuals.slice(TRAIN));
 const LBP = success(`backtest holt EKENE-P1 with the full-series parameters held`, FC.backtest({ y: Y1, method: 'holt', firstOrigin: TRAIN, horizon: 1, step: 1, alpha: FULL.params.alpha, beta: FULL.params.beta }));
 const FULLH = success('fitSmoothing holt on all 48 months, the hold-out months included, h 12', FC.fitSmoothing({ y: Y1, method: 'holt', h: H }));
@@ -726,8 +738,8 @@ const leakGap = LB.overall.mae - leakInSample;
 must('parameters fitted on the full series and held give exactly the full fit residuals', LBP.perOrigin.every((r) => r.errors[0] === FULL.residuals[r.origin]), 'identical');
 const LEAK = [
   ['honest: backtest, one step ahead, refitted at each origin', f6(LB.overall.mae), 'none'],
-  ['fitted on all 48 months, scored on its own one-step residuals for months 36 to 47 (derived from residuals)', f6(leakInSample), 'the months scored chose the parameters and fed the state'],
-  ['parameters fitted on all 48 months, then held in a backtest from origin 36', f6(LBP.overall.mae), 'the months scored chose the parameters'],
+  [`fitted on all ${Y1.length} months, scored on its own one-step residuals for months ${TRAIN} to ${Y1.length - 1} (derived from residuals)`, f6(leakInSample), 'the months scored chose the parameters and fed the state'],
+  [`parameters fitted on all ${Y1.length} months, then held in a backtest from origin ${TRAIN}`, f6(LBP.overall.mae), 'the months scored chose the parameters'],
 ];
 table(['route', `MAE on months ${TRAIN} to ${Y1.length - 1}, one step ahead`, 'what leaked'], LEAK);
 w();
@@ -735,7 +747,7 @@ w(`The two leaky routes are the same numbers: holding parameters fitted on the w
 w();
 w(`RANDOM MONTHS. Choosing test months at random and fitting on the rest leaks the future into the past: the months around a test month, before and after it, are in the fit. The engine offers no random split; a smoothing method needs an unbroken series, and its only honest test is an origin with everything after it held back. The machine learning course's well-by-well split is the answer for rows that are not a time series.`);
 w();
-w(`FITTING ON THE TEST WINDOW. A 12-step forecast is only a forecast of months 36 to 47 if it was made from month 35. Fitting on all ${Y1.length} months and then forecasting 12 steps forecasts months ${Y1.length} to ${Y1.length + H - 1}: holt from the full series gives ${f6(FULLH.forecast[0])} at step 1, a forecast for month ${Y1.length}, and cannot be scored against any month of the series.`);
+w(`FITTING ON THE TEST WINDOW. A ${H}-step forecast is only a forecast of months ${TRAIN} to ${Y1.length - 1} if it was made from month ${TRAIN - 1}. Fitting on all ${Y1.length} months and then forecasting ${H} steps forecasts months ${Y1.length} to ${Y1.length + H - 1}: holt from the full series gives ${f6(FULLH.forecast[0])} at step 1, a forecast for month ${Y1.length}, and cannot be scored against any month of the series.`);
 
 /* ============================================================ SECTION 16 */
 
@@ -764,25 +776,26 @@ must('overall MASE is the mean of each error over its own origin scale', nearly(
 const oneQ = absMean(allErr) / QS[QS.length - 1];
 w(`Dividing every error by the last origin's scale instead (derived, a wrong method) gives ${f6(oneQ)} against the engine's ${f6(B1.overall.mase)}.`);
 w();
-const B3 = success('backtest damped EKENE-P3 firstOrigin 6 horizon 6 step 6', FC.backtest({ y: Y3, method: 'damped', firstOrigin: 6, horizon: 6, step: 6 }));
+const B3S = { firstOrigin: O_FLAT, horizon: 6, step: 6 }; // stated
+const B3 = success('backtest damped EKENE-P3 firstOrigin 6 horizon 6 step 6', FC.backtest({ y: Y3, method: 'damped', ...B3S }));
 planted(3, B3.overall.mase === null && B3.perOrigin[0].maseScale === null && B3.perOrigin.slice(1).every((r) => r.maseScale > 0), B3.overall.notes && B3.overall.notes.mase);
-w(`ONE ORIGIN CAN LEAVE A METRIC UNDEFINED. EKENE-P3, damped, first origin 6, horizon 6, step 6 (stated): origins ${list(B3.origins)}. Origin 6 trains on months 0 to 5, all inside the plateau, so its Q is 0 (\`maseScale\` null); the other origins have scales ${list(B3.perOrigin.slice(1).map((r) => f6(r.maseScale)))}. One null scale leaves the overall MASE and every by-horizon MASE null, with the reason: "${B3.overall.notes.mase}". The other metrics are numbers: MAE ${f6(B3.overall.mae)}, sMAPE ${f6(B3.overall.smape)}.`);
+w(`ONE ORIGIN CAN LEAVE A METRIC UNDEFINED. EKENE-P3, damped, first origin ${B3S.firstOrigin}, horizon ${B3S.horizon}, step ${B3S.step} (stated): origins ${list(B3.origins)}. Origin ${B3.origins[0]} trains on months 0 to ${B3.origins[0] - 1}, all inside the plateau, so its Q is 0 (\`maseScale\` null); the other origins have scales ${list(B3.perOrigin.slice(1).map((r) => f6(r.maseScale)))}. One null scale leaves the overall MASE and every by-horizon MASE null, with the reason: "${B3.overall.notes.mase}". The other metrics are numbers: MAE ${f6(B3.overall.mae)}, sMAPE ${f6(B3.overall.smape)}.`);
 w();
 must('every by-horizon MASE is null too', B3.byHorizon.every((h) => h.mase === null), 'null');
-const B3b = success('backtest damped EKENE-P3 firstOrigin 12', FC.backtest({ y: Y3, method: 'damped', firstOrigin: 12, horizon: 6, step: 6 }));
-w(`Starting at origin 12 instead, past the plateau (stated), every origin has a scale and the overall MASE is ${f6(B3b.overall.mase)}. Choosing the origins is part of the test; state them.`);
+const B3b = success('backtest damped EKENE-P3 firstOrigin 12', FC.backtest({ y: Y3, method: 'damped', ...B3S, firstOrigin: B3.origins[1] }));
+w(`Starting at origin ${B3.origins[1]} instead, past the plateau (stated), every origin has a scale and the overall MASE is ${f6(B3b.overall.mase)}. Choosing the origins is part of the test; state them.`);
 
 /* ============================================================ SECTION 17 */
 
 section('comparing', 'Methods compared on one well, and a workover that changes the winner', ['Professional m06', 'Expert m04 l01']);
 const PRE = { firstOrigin: 10, horizon: 3, step: 3 };
 const POST = { firstOrigin: 28, horizon: 6, step: 3 };
-const CPRE = success('compareWithArps on EKENE-P2 months 0 to 21', FC.compareWithArps({ y: Y2.slice(0, 22), ...PRE }));
+const CPRE = success('compareWithArps on EKENE-P2 months 0 to 21', FC.compareWithArps({ y: Y2.slice(0, WSPEC['EKENE-P2'].shutIn[0]), ...PRE }));
 const CPOST = success('compareWithArps on EKENE-P2 from origin 28', FC.compareWithArps({ y: Y2, ...POST }));
 w(`\`compareWithArps\` backtests ses, holt and damped and the Arps baseline on the same origins with the same metrics, and ranks them by MASE unless told otherwise (the Expert tier takes the ranking rules apart). The Professional question is the testing workflow: the same origins, the same horizon, the same metric, for every method. EKENE-P2 before and after its shut-in and workover:`);
 w();
 const cmpRows = (c, lab) => c.rows.map((r) => [lab, r.method, f6(r.mae), f6(r.rmse), f6(r.mape), f6(r.smape), f6(r.mase)]);
-table(['window', 'method', 'MAE', 'RMSE', 'MAPE', 'sMAPE', 'MASE'], [...cmpRows(CPRE, `months 0 to 21, origins ${list(CPRE.origins)}, horizon ${PRE.horizon}`), ...cmpRows(CPOST, `all 48 months, origins ${list(CPOST.origins)}, horizon ${POST.horizon}`)]);
+table(['window', 'method', 'MAE', 'RMSE', 'MAPE', 'sMAPE', 'MASE'], [...cmpRows(CPRE, `months 0 to ${SH2[0] - 1}, origins ${list(CPRE.origins)}, horizon ${PRE.horizon}`), ...cmpRows(CPOST, `all ${Y2.length} months, origins ${list(CPOST.origins)}, horizon ${POST.horizon}`)]);
 w();
 must('before the shut-in arps ranks first', CPRE.best === 'arps', CPRE.ranking);
 must('after the workover a smoothing method ranks first and arps is not first', CPOST.best !== 'arps' && CPOST.ranking.indexOf('arps') > 0, CPOST.ranking);
@@ -796,9 +809,10 @@ table(['first origin', 'origins', 'ranking by MASE', 'best MASE', 'arps MASE'], 
 w();
 w('A smoothing method ranks first from every one of the four, and which smoothing method it is changes with the origins. Report a ranking with its origins, horizon, step and metric.');
 w();
-const C1 = success('compareWithArps EKENE-P1', FC.compareWithArps({ y: Y1, firstOrigin: 30, horizon: 6, step: 3 }));
+const C1S = { firstOrigin: 30, horizon: 6, step: 3 }; // stated
+const C1 = success('compareWithArps EKENE-P1', FC.compareWithArps({ y: Y1, ...C1S }));
 planted(0, C1.best === 'arps', C1.ranking);
-w(`ON A CLEAN DECLINE, EKENE-P1, first origin 30, horizon 6, step 3 (stated), the ranking is ${C1.ranking.join(', ')}, arps MASE ${f6(C1.rows.find((r) => r.method === 'arps').mase)}. EKENE-P1 was drawn from an Arps curve (stated), and on it the Arps baseline ranks first.`);
+w(`ON A CLEAN DECLINE, EKENE-P1, first origin ${C1S.firstOrigin}, horizon ${C1S.horizon}, step ${C1S.step} (stated), the ranking is ${C1.ranking.join(', ')}, arps MASE ${f6(C1.rows.find((r) => r.method === 'arps').mase)}. EKENE-P1 was drawn from an Arps curve (stated), and on it the Arps baseline ranks first.`);
 w();
 w('WRITING UP A BACKTEST names: the well and months; the methods; first origin, horizon, step and so the origins; refit or held; each metric with its reason when null; MASE with its lag m; the ranking and the metric it is by.');
 
@@ -852,14 +866,16 @@ w();
 w(`THE QUANTILE RULE, shown with lib/stats quantile (the function the engine calls) on stated sorted values 1, 2, ..., n:`);
 w();
 const QN = [10, 9, 1000, 999];
-const qrow = (n) => { const v = Array.from({ length: n }, (_, i) => i + 1); return ST.quantile(v, [0.1, 0.5, 0.9]); };
-table(['n (stated)', 'idx = n x 0.1', '10th percentile', '50th percentile', '90th percentile'], QN.map((n) => [S(n), f6(n * 0.1), ...qrow(n).map(f6)]));
+const QP = [0.1, 0.5, 0.9]; // the three levels the basis of the engine states
+must('the percentile basis states the three levels', PID.basis.percentiles.includes(`quantile at ${QP.join(', ')}`), PID.basis.percentiles);
+const qrow = (n) => { const v = Array.from({ length: n }, (_, i) => i + 1); return ST.quantile(v, QP); };
+table(['n (stated)', `idx = n x p at p = ${S(QP[0])}`, '10th percentile', '50th percentile', '90th percentile'], QN.map((n) => [S(n), f6(n * QP[0]), ...qrow(n).map(f6)]));
 must('n 10: 10th percentile is the mean of the 1st and 2nd', qrow(10)[0] === 1.5, qrow(10)[0]);
 must('n 9: idx 0.9 not whole takes the 1st smallest', qrow(9)[0] === 1, qrow(9)[0]);
 must('n 1000: the mean of the 100th and 101st', qrow(1000)[0] === 100.5, qrow(1000)[0]);
 must('n 999: idx 99.9 takes the 100th', qrow(999)[0] === 100, qrow(999)[0]);
 w();
-w(`With n 10 the 10th percentile is the mean of the 1st and 2nd smallest (idx 1 whole, n even); with n 9, idx 0.9 is not whole, so it is the 1st smallest; with n 1000 it is the mean of the 100th and 101st; with n 999 the 100th. The default nSims is ${FC.DEFAULTS.N_SIMS}, an even count, so every default percentile is the mean of two simulated values.`);
+w(`With n ${QN[0]} the 10th percentile is the mean of the 1st and 2nd smallest (idx 1 whole, n even); with n ${QN[1]}, idx ${S(QN[1] * QP[0])} is not whole, so it is the 1st smallest; with n ${QN[2]} it is the mean of the 100th and 101st; with n ${QN[3]} the 100th. The default nSims is ${FC.DEFAULTS.N_SIMS}, an even count, so every default percentile is the mean of two simulated values.`);
 w();
 w(`THE LABELS. Production is an outcome where more is better, and the platform labels outcomes by exceedance: "${PID.definition}" So P90 is the LOW case, the 10th percentile of the simulated paths, and P10 the HIGH case, the 90th percentile. Keys \`${PCT.OUTCOME_LABELS.p90}\`, \`${PCT.OUTCOME_LABELS.p50}\` and \`${PCT.OUTCOME_LABELS.p10}\` carry those values, and P90 <= P50 <= P10 at every step (checked in ${ref('bootstrap')}).`);
 must('the definition is the platform sentence', PID.definition === PCT.EXCEEDANCE_DEFINITION, PID.definition);
@@ -867,7 +883,7 @@ w();
 const PIH5 = success(`forecastIntervals holt EKENE-P5 h ${H} seed ${SEED_PI}`, FC.forecastIntervals({ y: Y5, method: 'holt', h: H, seed: SEED_PI }));
 const PIH5u = success(`forecastIntervals holt EKENE-P5 unclipped`, FC.forecastIntervals({ y: Y5, method: 'holt', h: H, seed: SEED_PI, nonNegative: false }));
 planted(5, PIH5.clippedToZero > 0 && firstNeg > 0, PIH5.clippedToZero);
-w(`NEGATIVE RATES REPORTED AS ZERO. With \`nonNegative\` true (the default) a percentile below 0 is reported as 0 and counted in \`clippedToZero\`; the basis reads: "${PIH5.basis.nonNegative}". EKENE-P5, holt, h ${H}, seed ${SEED_PI}: ${PIH5.clippedToZero} of the ${3 * H} percentiles (derived, 3 per step x ${H} steps) are reported as 0. The last three steps, both ways:`);
+w(`NEGATIVE RATES REPORTED AS ZERO. With \`nonNegative\` true (the default) a percentile below 0 is reported as 0 and counted in \`clippedToZero\`; the basis reads: "${PIH5.basis.nonNegative}". EKENE-P5, holt, h ${H}, seed ${SEED_PI}: ${PIH5.clippedToZero} of the ${3 * H} percentiles (derived, three per step x ${H} steps) are reported as 0. The last three steps, both ways:`);
 w();
 table(['step', 'P90, nonNegative true', 'P90, nonNegative false', 'P50, nonNegative true', 'P50, nonNegative false'], [H - 3, H - 2, H - 1].map((j) => [S(j + 1), f6(PIH5.P90[j]), f6(PIH5u.P90[j]), f6(PIH5.P50[j]), f6(PIH5u.P50[j])]));
 must('clipping touches only the negative percentiles', ['P90', 'P50', 'P10'].every((k) => PIH5[k].every((v, j) => v === Math.max(0, PIH5u[k][j]))), 'clip');
@@ -875,7 +891,7 @@ w();
 w(`Only the negative percentiles change; the point forecast is never clipped. A P90 reported as 0 says that at least a tenth of the paths fell below zero at that step: the method's paths ran out of rate there.`);
 w();
 const WID = PID.P10.map((v, j) => v - PID.P90[j]);
-w(`INTERVALS WIDEN WITH EVERY STEP. The P10 less the P90 of the damped EKENE-P1 intervals (derived): step 1 ${f6(WID[0])}, step 6 ${f6(WID[5])}, step ${H} ${f6(WID[H - 1])} bbl/d; each path carries all its earlier draws.`);
+w(`INTERVALS WIDEN WITH EVERY STEP. The P10 less the P90 of the damped EKENE-P1 intervals (derived): ${[0, 5, H - 1].map((j) => `step ${j + 1} ${f6(WID[j])}`).join(', ')} bbl/d; each path carries all its earlier draws.`);
 must('the width at step 12 is above the width at step 1', WID[H - 1] > WID[0], WID.join(','));
 
 /* ============================================================ SECTION 20 */
@@ -890,7 +906,7 @@ w();
 w(`A MONTH PASSED AS A DAY. fitArpsModel reads dated rates and measures time in days. The engine passes month k as day k, so qi is per month-step and Di is per month; the basis reads: "${AR1.basis.time}". EKENE-P1's Di ${f6(AR1.Di)} is per month (the generator stated ${S(WSPEC['EKENE-P1'].Di)} per month and b ${S(WSPEC['EKENE-P1'].b)}). Quoted per day, per year or as an effective decline it is a different number; this course quotes it per month.`);
 must('the EKENE-P1 Arps fit is hyperbolic', AR1.modelType === 'Hyperbolic', AR1.modelType);
 w();
-w(`PRINTED ALIKE. EKENE-P1's b prints ${f6(AR1.b)} and is ${S(AR1.b)} as returned: fitArpsModel's b grid accumulates steps of 0.05 in floating point, so a grid value is not the decimal it prints as. It differs from ${f6(AR1.b)} by ${eX(Math.abs(AR1.b - Number(f6(AR1.b))))}.`);
+w(`PRINTED ALIKE. EKENE-P1's b prints ${f6(AR1.b)} and is ${S(AR1.b)} as returned: fitArpsModel's b grid accumulates its steps in floating point, so a grid value is not the decimal it prints as. It differs from ${f6(AR1.b)} by ${eX(Math.abs(AR1.b - Number(f6(AR1.b))))}.`);
 must('the P1 b differs from its printed value', AR1.b !== Number(f6(AR1.b)), AR1.b);
 w();
 const AR2 = AR['EKENE-P2'];
@@ -930,23 +946,25 @@ w(`RANKING BY THE CHOSEN METRIC, the same comparison (lowest first):`);
 w();
 table(['rankBy', 'ranking', 'best'], byMetric.map(([k, c]) => [k, c.ranking.join(', '), c.best]));
 w();
-const CM = success('compareWithArps EKENE-P2 from origin 12, rankBy mape', FC.compareWithArps({ y: Y2, firstOrigin: 12, horizon: 6, step: 3, rankBy: 'mape' }));
+const CMS = { firstOrigin: 12, horizon: 6, step: 3 }; // stated
+const CM = success('compareWithArps EKENE-P2 from origin 12, rankBy mape', FC.compareWithArps({ y: Y2, ...CMS, rankBy: 'mape' }));
 must('with the shut-in in the actuals every mape is null and nothing is ranked', CM.ranking.length === 0 && CM.best === null && CM.unranked.length === 4, CM.unranked);
-w(`UNRANKED METHODS. A method whose metric is null is left out of the ranking and listed in \`unranked\`. EKENE-P2 from origin 12, horizon 6, step 3, ranked by MAPE (stated): the shut-in months are in the actuals of some origins, so every method's MAPE is null; \`ranking\` is empty, \`best\` is ${S(CM.best)}, and \`unranked\` is ${list(CM.unranked)}. Ranked by MASE instead, the same call ranks all four. Ranking by MAPE ranks nothing once a shut-in month is in the actuals of every method's origins.`);
-must('the same call by mase ranks all four', FC.compareWithArps({ y: Y2, firstOrigin: 12, horizon: 6, step: 3 }).ranking.length === 4, 'four');
+w(`UNRANKED METHODS. A method whose metric is null is left out of the ranking and listed in \`unranked\`. EKENE-P2 from origin ${CMS.firstOrigin}, horizon ${CMS.horizon}, step ${CMS.step}, ranked by MAPE (stated): the shut-in months are in the actuals of some origins, so every method's MAPE is null; \`ranking\` is empty, \`best\` is ${S(CM.best)}, and \`unranked\` is ${list(CM.unranked)}. Ranked by MASE instead, the same call ranks all four. Ranking by MAPE ranks nothing once a shut-in month is in the actuals of every method's origins.`);
+must('the same call by mase ranks all four', FC.compareWithArps({ y: Y2, ...CMS }).ranking.length === 4, 'four');
 w();
 const NOARPS = [900, 880, 0, 0, 0, 0, 0, 0, 870, 860, 850, 845]; // stated: a well shut in from month 2 to 7
-const CNA = success('compareWithArps with too few positive training months at the first origin', FC.compareWithArps({ y: NOARPS, firstOrigin: 6, horizon: 2, step: 2 }));
+const NAS = { firstOrigin: 6, horizon: 2, step: 2 }; // stated
+const CNA = success('compareWithArps with too few positive training months at the first origin', FC.compareWithArps({ y: NOARPS, ...NAS }));
 const naRow = CNA.rows.find((r) => r.method === 'arps');
 must('the arps row carries an error and null metrics and is unranked', typeof naRow.error === 'string' && naRow.mase === null && CNA.unranked.includes('arps'), naRow.error);
-w(`AN ARPS ROW WITH NO FIT. A stated series, ${list(NOARPS.map(S))}, first origin 6, horizon 2, step 2: the training window at origin 6 has two positive months, and the arps row carries no metrics, the error "${naRow.error}", and is unranked. The smoothing methods are ranked: ${CNA.ranking.join(', ')}.`);
+w(`AN ARPS ROW WITH NO FIT. A stated series, ${list(NOARPS.map(S))}, first origin ${NAS.firstOrigin}, horizon ${NAS.horizon}, step ${NAS.step}: the training window at origin ${NAS.firstOrigin} has two positive months, and the arps row carries no metrics, the error "${naRow.error}", and is unranked. The smoothing methods are ranked: ${CNA.ranking.join(', ')}.`);
 w();
 const gT = golden('cmp-constant-ties');
 const CT = success('golden cmp-constant-ties', FC.compareWithArps(clone(gT.args)));
 must('the constant series ties every smoothing method at MAE 0 and keeps the listed order', CT.ranking.join() === gT.args.methods.join() && CT.rows.filter((r) => r.method !== 'arps').every((r) => r.mae === 0), CT.ranking);
 w(`TIES AND THE LISTED ORDER. Values within ${eX(FC.DEFAULTS.RANK_TIE_REL)} of each other, relative, keep the order the methods were listed in, arps last. Golden \`cmp-constant-ties\`: a constant ${S(gT.args.y[0])} for ${gT.args.y.length} months, methods listed ${list(gT.args.methods)}, ranked by ${gT.args.rankBy}. Every smoothing method forecasts the constant exactly (MAE ${S(CT.rows[0].mae)}), so the ranking is the listed order, ${CT.ranking.join(', ')}; Arps cannot fit a flat series and is unranked (${list(CT.unranked)}).`);
 w();
-const CR = success('compareWithArps EKENE-P1 listed in reverse', FC.compareWithArps({ y: Y1, firstOrigin: 30, horizon: 6, step: 3, methods: ['damped', 'holt', 'ses'] }));
+const CR = success('compareWithArps EKENE-P1 listed in reverse', FC.compareWithArps({ y: Y1, ...C1S, methods: ['damped', 'holt', 'ses'] }));
 must('listing order does not change a ranking without ties', CR.ranking.join() === C1.ranking.join(), `${CR.ranking} ${C1.ranking}`);
 w(`Without a tie the order listed changes nothing: EKENE-P1 with the methods listed damped, holt, ses ranks ${CR.ranking.join(', ')}, as in ${ref('comparing')}.`);
 w();
@@ -962,45 +980,72 @@ const no = (r) => !!(r && r.error);
 const B = [];
 const brow = (fn, rule, acc, rej, cond, label) => { must(`BOUNDARY ${label}`, cond, label); B.push([`\`${fn}\``, rule, acc, rej]); };
 const y4 = Y1.slice(0, 4);
-brow('fitSmoothing', 'ses length', '2 values fitted', '1 refused', ok('', FC.fitSmoothing({ y: Y1.slice(0, 2), method: 'ses' })) && no(FC.fitSmoothing({ y: Y1.slice(0, 1), method: 'ses' })), 'ses length');
-brow('fitSmoothing', 'holt and damped length', '3 values fitted', '2 refused', ok('', FC.fitSmoothing({ y: Y1.slice(0, 3), method: 'holt' })) && ok('', FC.fitSmoothing({ y: Y1.slice(0, 3), method: 'damped' })) && no(FC.fitSmoothing({ y: Y1.slice(0, 2), method: 'damped' })), 'holt length');
-brow('fitSmoothing', 'holt and damped with an initialTrend', '2 values fitted', '1 refused', ok('', FC.fitSmoothing({ y: Y1.slice(0, 2), method: 'holt', initialTrend: -20 })) && no(FC.fitSmoothing({ y: Y1.slice(0, 1), method: 'holt', initialTrend: -20 })), 'trend length');
-brow('fitSmoothing', 'alpha and beta given', '0 and 1 accepted (inclusive)', '-0.1 and 1.2 refused', ok('', FC.fitSmoothing({ y: y4, method: 'holt', alpha: 0, beta: 1 })) && ok('', FC.fitSmoothing({ y: y4, method: 'holt', alpha: 1, beta: 0 })) && no(FC.fitSmoothing({ y: y4, method: 'ses', alpha: -0.1 })) && no(FC.fitSmoothing({ y: y4, method: 'ses', alpha: 1.2 })), 'alpha');
-brow('fitSmoothing', 'phi given', 'any value above 0 and at most 1 (0.01 and 1 accepted)', '0 and 1.05 refused', ok('', FC.fitSmoothing({ y: y4, method: 'damped', phi: 0.01 })) && ok('', FC.fitSmoothing({ y: y4, method: 'damped', phi: 1 })) && no(FC.fitSmoothing({ y: y4, method: 'damped', phi: 0 })) && no(FC.fitSmoothing({ y: y4, method: 'damped', phi: 1.05 })), 'phi given');
+/** The fewest values a call accepts, probed from 1 up (the call gets y[0..n-1]); asserted refused at one less. */
+const fewest = (label, call) => {
+  let n = 1;
+  while (n <= 10 && no(call(n))) n += 1;
+  must(`FEWEST ${label}: accepted at ${n}, refused at ${n - 1}`, n <= 10 && ok('', call(n)) && (n === 1 || no(call(n - 1))), n);
+  return n;
+};
+const LEN = {
+  sesFit: fewest('ses fit', (n) => FC.fitSmoothing({ y: Y1.slice(0, n), method: 'ses' })),
+  holtFit: fewest('holt fit', (n) => FC.fitSmoothing({ y: Y1.slice(0, n), method: 'holt' })),
+  dampedFit: fewest('damped fit', (n) => FC.fitSmoothing({ y: Y1.slice(0, n), method: 'damped' })),
+  trendFit: fewest('holt fit with an initialTrend', (n) => FC.fitSmoothing({ y: Y1.slice(0, n), method: 'holt', initialTrend: HOLTT.initial.trend })),
+  sesPI: fewest('ses intervals', (n) => FC.forecastIntervals({ y: Y1.slice(0, n), method: 'ses', h: 1, seed: SEED_PI })),
+  holtPI: fewest('holt intervals', (n) => FC.forecastIntervals({ y: Y1.slice(0, n), method: 'holt', h: 1, seed: SEED_PI })),
+  dampedPI: fewest('damped intervals', (n) => FC.forecastIntervals({ y: Y1.slice(0, n), method: 'damped', h: 1, seed: SEED_PI })),
+  trendPI: fewest('damped intervals with an initialTrend', (n) => FC.forecastIntervals({ y: Y1.slice(0, n), method: 'damped', initialTrend: HOLTT.initial.trend, h: 1, seed: SEED_PI })),
+  sesBT: fewest('ses backtest training', (n) => FC.backtest({ y: Y1, method: 'ses', alpha: A_SES, firstOrigin: n, horizon: 1 })),
+  holtBT: fewest('holt backtest training', (n) => FC.backtest({ y: Y1, method: 'holt', alpha: A_HOLT, beta: B_HOLT, firstOrigin: n, horizon: 1 })),
+  cmpSes: fewest('comparison training, ses alone', (n) => FC.compareWithArps({ y: Y1, methods: ['ses'], firstOrigin: n, horizon: 1, step: Y1.length })),
+  arps: fewest('arps positive values', (n) => FC.arpsForecast({ y: Y1.slice(0, n) })),
+  acc: fewest('accuracy actuals', (n) => FC.accuracy({ actual: Y1.slice(0, n), forecast: Y1.slice(1, n + 1) })),
+};
+must('holt and damped share their length rules', LEN.holtFit === LEN.dampedFit && LEN.holtPI === LEN.dampedPI, JSON.stringify(LEN));
+const lenRow = (fn, rule, n) => brow(fn, rule, `${n} values accepted`, `${n - 1} refused`, true, `${fn} ${rule}`);
+lenRow('fitSmoothing', 'ses length', LEN.sesFit);
+lenRow('fitSmoothing', 'holt and damped length', LEN.holtFit);
+lenRow('fitSmoothing', 'holt and damped with an initialTrend', LEN.trendFit);
+const BAD_ALPHA = [-0.1, 1.2]; // stated, one each side of [0, 1]
+brow('fitSmoothing', 'alpha and beta given', '0 and 1 accepted (inclusive)', `${list(BAD_ALPHA.map(S))} refused`, ok('', FC.fitSmoothing({ y: y4, method: 'holt', alpha: 0, beta: 1 })) && ok('', FC.fitSmoothing({ y: y4, method: 'holt', alpha: 1, beta: 0 })) && BAD_ALPHA.every((a) => no(FC.fitSmoothing({ y: y4, method: 'ses', alpha: a }))), 'alpha');
+const PHI_OK = [0.01, 1]; const PHI_BAD = [0, 1.05]; // stated
+brow('fitSmoothing', 'phi given', `any value above 0 and at most 1 (${list(PHI_OK.map(S))} accepted)`, `${list(PHI_BAD.map(S))} refused`, PHI_OK.every((ph) => ok('', FC.fitSmoothing({ y: y4, method: 'damped', phi: ph }))) && PHI_BAD.every((ph) => no(FC.fitSmoothing({ y: y4, method: 'damped', phi: ph }))), 'phi given');
 const gUB = golden('damped-phi-at-upper-bound');
 const UB = success('golden damped-phi-at-upper-bound', FC.fitSmoothing(clone(gUB.args)));
 brow('fitSmoothing', 'phi fitted', `${S(FC.DEFAULTS.PHI_MIN)} and ${S(FC.DEFAULTS.PHI_MAX)} reached (inclusive: EKENE-P4 on ${S(FC.DEFAULTS.PHI_MIN)}, golden \`damped-phi-at-upper-bound\` on ${S(FC.DEFAULTS.PHI_MAX)})`, 'never searched outside', DFIT['EKENE-P4'].params.phi === FC.DEFAULTS.PHI_MIN && UB.params.phi === FC.DEFAULTS.PHI_MAX, 'phi fitted');
-brow('fitSmoothing, arpsForecast', 'h', `0 and ${FC.DEFAULTS.MAX_H} accepted`, `-1, 1.5 and ${FC.DEFAULTS.MAX_H + 1} refused`, ok('', FC.fitSmoothing({ y: y4, method: 'ses', alpha: 0.5, h: 0 })) && ok('', FC.fitSmoothing({ y: y4, method: 'ses', alpha: 0.5, h: FC.DEFAULTS.MAX_H })) && no(FC.fitSmoothing({ y: y4, method: 'ses', h: FC.DEFAULTS.MAX_H + 1 })) && ok('', FC.arpsForecast({ y: Y1, h: 0 })) && no(FC.arpsForecast({ y: Y1, h: -1 })), 'h');
+const H_BAD = [-1, 1.5, FC.DEFAULTS.MAX_H + 1]; // stated
+brow('fitSmoothing, arpsForecast', 'h', `0 and ${FC.DEFAULTS.MAX_H} accepted`, `${list(H_BAD.map(S))} refused`, ok('', FC.fitSmoothing({ y: y4, method: 'ses', alpha: 0.5, h: 0 })) && ok('', FC.fitSmoothing({ y: y4, method: 'ses', alpha: 0.5, h: FC.DEFAULTS.MAX_H })) && H_BAD.every((h) => no(FC.fitSmoothing({ y: y4, method: 'ses', h }))) && ok('', FC.arpsForecast({ y: Y1, h: 0 })) && no(FC.arpsForecast({ y: Y1, h: H_BAD[0] })), 'h');
 brow('forecastIntervals', 'h', '1 accepted', '0 refused', ok('', FC.forecastIntervals({ y: Y1, method: 'ses', h: 1, seed: 1 })) && no(FC.forecastIntervals({ y: Y1, method: 'ses', h: 0, seed: 1 })), 'pi h');
-brow('forecastIntervals', 'nSims', `1 and ${FC.DEFAULTS.MAX_SIMS} accepted`, `0 and ${FC.DEFAULTS.MAX_SIMS + 1} refused`, ok('', FC.forecastIntervals({ y: Y1, method: 'ses', h: 1, seed: 1, nSims: 1 })) && ok('', FC.forecastIntervals({ y: y4, method: 'ses', alpha: 0.5, h: 1, seed: 1, nSims: FC.DEFAULTS.MAX_SIMS })) && no(FC.forecastIntervals({ y: Y1, method: 'ses', h: 1, seed: 1, nSims: 0 })), 'nsims');
-brow('forecastIntervals', 'seed', '0 and 4294967295 accepted', '-1 and 2.5 refused', ok('', FC.forecastIntervals({ y: y4, method: 'ses', h: 1, seed: 0 })) && ok('', FC.forecastIntervals({ y: y4, method: 'ses', h: 1, seed: 4294967295 })) && no(FC.forecastIntervals({ y: y4, method: 'ses', h: 1, seed: -1 })), 'seed');
-brow('forecastIntervals', 'the residual pool', '2 scored residuals accepted (holt on 4 values, ses on 3)', '1 refused (holt on 3, ses on 2)', ok('', FC.forecastIntervals({ y: y4, method: 'holt', h: 1, seed: 1 })) && ok('', FC.forecastIntervals({ y: y4.slice(0, 3), method: 'ses', h: 1, seed: 1 })) && no(FC.forecastIntervals({ y: y4.slice(0, 3), method: 'holt', h: 1, seed: 1 })) && no(FC.forecastIntervals({ y: y4.slice(0, 2), method: 'ses', h: 1, seed: 1 })), 'pool');
+brow('forecastIntervals', 'nSims', `1 and ${FC.DEFAULTS.MAX_SIMS} accepted`, `0 and ${FC.DEFAULTS.MAX_SIMS + 1} refused`, ok('', FC.forecastIntervals({ y: Y1, method: 'ses', h: 1, seed: 1, nSims: 1 })) && ok('', FC.forecastIntervals({ y: y4, method: 'ses', alpha: 0.5, h: 1, seed: 1, nSims: FC.DEFAULTS.MAX_SIMS })) && no(FC.forecastIntervals({ y: Y1, method: 'ses', h: 1, seed: 1, nSims: 0 })) && no(FC.forecastIntervals({ y: Y1, method: 'ses', h: 1, seed: 1, nSims: FC.DEFAULTS.MAX_SIMS + 1 })), 'nsims');
+const SEED_MAX = 2 ** 32 - 1; const SEED_BAD = [-1, 2.5]; // the largest 32-bit seed, and two stated refusals
+brow('forecastIntervals', 'seed', `0 and ${S(SEED_MAX)} accepted`, `${list(SEED_BAD.map(S))} refused`, ok('', FC.forecastIntervals({ y: y4, method: 'ses', h: 1, seed: 0 })) && ok('', FC.forecastIntervals({ y: y4, method: 'ses', h: 1, seed: SEED_MAX })) && SEED_BAD.every((sd) => no(FC.forecastIntervals({ y: y4, method: 'ses', h: 1, seed: sd }))), 'seed');
+brow('forecastIntervals', 'the residual pool', `2 scored residuals accepted (holt on ${LEN.holtPI} values, ses on ${LEN.sesPI})`, `1 refused (holt on ${LEN.holtPI - 1}, ses on ${LEN.sesPI - 1})`, LEN.holtPI - (LEN.holtFit - 1) === 2 && LEN.sesPI - (LEN.sesFit - 1) === 2, 'pool');
 const BIG = TILE(FC.DEFAULTS.MAX_POINTS + 1);
-brow('every function', 'series length', `${FC.DEFAULTS.MAX_POINTS} values fitted by fitSmoothing`, `${FC.DEFAULTS.MAX_POINTS + 1} refused by all six`, ok('', FC.fitSmoothing({ y: TILE(FC.DEFAULTS.MAX_POINTS), method: 'ses', alpha: 0.5 })) && no(FC.fitSmoothing({ y: BIG, method: 'ses', alpha: 0.5 })) && no(FC.accuracy({ actual: BIG, forecast: BIG })) && no(FC.forecastIntervals({ y: BIG, method: 'ses', h: 1, seed: 1 })) && no(FC.backtest({ y: BIG, method: 'ses', firstOrigin: 2, horizon: 1 })) && no(FC.arpsForecast({ y: BIG })) && no(FC.compareWithArps({ y: BIG, firstOrigin: 3, horizon: 1 })), 'cap');
-brow('backtest, compareWithArps', 'the last origin', 'o + horizon = n accepted', 'o + horizon > n refused', ok('', FC.backtest({ y: Y1, method: 'ses', alpha: 0.5, firstOrigin: 42, horizon: 6 })) && no(FC.backtest({ y: Y1, method: 'ses', alpha: 0.5, firstOrigin: 43, horizon: 6 })), 'last origin');
-brow('backtest', 'the first origin', 'the method\'s minimum length accepted (ses 2, holt and damped 3)', 'one less refused', ok('', FC.backtest({ y: Y1, method: 'ses', alpha: 0.5, firstOrigin: 2, horizon: 1 })) && ok('', FC.backtest({ y: Y1, method: 'holt', alpha: 0.5, beta: 0.2, firstOrigin: 3, horizon: 1 })) && no(FC.backtest({ y: Y1, method: 'holt', firstOrigin: 2, horizon: 1 })), 'first origin');
-brow('compareWithArps', 'the first origin', '3 accepted for every method list', '2 refused, even for ses alone', ok('', FC.compareWithArps({ y: Y1, methods: ['ses'], firstOrigin: 3, horizon: 1, step: 20 })) && no(FC.compareWithArps({ y: Y1, methods: ['ses'], firstOrigin: 2, horizon: 1 })), 'cmp first');
+brow('every function', 'series length', `${FC.DEFAULTS.MAX_POINTS} values fitted by fitSmoothing`, `${FC.DEFAULTS.MAX_POINTS + 1} refused by all six`, ok('', FC.fitSmoothing({ y: TILE(FC.DEFAULTS.MAX_POINTS), method: 'ses', alpha: 0.5 })) && no(FC.fitSmoothing({ y: BIG, method: 'ses', alpha: 0.5 })) && no(FC.accuracy({ actual: BIG, forecast: BIG })) && no(FC.forecastIntervals({ y: BIG, method: 'ses', h: 1, seed: 1 })) && no(FC.backtest({ y: BIG, method: 'ses', firstOrigin: LEN.sesBT, horizon: 1 })) && no(FC.arpsForecast({ y: BIG })) && no(FC.compareWithArps({ y: BIG, firstOrigin: LEN.cmpSes, horizon: 1 })), 'cap');
+brow('backtest, compareWithArps', 'the last origin', 'o + horizon = n accepted', 'o + horizon > n refused', ok('', FC.backtest({ y: Y1, method: 'ses', alpha: 0.5, firstOrigin: Y1.length - BT.horizon, horizon: BT.horizon })) && no(FC.backtest({ y: Y1, method: 'ses', alpha: 0.5, firstOrigin: Y1.length - BT.horizon + 1, horizon: BT.horizon })) && ok('', FC.compareWithArps({ y: Y1, firstOrigin: Y1.length - BT.horizon, horizon: BT.horizon })) && no(FC.compareWithArps({ y: Y1, firstOrigin: Y1.length - BT.horizon + 1, horizon: BT.horizon })), 'last origin');
+brow('backtest', 'the first origin', `the method's fitting length accepted (ses ${LEN.sesBT}, holt and damped ${LEN.holtBT})`, 'one less refused', LEN.sesBT === LEN.sesFit && LEN.holtBT === LEN.holtFit, 'first origin');
+brow('compareWithArps', 'the first origin', `${LEN.cmpSes} accepted for every method list`, `${LEN.cmpSes - 1} refused, even for ses alone`, LEN.cmpSes > LEN.sesFit, 'cmp first');
 const nMax = FC.DEFAULTS.MAX_ORIGINS;
-brow('backtest', 'origins', `${nMax} origins accepted`, `${nMax + 1} refused`, ok('', FC.backtest({ y: TILE(nMax + 2), method: 'ses', alpha: 0.5, firstOrigin: 2, horizon: 1 })) && no(FC.backtest({ y: TILE(nMax + 3), method: 'ses', alpha: 0.5, firstOrigin: 2, horizon: 1 })), 'origins');
+brow('backtest', 'origins', `${nMax} origins accepted`, `${nMax + 1} refused`, ok('', FC.backtest({ y: TILE(nMax + LEN.sesBT), method: 'ses', alpha: 0.5, firstOrigin: LEN.sesBT, horizon: 1 })) && no(FC.backtest({ y: TILE(nMax + LEN.sesBT + 1), method: 'ses', alpha: 0.5, firstOrigin: LEN.sesBT, horizon: 1 })), 'origins');
 brow('accuracy', 'MAPE', 'every actual non-zero: a number', 'any actual 0: null with the reason', typeof ACC.holt.mape === 'number' && P2A.mape === null, 'mape');
 brow('accuracy, backtest', 'MASE scale', 'Q > 0 and more than m training values: a number', 'Q = 0, or m values or fewer: null with the reason', typeof ACC.holt.mase === 'number' && accFlat.mase === null && accShort.mase === null, 'mase');
-brow('arpsForecast', 'positive values', '3 fitted', '2 refused', ok('', FC.arpsForecast({ y: [0, 0, 410.5, 398.2, 390.1] })) && no(FC.arpsForecast({ y: TWO_POS })), 'arps positive');
+const POS3 = [0, 0, ...Y1.slice(0, LEN.arps)]; // stated: two shut-in months, then the fewest producing months
+brow('arpsForecast', 'positive values', `${LEN.arps} fitted (zeros around them dropped)`, `${LEN.arps - 1} refused`, ok('', FC.arpsForecast({ y: POS3 })) && no(FC.arpsForecast({ y: TWO_POS })) && TWO_POS.filter((v) => v > 0).length === LEN.arps - 1, 'arps positive');
 brow('forecastIntervals', 'nonNegative', 'a percentile at or above 0 reported as simulated', 'below 0 reported as 0 and counted in clippedToZero', PIH5.clippedToZero === PIH5u.P90.concat(PIH5u.P50, PIH5u.P10).filter((v) => v < 0).length, 'clip count');
 table(['function', 'rule', 'at the boundary', 'across it'], B);
 w();
 w(`THE CAPS trade time for size: a series stops at ${FC.DEFAULTS.MAX_POINTS} values, h at ${FC.DEFAULTS.MAX_H}, the bootstrap at ${FC.DEFAULTS.MAX_SIMS} paths, a backtest or comparison at ${nMax} origins and a fit at ${FC.DEFAULTS.PS_MAX_EVALS} SSE evaluations. A longer study is split into calls, or its step raised.`);
 w();
-w(`LENGTH RULES, per function (the minimum a call needs):`);
+w(`LENGTH RULES, per function, each probed by the engine (the fewest values a call accepts; one fewer is refused):`);
 w();
 table(['function', 'method', 'fewest values accepted'], [
-  ['`fitSmoothing`', 'ses', '2'], ['`fitSmoothing`', 'holt, damped', '3 (2 with an initialTrend)'],
-  ['`forecastIntervals`', 'ses', '3 (2 scored residuals)'], ['`forecastIntervals`', 'holt, damped', '4 (3 with an initialTrend)'],
-  ['`backtest`', 'ses', '2 training values plus the horizon'], ['`backtest`', 'holt, damped', '3 training values plus the horizon'],
-  ['`compareWithArps`', 'any list', '3 training values plus the horizon'], ['`arpsForecast`', 'none', '3 positive values'],
-  ['`accuracy`', 'none', '1 actual and 1 forecast'],
+  ['`fitSmoothing`', 'ses', S(LEN.sesFit)], ['`fitSmoothing`', 'holt, damped', `${LEN.holtFit} (${LEN.trendFit} with an initialTrend)`],
+  ['`forecastIntervals`', 'ses', `${LEN.sesPI} (2 scored residuals)`], ['`forecastIntervals`', 'holt, damped', `${LEN.holtPI} (${LEN.trendPI} with an initialTrend)`],
+  ['`backtest`', 'ses', `${LEN.sesBT} training values plus the horizon`], ['`backtest`', 'holt, damped', `${LEN.holtBT} training values plus the horizon`],
+  ['`compareWithArps`', 'any list', `${LEN.cmpSes} training values plus the horizon`], ['`arpsForecast`', 'none', `${LEN.arps} positive values`],
+  ['`accuracy`', 'none', `${LEN.acc} actual and ${LEN.acc} forecast`],
 ]);
-must('forecastIntervals damped with an initialTrend on 3 values is accepted and on 2 refused', ok('', FC.forecastIntervals({ y: Y1.slice(0, 3), method: 'damped', initialTrend: -20, h: 1, seed: 1 })) && no(FC.forecastIntervals({ y: Y1.slice(0, 2), method: 'damped', initialTrend: -20, h: 1, seed: 1 })), 'pi trend');
-must('arps fits 3 positive values', ok('', FC.arpsForecast({ y: Y1.slice(0, 3) })), 'arps 3');
 
 /* ============================================================ SECTION 23 */
 
@@ -1017,7 +1062,7 @@ w(`THE PARAMETER BOX. A fitted alpha and beta stay in [0, 1] and a fitted phi in
 w();
 w(`The holt-linear-exact golden of ${ref('fit')} is the grid tie at work: every point scores SSE 0 and the first, alpha 0 and beta 0, is kept. The cmp-constant-ties golden of ${ref('ranking')} is the ranking tie.`);
 w();
-w(`THE STOP RULE. The compass step starts at ${S(FC.DEFAULTS.PS_STEP)} of each range (half the grid spacing) and halves after a sweep with no improvement; the search stops when a sweep at a step of at most 2^-30 of the range improves nothing. The stop is a rule on the step: two fits that stop at SSEs printing alike are the same minimum only as far as the search could tell. SEED AND nSims name a bootstrap exactly; there is no band on a percentile, and the quantile rule of ${ref('percentiles')} is exact on the sorted simulated values.`);
+w(`THE STOP RULE. The compass step starts at ${S(FC.DEFAULTS.PS_STEP)} of each range (half the grid spacing) and halves after a sweep with no improvement; the search stops when a sweep at a step of at most ${MINSTEP} of the range improves nothing. The stop is a rule on the step: two fits that stop at SSEs printing alike are the same minimum only as far as the search could tell. SEED AND nSims name a bootstrap exactly; there is no band on a percentile, and the quantile rule of ${ref('percentiles')} is exact on the sorted simulated values.`);
 
 /* ============================================================ SECTION 24 */
 
@@ -1043,7 +1088,7 @@ w();
 w('WHAT IS NOT BUILT. No seasonal smoothing (Holt-Winters); no multiplicative error or trend forms; no ARIMA; no regression of rate on other variables such as choke, pressure or water cut (the machine learning course regresses); no neural network; no analytic prediction interval; no parameter uncertainty in the bootstrap; no filling of a missing month (refused); no EUR or cumulative (the decline curve analysis course); no Arps of its own (engines/dca/arps.js, imported).');
 must('the not-built list matches the exports', !Object.keys(FC).some((k) => /season|winters|arima|regress|neural|eur/i.test(k)), Object.keys(FC).join(','));
 w();
-w('WRITING THE FORECAST NOTE names: the well and months; the method and parameters, fitted or given, with any bound; the backtest that tested it (origins, horizon, step, refit) and its MASE with m against the Arps baseline on the same origins; the intervals with method, nSims, seed and nonNegative, and the P90 read as the low case; every null metric with its reason.');
+w('WRITING THE FORECAST NOTE names: the well and months; the method and parameters, fitted or given, with any bound; the backtest that tested it (origins, horizon, step, refit) and its MASE with m against the Arps baseline on the same origins; the intervals with method, nSims, seed and nonNegative, and the P90 read as the low case; every metric the engine could not give, with its reason from notes.');
 
 /* ============================================================ SECTION 25 */
 

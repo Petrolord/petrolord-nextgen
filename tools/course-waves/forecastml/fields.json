@@ -21,7 +21,7 @@
   "beginner",
   "agulu1_holt_forecast_h12_bopd",
   178.71280696811394,
-  5e-7
+  0.00001
  ],
  [
   "beginner",
@@ -33,13 +33,13 @@
   "beginner",
   "agulu1_damped_forecast_h24_bopd",
   165.93091668046597,
-  5e-7
+  0.0001
  ],
  [
   "intermediate",
   "nanka1_holdout_damped_smape_pct",
   43.68270902593368,
-  5e-7
+  0.00001
  ],
  [
   "intermediate",
@@ -51,13 +51,13 @@
   "intermediate",
   "nanka1_holdout_damped_me_bopd",
   -85.00127607099324,
-  5e-7
+  0.00001
  ],
  [
   "intermediate",
   "nanka2_backtest_holt_rmse_bopd",
   32.871937503375555,
-  5e-7
+  0.00001
  ],
  [
   "intermediate",
@@ -69,25 +69,25 @@
   "intermediate",
   "nanka2_backtest_holt_step6_mae_bopd",
   33.483471338670675,
-  5e-7
+  0.00001
  ],
  [
   "advanced",
   "umunze1_damped_p90_h12_bopd",
   77.53186379015042,
-  5e-7
+  0.0001
  ],
  [
   "advanced",
   "umunze1_damped_p10_h12_bopd",
   255.05613380249784,
-  5e-7
+  0.00001
  ],
  [
   "advanced",
   "umunze1_damped_p50_h6_bopd",
   185.27163894112164,
-  5e-7
+  0.00001
  ],
  [
   "advanced",
