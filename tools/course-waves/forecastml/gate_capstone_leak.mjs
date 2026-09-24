@@ -79,7 +79,15 @@ const count = (k, n = 1) => { counts[k] = (counts[k] || 0) + n; };
 /* ---- the capstone inputs: one rate series per well, and the distinctive scalars ---- */
 const series = [];
 const scalars = [];
-const bigInt = (v) => typeof v === 'number' && Number.isInteger(v) && Math.abs(v) >= 100;
+// A value the engine uses by default (nSims 1000) is no capstone input: every
+// example that leaves nSims out uses it. Such scalars are left out and counted.
+const ENGINE_DEFAULTS = new Set(Object.values((await import(`${ENG}/engines/dataai/forecast.js`)).DEFAULTS).filter((v) => typeof v === 'number'));
+let defaultsLeftOut = 0;
+const bigInt = (v) => {
+  if (!(typeof v === 'number' && Number.isInteger(v) && Math.abs(v) >= 100)) return false;
+  if (ENGINE_DEFAULTS.has(v)) { defaultsLeftOut += 1; return false; }
+  return true;
+};
 Object.entries(INPUTS).forEach(([name, o]) => {
   const F = o.field;
   if (bigInt(F.seed)) scalars.push({ name, k: 'field.seed', v: F.seed });
@@ -90,6 +98,7 @@ Object.entries(INPUTS).forEach(([name, o]) => {
   Object.entries(o.stated).forEach(([k, v]) => { if (bigInt(v)) scalars.push({ name, k: `stated.${k}`, v }); });
 });
 console.log('  the stated alpha, beta, h, seeds and origins are small numbers any example uses, so they are left out of the scalars and printed as left out');
+console.log(`  stated scalars equal to an engine default, left out: ${defaultsLeftOut}`);
 
 /* ---- the negative controls, planted in memory ---- */
 if (has('--plant-value')) DIGEST += `\n| planted | ${FIELDS[3][2].toFixed(6)} |\n`;
@@ -105,6 +114,9 @@ series.forEach(({ name, k, v }) => {
   for (let i = 0; i + 3 <= v.length; i += 1) {
     const w = v.slice(i, i + 3);
     if (w.some((x) => x === null)) continue;
+    // A run of one repeated value (three shut-in months at 0) matches any flat
+    // example and says nothing about the capstone; it is left out and counted.
+    if (w.every((x) => x === w[0])) { count('1 constant runs left out'); continue; }
     runs.push({ name, k, i, six: w.map((x) => x.toFixed(6)).join(', '), raw: w.map(String).join(', '), rawTight: w.map(String).join(',') });
   }
 });
@@ -112,7 +124,9 @@ if (runs.length < 250) die(`only ${runs.length} capstone runs of three built`);
 
 const NUM = /(?<![\w.])-?\d+(?:\.\d+)?(?:e[-+]?\d+)?(?![\w])/g;
 const literals = (text) => [...text.matchAll(NUM)].map((m) => Number(m[0])).filter((x) => Number.isFinite(x));
-const hasWord = (text, s) => new RegExp(`(?<![\\d.])${String(s).replace(/[.]/g, '\\.')}(?![\\d])`).test(text);
+// A whole-number scalar is matched as a whole number: 980 in "980.353000" is a
+// different number and is not a hit (the (?!\.\d) guard).
+const hasWord = (text, s) => new RegExp(`(?<![\\d.])${String(s).replace(/[.]/g, '\\.')}(?![\\d])(?!\\.\\d)`).test(text);
 const runsIn = (text) => runs.filter((r) => text.includes(r.six) || text.includes(r.raw) || text.includes(r.rawTight));
 
 // 1. INPUTS

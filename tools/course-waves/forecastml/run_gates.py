@@ -57,6 +57,7 @@ def sha256(p):
 # (name, gate file, command, expected exit)
 RUNS = [
     ('structure.py', f'{HERE}/structure.py', ['python3', f'{HERE}/structure.py'], 0),
+    ('prove_prior_courses.sh', f'{HERE}/prove_prior_courses.sh', ['bash', f'{HERE}/prove_prior_courses.sh'], 0),
     ('scaffold.py --check', f'{HERE}/scaffold.py', ['python3', f'{HERE}/scaffold.py', '--check'], 0),
     ('d4_capstone.mjs', f'{HERE}/d4_capstone.mjs', ['node', f'{HERE}/d4_capstone.mjs'], 0),
     ('make_fields.mjs', f'{HERE}/make_fields.mjs', ['node', f'{HERE}/make_fields.mjs'], 0),

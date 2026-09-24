@@ -53,7 +53,7 @@ RULES = [
         r'|\bP10\s+(?:is|=|means|equals)\s+(?:the\s+)?(?:10th|low)'
         r'|\bP90\s*\(\s*high|\bP10\s*\(\s*low'
         r'|90th percentile\s*\(\s*P90|10th percentile\s*\(\s*P10', re.I)),
-    ('a P label the engine does not print', re.compile(r'\bP(?:1|5|25|75|95|99)\b')),
+    ('a P label the engine does not print', re.compile(r'(?<![-\w])P(?:1|5|25|75|95|99)\b')),
     ('an AI claim', re.compile(r'\bAI\b|AI-powered|artificial intelligence', re.I)),
 ]
 REPORT = [

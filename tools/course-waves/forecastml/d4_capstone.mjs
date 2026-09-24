@@ -130,7 +130,7 @@ must('Agulu-1: ses fitted there stops on alpha 1 (so the graded alpha is AGULU-2
 
 const NANKA = freeze({
   field: buildField({ seed: 82247, wells: [
-    { id: 'NANKA-1', months: 48, qi: 1120, Di: 0.048, b: 0.55, noise: 0.045, shutIn: [40, 41], uplift: 0 },
+    { id: 'NANKA-1', months: 48, qi: 1117, Di: 0.048, b: 0.55, noise: 0.045, shutIn: [40, 41], uplift: 0 },
     { id: 'NANKA-2', months: 50, qi: 980, Di: 0.06, b: 0.35, noise: 0.06 },
   ] }),
   stated: { train: 36, h: 12, firstOrigin: 18, horizon: 6, step: 4 },

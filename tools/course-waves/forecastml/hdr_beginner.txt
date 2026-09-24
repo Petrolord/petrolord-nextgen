@@ -1,0 +1,23 @@
+-- ============================================================================
+-- D4 ASSOCIATE DEEP SEED: Data-Driven Production Forecasting, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/forecastml/beginner.
+--
+-- What this tier owns: SMOOTHING A RATE SERIES INTO A FORECAST. A monthly rate
+-- series and the one-step and h-step forecasts; simple exponential smoothing,
+-- its level and alpha, the start at the first month and the flat forecast,
+-- alpha at 1 as the naive forecast; Holt's linear trend, the second month
+-- spent on the start and where scoring starts; the damped trend, phi, the
+-- flattening and its limit; the parameter fit by the least one-step sum of
+-- squared errors on a grid and a compass search, parameters on their bounds;
+-- the NIST handbook as a published check. Digest sections 1 to 10, and
+-- section 25.
+--
+-- THE TRAP THE TIER IS BUILT ON. A fit is in-sample: a low MSE says how well a
+-- method followed months it had already seen, and a straight trend runs below
+-- zero on a well that cannot. The Associate capstone grades six Associate
+-- quantities and grades no backtest, no interval and no Arps baseline.
+-- ============================================================================

@@ -48,7 +48,357 @@
   "trend": "the smoothed trend state b. Section 25.",
   "machine learning": "names the method (exponential smoothing, residual bootstrap, least-squares Arps). Section 25."
  },
- "openItems": {},
+ "openItems": {
+  "ENGINE FINDING E1 (wording, repair first)": "backtest and compareWithArps build naiveScale's label as `the ${o} training values`, so a training window of m values or fewer reads \"MASE is undefined: at origin 12 the 12 training values has 12 values, so the lag-12 naive forecast has no in-sample error (it needs more than 12)\" (digest section 3, the notes table): a plural subject with \"has\", and the count said twice. Reported to the lead; the digest quotes it verbatim until the engine is repaired and the wave re-cut.",
+  "ENGINE FINDING E2 (wording, repair first)": "the zero-scale reason in a backtest reads \"on the 6 values of the 6 training values\" (digest section 3 and section 16), the count said twice. Reported to the lead.",
+  "ENGINE FINDING E3 (wording, repair first)": "checkBacktest writes `then ${horizon} actuals` and `leaves fewer than ${horizon} actuals` with no singular, so horizon 1 reads \"then 1 actuals\" (digest section 3, the EKENE-P6 backtest refusal) and \"leaves fewer than 1 actuals\". Reported to the lead.",
+  "ENGINE OBSERVATION E4 (a stated behaviour, not a defect)": "forecastIntervals resamples the residuals as fitted, never centred, so on a declining well a flat method's paths drift and the point forecast can lie outside its own P90 to P10 band (digest section 18: ses on EKENE-P1 at step 12, 211.400000 against a P10 of 69.250000). The basis says the residuals are drawn from the scored in-sample residuals but not that they are uncentred. The course teaches it as a property; the lead may want one clause in the basis and a line in FINDINGS known limits.",
+  "PLAN ROSTER: feature regression": "Suite NextGen-Remaining-Courses-PLAN.md section 15 lists 'feature regression' for D4; the engine builds none and the digest lists it as not built, with regression owned by D2. The lead decides whether the roster line is amended.",
+  "TOLERANCE DECISION": "fields resting on fitted parameters are stated at 10 x the engine-oracle disagreement (1e-5 or 1e-4) in gradedTolerance.js; the rest at the printed floor 5e-7. oracle_check.py re-measures on every run."
+ },
  "cleared_claims": [],
- "fieldsDiscrimination": {}
+ "fieldsDiscrimination": {
+  "agulu2_ses_alpha": "the other well, holt alpha instead, damped alpha instead, grid start quoted, fitted on the first three years",
+  "agulu1_holt_fixed_mse_bopd2": "sse quoted, divided by every month, divided by n less one, root taken, parameters fitted instead, ses at the same alpha",
+  "agulu1_holt_beta": "alpha quoted, damped beta, grid start quoted, the other well, stated beta quoted",
+  "agulu1_holt_forecast_h12_bopd": "step eleven, step thirteen, damped instead, ses flat forecast, stated parameters used, last month less one step",
+  "agulu1_damped_phi": "the other well, grid start quoted, upper bound quoted, alpha quoted, with the stated alpha",
+  "agulu1_damped_forecast_h24_bopd": "step twelve, step twenty five, holt instead, the limit quoted, phi given as one",
+  "nanka1_holdout_damped_smape_pct": "mape with the shut in dropped, smape with the shut in dropped, on zero to one hundred, holt instead, forecast alone in the denominator",
+  "nanka1_holdout_damped_mase": "scaled by the holdout naive, lag twelve, scaled by the whole series, holt instead, rmse over the scale",
+  "nanka1_holdout_damped_me_bopd": "forecast minus actual, mae quoted, holt instead, shut in months dropped, ses instead",
+  "nanka2_backtest_holt_rmse_bopd": "mae quoted, parameters held, fitted on every month first, step one, mean of the origin rmses, ses instead",
+  "nanka2_backtest_holt_held_mase": "refitted, lag twelve, one scale for every origin, scaled by the actuals scored, held from the full series",
+  "nanka2_backtest_holt_step6_mae_bopd": "step one, overall quoted, step five, held parameters, rmse at step six",
+  "umunze1_damped_p90_h12_bopd": "the ninetieth percentile read as p90, the next seed, the point forecast, step eleven, holt instead, nine hundred ninety nine paths",
+  "umunze1_damped_p10_h12_bopd": "the tenth percentile read as p10, the next seed, p50 quoted, ses instead, ten thousand paths",
+  "umunze1_damped_p50_h6_bopd": "the point forecast, the next seed, step five, step seven, step twelve",
+  "umunze1_arps_di_per_month": "quoted per year, quoted per day, exponential forced, harmonic forced, fitted on three years, the other well",
+  "umunze2_compare_arps_mase": "the best quoted, arps mae quoted, lag twelve, exponential arps, step one, one arps fit on the first window",
+  "umunze2_compare_best_mase": "arps quoted, second ranked, best by mae then its mase, parameters held, last ranked"
+ },
+ "digest": {
+  "lines": 817,
+  "sections": 25,
+  "md5": "07d3ae95b628111c77f3f2ab3d71ad5b",
+  "sha256": "e88c79f416dca440aa37201a835a997dcb6dc1d7beaa28279cae2975c291b6f0"
+ },
+ "fields": {
+  "count": 18,
+  "sha256": "1ffa032f9a4d713aef4a82aed8520fcef8675555442e36980d120591c41cacc9",
+  "keys": [
+   "agulu2_ses_alpha",
+   "agulu1_holt_fixed_mse_bopd2",
+   "agulu1_holt_beta",
+   "agulu1_holt_forecast_h12_bopd",
+   "agulu1_damped_phi",
+   "agulu1_damped_forecast_h24_bopd",
+   "nanka1_holdout_damped_smape_pct",
+   "nanka1_holdout_damped_mase",
+   "nanka1_holdout_damped_me_bopd",
+   "nanka2_backtest_holt_rmse_bopd",
+   "nanka2_backtest_holt_held_mase",
+   "nanka2_backtest_holt_step6_mae_bopd",
+   "umunze1_damped_p90_h12_bopd",
+   "umunze1_damped_p10_h12_bopd",
+   "umunze1_damped_p50_h6_bopd",
+   "umunze1_arps_di_per_month",
+   "umunze2_compare_arps_mase",
+   "umunze2_compare_best_mase"
+  ]
+ },
+ "gates": {
+  "structure.py": {
+   "md5": "332718b85654cdec6cd4bd7202637935",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "prove_prior_courses.sh": {
+   "md5": "d7e6a3480d231dab45e6cddad73fa407",
+   "command": "bash prove_prior_courses.sh",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PRIOR COURSES UNCHANGED: D1, D2, D3 digests, fields and precision rebuild byte-identical against /root/wt-dai-d4-nextgen/packages/engines"
+  },
+  "scaffold.py --check": {
+   "md5": "8fdd17b68941427f05ad847b44cb6133",
+   "command": "python3 scaffold.py --check",
+   "expected": 0,
+   "exit": 0,
+   "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
+  },
+  "d4_capstone.mjs": {
+   "md5": "e28e9a7498d5f29f611b82db184ff58c",
+   "command": "node d4_capstone.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d4_capstone: 91 label-and-call, scenario, convergence, bound and seed assertions run, 0 failed"
+  },
+  "make_fields.mjs": {
+   "md5": "9d184f44a789e00703ace7cfa2fa1386",
+   "command": "node make_fields.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d4_capstone: 91 label-and-call, scenario, convergence, bound and seed assertions run, 0 failed"
+  },
+  "make_fields.mjs NEGATIVE CONTROL": {
+   "md5": "9d184f44a789e00703ace7cfa2fa1386",
+   "command": "node make_fields.mjs --bare-stated-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "d4_capstone: 91 label-and-call, scenario, convergence, bound and seed assertions run, 0 failed"
+  },
+  "oracle_check.py": {
+   "md5": "e5bff3efeed163d67410b1a07a8416b9",
+   "command": "python3 oracle_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 4 s; worst relative difference 6.64e-08; disagreements: 0"
+  },
+  "oracle_check.py NEGATIVE CONTROL": {
+   "md5": "e5bff3efeed163d67410b1a07a8416b9",
+   "command": "python3 oracle_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: nanka2_backtest_holt_rmse_bopd was moved by ten tolerances; caught"
+  },
+  "discriminate.mjs": {
+   "md5": "bbc0c475b80c421fccff796a9c099b89",
+   "command": "node discriminate.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "CLOSEST MISS ACROSS THE WHOLE SWEEP: umunze1_damped_p90_h12_bopd via nine_hundred_ninety_nine_paths, 1.133e+3 tolerances away"
+  },
+  "discriminate.mjs NEGATIVE CONTROL": {
+   "md5": "bbc0c475b80c421fccff796a9c099b89",
+   "command": "node discriminate.mjs --slack-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: tolerances multiplied by 1000000000000. Expected 18 WEAK routes, got 18."
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "command": "/root/dc-wavekit/digestrepro.sh dai-wip-forecastml /root/wt-dai-d4-nextgen",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d4_dump: 859 label-and-call, measurement and claim assertions run, 0 failed; 25 sections"
+  },
+  "digestprose.mjs": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-forecastml",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] /root/dai-wip-forecastml/digest.txt: 817 line(s), 25 section title(s) and 78 in-body marker(s) swept against their blocks, 32 history framings, 28 engine pin(s); 4 warned for a human read and 0 framed as cu"
+  },
+  "digestprose.mjs --selftest": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] selftest OK: the founding heading case is caught by the corrected pairing and missed by the broken one; both real keyword cases fail inside a teaching section; FC3 line 683 WARNS where the keyword family ca"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py dai-wip-forecastml",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "digestfigures.py --selftest": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] selftest OK"
+  },
+  "digestpromise.py": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py dai-wip-forecastml",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 completeness problem(s), all checks applied"
+  },
+  "digestpromise.py --selftest": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "command": "python3 /root/dc-wavekit/digestleak.py dai-wip-forecastml",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "command": "python3 /root/dc-wavekit/collisions.py dai-wip-forecastml",
+   "expected": 0,
+   "exit": 0,
+   "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py dai-wip-forecastml",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[gradeprecision] /root/dai-wip-forecastml: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 6 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "command": "python3 /root/dc-wavekit/briefleak.py dai-wip-forecastml",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 graded answer(s) reachable from this brief"
+  },
+  "briefcheck.py": {
+   "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
+   "command": "python3 /root/dc-wavekit/briefcheck.py dai-wip-forecastml",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
+  },
+  "gate_capstone_leak.mjs": {
+   "md5": "6dacf6940de516f27d3d13c131552945",
+   "command": "node gate_capstone_leak.mjs --no-banks",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
+   "md5": "6dacf6940de516f27d3d13c131552945",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-value",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
+   "md5": "6dacf6940de516f27d3d13c131552945",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-input",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
+   "md5": "6dacf6940de516f27d3d13c131552945",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-name",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
+   "md5": "6dacf6940de516f27d3d13c131552945",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
+  },
+  "gate_copy_rule.py": {
+   "md5": "26305b68566abfc56f9f6bd6da611ddd",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "26305b68566abfc56f9f6bd6da611ddd",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got 2"
+  },
+  "gate_typed_literals.py": {
+   "md5": "62057d15fdad94000bec955af6e12184",
+   "command": "python3 gate_typed_literals.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "UNEXPLAINED TYPED NUMBERS: 0"
+  },
+  "gate_typed_literals.py NEGATIVE CONTROL": {
+   "md5": "62057d15fdad94000bec955af6e12184",
+   "command": "python3 gate_typed_literals.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a typed 4.217 was planted in a printed line; caught 1"
+  },
+  "gate_vocabulary.py": {
+   "md5": "f28bbb15d7f081c7286b2c92cc8260c4",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "exemptions declared: 1, dead: []"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "f28bbb15d7f081c7286b2c92cc8260c4",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected a wrong-meaning P label and an AI claim caught; got ['a P label in the wrong meaning', 'an AI claim']"
+  },
+  "truth_check.py": {
+   "md5": "eb41206ec747d2f96fdaa7b185644486",
+   "command": "python3 truth_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "truth_check: truth-forecastml.json (413 digest lines) IS the harvest of digest.txt"
+  },
+  "truth_check.py NEGATIVE CONTROL": {
+   "md5": "eb41206ec747d2f96fdaa7b185644486",
+   "command": "python3 truth_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a line was planted in the scratch digest; expected a mismatch, caught"
+  },
+  "numsweep_forecastml.mjs": {
+   "md5": "6d687be2b718829134e7221ff4e8de94",
+   "command": "node numsweep_forecastml.mjs",
+   "expected": "held NOT ONE literal of seven or more significant figures",
+   "exit": 1,
+   "summary": "This gate does not pass on an empty or unreadable sweep.",
+   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+  },
+  "numsweep_forecastml.mjs --selftest": {
+   "md5": "6d687be2b718829134e7221ff4e8de94",
+   "command": "node numsweep_forecastml.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "numsweep_forecastml selftest OK"
+  },
+  "lengths.py": {
+   "md5": "cd38a428a63f05635972d93691dec50d",
+   "command": "python3 lengths.py",
+   "expected": [
+    "UNDER ITS OWN FLOOR",
+    78
+   ],
+   "exit": 1,
+   "summary": "tiers read: 3  out of band: 81  not written yet: 0",
+   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+  },
+  "lengths.py --selftest": {
+   "md5": "cd38a428a63f05635972d93691dec50d",
+   "command": "python3 lengths.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
+  },
+  "gate_claims.mjs": {
+   "md5": "1850ce7a0c59056b507d904831a42f17",
+   "command": "node gate_claims.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_claims.mjs NEGATIVE CONTROL": {
+   "md5": "1850ce7a0c59056b507d904831a42f17",
+   "command": "node gate_claims.mjs --plant-a-recon-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 1."
+  }
+ }
 }
