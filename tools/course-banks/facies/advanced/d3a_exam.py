@@ -58,10 +58,10 @@ x("A new row passed to `knnClassify` carries only one log, while the training ro
 # 6
 x("Held-out EKENE-6 at k 7 and k 9 both score 0.800000. What may a report say about the two?",
  "They score the same accuracy on the 30 rows of EKENE-6, which says nothing about other wells",
- ["They are the same model, since two values of k that score alike on one well give the same predictions",
+ ["One of the two must be a rounding, as two different k cannot score exactly alike on one well",
   "The larger k is to be preferred, since a larger k averages more rows at no cost in accuracy",
   "Both beat k 15 by a margin that proves the accuracy falls steadily with every rise in k"],
- "The table gives 0.800000 at both k, each on the 30 rows of EKENE-6; equal accuracies do not mean the same rows were right, and one held-out well is one draw. The accuracy does not fall steadily: k 3 at 0.866667 is above k 1 at 0.833333. A larger k reaches further from the new row, and whether that helps is what the held-out score measures.")
+ "The table gives 0.800000 at both k, each on the 30 rows of EKENE-6. Both are the same count of right rows out of 30, so nothing was rounded, and two k can score exactly alike; one held-out well is one draw, and it says nothing about other wells. The accuracy does not fall steadily: k 3 at 0.866667 is above k 1 at 0.833333. A larger k reaches further from the new row, and whether that helps is what the held-out score measures.")
 
 # 7
 x("Cored row 6 reads GR 59.800000, RHOB 2.415000, NPHI 0.221000 and PEF 1.990000. Traced down the printed five-channel tree, which leaf does it reach?",
@@ -93,7 +93,7 @@ x("A tree of maxDepth 1 on the 180 cored rows has 3 nodes and 2 leaves, with a t
  ["As a failed call, since an accuracy of 0 is what the engine returns when a held-out well is refused",
   "As proof that the root split on NPHI is wrong, since a correct split would place some rows right",
   "As the training accuracy of a tree grown on EKENE-6 itself, printed in the held-out column by error"],
- "The depth table prints both columns: 0.577778 on the rows the tree was grown on and 0.000000 on EKENE-6, held out, at maxDepth 1, and 0.000000 at maxDepth 0 too. A refusal returns no accuracy at all. The figure says the one-split tree grown on the other five wells predicts none of EKENE-6's rows right; deeper trees reach 0.900000 there.")
+ "The depth table prints both columns: 0.577778 on the rows the tree was grown on and 0.000000 on EKENE-6, held out, at maxDepth 1, and 0.000000 at maxDepth 0 too. A refusal returns no accuracy at all. The figure says the one-split tree grown on the other five wells predicts none of EKENE-6's rows right: it has 2 leaves, so it can predict at most two facies, and neither is the core facies of any of the 30 rows. Deeper trees reach 0.900000 there.")
 
 # 11
 x("At maxDepth 0 the tree on the 180 cored rows is one leaf. What does it predict, and why does its training accuracy read 0.300000?",
@@ -117,7 +117,7 @@ x("A tree is grown on the four logs in the order PEF, GR, RHOB, NPHI at depth 1.
  ["NPHI, which wins the root tie on the cored rows in any column order",
   "GR, the log with the largest unit, as gAPI outweighs the other logs",
   "Both, since equal decreases are kept together in one root node"],
- "NPHI and PEF each separate exactly the 54 limestone rows, so their decreases are exactly equal, and the tie goes to the lower feature index. With PEF first, PEF has index 0 and NPHI index 3. GR splits the limestone off no better, and a node splits on one log only.")
+ "NPHI and PEF each separate exactly the 54 limestone rows, so their decreases are exactly equal, and the tie goes to the lower feature index. With PEF first, PEF has index 0 and NPHI index 3. GR comes first in the order GR, RHOB, NPHI, PEF and still loses the root there, so its best split lowers the Gini by less; a node splits on one log only.")
 
 # 14
 x("`cartFit` is passed four logs with a names list of only two. What does it return?",
@@ -272,7 +272,7 @@ x("An elbow run finds two values of k with exactly the same highest mean silhoue
  "The basis: \"bestSilhouetteK has the highest mean silhouette; a tie goes to the smaller k. No elbow is picked automatically: read the drops\". The engine does report a best silhouette k; what it never picks is an elbow. The drop fractions are printed for the reader and take no part in the tie.")
 
 # 33
-x("`cutTree` is passed a linkage matrix whose row 1 names a cluster id that no earlier merge has made. What is refused?",
+x("`cutTree` is passed a two-merge linkage matrix over three rows of data, whose row 1 names a cluster id that no earlier merge has made. What is refused?",
  "The row, by name: \"linkageMatrix[1] must be [id1, id2, height, size] with whole ids 0 <= id1 < id2 < 4\"",
  ["Nothing: cutTree creates the missing cluster at height 0 and cuts the matrix it has",
   "The whole matrix, as empty: \"linkageMatrix must be the non-empty linkageMatrix of agglomerative\"",
@@ -316,7 +316,7 @@ x("Which course owns scoring every cored well in turn, and the precision and rec
  "The machine learning course: this engine does not split wells or cross-validate",
  ["This course, in the Expert tier, through the held-out EKENE-6 score of 0.833333",
   "The data quality course, which also owns gamma ray normalisation between wells",
-  "The petrophysics course, which owns the facies definitions that the core records describe"],
+  "The petrophysics course, which owns porosity, saturation and net pay from these same logs"],
  "The engine does not split wells or cross-validate; a split by whole wells and its scores belong to the machine learning course, whose report is read here and never re-derived. This course states one held-out well. The data quality course owns log conditioning and gamma ray normalisation, and petrophysics owns porosity, saturation and net pay.")
 
 # 39
@@ -346,10 +346,10 @@ x("The facies note carries a line on where the clustering fails. What does it sa
 # 42
 x("Of the three rules that settle a distance or height tie, which is the agglomerative one?",
  "The tied pair of merges with the lowest cluster ids wins",
- ["The merge whose new cluster would hold the most rows wins",
-  "The merge first reached by k-means++ seeding wins",
-  "The merge with the higher Ward height wins the tie"],
- "Each function breaks a tie by its own stated rule inside the 1.00e-12 band: k-means gives a tied row to the lower centre, kNN takes the lower row, and agglomerative takes the tied pair with the lowest cluster ids, the smaller id first. Tied merges have the same height by definition, and neither size nor any seeding enters.")
+ ["Whichever merge would make the cluster holding the most rows wins",
+  "A merge reached first by k-means++ seeding wins",
+  "Of the tied merges, the one with the higher Ward height wins"],
+ "Each function breaks a tie by its own stated rule inside the 1.00e-12 band: k-means gives a tied row to the lower centre, kNN takes the lower row, and agglomerative takes the tied pair with the lowest cluster ids, the smaller id first. Tied merges sit within the band of the smallest height, so height cannot order them, and neither size nor any seeding enters.")
 
 assert next(_i, None) is None
 emit(Q, '/root/dai-wip-facies/banks/d3a_exam.json', expect_n=42)

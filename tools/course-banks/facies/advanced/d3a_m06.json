@@ -156,10 +156,10 @@
  {
   "prompt": "For a note to be re-runnable, which setting must be written beside a tree's figures that a reader might not expect?",
   "options": [
-   "The column order of the logs, because it decides a tied root and every node below it",
+   "The column order of the logs, because it decides a tied root and the node numbers below it",
    "The random_state of the tree, because the engine draws its feature order from that seed",
    "The seed of the tree's scaler, since the engine standardises every log before splitting",
-   "The number of starts, as the tree keeps the best of 10 grown on shuffled rows"
+   "The number of starts, as the tree keeps the best of 10 trees grown on shuffled copies of the rows"
   ],
   "answer": 0,
   "explanation": "The engine breaks a split tie by the lower column index, so the order the logs are passed in decides the printed tree where two logs tie, as NPHI and PEF do at the root. The engine takes no random_state and draws no feature order; a tree scales nothing; and cartFit grows one tree. For a sampled silhouette the note would carry the sample size and seed instead."

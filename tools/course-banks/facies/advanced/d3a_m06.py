@@ -107,10 +107,10 @@ q(2, "A facies note for the Ekene field is assembled from all three tiers. Which
  "The withheld facies scored the predictions in this course only because the field is synthetic, and a real note has nothing like them. The seed and starts, the held-out well, and the elbow and silhouette readings beside the choice of k are exactly what the note carries, so that a colleague with the same wells and engine can reproduce every figure without asking a question.")
 
 q(0, "For a note to be re-runnable, which setting must be written beside a tree's figures that a reader might not expect?",
- "The column order of the logs, because it decides a tied root and every node below it",
+ "The column order of the logs, because it decides a tied root and the node numbers below it",
  ["The random_state of the tree, because the engine draws its feature order from that seed",
   "The seed of the tree's scaler, since the engine standardises every log before splitting",
-  "The number of starts, as the tree keeps the best of 10 grown on shuffled rows"],
+  "The number of starts, as the tree keeps the best of 10 trees grown on shuffled copies of the rows"],
  "The engine breaks a split tie by the lower column index, so the order the logs are passed in decides the printed tree where two logs tie, as NPHI and PEF do at the root. The engine takes no random_state and draws no feature order; a tree scales nothing; and cartFit grows one tree. For a sampled silhouette the note would carry the sample size and seed instead.")
 
 emit(Q, '/root/dai-wip-facies/banks/d3a_m06.json', expect_n=15)

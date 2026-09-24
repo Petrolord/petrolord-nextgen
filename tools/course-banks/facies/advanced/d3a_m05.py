@@ -58,11 +58,11 @@ q(0, "At k 4, seed 3, 10 starts on the 180 cored rows, starts 3, 5 and 8 all pri
  "The basis: \"lowest inertia over the runs; a run within 1e-12 (relative) of the best so far does not replace it\". The course prints the largest difference, 0, before calling them tied; printing alike at six decimals decides nothing. Passes do not break ties: start 5 took 5 passes, fewer than start 3's 6, and still lost. A row that opens two starts plays no part in the rule.")
 
 q(2, "Two figures a report compares print alike at six decimals. When may the report say they tie?",
- "Only where the engine's own comparison says so, such as a tied-vote count or a win kept by an earlier start",
+ "Only where the engine's own comparison says so, such as a tied-vote count or a difference inside the band",
  ["Whenever they print alike at six decimals, since the course prints every figure at that precision",
   "When their difference is below 1.00e-6, the size of the last printed digit at six decimals",
   "Whenever both are distances, as distances within the band of 1.00e-12 always print alike"],
- "Six decimals hide differences far larger than a relative band of 1.00e-12, so a pair can agree at that precision and still fall outside the band. The evidence for a tie is the engine's own comparison: a tied-vote count, a count of tied steps in the merge history, or a win kept by the earlier start. A threshold at the last printed digit is a rule the engine does not use.")
+ "Six decimals hide differences far larger than a relative band of 1.00e-12, so a pair can agree at that precision and still fall outside the band. The evidence for a tie is the engine's own comparison: a tied-vote count, a count of tied steps in the merge history, or a printed difference from the winning start that sits inside the band, as the 0 of the tied starts does. An earlier start also keeps the win when a later one is plainly worse, so the win alone shows no tie. A threshold at the last printed digit is a rule the engine does not use.")
 
 q(1, "The correlation PCA's first component on the cored rows weighs GR 0.423323, RHOB -0.489083, NPHI 0.541336 and PEF -0.537169. Which weight does the sign rule make positive, and why?",
  "NPHI's, the largest in absolute value, with PEF close behind and far outside the 1.00e-9 band",

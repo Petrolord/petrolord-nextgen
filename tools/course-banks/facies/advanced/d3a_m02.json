@@ -162,6 +162,6 @@
    "\"names must be an array of 4 feature names, one per column\""
   ],
   "answer": 2,
-  "explanation": "cartFit refuses a mixed label list with the words in the key: every label must share the type of the first. \"y[1] must be a string or a finite number\" is kNN's refusal of a null facies. The length refusal and the names refusal are real messages about other faults, with other fields: `y` in knnClassify and `names` in cartFit."
+  "explanation": "cartFit refuses a mixed label list with the words in the key: every label must share the type of the first. The form \"must be a string or a finite number\" is the refusal of a null facies, as knnClassify words it for `y[1]`, and the question passed no null. The length refusal and the names refusal are real messages about other faults, with other fields: `y` in knnClassify and `names` in cartFit."
  }
 ]

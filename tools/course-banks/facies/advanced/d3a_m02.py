@@ -111,7 +111,7 @@ q(2, "`cartFit` is passed the facies as a mix of names and numbers, and refuses 
  ["\"y[2] must be a string or a finite number\", because a name is not a number",
   "\"y must be an array of 180 labels, one per row\"",
   "\"names must be an array of 4 feature names, one per column\""],
- "cartFit refuses a mixed label list with the words in the key: every label must share the type of the first. \"y[1] must be a string or a finite number\" is kNN's refusal of a null facies. The length refusal and the names refusal are real messages about other faults, with other fields: `y` in knnClassify and `names` in cartFit.")
+ "cartFit refuses a mixed label list with the words in the key: every label must share the type of the first. The form \"must be a string or a finite number\" is the refusal of a null facies, as knnClassify words it for `y[1]`, and the question passed no null. The length refusal and the names refusal are real messages about other faults, with other fields: `y` in knnClassify and `names` in cartFit.")
 
 emit(Q, '/root/dai-wip-facies/banks/d3a_m02.json', expect_n=15)
 finish()
