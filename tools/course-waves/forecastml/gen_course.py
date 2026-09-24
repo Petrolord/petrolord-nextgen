@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# SHIP PHASE, NOT YET D4. Carried from D3 (tools/course-waves/facies) at the D4
+# foundation with names rewritten only; its D3 content (fields, prompts, case
+# files, dates) is rewritten for D4 at the ship phase. Do not run it for D4 yet.
 """Generate the D3 course + capstone migration AND the capstone case files from
 the ENGINE'S OWN RUN, so no expected value, no setting and no data point is
 retyped.

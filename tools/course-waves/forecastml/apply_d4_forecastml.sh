@@ -1,4 +1,7 @@
 #!/usr/bin/env bash
+# SHIP PHASE, NOT YET D4. Carried from D3 (tools/course-waves/facies) at the D4
+# foundation with names rewritten only; its D3 content (migration names, dates,
+# content pins) is rewritten for D4 at the ship phase. Do not run it for D4 yet.
 # =============================================================================
 # D3 facies "Electrofacies" SEED LADDER, content-addressed. The owner's
 # script. Adapted from apply_d2_mlcore.sh (D2): content pins read out of the git

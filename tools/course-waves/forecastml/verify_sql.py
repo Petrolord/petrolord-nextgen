@@ -1,4 +1,7 @@
 #!/usr/bin/env python3
+# SHIP PHASE, NOT YET D4. Carried from D3 (tools/course-waves/facies) at the D4
+# foundation with names rewritten only; its D3 content (fields, prompts, case
+# files, dates) is rewritten for D4 at the ship phase. Do not run it for D4 yet.
 """Compare the D3 facies seed ladder against its committed sources, FIELD BY FIELD:
 the three deep seeds against the 21 bank JSONs (every prompt, option, answer key
 and explanation of all 396 questions), the three structure rows against the

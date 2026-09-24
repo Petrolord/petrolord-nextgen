@@ -1,3 +1,5 @@
+-- SHIP PHASE, NOT YET D4. Carried from D3 (tools/course-waves/facies) at the D4
+-- foundation with names rewritten only; rewritten for D4 at the ship phase.
 
 -- ------------------------------------------------ the second route's helpers
 -- Every helper works on a FLAT row-major matrix (element i, j of an n x p
