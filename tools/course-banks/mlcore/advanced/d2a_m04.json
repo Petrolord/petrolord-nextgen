@@ -134,7 +134,7 @@
  {
   "prompt": "Why does the engine count a learning curve's size in wells?",
   "options": [
-   "Every well holds 30 rows here, so a count in wells and a count in rows give the same curve in the end anyway",
+   "Every well holds 30 rows here, so counting in wells is a shorter way to write the row counts and carries no other reason",
    "The engine cannot divide a well's rows, so any size given in rows would be rounded to whole wells",
    "Counting in wells is the scikit-learn convention, and the engine matches scikit-learn wherever it can so that results compare",
    "Rows of one well are not independent: 30 more rows from a well already in the fit carry its offset again"

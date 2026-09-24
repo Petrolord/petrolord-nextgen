@@ -97,7 +97,7 @@ q(1, "How does `learningCurve` choose its test wells and add its training wells 
 
 q(3, "Why does the engine count a learning curve's size in wells?",
  "Rows of one well are not independent: 30 more rows from a well already in the fit carry its offset again",
- ["Every well holds 30 rows here, so a count in wells and a count in rows give the same curve in the end anyway",
+ ["Every well holds 30 rows here, so counting in wells is a shorter way to write the row counts and carries no other reason",
   "The engine cannot divide a well's rows, so any size given in rows would be rounded to whole wells",
   "Counting in wells is the scikit-learn convention, and the engine matches scikit-learn wherever it can so that results compare"],
  "Each Ekene well sits above or below the fitted plane as a block, and the well means of the residuals span 12.562737 us/ft. Rows from a new well bring a new offset, so each step on the curve is one more well of the kind the model will be asked about. The common alternative counts rows, and the engine's stated reason for wells is that rows of one well are not independent.")

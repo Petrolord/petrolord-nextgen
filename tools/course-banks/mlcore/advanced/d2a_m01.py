@@ -43,8 +43,8 @@ q(2, "A fifth column exactly twice NPHI is added to the three logs. How did the 
  "It raised maxCondition to 1.00e+300, so the call was fitted and the field came back",
  ["It read the figure printed inside the refusal at the default, which is the field a lesson reasons with",
   "It centred NPHI and its copy first, which let the fit through at the default limit of 1.00e+8",
-  "It fitted ridge at lambda 10 on the same columns, since ridge returns the number that ols refuses on"],
- "A refusal returns `error` and `field` and no numeric field, so the course raised the limit to 1.00e+300 to have the number returned. The message's figure, 62175765717049960, is part of a sentence for a person and is quoted only as the engine's words. An exact copy stays an exact copy after centring. Ridge refuses above maxCondition as ols does, since the refusal rule belongs to both.")
+  "It fitted ridge at lambda 0 on the same columns, since ridge returns the number that ols refuses on"],
+ "A refusal returns `error` and `field` and no numeric field, so the course raised the limit to 1.00e+300 to have the number returned. The message's figure, 62175765717049960, is part of a sentence for a person and is quoted only as the engine's words. An exact copy stays an exact copy after centring. Ridge at lambda 0 refuses the same design in the same words, since the refusal rule belongs to both.")
 
 q(0, "Why does the default refusal limit sit at 1.00e+8?",
  "At kappa = 1.00e+8, kappa^2 x machine epsilon is 2.220446, so the worst-case error bound reaches the coefficient itself",

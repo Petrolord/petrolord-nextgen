@@ -15,7 +15,7 @@ q(1, "The engine's standard scaler divides by n. What reason does the engine sta
  "Ridge lambda then equals scikit-learn's alpha on the same standardised features",
  ["It matches the data quality course's z-score, which divides by the same n",
   "Dividing by n gives the unbiased estimate of each feature's spread",
-  "The n - 1 divisor cannot be computed on one training row"],
+  "The n - 1 divisor would make the scale depend on the seed of the split"],
  "The convention table gives the reason as ridge lambda equalling scikit-learn alpha on the same features. The data quality course's z-score uses the sample SD, divisor n - 1, which is the alternative this engine declined. On 180 rows the two scales differ by the factor 1.002789, so the divisor is named every time a standard deviation is quoted.")
 
 q(3, "A colleague runs a group split in another library with seed 5 and fraction 0.3 on the nine sonic wells and holds out different wells from EKENE-4, EKENE-5 and EKENE-8. How does the course compare the two splits?",

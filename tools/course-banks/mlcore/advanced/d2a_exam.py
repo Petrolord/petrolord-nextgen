@@ -36,7 +36,7 @@ q(1, "A caller passes maxCondition 0.5 to least squares. What comes back?",
  ["A refusal naming `X`, the message for a design whose scaled condition number is above maxCondition",
   "A fit, since every design has a scaled condition number of at least 1 and so the limit is simply never met",
   "A fit at the default limit of 1.00e+8, the value the engine puts in place of any limit it cannot use"],
- "The limit itself is refused by name: \"maxCondition must be a finite number, 1 or more\", and the field named is `maxCondition`. A refusal never substitutes a default for a bad input. A limit below 1 would refuse every design, since a condition number is at least 1, and NoInt1 reads exactly 1.000000.")
+ "The limit itself is refused by name: \"maxCondition must be a finite number, 1 or more\", and the field named is `maxCondition`. A refusal never substitutes a default for a bad input. A limit below 1 would refuse every design, since a condition number is at least 1, the value NoInt1 prints as 1.000000.")
 
 # CROSS m01 + m06
 q(2, "Another tool fits the design with a column exactly twice NPHI and prints its coefficients with a warning. Why does this engine refuse the same design at the default?",
@@ -79,11 +79,11 @@ q(2, "Logistic regression is passed only the 94 pay samples, every label 1. What
 
 # CROSS m02 + m06
 q(0, "Another tool runs Newton steps on PHIC for the high-RT rows and reports a very large coefficient with a warning. What does this engine do with the same rows at l2 0, and why?",
- "It decides separation exactly with two linear programmes before iterating and refuses, since no finite answer exists to print",
+ "It decides separation exactly by linear programme before iterating and refuses, since no finite answer exists to print",
  ["It iterates as the other tool does and stops when the coefficient passes a size cutoff stated in its basis",
   "It fits a finite coefficient, since the Newton step halving keeps the coefficient from growing past its limit",
   "Refusal comes only after maxIter updates, once the growth in the coefficient shows the labels are separated"],
- "The convention table sets the engine's choice, decided exactly by two linear programmes before iterating and refused at l2 = 0, against the alternative \"iterate and watch the coefficients grow\". The reason given: a separated maximum likelihood fit has no finite answer to print. The engine's check involves no size cutoff, and halving only guards against a step that lowers the log likelihood.")
+ "The convention table sets the engine's choice, decided exactly by two linear programmes before iterating and refused at l2 = 0, against the alternative \"iterate and watch the coefficients grow\". The reason given: a separated maximum likelihood fit has no finite answer to print. On these rows Gordan's programme alone decides it: infeasible, so complete, and Stiemke's is never reached. The engine's check involves no size cutoff, and halving only guards against a step that lowers the log likelihood.")
 
 q(3, "With l2 = 1 on the 106 high-RT rows the fit reports an intercept of 1.881712 and a PHIC coefficient of 0.817700. Which of the two does the penalty act on?",
  "PHIC's coefficient only: the penalty sums b_j^2 over the coefficients other than the intercept",

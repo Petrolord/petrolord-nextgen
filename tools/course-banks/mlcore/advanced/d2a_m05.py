@@ -42,8 +42,8 @@ q(2, "Leaving one well out, k 9, the Professional tier read 5.495600 for the log
  "As the lowest mean on the k 3, seed 5 folds, stated with those folds and that seed, and never as best for every well",
  ["As proven for every well, since the k 3 folds and the nine folds both test each of the nine wells once in the comparison",
   "As overturned, since leaving one well out is the more thorough scheme and so it replaces the k 3 result in the write-back",
-  "Four-decimal agreement between 5.495600 and 5.501614 would make the two lambdas equal, so either one may be quoted"],
- "At k 3 lambda 10 is lower, 5.826789 against 5.888677; at k 9 lambda 0 is lower, 5.495600 against 5.501614. Another k can reverse the order, so the choice is quoted with the folds and seed it was made on. The two k 9 means print differently at six decimals, and two figures are never keyed as equal from how they print.")
+  "As a tie, since 5.495600 and 5.501614 print alike once rounded to two decimals, so either lambda may be quoted"],
+ "At k 3 lambda 10 is lower, 5.826789 against 5.888677; at k 9 lambda 0 is lower, 5.495600 against 5.501614. Another k can reverse the order, so the choice is quoted with the folds and seed it was made on. The two k 9 means print alike at two decimals and differently at six, and two figures are never taken as equal from how they print.")
 
 q(0, "Step 2 fits the model that predicts EKENE-6. Which fit is it?",
  "Ridge at lambda 10 on all 270 sonic rows, GR's coefficient 0.292658 us/ft per gAPI in original units",
