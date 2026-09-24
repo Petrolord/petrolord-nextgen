@@ -438,7 +438,7 @@ Assigning the cored rows themselves returns exactly the fitted labels.
 | PC3 | 0.002748 | 0.000003 | -0.000189 | 0.978841 | -0.174857 | -0.106283 |
 | PC4 | 0.001509 | 0.000001 | -0.002211 | 0.176909 | 0.984173 | 0.010132 |
 
-The first covariance component is almost GR alone (weight 0.999905) and carries 0.998581 of the variance, because GR's variance in gAPI squared dwarfs the others': the covariance matrix's first diagonal entry is 1032.370110 against 0.018860, 0.009384, 1.636367 for RHOB, NPHI and PEF. On the correlation matrix (section 6) the first component carries 0.682351 and draws on all four logs. The engine's default is the correlation matrix for this reason.
+The first covariance component is almost GR alone (weight 0.999905) and carries 0.998581 of the variance, because GR's variance in gAPI squared dwarfs the others': the covariance matrix's first diagonal entry is 1032.370110 against 0.018860, 0.009384, 1.636367 for RHOB, NPHI and PEF. On the correlation matrix (section 6) the first component carries 0.682351 and draws on all four logs. The engine's default is the correlation matrix.
 
 THE SAME CHOICE IN K-MEANS. k 4, seed 3, ten starts, three scalings. Sizes are the rows in each cluster; the centres are in log units:
 
@@ -457,13 +457,13 @@ THE SAME CHOICE IN K-MEANS. k 4, seed 3, ten starts, three scalings. Sizes are t
 | minmax | 2 | 54 | 26.879630 | 2.642481 | 0.069037 | 4.909259 |
 | minmax | 3 | 43 | 66.686047 | 2.403023 | 0.243930 | 2.214884 |
 
-Raw, the four centres spread over 93.344030 gAPI of GR and 2.218682 b/e of PEF (derived, largest centre less smallest): the raw clusters are cut along GR. The inertias are in different units and cannot be compared across the three: standard 58.289042, raw 10331.820703, min-max 4.258929.
+Raw, the four centres spread over 93.344030 gAPI of GR and 2.218682 b/e of PEF (derived, largest centre less smallest), and their sizes are 67, 24, 65, 24 rows against the facies counts below. The inertias are in different units and cannot be compared across the three: standard 58.289042, raw 10331.820703, min-max 4.258929.
 
 Facies on the cored rows, for comparison: limestone 54, sandstone 50, shale 29, shaly-sand 47.
 
 # SECTION 12: Fisher's iris: a published check on the engine (owned by Associate m06 l02)
 
-Fisher's iris data (Fisher, 1936, The use of multiple measurements in taxonomic problems, Annals of Eugenics, volume seven, pages 179-188): 150 flowers, four measurements in cm (sepal_length, sepal_width, petal_length, petal_width), three species. The vendored copy is the file scikit-learn ships, test-data/dataai/iris/iris.csv. It has nothing to do with rock; it is here because a published figure for it exists, and an engine that reproduces it can be trusted on the logs.
+Fisher's iris data (Fisher, 1936, The use of multiple measurements in taxonomic problems, Annals of Eugenics, volume seven, pages 179-188): 150 flowers, four measurements in cm (sepal_length, sepal_width, petal_length, petal_width), three species. The vendored copy is the file scikit-learn ships, test-data/dataai/iris/iris.csv. It has nothing to do with rock; it is here because a published figure for it exists, so the engine's arithmetic can be checked against a source outside this programme.
 
 THE PUBLISHED FIGURE. The scikit-learn example "Comparison of LDA and PCA 2D projection of Iris dataset" prints the explained variance ratio of the first two covariance components as [0.92461872 0.05306648] (golden, recorded with its source). The engine, covariance matrix, all 150 flowers:
 
@@ -849,7 +849,7 @@ THE ROOT TIE BETWEEN TWO LOGS. Limestone is the only facies with NPHI at or belo
 
 The two splits make the same two groups of rows and the same decrease (the engine returns the two decreases exactly equal). The tie goes to the log with the LOWER COLUMN INDEX, so the order the logs are passed in decides the printed tree. The basis reads: "equal decreases (compared exactly on the integer counts) go to the lower feature index, then the lower threshold (scikit-learn breaks feature ties at random)". Splits are compared EXACTLY on the integer facies counts, so a tie is a tie and never a rounding.
 
-A SPLIT NEEDS A DECREASE ABOVE ZERO. Golden `cart-xor-no-split`: four rows (0, 0), (0, 1), (1, 0), (1, 1) labelled 0, 1, 1, 0, maxDepth 3. Every single split leaves each side half one label and half the other, so no split lowers the Gini (root 0.500000), and the tree stays a single leaf (1 node) predicting 0. A deeper look ahead would find the pattern; CART judges one split at a time.
+A SPLIT NEEDS A DECREASE ABOVE ZERO. Golden `cart-xor-no-split`: four rows (0, 0), (0, 1), (1, 0), (1, 1) labelled 0, 1, 1, 0, maxDepth 3. Every single split leaves each side half one label and half the other, so no split lowers the Gini (root 0.500000), and the tree stays a single leaf (1 node) predicting 0. CART judges one split at a time.
 
 A TIED LEAF. A leaf predicts its most common facies; a tie goes to the facies that sorts first. The basis reads: "the majority class of the leaf; a tie goes to the class that sorts first". Golden `cart-iris-depth0`: Fisher's iris, maxDepth 0, one leaf with counts 50, 50, 50 for setosa, versicolor, virginica; it predicts setosa, training accuracy 0.333333.
 
@@ -891,11 +891,11 @@ STEP 3, ONLY BECAUSE THIS FIELD IS SYNTHETIC: CHECK AGAINST THE WITHHELD FACIES.
 | EKENE-8 | kNN, k 5 | 27 | 0.900000 |
 | EKENE-8 | tree | 28 | 0.933333 |
 
-kNN misses 3 rows of EKENE-8: 3 sandstone as shaly-sand. A sandstone read 30 gAPI hot has the gamma ray of a shaly sand.
+kNN misses 3 rows of EKENE-8: 3 sandstone as shaly-sand. The stated sandstone GR mean is 45 gAPI and the shaly-sand mean 66 gAPI (section 2); 30 gAPI more puts a sandstone's mean GR above the shaly-sand mean.
 
 With the stated 30 gAPI taken off every EKENE-8 GR value (possible here only because the offset was planted and stated), kNN scores 1.000000 on the same well. In a real field the fix is a gamma ray normalisation between wells, which is the data quality course's, done before any facies is predicted.
 
-A RANGE CHECK SEES ONLY THE ROWS THAT LEAVE THE RANGE. Min-max flagged 10 rows of EKENE-8; kNN missed 3, and 3 of the misses sit inside the GR range. Every row of EKENE-8 carries the same offset, flagged or not.
+A RANGE CHECK SEES ONLY THE ROWS THAT LEAVE THE RANGE. Min-max flagged 10 rows of EKENE-8; kNN missed 3, and all 3 of the misses sit inside the GR range. Every row of EKENE-8 carries the same offset, flagged or not.
 
 STEP 4, WRITE IT BACK HONESTLY. The course's rule for a predicted facies, every value in it taken from the steps above:
 
