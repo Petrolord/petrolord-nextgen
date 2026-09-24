@@ -76,11 +76,11 @@ FILES="$SEEDS
 $GOLIVE"
 digest_for() {
   case $1 in
-    20261102_d3_facies_course           ) echo d9c99334301fe4929bc8b0561c2aec4480d73203288c65ffcd884fa37f636ab1 ;;
-    20261102_d3_facies_beginner_deep    ) echo 5efdda8e4ac8a35db2fe8a4eef6f2d8183912fc6476b42294c2104ba81af7082 ;;
-    20261102_d3_facies_intermediate_deep) echo c5db05a0dbed337f364174fecc279acd7e9f00f596e827671c9d21367019907a ;;
-    20261102_d3_facies_advanced_deep    ) echo ea29fe676cc491f9dc295272715ce6b8a8053a3de7bc3aa4bc891803b10a9bf3 ;;
-    20261102_d3_facies_go_live          ) echo 2a59bdbbcd49f57972acbc38a0059476a07c41056e753a0257f8a6e915c1b500 ;;
+    20261102_d3_facies_course             ) echo 36c1ef87686f2e9f305e87be55c03b1b120a841d7cfa0fd526d46f63b6988226 ;;
+    20261102_d3_facies_beginner_deep      ) echo fc8693119923f817d1bc380e51ff69a07f12df1ab93a96242b67559e340562a7 ;;
+    20261102_d3_facies_intermediate_deep  ) echo 8c92d015accbc2870f0163810fe070ac7c088a87583b7fffdc081e84f8bc5c7c ;;
+    20261102_d3_facies_advanced_deep      ) echo 31d09875235528c9c72561f0e4decd22c31b30ac2229c24288f5505507634499 ;;
+    20261102_d3_facies_go_live            ) echo ad4c2e2d84460dc19879a845670097d495758ccdf4e3583b5572f75f6e3dfb07 ;;
     *) echo UNPINNED ;;
   esac
 }
