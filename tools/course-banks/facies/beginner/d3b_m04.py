@@ -36,7 +36,7 @@ q(1, "For seed 3 on the 180 cored rows the first draw of mulberry32 is u = 0.720
  ["130, rounding 0.720227 x 180 to the nearest row",
   "The last of the four starting rows drawn for seed 3, row 11",
   "Always the first row, row 0, whatever u is"],
- "The first centre is row floor(u x n): floor(0.720227 x 180) is 129, counting rows from 0. The rule floors the product and does not round it, and row 11 is the last of the four drawn, after 129, 5 and 79."),
+ "The first centre is row floor(u x n): floor(0.720227 x 180) is 129, counting rows from 0. Rounding to the nearest row would give 130, and the rule takes the floor; row 11 is the last of the four drawn, after 129, 5 and 79."),
 
 q(2, "After the first k-means++ centre, how is each later centre drawn?",
  "With probability proportional to D squared, the squared distance to the nearest centre already chosen.",

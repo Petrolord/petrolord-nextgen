@@ -41,7 +41,7 @@
    "Always the first row, row 0, whatever u is"
   ],
   "answer": 1,
-  "explanation": "The first centre is row floor(u x n): floor(0.720227 x 180) is 129, counting rows from 0. The rule floors the product and does not round it, and row 11 is the last of the four drawn, after 129, 5 and 79."
+  "explanation": "The first centre is row floor(u x n): floor(0.720227 x 180) is 129, counting rows from 0. Rounding to the nearest row would give 130, and the rule takes the floor; row 11 is the last of the four drawn, after 129, 5 and 79."
  },
  {
   "prompt": "After the first k-means++ centre, how is each later centre drawn?",
