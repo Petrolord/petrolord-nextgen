@@ -1,0 +1,118 @@
+import sys, os; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D3 Professional m02, the silhouette.
+# Figures are the course's silhouettes: four stated points on a line, and the
+# teaching clustering (k-means, k 4, seed 3, 10 starts, standard scaling) and
+# the core facies on the 180 cored rows. No capstone field, well, stated input
+# or graded answer appears.
+
+q(2, "Four stated points, 0, 1, 4 and 6, are labelled 0, 0, 1, 1 with no scaling. For the point at 0, what are a, b and its silhouette?",
+ "a 1.000000, b 5.000000, silhouette 0.800000",
+ ["a 1.000000, b 4.000000 from the nearest point of the other cluster, silhouette 0.750000",
+  "a 0.000000 as the point is its own nearest row, b 5.000000, silhouette 1.000000",
+  "Its own-cluster distance 1.000000 and b 5.000000 give b less a, 4.000000"],
+ "a is the mean distance to the other rows of its own cluster, here the point at 1, so 1.000000; b is the MEAN distance to the other cluster, (4 + 6) / 2 = 5.000000; and s = (b - a) / max(a, b) = 0.800000, which the engine returns. Taking the nearest or the farthest point for b, or leaving out the division by max(a, b), is another formula.")
+
+q(0, "Of those four points, which scores the lowest silhouette, and why?",
+ "The point at 4, 0.428571: it sits 2 from its partner at 6 and only 3 from the point at 1",
+ ["The point at 6, 0.636364, since it is the farthest point from the other cluster",
+  "At 1, 0.750000, because the point at 1 lies nearest the other cluster's points",
+  "None of them; all four score 0.653734, the mean the engine returns"],
+ "The engine returns 0.800000, 0.750000, 0.428571 and 0.636364 for the points at 0, 1, 4 and 6, with a mean of 0.653734. The point at 4 is lowest because its own cluster is barely tighter than the other one. The mean is one summary, and the rows score differently.")
+
+q(3, "Which cluster of the teaching clustering has the lowest mean silhouette?",
+ "Cluster 3, 0.245762, a cluster of 38 rows",
+ ["Cluster 1, 0.438615, which is also the largest cluster at 59 rows",
+  "Every cluster reads 0.545063, since the mean is shared by the clusters",
+  "Cluster 2 at 0.842778, the cluster whose centre sits farthest out"],
+ "The cluster means are 0.599453, 0.438615, 0.842778 and 0.245762 for clusters 0 to 3, and 0.545063 over all 180 rows. Cluster 3 is lowest; cluster 2 is the highest, and 0.545063 is the overall mean blending all four.")
+
+q(1, "Scored in the same standardised space, how does the mean silhouette of the core facies as labels compare with the k-means clusters, and what does that show?",
+ "0.528711 against 0.545063; the silhouette scores compact, separate groups and is silent on rock types",
+ ["0.528711 against 0.545063, which shows the k-means clusters match the rock better than the core itself does",
+  "Level at 0.842345 against 0.842778, so the two labellings are equally good descriptions of the rock",
+  "Far lower at 0.152252 against 0.245762, which shows k-means has repaired the shaly-sand facies"],
+ "The core facies score 0.528711 and the k-means clusters 0.545063. A silhouette scores how compact and apart groups are and says nothing of whether they are rock types, so a higher figure for k-means is no claim that it matches rock. 0.842345 and 0.842778 are the limestone and cluster 2 figures; 0.152252 and 0.245762 are shaly-sand and cluster 3.")
+
+q(0, "How many rows of the teaching clustering score below 0, and what do they share?",
+ "3 rows, each core shaly-sand in cluster 3, from three different wells",
+ ["0 rows, since a k-means row sits nearest its own centre and so nearest its own cluster",
+  "12, the rows scaling moved next to a row of their own facies",
+  "Three rows of cluster 1, which holds sandstone and shaly-sand"],
+ "Rows 12, 135 and 169, of EKENE-1, EKENE-5 and EKENE-6, score -0.045137, -0.002304 and -0.021661; all are shaly-sand in cluster 3. The nearest centre is no promise of the nearest cluster on average distance, which is what b measures, so rows below 0 can exist. 12 is the count of rows scaling moved, a different table.")
+
+q(2, "What silhouette does the engine give a row alone in its cluster?",
+ "0, the stated rule, following scikit-learn",
+ ["1, since a lone row is perfectly separated from every other cluster",
+  "-1, since a row with no partner of its own is scored as misplaced",
+  "No value, since the call is refused naming labels"],
+ "The basis reads \"a row alone in its cluster scores 0, and a = b = 0 scores 0 (scikit-learn)\". The row has no a, and the stated score is 0. The call is not refused: the average-linkage cut at k 4 leaves row 56 alone and returns 0.000000 for it.")
+
+q(1, "The average-linkage cut at k 4 has clusters of 96, 54, 29 and 1 rows. What is its mean silhouette, and what does that mean hide?",
+ "0.514177; on its own it shows neither the cluster of one row nor the cluster of 96",
+ ["0.000000, since a lone row in the labelling sets the mean silhouette of all of them to 0",
+  "0.545063, since two labellings at k 4 of these rows score the same",
+  "0.653734, with a warning beside it naming the lone row"],
+ "The average-linkage cut scores 0.514177, a little below the k-means 0.545063, and the mean alone gives no hint of the lone row 56 or of the 96-row cluster; the sizes show them. The lone row contributes 0 and does not zero the mean. 0.653734 is the mean of the four stated points.")
+
+q(3, "The teaching k-means labels are scored on the raw logs with scale 'none'. What does the mean silhouette read?",
+ "0.443238, since the silhouette is measured in a space",
+ ["0.545063 again, because the labels are the same and a label cannot move",
+  "It reads 0.528711, the figure of the core facies in the same space",
+  "Nothing: raw logs are refused for their units"],
+ "The same labels read 0.443238 on the raw logs against 0.545063 on the standardised logs, so a silhouette is quoted with its scaling. 0.528711 is the core facies in the standardised space, and scale 'none' is accepted.")
+
+q(2, "A 60-row sample of the teaching clustering scores 0.521590 at seed 3 and 0.525011 at seed 4. What follows?",
+ "A sampled silhouette is quoted with its size and its seed",
+ ["Both samples round to the 180-row 0.545063",
+  "Seed 4 is the better clustering, as it scores higher",
+  "They are the means of two clusters of 60 rows cut from the 180"],
+ "The basis reads \"the first 60 rows of a mulberry32(3) Fisher-Yates shuffle, scored among themselves (scikit-learn sample_size)\". The seed chooses the rows scored, so the figure moves with it, and all 180 rows score 0.545063. The clustering is the same at both seeds.")
+
+q(0, "A silhouette is asked for with every row in one cluster. What happens?",
+ "Refused: \"labels must hold from 2 to 179 distinct clusters (found 1): the silhouette compares each row with the next nearest cluster\"",
+ ["It returns 0 for every row, since a single cluster leaves no row with a b, and prints a mean of 0.000000 over all 180 rows",
+  "Refused, naming X, because a single cluster gives the labels no variance for the standard scaler to divide by on the rows passed",
+  "It returns each row's distance to the one centre in place of b, since there is no other cluster for b to be measured against"],
+ "The silhouette needs a second cluster for b, and the engine refuses one cluster by name, in its own words quoted in the key. It does not score the rows 0, and the refusal names labels, the field it could not work with.")
+
+q(1, "Four rows are given four different labels. What does the engine do?",
+ "A refusal naming labels, which on four rows accepts 2 to 3 distinct clusters (found 4)",
+ ["Scores each of the four rows 0, as rows alone in their clusters, for a mean of 0.000000",
+  "Merges the two nearest rows to make 3 clusters, then scores those three",
+  "Scores every row 1.000000, since no row shares its cluster with another"],
+ "The accepted range runs from 2 to the number of rows less one; with every row alone no row has an a, and the engine refuses in its own words: \"labels must hold from 2 to 3 distinct clusters (found 4): the silhouette compares each row with the next nearest cluster\". The lone-row rule of 0 applies to a row alone inside an accepted labelling, and the engine never edits the labels it is given.")
+
+q(3, "A labels list holds numbers everywhere except a name at position 2. What does the engine say?",
+ "labels[2] must be the same type as labels[0]: all strings or all numbers",
+ ["labels must be an array of 180 labels, one per row, as the list mixes types",
+  "Converts the name to a number and scores the rows with the list as passed",
+  "Nothing; it scores the rows, since a label is only a name for a group"],
+ "The engine's words are \"labels[2] must be the same type as labels[0]: all strings or all numbers\", naming the first entry of the other type. The one-per-row message is the refusal of a list of the wrong length, a separate check, and nothing is converted.")
+
+q(2, "Over k 2 to 8, seed 3, 10 starts, what does the elbow return as bestSilhouetteK?",
+ "3, where the mean silhouette is 0.690362",
+ ["4, the core's facies count, where the mean silhouette is 0.545063",
+  "2, at 0.650162, since a tie goes to the smaller k",
+  "8, the k with the smallest inertia and the most clusters to score"],
+ "bestSilhouetteK has the highest mean silhouette, 0.690362 at k 3. The tie rule to the smaller k never comes into play, because 0.650162 at k 2 is lower; k 8 reads 0.266816, the lowest of the range.")
+
+q(0, "Which statement about the mean silhouette over k 2 to 8 on seed 3 matches the table?",
+ "It is highest at k 3, 0.690362, and reads 0.266816 at k 8",
+ ["Falling at every step from k 2 to k 8, it is highest at k 2",
+  "Highest at k 4, 0.545063, the core's count",
+  "Once k passes 4 it rises at every step, up to 0.505098 at k 6"],
+ "The means read 0.650162, 0.690362, 0.545063, 0.503776, 0.505098, 0.492984 and 0.266816 for k 2 to 8. They rise from k 2 to k 3 and from k 5 to k 6, fall from k 6 to k 7, and peak at k 3.")
+
+q(1, "A row's mean distance to the nearest other cluster, b, is below its mean distance to its own cluster, a. What is its silhouette?",
+ "Below 0: on average it sits nearer another cluster than its own",
+ ["Exactly 0, as for a row alone in its cluster, since a and b both exist",
+  "Above 0 once divided by max(a, b), since that division makes it positive",
+  "Undefined, since the engine refuses any row with b below a"],
+ "s = (b - a) / max(a, b) is negative when b is below a, and the teaching clustering has 3 such rows, the lowest at -0.045137. Dividing by the positive max(a, b) keeps the sign, and nothing is refused.")
+
+emit(Q, '/root/dai-wip-facies/banks/d3i_m02.json', expect_n=15)
+finish()

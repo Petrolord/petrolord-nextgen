@@ -1,0 +1,24 @@
+-- ============================================================================
+-- D3 ASSOCIATE DEEP SEED: Electrofacies, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/facies/beginner.
+--
+-- What this tier owns: GROUPING LOGS INTO ELECTROFACIES. Logs as features and
+-- a depth sample as a row; the Euclidean distance and why a raw distance is a
+-- gamma ray distance; standard scaling with the population standard deviation
+-- and min-max scaling without clipping, a constant log refused; principal
+-- components from the correlation matrix, their eigenvalues, explained
+-- variance, loadings and scores, a new well projected; k-means with seeded
+-- k-means++ seeding, Lloyd passes and inertia, several starts; centres back in
+-- log units, cluster numbers as names, new rows at the nearest centre;
+-- Fisher's iris as a published check. Digest sections 1 to 13, and section 28.
+--
+-- THE TRAP THE TIER IS BUILT ON. A cluster is a group the logs make, and its
+-- number is a name: the scaling decides which rows are near, one start can
+-- stop in a poor arrangement, and no cluster is a facies until it is matched
+-- against core. The Associate capstone grades six Associate quantities and
+-- grades no choice of k, no tree of merges and no score against core.
+-- ============================================================================

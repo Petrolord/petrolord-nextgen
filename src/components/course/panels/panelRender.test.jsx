@@ -289,6 +289,34 @@ describe('every course panel renders with no props', () => {
     }
     expect(rendered).toBe(17);
   }, 60000);
+  it('finds the D3 electrofacies panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('facies/ClusterExplorer.jsx');
+    expect(names).toContain('facies/JudgeExplorer.jsx');
+    expect(names).toContain('facies/ClassifyExplorer.jsx');
+  });
+  it('every D3 electrofacies view renders, not only the default one', async () => {
+    const MODES = {
+      'facies/ClusterExplorer.jsx': ['scale', 'distance', 'pca', 'kmeans', 'assign'],
+      'facies/JudgeExplorer.jsx': ['elbow', 'silhouette', 'tree', 'match', 'ari'],
+      'facies/ClassifyExplorer.jsx': ['knn', 'cart', 'ties', 'uncored', 'bounds'],
+    };
+    let rendered = 0;
+    for (const [name, modes] of Object.entries(MODES)) {
+      const entry = entries.find(([p]) => p.endsWith(`/${name}`));
+      expect(entry, `${name} is not in the panel sweep`).toBeTruthy();
+      const mod = await entry[1]();
+      expect(mod.MODES.map((m) => m[0]), `${name} declares different modes`).toEqual(modes);
+      for (const mode of modes) {
+        expect(
+          () => renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode })),
+          `${name} in the ${mode} view`,
+        ).not.toThrow();
+        rendered += 1;
+      }
+    }
+    expect(rendered).toBe(15);
+  }, 120000);
   // EVERY MODE, not only the default one. A panel with four views renders one
   // of them with no props, and the other three are exactly where a crash hides:
   // the sweep below mounted eighty panels and touched a quarter of their views.

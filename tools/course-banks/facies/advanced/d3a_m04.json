@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "To predict EKENE-7 and EKENE-8, what does the course train each method on?",
+  "options": [
+   "All 180 cored rows of EKENE-1 to EKENE-6: kNN at k 5, and the five-channel tree at the default depth",
+   "The 150 rows of EKENE-1 to EKENE-5, keeping EKENE-6 held out so each prediction still carries a score",
+   "All 240 rows of the eight wells, with the uncored rows given the facies of their nearest k-means cluster",
+   "The 60 uncored rows, each well scaled on its own statistics"
+  ],
+  "answer": 0,
+  "explanation": "For prediction both methods train on all 180 cored rows: kNN with k 5, and the tree of GR, RHOB, NPHI, PEF and CALI at the default depth. The held-out scores on EKENE-6 came from separate runs and are the evidence carried with the prediction. An uncored row has no facies to learn from, and a cluster number is no facies. Scaling a well on its own statistics is the wrong way that scored 0.466667 on EKENE-6."
+ },
+ {
+  "prompt": "A training set that still holds EKENE-7's rows, whose FACIES entries are null, is passed to `knnClassify`. What comes back?",
+  "options": [
+   "Predictions for the new rows, with the null rows dropped from the training set and a warning",
+   "Null rows voting as a facies of their own",
+   "A refusal naming the first null label, such as \"y[1] must be a string or a finite number\"",
+   "A refusal telling the caller to fill the missing facies with the nearest cored row's facies first"
+  ],
+  "answer": 2,
+  "explanation": "The engine refuses a null facies by name and neither guesses a facies for it nor drops the row; keeping uncored rows out of the training set is the caller's step. A dropped-row warning or a null facies voting would both be the engine deciding something it leaves to the caller. The only fill-or-drop message in the engine concerns a missing value in X, and even there it fills nothing."
+ },
+ {
+  "prompt": "Trained on the cored wells, kNN at k 5 predicts EKENE-8 as 13 limestone, 2 sandstone, 12 shale and 3 shaly-sand rows. What does that count, on its own, establish?",
+  "options": [
+   "EKENE-8 holds more shale than EKENE-7, whose kNN count shows only 1 shale row of its 30",
+   "Nothing about whether the predictions are right; it is a count of predicted facies",
+   "The tree is wrong on EKENE-8, since it predicts 3 sandstone rows where kNN predicts only 2",
+   "kNN reads EKENE-8 at an accuracy of 0.833333, the held-out score it carries over to the well"
+  ],
+  "answer": 1,
+  "explanation": "Nothing in the prediction counts says whether either well is predicted right. The shale counts compare predictions, and whether EKENE-8 holds more shale is a claim about rock that core would settle. A disagreement between methods shows at least one is wrong on those rows, and says nothing about which. 0.833333 is kNN's score on EKENE-6, held out, the expected agreement written back with the prediction, and it is no accuracy for EKENE-8."
+ },
+ {
+  "prompt": "Min-max scaling fitted on the 180 cored rows is applied to both uncored wells. EKENE-7's highest GR maps to 0.656751 and EKENE-8's to 1.241800. What does the check show?",
+  "options": [
+   "EKENE-8's GR was clipped at 1 on 10 rows, so its predictions on those rows are held at the cored maximum",
+   "EKENE-7 is out of range too, as 0.656751 is below the cored mean of GR in min-max units",
+   "EKENE-8's highest row sits 1.241800 population SDs above the cored mean, a small offset",
+   "10 of EKENE-8's 30 rows read more gamma ray than any cored row did, and none of EKENE-7's"
+  ],
+  "answer": 3,
+  "explanation": "Min-max maps the cored minimum to 0 and the cored maximum to 1, and nothing is clipped, so a new row above the cored maximum maps above 1: 10 of 30 EKENE-8 rows do, the highest to 1.241800, while EKENE-7 stays inside the range. Inside the range is inside the range, whatever the cored mean. Min-max units are fractions of the cored range, 131.100000 gAPI for GR, and never standard deviations."
+ },
+ {
+  "prompt": "EKENE-8's range check flags 10 rows. Only because the field is synthetic, the withheld facies shows kNN at k 5 missing 3 rows of that well. Where do the 3 misses sit?",
+  "options": [
+   "All 3 among the 10 flagged rows, as the check was built to catch them",
+   "2 among the flagged rows and 1 inside the range, split by their GR",
+   "All 3 inside the cored GR range, among the 20 rows the check passed",
+   "None in EKENE-8: the 3 misses belong to EKENE-7, whose GR is normal"
+  ],
+  "answer": 2,
+  "explanation": "A range check sees only the rows that leave the range: kNN missed 3 rows of EKENE-8, and all 3 of the misses sit inside the GR range. Every row of EKENE-8 carries the same 30 gAPI offset, flagged or not. kNN scores EKENE-7 at 1.000000 on the withheld facies, so it misses none there."
+ },
+ {
+  "prompt": "kNN's 3 misses on EKENE-8 are all sandstone predicted as shaly-sand. Which stated figures explain them?",
+  "options": [
+   "Sandstone GR has a stated mean of 45 gAPI, shaly-sand 66, and the tool adds 30",
+   "Shaly-sand's silhouette, 0.152252, the lowest",
+   "Sandstone's stated NPHI mean is 0.2 against 0.235, and the tool reads NPHI high too",
+   "A held-out score of 0.833333 on EKENE-6"
+  ],
+  "answer": 0,
+  "explanation": "The generator states the sandstone GR mean as 45 gAPI and the shaly-sand mean as 66 gAPI; 30 gAPI more puts a sandstone's mean GR above the shaly-sand mean, so its nearest cored rows can be shaly-sand rows. The planted fault is on GR alone. A silhouette describes the cored groups and names no mechanism for these rows, and a held-out score on another well explains no particular miss."
+ },
+ {
+  "prompt": "With the stated 30 gAPI taken off every EKENE-8 GR value, kNN at k 5 scores 1.000000 against the withheld facies. What does the course say about that correction?",
+  "options": [
+   "The engine's own repair, applied when min-max flags a whole well above 1, so a caller need not correct GR",
+   "It is possible only because the offset was planted and stated; a real field needs a gamma ray normalisation between wells",
+   "Any well flagged by the range check should lose 30 gAPI, whatever its tool or its logging company",
+   "Proof the tree was worse on EKENE-8, as the tree was not corrected and still reads 0.933333 on that well"
+  ],
+  "answer": 1,
+  "explanation": "In a real field the offset is unknown, and the fix is a gamma ray normalisation between wells, which is the data quality course's, done before any facies is predicted. The engine builds no gamma ray normalisation and repairs nothing. A flag says rows left the range; it measures no offset, and 30 gAPI is a figure the generator stated for this one well. The tree's 0.933333 was scored on the uncorrected well, so nothing is compared like for like."
+ },
+ {
+  "prompt": "Why does the course flag the whole of EKENE-8 for a gamma ray to be normalised, beyond the 10 rows above the cored GR maximum?",
+  "options": [
+   "A well with more than a third of its rows flagged is failed as a whole by the course's stated rule",
+   "The engine refuses to predict a well once any of its rows maps above 1, so all rows must be flagged",
+   "Flags feed the vote, so flagging 10 rows would alter the other 20",
+   "The offset sits on every row, flagged or not, and the check sees only rows that leave the range"
+  ],
+  "answer": 3,
+  "explanation": "The whole-well flag is the one that matters, because the planted offset is on every sample and a range check catches only the rows it pushes past the cored maximum; the 3 kNN misses were among the 20 unflagged rows. There is no stated fraction rule. The engine predicts every row it is given and scales nothing away. A flag is written beside the prediction and does not enter any vote."
+ },
+ {
+  "prompt": "kNN at k 5 and the tree give the same facies on 28 of 30 rows of EKENE-7 and 29 of 30 rows of EKENE-8. How does the course read that?",
+  "options": [
+   "As agreement between two methods trained on the same rows, which is not a check against rock",
+   "Strong support for EKENE-8's predictions, where the two methods agree on one row more than on EKENE-7",
+   "As a lower bound on accuracy: each well is right on at least as many rows as the two methods agree on",
+   "A reason to average the two predictions, as the engine does above 0.900000"
+  ],
+  "answer": 0,
+  "explanation": "Both methods learned from the same 180 cored rows, and whatever is wrong with a new well's logs reaches both at once. On EKENE-8, counted row by row against the withheld facies, 2 rows are missed by both with the same wrong facies, so agreement there included wrong answers. Agreement bounds nothing about accuracy, and the engine combines no predictions."
+ },
+ {
+  "prompt": "On EKENE-7, kNN matches the withheld facies on all 30 rows and the tree on 28. What do the 2 rows where the two methods disagree turn out to be?",
+  "options": [
+   "One miss for each method, so the disagreement split the errors evenly",
+   "Rows both methods missed, with each predicting a different wrong facies",
+   "Exactly the tree's 2 misses, so there a disagreement found every error",
+   "Rows outside the cored GR range, as EKENE-7's GR maps above 1 on them"
+  ],
+  "answer": 2,
+  "explanation": "kNN is right on every row of EKENE-7, so any row where the tree differs is a tree miss, and the tree misses exactly 2. No row of EKENE-7 is missed by both methods. EKENE-7's highest GR maps to 0.656751 on the cored min-max scaler, well inside the range."
+ },
+ {
+  "prompt": "Which of these belongs in the write-back of a predicted facies for EKENE-8, by the course's rule?",
+  "options": [
+   "Its predicted facies written into FACIES, so later training runs can use the well",
+   "Accuracy against the withheld facies, 0.900000, as the prediction's expected accuracy",
+   "Agreement with the tree, 29 of 30 rows, as a measure of how far to trust the facies",
+   "A new channel, FACIES_PRED, beside the empty core facies, which stays null"
+  ],
+  "answer": 3,
+  "explanation": "The course's table: \"a new channel, FACIES_PRED, beside the empty core facies; the core facies stays null\". Writing a prediction into the core channel erases the one certain fact, that nobody cored the well, and a later training run would learn from predictions as if they were rock. The withheld facies exists only because the field is synthetic and never enters the write-up, and agreement between methods is not evidence about rock."
+ },
+ {
+  "prompt": "What does the write-back state as the prediction's expected agreement, and why that figure?",
+  "options": [
+   "1.000000, kNN's accuracy on EKENE-7's withheld facies, the best figure the course measured for this method",
+   "0.833333, kNN at k 5 on EKENE-6 held out and trained on the other five cored wells, the only honest score it carries",
+   "0.988889, the tree's training accuracy on all 180 cored rows, since the tree was grown on the same rows",
+   "0.866667, kNN at k 3 on EKENE-6, the highest held-out score reached at any k tried on that well"
+  ],
+  "answer": 1,
+  "explanation": "The expected agreement is the held-out score, 0.833333 on EKENE-6, named as a score on one held-out cored well; it is an expectation for wells like the training wells. The withheld facies never enters the write-up. A training accuracy describes the rows a model was grown on. The method written back is kNN at k 5, so a k 3 score belongs to a different model."
+ },
+ {
+  "prompt": "Which item stands in the write-back as \"what is not claimed\"?",
+  "options": [
+   "No method, since the channel name already carries it",
+   "No range flags, which belong in a separate QC report",
+   "No core facies and no accuracy for an uncored well",
+   "No training wells, as they are listed in the core log"
+  ],
+  "answer": 2,
+  "explanation": "The course's table: \"what is not claimed | no core facies and no accuracy for an uncored well\". The method, the training wells and the range flags are items the write-back carries in full, beside the held-out score; the last line of the table keeps the note from claiming what no uncored well can give."
+ },
+ {
+  "prompt": "The course writes back the kNN prediction and not the tree's. On what evidence?",
+  "options": [
+   "kNN at k 5 scored 0.833333 on EKENE-6, held out, against the tree's 0.766667 at its default depth",
+   "kNN matched EKENE-7's withheld facies on all 30 rows, where the tree matched only 28 of them",
+   "kNN agreed with itself on more rows of EKENE-8 than the tree did when the two were compared",
+   "The tree splits on CALI, the caliper, which a write-back may never carry in its list of logs"
+  ],
+  "answer": 0,
+  "explanation": "The held-out cored well is the evidence that counts: kNN at k 5 scored 0.833333 on EKENE-6, and the tree at the default depth, grown without EKENE-6, scored 0.766667. The withheld facies exists only in this synthetic field, so a choice resting on it could never be made in a real one. Agreement is between the two methods only, and the tree never splits on CALI; its importance is 0.000000."
+ },
+ {
+  "prompt": "After the Associate tier, EKENE-7's rows carried cluster numbers from `assignClusters`; now they carry predicted facies. What is the difference?",
+  "options": [
+   "None in substance: both are the facies of the nearest centre, printed once as a number and once as a name",
+   "A cluster number comes from the core facies of EKENE-7's own rows, while a predicted facies comes from its logs alone",
+   "A predicted facies is certain once two methods agree, whereas a cluster number is only an estimate",
+   "A predicted facies is learned from core through training rows; a cluster number has no rock behind it until matched"
+  ],
+  "answer": 3,
+  "explanation": "A cluster is a group the engine made without core, numbered from 0, and the number is a name. A facies predicted by kNN or a tree comes from core through the training rows, and it is called predicted. EKENE-7 has no core facies at all. kNN keeps no centres, and agreement between two methods is not a check against rock."
+ }
+]

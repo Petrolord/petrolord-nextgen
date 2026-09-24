@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Two depth-1 trees are grown on the 180 cored rows. With the logs in the order GR, RHOB, NPHI, PEF, the root is NPHI <= 0.123000; with PEF before NPHI, it is PEF <= 4.090000. Both show a decrease of 0.283413. What decided each root?",
+  "options": [
+   "NPHI's decrease is larger in its last bits, so it always wins",
+   "The lower threshold wins a tie, and 0.123000 is below 4.090000, so NPHI would win in both orders",
+   "A seeded draw among the tied logs, made from mulberry32",
+   "The engine returns the two decreases exactly equal, and the tie goes to the lower column index"
+  ],
+  "answer": 3,
+  "explanation": "The basis: \"equal decreases (compared exactly on the integer counts) go to the lower feature index, then the lower threshold (scikit-learn breaks feature ties at random)\". The two splits make the same two groups, so the counts are identical and the decreases exactly equal. The feature index comes first; the threshold only breaks a tie within one log. cartFit takes no seed and draws nothing."
+ },
+ {
+  "prompt": "Why do NPHI and PEF tie for the root of the tree on the Ekene cored rows?",
+  "options": [
+   "A correlation of -0.622647, near enough to 1 in size to tie",
+   "Each separates exactly the 54 limestone rows from the other 126, as the generator planted",
+   "Both carry the same importance in the five-channel tree, and importance decides the root split",
+   "Both logs have their thresholds within 1.00e-12 of each other after standard scaling of the rows"
+  ],
+  "answer": 1,
+  "explanation": "The generator held limestone NPHI at or below 0.12 and every other facies' NPHI at or above 0.13, and limestone PEF at or above 4.2 and every other facies' PEF at or below 3.9. Each log alone sends the same 54 limestone rows one way, so both splits leave identical counts. A correlation or an importance is not what a split is scored on, and a tree scales nothing and uses no band."
+ },
+ {
+  "prompt": "In the tree whose logs are ordered GR, RHOB, PEF, NPHI, the root is PEF <= 4.090000 and sends 126 rows left. Where do the limestone rows go?",
+  "options": [
+   "Right, as a pure node of 54 rows with Gini 0",
+   "Left, with the other 126 rows, since limestone reads the lowest PEF",
+   "Right, as a node of 126 rows with Gini 0.650416, left to be split again",
+   "Left, as in the NPHI tree, because a column order never moves which side a group takes"
+  ],
+  "answer": 0,
+  "explanation": "Limestone PEF is at or above 4.2, above the threshold 4.090000, so x <= threshold sends the 126 other rows left and the 54 limestone rows right, a node of one facies with Gini 0. In the NPHI tree the limestone goes left, NPHI <= 0.123000, and the right child holds 126 rows with Gini 0.650416. The column order changes the log at the root, the threshold and the side each group takes."
+ },
+ {
+  "prompt": "Distance ties in kNN, k-means and agglomerative clustering are judged inside a relative band. How is a tie between two candidate splits judged?",
+  "options": [
+   "Inside the same band of 1.00e-12, relative to the larger of the two weighted decreases",
+   "At six decimals, the precision at which the course prints every weighted impurity decrease",
+   "Exactly, on the integer facies counts of the children, so an equal decrease is equal with no band",
+   "Inside a band of 1.00e-9, relative, the same band the engine uses for its PCA sign rule"
+  ],
+  "answer": 2,
+  "explanation": "The basis says the decreases are \"compared exactly on the integer counts\": two splits that send the same rows each way give identical counts, so there is no rounding to hide behind, and a tie here is a tie. The 1.00e-12 band is for distances and merge heights, 1.00e-9 for the PCA sign rule. Six decimals is how the course prints a figure, which decides nothing."
+ },
+ {
+  "prompt": "What would scikit-learn do on the same tied root, and what does the engine give up by choosing otherwise?",
+  "options": [
+   "Both splits are kept in one node by scikit-learn, so what the engine gives up is a tree with two roots",
+   "scikit-learn breaks feature ties at random; the engine's column order becomes part of the model",
+   "scikit-learn refuses a tie; the engine gives up the refusal and prints a warning in its place",
+   "It would take the log that sorts first; the engine gives up the alphabetical rule"
+  ],
+  "answer": 1,
+  "explanation": "The conventions table: CART split tie, this engine \"lower feature index, then lower threshold, compared exactly\", alternative \"a random feature order (scikit-learn random_state)\", chosen because \"the same data give the same tree\". The cost is that the order the logs are passed in decides the printed tree, so it is written down with the model. A tie is never refused or warned about, and no tree has two roots."
+ },
+ {
+  "prompt": "The golden `cart-xor-no-split` has rows (0, 0), (0, 1), (1, 0), (1, 1) labelled 0, 1, 1, 0 and maxDepth 3. What tree does the engine return?",
+  "options": [
+   "A depth 2 tree that separates all four labels",
+   "A refusal naming `y`, as the labels are balanced",
+   "A root split on the first feature, then two leaves",
+   "A single leaf, 1 node, predicting 0"
+  ],
+  "answer": 3,
+  "explanation": "The root holds two rows of each label, Gini 0.500000. Split on either feature and each side still holds one 0 and one 1, so no single split lowers the Gini, and a decrease of exactly zero leaves a leaf. The engine refuses the zero-decrease split, so it never reaches the second level where a split would separate the labels. Balanced labels are a valid input."
+ },
+ {
+  "prompt": "The labels of the XOR golden are fully decided by the two features together. Why does CART still stop at the root?",
+  "options": [
+   "It judges one split at a time, and the first split alone gains nothing",
+   "Its default maxDepth of 5 is too shallow for two features to be combined",
+   "Its tie band treats the Gini of 0.500000 as pure once it is below 1.00e-12",
+   "It needs minSamplesLeaf 5, and four rows cannot meet that on any side"
+  ],
+  "answer": 0,
+  "explanation": "CART is greedy: it scores each split on its own, and here every single split leaves each side half one label and half the other, so its decrease is zero and the node stays a leaf. The golden sets maxDepth 3, so depth is not the limit; the default minSamplesLeaf is 1, and a Gini of 0.500000 is far from 0. The label is 1 exactly when the two features differ, a rule only a pair of splits could draw."
+ },
+ {
+  "prompt": "Which rule for a split with a decrease of exactly zero is the engine's, and which is scikit-learn's?",
+  "options": [
+   "Both allow it, but the engine warns that the split separated nothing",
+   "The engine allows it once per branch; scikit-learn never allows it",
+   "The engine refuses it and the node stays a leaf; scikit-learn allows it",
+   "Both refuse it, since a zero decrease cannot be compared with zero"
+  ],
+  "answer": 2,
+  "explanation": "The conventions table: CART zero-decrease split, this engine \"refused: the node stays a leaf\", alternative \"allowed (scikit-learn)\", reason \"a split that separates nothing is not a split\". The boundary table draws it exactly: a decrease above zero splits, and a decrease of exactly zero leaves a leaf. No warning is attached; the rule simply stops the node."
+ },
+ {
+  "prompt": "The golden `cart-iris-depth0` grows a tree of maxDepth 0 on Fisher's iris: one leaf holding 50 setosa, 50 versicolor and 50 virginica flowers. What does it predict, and what is its training accuracy on the rows it was grown on?",
+  "options": [
+   "virginica, the class listed last; 0.333333",
+   "no class, since a tied leaf is refused",
+   "setosa, since it is the most common class; 1.000000",
+   "setosa, the class that sorts first; 0.333333"
+  ],
+  "answer": 3,
+  "explanation": "The basis for a leaf: \"the majority class of the leaf; a tie goes to the class that sorts first\". setosa sorts first among the three tied classes, so the leaf predicts setosa, and every setosa flower is right and every other wrong: 50 of 150, 0.333333. No class is more common here; the three tie. A tied leaf still names a class."
+ },
+ {
+  "prompt": "A leaf of the five-channel tree could hold equal counts of sandstone and shaly-sand rows. Which facies would it predict?",
+  "options": [
+   "Sandstone, the name that sorts first by character",
+   "Shaly-sand, since the tree reads the facies of the nearest training row",
+   "Whichever of the two has the lower mean GR over the rows in the leaf",
+   "Neither: the leaf is split again until its counts are no longer tied"
+  ],
+  "answer": 0,
+  "explanation": "A tied leaf goes to the class that sorts first, and names sort by character, so sandstone comes before shaly-sand, as shale does. The rule reads the spelling of the names, whatever the logs look like. A tree keeps no neighbour order and no log means at its leaves, and a leaf is a leaf because a stopping rule was met, so it is never split again to break a tie."
+ },
+ {
+  "prompt": "The same engine settles a tied kNN vote and a tied tree leaf by different rules. Which pairing is right?",
+  "options": [
+   "kNN: the class that sorts first; tree: the facies of the row nearest the leaf's centre",
+   "kNN: the tied facies whose nearest member comes first; tree: the class that sorts first",
+   "Both use the class that sorts first, which is the one tie rule the engine uses everywhere",
+   "kNN: the lower training row; tree: the lower column index of the log split at the leaf"
+  ],
+  "answer": 1,
+  "explanation": "Each rule is stated where it applies and none is global. kNN's basis: \"a tied vote goes to the tied label whose nearest member comes first in the neighbour order\". The tree's: \"a tie goes to the class that sorts first\", because a leaf keeps no neighbour order. The lower training row settles equidistant neighbours, and the lower column index settles tied splits: both are rules for other ties."
+ },
+ {
+  "prompt": "The five-channel tree reports importances GR 0.282009, RHOB 0.244767, NPHI 0.444883, PEF 0.028341 and CALI 0.000000. How is an importance formed?",
+  "options": [
+   "The drop in held-out accuracy on EKENE-6 when that log is shuffled with a seed and the tree rescored",
+   "Count the splits made on each log, then divide by the 7 splits of the tree so the shares sum to 1",
+   "Per log, the sum over its splits of n_t gini_t - n_L gini_L - n_R gini_R, normalised to sum 1",
+   "Each log's absolute weight on the first principal component, normalised to sum 1"
+  ],
+  "answer": 2,
+  "explanation": "The basis: \"sum over the feature's splits of n_t gini_t - n_L gini_L - n_R gini_R, normalised to sum 1 (scikit-learn feature_importances_); all 0 for a single leaf\". It is the impurity each split removed, counted in rows. A shuffled-log score is permutation importance, the machine learning course's method. Counting splits would give GR, RHOB and NPHI, two splits each, one and the same share, and a PCA weight is another quantity."
+ },
+ {
+  "prompt": "PEF separates the limestone rows exactly, as NPHI does, yet its importance in the five-channel tree is only 0.028341. Why?",
+  "options": [
+   "It lost the root to NPHI on the column-index tie-break, and its one split sits deep among 47 rows",
+   "Its values are in b/e, a smaller unit than NPHI's v/v, and importances are measured in log units",
+   "Once scaled by the population SD its spread is the narrowest of the four logs on the cored rows",
+   "Its separation of limestone is only approximate, and CART discounts any split that leaves a miss"
+  ],
+  "answer": 0,
+  "explanation": "With NPHI before PEF, NPHI takes the root, and once the limestone rows have gone left, PEF's limestone split is already made. PEF's only split is at node 5, among 47 sandstone and shaly-sand rows. Importances are computed on Gini counts, with no unit and no scaling, and PEF's limestone split is exact: the planted bounds hold on every row."
+ },
+ {
+  "prompt": "In the two depth-1 trees of the root tie, what importance does each log take?",
+  "options": [
+   "NPHI and PEF share it equally in both orders, since their decreases tie exactly",
+   "Zero for both, as a depth-1 tree has no split below its root",
+   "The log listed first in the order takes 1.000000, whichever log that happens to be",
+   "NPHI takes all of it, 1.000000, in one order and PEF all of it in the other"
+  ],
+  "answer": 3,
+  "explanation": "A depth-1 tree has one split, so the log at the root takes the whole normalised importance: NPHI 1.000000 in the order GR, RHOB, NPHI, PEF and PEF 1.000000 in the order GR, RHOB, PEF, NPHI. The two logs split the rows the same way, and each in turn is reported as the whole story. Importances are all 0 only for a single leaf. GR is listed first in both orders and takes none."
+ },
+ {
+  "prompt": "What does an importance of 0.000000 for CALI in the five-channel tree tell a reader?",
+  "options": [
+   "The scaler refused it as a constant log and dropped it silently",
+   "The tree never split on CALI, which matches the planted caliper that carries no facies signal",
+   "Any caliper, in any well of any field, carries no facies information and should be left out of study",
+   "It tied with another log at every split and lost on column index"
+  ],
+  "answer": 1,
+  "explanation": "CALI is never split on, and its importance is 0.000000; the generator drew it independently of the facies and of every other log. A tree scales nothing, so no scaler refusal arises, and a refused log would stop the call by name. An importance describes this one tree and says nothing universal about calipers. CALI is the fifth column, the highest index, but nothing shows it tied for any split."
+ }
+]

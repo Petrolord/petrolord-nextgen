@@ -1,0 +1,54 @@
+{
+ "accuracy": {
+  "decimals": 6,
+  "match": "^(?:nkwelle_majority_accuracy_k6|nkwelle_one_to_one_macro_f1|ogbunike_cart_depth3_heldout_accuracy|ogbunike_knn_heldout_accuracy)$"
+ },
+ "centre": {
+  "decimals": 6,
+  "match": "^(?:ihiala_row24_cluster_gr_centre_gapi)$"
+ },
+ "distance": {
+  "decimals": 6,
+  "match": "^(?:ogbunike_knn_nearest_distance)$"
+ },
+ "height": {
+  "decimals": 6,
+  "match": "^(?:nkwelle_ward_height_above_cut)$"
+ },
+ "importance": {
+  "decimals": 6,
+  "match": "^(?:ogbunike_cart_nphi_importance)$"
+ },
+ "impurity": {
+  "decimals": 6,
+  "match": "^(?:ogbunike_cart_node2_gini)$"
+ },
+ "index": {
+  "decimals": 6,
+  "match": "^(?:nkwelle_complete_ari)$"
+ },
+ "inertia": {
+  "decimals": 6,
+  "match": "^(?:ihiala_kmeans_inertia)$"
+ },
+ "loading": {
+  "decimals": 6,
+  "match": "^(?:ihiala_pc1_nphi_loading)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:ihiala_pc1_ratio|nkwelle_elbow_drop_fraction_k4)$"
+ },
+ "scale": {
+  "decimals": 6,
+  "match": "^(?:ihiala_gr_scale_gapi|ogbunike_uncored_gr_minmax_max)$"
+ },
+ "score": {
+  "decimals": 6,
+  "match": "^(?:ihiala_pc1_score_first_row)$"
+ },
+ "silhouette": {
+  "decimals": 6,
+  "match": "^(?:nkwelle_ward_silhouette)$"
+ }
+}

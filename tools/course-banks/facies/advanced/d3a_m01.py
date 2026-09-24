@@ -1,0 +1,116 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D3 Expert m01, k nearest neighbours. Figures from the course's kNN section
+# (held-out EKENE-6, the training scaler, the tied vote, the equidistant
+# golden, k against accuracy), the refusal table and the boundary table.
+
+q(1, "`knnClassify` trains on the 150 rows of EKENE-1 to EKENE-5 and predicts the first row of EKENE-6 at k 5. What decides the facies it prints for that row?",
+ "The facies most common among its five nearest training rows, by Euclidean distance on the scaled logs",
+ ["Whichever k-means centre, fitted to the 150 training rows at k 4, lies nearest",
+  "Each facies' mean logs, and the facies whose mean sits closest in raw units",
+  "A weighted vote in which each of the five neighbours counts in inverse proportion to its distance in gAPI"],
+ "kNN gives a new row the facies most common among its k nearest training rows, and every distance is Euclidean on the logs scaled with the training rows' scaler. A k-means centre is a cluster, a numbered group with no rock name, and kNN fits none. Comparing a row with each facies' mean logs is a nearest-centroid rule, which the engine does not build. Each neighbour casts one vote; nothing is weighted by distance, and no distance here is in gAPI.")
+
+q(3, "The engine's basis for choosing neighbours reads: the k nearest training rows, \"taken one at a time\". What happens at each of the k steps?",
+ "Among rows not yet taken, the lowest row within 1.00e-12, relative, of the smallest squared distance is taken",
+ ["All rows are sorted once by raw distance and the first k are kept, whatever their row numbers happen to be",
+  "The row with the smallest squared distance is taken, and a tie is settled by the facies that sorts first",
+  "One row is drawn at random from those within 1.00e-12 of the smallest distance, with a stated seed"],
+ "The basis: \"the k nearest training rows, taken one at a time: the lowest row among those whose squared distance is within 1e-12 (relative) of the smallest remaining\". Distances are on the scaled logs, so a raw sort is a different method. A tie among distances goes to the lower row; the sort order of facies names settles a tied leaf in a tree, a different rule. No random draw enters kNN at all.")
+
+q(0, "With EKENE-6 held out, the training scaler centres GR at 54.556667 gAPI, while all 180 cored rows would centre it at 56.871111. Why does the engine use the first figure?",
+ "The second includes EKENE-6, which would then shape the space it is scored in",
+ ["Only the first is a sample mean, divisor n - 1, which the correlation PCA also uses for its centre",
+  "Because the second is refused whenever a held-out well is named, since the engine checks the split",
+  "A smaller centre in gAPI would give shorter scaled distances for every one of the rows"],
+ "The basis: \"standard scaler (ml.js) fitted on the TRAINING rows only and applied unchanged to the new rows\". A scaler fitted on all 180 cored rows lets the held-out well move its own centre and scale, and the score would stop describing an unseen well. A mean has no divisor choice; the sample and population choice is about the standard deviation. The engine does not split wells or check a split, and a smaller centre does not shorten every distance.")
+
+q(2, "The same k 5 and held-out EKENE-6 score 0.833333 with the training scaler and 0.466667 when EKENE-6 is standardised on its own statistics. What does the second scaling do to the well?",
+ "It maps EKENE-6's own mean to 0, the training centre, whatever rock the well holds",
+ ["A refusal, since a well scaled on itself counts as a constant log",
+  "Every log is divided by the sample SD, n - 1, lengthening distances",
+  "It widens EKENE-6's range to match the 150 training rows, so its rows spread further apart"],
+ "Scaled on its own statistics, a well has its own mean at 0, which is where the training rows' centre sits, so a well rich in one facies is pulled onto the middle of the training mixture and meets the wrong neighbours. Neither wrong way is refused; both return a prediction for every row. Standard scaling here uses the population standard deviation, divisor n. Nothing stretches the well to the training range.")
+
+q(2, "With no scaling at all, k 5 on held-out EKENE-6 scores 0.633333. What does the course give as the reason a raw distance behaves as it does?",
+ "GR is in gAPI and differs by tens of units between facies, so it rules a raw distance",
+ ["RHOB in g/cm3 differs most between facies and rules every raw distance",
+  "Raw logs leave limestone rows with no neighbours at all, as NPHI and PEF read on different scales",
+  "Only PEF matters, since it spans more units than the three other logs together, so the raw vote follows it"],
+ "GR differs by tens of gAPI between facies while RHOB and NPHI differ by hundredths and PEF by units, so on the raw logs the density, neutron and photoelectric logs barely move a distance. Every row still has neighbours on raw logs; nothing is left without one. RHOB's spread between facies is in hundredths of a g/cm3, the smallest of the four.")
+
+q(0, "Passed GR and a caliper reading 8.5 on all 30 rows of EKENE-1 as training rows, `knnClassify` refuses. Which words does its message use that no clustering function's message uses?",
+ "\"on the 30 training rows\", because kNN fits its scaler on the labelled training rows",
+ ["\"on the 30 rows passed\", because every scaler in the engine counts the rows passed to it",
+  "\"has zero range\", because kNN scales by the minimum and maximum of each training log",
+  "\"fill or drop missing values first\", because a constant log is read as a missing one"],
+ "kNN's message reads, in the engine's words: \"X.CALI has zero variance on the 30 training rows (every value is 8.5): standardising would divide by zero, so drop the feature or fit on rows where it varies\". pca, kmeans, silhouette, elbow and agglomerative fit on every row passed and say \"on the 30 rows passed\". \"zero range\" belongs to the min-max scaler, and a constant log is a value the scaler cannot divide by, which is a different refusal from a missing one.")
+
+q(3, "Trained on all 180 cored rows at k 2, row 27 of EKENE-8 has two neighbours, shaly-sand at 0.372564 and sandstone at 0.379644 standard units. What does the engine predict, and what would scikit-learn print?",
+ "The engine predicts shaly-sand, the nearer neighbour's facies; scikit-learn would print sandstone",
+ ["Both print sandstone, the facies that sorts first, since the two tie rules agree on this row",
+  "Neither prints a facies, because a tied vote at an even k is refused until k is made odd",
+  "The engine predicts sandstone because a tie falls to the lower row; scikit-learn prints shaly-sand"],
+ "The basis: \"a tied vote goes to the tied label whose nearest member comes first in the neighbour order (scikit-learn takes the label that sorts first)\". The nearer neighbour is shaly-sand, so the engine prints shaly-sand; sandstone sorts before shaly-sand, so scikit-learn would print sandstone. A tied vote is a result: `tiedVotes` counts 1 such row in the well. The lower-row rule settles equidistant neighbours, a different tie.")
+
+q(1, "The golden `knn-vote-tie-nearest-b` puts training rows at 0, 1, 3, 4 and 10, labelled b, a, a, b, c, and a new row at 0.2 with k 4 and no scaling. The votes are a 2 and b 2. What does the engine predict?",
+ "b, the facies of the nearest neighbour, the row at 0",
+ ["a, the facies that sorts first among the two tied labels",
+  "c, since the row at 10 breaks a tie between the other two",
+  "nothing: a two-way tie at k 4 is refused by name as `k`"],
+ "The neighbours, nearest first, are the rows at 0, 1, 3 and 4 (rows 0, 1, 2, 3, counted from 0), labelled b, a, a, b. The tied facies whose nearest member comes first in the neighbour order is b, from the row at 0. A rule taking the label that sorts first would give a. The row at 10 is not among the four neighbours, so it casts no vote, and a tied vote is a result with a prediction.")
+
+q(0, "Why can an odd k still meet a tied vote on the Ekene wells?",
+ "Four facies can split the votes, so at k 5 votes of 2, 2 and 1 tie two facies",
+ ["Odd k counts the new row as its own neighbour, leaving an even vote",
+  "Because the tie band of 1.00e-12 makes some neighbours count as half a vote each at odd k",
+  "Each cored well adds one neighbour before voting, so the count of votes turns even"],
+ "An odd k rules out a tie only between two classes. The course has four facies, so votes of 2, 2 and 1 at k 5 leave two facies level. The new row is never among the training rows it is compared with. The tie band decides which rows are neighbours, and each neighbour then casts one whole vote. Nothing picks neighbours by well.")
+
+q(3, "In the golden `knn-equidistant-lower-row`, training rows sit at 0, 2, 4 and 9, labelled a, b, c, c; a new row sits at 2, k 2. Rows 0 and 2 are both 2.000000 away. Which rows are the neighbours, and what is predicted?",
+ "Rows 1 and 0, and the prediction is b",
+ ["Row 1 together with row 2, predicting c",
+  "A refusal: rows 0 and 2 tie, so no vote is taken",
+  "All three of rows 1, 0 and 2, as tied rows are kept"],
+ "Row 1 sits on the new row and is the first neighbour. Of rows 0 and 2, equally far, the engine takes the lower row, row 0. The neighbours are rows 1 and 0, labelled b and a, a tied vote, which goes to the facies of the nearer neighbour, row 1: b. Taking row 2 would be the higher row. kNN keeps exactly k neighbours, and a tie in distance is settled, never refused.")
+
+q(1, "Two squared distances to a new row are equal on paper but differ in their last bits once computed. How does the engine decide whether they tie?",
+ "They tie when within 1.00e-12 of the smallest remaining squared distance, relative to it, inclusive",
+ ["Only when the two figures agree at six decimals, the precision the course prints distances at",
+  "Within 1.00e-9 of each other, relative to the larger one, the same band the sign rule uses",
+  "Never: a bit-level difference orders them, and the smaller always becomes the neighbour"],
+ "The engine judges equally far inside a band: a squared distance within 1.00e-12 of the smallest remaining, relative to it, is tied, and the band is inclusive; the lower row then wins. Six decimals hide differences far larger than that band, so printing alike is not the test. 1.00e-9 is the sign rule's band for a PCA weight, a different rule. Ordering by the last bits is what the band exists to avoid.")
+
+q(2, "Held-out EKENE-6 scores 0.833333 at k 1, 0.866667 at k 3, 0.833333 at k 5 and 0.766667 at k 15. How does the course quote the choice of k?",
+ "k 3 scored highest on this one well, and the k is quoted with the well it was chosen on",
+ ["Keep k 1, because it ties the default k 5 at 0.833333 and it uses the fewest neighbours of all",
+  "Choose k 15, as a larger k averages over more rows and so generalises best of all",
+  "For the whole Ekene field k 3 is best, since three is the smallest odd k that avoids ties"],
+ "The highest accuracy on this one held-out well is 0.866667 at k 3, and one held-out well is one draw: another well could rank k differently, so the k is quoted with its well. Scoring every well in turn is cross-validation, which is the machine learning course's. k 15 scored lowest in the table. An odd k does not avoid ties among four facies, and two figures printing 0.833333 say nothing about which k to keep.")
+
+q(3, "Trained on all 180 cored rows, `knnClassify` is asked for more neighbours than it has. Which k values does its boundary accept?",
+ "k 1 and k 180 are accepted; one more is refused",
+ ["k 1 to 179 are accepted, and 180 is refused",
+  "Any odd k up to 180 is accepted, even k refused",
+  "k 0 to 180 are accepted, 0 meaning every row"],
+ "The engine's words for the refusal: \"k must be a whole number from 1 to 180 (the training rows)\". The boundary table draws it for this rule: 1 and the number of training rows accepted, one more refused. Even k is accepted; the engine resolves tied votes by its stated rule. k 0 is outside \"from 1\".")
+
+q(0, "With k equal to the number of training rows, every new row votes with every training row. What does its vote then depend on?",
+ "Only the facies counts of the training rows, the same for every new row, unless those counts tie",
+ ["Only its own nearest row, since the tie rule falls back to the single nearest training row",
+  "The distances to every training row, each vote weighted by how near that training row sits",
+  "The share of each facies among the new rows, which the engine counts before any vote is cast"],
+ "When every training row is a neighbour, the votes are the facies counts of the training rows, the same for every new row; only a tie in those counts would bring the row's own neighbour order back in through the tie rule. The engine accepts that k, and the held-out score says whether it is useful. No vote is weighted, and the new rows' own facies are unknown.")
+
+q(1, "10000 new rows against 10001 training rows are refused with \"100010000 distance pairs, above the 100000000 kNN computes\". What does the course draw from the cap?",
+ "kNN measures every training row against every new row, so a long section is classified in batches",
+ ["A cap on training rows alone, so 10000 is the most kNN can train on",
+  "Above the cap the engine keeps a seeded sample of 10000 new rows and warns that the rest were dropped",
+  "The pair count is squared rows, so thinning the new rows helps and thinning the training rows cannot"],
+ "The work grows with the training rows times the new rows, and the cap is on that product: 10000 x 10000 = 100000000 is computed and 10001 x 10000 is refused. The message names its remedy: \"classify fewer rows at a time or thin the training rows\". Nothing is sampled or dropped silently; the engine refuses. Either factor reduces the product.")
+
+emit(Q, '/root/dai-wip-facies/banks/d3a_m01.json', expect_n=15)
+finish()

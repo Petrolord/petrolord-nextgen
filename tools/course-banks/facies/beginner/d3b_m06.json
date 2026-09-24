@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The Associate workflow on the Ekene cored wells runs five engine steps. In what order?",
+  "options": [
+   "Run `kmeans` first, then choose the logs its centres favour, then `pca` on the clusters found.",
+   "Assign EKENE-7 first so its rows join the fit, then run `pca` and `kmeans`, and read the centres last of all.",
+   "Choose the logs, run `pca`, run `kmeans`, read `centresOriginal`, then `assignClusters` for EKENE-7.",
+   "Read the centres, choose k from them, run `pca` and finish by choosing which logs to keep."
+  ],
+  "answer": 2,
+  "explanation": "The course's table runs: choose GR, RHOB, NPHI and PEF; pca on the correlation matrix; kmeans k 4, seed 3, 10 starts, standard scaling; read centresOriginal; assignClusters for EKENE-7. The logs come first because every later distance depends on them, and the new well comes last because it is placed on a model already fitted."
+ },
+ {
+  "prompt": "In that workflow, `pca` on the correlation matrix returns a first-two-component share of 0.957731. What does this step contribute?",
+  "options": [
+   "It shows how the logs move together and whether a PC1 against PC2 plot is a fair picture; it clusters nothing.",
+   "Every row gets its cluster here, and k-means then only refines it with its Lloyd passes.",
+   "Choosing k: two components carrying 0.957731 mean two clusters are the right number.",
+   "The two components replace the logs, and k-means is run on the PC1 and PC2 scores."
+  ],
+  "answer": 0,
+  "explanation": "The pca step clusters nothing. It shows which logs carry the spread and that four logs spread almost entirely within a plane. The engine does not choose k, and the teaching clustering runs k-means on the four standard-scaled logs, with k 4 stated by the caller."
+ },
+ {
+  "prompt": "Why is Fisher's iris data in an electrofacies course?",
+  "options": [
+   "Its three species behave like three facies, so its clusters teach how rock types separate in logs.",
+   "It is the file the Ekene generator was calibrated on, so its measurements share the logs' units.",
+   "The flowers were chosen because k-means recovers the three species exactly, as a clean demonstration.",
+   "A published figure for it exists, so the engine's arithmetic can be checked against a source outside this programme."
+  ],
+  "answer": 3,
+  "explanation": "Iris has nothing to do with rock. It is here because the scikit-learn example prints a published explained variance ratio, [0.92461872 0.05306648], that the engine can be held against. The Ekene field comes from its own generator, and k-means does not recover the species exactly: its clusters hold 50, 38 and 62 flowers."
+ },
+ {
+  "prompt": "The engine's covariance PCA of all 150 iris flowers gives explained variance ratios 0.924619 and 0.053066. How do they compare with the published [0.92461872 0.05306648]?",
+  "options": [
+   "They agree at six decimals only, since the engine prints six and the source prints eight.",
+   "They agree at all eight printed decimals on both components, which checks the covariance form.",
+   "The first agrees and the second differs, because PC2 has a far smaller eigenvalue, 0.242671, than PC1 has.",
+   "Only the correlation form matches, since the source standardises the flowers before its PCA."
+  ],
+  "answer": 1,
+  "explanation": "The engine agrees with the published figure at all eight printed decimals on both components. The published figure is the covariance form: on the correlation matrix the same flowers give a first ratio of 0.729624. The course prints the engine's ratios to six decimals beside the eight the source prints, and the agreement holds at all eight."
+ },
+ {
+  "prompt": "On the correlation matrix the iris flowers give a first ratio of 0.729624; on the covariance matrix, 0.924619. What does that teach about using a published figure as a check?",
+  "options": [
+   "Either figure checks the engine, since both come from the same 150 flowers and four measurements.",
+   "A check is a check only when it uses the same matrix as the source, here covariance.",
+   "The correlation figure is the more trustworthy one, as it counts every measurement equally.",
+   "One of the two is a defect in the engine, since a PCA of one table has one first ratio."
+  ],
+  "answer": 1,
+  "explanation": "The choice of matrix moves the figure, and the published one is the covariance form. Both ratios are correct for their matrix; only the covariance one can be held against the source. A table has one first ratio per matrix, so the difference is no defect."
+ },
+ {
+  "prompt": "k-means on the raw iris measurements, k 3, seed 3, ten starts, gives an inertia of 78.851441 and clusters of 50, 38 and 62 flowers. The species hold 50 flowers each. What follows?",
+  "options": [
+   "The clusters and species differ: at least one cluster mixes two species, although the arithmetic is right.",
+   "The engine is wrong, since the standard library oracle would return three clusters of 50.",
+   "Seed 3 was unlucky, and a second seed would recover the three species at 50 flowers each.",
+   "Standard scaling was needed on the measurements, and scaled rows would give 50, 50 and 50."
+  ],
+  "answer": 0,
+  "explanation": "The oracle's golden for the same call reads 78.851441, so the arithmetic is right. Sizes of 38 and 62 against 50 each show that the clusters are no copy of the species. A clustering can be computed exactly right and still not recover the groups a specialist would draw, which is the lesson of the whole tier."
+ },
+ {
+  "prompt": "Why is the iris k-means run without scaling?",
+  "options": [
+   "The engine refuses to scale data that did not come from a well log file, such as flower measurements.",
+   "Standard scaling would divide by zero, since one of the four measurements is constant on every flower.",
+   "All four measurements are in centimetres, so no measurement's unit can dominate the distance.",
+   "Scaling is only for principal components, and k-means never uses it."
+  ],
+  "answer": 2,
+  "explanation": "Scaling fixes a units problem, and iris has none: sepal_length, sepal_width, petal_length and petal_width are all in cm. A constant column is what a scaler refuses, and iris has none. k-means scales by default, as the Ekene runs show; the iris call sets the scaling to none because the units already agree."
+ },
+ {
+  "prompt": "A write-up of the teaching clustering has five items: rows, logs and scaling, method, result and what is not claimed. Which line belongs under what is not claimed?",
+  "options": [
+   "The inertia, 58.289042 in standard units, and the cluster sizes of 29, 59, 54 and 38.",
+   "k-means, k 4, k-means++ seeding, seed 3, 10 starts, as the method that produced them.",
+   "GR, RHOB, NPHI and PEF, standard scaling with the population SD, fitted on the rows.",
+   "No cluster is named as a facies until it is matched against core, and k was stated."
+  ],
+  "answer": 3,
+  "explanation": "The course's write-up table puts under what is not claimed: no cluster is named as a facies until it is matched against core; k was stated, and the choice of k is judged in the Professional tier. The inertia and sizes are the result, the seeded k-means is the method, and the logs with their scaler are the logs and scaling item."
+ },
+ {
+  "prompt": "A write-up quotes the teaching clustering's inertia and sizes but leaves out the seed and the number of starts. What does a reader lose?",
+  "options": [
+   "Nothing of substance, since k-means with k 4 on the same rows returns one answer whatever the seed.",
+   "Only the passes: the seed changes how long the run takes, and the result stays the same.",
+   "The means to reproduce it: from seed 3, one start stops at 58.330411 and ten reach 58.289042.",
+   "The core match, because the seed decides which cluster is the shale in the cored wells."
+  ],
+  "answer": 2,
+  "explanation": "A seeded result without its seed cannot be reproduced, and a result without its number of starts hides how hard the engine looked. The seed decides the starting rows and so where the passes stop, and it decides no rock names, since no cluster is named until it is matched against core."
+ },
+ {
+  "prompt": "The write-up names the scaling as standard with the population standard deviation, fitted on the rows clustered. What happens to a reader who scales with the sample standard deviation or with min-max?",
+  "options": [
+   "The same clusters and inertia, since any scaling gives each log an equal weight in the distance.",
+   "Identical results once the reader rounds the scaled values to six decimals, as the course prints them.",
+   "A refusal, as the engine accepts only the population standard deviation.",
+   "Different distances and a different inertia, and possibly different clusters."
+  ],
+  "answer": 3,
+  "explanation": "Every distance is taken on the scaled logs, so another scaler changes it: min-max k-means gives clusters of 29, 54, 54 and 43 rows against the standard run's 29, 59, 54 and 38. The engine offers 'standard', 'minmax' and 'none', and the divisor is written down so a reader can match it."
+ },
+ {
+  "prompt": "Which phrase fits how the course asks a write-up to describe what k-means did to the Ekene rows?",
+  "options": [
+   "The rows were grouped into clusters by k-means.",
+   "Each row was classified into a facies by the model.",
+   "An intelligent system found the rock types in the logs.",
+   "The engine recognised the four lithologies of the field."
+  ],
+  "answer": 0,
+  "explanation": "The course names a method by what it is: k-means, and at this tier it groups rows into clusters with no core. Classified into facies, rock types found and lithologies recognised each claim a rock name the clustering has not earned, and no method in the course is called intelligent."
+ },
+ {
+  "prompt": "A capstone field asks for a log's scale as the clustering scaler uses it. On the Ekene cored rows, which GR figure is the worked twin?",
+  "options": [
+   "32.130517 gAPI, the sample SD, divisor n - 1.",
+   "32.041141 gAPI, the population standard deviation, divisor n.",
+   "56.871111 gAPI, the centre the scaler subtracts from each row.",
+   "131.100000 gAPI, the range min-max scaling divides by."
+  ],
+  "answer": 1,
+  "explanation": "The clustering scaler divides by the population standard deviation, 32.041141 for Ekene GR. The sample figure, 32.130517, belongs to the correlation PCA. 56.871111 is the mean, and 131.100000 is the min-max scale, a different scaler."
+ },
+ {
+  "prompt": "The loading field of the capstone wants a first-component loading. What is Ekene NPHI's twin figure?",
+  "options": [
+   "0.541336, NPHI's unit weight on PC1, as the component lists it.",
+   "0.682351, the explained variance ratio of PC1 on the correlation matrix.",
+   "0.894337, the weight times the square root of the eigenvalue.",
+   "0.002535, NPHI's weight on PC1 of the covariance matrix."
+  ],
+  "answer": 2,
+  "explanation": "The loading field asks for the loading. NPHI's PC1 weight is 0.541336 and its loading 0.894337, weight x sqrt(2.729404). 0.682351 is PC1's share, a different field, and 0.002535 comes from the covariance form, where GR takes the first component."
+ },
+ {
+  "prompt": "A capstone field asks for the GR centre, in gAPI, of the cluster a named row sits in. For cored row 0 under the teaching clustering, what is the twin, and why is the cluster's number not asked?",
+  "options": [
+   "46.479661 gAPI, from cluster 1; the number is a name another seed can change.",
+   "Cluster 1, since the number identifies the cluster and the centre follows from it.",
+   "-0.327638, a GR centre of cluster 1 in standard units, from the one-start run.",
+   "48.900000 gAPI, row 0's own GR, which is the centre of the cluster it sits in."
+  ],
+  "answer": 0,
+  "explanation": "Cored row 0, the first of EKENE-1, sits in cluster 1 of the teaching clustering, whose GR centre in log units is 46.479661 gAPI. The field asks for a figure in gAPI, so a standard-unit centre does not answer it, and a row's own reading is no centre. Seed 1 numbers the same cluster 0."
+ },
+ {
+  "prompt": "Which of these does the Associate capstone never ask for?",
+  "options": [
+   "The k-means inertia for a stated k and seed with ten starts, in standard units.",
+   "A row's PC1 score on the correlation form, the row counted from 0.",
+   "The explained variance ratio of PC1 on the correlation matrix of the logs.",
+   "A choice of k, a comparison of clusters with core, or a predicted facies."
+  ],
+  "answer": 3,
+  "explanation": "The capstone answers this tier's question with values the engine returns: a scale, the PC1 share, a loading, a row's PC1 score, the inertia for a stated k and seed, and a centre in log units. Choosing k and comparing clusters with core belong to the Professional tier, and a predicted facies to the Expert tier."
+ }
+]

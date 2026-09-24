@@ -1,0 +1,115 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D3 Associate m02, Scaling Before Distance.
+# Sources: the course digest's raw and scaled distances of the first four rows,
+# the scaler table on the 180 cored rows (centre, population SD, sample SD, min,
+# max, range), min-max scaling of row 0 and of EKENE-7, the covariance diagonal,
+# k-means under three scalings with their inertias, and the constant-log
+# refusals in the machine learning engine's words. Every figure is printed there.
+
+q(2, "On the 180 cored rows the variance of each log in its own squared units is GR 1032.370110, RHOB 0.018860, NPHI 0.009384 and PEF 1.636367. What does that do to a distance taken on the raw logs?",
+ "GR's differences dominate the sum of squares, so a raw distance is mostly a gamma ray distance.",
+ ["Each log adds the same share to the sum, since every log has four readings per row and one term each.",
+  "PEF rules it, because its unit, the barn per electron, is the largest of the four units in the table.",
+  "Nothing at all: a distance is taken on differences, and those do not depend on any log's unit."],
+ "A distance adds squared differences in whatever units the logs carry. GR differs by tens of gAPI between facies while RHOB and NPHI differ by hundredths, so GR supplied at least 0.976184 of the squared raw distance on the three pairs the course measured. Units are exactly what a raw difference carries, and PEF's variance of 1.636367 is far below GR's."),
+
+q(0, "k-means with k 4, seed 3 and ten starts is run on the RAW cored logs, scaling 'none'. Its four centres spread over 93.344030 gAPI of GR, in clusters of 67, 24, 65 and 24 rows. What do those clusters follow?",
+ "Bands of gamma ray, stepping up the GR scale, because the raw distance is ruled by GR.",
+ ["The four core facies, one each, matched by their sizes to the core counts.",
+  "Photoelectric factor, which outweighs the gamma ray once nothing is scaled.",
+  "The wells: each cluster gathers the rows of one or two wells, since depth enters every raw distance."],
+ "The raw centres sit at 28.005970, 52.741538, 84.158333 and 121.350000 gAPI, bands up the gamma ray. The sizes sit beside core counts of 54, 50, 29 and 47 and match none of them. PEF's raw centres spread only 2.218682 b/e, and depth is no feature in the call."),
+
+q(3, "The raw run of the last question reports an inertia of 10331.820703 and the standard run 58.289042. What can be concluded from the two figures?",
+ "Nothing about which run is better: the inertias are in different units and cannot be compared.",
+ ["The standard run is far tighter, so its clusters describe the rock far better.",
+  "The raw run is looser, which proves that scaling always improves k-means.",
+  "Both describe one fit, the raw figure simply being the standard one converted back to log units."],
+ "The raw inertia is a sum of squared differences dominated by gAPI squared; the standard one is in squared standard units. The course states that inertias under different scalings cannot be compared. They also come from different groupings, so neither is a conversion of the other."),
+
+q(1, "Which standard deviation does the clustering scaler divide by?",
+ "The population standard deviation, divisor n, which is 180 on the cored rows.",
+ ["Sample standard deviation, divisor n - 1, the figure a spreadsheet reports by default for a column.",
+  "Whichever is larger for each log, so that no scaled value can exceed its population figure.",
+  "Each log's range, its maximum less its minimum, called the standard deviation for short."],
+ "The basis reads that z is (x - mean) over the population SD per feature, fitted on the rows clustered; on the 180 cored rows GR's scale is 32.041141. The sample standard deviation belongs to the correlation form of principal components, and the range to min-max scaling."),
+
+q(2, "On the 180 cored rows GR's population standard deviation is 32.041141 and its sample standard deviation 32.130517. How do the two relate on every log?",
+ "The sample figure is larger by the factor 1.002789, the square root of 180 over 179.",
+ ["They are equal at six decimals on the other three logs, and GR differs only because of its large unit.",
+  "Smaller for the sample figure, since dividing by one fewer row shrinks it by 1.002789 on each log.",
+  "Each log has its own factor, following its own spread."],
+ "Dividing by n - 1 where the population figure divides by n makes the sample figure larger by sqrt(180 / 179), 1.002789, on every log: RHOB 0.136949 against 0.137331, NPHI 0.096603 against 0.096872, PEF 1.275647 against 1.279206. The factor depends only on the row count."),
+
+q(3, "Row 0 of the cored rows reads GR 48.900000 gAPI. With the engine's standard scaler (centre 56.871111, scale 32.041141), what is its standard score on GR?",
+ "-0.248777",
+ ["0.248777", "0.295957", "-1.335619"],
+ "The standard score is (48.900000 - 56.871111) / 32.041141, which comes to -0.248777: about a quarter of a population standard deviation below the centre, so the sign is negative and 0.248777 drops it. 0.295957 is row 0's min-max value for GR, and -1.335619 is its standard score on RHOB."),
+
+q(0, "After the engine's standard scaler is fitted on the 180 cored rows, what holds for each scaled log on those rows?",
+ "Mean 0 and population standard deviation 1.",
+ ["Minimum 0 and maximum 1, the property the course gives to every scaled log whatever the scaler.",
+  "Mean 0 and sample standard deviation 1, since dividing by n - 1 is what standardising means here.",
+  "Values that lie between -1 and 1 on every row, so that an extreme reading can be spotted at once."],
+ "Standard scaling subtracts the mean and divides by the population SD, so each log has mean 0 and population SD 1 on the rows it was fitted on. Minimum 0 and maximum 1 describe min-max scaling. Row 0's RHOB scores -1.335619, outside -1 to 1."),
+
+q(1, "The basis of the standard scaler ends with \"fitted on the rows clustered\". What does that commit a result to?",
+ "The centre and scale belong to the rows passed to the call, so another set of rows gives other scaled values.",
+ ["Every clustering in the platform shares one scaler, fitted once on the Ekene field and reused on any rows.",
+  "The scaler is refitted on each cluster separately after k-means has grouped the rows around their centres.",
+  "Only the cored wells can ever be clustered, since the scaler needs a core facies on every row it reads."],
+ "The scaler's centre and population SD are computed from the rows clustered, here the 180 cored rows, so changing the rows changes every scaled value. Nothing is shared across calls, nothing is refitted per cluster, and scaling reads the logs alone with no core facies."),
+
+q(3, "On the cored rows GR runs from 10.100000 to 141.200000 gAPI, a range of 131.100000. What does min-max scaling give row 0, whose GR is 48.900000?",
+ "0.295957",
+ ["0.524173", "0.115546", "-0.248777"],
+ "Min-max scaling is (x - min) / (max - min): (48.900000 - 10.100000) / 131.100000 gives 0.295957. 0.524173 is row 0's min-max NPHI, 0.115546 its min-max RHOB, and -0.248777 its standard score on GR, which comes from the other scaler."),
+
+q(2, "The 30 rows of EKENE-7 are scaled with the min-max scaler fitted on the cored rows. Their highest scaled PEF is 1.035264. What does the engine do with that value?",
+ "Returns it as it is; nothing is clipped, so the value says this row lies outside the fitted range.",
+ ["Clips it to 1, the ceiling of min-max scaling, and records the clipped row in a warning.",
+  "Refuses EKENE-7, since min-max scaling needs every new value to lie between 0 and 1.",
+  "It refits the scaler on the EKENE-7 rows, so that their highest PEF maps to exactly 1."],
+ "A row outside the fitted range maps outside [0, 1] and the engine clips nothing. EKENE-7's highest PEF scales to 1.035264, so at least one of its rows reads a photoelectric factor above anything in the cored wells. The scaler fitted on the cored rows is used as fitted, with no refit and no refusal."),
+
+q(0, "On the cored rows, what sets the min-max scale of a log?",
+ "Its lowest and highest values on the fitted rows, which one extreme reading can move.",
+ ["The mean and population standard deviation of every row, which is why one spike barely moves it.",
+  "A fixed range the engine stores for each log type, whatever rows are passed.",
+  "The median and the quartiles, chosen so that a single unusual sample cannot shift the scale."],
+ "Min-max scaling is (x - min) / (max - min) per feature on the fitted rows, so two readings set it and a single extreme sample moves the whole log. The mean and population SD belong to standard scaling. The engine stores no fixed log ranges and uses no quartiles."),
+
+q(1, "k-means with k 4, seed 3 and ten starts gives clusters of 29, 59, 54 and 38 rows under standard scaling and 29, 54, 54 and 43 rows under min-max scaling, with inertias 58.289042 and 4.258929. What does the comparison show?",
+ "The scaling changes the grouping, and the two inertias sit in different units.",
+ ["Min-max scaling fits far better, as its inertia of 4.258929 is far below 58.289042.",
+  "The two runs give one grouping, since both return a cluster of 29 rows and one of 54 rows.",
+  "Standard scaling is wrong for logs; only min-max keeps values in [0, 1]."],
+ "The sizes show the partitions differ: 59 and 38 rows under standard scaling against 54 and 43 under min-max, and no renumbering turns one list of sizes into the other. Inertias under different scalings measure different spaces and cannot be compared. Neither scaler is right in general; the choice is stated with the result."),
+
+q(3, "`kmeans` is passed GR and a caliper reading 8.5 on all 30 rows of EKENE-1, with standard scaling. Which reply comes back?",
+ "A refusal naming X.CALI, saying it \"has zero variance on the 30 rows passed\".",
+ ["A result in which CALI's scaled values are all 0, with a warning that the caliper carries nothing.",
+  "CALI is dropped without a word and the 30 rows are clustered on GR alone.",
+  "Refused by naming `k`: four clusters cannot sit on two logs."],
+ "A constant log has a standard deviation of 0 and the scaler cannot divide by it. The engine's own words are \"X.CALI has zero variance on the 30 rows passed (every value is 8.5): standardising would divide by zero, so drop the feature or fit on rows where it varies\". It returns no clusters, drops nothing silently, and k is not at fault."),
+
+q(0, "The same 30 EKENE-1 rows with the constant caliper are passed to `kmeans` with min-max scaling. How does the refusal differ from the standard-scaling one?",
+ "It says \"zero range\" where the standard scaler says \"zero variance\".",
+ ["No refusal comes back: min-max maps a constant log to 0 on every row and clusters on.",
+  "Its field is `scale`, telling the caller to switch back to standard scaling.",
+  "Counting the training rows, \"on the 30 training rows\", since min-max is fitted before k-means."],
+ "Min-max scaling divides by the range, which is 0 for a caliper reading 8.5 on every row, so the refusal says \"zero range\" where the standard scaler says \"zero variance\". Nothing is mapped to 0 and clustered on, the field stays X.CALI, and the message counts the rows passed, since kmeans fits its scaler on every row it is given."),
+
+q(2, "One cored row is passed twice to `pca` on the covariance matrix, so every column is constant. What does the engine reply?",
+ "A refusal naming `X`: \"X has zero total variance (every column is constant), so there are no principal components\".",
+ ["Refused by naming the first constant log, X.GR, in the standard scaler's words about a zero variance.",
+  "Four eigenvalues of 0 come back with a warning that the components are not unique.",
+  "Components computed from the one distinct row, reported with `converged` true after one sweep."],
+ "The covariance form skips the scaler and uses each log's own spread, so the refusal is pca's own and names the whole table, `X`, since no single log is at fault. A refusal returns no eigenvalues, no components and no warning."),
+
+emit(Q, '/root/dai-wip-facies/banks/d3b_m02.json', expect_n=15)
+finish()

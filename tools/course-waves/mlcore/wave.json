@@ -13,7 +13,7 @@
  "engines": [
   "engines/dataai/ml.js"
  ],
- "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines 966bb9e (engines PR #252). TWENTY-THREE paths walked by vendor_mlcore.sh over a git-archive export of the commit with the jest suite as the only seed: five reached by the walk (the suite, ml.js, lib/stats/stats.js, lib/lp/simplex.js, tools/validation/dataai/synthetic_wells.js) and eighteen NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; the eleven NIST StRD .dat files the oracle parses; oracle_ml.py, pin_ml.py, timing_ml.mjs, FINDINGS-ml.md, negcontrol_ml.sh). 23 paths x 4 proofs = 92, all IDENTICAL. The canonical pin stays 54cf7c4; 21 paths are ledgered as kind extra, group d2-mlcore-course; lib/stats and lib/lp already match the manifest. Vendored jest suite 614/614.",
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines 966bb9e (engines PR #252). TWENTY-THREE paths walked by vendor_mlcore.sh over a git-archive export of the commit with the jest suite as the only seed: five reached by the walk (the suite, ml.js, lib/stats/stats.js, lib/lp/simplex.js, tools/validation/dataai/synthetic_wells.js) and eighteen NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; the eleven NIST StRD .dat files the oracle parses; oracle_ml.py, pin_ml.py, timing_ml.mjs, FINDINGS-ml.md, negcontrol_ml.sh). 23 paths x 4 proofs = 92, all IDENTICAL. The canonical pin stays 54cf7c4; 21 paths are ledgered as kind extra, group d2-mlcore-course; lib/stats and lib/lp already match the manifest. Vendored jest suite 614/614. RE-VENDORED BY D3 (feat/d3-facies-course): engines/dataai/ml.js is now sha-identical with petrolord-engines ef4058f (engines PR #254), ledgered in group d3-facies-course. ef4058f added a rowNoun option to fitStandardScaler and fitMinMaxScaler (default 'training rows', plus one new refusal for any other noun); every D2 call uses the default, so the digest moved on its ENGINE header line only (the vendored commit and the line count, 1540 to 1551), and fields.json and precision.json rebuild byte-identically. The other 22 D2 paths are unchanged at 966bb9e.",
  "constants": {
   "$comment": "The engine exports DEFAULTS (MAX_CONDITION 1e8, LOGISTIC_TOL 1e-10, LOGISTIC_MAX_ITER 100, STEP_HALVINGS 30, LOG_LOSS_EPS 1e-15, WHOLE_TOL 1e-9) and METRICS. Digest section 1 prints both from the exports. None is graded."
  },
@@ -84,8 +84,8 @@
  "digest": {
   "lines": 908,
   "sections": 26,
-  "md5": "30e18849443ecc507e50ba743b63ff59",
-  "sha256": "1d50fa63c629d42f209e683558932bc8da74c06bb751f2fa8c3fdd96ed9f8db9"
+  "md5": "76f35ef10e4666234ee30ee30bb96b44",
+  "sha256": "f07383c375bee52005cc0e0836f6043ac46d2e0eb202343c0015d0a9c6490888"
  },
  "fields": {
   "count": 18,

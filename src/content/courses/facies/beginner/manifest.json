@@ -1,0 +1,361 @@
+{
+ "app_slug": "facies",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-what-electrofacies-are",
+   "title": "What Electrofacies Are",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-logs-as-a-signature-of-rock",
+     "title": "Logs as a signature of rock",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-core-facies-and-electrofacies",
+     "title": "Core facies and electrofacies",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-ekene-facies-wells",
+     "title": "The Ekene facies wells and their logs",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-rows-features-and-distance",
+     "title": "Rows, features and distance",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-refusals-by-name",
+     "title": "The refusals, each naming its field",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-scaling-before-distance",
+   "title": "Scaling Before Distance",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-why-gr-rules-a-raw-distance",
+     "title": "Why gamma ray rules a raw distance",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-population-standard-deviation",
+     "title": "Standardising with the population standard deviation",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-min-max-scaling",
+     "title": "Min-max scaling",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-constant-log",
+     "title": "A constant log",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-principal-components",
+   "title": "Principal Components",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-correlation-matrix",
+     "title": "The correlation matrix of the logs",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-eigenvalues-and-explained-variance",
+     "title": "Eigenvalues and explained variance",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-loadings",
+     "title": "Loadings and what a component means",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-scores-and-a-new-well",
+     "title": "Scores, and a new well projected",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-k-means",
+   "title": "k-Means Clustering",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-centres-and-the-nearest-centre",
+     "title": "Centres and the nearest centre",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-seeding-with-k-means-plus-plus",
+     "title": "Seeding with k-means++",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-lloyd-passes",
+     "title": "Lloyd passes until the labels stop changing",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-inertia",
+     "title": "Inertia",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-several-starts",
+     "title": "Several starts and the lowest inertia",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-reading-clusters",
+   "title": "Reading Clusters",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-centres-in-log-units",
+     "title": "Centres back in log units",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-cluster-numbers-are-names",
+     "title": "Cluster numbers are names",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-assigning-new-rows",
+     "title": "Assigning new rows to the nearest centre",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-covariance-against-correlation",
+     "title": "Covariance against correlation",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-one-field-clustered",
+   "title": "One Field Clustered, End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-whole-workflow",
+     "title": "The whole workflow in order",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-fisher-iris-as-a-check",
+     "title": "Fisher's iris as a published check",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-up-a-clustering",
+     "title": "Writing up a clustering",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ef-cluster-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

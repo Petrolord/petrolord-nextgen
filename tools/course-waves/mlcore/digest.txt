@@ -4,7 +4,7 @@
 
 # PRECISION. Every coefficient, standard error, score, metric, probability, centre, scale, condition number and difference prints to SIX decimals; counts, row numbers, iterations, seeds and well numbers are whole numbers; relative differences and very small magnitudes print in exponent form.
 
-# ENGINE. engines/dataai/ml.js, vendored sha-identical with petrolord-engines 966bb9e, 1540 lines. It imports lib/stats (mulberry32, mean) and lib/lp/simplex.js (the separation linear programmes). The vendored golden test-data/dataai/goldens/ml_cases.json carries 171 cases, 69 of them refusals and 11 of them NIST StRD published anchors, written by the standard library oracle.
+# ENGINE. engines/dataai/ml.js, vendored sha-identical with petrolord-engines ef4058f, 1551 lines (first vendored at 966bb9e; ef4058f added a rowNoun option to the two scalers for the clustering engine, and its default keeps every message this digest quotes). It imports lib/stats (mulberry32, mean) and lib/lp/simplex.js (the separation linear programmes). The vendored golden test-data/dataai/goldens/ml_cases.json carries 171 cases, 69 of them refusals and 11 of them NIST StRD published anchors, written by the standard library oracle.
 
 # WHAT IS NEVER IN THIS FILE. No capstone field, no capstone well, no capstone dataset and no graded answer. The capstones run their own datasets and the digest never names them.
 

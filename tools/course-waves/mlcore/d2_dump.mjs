@@ -185,7 +185,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Every coefficient, standard error, score, metric, probability, centre, scale, condition number and difference prints to SIX decimals; counts, row numbers, iterations, seeds and well numbers are whole numbers; relative differences and very small magnitudes print in exponent form.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 966bb9e, ${engineLines} lines. It imports lib/stats (mulberry32, mean) and lib/lp/simplex.js (the separation linear programmes). The vendored golden test-data/dataai/goldens/ml_cases.json carries ${CASES.length} cases, ${refusalsInGolden} of them refusals and ${publishedInGolden} of them NIST StRD published anchors, written by the standard library oracle.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines ef4058f, ${engineLines} lines (first vendored at 966bb9e; ef4058f added a rowNoun option to the two scalers for the clustering engine, and its default keeps every message this digest quotes). It imports lib/stats (mulberry32, mean) and lib/lp/simplex.js (the separation linear programmes). The vendored golden test-data/dataai/goldens/ml_cases.json carries ${CASES.length} cases, ${refusalsInGolden} of them refusals and ${publishedInGolden} of them NIST StRD published anchors, written by the standard library oracle.`);
 w();
 w('# WHAT IS NEVER IN THIS FILE. No capstone field, no capstone well, no capstone dataset and no graded answer. The capstones run their own datasets and the digest never names them.');
 w();
