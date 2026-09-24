@@ -23,9 +23,9 @@ The engine's own case shows the clip at work: true labels 1, 0, 1, 0 against pro
 | log loss | 8.723863 |
 | rows clipped | 3 |
 
-The first two rows are certain and right; clipped to within eps of their labels, they cost almost nothing. The fourth row, a non-pay row given 0.3, costs a modest amount. The third row is a pay row given a probability of exactly 0, certain and wrong. Clipped to eps it is charged -ln(1.00e-15), by far the largest charge of the four. Without the clip the answer would be infinite.
+The first two rows are certain and right; clipped to within eps of their labels, they cost almost nothing. The fourth row, a non-pay row given 0.3, costs a modest amount. The third row is a pay row given a probability of exactly 0, certain and wrong. Clipped to eps it is charged -ln(1.00e-15) = 34.538776, by far the largest charge of the four. Without the clip the answer would be infinite.
 
-The clip is a stated constant. Other tools clip at other values, and a clipped row's charge depends directly on eps, so compare log losses from two tools only when both the clip and the count of clipped rows are known.
+The clip is a stated constant. Other tools clip at other values: scikit-learn 1.9 clips at 2.22e-16 and would charge that row 36.043653, and a clipped row's charge depends directly on eps, so compare log losses from two tools only when both the clip and the count of clipped rows are known.
 
 ## Refusals
 

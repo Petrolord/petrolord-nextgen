@@ -39,7 +39,7 @@ A seed fixes the draws, and the draws fix the order. Change the seed and the who
 
 ## The test size, and a whole-number rule
 
-The test size is ceil(testFraction x count), here ceil(0.3 x 9) = 3 wells. Float arithmetic can land a hair off a whole number. In float, 0.28 x 25 comes out a tiny amount above 7, and a plain ceiling would then hold out 8. So the engine takes a product within 1.00e-9 of a whole number as that number before the ceiling, and holds out 7. Its basis states the rule:
+The test size is ceil(testFraction x count), here ceil(0.3 x 9) = 3 wells. Float arithmetic can land a hair off a whole number. In float, 0.28 x 25 comes out as 7 plus 8.88e-16, and a plain ceiling would then hold out 8. So the engine takes a product within 1.00e-9 of a whole number as that number before the ceiling, and holds out 7. Its basis states the rule:
 
 > ceil(testFraction x count), a product within 1e-9 of a whole number taken as that number
 

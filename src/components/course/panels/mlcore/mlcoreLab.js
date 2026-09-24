@@ -228,6 +228,46 @@ export const payTableText = () => tableText(ROWS, ['well', 'RHOB', 'NPHI', 'RT',
 export const noSonicTableText = () => tableText(NOS, ['well', 'GR', 'RHOB', 'NPHI']);
 export const highRtTableText = () => tableText(ROWS.filter((r) => r.RT >= 10), ['well', 'PHIC', 'RT', 'PAY']);
 export const sonicWellNames = () => [...new Set(G9)];
+/** The 180 training rows of the teaching split (EKENE-4, EKENE-5, EKENE-8 held out), with CALI, depth and the attributes. */
+export const sonicTrainTableText = () => tableText(pick(SONIC, GS().trainIndices), ['well', 'GR', 'RHOB', 'NPHI', 'CALI', 'depth', ...ATTRS, 'DT']);
+/** The 210 training rows of the pay model (the all-well teaching split, EKENE-3, EKENE-5, EKENE-7 held out). */
+export const payTrainTableText = () => tableText(pick(ROWS, ML.groupSplit({ groups: G10, testFraction: TF, seed: SEED }).trainIndices), ['well', 'RHOB', 'NPHI', 'RT', 'PAY']);
+
+/**
+ * The scaling-leak case: one group split, a standard scaler fitted once on
+ * the training wells and once on every row, the same penalised logistic fit
+ * on each scaled copy, and the test log loss of each. Every figure is an
+ * engine return; the difference is the only arithmetic.
+ */
+export const scalingLeakCase = ({ rows, features, target, l2, testFraction, seed }) => {
+  const Xr = matrixOf(rows, features);
+  const y = rows.map((r) => (r[target] === undefined ? null : r[target]));
+  const sp = ML.groupSplit({ groups: rows.map((r) => r.well), testFraction, seed });
+  if (sp.error) return { refusal: sp };
+  const run = (scaler) => {
+    if (scaler.error) return { refusal: scaler };
+    const Ztr = ML.applyScaler({ scaler, X: pick(Xr, sp.trainIndices) });
+    const Zte = ML.applyScaler({ scaler, X: pick(Xr, sp.testIndices) });
+    if (Ztr.error || Zte.error) return { refusal: Ztr.error ? Ztr : Zte };
+    const m = ML.logistic({ X: Ztr.X, y: pick(y, sp.trainIndices), names: features, l2 });
+    if (m.error) return { refusal: m };
+    const ll = ML.logLoss({ yTrue: pick(y, sp.testIndices), probabilities: ML.predict({ model: m, X: Zte.X }).values });
+    if (ll.error) return { refusal: ll };
+    return { centre: scaler.centre, scale: scaler.scale, coefficients: m.coefficients, logLoss: ll.logLoss };
+  };
+  const clean = run(ML.fitStandardScaler({ X: Xr, trainIndices: sp.trainIndices, names: features }));
+  const leaked = run(ML.fitStandardScaler({ X: Xr, names: features }));
+  return { testGroups: sp.testGroups, clean, leaked, difference: clean.refusal || leaked.refusal ? null : leaked.logLoss - clean.logLoss };
+};
+
+/** Professional: the section's scaling-leak case on the pay rows, l2 1. */
+export const scalingLeakReader = () => {
+  const r = scalingLeakCase({ rows: ROWS, features: PAYF, target: 'PAY', l2: 1, testFraction: TF, seed: SEED });
+  return {
+    clean: { rtCentre: r.clean.centre[2], rtScale: r.clean.scale[2], rtCoefficient: r.clean.coefficients[3], logLoss: r.clean.logLoss },
+    leaked: { rtCentre: r.leaked.centre[2], rtScale: r.leaked.scale[2], rtCoefficient: r.leaked.coefficients[3], logLoss: r.leaked.logLoss },
+  };
+};
 
 /** Associate: the two splits of the sonic rows at the teaching fraction and seed. */
 export const splitsReader = () => {
@@ -357,6 +397,11 @@ export const diagnoseReader = () => {
     importance: pi.importances.map((im) => ({ feature: im.feature, mean: im.mean, sd: im.sd })),
     learningCurve: lc.points.map((p) => ({ wells: p.nGroups, rows: p.nRows, train: p.trainScore, test: p.testScore })),
     missingLog: { well: DATA.withheld.well, rows: pn.values.length, lowest: Math.min(...pn.values), highest: Math.max(...pn.values), rmse: mw.rmse, mae: mw.mae },
+    rehearsal: {
+      attributeScaledCondition: ML.ols({ X: XA9, y: Y9 }).scaledConditionNumber,
+      nphiAfterThreeUpdates: ML.logistic({ X: XP10, y: PAY10, names: PAYF, maxIter: 3 }).coefficients[2],
+      firstRowPrediction: pn.values[0],
+    },
   };
 };
 

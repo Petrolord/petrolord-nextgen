@@ -3,7 +3,7 @@ import {
   ResponsiveContainer, LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip,
 } from 'recharts';
 import {
-  parseTable, parseNumber, parseSeries, fitAndScore, crossValidate, leakageOf, matrixOf, reportOf, rocOf, logLossOf,
+  parseTable, parseNumber, parseSeries, fitAndScore, crossValidate, leakageOf, matrixOf, reportOf, rocOf, logLossOf, scalingLeakCase,
   attributeTableText, payTableText, TEACHING, ridgeReader, payReader,
 } from './mlcoreLab';
 import {
@@ -24,6 +24,7 @@ export const MODES = [
   ['ridge', 'Ridge and its penalty'],
   ['kfold', 'Cross-validation by wells'],
   ['leakage', 'A random-row split against a well split'],
+  ['scaleleak', 'A scaler fitted on every row'],
   ['logistic', 'Logistic regression on a stated label'],
   ['confusion', 'The confusion matrix, precision, recall and F1'],
   ['roc', 'ROC, AUC and log loss'],
@@ -144,6 +145,44 @@ export const LeakageMode = () => {
         </>
       )}
       <Note>Take the four well attributes out of the features and compare: leakage needs a feature that names the well.</Note>
+    </>
+  );
+};
+
+export const ScaleLeakMode = () => {
+  const [text, setText, t] = useTable(payTableText());
+  const [feats, setFeats] = useState(TEACHING.payFeatures.join(', '));
+  const [target, setTarget] = useState('PAY');
+  const [l2, setL2] = useState('1');
+  const [fraction, setFraction] = useState(String(TEACHING.testFraction));
+  const [seed, setSeed] = useState(String(TEACHING.seed));
+  const features = names(feats);
+  const r = t.error ? null : scalingLeakCase({ rows: t.rows, features, target: target.trim(), l2: parseNumber(l2), testFraction: parseNumber(fraction), seed: parseNumber(seed) });
+  const bad = r && (r.refusal || r.clean.refusal || r.leaked.refusal);
+  return (
+    <>
+      <FieldGrid>
+        <TextField label="Your table (the target holds 0 and 1)" value={text} onChange={setText} rows={4} />
+        <WordField label="Features" value={feats} onChange={setFeats} />
+        <WordField label="Target" value={target} onChange={setTarget} />
+        <NumField label="l2 penalty" value={l2} onChange={setL2} />
+        <NumField label="Test fraction" value={fraction} onChange={setFraction} />
+        <NumField label="Seed" value={seed} onChange={setSeed} />
+      </FieldGrid>
+      {t.error && <Note>{t.error}</Note>}
+      {bad && <Refusal r={bad} />}
+      {r && !bad && (
+        <>
+          <Tbl head={['scaler fitted on', ...features.map((f) => `${f} centre`), 'last coefficient', 'test log loss']} rows={[
+            ['the training wells only', ...r.clean.centre.map(six), six(r.clean.coefficients[r.clean.coefficients.length - 1]), six(r.clean.logLoss)],
+            ['every row', ...r.leaked.centre.map(six), six(r.leaked.coefficients[r.leaked.coefficients.length - 1]), six(r.leaked.logLoss)],
+          ]} />
+          <TileGrid>
+            <Tile label={`Test wells: ${list(r.testGroups)}`} value={r.difference === null ? 'none' : r.difference.toExponential(2)} unit="log loss, every row less training" />
+          </TileGrid>
+        </>
+      )}
+      <Note>The same penalised logistic fit runs on two scaled copies. The scaler fitted on every row has seen the test wells.</Note>
     </>
   );
 };
@@ -279,6 +318,7 @@ const ValidateExplorer = ({ initialMode = 'ridge' }) => {
         {mode === 'ridge' && <RidgeMode path={path} />}
         {mode === 'kfold' && <KFoldMode />}
         {mode === 'leakage' && <LeakageMode />}
+        {mode === 'scaleleak' && <ScaleLeakMode />}
         {mode === 'logistic' && <LogisticMode pay={pay} />}
         {mode === 'confusion' && <ConfusionMode />}
         {mode === 'roc' && <RocMode />}

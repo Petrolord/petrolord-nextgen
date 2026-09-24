@@ -16,7 +16,7 @@ After scaling, a value reads in training population standard deviations (divisor
 
 ## Scaling does not move a least squares prediction
 
-Take the one-well workflow of module six: EKENE-8 held out, eight wells trained, 240 rows. Fit least squares on the raw logs, then again on standardised logs. The coefficients change completely, because they change units: on standardised features they are in us/ft per unit of the standardised feature, 105.119167, 6.898926, 2.402069 and 4.610720 for the intercept, GR, RHOB and NPHI. The predictions for the held-out well differ between the two fits by at most 1.42e-14 us/ft, which is rounding. Least squares with an intercept gives the same fitted plane under any rescaling of a feature.
+Take the one-well workflow of module six: EKENE-8 held out, eight wells trained, 240 rows. Fit least squares on the raw logs, then again on standardised logs. The coefficients change completely, because they change units: on standardised features they are in us/ft per population standard deviation (divisor n) of the 240 training rows, 105.119167, 6.898926, 2.402069 and 4.610720 for the intercept, GR, RHOB and NPHI. The predictions for the held-out well differ between the two fits by at most 1.42e-14 us/ft, which is rounding. Least squares with an intercept gives the same fitted plane under any rescaling of a feature.
 
 So for this tier's model, scaling changes how the coefficients read and leaves the predictions alone.
 

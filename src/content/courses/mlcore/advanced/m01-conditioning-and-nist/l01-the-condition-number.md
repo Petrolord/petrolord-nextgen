@@ -29,4 +29,4 @@ Only the scaled number decides whether the engine fits a design. The raw number 
 
 ## Exercise
 
-Open the panel on the condition view. The default table holds all 270 sonic rows; delete the rows of EKENE-4, EKENE-5 and EKENE-8 so the 180 training rows of the teaching split remain, fit GR, RHOB and NPHI on DT, and confirm the scaled condition number 193.359232. Then add CALI, which the table already carries, to the features and refit. Write down both condition numbers before and after, and say in one sentence whether the change is a units story or a collinearity story.
+Open the panel on the condition view. The default table holds the 180 training rows of the teaching split, with EKENE-4, EKENE-5 and EKENE-8 held out. Fit GR, RHOB and NPHI on DT, and confirm the scaled condition number 193.359232. Then add CALI, which the table already carries, to the features and refit. Write down both condition numbers before and after, and say in one sentence whether the change is a units story or a collinearity story.

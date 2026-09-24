@@ -29,7 +29,7 @@ Every coefficient here is in us/ft, because every feature is now in standard dev
 
 ## Back to original units
 
-The engine also reports every coefficient in the feature's own unit, and its basis states the conversion in its own words: "b_j / sd_j, intercept mean y - sum b_j mean_j / sd_j". Divide a standardised coefficient by the training standard deviation of its feature and you have DT per gAPI, per g/cm3 or per v/v again. The intercept is rebuilt from the training mean of y and the training means of the features.
+The engine also reports every coefficient in the feature's own unit, and its basis states the conversion in its own words: "b_j / sd_j, intercept mean y - sum b_j mean_j / sd_j". Divide a standardised coefficient by the training standard deviation of its feature and you have DT per gAPI, per g/cm3 or per v/v again. GR reads 0.317732 us/ft per gAPI at lambda 0, 0.278671 at 10 and 0.177531 at 100. The intercept is rebuilt from the training mean of y and the training means of the features.
 
 At lambda 0 the penalty is gone and ridge is least squares. The engine's ridge coefficients in original units at lambda 0 agree with `ols` on the same rows to a largest relative difference of 3.44e-16, which is rounding.
 

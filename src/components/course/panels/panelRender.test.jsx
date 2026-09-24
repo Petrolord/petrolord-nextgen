@@ -270,7 +270,7 @@ describe('every course panel renders with no props', () => {
   it('every D2 machine learning view renders, not only the default one', async () => {
     const MODES = {
       'mlcore/FitExplorer.jsx': ['split', 'scale', 'ols', 'metrics'],
-      'mlcore/ValidateExplorer.jsx': ['ridge', 'kfold', 'leakage', 'logistic', 'confusion', 'roc'],
+      'mlcore/ValidateExplorer.jsx': ['ridge', 'kfold', 'leakage', 'scaleleak', 'logistic', 'confusion', 'roc'],
       'mlcore/DiagnoseExplorer.jsx': ['condition', 'separation', 'convergence', 'importance', 'learning', 'missing'],
     };
     let rendered = 0;
@@ -287,7 +287,7 @@ describe('every course panel renders with no props', () => {
         rendered += 1;
       }
     }
-    expect(rendered).toBe(16);
+    expect(rendered).toBe(17);
   }, 60000);
   // EVERY MODE, not only the default one. A panel with four views renders one
   // of them with no props, and the other three are exactly where a crash hides:

@@ -2,7 +2,7 @@
 
 {{panel:ml-fit-explorer}}
 
-When the engine is handed something it cannot answer, it returns neither a number nor a guess. It returns an `error` and a `field`, the field names the exact input it refused, and the message starts with that name. Across the engine 31 refusals are tabled, across 18 functions. Each is a real call and each message is the engine's own words. A refusal carries no number of its own: any figure in it belongs to the message.
+When the engine is handed something it cannot answer, it returns neither a number nor a guess. It returns an `error` and a `field`, the field names the exact input it refused, and the message starts with that name. Across the engine 32 refusals are tabled, across 18 functions. Each is a real call and each message is the engine's own words. A refusal carries no number of its own: any figure in it belongs to the message.
 
 | function | what was passed | field named |
 | --- | --- | --- |

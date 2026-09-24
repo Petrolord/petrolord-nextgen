@@ -83,7 +83,6 @@ const ALLOWED = {
   460: 'the middle minimum of the word band, settled by structure.py',
   500: 'the top minimum of the word band, settled by structure.py',
   560: 'the ceiling of the word band, settled by structure.py',
-  67: 'the academy path order of the course, settled by wave.json and the course migration',
   78: 'the lessons in the course, three tiers of 26, settled by structure.py',
   0.45: 'the Jaccard threshold of the kit near-duplicate audit (dupaxes.py), named in KEY_TRUTH_TASK.md',
 };

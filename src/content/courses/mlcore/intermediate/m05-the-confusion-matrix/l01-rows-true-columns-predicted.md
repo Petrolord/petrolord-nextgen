@@ -20,7 +20,7 @@ Read it cell by cell, with pay as the positive class:
 * 0 pay rows were called non-pay. There are no false negatives.
 * 24 pay rows were called pay. These are the true positives.
 
-The row sums are the true class sizes: 66 non-pay rows and 24 pay rows, 90 in all. The column sums are what the model called: 62 rows non-pay, and 24 + 4 rows pay.
+The row sums are the true class sizes: 66 non-pay rows and 24 pay rows, 90 in all. The column sums are what the model called: 62 rows non-pay, and 28 rows pay, 24 + 4.
 
 ## Why the layout must be stated
 

@@ -1,7 +1,7 @@
 import React, { useMemo, useState } from 'react';
 import {
   parseTable, parseNumber, matrixOf, olsOf, logisticOf, groupSplitOf, importanceOf, learningCurveOf, predictNewWell,
-  sonicTableText, payTableText, highRtTableText, noSonicTableText, TEACHING, DEFAULTS, diagnoseReader,
+  sonicTableText, payTrainTableText, sonicTrainTableText, highRtTableText, noSonicTableText, TEACHING, DEFAULTS, diagnoseReader,
 } from './mlcoreLab';
 import {
   PanelShell, SelectField, NumField, Tile, TileGrid, FieldGrid, Note,
@@ -34,7 +34,7 @@ const useTable = (initial) => {
 const col = (rows, c) => rows.map((r) => (r[c] === undefined ? null : r[c]));
 
 export const ConditionMode = () => {
-  const [text, setText, t] = useTable(sonicTableText());
+  const [text, setText, t] = useTable(sonicTrainTableText());
   const [feats, setFeats] = useState('GR, RHOB, NPHI');
   const [target, setTarget] = useState('DT');
   const [maxc, setMaxc] = useState(String(DEFAULTS.MAX_CONDITION));
@@ -56,7 +56,7 @@ export const ConditionMode = () => {
           <Tile label="R-squared" value={six(r.rSquared)} />
         </TileGrid>
       )}
-      <Note>A fit is refused when the scaled condition number is above maxCondition. Centring a feature that sits far from zero lowers it.</Note>
+      <Note>The table opens on the 180 training rows of the teaching split, with EKENE-4, EKENE-5 and EKENE-8 held out. A fit is refused when the scaled condition number is above maxCondition. Centring a feature that sits far from zero lowers it.</Note>
     </>
   );
 };
@@ -95,7 +95,7 @@ export const SeparationMode = ({ d }) => {
 };
 
 export const ConvergenceMode = () => {
-  const [text, setText, t] = useTable(payTableText());
+  const [text, setText, t] = useTable(payTrainTableText());
   const [feats, setFeats] = useState(TEACHING.payFeatures.join(', '));
   const [target, setTarget] = useState('PAY');
   const [tol, setTol] = useState(String(DEFAULTS.LOGISTIC_TOL));
@@ -123,6 +123,7 @@ export const ConvergenceMode = () => {
           <Declared title="THE STOPPING RULE, in the engine's words">{r.basis.convergence}</Declared>
         </>
       )}
+      <Note>The table opens on the 210 training rows of the pay model, with EKENE-3, EKENE-5 and EKENE-7 held out.</Note>
     </>
   );
 };

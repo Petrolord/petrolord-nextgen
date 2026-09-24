@@ -37,4 +37,4 @@ The common alternative is to iterate and call the data separated if the coeffici
 
 ## Exercise
 
-Open the panel on the convergence view, copy its pay table, and paste it into the separation view. Delete the rows of the test wells EKENE-3, EKENE-5 and EKENE-7, and set the features to RHOB, NPHI and RT, the target to PAY and l2 to 0. Run it and copy the separation type and the certificate the engine prints. Then run the default high-RT table with l2 at 1 and copy its separation type. Say in one sentence why the second fit reports a separation and still returns coefficients.
+Open the panel on the convergence view, copy its table of the 210 training rows of the pay model, and paste it into the separation view. Set the features to RHOB, NPHI and RT, the target to PAY and l2 to 0. Run it and copy the separation type and the certificate the engine prints. Then run the default high-RT table with l2 at 1 and copy its separation type. Say in one sentence why the second fit reports a separation and still returns coefficients.

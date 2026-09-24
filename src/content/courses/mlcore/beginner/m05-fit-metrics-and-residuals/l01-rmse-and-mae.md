@@ -41,4 +41,4 @@ The engine's own worked case sets true values 1, 2 and 3 against predictions 3, 
 
 ## Exercise
 
-Open the fit explorer and choose the view for RMSE, MAE and R-squared on your own predictions. It opens on true values 1, 2, 3 and predicted values 3, 2, 1. Check the RMSE tile against 1.632993 and work the MAE by hand before reading its tile. Then change one predicted value so that a single row carries a large miss, and write down how RMSE and MAE each moved.
+Open the fit explorer and choose the view for RMSE, MAE and R-squared on your own predictions. It opens on true values 1, 2, 3 and predicted values 3, 2, 1. Check the RMSE tile against 1.632993, then work the MAE by hand and check it against 1.333333. Then change one predicted value so that a single row carries a large miss, and write down how RMSE and MAE each moved.

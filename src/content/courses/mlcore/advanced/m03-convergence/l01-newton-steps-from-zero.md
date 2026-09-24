@@ -39,4 +39,4 @@ At the tenth iteration the fit stopped with RT at 0.241141 log odds per ohm.m an
 
 ## Exercise
 
-Open the panel on the convergence view. The default table holds the pay rows of all ten wells; delete the rows of the test wells EKENE-3, EKENE-5 and EKENE-7 so the 210 training rows remain, keep the features RHOB, NPHI and RT and the default tol and maxIter, and run it. Confirm 10 iterations and the tenth step of 1.14e-13. Then write down the iteration at which the largest step component first falls below 1, and the iteration at which the log likelihood first prints -24.507027.
+Open the panel on the convergence view. The default table holds the 210 training rows of the pay model, the teaching split with EKENE-3, EKENE-5 and EKENE-7 held out; keep the features RHOB, NPHI and RT and the default tol and maxIter, and run it. Confirm 10 iterations and the tenth step of 1.14e-13. Then write down the iteration at which the largest step component first falls below 1, and the iteration at which the log likelihood first prints -24.507027.

@@ -66,6 +66,7 @@ const READERS = {
   leakageReader: L.leakageReader,
   payReader: L.payReader,
   diagnoseReader: L.diagnoseReader,
+  scalingLeakReader: L.scalingLeakReader,
 };
 
 describe('THE DATASET GATE: the lab runs the digest generator\'s own dataset', () => {
@@ -130,6 +131,12 @@ describe('THE DIGEST GATE: every number a teaching reader returns is printed in 
     const d = L.diagnoseReader();
     expect(d.importance[d.importance.length - 1].feature).toBe('CALI');
     expect(DIGEST).toContain(`| all | 30 | ${d.missingLog.rmse.toFixed(6)} | ${d.missingLog.mae.toFixed(6)} |`);
+    expect(DIGEST).toContain(`reads a scaled condition number of ${d.rehearsal.attributeScaledCondition.toFixed(6)}`);
+    expect(DIGEST).toContain(`returns the NPHI coefficient ${d.rehearsal.nphiAfterThreeUpdates.toFixed(6)} log odds per v/v`);
+    expect(DIGEST).toContain(`is predicted at ${d.rehearsal.firstRowPrediction.toFixed(6)} us/ft`);
+    const sl = L.scalingLeakReader();
+    expect(DIGEST).toContain(`| the training wells only | ${sl.clean.rtCentre.toFixed(6)} | ${sl.clean.rtScale.toFixed(6)} | ${sl.clean.rtCoefficient.toFixed(6)} | ${sl.clean.logLoss.toFixed(6)} |`);
+    expect(DIGEST).toContain(`| all ten wells | ${sl.leaked.rtCentre.toFixed(6)} | ${sl.leaked.rtScale.toFixed(6)} | ${sl.leaked.rtCoefficient.toFixed(6)} | ${sl.leaked.logLoss.toFixed(6)} |`);
   });
 
   it('every refusal the lab samples is the engine\'s own message and the digest quotes it verbatim', () => {
@@ -212,6 +219,19 @@ describe('THE ENGINE GATE: the interactive routes are the engine, unchanged', ()
     expect(L.parseTable('').error).toBeTruthy();
     const back = L.parseTable(L.sonicTableText());
     expect(back.rows).toHaveLength(270);
+    const tr = L.parseTable(L.sonicTrainTableText());
+    expect(tr.rows).toHaveLength(180);
+    expect(new Set(tr.rows.map((r) => r.well)).has('EKENE-4')).toBe(false);
+    const cond = L.olsOf({ X: L.matrixOf(tr.rows, ['GR', 'RHOB', 'NPHI']), y: tr.rows.map((r) => r.DT) });
+    expect(DIGEST).toContain(`| the three logs | ${cond.conditionNumber.toFixed(6)} | ${cond.scaledConditionNumber.toFixed(6)} |`);
+    const pt = L.parseTable(L.payTrainTableText());
+    expect(pt.rows).toHaveLength(210);
+    const lg = L.logisticOf({ X: L.matrixOf(pt.rows, ['RHOB', 'NPHI', 'RT']), y: pt.rows.map((r) => r.PAY), names: ['RHOB', 'NPHI', 'RT'] });
+    expect(lg.iterations).toBe(L.diagnoseReader().convergence.iterations);
+    expect(lg.coefficients[3]).toBe(L.diagnoseReader().convergence.rtConverged);
+    const sc = L.scalingLeakCase({ rows: L.parseTable(L.payTableText()).rows, features: ['RHOB', 'NPHI', 'RT'], target: 'PAY', l2: 1, testFraction: 0.3, seed: 5 });
+    expect(sc.clean.logLoss).toBe(L.scalingLeakReader().clean.logLoss);
+    expect(sc.leaked.logLoss).toBe(L.scalingLeakReader().leaked.logLoss);
   });
   it('the composite helpers are engine calls in order: fit and score, cross-validate, predict a new well', () => {
     const t = L.parseTable(L.sonicTableText());

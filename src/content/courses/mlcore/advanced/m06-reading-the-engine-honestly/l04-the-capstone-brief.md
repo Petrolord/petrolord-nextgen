@@ -27,7 +27,7 @@ Reading the raw condition number, or the one after centring, for the scaled one.
 
 ## A rehearsal on the Ekene wells
 
-Every step can be rehearsed on the Ekene wells in the panel. The attribute design on the teaching split's training rows has a scaled condition number of 7608.495043. PHIC on the high-RT rows at l2 1 reads 0.817700. The pay fit stopped at 3 updates gives an RT coefficient of 0.196989. NPHI's mean drop at seed 5 with 5 repeats is 3.786311. The learning curve's test RMSE at three training wells is 4.385966. The prediction for EKENE-6 runs from 100.024605 to 136.515569 us/ft. If your panel work reproduces those, your method is the engine's.
+Every step can be rehearsed on the Ekene wells in the panel. The attribute design on all 270 sonic rows has a scaled condition number of 3694.131550. PHIC on the high-RT rows at l2 1 reads 0.817700. The pay model on all 300 rows, stopped at 3 updates, gives an NPHI coefficient of -5.491841. NPHI's mean drop at seed 5 with 5 repeats is 3.786311. The learning curve's test RMSE at three training wells is 4.385966. The first row of EKENE-6 is predicted at 117.793533 us/ft. If your panel work reproduces those, your method is the engine's.
 
 ## Exercise
 
