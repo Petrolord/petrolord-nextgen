@@ -52,7 +52,7 @@
    "Each log has its own factor, following its own spread."
   ],
   "answer": 2,
-  "explanation": "Dividing by n - 1 instead of n makes the sample figure larger by sqrt(180 / 179), 1.002789, on every log: RHOB 0.136949 against 0.137331, NPHI 0.096603 against 0.096872, PEF 1.275647 against 1.279206. The factor depends only on the row count."
+  "explanation": "Dividing by n - 1 where the population figure divides by n makes the sample figure larger by sqrt(180 / 179), 1.002789, on every log: RHOB 0.136949 against 0.137331, NPHI 0.096603 against 0.096872, PEF 1.275647 against 1.279206. The factor depends only on the row count."
  },
  {
   "prompt": "Row 0 of the cored rows reads GR 48.900000 gAPI. With the engine's standard scaler (centre 56.871111, scale 32.041141), what is its standard score on GR?",
@@ -151,7 +151,7 @@
    "Counting the training rows, \"on the 30 training rows\", since min-max is fitted before k-means."
   ],
   "answer": 0,
-  "explanation": "The engine's own words are \"X.CALI has zero range on the 30 rows passed (every value is 8.5): min-max scaling would divide by zero, so drop the feature or fit on rows where it varies\". The field is still X.CALI, and the message counts the rows passed, since kmeans fits its scaler on every row it is given."
+  "explanation": "Min-max scaling divides by the range, which is 0 for a caliper reading 8.5 on every row, so the refusal says \"zero range\" where the standard scaler says \"zero variance\". Nothing is mapped to 0 and clustered on, the field stays X.CALI, and the message counts the rows passed, since kmeans fits its scaler on every row it is given."
  },
  {
   "prompt": "One cored row is passed twice to `pca` on the covariance matrix, so every column is constant. What does the engine reply?",

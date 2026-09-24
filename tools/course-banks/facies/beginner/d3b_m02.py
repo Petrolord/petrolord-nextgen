@@ -43,7 +43,7 @@ q(2, "On the 180 cored rows GR's population standard deviation is 32.041141 and 
  ["They are equal at six decimals on the other three logs, and GR differs only because of its large unit.",
   "Smaller for the sample figure, since dividing by one fewer row shrinks it by 1.002789 on each log.",
   "Each log has its own factor, following its own spread."],
- "Dividing by n - 1 instead of n makes the sample figure larger by sqrt(180 / 179), 1.002789, on every log: RHOB 0.136949 against 0.137331, NPHI 0.096603 against 0.096872, PEF 1.275647 against 1.279206. The factor depends only on the row count."),
+ "Dividing by n - 1 where the population figure divides by n makes the sample figure larger by sqrt(180 / 179), 1.002789, on every log: RHOB 0.136949 against 0.137331, NPHI 0.096603 against 0.096872, PEF 1.275647 against 1.279206. The factor depends only on the row count."),
 
 q(3, "Row 0 of the cored rows reads GR 48.900000 gAPI. With the engine's standard scaler (centre 56.871111, scale 32.041141), what is its standard score on GR?",
  "-0.248777",
@@ -102,7 +102,7 @@ q(0, "The same 30 EKENE-1 rows with the constant caliper are passed to `kmeans` 
  ["No refusal comes back: min-max maps a constant log to 0 on every row and clusters on.",
   "Its field is `scale`, telling the caller to switch back to standard scaling.",
   "Counting the training rows, \"on the 30 training rows\", since min-max is fitted before k-means."],
- "The engine's own words are \"X.CALI has zero range on the 30 rows passed (every value is 8.5): min-max scaling would divide by zero, so drop the feature or fit on rows where it varies\". The field is still X.CALI, and the message counts the rows passed, since kmeans fits its scaler on every row it is given."),
+ "Min-max scaling divides by the range, which is 0 for a caliper reading 8.5 on every row, so the refusal says \"zero range\" where the standard scaler says \"zero variance\". Nothing is mapped to 0 and clustered on, the field stays X.CALI, and the message counts the rows passed, since kmeans fits its scaler on every row it is given."),
 
 q(2, "One cored row is passed twice to `pca` on the covariance matrix, so every column is constant. What does the engine reply?",
  "A refusal naming `X`: \"X has zero total variance (every column is constant), so there are no principal components\".",
