@@ -11,7 +11,7 @@ The Associate capstone hands you a field of cored wells and asks for six numbers
 | a log's loading on PC1 | weight x square root of the eigenvalue, correlation form | NPHI, 0.894337 |
 | a row's PC1 score | the correlation form, the row counted from 0 | row 0, 1.334633 |
 | the k-means inertia | the stated k and seed, ten starts, standard scaling | 58.289042 at k 4, seed 3 |
-| a cluster centre in log units | the GR centre, in gAPI, of the cluster a named row sits in | EKENE-7's first row, cluster 2, 26.879630 gAPI |
+| a cluster centre in log units | the GR centre, in gAPI, of the cluster a named row sits in | row 0 of EKENE-1, cluster 1, 46.479661 gAPI |
 
 ## What each field asks of you
 
@@ -21,11 +21,11 @@ The share field asks for the correlation form, the engine's default. The covaria
 
 The loading field asks for the loading. The weight of the same log on the same component is a different number: for Ekene NPHI the PC1 weight is 0.541336 and the loading 0.894337.
 
-The score field asks for a score on the correlation form, for the row the brief names, counted from 0. The explorer prints scores for projected rows, so paste that row into the new-rows box of "Principal components": a fitted row projected with its own model gets its fitted score.
+The score field asks for a score on the correlation form, for the row the brief names, counted from 0. The "Principal components" view lists the fitted scores of ten rows from the row you choose; a fitted row projected with its own model gets the same score.
 
 The inertia field asks for the result of the stated k and the stated seed with ten starts, in standard units. One start from the same seed can stop higher: Ekene seed 3 with one start stops at 58.330411.
 
-The centre field asks for a figure in gAPI, the GR of the centre of the cluster a named row sits in. It does not ask for the cluster's number, which is a name, and a different seed can give the same cluster another number. To find a row's cluster, assign that row to the fitted model in "New rows at the nearest centre"; assigning a clustered row returns exactly its fitted label.
+The centre field asks for a figure in gAPI, the GR of the centre of the cluster a named row sits in. It does not ask for the cluster's number, which is a name, and a different seed can give the same cluster another number. The view "k-means, start by start" lists each fitted row's cluster from the row you choose: cored row 0, the first of EKENE-1, sits in cluster 1 of the teaching clustering, whose GR centre is 46.479661 gAPI.
 
 ## How to work it
 
@@ -37,4 +37,4 @@ It asks for no choice of k and no comparison of clusters with core. Those are th
 
 ## Exercise
 
-Reproduce all six worked twins from the table in the cluster explorer. Use "Standard and min-max scaling" for the GR scale, "Principal components" for the share, the loading and the score, "k-means, start by start" for the inertia, and "New rows at the nearest centre" for the centre. For each, write down the rule, the rows and the settings you used.
+Reproduce all six worked twins from the table in the cluster explorer. Use "Standard and min-max scaling" for the GR scale, "Principal components" for the share, the loading and the score, "k-means, start by start" for the inertia and the centre. For each, write down the rule, the rows and the settings you used.

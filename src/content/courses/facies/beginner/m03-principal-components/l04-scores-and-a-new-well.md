@@ -38,6 +38,8 @@ This is the two-component model fitted on the 180 cored rows. The first three ro
 
 EKENE-7's top three rows score low on PC1, from -2.713199 to -2.226124. By the loadings of the last lesson, a low PC1 means low gamma ray and neutron with high density and photoelectric factor. That describes the logs of those rows; which rock it is stays unsaid until something is checked against core.
 
+A cored row passed back through `pcaTransform` gets its fitted score. Row 0 projected with the four-component model returns 1.334633, -1.203214, 0.049295 and 0.066007, the fitted scores in the first table; over all 180 cored rows the largest difference between a projected and a fitted score is 0.
+
 Refitting on the new well would give it its own centre and components, and its scores could no longer be set beside the cored rows' on the same axes. Projecting keeps one frame for every well.
 
 ## When the model and the rows disagree
@@ -52,4 +54,4 @@ Pass a k-means result where a PCA was expected:
 
 ## Exercise
 
-Open the cluster explorer on the view "Principal components". Keep the cored rows and the four logs, set "Components kept" to 2, and leave the EKENE-7 rows in the new-rows box. Check the first three EKENE-7 scores against the table above. Then replace the new rows with the first three cored rows, all sandstone, and write down whether their scores match the scores in the first table. Finally clear "Components kept" so that all four are kept, and write down the PC3 and PC4 scores of the same three rows.
+Open the cluster explorer on the view "Principal components". Keep the cored rows and the four logs, set "Components kept" to 2, and leave the EKENE-7 rows in the new-rows box. Check the first three EKENE-7 scores against the table above. Then clear "Components kept", read the fitted rows listed from row 0, and paste cored rows 0 to 2 into the new-rows box. Write down whether each projected score equals the fitted one.

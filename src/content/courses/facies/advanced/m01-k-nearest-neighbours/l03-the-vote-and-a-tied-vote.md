@@ -23,14 +23,14 @@ With k 2, any row whose two neighbours carry different facies is a tie, whatever
 
 The engine's golden `knn-vote-tie-nearest-b` makes the rule visible on one log with no scaling. Five training rows sit at 0, 1, 3, 4 and 10, labelled b, a, a, b, c. A new row sits at 0.2, and k is 4.
 
-| neighbour order | the training row sits at | label |
-| --- | --- | --- |
-| 1 | 0 | b |
-| 2 | 1 | a |
-| 3 | 3 | a |
-| 4 | 4 | b |
+| neighbour order | training row, counted from 0 | the row sits at | label |
+| --- | --- | --- | --- |
+| 1 | 0 | 0 | b |
+| 2 | 1 | 1 | a |
+| 3 | 2 | 3 | a |
+| 4 | 3 | 4 | b |
 
-The votes are a 2 and b 2. The engine predicts b, because the nearest of all the neighbours, the row at 0, is a b. A rule that took the label sorting first would predict a. The panel lists these neighbours by row number, counting the five training rows from 0 in the order given, so read the positions from the table above.
+The neighbours are the rows at 0, 1, 3 and 4, which are rows 0, 1, 2 and 3 of the training set; the panel lists them by row number. The votes are a 2 and b 2. The engine predicts b, because the nearest of all the neighbours, row 0 at position 0, is a b. A rule that took the label sorting first would predict a.
 
 ## Why the engine chose this rule
 

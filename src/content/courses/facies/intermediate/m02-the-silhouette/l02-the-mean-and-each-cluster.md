@@ -18,7 +18,15 @@ The teaching clustering is k-means with k 4, seed 3, 10 starts, standard scaling
 
 The overall mean, 0.545063, blends a very clean cluster, cluster 2 at 0.842778, with a weak one, cluster 3 at 0.245762. The cluster numbers are names given by seed 3; another seed can number the same groups differently.
 
-3 rows of this clustering score below 0: each sits nearer, on average, to another cluster than to its own. A below-zero row is worth looking at by depth and well before anything else is concluded.
+3 rows of this clustering score below 0: each sits nearer, on average, to another cluster than to its own.
+
+| row | well | depth (ft) | core facies | cluster | silhouette |
+| --- | --- | --- | --- | --- | --- |
+| 12 | EKENE-1 | 6228 | shaly-sand | 3 | -0.045137 |
+| 135 | EKENE-5 | 6462 | shaly-sand | 3 | -0.002304 |
+| 169 | EKENE-6 | 6526 | shaly-sand | 3 | -0.021661 |
+
+All three are cored shaly-sand in cluster 3, the weakest cluster, and each comes from a different well.
 
 ## The core facies as labels
 

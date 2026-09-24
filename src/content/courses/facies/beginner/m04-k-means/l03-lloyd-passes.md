@@ -28,7 +28,11 @@ So `iterations` counts assignment passes, and the confirming pass, the one that 
 
 ## A limit on passes
 
-`maxIter` caps the passes of one start, 300 by default. Whether the run settled before the cap is reported as `converged`, which the explorer shows as a tile; read it before you quote a result. `maxIter` must allow at least one pass; set it to 0 and the engine refuses:
+`maxIter` caps the passes of one start, 300 by default. `converged` is false when none of the first maxIter passes returns the labels of the pass before; the first pass never can, so a cap of 1 never converges. The engine then assigns the labels once more against the last centres and adds a warning. The same start stopped at maxIter 2 returns `converged` false and inertia 58.432713, the third-pass figure above, with this warning:
+
+> did not converge in 2 assignment passes: the labels printed come from one more pass against the last centres
+
+That is a result with a warning, never a refusal. A cap of 0 is refused:
 
 > maxIter must be a whole number, 1 or more
 
@@ -38,4 +42,4 @@ An assignment never raises the sum of squared distances, because every row moves
 
 ## Exercise
 
-Open the cluster explorer on the view "k-means, start by start". Keep the cored rows and the four logs, set k to 4, the seed to 3 and the starts to 1. Read the pass trace of the winning start and check it against the table above. Then set the starts to 10 and read the pass trace again. Write down how many passes the winning start took and how many rows changed on its second pass.
+Open the cluster explorer on the view "k-means, start by start". Keep the cored rows and the four logs, set k to 4, the seed to 3 and the starts to 1. Read the pass trace of the winning start and check it against the table above. Then set the most passes to 2 and find the warning. Restore 300, set the starts to 10, and write down how many passes the winning start took.

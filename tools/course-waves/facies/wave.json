@@ -85,10 +85,10 @@
   "ogbunike_uncored_gr_minmax_max": "uncored well in the fit, standard score instead, mean not highest, stated offset removed, raw gr over cored max"
  },
  "digest": {
-  "lines": 1012,
+  "lines": 1042,
   "sections": 28,
-  "md5": "64589f6076353da208865bee6d3ceb8a",
-  "sha256": "1aab6b0cd11f8df0499854e7a7dcf0220c37e001998ee663baa814bf8aec4ca5"
+  "md5": "7d8e46ac08d4a11fb1896dc7c1f7081c",
+  "sha256": "470a43a3efb02853dd91583c9e36a35614b5d22d1ab48a0761f792763f4e6230"
  },
  "fields": {
   "count": 18,
@@ -155,7 +155,7 @@
    "command": "python3 oracle_check.py",
    "expected": 0,
    "exit": 0,
-   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 5 s; worst relative difference 9.42e-16; disagreements: 0"
+   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 3 s; worst relative difference 9.42e-16; disagreements: 0"
   },
   "oracle_check.py NEGATIVE CONTROL": {
    "md5": "496dc17659f909a3bbc7873890edf70e",
@@ -183,14 +183,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh dai-wip-facies /root/wt-dai-d3-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "d3_dump: 919 label-and-call, measurement and claim assertions run, 0 failed; 28 sections"
+   "summary": "d3_dump: 934 label-and-call, measurement and claim assertions run, 0 failed; 28 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-facies",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/dai-wip-facies/digest.txt: 1012 line(s), 28 section title(s) and 73 in-body marker(s) swept against their blocks, 32 history framings, 31 engine pin(s); 0 warned for a human read and 0 framed as curri"
+   "summary": "[digestprose] /root/dai-wip-facies/digest.txt: 1042 line(s), 28 section title(s) and 77 in-body marker(s) swept against their blocks, 32 history framings, 31 engine pin(s); 0 warned for a human read and 0 framed as curri"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -344,7 +344,7 @@
    "command": "python3 truth_check.py",
    "expected": 0,
    "exit": 0,
-   "summary": "truth_check: truth-facies.json (516 digest lines) IS the harvest of digest.txt"
+   "summary": "truth_check: truth-facies.json (532 digest lines) IS the harvest of digest.txt"
   },
   "truth_check.py NEGATIVE CONTROL": {
    "md5": "aa00feb9f6b715432b374d907c72466d",
@@ -356,10 +356,9 @@
   "numsweep_facies.mjs": {
    "md5": "64560bfd8f9484af5d1147c569baa3b3",
    "command": "node numsweep_facies.mjs",
-   "expected": "held NOT ONE literal of seven or more significant figures",
-   "exit": 1,
-   "summary": "This gate does not pass on an empty or unreadable sweep.",
-   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+   "expected": 0,
+   "exit": 0,
+   "summary": "serialised floats outside an exact reason quote: 0"
   },
   "numsweep_facies.mjs --selftest": {
    "md5": "64560bfd8f9484af5d1147c569baa3b3",
@@ -371,13 +370,9 @@
   "lengths.py": {
    "md5": "bc04f317e95e9e68c067a2db921abdf2",
    "command": "python3 lengths.py",
-   "expected": [
-    "UNDER ITS OWN FLOOR",
-    78
-   ],
-   "exit": 1,
-   "summary": "tiers read: 3  out of band: 80  not written yet: 0",
-   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+   "expected": 0,
+   "exit": 0,
+   "summary": "tiers read: 3  out of band: 0  not written yet: 0"
   },
   "lengths.py --selftest": {
    "md5": "bc04f317e95e9e68c067a2db921abdf2",

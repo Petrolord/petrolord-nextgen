@@ -335,6 +335,8 @@ A NEW WELL PROJECTED. `pcaTransform` scores new rows with the centre, scale and 
 | 1 | 6566 | -2.491550 | -0.155559 |
 | 2 | 6567 | -2.226124 | 0.393772 |
 
+A FITTED ROW PROJECTED. Passing a cored row back through `pcaTransform` with the four-component model gives its fitted score. Cored row 0 (sandstone), projected: 1.334633, -1.203214, 0.049295, 0.066007; fitted, from the table above: 1.334633, -1.203214, 0.049295, 0.066007. Over all 180 cored rows and all four components the largest difference between a projected and a fitted score is 0: the two are the same numbers, bit for bit.
+
 # SECTION 8: k-means: k-means++ seeding and Lloyd passes (owned by Associate m04 l01 and Associate m04 l02 and Associate m04 l03 and Associate m04 l04)
 
 k-means splits the rows into k clusters, each with a CENTRE, and puts every row in the cluster whose centre is nearest. It runs on the standardised logs of section 5. One start, k 4, seed 3 (stated), on the 180 cored rows.
@@ -359,6 +361,13 @@ LLOYD PASSES. Each pass assigns every row to its nearest centre, then moves each
 | 5 | 58.330411 | 0 |
 
 The run took 5 passes; the first pass counts all 180 rows as changed. INERTIA is the sum over the rows of the squared distance to their own centre, in standard units: 58.330411 at the end. The basis reads: "sum of squared distances of the rows to their centres, on the scaled features". Inertia never rose from one pass to the next here.
+
+
+A RUN STOPPED AT maxIter. `converged` is false when none of the first maxIter assignment passes returns the labels of the pass before (the first pass never can, so maxIter 1 never converges). The labels are then assigned once more against the last centres, and the result carries a `warning`; it is a result, never a refusal. The same start, seed 3, stopped at maxIter 2: `converged` false, `iterations` 2, inertia 58.432713 (the full run's pass 3 inertia above). The engine's warning, verbatim:
+
+> did not converge in 2 assignment passes: the labels printed come from one more pass against the last centres
+
+`converged` and the warning describe the WINNING start; each start's own flag is in `runs`. With 10 starts and maxIter 5, 6 of the 10 starts converged and the winning start, start 3, did not, so the result warns: "did not converge in 5 assignment passes: the labels printed come from one more pass against the last centres".
 
 THE ASSIGNMENT TIE RULE. A row equally near two centres goes to the lower centre number; "equally" means squared distances within 1e-12 of each other, relative. The basis reads: "nearest centre by Euclidean distance on the scaled features; squared distances within 1e-12 (relative) of the smallest are tied and go to the lower centre index".
 
@@ -440,6 +449,17 @@ NEW ROWS. `assignClusters` scales new rows with the scaler fitted on the cluster
 Its first row (depth 6565 ft) goes to cluster 2 at a distance of 0.365418 standard units from that centre. The largest distance of any EKENE-7 row to its centre is 1.164413; over the cored rows it is 1.168721.
 
 Assigning the cored rows themselves returns exactly the fitted labels.
+
+THE FITTED LABEL OF A NAMED ROW. `labels` holds one cluster per clustered row, in row order (rows counted from 0 over the 180 cored rows). The first row of each cored well, under the teaching clustering:
+
+| row | well | depth (ft) | core facies | cluster |
+| --- | --- | --- | --- | --- |
+| 0 | EKENE-1 | 6216 | sandstone | 1 |
+| 30 | EKENE-2 | 6280 | sandstone | 1 |
+| 60 | EKENE-3 | 6345 | limestone | 2 |
+| 90 | EKENE-4 | 6389 | sandstone | 1 |
+| 120 | EKENE-5 | 6447 | limestone | 2 |
+| 150 | EKENE-6 | 6507 | shaly-sand | 3 |
 
 # SECTION 11: Covariance against correlation, and clustering the raw logs (owned by Associate m05 l04 and Associate m02 l01)
 
@@ -566,6 +586,14 @@ THE TEACHING CLUSTERS, standard scaling (the same space k-means clustered in), a
 
 The lowest cluster mean is cluster 3's, 0.245762; among the core facies it is shaly-sand, 0.152252. 3 rows of the k-means clustering score below 0: each sits nearer, on average, to another cluster than to its own. The mean silhouette of the k-means clusters is 0.545063 and of the core facies 0.528711: a silhouette scores how compact and apart the groups are, and says nothing of whether they are the rock types.
 
+The 3 rows below 0, rows counted from 0 over the 180 cored rows:
+
+| row | well | depth (ft) | core facies | k-means cluster | silhouette |
+| --- | --- | --- | --- | --- | --- |
+| 12 | EKENE-1 | 6228 | shaly-sand | 3 | -0.045137 |
+| 135 | EKENE-5 | 6462 | shaly-sand | 3 | -0.002304 |
+| 169 | EKENE-6 | 6526 | shaly-sand | 3 | -0.021661 |
+
 A ROW ALONE IN ITS CLUSTER scores 0: it has no a. Average linkage cut at k 4 (section 16) leaves row 56 (shaly-sand, EKENE-2 at 6306 ft) alone in cluster 3; its silhouette is 0.000000. The basis reads: "a row alone in its cluster scores 0, and a = b = 0 scores 0 (scikit-learn)". Cluster sizes: 96, 54, 29, 1; mean silhouette 0.514177.
 
 A SEEDED SAMPLE. The silhouette compares every pair of rows, so above 10000 rows it is refused unless a sample is asked for (section 3). A sample of 60 rows, seed 3, scores 0.521590; seed 4 scores 0.525011; all 180 rows score 0.545063. The basis reads: "the first 60 rows of a mulberry32(3) Fisher-Yates shuffle, scored among themselves (scikit-learn sample_size)". A sampled silhouette is quoted with its size and seed.
@@ -662,7 +690,7 @@ Accuracy 0.950000 (derived check: 171 / 180); macro F1 0.952887.
 
 One cluster, cluster 1, holds rows of two facies: 50 sandstone and 9 shaly-sand. Matched to sandstone, its shaly-sand rows are scored wrong; every other cluster holds one facies only.
 
-MORE CLUSTERS THAN FACIES. At k 5 one-to-one matching is refused, because a cluster would be left without a facies (section 3). MAJORITY MATCHING gives each cluster its most common facies, so two clusters can share one; the basis reads: "majority: each cluster to its most common facies (several clusters may share one); a tie goes to the facies that sorts first".
+MORE CLUSTERS THAN FACIES. The clustering here is k-means, k 5, seed 3, 10 starts (the default), standard scaling, on the 180 cored rows. At k 5 one-to-one matching is refused, because a cluster would be left without a facies (section 3). MAJORITY MATCHING gives each cluster its most common facies, so two clusters can share one; the basis reads: "majority: each cluster to its most common facies (several clusters may share one); a tie goes to the facies that sorts first".
 
 | cluster | majority facies | rows of that facies | rows in the cluster |
 | --- | --- | --- | --- |
@@ -674,7 +702,7 @@ MORE CLUSTERS THAN FACIES. At k 5 one-to-one matching is refused, because a clus
 
 shaly-sand takes two clusters. Accuracy 0.983333, macro F1 0.984510, above the one-to-one accuracy at k 4, 0.950000. Splitting a facies into two clusters costs majority matching nothing, so a higher majority score at a larger k is no evidence for that k.
 
-FEWER CLUSTERS THAN FACIES. At k 3, one-to-one matching leaves shaly-sand with no cluster: its recall is 0.000000. Accuracy 0.738889.
+FEWER CLUSTERS THAN FACIES. The clustering here is k-means, k 3, seed 3, 10 starts (the default), standard scaling, on the 180 cored rows. At k 3, one-to-one matching leaves shaly-sand with no cluster: its recall is 0.000000. Accuracy 0.738889.
 
 A TIED MAPPING. Golden `match-tie-first-mapping`: facies a, b, a, b, clusters 0, 0, 1, 1. Both one-to-one mappings match 2 rows; the engine takes the first in cluster order that gives cluster 0 the first facies: cluster 0 to a, cluster 1 to b.
 
@@ -787,7 +815,7 @@ TWO WRONG WAYS, same k and well. Scaling EKENE-6's rows with a scaler fitted on 
 
 A TIED VOTE. Trained on all 180 cored rows, k 2, row 27 of EKENE-8: its neighbours, nearest first, are shaly-sand, sandstone (distances 0.372564, 0.379644). One vote each; the engine gives the row the facies of the nearer neighbour, shaly-sand. scikit-learn would give it the facies that sorts first, sandstone. `tiedVotes` counts 1 such row in the well.
 
-The same rule on a stated golden, `knn-vote-tie-nearest-b`: training rows 0, 1, 3, 4, 10 labelled b, a, a, b, c, a new row at 0.2, k 4, no scaling. Neighbours 0 (b), 1 (a), 3 (a), 4 (b); votes a 2, b 2; predicted b, the facies of the nearest row.
+The same rule on a stated golden, `knn-vote-tie-nearest-b`: training rows 0, 1, 3, 4, 10 labelled b, a, a, b, c, a new row at 0.2, k 4, no scaling. Neighbours, nearest first: the rows at 0, 1, 3 and 4 (rows 0, 1, 2, 3, counted from 0), labelled b, a, a, b; votes a 2, b 2; predicted b, the facies of the nearest row.
 
 EQUIDISTANT NEIGHBOURS. Golden `knn-equidistant-lower-row`: training rows 0, 2, 4, 9 labelled a, b, c, c, a new row at 2, k 2. Row 1 sits on it; rows 0 and 2 are both 2.000000 away. The engine takes the lower row, row 0, so the neighbours are rows 1, 0 and the prediction b. "Equally far" is judged within 1e-12, relative, of the smallest remaining squared distance (section 26).
 
@@ -906,6 +934,8 @@ STEP 3, ONLY BECAUSE THIS FIELD IS SYNTHETIC: CHECK AGAINST THE WITHHELD FACIES.
 | EKENE-8 | tree | 28 | 0.933333 |
 
 kNN misses 3 rows of EKENE-8: 3 sandstone as shaly-sand. The stated sandstone GR mean is 45 gAPI and the shaly-sand mean 66 gAPI (section 2); 30 gAPI more puts a sandstone's mean GR above the shaly-sand mean.
+
+MISSED BY BOTH (derived, counted row by row from the two prediction lists and the withheld facies): EKENE-7 0 of 30 rows, EKENE-8 2 of 30. On every one of those EKENE-8 rows the two methods give the same wrong facies, so the agreement counted in step 1 includes them.
 
 With the stated 30 gAPI taken off every EKENE-8 GR value (possible here only because the offset was planted and stated), kNN scores 1.000000 on the same well. In a real field the fix is a gamma ray normalisation between wells, which is the data quality course's, done before any facies is predicted.
 

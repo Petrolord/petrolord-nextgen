@@ -549,6 +549,11 @@ w();
 table(['row of ' + UN1, 'depth (ft)', 'PC1 score', 'PC2 score'], [0, 1, 2].map((i) => [S(i), S(R7[i].depth), ...PT.scores[i].map(f6)]));
 const PT4 = success(`pcaTransform, ${UN1}, four components`, CL.pcaTransform({ model: PC, X: X7 }));
 must('the two-component scores are the first two of the four-component scores', PT.scores.every((r, i) => r[0] === PT4.scores[i][0] && r[1] === PT4.scores[i][1]), 'same');
+const PTC = success('pcaTransform, the cored rows themselves', CL.pcaTransform({ model: PC, X: XC }));
+const ptcDiff = Math.max(...PTC.scores.flatMap((r, i) => r.map((v, k) => Math.abs(v - PC.scores[i][k]))));
+must('projecting the fitted rows reproduces their fitted scores exactly', ptcDiff === 0, ptcDiff);
+w();
+w(`A FITTED ROW PROJECTED. Passing a cored row back through \`pcaTransform\` with the four-component model gives its fitted score. Cored row 0 (${YC[0]}), projected: ${list(PTC.scores[0].map(f6))}; fitted, from the table above: ${list(PC.scores[0].map(f6))}. Over all ${PC.n} cored rows and all four components the largest difference between a projected and a fitted score is ${S(ptcDiff)}: the two are the same numbers, bit for bit.`);
 
 /* ============================================================ SECTION 8 */
 
@@ -571,6 +576,20 @@ must('the first pass counts every row as changed', K1.trace[0].changed === K1.n,
 must('inertia never rises from pass to pass', K1.trace.every((t, i) => i === 0 || t.inertia <= K1.trace[i - 1].inertia), 'monotone');
 w();
 w(`The run took ${K1.iterations} passes; the first pass counts all ${K1.n} rows as changed. INERTIA is the sum over the rows of the squared distance to their own centre, in standard units: ${f6(K1.inertia)} at the end. The basis reads: "${K1.basis.inertia}". Inertia never rose from one pass to the next here.`);
+w();
+const KX = success(`kmeans k ${K4}, seed ${SEED}, one start, maxIter 2`, CL.kmeans({ X: XC, k: K4, seed: SEED, nInit: 1, maxIter: 2, names: LOGS }));
+must('one start stopped at maxIter 2 did not converge and warns', KX.converged === false && KX.iterations === 2 && typeof KX.warning === 'string', KX.warning);
+must('its inertia is the full run\'s third-pass inertia (one more assignment against the last centres)', KX.inertia === K1.trace[2].inertia, `${KX.inertia} ${K1.trace[2].inertia}`);
+const MAXITER_DEMO = 5; // stated: a cap where some starts converge and the winner does not
+const KX5 = success(`kmeans k ${K4}, seed ${SEED}, ten starts, maxIter ${MAXITER_DEMO}`, CL.kmeans({ X: XC, k: K4, seed: SEED, maxIter: MAXITER_DEMO, names: LOGS }));
+const kx5Conv = KX5.runs.filter((r) => r.converged).length;
+must('at maxIter 5 some starts converge, the winner does not, and the result warns', kx5Conv > 0 && kx5Conv < KX5.runs.length && KX5.converged === false && KX5.runs[KX5.bestRun].converged === false && typeof KX5.warning === 'string', `${kx5Conv} ${KX5.bestRun}`);
+w();
+w(`A RUN STOPPED AT maxIter. \`converged\` is false when none of the first maxIter assignment passes returns the labels of the pass before (the first pass never can, so maxIter 1 never converges). The labels are then assigned once more against the last centres, and the result carries a \`warning\`; it is a result, never a refusal. The same start, seed ${SEED}, stopped at maxIter ${KX.iterations}: \`converged\` ${S(KX.converged)}, \`iterations\` ${KX.iterations}, inertia ${f6(KX.inertia)} (the full run's pass ${KX.iterations + 1} inertia above). The engine's warning, verbatim:`);
+w();
+w(`> ${KX.warning}`);
+w();
+w(`\`converged\` and the warning describe the WINNING start; each start's own flag is in \`runs\`. With ${KX5.runs.length} starts and maxIter ${MAXITER_DEMO}, ${kx5Conv} of the ${KX5.runs.length} starts converged and the winning start, start ${KX5.bestRun}, did not, so the result warns: "${KX5.warning}".`);
 w();
 w(`THE ASSIGNMENT TIE RULE. A row equally near two centres goes to the lower centre number; "equally" means squared distances within 1e-12 of each other, relative. The basis reads: "${K1.basis.assignment}".`);
 w();
@@ -640,6 +659,12 @@ w(`Its first row (depth ${S(R7[0].depth)} ft) goes to cluster ${AS.labels[0]} at
 must('assigning the cored rows reproduces the fitted labels', CL.assignClusters({ model: KM, X: XC }).labels.every((l, i) => l === KM.labels[i]), 'same');
 w();
 w('Assigning the cored rows themselves returns exactly the fitted labels.');
+w();
+const firstIdx = T.CORED.map((wid) => GC.indexOf(wid));
+must('every cored well has a first row among the cored rows', firstIdx.every((i) => i >= 0), firstIdx.join(','));
+w(`THE FITTED LABEL OF A NAMED ROW. \`labels\` holds one cluster per clustered row, in row order (rows counted from 0 over the ${KM.n} cored rows). The first row of each cored well, under the teaching clustering:`);
+w();
+table(['row', 'well', 'depth (ft)', 'core facies', 'cluster'], firstIdx.map((i) => [S(i), GC[i], S(CORED_ROWS[i].depth), YC[i], S(KM.labels[i])]));
 
 /* ============================================================ SECTION 11 */
 
@@ -783,6 +808,12 @@ const lowF = SF.perCluster.reduce((b, c) => (c.mean < b.mean ? c : b));
 const negK = SK.values.filter((v) => v < 0).length;
 w();
 w(`The lowest cluster mean is cluster ${lowK.label}'s, ${f6(lowK.mean)}; among the core facies it is ${lowF.label}, ${f6(lowF.mean)}. ${negK} rows of the k-means clustering score below 0: each sits nearer, on average, to another cluster than to its own. The mean silhouette of the k-means clusters is ${f6(SK.mean)} and of the core facies ${f6(SF.mean)}: a silhouette scores how compact and apart the groups are, and says nothing of whether they are the rock types.`);
+const negRows = SK.values.map((v, r) => [v, r]).filter(([v]) => v < 0).map(([, r]) => r);
+must('the rows below 0 are the counted ones', negRows.length === negK, negRows.join(','));
+w();
+w(`The ${negK} rows below 0, rows counted from 0 over the ${CORED_ROWS.length} cored rows:`);
+w();
+table(['row', 'well', 'depth (ft)', 'core facies', 'k-means cluster', 'silhouette'], negRows.map((r) => [S(r), GC[r], S(CORED_ROWS[r].depth), YC[r], S(KM.labels[r]), f6(SK.values[r])]));
 w();
 const AVG4 = success('agglomerative average k 4', CL.agglomerative({ X: XC, linkage: 'average', k: K4, names: LOGS }));
 const SA = success('silhouette of average linkage k 4', CL.silhouette({ X: XC, labels: AVG4.labels, names: LOGS }));
@@ -882,10 +913,11 @@ w();
 w(`One cluster, cluster ${ssRow.cl}, holds rows of two facies: ${ssRow.r[MC.faciesLabels.indexOf('sandstone')]} sandstone and ${ssRow.r[MC.faciesLabels.indexOf('shaly-sand')]} shaly-sand. Matched to sandstone, its shaly-sand rows are scored wrong; every other cluster holds one facies only.`);
 w();
 const K5 = success('kmeans k 5 seed 3', CL.kmeans({ X: XC, k: 5, seed: SEED, names: LOGS }));
+must('the k 5 and k 3 clusterings run the default starts with standard scaling', K5.runs.length === CL.DEFAULTS.KMEANS_N_INIT && K3m.runs.length === CL.DEFAULTS.KMEANS_N_INIT && K5.scale === 'standard' && K3m.scale === 'standard', `${K5.runs.length} ${K3m.runs.length}`);
 const MJ5 = success('matchClusters majority, k 5', CL.matchClusters({ yTrue: YC, clusters: K5.labels, mode: 'majority' }));
 const dup5 = [...count(MJ5.mapping.map((m) => m.facies)).entries()].filter(([, v]) => v > 1);
 must('majority matching at k 5 gives one facies to two clusters', dup5.length === 1 && dup5[0][1] === 2, JSON.stringify(dup5));
-w(`MORE CLUSTERS THAN FACIES. At k ${K5.k} one-to-one matching is refused, because a cluster would be left without a facies (${ref('refusals')}). MAJORITY MATCHING gives each cluster its most common facies, so two clusters can share one; the basis reads: "${MJ5.basis.mode}".`);
+w(`MORE CLUSTERS THAN FACIES. The clustering here is k-means, k ${K5.k}, seed ${SEED}, ${CL.DEFAULTS.KMEANS_N_INIT} starts (the default), standard scaling, on the ${K5.n} cored rows. At k ${K5.k} one-to-one matching is refused, because a cluster would be left without a facies (${ref('refusals')}). MAJORITY MATCHING gives each cluster its most common facies, so two clusters can share one; the basis reads: "${MJ5.basis.mode}".`);
 w();
 table(['cluster', 'majority facies', 'rows of that facies', 'rows in the cluster'], MJ5.mapping.map((m) => [S(m.cluster), m.facies, S(m.rows), S(m.clusterSize)]));
 w();
@@ -898,7 +930,7 @@ const missing3 = M3.faciesLabels.filter((f) => !M3.mapping.some((m) => m.facies 
 must('one-to-one at k 3 leaves one facies with no cluster', missing3.length === 1, missing3.join(','));
 const recall0 = M3.report.perClass.find((c) => c.label === missing3[0]).recall;
 must('the facies with no cluster has recall 0', recall0 === 0, recall0);
-w(`FEWER CLUSTERS THAN FACIES. At k ${K3.k}, one-to-one matching leaves ${missing3[0]} with no cluster: its recall is ${f6(recall0)}. Accuracy ${f6(M3.report.accuracy)}.`);
+w(`FEWER CLUSTERS THAN FACIES. The clustering here is k-means, k ${K3.k}, seed ${SEED}, ${CL.DEFAULTS.KMEANS_N_INIT} starts (the default), standard scaling, on the ${K3.n} cored rows. At k ${K3.k}, one-to-one matching leaves ${missing3[0]} with no cluster: its recall is ${f6(recall0)}. Accuracy ${f6(M3.report.accuracy)}.`);
 w();
 const TIEm = golden('match-tie-first-mapping');
 const MT = success('matchClusters, the tied golden', CL.matchClusters(TIEm.args));
@@ -1046,7 +1078,7 @@ must('the tied vote goes to the nearer neighbour', KT.predictions[tRow] === tNb[
 w();
 const gv = golden('knn-vote-tie-nearest-b');
 const GV = success('golden knn-vote-tie-nearest-b', CL.knnClassify(gv.args));
-w(`The same rule on a stated golden, \`knn-vote-tie-nearest-b\`: training rows ${list(gv.args.X.map((r) => S(r[0])))} labelled ${list(gv.args.y)}, a new row at ${S(gv.args.Xnew[0][0])}, k ${gv.args.k}, no scaling. Neighbours ${list(GV.neighbours[0].map((j) => `${gv.args.X[j][0]} (${gv.args.y[j]})`))}; votes ${GV.votes[0].map((v) => `${v.label} ${v.count}`).join(', ')}; predicted ${GV.predictions[0]}, the facies of the nearest row.`);
+w(`The same rule on a stated golden, \`knn-vote-tie-nearest-b\`: training rows ${list(gv.args.X.map((r) => S(r[0])))} labelled ${list(gv.args.y)}, a new row at ${S(gv.args.Xnew[0][0])}, k ${gv.args.k}, no scaling. Neighbours, nearest first: the rows at ${GV.neighbours[0].slice(0, -1).map((j) => S(gv.args.X[j][0])).join(', ')} and ${S(gv.args.X[GV.neighbours[0][GV.neighbours[0].length - 1]][0])} (rows ${list(GV.neighbours[0].map(S))}, counted from 0), labelled ${list(GV.neighbours[0].map((j) => gv.args.y[j]))}; votes ${GV.votes[0].map((v) => `${v.label} ${v.count}`).join(', ')}; predicted ${GV.predictions[0]}, the facies of the nearest row.`);
 must('the golden tie goes to b', GV.predictions[0] === gv.expected.predictions[0], GV.predictions[0]);
 w();
 const ge = golden('knn-equidistant-lower-row');
@@ -1180,6 +1212,13 @@ const grMean = (f) => T.FACIES.find((x) => x[0] === f)[1][0];
 must('the stated offset lifts the sandstone GR mean above the shaly-sand GR mean', grMean('sandstone') + T.HOT_GR_ADD > grMean('shaly-sand'), 'means');
 w(`kNN misses ${wrong8.length} rows of ${UN2}: ${wrongKinds.map(([k, v]) => `${v} ${k}`).join('; ')}. The stated sandstone GR mean is ${S(grMean('sandstone'))} gAPI and the shaly-sand mean ${S(grMean('shaly-sand'))} gAPI (${ref('dataset')}); ${S(T.HOT_GR_ADD)} gAPI more puts a sandstone's mean GR above the shaly-sand mean.`);
 must('every kNN miss on the hot well is sandstone predicted as shaly-sand', wrongKinds.length === 1 && wrongKinds[0][0] === 'sandstone as shaly-sand', JSON.stringify(wrongKinds));
+const bothMiss = (W, K, C) => W.filter((f, i) => K.predictions[i] !== f && C.predictions[i] !== f).length;
+const both7 = bothMiss(W7, KU7, CU7); const both8 = bothMiss(W8, KU8, CU8);
+const agreeWrong8 = W8.filter((f, i) => KU8.predictions[i] === CU8.predictions[i] && KU8.predictions[i] !== f).length;
+must('every EKENE-8 row both methods miss carries the same wrong facies from both', agreeWrong8 === both8 && both8 > 0, `${agreeWrong8} ${both8}`);
+must('rows both methods miss are counted from the two prediction lists', both8 <= Math.min(wrong8.length, R8.length - CU8.predictions.filter((p, i) => p === W8[i]).length), `${both7} ${both8}`);
+w();
+w(`MISSED BY BOTH (derived, counted row by row from the two prediction lists and the withheld facies): ${UN1} ${both7} of ${R7.length} rows, ${UN2} ${both8} of ${R8.length}. On every one of those ${UN2} rows the two methods give the same wrong facies, so the agreement counted in step 1 includes them.`);
 const X8fix = X8.map((r) => [r[0] - T.HOT_GR_ADD, r[1], r[2], r[3]]);
 const KU8fix = success(`knn k ${KNN_K}, ${UN2} with the stated offset removed`, CL.knnClassify({ X: XC, y: YC, Xnew: X8fix, k: KNN_K, names: LOGS }));
 const A8fix = accOf(W8, KU8fix.predictions);

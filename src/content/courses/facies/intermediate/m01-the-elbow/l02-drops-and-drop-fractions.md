@@ -44,4 +44,4 @@ The message states both ends of the accepted range: kMin at the bottom and the n
 
 ## Exercise
 
-In the elbow view, run the Ekene cored rows with seed 3 and largest k 8. Copy the inertia column into a sheet of your own and compute each drop and each drop fraction by the engine's formula, then compare them with the columns the view prints. Mark the k with the largest drop and the k with the largest drop fraction, and write one sentence on why they differ.
+In the elbow view, run the Ekene cored rows with seed 3 and largest k 8. Copy the inertia column into a sheet of your own and compute each drop and each drop fraction by the engine's formula, then compare them with the columns the view prints. Mark the k with the largest drop and the largest drop fraction. Then set the smallest k to 4 and the largest to 3.

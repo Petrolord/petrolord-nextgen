@@ -19,7 +19,7 @@ The course's rule for reading that: agreement between two methods trained on the
 
 kNN and the tree learned from the same 180 cored rows and the same core facies, and whatever is wrong with a new well's logs reaches both at once. EKENE-8's gamma ray reads 30 gAPI high, and both methods read that raised GR.
 
-The withheld facies, which only this synthetic field has, lets you count what the agreement hid. On EKENE-7, kNN matches the withheld facies on all 30 rows, so the 2 rows where the tree disagrees are exactly the tree's 2 misses; there, a disagreement found every error. On EKENE-8, kNN misses 3 rows and the methods disagree on only 1. A row where kNN is wrong and the tree is right is a disagreement, so at most 1 of kNN's 3 misses is such a row, and at least 2 rows of EKENE-8 are missed by both methods at once. Agreement on those rows was agreement on a wrong answer.
+The withheld facies, which only this synthetic field has, lets you count what the agreement hid. On EKENE-7, kNN matches the withheld facies on all 30 rows, so the 2 rows where the tree disagrees are exactly the tree's 2 misses; there, a disagreement found every error. On EKENE-8, kNN misses 3 rows and the methods disagree on only 1. Counted row by row against the withheld facies, 2 rows of EKENE-8 are missed by both methods at once, and on both the two methods give the same wrong facies, so the 29 rows of agreement include them. No row of EKENE-7 is missed by both. Agreement on those 2 rows was agreement on a wrong answer.
 
 ## The evidence that does count
 

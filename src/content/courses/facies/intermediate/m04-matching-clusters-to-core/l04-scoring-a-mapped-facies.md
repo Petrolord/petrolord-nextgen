@@ -39,7 +39,7 @@ When a facies is never predicted, its precision divides zero by zero. The machin
 
 > zeroDivision must be 0 or 1
 
-At k 3 under one-to-one matching, shaly-sand gets no cluster at all, so it is never predicted and its recall is 0.000000. Its precision is exactly the case this setting decides. Whichever value is set, say which one, because it moves the macro average.
+At k 3 (k-means, seed 3, 10 starts, standard scaling) under one-to-one matching, shaly-sand gets no cluster at all, so it is never predicted and its recall is 0.000000. Its precision is exactly the case this setting decides. Whichever value is set, say which one, because it moves the macro average.
 
 ## Exercise
 

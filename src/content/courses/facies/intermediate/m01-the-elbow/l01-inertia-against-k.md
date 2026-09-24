@@ -41,4 +41,4 @@ A range needs a lower end at least 1. The engine refuses a kMin of 0 in its own 
 
 ## Exercise
 
-Open the judge explorer on the elbow view with the Ekene cored rows, the logs GR, RHOB, NPHI and PEF, largest k 8, seed 3 and the default starts. Check that the first row reads the number of rows times the number of logs. Then remove one log from the list, predict the new k 1 inertia before you run it, and run it to check your prediction. Finally, read the k 4 row and confirm it matches the teaching clustering you fitted in the Associate tier.
+Open the judge explorer on the elbow view with the Ekene cored rows, the logs GR, RHOB, NPHI and PEF, largest k 8, seed 3 and the default starts. Check that the first row reads the number of rows times the number of logs. Then remove one log from the list, predict the new k 1 inertia before you run it, and run it to check your prediction. Finally, set the smallest k to 0 and read the refusal.
