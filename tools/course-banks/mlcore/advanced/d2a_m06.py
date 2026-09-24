@@ -1,0 +1,120 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D2 Expert m06, Reading the engine honestly.
+# Figures from digest section 25 (conventions that are choices, what is not
+# built), section 24 (the boundary table, rule by rule), section 1 (what the
+# engine declines to compute), section 16 (the log loss clip and its
+# alternative, the ROC start), section 12 (k 4 round robin), section 8 (the
+# two test R-squared references), sections 21 and 23 (the importance model
+# against the model written back) and section 26 (the vocabulary).
+
+q(1, "The engine's standard scaler divides by n. What reason does the engine state for that choice?",
+ "Ridge lambda then equals scikit-learn's alpha on the same standardised features",
+ ["It matches the data quality course's z-score, which divides by the same n",
+  "Dividing by n gives the unbiased estimate of each feature's spread",
+  "The n - 1 divisor would make the scale depend on the seed of the split"],
+ "The convention table gives the reason as ridge lambda equalling scikit-learn alpha on the same features. The data quality course's z-score uses the sample SD, divisor n - 1, which is the alternative this engine declined. On 180 rows the two scales differ by the factor 1.002789, so the divisor is named every time a standard deviation is quoted.")
+
+q(3, "A colleague runs a group split in another library with seed 5 and fraction 0.3 on the nine sonic wells and holds out different wells from EKENE-4, EKENE-5 and EKENE-8. How does the course compare the two splits?",
+ "By the list of wells each one holds out, since no library reproduces the engine's mulberry32 draws",
+ ["By the seed, since two tools given seed 5 and the same fraction draw the same shuffle of the same wells",
+  "The other library is in error, as a seeded group split has one right answer for a stated seed and fraction",
+  "By the count of test rows, 90 in each, which is all a group split promises whatever the tool that draws it"],
+ "Every draw here is mulberry32 with a stated seed, one canonical generator across the platform, and the convention table says no library reproduces its draws, so splits are compared by well list. A seed fixes the draw inside one generator only. Two tools holding out 90 rows each can still hold out different wells, and a score on one set is a score on those wells.")
+
+q(0, "With k = 4 on the nine sonic wells, how do the engine's folds come out, and what does scikit-learn's GroupKFold balance instead?",
+ "3, 2, 2 and 2 wells, 90, 60, 60 and 60 rows; GroupKFold balances rows and takes no seed",
+ ["Four folds balanced by their rows, the aim both tools share, each of them taking a seed to deal",
+  "Folds of 3, 3, 3 and 0 wells, as round robin fills each fold in turn",
+  "The same folds as GroupKFold, since both deal whole wells in sorted order"],
+ "Round robin deals the well at shuffled position q to fold q mod k, so fold sizes differ by at most one well: 3, 2, 2, 2 wells, or 90, 60, 60, 60 rows. The engine balances the count of wells and is seeded; GroupKFold balances rows and takes no seed. Filling one fold before the next would leave a fold empty.")
+
+q(2, "Why does the engine's ROC curve start at a point whose threshold is null?",
+ "JSON has no infinity, the value scikit-learn prints for that first threshold",
+ ["The first point has no rows called positive, so the engine leaves the threshold for the caller to supply",
+  "A null threshold marks the curve as unscored until the AUC is taken by the trapezoid rule over its points",
+  "Null stands for a threshold of 0, where every row is called positive"],
+ "The curve starts at (0, 0) with threshold null, and the convention table gives the reason: scikit-learn prints infinity there, and JSON has no infinity. At (0, 0) no row is called positive, which is a threshold above every score. A threshold below every score would call every row positive, the curve's last point, (1, 1).")
+
+q(1, "The engine writes F1 as 2TP / (2TP + FP + FN). How does that compare with the harmonic mean of precision and recall?",
+ "It is equal wherever both precision and recall are defined, and it is defined in more cases",
+ ["Always a little lower, as the counted form weights FN and FP unequally",
+  "A different score that agrees with the harmonic mean only on a binary report with two supported labels",
+  "Undefined in more cases, since it divides by zero whenever TP is 0"],
+ "The convention table states it: the counted form is equal to the harmonic mean wherever both are defined, and defined in more cases. On the pay label TP 24, FP 4 and FN 0 give the 0.923077 printed. A label with no true positive still has a nonzero denominator when it has a false positive or a false negative, so the counted form gives 0 there.")
+
+q(0, "A row with y = 1 and a probability of exactly 0 is charged 34.538776 by this engine's log loss. What would scikit-learn 1.9 charge, and why?",
+ "36.043653, since it clips at the float64 machine epsilon, 2.22e-16, where this engine clips at 1.00e-15",
+ ["34.538776 as well, since both tools clip a probability of 0 at the same stated eps before taking the log",
+  "An infinite charge, since scikit-learn 1.9 takes no eps and so leaves the zero probability as it is given",
+  "0.693147, the charge of a probability of one half, which is what scikit-learn puts in place of a zero"],
+ "This engine clips at eps = 1.00e-15 and charges -ln(1.00e-15) = 34.538776. scikit-learn 1.9 takes no eps and clips at the float type's machine epsilon, 2.22e-16 for float64, so it charges -ln(2.22e-16) = 36.043653. Taking no eps is different from not clipping. 0.693147 is ln 2, the loss when every probability is one half.")
+
+q(3, "Where does the log loss clip draw its boundary?",
+ "A probability equal to eps is kept: p = 1.00e-15 clips 0 rows, and p = 1.00e-16 clips 1",
+ ["Every probability below 1.00e-10 is clipped, the logistic tol",
+  "A probability equal to eps is clipped along with everything below it, so p = 1.00e-15 clips 1 row",
+  "Only a probability of exactly 0 or 1 is clipped, since any other value has a finite logarithm to take"],
+ "The clip is to [eps, 1 - eps] and the boundary table reads \"a probability equal to eps is kept\": p = 1.00e-15 clips 0 rows and p = 1.00e-16 clips 1. The logistic tol is a different rule with a different constant. A value of 1.00e-16 is finite and nonzero and is still clipped, because it lies below eps.")
+
+q(2, "A feature reads [2, 2, 2.0000000001] on the training rows, and another reads [2, 2, 2]. What does the standard scaler do with each?",
+ "It fits the first, with a scale of 4.71e-11, and refuses the second as constant",
+ ["It refuses both: a spread of 4.71e-11 counts as zero variance",
+  "Both are fitted, the second with a scale of 0",
+  "It fits the second and refuses the first as noise in the tenth decimal"],
+ "A feature is refused as constant only when every training value is identical, and the boundary table shows it: [2, 2, 2.0000000001] is fitted with a scale of 4.71e-11 and [2, 2, 2] is refused. The rule is about identical values, and a small spread is still a spread. Scaling by 0 would divide by zero, which is why the engine refuses.")
+
+q(1, "Leaving one well out asks `groupKFold` for k equal to the count of wells. What happens at k = 9 and at k = 10 on the sonic wells?",
+ "k 9 is fitted as leave one well out, and k 10 is refused: k must be a whole number from 2 to 9",
+ ["k 9 is refused since a fold of one well leaves too few rows, and k 10 is refused with it",
+  "k 9 and k 10 are both fitted, since k 10 simply leaves one of the ten folds with no test well",
+  "k 9 is fitted, and k 10 is quietly lowered to 9, the number of distinct wells"],
+ "The rule is 2 <= k <= number of groups, and k equal to the number of groups is allowed: k 9 on nine wells is leave one well out. k 10 is refused in the engine's own words, \"k must be a whole number from 2 to 9 (the number of distinct groups)\". A refusal changes no input on the caller's behalf, and an empty fold would test nothing.")
+
+q(0, "Least squares with an intercept on one feature is passed 2 rows, then 3. What does the engine do?",
+ "It refuses 2 rows for 2 coefficients and fits 3 rows, with 1 residual degree of freedom",
+ ["Both are fitted, since 2 points always define a line and the fit simply has no residual to report",
+  "Both are refused, since one feature needs at least 4 rows before the engine will estimate s",
+  "It fits 2 rows exactly and warns that the standard errors are undefined, then fits 3 rows as usual"],
+ "Least squares needs more rows than coefficients, and the boundary is n = p refused: 2 rows for 2 coefficients, the intercept counted, are refused, and 3 rows are fitted with n - p = 1. With n = p the line passes through every row and leaves no degree of freedom to estimate s. The engine refuses that case rather than warn.")
+
+q(3, "A Newton step lowers the penalised log likelihood by exactly 1e-12 x (1 + |l|). Is the step halved?",
+ "No: the halving rule is strict, and only a fall of more than that allowance is halved",
+ ["Yes: the halving rule is inclusive like the stopping rule, so a fall equal to the allowance is halved",
+  "Yes, and the halving then repeats until the fall is below the allowance, up to 30 times",
+  "The step is refused, since a Newton step that lowers the objective ends the fit with a warning"],
+ "The boundary table gives the halving rule as a fall of more than 1e-12 x (1 + |l|), strict, so a fall exactly at the allowance is kept whole. The stopping rule is the inclusive one: a full step at most tol stops the fit. Each rule draws its own boundary. A step that lowers the objective is halved, never refused, and the pay fit halved 0 times.")
+
+q(2, "A team asks the engine for a random forest facies model that returns a prediction interval with each value. What does the course say?",
+ "Neither is built: the engine fits linear models only and gives no prediction interval",
+ ["The engine builds the forest from its seeded shuffles and returns an interval from the spread of its repeats",
+  "Only the interval is missing; the engine's trees handle facies",
+  "The logistic model serves, and its probability gives the interval"],
+ "The engine fits least squares, ridge and binary logistic regression only: no tree, forest, boosting, neural network, neighbour rule or clustering, and clustering and facies are the electrofacies course's. It gives no prediction interval and samples no inputs. The seeded shuffles serve the splits and permutation importance only, and a logistic probability is the probability of PAY = 1 for one row.")
+
+q(1, "Which of these does the engine do?",
+ "Draw seeded shuffles, for its splits and for permutation importance",
+ ["Fill a missing log value with the training mean before a fit runs",
+  "Search lambda over the folds and return the model with the lowest mean",
+  "Hold out the last rows of each well in a time-ordered split for a rate series"],
+ "The only random draws are the seeded shuffles of the splits and of permutation importance. A missing value is refused by name, and filling or dropping it is the caller's decision. There is no search over lambda or features: a course or an app runs the folds and prints the scores it compared. There is no time-ordered split; forecasting is its own course's.")
+
+q(0, "A model note for the written-back sonic model, ridge at lambda 10 on the three logs, quotes the importance ranking GR, NPHI, RHOB, CALI. What must it say beside the ranking?",
+ "That it was measured on OLS with CALI, on the teaching split's test wells, seed 5 and 5 repeats: another model",
+ ["Nothing more, since a ranking of the logs describes the rock and so holds for any model fitted to them",
+  "Only the seed, 5, since the repeats and the model do not change a ranking once the seed is fixed",
+  "That the ranking was measured on the ridge model at lambda 10 on all 270 rows, the one written back"],
+ "Importance here is the loss of score for this fitted model, on these rows, with this seed and these repeats. The ranking was measured on OLS on GR, RHOB, NPHI and CALI, scored on the 90 test rows at seed 5 with 5 repeats, and the model written back is ridge at lambda 10 on 270 rows. The drops depend on the seed and on nRepeats, since one stream serves the whole call.")
+
+q(3, "Another tool reports a test R-squared of 0.816151 on the teaching split's test wells, where this engine prints 0.815322 for the same predictions. What explains the difference?",
+ "The reference mean: the engine's default is the test targets' mean, and 0.816151 is taken about the training mean",
+ ["Different predictions, since two tools fitting the same least squares plane on the same rows disagree in the third decimal",
+  "Rounding, since 0.815322 and 0.816151 are one figure printed at two precisions by the two different tools",
+  "The divisor of the standard deviation, which the other tool takes as n - 1 on the 90 test rows it scores"],
+ "Both rows print the same test RMSE, 4.282693, so the predictions agree; the R-squared differs by its reference. The engine's default is about the mean of the test targets, 105.214444, as scikit-learn's r2_score; about the training mean, 105.883333, passed as `referenceMean`, it reads 0.816151. R-squared involves no standard deviation, so no divisor enters it.")
+
+emit(Q, '/root/dai-wip-mlcore/banks/d2a_m06.json', expect_n=15)
+finish()

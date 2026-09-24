@@ -261,6 +261,34 @@ describe('every course panel renders with no props', () => {
     }
     expect(rendered).toBe(15);
   });
+  it('finds the D2 machine learning panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('mlcore/FitExplorer.jsx');
+    expect(names).toContain('mlcore/ValidateExplorer.jsx');
+    expect(names).toContain('mlcore/DiagnoseExplorer.jsx');
+  });
+  it('every D2 machine learning view renders, not only the default one', async () => {
+    const MODES = {
+      'mlcore/FitExplorer.jsx': ['split', 'scale', 'ols', 'metrics'],
+      'mlcore/ValidateExplorer.jsx': ['ridge', 'kfold', 'leakage', 'scaleleak', 'logistic', 'confusion', 'roc'],
+      'mlcore/DiagnoseExplorer.jsx': ['condition', 'separation', 'convergence', 'importance', 'learning', 'missing'],
+    };
+    let rendered = 0;
+    for (const [name, modes] of Object.entries(MODES)) {
+      const entry = entries.find(([p]) => p.endsWith(`/${name}`));
+      expect(entry, `${name} is not in the panel sweep`).toBeTruthy();
+      const mod = await entry[1]();
+      expect(mod.MODES.map((m) => m[0]), `${name} declares different modes`).toEqual(modes);
+      for (const mode of modes) {
+        expect(
+          () => renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode })),
+          `${name} in the ${mode} view`,
+        ).not.toThrow();
+        rendered += 1;
+      }
+    }
+    expect(rendered).toBe(17);
+  }, 60000);
   // EVERY MODE, not only the default one. A panel with four views renders one
   // of them with no props, and the other three are exactly where a crash hides:
   // the sweep below mounted eighty panels and touched a quarter of their views.

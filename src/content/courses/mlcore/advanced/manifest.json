@@ -1,0 +1,366 @@
+{
+ "app_slug": "mlcore",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-conditioning-and-nist",
+   "title": "Conditioning and the NIST Reference Problems",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-the-condition-number",
+     "title": "The condition number, raw and scaled",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-refusal-limit",
+     "title": "The refusal limit and why it sits there",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-longley-and-the-certified-values",
+     "title": "Longley and the certified values",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-filip-refused",
+     "title": "Filip, refused at the default",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-what-digits-mean",
+     "title": "What a digit of agreement means",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-separation",
+   "title": "Separation",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-complete-separation",
+     "title": "Complete separation",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-quasi-complete-separation",
+     "title": "Quasi-complete separation",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-exact-test",
+     "title": "The exact test before any iteration",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-penalty-that-fits",
+     "title": "A penalty that makes the fit finite",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ml-diagnose-explorer",
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-convergence",
+   "title": "Convergence and Its Stated Rule",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-newton-steps-from-zero",
+     "title": "Newton steps from zero",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-stopping-rule",
+     "title": "The stopping rule in coefficient units",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-step-halving",
+     "title": "Step halving",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-when-a-fit-does-not-converge",
+     "title": "When a fit does not converge",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-importance-and-learning-curves",
+   "title": "Importance and Learning Curves",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-permutation-importance",
+     "title": "Permutation importance",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-feature-that-carries-nothing",
+     "title": "A feature that carries nothing",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-repeats-and-their-spread",
+     "title": "Repeats and their spread",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-learning-curve-in-wells",
+     "title": "The learning curve counted in wells",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-reading-a-learning-curve",
+     "title": "Reading a learning curve",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "ml-diagnose-explorer",
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-missing-log-prediction",
+   "title": "Missing-Log Prediction End to End",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-well-with-no-sonic",
+     "title": "The well with no sonic",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-choosing-features-by-wells",
+     "title": "Choosing features by whole-well scores",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ml-diagnose-explorer",
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-well-outside-the-training-range",
+     "title": "A well outside the training range",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ml-diagnose-explorer",
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-writing-a-prediction-back",
+     "title": "Writing a prediction back honestly",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-reading-the-engine-honestly",
+   "title": "Reading the Engine Honestly",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-conventions-that-are-choices",
+     "title": "Conventions that are choices",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-what-is-not-built",
+     "title": "What is not built",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-the-model-note",
+     "title": "Writing the model note",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ml-diagnose-explorer",
+      "ml-validate-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ml-diagnose-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,120 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D2 Expert m04, Importance and learning curves.
+# Figures from digest section 21 (permutation importance on the teaching
+# setting, seed 5 and seed 6, the pay model by AUC, the basis lines), section 22
+# (the learning curve counted in wells), section 9 (the well means spanning
+# 12.562737) and section 26 (the word importance). Superlatives checked on the
+# printed rows: the lowest test RMSE on the curve is 4.205658 at five wells;
+# the test RMSE rises at the fourth (EKENE-10) and sixth (EKENE-7) wells only.
+
+q(3, "How does permutation importance measure a feature on a fitted model?",
+ "It shuffles that feature across the scored rows, predicts again without refitting, and reads the loss of score",
+ ["It drops the feature, refits the model on the rest, and reads how far the test error rises without it",
+  "Multiplying the coefficient by the feature's population SD gives its size in standard units, which it reports as the importance",
+  "It shuffles the target across the rows and reads how far each coefficient moves when the model is refitted"],
+ "Shuffling one feature's values across the rows breaks its link to the target and keeps its distribution. The model is not refitted: permutation importance asks what this model does without this feature's information. A coefficient carries the target's unit over the feature's, and its size says nothing about importance until the feature's spread is known, which is why importance is measured directly.")
+
+q(1, "For RMSE the engine's drop is permuted RMSE less baseline RMSE. What is the drop for AUC, and why?",
+ "Baseline less permuted, so a drop is positive when the feature matters, whatever the metric",
+ ["Permuted less baseline, the same arithmetic as for RMSE, so a feature that matters gives a negative AUC drop",
+  "The raw permuted AUC, since higher AUC is already better",
+  "One minus the permuted AUC, the share of pay and non-pay pairs the shuffled model now puts in the wrong order"],
+ "The basis for RMSE reads \"permuted rmse - baseline rmse (positive when the feature matters)\", and for AUC, where higher is better, the drop is baseline less permuted. One sign for every metric is the engine's stated choice; the common alternative is the raw permuted score, which leaves the sign to the reader.")
+
+q(0, "On the teaching setting, OLS on GR, RHOB, NPHI and CALI scored by test RMSE with 5 repeats and seed 5, how do the four features rank?",
+ "GR 4.747694, NPHI 3.786311, RHOB 1.754752, CALI -0.031931 us/ft, largest mean drop first",
+ ["NPHI first, as NPHI's coefficient on the three logs, 138.783590 us/ft per v/v, is the largest in size",
+  "GR, RHOB, NPHI, CALI, the column order the features were passed in, which is the order the engine ranks by",
+  "NPHI, GR, RHOB, CALI, since the engine ranks the features by their SD over the five repeats"],
+ "The ranking is by mean drop, largest first: GR, NPHI, RHOB, CALI. A coefficient's size depends on the feature's unit, so NPHI's large coefficient per whole v/v ranks nothing. Column order is the order the stream draws the shuffles in. The SDs, 0.323271 for NPHI and 0.315115 for GR, say how the repeats scatter and never set the rank.")
+
+q(2, "On the teaching setting, what baseline are the drops measured from?",
+ "The unshuffled test RMSE of the four-feature OLS fit on the 90 test rows, 4.309962 us/ft",
+ ["The test RMSE of the three-log fit on the teaching split, 4.282693 us/ft, as the Associate tier printed it",
+  "The four-feature fit's training RMSE, since importance is measured on the rows the model was fitted on",
+  "The mean k-fold test RMSE, 5.826789 us/ft"],
+ "The model is OLS on GR, RHOB, NPHI and CALI fitted on the training wells of the teaching split and scored on the 90 test rows, and its unshuffled test RMSE is 4.309962. The three-log model scores 4.282693 on the same wells, a different model. Importance is measured on the rows scored, here the test wells, and the k-fold mean belongs to ridge on the three logs.")
+
+q(0, "CALI's five drops are all negative, with a mean of -0.031931 us/ft. What does a negative drop mean?",
+ "On those repeats the shuffled CALI gave a slightly lower test RMSE than the real one, and the engine prints that as it is",
+ ["The engine has pushed a positive drop below zero to mark a feature that ought to be removed from the model",
+  "CALI works against the sonic: the more the model uses it the worse the fit, so its link to DT runs negative",
+  "CALI's drop is taken as baseline less permuted, the sign the engine keeps for a metric where higher is better"],
+ "A drop near zero can come out slightly negative when a shuffle happens to help, and the engine never clips it: the sign is information. For RMSE every feature's drop is permuted less baseline, CALI's included. CALI was drawn with no link to the sonic, so a negative drop reports luck in the shuffles on these rows, which is no relationship in the rock.")
+
+q(3, "What tells you that CALI is doing nothing useful in this model?",
+ "Its mean of -0.031931 beside an SD of 0.026894, both small next to RHOB's mean drop of 1.754752",
+ ["The sign of its mean alone: a negative mean proves no signal",
+  "Its last place in the ranking, which by itself shows a feature is useless whatever the size of the drops",
+  "A coefficient of zero on CALI, which the engine sets for any feature whose importance comes out negative"],
+ "A drop near zero is read against its spread and against the other features. CALI's mean and SD are both small beside RHOB's 1.754752, the smallest positive mean drop, and that comparison is the evidence; the sign alone would not be. Some feature always ranks last. Least squares gives CALI a coefficient like any other feature, and importance changes no coefficient.")
+
+q(1, "The SD printed beside each mean drop, 0.315115 for GR, is which quantity?",
+ "The population SD of the 5 drops, divided by n, describing how these draws scatter",
+ ["The standard error of GR's mean drop, the sample SD of the 5 drops over the square root of 5",
+  "The sample SD of the 5 drops with n - 1, the divisor the data quality course's z-score uses",
+  "The population SD of GR itself over the 90 test rows, which sets how far any shuffle can move it"],
+ "The SD is the population SD of the 5 drops. GR's drops are 4.955540, 4.682248, 4.227650, 4.704944 and 5.168088 us/ft, mean 4.747694, and 0.315115 describes their scatter; it is no standard error of the mean. The standard deviation always names its divisor in this course, and the data quality course's z-score is the sample SD case.")
+
+q(2, "At the same seed, why can a run with a different nRepeats read different drops for RHOB?",
+ "One stream serves the call, features in column order with repeats inner, so GR's repeats use draws that RHOB's would get",
+ ["The seed is multiplied by nRepeats before the stream starts, so each repeat count runs its own stream",
+  "Each feature is seeded by the seed plus its column index, and nRepeats shifts that index along",
+  "The drops are averaged with weights set by nRepeats, so the same draws give a different mean"],
+ "The basis: \"mulberry32(seed), one stream for the call; features in column order, repeats inner; Fisher-Yates from the end over the row order; row i takes the value from row perm[i]\". GR's shuffles come first, so the number of GR repeats decides where in the stream RHOB's begin. The mean drop is a plain mean of the drops.")
+
+q(3, "At seed 6 the mean drops read GR 4.954327, RHOB 1.752107, NPHI 3.651470 and CALI -0.022098. What follows?",
+ "Every mean moved and the ranking held, GR, NPHI, RHOB, CALI, so an importance is quoted with its seed and repeats",
+ ["The seed 5 figures were wrong, since a correct importance cannot depend on the seed that drew its shuffles",
+  "GR's rise from 4.747694 shows the model leans harder on GR at seed 6 than it did at seed 5, with the same rows and coefficients",
+  "The ranking changed, as NPHI fell below RHOB once the shuffles were drawn from the seed 6 stream"],
+ "The model and rows are the same at both seeds; only the shuffles differ, so the movement is the draw. At seed 6 NPHI's 3.651470 is still above RHOB's 1.752107, and the ranking is GR, NPHI, RHOB, CALI at both seeds. Without its seed and repeats an importance cannot be reproduced, and a reader cannot tell the model from the draw.")
+
+q(0, "On the pay model scored by AUC on its test wells, baseline 0.997475, the mean drops read RT 0.398232, RHOB 0.019823 and NPHI 0.001263. How do they compare with the sonic model's drops?",
+ "They are never compared: an AUC drop and an RMSE drop in us/ft are in different units",
+ ["RT's 0.398232 sits far below GR's 4.747694, so RT matters less to its model than GR does to its own",
+  "They rank on one scale with the sonic drops, because both kinds are positive when the feature matters",
+  "Every AUC drop is below 1, so each pay feature matters less than a sonic log whose drop is above 1"],
+ "One sign for every metric makes both kinds positive when the feature matters, and it leaves them in their own units: AUC is a probability and the RMSE drop is in us/ft. Within the pay model the ranking is RT, RHOB, NPHI. Quote each importance with its metric, model, rows, seed and repeats.")
+
+q(2, "A reader takes GR's mean drop of 4.747694 as proof that gamma ray controls sonic slowness in the rock. What does the course's vocabulary say?",
+ "Importance is the loss of score for this fitted model, on these rows, with this seed and these repeats",
+ ["The reading is right, since a shuffle breaks the feature's link to the target just as nature would",
+  "It holds once the SD over the repeats, 0.315115, is small beside the mean drop it goes with",
+  "The reading holds on the training wells alone, because the drops were measured on the rows the model was fitted on"],
+ "The course legislates the word: importance is the loss of score when the feature is shuffled, for this fitted model, on these rows, with this seed and these repeats. It describes a feature the model leans on, whether or not the rock does, and says nothing about cause. The drops were measured on the 90 test rows of the test wells.")
+
+q(1, "How does `learningCurve` choose its test wells and add its training wells on the teaching setting?",
+ "One groupSplit at fraction 0.3 and seed 5 fixes EKENE-4, EKENE-5 and EKENE-8, and the other six join in the split's shuffled order",
+ ["It draws a fresh groupSplit at every point, so the test wells change each time a training well is added",
+  "Training wells join in sorted name order, EKENE-1, EKENE-10, EKENE-2 and on, so the curve needs no seed",
+  "The test wells are the last three of the shuffled order, and training wells join from the front of that order"],
+ "The split's shuffled order is EKENE-8, EKENE-4, EKENE-5, EKENE-2, EKENE-1, EKENE-3, EKENE-10, EKENE-9, EKENE-7: the first three are the test wells and stay fixed for every point, and the training wells join as EKENE-2, EKENE-1, EKENE-3, EKENE-10, EKENE-9, EKENE-7. So the point at m wells is always the point at m - 1 wells with one more well added.")
+
+q(3, "Why does the engine count a learning curve's size in wells?",
+ "Rows of one well are not independent: 30 more rows from a well already in the fit carry its offset again",
+ ["Every well holds 30 rows here, so counting in wells is a shorter way to write the row counts and carries no other reason",
+  "The engine cannot divide a well's rows, so any size given in rows would be rounded to whole wells",
+  "Counting in wells is the scikit-learn convention, and the engine matches scikit-learn wherever it can so that results compare"],
+ "Each Ekene well sits above or below the fitted plane as a block, and the well means of the residuals span 12.562737 us/ft. Rows from a new well bring a new offset, so each step on the curve is one more well of the kind the model will be asked about. The common alternative counts rows, and the engine's stated reason for wells is that rows of one well are not independent.")
+
+q(0, "Along the Ekene learning curve, at which added wells does the test RMSE rise?",
+ "At EKENE-10, from 4.385966 to 4.761367, and at EKENE-7, from 4.205658 to 4.282693",
+ ["Only at EKENE-10; after that well the test RMSE falls at every added well through to the end",
+  "Nowhere: it falls at every added well, from 6.766479 at one well down to 4.282693 at six",
+  "At EKENE-1 and EKENE-3, the second and third wells, where the training RMSE rises as well"],
+ "The test RMSE reads 6.766479, 4.756657, 4.385966, 4.761367, 4.205658 and 4.282693 as wells are added, so it rises twice: at the fourth well, EKENE-10, and at the sixth, EKENE-7. It falls at EKENE-1 and EKENE-3. The order of the wells is the shuffle's, and a well with a large offset added early or late moves the curve.")
+
+q(2, "At one training well the curve reads 2.749195 on the training rows and 6.766479 on the test wells; at six wells, 5.758010 and 4.282693. Which reading is right?",
+  "The training score is the fit to wells the model has seen, and the test score the error on wells it has not",
+ ["The model fits its training wells better at six, as the training RMSE then rests on more rows",
+  "Test beating training at six wells shows the split leaked, since honest test scores always sit above training",
+  "The lowest test RMSE of the curve is its last point, 4.282693, which makes six the best number of wells"],
+ "A model fitted to one well is fitted to that well's rows, its own offset included, so it scores well on them and badly on new wells. As wells join, the fit spans several offsets and its training RMSE climbs to 5.758010, with a dip from 4.351546 to 4.346620 at the third well. Test below training at six wells is one draw of wells that happen to sit close to the plane. The lowest test RMSE on the curve is 4.205658, at five wells.")
+
+emit(Q, '/root/dai-wip-mlcore/banks/d2a_m04.json', expect_n=15)
+finish()

@@ -1,0 +1,23 @@
+-- ============================================================================
+-- D2 ASSOCIATE DEEP SEED: Machine Learning on Well Data, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/mlcore/beginner.
+--
+-- What this tier owns: A MODEL AND ITS TEST. A model is a rule fitted to
+-- data; features and a target; why test data must be unseen; a split by rows
+-- against a split by whole wells, the seed, the sorted names and the shuffle;
+-- scaling fitted on the training rows with the population standard deviation,
+-- and min-max without clipping; least squares, its coefficients and their
+-- units, the intercept, standard errors and residual degrees of freedom; RMSE,
+-- MAE and R-squared about a named reference mean; residuals well by well; one
+-- well held out end to end. Digest sections 1 to 10, and section 26.
+--
+-- THE TRAP THE TIER IS BUILT ON. A score means what its rows mean: a random-row
+-- split tests wells the model has already seen, a scaler fitted on every row
+-- has seen the test rows, and one held-out split is one draw of wells. The
+-- Associate capstone grades six Associate quantities and grades no penalty, no
+-- fold and no classifier.
+-- ============================================================================

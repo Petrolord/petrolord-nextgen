@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The forty rows from 130 to 169, the last twenty of EKENE-5 and the first twenty of EKENE-6, are passed to least squares with DT as the target. What does the engine return?",
+  "options": [
+   "A fit on the twenty EKENE-5 rows alone, since the engine drops a row whose target is null before it fits the plane",
+   "A refusal naming `X[20][1]`, the engine's message for a null it finds in the feature matrix of a least squares fit",
+   "A refusal naming `y[20]`, the twenty-first row passed, because EKENE-6's first sample is dataset row 150 and its DT is null",
+   "A fit with the twenty null targets filled by the training mean of DT, and a warning that lists the filled rows"
+  ],
+  "answer": 2,
+  "explanation": "Row 150, counted from 0, is EKENE-6's first sample, and it is the twenty-first of the forty rows passed, so the refusal names `y[20]` in the engine's own words: \"y[20] must be a finite number\". The engine neither fills nor drops a missing value; that decision is the caller's. `X[20][1]` is the refusal for a null in the features, a different call."
+ },
+ {
+  "prompt": "Five candidates were scored on the same k 3, seed 5 folds of the nine sonic wells. Which does the course choose for EKENE-6, and on what figure?",
+  "options": [
+   "Ridge on GR, RHOB and NPHI at lambda 10, the lowest mean test RMSE on those folds, 5.826789 us/ft",
+   "Least squares on the three logs, 5.888677 us/ft, since a penalty only adds bias",
+   "Ridge on GR, RHOB, NPHI and CALI at lambda 10, at 5.851480 us/ft, since a fourth log can only add information to the fit",
+   "The attribute set at lambda 100, 6.773053 us/ft, as it carries each well's offset"
+  ],
+  "answer": 0,
+  "explanation": "The lowest mean over the three folds is the three logs at lambda 10, 5.826789 us/ft. The logs at lambda 0 read 5.888677 and the logs with CALI at lambda 10 read 5.851480, both higher on the same wells. The attributes at their best, lambda 100, read 6.773053: they name the wells they were fitted on, and a new well's offset is absent from its training rows."
+ },
+ {
+  "prompt": "On the same folds, adding CALI to the three logs reads 5.908607 against 5.888677 at lambda 0, and 5.851480 against 5.826789 at lambda 10. What does the course read from the comparison?",
+  "options": [
+   "Both pairs differ in the second decimal only, so the course treats CALI as neutral and keeps it for its extra log coverage",
+   "Adding CALI lowers the mean at both lambdas, which is why the course carries the caliper forward into the write-back",
+   "Sharing one set of folds makes the two sets impossible to compare, since every CALI fit reuses the logs-only fits' rows",
+   "Scored on wells the model has not seen, the caliper raises the mean at both lambdas and earns no place in the prediction"
+  ],
+  "answer": 3,
+  "explanation": "Both differences have the same sign: the mean rises with CALI, 5.908607 above 5.888677 and 5.851480 above 5.826789. CALI was drawn with no link to the sonic, and on wells the model has not seen it does not help. Scoring every candidate on the same folds is what makes a difference between two means a difference on the same wells."
+ },
+ {
+  "prompt": "What does the mean test RMSE of 5.826789 us/ft estimate?",
+  "options": [
+   "The error EKENE-6's predicted sonic will carry, since that well is the one the chosen model is fitted to predict",
+   "The error expected for a new well like the nine, since every fold held out wells drawn from those nine",
+   "An upper limit on the error of any row predicted, the flagged rows above the GR range included, by the chosen fit",
+   "The training RMSE of ridge at lambda 10 on all 270 sonic rows, the fit applied to EKENE-6"
+  ],
+  "answer": 1,
+  "explanation": "The mean is taken over folds that each held out three of the nine sonic wells, so it describes a new well of the same kind. On this synthetic field EKENE-6 reads 13.176539 against its withheld sonic, far above 5.826789, because it differs from the nine. The write-back claims no error for rows outside the range, and a training RMSE is scored on rows the fit has seen."
+ },
+ {
+  "prompt": "Leaving one well out, k 9, the Professional tier read 5.495600 for the logs at lambda 0 and 5.501614 at lambda 10. How should the choice of lambda 10 be quoted?",
+  "options": [
+   "As proven for every well, since the k 3 folds and the nine folds both test each of the nine wells once in the comparison",
+   "As overturned, since leaving one well out is the more thorough scheme and so it replaces the k 3 result in the write-back",
+   "As the lowest mean on the k 3, seed 5 folds, stated with those folds and that seed, and never as best for every well",
+   "As a tie, since 5.495600 and 5.501614 print alike once rounded to two decimals, so either lambda may be quoted"
+  ],
+  "answer": 2,
+  "explanation": "At k 3 lambda 10 is lower, 5.826789 against 5.888677; at k 9 lambda 0 is lower, 5.495600 against 5.501614. Another k can reverse the order, so the choice is quoted with the folds and seed it was made on. The two k 9 means print alike at two decimals and differently at six, and two figures are never taken as equal from how they print."
+ },
+ {
+  "prompt": "Step 2 fits the model that predicts EKENE-6. Which fit is it?",
+  "options": [
+   "Ridge at lambda 10 on all 270 sonic rows, GR's coefficient 0.292658 us/ft per gAPI in original units",
+   "Least squares on the 180 training rows of the teaching split, GR's coefficient 0.288005 us/ft per gAPI",
+   "The fold 0 fit of the k 3 comparison, the model that scored the three wells EKENE-10, EKENE-2 and EKENE-8",
+   "Ridge at lambda 10 on the six training wells of the teaching split, so that its three test wells stay unseen"
+  ],
+  "answer": 0,
+  "explanation": "Once the features and lambda are chosen by the folds, the prediction is fitted on every well that has the log: ridge at lambda 10 on all 270 rows of the nine wells, with coefficients 2.521897, 0.292658, 21.134015 and 137.387028 for the intercept, GR, RHOB and NPHI. 0.288005 is least squares on the teaching split's 180 rows, and a fold's model trained on six wells only."
+ },
+ {
+  "prompt": "Min-max scaling is fitted on the nine sonic wells and applied to EKENE-6. What does it report?",
+  "options": [
+   "Four rows on each of GR, RHOB and NPHI map above 1, since the hot shale raised every log EKENE-6 carries",
+   "None of the 30 rows, since the scaler clips a new row to [0, 1] before the model ever sees it",
+   "All 30 rows on GR, since the hot shale adds 30 gAPI to every EKENE-6 sample and so lifts each one out of range",
+   "On GR, 4 of the 30 rows map above 1, the highest to 1.219324; RHOB and NPHI stay inside the range on every row"
+  ],
+  "answer": 3,
+  "explanation": "The scaler maps EKENE-6's GR to between 0.320959 and 1.219324, with 4 rows above 1; RHOB reaches 0.925040 and NPHI 0.600000, both inside. The hot shale is on GR alone. Min-max does not clip, which is why a row outside the training range shows as a value above 1, and 26 of the shifted rows still sit inside the nine-well range."
+ },
+ {
+  "prompt": "One EKENE-6 row maps to a scaled GR of 1.219324. What does that value say?",
+  "options": [
+   "A z-score: the row's GR sits 1.219324 population SDs above the training centre of the nine sonic wells",
+   "That row's GR is above the nine-well maximum of 120.870000 gAPI, so on it the model extrapolates",
+   "The scaler has failed on that row, since a min-max value is bounded by 0 and 1 for every row it is applied to",
+   "The row's GR is above the nine-well mean by the hot shale's 30 gAPI, which the scaler shows as a ratio"
+  ],
+  "answer": 1,
+  "explanation": "Min-max maps the training minimum, 21.200000 gAPI, to 0 and the training maximum, 120.870000, to 1, and it does not clip a new row. A value above 1 is the scaler saying the row lies outside the range the model was fitted on. A z-score divides by an SD about a centre, which is the standard scaler's map; min-max divides by the training range."
+ },
+ {
+  "prompt": "The course checks EKENE-6's prediction against its withheld sonic. What makes that check possible?",
+  "options": [
+   "A sonic run later in EKENE-6 over the same interval, which the course compares with the predicted values row by row",
+   "The k-fold folds, which tested EKENE-6 once when it was dealt into a fold with two of the nine sonic wells",
+   "Leaving EKENE-6 out of the fit makes its null DT samples a test set, which the engine scores against the prediction",
+   "The field is synthetic: its builder kept the sonic drawn for EKENE-6 apart from the rows, and a real well gives no such check"
+  ],
+  "answer": 3,
+  "explanation": "EKENE-6's DT is null on every row; the sonic drawn for it was kept as `withheld` and the course reads it once, saying so. A real field has no such record: if the sonic had been run no one would predict it. EKENE-6 was never in any fold, since the folds are over the nine wells that carry a DT, and a null target cannot score anything."
+ },
+ {
+  "prompt": "Predicted less withheld averages 12.708542 us/ft over EKENE-6's 30 rows. Which stated causes does the course give for a bias that size?",
+  "options": [
+   "The 4 rows above the GR range, whose extrapolated values alone lift the mean of the whole well to 12.708542",
+   "Ridge shrinkage at lambda 10, which pulls every prediction toward the nine-well mean DT and away from what the rock itself gives",
+   "The hot shale, 30 gAPI times GR's 0.292658, adding 8.779741, and the well's own offset of -5.138713 that no prediction can know",
+   "The k-fold estimate of 5.826789 counted twice, once in the fit and once in the write-back line of the channel"
+  ],
+  "answer": 2,
+  "explanation": "The two stated causes are the hot shale, 0.292658 x 30 = 8.779741 us/ft on every row, and EKENE-6's planted offset less the nine-well mean, -5.138713. 8.779741 less -5.138713 is 13.918453, within 1.209912 of the mean error. The bias sits on every row, inside the range as well as above it, so the 4 flagged rows cannot carry it alone."
+ },
+ {
+  "prompt": "The 4 flagged rows read an RMSE of 14.922136 against the withheld sonic, and the 26 rows inside the GR range read 12.887017. What does the second figure show about the range check?",
+  "options": [
+   "It sees only rows that leave the range: the 26 rows inside it carry the same hot shale shift and still pass",
+   "The check did its job, since the rows it passed are close to the k-fold estimate of 5.826789 for a well like the nine",
+   "Twenty-six clean rows and four bad ones, the pattern a range check exists to find and one this well shows",
+   "It proves the 26 rows are fine to use, as a row inside the training range has the expected error of the folds"
+  ],
+  "answer": 0,
+  "explanation": "The flagged rows are worse, 14.922136, and the 26 unflagged rows read 12.887017, far above 5.826789. The hot shale shifted all 30 rows by 30 gAPI and moved only 4 of them past the nine-well maximum. A range check tests where a row sits against the training range, so a shift that keeps a row inside that range passes it."
+ },
+ {
+  "prompt": "A well is shifted in a way that keeps its logs inside the training range. How does the course say such a shift is found?",
+  "options": [
+   "By a min-max scaler fitted on more wells, which narrows the training range until the shifted rows fall outside it",
+   "By the k-fold mean test RMSE, which rises for any well that differs from the ones the folds were drawn from",
+   "Its predictions are refused by the engine once they sit far enough from the training mean of the target",
+   "By comparing its logs with its neighbours', the data quality course's work, and by the geology; the scaler never finds it"
+  ],
+  "answer": 3,
+  "explanation": "A range check sees only the rows that leave the range, and EKENE-6's 26 shifted rows stayed inside it. The course names two ways to find such a shift: compare the well's logs with its neighbours', which the data quality course teaches, and the geology. More wells can only widen a training range. The k-fold mean never scores the new well, and the engine has no refusal for a prediction's size."
+ },
+ {
+  "prompt": "Where does the course's rule write EKENE-6's predicted sonic?",
+  "options": [
+   "Into the DT channel itself, with each predicted row marked as predicted, so the well has one sonic",
+   "Into a new channel, DT_PRED, beside the measured DT, which stays null",
+   "Over the measured DT of EKENE-6, since that channel holds only nulls and so nothing measured is lost",
+   "Into a project file kept apart from the well"
+  ],
+  "answer": 1,
+  "explanation": "The rule writes a new channel, DT_PRED, beside the measured DT, and the measured DT stays null. A prediction written into the DT channel would erase the fact that EKENE-6 has no sonic, and a later fit on every well with a DT would read the model's output as data. The prediction belongs with the well, labelled as what it is."
+ },
+ {
+  "prompt": "Which expected error does the write-back carry, and with what basis?",
+  "options": [
+   "5.826789 us/ft, the mean test RMSE of k-fold by wells, k 3 and seed 5, for a new well like the nine",
+   "13.176539 us/ft, EKENE-6's RMSE against the withheld sonic, since it is that well's own measured error",
+   "5.495600 us/ft, the leave one well out mean for the logs at lambda 0, the most thorough scheme the course ran",
+   "12.887017 us/ft, the RMSE of the rows inside the GR range, since those are the rows the flags leave unmarked"
+  ],
+  "answer": 0,
+  "explanation": "The rule's expected error line is \"k-fold by wells, k 3, seed 5: mean test RMSE 5.826789 us/ft\". The withheld comparisons exist only because this field is synthetic, and a real field offers none. 5.495600 belongs to least squares under a different k, while the model written back is ridge at lambda 10 chosen on the k 3 folds."
+ },
+ {
+  "prompt": "What does the write-back say about the rows outside the training range, and about the other rows?",
+  "options": [
+   "The 4 flagged rows are dropped from DT_PRED, since a row the model extrapolates on carries no predicted value",
+   "The 4 flagged rows carry an error of 14.922136 us/ft and the other 26 an error of 5.826789 us/ft, each row stamped with its own",
+   "The 4 rows with GR above 120.870000 gAPI are flagged row by row, no error is claimed for them, and nothing is claimed as a measurement",
+   "The 4 flagged rows are clipped to the nine-well maximum of GR and predicted again, so every row is in range"
+  ],
+  "answer": 2,
+  "explanation": "The rule reads \"4 of 30, GR above the nine-well maximum 120.870000 gAPI; flagged row by row\" and, under what is not claimed, \"no error for rows outside the range, and no measurement\". The flagged rows keep their predictions with the flag beside them. 14.922136 comes from the withheld sonic, which no real well has, and the engine does not clip a new row."
+ }
+]

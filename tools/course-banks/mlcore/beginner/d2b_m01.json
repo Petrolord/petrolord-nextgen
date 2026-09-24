@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Least squares is fitted to the 180 training rows of the teaching split, with DT as the target and GR, RHOB and NPHI as the features. What does the course call the model that comes back?",
+  "options": [
+   "The 180 training rows kept beside the fit, so that a new row is predicted from the training row nearest to it.",
+   "Its training R-squared of 0.683457, the one number that describes how the fitted plane sits on the rows.",
+   "The intercept and three coefficients: a rule that turns any row's three logs into a predicted DT.",
+   "The 90 predicted DT values for the three held-out wells, written out as a new log."
+  ],
+  "answer": 2,
+  "explanation": "The four numbers are the whole model. To predict a row, multiply each log by its coefficient, add the three products and add the intercept. Nothing else from the 180 rows travels with the rule, so no training row is ever looked up. The training R-squared is a score of the fit on the rows that chose it, and the 90 predicted values are what the rule produces once it is applied; neither is the rule itself."
+ },
+ {
+  "prompt": "In the Ekene sonic model, which column is the target y, and which columns are the features X?",
+  "options": [
+   "DT is the target; GR, RHOB and NPHI are the features the fit reads.",
+   "GR is the target, since the gamma ray is the log every well carries; DT, RHOB and NPHI are the features.",
+   "PAY is the target, as the label every row carries; GR, RHOB, NPHI and DT are the features it is fitted on.",
+   "Every column is both at once, because least squares predicts each log from all of the others in one fit."
+  ],
+  "answer": 0,
+  "explanation": "The target is the one column the model learns to predict, here the compressional sonic DT in us/ft, chosen because EKENE-6 was logged without one. The features are logs every well carries. PAY is a label from a stated rule on PHIC and RT, and this tier builds no model of it. Least squares fits one target at a time."
+ },
+ {
+  "prompt": "A script calls one of the engine's functions. Which description covers every reply it can get back?",
+  "options": [
+   "A result object in every case, with a list inside `basis` that fills up whenever an input looked doubtful.",
+   "Either a result or an error, where the error also carries the engine's best estimate from the inputs it could use.",
+   "One result object whose missing entries have been filled with the column mean and listed in a `filled` block.",
+   "Either a result object carrying a `basis` block that names its convention, or an object carrying `error` and `field`."
+  ],
+  "answer": 3,
+  "explanation": "Every function returns one of two shapes: a result with its `basis` block, or an object with `error` and `field`, where the field names the refused input and the message starts with that name. A refusal carries no number of its own, so it holds no estimate. The engine never fills a missing value, and an input it cannot use is refused by name, so a result that merely notes a doubtful input is a shape it does not return."
+ },
+ {
+  "prompt": "One GR value in a training well is null when `ols` is called. What does the engine do with it?",
+  "options": [
+   "It fills the entry with the training mean of GR and fits, so the call still returns four coefficients.",
+   "It refuses the call and names the entry, and leaves the choice to fill the value or drop the row to the caller.",
+   "It drops that row without saying so, fits all the other rows and reports the smaller row count in its basis block.",
+   "Zero is put in its place, the value a missing reading holds in most log files, and the fit goes ahead."
+  ],
+  "answer": 1,
+  "explanation": "The engine does not fill a missing value. A null, undefined or non-finite entry in X or y is refused by name, and filling or dropping it is the caller's decision, made before the fit. A filled value is a guess that would be scored as a measurement, and silently skipping a row would give a fit on a row count nobody chose. Treating a null as zero is a fill like any other."
+ },
+ {
+  "prompt": "Which kinds of model does this engine fit?",
+  "options": [
+   "Least squares and decision trees, choosing between the two for you by the lower training RMSE.",
+   "Linear models only, least squares among them; it builds no tree, network, neighbour rule or cluster.",
+   "Any model the caller names, neural networks included, provided the features are scaled first.",
+   "Only least squares, with a clustering step that groups similar wells together before the fit."
+  ],
+  "answer": 1,
+  "explanation": "The engine fits linear models only, and least squares is the one this tier uses. It builds no tree, no network, no neighbour rule and no cluster, and it does not choose the model or the features for you: a course or an app does that and prints the scores it compared. Clustering belongs to the electrofacies course."
+ },
+ {
+  "prompt": "The Ekene field has 300 rows, yet every sonic model in this tier works on 270 of them. Why?",
+  "options": [
+   "The engine judged 30 rows of the sonic to be outliers and dropped them before any fit was made.",
+   "Hot shale in EKENE-6 raised its gamma ray, and the scaler refused its 30 rows as out of range.",
+   "Each split holds back the first 30 rows as a fixed test well before the training rows are chosen.",
+   "EKENE-6 was logged without a sonic, so all 30 of its DT samples are null and 9 wells carry a DT."
+  ],
+  "answer": 3,
+  "explanation": "EKENE-6 has no sonic log, so every one of its DT samples is null: 270 rows in 9 wells carry a DT. The engine flags no outliers (that belongs to the data quality course), and min-max scaling maps rows outside the training range above 1 without refusing them. The test wells of a split change with the seed, so no fixed 30 rows are held back."
+ },
+ {
+  "prompt": "What is the PAY column in the Ekene table?",
+  "options": [
+   "The output of a stated rule: 1 where PHIC is at least 0.16 and RT is at least 10 ohm.m, and 0 otherwise.",
+   "A pay flag picked by a petrophysicist from core photographs, which the course treats as the ground truth.",
+   "A label the engine assigns from the gamma ray, marking every sample below a shale cutoff as pay.",
+   "Where the sonic model's predicted DT exceeds the measured DT on a row, PAY is set to 1."
+  ],
+  "answer": 0,
+  "explanation": "PAY is 1 when PHIC is at least 0.16 and RT is at least 10 ohm.m, and 0 otherwise; 94 of the 300 samples are pay. A label is the output of a stated rule, and this course always states it. The engine assigns no labels of its own, and the sonic model predicts DT and nothing else."
+ },
+ {
+  "prompt": "Easting, northing, KB and mud weight each hold one value down a whole well. Why does the course ask you to keep that in mind before rows are split?",
+  "options": [
+   "They are null on EKENE-6, so passing them to a fit removes one more well from every model that uses them.",
+   "Down each well they change with depth, so they carry the sonic trend and swamp the three logs in the fit.",
+   "A model handed them can learn which well a row came from, which matters once rows of one well can sit on both sides.",
+   "Every fit refuses all four of them, since a constant column can never be scaled or fitted by the engine."
+  ],
+  "answer": 2,
+  "explanation": "Each attribute is constant down its well, so it can identify the well a row came from. That matters as soon as rows of one well can land on both sides of a split. The attributes are stated for every well, EKENE-6 included, and they do not change with depth. A scaler fitted on the rows of one well refuses a constant attribute; across the nine sonic wells the same column varies and is fitted."
+ },
+ {
+  "prompt": "CALI sits in the Ekene table, present on every row. What does the course say about it as a feature for the sonic?",
+  "options": [
+   "It tracks washouts that slow the sonic, which makes it the strongest feature after the neutron porosity.",
+   "`ols` refuses it as a column the engine judges to carry too little information about the target.",
+   "With PHIC it is an input of the pay rule, which is why it is kept.",
+   "It was drawn independently of every other channel, so by design it carries no sonic signal."
+  ],
+  "answer": 3,
+  "explanation": "The Ekene field drew CALI with no link to any other channel, so it carries no sonic signal by design: a column can be present, clean and useless. The engine never judges whether a column is informative; the only CALI refusal it tables is for a column that is zero in every row. The pay rule reads PHIC and RT."
+ },
+ {
+  "prompt": "What does the engine's `predict` need in order to return predicted DT values for a set of rows?",
+  "options": [
+   "The fitted model and those rows' features; no measured DT is needed at all.",
+   "The fitted model, the rows' features and their measured DT, so each prediction arrives paired with a residual.",
+   "All the training rows as well, since the rule is fitted again each time a new row is to be predicted.",
+   "A seed, because every prediction is a draw from a distribution placed around the fitted plane."
+  ],
+  "answer": 0,
+  "explanation": "`predict` takes a model and X. A prediction is the fitted rule applied to a row's features, and it is useful exactly where the target may never have been measured. The coefficients are the whole model, so nothing is refitted. The engine gives no prediction intervals, and its only random draws are seeded shuffles."
+ },
+ {
+  "prompt": "`fitStandardScaler` is handed all 300 rows with GR and DT as its two features and refuses with the field `X[150][1]`. What does that field point at?",
+  "options": [
+   "The 150th row counted from 1, which is a row of EKENE-5, in the first feature column, which is GR.",
+   "A count: 150 missing values were found in column 1 before the scaler gave up.",
+   "Row 150 counted from 0, the first EKENE-6 sample, in column 1, which is DT, the second feature.",
+   "Row 150 among the sonic rows only, since the scaler skips wells with no sonic."
+  ],
+  "answer": 2,
+  "explanation": "The engine counts rows from 0, and the first EKENE-6 sample is dataset row 150. Column 1 is the second feature column, DT, which is null on every EKENE-6 row. A field names a position and holds no count, and the scaler skips nothing: it stops at the first null it meets and names it."
+ },
+ {
+  "prompt": "`ols` is passed the forty rows from 130 to 169, the last twenty of EKENE-5 and the first twenty of EKENE-6, with DT as the target. Why is the refused field `y[20]`?",
+  "options": [
+   "Counting from 1, y[20] is the twentieth row passed, which is the last EKENE-5 sample in the forty.",
+   "The index counts the rows passed from 0, and the twenty-first row passed is the first EKENE-6 sample.",
+   "Twenty of the forty targets are null, and the field reports how many nulls the engine found.",
+   "The engine fitted the first twenty rows, skipped the nulls after them and then reported where it stopped."
+  ],
+  "answer": 1,
+  "explanation": "The index counts the rows passed, from 0, so `y[20]` is the twenty-first row passed: dataset row 150, the first EKENE-6 sample. The engine stops at the first null it meets and returns no fit at all, so nothing is skipped. The field is a position; the message, in the engine's own words, is \"y[20] must be a finite number\"."
+ },
+ {
+  "prompt": "`ols` is handed three rows for three logs and an intercept. Which field does the refusal name, and why that one?",
+  "options": [
+   "`X`, because the whole design is too small and no single entry is to blame.",
+   "`y`, because the target has too few values to estimate a residual standard error from.",
+   "`X[2]`, the last row passed, because that is the row where the engine ran out of rows to use.",
+   "`intercept`, because dropping it would leave three coefficients and let the same three rows fit."
+  ],
+  "answer": 0,
+  "explanation": "Three logs and an intercept are four coefficients, and least squares needs more rows than coefficients. The engine names `X`, the whole design, since no one entry is at fault. Dropping the intercept would leave three coefficients on three rows, still no residual degree of freedom, so the call would still be refused."
+ },
+ {
+  "prompt": "The refusal for too few rows reads, in the engine's own words: \"X must have more rows than coefficients (3 rows for 4 coefficients, the intercept included): the residual degrees of freedom n - p must be at least 1\". What are the 3 and the 4 in it?",
+  "options": [
+   "A partial result: the engine fitted three of the four coefficients and reports how far it got.",
+   "Codes into the engine's list of refusals, where 3 and 4 together identify which message this is.",
+   "Residual degrees of freedom the fit reached, which the caller can later read back as a numeric field.",
+   "Part of the message, which states its own arithmetic; the refusal returns no number of its own."
+  ],
+  "answer": 3,
+  "explanation": "A refusal is an object with `error` and `field` and carries no number of its own: any figure in it is part of the message. Here the message counts the rows passed and the coefficients asked for, the intercept included. The engine fits nothing on a refused call, and the field is a name with no code behind it."
+ },
+ {
+  "prompt": "How does this course use the words \"machine learning\"?",
+  "options": [
+   "For any automated judgement a program makes about well data, whether fitted or hand-written.",
+   "About models that pick their own features and settings, which this engine does for its caller.",
+   "For a fitted statistical model, always named by its method, such as least squares.",
+   "Only of the scaling step, since that is the one part of the workflow that learns from the data."
+  ],
+  "answer": 2,
+  "explanation": "The course legislates the word: machine learning here means a fitted statistical model named by its method, and least squares is this tier's. The wider meaning, any automated judgement, is the one the course sets aside. The engine chooses no features and no model for its caller. A scaler is itself fitted on the training rows, but it is one fitted step among others and is not what the phrase names."
+ }
+]

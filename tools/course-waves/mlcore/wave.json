@@ -1,0 +1,396 @@
+{
+ "slug": "mlcore",
+ "prefix": "d2",
+ "name": "Machine Learning on Well Data",
+ "pathOrder": 67,
+ "module": "data_ai",
+ "prerequisite": null,
+ "repo": "/root/wt-dai-d2-nextgen",
+ "branch": "feat/d2-mlcore-course",
+ "goldens": [
+  "dataai/goldens/ml_cases.json"
+ ],
+ "engines": [
+  "engines/dataai/ml.js"
+ ],
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines 966bb9e (engines PR #252). TWENTY-THREE paths walked by vendor_mlcore.sh over a git-archive export of the commit with the jest suite as the only seed: five reached by the walk (the suite, ml.js, lib/stats/stats.js, lib/lp/simplex.js, tools/validation/dataai/synthetic_wells.js) and eighteen NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; the eleven NIST StRD .dat files the oracle parses; oracle_ml.py, pin_ml.py, timing_ml.mjs, FINDINGS-ml.md, negcontrol_ml.sh). 23 paths x 4 proofs = 92, all IDENTICAL. The canonical pin stays 54cf7c4; 21 paths are ledgered as kind extra, group d2-mlcore-course; lib/stats and lib/lp already match the manifest. Vendored jest suite 614/614.",
+ "constants": {
+  "$comment": "The engine exports DEFAULTS (MAX_CONDITION 1e8, LOGISTIC_TOL 1e-10, LOGISTIC_MAX_ITER 100, STEP_HALVINGS 30, LOG_LOSS_EPS 1e-15, WHOLE_TOL 1e-9) and METRICS. Digest section 1 prints both from the exports. None is graded."
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3",
+  "x1e2",
+  "x1e-2"
+ ],
+ "plan": {
+  "state": "FOUNDATION COMPLETE when run_gates.py is green: engine vendored at 966bb9e, the Ekene well dataset generator with 7 planted structures, digest built (26 sections), fields.json and precision.json generated from the one tolerance derivation, 18 graded fields discriminating, oracle cross-check against the vendored stdlib oracle, lab and three panels shipped with vitest, 78 lesson stubs scaffolded. No lesson prose, bank, key truth or migration is written yet.",
+  "thesis": "A model is a rule fitted to some wells and judged on wells it has never seen. Associate owns A MODEL AND ITS TEST (features and a target, unseen test data, random-row and whole-well splits, the seed and the shuffle, scaling fitted on the training rows, OLS with its coefficients, standard errors and metrics, residuals by well), Professional owns VALIDATING A MODEL (ridge and the bias-variance trade, cross-validation by wells, leakage and that a random split does not always flatter, logistic regression on a stated pay rule, the confusion matrix and its ratios, ROC, AUC and log loss), Expert owns WHEN THE ENGINE REFUSES, STOPS OR EXTRAPOLATES (conditioning and the NIST reference problems, separation and its exact test, convergence and its stated rule, permutation importance and learning curves, missing-log prediction end to end and writing it back, conventions as choices). Each capstone grades only its own tier's question.",
+  "tiers": {
+   "beginner": "Associate: m01 what a model is (a rule fitted to data, features and a target, the Ekene wells, what a prediction is, refusals), m02 data the model has not seen (why unseen, a split by rows, a split by whole wells, the seed and the shuffle), m03 scaling on the training rows, m04 ordinary least squares, m05 fit metrics and residuals, m06 one well held out end to end. Digest sections 1 to 10, and section 26.",
+   "intermediate": "Professional: m01 ridge and the bias-variance trade, m02 cross-validation by wells, m03 leakage, m04 logistic regression, m05 the confusion matrix and its ratios, m06 ROC, AUC and log loss. Digest sections 11 to 16.",
+   "advanced": "Expert: m01 conditioning and the NIST reference problems, m02 separation, m03 convergence and its stated rule, m04 importance and learning curves, m05 missing-log prediction end to end, m06 reading the engine honestly. Digest sections 17 to 25."
+  },
+  "stage": "FOUNDATION. run_gates.py expects numsweep_mlcore.mjs and lengths.py to refuse on the 78 stubs for their stated stub reasons; D2_STAGE=lessons flips both to must-pass."
+ },
+ "history": {
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The engine's lead-review changes (the dual Gordan and Stiemke separation programmes, the scale-aware solveSPD, the spread-free minimum and maximum, the in-place permutation) landed before its merge and before any lesson was written; they are provenance. The digest describes the engine as it is."
+ },
+ "scopeSeams": {
+  "regression fit quality of a decline or a well test": "OWNED BY dca and welltest (Arps parameter fitting, type-curve matching and their fit diagnostics). D2 teaches RMSE, MAE and R-squared as scores of predictions on held-out wells, and its residuals are grouped by well.",
+  "Monte Carlo and uncertainty propagation": "OWNED BY the uncertainty course (lib/stats sampling). The only random draws in D2 are the seeded shuffles of the splits and of permutation importance; no prediction interval is sampled.",
+  "outlier statistics": "OWNED BY D1 dataqc (z-score, modified z-score, Tukey fences, Hampel, Grubbs, Mahalanobis). D2 takes clean rows, refuses a missing value by name, and names D1 where a cleaning step belongs.",
+  "the z-score's standard deviation": "D1's z-score uses the sample SD (n - 1); D2's scaler uses the population SD (n). Digest sections 6, 25 and 26 say which and why.",
+  "clustering and electrofacies": "OWNED BY D3 facies (PCA, k-means, trees, kNN).",
+  "forecasting a rate series": "OWNED BY D4 forecastml (smoothing, rolling-origin backtests, time-ordered splits)."
+ },
+ "namingCollisions": {
+  "test": "rows the model was not fitted on; a whole well held out unless a random-row split is named. Section 26.",
+  "standard deviation": "names its divisor: the scaler's population SD against D1's sample SD. Section 26.",
+  "R-squared": "names its rows and its reference mean (training fit, test about the test mean, test about the training mean). Section 26.",
+  "separation": "the logistic property (complete, quasi-complete); a group split is a split. Section 26.",
+  "importance": "the loss of score for this fitted model on these rows with this seed and these repeats. Section 26.",
+  "machine learning": "a fitted statistical model named by its method; no AI claim. Gated by gate_vocabulary.py."
+ },
+ "openItems": {
+  "FINDINGS open question 3, the logistic stopping rule in coefficient units": "DECIDED FOR THE COURSE: the engine rule is kept and taught as stated (Expert m03, digest section 20, with the engine's own compressibility case converging at tol 0.1 and warning at the default). No graded field depends on the stopping rule: d2_capstone.mjs refits every converged logistic field at tol 1e-14 and requires agreement within a hundredth of its tolerance, and the three-update field is asserted to stop by maxIter. A column-scaled rule would change engine iteration-count goldens and belongs to an engines PR if the lead wants it.",
+  "FINDINGS open question 4, maxCondition 1e8 refuses Filip": "Taught as a feature: Expert m01 shows Filip refused at the default and fitted at 1e10 to its float-design limit (digest section 18).",
+  "FINDINGS open question 5, population against sample SD": "Taught: digest sections 6, 25 and 26.",
+  "FINDINGS open question 2, lib/linalg solveDense absolute pivot": "Not an ml.js matter (ml.js uses its own solveSPD); outside this course.",
+  "prerequisite": "wave.json carries prerequisite null, as D1 does. Whether D2 should require D1 is a go-live decision for the lead."
+ },
+ "cleared_claims": [],
+ "fieldsDiscrimination": {
+  "akpara_rhob_train_centre_g_cm3": "fitted on every row, fitted on the test wells, random row split, floor of the test size, median of the training rows",
+  "akpara_gr_train_scale_gapi": "sample sd, fitted on every row, min max range, next seed",
+  "akpara_ols_nphi_coef_us_ft_per_vv": "nphi alone, no intercept, standardised coefficient, fitted on every row, per hundredth of vv",
+  "akpara_ols_residual_se_us_ft": "rss over n, rss over n minus one, variance not rooted, test rmse quoted",
+  "akpara_test_rmse_us_ft": "training rmse, test mae, random row split, floor of the test size, next seed",
+  "akpara_test_r2": "about the training mean, training r2 quoted, adjusted training r2, random row split",
+  "oboria_ridge_gr_coef_us_ft_per_gapi": "standardised coefficient, lambda times n, least squares, logs only, fitted on every row",
+  "oboria_fold2_test_rmse_us_ft": "fold zero, contiguous folds in sorted order, round robin unshuffled, next seed, fold numbered from one",
+  "oboria_leak_optimism_rmse_us_ft": "sign reversed, logs only, next seed, mae in place of rmse, ridge in place of ols",
+  "oboria_logistic_rt_coef_per_ohmm": "odds ratio quoted, penalised l2 one, fitted on every row, no intercept, rt alone, the sonic seed used for pay",
+  "oboria_pay_f1": "f1 of label zero, macro f1, weighted f1, accuracy, precision of pay",
+  "oboria_test_log_loss": "base ten log, on the training rows, summed not averaged, pay rows only, the sonic seed used for pay",
+  "isuama_scaled_condition_attrs": "raw condition number, logs only, no intercept, features centred, squared gram number",
+  "isuama_l2_phic_coef_per_vv": "penalty not halved, read as sklearn C, every row not the high rt rows, penalty times n",
+  "isuama_nphi_coef_after_three_updates_per_vv": "converged value quoted, two updates, four updates, one update, rt coefficient quoted",
+  "isuama_perm_nphi_mean_drop_us_ft": "next seed, ten repeats, one repeat, r2 in place of rmse, scored on the training rows",
+  "isuama_lc_test_rmse_three_wells_us_ft": "training score quoted, the fourth point, next seed, first three in sorted order",
+  "isuama_pred_dt_first_row_us_ft": "least squares, fitted on the training wells only, lambda times n, last row of the well"
+ },
+ "digest": {
+  "lines": 908,
+  "sections": 26,
+  "md5": "30e18849443ecc507e50ba743b63ff59",
+  "sha256": "1d50fa63c629d42f209e683558932bc8da74c06bb751f2fa8c3fdd96ed9f8db9"
+ },
+ "fields": {
+  "count": 18,
+  "sha256": "a603076ff1c85769bf467e954175906d865900e0e75477cdabdca3019166c16d",
+  "keys": [
+   "akpara_rhob_train_centre_g_cm3",
+   "akpara_gr_train_scale_gapi",
+   "akpara_ols_nphi_coef_us_ft_per_vv",
+   "akpara_ols_residual_se_us_ft",
+   "akpara_test_rmse_us_ft",
+   "akpara_test_r2",
+   "oboria_ridge_gr_coef_us_ft_per_gapi",
+   "oboria_fold2_test_rmse_us_ft",
+   "oboria_leak_optimism_rmse_us_ft",
+   "oboria_logistic_rt_coef_per_ohmm",
+   "oboria_pay_f1",
+   "oboria_test_log_loss",
+   "isuama_scaled_condition_attrs",
+   "isuama_l2_phic_coef_per_vv",
+   "isuama_nphi_coef_after_three_updates_per_vv",
+   "isuama_perm_nphi_mean_drop_us_ft",
+   "isuama_lc_test_rmse_three_wells_us_ft",
+   "isuama_pred_dt_first_row_us_ft"
+  ]
+ },
+ "gates": {
+  "structure.py": {
+   "md5": "79fe9ab05e53b6f22c266b471d72db67",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "scaffold.py --check": {
+   "md5": "69c6b9c37634327caeff5dd5cb8a67ef",
+   "command": "python3 scaffold.py --check",
+   "expected": 0,
+   "exit": 0,
+   "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
+  },
+  "d2_capstone.mjs": {
+   "md5": "d04358b3e024e2b899856580d1d55e9f",
+   "command": "node d2_capstone.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d2_capstone: 115 label-and-call, scenario, stopping-rule and seed assertions run, 0 failed"
+  },
+  "make_fields.mjs": {
+   "md5": "81c6a7503eae6734562684096918b35a",
+   "command": "node make_fields.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d2_capstone: 115 label-and-call, scenario, stopping-rule and seed assertions run, 0 failed"
+  },
+  "make_fields.mjs NEGATIVE CONTROL": {
+   "md5": "81c6a7503eae6734562684096918b35a",
+   "command": "node make_fields.mjs --bare-stated-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "d2_capstone: 115 label-and-call, scenario, stopping-rule and seed assertions run, 0 failed"
+  },
+  "oracle_check.py": {
+   "md5": "04b86143a1a1df23b2fb97af8765f8c6",
+   "command": "python3 oracle_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "oracle_check: 18 graded fields replayed through the vendored oracle, worst relative difference 4.72e-13, worst in tolerances 1.5e-05; 9 scenario claims checked; 0 problem(s)"
+  },
+  "oracle_check.py NEGATIVE CONTROL": {
+   "md5": "04b86143a1a1df23b2fb97af8765f8c6",
+   "command": "python3 oracle_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: one field was perturbed by ten tolerances; this run must fail naming it."
+  },
+  "discriminate.mjs": {
+   "md5": "5ed600ed56642def080a19f2b9570dcf",
+   "command": "node discriminate.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "CLOSEST MISS ACROSS THE WHOLE SWEEP: oboria_ridge_gr_coef_us_ft_per_gapi via logs_only, 1.203e+3 tolerances away"
+  },
+  "discriminate.mjs NEGATIVE CONTROL": {
+   "md5": "5ed600ed56642def080a19f2b9570dcf",
+   "command": "node discriminate.mjs --slack-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: tolerances multiplied by 1000000000000. Expected 18 WEAK routes, got 18."
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "command": "/root/dc-wavekit/digestrepro.sh dai-wip-mlcore /root/wt-dai-d2-nextgen",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d2_dump: 1173 label-and-call, measurement and claim assertions run, 0 failed; 26 sections"
+  },
+  "digestprose.mjs": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-mlcore",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] /root/dai-wip-mlcore/digest.txt: 908 line(s), 26 section title(s) and 68 in-body marker(s) swept against their blocks, 32 history framings, 27 engine pin(s); 0 warned for a human read and 0 framed as curric"
+  },
+  "digestprose.mjs --selftest": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] selftest OK: the founding heading case is caught by the corrected pairing and missed by the broken one; both real keyword cases fail inside a teaching section; FC3 line 683 WARNS where the keyword family ca"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py dai-wip-mlcore",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "digestfigures.py --selftest": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] selftest OK"
+  },
+  "digestpromise.py": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py dai-wip-mlcore",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 completeness problem(s), all checks applied"
+  },
+  "digestpromise.py --selftest": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "command": "python3 /root/dc-wavekit/digestleak.py dai-wip-mlcore",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "command": "python3 /root/dc-wavekit/collisions.py dai-wip-mlcore",
+   "expected": 0,
+   "exit": 0,
+   "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py dai-wip-mlcore",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[gradeprecision] /root/dai-wip-mlcore: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 6 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "command": "python3 /root/dc-wavekit/briefleak.py dai-wip-mlcore",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 graded answer(s) reachable from this brief"
+  },
+  "briefcheck.py": {
+   "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
+   "command": "python3 /root/dc-wavekit/briefcheck.py dai-wip-mlcore",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
+  },
+  "gate_capstone_leak.mjs": {
+   "md5": "78c799c85baaa570ee0297ce7eac068c",
+   "command": "node gate_capstone_leak.mjs --no-banks",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
+   "md5": "78c799c85baaa570ee0297ce7eac068c",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-value",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
+   "md5": "78c799c85baaa570ee0297ce7eac068c",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-input",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
+   "md5": "78c799c85baaa570ee0297ce7eac068c",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-name",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
+   "md5": "78c799c85baaa570ee0297ce7eac068c",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
+  },
+  "gate_copy_rule.py": {
+   "md5": "b4191bcb4821c2f8575a6bfc97a97ccd",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "b4191bcb4821c2f8575a6bfc97a97ccd",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got 2"
+  },
+  "gate_typed_literals.py": {
+   "md5": "f5b6403e605561abdd9cf297bbbba7ae",
+   "command": "python3 gate_typed_literals.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "UNEXPLAINED TYPED NUMBERS: 0"
+  },
+  "gate_typed_literals.py NEGATIVE CONTROL": {
+   "md5": "f5b6403e605561abdd9cf297bbbba7ae",
+   "command": "python3 gate_typed_literals.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a typed 4.217 was planted in a printed line; caught 1"
+  },
+  "gate_vocabulary.py": {
+   "md5": "54279a2f57daca67fb3a86ec1e543fb2",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "exemptions declared: 1, dead: []"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "54279a2f57daca67fb3a86ec1e543fb2",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected a P label and an AI claim caught; got ['a P label', 'an AI claim']"
+  },
+  "truth_check.py": {
+   "md5": "5116966633b97339f55df35ca9682cd7",
+   "command": "python3 truth_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "truth_check: truth-mlcore.json (439 digest lines) IS the harvest of digest.txt"
+  },
+  "truth_check.py NEGATIVE CONTROL": {
+   "md5": "5116966633b97339f55df35ca9682cd7",
+   "command": "python3 truth_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a line was planted in the scratch digest; expected a mismatch, caught"
+  },
+  "numsweep_mlcore.mjs": {
+   "md5": "909613bf6e6898d27714f9da8b8f930f",
+   "command": "node numsweep_mlcore.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "serialised floats outside an exact reason quote: 0"
+  },
+  "numsweep_mlcore.mjs --selftest": {
+   "md5": "909613bf6e6898d27714f9da8b8f930f",
+   "command": "node numsweep_mlcore.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "numsweep_mlcore selftest OK"
+  },
+  "lengths.py": {
+   "md5": "7dfbef7df2f19e4f9cc99bcc66606b70",
+   "command": "python3 lengths.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "tiers read: 3  out of band: 0  not written yet: 0"
+  },
+  "lengths.py --selftest": {
+   "md5": "7dfbef7df2f19e4f9cc99bcc66606b70",
+   "command": "python3 lengths.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
+  },
+  "gate_claims.mjs": {
+   "md5": "cf578fff685a9582de893fb4c862cc65",
+   "command": "node gate_claims.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_claims.mjs NEGATIVE CONTROL": {
+   "md5": "cf578fff685a9582de893fb4c862cc65",
+   "command": "node gate_claims.mjs --plant-a-recon-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 1."
+  }
+ }
+}

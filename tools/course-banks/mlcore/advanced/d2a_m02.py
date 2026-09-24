@@ -1,0 +1,122 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D2 Expert m02, Separation.
+# Figures and messages from digest section 19 (the 106 high-RT rows, the two
+# messages, the l2 fits, Gordan and Stiemke as the course states them, the
+# basis, the pay model's certificate), section 2 (the pay rule), section 25
+# (separation decided before iterating) and section 26 (the word separation).
+# Gordan and Stiemke are keyed EXACTLY as the course states them: the engine
+# solves S'w = 0, sum w = 1, w >= 0 and infeasible means COMPLETE; Stiemke's
+# S'w = 0, w >= 1 is tested only when Gordan's is feasible, feasible meaning
+# none and infeasible meaning quasi-complete.
+
+q(1, "Logistic regression on PHIC alone is passed the 106 Ekene rows with RT at or above 10 ohm.m, with l2 at 0. What does the engine return?",
+ "A refusal naming `y` before any Newton step, as PHIC at 0.16 puts every row strictly on its own class side",
+ ["A fit after 100 updates with converged false, its PHIC coefficient still growing when the default maxIter ran out",
+  "Very large coefficients from an iteration that ran on, with a warning attached that says the labels are separated",
+  "The quasi-complete refusal, since rows with a PHIC of exactly 0.16 sit on the plane carrying both labels"],
+ "On those rows the RT half of the pay rule is always met, so PAY is 1 precisely when PHIC is at least 0.16, and the engine refuses in its own words: \"y is completely separated by a linear combination of the features (every row lies strictly on its own class side of a hyperplane), so the maximum likelihood coefficients are infinite: add an L2 penalty (l2 > 0) or remove the separating feature\". It decides before iterating, so there is no iterate and no warning. The rule makes a PHIC of exactly 0.16 pay, so it decides every tie.")
+
+q(3, "Why are the maximum likelihood coefficients infinite when the classes are completely separated?",
+ "The log likelihood keeps rising as the coefficients grow, so no finite point is its largest value",
+ ["The information matrix is singular at beta = 0, so no Newton step can be solved from the start",
+  "The separated rows start with probabilities of exactly 0 and 1, which makes the first log likelihood infinite",
+  "With l2 at 0 the penalty term is zero, and the engine divides by it when it sizes each Newton step"],
+ "Keep the boundary where it is and steepen the curve: every probability moves closer to its own label and the log likelihood rises, with no largest value. At beta = 0 every row's probability is one half, never 0 or 1. The penalty (l2 / 2) x sum b_j^2 is subtracted from the objective and is never a divisor. The engine settles separation before any Newton system is solved.")
+
+q(0, "The engine's own six rows are X [[1],[2],[3],[3],[4],[5]] with y [0,0,0,1,1,1]. Which kind of separation does it find?",
+ "Quasi-complete: a threshold at x = 3 puts every row on its own side or on it, with both labels at 3",
+ ["Complete, as a threshold between 3 and 4 puts every class 1 row above it and every class 0 row below",
+  "None, since the two rows at x = 3 share an x and differ in label, so no hyperplane can hold them apart at all",
+  "Complete, because the labels rise with x through every row of the table and never once fall back to 0"],
+ "No threshold divides the classes strictly, because the two rows at 3 carry one label each, and one of them lies below any threshold between 3 and 4. The threshold at 3 puts every row on its own side or on the plane, with rows of both classes on it, so the engine refuses with the words \"y is quasi-completely separated\" at the head of its message. Complete separation would need a threshold with no row on it, and the pair at 3 rules that out.")
+
+q(2, "The two separation refusals share their remedy. Which clause of the quasi-complete message tells it apart from the complete one?",
+ "every row lies on or on its own class side of a hyperplane, some exactly on it",
+ ["so the maximum likelihood coefficients are infinite, a claim the complete message never makes",
+  "add an L2 penalty (l2 > 0) or remove the separating feature, which the complete message leaves out",
+  "every row lies strictly on its own class side of a hyperplane, the clause missing from the complete message"],
+ "Both messages name `y`, both say the maximum likelihood coefficients are infinite, and both offer the same two remedies. The difference is where the rows lie: strictly on their own class side for complete separation, on or on their own side with some exactly on the plane for quasi-complete. They are different findings, so quote the one the engine returns.")
+
+q(2, "How does the engine build the matrix S that its separation check works on?",
+ "It multiplies each row by +1 when y = 1 and -1 when y = 0, then divides each column by its largest absolute value",
+ ["It weights each row by its probability at beta = 0, then centres every column on its mean over the rows passed",
+  "It standardises each column with the population SD of the rows passed, the way ridge scales before a fit",
+  "Stacking the pay rows over the non-pay rows, it scales each of the two blocks to unit length"],
+ "The basis names it the \"column-scaled, sign-flipped design S\". After the sign flip, a coefficient vector that scores every pay row positive and every non-pay row negative scores every row of S positive, so separation becomes S beta > 0. The column scaling is by the largest absolute value in each column; no mean, SD or probability enters.")
+
+q(0, "In the course's statement of Gordan's theorem, which programme does the engine solve, and what does an infeasible answer mean?",
+ "S'w = 0, sum w = 1, w >= 0; infeasible means some beta has S beta > 0, so the labels are completely separated",
+ ["S beta > 0 for beta itself; a feasible answer means complete separation, and no w is ever formed by the engine",
+  "S'w = 0, w >= 1; infeasible means the labels are completely separated and the second programme is then skipped",
+  "S'w = 0, sum w = 1, w >= 0; a feasible answer is the one that proves the labels completely separated"],
+ "Gordan's theorem says exactly one of two things holds: some beta has S beta > 0, which is complete separation, or some w >= 0 with sum 1 has S'w = 0. The engine solves the second as a linear programme, and if it is infeasible the first must hold. A feasible Gordan programme rules complete separation out. The programme with w >= 1 is Stiemke's, the second one.")
+
+q(3, "When does the engine solve its second programme, S'w = 0 with w >= 1, and what does each answer mean?",
+ "Only when Gordan's programme is feasible; feasible means no separation, and infeasible means quasi-complete",
+ ["Always, straight after Gordan's; feasible means quasi-complete, and infeasible means no separation of any kind",
+  "Only when Gordan's programme is infeasible, to tell complete separation apart from the quasi-complete case",
+  "Just for penalised fits with l2 above zero, which need to know the kind of separation they are fitting through"],
+ "The basis states the order: \"COMPLETE when S'w = 0, sum w = 1, w >= 0 is infeasible (Gordan); otherwise QUASI-COMPLETE when S'w = 0, w >= 1 is infeasible (Stiemke), else none\". Stiemke's theorem says either some w >= 1 has S'w = 0, no separation, or the separation is quasi-complete. An infeasible Gordan programme already decides complete. The check runs at every l2: the l2 = 1 fit on the high-RT rows reports complete.")
+
+q(1, "The course calls the engine's separation decision exact. Exact up to what?",
+ "The linear programme's feasibility tolerance: infeasible means an artificial sum above 1e-7 after phase one",
+ ["The Newton tolerance of 1.00e-10, since the check watches the first few steps for coefficients that keep growing",
+  "The singularity rule of `solveSPD`, p x machine epsilon, applied to the information matrix at beta = 0 before any step",
+  "A stated cutoff on coefficient size, above which the engine calls the labels separated"],
+ "Each pair of alternatives is a theorem, so once feasibility is known the kind of separation follows with no judgement left over; the one tolerance is the programme's own, stated in the basis. The check runs before any Newton step, so neither the stopping rule nor `solveSPD` enters. Watching coefficients grow is the common alternative the engine declined, and it leaves someone choosing how large is large.")
+
+q(0, "The Professional tier's pay model, RHOB, NPHI and RT with an intercept on the 210 training rows, reported `separation.type` none. What certificate did the engine print?",
+ "\"weights w >= 1 with S'w = 0 (Stiemke)\", so no hyperplane in those features puts pay and non-pay on their own sides",
+ ["None at all, because a fit that finds no separation has nothing to prove and reports the type alone",
+  "An infeasible Gordan programme, the proof that no hyperplane divides pay rows from the rest",
+  "PHIC at 0.16, the threshold of the stated pay rule that the model had to learn from the logs"],
+ "By Stiemke's theorem, weights w >= 1 with S'w = 0 exist only when there is no separation of any kind, so those weights are the certificate for none, and the fit went on to its finite answer. An infeasible Gordan programme means complete separation, the opposite finding. The pay model never saw PHIC: the rule reads it, the model reads RHOB, NPHI and RT.")
+
+q(3, "With l2 = 1 on the 106 high-RT rows, logistic regression on PHIC is fitted. What does the result report?",
+ "A PHIC coefficient of 0.817700 log odds per v/v after 6 iterations, converged true, `separation.type` complete",
+ ["A PHIC coefficient of 0.817700 with `separation.type` none, as the penalty took the separation away",
+  "The PHIC coefficient 6.814258 after 6 iterations, converged true, with a warning about the separation",
+  "Another refusal naming `y`, since a penalty cannot make a separated fit finite and the refusal message says as much"],
+ "With the penalty the objective is bounded and the fit is finite: PHIC 0.817700, intercept 1.881712, 6 iterations, converged true. The separation is still there, and the result says so with `separation.type` complete. 6.814258 is the coefficient at l2 = 0.1. A converged fit carries no warning, and the refusal's own remedy is \"add an L2 penalty (l2 > 0)\".")
+
+q(1, "On the same rows the PHIC coefficient is 6.814258 at l2 = 0.1 and 0.817700 at l2 = 1. What does the pair show?",
+ "A weaker penalty gives a larger coefficient, and as l2 goes to zero there is no finite limit for it to settle at",
+ ["The coefficient settles near 6.814258 as l2 falls further, which is the maximum likelihood value the refusal at l2 = 0 withheld",
+  "l2 = 0.1 fits the data better, as its coefficient is nearer the size a porosity effect should have",
+  "They are two estimates of one quantity, and their spread measures the uncertainty in the PHIC effect"],
+ "On separated rows the likelihood alone would take the coefficient to infinity, and the value you read is where the penalty stops it: the coefficient is set by the penalty. So a penalised coefficient on separated data is quoted with its l2, and coefficients fitted at different l2 values are never compared as estimates of one number. There is no finite maximum likelihood value to settle at.")
+
+q(2, "What does logistic regression subtract from the log likelihood when l2 is above zero?",
+ "(l2 / 2) x sum b_j^2 over the non-intercept coefficients, which makes the objective bounded",
+ ["l2 x sum b_j^2 over every coefficient, the intercept included, so that every term shrinks alike",
+  "l2 x sum |b_j| over the non-intercept coefficients, a penalty that sets some coefficients exactly to zero",
+  "Half of l2 times the sum of b_j^2 over every coefficient divided by the number of rows, so larger tables are penalised less"],
+ "The penalty (l2 / 2) x sum b_j^2 runs over the non-intercept coefficients, as ridge leaves its intercept unpenalised. The log likelihood can never rise above zero while the penalty grows without limit, so a best coefficient exists. The penalty is on squares, and it is not divided by the number of rows.")
+
+q(0, "Why does the engine decide separation before its first Newton step?",
+ "A separated fit with no penalty has no finite answer to print, and deciding first leaves no size cutoff to choose",
+ ["Newton steps on separated rows use all 30 halvings at the first iteration, which the check spares",
+  "The linear programmes need beta = 0 as their start, and one Newton step would move away from it",
+  "The stopping rule has to know the kind of separation before it can set its tol in coefficient units"],
+ "The engine's stated reason for its choice: a separated maximum likelihood fit has no finite answer to print. The common alternative is to iterate and watch the coefficients grow, which leaves someone choosing how large is large and prints a number set by the stopping point. The programmes work on S, built from the design and the labels, and no coefficient enters them. The stopping rule's tol is set by the caller.")
+
+q(2, "The separation refusal offers two remedies. On the high-RT rows, which one serves a model meant to predict pay from the logs?",
+ "Removing PHIC: it is an input of the rule that made the label, so a model using it is handed part of the answer",
+ ["Adding l2 = 1, since the penalised PHIC coefficient of 0.817700 is then a finite estimate of the porosity effect",
+  "Lowering the RT cutoff until the separation turns quasi-complete, a kind the engine fits with no penalty",
+  "Raising maxIter to its limit, so Newton's method runs on until the PHIC coefficient settles"],
+ "PHIC is the label in disguise on those rows, and the Professional tier's pay model, which reads RHOB, NPHI and RT and never PHIC, had no separation to fit through. A penalised coefficient on separated rows is set by the penalty and says as much about l2 as about the rock. Quasi-complete separation is refused at l2 = 0 as well, and a separated fit never reaches a Newton step for maxIter to extend.")
+
+q(3, "A report says the group split 'separated' the test wells from the training wells. How does the course's vocabulary treat that word?",
+ "Separation names the logistic property of labels on their own sides of a hyperplane; a split is called a split",
+ ["It is right, since a group split puts every row of a well on one side of the split, which is complete separation by definition",
+  "Right for a group split and wrong for a random-row split, where rows of one well fall on both sides",
+  "Acceptable whenever the `sharedGroups` list is empty, which is the engine's own check for it"],
+ "The course legislates the word: separation is the logistic property, a hyperplane putting the classes on their own sides (complete) or on or beside it (quasi-complete). A split is a split, whichever kind it is. `sharedGroups` lists the wells a random-row split puts on both sides; it describes a split, and the separation check reads labels and features.")
+
+emit(Q, '/root/dai-wip-mlcore/banks/d2a_m02.json', expect_n=15)
+finish()

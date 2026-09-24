@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Where does the engine start the Newton steps of a logistic fit, and what does every row's probability read there?",
+  "options": [
+   "At the least squares coefficients of the 0 and 1 labels on the features, so the first step starts near the answer",
+   "From the coefficients the last call on the same features returned, reused as a warm start to save iterations",
+   "At beta = 0, where every row's probability is one half",
+   "With the intercept at 0 and every other coefficient at 1, so that each feature starts out carrying weight"
+  ],
+  "answer": 2,
+  "explanation": "The basis states it: \"Newton-Raphson (IRLS) from beta = 0\". With every coefficient zero the log odds are zero for every row, so every probability is 1 / (1 + exp(0)), one half. From there the pay fit's first step is 1.024456 at its largest component, and the log likelihood rises to -46.305377."
+ },
+ {
+  "prompt": "What does one Newton step of a logistic fit solve?",
+  "options": [
+   "The information matrix against the score, a symmetric positive definite system solved with `solveSPD`",
+   "The unweighted normal equations of the 0 and 1 labels on the features, the same system least squares solves once",
+   "A line search along the score alone, stepping forward until the log likelihood stops rising",
+   "The two separation programmes again, once per iteration, to confirm that no hyperplane has formed"
+  ],
+  "answer": 0,
+  "explanation": "At the current coefficients the score is the slope of the log likelihood in each coefficient and the information matrix its curvature; the step solves one against the other with `solveSPD`. It is a weighted least squares solve with weights p(1 - p), which is why it is also called IRLS. Separation is decided once, before the first step."
+ },
+ {
+  "prompt": "On the Ekene pay fit, at which iteration does the engine stop, and why there?",
+  "options": [
+   "At iteration 7, the first whose log likelihood prints -24.507027, since the likelihood stops changing from there on",
+   "At iteration 9, whose largest step component of 9.80e-9 is small enough to count as converged under the tol",
+   "At iteration 100, the default maxIter, since the engine always takes every update it is allowed to take",
+   "At iteration 10, whose step of 1.14e-13 is the first at or below 1.00e-10"
+  ],
+  "answer": 3,
+  "explanation": "The rule stops the fit when the largest component of the full Newton step is at most tol, 1.00e-10 by default. 9.80e-9 is above that, so iteration 9 does not stop it, and 1.14e-13 at iteration 10 is the first step at or below it. A flat printed likelihood is no stopping rule, and maxIter is a ceiling: the fit stops as soon as the rule is met."
+ },
+ {
+  "prompt": "The pay fit's log likelihood prints -24.507027 at iterations 7, 8, 9 and 10. What does the course take from that?",
+  "options": [
+   "The fit had converged by iteration 7, and the last three steps did no more than confirm a solution already reached",
+   "Printed alike is not converged: the coefficients still moved by 0.097613 and 0.000448 at steps 7 and 8",
+   "The stopping rule reads the log likelihood at six decimals and stops once the print holds still",
+   "Steps 8 to 10 were halved away to almost nothing, leaving the likelihood nowhere to move"
+  ],
+  "answer": 1,
+  "explanation": "The likelihood's changes no longer show at six decimals from iteration 7, while the step, in coefficient units, is still 0.097613 at iteration 7 and 0.000448 at iteration 8. The engine judges convergence on the step, never on a printed likelihood. The halvings column reads 0 on every row of the trace, so every step was taken whole."
+ },
+ {
+  "prompt": "Which statement of the logistic stopping rule is exact?",
+  "options": [
+   "Stop once every coefficient's relative change falls strictly below tol, whatever the units of its feature",
+   "Stop when the log likelihood rises by less than tol x (1 + |l|) over two iterations in a row",
+   "Stop when the largest component of the step actually taken, after any halving, falls strictly below tol",
+   "Stop when the largest absolute component of the full Newton step is at most tol, in coefficient units"
+  ],
+  "answer": 3,
+  "explanation": "The basis: \"converged when the largest absolute component of the full Newton step is at most tol 1e-10 (in coefficient units: set tol to the scale of the coefficients when features are in very small or very large units); at most maxIter 100 updates\". The rule is absolute, inclusive and read on the full step. The allowance 1e-12 x (1 + |l|) belongs to the halving rule, a different test."
+ },
+ {
+  "prompt": "A logistic fit's full Newton step comes out with a largest component exactly equal to tol. What does the engine do?",
+  "options": [
+   "It stops, because the rule is inclusive: at most tol",
+   "It takes one more step, since convergence needs a step strictly below tol, as a refusal needs a number strictly above its limit",
+   "Halving the step and testing again, since the halving rule is what settles a tie that lands exactly on tol",
+   "It returns converged false with a warning, because a step at tol sits on the edge of the tolerance, outside it"
+  ],
+  "answer": 0,
+  "explanation": "Each rule draws its own boundary. The logistic stop is inclusive, so a step exactly at tol stops the fit. The condition limit is the other way round: a number exactly at maxCondition is fitted and only one strictly above is refused. The halving rule is strict and is about a fall in the penalised log likelihood; it never reads tol."
+ },
+ {
+  "prompt": "Which iteration of the pay fit takes the largest Newton step, and what do the steps do after it?",
+  "options": [
+   "Iteration 1, at 1.024456, because Newton's method takes its biggest step from the starting point at beta = 0",
+   "Iteration 3, at 5.791631, the step the maxIter 3 warning reports",
+   "Iteration 4, at 7.440994; the steps then shrink and collapse over the last few iterations",
+   "Iteration 5, at 5.014085, after which the steps shrink at a steady rate"
+  ],
+  "answer": 2,
+  "explanation": "The trace reads 1.024456, 2.796103, 5.791631, 7.440994, 5.014085, 1.434323, 0.097613, 0.000448, 9.80e-9 and 1.14e-13, so the largest is iteration 4's. The steps grow while the coefficients travel from zero, then shrink. Near the solution Newton's method roughly squares the error each step, so the fall is anything but steady. Iteration 3's step is indeed the one the maxIter 3 warning reports, and it is smaller than iteration 4's."
+ },
+ {
+  "prompt": "The pay fit is run with maxIter 3. What comes back?",
+  "options": [
+   "A refusal naming `maxIter`, since three updates are too few for the fit to reach tol on these rows",
+   "The full result with `converged` false and a warning, its RT coefficient the third iterate, 0.196989",
+   "The converged RT coefficient 0.241141, since the engine carries on past maxIter until the step reaches tol",
+   "An RT coefficient of 0.196989 with converged true, because the answer after three updates is the fit asked for"
+  ],
+  "answer": 1,
+  "explanation": "A fit that stops early is no refusal: the inputs were fine and the engine was allowed three updates. It returns every field a fitted model carries and adds `converged` false and the warning, in its own words: \"did not converge in 3 updates: the last full Newton step had a largest component of 5.791630774699914, above tol 1e-10\". maxIter is obeyed; 0.241141 is the RT coefficient at convergence, after 10 iterations."
+ },
+ {
+  "prompt": "The pay fit stopped at maxIter 3 warns, in the engine's words, \"did not converge in 3 updates: the last full Newton step had a largest component of 5.791630774699914, above tol 1e-10\". Which figure does a lesson reason with?",
+  "options": [
+   "The trace field for iteration 3, 5.791631 at six decimals",
+   "The message's own figure, since a warning carries every digit the engine computed and the trace rounds them",
+   "The tol of 1e-10 inside the message, as the only figure a warning is built to report",
+   "Iteration 4's step, 7.440994, which the stopped fit would have taken next had maxIter allowed it"
+  ],
+  "answer": 0,
+  "explanation": "A message is a sentence for a person, and its figure prints as the shortest decimal that reads back to the number. A lesson quotes the numeric field at six decimals, and the message only verbatim as the engine's own words. The trace field is the same full step the converged fit took at its third iteration: same data, same start, same steps."
+ },
+ {
+  "prompt": "After 3 updates the pay fit reads a log likelihood of -25.899408, against -24.507027 at convergence. How does the course read the iterate's coefficients and standard errors?",
+  "options": [
+   "As a regularised estimate, since stopping Newton's method early shrinks the coefficients the way an L2 penalty does",
+   "As usable coefficients with wider standard errors, which the engine inflates to account for the steps not taken",
+   "As a point on the way that estimates nothing, reported only as the iterate after 3 updates with the warning beside it",
+   "As the converged answer in all but name, because the log likelihood had risen at every one of the three steps"
+  ],
+  "answer": 2,
+  "explanation": "The iterate's last full step, 5.791631, is far above tol, and the steps after it were never taken. Its standard errors are computed at the iterate too and carry no more meaning than its coefficients. A rising likelihood is what every Newton step on this fit did, all the way to iteration 10. Never report a coefficient from a fit with `converged` false as if it were fitted."
+ },
+ {
+  "prompt": "The engine's own case has rock compressibility in 1/Pa, largest value 8.52e-10, over 40 rows. What happens at tol 0.1 and at the default tol?",
+  "options": [
+   "At 0.1 it stops too early to be trusted, while at 1.00e-10 it converges in 6 iterations, as the default suits any feature",
+   "Refused at both, as a feature of order 8.52e-10 is too ill-conditioned",
+   "It converges at both, as the rule measures each step relative to its coefficient",
+   "At 0.1 it converges in 6 iterations; at 1.00e-10 it runs all 100 updates and warns"
+  ],
+  "answer": 3,
+  "explanation": "The compressibility coefficient is near 6.83e+9 log odds per 1/Pa. At the default tol the last full step is still above 1.00e-10 after 100 updates, so the fit returns converged false with a warning; the rule compares the step with tol in absolute terms, whatever the coefficient's size. With tol 0.1 it converges in 6 iterations. Nothing is refused: the case is fitted both times."
+ },
+ {
+  "prompt": "The compressibility coefficient is near 6.83e+9. What is a tol of 0.1 on it in relative terms, and what does that show?",
+  "options": [
+   "A relative 0.1, since the engine divides every step by its coefficient before it compares the step with tol",
+   "A relative 1.46e-11: a tol that looks loose in absolute terms is tight beside a coefficient that large",
+   "A relative 6.83e+9, since the tol is multiplied up by the size of the coefficient it guards",
+   "A relative 1.00e-10, the default, which is why tol 0.1 and the default tol return the same fit"
+  ],
+  "answer": 1,
+  "explanation": "Relative to a coefficient near 6.83e+9, a step of 0.1 is 1.46e-11. The engine divides nothing: the step is compared with tol in coefficient units. The two tols did not return the same fit: 0.1 converged in 6 iterations, and the default ran to 100 updates with converged false."
+ },
+ {
+  "prompt": "A fit on a feature in very small units runs to maxIter at the default tol. Which remedies do the basis and the course name?",
+  "options": [
+   "Set tol to the scale of the coefficients, or rescale the feature, to 1/GPa for instance",
+   "Add an L2 penalty (l2 > 0), which the engine names as its remedy for any fit that does not converge",
+   "Raise maxCondition knowingly, since a feature in small units is refused as ill-conditioned until it is",
+   "Remove the feature, because the warning shows that it carries no signal the fit can use"
+  ],
+  "answer": 0,
+  "explanation": "The basis says: set tol to the scale of the coefficients when features are in very small or very large units. The other remedy rescales the feature, which changes the units the coefficient and its steps are measured in. The L2 penalty is the separation refusal's remedy, maxCondition belongs to least squares and ridge, and a warning says the fit stopped early, which is no finding about signal."
+ },
+ {
+  "prompt": "When does the engine halve a Newton step?",
+  "options": [
+   "Whenever the full step is above tol, until the halved step reaches tol",
+   "When the step raises the log likelihood by less than 1e-12 x (1 + |l|), up to the 100 updates maxIter allows",
+   "Each time the step lowers the plain log likelihood at all, by even the smallest amount, up to 30 times",
+   "When the step lowers the penalised log likelihood by more than 1e-12 x (1 + |l|), up to 30 times"
+  ],
+  "answer": 3,
+  "explanation": "The basis: \"Newton-Raphson (IRLS) from beta = 0; a step is halved while it lowers the penalised log likelihood by more than 1e-12 x (1 + |log likelihood|), up to 30 halvings\". The comparison is strict, so a fall of exactly the allowance is kept. With l2 at zero the penalised and plain log likelihood are the same. The pay fit halved 0 times."
+ },
+ {
+  "prompt": "Why does the engine judge convergence on the full Newton step, before any halving?",
+  "options": [
+   "The full step is cheaper, since each halved step needs a second solve of the Newton system to be formed",
+   "Halving happens only on penalised fits, so reading the full step keeps one rule for every value of l2",
+   "A halved step shrinks each time it is cut, so a fit stuck far from its answer could otherwise halve its way below tol",
+   "The full step and the halved step are always equal on any fit that goes on to converge, so either would do"
+  ],
+  "answer": 2,
+  "explanation": "The engine's stated reason: the full step cannot be faked by halving. If the rule read the halved step, enough halvings would make any step tiny and could report converged true far from the answer. A halving reuses the solved step and tries it at half the length. Halving guards the penalised log likelihood at every l2, and at l2 = 0 that is the plain log likelihood."
+ }
+]

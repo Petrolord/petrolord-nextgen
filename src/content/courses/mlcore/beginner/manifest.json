@@ -1,0 +1,361 @@
+{
+ "app_slug": "mlcore",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-what-a-model-is",
+   "title": "What a Model Is",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-a-rule-fitted-to-data",
+     "title": "A rule fitted to data",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-features-and-a-target",
+     "title": "Features and a target",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-ekene-wells",
+     "title": "The Ekene wells and their logs",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-a-prediction-is",
+     "title": "What a prediction is",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-refusals-by-name",
+     "title": "The refusals, each naming its field",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-data-the-model-has-not-seen",
+   "title": "Data the Model Has Not Seen",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-why-test-data-must-be-unseen",
+     "title": "Why test data must be unseen",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-split-by-rows",
+     "title": "A split by rows",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-split-by-whole-wells",
+     "title": "A split by whole wells",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-seed-and-the-shuffle",
+     "title": "The seed and the shuffle",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-scaling-on-the-training-rows",
+   "title": "Scaling on the Training Rows",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-why-features-are-scaled",
+     "title": "Why features are scaled",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-population-standard-deviation",
+     "title": "Standardising with the population standard deviation",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-fit-on-training-rows-only",
+     "title": "Fit on the training rows only",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-min-max-and-rows-outside-the-range",
+     "title": "Min-max scaling and rows outside the range",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-ordinary-least-squares",
+   "title": "Ordinary Least Squares",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-least-squares-on-several-features",
+     "title": "Least squares on several features",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-reading-a-coefficient",
+     "title": "Reading a coefficient and its unit",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-intercept",
+     "title": "The intercept",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-standard-errors",
+     "title": "Standard errors and residual degrees of freedom",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-more-rows-than-coefficients",
+     "title": "More rows than coefficients",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-fit-metrics-and-residuals",
+   "title": "Fit Metrics and Residuals",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-rmse-and-mae",
+     "title": "RMSE and MAE",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-r-squared-on-a-test-set",
+     "title": "R-squared on a test set",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-residuals-by-well",
+     "title": "Residuals, well by well",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-training-score-and-test-score",
+     "title": "Training score and test score",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-one-well-held-out",
+   "title": "One Well Held Out, End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-whole-workflow",
+     "title": "The whole workflow in order",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-well-the-model-never-saw",
+     "title": "A well the model never saw",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-up-a-fit",
+     "title": "Writing up a fit",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ml-fit-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
