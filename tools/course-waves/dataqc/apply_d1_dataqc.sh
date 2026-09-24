@@ -78,8 +78,8 @@ digest_for() {
   case $1 in
     20261031_d1_dataqc_course           ) echo 5f3794146d70184aea666711b66c357c874f8ad727594fcce57844a9645afa0c ;;
     20261031_d1_dataqc_beginner_deep    ) echo c17b3d3514795f0865f8f1a869228bf98a02dce1d4f1f3aa6bceb2e2866e182d ;;
-    20261031_d1_dataqc_intermediate_deep) echo 6e7aa5ed1ca5d9b87714ed4422db26340282a63346de3c8e38288fd9cb3c6f2c ;;
-    20261031_d1_dataqc_advanced_deep    ) echo ba945e40edc68ef18f03b3d00ce825934d893ef6460f7201935a615c9210698c ;;
+    20261031_d1_dataqc_intermediate_deep) echo c4e56715eb49599cac6108dc2e339f8bdaa60273640850ce273edecdefcec451 ;;
+    20261031_d1_dataqc_advanced_deep    ) echo 6a24704dec379280dd7b257d833ea699652e8f42aa990ed1c31a842e80fd9eae ;;
     20261031_d1_dataqc_go_live          ) echo 669c1f43ae450c16c4ca5ff9ae5aab17c3dca406adbb40ed3bc5f47ae849179a ;;
     *) echo UNPINNED ;;
   esac
