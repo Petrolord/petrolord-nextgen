@@ -103,7 +103,7 @@ q(3, "A scaler fitted on GR and RHOB is applied to rows carrying GR, RHOB and NP
 q(0, "`fitMinMaxScaler` is fitted on 2 training rows whose CALI both read 3. What does it return?",
  "A refusal on `X.CALI`: the range is zero, so min-max scaling would divide by zero.",
  ["CALI scaled to 0 on both rows, since the training minimum always maps to 0 by definition.",
-  "Both rows set to 0.5, the midpoint the engine takes whenever the training range vanishes.",
+  "Both rows set to one half, the midpoint the engine takes whenever the training range vanishes.",
   "A scaled CALI of 1 on both rows, as the training maximum always maps to 1 by definition."],
  "Min-max divides by the training range, maximum less minimum, and here it is zero. The engine's own words are: \"X.CALI has zero range on the 2 training rows (every value is 3): min-max scaling would divide by zero, so drop the feature or fit on rows where it varies\". It returns no scaled value at all, and it has no midpoint rule."),
 
