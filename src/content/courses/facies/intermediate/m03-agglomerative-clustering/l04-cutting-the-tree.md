@@ -22,9 +22,9 @@ The engine reports two heights with every cut, `cutHeights`: the height of the l
 | complete | 2.205317 | 2.970753 |
 | average | 1.273129 | 1.346979 |
 
-For Ward, the last merge kept has height 3.659186 and the first merge undone has height 6.612020. Any cutting height between the two gives the same 4 clusters. Drawn as a tree, a horizontal line anywhere in that band crosses exactly four branches.
+For Ward, the last merge kept has height 3.659186 and the first merge undone has height 6.612020. Any cutting height between the two gives the same 4 clusters. Drawn as a tree, a horizontal line anywhere in that range crosses exactly four branches.
 
-The width of that band is worth reading. For Ward it runs from 3.659186 to 6.612020. For average linkage it runs only from 1.273129 to 1.346979, so a slightly different height would give a different count of clusters. Each band is read against its own tree, since Ward heights are on a different scale from the other two.
+The width of that range is worth reading. For Ward it runs from 3.659186 to 6.612020. For average linkage it runs only from 1.273129 to 1.346979, so a slightly different height would give a different count of clusters. Each range is read against its own tree, since Ward heights are on a different scale from the other two.
 
 ## Sizes of the Ward cut
 
@@ -40,4 +40,4 @@ At k 1 nothing is undone and every row is in cluster 0. At k equal to the number
 
 ## Exercise
 
-In the agglomerative view, run the Ekene cored rows with Ward linkage at k 4 and read the two cut heights. Change the cut to k 3 and then k 5, and for each write down the two heights and the cluster sizes. Check that the merge undone first at one k is the last merge made at the next k down. Then do the same for complete linkage and compare the widths of the bands at k 4.
+In the agglomerative view, run the Ekene cored rows with Ward linkage at k 4 and read the two cut heights. Change the cut to k 3 and then k 5, and for each write down the two heights and the cluster sizes. Check that the merge undone first at one k is the last merge made at the next k down. Then do the same for complete linkage and compare the widths of the ranges at k 4.

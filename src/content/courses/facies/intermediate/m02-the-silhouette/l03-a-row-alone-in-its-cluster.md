@@ -39,4 +39,4 @@ Without a stated rule, two tools could score the same labelling differently. The
 
 ## Exercise
 
-In the silhouette view, build a small table of your own: five rows of one log, four close together and one far away, with a FACIES column that gives the far row a label of its own. Score it with no scaling and confirm the lone row reads 0.000000. Then give the far row the same label as its nearest neighbour and see how the mean moves. Finally give each of the five rows its own label and read the refusal.
+In the silhouette view, build a small table of your own: five rows of one log, four close together and one far away, with a FACIES column that gives the far row a label of its own. Score it with no scaling and confirm the lone row reads 0.000000. Then give the far row the same label as the row nearest to it and see how the mean moves. Finally give each of the five rows its own label and read the refusal.

@@ -26,7 +26,7 @@ The cored rows hold 54 limestone, 50 sandstone, 29 shale and 47 shaly-sand. Ward
 
 ## Why they differ
 
-Complete linkage is cautious about spread: one far row is enough to keep two clusters apart, so it tends to make compact clusters of similar diameter. Average linkage is more tolerant: a cluster can grow long as long as the mean distance to its neighbour stays small, so it can chain two touching groups into one, and a single odd row can stay unmerged until late. Ward, like k-means, favours compact clusters with a small sum of squares.
+Complete linkage is cautious about spread: one far row is enough to keep two clusters apart, so it tends to make compact clusters of similar diameter. Average linkage is more tolerant: a cluster can grow long as long as the mean distance to the cluster it joins stays small, so it can chain two touching groups into one, and a single odd row can stay unmerged until late. Ward, like k-means, favours compact clusters with a small sum of squares.
 
 None of these is right in general. Which one suits a field is judged against core, and later modules of this tier score all three that way.
 

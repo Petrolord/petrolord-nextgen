@@ -13,7 +13,7 @@ With one start per k and seed 265 (stated), on the 180 cored rows with standard 
 | 7 | 45.153181 |
 | 8 | 45.270437 |
 
-A larger k fitted worse. With eight centres available, the best arrangement can always do at least as well as the best arrangement with seven, because one centre could sit on top of another. So the k 8 run did not find the best arrangement: it stopped in a local minimum, a set of centres where no single Lloyd pass improves the labels and yet a better set exists.
+A larger k fitted worse. With eight centres available, the best arrangement can always do at least as well as the best arrangement with seven, because seven centres could sit where the best seven do and the eighth could go anywhere. So the k 8 run did not find the best arrangement: it stopped in a local minimum, a set of centres where no single Lloyd pass improves the labels and yet a better set exists.
 
 ## The engine's warning
 

@@ -15,7 +15,7 @@ The capstone for this tier grades six figures, and every one answers the Profess
 
 ## What it grades and why
 
-It grades judging quantities only. It grades no scaler, component or k-means inertia on its own, because those are the Associate question and the Associate capstone asks them. It grades no neighbour rule and no tree, because those are the Expert question.
+It grades judging quantities only. It grades no scaler, component or k-means inertia on its own, because those are the Associate question and the Associate capstone asks them. It grades no prediction by nearest neighbours and no classification tree, because those are the Expert question.
 
 ## The data are new
 
