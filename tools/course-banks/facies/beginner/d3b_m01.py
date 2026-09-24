@@ -1,0 +1,118 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D3 Associate m01, What Electrofacies Are.
+# Sources: the course digest's function table and what the engine does not do,
+# the Ekene wells and their planted structure, the refusals m01 l05 teaches, the
+# four first rows with their raw and scaled distances, the nearest other row
+# counts, and the vocabulary table. Every figure is printed there.
+
+q(1, "In this course, what is an electrofacies?",
+ "A cluster read as a rock type, which takes a facies name only after it has been matched against core.",
+ ["The core facies a geologist wrote for a sample, copied across to the uncored wells at the same depth.",
+  "Any group of depth samples whose gamma ray reads above the mean of the field, gathered well by well.",
+  "A rock name the engine attaches to each cluster the moment k-means returns, read from its centre."],
+ "The engine makes clusters from the logs alone with no core in the calculation, and a cluster read as a rock type is an electrofacies. It earns a facies name only by matching against core, which the Professional tier teaches. Core facies belong to cored rows, the gamma ray alone defines nothing here, and k-means returns numbered clusters with no rock names."),
+
+q(3, "The course legislates the word facies. Which use of it follows the rule?",
+ "The core facies of a cored row, or a facies predicted from core and called predicted.",
+ ["Any cluster k-means returns, since each cluster holds rows whose four logs read alike on the scaled logs.",
+  "Whatever a cluster's centre suggests, such as a high gamma ray and high neutron cluster written as shale.",
+  "Every depth sample in the eight wells, cored or not, labelled by the log with the largest reading."],
+ "Facies is reserved for core, or for a prediction made from core and called predicted. A cluster is a group the engine made without core and carries only a number. A centre can suggest a textbook response, and the course still writes no rock name until the cluster is matched against core."),
+
+q(0, "The teaching clustering (k-means, k 4, seed 3, 10 starts) returns clusters of 29, 59, 54 and 38 rows. The core counts 54 limestone, 50 sandstone, 29 shale and 47 shaly-sand rows. What may a learner conclude about the cluster of 29 rows?",
+ "Nothing about its rock: a size that equals a facies count says nothing about which rows are in it.",
+ ["It is the shale, because its 29 rows match the 29 shale rows of the core exactly.",
+  "The cluster holds the 29 shale rows plus none of the others, so it can be named shale in a write-up.",
+  "Shale and shaly-sand together, because 29 is the smallest size and those two facies read alike on GR."],
+ "Two groups can have the same size and hold different rows. The course writes that no cluster is named as a facies until it is matched against core, row by row. A size is a count; it never says which rows went in."),
+
+q(2, "How are the eight Ekene wells split between cored and uncored?",
+ "Six wells, EKENE-1 to EKENE-6, are cored, 180 rows; EKENE-7 and EKENE-8 carry no core.",
+ ["All eight are cored, so every one of the 240 rows carries a core facies in its FACIES column.",
+  "Four are cored, EKENE-1 to EKENE-4, 120 rows; the other four carry no core.",
+  "EKENE-1 and EKENE-8 carry no core; the six between them hold 180 cored rows."],
+ "Each well has 30 samples, 240 rows in all. The six cored wells are EKENE-1 to EKENE-6, giving 180 cored rows, and FACIES is null on every row of EKENE-7 and EKENE-8. The other splits describe wells the table does not list as uncored."),
+
+q(1, "This tier clusters on GR, RHOB, NPHI and PEF and leaves CALI out. What does the course give as the reason?",
+ "CALI measures the hole and was drawn with no link to the facies, yet it would still move every distance.",
+ ["The caliper is in inches, and the engine's scalers refuse any log whose unit is a length.",
+  "It is null on the two uncored wells, so no clustering that later places EKENE-7 could use it.",
+  "Every clustering function refuses a channel named CALI by name, whatever values it holds."],
+ "CALI is drawn as 8.5 in plus the size of a normal draw with SD 0.35 in, whatever the facies, so it carries no facies signal; any log still adds a term to every distance. The scalers work on any unit, CALI is logged on all eight wells, and the engine refuses a caliper only when it reads one value on every row."),
+
+q(3, "What does the course state about the gamma ray of EKENE-8?",
+ "It was logged with a tool reading 30 gAPI above what the rock gives, on every sample, a fact planted by the generator.",
+ ["A tool reading 30 gAPI low was used, which the engine corrects before any scaling.",
+  "EKENE-8 has no gamma ray at all, so it is left out of every call that needs four logs.",
+  "The engine detects the 30 gAPI offset itself and subtracts it from every sample before scaling."],
+ "The generator raised GR by 30 gAPI on every EKENE-8 sample, and the course states it openly because the field is synthetic. The engine corrects nothing: it builds no gamma ray normalisation between wells, which is the data quality course's work. EKENE-8 carries all five channels."),
+
+q(0, "Every method in this course compares two rows by one distance. How is it computed?",
+ "Square the difference on each log, add the squares over the logs and take the square root.",
+ ["Add the absolute differences on each log, so every log counts in its own unit and none is squared.",
+  "Take the largest single difference across the logs, which is the log where the two rows disagree most.",
+  "Count the logs on which the two rows differ by more than a tenth of that log's unit."],
+ "The course uses the Euclidean distance: the square root of the sum, over the logs, of the squared difference. A sum of absolute differences, the largest single difference and a count of differing logs are other measures, and none is the one the engine uses."),
+
+q(2, "Row 0 of the cored rows is a sandstone. On the RAW logs it lies 21.355833 from the first limestone (row 13) and 58.419443 from the first shale (row 28). On the standardised logs the two distances are 4.174924 and 3.333330. What happened?",
+ "Raw, the limestone was nearer because GR ruled the sum; scaled, the limestone became the farther of the two.",
+ ["Both orders agree, because scaling divides each distance by the same number and keeps every ranking.",
+  "Scaling made the shale farther, since the shale differs from sandstone mainly on its density.",
+  "A raw distance of 21.355833 and a scaled one of 4.174924 are the same measurement written in two units."],
+ "GR supplies 0.976184 of the squared raw distance to the limestone and 0.999334 to the shale, so the raw distance is mostly a gamma ray distance. On the standardised logs the density and photoelectric factor count, and the limestone moves out to 4.174924 while the shale sits at 3.333330. Scaling rescales each log separately, so it can reorder distances, and the two figures sit in different units."),
+
+q(3, "For each of the 180 cored rows the engine finds the nearest other cored row. How many of those nearest rows share the row's core facies?",
+ "161 on the raw logs and 173 on the standardised logs.",
+ ["173 on the raw logs and 161 on the standardised logs, since scaling blurs the gamma ray contrast.",
+  "The same count either way, 173, because scaling changes the units of a distance and never its order.",
+  "180 on the standardised logs: after scaling every row sits nearest a row of its own facies."],
+ "Raw, 161 rows have a nearest other row of their own facies and 19 do not; standardised, 173 do and 7 do not. Scaling moves 12 more rows next to a row of their own facies. It changes which rows are near, and 7 rows still sit nearest another facies after it."),
+
+q(1, "A report says two Ekene rows lie at a distance of 1.048512. By the course's vocabulary, what does that figure mean without further words?",
+ "A Euclidean distance on the scaled logs, which a text should still quote with its scaling.",
+ ["A distance on the raw logs, since a distance is read in the logs' own units unless it is marked as scaled.",
+  "It could be either; a distance means any difference between two rows here.",
+  "Gamma ray units, gAPI, the unit of the log that dominates every distance."],
+ "The course legislates distance as Euclidean on the scaled logs unless the text says raw, quoted with its scaling. The figure 1.048512 is the scaled distance from row 0 to row 6; the same pair lies 10.905782 apart on the raw logs."),
+
+q(0, "`pca` is called on the 180 cored rows with row 40's RHOB set to null. The engine replies, in its own words: \"X[40][1] must be a finite number: fill or drop missing values first\". What does the field X[40][1] name?",
+ "Row 40, column 1, both counted from 0, which is RHOB in the order GR, RHOB, NPHI, PEF.",
+ ["The 40th row and first column counted from 1: the gamma ray of the row above.",
+  "Forty missing values in column 1 of the table, the engine's count of every gap it found.",
+  "One missing value that the engine has filled with the RHOB mean before computing the components."],
+ "The engine counts rows and columns from 0 and names the first gap it meets, so X[40][1] is row 40's RHOB. It names one entry; it does not count gaps. It fills nothing: filling or dropping the value is the caller's decision, and conditioning logs is the data quality course's work."),
+
+q(2, "A single row is passed to `pca`. Which reply comes back?",
+ "A refusal naming the field `X`: \"X must be an array of at least 2 rows\".",
+ ["One component comes back, since one row has one direction, with a warning beside it.",
+  "Refused by naming `nComponents`, because a table of one row cannot supply four components.",
+  "Four eigenvalues of zero, because a single row has no spread along any direction."],
+ "One row has no spread about a centre, and the engine refuses the table by naming the field `X`, the whole table, since the fault lies in its size. A refusal returns no result, so no components and no eigenvalues come back. The nComponents refusal is a different call, asking for more components than logs."),
+
+q(1, "`kmeans` is called on the cored rows with no seed. What does the engine do?",
+ "It refuses the call: \"seed must be a whole number from 0 to 4294967295\".",
+ ["Seed 0 is used as a default and clusters come back, with that seed noted in the basis block.",
+  "Draws a fresh random seed from the clock, so each call returns a different clustering.",
+  "The teaching seed, 3, is used, because that is the course's stated default."],
+ "The engine takes no default seed. It refuses the call by naming `seed`, and a negative seed gets the same message. That refusal is why every k-means result in the course carries its seed: the starting rows are drawn from one mulberry32 stream on that seed."),
+
+q(3, "How does a refusal differ from a warning in this engine?",
+ "A refusal returns only an error and a field; a warning comes attached to a full result.",
+ ["A warning stops the call and names a field, while a refusal returns the result with a caution.",
+  "Both return the full result; a refusal simply uses stronger wording in the sentence it adds.",
+  "They are two names for one reply shape, an object carrying `error` and `field`."],
+ "Every call returns either a result or an object with `error` and `field`. A refusal is the second shape and carries no components, no clusters and no partial answer. A warning, such as a pca that did not converge, is added to a returned result, which is valid and needs a caution."),
+
+q(0, "Which of these decisions does the engine leave to the person calling it?",
+ "Which logs to use, how many clusters to ask for, and whether to fill or drop a missing value.",
+ ["Only the seed, since the engine picks the logs and the number of clusters from the data.",
+  "None of them: it fills a missing value with the log mean and picks k from the rows.",
+  "Filling of missing values only; the engine always clusters on every log it is given, CALI included."],
+ "The engine fills no missing value, refusing a null by name, and it does not choose the logs or k. Those choices are written down and defended by the caller. It clusters on the logs it is passed, which is why leaving CALI out is a decision made before the call."),
+
+emit(Q, '/root/dai-wip-facies/banks/d3b_m01.json', expect_n=15)
+finish()
