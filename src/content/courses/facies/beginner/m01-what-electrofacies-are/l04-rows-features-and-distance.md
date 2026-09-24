@@ -29,7 +29,7 @@ For each of the 180 cored rows the engine can find the nearest other cored row a
 | raw logs | 161 | 19 |
 | standardised logs | 173 | 7 |
 
-Scaling moves 12 more rows next to a row of their own facies, out of 180. Nothing about the rock changed between the two lines of the table. Only the units in which the distance was measured changed, and that decided which rows are neighbours. Scaling decides which rows are near, and so which rows cluster together.
+Scaling moves 12 more rows next to a row of their own facies, out of 180. Nothing about the rock changed between the two lines of the table. Only the units in which the distance was measured changed, and that decided which rows sit nearest. Scaling decides which rows are near, and so which rows cluster together.
 
 ## A rule for writing about distance
 
@@ -37,4 +37,4 @@ In this course a distance is on the scaled logs unless the text says raw, and ev
 
 ## Exercise
 
-Open the cluster explorer on the view "The nearest rows, raw and scaled". Set the row to 0, the nearest rows to list to 5 and the scaling to none. Write down the rows and their raw distances. Switch the scaling to standard and write down the new list. Then remove GR from the logs, keep the scaling at none, and compare the list once more with the standardised one. Write two sentences on which log decided the raw neighbours, and why the standardised list differs from both.
+Open the cluster explorer on the view "The nearest rows, raw and scaled". Set the row to 0, the nearest rows to list to 5 and the scaling to none. Write down the rows and their raw distances. Switch the scaling to standard and write down the new list. Then remove GR from the logs, keep the scaling at none, and compare the list once more with the standardised one. Write two sentences on which log decided the raw list, and why the standardised list differs from both.
