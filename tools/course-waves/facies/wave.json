@@ -72,7 +72,7 @@
   "ihiala_kmeans_inertia": "one start, raw logs, min max, k three, k five, sample sd scaling",
   "ihiala_row24_cluster_gr_centre_gapi": "standard units quoted, first row cluster read, raw logs, one start, k three, min max, the row gr quoted",
   "nkwelle_elbow_drop_fraction_k4": "drop not fraction, divided by inertia k, k three row, k five row, raw logs, one start",
-  "nkwelle_kmeans_silhouette": "raw logs, core facies labels, squared distances, a over cluster size, k three, a sample of sixty",
+  "nkwelle_ward_silhouette": "k means labels, complete linkage, raw logs, core facies labels, squared distances, a over cluster size",
   "nkwelle_ward_height_above_cut": "height below the cut, complete linkage, average linkage, without the factor two, raw logs, cut at three",
   "nkwelle_complete_ari": "ward linkage, k means, average linkage, unadjusted rand index, cut at three",
   "nkwelle_one_to_one_macro_f1": "accuracy quoted, weighted f1, k three, ward clusters, raw logs",
@@ -83,5 +83,322 @@
   "ogbunike_cart_nphi_importance": "pef first column order, depth three, root decrease quoted, min leaf five, training wells only",
   "ogbunike_cart_depth3_heldout_accuracy": "depth four, depth two, held out well in training, training accuracy quoted, k nearest instead",
   "ogbunike_uncored_gr_minmax_max": "uncored well in the fit, standard score instead, mean not highest, stated offset removed, raw gr over cored max"
+ },
+ "digest": {
+  "lines": 995,
+  "sections": 28,
+  "md5": "89de323759f43f4b4c95b993dc79263c",
+  "sha256": "f4b59c1fbabe57655d0c9d2b951002d5eb771d23fce9462828820592a201f6ff"
+ },
+ "fields": {
+  "count": 18,
+  "sha256": "40a63100966848168c2de7aa6d2b3dceefd630bb7e66da6509822b9c20027f3d",
+  "keys": [
+   "ihiala_gr_scale_gapi",
+   "ihiala_pc1_ratio",
+   "ihiala_pc1_nphi_loading",
+   "ihiala_pc1_score_first_row",
+   "ihiala_kmeans_inertia",
+   "ihiala_row24_cluster_gr_centre_gapi",
+   "nkwelle_elbow_drop_fraction_k4",
+   "nkwelle_ward_silhouette",
+   "nkwelle_ward_height_above_cut",
+   "nkwelle_complete_ari",
+   "nkwelle_one_to_one_macro_f1",
+   "nkwelle_majority_accuracy_k6",
+   "ogbunike_knn_heldout_accuracy",
+   "ogbunike_knn_nearest_distance",
+   "ogbunike_cart_node2_gini",
+   "ogbunike_cart_nphi_importance",
+   "ogbunike_cart_depth3_heldout_accuracy",
+   "ogbunike_uncored_gr_minmax_max"
+  ]
+ },
+ "gates": {
+  "structure.py": {
+   "md5": "f6c2ad27887251b0a4e99d4c41223aa1",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "scaffold.py --check": {
+   "md5": "c0f8c6ea01d6be168d56a44f8dc69553",
+   "command": "python3 scaffold.py --check",
+   "expected": 0,
+   "exit": 0,
+   "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
+  },
+  "d3_capstone.mjs": {
+   "md5": "0e77b29f18623508c956f81a99398c3e",
+   "command": "node d3_capstone.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d3_capstone: 103 label-and-call, scenario, convergence and seed assertions run, 0 failed"
+  },
+  "make_fields.mjs": {
+   "md5": "f3a65a5a3b62710d1e4fe589f3dc79aa",
+   "command": "node make_fields.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d3_capstone: 103 label-and-call, scenario, convergence and seed assertions run, 0 failed"
+  },
+  "make_fields.mjs NEGATIVE CONTROL": {
+   "md5": "f3a65a5a3b62710d1e4fe589f3dc79aa",
+   "command": "node make_fields.mjs --bare-stated-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "d3_capstone: 103 label-and-call, scenario, convergence and seed assertions run, 0 failed"
+  },
+  "oracle_check.py": {
+   "md5": "496dc17659f909a3bbc7873890edf70e",
+   "command": "python3 oracle_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 3 s; worst relative difference 9.42e-16; disagreements: 0"
+  },
+  "oracle_check.py NEGATIVE CONTROL": {
+   "md5": "496dc17659f909a3bbc7873890edf70e",
+   "command": "python3 oracle_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: nkwelle_ward_height_above_cut was moved by ten tolerances; caught"
+  },
+  "discriminate.mjs": {
+   "md5": "c0315bfe100a1a85f791da49e03224c7",
+   "command": "node discriminate.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "CLOSEST MISS ACROSS THE WHOLE SWEEP: ihiala_pc1_score_first_row via population_sd, 3.825e+3 tolerances away"
+  },
+  "discriminate.mjs NEGATIVE CONTROL": {
+   "md5": "c0315bfe100a1a85f791da49e03224c7",
+   "command": "node discriminate.mjs --slack-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: tolerances multiplied by 1000000000000. Expected 18 WEAK routes, got 18."
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "command": "/root/dc-wavekit/digestrepro.sh dai-wip-facies /root/wt-dai-d3-nextgen",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d3_dump: 883 label-and-call, measurement and claim assertions run, 0 failed; 28 sections"
+  },
+  "digestprose.mjs": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-facies",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] /root/dai-wip-facies/digest.txt: 995 line(s), 28 section title(s) and 72 in-body marker(s) swept against their blocks, 32 history framings, 31 engine pin(s); 0 warned for a human read and 0 framed as curric"
+  },
+  "digestprose.mjs --selftest": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] selftest OK: the founding heading case is caught by the corrected pairing and missed by the broken one; both real keyword cases fail inside a teaching section; FC3 line 683 WARNS where the keyword family ca"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py dai-wip-facies",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (3 sentence(s) cleared by name in wave.json)"
+  },
+  "digestfigures.py --selftest": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] selftest OK"
+  },
+  "digestpromise.py": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py dai-wip-facies",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 completeness problem(s), all checks applied"
+  },
+  "digestpromise.py --selftest": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "command": "python3 /root/dc-wavekit/digestleak.py dai-wip-facies",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "command": "python3 /root/dc-wavekit/collisions.py dai-wip-facies",
+   "expected": 0,
+   "exit": 0,
+   "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py dai-wip-facies",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[gradeprecision] /root/dai-wip-facies: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 13 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "command": "python3 /root/dc-wavekit/briefleak.py dai-wip-facies",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 graded answer(s) reachable from this brief"
+  },
+  "briefcheck.py": {
+   "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
+   "command": "python3 /root/dc-wavekit/briefcheck.py dai-wip-facies",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
+  },
+  "gate_capstone_leak.mjs": {
+   "md5": "64290244eb1bc3dd532be666a890ae4c",
+   "command": "node gate_capstone_leak.mjs --no-banks",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
+   "md5": "64290244eb1bc3dd532be666a890ae4c",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-value",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
+   "md5": "64290244eb1bc3dd532be666a890ae4c",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-input",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
+   "md5": "64290244eb1bc3dd532be666a890ae4c",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-name",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
+   "md5": "64290244eb1bc3dd532be666a890ae4c",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
+  },
+  "gate_copy_rule.py": {
+   "md5": "c067974f7d25bec2cc4c9b8484108106",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "c067974f7d25bec2cc4c9b8484108106",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got 2"
+  },
+  "gate_typed_literals.py": {
+   "md5": "a30ce05afed3d8b8c8c4af6286012f60",
+   "command": "python3 gate_typed_literals.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "UNEXPLAINED TYPED NUMBERS: 0"
+  },
+  "gate_typed_literals.py NEGATIVE CONTROL": {
+   "md5": "a30ce05afed3d8b8c8c4af6286012f60",
+   "command": "python3 gate_typed_literals.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a typed 4.217 was planted in a printed line; caught 1"
+  },
+  "gate_vocabulary.py": {
+   "md5": "d4644975b891c6cc74f9b063fa8ec5b0",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "exemptions declared: 1, dead: []"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "d4644975b891c6cc74f9b063fa8ec5b0",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected a P label and an AI claim caught; got ['a P label', 'an AI claim']"
+  },
+  "truth_check.py": {
+   "md5": "aa00feb9f6b715432b374d907c72466d",
+   "command": "python3 truth_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "truth_check: truth-facies.json (507 digest lines) IS the harvest of digest.txt"
+  },
+  "truth_check.py NEGATIVE CONTROL": {
+   "md5": "aa00feb9f6b715432b374d907c72466d",
+   "command": "python3 truth_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a line was planted in the scratch digest; expected a mismatch, caught"
+  },
+  "numsweep_facies.mjs": {
+   "md5": "64560bfd8f9484af5d1147c569baa3b3",
+   "command": "node numsweep_facies.mjs",
+   "expected": "held NOT ONE literal of seven or more significant figures",
+   "exit": 1,
+   "summary": "This gate does not pass on an empty or unreadable sweep.",
+   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+  },
+  "numsweep_facies.mjs --selftest": {
+   "md5": "64560bfd8f9484af5d1147c569baa3b3",
+   "command": "node numsweep_facies.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "numsweep_facies selftest OK"
+  },
+  "lengths.py": {
+   "md5": "bc04f317e95e9e68c067a2db921abdf2",
+   "command": "python3 lengths.py",
+   "expected": [
+    "UNDER ITS OWN FLOOR",
+    78
+   ],
+   "exit": 1,
+   "summary": "tiers read: 3  out of band: 80  not written yet: 0",
+   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+  },
+  "lengths.py --selftest": {
+   "md5": "bc04f317e95e9e68c067a2db921abdf2",
+   "command": "python3 lengths.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
+  },
+  "gate_claims.mjs": {
+   "md5": "36093e411cdfa6ca59badafbdd46d574",
+   "command": "node gate_claims.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_claims.mjs NEGATIVE CONTROL": {
+   "md5": "36093e411cdfa6ca59badafbdd46d574",
+   "command": "node gate_claims.mjs --plant-a-recon-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 1."
+  }
  }
 }

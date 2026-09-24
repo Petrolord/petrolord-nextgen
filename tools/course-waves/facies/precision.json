@@ -49,6 +49,6 @@
  },
  "silhouette": {
   "decimals": 6,
-  "match": "^(?:nkwelle_kmeans_silhouette)$"
+  "match": "^(?:nkwelle_ward_silhouette)$"
  }
 }

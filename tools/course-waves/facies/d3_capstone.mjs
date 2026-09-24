@@ -12,7 +12,7 @@
 //                           score, the k-means inertia and a centre in log
 //                           units
 //   NKWELLE   Professional  judging groups against core: an elbow drop
-//                           fraction, a mean silhouette, a Ward merge height,
+//                           fraction, the Ward cut's silhouette, a Ward merge height,
 //                           an adjusted Rand index, a one-to-one macro F1 and
 //                           a majority accuracy
 //   OGBUNIKE  Expert        predicting facies and the engine's rules: a
@@ -149,7 +149,8 @@ must('Ihiala: the correlation PCA converged with no repeated eigenvalue', ihPC.c
 
    Seven cored wells, twenty-four samples each. The brief states: the four
    logs; elbow k 1 to 8, seed 5, ten starts; k-means k 4 and k 6, seed 5;
-   agglomerative Ward and complete, cut at k 4; one-to-one matching at k 4
+   agglomerative Ward and complete, cut at k 4, and the silhouette of the
+   Ward cut; one-to-one matching at k 4
    and majority matching at k 6. */
 
 const NKWELLE = freeze({
@@ -165,9 +166,9 @@ must('Nkwelle: the elbow shows no rise', nkEL.inertiaRises.length === 0, nkEL.in
 const nkKM = success('Nkwelle kmeans k 4', CL.kmeans({ X: nkX, k: nkS.k, seed: nkS.seed, names: LOGS }));
 const nkK5 = success('Nkwelle kmeans k 6', CL.kmeans({ X: nkX, k: nkS.kOver, seed: nkS.seed, names: LOGS }));
 must('Nkwelle: both k-means converged on every start', [nkKM, nkK5].every((k) => k.converged && k.runs.every((r) => r.converged)), 'converged');
-const nkSil = success('Nkwelle silhouette', CL.silhouette({ X: nkX, labels: nkKM.labels, names: LOGS }));
 const nkW = success('Nkwelle Ward k 4', CL.agglomerative({ X: nkX, linkage: 'ward', k: nkS.k, names: LOGS }));
 const nkC = success('Nkwelle complete k 4', CL.agglomerative({ X: nkX, linkage: 'complete', k: nkS.k, names: LOGS }));
+const nkSil = success('Nkwelle silhouette of the Ward cut', CL.silhouette({ X: nkX, labels: nkW.labels, names: LOGS }));
 must('Nkwelle: no tied merge in either tree', nkW.tiedSteps === 0 && nkC.tiedSteps === 0, `${nkW.tiedSteps} ${nkC.tiedSteps}`);
 const nkCA = success('Nkwelle ARI complete', CL.adjustedRandIndex({ a: nkY, b: nkC.labels }));
 const nkM4 = success('Nkwelle one-to-one k 4', CL.matchClusters({ yTrue: nkY, clusters: nkKM.labels }));
@@ -228,7 +229,7 @@ const ROWS = [
   ['beginner', 'ihiala_kmeans_inertia', 'inertia', ihKM.inertia],
   ['beginner', 'ihiala_row24_cluster_gr_centre_gapi', 'centre', ihKM.centresOriginal[centreRowCluster][0]],
   ['intermediate', 'nkwelle_elbow_drop_fraction_k4', 'ratio', nkEL.table[nkS.k - 1].dropFraction],
-  ['intermediate', 'nkwelle_kmeans_silhouette', 'silhouette', nkSil.mean],
+  ['intermediate', 'nkwelle_ward_silhouette', 'silhouette', nkSil.mean],
   ['intermediate', 'nkwelle_ward_height_above_cut', 'height', nkW.cutHeights.above],
   ['intermediate', 'nkwelle_complete_ari', 'index', nkCA.ari],
   ['intermediate', 'nkwelle_one_to_one_macro_f1', 'accuracy', nkM4.report.macro.f1],
@@ -259,7 +260,6 @@ const nextSeed = [
   ['ihiala_kmeans_inertia', () => CL.kmeans({ X: ihX, k: IHIALA.stated.k, seed: IHIALA.stated.seed + 1 }).inertia],
   ['ihiala_row24_cluster_gr_centre_gapi', () => { const k = CL.kmeans({ X: ihX, k: IHIALA.stated.k, seed: IHIALA.stated.seed + 1 }); return k.centresOriginal[k.labels[IHIALA.stated.centreRow]][0]; }],
   ['nkwelle_elbow_drop_fraction_k4', () => CL.elbow({ X: nkX, kMin: 1, kMax: nkS.kMax, seed: nkS.seed + 1 }).table[nkS.k - 1].dropFraction],
-  ['nkwelle_kmeans_silhouette', () => CL.silhouette({ X: nkX, labels: CL.kmeans({ X: nkX, k: nkS.k, seed: nkS.seed + 1 }).labels }).mean],
   ['nkwelle_one_to_one_macro_f1', () => CL.matchClusters({ yTrue: nkY, clusters: CL.kmeans({ X: nkX, k: nkS.k, seed: nkS.seed + 1 }).labels }).report.macro.f1],
   ['nkwelle_majority_accuracy_k6', () => CL.matchClusters({ yTrue: nkY, clusters: CL.kmeans({ X: nkX, k: nkS.kOver, seed: nkS.seed + 1 }).labels, mode: 'majority' }).report.accuracy],
 ];

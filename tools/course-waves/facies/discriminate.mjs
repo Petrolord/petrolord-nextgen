@@ -182,15 +182,15 @@ const ROUTES = {
       one_start: () => nkEL({ nInit: 1 }).table[nkS.k - 1].dropFraction,
     },
   },
-  nkwelle_kmeans_silhouette: {
-    truth: () => CL.silhouette({ X: nkX, labels: nkKM.labels }).mean,
+  nkwelle_ward_silhouette: {
+    truth: () => CL.silhouette({ X: nkX, labels: nkAgg('ward').labels }).mean,
     wrong: {
-      raw_logs: () => CL.silhouette({ X: nkX, labels: nkKM.labels, scale: 'none' }).mean,
+      k_means_labels: () => CL.silhouette({ X: nkX, labels: nkKM.labels }).mean,
+      complete_linkage: () => CL.silhouette({ X: nkX, labels: nkAgg('complete').labels }).mean,
+      raw_logs: () => CL.silhouette({ X: nkX, labels: nkAgg('ward').labels, scale: 'none' }).mean,
       core_facies_labels: () => CL.silhouette({ X: nkX, labels: nkY }).mean,
-      squared_distances: () => handSil(nkZ, nkKM.labels, { squared: true }),
-      a_over_cluster_size: () => handSil(nkZ, nkKM.labels, { aBySize: true }),
-      k_three: () => CL.silhouette({ X: nkX, labels: CL.kmeans({ X: nkX, k: nkS.k - 1, seed: nkS.seed }).labels }).mean,
-      a_sample_of_sixty: () => CL.silhouette({ X: nkX, labels: nkKM.labels, sampleSize: 60, seed: nkS.seed }).mean,
+      squared_distances: () => handSil(nkZ, nkAgg('ward').labels, { squared: true }),
+      a_over_cluster_size: () => handSil(nkZ, nkAgg('ward').labels, { aBySize: true }),
     },
   },
   nkwelle_ward_height_above_cut: {

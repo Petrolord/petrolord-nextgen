@@ -43,8 +43,8 @@
  ],
  [
   "intermediate",
-  "nkwelle_kmeans_silhouette",
-  0.5961063496823578,
+  "nkwelle_ward_silhouette",
+  0.5894448481870038,
   5e-7
  ],
  [

@@ -94,8 +94,8 @@ try:
     k3, _ = O.o_kmeans(nkX, nkS['k'] - 1, seed=nkS['seed'], n_init=10)
     k4, _ = O.o_kmeans(nkX, nkS['k'], seed=nkS['seed'], n_init=10)
     got['nkwelle_elbow_drop_fraction_k4'] = float((F(k3['inertia']) - F(k4['inertia'])) / F(k3['inertia']))
-    got['nkwelle_kmeans_silhouette'] = O.o_silhouette(nkX, k4['labels'])['mean']
     ward, _ = O.o_agglomerative(nkX, 'ward', nkS['k'])
+    got['nkwelle_ward_silhouette'] = O.o_silhouette(nkX, ward['labels'])['mean']
     got['nkwelle_ward_height_above_cut'] = ward['cutHeights']['above']
     comp, _ = O.o_agglomerative(nkX, 'complete', nkS['k'])
     got['nkwelle_complete_ari'] = float(O.o_ari(nkY, comp['labels']))

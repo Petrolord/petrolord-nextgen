@@ -49,11 +49,11 @@ export const GRADED_FIELDS = [
   ['beginner', 'ihiala_kmeans_inertia', 'inertia', 1e-9],
   ['beginner', 'ihiala_row24_cluster_gr_centre_gapi', 'centre', 1e-9],
   // Professional: seven cored wells. JUDGING GROUPS AGAINST CORE: an elbow
-  // drop fraction, a mean silhouette, a Ward merge height at the cut, the
+  // drop fraction, the mean silhouette of the Ward cut, a Ward merge height at the cut, the
   // adjusted Rand index of complete linkage, a one-to-one macro F1 and a
   // majority accuracy.
   ['intermediate', 'nkwelle_elbow_drop_fraction_k4', 'ratio', 1e-9],
-  ['intermediate', 'nkwelle_kmeans_silhouette', 'silhouette', 1e-9],
+  ['intermediate', 'nkwelle_ward_silhouette', 'silhouette', 1e-9],
   ['intermediate', 'nkwelle_ward_height_above_cut', 'height', 1e-9],
   ['intermediate', 'nkwelle_complete_ari', 'index', 1e-9],
   ['intermediate', 'nkwelle_one_to_one_macro_f1', 'accuracy', 1e-9],
