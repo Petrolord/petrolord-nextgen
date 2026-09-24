@@ -162,6 +162,6 @@
    "It can be switched off by passing maxCondition 0, which the engine reads as no limit at all"
   ],
   "answer": 2,
-  "explanation": "The boundary table lists `ols`, `ridge` with the rule \"refuse the scaled condition number above maxCondition\" and the boundary \"exactly at the limit is fitted\". A limit below one is refused by name: maxCondition must be a finite number, 1 or more. Raising the limit is how a fit is let through knowingly, as Filip was at 1.00e+10."
+  "explanation": "The boundary table gives `ols` and `ridge` the same rule, a scaled condition number above maxCondition is refused, and the same boundary, \"exactly at the limit is fitted\"; ridge measures its penalised system, and at lambda 0 it refuses the exact copy of NPHI as ols does. A limit below one is refused by name: maxCondition must be a finite number, 1 or more. Raising the limit is how a fit is let through knowingly, as Filip was at 1.00e+10."
  }
 ]

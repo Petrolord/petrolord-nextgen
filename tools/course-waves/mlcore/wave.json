@@ -82,10 +82,10 @@
   "isuama_pred_dt_first_row_us_ft": "least squares, fitted on the training wells only, lambda times n, last row of the well"
  },
  "digest": {
-  "lines": 855,
+  "lines": 908,
   "sections": 26,
-  "md5": "2d71cf480cf6121e6a337b5d61c1bf94",
-  "sha256": "ecaac6970f893d51a717caa3cf5b9fa4e785f0672c366966110c900494fc6db0"
+  "md5": "30e18849443ecc507e50ba743b63ff59",
+  "sha256": "1d50fa63c629d42f209e683558932bc8da74c06bb751f2fa8c3fdd96ed9f8db9"
  },
  "fields": {
   "count": 18,
@@ -180,14 +180,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh dai-wip-mlcore /root/wt-dai-d2-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "d2_dump: 1030 label-and-call, measurement and claim assertions run, 0 failed; 26 sections"
+   "summary": "d2_dump: 1173 label-and-call, measurement and claim assertions run, 0 failed; 26 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-mlcore",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/dai-wip-mlcore/digest.txt: 855 line(s), 26 section title(s) and 59 in-body marker(s) swept against their blocks, 32 history framings, 27 engine pin(s); 0 warned for a human read and 0 framed as curric"
+   "summary": "[digestprose] /root/dai-wip-mlcore/digest.txt: 908 line(s), 26 section title(s) and 68 in-body marker(s) swept against their blocks, 32 history framings, 27 engine pin(s); 0 warned for a human read and 0 framed as curric"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -341,7 +341,7 @@
    "command": "python3 truth_check.py",
    "expected": 0,
    "exit": 0,
-   "summary": "truth_check: truth-mlcore.json (408 digest lines) IS the harvest of digest.txt"
+   "summary": "truth_check: truth-mlcore.json (439 digest lines) IS the harvest of digest.txt"
   },
   "truth_check.py NEGATIVE CONTROL": {
    "md5": "5116966633b97339f55df35ca9682cd7",

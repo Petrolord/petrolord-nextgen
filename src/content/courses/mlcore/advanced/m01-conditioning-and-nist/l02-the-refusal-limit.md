@@ -2,7 +2,7 @@
 
 {{panel:ml-diagnose-explorer}}
 
-The engine refuses a least squares or ridge fit when the scaled condition number of the design is above `maxCondition`. The default is 100000000, which the course writes as 1.00e+8. This lesson shows the refusal on an exact copy of a column, explains why the limit sits there, and brackets it on a published design.
+The engine refuses a least squares fit when the scaled condition number of the design is above `maxCondition`. The default is 100000000, which the course writes as 1.00e+8. Ridge applies the same limit to the system it solves, the standardised features stacked on sqrt(lambda) x I, so it refuses the copied column below at lambda 0 and at 1.00e-14 and fits it at lambda 10, where that number is 7.349273. This lesson shows the refusal on an exact copy of a column, explains why the limit sits there, and brackets it on a published design.
 
 | case | scaled condition number | maxCondition | result |
 | --- | --- | --- | --- |
@@ -24,11 +24,11 @@ A least squares solution can lose up to about kappa^2 x machine epsilon of relat
 
 > 2-norm condition number of the design with unit-length columns; refused above maxCondition 100000000
 
-The limit comes from a worst-case bound, stated in advance. A refusal carries no number of its own. What the engine declines to do is print coefficients whose digits it cannot vouch for. Raising the limit is left to you, and the message asks you to do it knowingly.
+A refusal carries no number of its own. What the engine declines to do is print coefficients whose digits it cannot vouch for. Raising the limit is left to you, and the message asks you to do it knowingly.
 
 ## The limit, bracketed
 
-The NIST Longley design has a scaled condition number of 43275.043587. Set maxCondition to 43000 and the engine refuses it; set it to 44000 and the engine fits it. Those two calls pin the rule from both sides. A value exactly at the limit is fitted: the refusal is for a number strictly above it. That boundary belongs to this rule alone. Each rule in the engine draws its own, and the logistic stopping rule, for instance, is read in a later module.
+The NIST Longley design has a scaled condition number of 43275.043587. Set maxCondition to 43000 and the engine refuses it; set it to 44000 and the engine fits it. Those two calls pin the rule from both sides. A value exactly at the limit is fitted: the refusal is for a number strictly above it. That boundary belongs to this rule alone.
 
 ## Exercise
 

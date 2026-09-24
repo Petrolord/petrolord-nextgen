@@ -114,7 +114,7 @@ q(2, "Which statement about the refusal limit is true of the engine as the cours
  ["It belongs to `ols` alone, since ridge's penalty always makes the design well enough conditioned to fit",
   "It refuses at the limit and above, so a scaled number equal to maxCondition is refused",
   "It can be switched off by passing maxCondition 0, which the engine reads as no limit at all"],
- "The boundary table lists `ols`, `ridge` with the rule \"refuse the scaled condition number above maxCondition\" and the boundary \"exactly at the limit is fitted\". A limit below one is refused by name: maxCondition must be a finite number, 1 or more. Raising the limit is how a fit is let through knowingly, as Filip was at 1.00e+10.")
+ "The boundary table gives `ols` and `ridge` the same rule, a scaled condition number above maxCondition is refused, and the same boundary, \"exactly at the limit is fitted\"; ridge measures its penalised system, and at lambda 0 it refuses the exact copy of NPHI as ols does. A limit below one is refused by name: maxCondition must be a finite number, 1 or more. Raising the limit is how a fit is let through knowingly, as Filip was at 1.00e+10.")
 
 emit(Q, '/root/dai-wip-mlcore/banks/d2a_m01.json', expect_n=15)
 finish()

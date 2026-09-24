@@ -71,7 +71,7 @@ would resolve it.
 
 ## THE REFUSALS, BY NAME
 
-Digest section 3 tables 32 refusals across 18 functions. **Quote the engine's
+Digest section 3 tables 33 refusals across 18 functions. **Quote the engine's
 message in a blockquote.** The ones each tier must teach:
 
 * Associate m01 l05: a missing value in X, a null target, too few rows for the

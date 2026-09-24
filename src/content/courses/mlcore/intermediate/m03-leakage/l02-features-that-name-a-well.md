@@ -8,7 +8,7 @@ Every Ekene well carries four well-level attributes: easting, northing, kb and m
 
 Each Ekene well has its own sonic offset, a block shift of every DT sample in that well. The logs cannot see it: it is not written in the gamma ray, the density or the neutron. A model given the attributes can learn it anyway, because a combination of four numbers that is constant down a well is enough to give each training well its own level.
 
-That is harmless only if the test well's offset was never in training. Under a random-row split it always was. At test fraction 0.3 and seed 5 the random-row split puts rows of all 9 wells on both sides. The model learns each well's offset from that well's training rows, through the attributes, and meets the same offset again in the test rows.
+That is harmless only if the test well's offset was never in training. Under a random-row split it was, on every one of the 12 seeds the course runs: at test fraction 0.3 each of seeds 1 to 12 puts rows of all 9 wells on both sides. The model learns each well's offset from that well's training rows, through the attributes, and meets the same offset again in the test rows.
 
 ## The Ekene demonstration
 

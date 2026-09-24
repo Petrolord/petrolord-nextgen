@@ -314,6 +314,7 @@ const REFUSALS = [
   ['logistic', { X: [[1], [2], [3]], y: [0, 1, 2] }, 'y[2]', 'a label other than 0 and 1'],
   ['logistic', { X: [[0.1], [0.2], [0.3], [0.4]], y: [0, 0, 1, 1] }, 'y', 'labels a threshold splits exactly'],
   ['logistic', { X: [[1], [2], [3]], y: [0, 1, 0], tol: 0 }, 'tol', 'a tolerance of zero'],
+  ['logistic', { X: XP10.map((r) => [...r, 2 * r[1]]), y: PAY10, names: [...PAYF, 'NPHI2'] }, 'X', `l2 0 (the default) on RHOB, NPHI, RT and a fourth column exactly twice NPHI, all ${ROWS.length} rows, target PAY`],
   ['solveSPD', { A: [[1, 2], [2, 4]], b: [1, 2] }, 'A', 'a rank one matrix'],
   ['predict', { model: { kind: 'tree', coefficients: [1] }, X: [[1]] }, 'model', 'something that is not a fitted model'],
   ['regressionMetrics', { yTrue: [70, 70], yPred: [69, 71] }, 'yTrue', 'a test target that never varies'],
@@ -338,6 +339,10 @@ const r0 = ML.ols({ X: X(NEAR, LOGS), y: NEAR.map((r) => r.DT), names: LOGS });
 planted(3, r0.field === 'y[20]' && firstNull === T.WELL_IDS.indexOf(T.NO_SONIC_WELL) * T.N_PER_WELL, `${r0.field} at ${firstNull}`);
 w();
 w(`The no-sonic target is refused at the first null it meets. The first ${T.NO_SONIC_WELL} sample is dataset row ${firstNull}, counting from 0; passing the forty rows from ${firstNull - 20} to ${firstNull + 19}, the last twenty of ${T.WELL_IDS[T.WELL_IDS.indexOf(T.NO_SONIC_WELL) - 1]} and the first twenty of ${T.NO_SONIC_WELL}, gives the refusal at \`y[20]\`, the twenty-first row passed.`);
+w();
+const lgCopyL2 = ML.logistic({ X: XP10.map((r) => [...r, 2 * r[1]]), y: PAY10, names: [...PAYF, 'NPHI2'], l2: 1 });
+must('the doubled-NPHI pay design is fitted at l2 1', !lgCopyL2.error, lgCopyL2.error || 'fitted');
+w('THE UNPENALISED LOGISTIC FIT HAS ITS OWN CONDITION REFUSAL. At l2 = 0 `logistic` measures the scaled condition number of its design and refuses above the fixed limit ' + eX(ML.DEFAULTS.MAX_CONDITION) + ' (it takes no maxCondition); the row above is that refusal. Any l2 above 0 skips this check: the same design at l2 1 is fitted.');
 w();
 w('Two more refusals are the Expert tier\'s subject and sit where it teaches them: an ill-conditioned design in ' + ref('conditioning') + ' and separated labels in ' + ref('separation') + '. A logistic fit that stops before it converges returns a result with a `warning`, in ' + ref('convergence') + '.');
 
@@ -520,6 +525,51 @@ const MN = success('regressionMetrics worse than the mean (golden)', ML.regressi
 w(`R-SQUARED CAN BE NEGATIVE. The engine's own case (golden \`metrics-worse-than-mean\`): yTrue ${list(NEG.args.yTrue.map(S))} against yPred ${list(NEG.args.yPred.map(S))} gives RMSE ${f6(MN.rmse)}, MAE ${f6(MN.mae)} and R-squared ${f6(MN.r2)}. A negative value means the predictions do worse than the reference mean would.`);
 must('the golden worse-than-mean case reads a negative R-squared', MN.r2 < 0, MN.r2);
 must('the golden worse-than-mean MAE is four thirds', Math.abs(MN.mae - 4 / 3) < 1e-15, MN.mae);
+w();
+// R-squared about the test rows' own mean against about the training mean
+w(`WHY THE TWO TEST R-SQUARED VALUES DIFFER. Both share one SSE, ${f6(MT.sse)}; only the denominator moves. The sum of squares about the test rows' own mean is ${f6(MT.sst)} (the engine's \`sst\`) and about the training mean ${f6(MTref.sst)}. A sum of squared deviations is smallest about the rows' own mean, so about any other reference the denominator is larger and the R-squared higher: ${f6(MT.r2)} against ${f6(MTref.r2)} here.`);
+must('the two test fits share one SSE', MT.sse === MTref.sse, `${MT.sse} ${MTref.sse}`);
+must('the sum of squares about the training mean exceeds that about the test mean', MTref.sst > MT.sst && MTref.r2 > MT.r2, `${MT.sst} ${MTref.sst}`);
+w();
+// RMSE against MAE
+const PAIRS = [MTR, MT, MTref, MN];
+must('the first table and the worse-than-mean case have RMSE above MAE', PAIRS.every((m) => m.rmse > m.mae), PAIRS.map((m) => `${m.rmse}/${m.mae}`).join(' '));
+let ulp = null;
+for (const d of [0.1, 0.3, 0.7, 1.1]) {
+  for (let n = 2; n <= 60 && !ulp; n += 1) {
+    const yT = Array.from({ length: n }, (_, i) => (i % 2) * 2 * d);
+    const yP = yT.map(() => d);
+    const miss = yT.map((v, i) => Math.abs(v - yP[i]));
+    if (!miss.every((m) => m === miss[0])) continue;
+    const m = ML.regressionMetrics({ yTrue: yT, yPred: yP });
+    if (!m.error && m.rmse < m.mae) ulp = { d, n, m, miss: miss[0] };
+  }
+  if (ulp) break;
+}
+must('an equal-miss case with RMSE below MAE in float is found', !!ulp, ulp ? `${ulp.d} ${ulp.n}` : 'none');
+if (ulp) success('regressionMetrics, equal misses', ulp.m);
+w(`RMSE AGAINST MAE. The mean of the squared misses is at least the square of the mean miss, so in exact arithmetic RMSE is at least MAE, and the two are equal only when every miss has one size. The three rows of the first table and the worse-than-mean case all read RMSE above MAE. The engine works in floating point, so UP TO ROUNDING is part of the rule: yTrue alternating 0 and ${ulp ? S(2 * ulp.d) : '?'} over ${ulp ? ulp.n : '?'} rows, with every prediction ${ulp ? S(ulp.d) : '?'} (every miss the same double, asserted), returns an RMSE below the MAE by ${ulp ? eX(ulp.m.mae - ulp.m.rmse) : '?'} (derived), a difference in the last digit.`);
+w();
+const BUMP = 20; // a stated input: the one prediction moved, us/ft
+const bumped = PRT.values.map((v, i) => (i === 0 ? v + BUMP : v));
+const MB = success('regressionMetrics, test wells, first prediction 20 us/ft higher', ML.regressionMetrics({ yTrue: yTe, yPred: bumped }));
+must('one large miss raises RMSE more than MAE', MB.rmse - MT.rmse > MB.mae - MT.mae && MB.mae > MT.mae, `${MB.rmse - MT.rmse} ${MB.mae - MT.mae}`);
+w(`ONE LARGE MISS. Move only the first test row's prediction ${S(BUMP)} us/ft higher and score the ${MB.n} test rows again: RMSE goes from ${f6(MT.rmse)} to ${f6(MB.rmse)} and MAE from ${f6(MT.mae)} to ${f6(MB.mae)}, rises of ${f6(MB.rmse - MT.rmse)} and ${f6(MB.mae - MT.mae)} us/ft (derived). Squaring weighs the one large miss more.`);
+w();
+// a refused metrics call withholds every metric
+const RMA1 = { yTrue: [5], yPred: [4] };
+const RMA2 = { yTrue: [70, 70], yPred: [69, 71], referenceMean: 71 };
+const RMA3 = { ...RMA2, referenceMean: 70 };
+const RM1 = refusal('regressionMetrics on one row', ML.regressionMetrics(RMA1), 'yTrue');
+const RM2 = success('regressionMetrics, a constant target, referenceMean 71', ML.regressionMetrics(RMA2));
+const RM3 = refusal('regressionMetrics, a constant target equal to referenceMean', ML.regressionMetrics(RMA3), 'yTrue');
+w(`A REFUSED METRICS CALL RETURNS NO METRIC. \`regressionMetrics\` refuses the WHOLE call when the sum of squares about its reference is zero, so a refused call carries no RMSE and no MAE either, although both are defined on those rows. Without \`referenceMean\` that is any test set whose targets are all equal, one row included; with \`referenceMean\` the refusal comes only when every target equals it:`);
+w();
+table(['call', 'field named', 'what the engine returned'], [
+  [`yTrue [${list(RMA1.yTrue.map(S))}], yPred [${list(RMA1.yPred.map(S))}]`, `\`${RM1.field}\``, RM1.error],
+  [`yTrue [${list(RMA2.yTrue.map(S))}], yPred [${list(RMA2.yPred.map(S))}], referenceMean ${S(RMA2.referenceMean)}`, 'none', `RMSE ${num(RM2.rmse)}, MAE ${num(RM2.mae)}, R-squared ${num(RM2.r2)}`],
+  [`yTrue [${list(RMA3.yTrue.map(S))}], yPred [${list(RMA3.yPred.map(S))}], referenceMean ${S(RMA3.referenceMean)}`, `\`${RM3.field}\``, RM3.error],
+]);
 
 /* ============================================================ SECTION 9 */
 
@@ -567,6 +617,7 @@ w('Which well is held out changes the score. One well at a time, seed by seed (e
 w();
 const heldRows = [];
 const HELD = {};
+const HELDV = {};
 const seenWell = new Set();
 for (let s = 1; heldRows.length < 5 && s < 50; s += 1) {
   const h = success(`groupSplit one well seed ${s}`, ML.groupSplit({ groups: G9, nTestGroups: 1, seed: s }));
@@ -575,9 +626,13 @@ for (let s = 1; heldRows.length < 5 && s < 50; s += 1) {
   const o = success(`ols one well seed ${s}`, ML.ols({ X: pick(XL9, h.trainIndices), y: pick(Y9, h.trainIndices) }));
   const m = success(`metrics one well seed ${s}`, ML.regressionMetrics({ yTrue: pick(Y9, h.testIndices), yPred: ML.predict({ model: o, X: pick(XL9, h.testIndices) }).values }));
   HELD[h.testGroups[0]] = m.rmse;
-  heldRows.push([S(s), h.testGroups[0], f6(m.rmse), f6(m.mae), f6(m.r2)]);
+  heldRows.push([S(s), h.testGroups[0], f6(m.rmse), f6(m.mae), f6(m.r2), f6(m.sst), f6(m.sst / m.n)]);
+  HELDV[h.testGroups[0]] = m.sst / m.n;
+  must(`the held-out well ${h.testGroups[0]} has ${T.N_PER_WELL} rows`, m.n === T.N_PER_WELL, m.n);
 }
-table(['seed, stated', 'held-out well', 'RMSE (us/ft)', 'MAE (us/ft)', 'R-squared about the well\'s own mean'], heldRows);
+table(['seed, stated', 'held-out well', 'RMSE (us/ft)', 'MAE (us/ft)', 'R-squared about the well\'s own mean', 'DT sum of squares about the well\'s own mean (`sst`)', `DT variance about the well's own mean, sst / ${T.N_PER_WELL} (derived, population)`], heldRows);
+w();
+w('THE SPREAD OF THE TARGET SETS THE OWN-MEAN R-SQUARED. R-squared about a well\'s own mean is 1 - SSE / sst, so one RMSE reads as a lower R-squared on a well whose DT varies less. The two right-hand columns print that spread for each held-out well.');
 w();
 w('The first seed that holds out each of five different wells is listed. A single held-out well is one reading of how the model does on a new well, and ' + ref('kfold') + ' averages over every well.');
 w();
@@ -718,6 +773,10 @@ table(['seed', 'logs: random-row test RMSE', 'logs: group test RMSE', 'logs: opt
   LK.map(({ sd, a, b }) => [S(sd), f6(a.randomRow.testScore), f6(a.group.testScore), f6(a.optimism), f6(b.randomRow.testScore), f6(b.group.testScore), f6(b.optimism)]));
 const posA = LK.filter((x) => x.b.optimism > 0).length;
 const negL = LK.filter((x) => x.a.optimism < 0).length;
+const posLs = LK.filter((x) => x.a.optimism > 0).map((x) => x.sd);
+const zeroL = LK.filter((x) => x.a.optimism === 0).length;
+must('positive, negative and zero logs-only optimisms count to the seeds', posLs.length + negL + zeroL === LEAK_SEEDS.length, `${posLs.length} ${negL} ${zeroL}`);
+const allShared = LK.filter((x) => x.b.randomRow.sharedGroups.length === SONIC_WELLS.length).length;
 const betterRR = LK.filter((x) => x.b.randomRow.testScore < x.a.randomRow.testScore).length;
 const worseG = LK.filter((x) => x.b.group.testScore > x.a.group.testScore).length;
 planted(1, posA === LEAK_SEEDS.length, `${posA}`);
@@ -729,9 +788,20 @@ must('adding the attributes raises the group RMSE on every seed', worseG === LEA
 w();
 const L5a = LK.find((x) => x.sd === SEED).a;
 const L5b = LK.find((x) => x.sd === SEED).b;
-w(`WHY. The four attributes are constant down each well, so together they name the well. Under a random-row split every well has rows on both sides (\`sharedGroups\` lists ${L5b.randomRow.sharedGroups.length} wells at seed ${S(SEED)}), and the model learns each well's sonic offset (${ref('residuals')}) from its training rows and meets it again in the test rows. Under a group split the test wells' offsets are absent from the training rows, and the attribute coefficients fitted to six wells extrapolate. At seed ${S(SEED)}: with the attributes, random-row RMSE ${f6(L5b.randomRow.testScore)} against group RMSE ${f6(L5b.group.testScore)}; on the logs alone, ${f6(L5a.randomRow.testScore)} against ${f6(L5a.group.testScore)}.`);
+w(`WHY. The four attributes are constant down each well, so together they name the well. Under a random-row split every well has rows on both sides (\`sharedGroups\` lists ${L5b.randomRow.sharedGroups.length} wells at seed ${S(SEED)}, and all ${SONIC_WELLS.length} on ${allShared} of the ${LEAK_SEEDS.length} seeds run here), and the model learns each well's sonic offset (${ref('residuals')}) from its training rows and meets it again in the test rows. Under a group split the test wells' offsets are absent from the training rows, and the attribute coefficients fitted to six wells extrapolate. At seed ${S(SEED)}: with the attributes, random-row RMSE ${f6(L5b.randomRow.testScore)} against group RMSE ${f6(L5b.group.testScore)}; on the logs alone, ${f6(L5a.randomRow.testScore)} against ${f6(L5a.group.testScore)}.`);
 w();
-w(`A RANDOM SPLIT DOES NOT ALWAYS FLATTER. On the logs alone no feature names a well, the model cannot learn a well's offset, and the random-row score is neither systematically better nor worse: the optimism is negative on ${negL} of the ${LEAK_SEEDS.length} seeds and positive on the rest, as the draw of test wells falls. Leakage needs a path from the test rows' identity to the prediction.`);
+w(`A RANDOM SPLIT DOES NOT ALWAYS FLATTER. On the logs alone no feature names a well, the model cannot learn a well's offset, and the random-row score is neither systematically better nor worse: the optimism is negative on ${negL} of the ${LEAK_SEEDS.length} seeds, positive on ${posLs.length} (seeds ${list(posLs.map(S))}) and exactly zero on ${zeroL === 0 ? 'none' : S(zeroL)}, as the draw of test wells falls. Leakage needs a path from the test rows' identity to the prediction.`);
+w();
+w(`ONE WELL-CONSTANT COLUMN. The same demonstration on the three logs plus ONE of the four attributes at a time (OLS, test fraction ${S(TF)}, the same ${LEAK_SEEDS.length} seeds), optimism in us/ft:`);
+w();
+const LK1 = ATTRS.map((a) => {
+  const Xa = X(SONIC, [...LOGS, a]);
+  return [a, LEAK_SEEDS.map((sd) => success(`leakageDemo logs and ${a} seed ${sd}`, ML.leakageDemo({ X: Xa, y: Y9, groups: G9, model: { kind: 'ols' }, testFraction: TF, seed: sd, metric: 'rmse' })).optimism)];
+});
+table(['seed', ...LK1.map(([a]) => `logs and ${a}`), 'logs alone'], LEAK_SEEDS.map((sd, i) => [S(sd), ...LK1.map(([, o]) => f6(o[i])), f6(LK[i].a.optimism)]));
+w();
+w(`Positive optimism, counted over the ${LEAK_SEEDS.length} seeds (derived): ${LK1.map(([a, o]) => `logs and ${a} ${o.filter((v) => v > 0).length}`).join(', ')}; logs alone ${posLs.length}. One column constant down each well can open the path, and whether a given set of seeds shows it depends on the draw.`);
+must('logs and kb is positive on more seeds than the logs alone', LK1.find(([a]) => a === 'kb')[1].filter((v) => v > 0).length > posLs.length, 'kb');
 w();
 w(`THE ENGINE'S OWN WORDS on the two splits: "${L5a.basis.randomRow}"; "${L5a.basis.group}".`);
 w();
@@ -789,6 +859,19 @@ const rPay = pearson(payRows.map((r) => r.RHOB), payRows.map((r) => r.NPHI));
 must('the two correlations are finite and between -1 and 1', [rAll, rPay].every((v) => Number.isFinite(v) && Math.abs(v) <= 1), `${rAll} ${rPay}`);
 w();
 w(`RHOB AND NPHI MOVE TOGETHER. The Pearson correlation of RHOB and NPHI (derived here with the stated formula sum (a - mean a)(b - mean b) / sqrt(sum (a - mean a)^2 x sum (b - mean b)^2); the engine exports no correlation) is ${f6(rAll)} over the ${trRows.length} training rows of the pay model and ${f6(rPay)} over the ${payRows.length} of them with PAY = 1. A coefficient that holds one fixed while the other moves describes a direction these rows rarely take.`);
+w();
+const LGnoN = success('logistic, RHOB and RT, training wells', ML.logistic({ X: pick(X(ROWS, ['RHOB', 'RT']), PTR), y: pick(PAY10, PTR), names: ['RHOB', 'RT'] }));
+const LGnoR = success('logistic, NPHI and RT, training wells', ML.logistic({ X: pick(X(ROWS, ['NPHI', 'RT']), PTR), y: pick(PAY10, PTR), names: ['NPHI', 'RT'] }));
+must('both partner-free fits converged without separation', LGnoN.converged && LGnoR.converged && LGnoN.separation.type === 'none' && LGnoR.separation.type === 'none', 'converged');
+w(`WHAT THE PARTNER COSTS IN STANDARD ERROR. The same fit on the same ${LG.n} training rows with the partner log left out:`);
+w();
+table(['coefficient', 'standard error with RHOB, NPHI and RT', 'standard error without its partner', 'fit without the partner'], [
+  ['RHOB', f6(LG.standardErrors[1]), f6(LGnoN.standardErrors[1]), 'RHOB and RT'],
+  ['NPHI', f6(LG.standardErrors[2]), f6(LGnoR.standardErrors[1]), 'NPHI and RT'],
+]);
+must('each standard error is larger beside its correlated partner', LG.standardErrors[1] > LGnoN.standardErrors[1] && LG.standardErrors[2] > LGnoR.standardErrors[1], `${LG.standardErrors[1]} ${LGnoN.standardErrors[1]} ${LG.standardErrors[2]} ${LGnoR.standardErrors[1]}`);
+w();
+w('Each standard error is larger with its correlated partner in the model than without it.');
 w();
 w(`The deviance fell from ${f6(LG.nullDeviance)} (intercept only) to ${f6(LG.deviance)} with the three features. The standard errors are the square roots of the diagonal of the inverse information at the solution; the basis says: "${LG.basis.standardErrors}".`);
 w();
@@ -935,6 +1018,18 @@ w(`AN EXACT COPY. Add a fifth column that is exactly twice NPHI. The scaled cond
 w();
 w(`> ${COLr.error}`);
 must('the doubled column drives the scaled condition number above 1e13', COL.scaledConditionNumber > 1e13, COL.scaledConditionNumber);
+w();
+const COPYX = trM(LOGS).map((r) => [...r, 2 * r[2]]);
+const COPYN = [...LOGS, 'NPHI2'];
+const LAM_COPY = [0, 10, 1e-12, 1e-14]; // stated inputs: the ridge lambdas run on the exact copy
+const RC0 = refusal('ridge lambda 0 with a column twice NPHI', ML.ridge({ X: COPYX, y: yTr, lambda: LAM_COPY[0], names: COPYN }), 'X');
+const RC10 = success('ridge lambda 10 with a column twice NPHI', ML.ridge({ X: COPYX, y: yTr, lambda: LAM_COPY[1], names: COPYN }));
+const RCs = success('ridge lambda 1e-12 with a column twice NPHI', ML.ridge({ X: COPYX, y: yTr, lambda: LAM_COPY[2], names: COPYN }));
+const RCt = refusal('ridge lambda 1e-14 with a column twice NPHI', ML.ridge({ X: COPYX, y: yTr, lambda: LAM_COPY[3], names: COPYN }), 'X');
+must('ridge refusal ladder on the exact copy', RC10.scaledConditionNumber <= ML.DEFAULTS.MAX_CONDITION && RCs.scaledConditionNumber <= ML.DEFAULTS.MAX_CONDITION, `${RC10.scaledConditionNumber} ${RCs.scaledConditionNumber}`);
+w(`RIDGE MEASURES THE PENALISED SYSTEM. \`ridge\` refuses on the same rule and the same default, but the number it measures is the scaled condition number of the system it solves: the standardised, centred features stacked on p rows of sqrt(lambda) x I, [Z; sqrt(lambda) I]. The penalty rows make that system full rank at any lambda above 0, and how far it sits from singular depends on lambda. On the exact-copy design above: at lambda 0 ridge is refused as ols is; at lambda ${S(LAM_COPY[1])} it is fitted with a scaled condition number of ${f6(RC10.scaledConditionNumber)}; at lambda ${eX(LAM_COPY[2])} it is fitted at ${f6(RCs.scaledConditionNumber)}; at lambda ${eX(LAM_COPY[3])} it is refused again. The engine's words at lambda 0:`);
+w();
+w(`> ${RC0.error}`);
 w();
 const kap2 = ML.DEFAULTS.MAX_CONDITION ** 2 * Number.EPSILON;
 w(`WHY ${eX(ML.DEFAULTS.MAX_CONDITION)}. A least squares solution can lose up to about kappa^2 x machine epsilon of relative accuracy in the worst case. At kappa = ${eX(ML.DEFAULTS.MAX_CONDITION)}, kappa^2 x ${S(Number.EPSILON)} = ${f6(kap2)} (derived): the worst-case error bound reaches the size of the coefficient, so no digit of some coefficient can be guaranteed. The basis says: "${OL.basis.scaledConditionNumber}".`);
@@ -1188,7 +1283,9 @@ table(['function', 'rule', 'boundary', 'shown by'], [
   ['`groupSplit`, `randomRowSplit`', 'test size ceil(f x count)', `a product within ${eX(ML.DEFAULTS.WHOLE_TOL)} of a whole number is that number`, `the golden product holds out the whole number (${ref('shuffle')})`],
   ['`groupKFold`', '2 <= k <= number of groups', 'k equal to the number of groups is allowed (leave one out)', `k ${ids9.length} on nine wells is fitted; k ${ids9.length + 1} is refused (${ref('kfold')}, ${ref('refusals')})`],
   ['`ols`', 'more rows than coefficients', 'n = p is refused', `${NP_X.length - 1} rows for ${NP_X[0].length + 1} coefficients refused; ${NP_X.length} rows fitted, residual degrees of freedom ${bNp1.dfResidual}`],
-  ['`ols`, `ridge`', 'refuse the scaled condition number above maxCondition', 'exactly at the limit is fitted', `Longley refused at ${S(LB1.args.maxCondition)}, fitted at ${S(LB2.args.maxCondition)} (${ref('conditioning')})`],
+  ['`ols`', 'refuse the scaled condition number of the design above maxCondition', 'exactly at the limit is fitted', `Longley refused at ${S(LB1.args.maxCondition)}, fitted at ${S(LB2.args.maxCondition)} (${ref('conditioning')})`],
+  ['`ridge`', 'refuse the scaled condition number of the penalised system [Z; sqrt(lambda) I] above maxCondition', 'exactly at the limit is fitted; lambda 0 measures the standardised design alone', `a column twice NPHI refused at lambda 0 and ${eX(LAM_COPY[3])}, fitted at lambda ${eX(LAM_COPY[2])} and ${S(LAM_COPY[1])} (${ref('conditioning')})`],
+  ['`logistic` at l2 = 0', `refuse the scaled condition number of the design above the fixed ${eX(ML.DEFAULTS.MAX_CONDITION)}`, 'no maxCondition option; any l2 above 0 skips the check', `the pay design with a column twice NPHI (${ref('refusals')})`],
   ['`logistic`', 'converged when the largest full Newton step is at most tol', 'inclusive', `the pay fit stops at a step of ${eX(lastT.maxChange)} (${ref('convergence')})`],
   ['`logistic`', 'halve a step that lowers the penalised log likelihood', 'a fall of more than 1e-12 x (1 + |l|); strict', `the pay fit halved ${LG.stepHalvings} times`],
   ['`solveSPD`', 'singular', 'a diagonal entry at or below zero, or a scaled pivot at or below p x machine epsilon; inclusive', `the rank one matrix of ${ref('refusals')}`],

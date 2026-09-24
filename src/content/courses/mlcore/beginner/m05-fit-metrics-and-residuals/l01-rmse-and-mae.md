@@ -11,7 +11,7 @@ Two scores measure how far predictions sit from measured values, and both read i
 
 ## Why two scores
 
-Both answer "how far off, typically". They weigh the misses differently. RMSE squares each miss before averaging, so one large miss counts for more in it than several small ones of the same total size. MAE takes every miss at face value. When a few rows are badly predicted, RMSE rises more than MAE does. When the misses are all of similar size, the two sit close together.
+Both answer "how far off, typically". They weigh the misses differently. RMSE squares each miss before averaging, so one large miss counts for more in it than several small ones of the same total size. MAE takes every miss at face value. When a few rows are badly predicted, RMSE rises more than MAE does: move only the first test row's prediction 20 us/ft higher and the test RMSE rises by 0.695109 us/ft, MAE by 0.222222. When the misses are all of similar size, the two sit close together. Up to rounding, RMSE is never below MAE, and the two meet only when every miss has one size.
 
 Quote both, and a reader can see at a glance whether the error is spread evenly or carried by a few rows.
 
@@ -37,7 +37,7 @@ Each well's RMSE is a statement about that well. The combined test RMSE of 4.282
 
 ## A small case to check by hand
 
-The engine's own worked case sets true values 1, 2 and 3 against predictions 3, 2 and 1. The misses are two, zero and two, so the squared misses are four, zero and four, and RMSE is the root of eight thirds: 1.632993. Work the MAE the same way. Working a case by hand once makes every later figure easier to trust.
+The engine's own worked case sets true values 1, 2 and 3 against predictions 3, 2 and 1. The misses are two, zero and two, so the squared misses are four, zero and four, and RMSE is the root of eight thirds: 1.632993. Work the MAE the same way.
 
 ## Exercise
 

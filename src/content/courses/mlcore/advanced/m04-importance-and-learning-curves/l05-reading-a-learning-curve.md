@@ -17,7 +17,7 @@ The previous lesson built the Ekene learning curve. This one reads it: what the 
 
 ## Two scores that answer different questions
 
-The training score is the fit to wells the model has seen. The test score is the error on wells it has not, which is the one a new well will meet. At one training well they are far apart: 2.749195 on EKENE-2's own rows against 6.766479 on the test wells. A model fitted to one well is fitted to that well's rows, its own offset included. As wells are added the training score rises, to 5.758010 at six wells: the fit now spans several wells' offsets.
+The training score is the fit to wells the model has seen. The test score is the error on wells it has not, which is the one a new well will meet. At one training well they are far apart: 2.749195 on EKENE-2's own rows against 6.766479 on the test wells. A model fitted to one well is fitted to that well's rows, its own offset included. As wells are added the training RMSE rises overall, to 5.758010 at six wells, with one dip at the third well, from 4.351546 to 4.346620: the fit now spans several wells' offsets.
 
 ## Test can beat training
 

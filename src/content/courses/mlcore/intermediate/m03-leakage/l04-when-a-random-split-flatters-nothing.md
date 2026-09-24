@@ -43,4 +43,4 @@ On the logs alone the group test RMSE runs from 3.689898 at seed 8 to 6.424610 a
 
 ## Exercise
 
-Open the random-row against well split view, remove the four attributes so the features are GR, RHOB and NPHI, and keep fraction 0.3. Run seeds 5, 8, 9 and 12 and confirm the optimism for each. Then add back only mudWeight and run the same four seeds. Write down, for each seed, the sign of the optimism with and without mudWeight, and say in one sentence what that one feature changed.
+Open the random-row against well split view, remove the four attributes so the features are GR, RHOB and NPHI, and keep fraction 0.3. Run seeds 5, 8, 9 and 12 and confirm the optimism for each. Then add back only kb, which is constant down each well, and run the same four seeds. Write down, for each seed, the sign of the optimism with and without kb, and say in one sentence what that one feature changed.

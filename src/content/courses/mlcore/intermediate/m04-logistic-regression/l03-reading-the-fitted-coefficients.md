@@ -31,7 +31,7 @@ The engine's basis gives the standard errors in its own words: "sqrt(diag((X'WX)
 
 ## Holding the others fixed
 
-Every reading above holds the other two features fixed. When two features tend to move together, a coefficient that holds one fixed while the other varies describes a direction the rows rarely take, and its standard error grows. On the 210 training rows RHOB and NPHI have a correlation of -0.563498, and -0.405407 on the 70 pay rows among them, and the standard error shows what that costs.
+Every reading above holds the other two features fixed. When two features tend to move together, a coefficient that holds one fixed while the other varies describes a direction the rows rarely take, and its standard error grows. On the 210 training rows RHOB and NPHI have a correlation of -0.563498, and -0.405407 on the 70 pay rows among them, and the standard error shows what that costs. Without its partner, RHOB's standard error is 4.830472 against 5.414154, and NPHI's 13.409607 against 15.424455.
 
 ## Units in the logistic view
 

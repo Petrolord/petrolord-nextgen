@@ -22,21 +22,23 @@ On the three held-out wells of the teaching split, EKENE-4, EKENE-5 and EKENE-8,
 
 Passing the training mean as `referenceMean` asks a different question: how much better does the model do than simply predicting the training average for a new well? That is the out-of-sample convention. About the training mean, 105.883333 us/ft, the same predictions give 0.816151.
 
-The two differ because the denominators differ. The misses in the numerator are identical, and so are the RMSE and MAE, 4.282693 and 3.526103 on both rows of the table. Only the yardstick changed. Neither is wrong. They are two named measurements, and a reader handed an unnamed R-squared cannot tell which one they have.
+The two differ because the denominators differ. The sum of squares about the test rows' own mean is 8938.451222, and about the training mean 8978.718333. Squared deviations sum smallest about the rows' own mean, so any other reference gives a larger denominator and a higher R-squared. The misses in the numerator are identical, and so are the RMSE and MAE, 4.282693 and 3.526103 on both rows of the table. Only the yardstick changed. Neither is wrong. They are two named measurements, and a reader handed an unnamed R-squared cannot tell which one they have.
 
 ## Rows and reference, every time
 
-Three different R-squared values belong to one fitted plane in the table above: the training fit about the training mean, the test wells about their own mean, and the test wells about the training mean. Written in full, each names its rows and its reference. That is the vocabulary rule for this word, and it is not pedantry. Two teams comparing models on "R-squared" can differ in the third decimal for no reason but the reference.
+Three different R-squared values belong to one fitted plane in the table above: the training fit about the training mean, the test wells about their own mean, and the test wells about the training mean. Written in full, each names its rows and its reference. Two teams comparing models on "R-squared" can differ in the third decimal for no reason but the reference.
 
-Scored well by well, each held-out well can also be taken about its own mean: 0.735001 for EKENE-4, 0.774561 for EKENE-5 and 0.855184 for EKENE-8. Each is a statement about how the plane follows that well's variation around that well's own average.
+Scored well by well, each held-out well can also be taken about its own mean: 0.735001 for EKENE-4, 0.774561 for EKENE-5 and 0.855184 for EKENE-8.
 
 ## Below zero
 
-R-squared is not bounded below. The engine's own case sets true values 1, 2 and 3 against predictions 3, 2 and 1, and gets R-squared -3.000000. A negative value means the predictions do worse than the reference mean would. It is a real result and the engine prints it as it is.
+R-squared is not bounded below. The engine's own case sets true values 1, 2 and 3 against predictions 3, 2 and 1, and gets R-squared -3.000000. A negative value means the predictions do worse than the reference mean would.
 
 A test set whose target never varies has nothing to measure variation against, and the engine refuses:
 
 > yTrue has zero variance (every value is equal), so R-squared about its mean is undefined
+
+The whole call is refused, so no RMSE or MAE comes back either, even from a single row.
 
 ## Exercise
 

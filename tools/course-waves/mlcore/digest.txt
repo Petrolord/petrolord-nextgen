@@ -144,6 +144,7 @@ Each row is a real call. The message column is the engine's `error` string, verb
 | `logistic` | a label other than 0 and 1 | `y[2]` | y[2] must be 0 or 1 |
 | `logistic` | labels a threshold splits exactly | `y` | y is completely separated by a linear combination of the features (every row lies strictly on its own class side of a hyperplane), so the maximum likelihood coefficients are infinite: add an L2 penalty (l2 > 0) or remove the separating feature |
 | `logistic` | a tolerance of zero | `tol` | tol must be a finite number above zero |
+| `logistic` | l2 0 (the default) on RHOB, NPHI, RT and a fourth column exactly twice NPHI, all 300 rows, target PAY | `X` | X is rank deficient or too ill-conditioned for an unpenalised fit: the scaled condition number 16047951301264036 is above 100000000; add an L2 penalty (l2 > 0) or drop collinear features |
 | `solveSPD` | a rank one matrix | `A` | A is singular to working precision: pivot 2 of the Cholesky factorisation of the unit-diagonal scaled matrix is 0, at or below p x machine epsilon = 4.440892098500626e-16 |
 | `predict` | something that is not a fitted model | `model` | model must be the result of ols, ridge or logistic |
 | `regressionMetrics` | a test target that never varies | `yTrue` | yTrue has zero variance (every value is equal), so R-squared about its mean is undefined |
@@ -154,9 +155,11 @@ Each row is a real call. The message column is the engine's `error` string, verb
 | `learningCurve` | counts that do not rise | `trainGroupCounts[1]` | trainGroupCounts[1] must be larger than the count before it |
 | `leakageDemo` | no well names | `groups` | groups must be an array of group ids, one per row |
 
-32 refusals are tabled above, across 18 functions.
+33 refusals are tabled above, across 18 functions.
 
 The no-sonic target is refused at the first null it meets. The first EKENE-6 sample is dataset row 150, counting from 0; passing the forty rows from 130 to 169, the last twenty of EKENE-5 and the first twenty of EKENE-6, gives the refusal at `y[20]`, the twenty-first row passed.
+
+THE UNPENALISED LOGISTIC FIT HAS ITS OWN CONDITION REFUSAL. At l2 = 0 `logistic` measures the scaled condition number of its design and refuses above the fixed limit 1.00e+8 (it takes no maxCondition); the row above is that refusal. Any l2 above 0 skips this check: the same design at l2 1 is fitted.
 
 Two more refusals are the Expert tier's subject and sit where it teaches them: an ill-conditioned design in section 17 and separated labels in section 19. A logistic fit that stops before it converges returns a result with a `warning`, in section 20.
 
@@ -296,6 +299,20 @@ One split is one draw of wells; section 12 tests every well once.
 
 R-SQUARED CAN BE NEGATIVE. The engine's own case (golden `metrics-worse-than-mean`): yTrue 1, 2, 3 against yPred 3, 2, 1 gives RMSE 1.632993, MAE 1.333333 and R-squared -3.000000. A negative value means the predictions do worse than the reference mean would.
 
+WHY THE TWO TEST R-SQUARED VALUES DIFFER. Both share one SSE, 1650.730996; only the denominator moves. The sum of squares about the test rows' own mean is 8938.451222 (the engine's `sst`) and about the training mean 8978.718333. A sum of squared deviations is smallest about the rows' own mean, so about any other reference the denominator is larger and the R-squared higher: 0.815322 against 0.816151 here.
+
+RMSE AGAINST MAE. The mean of the squared misses is at least the square of the mean miss, so in exact arithmetic RMSE is at least MAE, and the two are equal only when every miss has one size. The three rows of the first table and the worse-than-mean case all read RMSE above MAE. The engine works in floating point, so UP TO ROUNDING is part of the rule: yTrue alternating 0 and 0.2 over 3 rows, with every prediction 0.1 (every miss the same double, asserted), returns an RMSE below the MAE by 1.39e-17 (derived), a difference in the last digit.
+
+ONE LARGE MISS. Move only the first test row's prediction 20 us/ft higher and score the 90 test rows again: RMSE goes from 4.282693 to 4.977801 and MAE from 3.526103 to 3.748326, rises of 0.695109 and 0.222222 us/ft (derived). Squaring weighs the one large miss more.
+
+A REFUSED METRICS CALL RETURNS NO METRIC. `regressionMetrics` refuses the WHOLE call when the sum of squares about its reference is zero, so a refused call carries no RMSE and no MAE either, although both are defined on those rows. Without `referenceMean` that is any test set whose targets are all equal, one row included; with `referenceMean` the refusal comes only when every target equals it:
+
+| call | field named | what the engine returned |
+| --- | --- | --- |
+| yTrue [5], yPred [4] | `yTrue` | yTrue has zero variance (every value is equal), so R-squared about its mean is undefined |
+| yTrue [70, 70], yPred [69, 71], referenceMean 71 | none | RMSE 1, MAE 1, R-squared 0 |
+| yTrue [70, 70], yPred [69, 71], referenceMean 70 | `yTrue` | yTrue equals referenceMean 70 in every row, so R-squared is undefined |
+
 # SECTION 9: Residuals, well by well (owned by Associate m05 l03)
 
 A residual is y - yhat for one row. Fitted on all 270 sonic rows (GR, RHOB, NPHI), the OLS residuals are grouped here by well. The mean residual of a well is derived: the arithmetic mean of that well's 30 engine residuals. The generator's planted offset for each well (stated, section 2) is printed beside it, less the mean offset of the nine wells, because the intercept absorbs that mean.
@@ -330,13 +347,15 @@ The whole workflow in order, on the Ekene sonic wells, with every call the engin
 
 Which well is held out changes the score. One well at a time, seed by seed (each a separate call):
 
-| seed, stated | held-out well | RMSE (us/ft) | MAE (us/ft) | R-squared about the well's own mean |
-| --- | --- | --- | --- | --- |
-| 1 | EKENE-8 | 3.765285 | 2.958753 | 0.832560 |
-| 2 | EKENE-5 | 4.547894 | 3.888222 | 0.782233 |
-| 3 | EKENE-2 | 7.260092 | 6.681459 | 0.482707 |
-| 4 | EKENE-3 | 3.564857 | 2.756919 | 0.736197 |
-| 6 | EKENE-7 | 6.502833 | 5.838771 | 0.502611 |
+| seed, stated | held-out well | RMSE (us/ft) | MAE (us/ft) | R-squared about the well's own mean | DT sum of squares about the well's own mean (`sst`) | DT variance about the well's own mean, sst / 30 (derived, population) |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | EKENE-8 | 3.765285 | 2.958753 | 0.832560 | 2540.147000 | 84.671567 |
+| 2 | EKENE-5 | 4.547894 | 3.888222 | 0.782233 | 2849.380000 | 94.979333 |
+| 3 | EKENE-2 | 7.260092 | 6.681459 | 0.482707 | 3056.813667 | 101.893789 |
+| 4 | EKENE-3 | 3.564857 | 2.756919 | 0.736197 | 1445.194667 | 48.173156 |
+| 6 | EKENE-7 | 6.502833 | 5.838771 | 0.502611 | 2550.529667 | 85.017656 |
+
+THE SPREAD OF THE TARGET SETS THE OWN-MEAN R-SQUARED. R-squared about a well's own mean is 1 - SSE / sst, so one RMSE reads as a lower R-squared on a well whose DT varies less. The two right-hand columns print that spread for each held-out well.
 
 The first seed that holds out each of five different wells is listed. A single held-out well is one reading of how the model does on a new well, and section 12 averages over every well.
 
@@ -463,9 +482,28 @@ ROUND ROBIN BALANCES WELLS. With k = 4 on nine wells the folds hold 3, 2, 2, 2 w
 
 Counts over the 12 seeds (derived): with the attributes the optimism is positive on 12; on the logs alone it is negative on 7. Adding the attributes lowers the random-row test RMSE on 12 seeds and raises the group test RMSE on 12.
 
-WHY. The four attributes are constant down each well, so together they name the well. Under a random-row split every well has rows on both sides (`sharedGroups` lists 9 wells at seed 5), and the model learns each well's sonic offset (section 9) from its training rows and meets it again in the test rows. Under a group split the test wells' offsets are absent from the training rows, and the attribute coefficients fitted to six wells extrapolate. At seed 5: with the attributes, random-row RMSE 5.311723 against group RMSE 16.999672; on the logs alone, 6.030242 against 4.282693.
+WHY. The four attributes are constant down each well, so together they name the well. Under a random-row split every well has rows on both sides (`sharedGroups` lists 9 wells at seed 5, and all 9 on 12 of the 12 seeds run here), and the model learns each well's sonic offset (section 9) from its training rows and meets it again in the test rows. Under a group split the test wells' offsets are absent from the training rows, and the attribute coefficients fitted to six wells extrapolate. At seed 5: with the attributes, random-row RMSE 5.311723 against group RMSE 16.999672; on the logs alone, 6.030242 against 4.282693.
 
-A RANDOM SPLIT DOES NOT ALWAYS FLATTER. On the logs alone no feature names a well, the model cannot learn a well's offset, and the random-row score is neither systematically better nor worse: the optimism is negative on 7 of the 12 seeds and positive on the rest, as the draw of test wells falls. Leakage needs a path from the test rows' identity to the prediction.
+A RANDOM SPLIT DOES NOT ALWAYS FLATTER. On the logs alone no feature names a well, the model cannot learn a well's offset, and the random-row score is neither systematically better nor worse: the optimism is negative on 7 of the 12 seeds, positive on 5 (seeds 2, 3, 9, 11, 12) and exactly zero on none, as the draw of test wells falls. Leakage needs a path from the test rows' identity to the prediction.
+
+ONE WELL-CONSTANT COLUMN. The same demonstration on the three logs plus ONE of the four attributes at a time (OLS, test fraction 0.3, the same 12 seeds), optimism in us/ft:
+
+| seed | logs and easting | logs and northing | logs and kb | logs and mudWeight | logs alone |
+| --- | --- | --- | --- | --- | --- |
+| 1 | -0.070246 | 0.970059 | -0.195612 | -0.103589 | -0.047942 |
+| 2 | 0.548199 | 0.934727 | 0.401405 | 1.460600 | 0.760720 |
+| 3 | 0.967406 | 3.490597 | 0.575040 | 0.801837 | 1.082396 |
+| 4 | -1.236190 | -0.098121 | 0.501096 | -1.315990 | -1.004287 |
+| 5 | -1.789716 | -0.903612 | 0.254556 | -1.585794 | -1.747549 |
+| 6 | -0.269996 | 0.873698 | 1.348049 | -0.957850 | -0.810509 |
+| 7 | -0.995964 | -1.551370 | 2.326492 | -0.573070 | -1.511070 |
+| 8 | -1.015725 | -1.739260 | 3.265879 | -0.200461 | -1.838526 |
+| 9 | 1.247962 | 1.922434 | 0.455196 | 0.970279 | 1.220206 |
+| 10 | -1.062500 | -0.798318 | 0.529817 | 4.766968 | -1.090624 |
+| 11 | 1.106407 | 1.452553 | 0.368583 | 1.640220 | 0.560501 |
+| 12 | 1.555562 | 4.165725 | 1.192458 | 1.325836 | 1.256217 |
+
+Positive optimism, counted over the 12 seeds (derived): logs and easting 5, logs and northing 7, logs and kb 11, logs and mudWeight 6; logs alone 5. One column constant down each well can open the path, and whether a given set of seeds shows it depends on the draw.
 
 THE ENGINE'S OWN WORDS on the two splits: "randomRowSplit(testFraction, seed): rows of one well can land on both sides (sharedGroups)"; "groupSplit(testFraction, seed): whole wells held out; the honest estimate for a new well".
 
@@ -506,6 +544,15 @@ Logistic regression models the probability of PAY = 1 as p = 1 / (1 + exp(-eta))
 READING A COEFFICIENT. The RT coefficient 0.241141 is in log odds per ohm.m: one more ohm.m multiplies the odds of pay by exp(0.241141) = 1.272700 (derived), holding RHOB and NPHI fixed. The RHOB coefficient -10.716404 is per g/cm3, a whole unit of density; per 0.01 g/cm3 it is -0.107164 (derived).
 
 RHOB AND NPHI MOVE TOGETHER. The Pearson correlation of RHOB and NPHI (derived here with the stated formula sum (a - mean a)(b - mean b) / sqrt(sum (a - mean a)^2 x sum (b - mean b)^2); the engine exports no correlation) is -0.563498 over the 210 training rows of the pay model and -0.405407 over the 70 of them with PAY = 1. A coefficient that holds one fixed while the other moves describes a direction these rows rarely take.
+
+WHAT THE PARTNER COSTS IN STANDARD ERROR. The same fit on the same 210 training rows with the partner log left out:
+
+| coefficient | standard error with RHOB, NPHI and RT | standard error without its partner | fit without the partner |
+| --- | --- | --- | --- |
+| RHOB | 5.414154 | 4.830472 | RHOB and RT |
+| NPHI | 15.424455 | 13.409607 | NPHI and RT |
+
+Each standard error is larger with its correlated partner in the model than without it.
 
 The deviance fell from 267.335951 (intercept only) to 49.014054 with the three features. The standard errors are the square roots of the diagonal of the inverse information at the solution; the basis says: "sqrt(diag((X'WX)^-1)) at the solution, W = p(1 - p)".
 
@@ -622,6 +669,10 @@ A REHEARSAL ON THE EKENE WELLS, for the Expert capstone brief: the same attribut
 AN EXACT COPY. Add a fifth column that is exactly twice NPHI. The scaled condition number becomes 6.22e+16 (read with maxCondition raised to 1.00e+300 so the number is returned), and at the default the fit is refused. The engine's own words:
 
 > X is too ill-conditioned for a float64 least squares fit: the scaled condition number 62175765717049960 is above maxCondition 100000000, so some coefficients could carry no reliable digits; drop or combine collinear features, centre or rescale them, or raise maxCondition knowingly
+
+RIDGE MEASURES THE PENALISED SYSTEM. `ridge` refuses on the same rule and the same default, but the number it measures is the scaled condition number of the system it solves: the standardised, centred features stacked on p rows of sqrt(lambda) x I, [Z; sqrt(lambda) I]. The penalty rows make that system full rank at any lambda above 0, and how far it sits from singular depends on lambda. On the exact-copy design above: at lambda 0 ridge is refused as ols is; at lambda 10 it is fitted with a scaled condition number of 7.349273; at lambda 1.00e-12 it is fitted at 23024294.205065; at lambda 1.00e-14 it is refused again. The engine's words at lambda 0:
+
+> X is too ill-conditioned for a float64 ridge fit: the scaled condition number 6180422525187563 is above maxCondition 100000000, so some coefficients could carry no reliable digits; drop or combine collinear features, centre or rescale them, or raise maxCondition knowingly
 
 WHY 1.00e+8. A least squares solution can lose up to about kappa^2 x machine epsilon of relative accuracy in the worst case. At kappa = 1.00e+8, kappa^2 x 2.220446049250313e-16 = 2.220446 (derived): the worst-case error bound reaches the size of the coefficient, so no digit of some coefficient can be guaranteed. The basis says: "2-norm condition number of the design with unit-length columns; refused above maxCondition 100000000".
 
@@ -808,7 +859,9 @@ Each rule draws its own boundary; nothing here is global. Every row is a real ca
 | `groupSplit`, `randomRowSplit` | test size ceil(f x count) | a product within 1.00e-9 of a whole number is that number | the golden product holds out the whole number (section 5) |
 | `groupKFold` | 2 <= k <= number of groups | k equal to the number of groups is allowed (leave one out) | k 9 on nine wells is fitted; k 10 is refused (section 12, section 3) |
 | `ols` | more rows than coefficients | n = p is refused | 2 rows for 2 coefficients refused; 3 rows fitted, residual degrees of freedom 1 |
-| `ols`, `ridge` | refuse the scaled condition number above maxCondition | exactly at the limit is fitted | Longley refused at 43000, fitted at 44000 (section 17) |
+| `ols` | refuse the scaled condition number of the design above maxCondition | exactly at the limit is fitted | Longley refused at 43000, fitted at 44000 (section 17) |
+| `ridge` | refuse the scaled condition number of the penalised system [Z; sqrt(lambda) I] above maxCondition | exactly at the limit is fitted; lambda 0 measures the standardised design alone | a column twice NPHI refused at lambda 0 and 1.00e-14, fitted at lambda 1.00e-12 and 10 (section 17) |
+| `logistic` at l2 = 0 | refuse the scaled condition number of the design above the fixed 1.00e+8 | no maxCondition option; any l2 above 0 skips the check | the pay design with a column twice NPHI (section 3) |
 | `logistic` | converged when the largest full Newton step is at most tol | inclusive | the pay fit stops at a step of 1.14e-13 (section 20) |
 | `logistic` | halve a step that lowers the penalised log likelihood | a fall of more than 1e-12 x (1 + |l|); strict | the pay fit halved 0 times |
 | `solveSPD` | singular | a diagonal entry at or below zero, or a scaled pivot at or below p x machine epsilon; inclusive | the rank one matrix of section 3 |
