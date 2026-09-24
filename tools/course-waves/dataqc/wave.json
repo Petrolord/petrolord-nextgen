@@ -1,0 +1,391 @@
+{
+ "slug": "dataqc",
+ "prefix": "d1",
+ "name": "Oilfield Data Quality",
+ "pathOrder": 66,
+ "module": "data_ai",
+ "prerequisite": null,
+ "repo": "/root/wt-dai-d1-nextgen",
+ "branch": "feat/d1-dataqc-course",
+ "goldens": [
+  "dataai/goldens/quality_cases.json"
+ ],
+ "engines": [
+  "engines/dataai/quality.js"
+ ],
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines cc82bf3 (engines PR #248). TWELVE paths walked by vendor_dataqc.sh over a git-archive export of the commit with the jest suite as the only seed: six reached by the walk (the suite, quality.js, lib/stats/stats.js, engines/petrophysics/conditioning.js, engines/hse/safetyStats.js, lib/linalg/solveDense.js) and six NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; oracle_quality.py, pin_quality.py, FINDINGS-quality.md, negcontrol_quality.sh mode 755). 12 paths x 4 proofs = 48, all IDENTICAL. The canonical pin STAYS at 54cf7c4: 54cf7c4..cc82bf3 also moves economics cashflow goldens, facilities, production, seismolord and wellsite paths other courses grade. The four imported dependencies already match the pinned manifest byte for byte; the eight new paths are ledgered in VENDOR.json as kind extra, group d1-dataqc-course, pinned to their vendored blobs, and clear as STALE when the pin moves to cc82bf3 or later. Guard clean, 762 paths compared; vendored engine suites 160, the quality suite 854 of 854. RE-VENDORED 2026-09-23 at petrolord-engines a4e9592 (engines PR #249, the repair of this wave's three engine findings) by the same script with REV=a4e9592: 12 paths x 4 proofs = 48, all IDENTICAL; the pin stays at 54cf7c4 and the eight d1-dataqc-course extra entries are re-pinned to the new blobs; guard clean, 762 paths compared. The quality suite passes 903 of 903. fields.json is byte-identical to the cut at cc82bf3 (no graded value moved). RE-VENDORED 2026-09-23 at petrolord-engines c7eba2270f (engines PR #251: the zero-MAD refusal now reads 'more than half the present values equal the median'; 406 goldens; a Hampel comment in petrophysics/conditioning.js) by the same script: 12 paths x 4 proofs, all IDENTICAL. conditioning.js now differs from the pinned manifest in a comment only and is ledgered as kind differing in group d1-dataqc-course. Guard clean. fields.json byte-identical.",
+ "constants": {
+  "$comment": "The engine exports CONSTANTS (0.6745, 3.5, 1.4826, 1.128, 3.267, 1.5), DEFINITIONAL_LIMITS and DIMENSIONS. Digest section 1 prints CONSTANTS from the export and section 7 prints DEFINITIONAL_LIMITS. None is graded."
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3",
+  "x1e2",
+  "x1e-2"
+ ],
+ "plan": {
+  "state": "FOUNDATION COMPLETE when run_gates.py is green: engine vendored at cc82bf3, the Ekene dataset generator with 22 planted defects, digest built (32 sections), fields.json and precision.json generated from the one tolerance derivation, 18 graded fields discriminating, lab and three panels shipped with vitest, 78 lesson stubs scaffolded. No lesson prose, bank, key truth or migration is written yet.",
+  "thesis": "Data quality is a set of stated rules applied to a well log or a production series, every flag carrying the rule that fired and its reason. Associate owns IS THE DATA FIT TO USE (completeness, validity, the index, consistency, uniqueness), Professional owns WHICH VALUES STAND APART (the plausibility dimension), Expert owns HAS THE PROCESS CHANGED AND WHAT IS THE POLICY (charts, scorecard, defaults as choices, the engine read honestly). Each capstone grades only its own tier's question.",
+  "tiers": {
+   "beginner": "Associate: m01 what data quality means (a rule, a flag and a reason; the five dimensions; missing and the sentinel; refusals), m02 is it there (completeness, gap runs, coverage), m03 is it valid (definitional limits, caller plausibility ranges, units never converted, rate rules), m04 the depth and time index, m05 does it agree with itself (cumulative, water cut, phase sum, frozen runs), m06 names and one dataset end to end. Digest sections 1 to 16.",
+   "intermediate": "Professional: m01 the z-score and its ceiling, m02 the median and the MAD, m03 quartiles and Tukey fences, m04 a moving window (Hampel), m05 formal tests and many variables (Grubbs, Mahalanobis), m06 outliers in a report. Digest sections 17 to 24.",
+   "advanced": "Expert: m01 the individuals chart, m02 the EWMA chart, m03 the tabular CUSUM, m04 the scorecard, m05 designing a QC policy, m06 reading the engine honestly. Digest sections 25 to 31."
+  }
+ },
+ "history": {
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The engine was repaired once after its first merge (engines PR #249, before any lesson was written): reason strings print the shortest round-trip decimal, the population z ceiling is sqrt(n - 1), Hampel echoes halfWindow, nSigma and madScale. That repair is provenance; the digest describes the engine as it is. The NIST printed-figure errata are errata in a published source and are taught as such in Expert m06."
+ },
+ "scopeSeams": {
+  "u-chart and the Poisson count model": "OWNED BY H1 safetystats. D1 charts measured values only (individuals, EWMA, CUSUM).",
+  "regression fit quality": "OWNED BY dca and D2 mlcore.",
+  "Monte Carlo": "OWNED BY the uncertainty course. Nothing in D1 samples.",
+  "moving-average surveillance": "OWNED BY surveillance. EWMA here is a control chart with limits from historical sigma (NIST 6.3.2.4).",
+  "percentile ranges": "OWNED BY the economics uncertainty course and lib/conventions/percentile.js. D1 names a quantile by its probability and its rule; no P label."
+ },
+ "namingCollisions": {
+  "outlier": "a value a stated rule flags, never a value proven wrong; the engine's own label is potential outlier. Section 32.",
+  "sigma": "always with its source named. Section 32.",
+  "control limit": "never a specification or a plausibility range. Section 32.",
+  "missing": "null, undefined or NaN only; a sentinel is present. Section 32.",
+  "percentile": "no P label anywhere. Gated by gate_vocabulary.py."
+ },
+ "openItems": {
+  "FINDINGS open questions": "despikeHampel turns null into 0 (quality.hampel converts to NaN first, D1 unaffected); solveDense absolute pivot test; generalised ESD and robust covariance not built. Printed as care points in section 31.",
+  "closed by engines PR #249": "The population z ceiling (now sqrt(n - 1), basis.ceiling names it), the six-significant-figure reason strings (now shortest round-trip decimals), and the unechoed Hampel nSigma (now in the result and basis) were fixed in engines a4e9592 and re-vendored. Digest sections 11, 30 and 31 describe the repaired behaviour; LESSON_TASK.md states the quoting rule: the numeric field at six decimals, a reason string only verbatim as the engine's words."
+ },
+ "cleared_claims": [],
+ "gates": {
+  "structure.py": {
+   "md5": "30c7058410d7b75d6dd4cf30f14c774d",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "scaffold.py --check": {
+   "md5": "d8ffbc08960ae458b7db83d0e7579080",
+   "command": "python3 scaffold.py --check",
+   "expected": 0,
+   "exit": 0,
+   "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
+  },
+  "d1_capstone.mjs": {
+   "md5": "d53662b0b7c9c0dfc6fb325942fab646",
+   "command": "node d1_capstone.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d1_capstone: 88 label-and-call and scenario assertions run, 0 failed"
+  },
+  "make_fields.mjs": {
+   "md5": "cf4f379180569d8224cc3052672dcaf2",
+   "command": "node make_fields.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d1_capstone: 88 label-and-call and scenario assertions run, 0 failed"
+  },
+  "make_fields.mjs NEGATIVE CONTROL": {
+   "md5": "cf4f379180569d8224cc3052672dcaf2",
+   "command": "node make_fields.mjs --bare-stated-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "d1_capstone: 88 label-and-call and scenario assertions run, 0 failed"
+  },
+  "oracle_check.py": {
+   "md5": "acc6e3a095f5c5424d8ccece135ee5ac",
+   "command": "python3 oracle_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "oracle_check: 18 graded fields replayed through the vendored oracle, worst relative difference 5.60e-15; 12 scenario claims checked; 0 problem(s)"
+  },
+  "oracle_check.py NEGATIVE CONTROL": {
+   "md5": "acc6e3a095f5c5424d8ccece135ee5ac",
+   "command": "python3 oracle_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: one field was perturbed by ten tolerances; this run must fail naming it."
+  },
+  "discriminate.mjs": {
+   "md5": "ca17a7da9bbdc4eb7ff80149ba357972",
+   "command": "node discriminate.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "CLOSEST MISS ACROSS THE WHOLE SWEEP: ikoro_core_max_abs_modified_z via reciprocal_of_1_4826, 9.745e+1 tolerances away"
+  },
+  "discriminate.mjs NEGATIVE CONTROL": {
+   "md5": "ca17a7da9bbdc4eb7ff80149ba357972",
+   "command": "node discriminate.mjs --slack-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: tolerances multiplied by 1000000000000. Expected 18 WEAK routes, got 18."
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "command": "/root/dc-wavekit/digestrepro.sh dai-wip-dataqc /root/wt-dai-d1-nextgen",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d1_dump: 710 label-and-call, measurement and claim assertions run, 0 failed; 32 sections"
+  },
+  "digestprose.mjs": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] /root/dai-wip-dataqc/digest.txt: 1079 line(s), 32 section title(s) and 39 in-body marker(s) swept against their blocks, 32 history framings, 22 engine pin(s); 0 warned for a human read and 0 framed as curri"
+  },
+  "digestprose.mjs --selftest": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] selftest OK: the founding heading case is caught by the corrected pairing and missed by the broken one; both real keyword cases fail inside a teaching section; FC3 line 683 WARNS where the keyword family ca"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "digestfigures.py --selftest": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] selftest OK"
+  },
+  "digestpromise.py": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 completeness problem(s), all checks applied"
+  },
+  "digestpromise.py --selftest": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "command": "python3 /root/dc-wavekit/digestleak.py dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "command": "python3 /root/dc-wavekit/collisions.py dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[gradeprecision] /root/dai-wip-dataqc: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 5 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "command": "python3 /root/dc-wavekit/briefleak.py dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 graded answer(s) reachable from this brief"
+  },
+  "briefcheck.py": {
+   "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
+   "command": "python3 /root/dc-wavekit/briefcheck.py dai-wip-dataqc",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
+  },
+  "gate_capstone_leak.mjs": {
+   "md5": "5ec211a7602c351ed275bea942e771ba",
+   "command": "node gate_capstone_leak.mjs --no-banks",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
+   "md5": "5ec211a7602c351ed275bea942e771ba",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-value",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
+   "md5": "5ec211a7602c351ed275bea942e771ba",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-input",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
+   "md5": "5ec211a7602c351ed275bea942e771ba",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-name",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
+   "md5": "5ec211a7602c351ed275bea942e771ba",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
+  },
+  "gate_copy_rule.py": {
+   "md5": "3b4943c8da8f802748fae5316022d1e8",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "3b4943c8da8f802748fae5316022d1e8",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got 2"
+  },
+  "gate_typed_literals.py": {
+   "md5": "9d13cb623435500644ef9ba7ca05b55a",
+   "command": "python3 gate_typed_literals.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "UNEXPLAINED TYPED NUMBERS: 0"
+  },
+  "gate_typed_literals.py NEGATIVE CONTROL": {
+   "md5": "9d13cb623435500644ef9ba7ca05b55a",
+   "command": "python3 gate_typed_literals.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a typed 4.217 was planted in a printed line; caught 1"
+  },
+  "gate_vocabulary.py": {
+   "md5": "8a31b243019b10b95905280762245e0c",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "exemptions declared: 1, dead: []"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "8a31b243019b10b95905280762245e0c",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected a P label and an AI claim caught; got ['a P label', 'an AI claim']"
+  },
+  "truth_check.py": {
+   "md5": "f6d33a913f9a25ceae1d0a5abb56a6c3",
+   "command": "python3 truth_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "truth_check: truth-dataqc.json (539 digest lines) IS the harvest of digest.txt"
+  },
+  "truth_check.py NEGATIVE CONTROL": {
+   "md5": "f6d33a913f9a25ceae1d0a5abb56a6c3",
+   "command": "python3 truth_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a line was planted in the scratch digest; expected a mismatch, caught"
+  },
+  "numsweep_dataqc.mjs": {
+   "md5": "66804d61e6ae29618ccb2b5962b1b1aa",
+   "command": "node numsweep_dataqc.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "serialised floats outside an exact reason quote: 0"
+  },
+  "numsweep_dataqc.mjs --selftest": {
+   "md5": "66804d61e6ae29618ccb2b5962b1b1aa",
+   "command": "node numsweep_dataqc.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "numsweep_dataqc selftest OK"
+  },
+  "lengths.py": {
+   "md5": "359da98d6e20c8b7552d2fde13fe86e3",
+   "command": "python3 lengths.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "tiers read: 3  out of band: 0  not written yet: 0"
+  },
+  "lengths.py --selftest": {
+   "md5": "359da98d6e20c8b7552d2fde13fe86e3",
+   "command": "python3 lengths.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
+  },
+  "gate_claims.mjs": {
+   "md5": "98af821a830c94fed907175bbb61bc33",
+   "command": "node gate_claims.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_claims.mjs NEGATIVE CONTROL": {
+   "md5": "98af821a830c94fed907175bbb61bc33",
+   "command": "node gate_claims.mjs --plant-a-recon-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 1."
+  }
+ },
+ "digest": {
+  "lines": 1079,
+  "sections": 32,
+  "md5": "2d34cd2c4c73aa762ee775f6c5ba67c1",
+  "sha256": "990d0072359495b3d6f708982bcd4e3ee68f25dff744b844e48b913c45f4e746"
+ },
+ "fieldsDiscrimination": {
+  "odudu_rhob_completeness": "sentinels counted missing, only the long run counted, missing over present, null fraction quoted",
+  "odudu_nphi_coverage": "missing values ignored, max step one foot, whole log interval, fraction of samples present",
+  "odudu_scada_expected_step_min": "mean of every step, median of every step, median of absolute steps, span over entries",
+  "odudu_water_cut_day23": "reported value quoted, water over oil, oil cut, day 22 computed, in percent",
+  "odudu_cumulative_drop_bbl": "against day 36, rise to day 40, as a percent of day 37, against the largest before",
+  "odudu_phase_sum_allowed_day44_bbl_d": "tolerance on the sum, five percent, half a barrel, tolerance on the oil",
+  "ikoro_core_max_abs_z": "population sd, centred on the median, the ceiling quoted, leave one out",
+  "ikoro_core_max_abs_modified_z": "reciprocal of 1 4826, mad scaled by 1 4826, mean in place of median, sd in place of mad",
+  "ikoro_rhob_upper_fence_g_cm3": "r6 quartiles, r8 quartiles, outer fence k3, from the median",
+  "ikoro_rhob_hampel_threshold_entry57_g_cm3": "window one wider, no 1 4826 scale, missing read as zero, whole series mad, two sigma",
+  "ikoro_core_grubbs_critical": "one sided alpha over n, t on n minus 1 df, alpha not divided by n, the ceiling quoted",
+  "ikoro_max_mahalanobis_d2": "population covariance, distance not squared, sum of squared z, the cutoff quoted",
+  "amasiri_phase1_individuals_ucl_psig": "sample sd for sigma, two sigma, d2 rounded to 1 13, mrbar over n",
+  "amasiri_phase1_mr_ucl_psig": "d4 as three, d4 times sigma, three sigma above mrbar, d4 times sample sd",
+  "amasiri_ewma_day14_psig": "started at the first value, weights swapped, target from phase two, lambda 0 3",
+  "amasiri_ewma_exact_ucl_day2_psig": "asymptotic limit, exponent t for 2t, day counted from zero, variance lambda over 2",
+  "amasiri_cusum_upper_day18_psi": "no floor at zero, k read in psi, plain cumulative sum, target from phase two",
+  "amasiri_scorecard_total": "equal weights, weights not normalised, pooled failures, weakest score quoted",
+  "summary": "74 wrong methods over 18 routes, 0 WEAK, closest miss 97.5 tolerances (ikoro_core_max_abs_modified_z via reciprocal of 1 4826). Negative control at tolerance x1e12: 18 of 18 WEAK."
+ },
+ "fields": {
+  "count": 18,
+  "sha256": "f58d26ae3492faa3599e16a78a8e091633658f76415609d63dfdd94129d15670",
+  "keys": [
+   "odudu_rhob_completeness",
+   "odudu_nphi_coverage",
+   "odudu_scada_expected_step_min",
+   "odudu_water_cut_day23",
+   "odudu_cumulative_drop_bbl",
+   "odudu_phase_sum_allowed_day44_bbl_d",
+   "ikoro_core_max_abs_z",
+   "ikoro_core_max_abs_modified_z",
+   "ikoro_rhob_upper_fence_g_cm3",
+   "ikoro_rhob_hampel_threshold_entry57_g_cm3",
+   "ikoro_core_grubbs_critical",
+   "ikoro_max_mahalanobis_d2",
+   "amasiri_phase1_individuals_ucl_psig",
+   "amasiri_phase1_mr_ucl_psig",
+   "amasiri_ewma_day14_psig",
+   "amasiri_ewma_exact_ucl_day2_psig",
+   "amasiri_cusum_upper_day18_psi",
+   "amasiri_scorecard_total"
+  ]
+ }
+}

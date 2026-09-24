@@ -1,0 +1,361 @@
+{
+ "app_slug": "dataqc",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-what-data-quality-means",
+   "title": "What Data Quality Means",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-a-rule-a-flag-and-a-reason",
+     "title": "A rule, a flag and a reason",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-five-dimensions",
+     "title": "The five dimensions the engine reports",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-what-missing-means",
+     "title": "What missing means",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-sentinel-that-is-present",
+     "title": "The sentinel that counts as present",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-refusals-by-name",
+     "title": "The refusals, each naming its field",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-is-it-there",
+   "title": "Is It There",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-completeness-and-the-null-fraction",
+     "title": "Completeness and the null fraction",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-gap-runs",
+     "title": "Gap runs, one flag per run",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-coverage-of-an-interval",
+     "title": "Coverage of an interval",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-step-too-long-is-a-hole",
+     "title": "A step too long is a hole",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-is-it-valid",
+   "title": "Is It Valid",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-definitional-limits",
+     "title": "Definitional limits and nothing more",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-plausibility-ranges-are-yours",
+     "title": "Plausibility ranges are yours to supply",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-units-are-never-converted",
+     "title": "Units are never converted",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-fraction-written-in-percent",
+     "title": "A fraction written in percent",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-negative-rates-and-rates-while-shut-in",
+     "title": "Negative rates and rates while shut in",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-depth-and-time-index",
+   "title": "The Depth and Time Index",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-a-duplicate-is-any-earlier-value",
+     "title": "A duplicate is any earlier value",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-reversals",
+     "title": "Reversals against the stated direction",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-expected-step",
+     "title": "The expected step, inferred or stated",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-irregular-steps",
+     "title": "Irregular steps and their tolerance",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-does-it-agree-with-itself",
+   "title": "Does It Agree with Itself",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-a-cumulative-never-falls",
+     "title": "A cumulative never falls",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-water-cut-on-a-liquid-basis",
+     "title": "Water cut on a liquid basis",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-parts-that-add-to-a-total",
+     "title": "Parts that add to a total",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-frozen-values",
+     "title": "Frozen values and a slow drift",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-names-and-one-dataset",
+   "title": "Names, and One Dataset End to End",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-normalising-an-identifier",
+     "title": "Normalising an identifier",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-near-duplicates-and-the-digit-rule",
+     "title": "Near duplicates and the digit rule",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-one-dataset-every-check",
+     "title": "One dataset, every check",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

@@ -30,6 +30,7 @@ import { COURSE_ICONS } from '@/components/sidebar/courseIcons';
 export const MODULE_ORDER = [
   'geoscience', 'reservoir', 'drilling', 'production',
   'facilities', 'economics', 'assurance', 'hse', 'commercial_trading', 'supply_chain', 'energy_transition',
+  'data_ai',
 ];
 
 export const orderModules = (slugs) => {

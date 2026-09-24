@@ -1,0 +1,116 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D1 Associate m02, Is It There.
+# Sources: digest sections 5 and 6, and the coverage refusal in section 4.
+# Every figure is printed there.
+
+q(1, "EKENE-7's bulk density has 12 missing samples among its 240. What do `completeness` and `nullFraction` report for it?",
+ "Completeness 0.950000 and a null fraction of 0.050000.",
+ ["Completeness 0.987500 and a null fraction of 0.012500, the figures for twelve samples spread over the log.",
+  "Completeness 0.950000 and a null fraction of 0.950000, since both figures count the present samples.",
+  "Completeness 0.934783, the share of the depth interval the density still spans."],
+ "Completeness is present over n, 228 over 240, which is 0.950000, and `nullFraction` is the missing share, 0.050000; the two describe the same count from opposite sides. 0.987500 and 0.012500 belong to the neutron, which lost 3 samples. 0.934783 is the density's coverage at a half-foot maxStep, a length over a length."),
+
+q(3, "EKENE-7's neutron lost 3 samples, at entries 25, 118 and 205. How many flags does `completeness` raise on it?",
+ "Three, one for each gap run, since no two of the missing samples are consecutive.",
+ ["One, a single flag for the channel carrying the count of 3 missing samples and their entries.",
+  "Six, one for each present sample that sits next to a missing one.",
+  "None, since a single missing sample is too short to form a gap run and is only counted."],
+ "A gap run is a maximal stretch of consecutive missing values, and each run is one flag. The neutron's three samples are separated by present values, so they make 3 runs of one and 3 flags, the first reading \"sample 25 is missing\". A run can be one sample long, and the engine raises no flag for a present neighbour."),
+
+q(0, "The density flag reads \"samples 80 to 91 are missing (12 in a row)\". How much of the log has no density, derived from the step?",
+ "6 ft of rock, twelve samples times the half-foot step.",
+ ["12 ft of rock, one foot for each of the twelve missing samples in the run.",
+  "11 samples' worth of rock, since the run is measured from entry 80 to entry 91 as a span of steps.",
+  "115.000000 ft, since one gap run in the density spoils the whole interval from 8400 to 8515 ft."],
+ "EKENE-7 is logged at a 0.500000 ft step, so twelve missing samples are 6 ft of rock with no density, derived as twelve times the step. The log is not stepped at a foot, the run holds twelve samples, which the reason itself says, and a gap run describes only its own stretch of the log."),
+
+q(2, "Suppose EKENE-7's density had lost the same twelve samples scattered through the log, none of them next to another. What would completeness read?",
+ "0.950000, the same as the single run, because completeness counts samples and has no shape.",
+ ["Lower than 0.950000, since scattered losses break the log in more places.",
+  "Higher than 0.950000, since each isolated loss has present neighbours.",
+  "It cannot be computed until the twelve separate gap runs are merged."],
+ "Completeness is present over n, so twelve missing of 240 is 0.950000 however they fall. What would change is the gap runs: twelve flags of one sample each, where the single run gives one flag of twelve. That is why the engine returns the runs beside the fraction."),
+
+q(1, "In the middle of EKENE-7's twelve-sample density gap you type one real value in place of a null. What happens to the missing count and the gap runs?",
+ "The missing count falls by one, and the one gap run splits into two.",
+ ["The missing count falls by one, and the gap run stays one run, since the engine joins runs across a single present value.",
+  "The missing count stays the same, since the gap was flagged before the value was typed, and the runs split into two.",
+  "The gap runs fall to none, since a present value closes the gap."],
+ "One present value between missing ones splits them, because a gap run is consecutive missing values. So one fewer sample is missing and there are two runs, which is the stated rule the lesson warns about: both the run count and the longest run are sensitive to a single sample."),
+
+q(2, "Which EKENE-3 column is the least complete, and what does completeness report for it?",
+ "The water cut, 0.944444, with 5 missing days in 3 gap runs.",
+ ["The oil, 0.966667, with 3 missing days in a single run from day 31 caused by a meter outage.",
+  "The cumulative oil, 0.988889, since the lost day 69 reading breaks the cumulative for the rest of the sheet.",
+  "The gross, 0.966667, with 3 missing days."],
+ "The water cut is missing on 5 of 90 days, days 31 to 33, day 47 and day 60, for 0.944444. The oil and the gross each miss 3 days and read 0.966667, and the cumulative misses 1 day and reads 0.988889. Completeness counts only the column it is given."),
+
+q(0, "You rerun `completeness` on a stretch of EKENE-7's density that starts at its gap, dropping the present samples before it. What changes?",
+ "Completeness changes with the new n while the missing count stays the same.",
+ ["The missing count changes with the new n while completeness stays at 0.950000, since it describes the channel.",
+  "Nothing changes, since the channel is the same channel.",
+  "The engine refuses a series that starts on a null."],
+ "Completeness depends on what you call n, and the engine answers for the array it is handed. The same twelve nulls over a shorter array give a different fraction, so a report states which stretch the figure describes. Nothing in the engine refuses a series that begins with a null."),
+
+q(3, "An index 0, 1, 2 carries a present value at every entry and is passed to `coverage` with maxStep 1. What does it read?",
+ "1.000000, because a step equal to maxStep covers.",
+ ["0.000000, because each step of 1 is too long when maxStep is 1 and the engine fires on reaching it.",
+  "0.500000, because one step of the two sits on the limit and the engine counts it as half covered.",
+  "The engine refuses the call, since maxStep must be smaller than the smallest step of the index."],
+ "A step between two consecutive present samples covers when it is at most maxStep, inclusive, so steps of 1 at maxStep 1 cover and the reading is 1.000000. The engine fires strictly beyond a limit. There is no half coverage and no refusal for a maxStep equal to the step."),
+
+q(1, "At a half-foot maxStep, EKENE-7's density has a long hole from 8439.500000 to 8446.000000 ft. What are those two depths?",
+ "The last present density sample before the pad lift and the first present sample after it.",
+ ["The first and last of the twelve missing samples.",
+  "The two ends of the stretch the density covers.",
+  "The depths where the index skips a sample, so every channel shows this hole at the same depths."],
+ "Coverage measures the steps between present samples, so a hole runs from the last present sample to the next one. The twelve missing samples sit between those two depths. The hole every channel shares is the other one, 8474.500000 to 8475.500000 ft, where the index skips a sample."),
+
+q(3, "At a half-foot maxStep the neutron covers 0.965217 of the interval 8400 to 8515 ft. At maxStep 1.000000 ft it covers 1.000000. What changed in the data?",
+ "The maxStep alone: no neutron step, across a missing sample or the skipped index depth, is longer than 1.000000 ft.",
+ ["The three missing neutron samples were filled by the engine from their neighbours once the maxStep was raised.",
+  "The engine inserted the skipped index depth into the index, so the step across it became an ordinary half-foot step.",
+  "The neutron's completeness rose to 1.000000 too."],
+ "maxStep is the caller's statement of the longest step that still counts as data; raising it changed no sample. The engine does not fill or insert values. The neutron still has 3 missing samples and a completeness of 0.987500, which is how a channel can lose samples without losing coverage."),
+
+q(0, "With its sentinel converted, EKENE-7's gamma ray has no missing value inside 8400 to 8515 ft, yet at a half-foot maxStep it covers 0.991304. Where does the hole come from?",
+ "The depth index skips a sample after entry 149, so the step from 8474.500000 to 8475.500000 ft is longer than half a foot.",
+ ["The four converted sentinels at the bottom of the log, entries 236 to 239.",
+  "A missing gamma ray sample between those two depths that completeness also counts.",
+  "The coverage rule, which leaves a step equal to maxStep uncovered."],
+ "The index itself jumps from 8474.500000 to 8475.500000 ft with no row between, so there is no null to count and completeness cannot see it; coverage measures the step and finds it longer than half a foot. The converted sentinels sit at entries 236 to 239, outside this hole, and a step equal to maxStep covers."),
+
+q(2, "Why do the density and the neutron both show a hole from 8474.500000 to 8475.500000 ft at a half-foot maxStep?",
+ "The depth index is shared by every channel, so a sample missing from it is missing from all five at once.",
+ ["Both channels lost a sample at that depth when the logging tool lifted off the borehole wall there.",
+  "The engine copies a hole found in one channel into every other channel on the same index as a warning.",
+  "The interval end at 8515 ft is measured back from that depth, so every channel is uncovered there."],
+ "One sample is missing from the index after entry 149, and every channel hangs on that index, so each shows the same hole. The pad lift is the density's own twelve-sample gap, earlier in the log. The engine does not copy holes between channels, and the interval end has nothing to do with this depth."),
+
+q(3, "You pass the EKENE-7 splice index, which steps back at entry 5, to `coverage`. What does it return?",
+ "A refusal naming `index[5]`, which tells you to sort and de-duplicate the index first.",
+ ["A coverage figure computed after the engine sorts the index and keeps the first reading at each repeated depth.",
+  "A coverage figure with entry 5 dropped and flagged.",
+  "A coverage of 0.000000 for the whole interval."],
+ "The engine's own words are: index[5] must be strictly increasing: sort and de-duplicate the index first (indexCheck finds the offenders). Coverage will not sort for you, because sorting would quietly decide which of two readings at the same depth to keep, and that decision is the caller's."),
+
+q(0, "A channel's first present sample sits a few feet below the top of the interval you pass to `coverage`. How is the stretch above that sample counted?",
+ "As uncovered, since the stretch before the first present sample is outside every step.",
+ ["As covered, if the gap to the top is shorter than maxStep.",
+  "As covered, since the engine assumes data begin at the interval start.",
+  "As missing samples, which lower the channel's completeness."],
+ "The stretch before the first present sample and after the last is uncovered, whatever maxStep is. The interval ends are not samples, so no step reaches them. Completeness counts only the entries in the array, so an uncovered edge changes no completeness figure."),
+
+q(1, "At a half-foot maxStep EKENE-7's density covers 107.500000 ft of the interval 8400 to 8515 ft. Why is that figure worth nothing in a report without the maxStep beside it?",
+ "Because maxStep is the caller's statement, and the same samples read a different coverage at another maxStep.",
+ ["Because covered feet are always quoted with the interval length, and maxStep is the name the engine gives it.",
+  "Because the engine reports covered feet only when maxStep equals the logging step, so the figure proves it was.",
+  "Because a density figure must name the tool, and the engine records the tool's step as the maxStep."],
+ "maxStep is the caller's statement of the longest step that still counts as data, so a coverage quoted without it cannot be checked or compared: the neutron moved from 0.965217 to 1.000000 without a sample changing. maxStep is not the interval length, it is a free input at any value, and it names no tool."),
+
+emit(Q, '/root/dai-wip-dataqc/banks/d1b_m02.json', expect_n=15)
+finish()

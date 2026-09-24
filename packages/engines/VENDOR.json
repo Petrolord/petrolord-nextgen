@@ -1535,6 +1535,69 @@
       "group": "7-vendor-readme",
       "vendoredSha": "aa51c0243e29f73ab6c47f70016dd248d6ba4fe6",
       "reason": "The vendored README carries NextGen's own vendoring note rather than the canonical package README. Cosmetic and deliberate."
+    },
+    {
+      "path": "__tests__/dataai.quality.test.js",
+      "kind": "extra",
+      "group": "d1-dataqc-course",
+      "vendoredSha": "1333ff3085471f6b2ef5b1d97b030f3409ed4d29",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines c7eba22 (PR #248, #249 and #251: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to c7eba22 or later."
+    },
+    {
+      "path": "engines/dataai/quality.js",
+      "kind": "extra",
+      "group": "d1-dataqc-course",
+      "vendoredSha": "503694f67acc3a05df3a981a0cd0aa217b9129e2",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines c7eba22 (PR #248, #249 and #251: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to c7eba22 or later."
+    },
+    {
+      "path": "engines/petrophysics/conditioning.js",
+      "kind": "differing",
+      "group": "d1-dataqc-course",
+      "vendoredSha": "4321540b4db8db1dd76dc2c88551aeef47bd6452",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines c7eba22 (PR #248, #249 and #251: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. Differing from the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to c7eba22 or later."
+    },
+    {
+      "path": "test-data/dataai/goldens/quality_cases.json",
+      "kind": "extra",
+      "group": "d1-dataqc-course",
+      "vendoredSha": "12780ec2778e27f7947b8fed56f3657adcee8bb5",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines c7eba22 (PR #248, #249 and #251: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to c7eba22 or later."
+    },
+    {
+      "path": "test-data/dataai/pins/quality_pins.json",
+      "kind": "extra",
+      "group": "d1-dataqc-course",
+      "vendoredSha": "11e118a9ab79d7de0a261e10f67b33cd1e1d80ba",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines c7eba22 (PR #248, #249 and #251: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to c7eba22 or later."
+    },
+    {
+      "path": "tools/validation/dataai/FINDINGS-quality.md",
+      "kind": "extra",
+      "group": "d1-dataqc-course",
+      "vendoredSha": "293677d019247f7e1a01e9c1ecbc87658150802f",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines c7eba22 (PR #248, #249 and #251: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to c7eba22 or later."
+    },
+    {
+      "path": "tools/validation/dataai/negcontrol_quality.sh",
+      "kind": "extra",
+      "group": "d1-dataqc-course",
+      "vendoredSha": "2c224f44b27a9ddec7bac66741744f97791f0b39",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines c7eba22 (PR #248, #249 and #251: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to c7eba22 or later."
+    },
+    {
+      "path": "tools/validation/dataai/oracle_quality.py",
+      "kind": "extra",
+      "group": "d1-dataqc-course",
+      "vendoredSha": "7e52ff2cb0e021d3ee056b1b0960cff59350c0f1",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines c7eba22 (PR #248, #249 and #251: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to c7eba22 or later."
+    },
+    {
+      "path": "tools/validation/dataai/pin_quality.py",
+      "kind": "extra",
+      "group": "d1-dataqc-course",
+      "vendoredSha": "1b07648eb99b766cd09be392dac1e257ebb03746",
+      "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines c7eba22 (PR #248, #249 and #251: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to c7eba22 or later."
     }
   ]
 }

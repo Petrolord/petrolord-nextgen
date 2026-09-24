@@ -1,0 +1,366 @@
+{
+ "app_slug": "dataqc",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-individuals-chart",
+   "title": "The Individuals Chart",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-a-process-that-makes-data",
+     "title": "A process that makes data",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-moving-range",
+     "title": "The moving range",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-limits-from-the-moving-range",
+     "title": "Limits from the moving range",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-moving-range-chart",
+     "title": "The moving range chart",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-standard-or-the-data",
+     "title": "A standard or the data",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-ewma-chart",
+   "title": "The EWMA Chart",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-a-weighted-memory",
+     "title": "A weighted memory",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-target-and-sigma-from-history",
+     "title": "Target and sigma from history",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-asymptotic-and-exact-limits",
+     "title": "Asymptotic and exact limits",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-choosing-lambda",
+     "title": "Choosing lambda",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-the-tabular-cusum",
+   "title": "The Tabular CUSUM",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-accumulating-small-shifts",
+     "title": "Accumulating small shifts",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-k-and-h-in-stated-units",
+     "title": "The reference value and the decision interval",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-no-reset-after-a-signal",
+     "title": "No reset after a signal",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-nist-table-and-its-design",
+     "title": "The NIST table and its design",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-which-chart-sees-what",
+     "title": "Which chart sees what",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "dq-monitor-explorer",
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-scorecard",
+   "title": "The Scorecard",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-a-score-per-dimension",
+     "title": "A score per dimension",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "dq-monitor-explorer",
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-weights-and-their-normalisation",
+     "title": "Weights and their normalisation",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-weakest-dimension",
+     "title": "The weakest dimension",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-why-there-are-no-grade-bands",
+     "title": "Why there are no grade bands",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-designing-a-qc-policy",
+   "title": "Designing a QC Policy",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-order-of-checks",
+     "title": "The order of checks",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer",
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-defaults-are-choices",
+     "title": "Defaults are choices",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-flag-fix-or-refuse",
+     "title": "Flag, fix or refuse",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "dq-checks-explorer",
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-writing-the-policy",
+     "title": "Writing the policy",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-reading-the-engine-honestly",
+   "title": "Reading the Engine Honestly",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-printed-figures-and-their-errata",
+     "title": "Printed figures and their errata",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-what-is-not-built",
+     "title": "What is not built",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "dq-outliers-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-the-quality-note",
+     "title": "Writing the quality note",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "dq-monitor-explorer",
+      "dq-checks-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "dq-monitor-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

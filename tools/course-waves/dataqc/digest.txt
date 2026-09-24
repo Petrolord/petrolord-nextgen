@@ -1,0 +1,1079 @@
+# D1 TEACHING DIGEST: Oilfield Data Quality
+
+# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The engine FINDINGS record, the oracle, the library pins and the engine source comments are PROVENANCE and not teaching truth.
+
+# PRECISION. Every measured value, statistic, limit, fraction, score, step and difference prints to SIX decimals; counts, entry numbers and days are whole numbers; relative differences print in exponent form.
+
+# ENGINE. engines/dataai/quality.js, vendored sha-identical with petrolord-engines c7eba22, 1095 lines. It imports lib/stats (mean, median, standard deviations), engines/petrophysics/conditioning.js (despikeHampel), engines/hse/safetyStats.js (chiSquareQuantile, logGamma) and lib/linalg/solveDense.js. The vendored golden test-data/dataai/goldens/quality_cases.json carries 406 cases, 48 of them refusals and 8 of them NIST/SEMATECH published anchors, written by the standard library oracle.
+
+# WHAT IS NEVER IN THIS FILE. No capstone field, no capstone well, no capstone series and no graded answer. The capstones run their own datasets and the digest never names them.
+
+# THIS COURSE TEACHES NO REPAIR HISTORY. Every section below describes what the engine does today.
+
+# SECTION 1: What this engine computes, and what it declines to compute (owned by Associate m01 and Expert m06)
+
+Every function takes plain arrays and objects and returns either a result object or an object with `error` and `field`, where `field` names the input it refused. Every flag carries the `rule` that fired and a `reason` sentence, and every result carries a `basis` block naming its convention.
+
+| function | dimension or role | what it needs | what it returns |
+| --- | --- | --- | --- |
+| `completeness` | completeness | values | present over n, and one flag per run of missing values |
+| `coverage` | completeness | index, values, start, end, maxStep | the fraction of an interval spanned by steps no longer than maxStep |
+| `rangeCheck` | validity | values, a channel and unit or min and max | values outside a definitional or a supplied limit |
+| `indexCheck` | validity | index, direction, expectedStep, stepTolerance | missing entries, duplicates, reversals and irregular steps |
+| `rateCheck` | validity | rates, hoursOn, status | a negative rate, and a positive rate while shut in |
+| `cumulativeCheck` | consistency | cumulative, tolerance | a cumulative that falls |
+| `waterCutCheck` | consistency | waterCut, oil, water, tolerance | a water cut outside [0, 1] or unequal to water over liquid |
+| `phaseSumCheck` | consistency | parts, total, relTolerance, absTolerance | parts that do not add to their total |
+| `frozenRuns` | consistency | values, minRun, tolerance | runs of a stuck value |
+| `duplicateIdentifiers` | uniqueness | ids, maxDistance, digitsMustMatch | exact, normalised and near duplicate names |
+| `zScores` | plausibility | values, threshold, sd | z-scores and the largest z the sample size allows |
+| `modifiedZScores` | plausibility | values, threshold | the median and MAD based modified z-score |
+| `iqrFences` | plausibility | values, k, method | Tukey fences on stated quartiles |
+| `hampel` | plausibility | values, halfWindow, nSigma | a moving-window median test, with replacements |
+| `grubbsTest` | plausibility | values, alpha, side | the Grubbs test for one outlier |
+| `mahalanobis` | plausibility | rows, alpha | squared distances from the centre against a chi-square cutoff |
+| `individualsChart` | monitoring | values, centre, mrBar | a Shewhart individuals chart and its moving range chart |
+| `ewmaChart` | monitoring | values, lambda, target, sigma, L, limits | an EWMA chart |
+| `cusumChart` | monitoring | values, target, k, h, units, sigma | a tabular CUSUM |
+| `scorecard` | scoring | dimensions, weights | a weighted score per dimension and the weakest dimension |
+
+Helpers exported beside them: `levenshtein`, `normalizeIdentifier`, `sampleQuantile`, `regularizedBeta` and `studentTUpperQuantile`.
+
+The dimension names the engine exports in `DIMENSIONS`, in display order:
+
+| order | dimension |
+| --- | --- |
+| 1 | completeness |
+| 2 | validity |
+| 3 | consistency |
+| 4 | uniqueness |
+| 5 | plausibility |
+
+The published constants, read from the exported `CONSTANTS`:
+
+| constant | value | source |
+| --- | --- | --- |
+| `MODIFIED_Z_SCALE` | 0.674500 | Iglewicz and Hoaglin (1993), as NIST/SEMATECH 1.3.5.17 prints it |
+| `MODIFIED_Z_THRESHOLD` | 3.500000 | the same source: a modified z beyond it is labelled a potential outlier |
+| `HAMPEL_MAD_SCALE` | 1.482600 | the petrophysics conditioning engine, despikeHampel |
+| `D2_N2` | 1.128000 | NIST/SEMATECH 6.3.2.2, d2 for a moving range of two |
+| `D4_N2` | 3.267000 | NIST/SEMATECH 6.3.2.1 table, D4 for a moving range of two |
+| `TUKEY_K` | 1.500000 | the Tukey inner fence multiplier |
+
+WHAT THE ENGINE DOES NOT DO, checked here against its exports:
+- It does not fill, repair or delete a value. `hampel` returns a `cleaned` series beside its flags, and choosing to use it is the caller's decision.
+- It does not convert units. A value in an unlisted unit is refused by name.
+- It carries no plausibility range for any basin or tool, and no grade band for a score.
+- It does not decide whether a flagged value is wrong. A flag is a rule that fired, with its reason.
+- Its exported names are, in full: CONSTANTS, DEFINITIONAL_LIMITS, DIMENSIONS, completeness, coverage, cumulativeCheck, cusumChart, duplicateIdentifiers, ewmaChart, frozenRuns, grubbsTest, hampel, indexCheck, individualsChart, iqrFences, levenshtein, mahalanobis, modifiedZScores, normalizeIdentifier, phaseSumCheck, rangeCheck, rateCheck, regularizedBeta, sampleQuantile, scorecard, studentTUpperQuantile, waterCutCheck, zScores.
+
+One flag, exactly as the engine returns it (a negative rate, entry 1 of a two-entry series):
+
+| key | value |
+| --- | --- |
+| `index` | 1 |
+| `rule` | negative-rate |
+| `reason` | rate -3 is negative |
+| `value` | -3 |
+
+# SECTION 2: The Ekene teaching dataset, its seeds and its planted defects (owned by Associate m01 and Associate m06 and Expert m05)
+
+Every series in this course comes from one generator, d1_fields.mjs, which draws through the canonical mulberry32 and randomNormal of lib/stats on stated seeds, rounds every value to the decimals a real file carries, and then plants documented defects. The same inputs give the same file anywhere.
+
+| stream | seed, stated |
+| --- | --- |
+| log | 20260901 |
+| production | 20260902 |
+| core | 20260903 |
+| gauge | 20260904 |
+| pressure | 20260905 |
+
+| stream | what it is | entries |
+| --- | --- | --- |
+| EKENE-7 log | a well log at a 0.500000 ft step from 8400 ft, channels GR, RHOB, NPHI, RT, DT | 240 |
+| EKENE-7 splice | the delivered depth index where two logging runs were spliced | 15 |
+| EKENE-3 production | daily oil, water, gas, gross liquid, reported water cut, hours on, status and cumulative oil | 90 |
+| well names | the well header lists of the drilling database, the production database and a consultant spreadsheet, concatenated | 13 |
+| EKENE-7 core | core plug porosity, v/v, and a copy with a second high plug | 14 |
+| EKENE-3 gauge | ten bottom-hole gauge temperature readings, degF | 10 |
+| EKENE-3 pressure | flowing wellhead pressure, psig: 50 in-control days, then 40 monitored days | 90 |
+
+The EKENE-7 lithology by entry (stated): shale 0 to 39, oil sand 40 to 99, shale 100 to 129, water sand 130 to 199, shale 200 to 239. Inside a sand the porosity is drawn first and density, neutron and sonic follow it, so density and neutron move against each other there.
+
+THE PLANTED DEFECTS, every one stated by the generator. Each is found by the check named, and the section that finds it asserts so; the build fails if any defect is not found.
+
+| stream | channel | where | what was done | the check that finds it |
+| --- | --- | --- | --- | --- |
+| EKENE-7 log | RHOB | entries 80 to 91 | twelve samples set missing (a pad lift) | completeness: one gap run of twelve |
+| EKENE-7 log | NPHI | entries 25, 118 and 205 | single samples set missing | completeness: three gap runs of one |
+| EKENE-7 log | GR | entries 236 to 239 | the LAS missing-value sentinel -999.25 left in place | rangeCheck gammaRay: below the minimum; completeness counts them present |
+| EKENE-7 log | NPHI | entries 150 to 159 | written in percent | rangeCheck fraction v/v: above the maximum |
+| EKENE-7 log | RT | entry 120 | a resistivity of zero | rangeCheck resistivity ohm.m: the minimum itself is not allowed |
+| EKENE-7 log | GR | entries 70 and 170 | sixty gAPI added inside a sand | hampel: a local spike the global z-score cannot see |
+| EKENE-7 log | DT | entries 175 to 183 | the sonic held one value | frozenRuns: one run of nine |
+| EKENE-7 log | RHOB and NPHI | entry 60 | a density and a neutron each inside their sand range, off the trend together | mahalanobis on the oil sand |
+| EKENE-7 log | depth | after entry 149 | one sample missing from the index | indexCheck: an irregular step; coverage with a half-foot maxStep: a hole |
+| EKENE-7 splice | depth | entries 5, 8, 10, 12 and 13 | a reversal onto an earlier depth, a repeat, a skipped step, a lost entry | indexCheck: duplicates, a reversal, irregular steps, a missing entry |
+| EKENE-3 production | oil | days 31 to 33 | a meter outage | completeness: one gap run of three |
+| EKENE-3 production | oil | day 47 | an allocation back-out booked as -18.5 bbl/d | rateCheck: a negative rate |
+| EKENE-3 production | oil | day 61 | the rate carried forward on a shut-in day | rateCheck: a rate while shut in |
+| EKENE-3 production | waterCut | days 20 to 24 | written in percent | waterCutCheck: out of range |
+| EKENE-3 production | waterCut | day 55 | typed from day 54 | waterCutCheck: a mismatch against water / (oil + water) |
+| EKENE-3 production | gross | day 40 | a truck load booked into the gross total | phaseSumCheck: a mismatch; day 41 carries a small difference inside tolerance |
+| EKENE-3 production | gas | days 75 to 81 | the meter held its last value | frozenRuns: one run of eight |
+| EKENE-3 production | cumOil | days 69 and 70 | a lost reading, then a keying error of ten thousand barrels | cumulativeCheck: a decrease against the last present value |
+| well names | ids | thirteen entries | repeats, spellings, a leading zero, an accent and a typing slip | duplicateIdentifiers: exact, normalised and near pairs |
+| EKENE-7 core | porosity | plug 9 (entry 8) | a fractured plug | grubbsTest: one outlier; the two-spike copy adds entry 2 and masks it |
+| EKENE-3 gauge | readings | entry 7 | a gauge glitch in ten readings | zScores: the ceiling at ten values; modifiedZScores flags it |
+| EKENE-3 pressure | monitored | day 8, and days 16 to 40 | a glitch, then a shift of 1.2 process standard deviations down | individualsChart sees the glitch; ewmaChart and cusumChart see the shift |
+
+22 defects are planted.
+
+# SECTION 3: What missing means, and the sentinel that counts as present (owned by Associate m01)
+
+The engine's missing value is null, undefined or NaN. Plus or minus infinity is refused as invalid. A number such as -999.25, the null value a LAS file declares, is a present number until someone converts it.
+
+| middle entry | missing | present | completeness |
+| --- | --- | --- | --- |
+| `null` | 1 | 2 | 0.666667 |
+| `undefined` | 1 | 2 | 0.666667 |
+| `NaN` | 1 | 2 | 0.666667 |
+| -999.25 | 0 | 3 | 1.000000 |
+| 0 | 0 | 3 | 1.000000 |
+
+Infinity is refused, naming the entry. The engine's own words:
+
+> values[1] must be a finite number or missing (null)
+
+On EKENE-7 the gamma ray carries -999.25 at entries 236, 237, 238, 239 (stated). Completeness reads it as present; the definitional range check reads it as a value below the gamma ray minimum.
+
+| gamma ray, as delivered or converted | completeness | missing | range failures |
+| --- | --- | --- | --- |
+| as delivered, -999.25 in place | 1.000000 | 0 | 4 |
+| with -999.25 converted to null | 0.983333 | 4 | 0 |
+
+The first range flag's reason, verbatim: "value -999.25 is below the minimum 0".
+
+# SECTION 4: Every refusal, with the field it names and the engine's own words (owned by Associate m01 l05 and Associate m02 and Associate m03 l03 and Professional m02 l05 and Professional m05 and Expert m01 and Expert m02 l02 and Expert m03 l02 and Expert m04)
+
+Each row is a real call. The message column is the engine's `error` string, verbatim. A refusal carries no number.
+
+| function | what was passed | field named | the engine's message |
+| --- | --- | --- | --- |
+| `completeness` | an empty series | `values` | values must be a non-empty array |
+| `completeness` | an infinite value | `values[1]` | values[1] must be a finite number or missing (null) |
+| `coverage` | the splice index, which steps back | `index[5]` | index[5] must be strictly increasing: sort and de-duplicate the index first (indexCheck finds the offenders) |
+| `rangeCheck` | an unlisted unit | `unit` | unit must be one of us/ft, us/m for channel sonic: units are never converted here |
+| `rangeCheck` | an unlisted channel | `channel` | channel must be one of fraction, rate, cumulative, gammaRay, resistivity, bulkDensity, sonic, caliper, absolutePressure, temperature |
+| `indexCheck` | a one-entry index | `index` | index must be an array of at least two numbers |
+| `rateCheck` | hours shorter than the rates | `hoursOn` | hoursOn must be an array the same length as rates |
+| `cumulativeCheck` | a negative tolerance | `tolerance` | tolerance must be a finite number, zero or more |
+| `waterCutCheck` | no water cut and no rates | `waterCut` | waterCut or both oil and water rates are required |
+| `phaseSumCheck` | parts given as an array | `parts` | parts must be an object of named arrays, for example { oil: [...], water: [...] } |
+| `frozenRuns` | a run of one | `minRun` | minRun must be a whole number, 2 or more |
+| `duplicateIdentifiers` | no names | `ids` | ids must be a non-empty array of strings |
+| `zScores` | no spread | `values` | values have zero spread: every present value is the same, so a z-score is undefined |
+| `modifiedZScores` | a MAD of zero | `values` | values have MAD = 0: more than half the present values equal the median, so the modified z-score is undefined |
+| `iqrFences` | a multiplier of zero | `k` | k must be a finite number above zero |
+| `hampel` | a half window of zero | `halfWindow` | halfWindow must be a whole number, 1 or more (the window is 2 x halfWindow + 1 samples) |
+| `grubbsTest` | alpha as a percentage | `alpha` | alpha must be a significance level strictly between 0 and 1 |
+| `mahalanobis` | too few rows | `rows` | rows need at least p + 2 = 4 complete rows for a sample covariance of 2 variables |
+| `mahalanobis` | one variable a multiple of the other | `rows` | rows have a singular covariance matrix: a variable is constant or one is a linear combination of others |
+| `individualsChart` | a gap in the series | `values[1]` | values[1] is missing: a control chart needs a complete series, so fill or drop the gap first |
+| `ewmaChart` | no target | `target` | target is required: EWMA_0, the historical in-control mean or target |
+| `cusumChart` | no units for k and h | `units` | units is required: 'sigma' (k and h in multiples of sigma, rule of thumb k = 0.5, h = 4 or 5) or 'data' (k and h in the data's own units) |
+| `scorecard` | a weight missing | `weights.validity` | weights.validity is missing: give every listed dimension a weight, or none for equal weights |
+
+23 refusals are tabled above, across 20 functions.
+
+# SECTION 5: Completeness, the missing fraction and gap runs (owned by Associate m02)
+
+Completeness is present over n. A gap run is a maximal stretch of consecutive missing values, and each run is one flag.
+
+| EKENE-7 channel | n | missing | present | missing fraction, `nullFraction` | completeness | gap runs (start, length) | longest gap |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| GR | 240 | 0 | 240 | 0.000000 | 1.000000 | none | 0 |
+| RHOB | 240 | 12 | 228 | 0.050000 | 0.950000 | 80, 12 | 12 |
+| NPHI | 240 | 3 | 237 | 0.012500 | 0.987500 | 25, 1; 118, 1; 205, 1 | 1 |
+| RT | 240 | 0 | 240 | 0.000000 | 1.000000 | none | 0 |
+| DT | 240 | 0 | 240 | 0.000000 | 1.000000 | none | 0 |
+
+The density flag's reason, verbatim: "samples 80 to 91 are missing (12 in a row)". A neutron flag's reason: "sample 25 is missing".
+
+EKENE-3, the production sheet:
+
+| EKENE-3 column | n | missing | completeness | gap runs (first day, length) |
+| --- | --- | --- | --- | --- |
+| oil | 90 | 3 | 0.966667 | day 31, 3 |
+| water | 90 | 0 | 1.000000 | none |
+| gas | 90 | 0 | 1.000000 | none |
+| gross | 90 | 3 | 0.966667 | day 31, 3 |
+| waterCut | 90 | 5 | 0.944444 | day 31, 3; day 47, 1; day 60, 1 |
+| cumOil | 90 | 1 | 0.988889 | day 69, 1 |
+
+RHOB loses 12 samples in 1 run and NPHI 3 in 3 runs. Completeness counts samples; the gap runs say how they were lost. A twelve-sample hole in a half-foot log is 6 ft of rock with no density, derived as twelve times the step.
+
+# SECTION 6: Coverage of an interval, and a step too long (owned by Associate m02)
+
+A step between two consecutive PRESENT samples covers the index between them when it is at most `maxStep`, inclusive; a longer step is a hole. The stretch before the first and after the last present sample is uncovered.
+
+Interval 8400 to 8515 ft (stated), on the EKENE-7 depth index; GR with its sentinel converted to null.
+
+| channel | maxStep, ft | coverage | covered ft | holes (from, to) |
+| --- | --- | --- | --- | --- |
+| RHOB | 0.500000 | 0.934783 | 107.500000 | 8439.500000 to 8446.000000; 8474.500000 to 8475.500000 |
+| NPHI | 0.500000 | 0.965217 | 111.000000 | 8412.000000 to 8413.000000; 8458.500000 to 8459.500000; 8474.500000 to 8475.500000; 8502.500000 to 8503.500000 |
+| NPHI | 1.000000 | 1.000000 | 115.000000 |  |
+| GR | 0.500000 | 0.991304 | 114.000000 | 8474.500000 to 8475.500000 |
+| GR | 1.000000 | 1.000000 | 115.000000 |  |
+
+The gamma ray has no missing value inside the interval once the sentinel is converted, and at a half-foot maxStep it still has one hole, from 8474.500000 to 8475.500000 ft: the depth index skips a sample there. At a one-foot maxStep the same step covers. The hole's reason, verbatim: "no data from 8474.5 to 8475.5".
+
+ON THE BOUNDARY. An index 0, 1, 2 with every value present and maxStep 1 reads coverage 1.000000: a step equal to maxStep covers.
+
+Coverage needs a strictly increasing index. On the EKENE-7 splice index it refuses:
+
+> index[5] must be strictly increasing: sort and de-duplicate the index first (indexCheck finds the offenders)
+
+# SECTION 7: Definitional limits and the range check (owned by Associate m03)
+
+The engine ships DEFINITIONAL limits only: bounds a value cannot cross by definition. Each is keyed by unit, and a bound marked exclusive means the bound itself is not allowed.
+
+| channel | unit | minimum | maximum | minimum excluded | the engine note |
+| --- | --- | --- | --- | --- | --- |
+| fraction | v/v | 0 | 1 | no | a fraction lies in [0, 1] (water cut, porosity, saturation, shale volume, net to gross) |
+| rate | any | 0 | none | no | a produced or injected volume rate is not negative |
+| cumulative | any | 0 | none | no | a cumulative volume is not negative |
+| gammaRay | gAPI | 0 | none | no | API gamma ray units are counts on a non-negative scale |
+| resistivity | ohm.m | 0 | none | yes | resistivity is positive |
+| bulkDensity | g/cm3 | 0 | none | yes | density is positive |
+| sonic | us/ft | 0 | none | yes | a slowness is positive |
+| sonic | us/m | 0 | none | yes | a slowness is positive |
+| caliper | in | 0 | none | yes | a hole diameter is positive |
+| caliper | mm | 0 | none | yes | a hole diameter is positive |
+| absolutePressure | psia | 0 | none | no | an absolute pressure is not negative |
+| absolutePressure | kPa | 0 | none | no | an absolute pressure is not negative |
+| absolutePressure | bara | 0 | none | no | an absolute pressure is not negative |
+| temperature | degC | -273.150000 | none | no | no temperature is below absolute zero |
+| temperature | degF | -459.670000 | none | no | no temperature is below absolute zero |
+| temperature | K | 0 | none | no | no temperature is below absolute zero |
+
+16 channel and unit pairs across 10 channels.
+
+| EKENE-7 channel | checked | failed | entries flagged | rule |
+| --- | --- | --- | --- | --- |
+| GR | 240 | 4 | 236, 237, 238, 239 | below-minimum |
+| RHOB | 228 | 0 | none | none |
+| NPHI | 237 | 10 | 150, 151, 152, 153, 154, 155, 156, 157, 158, 159 | above-maximum |
+| RT | 240 | 1 | 120 | below-minimum |
+| DT | 240 | 0 | none | none |
+
+RT at entry 120 is zero (stated), and the resistivity minimum is exclusive. Its reason, verbatim: "value 0 is below the minimum 0 (the minimum itself is not allowed)".
+
+PLAUSIBILITY RANGES ARE THE CALLER'S. A gamma ray above some value, a density below some value, are claims about a basin and a tool, and the engine carries none. Passed by the caller as min and max, a range is checked the same way:
+
+| channel | caller minimum, stated | caller maximum, stated | checked | failed | the basis source |
+| --- | --- | --- | --- | --- | --- |
+| GR, sentinel converted | 0 | 150 | 236 | 0 | limits supplied by the caller |
+| RHOB | 1.950000 | 2.950000 | 228 | 0 | limits supplied by the caller |
+
+# SECTION 8: Units are never converted, and a fraction written in percent (owned by Associate m03)
+
+EKENE-7 NPHI entries 150 to 159 were written in percent (stated). Against the fraction limit in v/v they fail as above the maximum:
+
+| entry | NPHI as delivered | the engine reason |
+| --- | --- | --- |
+| 150 | 23.300000 | value 23.3 is above the maximum 1 |
+| 151 | 21.900000 | value 21.9 is above the maximum 1 |
+| 152 | 26.600000 | value 26.6 is above the maximum 1 |
+
+The first three of the 10 flags are shown. A value of 1 is allowed and a value above 1 is not: the maximum is inclusive.
+
+A unit the engine does not list is refused, and nothing is converted:
+
+> unit must be one of us/ft, us/m for channel sonic: units are never converted here
+
+The same EKENE-7 sonic, declared in us/m, passes 240 checked with 0 failed: the definitional limit is positive in either unit, so a unit mislabel is invisible to it. The label is the caller's responsibility.
+
+# SECTION 9: Negative rates and rates while shut in (owned by Associate m03 l05)
+
+Shut in means `status` is 'shut-in' or `hoursOn` is 0. A negative rate is flagged; a positive rate while shut in is flagged; a zero rate while shut in is correct.
+
+| day | oil, bbl/d | hours on | status | rule | the engine reason |
+| --- | --- | --- | --- | --- | --- |
+| 47 | -18.500000 | 24.000000 | producing | negative-rate | rate -18.5 is negative |
+| 61 | 1271.700000 | 0.000000 | shut-in | rate-while-shut-in | rate 1271.7 is reported while the well is shut in (status is 'shut-in') |
+
+87 days checked, 2 failed; the three missing days are not checked. Day 60 is shut in with an oil rate of 0.000000 and is not flagged. Day 59 ran 18.500000 hours (stated) and is not shut in.
+
+| what the check is given | failed |
+| --- | --- |
+| rates alone | 1 |
+| rates and status | 2 |
+| rates and hours on | 2 |
+| rates, status and hours on | 2 |
+
+# SECTION 10: The depth and time index: duplicates, reversals and irregular steps (owned by Associate m04)
+
+A duplicate is a value equal to ANY earlier value. A reversal is a step against the stated direction. An irregular step is a step in the right direction whose size differs from the expected step by more than the tolerance. The expected step defaults to the median of the steps in the stated direction, and the tolerance to 1e-6 x expectedStep.
+
+| EKENE-7 depth index | value |
+| --- | --- |
+| entries | 240 |
+| expected step, ft | 0.500000 |
+| expected step source | median of the steps in the stated direction |
+| step tolerance, ft | 5.00e-7 |
+| duplicates | 0 |
+| reversals | 0 |
+| irregular steps | 1 |
+| monotonic | true |
+
+The one flag, verbatim: "step 1 from entry 149 differs from the expected 0.5 by more than 5e-7".
+
+THE SPLICE. The delivered index where two runs meet (stated): 8520.000000, 8520.500000, 8521.000000, 8521.500000, 8522.000000, 8521.500000, 8522.500000, 8523.000000, 8523.000000, 8523.500000, 8524.500000, 8525.000000, null, 8526.000000, 8526.500000.
+
+| entry | value | rules | the engine reasons |
+| --- | --- | --- | --- |
+| 5 | 8521.500000 | duplicate-index, reversal | index value 8521.5 repeats entry 3; index goes from 8522 to 8521.5, against the increasing direction |
+| 6 | 8522.500000 | irregular-step | step 1 from entry 5 differs from the expected 0.5 by more than 5e-7 |
+| 8 | 8523.000000 | duplicate-index | index value 8523 repeats entry 7 |
+| 10 | 8524.500000 | irregular-step | step 1 from entry 9 differs from the expected 0.5 by more than 5e-7 |
+| 12 | `null` | missing-index | index entry 12 is missing |
+| 13 | 8526.000000 | irregular-step | step 1 from entry 11 differs from the expected 0.5 by more than 5e-7 |
+
+| splice summary | count |
+| --- | --- |
+| missing | 1 |
+| duplicates | 2 |
+| reversals | 1 |
+| irregular steps | 3 |
+| monotonic | false |
+
+Entry 5 returns to a depth entry 3 already holds, so it is flagged twice: as a duplicate and as a reversal. The step after the lost entry is measured from the last present entry.
+
+A STATED EXPECTED STEP AND A LOOSE TOLERANCE. With expectedStep 0.5 and stepTolerance 0.6 (stated) the splice reads 0 irregular steps and still 2 duplicates and 1 reversal: a tolerance loosens the step test only.
+
+A LOG RECORDED UPWARD. The index 8410, 8409.5, 8409, 8408.5, 8408 (stated) declared decreasing reads 0 reversals and expected step 0.500000.
+Declared increasing, the same index is refused, because no step runs in the stated direction:
+
+> index has no step in the increasing direction: nothing to infer an expected step from
+
+# SECTION 11: A cumulative never falls (owned by Associate m05)
+
+Each present value is compared with the LAST PRESENT value before it; a drop larger than the tolerance is flagged.
+
+| day | cumulative oil, bbl |
+| --- | --- |
+| 67 | 1337276.000000 |
+| 68 | 1338506.200000 |
+| 69 | null |
+| 70 | 1331009.500000 |
+| 71 | 1342234.800000 |
+
+| flagged day | compared with day | drop, bbl | the engine reason |
+| --- | --- | --- | --- |
+| 70 | 68 | 7496.700000 | cumulative falls from 1338506.2 at entry 67 to 1331009.5 |
+
+Day 69 is missing (stated), so day 70 is measured against day 68. The keying error planted on day 70 is ten thousand barrels (stated); the `drop` field is 7496.700000 bbl, which is that error less the oil produced on days 69 and 70. Derived: ten thousand less the drop is 2503.300000 bbl, the two days of production, and it is not the drop.
+
+READING THE FLAG. The engine counts entries from 0, so "entry 67" in the reason is day 68. The flag carries its figures as fields: `previous` 1338506.200000, `value` 1331009.500000 and `drop` 7496.700000. The reason prints each cumulative as the shortest decimal that reads back to its field, and a lesson quotes the fields at six decimals.
+
+With a tolerance of 8000 bbl (stated) the same drop is not flagged: a tolerance is for meter noise, and a tolerance wide enough to swallow a keying error hides it.
+
+# SECTION 12: Water cut on a liquid basis, and the reporting tolerance (owned by Associate m05)
+
+The engine's water cut is water / (oil + water), a liquid basis. A reported water cut outside [0, 1] is flagged as out of range; one that disagrees with the computed value by more than the tolerance is a mismatch. The default tolerance is 1e-6.
+
+| tolerance | failed | out of range | mismatch |
+| --- | --- | --- | --- |
+| 1e-6, the default | 83 | 5 | 78 |
+| 1e-4, one unit in the fourth decimal | 6 | 5 | 1 |
+
+The EKENE-3 sheet reports water cut to four decimals (stated), so a correct value can differ from water / (oil + water) by up to half a unit in the fourth decimal. At the default tolerance that rounding is flagged as a mismatch; at one unit in the fourth decimal only the planted defects remain:
+
+| day | reported | computed, water / (oil + water) | rule |
+| --- | --- | --- | --- |
+| 20 | 20.430000 | 0.204348 | water-cut-out-of-range |
+| 21 | 21.000000 | 0.209967 | water-cut-out-of-range |
+| 22 | 20.630000 | 0.206271 | water-cut-out-of-range |
+| 23 | 20.650000 | 0.206484 | water-cut-out-of-range |
+| 24 | 21.340000 | 0.213353 | water-cut-out-of-range |
+| 55 | 0.248100 | 0.248871 | water-cut-mismatch |
+
+Day 55's reason, verbatim: "water cut 0.2481 disagrees with water / (oil + water) = 0.2488714659063911".
+
+THE BASIS MATTERS. On day 10 the computed liquid-basis water cut is 0.183105. Derived on the same day: water over oil, the water-oil ratio, is 0.224147, and oil over liquid, the oil cut, is 0.816895. Only the first is what the engine checks.
+
+Where the engine cannot compute a liquid-basis cut (a missing or negative rate, or no liquid) the `computed` entry is null: on EKENE-3 that is days 31, 32, 33, 47, 60.
+
+# SECTION 13: Parts that add to a total, and the tolerance on the total (owned by Associate m05 and Expert m05)
+
+The parts must add to the total within max(absTolerance, relTolerance x |total|). The Petrolord default is relTolerance 0.005 of the TOTAL and absTolerance 0; both are choices, stated in the basis.
+
+| day | oil + water, bbl/d | gross total, bbl/d | difference | allowed | flagged |
+| --- | --- | --- | --- | --- | --- |
+| 40 | 1737.500000 | 1774.000000 | -36.500000 | 8.870000 | true |
+| 41 | 1792.800000 | 1798.200000 | -5.400000 | 8.991000 | false |
+
+The difference and allowed columns are derived (the sum less the total, and 0.005 times the total); the flagged column is the engine's.
+
+Day 40's reason, verbatim: "parts sum to 1737.5 against a total of 1774 (allowed difference 8.870000000000001)".
+
+| tolerance, stated | failed | days flagged |
+| --- | --- | --- |
+| relTolerance 0.005, the default | 1 | 40 |
+| relTolerance 0.01 | 1 | 40 |
+| relTolerance 0.005 with absTolerance 50 bbl/d | 0 | none |
+
+3 days carry no sum (`null`): a day with any part or the total missing is not checked.
+
+# SECTION 14: Frozen values, and a slow drift that is not one (owned by Associate m05)
+
+A frozen run is at least `minRun` consecutive present values each within `tolerance` of the run's FIRST value. A missing value ends a run. The Petrolord defaults are minRun 5 and tolerance 0.
+
+| series | runs | start | end | length | value held |
+| --- | --- | --- | --- | --- | --- |
+| EKENE-7 DT, us/ft, entries | 1 | 175 | 183 | 9 | 83.200000 |
+| EKENE-3 gas, Mscf/d, days | 1 | 74 | 81 | 8 | 748.700000 |
+
+The gas meter held its day 74 value for the seven days after it (stated), so the run is eight days long, days 74 to 81. The reason, verbatim: "8 values in a row from entry 73 to 80 stay at 748.7".
+
+| EKENE-3 column | frozen runs at the defaults |
+| --- | --- |
+| oil | 0 |
+| water | 0 |
+| gross | 0 |
+
+A SLOW DRIFT. The readings 410.000000, 410.100000, 410.200000, 410.300000, 410.400000, 410.500000, 410.600000 (stated) rise 0.100000 at a time. At tolerance 0.15 and minRun 5 the engine finds 0 runs, because each value is compared with the run's first value.
+Derived, and a rule the engine does not use: comparing each value with the one before it would chain all 7 readings into one run.
+
+# SECTION 15: Well names: normalisation, near duplicates and the digit rule (owned by Associate m06)
+
+The stated normalisation: NFKD, trim, upper case, keep A to Z and 0 to 9, and strip leading zeros in each digit group. A pair is EXACT when the raw strings are equal, NORMALISED when the normalised forms are equal, and NEAR when the normalised forms are within `maxDistance` Levenshtein edits (1 by default) AND carry the same digits in the same order. A pair is reported under its strongest class only.
+
+| entry | as written | normalised |
+| --- | --- | --- |
+| 0 | EKENE-1 | EKENE1 |
+| 1 | EKENE-2 | EKENE2 |
+| 2 | EKENE-3 | EKENE3 |
+| 3 | EKENE-3 | EKENE3 |
+| 4 | Ekene 3 | EKENE3 |
+| 5 | EKENE-03 | EKENE3 |
+| 6 | EKENE-4 | EKENE4 |
+| 7 | EKNE-4 | EKNE4 |
+| 8 | EKENE-7 | EKENE7 |
+| 9 | EKENE 7 | EKENE7 |
+| 10 | ÉKENE-7 | EKENE7 |
+| 11 | EKENE-10 | EKENE10 |
+| 12 | EKENE-12 | EKENE12 |
+
+| pair | kind | distance | the engine reason |
+| --- | --- | --- | --- |
+| 2, 3 | exact | 0 | "EKENE-3" repeats entry 2 exactly |
+| 2, 4 | normalised | 0 | "EKENE-3" and "Ekene 3" are the same after normalisation (EKENE3) |
+| 2, 5 | normalised | 0 | "EKENE-3" and "EKENE-03" are the same after normalisation (EKENE3) |
+| 3, 4 | normalised | 0 | "EKENE-3" and "Ekene 3" are the same after normalisation (EKENE3) |
+| 3, 5 | normalised | 0 | "EKENE-3" and "EKENE-03" are the same after normalisation (EKENE3) |
+| 4, 5 | normalised | 0 | "Ekene 3" and "EKENE-03" are the same after normalisation (EKENE3) |
+| 6, 7 | near | 1 | "EKENE-4" and "EKNE-4" differ by 1 edit after normalisation (EKENE4, EKNE4) |
+| 8, 9 | normalised | 0 | "EKENE-7" and "EKENE 7" are the same after normalisation (EKENE7) |
+| 8, 10 | normalised | 0 | "EKENE-7" and "ÉKENE-7" are the same after normalisation (EKENE7) |
+| 9, 10 | normalised | 0 | "EKENE 7" and "ÉKENE-7" are the same after normalisation (EKENE7) |
+
+| kind | pairs |
+| --- | --- |
+| exact | 1 |
+| normalised | 8 |
+| near | 1 |
+
+| normalised pair | Levenshtein distance | digits | reported as near |
+| --- | --- | --- | --- |
+| EKENE2, EKENE12 | 1 | 2 and 12 | false |
+| EKENE1, EKENE10 | 1 | 1 and 10 | false |
+| EKNE4, EKENE4 | 1 | 4 and 4 | true |
+| EKENE1, EKENE7 | 1 | 1 and 7 | false |
+
+The digit rule is why EKENE-2 and EKENE-12, two real wells one edit apart, are not called near duplicates, while EKNE-4, a typing slip, is paired with EKENE-4.
+
+| setting, stated | exact | normalised | near |
+| --- | --- | --- | --- |
+| the defaults | 1 | 8 | 1 |
+| digitsMustMatch false | 1 | 8 | 41 |
+| stripLeadingZeros false | 1 | 5 | 1 |
+
+The accented entry 10 normalises to EKENE7: NFKD separates the accent and the letter filter drops it.
+
+# SECTION 16: One dataset, every check (owned by Associate m06)
+
+EKENE-3's production sheet through every Associate check, with the settings stated in the sections above:
+
+Two different counts appear below and are kept in separate columns. ENTRIES FAILED is the number of entries (days, samples) the check faults: missing values for completeness, failed entries for the others. FLAGS is the number of flag objects the engine returns: completeness returns one flag per gap run, and frozenRuns one flag per run, so a run of several entries is one flag.
+
+| check | column | setting, stated | checked or n | entries failed | flags |
+| --- | --- | --- | --- | --- | --- |
+| completeness | oil | none | 90 | 3 | 1 |
+| rateCheck | oil | hours on and status | 87 | 2 | 2 |
+| cumulativeCheck | cumOil | tolerance 0 | 89 | 1 | 1 |
+| waterCutCheck | waterCut | tolerance 1e-4 | 90 | 6 | 6 |
+| phaseSumCheck | oil + water against gross | relTolerance 0.005 | 87 | 1 | 1 |
+| frozenRuns | gas | minRun 5, tolerance 0 | 90 | 8 | 1 |
+
+EKENE-7's log through the same checks:
+
+| check | channel | entries failed | flags |
+| --- | --- | --- | --- |
+| completeness | RHOB | 12 | 1 |
+| completeness | NPHI | 3 | 3 |
+| rangeCheck | GR as delivered | 4 | 4 |
+| rangeCheck | NPHI | 10 | 10 |
+| rangeCheck | RT | 1 | 1 |
+| indexCheck | depth | 1 | 1 |
+| frozenRuns | DT | 9 | 1 |
+
+Every one of these flags is a planted defect. The Associate tier checks whether data are fit to use; which values stand apart from the rest is the next tier's question.
+
+# SECTION 17: The z-score, sample or population, and its ceiling (owned by Professional m01)
+
+z = (x - mean) / s, with the SAMPLE standard deviation (n - 1) by default, as NIST/SEMATECH 1.3.5.17 defines it. A value is flagged when |z| > 3. The largest |z| any value can reach with the sample SD is (n - 1) / sqrt(n).
+
+EKENE-3's ten gauge readings (stated): 212.400000, 212.700000, 212.300000, 212.400000, 212.400000, 212.600000, 212.500000, 240.100000, 212.600000, 212.500000. Entry 7 is a gauge glitch.
+
+| what | sample SD | population SD |
+| --- | --- | --- |
+| mean | 215.250000 | 215.250000 |
+| standard deviation | 8.732220 | 8.284111 |
+| z of entry 7 | 2.845783 | 2.999718 |
+| largest |z| | 2.845783 | 2.999718 |
+| flags at |z| > 3 | 0 | 0 |
+
+THE CEILING. At n = 10 the engine reports `maxPossibleAbsZ` 2.846050 and `thresholdReachable` false: no value in ten can pass |z| > 3 with the sample SD, however wild. Entry 7 reaches 2.845783.
+
+| n | largest possible |z| with the sample SD | reachable at 3 |
+| --- | --- | --- |
+| 5 | 1.788854 | false |
+| 8 | 2.474874 | false |
+| 10 | 2.846050 | false |
+| 11 | 3.015113 | true |
+| 12 | 3.175426 | true |
+| 20 | 4.248529 | true |
+| 50 | 6.929646 | true |
+
+Each row is one value of 1 among zeros, which is how a value sits as far out as the sample allows.
+
+ONE OUTLIER INFLATES THE SPREAD. EKENE-7's 14 core plugs (stated): 0.225000, 0.232000, 0.239000, 0.216000, 0.224000, 0.214000, 0.201000, 0.212000, 0.281000, 0.211000, 0.206000, 0.219000, 0.215000, 0.209000. Entry 8 is a fractured plug.
+
+| plugs | mean | sample SD | largest |z| | flags |
+| --- | --- | --- | --- | --- |
+| all fourteen | 0.221714 | 0.019859 | 2.985356 | 0 |
+| entry 8 left out | 0.217154 | 0.010574 | 2.066042 | 0 |
+
+Derived: entry 8 measured against the other thirteen plugs' mean and SD sits at 6.038080. Measured against a spread that includes itself, it reads 2.985356 and is not flagged.
+
+NIST's uranium isotope example (golden, 8 values): the engine's largest |z| is 2.468765; NIST prints 2.4687. Section 31 reads that printed figure.
+
+# SECTION 18: The median, the MAD and the modified z-score (owned by Professional m02)
+
+MAD is the raw median of |x - median|. The modified z-score is M = 0.6745 (x - median) / MAD, and |M| > 3.5 labels a potential outlier (Iglewicz and Hoaglin, as NIST/SEMATECH 1.3.5.17 prints them).
+
+| series | median | MAD | largest |M| | entries flagged |
+| --- | --- | --- | --- | --- |
+| EKENE-3 gauge | 212.500000 | 0.100000 | 186.162000 | 7 |
+| EKENE-7 core | 0.215500 | 0.007500 | 5.890633 | 8 |
+
+On the gauge the median is 212.500000 with or without the glitch, and the modified z of entry 7 is 186.162000. Its reason, verbatim: "value 240.1 has modified z = 186.16200000001055, beyond 3.5".
+
+| gauge readings | mean, derived | median | sample SD | MAD |
+| --- | --- | --- | --- | --- |
+| all ten | 215.250000 | 212.500000 | 8.732220 | 0.100000 |
+| entry 7 left out | 212.488889 | 212.500000 | 0.126930 | 0.100000 |
+
+The mean column is lib/stats `mean`, the function the engine itself imports.
+
+THE PRINTED CONSTANT. The engine uses 0.6745 as printed. Derived: 1 / 1.4826 is 0.674491, and entry 7 on the gauge with that constant would read 186.159450 against the engine's 186.162000. Hampel's scale, 1.4826 x MAD, is the same idea from the other side (section 21).
+
+WHEN THE MAD IS ZERO. The MAD is zero exactly when MORE than half the present values equal the median: at least (n + 1) / 2 of them when n is odd, at least n / 2 + 1 when n is even. Exactly half is not enough: on 1, 5, 5, 9 (stated), two of four values sit at the median 5 and the engine returns MAD 2 and scores the series. When the MAD is zero the engine refuses rather than invent a fallback. On 5, 5, 5, 6, 7 (stated), three of five values equal the median:
+
+| function | the engine's refusal, verbatim |
+| --- | --- |
+| `modifiedZScores` | values have MAD = 0: more than half the present values equal the median, so the modified z-score is undefined |
+
+# SECTION 19: Three quantile rules, R6, R7 and R8 (owned by Professional m03)
+
+The engine implements Hyndman and Fan R6, R7 and R8 exactly as NIST/SEMATECH 7.2.6.2 states them: h = p(N + 1) for R6, 1 + p(N - 1) for R7 and p(N + 1/3) + 1/3 for R8; with h = k + d the quantile is Y[k] + d (Y[k+1] - Y[k]) on the ordered values, clamped to the minimum and maximum. R7 is the default of Excel, R and numpy; R6 is NIST's.
+
+| rule | engine 0.9 quantile | golden | NIST printed | relative difference against golden |
+| --- | --- | --- | --- | --- |
+| R6 | 95.198070 | 95.198070 | 95.1981 | 0 |
+| R7 | 95.195680 | 95.195680 | 95.1957 | 0 |
+| R8 | 95.197243 | 95.197243 | 95.1972 | 0 |
+
+The NIST silicon wafer resistivities (golden, 12 values), 90th percentile by each rule.
+
+THE SAME QUESTION ON EKENE-7. The water sand gamma ray, entries 130 to 199:
+
+| rule | first quartile | third quartile | IQR, derived |
+| --- | --- | --- | --- |
+| R6 | 31.817500 | 38.737500 | 6.920000 |
+| R7 | 31.947500 | 38.642500 | 6.695000 |
+| R8 | 31.825833 | 38.725833 | 6.900000 |
+
+# SECTION 20: Tukey fences: inner, outer and on the fence (owned by Professional m03)
+
+The fences are Q1 - k IQR and Q3 + k IQR, k = 1.5 by default (3 for far out values), quartiles by the stated rule, R7 by default. A value strictly outside a fence is flagged.
+
+| setting, stated | Q1 | Q3 | IQR | lower fence | upper fence | entries flagged |
+| --- | --- | --- | --- | --- | --- | --- |
+| R7, k 1.5 (the defaults) | 31.947500 | 38.642500 | 6.695000 | 21.905000 | 48.685000 | 170 |
+| R6, k 1.5 | 31.817500 | 38.737500 | 6.920000 | 21.437500 | 49.117500 | 170 |
+| R7, k 3 | 31.947500 | 38.642500 | 6.695000 | 11.862500 | 58.727500 | 170 |
+
+The flagged entries are EKENE-7 entries, the water sand read from entry 130. Entry 170 is a planted spike.
+
+On the whole log, shale and sand together, the gamma ray fences are -57.070000 and 186.810000 and flag 0 entries: the spike at entry 170 reads 90.590000, inside a spread that includes the shale.
+
+ON THE FENCE IS INSIDE. The golden case iqr-exactly-on-both-fences: values -4, 2, 2, 3, 4, 5, 6, 6, 12 (n = 9), at the defaults, rule R7 and k 1.5. The engine returns Q1 2, Q3 6 and IQR 4, fences -4 and 12, and 0 flags: the lowest and highest values sit exactly on the fences.
+
+WHERE THE BOUNDARY FALLS. The statistical flags (a Tukey fence, a Hampel threshold, a z or modified z threshold, a control limit, a CUSUM decision interval, the Grubbs critical value, the Mahalanobis cutoff) all fire strictly beyond their limit, so a value exactly on the limit is inside. Three Associate checks draw the boundary differently, each on purpose: an EXCLUSIVE definitional minimum flags the bound itself, a frozen-run tolerance includes a value exactly at tolerance, and a coverage step exactly equal to maxStep covers. Each row below is a real call, beside an inclusive maximum and a CUSUM exactly on h for contrast:
+
+| check | what was passed | the engine's answer | what it means |
+| --- | --- | --- | --- |
+| `rangeCheck`, resistivity in ohm.m | a value of 0, its EXCLUSIVE minimum | 1 failed | an exclusive minimum flags the bound itself |
+| `rangeCheck`, fraction in v/v | a value of 1, its inclusive maximum | 0 failed | an inclusive bound is allowed |
+| `frozenRuns`, tolerance 0.5 | 5, 5.5, 5, 5.5, 5, stated | 1 run of 5 | a value exactly at tolerance from the run's first value stays in the run |
+| `coverage`, maxStep 1 | an index 0, 1, 2 with every value present | coverage 1.000000 | a step exactly equal to maxStep covers |
+| `cusumChart`, golden cusum-exactly-on-h | S_hi reaches h = 4 | 0 signals | a CUSUM exactly on h does not signal |
+
+# SECTION 21: The Hampel window: local against global (owned by Professional m04)
+
+For each sample, the window is 2 x halfWindow + 1 samples centred on it, truncated at the ends; missing values never enter a window; a window with fewer than three present samples is not judged. A sample is flagged when |x - window median| > nSigma x 1.4826 x MAD of the window, strictly. The decision is the petrophysics engine's despikeHampel, imported; the replacement is the window median.
+
+| entry | GR | window median | window MAD | threshold | |x - median|, derived | replacement |
+| --- | --- | --- | --- | --- | --- | --- |
+| 15 | 110.770000 | 94.330000 | 1.660000 | 7.383348 | 16.440000 | 94.330000 |
+| 30 | 90.540000 | 96.290000 | 1.090000 | 4.848102 | 5.750000 | 96.290000 |
+| 49 | 24.810000 | 36.540000 | 1.480000 | 6.582744 | 11.730000 | 36.540000 |
+| 50 | 24.830000 | 36.540000 | 1.480000 | 6.582744 | 11.710000 | 36.540000 |
+| 70 | 95.420000 | 37.000000 | 7.700000 | 34.248060 | 58.420000 | 37.000000 |
+| 77 | 43.730000 | 31.440000 | 2.430000 | 10.808154 | 12.290000 | 31.440000 |
+| 82 | 43.630000 | 31.350000 | 1.960000 | 8.717688 | 12.280000 | 31.350000 |
+| 145 | 29.570000 | 36.810000 | 0.830000 | 3.691674 | 7.240000 | 36.810000 |
+| 170 | 90.590000 | 38.410000 | 3.320000 | 14.766696 | 52.180000 | 38.410000 |
+| 185 | 42.860000 | 33.110000 | 2.020000 | 8.984556 | 9.750000 | 33.110000 |
+| 186 | 42.810000 | 33.110000 | 1.340000 | 5.960052 | 9.700000 | 33.110000 |
+
+EKENE-7 gamma ray, sentinel converted, halfWindow 3 and nSigma 3: 11 flags. Entries 70 and 170 are the planted spikes. The other 9 are not planted defects: each is a sample farther from its window median than three scaled MADs of a seven-sample window, which is what the rule flags.
+
+GLOBAL AGAINST LOCAL. On the same channel the z-score flags 0: entry 70 reads z 1.058062 and entry 170 0.900269, because a sand spike to 95.420000 gAPI looks like shale to a global mean and SD.
+
+| halfWindow, stated | nSigma, stated | window samples | flags | both spikes flagged |
+| --- | --- | --- | --- | --- |
+| 3 | 3 | 7 | 11 | true |
+| 3 | 4 | 7 | 8 | true |
+| 3 | 5 | 7 | 6 | true |
+| 5 | 3 | 11 | 11 | true |
+| 5 | 5 | 11 | 3 | true |
+| 10 | 3 | 21 | 4 | true |
+
+EDGES. The engine returns one point per entry, and a point carries `windowCount` (present samples in its window) and `judged` (true when that count is three or more). The first four EKENE-7 gamma ray points, halfWindow 3, as returned:
+
+| entry | windowCount | judged | window median | window MAD | threshold | flagged |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | 4 | true | 96.090000 | 3.055000 | 13.588029 | false |
+| 1 | 5 | true | 96.510000 | 2.990000 | 13.298922 | false |
+| 2 | 6 | true | 97.685000 | 2.560000 | 11.386368 | false |
+| 3 | 7 | true | 98.860000 | 2.130000 | 9.473814 | false |
+
+EDGES AND GAPS. At entry 0 the window is truncated to 4 samples, which is at least three, so entry 0 is judged (`judged` true) and is not flagged. On the density, entry 79 sits beside the twelve-sample gap and its window holds 4 present samples; entry 80 is missing and is not judged (`judged` false).
+A window too thin to judge: on 2.3, null, null, 2.9, null, null, 2.31 (stated) with halfWindow 1, entry 3 has 1 present sample in its window and `judged` false.
+
+ON THE THRESHOLD. The golden case hampel-on-the-threshold: values -1, 0, 1.482600, 1, 0, halfWindow 2 and nSigma 1. Entry 2 sits exactly on its threshold (window median 0, MAD 1, threshold 1.482600) and is not flagged; the case flags entry 4.
+
+# SECTION 22: Grubbs for one outlier, its critical value, and masking (owned by Professional m05)
+
+Grubbs' G is the largest |Y - mean| / s (two-sided), with the sample SD. It is compared with (N - 1) / sqrt(N) x sqrt(t^2 / (N - 2 + t^2)), t the upper alpha / (2N) point of Student's t on N - 2 degrees of freedom (alpha / N one-sided). G above the critical value rejects. The test is for ONE outlier; NIST points to the generalised ESD test for several, which the engine does not build.
+
+| core plugs | n | sample SD | G | critical at alpha 0.05 | t | tail probability | reject | suspect entry |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| one fractured plug | 14 | 0.019859 | 2.985356 | 2.507321 | 3.611249 | 0.001786 | true | 8 |
+| two high plugs | 14 | 0.024800 | 2.275359 | 2.507321 | 3.611249 | 0.001786 | false | 8 |
+
+MASKING. With a second high plug at entry 2 (stated 0.279000), G falls to 2.275359 and the test no longer rejects: the sample SD rises from 0.019859 to 0.024800 with the second plug in it. G is the largest |z|: on the single-spike plugs G is 2.985356 and the largest |z| in section 17 is 2.985356.
+
+| n | two-sided critical at 0.05 | one-sided critical at 0.05 | largest possible G |
+| --- | --- | --- | --- |
+| 6 | 1.887145 | 1.822120 | 2.041241 |
+| 8 | 2.126645 | 2.031652 | 2.474874 |
+| 10 | 2.289954 | 2.176068 | 2.846050 |
+| 14 | 2.507321 | 2.371654 | 3.474396 |
+| 20 | 2.708246 | 2.556581 | 4.248529 |
+| 30 | 2.908473 | 2.745132 | 5.294651 |
+
+The critical value depends on n, alpha and the side only; the values the rows were run on do not enter it.
+
+NIST 1.3.5.17.1, the uranium example (golden, one-sided max, alpha 0.05): G 2.468765 against the printed 2.4687; critical 2.031652 against the printed 2.032; reject true.
+
+# SECTION 23: The Mahalanobis distance and its chi-square cutoff (owned by Professional m05)
+
+For each complete row, d^2 = (x - mean)' S^-1 (x - mean), with the classical mean and the SAMPLE covariance S (n - 1). A row is flagged when d^2 exceeds the chi-square quantile at 1 - alpha on p degrees of freedom, alpha 0.025 by default; the quantile is safetyStats' chiSquareQuantile, imported. Rows with a missing value are skipped and listed. The classical estimates are themselves pulled by outliers; a robust covariance is not built.
+
+| EKENE-7 oil sand, RHOB and NPHI | value |
+| --- | --- |
+| rows | 60 |
+| complete rows used | 48 |
+| rows skipped (EKENE-7 entries) | 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91 |
+| centre RHOB, g/cm3 | 2.280625 |
+| centre NPHI, v/v | 0.243313 |
+| covariance RHOB RHOB | 0.003079 |
+| covariance RHOB NPHI | -0.001576 |
+| covariance NPHI NPHI | 0.001153 |
+| correlation, derived | -0.836264 |
+| cutoff, chi-square 0.975 on 2 degrees of freedom | 7.377759 |
+| rows flagged (EKENE-7 entries) | 60 |
+
+Entry 60 (stated RHOB 2.221000, NPHI 0.188000) has d^2 22.397696. Each of its values alone is ordinary: z -1.074527 on density and -1.645167 on neutron, and neither z-score flags anything in the oil sand (0 and 0 flags). The pair sits off the density-neutron trend, and only a distance that knows the correlation sees it.
+
+The flag's reason, verbatim: "row 20 has squared distance 22.397696013934816, beyond the chi-square 0.975 quantile 7.3777589082278725 on 2 degrees of freedom".
+
+| alpha, stated | cutoff on 2 degrees of freedom | rows flagged |
+| --- | --- | --- |
+| 0.100000 | 4.605170 | 3 |
+| 0.050000 | 5.991465 | 2 |
+| 0.025000 | 7.377759 | 1 |
+| 0.010000 | 9.210340 | 1 |
+| 0.001000 | 13.815511 | 1 |
+
+| EKENE-7 entry | d^2 |
+| --- | --- |
+| 60 | 22.397696 |
+| 62 | 6.581737 |
+| 56 | 5.442663 |
+
+The three largest squared distances in the oil sand.
+
+# SECTION 24: Which method for which question (owned by Professional m06)
+
+Every Professional method run on the same three teaching series, at its defaults (Hampel halfWindow 3):
+
+| series | z beyond 3 | modified z beyond 3.5 | Tukey fences, R7 k 1.5 | Hampel | Grubbs rejects |
+| --- | --- | --- | --- | --- | --- |
+| EKENE-3 gauge | none | 7 | 7 | 1, 7 | 7 |
+| EKENE-7 core | none | 8 | 8 | 8 | 8 |
+| EKENE-7 core, two high plugs | none | 2, 8 | 2, 8 | 2, 8 | none |
+
+The entries are positions in each series. Each method answers its own question: z and Grubbs measure against a mean and SD the outlier helps set; the modified z and the fences against a median and quartiles it barely moves; Hampel against a local window; Mahalanobis (the section before) against a correlation. A flag from any of them is a question about that entry, and none of them deletes it.
+
+# SECTION 25: The individuals and moving range chart (owned by Expert m01)
+
+MR_i = |x_i - x_(i-1)|, sigma = MRbar / 1.128 (d2 for a moving range of two), limits centre +/- 3 sigma; the moving range chart has upper limit 3.267 MRbar (D4) and lower limit 0. Centre and MRbar default to the data's own averages, and either may be given as a standard. A point strictly outside its limits signals. A chart refuses a series with a gap.
+
+| NIST 6.3.2.2 flow rate, 10 batches | engine | NIST printed |
+| --- | --- | --- |
+| centre | 50.810000 | 50.81 |
+| mrBar | 1.877778 | 1.8778 |
+| ucl | 55.804090 | 55.8041 |
+| lcl | 45.815910 | 45.8159 |
+| movingRanges.1 | 2.000000 | 2 |
+| movingRanges.2 | 2.300000 | 2.3 |
+| movingRanges.3 | 1.400000 | 1.4 |
+| movingRanges.4 | 3.500000 | 3.5 |
+| movingRanges.5 | 3.400000 | 3.4 |
+| movingRanges.6 | 1.400000 | 1.4 |
+| movingRanges.7 | 0.200000 | 0.2 |
+| movingRanges.8 | 1.200000 | 1.2 |
+| movingRanges.9 | 1.500000 | 1.5 |
+
+The moving ranges (engine): 2.000000, 2.300000, 1.400000, 3.500000, 3.400000, 1.400000, 0.200000, 1.200000, 1.500000. Flags on the NIST data: 0.
+
+EKENE-3 FLOWING WELLHEAD PRESSURE, PHASE ONE: 50 in-control days, psig (stated in the generator).
+
+| phase one | value |
+| --- | --- |
+| centre, psig | 611.380000 |
+| MRbar, psi | 4.257143 |
+| sigma = MRbar / 1.128, psi | 3.774063 |
+| upper limit, psig | 622.702188 |
+| lower limit, psig | 600.057812 |
+| moving range upper limit, psi | 13.908086 |
+| flags | 0 |
+| sample SD of phase one, lib/stats, derived | 3.862060 |
+
+PHASE TWO, the forty monitored days, charted with phase one's centre and MRbar as the standard, and on its own averages:
+
+| chart | centre | upper limit | lower limit | days signalling (rule) |
+| --- | --- | --- | --- | --- |
+| phase one as the standard | 611.380000 | 622.702188 | 600.057812 | 8 (individuals-above-ucl); 8 (moving-range-above-ucl); 9 (moving-range-above-ucl); 22 (individuals-below-lcl); 23 (moving-range-above-ucl); 25 (moving-range-above-ucl) |
+| phase two on its own averages | 609.960000 | 624.839978 | 595.080022 | 8 (individuals-above-ucl); 9 (moving-range-above-ucl) |
+
+Day 8 is the planted gauge glitch (633.800000 psig). A chart drawn on the monitored data's own averages takes its centre from data that include the shift from day 16.
+
+# SECTION 26: The EWMA chart: a weighted memory with limits from history (owned by Expert m02)
+
+EWMA_t = lambda x_t + (1 - lambda) EWMA_(t-1), starting at EWMA_0 = the target. Limits are target +/- L sigma sqrt(lambda / (2 - lambda)) (asymptotic), or the exact ones, which multiply the variance by 1 - (1 - lambda)^(2t). Target and sigma are REQUIRED and come from historical in-control data; the chart does not estimate them from the data it monitors.
+
+NO ENGINE DEFAULT FOR LAMBDA. The engine takes no default smoothing constant: a call without `lambda` is refused, naming the field, in the engine's own words:
+
+> lambda must be in (0, 1]; 0.2 to 0.3 is usual (NIST 6.3.2.4)
+
+| NIST 6.3.2.4, lambda 0.3, target 50, s 2.0539 | engine | NIST printed |
+| --- | --- | --- |
+| ucl | 52.588432 | 52.5884 |
+| lcl | 47.411568 | 47.4115 |
+
+The NIST EWMA values (engine, first five): 50.600000, 49.520000, 50.564000, 50.184800, 50.159360. Section 31 reads the printed lower limit.
+
+EKENE-3 PHASE TWO, lambda 0.2 and L 3 (stated), target 611.380000 and sigma 3.774063 from phase one:
+
+| day | pressure | EWMA | asymptotic lower | asymptotic upper | exact lower | exact upper | signal |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 1 | 615.500000 | 612.204000 | 607.605937 | 615.154063 | 609.115562 | 613.644438 | none |
+| 2 | 608.900000 | 611.543200 | 607.605937 | 615.154063 | 608.480105 | 614.279895 | none |
+| 3 | 613.800000 | 611.994560 | 607.605937 | 615.154063 | 608.138135 | 614.621865 | none |
+| 4 | 614.900000 | 612.575648 | 607.605937 | 615.154063 | 607.937054 | 614.822946 | none |
+| 5 | 612.000000 | 612.460518 | 607.605937 | 615.154063 | 607.814308 | 614.945692 | none |
+| 6 | 614.700000 | 612.908415 | 607.605937 | 615.154063 | 607.737921 | 615.022079 | none |
+| 7 | 616.600000 | 613.646732 | 607.605937 | 615.154063 | 607.689863 | 615.070137 | none |
+| 8 | 633.800000 | 617.677385 | 607.605937 | 615.154063 | 607.659432 | 615.100568 | ewma-above-ucl |
+| 9 | 608.000000 | 615.741908 | 607.605937 | 615.154063 | 607.640085 | 615.119915 | ewma-above-ucl |
+| 10 | 611.100000 | 614.813527 | 607.605937 | 615.154063 | 607.627756 | 615.132244 | none |
+| 11 | 607.900000 | 613.430821 | 607.605937 | 615.154063 | 607.619887 | 615.140113 | none |
+| 12 | 618.000000 | 614.344657 | 607.605937 | 615.154063 | 607.614859 | 615.145141 | none |
+| 13 | 619.500000 | 615.375726 | 607.605937 | 615.154063 | 607.611645 | 615.148355 | ewma-above-ucl |
+| 14 | 615.700000 | 615.440581 | 607.605937 | 615.154063 | 607.609589 | 615.150411 | ewma-above-ucl |
+| 15 | 613.000000 | 614.952464 | 607.605937 | 615.154063 | 607.608274 | 615.151726 | none |
+| 16 | 604.500000 | 612.861972 | 607.605937 | 615.154063 | 607.607433 | 615.152567 | none |
+| 17 | 609.400000 | 612.169577 | 607.605937 | 615.154063 | 607.606894 | 615.153106 | none |
+| 18 | 606.200000 | 610.975662 | 607.605937 | 615.154063 | 607.606550 | 615.153450 | none |
+| 19 | 605.900000 | 609.960529 | 607.605937 | 615.154063 | 607.606329 | 615.153671 | none |
+| 20 | 607.300000 | 609.428424 | 607.605937 | 615.154063 | 607.606188 | 615.153812 | none |
+| 21 | 604.000000 | 608.342739 | 607.605937 | 615.154063 | 607.606098 | 615.153902 | none |
+| 22 | 598.600000 | 606.394191 | 607.605937 | 615.154063 | 607.606040 | 615.153960 | ewma-below-lcl |
+| 23 | 615.200000 | 608.155353 | 607.605937 | 615.154063 | 607.606003 | 615.153997 | none |
+| 24 | 618.500000 | 610.224282 | 607.605937 | 615.154063 | 607.605979 | 615.154021 | none |
+| 25 | 602.900000 | 608.759426 | 607.605937 | 615.154063 | 607.605964 | 615.154036 | none |
+| 26 | 607.200000 | 608.447541 | 607.605937 | 615.154063 | 607.605954 | 615.154046 | none |
+| 27 | 601.900000 | 607.138033 | 607.605937 | 615.154063 | 607.605948 | 615.154052 | ewma-below-lcl |
+| 28 | 604.900000 | 606.690426 | 607.605937 | 615.154063 | 607.605944 | 615.154056 | ewma-below-lcl |
+| 29 | 609.300000 | 607.212341 | 607.605937 | 615.154063 | 607.605942 | 615.154058 | ewma-below-lcl |
+| 30 | 603.100000 | 606.389873 | 607.605937 | 615.154063 | 607.605940 | 615.154060 | ewma-below-lcl |
+| 31 | 602.900000 | 605.691898 | 607.605937 | 615.154063 | 607.605939 | 615.154061 | ewma-below-lcl |
+| 32 | 604.100000 | 605.373518 | 607.605937 | 615.154063 | 607.605938 | 615.154062 | ewma-below-lcl |
+| 33 | 610.000000 | 606.298815 | 607.605937 | 615.154063 | 607.605938 | 615.154062 | ewma-below-lcl |
+| 34 | 606.500000 | 606.339052 | 607.605937 | 615.154063 | 607.605938 | 615.154062 | ewma-below-lcl |
+| 35 | 613.700000 | 607.811241 | 607.605937 | 615.154063 | 607.605937 | 615.154063 | none |
+| 36 | 603.900000 | 607.028993 | 607.605937 | 615.154063 | 607.605937 | 615.154063 | ewma-below-lcl |
+| 37 | 610.700000 | 607.763195 | 607.605937 | 615.154063 | 607.605937 | 615.154063 | none |
+| 38 | 605.700000 | 607.350556 | 607.605937 | 615.154063 | 607.605937 | 615.154063 | ewma-below-lcl |
+| 39 | 609.900000 | 607.860445 | 607.605937 | 615.154063 | 607.605937 | 615.154063 | none |
+| 40 | 608.700000 | 608.028356 | 607.605937 | 615.154063 | 607.605937 | 615.154063 | none |
+
+The signal column is the asymptotic chart's. With the EXACT limits the engine signals low on days 22, 27, 28, 29, 30, 31, 32, 33, 34, 36, 38 and high on days 8, 9, 13, 14; with the asymptotic limits, low on days 22, 27, 28, 29, 30, 31, 32, 33, 34, 36, 38 and high on days 8, 9, 13, 14. The two sets are the same days: the exact limits are narrower, most of all in the first days, and on no day does the EWMA fall between an exact and an asymptotic limit.
+
+The first low signal is day 22. The days with an upper signal are 8, 9, 13, 14. Derived: day 8's value enters the EWMA with weight lambda, 0.200000, and keeps weight lambda (1 - lambda)^(t - 8) on day t, which is 0.065536 on day 13.
+
+| lambda, stated | asymptotic half-width, psi, derived | first low signal day | days signalling |
+| --- | --- | --- | --- |
+| 0.100000 | 2.597488 | 28 | 18 |
+| 0.200000 | 3.774063 | 22 | 15 |
+| 0.300000 | 4.756270 | 22 | 10 |
+| 0.500000 | 6.536869 | 22 | 5 |
+| 1.000000 | 11.322188 | 22 | 2 |
+
+At lambda 1 the EWMA is the observation itself and the limits are target +/- 3.000000 sigma, derived: the individuals chart.
+
+# SECTION 27: The tabular CUSUM: k, h, stated units, and no reset (owned by Expert m03)
+
+S_hi(i) = max(0, S_hi(i-1) + x_i - target - k) and S_lo(i) = max(0, S_lo(i-1) + target - k - x_i), both starting at 0. A signal is S_hi or S_lo strictly above h. `units` is required, and the engine's own refusal (section 4) names the two choices, sigma and data, with its rule of thumb. No reset after a signal. The plain cumulative sum of x - target is returned too.
+
+NO ENGINE DEFAULT FOR K OR H. The engine takes neither the reference value nor the decision interval by default; the rule of thumb in its units refusal is advice, and a call without either is refused, naming the field:
+
+| what was left out | field named | the engine's message |
+| --- | --- | --- |
+| k | `k` | k must be a finite number, zero or more |
+| h | `h` | h must be a finite number above zero |
+
+NIST 6.3.2.3, target 325, k 0.317500 and h 4.195900 in data units (golden): the first upper signal is group 14.
+
+| group | x - 325 | S_hi | S_lo | cumulative sum |
+| --- | --- | --- | --- | --- |
+| 11 | -0.375000 | 0.000000 | 0.312500 | -2.650000 |
+| 12 | 0.150000 | 0.000000 | 0.000000 | -2.500000 |
+| 13 | 3.325000 | 3.007500 | 0.000000 | 0.825000 |
+| 14 | 2.250000 | 4.940000 | 0.000000 | 3.075000 |
+| 15 | 2.825000 | 7.447500 | 0.000000 | 5.900000 |
+
+EKENE-3 PHASE TWO, k 0.5 and h 4 in sigma units (stated), target and sigma from phase one: k is 1.887031 psi and h is 15.096251 psi.
+
+| day | pressure | S_hi | S_lo | cumulative sum | signal |
+| --- | --- | --- | --- | --- | --- |
+| 1 | 615.500000 | 2.232969 | 0.000000 | 4.120000 | none |
+| 2 | 608.900000 | 0.000000 | 0.592969 | 1.640000 | none |
+| 3 | 613.800000 | 0.532969 | 0.000000 | 4.060000 | none |
+| 4 | 614.900000 | 2.165937 | 0.000000 | 7.580000 | none |
+| 5 | 612.000000 | 0.898906 | 0.000000 | 8.200000 | none |
+| 6 | 614.700000 | 2.331874 | 0.000000 | 11.520000 | none |
+| 7 | 616.600000 | 5.664843 | 0.000000 | 16.740000 | none |
+| 8 | 633.800000 | 26.197812 | 0.000000 | 39.160000 | high |
+| 9 | 608.000000 | 20.930780 | 1.492969 | 35.780000 | high |
+| 10 | 611.100000 | 18.763749 | 0.000000 | 35.500000 | high |
+| 11 | 607.900000 | 13.396717 | 1.592969 | 32.020000 | none |
+| 12 | 618.000000 | 18.129686 | 0.000000 | 38.640000 | high |
+| 13 | 619.500000 | 24.362655 | 0.000000 | 46.760000 | high |
+| 14 | 615.700000 | 26.795623 | 0.000000 | 51.080000 | high |
+| 15 | 613.000000 | 26.528592 | 0.000000 | 52.700000 | high |
+| 16 | 604.500000 | 17.761560 | 4.992969 | 45.820000 | high |
+| 17 | 609.400000 | 13.894529 | 5.085937 | 43.840000 | none |
+| 18 | 606.200000 | 6.827497 | 8.378906 | 38.660000 | none |
+| 19 | 605.900000 | 0.000000 | 11.971874 | 33.180000 | none |
+| 20 | 607.300000 | 0.000000 | 14.164843 | 29.100000 | none |
+| 21 | 604.000000 | 0.000000 | 19.657812 | 21.720000 | low |
+| 22 | 598.600000 | 0.000000 | 30.550780 | 8.940000 | low |
+| 23 | 615.200000 | 1.932969 | 24.843749 | 12.760000 | low |
+| 24 | 618.500000 | 7.165937 | 15.836717 | 19.880000 | low |
+| 25 | 602.900000 | 0.000000 | 22.429686 | 11.400000 | low |
+| 26 | 607.200000 | 0.000000 | 24.722655 | 7.220000 | low |
+| 27 | 601.900000 | 0.000000 | 32.315623 | -2.260000 | low |
+| 28 | 604.900000 | 0.000000 | 36.908592 | -8.740000 | low |
+| 29 | 609.300000 | 0.000000 | 37.101560 | -10.820000 | low |
+| 30 | 603.100000 | 0.000000 | 43.494529 | -19.100000 | low |
+| 31 | 602.900000 | 0.000000 | 50.087497 | -27.580000 | low |
+| 32 | 604.100000 | 0.000000 | 55.480466 | -34.860000 | low |
+| 33 | 610.000000 | 0.000000 | 54.973435 | -36.240000 | low |
+| 34 | 606.500000 | 0.000000 | 57.966403 | -41.120000 | low |
+| 35 | 613.700000 | 0.432969 | 53.759372 | -38.800000 | low |
+| 36 | 603.900000 | 0.000000 | 59.352340 | -46.280000 | low |
+| 37 | 610.700000 | 0.000000 | 58.145309 | -46.960000 | low |
+| 38 | 605.700000 | 0.000000 | 61.938278 | -52.640000 | low |
+| 39 | 609.900000 | 0.000000 | 61.531246 | -54.120000 | low |
+| 40 | 608.700000 | 0.000000 | 62.324215 | -56.800000 | low |
+
+The first upper signal is day 8 and the first lower signal is day 21. NO RESET: S_hi is above h on 8 days from day 8 to day 16; after a signal the sum carries on from where it stood.
+
+THE UNIT MATTERS. The same k 0.5 and h 4 read as psi give a first upper signal on day 4, a first lower signal on day 11, and 45 flags against 28.
+
+NIST's design line, derived here with its own printed inputs (alpha 0.0027, beta 0.01, delta 1 sigma, and the printed k 0.317500): h = (2 / delta^2) ln((1 - beta) / alpha) k gives 3.749328, and 4.189476 with alpha halved, both in the data's units. The table uses h 4.195900. The engine has no design helper: k and h are inputs (section 31).
+
+# SECTION 28: Which chart sees what (owned by Expert m03 l05)
+
+EKENE-3 phase two carries two planted events: a glitch on day 8 and a downward shift from day 16 (stated in the generator). Each chart with its settings from the sections above:
+
+| chart | first signal at or after day 16, low side | signals on day 8 | days with any signal |
+| --- | --- | --- | --- |
+| individuals, phase one standard | 22 | true | 5 |
+| EWMA, lambda 0.2, asymptotic | 22 | true | 15 |
+| CUSUM, k 0.5 and h 4 sigma | 21 | true | 28 |
+
+| chart | low signals from day 16 to day 40 |
+| --- | --- |
+| individuals | 1 |
+| EWMA | 11 |
+| CUSUM | 20 |
+
+All three see the glitch. The individuals chart signals on the shifted days only where a single day falls past three sigma; EWMA and CUSUM accumulate the shift and hold it.
+
+# SECTION 29: The scorecard: a score per dimension, weights and the weakest (owned by Expert m04)
+
+Each dimension scores either `score` directly or 1 - failed / checked. The total is the weighted mean with weights normalised by their sum; with no weights every listed dimension weighs the same. The weakest dimension is the lowest score, and a tie goes to the dimension listed first. There are no grade bands: a band would be an invented number.
+
+EKENE-3, each dimension counted from a check printed above: completeness from the oil column, validity from rateCheck, consistency from phaseSumCheck, uniqueness from the well names (a name is failed when it duplicates an earlier one), plausibility from the modified z-score on oil.
+
+| dimension | checked | failed | score | weight, equal | weight, stated | normalised weight | contribution, weighted |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| completeness | 90 | 3 | 0.966667 | 0.200000 | 3 | 0.333333 | 0.322222 |
+| validity | 87 | 2 | 0.977011 | 0.200000 | 2 | 0.222222 | 0.217114 |
+| consistency | 87 | 1 | 0.988506 | 0.200000 | 2 | 0.222222 | 0.219668 |
+| uniqueness | 13 | 6 | 0.538462 | 0.200000 | 1 | 0.111111 | 0.059829 |
+| plausibility | 87 | 2 | 0.977011 | 0.200000 | 1 | 0.111111 | 0.108557 |
+
+| scorecard | total | weakest |
+| --- | --- | --- |
+| equal weights | 0.889531 | uniqueness |
+| stated weights 3, 2, 2, 1, 1 | 0.927390 | uniqueness |
+
+The oil column's modified z flags entries 46, 59, which are days 47, 60: the negative rate and the shut-in day. The negative rate, day 47, is flagged under validity too. A scorecard counts flags from checks, and two checks can flag the same entry.
+
+A TIE. Scores 0.9, 0.9, 0.95 for validity, completeness, consistency (stated, listed in that order): weakest validity, total 0.916667.
+
+A direct score and a counted one mix: RHOB completeness 0.950000 as a score beside NPHI validity (237 checked, 10 failed) gives a total of 0.953903.
+
+The basis block, verbatim: weights "caller weights, normalised by their sum"; score "score, or 1 - failed / checked"; tie break "the weakest is the lowest score; a tie goes to the dimension listed first".
+
+# SECTION 30: The Petrolord defaults, presented as choices, and the order of checks (owned by Expert m05)
+
+Every default below is a choice written in a basis block, open to change by the caller. Where a published source states the number, it is named; where none does, the row says Petrolord.
+
+Each default below is read from the basis block of a call that left it unset.
+
+| setting | default | whose choice |
+| --- | --- | --- |
+| phaseSumCheck relTolerance, on the TOTAL | 0.005000 | Petrolord |
+| phaseSumCheck absTolerance | 0 | Petrolord |
+| frozenRuns minRun | 5 | Petrolord |
+| frozenRuns tolerance, against the run's first value | 0 | Petrolord |
+| waterCutCheck tolerance | 1e-6 | Petrolord |
+| indexCheck stepTolerance | 1e-6 x expectedStep | Petrolord |
+| indexCheck expected step | median of the steps in the stated direction | Petrolord |
+| duplicateIdentifiers maxDistance and the digit rule | 1, digits must match | Petrolord |
+| mahalanobis alpha | 0.025000 | Petrolord |
+| zScores threshold | 3 | the usual convention |
+| modifiedZScores threshold | 3.500000 | Iglewicz and Hoaglin, as NIST prints it |
+| iqrFences k and quartile rule | 1.500000, R7 | Tukey for k; Petrolord for the rule, so a spreadsheet reproduces it |
+| hampel nSigma and MAD scale | 3, 1.4826 | the petrophysics conditioning engine |
+| ewmaChart L and limits | 3, asymptotic | NIST 6.3.2.4 |
+| grubbsTest alpha | 0.050000 | NIST 1.3.5.17.1 |
+
+THE ORDER OF CHECKS. The control charts refuse a series with a gap, so completeness comes first:
+
+> values[30] is missing: a control chart needs a complete series, so fill or drop the gap first
+
+An index that steps back is refused by coverage, so indexCheck comes before coverage. A sentinel is present to completeness and invalid to the range check, so the range check runs before any statistic. A frozen run is an agreement of a meter with itself, and it is found before any outlier test that would read a flat stretch as a perfectly quiet one.
+
+On the EKENE-7 sonic, entries 174 to 189, which hold the stuck run, the modified z-score refuses:
+
+| function | the engine's refusal, verbatim |
+| --- | --- |
+| `modifiedZScores` | values have MAD = 0: more than half the present values equal the median, so the modified z-score is undefined |
+
+# SECTION 31: Reading the engine honestly: printed-figure errata and what is not built (owned by Expert m06 and Professional m06 l01)
+
+NIST/SEMATECH printed figures, read against the engine. Each is a note about a published page; the engine reproduces each printed figure within the stated allowance.
+
+| page | printed | engine | what differs |
+| --- | --- | --- | --- |
+| 1.3.5.17.1 Grubbs G | 2.4687 | 2.468765 | truncated rather than rounded; rounded to four decimals the engine reads 2.4688 |
+| 6.3.2.4 EWMA lower limit | 47.4115 | 47.411568 | NIST rounds sqrt(0.3 / 1.7) to 0.4201 before multiplying; to four decimals the engine reads 47.4116 |
+| 6.3.2.3 CUSUM design h | 4.1959 | 3.749328 or 4.189476, derived | the page's own design formula gives neither; the table is reproduced from the printed k and h |
+
+The CUSUM page's "325 - k - x" column prints 0.54 and 0.47 at groups 9 and 12. Derived with the printed k: -0.542500 and -0.467500. The S_lo the engine returns at those groups is 0.172500 and 0.000000. That column is not an engine output.
+
+WHAT IS NOT BUILT, and the engine says so in its basis blocks and messages:
+
+| not built | what the engine does instead |
+| --- | --- |
+| a test for several outliers (generalised ESD) | Grubbs for one, and the masking it suffers is shown in the Professional tier |
+| a robust covariance for Mahalanobis | the classical estimate, labelled "sample covariance (n - 1), classical (not robust)" |
+| a CUSUM design helper from alpha and beta | k and h are inputs with a stated unit |
+| plausibility ranges for any basin or tool | definitional limits only; the caller supplies ranges |
+| grade bands for a scorecard | a total and the weakest dimension |
+| unit conversion | an unlisted unit is refused |
+| a fallback when the MAD is zero | a refusal |
+
+WHERE THE OUTPUT NEEDS READING WITH CARE:
+
+- The ceiling follows the chosen standard deviation. With `sd: 'population'` on nine zeros and a one (stated) at threshold 2.9, the engine returns maxPossibleAbsZ 3.000000, `thresholdReachable` true and 1 flag at z 3.000000; its basis names the ceiling "sqrt(n - 1), population SD". With the sample SD the same ten values reach 2.846050 at most (section 17).
+- A reason string prints every figure as the shortest decimal that reads back to the field it quotes, so a computed statistic prints every digit. The flag above reads, verbatim: "value 1 has z = 2.9999999999999996, beyond the threshold 2.9". Its `statistic` field printed at the digest's precision is 3.000000. A lesson quotes the field at six decimals, and quotes a reason only as the engine's own words.
+- The Mahalanobis refusal for a singular covariance uses an absolute pivot test inside lib/linalg; variables with very small variance in the caller's units can be refused as singular, and rescaling avoids it.
+- The Hampel decision is imported from the petrophysics engine, whose own entry point turns a null into 0; `hampel` converts missing values to NaN before the call, so this engine is unaffected.
+
+# SECTION 32: Vocabulary this course legislates before a word is written (owned by Associate m01 and Professional m01 and Expert m01)
+
+Five words in this course carry a narrower meaning than they have in conversation or elsewhere in the academy. The rule for each is binding on every lesson, bank question, key truth and panel.
+
+| word | what it can mean elsewhere | the rule here |
+| --- | --- | --- |
+| outlier | a value that is wrong | a value a STATED RULE flags; say which rule. The engine's word for the modified z is "potential outlier". A flag is a question about the value |
+| sigma | any standard deviation | a standard deviation with its source named: sample SD, MRbar / 1.128, 1.4826 x MAD, or historical in-control data |
+| control limit | a specification or an acceptable range | a limit computed from in-control data; never a specification and never a plausibility range |
+| missing | any bad or absent value | null, undefined or NaN; a sentinel such as -999.25 is a present value until converted |
+| percentile | a P label, whose meaning differs between exceedance and non-exceedance conventions | a quantile at a stated probability by a stated rule (R6, R7 or R8); no P label is used anywhere in this course |
+
+No lesson calls any method in this course artificial intelligence or machine learning: every one is a stated statistical rule.

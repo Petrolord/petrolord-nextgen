@@ -1,0 +1,24 @@
+-- ============================================================================
+-- D1 ASSOCIATE DEEP SEED: Oilfield Data Quality, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/dataqc/beginner.
+--
+-- What this tier owns: IS THE DATA FIT TO USE. A flag is a rule that fired,
+-- with its reason. Missing is null, undefined or NaN, and a sentinel such as
+-- -999.25 is a present value; completeness, gap runs and the coverage of an
+-- interval; definitional range limits keyed by unit, plausibility ranges the
+-- caller supplies, units never converted, negative rates and rates while shut
+-- in; the depth and time index; a cumulative against its last present value,
+-- water cut on a liquid basis, parts that add to a total, frozen runs; well
+-- names after a stated normalisation and the digit rule. Digest sections 1 to
+-- 16, and section 32.
+--
+-- THE TRAP THE TIER IS BUILT ON. A check is only as good as its stated
+-- convention: a sentinel reads complete, a tolerance tighter than the
+-- reporting precision flags every rounded value, and a step equal to maxStep
+-- covers. The Associate capstone grades six Associate quantities and grades no
+-- outlier statistic and no chart.
+-- ============================================================================

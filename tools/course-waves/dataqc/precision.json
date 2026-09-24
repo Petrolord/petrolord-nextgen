@@ -1,0 +1,22 @@
+{
+ "fraction": {
+  "decimals": 6,
+  "match": "^(?:odudu_nphi_coverage|odudu_rhob_completeness|odudu_water_cut_day23)$"
+ },
+ "limit": {
+  "decimals": 6,
+  "match": "^(?:amasiri_ewma_exact_ucl_day2_psig|amasiri_phase1_individuals_ucl_psig|amasiri_phase1_mr_ucl_psig|ikoro_rhob_hampel_threshold_entry57_g_cm3|ikoro_rhob_upper_fence_g_cm3)$"
+ },
+ "measure": {
+  "decimals": 6,
+  "match": "^(?:odudu_cumulative_drop_bbl|odudu_phase_sum_allowed_day44_bbl_d|odudu_scada_expected_step_min)$"
+ },
+ "score": {
+  "decimals": 6,
+  "match": "^(?:amasiri_scorecard_total)$"
+ },
+ "statistic": {
+  "decimals": 6,
+  "match": "^(?:amasiri_cusum_upper_day18_psi|amasiri_ewma_day14_psig|ikoro_core_grubbs_critical|ikoro_core_max_abs_modified_z|ikoro_core_max_abs_z|ikoro_max_mahalanobis_d2)$"
+ }
+}
