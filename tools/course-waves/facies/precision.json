@@ -19,6 +19,10 @@
   "decimals": 6,
   "match": "^(?:ogbunike_cart_nphi_importance)$"
  },
+ "impurity": {
+  "decimals": 6,
+  "match": "^(?:ogbunike_cart_node2_gini)$"
+ },
  "index": {
   "decimals": 6,
   "match": "^(?:nkwelle_complete_ari)$"
@@ -46,9 +50,5 @@
  "silhouette": {
   "decimals": 6,
   "match": "^(?:nkwelle_kmeans_silhouette)$"
- },
- "threshold": {
-  "decimals": 6,
-  "match": "^(?:ogbunike_cart_root_threshold_vv)$"
  }
 }

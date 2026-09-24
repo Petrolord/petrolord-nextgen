@@ -75,7 +75,7 @@
   "nkwelle_majority_accuracy_k6": "one to one at k four, macro f1 quoted, k five, ward at the same k, raw logs",
   "ogbunike_knn_heldout_accuracy": "k one, new rows on their own scaler, no scaling, held out well in training, min max",
   "ogbunike_knn_nearest_distance": "squared distance, raw logs, scaler on every cored row, new rows on their own scaler, second neighbour",
-  "ogbunike_cart_root_threshold_vv": "pef taken on the tie, lower value not midpoint, upper value not midpoint, next split quoted, min max scaled logs",
+  "ogbunike_cart_node2_gini": "pef taken on the tie, root gini quoted, node one read, training wells only, entropy instead",
   "ogbunike_cart_nphi_importance": "pef first column order, depth three, root decrease quoted, min leaf five, training wells only",
   "ogbunike_cart_depth3_heldout_accuracy": "depth four, depth two, held out well in training, training accuracy quoted, k nearest instead",
   "ogbunike_uncored_gr_minmax_max": "uncored well in the fit, standard score instead, mean not highest, stated offset removed, raw gr over cored max"

@@ -15,7 +15,7 @@
 // for the correlation matrix, the unit weight quoted as a loading, one start
 // for ten, the drop quoted for the drop fraction, the height below the cut for
 // the one above, Ward for complete linkage, the new rows scaled on their own
-// statistics, the higher feature index on a tie, the scaler refitted on the
+// statistics, the other log taken on a tie, the scaler refitted on the
 // new well. A few are hand arithmetic a learner might do instead of calling
 // the engine (the unadjusted Rand index, a silhouette on squared distances);
 // they live here, among the wrong methods, and nowhere else.
@@ -102,10 +102,7 @@ const trSc = ML.fitStandardScaler({ X: pick(ogX, TR) });
 const teOwn = ML.fitStandardScaler({ X: pick(ogX, TE) });
 const allSc = ML.fitStandardScaler({ X: ogX });
 const tree = (X, y, o = {}) => CL.cartFit({ X, y, names: o.names || LOGS_C, ...o });
-const rootVals = [...new Set(ogX5.map((r) => r[2]))].sort((a, b) => a - b);
 const ogT = tree(ogX5, ogY);
-const cutA = rootVals.filter((v) => v <= ogT.nodes[0].threshold).pop();
-const cutB = rootVals.find((v) => v > ogT.nodes[0].threshold);
 const t3acc = (o = {}, trIdx = TR) => { const t = tree(pick(ogX5, trIdx), pick(ogY, trIdx), { maxDepth: ogS.depth, ...o }); return acc(pick(ogY, TE), CL.cartPredict({ model: t, X: pick(ogX5, TE) }).predictions); };
 const mmU = (X) => { const mm = ML.fitMinMaxScaler({ X }); return Math.max(...ML.applyScaler({ scaler: mm, X: ogU }).X.map((r) => r[0])); };
 const ALL = ogC.map((_, i) => i);
@@ -257,14 +254,14 @@ const ROUTES = {
       second_neighbour: () => CL.knnClassify({ X: pick(ogX, TR), y: pick(ogY, TR), Xnew: pick(ogX, TE), k: ogS.k }).distances[0][1],
     },
   },
-  ogbunike_cart_root_threshold_vv: {
-    truth: () => ogT.nodes[0].threshold,
+  ogbunike_cart_node2_gini: {
+    truth: () => ogT.nodes[2].gini,
     wrong: {
-      pef_taken_on_the_tie: () => tree(ogX5.map((r) => [r[0], r[1], r[3], r[2], r[4]]), ogY, { names: ['GR', 'RHOB', 'PEF', 'NPHI', 'CALI'] }).nodes[0].threshold,
-      lower_value_not_midpoint: () => cutA,
-      upper_value_not_midpoint: () => cutB,
-      next_split_quoted: () => ogT.nodes[ogT.nodes[0].right].threshold,
-      min_max_scaled_logs: () => tree(ML.applyScaler({ scaler: ML.fitMinMaxScaler({ X: ogX5 }), X: ogX5 }).X, ogY).nodes[0].threshold,
+      pef_taken_on_the_tie: () => tree(ogX5.map((r) => [r[0], r[1], r[3], r[2], r[4]]), ogY, { names: ['GR', 'RHOB', 'PEF', 'NPHI', 'CALI'] }).nodes[2].gini,
+      root_gini_quoted: () => ogT.nodes[0].gini,
+      node_one_read: () => ogT.nodes[1].gini,
+      training_wells_only: () => tree(pick(ogX5, TR), pick(ogY, TR)).nodes[2].gini,
+      entropy_instead: () => { const c = ogT.nodes[2].counts.filter((v) => v > 0); const n = sum(c); return -sum(c.map((v) => (v / n) * Math.log2(v / n))); },
     },
   },
   ogbunike_cart_nphi_importance: {

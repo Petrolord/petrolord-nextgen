@@ -77,13 +77,11 @@ const DIGEST_OK = new Set();
 // number in the briefs (78, 26, 18 and the rest) happens to be printed somewhere
 // in the digest, so it resolves there; a DEAD entry fails this gate.
 const ALLOWED = {
-  132: 'the questions a tier, the programme shape in NextGen-Remaining-Courses-PLAN.md section 11',
-  42: 'the exam questions a tier, the same programme shape',
+  68: 'the path order of the course in the data_ai module, settled by wave.json pathOrder and the plan of record',
   420: 'the bottom of the word band, settled by structure.py',
   460: 'the middle minimum of the word band, settled by structure.py',
   500: 'the top minimum of the word band, settled by structure.py',
   560: 'the ceiling of the word band, settled by structure.py',
-  78: 'the lessons in the course, three tiers of 26, settled by structure.py',
   0.45: 'the Jaccard threshold of the kit near-duplicate audit (dupaxes.py), named in KEY_TRUTH_TASK.md',
 };
 

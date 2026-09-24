@@ -29,7 +29,7 @@
  */
 export const PRINTED_DECIMALS = {
   scale: 6, ratio: 6, loading: 6, score: 6, inertia: 6, centre: 6,
-  silhouette: 6, height: 6, index: 6, accuracy: 6, distance: 6, threshold: 6, importance: 6,
+  silhouette: 6, height: 6, index: 6, accuracy: 6, distance: 6, impurity: 6, importance: 6,
 };
 
 /**
@@ -60,11 +60,12 @@ export const GRADED_FIELDS = [
   ['intermediate', 'nkwelle_majority_accuracy_k6', 'accuracy', 1e-9],
   // Expert: six cored wells, one held out, and one uncored well logged with an
   // uncalibrated gamma ray tool. PREDICTING FACIES, AND THE ENGINE'S OWN
-  // RULES: a held-out kNN accuracy, a nearest distance, a tied root threshold,
-  // an importance, a held-out tree accuracy and a range check.
+  // RULES: a held-out kNN accuracy, a nearest distance, the Gini impurity of
+  // the node the root tie sends right, an importance, a held-out tree accuracy
+  // and a range check.
   ['advanced', 'ogbunike_knn_heldout_accuracy', 'accuracy', 1e-9],
   ['advanced', 'ogbunike_knn_nearest_distance', 'distance', 1e-9],
-  ['advanced', 'ogbunike_cart_root_threshold_vv', 'threshold', 1e-9],
+  ['advanced', 'ogbunike_cart_node2_gini', 'impurity', 1e-9],
   ['advanced', 'ogbunike_cart_nphi_importance', 'importance', 1e-9],
   ['advanced', 'ogbunike_cart_depth3_heldout_accuracy', 'accuracy', 1e-9],
   ['advanced', 'ogbunike_uncored_gr_minmax_max', 'scale', 1e-9],

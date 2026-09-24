@@ -117,7 +117,7 @@ try:
     got['ogbunike_knn_heldout_accuracy'] = O.o_report(pick(ogY, TE), kn['predictions'], labels)['accuracy']
     got['ogbunike_knn_nearest_distance'] = kn['distances'][0][0]
     tree, _ = O.o_cart(ogX5, ogY, LOGS_C)
-    got['ogbunike_cart_root_threshold_vv'] = float(tree['nodes'][0]['threshold'])
+    got['ogbunike_cart_node2_gini'] = float(tree['nodes'][2]['gini'])
     got['ogbunike_cart_nphi_importance'] = tree['featureImportances'][2]
     t3, pred3 = O.o_cart(pick(ogX5, TR), pick(ogY, TR), LOGS_C, max_depth=ogS['depth'])
     p3 = [pred3(r)['prediction'] for r in pick(ogX5, TE)]

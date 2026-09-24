@@ -16,8 +16,9 @@
 //                           an adjusted Rand index, a one-to-one macro F1 and
 //                           a majority accuracy
 //   OGBUNIKE  Expert        predicting facies and the engine's rules: a
-//                           held-out kNN accuracy, a nearest distance, a
-//                           tied root threshold, an importance, a held-out
+//                           held-out kNN accuracy, a nearest distance, the
+//                           Gini of the node the tied root sends right, an
+//                           importance, a held-out
 //                           tree accuracy and a range check on an uncored well
 //
 // The datasets are generated here, deterministically, through the canonical
@@ -202,6 +203,7 @@ must('Ogbunike: no tied vote on the held-out well', ogKN.tiedVotes === 0, ogKN.t
 const ogT = success('Ogbunike cartFit', CL.cartFit({ X: ogX5, y: ogY, names: LOGS_C }));
 const ogRoot = ogT.nodes[0];
 must('Ogbunike: the root splits on NPHI', ogRoot.feature === 'NPHI', ogRoot.feature);
+must('Ogbunike: node 2 is the right child of the root', ogRoot.right === 2 && !ogT.nodes[2].leaf, ogRoot.right);
 const ogSw = success('Ogbunike cartFit, PEF before NPHI', CL.cartFit({ X: ogX5.map((r) => [r[0], r[1], r[3], r[2], r[4]]), y: ogY, names: ['GR', 'RHOB', 'PEF', 'NPHI', 'CALI'], maxDepth: 1 }));
 must('Ogbunike: the root is a tie that PEF takes when it comes first', ogSw.nodes[0].feature === 'PEF' && ogSw.nodes[0].impurityDecrease === success('Ogbunike depth 1', CL.cartFit({ X: ogX5, y: ogY, names: LOGS_C, maxDepth: 1 })).nodes[0].impurityDecrease, ogSw.nodes[0].feature);
 const ogT3 = success('Ogbunike cartFit depth 3 on the training wells', CL.cartFit({ X: pick(ogX5, ogTR), y: pick(ogY, ogTR), names: LOGS_C, maxDepth: ogS.depth }));
@@ -233,7 +235,7 @@ const ROWS = [
   ['intermediate', 'nkwelle_majority_accuracy_k6', 'accuracy', nkM5.report.accuracy],
   ['advanced', 'ogbunike_knn_heldout_accuracy', 'accuracy', ogKNrep.accuracy],
   ['advanced', 'ogbunike_knn_nearest_distance', 'distance', ogKN.distances[0][0]],
-  ['advanced', 'ogbunike_cart_root_threshold_vv', 'threshold', ogRoot.threshold],
+  ['advanced', 'ogbunike_cart_node2_gini', 'impurity', ogT.nodes[2].gini],
   ['advanced', 'ogbunike_cart_nphi_importance', 'importance', ogT.featureImportances[2]],
   ['advanced', 'ogbunike_cart_depth3_heldout_accuracy', 'accuracy', ogT3rep.accuracy],
   ['advanced', 'ogbunike_uncored_gr_minmax_max', 'scale', ogUmax],

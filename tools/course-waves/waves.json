@@ -1288,6 +1288,11 @@
       "run_gates.py",
       "vendor_facies.sh",
       "mirror.sh",
+      "BRIEF.md",
+      "LESSON_TASK.md",
+      "BANK_TASK.md",
+      "KEY_TRUTH_TASK.md",
+      "PANELS.md",
       "hdr_beginner.txt",
       "hdr_intermediate.txt",
       "hdr_advanced.txt",
@@ -1298,7 +1303,7 @@
     ],
     "pins": {
       "digest.txt": "0cb6c4715ed463f08361c1ae0addd072ed5486898bb63acd5889e5d3690aafbd",
-      "fields.json": "0b6079bf45eeb500475076737fd79659e5195358acbb652e6e34466aa8d19fb1"
+      "fields.json": "769943a5057a798e8e87dbef0e91552316339d57f0de2fa82ba918ad6a7d3393"
     }
   }
 }
