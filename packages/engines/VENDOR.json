@@ -1733,18 +1733,88 @@
       "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
     },
     {
-      "path": "tools/validation/dataai/synthetic_wells.js",
-      "kind": "extra",
-      "group": "d2-mlcore-course",
-      "vendoredSha": "b2cbc94d613ea80f1d32a0b84c07d2544fb2abe8",
-      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
-    },
-    {
       "path": "tools/validation/dataai/timing_ml.mjs",
       "kind": "extra",
       "group": "d2-mlcore-course",
       "vendoredSha": "35f995bcf15c5fc938b38b225ca6da9e6f9da44c",
       "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "__tests__/dataai.cluster.test.js",
+      "kind": "extra",
+      "group": "d3-facies-course",
+      "vendoredSha": "9cd70eb7b673b5c11275f4039e709f10facc6470",
+      "reason": "D3 facies course: vendored sha-identical from petrolord-engines 4dfbb29 (PR #253: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 4dfbb29 or later."
+    },
+    {
+      "path": "engines/dataai/cluster.js",
+      "kind": "extra",
+      "group": "d3-facies-course",
+      "vendoredSha": "dcf392cfe450fb895fb11ba3bfbb5aacb2d514c6",
+      "reason": "D3 facies course: vendored sha-identical from petrolord-engines 4dfbb29 (PR #253: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 4dfbb29 or later."
+    },
+    {
+      "path": "test-data/dataai/goldens/cluster_cases.json",
+      "kind": "extra",
+      "group": "d3-facies-course",
+      "vendoredSha": "f2f6a033638ee9e6da016555de7370555500017e",
+      "reason": "D3 facies course: vendored sha-identical from petrolord-engines 4dfbb29 (PR #253: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 4dfbb29 or later."
+    },
+    {
+      "path": "test-data/dataai/iris/iris.csv",
+      "kind": "extra",
+      "group": "d3-facies-course",
+      "vendoredSha": "b7f746072794309a9a971949562a050e7366ceb1",
+      "reason": "D3 facies course: vendored sha-identical from petrolord-engines 4dfbb29 (PR #253: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 4dfbb29 or later."
+    },
+    {
+      "path": "test-data/dataai/pins/cluster_pins.json",
+      "kind": "extra",
+      "group": "d3-facies-course",
+      "vendoredSha": "de0024905efffd1e706936c836c85bc2afd04257",
+      "reason": "D3 facies course: vendored sha-identical from petrolord-engines 4dfbb29 (PR #253: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 4dfbb29 or later."
+    },
+    {
+      "path": "tools/validation/dataai/FINDINGS-cluster.md",
+      "kind": "extra",
+      "group": "d3-facies-course",
+      "vendoredSha": "abd120fb528d56f11a987aa46d27ac53a374d00c",
+      "reason": "D3 facies course: vendored sha-identical from petrolord-engines 4dfbb29 (PR #253: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 4dfbb29 or later."
+    },
+    {
+      "path": "tools/validation/dataai/negcontrol_cluster.sh",
+      "kind": "extra",
+      "group": "d3-facies-course",
+      "vendoredSha": "313b53aff189be87434a577fa6b086fde0936533",
+      "reason": "D3 facies course: vendored sha-identical from petrolord-engines 4dfbb29 (PR #253: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 4dfbb29 or later."
+    },
+    {
+      "path": "tools/validation/dataai/oracle_cluster.py",
+      "kind": "extra",
+      "group": "d3-facies-course",
+      "vendoredSha": "fff1007d918ff54af892d25b61c8e6dc0b4c2e29",
+      "reason": "D3 facies course: vendored sha-identical from petrolord-engines 4dfbb29 (PR #253: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 4dfbb29 or later."
+    },
+    {
+      "path": "tools/validation/dataai/pin_cluster.py",
+      "kind": "extra",
+      "group": "d3-facies-course",
+      "vendoredSha": "90cab9c693d9fdd6e78d8e29245579d8865d3954",
+      "reason": "D3 facies course: vendored sha-identical from petrolord-engines 4dfbb29 (PR #253: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 4dfbb29 or later."
+    },
+    {
+      "path": "tools/validation/dataai/synthetic_wells.js",
+      "kind": "extra",
+      "group": "d3-facies-course",
+      "vendoredSha": "e553ce37cb34b970de43166a93aa8a8bb6ff2cbd",
+      "reason": "D3 facies course: vendored sha-identical from petrolord-engines 4dfbb29 (PR #253: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 4dfbb29 or later."
+    },
+    {
+      "path": "tools/validation/dataai/timing_cluster.mjs",
+      "kind": "extra",
+      "group": "d3-facies-course",
+      "vendoredSha": "a94a1400733b0e1e7800e5d431d280ddb3b38db5",
+      "reason": "D3 facies course: vendored sha-identical from petrolord-engines 4dfbb29 (PR #253: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 4dfbb29 or later."
     }
   ]
 }
