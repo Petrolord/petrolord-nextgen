@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "`leakageDemo` returns `optimism` for an RMSE comparison. How does the engine compute it?",
+  "options": [
+   "Random-row test RMSE less group test RMSE, positive whenever the well split reads the better of the two scores.",
+   "As the ratio of the group test RMSE to the random-row one, which sits above 1 when the model has been flattered.",
+   "By taking the training RMSE of the group split less its test RMSE, the gap between the seen and unseen wells.",
+   "Group test RMSE less random-row test RMSE, so a positive figure means the random split flattered the model."
+  ],
+  "answer": 3,
+  "explanation": "For RMSE, where lower is better, the engine's optimism is the group test RMSE less the random-row test RMSE: positive when the random-row score looks better than the whole-well score. The reversed subtraction flips every sign, the engine returns a difference in us/ft and never a ratio, and the training score plays no part."
+ },
+ {
+  "prompt": "At seed 5, with the logs and the four attributes, what does `leakageDemo` report?",
+  "options": [
+   "Random-row 6.030242 against group 4.282693, both read at seed 5.",
+   "Random-row test RMSE 5.311723 against group test RMSE 16.999672.",
+   "A random-row 4.299599 and a group 11.365950, from the same table.",
+   "Random-row 5.201187 against group 5.902813, both in us/ft of slowness."
+  ],
+  "answer": 1,
+  "explanation": "With the attributes at seed 5 the random-row split reads 5.311723 us/ft and the group split 16.999672, an optimism of 11.687949. 6.030242 and 4.282693 are the logs alone at seed 5, 4.299599 and 11.365950 are the attributes at seed 12, and 5.201187 and 5.902813 are the attributes at seed 1."
+ },
+ {
+  "prompt": "On the logs alone at seed 5 the optimism is -1.747549 us/ft. What does the sign say?",
+  "options": [
+   "The random split flattered the model, as it must whenever rows of one well fall on both sides.",
+   "For the logs the engine subtracts in the other order, so the sign has to be read reversed.",
+   "The random-row split read worse than the well split on this draw: 6.030242 against 4.282693.",
+   "The group split leaked, because EKENE-4, EKENE-5 and EKENE-8 shared rows with training."
+  ],
+  "answer": 2,
+  "explanation": "A negative optimism means the group test RMSE, 4.282693, sits below the random-row one, 6.030242. The engine uses one subtraction for every feature set, and the group split holds out whole wells with no well on both sides. Shared rows flatter only when a feature gives the model a path to a well's offset, and the logs give none."
+ },
+ {
+  "prompt": "Over seeds 1 to 12, on how many seeds is the optimism positive with the attributes, and on how many is it negative on the logs alone?",
+  "options": [
+   "Positive on 12 of 12 with the attributes; negative on 7 of 12 on the logs alone.",
+   "Positive on all 12 with the attributes and on all 12 for the logs, since rows are shared every time.",
+   "Positive on 7 of 12 with the attributes, and negative on 12 of 12 for the logs alone.",
+   "Positive on 5 with the attributes, the same count of positives the logs show."
+  ],
+  "answer": 0,
+  "explanation": "With the attributes the optimism is positive on 12 of the 12 seeds; on the logs alone it is negative on 7 and positive on the other 5. Rows of every well are shared on every random split, yet the logs still read worse under it on 7 seeds, because no log names a well."
+ },
+ {
+  "prompt": "Why does a random-row split flatter the model once the four well-level attributes are features?",
+  "options": [
+   "Constant down each well, the attributes name it, so the model learns a well's offset from its training rows and meets it in test.",
+   "The attributes are measured more precisely than the logs, so they fit every row of every well better than the logs do.",
+   "The random-row split holds out 81 rows against 90 for the group split, and a smaller test set always scores lower.",
+   "Varying sample by sample down each well, the attributes add detail about the rock that the three logs miss."
+  ],
+  "answer": 0,
+  "explanation": "Easting, northing, kb and mudWeight are constant down each well, so together they identify it. Under a random-row split every well has rows on both sides, and the model learns each well's sonic offset through the attributes and meets it again in the test rows. Precision and test size play no part, and the attributes do not vary down a well."
+ },
+ {
+  "prompt": "On the logs alone, why is there no leak even though rows of all nine wells fall on both sides at seed 5?",
+  "options": [
+   "The random-row split drops shared wells before fitting whenever the features are logs.",
+   "The logs carry no well offset, because the offset is planted only in the attributes.",
+   "Least squares cannot overfit three features, so every split scores it the same.",
+   "No log names the well a row came from, so the model has no path to a well's offset."
+  ],
+  "answer": 3,
+  "explanation": "Every Ekene well carries its own sonic offset in DT, and GR, RHOB and NPHI do not say which well a row belongs to, so sharing wells gives the model nothing to use. The split keeps every shared well, the offset is in the target and the attributes are unrelated to it, and the two splits do score differently, by a sign that follows the draw of test wells."
+ },
+ {
+  "prompt": "At test fraction 0.3 the random-row split holds out 81 rows and the group split 90. Why do the two differ?",
+  "options": [
+   "The group split rounds its test size up to whole wells, while the random-row split rounds its size down.",
+   "The engine's ceil(testFraction x count) is applied to 270 rows in one case and to 9 wells in the other.",
+   "Rows from wells that fall on both sides are removed from the random-row test set before scoring.",
+   "A group split holds out a third of the wells, whatever test fraction the caller passes to it."
+  ],
+  "answer": 1,
+  "explanation": "Both splits size the test set as ceil(testFraction x count): 0.3 of 270 rows is 81 rows, and 0.3 of 9 wells rounds up to 3 wells, 90 rows. Both use the ceiling, the random-row split keeps its shared wells, and the group split's size follows the fraction passed."
+ },
+ {
+  "prompt": "On the logs alone the random split flattered nothing at seed 5. Does that make a random-row split safe for a log-only model on a real field?",
+  "options": [
+   "Yes. Once the optimism is negative on most seeds, a random-row score can be reported for a new well.",
+   "Yes, provided at least 7 of 12 seeds read negative, as the Ekene logs do, which settles it.",
+   "No. A log can carry a calibration or mud effect constant down one well, and one clean result cannot show there is none.",
+   "Only for least squares, because ridge re-standardises its features and so it can never leak."
+  ],
+  "answer": 2,
+  "explanation": "A random split that happens to flatter nothing only failed to find a path this time: on a real field a log can carry a tool calibration, a borehole effect or a mud system constant down a well. The honest estimate for a new well holds out whole wells, whatever the count of negative seeds. Ridge re-standardising protects it from an outside scaler and gives no protection from a feature that names a well."
+ },
+ {
+  "prompt": "Across seeds 1 to 12 with the attributes, which seed shows the largest optimism?",
+  "options": [
+   "Seed 2, at 11.095034 us/ft.",
+   "Seed 8, at 10.636928 us/ft.",
+   "Seed 1, at 0.701626 us/ft.",
+   "Seed 5, at 11.687949 us/ft."
+  ],
+  "answer": 3,
+  "explanation": "The twelve optimisms with the attributes run from 0.701626 at seed 1 to 11.687949 at seed 5. Seed 2 at 11.095034 and seed 8 at 10.636928 come next, and seed 1 is the smallest of the twelve."
+ },
+ {
+  "prompt": "On the logs alone, which seed gives the most negative optimism?",
+  "options": [
+   "Seed 8, at -1.838526 us/ft.",
+   "Seed 5, at -1.747549 us/ft.",
+   "Seed 7, at -1.511070 us/ft.",
+   "Seed 1, at -0.047942 us/ft."
+  ],
+  "answer": 0,
+  "explanation": "Of the 7 negative optimisms on the logs alone, seed 8 reads -1.838526, below seed 5's -1.747549 and seed 7's -1.511070. Seed 1's -0.047942 is the negative figure closest to zero."
+ },
+ {
+  "prompt": "Logistic regression with l2 = 1 on standardised pay features scores a test log loss of 0.126480 with a scaler fitted on the training wells and 0.126152 with one fitted on all ten. What do you conclude?",
+  "options": [
+   "The all-well scaler is the better choice, because it gives the lower of the two test log losses.",
+   "Nothing leaked at all, since a scaler never sees the pay label and is fitted on the logs themselves.",
+   "The procedure is the defect: the test wells shaped the transform, however small the change of -3.28e-4.",
+   "The fit is unstable under any rescaling, so logistic regression should be avoided."
+  ],
+  "answer": 2,
+  "explanation": "The difference, all wells less training wells, is -3.28e-4 and happens to favour the leaked version. The test wells still shaped the RT centre and scale the penalised coefficient was fitted through, so the test rows reached the model before it was scored. A scaler leaks through the features it transforms, with or without the label, and a small change says nothing about instability."
+ },
+ {
+  "prompt": "Why can a scaler fitted on every row not move a least squares prediction?",
+  "options": [
+   "Least squares refuses standardised features and fits the raw logs instead.",
+   "With an intercept, rescaling a feature changes its coefficient and leaves the fitted plane where it was.",
+   "The all-row and training-row scalers are identical on the Ekene sonic logs, so there is nothing left to move.",
+   "Least squares clips every scaled value outside [0, 1] before it fits."
+  ],
+  "answer": 1,
+  "explanation": "Least squares with an intercept gives the same fitted plane under any rescaling of a feature, so predictions agree to rounding. The two scalers do differ, GR centre 59.844500 on the training rows against 60.250741 on all rows, and least squares accepts scaled features and clips nothing. A penalty is where scaling starts to matter."
+ },
+ {
+  "prompt": "In the scaling case on the pay split, what RT centre and scale does the scaler fitted on the training wells give?",
+  "options": [
+   "Centre 14.045286, scale 16.599700",
+   "Centre 13.691967, scale 16.255862, from every one of the ten wells",
+   "Centre 14.045286 with a scale of 16.255862, one figure from each fit",
+   "Centre 13.691967 with a scale of 16.599700, mixing the two fits"
+  ],
+  "answer": 0,
+  "explanation": "Fitted on the training wells only, RT has centre 14.045286 and scale 16.599700; fitted on all ten wells it reads 13.691967 and 16.255862. The other two options pair a figure from one fit with a figure from the other."
+ },
+ {
+  "prompt": "Inside cross-validation by wells, where must a preparation step such as a scaler be fitted?",
+  "options": [
+   "Once, on every well before the folds are dealt, so that each fold shares one transform.",
+   "On each fold's test wells, since those are the rows the model will be scored on.",
+   "In each fold, on that fold's training wells, then applied unchanged to its test wells.",
+   "Only for ridge; least squares takes its scaler from every row without harm."
+  ],
+  "answer": 2,
+  "explanation": "Every preparation step, scalers, fills, feature choices and lambda itself, is fitted on the training rows only, which inside cross-validation means refitted inside each fold. A transform fitted before the folds are dealt has seen every fold's test wells, and one fitted on the test wells is the leak itself."
+ },
+ {
+  "prompt": "Adding the four attributes to the logs moves both split scores. On how many of the 12 seeds does it lower the random-row test RMSE, and on how many does it raise the group test RMSE?",
+  "options": [
+   "Lowers the first on 7 and raises the second on 5.",
+   "It lowers the first on 12 and raises the second on 12.",
+   "Lowering the first on 12, it raises the second on 7 of them.",
+   "Only 5 seeds lower the first, while all 12 raise the second."
+  ],
+  "answer": 1,
+  "explanation": "Over seeds 1 to 12 the attributes lower the random-row test RMSE on 12 and raise the group test RMSE on 12: they help on rows of wells the model has seen and hurt on wells it has not, every time. 7 and 5 are the logs' own counts of negative and positive optimism."
+ }
+]
