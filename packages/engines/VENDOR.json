@@ -1598,6 +1598,153 @@
       "group": "d1-dataqc-course",
       "vendoredSha": "1b07648eb99b766cd09be392dac1e257ebb03746",
       "reason": "D1 dataqc course: vendored sha-identical from petrolord-engines c7eba22 (PR #248, #249 and #251: engines/dataai/quality.js, its jest suite, golden, library pins, oracle, pin writer, FINDINGS, negative control) by the wave's vendor_dataqc.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to c7eba22 or later."
+    },
+    {
+      "path": "__tests__/dataai.ml.test.js",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "22d3ebcb48fd10850e58b83673be9b605a16b377",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "engines/dataai/ml.js",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "ddb35e350374ab9e7e74e73ab55a17e41ce3940e",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "test-data/dataai/goldens/ml_cases.json",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "aaf2ce47a7e3eda87b7b0489f04d1ccef84d0de4",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "test-data/dataai/nist-strd/Filip.dat",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "36b0bc4fd08ebceb7b3483755e8a490a1581d284",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "test-data/dataai/nist-strd/Longley.dat",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "af8e58c37777de9d1d7e098d78c98530081ee6da",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "test-data/dataai/nist-strd/NoInt1.dat",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "e782e686a6148612cd76b47a38dfba3b2943e955",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "test-data/dataai/nist-strd/NoInt2.dat",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "7ba4f0624fe596ca3bfd1ecc369260a9a13973ac",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "test-data/dataai/nist-strd/Norris.dat",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "e2c624fe041fa2cb732f2d572bbae7abdeec32c3",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "test-data/dataai/nist-strd/Pontius.dat",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "166663567c6d308f3ee222269f75743380aac939",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "test-data/dataai/nist-strd/Wampler1.dat",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "1168b827d62c745add56ad0e339175e129e06d6d",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "test-data/dataai/nist-strd/Wampler2.dat",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "b88aefc9766b12c5ac4aa570b4aefa0e0d9e98db",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "test-data/dataai/nist-strd/Wampler3.dat",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "98baf4693ed24000e5d71164519aa0fe3fae82ea",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "test-data/dataai/nist-strd/Wampler4.dat",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "044768dee0c64dd9280a4537d8dd8ac2d604b14f",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "test-data/dataai/nist-strd/Wampler5.dat",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "b056a23bfc40704442527906a3caaadc4eae9502",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "test-data/dataai/pins/ml_pins.json",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "6795aff2db161f37bfafc70a390d714c39662874",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "tools/validation/dataai/FINDINGS-ml.md",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "1aec1f3e8b46849608764101261e8aad79a632ab",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "tools/validation/dataai/negcontrol_ml.sh",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "4b0c8d189bddbb58d2a60a8826dd2b9cec1c54af",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "tools/validation/dataai/oracle_ml.py",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "8106290b475c0fd81103141ba1d519fbcccfc6ed",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "tools/validation/dataai/pin_ml.py",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "6e642cae1ed2de5f1f89f283ec273743bb055708",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "tools/validation/dataai/synthetic_wells.js",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "b2cbc94d613ea80f1d32a0b84c07d2544fb2abe8",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
+    },
+    {
+      "path": "tools/validation/dataai/timing_ml.mjs",
+      "kind": "extra",
+      "group": "d2-mlcore-course",
+      "vendoredSha": "35f995bcf15c5fc938b38b225ca6da9e6f9da44c",
+      "reason": "D2 mlcore course: vendored sha-identical from petrolord-engines 966bb9e (PR #252: engines/dataai/ml.js, its jest suite, golden, library pins, NIST StRD sources, synthetic wells, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_mlcore.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 966bb9e or later."
     }
   ]
 }
