@@ -74,9 +74,9 @@ q(2, "A 60-row sample of the teaching clustering scores 0.521590 at seed 3 and 0
 
 q(0, "A silhouette is asked for with every row in one cluster. What happens?",
  "Refused: \"labels must hold from 2 to 179 distinct clusters (found 1): the silhouette compares each row with the next nearest cluster\"",
- ["It returns 0 for every row, since a single cluster leaves no row with a b, and the mean 0.000000",
-  "Refused, naming X, because one cluster gives the labels no variance for the scaler to divide by",
-  "It returns each row's distance to the centre in place of b, since there is no other cluster"],
+ ["It returns 0 for every row, since a single cluster leaves no row with a b, and prints a mean of 0.000000 over all 180 rows",
+  "Refused, naming X, because a single cluster gives the labels no variance for the standard scaler to divide by on the rows passed",
+  "It returns each row's distance to the one centre in place of b, since there is no other cluster for b to be measured against"],
  "The silhouette needs a second cluster for b, and the engine refuses one cluster by name, in its own words quoted in the key. It does not score the rows 0, and the refusal names labels, the field it could not work with.")
 
 q(1, "Four rows are given four different labels. What does the engine do?",
@@ -86,7 +86,7 @@ q(1, "Four rows are given four different labels. What does the engine do?",
   "Scores every row 1.000000, since no row shares its cluster with another"],
  "The accepted range runs from 2 to the number of rows less one; with every row alone no row has an a, and the engine refuses in its own words: \"labels must hold from 2 to 3 distinct clusters (found 4): the silhouette compares each row with the next nearest cluster\". The lone-row rule of 0 applies to a row alone inside an accepted labelling, and the engine never edits the labels it is given.")
 
-q(3, "A labels list begins with a number and carries a name at position 2. What does the engine say?",
+q(3, "A labels list holds numbers everywhere except a name at position 2. What does the engine say?",
  "labels[2] must be the same type as labels[0]: all strings or all numbers",
  ["labels must be an array of 180 labels, one per row, as the list mixes types",
   "Converts the name to a number and scores the rows with the list as passed",

@@ -123,7 +123,7 @@ q(1, "A hand-built linkage matrix names, in its second row, a cluster id that no
  ["It builds the missing cluster from the rows its id would hold and cuts",
   "linkageMatrix must be the non-empty linkageMatrix of agglomerative",
   "A refusal naming linkageMatrix[0], since the ids begin there"],
- "cutTree checks a matrix it is given and names the row at fault, counted from 0; on the course's small stated case its words are \"linkageMatrix[1] must be [id1, id2, height, size] with whole ids 0 <= id1 < id2 < 4\". The non-empty message is the refusal of an empty matrix, and nothing is built for the caller.")
+ "cutTree checks a matrix it is given and names the row at fault, counted from 0; on a small hand-built matrix its words are \"linkageMatrix[1] must be [id1, id2, height, size] with whole ids 0 <= id1 < id2 < 4\". The non-empty message is the refusal of an empty matrix, and nothing is built for the caller.")
 
 q(3, "cutTree is handed the Ward tree of the cored rows with k 0. What comes back?",
  "k must be a whole number from 1 to 180 (the number of rows)",
@@ -216,7 +216,7 @@ q(0, "When does the engine's adjusted Rand index come out as 1 because the formu
  ["When both are one cluster, or one of the two is all singletons",
   "Whenever the labellings hold fewer than 2 rows between them",
   "When the two labellings match row for row, whatever their shape"],
- "Two one-cluster labellings, or two all-singleton labellings, give a zero denominator, and the engine returns 1 there as scikit-learn does. A labelling of fewer than 2 rows is refused naming a, and identical labellings of any other shape reach 1 through the formula itself.")
+ "Two one-cluster labellings, or two all-singleton labellings, give a zero denominator, and the engine returns 1 there as scikit-learn does. A call with fewer than 2 rows is refused by name, and identical labellings of any other shape reach 1 through the formula itself.")
 
 q(2, "Which pair of facts belongs to the average-linkage cut at k 4 on the cored rows?",
  "Clusters of 96, 54, 29 and 1 rows, and an index of 0.676404 against core",
@@ -255,9 +255,9 @@ q(2, "Ward and complete linkage both cut the cored rows at k 4. Which agrees bet
 
 q(3, "The seed 1 run returns the teaching partition with other cluster numbers. What changes in its contingency table and its index against core?",
  "Only the numbering of the table's rows; the index stays 0.872413",
- ["The index falls to 0.863179, since the names moved",
-  "Every count moves, since no row keeps its number",
-  "Its index against core reads 1.000000"],
+ ["The index falls to 0.863179, since every cluster name moved",
+  "Every count in the table moves, since no row keeps its number",
+  "Its index against core reads 1.000000, as the runs agree"],
  "Every cluster of one run is exactly one cluster of the other, so the counts are the same in another row order, and against the core both runs score 0.872413. 1.000000 is seed 1 against seed 3; 0.863179 is k-means against Ward.")
 
 # m06, electrofacies against core

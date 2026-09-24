@@ -88,12 +88,12 @@ q(0, "Grouping each cored row by the well it came from scores 0.157021 against t
 
 q(2, "Ward scores 0.873388 against the core and k-means 0.872413. Which statement is supported by the figures?",
  "Ward prints the higher index, and against each other the two score 0.863179, so they differ",
- ["Both print the same index to three decimals, so they are the same grouping",
-  "k-means prints the higher index, since its silhouette of 0.545063 is higher",
-  "A tie, since the two indices print so close together"],
+ ["Both print the same index to three decimals, so they are one grouping of the cored rows",
+  "k-means prints the higher index, since its mean silhouette of 0.545063 is the higher one",
+  "A tie, since the two indices print so close together that neither can lead"],
  "Ward reads 0.873388 and k-means 0.872413, so Ward prints the higher figure. Against each other they score 0.863179, below 1, so they are different groupings; printing alike would not make them one. The silhouette is a separate measure.")
 
-q(1, "An adjustedRandIndex call passes a labelling of one row. What does the engine say?",
+q(1, "An adjustedRandIndex call passes two labellings of one row each. What does the engine say?",
  "a must be an array of at least 2 labels",
  ["b must be an array of 180 labels, one per row",
   "It returns 1.000000, as a single row agrees with itself",

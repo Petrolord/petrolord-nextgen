@@ -45,9 +45,9 @@ q(2, "Which three figures from the course point at shaly-sand as the facies the 
 
 q(0, "The write-up states how k was chosen. What does it say?",
  "The core describes 4 facies, with the elbow's drop fractions and the silhouette at k 2 to 8 printed beside the choice",
- ["k 3 was chosen because both the drop fraction and the silhouette peak there, and the core was set aside",
-  "k 4 was picked by the engine's elbow, which the silhouette confirmed with its best figure at k 4",
-  "Nothing about k, since a stated k needs no evidence once the clusters are matched to core"],
+ ["k 3 was chosen because both the drop fraction and the silhouette peak there, and the core count was set aside",
+  "k 4 was picked by the engine's elbow, which the silhouette then confirmed with its best mean figure at k 4",
+  "Nothing about k, since a stated k needs no evidence once the clusters are matched to the core facies"],
  "The write-up table reads \"the core describes 4 facies; the elbow's drop fractions and the silhouette at k 2 to 8 are printed beside the choice\". The engine picks no elbow, and the best silhouette is at k 3, so the evidence that pointed elsewhere is printed with the choice.")
 
 q(3, "Which line belongs in the write-up's \"what is not claimed\"?",

@@ -173,7 +173,7 @@
    "A refusal naming linkageMatrix[0], since the ids begin there"
   ],
   "answer": 1,
-  "explanation": "cutTree checks a matrix it is given and names the row at fault, counted from 0; on the course's small stated case its words are \"linkageMatrix[1] must be [id1, id2, height, size] with whole ids 0 <= id1 < id2 < 4\". The non-empty message is the refusal of an empty matrix, and nothing is built for the caller."
+  "explanation": "cutTree checks a matrix it is given and names the row at fault, counted from 0; on a small hand-built matrix its words are \"linkageMatrix[1] must be [id1, id2, height, size] with whole ids 0 <= id1 < id2 < 4\". The non-empty message is the refusal of an empty matrix, and nothing is built for the caller."
  },
  {
   "prompt": "cutTree is handed the Ward tree of the cored rows with k 0. What comes back?",
@@ -316,7 +316,7 @@
    "When the two labellings match row for row, whatever their shape"
   ],
   "answer": 0,
-  "explanation": "Two one-cluster labellings, or two all-singleton labellings, give a zero denominator, and the engine returns 1 there as scikit-learn does. A labelling of fewer than 2 rows is refused naming a, and identical labellings of any other shape reach 1 through the formula itself."
+  "explanation": "Two one-cluster labellings, or two all-singleton labellings, give a zero denominator, and the engine returns 1 there as scikit-learn does. A call with fewer than 2 rows is refused by name, and identical labellings of any other shape reach 1 through the formula itself."
  },
  {
   "prompt": "Which pair of facts belongs to the average-linkage cut at k 4 on the cored rows?",
@@ -376,9 +376,9 @@
  {
   "prompt": "The seed 1 run returns the teaching partition with other cluster numbers. What changes in its contingency table and its index against core?",
   "options": [
-   "The index falls to 0.863179, since the names moved",
-   "Every count moves, since no row keeps its number",
-   "Its index against core reads 1.000000",
+   "The index falls to 0.863179, since every cluster name moved",
+   "Every count in the table moves, since no row keeps its number",
+   "Its index against core reads 1.000000, as the runs agree",
    "Only the numbering of the table's rows; the index stays 0.872413"
   ],
   "answer": 3,

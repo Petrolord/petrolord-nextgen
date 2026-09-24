@@ -33,7 +33,7 @@
   "explanation": "The largest drop is 474.609153 at k 2, taken from the one-cluster figure 720.000000. The fraction at k 2 is 0.659179, a little below the 0.668972 at k 3, and the drop at k 3 is 164.159721, well below the k 2 drop. The k 4 drop, 22.942083, is smaller than both."
  },
  {
-  "prompt": "Which k does the elbow call return as its reading of the inertia curve?",
+  "prompt": "An elbow is run with withSilhouette true. Which k does it return as its reading of the inertia curve?",
   "options": [
    "The k with the largest drop fraction, k 3, returned as the elbow",
    "k 4, returned as the elbow because the core describes 4 facies",
@@ -123,10 +123,10 @@
  {
   "prompt": "Read down the fraction column of the seed 3 elbow. Which description holds?",
   "options": [
-   "Falls at every step after k 2, so the curve bends once and smoothly",
-   "Its lowest figure is the last one, 0.068791 at k 8, as the curve flattens out",
+   "Falls at every step after k 2, so the curve bends only once and smoothly down to k 8",
+   "Its lowest figure is the last one, 0.068791 at k 8, as the curve flattens out toward the end",
    "It falls to 0.282430 at k 4 and 0.112303 at k 5, and no larger k shown reaches 0.112303 again",
-   "Rises from 0.282430 at k 4 to 0.112303 at k 5, which makes k 4 a dip"
+   "Rises from 0.282430 at k 4 to 0.112303 at k 5, which makes k 4 a dip in the column"
   ],
   "answer": 2,
   "explanation": "The fractions read 0.659179, 0.668972, 0.282430, 0.112303, 0.079256, 0.056380 and 0.068791 for k 2 to 8. They rise from k 2 to k 3 and again from k 7 to k 8, so the fall is not smooth; the lowest is 0.056380 at k 7; and 0.112303 is below 0.282430."

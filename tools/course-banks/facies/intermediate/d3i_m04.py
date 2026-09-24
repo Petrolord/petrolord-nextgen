@@ -26,9 +26,9 @@ q(0, "One-to-one matching maps the teaching clusters to shale, sandstone, limest
 
 q(3, "How does one-to-one matching choose which facies each cluster takes?",
  "The assignment, a different facies per cluster, that matches the most rows (Hungarian)",
- ["Greedily, each cluster in turn taking its best facies still free",
-  "Each cluster takes its most common facies, and two may share one",
-  "The facies whose mean logs sit nearest the cluster's centre takes it"],
+ ["Greedily, each cluster in turn taking its best facies still free, in cluster order",
+  "Each cluster takes its most common facies, and two clusters may share one name",
+  "The facies whose mean logs sit nearest the cluster's centre in log units takes it"],
  "The basis reads \"one-to-one: each cluster to a different facies, maximising the rows matched (Hungarian); among equal totals the first mapping in cluster order that takes the first facies\". Taking clusters one at a time is greedy matching, and letting clusters share a facies is majority matching.")
 
 q(1, "Facies a, b, a, b are matched one-to-one against clusters 0, 0, 1, 1. Both mappings match 2 rows. Which does the engine return?",
@@ -68,8 +68,8 @@ q(3, "The k 3 k-means clustering is matched one-to-one. Which facies gets no clu
 
 q(2, "Under the one-to-one mapping at k 4, why is sandstone's precision below 1 while its recall is 1.000000?",
  "The 9 shaly-sand rows of cluster 1 are predicted sandstone, and every core sandstone row is in cluster 1",
- ["Some core sandstone rows fall in cluster 3, which is named shaly-sand, so they are missed",
-  "Precision divides by all 180 cored rows, and sandstone holds only 50 of them",
+ ["Some core sandstone rows fall in cluster 3, which is named shaly-sand, so those rows are missed",
+  "Precision divides by all 180 cored rows, while sandstone holds only 50 of those cored rows",
   "The rows of the limestone cluster that read like sandstone lower its precision to 0.847458"],
  "Sandstone's precision is 0.847458: of the 59 rows predicted sandstone, 9 are core shaly-sand. Its recall is 1.000000 because all 50 core sandstone rows sit in cluster 1. Cluster 3 holds no sandstone and cluster 2 no sandstone; precision divides by the rows predicted, which are 59.")
 
@@ -110,9 +110,9 @@ q(0, "Under majority matching, a cluster holds equal counts of sandstone and sha
 
 q(1, "Cluster 1 of the k 5 run is its limestone cluster, while in the teaching clustering at k 4 limestone is cluster 2. Why?",
  "They are different runs, and a cluster number is only a name set by where the starting rows fell",
- ["The k 5 run numbers its clusters by facies, and limestone sorts first",
-  "Adding a fifth centre shifts every cluster number up by one",
-  "Cluster numbers are sorted by size, and limestone is the second largest at k 5"],
+ ["The k 5 run numbers its clusters by facies name, and limestone is the facies that sorts first",
+  "Adding a fifth centre renumbers the clusters, shifting each number along by one place",
+  "Cluster numbers are sorted by size, and limestone is the second largest cluster of the k 5 run"],
  "The course reads cluster numbers as names: numbers are assigned by where the starting rows fell, and cluster 0 carries no meaning of its own. At k 5 cluster 0 is still the shale-only cluster, so nothing shifted by one; and the k 5 sizes, 29, 54, 51, 24, 22, are not in size order.")
 
 emit(Q, '/root/dai-wip-facies/banks/d3i_m04.json', expect_n=15)
