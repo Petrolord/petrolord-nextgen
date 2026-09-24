@@ -20,7 +20,7 @@ q(3, "At k 3 and seed 5, which wells does the engine's fold 1 test?",
  ["EKENE-10, EKENE-2 and EKENE-8",
   "EKENE-3, EKENE-5 and EKENE-7",
   "EKENE-3, EKENE-4 and EKENE-5, the middle of the sorted list"],
- "The engine numbers folds from 0, and fold 1 takes shuffled positions 1, 4 and 7: EKENE-4, EKENE-1 and EKENE-9. EKENE-10, EKENE-2 and EKENE-8 are fold 0, EKENE-3, EKENE-5 and EKENE-7 are fold 2, and EKENE-3, EKENE-4 and EKENE-5 would be a contiguous block of the sorted names, which the engine never deals.")
+ "The engine numbers folds from 0, and fold 1 takes shuffled positions 1, 4 and 7: EKENE-4, EKENE-1 and EKENE-9. EKENE-10, EKENE-2 and EKENE-8 are fold 0, EKENE-3, EKENE-5 and EKENE-7 are fold 2, and the middle three names of the sorted list make up none of the three folds at this seed.")
 
 q(0, "For GR, RHOB and NPHI, which lambda gives the lowest mean test RMSE over the three folds at k 3, seed 5?",
  "Lambda 10, at 5.826789 us/ft.",
@@ -99,12 +99,12 @@ q(0, "The logs by least squares read 6.779400, 5.779067 and 5.107563 us/ft on th
   "The worst fold, 6.779400 us/ft, as a cautious upper figure."],
  "The arithmetic mean of the three fold scores, 5.888677, estimates the error on a new well like the nine, and it carries its k and seed. A single fold is one set of three wells, and 4.282693 is one draw of three wells; neither averages over every well.")
 
-q(1, "Twelve settings were compared on the same three folds. What keeps the winning mean from flattering the choice?",
+q(1, "Twelve settings were compared on the same three folds. What lets a reader judge how far the winning mean may flatter the choice?",
  "Deciding the grid before looking at the scores, and printing all of it.",
  ["Searching more settings until one clears the runner-up by a wide margin.",
   "Reporting the winning mean alone, so the runner-up does not distract.",
   "Refitting the winner on its best fold and quoting that fold's score."],
- "A grid searched until something scores well has used the folds to choose, and its winning mean can flatter the choice. Fixing the grid first and printing every mean, with k and the seed, lets a reader see how close the runner-up was. Quoting the best fold or hiding the runner-up does the opposite.")
+ "A grid searched until something scores well has used the folds to choose. Even a grid fixed in advance crowns the lowest of twelve means on one set of folds: for the logs, lambda 10 leads lambda 0 by 5.826789 against 5.888677, and leave one well out puts the two in the other order. Fixing the grid first and printing every mean, with k and the seed, lets a reader see that margin. Quoting the best fold or hiding the runner-up hides it.")
 
 q(2, "Why must every fold of a cross-validation on the Ekene wells be a set of whole wells?",
  "Rows of one well share its sonic offset, so a split well would be scored on an offset already seen.",

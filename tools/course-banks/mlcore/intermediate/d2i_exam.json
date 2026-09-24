@@ -118,7 +118,7 @@
    "Nothing at all: the folds follow the sorted names in blocks, whatever size each well happens to be."
   ],
   "answer": 1,
-  "explanation": "Round robin over the shuffled wells balances the number of wells, and fold sizes differ by at most one well; with k 4 on nine wells the folds hold 3, 2, 2 and 2. The engine splits no well, has no stratified split, and deals the shuffled order rather than blocks of sorted names."
+  "explanation": "Round robin over the shuffled wells balances the number of wells, and fold sizes differ by at most one well; with k 4 on nine wells the folds hold 3, 2, 2 and 2. The engine splits no well and has no stratified split, and it deals the shuffled order round robin, never in blocks of sorted names."
  },
  {
   "prompt": "A caller asks `groupKFold` for k = 1 on the nine sonic wells. What does the engine return?",

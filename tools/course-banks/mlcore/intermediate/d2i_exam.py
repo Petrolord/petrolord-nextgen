@@ -101,7 +101,7 @@ q(1, "A field's wells hold very different numbers of rows. What does the engine'
  ["The count of rows per fold, splitting a long well where it must so that every fold holds the same rows.",
   "The count of pay rows per fold, as a stratified deal does, so that every fold sees both classes alike.",
   "Nothing at all: the folds follow the sorted names in blocks, whatever size each well happens to be."],
- "Round robin over the shuffled wells balances the number of wells, and fold sizes differ by at most one well; with k 4 on nine wells the folds hold 3, 2, 2 and 2. The engine splits no well, has no stratified split, and deals the shuffled order rather than blocks of sorted names.")
+ "Round robin over the shuffled wells balances the number of wells, and fold sizes differ by at most one well; with k 4 on nine wells the folds hold 3, 2, 2 and 2. The engine splits no well and has no stratified split, and it deals the shuffled order round robin, never in blocks of sorted names.")
 
 # 12 m02
 q(2, "A caller asks `groupKFold` for k = 1 on the nine sonic wells. What does the engine return?",
