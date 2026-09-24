@@ -570,7 +570,7 @@ Agglomerative clustering starts with every row as its own cluster and merges the
 | complete | complete: the largest Euclidean distance between the two clusters (max of d_at, d_bt) |
 | average | average (UPGMA): the mean Euclidean distance over all cross pairs ((na d_at + nb d_bt) / (na + nb)) |
 
-Each tree cut at k 4; cluster sizes in cluster order, and the merge heights either side of the cut (`cutHeights`):
+The table below cuts each tree at k 4: cluster sizes in cluster order, the height of the last merge made and the height of the next merge (`cutHeights`).
 
 | linkage | cluster sizes | last merge made (below the cut) | next merge (above the cut) | tied steps |
 | --- | --- | --- | --- | --- |

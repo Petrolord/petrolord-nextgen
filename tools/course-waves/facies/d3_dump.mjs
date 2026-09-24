@@ -784,7 +784,7 @@ w();
 table(['linkage', 'the distance between two clusters, the engine\'s basis'], LINKS.map((L) => [L, AG[L].basis.linkage]));
 w();
 const sizesOf = (lab) => { const c = count(lab); return [...c.keys()].sort((a, b) => a - b).map((k) => c.get(k)); };
-w(`Each tree cut at k ${K4}; cluster sizes in cluster order, and the merge heights either side of the cut (\`cutHeights\`):`);
+w(`The table below cuts each tree at k ${K4}: cluster sizes in cluster order, the height of the last merge made and the height of the next merge (\`cutHeights\`).`);
 w();
 table(['linkage', 'cluster sizes', 'last merge made (below the cut)', 'next merge (above the cut)', 'tied steps'], LINKS.map((L) => [L, list(sizesOf(AG[L].labels).map(S)), f6(AG[L].cutHeights.below), f6(AG[L].cutHeights.above), S(AG[L].tiedSteps)]));
 must('no linkage met a tied merge on the cored rows', LINKS.every((L) => AG[L].tiedSteps === 0), LINKS.map((L) => AG[L].tiedSteps).join(','));

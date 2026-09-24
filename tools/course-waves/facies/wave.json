@@ -59,7 +59,11 @@
   "FINDINGS open question 3, no SOM": "Taught as not built (section 27).",
   "prerequisite": "wave.json carries prerequisite null, as D1 and D2 do. Whether D3 should require D2 is a go-live decision for the lead."
  },
- "cleared_claims": [],
+ "cleared_claims": [
+  "Each log standardised with the centre and population standard deviation fitted on the 180 cored rows (section 5), the same four rows read in standard units (derived, (x - centre) / scale, with the scaler the engine returned):",
+  "The first three rows of EKENE-7, on the two-component model:",
+  "The basis reads: \"the first 60 rows of a mulberry32(3) Fisher-Yates shuffle, scored among themselves (scikit-learn sample_size)\"."
+ ],
  "fieldsDiscrimination": {
   "ihiala_gr_scale_gapi": "sample sd, min max range, first well only, centre quoted, variance not rooted",
   "ihiala_pc1_ratio": "covariance matrix, second component, cumulative of two, eigenvalue quoted, caliper included",
