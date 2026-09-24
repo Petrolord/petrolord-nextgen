@@ -74,7 +74,7 @@
    "It quotes the numeric field at six decimals, and a reason only verbatim, as the engine's own words"
   ],
   "answer": 3,
-  "explanation": "A reason string prints every figure as the shortest decimal that reads back to its field, so the population z example's reason prints the statistic with all its digits while its `statistic` field at six decimals is 3.000000. A note quotes the field at the digest's precision and quotes a reason only as the engine's own words. The field and the reason hold the same number."
+  "explanation": "A reason string prints every figure as the shortest decimal that reads back to its field, so the population z example's reason prints the statistic with all its digits while its `statistic` field at six decimals is 3.000000. A note quotes the field at the course's precision and quotes a reason only as the engine's own words. The field and the reason hold the same number."
  },
  {
   "prompt": "Two variables with very small variance in the caller's units are passed to `mahalanobis`, and it refuses them as singular. What should a reader of that refusal know?",

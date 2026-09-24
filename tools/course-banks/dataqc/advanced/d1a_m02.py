@@ -42,14 +42,14 @@ q(0, "EKENE-3's EWMA at lambda 0.2 and L 3 carries limits of 607.605937 and 615.
  ["The exact limits on day 1, which the engine then holds fixed for all forty monitored days",
   "The individuals chart's limits, which the EWMA chart shares with it at every lambda",
   "The asymptotic limits at lambda 0.100000, the narrowest pair in the table of lambda"],
- "The digest's table prints 607.605937 and 615.154063 in the asymptotic columns on every day. Day 1's exact limits are 609.115562 and 613.644438. The individuals limits on the same standard are 600.057812 and 622.702188, far wider for a single reading. At lambda 0.100000 the half-width is 2.597488 psi, narrower than the 3.774063 at lambda 0.200000.")
+ "The course's table prints 607.605937 and 615.154063 in the asymptotic columns on every day. Day 1's exact limits are 609.115562 and 613.644438. The individuals limits on the same standard are 600.057812 and 622.702188, far wider for a single reading. At lambda 0.100000 the half-width is 2.597488 psi, narrower than the 3.774063 at lambda 0.200000.")
 
 q(3, "On day 1 the exact limits read 609.115562 and 613.644438 psig, inside the asymptotic 607.605937 and 615.154063. What makes them narrower?",
  "The exact variance is multiplied by 1 - (1 - lambda)^(2t), which is small at t = 1",
  ["The engine narrows the exact limits on any day the EWMA has not yet signalled, and widens them after a signal",
   "The exact limits use the first day's reading as sigma, which is a smaller spread than phase one's MRbar / 1.128",
   "The exact limits apply a smaller L on the early days and move to L 3 once the chart has run for a week"],
- "The digest's method line: the exact limits multiply the variance by 1 - (1 - lambda)^(2t). At t = 1 the factor is small, so the band is narrow, and it approaches the asymptotic pair as t grows; from day 35 the two print alike at six decimals, while the factor stays below 1 on every day. The limits depend on t, lambda, L, target and sigma only. A signal does not move them, sigma is phase one's throughout, and L stays at its stated value.")
+ "The course's method: the exact limits multiply the variance by 1 - (1 - lambda)^(2t). At t = 1 the factor is small, so the band is narrow, and it approaches the asymptotic pair as t grows; from day 35 the two print alike at six decimals, while the factor stays below 1 on every day. The limits depend on t, lambda, L, target and sigma only. A signal does not move them, sigma is phase one's throughout, and L stays at its stated value.")
 
 q(1, "EKENE-3's forty monitored days are run once with asymptotic limits and once with exact limits. Which days signal in each run?",
  "The same days in both: high on 8, 9, 13 and 14, and low on 22, 27 to 34, 36 and 38",
@@ -63,7 +63,7 @@ q(2, "On which day does EKENE-3's EWMA, at lambda 0.2 with phase one's target an
  ["Day 16, the first day of the planted shift, which the EWMA picks up on the day it begins",
   "Day 21, the same day the tabular CUSUM first signals low, since both charts gather the shift",
   "Day 27, the first day of the run from 27 to 34"],
- "The digest prints the first low signal as day 22, with the EWMA at 606.394191 against the asymptotic lower limit of 607.605937. A shift is gathered over several days, so it is not seen on day 16. Day 21 is the CUSUM's first low signal, a different chart with different settings. Days 27 to 34 are the unbroken run that follows, after day 22 had already signalled.")
+ "The course prints the first low signal as day 22, with the EWMA at 606.394191 against the asymptotic lower limit of 607.605937. A shift is gathered over several days, so it is not seen on day 16. Day 21 is the CUSUM's first low signal, a different chart with different settings. Days 27 to 34 are the unbroken run that follows, after day 22 had already signalled.")
 
 q(1, "Day 9 reads 608.000000 psig, below the target, yet the EWMA signals high on day 9. Why?",
  "The EWMA still carries day 8's glitch: it reads 615.741908, above 615.154063",

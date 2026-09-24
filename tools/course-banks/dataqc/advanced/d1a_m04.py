@@ -42,7 +42,7 @@ q(3, "Which dimension does EKENE-3's scorecard name as weakest, with equal weigh
  ["Uniqueness with equal weights, and plausibility with the stated weights, since plausibility then carries the smallest normalised weight",
   "Completeness in both, since it carries the largest share of the total at the stated weights and so of the risk",
   "Uniqueness with equal weights, and no dimension with the stated weights, since a weight of 1 marks a dimension as minor"],
- "The weakest is the lowest SCORE, and a tie goes to the dimension listed first. Uniqueness scores 0.538462 whatever the weights, and the digest prints it weakest in both rows. Plausibility and uniqueness share the smallest normalised weight, 0.111111, and weights do not enter the choice. Completeness scores 0.966667, and every listed dimension takes part.")
+ "The weakest is the lowest SCORE, and a tie goes to the dimension listed first. Uniqueness scores 0.538462 whatever the weights, and the course prints it weakest in both rows. Plausibility and uniqueness share the smallest normalised weight, 0.111111, and weights do not enter the choice. Completeness scores 0.966667, and every listed dimension takes part.")
 
 q(0, "A stated example scores validity 0.9, completeness 0.9 and consistency 0.95, listed in that order. What does the scorecard return?",
  "Weakest validity, total 0.916667",
@@ -63,7 +63,7 @@ q(1, "RHOB completeness is passed as a direct score of 0.950000, beside NPHI val
  ["A refusal, since every row must be scored by the same rule",
   "A refusal, since the two rows describe different channels of EKENE-7's log and a scorecard needs one channel",
   "A total of 0.950000, since a direct score replaces the counts"],
- "Each dimension scores either `score` directly or 1 - failed / checked, and a direct score and a counted one mix; the digest prints a total of 0.953903. Each row carries its own rule, so the engine accepts two kinds together and rows from two channels together. A direct score is one row's score and the counted row still enters the total.")
+ "Each dimension scores either `score` directly or 1 - failed / checked, and a direct score and a counted one mix; the course prints a total of 0.953903. Each row carries its own rule, so the engine accepts two kinds together and rows from two channels together. A direct score is one row's score and the counted row still enters the total.")
 
 q(0, "Which dimension adds least to EKENE-3's total at the stated weights 3, 2, 2, 1 and 1, and by how much?",
  "Uniqueness, with a weighted contribution of 0.059829",

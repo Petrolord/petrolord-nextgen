@@ -52,7 +52,7 @@
    "Uniqueness in both, at 0.538462"
   ],
   "answer": 3,
-  "explanation": "The weakest is the lowest SCORE, and a tie goes to the dimension listed first. Uniqueness scores 0.538462 whatever the weights, and the digest prints it weakest in both rows. Plausibility and uniqueness share the smallest normalised weight, 0.111111, and weights do not enter the choice. Completeness scores 0.966667, and every listed dimension takes part."
+  "explanation": "The weakest is the lowest SCORE, and a tie goes to the dimension listed first. Uniqueness scores 0.538462 whatever the weights, and the course prints it weakest in both rows. Plausibility and uniqueness share the smallest normalised weight, 0.111111, and weights do not enter the choice. Completeness scores 0.966667, and every listed dimension takes part."
  },
  {
   "prompt": "A stated example scores validity 0.9, completeness 0.9 and consistency 0.95, listed in that order. What does the scorecard return?",
@@ -85,7 +85,7 @@
    "A total of 0.950000, since a direct score replaces the counts"
   ],
   "answer": 1,
-  "explanation": "Each dimension scores either `score` directly or 1 - failed / checked, and a direct score and a counted one mix; the digest prints a total of 0.953903. Each row carries its own rule, so the engine accepts two kinds together and rows from two channels together. A direct score is one row's score and the counted row still enters the total."
+  "explanation": "Each dimension scores either `score` directly or 1 - failed / checked, and a direct score and a counted one mix; the course prints a total of 0.953903. Each row carries its own rule, so the engine accepts two kinds together and rows from two channels together. A direct score is one row's score and the counted row still enters the total."
  },
  {
   "prompt": "Which dimension adds least to EKENE-3's total at the stated weights 3, 2, 2, 1 and 1, and by how much?",

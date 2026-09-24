@@ -57,7 +57,7 @@ q(3, "A flag's reason sentence prints its computed statistic as the shortest dec
  ["It quotes the reason's figure, since the reason carries more digits than the field and is the more exact",
   "It rounds the reason's figure to four decimals, the way NIST prints its worked examples",
   "It quotes neither and recomputes the statistic by hand, since both engine outputs carry rounding"],
- "A reason string prints every figure as the shortest decimal that reads back to its field, so the population z example's reason prints the statistic with all its digits while its `statistic` field at six decimals is 3.000000. A note quotes the field at the digest's precision and quotes a reason only as the engine's own words. The field and the reason hold the same number.")
+ "A reason string prints every figure as the shortest decimal that reads back to its field, so the population z example's reason prints the statistic with all its digits while its `statistic` field at six decimals is 3.000000. A note quotes the field at the course's precision and quotes a reason only as the engine's own words. The field and the reason hold the same number.")
 
 q(1, "Two variables with very small variance in the caller's units are passed to `mahalanobis`, and it refuses them as singular. What should a reader of that refusal know?",
  "The singular test is an absolute pivot test inside lib/linalg, so tiny variances can trip it, and rescaling the variables avoids it",

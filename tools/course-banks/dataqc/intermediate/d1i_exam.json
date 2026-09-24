@@ -349,7 +349,7 @@
    "As proof that halfWindow 3 is the wrong window."
   ],
   "answer": 0,
-  "explanation": "The digest counts 9 Hampel flags on the gamma ray that no generator planted. The course's vocabulary treats every one of them as a question for someone who knows the log, and nothing about them says the engine erred or that the window is badly set."
+  "explanation": "The course counts 9 Hampel flags on the gamma ray that were never planted as defects. The course's vocabulary treats every one of them as a question for someone who knows the log, and nothing about them says the engine erred or that the window is badly set."
  },
  {
   "prompt": "The gauge's two standard deviations are 8.732220 and 8.284111. Which one divides by n?",

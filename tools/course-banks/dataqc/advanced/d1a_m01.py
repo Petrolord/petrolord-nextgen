@@ -27,14 +27,14 @@ q(3, "EKENE-3's 50 in-control days give an MRbar of 4.257143 psi and a sample SD
  ["3.862060 psi, the sample standard deviation with n - 1, which is the same spread the z-score in the Professional tier uses",
   "4.257143 psi, MRbar itself, because a moving range of two already measures one standard deviation of the process",
   "3.862060 psi, because phase one is in control and its sample SD is then the one spread the NIST chart page prescribes"],
- "The digest's method line is sigma = MRbar / 1.128, and on phase one that is 3.774063 psi. The sample SD, 3.862060 psi, is printed beside it as a derived figure from lib/stats and is a different source: it measures scatter around the phase one mean. MRbar is a mean step between neighbours, and d2 = 1.128 is what converts it to a standard deviation.")
+ "The course's method is sigma = MRbar / 1.128, and on phase one that is 3.774063 psi. The sample SD, 3.862060 psi, is printed beside it as a derived figure from lib/stats and is a different source: it measures scatter around the phase one mean. MRbar is a mean step between neighbours, and d2 = 1.128 is what converts it to a standard deviation.")
 
 q(1, "Which limits does the individuals chart draw on EKENE-3's phase one, and from what?",
  "600.057812 and 622.702188 psig, the centre of 611.380000 plus and minus 3 times 3.774063 psi",
  ["595.080022 and 624.839978 psig, the centre plus and minus 3 sigma once the forty monitored days are pooled with the history",
   "607.605937 and 615.154063 psig, the band the chart draws when it takes phase one's centre as its standard",
   "600.057812 and 622.702188 psig, the centre plus and minus 3 times the sample SD of phase one"],
- "Limits are centre +/- 3 sigma with sigma = MRbar / 1.128, 3.774063 psi, and the digest prints 600.057812 and 622.702188. 595.080022 and 624.839978 are the limits of the forty monitored days charted on their own averages. 607.605937 and 615.154063 are the EWMA's asymptotic limits at lambda 0.2, a narrower band for a smoothed statistic. The sample SD, 3.862060, would give a different pair of lines.")
+ "Limits are centre +/- 3 sigma with sigma = MRbar / 1.128, 3.774063 psi, and the course prints 600.057812 and 622.702188. 595.080022 and 624.839978 are the limits of the forty monitored days charted on their own averages. 607.605937 and 615.154063 are the EWMA's asymptotic limits at lambda 0.2, a narrower band for a smoothed statistic. The sample SD, 3.862060, would give a different pair of lines.")
 
 q(1, "Beside the individuals chart the engine draws a chart of the moving ranges. Where does it put that chart's limits for EKENE-3?",
  "An upper limit of 13.908086 psi, which is 3.267 times MRbar, and a lower limit of 0",
@@ -48,14 +48,14 @@ q(3, "On the phase one standard, day 9 reads 608.000000 psig, well inside the in
  ["individuals-below-lcl, because 608.000000 psig is below the centre of 611.380000 and any day below the centre signals low",
   "ewma-above-ucl, because the individuals chart carries the smoothed memory of the day 8 glitch on into day 9",
   "moving-range-above-ucl, as day 9 itself sits far from the phase one centre"],
- "Day 8's glitch makes two large steps, one up into it and one back down, and the digest lists day 9 under moving-range-above-ucl. A moving range is the change from the day before, so it is the step from 633.800000 that fires. Being below the centre is ordinary; the individuals lower limit is 600.057812. ewma-above-ucl is the EWMA chart's rule, and that chart is a different call.")
+ "Day 8's glitch makes two large steps, one up into it and one back down, and the course lists day 9 under moving-range-above-ucl. A moving range is the change from the day before, so it is the step from 633.800000 that fires. Being below the centre is ordinary; the individuals lower limit is 600.057812. ewma-above-ucl is the EWMA chart's rule, and that chart is a different call.")
 
 q(0, "EKENE-3's forty monitored days are charted with phase one's centre and MRbar as the standard. On which days does the chart signal?",
  "Days 8, 9, 22, 23 and 25, with day 8 appearing twice: once on each chart",
  ["Days 8 and 9 only, the glitch and the return from it, since the shift from day 16 lies inside the band",
   "Every day from day 16 onward, as each sits below the phase one centre",
   "Days 8 and 22 only, since the moving range chart returns no signal"],
- "The digest prints 8 (individuals-above-ucl), 8 (moving-range-above-ucl), 9, 22 (individuals-below-lcl), 23 and 25, the last three by the moving range rule. Days 8 and 9 alone is what the chart on the monitored days' own averages returns. Sitting below the centre is not a signal, and the moving range chart's signals are rules the engine returns.")
+ "The course prints 8 (individuals-above-ucl), 8 (moving-range-above-ucl), 9, 22 (individuals-below-lcl), 23 and 25, the last three by the moving range rule. Days 8 and 9 alone is what the chart on the monitored days' own averages returns. Sitting below the centre is not a signal, and the moving range chart's signals are rules the engine returns.")
 
 q(2, "The same forty monitored days are charted on their own averages, with no standard supplied. What does the engine return?",
  "A centre of 609.960000, limits of 595.080022 and 624.839978, and signals on days 8 and 9 only",
@@ -111,7 +111,7 @@ q(0, "Day 8's glitch reads 633.800000 psig. Which rules fire on day 8 on the pha
  ["individuals-above-ucl alone on both charts, since a single high reading can only ever break the level limit",
   "Both rules on both charts, since a glitch this large breaks every limit however the centre is drawn",
   "moving-range-above-ucl alone on both charts, since 633.800000 lies inside 624.839978 on each"],
- "The digest's two rows list day 8 twice on the standard, once per rule, and on the own-averages chart list 8 (individuals-above-ucl) and 9 (moving-range-above-ucl). The own-averages chart draws its limits wider, from the monitored days' own MRbar, and the digest lists its moving range signal on day 9 alone. 633.800000 is above both upper limits, 622.702188 and 624.839978.")
+ "The course's two rows list day 8 twice on the standard, once per rule, and on the own-averages chart list 8 (individuals-above-ucl) and 9 (moving-range-above-ucl). The own-averages chart draws its limits wider, from the monitored days' own MRbar, and the course lists its moving range signal on day 9 alone. 633.800000 is above both upper limits, 622.702188 and 624.839978.")
 
 emit(Q, '/root/dai-wip-dataqc/banks/d1a_m01.json', expect_n=15)
 finish()

@@ -265,7 +265,7 @@ q(0, "How should a report treat the nine gamma ray Hampel flags that are not pla
  ["As engine errors, to be discarded before the report is written.",
   "As defects the generator planted without recording them.",
   "As proof that halfWindow 3 is the wrong window."],
- "The digest counts 9 Hampel flags on the gamma ray that no generator planted. The course's vocabulary treats every one of them as a question for someone who knows the log, and nothing about them says the engine erred or that the window is badly set.")
+ "The course counts 9 Hampel flags on the gamma ray that were never planted as defects. The course's vocabulary treats every one of them as a question for someone who knows the log, and nothing about them says the engine erred or that the window is badly set.")
 
 # 33
 q(1, "The gauge's two standard deviations are 8.732220 and 8.284111. Which one divides by n?",

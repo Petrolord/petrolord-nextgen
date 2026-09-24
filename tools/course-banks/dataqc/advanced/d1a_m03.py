@@ -63,7 +63,7 @@ q(2, "With k 0.5 and h 4 in sigma units, on which day does EKENE-3's S_lo first 
  ["Day 16, the first day of the planted shift, where S_lo reads 4.992969",
   "Day 20, where S_lo reads 14.164843",
   "Day 22, the day the EWMA and the individuals chart first signal low, where S_lo reads 30.550780"],
- "The digest prints the first lower signal as day 21, S_lo 19.657812 against h 15.096251. On day 16 S_lo is 4.992969 and on day 20 it is 14.164843, both below h. Day 22 is the first low signal of the EWMA and of the individuals chart; the CUSUM had already signalled low the day before.")
+ "The course prints the first lower signal as day 21, S_lo 19.657812 against h 15.096251. On day 16 S_lo is 4.992969 and on day 20 it is 14.164843, both below h. Day 22 is the first low signal of the EWMA and of the individuals chart; the CUSUM had already signalled low the day before.")
 
 q(0, "On EKENE-3's day 7 the plain cumulative sum of x - target reads 16.740000, above h of 15.096251, and the day's signal is none. Why?",
  "A signal comes from S_hi or S_lo passing h, and S_hi on day 7 is 5.664843; the plain sum is returned beside them and carries no allowance",
