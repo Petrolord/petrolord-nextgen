@@ -2,7 +2,7 @@
  {
   "prompt": "On the 90 pay test rows, which hold 90 distinct probabilities, how many points does the engine's ROC curve carry?",
   "options": [
-   "90, one per test row, with no separate starting point.",
+   "90, one per test row, with no extra starting point.",
    "91: one per distinct score, plus the start at (0, 0).",
    "24, one per pay row, at each place the curve steps up.",
    "1584, one for every pair of a pay and a non-pay row."
@@ -123,9 +123,9 @@
  {
   "prompt": "`rocCurve` is given yTrue holding 2 positives and 0 negatives. What does the engine return?",
   "options": [
-   "A curve that climbs straight up the true positive rate axis and stops there, returned with an AUC of 1.",
-   "An AUC of 0.500000, the value the engine gives any model that is unable to rank its rows at all.",
-   "A curve whose false positive rate is scored by the zeroDivision setting, and listed as undefined.",
+   "A curve that climbs straight up the true positive rate axis from (0, 0) and stops there, returned with an AUC of 1 and no warning attached.",
+   "An AUC of 0.500000 with a single diagonal step, the value the engine gives any set of scores that is unable to rank its rows at all.",
+   "A curve whose false positive rate, a 0 / 0 on every point, is scored by the zeroDivision setting and listed among the undefined ratios.",
    "A refusal naming `yTrue`, in the engine's words: \"yTrue must contain both classes (found 2 positive and 0 negative), or the ROC curve is undefined\"."
   ],
   "answer": 3,

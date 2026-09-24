@@ -11,7 +11,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 q(1, "On the 90 pay test rows, which hold 90 distinct probabilities, how many points does the engine's ROC curve carry?",
  "91: one per distinct score, plus the start at (0, 0).",
- ["90, one per test row, with no separate starting point.",
+ ["90, one per test row, with no extra starting point.",
   "24, one per pay row, at each place the curve steps up.",
   "1584, one for every pair of a pay and a non-pay row."],
  "The engine places one point per distinct score and starts at (0, 0) with threshold null, so 90 distinct probabilities give 91 points. The curve moves right as well as up, so it has more points than pay rows, and the 1584 pairs are how the AUC reads as a probability, with no point for each pair.")
@@ -88,9 +88,9 @@ q(0, "scikit-learn 1.9 clips at the float64 machine epsilon, 2.22e-16. What woul
 
 q(3, "`rocCurve` is given yTrue holding 2 positives and 0 negatives. What does the engine return?",
  "A refusal naming `yTrue`, in the engine's words: \"yTrue must contain both classes (found 2 positive and 0 negative), or the ROC curve is undefined\".",
- ["A curve that climbs straight up the true positive rate axis and stops there, returned with an AUC of 1.",
-  "An AUC of 0.500000, the value the engine gives any model that is unable to rank its rows at all.",
-  "A curve whose false positive rate is scored by the zeroDivision setting, and listed as undefined."],
+ ["A curve that climbs straight up the true positive rate axis from (0, 0) and stops there, returned with an AUC of 1 and no warning attached.",
+  "An AUC of 0.500000 with a single diagonal step, the value the engine gives any set of scores that is unable to rank its rows at all.",
+  "A curve whose false positive rate, a 0 / 0 on every point, is scored by the zeroDivision setting and listed among the undefined ratios."],
  "With no negatives the false positive rate divides by zero, and the engine refuses by name, naming the counts it found. It returns no curve and no AUC, and zeroDivision belongs to `classificationReport`.")
 
 q(1, "What threshold does the engine print for the ROC curve's first point, and why?",
