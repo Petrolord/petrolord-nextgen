@@ -69,9 +69,9 @@ q(2, "The table of held-out wells lists seeds 1, 2, 3, 4 and 6. Why does seed 5 
 q(2, "A write-up of the teaching fit gives the split as `groupSplit`, test fraction 0.3, seed 5. Why does the course also ask for the names of the wells on each side?",
  "The seed alone tells a reader nothing about which wells were held out until the call is run again.",
  ["Because the engine's seeds can change between runs, so the seed may not reproduce the same wells.",
-  "So the reader can check the scoring without having to trust that the seed was ever run at all.",
+  "So the test fraction is on record, since a seed and a split name leave the fraction out of a write-up.",
   "Because a named well list lets the reader skip the split, since the fit can then be copied directly."],
- "The seed fixes the draw, and anyone with the same wells and the same call gets the same wells back. But a reader cannot see from the number 5 that EKENE-4, EKENE-5 and EKENE-8 were the test wells without rerunning the call, and row counts beside well counts show how much evidence the fit rests on. A seeded draw repeats exactly, and the well list replaces neither the split nor the fit."),
+ "The seed fixes the draw, and anyone with the same wells and the same call gets the same wells back. But a reader cannot see from the number 5 that EKENE-4, EKENE-5 and EKENE-8 were the test wells without rerunning the call, and row counts beside well counts show how much evidence the fit rests on. The fraction, 0.3, is already written beside the seed. A seeded draw repeats exactly, and the well list replaces neither the split nor the fit."),
 
 q(0, "Which sentence belongs in a write-up of a least squares fit to the Ekene wells?",
  "The field is synthetic, so any check against a planted value is one no real field allows.",

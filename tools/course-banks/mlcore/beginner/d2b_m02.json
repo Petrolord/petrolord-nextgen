@@ -63,10 +63,10 @@
    "Whole wells hold out more rows at the same fraction, and the course wants as large a test set as it can possibly get from nine wells."
   ],
   "answer": 0,
-  "explanation": "Each Ekene well adds its own offset to every DT sample, so the rows of a well sit above or below the others as a block. A row from a training well is barely new. A new well brings its own offset, and holding out whole wells asks that question. `randomRowSplit` takes a row count, RMSE is defined on any rows, and the 90 against 81 difference is a matter of rounding a count of wells."
+  "explanation": "Each Ekene well adds its own offset to every DT sample, so the rows of a well sit above or below the others as a block. A row from a training well is barely new. A new well brings its own offset, and holding out whole wells asks that question. `randomRowSplit` takes a row count, RMSE has no 30-row minimum, and the 90 against 81 difference is a matter of rounding a count of wells."
  },
  {
-  "prompt": "A model has no feature that identifies a well. How does a random-row test score compare with a whole-well test score on the same rows?",
+  "prompt": "A model has no feature that identifies a well. How does a random-row test score compare with a whole-well test score, both split from the same 270 sonic rows?",
   "options": [
    "It comes out lower on every draw, since a random-row split always lets the model meet each well's offset.",
    "It comes out higher on every draw, since a random-row test set is smaller and so carries larger misses.",

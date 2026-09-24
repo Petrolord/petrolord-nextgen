@@ -213,11 +213,11 @@ qd(2, "What would dropping the intercept from the teaching fit force on the fitt
 
 # m05, fit metrics and residuals
 q(3, "On the same rows, which relation between RMSE and MAE always holds?",
- "RMSE is at least as large as MAE, and equal only when every miss has the same size.",
- ["MAE is at least as large as RMSE, since it keeps every miss at its full size.",
-  "The two are equal whenever the model is fitted by least squares on those rows.",
-  "RMSE is MAE squared, since both are built from the same misses on the same rows."],
- "Squaring before averaging gives large misses more weight, so the root of the mean square is never below the mean of the sizes. Every table in the course shows it: the test wells read RMSE 4.282693 and MAE 3.526103 us/ft. Least squares minimises squared misses, which makes the two no more alike, and both read in us/ft."),
+ "Up to rounding, RMSE is at least as large as MAE, and the two meet only when every miss has one size.",
+ ["MAE is at least as large as RMSE, since it keeps every miss at its full size and takes no root of a square.",
+  "The two are equal whenever the model is fitted by least squares on those rows, since that fit balances the misses.",
+  "RMSE is MAE squared, since both are built from the same misses on the same rows and one of them is squared."],
+ "Squaring before averaging gives large misses more weight, so in exact arithmetic the root of the mean square is never below the mean of the sizes, and the two meet only when every miss has the same size. The engine works in floating point, so where every miss has one size the two can differ in the last digit, either way; the relation holds up to that rounding. On real rows the gap is plain: the test wells read RMSE 4.282693 and MAE 3.526103 us/ft. Least squares minimises squared misses, which makes the two no more alike, and both read in us/ft."),
 
 qd(3, "On the three test wells the same predictions give R-squared 0.815322 about the test mean and 0.816151 about the training mean. Why is the second one higher?",
  "The training mean is the better reference for a new well, and a better reference always scores higher.",
