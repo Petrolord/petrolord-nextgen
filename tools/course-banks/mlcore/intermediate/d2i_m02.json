@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "`groupKFold` with k = 3 and seed 5 shuffles the nine sonic wells to EKENE-8, EKENE-4, EKENE-5, EKENE-2, EKENE-1, EKENE-3, EKENE-10, EKENE-9, EKENE-7. Which fold tests EKENE-2?",
+  "options": [
+   "Fold 3, since it is the fourth well dealt in the shuffled order.",
+   "Fold 0: EKENE-2 sits at shuffled position 3, and 3 mod 3 is 0.",
+   "Fold 2, because EKENE-2 is the third name in the sorted order.",
+   "The fold that also tests EKENE-4, its neighbour in the shuffled order."
+  ],
+  "answer": 1,
+  "explanation": "The engine deals the well at shuffled position q to fold q mod k, counting positions from 0. EKENE-2 is at position 3, so it joins EKENE-8 (position 0) and EKENE-10 (position 6) in fold 0. With k = 3 there is no fold 3, the deal reads the shuffled order and never the sorted one, and EKENE-4 at position 1 goes to fold 1."
+ },
+ {
+  "prompt": "At k 3 and seed 5, which wells does the engine's fold 1 test?",
+  "options": [
+   "EKENE-10, EKENE-2 and EKENE-8",
+   "EKENE-3, EKENE-5 and EKENE-7",
+   "EKENE-3, EKENE-4 and EKENE-5, the middle of the sorted list",
+   "EKENE-1, EKENE-4 and EKENE-9"
+  ],
+  "answer": 3,
+  "explanation": "The engine numbers folds from 0, and fold 1 takes shuffled positions 1, 4 and 7: EKENE-4, EKENE-1 and EKENE-9. EKENE-10, EKENE-2 and EKENE-8 are fold 0, EKENE-3, EKENE-5 and EKENE-7 are fold 2, and EKENE-3, EKENE-4 and EKENE-5 would be a contiguous block of the sorted names, which the engine never deals."
+ },
+ {
+  "prompt": "For GR, RHOB and NPHI, which lambda gives the lowest mean test RMSE over the three folds at k 3, seed 5?",
+  "options": [
+   "Lambda 10, at 5.826789 us/ft.",
+   "Lambda 0, at 5.888677 us/ft.",
+   "Lambda 100, at 6.467800 us/ft.",
+   "Lambda 1, at 5.872012 us/ft."
+  ],
+  "answer": 0,
+  "explanation": "The six means for the logs are 5.888677, 5.886755, 5.872012, 5.826789, 6.467800 and 9.044393 at lambdas 0, 0.1, 1, 10, 100 and 1000. The lowest is 5.826789 at lambda 10; lambda 1 and lambda 0 read a little higher and lambda 100 higher again."
+ },
+ {
+  "prompt": "With the four well-level attributes added to the logs, what is the lowest three-fold mean the grid reaches, and at which lambda?",
+  "options": [
+   "5.759287 us/ft at lambda 100",
+   "7.214483 us/ft at lambda 10",
+   "6.773053 us/ft at lambda 100",
+   "8.982593 us/ft at lambda 1000, where the penalty is at its strongest"
+  ],
+  "answer": 2,
+  "explanation": "The attribute means over the three folds run 7.648016, 7.641799, 7.588505, 7.214483, 6.773053 and 8.982593, so the lowest is 6.773053 at lambda 100. 5.759287 is the attribute set's score on the three test wells of the single teaching split, 7.214483 is lambda 10, and 8.982593 at lambda 1000 is the highest of the six."
+ },
+ {
+  "prompt": "At lambda 1000 the attribute set reads 8.982593 us/ft against 9.044393 for the logs alone. What does that comparison say?",
+  "options": [
+   "The attributes carry real information once they are penalised hard enough.",
+   "Lambda 1000 is the attribute set's best setting over the three folds.",
+   "Little about the attributes: a penalty that strong pulls every prediction toward the training mean.",
+   "That the logs overfit at lambda 1000, which the four attributes then correct."
+  ],
+  "answer": 2,
+  "explanation": "At lambda 1000 every coefficient has been shrunk toward zero and every prediction toward the training mean, so both sets read worse than the logs at any lower lambda. The attribute set's best mean is 6.773053 at lambda 100, and every attribute mean in the grid is above the logs' 5.826789 at lambda 10."
+ },
+ {
+  "prompt": "Run `groupKFold` with k = 4 on the nine sonic wells. How are the wells dealt?",
+  "options": [
+   "Into folds of 3, 2, 2 and 2 wells, which is 90, 60, 60 and 60 rows.",
+   "It is refused, since nine wells do not divide into four equal folds.",
+   "By rows, as scikit-learn's GroupKFold deals them, with no seed.",
+   "2, 2, 2 and 3 wells, the extra well going to the last fold."
+  ],
+  "answer": 0,
+  "explanation": "Round robin sends shuffled positions 0, 4 and 8 to fold 0 and two wells to each other fold, so the folds hold 3, 2, 2 and 2 wells and fold sizes differ by at most one well. k only has to lie between 2 and the number of wells, the engine balances wells and takes a seed, and the extra well lands in fold 0."
+ },
+ {
+  "prompt": "What does `groupKFold` do with k = 9 and with k = 10 on the nine sonic wells?",
+  "options": [
+   "Both are refused, since k must be smaller than the number of wells.",
+   "Both are dealt, and at k 10 one of the ten folds is left empty.",
+   "k 9 is refused as a degenerate count, and k 10 wraps round to one.",
+   "k 9 is dealt as leave one well out; k 10 is refused, naming `k`."
+  ],
+  "answer": 3,
+  "explanation": "k runs from 2 to the number of distinct wells, and k equal to that number is allowed: it is leave one well out. Ask for one more and the engine refuses in its own words: \"k must be a whole number from 2 to 9 (the number of distinct groups)\". It never deals an empty fold or wraps a count round."
+ },
+ {
+  "prompt": "Under leave one well out, which setting for GR, RHOB and NPHI has the lower mean test RMSE?",
+  "options": [
+   "Lambda 10, at 5.501614 us/ft, the same order as under three folds.",
+   "Lambda 0, reading 5.495600 us/ft against 5.501614 at lambda 10.",
+   "Neither, since the two means are equal to six decimals.",
+   "The attribute set at lambda 100, which reads 6.288507 us/ft."
+  ],
+  "answer": 1,
+  "explanation": "Over the nine single-well folds the logs read 5.495600 at lambda 0 and 5.501614 at lambda 10, so lambda 0 is lower, the reverse of the three-fold order. The two means are close and unequal, and the attribute set at lambda 100 reads higher than either, at 6.288507."
+ },
+ {
+  "prompt": "Why does leave one well out give the same folds whatever the seed, while k 3 does not?",
+  "options": [
+   "With one well per fold, every order of the shuffle deals the same nine folds.",
+   "The engine skips the shuffle whenever k is an odd number of folds.",
+   "Leave one well out deals rows, and rows have no order to shuffle.",
+   "Its seed is fixed at 5 inside the engine, so every run matches."
+  ],
+  "answer": 0,
+  "explanation": "At k 9 each fold holds exactly one well, so the shuffle changes only which fold number a well gets and never which wells share a fold. At k 3 the seed decides which wells share a fold. Both 3 and 9 are odd, folds are always whole wells, and the seed is the caller's."
+ },
+ {
+  "prompt": "How does the engine's fold rule differ from scikit-learn's GroupKFold?",
+  "options": [
+   "Both balance rows per fold; only the engine sorts the names before it deals them.",
+   "The engine splits large wells to balance rows, while GroupKFold keeps each well whole.",
+   "The engine balances wells and takes a seed; GroupKFold balances rows and takes none.",
+   "GroupKFold shuffles with a seed, while the engine deals wells in plain sorted order."
+  ],
+  "answer": 2,
+  "explanation": "Round robin over the seeded shuffle balances the number of wells, and fold sizes differ by at most one well; scikit-learn's GroupKFold balances rows and takes no seed. Neither splits a well. On the Ekene wells every well has 30 rows, so both would balance rows here, and on a field of uneven wells they can deal different folds."
+ },
+ {
+  "prompt": "Of the nine single-well folds fitted by least squares on the logs, which well scores the highest test RMSE?",
+  "options": [
+   "EKENE-10, at 7.459642 us/ft.",
+   "EKENE-9, at 8.291318 us/ft.",
+   "EKENE-2, at 7.260092 us/ft.",
+   "EKENE-1, at 3.514700 us/ft, the lowest fold of all."
+  ],
+  "answer": 1,
+  "explanation": "The nine least squares fold scores run from 3.514700 on EKENE-1 to 8.291318 on EKENE-9. EKENE-10 at 7.459642 and EKENE-2 at 7.260092 are the next two, and EKENE-1 is the lowest of the nine, so it cannot be the highest."
+ },
+ {
+  "prompt": "On each of the nine single-well folds, how far apart are the test RMSEs of ridge at lambda 0 and least squares?",
+  "options": [
+   "Up to 3.44e-16 us/ft, the gap printed for the coefficients.",
+   "Ridge reads higher on every fold, because its penalty never quite vanishes.",
+   "They cannot be compared, since ridge is only run with k = 3.",
+   "At most 2.04e-14 us/ft, which is rounding."
+  ],
+  "answer": 3,
+  "explanation": "Ridge at lambda 0 is least squares, and on every fold the two test RMSEs differ by at most 2.04e-14 us/ft. 3.44e-16 is the largest relative difference between the two sets of coefficients on the teaching split, a different comparison. The penalty is exactly zero at lambda 0, and the nine folds were run for both models."
+ },
+ {
+  "prompt": "The logs by least squares read 6.779400, 5.779067 and 5.107563 us/ft on the three folds. Which single figure do you quote for a new well?",
+  "options": [
+   "The mean, 5.888677 us/ft, quoted as k-fold by wells, k 3, seed 5.",
+   "The best fold, 5.107563 us/ft, since it shows what the model can do.",
+   "The teaching split's 4.282693 us/ft on EKENE-4, EKENE-5 and EKENE-8.",
+   "The worst fold, 6.779400 us/ft, as a cautious upper figure."
+  ],
+  "answer": 0,
+  "explanation": "The arithmetic mean of the three fold scores, 5.888677, estimates the error on a new well like the nine, and it carries its k and seed. A single fold is one set of three wells, and 4.282693 is one draw of three wells; neither averages over every well."
+ },
+ {
+  "prompt": "Twelve settings were compared on the same three folds. What keeps the winning mean from flattering the choice?",
+  "options": [
+   "Searching more settings until one clears the runner-up by a wide margin.",
+   "Deciding the grid before looking at the scores, and printing all of it.",
+   "Reporting the winning mean alone, so the runner-up does not distract.",
+   "Refitting the winner on its best fold and quoting that fold's score."
+  ],
+  "answer": 1,
+  "explanation": "A grid searched until something scores well has used the folds to choose, and its winning mean can flatter the choice. Fixing the grid first and printing every mean, with k and the seed, lets a reader see how close the runner-up was. Quoting the best fold or hiding the runner-up does the opposite."
+ },
+ {
+  "prompt": "Why must every fold of a cross-validation on the Ekene wells be a set of whole wells?",
+  "options": [
+   "The engine cannot fit a model on fewer than 30 rows, the size of one Ekene well.",
+   "Whole wells make every fold hold the same number of rows on any field at all.",
+   "Rows of one well share its sonic offset, so a split well would be scored on an offset already seen.",
+   "`groupKFold` refuses with a message whenever a well would fall across two folds."
+  ],
+  "answer": 2,
+  "explanation": "Each Ekene well carries its own sonic offset, so its rows are not independent test cases, and a fold that split a well would test on rows whose offset the model had fitted. Row counts balance only when wells are the same size, the engine fits far smaller sets, and `groupKFold` deals whole wells by construction, so there is nothing for it to refuse."
+ }
+]
