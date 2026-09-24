@@ -1,0 +1,26 @@
+{
+ "decline": {
+  "decimals": 6,
+  "match": "^(?:umunze1_arps_di_per_month)$"
+ },
+ "mse": {
+  "decimals": 6,
+  "match": "^(?:agulu1_holt_fixed_mse_bopd2)$"
+ },
+ "parameter": {
+  "decimals": 6,
+  "match": "^(?:agulu1_damped_phi|agulu1_holt_beta|agulu2_ses_alpha)$"
+ },
+ "percent": {
+  "decimals": 6,
+  "match": "^(?:nanka1_holdout_damped_smape_pct)$"
+ },
+ "rate": {
+  "decimals": 6,
+  "match": "^(?:agulu1_damped_forecast_h24_bopd|agulu1_holt_forecast_h12_bopd|nanka1_holdout_damped_me_bopd|nanka2_backtest_holt_rmse_bopd|nanka2_backtest_holt_step6_mae_bopd|umunze1_damped_p10_h12_bopd|umunze1_damped_p50_h6_bopd|umunze1_damped_p90_h12_bopd)$"
+ },
+ "scaled": {
+  "decimals": 6,
+  "match": "^(?:nanka1_holdout_damped_mase|nanka2_backtest_holt_held_mase|umunze2_compare_arps_mase|umunze2_compare_best_mase)$"
+ }
+}

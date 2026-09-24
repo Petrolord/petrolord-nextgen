@@ -1,0 +1,54 @@
+{
+ "slug": "forecastml",
+ "prefix": "d4",
+ "name": "Data-Driven Production Forecasting",
+ "pathOrder": 69,
+ "module": "data_ai",
+ "prerequisite": null,
+ "repo": "/root/wt-dai-d4-nextgen",
+ "branch": "feat/d4-forecastml-course",
+ "goldens": [],
+ "goldensNote": "EMPTY BY DECISION. The vendored golden test-data/dataai/goldens/forecast_cases.json carries 130 cases of oracle output (the oracle's own Ekene wells, NIST inputs, stated series). Naming it here would let numsweep resolve a lesson literal against a figure the digest never prints. Every golden figure a lesson may quote (the NIST published figures, the exact-line and constant-tie goldens, the phi upper-bound golden) is recomputed by the engine and printed in the digest, so the harvested truth file carries it.",
+ "engines": [
+  "engines/dataai/forecast.js",
+  "engines/dca/arps.js",
+  "lib/stats/stats.js",
+  "lib/conventions/percentile.js"
+ ],
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines ec89b6b (engines PR #255, merged). THIRTEEN paths walked by vendor_forecastml.sh over a git-archive export of the commit with the jest suite as the only seed: six reached by the walk (the suite, forecast.js, engines/dca/arps.js, lib/stats/stats.js, lib/conventions/percentile.js, tools/validation/dataai/synthetic_wells.js) and seven NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; oracle_forecast.py, pin_forecast.py, timing_forecast.mjs, FINDINGS-forecast.md, negcontrol_forecast.sh). 13 paths x 4 proofs = 52, all IDENTICAL. The canonical pin stays 54cf7c4; 10 paths are ledgered as kind extra, group d4-forecastml-course. ONE entry moved there from d3-facies-course at its new blob: synthetic_wells.js (c5b850d5ed79, ec89b6b: syntheticProduction and an arps.js import appended; D2's syntheticWells and D3's syntheticFacies unchanged). arps.js, lib/stats and percentile.js already match the manifest. PRIOR-COURSE PROOF (prove_prior_courses.sh): against the new tree the committed D1 dataqc, D2 mlcore and D3 facies kits rebuild digest.txt, fields.json and precision.json byte-identical, and digest.txt and fields.json match their waves.json pins; vendored suites forecast 432/432, cluster 349/349, ml 614/614, quality 913/913.",
+ "constants": {
+  "$comment": "The engine exports DEFAULTS (PHI_MIN 0.8, PHI_MAX 0.98, GRID_ALPHA 0 to 1 by 0.1, GRID_PHI 0.8/0.85/0.9/0.95/0.98, GRID_TIE_REL 1e-12, PS_STEP 0.05, PS_MIN_STEP 2^-30, PS_MAX_EVALS 200000, MAX_H 10000, MAX_POINTS 100000, N_SIMS 1000, MAX_SIMS 100000, MAX_ORIGINS 5000, RANK_TIE_REL 1e-12). Digest section 1 prints them from the export. None is graded."
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3",
+  "x1e2",
+  "x1e-2"
+ ],
+ "plan": {
+  "state": "FOUNDATION: vendoring, structure, Ekene production dataset, digest, capstones, gates, kit, stubs and the teaching lab with three explorers. Lessons not started."
+ },
+ "history": {
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The engine's review changes (the exact refusal wordings, the stated quantile rule) landed before its merge and before any lesson was written; they are provenance. The digest describes the engine as it is."
+ },
+ "scopeSeams": {
+  "Arps decline curves": "OWNED BY the decline curve analysis course (dca). D4 imports fitArpsModel as a baseline, prints what the engine returns (model, qi, Di per month, b) and never re-derives the equations.",
+  "regression, splits by whole wells and k-fold": "OWNED BY D2 mlcore. D4 teaches the rolling origin, the time-series form of an honest test, and names the well-by-well split with a pointer.",
+  "data quality": "OWNED BY D1 dataqc (gaps, outliers, frozen values, rate while shut in). D4 takes a clean series, refuses a missing month by name, and treats a shut-in month as a real zero.",
+  "Monte Carlo and P labels in general": "OWNED BY the uncertainty and dca courses. D4's bootstrap is the residual bootstrap of one method; its labels follow lib/conventions/percentile.js and are taught as the platform convention.",
+  "clustering and classification": "OWNED BY D3 facies.",
+  "feature regression": "The plan roster (Suite NextGen-Remaining-Courses-PLAN.md section 15) lists feature regression for D4; the engine does not build it (digest section 24, what is not built), and regression is D2's. Open question for the lead."
+ },
+ "namingCollisions": {
+  "forecast": "the point forecast of one fitted method; a one-step forecast is a fitted value; a percentile is named as a percentile. Section 25.",
+  "error": "actual minus forecast; positive means the forecast was low; a residual is an in-sample one-step error. Sections 11, 25.",
+  "P90": "the low case, the 10th percentile of the simulated paths, by exceedance; P10 the high case. Sections 19, 25.",
+  "accuracy": "a named metric on named months (in-sample, hold-out, or a backtest with its origins). Section 25.",
+  "trend": "the smoothed trend state b. Section 25.",
+  "machine learning": "names the method (exponential smoothing, residual bootstrap, least-squares Arps). Section 25."
+ },
+ "openItems": {},
+ "cleared_claims": [],
+ "fieldsDiscrimination": {}
+}
