@@ -79,14 +79,14 @@ q(0, "The write-up gives both the index against core and the one-to-one accuracy
  "The one-to-one accuracy scores mapped predictions, so its mode is named; the index's basis reads \"adjusted Rand index of the clusters against the facies (independent of the mapping)\". Counting the same rows does not make two figures depend on the same choices.")
 
 q(1, "Why does the agglomerative half of step 2 carry no seed in the write-up while k-means carries seed 3 and 10 starts?",
- "Agglomerative takes no seed; the same rows, scaling and linkage give the same tree",
+ "The agglomerative call has no seed input, and each tree is named by its linkage",
  ["Its seed is shared with the k-means call, so stating seed 3 once covers both methods",
   "Its seed is chosen by the linkage, Ward drawing one and the others none",
   "A seed would be quoted, but the trees used the default of 3 as well"],
  "The function table lists agglomerative's inputs as X, linkage, k, scale and names, and the write-up names each tree only by its linkage. k-means carries its seed and starts because another seed could stop elsewhere, as seed 5 does at 58.297079 with ten starts.")
 
 q(3, "At k 5 under majority matching, shaly-sand takes two clusters of its own and accuracy rises to 0.983333. What does that show?",
- "Its rows fall in groups the logs can find once more centres are allowed; it is no case for k 5",
+ "Two nearly pure shaly-sand clusters, 24 of 24 and 21 of 22 rows, and no case for k 5",
  ["That k 5 is the right k, since the accuracy beats the k 4 figure of 0.950000",
   "The core description is wrong, and shaly-sand is two separate facies",
   "The sandstone cluster was the cause, since sandstone takes two clusters at k 5"],

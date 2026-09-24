@@ -69,7 +69,7 @@ q(3, "The k 3 k-means clustering is matched one-to-one. Which facies gets no clu
 q(2, "Under the one-to-one mapping at k 4, why is sandstone's precision below 1 while its recall is 1.000000?",
  "The 9 shaly-sand rows of cluster 1 are predicted sandstone, and every core sandstone row is in cluster 1",
  ["Some core sandstone rows fall in cluster 3, which is named shaly-sand, so they are missed",
-  "Sandstone has 50 rows against 59 in its cluster, and precision divides by the facies count",
+  "Precision divides by all 180 cored rows, and sandstone holds only 50 of them",
   "The rows of the limestone cluster that read like sandstone lower its precision to 0.847458"],
  "Sandstone's precision is 0.847458: of the 59 rows predicted sandstone, 9 are core shaly-sand. Its recall is 1.000000 because all 50 core sandstone rows sit in cluster 1. Cluster 3 holds no sandstone and cluster 2 no sandstone; precision divides by the rows predicted, which are 59.")
 
@@ -94,11 +94,11 @@ q(3, "A matchClusters call passes mode 'best'. What does the engine say?",
   "It runs majority with a warning"],
  "The engine offers exactly two modes and refuses any other by name, in its own words quoted in the key. The one-per-row message is the refusal of a clusters list of the wrong length, and no mode is substituted.")
 
-q(2, "A matchClusters call sets zeroDivision to one half. What happens, and why does the setting matter?",
- "Refused, \"zeroDivision must be 0 or 1\"; it decides a never-predicted facies's precision",
- ["Accepted, and the half is then used wherever a ratio in the report divides zero by zero",
-  "Rounded to 1, the scikit-learn default, and a warning is printed",
-  "Refused, since the setting exists only for one-to-one matching at k 4"],
+q(2, "A matchClusters call sets zeroDivision to one half. What happens?",
+ "A refusal by name: \"zeroDivision must be 0 or 1\"",
+ ["Accepted, and the half is then used wherever a ratio in the report would divide zero by zero",
+  "Rounded to 1 with a warning",
+  "Accepted in majority mode only, and refused under one-to-one"],
  "The machine learning engine's scorer takes 0 or 1 for a ratio that divides zero by zero, and the engine refuses a half in the words quoted. At k 3 shaly-sand is never predicted, so its precision is exactly the case the setting decides.")
 
 q(0, "Under majority matching, a cluster holds equal counts of sandstone and shale. Which facies does it take?",

@@ -31,7 +31,7 @@ q(0, "Which pair of clusters does Ward linkage merge at each step?",
 
 q(2, "Cut at k 4, which linkage puts more rows into one cluster than any core facies holds?",
  "Average linkage: 96 rows in one cluster, against 54 in the largest facies",
- ["Ward, whose cut holds a cluster of 54 rows, the whole of the limestone",
+ ["Ward, whose cut holds a cluster of 54 rows, as many as the limestone count",
   "Complete linkage, with a largest cluster of 51 rows and three smaller ones",
   "Every linkage alike, since each cut at k 4 has one cluster above 54 rows"],
  "The cuts at k 4 have sizes 52, 44, 54, 30 for Ward, 51, 46, 54, 29 for complete and 96, 54, 29, 1 for average. Only average linkage exceeds 54, the largest core facies (limestone), and it leaves one row alone. A Ward cluster of 54 rows equals the limestone count and does not exceed it.")

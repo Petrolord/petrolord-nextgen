@@ -35,7 +35,7 @@
  {
   "prompt": "Cut at k 4, which linkage puts more rows into one cluster than any core facies holds?",
   "options": [
-   "Ward, whose cut holds a cluster of 54 rows, the whole of the limestone",
+   "Ward, whose cut holds a cluster of 54 rows, as many as the limestone count",
    "Complete linkage, with a largest cluster of 51 rows and three smaller ones",
    "Average linkage: 96 rows in one cluster, against 54 in the largest facies",
    "Every linkage alike, since each cut at k 4 has one cluster above 54 rows"

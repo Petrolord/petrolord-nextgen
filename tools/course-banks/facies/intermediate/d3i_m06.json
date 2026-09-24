@@ -113,7 +113,7 @@
   "prompt": "Why does the agglomerative half of step 2 carry no seed in the write-up while k-means carries seed 3 and 10 starts?",
   "options": [
    "Its seed is shared with the k-means call, so stating seed 3 once covers both methods",
-   "Agglomerative takes no seed; the same rows, scaling and linkage give the same tree",
+   "The agglomerative call has no seed input, and each tree is named by its linkage",
    "Its seed is chosen by the linkage, Ward drawing one and the others none",
    "A seed would be quoted, but the trees used the default of 3 as well"
   ],
@@ -126,7 +126,7 @@
    "That k 5 is the right k, since the accuracy beats the k 4 figure of 0.950000",
    "The core description is wrong, and shaly-sand is two separate facies",
    "The sandstone cluster was the cause, since sandstone takes two clusters at k 5",
-   "Its rows fall in groups the logs can find once more centres are allowed; it is no case for k 5"
+   "Two nearly pure shaly-sand clusters, 24 of 24 and 21 of 22 rows, and no case for k 5"
   ],
   "answer": 3,
   "explanation": "At k 5 majority matching gives shaly-sand clusters 3 and 4 (24 of 24 and 21 of 22 rows) and 0.983333. Splitting a facies costs majority matching nothing, so the higher score is no evidence for k 5, and sandstone takes one cluster, cluster 2."

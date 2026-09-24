@@ -91,7 +91,7 @@
   "prompt": "Under the one-to-one mapping at k 4, why is sandstone's precision below 1 while its recall is 1.000000?",
   "options": [
    "Some core sandstone rows fall in cluster 3, which is named shaly-sand, so they are missed",
-   "Sandstone has 50 rows against 59 in its cluster, and precision divides by the facies count",
+   "Precision divides by all 180 cored rows, and sandstone holds only 50 of them",
    "The 9 shaly-sand rows of cluster 1 are predicted sandstone, and every core sandstone row is in cluster 1",
    "The rows of the limestone cluster that read like sandstone lower its precision to 0.847458"
   ],
@@ -132,12 +132,12 @@
   "explanation": "The engine offers exactly two modes and refuses any other by name, in its own words quoted in the key. The one-per-row message is the refusal of a clusters list of the wrong length, and no mode is substituted."
  },
  {
-  "prompt": "A matchClusters call sets zeroDivision to one half. What happens, and why does the setting matter?",
+  "prompt": "A matchClusters call sets zeroDivision to one half. What happens?",
   "options": [
-   "Accepted, and the half is then used wherever a ratio in the report divides zero by zero",
-   "Rounded to 1, the scikit-learn default, and a warning is printed",
-   "Refused, \"zeroDivision must be 0 or 1\"; it decides a never-predicted facies's precision",
-   "Refused, since the setting exists only for one-to-one matching at k 4"
+   "Accepted, and the half is then used wherever a ratio in the report would divide zero by zero",
+   "Rounded to 1 with a warning",
+   "A refusal by name: \"zeroDivision must be 0 or 1\"",
+   "Accepted in majority mode only, and refused under one-to-one"
   ],
   "answer": 2,
   "explanation": "The machine learning engine's scorer takes 0 or 1 for a ratio that divides zero by zero, and the engine refuses a half in the words quoted. At k 3 shaly-sand is never predicted, so its precision is exactly the case the setting decides."

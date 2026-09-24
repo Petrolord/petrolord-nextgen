@@ -53,8 +53,8 @@ q(0, "Two labellings each put every row in one cluster. What does the engine ret
 
 q(0, "The teaching partition comes back numbered differently at seed 1. What does the index read between seed 1 and seed 3, and against core?",
  "1.000000 between them, and 0.872413 each against the core",
- ["0.000000 between them, as no row keeps its cluster number",
-  "0.863179 between them, and 0.873388 each against the core",
+ ["0.000000 between them, since no row keeps its number",
+  "0.863179 between them, and 0.873388 for each against the core",
   "1.000000 between them, with seed 1 at 0.897678 against the core"],
  "Seed 1 is the teaching partition with other numbers, so the index between them is 1.000000 and both score 0.872413 against the core. 0.863179 is k-means against Ward; 0.873388 is Ward against core and 0.897678 complete against core.")
 
