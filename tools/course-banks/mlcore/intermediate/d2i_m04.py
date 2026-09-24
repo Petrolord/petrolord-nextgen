@@ -114,5 +114,5 @@ q(1, "RHOB and NPHI correlate at -0.563498 over the 210 training rows. What does
   "The engine drops one of the pair once their correlation passes one half."],
  "Holding RHOB fixed while NPHI moves asks about a direction the rows seldom take, since the two move together (-0.563498 over the training rows, -0.405407 over the 70 pay rows among them), and the standard errors show the cost. Both coefficients here are negative, so neither cancels the other; correlation affects any fit that holds a feature fixed, logistic included; and the engine drops no feature.")
 
-emit(Q, '/root/wt-dai-d2-nextgen/tools/course-banks/mlcore/intermediate/d2i_m04.json', expect_n=15)
+emit(Q, '/root/dai-wip-mlcore/banks/d2i_m04.json', expect_n=15)
 finish()

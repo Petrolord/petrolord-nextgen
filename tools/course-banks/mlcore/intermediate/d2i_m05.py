@@ -113,5 +113,5 @@ q(1, "With 66 of the 90 test rows non-pay, what does a rule that calls every row
   "Nothing at all, since the engine refuses a report with one predicted label."],
  "Accuracy counts the diagonal, so a rule that never calls pay is right on every non-pay row, 66 of 90, while its recall of pay is 0. That is why the ratios by label are read beside accuracy. The fitted model's accuracy, 0.955556, comes from 86 correct calls, and the engine reports a label that is never predicted with its precision scored zeroDivision.")
 
-emit(Q, '/root/wt-dai-d2-nextgen/tools/course-banks/mlcore/intermediate/d2i_m05.json', expect_n=15)
+emit(Q, '/root/dai-wip-mlcore/banks/d2i_m05.json', expect_n=15)
 finish()

@@ -113,5 +113,5 @@ q(1, "Adding the four attributes to the logs moves both split scores. On how man
   "Only 5 seeds lower the first, while all 12 raise the second."],
  "Over seeds 1 to 12 the attributes lower the random-row test RMSE on 12 and raise the group test RMSE on 12: they help on rows of wells the model has seen and hurt on wells it has not, every time. 7 and 5 are the logs' own counts of negative and positive optimism.")
 
-emit(Q, '/root/wt-dai-d2-nextgen/tools/course-banks/mlcore/intermediate/d2i_m03.json', expect_n=15)
+emit(Q, '/root/dai-wip-mlcore/banks/d2i_m03.json', expect_n=15)
 finish()

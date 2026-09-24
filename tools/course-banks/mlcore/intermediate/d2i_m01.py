@@ -113,5 +113,5 @@ q(0, "The teaching split points to lambda 100 for the seven features. Why is tha
   "A lambda can only be chosen from the training R-squared about the training mean."],
  "One split is one draw of wells: EKENE-4, EKENE-5 and EKENE-8 at seed 5. Choosing lambda from their scores tunes the model to those three wells, which is why the next module scores every well once. The seed does not limit lambda, 5.759287 is a test RMSE on the three held-out wells, and the training R-squared falls at every step whatever lambda would serve a new well.")
 
-emit(Q, '/root/wt-dai-d2-nextgen/tools/course-banks/mlcore/intermediate/d2i_m01.json', expect_n=15)
+emit(Q, '/root/dai-wip-mlcore/banks/d2i_m01.json', expect_n=15)
 finish()

@@ -113,5 +113,5 @@ q(2, "Why must every fold of a cross-validation on the Ekene wells be a set of w
   "`groupKFold` refuses with a message whenever a well would fall across two folds."],
  "Each Ekene well carries its own sonic offset, so its rows are not independent test cases, and a fold that split a well would test on rows whose offset the model had fitted. Row counts balance only when wells are the same size, the engine fits far smaller sets, and `groupKFold` deals whole wells by construction, so there is nothing for it to refuse.")
 
-emit(Q, '/root/wt-dai-d2-nextgen/tools/course-banks/mlcore/intermediate/d2i_m02.json', expect_n=15)
+emit(Q, '/root/dai-wip-mlcore/banks/d2i_m02.json', expect_n=15)
 finish()

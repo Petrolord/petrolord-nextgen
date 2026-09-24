@@ -114,5 +114,5 @@ q(2, "Row 61 of EKENE-3, a non-pay row, carries a probability of pay of 0.817561
   "34.538776, the clip's charge on a confident miss"],
  "A non-pay row (y = 0) is charged -ln(1 - p). -ln(p) is the charge for a pay row, every row is charged and clipping only bounds the extremes, and 34.538776 is the charge of a row clipped at eps, which 0.817561 is far from.")
 
-emit(Q, '/root/wt-dai-d2-nextgen/tools/course-banks/mlcore/intermediate/d2i_m06.json', expect_n=15)
+emit(Q, '/root/dai-wip-mlcore/banks/d2i_m06.json', expect_n=15)
 finish()
