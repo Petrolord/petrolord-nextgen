@@ -23,7 +23,7 @@ The scaler fitted on all ten wells moved the RT centre and scale, the penalised 
 
 ## Small, and still a defect
 
-A difference of -3.28e-4 is small on these data, and it happens to favour the leaked version. Neither fact makes the procedure acceptable. The test wells shaped the transform the model was trained through, so the score is no longer a score on data the model had not seen in any form.
+A difference of -3.28e-4 is small on these data, and it happens to favour the leaked version. Neither fact makes the procedure acceptable. The test wells shaped the transform the model was trained through, so the test rows had already reached the model in one form before it was scored.
 
 ## The rule
 

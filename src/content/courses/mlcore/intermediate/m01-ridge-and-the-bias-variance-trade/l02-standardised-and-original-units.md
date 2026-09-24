@@ -6,7 +6,7 @@ A least squares coefficient carries the target's unit over the feature's unit. O
 
 ## Why ridge standardises first
 
-Ridge charges lambda x sum b_j^2, a single price for every coefficient. To make that price fair, the engine standardises every feature before it fits: it subtracts the training mean and divides by the population standard deviation (dividing by n) of the rows passed. After that step every feature has the same spread, and a coefficient reads as the change in DT for one training standard deviation of its feature. Now the penalty treats every feature alike, whatever unit the log was recorded in.
+Ridge charges lambda x sum b_j^2, a single price for every coefficient. To make that price fair, the engine standardises every feature before it fits: it subtracts the training mean and divides by the population standard deviation (dividing by n) of the rows passed. After that step every feature has the same spread, and a coefficient reads as the change in DT for one training standard deviation of its feature.
 
 The Associate tier found that least squares with an intercept gives the same fitted plane under any rescaling of a feature. The penalty is where that stops being true. Scale a feature by a thousand and its coefficient shrinks by a thousand, so its share of the penalty changes. That is why the scaling is part of the model.
 
@@ -35,8 +35,8 @@ At lambda 0 the penalty is gone and ridge is least squares. The engine's ridge c
 
 ## Which unit to quote
 
-Quote the standardised coefficient when you compare features inside one fit, or when you watch the penalty shrink them. Quote the original-unit coefficient when someone will apply it to a log, and name the unit every time. A ridge coefficient quoted without saying which of the two it is cannot be checked.
+Quote the standardised coefficient when you compare features inside one fit, or when you watch the penalty shrink them. Quote the original-unit coefficient when someone will apply it to a log, and name the unit every time.
 
 ## Exercise
 
-Open the ridge view on the teaching split with the seven default features and lambda 10. Read the GR row, which shows both the original-unit and the standardised coefficient. Then open the fit explorer's scaling view on the same training rows and read the population standard deviation of GR. Divide the standardised coefficient by it and confirm that you reach the original-unit figure the ridge view prints.
+Open the ridge view on the teaching split with the seven default features and lambda 10. Read the GR row, which shows both the original-unit and the standardised coefficient. The Associate tier printed the population standard deviation of GR on these 180 training rows, 22.375203 gAPI. Divide the standardised coefficient by it and confirm that you reach the original-unit figure the ridge view prints.

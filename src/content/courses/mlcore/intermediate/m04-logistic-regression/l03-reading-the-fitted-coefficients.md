@@ -25,7 +25,7 @@ The RHOB coefficient is -10.716404 per g/cm3. A whole g/cm3 is larger than the s
 
 ## NPHI, and the standard error
 
-The NPHI coefficient is -9.876360 per v/v with a standard error of 15.424455; the coefficient is -0.640305 standard errors from zero. On these training rows the fit cannot tell the NPHI coefficient's sign with any confidence, once RHOB and RT are in the model. The RT coefficient, at 6.212972 standard errors, is the clearest of the four.
+The NPHI coefficient is -9.876360 per v/v with a standard error of 15.424455; the coefficient is -0.640305 standard errors from zero. Once RHOB and RT are in the model, these training rows do not pin down even the sign of the NPHI coefficient. The RT coefficient, at 6.212972 standard errors, is the clearest of the four.
 
 The engine's basis gives the standard errors in its own words: "sqrt(diag((X'WX)^-1)) at the solution, W = p(1 - p)". They carry the same caveat the Associate tier attached to least squares: the formula assumes the rows are independent, and rows of one well are not. Treat the ratios as a rough guide to which coefficients are well pinned down.
 
@@ -35,7 +35,7 @@ Every reading above holds the other two features fixed. When two features tend t
 
 ## Units in the logistic view
 
-The coefficients above are in the features' own units because the model was fitted on the raw logs. Fit on standardised features and every coefficient becomes log odds per training standard deviation instead, as ridge coefficients did in the first module. The leakage module's scaler case used standardised features, which is why its RT coefficient, 3.129011 per scaled unit with a penalty of 1, sits on another scale.
+The coefficients above are in the features' own units because the model was fitted on the raw logs. On standardised features each coefficient would be log odds per training standard deviation. The leakage module's scaler case used standardised features, which is why its RT coefficient, 3.129011 per scaled unit with a penalty of 1, sits on another scale.
 
 ## Exercise
 
