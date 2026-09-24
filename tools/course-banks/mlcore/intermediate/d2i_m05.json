@@ -162,6 +162,6 @@
    "Nothing at all, since the engine refuses a report with one predicted label."
   ],
   "answer": 1,
-  "explanation": "Accuracy counts the diagonal, so a rule that never calls pay is right on every non-pay row, 66 of 90, while its recall of pay is 0. That is why the ratios by label are read beside accuracy. The fitted model's accuracy, 0.955556, comes from 86 correct calls, and the engine reports a label that is never predicted with its precision scored zeroDivision."
+  "explanation": "Accuracy counts the diagonal, so a rule that never calls pay is right on every non-pay row, 66 of 90, while its recall of pay is 0. That is why the ratios by label are read beside accuracy. The fitted model's accuracy, 0.955556, comes from 62 correct non-pay calls and 24 correct pay calls, and the engine reports a label that is never predicted with its precision scored zeroDivision."
  }
 ]
