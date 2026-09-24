@@ -267,7 +267,7 @@ THE INTERCEPT is the fitted DT where every feature is zero: -0.552686 us/ft, wit
 
 A coefficient depends on which other features are in the model. Fitted on NPHI alone, the NPHI coefficient is 11.127468 us/ft per v/v with R-squared 0.001327; beside GR and RHOB it is 138.783590.
 
-STANDARD ERRORS are s x sqrt(diag((X'X)^-1)) with s^2 = RSS / (n - p); the basis says: "s x sqrt(diag((X'X)^-1)), s^2 = RSS / (n - p), p counting the intercept". They measure how far a coefficient would move between samples like this one, assuming independent residuals. Rows from one well are not independent (they share the well's offset, section 9), so these standard errors are smaller than the spread from well to well.
+STANDARD ERRORS are s x sqrt(diag((X'X)^-1)) with s^2 = RSS / (n - p); the basis says: "s x sqrt(diag((X'X)^-1)), s^2 = RSS / (n - p), p counting the intercept". They measure how far a coefficient would move between samples like this one, and the formula assumes independent residuals. Rows from one well share the well's offset (section 9), so that assumption does not hold row by row here, and the standard errors are exact only under it.
 
 MORE ROWS THAN COEFFICIENTS. Least squares needs n > p: with n = p the fit passes through every row and leaves no residual degree of freedom to estimate s. The engine refuses n <= p (section 3).
 
@@ -354,7 +354,7 @@ Ridge minimises sum (y - b0 - z'b)^2 + lambda x sum b_j^2 on features standardis
 | 100 | 3.458214 | 0.688743 | 5.759287 | 4.769725 |
 | 1000 | 0.965695 | 0.265317 | 8.607538 | 7.187084 |
 
-As lambda grows the training R-squared falls every step, from 0.861914 to 0.265317: the penalty pulls the fit away from the training rows (more bias). The test RMSE first falls, from 16.999672 at lambda 0 to 5.759287 at lambda 100, then rises again to 8.607538 at lambda 1000. At lambda 0 the seven coefficients chase the six training wells' offsets through the four attributes (more variance); a moderate penalty trades a little bias for much less variance. This is one split: section 12 chooses lambda over every well.
+As lambda grows the training R-squared falls every step, from 0.861914 to 0.265317: the penalty pulls the fit away from the training rows (more bias). The test RMSE first falls, from 16.999672 at lambda 0 to 5.759287 at lambda 100, then rises again to 8.607538 at lambda 1000. At lambda 0 the seven coefficients chase the six training wells' offsets through the four attributes (variance); the penalty shrinks the attribute coefficients hardest (the table below) and costs training fit (bias). This is one split: section 12 chooses lambda over every well.
 
 The standardised coefficients (per training standard deviation of each feature; the first entry is the intercept in standardised space, which is the training mean of y):
 
@@ -406,7 +406,7 @@ Test RMSE (us/ft) of ridge on each fold, and the mean over the three folds (deri
 | the logs and the four attributes | 100 | 7.818369 | 6.285660 | 6.215129 | 6.773053 |
 | the logs and the four attributes | 1000 | 9.842359 | 9.144579 | 7.960841 | 8.982593 |
 
-The lowest mean for the logs alone is 5.826789 us/ft at lambda 10; for the logs with the attributes it is 6.773053 us/ft at lambda 100. Scored on wells the model has not seen, the four well-level attributes make the model worse at every lambda tried: the smallest attribute mean is above the logs-only mean at lambda 10.
+The lowest mean for the logs alone is 5.826789 us/ft at lambda 10; for the logs with the attributes it is 6.773053 us/ft at lambda 100. Scored on wells the model has not seen, no lambda tried brings the logs with the attributes down to the logs alone at lambda 10: every attribute mean in the table is above 5.826789. At the largest lambda, 1000, the attribute set reads 8.982593 against 9.044393 for the logs, because a penalty that strong has shrunk every coefficient toward zero and every prediction toward the training mean.
 
 LEAVE ONE WELL OUT is k equal to the number of wells, 9, which the engine allows (section 24). Mean test RMSE over the nine folds (derived): the logs at lambda 0 5.495600, the logs at lambda 10 5.501614, the logs with the attributes at lambda 100 6.288507 us/ft.
 

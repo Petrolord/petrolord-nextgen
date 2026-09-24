@@ -84,8 +84,8 @@
  "digest": {
   "lines": 799,
   "sections": 26,
-  "md5": "59cd175e2d290c3e832dd04cbe5ec7c5",
-  "sha256": "64ebe2ad75b2952df02d4000d63f11aca049f48c7c18c899d9a8ec1a3383db66"
+  "md5": "de645933acf3483e2450488c80959978",
+  "sha256": "6df87e054197420a13da0da311dfbfe019fddbee3123925b24f7de350baeb6b2"
  },
  "fields": {
   "count": 18,
@@ -180,7 +180,7 @@
    "command": "/root/dc-wavekit/digestrepro.sh dai-wip-mlcore /root/wt-dai-d2-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "d2_dump: 922 label-and-call, measurement and claim assertions run, 0 failed; 26 sections"
+   "summary": "d2_dump: 924 label-and-call, measurement and claim assertions run, 0 failed; 26 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",

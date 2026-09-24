@@ -475,7 +475,7 @@ const O1 = success('ols on the training rows, NPHI alone', ML.ols({ X: pick(XL9,
 w(`A coefficient depends on which other features are in the model. Fitted on NPHI alone, the NPHI coefficient is ${f6(O1.coefficients[1])} us/ft per v/v with R-squared ${f6(O1.rSquared)}; beside GR and RHOB it is ${f6(OL.coefficients[3])}.`);
 must('the NPHI coefficient changes when GR and RHOB are added', Math.abs(O1.coefficients[1] - OL.coefficients[3]) > 1, `${O1.coefficients[1]} ${OL.coefficients[3]}`);
 w();
-w(`STANDARD ERRORS are s x sqrt(diag((X'X)^-1)) with s^2 = RSS / (n - p); the basis says: "${OL.basis.standardErrors}". They measure how far a coefficient would move between samples like this one, assuming independent residuals. Rows from one well are not independent (they share the well's offset, ${ref('residuals')}), so these standard errors are smaller than the spread from well to well.`);
+w(`STANDARD ERRORS are s x sqrt(diag((X'X)^-1)) with s^2 = RSS / (n - p); the basis says: "${OL.basis.standardErrors}". They measure how far a coefficient would move between samples like this one, and the formula assumes independent residuals. Rows from one well share the well's offset (${ref('residuals')}), so that assumption does not hold row by row here, and the standard errors are exact only under it.`);
 w();
 w(`MORE ROWS THAN COEFFICIENTS. Least squares needs n > p: with n = p the fit passes through every row and leaves no residual degree of freedom to estimate s. The engine refuses n <= p (${ref('refusals')}).`);
 
@@ -603,12 +603,14 @@ must('training R-squared falls as lambda grows', ridgeFits.every((f, i) => i ===
 must('effective degrees of freedom fall as lambda grows', ridgeFits.every((f, i) => i === 0 || f.r.effectiveDegreesOfFreedom < ridgeFits[i - 1].r.effectiveDegreesOfFreedom), 'monotone');
 must('the lowest test RMSE sits at an interior lambda', best.lam !== RL[0] && best.lam !== RL[RL.length - 1], best.lam);
 w();
-w(`As lambda grows the training R-squared falls every step, from ${f6(ridgeFits[0].r.rSquared)} to ${f6(ridgeFits[ridgeFits.length - 1].r.rSquared)}: the penalty pulls the fit away from the training rows (more bias). The test RMSE first falls, from ${f6(ridgeFits[0].m.rmse)} at lambda 0 to ${f6(best.m.rmse)} at lambda ${S(best.lam)}, then rises again to ${f6(ridgeFits[ridgeFits.length - 1].m.rmse)} at lambda ${S(RL[RL.length - 1])}. At lambda 0 the seven coefficients chase the six training wells' offsets through the four attributes (more variance); a moderate penalty trades a little bias for much less variance. This is one split: ${ref('kfold')} chooses lambda over every well.`);
+w(`As lambda grows the training R-squared falls every step, from ${f6(ridgeFits[0].r.rSquared)} to ${f6(ridgeFits[ridgeFits.length - 1].r.rSquared)}: the penalty pulls the fit away from the training rows (more bias). The test RMSE first falls, from ${f6(ridgeFits[0].m.rmse)} at lambda 0 to ${f6(best.m.rmse)} at lambda ${S(best.lam)}, then rises again to ${f6(ridgeFits[ridgeFits.length - 1].m.rmse)} at lambda ${S(RL[RL.length - 1])}. At lambda 0 the seven coefficients chase the six training wells' offsets through the four attributes (variance); the penalty shrinks the attribute coefficients hardest (the table below) and costs training fit (bias). This is one split: ${ref('kfold')} chooses lambda over every well.`);
 w();
 w('The standardised coefficients (per training standard deviation of each feature; the first entry is the intercept in standardised space, which is the training mean of y):');
 w();
 const showL = [0, 10, 100];
 table(['term', ...showL.map((l) => `lambda ${l}`)], ['intercept', ...FA].map((nm, j) => [nm, ...showL.map((l) => f6(ridgeFits.find((f) => f.lam === l).r.standardizedCoefficients[j]))]));
+const shrink = (j) => Math.abs(ridgeFits.find((f) => f.lam === 100).r.standardizedCoefficients[j]) / Math.abs(ridgeFits[0].r.standardizedCoefficients[j]);
+must('from lambda 0 to 100 every attribute coefficient shrinks by a larger factor than every log coefficient', Math.max(...[4, 5, 6, 7].map(shrink)) < Math.min(...[1, 2, 3].map(shrink)), [1, 2, 3, 4, 5, 6, 7].map(shrink).join(','));
 must('the standardised intercept is the training mean of y at every lambda', ridgeFits.every((f) => Math.abs(f.r.standardizedCoefficients[0] - MTR.referenceMean) < 1e-9), 'ybar');
 w();
 w(`THE INTERCEPT IS NOT PENALISED: in standardised space it is ${f6(ridgeFits[0].r.standardizedCoefficients[0])} us/ft at every lambda, the training mean of DT (${f6(MTR.referenceMean)}, ${ref('metrics')}). The basis says: "${ridgeFits[0].r.basis.objective}".`);
@@ -659,7 +661,8 @@ const [bLogs, vLogs] = argmin(CV.logs);
 const [bAttrs, vAttrs] = argmin(CV.attrs);
 must('the logs alone beat the logs with attributes at their best lambdas', vLogs < vAttrs, `${vLogs} ${vAttrs}`);
 w();
-w(`The lowest mean for the logs alone is ${f6(vLogs)} us/ft at lambda ${bLogs}; for the logs with the attributes it is ${f6(vAttrs)} us/ft at lambda ${bAttrs}. Scored on wells the model has not seen, the four well-level attributes make the model worse at every lambda tried: the smallest attribute mean is above the logs-only mean at lambda ${bLogs}.`);
+w(`The lowest mean for the logs alone is ${f6(vLogs)} us/ft at lambda ${bLogs}; for the logs with the attributes it is ${f6(vAttrs)} us/ft at lambda ${bAttrs}. Scored on wells the model has not seen, no lambda tried brings the logs with the attributes down to the logs alone at lambda ${bLogs}: every attribute mean in the table is above ${f6(vLogs)}. At the largest lambda, ${S(RL[RL.length - 1])}, the attribute set reads ${f6(CV.attrs[RL[RL.length - 1]])} against ${f6(CV.logs[RL[RL.length - 1]])} for the logs, because a penalty that strong has shrunk every coefficient toward zero and every prediction toward the training mean.`);
+must('at the largest lambda the attribute set reads below the logs', CV.attrs[RL[RL.length - 1]] < CV.logs[RL[RL.length - 1]], `${CV.attrs[RL[RL.length - 1]]} ${CV.logs[RL[RL.length - 1]]}`);
 must('every attribute mean is above the best logs-only mean', Object.values(CV.attrs).every((v) => v > vLogs), 'all above');
 w();
 const LOO = success('groupKFold k 9', ML.groupKFold({ groups: G9, k: ids9.length, seed: SEED }));
