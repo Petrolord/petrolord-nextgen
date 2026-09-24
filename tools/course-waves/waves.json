@@ -1264,7 +1264,7 @@
     "course": "D3",
     "live": "/root/dai-wip-facies",
     "kit": "full",
-    "kitNote": "Full kit at the FOUNDATION stage. The mirror carries everything the wave is rebuilt and gated from so far: the digest, its generator and the Ekene facies dataset generator; the eighteen graded answers, the capstone generator, the precision declaration and the tolerance derivation's writer; the discriminate sweep and the oracle cross-check that replays the vendored stdlib oracle on the capstone; every wave gate with its negative control and the runner that pins every gate's md5 into wave.json; the prose rules; the harvested truth file with its check, the wave numsweep wrapper and the tier-scoped lengths gate; the structure and the scaffold that writes the 78 lesson stubs and three manifests; the vendoring script and this mirror script; the five writer briefs; and the three tier headers. The seed ladder is mirrored with the migrations, after the banks.",
+    "kitNote": "Full kit. The mirror carries everything the wave is rebuilt and gated from: the digest, its generator and the Ekene facies dataset generator; the eighteen graded answers, the capstone generator, the precision declaration and the tolerance derivation's writer; the discriminate sweep and the oracle cross-check that replays the vendored stdlib oracle on the capstone; every wave gate with its negative control and the runner that pins every gate's md5 into wave.json; the prose rules; the harvested truth file with its check, the wave numsweep wrapper and the tier-scoped lengths gate; the structure and the scaffold that writes the 78 lesson stubs and three manifests; the vendoring script and this mirror script; the five writer briefs; and the three tier headers. The seed ladder is mirrored with the migrations: the course and go-live generators with the go-live's SQL helpers, the seed regenerator, the SQL verifier, the scratch database, the rolled-back dry run with its negative controls, the block cutter and the content-addressed apply script.",
     "inputs": [
       "digest.txt",
       "fields.json",
@@ -1299,7 +1299,16 @@
       "truth-facies.json",
       "truth_check.py",
       "numsweep_facies.mjs",
-      "lengths.py"
+      "lengths.py",
+      "gen_course.py",
+      "gen_golive.py",
+      "golive_helpers.sql",
+      "gen_seeds.sh",
+      "verify_sql.py",
+      "scratch_db.sh",
+      "dryrun_d3.sh",
+      "cut_block.py",
+      "apply_d3_facies.sh"
     ],
     "pins": {
       "digest.txt": "0fd508fd0d23ace3528707dbcc38defab9a1fa078345dc1a6371f729495a3fc9",

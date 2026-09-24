@@ -26,6 +26,8 @@ import {
   hasScope, getQuota, getCapstone, submitCapstone, getCourseProgress, verificationUrl,
 } from '@/services/academyService';
 import { buildCapstoneAnswers } from '@/lib/capstoneAnswer';
+import CapstoneCaseFiles from '@/components/course/CapstoneCaseFiles';
+import { FACIES_CASE_FILES } from '@/content/capstone-cases/facies';
 import LearningModeGate from '@/components/academy/LearningModeGate';
 
 // The Electrofacies course page, the third course of the academy's Data & AI
@@ -33,7 +35,9 @@ import LearningModeGate from '@/components/academy/LearningModeGate';
 // number it prints is a return value from the teaching lab (faciesLab), which
 // is a return value from the vendored clustering engine on the Ekene facies
 // wells. It never reads the capstone: panelCapstoneGuard.test.js and
-// faciesLab.test.js both grep this file.
+// faciesLab.test.js both grep this file. The capstone case files are imported
+// from src/content/capstone-cases/facies and offered on the capstone card only,
+// as the dataqc and mlcore courses offer theirs.
 
 const APP = 'facies';
 const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -251,6 +255,10 @@ const FaciesLearningPage = () => {
               <CardDescription>{capstone?.prompt}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
+              {capstone && FACIES_CASE_FILES[tier] && (
+                <CapstoneCaseFiles files={FACIES_CASE_FILES[tier]}
+                  note="Download the case file the brief names, then paste its rows into the panel view each value belongs to. An uncored well's facies is written null, and no panel loads a case for you." />
+              )}
               {!(!hasDeepCourse(APP, tier)
                 || courseProgress?.capstone?.unlocked === true
                 || courseProgress?.capstone?.passed === true

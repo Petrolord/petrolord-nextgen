@@ -23,7 +23,7 @@ Work each field in the panel view that teaches it. For kNN, scale on the trainin
 
 ## What catches people
 
-Scaling the held-out well on its own statistics. Counting the neighbour row from the start of the table instead of within the well. Passing the logs in a different order, which moves the tied root and every node below it. Reading the training accuracy of the tree where the brief asks for the held-out one. Fitting the range check on the uncored well itself, which maps its own maximum to 1.
+Scaling the held-out well on its own statistics. Counting the neighbour row from the start of the table instead of within the well. Passing the logs in a different order, which moves the tied root and renumbers the nodes below it. Reading the training accuracy of the tree where the brief asks for the held-out one. Fitting the range check on the uncored well itself, which maps its own maximum to 1.
 
 ## A rehearsal on the Ekene wells
 
