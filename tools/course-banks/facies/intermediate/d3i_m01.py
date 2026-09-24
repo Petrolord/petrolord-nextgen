@@ -86,7 +86,7 @@ q(0, "An elbow call passes a word where withSilhouette belongs. What does the en
   "Returns the elbow with a warning that the silhouette setting was read as false"],
  "withSilhouette must be a true or false value, and a word is refused by name in the engine's words \"withSilhouette must be true or false\". The engine neither coerces the word nor falls back to a default with a warning.")
 
-q(2, "Which reading of the drop fraction column over k 2 to 8 matches the figures?",
+q(2, "Read down the fraction column of the seed 3 elbow. Which description holds?",
  "It falls to 0.282430 at k 4 and 0.112303 at k 5, and no larger k shown reaches 0.112303 again",
  ["Falls at every step after k 2, so the curve bends once and smoothly",
   "Its lowest figure is the last one, 0.068791 at k 8, as the curve flattens out",

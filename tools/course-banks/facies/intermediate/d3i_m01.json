@@ -121,7 +121,7 @@
   "explanation": "withSilhouette must be a true or false value, and a word is refused by name in the engine's words \"withSilhouette must be true or false\". The engine neither coerces the word nor falls back to a default with a warning."
  },
  {
-  "prompt": "Which reading of the drop fraction column over k 2 to 8 matches the figures?",
+  "prompt": "Read down the fraction column of the seed 3 elbow. Which description holds?",
   "options": [
    "Falls at every step after k 2, so the curve bends once and smoothly",
    "Its lowest figure is the last one, 0.068791 at k 8, as the curve flattens out",
