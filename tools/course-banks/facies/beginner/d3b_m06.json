@@ -70,7 +70,7 @@
   "options": [
    "The engine refuses to scale data that did not come from a well log file, such as flower measurements.",
    "Standard scaling would divide by zero, since one of the four measurements is constant on every flower.",
-   "All four measurements are in centimetres, so no log's unit can dominate the distance.",
+   "All four measurements are in centimetres, so no measurement's unit can dominate the distance.",
    "Scaling is only for principal components, and k-means never uses it."
   ],
   "answer": 2,

@@ -36,7 +36,7 @@
   "prompt": "For seed 3 on the 180 cored rows the first draw of mulberry32 is u = 0.720227. Which row becomes the first k-means++ centre?",
   "options": [
    "130, rounding 0.720227 x 180 to the nearest row",
-   "Row 129, which is floor(0.720227 x 180).",
+   "Row 129, which is floor(0.720227 x 180)",
    "The last of the four starting rows drawn for seed 3, row 11",
    "Always the first row, row 0, whatever u is"
   ],
@@ -114,11 +114,11 @@
   "options": [
    "A result from the starting centres alone, with a warning that no pass ran",
    "It uses the default of 300 passes, since 0 means the setting was left out",
-   "\"nInit must be a whole number, 1 or more\", because passes and starts share a limit",
+   "\"k must be a whole number from 1 to 180 (the number of rows)\"",
    "\"maxIter must be a whole number, 1 or more\""
   ],
   "answer": 3,
-  "explanation": "A cap of 0 is refused by naming `maxIter`. A cap of 1 is accepted and never converges, since the first pass cannot return the labels of a pass before. The default of 300 applies only when maxIter is left out, and the nInit refusal is for no starts."
+  "explanation": "A cap of 0 is refused by naming `maxIter`. A cap of 1 is accepted and never converges, since the first pass cannot return the labels of a pass before. The default of 300 applies only when maxIter is left out, and the k refusal is for a number of clusters outside 1 to the number of rows."
  },
  {
   "prompt": "What is the inertia of a k-means result?",
@@ -148,7 +148,7 @@
    "The last to reach the lowest figure, start 8",
    "Start 5, whose 5 passes are the fewest of the three",
    "All three share the win, as their inertias print alike",
-   "Start 3, the earliest of them."
+   "Start 3, the earliest of them"
   ],
   "answer": 3,
   "explanation": "The basis reads: lowest inertia over the runs; a run within 1e-12 (relative) of the best so far does not replace it. So a later start that only ties the best so far keeps the earlier one in place, and start 3 wins. Passes play no part in the choice, and one start is reported."

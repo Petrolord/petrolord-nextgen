@@ -32,7 +32,7 @@ q(3, "`kmeans` is asked for 0 clusters of the 180 cored rows, and in a second ca
  "k counts clusters, so it must lie from 1 to the number of rows, and the engine names the limit it applied: \"k must be a whole number from 1 to 180 (the number of rows)\" and \"k must be a whole number from 1 to 2 (the number of rows)\". The count of distinct rows is a separate refusal, met when rows repeat, and no fixed ceiling or log count enters k's limit."),
 
 q(1, "For seed 3 on the 180 cored rows the first draw of mulberry32 is u = 0.720227. Which row becomes the first k-means++ centre?",
- "Row 129, which is floor(0.720227 x 180).",
+ "Row 129, which is floor(0.720227 x 180)",
  ["130, rounding 0.720227 x 180 to the nearest row",
   "The last of the four starting rows drawn for seed 3, row 11",
   "Always the first row, row 0, whatever u is"],
@@ -84,8 +84,8 @@ q(3, "A learner sets the most passes of a k-means start, `maxIter`, to 0. How do
  "\"maxIter must be a whole number, 1 or more\"",
  ["A result from the starting centres alone, with a warning that no pass ran",
   "It uses the default of 300 passes, since 0 means the setting was left out",
-  "\"nInit must be a whole number, 1 or more\", because passes and starts share a limit"],
- "A cap of 0 is refused by naming `maxIter`. A cap of 1 is accepted and never converges, since the first pass cannot return the labels of a pass before. The default of 300 applies only when maxIter is left out, and the nInit refusal is for no starts."),
+  "\"k must be a whole number from 1 to 180 (the number of rows)\""],
+ "A cap of 0 is refused by naming `maxIter`. A cap of 1 is accepted and never converges, since the first pass cannot return the labels of a pass before. The default of 300 applies only when maxIter is left out, and the k refusal is for a number of clusters outside 1 to the number of rows."),
 
 q(2, "What is the inertia of a k-means result?",
  "The sum of the squared distances from each row to its own centre, on the scaled logs.",
@@ -102,7 +102,7 @@ q(1, "From seed 3 on the 180 cored rows, one start ends at inertia 58.330411 and
  "A lower inertia is a better fit of the same k and nothing in it comes from core. The two figures belong to two different partitions: one start settled into a slightly looser arrangement. Both runs cluster the same 180 cored rows."),
 
 q(3, "With seed 3 and ten starts, starts 3, 5 and 8 all print the inertia 58.289042. Which start does the engine report as the winner?",
- "Start 3, the earliest of them.",
+ "Start 3, the earliest of them",
  ["The last to reach the lowest figure, start 8",
   "Start 5, whose 5 passes are the fewest of the three",
   "All three share the win, as their inertias print alike"],

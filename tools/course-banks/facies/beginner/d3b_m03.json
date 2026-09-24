@@ -16,7 +16,7 @@
    "GR and NPHI, at 0.840604, the pair the shale reads high on",
    "NPHI and PEF at -0.622647, as a negative value counts as the stronger one",
    "GR and RHOB, at -0.192943, since the gamma ray drives the matrix",
-   "RHOB and PEF, at 0.915911."
+   "RHOB and PEF, at 0.915911"
   ],
   "answer": 3,
   "explanation": "RHOB and PEF correlate at 0.915911, the entry nearest to one; dense rows here also read a high photoelectric factor. GR and NPHI follow at 0.840604. A correlation of -0.622647 is weaker in size than either, and GR and RHOB, at -0.192943, are the weakest pair."
@@ -26,7 +26,7 @@
   "options": [
    "\"matrix must be 'correlation' or 'covariance'\"",
    "A correlation result, since the engine falls back to its default whenever a setting is unknown",
-   "\"X must be an array of at least 2 rows\", the refusal that guards the input table",
+   "\"X must be an array of at least 2 rows\"",
    "A rank correlation matrix, reported with a warning that the ranks have ties"
   ],
   "answer": 0,
@@ -60,7 +60,7 @@
    "Two ratios rescaled so that the two components kept add to 1",
    "0.957731 for PC1, since the share of the dropped components moves to the first",
    "Two ratios computed over the two kept components only, so both change",
-   "0.682351 and 0.275380, the same as with four kept."
+   "0.682351 and 0.275380, the same as with four kept"
   ],
   "answer": 3,
   "explanation": "The ratio is always taken over all four components, so keeping fewer does not inflate the ones kept: nComponents 2 returns the same first two ratios, 0.682351 and 0.275380. 0.957731 is their cumulative share. No ratio is recomputed over the kept components."
@@ -137,7 +137,7 @@
    "1.000000, since scores are standardised like the logs",
    "0.682351, the explained variance ratio of PC1",
    "0.894337, the largest PC1 loading, NPHI's",
-   "2.729404, PC1's eigenvalue."
+   "2.729404, PC1's eigenvalue"
   ],
   "answer": 3,
   "explanation": "The sample variance of each score column is its eigenvalue, checked to 1.00e-9 on all four columns, so the PC1 scores vary with variance 2.729404. The ratio 0.682351 is that eigenvalue over the total of 4.000000, and 0.894337 is NPHI's loading on PC1."

@@ -129,7 +129,7 @@
    "Standard scaling is wrong for logs; only min-max keeps values in [0, 1]."
   ],
   "answer": 1,
-  "explanation": "Two clusters keep their log-unit centres across the two scalings and the other two shift, so the partitions differ: 59 and 38 rows against 54 and 43. Inertias under different scalings measure different spaces and cannot be compared. Neither scaler is right in general; the choice is stated with the result."
+  "explanation": "The sizes show the partitions differ: 59 and 38 rows under standard scaling against 54 and 43 under min-max, and no renumbering turns one list of sizes into the other. Inertias under different scalings measure different spaces and cannot be compared. Neither scaler is right in general; the choice is stated with the result."
  },
  {
   "prompt": "`kmeans` is passed GR and a caliper reading 8.5 on all 30 rows of EKENE-1, with standard scaling. Which reply comes back?",

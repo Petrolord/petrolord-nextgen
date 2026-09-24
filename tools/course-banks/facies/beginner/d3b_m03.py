@@ -18,7 +18,7 @@ q(1, "How does `pca` build its default matrix from the logs?",
  "The default is the correlation matrix, and its basis reads that features are standardised with the SAMPLE SD (n - 1), so each score variance equals its eigenvalue. The population SD is the clustering scaler's divisor. Keeping each log's unit is the covariance form, and min-max is a clustering scaler."),
 
 q(3, "On the 180 cored rows, which pair of logs has the strongest correlation, and at what value?",
- "RHOB and PEF, at 0.915911.",
+ "RHOB and PEF, at 0.915911",
  ["GR and NPHI, at 0.840604, the pair the shale reads high on",
   "NPHI and PEF at -0.622647, as a negative value counts as the stronger one",
   "GR and RHOB, at -0.192943, since the gamma ray drives the matrix"],
@@ -27,7 +27,7 @@ q(3, "On the 180 cored rows, which pair of logs has the strongest correlation, a
 q(0, "`pca` is called with a `matrix` setting of 'spearman'. What does the engine reply, in its own words?",
  "\"matrix must be 'correlation' or 'covariance'\"",
  ["A correlation result, since the engine falls back to its default whenever a setting is unknown",
-  "\"X must be an array of at least 2 rows\", the refusal that guards the input table",
+  "\"X must be an array of at least 2 rows\"",
   "A rank correlation matrix, reported with a warning that the ranks have ties"],
  "The engine builds two matrices only and refuses any other setting by naming `matrix`. It never substitutes its default for an unknown setting, and it builds no rank correlation. The row count refusal belongs to a table of one row."),
 
@@ -44,7 +44,7 @@ q(1, "PC1 carries 0.682351 of the variance and PC2 0.275380, a cumulative 0.9577
  "The cumulative ratio reaches 1.000000 at PC4, so the last two carry 1 less 0.957731, which is 0.042269. 0.024446 is PC3's share alone, 0.017823 PC4's alone, and 0.957731 is the share of the first two."),
 
 q(3, "`pca` is asked for `nComponents` 2 on the four logs. What explained variance ratios does it return for the two components kept?",
- "0.682351 and 0.275380, the same as with four kept.",
+ "0.682351 and 0.275380, the same as with four kept",
  ["Two ratios rescaled so that the two components kept add to 1",
   "0.957731 for PC1, since the share of the dropped components moves to the first",
   "Two ratios computed over the two kept components only, so both change"],
@@ -93,7 +93,7 @@ q(0, "Another tool returns the Ekene PC1 with every weight's sign flipped. What 
  "The sign is a convention. The engine fixes it so the largest absolute weight in each component is positive; on PC1 that is NPHI's 0.541336. Another tool may return every weight, loading and score flipped together, and nothing about the rows has changed. Compare loadings between tools only after checking each one's sign convention."),
 
 q(3, "The PC1 scores of the 180 cored rows are computed. What is the sample variance of that column of scores?",
- "2.729404, PC1's eigenvalue.",
+ "2.729404, PC1's eigenvalue",
  ["1.000000, since scores are standardised like the logs",
   "0.682351, the explained variance ratio of PC1",
   "0.894337, the largest PC1 loading, NPHI's"],

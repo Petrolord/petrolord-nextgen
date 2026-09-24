@@ -25,12 +25,12 @@
   "prompt": "The teaching clustering's cluster 0 has 29 rows with centre GR 117.406897 gAPI, RHOB 2.510793 g/cm3, NPHI 0.337069 and PEF 3.213793 b/e. Which description may a write-up at this tier give?",
   "options": [
    "The shale cluster, as its gamma ray and neutron porosity give the textbook shale response.",
-   "The 29 shale rows of the core, since the cluster's size equals the core's count of shale.",
+   "Limestone, since cluster 0 takes the facies that sorts first in every list the engine returns.",
    "Highest gamma ray and neutron porosity of the four centres, with a middling photoelectric factor.",
    "Cluster 0, the lowest-numbered and so the most important cluster the engine found."
   ],
   "answer": 2,
-  "explanation": "A cluster is described by its centre in log units until it has been matched against core, which is the Professional tier's work. A textbook response and an equal count each suggest a rock and prove none. The number 0 carries no meaning of its own."
+  "explanation": "A cluster is described by its centre in log units until it has been matched against core, which is the Professional tier's work. A textbook response suggests a rock and proves none. The number 0 carries no meaning of its own, so it picks no facies from the sorted list, and the lowest gamma ray centre belongs to another cluster."
  },
  {
   "prompt": "Among the four centres of the teaching clustering, which cluster has the highest density and photoelectric factor, and which the lowest?",

@@ -88,7 +88,7 @@ q(1, "k-means with k 4, seed 3 and ten starts gives clusters of 29, 59, 54 and 3
  ["Min-max scaling fits far better, as its inertia of 4.258929 is far below 58.289042.",
   "The two runs give one grouping, since both return a cluster of 29 rows and one of 54 rows.",
   "Standard scaling is wrong for logs; only min-max keeps values in [0, 1]."],
- "Two clusters keep their log-unit centres across the two scalings and the other two shift, so the partitions differ: 59 and 38 rows against 54 and 43. Inertias under different scalings measure different spaces and cannot be compared. Neither scaler is right in general; the choice is stated with the result."),
+ "The sizes show the partitions differ: 59 and 38 rows under standard scaling against 54 and 43 under min-max, and no renumbering turns one list of sizes into the other. Inertias under different scalings measure different spaces and cannot be compared. Neither scaler is right in general; the choice is stated with the result."),
 
 q(3, "`kmeans` is passed GR and a caliper reading 8.5 on all 30 rows of EKENE-1, with standard scaling. Which reply comes back?",
  "A refusal naming X.CALI, saying it \"has zero variance on the 30 rows passed\".",

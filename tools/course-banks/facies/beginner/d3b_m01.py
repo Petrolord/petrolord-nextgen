@@ -25,10 +25,10 @@ q(3, "The course legislates the word facies. Which use of it follows the rule?",
 
 q(0, "The teaching clustering (k-means, k 4, seed 3, 10 starts) returns clusters of 29, 59, 54 and 38 rows. The core counts 54 limestone, 50 sandstone, 29 shale and 47 shaly-sand rows. What may a learner conclude about the cluster of 29 rows?",
  "Nothing about its rock: a size that equals a facies count says nothing about which rows are in it.",
- ["It is the shale, because its 29 rows match the 29 shale rows of the core exactly.",
-  "The cluster holds the 29 shale rows plus none of the others, so it can be named shale in a write-up.",
+ ["A share of every facies, since k-means spreads the rows of each facies evenly across its clusters.",
+  "Limestone, since the first cluster k-means lists always takes the facies that sorts first.",
   "Shale and shaly-sand together, because 29 is the smallest size and those two facies read alike on GR."],
- "Two groups can have the same size and hold different rows. The course writes that no cluster is named as a facies until it is matched against core, row by row. A size is a count; it never says which rows went in."),
+ "Two groups can have the same size and hold different rows, and k-means places each row by its logs alone, with no rule that shares a facies out among clusters. The course writes that no cluster is named as a facies until it is matched against core, row by row. A size is a count; it never says which rows went in, and a cluster's place in the list is a name that picks no facies from any sorted list."),
 
 q(2, "How are the eight Ekene wells split between cored and uncored?",
  "Six wells, EKENE-1 to EKENE-6, are cored, 180 rows; EKENE-7 and EKENE-8 carry no core.",

@@ -53,7 +53,7 @@ q(0, "k-means on the raw iris measurements, k 3, seed 3, ten starts, gives an in
  "The oracle's golden for the same call reads 78.851441, so the arithmetic is right. Sizes of 38 and 62 against 50 each show that the clusters are no copy of the species. A clustering can be computed exactly right and still not recover the groups a specialist would draw, which is the lesson of the whole tier."),
 
 q(2, "Why is the iris k-means run without scaling?",
- "All four measurements are in centimetres, so no log's unit can dominate the distance.",
+ "All four measurements are in centimetres, so no measurement's unit can dominate the distance.",
  ["The engine refuses to scale data that did not come from a well log file, such as flower measurements.",
   "Standard scaling would divide by zero, since one of the four measurements is constant on every flower.",
   "Scaling is only for principal components, and k-means never uses it."],

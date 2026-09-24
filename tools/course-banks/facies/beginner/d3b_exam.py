@@ -91,14 +91,14 @@ q(2, "`kmeans` is called with `scale: 'robust'`. What does the engine reply?",
  "\"scale must be 'standard', 'minmax' or 'none'\"",
  ["A result scaled by the median and quartiles, with a note in the basis block",
   "Standard scaling, the default it falls back on for an unknown setting",
-  "\"matrix must be 'correlation' or 'covariance'\", the one scaling refusal"],
+  "\"matrix must be 'correlation' or 'covariance'\""],
  "k-means offers three scalings, standard (the default), min-max and none, and refuses anything else by naming `scale`. It never falls back silently, and the matrix refusal belongs to pca, whose setting chooses between two matrices."),
 
 q(1, "`kmeans` is given starting centres through `init` and asked for five starts. What does the engine reply?",
  "\"nInit must be 1 (or left out) when init gives the starting centres\"",
  ["Five starts, each beginning from the given centres and ending at the same inertia",
   "It keeps the given centres for the first start and draws four more from the seed",
-  "\"nInit must be a whole number, 1 or more\", since five exceeds its limit"],
+  "\"nInit must be a whole number, 1 or more\""],
  "Given centres fix the start, so further starts would repeat it, and the engine refuses the call by naming `nInit`. It does not mix given and drawn centres. The \"1 or more\" message is the refusal for no starts."),
 
 # X m01 + m04
@@ -118,7 +118,7 @@ q(3, "What do `pcaTransform` on EKENE-7 and `assignClusters` on EKENE-7 have in 
  "pcaTransform scores new rows with the fitted centre, scale and components; assignClusters scales them with the fitted scaler and places each at the nearest fitted centre. Neither refits, and neither returns a facies: EKENE-7 has no core, and a cluster carries no facies name until it is matched against core."),
 
 q(2, "A correlation near zero means two logs move almost independently. Among the four Ekene logs on the cored rows, which pair comes nearest to that?",
- "GR and RHOB, at -0.192943.",
+ "GR and RHOB, at -0.192943",
  ["NPHI and PEF, at -0.622647, the most negative entry",
   "GR and PEF, at -0.340082, gamma ray against photoelectric factor",
   "RHOB and NPHI, at -0.502728, the density against the neutron"],
@@ -217,7 +217,7 @@ q(1, "With seed 5 and ten starts, k-means on the cored rows ends at 58.297079, a
  ["As a defect of the engine, since ten starts are guaranteed to reach the lowest inertia.",
   "58.289042 in fact, since two inertias this close describe the same partition.",
   "A failed run, which the engine should have refused and reported with a warning."],
- "With ten starts, 9 of the 10 seeds reach 58.289042 and seed 5 stops at 58.297079. More starts make a poor stop less likely and do not rule it out. The figure is a result of that call, and two figures that differ at the third decimal are different results."),
+ "With ten starts, 9 of the 10 seeds reach 58.289042 and seed 5 stops at 58.297079. More starts make a poor stop less likely and do not rule it out. The figure is a result of that call, and two figures that differ at the second decimal are different results."),
 
 q(0, "With one start, seed 5 stops at inertia 78.775612 with clusters of 32, 96, 30 and 22 rows. What marks this as a poor stop?",
  "One cluster holds 96 of the 180 rows, and the inertia sits far above 58.289042.",
@@ -227,7 +227,7 @@ q(0, "With one start, seed 5 stops at inertia 78.775612 with clusters of 32, 96,
  "The one-start figure 78.775612, shared by seeds 5 and 7, is the highest printed in the seed table, and the teaching clustering sits at 58.289042 with sizes 29, 59, 54 and 38. The sizes 32, 96, 30 and 22 add to 180. Seed 5 is a valid seed, and nothing was refused."),
 
 q(3, "Of the ten starts from seed 3, how many print the inertia 58.330411?",
- "Three: starts 0, 2 and 9.",
+ "Three: starts 0, 2 and 9",
  ["One, start 0, the one-start run of seed 3",
   "Six, the number of distinct inertias the ten starts print",
   "Four, starts 1, 4, 6 and 7, each above 75"],
@@ -265,11 +265,11 @@ q(3, "Under the teaching clustering, the first rows of EKENE-3 and EKENE-5 (rows
 
 # X m03 + m06
 q(2, "On the correlation matrix the iris flowers give eigenvalues 2.918498, 0.914030, 0.146757 and 0.020715. What do they add to?",
- "4, the number of measurements, as each standardised measurement has variance 1.",
+ "4.000000 at six decimals, the number of measurements, as each standardised one has variance 1.",
  ["150, one for each flower, as each flower adds one unit of variance to the correlation total.",
   "3, the number of species, since the eigenvalues of a correlation matrix count the groups in it.",
   "4.228242, the first eigenvalue of the covariance form."],
- "The correlation form's basis states that the eigenvalues sum to the number of features, and the four iris eigenvalues add to 4, just as the Ekene ones add to 4.000000. Eigenvalues count no flowers and no species, and 4.228242 belongs to the covariance form."),
+ "The correlation form's basis states that the eigenvalues sum to the number of features, and the four iris eigenvalues add to 4.000000 at six decimals, as the Ekene ones do. Eigenvalues count no flowers and no species, and 4.228242 belongs to the covariance form."),
 
 q(1, "Which copy of Fisher's iris data does the engine check itself against?",
  "The file scikit-learn ships: 150 flowers, four measurements in cm, three species.",
