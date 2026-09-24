@@ -27,12 +27,16 @@ import {
 } from '@/services/academyService';
 import { buildCapstoneAnswers } from '@/lib/capstoneAnswer';
 import LearningModeGate from '@/components/academy/LearningModeGate';
+import CapstoneCaseFiles from '@/components/course/CapstoneCaseFiles';
+import { MLCORE_CASE_FILES } from '@/content/capstone-cases/mlcore';
 
 // The Machine Learning on Well Data course page, the second course of the
 // academy's Data & AI module. Every number it prints is a return value from the
 // teaching lab (mlcoreLab), which is a return value from the vendored machine
 // learning engine on the Ekene teaching wells. It never reads the capstone:
-// panelCapstoneGuard.test.js and mlcoreLab.test.js both grep this file.
+// panelCapstoneGuard.test.js and mlcoreLab.test.js both grep this file. The
+// capstone case files are imported from src/content/capstone-cases/mlcore and
+// offered on the capstone card only, as the dataqc course offers its files.
 
 const APP = 'mlcore';
 const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -250,6 +254,10 @@ const MlCoreLearningPage = () => {
               <CardDescription>{capstone?.prompt}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
+              {capstone && MLCORE_CASE_FILES[tier] && (
+                <CapstoneCaseFiles files={MLCORE_CASE_FILES[tier]}
+                  note="Download the case file the brief names, then paste its rows into the panel view each value belongs to. A missing sonic is written null, and no panel loads a case for you." />
+              )}
               {!(!hasDeepCourse(APP, tier)
                 || courseProgress?.capstone?.unlocked === true
                 || courseProgress?.capstone?.passed === true
