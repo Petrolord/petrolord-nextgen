@@ -89,7 +89,7 @@ wells EKENE-3, EKENE-5, EKENE-7.
 
 ## THE REFUSALS
 
-Digest section 3 tables 31 refusals across 18 functions, each with the field it
+Digest section 3 tables 32 refusals across 18 functions, each with the field it
 names and the engine's message verbatim. **Quote a refusal in a blockquote as
 the engine's own words.** A logistic fit that stops before it converges is a
 result with a `warning`, never a refusal (section 20).
