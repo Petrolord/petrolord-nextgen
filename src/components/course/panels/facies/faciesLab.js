@@ -3,7 +3,7 @@
 // Every number this lab returns is a return value of the vendored engines
 // (packages/engines/engines/dataai/cluster.js, and ml.js where a scaler or a
 // classification report is read, sha-identical with petrolord-engines
-// 4dfbb29) on the Ekene facies wells, or on the rows a learner types into a
+// ef4058f) on the Ekene facies wells, or on the rows a learner types into a
 // panel, or arithmetic on engine values where the digest prints the same
 // figure and says it is derived. The dataset is ekeneFacies.json beside this
 // file, the committed output of the wave's generator
@@ -347,6 +347,7 @@ export const refusalSamples = () => {
   const flat = e1.map((r) => [r.GR, 8.5]);
   return [
     { fn: 'kmeans', what: 'a caliper that never changes', r: CL.kmeans({ X: flat, k: 2, seed: SEED, names: ['GR', 'CALI'] }) },
+    { fn: 'knnClassify', what: 'the same caliper in the training rows', r: CL.knnClassify({ X: flat, y: e1.map((r) => r.FACIES), Xnew: flat.slice(0, 2), names: ['GR', 'CALI'] }) },
     { fn: 'kmeans', what: 'no seed', r: CL.kmeans({ X: XC, k: K4, names: LOGS }) },
     { fn: 'matchClusters', what: 'five clusters, four facies, one-to-one', r: CL.matchClusters({ yTrue: YC, clusters: CL.kmeans({ X: XC, k: 5, seed: SEED }).labels }) },
     { fn: 'cartFit', what: 'a negative depth', r: CL.cartFit({ X: XC, y: YC, maxDepth: -1 }) },

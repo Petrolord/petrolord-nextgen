@@ -56,7 +56,7 @@ export const ScaleMode = () => {
           rows={features.map((f, j) => [f, six(st.centre[j]), six(st.scale[j]), six(mm.min[j]), six(mm.max[j]), six(mm.scale[j])])} />
       )}
       {st && !st.error && <Declared title="THE DIVISOR, in the engine's words">{st.basis.sd}</Declared>}
-      <Note>k-means, the silhouette and agglomerative clustering fit the scaler on the rows clustered, with the population standard deviation (n). A log that never changes is refused by name.</Note>
+      <Note>k-means, the silhouette and agglomerative clustering fit the scaler on the rows clustered, with the population standard deviation (n). A log that never changes is refused by name, and the message counts the rows passed.</Note>
     </>
   );
 };

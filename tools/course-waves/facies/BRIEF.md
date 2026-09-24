@@ -96,11 +96,17 @@ cored wells train.
 
 ## THE REFUSALS
 
-Digest section 3 tables 58 refusals across 13 functions, each with the field it
+Digest section 3 tables 61 refusals across 13 functions, each with the field it
 names and the engine's message verbatim. **Quote a refusal in a blockquote as
 the engine's own words.** A k-means that stops at maxIter, a PCA with a
 repeated eigenvalue and an elbow whose inertia rises are results with a
-`warning`, never refusals.
+`warning`, never refusals. Section 3 also tables the two pca warnings with the
+exact condition of each. Wording at engines ef4058f: a constant log is refused
+"on the N rows passed" in pca and every clustering function and "on the N
+training rows" only in knnClassify; the repeated-eigenvalue warning reads
+"differ by at most 1e-10 times the largest eigenvalue" (the test:
+abs(lambda_k - lambda_(k+1)) <= 1e-10 x lambda_1, adjacent sorted eigenvalues,
+inclusive); both pca warnings are kept, joined by "; ", non-convergence first.
 
 ## WHAT IS GRADED, AND WHAT IS NEVER IN THE DIGEST
 

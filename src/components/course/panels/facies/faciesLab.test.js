@@ -149,7 +149,12 @@ describe('THE DIGEST GATE: every number a teaching reader returns is printed in 
 
   it('every refusal the lab samples is the engine\'s own message and the digest quotes it verbatim', () => {
     const rs = L.refusalSamples();
-    expect(rs.length).toBe(4);
+    expect(rs.length).toBe(5);
+    // A constant log is refused naming the rows the scaler was fitted on:
+    // the rows passed when clustering, the training rows for kNN.
+    expect(rs[0].error).toMatch(/^X\.CALI has zero variance on the 30 rows passed \(every value is 8\.5\)/);
+    expect(rs[1].fn).toBe('knnClassify');
+    expect(rs[1].error).toMatch(/^X\.CALI has zero variance on the 30 training rows \(every value is 8\.5\)/);
     rs.forEach((r) => {
       expect(typeof r.error).toBe('string');
       expect(DIGEST, `${r.fn} ${r.what}`).toContain(r.error);

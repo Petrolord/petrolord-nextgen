@@ -187,7 +187,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Every log value, centre, scale, distance, eigenvalue, ratio, loading, score, inertia, silhouette, merge height, index, accuracy, impurity, importance and threshold prints to SIX decimals; counts, row numbers, cluster numbers, passes, depths, seeds and well numbers are whole numbers; very small magnitudes and tie bands print in exponent form; an engine message is printed verbatim, figures and all.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 4dfbb29, ${engineLines} lines. It imports lib/stats (mulberry32) and, from engines/dataai/ml.js, the two scalers, applyScaler and classificationReport. The vendored golden test-data/dataai/goldens/cluster_cases.json carries ${CASES.length} cases, ${refusalsInGolden} of them refusals and ${publishedInGolden} of them a published anchor, written by the standard library oracle.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines ef4058f, ${engineLines} lines. It imports lib/stats (mulberry32) and, from engines/dataai/ml.js, the two scalers, applyScaler and classificationReport. The vendored golden test-data/dataai/goldens/cluster_cases.json carries ${CASES.length} cases, ${refusalsInGolden} of them refusals and ${publishedInGolden} of them a published anchor, written by the standard library oracle.`);
 w();
 w('# WHAT IS NEVER IN THIS FILE. No capstone field, no capstone well, no capstone dataset and no graded answer. The capstones run their own datasets and the digest never names them.');
 w();
@@ -199,7 +199,7 @@ section('computes', 'What this engine computes, and what it declines to compute'
 w('Every function takes plain arrays and objects and returns either a result object or an object with `error` and `field`, where `field` names the input it refused and the message starts with that name. Every result carries a `basis` block naming its convention, so the working can be printed.');
 w();
 const EXPORTS = [
-  ['pca', 'components', 'X, names, matrix, nComponents', 'eigenvalues, explained variance ratios, unit components, loadings and scores'],
+  ['pca', 'components', 'X, names, matrix, nComponents, maxSweeps', 'eigenvalues, explained variance ratios, unit components, loadings and scores'],
   ['pcaTransform', 'components', 'model, X', 'scores of new rows with the fitted centre, scale and components'],
   ['kmeans', 'clustering', 'X, k, seed, nInit, maxIter, init, scale, names', 'labels, sizes, centres (scaled and in log units), inertia, passes and every start'],
   ['assignClusters', 'clustering', 'model, X', 'the nearest centre of a fitted k-means for each new row, with its distance'],
@@ -221,7 +221,7 @@ w();
 w('The stated defaults, read from the exported `DEFAULTS`:');
 w();
 const DSRC = {
-  JACOBI_MAX_SWEEPS: 'the most sweeps of Jacobi rotations pca takes',
+  JACOBI_MAX_SWEEPS: 'the most sweeps of Jacobi rotations pca takes when maxSweeps is left out',
   SIGN_TIE_REL: 'how close a loading must be to the largest to count as largest, in the sign rule',
   REPEATED_EIGEN_REL: 'how close two eigenvalues must be, relative to the largest, to be flagged as repeated',
   KMEANS_MAX_ITER: 'the most assignment passes one k-means start takes',
@@ -318,6 +318,7 @@ const REFUSALS = [
   ['pca', { X: constCali, names: ['GR', 'CALI'] }, 'X.CALI', `GR and a caliper reading ${S(CALI_CONST)} on all ${E1.length} rows of EKENE-1`],
   ['pca', { X: [XC[0], XC[0]], matrix: 'covariance' }, 'X', 'one cored row passed twice, covariance matrix'],
   ['pca', { X: XC, names: ['GR', 'RHOB', 'GR', 'PEF'] }, 'names[2]', 'a log name given twice'],
+  ['pca', { X: XC, names: LOGS, maxSweeps: 0 }, 'maxSweeps', 'no Jacobi sweeps'],
   ['pcaTransform', { model: KM, X: X7 }, 'model', 'a k-means result where a PCA was expected'],
   ['pcaTransform', { model: PCM, X: X(R7, ['GR', 'RHOB']) }, 'X', 'new rows with two logs for a PCA of four'],
   ['kmeans', { X: XC, k: 0, seed: SEED }, 'k', 'k of 0'],
@@ -351,10 +352,12 @@ const REFUSALS = [
   ['cutTree', { linkageMatrix: WARD.linkageMatrix, k: 0 }, 'k', 'k of 0 on the Ward tree of the cored rows'],
   ['cutTree', { linkageMatrix: [[0, 1, 1, 2], [3, 5, 2, 3]], k: 2 }, 'linkageMatrix[1]', 'a merge that names a cluster not yet made'],
   ['cutTree', { linkageMatrix: [], k: 1 }, 'linkageMatrix', 'an empty matrix'],
+  ['cutTree', { linkageMatrix: [[0, 1, 1, 2], [0, 2, 2, 2], [3, 5, 3, 4]], k: 2 }, 'linkageMatrix[1]', 'row 0 merged a second time'],
   ['knnClassify', { X: XC, y: YC, Xnew: X7, k: CORED_ROWS.length + 1 }, 'k', 'more neighbours than training rows'],
   ['knnClassify', { X: XC, y: YC, Xnew: X(R7, ['GR']) }, 'Xnew', 'new rows with one log for training rows of four'],
   ['knnClassify', { X: XC, y: YC.slice(1), Xnew: X7 }, 'y', 'one facies too few'],
   ['knnClassify', { X: XC.slice(0, 3), y: ['shale', null, 'shale'], Xnew: X7 }, 'y[1]', 'a null facies'],
+  ['knnClassify', { X: constCali, y: E1.map((r) => r.FACIES), Xnew: constCali.slice(0, 2), names: ['GR', 'CALI'] }, 'X.CALI', `GR and a caliper reading ${S(CALI_CONST)} on all ${E1.length} rows of EKENE-1 as training rows`],
   ['knnClassify', { X: TILE(PAIRS_TRAIN), y: TILE_Y(PAIRS_TRAIN), Xnew: TILE(PAIRS_NEW) }, 'Xnew', `${PAIRS_NEW} new rows against ${PAIRS_TRAIN} training rows (the cored rows repeated)`],
   ['cartFit', { X: XC, y: YC, maxDepth: -1 }, 'maxDepth', 'a negative depth'],
   ['cartFit', { X: XC, y: YC, minSamplesLeaf: 0 }, 'minSamplesLeaf', 'a leaf of no rows'],
@@ -380,9 +383,35 @@ w();
 w(`${REF_OUT.length} refusals are tabled above, across ${refFns.size} functions.`);
 must('every exported function is refused at least once above', EXPORTS.every(([n]) => refFns.has(n)), [...refFns].join(','));
 w();
-const trainingWord = REF_OUT.filter((r) => /training rows/.test(r[3]) && r[0] !== 'knnClassify');
-w(`A CONSTANT LOG IS REFUSED BY THE SCALER. pca (correlation), kmeans, silhouette, elbow, agglomerative and knnClassify scale through the machine learning engine's own scalers, so a constant log is refused in that engine's words, which call the rows the scaler is fitted on its training rows. In pca and in clustering those are every row passed; in knnClassify they are the training rows (${ref('knn')}). ${trainingWord.length} rows of the table above carry that wording outside knnClassify.`);
-must('the scaler refusals carry the ml.js wording', trainingWord.length >= 3, trainingWord.length);
+const constOut = REF_OUT.filter((r) => / (?:variance|range) on the \d+ /.test(r[3]));
+const passedWord = constOut.filter((r) => r[0] !== 'knnClassify');
+const trainedWord = constOut.filter((r) => r[0] === 'knnClassify');
+must('every constant-log refusal outside knnClassify says "rows passed" and never "training"', passedWord.length >= 3 && passedWord.every((r) => / rows passed \x28every value is /.test(r[3]) && !/training/.test(r[3])), passedWord.map((r) => r[3]).join(' | '));
+must('the knnClassify constant-log refusal says "training rows"', trainedWord.length === 1 && / training rows \x28every value is /.test(trainedWord[0][3]), trainedWord.map((r) => r[3]).join(' | '));
+const CONST_BY = [
+  ['silhouette', CL.silhouette({ X: constCali, labels: E1.map((_, i) => i % 2), names: ['GR', 'CALI'] })],
+  ['elbow', CL.elbow({ X: constCali, kMin: 1, kMax: 2, seed: SEED, names: ['GR', 'CALI'] })],
+  ['agglomerative', CL.agglomerative({ X: constCali, names: ['GR', 'CALI'] })],
+];
+CONST_BY.forEach(([fn, r]) => must(`${fn} refuses the constant caliper on the rows passed`, r && r.field === 'X.CALI' && r.error === passedWord.find((q) => q[0] === 'kmeans')[3], r && r.error));
+w(`A CONSTANT LOG IS REFUSED BY THE SCALER. pca (correlation), kmeans, silhouette, elbow, agglomerative and knnClassify scale through the machine learning engine's own scalers, so a constant log is refused in that engine's words, and the words name the rows the scaler was fitted on. In pca, kmeans, silhouette, elbow and agglomerative those are every row passed, and the message says "on the N rows passed"; silhouette, elbow and agglomerative give, on the EKENE-1 caliper rows, the same message as kmeans above. In knnClassify they are the labelled training rows, and the message says "on the N training rows" (${ref('knn')}). A min-max scaler says "zero range" where the standard scaler says "zero variance".`);
+w();
+w(`WARNINGS ARE NOT REFUSALS. \`pca\` returns its result and adds a \`warning\` in two cases, each stated exactly:`);
+w();
+const gw = golden('pca-warning-both');
+const GW = success('golden pca-warning-both', CL.pca(gw.args));
+const GWN = success('golden pca-warning-nonconverged-only', CL.pca(golden('pca-warning-nonconverged-only').args));
+const GWR = success('golden pca-warning-repeated-only', CL.pca(golden('pca-warning-repeated-only').args));
+must('the both-warnings golden joins the two single warnings, non-convergence first', GW.warning === `${GWN.warning.replace('1 sweep', `${gw.args.maxSweeps} sweep`)}; ${GWR.warning}` && GW.warning === gw.expected.warning, GW.warning);
+must('the both-warnings golden stops unconverged with repeated pairs', GW.converged === false && GW.repeatedEigenvalues.length > 0, GW.converged);
+table(['warning', 'raised when, exactly', 'the engine\'s message (golden)'], [
+  ['Jacobi did not converge', `the sweep numbered \`maxSweeps\` (default ${S(CL.DEFAULTS.JACOBI_MAX_SWEEPS)}) still needed a rotation; \`converged\` is false`, GWN.warning],
+  ['repeated eigenvalue', `for adjacent eigenvalues in the sorted list, abs(lambda_k - lambda_(k+1)) <= ${eX(CL.DEFAULTS.REPEATED_EIGEN_REL)} x lambda_1, the largest eigenvalue: inclusive, relative to the largest, never to the pair`, GWR.warning],
+]);
+w();
+w(`When both apply the engine keeps both, the non-convergence warning first, joined by "; ". Golden \`pca-warning-both\` (maxSweeps ${S(gw.args.maxSweeps)}), verbatim:`);
+w();
+w(`> ${GW.warning}`);
 w();
 w(`A MISSING VALUE IS REFUSED BY NAME at the first row and column it meets, counting from 0: row ${NULL_ROW}, column 1 (RHOB) above. Nothing is filled.`);
 
@@ -1206,6 +1235,14 @@ brow('cartFit', 'a split', 'a decrease above zero splits', `a decrease of exactl
 brow('matchClusters', 'one-to-one', 'clusters equal to facies accepted', 'more clusters than facies refused; majority mode accepts them', ok(`match one-to-one k ${K4}`, CL.matchClusters({ yTrue: YC, clusters: KM.labels })) && no(CL.matchClusters({ yTrue: YC, clusters: K5.labels })) && ok(`majority k ${K5.k}`, CL.matchClusters({ yTrue: YC, clusters: K5.labels, mode: 'majority' })), 'match');
 brow('kmeans, agglomerative, knnClassify', 'a tie in distance or height', `within ${eX(CL.DEFAULTS.TIE_REL)} of the smallest, relative, inclusive: tied`, 'beyond it: ordered by size', true, 'band stated');
 brow('pca', 'the sign rule', `a weight within ${eX(CL.DEFAULTS.SIGN_TIE_REL)} of the largest, relative, inclusive, counts as largest`, 'the first such weight is made positive', true, 'sign stated');
+const REP = CL.DEFAULTS.REPEATED_EIGEN_REL;
+const REP_IN = 0.99; const REP_OUT = 1.01; // stated fractions of the band, one each side
+const repCross = (f) => { const t = Math.sqrt(1 - f * REP); return CL.pca({ X: [[1, 0], [-1, 0], [0, t], [0, -t]], matrix: 'covariance' }); };
+const RIN = success('pca, a gap inside the band', repCross(REP_IN));
+const ROUT = success('pca, a gap outside the band', repCross(REP_OUT));
+brow('pca', 'repeated eigenvalue', `abs(lambda_k - lambda_(k+1)) <= ${eX(REP)} x lambda_1 flagged, inclusive (a gap of ${S(REP_IN)} of that band flagged)`, `a gap of ${S(REP_OUT)} of that band not flagged`, RIN.repeatedEigenvalues.length === 1 && /differ by at most 1e-10 times the largest eigenvalue/.test(RIN.warning) && ROUT.repeatedEigenvalues.length === 0 && !ROUT.warning, 'repeated');
+brow('pca', 'maxSweeps', '1 accepted', '0 refused', ok('pca one sweep', CL.pca({ X: XC, maxSweeps: 1 })) && no(CL.pca({ X: XC, maxSweeps: 0 })), 'sweeps');
+brow('cutTree', 'an id merged twice', 'each row id and cluster id merged once accepted', 'a second merge of any id refused', ok('cutTree ward', CL.cutTree({ linkageMatrix: WD.linkageMatrix, k: 2 })) && no(CL.cutTree({ linkageMatrix: [[0, 1, 1, 2], [0, 2, 2, 2], [3, 5, 3, 4]], k: 2 })), 'reuse');
 brow('elbow', 'bestSilhouetteK', 'the highest mean silhouette', 'a tie goes to the smaller k', EL.basis.pick.includes('smaller k'), 'best k');
 table(['function', 'rule', 'at the boundary', 'across it'], B);
 w();
@@ -1243,7 +1280,7 @@ w(`A REPEATED EIGENVALUE. Four stated rows, ${list(ISO.map((r) => `(${r.join(', 
 w();
 w(`> ${GI.warning}`);
 w();
-w(`The repeated check is relative to the largest eigenvalue, band ${eX(CL.DEFAULTS.REPEATED_EIGEN_REL)}. On the Ekene cored rows no pair is repeated (${ref('pca')}).`);
+w(`The repeated test compares each eigenvalue with the next one in the sorted list: the pair is flagged when abs(lambda_k - lambda_(k+1)) <= ${eX(CL.DEFAULTS.REPEATED_EIGEN_REL)} x lambda_1, where lambda_1 is the largest eigenvalue. The test is inclusive and relative to the largest eigenvalue, never to the pair (${ref('boundaries')} shows a gap of ${S(REP_IN)} of the band flagged and ${S(REP_OUT)} not). On the Ekene cored rows no pair is repeated (${ref('pca')}).`);
 
 /* ============================================================ SECTION 27 */
 

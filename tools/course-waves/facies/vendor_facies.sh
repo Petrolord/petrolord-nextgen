@@ -7,31 +7,43 @@
 # its pins through a spread `read(...)` helper the walker cannot parse, so
 # those two, Fisher's iris file the oracle parses, the oracle, the pin writer,
 # the timing script, FINDINGS and the negative control are NAMED with the
-# reason they travel. cluster.js imports ml.js and lib/stats, both already
-# vendored by D2 at 966bb9e and unchanged at 4dfbb29.
+# reason they travel. cluster.js imports ml.js and lib/stats; since ef4058f
+# the suite imports ml.js directly as well.
 #
-# synthetic_wells.js GAINED syntheticFacies at 4dfbb29 (an append; D2's ml
-# suite still reads syntheticWells unchanged). D2 ledgered its 966bb9e blob in
-# group d2-mlcore-course; this script MOVES that one entry to group
-# d3-facies-course with the new blob, and refuses any other foreign entry.
+# RE-VENDORED AT ef4058f (engines PR #254, the foundation's finding E1 and
+# more; first vendored at 4dfbb29, PR #253). ml.js's scalers gained a
+# `rowNoun` option whose default is 'training rows', so every D2 caller keeps
+# its behaviour and wording; cluster.js passes 'rows passed' (pca, kmeans,
+# silhouette, elbow, agglomerative) and kNN keeps 'training rows'. pca gained
+# maxSweeps and keeps both warnings; cutTree refuses id reuse.
+#
+# TWO ENTRIES MOVE FROM D2's GROUP d2-mlcore-course TO d3-facies-course, each
+# at its new blob, because D3's closure is why the file moved:
+#   tools/validation/dataai/synthetic_wells.js  (4dfbb29: syntheticFacies
+#       appended; D2's syntheticWells unchanged)
+#   engines/dataai/ml.js  (ef4058f: rowNoun added, default wording unchanged)
+# The ml.js move is proved harmless to D2 by rebuilding the merged D2 digest,
+# fields.json and precision.json against the new ml.js byte-identically and by
+# running D2's vendored ml suite (wave.json enginesVendoredAt records it). Any
+# OTHER closure path ledgered by another group refuses.
 #
 # Four proofs per path: git blob hash, sha256, cmp, byte count.
 #
 # LEDGER MODE: THE PIN DOES NOT MOVE. VENDOR.json pins 54cf7c4; moving it to
-# 4dfbb29 would also move economics cashflow goldens, facilities, production,
+# ef4058f would also move economics cashflow goldens, facilities, production,
 # seismolord and wellsite paths, reopening live graded values in other
 # courses. Every closure path either matches the pinned manifest (the imported
 # dependencies lib/stats and lib/lp, byte-identical and already vendored), or
 # is NEW since the pin and is ledgered as kind "extra", group
 # "d3-facies-course", pinned to its vendored blob. The entries clear by the
-# guard's own STALE rule when the pin moves to 4dfbb29 or later. A closure
-# path another group already ledgers AT THE SAME BLOB (ml.js, D2's) is left
-# with its owner.
+# guard's own STALE rule when the pin moves to ef4058f or later. A closure
+# path another group ledgers AT THE SAME BLOB would be left with its owner
+# (none at ef4058f).
 set -euo pipefail
 ENG=/root/petrolord-engines
 NG=${NG:-/root/wt-dai-d3-nextgen}
 PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
-REV=${REV:-4dfbb29}
+REV=${REV:-ef4058f}
 FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 EXP=$(mktemp -d)
 LEDGER_PY=$(mktemp)
@@ -119,7 +131,7 @@ import json, subprocess, sys
 vj, man, ng, full = sys.argv[1:5]
 paths = [l for l in sys.stdin.read().split('\n') if l]
 GROUP = 'd3-facies-course'
-MOVABLE = {('tools/validation/dataai/synthetic_wells.js', 'd2-mlcore-course')}
+MOVABLE = {('tools/validation/dataai/synthetic_wells.js', 'd2-mlcore-course'), ('engines/dataai/ml.js', 'd2-mlcore-course')}
 canon = {}
 for line in open(man):
     if line.startswith('#') or not line.strip():
@@ -150,7 +162,7 @@ for p in paths:
     added.append({
         'path': p, 'kind': kind, 'group': GROUP, 'vendoredSha': blob,
         'reason': (f"D3 facies course: vendored sha-identical from petrolord-engines {full[:7]} "
-                   f"(PR #253: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), oracle, pin writer, "
+                   f"(PRs #253 and #254: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), ml.js (rowNoun added; its default 'training rows' wording, which D2 grades, unchanged), oracle, pin writer, "
                    f"timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. "
                    f"{'New since' if kind == 'extra' else 'Differing from'} the canonical pin {pin[:7]}, which stays: moving it "
                    f"would also move economics, facilities, production, seismolord and wellsite paths other courses grade. "

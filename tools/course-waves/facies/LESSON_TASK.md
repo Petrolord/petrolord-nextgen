@@ -77,12 +77,31 @@ FLOAT NOISE even where the truth file would resolve it.
 
 ## THE REFUSALS, BY NAME
 
-Digest section 3 tables 58 refusals across 13 functions. **Quote the engine's
-message in a blockquote.** The ones each tier must teach:
+Digest section 3 tables 61 refusals across 13 functions. **Quote the engine's
+message in a blockquote.** The wording changed at engines ef4058f; quote the
+digest as rebuilt, never an older copy:
+
+* A constant log says "has zero variance on the N rows passed" (min-max: "zero
+  range on the N rows passed") in pca, kmeans, silhouette, elbow and
+  agglomerative, and "on the N training rows" ONLY in knnClassify. Never write
+  "training rows" of a clustering or PCA call.
+* pca warnings: "Jacobi did not converge in N sweeps (the last sweep still
+  rotated): ..." and "eigenvalues k and k+1 differ by at most 1e-10 times the
+  largest eigenvalue, ...". When both apply, both are kept, non-convergence
+  first, joined by "; ". The repeated test is exactly abs(lambda_k -
+  lambda_(k+1)) <= 1e-10 x lambda_1 (lambda_1 the largest eigenvalue),
+  adjacent eigenvalues in sorted order, INCLUSIVE, relative to the largest and
+  never to the pair (section 26 and the boundary table, section 25). Do not
+  say "equal to within 1e-10" or "within 1e-10 of each other".
+* pca takes maxSweeps (default 50, whole number 1 or more; 0 is refused).
+* cutTree refuses a linkage matrix that merges any row or cluster id twice.
+
+The ones each tier must teach:
 
 * Associate m01 l05: a missing value in X, one row for a PCA, a seed left out.
 * Associate m02 l04: a constant log (a caliper reading one value on every row
-  of EKENE-1), refused by the scaler in the machine learning engine's words.
+  of EKENE-1), refused by the scaler in the machine learning engine's words,
+  which count "the 30 rows passed" (kNN alone says "training rows").
 * Associate m03 and m04: too many components, too few distinct rows for k.
 * Professional m01 to m04: kMax below kMin, a silhouette of one cluster, the
   agglomerative row cap, more clusters than facies in one-to-one matching.

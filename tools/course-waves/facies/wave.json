@@ -13,7 +13,7 @@
   "engines/dataai/cluster.js",
   "engines/dataai/ml.js"
  ],
- "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines 4dfbb29 (engines PR #253). FOURTEEN paths walked by vendor_facies.sh over a git-archive export of the commit with the jest suite as the only seed: six reached by the walk (the suite, cluster.js, ml.js, lib/stats/stats.js, lib/lp/simplex.js, tools/validation/dataai/synthetic_wells.js) and eight NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; Fisher's iris; oracle_cluster.py, pin_cluster.py, timing_cluster.mjs, FINDINGS-cluster.md, negcontrol_cluster.sh). 14 paths x 4 proofs = 56, all IDENTICAL. The canonical pin stays 54cf7c4; 11 paths are ledgered as kind extra, group d3-facies-course (synthetic_wells.js moved there from d2-mlcore-course at its new blob, syntheticFacies appended); ml.js stays with D2's group at the same blob; lib/stats and lib/lp already match the manifest. Vendored jest suites: cluster 316/316, ml 614/614.",
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines ef4058f (engines PR #254, merged; first vendored at 4dfbb29, PR #253). FOURTEEN paths walked by vendor_facies.sh over a git-archive export of the commit with the jest suite as the only seed: six reached by the walk (the suite, cluster.js, ml.js, lib/stats/stats.js, lib/lp/simplex.js, tools/validation/dataai/synthetic_wells.js) and eight NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; Fisher's iris; oracle_cluster.py, pin_cluster.py, timing_cluster.mjs, FINDINGS-cluster.md, negcontrol_cluster.sh). 14 paths x 4 proofs = 56, all IDENTICAL. The canonical pin stays 54cf7c4; 12 paths are ledgered as kind extra, group d3-facies-course. TWO entries moved there from d2-mlcore-course at their new blobs: synthetic_wells.js (4dfbb29, syntheticFacies appended) and engines/dataai/ml.js (ef4058f, c25630d2fa44: a rowNoun option on fitStandardScaler and fitMinMaxScaler, default 'training rows', plus one refusal of any other noun). lib/stats and lib/lp already match the manifest. D2 PROOF: every D2 call uses the default noun. Against the new ml.js the D2 mlcore generators rebuild fields.json (sha256 a603076f...) and precision.json byte-identically, and the D2 digest moves on its ENGINE header line only (the vendored commit and the ml.js line count, 1540 to 1551; d2_dump.mjs now names ef4058f); the committed D2 mirror was re-cut on that one line and its waves.json pin moved. D2's 40 gates (run_gates.py, lessons stage, on a scratch copy pointed at this worktree; numsweep and lengths re-run there with the repo and content paths set, since their defaults name the deleted D2 worktree) all met their expectation. Vendored jest suites: cluster 349/349, ml 614/614 (D2's suite, unchanged at 966bb9e, against the new ml.js).",
  "constants": {
   "$comment": "The engine exports DEFAULTS (JACOBI_MAX_SWEEPS 50, SIGN_TIE_REL 1e-9, REPEATED_EIGEN_REL 1e-10, KMEANS_MAX_ITER 300, KMEANS_N_INIT 10, SILHOUETTE_MAX_ROWS 10000, AGGLOMERATIVE_MAX_ROWS 3000, TIE_REL 1e-12, KNN_MAX_PAIRS 1e8, CART_MAX_DEPTH 5, MATCH_MAX_LABELS 50). Digest section 1 prints them from the export. None is graded."
  },
@@ -25,7 +25,7 @@
   "x1e-2"
  ],
  "plan": {
-  "state": "FOUNDATION COMPLETE when run_gates.py is green: engine vendored at 4dfbb29, the Ekene facies dataset generator with 6 planted structures, digest built (28 sections), fields.json and precision.json generated from the one tolerance derivation, 18 graded fields discriminating, oracle cross-check against the vendored stdlib oracle, lab and three panels shipped with vitest, 78 lesson stubs scaffolded. No lesson prose, bank, key truth or migration is written yet.",
+  "state": "FOUNDATION COMPLETE, RE-CUT AT ef4058f when run_gates.py is green: engine vendored at ef4058f (engines PR #254 repaired finding E1: constant-log refusals say 'rows passed' outside kNN; pca maxSweeps and both warnings kept; cutTree refuses id reuse; the repeated-eigenvalue warning states its test), the Ekene facies dataset generator with 6 planted structures, digest rebuilt (28 sections; section 3 now tables 61 refusals and the two pca warnings with their exact conditions; the boundary table carries the repeated-eigenvalue, maxSweeps and cutTree id rows), fields.json and precision.json byte-identical to the 4dfbb29 cut, 18 graded fields discriminating, oracle cross-check against the vendored stdlib oracle, lab and three panels shipped with vitest, 78 lesson stubs scaffolded. No lesson prose, bank, key truth or migration is written yet.",
   "thesis": "An electrofacies is a group of depth samples whose logs look alike, and it is worth something only when it is checked against the rock. Associate owns GROUPING LOGS INTO ELECTROFACIES (logs as features, distance and why a raw distance is ruled by GR, standard and min-max scaling, principal components from the correlation matrix, k-means with seeded k-means++ and several starts, centres in log units, new rows at the nearest centre, the published iris check), Professional owns JUDGING GROUPS AGAINST CORE (the elbow, the silhouette, agglomerative Ward, complete and average linkage with the linkage matrix and its cut, matching clusters to core facies one to one and by majority, the adjusted Rand index), Expert owns PREDICTING FACIES AND THE ENGINE'S OWN RULES (k nearest neighbours with the scaler fitted on the training rows and its tie rules, the CART tree, its exact tie-break and importances, the uncored wells predicted and written back, boundaries rule by rule, the tie band, the sign rule, the row caps, conventions that are choices). Each capstone grades only its own tier's question.",
   "tiers": {
    "beginner": "Associate: m01 what electrofacies are (logs as a signature of rock, core facies and electrofacies, the Ekene facies wells, rows features and distance, refusals), m02 scaling before distance, m03 principal components, m04 k-means, m05 reading clusters (centres in log units, cluster numbers are names, new rows, covariance against correlation), m06 one field clustered end to end (with Fisher's iris as the published check). Digest sections 1 to 13, and section 28.",
@@ -53,7 +53,7 @@
   "machine learning": "a method named by what it is; no AI claim. Gated by gate_vocabulary.py."
  },
  "openItems": {
-  "ENGINE FINDING E1 (repair first)": "The constant-log refusal cluster.js inherits from ml.js calls the rows the scaler was fitted on 'training rows' when pca (correlation), kmeans, silhouette, elbow and agglomerative refuse: 'X.CALI has zero variance on the 30 training rows (every value is 8.5): standardising would divide by zero, so drop the feature or fit on rows where it varies'. Clustering and PCA have no training rows; the digest (section 3) states the wording as it is. Reported to the lead for an engines PR; the foundation re-cuts after it.",
+  "ENGINE FINDING E1 (repair first)": "RESOLVED by engines PR #254 (ef4058f), re-cut here. ml.js scalers take rowNoun; cluster.js passes 'rows passed' for pca (correlation), kmeans, silhouette, elbow and agglomerative, and kNN keeps 'training rows'. The digest (section 3) states both wordings and asserts each by function.",
   "FINDINGS open question 1, nInit default 10": "Taught as a choice (sections 9 and 27): one start stops above the ten-start inertia on 8 of 10 seeds.",
   "FINDINGS open question 2, one-to-one refuses more clusters than facies": "Taught (section 18) with majority matching beside it.",
   "FINDINGS open question 3, no SOM": "Taught as not built (section 27).",
@@ -85,10 +85,10 @@
   "ogbunike_uncored_gr_minmax_max": "uncored well in the fit, standard score instead, mean not highest, stated offset removed, raw gr over cored max"
  },
  "digest": {
-  "lines": 995,
+  "lines": 1012,
   "sections": 28,
-  "md5": "89de323759f43f4b4c95b993dc79263c",
-  "sha256": "f4b59c1fbabe57655d0c9d2b951002d5eb771d23fce9462828820592a201f6ff"
+  "md5": "64589f6076353da208865bee6d3ceb8a",
+  "sha256": "1aab6b0cd11f8df0499854e7a7dcf0220c37e001998ee663baa814bf8aec4ca5"
  },
  "fields": {
   "count": 18,
@@ -116,7 +116,7 @@
  },
  "gates": {
   "structure.py": {
-   "md5": "f6c2ad27887251b0a4e99d4c41223aa1",
+   "md5": "6bb073bc6a80705ba99ce87f6d86c3e8",
    "command": "python3 structure.py",
    "expected": 0,
    "exit": 0,
@@ -155,7 +155,7 @@
    "command": "python3 oracle_check.py",
    "expected": 0,
    "exit": 0,
-   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 3 s; worst relative difference 9.42e-16; disagreements: 0"
+   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 5 s; worst relative difference 9.42e-16; disagreements: 0"
   },
   "oracle_check.py NEGATIVE CONTROL": {
    "md5": "496dc17659f909a3bbc7873890edf70e",
@@ -183,14 +183,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh dai-wip-facies /root/wt-dai-d3-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "d3_dump: 883 label-and-call, measurement and claim assertions run, 0 failed; 28 sections"
+   "summary": "d3_dump: 919 label-and-call, measurement and claim assertions run, 0 failed; 28 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-facies",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/dai-wip-facies/digest.txt: 995 line(s), 28 section title(s) and 72 in-body marker(s) swept against their blocks, 32 history framings, 31 engine pin(s); 0 warned for a human read and 0 framed as curric"
+   "summary": "[digestprose] /root/dai-wip-facies/digest.txt: 1012 line(s), 28 section title(s) and 73 in-body marker(s) swept against their blocks, 32 history framings, 31 engine pin(s); 0 warned for a human read and 0 framed as curri"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -344,7 +344,7 @@
    "command": "python3 truth_check.py",
    "expected": 0,
    "exit": 0,
-   "summary": "truth_check: truth-facies.json (507 digest lines) IS the harvest of digest.txt"
+   "summary": "truth_check: truth-facies.json (516 digest lines) IS the harvest of digest.txt"
   },
   "truth_check.py NEGATIVE CONTROL": {
    "md5": "aa00feb9f6b715432b374d907c72466d",
@@ -387,14 +387,14 @@
    "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
   },
   "gate_claims.mjs": {
-   "md5": "36093e411cdfa6ca59badafbdd46d574",
+   "md5": "6f79d2a94a7b54b9e8d7332cfd923b73",
    "command": "node gate_claims.mjs",
    "expected": 0,
    "exit": 0,
    "summary": "FINDINGS: 0"
   },
   "gate_claims.mjs NEGATIVE CONTROL": {
-   "md5": "36093e411cdfa6ca59badafbdd46d574",
+   "md5": "6f79d2a94a7b54b9e8d7332cfd923b73",
    "command": "node gate_claims.mjs --plant-a-recon-figure",
    "expected": 1,
    "exit": 1,

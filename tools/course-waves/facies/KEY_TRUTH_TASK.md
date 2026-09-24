@@ -20,8 +20,12 @@ library pins and the engine's source comments are PROVENANCE.
    number under some stated setting the question did not rule out (another
    seed, another number of starts, another scaling, another column order).
 2. **A wrong failure-mode gloss.** "Refused" said of a call that returns with a
-   warning (an inertia that rises, a repeated eigenvalue, a k-means stopped at
-   maxIter); "wrong" said of a value that is only outside the training range.
+   warning (an inertia that rises, a repeated eigenvalue, a Jacobi that did not
+   converge in maxSweeps, a k-means stopped at maxIter); "training rows" said of
+   a clustering or PCA refusal (only knnClassify says it; the rest say "rows
+   passed"); a repeated eigenvalue glossed as "equal" or "within 1e-10 of each
+   other" (the test is abs(lambda_k - lambda_(k+1)) <= 1e-10 x the largest,
+   inclusive); "wrong" said of a value that is only outside the training range.
 3. **A false superlative.** "the largest", "always", "never" where the digest
    shows one case. A held-out well is one draw.
 4. **An exam question that near-duplicates a module question** (audit at

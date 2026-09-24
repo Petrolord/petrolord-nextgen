@@ -108,8 +108,12 @@ BRIEFS.forEach((f) => {
   [...prose.matchAll(NUM)].forEach((m) => {
     const lit = m.group ? m.group(0) : m[0];
     numbersSwept += 1;
-    if (DIGEST_OK.has(lit)) return;
+    // A DECLARED figure is checked FIRST: the path order 68 is settled by
+    // wave.json even though, since engines ef4058f, the digest also prints 68
+    // (the golden's refusal count). Digits printed alike are not the same
+    // figure, and the declaration must not go dead by coincidence.
     if (Object.prototype.hasOwnProperty.call(ALLOWED, lit)) { hit.add(lit); return; }
+    if (DIGEST_OK.has(lit)) return;
     const where = prose.slice(Math.max(0, m.index - 60), m.index + 40).replace(/\s+/g, ' ');
     const inRecon = (RECON && RECON.includes(lit)) || (FINDINGS && FINDINGS.includes(lit));
     findings.push(`${f}: the figure ${lit} is not in the digest and is not declared`

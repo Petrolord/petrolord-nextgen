@@ -4,7 +4,7 @@
 
 # PRECISION. Every log value, centre, scale, distance, eigenvalue, ratio, loading, score, inertia, silhouette, merge height, index, accuracy, impurity, importance and threshold prints to SIX decimals; counts, row numbers, cluster numbers, passes, depths, seeds and well numbers are whole numbers; very small magnitudes and tie bands print in exponent form; an engine message is printed verbatim, figures and all.
 
-# ENGINE. engines/dataai/cluster.js, vendored sha-identical with petrolord-engines 4dfbb29, 1165 lines. It imports lib/stats (mulberry32) and, from engines/dataai/ml.js, the two scalers, applyScaler and classificationReport. The vendored golden test-data/dataai/goldens/cluster_cases.json carries 126 cases, 54 of them refusals and 1 of them a published anchor, written by the standard library oracle.
+# ENGINE. engines/dataai/cluster.js, vendored sha-identical with petrolord-engines ef4058f, 1186 lines. It imports lib/stats (mulberry32) and, from engines/dataai/ml.js, the two scalers, applyScaler and classificationReport. The vendored golden test-data/dataai/goldens/cluster_cases.json carries 145 cases, 68 of them refusals and 1 of them a published anchor, written by the standard library oracle.
 
 # WHAT IS NEVER IN THIS FILE. No capstone field, no capstone well, no capstone dataset and no graded answer. The capstones run their own datasets and the digest never names them.
 
@@ -16,7 +16,7 @@ Every function takes plain arrays and objects and returns either a result object
 
 | function | role | what it needs | what it returns |
 | --- | --- | --- | --- |
-| `pca` | components | X, names, matrix, nComponents | eigenvalues, explained variance ratios, unit components, loadings and scores |
+| `pca` | components | X, names, matrix, nComponents, maxSweeps | eigenvalues, explained variance ratios, unit components, loadings and scores |
 | `pcaTransform` | components | model, X | scores of new rows with the fitted centre, scale and components |
 | `kmeans` | clustering | X, k, seed, nInit, maxIter, init, scale, names | labels, sizes, centres (scaled and in log units), inertia, passes and every start |
 | `assignClusters` | clustering | model, X | the nearest centre of a fitted k-means for each new row, with its distance |
@@ -34,7 +34,7 @@ The stated defaults, read from the exported `DEFAULTS`:
 
 | default | value | what it sets |
 | --- | --- | --- |
-| `JACOBI_MAX_SWEEPS` | 50 | the most sweeps of Jacobi rotations pca takes |
+| `JACOBI_MAX_SWEEPS` | 50 | the most sweeps of Jacobi rotations pca takes when maxSweeps is left out |
 | `SIGN_TIE_REL` | 1.00e-9 | how close a loading must be to the largest to count as largest, in the sign rule |
 | `REPEATED_EIGEN_REL` | 1.00e-10 | how close two eigenvalues must be, relative to the largest, to be flagged as repeated |
 | `KMEANS_MAX_ITER` | 300 | the most assignment passes one k-means start takes |
@@ -130,9 +130,10 @@ Each row is a real call. The message column is the engine's `error` string, verb
 | `pca` | five components of four logs | `nComponents` | nComponents must be a whole number from 1 to 4 (the number of features) |
 | `pca` | a matrix it does not build | `matrix` | matrix must be 'correlation' or 'covariance' |
 | `pca` | the 180 cored rows with row 40's RHOB null | `X[40][1]` | X[40][1] must be a finite number: fill or drop missing values first |
-| `pca` | GR and a caliper reading 8.5 on all 30 rows of EKENE-1 | `X.CALI` | X.CALI has zero variance on the 30 training rows (every value is 8.5): standardising would divide by zero, so drop the feature or fit on rows where it varies |
+| `pca` | GR and a caliper reading 8.5 on all 30 rows of EKENE-1 | `X.CALI` | X.CALI has zero variance on the 30 rows passed (every value is 8.5): standardising would divide by zero, so drop the feature or fit on rows where it varies |
 | `pca` | one cored row passed twice, covariance matrix | `X` | X has zero total variance (every column is constant), so there are no principal components |
 | `pca` | a log name given twice | `names[2]` | names[2] repeats the name GR |
+| `pca` | no Jacobi sweeps | `maxSweeps` | maxSweeps must be a whole number, 1 or more |
 | `pcaTransform` | a k-means result where a PCA was expected | `model` | model must be the result of pca |
 | `pcaTransform` | new rows with two logs for a PCA of four | `X` | X must have 4 columns, as the PCA was fitted on |
 | `kmeans` | k of 0 | `k` | k must be a whole number from 1 to 180 (the number of rows) |
@@ -145,8 +146,8 @@ Each row is a real call. The message column is the engine's `error` string, verb
 | `kmeans` | a scaling it does not offer | `scale` | scale must be 'standard', 'minmax' or 'none' |
 | `kmeans` | no starts | `nInit` | nInit must be a whole number, 1 or more |
 | `kmeans` | no passes | `maxIter` | maxIter must be a whole number, 1 or more |
-| `kmeans` | GR and a caliper reading 8.5 on all 30 rows of EKENE-1, standard scaling | `X.CALI` | X.CALI has zero variance on the 30 training rows (every value is 8.5): standardising would divide by zero, so drop the feature or fit on rows where it varies |
-| `kmeans` | the same rows, min-max scaling | `X.CALI` | X.CALI has zero range on the 30 training rows (every value is 8.5): min-max scaling would divide by zero, so drop the feature or fit on rows where it varies |
+| `kmeans` | GR and a caliper reading 8.5 on all 30 rows of EKENE-1, standard scaling | `X.CALI` | X.CALI has zero variance on the 30 rows passed (every value is 8.5): standardising would divide by zero, so drop the feature or fit on rows where it varies |
+| `kmeans` | the same rows, min-max scaling | `X.CALI` | X.CALI has zero range on the 30 rows passed (every value is 8.5): min-max scaling would divide by zero, so drop the feature or fit on rows where it varies |
 | `assignClusters` | a PCA result where a k-means was expected | `model` | model must be the result of kmeans |
 | `assignClusters` | new rows with three logs for a model of four | `X` | X must have 4 columns, as the model was fitted on |
 | `silhouette` | every row in one cluster | `labels` | labels must hold from 2 to 179 distinct clusters (found 1): the silhouette compares each row with the next nearest cluster |
@@ -166,10 +167,12 @@ Each row is a real call. The message column is the engine's `error` string, verb
 | `cutTree` | k of 0 on the Ward tree of the cored rows | `k` | k must be a whole number from 1 to 180 (the number of rows) |
 | `cutTree` | a merge that names a cluster not yet made | `linkageMatrix[1]` | linkageMatrix[1] must be [id1, id2, height, size] with whole ids 0 <= id1 < id2 < 4 |
 | `cutTree` | an empty matrix | `linkageMatrix` | linkageMatrix must be the non-empty linkageMatrix of agglomerative |
+| `cutTree` | row 0 merged a second time | `linkageMatrix[1]` | linkageMatrix[1] merges id 0, which linkageMatrix[0] already merged: each row id (0 to 3) and each cluster id (4 to 5) may be merged once only |
 | `knnClassify` | more neighbours than training rows | `k` | k must be a whole number from 1 to 180 (the training rows) |
 | `knnClassify` | new rows with one log for training rows of four | `Xnew` | Xnew must have 4 columns, like X |
 | `knnClassify` | one facies too few | `y` | y must be an array of 180 labels, one per row |
 | `knnClassify` | a null facies | `y[1]` | y[1] must be a string or a finite number |
+| `knnClassify` | GR and a caliper reading 8.5 on all 30 rows of EKENE-1 as training rows | `X.CALI` | X.CALI has zero variance on the 30 training rows (every value is 8.5): standardising would divide by zero, so drop the feature or fit on rows where it varies |
 | `knnClassify` | 10000 new rows against 10001 training rows (the cored rows repeated) | `Xnew` | Xnew has 10000 rows against 10001 training rows, 100010000 distance pairs, above the 100000000 kNN computes: classify fewer rows at a time or thin the training rows |
 | `cartFit` | a negative depth | `maxDepth` | maxDepth must be a whole number, 0 or more (0 is a single leaf) |
 | `cartFit` | a leaf of no rows | `minSamplesLeaf` | minSamplesLeaf must be a whole number, 1 or more |
@@ -185,9 +188,20 @@ Each row is a real call. The message column is the engine's `error` string, verb
 | `matchClusters` | one label too few | `clusters` | clusters must be an array of 180 labels, one per row |
 | `matchClusters` | a zero division score of one half, which ml.js refuses | `zeroDivision` | zeroDivision must be 0 or 1 |
 
-58 refusals are tabled above, across 13 functions.
+61 refusals are tabled above, across 13 functions.
 
-A CONSTANT LOG IS REFUSED BY THE SCALER. pca (correlation), kmeans, silhouette, elbow, agglomerative and knnClassify scale through the machine learning engine's own scalers, so a constant log is refused in that engine's words, which call the rows the scaler is fitted on its training rows. In pca and in clustering those are every row passed; in knnClassify they are the training rows (section 21). 3 rows of the table above carry that wording outside knnClassify.
+A CONSTANT LOG IS REFUSED BY THE SCALER. pca (correlation), kmeans, silhouette, elbow, agglomerative and knnClassify scale through the machine learning engine's own scalers, so a constant log is refused in that engine's words, and the words name the rows the scaler was fitted on. In pca, kmeans, silhouette, elbow and agglomerative those are every row passed, and the message says "on the N rows passed"; silhouette, elbow and agglomerative give, on the EKENE-1 caliper rows, the same message as kmeans above. In knnClassify they are the labelled training rows, and the message says "on the N training rows" (section 21). A min-max scaler says "zero range" where the standard scaler says "zero variance".
+
+WARNINGS ARE NOT REFUSALS. `pca` returns its result and adds a `warning` in two cases, each stated exactly:
+
+| warning | raised when, exactly | the engine's message (golden) |
+| --- | --- | --- |
+| Jacobi did not converge | the sweep numbered `maxSweeps` (default 50) still needed a rotation; `converged` is false | Jacobi did not converge in 1 sweep (the last sweep still rotated): the eigenvalues and components shown are those after sweep 1 |
+| repeated eigenvalue | for adjacent eigenvalues in the sorted list, abs(lambda_k - lambda_(k+1)) <= 1.00e-10 x lambda_1, the largest eigenvalue: inclusive, relative to the largest, never to the pair | eigenvalues 1 and 2, 3 and 4 differ by at most 1e-10 times the largest eigenvalue, so the directions of those components are not unique: the loadings shown are one valid choice |
+
+When both apply the engine keeps both, the non-convergence warning first, joined by "; ". Golden `pca-warning-both` (maxSweeps 1), verbatim:
+
+> Jacobi did not converge in 1 sweep (the last sweep still rotated): the eigenvalues and components shown are those after sweep 1; eigenvalues 1 and 2, 3 and 4 differ by at most 1e-10 times the largest eigenvalue, so the directions of those components are not unique: the loadings shown are one valid choice
 
 A MISSING VALUE IS REFUSED BY NAME at the first row and column it meets, counting from 0: row 40, column 1 (RHOB) above. Nothing is filled.
 
@@ -933,6 +947,9 @@ Each rule draws its own boundary; nothing here is global. Every row is a real ca
 | `matchClusters` | one-to-one | clusters equal to facies accepted | more clusters than facies refused; majority mode accepts them |
 | `kmeans, agglomerative, knnClassify` | a tie in distance or height | within 1.00e-12 of the smallest, relative, inclusive: tied | beyond it: ordered by size |
 | `pca` | the sign rule | a weight within 1.00e-9 of the largest, relative, inclusive, counts as largest | the first such weight is made positive |
+| `pca` | repeated eigenvalue | abs(lambda_k - lambda_(k+1)) <= 1.00e-10 x lambda_1 flagged, inclusive (a gap of 0.99 of that band flagged) | a gap of 1.01 of that band not flagged |
+| `pca` | maxSweeps | 1 accepted | 0 refused |
+| `cutTree` | an id merged twice | each row id and cluster id merged once accepted | a second merge of any id refused |
 | `elbow` | bestSilhouetteK | the highest mean silhouette | a tie goes to the smaller k |
 
 The row caps trade memory and time for rows: the silhouette and agglomerative clustering hold every pair of rows, so they stop at 10000 and 3000 rows, and kNN computes every training row against every new row, so it stops at 100000000 pairs. A larger dataset is sampled with a stated seed (the silhouette's `sampleSize`), clustered by k-means, or classified in batches.
@@ -953,9 +970,9 @@ THE SIGN RULE. In each component the engine makes the largest absolute weight po
 
 A REPEATED EIGENVALUE. Four stated rows, (1, 0), (-1, 0), (0, 1), (0, -1), spread equally in every direction: covariance eigenvalues 0.666667, 0.666667. Any direction is as good as any other, so the components are one valid choice among many, and the engine says so, verbatim:
 
-> eigenvalues 1 and 2 are equal to within 1e-10 of the largest, so the directions of those components are not unique: the loadings shown are one valid choice
+> eigenvalues 1 and 2 differ by at most 1e-10 times the largest eigenvalue, so the directions of those components are not unique: the loadings shown are one valid choice
 
-The repeated check is relative to the largest eigenvalue, band 1.00e-10. On the Ekene cored rows no pair is repeated (section 6).
+The repeated test compares each eigenvalue with the next one in the sorted list: the pair is flagged when abs(lambda_k - lambda_(k+1)) <= 1.00e-10 x lambda_1, where lambda_1 is the largest eigenvalue. The test is inclusive and relative to the largest eigenvalue, never to the pair (section 25 shows a gap of 0.99 of the band flagged and 1.01 not). On the Ekene cored rows no pair is repeated (section 6).
 
 # SECTION 27: Conventions that are choices, and what is not built (owned by Expert m06)
 

@@ -3,9 +3,10 @@
 # Data Quality and D2 Machine Learning on Well Data.
 #
 # Engine: engines/dataai/cluster.js, vendored sha-identical with
-# petrolord-engines 4dfbb29 (engines PR #253). It imports lib/stats
+# petrolord-engines ef4058f (engines PRs #253 and #254). It imports lib/stats
 # (mulberry32) and, from ml.js, the scalers and classificationReport, so ml.js
-# travels with it (already vendored by D2 at the same bytes). The vendoring
+# travels with it (re-vendored at ef4058f for its rowNoun option, and moved
+# from D2's ledger group to D3's; D2's digest moved on its header only). The vendoring
 # closure walked from the jest suite is FOURTEEN paths: six reached by the walk
 # (the suite, cluster.js, ml.js, lib/stats/stats.js, lib/lp/simplex.js and the
 # synthetic wells helper) and eight NAMED with their reason (the golden and the
