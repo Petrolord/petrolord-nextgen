@@ -1,0 +1,799 @@
+# D2 TEACHING DIGEST: Machine Learning on Well Data
+
+# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The engine FINDINGS record, the oracle, the library pins and the engine source comments are PROVENANCE and not teaching truth.
+
+# PRECISION. Every coefficient, standard error, score, metric, probability, centre, scale, condition number and difference prints to SIX decimals; counts, row numbers, iterations, seeds and well numbers are whole numbers; relative differences and very small magnitudes print in exponent form.
+
+# ENGINE. engines/dataai/ml.js, vendored sha-identical with petrolord-engines 966bb9e, 1540 lines. It imports lib/stats (mulberry32, mean) and lib/lp/simplex.js (the separation linear programmes). The vendored golden test-data/dataai/goldens/ml_cases.json carries 171 cases, 69 of them refusals and 11 of them NIST StRD published anchors, written by the standard library oracle.
+
+# WHAT IS NEVER IN THIS FILE. No capstone field, no capstone well, no capstone dataset and no graded answer. The capstones run their own datasets and the digest never names them.
+
+# THIS COURSE TEACHES NO REPAIR HISTORY. Every section below describes what the engine does today.
+
+# SECTION 1: What this engine computes, and what it declines to compute (owned by Associate m01 and Expert m06)
+
+Every function takes plain arrays and objects and returns either a result object or an object with `error` and `field`, where `field` names the input it refused and the message starts with that name. Every result carries a `basis` block naming its convention, so the working can be printed.
+
+| function | role | what it needs | what it returns |
+| --- | --- | --- | --- |
+| `fitStandardScaler` | preprocessing | X, trainIndices, names, sd | a centre and a scale per feature, fitted on the training rows |
+| `fitMinMaxScaler` | preprocessing | X, trainIndices, names | the training minimum and range per feature |
+| `applyScaler` | preprocessing | scaler, X | rows transformed with the fitted parameters, unchanged |
+| `groupSplit` | splitting | groups, testFraction or nTestGroups, seed | whole groups (wells) held out |
+| `groupKFold` | splitting | groups, k, seed | k folds of whole groups |
+| `randomRowSplit` | splitting | n or groups, testFraction, seed | rows held out one by one, for the leakage demonstration |
+| `ols` | linear model | X, y, names, intercept, maxCondition | least squares coefficients, standard errors, R-squared, condition numbers, residuals |
+| `ridge` | linear model | X, y, lambda, names, maxCondition | penalised coefficients in standardised and original units, effective degrees of freedom |
+| `logistic` | linear model | X, y, names, intercept, l2, tol, maxIter | binary logistic coefficients by Newton steps, with a separation test first |
+| `solveSPD` | numerics | A, b | the solution of a symmetric positive definite system, with a relative singularity rule |
+| `predict` | prediction | model, X | predicted values, and for logistic the probabilities and classes |
+| `regressionMetrics` | scoring | yTrue, yPred, referenceMean | RMSE, MAE and R-squared |
+| `confusionMatrix` | scoring | yTrue, yPred, labels | counts by true label and predicted label |
+| `classificationReport` | scoring | yTrue, yPred, labels, zeroDivision | accuracy, precision, recall and F1 per class, macro and weighted |
+| `rocCurve` | scoring | yTrue, scores | the ROC points and the area under them |
+| `logLoss` | scoring | yTrue, probabilities, eps | the mean natural-log loss with its clip |
+| `permutationImportance` | evaluation | model, X, y, metric, nRepeats, seed | the loss of score when one feature is shuffled |
+| `learningCurve` | evaluation | X, y, groups, model, trainGroupCounts, testFraction, seed, metric | training and test scores as training wells are added |
+| `leakageDemo` | evaluation | X, y, groups, model, testFraction, seed, metric | one model scored under a random-row split and under a group split |
+
+The stated defaults, read from the exported `DEFAULTS`:
+
+| default | value | what it sets |
+| --- | --- | --- |
+| `MAX_CONDITION` | 100000000 | the scaled condition number above which ols and ridge refuse |
+| `LOGISTIC_TOL` | 1.00e-10 | the largest full Newton step, in coefficient units, at which logistic stops |
+| `LOGISTIC_MAX_ITER` | 100 | the most Newton updates logistic takes |
+| `STEP_HALVINGS` | 30 | the most halvings of one Newton step |
+| `LOG_LOSS_EPS` | 1.00e-15 | the clip on a probability in logLoss |
+| `WHOLE_TOL` | 1.00e-9 | how close f x count must be to a whole number to be taken as it |
+
+The metric names the evaluation functions take, read from the exported `METRICS`:
+
+| metric | task | higher is better |
+| --- | --- | --- |
+| rmse | regression | false |
+| mae | regression | false |
+| r2 | regression | true |
+| accuracy | classification | true |
+| logLoss | classification | false |
+| auc | classification | true |
+
+WHAT THE ENGINE DOES NOT DO, checked here against its exports:
+- It does not fill a missing value. A null, undefined or non-finite entry in X or y is refused by name, and filling or dropping it is the caller's decision.
+- It fits linear models only: least squares, ridge and binary logistic regression. It builds no tree, no network, no neighbour rule and no cluster.
+- It does not sample input distributions or give prediction intervals. The only random draws are the seeded shuffles of the splits and of permutation importance.
+- It does not choose lambda, the features or the model. A course or an app does that with the folds groupKFold returns, and prints the scores it compared.
+- Its exported names are, in full: DEFAULTS, METRICS, applyScaler, classificationReport, confusionMatrix, fitMinMaxScaler, fitStandardScaler, groupKFold, groupSplit, leakageDemo, learningCurve, logLoss, logistic, ols, permutationImportance, predict, randomRowSplit, regressionMetrics, ridge, rocCurve, solveSPD.
+
+# SECTION 2: The Ekene wells, their seed and their planted structure (owned by Associate m01 and Associate m06 and Expert m05)
+
+Every row in this course comes from one generator, d2_fields.mjs, which draws through the canonical mulberry32 and randomNormal of lib/stats on one stated seed, 20260913, and rounds every value to the decimals a real file carries. The same inputs give the same file anywhere.
+
+10 wells, EKENE-1, EKENE-2, EKENE-3, EKENE-4, EKENE-5, EKENE-6, EKENE-7, EKENE-8, EKENE-9, EKENE-10, carry 30 samples each at a one foot step through the same reservoir interval, each well at its own depth: 300 rows in all.
+
+| channel | unit | what it is |
+| --- | --- | --- |
+| GR | gAPI | gamma ray |
+| RHOB | g/cm3 | bulk density |
+| NPHI | v/v | neutron porosity |
+| RT | ohm.m | deep resistivity |
+| CALI | in | caliper, the hole diameter |
+| DT | us/ft | compressional sonic slowness |
+| PHIC | v/v | core calibrated porosity, the input of the pay rule |
+| PAY | 0 or 1 | the pay label from the stated rule |
+
+Four well-level attributes are constant down each well:
+
+| well | easting (km), stated | northing (km), stated | kb (m), stated | mudWeight (ppg), stated | top depth (ft), stated |
+| --- | --- | --- | --- | --- | --- |
+| EKENE-1 | 415.100000 | 210.570000 | 22.200000 | 9.400000 | 7827 |
+| EKENE-2 | 414.380000 | 209.140000 | 25.900000 | 9.900000 | 7880 |
+| EKENE-3 | 415.110000 | 211.070000 | 28.300000 | 9.700000 | 7923 |
+| EKENE-4 | 415.970000 | 208.010000 | 22.900000 | 9.800000 | 7966 |
+| EKENE-5 | 415.460000 | 208.670000 | 26.300000 | 9.300000 | 8045 |
+| EKENE-6 | 417.710000 | 210.580000 | 23.000000 | 10.500000 | 8092 |
+| EKENE-7 | 413.070000 | 211.890000 | 23.700000 | 10.300000 | 8140 |
+| EKENE-8 | 415.720000 | 208.810000 | 18.600000 | 9.800000 | 8209 |
+| EKENE-9 | 413.930000 | 208.110000 | 21.700000 | 10.100000 | 8265 |
+| EKENE-10 | 413.450000 | 212.930000 | 27.500000 | 9.900000 | 8304 |
+
+THE PAY RULE, stated: a sample is pay (PAY = 1) when PHIC is at least 0.16 and RT is at least 10 ohm.m; otherwise PAY = 0. 94 of the 300 samples are pay. A label is the output of a stated rule, and this course always states it.
+
+THE NO-SONIC WELL, stated: EKENE-6 was never logged with a sonic, so every one of its DT samples is null. 270 rows in 9 wells carry a DT. The generator keeps the sonic it drew for EKENE-6 apart from the rows, as `withheld`; a real field has no such record, and this course reads it once, in section 23, to check a prediction.
+
+THE PLANTED STRUCTURE, every item stated by the generator. Each is found by the named method, and the section that finds it asserts so; the build fails if any item is not found.
+
+| what | where | how it was planted | the method that finds it |
+| --- | --- | --- | --- |
+| a well-level sonic offset | every well | each well adds its own drawn offset to every DT sample | the mean OLS residual per well, logs only |
+| well-identifying attributes | every well | easting, northing, KB and mud weight are constant down each well and unrelated to the offset | leakageDemo with the attributes: positive optimism on each stated seed |
+| a split that flatters nothing | logs only | no feature identifies a well | leakageDemo on the logs alone: a stated seed where the optimism is negative |
+| a well with no sonic | EKENE-6 | every DT sample is null | ols refuses the first null target by name |
+| a hot shale in the no-sonic well | EKENE-6 | GR raised by 30 gAPI on every sample | min-max scaling fitted on the nine sonic wells maps its highest GR above 1 |
+| a pay label from a stated rule | every sample | PAY is 1 when PHIC >= 0.16 and RT >= 10 ohm.m | logistic on PHIC alone, rows with RT at or above the cutoff: completely separated |
+| a caliper that carries no sonic signal | every sample | CALI is drawn independently of every other channel | permutationImportance: CALI ranks last |
+
+7 items are planted.
+
+# SECTION 3: Every refusal, with the field it names and the engine's own words (owned by Associate m01 l05 and Associate m03 and Associate m04 l05 and Professional m04 and Expert m01 and Expert m02 and Expert m03)
+
+Each row is a real call. The message column is the engine's `error` string, verbatim. A refusal carries no number of its own: any figure in it is part of the message.
+
+| function | what was passed | field named | the engine's message |
+| --- | --- | --- | --- |
+| `fitStandardScaler` | the no-sonic well's DT as a feature | `X[150][1]` | X[150][1] must be a finite number: fill or drop missing values first |
+| `fitStandardScaler` | a well-level attribute fitted on one well | `X.mudWeight` | X.mudWeight has zero variance on the 30 training rows (every value is 9.4): standardising would divide by zero, so drop the feature or fit on rows where it varies |
+| `fitStandardScaler` | an unnamed divisor | `sd` | sd must be 'population' or 'sample' |
+| `fitMinMaxScaler` | a constant column | `X.CALI` | X.CALI has zero range on the 2 training rows (every value is 3): min-max scaling would divide by zero, so drop the feature or fit on rows where it varies |
+| `applyScaler` | rows with the wrong number of columns | `X` | X must have 2 columns, as the scaler was fitted on |
+| `groupSplit` | one well only | `groups` | groups must hold at least 2 distinct groups to hold one out (found 1) |
+| `groupSplit` | a fraction that leaves no well to train | `testFraction` | testFraction puts all 9 groups in the test set (ceil(0.95 x 9) = 9): lower it so at least one group trains |
+| `groupSplit` | both sizes given | `nTestGroups` | nTestGroups and testFraction cannot both be given |
+| `groupSplit` | a name and a number mixed | `groups[1]` | groups[1] must be the same type as groups[0]: all strings or all numbers |
+| `groupSplit` | a negative seed | `seed` | seed must be a whole number from 0 to 4294967295 |
+| `groupKFold` | more folds than wells | `k` | k must be a whole number from 2 to 9 (the number of distinct groups) |
+| `randomRowSplit` | one row | `n` | n must be a whole number of rows, 2 or more (or give groups) |
+| `ols` | three rows for four coefficients | `X` | X must have more rows than coefficients (3 rows for 4 coefficients, the intercept included): the residual degrees of freedom n - p must be at least 1 |
+| `ols` | a column of zeros | `X.CALI` | X.CALI is zero in every row, so its coefficient is not identifiable |
+| `ols` | a target that never varies | `y` | y has zero variance about its mean (every value is equal), so R-squared is undefined |
+| `ols` | a null target | `y[20]` | y[20] must be a finite number |
+| `ols` | a limit below one | `maxCondition` | maxCondition must be a finite number, 1 or more |
+| `ridge` | a negative lambda | `lambda` | lambda must be a finite number, zero or more |
+| `logistic` | one class only | `y` | y must contain both classes, 0 and 1 |
+| `logistic` | a label other than 0 and 1 | `y[2]` | y[2] must be 0 or 1 |
+| `logistic` | labels a threshold splits exactly | `y` | y is completely separated by a linear combination of the features (every row lies strictly on its own class side of a hyperplane), so the maximum likelihood coefficients are infinite: add an L2 penalty (l2 > 0) or remove the separating feature |
+| `logistic` | a tolerance of zero | `tol` | tol must be a finite number above zero |
+| `solveSPD` | a rank one matrix | `A` | A is singular to working precision: pivot 2 of the Cholesky factorisation of the unit-diagonal scaled matrix is 0, at or below p x machine epsilon = 4.440892098500626e-16 |
+| `predict` | something that is not a fitted model | `model` | model must be the result of ols, ridge or logistic |
+| `regressionMetrics` | a test target that never varies | `yTrue` | yTrue has zero variance (every value is equal), so R-squared about its mean is undefined |
+| `classificationReport` | a zero division score of one half | `zeroDivision` | zeroDivision must be 0 or 1 |
+| `rocCurve` | one class only | `yTrue` | yTrue must contain both classes (found 2 positive and 0 negative), or the ROC curve is undefined |
+| `logLoss` | a probability above one | `probabilities[0]` | probabilities[0] must be a number from 0 to 1 |
+| `permutationImportance` | a classification metric on a regression model | `metric` | metric auc is a classification metric and the model is ols |
+| `learningCurve` | counts that do not rise | `trainGroupCounts[1]` | trainGroupCounts[1] must be larger than the count before it |
+| `leakageDemo` | no well names | `groups` | groups must be an array of group ids, one per row |
+
+31 refusals are tabled above, across 18 functions.
+
+The no-sonic target is refused at the first null it meets. Row 150 of the 300 rows (counted from 0) is the first EKENE-6 sample; passing the forty rows from 130 to 169, the last twenty of EKENE-5 and the first twenty of EKENE-6, gives the refusal at `y[20]`, the twenty-first row passed.
+
+Two more refusals are the Expert tier's subject and sit where it teaches them: an ill-conditioned design in section 17 and separated labels in section 19. A logistic fit that stops before it converges returns a result with a `warning`, in section 20.
+
+# SECTION 4: A split by rows and a split by whole wells (owned by Associate m02)
+
+Test rows must be rows the model was not fitted on. The engine offers two ways to choose them, and this section runs both on the 270 sonic rows of the 9 sonic wells with the stated test fraction 0.3 and the stated seed 5.
+
+| split | test rows | training rows | wells with test rows | wells on both sides |
+| --- | --- | --- | --- | --- |
+| `randomRowSplit` | 81 | 189 | 9 | 9 |
+| `groupSplit` | 90 | 180 | 3 | 0 |
+
+Under `randomRowSplit` the 81 test rows come from all 9 wells, and each of those wells also trains the model: its `sharedGroups` lists EKENE-1, EKENE-10, EKENE-2, EKENE-3, EKENE-4, EKENE-5, EKENE-7, EKENE-8, EKENE-9. The engine's basis names the purpose of that function in its own words: "leakage demonstration only: rows of one well can fall on both sides (sharedGroups); use groupSplit or groupKFold to score a model".
+
+Under `groupSplit` the test set is whole wells, EKENE-4, EKENE-5, EKENE-8, 90 rows; the model trains on EKENE-1, EKENE-10, EKENE-2, EKENE-3, EKENE-7, EKENE-9, 180 rows. Its rule, in the engine's words: "the first nTest groups of the shuffled order are the test set; every row of a group goes with it".
+
+Which wells the group split holds out, seed by seed, at the same fraction:
+
+| seed, stated | test wells | test rows |
+| --- | --- | --- |
+| 1 | EKENE-2, EKENE-7, EKENE-8 | 90 |
+| 2 | EKENE-1, EKENE-5, EKENE-9 | 90 |
+| 3 | EKENE-2, EKENE-4, EKENE-5 | 90 |
+| 4 | EKENE-3, EKENE-4, EKENE-5 | 90 |
+| 5 | EKENE-4, EKENE-5, EKENE-8 | 90 |
+| 6 | EKENE-3, EKENE-5, EKENE-7 | 90 |
+
+A seed fixes the draw and nothing else: any other seed holds out another set of wells, and a score measured on one set is a score on those wells.
+
+# SECTION 5: The seed, the sorted names and the shuffle (owned by Associate m02 l04)
+
+Before any shuffle the engine sorts the well names. Names that are strings sort by UTF-16 code unit, character by character, so the nine sonic wells sort as: EKENE-1, EKENE-10, EKENE-2, EKENE-3, EKENE-4, EKENE-5, EKENE-7, EKENE-8, EKENE-9. EKENE-10 comes before EKENE-2 because the character 1 comes before the character 2; the engine does not read the number inside a name. Names that are all numbers sort ascending, and a mix of the two is refused (section 3).
+
+The shuffle is Fisher-Yates from the end with one mulberry32 stream seeded by `seed`: for i from m - 1 down to 1, draw u, take j = floor(u x (i + 1)), and swap positions i and j. The draws for seed 5 and m = 9 (u from lib/stats mulberry32, printed to six decimals; j derived):
+
+| i | u | j = floor(u x (i + 1)), derived | swap |
+| --- | --- | --- | --- |
+| 8 | 0.689775 | 6 | EKENE-9 with EKENE-7 |
+| 7 | 0.772743 | 6 | EKENE-8 with EKENE-9 |
+| 6 | 0.219763 | 1 | EKENE-8 with EKENE-10 |
+| 5 | 0.623179 | 3 | EKENE-5 with EKENE-3 |
+| 4 | 0.085137 | 0 | EKENE-4 with EKENE-1 |
+| 3 | 0.592165 | 2 | EKENE-5 with EKENE-2 |
+| 2 | 0.720102 | 2 | EKENE-5 with EKENE-5 |
+| 1 | 0.458104 | 0 | EKENE-8 with EKENE-4 |
+
+The shuffled order is EKENE-8, EKENE-4, EKENE-5, EKENE-2, EKENE-1, EKENE-3, EKENE-10, EKENE-9, EKENE-7, which is the `order` the engine returns. The first three are the test wells.
+
+THE TEST SIZE is ceil(testFraction x count): here ceil(0.3 x 9) = 3 wells. A product within 1e-9 of a whole number is taken as that number before the ceiling. The engine's own case:
+
+| call | testFraction x count in float, derived | test size |
+| --- | --- | --- |
+| `groupSplit`, 25 groups, fraction 0.28 (golden) | 7.000000000000001 | 7 |
+| `randomRowSplit`, 25 rows, fraction 0.28 (golden) | 7.000000000000001 | 7 |
+
+In float, 0.28 x 25 is 7.000000000000001; a plain ceiling would hold out 8. The engine's basis states the rule: "ceil(testFraction x count), a product within 1e-9 of a whole number taken as that number".
+
+# SECTION 6: Scaling fitted on the training rows only (owned by Associate m03)
+
+A standard scaler maps each feature to z = (x - centre) / scale. The engine fits the centre and the scale on the TRAINING rows only (the rows passed, or the rows `trainIndices` lists) and applies them unchanged to any other rows. Here it is fitted on the 180 training rows of the teaching split (section 4) and, for comparison, on all 270 sonic rows, which include the test wells.
+
+| feature | centre, training rows | centre, all rows | scale, training rows (population SD) | scale, all rows | scale, training rows (sample SD) |
+| --- | --- | --- | --- | --- | --- |
+| GR | 59.844500 | 60.250741 | 22.375203 | 21.363430 | 22.437616 |
+| RHOB | 2.391150 | 2.397719 | 0.142322 | 0.136737 | 0.142719 |
+| NPHI | 0.255072 | 0.253533 | 0.033503 | 0.033238 | 0.033597 |
+
+The divisor is stated in the basis: "population standard deviation (n), as scikit-learn StandardScaler". The option `sd: 'sample'` divides by n - 1 instead; on 180 rows the two scales differ by the factor sqrt(180 / 179) (derived), which is 1.002789. The data quality course computes its z-score with the sample SD; this engine's scaler uses the population SD so that ridge matches scikit-learn (section 25).
+
+Applied to the first test row (sonic row 90, EKENE-4 at 7966 ft; GR 48.200000, RHOB 2.348000, NPHI 0.243000), the training scaler gives z = -0.520420, -0.303186, -0.360332. The basis says: "standard scaler fitted on 180 training rows; parameters unchanged".
+
+MIN-MAX SCALING maps the training minimum to 0 and the training maximum to 1, and does not clip a new row. Fitted on all nine sonic wells and applied to the no-sonic well:
+
+| feature | training minimum | training maximum | EKENE-6 scaled minimum | EKENE-6 scaled maximum | EKENE-6 rows above 1 |
+| --- | --- | --- | --- | --- | --- |
+| GR | 21.200000 | 120.870000 | 0.320959 | 1.219324 | 4 |
+| RHOB | 2.107000 | 2.734000 | 0.181818 | 0.925040 | 0 |
+| NPHI | 0.183000 | 0.358000 | 0.057143 | 0.600000 | 0 |
+
+EKENE-6's gamma ray reads above the training maximum on 4 of its 30 rows, and min-max maps them above 1; the basis says: "none: a new row outside the training range maps outside [0, 1]". A scaled value above 1 is the scaler telling you the row lies outside the range the model was fitted on (section 23).
+
+A feature is refused as constant only when every training value is identical, and the refusal names it. A well-level attribute is constant down a well, so fitted on one well it is refused: the mud weight row of section 3. The same feature varies across the nine wells and is fitted there.
+
+# SECTION 7: Ordinary least squares on the training wells (owned by Associate m04)
+
+Least squares finds the coefficients that make the sum of squared residuals, sum (y - yhat)^2, as small as it can be. Here the target is DT (us/ft) and the features are GR (gAPI), RHOB (g/cm3) and NPHI (v/v), fitted on the 180 training rows of the teaching split, with an intercept.
+
+| term | coefficient | unit | standard error | t value |
+| --- | --- | --- | --- | --- |
+| intercept | -0.552686 | us/ft | 30.261214 | -0.018264 |
+| GR | 0.288005 | us/ft per gAPI | 0.066103 | 4.356927 |
+| RHOB | 22.499915 | us/ft per g/cm3 | 12.289493 | 1.830825 |
+| NPHI | 138.783590 | us/ft per v/v | 21.960664 | 6.319645 |
+
+| quantity | value |
+| --- | --- |
+| rows n | 180 |
+| coefficients p, the intercept included | 4 |
+| residual degrees of freedom n - p | 176 |
+| residual standard error s (us/ft) | 5.823075 |
+| RSS | 5967.842781 |
+| TSS about the training mean | 18853.190000 |
+| R-squared | 0.683457 |
+| adjusted R-squared | 0.678062 |
+
+READING A COEFFICIENT. Holding RHOB and NPHI fixed, one more gAPI of gamma ray moves the fitted DT by 0.288005 us/ft. NPHI is a fraction, so its coefficient 138.783590 is per whole unit of v/v; per 0.01 v/v it is 1.387836 us/ft (derived, the coefficient over 100). A coefficient carries the target's unit over the feature's unit, and its size says nothing about importance until the feature's own spread is known (section 21 measures importance directly).
+
+THE INTERCEPT is the fitted DT where every feature is zero: -0.552686 us/ft, with a standard error of 30.261214. No rock has a bulk density of zero, so the intercept is a point far outside the data where the fitted plane happens to cross; it is there so the plane need not pass through the origin.
+
+A coefficient depends on which other features are in the model. Fitted on NPHI alone, the NPHI coefficient is 11.127468 us/ft per v/v with R-squared 0.001327; beside GR and RHOB it is 138.783590.
+
+STANDARD ERRORS are s x sqrt(diag((X'X)^-1)) with s^2 = RSS / (n - p); the basis says: "s x sqrt(diag((X'X)^-1)), s^2 = RSS / (n - p), p counting the intercept". They measure how far a coefficient would move between samples like this one, assuming independent residuals. Rows from one well are not independent (they share the well's offset, section 9), so these standard errors are smaller than the spread from well to well.
+
+MORE ROWS THAN COEFFICIENTS. Least squares needs n > p: with n = p the fit passes through every row and leaves no residual degree of freedom to estimate s. The engine refuses n <= p (section 3).
+
+# SECTION 8: RMSE, MAE and R-squared on the test wells (owned by Associate m05)
+
+RMSE = sqrt(sum (y - yhat)^2 / n) and MAE = sum |y - yhat| / n are in the target's unit (us/ft). R-squared = 1 - SSE / sum (y - reference)^2 is a fraction of the variation about a reference mean. The OLS fit of section 7 scored on its own training rows and on the three test wells:
+
+| scored on | rows | RMSE (us/ft) | MAE (us/ft) | R-squared | reference mean (us/ft) |
+| --- | --- | --- | --- | --- | --- |
+| training rows (fitted values) | 180 | 5.758010 | 4.810983 | 0.683457 | 105.883333 |
+| test wells, about the test mean (default) | 90 | 4.282693 | 3.526103 | 0.815322 | 105.214444 |
+| test wells, about the training mean (referenceMean) | 90 | 4.282693 | 3.526103 | 0.816151 | 105.883333 |
+
+The default reference for a test R-squared is the mean of the TEST targets, as scikit-learn's r2_score; the basis says: "1 - SSE / sum (y - mean of these y)^2 (scikit-learn r2_score); negative when worse than that mean". Passing the training mean as `referenceMean` asks how much better the model does than predicting the training average for a new well, which is the out-of-sample convention; here the two read 0.815322 and 0.816151. Name the reference every time an R-squared is quoted.
+
+On this split the test wells score BETTER than the training rows: RMSE 4.282693 against 5.758010. The three held-out wells happen to sit close to the fitted plane, well by well:
+
+| test well | rows | RMSE (us/ft) | MAE (us/ft) | R-squared about the well's own mean |
+| --- | --- | --- | --- | --- |
+| EKENE-4 | 30 | 4.620664 | 3.820356 | 0.735001 |
+| EKENE-5 | 30 | 4.627312 | 3.978440 | 0.774561 |
+| EKENE-8 | 30 | 3.501687 | 2.779514 | 0.855184 |
+
+One split is one draw of wells; section 12 tests every well once.
+
+R-SQUARED CAN BE NEGATIVE. The engine's own case (golden `metrics-worse-than-mean`): yTrue 1, 2, 3 against yPred 3, 2, 1 gives RMSE 1.632993 and R-squared -3.000000. A negative value means the predictions do worse than the reference mean would.
+
+# SECTION 9: Residuals, well by well (owned by Associate m05 l03)
+
+A residual is y - yhat for one row. Fitted on all 270 sonic rows (GR, RHOB, NPHI), the OLS residuals are grouped here by well. The mean residual of a well is derived: the arithmetic mean of that well's 30 engine residuals. The generator's planted offset for each well (stated, section 2) is printed beside it, less the mean offset of the nine wells, because the intercept absorbs that mean.
+
+| well | mean residual (us/ft), derived | planted offset less the nine-well mean (us/ft), stated | difference, derived |
+| --- | --- | --- | --- |
+| EKENE-1 | 0.265727 | 0.244483 | 0.021244 |
+| EKENE-10 | -5.343678 | -5.187561 | -0.156117 |
+| EKENE-2 | -5.829469 | -6.188718 | 0.359250 |
+| EKENE-3 | 0.592822 | 0.903752 | -0.310930 |
+| EKENE-4 | -1.782004 | -1.345958 | -0.436046 |
+| EKENE-5 | -1.698368 | -1.808898 | 0.110529 |
+| EKENE-7 | 5.120888 | 4.483635 | 0.637253 |
+| EKENE-8 | 1.940815 | 2.145710 | -0.204896 |
+| EKENE-9 | 6.733268 | 6.753554 | -0.020286 |
+
+The largest |difference| is 0.637253 us/ft, and the well means span 12.562737 us/ft from the lowest to the highest (derived). Each well sits above or below the plane as a block. That is the structure a random-row split leaks (section 13), and the reason rows of one well are not independent test cases.
+
+With an intercept the residuals of the fitted rows sum to zero up to rounding: here -1.99e-12 us/ft over 270 rows (derived). The R-squared of this fit is 0.728027 and its residual standard error 5.333216 us/ft.
+
+# SECTION 10: One well held out, end to end (owned by Associate m06)
+
+The whole workflow in order, on the Ekene sonic wells, with every call the engine makes and what it returned:
+
+| step | call | what it returned |
+| --- | --- | --- |
+| 1. choose the rows | `groupSplit` with nTestGroups 1 and seed 5 | test well EKENE-8, 30 rows; 8 training wells, 240 rows |
+| 2. fit on the training rows only | `ols` on GR, RHOB, NPHI | coefficients 8.829369, 0.320501, 17.445328, 139.804854; R-squared 0.709438 |
+| 3. predict the held-out well | `predict` | 30 predicted DT values |
+| 4. score the held-out well | `regressionMetrics` | RMSE 3.765285 us/ft, MAE 2.958753 us/ft, R-squared about its own mean 0.832560 |
+| 5. score the training rows, for comparison | `regressionMetrics` on the fitted values | RMSE 5.462405 us/ft, R-squared 0.709438 |
+
+Which well is held out changes the score. One well at a time, seed by seed (each a separate call):
+
+| seed, stated | held-out well | RMSE (us/ft) | MAE (us/ft) | R-squared about the well's own mean |
+| --- | --- | --- | --- | --- |
+| 1 | EKENE-8 | 3.765285 | 2.958753 | 0.832560 |
+| 2 | EKENE-5 | 4.547894 | 3.888222 | 0.782233 |
+| 3 | EKENE-2 | 7.260092 | 6.681459 | 0.482707 |
+| 4 | EKENE-3 | 3.564857 | 2.756919 | 0.736197 |
+| 6 | EKENE-7 | 6.502833 | 5.838771 | 0.502611 |
+
+The first seed that holds out each of five different wells is listed. A single held-out well is one reading of how the model does on a new well, and section 12 averages over every well.
+
+SCALING AND LEAST SQUARES. Fitted on standardised features the coefficients change units (us/ft per training standard deviation): 105.119167, 6.898926, 2.402069, 4.610720. The predictions for the held-out well differ from the unscaled fit's by at most 1.42e-14 us/ft (derived), which is rounding: least squares with an intercept gives the same fitted plane under any rescaling of a feature. Scaling matters to the penalised fits of section 11.
+
+# SECTION 11: Ridge and the bias-variance trade (owned by Professional m01)
+
+Ridge minimises sum (y - b0 - z'b)^2 + lambda x sum b_j^2 on features standardised with the population SD of the rows passed; the intercept b0 is not penalised. Here it is fitted on the 180 training rows of the teaching split with the three logs AND the four well-level attributes (easting, northing, kb, mudWeight): seven features, six training wells. The test wells are the three of section 4.
+
+| lambda, stated | effective degrees of freedom | training R-squared | test RMSE (us/ft) | test MAE (us/ft) |
+| --- | --- | --- | --- | --- |
+| 0 | 7.000000 | 0.861914 | 16.999672 | 15.883282 |
+| 0.1 | 6.969214 | 0.861901 | 16.831728 | 15.717127 |
+| 1 | 6.724037 | 0.860878 | 15.485689 | 14.382834 |
+| 10 | 5.568235 | 0.833394 | 9.418023 | 8.317834 |
+| 100 | 3.458214 | 0.688743 | 5.759287 | 4.769725 |
+| 1000 | 0.965695 | 0.265317 | 8.607538 | 7.187084 |
+
+As lambda grows the training R-squared falls every step, from 0.861914 to 0.265317: the penalty pulls the fit away from the training rows (more bias). The test RMSE first falls, from 16.999672 at lambda 0 to 5.759287 at lambda 100, then rises again to 8.607538 at lambda 1000. At lambda 0 the seven coefficients chase the six training wells' offsets through the four attributes (more variance); a moderate penalty trades a little bias for much less variance. This is one split: section 12 chooses lambda over every well.
+
+The standardised coefficients (per training standard deviation of each feature; the first entry is the intercept in standardised space, which is the training mean of y):
+
+| term | lambda 0 | lambda 10 | lambda 100 |
+| --- | --- | --- | --- |
+| intercept | 105.883333 | 105.883333 | 105.883333 |
+| GR | 7.109316 | 6.235322 | 3.972291 |
+| RHOB | 2.794047 | 2.976936 | 2.453848 |
+| NPHI | 4.748874 | 4.404522 | 2.257166 |
+| easting | 8.680036 | 3.454502 | 0.098385 |
+| northing | 4.173548 | 1.510277 | -0.274348 |
+| kb | -5.095543 | -3.502338 | -1.782262 |
+| mudWeight | 8.884278 | 4.243369 | 1.045997 |
+
+THE INTERCEPT IS NOT PENALISED: in standardised space it is 105.883333 us/ft at every lambda, the training mean of DT (105.883333, section 8). The basis says: "sum (y - b0 - z'b)^2 + lambda x sum b_j^2, the intercept b0 not penalised".
+
+LAMBDA 0 IS LEAST SQUARES. The ridge coefficients in original units at lambda 0 agree with `ols` on the same rows to a largest relative difference of 3.44e-16 (derived). The original-unit coefficients are b_j / sd_j, and the basis states the conversion: "b_j / sd_j, intercept mean y - sum b_j mean_j / sd_j".
+
+EFFECTIVE DEGREES OF FREEDOM, sum d_i^2 / (d_i^2 + lambda) over the singular values d_i of the standardised features, count how many coefficients the fit is really spending: 7.000000 at lambda 0 (all seven) down to 0.965695 at lambda 1000. The intercept is not counted.
+
+LAMBDA IS ON THE SUM OF SQUARES, so it equals scikit-learn Ridge's alpha on the same standardised features; the basis says: "on the sum of squares: equals scikit-learn Ridge(alpha = lambda, fit_intercept = True) on the same standardised features". It is not divided by the number of rows, so the same lambda is a stronger penalty on fewer rows.
+
+# SECTION 12: Cross-validation by wells: every well tested once (owned by Professional m02)
+
+`groupKFold` sorts the well names, shuffles them once with the seed, and deals them round robin: the well at shuffled position q goes to fold q mod k. Each fold tests on its wells and trains on every other well, so every well is tested exactly once. With k = 3 and seed 5 on the nine sonic wells:
+
+| fold | test wells | test rows | training rows |
+| --- | --- | --- | --- |
+| 0 | EKENE-10, EKENE-2, EKENE-8 | 90 | 180 |
+| 1 | EKENE-1, EKENE-4, EKENE-9 | 90 | 180 |
+| 2 | EKENE-3, EKENE-5, EKENE-7 | 90 | 180 |
+
+The shuffled order is EKENE-8, EKENE-4, EKENE-5, EKENE-2, EKENE-1, EKENE-3, EKENE-10, EKENE-9, EKENE-7: positions 0, 3 and 6 go to fold 0, positions 1, 4 and 7 to fold 1, positions 2, 5 and 8 to fold 2.
+
+Test RMSE (us/ft) of ridge on each fold, and the mean over the three folds (derived, the arithmetic mean of the three):
+
+| features | lambda, stated | fold 0 | fold 1 | fold 2 | mean, derived |
+| --- | --- | --- | --- | --- | --- |
+| GR, RHOB, NPHI | 0 | 6.779400 | 5.779067 | 5.107563 | 5.888677 |
+| GR, RHOB, NPHI | 0.1 | 6.777391 | 5.778080 | 5.104793 | 5.886755 |
+| GR, RHOB, NPHI | 1 | 6.762005 | 5.771086 | 5.082945 | 5.872012 |
+| GR, RHOB, NPHI | 10 | 6.715438 | 5.776388 | 4.988542 | 5.826789 |
+| GR, RHOB, NPHI | 100 | 7.268822 | 6.623012 | 5.511564 | 6.467800 |
+| GR, RHOB, NPHI | 1000 | 9.780071 | 9.281985 | 8.071123 | 9.044393 |
+| the logs and the four attributes | 0 | 8.257700 | 6.219752 | 8.466595 | 7.648016 |
+| the logs and the four attributes | 0.1 | 8.253205 | 6.214259 | 8.457932 | 7.641799 |
+| the logs and the four attributes | 1 | 8.214786 | 6.168122 | 8.382606 | 7.588505 |
+| the logs and the four attributes | 10 | 7.954222 | 5.899421 | 7.789807 | 7.214483 |
+| the logs and the four attributes | 100 | 7.818369 | 6.285660 | 6.215129 | 6.773053 |
+| the logs and the four attributes | 1000 | 9.842359 | 9.144579 | 7.960841 | 8.982593 |
+
+The lowest mean for the logs alone is 5.826789 us/ft at lambda 10; for the logs with the attributes it is 6.773053 us/ft at lambda 100. Scored on wells the model has not seen, the four well-level attributes make the model worse at every lambda tried: the smallest attribute mean is above the logs-only mean at lambda 10.
+
+LEAVE ONE WELL OUT is k equal to the number of wells, 9, which the engine allows (section 24). Mean test RMSE over the nine folds (derived): the logs at lambda 0 5.495600, the logs at lambda 10 5.501614, the logs with the attributes at lambda 100 6.288507 us/ft.
+
+ROUND ROBIN BALANCES WELLS. With k = 4 on nine wells the folds hold 3, 2, 2, 2 wells (90, 60, 60, 60 rows): fold sizes differ by at most one well. The engine balances the count of wells; scikit-learn's GroupKFold balances rows and is not seeded (section 25).
+
+# SECTION 13: Leakage, and when a random split flatters nothing (owned by Professional m03)
+
+`leakageDemo` fits the same model twice with the same test fraction and seed: once under `randomRowSplit` and once under `groupSplit`. `optimism` is how much better the random-row test score looks; for RMSE it is group test RMSE less random-row test RMSE, so a positive optimism means the random split flattered the model. OLS on the nine sonic wells, test fraction 0.3, seeds 1 to 12 (stated):
+
+| seed | logs: random-row test RMSE | logs: group test RMSE | logs: optimism | with attributes: random-row test RMSE | with attributes: group test RMSE | with attributes: optimism |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | 5.702123 | 5.654181 | -0.047942 | 5.201187 | 5.902813 | 0.701626 |
+| 2 | 5.004763 | 5.765483 | 0.760720 | 4.925593 | 16.020627 | 11.095034 |
+| 3 | 5.342215 | 6.424610 | 1.082396 | 5.264627 | 7.995086 | 2.730459 |
+| 4 | 5.426921 | 4.422634 | -1.004287 | 5.107177 | 13.086835 | 7.979658 |
+| 5 | 6.030242 | 4.282693 | -1.747549 | 5.311723 | 16.999672 | 11.687949 |
+| 6 | 5.918072 | 5.107563 | -0.810509 | 5.262509 | 8.466595 | 3.204086 |
+| 7 | 5.451041 | 3.939971 | -1.511070 | 4.969623 | 10.923032 | 5.953408 |
+| 8 | 5.528424 | 3.689898 | -1.838526 | 4.570675 | 15.207603 | 10.636928 |
+| 9 | 4.883177 | 6.103383 | 1.220206 | 4.521297 | 9.661635 | 5.140337 |
+| 10 | 4.997075 | 3.906451 | -1.090624 | 4.441206 | 12.107460 | 7.666254 |
+| 11 | 5.334782 | 5.895284 | 0.560501 | 4.564491 | 6.337166 | 1.772675 |
+| 12 | 4.998096 | 6.254313 | 1.256217 | 4.299599 | 11.365950 | 7.066351 |
+
+Counts over the 12 seeds (derived): with the attributes the optimism is positive on 12; on the logs alone it is negative on 7. Adding the attributes lowers the random-row test RMSE on 12 seeds and raises the group test RMSE on 12.
+
+WHY. The four attributes are constant down each well, so together they name the well. Under a random-row split every well has rows on both sides (`sharedGroups` lists 9 wells at seed 5), and the model learns each well's sonic offset (section 9) from its training rows and meets it again in the test rows. Under a group split the test wells' offsets were never seen, and the attribute coefficients fitted to six wells extrapolate. At seed 5: with the attributes, random-row RMSE 5.311723 against group RMSE 16.999672; on the logs alone, 6.030242 against 4.282693.
+
+A RANDOM SPLIT DOES NOT ALWAYS FLATTER. On the logs alone no feature names a well, the model cannot learn a well's offset, and the random-row score is neither systematically better nor worse: the optimism is negative on 7 of the 12 seeds and positive on the rest, as the draw of test wells falls. Leakage needs a path from the test rows' identity to the prediction.
+
+THE ENGINE'S OWN WORDS on the two splits: "randomRowSplit(testFraction, seed): rows of one well can land on both sides (sharedGroups)"; "groupSplit(testFraction, seed): whole wells held out; the honest estimate for a new well".
+
+SCALING CAN LEAK TOO. A scaler fitted on all rows has seen the test rows. For least squares it changes nothing in the predictions (section 10) and ridge re-standardises on the rows it is given, but a penalty on standardised features depends on the scale. Logistic regression with l2 = 1 (section 14) on the pay features, standardised once with a scaler fitted on the training wells and once with one fitted on all ten wells, scored by log loss on the three test wells of the all-well teaching split (EKENE-3, EKENE-5, EKENE-7):
+
+| scaler fitted on | RT centre | RT scale | RT coefficient (per scaled unit) | test log loss |
+| --- | --- | --- | --- | --- |
+| the training wells only | 14.045286 | 16.599700 | 3.129011 | 0.126480 |
+| all ten wells | 13.691967 | 16.255862 | 3.083215 | 0.126152 |
+
+The test log loss differs by -3.28e-4 (derived, all wells less training wells). The size is small on these data; the procedure is the defect, because the test wells shaped the transform the model was trained through.
+
+# SECTION 14: Logistic regression on the stated pay rule (owned by Professional m04)
+
+The label is PAY from the stated rule of section 2. The rule reads PHIC, a core calibrated porosity, which is not a feature: the model sees RHOB (g/cm3), NPHI (v/v) and RT (ohm.m) and must learn the label from them. All ten wells carry a PAY label, so the teaching split here is `groupSplit` over the ten wells with fraction 0.3 and seed 5: test wells EKENE-3, EKENE-5, EKENE-7 (90 rows), training wells EKENE-1, EKENE-10, EKENE-2, EKENE-4, EKENE-6, EKENE-8, EKENE-9 (210 rows).
+
+Logistic regression models the probability of PAY = 1 as p = 1 / (1 + exp(-eta)), with eta = b0 + b1 x1 + ... the log odds. The fit on the training wells:
+
+| term | coefficient (log odds per unit) | standard error | coefficient over standard error, derived |
+| --- | --- | --- | --- |
+| intercept | 23.081681 | 14.601030 | 1.580826 |
+| RHOB | -10.716404 | 5.414154 | -1.979331 |
+| NPHI | -9.876360 | 15.424455 | -0.640305 |
+| RT | 0.241141 | 0.038812 | 6.212972 |
+
+| quantity | value |
+| --- | --- |
+| rows | 210 |
+| pay rows in training | 70 |
+| Newton iterations | 10 |
+| converged | true |
+| step halvings | 0 |
+| log likelihood | -24.507027 |
+| deviance, -2 x log likelihood | 49.014054 |
+| null deviance (intercept only) | 267.335951 |
+| separation | none |
+
+READING A COEFFICIENT. The RT coefficient 0.241141 is in log odds per ohm.m: one more ohm.m multiplies the odds of pay by exp(0.241141) = 1.272700 (derived), holding RHOB and NPHI fixed. The RHOB coefficient -10.716404 is per g/cm3, a whole unit of density; per 0.01 g/cm3 it is -0.107164 (derived).
+
+The deviance fell from 267.335951 (intercept only) to 49.014054 with the three features. The standard errors are the square roots of the diagonal of the inverse information at the solution; the basis says: "sqrt(diag((X'WX)^-1)) at the solution, W = p(1 - p)".
+
+PREDICTIONS on the first five test rows (probability of pay and the class the engine assigns):
+
+| test row | well | depth (ft) | RHOB | NPHI | RT | probability | class | PAY |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 60 | EKENE-3 | 7923 | 2.165000 | 0.283000 | 1.250000 | 0.068312 | 0 | 0 |
+| 61 | EKENE-3 | 7924 | 2.428000 | 0.227000 | 27.700000 | 0.817561 | 1 | 0 |
+| 62 | EKENE-3 | 7925 | 2.271000 | 0.280000 | 1.750000 | 0.026632 | 0 | 0 |
+| 63 | EKENE-3 | 7926 | 2.155000 | 0.302000 | 1.240000 | 0.063221 | 0 | 0 |
+| 64 | EKENE-3 | 7927 | 2.510000 | 0.222000 | 2.800000 | 0.004802 | 0 | 0 |
+
+THE THRESHOLD AT ONE HALF. A probability above 0.5 is class 1; exactly 0.5 is class 0. The engine's own case (golden `predict-logistic-half`) gives the probability 0.500000 and the class 0. The basis says: "probability 1 / (1 + exp(-eta)); class 1 when the probability is above 0.5, class 0 at exactly 0.5".
+
+Newton's method and its stopping rule are the Expert tier's (section 20); here the fit took 10 iterations and the basis records the rule: "converged when the largest absolute component of the full Newton step is at most tol 1e-10 (in coefficient units: set tol to the scale of the coefficients when features are in very small or very large units); at most maxIter 100 updates".
+
+# SECTION 15: The confusion matrix, precision, recall and F1 (owned by Professional m05)
+
+The 90 test rows of section 14, true label against the class the engine predicted at the 0.5 threshold. The layout, in the basis's words: "matrix[i][j] counts rows whose TRUE label is labels[i] and PREDICTED label is labels[j] (scikit-learn layout)".
+
+|  | predicted 0 | predicted 1 |
+| --- | --- | --- |
+| true 0 | 62 | 4 |
+| true 1 | 0 | 24 |
+
+| label | TP | FP | FN | support | precision | recall | F1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 0 | 62 | 0 | 4 | 66 | 1.000000 | 0.939394 | 0.968750 |
+| 1 | 24 | 4 | 0 | 24 | 0.857143 | 1.000000 | 0.923077 |
+
+| average | precision | recall | F1 |
+| --- | --- | --- | --- |
+| macro (unweighted mean over labels) | 0.928571 | 0.969697 | 0.945913 |
+| weighted (by support) | 0.961905 | 0.955556 | 0.956571 |
+
+Accuracy is 0.955556: correct over n. Precision of pay = TP / (TP + FP): of the rows called pay, the fraction that are pay. Recall of pay = TP / (TP + FN): of the pay rows, the fraction called pay. F1 = 2TP / (2TP + FP + FN), the harmonic mean of the two wherever both are defined; the basis says: "2TP / (2TP + FP + FN), the harmonic mean of precision and recall where both are defined".
+
+For the pay label here, TP 24, FP 4, FN 0. Label 0 is also a class with its own precision and recall; in a binary report the two classes' rows are the same four counts read from each side.
+
+A ZERO DENOMINATOR. When a label is never predicted its precision is 0 / 0. The engine scores it `zeroDivision` (0 by default, or 1) and lists it in `undefinedRatios`. The engine's own case (golden `report-never-predicted-zd0` and `-zd1`): yTrue ["sand","shale","sand","lime"], yPred ["sand","sand","sand","sand"].
+
+| zeroDivision | undefined ratios | macro precision | macro F1 |
+| --- | --- | --- | --- |
+| 0 | precision of "lime"; precision of "shale" | 0.166667 | 0.222222 |
+| 1 | precision of "lime"; precision of "shale" | 0.833333 | 0.222222 |
+
+The choice moves the macro average, so a report states it. The basis says: "a zero denominator scores 0 (scikit-learn zero_division = 0)".
+
+# SECTION 16: ROC, AUC and log loss (owned by Professional m06)
+
+The ROC curve lowers a threshold through the scores and plots the true positive rate (recall of pay) against the false positive rate. The engine places one point per DISTINCT score, starting at (0, 0) with threshold null. On the 90 test rows of section 14: 24 positives, 66 negatives, 90 distinct probabilities, 91 points.
+
+| quantity | value |
+| --- | --- |
+| AUC, trapezoid rule over the points | 0.997475 |
+| log loss, natural log | 0.115676 |
+| rows clipped | 0 |
+| eps | 1.00e-15 |
+
+AUC AS A PROBABILITY. Over every (pay, non-pay) pair of test rows, 1584 pairs, the pay row has the higher probability in 1580 (derived, a tie counting one half): 0.997475, which differs from the trapezoid AUC by 1.11e-16. The basis says: "trapezoid rule over the curve points (equals the Mann-Whitney probability with ties counted one half)".
+
+TIED SCORES MOVE TOGETHER. The engine's own case (golden `roc-ties`): yTrue [0,1,0,1,1,0], scores [0.1,0.4,0.4,0.8,0.8,0.2].
+
+| point | threshold | FPR | TPR |
+| --- | --- | --- | --- |
+| 0 | null | 0.000000 | 0.000000 |
+| 1 | 0.800000 | 0.000000 | 0.666667 |
+| 2 | 0.400000 | 0.333333 | 1.000000 |
+| 3 | 0.200000 | 0.666667 | 1.000000 |
+| 4 | 0.100000 | 1.000000 | 1.000000 |
+
+AUC 0.944444. Where a threshold holds a positive and a negative at the same score, the curve steps diagonally; the basis says: "equal scores are one threshold: their rows move together, a diagonal step when the classes are mixed".
+
+Every score equal (golden `roc-all-tied`) gives the single diagonal step and AUC 0.500000.
+
+LOG LOSS AND ITS CLIP. Log loss is -(1/n) sum [y ln p + (1 - y) ln(1 - p)] and punishes a confident wrong probability without limit, so the engine clips p to [eps, 1 - eps] with eps = 1.00e-15 and counts the rows it clipped. The engine's own cases: a probability of one half everywhere (golden `logloss-half`) reads 0.693147, which is ln 2; probabilities of exactly 0 and 1 (golden `logloss-clipped`, yTrue [1,0,1,0], probabilities [1,0,0,0.3]) read 8.723863 with 3 rows clipped.
+
+AUC reads only the ORDER of the scores; log loss reads the probabilities themselves. On the test wells the AUC is 0.997475 and the log loss 0.115676; the accuracy at the 0.5 threshold (section 15) is 0.955556.
+
+# SECTION 17: The condition number, raw and scaled, and the refusal limit (owned by Expert m01)
+
+The condition number of a design says how much a small change in the data can move the least squares coefficients. The engine reports two: `conditionNumber`, the 2-norm condition number of the design as given (the intercept column of ones included), and `scaledConditionNumber`, the same with every column scaled to unit length (Belsley). A fit is REFUSED when the scaled number is above `maxCondition`, default 1.00e+8.
+
+| design (training rows of the teaching split) | condition number, raw | scaled condition number | R-squared |
+| --- | --- | --- | --- |
+| the three logs | 5595.200723 | 193.359232 | 0.683457 |
+| the logs and the depth | 751074.623153 | 225.474144 | 0.698882 |
+| the logs and the four attributes | 964782.182336 | 7608.495043 | 0.861914 |
+| the logs and the four attributes, every feature centred on its training mean (derived) | 1251.765912 | 8.661304 | 0.861914 |
+
+The raw number mixes units: a column in thousands of feet beside one in g/cm3 reads as ill-conditioned whatever the data. The scaled number removes the units and measures near-collinearity. Easting sits far from zero and varies little (over the training rows its mean is 414.173333 km and its population SD 0.772284 km, derived), so with an intercept it is nearly a multiple of the column of ones, and northing the same: the scaled number of the attribute design is 7608.495043. Centring every feature on its training mean (arithmetic done here, stated) brings it to 8.661304 and leaves the fit itself unchanged: R-squared moves by 0. The refusal message names that remedy.
+
+AN EXACT COPY. Add a fifth column that is exactly twice NPHI. The scaled condition number becomes 6.22e+16 (read with maxCondition raised to 1e300 so the number is returned), and at the default the fit is refused. The engine's own words:
+
+> X is too ill-conditioned for a float64 least squares fit: the scaled condition number 62175765717049960 is above maxCondition 100000000, so some coefficients could carry no reliable digits; drop or combine collinear features, centre or rescale them, or raise maxCondition knowingly
+
+WHY 1e8. A least squares solution can lose up to about kappa^2 x machine epsilon of relative accuracy in the worst case. At kappa = 1.00e+8, kappa^2 x 2.220446049250313e-16 = 2.220446 (derived): the worst-case error bound reaches the size of the coefficient, so no digit of some coefficient can be guaranteed. The basis says: "2-norm condition number of the design with unit-length columns; refused above maxCondition 100000000".
+
+THE LIMIT, BRACKETED. The NIST Longley design (section 18) has a scaled condition number of 43275.043587. With maxCondition 43000 (golden `ols-longley-below-limit`) it is refused; with 44000 (golden `ols-longley-limit-44000`) it is fitted. A value exactly at the limit is fitted: the refusal is for a number strictly above it.
+
+# SECTION 18: The NIST reference problems, and what a digit means (owned by Expert m01)
+
+The NIST/ITL Statistical Reference Datasets for linear least squares publish certified coefficients, standard deviations, residual standard deviation and R-squared, computed in multiple precision. The eleven source files are vendored with the engine; the rows below run the engine on the vendored golden's own inputs (the design exactly as the golden builds it) and compare with the certified values the golden reads from those files.
+
+A DIGIT OF AGREEMENT is the log relative error, LRE = -log10(|estimate - certified| / |certified|), capped at 16 when the two are identical in float; derived here from the engine value and the certified string. An LRE of 14 means the first fourteen significant digits agree.
+
+| dataset | rows | coefficients | scaled condition number | smallest coefficient LRE, derived | R-squared LRE, derived | float-design limit, golden |
+| --- | --- | --- | --- | --- | --- | --- |
+| Norris | 36 | 2 | 2.800505 | 14.06 | 15.48 | 14.07 |
+| Pontius | 40 | 3 | 18.446824 | 13.51 | 15.95 | 13.51 |
+| NoInt1 | 11 | 1 | 1.000000 | 14.72 | 15.65 | 14.74 |
+| NoInt2 | 3 | 1 | 1.000000 | 15.34 | 15.95 | 15.43 |
+| Longley | 16 | 7 | 43275.043587 | 14.62 | 15.48 | 14.62 |
+| Wampler1 | 21 | 6 | 2220.208496 | 16.00 | 16.00 | 16 |
+| Wampler2 | 21 | 6 | 2220.208496 | 13.20 | 16.00 | 13.2 |
+| Wampler3 | 21 | 6 | 2220.208496 | 16.00 | 15.95 | 16 |
+| Wampler4 | 21 | 6 | 2220.208496 | 16.00 | 15.94 | 16 |
+| Wampler5 | 21 | 6 | 2220.208496 | 16.00 | 13.73 | 16 |
+| Filip, maxCondition 1e10 | 82 | 11 | 5206821213.915052 | 7.66 | 10.37 | 7.66 |
+
+Every dataset but Filip agrees with the certified coefficients to at least 13 significant digits (derived, the smallest LRE above). The float-design limit (golden `nistFloatDesignDigits`) is the oracle's measure of how many certified digits the float64 inputs themselves allow: the exact solution of the design as rounded to float64.
+
+FILIP, REFUSED AT THE DEFAULT. Filip is a degree ten polynomial in one variable, 82 rows and 11 coefficients, and NIST rates it higher difficulty. At the default limit the engine refuses it (golden `nist-filip-refused`):
+
+> X is too ill-conditioned for a float64 least squares fit: the scaled condition number 5206821213.915052 is above maxCondition 100000000, so some coefficients could carry no reliable digits; drop or combine collinear features, centre or rescale them, or raise maxCondition knowingly
+
+Raised knowingly to maxCondition 1e10 it is fitted, and its smallest coefficient LRE is 7.66 against a float-design limit of 7.66: the certified values cannot be reached from float64 data by any method to more digits than that, so the missing digits are an input limit. A refusal at the default is the engine declining to print coefficients it cannot vouch for.
+
+LONGLEY, the classic test of 1967 (Longley, Journal of the American Statistical Association 62, 819 to 841), six economic series, 16 rows: coefficient LRE 14.62 at a scaled condition number of 43275.043587, and the certified R-squared to 15.48 digits.
+
+# SECTION 19: Separation, and the exact test before any iteration (owned by Expert m02)
+
+When a hyperplane in the features puts every PAY = 1 row on one side and every PAY = 0 row on the other, the log likelihood keeps rising as the coefficients grow and the maximum likelihood coefficients are infinite. The Ekene pay rule does exactly that on its own input: among the 106 rows with RT at or above 10 ohm.m, PAY is 1 precisely when PHIC is at least 0.16. Logistic on PHIC alone for those rows is refused before any iteration:
+
+> y is completely separated by a linear combination of the features (every row lies strictly on its own class side of a hyperplane), so the maximum likelihood coefficients are infinite: add an L2 penalty (l2 > 0) or remove the separating feature
+
+WITH A PENALTY the fit is finite. With l2 = 1 on the same rows: PHIC coefficient 0.817700 log odds per v/v, intercept 1.881712, 6 iterations, converged true, and the result reports `separation.type` complete. The penalty (l2 / 2) x sum b_j^2 on the non-intercept coefficients makes the objective bounded; the separation is still there, and the coefficient is set by the penalty rather than by the data.
+
+At l2 = 0.1 the PHIC coefficient is 6.814258: a weaker penalty, a larger coefficient, and no finite limit as l2 goes to zero.
+
+QUASI-COMPLETE SEPARATION: a hyperplane puts every row on its own side or ON the plane, with rows of both classes on the plane. The engine's own case (golden `logistic-quasi-separation`), X [[1],[2],[3],[3],[4],[5]], y [0,0,0,1,1,1]:
+
+> y is quasi-completely separated by a linear combination of the features (every row lies on or on its own class side of a hyperplane, some exactly on it), so the maximum likelihood coefficients are infinite: add an L2 penalty (l2 > 0) or remove the separating feature
+
+THE EXACT TEST. The engine decides separation BEFORE iterating, with two linear programmes on S, the design with each row multiplied by +1 for y = 1 and -1 for y = 0 and each column divided by its largest absolute value. Gordan's theorem: either some beta has S beta > 0 (complete separation) or some w >= 0 with sum 1 has S'w = 0; the engine solves the second as a linear programme, and infeasible means complete. Stiemke's theorem, tested only when Gordan's programme is feasible: either some w >= 1 has S'w = 0 (no separation) or the separation is quasi-complete. Each pair of alternatives is a theorem, so the decision is exact up to the linear programme's feasibility tolerance. The basis says: "dual linear programmes on the column-scaled, sign-flipped design S (lib/lp): COMPLETE when S'w = 0, sum w = 1, w >= 0 is infeasible (Gordan); otherwise QUASI-COMPLETE when S'w = 0, w >= 1 is infeasible (Stiemke), else none; infeasible means an artificial sum above 1e-7 after phase one".
+
+The pay model of section 14 reported `separation.type` none, with the certificate: "weights w >= 1 with S'w = 0 (Stiemke)".
+
+# SECTION 20: Convergence and its stated rule (owned by Expert m03)
+
+Logistic regression has no closed form. The engine takes Newton-Raphson steps from beta = 0: each step solves the Newton system (the information matrix against the score) with `solveSPD`, and the fit stops when the largest absolute component of the FULL Newton step is at most `tol`, default 1.00e-10, or after `maxIter` updates, default 100. The trace of the pay fit of section 14:
+
+| iteration | largest component of the full Newton step | log likelihood after the step | step halvings |
+| --- | --- | --- | --- |
+| 1 | 1.024456 | -46.305377 | 0 |
+| 2 | 2.796103 | -30.214668 | 0 |
+| 3 | 5.791631 | -25.899408 | 0 |
+| 4 | 7.440994 | -24.740838 | 0 |
+| 5 | 5.014085 | -24.519775 | 0 |
+| 6 | 1.434323 | -24.507083 | 0 |
+| 7 | 0.097613 | -24.507027 | 0 |
+| 8 | 0.000448 | -24.507027 | 0 |
+| 9 | 9.80e-9 | -24.507027 | 0 |
+| 10 | 1.14e-13 | -24.507027 | 0 |
+
+The last step, 1.14e-13, is the first at or below 1.00e-10. Near the solution Newton's method roughly squares the error each step, which is why the step sizes collapse over the last few iterations. The rule is inclusive: a step exactly at tol stops the fit.
+
+WHEN A FIT DOES NOT CONVERGE the engine returns the result with `converged` false and a warning; it is no refusal. The same pay fit with maxIter 3: converged false, 3 iterations, RT coefficient 0.196989 against 0.241141 at convergence. The engine's words:
+
+> did not converge in 3 updates: the last full Newton step had a largest component of 5.791630774699914, above tol 1e-10
+
+THE STOPPING RULE IS IN COEFFICIENT UNITS. A feature in very small units has a very large coefficient, and an absolute tol must be set to match. The engine's own case (golden `logistic-compressibility-per-pa`): rock compressibility in 1/Pa, a feature near 6e-10, 40 rows. With the golden's tol 0.1 it converges in 6 iterations with the compressibility coefficient 6.83e+9; at the default tol 1.00e-10 it runs to 100 updates, converged false, and warns:
+
+> did not converge in 100 updates: the last full Newton step had a largest component of 0.0000014834152759636627, above tol 1e-10
+
+A tol of 0.1 on a coefficient near 6.83e+9 is a relative 1.46e-11 (derived). Rescaling the feature (to 1/GPa, say) is the other remedy. The basis says: "converged when the largest absolute component of the full Newton step is at most tol 0.1 (in coefficient units: set tol to the scale of the coefficients when features are in very small or very large units); at most maxIter 100 updates".
+
+STEP HALVING. A step that lowers the penalised log likelihood by more than 1e-12 x (1 + |l|) is halved, up to 30 times. Convergence is judged on the FULL step before any halving, so a halved step can never fake convergence. The pay fit halved 0 times; the basis says: "Newton-Raphson (IRLS) from beta = 0; a step is halved while it lowers the penalised log likelihood by more than 1e-12 x (1 + |log likelihood|), up to 30 halvings".
+
+# SECTION 21: Permutation importance (owned by Expert m04)
+
+Permutation importance asks how much worse a fitted model scores when one feature's values are shuffled across the rows, which breaks that feature's link to the target and keeps its distribution. The model is OLS on GR, RHOB, NPHI and CALI fitted on the training wells of the teaching split; it is scored on the 90 test rows by RMSE, 5 repeats, seed 5 (stated). Baseline test RMSE 4.309962 us/ft.
+
+| feature | mean drop (us/ft) | SD over repeats | drops, repeat by repeat |
+| --- | --- | --- | --- |
+| GR | 4.747694 | 0.315115 | 4.955540, 4.682248, 4.227650, 4.704944, 5.168088 |
+| RHOB | 1.754752 | 0.112173 | 1.702529, 1.920164, 1.607983, 1.698329, 1.844754 |
+| NPHI | 3.786311 | 0.323271 | 3.694716, 3.283211, 3.734067, 4.266350, 3.953211 |
+| CALI | -0.031931 | 0.026894 | -0.029560, -0.006560, -0.051118, -0.000415, -0.072004 |
+
+Ranking, largest mean drop first: GR, NPHI, RHOB, CALI. The drop for RMSE is permuted RMSE less baseline RMSE, positive when the feature matters; the basis says: "permuted rmse - baseline rmse (positive when the feature matters)".
+
+CALI, the caliper, was drawn with no link to the sonic (section 2), and it ranks last with a mean drop of -0.031931 us/ft. A drop near zero can come out slightly negative, when a shuffle happens to help, and the engine prints it as it is.
+
+REPEATS AND THEIR SPREAD. The SD is the population SD of the 5 drops. One mulberry32 stream serves the whole call, features in column order and repeats inner, so the drops depend on the seed and on nRepeats; the basis says: "mulberry32(seed), one stream for the call; features in column order, repeats inner; Fisher-Yates from the end over the row order; row i takes the value from row perm[i]".
+
+With seed 6 the mean drops read GR 4.954327, RHOB 1.752107, NPHI 3.651470, CALI -0.022098, ranking GR, NPHI, RHOB, CALI. Quote an importance with its seed and its repeats.
+
+On the pay model of section 14, scored by AUC on its test wells (baseline 0.997475): RHOB 0.019823 (SD 0.009850), NPHI 0.001263 (SD 0.001056), RT 0.398232 (SD 0.015727); ranking RT, RHOB, NPHI. The drop for AUC is baseline less permuted.
+
+Importance is measured on the rows scored, here the test wells, and describes the fitted model: a feature the model leans on, whether or not the rock does.
+
+# SECTION 22: The learning curve, counted in wells (owned by Expert m04)
+
+`learningCurve` holds out test wells with one `groupSplit` (fraction 0.3, seed 5: EKENE-4, EKENE-5, EKENE-8), then fits on the first m training wells of the split's shuffled order, EKENE-2, EKENE-1, EKENE-3, EKENE-10, EKENE-9, EKENE-7, for each m, and scores each fit on its own training rows and on the fixed test wells. Sizes are counted in wells. OLS on GR, RHOB and NPHI, RMSE in us/ft:
+
+| training wells m | training rows | wells used | training RMSE | test RMSE |
+| --- | --- | --- | --- | --- |
+| 1 | 30 | EKENE-2 | 2.749195 | 6.766479 |
+| 2 | 60 | EKENE-2, EKENE-1 | 4.351546 | 4.756657 |
+| 3 | 90 | EKENE-2, EKENE-1, EKENE-3 | 4.346620 | 4.385966 |
+| 4 | 120 | EKENE-2, EKENE-1, EKENE-3, EKENE-10 | 4.482803 | 4.761367 |
+| 5 | 150 | EKENE-2, EKENE-1, EKENE-3, EKENE-10, EKENE-9 | 5.696182 | 4.205658 |
+| 6 | 180 | EKENE-2, EKENE-1, EKENE-3, EKENE-10, EKENE-9, EKENE-7 | 5.758010 | 4.282693 |
+
+With one training well the model scores 2.749195 on its own rows and 6.766479 on the test wells; with 6 it scores 5.758010 and 4.282693. The training score is the fit to wells the model has seen and the test score the error on wells it has not; the curve shows how the second changes as wells are added, well by well in a stated order. A curve still falling at the last point says more wells would help; a flat one says the features, the model, or the well-to-well offsets now set the error.
+
+The test RMSE does not fall at every added well here: the order of the wells is the shuffle's, and a well with a large offset added early or late moves the curve.
+
+# SECTION 23: Missing-log prediction end to end, and writing it back (owned by Expert m05)
+
+EKENE-6 has no sonic (section 2). The task: predict its DT from the logs it does have, say how good the prediction is expected to be, and write it back so no one mistakes it for a measurement. Every step below is a call to the engine.
+
+STEP 1, CHOOSE THE FEATURES AND LAMBDA BY WHOLE WELLS. The k-fold of section 12 (k 3, seed 5) compared feature sets on wells the model had not seen. One more candidate is scored here on the same folds, the logs with the caliper:
+
+| features | lambda | mean test RMSE over the three folds (us/ft), derived |
+| --- | --- | --- |
+| GR, RHOB, NPHI | 0 | 5.888677 |
+| GR, RHOB, NPHI | 10 | 5.826789 |
+| GR, RHOB, NPHI, CALI | 0 | 5.908607 |
+| GR, RHOB, NPHI, CALI | 10 | 5.851480 |
+| the logs and the four attributes | 100 | 6.773053 |
+
+The lowest is the three logs at lambda 10, 5.826789 us/ft. That mean is the expected error for a NEW well LIKE the nine, and it is the number the write-back carries.
+
+STEP 2, FIT ON EVERY WELL THAT HAS THE LOG. Ridge at lambda 10 on all 270 sonic rows: coefficients in original units 2.521897, 0.292658, 21.134015, 137.387028 (intercept, GR, RHOB, NPHI).
+
+STEP 3, CHECK THE NEW WELL AGAINST THE TRAINING RANGE. Min-max scaling fitted on the nine wells (section 6) maps 4 of the 30 EKENE-6 rows above 1 on GR, the highest to 1.219324. On those rows the model extrapolates. The well was drilled through a hot shale (stated, section 2): its GR reads 30 gAPI above what the rock alone gives on every row, and GR carries a positive coefficient.
+
+STEP 4, PREDICT. 30 predicted DT values, from 100.024605 to 136.515569 us/ft.
+
+STEP 5, ONLY BECAUSE THIS FIELD IS SYNTHETIC: CHECK AGAINST THE WITHHELD SONIC. A real well gives no such check; the generator kept the DT it drew (section 2).
+
+| rows of EKENE-6 | rows | RMSE against the withheld DT (us/ft) | MAE (us/ft) |
+| --- | --- | --- | --- |
+| all | 30 | 13.176539 | 12.708542 |
+| GR inside the training range | 26 | 12.887017 | 12.483374 |
+| GR above the training range | 4 | 14.922136 | 14.172130 |
+
+The mean of predicted less withheld is 12.708542 us/ft (derived): the predictions sit high on every row, inside the range as well as above it. Two stated causes account for it. The hot shale adds 30 gAPI to every EKENE-6 sample, and the GR coefficient of 0.292658 us/ft per gAPI turns that into 8.779741 us/ft on every row (derived, coefficient x 30). The well's own planted sonic offset, less the nine-well mean the intercept absorbed, is -5.138713 us/ft (stated, as in section 9); a prediction cannot know it. 8.779741 less -5.138713 is 13.918453 (derived), within 1.209912 of the mean error.
+
+A RANGE CHECK SEES ONLY THE ROWS THAT LEAVE THE RANGE. Min-max flagged 4 rows, and those read 14.922136 against 12.887017 inside the range: the 26 rows inside it are shifted by the same hot shale and pass the check. The RMSE on the whole well, 13.176539, is above the k-fold estimate of 5.826789, which holds for a well like the nine. A shift that keeps a well inside the training range is found by comparing its logs with its neighbours' (the data quality course) and by the geology, and never by the scaler.
+
+STEP 6, WRITE IT BACK HONESTLY. The course's rule for a predicted log, every value in it taken from the steps above:
+
+| item | what is written |
+| --- | --- |
+| channel name | a new channel, DT_PRED, beside the measured DT; the measured DT stays null |
+| method | ridge, lambda 10, features GR, RHOB, NPHI, fitted on 270 rows of 9 wells |
+| wells trained on | EKENE-1, EKENE-10, EKENE-2, EKENE-3, EKENE-4, EKENE-5, EKENE-7, EKENE-8, EKENE-9 |
+| expected error | k-fold by wells, k 3, seed 5: mean test RMSE 5.826789 us/ft |
+| rows outside the training range | 4 of 30, GR above the nine-well maximum 120.870000 gAPI; flagged row by row |
+| what is not claimed | no error for rows outside the range, and no measurement |
+
+A prediction written back without its method, its training wells, its expected error and its out-of-range flags will be read later as a measurement.
+
+# SECTION 24: Where each boundary falls, rule by rule (owned by Expert m06 and Professional m04 l04)
+
+Each rule draws its own boundary; nothing here is global. Every row is a real call or quotes the engine's basis.
+
+| function | rule | boundary | shown by |
+| --- | --- | --- | --- |
+| `fitStandardScaler`, `fitMinMaxScaler` | refuse a constant feature | only when every training value is identical | [2, 2, 2.0000000001] is fitted (scale 4.71e-11); [2, 2, 2] is refused |
+| `applyScaler` (min-max) | no clipping | a new row outside the training range maps outside [0, 1] | EKENE-6 GR to 1.219324 (section 6) |
+| `groupSplit`, `randomRowSplit` | test size ceil(f x count) | a product within 1e-9 of a whole number is that number | 0.28 x 25 holds out 7 (section 5) |
+| `groupKFold` | 2 <= k <= number of groups | k equal to the number of groups is allowed (leave one out) | k 9 on nine wells is fitted; k 10 is refused (section 12, section 3) |
+| `ols` | more rows than coefficients | n = p is refused | 2 rows for 2 coefficients refused; 3 rows fitted, residual degrees of freedom 1 |
+| `ols`, `ridge` | refuse the scaled condition number above maxCondition | exactly at the limit is fitted | Longley refused at 43000, fitted at 44000 (section 17) |
+| `logistic` | converged when the largest full Newton step is at most tol | inclusive | the pay fit stops at a step of 1.14e-13 (section 20) |
+| `logistic` | halve a step that lowers the penalised log likelihood | a fall of more than 1e-12 x (1 + |l|); strict | the pay fit halved 0 times |
+| `solveSPD` | singular | a diagonal entry at or below zero, or a scaled pivot at or below p x machine epsilon; inclusive | the rank one matrix of section 3 |
+| `predict` (logistic) | class 1 | a probability above 0.5; exactly 0.5 is class 0 | golden `predict-logistic-half` (section 14) |
+| `rocCurve` | a row is called positive | at a score at or above the threshold; equal scores move together | golden `roc-ties` (section 16) |
+| `logLoss` | clip to [eps, 1 - eps] | a probability equal to eps is kept | p = 1.00e-15 clips 0 rows; p = 1e-16 clips 1 |
+| `classificationReport` | score zeroDivision | only when a denominator is 0 | yTrue [0, 1, 1], yPred [0, 1, 0]: 0 undefined ratios |
+
+# SECTION 25: Conventions that are choices, and what is not built (owned by Expert m06)
+
+Every convention below is a choice the engine states in its basis. Each has a real alternative in common use; name the choice when a number from this engine is compared with one from another tool.
+
+| convention | this engine | a common alternative | why the engine chose it |
+| --- | --- | --- | --- |
+| scaler divisor | population SD (n) | sample SD (n - 1), which the data quality course uses for its z-score | ridge lambda then equals scikit-learn alpha on the same features |
+| random draws | mulberry32(seed), Fisher-Yates from the end | a library generator (numpy, scikit-learn) | one canonical generator across the platform; no library reproduces its draws, so splits are compared by well list |
+| group names | sorted by UTF-16 code unit before the shuffle | natural order (EKENE-2 before EKENE-10) | a stated order that needs no parsing of names |
+| k-fold | round robin over shuffled groups: balances the number of wells | scikit-learn GroupKFold: balances rows, not seeded | seeded and reproducible; every well tested once |
+| test R-squared | about the mean of the test targets | about the training mean (referenceMean) | matches scikit-learn r2_score; the option is there |
+| OLS refusal | scaled condition number above 1.00e+8 | fit anything and warn | at 1e8 the worst-case bound reaches the coefficient itself |
+| logistic stop | largest full Newton step at most 1.00e-10, in coefficient units | a relative or column-scaled rule | the full step cannot be faked by halving; the unit is stated in the basis |
+| separation | decided exactly by two linear programmes before iterating, refused at l2 = 0 | iterate and watch the coefficients grow | a separated maximum likelihood fit has no finite answer to print |
+| F1 | 2TP / (2TP + FP + FN) | the harmonic mean of precision and recall | equal wherever both are defined, and defined in more cases |
+| ROC start | threshold null | scikit-learn prints infinity | JSON has no infinity |
+| log loss clip | eps = 1.00e-15 | the float dtype epsilon (scikit-learn 1.9) | a stated constant |
+| permutation drop | loss of score, positive when the feature matters | the raw permuted score | one sign for every metric |
+| learning curve size | counted in wells | counted in rows | rows of one well are not independent |
+
+WHAT IS NOT BUILT. The engine fits linear models only (least squares, ridge, binary logistic). There is no tree, forest, boosting, neural network, neighbour rule or clustering (clustering and facies are the electrofacies course's), no multiclass logistic, no nonlinear feature expansion, no prediction interval and no sampling of inputs (uncertainty is its own course's), no imputation (a missing value is refused), no stratified split and no time-ordered split (forecasting is its own course's), and no search over lambda or features: the course runs the folds and prints the scores it compared.
+
+# SECTION 26: Vocabulary this course legislates before a word is written (owned by Associate m01 and Professional m01 and Expert m01)
+
+Six words in this course carry a narrower meaning than they have in conversation or elsewhere in the academy. The rule for each is binding on every lesson, bank question, key truth and panel.
+
+| word | what it can mean elsewhere | the rule here |
+| --- | --- | --- |
+| test | any check | rows the model was not fitted on; in this course a whole well held out, unless the text names a random-row split |
+| standard deviation | either divisor | name the divisor: the scaler uses the population SD (n); the data quality course's z-score uses the sample SD (n - 1) |
+| R-squared | one number per fit | name the rows and the reference mean: the training fit, the test rows about their own mean, or the test rows about the training mean |
+| separation | any split of the data | the logistic property: a hyperplane puts the classes on their own sides (complete) or on or beside it (quasi-complete). A split is a split |
+| importance | how much a feature matters in the rock | the loss of score when the feature is shuffled, for this fitted model, on these rows, with this seed and these repeats |
+| machine learning | any automated judgement | a fitted statistical model named by its method (least squares, ridge, logistic); no lesson calls a model artificial intelligence |
+
+No P label is used in this course. A probability from the logistic model is the probability of PAY = 1 for that row.
