@@ -100,7 +100,7 @@ const AppContent = () => {
 function App() {
   return (
     <>
-      <Helmet><title>Petrolord NextGen Suite</title><meta name="description" content="Digital Operating System for Energy Enterprise" /></Helmet>
+      <Helmet><title>Petrolord NextGen Academy</title><meta name="description" content="The academy of the Petrolord Suite: hands-on energy industry courses with auto-graded practicals and verifiable certifications." /></Helmet>
       <RoleProvider><SearchProvider><DeviceGuard><AppContent /></DeviceGuard></SearchProvider></RoleProvider><Toaster />
     </>
   );

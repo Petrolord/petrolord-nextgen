@@ -34,9 +34,9 @@ const Footer = () => {
             <span className="text-white font-semibold text-base block mb-2">Academy</span>
             <ul className="space-y-3">
               <li><Link to="/register" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Create Account</Link></li>
-              <li><a href="/#doors" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">How to Join</a></li>
-              <li><a href="/#modules" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Modules</a></li>
-              <li><a href="/#pricing" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Pricing</a></li>
+              <li><a href="/#how" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">How It Works</a></li>
+              <li><a href="/#courses" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Courses</a></li>
+              <li><a href="/#fees" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Fees</a></li>
               <li><Link to="/verify" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">Verify a Certificate</Link></li>
             </ul>
           </div>
@@ -84,6 +84,12 @@ const Footer = () => {
                 <Mail className="w-5 h-5 text-[#BFFF00] mt-0.5 shrink-0" />
                 <a href="mailto:info@petrolord.com" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">
                   info@petrolord.com
+                </a>
+              </li>
+              <li className="flex items-start gap-3">
+                <Mail className="w-5 h-5 text-[#BFFF00] mt-0.5 shrink-0" />
+                <a href="mailto:info@lordswayenergy.com" className="text-sm text-slate-400 hover:text-[#BFFF00] transition-colors">
+                  info@lordswayenergy.com
                 </a>
               </li>
             </ul>

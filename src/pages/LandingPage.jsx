@@ -1,587 +1,486 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { ArrowRight, CheckCircle2, Mail, Menu, X, GraduationCap, Unlock, ShieldAlert, BookOpen, CreditCard, Briefcase, Microscope, Award, BadgeCheck, UserPlus, ClipboardCheck, Layers, Database, HardHat, Fuel, DollarSign, Factory, ShieldCheck, HeartPulse, Leaf, CandlestickChart, Ship, BrainCircuit } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { motion } from 'framer-motion';
-import Footer from '@/components/Footer';
+import { Link, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
+import { ArrowRight, Check, Menu, Search, X } from 'lucide-react';
+import { listAcademyApps } from '@/services/academyService';
+import { HOME_COURSES, HOME_MODULES, mergeCatalog, catalogStats } from '@/lib/homeCatalog';
+import './LandingPage.css';
 
-// Landing page reflects the Academy doctrine (NextGen-Academy-PLAN §1):
-// one identity, four doors; the catalog is the app catalog; certification
-// ladder Associate → Professional → Expert; published per-school fees.
-// Keep this page in sync with academy_apps / academy_fees when they change.
+// Homepage, regal redesign (2026-09-25, owner approved). Written for two
+// readers at a glance: the professional choosing a course and the employer
+// buying seats. Course list and counts come from src/lib/homeCatalog.js,
+// with live status from academy_apps. Fees mirror academy_fees (every course
+// is on the subsurface schedule today); update both together.
 
-const DOORS = [{
-  icon: CreditCard,
-  title: 'Self-Enrolled',
-  desc: 'Register with your personal email, pick a course and tier, and pay the course fee securely online. Start learning the same day.'
-}, {
-  icon: GraduationCap,
-  title: 'Campus Scholar',
-  desc: 'For university cohorts: your liaison gives you a cohort code that applies a scholarship to the course fee, and a small personal registration fee (once per account) is all you pay.'
-}, {
-  icon: Microscope,
-  title: 'Residency',
-  desc: 'A selective, in-person, time-boxed intake at the Lordsway facility with instructor supervision and a small number of places. Intakes open when the new facility is ready in 2027; applications are not being accepted yet.'
-}, {
-  icon: Briefcase,
-  title: 'Employer-Sponsored',
-  desc: 'Redeem a sponsorship code from your employer. Your sponsor covers the course fee, while the account, courses and certificate remain yours.'
-}];
+const LOGO = 'https://horizons-cdn.hostinger.com/80504870-35f5-4fc9-ba7f-f8bc12cf282f/petrolord-symbol-512-4kVUt.png';
+const INITIAL_COUNT = 12;
 
-const LADDER = [{
-  tier: 'Beginner',
-  cert: 'Associate',
-  desc: 'Learn the app on bundled teaching datasets. Certifying unlocks working mode: your own data, core features, training watermark removed.'
-}, {
-  tier: 'Intermediate',
-  cert: 'Professional',
-  desc: 'Deeper workflows and advanced capabilities of the app, certified against the same auto-graded standard.'
-}, {
-  tier: 'Advanced',
-  cert: 'Expert',
-  desc: 'Full capability, the highest quotas and all export formats, plus a discounted pathway into the professional Petrolord Suite.'
-}];
+const NAV = [
+  ['#courses', 'Courses'],
+  ['#employers', 'For Employers'],
+  ['#how', 'How It Works'],
+  ['#fees', 'Fees'],
+  ['#verify', 'Verify a Certificate'],
+];
 
-// Module buckets mirror the Suite dashboard tiles plus the four new
-// modules introduced for the commercial and energy-business app wave
-// (2026-07-15 owner direction). `coming` lists the apps planned for the
-// bucket, flagship first; keep in sync as the owner adds courses.
-const MODULES = [{
-  name: 'Geoscience',
-  icon: Layers,
-  color: 'text-emerald-400',
-  bg: 'bg-emerald-500/10',
-  desc: 'Well data, petrophysics, correlation, seismic interpretation, mapping and earth modelling.'
-}, {
-  name: 'Reservoir',
-  icon: Database,
-  color: 'text-blue-400',
-  bg: 'bg-blue-500/10',
-  desc: 'Volumetrics, material balance, decline analysis and waterflood surveillance.'
-}, {
-  name: 'Drilling',
-  icon: HardHat,
-  color: 'text-amber-400',
-  bg: 'bg-amber-500/10',
-  desc: 'Well engineering, cementing and drilling operations.'
-}, {
-  name: 'Production',
-  icon: Fuel,
-  color: 'text-purple-400',
-  bg: 'bg-purple-500/10',
-  desc: 'Production surveillance, allocation and performance optimisation.'
-}, {
-  name: 'Economics',
-  icon: DollarSign,
-  color: 'text-lime-400',
-  bg: 'bg-lime-500/10',
-  desc: 'Project economics, AFE and cost control, fiscal and contract modelling.',
-  coming: ['Fiscal & Contract Economics Modeler']
-}, {
-  name: 'Facilities',
-  icon: Factory,
-  color: 'text-rose-400',
-  bg: 'bg-rose-500/10',
-  desc: 'Surface facilities, flow assurance and pipeline engineering.'
-}, {
-  name: 'Assurance',
-  icon: ShieldCheck,
-  color: 'text-cyan-400',
-  bg: 'bg-cyan-500/10',
-  desc: 'Technical assurance, risk and compliance.'
-}, {
-  name: 'HSE',
-  icon: HeartPulse,
-  color: 'text-red-400',
-  bg: 'bg-red-500/10',
-  desc: 'Health, safety and environment management.'
-}, {
-  name: 'Energy Transition',
-  icon: Leaf,
-  color: 'text-teal-400',
-  bg: 'bg-teal-500/10',
-  desc: 'Carbon accounting, emissions tracking and decarbonisation planning.',
-  coming: ['Carbon & Emissions Studio', 'CCS/CCUS Screening Tool', 'Methane & Flaring Monitor'],
-  isNew: true
-}, {
-  name: 'Commercial & Trading',
-  icon: CandlestickChart,
-  color: 'text-orange-400',
-  bg: 'bg-orange-500/10',
-  desc: 'Energy trading, cargo operations and market analytics.',
-  coming: ['Energy Trading & Cargo Simulator', 'Crude Assay & Blending Manager', 'Price Risk & Hedging Desk'],
-  isNew: true
-}, {
-  name: 'Supply Chain & Logistics',
-  icon: Ship,
-  color: 'text-sky-400',
-  bg: 'bg-sky-500/10',
-  desc: 'Supply chain planning and marine logistics for energy operations.',
-  coming: ['Supply Chain & Marine Logistics Planner', 'Materials & Inventory Manager', 'Vessel Scheduling Optimizer'],
-  isNew: true
-}, {
-  name: 'Data & AI',
-  icon: BrainCircuit,
-  color: 'text-violet-400',
-  bg: 'bg-violet-500/10',
-  desc: 'Oilfield data quality, machine learning on well data and applied AI.',
-  coming: ['Oilfield Data Quality', 'Machine Learning on Well Data', 'Electrofacies', 'Data-Driven Production Forecasting', 'Applied AI and Language Models'],
-  isNew: true
-}];
+const PATHWAYS = [
+  ['Graduate Accelerator', 6, 'Well Data, Petrophysics, DCA, Nodal Analysis, Cash Flow & NPV, Safety KPIs'],
+  ['Wells Delivery', 7, 'Well Design, Pore Pressure, Geomechanics, Well Control, Casing, Cementing, Well Cost'],
+  ['Barrels Now', 6, 'Nodal, Gas Lift, ESP, Flow Assurance, Networks, Surveillance'],
+  ['Asset Integrity & Safety', 5, 'Relief & Flare, Corrosion, LOPA & SIL, Consequence Modelling, QRA'],
+  ['Commercial Leadership', 5, 'Cash Flow & NPV, Fiscal Regimes, Probabilistic Economics, Decision Analysis, FDP'],
+];
 
-const LandingPage = () => {
-  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false);
-  const toggleMobileMenu = () => setMobileMenuOpen(!mobileMenuOpen);
-  const fadeIn = {
-    hidden: {
-      opacity: 0,
-      y: 20
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        duration: 0.6
-      }
-    }
+const SAMPLE_LEARNERS = [
+  ['T. Bello', 'Petrophysics · Associate', 100, '92%', 'done', 'Certified'],
+  ['C. Eze', 'Nodal Analysis · Associate', 78, '84%', 'ok', 'On track'],
+  ['F. Adeyemi', 'DCA · Associate', 64, '76%', 'ok', 'On track'],
+  ['K. Musa', 'Cash Flow & NPV · Associate', 22, 'n/a', 'warn', 'Inactive 16 days'],
+];
+
+const FEES = [
+  ['Associate', 'Beginner tier', '₦60,000', '≈ $40'],
+  ['Professional', 'Intermediate tier', '₦120,000', '≈ $80'],
+  ['Expert', 'Advanced tier', '₦200,000', '≈ $130'],
+];
+
+const moduleLabel = (key) => HOME_MODULES.find((m) => m.key === key)?.label ?? key;
+
+function Catalogue({ courses, stats }) {
+  const [active, setActive] = React.useState('all');
+  const [term, setTerm] = React.useState('');
+  const [expanded, setExpanded] = React.useState(false);
+
+  const live = (key) => courses.filter((c) => c.status === 'available' && (key === 'all' || c.module === key)).length;
+  const mod = HOME_MODULES.find((m) => m.key === active);
+  const q = term.trim().toLowerCase();
+  const matches = courses.filter(
+    (c) => (active === 'all' || c.module === active) && (!q || `${c.name} ${c.blurb}`.toLowerCase().includes(q)),
+  );
+  const capped = active === 'all' && !q && !expanded && matches.length > INITIAL_COUNT;
+  const shown = capped ? matches.slice(0, INITIAL_COUNT) : matches;
+
+  return (
+    <>
+      <div className="tabs" role="tablist" aria-label="Disciplines">
+        {[{ key: 'all', label: 'All' }, ...HOME_MODULES].map((m) => (
+          <button
+            key={m.key}
+            type="button"
+            role="tab"
+            className="tab"
+            aria-selected={active === m.key}
+            onClick={() => { setActive(m.key); setExpanded(false); }}
+          >
+            {m.label}<span className="c">{live(m.key)}</span>
+          </button>
+        ))}
+      </div>
+      <div className="cat-top">
+        <div>
+          <h3>{mod ? mod.label : 'All disciplines'}</h3>
+          <p>{mod ? mod.tagline : `${stats.courses} live courses across ${stats.disciplines} disciplines, with more on the way.`}</p>
+        </div>
+        <label className="search" htmlFor="home-course-search">
+          <Search className="w-4 h-4" aria-hidden="true" />
+          <input
+            id="home-course-search"
+            type="search"
+            placeholder="Search courses, e.g. well control"
+            autoComplete="off"
+            value={term}
+            onChange={(e) => setTerm(e.target.value)}
+          />
+        </label>
+      </div>
+      <div className="grid" aria-live="polite">
+        {shown.length === 0 && (
+          <p className="empty">No course matches that search yet. Try a broader word, or browse by discipline.</p>
+        )}
+        {shown.map((c) => {
+          const soon = c.status !== 'available';
+          return (
+            <article className="course" key={c.slug}>
+              <span className="mod">{moduleLabel(c.module)}</span>
+              {soon ? <span className="pill">Coming soon</span> : c.isNew ? <span className="pill new">New</span> : null}
+              <h4>{c.name}</h4>
+              <p>{c.blurb}</p>
+              {!soon && (
+                <div className="tiers">
+                  <i style={{ background: 'var(--assoc)' }} />
+                  <i style={{ background: 'var(--prof)' }} />
+                  <i style={{ background: 'var(--expert)' }} />
+                  &nbsp;Associate · Professional · Expert
+                </div>
+              )}
+            </article>
+          );
+        })}
+      </div>
+      {capped && (
+        <div className="more">
+          <button type="button" className="btn btn-ink" onClick={() => setExpanded(true)}>
+            Show all courses
+          </button>
+        </div>
+      )}
+    </>
+  );
+}
+
+function VerifyPanel() {
+  const navigate = useNavigate();
+  const [code, setCode] = React.useState('');
+  const [msg, setMsg] = React.useState('');
+  const submit = (e) => {
+    e.preventDefault();
+    const v = code.trim();
+    if (!v) { setMsg('Enter the verification code printed on the certificate.'); return; }
+    navigate(`/verify/${encodeURIComponent(v)}`);
   };
   return (
-    <div className="min-h-screen bg-[#020617] text-slate-50 font-sans flex flex-col selection:bg-[#BFFF00] selection:text-black">
-      {/* Navbar */}
-      <nav className="border-b border-slate-800 bg-[#020617]/80 backdrop-blur-md sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex justify-between items-center h-20">
-            {/* Logo */}
-            <Link to="/" className="flex items-center gap-3 group">
-              <div className="w-10 h-10 flex items-center justify-center overflow-hidden rounded-lg shadow-lg shadow-[#BFFF00]/20 group-hover:shadow-[#BFFF00]/40 transition-all duration-300">
-                 <img alt="Company Logo Icon" className="w-full h-full object-cover" src="https://horizons-cdn.hostinger.com/80504870-35f5-4fc9-ba7f-f8bc12cf282f/petrolord-symbol-512-4kVUt.png" />
+    <div className="panel" id="verify">
+      <p className="eyebrow">Public register</p>
+      <h3>Verify a certificate</h3>
+      <p>Employers, clients and regulators can confirm any NextGen credential without creating an account. Enter the verification code printed on the certificate.</p>
+      <form className="vform" onSubmit={submit}>
+        <input
+          id="home-verify-code"
+          type="text"
+          placeholder="Verification code"
+          aria-label="Verification code"
+          autoComplete="off"
+          value={code}
+          onChange={(e) => { setCode(e.target.value); setMsg(''); }}
+        />
+        <button className="btn btn-ink" type="submit">Verify</button>
+      </form>
+      <p className="vmsg" role="status">{msg}</p>
+    </div>
+  );
+}
+
+const LandingPage = () => {
+  const [menuOpen, setMenuOpen] = React.useState(false);
+  const [courses, setCourses] = React.useState(HOME_COURSES);
+
+  React.useEffect(() => {
+    let alive = true;
+    listAcademyApps()
+      .then((apps) => { if (alive) setCourses(mergeCatalog(HOME_COURSES, apps)); })
+      .catch(() => {}); // keep the static catalogue
+    return () => { alive = false; };
+  }, []);
+
+  const stats = catalogStats(courses);
+  const closeMenu = () => setMenuOpen(false);
+
+  return (
+    <div className="ng-home">
+      <Helmet>
+        <title>Petrolord NextGen Academy | Energy courses with verifiable certifications</title>
+        <meta
+          name="description"
+          content={`${stats.courses} hands-on energy industry courses taught inside the Petrolord Suite, from geoscience to HSE. Auto-graded practicals and Associate, Professional and Expert certificates anyone can verify.`}
+        />
+      </Helmet>
+
+      <header className="site">
+        <div className="wrap nav">
+          <Link className="brand" to="/" aria-label="Petrolord NextGen home">
+            <span className="crest"><img src={LOGO} alt="" /></span>
+            <span>Petrolord <em>NextGen</em></span>
+          </Link>
+          <nav className="links" aria-label="Main">
+            {NAV.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
+          </nav>
+          <div className="nav-cta">
+            <Link className="login" to="/login">Log in</Link>
+            <Link className="btn btn-gold" to="/register">Get started</Link>
+            <button
+              type="button"
+              className="menu-btn"
+              aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+              aria-expanded={menuOpen}
+              onClick={() => setMenuOpen((o) => !o)}
+            >
+              {menuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
+          </div>
+        </div>
+        <nav className={`mobile-menu${menuOpen ? ' open' : ''}`} aria-label="Mobile">
+          {NAV.map(([href, label]) => <a key={href} href={href} onClick={closeMenu}>{label}</a>)}
+          <Link to="/login" onClick={closeMenu}>Log in</Link>
+        </nav>
+      </header>
+
+      <main>
+        <section className="hero">
+          <div className="wrap hero-grid">
+            <div>
+              <p className="eyebrow">The Academy of the Petrolord Suite</p>
+              <h1>Where energy professionals are <em>made, proven and certified.</em></h1>
+              <p className="lede">
+                Train inside the same engineering software used on real assets, across {stats.courses} courses from
+                geoscience to HSE. Every certificate is earned on an auto-graded practical and can be verified by
+                anyone, anywhere.
+              </p>
+              <div className="ctas">
+                <a className="btn btn-gold" href="#courses">Explore the {stats.courses} courses <ArrowRight className="w-4 h-4" /></a>
+                <a className="btn btn-ghost" href="#employers">Train your team</a>
               </div>
-              <span className="text-xl font-bold tracking-tight text-white">Petrolord <span className="text-[#BFFF00]">NextGen</span></span>
-            </Link>
-
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#about" className="text-sm font-medium text-slate-300 hover:text-[#BFFF00] transition-colors">About</a>
-              <a href="#doors" className="text-sm font-medium text-slate-300 hover:text-[#BFFF00] transition-colors">How to Join</a>
-              <a href="#modules" className="text-sm font-medium text-slate-300 hover:text-[#BFFF00] transition-colors">Modules</a>
-              <a href="#pricing" className="text-sm font-medium text-slate-300 hover:text-[#BFFF00] transition-colors">Pricing</a>
-              <Link to="/verify" className="text-sm font-medium text-slate-300 hover:text-[#BFFF00] transition-colors">Verify a Certificate</Link>
+              <p className="fine">Already certified? <a href="#verify">Verify a certificate</a> in seconds.</p>
             </div>
-
-            {/* CTA Buttons */}
-            <div className="hidden md:flex items-center space-x-4">
-              <Link to="/login">
-                <Button variant="ghost" className="text-slate-300 hover:text-white hover:bg-slate-800">Log In</Button>
-              </Link>
-              <Link to="/register">
-                <Button className="bg-[#BFFF00] text-black hover:bg-[#a3d900] font-bold border-none shadow-[0_0_15px_rgba(191,255,0,0.3)] hover:shadow-[0_0_25px_rgba(191,255,0,0.5)] transition-all">Create Account</Button>
-              </Link>
-            </div>
-
-            {/* Mobile Menu Button */}
-            <div className="md:hidden">
-              <button onClick={toggleMobileMenu} className="text-slate-300 hover:text-white p-2">
-                {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-              </button>
+            <div className="cert-stage" aria-label="Sample Professional certificate">
+              <div className="cert">
+                <span className="sample" aria-hidden="true">SAMPLE</span>
+                <div className="cert-top">
+                  <div className="cert-word">Petrolord <em>NextGen</em></div>
+                  <div className="cert-tier">Professional</div>
+                </div>
+                <div className="cert-mid">
+                  <div className="k">Certificate of Professional Certification</div>
+                  <div className="name">Your Name</div>
+                  <div className="cert-course">Nodal Analysis &amp; Well Performance<br />Professional tier · auto-graded capstone passed</div>
+                </div>
+                <div className="cert-bot">
+                  <div className="cert-id">PLA-2026-000000<br />Valid for 12 months</div>
+                  <div className="seal">LORDS<br />WAY</div>
+                  <div className="sig">Registrar<small>Lordsway Energy</small></div>
+                </div>
+              </div>
+              <div className="verified" role="note">
+                <div className="dot"><Check className="w-4 h-4" /></div>
+                <div><b>Verifiable credential</b><span>Checked on the public register, no login needed</span></div>
+              </div>
             </div>
           </div>
-        </div>
-
-        {/* Mobile Menu */}
-        {mobileMenuOpen && (
-          <div className="md:hidden bg-[#1E293B] border-b border-slate-800 py-4 px-4 space-y-4 shadow-xl">
-            <a href="#about" onClick={toggleMobileMenu} className="block text-base font-medium text-slate-300 hover:text-[#BFFF00]">About</a>
-            <a href="#doors" onClick={toggleMobileMenu} className="block text-base font-medium text-slate-300 hover:text-[#BFFF00]">How to Join</a>
-            <a href="#modules" onClick={toggleMobileMenu} className="block text-base font-medium text-slate-300 hover:text-[#BFFF00]">Modules</a>
-            <a href="#pricing" onClick={toggleMobileMenu} className="block text-base font-medium text-slate-300 hover:text-[#BFFF00]">Pricing</a>
-            <Link to="/verify" onClick={toggleMobileMenu} className="block text-base font-medium text-slate-300 hover:text-[#BFFF00]">Verify a Certificate</Link>
-            <div className="pt-4 border-t border-slate-700 flex flex-col gap-3">
-              <Link to="/login" className="w-full">
-                <Button variant="outline" className="w-full justify-center border-slate-600 text-slate-200">Log In</Button>
-              </Link>
-              <Link to="/register" className="w-full">
-                <Button className="w-full justify-center bg-[#BFFF00] text-black hover:bg-[#a3d900] font-bold">Create Account</Button>
-              </Link>
-            </div>
+          <div className="ledger">
+            <ul className="wrap" aria-label="NextGen at a glance">
+              <li><strong>{stats.courses}</strong><span>courses, each built around a real engineering app</span></li>
+              <li><strong>{stats.disciplines}</strong><span>disciplines across the energy value chain</span></li>
+              <li><strong>{stats.certifications}</strong><span>certifications across three tiers</span></li>
+              <li><strong>100%</strong><span>of capstones auto-graded against verified answers</span></li>
+              <li><strong>0</strong><span>software to install. Learn from any browser</span></li>
+            </ul>
           </div>
-        )}
-      </nav>
+        </section>
 
-      {/* Hero Section */}
-      <section className="relative pt-20 pb-32 overflow-hidden">
-        {/* Background Elements */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[600px] bg-gradient-to-b from-[#BFFF00]/10 via-[#BFFF00]/5 to-transparent opacity-20 blur-3xl pointer-events-none" />
-        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=2000&auto=format&fit=crop')] bg-cover bg-center opacity-[0.03] pointer-events-none mix-blend-overlay"></div>
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
-          <motion.div initial="hidden" animate="visible" variants={fadeIn} className="max-w-4xl mx-auto">
-            <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-slate-800/80 border border-slate-700 mb-8 backdrop-blur-md shadow-lg">
-              <span className="flex h-2.5 w-2.5 rounded-full bg-[#BFFF00] animate-pulse"></span>
-              <span className="text-xs font-semibold text-[#BFFF00] uppercase tracking-wider">Petrolord Academy: Enrollment Now Open</span>
+        <section className="block" id="start">
+          <div className="wrap">
+            <div className="head">
+              <p className="eyebrow">Choose your path</p>
+              <h2>Built for ambitious professionals and the companies that grow them.</h2>
             </div>
-
-            <h1 className="text-5xl md:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
-              Learn the Real Tools. <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#BFFF00] to-emerald-400">Earn Verifiable Certifications.</span>
-            </h1>
-
-            <p className="mt-8 max-w-2xl mx-auto text-lg md:text-xl text-slate-300 leading-relaxed">
-              <strong>Petrolord NextGen</strong> is the academy edition of the Petrolord Suite. Train hands-on inside the actual engineering apps, complete auto-graded practicals, and climb the certification ladder from Associate to Professional to Expert.
-            </p>
-
-            <div className="mt-12 flex flex-col sm:flex-row items-center justify-center gap-5">
-              <Link to="/register" className="w-full sm:w-auto">
-                <Button size="lg" className="h-14 px-10 bg-[#BFFF00] text-black hover:bg-[#a3d900] font-bold text-lg w-full shadow-[0_0_20px_rgba(191,255,0,0.4)] hover:shadow-[0_0_30px_rgba(191,255,0,0.6)] transition-all">
-                  Create Your Account
-                  <ArrowRight className="ml-2 w-5 h-5" />
-                </Button>
-              </Link>
-              <a href="#doors" className="w-full sm:w-auto">
-                <Button size="lg" variant="outline" className="h-14 px-10 border-slate-600 text-slate-200 hover:bg-slate-800 hover:text-white font-semibold text-lg w-full">
-                  See How to Join
-                </Button>
-              </a>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* What Is Petrolord NextGen */}
-      <section id="about" className="py-20 bg-[#0F172A] border-y border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid md:grid-cols-2 gap-16 items-center">
-            <motion.div initial={{
-            opacity: 0,
-            x: -20
-          }} whileInView={{
-            opacity: 1,
-            x: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.6
-          }}>
-              <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-                What is Petrolord <span className="text-[#BFFF00]">NextGen</span>?
-              </h2>
-              <div className="space-y-4 text-slate-300 text-lg leading-relaxed">
-                <p>
-                  Petrolord NextGen is the academy of the Petrolord Suite. Each course is built around a real app: you learn Petrophysics inside the actual Petrophysics app, running the same calculation engines that professionals use in their daily work.
-                </p>
-                <p>
-                  Every course pairs lessons and guided exercises on bundled teaching datasets with a quiz and a practical capstone that is auto-graded against verified reference answers. When you certify, your access upgrades automatically, from Learning Mode all the way to full professional capability.
-                </p>
-                <ul className="grid grid-cols-1 gap-3 mt-6">
-                  {['Hands-on learning in the real Petrolord apps and engines', 'Auto-graded capstones with machine-checked answers', 'Certificates anyone can verify online, valid for 12 months', 'Fully cloud-based, with nothing to install'].map((item, i) => <li key={i} className="flex items-center gap-3">
-                      <CheckCircle2 className="w-5 h-5 text-[#BFFF00] shrink-0" />
-                      <span className="text-slate-200">{item}</span>
-                    </li>)}
+            <div className="aud">
+              <article className="pro">
+                <p className="eyebrow">For professionals and graduates</p>
+                <h3>Get job-ready on the tools the industry runs on.</h3>
+                <ul>
+                  <li>Learn inside the real Petrolord apps on realistic field datasets</li>
+                  <li>Climb from Associate to Professional to Expert in each course</li>
+                  <li>Each certificate you earn opens more of the software for your own work</li>
+                  <li>Your account uses your personal email, so it follows your career</li>
                 </ul>
+                <div className="actions">
+                  <a className="btn btn-ink" href="#courses">Find your course</a>
+                  <a className="btn btn-line" href="#fees">See fees</a>
+                </div>
+              </article>
+              <article className="emp">
+                <p className="eyebrow">For employers and sponsors</p>
+                <h3>Turn your training budget into verified capability.</h3>
+                <ul>
+                  <li>Buy seats and assign courses with a single sponsorship code</li>
+                  <li>See every learner&apos;s progress and scores in the Sponsor console</li>
+                  <li>Spot inactive learners automatically after 14 days</li>
+                  <li>Export results to CSV for HR, audits and local content reporting</li>
+                </ul>
+                <div className="actions"><a className="btn btn-gold" href="#employers">Plan a team programme</a></div>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <section className="block flush" id="how">
+          <div className="wrap">
+            <div className="head">
+              <p className="eyebrow">How it works</p>
+              <h2>Four steps from enrolment to a certificate that means something.</h2>
+            </div>
+            <ol className="how">
+              <li><span className="n">STEP 1</span><h3>Enrol</h3><p>Create your account, or redeem your employer&apos;s code. Learning opens the same day.</p></li>
+              <li><span className="n">STEP 2</span><h3>Learn by doing</h3><p>Lessons and guided exercises inside the real app, on teaching datasets built from field-style data.</p></li>
+              <li><span className="n">STEP 3</span><h3>Prove it</h3><p>Pass the quiz and a practical capstone graded automatically against verified reference answers.</p></li>
+              <li><span className="n">STEP 4</span><h3>Certify</h3><p>Receive a certificate with a public verification code, valid for 12 months and renewable.</p></li>
+            </ol>
+          </div>
+        </section>
+
+        <section className="block cat-bg" id="courses">
+          <div className="wrap">
+            <div className="head">
+              <p className="eyebrow">The catalogue</p>
+              <h2>{stats.courses} courses. One academy for the whole value chain.</h2>
+              <p>Every course has Associate, Professional and Expert tiers. Pick a discipline or search by topic.</p>
+            </div>
+            <Catalogue courses={courses} stats={stats} />
+          </div>
+        </section>
+
+        <section className="block" id="ladder">
+          <div className="wrap">
+            <div className="head">
+              <p className="eyebrow">The certification ladder</p>
+              <h2>Three tiers in every course. Each one unlocks more of the software.</h2>
+            </div>
+            <div className="ladder">
+              <article className="rung a"><div className="badge">I</div><p className="who">Graduates and new hires</p><h3>Associate</h3><p>Runs the core workflow correctly and independently.</p><p className="unlock"><b>Unlocks</b> your own data and the core features, with the training watermark removed.</p></article>
+              <article className="rung p"><div className="badge">II</div><p className="who">Working engineers and analysts</p><h3>Professional</h3><p>Handles real complexity, sensitivities and quality checks.</p><p className="unlock"><b>Unlocks</b> the advanced workflows and features of the app.</p></article>
+              <article className="rung e"><div className="badge">III</div><p className="who">Senior staff and future leads</p><h3>Expert</h3><p>Makes and defends decisions, and mentors others.</p><p className="unlock"><b>Unlocks</b> full capability, every export format and a discounted pathway into the Petrolord Suite.</p></article>
+            </div>
+          </div>
+        </section>
+
+        <section className="block emp-sec" id="employers">
+          <div className="wrap">
+            <div className="head">
+              <p className="eyebrow">For employers</p>
+              <h2>Develop your people. <em>See the results.</em></h2>
+              <p>Choose a ready-made pathway or build your own. Your training lead follows every learner from the first lesson to the certificate.</p>
+            </div>
+            <div className="emp-grid">
+              <div className="pathways" aria-label="Ready-made pathways">
+                {PATHWAYS.map(([name, n, list]) => (
+                  <div className="pw" key={name}><b>{name}</b><em>{n} courses</em><span>{list}</span></div>
+                ))}
+                <a className="btn btn-gold" style={{ justifySelf: 'start', marginTop: 10 }} href="#contact">Book a 30-minute briefing</a>
               </div>
-            </motion.div>
-            <motion.div initial={{
-            opacity: 0,
-            x: 20
-          }} whileInView={{
-            opacity: 1,
-            x: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            duration: 0.6
-          }} className="relative rounded-2xl overflow-hidden border border-slate-700 shadow-2xl">
-              <div className="absolute inset-0 bg-gradient-to-t from-[#0F172A] via-transparent to-transparent z-10"></div>
-              <img className="w-full h-auto object-cover opacity-90 hover:scale-105 transition-transform duration-700" alt="Students collaborating on laptops in a modern university lab" src="https://horizons-cdn.hostinger.com/80504870-35f5-4fc9-ba7f-f8bc12cf282f/nextgen-lab-MbfVX.png" />
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Four Doors */}
-      <section id="doors" className="py-24 relative overflow-hidden">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-emerald-500/5 rounded-full blur-3xl pointer-events-none" />
-
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">One Identity, Four Doors</h2>
-            <p className="text-slate-400 text-lg">Every learner registers with a personal email, so your account stays with you long after graduation. There are four ways in, and the only difference between them is who pays.</p>
-          </div>
-
-          <div className="grid md:grid-cols-4 gap-8">
-            {DOORS.map((door, idx) => <motion.div key={idx} initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            delay: idx * 0.1,
-            duration: 0.5
-          }} className="relative p-6 rounded-2xl bg-[#1E293B]/50 border border-slate-700/50 hover:border-[#BFFF00]/30 hover:bg-[#1E293B] transition-all group">
-                <div className="absolute -top-4 -left-4 w-8 h-8 rounded-full bg-slate-800 border border-slate-700 flex items-center justify-center text-sm font-bold text-[#BFFF00] z-20">
-                  {idx + 1}
+              <div className="console" aria-label="Sample Sponsor console">
+                <div className="bar"><b>Sponsor console · Graduate Accelerator</b><span>Sample view</span></div>
+                <div className="kpis">
+                  <div><strong>24</strong><small>seats assigned</small></div>
+                  <div><strong>71%</strong><small>average progress</small></div>
+                  <div><strong>2</strong><small>inactive 14+ days</small></div>
                 </div>
-                <div className="w-14 h-14 rounded-xl bg-slate-800/80 flex items-center justify-center mb-6 text-[#BFFF00] group-hover:scale-110 transition-transform duration-300">
-                  <door.icon className="w-7 h-7" />
-                </div>
-                <h3 className="text-xl font-bold text-white mb-3">{door.title}</h3>
-                <p className="text-slate-400 leading-relaxed text-sm">{door.desc}</p>
-              </motion.div>)}
-          </div>
-
-          <p className="text-center text-slate-300 mt-12 text-lg">
-            Same account, same courses, same certificates. <span className="text-[#BFFF00] font-semibold">The only difference is who pays.</span>
-          </p>
-        </div>
-      </section>
-
-      {/* Certification Ladder & Path */}
-      <section id="ladder" className="py-20 bg-[#0B1221]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">The Certification Ladder</h2>
-            <p className="text-slate-400 text-lg">Each course has three tiers. Passing a tier's quiz and capstone earns you the matching certification and automatically unlocks more of the app.</p>
-          </div>
-
-          <div className="grid lg:grid-cols-3 gap-8 mb-16">
-            {LADDER.map((rung, idx) => <div key={idx} className="bg-[#162032] rounded-3xl p-8 border border-slate-800 hover:border-[#BFFF00]/20 transition-colors">
-                <div className="flex items-center justify-between mb-6">
-                  <div className="flex items-center gap-3">
-                    <div className="p-3 bg-[#BFFF00]/10 rounded-lg">
-                      <Award className="w-6 h-6 text-[#BFFF00]" />
-                    </div>
-                    <div>
-                      <p className="text-xs text-slate-400 uppercase tracking-wider">{rung.tier} tier</p>
-                      <h3 className="text-xl font-bold text-white">{rung.cert}</h3>
-                    </div>
-                  </div>
-                </div>
-                <p className="text-slate-400 text-sm leading-relaxed">{rung.desc}</p>
-              </div>)}
-          </div>
-
-          {/* Your path, step by step */}
-          <div className="grid md:grid-cols-4 gap-6">
-            {[{
-            icon: UserPlus,
-            title: 'Register',
-            desc: 'Create your account with your personal email and complete a short orientation and entry assessment.'
-          }, {
-            icon: BookOpen,
-            title: 'Enroll',
-            desc: 'Pick your course, tier and door. Learning Mode opens instantly on bundled teaching datasets.'
-          }, {
-            icon: ClipboardCheck,
-            title: 'Prove It',
-            desc: 'Pass the quiz and the practical capstone, which is auto-graded against verified reference answers within a stated tolerance.'
-          }, {
-            icon: Unlock,
-            title: 'Certify & Unlock',
-            desc: 'Your certificate is issued with a verifiable ID, valid for 12 months and renewable, and your app access upgrades automatically.'
-          }].map((step, idx) => <div key={idx} className="p-6 rounded-2xl bg-slate-800/30 border border-slate-700/50">
-                <div className="w-12 h-12 rounded-xl bg-slate-800/80 flex items-center justify-center mb-4 text-[#BFFF00]">
-                  <step.icon className="w-6 h-6" />
-                </div>
-                <h4 className="text-white font-bold mb-2">{idx + 1}. {step.title}</h4>
-                <p className="text-slate-400 text-sm leading-relaxed">{step.desc}</p>
-              </div>)}
-          </div>
-        </div>
-      </section>
-
-      {/* Modules */}
-      <section id="modules" className="py-24">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Modules</h2>
-            <p className="text-slate-400 text-lg">Courses span the full breadth of the platform, from subsurface engineering to the business of energy, with every course built around a real app.</p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {MODULES.map((module, idx) => <motion.div key={idx} initial={{
-            opacity: 0,
-            y: 20
-          }} whileInView={{
-            opacity: 1,
-            y: 0
-          }} viewport={{
-            once: true
-          }} transition={{
-            delay: (idx % 4) * 0.08,
-            duration: 0.4
-          }} className={`relative p-6 rounded-2xl border transition-all group ${module.isNew ? 'bg-[#1E293B]/70 border-[#BFFF00]/25 hover:border-[#BFFF00]/50' : 'bg-[#1E293B]/40 border-slate-800 hover:border-slate-600'}`}>
-                {module.isNew && (
-                  <span className="absolute top-4 right-4 text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full bg-[#BFFF00]/15 text-[#BFFF00]">New</span>
-                )}
-                <div className={`w-12 h-12 rounded-xl ${module.bg} flex items-center justify-center mb-5 ${module.color} group-hover:scale-110 transition-transform duration-300`}>
-                  <module.icon className="w-6 h-6" />
-                </div>
-                <h3 className="text-lg font-bold text-white mb-2">{module.name}</h3>
-                <p className="text-slate-400 text-sm leading-relaxed">{module.desc}</p>
-                {module.coming && (
-                  <div className="mt-4 pt-3 border-t border-slate-700/60">
-                    <p className="text-[10px] font-semibold uppercase tracking-wider text-slate-500 mb-1.5">Coming soon</p>
-                    <ul className="space-y-1">
-                      {module.coming.map((app, i) => (
-                        <li key={i} className="text-xs text-slate-300 flex items-start gap-1.5">
-                          <span className="mt-1.5 w-1 h-1 rounded-full shrink-0 bg-[#BFFF00]/70"></span>
-                          {app}
-                        </li>
+                <div className="tbl">
+                  <table>
+                    <thead><tr><th>Learner</th><th>Course · tier</th><th>Progress</th><th>Best score</th><th>Status</th></tr></thead>
+                    <tbody>
+                      {SAMPLE_LEARNERS.map(([who, course, pct, score, tone, status]) => (
+                        <tr key={who}>
+                          <td>{who}</td><td>{course}</td>
+                          <td><div className="bar-p"><i style={{ width: `${pct}%` }} /></div></td>
+                          <td>{score}</td><td><span className={`chip ${tone}`}>{status}</span></td>
+                        </tr>
                       ))}
-                    </ul>
-                  </div>
-                )}
-              </motion.div>)}
-          </div>
-        </div>
-      </section>
-
-      {/* Pricing */}
-      <section id="pricing" className="py-20 bg-[#0B1221] border-y border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">Fees</h2>
-            <p className="text-slate-400 text-lg">One fee per course tier. Campus scholars enter on a scholarship via their university's cohort code and pay only a small personal registration fee.</p>
-          </div>
-
-          <div className="grid lg:grid-cols-2 gap-12">
-            {/* Subsurface & Engineering */}
-            <div className="bg-[#162032] rounded-3xl p-8 border border-slate-800">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="p-3 bg-blue-500/10 rounded-lg">
-                  <GraduationCap className="w-6 h-6 text-blue-400" />
+                    </tbody>
+                  </table>
                 </div>
-                <h3 className="text-2xl font-bold text-white">Subsurface &amp; Engineering</h3>
-              </div>
-
-              <div className="space-y-6">
-                {[{
-                tier: 'Beginner → Associate',
-                fee: '₦60,000',
-                usd: '≈ $40'
-              }, {
-                tier: 'Intermediate → Professional',
-                fee: '₦120,000',
-                usd: '≈ $80'
-              }, {
-                tier: 'Advanced → Expert',
-                fee: '₦200,000',
-                usd: '≈ $130'
-              }].map((row, i) => <div key={i} className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 flex items-center justify-between">
-                    <div>
-                      <h4 className="text-white font-bold">{row.tier.split(' → ')[0]}</h4>
-                      <p className="text-xs text-slate-400 uppercase tracking-wider mt-1">{row.tier.split(' → ')[1]} certification</p>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-2xl font-bold text-[#BFFF00]">{row.fee}</span>
-                      <p className="text-xs text-slate-500">{row.usd}</p>
-                    </div>
-                  </div>)}
-              </div>
-            </div>
-
-            {/* Energy Business & Society */}
-            <div className="bg-[#162032] rounded-3xl p-8 border border-slate-800">
-              <div className="flex items-center gap-3 mb-8">
-                <div className="p-3 bg-emerald-500/10 rounded-lg">
-                  <Briefcase className="w-6 h-6 text-emerald-400" />
-                </div>
-                <h3 className="text-2xl font-bold text-white">Energy Business &amp; Society</h3>
-              </div>
-
-              <div className="space-y-6">
-                {[{
-                tier: 'Beginner → Associate',
-                fee: '₦40,000',
-                usd: '≈ $27'
-              }, {
-                tier: 'Intermediate → Professional',
-                fee: '₦75,000',
-                usd: '≈ $50'
-              }, {
-                tier: 'Advanced → Expert',
-                fee: '₦120,000',
-                usd: '≈ $80'
-              }].map((row, i) => <div key={i} className="p-4 rounded-xl bg-slate-800/50 border border-slate-700/50 flex items-center justify-between">
-                    <div>
-                      <h4 className="text-white font-bold">{row.tier.split(' → ')[0]}</h4>
-                      <p className="text-xs text-slate-400 uppercase tracking-wider mt-1">{row.tier.split(' → ')[1]} certification</p>
-                    </div>
-                    <div className="text-right">
-                      <span className="text-2xl font-bold text-[#BFFF00]">{row.fee}</span>
-                      <p className="text-xs text-slate-500">{row.usd}</p>
-                    </div>
-                  </div>)}
+                <p className="note">Sample data for illustration. Export any view to CSV.</p>
               </div>
             </div>
           </div>
+        </section>
 
-          <p className="text-center text-slate-500 mt-10 text-sm">
-            Fees are charged in Naira via secure Paystack checkout. US-dollar figures are indicative equivalents.
-          </p>
-        </div>
-      </section>
-
-      {/* Verifiable Certificates */}
-      <section className="py-20">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-[#BFFF00]/10 mb-6">
-            <BadgeCheck className="w-8 h-8 text-[#BFFF00]" />
+        <section className="block">
+          <div className="wrap duo">
+            <VerifyPanel />
+            <div className="panel" id="fees">
+              <p className="eyebrow">Fees</p>
+              <h3>One clear fee per tier</h3>
+              <div className="fees">
+                {FEES.map(([tier, sub, ngn, usd]) => (
+                  <div key={tier}><b>{tier}</b><span>{sub}</span><strong>{ngn}<small>{usd}</small></strong></div>
+                ))}
+              </div>
+              <p style={{ fontSize: 14 }}>Charged in Naira through secure Paystack checkout. US-dollar figures are indicative. Cohort packages for employers and scholarships for partner universities are available.</p>
+            </div>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Certificates Anyone Can Verify</h2>
-          <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
-            Every certificate carries a unique verification code, so employers and universities can confirm a credential in seconds without creating an account. Certifications are valid for 12 months and renewable through re-certification.
-          </p>
-          <Link to="/verify">
-            <Button variant="outline" className="border-slate-600 text-slate-200 hover:bg-slate-800 hover:text-white">
-              Verify a Certificate
-              <ArrowRight className="ml-2 w-4 h-4" />
-            </Button>
-          </Link>
-        </div>
-      </section>
+        </section>
 
-      {/* Responsible Use - Red Accent Section */}
-      <section className="py-16 bg-red-950/10 border-y border-red-900/20">
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-red-500/10 mb-6">
-            <ShieldAlert className="w-8 h-8 text-red-500" />
+        <section className="block flush">
+          <div className="wrap">
+            <div className="head">
+              <p className="eyebrow">Other ways in</p>
+              <h2>Partnerships that widen the pipeline of talent.</h2>
+            </div>
+            <div className="partners">
+              <article><h3>Universities</h3><p>Campus cohorts learn on scholarship through a cohort code from their liaison. Students pay only a small personal registration fee.</p></article>
+              <article><h3>Sponsors</h3><p>Operators, service companies and foundations can sponsor learners. The account and certificate always stay with the learner.</p></article>
+              <article><h3>Residency, from 2027</h3><p>A selective, in-person programme at the Lordsway facility with instructor supervision. Applications open when the facility is ready.</p></article>
+            </div>
           </div>
-          <h2 className="text-2xl md:text-3xl font-bold text-white mb-4">Academic Integrity &amp; Responsible Use</h2>
-          <p className="text-slate-300 mb-6">
-            Accounts are individual and non-transferable, limited to two registered devices, with session activity monitored. Learning Mode uses the provided teaching datasets only. Sharing credentials or using the platform for commercial gain results in immediate termination of access.
-          </p>
-          <div className="text-sm text-red-400 font-semibold uppercase tracking-wide">
-            Zero Tolerance Policy
+        </section>
+
+        <section className="block final" id="contact">
+          <div className="wrap">
+            <p className="eyebrow">Start today</p>
+            <h2>Build the workforce your <em>next barrel</em> depends on.</h2>
+            <p>Create your account in minutes, or talk to us about a pilot cohort for your team.</p>
+            <div className="ctas">
+              <Link className="btn btn-gold" to="/register">Create your account</Link>
+              <a className="btn btn-ghost" href="mailto:info@petrolord.com?subject=NextGen%20team%20briefing">Book a team briefing</a>
+            </div>
+            <p className="contact-line">
+              <a href="mailto:info@petrolord.com">info@petrolord.com</a> · <a href="mailto:info@lordswayenergy.com">info@lordswayenergy.com</a> · +234 901 556 6981 · +44 7403 660720
+            </p>
           </div>
-        </div>
-      </section>
+        </section>
+      </main>
 
-      {/* CTA Footer Section */}
-      <section className="py-24 relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-[#BFFF00]/10 to-emerald-500/10 opacity-30"></div>
-        <div className="max-w-4xl mx-auto px-4 relative z-10 text-center">
-          <h2 className="text-4xl font-bold text-white mb-6">Ready to start your first course?</h2>
-          <p className="text-xl text-slate-300 mb-10">Create your account, enroll through the door that fits you, and start learning inside the real tools today.</p>
-          <Link to="/register">
-            <Button size="lg" className="h-16 px-12 bg-[#BFFF00] text-black hover:bg-[#a3d900] font-bold text-xl rounded-full shadow-2xl shadow-[#BFFF00]/20 hover:scale-105 transition-transform">
-              Create Your Account
-            </Button>
-          </Link>
-          <p className="mt-8 text-slate-400">
-            Representing a university? Partner with us on Campus cohort scholarships at{' '}
-            <a href="mailto:info@petrolord.com" className="text-[#BFFF00] hover:underline inline-flex items-center gap-1">
-              <Mail className="w-4 h-4" /> info@petrolord.com
-            </a>
-          </p>
-        </div>
-      </section>
-
-      {/* FOOTER */}
-      <Footer />
+      <HomeFooter />
     </div>
   );
 };
+
+function HomeFooter() {
+  return (
+    <footer style={{ background: '#07140E', color: 'var(--on-ink-muted)', fontSize: 14 }}>
+      <div className="wrap" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit,minmax(200px,1fr))', gap: 28, paddingBlock: '52px 36px' }}>
+        <div>
+          <Link className="brand" to="/" style={{ marginBottom: 14 }}>
+            <span className="crest"><img src={LOGO} alt="" /></span>
+            <span>Petrolord <em>NextGen</em></span>
+          </Link>
+          <p>The academy of the Petrolord Suite. Hands-on courses and verifiable Associate, Professional and Expert certifications. A Lordsway Energy company.</p>
+        </div>
+        <FooterCol title="Academy">
+          {NAV.map(([href, label]) => <a key={href} href={href}>{label}</a>)}
+          <Link to="/register">Create Account</Link>
+        </FooterCol>
+        <FooterCol title="Contact">
+          <a href="mailto:info@petrolord.com">info@petrolord.com</a>
+          <a href="mailto:info@lordswayenergy.com">info@lordswayenergy.com</a>
+          <a href="tel:+2349015566981">+234 901 556 6981</a>
+          <a href="tel:+447403660720">+44 7403 660720</a>
+        </FooterCol>
+        <FooterCol title="Offices">
+          <p>8 The Providence Street, Lekki Phase 1, Lagos, Nigeria</p>
+          <p style={{ marginTop: 10 }}>128 City Road, London EC1V 2NX, United Kingdom</p>
+        </FooterCol>
+      </div>
+      <div className="wrap" style={{ borderTop: '1px solid rgba(255,255,255,.08)', paddingBlock: 18, display: 'flex', justifyContent: 'space-between', gap: 16, flexWrap: 'wrap', fontSize: 13 }}>
+        <span>© {new Date().getFullYear()} Lordsway Energy. All rights reserved.</span>
+        <span style={{ display: 'flex', gap: 18, flexWrap: 'wrap' }}>
+          <Link to="/privacy-policy" style={{ textDecoration: 'none' }}>Privacy Policy</Link>
+          <Link to="/terms-of-service" style={{ textDecoration: 'none' }}>Terms of Service</Link>
+          <Link to="/academic-integrity" style={{ textDecoration: 'none' }}>Academic Integrity</Link>
+        </span>
+      </div>
+    </footer>
+  );
+}
+
+function FooterCol({ title, children }) {
+  return (
+    <div style={{ display: 'grid', gap: 6, alignContent: 'start' }}>
+      <h5 style={{ margin: '0 0 8px', font: '600 12px/1 var(--sans)', letterSpacing: '.14em', textTransform: 'uppercase', color: 'var(--gold-soft)' }}>{title}</h5>
+      {React.Children.map(children, (child) =>
+        React.isValidElement(child) ? React.cloneElement(child, { style: { textDecoration: 'none', lineHeight: 1.7, ...(child.props.style || {}) } }) : child,
+      )}
+    </div>
+  );
+}
+
 export default LandingPage;
