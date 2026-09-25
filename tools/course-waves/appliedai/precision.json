@@ -1,0 +1,26 @@
+{
+ "bound": {
+  "decimals": 6,
+  "match": "^(?:nnewi_paired_ndcg_upper)$"
+ },
+ "brier": {
+  "decimals": 6,
+  "match": "^(?:awka_brier|awka_reliability_bins8|awka_resolution_bins8|awka_wbc_bins8)$"
+ },
+ "fraction": {
+  "decimals": 6,
+  "match": "^(?:nnewi_extraction_macro_f1|nnewi_q_supported_fraction|nnewi_short_mean_token_f1|orlu_answers_supported_fraction)$"
+ },
+ "kappa": {
+  "decimals": 6,
+  "match": "^(?:awka_kappa_linear|awka_kappa_unweighted)$"
+ },
+ "metric": {
+  "decimals": 6,
+  "match": "^(?:nnewi_p_map_at5_grade2|nnewi_q_ndcg_at5_exponential|orlu_bm25_mean_recall_at3|orlu_bm25_mrr_at3)$"
+ },
+ "score": {
+  "decimals": 6,
+  "match": "^(?:orlu_bm25_idf_pressure|orlu_o1_bm25_top_score|orlu_o4_tfidf_top_cosine)$"
+ }
+}

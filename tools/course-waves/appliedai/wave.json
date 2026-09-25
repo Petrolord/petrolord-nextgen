@@ -1,0 +1,79 @@
+{
+ "slug": "appliedai",
+ "prefix": "d5",
+ "name": "Applied AI and Language Models",
+ "pathOrder": 70,
+ "module": "data_ai",
+ "prerequisite": null,
+ "repo": "/root/wt-dai-d5-nextgen",
+ "branch": "feat/d5-appliedai-course",
+ "goldens": [],
+ "goldensNote": "EMPTY BY DECISION. The vendored golden test-data/dataai/goldens/evaluate_cases.json carries 282 cases of oracle output (small stated corpora, the Ekene documents at many settings). Naming it here would let numsweep resolve a lesson literal against a figure the digest never prints. Every figure a lesson may quote is recomputed by the engine and printed in the digest (the hand set, the near-tie passages, the stated ranking and the within-bin rows are typed in d5_dump.mjs as stated inputs), so the harvested truth file carries it.",
+ "engines": [
+  "engines/dataai/evaluate.js",
+  "engines/dataai/ml.js",
+  "lib/stats/stats.js",
+  "lib/conventions/percentile.js"
+ ],
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines 1906182 (engines PR #257, squash-merged; content identical to the CI-green PR head). TWENTY-THREE paths walked by vendor_appliedai.sh over a git-archive export of the commit with the jest suite as the only seed: six reached by the walk (the suite, evaluate.js, ml.js, lib/lp/simplex.js through ml.js, lib/stats/stats.js, lib/conventions/percentile.js) and seventeen NAMED (the golden and the library pins, the five ekene-docs fixtures and their README, three ekene-dynamic files the suite's consistency gate reads, the fixture writer, the oracle, the pin writer, the timing script, FINDINGS and the negative control). 23 paths x 4 proofs = 92, all IDENTICAL. The canonical pin stays 54cf7c4; 16 paths are ledgered as kind extra, group d5-appliedai-course, at their 1906182 blobs; ml.js stays with its owner group at the same blob; lib/stats, percentile.js, simplex.js and the ekene-dynamic files already match the manifest. PRIOR-COURSE PROOF (prove_prior_courses.sh): the committed D1 dataqc, D2 mlcore, D3 facies and D4 forecastml kits rebuild digest.txt, fields.json and precision.json byte-identical, and digest.txt and fields.json match their waves.json pins; vendored suites evaluate 2707/2707, all five dataai suites 5036/5036.",
+ "constants": {
+  "$comment": "The engine exports DEFAULTS (K1 1.2, B 0.75, K 10, RELEVANT_GRADE 1, MAX_GRADE 10, TIE_DIGITS 12, BINS 10, MAX_BINS 100, N_BOOT 2000, MAX_BOOT 100000, LEVEL 0.95, LEVELS 0.8/0.9/0.95/0.99, MAX_DOCS 5000, MAX_CHARS 20000, MAX_QUERIES 1000, MAX_K 1000, MAX_RECORDS 5000, MAX_FIELDS 50, MAX_ANSWERS 5000, MAX_ROWS 100000, MAX_LABELS 50, MAX_VALUES 10000) and ENGLISH_STOP_WORDS (318 words). Digest section 1 prints them from the export. None is graded."
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3",
+  "x1e2",
+  "x1e-2"
+ ],
+ "plan": {
+  "state": "FOUNDATION: vendoring, structure, digest on the vendored Ekene document fixtures, capstones, gates, kit, stubs and the teaching lab with three explorers. Lessons not started."
+ },
+ "history": {
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The engine's review changes (extraction precision, recall and micro and macro F1 added beside accuracy, the near-tie golden) landed before its merge and before any lesson was written; they are provenance. The digest describes the engine as it is."
+ },
+ "scopeSeams": {
+  "logistic regression, log loss and classifiers": "OWNED BY D2 mlcore. D5 imports logLoss from engines/dataai/ml.js, prints what it returns with its eps and clipping count, and takes the calibration set's probabilities as given inputs.",
+  "data quality and near-duplicate identifiers": "OWNED BY D1 dataqc. D5 uses the exact duplicate EKD-058 for its tie only.",
+  "the bootstrap as a general method, and P labels for outcomes": "OWNED BY the uncertainty course and D4 forecastml. D5's interval is a percentile of a statistic, labelled as a parameter percentile, never P10, P50 or P90.",
+  "forecasting": "OWNED BY D4 forecastml.",
+  "clustering and classification": "OWNED BY D3 facies.",
+  "language models themselves": "NOT BUILT. D5 evaluates the retrieval, answers and extractions a language-model copilot would produce, using fixture text; no model runs anywhere in the engine, the fixtures, the gates or the course, and no graded value depends on model output (digest section 4)."
+ },
+ "namingCollisions": {
+  "relevant": "a judged grade at or above the stated threshold, grade 1 by default; related is grade 1 itself. Sections 11, 24.",
+  "hallucination": "an unsupported claim, named with the engine's reason. Sections 10, 15, 24.",
+  "grounded": "supported by a cited and retrieved passage; never a statement about truth. Sections 15, 24.",
+  "accuracy": "correct cells over cells, named with its denominator. Sections 14, 24.",
+  "score": "a BM25 score or TF-IDF cosine, named with its method; never a probability. Sections 6, 7, 24.",
+  "AI": "the system being evaluated; the engine runs no model. Sections 1, 4, 24."
+ },
+ "openItems": {
+  "ENGINE FINDINGS": "None blocking. The foundation found no engine defect and no unclear reason string; the three FINDINGS open questions are decided by the course as recorded under decisions.",
+  "DECISION relevantGrade": "FINDINGS open question 1 (default grade 1 against 2). Kept at the engine default, grade 1 (trec_eval); the digest teaches the threshold as a stated setting and prints every mean at grade 1 and grade 2 (section 11), where the MAP order of the two systems reverses. The Professional capstone grades a MAP at grade 2 with the grade stated.",
+  "DECISION end of 2025": "FINDINGS open question 2. Kept as a teaching example of how a deterministic check reads text (section 15); no engine change requested.",
+  "DECISION bin edges": "FINDINGS open question 3. The course states the engine's edge rule and the library's (section 19, with the library table DERIVED in the dump and labelled so); the Expert capstone grades three Murphy terms at eight bins, where 2 dp probabilities sit on the interior edges 0.25, 0.5 and 0.75, so the library rule is a discriminated wrong method.",
+  "DECISION ECE not graded": "On the Ekene calibration rows every bin is over-confident at 5, 10 and 15 bins, so ECE equals mean probability minus the base rate whatever the bins (digest section 18, asserted). The first capstone cut graded ECE at eight bins and the discriminate sweep found it blind to the bin count and the edge rule; it was replaced by the Murphy reliability term, which both move."
+ },
+ "cleared_claims": [],
+ "fieldsDiscrimination": {
+  "orlu_bm25_idf_pressure": "the tfidf smooth idf, robertson idf without the one, log base ten, the whole ekene corpus, df plus one",
+  "orlu_o1_bm25_top_score": "b zero, k1 two, stop list on, second ranked, the whole ekene corpus, tfidf cosine quoted",
+  "orlu_o4_tfidf_top_cosine": "sublinear tf, stop list on, second ranked, bm25 score quoted, the whole ekene corpus",
+  "orlu_bm25_mean_recall_at3": "cutoff five, relevant at grade two, precision quoted, tfidf runs, relevant at grade three",
+  "orlu_bm25_mrr_at3": "hit rate quoted, map quoted, relevant at grade two, cutoff one, b zero runs",
+  "orlu_answers_supported_fraction": "retrieved lists ignored, per answer mean, answer with an unretrieved citation dropped, numbers only, fully supported answers share",
+  "nnewi_p_map_at5_grade2": "relevant at grade one, system q, mrr quoted, cutoff three, grade three",
+  "nnewi_q_ndcg_at5_exponential": "linear gain, system p, cutoff three, ideal from the retrieved only, map quoted",
+  "nnewi_short_mean_token_f1": "exact match rate, token precision mean, token recall mean, exact matches counted out, raw strings without normalising",
+  "nnewi_extraction_macro_f1": "micro f1, macro accuracy, overall precision, text fields only, overall recall",
+  "nnewi_paired_ndcg_upper": "lower bound, unpaired, next seed, level ninety, q minus p, average precision",
+  "nnewi_q_supported_fraction": "retrieved lists ignored, per answer mean, numbers only, fully supported answers share",
+  "awka_kappa_unweighted": "observed agreement, linear weights, quadratic weights, relevant or not at two",
+  "awka_kappa_linear": "unweighted, quadratic weights, one minus observed disagreement, relevant or not at one",
+  "awka_brier": "log loss quoted, ece quoted, mean absolute difference, without the within bin terms",
+  "awka_reliability_bins8": "ten bins, the library edge rule, ece quoted, resolution quoted",
+  "awka_resolution_bins8": "ten bins, reliability quoted, uncertainty quoted, the library edge rule",
+  "awka_wbc_bins8": "within bin variance, ten bins, without the factor two, the library edge rule"
+ }
+}
