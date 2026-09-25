@@ -18,7 +18,7 @@ On the teaching hold-out the training months are EKENE-P1 months 0 to 35. There 
 
 ## Why this yardstick
 
-It is known before the forecast is scored, because it comes from the training months only. It is in bbl/d, the unit of the errors it will divide. And it measures how much this well moves from month to month, which is how hard the well is to forecast one step at a time. A noisy well tends to have a large Q and a smooth one a small Q.
+It is known before the forecast is scored, because it comes from the training months only. It is in bbl/d, the unit of the errors it will divide. And it measures how much this well moves from month to month, which is how hard the well is to forecast one step at a time. Q grows with how far the rate moves from month to month, whether from noise or from a steep decline.
 
 It is a demanding yardstick in one way and a lenient one in another. Demanding, because on a steady series the naive forecast is hard to beat one step ahead. Lenient, because Q is a one-step figure while a hold-out forecast runs up to 12 steps from one month, and errors tend to grow with the steps.
 

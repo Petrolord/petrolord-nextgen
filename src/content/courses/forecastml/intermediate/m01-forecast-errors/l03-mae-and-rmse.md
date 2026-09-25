@@ -22,7 +22,7 @@ Holt misses by 6.783515 bbl/d in a typical month here; ses by 51.683333. Holt's 
 
 RMSE is at least MAE on every row of that table, and that is always so. Squaring makes a large error count for more than its share: an error twice as big adds four times as much to the mean of the squares. So RMSE rises above MAE when the misses are uneven, a few large ones among many small ones, and sits close to MAE when the misses are all about the same size.
 
-Holt's errors on this hold-out are uneven: from almost nothing in month 46 (-0.027913) to -13.551559 in month 37 and -13.910343 in month 40. Those two large months pull its RMSE, 8.360530, above its MAE of 6.783515. The ses misses grow as the flat forecast falls behind the decline, so its RMSE of 55.720702 also sits above its MAE of 51.683333.
+Holt's errors on this hold-out are uneven: from almost nothing in month 46 (-0.027913) to -13.551559 in month 37 and -13.910343 in month 40. The four misses above 12 bbl/d in size, in months 36, 37, 39 and 40, pull its RMSE, 8.360530, above its MAE of 6.783515. The ses misses are all negative and unequal in size, so its RMSE of 55.720702 also sits above its MAE of 51.683333.
 
 ## Which one to report
 

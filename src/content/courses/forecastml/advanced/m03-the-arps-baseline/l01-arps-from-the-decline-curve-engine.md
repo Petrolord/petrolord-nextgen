@@ -43,7 +43,7 @@ Auto-Select and Hyperbolic agree here because the hyperbolic fit has the lowest 
 
 ## What the baseline is for
 
-The Arps fit reads the same thing the smoothing methods read: one rate series, oldest month first. It is a least-squares fit of a decline shape, and its forecast at step 12 comes from the fitted curve, so it keeps declining where a flat or damped forecast levels off. That makes it a fair baseline. Whether it forecasts better is a question for a backtest on the same origins, never for the R2 of a fit on months already seen.
+The Arps fit reads the same thing the smoothing methods read: one rate series, oldest month first. It is a least-squares fit of a decline shape, so its forecast follows the fitted decline, where a flat forecast holds the last level and a damped forecast flattens toward its limit. That makes it a fair baseline. Whether it forecasts better is a question for a backtest on the same origins, never for the R2 of a fit on months already seen.
 
 ## A b that prints alike
 

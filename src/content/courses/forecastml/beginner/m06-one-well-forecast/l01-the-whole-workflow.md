@@ -22,7 +22,7 @@ Every fit converged. Only the damped trend sits on a bound, phi on its lower edg
 
 ## Step 3: compare by MSE
 
-Simple smoothing scores 47 errors and the two trend methods score 46, because they spend month 1 on the start. So compare the MSE and never the SSE. By MSE the damped trend is lowest at 4502.618003, simple smoothing next at 4585.145790, and Holt highest at 6048.241985. On this noisy well, in-sample, a full straight trend chases noise, and the fits that keep the trend weak or fading follow the history more closely.
+Simple smoothing scores 47 errors and the two trend methods score 46, because they spend month 1 on the start. So compare the MSE and never the SSE. By MSE the damped trend is lowest at 4502.618003, simple smoothing next at 4585.145790, and Holt highest at 6048.241985. That order is in-sample: it says which fit followed the months it had already seen most closely.
 
 ## Step 4: say what the comparison means
 

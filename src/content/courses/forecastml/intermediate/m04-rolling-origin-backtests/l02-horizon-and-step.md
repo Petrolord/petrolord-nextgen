@@ -8,7 +8,7 @@ Three numbers lay out every backtest: the first origin; the horizon, how many mo
 
 Holt on EKENE-P1, first origin 24, horizon 6, step 6. The first origin forecasts months 24 to 29, and the origin then moves to 30, 36 and 42. The last origin is the largest o with o + 6 <= 48, so that every origin has all 6 of its actuals: origin 42 forecasts months 42 to 47, the end of the series; origin 43 is refused.
 
-When the step equals the horizon, as here, each month is forecast by exactly one origin. A step shorter than the horizon makes the forecast windows overlap: the comparison of methods at the end of this tier uses horizon 6 and step 3.
+When the step equals the horizon, as here, each month is forecast by exactly one origin. A step shorter than the horizon makes the forecast windows overlap: the EKENE-P2 comparisons after the workover, at the end of this tier, use horizon 6 and step 3.
 
 ## The first origin
 

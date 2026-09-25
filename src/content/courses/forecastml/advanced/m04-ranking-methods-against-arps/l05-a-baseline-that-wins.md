@@ -21,7 +21,7 @@ The same comparison on EKENE-P2 months 0 to 21, before the shut-in, from origins
 | damped | 23.269948 | 0.504549 |
 | arps | 17.012466 | 0.389192 |
 
-The ranking by MASE is arps, holt, damped, ses. On a steady decline the baseline wins again.
+The ranking by MASE is arps, holt, damped, ses. Before the shut-in, on these origins, the baseline wins again.
 
 ## After the workover: the winner changes
 

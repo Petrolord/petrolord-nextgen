@@ -34,7 +34,7 @@ Noise pulls the other way. On EKENE-P4, with noise of 12 percent, a single month
 
 ## What a bound tells you
 
-An alpha on its bound is a fitted value like any other, and it says that the SSE was still falling at the edge of the box. That is useful information: the naive forecast needs no method at all, and when a smoothing fit collapses onto it, the series is asking for a trend. The next module adds one.
+An alpha on its bound is a fitted value like any other, and it says that the SSE was still falling at the edge of the box. That is useful information: the naive forecast needs no method at all, and when a smoothing fit collapses onto it on a steady decline, the series is asking for a trend. The next module adds one.
 
 All of this is in-sample. The fitted alpha minimises one-step errors over months the method has already seen. Whether the naive forecast or any other forecasts future months well is a separate test.
 

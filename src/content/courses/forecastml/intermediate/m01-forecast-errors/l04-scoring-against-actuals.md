@@ -23,7 +23,7 @@ One call returns every metric of this tier, for one forecast:
 | sMAPE (percent) | 2.735957 |
 | MASE, m 1 | 0.241874 |
 
-It also returns the scale MASE divided by, and a `notes` list holding the reason for any metric it could not give. The percentage errors and MASE are the next two modules.
+It also returns the scale MASE divided by, and a `notes` record holding, under each metric's name, the reason for any metric it could not give. The percentage errors and MASE are the next two modules.
 
 ## The forecast must be for the months scored
 

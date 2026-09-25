@@ -30,7 +30,7 @@ At step 1 each path holds one draw, and the width reflects the spread of the res
 
 The paths vary the future rates. They do not vary the parameters: alpha, beta and phi are fitted once, on the whole series, and held for every path. The course lists this among what is not built: the bootstrap carries no parameter uncertainty. A bootstrap that also resamples the parameters is an alternative in common use; the engine's choice replays the method's own errors and assumes no distribution for them.
 
-## The point forecast is not one of the paths
+## The point forecast draws no residual
 
 The point forecast comes from the fitted final state with no residual added, so it is the forecast of a path that draws 0 at every step. Whether it sits near the middle of the paths depends on the residuals themselves, the subject of this module's last lesson.
 

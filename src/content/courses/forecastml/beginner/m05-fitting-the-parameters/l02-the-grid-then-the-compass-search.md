@@ -14,7 +14,7 @@ The basis of every fit with a free parameter reads:
 
 Alpha and beta are tried at 0, 0.1, 0.2 and so on up to 1, eleven values each, and phi at 0.8, 0.85, 0.9, 0.95 and 0.98. Every point of the grid is scored, alpha outermost, then beta, then phi, and the lowest SSE wins. That is 11 points for simple smoothing, 121 for Holt and 605 for the damped trend. When two points tie, the earlier one is kept, so the order of the loops is part of the rule.
 
-The grid sees the whole box, but its best point can sit up to a grid spacing from the least SSE, so a second stage follows.
+The grid sees the whole box, but its best point can sit between grid points, away from the least SSE, so a second stage follows.
 
 ## Stage two: the compass search
 

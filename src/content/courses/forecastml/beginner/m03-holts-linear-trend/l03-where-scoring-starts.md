@@ -24,7 +24,7 @@ Here are the three methods fitted, every parameter left free, on EKENE-P4:
 | holt | alpha 0.501603, beta 0.354191 | 2 | 278219.131326 | 6048.241985 |
 | damped | alpha 0.388341, beta 0.109704, phi 0.800000 | 2 | 207120.428138 | 4502.618003 |
 
-On this noisy well Holt's MSE is the highest of the three. A trend that swings with each noisy month adds error, and the level-only method does better. The damped trend, which the next module teaches, has the lowest MSE here.
+On this noisy well Holt's MSE, 6048.241985, is the highest of the three, above simple smoothing's 4585.145790 and the damped trend's 4502.618003. The damped trend, which the next module teaches, has the lowest MSE here. The figures give the order and nothing more; they do not say why.
 
 ## What an in-sample MSE says
 

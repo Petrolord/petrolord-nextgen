@@ -2,7 +2,7 @@
 
 {{panel:pf-backtest-explorer}}
 
-EKENE-P2 was shut in for three months, months 22 to 24 counted from 0, at a rate of exactly 0. A hold-out whose actuals include those months puts MAPE's zero rule to work. This lesson scores one.
+EKENE-P2 was shut in for three months, months 22 to 24 counted from 0, at a rate of exactly 0. A hold-out whose actuals include those months puts MAPE's zero rule to work.
 
 ## The test
 
@@ -25,7 +25,7 @@ Three actuals are 0, and MAPE divides by each actual. The engine returns MAPE as
 
 The index is into the actuals passed, counted from 0: actual[2] is the third of the six, month 22. Nothing was refused. Every other metric of the call is a number: MAE 209.968065, RMSE 258.102385 and MASE 5.427746.
 
-Read those three with the table. The shut-in months carry errors from -339.129629 to -372.229050 bbl/d, and they dominate every mean. The forecast did what a forecast from months 0 to 19 could do; nothing in those months said the well would be shut in.
+The shut-in months carry errors from -339.129629 to -372.229050 bbl/d, and they dominate every mean.
 
 ## sMAPE stays defined, at the top of its scale
 
@@ -35,11 +35,11 @@ That is the next lesson's measure, and it shows here why it exists: it stays a n
 
 ## In a backtest, the reason names the origin
 
-The same zero rule applies inside a rolling-origin backtest, which this tier builds later. There the reason names the month by its index in the series, its origin and its step. EKENE-P2, ses, first origin 20:
+The same zero rule applies inside a rolling-origin backtest, which this tier builds later. There the reason names the month by its index in the series, its origin and its step. EKENE-P2, ses with alpha 0.3 given, first origin 20, horizon 3, step 6:
 
 > MAPE is undefined: the actual at index 22 (origin 20, step 3) is 0 and MAPE divides by each actual
 
-An `accuracy` reason names the position in the actuals passed; a backtest reason names the origin it comes from.
+An `accuracy` reason names the position in the actuals passed; a backtest reason names the origin it comes from. The origin and step it names depend on the horizon and step, so quote them with the reason: at horizon 1, step 1 the same zero is reported at origin 22, step 1.
 
 ## Where the shut-in belongs
 
@@ -47,4 +47,4 @@ Whether a zero month should be in the actuals at all is a data question. The dat
 
 ## Exercise
 
-In the backtest explorer, choose EKENE-P2 and score holt fitted on months 0 to 19 against months 20 to 25. Check that MAPE is null and read its reason. Then move the hold-out so that it ends at month 21, before the shut-in, and say which metrics changed from null to a number. Finally, run a backtest on EKENE-P2 with ses from first origin 20 and compare its reason with the hold-out's.
+In the backtest explorer, choose EKENE-P2 and score holt fitted on months 0 to 19 against months 20 to 25. Check that MAPE is null and read its reason. Then move the hold-out so that it ends at month 21, before the shut-in, and say which metrics changed from null to a number. Finally, run a backtest on EKENE-P2 with ses from first origin 20, horizon 3, step 6, and compare its reason with the hold-out's.

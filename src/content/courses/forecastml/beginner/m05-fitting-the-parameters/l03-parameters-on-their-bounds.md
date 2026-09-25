@@ -34,15 +34,15 @@ Each bound has a plain reading:
 
 ## Reading the Ekene bounds
 
-Simple smoothing on four of the five long wells ends on alpha 1, the naive forecast. The method has no trend, and on a decline the least lag comes from the newest month alone. The bound says the method needs a trend.
+Simple smoothing on four of the five long wells ends on alpha 1, the naive forecast. The method has no trend, and on a decline the least lag comes from the newest month alone. On a steady decline the bound says the method needs a trend.
 
 The damped trend on EKENE-P4 ends on phi 0.8. On a noisy allocation the fit wanted the trend to fade as fast as the box allows, and faster if it could. A forecaster reading that might give a lower phi and compare, or accept that the damped trend here is close to a level with a short-lived slope.
 
-The damped trend on EKENE-P2 ends on two bounds, alpha 1 and beta 0: a level that jumps to every new rate and a trend that learns nothing from the months after its start, fading only by phi. The shut-in and the workover sit inside that series.
+The damped trend on EKENE-P2 ends on two bounds, alpha 1 and beta 0: a level that jumps to every new rate and a trend that learns nothing from the months after its start, fading only by phi.
 
 ## Why the box has edges
 
-Alpha and beta outside 0 to 1 would not be weighted averages any more; the recursion would put a negative weight on the new rate or on the old forecast. Phi's narrower box is a choice the engine states, following FPP3, to keep a fitted damped trend distinct from simple smoothing at one end and Holt at the other. A given phi may go outside the fitted box, down to just above 0 and up to 1; a given alpha or beta may not leave 0 to 1, and is refused if it tries:
+Alpha and beta outside 0 to 1 would not be weighted averages any more; the recursion would put a negative weight on the new rate or on the old forecast. Phi's narrower box is a choice the engine states, following FPP3: below 0.8 the damping has a very strong effect, and near 1 the damped trend cannot be told apart from Holt's. A given phi may go outside the fitted box, down to just above 0 and up to 1; a given alpha or beta may not leave 0 to 1, and is refused if it tries:
 
 > alpha must be a number from 0 to 1 (inclusive)
 

@@ -10,23 +10,23 @@ A shut-in month has a rate of exactly 0. The smoothing methods take it as a valu
 
 EKENE-P2 is shut in for months 22 to 24, counted from 0, at rate 0, and a workover lifts its rate from month 25 on. The Arps fit uses 45 of its 48 months: the 3 shut-in months are dropped.
 
-The months after the shut-in keep their own time index. Month 25 is still passed as day 25, so the gap stays in the time axis. The fit sees a decline with three points missing, followed by rates the workover has lifted.
+The months after the shut-in keep their own time index. Month 25 is still passed as day 25, so the gap stays in the time axis.
 
 ## What the fit makes of it
 
-Auto-Select on EKENE-P2 returns a hyperbolic fit with qi 979.700443, Di 0.057021 per month and b 0.950000, with R2 0.963683. The generator stated qi 950, Di 0.05 and b 0.3 for this well's underlying decline, before the shut-in and the uplift were planted on it. The fit reads every positive month, the lifted ones included, so it answers a different question from the one the generator was set: it finds the single Arps curve that best follows the whole record, workover and all. A b this far from the stated one is a hint that one Arps curve does not describe the whole history, which the next module tests on the same origins.
+Auto-Select on EKENE-P2 returns a hyperbolic fit with qi 979.700443, Di 0.057021 per month and b 0.950000, with R2 0.963683. The generator stated qi 950, Di 0.05 and b 0.3 for this well's underlying decline, before the shut-in and the uplift were planted on it. The fit reads every positive month, the lifted ones included, and finds the single Arps curve that best follows the whole record. A b this far from the stated one is a hint that one Arps curve does not describe the whole history, which the next module tests on the same origins.
 
 ## Where t = 0 sits
 
-Time starts at the first positive value. Put two months of 0 in front of the same well (stated) and the basis reads:
+Time starts at the first positive value. Put two months of 0 in front of a series with no 0 of its own, EKENE-P1's first 20 months (stated), and the basis reads:
 
 > step k is passed as day k, so qi is per step and Di per step; t = 0 at index 2, the first positive value
 
-The result carries `t0Index` 2, drops 2 months, and returns `fitted` as null before index 2. qi is then the rate at index 2, the first month that produced.
+The result carries `t0Index` 2, drops 2 months, and returns `fitted` as null before index 2. qi is then the fitted rate at t = 0, index 2. On all 48 months of EKENE-P1 with the same two zeros in front, qi is 1202.685523 against the 1176.100000 recorded there.
 
 ## Too few positive months
 
-Dropping zeros can leave too little to fit. `fitArpsModel` needs at least 3 positive values. Two months passed are refused, naming the field `y`:
+`fitArpsModel` needs at least 3 positive values. Two months passed are refused, naming the field `y`:
 
 > y has 2 values: fitArpsModel needs at least 3 positive values
 
@@ -38,4 +38,4 @@ The boundary is 3 positive values fitted, with zeros around them dropped, and 2 
 
 ## Exercise
 
-Open the view "The Arps baseline" and start from EKENE-P2 with Auto-Select. Read the months dropped and first positive month tiles, and the fitted b. Then edit the series: put two values of 0 in front of it and run again, and read the same two tiles. Finally, cut the series to its first five months with three of them set to 0, and read the engine's words for the refusal.
+Open the view "The Arps baseline" and start from EKENE-P2 with Auto-Select. Read the months dropped and first positive month tiles, and the fitted b. Then edit the series: put two values of 0 in front of it and run again, and read the same two tiles. The months dropped should read 5: say which 5 they are. Finally, cut the series to its first five months with three of them set to 0, and read the engine's words for the refusal.

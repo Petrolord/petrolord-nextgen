@@ -34,7 +34,7 @@ By MASE the order is now holt, damped, arps, ses, with arps third. The holt row'
 
 The Arps baseline is a least-squares fit over every positive month of each training window, the months before the uplift included, so every Arps fit here mixes the old decline with the new level. The shut-in months at rate 0 are dropped from the fit by the decline curve engine. After the workover the Arps mean error is -23.147528 bbl/d, so it forecast high on average. Holt's is 20.751043, so holt forecast low. Both lean, in opposite directions, and holt's misses were the smaller when scaled.
 
-The smoothing methods weight the recent months most, and each forecast starts from a state built on them. That is what a workover rewards.
+Holt and damped weight the recent months and carry a trend state built on them, and after the workover both rank above arps; ses, with no trend, ranks last.
 
 ## The winner depends on the origins
 

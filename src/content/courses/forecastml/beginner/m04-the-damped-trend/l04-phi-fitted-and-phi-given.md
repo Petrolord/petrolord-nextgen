@@ -2,7 +2,7 @@
 
 {{panel:pf-smoothing-explorer}}
 
-Phi can reach the engine in two ways, and each has its own range. Left blank, phi is fitted inside a narrow box. Given, it may take almost any value from 0 to 1. The difference is deliberate, and reading a damped fit correctly means knowing which way its phi arrived.
+Phi can reach the engine in two ways, and each has its own range. Left blank, phi is fitted inside a narrow box. Given, it may take any value above 0 and at most 1. The difference is deliberate, and reading a damped fit correctly means knowing which way its phi arrived.
 
 ## A fitted phi: 0.8 to 0.98
 
@@ -22,7 +22,7 @@ EKENE-P2 lists two bounds, alpha at 1 and beta at 0. With beta 0 the trend takes
 
 ## Why the fitted range is narrow
 
-The range follows the textbook Forecasting: Principles and Practice (FPP3), which restricts an estimated phi to 0.8 to 0.98. Far below 0.8 the trend fades so fast that the method behaves much like simple smoothing; close to 1 it fades so slowly that the method behaves much like Holt. Inside the box the damped trend stays distinct from both, and the fit cannot drift to either end by chasing a small drop in SSE.
+The range follows the textbook Forecasting: Principles and Practice (FPP3), which restricts an estimated phi to 0.8 to 0.98. FPP3 gives its reasons: below 0.8 the damping has a very strong effect, and a phi close to 1 gives a damped trend that cannot be told apart from Holt's undamped trend. Inside the box a fitted phi cannot drift below 0.8 or above 0.98, whatever small drop in SSE lies beyond.
 
 ## A given phi: above 0 and at most 1
 

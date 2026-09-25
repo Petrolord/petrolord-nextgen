@@ -20,7 +20,7 @@ In-sample, damped looks best, holt close behind and ses last. Out-of-sample, hol
 
 The in-sample figure scores forecasts one month ahead, on months that helped choose the parameters and that fed the state. It says how well the method followed a history it was tuned to. The hold-out scores forecasts up to 12 months ahead, from one fixed month, on months that reached the fit in no way. It says how the method would have done had it been used.
 
-Those can disagree, as they do here, for two reasons. The forecast horizon differs: one step ahead each time against up to twelve steps from one month. And the in-sample months were used to pick alpha and beta, so the in-sample figure flatters every method a little. A method is judged on the out-of-sample figure.
+Those can disagree, as they do here, for two reasons. The forecast horizon differs: one step ahead each time against up to twelve steps from one month. And the in-sample months were used to pick alpha and beta, so the in-sample figure can flatter a method; here it did so only for ses. A method is judged on the out-of-sample figure.
 
 ## Why damped fell behind on this hold-out
 
