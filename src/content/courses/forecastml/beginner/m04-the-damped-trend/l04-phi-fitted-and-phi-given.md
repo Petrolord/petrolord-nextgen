@@ -18,7 +18,7 @@ When phi is left out, the engine searches for it from 0.8 to 0.98 inclusive, alo
 
 Four wells fit phi inside the box. EKENE-P4, the noisy allocation, fits phi on the lower bound 0.8, and the engine lists it in `atBounds` as "phi = 0.8". A phi on its bound is the strongest damping the fit may choose, and it says the SSE was still falling at that edge: on this noisy well the fit wanted the trend to fade even faster.
 
-EKENE-P2 lists two bounds, alpha at 1 and beta at 0. With beta 0 the trend never updates from its start, and with alpha 1 the level is always the newest rate.
+EKENE-P2 lists two bounds, alpha at 1 and beta at 0. With beta 0 the trend takes nothing from the newest change in level and only fades by phi each month, and with alpha 1 the level is always the newest rate.
 
 ## Why the fitted range is narrow
 
