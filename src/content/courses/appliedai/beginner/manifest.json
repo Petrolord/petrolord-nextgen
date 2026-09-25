@@ -1,0 +1,361 @@
+{
+ "app_slug": "appliedai",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-what-copilots-and-retrieval-do",
+   "title": "What Copilots and Retrieval Do",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-a-question-a-search-and-an-answer",
+     "title": "A question, a search and an answer",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-retrieval-before-the-answer",
+     "title": "Retrieval before the answer is written",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-ekene-document-set",
+     "title": "The Ekene document set",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-what-is-graded-and-what-never-is",
+     "title": "What is graded and what never is",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-refusals-by-name",
+     "title": "The refusals, each naming its field",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-tokens",
+   "title": "Tokens",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-lowercase-and-split",
+     "title": "Lowercasing and splitting text",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-numbers-and-well-names-split",
+     "title": "Numbers and well names split apart",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-stop-list-left-off",
+     "title": "The stop list, and why it is left off",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-counting-terms",
+     "title": "Counting terms in a passage",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-tf-idf",
+   "title": "TF-IDF",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-term-and-document-frequency",
+     "title": "Term frequency and document frequency",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-smoothed-idf",
+     "title": "The smoothed inverse document frequency",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-unit-length-vectors",
+     "title": "Vectors scaled to unit length",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-cosine-ranking",
+     "title": "Ranking by cosine",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-bm25",
+   "title": "BM25",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-bm25-idf",
+     "title": "The BM25 inverse document frequency",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-saturation-and-k1",
+     "title": "Term saturation and k1",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-length-normalisation-and-b",
+     "title": "Length normalisation and b",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-repeated-query-word",
+     "title": "A repeated query word counts once",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-bm25-term-by-term",
+     "title": "A score read term by term",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-ranking-and-metrics-at-k",
+   "title": "Ranking and Metrics at a Cutoff",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-score-order-and-ties",
+     "title": "Score order and the tie rule",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-precision-and-recall-at-k",
+     "title": "Precision and recall at a cutoff",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-hit-and-reciprocal-rank",
+     "title": "Hit and reciprocal rank",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-means-over-queries",
+     "title": "Means over queries",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-answers-that-cite-sources",
+   "title": "Answers That Cite Their Sources",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-prompts-that-ask-for-citations",
+     "title": "Prompts that ask for citations",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-claims-in-an-answer",
+     "title": "Numbers, dates and quotes as claims",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-unsupported-claims",
+     "title": "Unsupported claims",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

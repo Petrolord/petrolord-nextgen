@@ -167,6 +167,29 @@ const HAND = [
   { id: 'd5', text: '' },
 ];
 const HAND_Q = 'oil rate';
+const KD = EV.DEFAULTS; // the engine defaults a sentence names are substituted from here
+const K1_ALT = 2; // the stated second k1 of the k1 comparison
+const NT_B = 1e-7; // the stated b of the near-tie passages
+const K_WIDE = 10; // the stated cutoff of the run outside the pool
+const B_THIRD = 0.4; // the stated b of the third run
+const XT_TOL = { qRel: 0.01, pAbs: 2, pRel: 0.001 }; // the stated tolerances of the tolerance records
+const CW = { p: [0.61, 0.62, 0.64, 0.66, 0.68, 0.69], y: [1, 0, 1, 0, 1, 1] }; // the stated within-bin rows
+const SEED_MAX = 2 ** 32 - 1; // the largest 32-bit seed
+const GRADE_BAD = [-1, 2.5, KD.MAX_GRADE + 1]; // stated grades the engine refuses
+// STATED TEXT PROBES: strings handed to the engine by the sections below, typed once here.
+const PROBE = {
+  stated: 'Ekene-1 made 120 bopd; the survey read 2,096 psia on 2023-01-01, a "water injection" start, and 45% water, -2 skin.',
+  coin: 'The spill was 5 bbl.',
+  tol: 'about 2,100 psia',
+  comma: '12,1234 and 12,123',
+  minus: 'skin -2 at Ekene-2',
+  date: 'on 2023-01-01 and 2023-01-01x',
+  noFigure: 'No passage says so.',
+  repeated: 'oil oil rate',
+  multiset: ['oil oil water', 'oil water water'],
+};
+// The engine rounds each bootstrap tail to this many decimals, read from its source.
+const TAIL_DECIMALS = Math.log10(Number((ENGINE_SRC.match(/\(1 - level\) \/ 2\) \* (1e\d+)\)/) || [])[1]));
 
 /* ================================================================ HEADER */
 
@@ -175,7 +198,7 @@ w('# D5 TEACHING DIGEST: Applied AI and Language Models');
 w();
 w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The engine FINDINGS record, the oracle, the library pins, the fixture README and the engine source comments are PROVENANCE and not teaching truth.');
 w();
-w('# PRECISION. Every score, idf, weight, cosine, term contribution, average length, metric (precision, recall, hit rate, reciprocal rank, average precision, DCG, nDCG and their means), F1, accuracy, fraction, agreement, kappa, probability, Brier score and each of its terms, calibration error, log loss, bootstrap mean, bound, difference, share and standard error prints to SIX decimals; counts, ranks, grades, lengths, seeds, replicates and bins are whole numbers; the 12-digit tie key prints at twelve significant digits where the tie rule is shown; very small magnitudes print in exponent form; an engine message is printed verbatim, figures and all.');
+w(`# PRECISION. Every score, idf, weight, cosine, term contribution, average length, metric (precision, recall, hit rate, reciprocal rank, average precision, DCG, nDCG and their means), F1, accuracy, fraction, agreement, kappa, probability, Brier score and each of its terms, calibration error, log loss, bootstrap mean, bound, difference, share and standard error prints to SIX decimals; counts, ranks, grades, lengths, seeds, replicates and bins are whole numbers; the ${KD.TIE_DIGITS}-digit tie key prints at twelve significant digits where the tie rule is shown; very small magnitudes print in exponent form; an engine message is printed verbatim, figures and all.`);
 w();
 w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 1906182, ${engineLines} lines. It imports lib/stats (mulberry32 and quantile), lib/conventions/percentile.js (parameterPercentileLabel) and, from engines/dataai/ml.js, logLoss. It runs no language model and makes no network call.`);
 w();
@@ -248,9 +271,9 @@ w();
 w(`\`ENGLISH_STOP_WORDS\` is also exported: ${EV.ENGLISH_STOP_WORDS.length} words, scikit-learn's list (BSD-3-Clause), sorted.`);
 w();
 w('WHAT THE ENGINE DOES NOT DO, checked here against its exports and its source:');
-const IMPORTS = [...ENGINE_SRC.matchAll(/^import .* from '([^']+)';$/gm)].map((m) => m[1]);
+const IMPORTS = [...ENGINE_SRC.matchAll(/^import .* from \x27([^\x27]+)\x27;$/gm)].map((m) => m[1]);
 must('the engine imports exactly lib/stats, the percentile convention and ml.js', IMPORTS.join() === '../../lib/stats/stats.js,../../lib/conventions/percentile.js,./ml.js', IMPORTS.join());
-must('the engine source makes no network call and loads no module at run time', !/\bfetch\(|XMLHttpRequest|\bimport\(|require\(/.test(ENGINE_SRC), 'none');
+must('the engine source makes no network call and loads no module at run time', !/\bfetch\x28|XMLHttpRequest|\bimport\x28|require\x28/.test(ENGINE_SRC), 'none');
 must('no export generates text, embeds or calls a model', !Object.keys(EV).some((k) => /generat|embed|model|llm|chat|complet|prompt|rerank|dense|vector(?!s)/i.test(k)), Object.keys(EV).join(','));
 must('no export stems a word', !Object.keys(EV).some((k) => /stem|lemma/i.test(k)), 'none');
 w('- It runs no language model. It writes no answer, embeds no text, reranks nothing and asks no model to judge an answer. Its imports are, in full: lib/stats/stats.js, lib/conventions/percentile.js and engines/dataai/ml.js; its source makes no network call.');
@@ -292,7 +315,7 @@ must('Q24 has no judged grade above 0', Object.values(J.Q24).every((g) => g === 
 w();
 w(`A SECOND ANNOTATOR graded every judged pair again (fixture: ${QUERIES.secondAnnotator}). The agreement between the two is measured in ${ref('kappa')}.`);
 w();
-w('THE TWO SYSTEMS. Two fixed systems answered every query. Each retrieved its top 5 passages, wrote an answer text citing passage ids, and gave a short answer. The answer texts are hand-written fixture text: no model produced them, at build time or at run time.');
+w(`THE TWO SYSTEMS. Two fixed systems answered every query. Each retrieved its top ${SYSTEMS.systems[0].retriever.k} passages, wrote an answer text citing passage ids, and gave a short answer. The answer texts are hand-written fixture text: no model produced them, at build time or at run time.`);
 w();
 table(['system', 'retriever (fixture)', 'answers'], SYSTEMS.systems.map((s) => [s.id, `${s.retriever.method} k ${s.retriever.k}${s.retriever.method === 'bm25' ? ` k1 ${s.retriever.k1} b ${s.retriever.b}` : ''}, stop list ${s.retriever.stopWords ? 'on' : 'off'}`, S(s.answers.length)]));
 const rA = success('retrieve bm25 k 5 on every query', EV.retrieve({ documents: DOCS, queries: QLIST, method: 'bm25', k: K }));
@@ -300,7 +323,7 @@ const rB = success('retrieve tfidf k 5 on every query', EV.retrieve({ documents:
 must('system A\'s retrieved lists are exactly the engine\'s BM25 top 5', SYS.A.answers.every((a) => JSON.stringify(a.retrieved) === JSON.stringify(rA.runs[a.query])), 'A');
 must('system B\'s retrieved lists are exactly the engine\'s TF-IDF top 5', SYS.B.answers.every((a) => JSON.stringify(a.retrieved) === JSON.stringify(rB.runs[a.query])), 'B');
 w();
-w('Each system\'s retrieved lists are exactly what `retrieve` returns on the corpus with that method, k 5 and the other settings at their defaults (checked on all 24 queries for both systems).');
+w(`Each system's retrieved lists are exactly what \`retrieve\` returns on the corpus with that method, k ${K} and the other settings at their defaults (checked on all ${QS.length} queries for both systems).`);
 w();
 w(`THE EXTRACTION SET. ${FIELDS.length} fields, ${LABELS.length} labelled records (one per source passage, the record id is the passage id), and both systems' predictions. Fixture: ${EXTRACT.description}`);
 w();
@@ -331,7 +354,7 @@ const PLANTED = [
   ['a wellhead pressure as reservoir pressure', 'A EKD-036', '2,289 psi wellhead', `the outcome unsupported (${ref('extraction')})`],
   ['"near-miss" for "near miss"', 'A EKD-044', 'the hyphen joins the words', `the outcome wrong (${ref('extraction')})`],
   ['"Ekene 3" for "Ekene-3"', 'B EKD-003', 'a space for the hyphen', `the outcome wrong (${ref('extraction')})`],
-  ['"150 bopd" in a number field', 'B EKD-003', 'a unit inside a number', `the outcome wrong, not a plain number (${ref('extraction')})`],
+  ['"150 bopd" in a number field', 'B EKD-003', 'a unit inside a number', `the outcome wrong, the reason quoting the plain-number rule (${ref('extraction')})`],
   ['two records not returned', 'B EKD-053 and EKD-056', 'no prediction for either', `scored as all empty (${ref('extraction')})`],
   ['values from the wrong well', 'B EKD-013 and EKD-029', 'a well on a field survey, Ekene-6\'s water cut on Ekene-1', `the outcome unsupported (${ref('extraction')})`],
 ];
@@ -417,7 +440,7 @@ const REFUSALS = [
   ['cohenKappa', { a: [0, 1], b: [1, 1], labels: [0, 1, 1] }, 'labels[2]', 'a label listed twice'],
   ['cohenKappa', { a: [0, 3], b: [1, 1], labels: [0, 1, 2] }, 'a[1]', 'a rating outside the labels'],
   ['calibration', { yTrue: [], probabilities: [] }, 'yTrue', 'no outcomes'],
-  ['calibration', { yTrue: [1, 2], probabilities: [0.9, 0.8] }, 'yTrue[1]', 'an outcome of 2 (a grade, not an outcome)'],
+  ['calibration', { yTrue: [1, 2], probabilities: [0.9, 0.8] }, 'yTrue[1]', 'an outcome of 2 (a grade where an outcome belongs)'],
   ['calibration', { yTrue: [1, 0], probabilities: [0.9] }, 'probabilities', 'two outcomes and one probability'],
   ['calibration', { yTrue: [1, 0], probabilities: [0.9, 1.2] }, 'probabilities[1]', 'a probability of 1.2'],
   ['calibration', { yTrue: [1, 0], probabilities: [0.9, 0.2], bins: 0 }, 'bins', 'no bins'],
@@ -452,7 +475,7 @@ const nt3 = EV.rankTfidf({ documents: DOCS, query: 'helicopter' }); noteRow('ran
 const nt4 = EV.retrievalMetrics({ ranking: RUNS('A').Q24, judgments: J.Q24, k: K }); noteRow('retrievalMetrics', 'system A on Q24', nt4, '`notes.recall`', nt4.notes.recall);
 noteRow('retrievalMetrics', 'system A on Q24', nt4, '`notes.averagePrecision`', nt4.notes.averagePrecision);
 noteRow('retrievalMetrics', 'system A on Q24', nt4, '`notes.ndcg`', nt4.notes.ndcg);
-const nt5 = EV.evaluateRetrieval({ runs: RUNS('A'), judgments: J, k: K }); noteRow('evaluateRetrieval', 'system A, k 5', nt5, '`excluded[0].reason`', nt5.excluded[0].reason);
+const nt5 = EV.evaluateRetrieval({ runs: RUNS('A'), judgments: J, k: K }); noteRow('evaluateRetrieval', `system A, k ${K}`, nt5, '`excluded[0].reason`', nt5.excluded[0].reason);
 const nt6 = EV.evaluateRetrieval({ runs: { Q24: RUNS('A').Q24 }, judgments: { Q24: J.Q24 }, k: K }); noteRow('evaluateRetrieval', 'Q24 alone', nt6, '`note`', nt6.note);
 const nt7 = EV.checkGroundedness({ answer: 'No passage says so.', citations: [], documents: DOCS }); noteRow('checkGroundedness', 'an answer with no figure', nt7, '`note`', nt7.note);
 const nt8 = EV.cohenKappa({ a: [2, 2, 2], b: [2, 2, 2] }); noteRow('cohenKappa', 'both raters grade 2 on every item', nt8, '`note`', nt8.note);
@@ -504,7 +527,7 @@ must('1.25 splits into 1 and 25, Ekene-3 into ekene and 3', t0.tokens.includes('
 const tAcc = tk(TOKX[5]);
 must('an accented letter is a separator and only A-Z is lowercased', tAcc.tokens.join() === 'caf,berpr,fung,na,ve', tAcc.tokens.join());
 w();
-w('Read the rows: a decimal point, a comma, a hyphen, a slash, an underscore and a colon all separate, so "1.25" becomes the two tokens 1 and 25, "2,096" becomes 2 and 096, and "Ekene-3" becomes ekene and 3. Single-character tokens are kept. An accented letter is outside [a-z0-9] and separates, so "Café" gives caf. Nothing is stemmed: "producing" and "produced" stay different tokens.');
+w('Read the rows: a decimal point, a comma, a hyphen, a slash, an underscore and a colon all separate, so "1.25" becomes the two tokens "1" and "25", "2,096" becomes "2" and "096", and "Ekene-3" becomes "ekene" and "3". Single-character tokens are kept. An accented letter is outside [a-z0-9] and separates, so "Café" gives caf. Nothing is stemmed: "producing" and "produced" stay different tokens.');
 w();
 const oily = ['well', 'top', 'bottom', 'fire', 'system', 'first', 'third', 'one', 'two', 'three', 'twelve', 'fifteen', 'fifty', 'hundred', 'thick', 'thin', 'per', 'full', 'empty', 'found', 'back', 'part', 'side', 'move', 'amount', 'mill', 'bill', 'interest', 'no', 'not'];
 must('every oilfield word listed is in the stop list', oily.every((x) => EV.ENGLISH_STOP_WORDS.includes(x)), oily.filter((x) => !EV.ENGLISH_STOP_WORDS.includes(x)).join());
@@ -547,7 +570,7 @@ table(['term', 'df', 'idf'], tv.vocabulary.map((t, i) => [t, S(tv.df[i]), f6(tv.
 must('idf is ln((1+N)/(1+df))+1 on every term', tv.vocabulary.every((t, i) => nearly(tv.idf[i], Math.log((1 + 5) / (1 + tv.df[i])) + 1)), 'idf');
 w();
 const ti = tv.vocabulary.indexOf('oil');
-w(`Derived check on one row: oil is in ${tv.df[ti]} of the 5 passages, so idf = ln((1 + 5) / (1 + ${tv.df[ti]})) + 1 = ${f6(tv.idf[ti])}. A term in every passage would still have idf 1, never 0: the + 1 keeps it.`);
+w(`Derived check on one row: oil is in ${tv.df[ti]} of the ${HAND.length} passages, so idf = ln((1 + ${HAND.length}) / (1 + ${tv.df[ti]})) + 1 = ${f6(tv.idf[ti])}. A term in every passage would still have idf 1, never 0: the + 1 keeps it.`);
 w();
 w('THE DOCUMENT VECTORS. Each passage\'s raw weight is its count times the idf, and the vector is then divided by its length, so every non-empty vector has length 1:');
 w();
@@ -564,7 +587,7 @@ w();
 table(['rank', 'passage', 'cosine', 'term: query weight x passage weight'], th.ranking.map((r) => [S(r.rank), r.id, f6(r.score), r.terms.map((t) => `${t.term}: ${f6(t.query)} x ${f6(t.document)}`).join('; ')]));
 must('each cosine is the sum of its products', th.ranking.every((r) => nearly(r.score, sum(r.terms.map((t) => t.query * t.document)))), 'dot');
 w();
-w(`${th.ranking.length} of the 5 passages rank: d2 and d4 share no term with the query, and d5 is empty.`);
+w(`${th.ranking.length} of the ${HAND.length} passages rank: d2 and d4 share no term with the query, and d5 is empty.`);
 w();
 const t4 = success('rankTfidf Q04', EV.rankTfidf({ documents: DOCS, query: QTEXT.Q04, k: K }));
 w(`ON THE CORPUS. Q04 "${QTEXT.Q04}": query vector ${Object.entries(t4.queryVector).map(([t, x]) => `${t} ${f6(x)}`).join(', ')}.`);
@@ -599,8 +622,8 @@ must('each BM25 score is the sum of its term contributions', bh.ranking.every((r
 const h1 = bh.ranking[0];
 const h1o = h1.terms.find((t) => t.term === 'oil');
 w();
-w(`Derived check on d1's oil term: idf ${f6(h1o.idf)} x ${h1o.tf} x (1.2 + 1) / (${h1o.tf} + 1.2 x (1 - 0.75 + 0.75 x ${h1.length} / ${f6(bh.avgdl)})) = ${f6(h1o.contribution)}.`);
-must('the derived oil contribution matches', nearly(h1o.contribution, (h1o.idf * h1o.tf * 2.2) / (h1o.tf + 1.2 * (0.25 + (0.75 * h1.length) / bh.avgdl))), h1o.contribution);
+w(`Derived check on d1's oil term: idf ${f6(h1o.idf)} x ${h1o.tf} x (${KD.K1} + 1) / (${h1o.tf} + ${KD.K1} x (1 - ${KD.B} + ${KD.B} x ${h1.length} / ${f6(bh.avgdl)})) = ${f6(h1o.contribution)}.`);
+must('the derived oil contribution matches', nearly(h1o.contribution, (h1o.idf * h1o.tf * (KD.K1 + 1)) / (h1o.tf + KD.K1 * (1 - KD.B + (KD.B * h1.length) / bh.avgdl))), h1o.contribution);
 w();
 w('THE BM25 IDF IS NEVER NEGATIVE. The Lucene form adds 1 inside the logarithm, so a term in every passage still scores a small positive idf. A term in no passage has no posting and contributes nothing.');
 w();
@@ -615,21 +638,22 @@ const SAT = [
 ];
 const sat = success('rankBm25 saturation b 0', EV.rankBm25({ documents: SAT, query: 'oil', k: 6, b: 0 }));
 const satIdf = sat.queryTerms[0].idf;
-w(`SATURATION AND K1. Six stated passages, "oil" repeated 1, 2, 3, 5 and 9 times and one passage "gas", scored for "oil" with b = 0 so that length plays no part (k1 = 1.2, idf ${f6(satIdf)}):`);
+const satTf = SAT.filter((d) => d.text.startsWith('oil')).map((d) => d.text.split(' ').length);
+w(`SATURATION AND K1. Six stated passages, "oil" repeated ${satTf.slice(0, -1).join(', ')} and ${satTf[satTf.length - 1]} times and one passage "gas", scored for "oil" with b = 0 so that length plays no part (k1 = ${KD.K1}, idf ${f6(satIdf)}):`);
 w();
 const satRows = [...sat.ranking].sort((a, b) => a.terms[0].tf - b.terms[0].tf);
 table(['passage', 'tf', 'contribution', 'contribution / idf (derived)'], satRows.map((r) => [r.id, S(r.terms[0].tf), f6(r.score), f6(r.score / satIdf)]));
 w();
-w(`The ratio climbs toward k1 + 1 = 2.2 and never reaches it: each extra repeat adds less (derived from the rows above). k1 sets how fast the count saturates.`);
-must('the saturation ratio rises and stays below 2.2', satRows.every((r, i) => i === 0 || r.score > satRows[i - 1].score) && satRows.every((r) => r.score / satIdf < 2.2), 'sat');
+w(`The ratio climbs toward k1 + 1 = ${KD.K1 + 1} and never reaches it: each extra repeat adds less (derived from the rows above). k1 sets how fast the count saturates.`);
+must('the saturation ratio rises and stays below k1 + 1', satRows.every((r, i) => i === 0 || r.score > satRows[i - 1].score) && satRows.every((r) => r.score / satIdf < KD.K1 + 1), 'sat');
 w();
 const b06d = success('bm25 Q06 b default', EV.rankBm25({ documents: DOCS, query: QTEXT.Q06, k: K }));
 const bq0 = success('bm25 Q13 b 0', EV.rankBm25({ documents: DOCS, query: QTEXT.Q13, k: K, b: 0 }));
 const bqd = success('bm25 Q13 b default', EV.rankBm25({ documents: DOCS, query: QTEXT.Q13, k: K }));
 const bq1 = success('bm25 Q13 b 1', EV.rankBm25({ documents: DOCS, query: QTEXT.Q13, k: K, b: 1 }));
-w(`LENGTH NORMALISATION AND B. b scales how much a long passage is marked down. Q13 "${QTEXT.Q13}" at b = 0, the default 0.75 and 1:`);
+w(`LENGTH NORMALISATION AND B. b scales how much a long passage is marked down. Q13 "${QTEXT.Q13}" at b = 0, the default ${KD.B} and 1:`);
 w();
-table(['rank', 'b 0: passage (length)', 'score', 'b 0.75: passage (length)', 'score', 'b 1: passage (length)', 'score'], [0, 1, 2, 3, 4].map((i) => [S(i + 1),
+table(['rank', 'b 0: passage (length)', 'score', `b ${KD.B}: passage (length)`, 'score', 'b 1: passage (length)', 'score'], [0, 1, 2, 3, 4].map((i) => [S(i + 1),
   `${bq0.ranking[i].id} (${bq0.ranking[i].length})`, f6(bq0.ranking[i].score),
   `${bqd.ranking[i].id} (${bqd.ranking[i].length})`, f6(bqd.ranking[i].score),
   `${bq1.ranking[i].id} (${bq1.ranking[i].length})`, f6(bq1.ranking[i].score)]));
@@ -638,7 +662,7 @@ w();
 w(`At b = 0 length plays no part and the longer ${bq0.ranking[0].id} (${bq0.ranking[0].length} tokens) is first; at b = 1 the shorter ${bq1.ranking[0].id} (${bq1.ranking[0].length} tokens) is. At b = 0 the fifth place is also a tie at the cutoff (tieAtCutoff ${bq0.tieAtCutoff}).`);
 must('Q13 b 0 has a tie at the cutoff', bq0.tieAtCutoff === true, bq0.tieAtCutoff);
 w();
-const rep = success('bm25 oil oil rate', EV.rankBm25({ documents: HAND, query: 'oil oil rate', k: K }));
+const rep = success('bm25 oil oil rate', EV.rankBm25({ documents: HAND, query: PROBE.repeated, k: K }));
 must('a repeated query word counts once', JSON.stringify(rep.ranking.map((r) => [r.id, r.score])) === JSON.stringify(bh.ranking.map((r) => [r.id, r.score])), 'repeat');
 w(`A REPEATED QUERY WORD COUNTS ONCE. "oil oil rate" on the hand set returns exactly the scores of "oil rate" (checked to the last bit): ${rep.ranking.map((r) => `${r.id} ${f6(r.score)}`).join(', ')}. The engine keeps the distinct query terms (Okapi's query-frequency factor with k3 = 0, stated in its basis).`);
 w();
@@ -650,11 +674,11 @@ must('Q02: EKD-043 ranks first and the answer EKD-003 fourth', b02.ranking[0].id
 w();
 w(`EKD-043 is a drilling report ("rate of penetration") and ranks first on the words rate and of; the passage that answers the query, EKD-003, ranks fourth. Words match, meaning does not.`);
 w();
-const b13k = success('bm25 Q13 k1 2', EV.rankBm25({ documents: DOCS, query: QTEXT.Q13, k: K, k1: 2 }));
+const b13k = success('bm25 Q13 k1 alt', EV.rankBm25({ documents: DOCS, query: QTEXT.Q13, k: K, k1: K1_ALT }));
 const b13 = success('bm25 Q13', EV.rankBm25({ documents: DOCS, query: QTEXT.Q13, k: K }));
-w(`K1 ON THE CORPUS. Q13 "${QTEXT.Q13}" at k1 1.2 and k1 2:`);
+w(`K1 ON THE CORPUS. Q13 "${QTEXT.Q13}" at k1 ${KD.K1} and k1 ${K1_ALT}:`);
 w();
-table(['rank', 'k1 1.2: passage', 'score', 'k1 2: passage', 'score'], b13.ranking.map((r, i) => [S(r.rank), r.id, f6(r.score), b13k.ranking[i].id, f6(b13k.ranking[i].score)]));
+table(['rank', `k1 ${KD.K1}: passage`, 'score', `k1 ${K1_ALT}: passage`, 'score'], b13.ranking.map((r, i) => [S(r.rank), r.id, f6(r.score), b13k.ranking[i].id, f6(b13k.ranking[i].score)]));
 
 /* ============================================================ SECTION 8 */
 
@@ -677,17 +701,17 @@ w(`A TIE AT THE CUTOFF. The same query at k = 1 keeps ${q10k1.ranking[0].id} and
 must('Q10 at k 1 reports the tie at the cutoff', q10k1.tieAtCutoff === true && q10k1.ranking.length === 1, q10k1.tieAtCutoff);
 w();
 const q06 = b06d;
-w(`A WIDER TIE. Q06 by BM25 at k 5 ties ${JSON.stringify(q06.ties)}, and tieAtCutoff is ${q06.tieAtCutoff}. Across the 24 queries at k 5, BM25 reports a tie at the cutoff on ${rA.perQuery.filter((p) => p.tieAtCutoff).map((p) => p.id).join(', ')} and TF-IDF on ${rB.perQuery.filter((p) => p.tieAtCutoff).map((p) => p.id).join(', ') || 'none'}.`);
+w(`A WIDER TIE. Q06 by BM25 at k ${K} ties ${JSON.stringify(q06.ties)}, and tieAtCutoff is ${q06.tieAtCutoff}. Across the ${QS.length} queries at k ${K}, BM25 reports a tie at the cutoff on ${rA.perQuery.filter((p) => p.tieAtCutoff).map((p) => p.id).join(', ')} and TF-IDF on ${rB.perQuery.filter((p) => p.tieAtCutoff).map((p) => p.id).join(', ') || 'none'}.`);
 must('Q06 has a four-way tie and a tie at the cutoff', q06.ties.some((t) => t.length === 4) && q06.tieAtCutoff, JSON.stringify(q06.ties));
 w();
 const NT = [{ id: 'n2', text: 'oil water' }, { id: 'n1', text: 'oil water gas' }, { id: 'n3', text: 'gas' }];
-const nt = success('bm25 near tie', EV.rankBm25({ documents: NT, query: 'oil', b: 1e-7 }));
-w(`WHAT COUNTS AS A TIE. Two scores tie when they agree to ${EV.DEFAULTS.TIE_DIGITS} significant digits, compared as Number(score.toPrecision(12)). Three stated passages n2 "oil water", n1 "oil water gas" and n3 "gas", scored for "oil" with b = 1e-7, so that length barely matters:`);
+const nt = success('bm25 near tie', EV.rankBm25({ documents: NT, query: 'oil', b: NT_B }));
+w(`WHAT COUNTS AS A TIE. Two scores tie when they agree to ${EV.DEFAULTS.TIE_DIGITS} significant digits, compared as Number(score.toPrecision(${KD.TIE_DIGITS})). Three stated passages n2 "oil water", n1 "oil water gas" and n3 "gas", scored for "oil" with b = ${S(NT_B)}, so that length barely matters:`);
 w();
-table(['rank', 'passage', 'length', 'score (full double)', 'tie key, 12 significant digits'], nt.ranking.map((r) => [S(r.rank), r.id, S(r.length), S(r.score), S(key12(r.score))]));
+table(['rank', 'passage', 'length', 'score (full double)', `tie key, ${KD.TIE_DIGITS} significant digits`], nt.ranking.map((r) => [S(r.rank), r.id, S(r.length), S(r.score), S(key12(r.score))]));
 must('the near tie differs at 12 digits and the shorter n2 ranks first', nt.ranking[0].id === 'n2' && key12(nt.ranking[0].score) !== key12(nt.ranking[1].score) && nt.ties.length === 0, nt.ranking.map((r) => r.id).join());
 w();
-w(`The two scores differ by ${eX(nt.ranking[0].score - nt.ranking[1].score)} (derived), which the 12-digit key sees, so there is no tie and n2 ranks above n1 on its score. With ids alone n1 would come first.`);
+w(`The two scores differ by ${eX(nt.ranking[0].score - nt.ranking[1].score)} (derived), which the ${KD.TIE_DIGITS}-digit key sees, so there is no tie and n2 ranks above n1 on its score. With ids alone n1 would come first.`);
 must('the near-tie scores print alike at six decimals', f6(nt.ranking[0].score) === f6(nt.ranking[1].score), `${f6(nt.ranking[0].score)} ${f6(nt.ranking[1].score)}`);
 w(`At six decimals the two scores print alike (${f6(nt.ranking[0].score)}); they are not equal, and the engine does not tie them.`);
 w();
@@ -701,7 +725,7 @@ w('THE DEFINITIONS (the engine\'s basis, verbatim):');
 w();
 ['relevant', 'precision', 'recall', 'hit', 'reciprocalRank'].forEach((k2) => w(`- ${k2}: ${mb.basis[k2]}`));
 w();
-w('A STATED RANKING, by hand: the list c, a, x, b, d against the judgments a 3, b 2, c 0, d 1, e 2 (x is unjudged, e is judged but not retrieved), k 5, relevant at grade 1 or more:');
+w(`A STATED RANKING, by hand: the list c, a, x, b, d against the judgments a 3, b 2, c 0, d 1, e 2 (x is unjudged, e is judged but not retrieved), k ${K}, relevant at grade 1 or more:`);
 w();
 table(['rank', 'passage', 'grade', 'relevant'], ['c', 'a', 'x', 'b', 'd'].map((id, i) => {
   const g = { a: 3, b: 2, c: 0, d: 1, e: 2 }[id];
@@ -709,34 +733,34 @@ table(['rank', 'passage', 'grade', 'relevant'], ['c', 'a', 'x', 'b', 'd'].map((i
 }));
 w();
 table(['metric', 'value'], [
-  ['relevant judged', S(mb.nRelevant)], ['relevant in the top 5', S(mb.relevantRetrieved)], ['unjudged retrieved', S(mb.unjudgedRetrieved)],
-  ['precision at 5', f6(mb.precision)], ['recall at 5', f6(mb.recall)], ['hit at 5', S(mb.hit)], ['first relevant rank', S(mb.firstRelevantRank)], ['reciprocal rank', f6(mb.reciprocalRank)],
+  ['relevant judged', S(mb.nRelevant)], [`relevant in the top ${K}`, S(mb.relevantRetrieved)], ['unjudged retrieved', S(mb.unjudgedRetrieved)],
+  [`precision at ${K}`, f6(mb.precision)], [`recall at ${K}`, f6(mb.recall)], [`hit at ${K}`, S(mb.hit)], ['first relevant rank', S(mb.firstRelevantRank)], ['reciprocal rank', f6(mb.reciprocalRank)],
 ]);
 must('stated ranking: 3 of 5 relevant, 4 judged relevant, RR 0.5', mb.relevantRetrieved === 3 && mb.nRelevant === 4 && mb.reciprocalRank === 0.5, JSON.stringify(mb));
 w();
-w(`Precision is 3 / 5 and recall 3 / ${mb.nRelevant}: e is relevant and was not retrieved. The first relevant passage is a at rank 2, so the reciprocal rank is 1 / 2.`);
+w(`Precision is ${mb.relevantRetrieved} / ${K} and recall ${mb.relevantRetrieved} / ${mb.nRelevant}: e is relevant and was not retrieved. The first relevant passage is a at rank 2, so the reciprocal rank is 1 / 2.`);
 w();
 const eA = success('evaluateRetrieval A k 5', EV.evaluateRetrieval({ runs: RUNS('A'), judgments: J, k: K }));
 const eB = success('evaluateRetrieval B k 5', EV.evaluateRetrieval({ runs: RUNS('B'), judgments: J, k: K }));
-w('SYSTEM A (BM25) ON EVERY QUERY, k 5, relevant at grade 1 or more:');
+w(`SYSTEM A (BM25) ON EVERY QUERY, k ${K}, relevant at grade 1 or more:`);
 w();
-table(['query', 'relevant judged', 'relevant in top 5', 'precision', 'recall', 'hit', 'first relevant rank', 'reciprocal rank'], eA.perQuery.map((r) => [r.query, S(r.nRelevant), S(r.relevantRetrieved), f6(r.precision), f6(r.recall), S(r.hit), S(r.firstRelevantRank), f6(r.reciprocalRank)]));
+table(['query', 'relevant judged', `relevant in top ${K}`, 'precision', 'recall', 'hit', 'first relevant rank', 'reciprocal rank'], eA.perQuery.map((r) => [r.query, S(r.nRelevant), S(r.relevantRetrieved), f6(r.precision), f6(r.recall), S(r.hit), S(r.firstRelevantRank), f6(r.reciprocalRank)]));
 const pA14 = eA.perQuery.find((r) => r.query === 'Q14');
 planted(2, pA14.hit === 0 && pA14.nRelevant > 0, JSON.stringify(pA14));
 w();
-w(`Q14 has ${pA14.nRelevant} relevant passages and BM25 retrieves none of them in the top 5: hit 0. Q24 has recall null, because no passage is relevant to it. Q10 has precision ${f6(eA.perQuery.find((r) => r.query === 'Q10').precision)} with only 2 passages ranked: precision at 5 divides by 5 even when fewer are ranked.`);
+w(`Q14 has ${pA14.nRelevant} relevant passages and BM25 retrieves none of them in the top ${K}: hit 0. Q24 has recall null, because no passage is relevant to it. Q10 has precision ${f6(eA.perQuery.find((r) => r.query === 'Q10').precision)} with only ${eA.perQuery.find((r) => r.query === 'Q10').retrieved} passages ranked: precision at ${K} divides by ${K} even when fewer are ranked.`);
 must('Q10 precision divides by 5', eA.perQuery.find((r) => r.query === 'Q10').precision === eA.perQuery.find((r) => r.query === 'Q10').relevantRetrieved / 5, 'p10');
 w();
 w(`THE MEANS OVER QUERIES (the engine's basis: ${eA.basis.mean}). ${eA.nIncluded} of the ${eA.nQueries} queries are included; ${eA.excluded.map((x) => x.query).join(', ')} is excluded (${ref('ap')} gives the rule):`);
 w();
 table(['mean over the included queries', 'system A (BM25)', 'system B (TF-IDF)'], [
-  ['precision at 5', f6(eA.mean.precision), f6(eB.mean.precision)],
-  ['recall at 5', f6(eA.mean.recall), f6(eB.mean.recall)],
-  ['hit rate at 5', f6(eA.mean.hitRate), f6(eB.mean.hitRate)],
-  ['MRR at 5', f6(eA.mean.mrr), f6(eB.mean.mrr)],
+  [`precision at ${K}`, f6(eA.mean.precision), f6(eB.mean.precision)],
+  [`recall at ${K}`, f6(eA.mean.recall), f6(eB.mean.recall)],
+  [`hit rate at ${K}`, f6(eA.mean.hitRate), f6(eB.mean.hitRate)],
+  [`MRR at ${K}`, f6(eA.mean.mrr), f6(eB.mean.mrr)],
 ]);
 w();
-w(`MRR is the mean reciprocal rank: system B's ${f6(eB.mean.mrr)} puts its first relevant passage higher on average than system A's ${f6(eA.mean.mrr)}; system A's recall at 5 is the higher of the two.`);
+w(`MRR is the mean reciprocal rank: system B's ${f6(eB.mean.mrr)} puts its first relevant passage higher on average than system A's ${f6(eA.mean.mrr)}; system A's recall at ${K} is the higher of the two.`);
 must('B has the higher MRR and A the higher recall', eB.mean.mrr > eA.mean.mrr && eA.mean.recall > eB.mean.recall, `${eB.mean.mrr} ${eA.mean.recall}`);
 
 /* ============================================================ SECTION 10 */
@@ -744,7 +768,7 @@ must('B has the higher MRR and A the higher recall', eB.mean.mrr > eA.mean.mrr &
 section('claims', 'Answers that cite their sources: claims, and unsupported claims', ['Associate m06', 'Associate m01 l01']);
 w('AN ANSWER IN THIS COURSE is a text and the list of passage ids it cites. A copilot that retrieves passages and then writes an answer can be asked, in its instructions, to cite the passage every figure came from; the citations are what make an answer checkable. The engine then checks the answer\'s claims against the passages it cites.');
 w();
-const gs = success('checkGroundedness stated', EV.checkGroundedness({ answer: 'Ekene-1 made 120 bopd; the survey read 2,096 psia on 2023-01-01, a "water injection" start, and 45% water, -2 skin.', citations: ['d1', 'd4'], documents: HAND, retrieved: ['d1', 'd2', 'd4'] }));
+const gs = success('checkGroundedness stated', EV.checkGroundedness({ answer: PROBE.stated, citations: ['d1', 'd4'], documents: HAND, retrieved: ['d1', 'd2', 'd4'] }));
 w('WHAT A CLAIM IS (the engine\'s basis, verbatim):');
 w();
 w(`- claims: ${gs.basis.claims}`);
@@ -752,15 +776,15 @@ w(`- support: ${gs.basis.support}`);
 w(`- citations: ${gs.basis.citations}`);
 w(`- fraction: ${gs.basis.fraction}`);
 w();
-w('A STATED ANSWER on the hand set: "Ekene-1 made 120 bopd; the survey read 2,096 psia on 2023-01-01, a "water injection" start, and 45% water, -2 skin." citing d1 and d4, with d1, d2 and d4 retrieved:');
+w(`A STATED ANSWER on the hand set, citing d1 and d4, with d1, d2 and d4 retrieved: ${PROBE.stated}`);
 w();
 table(['claim', 'kind', 'value', 'supported', 'reason (verbatim)'], gs.claims.map((c) => [c.text, c.kind, S(c.value), S(c.supported), c.reason || `found in ${list(c.foundIn)}`]));
 must('the stated answer: 120 and 2,096 supported, 4 unsupported', gs.nSupported === 2 && gs.nClaims === 6, `${gs.nSupported}/${gs.nClaims}`);
 w();
-w(`${gs.nSupported} of ${gs.nClaims} claims are supported, a supported fraction of ${f6(gs.supportedFraction)}. "Ekene-1" is an identifier and makes no claim. The quote is checked first and the date before the numbers, and "45%" is the number 45. The date and the quote are in d2, which was retrieved and not cited; the reason says so.`);
+w(`${gs.nSupported} of ${gs.nClaims} claims are supported, a supported fraction of ${f6(gs.supportedFraction)}. "Ekene-1" is an identifier and makes no claim. The quote is checked first and the date before the numbers, and "45%" is the number "45". The date and the quote are in d2, which was retrieved and not cited; the reason says so.`);
 w();
 const cA = success('checkAnswers A', EV.checkAnswers({ answers: ANSWERS('A'), documents: DOCS, runs: RUNS('A') }));
-w('SYSTEM A\'S 24 ANSWERS, checked against the passages each cites, with its retrieved lists:');
+w(`SYSTEM A'S ${QS.length} ANSWERS, checked against the passages each cites, with its retrieved lists:`);
 w();
 table(['query', 'claims', 'supported', 'supported fraction', 'citations', 'flags'], cA.perAnswer.map((r) => [r.query, S(r.nClaims), S(r.nSupported), r.supportedFraction === null ? 'null' : f6(r.supportedFraction), r.citations.map((c) => c.id).join(', ') || '(none)', r.flags.join('; ') || '(none)']));
 w();
@@ -773,7 +797,7 @@ const unsA = cA.perAnswer.flatMap((r) => r.claims.filter((c) => !c.supported).ma
 table(['query', 'claim', 'reason (verbatim)'], unsA);
 planted(3, unsA.some(([q, t, r]) => q === 'Q06' && t === '20.3' && /EKD-007, neither cited nor retrieved/.test(r)), JSON.stringify(unsA));
 w();
-w('The Q06 answer states the maximum oil column, 20.3 m, which is in EKD-007: that passage was neither retrieved nor cited, so the figure came from somewhere the answer cannot show. The Q13 claim is taken up in ' + ref('grounded') + '.');
+w(`The Q06 answer states the maximum oil column, ${unsA[0][1]} m, which is in EKD-007: that passage was neither retrieved nor cited, so the figure came from somewhere the answer cannot show. The Q13 claim is taken up in ${ref('grounded')}.`);
 w();
 w(`THE ANSWERS WITH NO CLAIM. ${cA.perAnswer.filter((r) => r.nClaims === 0).map((r) => r.query).join(' and ')} state no number, date or quote: "${ANS('A').Q14.text}" and "${ANS('A').Q24.text}". Their supported fraction is null, and the pooled fraction counts only claims.`);
 
@@ -782,7 +806,7 @@ w(`THE ANSWERS WITH NO CLAIM. ${cA.perAnswer.filter((r) => r.nClaims === 0).map(
 section('ap', 'Average precision, MAP, the no-relevant rule and the relevance threshold', ['Professional m01']);
 w(`THE DEFINITION (the engine's basis, verbatim): ${mb.basis.averagePrecision}.`);
 w();
-w('THE STATED RANKING of ' + ref('atk') + ', c, a, x, b, d, judgments a 3, b 2, c 0, d 1, e 2, k 5:');
+w(`THE STATED RANKING of ${ref('atk')}, c, a, x, b, d, judgments a 3, b 2, c 0, d 1, e 2, k ${K}:`);
 w();
 const apRows = [];
 let hits = 0;
@@ -792,14 +816,14 @@ let hits = 0;
 });
 table(['rank of a relevant passage', 'passage', 'relevant so far', 'precision at that rank (derived)'], apRows);
 w();
-w(`Average precision = (${apRows.map((r) => r[3]).join(' + ')}) / ${mb.nRelevant} = ${f6(mb.averagePrecision)}. The divisor is every relevant judged passage, ${mb.nRelevant}, so e, relevant and never retrieved, lowers the average; dividing by the 3 retrieved would give ${f6(sum(apRows.map((r) => Number(r[3]))) / 3)} (derived), which is not what the engine computes.`);
+w(`Average precision = (${apRows.map((r) => r[3]).join(' + ')}) / ${mb.nRelevant} = ${f6(mb.averagePrecision)}. The divisor is every relevant judged passage, ${mb.nRelevant}, so e, relevant and never retrieved, lowers the average; dividing by the ${apRows.length} retrieved would give ${f6(sum(apRows.map((r) => Number(r[3]))) / apRows.length)} (derived), which is not what the engine computes.`);
 must('AP of the stated ranking', nearly(mb.averagePrecision, (1 / 2 + 2 / 4 + 3 / 5) / 4), mb.averagePrecision);
 w();
-w('MAP is the mean of the per-query average precision over the included queries. At k 5 and grade 1:');
+w(`MAP is the mean of the per-query average precision over the included queries. At k ${K} and grade 1:`);
 w();
 table(['query', 'relevant judged', 'system A AP', 'system B AP'], eA.perQuery.map((r, i) => [r.query, S(r.nRelevant), r.averagePrecision === null ? 'null' : f6(r.averagePrecision), eB.perQuery[i].averagePrecision === null ? 'null' : f6(eB.perQuery[i].averagePrecision)]));
 w();
-w(`MAP at 5: system A ${f6(eA.mean.map)}, system B ${f6(eB.mean.map)}, each over ${eA.nIncluded} queries.`);
+w(`MAP at ${K}: system A ${f6(eA.mean.map)}, system B ${f6(eB.mean.map)}, each over ${eA.nIncluded} queries.`);
 must('MAP A 0.600278 and B 0.593007', f6(eA.mean.map) === '0.600278' && f6(eB.mean.map) === '0.593007', `${eA.mean.map} ${eB.mean.map}`);
 w();
 w(`THE NO-RELEVANT RULE (the engine's basis, verbatim): ${eA.basis.noRelevant}.`);
@@ -818,7 +842,7 @@ const eA2 = success('evaluateRetrieval A grade 2', EV.evaluateRetrieval({ runs: 
 const eB2 = success('evaluateRetrieval B grade 2', EV.evaluateRetrieval({ runs: RUNS('B'), judgments: J, k: K, relevantGrade: 2 }));
 w('THE RELEVANCE THRESHOLD. relevantGrade is 1 by default, the trec_eval default, so a passage graded 1 ("related") counts as relevant. At grade 2 only "relevant" and "answers the query" count:');
 w();
-table(['mean at 5', 'A, grade 1', 'A, grade 2', 'B, grade 1', 'B, grade 2'], [
+table([`mean at ${K}`, 'A, grade 1', 'A, grade 2', 'B, grade 1', 'B, grade 2'], [
   ['queries in the means', S(eA.nIncluded), S(eA2.nIncluded), S(eB.nIncluded), S(eB2.nIncluded)],
   ['precision', f6(eA.mean.precision), f6(eA2.mean.precision), f6(eB.mean.precision), f6(eB2.mean.precision)],
   ['recall', f6(eA.mean.recall), f6(eA2.mean.recall), f6(eB.mean.recall), f6(eB2.mean.recall)],
@@ -830,7 +854,7 @@ must('the threshold reverses the MAP order', eA.mean.map > eB.mean.map && eB2.me
 must('nDCG does not move with the threshold', eA.mean.ndcg === eA2.mean.ndcg && eB.mean.ndcg === eB2.mean.ndcg, 'ndcg');
 w();
 must('grade 1 gives the higher precision and the lower recall for both systems', eA.mean.precision > eA2.mean.precision && eB.mean.precision > eB2.mean.precision && eA.mean.recall < eA2.mean.recall && eB.mean.recall < eB2.mean.recall, 'direction');
-w(`At grade 1 system A has the higher MAP; at grade 2 system B does. Counting grade 1 as relevant gives each system a higher precision at 5 (more of its top 5 counts) and a lower recall (more relevant passages to find), for both systems (checked). nDCG is identical in both columns (checked): the gain uses every grade and the threshold does not apply to it. A comparison states its threshold.`);
+w(`At grade 1 system A has the higher MAP; at grade 2 system B does. Counting grade 1 as relevant gives each system a higher precision at ${K} (more of its top ${K} counts) and a lower recall (more relevant passages to find), for both systems (checked). nDCG is identical in both columns (checked): the gain uses every grade and the threshold does not apply to it. A comparison states its threshold.`);
 
 /* ============================================================ SECTION 12 */
 
@@ -838,7 +862,7 @@ section('ndcg', 'Graded relevance: DCG, the ideal ranking, linear and exponentia
 w(`THE DEFINITION (the engine's basis, verbatim): ${mb.basis.ndcg}.`);
 w();
 const mbe = success('retrievalMetrics stated exponential', EV.retrievalMetrics({ ranking: ['c', 'a', 'x', 'b', 'd'], judgments: { a: 3, b: 2, c: 0, d: 1, e: 2 }, k: K, gain: 'exponential' }));
-w('THE STATED RANKING again, c, a, x, b, d, judgments a 3, b 2, c 0, d 1, e 2, k 5. Each rank\'s gain and discount (derived):');
+w(`THE STATED RANKING again, c, a, x, b, d, judgments a 3, b 2, c 0, d 1, e 2, k ${K}. Each rank's gain and discount (derived):`);
 w();
 const JG = { a: 3, b: 2, c: 0, d: 1, e: 2 };
 table(['rank', 'passage', 'grade', 'discount log2(rank + 1)', 'linear gain / discount', 'exponential gain 2^g - 1', 'exponential gain / discount'], ['c', 'a', 'x', 'b', 'd'].map((id, i) => {
@@ -846,28 +870,28 @@ table(['rank', 'passage', 'grade', 'discount log2(rank + 1)', 'linear gain / dis
   return [S(i + 1), id, S(g), f6(dsc), f6(g / dsc), S(2 ** g - 1), f6((2 ** g - 1) / dsc)];
 }));
 w();
-w('THE IDEAL RANKING sorts every judged grade for the query descending, retrieved or not: 3, 2, 2, 1, 0. Its DCG at 5 is the ideal DCG.');
+w(`THE IDEAL RANKING sorts every judged grade for the query descending, retrieved or not: 3, 2, 2, 1, 0. Its DCG at ${K} is the ideal DCG.`);
 w();
 table(['gain', 'DCG', 'ideal DCG', 'nDCG'], [['linear', f6(mb.dcg), f6(mb.idcg), f6(mb.ndcg)], ['exponential', f6(mbe.dcg), f6(mbe.idcg), f6(mbe.ndcg)]]);
 must('the ideal DCG uses e, which was never retrieved', nearly(mb.idcg, 3 + 2 / Math.log2(3) + 2 / 2 + 1 / Math.log2(5)), mb.idcg);
 w();
-w('The ideal counts e\'s grade 2 although e was never retrieved: building the ideal from the retrieved passages alone would reward a system for missing a good passage.');
+w('The ideal counts e\'s grade 2 although no system retrieved e: building the ideal from the retrieved passages alone would reward a system for missing a good passage.');
 w();
 const eAe = success('evaluateRetrieval A exponential', EV.evaluateRetrieval({ runs: RUNS('A'), judgments: J, k: K, gain: 'exponential' }));
 const eBe = success('evaluateRetrieval B exponential', EV.evaluateRetrieval({ runs: RUNS('B'), judgments: J, k: K, gain: 'exponential' }));
-w('ON THE EKENE QUERIES, k 5, per query:');
+w(`ON THE EKENE QUERIES, k ${K}, per query:`);
 w();
 table(['query', 'A nDCG linear', 'A nDCG exponential', 'B nDCG linear', 'B nDCG exponential'], eA.perQuery.map((r, i) => [r.query, f6(r.ndcg), f6(eAe.perQuery[i].ndcg), f6(eB.perQuery[i].ndcg), f6(eBe.perQuery[i].ndcg)]));
 w();
-w(`Mean nDCG at 5 over the ${eA.nIncluded} included queries: linear gain, A ${f6(eA.mean.ndcg)} and B ${f6(eB.mean.ndcg)}; exponential gain, A ${f6(eAe.mean.ndcg)} and B ${f6(eBe.mean.ndcg)}. Exponential gain makes a grade 3 passage worth 7 against a grade 2's 3, so it rewards putting the answering passage first.`);
+w(`Mean nDCG at ${K} over the ${eA.nIncluded} included queries: linear gain, A ${f6(eA.mean.ndcg)} and B ${f6(eB.mean.ndcg)}; exponential gain, A ${f6(eAe.mean.ndcg)} and B ${f6(eBe.mean.ndcg)}. Exponential gain makes a grade 3 passage worth ${2 ** 3 - 1} against a grade 2's ${2 ** 2 - 1}, so it rewards putting the answering passage first.`);
 must('B has the higher mean nDCG on both gains', eB.mean.ndcg > eA.mean.ndcg && eBe.mean.ndcg > eAe.mean.ndcg, 'ndcg');
 w(`System B has the higher mean nDCG on both gains; the difference is ${eX(eB.mean.ndcg - eA.mean.ndcg)} linear and ${eX(eBe.mean.ndcg - eAe.mean.ndcg)} exponential (derived). Whether a difference that small means anything is the question of ${ref('compare')}.`);
 w();
 const g1only = success('retrievalMetrics grade 1 only at threshold 2', EV.retrievalMetrics({ ranking: ['EKD-013', 'EKD-014'], judgments: { 'EKD-013': 1, 'EKD-014': 1, 'EKD-018': 0 }, k: K, relevantGrade: 2 }));
-w(`nDCG AND THE THRESHOLD. A stated query whose judged passages are graded 1, 1 and 0, ranked EKD-013, EKD-014, at relevantGrade 2: recall and AP are null (${g1only.notes.recall}), and nDCG is ${f6(g1only.ndcg)}, because grade 1 still carries gain.`);
+w(`nDCG AND THE THRESHOLD. A stated query whose judged passages are graded 1, 1 and 0, ranked EKD-013, EKD-014, at relevantGrade 2: recall and AP are returned as null (${g1only.notes.recall}), and nDCG is ${f6(g1only.ndcg)}, because grade 1 still carries gain.`);
 must('grade-1-only: nDCG defined at threshold 2', g1only.ndcg === 1 && g1only.recall === null, JSON.stringify(g1only.notes));
 w();
-w(`UNJUDGED PASSAGES. A passage nobody judged counts as grade 0, and the engine counts how many were retrieved (unjudgedRetrieved). The judged set was pooled from both systems' top 5, so at k 5 system A retrieves ${sum(eA.perQuery.map((r) => r.unjudgedRetrieved))} unjudged passages and system B ${sum(eB.perQuery.map((r) => r.unjudgedRetrieved))}. What happens outside the pool is shown in ${ref('judged')}.`);
+w(`UNJUDGED PASSAGES. A passage nobody judged counts as grade 0, and the engine counts how many were retrieved (unjudgedRetrieved). The judged set was pooled from both systems' top ${K}, so at k ${K} system A retrieves ${sum(eA.perQuery.map((r) => r.unjudgedRetrieved))} unjudged passages and system B ${sum(eB.perQuery.map((r) => r.unjudgedRetrieved))}. What happens outside the pool is shown in ${ref('judged')}.`);
 must('no unjudged passage in either system\'s top 5', sum(eA.perQuery.map((r) => r.unjudgedRetrieved)) === 0 && sum(eB.perQuery.map((r) => r.unjudgedRetrieved)) === 0, 'pool');
 
 /* ============================================================ SECTION 13 */
@@ -890,9 +914,9 @@ w('BOTH SYSTEMS\' SHORT ANSWERS against the reference:');
 w();
 table(['query', 'reference', 'A short answer', 'A exact', 'A F1', 'B short answer', 'B exact', 'B F1'], QS.map((q, i) => [q.id, REF[q.id] || '(empty)', ANS('A')[q.id].short || '(empty)', mA[i][1].exactMatch ? '1' : '0', f6(mA[i][1].f1), ANS('B')[q.id].short || '(empty)', mB[i][1].exactMatch ? '1' : '0', f6(mB[i][1].f1)]));
 const emA = mA.filter(([, r]) => r.exactMatch).length; const emB = mB.filter(([, r]) => r.exactMatch).length;
-const f1A = sum(mA.map(([, r]) => r.f1)) / 24; const f1B = sum(mB.map(([, r]) => r.f1)) / 24;
+const f1A = sum(mA.map(([, r]) => r.f1)) / QS.length; const f1B = sum(mB.map(([, r]) => r.f1)) / QS.length;
 w();
-w(`Exact matches: system A ${emA} of 24, system B ${emB} of 24. Mean token F1 over the 24 (derived, the mean of the column): A ${f6(f1A)}, B ${f6(f1B)}.`);
+w(`Exact matches: system A ${emA} of ${QS.length}, system B ${emB} of ${QS.length}. Mean token F1 over the ${QS.length} (derived, the mean of the column): A ${f6(f1A)}, B ${f6(f1B)}.`);
 must('exact match 20 and 13', emA === 20 && emB === 13, `${emA} ${emB}`);
 const a13 = mA[12][1]; const a24 = mA[23][1]; const a14 = mA[13][1];
 planted(5, a24.exactMatch === true && a24.f1 === 1, JSON.stringify(a24));
@@ -900,8 +924,8 @@ planted(6, a14.f1 === 0 && a14.exactMatch === false, JSON.stringify(a14));
 w();
 w(`Read four rows. A's Q13 "45 percent" against "45.0 percent" scores exact 0 and F1 ${f6(a13.f1)}: the same quantity, different normalised tokens. A's Q24 is empty and so is the reference, which scores exact 1 and F1 1, a correct abstention. A's Q14 is empty against "water free": F1 0. B's Q16 lists two of the four wells: F1 ${f6(mB[15][1].f1)}, partial credit.`);
 w();
-const mr = success('answerMatch repeated tokens', EV.answerMatch({ prediction: 'oil oil water', truth: 'oil water water' }));
-w(`TOKEN F1 BY MULTISET. "oil oil water" against "oil water water" (stated) has ${mr.commonTokens} common tokens (each token counted as often as it appears in both), precision ${f6(mr.precision)}, recall ${f6(mr.recall)}, F1 ${f6(mr.f1)}.`);
+const mr = success('answerMatch repeated tokens', EV.answerMatch({ prediction: PROBE.multiset[0], truth: PROBE.multiset[1] }));
+w(`TOKEN F1 BY MULTISET. "${PROBE.multiset[0]}" against "${PROBE.multiset[1]}" (stated) has ${mr.commonTokens} common tokens (each token counted as often as it appears in both), precision ${f6(mr.precision)}, recall ${f6(mr.recall)}, F1 ${f6(mr.f1)}.`);
 must('multiset common tokens 2', mr.commonTokens === 2, mr.commonTokens);
 
 /* ============================================================ SECTION 14 */
@@ -949,12 +973,14 @@ planted(20, xB.perRecord.filter((r) => !r.predicted).map((r) => r.id).join() ===
 planted(21, find('B', 'EKD-013', 'well', 'unsupported') && find('B', 'EKD-029', 'water_cut_pct', 'unsupported'), 'wrong well');
 w();
 must('B EKD-032 is correct on the tolerance and EKD-033 wrong', xB.perRecord.find((r) => r.id === 'EKD-032').fields.oil_rate_bopd.outcome === 'correct' && xB.perRecord.find((r) => r.id === 'EKD-033').fields.oil_rate_bopd.outcome === 'wrong', 'tol');
-w(`System A's "3,038" for 3038 is correct: a number field reads digits with comma thousands groups. System B's 45.25 against 45.2 on EKD-032 is correct: the difference sits on the absTol ${FIELDS.find((f) => f.name === 'oil_rate_bopd').absTol}, the tolerance is inclusive, and the double computes it as ${S(xB.perRecord.find((r) => r.id === 'EKD-032').fields.oil_rate_bopd.difference)}. System B's 64.7 against 64.6 on EKD-033 is wrong: the double difference is ${S(xB.perRecord.find((r) => r.id === 'EKD-033').fields.oil_rate_bopd.difference)}, above 0.05. System B did not return EKD-053 or EKD-056; a labelled record with no prediction is scored as all empty, so its filled labels are missed.`);
+const cellOf = (x, id, f) => x.perRecord.find((r) => r.id === id).fields[f];
+w(`System A's "${cellOf(xA, 'EKD-013', 'reservoir_pressure_psia').prediction}" for the label ${cellOf(xA, 'EKD-013', 'reservoir_pressure_psia').label} is correct: a number field reads digits with comma thousands groups. System B's ${cellOf(xB, 'EKD-032', 'oil_rate_bopd').prediction} against ${cellOf(xB, 'EKD-032', 'oil_rate_bopd').label} on EKD-032 is correct: the difference sits on the absTol ${FIELDS.find((f) => f.name === 'oil_rate_bopd').absTol}, the tolerance is inclusive, and the double computes it as ${S(xB.perRecord.find((r) => r.id === 'EKD-032').fields.oil_rate_bopd.difference)}. System B's ${cellOf(xB, 'EKD-033', 'oil_rate_bopd').prediction} against ${cellOf(xB, 'EKD-033', 'oil_rate_bopd').label} on EKD-033 is wrong: the double difference is ${S(cellOf(xB, 'EKD-033', 'oil_rate_bopd').difference)}, above ${FIELDS.find((f) => f.name === 'oil_rate_bopd').absTol}. System B did not return EKD-053 or EKD-056; a labelled record with no prediction is scored as all empty, so its filled labels are missed.`);
 w();
-const xt = success('scoreExtraction tolerances', EV.scoreExtraction({ labels: [{ id: 'r1', fields: { q: 100, p: 3000 } }, { id: 'r2', fields: { q: 50, p: 1000 } }], predictions: [{ id: 'r1', fields: { q: '101', p: '3,003' } }, { id: 'r2', fields: { q: 50.6, p: 1002.5 } }], fields: [{ name: 'q', type: 'number', relTol: 0.01 }, { name: 'p', type: 'number', absTol: 2, relTol: 0.001 }] }));
-w('A TOLERANCE IS INCLUSIVE, |prediction - label| <= max(absTol, relTol x |label|). Two stated records, q with relTol 0.01 and p with absTol 2 and relTol 0.001:');
+const XT = { labels: [{ id: 'r1', fields: { q: 100, p: 3000 } }, { id: 'r2', fields: { q: 50, p: 1000 } }], predictions: [{ id: 'r1', fields: { q: '101', p: '3,003' } }, { id: 'r2', fields: { q: 50.6, p: 1002.5 } }] }; // stated records
+const xt = success('scoreExtraction tolerances', EV.scoreExtraction({ ...XT, fields: [{ name: 'q', type: 'number', relTol: XT_TOL.qRel }, { name: 'p', type: 'number', absTol: XT_TOL.pAbs, relTol: XT_TOL.pRel }] }));
+w(`A TOLERANCE IS INCLUSIVE, |prediction - label| <= max(absTol, relTol x |label|). Two stated records, q with relTol ${XT_TOL.qRel} and p with absTol ${XT_TOL.pAbs} and relTol ${XT_TOL.pRel}:`);
 w();
-table(['record', 'field', 'label', 'prediction', 'tolerance (derived)', 'outcome', 'difference'], xt.perRecord.flatMap((r) => Object.entries(r.fields).map(([f, c]) => [r.id, f, S(c.label), `\`${S(c.prediction)}\``, S(f === 'q' ? 0.01 * c.label : Math.max(2, 0.001 * c.label)), c.outcome, S(c.difference)])));
+table(['record', 'field', 'label', 'prediction', 'tolerance (derived)', 'outcome', 'difference'], xt.perRecord.flatMap((r) => Object.entries(r.fields).map(([f, c]) => [r.id, f, S(c.label), `\`${S(c.prediction)}\``, S(f === 'q' ? XT_TOL.qRel * c.label : Math.max(XT_TOL.pAbs, XT_TOL.pRel * c.label)), c.outcome, S(c.difference)])));
 must('101 against 100 at relTol 0.01 is correct (on the boundary)', xt.perRecord[0].fields.q.outcome === 'correct', 'q');
 
 /* ============================================================ SECTION 15 */
@@ -965,7 +991,7 @@ const cBt = success('checkAnswers B reltol', EV.checkAnswers({ answers: ANSWERS(
 const cBn = success('checkAnswers B no runs', EV.checkAnswers({ answers: ANSWERS('B'), documents: DOCS }));
 w('A CLAIM IS SUPPORTED only by a passage that is both cited and retrieved. A citation to a passage that was not retrieved is flagged and supports nothing; a citation to an id that is not a passage is flagged unknown.');
 w();
-table(['figure (both systems, k 5)', 'system A', 'system B'], [
+table([`figure (both systems, k ${K})`, 'system A', 'system B'], [
   ['claims', S(cA.nClaims), S(cB.nClaims)], ['supported', S(cA.nSupported), S(cB.nSupported)],
   ['pooled supported fraction', f6(cA.supportedFraction), f6(cB.supportedFraction)],
   ['mean of the per-answer fractions', f6(cA.meanAnswerSupportedFraction), f6(cB.meanAnswerSupportedFraction)],
@@ -999,14 +1025,15 @@ w(`GROUNDED IS NOT CORRECT. System B's Q05 answer "${ANS('B').Q05.text}" is full
 w();
 const a13c = cA.perAnswer.find((r) => r.query === 'Q13');
 planted(4, a13c.claims.some((c) => c.text === '2025' && !c.supported), JSON.stringify(a13c.claims));
-w(`HOW THE CHECK READS TEXT. System A's Q13 answer "${ANS('A').Q13.text}" says "the end of 2025". The claim grammar reads a bare year as the number 2025, which is not in EKD-030 (that passage writes the date 2025-12-01), so the claim is unsupported although the answer is right: ${a13c.claims.find((c) => c.text === '2025').reason}. A deterministic check reads exactly the forms it states and no others.`);
+w(`HOW THE CHECK READS TEXT. System A's Q13 answer "${ANS('A').Q13.text}" says "the end of 2025". The claim grammar reads a bare year as the number "${a13c.claims.find((c) => c.kind === 'number' && Number.isInteger(c.value) && c.value > 1900).text}", which is not in EKD-030 (that passage writes the date "2025-12-01"), so the claim is unsupported although the answer is right: ${a13c.claims.find((c) => c.text === '2025').reason}. A deterministic check reads exactly the forms it states and no others.`);
 w();
-const coin = success('groundedness coincidence', EV.checkGroundedness({ answer: 'The spill was 5 bbl.', citations: ['EKD-025'], documents: DOCS }));
-w(`A NUMBER CAN MATCH BY COINCIDENCE. The stated answer "The spill was 5 bbl." citing EKD-025 (no retrieved list given) is supported: EKD-025 says "5 months". The check matches the value and ignores the unit: supported ${coin.nSupported} of ${coin.nClaims}.`);
+const coin = success('groundedness coincidence', EV.checkGroundedness({ answer: PROBE.coin, citations: ['EKD-025'], documents: DOCS }));
+w(`A NUMBER CAN MATCH BY COINCIDENCE. The stated answer "${PROBE.coin}" citing EKD-025 (no retrieved list given) is supported: EKD-025 says "5 months". The check matches the value and ignores the unit: supported ${coin.nSupported} of ${coin.nClaims}.`);
 must('5 bbl supported by 5 months', coin.nSupported === 1, coin.nSupported);
 w();
 const q01t = cBt.perAnswer.find((r) => r.query === 'Q01');
-w(`A STATED TOLERANCE. numericRelTol is 0 by default, so a number must equal a passage number. At ${S(TOL)}, |2100 - 2096| = 4 is within ${S(TOL)} x 2096 (derived: ${S(TOL * 2096)}), so B's "about 2,100 psia" is supported: system B then has ${cBt.nSupported} of ${cBt.nClaims} claims supported, ${f6(cBt.supportedFraction)}.`);
+const q01c = q01t.claims.find((c) => c.kind === 'number'); const q01v = cellOf(xA, 'EKD-018', 'reservoir_pressure_psia').label;
+w(`A STATED TOLERANCE. numericRelTol is 0 by default, so a number must equal a passage number. At ${S(TOL)}, |${q01c.value} - ${q01v}| = ${Math.abs(q01c.value - q01v)} is within ${S(TOL)} x ${q01v} (derived: ${S(TOL * q01v)}), so B's "${ANS('B').Q01.short}" is supported: system B then has ${cBt.nSupported} of ${cBt.nClaims} claims supported, ${f6(cBt.supportedFraction)}.`);
 must('2,100 supported at 0.002', q01t.claims.find((c) => c.text === '2,100').supported === true, 'reltol');
 w();
 w(`WITHOUT THE RETRIEVED LISTS every cited passage of the corpus can support a claim: system B then has ${cBn.nSupported} of ${cBn.nClaims} supported (${f6(cBn.supportedFraction)}), because Q15's citation of EKD-059 now counts. The basis says which rule ran: "${cBn.basis.citations}".`);
@@ -1019,7 +1046,7 @@ const incA = eA.perQuery.filter((r) => r.nRelevant > 0); const incB = eB.perQuer
 must('the two systems include the same queries in the same order', incA.map((r) => r.query).join() === incB.map((r) => r.query).join(), 'order');
 const nA = incA.map((r) => r.ndcg); const nB = incB.map((r) => r.ndcg);
 const apA = incA.map((r) => r.averagePrecision); const apB = incB.map((r) => r.averagePrecision);
-w(`TWO SYSTEMS ON THE SAME QUERIES. Both systems answered the same ${incA.length} included queries, so each query gives a pair of scores and a difference. Per-query nDCG at 5 (linear gain), A minus B (derived):`);
+w(`TWO SYSTEMS ON THE SAME QUERIES. Both systems answered the same ${incA.length} included queries, so each query gives a pair of scores and a difference. Per-query nDCG at ${K} (linear gain), A minus B (derived):`);
 w();
 table(['query', 'A nDCG', 'B nDCG', 'A minus B'], incA.map((r, i) => [r.query, f6(nA[i]), f6(nB[i]), f6(nA[i] - nB[i])]));
 const wins = nA.filter((x, i) => x > nB[i]).length; const losses = nA.filter((x, i) => x < nB[i]).length;
@@ -1031,7 +1058,7 @@ const bB = success('bootstrapMean B nDCG', EV.bootstrapMean({ values: nB, seed: 
 must('the teaching replicate count is the engine default', NBOOT === EV.DEFAULTS.N_BOOT, NBOOT);
 w(`THE BOOTSTRAP OF A MEAN (the engine's basis, verbatim): ${bA.basis.resampling}. Interval: ${bA.basis.interval}.`);
 w();
-table(['system', 'mean nDCG at 5', 'seed', 'replicates', 'level', `${bA.labels.lower}`, `${bA.labels.upper}`, 'standard error'], [
+table(['system', `mean nDCG at ${K}`, 'seed', 'replicates', 'level', `${bA.labels.lower}`, `${bA.labels.upper}`, 'standard error'], [
   ['A', f6(bA.mean), S(bA.seed), S(bA.nBoot), S(bA.level), f6(bA.lower), f6(bA.upper), f6(bA.standardError)],
   ['B', f6(bB.mean), S(bB.seed), S(bB.nBoot), S(bB.level), f6(bB.lower), f6(bB.upper), f6(bB.standardError)],
 ]);
@@ -1041,10 +1068,10 @@ const uN = success('unpaired nDCG', EV.pairedBootstrap({ a: nA, b: nB, seed: SEE
 const pAP = success('pairedBootstrap AP', EV.pairedBootstrap({ a: apA, b: apB, seed: SEED, nBoot: NBOOT }));
 w(`THE PAIRED BOOTSTRAP (the engine's basis, verbatim): ${pN.basis.resampling}. The share (the engine's basis, verbatim): ${pN.basis.share}.`);
 w();
-table(['comparison, seed ' + SEED + ', ' + NBOOT + ' replicates, level 0.95', 'difference A minus B', pN.labels.lower, pN.labels.upper, 'standard error', 'share at or below 0'], [
-  ['nDCG at 5, paired', f6(pN.difference), f6(pN.lower), f6(pN.upper), f6(pN.standardError), f6(pN.shareAtOrBelowZero)],
-  ['nDCG at 5, unpaired', f6(uN.difference), f6(uN.lower), f6(uN.upper), f6(uN.standardError), f6(uN.shareAtOrBelowZero)],
-  ['AP at 5, paired', f6(pAP.difference), f6(pAP.lower), f6(pAP.upper), f6(pAP.standardError), f6(pAP.shareAtOrBelowZero)],
+table([`comparison, seed ${SEED}, ${NBOOT} replicates, level ${KD.LEVEL}`, 'difference A minus B', pN.labels.lower, pN.labels.upper, 'standard error', 'share at or below 0'], [
+  [`nDCG at ${K}, paired`, f6(pN.difference), f6(pN.lower), f6(pN.upper), f6(pN.standardError), f6(pN.shareAtOrBelowZero)],
+  [`nDCG at ${K}, unpaired`, f6(uN.difference), f6(uN.lower), f6(uN.upper), f6(uN.standardError), f6(uN.shareAtOrBelowZero)],
+  [`AP at ${K}, paired`, f6(pAP.difference), f6(pAP.lower), f6(pAP.upper), f6(pAP.standardError), f6(pAP.shareAtOrBelowZero)],
 ]);
 must('the unpaired interval is wider', (uN.upper - uN.lower) > (pN.upper - pN.lower), `${uN.upper - uN.lower} ${pN.upper - pN.lower}`);
 must('both nDCG intervals straddle 0', pN.lower < 0 && pN.upper > 0 && pAP.lower < 0 && pAP.upper > 0, 'straddle');
@@ -1102,7 +1129,7 @@ section('calibration', 'Calibration: the Brier score, the reliability table, ECE
 const cal = success('calibration 10 bins', EV.calibration({ yTrue: Y, probabilities: P }));
 w('THE CONVENTION (the engine\'s basis, verbatim):');
 w();
-['bins', 'brier', 'ece', 'mce'].forEach((k2) => w(`- ${k2}: ${cal.basis[k2]}`));
+['bins', 'brier', 'ece', 'mce'].forEach((k2) => w(`- ${k2}: \`${cal.basis[k2]}\``));
 w();
 w(`THE CALIBRATION SET. ${cal.n} rows, each a relevance classifier's probability that a passage is relevant to a query (given to 2 decimals) and the outcome, 1 when the judged grade is 2 or 3. The base rate, the share of outcomes that are 1, is ${f6(cal.baseRate)}.`);
 w();
@@ -1112,12 +1139,12 @@ w(`Brier score ${f6(cal.brier)}; ECE ${f6(cal.ece)}; MCE ${f6(cal.mce)}.`);
 must('Brier 0.168382 ECE 0.2093 MCE 0.723333', f6(cal.brier) === '0.168382' && f6(cal.ece) === '0.209300' && f6(cal.mce) === '0.723333', `${cal.brier} ${cal.ece} ${cal.mce}`);
 const over = cal.table.filter((t) => t.n > 0 && t.meanPredicted > t.observedFrequency).length;
 w();
-w(`In ${over} of the 10 bins the mean probability is above the observed frequency: the classifier is over-confident there. The largest gap, the MCE, is in bin ${cal.table.findIndex((t) => t.gap === cal.mce)}, where ${cal.table.find((t) => t.gap === cal.mce).n} rows carry a mean probability of ${f6(cal.table.find((t) => t.gap === cal.mce).meanPredicted)} and none is relevant. ECE weights each gap by its bin's share of the rows, so a small bin moves ECE little and MCE a lot.`);
+w(`In ${over} of the ${cal.bins} bins the mean probability is above the observed frequency: the classifier is over-confident there. The largest gap, the MCE, is in bin ${cal.table.findIndex((t) => t.gap === cal.mce)}, where ${cal.table.find((t) => t.gap === cal.mce).n} rows carry a mean probability of ${f6(cal.table.find((t) => t.gap === cal.mce).meanPredicted)} and none is relevant. ECE weights each gap by its bin's share of the rows, so a small bin moves ECE little and MCE a lot.`);
 must('every non-empty bin over-confident', over === cal.table.filter((t) => t.n > 0).length, over);
 w();
 const c5 = success('calibration 5 bins', EV.calibration({ yTrue: Y, probabilities: P, bins: 5 }));
 const c15 = success('calibration 15 bins', EV.calibration({ yTrue: Y, probabilities: P, bins: 15 }));
-w('THE BIN COUNT IS A CHOICE. The same rows at 5, 10 and 15 bins:');
+w(`THE BIN COUNT IS A CHOICE. The same rows at ${c5.bins}, ${cal.bins} and ${c15.bins} bins:`);
 w();
 table(['bins', 'Brier', 'ECE', 'MCE', 'empty bins'], [c5, cal, c15].map((c) => [S(c.bins), f6(c.brier), f6(c.ece), f6(c.mce), S(c.table.filter((t) => t.n === 0).length)]));
 must('Brier does not depend on the bins', c5.brier === cal.brier && c15.brier === cal.brier, 'brier');
@@ -1125,7 +1152,7 @@ w();
 const meanP = P.reduce((a, b) => a + b, 0) / P.length;
 must('ECE is the same at 5, 10 and 15 bins and equals mean p minus the base rate', Math.abs(c5.ece - cal.ece) < 1e-12 && Math.abs(c15.ece - cal.ece) < 1e-12 && Math.abs(cal.ece - (meanP - cal.baseRate)) < 1e-12 && c5.mce !== cal.mce, `${c5.ece} ${c15.ece} ${meanP - cal.baseRate}`);
 must('every non-empty bin is over-confident at 5 and 15 bins too', [c5, c15].every((c) => c.table.every((t) => t.n === 0 || t.meanPredicted > t.observedFrequency)), 'over');
-w(`The Brier score is the same at every bin count (checked): it is a mean over rows and uses no bins. MCE changes with the bins. ECE does not, ON THIS SET: every non-empty bin is over-confident at 5, 10 and 15 bins alike (checked), so each gap is mean probability minus observed frequency, the weights n_k / N add the bins back together, and ECE comes to the mean probability minus the base rate, ${f6(meanP)} - ${f6(cal.baseRate)} = ${f6(meanP - cal.baseRate)} (derived), whatever the bins. On a set with bins on both sides of the diagonal the gaps no longer add up this way; quote each figure with its bin count.`);
+w(`The Brier score is the same at every bin count (checked): it is a mean over rows and uses no bins. MCE changes with the bins. ECE does not, ON THIS SET: every non-empty bin is over-confident at ${c5.bins}, ${cal.bins} and ${c15.bins} bins alike (checked), so each gap is mean probability minus observed frequency, the weights n_k / N add the bins back together, and ECE comes to the mean probability minus the base rate, ${f6(meanP)} - ${f6(cal.baseRate)} = ${f6(meanP - cal.baseRate)} (derived), whatever the bins. On a set with bins on both sides of the diagonal the gaps no longer add up this way; quote each figure with its bin count.`);
 
 /* ============================================================ SECTION 19 */
 
@@ -1133,7 +1160,7 @@ section('murphy', 'Decomposing the Brier score: reliability, resolution, uncerta
 w(`THE DECOMPOSITION (the engine's basis, verbatim): ${cal.basis.murphy}.`);
 w();
 const M = cal.murphy;
-table(['term', 'value (10 bins)'], [['reliability REL', f6(M.reliability)], ['resolution RES', f6(M.resolution)], ['uncertainty UNC', f6(M.uncertainty)], ['within-bin variance WBV', f6(M.withinBinVariance)], ['within-bin covariance WBC', f6(M.withinBinCovariance)], ['REL - RES + UNC + WBV - WBC', f6(M.sum)], ['Brier', f6(cal.brier)], ['closure, Brier minus the sum', eX(M.closure)]]);
+table(['term', `value (${cal.bins} bins)`], [['reliability REL', f6(M.reliability)], ['resolution RES', f6(M.resolution)], ['uncertainty UNC', f6(M.uncertainty)], ['within-bin variance WBV', f6(M.withinBinVariance)], ['within-bin covariance WBC', f6(M.withinBinCovariance)], ['REL - RES + UNC + WBV - WBC', f6(M.sum)], ['Brier', f6(cal.brier)], ['closure, Brier minus the sum', eX(M.closure)]]);
 must('the identity closes to rounding', Math.abs(M.closure) < 1e-15, M.closure);
 w();
 w(`The identity closes: the closure is ${eX(M.closure)}, rounding in the last bits. Without WBV and WBC, REL - RES + UNC would be ${f6(M.reliability - M.resolution + M.uncertainty)} (derived), which is not the Brier score. Uncertainty is base rate x (1 - base rate) = ${f6(cal.baseRate)} x ${f6(1 - cal.baseRate)} (derived); it depends on the outcomes alone. Reliability is small when each bin's mean probability matches its observed frequency; resolution is large when the bins' frequencies differ from the base rate.`);
@@ -1143,11 +1170,13 @@ const c1 = success('calibration 1 bin', EV.calibration({ yTrue: Y, probabilities
 w(`ONE BIN. With every row in one bin, REL is (mean probability - base rate)^2 = ${f6(c1.murphy.reliability)} and RES is ${f6(c1.murphy.resolution)}: one bin cannot resolve anything.`);
 must('one bin RES 0', c1.murphy.resolution === 0, c1.murphy.resolution);
 w();
-const cw = success('calibration within bin', EV.calibration({ yTrue: [1, 0, 1, 0, 1, 1], probabilities: [0.61, 0.62, 0.64, 0.66, 0.68, 0.69] }));
-w(`THE WITHIN-BIN TERMS. Six stated rows with probabilities 0.61, 0.62, 0.64, 0.66, 0.68 and 0.69 and outcomes 1, 0, 1, 0, 1, 1 all fall in bin 6. WBV ${f6(cw.murphy.withinBinVariance)}, WBC ${f6(cw.murphy.withinBinCovariance)}, closure ${eX(cw.murphy.closure)}. The spread of the probabilities inside the bin is what WBV measures.`);
+const cw = success('calibration within bin', EV.calibration({ yTrue: CW.y, probabilities: CW.p }));
+const cwBin = cw.table.findIndex((t) => t.n > 0);
+must('the within-bin rows share one bin', cw.table[cwBin].n === CW.p.length, cwBin);
+w(`THE WITHIN-BIN TERMS. Six stated rows with probabilities ${CW.p.slice(0, -1).join(', ')} and ${CW.p[CW.p.length - 1]} and outcomes ${CW.y.join(', ')} all fall in bin ${cwBin}. WBV ${f6(cw.murphy.withinBinVariance)}, WBC ${f6(cw.murphy.withinBinCovariance)}, closure ${eX(cw.murphy.closure)}. The spread of the probabilities inside the bin is what WBV measures.`);
 w();
 const edgeIdx = P.map((p, i) => [p, i]).filter(([p]) => { const i = Math.round(p * 10); return i >= 1 && i <= 9 && p === i / 10; });
-w(`THE BIN-EDGE RULE. p is in bin i when i/M <= p < (i+1)/M, with the edges as computed in double precision, so a probability exactly on an interior edge OPENS the upper bin; 1 closes the last bin. ${edgeIdx.length} of the ${cal.n} rows sit exactly on an interior edge at 10 bins (counted), with probabilities ${[...new Set(edgeIdx.map(([p]) => p))].sort().join(', ')}.`);
+w(`THE BIN-EDGE RULE. p is in bin i when i/M <= p < (i+1)/M, with the edges as computed in double precision, so a probability exactly on an interior edge OPENS the upper bin; 1 closes the last bin. Counted over the whole calibration set, ${edgeIdx.length} probabilities sit exactly on an interior edge at ${cal.bins} bins, with the values ${[...new Set(edgeIdx.map(([p]) => p))].sort().join(', ')}.`);
 must('17 rows on interior edges', edgeIdx.length === 17, edgeIdx.length);
 w();
 // The library rule, DERIVED here (the engine does not implement it): an edge value goes to the LOWER bin.
@@ -1163,7 +1192,7 @@ w();
 table(['bin', 'engine rows', 'library-rule rows (derived)', 'library-rule gap (derived)'], cal.table.map((t, i) => [S(i), S(t.n), S(libRows[i][1]), libRows[i][1] ? f6(libRows[i][4]) : 'null']));
 w();
 const diffBins = cal.table.filter((t, i) => t.n !== libRows[i][1]).length;
-w(`By the library rule (derived): ECE ${f6(libEce)}, MCE ${f6(libMce)}, REL ${f6(libRel)}; by the engine: ECE ${f6(cal.ece)}, MCE ${f6(cal.mce)}, REL ${f6(M.reliability)}. ${diffBins} of the 10 bins hold a different number of rows. The ECE difference is ${eX(libEce - cal.ece)} (derived): every bin here is over-confident, so moving an edge row between two over-confident bins leaves the pooled gap unchanged on this set. REL differs by ${eX(libRel - M.reliability)} (derived); MCE is the same here because the largest gap is in bin 7, which holds no edge value. Name the rule when a table from this engine is compared with the library's.`);
+w(`By the library rule (derived): ECE ${f6(libEce)}, MCE ${f6(libMce)}, REL ${f6(libRel)}; by the engine: ECE ${f6(cal.ece)}, MCE ${f6(cal.mce)}, REL ${f6(M.reliability)}. ${diffBins} of the ${cal.bins} bins hold a different number of rows. The ECE difference is ${eX(libEce - cal.ece)} (derived): every bin here is over-confident, so moving an edge row between two over-confident bins leaves the pooled gap unchanged on this set. REL differs by ${eX(libRel - M.reliability)} (derived); MCE is the same here because the largest gap is in bin ${cal.table.findIndex((t) => t.gap === cal.mce)}, which holds no edge value. Name the rule when a table from this engine is compared with the library's.`);
 must('library ECE equal to engine ECE within rounding, REL different, MCE equal', Math.abs(libEce - cal.ece) < 1e-12 && Math.abs(libRel - M.reliability) > 1e-4 && libMce === cal.mce && diffBins > 0, `${libEce} ${libRel} ${libMce}`);
 w();
 w(`LOG LOSS is imported from the machine learning engine, never re-implemented here: ${cal.basis.logLoss}. On this set it is ${f6(cal.logLoss)}, with eps ${S(cal.logLossEps)} and ${cal.logLossClipped} probabilities clipped (a probability of 0 or 1 would make the logarithm infinite).`);
@@ -1176,17 +1205,17 @@ w('The figure is exactly what engines/dataai/ml.js logLoss returns on the same r
 section('judged', 'Judged sets, pooling, unjudged passages, a second annotator, and test questions in a prompt', ['Expert m04', 'Professional m02 l04']);
 w(`HOW THE JUDGED SET WAS BUILT (fixture): ${QUERIES.pooling}. A judged set built this way is a POOL: the passages the pooled systems retrieved are judged, and every other passage is unjudged and counts as grade 0.`);
 w();
-const r10a = success('retrieve bm25 k 10', EV.retrieve({ documents: DOCS, queries: QLIST, method: 'bm25', k: 10 }));
-const e10a = success('evaluate bm25 k 10', EV.evaluateRetrieval({ runs: r10a.runs, judgments: J, k: 10 }));
-const r3 = success('retrieve third run', EV.retrieve({ documents: DOCS, queries: QLIST, method: 'bm25', k: K, b: 0.4, stopWords: true }));
+const r10a = success('retrieve bm25 wide', EV.retrieve({ documents: DOCS, queries: QLIST, method: 'bm25', k: K_WIDE }));
+const e10a = success('evaluate bm25 wide', EV.evaluateRetrieval({ runs: r10a.runs, judgments: J, k: K_WIDE }));
+const r3 = success('retrieve third run', EV.retrieve({ documents: DOCS, queries: QLIST, method: 'bm25', k: K, b: B_THIRD, stopWords: true }));
 const e3 = success('evaluate third run', EV.evaluateRetrieval({ runs: r3.runs, judgments: J, k: K }));
 const uj10 = sum(e10a.perQuery.map((r) => r.unjudgedRetrieved)); const uj3 = sum(e3.perQuery.map((r) => r.unjudgedRetrieved));
 w('OUTSIDE THE POOL. Two runs the pool did not come from (stated settings):');
 w();
 table(['run', 'unjudged passages retrieved, all queries', 'queries with an unjudged passage', 'mean precision', 'MAP', 'mean nDCG'], [
-  ['system A\'s retriever at k 5 (in the pool)', S(sum(eA.perQuery.map((r) => r.unjudgedRetrieved))), S(eA.perQuery.filter((r) => r.unjudgedRetrieved).length), f6(eA.mean.precision), f6(eA.mean.map), f6(eA.mean.ndcg)],
-  ['BM25 at k 10', S(uj10), S(e10a.perQuery.filter((r) => r.unjudgedRetrieved).length), f6(e10a.mean.precision), f6(e10a.mean.map), f6(e10a.mean.ndcg)],
-  ['BM25 b 0.4, stop list on, k 5', S(uj3), S(e3.perQuery.filter((r) => r.unjudgedRetrieved).length), f6(e3.mean.precision), f6(e3.mean.map), f6(e3.mean.ndcg)],
+  [`system A's retriever at k ${K} (in the pool)`, S(sum(eA.perQuery.map((r) => r.unjudgedRetrieved))), S(eA.perQuery.filter((r) => r.unjudgedRetrieved).length), f6(eA.mean.precision), f6(eA.mean.map), f6(eA.mean.ndcg)],
+  [`BM25 at k ${K_WIDE}`, S(uj10), S(e10a.perQuery.filter((r) => r.unjudgedRetrieved).length), f6(e10a.mean.precision), f6(e10a.mean.map), f6(e10a.mean.ndcg)],
+  [`BM25 b ${B_THIRD}, stop list on, k ${K}`, S(uj3), S(e3.perQuery.filter((r) => r.unjudgedRetrieved).length), f6(e3.mean.precision), f6(e3.mean.map), f6(e3.mean.ndcg)],
 ]);
 must('the runs outside the pool retrieve unjudged passages', uj10 > 0 && uj3 > 0, `${uj10} ${uj3}`);
 w();
@@ -1194,7 +1223,7 @@ w('UNJUDGED AND IRRELEVANT ARE DIFFERENT. Each unjudged passage above was scored
 w();
 const eAJ2 = success('evaluate A second annotator', EV.evaluateRetrieval({ runs: RUNS('A'), judgments: J2, k: K }));
 const eBJ2 = success('evaluate B second annotator', EV.evaluateRetrieval({ runs: RUNS('B'), judgments: J2, k: K }));
-w('A SECOND ANNOTATOR AS A CHECK. The same runs scored against the second annotator\'s grades (k 5, grade 1):');
+w(`A SECOND ANNOTATOR AS A CHECK. The same runs scored against the second annotator's grades (k ${K}, grade 1):`);
 w();
 table(['judgments', 'queries in the means', 'A MAP', 'B MAP', 'A mean nDCG', 'B mean nDCG'], [
   ['primary', S(eA.nIncluded), f6(eA.mean.map), f6(eB.mean.map), f6(eA.mean.ndcg), f6(eB.mean.ndcg)],
@@ -1205,19 +1234,19 @@ w();
 w(`On the primary grades B has the higher mean nDCG; on the second annotator's, A does. A difference between two systems smaller than the difference between two annotators is not a finding. ${eAJ2.excluded.length ? `Under the second annotator ${eAJ2.excluded.map((x) => x.query).join(', ')} is excluded.` : 'Under the second annotator no query is excluded.'}`);
 w();
 const leak = QS.map((q) => success(`leak ${q.id}`, EV.answerMatch({ prediction: q.reference, truth: q.reference })));
-w(`TEST QUESTIONS IN A PROMPT. The reference answers are the key. A system whose instructions or examples contained them would return the key itself, and the engine scores that as ${leak.filter((r) => r.exactMatch).length} exact matches of 24 (computed: each reference against itself). No score can tell a leaked key from skill, so the judged queries and their references are kept out of every prompt, every example and every fine-tuning set, and a leak is prevented by process: the score cannot detect it.`);
-must('a leaked key scores 24 of 24', leak.every((r) => r.exactMatch), 'leak');
+w(`TEST QUESTIONS IN A PROMPT. The reference answers are the key. A system whose instructions or examples contained them would return the key itself, and the engine scores that as ${leak.filter((r) => r.exactMatch).length} exact matches of ${QS.length} (computed: each reference against itself). No score can tell a leaked key from skill, so the judged queries and their references are kept out of every prompt, every example and every fine-tuning set, and a leak is prevented by process: the score cannot detect it.`);
+must('a leaked key scores every exact match', leak.every((r) => r.exactMatch), 'leak');
 
 /* ============================================================ SECTION 21 */
 
 section('boundaries', 'Boundaries, rule by rule', ['Expert m05']);
-w('Every rule has its own boundary; none is global. Each row is probed by the engine either side of the boundary.');
+w('Every rule has its own boundary; none is global. Each row below is probed by two engine calls, one at the boundary and one across it.');
 w();
 const B = [];
 const brow = (fn, rule, at, across, cond, label) => { must(`BOUNDARY ${fn} ${rule}: ${label}`, cond, label); B.push([`\`${fn}\``, rule, at, across]); };
 const ok = (r) => r && !r.error; const no = (r) => r && !!r.error;
 brow('rankBm25, rankTfidf', 'ranked', 'a score above 0 is ranked', 'a score of 0 (no query term) is never ranked', q10.ranking.length === 2 && q10.matched === 2, 'ranked');
-brow('ranking', 'tie', 'equal 12-digit keys tie and the id decides', 'keys that differ at the 12th digit do not tie', q10.ties.length === 1 && nt.ties.length === 0, 'tie');
+brow('ranking', 'tie', `equal ${KD.TIE_DIGITS}-digit keys tie and the id decides`, `keys that differ within ${KD.TIE_DIGITS} significant digits do not tie`, q10.ties.length === 1 && nt.ties.length === 0, 'tie');
 const rgEq = EV.retrievalMetrics({ ranking: ['a'], judgments: { a: 2 }, k: 1, relevantGrade: 2 });
 const rgBelow = EV.retrievalMetrics({ ranking: ['a'], judgments: { a: 1, b: 2 }, k: 1, relevantGrade: 2 });
 brow('retrievalMetrics', 'relevant', 'a grade equal to relevantGrade is relevant', 'a grade one below is not', rgEq.hit === 1 && rgBelow.hit === 0, 'relevant');
@@ -1230,17 +1259,17 @@ brow('retrievalMetrics', 'nDCG', 'an ideal DCG above 0: a value', 'an ideal DCG 
 const tolB = EV.scoreExtraction({ labels: [{ id: 'r', fields: { q: 100 } }], predictions: [{ id: 'r', fields: { q: 101 } }], fields: [{ name: 'q', type: 'number', absTol: 1 }] });
 const tolB2 = EV.scoreExtraction({ labels: [{ id: 'r', fields: { q: 100 } }], predictions: [{ id: 'r', fields: { q: 101.5 } }], fields: [{ name: 'q', type: 'number', absTol: 1 }] });
 brow('scoreExtraction', 'number match', '|p - l| equal to the tolerance: correct (inclusive)', 'above it: wrong', tolB.perRecord[0].fields.q.outcome === 'correct' && tolB2.perRecord[0].fields.q.outcome === 'wrong', 'tol');
-const gTol = EV.checkGroundedness({ answer: 'about 2,100 psia', citations: ['EKD-018'], documents: DOCS, numericRelTol: 4 / 2096 });
-const gTol2 = EV.checkGroundedness({ answer: 'about 2,100 psia', citations: ['EKD-018'], documents: DOCS, numericRelTol: 3.9 / 2096 });
+const gTol = EV.checkGroundedness({ answer: PROBE.tol, citations: ['EKD-018'], documents: DOCS, numericRelTol: 4 / 2096 });
+const gTol2 = EV.checkGroundedness({ answer: PROBE.tol, citations: ['EKD-018'], documents: DOCS, numericRelTol: 3.9 / 2096 });
 brow('checkGroundedness', 'number match', '|c - v| equal to numericRelTol x |v|: supported', 'above it: unsupported; numericRelTol 0 means equal values', gTol.nSupported === 1 && gTol2.nSupported === 0, 'reltol');
 brow('checkGroundedness', 'numericRelTol', 'from 0 up to just below 1 accepted', '1 refused', ok(EV.checkGroundedness({ answer: 'x', citations: [], documents: DOCS, numericRelTol: 0.999 })) && no(EV.checkGroundedness({ answer: 'x', citations: [], documents: DOCS, numericRelTol: 1 })), 'reltol range');
 const emp = EV.scoreExtraction({ labels: [{ id: 'r', fields: { w: '' } }, { id: 's', fields: { w: '' } }], predictions: [{ id: 'r', fields: { w: '   ' } }, { id: 's', fields: { w: 'the' } }], fields: [{ name: 'w', type: 'text' }] });
 brow('scoreExtraction', 'empty', 'null, absent or a blank string is empty', '"the" is a value (it normalises to nothing)', emp.perRecord[0].fields.w.outcome === 'correct' && emp.perRecord[1].fields.w.outcome === 'unsupported', 'empty');
-const cg = EV.checkGroundedness({ answer: '12,1234 and 12,123', citations: [], documents: DOCS });
-brow('checkGroundedness', 'comma groups', 'exactly three digits after a comma join the number', 'four digits: "12,1234" reads as 12 and 1234', cg.claims.map((c) => c.value).join() === '12,1234,12123', 'comma');
-const mn = EV.checkGroundedness({ answer: 'skin -2 at Ekene-2', citations: [], documents: DOCS });
-brow('checkGroundedness', 'minus sign', 'after a space: "-2" is the number -2', 'after a letter or digit: "Ekene-2" is an identifier', mn.claims.length === 1 && mn.claims[0].value === -2, 'minus');
-const dt = EV.checkGroundedness({ answer: 'on 2023-01-01 and 2023-01-01x', citations: [], documents: DOCS });
+const cg = EV.checkGroundedness({ answer: PROBE.comma, citations: [], documents: DOCS });
+brow('checkGroundedness', 'comma groups', 'exactly three digits after a comma join the number', 'four digits: "12,1234" reads as "12" and "1234"', cg.claims.map((c) => c.value).join() === [12, 1234, 12123].join(), 'comma');
+const mn = EV.checkGroundedness({ answer: PROBE.minus, citations: [], documents: DOCS });
+brow('checkGroundedness', 'minus sign', 'after a space: "-2" is a negative number', 'after a letter or digit: "Ekene-2" is an identifier', mn.claims.length === 1 && mn.claims[0].value === -2, 'minus');
+const dt = EV.checkGroundedness({ answer: PROBE.date, citations: [], documents: DOCS });
 brow('checkGroundedness', 'date', 'YYYY-MM-DD touching no letter or digit is a date', '"2023-01-01x" is read as numbers', dt.claims[0].kind === 'date' && dt.claims.slice(1).every((c) => c.kind === 'number'), 'date');
 const ce = EV.calibration({ yTrue: [0, 1, 0, 1, 1, 0, 1], probabilities: [0.0, 0.1, 0.2, 0.3, 0.7, 0.9, 1.0] });
 brow('calibration', 'bin edge', 'p = i / M opens bin i', 'scikit-learn closes bin i - 1 at that value', ce.table[3].n === 1 && ce.table[2].n === 1, 'edge');
@@ -1249,9 +1278,9 @@ brow('cohenKappa', 'expected disagreement', 'above 0: a kappa', '0: null with th
 const sh = EV.pairedBootstrap({ a: [1, 1], b: [1, 1], seed: 1, nBoot: 10 });
 brow('pairedBootstrap', 'share at or below 0', 'a replicate exactly 0 is counted', 'only replicates above 0 are not', sh.shareAtOrBelowZero === 1, 'share');
 brow('bootstrapMean, pairedBootstrap', 'level', `${list(EV.DEFAULTS.LEVELS.map(S))} accepted`, 'any other level refused', EV.DEFAULTS.LEVELS.every((l) => ok(EV.bootstrapMean({ values: [1, 2], seed: 1, nBoot: 2, level: l }))) && no(EV.bootstrapMean({ values: [1, 2], seed: 1, level: 0.975 })), 'level');
-brow('bootstrapMean, pairedBootstrap', 'seed', '0 and 4294967295 accepted', '-1 and 4294967296 refused', ok(EV.bootstrapMean({ values: [1, 2], seed: 0, nBoot: 2 })) && ok(EV.bootstrapMean({ values: [1, 2], seed: 4294967295, nBoot: 2 })) && no(EV.bootstrapMean({ values: [1, 2], seed: -1 })) && no(EV.bootstrapMean({ values: [1, 2], seed: 4294967296 })), 'seed');
+brow('bootstrapMean, pairedBootstrap', 'seed', `0 and ${SEED_MAX} accepted`, `-1 and ${SEED_MAX + 1} refused`, ok(EV.bootstrapMean({ values: [1, 2], seed: 0, nBoot: 2 })) && ok(EV.bootstrapMean({ values: [1, 2], seed: SEED_MAX, nBoot: 2 })) && no(EV.bootstrapMean({ values: [1, 2], seed: -1 })) && no(EV.bootstrapMean({ values: [1, 2], seed: SEED_MAX + 1 })), 'seed');
 brow('bootstrapMean', 'values', '2 values accepted', '1 refused', ok(EV.bootstrapMean({ values: [1, 2], seed: 1, nBoot: 2 })) && no(EV.bootstrapMean({ values: [1], seed: 1 })), 'values');
-brow('retrievalMetrics', 'grade', `0 and ${EV.DEFAULTS.MAX_GRADE} accepted`, `-1, 2.5 and ${EV.DEFAULTS.MAX_GRADE + 1} refused`, ok(EV.retrievalMetrics({ ranking: [], judgments: { a: 0, b: EV.DEFAULTS.MAX_GRADE } })) && [-1, 2.5, EV.DEFAULTS.MAX_GRADE + 1].every((g) => no(EV.retrievalMetrics({ ranking: [], judgments: { a: g } }))), 'grade');
+brow('retrievalMetrics', 'grade', `0 and ${EV.DEFAULTS.MAX_GRADE} accepted`, `${list(GRADE_BAD.map(S))} refused`, ok(EV.retrievalMetrics({ ranking: [], judgments: { a: 0, b: EV.DEFAULTS.MAX_GRADE } })) && GRADE_BAD.every((g) => no(EV.retrievalMetrics({ ranking: [], judgments: { a: g } }))), 'grade');
 brow('rankBm25', 'k1 and b', 'k1 0 and b 0 and 1 accepted', 'k1 below 0 and b outside 0 to 1 refused', ok(EV.rankBm25({ documents: HAND, query: 'oil', k1: 0, b: 0 })) && ok(EV.rankBm25({ documents: HAND, query: 'oil', b: 1 })) && no(EV.rankBm25({ documents: HAND, query: 'oil', k1: -0.001 })) && no(EV.rankBm25({ documents: HAND, query: 'oil', b: 1.001 })), 'k1 b');
 table(['function', 'rule', 'at the boundary', 'across it'], B);
 w();
@@ -1293,8 +1322,9 @@ const LV = md.LEVELS.map((l) => { const r = success(`bootstrap level ${l}`, EV.b
 table(['level', 'lower label (verbatim)', 'upper label (verbatim)', 'lower, A nDCG, seed ' + SEED, 'upper'], LV);
 must('the 0.95 labels are 2.5th and 97.5th', LV[2][1] === '2.5th percentile of the bootstrap mean' && LV[2][2] === '97.5th percentile of the bootstrap mean', LV[2][1]);
 w();
-w('The tails at level 0.95 are 0.025 and 0.975. In floating point (1 - 0.95) / 2 is 0.025000000000000022, which would move the quantile index off a whole number, so the engine rounds each tail to 12 decimals first. A fixed list of levels keeps every label a well-formed ordinal.');
-must('the float tail is off 0.025', (1 - 0.95) / 2 !== 0.025, (1 - 0.95) / 2);
+const tailF = (1 - KD.LEVEL) / 2; const tailR = Math.round(tailF * 10 ** TAIL_DECIMALS) / 10 ** TAIL_DECIMALS;
+must('the float tail is off its rounded value and the rounding reads twelve decimals', tailF !== tailR && TAIL_DECIMALS === 12, `${tailF} ${TAIL_DECIMALS}`);
+w(`The tails at level ${KD.LEVEL} are ${S(tailR)} and ${S(1 - tailR)}. In floating point (1 - ${KD.LEVEL}) / 2 is ${S(tailF)}, which would move the quantile index off a whole number, so the engine rounds each tail to ${TAIL_DECIMALS} decimals first (read from its source). A fixed list of levels keeps every label a well-formed ordinal.`);
 
 /* ============================================================ SECTION 23 */
 
@@ -1302,13 +1332,13 @@ section('choices', 'Conventions that are choices, what is not built, and the eva
 w('Every convention below is a choice the engine states in its basis. Each has a real alternative in common use; name the choice when a number from this engine is compared with one from another tool.');
 w();
 table(['convention', 'this engine', 'a common alternative', 'why the engine chose it'], [
-  ['tokens', 'ASCII lowercase, split outside [a-z0-9], single characters kept, no stemming', 'a word pattern of two characters or more (scikit-learn\'s default), stemming', 'a learner can tokenise by hand, and 1-character tokens such as well numbers matter'],
+  ['tokens', 'ASCII lowercase, split outside [a-z0-9], single characters kept, no stemming', 'a word pattern of two characters or more (scikit-learn\'s default), stemming', 'a learner can tokenise by hand, and single-character tokens such as well numbers matter'],
   ['stop list', 'off', 'on', 'the list removes well, top, bottom, fire and system'],
   ['TF-IDF', 'raw counts, smooth idf ln((1 + N) / (1 + df)) + 1, unit vectors', 'unsmoothed idf, other norms', 'scikit-learn\'s defaults, so a figure compares directly'],
   ['BM25 idf', 'Lucene ln(1 + (N - df + 0.5) / (df + 0.5))', 'the Robertson form, negative for common terms', 'never negative'],
   ['BM25 numerator', 'keeps (k1 + 1)', 'Lucene 8 and later drop it', 'Robertson and Zaragoza\'s form; dropping it scales every score and leaves the order'],
   ['repeated query words', 'counted once (k3 = 0)', 'weighted by query frequency', 'a query is a set of words'],
-  ['ties', '12 significant digits, then the id ascending', 'a relative tolerance, or input order', 'a key is transitive'],
+  ['ties', `${KD.TIE_DIGITS} significant digits, then the id ascending`, 'a relative tolerance, or input order', 'a key is transitive'],
   ['relevance threshold', 'grade 1 or more', 'grade 2 or more', 'trec_eval\'s default; state it with every figure'],
   ['precision at k', 'divides by k', 'divides by the passages ranked', 'trec_eval'],
   ['average precision', 'divides by every relevant judged passage', 'divides by min(k, relevant)', 'trec_eval; a missed passage lowers AP'],

@@ -55,7 +55,9 @@
   "DECISION bin edges": "FINDINGS open question 3. The course states the engine's edge rule and the library's (section 19, with the library table DERIVED in the dump and labelled so); the Expert capstone grades three Murphy terms at eight bins, where 2 dp probabilities sit on the interior edges 0.25, 0.5 and 0.75, so the library rule is a discriminated wrong method.",
   "DECISION ECE not graded": "On the Ekene calibration rows every bin is over-confident at 5, 10 and 15 bins, so ECE equals mean probability minus the base rate whatever the bins (digest section 18, asserted). The first capstone cut graded ECE at eight bins and the discriminate sweep found it blind to the bin count and the edge rule; it was replaced by the Murphy reliability term, which both move."
  },
- "cleared_claims": [],
+ "cleared_claims": [
+  "The largest gap, the MCE, is in bin 7, where 3 rows carry a mean probability of 0.723333 and none is relevant."
+ ],
  "fieldsDiscrimination": {
   "orlu_bm25_idf_pressure": "the tfidf smooth idf, robertson idf without the one, log base ten, the whole ekene corpus, df plus one",
   "orlu_o1_bm25_top_score": "b zero, k1 two, stop list on, second ranked, the whole ekene corpus, tfidf cosine quoted",
@@ -75,5 +77,6 @@
   "awka_reliability_bins8": "ten bins, the library edge rule, ece quoted, resolution quoted",
   "awka_resolution_bins8": "ten bins, reliability quoted, uncertainty quoted, the library edge rule",
   "awka_wbc_bins8": "within bin variance, ten bins, without the factor two, the library edge rule"
- }
+ },
+ "cleared_claimsNote": "Read by hand: the reliability table prints bin 7 with 3 rows, mean probability 0.723333 and observed frequency 0.000000, and the sentence says exactly that."
 }

@@ -138,9 +138,9 @@ must('ORLU: every query has a relevant passage and none is excluded', orEval.nIn
 // The four answers: fixture-style hand-written text citing source passages,
 // renamed to ORLU ids; each answer's retrieved list is the BM25 top 3 above.
 const OR_ANS_SRC = [
-  ['O1', 'Ekene-6 water cut was 45.0 percent on 2025-12-01, up from 23.0 percent at mid-year.', ['EKD-030']],
-  ['O2', 'Average reservoir pressure was 2,096 psia on 2023-01-01, just above the 2000 psia bubble point.', ['EKD-018']],
-  ['O3', 'Ekene-3 came on stream on 2020-03-01 at 150 bopd with a GOR of 400 scf/stb, from 29 m of gross sand.', ['EKD-003']],
+  ['O1', 'Ekene-6 water cut was 45.0 percent on 2025-12-01 with oil at 24.0 bopd, up from 23.0 percent at mid-year.', ['EKD-030']],
+  ['O2', 'Average reservoir pressure was 2,096 psia on 2023-01-01, just above the 2000 psia bubble point, after 261,475 stb of field oil.', ['EKD-018']],
+  ['O3', 'Ekene-3 came on stream on 2020-03-01 at 150 bopd with a GOR of 400 scf/stb, from 29 m of gross sand below a 1541 m TVD top.', ['EKD-003']],
   ['O4', 'The discharge limit is 40 mg/l; the 2025-04-08 sample read 25 mg/l, under the 30 mg/l action level.', ['EKD-053']],
 ];
 ORLU.answers = OR_ANS_SRC.map(([q, text, cites]) => ({ query: q, text, citations: cites.map((c) => ORLU.idOf[c]), retrieved: orRun.runs[q] }));

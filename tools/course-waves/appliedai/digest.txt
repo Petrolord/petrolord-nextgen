@@ -173,7 +173,7 @@ THE PLANTED DEFECTS, every item stated by the fixture record. Each is found by t
 | a wellhead pressure as reservoir pressure | A EKD-036 | 2,289 psi wellhead | the outcome unsupported (section 14) |
 | "near-miss" for "near miss" | A EKD-044 | the hyphen joins the words | the outcome wrong (section 14) |
 | "Ekene 3" for "Ekene-3" | B EKD-003 | a space for the hyphen | the outcome wrong (section 14) |
-| "150 bopd" in a number field | B EKD-003 | a unit inside a number | the outcome wrong, not a plain number (section 14) |
+| "150 bopd" in a number field | B EKD-003 | a unit inside a number | the outcome wrong, the reason quoting the plain-number rule (section 14) |
 | two records not returned | B EKD-053 and EKD-056 | no prediction for either | scored as all empty (section 14) |
 | values from the wrong well | B EKD-013 and EKD-029 | a well on a field survey, Ekene-6's water cut on Ekene-1 | the outcome unsupported (section 14) |
 
@@ -247,7 +247,7 @@ Each row is a real call. The message column is the engine's `error` string, verb
 | `cohenKappa` | a label listed twice | `labels[2]` | labels[2] repeats 1 |
 | `cohenKappa` | a rating outside the labels | `a[1]` | a[1] is 3, which is not one of labels |
 | `calibration` | no outcomes | `yTrue` | yTrue must be a non-empty array of 0 and 1 outcomes |
-| `calibration` | an outcome of 2 (a grade, not an outcome) | `yTrue[1]` | yTrue[1] must be 0 or 1 |
+| `calibration` | an outcome of 2 (a grade where an outcome belongs) | `yTrue[1]` | yTrue[1] must be 0 or 1 |
 | `calibration` | two outcomes and one probability | `probabilities` | probabilities must be an array of 2 numbers, one per outcome |
 | `calibration` | a probability of 1.2 | `probabilities[1]` | probabilities[1] must be a number from 0 to 1 |
 | `calibration` | no bins | `bins` | bins must be a whole number from 1 to 100 |
@@ -308,7 +308,7 @@ THE RULE (the engine's basis, verbatim): ASCII A-Z lowercased (nothing else chan
 | `Café Überprüfung naïve` | caf berpr fung na ve | 5 | caf berpr fung na ve | 0 |
 | `oil_rate and water/cut` | oil rate and water cut | 5 | oil rate water cut | 1 |
 
-Read the rows: a decimal point, a comma, a hyphen, a slash, an underscore and a colon all separate, so "1.25" becomes the two tokens 1 and 25, "2,096" becomes 2 and 096, and "Ekene-3" becomes ekene and 3. Single-character tokens are kept. An accented letter is outside [a-z0-9] and separates, so "Café" gives caf. Nothing is stemmed: "producing" and "produced" stay different tokens.
+Read the rows: a decimal point, a comma, a hyphen, a slash, an underscore and a colon all separate, so "1.25" becomes the two tokens "1" and "25", "2,096" becomes "2" and "096", and "Ekene-3" becomes "ekene" and "3". Single-character tokens are kept. An accented letter is outside [a-z0-9] and separates, so "Café" gives caf. Nothing is stemmed: "producing" and "produced" stay different tokens.
 
 THE STOP LIST IS OFF BY DEFAULT. scikit-learn's ENGLISH_STOP_WORDS (318 words) removes words that carry meaning in oilfield text, every one of these checked to be in it: well, top, bottom, fire, system, first, third, one, two, three, twelve, fifteen, fifty, hundred, thick, thin, per, full, empty, found, back, part, side, move, amount, mill, bill, interest, no, not. The query "the well top" loses every token with the list on:
 
@@ -604,7 +604,7 @@ WHAT A CLAIM IS (the engine's basis, verbatim):
 - citations: a citation that is not a passage of the corpus is flagged unknown; one that was not retrieved for the query is flagged notRetrieved and supports nothing
 - fraction: supported claims / claims; undefined for an answer with no claim
 
-A STATED ANSWER on the hand set: "Ekene-1 made 120 bopd; the survey read 2,096 psia on 2023-01-01, a "water injection" start, and 45% water, -2 skin." citing d1 and d4, with d1, d2 and d4 retrieved:
+A STATED ANSWER on the hand set, citing d1 and d4, with d1, d2 and d4 retrieved: Ekene-1 made 120 bopd; the survey read 2,096 psia on 2023-01-01, a "water injection" start, and 45% water, -2 skin.
 
 | claim | kind | value | supported | reason (verbatim) |
 | --- | --- | --- | --- | --- |
@@ -615,7 +615,7 @@ A STATED ANSWER on the hand set: "Ekene-1 made 120 bopd; the survey read 2,096 p
 | 45 | number | 45 | false | the number 45 is not in the cited passages d1 and d4; it appears in no passage of the corpus |
 | -2 | number | -2 | false | the number -2 is not in the cited passages d1 and d4; it appears in no passage of the corpus |
 
-2 of 6 claims are supported, a supported fraction of 0.333333. "Ekene-1" is an identifier and makes no claim. The quote is checked first and the date before the numbers, and "45%" is the number 45. The date and the quote are in d2, which was retrieved and not cited; the reason says so.
+2 of 6 claims are supported, a supported fraction of 0.333333. "Ekene-1" is an identifier and makes no claim. The quote is checked first and the date before the numbers, and "45%" is the number "45". The date and the quote are in d2, which was retrieved and not cited; the reason says so.
 
 SYSTEM A'S 24 ANSWERS, checked against the passages each cites, with its retrieved lists:
 
@@ -747,7 +747,7 @@ THE IDEAL RANKING sorts every judged grade for the query descending, retrieved o
 | linear | 3.140995 | 5.692536 | 0.551774 |
 | exponential | 6.095391 | 10.823466 | 0.563164 |
 
-The ideal counts e's grade 2 although e was never retrieved: building the ideal from the retrieved passages alone would reward a system for missing a good passage.
+The ideal counts e's grade 2 although no system retrieved e: building the ideal from the retrieved passages alone would reward a system for missing a good passage.
 
 ON THE EKENE QUERIES, k 5, per query:
 
@@ -781,7 +781,7 @@ ON THE EKENE QUERIES, k 5, per query:
 Mean nDCG at 5 over the 23 included queries: linear gain, A 0.762753 and B 0.764137; exponential gain, A 0.786456 and B 0.786615. Exponential gain makes a grade 3 passage worth 7 against a grade 2's 3, so it rewards putting the answering passage first.
 System B has the higher mean nDCG on both gains; the difference is 1.38e-3 linear and 1.59e-4 exponential (derived). Whether a difference that small means anything is the question of section 16.
 
-nDCG AND THE THRESHOLD. A stated query whose judged passages are graded 1, 1 and 0, ranked EKD-013, EKD-014, at relevantGrade 2: recall and AP are null (recall is undefined: no judged document has grade 2 or more), and nDCG is 1.000000, because grade 1 still carries gain.
+nDCG AND THE THRESHOLD. A stated query whose judged passages are graded 1, 1 and 0, ranked EKD-013, EKD-014, at relevantGrade 2: recall and AP are returned as null (recall is undefined: no judged document has grade 2 or more), and nDCG is 1.000000, because grade 1 still carries gain.
 
 UNJUDGED PASSAGES. A passage nobody judged counts as grade 0, and the engine counts how many were retrieved (unjudgedRetrieved). The judged set was pooled from both systems' top 5, so at k 5 system A retrieves 0 unjudged passages and system B 0. What happens outside the pool is shown in section 20.
 
@@ -911,7 +911,7 @@ EVERY CELL THAT IS NOT CORRECT, with the engine's reason:
 | B | EKD-056 | well | Ekene-1 | (empty) | missed | the label has a value and the prediction is empty |
 | B | EKD-056 | event | core plug | (empty) | missed | the label has a value and the prediction is empty |
 
-System A's "3,038" for 3038 is correct: a number field reads digits with comma thousands groups. System B's 45.25 against 45.2 on EKD-032 is correct: the difference sits on the absTol 0.05, the tolerance is inclusive, and the double computes it as 0.04999999999999716. System B's 64.7 against 64.6 on EKD-033 is wrong: the double difference is 0.10000000000000853, above 0.05. System B did not return EKD-053 or EKD-056; a labelled record with no prediction is scored as all empty, so its filled labels are missed.
+System A's "3,038" for the label 3038 is correct: a number field reads digits with comma thousands groups. System B's 45.25 against 45.2 on EKD-032 is correct: the difference sits on the absTol 0.05, the tolerance is inclusive, and the double computes it as 0.04999999999999716. System B's 64.7 against 64.6 on EKD-033 is wrong: the double difference is 0.10000000000000853, above 0.05. System B did not return EKD-053 or EKD-056; a labelled record with no prediction is scored as all empty, so its filled labels are missed.
 
 A TOLERANCE IS INCLUSIVE, |prediction - label| <= max(absTol, relTol x |label|). Two stated records, q with relTol 0.01 and p with absTol 2 and relTol 0.001:
 
@@ -965,7 +965,7 @@ SYSTEM B'S UNSUPPORTED CLAIMS AND FLAGS, with the engine's reasons. Each reason 
 
 GROUNDED IS NOT CORRECT. System B's Q05 answer "Water broke through at Ekene-6 on 2024-09-01." is fully supported: the date is in EKD-027, which it cites and retrieved. EKD-027 is about Ekene-3's breakthrough; Ekene-6 broke through on the reference date 2024-03-01, and the short answer scores exact match 0. The check found the figure in the passage; it cannot know the passage is about another well.
 
-HOW THE CHECK READS TEXT. System A's Q13 answer "Ekene-6 water cut was 45 percent at the end of 2025 (2025-12-01)." says "the end of 2025". The claim grammar reads a bare year as the number 2025, which is not in EKD-030 (that passage writes the date 2025-12-01), so the claim is unsupported although the answer is right: the number 2025 is not in the cited passage EKD-030; it appears in retrieved passage EKD-037, which the answer does not cite. A deterministic check reads exactly the forms it states and no others.
+HOW THE CHECK READS TEXT. System A's Q13 answer "Ekene-6 water cut was 45 percent at the end of 2025 (2025-12-01)." says "the end of 2025". The claim grammar reads a bare year as the number "2025", which is not in EKD-030 (that passage writes the date "2025-12-01"), so the claim is unsupported although the answer is right: the number 2025 is not in the cited passage EKD-030; it appears in retrieved passage EKD-037, which the answer does not cite. A deterministic check reads exactly the forms it states and no others.
 
 A NUMBER CAN MATCH BY COINCIDENCE. The stated answer "The spill was 5 bbl." citing EKD-025 (no retrieved list given) is supported: EKD-025 says "5 months". The check matches the value and ignores the unit: supported 1 of 1.
 
@@ -1065,10 +1065,10 @@ WHEN KAPPA HAS NO VALUE. If both raters give every item one and the same label, 
 
 THE CONVENTION (the engine's basis, verbatim):
 
-- bins: 10 equal-width bins: p is in bin i when i/10 <= p < (i+1)/10 (edges as computed in double precision), the last bin closed at 1; an empty bin has null means and is skipped
-- brier: mean (p - y)^2
-- ece: sum over non-empty bins of n_k / N x |observed_k - mean p_k|
-- mce: the largest |observed_k - mean p_k| over non-empty bins
+- bins: `10 equal-width bins: p is in bin i when i/10 <= p < (i+1)/10 (edges as computed in double precision), the last bin closed at 1; an empty bin has null means and is skipped`
+- brier: `mean (p - y)^2`
+- ece: `sum over non-empty bins of n_k / N x |observed_k - mean p_k|`
+- mce: `the largest |observed_k - mean p_k| over non-empty bins`
 
 THE CALIBRATION SET. 200 rows, each a relevance classifier's probability that a passage is relevant to a query (given to 2 decimals) and the outcome, 1 when the judged grade is 2 or 3. The base rate, the share of outcomes that are 1, is 0.190000.
 
@@ -1120,7 +1120,7 @@ ONE BIN. With every row in one bin, REL is (mean probability - base rate)^2 = 0.
 
 THE WITHIN-BIN TERMS. Six stated rows with probabilities 0.61, 0.62, 0.64, 0.66, 0.68 and 0.69 and outcomes 1, 0, 1, 0, 1, 1 all fall in bin 6. WBV 0.000867, WBC 0.006667, closure 0. The spread of the probabilities inside the bin is what WBV measures.
 
-THE BIN-EDGE RULE. p is in bin i when i/M <= p < (i+1)/M, with the edges as computed in double precision, so a probability exactly on an interior edge OPENS the upper bin; 1 closes the last bin. 17 of the 200 rows sit exactly on an interior edge at 10 bins (counted), with probabilities 0.1, 0.2, 0.3, 0.4, 0.6.
+THE BIN-EDGE RULE. p is in bin i when i/M <= p < (i+1)/M, with the edges as computed in double precision, so a probability exactly on an interior edge OPENS the upper bin; 1 closes the last bin. Counted over the whole calibration set, 17 probabilities sit exactly on an interior edge at 10 bins, with the values 0.1, 0.2, 0.3, 0.4, 0.6.
 
 scikit-learn's calibration_curve puts an interior-edge value in the LOWER bin. Its table on these rows is DERIVED here by that rule (the engine does not implement it):
 
@@ -1169,12 +1169,12 @@ TEST QUESTIONS IN A PROMPT. The reference answers are the key. A system whose in
 
 # SECTION 21: Boundaries, rule by rule (owned by Expert m05)
 
-Every rule has its own boundary; none is global. Each row is probed by the engine either side of the boundary.
+Every rule has its own boundary; none is global. Each row below is probed by two engine calls, one at the boundary and one across it.
 
 | function | rule | at the boundary | across it |
 | --- | --- | --- | --- |
 | `rankBm25, rankTfidf` | ranked | a score above 0 is ranked | a score of 0 (no query term) is never ranked |
-| `ranking` | tie | equal 12-digit keys tie and the id decides | keys that differ at the 12th digit do not tie |
+| `ranking` | tie | equal 12-digit keys tie and the id decides | keys that differ within 12 significant digits do not tie |
 | `retrievalMetrics` | relevant | a grade equal to relevantGrade is relevant | a grade one below is not |
 | `retrievalMetrics` | precision at k | k ranked: relevant / k | fewer than k ranked: still divides by k |
 | `retrievalMetrics` | reciprocal rank and AP | a relevant passage at rank k counts | at rank k + 1 it does not |
@@ -1184,8 +1184,8 @@ Every rule has its own boundary; none is global. Each row is probed by the engin
 | `checkGroundedness` | number match | |c - v| equal to numericRelTol x |v|: supported | above it: unsupported; numericRelTol 0 means equal values |
 | `checkGroundedness` | numericRelTol | from 0 up to just below 1 accepted | 1 refused |
 | `scoreExtraction` | empty | null, absent or a blank string is empty | "the" is a value (it normalises to nothing) |
-| `checkGroundedness` | comma groups | exactly three digits after a comma join the number | four digits: "12,1234" reads as 12 and 1234 |
-| `checkGroundedness` | minus sign | after a space: "-2" is the number -2 | after a letter or digit: "Ekene-2" is an identifier |
+| `checkGroundedness` | comma groups | exactly three digits after a comma join the number | four digits: "12,1234" reads as "12" and "1234" |
+| `checkGroundedness` | minus sign | after a space: "-2" is a negative number | after a letter or digit: "Ekene-2" is an identifier |
 | `checkGroundedness` | date | YYYY-MM-DD touching no letter or digit is a date | "2023-01-01x" is read as numbers |
 | `calibration` | bin edge | p = i / M opens bin i | scikit-learn closes bin i - 1 at that value |
 | `calibration` | last bin | p = 1 is in bin M - 1 (closed) | no bin above it |
@@ -1194,7 +1194,7 @@ Every rule has its own boundary; none is global. Each row is probed by the engin
 | `bootstrapMean, pairedBootstrap` | level | 0.8, 0.9, 0.95, 0.99 accepted | any other level refused |
 | `bootstrapMean, pairedBootstrap` | seed | 0 and 4294967295 accepted | -1 and 4294967296 refused |
 | `bootstrapMean` | values | 2 values accepted | 1 refused |
-| `retrievalMetrics` | grade | 0 and 10 accepted | -1, 2.5 and 11 refused |
+| `retrievalMetrics` | grade | 0 and 10 accepted | -1, 2.5, 11 refused |
 | `rankBm25` | k1 and b | k1 0 and b 0 and 1 accepted | k1 below 0 and b outside 0 to 1 refused |
 
 23 rules, each probed by a call either side.
@@ -1229,7 +1229,7 @@ THE BOOTSTRAP LEVELS AND THEIR LABELS. level is one of the four accepted values.
 | 0.95 | 2.5th percentile of the bootstrap mean | 97.5th percentile of the bootstrap mean | 0.653604 | 0.852644 |
 | 0.99 | 0.5th percentile of the bootstrap mean | 99.5th percentile of the bootstrap mean | 0.623984 | 0.877278 |
 
-The tails at level 0.95 are 0.025 and 0.975. In floating point (1 - 0.95) / 2 is 0.025000000000000022, which would move the quantile index off a whole number, so the engine rounds each tail to 12 decimals first. A fixed list of levels keeps every label a well-formed ordinal.
+The tails at level 0.95 are 0.025 and 0.975. In floating point (1 - 0.95) / 2 is 0.025000000000000022, which would move the quantile index off a whole number, so the engine rounds each tail to 12 decimals first (read from its source). A fixed list of levels keeps every label a well-formed ordinal.
 
 # SECTION 23: Conventions that are choices, what is not built, and the evaluation report (owned by Expert m06)
 
@@ -1237,7 +1237,7 @@ Every convention below is a choice the engine states in its basis. Each has a re
 
 | convention | this engine | a common alternative | why the engine chose it |
 | --- | --- | --- | --- |
-| tokens | ASCII lowercase, split outside [a-z0-9], single characters kept, no stemming | a word pattern of two characters or more (scikit-learn's default), stemming | a learner can tokenise by hand, and 1-character tokens such as well numbers matter |
+| tokens | ASCII lowercase, split outside [a-z0-9], single characters kept, no stemming | a word pattern of two characters or more (scikit-learn's default), stemming | a learner can tokenise by hand, and single-character tokens such as well numbers matter |
 | stop list | off | on | the list removes well, top, bottom, fire and system |
 | TF-IDF | raw counts, smooth idf ln((1 + N) / (1 + df)) + 1, unit vectors | unsmoothed idf, other norms | scikit-learn's defaults, so a figure compares directly |
 | BM25 idf | Lucene ln(1 + (N - df + 0.5) / (df + 0.5)) | the Robertson form, negative for common terms | never negative |
