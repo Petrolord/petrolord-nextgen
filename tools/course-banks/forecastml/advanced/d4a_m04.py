@@ -35,7 +35,7 @@ x("A comparison is run with `refit` false. What happens to the Arps baseline at 
  ["Held at the parameters fitted on the first window, exactly as the smoothing methods are held at every later origin",
   "Dropped from the comparison, since a baseline fitted only once cannot be ranked fairly against the other three rows",
   "It is fitted once on the whole series, because the Arps fit has no refit setting of its own at all"],
- "The basis: \"engines/dca/arps.js fitArpsModel refitted on each training window\", and Arps is refitted whatever `refit` says; a note on such a run says so. Holding Arps is what the smoothing methods do with refit false, and the baseline does not follow them. It stays in the comparison. Fitting it on the whole series would put the scored months into its fit.")
+ "The basis: \"engines/dca/arps.js fitArpsModel refitted on each training window\", and Arps is refitted whatever `refit` says, so a forecast note on such a run says the baseline was refitted regardless. Holding Arps is what the smoothing methods do with refit false, and the baseline does not follow them. It stays in the comparison. Fitting it on the whole series would put the scored months into its fit.")
 
 # 4
 x("The EKENE-P2 comparison from first origin 28 ranks holt, damped, arps, ses by MASE. Ranked by sMAPE instead, which method comes first?",
@@ -58,8 +58,8 @@ x("A comparison is asked to rank by `rankBy` 'me', the mean error. What comes ba
  "A refusal naming `rankBy`: \"rankBy must be 'mae', 'rmse', 'mape', 'smape' or 'mase'\"",
  ["Mean error ranks it, lowest first, which puts the most negative bias at the top",
   "A ranking by MASE, the default, with a warning that the name 'me' was not recognised by the engine",
-  "The methods ordered by the size of their mean error, since a signed error cannot be put in order"],
- "The ranking takes five names, and anything else is refused with the field named, in the words quoted. The engine never ranks by the mean error, signed or unsigned, and it never falls back to a default with a warning; a name it does not offer is refused before any fit.")
+  "A refusal naming `methods`: \"methods must be a non-empty array of 'ses', 'holt' and 'damped'\""],
+ "The ranking takes five names, and anything else is refused with the field named, in the words quoted. The engine never ranks by the mean error, signed or unsigned, and it never falls back to a default with a warning; a name it does not offer is refused before any fit. The methods message is for an empty list, and nothing was wrong with the methods here.")
 
 # 7
 x("The golden `cmp-constant-ties` is a constant 50 for 10 months, with the methods listed damped, ses, holt and ranked by mae. What ranking comes back?",
@@ -89,9 +89,9 @@ x("EKENE-P1 is compared from first origin 30, horizon 6, step 3 with the methods
 x("The methods passed to `compareWithArps` are ses, holt, ses. What happens?",
  "It is refused, in the engine's words \"methods[2] repeats ses\", the field naming the third method counted from 0",
  ["It ranks ses once and drops the repeat without a message, since both copies would score the same",
-  "A refusal naming `methods[1]`, the first repeat of ses when the list is counted from 1",
+  "A refusal naming `methods[1]`: \"methods[1] must be 'ses', 'holt' or 'damped'\"",
   "Both copies of ses are ranked, and they tie within the band and so keep their listed order"],
- "A method listed twice is refused, and the field names its position counted from 0, so `methods[2]` is the third method listed. Nothing is dropped quietly, and the list is never counted from 1. A repeated method is not ranked twice; it never reaches the ranking.")
+ "A method listed twice is refused, and the field names its position counted from 0, so `methods[2]` is the third method listed. Nothing is dropped quietly, and holt, in second place, is a method the engine offers, so nothing is refused at `methods[1]`. A repeated method is not ranked twice; it never reaches the ranking.")
 
 # 11
 x("EKENE-P2 is compared from first origin 12, horizon 6, step 3, ranked by MAPE. The shut-in months fall in the actuals of some origins. What comes back?",

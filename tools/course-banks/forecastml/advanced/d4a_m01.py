@@ -41,8 +41,8 @@ x("A call to `forecastIntervals` gives the method, the series and h, and leaves 
  "A refusal naming `seed`, in the engine's words \"seed must be a whole number from 0 to 4294967295\"",
  ["An interval drawn on seed 0, which the engine takes as the seed when none is passed to it",
   "An interval seeded from the clock, with a warning that the figures cannot be reproduced",
-  "A refusal naming `nSims`, since the seed and the number of paths are checked as one pair"],
- "The seed has no default, and leaving it out is refused with the field `seed` named, in the words quoted. Seed 0 is accepted when it is given, and it is never filled in. Every draw comes from one mulberry32 stream on the seed given, so no clock enters and no warning of that kind exists. `nSims` has its own rule and its own default of 1000.")
+  "A refusal naming `nSims`: \"nSims must be a whole number from 1 to 100000\", checked with the seed"],
+ "The seed has no default, and leaving it out is refused with the field `seed` named, in the words quoted. Seed 0 is accepted when it is given, and it is never filled in. Every draw comes from one mulberry32 stream on the seed given, so no clock enters and no warning of that kind exists. `nSims` has its own rule and its own default of 1000, so leaving the seed out never brings its message.")
 
 # 5
 x("Damped on EKENE-P1, h 12, seed 11: the P50 at step 12 is 132.416487 with 100 paths, 137.469798 with 1000 and 135.920627 with 10000. What does the course draw from the three?",
@@ -111,7 +111,7 @@ x("The 46 residuals of the teaching bootstrap have a mean of -1.726983 bbl/d. Wh
 # 13
 x("ses on EKENE-P1, h 12, seed 11, 1000 paths, nonNegative false: the point forecast is 211.400000 at every step, yet at step 12 the P10 (high) of the paths is 69.250000. What explains it?",
  "alpha fits to 1, so each residual is a month-to-month change of the decline, mean -20.525532, and every path replays that fall",
- ["With nonNegative false the percentiles are read from the negative side of the paths, which swaps high and low",
+ ["With nonNegative false the percentiles are read from the negative side of the paths, which swaps the high and the low labels at every step",
   "The flat point forecast comes from the P50 at step 1, 198.900000, so it drifts away from the paths",
   "Seed 11 gives ses a run of negative draws that another seed would not, so the figure is chance"],
  "With alpha at 1 each one-step forecast is the month before, so each residual is one month's change of the decline, and their mean is -20.525532 bbl/d. Drawn as fitted, they push every path down step after step, while the flat method's point forecast stays at the last rate. nonNegative only decides whether a negative percentile is reported as 0; it never swaps labels. The point forecast is the final level, and the P50 at step 1 is itself 198.900000. A lean that large is the method's residuals, whatever the seed.")

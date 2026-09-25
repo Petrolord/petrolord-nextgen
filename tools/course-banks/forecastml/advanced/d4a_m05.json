@@ -137,7 +137,7 @@
    "\"y has 3 values: a backtest with horizon 1 needs at least 4 ('holt' needs 3 training values, then 1 actual)\"",
    "A backtest from origin 3 with no actuals to score, returning every one of its metrics as null",
    "An accepted backtest from first origin 2, since horizon 1 needs only a single actual after it",
-   "A refusal naming `horizon`, since 1 is below the least horizon a backtest will take"
+   "\"horizon must be a whole number, 1 or more\", naming `horizon`, since 1 is below the least horizon"
   ],
   "answer": 0,
   "explanation": "A backtest needs the method's fitting length, 3 for holt, plus a full horizon of actuals, so 3 values are one short and the refusal names `y` in the words quoted. An origin with no actuals is never run. holt from origin 2 is refused, because holt needs 3 training values. Horizon 1 is legal; the refusal is for a horizon of 0."

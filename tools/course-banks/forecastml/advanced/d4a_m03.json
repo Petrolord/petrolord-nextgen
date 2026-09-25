@@ -66,15 +66,15 @@
   "explanation": "The fits are least-squares lines on the log, reciprocal or q^-b scale, and a rate of 0 has no value on any of them, so shut-in months are dropped: \"fitArpsModel drops zero and negative values (shut-in months) before fitting\". A shut-in month is a real value. Auto-Select chooses by the lowest RMSE. The smoothing methods take a zero as a value and fit through it."
  },
  {
-  "prompt": "Two months of 0 are put in front of EKENE-P2 and `arpsForecast` is run again. What does the result report about where time starts?",
+  "prompt": "Two months of 0 are put in front of EKENE-P1's 48 months, which hold no zero of their own, and `arpsForecast` is run again. What does the result report about where time starts?",
   "options": [
    "`t0Index` 0, with the two leading zeros fitted as the first two points of the decline, rates like any other",
    "A refusal naming `y`, because a series may not open on a zero rate",
    "qi read at index 0 and carried back across the zeros, with `t0Index` 2",
-   "`t0Index` 2 and 2 months dropped, with `fitted` null before index 2 and qi the rate at index 2"
+   "`t0Index` 2 and 2 months dropped, with `fitted` null before index 2 and qi the fitted rate at t = 0"
   ],
   "answer": 3,
-  "explanation": "t = 0 is the first positive value, and the basis says so: \"t = 0 at index 2, the first positive value\". The zeros are dropped before the fit, and fitted values before index 2 are null. Leading zeros are accepted; the only positive-count rule is at least 3. qi is the rate at t = 0, which is index 2 here."
+  "explanation": "t = 0 is the first positive value, and the basis says so: \"t = 0 at index 2, the first positive value\". The two zeros are dropped before the fit, and fitted values before index 2 are null. Leading zeros are accepted; the only positive-count rule is at least 3. qi is the fitted rate at t = 0, which is index 2 here, and nothing is carried back across the zeros. On a series with shut-in months of its own, such as EKENE-P2, the count dropped takes in those months as well."
  },
  {
   "prompt": "`arpsForecast` is passed 5 months, two of them producing. What comes back?",
@@ -82,10 +82,10 @@
    "A fit through the 2 producing months, with a warning that R2 is undefined on two points",
    "A refusal naming `y`: \"y has 2 positive values: fitArpsModel needs at least 3 (it drops zero and negative rates)\"",
    "Every zero is replaced by the smallest positive rate given, and all 5 months are fitted",
-   "Refused with `h` named, since 2 producing months cannot support any forecast horizon"
+   "A refusal naming `y`: \"y has 2 values: fitArpsModel needs at least 3 positive values\""
   ],
   "answer": 1,
-  "explanation": "Zeros are dropped before the fit, and fitArpsModel needs at least 3 positive values; the refusal names `y` in the words quoted. The boundary is 3 fitted and 2 refused, with no warning route. Nothing is filled or replaced: zeros are dropped. h has its own rule, 0 to 10000, unrelated to the count of positive months."
+  "explanation": "Zeros are dropped before the fit, and fitArpsModel needs at least 3 positive values; the refusal names `y` in the words quoted. The boundary is 3 fitted and 2 refused, with no warning route. Nothing is filled or replaced: zeros are dropped. The message that counts values is the refusal for a series of two months; here 5 values were passed, so the message counts the positive ones."
  },
  {
   "prompt": "The rising series 100, 120, 150, 190, 240 is passed to `arpsForecast` with Auto-Select. Why is it refused?",

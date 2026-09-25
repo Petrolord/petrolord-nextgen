@@ -95,9 +95,9 @@ x("Which of these can this engine return?",
 x("EKENE-P1 is passed with month 5 set to null. What does the engine do?",
  "It refuses by name at the first null index: \"y[5] must be a finite number: fill or drop missing values first\"",
  ["Fills month 5 by interpolating between months 4 and 6, and notes the filled month in the result",
-  "Drops month 5 and fits the other 47 months, with the gap left in the time axis as for Arps",
+  "Refuses the series as a whole: \"y must be an array of numbers\", since one null spoils every value",
   "Treats month 5 as a shut-in at rate 0, which the smoothing methods fit through like any value"],
- "A missing month is refused by name at the first index it meets, counting from 0, and nothing is filled; filling or dropping it is the caller's decision, and the data quality course conditions rates. Interpolating and dropping are both caller decisions the engine will not make. A shut-in is a real value of 0; a null is a missing one, and the engine does not guess which a null was.")
+ "A missing month is refused by name at the first index it meets, counting from 0, and nothing is filled; filling or dropping it is the caller's decision, and the data quality course conditions rates. Interpolating and dropping are both caller decisions the engine will not make. The array message is for something passed in place of a series, and here the series was an array with one null in it. A shut-in is a real value of 0; a null is a missing one, and the engine does not guess which a null was.")
 
 # 12
 x("The engine's exports are listed in full. How many names are there, and which one draws the bootstrap?",

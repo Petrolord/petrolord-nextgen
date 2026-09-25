@@ -111,7 +111,7 @@ x("A bootstrap call passes `nonNegative` as the word 'yes'. What does the engine
  "\"nonNegative must be true or false\", naming the field `nonNegative`",
  ["Read as true, with negative percentiles clipped as usual",
   "It ignores the word and falls back to the default, which is true",
-  "It refuses naming `seed`, since the switch is checked with the seed"],
+  "It refuses naming `seed`: \"seed must be a whole number from 0 to 4294967295\""],
  "The switch is a strict true or false, and a word in its place is refused with the field named, in the words quoted. No word is interpreted as true. A value given is checked as given, and the default applies only when the field is left out. The seed has its own rule and its own message.")
 
 # 13
@@ -139,12 +139,12 @@ x("EKENE-P2, EKENE-P4 and EKENE-P5 return hyperbolic b values of 0.950000, 0.400
  "The basis: \"hyperbolic by a b grid from 0.05 by 0.05 to 2 on q^-b\", so every hyperbolic b is a grid point, as printed; as returned it can differ from the printed decimal in its last bits, as EKENE-P1's does. Nothing is rounded. The generator stated 0.3, 0.7 and 0.1 for these wells, and only EKENE-P5's matches. The refusal for no fit concerns Di <= 0 on the line, unrelated to the grid.")
 
 # 16
-x("At step 12 the Arps forecast of EKENE-P1 is 156.514309, below the damped point forecast of 169.556510. What accounts for the gap?",
- "The Arps curve keeps declining, while the damped forecast levels off toward its limit",
- ["Being a percentile of simulated paths, the Arps forecast sits below the point forecast",
-  "Damped was fitted on fewer months, so its forecast lags the decline",
-  "Zero months dropped by the Arps fit lower every forecast after them"],
- "An Arps forecast comes from the fitted decline curve and keeps declining, while phi makes each damped step smaller than the last so the forecast flattens. Both are point forecasts; neither is a percentile. Both methods read all 48 months. EKENE-P1 has no zero months, and the Arps fit dropped none.")
+x("At step 12 the Arps forecast of EKENE-P1 is 156.514309 and the damped point forecast 169.556510. How should a reader take the two figures?",
+ "As point forecasts from two different fits, each carried forward from its own fitted curve or state",
+ ["As a percentile of simulated Arps paths set beside a point forecast, the Arps figure being the low case",
+  "As fits of different months, since damped read fewer of them and so lags the decline",
+  "As one decline lowered at every step by the zero months that the Arps fit dropped"],
+ "Both are point forecasts: the Arps figure comes from the fitted decline curve, qi, Di and b, and the damped figure from the fitted final level and trend, each step's change phi times the one before. Neither is a percentile. Both methods read all 48 months. EKENE-P1 has no zero months, and the Arps fit dropped none. Which of the two forecasts is better is a question for a backtest on the same origins, where on EKENE-P1 from first origin 30 arps ranks first.")
 
 # 17
 x("A colleague pastes EKENE-P1's Di of 0.060069 into a tool that reads decline per year. What goes wrong?",
@@ -167,8 +167,8 @@ x("A comparison is passed `arpsModel` 'Linear'. What does the engine reply?",
  "\"arpsModel must be 'Auto-Select', 'Exponential', 'Harmonic' or 'Hyperbolic'\"",
  ["The arps row fitted as a straight line through each window's rates",
   "A comparison with the arps row unranked and its error naming the model it could not fit",
-  "Auto-Select runs in place of the name it did not recognise"],
- "A model the engine does not offer is refused with the field `arpsModel` named, in the words quoted; the same four names are the ones `arpsForecast` takes as `modelType`. No straight-line model exists in the decline curve engine's list. An unranked arps row comes from a failed fit on a window; an unknown name stops the call. Nothing is substituted.")
+  "\"modelType must be 'Auto-Select', 'Exponential', 'Harmonic' or 'Hyperbolic'\", naming `modelType`"],
+ "A model the engine does not offer is refused with the field `arpsModel` named, in the words quoted; the same four names are the ones `arpsForecast` takes as `modelType`, and that field and its message belong to `arpsForecast` alone. No straight-line model exists in the decline curve engine's list. An unranked arps row comes from a failed fit on a window; an unknown name stops the call. Nothing is substituted.")
 
 # 20
 x("Why does every ranking the engine returns put the lowest metric first?",
@@ -184,7 +184,7 @@ x("On EKENE-P2 months 0 to 21, before the shut-in, from origins 10, 13, 16 and 1
  ["holt, at 0.483573",
   "damped, at 0.504549",
   "ses, at 1.006754"],
- "Before the shut-in the ranking by MASE is arps, holt, damped, ses, with arps at 0.389192; on a steady decline the baseline wins. holt's 0.483573 and damped's 0.504549 come next, and ses's 1.006754, above 1, is last.")
+ "Before the shut-in the ranking by MASE is arps, holt, damped, ses, with arps at 0.389192; on these origins the baseline wins. holt's 0.483573 and damped's 0.504549 come next, and ses's 1.006754, above 1, is last.")
 
 # 22
 x("EKENE-P2 compared from first origin 28 has a MAPE on every row, while from first origin 12 every MAPE is null. What makes the difference?",
@@ -223,8 +223,8 @@ x("A caller passes the methods ses and arps to `compareWithArps`. What happens?"
  "Refused, \"methods[1] must be 'ses', 'holt' or 'damped'\", since arps is added by the engine itself",
  ["Accepted, with arps compared twice, once as listed and once more as the baseline the engine adds at the end",
   "Accepted, with the listed arps moved to the end of the list and treated as the one baseline",
-  "Refused as a repeat, since arps is always present and listing it counts as listing it twice"],
- "The list takes only 'ses', 'holt' and 'damped'; anything else is refused by its position, counted from 0, so arps in second place is `methods[1]`. The engine always adds arps itself, last, so it never needs listing. Nothing listed is moved or doubled. The repeat message, \"methods[2] repeats ses\", is for a smoothing method listed twice.")
+  "Refused, \"methods must be a non-empty array of 'ses', 'holt' and 'damped'\", as arps spoils the list"],
+ "The list takes only 'ses', 'holt' and 'damped'; anything else is refused by its position, counted from 0, so arps in second place is `methods[1]`. The engine always adds arps itself, last, so it never needs listing. Nothing listed is moved or doubled. The empty-list message is for a list with nothing in it, and this one had two entries. The repeat message, \"methods[2] repeats ses\", is for a smoothing method listed twice.")
 
 # 27
 x("A comparison is run with `refit` and `m` left out. What settings does it run with?",
@@ -279,8 +279,8 @@ x("Why does the compass search's first step start at 0.05 of each parameter's ra
  "Half the grid spacing: the grid steps by 0.1, and the first compass step is half of that",
  ["The smallest step that the grid's tie band of 1.00e-12 can still tell apart from a step of zero",
   "Matching the lowest b on the Arps grid, so that both searches move by the same steps throughout",
-  "It is chosen so that 26 halvings reach 2^-30 of the range from any grid point"],
- "The stop rule's description: \"The compass step starts at 0.05 of each range (half the grid spacing)\", and the grid runs at 0.1. The tie band is a relative test on SSE, unrelated to step size. The Arps b grid is another engine's search. The halvings follow from the start and the stop rule; the start was not chosen to make them 26.")
+  "It is 5 percent of the SSE at the best grid point, so the first step scales with the fit"],
+ "The stop rule's description: \"The compass step starts at 0.05 of each range (half the grid spacing)\", and the grid runs at 0.1. The tie band is a relative test on SSE, unrelated to step size. The Arps b grid is another engine's search. The step is a fraction of each parameter's range, and the SSE plays no part in its size.")
 
 # 34
 x("What is the fewest set of values `accuracy` will score?",

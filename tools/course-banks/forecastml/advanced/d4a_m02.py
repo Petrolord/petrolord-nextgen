@@ -38,10 +38,10 @@ x("Why is every percentile of a bootstrap at the default 1000 paths the mean of 
 # 4
 x("The teaching run is repeated with 999 paths on the same seed. What changes in the way each percentile is read?",
  "Every index turns fractional, so each percentile is a single simulated value, and the 999 paths are the first 999 of the 1000",
- ["Nothing at all, since 999 and 1000 both give whole indices at 0.1, 0.5 and 0.9",
+ ["Nothing at all, since 999 and 1000 both give whole indices at 0.1, 0.5 and 0.9, so each percentile is still the mean of two values",
   "The call is refused, because nSims must be even for a mean of two values to exist",
-  "A fresh stream is drawn, so the 999 paths share no draw with the 1000 on that seed"],
- "999 x 0.1 is 99.900000, and likewise at 0.5 and 0.9 the index is not whole, so each percentile is the ceil(idx)-th smallest value; the table gives 100.000000 at p 0.1 for 999 sorted values. The stream runs path by path, so the first 999 paths are the same draws as before and the comparison isolates the rule and one path. An odd nSims is accepted; the range is 1 to 100000.")
+  "A fresh stream is drawn for an odd count, so the 999 paths share no draw with the 1000 on that seed, and every percentile moves for that alone"],
+ "999 x 0.1 is 99.900000, and likewise at 0.5 and 0.9 the index is not whole, so each percentile is the ceil(idx)-th smallest value; the table gives 100.000000 at p 0.1 for 999 sorted values. The stream runs path by path, so the first 999 paths are the same draws as before and the comparison isolates the rule and one path; the seed alone starts the stream, whatever the count. An odd nSims is accepted; the range is 1 to 100000.")
 
 # 5
 x("`forecastIntervals` returns arrays keyed `P90`, `P50` and `P10`. Which percentile of the simulated paths sits under the key `P90`?",
@@ -111,17 +111,17 @@ x("On the teaching run the P10 (high) less the P90 (low) is 51.569125 at step 1,
 x("At step 12 of the teaching run the width of the interval equals the P10 (high), 324.803671. What should a reader do before quoting that width in a decision?",
  "Read the run with nonNegative false as well, since a P90 reported as 0 leaves the width measuring the high side alone",
  ["Double the width, since the zero rule halves every interval it touches at a step",
-  "Quote the width as printed, because the zero rule never changes a width",
-  "Rerun with more paths until the P90 (low) climbs above 0 at that step"],
+  "Quote the width as printed, because the zero rule never changes a width, only the percentile it acts on",
+  "Rerun with more paths until the P90 (low) climbs above 0 at that step, since more paths narrow the low tail"],
  "Once the low case is reported as 0 the width stops measuring the spread of the paths below the middle; reading the run with nonNegative false shows the simulated P90, and the course asks the reader to say which width is quoted. No rule halves or doubles anything. The zero rule does change the width here, which is the point. More paths steady the percentiles; at 10000 paths the P90 at step 12 is still 0.000000.")
 
 # 14
 x("`fitSmoothing` accepts h 0 and answers with an empty forecast. What does `forecastIntervals` do when passed h 0?",
  "Refuses it, naming `h`: \"h must be a whole number from 1 to 10000\"",
- ["It returns the residual pool with no percentiles, the way the fit returns an empty forecast",
+ ["Refuses it with the fit's message, \"h must be a whole number from 0 to 10000\", naming `h`",
   "Uses h 12, the horizon of the teaching bootstrap, whenever h is 0 or left out of the call",
   "Percentiles come back for step 0, which is the last month of the series itself"],
- "The bootstrap forecasts at least one step, so its h runs from 1, and h 0 is refused in the engine's words quoted. The fit's rule, from 0 to 10000, is a different rule on a different function. No default horizon of 12 exists; 12 is simply the horizon the course chose for its teaching run. Step 1 is the first month past the series; there is no step 0.")
+ "The bootstrap forecasts at least one step, so its h runs from 1, and h 0 is refused in the engine's words quoted. The fit's rule and message, from 0 to 10000, belong to a different function, and under them h 0 would be accepted. No default horizon of 12 exists; 12 is simply the horizon the course chose for its teaching run. Step 1 is the first month past the series; there is no step 0.")
 
 # 15
 x("A second tool reads percentiles by linear interpolation between sorted values, the numpy default. What does the course advise before its P90 is set beside this engine's?",
