@@ -12,7 +12,8 @@
 # the suite imports arps.js directly as well, and synthetic_wells.js now
 # imports arps.js for syntheticProduction.
 #
-# VENDORED AT ec89b6b (engines PR #255, merged).
+# VENDORED AT ec89b6b (engines PR #255, merged); RE-VENDORED AT 1dfdd60
+# (engines PR #256, merged: message wording only, E1-E4; no number changed).
 #
 # ONE ENTRY MOVES FROM D3's GROUP d3-facies-course TO d4-forecastml-course, at
 # its new blob, because D4's closure is why the file moved:
@@ -38,7 +39,7 @@ set -euo pipefail
 ENG=/root/petrolord-engines
 NG=${NG:-/root/wt-dai-d4-nextgen}
 PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
-REV=${REV:-ec89b6b}
+REV=${REV:-1dfdd60}
 FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 EXP=$(mktemp -d)
 LEDGER_PY=$(mktemp)
@@ -156,7 +157,7 @@ for p in paths:
     added.append({
         'path': p, 'kind': kind, 'group': GROUP, 'vendoredSha': blob,
         'reason': (f"D4 forecastml course: vendored sha-identical from petrolord-engines {full[:7]} "
-                   f"(PR #255: engines/dataai/forecast.js, its jest suite, golden, library pins, synthetic wells (syntheticProduction and an arps.js import appended; D2's syntheticWells and D3's syntheticFacies unchanged), oracle, pin writer, "
+                   f"(PR #255 + #256: engines/dataai/forecast.js, its jest suite, golden, library pins, synthetic wells (syntheticProduction and an arps.js import appended; D2's syntheticWells and D3's syntheticFacies unchanged), oracle, pin writer, "
                    f"timing script, FINDINGS, negative control) by the wave's vendor_forecastml.sh, 4 proofs per path. "
                    f"{'New since' if kind == 'extra' else 'Differing from'} the canonical pin {pin[:7]}, which stays: moving it "
                    f"would also move economics, facilities, production, seismolord and wellsite paths other courses grade. "

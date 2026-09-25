@@ -2,7 +2,7 @@
 //
 // Every number this lab returns is a return value of the vendored engine
 // (packages/engines/engines/dataai/forecast.js, sha-identical with
-// petrolord-engines ec89b6b, which imports engines/dca/arps.js for the Arps
+// petrolord-engines 1dfdd60, which imports engines/dca/arps.js for the Arps
 // baseline and lib/stats for the seeded bootstrap) on the Ekene production
 // wells, or on the series a learner types into a panel. The dataset is
 // ekeneProduction.json beside this file, the committed output of the wave's

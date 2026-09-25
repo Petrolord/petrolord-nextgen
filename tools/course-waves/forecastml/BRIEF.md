@@ -91,9 +91,12 @@ is damped on EKENE-P1, h 12, seed 11, 1000 paths.
    null origin scale leaves the pooled MASE null (section 16).
 6. **The bootstrap replays the residuals as fitted** (section 18), one
    mulberry32 stream on a stated seed, and the simulated value updates the
-   state. The residuals are never centred, so a median can sit away from the
-   point forecast: ses on EKENE-P1 at step 12 forecasts 211.400000 while the P10
-   (high) of its paths is 69.250000.
+   state. The residuals are drawn WITHOUT CENTRING (their mean is not
+   subtracted), and the engine's basis says so in words: a method whose
+   residuals have a non-zero mean drifts, so on a declining well a flat
+   method's paths can fall below its own point forecast. Quote the basis
+   wording from section 18. ses on EKENE-P1 at step 12 forecasts 211.400000
+   while the P10 (high) of its paths is 69.250000.
 7. **P90 is the low case** (section 19): the 10th percentile of the paths, by
    the platform's exceedance convention; P10 is the high case. With
    `nonNegative` true a negative percentile is reported as 0 and counted.

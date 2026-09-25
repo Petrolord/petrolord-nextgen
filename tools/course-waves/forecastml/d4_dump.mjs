@@ -175,7 +175,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Every rate, level, trend, forecast, fitted value, residual, error, smoothing parameter, sum of squares, mean squared error, percentage error, scaled error, scale, percentile, Arps qi, Di and b, R2 and RMSE prints to SIX decimals; counts, month indices, origins, steps, horizons, evaluations, seeds and path counts are whole numbers; very small magnitudes and tie bands print in exponent form; an engine message is printed verbatim, figures and all.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines ec89b6b, ${engineLines} lines. It imports lib/stats (mulberry32 and quantile), lib/conventions/percentile.js (the P90, P50 and P10 labels and the exceedance definition) and, from engines/dca/arps.js, fitArpsModel and calculateArpsHyperbolic. The vendored golden test-data/dataai/goldens/forecast_cases.json carries ${CASES.length} cases, ${refusalsInGolden} of them refusals and ${publishedInGolden} of them a published anchor, written by the standard library oracle.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 1dfdd60, ${engineLines} lines. It imports lib/stats (mulberry32 and quantile), lib/conventions/percentile.js (the P90, P50 and P10 labels and the exceedance definition) and, from engines/dca/arps.js, fitArpsModel and calculateArpsHyperbolic. The vendored golden test-data/dataai/goldens/forecast_cases.json carries ${CASES.length} cases, ${refusalsInGolden} of them refusals and ${publishedInGolden} of them a published anchor, written by the standard library oracle.`);
 w();
 w('# WHAT IS NEVER IN THIS FILE. No capstone field, no capstone well, no capstone dataset and no graded answer. The capstones run their own datasets and the digest never names them.');
 w();
@@ -852,7 +852,12 @@ const sesRes = SESF['EKENE-P1'].residuals.slice(1);
 const PISu = success(`forecastIntervals ses EKENE-P1 unclipped`, FC.forecastIntervals({ y: Y1, method: 'ses', h: H, seed: SEED_PI, nonNegative: false }));
 must('ses on EKENE-P1: the point forecast is above the P10 at step 12', PIS.forecast[H - 1] > PIS.P10[H - 1], `${PIS.forecast[H - 1]} ${PIS.P10[H - 1]}`);
 must('the ses residual mean is negative', mean(sesRes) < 0, mean(sesRes));
-w(`A MEDIAN AWAY FROM THE POINT FORECAST. The residuals are drawn as they are, never centred on 0 (their mean over the damped pool here is ${f6(resMean)} bbl/d, derived). When the residuals lean one way, every path leans with them and the state carries the lean forward. ses on EKENE-P1 shows it plainly: alpha fits to 1, so each residual is a month-to-month change of the decline, mean ${f6(mean(sesRes))} bbl/d (derived). The P50 of the paths falls while the point forecast stays flat:`);
+const UNCENTRED = 'residuals are drawn as fitted without centring (their mean is not subtracted), so a method whose residuals have a non-zero mean drifts: on a declining well a flat method\'s paths can fall below its own point forecast';
+must('the bootstrap basis states the uncentred draw', PID.basis.bootstrap.endsWith(UNCENTRED), PID.basis.bootstrap);
+must('the ses bootstrap basis states it too', PIS.basis.bootstrap.endsWith(UNCENTRED), PIS.basis.bootstrap);
+w(`RESIDUALS DRAWN WITHOUT CENTRING. The engine does not subtract the residual mean before it resamples, and its basis says so in these words: "${UNCENTRED}". ses on EKENE-P1, below, is that case: a flat method on a declining well. A centred bootstrap (the mean subtracted first) is the alternative in common use (${ref('choices')}).`);
+w();
+w(`A MEDIAN AWAY FROM THE POINT FORECAST. The residuals are drawn as fitted (their mean over the damped pool here is ${f6(resMean)} bbl/d, derived). When the residuals lean one way, every path leans with them and the state carries the lean forward. ses on EKENE-P1 shows it plainly: alpha fits to 1, so each residual is a month-to-month change of the decline, mean ${f6(mean(sesRes))} bbl/d (derived). The P50 of the paths falls while the point forecast stays flat:`);
 w();
 table(['step', 'ses point forecast', 'P90 (low), unclipped', 'P50, unclipped', 'P10 (high), unclipped'], [0, 5, H - 1].map((j) => [S(j + 1), f6(PIS.forecast[j]), f6(PISu.P90[j]), f6(PISu.P50[j]), f6(PISu.P10[j])]));
 w();
@@ -1078,7 +1083,7 @@ table(['convention', 'this engine', 'a common alternative', 'why the engine chos
   ['sMAPE', 'absolute values in the denominator, 0 to 200, a 0/0 term scores 0', 'without absolute values, or on 0 to 100', 'Hyndman and Koehler 2006'],
   ['MASE scale', 'in-sample lag-m naive MAE of the training series, m = 1', 'the out-of-sample naive error, or a seasonal m', 'the scale is fixed before the forecast is scored'],
   ['backtest window', 'expanding, from month 0', 'a sliding window of fixed length', 'every month before the origin is information a forecaster would have'],
-  ['intervals', 'residual bootstrap, residuals as fitted, parameters held', 'analytic intervals, or a bootstrap that also resamples parameters', 'no distribution is assumed; the method\'s own errors are replayed'],
+  ['intervals', 'residual bootstrap, residuals as fitted without centring, parameters held', 'analytic intervals, a centred bootstrap (residual mean subtracted), or a bootstrap that also resamples parameters', 'no distribution is assumed; the method\'s own errors are replayed'],
   ['quantile', 'lib/stats quantile (the simple-statistics rule)', 'linear interpolation (numpy default)', 'the platform\'s one quantile'],
   ['percentile labels', 'P90 the low case (exceedance)', 'P90 the 90th percentile', 'the platform convention for outcomes'],
   ['Arps time base', 'month k passed as day k, Di per month', 'calendar days', 'fitArpsModel reads days and a step is a month'],

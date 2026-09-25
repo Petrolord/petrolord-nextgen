@@ -4,7 +4,7 @@
 
 # PRECISION. Every rate, level, trend, forecast, fitted value, residual, error, smoothing parameter, sum of squares, mean squared error, percentage error, scaled error, scale, percentile, Arps qi, Di and b, R2 and RMSE prints to SIX decimals; counts, month indices, origins, steps, horizons, evaluations, seeds and path counts are whole numbers; very small magnitudes and tie bands print in exponent form; an engine message is printed verbatim, figures and all.
 
-# ENGINE. engines/dataai/forecast.js, vendored sha-identical with petrolord-engines ec89b6b, 695 lines. It imports lib/stats (mulberry32 and quantile), lib/conventions/percentile.js (the P90, P50 and P10 labels and the exceedance definition) and, from engines/dca/arps.js, fitArpsModel and calculateArpsHyperbolic. The vendored golden test-data/dataai/goldens/forecast_cases.json carries 130 cases, 56 of them refusals and 6 of them a published anchor, written by the standard library oracle.
+# ENGINE. engines/dataai/forecast.js, vendored sha-identical with petrolord-engines 1dfdd60, 699 lines. It imports lib/stats (mulberry32 and quantile), lib/conventions/percentile.js (the P90, P50 and P10 labels and the exceedance definition) and, from engines/dca/arps.js, fitArpsModel and calculateArpsHyperbolic. The vendored golden test-data/dataai/goldens/forecast_cases.json carries 140 cases, 62 of them refusals and 6 of them a published anchor, written by the standard library oracle.
 
 # WHAT IS NEVER IN THIS FILE. No capstone field, no capstone well, no capstone dataset and no graded answer. The capstones run their own datasets and the digest never names them.
 
@@ -148,7 +148,7 @@ Each row is a real call. The message column is the engine's `error` string, verb
 | `forecastIntervals` | two months, ses | `y` | y has 2 values, which leave 1 scored residual: the bootstrap resamples at least 2, so 'ses' needs at least 3 values here |
 | `backtest` | a horizon of 0 | `horizon` | horizon must be a whole number, 1 or more |
 | `backtest` | a step of 0 | `step` | step must be a whole number, 1 or more |
-| `backtest` | EKENE-P6, 3 months, holt, horizon 1 | `y` | y has 3 values: a backtest with horizon 1 needs at least 4 ('holt' needs 3 training values, then 1 actuals) |
+| `backtest` | EKENE-P6, 3 months, holt, horizon 1 | `y` | y has 3 values: a backtest with horizon 1 needs at least 4 ('holt' needs 3 training values, then 1 actual) |
 | `backtest` | holt from origin 2 | `firstOrigin` | firstOrigin must be a whole number from 3 to 42 ('holt' needs 3 training values; an origin above 42 leaves fewer than 6 actuals) |
 | `backtest` | origin 45 with a horizon of 6 on 48 months | `firstOrigin` | firstOrigin must be a whole number from 2 to 42 ('ses' needs 2 training values; an origin above 42 leaves fewer than 6 actuals) |
 | `backtest` | a word where true or false belongs | `refit` | refit must be true or false |
@@ -184,10 +184,10 @@ UNDEFINED METRICS ARE NOT REFUSALS. A MAPE or a MASE the arithmetic cannot give 
 | `accuracy` | EKENE-P2 months 20 to 25 as actuals (the shut-in inside) | mape | MAPE is undefined: actual[2] is 0 and MAPE divides by each actual |
 | `accuracy` | no insample | mase | MASE needs insample (the training series) to scale by its in-sample naive error |
 | `accuracy` | an insample of one month | mase | MASE is undefined: insample has 1 value, so the lag-1 naive forecast has no in-sample error (it needs more than 1) |
-| `accuracy` | EKENE-P3 months 0 to 8 (the plateau) as insample | mase | MASE is undefined: the lag-1 naive forecast has zero in-sample error on the 9 values of insample (every y[t] - y[t - 1] is 0), so the scale is 0 |
+| `accuracy` | EKENE-P3 months 0 to 8 (the plateau) as insample | mase | MASE is undefined: insample has 9 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0 |
 | `accuracy` | a lag m of 12 on an insample of 12 months | mase | MASE is undefined: insample has 12 values, so the lag-12 naive forecast has no in-sample error (it needs more than 12) |
-| `backtest` | EKENE-P3, ses, first origin 6 (inside the plateau) | mase | MASE is undefined: at origin 6 the lag-1 naive forecast has zero in-sample error on the 6 values of the 6 training values (every y[t] - y[t - 1] is 0), so the scale is 0 |
-| `backtest` | EKENE-P1, ses, lag m 12, first origin 12 | mase | MASE is undefined: at origin 12 the 12 training values has 12 values, so the lag-12 naive forecast has no in-sample error (it needs more than 12) |
+| `backtest` | EKENE-P3, ses, first origin 6 (inside the plateau) | mase | MASE is undefined: at origin 6 the training window has 6 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0 |
+| `backtest` | EKENE-P1, ses, lag m 12, first origin 12 | mase | MASE is undefined: at origin 12 the training window has 12 values, so the lag-12 naive forecast has no in-sample error (it needs more than 12) |
 | `backtest` | EKENE-P2, ses, first origin 20 (the shut-in in the actuals) | mape | MAPE is undefined: the actual at index 22 (origin 20, step 3) is 0 and MAPE divides by each actual |
 
 A backtest reason names the origin it comes from; an `accuracy` reason names the input. Every other metric of those calls is a number.
@@ -472,7 +472,7 @@ THE SCALE COMES FROM THE TRAINING SERIES, never from the actuals being scored. S
 
 THE LAG. `m` is 1 by default, the month before. With m 12 (stated), the naive forecast is the same month a year before: Q = 281.625000 over 24 differences, and holt's MASE becomes 0.024087 against 0.241874 at m 1. A declining well has no season, and on a decline the year-old month is far from this month, so the lag-12 scale is larger and MASE smaller. The lag is part of the figure: quote MASE with its m.
 
-A FLAT TRAINING WINDOW. EKENE-P3's first 9 months are the plateau, exactly 1500.000000 each. As a training series every difference is 0, so Q = 0 and MASE would divide by zero; the engine returns null and says so: "MASE is undefined: the lag-1 naive forecast has zero in-sample error on the 9 values of insample (every y[t] - y[t - 1] is 0), so the scale is 0". A training series of m values or fewer has no naive difference at all: "MASE is undefined: insample has 1 value, so the lag-1 naive forecast has no in-sample error (it needs more than 1)".
+A FLAT TRAINING WINDOW. EKENE-P3's first 9 months are the plateau, exactly 1500.000000 each. As a training series every difference is 0, so Q = 0 and MASE would divide by zero; the engine returns null and says so: "MASE is undefined: insample has 9 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0". A training series of m values or fewer has no naive difference at all: "MASE is undefined: insample has 1 value, so the lag-1 naive forecast has no in-sample error (it needs more than 1)".
 
 # SECTION 14: Rolling-origin backtests: origins, horizon, step, refit and held parameters (owned by Professional m04)
 
@@ -546,7 +546,7 @@ EACH ORIGIN ITS OWN SCALE. MASE divides each error by the Q of its own origin's 
 
 Dividing every error by the last origin's scale instead (derived, a wrong method) gives 0.458893 against the engine's 0.374515.
 
-ONE ORIGIN CAN LEAVE A METRIC UNDEFINED. EKENE-P3, damped, first origin 6, horizon 6, step 6 (stated): origins 6, 12, 18, 24, 30, 36, 42. Origin 6 trains on months 0 to 5, all inside the plateau, so its Q is 0 (`maseScale` null); the other origins have scales 18.163636, 37.629412, 38.791304, 36.041379, 35.505714, 33.797561. One null scale leaves the overall MASE and every by-horizon MASE null, with the reason: "MASE is undefined: at origin 6 the lag-1 naive forecast has zero in-sample error on the 6 values of the 6 training values (every y[t] - y[t - 1] is 0), so the scale is 0". The other metrics are numbers: MAE 62.892091, sMAPE 11.808809.
+ONE ORIGIN CAN LEAVE A METRIC UNDEFINED. EKENE-P3, damped, first origin 6, horizon 6, step 6 (stated): origins 6, 12, 18, 24, 30, 36, 42. Origin 6 trains on months 0 to 5, all inside the plateau, so its Q is 0 (`maseScale` null); the other origins have scales 18.163636, 37.629412, 38.791304, 36.041379, 35.505714, 33.797561. One null scale leaves the overall MASE and every by-horizon MASE null, with the reason: "MASE is undefined: at origin 6 the training window has 6 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0". The other metrics are numbers: MAE 62.892091, sMAPE 11.808809.
 
 Starting at origin 12 instead, past the plateau (stated), every origin has a scale and the overall MASE is 2.004154. Choosing the origins is part of the test; state them.
 
@@ -584,7 +584,7 @@ WRITING UP A BACKTEST names: the well and months; the methods; first origin, hor
 
 # SECTION 18: The residual bootstrap: paths, one seeded stream, the state update and the pool (owned by Expert m01)
 
-`forecastIntervals` fits the method as `fitSmoothing` does, then simulates 1000 future paths (`nSims`, default 1000). The basis reads: "1000 paths; each step adds a residual drawn with replacement from the 46 scored in-sample residuals (index floor(u x 46), u from mulberry32(11), path by path, step by step) to the one-step forecast, and the simulated value updates the state".
+`forecastIntervals` fits the method as `fitSmoothing` does, then simulates 1000 future paths (`nSims`, default 1000). The basis reads: "1000 paths; each step adds a residual drawn with replacement from the 46 scored in-sample residuals (index floor(u x 46), u from mulberry32(11), path by path, step by step) to the one-step forecast, and the simulated value updates the state; residuals are drawn as fitted without centring (their mean is not subtracted), so a method whose residuals have a non-zero mean drifts: on a declining well a flat method's paths can fall below its own point forecast".
 
 EKENE-P1, damped, fitted (alpha 0.657029, beta 0.353869, phi 0.960949), h 12, seed 11 (stated):
 
@@ -619,7 +619,9 @@ MORE PATHS, the same seed (nSims stated):
 
 More paths steady the percentiles; they do not make the method right.
 
-A MEDIAN AWAY FROM THE POINT FORECAST. The residuals are drawn as they are, never centred on 0 (their mean over the damped pool here is -1.726983 bbl/d, derived). When the residuals lean one way, every path leans with them and the state carries the lean forward. ses on EKENE-P1 shows it plainly: alpha fits to 1, so each residual is a month-to-month change of the decline, mean -20.525532 bbl/d (derived). The P50 of the paths falls while the point forecast stays flat:
+RESIDUALS DRAWN WITHOUT CENTRING. The engine does not subtract the residual mean before it resamples, and its basis says so in these words: "residuals are drawn as fitted without centring (their mean is not subtracted), so a method whose residuals have a non-zero mean drifts: on a declining well a flat method's paths can fall below its own point forecast". ses on EKENE-P1, below, is that case: a flat method on a declining well. A centred bootstrap (the mean subtracted first) is the alternative in common use (section 24).
+
+A MEDIAN AWAY FROM THE POINT FORECAST. The residuals are drawn as fitted (their mean over the damped pool here is -1.726983 bbl/d, derived). When the residuals lean one way, every path leans with them and the state carries the lean forward. ses on EKENE-P1 shows it plainly: alpha fits to 1, so each residual is a month-to-month change of the decline, mean -20.525532 bbl/d (derived). The P50 of the paths falls while the point forecast stays flat:
 
 | step | ses point forecast | P90 (low), unclipped | P50, unclipped | P10 (high), unclipped |
 | --- | --- | --- | --- | --- |
@@ -710,7 +712,7 @@ RANKING BY THE CHOSEN METRIC, the same comparison (lowest first):
 
 UNRANKED METHODS. A method whose metric is null is left out of the ranking and listed in `unranked`. EKENE-P2 from origin 12, horizon 6, step 3, ranked by MAPE (stated): the shut-in months are in the actuals of some origins, so every method's MAPE is null; `ranking` is empty, `best` is null, and `unranked` is ses, holt, damped, arps. Ranked by MASE instead, the same call ranks all four. Ranking by MAPE ranks nothing once a shut-in month is in the actuals of every method's origins.
 
-AN ARPS ROW WITH NO FIT. A stated series, 900, 880, 0, 0, 0, 0, 0, 0, 870, 860, 850, 845, first origin 6, horizon 2, step 2: the training window at origin 6 has two positive months, and the arps row carries no metrics, the error "at origin 6 the 6 training values have 2 positive values: fitArpsModel needs at least 3 (it drops zero and negative rates)", and is unranked. The smoothing methods are ranked: ses, damped, holt.
+AN ARPS ROW WITH NO FIT. A stated series, 900, 880, 0, 0, 0, 0, 0, 0, 870, 860, 850, 845, first origin 6, horizon 2, step 2: the training window at origin 6 has two positive months, and the arps row carries no metrics, the error "at origin 6 the training window has 2 positive values: fitArpsModel needs at least 3 (it drops zero and negative rates)", and is unranked. The smoothing methods are ranked: ses, damped, holt.
 
 TIES AND THE LISTED ORDER. Values within 1.00e-12 of each other, relative, keep the order the methods were listed in, arps last. Golden `cmp-constant-ties`: a constant 50 for 10 months, methods listed damped, ses, holt, ranked by mae. Every smoothing method forecasts the constant exactly (MAE 0), so the ranking is the listed order, damped, ses, holt; Arps cannot fit a flat series and is unranked (arps).
 
@@ -791,7 +793,7 @@ Every convention below is a choice the engine states in its basis. Each has a re
 | sMAPE | absolute values in the denominator, 0 to 200, a 0/0 term scores 0 | without absolute values, or on 0 to 100 | Hyndman and Koehler 2006 |
 | MASE scale | in-sample lag-m naive MAE of the training series, m = 1 | the out-of-sample naive error, or a seasonal m | the scale is fixed before the forecast is scored |
 | backtest window | expanding, from month 0 | a sliding window of fixed length | every month before the origin is information a forecaster would have |
-| intervals | residual bootstrap, residuals as fitted, parameters held | analytic intervals, or a bootstrap that also resamples parameters | no distribution is assumed; the method's own errors are replayed |
+| intervals | residual bootstrap, residuals as fitted without centring, parameters held | analytic intervals, a centred bootstrap (residual mean subtracted), or a bootstrap that also resamples parameters | no distribution is assumed; the method's own errors are replayed |
 | quantile | lib/stats quantile (the simple-statistics rule) | linear interpolation (numpy default) | the platform's one quantile |
 | percentile labels | P90 the low case (exceedance) | P90 the 90th percentile | the platform convention for outcomes |
 | Arps time base | month k passed as day k, Di per month | calendar days | fitArpsModel reads days and a step is a month |

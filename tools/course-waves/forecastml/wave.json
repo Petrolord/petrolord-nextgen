@@ -15,7 +15,7 @@
   "lib/stats/stats.js",
   "lib/conventions/percentile.js"
  ],
- "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines ec89b6b (engines PR #255, merged). THIRTEEN paths walked by vendor_forecastml.sh over a git-archive export of the commit with the jest suite as the only seed: six reached by the walk (the suite, forecast.js, engines/dca/arps.js, lib/stats/stats.js, lib/conventions/percentile.js, tools/validation/dataai/synthetic_wells.js) and seven NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; oracle_forecast.py, pin_forecast.py, timing_forecast.mjs, FINDINGS-forecast.md, negcontrol_forecast.sh). 13 paths x 4 proofs = 52, all IDENTICAL. The canonical pin stays 54cf7c4; 10 paths are ledgered as kind extra, group d4-forecastml-course. ONE entry moved there from d3-facies-course at its new blob: synthetic_wells.js (c5b850d5ed79, ec89b6b: syntheticProduction and an arps.js import appended; D2's syntheticWells and D3's syntheticFacies unchanged). arps.js, lib/stats and percentile.js already match the manifest. PRIOR-COURSE PROOF (prove_prior_courses.sh): against the new tree the committed D1 dataqc, D2 mlcore and D3 facies kits rebuild digest.txt, fields.json and precision.json byte-identical, and digest.txt and fields.json match their waves.json pins; vendored suites forecast 432/432, cluster 349/349, ml 614/614, quality 913/913.",
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines 1dfdd60 (engines PR #256, merged: forecast.js message wording only, findings E1 to E4; no number changed), re-vendored over the first cut at ec89b6b (engines PR #255). THIRTEEN paths walked by vendor_forecastml.sh over a git-archive export of the commit with the jest suite as the only seed: six reached by the walk (the suite, forecast.js, engines/dca/arps.js, lib/stats/stats.js, lib/conventions/percentile.js, tools/validation/dataai/synthetic_wells.js) and seven NAMED (the golden and the library pins, read through a spread helper the walker cannot parse; oracle_forecast.py, pin_forecast.py, timing_forecast.mjs, FINDINGS-forecast.md, negcontrol_forecast.sh). 13 paths x 4 proofs = 52, all IDENTICAL. The canonical pin stays 54cf7c4; 10 paths are ledgered as kind extra, group d4-forecastml-course, re-pinned at their 1dfdd60 blobs (7 moved at 1dfdd60: forecast.js, the suite, golden, pins, FINDINGS, oracle, negative control). synthetic_wells.js (c5b850d5ed79) moved to this group from d3-facies-course at the ec89b6b cut; D2's syntheticWells and D3's syntheticFacies unchanged. arps.js, lib/stats and percentile.js already match the manifest. PRIOR-COURSE PROOF (prove_prior_courses.sh, re-run at 1dfdd60): the committed D1 dataqc, D2 mlcore and D3 facies kits rebuild digest.txt, fields.json and precision.json byte-identical, and digest.txt and fields.json match their waves.json pins; vendored suites forecast 453/453, cluster 349/349, ml 614/614, quality 913/913. RE-CUT PROOF: fields.json and precision.json rebuild byte-identical at 1dfdd60 (fields sha256 1ffa032f9a4d...); the digest changes in wording only.",
  "constants": {
   "$comment": "The engine exports DEFAULTS (PHI_MIN 0.8, PHI_MAX 0.98, GRID_ALPHA 0 to 1 by 0.1, GRID_PHI 0.8/0.85/0.9/0.95/0.98, GRID_TIE_REL 1e-12, PS_STEP 0.05, PS_MIN_STEP 2^-30, PS_MAX_EVALS 200000, MAX_H 10000, MAX_POINTS 100000, N_SIMS 1000, MAX_SIMS 100000, MAX_ORIGINS 5000, RANK_TIE_REL 1e-12). Digest section 1 prints them from the export. None is graded."
  },
@@ -49,10 +49,10 @@
   "machine learning": "names the method (exponential smoothing, residual bootstrap, least-squares Arps). Section 25."
  },
  "openItems": {
-  "ENGINE FINDING E1 (wording, repair first)": "backtest and compareWithArps build naiveScale's label as `the ${o} training values`, so a training window of m values or fewer reads \"MASE is undefined: at origin 12 the 12 training values has 12 values, so the lag-12 naive forecast has no in-sample error (it needs more than 12)\" (digest section 3, the notes table): a plural subject with \"has\", and the count said twice. Reported to the lead; the digest quotes it verbatim until the engine is repaired and the wave re-cut.",
-  "ENGINE FINDING E2 (wording, repair first)": "the zero-scale reason in a backtest reads \"on the 6 values of the 6 training values\" (digest section 3 and section 16), the count said twice. Reported to the lead.",
-  "ENGINE FINDING E3 (wording, repair first)": "checkBacktest writes `then ${horizon} actuals` and `leaves fewer than ${horizon} actuals` with no singular, so horizon 1 reads \"then 1 actuals\" (digest section 3, the EKENE-P6 backtest refusal) and \"leaves fewer than 1 actuals\". Reported to the lead.",
-  "ENGINE OBSERVATION E4 (a stated behaviour, not a defect)": "forecastIntervals resamples the residuals as fitted, never centred, so on a declining well a flat method's paths drift and the point forecast can lie outside its own P90 to P10 band (digest section 18: ses on EKENE-P1 at step 12, 211.400000 against a P10 of 69.250000). The basis says the residuals are drawn from the scored in-sample residuals but not that they are uncentred. The course teaches it as a property; the lead may want one clause in the basis and a line in FINDINGS known limits.",
+  "ENGINE FINDING E1 (CLOSED, repaired in engines #256 1dfdd60)": "The backtest and compareWithArps MASE labels now read \"the training window\" once: \"MASE is undefined: at origin 12 the training window has 12 values, so the lag-12 naive forecast has no in-sample error (it needs more than 12)\" (digest section 3). Was: backtest and compareWithArps build naiveScale's label as `the ${o} training values`, so a training window of m values or fewer reads \"MASE is undefined: at origin 12 the 12 training values has 12 values, so the lag-12 naive forecast has no in-sample error (it needs more than 12)\" (digest section 3, the notes table): a plural subject with \"has\", and the count said twice. Reported to the lead; the digest quotes it verbatim until the engine is repaired and the wave re-cut.",
+  "ENGINE FINDING E2 (CLOSED, repaired in engines #256 1dfdd60)": "The zero-scale reason now reads \"MASE is undefined: at origin 6 the training window has 6 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0\" (digest sections 3 and 16). Was: the zero-scale reason in a backtest reads \"on the 6 values of the 6 training values\" (digest section 3 and section 16), the count said twice. Reported to the lead.",
+  "ENGINE FINDING E3 (CLOSED, repaired in engines #256 1dfdd60)": "Singular forms now: \"then 1 actual\", \"leaves no actual\" at horizon 1, \"1 value\", \"1 scored residual\", \"1 path\"; the Arps refusal reads \"the training window has 2 positive values\". Was: checkBacktest writes `then ${horizon} actuals` and `leaves fewer than ${horizon} actuals` with no singular, so horizon 1 reads \"then 1 actuals\" (digest section 3, the EKENE-P6 backtest refusal) and \"leaves fewer than 1 actuals\". Reported to the lead.",
+  "ENGINE OBSERVATION E4 (CLOSED, stated in the basis by engines #256 1dfdd60)": "The bootstrap basis now ends: \"residuals are drawn as fitted without centring (their mean is not subtracted), so a method whose residuals have a non-zero mean drifts: on a declining well a flat method's paths can fall below its own point forecast\". Digest section 18 quotes it (a must() pins it) and teaches it on ses EKENE-P1. Was: forecastIntervals resamples the residuals as fitted, never centred, so on a declining well a flat method's paths drift and the point forecast can lie outside its own P90 to P10 band (digest section 18: ses on EKENE-P1 at step 12, 211.400000 against a P10 of 69.250000). The basis says the residuals are drawn from the scored in-sample residuals but not that they are uncentred. The course teaches it as a property; the lead may want one clause in the basis and a line in FINDINGS known limits.",
   "PLAN ROSTER: feature regression": "Suite NextGen-Remaining-Courses-PLAN.md section 15 lists 'feature regression' for D4; the engine builds none and the digest lists it as not built, with regression owned by D2. The lead decides whether the roster line is amended.",
   "TOLERANCE DECISION": "fields resting on fitted parameters are stated at 10 x the engine-oracle disagreement (1e-5 or 1e-4) in gradedTolerance.js; the rest at the printed floor 5e-7. oracle_check.py re-measures on every run."
  },
@@ -78,10 +78,10 @@
   "umunze2_compare_best_mase": "arps quoted, second ranked, best by mae then its mase, parameters held, last ranked"
  },
  "digest": {
-  "lines": 817,
+  "lines": 819,
   "sections": 25,
-  "md5": "07d3ae95b628111c77f3f2ab3d71ad5b",
-  "sha256": "e88c79f416dca440aa37201a835a997dcb6dc1d7beaa28279cae2975c291b6f0"
+  "md5": "38e22e1534f1a1872223a436af5c538a",
+  "sha256": "a1f072a2f03eadc45285d507b66c1f4598f94fc388f97164664dbd4b23837e66"
  },
  "fields": {
   "count": 18,
@@ -155,7 +155,7 @@
    "command": "python3 oracle_check.py",
    "expected": 0,
    "exit": 0,
-   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 4 s; worst relative difference 6.64e-08; disagreements: 0"
+   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 7 s; worst relative difference 6.64e-08; disagreements: 0"
   },
   "oracle_check.py NEGATIVE CONTROL": {
    "md5": "e5bff3efeed163d67410b1a07a8416b9",
@@ -183,14 +183,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh dai-wip-forecastml /root/wt-dai-d4-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "d4_dump: 859 label-and-call, measurement and claim assertions run, 0 failed; 25 sections"
+   "summary": "d4_dump: 862 label-and-call, measurement and claim assertions run, 0 failed; 25 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-forecastml",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/dai-wip-forecastml/digest.txt: 817 line(s), 25 section title(s) and 78 in-body marker(s) swept against their blocks, 32 history framings, 28 engine pin(s); 4 warned for a human read and 0 framed as cu"
+   "summary": "[digestprose] /root/dai-wip-forecastml/digest.txt: 819 line(s), 25 section title(s) and 79 in-body marker(s) swept against their blocks, 32 history framings, 28 engine pin(s); 4 warned for a human read and 0 framed as cu"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -344,7 +344,7 @@
    "command": "python3 truth_check.py",
    "expected": 0,
    "exit": 0,
-   "summary": "truth_check: truth-forecastml.json (413 digest lines) IS the harvest of digest.txt"
+   "summary": "truth_check: truth-forecastml.json (414 digest lines) IS the harvest of digest.txt"
   },
   "truth_check.py NEGATIVE CONTROL": {
    "md5": "eb41206ec747d2f96fdaa7b185644486",
