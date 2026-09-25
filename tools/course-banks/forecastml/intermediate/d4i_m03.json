@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "On the teaching hold-out the engine prints `maseScale` 28.045714 bbl/d. What is that figure?",
+  "options": [
+   "The MAE of the lag-1 naive forecast scored on the hold-out months 36 to 47 themselves",
+   "Holt's own in-sample one-step MAE on months 0 to 35, the fit's residuals averaged",
+   "The mean rate of the training months, which turns each error into a share of production",
+   "The mean of |y_t - y_(t-1)| over months 1 to 35 of the training series, 35 differences"
+  ],
+  "answer": 3,
+  "explanation": "MASE's Q is the MAE the lag-m naive forecast makes on the training series, in-sample: here the mean of the 35 month-to-month differences over months 1 to 35. The hold-out months never set the scale. Holt's in-sample MAE is 19.755951, a different figure, and a mean rate would make a percentage, which MASE is not."
+ },
+ {
+  "prompt": "Holt's MAE on the teaching hold-out is 6.783515 bbl/d. With Q 28.045714 at m 1, what MASE does the engine print, and what does it say?",
+  "options": [
+   "0.241874: holt's mean absolute error is about a quarter of the in-sample naive error",
+   "0.902281, the hold-out's own naive error taken as the scale, so holt nearly matched it",
+   "1.842825, which says holt did worse than the naive forecast made on the training months",
+   "0.024087, holt's MASE at m 12, which is the lag the engine takes when none is given"
+  ],
+  "answer": 0,
+  "explanation": "MASE is \"mean |e| / Q\", and 6.783515 over 28.045714 is 0.241874, below 1, so holt's MAE is smaller than the in-sample naive MAE. 0.902281 comes from scaling by the scored months' own naive error, which is no MASE, and 0.024087 is the m 12 figure, while m defaults to 1. 1.842825 is ses's MASE on the same hold-out."
+ },
+ {
+  "prompt": "Ses on the teaching hold-out has MASE 1.842825. What does a MASE above 1 say?",
+  "options": [
+   "Its mean absolute error is larger than the lag-1 naive forecast's in-sample MAE",
+   "That ses forecast every hold-out month more closely than the naive did",
+   "A MASE above 1 can only come from a shut-in month in the actuals being scored by the metric",
+   "That the scale was taken from the hold-out months, which the engine does when a method is flat"
+  ],
+  "answer": 0,
+  "explanation": "MASE below 1 means the forecast's MAE is smaller than the in-sample naive error, so above 1 means it is larger: ses's 51.683333 against Q 28.045714. EKENE-P1 has no shut-in, and the engine always takes the scale from the training series, never from the scored months."
+ },
+ {
+  "prompt": "A learner scales holt's hold-out errors by the naive error of months 36 to 47 themselves and gets 0.902281. Why is that no MASE?",
+  "options": [
+   "The naive error of the hold-out months is always zero on a decline, so the division cannot run",
+   "MASE's scale comes from the training series, so the figure no longer depends on the forecast months",
+   "It is MASE: taking the scale from the scored months is the engine's default at m 1",
+   "Using hold-out months as the scale is allowed only when the step ahead is 1, and here it runs to 12"
+  ],
+  "answer": 1,
+  "explanation": "MASE divides by the lag-m naive MAE of the TRAINING series; scaled by the scored months' own naive error, the scale then depends on the months being forecast, and holt would read 0.902281 against the engine's 0.241874. That naive error is not zero on EKENE-P1's months 36 to 47, and the engine takes no scale from scored months at any step ahead."
+ },
+ {
+  "prompt": "Scored on the same teaching hold-out with m 12, holt's MASE reads 0.024087. Why is it so much smaller than at m 1?",
+  "options": [
+   "At m 12 the engine scores only every twelfth month of the hold-out, one error in place of 12",
+   "The larger lag makes holt's own errors smaller, since it refits the method with a seasonal term",
+   "MASE at m 12 is reported per year, so the monthly figure is divided by 12 before printing",
+   "The lag-12 scale Q is 281.625000: on a decline the month a year before is far from this one"
+  ],
+  "answer": 3,
+  "explanation": "With m 12 the naive forecast is the same month a year before, and on a declining well that month is far from this month, so Q grows to 281.625000 over 24 differences and the same MAE gives a smaller MASE. The errors are the same 12 errors, the engine builds no seasonal smoothing, and nothing is divided by 12. The lag is part of the figure: quote MASE with its m."
+ },
+ {
+  "prompt": "At m 12 on the teaching hold-out's training months 0 to 35, how many differences make up Q?",
+  "options": [
+   "35, as at m 1",
+   "12, one per hold-out month",
+   "24, from month 12 to month 35",
+   "36, since each training month is paired with the month a year earlier"
+  ],
+  "answer": 2,
+  "explanation": "At lag 12 a difference needs the month 12 before, so the first is at month 12 and the last at month 35: 24 differences, and Q is 281.625000. 35 is the count at m 1; the hold-out months never enter the scale; and the first 12 training months have no month a year before them."
+ },
+ {
+  "prompt": "EKENE-P3's first 9 months are the plateau at 1500.000000 each. Used as the training series, what does `accuracy` return for MASE?",
+  "options": [
+   "Null, because every difference is 0, so Q = 0 and the engine will not divide by it",
+   "A refusal naming `insample`, since a series with no change is not accepted as training data",
+   "Infinity, printed as a very large MASE, since any error over a scale of 0 is unbounded",
+   "0.000000, because the naive forecast is perfect and any method matched against it scores 0"
+  ],
+  "answer": 0,
+  "explanation": "Every training difference is 0, so the scale is 0 and MASE would divide by zero; the engine returns null and says so: \"MASE is undefined: insample has 9 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0\". That is a result with the other metrics still numbers, and no refusal; no infinite or zero figure is printed."
+ },
+ {
+  "prompt": "A learner passes `accuracy` an insample of one month. What does it return for MASE?",
+  "options": [
+   "A refusal naming `insample`, as at least 2 training values are required",
+   "Null, with the reason that the lag-1 naive forecast needs more than 1 value",
+   "MASE computed on a scale of 0, printed as 0.000000 for every forecast",
+   "The MAE itself, since a one-month training series leaves the scale at 1"
+  ],
+  "answer": 1,
+  "explanation": "The engine returns MASE as null, in its own words: \"MASE is undefined: insample has 1 value, so the lag-1 naive forecast has no in-sample error (it needs more than 1)\". A single value has no naive difference at all. An insample of one value is accepted; only an empty one is refused. No scale of 0 or 1 is assumed."
+ },
+ {
+  "prompt": "One `accuracy` call is passed no insample at all, and another is passed an empty insample. How do the two results differ?",
+  "options": [
+   "Both are refused in the same words, since neither gives a training series to scale by",
+   "The first returns MASE as null with a reason; the second is refused, naming `insample`",
+   "Both return MASE as null, with the same reason in notes, and every other metric a number",
+   "The first is refused for the missing field, and the second returns MASE as a null metric"
+  ],
+  "answer": 1,
+  "explanation": "Leaving insample out is allowed: MASE comes back null with the reason \"MASE needs insample (the training series) to scale by its in-sample naive error\". An empty insample is refused: \"insample has 0 values: at least 1 value is needed\"."
+ },
+ {
+  "prompt": "A learner passes `accuracy` a lag m of 0. What comes back?",
+  "options": [
+   "MASE scaled by the forecast's own errors, since a lag of 0 compares each month with itself",
+   "MASE returned as null, with a reason saying the lag-0 naive forecast has no error",
+   "Each metric computed with m reset to 1, the default, and a warning that the lag was changed",
+   "A refusal naming `m`, in the engine's words \"m must be a whole number, 1 or more (1 is the non-seasonal naive; 12 is a monthly seasonal naive)\""
+  ],
+  "answer": 3,
+  "explanation": "A lag of 0 is refused by name with that message. Nothing is rescaled or reset: a refusal returns no metrics, and a null with a reason is kept for a scale the arithmetic cannot give, such as a flat training window."
+ },
+ {
+  "prompt": "With m set to 12, a training series of exactly 12 months is handed to `accuracy`. How does the scaled error come back?",
+  "options": [
+   "A MASE scaled by a single difference, the last month less the first of the training months",
+   "A refusal naming `m`, since the lag may not equal the length of the training series",
+   "The same figure as at m 1, as the engine falls back to lag 1 when the series is short",
+   "Null: a lag-12 naive forecast needs more than 12 training values"
+  ],
+  "answer": 3,
+  "explanation": "The reason reads \"MASE is undefined: insample has 12 values, so the lag-12 naive forecast has no in-sample error (it needs more than 12)\". Twelve months give no pair a year apart, so there is no difference at all. The call is not refused, and the engine does not change the lag."
+ },
+ {
+  "prompt": "On EKENE-P5's low tail holt scores MASE 0.144157 and MAE 3.244769 bbl/d, while on EKENE-P1's hold-out holt scores MASE 0.241874 and MAE 6.783515. Why can MASE be set side by side across two wells of such different size?",
+  "options": [
+   "It has no unit, each well's error divided by that well's own in-sample naive error",
+   "In bbl/d like the MAE, so the two wells' figures can be subtracted directly",
+   "A percentage of each month's rate, so a small well and a large one share a scale",
+   "Both wells share one scale Q, since the engine takes it from the field's largest well"
+  ],
+  "answer": 0,
+  "explanation": "MASE is the MAE over Q, and Q is that well's own lag-m naive MAE on its training months, so the ratio has no unit and wells of any size compare. It is neither in bbl/d nor a percentage of rate; a percentage error divides by the actual, and every well carries its own scale."
+ },
+ {
+  "prompt": "On the EKENE-P2 hold-out with the shut-in months in the actuals, MAPE is null. What happens to MASE on the same call?",
+  "options": [
+   "Null too: a zero actual voids every metric that divides by anything",
+   "200.000000, the same top term a shut-in month takes in sMAPE",
+   "It is a number, 5.427746, because its scale comes from the training months",
+   "Refused, since the shut-in months fall inside the training window"
+  ],
+  "answer": 2,
+  "explanation": "MASE divides by Q, the naive MAE of months 0 to 19, and those have non-zero differences, so the zero actuals scored do not touch the scale: MASE is 5.427746. The shut-in months are in the scored months 20 to 25, outside the training window, and only MAPE divides by each actual. 200.000000 is an sMAPE term."
+ },
+ {
+  "prompt": "Fitted on months 0 to 35 of EKENE-P1, damped misses months 36 to 47 by 14.978829 bbl/d on average. Which scaled error belongs to it?",
+  "options": [
+   "0.241874, one MASE for all",
+   "0.534086, its MAE over Q 28.045714",
+   "1.842825, as damped and ses share a flat forecast on this well",
+   "14.978829, as MASE equals MAE when the training months set the scale"
+  ],
+  "answer": 1,
+  "explanation": "MASE is MAE / Q, and 14.978829 over 28.045714 is 0.534086. The scale is shared across methods on one hold-out; the MAE is not, so each method has its own MASE: 0.241874 is holt's and 1.842825 is ses's. Damped's forecast declines while ses's is flat, and dividing by Q changes the figure."
+ },
+ {
+  "prompt": "The engine's basis reads \"mean |e| / Q, Q = mean |y_t - y_{t-m}| over the in-sample (training) series (Hyndman and Koehler 2006); null when Q = 0\". Which choice does that basis make?",
+  "options": [
+   "It divides by each month's actual, keeping shut-ins out",
+   "It rescales each error by the method's own residuals",
+   "The scale is fixed on the training series before any forecast is scored",
+   "Taking the lag-m naive error of the scored months, it lets the forecast set its own yardstick"
+  ],
+  "answer": 2,
+  "explanation": "Q is the mean lag-m difference over the training series, so the yardstick is set before the forecast is scored and cannot move with the scored months. MASE does not divide by the actuals (MAPE does), it does not use the method's residuals, and the scored months never enter the scale."
+ }
+]
