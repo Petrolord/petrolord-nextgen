@@ -145,13 +145,13 @@
  {
   "prompt": "A fit asks for the method 'arima'. Which field does the refusal name?",
   "options": [
-   "`y`, since the engine cannot read the series before a method it offers is attached to it.",
+   "`y`, in the engine's words \"y must be an array of numbers\", since a method must come first.",
    "No field at all: the engine falls back to ses and returns that fit with a warning beside it.",
    "`h`, since an ARIMA forecast needs a number of steps.",
    "`method`, in the engine's words \"method must be 'ses', 'holt' or 'damped'\"."
   ],
   "answer": 3,
-  "explanation": "The engine offers three methods and refuses any other by naming `method`, with a message that lists all three. It builds no ARIMA and falls back to no default method. The series is read on its own terms, and `h` has nothing to do with the method named."
+  "explanation": "The engine offers three methods and refuses any other by naming `method`, with a message that lists all three. It builds no ARIMA and falls back to no default method. The message about `y` is the refusal for a series that is not an array, and `h` has nothing to do with the method named."
  },
  {
   "prompt": "How does a refusal differ from a result in this engine?",

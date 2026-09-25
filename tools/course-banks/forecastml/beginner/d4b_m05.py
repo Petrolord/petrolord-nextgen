@@ -45,12 +45,12 @@ q(1, "When does a later grid point replace the best one found so far?",
   "If its SSE is lower and its alpha higher."],
  "The tie rule is relative: a later point replaces the best only when its SSE is below best x (1 - 1.00e-12), the stated `GRID_TIE_REL`, so an equal SSE keeps the earlier point. 0.05 is the compass search's first step, a fraction of each range, and alpha plays no part in the rule."),
 
-q(3, "What does the compass search do after a whole sweep that improves nothing?",
+q(3, "What does the compass search do after a whole sweep that improves nothing, while its step is still above 2^-30 of the range?",
  "Halves its step and sweeps again.",
  ["Stops at once, since no trial in that sweep lowered the SSE at all.",
   "Doubles its step, so that it can climb out of a small local dip.",
   "Goes back to the grid and restarts from the second best grid point."],
- "The search tries the step added and taken away on each free parameter in turn, moves to the best trial that lowers the SSE, and halves the step after a sweep that improves nothing. It stops only when a sweep at a step of at most 2^-30 of the range improves nothing. It never doubles its step or returns to the grid."),
+ "The search tries the step added and taken away on each free parameter in turn, moves to the best trial that lowers the SSE, and halves the step after a sweep that improves nothing. It stops only when a sweep at a step of at most 2^-30 of the range improves nothing, so a step still above that is halved. It never doubles its step or returns to the grid."),
 
 q(0, "How large is the compass search's first step?",
  "0.05 of each parameter's range, half the grid spacing.",
@@ -103,10 +103,10 @@ q(1, "What happens if a search reaches 200000 SSE evaluations before its step ru
 
 q(0, "Every parameter of a holt fit is given. What does the fit record hold?",
  "`optimiser` is null, and the basis reads \"all parameters given: no estimation\".",
- ["`converged` true after 0 moves and 0 halvings, since the search found nothing.",
+ ["An `optimiser` record of 0 moves, beside the basis \"all parameters given: no estimation\".",
   "The grid's 121 SSE values, kept for comparison with the given pair.",
   "`converged` false, since no search ran to meet the stop rule."],
- "With nothing left to fit, no search runs, the optimiser record is null and the basis reads \"all parameters given: no estimation\". There is no `converged` to read, true or false, and no grid is scored."),
+ "With nothing left to fit, no search runs, the optimiser record is null and the basis reads \"all parameters given: no estimation\". There is no optimiser record of moves to read and no `converged`, true or false, and no grid is scored."),
 
 q(3, "Why does the engine fit by a grid and a compass search?",
  "It is deterministic: the same series gives the same parameters on any machine.",

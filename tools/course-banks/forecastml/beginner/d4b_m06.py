@@ -21,7 +21,7 @@ q(0, "All three methods are fitted on EKENE-P4 with every parameter free. Which 
  ["ses, at 4585.145790, the lowest of the three once the SSE is divided.",
   "holt, at 6048.241985, since a straight trend follows any decline best.",
   "ses, since its SSE of 215501.852140 is spread over one more error."],
- "By MSE the damped trend is lowest at 4502.618003, ses next at 4585.145790 and holt highest at 6048.241985. On this noisy well a full straight trend chases noise. Dividing ses's SSE by its 47 errors gives 4585.145790, still above the damped MSE."),
+ "By MSE the damped trend is lowest at 4502.618003, ses next at 4585.145790 and holt highest at 6048.241985. Dividing ses's SSE by its 47 errors gives 4585.145790, still above the damped MSE."),
 
 q(2, "What does the lowest in-sample MSE on EKENE-P4 tell the forecaster?",
  "Which method best followed months the fit had already seen, and nothing yet about months to come.",

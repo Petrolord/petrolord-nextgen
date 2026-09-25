@@ -61,7 +61,7 @@ q(2, "Which values of phi may a caller give and have held fixed?",
 
 q(1, "Which message comes back when a caller gives the damped method phi 1.05?",
  "\"phi must be a number above 0 and at most 1 when given (when fitted it is searched from 0.8 to 0.98)\"",
- ["\"phi applies to 'damped' only: 'holt' is the damped method with phi = 1\", with `phi` as the field.",
+ ["\"phi applies to 'damped' only: 'holt' is the damped method with phi = 1\"",
   "A fit with phi moved down to 0.98, the top of the fitted range, and a warning attached to the result.",
   "\"phi must be a number from 0 to 1 (inclusive)\", naming `phi`."],
  "The engine refuses a given phi of 0 or of 1.05 with the message in the key, its own words, which state the rule for a given phi and for a fitted one together. The message about holt is the refusal for a phi passed to holt. A refusal returns no fit, so nothing is moved to 0.98, and the inclusive 0 to 1 wording is the alpha and beta rule."),
@@ -113,7 +113,7 @@ q(1, "Why is a fitted phi held to 0.8 to 0.98?",
  ["The compass search cannot step below 0.8 without raising a warning about its step size.",
   "Wells never decline with damping weaker than 0.98, a figure taken from decline curve theory.",
   "A phi below 0.8 gives a negative forecast on every declining well in the Ekene field."],
- "The engine follows Forecasting: Principles and Practice (FPP3), which restricts an estimated phi to 0.8 to 0.98: far below, the trend fades so fast the method is close to simple smoothing, and near 1 it is close to Holt. The range sets the search's box and the search works inside it; no decline theory fixes 0.98; and with a negative trend a lower phi leaves the limit a smaller drop below the final level."),
+ "The engine follows Forecasting: Principles and Practice (FPP3), which restricts an estimated phi to 0.8 to 0.98: far below, the trend fades so fast the method is close to simple smoothing, and near 1 it is close to Holt. The range sets the search's box and the search works inside it; no decline theory fixes 0.98; and for the same final trend a lower phi makes the drop to the limit, b_n phi / (1 - phi), smaller, which keeps the forecast nearer the final level."),
 
 emit(Q, '/root/dai-wip-forecastml/banks/d4b_m04.json', expect_n=15)
 finish()

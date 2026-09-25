@@ -102,10 +102,10 @@ q(0, "EKENE-P1 is passed with month 5 set to null. The engine replies, in its ow
 
 q(3, "A fit asks for the method 'arima'. Which field does the refusal name?",
  "`method`, in the engine's words \"method must be 'ses', 'holt' or 'damped'\".",
- ["`y`, since the engine cannot read the series before a method it offers is attached to it.",
+ ["`y`, in the engine's words \"y must be an array of numbers\", since a method must come first.",
   "No field at all: the engine falls back to ses and returns that fit with a warning beside it.",
   "`h`, since an ARIMA forecast needs a number of steps."],
- "The engine offers three methods and refuses any other by naming `method`, with a message that lists all three. It builds no ARIMA and falls back to no default method. The series is read on its own terms, and `h` has nothing to do with the method named."),
+ "The engine offers three methods and refuses any other by naming `method`, with a message that lists all three. It builds no ARIMA and falls back to no default method. The message about `y` is the refusal for a series that is not an array, and `h` has nothing to do with the method named."),
 
 q(2, "How does a refusal differ from a result in this engine?",
  "A refusal carries `error` and `field` and no result; any figure in it belongs to the message.",

@@ -19,7 +19,7 @@
    "ses, since its SSE of 215501.852140 is spread over one more error."
   ],
   "answer": 0,
-  "explanation": "By MSE the damped trend is lowest at 4502.618003, ses next at 4585.145790 and holt highest at 6048.241985. On this noisy well a full straight trend chases noise. Dividing ses's SSE by its 47 errors gives 4585.145790, still above the damped MSE."
+  "explanation": "By MSE the damped trend is lowest at 4502.618003, ses next at 4585.145790 and holt highest at 6048.241985. Dividing ses's SSE by its 47 errors gives 4585.145790, still above the damped MSE."
  },
  {
   "prompt": "What does the lowest in-sample MSE on EKENE-P4 tell the forecaster?",

@@ -91,7 +91,7 @@
   "prompt": "What do simple smoothing, Holt's linear trend and the damped trend have in common in this engine?",
   "options": [
    "All three are multiplicative, scaling the level by a factor each month of the series.",
-   "All three are additive: a trend adds to the level and an error to the forecast.",
+   "All three are additive: any trend adds to the level, and an error to the forecast.",
    "Every one of them carries a trend, and the trend is damped by phi in all three of them.",
    "They share one set of parameters, so a single alpha fits all three."
   ],
@@ -158,11 +158,11 @@
   "options": [
    "On a series with no persistent direction, such as a plateau or heavy noise around a steady rate.",
    "On any steady decline, where the naive forecast follows the fall best of all the methods offered.",
-   "On a short series only, where the engine refuses holt and damped for lack of months to fit.",
+   "On a short series only, since the engine refuses holt and damped on any series under 12 months.",
    "Whenever its fitted alpha lands on the bound 1, since that proves the level is the right model."
   ],
   "answer": 0,
-  "explanation": "A flat forecast says the method sees no direction, which is right on a plateau or on noise about a steady rate and wrong on a clear decline, where every step inherits the error. Holt fits on as few as 3 months. alpha on its bound 1 says the fit wants more weight on the newest month than the box allows, which on a decline is a sign the series asks for a trend."
+  "explanation": "A flat forecast says the method sees no direction, which is right on a plateau or on noise about a steady rate and wrong on a clear decline, where every step inherits the error. Holt fits on as few as 3 months, so no rule of twelve exists. alpha on its bound 1 says the fit wants more weight on the newest month than the box allows, which on a decline is a sign the series asks for a trend."
  },
  {
   "prompt": "At alpha 0.5 and beta 0.2, EKENE-P1's month 3 level moves from 1104.650000 to 1040.970000 on an old trend of -27.910000. Which trend does month 3 end on?",
@@ -187,26 +187,26 @@
   "explanation": "The trend moves from -22.700000 at the start to -40.772440 by month 5, as each month surprises the method on the low side, so month 5's fitted value, 940.178400, sits within a few bbl/d of the rate 934.200000. alpha and beta are given and held, every month from index 2 is scored, and alpha 0.5 keeps half of the old forecast in each level."
  },
  {
-  "prompt": "Fitted on EKENE-P1, holt reaches SSE 23041.767516 and damped SSE 22288.217610. May the two SSEs be compared directly?",
+  "prompt": "Fitted on EKENE-P1, holt reaches SSE 23041.767516 and damped SSE 22288.217610. What happens to their order once each SSE becomes an MSE?",
   "options": [
-   "No: an SSE can never be compared across methods, whatever their counts.",
-   "Only after both are divided by 48, the months in the series.",
-   "No, since damped has one parameter more and its SSE must be penalised.",
-   "Yes: both score 46 errors from index 2, so the SSE order is the MSE order."
+   "It reverses, since damped carries one parameter more and its MSE is penalised for it.",
+   "No order survives, because holt divides by 47 errors and damped by 46 on the same months.",
+   "Nothing can be said until both SSEs are divided by the 48 months of the series.",
+   "It holds: both divide by 46 scored errors, so damped's MSE is the lower one too."
   ],
   "answer": 3,
-  "explanation": "The rule to compare by MSE exists because ses scores 47 errors and holt and damped 46. Holt and damped both start at l_1 = y_1, b_1 = y_2 - y_1 and score from index 2, so on the same 48 months both divide by 46, and ranking their SSEs ranks their MSEs. The divisor is the scored errors, never the months, and the MSE adds no penalty."
+  "explanation": "The course compares methods by MSE because ses scores 47 errors and holt and damped 46. Holt and damped both start at l_1 = y_1, b_1 = y_2 - y_1 and score from index 2, so on EKENE-P1's 48 months both SSEs are divided by 46 and their order is kept. The MSE adds no penalty for parameters, holt scores 46 errors just as damped does, and the divisor is the scored errors, never the months."
  },
  {
-  "prompt": "Why does Holt score the highest in-sample MSE of the three methods on EKENE-P4?",
+  "prompt": "On EKENE-P4, Holt's fit reaches SSE 278219.131326 and ses's SSE 215501.852140, each over its own scored errors. Which MSEs does the engine report?",
   "options": [
-   "A trend that swings with each noisy month adds error, so the level-only fit does better.",
-   "Holt is the only method the engine refuses to fit to its minimum on a noisy series.",
-   "Holt's MSE divides by 47 errors, one more than simple smoothing scores on the well.",
-   "Holt starts at a trend of 0, which a noisy well cannot correct within 48 months."
+   "6048.241985 for holt over 46 errors, and 4585.145790 for ses over 47.",
+   "4585.145790 for holt and 6048.241985 for ses, since ses scores the extra month.",
+   "One MSE for both, because the two methods score the same months of EKENE-P4.",
+   "Holt's is the lower of the two, as it divides its SSE by one error more than ses."
   ],
   "answer": 0,
-  "explanation": "On EKENE-P4 Holt fits alpha 0.501603 and beta 0.354191 and scores MSE 6048.241985, above ses's 4585.145790 and damped's 4502.618003: its full straight trend chases the noise. Every fit converged, Holt divides by 46, and its start is b_1 = y_2 - y_1."
+  "explanation": "The MSE is the SSE over the scored errors. Holt scores from index 2, so 278219.131326 over 46 is 6048.241985; ses scores from index 1, so 215501.852140 over 47 is 4585.145790. Swapping the two figures swaps the methods, the two methods score different numbers of months, and holt divides by one error fewer than ses, which leaves its larger SSE with the higher MSE."
  },
  {
   "prompt": "What unit goes with Holt's final state b on EKENE-P5, -0.702187?",
