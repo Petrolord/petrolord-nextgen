@@ -1,9 +1,6 @@
 #!/usr/bin/env bash
-# SHIP PHASE, NOT YET D4. Carried from D3 (tools/course-waves/facies) at the D4
-# foundation with names rewritten only; its D3 content (migration names, dates,
-# content pins) is rewritten for D4 at the ship phase. Do not run it for D4 yet.
 # =============================================================================
-# D3 DRY RUN: THE WHOLE LADDER, ROLLED BACK. Adapted from D2's dryrun_d2.sh.
+# D4 DRY RUN: THE WHOLE LADDER, ROLLED BACK. Adapted from D3's dryrun_d3.sh.
 #
 # All five migrations run inside ONE transaction that ends in ROLLBACK. The run
 # then RE-READS the database and compares it with the snapshot taken before,
@@ -13,7 +10,7 @@
 # and it is the owner's to run. The go-live is HELD and is dry-run here only.
 #
 # TARGETS.
-#   TARGET=scratch  the local d3-scratch container (scratch_db.sh). The default,
+#   TARGET=scratch  the local d4-scratch container (scratch_db.sh). The default,
 #                   and the only target the negative controls run on.
 #   TARGET=linked   the linked NextGen project, which is PRODUCTION, from the
 #                   linked checkout. Clean run only, rolled back, with the
@@ -23,23 +20,25 @@
 # unless the same run can be made to fail, and each of the go-live's
 # independent checks has to be shown to fire ON ITS OWN:
 #   ledger [field] [mult]  moves one graded value by a factor (default
-#                          ogbunike_knn_nearest_distance, the SMALLEST graded
+#                          umunze1_arps_di_per_month, the SMALLEST graded
 #                          value in size, by 1.0000001: an absolute move of
-#                          2.5e-8, a twentieth of its 5e-7 tolerance, so a
-#                          grader would pass it); the engine-ledger check
+#                          5.3e-9, about a hundredth of its 5e-7 tolerance, so
+#                          a grader would pass it); the engine-ledger check
 #                          must refuse it by name.
 #   route [field] [mult]   the same move with the ledger block cut out of the
 #                          go-live; the second route in SQL must refuse it and
 #                          name the field.
 #   trap                   the ledger and second-route blocks cut out, and the
-#                          Associate GR scale set to the reading with the
-#                          SAMPLE standard deviation, computed by the engine;
-#                          the trap must refuse.
-#   prompt                 the tree depth edited in the shipped Expert prompt;
-#                          the go-live must refuse the prompt.
-#   leak                   the Professional macro F1, to six decimals, planted
-#                          in an Associate label; the SQL promptleak must
+#                          Associate Holt MSE with its parameters given set to
+#                          the reading that divides the SSE by every month (n)
+#                          instead of the scored errors (n - 2), computed from
+#                          the engine's own SSE; a trap on that field must
 #                          refuse.
+#   prompt                 the bootstrap seed edited in the shipped Expert
+#                          prompt; the go-live must refuse the prompt.
+#   leak                   the Professional hold-out MASE, to six decimals,
+#                          planted in an Associate label; the SQL promptleak
+#                          must refuse.
 #   sweep                  ledger AND route at one part in 1e7 on EVERY one of
 #                          the eighteen fields, one rolled-back run each.
 #
@@ -63,21 +62,21 @@ else
   REPO=${REPO:-/root/wt-dai-d4-nextgen}
 fi
 LINKED=${LINKED:-/opt/petrolord-studio/workspaces/dev1/projects/petrolord-nextgen}
-C=${SCRATCH:-d3-scratch}
-RUN=$(mktemp -d /tmp/d3dry.XXXXXX)
-SLUG=facies
-GOLIVE=20261102_d3_facies_go_live
-FILES="20261102_d3_facies_course
-20261102_d3_facies_beginner_deep
-20261102_d3_facies_intermediate_deep
-20261102_d3_facies_advanced_deep
+C=${SCRATCH:-d4-scratch}
+RUN=$(mktemp -d /tmp/d4dry.XXXXXX)
+SLUG=forecastml
+GOLIVE=20261103_d4_forecastml_go_live
+FILES="20261103_d4_forecastml_course
+20261103_d4_forecastml_beginner_deep
+20261103_d4_forecastml_intermediate_deep
+20261103_d4_forecastml_advanced_deep
 $GOLIVE"
-KEYS="ihiala_gr_scale_gapi:beginner ihiala_pc1_ratio:beginner ihiala_pc1_nphi_loading:beginner
-ihiala_pc1_score_first_row:beginner ihiala_kmeans_inertia:beginner ihiala_row24_cluster_gr_centre_gapi:beginner
-nkwelle_elbow_drop_fraction_k4:intermediate nkwelle_ward_silhouette:intermediate nkwelle_ward_height_above_cut:intermediate
-nkwelle_complete_ari:intermediate nkwelle_one_to_one_macro_f1:intermediate nkwelle_majority_accuracy_k6:intermediate
-ogbunike_knn_heldout_accuracy:advanced ogbunike_knn_nearest_distance:advanced ogbunike_cart_node2_gini:advanced
-ogbunike_cart_nphi_importance:advanced ogbunike_cart_depth3_heldout_accuracy:advanced ogbunike_uncored_gr_minmax_max:advanced"
+KEYS="agulu2_ses_alpha:beginner agulu1_holt_fixed_mse_bopd2:beginner agulu1_holt_beta:beginner
+agulu1_holt_forecast_h12_bopd:beginner agulu1_damped_phi:beginner agulu1_damped_forecast_h24_bopd:beginner
+nanka1_holdout_damped_smape_pct:intermediate nanka1_holdout_damped_mase:intermediate nanka1_holdout_damped_me_bopd:intermediate
+nanka2_backtest_holt_rmse_bopd:intermediate nanka2_backtest_holt_held_mase:intermediate nanka2_backtest_holt_step6_mae_bopd:intermediate
+umunze1_damped_p90_h12_bopd:advanced umunze1_damped_p10_h12_bopd:advanced umunze1_damped_p50_h6_bopd:advanced
+umunze1_arps_di_per_month:advanced umunze2_compare_arps_mase:advanced umunze2_compare_best_mase:advanced"
 tier_of() { for kt in $KEYS; do [ "${kt%%:*}" = "$1" ] && { echo "${kt##*:}"; return; }; done; echo ""; }
 
 if [ -n "$CONTROL" ] && [ "$CONTROL" != --idempotent ] && [ "$TARGET" != scratch ]; then
@@ -107,14 +106,14 @@ select 'catalogue' as what,
   from public.academy_apps
 union all select 'apps rows',          count(*)::text from public.academy_apps
 union all select 'data_ai rows',       count(*)::text from public.academy_apps where module = 'data_ai'
-union all select 'path_order 68 held', count(*)::text from public.academy_apps where path_order = 68
+union all select 'path_order 69 held', count(*)::text from public.academy_apps where path_order = 69
 union all select 'structures rows',    count(*)::text from public.academy_course_structures
 union all select 'questions rows',     count(*)::text from public.academy_quiz_questions
 union all select 'capstones rows',     count(*)::text from public.academy_capstones
-union all select 'facies apps',        count(*)::text from public.academy_apps where slug = 'facies'
-union all select 'facies any',         (select count(*) from public.academy_course_structures where app_slug = 'facies')
-                                     + (select count(*) from public.academy_quiz_questions where app_slug = 'facies')
-                                     + (select count(*) from public.academy_capstones where app_slug = 'facies') || ''
+union all select 'forecastml apps',        count(*)::text from public.academy_apps where slug = 'forecastml'
+union all select 'forecastml any',         (select count(*) from public.academy_course_structures where app_slug = 'forecastml')
+                                     + (select count(*) from public.academy_quiz_questions where app_slug = 'forecastml')
+                                     + (select count(*) from public.academy_capstones where app_slug = 'forecastml') || ''
 union all select 'apps digest',        md5(string_agg(slug||'|'||module||'|'||path_order||'|'||status, ',' order by slug)) from public.academy_apps
 union all select 'structures digest',  coalesce(md5(string_agg(app_slug||'|'||tier||'|'||(structure)::text||'|'||active, ',' order by app_slug, tier)), '(empty)') from public.academy_course_structures
 union all select 'questions digest',   coalesce(md5(string_agg(app_slug||'|'||tier||'|'||scope||'|'||ord||'|'||md5(prompt)||'|'||answer_index, ',' order by app_slug, tier, scope, coalesce(module_key,''), ord)), '(empty)') from public.academy_quiz_questions
@@ -150,7 +149,7 @@ FIELD=""
 case "$CONTROL:$CTL" in
   :) ;;
   --control:ledger|--control:route)
-    FIELD=${FIELD_ARG:-ogbunike_knn_nearest_distance}
+    FIELD=${FIELD_ARG:-umunze1_arps_di_per_month}
     TIER=$(tier_of "$FIELD"); [ -n "$TIER" ] || { echo "unknown field $FIELD"; exit 2; }
     PRE_GOLIVE=$(move_sql "$FIELD" "$TIER" "$MULT")
     if [ "$CTL" = ledger ]; then
@@ -161,39 +160,41 @@ case "$CONTROL:$CTL" in
     fi
     ;;
   --control:trap)
-    # The Associate GR scale set to the reading with the SAMPLE standard
-    # deviation, the first wrong method discriminate.mjs aims at it, computed
-    # by the engine (fitStandardScaler with sd 'sample' on every Ihiala row),
-    # with the ledger and the second route cut out so ONLY the trap can object.
-    FIELD=ihiala_gr_scale_gapi; TIER=beginner
+    # The Associate Holt MSE with alpha and beta given, set to the reading
+    # that divides the SSE by every month (n) instead of the scored errors
+    # (n - 2), the first wrong method discriminate.mjs aims at it, computed
+    # from the engine's own SSE (fitSmoothing on AGULU-1 with the stated
+    # alpha and beta), with the ledger and the second route cut out so ONLY a
+    # trap can object.
+    FIELD=agulu1_holt_fixed_mse_bopd2; TIER=beginner
     WRONG=$(D4_ENGINES="$REPO/packages/engines" node "$HERE/d4_capstone.mjs" --inputs 2>/dev/null \
-      | ENG="$REPO/packages/engines/engines/dataai/ml.js" node --input-type=module -e "
-          const ML = await import(process.env.ENG); let s = ''; for await (const c of process.stdin) s += c;
-          const rows = JSON.parse(s).IHIALA.field.rows;
-          const sc = ML.fitStandardScaler({ X: rows.map((r) => [r.GR]), sd: 'sample' });
-          console.log(String(sc.scale[0]));")
+      | ENG="$REPO/packages/engines/engines/dataai/forecast.js" node --input-type=module -e "
+          const FC = await import(process.env.ENG); let s = ''; for await (const c of process.stdin) s += c;
+          const A = JSON.parse(s).AGULU; const y = A.field.wells.find((w) => w.well === 'AGULU-1').rate;
+          const r = FC.fitSmoothing({ y, method: 'holt', alpha: A.stated.alpha, beta: A.stated.beta });
+          console.log(String(r.sse / y.length));")
     [ -n "$WRONG" ] || { echo "could not compute the trap value"; exit 2; }
     PRE_GOLIVE="update public.academy_capstones c
    set fields = (select jsonb_agg(case when f->>'key' = '$FIELD' then jsonb_set(f, '{expected}', to_jsonb($WRONG::numeric)) else f end)
                    from jsonb_array_elements(c.fields) f)
  where c.app_slug = '$SLUG' and c.tier = '$TIER';"
     GOLIVE_EDIT="python3 $HERE/cut_block.py ledger route"
-    WANT="the sample standard deviation gives .*so the field does not discriminate the trap"
+    WANT="gives .*so the field does not discriminate the trap \\[graded field: $TIER/$FIELD\\]"
     ;;
   --control:prompt)
-    PRE_GOLIVE="update public.academy_capstones set prompt = replace(prompt, 'a tree of maxDepth 3 grown', 'a tree of maxDepth 4 grown')
+    PRE_GOLIVE="update public.academy_capstones set prompt = replace(prompt, 'paths, seed 29,', 'paths, seed 30,')
  where app_slug = '$SLUG' and tier = 'advanced';"
     WANT="the advanced prompt is not the prompt gen_course.py rendered"
     ;;
   --control:leak)
-    PLANT=$(python3 -c "import json; f=[x for x in json.load(open('$HERE/fields.json')) if x[1]=='nkwelle_one_to_one_macro_f1'][0]; print(f'{f[2]:.6f}')")
+    PLANT=$(python3 -c "import json; f=[x for x in json.load(open('$HERE/fields.json')) if x[1]=='nanka1_holdout_damped_mase'][0]; print(f'{f[2]:.6f}')")
     PRE_GOLIVE="update public.academy_capstones c
-   set fields = (select jsonb_agg(case when f->>'key' = 'ihiala_kmeans_inertia'
+   set fields = (select jsonb_agg(case when f->>'key' = 'agulu2_ses_alpha'
                                        then jsonb_set(f, '{label}', to_jsonb((f->>'label') || ', against a benchmark of $PLANT'))
                                        else f end)
                    from jsonb_array_elements(c.fields) f)
  where c.app_slug = '$SLUG' and c.tier = 'beginner';"
-    WANT="intermediate/nkwelle_one_to_one_macro_f1 in the beginner capstone text"
+    WANT="intermediate/nanka1_holdout_damped_mase in the beginner capstone text"
     ;;
   --control:sweep)
     fails=0
@@ -224,7 +225,7 @@ snap | sed 's/^/  /' | tee "$RUN/before.txt"
   PASSES=1; [ "$IDEMPOTENT" = 1 ] && PASSES=2
   for pass in $(seq 1 $PASSES); do
   if [ "$pass" = 2 ]; then
-    echo "create temp table d3_pass1 as select * from ($(tr '\n' ' ' < "$RUN/snap.sql" | sed 's/;[[:space:]]*$//')) s;"
+    echo "create temp table d4_pass1 as select * from ($(tr '\n' ' ' < "$RUN/snap.sql" | sed 's/;[[:space:]]*$//')) s;"
   fi
   for f in $FILES; do
     echo "-- ================= $f"
@@ -237,29 +238,29 @@ snap | sed 's/^/  /' | tee "$RUN/before.txt"
     echo
   done
   if [ "$pass" = 2 ]; then
-    echo "do \$\$ declare v_n int; begin select count(*) into v_n from ((select * from d3_pass1 except select * from ($(tr '\n' ' ' < "$RUN/snap.sql" | sed 's/;[[:space:]]*$//')) s) union all (select * from ($(tr '\n' ' ' < "$RUN/snap.sql" | sed 's/;[[:space:]]*$//')) s except select * from d3_pass1)) d; if v_n <> 0 then raise exception 'D3 go-live refused: IDEMPOTENCE, the second pass of the ladder moved % snapshot row(s)', v_n; end if; raise notice 'IDEMPOTENT: the second pass left every count and digest where the first left it'; end \$\$;"
+    echo "do \$\$ declare v_n int; begin select count(*) into v_n from ((select * from d4_pass1 except select * from ($(tr '\n' ' ' < "$RUN/snap.sql" | sed 's/;[[:space:]]*$//')) s) union all (select * from ($(tr '\n' ' ' < "$RUN/snap.sql" | sed 's/;[[:space:]]*$//')) s except select * from d4_pass1)) d; if v_n <> 0 then raise exception 'D4 go-live refused: IDEMPOTENCE, the second pass of the ladder moved % snapshot row(s)', v_n; end if; raise notice 'IDEMPOTENT: the second pass left every count and digest where the first left it'; end \$\$;"
   fi
   done
   cat <<'SQL'
 select 'DRY RUN' as what,
-       'facies ' || a.status
-       || ' | ' || (select count(*) from public.academy_course_structures where app_slug='facies' and active)::text || ' tiers'
+       'forecastml ' || a.status
+       || ' | ' || (select count(*) from public.academy_course_structures where app_slug='forecastml' and active)::text || ' tiers'
        || ' | ' || (select count(*) from public.academy_course_structures s,
                            lateral jsonb_array_elements(s.structure->'modules') m,
                            lateral jsonb_array_elements_text(m->'lesson_keys') lk
-                     where s.app_slug='facies' and s.active)::text || ' lessons'
-       || ' | ' || (select count(*) from public.academy_quiz_questions where app_slug='facies')::text || ' questions ('
+                     where s.app_slug='forecastml' and s.active)::text || ' lessons'
+       || ' | ' || (select count(*) from public.academy_quiz_questions where app_slug='forecastml')::text || ' questions ('
        || (select string_agg(n::text, '/' order by ord) from (
              select case tier when 'beginner' then 1 when 'intermediate' then 2 else 3 end ord, count(*) n
-               from public.academy_quiz_questions where app_slug='facies' group by tier) t) || ')'
-       || ' | ' || (select count(*) from public.academy_capstones where app_slug='facies')::text || ' capstones'
+               from public.academy_quiz_questions where app_slug='forecastml' group by tier) t) || ')'
+       || ' | ' || (select count(*) from public.academy_capstones where app_slug='forecastml')::text || ' capstones'
        || ' | ' || (select count(*) from public.academy_capstones c, lateral jsonb_array_elements(c.fields) f
-                     where c.app_slug='facies')::text || ' graded'
+                     where c.app_slug='forecastml')::text || ' graded'
        || ' | path_order ' || a.path_order::text || ' in ' || a.module
        || ' | catalogue ' || (select count(*) filter (where status='available') from public.academy_apps)::text
        || ' available / ' || (select count(*) filter (where status='coming_soon') from public.academy_apps)::text
        || ' coming_soon' as v
-  from public.academy_apps a where a.slug = 'facies';
+  from public.academy_apps a where a.slug = 'forecastml';
 rollback;
 SQL
 } > "$RUN/ladder.sql" || { echo "could not resolve the SQL at $REF"; exit 3; }
@@ -293,9 +294,9 @@ echo
 if [ -n "$CONTROL" ] && [ "$CONTROL" != --idempotent ]; then
   # The control must fire THROUGH THE CHECK IT IS FOR. A refusal from some
   # other check (the pairwise sweep, say) proves nothing about this one.
-  if [ $FAILED = 1 ] && grep -qE "D3 go-live refused.*$WANT" "$RUN/out.txt"; then
+  if [ $FAILED = 1 ] && grep -qE "D4 go-live refused.*$WANT" "$RUN/out.txt"; then
     echo "CONTROL $CTL FIRED:"
-    grep -oE "D3 go-live refused[^\"]*" "$RUN/out.txt" | head -2 | cut -c1-400 | sed 's/^/    /'
+    grep -oE "D4 go-live refused[^\"]*" "$RUN/out.txt" | head -2 | cut -c1-400 | sed 's/^/    /'
     exit 0
   fi
   echo "CONTROL $CTL DID NOT FIRE through its own check ($WANT)."
@@ -307,7 +308,7 @@ if [ $FAILED = 1 ]; then
   grep -E 'ERROR|refused' "$RUN/out.txt" | head -5 | cut -c1-400
   exit 2
 fi
-grep -q 'facies available | 3 tiers | 78 lessons | 396 questions' "$RUN/out.txt" \
+grep -q 'forecastml available | 3 tiers | 78 lessons | 396 questions' "$RUN/out.txt" \
   || { echo "DRY RUN DID NOT READ BACK the flipped course"; exit 2; }
 if [ "$IDEMPOTENT" = 1 ]; then grep -q 'IDEMPOTENT: the second pass' "$RUN/out.txt" || { echo "THE IDEMPOTENCE CHECK DID NOT RUN"; exit 2; }; echo "IDEMPOTENT: the whole ladder ran twice in one rolled-back transaction and the second pass moved nothing."; fi
 echo "DRY RUN CLEAN: all five migrations ran, the go-live's assertions all passed, and the transaction rolled back."

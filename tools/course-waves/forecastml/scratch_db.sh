@@ -1,22 +1,19 @@
 #!/usr/bin/env bash
-# SHIP PHASE, NOT YET D4. Carried from D3 (tools/course-waves/facies) at the D4
-# foundation with names rewritten only; its D3 content (migration names, dates,
-# content pins) is rewritten for D4 at the ship phase. Do not run it for D4 yet.
 # =============================================================================
-# D3 SCRATCH DATABASE. A local Postgres 16 the ladder is iterated on BEFORE any
+# D4 SCRATCH DATABASE. A local Postgres 16 the ladder is iterated on BEFORE any
 # rolled-back run against the linked project, so a go-live that cannot pass is
 # found here and never against production (the NextGen linked project IS
 # production).
 #
-# Adapted from tools/course-waves/mlcore/scratch_db.sh (D2). The four
+# Adapted from tools/course-waves/facies/scratch_db.sh (D3). The four
 # academy tables the ladder writes, from the NextGen repository's own DDL, then
 # production's catalogue shape: stand-ins for the courses at path_order 1 to 38
-# and 53 to 58, and the TWENTY THREE FC, Commercial & Trading, Energy Transition,
+# and 53 to 58, and the TWENTY FOUR FC, Commercial & Trading, Energy Transition,
 # Assurance, HSE and Data & AI courses read out of the COMMITTED course migrations at REF
 # (FC1 to FC9 at 39 to 47, crude, refinery and supply at 48 to 50, gasvalue and
 # carbon at 51 and 52, riskchange at 59, compliance at 60, H1 to H5 at 61 to
-# 65, D1 dataqc at 66, D2 mlcore at 67), so the path_order, catalogue and prompt
-# checks meet real neighbours and real capstone rows. Every path_order from 1 to 67 is asserted
+# 65, D1 dataqc at 66, D2 mlcore at 67, D3 facies at 68), so the path_order, catalogue and prompt
+# checks meet real neighbours and real capstone rows. Every path_order from 1 to 68 is asserted
 # occupied, so a hole refuses rather than passing short.
 #
 # academy_apps.module is free text in production (no check constraint, no enum),
@@ -27,7 +24,7 @@
 # before and after), and the owner's apply script re-runs every assertion
 # against production inside the transaction that flips the course.
 #
-# Usage: scratch_db.sh [ref]     (re)creates container d3-scratch; default HEAD
+# Usage: scratch_db.sh [ref]     (re)creates container d4-scratch; default HEAD
 # =============================================================================
 set -eu
 REF=${1:-HEAD}
@@ -37,7 +34,7 @@ if up=$(cd "$HERE/../../.." 2>/dev/null && pwd) && { [ -d "$up/.git" ] || [ -f "
 else
   REPO=${REPO:-/root/wt-dai-d4-nextgen}
 fi
-C=${SCRATCH:-d3-scratch}
+C=${SCRATCH:-d4-scratch}
 docker rm -f $C >/dev/null 2>&1 || true
 docker run -d --name $C -e POSTGRES_PASSWORD=scratch postgres:16-alpine >/dev/null
 until docker exec $C pg_isready -U postgres >/dev/null 2>&1; do sleep 1; done
@@ -112,14 +109,14 @@ select 'neighbour' || g, 'Neighbour ' || g,
 SQL
 n=0
 for f in $(git -C "$REPO" ls-tree --name-only "$REF" migrations/ \
-           | grep -E '_(fc[0-9]+_[a-z]+|cr_crude|rf_refinery|tds_supply|gv_gasvalue|cef_carbon|asrc_riskchange|cq_compliance|h[1-5]_[a-z]+|d1_dataqc|d2_mlcore)_course\.sql$'); do
+           | grep -E '_(fc[0-9]+_[a-z]+|cr_crude|rf_refinery|tds_supply|gv_gasvalue|cef_carbon|asrc_riskchange|cq_compliance|h[1-5]_[a-z]+|d1_dataqc|d2_mlcore|d3_facies)_course\.sql$'); do
   git -C "$REPO" show "$REF:$f" | P
   n=$((n + 1))
 done
-[ "$n" = 23 ] || { echo "REFUSED: expected the 23 seeded course migrations at $REF, found $n"; exit 2; }
-# No hole: every path_order 1..67 must hold a row, stand-in or real, so a
+[ "$n" = 24 ] || { echo "REFUSED: expected the 24 seeded course migrations at $REF, found $n"; exit 2; }
+# No hole: every path_order 1..68 must hold a row, stand-in or real, so a
 # neighbour course the pattern above misses refuses instead of passing short.
-holes=$(P -Atc "select coalesce(string_agg(g::text, ',' order by g), '') from generate_series(1, 67) g where not exists (select 1 from public.academy_apps a where a.path_order = g)")
+holes=$(P -Atc "select coalesce(string_agg(g::text, ',' order by g), '') from generate_series(1, 68) g where not exists (select 1 from public.academy_apps a where a.path_order = g)")
 [ -z "$holes" ] || { echo "REFUSED: path_order hole(s) in the neighbour catalogue at $REF: $holes"; exit 2; }
 echo "$C ready: 4 academy tables, $n committed course migrations loaded at $REF"
 P -Atc "select count(*) filter (where status='available') || ' available / ' || count(*) filter (where status='coming_soon') || ' coming_soon, ' || (select count(*) from public.academy_capstones) || ' capstones' from public.academy_apps"

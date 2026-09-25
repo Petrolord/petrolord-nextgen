@@ -1,10 +1,7 @@
 #!/usr/bin/env bash
-# SHIP PHASE, NOT YET D4. Carried from D3 (tools/course-waves/facies) at the D4
-# foundation with names rewritten only; its D3 content (migration names, dates,
-# content pins) is rewritten for D4 at the ship phase. Do not run it for D4 yet.
 # =============================================================================
-# D3 facies "Electrofacies" SEED LADDER, content-addressed. The owner's
-# script. Adapted from apply_d2_mlcore.sh (D2): content pins read out of the git
+# D4 forecastml "Data-Driven Production Forecasting" SEED LADDER, content-addressed. The owner's
+# script. Adapted from apply_d3_facies.sh (D3): content pins read out of the git
 # object store, never a working tree, and the same mode set (verify, dryrun,
 # attempts, prod-status, prod-dryrun, apply --prod, rows).
 #
@@ -15,12 +12,12 @@
 # and names the file. Re-pin only with `pin <ref>`, never by hand.
 #
 # THE FIVE FILES.
-#   20261102_d3_facies_course             catalogue row (coming_soon, module
-#                                         data_ai, path_order 68) + 3 capstones,
+#   20261103_d4_forecastml_course             catalogue row (coming_soon, module
+#                                         data_ai, path_order 69) + 3 capstones,
 #                                         18 graded fields
-#   20261102_d3_facies_{beginner,intermediate,advanced}_deep
+#   20261103_d4_forecastml_{beginner,intermediate,advanced}_deep
 #                                         3 structures, 78 lesson keys, 396 questions
-#   20261102_d3_facies_go_live            HELD. coming_soon -> available, behind
+#   20261103_d4_forecastml_go_live            HELD. coming_soon -> available, behind
 #                                         the shape, grader, prompt, engine-ledger,
 #                                         second-route and trap assertions.
 #
@@ -29,8 +26,8 @@
 # capstone case files ship in the NextGen ZIP and not in this database. Upload
 # the zip FIRST. The four seeds may then be applied (the course stays
 # coming_soon, invisible to learners). The go-live runs ONLY after the deployed
-# site serves /dashboard/apps/facies: serve the built DashboardPage chunk and see
-# `apps/facies` in it. `apply --prod --go-live` will not run until you type it.
+# site serves /dashboard/apps/forecastml: serve the built DashboardPage chunk and see
+# `apps/forecastml` in it. `apply --prod --go-live` will not run until you type it.
 # ============================================================================
 #
 # MODES
@@ -40,7 +37,7 @@
 #                   idempotence, the five negative controls (ledger, route,
 #                   trap, prompt, leak), and verify_sql.py with its canaries.
 #   attempts        PRODUCTION, READ-ONLY: every learner row that already names
-#                   facies (enrolments, lesson progress, quiz and capstone
+#                   forecastml (enrolments, lesson progress, quiz and capstone
 #                   attempts, certifications). A new course must show 0.
 #   prod-status     PRODUCTION: each seed inside BEGIN ... ROLLBACK (PENDING or
 #                   ALREADY-APPLIED), and the go-live state (HELD or APPLIED).
@@ -52,7 +49,7 @@
 #                   transaction each, in order, then prod-status.
 #   apply --prod --go-live
 #                   PRODUCTION: the go-live, after a typed confirmation that the
-#                   deployed site serves /dashboard/apps/facies.
+#                   deployed site serves /dashboard/apps/forecastml.
 #   rows            the MIGRATIONS.md rows to paste over the NOT YET APPLIED rows.
 #   pin <ref>       reprint the digest table at a ref.
 #
@@ -67,23 +64,23 @@ set -u
 REF=${REF:-origin/main}
 NG_REPO=${NG_REPO:-/opt/petrolord-studio/workspaces/dev1/projects/petrolord-nextgen}
 HERE=$(cd "$(dirname "$0")" && pwd)
-RUN=$(mktemp -d /tmp/d3apply.XXXXXX)
-SLUG=facies
+RUN=$(mktemp -d /tmp/d4apply.XXXXXX)
+SLUG=forecastml
 
-SEEDS="20261102_d3_facies_course
-20261102_d3_facies_beginner_deep
-20261102_d3_facies_intermediate_deep
-20261102_d3_facies_advanced_deep"
-GOLIVE=20261102_d3_facies_go_live
+SEEDS="20261103_d4_forecastml_course
+20261103_d4_forecastml_beginner_deep
+20261103_d4_forecastml_intermediate_deep
+20261103_d4_forecastml_advanced_deep"
+GOLIVE=20261103_d4_forecastml_go_live
 FILES="$SEEDS
 $GOLIVE"
 digest_for() {
   case $1 in
-    20261102_d3_facies_course             ) echo 36c1ef87686f2e9f305e87be55c03b1b120a841d7cfa0fd526d46f63b6988226 ;;
-    20261102_d3_facies_beginner_deep      ) echo fc8693119923f817d1bc380e51ff69a07f12df1ab93a96242b67559e340562a7 ;;
-    20261102_d3_facies_intermediate_deep  ) echo 8c92d015accbc2870f0163810fe070ac7c088a87583b7fffdc081e84f8bc5c7c ;;
-    20261102_d3_facies_advanced_deep      ) echo 31d09875235528c9c72561f0e4decd22c31b30ac2229c24288f5505507634499 ;;
-    20261102_d3_facies_go_live            ) echo ad4c2e2d84460dc19879a845670097d495758ccdf4e3583b5572f75f6e3dfb07 ;;
+    20261103_d4_forecastml_course             ) echo UNPINNED_UNTIL_THE_SEED_LADDER_COMMIT ;;
+    20261103_d4_forecastml_beginner_deep      ) echo UNPINNED_UNTIL_THE_SEED_LADDER_COMMIT ;;
+    20261103_d4_forecastml_intermediate_deep  ) echo UNPINNED_UNTIL_THE_SEED_LADDER_COMMIT ;;
+    20261103_d4_forecastml_advanced_deep      ) echo UNPINNED_UNTIL_THE_SEED_LADDER_COMMIT ;;
+    20261103_d4_forecastml_go_live            ) echo UNPINNED_UNTIL_THE_SEED_LADDER_COMMIT ;;
     *) echo UNPINNED ;;
   esac
 }
@@ -112,17 +109,17 @@ fetch() {
   say "all five files match their pinned content"
 }
 
-# The hash of every facies row the seeds write, so a seed inside BEGIN ... ROLLBACK
+# The hash of every forecastml row the seeds write, so a seed inside BEGIN ... ROLLBACK
 # can say whether it would change anything.
-HASH_Q="md5(coalesce((select string_agg(md5(a::text), ',') from (select slug, name, module, path_order, prereq_slug from public.academy_apps where slug = 'facies') a), '')
- || coalesce((select string_agg(md5(s::text), ',' order by s.tier) from (select tier, structure, content_version, active from public.academy_course_structures where app_slug = 'facies') s), '')
- || coalesce((select string_agg(md5(q::text), ',' order by q.tier, q.scope, q.module_key, q.ord) from (select tier, scope, module_key, ord, prompt, options, answer_index, explanation, active from public.academy_quiz_questions where app_slug = 'facies') q), '')
- || coalesce((select string_agg(md5(c::text), ',' order by c.tier) from (select tier, cert_tier, dataset, title, prompt, fields from public.academy_capstones where app_slug = 'facies') c), ''))"
+HASH_Q="md5(coalesce((select string_agg(md5(a::text), ',') from (select slug, name, module, path_order, prereq_slug from public.academy_apps where slug = 'forecastml') a), '')
+ || coalesce((select string_agg(md5(s::text), ',' order by s.tier) from (select tier, structure, content_version, active from public.academy_course_structures where app_slug = 'forecastml') s), '')
+ || coalesce((select string_agg(md5(q::text), ',' order by q.tier, q.scope, q.module_key, q.ord) from (select tier, scope, module_key, ord, prompt, options, answer_index, explanation, active from public.academy_quiz_questions where app_slug = 'forecastml') q), '')
+ || coalesce((select string_agg(md5(c::text), ',' order by c.tier) from (select tier, cert_tier, dataset, title, prompt, fields from public.academy_capstones where app_slug = 'forecastml') c), ''))"
 
 state_of() {  # file -> PENDING | ALREADY-APPLIED | REFUSED:<reason>
-  { echo "begin;"; echo "create temp table d3_before on commit drop as select $HASH_Q as h;"
+  { echo "begin;"; echo "create temp table d4_before on commit drop as select $HASH_Q as h;"
     cat "$RUN/$1.sql"; echo
-    echo "select case when (select h from d3_before) = $HASH_Q then 'ALREADY-APPLIED' else 'PENDING' end as d3_state;"
+    echo "select case when (select h from d4_before) = $HASH_Q then 'ALREADY-APPLIED' else 'PENDING' end as d4_state;"
     echo "rollback;"; } > "$RUN/$1.state.sql"
   out=$(prod_q "$RUN/$1.state.sql"); rc=$?
   if failed $rc "$out"; then echo "REFUSED:$(grep -m1 -oE '[A-Za-z0-9 /_.-]*(refused|ERROR)[^"]*' <<<"$out" | cut -c1-200)"
@@ -132,12 +129,12 @@ state_of() {  # file -> PENDING | ALREADY-APPLIED | REFUSED:<reason>
 }
 
 golive_state() {
-  echo "select 'D3|' || coalesce((select status from public.academy_apps where slug = 'facies'), 'absent') as d3_golive;" > "$RUN/golive.sql"
+  echo "select 'D4|' || coalesce((select status from public.academy_apps where slug = 'forecastml'), 'absent') as d4_golive;" > "$RUN/golive.sql"
   out=$(prod_q "$RUN/golive.sql")
-  case "$(grep -oE 'D3\|[a-z_]+' <<<"$out" | head -1)" in
-    'D3|available') echo APPLIED ;;
-    'D3|coming_soon') echo HELD ;;
-    'D3|absent') echo "HELD (the course row is not seeded yet)" ;;
+  case "$(grep -oE 'D4\|[a-z_]+' <<<"$out" | head -1)" in
+    'D4|available') echo APPLIED ;;
+    'D4|coming_soon') echo HELD ;;
+    'D4|absent') echo "HELD (the course row is not seeded yet)" ;;
     *) echo UNKNOWN ;;
   esac
 }
@@ -159,26 +156,26 @@ status() {
 
 attempts() {
   cat > "$RUN/attempts.sql" <<'SQL'
-select 'ATT|' || string_agg(t || ' ' || n, ' | ' order by t) as d3_attempts from (
-  select 'enrollments' t, count(*) n from public.academy_enrollments where app_slug = 'facies'
-  union all select 'lesson_progress', count(*) from public.academy_lesson_progress where app_slug = 'facies'
-  union all select 'quiz_attempts', count(*) from public.academy_quiz_attempts where app_slug = 'facies'
-  union all select 'capstone_attempts', count(*) from public.academy_capstone_attempts where app_slug = 'facies'
-  union all select 'certifications', count(*) from public.academy_certifications where app_slug = 'facies') x;
+select 'ATT|' || string_agg(t || ' ' || n, ' | ' order by t) as d4_attempts from (
+  select 'enrollments' t, count(*) n from public.academy_enrollments where app_slug = 'forecastml'
+  union all select 'lesson_progress', count(*) from public.academy_lesson_progress where app_slug = 'forecastml'
+  union all select 'quiz_attempts', count(*) from public.academy_quiz_attempts where app_slug = 'forecastml'
+  union all select 'capstone_attempts', count(*) from public.academy_capstone_attempts where app_slug = 'forecastml'
+  union all select 'certifications', count(*) from public.academy_certifications where app_slug = 'forecastml') x;
 SQL
   out=$(prod_q "$RUN/attempts.sql")
   line=$(grep -oE 'ATT\|[^"]+' <<<"$out" | head -1)
   [ -n "$line" ] || { echo "$out" | tail -5; refuse "could not read the attempt counts"; }
   say "  ${line#ATT|}"
-  say "  A new course must show 0 everywhere. A non-zero count means facies rows already exist in production: stop and read them before applying."
+  say "  A new course must show 0 everywhere. A non-zero count means forecastml rows already exist in production: stop and read them before applying."
 }
 
 rows() {
   d=$(date -u +%F)
   for f in $SEEDS; do
-    echo "| $d | \`$f.sql\` | D3 Electrofacies (facies), seed | **APPLIED $d** by the owner via tools/course-waves/forecastml/apply_d4_forecastml.sh apply --prod from $REF (content pinned by sha256; scratch dry run and prod rolled-back dry run first) |"
+    echo "| $d | \`$f.sql\` | D4 Data-Driven Production Forecasting (forecastml), seed | **APPLIED $d** by the owner via tools/course-waves/forecastml/apply_d4_forecastml.sh apply --prod from $REF (content pinned by sha256; scratch dry run and prod rolled-back dry run first) |"
   done
-  echo "| $d | \`$GOLIVE.sql\` | D3 Electrofacies (facies), GO-LIVE: coming_soon to available | **APPLIED $d** via apply_d4_forecastml.sh apply --prod --go-live, after the deployed site served /dashboard/apps/facies |"
+  echo "| $d | \`$GOLIVE.sql\` | D4 Data-Driven Production Forecasting (forecastml), GO-LIVE: coming_soon to available | **APPLIED $d** via apply_d4_forecastml.sh apply --prod --go-live, after the deployed site served /dashboard/apps/forecastml |"
 }
 
 dryrun() {
@@ -215,9 +212,9 @@ case "${1:-verify}" in
     fetch
     if [ "${3:-}" = "--go-live" ]; then
       [ "$(golive_state)" = HELD ] || refuse "the go-live is not HELD on production: $(golive_state). Apply the four seeds first."
-      say "THE GO-LIVE. Confirm you have SERVED the built DashboardPage chunk and SEEN 'apps/facies' in it."
-      printf "Type exactly  apps/facies  to proceed: "; read -r answer
-      [ "$answer" = "apps/facies" ] || refuse "upload gate not confirmed"
+      say "THE GO-LIVE. Confirm you have SERVED the built DashboardPage chunk and SEEN 'apps/forecastml' in it."
+      printf "Type exactly  apps/forecastml  to proceed: "; read -r answer
+      [ "$answer" = "apps/forecastml" ] || refuse "upload gate not confirmed"
       { echo "begin;"; cat "$RUN/$GOLIVE.sql"; echo; echo "commit;"; } > "$RUN/golive.apply.sql"
       out=$(prod_q "$RUN/golive.apply.sql"); rc=$?
       if failed $rc "$out"; then echo "$out" | grep -E 'ERROR|refused' | head -3; refuse "the go-live failed and rolled back"; fi
@@ -233,9 +230,9 @@ case "${1:-verify}" in
       say "  applied $f"
     done
     say "post-check:"; status || refuse "the post-check shows refusals"
-    say; say "SEEDED. facies is coming_soon and no learner can reach it."
+    say; say "SEEDED. forecastml is coming_soon and no learner can reach it."
     say "Now run: $0 rows, and paste the four seed rows over their NOT YET APPLIED rows in MIGRATIONS.md."
-    say "The go-live stays HELD until the deployed site serves /dashboard/apps/facies." ;;
+    say "The go-live stays HELD until the deployed site serves /dashboard/apps/forecastml." ;;
   rows)        rows ;;
   *) refuse "unknown mode '${1:-}' (verify | dryrun | attempts | prod-status | prod-dryrun | apply --prod [--go-live] | rows | pin <ref>)" ;;
 esac

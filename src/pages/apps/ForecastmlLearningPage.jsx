@@ -27,6 +27,8 @@ import {
 } from '@/services/academyService';
 import { buildCapstoneAnswers } from '@/lib/capstoneAnswer';
 import LearningModeGate from '@/components/academy/LearningModeGate';
+import CapstoneCaseFiles from '@/components/course/CapstoneCaseFiles';
+import { FORECASTML_CASE_FILES } from '@/content/capstone-cases/forecastml';
 
 // The Data-Driven Production Forecasting course page, the fourth course of the
 // academy's Data & AI module, after Oilfield Data Quality, Machine Learning on
@@ -34,8 +36,9 @@ import LearningModeGate from '@/components/academy/LearningModeGate';
 // the teaching lab (forecastLab), which is a return value from the vendored
 // forecasting engine on the Ekene production wells. It never reads the
 // capstone: panelCapstoneGuard.test.js and forecastLab.test.js both grep this
-// file. The capstone case files are added at the ship phase, as the sibling
-// courses offer theirs.
+// file. The capstone case files are imported from
+// src/content/capstone-cases/forecastml and offered on the capstone card only,
+// as the dataqc, mlcore and facies courses offer theirs.
 
 const APP = 'forecastml';
 const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -254,6 +257,10 @@ const ForecastmlLearningPage = () => {
               <CardDescription>{capstone?.prompt}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
+              {capstone && FORECASTML_CASE_FILES[tier] && (
+                <CapstoneCaseFiles files={FORECASTML_CASE_FILES[tier]}
+                  note="Download the case file the brief names, then paste the rates of the well each value asks for into the panel view it belongs to, oldest month first. No panel loads a case for you." />
+              )}
               {!(!hasDeepCourse(APP, tier)
                 || courseProgress?.capstone?.unlocked === true
                 || courseProgress?.capstone?.passed === true

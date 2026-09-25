@@ -1,38 +1,36 @@
 #!/usr/bin/env python3
-# SHIP PHASE, NOT YET D4. Carried from D3 (tools/course-waves/facies) at the D4
-# foundation with names rewritten only; its D3 content (fields, prompts, case
-# files, dates) is rewritten for D4 at the ship phase. Do not run it for D4 yet.
-"""Generate the D3 course + capstone migration AND the capstone case files from
+"""Generate the D4 course + capstone migration AND the capstone case files from
 the ENGINE'S OWN RUN, so no expected value, no setting and no data point is
 retyped.
 
-Modelled on tools/course-waves/mlcore/gen_course.py (D2):
+Modelled on tools/course-waves/facies/gen_course.py (D3):
 
 1. THE ENGINE IS RUN HERE. `node d4_capstone.mjs --json` is executed through the
-   vendored engines/dataai/cluster.js and ml.js (D4_ENGINES) and the one
-   tolerance module (D4_TOLERANCE), and this file REFUSES unless fields.json
-   carries exactly what that run returned: the same tier, key and value to the
-   last bit, and the tolerance gradedTolerance.js derives. gen_golive.py
-   imports this module and takes its engine ledger from THIS run.
+   vendored engines/dataai/forecast.js (with engines/dca/arps.js and lib/stats,
+   D4_ENGINES) and the one tolerance module (D4_TOLERANCE), and this file
+   REFUSES unless fields.json carries exactly what that run returned: the same
+   tier, key and value to the last bit, and the tolerance gradedTolerance.js
+   derives. gen_golive.py imports this module and takes its engine ledger from
+   THIS run.
 
-2. THE DATA TRAVELS AS CASE FILES. A D3 capstone is set on a field of wells
-   (150, 168 and 175 rows), which no prompt can carry readably. So
-   `d4_capstone.mjs --inputs` is rendered into one CSV case file per field
-   under src/content/capstone-cases/forecastml/ (the dataqc and mlcore pattern: the
-   capstone card offers them for download and no panel preloads them), with
-   the header the explorer panels read (a `well` column, the numeric columns,
-   then FACIES), the rows in the order the engine ran them. The uncored well's
-   FACIES is written `null`, which the panels read as missing; the facies the
-   generator drew for it (`withheld`) is NEVER written. A self check re-reads
-   every case file and proves every column the engine ran is in it, value for
-   value and in order.
+2. THE DATA TRAVELS AS CASE FILES. A D4 capstone is set on a field of two
+   producing wells (84, 98 and 97 monthly rates), which no prompt can carry
+   readably. So `d4_capstone.mjs --inputs` is rendered into one CSV case file
+   per field under src/content/capstone-cases/forecastml/ (the dataqc, mlcore
+   and facies pattern: the capstone card offers them for download and no panel
+   preloads them): a `well` column, the month counted from 0, and the monthly
+   average oil rate in bbl/d, the rows in the order the engine ran them. The
+   generator's decline inputs (qi, Di, b, noise) are NEVER written. A self
+   check re-reads every case file and proves every series the engine ran is in
+   it, value for value and in order.
 
-3. THE VOCABULARY THIS WAVE LEGISLATED (digest section 28) IS ENFORCED ON EVERY
-   PROMPT, TITLE AND LABEL: a standard deviation names its divisor, no P label,
-   no AI claim; and the copy rule: no em or en dash, no "X, not Y" contrastive.
+3. THE VOCABULARY THIS WAVE LEGISLATED (digest section 25) IS ENFORCED ON EVERY
+   PROMPT, TITLE AND LABEL: P90 is written with (low) and P10 with (high), a
+   percentile is never "the 90th percentile", no AI claim; and the copy rule:
+   no em or en dash, no "X, not Y" contrastive.
 
 4. THE PRECISION SENTENCE IN EACH PROMPT IS CHECKED AGAINST precision.json.
-   Every D3 class prints to six decimals, so every prompt asks for six.
+   Every D4 class prints to six decimals, so every prompt asks for six.
 
 THE TOLERANCES ARE READ, NEVER DECLARED.
 
@@ -59,12 +57,12 @@ REPO = os.environ.get('D4_REPO', '/root/wt-dai-d4-nextgen')
 ENGINES = os.environ.get('D4_ENGINES', f'{REPO}/packages/engines')
 TOLPATH = os.environ.get(
     'D4_TOLERANCE', f'{REPO}/src/components/course/panels/forecastml/gradedTolerance.js')
-DATE = '20261102'
-OUT = os.environ.get('D4_COURSE_OUT', f'{REPO}/migrations/{DATE}_d3_facies_course.sql')
+DATE = '20261103'
+OUT = os.environ.get('D4_COURSE_OUT', f'{REPO}/migrations/{DATE}_d4_forecastml_course.sql')
 CASES_OUT = os.environ.get('D4_CASES_OUT', f'{REPO}/src/content/capstone-cases/forecastml')
 
-SLUG, MODULE, PATH_ORDER = 'facies', 'data_ai', 68
-NAME = 'Electrofacies'
+SLUG, MODULE, PATH_ORDER = 'forecastml', 'data_ai', 69
+NAME = 'Data-Driven Production Forecasting'
 TIERS = ('beginner', 'intermediate', 'advanced')
 
 fields = json.load(open(f'{W}/fields.json'))
@@ -120,8 +118,8 @@ TOL = {k: tol for _t, k, _v, tol in fields}
 if len(set(KEYS)) != 18:
     bad.append('two graded fields share a key')
 
-IH, NK, OG = INPUTS['IHIALA'], INPUTS['NKWELLE'], INPUTS['OGBUNIKE']
-IHS, NKS, OGS = IH['stated'], NK['stated'], OG['stated']
+AG, NK, UM = INPUTS['AGULU'], INPUTS['NANKA'], INPUTS['UMUNZE']
+AGS, NKS, UMS = AG['stated'], NK['stated'], UM['stated']
 
 
 def n(x):
@@ -137,218 +135,216 @@ def n(x):
     return s
 
 
+def series(fld, wid):
+    return next(w['rate'] for w in fld['field']['wells'] if w['well'] == wid)
+
+
+def spec(fld, wid):
+    return next(w['spec'] for w in fld['field']['wells'] if w['well'] == wid)
+
+
 # ---------------------------------------------------------------------------
 # THE CASE FILES, rendered from the engine's own inputs: one per field, every
-# row in the order the engine ran it. The withheld facies is never written.
+# month of every well in the order the engine ran it. The generator's decline
+# inputs are never written.
 # ---------------------------------------------------------------------------
-CHANNELS = ['depth', 'GR', 'RHOB', 'NPHI', 'PEF', 'CALI']
-HEAD = ['well', *CHANNELS, 'FACIES']
+HEAD = ['well', 'month', 'rate_bopd']
 
 
-def case_text(field):
+def case_text(fld):
     buf = io.StringIO()
     wr = csv.writer(buf, lineterminator='\n')
     wr.writerow(HEAD)
-    for r in field['rows']:
-        wr.writerow([r['well'], *[n(r[c]) for c in CHANNELS], 'null' if r['FACIES'] is None else r['FACIES']])
+    for w in fld['field']['wells']:
+        for t, v in enumerate(w['rate']):
+            wr.writerow([w['well'], t, n(v)])
     return buf.getvalue()
 
 
-CASE_NAME = {'beginner': 'ihiala_wells.csv', 'intermediate': 'nkwelle_wells.csv', 'advanced': 'ogbunike_wells.csv'}
-FIELD_OF = {'beginner': IH['field'], 'intermediate': NK['field'], 'advanced': OG['field']}
+CASE_NAME = {'beginner': 'agulu_rates.csv', 'intermediate': 'nanka_rates.csv', 'advanced': 'umunze_rates.csv'}
+FIELD_OF = {'beginner': AG, 'intermediate': NK, 'advanced': UM}
 CASES = {t: [(CASE_NAME[t], case_text(FIELD_OF[t]))] for t in TIERS}
 
-# EVERY COLUMN THE ENGINE RAN IS IN ITS CASE FILE, value for value and in order.
+# EVERY SERIES THE ENGINE RAN IS IN ITS CASE FILE, value for value and in order.
 SERIES_CHECKED = 0
 for t in TIERS:
     fld = FIELD_OF[t]
     rows = list(csv.DictReader(io.StringIO(CASES[t][0][1])))
-    if [r['well'] for r in rows] != [r['well'] for r in fld['rows']]:
-        bad.append(f'{CASE_NAME[t]}: the well column is not the rows the engine ran, in order')
-    for c in CHANNELS:
-        got = [float(r[c]) for r in rows]
-        want = [float(r[c]) for r in fld['rows']]
+    for w in fld['field']['wells']:
+        got = [(int(r['month']), float(r['rate_bopd'])) for r in rows if r['well'] == w['well']]
+        want = [(i, float(v)) for i, v in enumerate(w['rate'])]
         if got != want:
-            bad.append(f'{CASE_NAME[t]} column {c} is not the series the engine ran')
+            bad.append(f'{CASE_NAME[t]}: {w["well"]} is not the series the engine ran')
         SERIES_CHECKED += 1
-    if [None if r['FACIES'] == 'null' else r['FACIES'] for r in rows] != [r['FACIES'] for r in fld['rows']]:
-        bad.append(f'{CASE_NAME[t]} column FACIES is not the core facies the engine ran')
-    SERIES_CHECKED += 1
-    if len(fld['wells']) != len(set(r['well'] for r in fld['rows'])):
-        bad.append(f'{CASE_NAME[t]}: a well without rows')
-# THE WITHHELD FACIES NEVER TRAVELS: no case file carries a facies for a row
-# whose core facies is null.
-for t in TIERS:
-    for r, fr in zip(csv.DictReader(io.StringIO(CASES[t][0][1])), FIELD_OF[t]['rows']):
-        if fr['FACIES'] is None and r['FACIES'] != 'null':
-            bad.append(f'{CASE_NAME[t]}: an uncored row carries a facies')
-            break
+    if len(rows) != sum(len(w['rate']) for w in fld['field']['wells']):
+        bad.append(f'{CASE_NAME[t]}: a row that no well the engine ran carries')
+    if [r['well'] for r in rows] != [w['well'] for w in fld['field']['wells'] for _ in w['rate']]:
+        bad.append(f'{CASE_NAME[t]}: the rows are not in well order and month order')
+# THE GENERATOR'S DECLINE INPUTS NEVER TRAVEL: no case file or prompt carries a
+# qi, Di, b or noise figure (checked on the prompts below).
+SPEC_NUMS = {float(w['spec'][k]) for fld in (AG, NK, UM) for w in fld['field']['wells'] for k in ('qi', 'Di', 'b', 'noise')}
 
-IH_NW, NK_NW, OG_NW = len(IH['field']['wells']), len(NK['field']['wells']), len(OG['field']['wells'])
-IH_N, NK_N, OG_N = len(IH['field']['rows']), len(NK['field']['rows']), len(OG['field']['rows'])
-IH_PER, NK_PER, OG_PER = IH_N // IH_NW, NK_N // NK_NW, OG_N // OG_NW
-OG_CORED = sum(1 for r in OG['field']['rows'] if r['FACIES'] is not None)
-UNCORED = sorted({r['well'] for r in OG['field']['rows'] if r['FACIES'] is None})
-if UNCORED != [OGS['uncored']]:
-    bad.append(f'the Ogbunike uncored wells are {UNCORED}, and the prompt names {OGS["uncored"]}')
-if any(r['FACIES'] is None for r in IH['field']['rows'] + NK['field']['rows']):
-    bad.append('an Ihiala or Nkwelle row has no core facies, and the prompts say every well is cored')
-if IH_N % IH_NW or NK_N % NK_NW or OG_N % OG_NW:
-    bad.append('a field does not carry the same number of rows in every well')
-CR = IHS['centreRow']
-if IH['field']['rows'][CR]['well'] != 'IHIALA-1' or IH['field']['rows'][CR + 1]['well'] != 'IHIALA-2':
-    bad.append(f'Ihiala row {CR} is not the last row of IHIALA-1, as the prompt says')
+AG1, AG2 = series(AG, 'AGULU-1'), series(AG, 'AGULU-2')
+NK1, NK2 = series(NK, 'NANKA-1'), series(NK, 'NANKA-2')
+UM1, UM2 = series(UM, 'UMUNZE-1'), series(UM, 'UMUNZE-2')
+NK1_SHUT, UM2_SHUT = spec(NK, 'NANKA-1')['shutIn'], spec(UM, 'UMUNZE-2')['shutIn']
+for wid, y, sh in (('NANKA-1', NK1, NK1_SHUT), ('UMUNZE-2', UM2, UM2_SHUT)):
+    zeros = [i for i, v in enumerate(y) if v == 0]
+    if zeros != list(range(sh[0], sh[1] + 1)):
+        bad.append(f'{wid} holds 0 at months {zeros}, and the prompt names {sh[0]} to {sh[1]}')
+for wid, y in (('AGULU-1', AG1), ('AGULU-2', AG2), ('NANKA-2', NK2), ('UMUNZE-1', UM1)):
+    if any(v == 0 for v in y):
+        bad.append(f'{wid} holds a 0, and the prompt says only the named shut-ins do')
+if NKS['train'] + NKS['h'] != len(NK1):
+    bad.append('the Nanka hold-out does not end at the last month of NANKA-1, as the prompt says')
 
 # ---------------------------------------------------------------------------
 # The eighteen graded fields.
 # ---------------------------------------------------------------------------
+LAST_TRAIN = NKS['train'] - 1
+HOLD = f"months {n(NKS['train'])} to {n(NKS['train'] + NKS['h'] - 1)}"
 LABELS = {
-    'ihiala_gr_scale_gapi': ('The scale of GR, the population standard deviation (n)', 'gAPI'),
-    'ihiala_pc1_ratio': ('The explained variance ratio of the first principal component, correlation matrix', 'dimensionless'),
-    'ihiala_pc1_nphi_loading': ('The loading of NPHI on the first principal component', 'dimensionless'),
-    'ihiala_pc1_score_first_row': ('The score of row 0 on the first principal component', 'dimensionless'),
-    'ihiala_kmeans_inertia': (f"The inertia of k-means at k {n(IHS['k'])}, seed {n(IHS['seed'])}", 'standard units squared'),
-    'ihiala_row24_cluster_gr_centre_gapi': (f'The GR of the centre of the cluster row {CR} sits in', 'gAPI'),
-    'nkwelle_elbow_drop_fraction_k4': (f"The drop fraction of the elbow at k {n(NKS['k'])}", 'dimensionless'),
-    'nkwelle_ward_silhouette': (f"The mean silhouette of the Ward cut at k {n(NKS['k'])}", 'dimensionless'),
-    'nkwelle_ward_height_above_cut': (f"The height of the next Ward merge above the cut at k {n(NKS['k'])}", 'standard units'),
-    'nkwelle_complete_ari': (f"The adjusted Rand index of the complete-linkage cut at k {n(NKS['k'])} against the core facies", 'dimensionless'),
-    'nkwelle_one_to_one_macro_f1': (f"The macro F1 of one-to-one matching of k-means at k {n(NKS['k'])}", 'dimensionless'),
-    'nkwelle_majority_accuracy_k6': (f"The accuracy of majority matching of k-means at k {n(NKS['kOver'])}", 'dimensionless'),
-    'ogbunike_knn_heldout_accuracy': (f"The kNN accuracy on {OGS['heldOut']}", 'dimensionless'),
-    'ogbunike_knn_nearest_distance': (f"The distance from row 0 of {OGS['heldOut']} to its nearest training row", 'standard units'),
-    'ogbunike_cart_node2_gini': ('The Gini impurity of node 2', 'dimensionless'),
-    'ogbunike_cart_nphi_importance': ('The importance of NPHI in the tree', 'dimensionless'),
-    'ogbunike_cart_depth3_heldout_accuracy': (f"The accuracy on {OGS['heldOut']} of the tree of maxDepth {n(OGS['depth'])}", 'dimensionless'),
-    'ogbunike_uncored_gr_minmax_max': (f"The highest GR of {OGS['uncored']}, min-max scaled on the cored rows", 'dimensionless'),
+    'agulu2_ses_alpha': ('The alpha simple exponential smoothing fits on AGULU-2', 'dimensionless'),
+    'agulu1_holt_fixed_mse_bopd2': (f"The MSE of holt on AGULU-1 with alpha {n(AGS['alpha'])} and beta {n(AGS['beta'])} given", '(bbl/d)^2'),
+    'agulu1_holt_beta': ('The beta holt fits on AGULU-1, alpha and beta left free', 'dimensionless'),
+    'agulu1_holt_forecast_h12_bopd': (f"The fitted holt forecast of AGULU-1 at step {n(AGS['hHolt'])}", 'bbl/d'),
+    'agulu1_damped_phi': ('The phi the damped trend fits on AGULU-1, every parameter left free', 'dimensionless'),
+    'agulu1_damped_forecast_h24_bopd': (f"The fitted damped forecast of AGULU-1 at step {n(AGS['hDamped'])}", 'bbl/d'),
+    'nanka1_holdout_damped_smape_pct': (f'The sMAPE of the damped forecast of NANKA-1 over {HOLD}', 'percent'),
+    'nanka1_holdout_damped_mase': ('The MASE of that forecast, m 1', 'dimensionless'),
+    'nanka1_holdout_damped_me_bopd': ('The mean error of that forecast', 'bbl/d'),
+    'nanka2_backtest_holt_rmse_bopd': ('The pooled RMSE of the refitted holt backtest of NANKA-2', 'bbl/d'),
+    'nanka2_backtest_holt_held_mase': ('The pooled MASE of the same backtest with refit false', 'dimensionless'),
+    'nanka2_backtest_holt_step6_mae_bopd': (f"The MAE at step {n(NKS['horizon'])} of the refitted backtest", 'bbl/d'),
+    'umunze1_damped_p90_h12_bopd': (f"The P90 (low) at step {n(UMS['h'])} of the damped bootstrap of UMUNZE-1", 'bbl/d'),
+    'umunze1_damped_p10_h12_bopd': (f"The P10 (high) at step {n(UMS['h'])} of the same bootstrap", 'bbl/d'),
+    'umunze1_damped_p50_h6_bopd': ('The P50 at step 6 of the same bootstrap', 'bbl/d'),
+    'umunze1_arps_di_per_month': ('The Arps Di of UMUNZE-1, Auto-Select', 'per month'),
+    'umunze2_compare_arps_mase': ('The MASE of the arps row in the comparison on UMUNZE-2', 'dimensionless'),
+    'umunze2_compare_best_mase': ('The MASE of the method the comparison ranks first', 'dimensionless'),
 }
 if set(LABELS) != set(KEYS):
     bad.append('LABELS and fields.json name different fields')
+P50_STEP = 6  # the step of the graded P50, read by d4_capstone.mjs as P50[5]
+if not re.search(r'P50\[5\]', open(f'{W}/d4_capstone.mjs', encoding='utf-8').read()):
+    bad.append('d4_capstone.mjs no longer grades the P50 at step 6, which the prompt states')
 
-# The stated settings, read off the capstone generator's own stated block and
-# checked against what this prompt text assumes.
-LOGS = ['GR', 'RHOB', 'NPHI', 'PEF']
-for what, got, want in (
-        ('Ihiala logs', IHS['logs'], LOGS), ('Nkwelle logs', NKS['logs'], LOGS), ('Ogbunike logs', OGS['logs'], LOGS),
-        ('Ogbunike channels', OGS['channels'], LOGS + ['CALI']), ('Nkwelle kMax', NKS['kMax'], 8)):
-    if got != want:
-        bad.append(f'{what} is {got!r}; the prompt text is written for {want!r}')
-MAXDEPTH_DEFAULT = int(node('--input-type=module', '-e',
-                            'const C = await import(%s); console.log(C.DEFAULTS.CART_MAX_DEPTH);'
-                            % json.dumps(f'{ENGINES}/engines/dataai/cluster.js')).strip())
-NINIT_DEFAULT = int(node('--input-type=module', '-e',
-                         'const C = await import(%s); console.log(C.DEFAULTS.KMEANS_N_INIT);'
-                         % json.dumps(f'{ENGINES}/engines/dataai/cluster.js')).strip())
+N_SIMS_DEFAULT = int(node('--input-type=module', '-e',
+                          'const F = await import(%s); console.log(F.DEFAULTS.N_SIMS);'
+                          % json.dumps(f'{ENGINES}/engines/dataai/forecast.js')).strip())
+if N_SIMS_DEFAULT != UMS['nSims']:
+    bad.append(f'the stated nSims {UMS["nSims"]} is not the engine default {N_SIMS_DEFAULT}; the prompt says both')
 
 # ---------------------------------------------------------------------------
 # The prompts, rendered from the engine's own inputs.
 # ---------------------------------------------------------------------------
-LAYOUT = ("the well name, the depth in ft, GR in gAPI, RHOB in g/cm3, NPHI in v/v, PEF in b/e, CALI in in, and "
-          "the core FACIES")
-OTHER5 = [w['id'] for w in OG['field']['wells'] if w['id'] not in (OGS['heldOut'], OGS['uncored'])]
-IHIALA_TEXT = (
-    f"IHIALA, a field of {IH_NW} cored wells, IHIALA-1 to IHIALA-{IH_NW}, each logged at a one foot step. One case "
-    f"file comes with this capstone. ihiala_wells.csv carries {IH_N} rows, {IH_PER} a well, in well order and in "
-    f"depth order within each well: {LAYOUT}. Use the four logs GR, RHOB, NPHI and PEF on all {IH_N} rows, rows "
-    f"counted from 0 in the order of the file, so row {CR} is the last row of IHIALA-1.")
-NKWELLE_TEXT = (
-    f"NKWELLE, a field of {NK_NW} cored wells, NKWELLE-1 to NKWELLE-{NK_NW}, each logged at a one foot step. One case "
-    f"file comes with this capstone. nkwelle_wells.csv carries {NK_N} rows, {NK_PER} a well, in well order and in "
-    f"depth order within each well: {LAYOUT}. Use the four logs GR, RHOB, NPHI and PEF on all {NK_N} rows, with "
-    f"standard scaling throughout.")
-OGBUNIKE_TEXT = (
-    f"OGBUNIKE, a field of {OG_NW} wells, OGBUNIKE-1 to OGBUNIKE-{OG_NW}, each logged at a one foot step. One case "
-    f"file comes with this capstone. ogbunike_wells.csv carries {OG_N} rows, {OG_PER} a well, in well order and in "
-    f"depth order within each well: {LAYOUT}. {OGS['uncored']} was not cored, and its FACIES is written null on "
-    f"every row; it was logged with a gamma ray tool that reads {n(OGS['hotAdd'])} gAPI high on every row. The "
-    f"other {OG_NW - 1} wells are cored, {OG_CORED} rows.")
+LAYOUT = 'the well name, the month counted from 0, and the monthly average oil rate in bbl/d'
+
+
+def field_text(name, fld, fname, extra):
+    ws = fld['field']['wells']
+    lens = [len(w['rate']) for w in ws]
+    total = sum(lens)
+    per = (f'{n(lens[0])} months each' if len(set(lens)) == 1
+           else ' and '.join(f"{n(len(w['rate']))} months of {w['well']}" for w in ws))
+    return (f"{name}, a field of {len(ws)} producing wells, {' and '.join(w['well'] for w in ws)}, with {per} "
+            f"of monthly average oil rate in bbl/d, oldest month first. One case file comes with this capstone. "
+            f"{fname} carries {n(total)} rows, in well order and in month order within each well: {LAYOUT}. "
+            f"{extra}")
+
+
+AGULU_TEXT = field_text('AGULU', AG, CASE_NAME['beginner'], 'No month is missing and no month is 0.')
+NANKA_TEXT = field_text(
+    'NANKA', NK, CASE_NAME['intermediate'],
+    f"NANKA-1 was shut in for months {n(NK1_SHUT[0])} and {n(NK1_SHUT[1])}, at rate 0; no other month is missing or 0.")
+UMUNZE_TEXT = field_text(
+    'UMUNZE', UM, CASE_NAME['advanced'],
+    f"UMUNZE-2 was shut in for months {n(UM2_SHUT[0])} to {n(UM2_SHUT[1])}, at rate 0, and restarted after a "
+    f"workover; no other month is missing or 0.")
 
 TIER = {
     'beginner': (
         'associate',
-        f'IHIALA, {IH_NW} cored wells, {IH_N} rows',
-        'Grouping logs into electrofacies',
-        IHIALA_TEXT + f" Report six values: the scale of GR that standard scaling fits on those rows, the population "
-                      f"standard deviation (n), in gAPI; the explained variance ratio of the first principal component "
-                      f"of the correlation matrix; the loading of NPHI on that component, with the engine's sign "
-                      f"convention; the score of row 0 on that component; the inertia, in squared standard units, of "
-                      f"k-means with k {n(IHS['k'])}, seed {n(IHS['seed'])} and {NINIT_DEFAULT} starts, standard "
-                      f"scaling; and the GR, in gAPI, of the centre of the cluster row {CR} sits in under that "
-                      f"clustering. All six to six decimals."),
+        f"AGULU, {len(AG['field']['wells'])} producing wells, {n(len(AG1))} months each",
+        'Smoothing a rate series into a forecast',
+        AGULU_TEXT + f" Fit on every month of the well named, with only the parameters stated here given. Report six "
+                     f"values: the alpha that simple exponential smoothing fits on AGULU-2; the MSE, in (bbl/d)^2, of "
+                     f"Holt's linear trend on AGULU-1 with alpha {n(AGS['alpha'])} and beta {n(AGS['beta'])} given; "
+                     f"the beta that Holt's linear trend fits on AGULU-1 with alpha and beta both left free; that "
+                     f"fitted Holt forecast at step {n(AGS['hHolt'])}, in bbl/d; the phi that the damped trend fits "
+                     f"on AGULU-1 with alpha, beta and phi all left free; and that fitted damped forecast at step "
+                     f"{n(AGS['hDamped'])}, in bbl/d. All six to six decimals."),
     'intermediate': (
         'professional',
-        f'NKWELLE, {NK_NW} cored wells, {NK_N} rows',
-        'Judging groups against core',
-        NKWELLE_TEXT + f" Report six values. First, the drop fraction at k {n(NKS['k'])} of the elbow over k 1 to "
-                       f"{n(NKS['kMax'])} with seed {n(NKS['seed'])} and {NINIT_DEFAULT} starts. Second, the mean "
-                       f"silhouette of the Ward linkage cut at k {n(NKS['k'])}, scored on the standardised logs. "
-                       f"Third, the height, in standard units, of the next merge above that Ward cut, the first merge "
-                       f"the cut undoes. Fourth, the adjusted Rand index of the complete linkage cut at k "
-                       f"{n(NKS['k'])} against the core facies. Fifth, the macro F1 of one-to-one matching of k-means "
-                       f"at k {n(NKS['k'])}, seed {n(NKS['seed'])} and {NINIT_DEFAULT} starts, against the core "
-                       f"facies. Sixth, the accuracy of majority matching of k-means at k {n(NKS['kOver'])}, seed "
-                       f"{n(NKS['seed'])} and {NINIT_DEFAULT} starts, against the core facies. All six to six "
-                       f"decimals."),
+        f"NANKA, {len(NK['field']['wells'])} producing wells, one shut in",
+        'Testing a forecast honestly',
+        NANKA_TEXT + f" Report six values. First, the sMAPE, in percent, of the damped trend fitted on NANKA-1 "
+                     f"months 0 to {n(LAST_TRAIN)}, every parameter left free, forecasting {n(NKS['h'])} steps and "
+                     f"scored against {HOLD}. Second, the MASE of the same forecast with months 0 to {n(LAST_TRAIN)} "
+                     f"as the in-sample series and m 1. Third, its mean error, actual minus forecast, in bbl/d. "
+                     f"Fourth, the pooled RMSE, in bbl/d, of a rolling-origin backtest of Holt's linear trend on "
+                     f"NANKA-2 from first origin {n(NKS['firstOrigin'])}, horizon {n(NKS['horizon'])}, step "
+                     f"{n(NKS['step'])}, refitted at every origin, m 1. Fifth, the pooled MASE of the same backtest "
+                     f"with refit false, the parameters held from the first window. Sixth, the MAE, in bbl/d, at step "
+                     f"{n(NKS['horizon'])} ahead of the refitted backtest. All six to six decimals."),
     'advanced': (
         'expert',
-        f'OGBUNIKE, {OG_NW} wells, one of them uncored',
-        'Predicting facies and the engine\'s own rules',
-        OGBUNIKE_TEXT + f" Report six values. First, the accuracy on {OGS['heldOut']} of kNN with k {n(OGS['k'])} on "
-                        f"the four logs GR, RHOB, NPHI and PEF, standard scaling fitted on the training rows, trained "
-                        f"on the other {len(OTHER5)} cored wells, {', '.join(OTHER5)}. Second, the distance, in "
-                        f"standard units, from row 0 of {OGS['heldOut']}, its shallowest row, rows counted from 0 "
-                        f"within the well, to its nearest training row in that run. Third, the Gini impurity of node "
-                        f"2, the node the root sends right, of the classification tree grown on all {OG_CORED} cored "
-                        f"rows at the default maxDepth {MAXDEPTH_DEFAULT}, with the five channels in the column order "
-                        f"GR, RHOB, NPHI, PEF, CALI. Fourth, the importance of NPHI in that tree. Fifth, the accuracy "
-                        f"on {OGS['heldOut']} of a tree of maxDepth {n(OGS['depth'])} grown on the other "
-                        f"{len(OTHER5)} cored wells with the same five channels in the same order. Sixth, the highest "
-                        f"GR of {OGS['uncored']} after min-max scaling fitted on the four logs of the {OG_CORED} cored "
-                        f"rows. All six to six decimals."),
+        f"UMUNZE, {len(UM['field']['wells'])} producing wells, one shut in and restarted",
+        'Uncertainty, the Arps baseline and the engine\'s rules',
+        UMUNZE_TEXT + f" Report six values. First, the P90 (low) at step {n(UMS['h'])} of the residual bootstrap of "
+                      f"the damped trend fitted on all of UMUNZE-1, every parameter left free, h {n(UMS['h'])}, "
+                      f"{n(UMS['nSims'])} paths, seed {n(UMS['seed'])}, nonNegative true. Second, the P10 (high) at "
+                      f"step {n(UMS['h'])} of the same run. Third, the P50 at step {n(P50_STEP)} of the same run. "
+                      f"Fourth, the Di, per month, of the Arps baseline fitted on all of UMUNZE-1 with the model "
+                      f"Auto-Select. Fifth and sixth, from a comparison of ses, holt and damped with the Arps baseline "
+                      f"on UMUNZE-2, first origin {n(UMS['firstOrigin'])}, horizon {n(UMS['horizon'])}, step "
+                      f"{n(UMS['step'])}, refit true, m 1, the Arps model Auto-Select, ranked by MASE: the MASE of "
+                      f"the arps row, and the MASE of the method the ranking puts first. All six to six decimals."),
 }
 PROMPTS = {t: TIER[t][3] for t in TIERS}
 
 HEADER = f"""-- ============================================================================
--- D3: Electrofacies joins the catalogue, the THIRD course of the Data & AI
--- module.
+-- D4: Data-Driven Production Forecasting joins the catalogue, the FOURTH
+-- course of the Data & AI module.
 --
--- Catalogue row (module 'data_ai'; path_order {PATH_ORDER}, directly above D2
--- mlcore at 67; prereq_slug NULL, as D1 and D2 carry it: whether D3 requires
--- D2 is a go-live decision; school left at its default) plus the three
--- capstones and their eighteen graded fields, generated by
--- tools/course-waves/forecastml/gen_course.py from the ENGINE'S OWN RUN
--- (d4_capstone.mjs through the vendored engines/dataai/cluster.js and ml.js),
--- which it refuses to write unless fields.json carries exactly that run's
--- values and the tolerance gradedTolerance.js derives. Deep seeds are three
--- separate migrations; the go-live is a fifth and is HELD until a NextGen
--- production upload carries the route /dashboard/apps/facies, because the 78
--- lessons, the teaching lab (faciesLab.js), its three explorer panels and the
--- capstone case files ship in the zip and not in this database.
+-- Catalogue row (module 'data_ai'; path_order {PATH_ORDER}, directly above D3
+-- facies at 68; prereq_slug NULL, as D1, D2 and D3 carry it: whether D4
+-- requires an earlier course is a go-live decision; school left at its
+-- default) plus the three capstones and their eighteen graded fields,
+-- generated by tools/course-waves/forecastml/gen_course.py from the ENGINE'S
+-- OWN RUN (d4_capstone.mjs through the vendored engines/dataai/forecast.js and
+-- engines/dca/arps.js), which it refuses to write unless fields.json carries
+-- exactly that run's values and the tolerance gradedTolerance.js derives. Deep
+-- seeds are three separate migrations; the go-live is a fifth and is HELD
+-- until a NextGen production upload carries the route
+-- /dashboard/apps/forecastml, because the 78 lessons, the teaching lab
+-- (forecastLab.js), its three explorer panels and the capstone case files ship
+-- in the zip and not in this database.
 --
--- THE ONE SENTENCE THE COURSE IS. An electrofacies is a group of depth samples
--- whose logs look alike, and it is worth something only when it is checked
--- against the rock, so the course teaches grouping logs into electrofacies
--- (Associate), judging the groups against core (Professional), and predicting
--- facies with the engine's own rules (Expert), and grades each tier on its own
--- question with numbers the engine returns.
+-- THE ONE SENTENCE THE COURSE IS. A data-driven forecast extends a rate series
+-- from its own history, and it is worth something only when it is tested on
+-- months it never saw, so the course teaches smoothing a rate series into a
+-- forecast (Associate), testing a forecast honestly (Professional), and
+-- uncertainty, the Arps baseline and the engine's rules (Expert), and grades
+-- each tier on its own question with numbers the engine returns.
 --
--- THE ENGINE. engines/dataai/cluster.js, vendored sha-identical with
--- petrolord-engines ef4058f (engines #253 and #254), with the scalers and
--- classificationReport of ml.js. Scaling for clustering is fitted on the rows
--- passed with the population standard deviation; PCA on the correlation
--- matrix uses the sample standard deviation and a stated sign rule; k-means
--- seeds with k-means++ on one mulberry32 stream and keeps the lowest inertia
--- of its starts; distance and merge ties are judged in a 1e-12 relative band.
+-- THE ENGINE. engines/dataai/forecast.js, vendored sha-identical with
+-- petrolord-engines 1dfdd60, with engines/dca/arps.js for the Arps baseline
+-- and lib/stats for mulberry32 and the quantile. Simple, Holt and damped
+-- exponential smoothing start at the first observation and fit by the least
+-- one-step SSE (a grid, then a compass search, phi fitted in 0.8 to 0.98); an
+-- error is actual minus forecast; MASE divides by the in-sample lag-m naive
+-- MAE of the training months; the residual bootstrap draws the scored
+-- residuals without centring on one mulberry32 stream; P90 is the low case.
 --
--- WHAT IS GRADED. IHIALA (Associate) grades a scaler's scale, the first
--- component's share, a loading and a score, a k-means inertia and a centre in
--- log units; NKWELLE (Professional) grades an elbow drop fraction, a Ward
--- silhouette and merge height, an adjusted Rand index, a one-to-one macro F1
--- and a majority accuracy; OGBUNIKE (Expert) grades a held-out kNN accuracy, a
--- nearest distance, the Gini of the node a tied root sends right, an
--- importance, a held-out tree accuracy and a range check on an uncored well.
--- Every value is a return value of the engine, and the data it was run on is
--- in the case file the prompt names.
+-- WHAT IS GRADED. AGULU (Associate) grades a fitted ses alpha, a Holt MSE with
+-- its parameters given, a fitted Holt beta and forecast, and a fitted damped
+-- phi and forecast; NANKA (Professional) grades a hold-out sMAPE, MASE and
+-- mean error through a shut-in, a refitted backtest's pooled RMSE, the held
+-- backtest's pooled MASE and a by-horizon MAE; UMUNZE (Expert) grades a
+-- bootstrap P90 (low), P10 (high) and P50, an Arps Di per month, and a
+-- comparison's arps MASE and best MASE. Every value is a return value of the
+-- engine, and the data it was run on is in the case file the prompt names.
 --
 -- All eighteen graded values were swept against every number the digest
 -- prints and against every number handed to a learner in a prompt, a label or
@@ -385,14 +381,14 @@ def ident(fname):
     return re.sub(r'[^a-z0-9]', '_', fname[:-4])
 
 
-INDEX_JS = ("// The facies capstone case files, generated by tools/course-waves/forecastml/gen_course.py\n"
+INDEX_JS = ("// The forecastml capstone case files, generated by tools/course-waves/forecastml/gen_course.py\n"
             "// from the engine's own inputs (d4_capstone.mjs --inputs). Only the capstone card\n"
             "// imports this module: no panel preloads a case, and the graded answers are not\n"
             "// stored anywhere in the app.\n")
 for tier in TIERS:
     for fname, _ in CASES[tier]:
         INDEX_JS += f"import {ident(fname)} from './{fname}?raw';\n"
-INDEX_JS += '\nexport const FACIES_CASE_FILES = {\n'
+INDEX_JS += '\nexport const FORECASTML_CASE_FILES = {\n'
 for tier in TIERS:
     INDEX_JS += f'  {tier}: [\n'
     for fname, _ in CASES[tier]:
@@ -409,19 +405,21 @@ if odd:
 # EVERY SCALAR THE ENGINE RAN IS STATED IN ITS OWN TIER'S PROMPT, and every case
 # file is named in it.
 NUMS = {t: re.findall(r'(?<![\d.])\d+(?:\.\d+)?(?!\d|\.\d)', PROMPTS[t]) for t in TIERS}
-for tier, pairs in (('beginner', [('k', IHS['k']), ('seed', IHS['seed']), ('centreRow', IHS['centreRow']), ('nInit', NINIT_DEFAULT)]),
-                    ('intermediate', [(k, NKS[k]) for k in ('kMax', 'seed', 'k', 'kOver')] + [('nInit', NINIT_DEFAULT)]),
-                    ('advanced', [(k, OGS[k]) for k in ('k', 'hotAdd', 'depth')] + [('maxDepth', MAXDEPTH_DEFAULT)])):
+for tier, pairs in (('beginner', [(k, AGS[k]) for k in ('alpha', 'beta', 'hHolt', 'hDamped')] + [('months', len(AG1))]),
+                    ('intermediate', [(k, NKS[k]) for k in ('h', 'firstOrigin', 'horizon', 'step')]
+                     + [('last training month', LAST_TRAIN), ('shut-in', NK1_SHUT[0]), ('shut-in end', NK1_SHUT[1])]),
+                    ('advanced', [(k, UMS[k]) for k in ('h', 'nSims', 'seed', 'firstOrigin', 'horizon', 'step')]
+                     + [('P50 step', P50_STEP), ('shut-in', UM2_SHUT[0]), ('shut-in end', UM2_SHUT[1])])):
     for k, v in pairs:
         if n(v) not in NUMS[tier]:
             bad.append(f'{tier} prompt does not state {k} = {n(v)}, which the engine ran')
-for s_ in (OGS['heldOut'], OGS['uncored']):
-    if s_ not in PROMPTS['advanced']:
-        bad.append(f'the advanced prompt does not name {s_}')
 for tier in TIERS:
     for fname, _ in CASES[tier]:
         if PROMPTS[tier].count(fname) != 1:
             bad.append(f'{tier} prompt does not name the case file {fname} exactly once')
+    for w in FIELD_OF[tier]['field']['wells']:
+        if w['well'] not in PROMPTS[tier]:
+            bad.append(f'{tier} prompt does not name {w["well"]}')
 
 # THE VOCABULARY AND THE COPY RULE, over every prompt, dataset, title and label.
 READ = [(f'{t} prompt', PROMPTS[t]) for t in TIERS] + \
@@ -431,14 +429,14 @@ READ = [(f'{t} prompt', PROMPTS[t]) for t in TIERS] + \
 
 def vocabulary(label, text):
     out = []
-    if re.search(r'\bP(?:5|10|50|90|95)\b', text):
-        out.append(f'{label} carries a P label')
+    for m in re.finditer(r'\bP(90|10)\b', text):
+        want = '(low)' if m.group(1) == '90' else '(high)'
+        if not text[m.end():m.end() + 7].startswith(' ' + want):
+            out.append(f'{label} carries a P{m.group(1)} without {want}')
+    if re.search(r'\b\d+(?:st|nd|rd|th) percentile', text):
+        out.append(f'{label} names a percentile by its ordinal')
     if re.search(r'\bAI\b|AI-powered|artificial intelligence', text, re.I):
         out.append(f'{label} carries an AI claim')
-    for m in re.finditer(r'standard deviation', text):
-        near = text[max(0, m.start() - 60):m.end() + 20]
-        if not re.search(r'population|sample', near):
-            out.append(f'{label} carries a standard deviation with no divisor named')
     if re.search('[–—]', text):
         out.append(f'{label} carries an en or em dash')
     if re.search(r',\s+not\s+\w', text):
@@ -448,9 +446,9 @@ def vocabulary(label, text):
 
 for label, text in READ:
     bad.extend(vocabulary(label, text))
-for plant, rule in (('the P90 figure', 'P label'), ('an AI-powered model', 'AI claim'),
-                    ('the standard deviation of GR', 'divisor'),
-                    ('a split — whole', 'dash'), ('the test wells, not the training rows', 'contrastive')):
+for plant, rule in (('the P90 figure', 'P label'), ('the 90th percentile of the paths', 'ordinal'),
+                    ('an AI-powered model', 'AI claim'),
+                    ('a split — whole', 'dash'), ('the test months, not the training months', 'contrastive')):
     if not vocabulary('plant', plant):
         bad.append(f'the vocabulary sweep does not catch a planted {rule}')
 
@@ -473,6 +471,14 @@ for a in range(len(fields)):
     for b in range(a + 1, len(fields)):
         if abs(abs(fields[a][2]) - abs(fields[b][2])) <= max(fields[a][3], fields[b][3]):
             bad.append(f'pairwise: {fields[a][1]} and {fields[b][1]}')
+# The generator's decline inputs are never handed in a prompt, label or title
+# (0 and 1 aside, and a stated setting that coincides with one, such as alpha 0.4).
+PROMPT_NUMS = {abs(float(tok)) for t in TIERS for tok in NUM.findall(PROMPTS[t] + TIER[t][1] + TIER[t][2])}
+PROMPT_NUMS |= {abs(float(tok)) for k in KEYS for tok in NUM.findall(' '.join(LABELS[k]))}
+STATED_NUMS = {abs(float(v)) for st in (AGS, NKS, UMS) for v in st.values()}
+leak = sorted(x for x in SPEC_NUMS & PROMPT_NUMS if x not in (0.0, 1.0) and x not in STATED_NUMS)
+if leak:
+    bad.append(f'a generator decline input is handed in a prompt or label: {leak}')
 
 # EVERY NUMBER THE DIGEST PRINTS.
 DIGEST_NUMS = sorted({abs(float(tok)) for tok in NUM.findall(open(f'{W}/digest.txt', encoding='utf-8').read())})
@@ -522,6 +528,6 @@ if __name__ == '__main__':
     print(f'engine run: 18 of 18 fields.json values equal what d4_capstone.mjs returned through {ENGINES}, '
           'and every tolerance is the one gradedTolerance.js derives')
     print('prompt lengths:', {t: len(PROMPTS[t]) for t in TIERS})
-    print(f'case-file columns re-read and equal to the engine run: {SERIES_CHECKED}')
+    print(f'case-file series re-read and equal to the engine run: {SERIES_CHECKED}')
     print(f'digest numbers swept: {len(DIGEST_NUMS)} | numbers handed in prompts, labels and case files: {len(handed)}')
-    print('handed + pairwise + digest collisions + precision + vocabulary + copy rule: 0')
+    print('handed + pairwise + digest collisions + decline inputs + precision + vocabulary + copy rule: 0')

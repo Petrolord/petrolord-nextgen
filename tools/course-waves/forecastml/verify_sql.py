@@ -1,13 +1,10 @@
 #!/usr/bin/env python3
-# SHIP PHASE, NOT YET D4. Carried from D3 (tools/course-waves/facies) at the D4
-# foundation with names rewritten only; its D3 content (fields, prompts, case
-# files, dates) is rewritten for D4 at the ship phase. Do not run it for D4 yet.
-"""Compare the D3 facies seed ladder against its committed sources, FIELD BY FIELD:
+"""Compare the D4 forecastml seed ladder against its committed sources, FIELD BY FIELD:
 the three deep seeds against the 21 bank JSONs (every prompt, option, answer key
 and explanation of all 396 questions), the three structure rows against the
 three manifests (every module key, title and lesson key, 78 in all), the course
 migration's capstones against fields.json (every graded key, expected value and
-tolerance, 18 in all), and its catalogue row against wave.json.
+tolerance, 18 in all, each field at its own tolerance), and its catalogue row against wave.json.
 
 WHY A CHARACTER-LEVEL PARSER AND NOT A REGEX. The rows of a deep seed are a SQL
 VALUES list, and the obvious way to split one is on `), (`. That works until an
@@ -49,7 +46,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 UP = os.path.abspath(os.path.join(HERE, '../../..'))
 REPO = os.environ.get(
     'REPO', UP if os.path.exists(os.path.join(UP, '.git')) else '/root/wt-dai-d4-nextgen')
-SLUG, PREFIX, DATE = 'facies', 'd3', '20261102'
+SLUG, PREFIX, DATE = 'forecastml', 'd4', '20261103'
 WAVE = f'tools/course-waves/{SLUG}'
 TIERS = (('beginner', 'b'), ('intermediate', 'i'), ('advanced', 'a'))
 PARTS = ('m01', 'm02', 'm03', 'm04', 'm05', 'm06', 'exam')
@@ -248,7 +245,7 @@ if CANARY_FIELD:
 NUMTOK = r'(-?\d+(?:\.\d+)?(?:[eE][-+]?\d+)?)'
 FIELD = re.compile(r"jsonb_build_object\('key','([a-z0-9_]+)', 'label','((?:[^']|'')*)', 'unit','((?:[^']|'')*)',"
                    r" 'expected'," + NUMTOK + r", 'tol'," + NUMTOK + r"\)")
-cap_rows = re.split(r"\n\(\n  'facies', ", course.split('insert into public.academy_capstones', 1)[1])[1:]
+cap_rows = re.split(r"\n\(\n  'forecastml', ", course.split('insert into public.academy_capstones', 1)[1])[1:]
 got_fields = []
 for row in cap_rows:
     tier = row.split("'", 2)[1]

@@ -1,15 +1,12 @@
 #!/usr/bin/env bash
-# SHIP PHASE, NOT YET D4. Carried from D3 (tools/course-waves/facies) at the D4
-# foundation with names rewritten only; its D3 content (migration names, dates,
-# content pins) is rewritten for D4 at the ship phase. Do not run it for D4 yet.
 # =============================================================================
-# D3 SEEDS AND CASE FILES, GENERATED FROM THE COMMITTED TREE AND NEVER FROM A
-# WORKING TREE. Adapted from tools/course-waves/mlcore/gen_seeds.sh (D2).
+# D4 SEEDS AND CASE FILES, GENERATED FROM THE COMMITTED TREE AND NEVER FROM A
+# WORKING TREE. Adapted from tools/course-waves/facies/gen_seeds.sh (D3).
 #
 # This script stages the COMMITTED tree first: wave.json, fields.json,
 # precision.json, digest.txt, the capstone generator d4_capstone.mjs, the three
 # tier headers, every manifest.json, all 21 bank JSONs, the vendored engine
-# closure (engines/dataai/cluster.js, ml.js and the two files they import) and the one
+# closure (engines/dataai/forecast.js, engines/dca/arps.js and the two lib files forecast.js imports) and the one
 # tolerance module gradedTolerance.js are pulled out of the git object store at
 # REF with `git show` into a throwaway directory, and all three generators are
 # pointed at that. The ENGINE the course generator runs is the committed one,
@@ -32,14 +29,14 @@ else
 fi
 REPO=${REPO:-$DEFAULT_REPO}
 KIT=${KIT:-/root/dc-wavekit}
-SLUG=facies
-PREFIX=d3
-DATE=20261102
+SLUG=forecastml
+PREFIX=d4
+DATE=20261103
 
-STAGE=$(mktemp -d /tmp/d2seed.XXXXXX)
+STAGE=$(mktemp -d /tmp/d4seed.XXXXXX)
 OUTDIR="$STAGE/out"
 trap 'rm -rf "$STAGE"' EXIT
-mkdir -p "$STAGE/banks" "$OUTDIR" "$OUTDIR/cases" "$STAGE/repo/src/content/courses/$SLUG" "$STAGE/engines/engines/dataai" "$STAGE/engines/lib/stats" "$STAGE/engines/lib/lp"
+mkdir -p "$STAGE/banks" "$OUTDIR" "$OUTDIR/cases" "$STAGE/repo/src/content/courses/$SLUG" "$STAGE/engines/engines/dataai" "$STAGE/engines/engines/dca" "$STAGE/engines/lib/stats" "$STAGE/engines/lib/conventions"
 
 echo "repo:    $REPO"
 echo "staging the committed tree at $REF into $STAGE"
@@ -52,7 +49,7 @@ git -C "$REPO" show "$REF:tools/course-waves/$SLUG/wave.json" \
 for f in fields.json precision.json digest.txt d4_capstone.mjs hdr_beginner.txt hdr_intermediate.txt hdr_advanced.txt; do
   git -C "$REPO" show "$REF:tools/course-waves/$SLUG/$f" > "$STAGE/$f"
 done
-for e in engines/dataai/cluster.js engines/dataai/ml.js lib/stats/stats.js lib/lp/simplex.js; do
+for e in engines/dataai/forecast.js engines/dca/arps.js lib/stats/stats.js lib/conventions/percentile.js; do
   git -C "$REPO" show "$REF:packages/engines/$e" > "$STAGE/engines/$e"
 done
 git -C "$REPO" show "$REF:src/components/course/panels/$SLUG/gradedTolerance.js" > "$STAGE/gradedTolerance.js"
@@ -125,7 +122,7 @@ done
 
 echo
 if [ "$bad" = 0 ]; then
-  echo "AGREE: all five migrations and the four case-file outputs regenerate byte for byte from the committed inputs at $REF."
+  echo "AGREE: all five migrations and the three case files and their index regenerate byte for byte from the committed inputs at $REF."
 else
   echo "DISAGREE: the migrations in the worktree are not what the committed inputs produce."
   [ "$WRITE" = --write ] || exit 2

@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
-# SHIP PHASE, NOT YET D4. Carried from D3 (tools/course-waves/facies) at the D4
-# foundation with names rewritten only; its D3 content (fields, prompts, case
-# files, dates) is rewritten for D4 at the ship phase. Do not run it for D4 yet.
-"""Cut named check blocks out of the go-live on stdin, for dryrun_d2.sh's
+"""Cut named check blocks out of the go-live on stdin, for dryrun_d4.sh's
 negative controls only. `ledger` is the engine-ledger block, `route` the second
 route in SQL. A block runs from its section banner to the next banner, and the
 script refuses if a named banner is absent, so a control can never pass
