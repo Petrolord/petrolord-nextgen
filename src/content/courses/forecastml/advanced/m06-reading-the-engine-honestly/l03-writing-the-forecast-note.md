@@ -23,11 +23,11 @@ Leave one out and a figure in the note cannot be checked.
 
 - Well: EKENE-P1, months 0 to 47, monthly oil rate in bbl/d. The field is synthetic, and this well was drawn from an Arps curve.
 - Method: damped, alpha 0.657029, beta 0.353869 and phi 0.960949, all fitted, none on a bound, the search converged.
-- Test: compared with ses, holt and the Arps baseline from first origin 30, horizon 6, step 3, refit and m left at their defaults, ranked by MASE: arps, damped, holt, ses. Arps MASE 0.199862. Damped ranks second, behind the baseline.
-- Intervals: damped, seed 11, 1000 paths, nonNegative true. Step 1: P90 (low) 174.139087, P50 206.724356, P10 (high) 225.708211 bbl/d. Step 12: P90 (low) reported as 0, P50 137.469798, P10 (high) 324.803671. The damped point forecast at step 12 is 169.556510.
+- Test: compared with ses, holt and the Arps baseline from first origin 30, horizon 6, step 3 (origins 30, 33, 36, 39 and 42), refit true and m 1, both the defaults. Ranked by MASE: arps 0.199862, damped 0.287529, holt 0.346480, ses 1.067547. No metric returned as null. Damped ranks second, behind the baseline.
+- Intervals: damped, h 12, seed 11, 1000 paths, nonNegative true, `clippedToZero` 3 (the P90 at steps 10, 11 and 12). Step 1: P90 (low) 174.139087, P50 206.724356, P10 (high) 225.708211 bbl/d. Step 12: P90 (low) reported as 0, P50 137.469798, P10 (high) 324.803671. The damped point forecast at step 12 is 169.556510.
 - Finding: the Arps baseline ranks first on this well. The damped method has not earned its place on EKENE-P1.
 
-Every figure above is one the course prints, with its conditions. The note also shows what it does not have: damped's own MASE in that comparison is not among the course's figures, so the note gives the ranking and the Arps figure alone. From the panels you will have every row's figure; give them all.
+Every figure above is one the course prints, with its conditions, and the comparison gives every row's MASE, the baseline's included.
 
 ## What the note never does
 

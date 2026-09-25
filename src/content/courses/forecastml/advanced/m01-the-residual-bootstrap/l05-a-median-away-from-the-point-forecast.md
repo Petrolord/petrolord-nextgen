@@ -16,7 +16,7 @@ On the teaching run, damped on EKENE-P1, seed 11, 1000 paths, the mean of the 46
 
 ## A strong lean: ses
 
-ses on EKENE-P1 shows the drift plainly. Its alpha fits to 1, so each one-step forecast is the month before, and each residual is a month-to-month change of the decline. Their mean is -20.525532 bbl/d (derived). ses has no trend, so its point forecast is flat at the last month's rate. The course's ses run on EKENE-P1, h 12, with negative percentiles left as simulated:
+ses on EKENE-P1 shows the drift plainly. Its alpha fits to 1, so each one-step forecast is the month before, and each residual is a month-to-month change of the decline. Their mean is -20.525532 bbl/d (derived). ses has no trend, so its point forecast is flat at the last month's rate. ses on EKENE-P1, h 12, seed 11, 1000 paths, nonNegative false, so negative percentiles are left as simulated:
 
 | step | ses point forecast | P90 (low), unclipped | P50, unclipped | P10 (high), unclipped |
 | --- | --- | --- | --- | --- |
@@ -38,4 +38,4 @@ In a forecast note, report the point forecast and the percentiles together, name
 
 ## Exercise
 
-Open the view "Seeds, paths and clipping" with EKENE-P1, method ses, h 12, seed 11, and nonNegative false. Read the P50 and the P10 (high) at step 12 and compare them with the flat point forecast. Then switch the method to damped and repeat. Write two sentences: which method's point forecast sits outside its own P90 to P10 range, and what the residuals of that method on this well explain about it.
+Open the view "Seeds, paths and clipping" with EKENE-P1, method ses, h 12, seed 11, 1000 paths and nonNegative false. Check the P50 and the P10 (high) at step 12 against the table and compare them with the flat point forecast. Then switch the method to damped and repeat. Write two sentences: which method's point forecast sits outside its own P90 to P10 range, and what the residuals of that method on this well explain about it.

@@ -26,7 +26,7 @@ The range follows the textbook Forecasting: Principles and Practice (FPP3), whic
 
 ## A given phi: above 0 and at most 1
 
-A phi you give may be any number above 0 and at most 1, and it is held fixed. A phi below the fitted range can only be given. In the course's worked case, phi 0.5 is given: the engine accepts it, lists phi in `fixed`, and fits alpha and beta around it, reaching alpha 0.784159, beta 1.000000 and SSE 34690.033324.
+A phi you give may be any number above 0 and at most 1, and it is held fixed. A phi below the fitted range can only be given. On EKENE-P1, phi 0.5 given is accepted: the engine lists phi in `fixed` and fits alpha and beta around it, reaching alpha 0.784159, beta 1.000000 and SSE 34690.033324. The fitted beta sits on its upper bound, so `atBounds` lists "beta = 1". The given phi is not listed there.
 
 Phi 0 and phi 1.05 are refused, with the rule for both kinds of phi in one sentence:
 
@@ -38,4 +38,4 @@ Fit phi when you want the data to choose how much damping the history supports, 
 
 ## Exercise
 
-In the smoothing explorer choose "Fit a method", pick damped and leave every parameter blank. Fit each 48-month well and record phi and `atBounds`. Then load EKENE-P4, give phi 0.9 with alpha and beta blank, and compare the SSE with the fitted one. Finally give phi 0.5 on EKENE-P1 and read which parameters are listed as given.
+In the smoothing explorer choose "Fit a method", pick damped and leave every parameter blank. Fit each 48-month well and record phi and `atBounds`. Then load EKENE-P4, give phi 0.9 with alpha and beta blank, and compare the SSE with the fitted one. Finally give phi 0.5 on EKENE-P1 and read which parameters `fixed` lists as given and which `atBounds` lists on a bound.

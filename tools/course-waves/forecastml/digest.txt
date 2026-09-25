@@ -305,7 +305,7 @@ PHI FITTED AND PHI GIVEN. A FITTED phi is searched from 0.8 to 0.98 inclusive; a
 | EKENE-P4 | 0.388341 | 0.109704 | 0.800000 | phi = 0.8 | 207120.428138 | 239.235397 |
 | EKENE-P5 | 0.091167 | 0.434737 | 0.877145 | none | 14087.135207 | 7.425050 |
 
-EKENE-P4 fits phi on the lower bound 0.8, listed in `atBounds`. A phi below the range can only be given: phi 0.5 (stated) is accepted, held fixed (`fixed` lists phi), and alpha and beta are fitted around it: alpha 0.784159, beta 1.000000, SSE 34690.033324.
+EKENE-P4 fits phi on the lower bound 0.8, listed in `atBounds`. A phi below the range can only be given: on EKENE-P1, phi 0.5 (stated) is accepted, held fixed (`fixed` lists phi), and alpha and beta are fitted around it: alpha 0.784159, beta 1.000000, SSE 34690.033324. The fitted beta 1.000000 is on its upper bound, and `atBounds` lists it: beta = 1. The given phi 0.5 is not listed there.
 
 # SECTION 8: Fitting the parameters: SSE, the grid, the compass search and the bounds (owned by Associate m05)
 
@@ -546,7 +546,7 @@ EACH ORIGIN ITS OWN SCALE. MASE divides each error by the Q of its own origin's 
 
 Dividing every error by the last origin's scale instead (derived, a wrong method) gives 0.458893 against the engine's 0.374515.
 
-ONE ORIGIN CAN LEAVE A METRIC UNDEFINED. EKENE-P3, damped, first origin 6, horizon 6, step 6 (stated): origins 6, 12, 18, 24, 30, 36, 42. Origin 6 trains on months 0 to 5, all inside the plateau, so its Q is 0 (`maseScale` null); the other origins have scales 18.163636, 37.629412, 38.791304, 36.041379, 35.505714, 33.797561. One null scale leaves the overall MASE and every by-horizon MASE null, with the reason: "MASE is undefined: at origin 6 the training window has 6 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0". The other metrics are numbers: MAE 62.892091, sMAPE 11.808809.
+ONE ORIGIN CAN LEAVE A METRIC UNDEFINED. EKENE-P3, damped, first origin 6, horizon 6, step 6 (stated) (refit true, the default): origins 6, 12, 18, 24, 30, 36, 42. Origin 6 trains on months 0 to 5, all inside the plateau, so its Q is 0 (`maseScale` null); the other origins have scales 18.163636, 37.629412, 38.791304, 36.041379, 35.505714, 33.797561. One null scale leaves the overall MASE and every by-horizon MASE null, with the reason: "MASE is undefined: at origin 6 the training window has 6 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0". The other metrics are numbers: MAE 62.892091, sMAPE 11.808809.
 
 Starting at origin 12 instead, past the plateau (stated), every origin has a scale and the overall MASE is 2.004154. Choosing the origins is part of the test; state them.
 
@@ -580,6 +580,15 @@ A smoothing method ranks first from every one of the four, and which smoothing m
 
 ON A CLEAN DECLINE, EKENE-P1, first origin 30, horizon 6, step 3 (stated), the ranking is arps, damped, holt, ses, arps MASE 0.199862. EKENE-P1 was drawn from an Arps curve (stated), and on it the Arps baseline ranks first.
 
+`compareWithArps` refits by default, as `backtest` does: its signature reads `refit = true` and `m = 1`, and the result above returns refit true; the Arps baseline is refitted on every training window whatever refit says. The four rows of that EKENE-P1 comparison (first origin 30, horizon 6, step 3, origins 30, 33, 36, 39, 42, refit true and m 1, both the defaults), with 30 errors in each row:
+
+| method | ME | MAE | RMSE | MAPE | sMAPE | MASE | refit | m | metric returned as null |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| ses | -30.493333 | 30.533333 | 33.650329 | 11.941457 | 11.130948 | 1.067547 | true | 1 | none |
+| holt | 3.164825 | 9.999988 | 12.012815 | 3.801825 | 3.846513 | 0.346480 | true | 1 | none |
+| damped | -2.074236 | 8.125891 | 10.132261 | 3.174119 | 3.139259 | 0.287529 | true | 1 | none |
+| arps | -0.407739 | 5.668226 | 6.448251 | 2.185755 | 2.183781 | 0.199862 | true | 1 | none |
+
 WRITING UP A BACKTEST names: the well and months; the methods; first origin, horizon, step and so the origins; refit or held; each metric with its reason when null; MASE with its lag m; the ranking and the metric it is by.
 
 # SECTION 18: The residual bootstrap: paths, one seeded stream, the state update and the pool (owned by Expert m01)
@@ -603,6 +612,8 @@ EKENE-P1, damped, fitted (alpha 0.657029, beta 0.353869, phi 0.960949), h 12, se
 | 11 | 172.173687 | 0.000000 | 143.289158 | 311.260079 |
 | 12 | 169.556510 | 0.000000 | 137.469798 | 324.803671 |
 
+`clippedToZero` is 3 on this call (nonNegative true, the default, and 1000 paths): the P90 (low) at steps 10, 11, 12 is reported as 0, and no P50 or P10 is.
+
 The point forecast is exactly `fitSmoothing`'s. Each path starts from the fitted final level and trend; at each step it takes the one-step forecast, adds one residual drawn at random from the fitted residuals, and that simulated rate UPDATES THE STATE (level and trend) before the next step, so an early draw carries into every later step of its path.
 
 THE POOL is the scored in-sample residuals: `poolSize` 46, the 48 months less the 2 before `scoredFrom`. At least 2 are needed; EKENE-P6 with holt leaves 1 and is refused (section 3).
@@ -621,7 +632,7 @@ More paths steady the percentiles; they do not make the method right.
 
 RESIDUALS DRAWN WITHOUT CENTRING. The engine does not subtract the residual mean before it resamples, and its basis says so in these words: "residuals are drawn as fitted without centring (their mean is not subtracted), so a method whose residuals have a non-zero mean drifts: on a declining well a flat method's paths can fall below its own point forecast". ses on EKENE-P1, below, is that case: a flat method on a declining well. A centred bootstrap (the mean subtracted first) is the alternative in common use (section 24).
 
-A MEDIAN AWAY FROM THE POINT FORECAST. The residuals are drawn as fitted (their mean over the damped pool here is -1.726983 bbl/d, derived). When the residuals lean one way, every path leans with them and the state carries the lean forward. ses on EKENE-P1 shows it plainly: alpha fits to 1, so each residual is a month-to-month change of the decline, mean -20.525532 bbl/d (derived). The P50 of the paths falls while the point forecast stays flat:
+A MEDIAN AWAY FROM THE POINT FORECAST. The residuals are drawn as fitted (their mean over the damped pool here is -1.726983 bbl/d, derived). When the residuals lean one way, every path leans with them and the state carries the lean forward. ses on EKENE-P1 shows it plainly: alpha fits to 1, so each residual is a month-to-month change of the decline, mean -20.525532 bbl/d (derived). The P50 of the paths falls while the point forecast stays flat. ses on EKENE-P1, h 12, seed 11, 1000 paths (nSims left at its default), nonNegative false (stated):
 
 | step | ses point forecast | P90 (low), unclipped | P50, unclipped | P10 (high), unclipped |
 | --- | --- | --- | --- | --- |
@@ -648,15 +659,15 @@ With n 10 the 10th percentile is the mean of the 1st and 2nd smallest (idx 1 who
 
 THE LABELS. Production is an outcome where more is better, and the platform labels outcomes by exceedance: "P90 means a 90% probability the actual quantity meets or exceeds this value, per SPE PRMS." So P90 is the LOW case, the 10th percentile of the simulated paths, and P10 the HIGH case, the 90th percentile. Keys `P90`, `P50` and `P10` carry those values, and P90 <= P50 <= P10 at every step (checked in section 18).
 
-NEGATIVE RATES REPORTED AS ZERO. With `nonNegative` true (the default) a percentile below 0 is reported as 0 and counted in `clippedToZero`; the basis reads: "a negative percentile is reported as 0 (clippedToZero counts them)". EKENE-P5, holt, h 12, seed 11: 11 of the 36 percentiles (derived, three per step x 12 steps) are reported as 0. The last three steps, both ways:
+NEGATIVE RATES REPORTED AS ZERO. With `nonNegative` true (the default) a percentile below 0 is reported as 0 and counted in `clippedToZero`; the basis reads: "a negative percentile is reported as 0 (clippedToZero counts them)". EKENE-P5, holt, h 12, seed 11, 1000 paths (nSims left at its default): 11 of the 36 percentiles (derived, three per step x 12 steps) are reported as 0. The last three steps, both ways:
 
-| step | P90, nonNegative true | P90, nonNegative false | P50, nonNegative true | P50, nonNegative false |
-| --- | --- | --- | --- | --- |
-| 10 | 0.000000 | -53.846650 | 101.499145 | 101.499145 |
-| 11 | 0.000000 | -54.233366 | 120.696727 | 120.696727 |
-| 12 | 0.000000 | -58.408958 | 138.941534 | 138.941534 |
+| step | holt point forecast | P90, nonNegative true | P90, nonNegative false | P50, nonNegative true | P50, nonNegative false |
+| --- | --- | --- | --- | --- | --- |
+| 10 | 4.291768 | 0.000000 | -53.846650 | 101.499145 | 101.499145 |
+| 11 | 3.589581 | 0.000000 | -54.233366 | 120.696727 | 120.696727 |
+| 12 | 2.887394 | 0.000000 | -58.408958 | 138.941534 | 138.941534 |
 
-Only the negative percentiles change; the point forecast is never clipped. A P90 reported as 0 says that at least a tenth of the paths fell below zero at that step: the method's paths ran out of rate there.
+Only the negative percentiles change; the point forecast is never clipped. Over steps 10 to 12 the holt point forecast falls while the P50 of its paths rises. A P90 reported as 0 says that at least a tenth of the paths fell below zero at that step: the method's paths ran out of rate there.
 
 INTERVALS WIDEN WITH EVERY STEP. The P10 less the P90 of the damped EKENE-P1 intervals (derived): step 1 51.569125, step 6 178.424168, step 12 324.803671 bbl/d; each path carries all its earlier draws.
 

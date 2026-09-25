@@ -22,7 +22,7 @@ Holt on EKENE-P1, all 48 months. First origin 24, horizon 6, step 6: origins 24,
 
 ## A note with a metric returned as null
 
-Damped on EKENE-P3, all 48 months. First origin 6, horizon 6, step 6: origins 6 to 42. Parameters refitted, the default. MAE 62.892091 bbl/d, sMAPE 11.808809 percent. MASE returned as null, with the reason:
+Damped on EKENE-P3, all 48 months. First origin 6, horizon 6, step 6: origins 6 to 42. Parameters refitted (refit true, the default). MAE 62.892091 bbl/d, sMAPE 11.808809 percent. MASE returned as null, with the reason:
 
 > MASE is undefined: at origin 6 the training window has 6 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0
 
@@ -32,7 +32,7 @@ The null is reported with its reason, and the second figure is labelled as a dif
 
 ## A note for a comparison
 
-EKENE-P2, all 48 months, after the workover. Methods ses, holt, damped and the Arps baseline, on the same origins: first origin 28, horizon 6, step 3, origins 28, 31, 34, 37 and 40. The `refit` setting left at its default. Order by MASE at m 1: holt 0.571171, damped 0.599131, arps 0.605968, ses 0.789324. From first origins 26, 30 and 32 a smoothing method still comes first, but which one changes, so no single best smoothing method is claimed.
+EKENE-P2, all 48 months, after the workover. Methods ses, holt, damped and the Arps baseline, on the same origins: first origin 28, horizon 6, step 3, origins 28, 31, 34, 37 and 40. Refit true, the comparison's default. Order by MASE at m 1: holt 0.571171, damped 0.599131, arps 0.605968, ses 0.789324. From first origins 26, 30 and 32 a smoothing method still comes first, but which one changes, so no single best smoothing method is claimed.
 
 ## What a note leaves out
 

@@ -52,6 +52,14 @@ const FC = await import(`${ROOT}/${ENGINE_REL}`);
 const ST = await import(`${ROOT}/lib/stats/stats.js`);
 const PCT = await import(`${ROOT}/lib/conventions/percentile.js`);
 const ENGINE_SRC = fs.readFileSync(`${ROOT}/${ENGINE_REL}`, 'utf8');
+// A parameter default READ FROM THE ENGINE SOURCE: the text after `name = ` in the
+// destructured signature of `export const fn = ({ ... })`. Absent is a failure.
+const sigDefault = (fn, name) => {
+  const sig = ENGINE_SRC.match(new RegExp(`export const ${fn} = \\(\\{([^}]*)\\}`));
+  const d = sig && sig[1].match(new RegExp(`(?:^|,)\\s*${name} = ([^,]+?)\\s*(?:,|$)`));
+  if (!d) { console.error(`sigDefault: no default for ${name} in the signature of ${fn}`); process.exit(1); }
+  return d[1];
+};
 const GOLD = JSON.parse(fs.readFileSync(`${ROOT}/test-data/dataai/goldens/forecast_cases.json`, 'utf8'));
 const CASES = GOLD.cases;
 const MODULES = JSON.parse(execFileSync('python3', [`${HERE}/structure.py`, '--modules'], { encoding: 'utf8' }));
@@ -512,7 +520,10 @@ must('EKENE-P4 fits phi on its lower bound', phiLow.includes('EKENE-P4'), phiLow
 w();
 const PHI_LOW = 0.5; // stated: a phi below the search range
 const PHI05 = success('fitSmoothing damped phi 0.5 given', FC.fitSmoothing({ y: Y1, method: 'damped', phi: PHI_LOW, h: H }));
-w(`${list(phiLow)} ${phiLow.length === 1 ? 'fits' : 'fit'} phi on the lower bound ${S(FC.DEFAULTS.PHI_MIN)}, listed in \`atBounds\`. A phi below the range can only be given: phi ${S(PHI_LOW)} (stated) is accepted, held fixed (\`fixed\` lists ${list(PHI05.fixed)}), and alpha and beta are fitted around it: alpha ${f6(PHI05.params.alpha)}, beta ${f6(PHI05.params.beta)}, SSE ${f6(PHI05.sse)}.`);
+const PHI05_BETA_EDGE = PHI05.optimiser.atBounds.filter((b) => b.startsWith('beta'));
+must('phi 0.5 given: the fitted beta is on its upper bound 1', PHI05.params.beta === 1, PHI05.params.beta);
+must('phi 0.5 given: atBounds lists beta and nothing for phi', PHI05_BETA_EDGE.length === 1 && !PHI05.optimiser.atBounds.some((b) => b.startsWith('phi')), PHI05.optimiser.atBounds);
+w(`${list(phiLow)} ${phiLow.length === 1 ? 'fits' : 'fit'} phi on the lower bound ${S(FC.DEFAULTS.PHI_MIN)}, listed in \`atBounds\`. A phi below the range can only be given: on EKENE-P1, phi ${S(PHI_LOW)} (stated) is accepted, held fixed (\`fixed\` lists ${list(PHI05.fixed)}), and alpha and beta are fitted around it: alpha ${f6(PHI05.params.alpha)}, beta ${f6(PHI05.params.beta)}, SSE ${f6(PHI05.sse)}. The fitted beta ${f6(PHI05.params.beta)} is on its upper bound, and \`atBounds\` lists it: ${list(PHI05.optimiser.atBounds)}. The given phi ${S(PHI_LOW)} is not listed there.`);
 must('phi 0.5 given is fixed and alpha, beta free', PHI05.fixed.join() === 'phi' && PHI05.free.join() === 'alpha,beta', PHI05.fixed);
 
 /* ============================================================ SECTION 8 */
@@ -779,7 +790,8 @@ w();
 const B3S = { firstOrigin: O_FLAT, horizon: 6, step: 6 }; // stated
 const B3 = success('backtest damped EKENE-P3 firstOrigin 6 horizon 6 step 6', FC.backtest({ y: Y3, method: 'damped', ...B3S }));
 planted(3, B3.overall.mase === null && B3.perOrigin[0].maseScale === null && B3.perOrigin.slice(1).every((r) => r.maseScale > 0), B3.overall.notes && B3.overall.notes.mase);
-w(`ONE ORIGIN CAN LEAVE A METRIC UNDEFINED. EKENE-P3, damped, first origin ${B3S.firstOrigin}, horizon ${B3S.horizon}, step ${B3S.step} (stated): origins ${list(B3.origins)}. Origin ${B3.origins[0]} trains on months 0 to ${B3.origins[0] - 1}, all inside the plateau, so its Q is 0 (\`maseScale\` null); the other origins have scales ${list(B3.perOrigin.slice(1).map((r) => f6(r.maseScale)))}. One null scale leaves the overall MASE and every by-horizon MASE null, with the reason: "${B3.overall.notes.mase}". The other metrics are numbers: MAE ${f6(B3.overall.mae)}, sMAPE ${f6(B3.overall.smape)}.`);
+must('the EKENE-P3 backtest is refitted, the backtest default', B3.refit === true && sigDefault('backtest', 'refit') === 'true', `${B3.refit} ${sigDefault('backtest', 'refit')}`);
+w(`ONE ORIGIN CAN LEAVE A METRIC UNDEFINED. EKENE-P3, damped, first origin ${B3S.firstOrigin}, horizon ${B3S.horizon}, step ${B3S.step} (stated) (refit ${S(B3.refit)}, the default): origins ${list(B3.origins)}. Origin ${B3.origins[0]} trains on months 0 to ${B3.origins[0] - 1}, all inside the plateau, so its Q is 0 (\`maseScale\` null); the other origins have scales ${list(B3.perOrigin.slice(1).map((r) => f6(r.maseScale)))}. One null scale leaves the overall MASE and every by-horizon MASE null, with the reason: "${B3.overall.notes.mase}". The other metrics are numbers: MAE ${f6(B3.overall.mae)}, sMAPE ${f6(B3.overall.smape)}.`);
 w();
 must('every by-horizon MASE is null too', B3.byHorizon.every((h) => h.mase === null), 'null');
 const B3b = success('backtest damped EKENE-P3 firstOrigin 12', FC.backtest({ y: Y3, method: 'damped', ...B3S, firstOrigin: B3.origins[1] }));
@@ -814,6 +826,20 @@ const C1 = success('compareWithArps EKENE-P1', FC.compareWithArps({ y: Y1, ...C1
 planted(0, C1.best === 'arps', C1.ranking);
 w(`ON A CLEAN DECLINE, EKENE-P1, first origin ${C1S.firstOrigin}, horizon ${C1S.horizon}, step ${C1S.step} (stated), the ranking is ${C1.ranking.join(', ')}, arps MASE ${f6(C1.rows.find((r) => r.method === 'arps').mase)}. EKENE-P1 was drawn from an Arps curve (stated), and on it the Arps baseline ranks first.`);
 w();
+const CMP_REFIT = sigDefault('compareWithArps', 'refit');
+const CMP_M = sigDefault('compareWithArps', 'm');
+must('compareWithArps refits by default, as backtest does', CMP_REFIT === 'true' && sigDefault('backtest', 'refit') === 'true' && C1.refit === true, `${CMP_REFIT} ${C1.refit}`);
+must('compareWithArps m defaults to 1', CMP_M === '1', CMP_M);
+const C1m = success('compareWithArps EKENE-P1 with refit and m given at their defaults', FC.compareWithArps({ y: Y1, ...C1S, refit: true, m: 1 }));
+must('refit true and m 1 given reproduce the default call bit for bit', JSON.stringify(C1m.rows) === JSON.stringify(C1.rows), 'same');
+const C1held = success('compareWithArps EKENE-P1 held', FC.compareWithArps({ y: Y1, ...C1S, refit: false }));
+must('the Arps row is refitted whatever refit says', JSON.stringify(C1held.rows.find((r) => r.method === 'arps')) === JSON.stringify(C1.rows.find((r) => r.method === 'arps')), 'same');
+const nullsOf = (r) => ['me', 'mae', 'rmse', 'mape', 'smape', 'mase'].filter((k) => r[k] === null);
+must('no metric of the EKENE-P1 comparison is null', C1.rows.every((r) => nullsOf(r).length === 0 && !r.notes), 'none');
+w(`\`compareWithArps\` refits by default, as \`backtest\` does: its signature reads \`refit = ${CMP_REFIT}\` and \`m = ${CMP_M}\`, and the result above returns refit ${S(C1.refit)}; the Arps baseline is refitted on every training window whatever refit says. The four rows of that EKENE-P1 comparison (first origin ${C1S.firstOrigin}, horizon ${C1S.horizon}, step ${C1S.step}, origins ${list(C1.origins)}, refit ${S(C1.refit)} and m ${CMP_M}, both the defaults), with ${S(C1.rows[0].n)} errors in each row:`);
+w();
+table(['method', 'ME', 'MAE', 'RMSE', 'MAPE', 'sMAPE', 'MASE', 'refit', 'm', 'metric returned as null'], C1.rows.map((r) => [r.method, f6(r.me), f6(r.mae), f6(r.rmse), f6(r.mape), f6(r.smape), f6(r.mase), S(C1.refit), CMP_M, nullsOf(r).length ? list(nullsOf(r)) : 'none']));
+w();
 w('WRITING UP A BACKTEST names: the well and months; the methods; first origin, horizon, step and so the origins; refit or held; each metric with its reason when null; MASE with its lag m; the ranking and the metric it is by.');
 
 /* ============================================================ SECTION 18 */
@@ -827,6 +853,10 @@ w();
 table(['step', 'point forecast', 'P90 (low)', 'P50', 'P10 (high)'], PID.forecast.map((f, j) => [S(j + 1), f6(f), f6(PID.P90[j]), f6(PID.P50[j]), f6(PID.P10[j])]));
 must('the point forecast is the fitSmoothing forecast', PID.forecast.every((v, j) => v === DFIT['EKENE-P1'].forecast[j]), 'same');
 must('P90 <= P50 <= P10 at every step', PID.P90.every((v, j) => v <= PID.P50[j] && PID.P50[j] <= PID.P10[j]), 'ordered');
+w();
+const PIDclipSteps = PID.P90.map((v, j) => [v, j]).filter(([v]) => v === 0).map(([, j]) => j + 1);
+must('the teaching bootstrap clips only the P90', PID.P50.every((v) => v > 0) && PID.P10.every((v) => v > 0) && PIDclipSteps.length === PID.clippedToZero, `${PID.clippedToZero} ${PIDclipSteps}`);
+w(`\`clippedToZero\` is ${S(PID.clippedToZero)} on this call (nonNegative ${S(sigDefault('forecastIntervals', 'nonNegative'))}, the default, and ${S(PID.nSims)} paths): the P90 (low) at steps ${list(PIDclipSteps)} is reported as 0, and no P50 or P10 is.`);
 w();
 w(`The point forecast is exactly \`fitSmoothing\`'s. Each path starts from the fitted final level and trend; at each step it takes the one-step forecast, adds one residual drawn at random from the fitted residuals, and that simulated rate UPDATES THE STATE (level and trend) before the next step, so an early draw carries into every later step of its path.`);
 w();
@@ -850,6 +880,7 @@ const resMean = mean(DFIT['EKENE-P1'].residuals.slice(DFIT['EKENE-P1'].scoredFro
 const PIS = success(`forecastIntervals ses EKENE-P1 h ${H} seed ${SEED_PI}`, FC.forecastIntervals({ y: Y1, method: 'ses', h: H, seed: SEED_PI }));
 const sesRes = SESF['EKENE-P1'].residuals.slice(1);
 const PISu = success(`forecastIntervals ses EKENE-P1 unclipped`, FC.forecastIntervals({ y: Y1, method: 'ses', h: H, seed: SEED_PI, nonNegative: false }));
+must('the ses unclipped run is the default nSims on seed 11', PISu.nSims === FC.DEFAULTS.N_SIMS && PISu.seed === SEED_PI && PIS.nSims === PISu.nSims, `${PISu.nSims} ${PISu.seed}`);
 must('ses on EKENE-P1: the point forecast is above the P10 at step 12', PIS.forecast[H - 1] > PIS.P10[H - 1], `${PIS.forecast[H - 1]} ${PIS.P10[H - 1]}`);
 must('the ses residual mean is negative', mean(sesRes) < 0, mean(sesRes));
 const UNCENTRED = 'residuals are drawn as fitted without centring (their mean is not subtracted), so a method whose residuals have a non-zero mean drifts: on a declining well a flat method\'s paths can fall below its own point forecast';
@@ -857,7 +888,7 @@ must('the bootstrap basis states the uncentred draw', PID.basis.bootstrap.endsWi
 must('the ses bootstrap basis states it too', PIS.basis.bootstrap.endsWith(UNCENTRED), PIS.basis.bootstrap);
 w(`RESIDUALS DRAWN WITHOUT CENTRING. The engine does not subtract the residual mean before it resamples, and its basis says so in these words: "${UNCENTRED}". ses on EKENE-P1, below, is that case: a flat method on a declining well. A centred bootstrap (the mean subtracted first) is the alternative in common use (${ref('choices')}).`);
 w();
-w(`A MEDIAN AWAY FROM THE POINT FORECAST. The residuals are drawn as fitted (their mean over the damped pool here is ${f6(resMean)} bbl/d, derived). When the residuals lean one way, every path leans with them and the state carries the lean forward. ses on EKENE-P1 shows it plainly: alpha fits to 1, so each residual is a month-to-month change of the decline, mean ${f6(mean(sesRes))} bbl/d (derived). The P50 of the paths falls while the point forecast stays flat:`);
+w(`A MEDIAN AWAY FROM THE POINT FORECAST. The residuals are drawn as fitted (their mean over the damped pool here is ${f6(resMean)} bbl/d, derived). When the residuals lean one way, every path leans with them and the state carries the lean forward. ses on EKENE-P1 shows it plainly: alpha fits to 1, so each residual is a month-to-month change of the decline, mean ${f6(mean(sesRes))} bbl/d (derived). The P50 of the paths falls while the point forecast stays flat. ses on EKENE-P1, h ${H}, seed ${S(PISu.seed)}, ${S(PISu.nSims)} paths (nSims left at its default), nonNegative ${S(false)} (stated):`);
 w();
 table(['step', 'ses point forecast', 'P90 (low), unclipped', 'P50, unclipped', 'P10 (high), unclipped'], [0, 5, H - 1].map((j) => [S(j + 1), f6(PIS.forecast[j]), f6(PISu.P90[j]), f6(PISu.P50[j]), f6(PISu.P10[j])]));
 w();
@@ -888,12 +919,15 @@ w();
 const PIH5 = success(`forecastIntervals holt EKENE-P5 h ${H} seed ${SEED_PI}`, FC.forecastIntervals({ y: Y5, method: 'holt', h: H, seed: SEED_PI }));
 const PIH5u = success(`forecastIntervals holt EKENE-P5 unclipped`, FC.forecastIntervals({ y: Y5, method: 'holt', h: H, seed: SEED_PI, nonNegative: false }));
 planted(5, PIH5.clippedToZero > 0 && firstNeg > 0, PIH5.clippedToZero);
-w(`NEGATIVE RATES REPORTED AS ZERO. With \`nonNegative\` true (the default) a percentile below 0 is reported as 0 and counted in \`clippedToZero\`; the basis reads: "${PIH5.basis.nonNegative}". EKENE-P5, holt, h ${H}, seed ${SEED_PI}: ${PIH5.clippedToZero} of the ${3 * H} percentiles (derived, three per step x ${H} steps) are reported as 0. The last three steps, both ways:`);
+w(`NEGATIVE RATES REPORTED AS ZERO. With \`nonNegative\` true (the default) a percentile below 0 is reported as 0 and counted in \`clippedToZero\`; the basis reads: "${PIH5.basis.nonNegative}". EKENE-P5, holt, h ${H}, seed ${SEED_PI}, ${S(PIH5.nSims)} paths (nSims left at its default): ${PIH5.clippedToZero} of the ${3 * H} percentiles (derived, three per step x ${H} steps) are reported as 0. The last three steps, both ways:`);
 w();
-table(['step', 'P90, nonNegative true', 'P90, nonNegative false', 'P50, nonNegative true', 'P50, nonNegative false'], [H - 3, H - 2, H - 1].map((j) => [S(j + 1), f6(PIH5.P90[j]), f6(PIH5u.P90[j]), f6(PIH5.P50[j]), f6(PIH5u.P50[j])]));
+must('the holt P50 rises over the last three steps', PIH5.P50[H - 2] > PIH5.P50[H - 3] && PIH5.P50[H - 1] > PIH5.P50[H - 2], PIH5.P50.slice(H - 3));
+must('the EKENE-P5 clipping runs are the default nSims', PIH5.nSims === FC.DEFAULTS.N_SIMS && PIH5u.nSims === FC.DEFAULTS.N_SIMS, PIH5.nSims);
+must('the holt point forecast is the same clipped or not, and falls over the last three steps', [H - 3, H - 2, H - 1].every((j) => PIH5.forecast[j] === PIH5u.forecast[j] && (j === H - 3 || PIH5.forecast[j] < PIH5.forecast[j - 1])), 'same');
+table(['step', 'holt point forecast', 'P90, nonNegative true', 'P90, nonNegative false', 'P50, nonNegative true', 'P50, nonNegative false'], [H - 3, H - 2, H - 1].map((j) => [S(j + 1), f6(PIH5.forecast[j]), f6(PIH5.P90[j]), f6(PIH5u.P90[j]), f6(PIH5.P50[j]), f6(PIH5u.P50[j])]));
 must('clipping touches only the negative percentiles', ['P90', 'P50', 'P10'].every((k) => PIH5[k].every((v, j) => v === Math.max(0, PIH5u[k][j]))), 'clip');
 w();
-w(`Only the negative percentiles change; the point forecast is never clipped. A P90 reported as 0 says that at least a tenth of the paths fell below zero at that step: the method's paths ran out of rate there.`);
+w(`Only the negative percentiles change; the point forecast is never clipped. Over steps ${H - 2} to ${H} the holt point forecast falls while the P50 of its paths rises. A P90 reported as 0 says that at least a tenth of the paths fell below zero at that step: the method's paths ran out of rate there.`);
 w();
 const WID = PID.P10.map((v, j) => v - PID.P90[j]);
 w(`INTERVALS WIDEN WITH EVERY STEP. The P10 less the P90 of the damped EKENE-P1 intervals (derived): ${[0, 5, H - 1].map((j) => `step ${j + 1} ${f6(WID[j])}`).join(', ')} bbl/d; each path carries all its earlier draws.`);
