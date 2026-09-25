@@ -134,7 +134,7 @@
    "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
   },
   "d5_capstone.mjs": {
-   "md5": "91b4411164341b74296a40e07b53e1f0",
+   "md5": "a72e6c32c18a317ec432394a06b210d4",
    "command": "node d5_capstone.mjs",
    "expected": 0,
    "exit": 0,

@@ -127,7 +127,7 @@ const ORLU = (() => {
   const judgments = Object.fromEntries(Object.entries(OR_SRC).map(([id, q]) => [id, mapJudgments(q, idOf)]));
   return { seed: 70311, idOf, documents, queries, judgments, need: [...need] };
 })();
-const orS = { k: 4, k1: 1.2, b: 0.75, idfTerm: 'pressure', topQuery: 'O1', cosQuery: 'O4' };
+const orS = { method: 'bm25', k: 4, k1: 1.2, b: 0.75, stopWords: false, tfidf: 'raw counts', relevantGrade: 1, numericRelTol: 0, idfTerm: 'pressure', topQuery: 'O1', cosQuery: 'O4' };
 const orRun = success('ORLU bm25 k 4', EV.retrieve({ documents: ORLU.documents, queries: ORLU.queries, method: 'bm25', k: orS.k }));
 must('ORLU: no BM25 tie at the cutoff 4 on any query', orRun.perQuery.every((p) => !p.tieAtCutoff), orRun.perQuery.filter((p) => p.tieAtCutoff).map((p) => p.id));
 const orIdf = success('ORLU bm25 idf', EV.rankBm25({ documents: ORLU.documents, query: orS.idfTerm, k: 1 }));
@@ -195,7 +195,7 @@ const NNEWI = (() => {
   const shorts = Object.entries(NN_SRC).map(([id, q]) => ({ query: id, answer: g() < 0.5 ? SYS.A[q].short : SYS.B[q].short, reference: QUERIES[q].reference }));
   return { seed, idOf, documents, queries, judgments, shorts, size };
 })();
-const nnS = { k: 5, P: { method: 'bm25', k1: 1.5, b: 0.5 }, Q: { method: 'tfidf', sublinearTf: true }, mapGrade: 2, bootSeed: 44, nBoot: 2000, level: 0.95 };
+const nnS = { k: 5, P: { method: 'bm25', k1: 1.5, b: 0.5, stopWords: false }, Q: { method: 'tfidf', sublinearTf: true, stopWords: false }, mapGrade: 2, ndcgGain: 'exponential', ndcgGrade: 1, noRelevant: 'exclude', bootMetric: 'nDCG at 5, linear gain, grade 1', bootSeed: 44, nBoot: 2000, level: 0.95, paired: true, numericRelTol: 0 };
 const nnP = success('NNEWI P run', EV.retrieve({ documents: NNEWI.documents, queries: NNEWI.queries, method: 'bm25', k: nnS.k, k1: nnS.P.k1, b: nnS.P.b }));
 const nnQ = success('NNEWI Q run', EV.retrieve({ documents: NNEWI.documents, queries: NNEWI.queries, method: 'tfidf', k: nnS.k, sublinearTf: true }));
 must('NNEWI: forty-five passages', NNEWI.documents.length === 45, NNEWI.documents.length);
@@ -272,7 +272,7 @@ const AWKA = (() => {
   const rows = shuffle(CALIB.map((r, i) => i), g).slice(0, 122).sort((x, y) => x - y).map((i) => CALIB[i]);
   return { seed, ratings: { a, b }, calibration: { yTrue: rows.map((r) => r.relevant), probabilities: rows.map((r) => r.probability) } };
 })();
-const awS = { labels: [0, 1, 2, 3], bins: 8 };
+const awS = { labels: [0, 1, 2, 3], weights: ['none', 'linear'], bins: 8, edgeRule: 'an interior edge opens the upper bin' };
 const awKN = success('AWKA kappa none', EV.cohenKappa({ a: AWKA.ratings.a, b: AWKA.ratings.b, labels: awS.labels }));
 const awKL = success('AWKA kappa linear', EV.cohenKappa({ a: AWKA.ratings.a, b: AWKA.ratings.b, labels: awS.labels, weights: 'linear' }));
 const awC = success('AWKA calibration 8 bins', EV.calibration({ yTrue: AWKA.calibration.yTrue, probabilities: AWKA.calibration.probabilities, bins: awS.bins }));
