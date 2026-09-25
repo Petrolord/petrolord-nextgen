@@ -1,0 +1,136 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D4 Expert m02, percentiles and their labels. Figures from the course's
+# quantile rule table, the exceedance labels, the teaching run, the EKENE-P5
+# holt run with and without nonNegative, and the widening intervals.
+
+K = [1, 3, 0, 2, 0, 3, 1, 2, 1, 0, 3, 2, 3, 0, 1]
+_i = iter(K)
+def x(p, c, ds, e): q(next(_i), p, c, ds, e)
+
+# 1
+x("The platform's quantile is applied to the sorted values 1, 2, ..., 10. What is their 10th percentile, and which case of the rule gives it?",
+ "1.500000, the mean of the 1st and 2nd smallest, since idx 1 is whole and n is even",
+ ["1, the smallest value, because an index of 1 names the 1st smallest outright",
+  "2, the 2nd smallest, because a whole index takes the (idx+1)-th smallest for any n",
+  "Whatever linear interpolation between the 1st and 2nd sorted values gives at a p of 0.1"],
+ "idx = n x p = 10 x 0.1 = 1, a whole number, and n is even, so the rule takes the mean of the idx-th and (idx+1)-th smallest: 1.500000. Taking the 1st smallest outright is the case of a fractional index. The (idx+1)-th smallest is the rule for a whole index with n odd. Linear interpolation is the numpy default, a different rule the engine does not use.")
+
+# 2
+x("A bootstrap is run with nSims 9. Which of the 9 simulated values at a step is reported as the P90 (low)?",
+ "The smallest, since idx 0.9 is not whole and the ceil(idx)-th smallest is taken",
+ ["The mean of the 1st and 2nd smallest, the case every path count shares",
+  "The largest of the 9, reading the 90 in the label as the 90th percentile of the paths",
+  "A value interpolated 90 percent of the way from the 1st smallest to the 2nd"],
+ "The P90 (low) is the 10th percentile. idx = 9 x 0.1 = 0.9 is fractional, so the rule takes the ceil(idx)-th smallest, the 1st: the course's table gives 1.000000 for the values 1 to 9. The mean of two values is the case of a whole index with an even count. The largest value would be the high end, which the label does not name. Interpolation is the numpy rule.")
+
+# 3
+x("Why is every percentile of a bootstrap at the default 1000 paths the mean of two simulated values?",
+ "1000 x 0.1, 1000 x 0.5 and 1000 x 0.9 are whole and 1000 is even, so the idx-th and (idx+1)-th are averaged",
+ ["The engine averages each path with the next one before it sorts, to halve the noise of the draws",
+  "Paths are drawn in pairs from the stream, and each pair gives a single simulated value at every step",
+  "The rule always averages two values whatever nSims is, as linear interpolation does"],
+ "At 1000 paths every index, 100, 500 and 900, is whole and the count is even, so each percentile is the mean of two neighbouring sorted values; at step 1 of the teaching run the P90 (low) 174.139087 is the mean of the 100th and 101st smallest. No path is averaged with another, and paths are drawn one at a time, step by step. With an odd count or a fractional index the rule reads a single value.")
+
+# 4
+x("The teaching run is repeated with 999 paths on the same seed. What changes in the way each percentile is read?",
+ "Every index turns fractional, so each percentile is a single simulated value, and the 999 paths are the first 999 of the 1000",
+ ["Nothing at all, since 999 and 1000 both give whole indices at 0.1, 0.5 and 0.9",
+  "The call is refused, because nSims must be even for a mean of two values to exist",
+  "A fresh stream is drawn, so the 999 paths share no draw with the 1000 on that seed"],
+ "999 x 0.1 is 99.900000, and likewise at 0.5 and 0.9 the index is not whole, so each percentile is the ceil(idx)-th smallest value; the table gives 100.000000 at p 0.1 for 999 sorted values. The stream runs path by path, so the first 999 paths are the same draws as before and the comparison isolates the rule and one path. An odd nSims is accepted; the range is 1 to 100000.")
+
+# 5
+x("`forecastIntervals` returns arrays keyed `P90`, `P50` and `P10`. Which percentile of the simulated paths sits under the key `P90`?",
+ "The 10th percentile, the low case, which 90 percent of the paths meet or exceed",
+ ["The 90th percentile, the high case, which only a tenth of the paths exceed",
+  "The 90th percentile of the residual pool, added to the point forecast at each step",
+  "Either percentile, since nonNegative decides which end of the paths the label names"],
+ "Production is an outcome where more is better, and the platform labels outcomes by exceedance, so P90 is the low case, the 10th percentile of the simulated paths. The 90th percentile is P10 (high). The percentiles are read from the simulated rates at each step; the residual pool only feeds the draws. nonNegative only reports a negative percentile as 0; it never moves a label.")
+
+# 6
+x("The platform's definition reads: \"P90 means a 90% probability the actual quantity meets or exceeds this value, per SPE PRMS.\" Why does that put P90 at the low end of a set of simulated rates?",
+ "A rate that 90 percent of the paths meet or exceed leaves only a tenth of them below it",
+ ["Production is taken as an outcome where less is better, so the platform reverses the percentile",
+  "The engine sorts the simulated rates from the highest to the lowest before it reads the quantile",
+  "Only reserves follow that convention, and the engine extends it by flipping the sign of each rate"],
+ "Meeting or exceeding a value with probability 0.9 means only a tenth of the outcomes fall below it, which is the 10th percentile: the low case. The engine's basis says production is an outcome where more is better. The rule reads the idx-th smallest values, sorted from the lowest. No sign is flipped anywhere; the convention is the platform's for every outcome it reports.")
+
+# 7
+x("A report prints, for one step of a bootstrap, P90 (low) 225.708211 beside P10 (high) 174.139087. What does the course conclude?",
+ "The labels were swapped somewhere between the engine and the page, since P90 never exceeds P10",
+ ["The paths drifted upward at that step, and such a drift can lift the low case above the high case",
+  "nonNegative clipped the P10 (high) at that step, so the two figures are legal as they stand",
+  "With few distinct residuals the quantile rule may order the two percentiles either way round"],
+ "The 10th percentile of a set of values can never exceed its 90th, so P90 (low) is at or below P50, and P50 at or below P10 (high), at every step; the course checks it on the teaching run, where step 1 reads 174.139087 low and 225.708211 high. A drift moves every percentile together without reordering them. Clipping only raises a negative percentile to 0. The quantile rule reads sorted values, so its order is fixed.")
+
+# 8
+x("The teaching bootstrap, damped on EKENE-P1 with seed 11 and 1000 paths, reports `clippedToZero` 3. What are the three?",
+ "The P90 (low) at steps 10, 11 and 12, each negative as simulated and reported as 0",
+ ["Three paths that fell below zero and were removed before any percentile was read",
+  "Three steps at which the damped point forecast went below zero and was reported as 0",
+  "The P90, the P50 and the P10 at step 12, all three below zero and reported as 0 together"],
+ "With nonNegative true, a percentile below 0 is reported as 0 and counted; on the teaching run that happens to the P90 (low) at steps 10, 11 and 12, and no P50 or P10 is touched. No path is removed: the rule acts on percentiles after they are read. The point forecast is never clipped, and damped's is 169.556510 at step 12. The P50 at step 12 is 137.469798.")
+
+# 9
+x("Holt on EKENE-P5, h 12, seed 11, 1000 paths reports 11 of its 36 percentiles as 0. At step 12 the P90 reads 0.000000 with nonNegative true and -58.408958 with it false. What is the P50 at step 12 in the two runs?",
+ "138.941534 in both, since only a negative percentile is changed",
+ ["0.000000 with nonNegative true, since the clipping resets the whole interval at that step",
+  "138.941534 with it false, and 2.887394, the point forecast, with it true",
+  "Lower with nonNegative true, as paths clipped to 0 pull the median of the paths down"],
+ "The rule changes only a percentile below 0, and the P50 at step 12 is 138.941534 either way; the paths are simulated in full both times. The interval is not reset, and the P50 is never replaced by the point forecast, which is 2.887394. Paths are never clipped, only reported percentiles, so nothing pulls the median.")
+
+# 10
+x("A bootstrap reports the P90 (low) at some step as 0. What does that reported 0 say?",
+ "At least a tenth of the paths fell below zero at that step: the method's paths ran out of rate",
+ ["The well is forecast to be shut in from that step on, at a rate of exactly zero",
+  "A zero rate in the series itself was carried forward into the interval at that step",
+  "Every one of the paths reached zero at that step, so the interval has collapsed onto one single value"],
+ "The P90 (low) is the 10th percentile of the paths, so a negative one means at least a tenth of the paths ended below zero, and nonNegative reports it as 0 and counts it. It is no forecast of a shut-in and no rate the engine measured. The other percentiles at that step are read from the same paths and are usually far above 0; on the teaching run the P10 (high) at step 12 is 324.803671.")
+
+# 11
+x("Holt fitted on EKENE-P5 crosses zero between step 16 and step 17. With nonNegative true and h 24, what point forecast does `forecastIntervals` return at step 17?",
+ "-0.623541, as the point forecast is never clipped",
+ ["0.000000, reported as 0 and counted in `clippedToZero`",
+  "0.078646, the last value above zero, held from step 16 on",
+  "None: a point forecast below zero ends the call with a refusal naming `h`"],
+ "The point forecast of `forecastIntervals` is exactly the fitted method's h-step forecast, and the zero rule acts on percentiles only; holt's line is returned as computed, -0.623541 at step 17. `clippedToZero` counts percentiles alone. Nothing holds a forecast at its last positive value, and a negative forecast is a result like any other.")
+
+# 12
+x("On the teaching run the P10 (high) less the P90 (low) is 51.569125 at step 1, 178.424168 at step 6 and 324.803671 at step 12. Why does the width grow with the step?",
+ "Each path carries all its earlier draws through the state update, so the paths fan out",
+ ["The engine adds one more month of forecast errors to the residual pool at every step",
+  "Residuals are scaled up by the step number before they are drawn, as analytic intervals are",
+  "The interval is a fixed share of the point forecast, and that share grows as the forecast falls"],
+ "The simulated value updates the level and trend, so by step 6 each path holds six draws, each moving the state the next starts from, and the spread of the paths grows. The pool is fixed at the scored in-sample residuals. The engine gives no analytic interval and scales no residual. The width has no fixed ratio to the point forecast, which falls only from 204.969642 to 169.556510.")
+
+# 13
+x("At step 12 of the teaching run the width of the interval equals the P10 (high), 324.803671. What should a reader do before quoting that width in a decision?",
+ "Read the run with nonNegative false as well, since a P90 reported as 0 leaves the width measuring the high side alone",
+ ["Double the width, since the zero rule halves every interval it touches at a step",
+  "Quote the width as printed, because the zero rule never changes a width",
+  "Rerun with more paths until the P90 (low) climbs above 0 at that step"],
+ "Once the low case is reported as 0 the width stops measuring the spread of the paths below the middle; reading the run with nonNegative false shows the simulated P90, and the course asks the reader to say which width is quoted. No rule halves or doubles anything. The zero rule does change the width here, which is the point. More paths steady the percentiles; at 10000 paths the P90 at step 12 is still 0.000000.")
+
+# 14
+x("`fitSmoothing` accepts h 0 and answers with an empty forecast. What does `forecastIntervals` do when passed h 0?",
+ "Refuses it, naming `h`: \"h must be a whole number from 1 to 10000\"",
+ ["It returns the residual pool with no percentiles, the way the fit returns an empty forecast",
+  "Uses h 12, the horizon of the teaching bootstrap, whenever h is 0 or left out of the call",
+  "Percentiles come back for step 0, which is the last month of the series itself"],
+ "The bootstrap forecasts at least one step, so its h runs from 1, and h 0 is refused in the engine's words quoted. The fit's rule, from 0 to 10000, is a different rule on a different function. No default horizon of 12 exists; 12 is simply the horizon the course chose for its teaching run. Step 1 is the first month past the series; there is no step 0.")
+
+# 15
+x("A second tool reads percentiles by linear interpolation between sorted values, the numpy default. What does the course advise before its P90 is set beside this engine's?",
+ "Check which quantile rule and which label convention it uses before comparing any figure",
+ ["Compare them directly, since every quantile rule gives one and the same value on 1000 sorted paths",
+  "Allow a tolerance of 1.00e-12 between the two, the band the engine keeps on percentiles",
+  "Trust the numpy figure, since interpolation is exact where the platform rule rounds"],
+ "The quantile and the P labels are both stated choices, each with an alternative in common use: linear interpolation, and P90 read as the 90th percentile. Either can move a figure, so both are checked first. Two rules can differ on the same sorted values. There is no band on a percentile; 1.00e-12 is the tie band of the grid and the ranking. The platform rule is exact on the sorted values, as interpolation is by its own definition.")
+
+assert next(_i, None) is None
+emit(Q, '/root/dai-wip-forecastml/banks/d4a_m02.json', expect_n=15)
+finish()

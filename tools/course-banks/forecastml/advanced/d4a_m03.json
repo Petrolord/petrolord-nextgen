@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Where does `arpsForecast` get its decline curve from?",
+  "options": [
+   "Its own least-squares Arps fit, written for monthly steps and checked against the decline curve engine",
+   "A Holt fit on the logarithm of the rates, read back afterwards as the equivalent Arps curve",
+   "fitArpsModel for the fit, and a hyperbolic formula of its own for the forecasts past the last month",
+   "engines/dca/arps.js, whose fitArpsModel fits and calculateArpsHyperbolic forecasts, imported unchanged"
+  ],
+  "answer": 3,
+  "explanation": "The basis names both imported functions, and nothing about Arps is re-implemented in the forecasting engine; the decline curve analysis course teaches the equations. There is no second fit to check against, no smoothing method stands in for Arps, and the forecasts come from calculateArpsHyperbolic, the decline curve engine's own function."
+ },
+ {
+  "prompt": "On EKENE-P1 the hyperbolic fit has RMSE 12.956885, the exponential 42.600547 and the harmonic 122.013020. Why does Auto-Select return Hyperbolic?",
+  "options": [
+   "It keeps the model with the smallest Di, the gentlest decline of the three it fits",
+   "Auto-Select keeps the lowest RMSE of the three models",
+   "The hyperbolic model is the default whenever the fitted b lies between 0 and 1",
+   "Auto-Select returns the model the well was generated from, which it reads from the series"
+  ],
+  "answer": 1,
+  "explanation": "The basis: \"Auto-Select takes the lowest RMSE\", and the hyperbolic fit's 12.956885 is lowest. The smallest Di on EKENE-P1 is the exponential's 0.036564, so a Di rule would pick the exponential. No b range makes a model the default. The engine reads only the rates; it knows nothing of how the synthetic well was drawn."
+ },
+ {
+  "prompt": "EKENE-P1's Arps fit returns Di 0.060069. In what unit is that figure?",
+  "options": [
+   "Per month, because month k of the series is passed to fitArpsModel as day k",
+   "Per day, the unit in which fitArpsModel measures time on every fit it makes",
+   "Per year, after the engine converts the fit's days to a calendar before returning",
+   "As an effective decline over the 48 months, a fraction that carries no time unit"
+  ],
+  "answer": 0,
+  "explanation": "The basis: \"step k is passed as day k, so qi is per step and Di per step\", and a step here is a month. fitArpsModel does work in days, but the days it is handed are months, so the figure is per month; the generator stated 0.06 per month for this well. The engine converts nothing, and a per-day, per-year or effective figure would be a different number."
+ },
+ {
+  "prompt": "EKENE-P1's fitted b prints 0.500000. A script tests the returned b for equality with 0.5. What does the test find?",
+  "options": [
+   "Equal, since the grid runs from 0.05 by 0.05 to 2 and 0.5 is one of its points",
+   "Equal, because the engine rounds every fitted b to six decimals before it hands the fit back to the caller",
+   "Not equal: the b grid builds its values by adding steps in floating point, and this one is off by 5.55e-17",
+   "Not equal, because 3 percent noise moved the fitted b off the generator's stated 0.5"
+  ],
+  "answer": 2,
+  "explanation": "The course prints the difference before it says so: fitArpsModel's b grid accumulates its steps in floating point, so a grid value is not the decimal it prints as, here by 5.55e-17. That the grid passes near 0.5 does not make the value exactly 0.5, and the engine returns b unrounded. The noise does not move b off a grid point; b is always one of the grid's values."
+ },
+ {
+  "prompt": "Auto-Select on EKENE-P2 uses 45 of its 48 months. What time index does month 25, the first after the shut-in, carry in the fit?",
+  "options": [
+   "22, as the dropped months close up and every later month moves forward three",
+   "0, since the fit restarts its clock at the first month after a shut-in ends",
+   "25: later months keep their own index, so the gap stays in the time axis",
+   "None: the first month after a shut-in is dropped too, as a restart transient"
+  ],
+  "answer": 2,
+  "explanation": "fitArpsModel drops the three zero months, and the months after them are still passed as their own days, so month 25 stays at 25. Closing the gap would compress the decline in time. t = 0 sits at the first positive value of the whole series, which on EKENE-P2 is index 0. Only zero and negative rates are dropped: 48 less 3 is 45."
+ },
+ {
+  "prompt": "Why does fitArpsModel drop zero rates before it fits?",
+  "options": [
+   "Each model is a line through the rates on the log, reciprocal or q^-b scale, and none is defined at 0",
+   "Zeros are outliers that the data quality course would remove, and the Arps fit removes them on that course's behalf",
+   "Dropping the zeros lifts R2, which is the figure Auto-Select uses to choose between the exponential, harmonic and hyperbolic",
+   "The smoothing methods drop zero months too, so the two kinds of fit see the same months"
+  ],
+  "answer": 0,
+  "explanation": "The fits are least-squares lines on the log, reciprocal or q^-b scale, and a rate of 0 has no value on any of them, so shut-in months are dropped: \"fitArpsModel drops zero and negative values (shut-in months) before fitting\". A shut-in month is a real value. Auto-Select chooses by the lowest RMSE. The smoothing methods take a zero as a value and fit through it."
+ },
+ {
+  "prompt": "Two months of 0 are put in front of EKENE-P2 and `arpsForecast` is run again. What does the result report about where time starts?",
+  "options": [
+   "`t0Index` 0, with the two leading zeros fitted as the first two points of the decline, rates like any other",
+   "A refusal naming `y`, because a series may not open on a zero rate",
+   "qi read at index 0 and carried back across the zeros, with `t0Index` 2",
+   "`t0Index` 2 and 2 months dropped, with `fitted` null before index 2 and qi the rate at index 2"
+  ],
+  "answer": 3,
+  "explanation": "t = 0 is the first positive value, and the basis says so: \"t = 0 at index 2, the first positive value\". The zeros are dropped before the fit, and fitted values before index 2 are null. Leading zeros are accepted; the only positive-count rule is at least 3. qi is the rate at t = 0, which is index 2 here."
+ },
+ {
+  "prompt": "`arpsForecast` is passed 5 months, two of them producing. What comes back?",
+  "options": [
+   "A fit through the 2 producing months, with a warning that R2 is undefined on two points",
+   "A refusal naming `y`: \"y has 2 positive values: fitArpsModel needs at least 3 (it drops zero and negative rates)\"",
+   "Every zero is replaced by the smallest positive rate given, and all 5 months are fitted",
+   "Refused with `h` named, since 2 producing months cannot support any forecast horizon"
+  ],
+  "answer": 1,
+  "explanation": "Zeros are dropped before the fit, and fitArpsModel needs at least 3 positive values; the refusal names `y` in the words quoted. The boundary is 3 fitted and 2 refused, with no warning route. Nothing is filled or replaced: zeros are dropped. h has its own rule, 0 to 10000, unrelated to the count of positive months."
+ },
+ {
+  "prompt": "The rising series 100, 120, 150, 190, 240 is passed to `arpsForecast` with Auto-Select. Why is it refused?",
+  "options": [
+   "Every model's least-squares line slopes the wrong way, giving Di <= 0, so no fit has finite qi > 0 and Di > 0",
+   "Auto-Select finds a harmonic fit with a negative Di and returns it anyway, flagged by an R2 that falls below 0 on those five months",
+   "An exponential growth curve is fitted and returned, since the engine treats a rising well as an Arps case with Di below 0",
+   "The series is shorter than the 6 months the Arps fit needs before any model is tried"
+  ],
+  "answer": 0,
+  "explanation": "The engine's words: \"y gives no Arps fit: fitArpsModel found no exponential, harmonic or hyperbolic fit with finite qi > 0 and Di > 0 on the 5 positive values\", and its parenthesis says a line that shows no decline gives Di <= 0. No fit with Di of 0 or below is returned, as a growth curve or otherwise. The least the fit accepts is 3 positive values, and 5 are here."
+ },
+ {
+  "prompt": "In a comparison, the training window at one origin gives `fitArpsModel` only 2 positive months. What happens to the comparison?",
+  "options": [
+   "Refused as a whole, naming `y`, as `arpsForecast` is on the same months",
+   "Arps is ranked last, behind every smoothing method, with its metrics set to null",
+   "The arps row takes the naive forecast at that origin, so every method keeps a figure",
+   "The arps row carries an error and no metrics and is left unranked, while the smoothing methods are ranked"
+  ],
+  "answer": 3,
+  "explanation": "In a comparison the same condition leaves the arps row without numbers: on the stated series 900, 880, 0, 0, 0, 0, 0, 0, 870, 860, 850, 845 from first origin 6, its error reads \"at origin 6 the training window has 2 positive values: fitArpsModel needs at least 3 (it drops zero and negative rates)\", and the smoothing methods rank ses, damped, holt. The call is not refused. An unranked method is never placed last. Nothing stands in for a failed fit."
+ },
+ {
+  "prompt": "Auto-Select chooses Exponential on EKENE-P3, with b 0.000000 and RMSE 100.897804. What planted structure keeps one Arps curve from following this well?",
+  "options": [
+   "Three months of shut-in at a rate of 0, with a workover lift in the months after it",
+   "A facility-limited plateau held at 1500.000000 for months 0 to 8 before the decline",
+   "Allocation noise of 12 percent on every month, which blurs the decline's shape",
+   "Only three months of production, too few for the hyperbolic grid to settle on a b"
+  ],
+  "answer": 1,
+  "explanation": "EKENE-P3 holds exactly 1500.000000 for months 0 to 8 and declines from that rate after, and a single Arps curve declines from t = 0. The shut-in and workover are EKENE-P2's, the 12 percent noise is EKENE-P4's, and three months on production is EKENE-P6. The course states each well's planted structure."
+ },
+ {
+  "prompt": "EKENE-P4's Arps fit has R2 0.898126, the lowest of the five long wells. Which reading does the course support?",
+  "options": [
+   "EKENE-P4's Arps baseline will score the worst MASE of the five long wells in any backtest the course could run",
+   "The hyperbolic fit failed a check at that R2 and Auto-Select fell back to the exponential",
+   "An Arps curve follows this noisy well less closely than the others, on months the fit has already seen",
+   "An R2 below 0.9 makes the engine refuse to forecast the well past its last month"
+  ],
+  "answer": 2,
+  "explanation": "R2 describes the fit on the months it was fitted to, and EKENE-P4 carries 12 percent allocation noise. Whether its baseline forecasts well is a question for a backtest on the same origins, and the course prints no such backtest comparing the five wells. Auto-Select returns Hyperbolic on EKENE-P4. No R2 threshold refuses a forecast."
+ },
+ {
+  "prompt": "EKENE-P2's Auto-Select fit returns b 0.950000, while the generator stated b 0.3 for its underlying decline. What does the course make of the gap?",
+  "options": [
+   "The fit misread b because each month was passed to it as a day rather than a month",
+   "The fit follows the whole record, lifted months included, so one curve is stretched over two stretches of history",
+   "0.950000 is the top of the b grid, so the search simply stopped at its upper edge",
+   "The three shut-in zeros were fitted as rates and pulled b up toward the harmonic"
+  ],
+  "answer": 1,
+  "explanation": "The fit reads every positive month, the workover-lifted ones included, and finds the single curve that best follows all of them; a b this far from the stated one hints that one Arps curve does not describe the whole history. Passing a month as a day sets the unit of Di and has no bearing on b. The b grid runs to 2. The zeros are dropped before the fit."
+ },
+ {
+  "prompt": "How does the course decide whether the Arps baseline forecasts a well better than a smoothing method?",
+  "options": [
+   "R2 decides it: on EKENE-P1 the Arps fit's 0.997703 already shows the baseline is the better forecast",
+   "Compare the RMSE of each fit, which Auto-Select has minimised on the months before the last",
+   "The step 12 forecasts decide, the lower of the two being the more cautious and so the better",
+   "A backtest of both from the same origins, since an R2 scores only months the fit already saw"
+  ],
+  "answer": 3,
+  "explanation": "The Arps fit and its R2 describe months already seen; a forecast is judged on months it never saw, from the same origins for every method, which is what `compareWithArps` does. An in-sample RMSE has the same limit as R2. A lower forecast is no better for being lower; the metric on held-out months decides."
+ },
+ {
+  "prompt": "EKENE-P1 fitted with `modelType` 'Harmonic' returns b 1.000000 and RMSE 122.013020. What does naming a model do?",
+  "options": [
+   "Fits that model alone and returns it, whatever its RMSE against the other two",
+   "Fits all three models and returns the named one only when its RMSE is the lowest",
+   "Refuses the call unless the named model is the one Auto-Select would have chosen",
+   "Fixes b at the named model's value, then fits qi and Di by Auto-Select's own rule"
+  ],
+  "answer": 0,
+  "explanation": "Auto-Select, the default, takes the lowest RMSE; naming a model fits that one alone, and the harmonic's RMSE is the highest of the three here. Nothing is compared or refused: only a name the engine does not offer is refused, in the words \"modelType must be 'Auto-Select', 'Exponential', 'Harmonic' or 'Hyperbolic'\". qi and Di are the named model's own least-squares fit."
+ }
+]
