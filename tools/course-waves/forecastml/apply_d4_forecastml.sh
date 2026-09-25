@@ -76,11 +76,11 @@ FILES="$SEEDS
 $GOLIVE"
 digest_for() {
   case $1 in
-    20261103_d4_forecastml_course             ) echo UNPINNED_UNTIL_THE_SEED_LADDER_COMMIT ;;
-    20261103_d4_forecastml_beginner_deep      ) echo UNPINNED_UNTIL_THE_SEED_LADDER_COMMIT ;;
-    20261103_d4_forecastml_intermediate_deep  ) echo UNPINNED_UNTIL_THE_SEED_LADDER_COMMIT ;;
-    20261103_d4_forecastml_advanced_deep      ) echo UNPINNED_UNTIL_THE_SEED_LADDER_COMMIT ;;
-    20261103_d4_forecastml_go_live            ) echo UNPINNED_UNTIL_THE_SEED_LADDER_COMMIT ;;
+    20261103_d4_forecastml_course             ) echo 593f9a356e6379b0e6141cf0929b521398bad634e2af69d05b3e8f28a6a88fc9 ;;
+    20261103_d4_forecastml_beginner_deep      ) echo dd96db8bf9c95cddd741bf9ef7b27c78fa2d4a063e413b8bf57964af94cadf03 ;;
+    20261103_d4_forecastml_intermediate_deep  ) echo fde06ac26d1ad311e43b5a0f4edf7730df3d39ddb27efbc0b513f71b1cb9055c ;;
+    20261103_d4_forecastml_advanced_deep      ) echo 386e6d1f17bf4629e073149f40e2b4dfdac3f8e9c4978ec8020a151e6ab1380c ;;
+    20261103_d4_forecastml_go_live            ) echo 6f66bb3c7d3f5c3343e27e7c0c7934b1bea9e8ecc6bb097055572d958f1d8e77 ;;
     *) echo UNPINNED ;;
   esac
 }
@@ -200,7 +200,8 @@ case "${1:-verify}" in
   pin)
     [ $# -ge 2 ] || { echo "usage: $0 pin <ref>"; exit 2; }
     for f in $FILES; do
-      git -C "$NG_REPO" show "$2:migrations/$f.sql" 2>/dev/null | sha256sum | awk -v n="$f" '{printf "    %-38s) echo %s ;;\n", n, $1}'
+      body=$(git -C "$NG_REPO" show "$2:migrations/$f.sql" 2>/dev/null) || refuse "$f.sql is not in $2 in $NG_REPO; set NG_REPO"
+      printf '%s\n' "$body" | sha256sum | awk -v n="$f" '{printf "    %-38s) echo %s ;;\n", n, $1}'
     done ;;
   dryrun)      fetch; dryrun ;;
   attempts)    fetch; say "target: PRODUCTION (read-only)"; attempts ;;
