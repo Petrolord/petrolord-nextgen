@@ -20,7 +20,7 @@ Each sMAPE here sits a little below its MAPE, and every method forecast high on 
 
 ## The same miss, high and low
 
-With an actual of 100 (stated), a forecast of 150 misses high by 50 and scores an sMAPE of 40.000000. A forecast of 50 misses low by 50 and scores 66.666667. MAPE is 50.000000 for both, because MAPE divides by the actual alone. In sMAPE the forecast is in the denominator: a high forecast makes the denominator bigger and the term smaller, and a low forecast does the reverse.
+With an actual of 100, a forecast of 150 misses high by 50 and scores an sMAPE of 40.000000. A forecast of 50 misses low by 50 and scores 66.666667. MAPE is 50.000000 for both, because MAPE divides by the actual alone. In sMAPE the forecast is in the denominator: a high forecast makes the denominator bigger and the term smaller, and a low forecast does the reverse.
 
 So the name is misleading. sMAPE is symmetric in the actual and the forecast, which may be swapped without changing a term. It is not symmetric in the error: the same size of miss costs more when the forecast is low.
 

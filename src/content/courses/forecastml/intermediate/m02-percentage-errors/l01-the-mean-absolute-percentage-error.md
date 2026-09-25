@@ -22,7 +22,7 @@ Holt's typical miss of 6.783515 bbl/d is 2.781120 percent of the rates it was sc
 
 MAPE divides by the actual, and only by the actual. So the same miss costs more on a low month than on a high one. On a declining well, the late months are the low months, and a forecast scored on a late hold-out pays for its misses at a higher rate than the same misses early in the life of the well.
 
-The size of the miss is all that counts in the numerator. With an actual of 100 (stated), a forecast of 150 and a forecast of 50 both miss by 50, and MAPE is 50.000000 for each. The forecast itself never enters the denominator. That symmetry is worth holding on to, because the next percentage measure in this module does not have it.
+The size of the miss is all that counts in the numerator. With an actual of 100, a forecast of 150 and a forecast of 50 both miss by 50, and MAPE is 50.000000 for each. The forecast itself never enters the denominator. That symmetry is worth holding on to, because the next percentage measure in this module does not have it.
 
 ## The rule for a zero actual
 
