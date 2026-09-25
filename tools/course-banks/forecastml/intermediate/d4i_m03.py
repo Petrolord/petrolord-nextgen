@@ -74,9 +74,9 @@ q(1, "One `accuracy` call is passed no insample at all, and another is passed an
 
 q(3, "A learner passes `accuracy` a lag m of 0. What comes back?",
  "A refusal naming `m`, in the engine's words \"m must be a whole number, 1 or more (1 is the non-seasonal naive; 12 is a monthly seasonal naive)\"",
- ["MASE scaled by the forecast's own errors, since a lag of 0 compares each month with itself",
-  "MASE returned as null, with a reason saying the lag-0 naive forecast has no error",
-  "Each metric computed with m reset to 1, the default, and a warning that the lag was changed"],
+ ["MASE scaled by the forecast's own errors, since a lag of 0 compares each month with itself and so leaves the naive forecast with no difference to average",
+  "MASE returned as null, with a reason in `notes` saying the lag-0 naive forecast has no in-sample error, while ME, MAE, RMSE, MAPE and sMAPE stay numbers",
+  "Each metric computed with m reset to 1, the default, and a warning in the result that the lag passed was changed before the naive scale was taken"],
  "A lag of 0 is refused by name with that message. Nothing is rescaled or reset: a refusal returns no metrics, and a null with a reason is kept for a scale the arithmetic cannot give, such as a flat training window.")
 
 q(3, "With m set to 12, a training series of exactly 12 months is handed to `accuracy`. How does the scaled error come back?",

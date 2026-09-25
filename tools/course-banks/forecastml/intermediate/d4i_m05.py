@@ -95,9 +95,9 @@ q(3, "The same EKENE-P3 backtest started at first origin 12, past the plateau, g
 
 q(2, "Which reason does the EKENE-P3 damped backtest from first origin 6 give for its null MASE?",
  "\"MASE is undefined: at origin 6 the training window has 6 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0\"",
- ["The 9-value reason an `accuracy` call gives when the whole plateau is passed as its training series",
-  "\"MASE needs insample (the training series) to scale by its in-sample naive error\", since a backtest passes none",
-  "A refusal naming `y`, as a series whose first months repeat one rate is not accepted"],
+ ["\"MASE is undefined: insample has 9 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0\", as `accuracy` gives",
+  "\"MASE needs insample (the training series) to scale by its in-sample naive error\", since a backtest passes no training series of its own to the scaled error at any origin",
+  "A refusal naming `y`, as a series whose first months repeat one rate exactly is not accepted by `backtest`, and the call returns no metrics for any of its origins at all"],
  "A backtest reason names the origin it comes from, so the reason names origin 6 and its window of 6 values, in the engine's own words. The 9-value reason belongs to an `accuracy` call on the whole plateau, and a backtest builds each origin's training series itself. The series is accepted.")
 
 q(2, "Across the teaching backtest the training-window scale falls from 36.956522 at origin 24 to 25.682927 at origin 42. What must be true of the months each later window adds?",

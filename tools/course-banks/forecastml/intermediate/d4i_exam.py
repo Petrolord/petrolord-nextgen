@@ -78,9 +78,9 @@ q(3, "Which figures are holt's, damped's and ses's MAPE when each is scored on m
 
 q(3, "On the EKENE-P2 shut-in hold-out, holt's sMAPE term is 8.157702 at month 20 and 6.583278 at month 21. Which reading is right?",
  "Month 20 was forecast low by 34.471530 and month 21 high by 24.778760, the larger miss giving the larger term",
- ["Both months were forecast low, and month 21's term is smaller because its actual was larger",
-  "Month 21's term is smaller because sMAPE halves the term of any month where the forecast ran high",
-  "Both terms count 200 at the top, being in the months before the three months of shut-in"],
+ ["Both months were forecast low, and month 21's term is smaller because its actual of 364.000000 was larger",
+  "Month 21's term is smaller because sMAPE halves the term of any month where the forecast ran above the well",
+  "Both terms count 200 at the top, being in the months just before the three months of shut-in at rate 0"],
  "The errors are 34.471530 at month 20 (actual 439.800000, forecast 405.328470, forecast low) and -24.778760 at month 21 (actual 364.000000, forecast 388.778760, forecast high). The larger miss gives the larger term. sMAPE halves nothing, and only a zero actual with a non-zero forecast scores 200.")
 
 q(1, "On the EKENE-P2 shut-in hold-out RMSE is 258.102385 against MAE 209.968065. Why is the gap so wide?",
@@ -151,7 +151,7 @@ q(1, "A backtest of holt on EKENE-P1 uses first origin 24, horizon 6 and step 3.
  ["They tile the series exactly, each month forecast once, as in the teaching backtest",
   "Gaps open between them, three months left unforecast after every origin in turn",
   "They are refused, since a step shorter than the horizon is not accepted by the engine"],
- "Origin o forecasts months o to o + 5, and with step 3 the next origin is o + 3, so months o + 3 to o + 5 are forecast twice, once from each origin. The teaching backtest tiles because its step equals its horizon, 6. A gap would need a step longer than the horizon, and the comparisons of this tier run horizon 6 with step 3.")
+ "Origin o forecasts months o to o + 5, and with step 3 the next origin is o + 3, so months o + 3 to o + 5 are forecast twice, once from each origin. The teaching backtest tiles because its step equals its horizon, 6. A gap would need a step longer than the horizon, and the EKENE-P2 comparisons after the workover run horizon 6 with step 3.")
 
 q(2, "A backtest is passed `refit` as a word where true or false belongs. What comes back?",
  "A refusal naming `refit`: \"refit must be true or false\"",
@@ -225,11 +225,11 @@ q(2, "Of the seven origins in EKENE-P3's damped run from 6, one prints `maseScal
  "Origin 6's scale is 0 (`maseScale` null), and the other origins read 18.163636, 37.629412, 38.791304, 36.041379, 35.505714 and 33.797561 for origins 12 to 42. Origin 12 trains on months 0 to 11, the nine plateau months and three declining ones, so its mean difference is small. Origin 42's scale is 33.797561, and origin 18's is 37.629412, which is no doubling.")
 
 q(3, "Started past EKENE-P3's plateau, at first origin 12, damped pools a scaled error of 2.004154. Against the naive yardstick, how did it do?",
- "Damped's MAE over those origins was about twice the in-sample naive error of the windows",
- ["Damped beat the naive yardstick twice over on EKENE-P3 after the plateau months",
-  "The figure counts the null origin 6 as a zero and doubles the rest to compensate",
-  "Two origins returned null scales, and the engine divided the pooled MASE by 2"],
- "MASE above 1 means the MAE is larger than the naive yardstick; 2.004154 is roughly double. Origin 6 is not in a run that starts at 12, so no null scale enters, and the engine applies no correction.")
+ "Its errors, each over its own window's naive error, averaged about twice that yardstick",
+ ["Damped beat the naive yardstick twice over on EKENE-P3 once past the plateau months",
+  "The figure counts the null origin 6 as a zero and doubles the rest to compensate for it",
+  "Two origins returned null scales, and the engine divided the pooled MASE by 2 to match"],
+ "The pooled MASE divides each error by its own origin's in-sample naive error and averages; above 1 means the errors ran larger than that yardstick, and 2.004154 is roughly double. Origin 6 is not in a run that starts at 12, so no null scale enters, and the engine applies no correction.")
 
 # --- methods compared ---
 q(0, "Scored in percent on EKENE-P2 before the shut-in, over months 0 to 21, which method misses least by MAPE?",
@@ -248,10 +248,10 @@ q(2, "After the workover on EKENE-P2 (origins 28, 31, 34, 37, 40, horizon 6), ho
 
 q(2, "After the workover, ses ranks last on EKENE-P2 by MASE, at 0.789324. Which reading is right?",
  "Its MAE was below the naive in-sample error even so; last is relative to the other three",
- ["A last place means its MASE must be above 1, so the figure is misprinted",
-  "Ses fails the naive yardstick, being the only method ranked below Arps",
-  "Ses was scored on fewer origins than the others, which placed it last"],
- "A MASE below 1 means the MAE is smaller than the in-sample naive MAE, whatever the rank; ses is last because the other three are lower still. Every method is scored on the same origins, and a place in a ranking says nothing on its own about the naive yardstick.")
+ ["A last place means its MASE must be above 1, so the figure of 0.789324 is misprinted",
+  "Ses fails the naive yardstick, being the only method of the four ranked below Arps",
+  "Ses was scored on fewer origins than the other three methods, which placed it last"],
+ "A MASE below 1 means the MAE is smaller than the in-sample naive MAE (here below the scale of every origin), whatever the rank; ses is last because the other three are lower still. Every method is scored on the same origins, and a place in a ranking says nothing on its own about the naive yardstick.")
 
 q(3, "From first origin 26 after the restart, the EKENE-P2 comparison orders holt, arps, ses, damped. What are holt's and arps's MASE there?",
  "Holt 0.573284, arps 0.702535",
@@ -297,16 +297,16 @@ q(1, "The EKENE-P1 comparison from first origin 30 orders arps, damped, holt, se
 
 q(0, "Why does it matter how a backtest's errors are scaled when its MASE is pooled?",
  "One scale for every error gives a different figure: 0.458893 in place of 0.374515 on the teaching backtest",
- ["The engine pools with one scale by default, so the note must flag the rare runs that do not",
-  "Each origin's own scale is the wrong method, and a note that uses it must say it is wrong",
-  "MASE pooled either way gives the same figure, and the note records the choice for form"],
+ ["The engine pools with one scale by default, the last origin's, so the note must flag the rare runs that do not",
+  "Each origin's own scale is the wrong method, and a note that uses it must say so beside the pooled figure",
+  "MASE pooled either way gives the same figure, and the note records the choice of scale only for form's sake"],
  "The engine scales each error by its own origin's naive MAE; dividing every error by the last origin's scale instead gives 0.458893 against the engine's 0.374515. The two differ, and the engine's per-origin scale is its stated rule.")
 
 q(0, "Writing up damped on EKENE-P3 from origin 6, where the scaled error came back null, which line is correct?",
  "MAE 62.892091 bbl/d and sMAPE 11.808809 percent, with MASE returned as null and the reason quoted",
- ["0.000000 for MASE, since origin 6 scored no scaled error and the others are averaged",
-  "MASE 2.004154, taken from the run started at origin 12 and quoted for this one",
-  "Nothing on MASE, left out without comment since a null has nothing to report"],
+ ["0.000000 for MASE, since origin 6 scored no scaled error and the six other origins are averaged",
+  "MASE 2.004154, taken from the run started at origin 12 and quoted for this run from origin 6",
+  "Nothing on MASE, left out of the note without comment since a null has nothing in it to report"],
  "Each metric the engine could not give is reported with its reason from `notes`, and the other metrics are numbers: MAE 62.892091 and sMAPE 11.808809. 2.004154 belongs to a different backtest, from origin 12, and would be labelled as such; a null is never printed as 0.")
 
 emit(Q, '/root/dai-wip-forecastml/banks/d4i_exam.json', expect_n=42)

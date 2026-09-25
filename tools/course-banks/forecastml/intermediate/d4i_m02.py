@@ -86,7 +86,7 @@ q(2, "What range does the engine's sMAPE run over, and what is its basis?",
   "Unbounded above, since a forecast far above a small actual has no ceiling"],
  "The engine's basis reads \"100 x mean 2|e| / (|actual| + |forecast|), percent on 0 to 200; a term with actual = forecast = 0 scores 0\". Absolute values keep every term at or above 0, and the largest a term can be is 200, reached when one of actual and forecast is 0. A 0 to 100 version is another convention, which this engine does not use.")
 
-q(3, "A backtest of ses on EKENE-P2 from first origin 20 has the shut-in in its actuals. Which reason does it give for MAPE?",
+q(3, "A backtest of ses on EKENE-P2 from first origin 20, with horizon 3 and step 6, has the shut-in in its actuals. Which reason does it give for MAPE?",
  "\"MAPE is undefined: the actual at index 22 (origin 20, step 3) is 0 and MAPE divides by each actual\"",
  ["\"MAPE is undefined: actual[2] is 0 and MAPE divides by each actual\", the reason `accuracy` gives",
   "A refusal naming `firstOrigin`, because an origin before a shut-in cannot be scored at all",

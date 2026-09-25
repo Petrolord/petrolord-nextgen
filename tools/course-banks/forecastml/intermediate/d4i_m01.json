@@ -46,9 +46,9 @@
  {
   "prompt": "The teaching hold-out prints holt's MAE as 6.783515 and its RMSE as 8.360530. What makes the RMSE the larger figure?",
   "options": [
-   "RMSE divides by n less one, which lifts it",
-   "Its unit is bbl/d squared, so it prints larger",
-   "Only the negative errors count, the larger ones here",
+   "RMSE divides by n less one, as a sample deviation does, which lifts it",
+   "Its unit is bbl/d squared, so the same misses print as a larger figure",
+   "Only the negative errors count, and those are the larger ones on this hold-out",
    "Squaring weights the large errors more heavily than the small ones"
   ],
   "answer": 3,

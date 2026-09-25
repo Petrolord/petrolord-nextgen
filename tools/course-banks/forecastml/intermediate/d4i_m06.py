@@ -55,9 +55,9 @@ q(2, "The same EKENE-P2 comparison is started from first origins 26, 28, 30 and 
 
 q(1, "From first origin 30 after the restart, the EKENE-P2 comparison orders damped, ses, arps, holt. What does the course conclude from this beside the run from origin 28?",
  "The winner depends on the origins, so a ranking is reported with its origins, horizon, step and metric",
- ["Damped is the right method for EKENE-P2, having the lowest MASE of any run at 0.461235",
-  "The origin 28 run was wrong, as holt should not rank last from a later first origin",
-  "Holt is unstable on this well and is dropped from the comparison before a note is written"],
+ ["Damped is the right method for EKENE-P2, having the lowest MASE of the four first origins, at 0.461235",
+  "The origin 28 run was wrong, as holt should not rank last from a later first origin on the very same well",
+  "Holt is unstable on this well and is dropped from the comparison before any note is written on its ranking"],
  "From origin 28 holt ranks first and from origin 30 last, with damped first at 0.461235: the same methods on the same well order differently as the origins move. The course's rule is to report a ranking with its origins, horizon, step and metric. One favourable run does not name a method right for the well, and neither run is wrong.")
 
 q(2, "On EKENE-P1 from first origin 30, horizon 6, step 3, the comparison ranks arps first at MASE 0.199862. Why does the course expect that?",
@@ -69,9 +69,9 @@ q(2, "On EKENE-P1 from first origin 30, horizon 6, step 3, the comparison ranks 
 
 q(0, "In that EKENE-P1 comparison, how many errors does each method's row pool?",
  "30: origins 30, 33, 36, 39 and 42 each score 6 steps",
- ["24, as in the teaching backtest",
-  "6, one per step ahead of the first origin",
-  "48, one per month"],
+ ["24, as in the teaching backtest of holt from origin 24",
+  "6, one per step ahead of the first origin, origin 30",
+  "48, one per month of EKENE-P1 from month 0 to month 47"],
  "First origin 30 with step 3 gives origins 30, 33, 36, 39 and 42, each scoring horizon 6, so each row pools 30 errors. The teaching backtest, with step 6 from origin 24, pools 24; months before origin 30 are never scored.")
 
 q(3, "What `refit` does `compareWithArps` use when none is given, and what happens to the Arps baseline?",
@@ -82,17 +82,17 @@ q(3, "What `refit` does `compareWithArps` use when none is given, and what happe
  "The signature reads `refit = true` and `m = 1`, and the EKENE-P1 result returns refit true. The Arps baseline is refitted on every training window whatever refit says. Fitting on all 48 months would let the scored months reach the fit, which the comparison never does.")
 
 q(1, "In the EKENE-P1 comparison, ses has ME -30.493333 and MASE 1.067547. What does that pair say about ses on this well?",
- "Its flat forecast ran high on the decline, and its MAE exceeded the in-sample naive error",
+ "Its flat forecast ran high, and its scaled errors averaged above the naive yardstick of 1",
  ["Low forecasts, and it beat the in-sample naive forecast by a small margin on average over the run",
   "No bias, and a MASE just above 1 marks a method that equals the naive forecast in its size",
   "High forecasts, yet a MASE above 1 places it first among the four methods"],
- "A negative ME says the forecasts sat above the well on average, as a flat forecast does on a decline, and a MASE above 1 says its MAE was larger than the in-sample naive error. Ses ranks last on this comparison, behind arps 0.199862, damped 0.287529 and holt 0.346480.")
+ "A negative ME says the forecasts sat above the well on average, as a flat forecast does on a decline, and a pooled MASE above 1 says its errors, each divided by its own origin's in-sample naive error, averaged above 1. Ses ranks last on this comparison, behind arps 0.199862, damped 0.287529 and holt 0.346480.")
 
 q(0, "Which set of items belongs in a note written up for a backtest?",
  "The origins with horizon and step, refit or held, each metric with its reason when null, MASE with its m and the ranking's metric",
- ["The best method's name and its MASE, since the remaining settings can be read back from the engine",
-  "The in-sample MSE of each method, which stands in for the backtest when the series is short",
-  "Only the pooled MAE in bbl/d, because a single metric keeps the note easy to check and compare"],
+ ["The best method's name and its MASE, since the remaining settings of the run can be read back from the engine later on by anyone",
+  "The in-sample MSE of each method with its fitted parameters, which stands in for the backtest when the series is short or new",
+  "Only the pooled MAE in bbl/d over every origin and step, because a single metric keeps the note easy to check and compare"],
  "A backtest note names the well and months, the methods, the first origin, horizon and step and so the origins, refit or held, each metric with its reason when null, MASE with its lag m, and the ranking with the metric it is by. Every figure changes when a setting changes, so a note that leaves one out cannot be checked; an in-sample MSE answers another question.")
 
 q(0, "A draft note reads \"holt is accurate on EKENE-P2\". What does the course require in its place?",
@@ -112,7 +112,7 @@ q(3, "A learner compares holt's MASE 0.241874 on EKENE-P1's teaching hold-out wi
 q(3, "Ranking EKENE-P2's methods through its shut-in, why is MASE a workable default where MAPE is not?",
  "MASE stays a number through the shut-in, while MAPE comes back null",
  ["In bbl/d, MASE keeps the shut-in months on their true scale",
-  "Months after the workover are ignored, so the uplift cannot sway it",
+  "Months after the workover are ignored, so no uplift sways it",
   "Arps can be scored on MASE alone, the others needing a fit"],
  "MASE scales by the training months' naive error, so a zero actual in the scored months does not void it; MAPE divides by each actual and returns null through the shut-in. MASE has no unit, it scores every origin's months after the workover, and Arps is scored on every metric.")
 

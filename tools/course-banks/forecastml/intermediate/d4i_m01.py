@@ -39,9 +39,9 @@ q(1, "Holt on the teaching hold-out has ME -4.573069 and MAE 6.783515. Why is th
 
 q(3, "The teaching hold-out prints holt's MAE as 6.783515 and its RMSE as 8.360530. What makes the RMSE the larger figure?",
  "Squaring weights the large errors more heavily than the small ones",
- ["RMSE divides by n less one, which lifts it",
-  "Its unit is bbl/d squared, so it prints larger",
-  "Only the negative errors count, the larger ones here"],
+ ["RMSE divides by n less one, as a sample deviation does, which lifts it",
+  "Its unit is bbl/d squared, so the same misses print as a larger figure",
+  "Only the negative errors count, and those are the larger ones on this hold-out"],
  "RMSE is \"sqrt(mean e^2)\", and squaring gives a large error more weight, so RMSE is at least MAE on every row the course prints. Its divisor is n, the number of errors scored, with nothing taken away. The square root returns it to bbl/d, and it uses every error whatever its sign.")
 
 q(0, "A learner scores holt on the teaching hold-out and wants the RMSE divisor. What does the engine divide the sum of squared errors by before taking the root?",

@@ -53,9 +53,9 @@ q(2, "With refit false, how do origin 24's errors compare with the refitted run'
 
 q(0, "Holt on EKENE-P1 with horizon 6 is started at origin 2. What does the engine say?",
  "It refuses: \"firstOrigin must be a whole number from 3 to 42 ('holt' needs 3 training values; an origin above 42 leaves fewer than 6 actuals)\"",
- ["The origin moves up to 3, the first one holt can fit, and the backtest runs from there",
-  "Origin 2 runs, and month 2 scores a residual of 0, as the fit forecasts that month exactly",
-  "A refusal naming `horizon`, since 6 steps from origin 2 run past the training window it has"],
+ ["The origin moves up to 3, the first one holt can fit, and the backtest runs from there to origin 42 with a note in the result saying the first origin was raised",
+  "Origin 2 runs, and month 2 scores a residual of 0, as the fit forecasts that month exactly from its start of l_1 = y_1 and b_1 = y_2 - y_1, before the others",
+  "A refusal naming `horizon`: \"horizon must be a whole number, 1 or more\", since 6 steps from origin 2 run past the training window the call has"],
  "Holt spends its second month on the start, so it needs 3 training values and the lowest origin is 3; the highest is 42, leaving 6 actuals. The engine refuses and names `firstOrigin` in those words. Nothing is moved or run, and the horizon is not the field at fault.")
 
 q(0, "Ses from origin 45 with horizon 6 on EKENE-P1's 48 months is refused with \"firstOrigin must be a whole number from 2 to 42 ('ses' needs 2 training values; an origin above 42 leaves fewer than 6 actuals)\". Why is the lower limit 2 for ses and 3 for holt?",
@@ -67,9 +67,9 @@ q(0, "Ses from origin 45 with horizon 6 on EKENE-P1's 48 months is refused with 
 
 q(1, "EKENE-P6, the new well, has 3 months. What does a backtest of holt with horizon 1 return?",
  "A refusal: \"y has 3 values: a backtest with horizon 1 needs at least 4 ('holt' needs 3 training values, then 1 actual)\"",
- ["One origin, 2, scored on month 2, since holt can be fitted on its three months",
-  "A backtest of ses in place of holt, the engine choosing the method its length allows",
-  "Pooled metrics that are all null, each with a reason naming the short series"],
+ ["One origin, 2, scored on month 2, since holt can be fitted on its three months and a horizon of 1 needs only one actual after it",
+  "A backtest of ses in place of holt, the engine choosing the method its length allows and naming the swap in the result",
+  "Pooled metrics that are all null, each with a reason in `notes` naming the short series and the months it would need"],
  "Holt can be fitted on 3 months, but a backtest needs 3 training values and then at least one actual, 4 in all, so it is refused by that length rule in the engine's words. No origin below 3 exists for holt, the engine never swaps the method, and a refusal carries no metrics.")
 
 q(3, "A backtest is asked for with a horizon of 0. What does the engine return?",
