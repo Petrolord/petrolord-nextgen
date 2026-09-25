@@ -107,7 +107,7 @@ RUNS = [
 BANKS = STAGE in ('banks', 'full')
 if BANKS:
     BK = f'{HERE}/banks'
-    TIERS = [('d3b', 'beginner'), ('d3i', 'intermediate'), ('d3a', 'advanced')]
+    TIERS = [('d4b', 'beginner'), ('d4i', 'intermediate'), ('d4a', 'advanced')]
     for pre, tier in TIERS:
         for b in ['m01', 'm02', 'm03', 'm04', 'm05', 'm06', 'exam']:
             RUNS.append((f'bank {pre}_{b}.py', f'{BK}/{pre}_{b}.py', ['python3', f'{BK}/{pre}_{b}.py'], 0))

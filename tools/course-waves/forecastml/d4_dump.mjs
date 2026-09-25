@@ -386,14 +386,21 @@ const NOTES = [
   ['`accuracy`', 'an insample of one month', 'mase', accShort],
   ['`accuracy`', `EKENE-P3 months 0 to ${PLAT - 1} (the plateau) as insample`, 'mase', accFlat],
   ['`accuracy`', `a lag m of ${LAG} on an insample of ${LAG} months`, 'mase', accLag],
-  ['`backtest`', `EKENE-P3, ses, first origin ${O_FLAT} (inside the plateau)`, 'mase', btFlat.overall],
-  ['`backtest`', `EKENE-P1, ses, lag m ${LAG}, first origin ${LAG}`, 'mase', btLag.overall],
-  ['`backtest`', `EKENE-P2, ses, first origin ${Z2[0]} (the shut-in in the actuals)`, 'mape', btShut.overall],
+  ['`backtest`', `EKENE-P3, ses, alpha ${A_SES} given, first origin ${O_FLAT} (inside the plateau), horizon ${btFlat.horizon}, step ${btFlat.step}`, 'mase', btFlat.overall],
+  ['`backtest`', `EKENE-P1, ses, alpha ${A_SES} given, lag m ${LAG}, first origin ${LAG}, horizon ${btLag.horizon}, step ${btLag.step}`, 'mase', btLag.overall],
+  ['`backtest`', `EKENE-P2, ses, alpha ${A_SES} given, first origin ${Z2[0]} (the shut-in in the actuals), horizon ${btShut.horizon}, step ${btShut.step}`, 'mape', btShut.overall],
 ];
 NOTES.forEach(([fn, what, k, r]) => must(`${fn} ${what}: ${k} is null with a note`, r[k] === null && r.notes && typeof r.notes[k] === 'string', r.notes && r.notes[k]));
 table(['function', 'what was passed', 'metric returned as null', 'the reason in notes, verbatim'], NOTES.map(([fn, what, k, r]) => [fn, what, k, r.notes[k]]));
 w();
-w('A backtest reason names the origin it comes from; an `accuracy` reason names the input. Every other metric of those calls is a number.');
+w('A backtest reason names the origin it comes from; an `accuracy` reason names the input. Every other metric of those calls is a number. The three backtest rows state every setting, because a backtest reason can depend on the horizon and step: the MAPE reason names the first origin whose actuals hold a 0 and the step at which that 0 falls, so a different horizon or step can name a different origin and step.');
+w();
+{
+  const h1 = success('backtest EKENE-P2 ses first origin 20 horizon 1 step 1', FC.backtest({ y: Y2, method: 'ses', alpha: A_SES, firstOrigin: Z2[0], horizon: 1, step: 1 }));
+  must('the shut-in reason at horizon 3 step 6 names origin 20 step 3', /\(origin 20, step 3\)/.test(btShut.overall.notes.mape), btShut.overall.notes.mape);
+  must('the shut-in reason at horizon 1 step 1 names a different origin', h1.overall.mape === null && !/\(origin 20, step 3\)/.test(h1.overall.notes.mape), h1.overall.notes.mape);
+  w(`The same EKENE-P2 call at horizon 1, step 1 reads: "${h1.overall.notes.mape}".`);
+}
 must('the other metrics of the null-MAPE accuracy call are numbers', ['me', 'mae', 'rmse', 'smape', 'mase'].every((k) => typeof accZero[k] === 'number'), 'numbers');
 w();
 w(`WARNINGS. \`fitSmoothing\`, \`forecastIntervals\` and \`backtest\` add \`warnings\` when the compass search stops at ${FC.DEFAULTS.PS_MAX_EVALS} SSE evaluations before its step falls to ${MINSTEP} of the range (\`converged\` false). No fit in this course reaches that cap: every optimiser record this digest reads reports \`converged\` true (asserted at the end of the build).`);
@@ -511,7 +518,7 @@ must('damped with phi 1 is holt exactly', PHI1.sse === HOLT.sse && PHI1.forecast
 w(`DAMPED WITH PHI 1 IS HOLT. With phi 1 given, the damped fit returns the same SSE (${f6(PHI1.sse)}) and the same ${H} forecasts as Holt at the same alpha and beta, bit for bit: Holt is the damped method with phi = 1.`);
 w();
 const DFIT = Object.fromEntries(WELLS.filter((x) => x.rate.length === T.N_MONTHS).map((x) => [x.well, success(`fitSmoothing damped fitted on ${x.well}`, FC.fitSmoothing({ y: x.rate, method: 'damped', h: H }))]));
-w(`PHI FITTED AND PHI GIVEN. A FITTED phi is searched from ${S(FC.DEFAULTS.PHI_MIN)} to ${S(FC.DEFAULTS.PHI_MAX)} inclusive; a GIVEN phi may be any number above 0 and at most 1. Every ${T.N_MONTHS}-month well, damped fitted:`);
+w(`PHI FITTED AND PHI GIVEN. A FITTED phi is searched from ${S(FC.DEFAULTS.PHI_MIN)} to ${S(FC.DEFAULTS.PHI_MAX)} inclusive; a GIVEN phi may be any number above 0 and at most 1. The fitted range is the one FPP3 8.2 recommends, for its stated reasons: below ${S(FC.DEFAULTS.PHI_MIN)} the damping has a very strong effect, and a phi close to 1 gives a damped trend that cannot be told apart from Holt's undamped trend. Every ${T.N_MONTHS}-month well, damped fitted:`);
 w();
 table(['well', 'alpha', 'beta', 'phi', 'atBounds', 'SSE', `forecast at step ${H}`], Object.entries(DFIT).map(([id, r]) => [id, f6(r.params.alpha), f6(r.params.beta), f6(r.params.phi), r.optimiser.atBounds.length ? list(r.optimiser.atBounds) : 'none', f6(r.sse), f6(r.forecast[H - 1])]));
 must('every fitted phi is inside the search range', Object.values(DFIT).every((r) => r.params.phi >= FC.DEFAULTS.PHI_MIN && r.params.phi <= FC.DEFAULTS.PHI_MAX), 'range');
@@ -544,6 +551,13 @@ FITS3.forEach(([m, r]) => must(`${m}: evaluations exceed the grid`, r.optimiser.
 w();
 w(`THE STOP RULE. The search stops, \`converged\` true, when a sweep at a step of at most ${MINSTEP} of each range improves nothing; \`finalStep\` is that fraction. Holt on EKENE-P1 ends at ${eX(HF.optimiser.finalStep)} after ${HF.optimiser.halvings} halvings from ${S(FC.DEFAULTS.PS_STEP)}. A search that reaches ${FC.DEFAULTS.PS_MAX_EVALS} evaluations first stops with \`converged\` false and a warning (${ref('refusals')}).`);
 must('holt final step is at most the stop step', HF.optimiser.finalStep <= FC.DEFAULTS.PS_MIN_STEP, HF.optimiser.finalStep);
+{
+  let k = 0; let st = FC.DEFAULTS.PS_STEP; while (st > FC.DEFAULTS.PS_MIN_STEP) { st /= 2; k += 1; }
+  must('every EKENE-P1 fit takes the same halvings, the count that first reaches the stop step', FITS3.every(([, r]) => r.optimiser.halvings === k && r.optimiser.finalStep === st), `${k} ${FITS3.map(([, r]) => r.optimiser.halvings)}`);
+  must('one halving fewer is still above the stop step', st * 2 > FC.DEFAULTS.PS_MIN_STEP, st);
+  w();
+  w(`WHY ${k} HALVINGS. ${S(FC.DEFAULTS.PS_STEP)} halved ${k} times is ${eX(st)} (derived, ${S(FC.DEFAULTS.PS_STEP)} / 2^${k}), the first step at or below ${MINSTEP}, ${eX(FC.DEFAULTS.PS_MIN_STEP)}; ${k - 1} halvings leave ${eX(st * 2)}, still above it. So a search that stops by the rule takes exactly ${k} halvings whatever the series, and all three EKENE-P1 fits above report ${k}. The count follows from the starting step and the stop step.`);
+}
 w();
 const HELD = success('fitSmoothing holt with the fitted parameters given', FC.fitSmoothing({ y: Y1, method: 'holt', ...HF.params, h: H }));
 must('holding the fitted parameters reproduces the fit exactly', HELD.sse === HF.sse && HELD.forecast.every((v, j) => v === HF.forecast[j]) && HELD.optimiser === null, `${HELD.sse} ${HF.sse}`);
@@ -563,7 +577,7 @@ w();
 const gHL = golden('holt-linear-exact');
 const HL = success('golden holt-linear-exact', FC.fitSmoothing(clone(gHL.args)));
 must('the exact line fits with SSE 0 at the first grid point', HL.sse === 0 && HL.params.alpha === 0 && HL.params.beta === 0 && HL.optimiser.moves === 0, JSON.stringify(HL.params));
-w(`A FLAT SSE SURFACE. Golden \`holt-linear-exact\`: the exact line ${list(gHL.args.y.map(S))}. Every alpha and beta give SSE ${S(HL.sse)}, so the grid tie keeps its first point, alpha ${S(HL.params.alpha)} and beta ${S(HL.params.beta)}, and the search makes ${HL.optimiser.moves} moves. The parameters are not identified: any pair would fit as well. The forecasts ${list(HL.forecast.map(f6))} continue the line.`);
+w(`A FLAT SSE SURFACE. Golden \`holt-linear-exact\`: the exact line ${list(gHL.args.y.map(S))}. Every alpha and beta give SSE ${S(HL.sse)}, so the grid tie keeps its first point, alpha ${S(HL.params.alpha)} and beta ${S(HL.params.beta)}, and the search makes ${HL.optimiser.moves} moves. Because that first point is a corner of the box, \`atBounds\` reads ${list(HL.optimiser.atBounds.map((x) => `"${x}"`))}. The parameters are not identified: any pair would fit as well. The forecasts ${list(HL.forecast.map(f6))} continue the line.`);
 
 /* ============================================================ SECTION 9 */
 
@@ -678,6 +692,9 @@ w();
 table(['method', 'MAE (bbl/d)', 'MAPE (percent)', 'sMAPE (percent)', 'MASE'], [['damped', L5A], ['holt', L5HA]].map(([m, a]) => [m, f6(a.mae), f6(a.mape), f6(a.smape), f6(a.mase)]));
 w();
 w(`A small error on a small rate is a large percentage: holt's MAE of ${f6(L5HA.mae)} bbl/d here is a MAPE of ${f6(L5HA.mape)} percent, while on EKENE-P1's hold-out holt's larger MAE of ${f6(ACC.holt.mae)} bbl/d is ${f6(ACC.holt.mape)} percent (${ref('errors')}). A percentage error puts wells of different size on one scale, and on a low tail it is large for errors small in bbl/d.`);
+must('damped and holt share one scale on the EKENE-P5 hold-out', L5A.maseScale === L5HA.maseScale && L5A.maseScale > 0, `${L5A.maseScale} ${L5HA.maseScale}`);
+w();
+w(`Both rows divide by the same MASE scale, \`maseScale\` ${f6(L5HA.maseScale)}, because the scale comes from the training months (EKENE-P5 months 0 to ${TRAIN - 1}) and both methods trained on the same months (${ref('mase')}).`);
 must('the low tail holt MAE is below the P1 holt MAE and its MAPE above', L5HA.mae < ACC.holt.mae && L5HA.mape > ACC.holt.mape, `${L5HA.mae} ${ACC.holt.mae}`);
 w();
 const ASYM_A = 100; // stated actual
@@ -738,14 +755,15 @@ w(`THE LAST ORIGIN. Origin ${bExact.origins[0]} with horizon ${BT.horizon} on ${
 /* ============================================================ SECTION 15 */
 
 section('leakage', 'Leakage: scoring months the fit has already seen', ['Professional m04 l05', 'Professional m01 l05']);
-w(`LEAKAGE is any route by which the months being scored reach the fit. A backtest has none by construction: at every origin only months 0 to o - 1 are fitted. Two leaky routes a learner can take, each run through the engine on EKENE-P1, against the honest one-step backtest from origin ${TRAIN} (horizon 1, step 1, holt refitted):`);
-w();
 const LB = success(`backtest holt EKENE-P1 firstOrigin ${TRAIN} horizon 1 step 1`, FC.backtest({ y: Y1, method: 'holt', firstOrigin: TRAIN, horizon: 1, step: 1 }));
+w(`LEAKAGE is any route by which the months being scored reach the fit. A backtest has none by construction: at every origin only months 0 to o - 1 are fitted. Two leaky routes a learner can take, each run through the engine on EKENE-P1, against the honest one-step backtest from origin ${TRAIN} (horizon 1, step 1, holt refitted: ${LB.origins.length} origins, ${LB.origins[0]} to ${LB.origins[LB.origins.length - 1]}, one error each):`);
+w();
 const FULL = success('fitSmoothing holt fitted on every month', FC.fitSmoothing({ y: Y1, method: 'holt' }));
 const leakInSample = absMean(FULL.residuals.slice(TRAIN));
 const LBP = success(`backtest holt EKENE-P1 with the full-series parameters held`, FC.backtest({ y: Y1, method: 'holt', firstOrigin: TRAIN, horizon: 1, step: 1, alpha: FULL.params.alpha, beta: FULL.params.beta }));
 const FULLH = success('fitSmoothing holt on all 48 months, the hold-out months included, h 12', FC.fitSmoothing({ y: Y1, method: 'holt', h: H }));
 const leakGap = LB.overall.mae - leakInSample;
+must('the honest one-step run has one origin per scored month', LB.origins.length === Y1.length - TRAIN && LB.origins[0] === TRAIN && LB.origins[LB.origins.length - 1] === Y1.length - 1, LB.origins.length);
 must('parameters fitted on the full series and held give exactly the full fit residuals', LBP.perOrigin.every((r) => r.errors[0] === FULL.residuals[r.origin]), 'identical');
 const LEAK = [
   ['honest: backtest, one step ahead, refitted at each origin', f6(LB.overall.mae), 'none'],
@@ -787,6 +805,8 @@ must('overall MASE is the mean of each error over its own origin scale', nearly(
 const oneQ = absMean(allErr) / QS[QS.length - 1];
 w(`Dividing every error by the last origin's scale instead (derived, a wrong method) gives ${f6(oneQ)} against the engine's ${f6(B1.overall.mase)}.`);
 w();
+w('READING A POOLED MASE. When the origins carry different scales, the pooled MASE is the mean of every error divided by its own origin\'s Q. So a pooled MASE above 1 says the scaled errors averaged above 1, while the MAE can still sit below one origin\'s Q, and a pooled MASE below 1 says they averaged below 1; section 17 prints a case. Read a pooled MASE against the yardstick of 1.');
+w();
 const B3S = { firstOrigin: O_FLAT, horizon: 6, step: 6 }; // stated
 const B3 = success('backtest damped EKENE-P3 firstOrigin 6 horizon 6 step 6', FC.backtest({ y: Y3, method: 'damped', ...B3S }));
 planted(3, B3.overall.mase === null && B3.perOrigin[0].maseScale === null && B3.perOrigin.slice(1).every((r) => r.maseScale > 0), B3.overall.notes && B3.overall.notes.mase);
@@ -807,7 +827,7 @@ const CPOST = success('compareWithArps on EKENE-P2 from origin 28', FC.compareWi
 w(`\`compareWithArps\` backtests ses, holt and damped and the Arps baseline on the same origins with the same metrics, and ranks them by MASE unless told otherwise (the Expert tier takes the ranking rules apart). The Professional question is the testing workflow: the same origins, the same horizon, the same metric, for every method. EKENE-P2 before and after its shut-in and workover:`);
 w();
 const cmpRows = (c, lab) => c.rows.map((r) => [lab, r.method, f6(r.mae), f6(r.rmse), f6(r.mape), f6(r.smape), f6(r.mase)]);
-table(['window', 'method', 'MAE', 'RMSE', 'MAPE', 'sMAPE', 'MASE'], [...cmpRows(CPRE, `months 0 to ${SH2[0] - 1}, origins ${list(CPRE.origins)}, horizon ${PRE.horizon}`), ...cmpRows(CPOST, `all ${Y2.length} months, origins ${list(CPOST.origins)}, horizon ${POST.horizon}`)]);
+table(['window', 'method', 'MAE', 'RMSE', 'MAPE', 'sMAPE', 'MASE'], [...cmpRows(CPRE, `months 0 to ${SH2[0] - 1}, origins ${list(CPRE.origins)}, horizon ${PRE.horizon}, step ${PRE.step}`), ...cmpRows(CPOST, `all ${Y2.length} months, origins ${list(CPOST.origins)}, horizon ${POST.horizon}, step ${POST.step}`)]);
 w();
 must('before the shut-in arps ranks first', CPRE.best === 'arps', CPRE.ranking);
 must('after the workover a smoothing method ranks first and arps is not first', CPOST.best !== 'arps' && CPOST.ranking.indexOf('arps') > 0, CPOST.ranking);
@@ -840,6 +860,22 @@ w(`\`compareWithArps\` refits by default, as \`backtest\` does: its signature re
 w();
 table(['method', 'ME', 'MAE', 'RMSE', 'MAPE', 'sMAPE', 'MASE', 'refit', 'm', 'metric returned as null'], C1.rows.map((r) => [r.method, f6(r.me), f6(r.mae), f6(r.rmse), f6(r.mape), f6(r.smape), f6(r.mase), S(C1.refit), CMP_M, nullsOf(r).length ? list(nullsOf(r)) : 'none']));
 w();
+{
+  const sesC1 = C1.rows.find((r) => r.method === 'ses');
+  const qC1 = sesC1.perOrigin.map((r) => r.maseScale);
+  const below = sesC1.perOrigin.filter((r) => sesC1.mae < r.maseScale).map((r) => r.origin);
+  must('ses pooled MASE above 1 while its MAE is below at least one origin scale', sesC1.mase > 1 && below.length > 0, `${sesC1.mase} ${below}`);
+  must('ses MAE is above every other origin scale', sesC1.perOrigin.filter((r) => !below.includes(r.origin)).every((r) => sesC1.mae > r.maseScale), 'above');
+  must('the ses row origin scales match the teaching backtest scales at shared origins', qC1.length === C1.origins.length, qC1.length);
+  w(`A POOLED MASE ACROSS SCALES. In that comparison ses has MAE ${f6(sesC1.mae)} and MASE ${f6(sesC1.mase)}; its origin scales are ${sesC1.perOrigin.map((r) => `origin ${r.origin} Q ${f6(r.maseScale)}`).join(', ')}. The MAE sits below the Q of origin${below.length === 1 ? '' : 's'} ${list(below.map(S))} and above the others, and the MASE above 1 says ses's scaled errors averaged above 1.`);
+  w();
+  const arpsC1 = C1.rows.find((r) => r.method === 'arps');
+  const errs = arpsC1.perOrigin.flatMap((r) => r.errors);
+  const pos = errs.filter((e) => e > 0).length; const neg = errs.filter((e) => e < 0).length; const zero = errs.filter((e) => e === 0).length;
+  must('arps errors split by sign add up', pos + neg + zero === arpsC1.n, `${pos} ${neg} ${zero}`);
+  w(`THE SIGNS OF THE ARPS ERRORS. Of the ${arpsC1.n} arps errors in that comparison, ${pos} are positive (the baseline was low), ${neg} negative (the baseline was high) and ${zero} zero (derived by counting the signs of the returned errors); its ME is ${f6(arpsC1.me)}.`);
+  w();
+}
 w('WRITING UP A BACKTEST names: the well and months; the methods; first origin, horizon, step and so the origins; refit or held; each metric with its reason when null; MASE with its lag m; the ranking and the metric it is by.');
 
 /* ============================================================ SECTION 18 */
@@ -883,12 +919,13 @@ const PISu = success(`forecastIntervals ses EKENE-P1 unclipped`, FC.forecastInte
 must('the ses unclipped run is the default nSims on seed 11', PISu.nSims === FC.DEFAULTS.N_SIMS && PISu.seed === SEED_PI && PIS.nSims === PISu.nSims, `${PISu.nSims} ${PISu.seed}`);
 must('ses on EKENE-P1: the point forecast is above the P10 at step 12', PIS.forecast[H - 1] > PIS.P10[H - 1], `${PIS.forecast[H - 1]} ${PIS.P10[H - 1]}`);
 must('the ses residual mean is negative', mean(sesRes) < 0, mean(sesRes));
+must('the ses pool is the 47 scored residuals', sesRes.length === PIS.poolSize && sesRes.every((e) => typeof e === 'number'), `${sesRes.length} ${PIS.poolSize}`);
 const UNCENTRED = 'residuals are drawn as fitted without centring (their mean is not subtracted), so a method whose residuals have a non-zero mean drifts: on a declining well a flat method\'s paths can fall below its own point forecast';
 must('the bootstrap basis states the uncentred draw', PID.basis.bootstrap.endsWith(UNCENTRED), PID.basis.bootstrap);
 must('the ses bootstrap basis states it too', PIS.basis.bootstrap.endsWith(UNCENTRED), PIS.basis.bootstrap);
 w(`RESIDUALS DRAWN WITHOUT CENTRING. The engine does not subtract the residual mean before it resamples, and its basis says so in these words: "${UNCENTRED}". ses on EKENE-P1, below, is that case: a flat method on a declining well. A centred bootstrap (the mean subtracted first) is the alternative in common use (${ref('choices')}).`);
 w();
-w(`A MEDIAN AWAY FROM THE POINT FORECAST. The residuals are drawn as fitted (their mean over the damped pool here is ${f6(resMean)} bbl/d, derived). When the residuals lean one way, every path leans with them and the state carries the lean forward. ses on EKENE-P1 shows it plainly: alpha fits to 1, so each residual is a month-to-month change of the decline, mean ${f6(mean(sesRes))} bbl/d (derived). The P50 of the paths falls while the point forecast stays flat. ses on EKENE-P1, h ${H}, seed ${S(PISu.seed)}, ${S(PISu.nSims)} paths (nSims left at its default), nonNegative ${S(false)} (stated):`);
+w(`A MEDIAN AWAY FROM THE POINT FORECAST. The residuals are drawn as fitted (their mean over the damped pool here is ${f6(resMean)} bbl/d, derived). When the residuals lean one way, every path leans with them and the state carries the lean forward. ses on EKENE-P1 shows it plainly: alpha fits to 1, so each residual is a month-to-month change of the decline, mean ${f6(mean(sesRes))} bbl/d (derived). Of its ${sesRes.length} scored residuals, ${sesRes.filter((e) => e < 0).length} are negative, ${sesRes.filter((e) => e > 0).length} positive and ${sesRes.filter((e) => e === 0).length} zero (derived by counting the signs of the returned residuals). The P50 of the paths falls while the point forecast stays flat. ses on EKENE-P1, h ${H}, seed ${S(PISu.seed)}, ${S(PISu.nSims)} paths (nSims left at its default), nonNegative ${S(false)} (stated):`);
 w();
 table(['step', 'ses point forecast', 'P90 (low), unclipped', 'P50, unclipped', 'P10 (high), unclipped'], [0, 5, H - 1].map((j) => [S(j + 1), f6(PIS.forecast[j]), f6(PISu.P90[j]), f6(PISu.P50[j]), f6(PISu.P10[j])]));
 w();
@@ -952,10 +989,20 @@ const AR2 = AR['EKENE-P2'];
 planted(1, P2A.mape === null && AR2.dropped === 3 && AR2.nUsed === Y2.length - 3, AR2.dropped);
 w(`SHUT-IN MONTHS DROPPED. fitArpsModel drops zero and negative rates before fitting; the basis reads: "${AR2.basis.dropped}". EKENE-P2 uses ${AR2.nUsed} of its ${Y2.length} months: the ${AR2.dropped} shut-in months are dropped, and the months after them keep their own time index, so the gap stays in the time axis.`);
 w();
-const LEAD = [0, 0, ...Y1.slice(0, 20)]; // stated: two months of zeros before first production
+const LEAD_N = 20; // stated: the first 20 months of EKENE-P1
+const LEAD = [0, 0, ...Y1.slice(0, LEAD_N)]; // stated: two months of zeros before first production
 const ARL = success('arpsForecast with two leading zeros', FC.arpsForecast({ y: LEAD, h: 3 }));
-w(`t = 0 IS THE FIRST POSITIVE MONTH. The same well with two months of 0 put in front (stated): \`t0Index\` ${ARL.t0Index}, ${ARL.dropped} months dropped, \`fitted\` null before index ${ARL.t0Index}, and the basis reads: "${ARL.basis.time}".`);
+w(`t = 0 IS THE FIRST POSITIVE MONTH. EKENE-P1's first ${LEAD_N} months, which hold no 0 of their own, with two months of 0 put in front (stated): \`t0Index\` ${ARL.t0Index}, ${ARL.dropped} months dropped, \`fitted\` null before index ${ARL.t0Index}, and the basis reads: "${ARL.basis.time}".`);
 must('leading zeros move t0', ARL.t0Index === 2 && ARL.fitted[0] === null && ARL.fitted[1] === null, ARL.t0Index);
+must('EKENE-P1 months 0 to 19 hold no zero', Y1.slice(0, LEAD_N).every((v) => v > 0), 'no zero');
+{
+  const LEAD48 = success('arpsForecast EKENE-P1 all 48 months with two leading zeros', FC.arpsForecast({ y: [0, 0, ...Y1], h: H }));
+  const LEAD2 = success('arpsForecast EKENE-P2 with two leading zeros', FC.arpsForecast({ y: [0, 0, ...Y2], h: H }));
+  must('P1 48 with leading zeros: t0 2, 2 dropped, same qi as without', LEAD48.t0Index === 2 && LEAD48.dropped === 2 && f6(LEAD48.qi) === f6(AR1.qi) && f6(LEAD48.fitted[2]) === f6(AR1.qi), `${LEAD48.t0Index} ${LEAD48.dropped} ${LEAD48.qi} ${LEAD48.fitted[2]}`);
+  must('P2 with leading zeros drops 5', LEAD2.dropped === AR2.dropped + 2 && LEAD2.t0Index === 2, LEAD2.dropped);
+  w();
+  w(`qi IS THE FITTED RATE AT t = 0. All ${Y1.length} months of EKENE-P1 with the same two months of 0 in front (stated): \`t0Index\` ${LEAD48.t0Index}, ${LEAD48.dropped} months dropped, qi ${f6(LEAD48.qi)}, the same qi as the fit without the zeros, and \`fitted\` at index ${LEAD48.t0Index} is ${f6(LEAD48.fitted[2])}, the fitted curve at t = 0; the rate recorded there is EKENE-P1's month 0, ${f6(Y1[0])}. On EKENE-P2 the same two zeros in front give \`t0Index\` ${LEAD2.t0Index} and ${LEAD2.dropped} months dropped: the ${AR2.dropped} shut-in months and the 2 leading zeros.`);
+}
 w();
 const REQ = ['Exponential', 'Harmonic', 'Hyperbolic'].map((mt) => [mt, success(`arpsForecast EKENE-P1 ${mt}`, FC.arpsForecast({ y: Y1, h: H, modelType: mt }))]);
 w(`A MODEL ASKED FOR BY NAME. \`modelType\` 'Auto-Select' (the default) takes the lowest RMSE; naming a model fits that one alone. EKENE-P1:`);
@@ -1112,7 +1159,7 @@ table(['convention', 'this engine', 'a common alternative', 'why the engine chos
   ['form of the recursions', 'component form (FPP3), beta the trend weight on the level change', 'error-correction form, or beta multiplied by alpha (some texts)', 'beta is statsmodels\' smoothing_trend, so a parameter compares directly'],
   ['the start', 'l_1 = y_1, b_1 = y_2 - y_1, y_2 not scored', 'estimated initial states (statsmodels), or a mean of early differences (NIST double smoothing)', 'a learner can start the recursion by hand'],
   ['the fit', 'least one-step SSE; grid then compass search in a stated box', 'maximum likelihood with a gradient optimiser', 'deterministic: the same series gives the same parameters'],
-  ['phi range when fitted', `${S(FC.DEFAULTS.PHI_MIN)} to ${S(FC.DEFAULTS.PHI_MAX)}`, 'any value in (0, 1]', 'FPP3 8.2 restricts an estimated phi to this range'],
+  ['phi range when fitted', `${S(FC.DEFAULTS.PHI_MIN)} to ${S(FC.DEFAULTS.PHI_MAX)}`, 'any value in (0, 1]', 'FPP3 8.2 restricts an estimated phi to this range, for its stated reasons: below ' + S(FC.DEFAULTS.PHI_MIN) + ' the damping has a very strong effect, and a phi close to 1 gives a damped trend that cannot be told apart from Holt\'s undamped trend'],
   ['MAPE with a zero actual', 'null with the reason', 'drop the month, or divide by a tiny number', 'a shut-in month is real and dropping it changes the metric'],
   ['sMAPE', 'absolute values in the denominator, 0 to 200, a 0/0 term scores 0', 'without absolute values, or on 0 to 100', 'Hyndman and Koehler 2006'],
   ['MASE scale', 'in-sample lag-m naive MAE of the training series, m = 1', 'the out-of-sample naive error, or a seasonal m', 'the scale is fixed before the forecast is scored'],

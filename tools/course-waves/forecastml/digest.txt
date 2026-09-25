@@ -186,11 +186,13 @@ UNDEFINED METRICS ARE NOT REFUSALS. A MAPE or a MASE the arithmetic cannot give 
 | `accuracy` | an insample of one month | mase | MASE is undefined: insample has 1 value, so the lag-1 naive forecast has no in-sample error (it needs more than 1) |
 | `accuracy` | EKENE-P3 months 0 to 8 (the plateau) as insample | mase | MASE is undefined: insample has 9 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0 |
 | `accuracy` | a lag m of 12 on an insample of 12 months | mase | MASE is undefined: insample has 12 values, so the lag-12 naive forecast has no in-sample error (it needs more than 12) |
-| `backtest` | EKENE-P3, ses, first origin 6 (inside the plateau) | mase | MASE is undefined: at origin 6 the training window has 6 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0 |
-| `backtest` | EKENE-P1, ses, lag m 12, first origin 12 | mase | MASE is undefined: at origin 12 the training window has 12 values, so the lag-12 naive forecast has no in-sample error (it needs more than 12) |
-| `backtest` | EKENE-P2, ses, first origin 20 (the shut-in in the actuals) | mape | MAPE is undefined: the actual at index 22 (origin 20, step 3) is 0 and MAPE divides by each actual |
+| `backtest` | EKENE-P3, ses, alpha 0.3 given, first origin 6 (inside the plateau), horizon 3, step 6 | mase | MASE is undefined: at origin 6 the training window has 6 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0 |
+| `backtest` | EKENE-P1, ses, alpha 0.3 given, lag m 12, first origin 12, horizon 3, step 12 | mase | MASE is undefined: at origin 12 the training window has 12 values, so the lag-12 naive forecast has no in-sample error (it needs more than 12) |
+| `backtest` | EKENE-P2, ses, alpha 0.3 given, first origin 20 (the shut-in in the actuals), horizon 3, step 6 | mape | MAPE is undefined: the actual at index 22 (origin 20, step 3) is 0 and MAPE divides by each actual |
 
-A backtest reason names the origin it comes from; an `accuracy` reason names the input. Every other metric of those calls is a number.
+A backtest reason names the origin it comes from; an `accuracy` reason names the input. Every other metric of those calls is a number. The three backtest rows state every setting, because a backtest reason can depend on the horizon and step: the MAPE reason names the first origin whose actuals hold a 0 and the step at which that 0 falls, so a different horizon or step can name a different origin and step.
+
+The same EKENE-P2 call at horizon 1, step 1 reads: "MAPE is undefined: the actual at index 22 (origin 22, step 1) is 0 and MAPE divides by each actual".
 
 WARNINGS. `fitSmoothing`, `forecastIntervals` and `backtest` add `warnings` when the compass search stops at 200000 SSE evaluations before its step falls to 2^-30 of the range (`converged` false). No fit in this course reaches that cap: every optimiser record this digest reads reports `converged` true (asserted at the end of the build).
 
@@ -295,7 +297,7 @@ THE LIMIT. The damped forecast l_n + (phi + phi^2 + ... + phi^h) b_n approaches 
 
 DAMPED WITH PHI 1 IS HOLT. With phi 1 given, the damped fit returns the same SSE (29230.297102) and the same 12 forecasts as Holt at the same alpha and beta, bit for bit: Holt is the damped method with phi = 1.
 
-PHI FITTED AND PHI GIVEN. A FITTED phi is searched from 0.8 to 0.98 inclusive; a GIVEN phi may be any number above 0 and at most 1. Every 48-month well, damped fitted:
+PHI FITTED AND PHI GIVEN. A FITTED phi is searched from 0.8 to 0.98 inclusive; a GIVEN phi may be any number above 0 and at most 1. The fitted range is the one FPP3 8.2 recommends, for its stated reasons: below 0.8 the damping has a very strong effect, and a phi close to 1 gives a damped trend that cannot be told apart from Holt's undamped trend. Every 48-month well, damped fitted:
 
 | well | alpha | beta | phi | atBounds | SSE | forecast at step 12 |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -323,6 +325,8 @@ The final SSE is at most the grid SSE on every method (the search only moves dow
 
 THE STOP RULE. The search stops, `converged` true, when a sweep at a step of at most 2^-30 of each range improves nothing; `finalStep` is that fraction. Holt on EKENE-P1 ends at 7.45e-10 after 26 halvings from 0.05. A search that reaches 200000 evaluations first stops with `converged` false and a warning (section 3).
 
+WHY 26 HALVINGS. 0.05 halved 26 times is 7.45e-10 (derived, 0.05 / 2^26), the first step at or below 2^-30, 9.31e-10; 25 halvings leave 1.49e-9, still above it. So a search that stops by the rule takes exactly 26 halvings whatever the series, and all three EKENE-P1 fits above report 26. The count follows from the starting step and the stop step.
+
 HOLDING THE FIT. Giving the fitted alpha and beta back as fixed parameters returns the same SSE and forecasts bit for bit, with `optimiser` null and the basis "all parameters given: no estimation".
 
 PARAMETERS ON THEIR BOUNDS. `optimiser.atBounds` lists every fitted parameter that ended exactly on a bound of its box (alpha and beta 0 or 1, phi 0.8 or 0.98). Across the fits of this digest:
@@ -338,7 +342,7 @@ PARAMETERS ON THEIR BOUNDS. `optimiser.atBounds` lists every fitted parameter th
 
 A parameter on its bound is a fitted value like any other; it says the SSE was still falling at the edge of the box. For alpha at 1 that is the naive forecast; for phi at 0.8 it is the strongest damping the fit may choose.
 
-A FLAT SSE SURFACE. Golden `holt-linear-exact`: the exact line 10, 12, 14, 16, 18, 20, 22, 24. Every alpha and beta give SSE 0, so the grid tie keeps its first point, alpha 0 and beta 0, and the search makes 0 moves. The parameters are not identified: any pair would fit as well. The forecasts 26.000000, 28.000000, 30.000000 continue the line.
+A FLAT SSE SURFACE. Golden `holt-linear-exact`: the exact line 10, 12, 14, 16, 18, 20, 22, 24. Every alpha and beta give SSE 0, so the grid tie keeps its first point, alpha 0 and beta 0, and the search makes 0 moves. Because that first point is a corner of the box, `atBounds` reads "alpha = 0", "beta = 0". The parameters are not identified: any pair would fit as well. The forecasts 26.000000, 28.000000, 30.000000 continue the line.
 
 # SECTION 9: The Associate workflow, end to end (owned by Associate m06 l01 and Associate m06 l03)
 
@@ -454,6 +458,8 @@ A LOW RATE TAIL. EKENE-P5, fitted on months 0 to 35 and scored on months 36 to 4
 
 A small error on a small rate is a large percentage: holt's MAE of 3.244769 bbl/d here is a MAPE of 24.095758 percent, while on EKENE-P1's hold-out holt's larger MAE of 6.783515 bbl/d is 2.781120 percent (section 11). A percentage error puts wells of different size on one scale, and on a low tail it is large for errors small in bbl/d.
 
+Both rows divide by the same MASE scale, `maseScale` 22.508571, because the scale comes from the training months (EKENE-P5 months 0 to 35) and both methods trained on the same months (section 13).
+
 sMAPE IS NOT SYMMETRIC IN THE ERROR. Stated actual 100: a forecast of 150 (50 high) scores sMAPE 40.000000, and a forecast of 50 (50 low) scores 66.666667; MAPE is 50.000000 for both. The same size of error costs more when the forecast is low, because the forecast is in the denominator.
 
 # SECTION 13: The scaled error: MASE, its in-sample naive scale and its lag (owned by Professional m03)
@@ -502,7 +508,7 @@ THE LAST ORIGIN. Origin 42 with horizon 6 on 48 months is accepted (42 + 6 = 48)
 
 # SECTION 15: Leakage: scoring months the fit has already seen (owned by Professional m04 l05 and Professional m01 l05)
 
-LEAKAGE is any route by which the months being scored reach the fit. A backtest has none by construction: at every origin only months 0 to o - 1 are fitted. Two leaky routes a learner can take, each run through the engine on EKENE-P1, against the honest one-step backtest from origin 36 (horizon 1, step 1, holt refitted):
+LEAKAGE is any route by which the months being scored reach the fit. A backtest has none by construction: at every origin only months 0 to o - 1 are fitted. Two leaky routes a learner can take, each run through the engine on EKENE-P1, against the honest one-step backtest from origin 36 (horizon 1, step 1, holt refitted: 12 origins, 36 to 47, one error each):
 
 | route | MAE on months 36 to 47, one step ahead | what leaked |
 | --- | --- | --- |
@@ -546,6 +552,8 @@ EACH ORIGIN ITS OWN SCALE. MASE divides each error by the Q of its own origin's 
 
 Dividing every error by the last origin's scale instead (derived, a wrong method) gives 0.458893 against the engine's 0.374515.
 
+READING A POOLED MASE. When the origins carry different scales, the pooled MASE is the mean of every error divided by its own origin's Q. So a pooled MASE above 1 says the scaled errors averaged above 1, while the MAE can still sit below one origin's Q, and a pooled MASE below 1 says they averaged below 1; section 17 prints a case. Read a pooled MASE against the yardstick of 1.
+
 ONE ORIGIN CAN LEAVE A METRIC UNDEFINED. EKENE-P3, damped, first origin 6, horizon 6, step 6 (stated) (refit true, the default): origins 6, 12, 18, 24, 30, 36, 42. Origin 6 trains on months 0 to 5, all inside the plateau, so its Q is 0 (`maseScale` null); the other origins have scales 18.163636, 37.629412, 38.791304, 36.041379, 35.505714, 33.797561. One null scale leaves the overall MASE and every by-horizon MASE null, with the reason: "MASE is undefined: at origin 6 the training window has 6 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0". The other metrics are numbers: MAE 62.892091, sMAPE 11.808809.
 
 Starting at origin 12 instead, past the plateau (stated), every origin has a scale and the overall MASE is 2.004154. Choosing the origins is part of the test; state them.
@@ -556,14 +564,14 @@ Starting at origin 12 instead, past the plateau (stated), every origin has a sca
 
 | window | method | MAE | RMSE | MAPE | sMAPE | MASE |
 | --- | --- | --- | --- | --- | --- | --- |
-| months 0 to 21, origins 10, 13, 16, 19, horizon 3 | ses | 46.858333 | 52.606677 | 9.796323 | 9.211623 | 1.006754 |
-| months 0 to 21, origins 10, 13, 16, 19, horizon 3 | holt | 22.412654 | 26.275983 | 4.616605 | 4.703456 | 0.483573 |
-| months 0 to 21, origins 10, 13, 16, 19, horizon 3 | damped | 23.269948 | 27.181239 | 4.897800 | 4.747889 | 0.504549 |
-| months 0 to 21, origins 10, 13, 16, 19, horizon 3 | arps | 17.012466 | 20.918089 | 3.702719 | 3.768663 | 0.389192 |
-| all 48 months, origins 28, 31, 34, 37, 40, horizon 6 | ses | 43.530000 | 51.812325 | 13.898626 | 12.619697 | 0.789324 |
-| all 48 months, origins 28, 31, 34, 37, 40, horizon 6 | holt | 31.606865 | 37.929339 | 9.773629 | 10.338085 | 0.571171 |
-| all 48 months, origins 28, 31, 34, 37, 40, horizon 6 | damped | 32.820015 | 40.387899 | 10.567776 | 9.770766 | 0.599131 |
-| all 48 months, origins 28, 31, 34, 37, 40, horizon 6 | arps | 32.176780 | 39.058863 | 10.882779 | 10.094073 | 0.605968 |
+| months 0 to 21, origins 10, 13, 16, 19, horizon 3, step 3 | ses | 46.858333 | 52.606677 | 9.796323 | 9.211623 | 1.006754 |
+| months 0 to 21, origins 10, 13, 16, 19, horizon 3, step 3 | holt | 22.412654 | 26.275983 | 4.616605 | 4.703456 | 0.483573 |
+| months 0 to 21, origins 10, 13, 16, 19, horizon 3, step 3 | damped | 23.269948 | 27.181239 | 4.897800 | 4.747889 | 0.504549 |
+| months 0 to 21, origins 10, 13, 16, 19, horizon 3, step 3 | arps | 17.012466 | 20.918089 | 3.702719 | 3.768663 | 0.389192 |
+| all 48 months, origins 28, 31, 34, 37, 40, horizon 6, step 3 | ses | 43.530000 | 51.812325 | 13.898626 | 12.619697 | 0.789324 |
+| all 48 months, origins 28, 31, 34, 37, 40, horizon 6, step 3 | holt | 31.606865 | 37.929339 | 9.773629 | 10.338085 | 0.571171 |
+| all 48 months, origins 28, 31, 34, 37, 40, horizon 6, step 3 | damped | 32.820015 | 40.387899 | 10.567776 | 9.770766 | 0.599131 |
+| all 48 months, origins 28, 31, 34, 37, 40, horizon 6, step 3 | arps | 32.176780 | 39.058863 | 10.882779 | 10.094073 | 0.605968 |
 
 Before the shut-in the ranking by MASE is arps, holt, damped, ses: arps first. After the workover it is holt, damped, arps, ses, with arps third. The Arps fit is a regression on every positive month of each training window, the months before the uplift included, and its mean error after the workover is -23.147528 bbl/d against holt's 20.751043.
 
@@ -588,6 +596,10 @@ ON A CLEAN DECLINE, EKENE-P1, first origin 30, horizon 6, step 3 (stated), the r
 | holt | 3.164825 | 9.999988 | 12.012815 | 3.801825 | 3.846513 | 0.346480 | true | 1 | none |
 | damped | -2.074236 | 8.125891 | 10.132261 | 3.174119 | 3.139259 | 0.287529 | true | 1 | none |
 | arps | -0.407739 | 5.668226 | 6.448251 | 2.185755 | 2.183781 | 0.199862 | true | 1 | none |
+
+A POOLED MASE ACROSS SCALES. In that comparison ses has MAE 30.533333 and MASE 1.067547; its origin scales are origin 30 Q 32.003448, origin 33 Q 30.034375, origin 36 Q 28.045714, origin 39 Q 26.842105, origin 42 Q 25.682927. The MAE sits below the Q of origin 30 and above the others, and the MASE above 1 says ses's scaled errors averaged above 1.
+
+THE SIGNS OF THE ARPS ERRORS. Of the 30 arps errors in that comparison, 15 are positive (the baseline was low), 15 negative (the baseline was high) and 0 zero (derived by counting the signs of the returned errors); its ME is -0.407739.
 
 WRITING UP A BACKTEST names: the well and months; the methods; first origin, horizon, step and so the origins; refit or held; each metric with its reason when null; MASE with its lag m; the ranking and the metric it is by.
 
@@ -632,7 +644,7 @@ More paths steady the percentiles; they do not make the method right.
 
 RESIDUALS DRAWN WITHOUT CENTRING. The engine does not subtract the residual mean before it resamples, and its basis says so in these words: "residuals are drawn as fitted without centring (their mean is not subtracted), so a method whose residuals have a non-zero mean drifts: on a declining well a flat method's paths can fall below its own point forecast". ses on EKENE-P1, below, is that case: a flat method on a declining well. A centred bootstrap (the mean subtracted first) is the alternative in common use (section 24).
 
-A MEDIAN AWAY FROM THE POINT FORECAST. The residuals are drawn as fitted (their mean over the damped pool here is -1.726983 bbl/d, derived). When the residuals lean one way, every path leans with them and the state carries the lean forward. ses on EKENE-P1 shows it plainly: alpha fits to 1, so each residual is a month-to-month change of the decline, mean -20.525532 bbl/d (derived). The P50 of the paths falls while the point forecast stays flat. ses on EKENE-P1, h 12, seed 11, 1000 paths (nSims left at its default), nonNegative false (stated):
+A MEDIAN AWAY FROM THE POINT FORECAST. The residuals are drawn as fitted (their mean over the damped pool here is -1.726983 bbl/d, derived). When the residuals lean one way, every path leans with them and the state carries the lean forward. ses on EKENE-P1 shows it plainly: alpha fits to 1, so each residual is a month-to-month change of the decline, mean -20.525532 bbl/d (derived). Of its 47 scored residuals, 39 are negative, 8 positive and 0 zero (derived by counting the signs of the returned residuals). The P50 of the paths falls while the point forecast stays flat. ses on EKENE-P1, h 12, seed 11, 1000 paths (nSims left at its default), nonNegative false (stated):
 
 | step | ses point forecast | P90 (low), unclipped | P50, unclipped | P10 (high), unclipped |
 | --- | --- | --- | --- | --- |
@@ -689,7 +701,9 @@ PRINTED ALIKE. EKENE-P1's b prints 0.500000 and is 0.49999999999999994 as return
 
 SHUT-IN MONTHS DROPPED. fitArpsModel drops zero and negative rates before fitting; the basis reads: "fitArpsModel drops zero and negative values (shut-in months) before fitting". EKENE-P2 uses 45 of its 48 months: the 3 shut-in months are dropped, and the months after them keep their own time index, so the gap stays in the time axis.
 
-t = 0 IS THE FIRST POSITIVE MONTH. The same well with two months of 0 put in front (stated): `t0Index` 2, 2 months dropped, `fitted` null before index 2, and the basis reads: "step k is passed as day k, so qi is per step and Di per step; t = 0 at index 2, the first positive value".
+t = 0 IS THE FIRST POSITIVE MONTH. EKENE-P1's first 20 months, which hold no 0 of their own, with two months of 0 put in front (stated): `t0Index` 2, 2 months dropped, `fitted` null before index 2, and the basis reads: "step k is passed as day k, so qi is per step and Di per step; t = 0 at index 2, the first positive value".
+
+qi IS THE FITTED RATE AT t = 0. All 48 months of EKENE-P1 with the same two months of 0 in front (stated): `t0Index` 2, 2 months dropped, qi 1202.685523, the same qi as the fit without the zeros, and `fitted` at index 2 is 1202.685523, the fitted curve at t = 0; the rate recorded there is EKENE-P1's month 0, 1176.100000. On EKENE-P2 the same two zeros in front give `t0Index` 2 and 5 months dropped: the 3 shut-in months and the 2 leading zeros.
 
 A MODEL ASKED FOR BY NAME. `modelType` 'Auto-Select' (the default) takes the lowest RMSE; naming a model fits that one alone. EKENE-P1:
 
@@ -799,7 +813,7 @@ Every convention below is a choice the engine states in its basis. Each has a re
 | form of the recursions | component form (FPP3), beta the trend weight on the level change | error-correction form, or beta multiplied by alpha (some texts) | beta is statsmodels' smoothing_trend, so a parameter compares directly |
 | the start | l_1 = y_1, b_1 = y_2 - y_1, y_2 not scored | estimated initial states (statsmodels), or a mean of early differences (NIST double smoothing) | a learner can start the recursion by hand |
 | the fit | least one-step SSE; grid then compass search in a stated box | maximum likelihood with a gradient optimiser | deterministic: the same series gives the same parameters |
-| phi range when fitted | 0.8 to 0.98 | any value in (0, 1] | FPP3 8.2 restricts an estimated phi to this range |
+| phi range when fitted | 0.8 to 0.98 | any value in (0, 1] | FPP3 8.2 restricts an estimated phi to this range, for its stated reasons: below 0.8 the damping has a very strong effect, and a phi close to 1 gives a damped trend that cannot be told apart from Holt's undamped trend |
 | MAPE with a zero actual | null with the reason | drop the month, or divide by a tiny number | a shut-in month is real and dropping it changes the metric |
 | sMAPE | absolute values in the denominator, 0 to 200, a 0/0 term scores 0 | without absolute values, or on 0 to 100 | Hyndman and Koehler 2006 |
 | MASE scale | in-sample lag-m naive MAE of the training series, m = 1 | the out-of-sample naive error, or a seasonal m | the scale is fixed before the forecast is scored |

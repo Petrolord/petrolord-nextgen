@@ -1367,7 +1367,7 @@
       "apply_d4_forecastml.sh"
     ],
     "pins": {
-      "digest.txt": "2c952d3c42adc54423d211c83bf5f8715302efb4460819efe043527e11d671ef",
+      "digest.txt": "726d6a26bf17a428eb22af2d263220d946b64736be14ae625756f609fca23a0e",
       "fields.json": "1ffa032f9a4d713aef4a82aed8520fcef8675555442e36980d120591c41cacc9"
     }
   }
