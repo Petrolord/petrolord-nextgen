@@ -1,0 +1,19 @@
+-- ============================================================================
+-- D4 PROFESSIONAL DEEP SEED: Data-Driven Production Forecasting, intermediate
+-- tier.
+--
+-- Six modules, 26 lessons, 132 questions. Generated from the tier's
+-- manifest.json and the committed bank JSONs under
+-- tools/course-banks/forecastml/intermediate.
+--
+-- What this tier owns: TESTING A FORECAST HONESTLY. Errors as actual minus
+-- forecast, bias, MAE and RMSE; MAPE and a zero actual, sMAPE on 0 to 200;
+-- MASE scaled by the training months' naive error and its lag; rolling-origin
+-- backtests with an expanding window, refitted or held, and leakage; pooled
+-- and by-horizon metrics, each origin its own scale; methods compared on the
+-- same origins. Digest sections 11 to 17, and section 25.
+--
+-- THE TRAP THE TIER IS BUILT ON. A forecast is judged on months it never saw,
+-- with a metric that stays defined through a shut-in month. The Professional
+-- capstone grades six Professional quantities.
+-- ============================================================================

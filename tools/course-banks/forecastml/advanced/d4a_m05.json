@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "A caller gives alpha by hand to `fitSmoothing`. Where does the accepted range begin and end?",
+  "options": [
+   "Numbers strictly between 0 and 1, since alpha 0 would leave the level stuck at y_1",
+   "0 to 1 when given and 0.8 to 0.98 when fitted, the box the search keeps it in",
+   "Any number from 0 to 1 with both ends included, while -0.1 and 1.2 are refused",
+   "Any number at all, clipped into the box from 0 to 1 before the fit starts"
+  ],
+  "answer": 2,
+  "explanation": "The boundary table: alpha and beta given, 0 and 1 accepted (inclusive), -0.1 and 1.2 refused with \"alpha must be a number from 0 to 1 (inclusive)\". alpha 0 is legal: the level then never moves from y_1, and the forecast is month 0's rate for ever. 0.8 to 0.98 is the fitted box for phi, and a fitted alpha stays in 0 to 1. A given value outside the range is refused outright."
+ },
+ {
+  "prompt": "A phi given to `fitSmoothing` is checked against which rule?",
+  "options": [
+   "From 0.8 to 0.98, the same box the fit searches when phi is left free",
+   "From 0 to 1 with both ends included, the same rule as alpha and beta",
+   "Above 0 and below 1, since a phi of 1 would turn the damped method into holt",
+   "Above 0 and at most 1: 0.01 and 1 are accepted, 0 and 1.05 refused"
+  ],
+  "answer": 3,
+  "explanation": "A given phi may be any value above 0 and at most 1, exclusive at 0 and inclusive at 1; the refusal says so, adding that a fitted phi is searched from 0.8 to 0.98. The fitted box is narrower than the given rule; phi 0.5 can be given and held. A phi of 0 is refused. phi 1 is accepted, and damped with phi 1 returns the same SSE and forecasts as holt, bit for bit."
+ },
+ {
+  "prompt": "h 0 is accepted by some functions and refused by another. Which way round is it?",
+  "options": [
+   "`fitSmoothing` and `arpsForecast` accept it, and `forecastIntervals` refuses it",
+   "`forecastIntervals` accepts it, and `fitSmoothing` refuses it as an empty horizon",
+   "All three accept it, since 0 is the default h in every function that takes one",
+   "`arpsForecast` refuses it, because an Arps curve needs at least one step to draw"
+  ],
+  "answer": 0,
+  "explanation": "For a fit and an Arps forecast h runs from 0 to 10000, and h 0 returns an empty forecast; the bootstrap forecasts at least one step, so its h runs from 1, and h 0 is refused with \"h must be a whole number from 1 to 10000\". h is 0 when left out of a fit, while the bootstrap has its own rule. `arpsForecast` shares the fit's rule."
+ },
+ {
+  "prompt": "A backtest on 48 months with horizon 6: which is the largest first origin it accepts?",
+  "options": [
+   "41, since the last origin must leave one month spare after its horizon",
+   "42, since o + horizon = n is accepted, and 43 is refused",
+   "43, because a horizon may run past the series and score what actuals remain",
+   "48, the series length itself, where the origin forecasts months beyond the data"
+  ],
+  "answer": 1,
+  "explanation": "The last origin must leave all its actuals inside the series: o + horizon = n is accepted and o + horizon > n refused, so 42 is accepted (42 + 6 = 48). No spare month is needed. An origin whose horizon runs past the end would be scored on fewer than 6 actuals, and the refusal says so: \"an origin above 42 leaves fewer than 6 actuals\"."
+ },
+ {
+  "prompt": "`compareWithArps` is passed ses alone, with first origin 2. What comes back?",
+  "options": [
+   "An accepted comparison, since ses needs only 2 training values and is the only method listed",
+   "A comparison with the arps row unranked at origin 2 and ses ranked alone",
+   "A refusal, because ses cannot be compared without holt or damped beside it",
+   "A refusal: a comparison needs 3 training values whatever methods are listed"
+  ],
+  "answer": 3,
+  "explanation": "The engine's words: \"firstOrigin must be a whole number from 3 to 42 (the comparison needs 3 training values; an origin above 42 leaves fewer than 6 actuals)\". The boundary table says 2 is refused even for ses alone; the comparison's rule is its own and stricter than a backtest of ses, which accepts 2. The call is refused, so no row is scored. A list of one method is accepted."
+ },
+ {
+  "prompt": "With `nonNegative` true, a percentile at some step comes out exactly 0 as simulated. How is it reported?",
+  "options": [
+   "As 0, reported as simulated and left out of the `clippedToZero` count",
+   "As 0, and counted in `clippedToZero` along with every negative percentile",
+   "As null, since a rate of exactly zero is read as a shut-in month",
+   "Raised to the smallest positive simulated value at that step"
+  ],
+  "answer": 0,
+  "explanation": "The boundary is per rule: a percentile at or above 0 is reported as simulated, and only one below 0 is reported as 0 and counted. So a percentile of exactly 0 is left alone and not counted. The engine never turns a percentile into null, and no rule raises one to another simulated value."
+ },
+ {
+  "prompt": "During the compass search, a trial of +step would carry a fitted alpha to 1.05. What does the engine do with that trial?",
+  "options": [
+   "Refuses the fit, naming `alpha`, since an alpha above 1 is refused when it is given",
+   "Evaluates alpha 1.05 as it stands, since the box binds only the points of the grid",
+   "Clips it to 1, the edge of the box, and skips the trial if the clip leaves alpha where it was",
+   "Reflects the trial back inside the box to 0.95 and evaluates the SSE there"
+  ],
+  "answer": 2,
+  "explanation": "A compass trial past an edge is clipped to it, and a trial the clip leaves where it was is skipped; a fitted alpha stays in [0, 1]. A refusal is for a value the caller gives; a search trial is only clipped. The box binds the search as well as the grid. No trial is reflected."
+ },
+ {
+  "prompt": "EKENE-P4's damped fit lists `atBounds` phi = 0.8. How does the course read that?",
+  "options": [
+   "The fit failed, and the engine would have refused it had the search not converged",
+   "phi is a fitted value on the lower edge of its box, the strongest damping the fit may choose",
+   "phi was given as 0.8 and held fixed, and `atBounds` is where a given value is recorded",
+   "The search ran out of evaluations at the edge and returned a warning with the fit"
+  ],
+  "answer": 1,
+  "explanation": "A parameter on its bound is a fitted value like any other; it says the SSE was still falling at the edge of the box, and for phi at 0.8 that is the strongest damping allowed. The fit converged, and nothing is refused. A given parameter is listed in `fixed` and never in `atBounds`, as phi 0.5 given on EKENE-P1 shows. No fit in the course reaches the evaluation cap."
+ },
+ {
+  "prompt": "Two trials in one compass sweep lower the SSE by exactly the same amount. Which one does the search move to?",
+  "options": [
+   "The earlier: +step before -step, alpha before beta before phi",
+   "The later one, since each new trial replaces the best whenever it is no worse",
+   "Whichever lies within 1.00e-12 of the best grid point's SSE",
+   "Neither, since a tie counts as no improvement and the step is halved"
+  ],
+  "answer": 0,
+  "explanation": "The tie rules table: in the compass search a trial must be strictly below the current SSE to replace it, so the earlier trial is kept, in the stated order. Replacing on no worse would let the later trial win. 1.00e-12 is the band of the grid and of the ranking, and it plays no part here. Both trials improve on the current SSE, so the sweep has improved and the step is not halved."
+ },
+ {
+  "prompt": "In the golden `holt-linear-exact`, the line 10, 12, 14, ..., 24, every alpha and beta give SSE 0. What does the fit return?",
+  "options": [
+   "alpha 1 and beta 1, the naive forecast of a line, which the grid reaches at its very last point",
+   "A refusal, since parameters that cannot be identified cannot be fitted at all",
+   "alpha 0.5 and beta 0.5, the middle of the box, which the engine takes when every point ties",
+   "alpha 0 and beta 0, the grid's first point, kept by the tie rule, with 0 moves in the search"
+  ],
+  "answer": 3,
+  "explanation": "On the coarse grid a later point replaces the best only when its SSE is below best x (1 - 1.00e-12), so with every point at 0 the first, alpha 0 and beta 0, is kept, and the compass search makes 0 moves. The parameters are not identified, and the tie rule is what makes the answer the same every time; nothing is refused. The last grid point never displaces a tie, and no middle point is chosen."
+ },
+ {
+  "prompt": "Holt on EKENE-P1 ends its compass search at a final step of 7.45e-10 after 26 halvings. What stopped it?",
+  "options": [
+   "It reached the cap of 200000 SSE evaluations before the step could fall any further",
+   "A sweep at a step of at most 2^-30 of the range, 9.31e-10, improved nothing",
+   "The SSE fell below the grid's tie band of 1.00e-12, so no further move could count",
+   "Its parameters stopped changing at six decimals, the precision the course prints them at"
+  ],
+  "answer": 1,
+  "explanation": "The stop rule is a rule on the step: the step starts at 0.05 of each range, halves after a sweep with no improvement, and the search stops when a sweep at a step of at most 2^-30 of the range improves nothing; `converged` is true. Holt on EKENE-P1 takes 329 evaluations, far from the cap. 1.00e-12 is a relative tie band on the grid and puts no floor under the SSE. Printed decimals play no part in the search."
+ },
+ {
+  "prompt": "What does `fitSmoothing` return if its search reaches 200000 SSE evaluations before the step falls to 2^-30 of the range?",
+  "options": [
+   "A refusal naming `y`, since a series that long cannot be fitted within the cap",
+   "It restarts from the next best grid point with a fresh budget of evaluations",
+   "A fit with `converged` false and a warning, its parameters being where the search stopped",
+   "The grid's best point, with every compass move discarded as unconverged"
+  ],
+  "answer": 2,
+  "explanation": "The evaluation cap warns and never refuses: the fit returns with `converged` false and a message in `warnings`, and its parameters are read as the point where the search stopped, which may not be the minimum. No restart and no discarding happen. No fit in this course reaches the cap; the three EKENE-P1 fits take 38, 329 and 1067 evaluations."
+ },
+ {
+  "prompt": "EKENE-P6, with 3 months, is backtested with holt at horizon 1. What does the engine reply?",
+  "options": [
+   "\"y has 3 values: a backtest with horizon 1 needs at least 4 ('holt' needs 3 training values, then 1 actual)\"",
+   "A backtest from origin 3 with no actuals to score, returning every one of its metrics as null",
+   "An accepted backtest from first origin 2, since horizon 1 needs only a single actual after it",
+   "\"horizon must be a whole number, 1 or more\", naming `horizon`, since 1 is below the least horizon"
+  ],
+  "answer": 0,
+  "explanation": "A backtest needs the method's fitting length, 3 for holt, plus a full horizon of actuals, so 3 values are one short and the refusal names `y` in the words quoted. An origin with no actuals is never run. holt from origin 2 is refused, because holt needs 3 training values. Horizon 1 is legal; the refusal is for a horizon of 0."
+ },
+ {
+  "prompt": "EKENE-P1 repeated to 5005 values is backtested with step 1, and the engine refuses, naming `step`. What remedy does its message name?",
+  "options": [
+   "Shorten the series to fewer than 5000 values, since that is where the series cap sits",
+   "Lower the horizon to 1, since each origin is charged for every step of its horizon",
+   "Call `compareWithArps` instead, whose own cap on origins is ten times higher",
+   "Raise step or firstOrigin, since 5003 origins are above the 5000 a backtest accepts"
+  ],
+  "answer": 3,
+  "explanation": "The engine's words: \"step gives 5003 origins, above the 5000 a backtest accepts: raise step or firstOrigin\". The series cap is 100000 values, far above 5005. The origin count depends on the first origin and the step; the horizon only moves the last origin. A comparison shares the cap of 5000 origins."
+ },
+ {
+  "prompt": "A series of 100001 values reaches the engine. Which functions refuse it?",
+  "options": [
+   "Only `backtest` and `compareWithArps`, which fit once per origin",
+   "All six, while 100000 values are fitted by `fitSmoothing`",
+   "None: the only length cap is on h, which stops at 10000",
+   "`forecastIntervals` alone, as 1000 paths on that series are too many"
+  ],
+  "answer": 1,
+  "explanation": "The boundary table: 100000 values fitted by `fitSmoothing`, 100001 refused by all six, with \"y has 100001 values, above the 100000 this engine accepts\". The origin cap is a separate rule. h has its own cap of 10000, and the series has its own of 100000. The path cap is on nSims, 100000, and it has no link to the series length."
+ }
+]

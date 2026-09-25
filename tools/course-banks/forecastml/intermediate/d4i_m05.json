@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "How many errors do the teaching backtest's overall metrics average over?",
+  "options": [
+   "6, one per step ahead, each already averaged over the four origins",
+   "24: four origins times six steps",
+   "4, one per origin, each being that origin's own mean error",
+   "48, one for every month of EKENE-P1 from month 0 to month 47"
+  ],
+  "answer": 1,
+  "explanation": "The basis reads \"overall metrics average over every origin and step\", and origins 24, 30, 36 and 42 each score 6 steps, so 4 x 6 = 24 errors are pooled. The by-horizon view is a separate breakdown, and no origin mean is averaged in its place. Months 0 to 23 are never scored, being training months at every origin."
+ },
+ {
+  "prompt": "Pooled over the teaching backtest, holt's ME is 6.558931. On the teaching hold-out alone it was -4.573069. What does the pooled figure say?",
+  "options": [
+   "The pooled run is wrong, as one method on one well must keep the sign of its bias",
+   "Over the four origins holt forecast low on average, though from origin 36 it ran high",
+   "Holt forecast high over the whole backtest, as a positive ME marks a high forecast each time",
+   "The two figures are the same bias, reported with opposite signs by the two functions used"
+  ],
+  "answer": 1,
+  "explanation": "An error is actual minus forecast, so a positive ME says the forecasts were low on average; origins 24, 30 and 42 carry mostly positive errors while origin 36, the teaching hold-out's origin, carries mostly negative ones. Both functions use the same sign rule, and one well can show a bias of either sign depending on the months and origins pooled."
+ },
+ {
+  "prompt": "The teaching backtest's `byHorizon` row for step 1 prints MAE 10.992423. How many errors does that figure rest on?",
+  "options": [
+   "24, every error of the backtest reweighted toward step 1",
+   "6, one for each step of the first origin's forecast run",
+   "1, the first error of the first origin, at month 24",
+   "4, the step 1 error of each origin"
+  ],
+  "answer": 3,
+  "explanation": "`byHorizon` scores step 1 of every origin together, so with origins 24, 30, 36 and 42 each step has 4 errors: 11.627690, 9.126974, -12.431964 and 10.783063 at step 1. The course warns that a figure on 4 numbers is a small sample. The 24 errors are the overall pool, and a single origin's run is no by-horizon row."
+ },
+ {
+  "prompt": "In the teaching backtest's by-horizon rows, the MAE reads 10.992423 at step 1, 8.726945 at step 2, 9.044099 at step 3, 7.135803 at step 4, 16.466929 at step 5 and 18.348056 at step 6. Which reading does the course give?",
+  "options": [
+   "The MAE rises at every step, the textbook pattern of a forecast fading with distance",
+   "Step 4 is the method's best horizon, and the note should say holt forecasts four months best",
+   "Steps 5 and 6 are outliers, to be dropped from the pooled figures before they are quoted",
+   "Step 6 misses by more than step 1, but the steps between do not rise in order"
+  ],
+  "answer": 3,
+  "explanation": "The step 6 MAE is above step 1 on this well, while step 2 and step 4 are below step 1, so the rows do not rise in order. With 4 errors per step a by-horizon figure is a small sample, so no best horizon is claimed from it, and nothing is dropped from a pooled metric."
+ },
+ {
+  "prompt": "At step 3 of the teaching backtest the by-horizon ME and MAE both read 9.044099. What does that say about the four step 3 errors?",
+  "options": [
+   "All four are positive: each origin's forecast was low three steps out",
+   "All four are negative; the MAE prints the negative mean's size",
+   "They cancel to zero, so the ME equals the MAE by coincidence of rounding",
+   "Only the origin 36 error is positive, and it dominates both of the means"
+  ],
+  "answer": 0,
+  "explanation": "The ME equals the MAE only when no error is negative, and the step 3 errors are 23.391678, 6.259443, 3.128846 and 3.396430, all positive, so every forecast was low at step 3. Negative errors would make the ME equal minus the MAE, and cancelling errors would leave the ME below the MAE."
+ },
+ {
+  "prompt": "The engine's pooled MASE for the teaching backtest is 0.374515. How is each error scaled?",
+  "options": [
+   "The first origin's scale, 36.956522, held fixed for every origin of the run",
+   "The naive error of the six months each origin forecasts",
+   "By the lag-1 naive in-sample MAE of its own origin's training window",
+   "One mean of the four origins' scales, taken at the end"
+  ],
+  "answer": 2,
+  "explanation": "The basis reads \"MASE scales each error by its own origin's lag-1 naive in-sample MAE\": origin 24 by 36.956522, origin 30 by 32.003448, origin 36 by 28.045714 and origin 42 by 25.682927. No single scale is used for the run, and the forecast months never set a scale."
+ },
+ {
+  "prompt": "Dividing every error of the teaching backtest by the last origin's scale gives 0.458893 in place of the engine's 0.374515. Why is it higher?",
+  "options": [
+   "The last origin's errors are the largest, and its scale is built from them in the process",
+   "The scales fall from origin to origin, so the last origin's 25.682927 is the smallest divisor",
+   "One scale for all four origins double counts the errors that fall at the shared months",
+   "The last origin's scale uses lag 12, which on a declining well is the larger scale"
+  ],
+  "answer": 1,
+  "explanation": "Each origin's training window has its own Q, 36.956522 falling to 25.682927 at origin 42, so dividing every error by the smallest one inflates the figure. A scale is built from training months, never from errors; the step equals the horizon, so no month is shared; and every scale here is lag 1."
+ },
+ {
+  "prompt": "The teaching backtest's pooled RMSE is 14.083697 and its pooled MAE 11.785709. Which statement holds?",
+  "options": [
+   "Both pool the same 24 errors, and RMSE weights the large ones more by squaring",
+   "RMSE is in percent and MAE in bbl/d, so their gap cannot be read as a size",
+   "RMSE pools the 4 origin means and MAE the 24 errors, hence the larger figure printed",
+   "The gap shows the refitted run leaked, as an honest backtest keeps them equal"
+  ],
+  "answer": 0,
+  "explanation": "RMSE and MAE are both in bbl/d and both average over every origin and step, the same 24 errors; squaring gives large errors more weight, so RMSE is at least MAE. The gap says nothing about leakage."
+ },
+ {
+  "prompt": "The teaching backtest pools MAPE 4.002905 and sMAPE 4.065956. What do these figures describe?",
+  "options": [
+   "The mean of each origin's MAPE and sMAPE, taken as four figures and averaged once more",
+   "Percentage errors over all 24 forecasts of months 24 to 47, pooled across four origins",
+   "Percentage errors on the training months, the in-sample one-step residuals of each window",
+   "Holt's MAPE and sMAPE at step 1 alone, being the step the backtest is ranked on"
+  ],
+  "answer": 1,
+  "explanation": "Overall metrics average over every origin and step, so the pooled MAPE and sMAPE run over the 24 forecast errors on months 24 to 47, in percent. They pool the errors themselves with no origin means in between, score out-of-sample forecasts, and cover every step."
+ },
+ {
+  "prompt": "EKENE-P3 is backtested with damped from first origin 6, horizon 6, step 6, refitted. What does the engine return for the overall MASE?",
+  "options": [
+   "Null, because origin 6 trains on the plateau months 0 to 5, whose scale is 0",
+   "A number pooled from the six origins that have a scale, with origin 6 left out",
+   "A refusal naming `firstOrigin`, since an origin inside a plateau is not allowed",
+   "Infinity, the origin 6 errors having been divided by a scale of 0.000000"
+  ],
+  "answer": 0,
+  "explanation": "Origin 6's training window is all 1500.000000, so its Q is 0 and `maseScale` is null. One null scale leaves the overall MASE and every by-horizon MASE null, with the reason naming origin 6. The engine drops no origin, accepts the call, and never divides by zero."
+ },
+ {
+  "prompt": "In that EKENE-P3 backtest from origin 6, MASE is null. What becomes of the other metrics?",
+  "options": [
+   "Null too, since one null metric voids every pooled figure",
+   "Computed from origin 12 on, the first origin with a scale above 0",
+   "They are numbers: MAE 62.892091 and sMAPE 11.808809",
+   "Refused along with MASE, the call restarting at origin 12"
+  ],
+  "answer": 2,
+  "explanation": "Only MASE depends on the scale; the other metrics are numbers, MAE 62.892091 and sMAPE 11.808809, over every origin including origin 6. Nothing is refused and no origin is dropped; the null MASE comes with its reason."
+ },
+ {
+  "prompt": "The same EKENE-P3 backtest started at first origin 12, past the plateau, gives an overall MASE of 2.004154. What does the course take from the pair of runs?",
+  "options": [
+   "The origin 12 run corrects the first and replaces it",
+   "The runs agree once the null origin is removed",
+   "A MASE above 2 shows damped fails on any well that starts on a plateau",
+   "Choosing the origins is part of the test, so the origins are stated"
+  ],
+  "answer": 3,
+  "explanation": "Starting past the plateau gives every origin a scale and a pooled MASE of 2.004154; starting at 6 leaves it null. Those are two backtests with different origins, and the course's rule is to state them. Neither corrects the other, the engine removes no origin, and one well supports no claim about every plateau."
+ },
+ {
+  "prompt": "Which reason does the EKENE-P3 damped backtest from first origin 6 give for its null MASE?",
+  "options": [
+   "\"MASE is undefined: insample has 9 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0\", as `accuracy` gives",
+   "\"MASE needs insample (the training series) to scale by its in-sample naive error\", since a backtest passes no training series of its own to the scaled error at any origin",
+   "\"MASE is undefined: at origin 6 the training window has 6 values and the lag-1 naive forecast has zero in-sample error on them (every y[t] - y[t - 1] is 0), so the scale is 0\"",
+   "A refusal naming `y`, as a series whose first months repeat one rate exactly is not accepted by `backtest`, and the call returns no metrics for any of its origins at all"
+  ],
+  "answer": 2,
+  "explanation": "A backtest reason names the origin it comes from, so the reason names origin 6 and its window of 6 values, in the engine's own words. The 9-value reason belongs to an `accuracy` call on the whole plateau, and a backtest builds each origin's training series itself. The series is accepted."
+ },
+ {
+  "prompt": "Across the teaching backtest the training-window scale falls from 36.956522 at origin 24 to 25.682927 at origin 42. What must be true of the months each later window adds?",
+  "options": [
+   "They are shut-in months, whose zero rates pull the naive error of the window down",
+   "They are the months the earlier origins scored, now counted with their errors halved",
+   "Their month-to-month changes are smaller on average than those already in the window",
+   "Nothing about them; the engine shrinks each origin's scale by a fixed share as it moves"
+  ],
+  "answer": 2,
+  "explanation": "Q is the mean of |y_t - y_(t-1)| over the training window, so it can fall as a window grows only if the differences added are smaller than the mean before them: on EKENE-P1's decline the later months change less. EKENE-P1 has no shut-in, a scale is built from rates and never from errors, and no fixed shrink is applied."
+ },
+ {
+  "prompt": "At step 2 the teaching backtest's by-horizon ME is -0.602230 while every other step's ME is positive. What should a note do with that?",
+  "options": [
+   "Report it as one row of 4 errors, a small sample, and draw no rule from it",
+   "Say holt forecasts high two months out, as a rule for EKENE-P1",
+   "Drop step 2 from the pooled ME, being the only step of opposite sign",
+   "Refit the backtest with step 2 so that the sign agrees with the rest"
+  ],
+  "answer": 0,
+  "explanation": "Each by-horizon figure rests on 4 errors, one per origin, so a sign at one step is a small-sample reading and no rule. Nothing is dropped from a pooled metric, and the step between origins is a setting of the test that is not chosen to change a sign."
+ }
+]

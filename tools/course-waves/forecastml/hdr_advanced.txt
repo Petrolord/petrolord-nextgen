@@ -1,0 +1,19 @@
+-- ============================================================================
+-- D4 EXPERT DEEP SEED: Data-Driven Production Forecasting, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions. Generated from the tier's
+-- manifest.json and the committed bank JSONs under
+-- tools/course-banks/forecastml/advanced.
+--
+-- What this tier owns: UNCERTAINTY, THE ARPS BASELINE AND THE ENGINE'S RULES.
+-- The residual bootstrap from one seeded stream, the quantile rule and the
+-- exceedance labels (P90 the low case), negatives reported as zero; the Arps
+-- baseline from the decline curve engine with a month passed as a day; the
+-- ranking against Arps, ties and unranked rows; every boundary rule by rule,
+-- the parameter box and the caps; the conventions that are choices and what is
+-- not built. Digest sections 18 to 24, and section 25.
+--
+-- THE TRAP THE TIER IS BUILT ON. An interval replays the method's own
+-- residuals, so a point forecast can sit outside it, and a baseline that wins
+-- is a finding. The Expert capstone grades six Expert quantities.
+-- ============================================================================

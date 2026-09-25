@@ -1803,18 +1803,81 @@
       "reason": "D3 facies course: vendored sha-identical from petrolord-engines ef4058f (PRs #253 and #254: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), ml.js (rowNoun added; its default 'training rows' wording, which D2 grades, unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to ef4058f or later."
     },
     {
-      "path": "tools/validation/dataai/synthetic_wells.js",
-      "kind": "extra",
-      "group": "d3-facies-course",
-      "vendoredSha": "e553ce37cb34b970de43166a93aa8a8bb6ff2cbd",
-      "reason": "D3 facies course: vendored sha-identical from petrolord-engines ef4058f (PRs #253 and #254: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), ml.js (rowNoun added; its default 'training rows' wording, which D2 grades, unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to ef4058f or later."
-    },
-    {
       "path": "tools/validation/dataai/timing_cluster.mjs",
       "kind": "extra",
       "group": "d3-facies-course",
       "vendoredSha": "a94a1400733b0e1e7800e5d431d280ddb3b38db5",
       "reason": "D3 facies course: vendored sha-identical from petrolord-engines ef4058f (PRs #253 and #254: engines/dataai/cluster.js, its jest suite, golden, library pins, Fisher's iris, synthetic wells (syntheticFacies appended; D2's syntheticWells unchanged), ml.js (rowNoun added; its default 'training rows' wording, which D2 grades, unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_facies.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to ef4058f or later."
+    },
+    {
+      "path": "__tests__/dataai.forecast.test.js",
+      "kind": "extra",
+      "group": "d4-forecastml-course",
+      "vendoredSha": "3024cbce1d0ccf5de7dcbec73692604cbaf7f2e2",
+      "reason": "D4 forecastml course: vendored sha-identical from petrolord-engines 1dfdd60 (PR #255 + #256: engines/dataai/forecast.js, its jest suite, golden, library pins, synthetic wells (syntheticProduction and an arps.js import appended; D2's syntheticWells and D3's syntheticFacies unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_forecastml.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1dfdd60 or later."
+    },
+    {
+      "path": "engines/dataai/forecast.js",
+      "kind": "extra",
+      "group": "d4-forecastml-course",
+      "vendoredSha": "d770a90e36ee6131e82263695adf533a53373a2c",
+      "reason": "D4 forecastml course: vendored sha-identical from petrolord-engines 1dfdd60 (PR #255 + #256: engines/dataai/forecast.js, its jest suite, golden, library pins, synthetic wells (syntheticProduction and an arps.js import appended; D2's syntheticWells and D3's syntheticFacies unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_forecastml.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1dfdd60 or later."
+    },
+    {
+      "path": "test-data/dataai/goldens/forecast_cases.json",
+      "kind": "extra",
+      "group": "d4-forecastml-course",
+      "vendoredSha": "13df7ca07441978da4b1c47e1c486d17f3124b7c",
+      "reason": "D4 forecastml course: vendored sha-identical from petrolord-engines 1dfdd60 (PR #255 + #256: engines/dataai/forecast.js, its jest suite, golden, library pins, synthetic wells (syntheticProduction and an arps.js import appended; D2's syntheticWells and D3's syntheticFacies unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_forecastml.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1dfdd60 or later."
+    },
+    {
+      "path": "test-data/dataai/pins/forecast_pins.json",
+      "kind": "extra",
+      "group": "d4-forecastml-course",
+      "vendoredSha": "eb1eafc15b8ec58b20cc1b35d4d241a1c09523ce",
+      "reason": "D4 forecastml course: vendored sha-identical from petrolord-engines 1dfdd60 (PR #255 + #256: engines/dataai/forecast.js, its jest suite, golden, library pins, synthetic wells (syntheticProduction and an arps.js import appended; D2's syntheticWells and D3's syntheticFacies unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_forecastml.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1dfdd60 or later."
+    },
+    {
+      "path": "tools/validation/dataai/FINDINGS-forecast.md",
+      "kind": "extra",
+      "group": "d4-forecastml-course",
+      "vendoredSha": "8a134a2756480e2da8c014a22f55d968fc8ebc14",
+      "reason": "D4 forecastml course: vendored sha-identical from petrolord-engines 1dfdd60 (PR #255 + #256: engines/dataai/forecast.js, its jest suite, golden, library pins, synthetic wells (syntheticProduction and an arps.js import appended; D2's syntheticWells and D3's syntheticFacies unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_forecastml.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1dfdd60 or later."
+    },
+    {
+      "path": "tools/validation/dataai/negcontrol_forecast.sh",
+      "kind": "extra",
+      "group": "d4-forecastml-course",
+      "vendoredSha": "51f5a3f48d419eab4d07f2ffd49a42b0cbc6e379",
+      "reason": "D4 forecastml course: vendored sha-identical from petrolord-engines 1dfdd60 (PR #255 + #256: engines/dataai/forecast.js, its jest suite, golden, library pins, synthetic wells (syntheticProduction and an arps.js import appended; D2's syntheticWells and D3's syntheticFacies unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_forecastml.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1dfdd60 or later."
+    },
+    {
+      "path": "tools/validation/dataai/oracle_forecast.py",
+      "kind": "extra",
+      "group": "d4-forecastml-course",
+      "vendoredSha": "d60a5710a9e7b889f234fb835cff8ae41add0837",
+      "reason": "D4 forecastml course: vendored sha-identical from petrolord-engines 1dfdd60 (PR #255 + #256: engines/dataai/forecast.js, its jest suite, golden, library pins, synthetic wells (syntheticProduction and an arps.js import appended; D2's syntheticWells and D3's syntheticFacies unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_forecastml.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1dfdd60 or later."
+    },
+    {
+      "path": "tools/validation/dataai/pin_forecast.py",
+      "kind": "extra",
+      "group": "d4-forecastml-course",
+      "vendoredSha": "d21136d14fff644a0a3c716d7a7b8df891cb5ad7",
+      "reason": "D4 forecastml course: vendored sha-identical from petrolord-engines 1dfdd60 (PR #255 + #256: engines/dataai/forecast.js, its jest suite, golden, library pins, synthetic wells (syntheticProduction and an arps.js import appended; D2's syntheticWells and D3's syntheticFacies unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_forecastml.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1dfdd60 or later."
+    },
+    {
+      "path": "tools/validation/dataai/synthetic_wells.js",
+      "kind": "extra",
+      "group": "d4-forecastml-course",
+      "vendoredSha": "c5b850d5ed79d8b526ff37de4a385c4a947a2c42",
+      "reason": "D4 forecastml course: vendored sha-identical from petrolord-engines 1dfdd60 (PR #255 + #256: engines/dataai/forecast.js, its jest suite, golden, library pins, synthetic wells (syntheticProduction and an arps.js import appended; D2's syntheticWells and D3's syntheticFacies unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_forecastml.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1dfdd60 or later."
+    },
+    {
+      "path": "tools/validation/dataai/timing_forecast.mjs",
+      "kind": "extra",
+      "group": "d4-forecastml-course",
+      "vendoredSha": "cd660d5aa87d1c062250c1b2354525d44849ec74",
+      "reason": "D4 forecastml course: vendored sha-identical from petrolord-engines 1dfdd60 (PR #255 + #256: engines/dataai/forecast.js, its jest suite, golden, library pins, synthetic wells (syntheticProduction and an arps.js import appended; D2's syntheticWells and D3's syntheticFacies unchanged), oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_forecastml.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1dfdd60 or later."
     }
   ]
 }

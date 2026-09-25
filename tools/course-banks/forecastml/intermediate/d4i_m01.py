@@ -1,0 +1,118 @@
+import sys, os; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D4 Professional m01, forecast errors.
+# Every figure is the course's teaching hold-out unless the question states
+# otherwise: each method fitted on EKENE-P1 months 0 to 35, forecast 12 steps,
+# scored on months 36 to 47. No capstone field, well, stated input or graded
+# answer appears.
+
+q(1, "On the teaching hold-out, holt's forecast for month 36 is 282.531964 and the well made 270.100000. The engine prints the error as -12.431964. What does the sign say?",
+ "The forecast sat 12.431964 bbl/d above the rate the well made",
+ ["That holt under-forecast the month, since a minus sign marks a forecast that fell short of the well",
+  "Nothing about direction; the engine prints every error as a magnitude with a sign of its own choosing",
+  "The actual came in 12.431964 bbl/d above the forecast"],
+ "The engine's basis reads \"e = actual - forecast\", so 270.100000 less 282.531964 is negative and a negative error means the forecast was high. An under-forecast would give a positive error. The sign is fixed by that rule and carries meaning, and the actual sat below the forecast here, never above it.")
+
+q(3, "Holt's error for month 38 of the teaching hold-out is 3.128846. Which reading of that figure is right?",
+ "Holt forecast month 38 low: the well made 3.128846 bbl/d more than forecast",
+ ["Holt forecast month 38 high, sitting 3.128846 bbl/d above the actual rate",
+  "The fit missed month 38 by 3.128846 bbl/d, in a direction no error can ever show",
+  "A one-step residual of 3.128846 bbl/d that the fit chose its parameters on"],
+ "An error is actual minus forecast: 271.500000 less 268.371154 is 3.128846, positive, so the forecast was low. A high forecast gives a negative error, and the sign shows the direction. Month 38 is a hold-out month the fit never saw, so this is an out-of-sample error and no residual; a residual is an in-sample one-step error.")
+
+q(3, "On the teaching hold-out ses prints ME -51.683333 and MAE 51.683333. What must be true of its 12 errors?",
+ "Every one of them is negative: the flat forecast sat above each month of the decline",
+ ["Their positive and negative values cancel, leaving a mean of zero behind the bias",
+  "About half are negative, and the ME simply happens to match the MAE in size on this well",
+  "Each is exactly -51.683333, because a flat forecast misses every month by the same amount"],
+ "The ME equals minus the MAE only when no error is positive, so all 12 ses errors are negative: its forecast 290.700000 sits above every month from 36 to 47. They do not cancel, since the mean is -51.683333 and far from zero. The errors differ month by month because the actuals fall from 270.100000 to 211.400000 while the forecast stays flat.")
+
+q(1, "Holt on the teaching hold-out has ME -4.573069 and MAE 6.783515. Why is the size of the ME smaller than the MAE?",
+ "Some holt errors are positive and some negative, so they partly cancel in the mean",
+ ["The ME divides by more errors than the MAE does, which shrinks it on every hold-out",
+  "Holt's forecast is low on average, and a low forecast always makes the ME the smaller one",
+  "RMSE absorbs the large errors first, leaving only the small ones for the ME to average"],
+ "Holt's errors include positive ones (3.128846 at month 38, 6.752492 at month 47) and negative ones (-13.910343 at month 40), so the signed mean partly cancels while the absolute mean does not. Both divide by the same 12 errors. The negative ME says holt was high on average, and RMSE is a separate metric that takes nothing from the ME.")
+
+q(3, "The teaching hold-out prints holt's MAE as 6.783515 and its RMSE as 8.360530. What makes the RMSE the larger figure?",
+ "Squaring weights the large errors more heavily than the small ones",
+ ["RMSE divides by n less one, as a sample deviation does, which lifts it",
+  "Its unit is bbl/d squared, so the same misses print as a larger figure",
+  "Only the negative errors count, and those are the larger ones on this hold-out"],
+ "RMSE is \"sqrt(mean e^2)\", and squaring gives a large error more weight, so RMSE is at least MAE on every row the course prints. Its divisor is n, the number of errors scored, with nothing taken away. The square root returns it to bbl/d, and it uses every error whatever its sign.")
+
+q(0, "A learner scores holt on the teaching hold-out and wants the RMSE divisor. What does the engine divide the sum of squared errors by before taking the root?",
+ "12, the number of errors scored on months 36 to 47",
+ ["11, the number of errors less one, the way a sample standard deviation is taken",
+  "36, the number of training months the fit was chosen on before the hold-out",
+  "46, the scored in-sample residuals"],
+ "The divisor of RMSE is n, the number of errors scored, and the hold-out scores 12 months. The engine takes no degree of freedom away. The 36 training months and the in-sample residuals are the fit's business and are never counted in a hold-out metric.")
+
+q(1, "Fitted on EKENE-P1 months 0 to 35, damped has the lowest in-sample one-step MAE, 19.150711, while holt has the lowest hold-out MAE, 6.783515. Which method does the course judge better at forecasting those 12 months, and on which figure?",
+ "Holt, whose out-of-sample MAE is the lowest of the three",
+ ["Damped, on its in-sample MAE of 19.150711",
+  "Neither, until the two MAEs agree",
+  "Ses, since its in-sample figure 28.045714 is the steadiest of the three on the training months"],
+ "The in-sample figure scores one-step forecasts on months that chose the parameters; the hold-out scores forecasts up to 12 steps ahead on months the fit never saw. A method is judged on the second, and holt's 6.783515 is the lowest there. The two figures answer different questions and need not agree, and ses has the highest in-sample MAE of the three.")
+
+q(2, "Why can the in-sample one-step MAE flatter a method against its hold-out MAE?",
+ "The in-sample months chose the parameters and fed the state, and each is only one step ahead",
+ ["In-sample errors exclude every negative residual, so only the smaller misses are averaged",
+  "The engine rounds in-sample residuals to one decimal, which trims each error a little",
+  "Fitted months are rescaled by the MASE scale before the mean is taken, shrinking them"],
+ "In-sample, the months scored helped pick alpha and beta and fed the level and trend, and every forecast looks one month ahead. The hold-out looks up to 12 months ahead from one fixed month on months that reached the fit in no way. Residuals keep their sign and their six-decimal value, and no scale is applied to an MAE.")
+
+q(2, "Holt fitted on months 0 to 35 is scored on months 36 to 47. Which error has the largest size?",
+ "Month 40, where the error is -13.910343",
+ ["At month 37, where holt sat 13.551559 bbl/d above the well",
+  "The twelfth step, month 47, since error grows with the step",
+  "Step 1, month 36, at -12.431964"],
+ "The holt errors run -12.431964, -13.551559, 3.128846, -12.690748, -13.910343 and on to 6.752492 at month 47. The largest in size is -13.910343 at month 40. Month 37's -13.551559 is a little smaller, month 47's 6.752492 is far smaller, and the course shows the errors do not grow in order with the step.")
+
+q(0, "Damped on the teaching hold-out prints ME -14.978829 and MAE 14.978829. What does that pair say about damped's forecast?",
+ "It sat above the well in every month from 36 to 47",
+ ["Below the well each month, as damping flattens it low",
+  "One crossing of the actuals, so the errors cancel out",
+  "Exact at month 36, then high on each later month after"],
+ "The ME equals minus the MAE only when every error is negative, so damped's forecast was high in each of the 12 months: 283.622932 against 270.100000 at month 36, and 228.161212 against 211.400000 at month 47. Its flattening kept it above a well that went on declining, and month 36 carries an error of its own, far from exact.")
+
+q(2, "A learner passes `accuracy` three actuals and two forecasts. What comes back?",
+ "A refusal naming `forecast`: \"forecast must have 3 values, one per actual (it has 2)\"",
+ ["Metrics computed on the first two months, with the unmatched third actual left out of each",
+  "An ME and an MAE, with RMSE returned as null and its reason given in the notes",
+  "Its three metrics scored against a third forecast of zero that the engine fills in"],
+ "The engine refuses and names the field, in its own words: \"forecast must have 3 values, one per actual (it has 2)\". Forecasts are scored one for one against actuals, so nothing is trimmed or filled. A null metric with a reason in `notes` is a result, and this call returns no result at all.")
+
+q(0, "In an `accuracy` call the second forecast is null. What does the engine return?",
+ "A refusal naming `forecast[1]`, which asks for missing values to be filled or dropped first",
+ ["An error that the forecast array is short, since a null is read as a missing entry at the end",
+  "Every metric scored on the remaining months, with the null month quietly skipped over",
+  "Each metric returned as null, with the reason for every one of them listed in its notes"],
+ "The engine refuses by name at the index, counting from 0, in its own words: \"forecast[1] must be a finite number: fill or drop missing values first\". The array keeps its length, so no short-array message appears. The engine drops or fills nothing, and a refusal carries no metrics at all, null or otherwise.")
+
+q(3, "A learner fits holt on all 48 months of EKENE-P1, forecasts 12 steps and plans to score them against months 36 to 47. What has gone wrong?",
+ "Those 12 steps forecast months 48 to 59; step 1, 204.197498, is a forecast for month 48",
+ ["Nothing; step 1 forecasts month 36 whatever months the fit was made on",
+  "Only the scale: the forecasts are right but MASE needs the training months named",
+  "The forecasts include the months scored, so every error comes out as exactly zero"],
+ "A 12-step forecast is a forecast of months 36 to 47 only when it is made from month 35. Fitted on all 48 months, step 1 is one step past the last month, month 48: holt gives 204.197498 there, and no month of the series can score it. The errors would not be zero, because the forecasts are for different months entirely.")
+
+q(1, "The course runs holt on EKENE-P1 one step ahead over months 36 to 47 two ways: an honest backtest refitted at each origin gives MAE 8.096036, and a fit on all 48 months scored on its own residuals gives 8.045544. What does the course conclude?",
+ "The second route leaks, because the months scored chose the parameters, whatever its size",
+ ["The leak is harmless here, because the two MAEs differ by only 0.050492 bbl/d on this well",
+  "The honest route is wrong, since its MAE is the higher of the two figures on these months",
+  "Leakage shows itself as a lower MAE, so any route scoring below the honest one leaked"],
+ "The rule is procedural: the months scored must never reach the fit. The full-series fit let months 36 to 47 choose alpha and beta and feed the state, so it leaks whatever the number. On one well the size and sign of the 0.050492 bbl/d difference are no test, so a small or a lower figure proves nothing either way.")
+
+q(0, "The engine's basis prints the mean error as \"mean e (bias; positive means the forecast is low)\". All three methods have ME below 0 on the teaching hold-out. What does that say?",
+ "Each method forecast EKENE-P1 high over months 36 to 47",
+ ["Low forecasts from each method, outrun by the decline",
+  "No bias at all, a negative ME being its mark",
+  "Every error of all three methods is negative"],
+ "With the error defined as actual minus forecast, a negative mean says the forecasts sat above the well on average: ses -51.683333, holt -4.573069, damped -14.978829. A low forecast would give a positive ME. Holt's mean is negative while some of its errors, such as 3.128846 at month 38, are positive, so not every error is negative.")
+
+emit(Q, '/root/dai-wip-forecastml/banks/d4i_m01.json', expect_n=15)
+finish()

@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "`forecastIntervals` is called with damped on EKENE-P1, h 12 and seed 11, and `nSims` is left out. How many paths are simulated, and how does its point forecast relate to the fitted method's?",
+  "options": [
+   "100 paths, the fewest the engine takes without a warning, and the point forecast is their P50",
+   "None: `nSims` has no default, so the call is refused with the field `nSims` named",
+   "1000 paths, and the point forecast is exactly the h-step forecast `fitSmoothing` returns",
+   "1000 paths, and the point forecast is the mean of the simulated rates at each step"
+  ],
+  "answer": 2,
+  "explanation": "`nSims` is 1000 when it is left out, and the point forecast is exactly `fitSmoothing`'s, so asking for an interval changes nothing about it. The P50 is a percentile of the paths (137.469798 at step 12 against a point forecast of 169.556510), and 1 path is accepted with no warning. It is the seed that has no default. The engine returns no mean of the paths; the point forecast comes from the fitted final state."
+ },
+ {
+  "prompt": "The teaching bootstrap's basis says each residual is drawn \"with replacement from the 46 scored in-sample residuals (index floor(u x 46), u from mulberry32(11), path by path, step by step)\". In what order does the stream feed the draws?",
+  "options": [
+   "Path one takes a draw for every one of its steps, then path two begins, and so on",
+   "Step 1 is drawn for all 1000 paths first, then step 2 for all of them, and so on to step 12",
+   "Each path runs its own stream, seeded 11 plus the path number, so no order is shared",
+   "All the draws are sorted before use, so the order the stream is read in changes nothing"
+  ],
+  "answer": 0,
+  "explanation": "\"Path by path, step by step\" means path one takes all h of its draws before path two takes any. Drawing step 1 across every path first is the other order, and it would hand each path different residuals from the same seed. There is one mulberry32 stream on the seed given, shared by every path. Nothing is sorted before use; the percentiles are read from the sorted simulated rates after the paths are drawn."
+ },
+ {
+  "prompt": "Two bootstrap runs differ only in their seed, 11 against 12, and their middle percentiles at the last step read 137.469798 and 140.453203. How does the course read the pair?",
+  "options": [
+   "Seed 12 is the better run, since its P50 lies nearer the point forecast of 169.556510",
+   "As a fault, because one seeded stream should give the same percentiles whatever the seed",
+   "Seed 11 is the one to trust, since the engine falls back to it when no seed is passed",
+   "As two draws of the same experiment, each quoted with its seed and its paths"
+  ],
+  "answer": 3,
+  "explanation": "A different seed is a different stream, and the percentiles move with it; neither seed is the better answer, so a bootstrap figure travels with its seed and nSims. Nearness to the point forecast is no test: the residuals can pull the middle of the paths away from it. The same call with the same seed returns the same percentiles bit for bit, which is what one stream promises. The seed has no default, so the engine falls back to nothing."
+ },
+ {
+  "prompt": "A call to `forecastIntervals` gives the method, the series and h, and leaves the seed out. What comes back?",
+  "options": [
+   "An interval drawn on seed 0, which the engine takes as the seed when none is passed to it",
+   "A refusal naming `seed`, in the engine's words \"seed must be a whole number from 0 to 4294967295\"",
+   "An interval seeded from the clock, with a warning that the figures cannot be reproduced",
+   "A refusal naming `nSims`: \"nSims must be a whole number from 1 to 100000\", checked with the seed"
+  ],
+  "answer": 1,
+  "explanation": "The seed has no default, and leaving it out is refused with the field `seed` named, in the words quoted. Seed 0 is accepted when it is given, and it is never filled in. Every draw comes from one mulberry32 stream on the seed given, so no clock enters and no warning of that kind exists. `nSims` has its own rule and its own default of 1000, so leaving the seed out never brings its message."
+ },
+ {
+  "prompt": "Damped on EKENE-P1, h 12, seed 11: the P50 at step 12 is 132.416487 with 100 paths, 137.469798 with 1000 and 135.920627 with 10000. What does the course draw from the three?",
+  "options": [
+   "The P50 ought to rise with every tenfold step in paths, so the 10000 run shows a defect",
+   "More paths steady the percentiles, and they do not make the method right",
+   "At 10000 paths the percentile has settled exactly, so it may be quoted without its seed",
+   "The 1000 run is right because it is the default and it matches the point forecast"
+  ],
+  "answer": 1,
+  "explanation": "The three figures wander and settle as the paths grow, which is all more paths can do: the method and its residuals are unchanged. No rule says a percentile rises with the path count. Any figure from the bootstrap, at any count, is quoted with its seed and nSims, because a different seed moves it. The point forecast at step 12 is 169.556510, which none of the three matches, and the default carries no special truth."
+ },
+ {
+  "prompt": "At step 1 one path of the damped bootstrap draws a large negative residual. What does that draw do to the path's later steps?",
+  "options": [
+   "Nothing, since every step restarts from the fitted final level and trend",
+   "The path's next draws come only from the positive residuals, to bring it back toward the point forecast",
+   "The path is dropped and redrawn, as a rate more than one residual below the forecast is refused",
+   "Its simulated rate pulls the level down and makes the trend more negative, so later steps start lower and fall faster"
+  ],
+  "answer": 3,
+  "explanation": "The simulated rate plays the part of y_t in the recursion and updates the state, so the level moves toward it by alpha and the trend moves toward the change in level by beta; the next one-step forecast starts from there. Restarting every step from the fitted state would stop draws accumulating, and the widening intervals show they do. Every draw is uniform over the whole pool, with replacement. No path is dropped or refused for its size."
+ },
+ {
+  "prompt": "Across the 1000 paths of the teaching bootstrap, which quantities change from one path to the next?",
+  "options": [
+   "The simulated rates and the level and trend states; alpha, beta and phi stay fitted",
+   "alpha, beta and phi, refitted on each simulated path, so the paths carry parameter uncertainty",
+   "Only the residual at step 1; every later step follows the point forecast's own recursion",
+   "The residual pool, which the seed redraws from the series for every path in turn"
+  ],
+  "answer": 0,
+  "explanation": "The parameters are fitted once, on the whole series, and held for every path; only the states and the simulated rates move. The course lists parameter uncertainty in the bootstrap among what is not built, so nothing is refitted per path. Each step of each path adds its own draw, and the pool is fixed: the scored in-sample residuals of the one fit."
+ },
+ {
+  "prompt": "The teaching bootstrap reports `poolSize` 46 on EKENE-P1's 48 months. Which two months have no residual in the pool, and why?",
+  "options": [
+   "Months 46 and 47, the last two, held back to check the bootstrap on months it never saw",
+   "The two largest residuals in size, trimmed so that one bad month cannot widen every interval",
+   "Month 0, which has no one-step forecast, and month 1, spent on the start of the damped method",
+   "Month 0 and month 47, the first and the last, whose residuals the engine treats as edge effects"
+  ],
+  "answer": 2,
+  "explanation": "The pool is the scored residuals from `scoredFrom` on. Month 0 has nothing before it to forecast from, and damped starts with l_1 = y_1 and b_1 = y_2 - y_1, so month 1 is forecast exactly and not scored: 48 less 2 is 46. No month is held back from the pool, no residual is trimmed for its size, and the last month is scored like any other."
+ },
+ {
+  "prompt": "ses is fitted on the same 48 months of EKENE-P1 and bootstrapped. How many residuals are in its pool?",
+  "options": [
+   "46, the same as damped, since the pool size depends on the series length alone",
+   "48, one per month, counting month 0's residual as 0",
+   "45, since ses also sets aside the last month to fix its flat forecast",
+   "47, as ses spends only month 0 and scores from index 1"
+  ],
+  "answer": 3,
+  "explanation": "ses starts at l_1 = y_1 and has no trend to start, so it scores 47 errors on 48 months and its pool is those 47. The pool depends on the method's start as well as the length, which is why damped has 46. Month 0 has no residual at all; it is null. The flat forecast is the final level, and the last month is scored like the others."
+ },
+ {
+  "prompt": "EKENE-P6 has 3 months. `fitSmoothing` fits holt on them. What does `forecastIntervals` do with the same holt call?",
+  "options": [
+   "It refuses, naming `h`, because a series of 3 months cannot carry a forecast of more than 3 steps ahead",
+   "It refuses, naming `y`: 3 values leave 1 scored residual, and the bootstrap resamples at least 2",
+   "An interval whose percentiles all equal the point forecast, drawn from the one residual",
+   "Refused with `nSims` named, because 1000 paths need a pool at least as large as h"
+  ],
+  "answer": 1,
+  "explanation": "The engine's words: \"y has 3 values, which leave 1 scored residual: the bootstrap resamples at least 2, so 'holt' needs at least 4 values here\". h is limited by the cap of 10000 alone; the series length does not enter. A pool of one would give every path the same draw, and the engine refuses it rather than return such an interval. The pool size is checked against 2 and has no link to nSims or h."
+ },
+ {
+  "prompt": "With an `initialTrend` given, how few values does `forecastIntervals` accept for holt, and why is it one fewer than without?",
+  "options": [
+   "3, because month 1 is no longer spent on the start, so its residual is scored",
+   "4, since a given trend changes the start and the bootstrap still counts the second month as spent",
+   "2, since an initialTrend and the first value together fix both states before any residual",
+   "5, because a given trend is checked against two scored residuals of its own"
+  ],
+  "answer": 0,
+  "explanation": "With an initialTrend the start is l_1 = y_1 and b_1 = initialTrend, so y_2 is forecast and scored; 3 values then leave 2 scored residuals, the least the bootstrap resamples. Counting month 1 as spent is the rule without an initialTrend, which is why that case needs 4. Two values would fit holt with one scored error, a pool of 1, and be refused. No check of the given trend exists."
+ },
+ {
+  "prompt": "The 46 residuals of the teaching bootstrap have a mean of -1.726983 bbl/d. What does the engine do with that mean before it draws from them?",
+  "options": [
+   "Subtracts it from each residual, so the draws average 0 and the P50 follows the point forecast",
+   "Adds it to the point forecast, so the reported point forecast is shifted down by that amount",
+   "Nothing: the residuals are drawn as fitted, so the paths carry whatever lean they have",
+   "Reports it as a warning and removes the residuals below the mean from the pool"
+  ],
+  "answer": 2,
+  "explanation": "The basis says so in the engine's own words: \"residuals are drawn as fitted without centring (their mean is not subtracted)\". Subtracting the mean is the centred bootstrap, the alternative in common use that the engine did not take. The point forecast is exactly the fitted method's and is never shifted. No warning is raised and no residual is removed."
+ },
+ {
+  "prompt": "ses on EKENE-P1, h 12, seed 11, 1000 paths, nonNegative false: the point forecast is 211.400000 at every step, yet at step 12 the P10 (high) of the paths is 69.250000. What explains it?",
+  "options": [
+   "With nonNegative false the percentiles are read from the negative side of the paths, which swaps the high and the low labels at every step",
+   "The flat point forecast comes from the P50 at step 1, 198.900000, so it drifts away from the paths",
+   "alpha fits to 1, so each residual is a month-to-month change of the decline, mean -20.525532, and every path replays that fall",
+   "Seed 11 gives ses a run of negative draws that another seed would not, so the figure is chance"
+  ],
+  "answer": 2,
+  "explanation": "With alpha at 1 each one-step forecast is the month before, so each residual is one month's change of the decline, and their mean is -20.525532 bbl/d. Drawn as fitted, they push every path down step after step, while the flat method's point forecast stays at the last rate. nonNegative only decides whether a negative percentile is reported as 0; it never swaps labels. The point forecast is the final level, and the P50 at step 1 is itself 198.900000. A lean that large is the method's residuals, whatever the seed."
+ },
+ {
+  "prompt": "In the teaching run the P50 starts a little above the point forecast (206.724356 against 204.969642) and ends well below it (137.469798 against 169.556510). Where should a reader take the middle of the paths from?",
+  "options": [
+   "From the percentiles, step by step; the point forecast is the path that draws 0 at every step and need not sit in the middle",
+   "The P50 and the point forecast are one figure computed two ways, so the point forecast is the middle of the paths",
+   "As the mean of the P90 (low) and the P10 (high), which the engine returns as each interval's centre",
+   "Where the step 1 P50 sits, carried forward, since later steps only widen the interval around it"
+  ],
+  "answer": 0,
+  "explanation": "A path that draws 0 at every step follows the fitted recursion exactly, so the point forecast is that path; the paths lean with the residuals, and the P50 shows where their middle sits at each step. The two figures differ at both steps quoted, so they are not one figure. The engine returns no mid-point of the P90 and P10. The P50 moves at every step, from 206.724356 to 137.469798."
+ },
+ {
+  "prompt": "Which values of `nSims` does `forecastIntervals` accept?",
+  "options": [
+   "Any whole number of 100 or more, since fewer paths give no stable percentile",
+   "Whole numbers from 1 to 10000, the same cap the engine puts on h and on a horizon",
+   "Even whole numbers only, so that each percentile can be the mean of two simulated values",
+   "Whole numbers from 1 to 100000, with 1000 used when it is left out"
+  ],
+  "answer": 3,
+  "explanation": "The boundary is 1 and 100000 accepted, 0 and 100001 refused, in the engine's words \"nSims must be a whole number from 1 to 100000\", and the default is 1000. A small count is legal; its percentiles simply move more. 10000 is the cap on h and the horizon, a different rule. An odd count is accepted, and the quantile rule then reads a single simulated value."
+ }
+]

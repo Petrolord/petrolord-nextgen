@@ -278,6 +278,10 @@ export const PANELS = {
   'ef-cluster-explorer': React.lazy(() => import('@/components/course/panels/facies/ClusterExplorer')),
   'ef-judge-explorer': React.lazy(() => import('@/components/course/panels/facies/JudgeExplorer')),
   'ef-classify-explorer': React.lazy(() => import('@/components/course/panels/facies/ClassifyExplorer')),
+  // D4 Data-Driven Production Forecasting (academy module data_ai)
+  'pf-smoothing-explorer': React.lazy(() => import('@/components/course/panels/forecastml/SmoothingExplorer')),
+  'pf-backtest-explorer': React.lazy(() => import('@/components/course/panels/forecastml/BacktestExplorer')),
+  'pf-uncertainty-explorer': React.lazy(() => import('@/components/course/panels/forecastml/UncertaintyExplorer')),
 };
 
 export function resolvePanel(id) {

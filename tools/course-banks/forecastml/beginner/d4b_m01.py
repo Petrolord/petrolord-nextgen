@@ -1,0 +1,118 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D4 Associate m01, what a data-driven forecast is.
+# Sources: the course digest's function table and what the engine does not do,
+# the Ekene production wells and their planted structure, the refusals m01 l05
+# teaches, the one-step and h-step forecasts of simple smoothing at alpha 0.3 on
+# EKENE-P1, and the vocabulary table. Every figure is printed there.
+
+q(2, "EKENE-P1 carries 48 months of rates. Which index does the engine give its last month?",
+ "Month 47, because the engine counts from 0 and month 0 is the first month on production.",
+ ["Month 48, since the engine numbers months from 1, as a calendar count of months does.",
+  "Index 0, since the engine stores the newest month first and counts backward.",
+  "Month 12 of year 4, since a monthly series is indexed by year and by month."],
+ "The engine counts months from 0: month 0 is the first month on production, so a 48-month series ends at month 47. Numbering from 1 would put the last month at 48, which is the month step 1 of a forecast stands for. The series runs oldest month first, and the engine indexes months with a single whole number, never by year and month."),
+
+q(0, "Which inputs does an exponential smoothing method in this course read when it forecasts a well?",
+ "Only the rate series, one monthly average rate per month, oldest first.",
+ ["The rate series together with the choke setting and the flowing pressure of every month it covers.",
+  "A decline curve fitted first, whose shape the smoothing follows.",
+  "Each month's oil rate divided by its water cut, so that the method smooths the rate of total liquid."],
+ "A forecasting method here reads only the series itself: no pressure, no choke setting, no reservoir model. The engine runs no regression of rate on other variables such as choke or pressure, fits no decline curve of its own before smoothing, and reads no water cut. Each input the distractors add is something the method cannot see."),
+
+q(3, "Which of these does the forecasting engine return?",
+ "A rate at each future step from one fitted smoothing method.",
+ ["The EUR of the well, found by summing the forecast rates down to an economic limit that the caller states.",
+  "Cumulative production to date, returned beside the fitted values of every month in the series.",
+  "A seasonal Holt-Winters forecast whenever the series spans at least two full years of months."],
+ "The engine forecasts a rate at each future step. It computes no reserves, no EUR and no cumulative production; those belong to the decline curve analysis course. It builds no seasonal smoothing at all, so a Holt-Winters forecast never comes back whatever the length of the series."),
+
+q(1, "When this course uses the words machine learning, how is the method named?",
+ "By what it is: here exponential smoothing, with its free parameters fitted by least squares.",
+ ["As a neural network, the one learning method this engine builds and trains on the Ekene wells.",
+  "As a regression of rate on choke and on pressure, fitted to each producing well in its turn.",
+  "Loosely, as any automated judgement, since the name of the method inside does not matter."],
+ "The course names a method by what it is: exponential smoothing, with free parameters fitted by the least one-step sum of squared errors. The engine builds no neural network and runs no regression of rate on choke or pressure; regression belongs to the machine learning course. Calling any automated judgement machine learning is the loose meaning the course legislates against."),
+
+q(1, "What does the course state about where the Ekene production rates came from?",
+ "They are synthetic, drawn by one generator on the stated seed 20260925 and rounded to 0.1 bbl/d.",
+ ["They are the monthly allocations of a real field, anonymised by renaming the wells.",
+  "They are real well tests cleaned by the data quality course before any lesson was allowed to use them.",
+  "A fresh draw is made at each session, so every learner meets different rates."],
+ "The Ekene field is synthetic: one generator draws every series through the platform's seeded random numbers on the seed 20260925 and rounds each rate to the tenth of a bbl/d. The same inputs give the same series anywhere, so no session draws new rates. No real field and no real well test sits behind the series."),
+
+q(3, "Which Ekene well carries a facility-limited plateau, and what does the plateau hold?",
+ "EKENE-P3, held at exactly 1500.000000 bbl/d for months 0 to 8.",
+ ["EKENE-P2, which holds 1500.000000 bbl/d over its three months before the workover lifts the rate.",
+  "EKENE-P4, whose noisy allocation averages out at 1500.000000 bbl/d across its first year.",
+  "EKENE-P1, which holds its first rate of 1176.100000 for nine months before its decline begins."],
+ "EKENE-P3 holds exactly 1500.000000 bbl/d for months 0 to 8, counted from 0, and declines after. EKENE-P2 carries the shut-in and the workover, EKENE-P4 the noisy allocation starting at 815.700000, and EKENE-P1 declines from its very first month, 1176.100000 then 1153.400000."),
+
+q(0, "EKENE-P2 reads 0.000000 in months 22 to 24, counted from 0. What are those three values?",
+ "A shut-in: real rates of 0, which a smoothing method reads like any other month.",
+ ["Missing months written as 0, which the engine fills by averaging the months on either side of them.",
+  "Values the engine refuses by name, since 0 is not a rate it accepts.",
+  "Months the engine drops before any fit, so that the smoothing sees the series with the gap closed."],
+ "Months 22 to 24 of EKENE-P2 are a planted shut-in at rate 0. A rate of 0 is a real, finite value, so the engine neither refuses it nor drops it, and a smoothing method reads it as a rate like any other. The engine fills no month at all; a missing month would be refused by name."),
+
+q(2, "EKENE-P6, the new well, has three months. What does fitting holt on it return?",
+ "A fit with 1 scored error, the least the method can work with.",
+ ["A refusal naming `y`: holt needs four months.",
+  "A fit scored on all three months, since the start of holt takes nothing from the series itself.",
+  "Two scored errors, months 1 and 2."],
+ "Holt spends months 0 and 1 on the start, the level and the trend, so on three months it scores only month 2: 1 scored error. Three months is exactly the fewest holt accepts, so the fit is not refused. The start is taken from the series, which is why months 0 and 1 are not scored."),
+
+q(3, "In this course, what is a fitted value?",
+ "A one-step forecast, made at month t - 1 for month t inside the series.",
+ ["Any h-step forecast made past the last month, which the engine returns in its `forecast` list.",
+  "The level l_t, computed once month t's rate has arrived.",
+  "The rate a straight line fitted through every month of the series gives at month t."],
+ "The course calls a one-step forecast a fitted value: f_t is made at month t - 1 for month t, and the engine returns them as `fitted`. The h-step forecasts past the last month are the `forecast` list. The level l_t is made after month t arrives, so it is a state of the method. No straight line through the months is fitted by this engine."),
+
+q(0, "A 48-month series is fitted with h 12. Which month does index 0 of the `forecast` list stand for?",
+ "Month 48, one step past the last month, month 47.",
+ ["The last month on production, month 47, forecast a second time from the final state of the fit.",
+  "Index 0 means month 0, since every list the engine returns begins at the first month.",
+  "Month 24, since the forecast list is laid over the second half of a 48-month series."],
+ "Index 0 of `forecast` is one step past the last month. The last month of a 48-month series is month 47, so step 1 forecasts month 48. The `fitted` list starts at month 0; the `forecast` list starts past the end, and no h-step forecast is made for a month inside the series."),
+
+q(2, "A fit is run with `h` left out. What does the engine return?",
+ "Every fitted value and residual, with an empty `forecast`, since h is 0 when left out.",
+ ["A refusal naming `h`, because a forecast needs at least one step past the last month to return.",
+  "Twelve h-step forecasts, the default the engine sets for any series of monthly rates.",
+  "Ten thousand forecast steps, the largest h the engine accepts, as a default."],
+ "When `h` is left out it is 0, so a fit alone returns an empty `forecast` and still returns every fitted value and residual. A value of 0 is accepted, so there is no refusal. The engine sets no default of twelve; 10000 is the largest h accepted, never a default."),
+
+q(1, "Simple smoothing at alpha 0.3 on EKENE-P1 gives month 2 a residual of -90.690000. What does the sign tell you?",
+ "The fitted value, 1169.290000, sat above the rate of 1078.600000.",
+ ["It forecast low: the fitted value, 1169.290000, sat below month 2's rate of 1078.600000.",
+  "The level fell by 90.690000 bbl/d over the month.",
+  "A fall of 90.690000 bbl/d in the rate itself over the month, read from the series."],
+ "A residual is the rate less the fitted value: 1078.600000 less 1169.290000 is -90.690000, so a negative residual means the forecast was high. The level moved from 1169.290000 to 1142.083000, a smaller fall. The rate itself fell from 1153.400000 to 1078.600000, which is a different difference from the residual."),
+
+q(0, "EKENE-P1 is passed with month 5 set to null. The engine replies, in its own words: \"y[5] must be a finite number: fill or drop missing values first\". What has it done?",
+ "Refused the whole call, naming index 5; filling or dropping the month is left to the caller.",
+ ["Filled month 5 with the mean of months 4 and 6, then fitted the method as usual.",
+  "Dropped month 5 and fitted the other months, recording the gap in the basis block.",
+  "Fitted months 0 to 4 and returned a warning for every month past the gap at month 5."],
+ "A null month stops the call: the engine returns `error` and `field` and no result, naming the first index it meets, counted from 0. It fills nothing, drops nothing and fits no part of the series. Whether to fill month 5 or drop it is the caller's decision, and the data quality course teaches how to make it."),
+
+q(3, "A fit asks for the method 'arima'. Which field does the refusal name?",
+ "`method`, in the engine's words \"method must be 'ses', 'holt' or 'damped'\".",
+ ["`y`, in the engine's words \"y must be an array of numbers\", since a method must come first.",
+  "No field at all: the engine falls back to ses and returns that fit with a warning beside it.",
+  "`h`, since an ARIMA forecast needs a number of steps."],
+ "The engine offers three methods and refuses any other by naming `method`, with a message that lists all three. It builds no ARIMA and falls back to no default method. The message about `y` is the refusal for a series that is not an array, and `h` has nothing to do with the method named."),
+
+q(2, "How does a refusal differ from a result in this engine?",
+ "A refusal carries `error` and `field` and no result; any figure in it belongs to the message.",
+ ["A refusal is a full result with a caution attached, naming the input that caused it.",
+  "It returns the fit on whichever months were valid, with the invalid ones listed by index.",
+  "It holds the last good result of an earlier call, flagged in the basis as out of date."],
+ "Every function returns either a result object or an object with `error` and `field`, where `field` names the input it refused. A refusal carries no number of its own and no partial fit. A caution attached to a returned result is a warning, a different thing, which a fit carries only if its search ran out of effort."),
+
+emit(Q, '/root/dai-wip-forecastml/banks/d4b_m01.json', expect_n=15)
+finish()

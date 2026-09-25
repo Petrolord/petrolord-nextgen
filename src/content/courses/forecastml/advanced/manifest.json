@@ -1,0 +1,365 @@
+{
+ "app_slug": "forecastml",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-residual-bootstrap",
+   "title": "The Residual Bootstrap",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-simulated-future-paths",
+     "title": "Simulated future paths",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-drawing-residuals-with-a-seed",
+     "title": "Drawing residuals with a seed",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-simulated-value-updates-the-state",
+     "title": "The simulated value updates the state",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-residual-pool",
+     "title": "The residual pool",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-median-away-from-the-point-forecast",
+     "title": "A median away from the point forecast",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-percentiles-and-their-labels",
+   "title": "Percentiles and Their Labels",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-the-quantile-rule",
+     "title": "The quantile rule on sorted paths",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-exceedance-labels",
+     "title": "The exceedance labels, low case and high case",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-negative-rates-reported-as-zero",
+     "title": "Negative rates reported as zero",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-intervals-that-widen",
+     "title": "Intervals that widen with every step",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-the-arps-baseline",
+   "title": "The Arps Baseline",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-arps-from-the-decline-curve-engine",
+     "title": "Arps from the decline curve engine",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-a-month-passed-as-a-day",
+     "title": "A month passed as a day",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-shut-in-months-dropped",
+     "title": "Shut-in months dropped before the fit",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-when-arps-finds-no-fit",
+     "title": "When Arps finds no fit",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-ranking-methods-against-arps",
+   "title": "Ranking Methods Against Arps",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-same-origins-for-every-method",
+     "title": "The same origins for every method",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pf-uncertainty-explorer",
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-ranking-by-the-chosen-metric",
+     "title": "Ranking by the chosen metric",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-ties-and-the-listed-order",
+     "title": "Ties and the listed order",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-unranked-methods",
+     "title": "Unranked methods",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-baseline-that-wins",
+     "title": "A baseline that wins",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-boundaries-bounds-and-caps",
+   "title": "Boundaries, Bounds and Caps",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-boundaries-rule-by-rule",
+     "title": "Boundaries, rule by rule",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-parameter-box",
+     "title": "The parameter box and the grid tie",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pf-uncertainty-explorer",
+      "pf-smoothing-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-length-rules",
+     "title": "Length rules for every function",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-row-origin-and-path-caps",
+     "title": "Row, origin and path caps",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pf-uncertainty-explorer",
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-reading-the-engine-honestly",
+   "title": "Reading the Engine Honestly",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-conventions-that-are-choices",
+     "title": "Conventions that are choices",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-what-is-not-built",
+     "title": "What is not built",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-the-forecast-note",
+     "title": "Writing the forecast note",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pf-uncertainty-explorer",
+      "pf-backtest-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pf-uncertainty-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
