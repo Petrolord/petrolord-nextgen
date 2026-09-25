@@ -132,17 +132,18 @@ const ROUTES = {
       the_whole_ekene_corpus: () => EV.rankTfidf({ documents: FULL, query: orQ[orS.cosQuery], k: orS.k }).ranking[0].score,
     },
   },
-  orlu_bm25_mean_recall_at3: {
+  orlu_bm25_mean_recall_at4: {
     truth: () => orEval().recall,
     wrong: {
-      cutoff_five: () => orEval({ k: 5 }, orRun({ k: 5 })).recall,
+      cutoff_two: () => orEval({ k: 2 }, orRun({ k: 2 })).recall,
+      cutoff_three: () => orEval({ k: 3 }, orRun({ k: 3 })).recall,
       relevant_at_grade_two: () => orEval({ relevantGrade: 2 }).recall,
       precision_quoted: () => orEval().precision,
       tfidf_runs: () => orEval({}, EV.retrieve({ documents: OR.documents, queries: OR.queries, method: 'tfidf', k: orS.k }).runs).recall,
       relevant_at_grade_three: () => orEval({ relevantGrade: 3 }).recall,
     },
   },
-  orlu_bm25_mrr_at3: {
+  orlu_bm25_mrr_at4: {
     truth: () => orEval().mrr,
     wrong: {
       hit_rate_quoted: () => orEval().hitRate,

@@ -1,0 +1,20 @@
+-- ============================================================================
+-- D5 EXPERT DEEP SEED: Applied AI and Language Models, advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions. Generated from the tier's
+-- manifest.json and the committed bank JSONs under
+-- tools/course-banks/appliedai/advanced.
+--
+-- What this tier owns: AGREEMENT, CALIBRATION AND GOVERNANCE. Two annotators
+-- and Cohen's kappa, unweighted and weighted; calibration with the Brier
+-- score, the reliability table, ECE and MCE; the Murphy decomposition with the
+-- within-bin terms and the bin-edge rule; log loss imported from the machine
+-- learning engine; judged sets, pooling, unjudged passages and test questions
+-- in a prompt; every boundary rule, the tie key, the bootstrap levels and the
+-- caps; the conventions that are choices, when a model helper is never graded,
+-- and the evaluation report. Digest sections 17 to 23, and section 24.
+--
+-- THE TRAP THE TIER IS BUILT ON. A score is only as good as its judgments and
+-- its bins: the second annotator's grades reverse the nDCG order of the two
+-- systems, and an interior bin edge moves the reliability term.
+-- ============================================================================

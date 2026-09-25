@@ -479,7 +479,7 @@ A SCORE READ TERM BY TERM, on the corpus. Q02 "initial oil rate of Ekene-3", que
 | 4 | EKD-003 | 56 | 4.084216 | 3 | oil: 2, 1.110177; of: 3, 1.630868; ekene: 2, 0.383833; 3: 1, 0.959339 |
 | 5 | EKD-008 | 51 | 3.931617 | 0 | initial: 1, 1.845996; oil: 1, 0.803408; of: 1, 1.004443; ekene: 1, 0.277770 |
 
-EKD-043 is a drilling report ("rate of penetration") and ranks first on the words rate and of; the passage that answers the query, EKD-003, ranks fourth. Words match, meaning does not.
+EKD-043 is a drilling report ("rate of penetration") and ranks first on the words rate and of; the passage that answers the query, EKD-003, ranks fourth. BM25 matches words and knows nothing of meaning.
 
 K1 ON THE CORPUS. Q13 "Ekene-6 water cut at the end of 2025" at k1 1.2 and k1 2:
 
@@ -922,7 +922,7 @@ A TOLERANCE IS INCLUSIVE, |prediction - label| <= max(absTol, relTol x |label|).
 | r2 | q | 50 | `50.6` | 0.5 | wrong | 0.6000000000000014 |
 | r2 | p | 1000 | `1002.5` | 2 | wrong | 2.5 |
 
-# SECTION 15: Groundedness and its limits: cited and retrieved, the reasons, grounded and correct (owned by Professional m05 and Associate m06 l03)
+# SECTION 15: Groundedness and its limits: cited and retrieved, the reasons, grounded and correct (owned by Professional m05)
 
 A CLAIM IS SUPPORTED only by a passage that is both cited and retrieved. A citation to a passage that was not retrieved is flagged and supports nothing; a citation to an id that is not a passage is flagged unknown.
 

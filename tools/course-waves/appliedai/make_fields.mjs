@@ -1,4 +1,4 @@
-// fields.json and precision.json: the eighteen graded D4 fields with the
+// fields.json and precision.json: the eighteen graded D5 fields with the
 // tolerance each is graded at. REGENERATED from the generator, never
 // hand-edited.
 //

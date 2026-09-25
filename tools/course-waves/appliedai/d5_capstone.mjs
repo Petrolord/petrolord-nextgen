@@ -7,7 +7,7 @@
 // engine result object, and discriminate.mjs is where the wrong methods live.
 //
 //   ORLU    Associate     retrieval and cited answers: a BM25 idf, a BM25 top
-//                         score, a TF-IDF top cosine, mean recall and MRR at 3,
+//                         score, a TF-IDF top cosine, mean recall and MRR at 4,
 //                         and the pooled supported fraction of four answers
 //   NNEWI   Professional  scoring retrieval and answers honestly: a MAP at
 //                         grade 2, an exponential-gain nDCG, the mean token F1
@@ -96,27 +96,29 @@ const mapJudgments = (q, idOf) => Object.fromEntries(Object.entries(QUERIES[q].j
 
 /* ========================================================== ORLU, Associate
 
-   Twenty-two passages, four reworded queries. The brief states: BM25 at k1 1.2
-   and b 0.75, TF-IDF with raw counts, stop list off, cutoff 3, relevant at
+   Twenty-two passages, five reworded queries. The brief states: BM25 at k1
+   1.2 and b 0.75, TF-IDF with raw counts, stop list off, cutoff 4, relevant at
    grade 1 or more; the four answers with their citations and the passages
    each system retrieved. */
 
-const OR_SRC = { O1: 'Q13', O2: 'Q01', O3: 'Q02', O4: 'Q20' };
+const OR_SRC = { O1: 'Q13', O2: 'Q01', O3: 'Q02', O4: 'Q20', O5: 'Q18' };
 const OR_TEXT = {
   O1: 'water cut reported for Ekene-6 at the close of 2025',
   O2: 'pressure in the reservoir when water injection started',
   O3: 'first day oil rate of Ekene-3',
   O4: 'discharge limit for oil in produced water',
+  O5: 'voidage replacement target during injection',
 };
 // ORLU keeps each source query's passages judged grade 1 or more and the
-// passages the answers cite, then seeded fillers to twenty-two.
+// passages the answers cite, then seeded fillers (two at least, twenty-two
+// passages at least).
 const ORLU = (() => {
   const g = mulberry32(70311);
   const need = new Set(['EKD-030', 'EKD-018', 'EKD-003', 'EKD-053']);
   Object.values(OR_SRC).forEach((q) => Object.entries(QUERIES[q].judgments).forEach(([d, gr]) => { if (gr >= 1) need.add(d); }));
   need.delete('EKD-058');
   const rest = shuffle(CORPUS.map((p) => p.id).filter((id) => !need.has(id) && id !== 'EKD-058'), g);
-  const size = 22;
+  const size = Math.max(22, need.size + 2);
   const chosen = [...need, ...rest.slice(0, Math.max(0, size - need.size))];
   const order = shuffle(chosen.sort(), g);
   const idOf = Object.fromEntries(order.map((src, i) => [src, `ORL-${String(i + 1).padStart(2, '0')}`]));
@@ -125,16 +127,16 @@ const ORLU = (() => {
   const judgments = Object.fromEntries(Object.entries(OR_SRC).map(([id, q]) => [id, mapJudgments(q, idOf)]));
   return { seed: 70311, idOf, documents, queries, judgments, need: [...need] };
 })();
-const orS = { k: 3, k1: 1.2, b: 0.75, idfTerm: 'pressure', topQuery: 'O1', cosQuery: 'O4' };
-const orRun = success('ORLU bm25 k 3', EV.retrieve({ documents: ORLU.documents, queries: ORLU.queries, method: 'bm25', k: orS.k }));
-must('ORLU: no BM25 tie at the cutoff 3 on any query', orRun.perQuery.every((p) => !p.tieAtCutoff), orRun.perQuery.filter((p) => p.tieAtCutoff).map((p) => p.id));
+const orS = { k: 4, k1: 1.2, b: 0.75, idfTerm: 'pressure', topQuery: 'O1', cosQuery: 'O4' };
+const orRun = success('ORLU bm25 k 4', EV.retrieve({ documents: ORLU.documents, queries: ORLU.queries, method: 'bm25', k: orS.k }));
+must('ORLU: no BM25 tie at the cutoff 4 on any query', orRun.perQuery.every((p) => !p.tieAtCutoff), orRun.perQuery.filter((p) => p.tieAtCutoff).map((p) => p.id));
 const orIdf = success('ORLU bm25 idf', EV.rankBm25({ documents: ORLU.documents, query: orS.idfTerm, k: 1 }));
 const orTop = success('ORLU bm25 O1', EV.rankBm25({ documents: ORLU.documents, query: OR_TEXT[orS.topQuery], k: orS.k }));
 must('ORLU: the O1 top score is not tied', orTop.ranking.length > 1 && orTop.ranking[0].score !== orTop.ranking[1].score && orTop.ties.every((t) => !t.includes(orTop.ranking[0].id)), JSON.stringify(orTop.ties));
 const orCos = success('ORLU tfidf O4', EV.rankTfidf({ documents: ORLU.documents, query: OR_TEXT[orS.cosQuery], k: orS.k }));
 must('ORLU: the O4 top cosine is not tied', orCos.ranking.length > 1 && orCos.ranking[0].score !== orCos.ranking[1].score, JSON.stringify(orCos.ties));
-const orEval = success('ORLU evaluate k 3', EV.evaluateRetrieval({ runs: orRun.runs, judgments: ORLU.judgments, k: orS.k }));
-must('ORLU: every query has a relevant passage and none is excluded', orEval.nIncluded === 4 && orEval.excluded.length === 0, orEval.excluded);
+const orEval = success('ORLU evaluate k 4', EV.evaluateRetrieval({ runs: orRun.runs, judgments: ORLU.judgments, k: orS.k }));
+must('ORLU: every query has a relevant passage and none is excluded', orEval.nIncluded === ORLU.queries.length && orEval.excluded.length === 0, orEval.excluded);
 // The four answers: fixture-style hand-written text citing source passages,
 // renamed to ORLU ids; each answer's retrieved list is the BM25 top 3 above.
 const OR_ANS_SRC = [
@@ -142,6 +144,7 @@ const OR_ANS_SRC = [
   ['O2', 'Average reservoir pressure was 2,096 psia on 2023-01-01, just above the 2000 psia bubble point, after 261,475 stb of field oil.', ['EKD-018']],
   ['O3', 'Ekene-3 came on stream on 2020-03-01 at 150 bopd with a GOR of 400 scf/stb, from 29 m of gross sand below a 1541 m TVD top.', ['EKD-003']],
   ['O4', 'The discharge limit is 40 mg/l; the 2025-04-08 sample read 25 mg/l, under the 30 mg/l action level.', ['EKD-053']],
+  ['O5', 'The VRR target was 0.85 in the first month of injection and 1.05 from the sixth, with the injection split 60 to 40 between Ekene-2 and Ekene-4.', ['EKD-037', 'EKD-034']],
 ];
 ORLU.answers = OR_ANS_SRC.map(([q, text, cites]) => ({ query: q, text, citations: cites.map((c) => ORLU.idOf[c]), retrieved: orRun.runs[q] }));
 must('ORLU: every cited passage is in the corpus', ORLU.answers.every((a) => a.citations.every(Boolean)), 'cites');
@@ -159,7 +162,7 @@ ORLU.stated = orS;
    mean nDCG at 5 with exponential gain for Q; the mean token F1 of the eight
    short answers; an extraction macro F1 on fourteen records; the paired
    bootstrap of per-query nDCG at 5 (linear gain, grade 1), P minus Q, seed
-   41, 2000 replicates, level 0.95; and Q's grounded fraction. */
+   44, 2000 replicates, level 0.95; and Q's grounded fraction. */
 
 const NN_SRC = { N1: 'Q02', N2: 'Q03', N3: 'Q05', N4: 'Q08', N5: 'Q11', N6: 'Q15', N7: 'Q18', N8: 'Q20' };
 const NN_TEXT = {
@@ -192,7 +195,7 @@ const NNEWI = (() => {
   const shorts = Object.entries(NN_SRC).map(([id, q]) => ({ query: id, answer: g() < 0.5 ? SYS.A[q].short : SYS.B[q].short, reference: QUERIES[q].reference }));
   return { seed, idOf, documents, queries, judgments, shorts, size };
 })();
-const nnS = { k: 5, P: { method: 'bm25', k1: 1.5, b: 0.5 }, Q: { method: 'tfidf', sublinearTf: true }, mapGrade: 2, bootSeed: 41, nBoot: 2000, level: 0.95 };
+const nnS = { k: 5, P: { method: 'bm25', k1: 1.5, b: 0.5 }, Q: { method: 'tfidf', sublinearTf: true }, mapGrade: 2, bootSeed: 44, nBoot: 2000, level: 0.95 };
 const nnP = success('NNEWI P run', EV.retrieve({ documents: NNEWI.documents, queries: NNEWI.queries, method: 'bm25', k: nnS.k, k1: nnS.P.k1, b: nnS.P.b }));
 const nnQ = success('NNEWI Q run', EV.retrieve({ documents: NNEWI.documents, queries: NNEWI.queries, method: 'tfidf', k: nnS.k, sublinearTf: true }));
 must('NNEWI: forty-five passages', NNEWI.documents.length === 45, NNEWI.documents.length);
@@ -246,7 +249,7 @@ NNEWI.stated = nnS;
 
 /* ========================================================== AWKA, Expert
 
-   Ninety-six rating pairs and one hundred and twenty calibration rows. The
+   Ninety-six rating pairs and one hundred and twenty-two calibration rows. The
    brief states: kappa unweighted and linear on the grades 0 to 3 (labels 0,
    1, 2, 3); the Brier score, and the Murphy reliability, resolution and
    within-bin covariance terms at eight equal-width bins. */
@@ -266,7 +269,7 @@ const AWKA = (() => {
     const step = u < 0.08 ? 2 : u < 0.38 ? 1 : 0;
     return Math.min(3, Math.max(0, p.grade + dir * step));
   });
-  const rows = shuffle(CALIB.map((r, i) => i), g).slice(0, 120).sort((x, y) => x - y).map((i) => CALIB[i]);
+  const rows = shuffle(CALIB.map((r, i) => i), g).slice(0, 122).sort((x, y) => x - y).map((i) => CALIB[i]);
   return { seed, ratings: { a, b }, calibration: { yTrue: rows.map((r) => r.relevant), probabilities: rows.map((r) => r.probability) } };
 })();
 const awS = { labels: [0, 1, 2, 3], bins: 8 };
@@ -285,8 +288,8 @@ const ROWS = [
   ['beginner', 'orlu_bm25_idf_pressure', 'score', orIdf.queryTerms[0].idf],
   ['beginner', 'orlu_o1_bm25_top_score', 'score', orTop.ranking[0].score],
   ['beginner', 'orlu_o4_tfidf_top_cosine', 'score', orCos.ranking[0].score],
-  ['beginner', 'orlu_bm25_mean_recall_at3', 'metric', orEval.mean.recall],
-  ['beginner', 'orlu_bm25_mrr_at3', 'metric', orEval.mean.mrr],
+  ['beginner', 'orlu_bm25_mean_recall_at4', 'metric', orEval.mean.recall],
+  ['beginner', 'orlu_bm25_mrr_at4', 'metric', orEval.mean.mrr],
   ['beginner', 'orlu_answers_supported_fraction', 'fraction', orG.supportedFraction],
   ['intermediate', 'nnewi_p_map_at5_grade2', 'metric', nnMapP.mean.map],
   ['intermediate', 'nnewi_q_ndcg_at5_exponential', 'metric', nnExpQ.mean.ndcg],

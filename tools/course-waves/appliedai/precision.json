@@ -17,7 +17,7 @@
  },
  "metric": {
   "decimals": 6,
-  "match": "^(?:nnewi_p_map_at5_grade2|nnewi_q_ndcg_at5_exponential|orlu_bm25_mean_recall_at3|orlu_bm25_mrr_at3)$"
+  "match": "^(?:nnewi_p_map_at5_grade2|nnewi_q_ndcg_at5_exponential|orlu_bm25_mean_recall_at4|orlu_bm25_mrr_at4)$"
  },
  "score": {
   "decimals": 6,

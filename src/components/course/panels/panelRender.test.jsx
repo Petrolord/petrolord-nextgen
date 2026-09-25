@@ -345,6 +345,34 @@ describe('every course panel renders with no props', () => {
     }
     expect(rendered).toBe(15);
   }, 120000);
+  it('finds the D5 appliedai panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('appliedai/RetrievalExplorer.jsx');
+    expect(names).toContain('appliedai/ScoringExplorer.jsx');
+    expect(names).toContain('appliedai/TrustExplorer.jsx');
+  });
+  it('every D5 appliedai view renders, not only the default one', async () => {
+    const MODES = {
+      'appliedai/RetrievalExplorer.jsx': ['tokens', 'tfidf', 'bm25', 'run', 'claims'],
+      'appliedai/ScoringExplorer.jsx': ['evaluate', 'answers', 'extraction', 'grounded', 'compare'],
+      'appliedai/TrustExplorer.jsx': ['kappa', 'calibration', 'murphy', 'bootstrap', 'bounds'],
+    };
+    let rendered = 0;
+    for (const [name, modes] of Object.entries(MODES)) {
+      const entry = entries.find(([p]) => p.endsWith(`/${name}`));
+      expect(entry, `${name} is not in the panel sweep`).toBeTruthy();
+      const mod = await entry[1]();
+      expect(mod.MODES.map((m) => m[0]), `${name} declares different modes`).toEqual(modes);
+      for (const mode of modes) {
+        expect(
+          () => renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode })),
+          `${name} in the ${mode} view`,
+        ).not.toThrow();
+        rendered += 1;
+      }
+    }
+    expect(rendered).toBe(15);
+  }, 120000);
   // EVERY MODE, not only the default one. A panel with four views renders one
   // of them with no props, and the other three are exactly where a crash hides:
   // the sweep below mounted eighty panels and touched a quarter of their views.

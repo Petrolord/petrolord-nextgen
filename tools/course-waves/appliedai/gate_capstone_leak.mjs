@@ -20,7 +20,7 @@
 // DIRECTIONS, every one counted and printed:
 //   1. INPUTS. No distinctive capstone string, no run of three consecutive
 //      capstone probabilities and no distinctive capstone scalar in
-//      digest.txt, d5_dump.mjs or the lab's fixture copy; no capstone scalar
+//      digest.txt, d5_dump.mjs or the ekene-docs fixtures the lab imports; no capstone scalar
 //      equal to a number in the golden.
 //   2. VALUES, AS TEXT. Every graded value at four renderings (full double,
 //      twelve and nine significant digits, the six decimals the course prints)
@@ -150,8 +150,11 @@ const runsIn = (text) => runs.filter((r) => text.includes(r.six) || text.include
 const stringsIn = (text) => { const low = text.toLowerCase(); return strings.filter((x) => low.includes(x.low)); };
 
 // 1. INPUTS
-const LAB_DATA = read(path.join(REPO, 'src/components/course/panels/appliedai/ekeneDocs.json'));
-[['digest.txt', DIGEST], ['d5_dump.mjs', DUMP], ['ekeneDocs.json', LAB_DATA]].forEach(([label, text]) => {
+// The lab imports the vendored fixture files themselves; they are what a
+// learner's panel starts from, so they are swept as the lab's dataset.
+const LAB_DATA = ['corpus.json', 'queries.json', 'systems.json', 'extraction.json', 'calibration.json']
+  .map((f) => read(path.join(FIXDIR, f))).join('\n');
+[['digest.txt', DIGEST], ['d5_dump.mjs', DUMP], ['the ekene-docs fixtures', LAB_DATA]].forEach(([label, text]) => {
   count('1 input runs searched', runs.length);
   runsIn(text).forEach((r) => findings.push(`[1 inputs] ${label} carries a run of ${r.name}.${r.k} from entry ${r.i}: ${r.two}`));
   count('1 input strings searched', strings.length);
@@ -200,7 +203,7 @@ nearAnswer(digestLits, 'digest', '3');
 
 // 4. NAMES
 const nameRe = /\b(orlu|nnewi|awka)\b|\b(?:ORL|NNW|NX)-\d/i;
-[['digest.txt', DIGEST], ['d5_dump.mjs', DUMP], ['ekeneDocs.json', LAB_DATA]].forEach(([label, text]) => {
+[['digest.txt', DIGEST], ['d5_dump.mjs', DUMP], ['the ekene-docs fixtures', LAB_DATA]].forEach(([label, text]) => {
   count('4 files searched for names');
   const m = text.match(nameRe);
   if (m) findings.push(`[4 names] ${label} names the capstone field ${m[0]}`);
@@ -238,7 +241,7 @@ if (fs.existsSync(WAVES)) {
 if (siblings < 10) die(`only ${siblings} sibling answer keys found under ${WAVES}`);
 
 // 8. THE APP
-const APP = ['evaluateLab.js', 'RetrievalExplorer.jsx', 'ScoringExplorer.jsx', 'TrustExplorer.jsx', 'panelBits.jsx', 'ekeneDocs.json']
+const APP = ['evaluateLab.js', 'RetrievalExplorer.jsx', 'ScoringExplorer.jsx', 'TrustExplorer.jsx', 'panelBits.jsx']
   .map((f) => path.join(REPO, 'src/components/course/panels/appliedai', f))
   .concat([path.join(REPO, 'src/pages/apps/AppliedaiLearningPage.jsx')]);
 APP.forEach((p) => {

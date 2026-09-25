@@ -76,8 +76,8 @@ try:
     got['orlu_o1_bm25_top_score'] = O.o_bm25(docs, qtext[s['topQuery']], k=s['k'], k1=s['k1'], b=s['b'])['ranking'][0]['score']
     got['orlu_o4_tfidf_top_cosine'] = O.o_tfidf(docs, qtext[s['cosQuery']], k=s['k'])['ranking'][0]['score']
     ev = O.o_evaluate(run['runs'], OR['judgments'], k=s['k'])
-    got['orlu_bm25_mean_recall_at3'] = ev['mean']['recall']
-    got['orlu_bm25_mrr_at3'] = ev['mean']['mrr']
+    got['orlu_bm25_mean_recall_at4'] = ev['mean']['recall']
+    got['orlu_bm25_mrr_at4'] = ev['mean']['mrr']
     g = O.o_answers([{k: a[k] for k in ('query', 'text', 'citations')} for a in OR['answers']], docs,
                     runs={a['query']: a['retrieved'] for a in OR['answers']})
     got['orlu_answers_supported_fraction'] = g['supportedFraction']

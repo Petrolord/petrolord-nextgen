@@ -282,6 +282,9 @@ export const PANELS = {
   'pf-smoothing-explorer': React.lazy(() => import('@/components/course/panels/forecastml/SmoothingExplorer')),
   'pf-backtest-explorer': React.lazy(() => import('@/components/course/panels/forecastml/BacktestExplorer')),
   'pf-uncertainty-explorer': React.lazy(() => import('@/components/course/panels/forecastml/UncertaintyExplorer')),
+  'ae-retrieval-explorer': React.lazy(() => import('@/components/course/panels/appliedai/RetrievalExplorer')),
+  'ae-scoring-explorer': React.lazy(() => import('@/components/course/panels/appliedai/ScoringExplorer')),
+  'ae-trust-explorer': React.lazy(() => import('@/components/course/panels/appliedai/TrustExplorer')),
 };
 
 export function resolvePanel(id) {

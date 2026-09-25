@@ -78,7 +78,7 @@
 #   * the bootstrap as a general method and P labels for outcomes are OWNED BY
 #     the uncertainty course and D4; the interval here is a percentile of a
 #     statistic, labelled as a parameter percentile;
-#   * forecasting is OWNED BY D4 appliedai; clustering by D3 facies.
+#   * forecasting is OWNED BY D4 forecastml; clustering by D3 facies.
 #
 # Panel ids: R the retrieval explorer (tokens, TF-IDF, BM25, the ranking,
 # metrics at k, one answer's claims), S the scoring explorer (MAP and nDCG over

@@ -672,7 +672,7 @@ w();
 table(['rank', 'passage', 'length', 'score', 'judged grade (fixture)', 'term: tf, contribution'], b02.ranking.map((r) => [S(r.rank), r.id, S(r.length), f6(r.score), S(J.Q02[r.id] ?? 'unjudged'), r.terms.map((t) => `${t.term}: ${t.tf}, ${f6(t.contribution)}`).join('; ')]));
 must('Q02: EKD-043 ranks first and the answer EKD-003 fourth', b02.ranking[0].id === 'EKD-043' && b02.ranking[3].id === 'EKD-003' && J.Q02['EKD-003'] === 3, b02.ranking.map((r) => r.id).join());
 w();
-w(`EKD-043 is a drilling report ("rate of penetration") and ranks first on the words rate and of; the passage that answers the query, EKD-003, ranks fourth. Words match, meaning does not.`);
+w(`EKD-043 is a drilling report ("rate of penetration") and ranks first on the words rate and of; the passage that answers the query, EKD-003, ranks fourth. BM25 matches words and knows nothing of meaning.`);
 w();
 const b13k = success('bm25 Q13 k1 alt', EV.rankBm25({ documents: DOCS, query: QTEXT.Q13, k: K, k1: K1_ALT }));
 const b13 = success('bm25 Q13', EV.rankBm25({ documents: DOCS, query: QTEXT.Q13, k: K }));
@@ -985,7 +985,7 @@ must('101 against 100 at relTol 0.01 is correct (on the boundary)', xt.perRecord
 
 /* ============================================================ SECTION 15 */
 
-section('grounded', 'Groundedness and its limits: cited and retrieved, the reasons, grounded and correct', ['Professional m05', 'Associate m06 l03']);
+section('grounded', 'Groundedness and its limits: cited and retrieved, the reasons, grounded and correct', ['Professional m05']);
 const cB = success('checkAnswers B', EV.checkAnswers({ answers: ANSWERS('B'), documents: DOCS, runs: RUNS('B') }));
 const cBt = success('checkAnswers B reltol', EV.checkAnswers({ answers: ANSWERS('B'), documents: DOCS, runs: RUNS('B'), numericRelTol: TOL }));
 const cBn = success('checkAnswers B no runs', EV.checkAnswers({ answers: ANSWERS('B'), documents: DOCS }));

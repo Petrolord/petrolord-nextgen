@@ -49,12 +49,12 @@ export const PRINTED_DECIMALS = {
 export const GRADED_FIELDS = [
   // Associate: ORLU, eighteen passages and four queries. RETRIEVAL AND CITED
   // ANSWERS: a BM25 idf, a BM25 top score, a TF-IDF top cosine, mean recall and
-  // MRR at 3, and the pooled supported fraction of four answers.
+  // MRR at 4, and the pooled supported fraction of four answers.
   ['beginner', 'orlu_bm25_idf_pressure', 'score', 1e-9],
   ['beginner', 'orlu_o1_bm25_top_score', 'score', 1e-9],
   ['beginner', 'orlu_o4_tfidf_top_cosine', 'score', 1e-9],
-  ['beginner', 'orlu_bm25_mean_recall_at3', 'metric', 1e-9],
-  ['beginner', 'orlu_bm25_mrr_at3', 'metric', 1e-9],
+  ['beginner', 'orlu_bm25_mean_recall_at4', 'metric', 1e-9],
+  ['beginner', 'orlu_bm25_mrr_at4', 'metric', 1e-9],
   ['beginner', 'orlu_answers_supported_fraction', 'fraction', 1e-9],
   // Professional: NNEWI, forty-five passages, eight queries and two fixed systems.
   // SCORING RETRIEVAL AND ANSWERS HONESTLY: a MAP at grade 2, an exponential
@@ -66,7 +66,7 @@ export const GRADED_FIELDS = [
   ['intermediate', 'nnewi_extraction_macro_f1', 'fraction', 1e-9],
   ['intermediate', 'nnewi_paired_ndcg_upper', 'bound', 1e-9],
   ['intermediate', 'nnewi_q_supported_fraction', 'fraction', 1e-9],
-  // Expert: AWKA, ninety-six rating pairs and one hundred and twenty
+  // Expert: AWKA, ninety-six rating pairs and one hundred and twenty-two
   // calibration rows. AGREEMENT AND CALIBRATION: unweighted and linear kappa,
   // the Brier score, and the Murphy reliability, resolution and within-bin
   // covariance terms at eight bins.

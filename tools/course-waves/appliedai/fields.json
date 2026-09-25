@@ -2,37 +2,37 @@
  [
   "beginner",
   "orlu_bm25_idf_pressure",
-  0.9954280524328789,
+  1.120591195386885,
   5e-7
  ],
  [
   "beginner",
   "orlu_o1_bm25_top_score",
-  8.260608093659863,
+  7.811644371347484,
   5e-7
  ],
  [
   "beginner",
   "orlu_o4_tfidf_top_cosine",
-  0.3610972423758391,
+  0.4097941058785764,
   5e-7
  ],
  [
   "beginner",
-  "orlu_bm25_mean_recall_at3",
-  0.5125,
+  "orlu_bm25_mean_recall_at4",
+  0.6233333333333333,
   5e-7
  ],
  [
   "beginner",
-  "orlu_bm25_mrr_at3",
-  0.7083333333333333,
+  "orlu_bm25_mrr_at4",
+  0.7666666666666666,
   5e-7
  ],
  [
   "beginner",
   "orlu_answers_supported_fraction",
-  0.5882352941176471,
+  0.7619047619047619,
   5e-7
  ],
  [
@@ -62,7 +62,7 @@
  [
   "intermediate",
   "nnewi_paired_ndcg_upper",
-  0.0850669227160172,
+  0.08662003730238574,
   5e-7
  ],
  [
@@ -86,25 +86,25 @@
  [
   "advanced",
   "awka_brier",
-  0.16085416666666671,
+  0.16416885245901644,
   5e-7
  ],
  [
   "advanced",
   "awka_reliability_bins8",
-  0.06804588293650794,
+  0.07224170442589009,
   5e-7
  ],
  [
   "advanced",
   "awka_resolution_bins8",
-  0.07503456221198156,
+  0.0739759723015178,
   5e-7
  ],
  [
   "advanced",
   "awka_wbc_bins8",
-  0.00302346816862946,
+  0.00292706470919057,
   5e-7
  ]
 ]
