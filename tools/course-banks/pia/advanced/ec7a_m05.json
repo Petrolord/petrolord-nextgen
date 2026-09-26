@@ -48,11 +48,11 @@
   "options": [
    "HCDT is 3 percent of the year's own opex plus capex, and its first year has capex only",
    "Only once the field's production passes 10,000 bopd is HCDT charged, which Alpha never does in any year of its ledger",
-   "HCDT is 3 percent of the preceding year's opex, and none is stated for the year before 2026",
+   "HCDT is 3 percent of the preceding year's opex, and Alpha's first year reads a prior-year opex of 0",
    "A fixed sum of 720000.000000 a year, which begins in the second year of any ledger"
   ],
   "answer": 2,
-  "explanation": "HCDT is 3 percent of the preceding year's opex, and the first ledger year reads the stated pia_prior_year_opex_usd (0 if not stated), so Alpha's 2026 HCDT is 0.000000 and every later year 720000.000000. The NDDC levy reads opex plus capex, which is why its 2026 figure is 4320000.000000. Nothing in HCDT reads the daily rate."
+  "explanation": "HCDT is 3 percent of the preceding year's opex, and the first ledger year reads the stated pia_prior_year_opex_usd (0 if not stated); Alpha's 2026 HCDT is 0.000000 and every later year 720000.000000. The NDDC levy reads opex plus capex, which is why its 2026 figure is 4320000.000000. Nothing in HCDT reads the daily rate."
  },
  {
   "prompt": "Moving Ekene Alpha onshore changes every provision total by 0.000000. What does the course read from that?",

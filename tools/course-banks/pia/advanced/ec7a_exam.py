@@ -10,7 +10,7 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # one-change rows on Ekene Alpha, the concept-only quotations, the refusal
 # table and the new-lease rows under both stated rates. Open readings are
 # quoted with their stated reading and never keyed as the law. Questions 4, 9,
-# 23, 31, 33, 34, 35, 41 and 42 each need two modules at once.
+# 22, 30, 31, 32, 33, 34, 41 and 42 each need two modules at once.
 
 K = [1, 0, 2, 3, 3, 1, 0, 1, 1, 3, 3, 2, 0, 0, 1, 3, 1, 1, 3, 3, 1,
      2, 2, 1, 2, 0, 2, 2, 2, 0, 0, 1, 3, 3, 2, 0, 3, 0, 0, 2, 0, 1]
@@ -42,12 +42,12 @@ x("The single-year worked example (2025, a year under the Act alone) is run with
  "The engine builds one note from the run: \"pia_tet_rate_pct 2.5 was used for 2025. The statutory tertiary education tax is 3% from 2023 (Tertiary Education Trust Fund Act s.1(2) as amended by Finance Act 2023 s.26) and 2.5% before; leave pia_tet_rate_pct unset to apply it.\" A stated rate that differs from the statute is used and named; a year under the Nigeria Tax Act 2025 charges no education tax at all.")
 
 # 4
-x("An oil mining lease that never converted and a converted lease each produce gas onshore. Which gas royalty rates do the texts the course quotes give them?",
- "7% onshore under NTA Seventh Schedule Part IV para 7(3)(c) for the unconverted lease; 5%, or 2.5% for gas used in-country, for the converted one",
- ["5%, or 2.5% for gas used in-country, for both, since the Nigeria Tax Act restates para 10(6) for every lease",
-  "7% onshore for both, since the Nigeria Tax Act replaced the Act's gas royalty with its own Part IV rates",
-  "2.5% for both, the in-country rate of para 10(6) being applied to all gas that stays in Nigeria"],
- "The Nigeria Tax Act prints, for leases under its Chapter Three Parts II and III, a gas royalty of \"(i) onshore areas: 7 %, and (ii) offshore areas: 5%;\", and the course reads it beside the Act's own gas royalty, 5 percent and 2.5 percent in-country (PIA Seventh Schedule para 10(6); NTA Seventh Schedule para 6(2)(f)). The two kinds of lease can pay different royalty on the same gas. The unconverted lease is concept-only; the engine computes the converted one.")
+x("The course reads NTA Seventh Schedule Part IV para 7(3)(c) beside the Act's own gas royalty. What rates do the two texts print for gas produced onshore?",
+ "7% onshore in para 7(3)(c), for leases under NTA Chapter Three Parts II and III; 5%, or 2.5% for gas used in-country, in para 10(6)",
+ ["5%, or 2.5% for gas used in-country, in both texts, since the Nigeria Tax Act restates para 10(6) word for word everywhere",
+  "7% onshore in both, since the Nigeria Tax Act replaced the Act's gas royalty with its own Part IV rates",
+  "2.5% in both, the in-country rate of para 10(6) being applied to all gas that stays in Nigeria"],
+ "The Nigeria Tax Act prints, for leases under its Chapter Three Parts II and III, a gas royalty of \"(i) onshore areas: 7 %, and (ii) offshore areas: 5%;\", and the course reads it beside the Act's own gas royalty, 5 percent and 2.5 percent in-country (PIA Seventh Schedule para 10(6); NTA Seventh Schedule para 6(2)(f)). The engine computes only the Act's rates; para 7(3)(c) belongs to the concept-only terms of leases outside the conversion.")
 
 # 5
 x("Para 14(4) of the PIA Seventh Schedule sets a minimum government share of profit oil by cumulative production per field. What does it print for the first and last bands?",
