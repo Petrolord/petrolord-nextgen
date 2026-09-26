@@ -1,0 +1,544 @@
+{
+ "dataset": "IFEYI (synthetic)",
+ "label": "IFEYI, Ekene gas to the Ifeyi Glass Cluster (synthetic), 2028 to 2033",
+ "price": {
+  "months": [
+   {
+    "month": "2027-09",
+    "values": {
+     "oil": 71.4
+    }
+   },
+   {
+    "month": "2027-10",
+    "values": {
+     "oil": 73.15
+    }
+   },
+   {
+    "month": "2027-11",
+    "values": {
+     "oil": 69.8
+    }
+   },
+   {
+    "month": "2027-12",
+    "values": {
+     "oil": 66.25
+    }
+   },
+   {
+    "month": "2028-01",
+    "values": {
+     "oil": 64.9
+    }
+   },
+   {
+    "month": "2028-02",
+    "values": {
+     "oil": 62.35
+    }
+   },
+   {
+    "month": "2028-03",
+    "values": {
+     "oil": 65.7
+    }
+   },
+   {
+    "month": "2028-04",
+    "values": {
+     "oil": 68.45
+    }
+   },
+   {
+    "month": "2028-05",
+    "values": {
+     "oil": 70.1
+    }
+   },
+   {
+    "month": "2028-06",
+    "values": {
+     "oil": 72.6
+    }
+   },
+   {
+    "month": "2028-07",
+    "values": {
+     "oil": 74.95
+    }
+   },
+   {
+    "month": "2028-08",
+    "values": {
+     "oil": 77.3
+    }
+   },
+   {
+    "month": "2028-09",
+    "values": {
+     "oil": 75.8
+    }
+   },
+   {
+    "month": "2028-10",
+    "values": {
+     "oil": 73.25
+    }
+   },
+   {
+    "month": "2028-11",
+    "values": {
+     "oil": 71.9
+    }
+   },
+   {
+    "month": "2028-12",
+    "values": {
+     "oil": 70.4
+    }
+   },
+   {
+    "month": "2029-01",
+    "values": {
+     "oil": 68.15
+    }
+   },
+   {
+    "month": "2029-02",
+    "values": {
+     "oil": 66.7
+    }
+   },
+   {
+    "month": "2029-03",
+    "values": {
+     "oil": 63.95
+    }
+   },
+   {
+    "month": "2029-04",
+    "values": {
+     "oil": 61.2
+    }
+   },
+   {
+    "month": "2029-05",
+    "values": {
+     "oil": 60.45
+    }
+   },
+   {
+    "month": "2029-06",
+    "values": {
+     "oil": 62.8
+    }
+   },
+   {
+    "month": "2029-07",
+    "values": {
+     "oil": 65.35
+    }
+   },
+   {
+    "month": "2029-08",
+    "values": {
+     "oil": 67.9
+    }
+   },
+   {
+    "month": "2029-09",
+    "values": {
+     "oil": 69.25
+    }
+   },
+   {
+    "month": "2029-10",
+    "values": {
+     "oil": 71.6
+    }
+   },
+   {
+    "month": "2029-11",
+    "values": {
+     "oil": 73.05
+    }
+   },
+   {
+    "month": "2029-12",
+    "values": {
+     "oil": 74.4
+    }
+   },
+   {
+    "month": "2030-01",
+    "values": {
+     "oil": 76.85
+    }
+   },
+   {
+    "month": "2030-02",
+    "values": {
+     "oil": 78.2
+    }
+   },
+   {
+    "month": "2030-03",
+    "values": {
+     "oil": 80.65
+    }
+   },
+   {
+    "month": "2030-04",
+    "values": {
+     "oil": 82.1
+    }
+   },
+   {
+    "month": "2030-05",
+    "values": {
+     "oil": 79.55
+    }
+   },
+   {
+    "month": "2030-06",
+    "values": {
+     "oil": 77.9
+    }
+   },
+   {
+    "month": "2030-07",
+    "values": {
+     "oil": 75.35
+    }
+   },
+   {
+    "month": "2030-08",
+    "values": {
+     "oil": 73.8
+    }
+   },
+   {
+    "month": "2030-09",
+    "values": {
+     "oil": 72.15
+    }
+   },
+   {
+    "month": "2030-10",
+    "values": {
+     "oil": 70.6
+    }
+   },
+   {
+    "month": "2030-11",
+    "values": {
+     "oil": 68.95
+    }
+   },
+   {
+    "month": "2030-12",
+    "values": {
+     "oil": 67.3
+    }
+   },
+   {
+    "month": "2031-01",
+    "values": {
+     "oil": 65.75
+    }
+   },
+   {
+    "month": "2031-02",
+    "values": {
+     "oil": 64.2
+    }
+   },
+   {
+    "month": "2031-03",
+    "values": {
+     "oil": 66.55
+    }
+   },
+   {
+    "month": "2031-04",
+    "values": {
+     "oil": 68.9
+    }
+   },
+   {
+    "month": "2031-05",
+    "values": {
+     "oil": 71.25
+    }
+   },
+   {
+    "month": "2031-06",
+    "values": {
+     "oil": 73.7
+    }
+   },
+   {
+    "month": "2031-07",
+    "values": {
+     "oil": 75.05
+    }
+   },
+   {
+    "month": "2031-08",
+    "values": {
+     "oil": 76.4
+    }
+   },
+   {
+    "month": "2031-09",
+    "values": {
+     "oil": 78.85
+    }
+   },
+   {
+    "month": "2031-10",
+    "values": {
+     "oil": 80.3
+    }
+   },
+   {
+    "month": "2031-11",
+    "values": {
+     "oil": 81.65
+    }
+   },
+   {
+    "month": "2031-12",
+    "values": {
+     "oil": 83.1
+    }
+   },
+   {
+    "month": "2032-01",
+    "values": {
+     "oil": 84.45
+    }
+   },
+   {
+    "month": "2032-02",
+    "values": {
+     "oil": 82.9
+    }
+   },
+   {
+    "month": "2032-03",
+    "values": {
+     "oil": 80.35
+    }
+   },
+   {
+    "month": "2032-04",
+    "values": {
+     "oil": 78.7
+    }
+   },
+   {
+    "month": "2032-05",
+    "values": {
+     "oil": 76.15
+    }
+   },
+   {
+    "month": "2032-06",
+    "values": {
+     "oil": 74.6
+    }
+   },
+   {
+    "month": "2032-07",
+    "values": {
+     "oil": 73.05
+    }
+   },
+   {
+    "month": "2032-08",
+    "values": {
+     "oil": 71.5
+    }
+   },
+   {
+    "month": "2032-09",
+    "values": {
+     "oil": 69.95
+    }
+   },
+   {
+    "month": "2032-10",
+    "values": {
+     "oil": 68.4
+    }
+   },
+   {
+    "month": "2032-11",
+    "values": {
+     "oil": 66.85
+    }
+   },
+   {
+    "month": "2032-12",
+    "values": {
+     "oil": 65.3
+    }
+   },
+   {
+    "month": "2033-01",
+    "values": {
+     "oil": 63.75
+    }
+   },
+   {
+    "month": "2033-02",
+    "values": {
+     "oil": 62.2
+    }
+   },
+   {
+    "month": "2033-03",
+    "values": {
+     "oil": 60.65
+    }
+   },
+   {
+    "month": "2033-04",
+    "values": {
+     "oil": 62.1
+    }
+   },
+   {
+    "month": "2033-05",
+    "values": {
+     "oil": 64.55
+    }
+   },
+   {
+    "month": "2033-06",
+    "values": {
+     "oil": 66.9
+    }
+   },
+   {
+    "month": "2033-07",
+    "values": {
+     "oil": 69.35
+    }
+   },
+   {
+    "month": "2033-08",
+    "values": {
+     "oil": 71.8
+    }
+   },
+   {
+    "month": "2033-09",
+    "values": {
+     "oil": 74.25
+    }
+   },
+   {
+    "month": "2033-10",
+    "values": {
+     "oil": 76.7
+    }
+   },
+   {
+    "month": "2033-11",
+    "values": {
+     "oil": 78.15
+    }
+   },
+   {
+    "month": "2033-12",
+    "values": {
+     "oil": 79.6
+    }
+   }
+  ],
+  "formula": {
+   "type": "oil-indexed",
+   "index": "oil",
+   "slope": 0.0915,
+   "constant": 0.62,
+   "floor": 4.25,
+   "ceiling": 11.5
+  },
+  "from": "2028-01",
+  "to": "2033-12",
+  "averagingMonths": 3,
+  "lagMonths": 1,
+  "resetMonths": 3,
+  "rounding": "model-gsa-4dp"
+ },
+ "pricing": {
+  "contractPrice": "annual-average",
+  "topPrice": "annual-average",
+  "makeUpPrice": 0.35
+ },
+ "contract": {
+  "topPct": 82.5,
+  "makeUp": {
+   "periodYears": 3,
+   "order": "after-adjusted-acq",
+   "endOfTerm": "forfeit"
+  },
+  "years": [
+   {
+    "year": 2028,
+    "acq": 11437500,
+    "forceMajeure": 468750,
+    "maintenance": 93750,
+    "taken": 7812500.5
+   },
+   {
+    "year": 2029,
+    "acq": 11406250,
+    "maintenance": 93750,
+    "taken": 11562500.25
+   },
+   {
+    "year": 2030,
+    "acq": 11406250,
+    "maintenance": 62500,
+    "sellerShortfall": 125000.5,
+    "shortfallPrice": 1.15,
+    "taken": 8750000.75
+   },
+   {
+    "year": 2031,
+    "acq": 11406250,
+    "maintenance": 93750,
+    "taken": 11968750.5
+   },
+   {
+    "year": 2032,
+    "acq": 11437500,
+    "maintenance": 93750,
+    "sellerShortfall": 218750.25,
+    "shortfallPrice": 1.15,
+    "taken": 11187500
+   },
+   {
+    "year": 2033,
+    "acq": 11406250,
+    "maintenance": 93750,
+    "taken": 11250000.75
+   }
+  ]
+ },
+ "dgdo": {
+  "obligation": 8760400.4,
+  "delivered": 7915260.2,
+  "voluntaryContracts": 6250000,
+  "excused": {
+   "forceMajeure": 120500.3,
+   "transportUnavailable": 95000.25
+  },
+  "agreementPenaltyRate": 3.2
+ }
+}

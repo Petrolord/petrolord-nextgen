@@ -291,6 +291,9 @@ export const PANELS = {
   'pia-royalty-calculator': React.lazy(() => import('@/components/course/panels/pia/RoyaltyCalculator')),
   'pia-hct-calculator': React.lazy(() => import('@/components/course/panels/pia/HctCalculator')),
   'pia-ledger-calculator': React.lazy(() => import('@/components/course/panels/pia/LedgerCalculator')),
+  'gsa-quantity-calculator': React.lazy(() => import('@/components/course/panels/gsa/QuantityCalculator')),
+  'gsa-ledger-calculator': React.lazy(() => import('@/components/course/panels/gsa/LedgerCalculator')),
+  'gsa-contract-calculator': React.lazy(() => import('@/components/course/panels/gsa/ContractCalculator')),
 };
 
 export function resolvePanel(id) {

@@ -1,0 +1,19 @@
+-- ============================================================================
+-- EC8 ASSOCIATE DEEP SEED: Gas Commercialisation & Gas Sales Agreements,
+-- beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/gsa/beginner.
+--
+-- What this tier owns: QUANTITIES AND ONE CONTRACT YEAR. What a gas sales agreement fixes; the
+-- texts with their editions and read dates; volume to energy; the DCQ, the
+-- ACQ, day counts, MaxDCQ and swing; the daily balance of nominations and
+-- takes with seller and buyer shortfall; the Adjusted ACQ, the take-or-pay
+-- quantity and one year's deficiency payment.
+--
+-- AN ENGINE COURSE. There is no Suite app: the practicals run in the course's
+-- own quantity calculator. The capstone grades six quantities of this tier, each
+-- identical under every reading the engine states.
+-- ============================================================================

@@ -85,6 +85,7 @@ export const HOME_COURSES = [
   c('portfolio', 'economics', 'Capital Portfolio & Cost Control', 'Capital to the best projects, spend kept on track.'),
   c('fdp', 'economics', 'Field Development Planning', 'Every discipline in one bankable plan.'),
   c('pia', 'economics', 'Petroleum Industry Act 2021 & Nigerian Fiscal Terms', 'Read Nigerian royalty and tax the way the Act writes them.', 'coming_soon', true),
+  c('gsa', 'economics', 'Gas Commercialisation & Gas Sales Agreements', 'Work take-or-pay, make-up and gas price formulas the way the contract writes them.', 'coming_soon', true),
   c('riskchange', 'assurance', 'Risk, Change & Learning', 'Risk registers, MOC and lessons learned done properly.'),
   c('compliance', 'assurance', 'Compliance, Audit & Quality', 'Audit-ready teams and consistent quality.'),
   c('safetystats', 'hse', 'Safety Performance Statistics & KPIs', 'Act on real safety trends instead of noise in the data.'),

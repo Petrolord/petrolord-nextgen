@@ -78,6 +78,7 @@ import ForecastmlLearningPage from '@/pages/apps/ForecastmlLearningPage';
 import AppliedaiLearningPage from '@/pages/apps/AppliedaiLearningPage';
 import ProcurementLearningPage from '@/pages/apps/ProcurementLearningPage';
 import PiaLearningPage from '@/pages/apps/PiaLearningPage';
+import GsaLearningPage from '@/pages/apps/GsaLearningPage';
 import HygieneLearningPage from '@/pages/apps/HygieneLearningPage';
 import RiskChangeLearningPage from '@/pages/apps/RiskChangeLearningPage';
 import ComplianceLearningPage from '@/pages/apps/ComplianceLearningPage';
@@ -469,6 +470,7 @@ const DashboardPage = () => {
     <Route path="apps/appliedai" element={<AppliedaiLearningPage />} />
     <Route path="apps/procurement" element={<ProcurementLearningPage />} />
     <Route path="apps/pia" element={<PiaLearningPage />} />
+    <Route path="apps/gsa" element={<GsaLearningPage />} />
     <Route path="apps/hygiene" element={<HygieneLearningPage />} />
     <Route path="apps/riskchange" element={<RiskChangeLearningPage />} />
     <Route path="apps/compliance" element={<ComplianceLearningPage />} />

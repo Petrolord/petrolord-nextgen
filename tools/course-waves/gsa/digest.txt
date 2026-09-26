@@ -70,7 +70,7 @@ THE RULE THIS COURSE FOLLOWS FOR EVERY LAW, REGULATION, MODEL CONTRACT AND GUIDE
 | text | edition or date | what the engine reads from it | date read |
 | --- | --- | --- | --- |
 | Petroleum Industry Act 2021 (Act No. 6) | Official Gazette No. 142, Vol. 108, 27 August 2021 | s.104 and s.105 (flaring: a fine by regulation, no rate in the Act); s.110 (the Domestic Gas Delivery Obligation); s.167 (the domestic base price and the sector prices); s.168 and the Fourth Schedule (gas based industries); the Third Schedule (base price principles); the Seventh Schedule para 10(6) (gas royalty, through cashflow.ts) | 2026-09-26 |
-| Domestic Gas Delivery Obligation Regulations 2022 (S.I. No. 74 of 2022) | Official Gazette No. 206, Vol. 109, Lagos, 23 November 2022; made and commenced 18 November 2022 | r.6(1) (US$3.50 per MMBtu not delivered), r.6(2) (under a signed agreement not less than that amount), r.6(3) and (4) (the 90-day investigation, not computed), r.4 and r.5 (supply curve and allocation, concept), r.9 (definitions) | 2026-09-26 |
+| Domestic Gas Delivery Obligation Regulations 2022 (S.I. No. 74 of 2022) | Official Gazette No. 206, Vol. 109, Lagos, 23 November 2022; made and commenced 18 November 2022 | r.6(1) (US$3.50 per MMBtu not delivered), r.6(2) (under a signed agreement not less than that amount), r.6(3) and (4) (the 90-day investigation, which the engine does not compute), r.4 and r.5 (supply curve and allocation, concept), r.9 (definitions) | 2026-09-26 |
 | Commonwealth Secretariat, Gas Sales Agreement, Contract 2 in the Commonwealth Model Contract Series | 2025, licensed under Creative Commons Attribution 4.0 | the definitions (ACQ, Adjusted ACQ, Take or Pay Quantity, BADQ, BASQ, Make-Up Aggregate, Carry Forward Aggregate, Shortfall Quantity, MaxDCQ) and Articles 12.5 to 12.8, 15.1, 15.2.6, 15.4 and 15.8 | 2026-09-26 |
 | ESMAP Report 152/93, Long-term Gas Contracts: Principles and Applications | January 1993, World Bank and UNDP | paras 6.52 (daily availability), 6.55 to 6.59 (minimum pay and make-up), 6.61 and 6.62 (carry-forward) | 2026-09-26 |
 | HMRC Oil Taxation Manual OT05435 and OT05402 | both updated 19 December 2019, Open Government Licence | OT05435 (make-up in priority or after the period minimum; a time limit); OT05402 (effective swing = swing factor / take-or-pay level) | 2026-09-26 |
@@ -79,7 +79,7 @@ THE RULE THIS COURSE FOLLOWS FOR EVERY LAW, REGULATION, MODEL CONTRACT AND GUIDE
 | CLDP and US DOE, Understanding Natural Gas and LNG Options | edition current as of October 2017 | glossary: take or pay, carry forward, downward quantity tolerance; the S-curve and the price reopener as concept | 2026-09-26 |
 | NIST Special Publication 811 | 2008 edition, Appendix B | the International Table Btu, 1.055 056 E+03 J (the engine holds the exact defining value) | 2026-09-26 |
 | EIA, Energy conversion calculators | web page read 2026-09-26 | 1 barrel of crude oil = 5,689,000 Btu (2026 US production estimate) | 2026-09-26 |
-| NMDPRA domestic base price 2026 (and 2025), as reported | circular effective 1 April 2026, not retrieved; reported by BusinessDay (31 March 2026) and by Advocaat Law Practice through Legal 500 (7 April 2026) | a required input of domesticPrice; the reported figures appear only as reported (the next paragraph) | 2026-09-26 |
+| NMDPRA domestic base price 2026 (and 2025), as reported | circular effective 1 April 2026, which could not be retrieved; reported by BusinessDay (31 March 2026) and by Advocaat Law Practice through Legal 500 (7 April 2026) | a required input of domesticPrice; the reported figures appear only as reported (the next paragraph) | 2026-09-26 |
 | NUPRC, Gas Flaring, Venting and Methane Emissions (Prevention of Waste and Pollution) Regulations 2023 | the copy on the NUPRC gazetted page is unnumbered and undated | not implemented; flaring is taught as concept only | 2026-09-26 |
 
 THE DOMESTIC BASE PRICE IS A REQUIRED INPUT, QUOTED ONLY AS REPORTED. The Authority determines it each year (PIA s.167(1)); the regulator's own circular could not be retrieved, so the engine holds no default and every domesticPrice call states it. The engine's own basis, verbatim:
@@ -476,7 +476,7 @@ A PRICED LEDGER IN A PANEL. Where a contract prices its gas by a formula, the pa
 
 WHAT A CAPSTONE STATES. Each capstone runs its own synthetic agreement, which this digest does not print, and states every term a figure depends on: the quantities, the day counts, the take-or-pay percentage, the make-up period, the recovery order, the end-of-term rule, the carry-forward terms, the price formula with its averaging, lag, reset and rounding, the price basis of the ledger, the royalty terrain and share, the discount rate and base year. Each graded figure is quoted to six decimals as the panel prints it.
 
-WHAT IS NEVER GRADED. No graded figure depends on a reading the engine states (section 18): every capstone field is the same number under either side of each reading. No graded figure uses the domestic base price, which is quoted only as reported (section 2).
+WHAT IS NEVER GRADED. No graded figure depends on a reading the engine states (section 18): every capstone field is the same number under each reading the engine takes and under the alternative it names. No graded figure uses the domestic base price, which is quoted only as reported (section 2).
 
 WHAT A COMPUTED FIGURE DOES NOT SAY. A deficiency payment is what the stated clauses produce on stated takes; it is not a forecast of what a buyer will pay. An oil-indexed price follows the stated formula on the stated index series, which in this course is synthetic. An NPV depends on the discount rate and base year stated. Each figure is quoted with its terms for that reason.
 
@@ -528,9 +528,9 @@ THE RULE, in the engine's basis: ACQ = DCQ x days in the contract year; MaxDCQ =
 | cq-top-zero-without-swing | 50000.000000 | 360 days as stated | 18000000.000000 | none | none | 0.000000 | none |
 | cq-hmrc-ot05402-effective-swing | 100.000000 | 365 days as stated | 36500.000000 | 150.000000 | 1.500000 | 32850.000000 | 1.666667 |
 
-A DAY COUNT IS A STATED TERM. The engine takes a stated number of days, a calendar year (365 days, or 366 in a leap year; 2100 is not a leap year and 2000 is), or a period whose end date is excluded, as a contract year that finishes on the following 1 January. A call that states more than one day count, or none, is refused.
+A DAY COUNT IS A STATED TERM. The engine takes a stated number of days, a calendar year (365 days, or 366 in a leap year; 2100 is not a leap year and 2000 is), or a period whose end date is excluded, as a contract year that finishes on the following first of January. A call that states more than one day count, or none, is refused.
 
-EFFECTIVE SWING (golden input 150 and 90): MaxDCQ percent / take-or-pay percent = 1.666667 (engine). HMRC's manual prints the same division as 1.66 and the swing above the take-or-pay level as a factor of 6.6 (text: OT05402); the manual's 1.66 is the engine's figure cut after two decimals (derived: 1.660000), and its 6.6 is (1.66 - 1) x 10 (derived). The course quotes the engine's figure and names the manual's printed one as the manual's.
+EFFECTIVE SWING (golden input 150 and 90): MaxDCQ percent / take-or-pay percent = 1.666667 (engine). HMRC Oil Taxation Manual OT05402 prints the same division as 1.66, and the golden file records its rule, verbatim: "printed truncated: 150/90 = 1.666...; the manual prints 1.66 and a factor of 6.6". The manual's figure is the engine's cut after two decimals (derived: 1.660000). The course quotes the engine's figure and names the manual's printed one as the manual's.
 
 A take-or-pay percentage of 0 is accepted when no MaxDCQ is stated (golden input cq-top-zero-without-swing: take-or-pay quantity 0.000000, effective swing none); with a MaxDCQ stated the effective swing would divide by it, so that call is refused (section 5).
 
@@ -646,7 +646,7 @@ daily-buyer-caused, the engine's reasons, verbatim:
 > 2027-03-01: 80 of the properly nominated quantity was not made available for a cause on the buyer's side, so it is not a seller shortfall
 > 2027-03-01: taken 20 is below the adjusted DCQ 100: buyer shortfall 80
 
-THE READING THIS SECTION RESTS ON. The engine measures a seller shortfall against the quantity the seller made AVAILABLE, so on daily-available-not-taken (100 made available, 60 taken) the seller shortfall is 0.000000 and the buyer shortfall 40.000000. Section 18 quotes the reading and the model formula it departs from.
+THE READING THIS SECTION RESTS ON. The engine measures a seller shortfall against the quantity the seller made AVAILABLE, so on daily-available-not-taken (100.000000 made available, 60.000000 taken) the seller shortfall is 0.000000 and the buyer shortfall 40.000000. Section 18 quotes the reading and the model formula it departs from.
 
 # SECTION 10: Take-or-pay in one contract year: the Adjusted ACQ, the take-or-pay quantity, the deficiency and its payment, damages (owned by Associate m05 and Associate m06)
 
@@ -1215,13 +1215,13 @@ price-export-unrounded: oil-indexed 0.5 + 0.12 x oil, S-curve kinks 55 and 90, s
 | 2028-02 | 2027-07 to 2027-12 | oil 56.488333 | none | mid | none | 7.278600 | 7.278600 |
 (106 more months; the annual rows: 2027 average 8.694450, last month 7.768800; 2028 average 7.543550, last month 8.028000; 2029 average 9.808450, last month 10.674000; 2030 average 10.645100, last month 10.061800; 2031 average 8.261300, last month 7.461000; 2032 average 7.756900, last month 8.436600; 2033 average 10.211300, last month 10.939000; 2034 average 10.373200, last month 9.598200; 2035 average 7.898300, last month 7.254400; 2036 average 8.081300, last month 8.950200)
 
-THE FOUR-DECIMAL RULE on price-round-model-4dp: a fifth decimal of 5 or more rounds the fourth up (11.23459 prints 11.234600, 100.00005 prints 100.000100), 4 or less leaves it (11.23449 prints 11.234500), and the price is computed in full before the rule reads its fifth decimal (11.234346 prints 11.234300). The prices above are the engine's.
+THE FOUR-DECIMAL RULE on price-round-model-4dp, in the model agreement's words "five (5) or more" rounds the fourth decimal up and "four (4) or less" leaves it (section 3): 11.23459 prices 11.234600 and 100.00005 prices 100.000100; 11.23449 prices 11.234500; and the price is computed in full before the rule reads its fifth decimal, so 11.234346 prices 11.234300. Every price here is the engine's on the golden inputs.
 
 FLOOR AND CEILING. On price-oil-floor-ceiling the engine labels a month clamped at the floor or the ceiling (floor, none, ceiling); a raw price equal to the floor or the ceiling is not labelled clamped (section 20). On price-ecs-plain-linear there is no S-curve and no band, so every month is on the straight line.
 
 # SECTION 14: Nigerian domestic gas prices: power, commercial, gas distributors and gas based industries (owned by Professional m05 and Expert m05 l04)
 
-Every domesticPrice call states the domestic base price; section 2 says where the reported figures come from and why none is graded. The rows below state 2.18 and 2.13 as the figures reported for 2026 and 2025, and other figures as stated probes.
+Every domesticPrice call states the domestic base price; section 2 says where the reported figures come from and why none is graded. The rows below state 2.180000 and 2.130000 as the figures reported for 2026 and 2025 (the golden file's published figures), and other figures as stated probes.
 
 | golden case | sector | domestic base price | negotiated | product | CMPP | NRP | PRP | EPF | formula price | price | ceiling | held at | delivered price |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -1265,7 +1265,7 @@ The engine's rule and reason for each, verbatim:
 | dp-gbi-schedule-override | CP = NRP x (1 + EPF), EPF = (CMPP - PRP) / PRP, CP <= domestic base price, floor US$0.90 per MMBtu; NRP 1.2 and PRP 300 from the stated by the caller: illustrative regulation (synthetic) (the Authority may change NRP and PRP by regulation, Fourth Schedule) | the formula gives 1.7999999999999998, inside the floor 0.9 and the domestic base price 2.18 | prices at the marketable natural gas delivery point |
 | dp-power-transport | power sector price = domestic base price | none | prices at the marketable natural gas delivery point; the stated transport tariff is added for the delivered price (s.167(8), s.168(4)) |
 
-THE FOURTH SCHEDULE ARITHMETIC (dp-gbi-urea-inside): EPF = (CMPP - PRP) / PRP and CP = NRP x (1 + EPF), then held at or below the domestic base price and at or above US$0.90 per MMBtu. The ceiling applies before the floor. Section 3 quotes the Schedule.
+THE FOURTH SCHEDULE ARITHMETIC (dp-gbi-urea-inside): EPF = (CMPP - PRP) / PRP and CP = NRP x (1 + EPF), then held at or below the domestic base price and at or above the floor of 0.900000 US$ per MMBtu. The ceiling applies before the floor. Section 3 quotes the Schedule.
 
 # SECTION 15: The Domestic Gas Delivery Obligation: deemed fulfilment, the excuses in order, the penalty and a signed agreement (owned by Professional m06)
 
@@ -1339,7 +1339,7 @@ dgdo-adjusted-rate, the engine's reasons, verbatim:
 > delivered 600 against the obligation 1000 leaves 400 undelivered
 > 400 is penalised at 4.25 per MMBtu: 1700; the lessee may not supply new midstream gas export operations (s.110(14)(a)) and export supply approvals require prior compliance (s.110(15))
 
-THE EXCUSES are applied in the order of s.110(10), (a) force majeure, (b) a purchaser that cannot accept, (c) gas that cannot be transported, (d) a purchaser that does not pay, and each only up to the undelivered quantity left. A penalised quantity above 0 also bars new export supply (s.110(14)(a), s.110(15)); the engine reports that restriction and gives it no price.
+THE EXCUSES are applied in the order of s.110(10), (a) force majeure, (b) a purchaser that cannot accept, (c) gas that cannot be transported, (d) a purchaser that does not pay, and each only up to the undelivered quantity left. A penalised quantity above zero also bars new export supply (s.110(14)(a), s.110(15)); the engine reports that restriction and gives it no price.
 
 # SECTION 16: Energy parity and the S-curve: heat equivalence, slopes below parity, the kinks and the published curve (owned by Expert m01)
 
@@ -1351,7 +1351,7 @@ THE EXCUSES are applied in the order of s.110(10), (a) force majeure, (b) a purc
 
 THE RULE, in the engine's basis: slope = 1 / (MMBtu per barrel); gas in US$/MMBtu = slope x oil in US$/bbl on equal heat content.
 
-THE PRINTED SLOPE AND THE EXACT ONE. The Energy Charter Secretariat prints the heat-equivalence slope as 0.172 (text). On 5.8 MMBtu per barrel the engine returns 0.172414; 1 / 0.172 = 5.813953 MMBtu per barrel (derived), so the printed slope is a rounded figure. On the EIA's 5,689,000 Btu per barrel (text) the slope is 0.175778. A contract slope below the parity slope prices gas below oil on heat content.
+THE PRINTED SLOPE AND THE EXACT ONE. The Energy Charter Secretariat prints the heat-equivalence slope as 0.172 (text). On 5.8 MMBtu per barrel the engine returns 0.172414; the reciprocal of the printed slope is 5.813953 MMBtu per barrel (derived), so the printed slope is a rounded figure. On the EIA's 5689000 Btu per barrel (text) the slope is 0.175778. A contract slope below the parity slope prices gas below oil on heat content.
 
 THE PUBLISHED S-CURVE (golden input price-ecs-figure-51, the Energy Charter Secretariat's Figure 51: A 0.1485, B 0.8, floor at 15 and cap at 30 US$ per barrel, flat outside, text):
 
@@ -1363,7 +1363,7 @@ THE PUBLISHED S-CURVE (golden input price-ecs-figure-51, the Energy Charter Secr
 | 2026-04 | 30.000000 | mid | 5.255000 |
 | 2026-05 | 40.000000 | high | 5.255000 |
 
-The plateau levels follow from the printed parameters: 3.027500 at and below the lower kink and 5.255000 above the upper kink, inside the figure's printed axis of 2.50 to 5.50 (text).
+The plateau levels follow from the printed parameters: 3.027500 at and below the lower kink and 5.255000 above the upper kink, inside the figure's printed axis of 2.500000 to 5.500000 (text).
 
 THE KINKS (golden input price-s-curve-kinks: oil-indexed 0.5 + 0.12 x oil, S-curve kinks 50 and 90, slopes 0.06 and 0.03). Below the low kink P = constant + slope x lowKink + lowSlope x (X - lowKink); above the high kink likewise with highSlope; between them, and AT either kink, P = constant + slope x X. The curve is continuous at both kinks:
 
@@ -1414,9 +1414,9 @@ THE EXPORT FEED IN MONEY (golden input cf-export: 0 percent utilised in-country,
 
 NPV of the seller revenue 1,157,367,784.116539; NPV of the net after royalty 1,099,781,259.486489 (engine).
 
-Both NPVs above are the canonical npv of engines/economics/cashflow.ts on the seller revenue rows, year-end flows (checked when this digest is built). The royalty rate is the canonical deriveGasRoyaltyRate of the same file: 5 percent, and 2.5 percent on gas utilised in-country (PIA Seventh Schedule para 10(6)); the pia course teaches the fiscal system that rate sits in.
+Both NPVs above are the canonical npv of engines/economics/cashflow.ts on the seller revenue rows, year-end flows (checked when this digest is built). The royalty rate is the canonical deriveGasRoyaltyRate of the same file: 0.050000 on exported gas and 0.025000 on gas utilised in-country (PIA Seventh Schedule para 10(6)); the pia course teaches the fiscal system that rate sits in.
 
-A ZERO DISCOUNT RATE (golden input cf-small-zero-rate, deep offshore, 40 percent in-country): royalty rate 0.040000; NPV of the seller revenue 8400.000000, which at a rate of 0 is the plain sum of the rows (8400.000000, derived).
+A ZERO DISCOUNT RATE (golden input cf-small-zero-rate, deep offshore, 40 percent in-country): royalty rate 0.040000; NPV of the seller revenue 8400.000000, which at a rate of zero is the plain sum of the rows (8400.000000, derived).
 
 # SECTION 18: The four readings the engine states, verbatim, and where each one acts (owned by Expert m03)
 
@@ -1429,17 +1429,17 @@ Where a text leaves a rule open or prints a formula that would give an odd resul
 | 3. a last-contract-year deficiency creates no make-up right (forfeit/refund applies to earlier years' make-up only) | takeOrPay basis.reading | make-up right equals the deficiency actually paid after any carry-forward credit; a last-contract-year deficiency creates no make-up right (forfeit/refund applies to earlier years' make-up only); the Make-Up Aggregate sums prior contract years only |
 | 4. royalty is charged on delivered gas value and not on deficiency payments | gsaCashFlows basis.royalty | gas royalty rate 0.025 from engines/economics/cashflow.ts deriveGasRoyaltyRate (onshore, 100% utilised in-country: 5%, 2.5% in-country, PIA Seventh Schedule para 10(6)) on the value of gas delivered (taken x contract price): royalty is charged on delivered gas value and not on deficiency payments |
 
-READING 1 ACTS on a day the seller made gas available that the buyer did not take. The model agreement's definition opens with a day on which the seller "did not make available" the properly nominated quantity, and its printed formula subtracts the Daily Actual Quantity (section 3). On daily-available-not-taken the engine returns a seller shortfall of 0.000000 and a buyer shortfall of 40.000000 (section 9).
+READING ONE ACTS on a day the seller made gas available that the buyer did not take. The model agreement's definition opens with a day on which the seller "did not make available" the properly nominated quantity, and its printed formula subtracts the Daily Actual Quantity (section 3). On daily-available-not-taken the engine returns a seller shortfall of 0.000000 and a buyer shortfall of 40.000000 (section 9).
 
-READING 2 ACTS in a year that draws a carry-forward credit. On top-carry-forward-capped, 2029: deficiency 100.000000, carry-forward credit 50.000000, deficiency paid 50.000000; in 2030 the make-up available is 50.000000, the deficiency paid (section 12). The model agreement's Make-Up Aggregate sums the deficiency quantities before any credit.
+READING TWO ACTS in a year that draws a carry-forward credit. On top-carry-forward-capped, 2029: deficiency 100.000000, carry-forward credit 50.000000, deficiency paid 50.000000; in 2030 the make-up available is 50.000000, the deficiency paid (section 12). The model agreement's Make-Up Aggregate sums the deficiency quantities before any credit.
 
-READING 3 ACTS in a last contract year with a deficiency. On top-end-of-term-refund, 2029: the reasons read, verbatim:
+READING THREE ACTS in a last contract year with a deficiency. On top-end-of-term-refund, 2029: the reasons read, verbatim:
 > 2029: make-up aggregate 150 available and none taken, because taken 700 does not exceed the Adjusted ACQ 1000
 > 2029: 700 counted against the take-or-pay quantity 800 leaves a deficiency of 100; the deficiency payment is 100 x 4 = 400; the delivery period ends with this year, so no make-up right arises
 > 2029: the delivery period ends with make-up of 150 unrecovered; the seller refunds 150 x 4 = 600
 The refund covers the earlier entries only (150.000000 from 2027); the year's own deficiency payment stays with the seller.
 
-READING 4 ACTS in a year with a deficiency payment. On cf-power, 2028: deficiency payment 1501584.000000, delivered value 11902800.000000, royalty 297570.000000; the royalty is 0.025000 x the delivered value (the gas pays its royalty when it is made up).
+READING FOUR ACTS in a year with a deficiency payment. On cf-power, 2028: deficiency payment 1501584.000000, delivered value 11902800.000000, royalty 297570.000000; the royalty is 0.025000 x the delivered value (the gas pays its royalty when it is made up).
 
 THE RECOVERY ORDER IS NOT A READING. It is a required input with no default, and the engine names the reference text's order (section 11).
 
@@ -1464,13 +1464,13 @@ THE CARRY-FORWARD CAP IN THE TEXTS. ESMAP describes a cap on the use of carry-fo
 
 THE SHORTFALL DEFINITION AND ITS FORMULA. The model agreement's definition of the Shortfall Quantity opens with a day the seller did not make the properly nominated quantity available, and its printed formula subtracts the quantity taken. The engine measures against the quantity made available (section 18).
 
-PRINTED FIGURES AND EXACT FIGURES. HMRC prints 150 / 90 = 1.66 (the engine: 1.666667, section 8); the Energy Charter Secretariat prints the parity slope 0.172 (the engine on 5.8 MMBtu per barrel: 0.172414, section 16). A reason the engine prints carries the double it holds: the export refund reads, verbatim,
+PRINTED FIGURES AND EXACT FIGURES. HMRC prints the effective swing as 1.66 (the engine: 1.666667, section 8); the Energy Charter Secretariat prints the parity slope 0.172 (the engine on 5.8 MMBtu per barrel: 0.172414, section 16). A reason the engine prints carries the double it holds: the export refund reads, verbatim,
 > 2036: the delivery period ends with make-up of 457950 unrecovered; the seller refunds 457950 x 8.0813 = 3700831.3350000004
 and the course quotes that refund as the numeric field at six decimals: 3700831.335000.
 
-THE BTU AND THE CUBIC FOOT. The engine uses the International Table Btu, 1055.05585262 J, exact by definition (NIST SP 811 prints it as 1.055 056 E+03 J). The model agreement defines its Btu at 59 F to 60 F, about 1054.80 J, about 0.02 percent smaller (FINDINGS, read from the text); a contract on that Btu should state its heating value in those units. The cubic foot is (0.3048 m) cubed, 0.028316846592 cubic metres, exact.
+THE BTU AND THE CUBIC FOOT. The engine uses the International Table Btu, 1055.05585262 J, exact by definition (NIST SP 811 prints it as "1.055 056 E+03 J"). The validation record reads the model agreement's Btu as defined "at 59 F to 60 F", "about 1054.80 J, 0.02% smaller"; a contract on that Btu should state its heating value in those units. The cubic foot is exactly 0.028316846592 cubic metres, the cube of the international foot.
 
-THE FOURTH SCHEDULE'S TABLE HEADER. The gazetted table heads its NRP column "US $/mmbtu" and, beneath it, "Net of transport Tariff US $/Kcf" (text); the formula above the table states NRP as US$1 per MMBtu, and the engine holds NRP in US$ per MMBtu.
+THE FOURTH SCHEDULE'S TABLE HEADER. The gazetted table heads its NRP column "US $/mmbtu" and, beneath it, "Net of transport Tariff US $/Kcf" (text); the formula above the table states NRP in US$ per MMBtu, and the engine holds NRP in US$ per MMBtu.
 
 # SECTION 20: Boundaries, rule by rule (owned by Expert m04 l05)
 
@@ -1480,29 +1480,29 @@ Every rule the engine applies has its own boundary; no single rule covers them a
 | --- | --- | --- |
 | deficiency | counted EQUAL to the take-or-pay quantity (top-exactly-met: 800.000000) | no deficiency (0.000000); one unit short gives 1.000000 |
 | make-up, after-adjusted-acq | taken EQUAL to the Adjusted ACQ (top-power 2030: 7665000.000000) | no make-up (0.000000); make-up only strictly above |
-| make-up expiry | the last year of the period, y + N (top-makeup-on-last-day-of-period) | usable in that year; the rest expires at its end; none in y + N + 1 (top-makeup-one-year-late) |
-| make-up period 0 | a deficiency (top-makeup-period-zero) | paid (600.000000), no make-up right |
+| make-up expiry | the last year of the period, y + N (top-makeup-on-last-day-of-period) | usable in that year; the rest expires at its end; none in the year after (top-makeup-one-year-late) |
+| make-up period of zero years | a deficiency (top-makeup-period-zero) | paid (600.000000), no make-up right |
 | last contract year | a deficiency (top-end-of-term-refund) | paid, no make-up right |
 | carry-forward surplus | counted EQUAL to the base (top-carry-forward-adjusted-acq) | surplus only strictly above: 2027 100.000000, 2028 50.000000, 2029 0.000000, 2030 0.000000, 2031 0.000000 |
 | carry-forward cap | a credit EQUAL to the cap percent of the deficiency (stated probe below) | applied in full (inclusive) |
-| seller shortfall on a day | (PNQ - tolerance) - available EQUAL to 0 (daily-tolerance-covers-the-gap) | no shortfall (0.000000); one unit more (daily-tolerance-one-short) gives 1.000000 |
+| seller shortfall on a day | (PNQ - tolerance) - available EQUAL to zero (daily-tolerance-covers-the-gap) | no shortfall (0.000000); one unit more (daily-tolerance-one-short) gives 1.000000 |
 | MaxDCQ | a nomination EQUAL to MaxDCQ | properly nominated in full; above it the excess is not properly nominated |
 | force majeure and maintenance | together EQUAL to the DCQ (daily-fm-whole-day-with-nomination) | allowed; adjusted DCQ 0.000000, nothing owed either way; above the DCQ refused |
-| zero nomination | a nomination of 0 with an adjusted DCQ above 0 (January 2027, the 5th) | the whole adjusted DCQ is a buyer shortfall (21000.000000) |
+| zero nomination | a zero nomination with an adjusted DCQ above zero (2027-01-05) | the whole adjusted DCQ is a buyer shortfall (21000.000000) |
 | S-curve | an index EQUAL to a kink (price-s-curve-kinks at 90) | on the mid segment (mid); the curve is continuous there |
 | price floor or ceiling | a raw price EQUAL to the floor (stated probe below) | not labelled clamped (strict); one index point lower is held at the floor |
 | basket index floor or ceiling | an index EQUAL to its floor or ceiling (price-cw-basket-index-floors) | unchanged (strict); held indices: 2025-12 fo 410.000000 cpi 100.500000, 2026-01 fo 410.000000 cpi 101.500000, 2026-02 fo 440.000000 cpi 102.500000, 2026-03 fo 450.000000 cpi 102.500000 |
-| four-decimal rounding | a fifth decimal of 5 | rounds up (11.23459 to 11.2346) |
+| four-decimal rounding | a fifth decimal of five | rounds up (11.23459 to 11.234600) |
 | escalation | each anniversary of the base month (price-escalated, base 2027-04) | steps in whole years: 2028-04, 2029-04 |
 | gas distributor | a negotiated price EQUAL to the commercial price (dp-distributor-at-ceiling) | within the ceiling (true, inclusive) |
-| gas based industries | a formula price EQUAL to the base price, or to 0.90 (dp-gbi-exactly-dbp, dp-gbi-exactly-floor) | not held (held at: none, none); the ceiling applies before the floor |
+| gas based industries | a formula price EQUAL to the base price, or to the floor 0.900000 (dp-gbi-exactly-dbp, dp-gbi-exactly-floor) | not held (held at: none, none); the ceiling applies before the floor |
 | DGDO deemed fulfilment | voluntary contracts EQUAL to the obligation (dgdo-deemed-by-contracts) | deemed fulfilled (inclusive, s.110(2) "equal to or higher"); one short is not (dgdo-contracts-one-short) |
-| DGDO agreement rate | an agreement rate EQUAL to 3.50 (dgdo-agreement-equal) | the agreement's rate (3.500000) |
+| DGDO agreement rate | an agreement rate EQUAL to 3.500000 (dgdo-agreement-equal) | the agreement's rate (3.500000) |
 | DGDO excuses | excuses stated above the undelivered quantity (dgdo-all-excused) | applied only up to it, in the order (a) to (d) |
-| period day count | the end date of a period | excluded (a contract year that finishes on the following 1 January) |
-| maxDcqPct | EQUAL to 100 | allowed |
+| period day count | the end date of a period | excluded (a contract year that finishes on the following first of January) |
+| maxDcqPct | EQUAL to 100 (stated probe below) | allowed |
 
-Four probes above are stated in this file. contractQuantities with dcq 100, 365 days, maxDcqPct 100 and topPct 80 returns MaxDCQ 100.000000. dailyBalance with dcq 100, maxDcqPct 120 and a nomination of 120 made available and taken returns a properly nominated quantity of 120.000000. takeOrPay on two years of ACQ 1000 at 80 percent, taken 1100 then 700, with carry-forward of one year above the take-or-pay quantity capped at 50 percent and a make-up period of 0, applies a credit of 50.000000 against a deficiency of 100.000000. priceSeries on 1 + 0.1 x oil with a floor of 4 and a ceiling of 9 prices oil 30 at 4.000000, clamped none, and oil 29 at 4.000000, clamped floor.
+Four probes above are stated in this file. contractQuantities with dcq 100, 365 days, maxDcqPct 100 and topPct 80 returns MaxDCQ 100.000000. dailyBalance with dcq 100, maxDcqPct 120 and a nomination of 120 made available and taken returns a properly nominated quantity of 120.000000. takeOrPay on two years of ACQ 1000 at 80 percent, taken 1100 then 700, with carry-forward of 1 year above the take-or-pay quantity capped at 50 percent and a make-up period of 0 years, applies a credit of 50.000000 against a deficiency of 100.000000. priceSeries on 1 + 0.1 x oil with a floor of 4 and a ceiling of 9 prices oil 30 at 4.000000, clamped none, and oil 29 at 4.000000, clamped floor.
 
 # SECTION 21: What the engine does not compute, and figures quoted only as reported (owned by Expert m05)
 
@@ -1526,7 +1526,7 @@ REOPENERS ARE REPORTED BY MONTH. priceSeries returns each reopener with this not
 
 THE DGDO'S UNCOMPUTED RULES, in the engine's basis: the 90-day investigation rule of r.6(3) and the compensation to customer-clients of s.110(13) are not computed.
 
-FIGURES QUOTED ONLY AS REPORTED. The domestic base price for 2026 (US$2.18 per MMBtu for power, US$2.68 for the commercial sector, effective 1 April 2026) and for 2025 (2.13 and 2.63) are reported figures; the regulator's circular was not read. The engine's own sentence is in section 2. A lesson quotes them with that attribution and never as a value the course grades.
+FIGURES QUOTED ONLY AS REPORTED. The domestic base price for 2026 (2.180000 US$ per MMBtu for power and 2.680000 for the commercial sector, effective on the first of April) and for 2025 (2.130000 and 2.630000) are reported figures; the regulator's circular was not read. The engine's own sentence is in section 2. A lesson quotes them with that attribution and never as a value the course grades.
 
 # SECTION 22: Size caps and refusals at scale (owned by Expert m06 l02)
 
@@ -1538,7 +1538,7 @@ FIGURES QUOTED ONLY AS REPORTED. The domestic base price for 2026 (US$2.18 per M
 | `MAX_MONTHS` | 1200 | priceSeries asked to price 1201 months | to must give at most 1200 priced months; got 1201 |
 | `MAX_INDICES` | 10 | a basket of 11 indices | formula.weights must have at most 10 indices; got 11 |
 
-A panel stays well inside these caps. FINDINGS records that a call at every cap stays well under 100 ms on the build host.
+A panel stays well inside these caps. The validation record states, verbatim: "At every cap a call stays well under 100 ms".
 
 # SECTION 23: Conventions that are choices, and the contract report (owned by Expert m06)
 
@@ -1546,14 +1546,14 @@ CONVENTIONS THAT ARE CHOICES. Each is the engine's stated choice where no text f
 
 | convention | the engine's choice | where it comes from |
 | --- | --- | --- |
-| the Btu | the International Table Btu, 1055.05585262 J | NIST SP 811 (2008) Appendix B; the model agreement's 59 F Btu is about 0.02 percent smaller |
+| the Btu | the International Table Btu, 1055.05585262 J | NIST SP 811 (2008) Appendix B; the validation record reads the model agreement's Btu as defined at 59 F to 60 F, about 1054.80 J, 0.02% smaller |
 | a mixed volume and heating value pair | one set of reference conditions, stated by the caller | engine convention |
 | the day count | stated days, a calendar year, or a period with the end date excluded | engine convention |
 | the seller shortfall | against the quantity made available | a stated reading (section 18) |
 | the make-up right | the deficiency paid after any carry-forward credit; none from the last year | stated readings (section 18) |
 | the make-up threshold | strictly above the Adjusted ACQ or the take-or-pay quantity | engine convention on the model agreement's "after Buyer has taken delivery of at least" |
 | drawing make-up and carry-forward | first in first out | Commonwealth model GSA Articles 12.7 and 12.8 |
-| the index window | the mean of averagingMonths months ending lagMonths months before the delivery month; lag 0 ends it at the delivery month | engine convention; the model agreement ends it one month before the review month |
+| the index window | the mean of averagingMonths months ending lagMonths months before the delivery month; a lag of zero ends it at the delivery month | engine convention; the model agreement ends it one month before the review month |
 | the reset | every month of a block carries the price of the block's first month, counted from `from` | engine convention |
 | the four-decimal rule | the double normalised to 12 significant digits before the fifth decimal decides | Commonwealth model GSA Article 15.4, with the normalisation stated |
 | royalty | on the value of gas delivered, none on a deficiency payment | a stated reading (section 18) |
@@ -1568,7 +1568,7 @@ Six terms in this course carry a narrower meaning than they have in conversation
 | term | what it can mean elsewhere | the rule here |
 | --- | --- | --- |
 | shortfall | any gap between what was wanted and what came | always qualified: a seller shortfall is gas the seller did not make available against a properly nominated quantity; a buyer shortfall is the adjusted DCQ the buyer did not take |
-| deficiency | any shortage | the take-or-pay quantity less the quantity counted, when above 0; the money is the deficiency payment |
+| deficiency | any shortage | the take-or-pay quantity less the quantity counted, when above zero; the money is the deficiency payment |
 | make-up | any catching up | gas paid for in a deficiency year and taken in a later year of its make-up period |
 | carry-forward | any balance brought forward | takes above the stated base credited against a later deficiency, capped, for a stated period |
 | Adjusted ACQ | the ACQ | the ACQ less maintenance, force majeure, seller shortfall and any permitted reduction; the take-or-pay quantity is its stated percentage |

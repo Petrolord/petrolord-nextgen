@@ -1,0 +1,443 @@
+{
+ "slug": "gsa",
+ "prefix": "ec8",
+ "name": "Gas Commercialisation & Gas Sales Agreements",
+ "pathOrder": 73,
+ "module": "economics",
+ "prerequisite": null,
+ "engineCourse": "An ENGINE COURSE: no Suite app. The practicals run in the course's own calculator panels (gsa-quantity-calculator, gsa-ledger-calculator, gsa-contract-calculator) over the vendored engine engines/economics/gasContract.js; the learning page says so plainly. Lead decisions (cat-brief): the same published fee and the same Associate/Professional/Expert certificate ladder as app courses; no Suite bridge mapping; prerequisite null.",
+ "repo": "/root/wt-ec8-nextgen",
+ "branch": "feat/ec8-gsa-course",
+ "goldens": [],
+ "goldensNote": "EMPTY BY DECISION, as SC2, EC7 and D5. The vendored golden test-data/economics/goldens/gascontract_cases.json carries oracle output beside its inputs. The digest reads its INPUTS only and prints the engine's own figures (and asserts every refusal message equals the golden's); naming the golden here would let numsweep resolve a lesson literal against an oracle figure the digest never prints.",
+ "engines": [
+  "engines/economics/gasContract.js",
+  "engines/economics/cashflow.ts"
+ ],
+ "enginesVendoredAt": "gasContract.js and its closure vendored sha-identical from petrolord-engines d745b88 (engines PR #267) by vendor_gsa.sh (NextGen cad832ffd): 12 paths x 4 proofs, 11 ledgered in VENDOR.json group ec8-gsa-course, pin 54cf7c4 unchanged. cashflow.ts is NOT moved: NextGen's blob 92906576c0 is the d745b88 blob, and npv, deriveGasRoyaltyRate, calendarDays and isLeapYear are source-identical; the engine suite passes 219 of 219 against NextGen's copy.",
+ "history": {
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The lead's decisions on the engine (domestic base price and recovery order as required inputs, the four stated readings) landed before its merge and before any lesson was written; that is provenance."
+ },
+ "regulatoryRule": "Every Act, regulation, model contract and guide taught is named with its edition or gazette date and the date read (2026-09-26), printed in digest section 2 and asserted against the vendored FINDINGS-gasContract.md. Every quotation is in concepts.json with its citation and is verified against the public text by quote_check.py (the PDFs hash to the sha256 prefix FINDINGS records). The Commonwealth model GSA (2025) is CC BY 4.0 and quoted with attribution; the AIPN model GSA is licensed and never quoted. No legal figure is invented; the domestic base price is a required input quoted only as reported (BusinessDay 31 March 2026; Advocaat Law Practice through Legal 500, 7 April 2026) and never graded; the flare penalty is concept only.",
+ "openReadings": {
+  "seller shortfall": "seller shortfall measured against the quantity the seller made available (the model formula subtracts the DAQ). Never graded: every field bit-identical under reading_sfq_against_taken (gsa_capstone.mjs, discriminate.mjs).",
+  "make-up right": "make-up right equals the deficiency actually paid after any carry-forward credit. Never graded: bit-identical under reading_makeup_is_whole_deficiency.",
+  "last contract year": "a last-contract-year deficiency creates no make-up right (forfeit/refund applies to earlier years' make-up only). Never graded: bit-identical under reading_last_year_opens_makeup.",
+  "royalty": "royalty is charged on delivered gas value and not on deficiency payments. Never graded: bit-identical under reading_royalty_on_deficiency.",
+  "domestic base price": "a required input with no default, quoted only as reported. No capstone case passes one (asserted)."
+ },
+ "scopeSeams": {
+  "flare to value, LPG and CNG": "OWNED BY the gasvalue course; this course names flaring as concept only and refers there.",
+  "ledger arithmetic, discounting and NPV": "OWNED BY the cashflow course; this course imports the canonical npv and refers there.",
+  "the Nigerian fiscal system": "OWNED BY the pia course (royalty by terrain, HCT, CIT, levies); this course imports the gas royalty rate and teaches only the Act's gas pricing (s.167, s.168, Fourth Schedule) and the delivery obligation (s.110)."
+ },
+ "namingCollisions": {
+  "shortfall": "always qualified: seller shortfall or buyer shortfall. Vocabulary section.",
+  "deficiency": "the quantity below the take-or-pay quantity; the money is the deficiency payment.",
+  "make-up / carry-forward": "prepaid gas taken later / excess takes credited against a later deficiency.",
+  "Adjusted ACQ": "ACQ less the stated reductions; the take-or-pay quantity is its stated percentage.",
+  "domestic base price": "a required input, quoted only as reported."
+ },
+ "plan": {
+  "state": "FOUNDATION: structure, digest, capstones, fields, precision, truth, panels, learning page, gates, writer briefs. Stops before lessons."
+ },
+ "digest": {
+  "lines": 1577,
+  "sections": 24,
+  "md5": "40b6343e6145633fc21c42ff26622792",
+  "sha256": "d68b9066fde69b0ac49ff5cead3ad51de38bd40bde9af9674c63ae454abe82c5"
+ },
+ "fields": {
+  "count": 18,
+  "sha256": "65052a2bdd6ca449286bf85b0c8fb07026bb1339b4ed846e393da889852a2226",
+  "keys": [
+   "ozubu_march_2028_mmbtu",
+   "ozubu_2028_acq",
+   "ozubu_effective_swing",
+   "ozubu_fortnight_buyer_shortfall",
+   "ozubu_fortnight_seller_shortfall",
+   "ozubu_2029_deficiency_payment",
+   "ifeyi_2030_average_price",
+   "ifeyi_2028_deficiency_payment",
+   "ifeyi_2031_make_up_taken",
+   "ifeyi_2031_make_up_expired",
+   "ifeyi_total_net_to_seller",
+   "ifeyi_2031_dgdo_penalty",
+   "nwaka_july_2029_price",
+   "nwaka_2034_average_price",
+   "nwaka_2030_carry_forward_credit",
+   "nwaka_2035_refund",
+   "nwaka_npv_seller_revenue",
+   "nwaka_2032_royalty"
+  ]
+ },
+ "fieldsDiscrimination": {
+  "ozubu_march_2028_mmbtu": "Btu at 59 F, MJ per MMBtu rounded to 1055 or printed 1055.056, GJ read as MMBtu",
+  "ozubu_2028_acq": "end date counted, a 365-day leap year, a 360-day year",
+  "ozubu_effective_swing": "effective swing inverted, the swing factor alone, swing times the take-or-pay fraction",
+  "ozubu_fortnight_buyer_shortfall": "tolerance ignored, force majeure not excusing the gap, a buyer-caused gap counted against the seller",
+  "ozubu_fortnight_seller_shortfall": "nomination above MaxDCQ counted, tolerance ignored, force majeure not excusing, buyer-caused counted",
+  "ozubu_2029_deficiency_payment": "TOP on the unadjusted ACQ, force majeure or seller shortfall not netted, deficiency at the contract price",
+  "ifeyi_2030_average_price": "lag dropped, average over one month too many, reset ignored, window one month short, lag one month longer",
+  "ifeyi_2028_deficiency_payment": "TOP on the unadjusted ACQ, force majeure not netted, lag dropped, lag one month longer",
+  "ifeyi_2031_make_up_taken": "make-up before the year's quantity, the other recovery order, expiry a year early, maintenance not netted",
+  "ifeyi_2031_make_up_expired": "make-up drawn newest first, expiry a year late or early, make-up taken first",
+  "ifeyi_total_net_to_seller": "damages added to the seller, make-up at the contract price, TOP on the unadjusted ACQ, seller shortfall not netted, lag dropped",
+  "ifeyi_2031_dgdo_penalty": "rate 3, agreement rate below 3.50 accepted, excuses ignored, voluntary contracts counted as delivered",
+  "nwaka_july_2029_price": "S-curve low segment keeps the mid slope or is not anchored, lag dropped, averaging one too many, lag one short",
+  "nwaka_2034_average_price": "high segment not anchored, reset ignored, lag dropped, window one month short",
+  "nwaka_2030_carry_forward_credit": "cap ignored, force majeure not netted, TOP on the unadjusted ACQ, carry-forward base swapped",
+  "nwaka_2035_refund": "refund at the contract price, seller shortfall not netted, make-up first, the model agreement order, TOP on the unadjusted ACQ",
+  "nwaka_npv_seller_revenue": "NPV a year early, make-up at the contract price, refund at the contract price, cap ignored, S-curve low slope",
+  "nwaka_2032_royalty": "in-country share ignored, averaging one too many, lag dropped, reset ignored, royalty on the net to the seller"
+ },
+ "openItems": {
+  "ENGINE FINDINGS": "No engine defect found at the foundation. Every refusal golden (84) returns the golden message through the vendored engine (gsa_dump.mjs asserts each), and the oracle replays all 18 capstone fields within 1.19e-01 tolerances (worst relative 1.37e-15).",
+  "domestic base price": "A required input; the course prints the reported 2026 and 2025 figures only with their reports and grades none. The power plant fixture holds 2.18 flat as a stated planning assumption; gate_vocabulary.py fails a lesson, bank or app line that carries a reported figure without an attribution word.",
+  "readings": "All four stated readings are printed verbatim where each acts; every capstone field is bit-identical under the other side of each (ts_loader.mjs reading_* variants), asserted in gsa_capstone.mjs and discriminate.mjs.",
+  "gate adjustments recorded": "gate_typed_literals.py refuses on string literals read (849) with --plant proving the sweep, because every rule figure is substituted and few prose literals remain; gate_capstone_leak.mjs leaves out engine option values (no space, lower case) as non-distinctive; panelCapstoneGuard requires two renderings per field (51 in all) where pia required 54 in all."
+ },
+ "gates": {
+  "structure.py": {
+   "md5": "166f19c698c09b13461d6db14d8d8503",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "prove_prior_courses.sh": {
+   "md5": "72603b98d10ccaff7ee036d8255f82bb",
+   "command": "bash prove_prior_courses.sh",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PRIOR COURSES UNCHANGED: packages/engines differs from origin/main only by the eleven ec8-gsa-course paths (sha-identical to d745b88) and their ledger entries; D1 to D5, H5, SC2 procurement and EC7 pia digests, fields an"
+  },
+  "scaffold.py --check": {
+   "md5": "9ba437dbe5c1ff4699a57ad19d991778",
+   "command": "python3 scaffold.py --check",
+   "expected": 0,
+   "exit": 0,
+   "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
+  },
+  "gsa_capstone.mjs": {
+   "md5": "1a02bade5f45e80f635e92b0ce9ec863",
+   "command": "node gsa_capstone.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "gsa_capstone: 311 assertions, 0 failed; 4 stated readings, every field bit-identical under each"
+  },
+  "make_fields.mjs": {
+   "md5": "d4e0159577e06a39fb13bdcdd1921887",
+   "command": "node make_fields.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "make_fields: 0 field(s) unanswerable at the declared precision"
+  },
+  "make_fields.mjs NEGATIVE CONTROL": {
+   "md5": "d4e0159577e06a39fb13bdcdd1921887",
+   "command": "node make_fields.mjs --bare-stated-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "make_fields: 18 field(s) unanswerable at the declared precision"
+  },
+  "oracle_check.py": {
+   "md5": "d9b2ea95c6709516e8d76a9177500ce8",
+   "command": "python3 oracle_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 0 s; every chain the oracle's own; worst relative difference 1.37e-15, worst 1.19e-01 tolerances; disagreements: 0"
+  },
+  "oracle_check.py NEGATIVE CONTROL": {
+   "md5": "d9b2ea95c6709516e8d76a9177500ce8",
+   "command": "python3 oracle_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: ifeyi_2031_make_up_expired was moved by ten tolerances; caught"
+  },
+  "make_concepts.py (every quotation found in its text)": {
+   "md5": "02b80e2fb7c2b57a9fd2d08ddcd860d6",
+   "command": "python3 make_concepts.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "concepts.json: 58 quotations, every one found in its text: {'PIA': 27, 'DGDO': 6, 'CW': 19, 'ESMAP': 3, 'HMRC': 3}"
+  },
+  "discriminate.mjs": {
+   "md5": "a59f4df90215a4a3433787048a586263",
+   "command": "node discriminate.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "WEAK ROUTES: 0; READING-DEPENDENT: 0"
+  },
+  "discriminate.mjs NEGATIVE CONTROL": {
+   "md5": "a59f4df90215a4a3433787048a586263",
+   "command": "node discriminate.mjs --slack-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: tolerances multiplied by 1000000000000000. Expected 18 WEAK routes, got 18."
+  },
+  "quote_check.py": {
+   "md5": "112c1e27f6f81cf1df1a3aafb42ae256",
+   "command": "python3 quote_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "MISMATCHES: 0"
+  },
+  "quote_check.py NEGATIVE CONTROL": {
+   "md5": "112c1e27f6f81cf1df1a3aafb42ae256",
+   "command": "python3 quote_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: one character of pia_110_1a_allocation was altered in memory; caught"
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "command": "/root/dc-wavekit/digestrepro.sh cat-wip-gsa /root/wt-ec8-nextgen",
+   "expected": 0,
+   "exit": 0,
+   "summary": "gsa_dump: 1425 label-and-call, measurement and claim assertions run, 0 failed; 24 sections"
+  },
+  "digestprose.mjs": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules cat-wip-gsa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] /root/cat-wip-gsa/digest.txt: 1577 line(s), 24 section title(s) and 87 in-body marker(s) swept against their blocks, 32 history framings, 15 engine pin(s); 0 warned for a human read and 0 framed as curricul"
+  },
+  "digestprose.mjs --selftest": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] selftest OK: the founding heading case is caught by the corrected pairing and missed by the broken one; both real keyword cases fail inside a teaching section; FC3 line 683 WARNS where the keyword family ca"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py cat-wip-gsa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "digestfigures.py --selftest": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] selftest OK"
+  },
+  "digestpromise_gsa.py": {
+   "md5": "35e64b9f66b327bf6ef9abd78afe0a55",
+   "command": "python3 digestpromise_gsa.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 completeness problem(s), all checks applied"
+  },
+  "digestpromise_gsa.py NEGATIVE CONTROL": {
+   "md5": "35e64b9f66b327bf6ef9abd78afe0a55",
+   "command": "python3 digestpromise_gsa.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a promise of section 99 was planted; caught"
+  },
+  "digestpromise.py --selftest": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "command": "python3 /root/dc-wavekit/digestleak.py cat-wip-gsa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "command": "python3 /root/dc-wavekit/collisions.py cat-wip-gsa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py cat-wip-gsa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[gradeprecision] /root/cat-wip-gsa: 18 graded field(s), 18 OF 18 CLASSIFIED against 2 precision clause(s) in the digest header and 4 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "command": "python3 /root/dc-wavekit/briefleak.py cat-wip-gsa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 graded answer(s) reachable from this brief"
+  },
+  "briefcheck.py": {
+   "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
+   "command": "python3 /root/dc-wavekit/briefcheck.py cat-wip-gsa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
+  },
+  "gate_capstone_leak.mjs": {
+   "md5": "afc95e673aac56be91ae550e57501e4c",
+   "command": "node gate_capstone_leak.mjs --no-banks",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
+   "md5": "afc95e673aac56be91ae550e57501e4c",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-value",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
+   "md5": "afc95e673aac56be91ae550e57501e4c",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-input",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
+   "md5": "afc95e673aac56be91ae550e57501e4c",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-name",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
+   "md5": "afc95e673aac56be91ae550e57501e4c",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
+  },
+  "gate_copy_rule.py": {
+   "md5": "da2d4a48b5ff8fadf58a2873b4ac99bd",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "da2d4a48b5ff8fadf58a2873b4ac99bd",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest with a rather-than; expected 3 caught, got 3"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL bank": {
+   "md5": "da2d4a48b5ff8fadf58a2873b4ac99bd",
+   "command": "python3 gate_copy_rule.py --plant-bank",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in a bank string with an instead-of; expected 3 caught, got 3"
+  },
+  "gate_typed_literals.py": {
+   "md5": "36166ac7a7b2e9d1a5342fb6172c1f15",
+   "command": "python3 gate_typed_literals.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "UNEXPLAINED TYPED NUMBERS: 0"
+  },
+  "gate_typed_literals.py NEGATIVE CONTROL": {
+   "md5": "36166ac7a7b2e9d1a5342fb6172c1f15",
+   "command": "python3 gate_typed_literals.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a typed 4.217 was planted in a printed line; caught 1"
+  },
+  "gate_vocabulary.py": {
+   "md5": "3b17bd4429e242cf62b725ec6c10ba8c",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "exemptions declared: 0, dead: []"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "3b17bd4429e242cf62b725ec6c10ba8c",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected a repair-history framing and an AI claim caught; got ['a repair-history framing', 'an AI claim']"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL price": {
+   "md5": "3b17bd4429e242cf62b725ec6c10ba8c",
+   "command": "python3 gate_vocabulary.py --plant-price",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a reported price with no attribution was planted in a lesson line; caught 1"
+  },
+  "truth_check.py": {
+   "md5": "367bd89467c0a65bb80125764ac090fc",
+   "command": "python3 truth_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "truth_check: truth-gsa.json (971 digest lines) IS the harvest of digest.txt"
+  },
+  "truth_check.py NEGATIVE CONTROL": {
+   "md5": "367bd89467c0a65bb80125764ac090fc",
+   "command": "python3 truth_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a line was planted in the scratch digest; expected a mismatch, caught"
+  },
+  "numsweep_gsa.mjs": {
+   "md5": "8d1d2d3a30eb3bc0604ecf87dd09818a",
+   "command": "node numsweep_gsa.mjs",
+   "expected": "held NOT ONE literal of seven or more significant figures",
+   "exit": 1,
+   "summary": "This gate does not pass on an empty or unreadable sweep.",
+   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+  },
+  "numsweep_gsa.mjs --selftest": {
+   "md5": "8d1d2d3a30eb3bc0604ecf87dd09818a",
+   "command": "node numsweep_gsa.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "numsweep_gsa selftest OK"
+  },
+  "lengths.py": {
+   "md5": "67bbb73e6e45d05aa1d6d6b748bf7238",
+   "command": "python3 lengths.py",
+   "expected": [
+    "UNDER ITS OWN FLOOR",
+    78
+   ],
+   "exit": 1,
+   "summary": "tiers read: 3  out of band: 79  not written yet: 0",
+   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+  },
+  "lengths.py --selftest": {
+   "md5": "67bbb73e6e45d05aa1d6d6b748bf7238",
+   "command": "python3 lengths.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
+  },
+  "gate_claims.mjs": {
+   "md5": "b6c3abda12f0e0800ae26e61945821a3",
+   "command": "node gate_claims.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_claims.mjs NEGATIVE CONTROL": {
+   "md5": "b6c3abda12f0e0800ae26e61945821a3",
+   "command": "node gate_claims.mjs --plant-a-recon-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 3."
+  },
+  "gen_course.py (self checks)": {
+   "md5": "f2488d5420b6a4bd1b29c1db1c0f0ba5",
+   "command": "python3 gen_course.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "gen_course: engine run 18 of 18 fields.json values equal what gsa_capstone.mjs returned through /root/wt-ec8-nextgen/packages/engines, every tolerance the one gradedTolerance.js derives; case-file data re-read and equal "
+  }
+ }
+}

@@ -42,8 +42,8 @@ const out = rows.map((r) => {
   if (tol < floor) {
     unanswerable.push(
       `${r.tier}/${r.key}: graded at ${tol} but the ${cls} class prints to ${PRINTED_DECIMALS[cls]} decimals, `
-      + `so the finest answer a learner can give is ${r.value.toFixed(PRINTED_DECIMALS[cls])} and the error that `
-      + `quoting it carries is up to ${floor}, which is ${(floor / tol).toPrecision(3)} times the tolerance`);
+      + `so a learner quoting the printed figure can be out by up to ${floor}, which is ${(floor / tol).toPrecision(3)} times the tolerance `
+      + '(the value itself is not printed here, because wave.json records this line)');
   }
   if (tol !== stated) widened.push(`${r.tier}/${r.key} ${stated} -> ${tol}`);
   return [r.tier, r.key, r.value, tol];
@@ -63,6 +63,7 @@ console.log(`  per tier: ${JSON.stringify(perTier)}`);
 console.log(`  tolerances RAISED to the printed precision: ${widened.length}${widened.length ? ` -> ${widened.join('; ')}` : ''}`);
 console.log(`  UNANSWERABLE AT THE DECLARED PRECISION: ${unanswerable.length}`);
 unanswerable.forEach((u) => console.log(`   ${u}`));
+console.log(`  make_fields: ${unanswerable.length} field(s) unanswerable at the declared precision`);
 if (Object.values(perTier).some((n) => n !== 6) || Object.keys(perTier).length !== 3) {
   console.log('  REFUSES: not six graded fields in each of three tiers'); process.exit(2);
 }

@@ -1,0 +1,363 @@
+{
+ "app_slug": "gsa",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-take-or-pay-ledger",
+   "title": "The Take-or-Pay Ledger",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-contract-years-in-sequence",
+     "title": "Contract years in sequence",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-quantity-calculator",
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-make-up-as-prepaid-gas",
+     "title": "Make-up as prepaid gas",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-recovery-order-is-a-stated-term",
+     "title": "The recovery order is a stated term",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-first-in-first-out",
+     "title": "Make-up drawn first in first out",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-make-up-expiry-and-the-end-of-the-term",
+   "title": "Make-Up Expiry and the End of the Term",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-the-make-up-period",
+     "title": "The make-up period and its last year",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-make-up-expiring",
+     "title": "Make-up expiring at the end of its last year",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-forfeit-or-refund",
+     "title": "Forfeit or refund at the end of the term",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-power-plant-ledger-end-to-end",
+     "title": "The power plant ledger end to end",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-carry-forward-and-seller-shortfall",
+   "title": "Carry-Forward and Seller Shortfall",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-carry-forward-of-excess-takes",
+     "title": "Carry-forward of excess takes",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-carry-forward-cap-and-base",
+     "title": "The carry-forward cap and its base",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-carry-forward-expiry",
+     "title": "Carry-forward expiry",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-seller-shortfall-liquidated-damages",
+     "title": "Seller shortfall liquidated damages",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator",
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-export-feed-ledger",
+     "title": "The export feed ledger",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-price-formulas",
+   "title": "Price Formulas",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-fixed-and-escalated",
+     "title": "Fixed and escalated prices",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-oil-indexed-slope-and-constant",
+     "title": "Oil-indexed slope and constant",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-averaging-windows-and-lags",
+     "title": "Averaging windows and lags",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-resets-floors-ceilings-rounding",
+     "title": "Resets, floors, ceilings and rounding",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-hub-indexed-and-basket",
+     "title": "Hub-indexed and basket formulas",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-domestic-gas-prices",
+   "title": "Domestic Gas Prices",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-domestic-base-price",
+     "title": "The domestic base price, a stated input",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-power-commercial-and-distributors",
+     "title": "Power, commercial and gas distributors",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-gas-based-industries",
+     "title": "Gas based industries and the Fourth Schedule",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-transport-and-the-delivery-point",
+     "title": "Transport and the delivery point",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-the-domestic-gas-delivery-obligation",
+   "title": "The Domestic Gas Delivery Obligation",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-obligation-and-deemed-fulfilment",
+     "title": "The obligation and deemed fulfilment",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-excuses-in-their-order",
+     "title": "The excuses, in their order",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-penalty-and-a-signed-agreement",
+     "title": "The penalty and a signed agreement",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}
