@@ -25,7 +25,7 @@ Take WS2: 862141.000000 divided by 885574.000000, times 100, is 97.353920. WS3 i
 
 ## What the score is built from
 
-The commercial score uses the evaluated cost from module 4, never the quoted price. Everything that moved an evaluated cost, a correction, a discount, a deviation, an omission, a late completion, moves the commercial score with it. An evaluated cost of zero is refused, since the ratio has no meaning when a cost is zero:
+The commercial score is built from the evaluated cost of module 4. Everything that moved an evaluated cost, a correction, a discount, a deviation, an omission, a late completion, moves the commercial score with it. An evaluated cost of zero is refused, since the ratio has no meaning when a cost is zero:
 
 > bids[0].evaluatedCost must be a finite number above 0
 

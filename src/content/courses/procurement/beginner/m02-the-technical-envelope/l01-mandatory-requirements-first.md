@@ -29,7 +29,7 @@ When a bid fails more than one requirement, the engine names them all, so the re
 
 ## Two refusals on the shape of a requirement
 
-Each requirement is an entry with an id and a met flag of true or false. If the requirements arrive as text instead of a list, the engine refuses:
+Each requirement is an entry with an id and a met flag of true or false. If the requirements arrive as text, the engine refuses:
 
 > bids[0].mandatory must be an array of { id, met } when given
 

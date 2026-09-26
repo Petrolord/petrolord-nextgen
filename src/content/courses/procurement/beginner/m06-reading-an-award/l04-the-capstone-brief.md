@@ -33,7 +33,7 @@ Work in stage order, as the engine does. First, the mandatory requirements and t
 
 ## The traps this tier has shown you
 
-A bid on the pass mark passes. A failed bid's prices never reach another bid's omission. A declared misplaced decimal point leaves the amount standing. A discount lowers the base of the completion adjustment. The commercial score is built from the evaluated cost and never from the quoted price. Each of these moved a figure on the Ekene tenders, and each can move one here.
+A bid on the pass mark passes. A failed bid's prices never reach another bid's omission. A declared misplaced decimal point leaves the amount standing. A discount lowers the base of the completion adjustment. The commercial score is built from the evaluated cost. Each of these moved a figure on the Ekene tenders, and each can move one here.
 
 ## Exercise
 
