@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Which edition of the Nigerian content Schedule does the engine hold, and what does it say about later targets?",
+  "options": [
+   "A yearly Schedule as amended by the Board, from its latest list",
+   "The Schedule of the 2010 Act as enacted; later Board targets are not included",
+   "The 2010 Schedule with every later Board target folded in as a default beside the enacted lines",
+   "No Schedule at all: every minimum is a stated input"
+  ],
+  "answer": 1,
+  "explanation": "The engine's source string reads \"Nigerian Oil and Gas Industry Content Development Act 2010 (Act No. 2, commenced 22 April 2010) s.11 and the Schedule as enacted in 2010 (later Board targets are not included)\". No later Board target was read, so none is held; a later target enters as a user-stated target with its source. The enacted lines are held with their minimums."
+ },
+ {
+  "prompt": "How many lines of the Schedule does NC_SCHEDULE carry, and in how many of its sections?",
+  "options": [
+   "45 lines in one list with no section headings, since the engine flattens the Schedule when it loads",
+   "24 lines, all in WELL AND DRILLING SERVICES/PETROLEUM TECHNOLOGY, the section the two tenders use",
+   "12 lines in 3 sections, one for each item the Ekene materials tender prices in its bill",
+   "45 lines in 3 sections, 12 of them under MATERIALS AND PROCUREMENT"
+  ],
+  "answer": 3,
+  "explanation": "NC_SCHEDULE holds 45 lines in 3 sections: MATERIALS AND PROCUREMENT (12), WELL AND DRILLING SERVICES/PETROLEUM TECHNOLOGY (24) and EXPLORATION, SUBSURFACE, PETROLEUM ENGINEERING AND SEISMIC (9). 24 is the size of one section, and the materials tender draws four of its items from the 12-line section."
+ },
+ {
+  "prompt": "A content item names the Schedule line 'casing-and-tubing'. What does the engine return?",
+  "options": [
+   "A refusal: \"items[0].scheduleLine 'casing-and-tubing' is not a line of NC_SCHEDULE; state targetPct, measure and source instead\"",
+   "The nearest line the engine holds, steel-pipes at 100% by tonnage, with a note that the key was matched",
+   "A result with a target of 0% for the item, since the Schedule sets no minimum for a line it lacks",
+   "A refusal asking for weights, as an unknown line has to be averaged over the lines the engine holds"
+  ],
+  "answer": 0,
+  "explanation": "A key the engine does not hold is refused by the field items[0].scheduleLine, and the message says what to do instead: state the target, its unit and its source. The engine never guesses a nearby line and never invents a minimum of 0. Weights are refused only where items in different units have none."
+ },
+ {
+  "prompt": "How does the engine decide whether a bid meets the minimum for one item?",
+  "options": [
+   "It meets when content > the minimum, so a bid exactly on the minimum falls short of the Schedule line",
+   "It counts every unit the bid reports and converts each to spend before comparing with the minimum",
+   "content = 100 x nigerian / total in the Schedule line's unit; it meets when content >= the minimum",
+   "The overall content of the bid is set against each item's minimum, so one figure decides every item"
+  ],
+  "answer": 2,
+  "explanation": "The engine's basis reads \"content = 100 x nigerian / total in the measured unit of the Schedule line; the item meets its minimum when content >= the minimum\". The comparison includes the minimum. Each item is tested in its own unit, and the overall figure is a separate result."
+ },
+ {
+  "prompt": "WS1's pumping content is 95.000000 by man-hours, and the Schedule minimum for Pumping Services is 95%. What does the engine return for that item?",
+  "options": [
+   "Short of it, because the comparison is strict and the reason names the item below 95%",
+   "It meets the minimum, since an item at the minimum meets it",
+   "Refused, as a figure on the minimum needs more decimals",
+   "It meets only if the bid's overall content also reaches 95%, which it does not reach here"
+  ],
+  "answer": 1,
+  "explanation": "The rule is content >= the minimum, so 95.000000 against 95% meets it, and WS1 meets 3 of 3. No reason is printed for WS1, because only items below their minimum get one. The overall content does not enter the item test; WS1's overall is 82.647059."
+ },
+ {
+  "prompt": "A materials bid reports its valves by tonnage. What does the engine do?",
+  "options": [
+   "Refuses: \"bids[0].items.valves.measure must be 'number', the unit the minimum is measured in; got 'tonnage'\"",
+   "Converts the tonnage to a count of valves with the average weight of a gate valve in the bill",
+   "Accepts it, because tonnage is one of the units NC_MEASURES lists for materials of every kind",
+   "Tests the valves by tonnage and flags the item as below its minimum until a count is supplied"
+  ],
+  "answer": 0,
+  "explanation": "The Schedule measures Valves by number, and the engine accepts only the unit a Schedule line names for that item, so the call is refused with the message in the key. NC_MEASURES lists the units the engine knows, and a listed unit is still refused for an item the Schedule measures another way. Nothing is converted."
+ },
+ {
+  "prompt": "Which two inputs on a content item would the engine refuse as impossible arithmetic?",
+  "options": [
+   "Nigerian quantity 0, and a total larger than the quantity the tender's bill states for the item",
+   "A total above the bill's quantity, and a Nigerian quantity stated with a decimal fraction of a tonne",
+   "A Nigerian quantity equal to the total, and a total of exactly 1, since each gives a ratio at an edge",
+   "A total of 0, and more Nigerian tonnes than the total the bid supplies"
+  ],
+  "answer": 3,
+  "explanation": "The engine refuses \"bids[0].items.casing.total must be a finite number above 0\" and \"bids[0].items.casing.nigerian must be a number from 0 to total\". A Nigerian quantity of 0 and one equal to the total both sit inside 0 to total and give 0 and 100 percent: MS3's casing is 100.000000 and meets its minimum."
+ },
+ {
+  "prompt": "Every well services item is measured in man-hours. How does the engine compute a bid's overall content there?",
+  "options": [
+   "The plain mean of the three item contents, each item counting the same whatever its size",
+   "The lowest of the item contents, since a bid is only as good as its weakest item",
+   "100 x the sum of Nigerian man-hours / the sum of total man-hours, pooled over the items",
+   "A weighted mean with the bid's quoted amounts as weights, the rule the materials tender uses"
+  ],
+  "answer": 2,
+  "explanation": "When every item shares one unit the engine pools: overall = 100 x sum of Nigerian quantities / sum of total quantities. Pooling weights each item by its size in man-hours. The weighted mean with stated weights is the rule for items in different units, as on the materials tender."
+ },
+ {
+  "prompt": "WS5's overall content is 78.750000. What does the item test add to that single figure?",
+  "options": [
+   "Nothing, as an overall above every minimum shows each item meets it",
+   "Stimulation sits at 75.000000 against a minimum of 85%, so WS5 meets 2 of 3",
+   "All three items meet their minimums, since 78.750000 is above the coiled tubing minimum of 75%",
+   "Coiled tubing falls short at 75.000000, at its minimum"
+  ],
+  "answer": 1,
+  "explanation": "The engine's reason is \"WS5: item stimulation: Nigerian content 75% by man-hours is below the minimum 85%\". Coiled tubing at 75.000000 meets its 75% minimum, and pumping at 95.000000 meets 95%. The overall figure hides which item falls short, so a report gives both."
+ },
+ {
+  "prompt": "MS2's overall content is 61.584657. How does the engine reach it on the materials tender?",
+  "options": [
+   "100 x its Nigerian tonnes over its total tonnes, with the valves left out as they are counted",
+   "The plain mean of its four item contents, since the Act counts every Schedule line the same",
+   "Its highest item content, cement at 82.000000",
+   "A mean of its item contents weighted by its own quoted amount for each item"
+  ],
+  "answer": 3,
+  "explanation": "The materials items mix tonnage and number, so the engine takes the weighted mean of the item contents with the bid's stated weights. The fixture weights each item by the bid's quoted amount: casing 288000, valves 103200, cement 45000, baryte 80000. That weighted mean is checked to give 61.584657. The Act gives no rule for adding man-hours to tonnes, so the weights are a stated input."
+ },
+ {
+  "prompt": "A materials bid reports items in different units and states no weights. What comes back?",
+  "options": [
+   "A refusal naming bids[0].weights, which says the overall content is a weighted mean with stated weights",
+   "Equal weights on every item, the engine's default when the units differ and nothing is stated",
+   "An overall content pooled over the raw quantities, tonnes and valve counts added together",
+   "A result with the overall content set to null and each item's content still reported alone"
+  ],
+  "answer": 0,
+  "explanation": "The engine refuses: \"bids[0].weights are required: the items are measured in different units, so the overall content is the weighted mean of the item contents with stated weights (for example the priced amount of each item)\". It has no default weighting, and it never adds tonnes to a count of valves."
+ },
+ {
+  "prompt": "A bid states weights for its four materials items, and every one of them is 0. What does the engine do?",
+  "options": [
+   "Falls back to equal weights, since zero weights carry no information about the items",
+   "Returns an overall content of 0.000000 for the bid, the weighted mean of nothing",
+   "Refuses: \"bids[0].weights must not all be 0\"",
+   "Pools the raw quantities instead, the rule it applies when every item shares a unit"
+  ],
+  "answer": 2,
+  "explanation": "Weights that all sum to nothing leave the weighted mean undefined, and the engine refuses them by name with the message in the key. A negative weight is refused too. It has no fallback to equal weights or to pooling for items in different units."
+ },
+ {
+  "prompt": "The course states two bids on a land-rig Schedule line (70% by man-hours) and a catering target of 90% by man-hours. B1 sits at 70.000000 and 90.000000. What does the engine return for B1?",
+  "options": [
+   "Neither is met, as a content on a minimum counts as short",
+   "It meets both minimums, 2 of 2, with an overall content of 73.333333",
+   "Only the rig line, as an unlisted target can be met by no bid",
+   "Both are met, with an overall content of 73.166667 pooled across its man-hours"
+  ],
+  "answer": 1,
+  "explanation": "B1 sits exactly on both minimums and meets both, with an overall of 73.333333. B2, at 69.900000 and 89.500000, meets 0 of 2 and has the overall 73.166667. A stated target is tested like a Schedule line once it carries its percentage, unit and source."
+ },
+ {
+  "prompt": "What source does the engine return beside the course's stated catering target of 90%?",
+  "options": [
+   "\"stated by the user: a level stated for this example by the course; no Board target was read\"",
+   "The Act's s.11(2), as the Board's power makes any stated target a Board target",
+   "The 2010 Schedule's EXPLORATION section, assigned to any unknown item",
+   "No source at all, because a stated target is a figure the engine takes on trust and prints bare"
+  ],
+  "answer": 0,
+  "explanation": "The engine returns every target with its source. A stated target's source is what the user wrote, labelled \"stated by the user\". The rig line returns the Act's citation with \"Drilling Rigs (Land) 70% by man-hours\". A stated target with no source is refused: \"items[0].source must state where the target comes from (a user-stated target is never a hidden default)\"."
+ },
+ {
+  "prompt": "The Nigerian content call is handed all six well services bids, including WS4 and WS6, which fail the technical envelope. What does it return for WS4?",
+  "options": [
+   "A refusal naming bids[3], as a bid that failed the technical envelope cannot be measured",
+   "Nothing for WS4, since the call measures only bids that passed the pass mark of 70",
+   "Its item contents with the overall content set to null, since it is out of the evaluation",
+   "Its contents all the same: 67.058824 overall, meeting 0 of 3"
+  ],
+  "answer": 3,
+  "explanation": "The content table covers all six bids: WS4 has coiled tubing 60.000000, pumping 80.000000 and stimulation 75.000000, 0 of 3 met, overall 67.058824. The call measures the bids it is handed, and nothing in it reads the technical envelope. Which bids reach s.14 is decided at the commercial stage."
+ }
+]
