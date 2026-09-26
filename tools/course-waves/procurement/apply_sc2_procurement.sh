@@ -87,11 +87,11 @@ FILES="$SEEDS
 $GOLIVE"
 digest_for() {
   case $1 in
-    20261106_sc2_procurement_course       ) echo d8a15c1403177ea8262a75520fe73055f647b72a62d204c9a0e19c5b98cbafd7 ;;
+    20261106_sc2_procurement_course       ) echo c854dc8fb7609878dc09443cf411de53bdd33aca8c21a1794f3a5508de4c8fff ;;
     20261106_sc2_procurement_beginner_deep) echo e31cf594d68aff1ab423ba33d7bbe46f8b3da4f3d6edf336761058270e1e0ad4 ;;
     20261106_sc2_procurement_intermediate_deep) echo 8f3673fe5753cc3a2cf98078f6239ce44c61b4c57ab59313b5c4ca882251f709 ;;
     20261106_sc2_procurement_advanced_deep) echo 979d9d0eae003136a035365a8d6f57743d0f352a3320b06b4ad4be66e41e9a04 ;;
-    20261106_sc2_procurement_go_live      ) echo 506ce4e759a8d50c6042585af53c4891bbbb9eed6aa25b9eb9bb3ee726de047a ;;
+    20261106_sc2_procurement_go_live      ) echo e2413c0d96a35a9336e0379528049b9468f05941d55ac1caba748a99c8d0097a ;;
     *) echo UNPINNED ;;
   esac
 }

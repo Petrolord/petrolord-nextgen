@@ -6,7 +6,7 @@ The Associate capstone asks you to evaluate a two-envelope tender from end to en
 
 ## What you are given
 
-One case file comes with the capstone and is offered on the capstone card. It carries the criteria, each with an id, a weight and a maxScore, and for each bid its receipt time, mandatory requirements, scores, priced bill lines (quantity, unit rate, quoted amount, and a decimalMisplaced flag where the bidder declared one), discount, priced deviations, omitted items and completion weeks. It is written in the same shape the envelope calculator reads.
+One case file comes with the capstone and is offered on the capstone card. It carries the criteria, each with an id, a weight and a maxScore, and for each bid its receipt time, mandatory requirements, scores, priced bill lines (quantity, unit rate, quoted amount, and a decimalMisplaced flag where the evaluator recorded one), discount, priced deviations, omitted items and completion weeks. It is written in the same shape the envelope calculator reads.
 
 ## What the capstone states
 
@@ -33,7 +33,7 @@ Work in stage order, as the engine does. First, the mandatory requirements and t
 
 ## The traps this tier has shown you
 
-A bid on the pass mark passes. A failed bid's prices never reach another bid's omission. A declared misplaced decimal point leaves the amount standing. A discount lowers the base of the completion adjustment. The commercial score is built from the evaluated cost. Each of these moved a figure on the Ekene tenders, and each can move one here.
+A bid on the pass mark passes. A failed bid's prices never reach another bid's omission. A recorded misplaced decimal point leaves the amount standing. A discount lowers the base of the completion adjustment. The commercial score is built from the evaluated cost. Each of these moved a figure on the Ekene tenders, and each can move one here.
 
 ## Exercise
 

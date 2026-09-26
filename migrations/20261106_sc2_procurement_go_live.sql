@@ -453,7 +453,7 @@ begin
 
   -- ---------------------------------------- the prompts the learner reads
   select prompt into v_prompt from public.academy_capstones where app_slug = 'procurement' and tier = 'beginner';
-  if v_prompt is null or md5(v_prompt) <> '50f2f102121eea670db5534fa23700ff' then
+  if v_prompt is null or md5(v_prompt) <> '05e56d6bab3b02829fec5899581db107' then
     raise exception 'SC2 go-live refused: the beginner prompt is not the prompt gen_course.py rendered from the engine inputs (md5 %)', md5(v_prompt);
   end if;
   if not exists (select 1 from public.academy_capstones where app_slug = 'procurement' and tier = 'beginner'

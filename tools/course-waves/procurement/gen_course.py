@@ -221,7 +221,7 @@ ONITSHA_TEXT = (
     f"ONITSHA is a synthetic two-envelope tender, {ON['tender']}: {ON['scope']}, with {n(len(ON['bids']))} bids, "
     f"{span(ON['bids'])}. One case file comes with this capstone. {CASE_NAME['beginner']} carries the criteria "
     f"(id, weight and maxScore), and each bid's receipt time, mandatory requirements, scores, priced bill lines "
-    f"(quantity, unit rate, quoted amount, and a decimalMisplaced flag where the bidder declared one), discount, "
+    f"(quantity, unit rate, quoted amount, and a decimalMisplaced flag where the evaluator recorded one), discount, "
     f"priced deviations, omitted items and completion weeks. The settings: the pass mark {n(ON['passMark'])}; "
     f"the arithmetic tolerance at the engine default; an omitted item priced at the {ON['omissionRule']} of the "
     f"corrected amounts the other responsive bids quote; completion beyond minWeeks {n(ONS['minWeeks'])} adds "

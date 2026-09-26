@@ -245,7 +245,8 @@ const ProcurementLearningPage = () => {
               <CardDescription>
                 A bid that fails a mandatory requirement is not scored, and a bid below the pass mark never has its price
                 opened. A bill line whose quantity times unit rate differs from its amount is corrected with the unit rate
-                prevailing, unless the bidder declares the decimal point misplaced. An omitted item is priced at the average
+                prevailing, unless the line carries decimalMisplaced, which the evaluator records once the Employer judges the
+                decimal point obviously misplaced (ITB 35.1(a)). An omitted item is priced at the average
                 the other responsive bids quote. The pass mark, the weights, the technical weight, the scoring methods, the
                 s.14 reading, the should-cost band and the Monte Carlo seed have no default: you state each one. Scores
                 that agree to twelve significant digits tie, and the lower evaluated cost, then the earlier receipt, then
