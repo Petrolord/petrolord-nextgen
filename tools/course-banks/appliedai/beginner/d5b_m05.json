@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Q10 \"diesel spill during bunkering\" is run by BM25 at k 5. How many passages does the list hold?",
+  "options": [
+   "5, because the list is filled to k with the next passages at score 0",
+   "1, since the two twins merge into one entry",
+   "2, since only EKD-046 and EKD-058 contain a query word",
+   "60, since k applies only to the metrics and the ranking keeps every passage"
+  ],
+  "answer": 2,
+  "explanation": "Only a score above 0 is ranked, so a list can be shorter than k: on Q10 only 2 passages contain a query word. No passage is added at score 0, the twins stay two entries because each id is ranked once, and the cutoff applies to the list itself."
+ },
+ {
+  "prompt": "EKD-046 and EKD-058 both score 13.884966 by BM25 on Q10. Which ranks first, and by what rule?",
+  "options": [
+   "EKD-046, since scores that agree to 12 significant digits tie and ties go to the id ascending",
+   "EKD-058, since the later copy of a passage is taken to be the corrected version of it",
+   "Either, drawn at random with a seed, so repeated runs can differ",
+   "EKD-046, because it is longer"
+  ],
+  "answer": 0,
+  "explanation": "The two carry the same text and score the same, so they tie and the id ascending puts EKD-046 first. The rule is stated so the same inputs always give the same list: no draw decides, no copy is treated as a correction, and identical texts have identical lengths."
+ },
+ {
+  "prompt": "Q10 is run again at k = 1. What does the engine report?",
+  "options": [
+   "It keeps both twins, since a tie is never split by the cutoff, and reports a list of 2",
+   "A refusal naming `k`, since k 1 would split a tied pair",
+   "tieAtCutoff false, since only one passage is left in the list",
+   "It keeps EKD-046, drops EKD-058, and reports tieAtCutoff true"
+  ],
+  "answer": 3,
+  "explanation": "The first and second passages tie and the cut falls between them, so the id keeps EKD-046 and tieAtCutoff is true: the flag warns that a metric on that list rests on the id. k 1 is a whole number from 1 to 1000 and is accepted, and the cutoff is never stretched to hold a tie."
+ },
+ {
+  "prompt": "Passages n2 and n1 score 0.470003629246 and 0.470003616427 at 12 significant digits for \"oil\" with b = 1e-7. Both print 0.470004. How are they ranked?",
+  "options": [
+   "n1 above n2, since they tie at 0.470004 and the id ascending decides",
+   "n2 above n1, since the 12-digit keys differ and there is no tie",
+   "Together, in one tied group, since scores that print alike at six decimals always tie in the engine",
+   "n1 above n2, as the passage with more tokens wins"
+  ],
+  "answer": 1,
+  "explanation": "Two scores tie when they agree to 12 significant digits. The keys are 0.470003629246 and 0.470003616427, which differ, so there is no tie and n2 ranks above n1 on its score; with ids alone n1 would come first. Printed alike at six decimals is not equal, and n1's extra token lowers its score."
+ },
+ {
+  "prompt": "Why does the engine use a 12-digit key to decide ties and never a relative tolerance?",
+  "options": [
+   "Every passage would tie under a tolerance, since BM25 scores differ only in the sixth decimal",
+   "Speed: a key runs faster, and that is the only reason stated",
+   "A key is transitive; with a tolerance, a can be near b and b near c while a is far from c, which breaks a sort",
+   "Tolerances cannot be computed on a score above 0"
+  ],
+  "answer": 2,
+  "explanation": "The stated reason is transitivity: two scores with the same key tie, full stop, while near-to-near chains under a tolerance break a sort. BM25 scores on the Ekene set differ in their leading digits, as Q13's run from 9.951737 down to 6.222042 shows, speed is no stated reason, and a tolerance is computable on any score."
+ },
+ {
+  "prompt": "Which of these values of k does the engine accept?",
+  "options": [
+   "1000",
+   "0, the empty cutoff, as a way to rank without keeping anything",
+   "2.5, rounded down to 2 before the ranking is cut",
+   "1001"
+  ],
+  "answer": 0,
+  "explanation": "k must be a whole number from 1 to 1000, so 1000 is accepted. 0, 2.5 and 1001 are each refused with the engine's own words \"k must be a whole number from 1 to 1000\". The engine never rounds a k, and the cap of 1000 holds whatever the corpus size."
+ },
+ {
+  "prompt": "The stated ranking c, a, x, b, d is scored against the judgments a 3, b 2, c 0, d 1, e 2, at k 5 and grade 1 or more. What is the precision at 5?",
+  "options": [
+   "0.750000, from 3 relevant retrieved over the 4 relevant judged",
+   "1.000000, as every passage in the list was judged",
+   "0.800000, from the 4 judged passages in the top 5, a, b, c and d, over 5",
+   "0.600000, from 3 relevant in the top 5 over 5"
+  ],
+  "answer": 3,
+  "explanation": "a, b and d are relevant at grade 1 or more, c is grade 0 and x is unjudged, which counts as grade 0: 3 relevant in the top 5, over 5, is 0.600000. 0.750000 is the recall, 3 over the 4 relevant judged. x was never judged, and a judged passage at grade 0 is still not relevant."
+ },
+ {
+  "prompt": "Which judged passage keeps the stated list's recall at 5 below 1.000000?",
+  "options": [
+   "x, which nobody judged and which counts as grade 0 in the top 5",
+   "c, heading the list at grade 0",
+   "e, graded 2 and missing from the list",
+   "d, at grade 1"
+  ],
+  "answer": 2,
+  "explanation": "Recall asks how many of the relevant judged passages made the top 5. a, b, d and e clear grade 1, and e never appears in the list, so 3 of 4 are found, 0.750000. x and c sit in the list without being relevant, which lowers precision and leaves recall alone, and d's grade 1 counts in full at the default threshold."
+ },
+ {
+  "prompt": "In the stated ranking, what is the reciprocal rank?",
+  "options": [
+   "1.000000, since c heads the list and every judged passage counts as a find",
+   "0.500000, since the first relevant passage is a, at rank 2",
+   "0.200000, from the last relevant passage, d, at rank 5",
+   "0.333333, one over the rank of x"
+  ],
+  "answer": 1,
+  "explanation": "Reciprocal rank is 1 over the rank of the first relevant passage in the top 5. c at rank 1 is grade 0, so the first relevant passage is a at rank 2 and the reciprocal rank is 1 / 2, 0.500000. A judged passage counts only at the threshold, it is the first relevant passage that counts, and x is unjudged."
+ },
+ {
+  "prompt": "System A retrieves only 2 passages for Q10, both relevant. What is its precision at 5?",
+  "options": [
+   "1.000000, since both passages it ranked are relevant, 2 over the 2 ranked",
+   "Null with a note, since the list is shorter than k",
+   "0.500000, since one of the two is a duplicate",
+   "0.400000, since precision at 5 divides by 5 even when fewer are ranked"
+  ],
+  "answer": 3,
+  "explanation": "Precision at 5 is relevant in the top 5 over 5, whatever the list's length: 2 / 5, 0.400000. That is the stated choice trec_eval makes; dividing by the passages ranked would give a list of two a perfect figure. A short list is no reason for a null, and both twins are judged relevant, so both count."
+ },
+ {
+  "prompt": "For Q02, system A's first relevant passage is EKD-003 at rank 4. What are its hit and reciprocal rank at 5?",
+  "options": [
+   "Hit 1 and reciprocal rank 0.250000",
+   "Both 0, since three passages graded 0 come first in the list",
+   "Hit 1 and reciprocal rank 1.000000, since a hit is the same thing as a first place",
+   "A hit of 4 and reciprocal rank 0.250000, since hit counts the rank reached"
+  ],
+  "answer": 0,
+  "explanation": "Hit is 1 when any relevant passage is in the top 5, and reciprocal rank is 1 / 4 for a first relevant passage at rank 4, 0.250000. Hit is generous and reciprocal rank sees the drop; hit is only ever 0 or 1, and a hit does not move the first relevant passage to rank 1."
+ },
+ {
+  "prompt": "Q14 has 3 relevant passages at grade 1 or more. What does system A score on it at 5?",
+  "options": [
+   "Recall returned as null with a reason, since none of its relevant passages was found",
+   "Hit 0, reciprocal rank 0.000000 and recall 0.000000",
+   "Hit 1 and reciprocal rank 0.500000, from the second passage",
+   "Precision 0.600000 and recall 1.000000"
+  ],
+  "answer": 1,
+  "explanation": "BM25 retrieves none of Q14's 3 relevant passages in the top 5, so hit, reciprocal rank and recall are all 0 on this planted lexical trap. Recall is null only when no passage is relevant at all, as on Q24; Q14 has 3, so its recall is a plain 0."
+ },
+ {
+  "prompt": "At k 5, relevant at grade 1 or more, system B's MRR is 0.923913 and system A's 0.880435. What does the difference say?",
+  "options": [
+   "B beats A on every metric, so B should be chosen",
+   "More of the relevant passages are found by B, since MRR counts every relevant find in the top 5 of each query",
+   "System B puts its first relevant passage higher on average, while system A has the higher recall",
+   "A trails on hit rate and on recall as well"
+  ],
+  "answer": 2,
+  "explanation": "MRR is the mean reciprocal rank, so B's higher figure means its first relevant passage sits higher on average. System A's recall at 5 is 0.673188 against B's 0.658696, and its precision 0.443478 against 0.434783, so neither system wins everywhere. MRR looks only at the first relevant passage, and A's hit rate is lower but its recall higher."
+ },
+ {
+  "prompt": "How many of the 24 queries enter system A's means at k 5, and why?",
+  "options": [
+   "24, with Q24 scored 0 on every metric in line with the default rule",
+   "22, since Q14 and Q24 both fail to reach a hit",
+   "24, with Q24's recall set to 1.000000 since there was nothing to find",
+   "23, as Q24 has no relevant passage and is excluded and listed"
+  ],
+  "answer": 3,
+  "explanation": "A query with no judged passage at grade 1 or more is excluded from every mean and listed, with the reason \"no judged document has grade 1 or more\", so 23 queries are included. Excluding and listing is the default. Q14 has relevant passages and stays in the means with its zeros, and Q24's recall is returned as null, never filled in."
+ },
+ {
+  "prompt": "Q01 has 8 relevant passages at grade 1 or more, and system A finds 3 of them in its top 5. What is its recall at 5?",
+  "options": [
+   "0.375000, and at 5 it could never pass 5 / 8",
+   "0.600000, since 3 of the 5 retrieved passages are relevant to Q01",
+   "1.000000, since the list is full and no more fit",
+   "0.625000, the recall a list holding 5 relevant passages would reach"
+  ],
+  "answer": 0,
+  "explanation": "Recall is relevant in the top 5 over relevant judged: 3 / 8, 0.375000. With 8 relevant passages and a list of 5, recall at 5 can never pass 5 / 8. 0.600000 is Q01's precision at 5, a full list is no reason for full recall, and 5 relevant in the top 5 is not what system A found."
+ }
+]

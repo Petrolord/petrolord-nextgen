@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Passages n2 \"oil water\" and n1 \"oil water gas\" are scored by BM25 for \"oil\" with b = 1e-7, and both scores print 0.470004 at six decimals. How does the engine order them?",
+  "options": [
+   "n1 above n2: the two scores tie at six decimals, and so the tie goes to the id ascending",
+   "n2 above n1: the scores differ by 1.28e-8, which the 12-digit key sees, so they do not tie",
+   "n1 above n2, with a tie reported, since any BM25 scores that print alike are treated as equal",
+   "Either order, since the engine keeps the input order for any two scores that print the same"
+  ],
+  "answer": 1,
+  "explanation": "Two scores tie only when they agree to 12 significant digits, and the keys are 0.470003629246 and 0.470003616427, so there is no tie and n2 ranks above n1 on its score. Printed alike is not equal: six decimals hide a difference the key sees. With ids alone n1 would come first, which is exactly what the engine does not do here. Input order never decides."
+ },
+ {
+  "prompt": "Why does the engine compare scores through a 12-significant-digit key and decline a relative tolerance?",
+  "options": [
+   "A tolerance is slower to compute on large corpora, and the key was chosen to keep a ranking of 5000 passages fast enough",
+   "The key rounds every score to six decimals first, so it matches the printed figures and a reader can check any tie",
+   "A relative tolerance would tie the two copies EKD-046 and EKD-058, while the key keeps them apart by their ids",
+   "A key is transitive: equal keys tie, full stop, while a tolerance can make a near b and b near c with a far from c, which breaks a sort"
+  ],
+  "answer": 3,
+  "explanation": "The course's stated reason is transitivity: a key partitions the scores into tie groups, while a tolerance can chain near neighbours into a group whose ends are not near, and a sort cannot handle that. The key uses 12 significant digits, far finer than the six decimals printed. EKD-046 and EKD-058 do tie under the key, and the id ascending then orders them. Speed is not the reason given."
+ },
+ {
+  "prompt": "What does the 12-digit key absorb that a direct comparison of two doubles would not?",
+  "options": [
+   "Differences in passage length, which b already normalises away before any tie is ever tested",
+   "Any gap too small to show at six decimals, so that every pair of scores printing alike is a tie",
+   "Last-bit differences that arise when the terms of equal texts are added in a different order",
+   "Unicode case differences in two copies of a passage, which the tokeniser keeps apart"
+  ],
+  "answer": 2,
+  "explanation": "A score is a sum of floating-point terms, and two passages with the same text can land a few bits apart when the terms are summed in another order. The key rounds that away, so a difference the key still sees is a real difference in the inputs. It does not tie scores that merely print alike, as the n1 and n2 pair shows, and it knows nothing of lengths or text."
+ },
+ {
+  "prompt": "Q10 is ranked by BM25 at k 1. EKD-046 and EKD-058 both score 13.884966. What does the engine return?",
+  "options": [
+   "EKD-046, with tieAtCutoff true: the cut falls inside the tie and the id ascending decided",
+   "EKD-058, since the later copy of a duplicated passage is kept and the earlier one dropped",
+   "Both passages, since a tie at the cutoff lengthens the list beyond k to hold the tied group",
+   "EKD-046, with tieAtCutoff false: the two passages are equal, so no tie needs reporting"
+  ],
+  "answer": 0,
+  "explanation": "The two copies carry the same text and the same score, so they tie; the id ascending puts EKD-046 first, and at k 1 the cut falls between the tied pair, which the engine flags with tieAtCutoff true. The list never grows past k. A tie is reported whenever it exists, and tieAtCutoff is what says the id alone decided which passage stayed."
+ },
+ {
+  "prompt": "System B's extraction prediction 45.25 for the label 45.2 on EKD-032 sits on the absTol 0.05. How is the cell scored, and by which boundary rule?",
+  "options": [
+   "Wrong: every limit in the engine is exclusive, so a difference lying exactly on the tolerance fails",
+   "Missed: a value on the tolerance edge is treated as empty, and so the label value goes unmatched",
+   "Wrong: the double difference is above 0.05 here, as it was for the 64.7 on EKD-033",
+   "Correct: a number matches when |prediction - label| <= max(absTol, relTol x |label|), inclusive"
+  ],
+  "answer": 3,
+  "explanation": "The extraction number rule is inclusive, and the course states the double computes this difference as just under 0.05, so the cell is correct. Boundaries are per rule, never global: some rules include their limit and some exclude it. A value on the edge is still a value, and 64.7 against 64.6 on EKD-033 is wrong because its difference is above 0.05."
+ },
+ {
+  "prompt": "In the paired bootstrap, how is a replicate whose A minus B difference is exactly 0 counted in the share at or below 0?",
+  "options": [
+   "It is counted, because \"a does not beat b\" includes a draw",
+   "It is dropped from both counts, being neither a win nor a loss",
+   "It is split, half counted in the share and half counted out",
+   "It is counted out, since only a strictly negative one counts"
+  ],
+  "answer": 0,
+  "explanation": "The share is the share of replicates with a difference at or below 0, and the boundary table states that a replicate exactly 0 is counted; only replicates above 0 are not. No replicate is dropped or split. The share at or below 0 for nDCG, seed 7 and 2000 replicates, is 0.511000, and it is a count of replicates, which the engine does not call a p-value."
+ },
+ {
+  "prompt": "A bootstrap call asks for level 0.5. What does the engine return?",
+  "options": [
+   "A 50 percent interval, read from the middle half of the bootstrap means",
+   "A refusal naming `level`: \"level must be 0.8, 0.9, 0.95 or 0.99\"",
+   "The 0.95 interval, the default, with a note that 0.5 was not one of the levels",
+   "A refusal naming `nBoot`, since level 0.5 needs more replicates to be read"
+  ],
+  "answer": 1,
+  "explanation": "The engine accepts four levels and refuses every other, naming the field `level`, in the words quoted. It never substitutes the default for a refused value. A fixed list keeps every label a well-formed ordinal, and the replicate count has its own rule, from 1 to 100000."
+ },
+ {
+  "prompt": "At level 0.9, system A's mean nDCG on seed 7 with 2000 replicates gives the bounds 0.671684 and 0.838560. How does the engine label them?",
+  "options": [
+   "Letter-P outcome labels, which the platform uses for any fifth and ninety-fifth percentile",
+   "\"lower 90 percent bound\" and \"upper 90 percent bound\" of the interval",
+   "\"5th percentile of the bootstrap mean\" and \"95th percentile of the bootstrap mean\"",
+   "\"10th percentile of the bootstrap mean\" and \"90th percentile of the bootstrap mean\""
+  ],
+  "answer": 2,
+  "explanation": "Each bound is a percentile of a statistic, so it is labelled as a parameter percentile, and at level 0.9 the tails are the 5th and 95th percentiles, in the words quoted. P labels are kept for outcomes and never used here. The engine's labels name the percentile itself, and the 10th and 90th labels belong to level 0.8, whose bounds are 0.691350 and 0.822582."
+ },
+ {
+  "prompt": "Why does the engine round each bootstrap tail to 12 decimals before reading the quantile?",
+  "options": [
+   "In floating point (1 - 0.95) / 2 lands a few bits above 0.025, which would move the quantile index off a whole number",
+   "So that the interval prints at six decimals like every other figure the course quotes, with no trailing digits left over",
+   "To make the tails agree with linear interpolation, the alternative quantile the platform chose to follow",
+   "Because the seed is a 12-digit number, and the tails are drawn from the stream at that same precision"
+  ],
+  "answer": 0,
+  "explanation": "At 2000 replicates the lower tail 0.025 gives an index of 50, a whole number, and the whole-number case takes the mean of the 50th and 51st smallest replicates. A tail a few bits above 0.025 would give an index just above 50 and take the ceil, the 51st, a different value. Rounding the tail to 12 decimals restores 0.025. Printing is separate, the platform's quantile is not linear interpolation, and the seed is not drawn at any precision."
+ },
+ {
+  "prompt": "Which seeds does the bootstrap accept at its boundaries, and which does it refuse?",
+  "options": [
+   "1 and 4294967295 are accepted; 0 and 4294967296 are refused",
+   "0 and 4294967296 are accepted; only -1 is refused",
+   "Any whole number is accepted, and a missing seed defaults to 7",
+   "0 and 4294967295 are accepted; -1 and 4294967296 are refused"
+  ],
+  "answer": 3,
+  "explanation": "The boundary table probes the seed either side: 0 and 4294967295 run, -1 and 4294967296 are refused with \"seed must be a whole number from 0 to 4294967295\". The seed has no default: leaving it out is refused with the same message. Seed 7 is the course's teaching seed, stated with every bootstrap figure."
+ },
+ {
+  "prompt": "A ranking call passes 5000 documents, and a second passes 5001. What happens to each?",
+  "options": [
+   "Both run, since the cap only warns, and the 5001st document is ranked after all the others as usual",
+   "5000 run, since the cap is inclusive; 5001 is refused with \"documents has 5001 entries, above the 5000 this engine accepts\"",
+   "5000 is refused as well, since the cap is exclusive and the engine accepts only fewer than 5000 documents",
+   "Both are refused, since MAX_DOCS limits the passages a query can rank to 1000, the largest cutoff k"
+  ],
+  "answer": 1,
+  "explanation": "Each cap is probed at the limit, where the call is accepted, and one above, where it is refused with the field and the cap named. MAX_DOCS is 5000 and applies to the documents one call accepts; MAX_K, 1000, is the largest cutoff, a separate rule. A cap never warns: it lets the call run exactly or refuses it."
+ },
+ {
+  "prompt": "k 0, k 2.5 and k 1001 are each passed to rankBm25. What does the engine return for each?",
+  "options": [
+   "k 0 and k 2.5 are refused, and k 1001 is capped at 1000 with a note saying that the cutoff was reduced",
+   "k 2.5 is rounded to 3 and run; k 0 and k 1001 are each refused with two different messages of their own",
+   "The same refusal every time, \"k must be a whole number from 1 to 1000\", since all three break one rule",
+   "An empty list with a note for k 0, while k 2.5 and k 1001 are refused as lying outside the engine's stated range"
+  ],
+  "answer": 2,
+  "explanation": "The cap on k shares its message with the range rule: k must be a whole number from 1 to 1000, and 0, 2.5 and 1001 all break it, so each is refused in the same words with the field `k` named. The engine never caps, rounds or empties a list in place of refusing. Most other caps have their own sentence, naming the count that was passed."
+ },
+ {
+  "prompt": "A calibration call passes 100001 rows. What comes back, and which other input shares the cap?",
+  "options": [
+   "The first 100000 rows are scored and the last is dropped; bootstrap values share the same cap",
+   "\"bins must be a whole number from 1 to 100\", as the rows overflow the bins; no other input shares it",
+   "A result with a note that the Brier score was sampled; the bootstrap replicates share MAX_ROWS",
+   "\"yTrue has 100001 rows, above the 100000 this engine accepts\"; kappa rating pairs share MAX_ROWS"
+  ],
+  "answer": 3,
+  "explanation": "MAX_ROWS is 100000 and covers the calibration rows and the kappa rating pairs; one above is refused in the words quoted, naming `yTrue`. Nothing is truncated or sampled. The bins message belongs to the bin count, and the bootstrap has its own caps: MAX_VALUES 10000 for values and MAX_BOOT 100000 for replicates."
+ },
+ {
+  "prompt": "How does the claim reader treat \"-2\" after a space and \"Ekene-2\" in an answer?",
+  "options": [
+   "\"-2\" after a space is a negative number; in \"Ekene-2\" the minus follows a letter, so it is an identifier",
+   "Both are the number -2, since a minus sign always makes the digits written after it a negative number",
+   "Both are identifiers, since a minus sign is always split off by the tokeniser before any of the claims are read",
+   "\"-2\" is a date fragment and \"Ekene-2\" the number 2, since the hyphen separates the well name"
+  ],
+  "answer": 0,
+  "explanation": "The boundary table states the rule: a leading minus counts only after a non-alphanumeric character, so \"-2\" after a space is a negative number, and after a letter or digit, as in \"Ekene-2\", the text is part of an identifier and makes no claim. Well names would otherwise produce negative numbers. The tokeniser is not the claim reader, and neither text is a date."
+ },
+ {
+  "prompt": "A bootstrap call passes 1 replicate, and another passes 1 value. How does the engine treat the two calls?",
+  "options": [
+   "Both run, each returning a standard error of 0.000000 and a note that one draw gives no spread at all",
+   "Both are refused, since the bootstrap needs at least 2 of each, with messages naming nBoot and values",
+   "The replicate call runs, with the standard error null and the note \"one replicate: the standard error is undefined\"; the value call is refused",
+   "The value call runs with its interval equal to the one value; the replicate call is refused by name"
+  ],
+  "answer": 2,
+  "explanation": "One replicate is accepted, since nBoot runs from 1 to 100000, and the standard error, the SD of the replicates with divisor nBoot - 1, has no value, so it is returned as null with the note quoted: a result with a note. One value is refused, \"values has 1 value: the bootstrap resamples at least 2\". Nothing is set to 0 in place of an undefined figure."
+ }
+]

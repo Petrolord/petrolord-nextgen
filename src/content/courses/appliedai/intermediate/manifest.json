@@ -1,0 +1,361 @@
+{
+ "app_slug": "appliedai",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-average-precision-and-map",
+   "title": "Average Precision and MAP",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-precision-at-every-relevant-rank",
+     "title": "Precision at every relevant rank",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-dividing-by-every-relevant-passage",
+     "title": "Dividing by every relevant passage",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-mean-average-precision",
+     "title": "Mean average precision",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-query-with-no-relevant-passage",
+     "title": "A query with no relevant passage",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-relevance-threshold",
+     "title": "The relevance threshold",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-graded-relevance-and-ndcg",
+   "title": "Graded Relevance and nDCG",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-discounted-cumulative-gain",
+     "title": "Discounted cumulative gain",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-ideal-ranking",
+     "title": "The ideal ranking",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-linear-and-exponential-gain",
+     "title": "Linear and exponential gain",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-unjudged-passages",
+     "title": "Unjudged passages in a ranking",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-short-answers",
+   "title": "Short Answers",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-normalising-an-answer",
+     "title": "Normalising an answer",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-exact-match",
+     "title": "Exact match",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-token-f1",
+     "title": "Token F1",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-an-empty-answer",
+     "title": "An empty answer and an abstention",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-field-extraction",
+   "title": "Field Extraction",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-fields-records-and-cells",
+     "title": "Fields, records and cells",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-four-outcomes",
+     "title": "The four outcomes of a cell",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-numbers-within-a-tolerance",
+     "title": "Numbers within a tolerance",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-accuracy-precision-and-recall",
+     "title": "Accuracy, precision and recall on cells",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-micro-and-macro",
+     "title": "Micro and macro averages",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-groundedness-and-its-limits",
+   "title": "Groundedness and Its Limits",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-cited-and-retrieved",
+     "title": "Cited and retrieved",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-reasons-a-claim-fails",
+     "title": "The reasons a claim fails",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-grounded-and-correct",
+     "title": "Grounded and correct are different questions",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-how-the-check-reads-text",
+     "title": "How the check reads text",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-comparing-two-systems",
+   "title": "Comparing Two Systems",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-two-systems-on-the-same-queries",
+     "title": "Two systems on the same queries",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-paired-bootstrap",
+     "title": "The paired bootstrap",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-up-a-comparison",
+     "title": "Writing up a comparison",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

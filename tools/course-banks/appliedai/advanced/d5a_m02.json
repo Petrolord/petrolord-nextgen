@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "In the Ekene calibration set, when is a row's outcome 1, and what share of the 200 rows has it?",
+  "options": [
+   "At grade 1 or more, the retrieval default; the base rate is 0.190000",
+   "When the judged grade is 2 or 3; the base rate is 0.190000",
+   "Whenever the probability is at least 0.5, so the base rate is the share above that line",
+   "In system A's top 5; the base rate is 0.443478"
+  ],
+  "answer": 1,
+  "explanation": "The fixture defines the outcome as 1 when the judged grade is 2 or 3, which is stricter than the grade 1 default of the retrieval metrics; 0.190000 of the 200 rows have it. An outcome is what happened, so it never comes from the probability. 0.443478 is system A's mean precision at 5, a retrieval figure with nothing to do with these rows."
+ },
+ {
+  "prompt": "The Brier score of the Ekene rows is 0.168382 at 5, 10 and 15 bins. Why does the bin count leave it unchanged?",
+  "options": [
+   "The engine fixes the bins at 10 for the Brier score whatever count is passed to it",
+   "Every bin on this set is over-confident, so the bins happen to cancel out in the mean",
+   "It is the row-weighted sum of the bin gaps",
+   "It is the mean of (p - y)^2 over the rows, and it uses no bins at all"
+  ],
+  "answer": 3,
+  "explanation": "The basis gives the Brier score as mean (p - y)^2: each row adds the square of its own miss, and no bin enters. The bin count passed to the call is used for the table, ECE, MCE and the Murphy terms. The over-confidence argument explains why ECE holds still on this set, a different figure. A row-weighted sum of bin gaps is ECE's definition."
+ },
+ {
+  "prompt": "In how many of the ten bins of the Ekene reliability table is the mean probability above the observed frequency, and what does that make the classifier there?",
+  "options": [
+   "10 of 10: over-confident in every bin",
+   "5 of 10: over-confident in the upper half only",
+   "None of them: under-confident in every bin",
+   "9 of 10: bin 9 alone is under-confident here"
+  ],
+  "answer": 0,
+  "explanation": "Every bin's mean probability sits above its observed frequency, from bin 0 (0.065263 against 0.052632) to bin 9 (0.974286 against 0.904762), so the classifier is over-confident in all ten. Bin 9 is the upper bin that comes nearest its promise, with a gap of 0.069524, and it is still over-confident. No bin has its observed frequency above its mean probability."
+ },
+ {
+  "prompt": "Bin 7 of the ten-bin table holds 3 rows at a mean probability of 0.723333, none of them relevant. What does that bin do to ECE and to MCE?",
+  "options": [
+   "It sets ECE, since ECE is the largest gap in any non-empty bin of the table, 0.723333",
+   "Both ignore it: a bin with fewer than 5 rows is treated as empty and skipped by the sums",
+   "It sets MCE outright at 0.723333 and moves ECE little, since 3 of 200 rows weight its gap",
+   "It moves both alike, as each averages the ten gaps with an equal weight for every bin"
+  ],
+  "answer": 2,
+  "explanation": "MCE is the largest gap over non-empty bins, and bin 7's 0.723333 is the largest, so MCE is 0.723333. ECE weights each gap by n_k / N, and 3 rows of 200 carry little weight. Only an empty bin is skipped, and ECE is the row-weighted sum; an equal weight per bin is the common alternative the engine did not take."
+ },
+ {
+  "prompt": "How does the engine weight each bin's gap when it computes ECE, and what alternative did it decline?",
+  "options": [
+   "By one over the number of non-empty bins, so each bin counts equally; it declined weighting by the rows",
+   "By the square of each gap, as the REL term does, to stress the large gaps; it declined the plain mean of the gaps",
+   "By its share of the rows, n_k / N, after Guo et al. (2017); it declined the plain mean of the gaps over bins",
+   "By its mean probability, so the confident bins count most; it declined the weights of Guo et al. (2017)"
+  ],
+  "answer": 2,
+  "explanation": "The basis says sum over non-empty bins of n_k / N x |observed_k - mean p_k|, the Guo et al. (2017) form, and the course names the unweighted mean over bins as the common alternative, under which a 3-row bin would count as much as a 39-row one. Squared gaps weighted by rows are the reliability term of the decomposition, a different figure. Nothing is weighted by mean probability."
+ },
+ {
+  "prompt": "On the Ekene rows ECE is 0.209300 at 5, 10 and 15 bins while MCE reads 0.660556, 0.723333 and 0.750000. Why does ECE stay put here?",
+  "options": [
+   "Every non-empty bin is over-confident at all three counts, so ECE is the mean probability minus the base rate",
+   "ECE uses no bins, being a mean over rows, exactly like the Brier score beside it in the result",
+   "The engine rounds ECE to the nearest bin width before it reports it, which hides small movements",
+   "ECE is always fixed by the base rate, whatever the set, so a report may quote it with no bin count"
+  ],
+  "answer": 0,
+  "explanation": "When every bin is over-confident each gap is mean probability minus observed frequency, with no sign to flip, and the row weights add the bins back into 0.399300 - 0.190000 = 0.209300. That is particular to this set: with bins on both sides of the diagonal ECE can move with the bin count, so it is always quoted with its bins. ECE is built from bins, and nothing is rounded."
+ },
+ {
+  "prompt": "What does the rise of MCE from 0.660556 at 5 bins to 0.750000 at 15 bins show?",
+  "options": [
+   "The classifier got worse: the rows were redrawn for each bin count",
+   "An engine fault, because a maximum gap over the same rows cannot depend on where bins are cut",
+   "Rounding: probabilities given to 2 decimals make MCE jump in steps",
+   "Finer bins can isolate a smaller, worse group of rows, so MCE is quoted with its bin count"
+  ],
+  "answer": 3,
+  "explanation": "The rows are the same 200 at every count; only the bins change. A narrower bin can gather a handful of rows with a large gap that a wider bin would dilute, so the worst gap can grow as bins get finer. That is why the course quotes MCE and ECE with their bin count. Nothing is redrawn, the maximum gap depends on the bins by definition, and no rounding of that kind is applied."
+ },
+ {
+  "prompt": "A calibration call is passed judged grades, 0, 2, 3, as the outcomes. What does the engine return?",
+  "options": [
+   "A result on the grades read as outcomes of 0, 1 and 1 at grade 2 or more",
+   "A refusal naming `yTrue[1]`: \"yTrue[1] must be 0 or 1\"",
+   "A refusal naming `yTrue`: \"yTrue must be a non-empty array of 0 and 1 outcomes\"",
+   "A result with a note that the grades were reduced to 0 and 1 at grade 1 or more"
+  ],
+  "answer": 1,
+  "explanation": "An outcome must be 0 or 1, and the first value that is neither, the 2 at position 1, is refused with its position named, in the words quoted. The engine never reduces grades to outcomes itself: the threshold is the caller's to state. The `yTrue` message is for an empty list of outcomes."
+ },
+ {
+  "prompt": "A BM25 score of 2.191027 is pasted in as the second of the probabilities of a calibration call. What comes back, and why?",
+  "options": [
+   "A refusal, \"probabilities[1] must be a number from 0 to 1\": a score is never a probability and can run above 1",
+   "A Brier score computed on the pasted score after the engine has scaled it into 0 to 1 by the largest value given",
+   "The Brier score 0.168382, since the engine reads the calibration probabilities from the fixture",
+   "A refusal naming `bins`, because a score above 1 would need one more bin above the last one to hold it in the table"
+  ],
+  "answer": 0,
+  "explanation": "The probability check refuses any value outside 0 to 1, naming its position, in the words quoted. A BM25 score is a score and never a probability, and it can exceed 1. The engine rescales nothing, reads the probabilities it is given, and the bins message is for a bin count outside 1 to 100."
+ },
+ {
+  "prompt": "Two outcomes are passed with one probability. Which field does the engine name?",
+  "options": [
+   "`yTrue`, with \"yTrue must be a non-empty array of 0 and 1 outcomes\" for the lost pair",
+   "None: the unmatched outcome is dropped",
+   "`bins`, with \"bins must be a whole number from 1 to 100\", as the rows cannot be binned",
+   "It names `probabilities`: \"probabilities must be an array of 2 numbers, one per outcome\""
+  ],
+  "answer": 3,
+  "explanation": "The outcomes come first and fix the length, so the probabilities list is measured against them and the refusal names `probabilities`, stating the 2 it needed. The `yTrue` message is for no outcomes at all. The engine never drops an unmatched row. The bins message is for a bin count outside 1 to 100."
+ },
+ {
+  "prompt": "A calibration call asks for 101 bins, and a second asks for 1. What does the engine do with each?",
+  "options": [
+   "It runs both, capping 101 at 100 bins and reporting 1 bin as a one-line table with every one of the rows in bin 0",
+   "It refuses both, since the bin count must lie strictly between 1 and 100, both ends excluded",
+   "It refuses 101 with \"bins must be a whole number from 1 to 100\" and runs 1, putting every row in one bin",
+   "It runs 101 with a note that the extra bin is empty and refuses 1 as too coarse to resolve"
+  ],
+  "answer": 2,
+  "explanation": "The bin count is a whole number from 1 to 100, both ends accepted, so 101 is refused with the words quoted and 1 is run. One bin puts every row in a single bin; the decomposition module shows it cannot resolve anything. The engine never caps a value silently or adds a note in place of a refusal, and 1 is a valid count."
+ },
+ {
+  "prompt": "Where do the probabilities in the Ekene calibration set come from?",
+  "options": [
+   "The engine's own relevance classifier, fitted on the 183 judged pairs each time a calibration call runs",
+   "A stated curve on the BM25 score, 1 / (1 + exp(-(0.6 x bm25 - 3.0))), rounded to 2 dp and fitted elsewhere",
+   "A language model asked how likely each passage is to answer its query, with the replies saved to the file",
+   "The TF-IDF cosine of each passage, which already lies between 0 and 1 and so serves as a probability"
+  ],
+  "answer": 1,
+  "explanation": "The fixture states the curve and says it was fitted elsewhere, so it is not calibrated here. The engine reads no probability of its own: the probabilities are given inputs, and fitting a classifier is the machine learning course's subject. No model output enters any fixture. A cosine is a score, and a score is never a probability even when it lies between 0 and 1."
+ },
+ {
+  "prompt": "Bin 6 of the ten-bin table holds 15 rows at a mean probability of 0.648000 with an observed frequency of 0.000000. How is that bin read?",
+  "options": [
+   "The classifier gave 15 rows a mean of 0.648000 and none of them was relevant: a gap of 0.648000",
+   "The bin counts as empty, since no outcome in it is 1, so its means are null and ECE skips it",
+   "Its gap is 0.000000, since an observed frequency of 0 leaves nothing to compare in the bin",
+   "Its 15 rows are left out of ECE, as a bin with no relevant row in it cannot be calibrated at all"
+  ],
+  "answer": 0,
+  "explanation": "The rows column says 15 rows fell in bin 6, and their mean probability, 0.648000, promised a good share of relevant rows; none was, so the gap is 0.648000. An empty bin is one with no rows, and only such a bin is skipped. An observed frequency of 0 is a real frequency, and the bin enters ECE with its row weight."
+ },
+ {
+  "prompt": "A classifier gives every Ekene row the base rate, 0.190000. What would a reliability table show, and why would it still be no use?",
+  "options": [
+   "Ten bins with equal rows, each one over-confident by the base rate, so that the gaps add to exactly 0.190000",
+   "An error, since the engine refuses any probability list in which every single value given is equal to every other value",
+   "A perfect score in every bin, which would make it the very best classifier that the Ekene calibration set can reward",
+   "One populated bin, its gap 0 up to rounding: honest about the average, and it separates no relevant row from any other"
+  ],
+  "answer": 3,
+  "explanation": "Every row lands in the one bin holding the base rate, whose observed frequency is the base rate itself, so the one gap is 0 up to rounding: the mean of the 200 equal probabilities lands a few bits away from the observed frequency, so the gap prints 0.000000 without being exactly 0, and printed alike is not equal. Calibration and separation are different properties: this classifier gives every row the same number, so it cannot rank relevant rows above the others. The engine accepts equal probabilities, and a zero gap is no evidence of usefulness."
+ },
+ {
+  "prompt": "How does the engine place a row whose probability is exactly 1 at 10 bins?",
+  "options": [
+   "In a bin 10 above the table, made for the one row",
+   "In bin 9, because 1 closes the last bin",
+   "Nowhere: a probability of 1 is refused as out of range",
+   "In bin 9 or bin 10, by the id ascending tie rule"
+  ],
+  "answer": 1,
+  "explanation": "The bin rule is i/10 <= p < (i+1)/10 with the last bin closed at 1, so a probability of 1 has a home in bin 9 and there is no bin above it. A probability from 0 to 1 is accepted, both ends included. The id tie rule belongs to the ranking and plays no part in binning."
+ }
+]

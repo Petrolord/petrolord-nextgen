@@ -1,0 +1,224 @@
+{
+ "dataset": "ORLU (synthetic)",
+ "passages": [
+  {
+   "id": "ORL-01",
+   "text": "Static pressure survey on 2021-01-01: average reservoir pressure 2,783 psia at the 1560 m TVD datum, down from 3200 psia initial. Cumulative field oil at the survey was 99,595 stb."
+  },
+  {
+   "id": "ORL-02",
+   "text": "Ekene-6 end of well summary. Top of the Ekene Sand at 1546 m TVD and base at 1580 m TVD, 34 m of gross sand, with the top above the 1560 m TVD oil-water contact. The well was completed as an oil producer and came on stream on 2020-09-01 at 90 bopd."
+  },
+  {
+   "id": "ORL-03",
+   "text": "Static pressure survey on 2022-01-01: average reservoir pressure 2,378 psia at the 1560 m TVD datum, down from 3200 psia initial. Cumulative field oil at the survey was 195,408 stb."
+  },
+  {
+   "id": "ORL-04",
+   "text": "Voidage replacement ratio target: 0.85 in the first month of injection, rising by 0.04 a month to 1.05 from the sixth month. Cumulative VRR at the end of 2025 is 1.035."
+  },
+  {
+   "id": "ORL-05",
+   "text": "Year end report 2025-12-01. Ekene-6 24.0 bopd at 45.0 percent water cut; Ekene-3 26.6 bopd at 25.0 percent; Ekene-1 29.4 bopd at 8.0 percent; Ekene-5 38.5 bopd, still water free."
+  },
+  {
+   "id": "ORL-06",
+   "text": "Water breakthrough at Ekene-1 dated 2025-06-01, the last of the three flooded producers. Oil 34.0 bopd. Ekene-6 water cut is now 23.0 percent."
+  },
+  {
+   "id": "ORL-07",
+   "text": "Rates on 2023-01-01, the first day of injection: Ekene-1 32.2 bopd, Ekene-3 36.2 bopd, Ekene-5 41.4 bopd and Ekene-6 42.7 bopd, no water."
+  },
+  {
+   "id": "ORL-08",
+   "text": "Field report 2025-01-01. Ekene-6 44.1 bopd with 5.0 bwpd, a water cut of 10.2 percent. Ekene-3 39.1 bopd with 0.7 bwpd. Ekene-1 35.9 bopd and Ekene-5 43.2 bopd, both water free."
+  },
+  {
+   "id": "ORL-09",
+   "text": "Static pressure survey on 2023-01-01: average reservoir pressure 2,096 psia at the datum, close to the 2000 psia bubble point, with cumulative field oil of 261,475 stb. The waterflood started the same day to hold pressure above the bubble point."
+  },
+  {
+   "id": "ORL-10",
+   "text": "Field morning report 2021-01-01. Ekene-1 77.3 bopd, Ekene-3 87.9 bopd, Ekene-5 75.7 bopd and Ekene-6 79.9 bopd. All four producers are water free and declining as expected under primary depletion."
+  },
+  {
+   "id": "ORL-11",
+   "text": "Primary decline fits: Ekene-1 exponential with Di 0.0012 per day; Ekene-3 hyperbolic with b 0.5 and Di 0.002 per day; Ekene-5 harmonic with Di 0.0015 per day; Ekene-6 hyperbolic with b 0.35 and Di 0.001 per day."
+  },
+  {
+   "id": "ORL-12",
+   "text": "Produced water from the flooded producers passes a hydrocyclone and a degasser. Oil in water measured 25 mg/l on 2025-04-08 against the 40 mg/l discharge limit."
+  },
+  {
+   "id": "ORL-13",
+   "text": "Injection started on 2023-01-01. Ekene-2 took 92.7 bwpd at a wellhead pressure of 2,235 psi and Ekene-4 took 61.8 bwpd at 2,174 psi, a 60 to 40 split."
+  },
+  {
+   "id": "ORL-14",
+   "text": "Static pressure survey on 2022-07-01: average reservoir pressure 2,226 psia at the 1560 m TVD datum, down from 3200 psia initial. Cumulative field oil at the survey was 230,985 stb."
+  },
+  {
+   "id": "ORL-15",
+   "text": "The test separator on the Ekene platform operates at 150 psig and 120 F. It was recalibrated on 2021-08-03 and the oil meter factor set to 0.998."
+  },
+  {
+   "id": "ORL-16",
+   "text": "Pressure surveys under the flood: 2,098 psia on 2024-02-01 and 2,119 psia on 2025-08-01. Pressure is recovering slowly with the voidage replacement ratio held at 1.05."
+  },
+  {
+   "id": "ORL-17",
+   "text": "Static pressure survey on 2020-07-01: average reservoir pressure 3,038 psia at the 1560 m TVD datum, down from 3200 psia initial. Cumulative field oil at the survey was 38,864 stb."
+  },
+  {
+   "id": "ORL-18",
+   "text": "Ekene-3 end of well summary. Top of the Ekene Sand at 1541 m TVD and base at 1570 m TVD, 29 m of gross sand, with the top above the 1560 m TVD oil-water contact. The well was completed as an oil producer and came on stream on 2020-03-01 at 150 bopd."
+  },
+  {
+   "id": "ORL-19",
+   "text": "Water breakthrough at Ekene-6 dated 2024-03-01, the first producer to see injected water. Oil rate 54.7 bopd. Water sampling started to confirm injection water chemistry."
+  },
+  {
+   "id": "ORL-20",
+   "text": "Minor diesel spill of 0.5 bbl on deck during bunkering on 2022-08-09. It was contained in the drip trays and cleaned up with absorbent pads, with no discharge to sea. The bunkering hose coupling was replaced."
+  },
+  {
+   "id": "ORL-21",
+   "text": "Water breakthrough at Ekene-3 dated 2024-09-01, with oil at 41.5 bopd. Ekene-6 water cut has reached 3.7 percent."
+  },
+  {
+   "id": "ORL-22",
+   "text": "Well test Ekene-3 on 2022-06-01: 45.2 bopd through the test separator over 12 hours, GOR 400 scf/stb, no water."
+  }
+ ],
+ "queries": [
+  {
+   "id": "O1",
+   "text": "water cut reported for Ekene-6 at the close of 2025"
+  },
+  {
+   "id": "O2",
+   "text": "pressure in the reservoir when water injection started"
+  },
+  {
+   "id": "O3",
+   "text": "first day oil rate of Ekene-3"
+  },
+  {
+   "id": "O4",
+   "text": "discharge limit for oil in produced water"
+  },
+  {
+   "id": "O5",
+   "text": "voidage replacement target during injection"
+  }
+ ],
+ "judgments": {
+  "O1": {
+   "ORL-02": 0,
+   "ORL-04": 0,
+   "ORL-05": 3,
+   "ORL-06": 1,
+   "ORL-08": 1,
+   "ORL-19": 1,
+   "ORL-21": 1
+  },
+  "O2": {
+   "ORL-01": 1,
+   "ORL-03": 1,
+   "ORL-07": 1,
+   "ORL-09": 3,
+   "ORL-13": 1,
+   "ORL-14": 1,
+   "ORL-16": 1,
+   "ORL-17": 1
+  },
+  "O3": {
+   "ORL-10": 1,
+   "ORL-11": 1,
+   "ORL-17": 0,
+   "ORL-18": 3,
+   "ORL-21": 1,
+   "ORL-22": 1
+  },
+  "O4": {
+   "ORL-12": 3,
+   "ORL-19": 0,
+   "ORL-20": 1
+  },
+  "O5": {
+   "ORL-04": 3,
+   "ORL-13": 1,
+   "ORL-16": 2
+  }
+ },
+ "answers": [
+  {
+   "query": "O1",
+   "text": "Ekene-6 water cut was 45.0 percent on 2025-12-01 with oil at 24.0 bopd, up from 23.0 percent at mid-year.",
+   "citations": [
+    "ORL-05"
+   ]
+  },
+  {
+   "query": "O2",
+   "text": "Average reservoir pressure was 2,096 psia on 2023-01-01, just above the 2000 psia bubble point, after 261,475 stb of field oil.",
+   "citations": [
+    "ORL-09"
+   ]
+  },
+  {
+   "query": "O3",
+   "text": "Ekene-3 came on stream on 2020-03-01 at 150 bopd with a GOR of 400 scf/stb, from 29 m of gross sand below a 1541 m TVD top.",
+   "citations": [
+    "ORL-18"
+   ]
+  },
+  {
+   "query": "O4",
+   "text": "The discharge limit is 40 mg/l; the 2025-04-08 sample read 25 mg/l, under the 30 mg/l action level.",
+   "citations": [
+    "ORL-12"
+   ]
+  },
+  {
+   "query": "O5",
+   "text": "The VRR target was 0.85 in the first month of injection and 1.05 from the sixth, with the injection split 60 to 40 between Ekene-2 and Ekene-4.",
+   "citations": [
+    "ORL-04",
+    "ORL-13"
+   ]
+  }
+ ],
+ "retrieved": {
+  "O1": [
+   "ORL-06",
+   "ORL-05",
+   "ORL-08",
+   "ORL-21"
+  ],
+  "O2": [
+   "ORL-19",
+   "ORL-09",
+   "ORL-13",
+   "ORL-04"
+  ],
+  "O3": [
+   "ORL-07",
+   "ORL-19",
+   "ORL-11",
+   "ORL-18"
+  ],
+  "O4": [
+   "ORL-12",
+   "ORL-20",
+   "ORL-04",
+   "ORL-19"
+  ],
+  "O5": [
+   "ORL-04",
+   "ORL-16",
+   "ORL-20",
+   "ORL-19"
+  ]
+ }
+}

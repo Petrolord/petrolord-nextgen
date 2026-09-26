@@ -1,0 +1,669 @@
+{
+ "slug": "appliedai",
+ "prefix": "d5",
+ "name": "Applied AI and Language Models",
+ "pathOrder": 70,
+ "module": "data_ai",
+ "prerequisite": null,
+ "repo": "/root/wt-dai-d5-nextgen",
+ "branch": "feat/d5-appliedai-course",
+ "goldens": [],
+ "goldensNote": "EMPTY BY DECISION. The vendored golden test-data/dataai/goldens/evaluate_cases.json carries 282 cases of oracle output (small stated corpora, the Ekene documents at many settings). Naming it here would let numsweep resolve a lesson literal against a figure the digest never prints. Every figure a lesson may quote is recomputed by the engine and printed in the digest (the hand set, the near-tie passages, the stated ranking and the within-bin rows are typed in d5_dump.mjs as stated inputs), so the harvested truth file carries it.",
+ "engines": [
+  "engines/dataai/evaluate.js",
+  "engines/dataai/ml.js",
+  "lib/stats/stats.js",
+  "lib/conventions/percentile.js"
+ ],
+ "enginesVendoredAt": "NextGen packages/engines, sha-identical with petrolord-engines f50251d (engines PR #258, squash-merged, the wording repair on top of the engine PR #257 at 1906182: the nDCG-undefined note names its case and the Murphy basis anchors WBC to Stephenson, Coelho and Jolliffe 2008 eq. 7; no number changed, fields.json byte-identical across the re-cut). TWENTY-THREE paths walked by vendor_appliedai.sh over a git-archive export of the commit with the jest suite as the only seed: six reached by the walk (the suite, evaluate.js, ml.js, lib/lp/simplex.js through ml.js, lib/stats/stats.js, lib/conventions/percentile.js) and seventeen NAMED (the golden and the library pins, the five ekene-docs fixtures and their README, three ekene-dynamic files the suite's consistency gate reads, the fixture writer, the oracle, the pin writer, the timing script, FINDINGS and the negative control). 23 paths x 4 proofs = 92, all IDENTICAL. The canonical pin stays 54cf7c4; 16 paths are ledgered as kind extra, group d5-appliedai-course, at their f50251d blobs; ml.js stays with its owner group at the same blob; lib/stats, percentile.js, simplex.js and the ekene-dynamic files already match the manifest. PRIOR-COURSE PROOF (prove_prior_courses.sh): the committed D1 dataqc, D2 mlcore, D3 facies and D4 forecastml kits rebuild digest.txt, fields.json and precision.json byte-identical, and digest.txt and fields.json match their waves.json pins; vendored suites at f50251d: evaluate 2710/2710, all five dataai suites 5039/5039.",
+ "constants": {
+  "$comment": "The engine exports DEFAULTS (K1 1.2, B 0.75, K 10, RELEVANT_GRADE 1, MAX_GRADE 10, TIE_DIGITS 12, BINS 10, MAX_BINS 100, N_BOOT 2000, MAX_BOOT 100000, LEVEL 0.95, LEVELS 0.8/0.9/0.95/0.99, MAX_DOCS 5000, MAX_CHARS 20000, MAX_QUERIES 1000, MAX_K 1000, MAX_RECORDS 5000, MAX_FIELDS 50, MAX_ANSWERS 5000, MAX_ROWS 100000, MAX_LABELS 50, MAX_VALUES 10000) and ENGLISH_STOP_WORDS (318 words). Digest section 1 prints them from the export. None is graded."
+ },
+ "leakScales": [
+  "1",
+  "x1e3",
+  "x1e-3",
+  "x1e2",
+  "x1e-2"
+ ],
+ "plan": {
+  "state": "SHIPPED FOR REVIEW: foundation, 78 lessons, 396 questions (three key-truth audits, 2 wrong keys fixed), post-audit digest additions and lesson fixes, and the five migrations 20261104_d5_appliedai_* (HELD, not applied), the three JSON capstone case files, the go-live with an engine ledger, a second route in SQL and 57 traps, and the owner's apply_d5_appliedai.sh (content pinned). Local scratch dry run clean with idempotence, five negative controls and the 36-control sweep."
+ },
+ "history": {
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The engine's review changes (extraction precision, recall and micro and macro F1 added beside accuracy, the near-tie golden) landed before its merge and before any lesson was written; they are provenance. The digest describes the engine as it is."
+ },
+ "scopeSeams": {
+  "logistic regression, log loss and classifiers": "OWNED BY D2 mlcore. D5 imports logLoss from engines/dataai/ml.js, prints what it returns with its eps and clipping count, and takes the calibration set's probabilities as given inputs.",
+  "data quality and near-duplicate identifiers": "OWNED BY D1 dataqc. D5 uses the exact duplicate EKD-058 for its tie only.",
+  "the bootstrap as a general method, and P labels for outcomes": "OWNED BY the uncertainty course and D4 forecastml. D5's interval is a percentile of a statistic, labelled as a parameter percentile, never P10, P50 or P90.",
+  "forecasting": "OWNED BY D4 forecastml.",
+  "clustering and classification": "OWNED BY D3 facies.",
+  "language models themselves": "NOT BUILT. D5 evaluates the retrieval, answers and extractions a language-model copilot would produce, using fixture text; no model runs anywhere in the engine, the fixtures, the gates or the course, and no graded value depends on model output (digest section 4)."
+ },
+ "namingCollisions": {
+  "relevant": "a judged grade at or above the stated threshold, grade 1 by default; related is grade 1 itself. Sections 11, 24.",
+  "hallucination": "an unsupported claim, named with the engine's reason. Sections 10, 15, 24.",
+  "grounded": "supported by a cited and retrieved passage; never a statement about truth. Sections 15, 24.",
+  "accuracy": "correct cells over cells, named with its denominator. Sections 14, 24.",
+  "score": "a BM25 score or TF-IDF cosine, named with its method; never a probability. Sections 6, 7, 24.",
+  "AI": "the system being evaluated; the engine runs no model. Sections 1, 4, 24."
+ },
+ "openItems": {
+  "ENGINE FINDINGS": "None open. The foundation's two wording findings went to engines PR #258 (merged as f50251d) before any lesson: the nDCG-undefined note now states its exact case (no judged documents, the 1 judged document at grade 0, or the N judged documents all at grade 0), and the Murphy basis names WBC as the fifth term of Stephenson, Coelho and Jolliffe (2008) eq. 7, which carries the factor 2, so WBC as the paper labels it is twice the pooled within-bin covariance. The engine always matched the paper; the course teaches the paper's labelling (digest section 19 derives WBC = 2 x the pooled covariance on six stated rows and asserts it on the Ekene rows). The foundation re-cut at f50251d; fields.json is byte-identical. The three FINDINGS open questions are decided by the course as recorded under decisions.",
+  "DECISION relevantGrade": "FINDINGS open question 1 (default grade 1 against 2). Kept at the engine default, grade 1 (trec_eval); the digest teaches the threshold as a stated setting and prints every mean at grade 1 and grade 2 (section 11), where the MAP order of the two systems reverses. The Professional capstone grades a MAP at grade 2 with the grade stated.",
+  "DECISION end of 2025": "FINDINGS open question 2. Kept as a teaching example of how a deterministic check reads text (section 15); no engine change requested.",
+  "DECISION bin edges": "FINDINGS open question 3. The course states the engine's edge rule and the library's (section 19, with the library table DERIVED in the dump and labelled so); the Expert capstone grades three Murphy terms at eight bins, where 2 dp probabilities sit on the interior edges 0.25, 0.5 and 0.75, so the library rule is a discriminated wrong method.",
+  "DECISION ECE not graded": "On the Ekene calibration rows every bin is over-confident at 5, 10 and 15 bins, so ECE equals mean probability minus the base rate whatever the bins (digest section 18, asserted). The first capstone cut graded ECE at eight bins and the discriminate sweep found it blind to the bin count and the edge rule; it was replaced by the Murphy reliability term, which both move.",
+  "DECISION capstone values kept off coincidences": "Every graded value is checked against the vendored golden, the digest and every sibling wave's answer key (gate_capstone_leak directions 3, 6 and 7). The first cuts collided three times, each a simple fraction or a near-coincidence: the Associate capstone's supported fraction 4/7 printed in the digest as a system B F1, its MRR 17/24 in the golden, and the Expert capstone's reliability within ten tolerances of a golden number. The Associate capstone now runs five queries at cutoff 4 and five answers (one citing a passage that was not retrieved, so ignoring the retrieved lists is a discriminated wrong method), and the Expert capstone draws 122 calibration rows (a first choice of 124 put the WBC term within ten tolerances of a fixture BM25 score at a shifting of 1000); the Professional bootstrap runs on seed 44 (seed 41 put the four-decimal rendering of its bound inside a digest figure). Every value clears the golden, digest, sibling and fixture sweeps.",
+  "DECISION Associate capstone cutoff 4": "The Associate capstone states cutoff 4, where the teaching cutoff is 5: at 4 no capstone query has a tie at the cutoff and the mean recall and MRR clear the coincidence sweeps; the teaching digest keeps 5, the systems' own cutoff."
+ },
+ "cleared_claims": [
+  "The largest gap, the MCE, is in bin 7, where 3 rows carry a mean probability of 0.723333 and none is relevant."
+ ],
+ "fieldsDiscrimination": {
+  "orlu_bm25_idf_pressure": "the tfidf smooth idf, robertson idf without the one, log base ten, the whole ekene corpus, df plus one",
+  "orlu_o1_bm25_top_score": "b zero, k1 two, stop list on, second ranked, the whole ekene corpus, tfidf cosine quoted",
+  "orlu_o4_tfidf_top_cosine": "sublinear tf, stop list on, second ranked, bm25 score quoted, the whole ekene corpus",
+  "orlu_bm25_mean_recall_at4": "cutoff two, cutoff three, relevant at grade two, precision quoted, tfidf runs, relevant at grade three",
+  "orlu_bm25_mrr_at4": "hit rate quoted, map quoted, relevant at grade two, cutoff one, b zero runs",
+  "orlu_answers_supported_fraction": "retrieved lists ignored, per answer mean, answer with an unretrieved citation dropped, numbers only, fully supported answers share",
+  "nnewi_p_map_at5_grade2": "relevant at grade one, system q, mrr quoted, cutoff three, grade three",
+  "nnewi_q_ndcg_at5_exponential": "linear gain, system p, cutoff three, ideal from the retrieved only, map quoted",
+  "nnewi_short_mean_token_f1": "exact match rate, token precision mean, token recall mean, exact matches counted out, raw strings without normalising",
+  "nnewi_extraction_macro_f1": "micro f1, macro accuracy, overall precision, text fields only, overall recall",
+  "nnewi_paired_ndcg_upper": "lower bound, unpaired, next seed, level ninety, q minus p, average precision",
+  "nnewi_q_supported_fraction": "retrieved lists ignored, per answer mean, numbers only, fully supported answers share",
+  "awka_kappa_unweighted": "observed agreement, linear weights, quadratic weights, relevant or not at two",
+  "awka_kappa_linear": "unweighted, quadratic weights, one minus observed disagreement, relevant or not at one",
+  "awka_brier": "log loss quoted, ece quoted, mean absolute difference, without the within bin terms",
+  "awka_reliability_bins8": "ten bins, the library edge rule, ece quoted, resolution quoted",
+  "awka_resolution_bins8": "ten bins, reliability quoted, uncertainty quoted, the library edge rule",
+  "awka_wbc_bins8": "within bin variance, ten bins, without the factor two, the library edge rule"
+ },
+ "cleared_claimsNote": "Read by hand: the reliability table prints bin 7 with 3 rows, mean probability 0.723333 and observed frequency 0.000000, and the sentence says exactly that.",
+ "digest": {
+  "lines": 1332,
+  "sections": 24,
+  "md5": "3cf3393ace3b3324a01ceb9128632d1d",
+  "sha256": "f382e3b952532f29de4df5891dbc499de2f066bb3119bf6dff0387a2a15ef903"
+ },
+ "fields": {
+  "count": 18,
+  "sha256": "de3613c2cfca49d6dc5b96dd5a45de36f8d2837b2147942a0c786200a51e67f1",
+  "keys": [
+   "orlu_bm25_idf_pressure",
+   "orlu_o1_bm25_top_score",
+   "orlu_o4_tfidf_top_cosine",
+   "orlu_bm25_mean_recall_at4",
+   "orlu_bm25_mrr_at4",
+   "orlu_answers_supported_fraction",
+   "nnewi_p_map_at5_grade2",
+   "nnewi_q_ndcg_at5_exponential",
+   "nnewi_short_mean_token_f1",
+   "nnewi_extraction_macro_f1",
+   "nnewi_paired_ndcg_upper",
+   "nnewi_q_supported_fraction",
+   "awka_kappa_unweighted",
+   "awka_kappa_linear",
+   "awka_brier",
+   "awka_reliability_bins8",
+   "awka_resolution_bins8",
+   "awka_wbc_bins8"
+  ]
+ },
+ "gates": {
+  "structure.py": {
+   "md5": "6dff861a4175a4ffd9e81db109f091bc",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "prove_prior_courses.sh": {
+   "md5": "ef02f79b516e73e1375fd47505f3a48a",
+   "command": "bash prove_prior_courses.sh",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PRIOR COURSES UNCHANGED: D1, D2, D3, D4 digests, fields and precision rebuild byte-identical against /root/wt-dai-d5-nextgen/packages/engines"
+  },
+  "scaffold.py --check": {
+   "md5": "43d6b234727d6d62f8ce4061571e5976",
+   "command": "python3 scaffold.py --check",
+   "expected": 0,
+   "exit": 0,
+   "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
+  },
+  "d5_capstone.mjs": {
+   "md5": "707b41d9075df61a97d7ad46df348e88",
+   "command": "node d5_capstone.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d5_capstone: 109 label-and-call, scenario, tie, exclusion and seed assertions run, 0 failed"
+  },
+  "make_fields.mjs": {
+   "md5": "d1a67459438bf6713dda62c1691c8fc1",
+   "command": "node make_fields.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d5_capstone: 109 label-and-call, scenario, tie, exclusion and seed assertions run, 0 failed"
+  },
+  "make_fields.mjs NEGATIVE CONTROL": {
+   "md5": "d1a67459438bf6713dda62c1691c8fc1",
+   "command": "node make_fields.mjs --bare-stated-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "d5_capstone: 109 label-and-call, scenario, tie, exclusion and seed assertions run, 0 failed"
+  },
+  "oracle_check.py": {
+   "md5": "d323ee61975a9bd36248abe7a828543a",
+   "command": "python3 oracle_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 1 s; the capstone runs re-retrieved and equal; worst relative difference 3.38e-16; disagreements: 0"
+  },
+  "oracle_check.py NEGATIVE CONTROL": {
+   "md5": "d323ee61975a9bd36248abe7a828543a",
+   "command": "python3 oracle_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: nnewi_q_ndcg_at5_exponential was moved by ten tolerances; caught"
+  },
+  "discriminate.mjs": {
+   "md5": "39d4a88d884f84b2ec7bb05c816075b2",
+   "command": "node discriminate.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "CLOSEST MISS ACROSS THE WHOLE SWEEP: awka_reliability_bins8 via the_library_edge_rule, 3.772e+2 tolerances away"
+  },
+  "discriminate.mjs NEGATIVE CONTROL": {
+   "md5": "39d4a88d884f84b2ec7bb05c816075b2",
+   "command": "node discriminate.mjs --slack-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: tolerances multiplied by 1000000000000. Expected 18 WEAK routes, got 18."
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "command": "/root/dc-wavekit/digestrepro.sh dai-wip-appliedai /root/wt-dai-d5-nextgen",
+   "expected": 0,
+   "exit": 0,
+   "summary": "d5_dump: 1128 label-and-call, measurement and claim assertions run, 0 failed; 24 sections"
+  },
+  "digestprose.mjs": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-appliedai",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] /root/dai-wip-appliedai/digest.txt: 1332 line(s), 24 section title(s) and 116 in-body marker(s) swept against their blocks, 32 history framings, 42 engine pin(s); 0 warned for a human read and 0 framed as c"
+  },
+  "digestprose.mjs --selftest": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] selftest OK: the founding heading case is caught by the corrected pairing and missed by the broken one; both real keyword cases fail inside a teaching section; FC3 line 683 WARNS where the keyword family ca"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py dai-wip-appliedai",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (1 sentence(s) cleared by name in wave.json)"
+  },
+  "digestfigures.py --selftest": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] selftest OK"
+  },
+  "digestpromise.py": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py dai-wip-appliedai",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 completeness problem(s), all checks applied"
+  },
+  "digestpromise.py --selftest": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "command": "python3 /root/dc-wavekit/digestleak.py dai-wip-appliedai",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "command": "python3 /root/dc-wavekit/collisions.py dai-wip-appliedai",
+   "expected": 0,
+   "exit": 0,
+   "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py dai-wip-appliedai",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[gradeprecision] /root/dai-wip-appliedai: 18 graded field(s), 18 OF 18 CLASSIFIED against 1 precision clause(s) in the digest header and 6 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "command": "python3 /root/dc-wavekit/briefleak.py dai-wip-appliedai",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 graded answer(s) reachable from this brief"
+  },
+  "briefcheck.py": {
+   "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
+   "command": "python3 /root/dc-wavekit/briefcheck.py dai-wip-appliedai",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
+  },
+  "gate_capstone_leak.mjs": {
+   "md5": "ebadf3efbf6aa9050acf264976840e3d",
+   "command": "node gate_capstone_leak.mjs --no-banks",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
+   "md5": "ebadf3efbf6aa9050acf264976840e3d",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-value",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
+   "md5": "ebadf3efbf6aa9050acf264976840e3d",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-input",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
+   "md5": "ebadf3efbf6aa9050acf264976840e3d",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-name",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
+   "md5": "ebadf3efbf6aa9050acf264976840e3d",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
+  },
+  "gate_copy_rule.py": {
+   "md5": "9c7e40ded017a8c919f6eff3589dc207",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "9c7e40ded017a8c919f6eff3589dc207",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got 2"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL bank": {
+   "md5": "9c7e40ded017a8c919f6eff3589dc207",
+   "command": "python3 gate_copy_rule.py --plant-bank",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in a bank string; expected 2 caught, got 2"
+  },
+  "gate_typed_literals.py": {
+   "md5": "c0b9a6b1ce31118957e5eccee1232a5b",
+   "command": "python3 gate_typed_literals.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "UNEXPLAINED TYPED NUMBERS: 0"
+  },
+  "gate_typed_literals.py NEGATIVE CONTROL": {
+   "md5": "c0b9a6b1ce31118957e5eccee1232a5b",
+   "command": "python3 gate_typed_literals.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a typed 4.217 was planted in a printed line; caught 1"
+  },
+  "gate_vocabulary.py": {
+   "md5": "449ef2353f1943494070de0b86827fe9",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "exemptions declared: 1, dead: []"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "449ef2353f1943494070de0b86827fe9",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected a P label and an AI claim caught; got ['a P label', 'an AI or model claim about a method']"
+  },
+  "truth_check.py": {
+   "md5": "b20fbb2eb8f9d9c93cd88ee02b448313",
+   "command": "python3 truth_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "truth_check: truth-appliedai.json (785 digest lines) IS the harvest of digest.txt"
+  },
+  "truth_check.py NEGATIVE CONTROL": {
+   "md5": "b20fbb2eb8f9d9c93cd88ee02b448313",
+   "command": "python3 truth_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a line was planted in the scratch digest; expected a mismatch, caught"
+  },
+  "numsweep_appliedai.mjs": {
+   "md5": "17cb0aa7f5794fec60c5ee435f4e99e8",
+   "command": "node numsweep_appliedai.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "serialised floats outside an exact reason quote: 0"
+  },
+  "numsweep_appliedai.mjs --selftest": {
+   "md5": "17cb0aa7f5794fec60c5ee435f4e99e8",
+   "command": "node numsweep_appliedai.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "numsweep_appliedai selftest OK"
+  },
+  "lengths.py": {
+   "md5": "16a799f6b8ec0b2e450051f529f63498",
+   "command": "python3 lengths.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "tiers read: 3  out of band: 0  not written yet: 0"
+  },
+  "lengths.py --selftest": {
+   "md5": "16a799f6b8ec0b2e450051f529f63498",
+   "command": "python3 lengths.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
+  },
+  "gate_claims.mjs": {
+   "md5": "f5003ea1e5a90ab10da713714a638cd8",
+   "command": "node gate_claims.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_claims.mjs NEGATIVE CONTROL": {
+   "md5": "f5003ea1e5a90ab10da713714a638cd8",
+   "command": "node gate_claims.mjs --plant-a-recon-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 1."
+  },
+  "bank d5b_m01.py": {
+   "md5": "a5cdfe89a52c36416f90cc032ce9cc69",
+   "command": "python3 d5b_m01.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5b_m02.py": {
+   "md5": "6087e24ef84389187c00d7f9ad241b58",
+   "command": "python3 d5b_m02.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5b_m03.py": {
+   "md5": "2e0ad2a9ed629252b953c7a2a395cef8",
+   "command": "python3 d5b_m03.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5b_m04.py": {
+   "md5": "8278d594bc9f6aecf35de8b3208d0247",
+   "command": "python3 d5b_m04.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5b_m05.py": {
+   "md5": "a9b3216453ca1573c3d25455a9079f1a",
+   "command": "python3 d5b_m05.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5b_m06.py": {
+   "md5": "90e1683a352cf7c52fa224f3a04a70f0",
+   "command": "python3 d5b_m06.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5b_exam.py": {
+   "md5": "02226fec428c8f1e4b1a0bda7e2b4034",
+   "command": "python3 d5b_exam.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "lengthtails.py d5b": {
+   "md5": "3ad5008fafb05e024e9c9be8073983e7",
+   "command": "python3 /root/dc-wavekit/lengthtails.py banks --prefix d5b",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[lengthtails] worst single strategy on any bank: 33.3 pct (chance 25.0, refuse above 40.0)"
+  },
+  "dupaxes.py d5b": {
+   "md5": "de6a2216f5b921b10022ed60be07df1b",
+   "command": "python3 /root/dc-wavekit/dupaxes.py banks --prefix d5b --threshold 0.45",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[dupaxes] 0 pair(s) at or above 0.45  within=0  exam-vs-module=0  module-vs-module=0"
+  },
+  "litsweep.py d5b": {
+   "md5": "76fcabb91a02adf5359d75f0d1c8add6",
+   "command": "python3 /root/dc-wavekit/litsweep.py dai-wip-appliedai --prefix d5b",
+   "expected": 0,
+   "exit": 0,
+   "summary": "row: | Q13 | Ekene-6 water cut at the end of 2025 | 7 | 1 | 0 | 4 | 2 | 45.0 percent |"
+  },
+  "leakage.mjs beginner": {
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "command": "node /root/dc-wavekit/leakage.mjs dai-wip-appliedai --banks banks --tier beginner",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "bank d5i_m01.py": {
+   "md5": "be6714b40634ca0bb7c83f10ca8cb486",
+   "command": "python3 d5i_m01.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5i_m02.py": {
+   "md5": "ae39b18e56b45d748004219769681657",
+   "command": "python3 d5i_m02.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5i_m03.py": {
+   "md5": "65bd15a569b9e564d0bb22e72c735834",
+   "command": "python3 d5i_m03.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5i_m04.py": {
+   "md5": "b2d56bd51f7f759e89b8bc17dd42f01d",
+   "command": "python3 d5i_m04.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5i_m05.py": {
+   "md5": "7bab2ef3904787a5aa1bf4ba8ee2dc46",
+   "command": "python3 d5i_m05.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5i_m06.py": {
+   "md5": "2956fc6ababf357f02125f2d03768da0",
+   "command": "python3 d5i_m06.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5i_exam.py": {
+   "md5": "06d87f1e497408cc4c6b77fe5c8ed4c2",
+   "command": "python3 d5i_exam.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "lengthtails.py d5i": {
+   "md5": "3ad5008fafb05e024e9c9be8073983e7",
+   "command": "python3 /root/dc-wavekit/lengthtails.py banks --prefix d5i",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[lengthtails] worst single strategy on any bank: 38.9 pct (chance 25.0, refuse above 40.0)"
+  },
+  "dupaxes.py d5i": {
+   "md5": "de6a2216f5b921b10022ed60be07df1b",
+   "command": "python3 /root/dc-wavekit/dupaxes.py banks --prefix d5i --threshold 0.45",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[dupaxes] 0 pair(s) at or above 0.45  within=0  exam-vs-module=0  module-vs-module=0"
+  },
+  "litsweep.py d5i": {
+   "md5": "76fcabb91a02adf5359d75f0d1c8add6",
+   "command": "python3 /root/dc-wavekit/litsweep.py dai-wip-appliedai --prefix d5i",
+   "expected": 0,
+   "exit": 0,
+   "summary": "row: System A makes 49 claims and 47 are supported, a pooled supported fraction of 0.959184; 20 of the 22 answers with a claim are full"
+  },
+  "leakage.mjs intermediate": {
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "command": "node /root/dc-wavekit/leakage.mjs dai-wip-appliedai --banks banks --tier intermediate",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "bank d5a_m01.py": {
+   "md5": "7ed8961e79a9ef0c21da23d210b9e1fc",
+   "command": "python3 d5a_m01.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5a_m02.py": {
+   "md5": "b316cceff5c1d16c998826d3d6104cdd",
+   "command": "python3 d5a_m02.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5a_m03.py": {
+   "md5": "de6e778ce5474a2ac02923c25466b04e",
+   "command": "python3 d5a_m03.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5a_m04.py": {
+   "md5": "9e97d21fef887a6e8b4e5f15e790c72f",
+   "command": "python3 d5a_m04.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5a_m05.py": {
+   "md5": "1ff773640e2fa9bbf10a4b117cabe788",
+   "command": "python3 d5a_m05.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5a_m06.py": {
+   "md5": "62c00a1034330d9e04a3a329d9a924e5",
+   "command": "python3 d5a_m06.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "bank d5a_exam.py": {
+   "md5": "b82de6dbb4c8e5d1a4dc5705202f1c32",
+   "command": "python3 d5a_exam.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "all banks in this batch passed every gate"
+  },
+  "lengthtails.py d5a": {
+   "md5": "3ad5008fafb05e024e9c9be8073983e7",
+   "command": "python3 /root/dc-wavekit/lengthtails.py banks --prefix d5a",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[lengthtails] worst single strategy on any bank: 35.6 pct (chance 25.0, refuse above 40.0)"
+  },
+  "dupaxes.py d5a": {
+   "md5": "de6a2216f5b921b10022ed60be07df1b",
+   "command": "python3 /root/dc-wavekit/dupaxes.py banks --prefix d5a --threshold 0.45",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[dupaxes] 0 pair(s) at or above 0.45  within=0  exam-vs-module=0  module-vs-module=0"
+  },
+  "litsweep.py d5a": {
+   "md5": "76fcabb91a02adf5359d75f0d1c8add6",
+   "command": "python3 /root/dc-wavekit/litsweep.py dai-wip-appliedai --prefix d5a",
+   "expected": 0,
+   "exit": 0,
+   "summary": "... 1 more, pass --review-all to print them"
+  },
+  "leakage.mjs advanced": {
+   "md5": "e1ed8de10de5778302d00d7e5b357287",
+   "command": "node /root/dc-wavekit/leakage.mjs dai-wip-appliedai --banks banks --tier advanced",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> fatal downward leaks: 0   same-tier answer prints: 0"
+  },
+  "check-bank-sources.py": {
+   "md5": "ab6de6165648fe4580fa8ab2246ab46b",
+   "command": "python3 /root/wt-dai-d5-nextgen/tools/course-banks/check-bank-sources.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[course-banks] 546 committed pair(s) under /root/wt-dai-d5-nextgen/tools/course-banks: 546 reproduce, 0 drifted, 0 could not run, 10296 question(s) compared"
+  },
+  "numsweep_appliedai.mjs --banks": {
+   "md5": "17cb0aa7f5794fec60c5ee435f4e99e8",
+   "command": "node numsweep_appliedai.mjs --banks banks",
+   "expected": 0,
+   "exit": 0,
+   "summary": "serialised floats outside an exact reason quote: 0"
+  },
+  "numsweep.mjs (kit) --banks": {
+   "md5": "eb4f52002de4dc8b2ad43e63a90c8a6e",
+   "command": "node /root/dc-wavekit/numsweep.mjs dai-wip-appliedai --banks banks",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> literals with 7+ significant figures checked: 161   unresolved: 0   (47 round literal(s) skipped for trailing zeros, not checked)"
+  },
+  "gate_capstone_leak.mjs --banks": {
+   "md5": "ebadf3efbf6aa9050acf264976840e3d",
+   "command": "node gate_capstone_leak.mjs --banks banks",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  }
+ }
+}

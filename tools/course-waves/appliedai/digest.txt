@@ -1,0 +1,1332 @@
+# D5 TEACHING DIGEST: Applied AI and Language Models
+
+# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The engine FINDINGS record, the oracle, the library pins, the fixture README and the engine source comments are PROVENANCE and not teaching truth.
+
+# PRECISION. Every score, idf, weight, cosine, term contribution, average length, metric (precision, recall, hit rate, reciprocal rank, average precision, DCG, nDCG and their means), F1, accuracy, fraction, agreement, kappa, probability, Brier score and each of its terms, calibration error, log loss, bootstrap mean, bound, difference, share and standard error prints to SIX decimals; counts, ranks, grades, lengths, seeds, replicates and bins are whole numbers; the 12-digit tie key prints at twelve significant digits where the tie rule is shown; very small magnitudes print in exponent form; an engine message is printed verbatim, figures and all.
+
+# ENGINE. engines/dataai/evaluate.js, vendored sha-identical with petrolord-engines f50251d, 1276 lines. It imports lib/stats (mulberry32 and quantile), lib/conventions/percentile.js (parameterPercentileLabel) and, from engines/dataai/ml.js, logLoss. It runs no language model and makes no network call.
+
+# THE DATA. Every Ekene document, query, judgment, answer, label and probability is SYNTHETIC, written for this platform by a stated script, and no language model wrote or scores any of it. No real company, person or incident appears.
+
+# WHAT IS NEVER IN THIS FILE. No capstone field, no capstone dataset and no graded answer. The capstones run their own datasets and the digest never names them.
+
+# THIS COURSE TEACHES NO REPAIR HISTORY. Every section below describes what the engine does today.
+
+# SECTION 1: What this engine computes, and what it declines to compute (owned by Associate m01 and Expert m06)
+
+Every function takes plain arrays and objects and returns either a result object or an object with `error` and `field`, where `field` names the input it refused and the message starts with that name. Every result carries a `basis` block naming its convention, so the working can be printed.
+
+| function | role | what it needs | what it returns |
+| --- | --- | --- | --- |
+| `tokenize` | tokens | text, stopWords | the tokens of one text, their count and how many the stop list removed |
+| `tfidfVectors` | TF-IDF | documents, stopWords, sublinearTf | the vocabulary, each term's document frequency and idf, and every document's unit-length weight vector |
+| `rankTfidf` | TF-IDF | documents, query, k, stopWords, sublinearTf | the query vector, the terms dropped as outside the vocabulary, and the top k by cosine with each term's two weights |
+| `rankBm25` | BM25 | documents, query, k, k1, b, stopWords | N, avgdl, each query term's df and idf, and the top k with each matched term's tf and contribution |
+| `retrieve` | ranking | documents, queries, method, k, k1, b, stopWords, sublinearTf | one ranked list per query, with its ties and whether the cutoff falls inside a tie |
+| `retrievalMetrics` | retrieval scoring | ranking, judgments, k, relevantGrade, gain | precision, recall, hit, reciprocal rank, average precision, DCG, ideal DCG and nDCG at k for one ranked list |
+| `evaluateRetrieval` | retrieval scoring | runs, judgments, k, relevantGrade, gain, noRelevant | the per-query metrics, their means over queries, and the queries excluded or zeroed with the reason |
+| `normalizeAnswer` | short answers | text | the SQuAD normalisation of one string and its tokens |
+| `answerMatch` | short answers | prediction, truth | exact match and token F1 of one answer against the truth |
+| `scoreExtraction` | extraction | labels, predictions, fields | every cell's outcome with its reason, per-field and overall tallies, accuracy, precision, recall and F1, micro and macro |
+| `checkGroundedness` | groundedness | answer, citations, documents, retrieved, numericRelTol | one answer's claims, each supported or unsupported with its reason, and the citation flags |
+| `checkAnswers` | groundedness | answers, documents, runs, numericRelTol | the same for a set of answers, with the pooled supported fraction |
+| `cohenKappa` | agreement | a, b, labels, weights | the confusion counts, observed and expected agreement and Cohen's kappa, unweighted or weighted |
+| `calibration` | calibration | yTrue, probabilities, bins, eps | the Brier score, the reliability table, ECE, MCE, the Murphy decomposition with its closure, and log loss |
+| `bootstrapMean` | uncertainty | values, nBoot, seed, level | a seeded percentile bootstrap interval of a mean, its labels and its standard error |
+| `pairedBootstrap` | comparison | a, b, nBoot, seed, level, paired | the difference of two means with a seeded percentile interval and the share of replicates at or below 0 |
+
+The stated defaults, read from the exported `DEFAULTS`:
+
+| default | value | what it sets |
+| --- | --- | --- |
+| `K1` | 1.2 | BM25 term saturation when k1 is left out |
+| `B` | 0.75 | BM25 length normalisation when b is left out |
+| `K` | 10 | the cutoff when k is left out |
+| `RELEVANT_GRADE` | 1 | the lowest grade that counts as relevant when relevantGrade is left out |
+| `MAX_GRADE` | 10 | the highest judged grade accepted |
+| `TIE_DIGITS` | 12 | the significant digits at which two scores tie |
+| `BINS` | 10 | the calibration bins when bins is left out |
+| `MAX_BINS` | 100 | the most calibration bins accepted |
+| `N_BOOT` | 2000 | the bootstrap replicates when nBoot is left out |
+| `MAX_BOOT` | 100000 | the most bootstrap replicates accepted |
+| `LEVEL` | 0.95 | the interval level when level is left out |
+| `LEVELS` | 0.8, 0.9, 0.95, 0.99 | the interval levels accepted |
+| `MAX_DOCS` | 5000 | the most documents one call accepts |
+| `MAX_CHARS` | 20000 | the most characters in one text |
+| `MAX_QUERIES` | 1000 | the most queries one call accepts |
+| `MAX_K` | 1000 | the largest cutoff accepted |
+| `MAX_RECORDS` | 5000 | the most extraction records accepted |
+| `MAX_FIELDS` | 50 | the most extraction fields accepted |
+| `MAX_ANSWERS` | 5000 | the most answers one groundedness call accepts |
+| `MAX_ROWS` | 100000 | the most calibration rows or rating pairs accepted |
+| `MAX_LABELS` | 50 | the most kappa labels accepted |
+| `MAX_VALUES` | 10000 | the most values one bootstrap accepts |
+
+`ENGLISH_STOP_WORDS` is also exported: 318 words, scikit-learn's list (BSD-3-Clause), sorted.
+
+WHAT THE ENGINE DOES NOT DO, checked here against its exports and its source:
+- It runs no language model. It writes no answer, embeds no text, reranks nothing and asks no model to judge an answer. Its imports are, in full: lib/stats/stats.js, lib/conventions/percentile.js and engines/dataai/ml.js; its source makes no network call.
+- It retrieves by words alone. TF-IDF and BM25 match tokens; there is no dense (embedding) retrieval, no synonym list and no stemming, so "producing" and "produced" are different tokens.
+- It checks a claim by finding it in a passage. It does not decide whether an answer is true, only whether the answer's numbers, dates and quotes appear in the passages it cites.
+- It reads no probability of its own. The calibration set's probabilities are given inputs; fitting the classifier that made them is the machine learning course's subject.
+- Its exported names are, in full: DEFAULTS, ENGLISH_STOP_WORDS, answerMatch, bootstrapMean, calibration, checkAnswers, checkGroundedness, cohenKappa, evaluateRetrieval, normalizeAnswer, pairedBootstrap, rankBm25, rankTfidf, retrievalMetrics, retrieve, scoreExtraction, tfidfVectors, tokenize.
+
+# SECTION 2: The Ekene document set, its queries, its two systems and what is planted in them (owned by Associate m01 and Professional m06 and Expert m04)
+
+Every document, query, judgment, answer, label and probability in this course comes from five fixture files under test-data/dataai/ekene-docs, written by a stated script that reproduces them byte for byte. The Ekene field is synthetic, and every figure a passage shares with the platform's other Ekene data (rates, pressures, fluid properties, well tops) is read from that data at a stated rounding.
+
+THE CORPUS. 60 passages, EKD-001 to EKD-060, each with an id, a type, a well where one applies, a date where one applies, a title and a text. The engine indexes the text alone.
+
+| passage type (fixture) | passages |
+| --- | --- |
+| well_report | 6 |
+| geology_note | 3 |
+| pvt_report | 3 |
+| pressure_survey | 7 |
+| production_note | 14 |
+| injection_note | 4 |
+| drilling_report | 6 |
+| hse_note | 8 |
+| facilities_note | 5 |
+| core_report | 2 |
+| dca_note | 2 |
+
+EKD-058 is an exact copy of EKD-046 (a spill note filed twice), so every method scores the two alike and the tie rule decides their order.
+
+Across the corpus the passages carry 2299 tokens, a mean of 38.316667 (the BM25 avgdl), from 16 to 58 tokens a passage, and a vocabulary of 574 distinct tokens.
+
+THE QUERIES. 24 queries, Q01 to Q24, each with a short reference answer and judgments on a four-grade scale (fixture): 3 answers the query, 2 relevant, 1 related, 0 judged not relevant. Pooling (fixture): every passage in the top 5 of either system (BM25 and TF-IDF, default settings) is judged, plus passages the assessor added; unjudged passages count as grade 0.
+
+| query | text | judged | grade 3 | grade 2 | grade 1 | grade 0 | reference answer (fixture) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Q01 | What was the reservoir pressure when the waterflood started? | 10 | 1 | 0 | 7 | 2 | 2,096 psia |
+| Q02 | initial oil rate of Ekene-3 | 12 | 1 | 0 | 4 | 7 | 150 bopd |
+| Q03 | Which wells were converted to water injectors? | 9 | 2 | 1 | 3 | 3 | Ekene-2 and Ekene-4 |
+| Q04 | bubble point pressure of the Ekene oil | 6 | 1 | 2 | 1 | 2 | 2000 psia |
+| Q05 | When did water break through at Ekene-6? | 7 | 1 | 1 | 3 | 2 | 2024-03-01 |
+| Q06 | depth of the oil-water contact | 8 | 1 | 3 | 4 | 0 | 1560 m TVD |
+| Q07 | volumetric STOIIP estimate for the Ekene Sand | 7 | 1 | 0 | 1 | 5 | 12,139,208 stb |
+| Q08 | Ekene-4 injectivity decline and Hall plot | 10 | 1 | 1 | 2 | 6 | from 0.5 to 0.35 bbl/d/psi |
+| Q09 | dropped object near miss on the drill floor | 7 | 1 | 0 | 0 | 6 | a 2 kg wrench |
+| Q10 | diesel spill during bunkering | 3 | 2 | 0 | 0 | 1 | 0.5 bbl |
+| Q11 | mud weight used to drill the Ekene Sand | 9 | 1 | 2 | 2 | 4 | 12.4 ppg |
+| Q12 | setting depth of the 9.625 in casing shoe | 6 | 1 | 0 | 2 | 3 | 1800 m MD |
+| Q13 | Ekene-6 water cut at the end of 2025 | 7 | 1 | 0 | 4 | 2 | 45.0 percent |
+| Q14 | Is Ekene-5 producing water? | 10 | 1 | 2 | 0 | 7 | water free |
+| Q15 | decline curve parameters for Ekene-1 | 8 | 1 | 0 | 2 | 5 | exponential, Di 0.0012 per day |
+| Q16 | EUR of each producer at the economic limit | 6 | 1 | 0 | 1 | 4 | Ekene-1 91,667 stb, Ekene-3 111,270 stb, Ekene-5 153,506 stb, Ekene-6 105,267 stb |
+| Q17 | oil viscosity at initial reservoir pressure | 8 | 1 | 0 | 1 | 6 | 2.05 cp |
+| Q18 | voidage replacement ratio target for the flood | 8 | 1 | 1 | 1 | 5 | 0.85 rising to 1.05 |
+| Q19 | core plug permeability from Ekene-1 | 7 | 1 | 0 | 1 | 5 | 420 md |
+| Q20 | oil in water limit for produced water discharge | 9 | 1 | 0 | 2 | 6 | 40 mg/l |
+| Q21 | lost circulation while drilling Ekene-4 | 6 | 1 | 0 | 1 | 4 | 15 bbl/hr at 1612 m MD |
+| Q22 | gas-water contact of the Oboro Sand | 6 | 1 | 0 | 1 | 4 | 1935 m MD |
+| Q23 | H2S concentration in the produced gas | 6 | 1 | 0 | 1 | 4 | 0 ppm |
+| Q24 | subsea tree replacement on Ekene-5 | 8 | 0 | 0 | 0 | 8 | (empty) |
+
+183 (query, passage) pairs are judged. Q24 has no passage judged above 0 and an empty reference: nothing in the corpus answers it.
+
+A SECOND ANNOTATOR graded every judged pair again (fixture: an independent second grading of every judged pair, for Cohen kappa (drawn: the primary grade moved one grade with probability 0.25 and two grades with probability 0.05, random.Random(20260925))). The agreement between the two is measured in section 17.
+
+THE TWO SYSTEMS. Two fixed systems answered every query. Each retrieved its top 5 passages, wrote an answer text citing passage ids, and gave a short answer. The answer texts are hand-written fixture text: no model produced them, at build time or at run time.
+
+| system | retriever (fixture) | answers |
+| --- | --- | --- |
+| A | bm25 k 5 k1 1.2 b 0.75, stop list off | 24 |
+| B | tfidf k 5, stop list off | 24 |
+
+Each system's retrieved lists are exactly what `retrieve` returns on the corpus with that method, k 5 and the other settings at their defaults (checked on all 24 queries for both systems).
+
+THE EXTRACTION SET. 6 fields, 30 labelled records (one per source passage, the record id is the passage id), and both systems' predictions. Fixture: One record per source passage (the record id is the passage id). A field is empty where the passage does not state it for that record. water_cut_pct 0 where the passage says the well makes no water. reservoir_pressure_psia is the static reservoir pressure, never a wellhead pressure.
+
+| field | type | absTol (fixture) |
+| --- | --- | --- |
+| well | text | none |
+| date | text | none |
+| event | text | none |
+| oil_rate_bopd | number | 0.05 |
+| water_cut_pct | number | 0.05 |
+| reservoir_pressure_psia | number | 0.5 |
+
+THE CALIBRATION SET. 200 (query, passage) rows (fixture: A relevance classifier on (query, passage) pairs: probability that the passage is relevant (judged grade 2 or 3). Every judged pair plus unjudged pairs (grade 0) drawn with random.Random(7) to make 200 rows. probability = 1 / (1 + exp(-(0.6 x bm25 - 3.0))) rounded to 2 dp, a curve fitted elsewhere, so it is not calibrated here.), each with a probability given to 2 decimals and an outcome, 1 when the judged grade is 2 or 3.
+
+THE PLANTED DEFECTS, every item stated by the fixture record. Each is found by the named engine behaviour, the section that finds it asserts so, and the build fails if any is not found.
+
+| what | where | how it was planted (fixture) | the engine behaviour that finds it |
+| --- | --- | --- | --- |
+| EKD-058 duplicates EKD-046 | corpus | the same text filed twice | the tie rule (section 8) |
+| a query nothing answers | Q24 | no passage judged above 0 | the no-relevant rule (section 11) |
+| a lexical trap | Q14 | the answers say "no water" and "water free", the query says "producing water" | hit 0 at 5 for BM25 (section 9) |
+| an oil column from an unretrieved passage | A Q06 | 20.3 m is in EKD-007, neither cited nor retrieved | an unsupported claim (section 10) |
+| "the end of 2025" read as a number | A Q13 | the year becomes the claim 2025 | an unsupported claim (section 15) |
+| a correct abstention | A Q24 | an empty short answer to a query nothing answers | exact match on two empty answers (section 13) |
+| no answer where retrieval failed | A Q14 | an empty short answer | token F1 0 (section 13) |
+| a rounded figure | B Q01 | 2,100 psia for 2,096 | unsupported at numericRelTol 0, supported at 0.002 (section 15) |
+| a unit change | B Q07 | 12.1 million stb for 12,139,208 stb | an unsupported claim in no passage (section 15) |
+| figures from an uncited passage | B Q03 and B Q12 | rates from EKD-034 and depths from EKD-038 | the reason names where the figure is (section 15) |
+| a wrong date that is still supported | B Q05 | 2024-09-01 is in the cited EKD-027, about another well | supported, yet exact match false (section 15) |
+| a citation that was not retrieved | B Q15 | EKD-059 cited, outside the top 5 | a notRetrieved flag (section 15) |
+| an unknown citation | B Q21 | EKD-061 is not a passage | an unknown flag (section 15) |
+| a fabricated event | B Q24 | a subsea tree replaced on 2024-03-01 | an unsupported date (section 15) |
+| a missed 0 water cut | A EKD-020 | water cut left empty | the outcome missed (section 14) |
+| another well's water cut | A EKD-027 | Ekene-6's 3.7 percent on an Ekene-3 record | the outcome unsupported (section 14) |
+| a wellhead pressure as reservoir pressure | A EKD-036 | 2,289 psi wellhead | the outcome unsupported (section 14) |
+| "near-miss" for "near miss" | A EKD-044 | the hyphen joins the words | the outcome wrong (section 14) |
+| "Ekene 3" for "Ekene-3" | B EKD-003 | a space for the hyphen | the outcome wrong (section 14) |
+| "150 bopd" in a number field | B EKD-003 | a unit inside a number | the outcome wrong, the reason quoting the plain-number rule (section 14) |
+| two records not returned | B EKD-053 and EKD-056 | no prediction for either | scored as all empty (section 14) |
+| values from the wrong well | B EKD-013 and EKD-029 | a well on a field survey, Ekene-6's water cut on Ekene-1 | the outcome unsupported (section 14) |
+
+22 items are planted.
+
+# SECTION 3: Every refusal, with the field it names and the engine's own words (owned by Associate m01 l05 and Associate m02 and Associate m03 and Associate m04 and Associate m05 and Professional m01 and Professional m02 and Professional m03 and Professional m04 and Professional m05 and Professional m06 and Expert m01 and Expert m02 and Expert m03 and Expert m05)
+
+Each row is a real call. The message column is the engine's `error` string, verbatim. A refusal carries no number of its own: any figure in it is part of the message.
+
+| function | the input | field named | message (verbatim) |
+| --- | --- | --- | --- |
+| `tokenize` | a number where the text belongs | `text` | text must be a string |
+| `tokenize` | a text of 20001 characters | `text` | text has 20001 characters, above the 20000 this engine accepts |
+| `tokenize` | a word where true or false belongs | `stopWords` | stopWords must be true or false |
+| `rankBm25` | no documents | `documents` | documents must be a non-empty array of { id, text } |
+| `rankBm25` | a passage id where the documents belong | `documents` | documents must be a non-empty array of { id, text } |
+| `rankBm25` | the same id twice | `documents[1].id` | documents[1].id repeats EKD-001 (documents[0]) |
+| `rankBm25` | an empty id | `documents[0].id` | documents[0].id must be a non-empty string |
+| `rankBm25` | a number where the text belongs | `documents[0].text` | documents[0].text must be a string |
+| `rankBm25` | a passage of 20001 characters | `documents[0].text` | documents[0].text has 20001 characters, above the 20000 this engine accepts |
+| `rankBm25` | 5001 documents | `documents` | documents has 5001 entries, above the 5000 this engine accepts |
+| `rankBm25` | a number where the query belongs | `query` | query must be a string |
+| `rankBm25` | k of 0 | `k` | k must be a whole number from 1 to 1000 |
+| `rankBm25` | k of 2.5 | `k` | k must be a whole number from 1 to 1000 |
+| `rankBm25` | k of 1001 | `k` | k must be a whole number from 1 to 1000 |
+| `rankBm25` | k1 of -0.5 | `k1` | k1 must be a finite number, 0 or more (0 scores each matched term at its idf) |
+| `rankBm25` | b of 1.5 | `b` | b must be a number from 0 to 1 (0 removes length normalisation) |
+| `rankBm25` | a corpus of punctuation only | `documents` | documents has no token in any text: BM25 needs an average document length above 0 |
+| `rankBm25` | a corpus of stop words, stop list on | `documents` | documents has no token in any text after the stop list: BM25 needs an average document length above 0 |
+| `tfidfVectors` | one empty passage | `documents` | documents has no token in any text: the vocabulary is empty |
+| `rankTfidf` | a word where true or false belongs | `sublinearTf` | sublinearTf must be true or false |
+| `retrieve` | a method it does not offer | `method` | method must be 'bm25' or 'tfidf' |
+| `retrieve` | k1 on tfidf | `k1` | k1 applies to 'bm25' only |
+| `retrieve` | b on tfidf | `b` | b applies to 'bm25' only |
+| `retrieve` | sublinearTf on bm25 | `sublinearTf` | sublinearTf applies to 'tfidf' only |
+| `retrieve` | no queries | `queries` | queries must be a non-empty array of { id, text } |
+| `retrieve` | Q01 twice | `queries[1].id` | queries[1].id repeats Q01 (queries[0]) |
+| `retrieve` | a null query text | `queries[0].text` | queries[0].text must be a string |
+| `retrieve` | 1001 queries | `queries` | queries has 1001 entries, above the 1000 this engine accepts |
+| `retrievalMetrics` | one id where a list belongs | `ranking` | ranking must be an array of document ids, best first |
+| `retrievalMetrics` | a passage ranked twice | `ranking[2]` | ranking[2] repeats EKD-018 (ranking[0]): a document is ranked once |
+| `retrievalMetrics` | a grade of 2.5 | `judgments.EKD-018` | judgments.EKD-018 must be a whole-number grade from 0 to 10 |
+| `retrievalMetrics` | a grade of 11 | `judgments.EKD-018` | judgments.EKD-018 must be a whole-number grade from 0 to 10 |
+| `retrievalMetrics` | relevantGrade of 0 | `relevantGrade` | relevantGrade must be a whole number from 1 to 10 |
+| `retrievalMetrics` | a gain it does not offer | `gain` | gain must be 'linear' or 'exponential' |
+| `evaluateRetrieval` | no judged query | `judgments` | judgments must be a non-empty object mapping query id to { document id: grade } |
+| `evaluateRetrieval` | a judged query with no ranking | `runs` | runs has no ranking for query Q01 (every judged query needs one; an empty array is a ranking that retrieved nothing) |
+| `evaluateRetrieval` | a ranked query with no judgments | `runs.Q99` | runs.Q99 has no judgments: every ranked query needs judgments |
+| `evaluateRetrieval` | a rule it does not offer | `noRelevant` | noRelevant must be 'exclude' or 'zero' |
+| `normalizeAnswer` | no text | `text` | text must be a string |
+| `answerMatch` | a number where the answer text belongs | `prediction` | prediction must be a string |
+| `scoreExtraction` | no fields | `fields` | fields must be a non-empty array of { name, type } |
+| `scoreExtraction` | a type it does not offer | `fields[0].type` | fields[0].type must be 'text' or 'number' |
+| `scoreExtraction` | a tolerance on a text field | `fields[0].absTol` | fields[0].absTol applies to 'number' fields only |
+| `scoreExtraction` | a negative relTol | `fields[0].relTol` | fields[0].relTol must be a finite number, 0 or more |
+| `scoreExtraction` | no labelled record | `labels` | labels must hold at least 1 labelled record |
+| `scoreExtraction` | a label number given as text | `labels[0].fields.rate` | labels[0].fields.rate must be a finite number or empty |
+| `scoreExtraction` | a prediction for an unlabelled record | `predictions[0].id` | predictions[0].id is r9, which is not a labelled record |
+| `scoreExtraction` | a field that is not declared | `predictions[0].fields.choke` | predictions[0].fields.choke is not one of the fields |
+| `checkGroundedness` | one id where a list belongs | `citations` | citations must be an array of passage ids |
+| `checkGroundedness` | an empty citation | `citations[0]` | citations[0] must be a non-empty string |
+| `checkGroundedness` | numericRelTol of 1 | `numericRelTol` | numericRelTol must be a number from 0 (inclusive) to 1 (exclusive) |
+| `checkAnswers` | no answers | `answers` | answers must be a non-empty array of { query, text, citations } |
+| `checkAnswers` | two answers to Q01 | `answers[1].query` | answers[1].query repeats Q01 (answers[0]): one answer per query |
+| `checkAnswers` | runs for Q01 alone | `runs` | runs has no retrieved list for query Q02 (answers[1]) |
+| `cohenKappa` | no ratings | `a` | a must be a non-empty array of ratings |
+| `cohenKappa` | three ratings against two | `b` | b must be an array of 3 ratings, one per item of a |
+| `cohenKappa` | a weighting it does not offer | `weights` | weights must be 'none', 'linear' or 'quadratic' |
+| `cohenKappa` | a word among number ratings | `a[1]` | a[1] must be a finite number, like a[0] |
+| `cohenKappa` | linear weights on words with no label order | `labels` | labels must be given in order for linear weights on string ratings (the weights use the label positions) |
+| `cohenKappa` | a label listed twice | `labels[2]` | labels[2] repeats 1 |
+| `cohenKappa` | a rating outside the labels | `a[1]` | a[1] is 3, which is not one of labels |
+| `calibration` | no outcomes | `yTrue` | yTrue must be a non-empty array of 0 and 1 outcomes |
+| `calibration` | an outcome of 2 (a grade where an outcome belongs) | `yTrue[1]` | yTrue[1] must be 0 or 1 |
+| `calibration` | two outcomes and one probability | `probabilities` | probabilities must be an array of 2 numbers, one per outcome |
+| `calibration` | a probability of 1.2 | `probabilities[1]` | probabilities[1] must be a number from 0 to 1 |
+| `calibration` | no bins | `bins` | bins must be a whole number from 1 to 100 |
+| `calibration` | 101 bins | `bins` | bins must be a whole number from 1 to 100 |
+| `calibration` | eps of 0.5, passed to ml.js logLoss | `eps` | eps must be a number above 0 and below 0.5 |
+| `bootstrapMean` | one value | `values` | values has 1 value: the bootstrap resamples at least 2 |
+| `bootstrapMean` | a null value | `values[1]` | values[1] must be a finite number |
+| `bootstrapMean` | no seed | `seed` | seed must be a whole number from 0 to 4294967295 |
+| `bootstrapMean` | a seed of -1 | `seed` | seed must be a whole number from 0 to 4294967295 |
+| `bootstrapMean` | no replicates | `nBoot` | nBoot must be a whole number from 1 to 100000 |
+| `bootstrapMean` | a level of 0.5 | `level` | level must be 0.8, 0.9, 0.95 or 0.99 |
+| `pairedBootstrap` | three values against two | `b` | b must have 3 values, one per value of a (the same queries in the same order) |
+| `pairedBootstrap` | a word where true or false belongs | `paired` | paired must be true or false |
+
+76 refusals across 16 functions.
+
+A RESULT WITH A NOTE IS NOT A REFUSAL. These calls succeed; the engine returns the result with the reason beside the value it could not give:
+
+| function | call | where the reason is | the reason (verbatim) |
+| --- | --- | --- | --- |
+| `rankBm25` | a query of punctuation only | `note` | the query has no token, so no document is ranked |
+| `rankBm25` | the query helicopter | `note` | no document contains a query term, so no document is ranked |
+| `rankTfidf` | the query helicopter | `note` | no query term is in the corpus vocabulary, so no document is ranked |
+| `retrievalMetrics` | system A on Q24 | `notes.recall` | recall is undefined: no judged document has grade 1 or more |
+| `retrievalMetrics` | system A on Q24 | `notes.averagePrecision` | average precision is undefined: no judged document has grade 1 or more |
+| `retrievalMetrics` | system A on Q24 | `notes.ndcg` | nDCG is undefined: the 8 judged documents all have grade 0, so the ideal DCG is 0 |
+| `retrievalMetrics` | system A on Q24 with no judgments | `notes.ndcg` | nDCG is undefined: the query has no judged documents, so the ideal DCG is 0 |
+| `retrievalMetrics` | system A on Q24 with one judgment, EKD-019 at grade 0 | `notes.ndcg` | nDCG is undefined: the 1 judged document has grade 0, so the ideal DCG is 0 |
+| `evaluateRetrieval` | system A, k 5 | `excluded[0].reason` | no judged document has grade 1 or more |
+| `evaluateRetrieval` | Q24 alone | `note` | no query has a judged document at grade 1 or more, so every mean is null |
+| `checkGroundedness` | an answer with no figure | `note` | the answer has no checkable claim (no quote, date or number), so the supported fraction is undefined |
+| `cohenKappa` | both raters grade 2 on every item | `note` | kappa is undefined: both raters gave every item the same label (2), so the expected disagreement is 0 |
+| `bootstrapMean` | one replicate | `note` | one replicate: the standard error is undefined |
+
+# SECTION 4: What is graded, and what is never graded (owned by Associate m01 l04 and Expert m06)
+
+EVERY GRADED NUMBER IN THIS COURSE IS A RETURN VALUE OF THIS ENGINE ON FIXED INPUTS. A capstone field, a question key and a panel figure are each computed by a function in the table of section 1 on documents, queries, judgments, answers, labels, ratings or probabilities that are written down in advance. The same inputs give the same number on any machine, so there is exactly one right answer.
+
+NO FIELD, KEY OR ENGINE OUTPUT DEPENDS ON LANGUAGE-MODEL OUTPUT. Three things make that so, and each is checked:
+
+- The engine calls no model (section 1: its imports and its source are checked).
+- The two systems' answers are fixture text, written once and committed; the course scores that text as a stand-in for what a copilot returns. The fixture record says no model wrote or scores any of it.
+- The bootstrap is the only random draw, and it is seeded: a seed and a replicate count name its result exactly.
+
+WHAT A MODEL HELPER MAY DO, AND WHY IT IS NEVER GRADED. A tool around this engine may use a language model to draft an answer, suggest a label or summarise a report. Such output changes from run to run and from model version to model version, so a grade resting on it would have no fixed right answer. The rule this course follows is that a model's output is an INPUT to be scored, never a key: it is scored exactly as the fixture answers are scored, by the deterministic checks of section 10, section 13, section 14 and section 15, and those scores are what a person reads.
+
+WHAT A DETERMINISTIC SCORE DOES NOT SAY. A supported claim is found in a cited passage; it is not thereby true (section 15). An exact match compares normalised strings; it does not know that "45.0 percent" and "45 percent" are the same quantity (section 13). A high nDCG says the judged passages were ranked well; it says nothing about passages nobody judged (section 20). Each score is quoted with its settings for that reason.
+
+# SECTION 5: Tokens: lowercase, split, no stemming, and the stop list left off (owned by Associate m02 and Associate m03 l01)
+
+THE RULE (the engine's basis, verbatim): ASCII A-Z lowercased (nothing else changed), split on every run of characters outside [a-z0-9], empty pieces dropped; no stemming.
+
+| text (stated) | tokens | count | with the stop list on | removed |
+| --- | --- | --- | --- | --- |
+| `Ekene-3 flowed 1.25 MMscf/d; Top WELL at 1548 m TVD.` | ekene 3 flowed 1 25 mmscf d top well at 1548 m tvd | 13 | ekene 3 flowed 1 25 mmscf d 1548 m tvd | 3 |
+| `Average reservoir pressure 2,096 psia on 2023-01-01.` | average reservoir pressure 2 096 psia on 2023 01 01 | 10 | average reservoir pressure 2 096 psia 2023 01 01 | 1 |
+| `Core plug EK1-P: permeability 420 md.` | core plug ek1 p permeability 420 md | 7 | core plug ek1 p permeability 420 md | 0 |
+| `Monthly H2S drill: 0 ppm H2S.` | monthly h2s drill 0 ppm h2s | 6 | monthly h2s drill 0 ppm h2s | 0 |
+| `Bit graded 2-3-WT at 1760 m MD.` | bit graded 2 3 wt at 1760 m md | 9 | bit graded 2 3 wt 1760 m md | 1 |
+| `Café Überprüfung naïve` | caf berpr fung na ve | 5 | caf berpr fung na ve | 0 |
+| `oil_rate and water/cut` | oil rate and water cut | 5 | oil rate water cut | 1 |
+
+Read the rows: a decimal point, a comma, a hyphen, a slash, an underscore and a colon all separate, so "1.25" becomes the two tokens "1" and "25", "2,096" becomes "2" and "096", and "Ekene-3" becomes "ekene" and "3". Single-character tokens are kept. An accented letter is outside [a-z0-9] and separates, so "Café" gives caf. Nothing is stemmed: "producing" and "produced" stay different tokens.
+
+THE STOP LIST IS OFF BY DEFAULT. scikit-learn's ENGLISH_STOP_WORDS (318 words) removes words that carry meaning in oilfield text, every one of these checked to be in it: well, top, bottom, fire, system, first, third, one, two, three, twelve, fifteen, fifty, hundred, thick, thin, per, full, empty, found, back, part, side, move, amount, mill, bill, interest, no, not. The query "the well top" loses every token with the list on:
+
+> the query has no token after the stop list, so no document is ranked
+
+Q14 "Is Ekene-5 producing water?" keeps the query terms is, ekene, 5, producing, water with the list off and ekene, 5, producing, water with it on; "no", the word that answers it in the passages, is itself a stop word.
+
+COUNTING TERMS. A passage's length for BM25 is its token count after the stop list (with the list off, every token). Three passages, counted by the engine:
+
+| passage | tokens | with the stop list on | the three most frequent tokens (count) |
+| --- | --- | --- | --- |
+| EKD-001 | 56 | 33 | m (4), the (4), at (3) |
+| EKD-018 | 44 | 31 | the (5), pressure (3), 01 (2) |
+| EKD-030 | 43 | 39 | 0 (4), bopd (4), ekene (4) |
+
+EKD-018 in full (fixture), the passage the next sections return to: "Static pressure survey on 2023-01-01: average reservoir pressure 2,096 psia at the datum, close to the 2000 psia bubble point, with cumulative field oil of 261,475 stb. The waterflood started the same day to hold pressure above the bubble point."
+
+With the stop list on, the corpus vocabulary is 505 tokens (against 574) and the mean passage length 27.483333 (against 38.316667).
+
+# SECTION 6: TF-IDF: counts, the smoothed idf, unit vectors and the cosine (owned by Associate m03)
+
+THE CONVENTION (the engine's basis, verbatim):
+
+- tokens: ASCII A-Z lowercased (nothing else changed), split on every run of characters outside [a-z0-9], empty pieces dropped; no stemming
+- stopWords: no stop list
+- tf: raw count
+- idf: ln((1 + N) / (1 + df)) + 1, N = 5 (scikit-learn smooth_idf)
+- norm: each vector scaled to unit Euclidean length (l2)
+- score: cosine: the dot product of the unit query and document vectors; query terms outside the corpus vocabulary are dropped
+- ranking: documents with a score above 0 ranked by score descending; scores that agree to 12 significant digits tie, and ties go to the document id ascending
+
+THE HAND SET (stated), five short passages, the fifth empty: d1 "Oil rate 120 bopd at Ekene-1. Oil rate fell."; d2 "Water injection at Ekene-2 started on 2023-01-01."; d3 "Oil and water rates were tested; the oil rate was 150 bopd."; d4 "Pressure survey: 2,096 psia."; d5 "".
+
+| term | df | idf |
+| --- | --- | --- |
+| 01 | 1 | 2.098612 |
+| 096 | 1 | 2.098612 |
+| 1 | 1 | 2.098612 |
+| 120 | 1 | 2.098612 |
+| 150 | 1 | 2.098612 |
+| 2 | 2 | 1.693147 |
+| 2023 | 1 | 2.098612 |
+| and | 1 | 2.098612 |
+| at | 2 | 1.693147 |
+| bopd | 2 | 1.693147 |
+| ekene | 2 | 1.693147 |
+| fell | 1 | 2.098612 |
+| injection | 1 | 2.098612 |
+| oil | 2 | 1.693147 |
+| on | 1 | 2.098612 |
+| pressure | 1 | 2.098612 |
+| psia | 1 | 2.098612 |
+| rate | 2 | 1.693147 |
+| rates | 1 | 2.098612 |
+| started | 1 | 2.098612 |
+| survey | 1 | 2.098612 |
+| tested | 1 | 2.098612 |
+| the | 1 | 2.098612 |
+| was | 1 | 2.098612 |
+| water | 2 | 1.693147 |
+| were | 1 | 2.098612 |
+
+Derived check on one row: oil is in 2 of the 5 passages, so idf = ln((1 + 5) / (1 + 2)) + 1 = 1.693147. A term in every passage would still have idf 1, never 0: the + 1 keeps it.
+
+THE DOCUMENT VECTORS. Each passage's raw weight is its count times the idf, and the vector is then divided by its length, so every non-empty vector has length 1:
+
+| passage | tokens | norm before scaling | weights after scaling |
+| --- | --- | --- | --- |
+| d1 | 10 | 6.689301 | 1 0.313727, 120 0.313727, at 0.253113, bopd 0.253113, ekene 0.253113, fell 0.313727, oil 0.506225, rate 0.506225 |
+| d2 | 10 | 6.833767 | 2 0.247762, 2023 0.307094, 01 0.614189, at 0.247762, ekene 0.247762, injection 0.307094, on 0.307094, started 0.307094, water 0.247762 |
+| d3 | 12 | 7.134175 | 150 0.294163, and 0.294163, bopd 0.237329, oil 0.474658, rate 0.237329, rates 0.294163, tested 0.294163, the 0.294163, was 0.294163, water 0.237329, were 0.294163 |
+| d4 | 5 | 4.525864 | 2 0.374105, 096 0.463693, pressure 0.463693, psia 0.463693, survey 0.463693 |
+| d5 | 0 | 0.000000 | (none) |
+
+The empty passage d5 is a zero vector with norm 0; it can never rank.
+
+RANKING "oil rate" BY COSINE. The query is weighted the same way on the corpus vocabulary: query vector oil 0.707107, rate 0.707107. The score is the dot product of the two unit vectors:
+
+| rank | passage | cosine | term: query weight x passage weight |
+| --- | --- | --- | --- |
+| 1 | d1 | 0.715911 | oil: 0.707107 x 0.506225; rate: 0.707107 x 0.506225 |
+| 2 | d3 | 0.503451 | oil: 0.707107 x 0.474658; rate: 0.707107 x 0.237329 |
+
+2 of the 5 passages rank: d2 and d4 share no term with the query, and d5 is empty.
+
+ON THE CORPUS. Q04 "bubble point pressure of the Ekene oil": query vector bubble 0.549668, ekene 0.204740, of 0.332042, oil 0.297012, point 0.521046, pressure 0.388034, the 0.188200.
+
+| rank | passage | cosine | judged grade (fixture) |
+| --- | --- | --- | --- |
+| 1 | EKD-018 | 0.553949 | 2 |
+| 2 | EKD-010 | 0.328560 | 3 |
+| 3 | EKD-011 | 0.314808 | 2 |
+| 4 | EKD-020 | 0.258215 | 1 |
+| 5 | EKD-057 | 0.251461 | 0 |
+
+TERMS OUTSIDE THE VOCABULARY ARE DROPPED. Q24 "subsea tree replacement on Ekene-5" drops subsea, tree, which appear in no passage; the cosine is computed on 5, ekene, on, replacement.
+
+SUBLINEAR TF replaces a count c by 1 + ln c before the idf, so a word repeated in a passage counts for less. Q13 "Ekene-6 water cut at the end of 2025", raw counts and sublinear:
+
+| rank | raw counts: passage | cosine | sublinear: passage | cosine |
+| --- | --- | --- | --- | --- |
+| 1 | EKD-029 | 0.404014 | EKD-029 | 0.395996 |
+| 2 | EKD-030 | 0.355212 | EKD-030 | 0.382844 |
+| 3 | EKD-027 | 0.328842 | EKD-027 | 0.316864 |
+| 4 | EKD-028 | 0.289724 | EKD-028 | 0.306947 |
+| 5 | EKD-006 | 0.271539 | EKD-006 | 0.255038 |
+
+# SECTION 7: BM25: the Lucene idf, k1 saturation, b length normalisation, and a score read term by term (owned by Associate m04)
+
+THE CONVENTION (the engine's basis, verbatim):
+
+- tokens: ASCII A-Z lowercased (nothing else changed), split on every run of characters outside [a-z0-9], empty pieces dropped; no stemming
+- stopWords: no stop list
+- score: sum over the distinct query terms found in the document of idf x tf (k1 + 1) / (tf + k1 (1 - b + b dl / avgdl)), k1 = 1.2, b = 0.75; a repeated query word counts once
+- idf: ln(1 + (N - df + 0.5) / (df + 0.5)) (Lucene), N = 5
+- avgdl: mean token count over the 5 documents = 7.4
+- ranking: documents with a score above 0 ranked by score descending; scores that agree to 12 significant digits tie, and ties go to the document id ascending
+
+ON THE HAND SET, "oil rate": N = 5, avgdl = 7.400000 (the empty passage counts in the mean with length 0).
+
+| query term | df | BM25 idf |
+| --- | --- | --- |
+| oil | 2 | 0.875469 |
+| rate | 2 | 0.875469 |
+
+| rank | passage | length | score | term: tf, contribution |
+| --- | --- | --- | --- | --- |
+| 1 | d1 | 10 | 2.191027 | oil: 2, 1.095514; rate: 2, 1.095514 |
+| 2 | d3 | 12 | 1.722606 | oil: 2, 1.024632; rate: 1, 0.697974 |
+
+Derived check on d1's oil term: idf 0.875469 x 2 x (1.2 + 1) / (2 + 1.2 x (1 - 0.75 + 0.75 x 10 / 7.400000)) = 1.095514.
+
+THE BM25 IDF IS NEVER NEGATIVE. The Lucene form adds 1 inside the logarithm, so a term in every passage still scores a small positive idf. A term in no passage has no posting and contributes nothing.
+
+THE ALTERNATIVE THE ENGINE DID NOT TAKE: THE ROBERTSON IDF, ln((N - df + 0.5) / (df + 0.5)), without the 1 +. Its argument falls below 1, and the idf below 0, exactly when N - df < df, that is when df > N / 2: a word in more than half the passages scores a NEGATIVE idf (at df = N / 2 it is exactly 0). On the corpus, ekene is in 44 of the 60 passages, so the Robertson form gives ln((60 - 44 + 0.5) / (44 + 0.5)) = -0.992129 (derived), where the engine's Lucene idf is 0.315385.
+
+THE (k1 + 1) NUMERATOR. The engine keeps (k1 + 1) in each term's numerator (the Robertson and Zaragoza form, stated in its basis); Lucene 8 and later drop it. For a given k1 the factor is one constant, 2.2 at k1 1.2, so dropping it divides every score by 2.2 and leaves the order unchanged: on the hand set "oil rate" would score d1 0.995921, d3 0.783003 (derived), in the same order.
+
+K1 = 0 scores each matched term at its idf alone, whatever its count: d1 1.750937, d3 1.750937, each the sum of its matched terms' idf (checked).
+
+SATURATION AND K1. Six stated passages, "oil" repeated 1, 2, 3, 5 and 9 times and one passage "gas", scored for "oil" with b = 0 so that length plays no part (k1 = 1.2, idf 0.241162):
+
+| passage | tf | contribution | contribution / idf (derived) |
+| --- | --- | --- | --- |
+| s1 | 1 | 0.241162 | 1.000000 |
+| s2 | 2 | 0.331598 | 1.375000 |
+| s3 | 3 | 0.378969 | 1.571429 |
+| s5 | 5 | 0.427868 | 1.774194 |
+| s9 | 9 | 0.468138 | 1.941176 |
+
+The ratio climbs toward k1 + 1 = 2.2 and never reaches it: each extra repeat adds less (derived from the rows above). k1 sets how fast the count saturates.
+
+LENGTH NORMALISATION AND B. b scales how much a long passage is marked down. Q13 "Ekene-6 water cut at the end of 2025" at b = 0, the default 0.75 and 1:
+
+| rank | b 0: passage (length) | score | b 0.75: passage (length) | score | b 1: passage (length) | score |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | EKD-030 (43) | 10.217811 | EKD-029 (29) | 9.951737 | EKD-029 (29) | 10.305812 |
+| 2 | EKD-029 (29) | 9.024140 | EKD-030 (43) | 9.798866 | EKD-030 (43) | 9.667097 |
+| 3 | EKD-028 (44) | 8.427403 | EKD-028 (44) | 7.982142 | EKD-028 (44) | 7.844305 |
+| 4 | EKD-006 (56) | 7.056713 | EKD-027 (24) | 6.818244 | EKD-027 (24) | 7.198868 |
+| 5 | EKD-002 (58) | 6.105306 | EKD-037 (35) | 6.222042 | EKD-037 (35) | 6.290669 |
+
+At b = 0 length plays no part and the longer EKD-030 (43 tokens) is first; at b = 1 the shorter EKD-029 (29 tokens) is. At b = 0 the fifth place is also a tie at the cutoff (tieAtCutoff true).
+
+A REPEATED QUERY WORD COUNTS ONCE. "oil oil rate" on the hand set returns exactly the scores of "oil rate" (checked to the last bit): d1 2.191027, d3 1.722606. The engine keeps the distinct query terms (Okapi's query-frequency factor with k3 = 0, stated in its basis).
+
+TF-IDF COUNTS IT. The same query "oil oil rate" through rankTfidf, whose query is weighted like a passage (raw counts, section 6): query vector oil 0.894427, rate 0.447214, where "oil rate" gives oil 0.707107, rate 0.707107. The cosines move: d1 0.679173 (0.715911 for "oil rate"), d3 0.530684 (0.503451 for "oil rate").
+
+A SCORE READ TERM BY TERM, on the corpus. Q02 "initial oil rate of Ekene-3", query terms initial (df 7, idf 2.095971), oil (df 24, idf 0.912201), rate (df 6, idf 2.239072), of (df 19, idf 1.140459), ekene (df 44, idf 0.315385), 3 (df 19, idf 1.140459):
+
+| rank | passage | length | score | judged grade (fixture) | term: tf, contribution |
+| --- | --- | --- | --- | --- | --- |
+| 1 | EKD-043 | 41 | 5.129851 | 0 | rate: 1, 2.176711; of: 2, 1.537842; ekene: 1, 0.306601; 3: 1, 1.108697 |
+| 2 | EKD-010 | 47 | 4.617541 | 0 | initial: 1, 1.918143; oil: 3, 1.367071; of: 1, 1.043700; ekene: 1, 0.288627 |
+| 3 | EKD-013 | 34 | 4.349067 | 0 | initial: 1, 2.197235; oil: 1, 0.956273; 3: 1, 1.195559 |
+| 4 | EKD-003 | 56 | 4.084216 | 3 | oil: 2, 1.110177; of: 3, 1.630868; ekene: 2, 0.383833; 3: 1, 0.959339 |
+| 5 | EKD-008 | 51 | 3.931617 | 0 | initial: 1, 1.845996; oil: 1, 0.803408; of: 1, 1.004443; ekene: 1, 0.277770 |
+
+EKD-043 is a drilling report ("rate of penetration") and ranks first on the words rate and of; the passage that answers the query, EKD-003, ranks fourth. BM25 matches words and knows nothing of meaning.
+
+K1 ON THE CORPUS. Q13 "Ekene-6 water cut at the end of 2025" at k1 1.2 and k1 2:
+
+| rank | k1 1.2: passage | score | k1 2: passage | score |
+| --- | --- | --- | --- | --- |
+| 1 | EKD-029 | 9.951737 | EKD-029 | 10.388779 |
+| 2 | EKD-030 | 9.798866 | EKD-030 | 10.116345 |
+| 3 | EKD-028 | 7.982142 | EKD-028 | 8.074363 |
+| 4 | EKD-027 | 6.818244 | EKD-027 | 7.327155 |
+| 5 | EKD-037 | 6.222042 | EKD-037 | 6.469637 |
+
+Each of the five top scores rises at k1 2. Below the top 5 some scores FALL (every passage scored, checked): EKD-008 2.323039 to 2.306499 (tf 1, 1, 3, 1, length 51); EKD-038 2.016546 to 2.004142 (tf 1, 1, 1, 1, length 41); EKD-010 1.977177 to 1.964366 (tf 1, 1, 2, 1, length 47); EKD-042 1.515275 to 1.505954 (tf 1, 1, 1, length 41). Each is longer than the mean passage (38.316667 tokens). From the formula, a term's contribution idf x tf x (k1 + 1) / (tf + k1 x L), with L = 1 - b + b x length / avgdl, rises with k1 when tf > L and falls when tf < L; a term met once in a passage longer than average has tf 1 below L, and in these passages those terms lose more than the others gain. A larger k1 does not raise every score.
+
+# SECTION 8: The ranking: score order, the twelve-digit tie rule and a tie at the cutoff (owned by Associate m05 and Expert m05 l02)
+
+THE RULE (the engine's basis, verbatim): documents with a score above 0 ranked by score descending; scores that agree to 12 significant digits tie, and ties go to the document id ascending.
+
+A TIE. Q10 "diesel spill during bunkering": only 2 passages contain a query word, so the BM25 list holds 2 passages although k is 5. EKD-046 and EKD-058 carry the same text, so they score the same, and the id ascending puts EKD-046 first:
+
+| method | rank 1 | score | rank 2 | score | ties reported | tieAtCutoff |
+| --- | --- | --- | --- | --- | --- | --- |
+| bm25 | EKD-046 | 13.884966 | EKD-058 | 13.884966 | [["EKD-046","EKD-058"]] | false |
+| tfidf | EKD-046 | 0.464024 | EKD-058 | 0.464024 | [["EKD-046","EKD-058"]] | false |
+
+A TIE AT THE CUTOFF. The same query at k = 1 keeps EKD-046 and drops its twin: tieAtCutoff is true, because the first and second passages tie and the cut falls between them. The id alone decided which one is kept.
+
+A WIDER TIE. Q06 by BM25 at k 5 ties [["EKD-001","EKD-003","EKD-005","EKD-006"]], and tieAtCutoff is true. Across the 24 queries at k 5, BM25 reports a tie at the cutoff on Q01, Q06, Q17, Q22 and TF-IDF on Q22.
+
+WHAT COUNTS AS A TIE. Two scores tie when they agree to 12 significant digits, compared as Number(score.toPrecision(12)). Three stated passages n2 "oil water", n1 "oil water gas" and n3 "gas", scored for "oil" with b = 1e-7, so that length barely matters:
+
+| rank | passage | length | score (full double) | tie key, 12 significant digits |
+| --- | --- | --- | --- | --- |
+| 1 | n2 | 2 | 0.4700036292457355 | 0.470003629246 |
+| 2 | n1 | 3 | 0.47000361642745514 | 0.470003616427 |
+
+The two scores differ by 1.28e-8 (derived), which the 12-digit key sees, so there is no tie and n2 ranks above n1 on its score. With ids alone n1 would come first.
+At six decimals the two scores print alike (0.470004); they are not equal, and the engine does not tie them.
+
+WHY A KEY AND NOT A TOLERANCE. A key is transitive: two scores with the same key tie, full stop. A relative tolerance is not: a can be near b and b near c while a is not near c, which breaks a sort. Only a score above 0 is ranked, so a list can be shorter than k.
+
+# SECTION 9: Metrics at a cutoff: precision, recall, hit and reciprocal rank, and their means (owned by Associate m05)
+
+THE DEFINITIONS (the engine's basis, verbatim):
+
+- relevant: grade >= 1; unjudged documents count as grade 0
+- precision: relevant in the top 5 / 5 (5 even when fewer are ranked)
+- recall: relevant in the top 5 / relevant judged
+- hit: 1 when a relevant document is in the top 5, else 0
+- reciprocalRank: 1 / rank of the first relevant document in the top 5, 0 when there is none
+
+A STATED RANKING, by hand: the list c, a, x, b, d against the judgments a 3, b 2, c 0, d 1, e 2 (x is unjudged, e is judged but not retrieved), k 5, relevant at grade 1 or more:
+
+| rank | passage | grade | relevant |
+| --- | --- | --- | --- |
+| 1 | c | 0 | no |
+| 2 | a | 3 | yes |
+| 3 | x | unjudged, counts as 0 | no |
+| 4 | b | 2 | yes |
+| 5 | d | 1 | yes |
+
+| metric | value |
+| --- | --- |
+| relevant judged | 4 |
+| relevant in the top 5 | 3 |
+| unjudged retrieved | 1 |
+| precision at 5 | 0.600000 |
+| recall at 5 | 0.750000 |
+| hit at 5 | 1 |
+| first relevant rank | 2 |
+| reciprocal rank | 0.500000 |
+
+Precision is 3 / 5 and recall 3 / 4: e is relevant and was not retrieved. The first relevant passage is a at rank 2, so the reciprocal rank is 1 / 2.
+
+SYSTEM A (BM25) ON EVERY QUERY, k 5, relevant at grade 1 or more:
+
+| query | relevant judged | relevant in top 5 | precision | recall | hit | first relevant rank | reciprocal rank |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Q01 | 8 | 3 | 0.600000 | 0.375000 | 1 | 1 | 1.000000 |
+| Q02 | 5 | 1 | 0.200000 | 0.200000 | 1 | 4 | 0.250000 |
+| Q03 | 6 | 3 | 0.600000 | 0.500000 | 1 | 1 | 1.000000 |
+| Q04 | 4 | 4 | 0.800000 | 1.000000 | 1 | 1 | 1.000000 |
+| Q05 | 5 | 4 | 0.800000 | 0.800000 | 1 | 2 | 0.500000 |
+| Q06 | 8 | 5 | 1.000000 | 0.625000 | 1 | 1 | 1.000000 |
+| Q07 | 2 | 1 | 0.200000 | 0.500000 | 1 | 1 | 1.000000 |
+| Q08 | 4 | 1 | 0.200000 | 0.250000 | 1 | 1 | 1.000000 |
+| Q09 | 1 | 1 | 0.200000 | 1.000000 | 1 | 1 | 1.000000 |
+| Q10 | 2 | 2 | 0.400000 | 1.000000 | 1 | 1 | 1.000000 |
+| Q11 | 5 | 3 | 0.600000 | 0.600000 | 1 | 1 | 1.000000 |
+| Q12 | 3 | 3 | 0.600000 | 1.000000 | 1 | 1 | 1.000000 |
+| Q13 | 5 | 4 | 0.800000 | 0.800000 | 1 | 1 | 1.000000 |
+| Q14 | 3 | 0 | 0.000000 | 0.000000 | 0 | null | 0.000000 |
+| Q15 | 3 | 2 | 0.400000 | 0.666667 | 1 | 2 | 0.500000 |
+| Q16 | 2 | 1 | 0.200000 | 0.500000 | 1 | 1 | 1.000000 |
+| Q17 | 2 | 1 | 0.200000 | 0.500000 | 1 | 1 | 1.000000 |
+| Q18 | 3 | 2 | 0.400000 | 0.666667 | 1 | 1 | 1.000000 |
+| Q19 | 2 | 2 | 0.400000 | 1.000000 | 1 | 1 | 1.000000 |
+| Q20 | 3 | 3 | 0.600000 | 1.000000 | 1 | 1 | 1.000000 |
+| Q21 | 2 | 2 | 0.400000 | 1.000000 | 1 | 1 | 1.000000 |
+| Q22 | 2 | 1 | 0.200000 | 0.500000 | 1 | 1 | 1.000000 |
+| Q23 | 2 | 2 | 0.400000 | 1.000000 | 1 | 1 | 1.000000 |
+| Q24 | 0 | 0 | 0.000000 | null | 0 | null | 0.000000 |
+
+Q14 has 3 relevant passages and BM25 retrieves none of them in the top 5: hit 0. Q24 has recall null, because no passage is relevant to it. Q10 has precision 0.400000 with only 2 passages ranked: precision at 5 divides by 5 even when fewer are ranked. Dividing by the 2 ranked instead would give 2 / 2 = 1.000000 (derived), which the engine does not compute.
+
+THE MEANS OVER QUERIES (the engine's basis: arithmetic mean over the included queries: mrr is the mean reciprocal rank, map the mean average precision, hitRate the mean hit). 23 of the 24 queries are included; Q24 is excluded (section 11 gives the rule):
+
+| mean over the included queries | system A (BM25) | system B (TF-IDF) |
+| --- | --- | --- |
+| precision at 5 | 0.443478 | 0.434783 |
+| recall at 5 | 0.673188 | 0.658696 |
+| hit rate at 5 | 0.956522 | 1.000000 |
+| MRR at 5 | 0.880435 | 0.923913 |
+
+MRR is the mean reciprocal rank: system B's 0.923913 puts its first relevant passage higher on average than system A's 0.880435; system A's recall at 5 is the higher of the two.
+
+# SECTION 10: Answers that cite their sources: claims, and unsupported claims (owned by Associate m06 and Associate m01 l01)
+
+AN ANSWER IN THIS COURSE is a text and the list of passage ids it cites. A copilot that retrieves passages and then writes an answer can be asked, in its instructions, to cite the passage every figure came from; the citations are what make an answer checkable. The engine then checks the answer's claims against the passages it cites.
+
+WHAT A CLAIM IS (the engine's basis, verbatim):
+
+- claims: quoted spans (straight or curly double quotes) first, then ISO dates YYYY-MM-DD, then numbers: digits with optional comma thousands groups and a decimal part, a leading minus only after a non-alphanumeric character, a percent sign ignored; a number directly after a letter, or after - _ or / that follows a letter or digit, is part of an identifier and not a claim; every occurrence is a claim
+- support: a claim is supported when it appears in a cited passage that was retrieved: a number as a value within 0 x |passage value| of a passage number (equal), a date as the same date, a quote as the same run of tokens (ASCII A-Z lowercased (nothing else changed), split on every run of characters outside [a-z0-9], empty pieces dropped; no stemming)
+- citations: a citation that is not a passage of the corpus is flagged unknown; one that was not retrieved for the query is flagged notRetrieved and supports nothing
+- fraction: supported claims / claims; undefined for an answer with no claim
+
+A STATED ANSWER on the hand set, citing d1 and d4, with d1, d2 and d4 retrieved: Ekene-1 made 120 bopd; the survey read 2,096 psia on 2023-01-01, a "water injection" start, and 45% water, -2 skin.
+
+| claim | kind | value | supported | reason (verbatim) |
+| --- | --- | --- | --- | --- |
+| 120 | number | 120 | true | found in d1 |
+| 2,096 | number | 2096 | true | found in d4 |
+| 2023-01-01 | date | 2023-01-01 | false | the date 2023-01-01 is not in the cited passages d1 and d4; it appears in retrieved passage d2, which the answer does not cite |
+| water injection | quote | water injection | false | the quote "water injection" is not in the cited passages d1 and d4; it appears in retrieved passage d2, which the answer does not cite |
+| 45 | number | 45 | false | the number 45 is not in the cited passages d1 and d4; it appears in no passage of the corpus |
+| -2 | number | -2 | false | the number -2 is not in the cited passages d1 and d4; it appears in no passage of the corpus |
+
+2 of 6 claims are supported, a supported fraction of 0.333333. "Ekene-1" is an identifier and makes no claim. The quote is checked first and the date before the numbers, and "45%" is the number "45". The date and the quote are in d2, which was retrieved and not cited; the reason says so.
+
+SYSTEM A'S 24 ANSWERS, checked against the passages each cites, with its retrieved lists:
+
+| query | claims | supported | supported fraction | citations | flags |
+| --- | --- | --- | --- | --- | --- |
+| Q01 | 2 | 2 | 1.000000 | EKD-018 | (none) |
+| Q02 | 2 | 2 | 1.000000 | EKD-003 | (none) |
+| Q03 | 2 | 2 | 1.000000 | EKD-002, EKD-004 | (none) |
+| Q04 | 1 | 1 | 1.000000 | EKD-010 | (none) |
+| Q05 | 2 | 2 | 1.000000 | EKD-026 | (none) |
+| Q06 | 2 | 1 | 0.500000 | EKD-001 | (none) |
+| Q07 | 1 | 1 | 1.000000 | EKD-008 | (none) |
+| Q08 | 3 | 3 | 1.000000 | EKD-036 | (none) |
+| Q09 | 3 | 3 | 1.000000 | EKD-044 | (none) |
+| Q10 | 2 | 2 | 1.000000 | EKD-046, EKD-058 | (none) |
+| Q11 | 1 | 1 | 1.000000 | EKD-041 | (none) |
+| Q12 | 2 | 2 | 1.000000 | EKD-038 | (none) |
+| Q13 | 3 | 2 | 0.666667 | EKD-030 | (none) |
+| Q14 | 0 | 0 | null | (none) | (none) |
+| Q15 | 1 | 1 | 1.000000 | EKD-059 | (none) |
+| Q16 | 5 | 5 | 1.000000 | EKD-060 | (none) |
+| Q17 | 2 | 2 | 1.000000 | EKD-010 | (none) |
+| Q18 | 5 | 5 | 1.000000 | EKD-037 | (none) |
+| Q19 | 1 | 1 | 1.000000 | EKD-056 | (none) |
+| Q20 | 3 | 3 | 1.000000 | EKD-053 | (none) |
+| Q21 | 4 | 4 | 1.000000 | EKD-040 | (none) |
+| Q22 | 1 | 1 | 1.000000 | EKD-009 | (none) |
+| Q23 | 1 | 1 | 1.000000 | EKD-045 | (none) |
+| Q24 | 0 | 0 | null | (none) | (none) |
+
+System A makes 49 claims and 47 are supported, a pooled supported fraction of 0.959184; 20 of the 22 answers with a claim are fully supported.
+
+AN UNSUPPORTED CLAIM is what this course calls a hallucination: a figure the answer states that the check could not find in a passage it cites and retrieved. System A's two, with the engine's reasons:
+
+| query | claim | reason (verbatim) |
+| --- | --- | --- |
+| Q06 | 20.3 | the number 20.3 is not in the cited passage EKD-001; it appears only in passage EKD-007, neither cited nor retrieved |
+| Q13 | 2025 | the number 2025 is not in the cited passage EKD-030; it appears in retrieved passage EKD-037, which the answer does not cite |
+
+The Q06 answer states the maximum oil column, 20.3 m, which is in EKD-007: that passage was neither retrieved nor cited, so the figure came from somewhere the answer cannot show. The Q13 claim is taken up in section 15.
+
+THE ANSWERS WITH NO CLAIM. Q14 and Q24 state no number, date or quote: "The retrieved passages do not say whether Ekene-5 produces water." and "No retrieved passage mentions a subsea tree replacement.". Their supported fraction is null, and the pooled fraction counts only claims.
+
+# SECTION 11: Average precision, MAP, the no-relevant rule and the relevance threshold (owned by Professional m01)
+
+THE DEFINITION (the engine's basis, verbatim): (1 / relevant judged) x sum of precision at each relevant rank up to 5.
+
+THE STATED RANKING of section 9, c, a, x, b, d, judgments a 3, b 2, c 0, d 1, e 2, k 5:
+
+| rank of a relevant passage | passage | relevant so far | precision at that rank (derived) |
+| --- | --- | --- | --- |
+| 2 | a | 1 | 0.500000 |
+| 4 | b | 2 | 0.500000 |
+| 5 | d | 3 | 0.600000 |
+
+Average precision = (0.500000 + 0.500000 + 0.600000) / 4 = 0.400000. The divisor is every relevant judged passage, 4, so e, relevant and never retrieved, lowers the average; dividing by the 3 retrieved would give 0.533333 (derived), which is not what the engine computes.
+
+MAP is the mean of the per-query average precision over the included queries. At k 5 and grade 1:
+
+| query | relevant judged | system A AP | system B AP |
+| --- | --- | --- | --- |
+| Q01 | 8 | 0.262500 | 0.262500 |
+| Q02 | 5 | 0.050000 | 0.400000 |
+| Q03 | 6 | 0.500000 | 0.458333 |
+| Q04 | 4 | 1.000000 | 1.000000 |
+| Q05 | 5 | 0.543333 | 0.543333 |
+| Q06 | 8 | 0.625000 | 0.625000 |
+| Q07 | 2 | 0.500000 | 0.500000 |
+| Q08 | 4 | 0.250000 | 0.250000 |
+| Q09 | 1 | 1.000000 | 1.000000 |
+| Q10 | 2 | 1.000000 | 1.000000 |
+| Q11 | 5 | 0.520000 | 0.333333 |
+| Q12 | 3 | 1.000000 | 1.000000 |
+| Q13 | 5 | 0.800000 | 0.800000 |
+| Q14 | 3 | 0.000000 | 0.216667 |
+| Q15 | 3 | 0.388889 | 0.166667 |
+| Q16 | 2 | 0.500000 | 0.500000 |
+| Q17 | 2 | 0.500000 | 0.500000 |
+| Q18 | 3 | 0.666667 | 0.666667 |
+| Q19 | 2 | 1.000000 | 0.833333 |
+| Q20 | 3 | 0.700000 | 0.333333 |
+| Q21 | 2 | 0.750000 | 0.750000 |
+| Q22 | 2 | 0.500000 | 0.500000 |
+| Q23 | 2 | 0.750000 | 1.000000 |
+| Q24 | 0 | null | null |
+
+MAP at 5: system A 0.600278, system B 0.593007, each over 23 queries.
+
+THE NO-RELEVANT RULE (the engine's basis, verbatim): a query with no judged document at grade 1 or more is excluded from every mean and listed in excluded.
+
+| noRelevant | queries in the means | A MAP | B MAP | A MRR | B MRR | listed in |
+| --- | --- | --- | --- | --- | --- | --- |
+| exclude (default) | 23 | 0.600278 | 0.593007 | 0.880435 | 0.923913 | excluded: Q24 |
+| zero | 24 | 0.575266 | 0.568299 | 0.843750 | 0.885417 | zeroed: Q24 |
+
+Keeping Q24 with every metric it cannot give scored 0 lowers every mean, because a query nothing answers can only score 0. Its reason is quoted in section 3. The default follows trec_eval.
+
+THE RELEVANCE THRESHOLD. relevantGrade is 1 by default, the trec_eval default, so a passage graded 1 ("related") counts as relevant. At grade 2 only "relevant" and "answers the query" count:
+
+| mean at 5 | A, grade 1 | A, grade 2 | B, grade 1 | B, grade 2 |
+| --- | --- | --- | --- | --- |
+| queries in the means | 23 | 23 | 23 | 23 |
+| precision | 0.443478 | 0.252174 | 0.434783 | 0.252174 |
+| recall | 0.673188 | 0.869565 | 0.658696 | 0.833333 |
+| MRR | 0.880435 | 0.840580 | 0.923913 | 0.873188 |
+| MAP | 0.600278 | 0.750362 | 0.593007 | 0.771014 |
+| nDCG | 0.762753 | 0.762753 | 0.764137 | 0.764137 |
+
+At grade 1 system A has the higher MAP; at grade 2 system B does. Counting grade 1 as relevant gives each system a higher precision at 5 (more of its top 5 counts) and a lower recall (more relevant passages to find), for both systems (checked). nDCG is identical in both columns (checked): the gain uses every grade and the threshold does not apply to it. A comparison states its threshold.
+
+# SECTION 12: Graded relevance: DCG, the ideal ranking, linear and exponential gain, and unjudged passages (owned by Professional m02)
+
+THE DEFINITION (the engine's basis, verbatim): DCG / ideal DCG at 5; DCG = sum of gain / log2(rank + 1), gain the grade (linear); the ideal ranks every judged grade descending; the gain uses every grade.
+
+THE STATED RANKING again, c, a, x, b, d, judgments a 3, b 2, c 0, d 1, e 2, k 5. Each rank's gain and discount (derived):
+
+| rank | passage | grade | discount log2(rank + 1) | linear gain / discount | exponential gain 2^g - 1 | exponential gain / discount |
+| --- | --- | --- | --- | --- | --- | --- |
+| 1 | c | 0 | 1.000000 | 0.000000 | 0 | 0.000000 |
+| 2 | a | 3 | 1.584963 | 1.892789 | 7 | 4.416508 |
+| 3 | x | 0 | 2.000000 | 0.000000 | 0 | 0.000000 |
+| 4 | b | 2 | 2.321928 | 0.861353 | 3 | 1.292030 |
+| 5 | d | 1 | 2.584963 | 0.386853 | 1 | 0.386853 |
+
+THE IDEAL RANKING sorts every judged grade for the query descending, retrieved or not: 3, 2, 2, 1, 0. Its DCG at 5 is the ideal DCG.
+
+| gain | DCG | ideal DCG | nDCG |
+| --- | --- | --- | --- |
+| linear | 3.140995 | 5.692536 | 0.551774 |
+| exponential | 6.095391 | 10.823466 | 0.563164 |
+
+The ideal counts e's grade 2 although no system retrieved e: building the ideal from the retrieved passages alone would reward a system for missing a good passage.
+
+ON THE EKENE QUERIES, k 5, per query:
+
+| query | A nDCG linear | A nDCG exponential | B nDCG linear | B nDCG exponential |
+| --- | --- | --- | --- | --- |
+| Q01 | 0.771458 | 0.873617 | 0.771458 | 0.873617 |
+| Q02 | 0.261097 | 0.336900 | 0.733750 | 0.852765 |
+| Q03 | 0.803656 | 0.867662 | 0.793325 | 0.862615 |
+| Q04 | 0.935166 | 0.863604 | 0.935166 | 0.863604 |
+| Q05 | 0.565087 | 0.502524 | 0.528456 | 0.484653 |
+| Q06 | 0.665940 | 0.474016 | 0.665940 | 0.474016 |
+| Q07 | 0.826235 | 0.917319 | 0.826235 | 0.917319 |
+| Q08 | 0.577752 | 0.712579 | 0.577752 | 0.712579 |
+| Q09 | 1.000000 | 1.000000 | 1.000000 | 1.000000 |
+| Q10 | 1.000000 | 1.000000 | 1.000000 | 1.000000 |
+| Q11 | 0.660886 | 0.715215 | 0.575716 | 0.669026 |
+| Q12 | 1.000000 | 1.000000 | 1.000000 | 1.000000 |
+| Q13 | 0.772658 | 0.709305 | 0.772658 | 0.709305 |
+| Q14 | 0.000000 | 0.000000 | 0.310738 | 0.235989 |
+| Q15 | 0.515847 | 0.508051 | 0.152733 | 0.077596 |
+| Q16 | 0.826235 | 0.917319 | 0.826235 | 0.917319 |
+| Q17 | 0.826235 | 0.917319 | 0.826235 | 0.917319 |
+| Q18 | 0.894999 | 0.946768 | 0.817494 | 0.789596 |
+| Q19 | 1.000000 | 1.000000 | 0.963940 | 0.982842 |
+| Q20 | 0.924133 | 0.961456 | 0.726229 | 0.860910 |
+| Q21 | 0.944848 | 0.973758 | 0.944848 | 0.973758 |
+| Q22 | 0.826235 | 0.917319 | 0.826235 | 0.917319 |
+| Q23 | 0.944848 | 0.973758 | 1.000000 | 1.000000 |
+| Q24 | null | null | null | null |
+
+Mean nDCG at 5 over the 23 included queries: linear gain, A 0.762753 and B 0.764137; exponential gain, A 0.786456 and B 0.786615. Exponential gain makes a grade 3 passage worth 7 against a grade 2's 3, so it rewards putting the answering passage first.
+System B has the higher mean nDCG on both gains; the difference is 1.38e-3 linear and 1.59e-4 exponential (derived). Whether a difference that small means anything is the question of section 16.
+
+nDCG AND THE THRESHOLD. A stated query whose judged passages are graded 1, 1 and 0, ranked EKD-013, EKD-014, at relevantGrade 2: recall and AP are returned as null (recall is undefined: no judged document has grade 2 or more), and nDCG is 1.000000, because grade 1 still carries gain.
+
+UNJUDGED PASSAGES. A passage nobody judged counts as grade 0, and the engine counts how many were retrieved (unjudgedRetrieved). The judged set was pooled from both systems' top 5, so at k 5 system A retrieves 0 unjudged passages and system B 0. What happens outside the pool is shown in section 20.
+
+# SECTION 13: Short answers: SQuAD normalisation, exact match and token F1 (owned by Professional m03)
+
+THE CONVENTION (the engine's basis, verbatim):
+
+- normalize: SQuAD: lowercase, drop ASCII punctuation, replace the words a, an, the by a space, collapse whitespace
+- exactMatch: the normalised strings are equal
+- f1: token F1 on the normalised whitespace tokens by multiset overlap: precision = common / prediction tokens, recall = common / truth tokens; when either side has no token, 1 if both are empty and 0 otherwise (SQuAD 2.0)
+
+| text (stated) | normalised | tokens |
+| --- | --- | --- |
+| `2,096 psia` | `2096 psia` | 2 |
+| `45.0 percent` | `450 percent` | 2 |
+| `45 percent` | `45 percent` | 2 |
+| `Ekene-3` | `ekene3` | 1 |
+| `Ekene 3` | `ekene 3` | 2 |
+| `The Ekene Sand` | `ekene sand` | 2 |
+| `a 2 kg wrench` | `2 kg wrench` | 3 |
+| `near-miss` | `nearmiss` | 1 |
+| `near miss` | `near miss` | 2 |
+| `0.5 bbl` | `05 bbl` | 2 |
+| `the` | (empty) | 0 |
+| (empty) | (empty) | 0 |
+
+"45.0 percent" normalises to "450 percent": dropping the decimal point joins the digits. So it does not match "45 percent". "Ekene-3" becomes "ekene3" and does not match "Ekene 3", which becomes "ekene 3". "the" normalises to nothing.
+
+BOTH SYSTEMS' SHORT ANSWERS against the reference:
+
+| query | reference | A short answer | A exact | A F1 | B short answer | B exact | B F1 |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| Q01 | 2,096 psia | 2,096 psia | 1 | 1.000000 | about 2,100 psia | 0 | 0.400000 |
+| Q02 | 150 bopd | 150 bopd | 1 | 1.000000 | 150 bopd | 1 | 1.000000 |
+| Q03 | Ekene-2 and Ekene-4 | Ekene-2 and Ekene-4 | 1 | 1.000000 | Ekene 2 and Ekene 4 | 0 | 0.250000 |
+| Q04 | 2000 psia | 2000 psia | 1 | 1.000000 | 2,000 psia | 1 | 1.000000 |
+| Q05 | 2024-03-01 | 2024-03-01 | 1 | 1.000000 | 2024-09-01 | 0 | 0.000000 |
+| Q06 | 1560 m TVD | 1560 m TVD | 1 | 1.000000 | 1560 m TVD | 1 | 1.000000 |
+| Q07 | 12,139,208 stb | 12,139,208 stb | 1 | 1.000000 | 12.1 million stb | 0 | 0.400000 |
+| Q08 | from 0.5 to 0.35 bbl/d/psi | 0.5 to 0.35 bbl/d/psi | 0 | 0.888889 | 0.35 bbl/d/psi | 0 | 0.571429 |
+| Q09 | a 2 kg wrench | a 2 kg wrench | 1 | 1.000000 | a wrench | 0 | 0.500000 |
+| Q10 | 0.5 bbl | 0.5 bbl | 1 | 1.000000 | about 5 bbl | 0 | 0.400000 |
+| Q11 | 12.4 ppg | 12.4 ppg | 1 | 1.000000 | 12.6 ppg | 0 | 0.500000 |
+| Q12 | 1800 m MD | 1800 m MD | 1 | 1.000000 | 1800 m MD | 1 | 1.000000 |
+| Q13 | 45.0 percent | 45 percent | 0 | 0.500000 | 45.0 percent | 1 | 1.000000 |
+| Q14 | water free | (empty) | 0 | 0.000000 | water free | 1 | 1.000000 |
+| Q15 | exponential, Di 0.0012 per day | exponential, Di 0.0012 per day | 1 | 1.000000 | exponential, Di 0.0012 per day | 1 | 1.000000 |
+| Q16 | Ekene-1 91,667 stb, Ekene-3 111,270 stb, Ekene-5 153,506 stb, Ekene-6 105,267 stb | Ekene-1 91,667 stb, Ekene-3 111,270 stb, Ekene-5 153,506 stb, Ekene-6 105,267 stb | 1 | 1.000000 | Ekene-1 91,667 stb, Ekene-5 153,506 stb | 0 | 0.666667 |
+| Q17 | 2.05 cp | 2.05 cp | 1 | 1.000000 | 2.05 cp | 1 | 1.000000 |
+| Q18 | 0.85 rising to 1.05 | 0.85 rising by 0.04 a month to 1.05 | 0 | 0.727273 | 1.05 | 0 | 0.400000 |
+| Q19 | 420 md | 420 md | 1 | 1.000000 | 420 md | 1 | 1.000000 |
+| Q20 | 40 mg/l | 40 mg/l | 1 | 1.000000 | 40 mg/l | 1 | 1.000000 |
+| Q21 | 15 bbl/hr at 1612 m MD | 15 bbl/hr at 1612 m MD | 1 | 1.000000 | 15 bbl/hr at 1612 m MD | 1 | 1.000000 |
+| Q22 | 1935 m MD | 1935 m MD | 1 | 1.000000 | 1935 m MD | 1 | 1.000000 |
+| Q23 | 0 ppm | 0 ppm | 1 | 1.000000 | 0 ppm | 1 | 1.000000 |
+| Q24 | (empty) | (empty) | 1 | 1.000000 | 2024-03-01 | 0 | 0.000000 |
+
+Exact matches: system A 20 of 24, system B 13 of 24. Mean token F1 over the 24 (derived, the mean of the column): A 0.921507, B 0.712004.
+
+Read four rows. A's Q13 "45 percent" against "45.0 percent" scores exact 0 and F1 0.500000: the same quantity, different normalised tokens. A's Q24 is empty and so is the reference, which scores exact 1 and F1 1, a correct abstention. A's Q14 is empty against "water free": F1 0. B's Q16 lists two of the four wells: F1 0.666667, partial credit.
+
+TOKEN F1 BY MULTISET. "oil oil water" against "oil water water" (stated) has 2 common tokens (each token counted as often as it appears in both), precision 0.666667, recall 0.666667, F1 0.666667.
+
+# SECTION 14: Field extraction: cells, the four outcomes, tolerances, micro and macro (owned by Professional m04)
+
+THE CONVENTION (the engine's basis, verbatim):
+
+- outcomes: correct: the values match, or both are empty; wrong: both have a value and they do not match; missed: the label has a value and the prediction is empty; unsupported: the label is empty and the prediction has a value. Empty is null, absent or a blank string
+- text: SQuAD: lowercase, drop ASCII punctuation, replace the words a, an, the by a space, collapse whitespace; a match is exact equality of the normalised strings; f1 is SQuAD token F1
+- number: the prediction is a number or a string of digits with optional comma thousands groups and a decimal part; it matches when |prediction - label| <= max(absTol, relTol x |label|)
+- accuracy: correct / cells; microAccuracy pools every cell, macroAccuracy is the mean of the per-field accuracies (every labelled record is scored on every field, so the two are equal)
+- f1: f1 = 2 precision recall / (precision + recall) on filled cells, a missing precision or recall counting as 0, and 0 when both are 0; null when no cell of that field is filled on either side; microF1 pools every cell, macroF1 is the mean of the per-field f1 that are not null
+- precision: correct filled cells / cells with a predicted value (wrong, unsupported and correct filled)
+- recall: correct filled cells / cells with a label value (wrong, missed and correct filled)
+
+A CELL is one field of one record: 30 records x 6 fields = 180 cells. System A returned 30 records and system B 28.
+
+| overall | system A | system B |
+| --- | --- | --- |
+| correct | 175 | 165 |
+| of which both empty | 73 | 71 |
+| wrong | 2 | 7 |
+| missed | 1 | 4 |
+| unsupported | 2 | 4 |
+| micro accuracy | 0.972222 | 0.916667 |
+| macro accuracy | 0.972222 | 0.916667 |
+| precision on filled cells | 0.962264 | 0.895238 |
+| recall on filled cells | 0.971429 | 0.895238 |
+| micro F1 | 0.966825 | 0.895238 |
+| macro F1 | 0.942735 | 0.865875 |
+
+ACCURACY IS INFLATED BY EMPTY CELLS. 73 of system A's 175 correct cells are correct because both sides are empty. Precision and recall count filled cells only, which is why they sit beside accuracy.
+
+SYSTEM B'S PRECISION AND RECALL ON FILLED CELLS ARE EQUAL: the engine returns the same double for both (checked). 94 filled cells are correct; precision divides by the 105 cells B filled (94 + 7 wrong + 4 unsupported), recall by the 105 cells the labels filled (94 + 7 wrong + 4 missed), and 4 unsupported equals 4 missed, so both are 94 / 105 = 0.895238.
+
+MICRO AND MACRO. Micro pools every cell; macro averages the per-field figures. Every labelled record is scored on every field, so each field has the same 30 cells and macro accuracy equals micro accuracy by construction (checked for both systems, differences 1.11e-16 and 2.22e-16). F1 counts filled cells, which differ by field, so micro and macro F1 differ: system A 0.966825 against 0.942735.
+
+| field | type | A correct | A wrong | A missed | A unsupported | A F1 | B correct | B wrong | B missed | B unsupported | B F1 |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| well | text | 30 | 0 | 0 | 0 | 1.000000 | 26 | 2 | 1 | 1 | 0.857143 |
+| date | text | 30 | 0 | 0 | 0 | 1.000000 | 28 | 1 | 1 | 0 | 0.947368 |
+| event | text | 28 | 2 | 0 | 0 | 0.933333 | 27 | 1 | 2 | 0 | 0.931034 |
+| oil_rate_bopd | number | 30 | 0 | 0 | 0 | 1.000000 | 28 | 2 | 0 | 0 | 0.857143 |
+| water_cut_pct | number | 28 | 0 | 1 | 1 | 0.800000 | 27 | 0 | 0 | 3 | 0.769231 |
+| reservoir_pressure_psia | number | 29 | 0 | 0 | 1 | 0.923077 | 29 | 1 | 0 | 0 | 0.833333 |
+
+EVERY CELL THAT IS NOT CORRECT, with the engine's reason:
+
+| system | record | field | label | prediction | outcome | reason (verbatim) |
+| --- | --- | --- | --- | --- | --- | --- |
+| A | EKD-020 | water_cut_pct | 0 | (empty) | missed | the label has a value and the prediction is empty |
+| A | EKD-027 | water_cut_pct | (empty) | `3.7` | unsupported | the label is empty and the prediction has a value |
+| A | EKD-036 | reservoir_pressure_psia | (empty) | `2289` | unsupported | the label is empty and the prediction has a value |
+| A | EKD-038 | event | casing | `casing run` | wrong | normalised "casing run" differs from "casing" |
+| A | EKD-044 | event | near miss | `near-miss` | wrong | normalised "nearmiss" differs from "near miss" |
+| B | EKD-003 | well | Ekene-3 | `Ekene 3` | wrong | normalised "ekene 3" differs from "ekene3" |
+| B | EKD-003 | oil_rate_bopd | 150 | `150 bopd` | wrong | "150 bopd" is not a plain number (digits with optional comma thousands groups and a decimal part) |
+| B | EKD-005 | well | Ekene-5 | `Ekene 5` | wrong | normalised "ekene 5" differs from "ekene5" |
+| B | EKD-013 | well | (empty) | `Ekene-1` | unsupported | the label is empty and the prediction has a value |
+| B | EKD-017 | reservoir_pressure_psia | 2226 | `2230` | wrong | 2230 differs from 2226 by 4, above the tolerance 0.5 |
+| B | EKD-026 | date | 2024-03-01 | `2024-09-01` | wrong | normalised "20240901" differs from "20240301" |
+| B | EKD-027 | water_cut_pct | (empty) | `3.7` | unsupported | the label is empty and the prediction has a value |
+| B | EKD-029 | water_cut_pct | (empty) | `23` | unsupported | the label is empty and the prediction has a value |
+| B | EKD-033 | oil_rate_bopd | 64.6 | `64.7` | wrong | 64.7 differs from 64.6 by 0.10000000000000853, above the tolerance 0.05 |
+| B | EKD-040 | event | losses | `lost circulation` | wrong | normalised "lost circulation" differs from "losses" |
+| B | EKD-041 | water_cut_pct | (empty) | `0.4` | unsupported | the label is empty and the prediction has a value |
+| B | EKD-053 | date | 2025-04-08 | (empty) | missed | the label has a value and the prediction is empty |
+| B | EKD-053 | event | water treatment | (empty) | missed | the label has a value and the prediction is empty |
+| B | EKD-056 | well | Ekene-1 | (empty) | missed | the label has a value and the prediction is empty |
+| B | EKD-056 | event | core plug | (empty) | missed | the label has a value and the prediction is empty |
+
+System A's "3,038" for the label 3038 is correct: a number field reads digits with comma thousands groups. System B's 45.25 against 45.2 on EKD-032 is correct: as written the difference is the absTol 0.05, and the double computes it as 0.04999999999999716, just under it, so this cell is correct whether the tolerance is inclusive or strict. The stated r1 cells below (a difference of 1 on a tolerance of 1, and 3 on 3) are the ones inclusivity decides. System B's 64.7 against 64.6 on EKD-033 is wrong: the double difference is 0.10000000000000853, above 0.05. System B did not return EKD-053 or EKD-056; a labelled record with no prediction is scored as all empty, so its filled labels are missed.
+
+A TEXT CELL ALSO CARRIES A TOKEN F1 (the SQuAD token F1 of the prediction against the label, `f1` on each text cell; a correct text cell has f1 1). Every text cell that is not correct:
+
+| system | record | field | label | prediction | outcome | token F1 |
+| --- | --- | --- | --- | --- | --- | --- |
+| A | EKD-038 | event | casing | `casing run` | wrong | 0.666667 |
+| A | EKD-044 | event | near miss | `near-miss` | wrong | 0.000000 |
+| B | EKD-003 | well | Ekene-3 | `Ekene 3` | wrong | 0.000000 |
+| B | EKD-005 | well | Ekene-5 | `Ekene 5` | wrong | 0.000000 |
+| B | EKD-013 | well | (empty) | `Ekene-1` | unsupported | 0.000000 |
+| B | EKD-026 | date | 2024-03-01 | `2024-09-01` | wrong | 0.000000 |
+| B | EKD-040 | event | losses | `lost circulation` | wrong | 0.000000 |
+| B | EKD-053 | date | 2025-04-08 | (empty) | missed | 0.000000 |
+| B | EKD-053 | event | water treatment | (empty) | missed | 0.000000 |
+| B | EKD-056 | well | Ekene-1 | (empty) | missed | 0.000000 |
+| B | EKD-056 | event | core plug | (empty) | missed | 0.000000 |
+
+A NUMBER FIELD'S TOLERANCE IS ITS OWN SETTING. System B's EKD-017 pressure 2230 against 2226 is wrong at the field's absTol 0.5. Give the field relTol 0.002 as well and the tolerance becomes max(0.5, 0.002 x 2226) = 4.452 (derived), and the cell is correct. Extraction reads only the fields' absTol and relTol; the groundedness check's numericRelTol is a setting of that check, and scoreExtraction never reads it.
+
+A TOLERANCE IS INCLUSIVE, |prediction - label| <= max(absTol, relTol x |label|). Two stated records, q with relTol 0.01 and p with absTol 2 and relTol 0.001:
+
+| record | field | label | prediction | tolerance (derived) | outcome | difference |
+| --- | --- | --- | --- | --- | --- | --- |
+| r1 | q | 100 | `101` | 1 | correct | 1 |
+| r1 | p | 3000 | `3,003` | 3 | correct | 3 |
+| r2 | q | 50 | `50.6` | 0.5 | wrong | 0.6000000000000014 |
+| r2 | p | 1000 | `1002.5` | 2 | wrong | 2.5 |
+
+# SECTION 15: Groundedness and its limits: cited and retrieved, the reasons, grounded and correct (owned by Professional m05)
+
+A CLAIM IS SUPPORTED only by a passage that is both cited and retrieved. A citation to a passage that was not retrieved is flagged and supports nothing; a citation to an id that is not a passage is flagged unknown.
+
+| figure (both systems, k 5) | system A | system B |
+| --- | --- | --- |
+| claims | 49 | 41 |
+| supported | 47 | 30 |
+| pooled supported fraction | 0.959184 | 0.731707 |
+| mean of the per-answer fractions | 0.962121 | 0.687500 |
+| answers with a claim | 22 | 24 |
+| fully supported answers | 20 | 15 |
+| citations not retrieved | 0 | 1 |
+| unknown citations | 0 | 1 |
+| number claims supported / claims | 38 / 40 | 22 / 32 |
+| date claims supported / claims | 9 / 9 | 7 / 8 |
+| quote claims supported / claims | 0 / 0 | 1 / 1 |
+
+Pooled and per-answer fractions answer different questions (the engine's basis: supportedFraction pools every claim of every answer; meanAnswerSupportedFraction averages the answers that have at least one claim).
+
+SYSTEM B'S UNSUPPORTED CLAIMS AND FLAGS, with the engine's reasons. Each reason says where the figure is: in a retrieved passage the answer does not cite (a citation error), in a cited passage that was not retrieved, only in other passages, or in no passage (a fabrication):
+
+| query | claim | reason (verbatim) |
+| --- | --- | --- |
+| Q01 | 2,100 | the number 2,100 is not in the cited passage EKD-018; it appears in no passage of the corpus |
+| Q03 | 92.7 | the number 92.7 is not in the cited passages EKD-002 and EKD-004; it appears only in passage EKD-034, neither cited nor retrieved |
+| Q03 | 61.8 | the number 61.8 is not in the cited passages EKD-002 and EKD-004; it appears only in passage EKD-034, neither cited nor retrieved |
+| Q04 | 1.2 | the number 1.2 is not in the cited passage EKD-018; it appears in retrieved passages EKD-010, EKD-011 and EKD-057, which the answer does not cite |
+| Q07 | 12.1 | the number 12.1 is not in the cited passage EKD-008; it appears in no passage of the corpus |
+| Q10 | 5 | the number 5 is not in the cited passage EKD-046; it appears only in passages EKD-025 and EKD-028, neither cited nor retrieved |
+| Q11 | 12.6 | the number 12.6 is not in the cited passage EKD-041; it appears only in passage EKD-040, neither cited nor retrieved |
+| Q12 | 9.625 | the number 9.625 is not in the cited passage EKD-039; it appears in retrieved passage EKD-038, which the answer does not cite |
+| Q12 | 1800 | the number 1800 is not in the cited passage EKD-039; it appears in retrieved passages EKD-038 and EKD-042, which the answer does not cite |
+| Q15 | 0.0012 | the number 0.0012 is unsupported: no cited passage is a retrieved passage of the corpus; it appears in EKD-059, cited but not retrieved |
+| Q24 | 2024-03-01 | the date 2024-03-01 is not in the cited passage EKD-031; it appears only in passages EKD-026 and EKD-035, neither cited nor retrieved |
+
+
+THE 11 REASONS BY KIND (derived: each reason above sorted by the clause it ends with, every reason in exactly one kind, checked):
+
+| where the figure is | unsupported claims (system B) |
+| --- | --- |
+| in a retrieved passage the answer does not cite | 3 |
+| in a cited passage that was not retrieved | 1 |
+| only in passages neither cited nor retrieved | 5 |
+| in no passage of the corpus | 2 |
+| all | 11 |
+
+| query | flag (verbatim) |
+| --- | --- |
+| Q15 | citation EKD-059 was not retrieved for this query |
+| Q21 | citation EKD-061 is not a passage of the corpus |
+
+GROUNDED IS NOT CORRECT. System B's Q05 answer "Water broke through at Ekene-6 on 2024-09-01." is fully supported: the date is in EKD-027, which it cites and retrieved. EKD-027 is about Ekene-3's breakthrough; Ekene-6 broke through on the reference date 2024-03-01, and the short answer scores exact match 0. The check found the figure in the passage; it cannot know the passage is about another well.
+
+HOW THE CHECK READS TEXT. System A's Q13 answer "Ekene-6 water cut was 45 percent at the end of 2025 (2025-12-01)." says "the end of 2025". The claim grammar reads a bare year as the number "2025", which is not in EKD-030 (that passage writes the date "2025-12-01"), so the claim is unsupported although the answer is right: the number 2025 is not in the cited passage EKD-030; it appears in retrieved passage EKD-037, which the answer does not cite. A deterministic check reads exactly the forms it states and no others.
+
+A NUMBER CAN MATCH BY COINCIDENCE. The stated answer "The spill was 5 bbl." citing EKD-025 (no retrieved list given) is supported: EKD-025 says "5 months". The check matches the value and ignores the unit: supported 1 of 1.
+
+A STATED TOLERANCE. numericRelTol is 0 by default, so a number must equal a passage number. At 0.002, |2100 - 2096| = 4 is within 0.002 x 2096 (derived: 4.192), so B's "about 2,100 psia" is supported: system B then has 31 of 41 claims supported, 0.756098.
+
+WITHOUT THE RETRIEVED LISTS every cited passage of the corpus can support a claim: system B then has 31 of 41 supported (0.756098), because Q15's citation of EKD-059 now counts. The basis says which rule ran: "a citation that is not a passage of the corpus is flagged unknown; no retrieved list was given, so every cited passage of the corpus can support a claim".
+
+# SECTION 16: Comparing two systems: per-query scores and the paired bootstrap (owned by Professional m06 and Expert m05 l03)
+
+TWO SYSTEMS ON THE SAME QUERIES. Both systems answered the same 23 included queries, so each query gives a pair of scores and a difference. Per-query nDCG at 5 (linear gain), A minus B (derived):
+
+| query | A nDCG | B nDCG | A minus B |
+| --- | --- | --- | --- |
+| Q01 | 0.771458 | 0.771458 | 0.000000 |
+| Q02 | 0.261097 | 0.733750 | -0.472652 |
+| Q03 | 0.803656 | 0.793325 | 0.010331 |
+| Q04 | 0.935166 | 0.935166 | 0.000000 |
+| Q05 | 0.565087 | 0.528456 | 0.036632 |
+| Q06 | 0.665940 | 0.665940 | 0.000000 |
+| Q07 | 0.826235 | 0.826235 | 0.000000 |
+| Q08 | 0.577752 | 0.577752 | 0.000000 |
+| Q09 | 1.000000 | 1.000000 | 0.000000 |
+| Q10 | 1.000000 | 1.000000 | 0.000000 |
+| Q11 | 0.660886 | 0.575716 | 0.085170 |
+| Q12 | 1.000000 | 1.000000 | 0.000000 |
+| Q13 | 0.772658 | 0.772658 | 0.000000 |
+| Q14 | 0.000000 | 0.310738 | -0.310738 |
+| Q15 | 0.515847 | 0.152733 | 0.363114 |
+| Q16 | 0.826235 | 0.826235 | 0.000000 |
+| Q17 | 0.826235 | 0.826235 | 0.000000 |
+| Q18 | 0.894999 | 0.817494 | 0.077505 |
+| Q19 | 1.000000 | 0.963940 | 0.036060 |
+| Q20 | 0.924133 | 0.726229 | 0.197904 |
+| Q21 | 0.944848 | 0.944848 | 0.000000 |
+| Q22 | 0.826235 | 0.826235 | 0.000000 |
+| Q23 | 0.944848 | 1.000000 | -0.055152 |
+
+A is higher on 7 queries, B on 3, and they are equal on 13 (counted).
+THE WINS, SUMMED (derived from the differences above): A's 7 wins add up to 0.806717; B's 3 wins add up to 0.838542, and B's lead in the mean comes from that. Q02 and Q14 alone add up to 0.783390, less than A's 7 wins; B's third win, Q23 at 0.055152, is needed as well. The 13 equal queries add 0.
+
+THE BOOTSTRAP OF A MEAN (the engine's basis, verbatim): 2000 replicates of 23 values drawn with replacement (index floor(u x 23), u from one mulberry32(7) stream, replicate by replicate); each replicate's statistic is its mean. Interval: lib/stats quantile at 0.025 and 0.975 of the 2000 replicates (idx = nBoot x p on the sorted values: idx not whole takes the ceil(idx)-th smallest, idx whole with nBoot even the mean of the idx-th and (idx+1)-th, idx whole with nBoot odd the (idx+1)-th); a percentile interval of a statistic, labelled as parameter percentiles, never P-labels; standardError is the SD of the replicates with divisor nBoot - 1.
+
+| system | mean nDCG at 5 | seed | replicates | level | 2.5th percentile of the bootstrap mean | 97.5th percentile of the bootstrap mean | standard error |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| A | 0.762753 | 7 | 2000 | 0.95 | 0.653604 | 0.852644 | 0.051501 |
+| B | 0.764137 | 7 | 2000 | 0.95 | 0.666871 | 0.847238 | 0.046104 |
+
+THE PAIRED BOOTSTRAP (the engine's basis, verbatim): 2000 replicates; each draws 23 query positions with replacement (index floor(u x 23), u from one mulberry32(7) stream, replicate by replicate) and averages a - b at those positions, so both systems see the same queries. The share (the engine's basis, verbatim): the share of replicates with a difference at or below 0 (a does not beat b in that replicate).
+
+| comparison, seed 7, 2000 replicates, level 0.95 | difference A minus B | 2.5th percentile of the bootstrap difference | 97.5th percentile of the bootstrap difference | standard error | share at or below 0 |
+| --- | --- | --- | --- | --- | --- |
+| nDCG at 5, paired | -0.001384 | -0.068015 | 0.058726 | 0.032083 | 0.511000 |
+| nDCG at 5, unpaired | -0.001384 | -0.133554 | 0.128297 | 0.066811 | 0.505000 |
+| AP at 5, paired | 0.007271 | -0.054879 | 0.064758 | 0.030704 | 0.418500 |
+
+Read the rows. The nDCG difference is -0.001384, and its paired interval runs from -0.068015 to 0.058726, across 0, as does the AP interval: on these 23 queries the data do not separate the two systems. The unpaired interval, -0.133554 to 0.128297, is wider (width 0.261851 against 0.126741, derived) because it ignores that both systems answered the same queries. The paired result is exactly the bootstrap of the per-query differences on the same seed (checked bit for bit).
+
+A PAIR NEEDS BOTH HALVES. Drop one query from B's list, 23 values against 22, and the engine refuses (field `b`):
+
+> b must have 23 values, one per value of a (the same queries in the same order)
+
+THE SHARE AT OR BELOW 0 is 0.511000 for nDCG: the share of replicates in which A did not beat B. It is a count of replicates, and the engine does not call it a p-value.
+
+A SEED NAMES THE RESULT. On seed 8 the same paired nDCG interval is -0.063543 to 0.055562. Quote a bootstrap figure with its seed, its replicate count and its level.
+
+# SECTION 17: Annotator agreement: observed, expected and Cohen's kappa, unweighted and weighted (owned by Expert m01)
+
+THE CONVENTION (the engine's basis, verbatim):
+
+- kappa: 1 - sum w O / sum w E, O the observed counts (rows rater a, columns rater b), E = row total x column total / n
+- weights: w = 0 on the diagonal and 1 off it (unweighted)
+- labels: the distinct ratings sorted ascending
+- agreement: observedAgreement = diagonal / n and expectedAgreement = sum row x column / n^2, both unweighted
+- weights, linear: w = |i - j| on the label positions (linear)
+- weights, quadratic: w = (i - j)^2 on the label positions (quadratic)
+
+THE TWO ANNOTATORS on all 183 judged pairs (rater a the primary grades, rater b the second annotator; pairs in query order, passages by id within a query). The confusion counts, rows a and columns b:
+
+| a \ b | 0 | 1 | 2 | 3 | row total |
+| --- | --- | --- | --- | --- | --- |
+| 0 | 72 | 24 | 5 | 0 | 101 |
+| 1 | 3 | 37 | 2 | 2 | 44 |
+| 2 | 2 | 0 | 11 | 0 | 13 |
+| 3 | 0 | 2 | 11 | 12 | 25 |
+| column total | 77 | 63 | 29 | 14 | 183 |
+
+| weights | observed agreement | expected agreement | observed disagreement | expected disagreement | kappa |
+| --- | --- | --- | --- | --- | --- |
+| none | 0.721311 | 0.336708 | 0.278689 | 0.663292 | 0.579841 |
+| linear | 0.721311 | 0.336708 | 0.338798 | 1.045478 | 0.675940 |
+| quadratic | 0.721311 | 0.336708 | 0.459016 | 2.009257 | 0.771549 |
+
+The annotators agree on 0.721311 of the pairs; two raters labelling at random with these same row and column totals would agree on 0.336708. Kappa rescales the first against the second: unweighted 0.579841. Weighted kappa counts a disagreement of one grade as less serious than one of three: linear 0.675940, quadratic 0.771549. 40 of the 51 disagreements are one grade apart (counted from the table), so the weighted figures are higher.
+
+WORDS AS RATINGS. Weighted kappa uses the label positions, so words need their order given: six stated pairs on the labels none, related, relevant, answers, linear weights, kappa 0.608696. The six pairs, rater a then rater b: related and relevant; answers and answers; none and none; relevant and relevant; answers and relevant; none and related. Without labels the engine refuses (section 3), because sorting the words alphabetically would put "answers" before "none".
+
+AGREEMENT ON THE RELEVANT/NOT DECISION. Reduce each grade to relevant (1) or not (0) at a threshold (derived ratings): at grade 1 or more, kappa 0.634430 (observed agreement 0.814208); at grade 2 or more, kappa 0.794115 (observed agreement 0.928962). The threshold a metric uses is also a threshold the annotators have to agree on.
+
+WHEN KAPPA HAS NO VALUE. If both raters give every item one and the same label, the expected disagreement is 0 and kappa is null with the reason quoted in section 3.
+
+# SECTION 18: Calibration: the Brier score, the reliability table, ECE and MCE (owned by Expert m02)
+
+THE CONVENTION (the engine's basis, verbatim):
+
+- bins: `10 equal-width bins: p is in bin i when i/10 <= p < (i+1)/10 (edges as computed in double precision), the last bin closed at 1; an empty bin has null means and is skipped`
+- brier: `mean (p - y)^2`
+- ece: `sum over non-empty bins of n_k / N x |observed_k - mean p_k|`
+- mce: `the largest |observed_k - mean p_k| over non-empty bins`
+
+THE CALIBRATION SET. 200 rows, each a relevance classifier's probability that a passage is relevant to a query (given to 2 decimals) and the outcome, 1 when the judged grade is 2 or 3. The base rate, the share of outcomes that are 1, is 0.190000.
+
+| bin | lower | upper | rows | mean probability | observed frequency | gap |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0 | 0.000000 | 0.100000 | 19 | 0.065263 | 0.052632 | 0.012632 |
+| 1 | 0.100000 | 0.200000 | 36 | 0.142222 | 0.027778 | 0.114444 |
+| 2 | 0.200000 | 0.300000 | 39 | 0.245897 | 0.128205 | 0.117692 |
+| 3 | 0.300000 | 0.400000 | 28 | 0.342500 | 0.178571 | 0.163929 |
+| 4 | 0.400000 | 0.500000 | 15 | 0.422667 | 0.133333 | 0.289333 |
+| 5 | 0.500000 | 0.600000 | 16 | 0.550625 | 0.187500 | 0.363125 |
+| 6 | 0.600000 | 0.700000 | 15 | 0.648000 | 0.000000 | 0.648000 |
+| 7 | 0.700000 | 0.800000 | 3 | 0.723333 | 0.000000 | 0.723333 |
+| 8 | 0.800000 | 0.900000 | 8 | 0.852500 | 0.250000 | 0.602500 |
+| 9 | 0.900000 | 1.000000 (closed) | 21 | 0.974286 | 0.904762 | 0.069524 |
+
+Brier score 0.168382; ECE 0.209300; MCE 0.723333.
+
+In 10 of the 10 bins the mean probability is above the observed frequency: the classifier is over-confident there. The largest gap, the MCE, is in bin 7, where 3 rows carry a mean probability of 0.723333 and none is relevant. ECE weights each gap by its bin's share of the rows, so a small bin moves ECE little and MCE a lot.
+
+THE BIN COUNT IS A CHOICE. The same rows at 5, 10 and 15 bins:
+
+| bins | Brier | ECE | MCE | empty bins |
+| --- | --- | --- | --- | --- |
+| 5 | 0.168382 | 0.209300 | 0.660556 | 0 |
+| 10 | 0.168382 | 0.209300 | 0.723333 | 0 |
+| 15 | 0.168382 | 0.209300 | 0.750000 | 0 |
+
+The Brier score is the same at every bin count (checked): it is a mean over rows and uses no bins. MCE changes with the bins. ECE does not, ON THIS SET: every non-empty bin is over-confident at 5, 10 and 15 bins alike (checked), so each gap is mean probability minus observed frequency, the weights n_k / N add the bins back together, and ECE comes to the mean probability minus the base rate, 0.399300 - 0.190000 = 0.209300 (derived), whatever the bins. On a set with bins on both sides of the diagonal the gaps no longer add up this way; quote each figure with its bin count.
+
+EVERY ROW GIVEN THE BASE RATE. Give all 200 Ekene rows the probability 0.190000 (stated: the base rate) and every row falls in one bin, whose mean probability the engine returns as 0.1900000000000001 against the observed frequency 0.19. The gap is 1.11e-16, so ECE and MCE print 0.000000 and 0.000000 without being exactly 0: rounding in the last bits, printed alike and not equal. RES is 0: one probability for every row resolves nothing.
+
+# SECTION 19: Decomposing the Brier score: reliability, resolution, uncertainty and the within-bin terms; the bin-edge rule; log loss (owned by Expert m03)
+
+THE DECOMPOSITION (the engine's basis, verbatim): Brier = REL - RES + UNC + WBV - WBC (Stephenson, Coelho and Jolliffe 2008, eq. 7): REL = sum n_k (mean p_k - observed_k)^2 / N, RES = sum n_k (observed_k - base rate)^2 / N, UNC = base rate (1 - base rate), WBV = sum (p - mean p_k)^2 / N, WBC = 2 sum (y - observed_k)(p - mean p_k) / N (the fifth term of their eq. 7, so twice the pooled within-bin covariance); closure = Brier - that sum (0 up to rounding).
+
+| term | value (10 bins) |
+| --- | --- |
+| reliability REL | 0.080032 |
+| resolution RES | 0.064570 |
+| uncertainty UNC | 0.153900 |
+| within-bin variance WBV | 0.000689 |
+| within-bin covariance term WBC (twice the pooled within-bin covariance) | 0.001669 |
+| REL - RES + UNC + WBV - WBC | 0.168382 |
+| Brier | 0.168382 |
+| closure, Brier minus the sum | -8.33e-17 |
+
+The identity closes: the closure is -8.33e-17, rounding in the last bits. Without WBV and WBC, REL - RES + UNC would be 0.169362 (derived), which is not the Brier score. Uncertainty is base rate x (1 - base rate) = 0.190000 x 0.810000 (derived); it depends on the outcomes alone. Reliability is small when each bin's mean probability matches its observed frequency; resolution is large when the bins' frequencies differ from the base rate.
+
+ONE BIN. With every row in one bin, REL is (mean probability - base rate)^2 = 0.043806 and RES is 0.000000: one bin cannot resolve anything.
+
+THE WITHIN-BIN TERMS. Six stated rows with probabilities 0.61, 0.62, 0.64, 0.66, 0.68 and 0.69 and outcomes 1, 0, 1, 0, 1, 1 all fall in bin 6. WBV 0.000867, WBC 0.006667, closure 0. The spread of the probabilities inside the bin is what WBV measures.
+
+WBC AS THE PAPER LABELS IT. Stephenson, Coelho and Jolliffe (2008) write the Brier score out in their eq. 7 with five components; the fifth is -(2/N) sum over bins k and rows j in bin k of (y_kj - observed_k)(p_kj - mean p_k), and the line after eq. 7 names the five BS = REL - RES + UNC + WBV - WBC. So WBC is (2/N) sum (y_kj - observed_k)(p_kj - mean p_k), the fifth term without its minus sign, and it carries the factor 2: WBC as the paper labels it is twice the pooled within-bin covariance, and the engine's WBC is the paper's. On the six rows above the pooled within-bin covariance, sum (y - observed)(p - mean p) / N with observed 0.666667 and mean p 0.650000, is 0.003333 (derived), and WBC is 2 x 0.003333 = 0.006667 (derived), the engine's 0.006667. Drop the 2 and the identity no longer closes.
+
+THE BIN-EDGE RULE. p is in bin i when i/M <= p < (i+1)/M, with the edges as computed in double precision, so a probability exactly on an interior edge OPENS the upper bin; 1 closes the last bin. Counted over the whole calibration set, 17 probabilities sit exactly on an interior edge at 10 bins, with the values 0.1, 0.2, 0.3, 0.4, 0.6.
+
+scikit-learn's calibration_curve puts an interior-edge value in the LOWER bin. Its table on these rows is DERIVED here by that rule (the engine does not implement it):
+
+| bin | engine rows | library-rule rows (derived) | library-rule gap (derived) |
+| --- | --- | --- | --- |
+| 0 | 19 | 21 | 0.020952 |
+| 1 | 36 | 36 | 0.120000 |
+| 2 | 39 | 41 | 0.107073 |
+| 3 | 28 | 29 | 0.220345 |
+| 4 | 15 | 10 | 0.234000 |
+| 5 | 16 | 20 | 0.410500 |
+| 6 | 15 | 11 | 0.665455 |
+| 7 | 3 | 3 | 0.723333 |
+| 8 | 8 | 8 | 0.602500 |
+| 9 | 21 | 21 | 0.069524 |
+
+By the library rule (derived): ECE 0.209300, MCE 0.723333, REL 0.078849; by the engine: ECE 0.209300, MCE 0.723333, REL 0.080032. 6 of the 10 bins hold a different number of rows. The ECE difference is 0 (derived): every bin here is over-confident, so moving an edge row between two over-confident bins leaves the pooled gap unchanged on this set. REL differs by -1.18e-3 (derived); MCE is the same here because the largest gap is in bin 7, which holds no edge value. Name the rule when a table from this engine is compared with the library's.
+
+LOG LOSS is imported from the machine learning engine, never re-implemented here: engines/dataai/ml.js logLoss: -(1/n) sum [y ln p + (1 - y) ln(1 - p)], natural log; p clipped to [eps, 1 - eps], eps = 1e-15. On this set it is 0.503184, with eps 1e-15 and 5 probabilities clipped (a probability of 0 or 1 would make the logarithm infinite).
+The figure is exactly what engines/dataai/ml.js logLoss returns on the same rows (checked). The machine learning course teaches log loss as a training loss.
+
+# SECTION 20: Judged sets, pooling, unjudged passages, a second annotator, and test questions in a prompt (owned by Expert m04 and Professional m02 l04)
+
+HOW THE JUDGED SET WAS BUILT (fixture): every passage in the top 5 of either system (BM25 and TF-IDF, default settings) is judged, plus passages the assessor added; unjudged passages count as grade 0. A judged set built this way is a POOL: the passages the pooled systems retrieved are judged, and every other passage is unjudged and counts as grade 0.
+
+OUTSIDE THE POOL. Two runs the pool did not come from (stated settings):
+
+| run | unjudged passages retrieved, all queries | queries with an unjudged passage | mean precision | MAP | mean nDCG |
+| --- | --- | --- | --- | --- | --- |
+| system A's retriever at k 5 (in the pool) | 0 | 0 | 0.443478 | 0.600278 | 0.762753 |
+| BM25 at k 10 | 80 | 22 | 0.291304 | 0.670893 | 0.816045 |
+| BM25 b 0.4, stop list on, k 5 | 16 | 11 | 0.443478 | 0.656854 | 0.799171 |
+
+UNJUDGED AND IRRELEVANT ARE DIFFERENT. Each unjudged passage above was scored as grade 0 because nobody judged it, and some may answer the query. A run that finds good passages the pool never saw is marked down for it: that is POOLING BIAS, and it favours the systems the pool was built from. Report unjudgedRetrieved beside every score of a new system, and judge its unjudged passages before comparing it with the pooled ones.
+
+A SECOND ANNOTATOR AS A CHECK. The same runs scored against the second annotator's grades (k 5, grade 1):
+
+| judgments | queries in the means | A MAP | B MAP | A mean nDCG | B mean nDCG |
+| --- | --- | --- | --- | --- | --- |
+| primary | 23 | 0.600278 | 0.593007 | 0.762753 | 0.764137 |
+| second annotator | 24 | 0.551119 | 0.542743 | 0.718064 | 0.701037 |
+
+On the primary grades B has the higher mean nDCG; on the second annotator's, A does. A difference between two systems smaller than the difference between two annotators is not a finding. Under the second annotator no query is excluded.
+Why no query drops out: Q24, excluded on the primary grades (all 0), has passages the second annotator graded 1 or more (fixture): EKD-023 1, EKD-033 2, EKD-037 1; every other passage judged for Q24 is 0 on both.
+
+PRINTED ALIKE IS NOT EQUAL. The b 0.4 run's mean precision and system A's both print 0.443478; the engine's doubles are 0.4434782608695653 and 0.44347826086956527, which differ in the last bits (difference 5.55e-17, derived). They are not a tie, and at six decimals they are no evidence either way.
+
+TEST QUESTIONS IN A PROMPT. The reference answers are the key. A system whose instructions or examples contained them would return the key itself, and the engine scores that as 24 exact matches of 24 (computed: each reference against itself). No score can tell a leaked key from skill, so the judged queries and their references are kept out of every prompt, every example and every fine-tuning set, and a leak is prevented by process: the score cannot detect it.
+
+# SECTION 21: Boundaries, rule by rule (owned by Expert m05)
+
+Every rule has its own boundary; none is global. Each row below is probed by two engine calls, one at the boundary and one across it.
+
+| function | rule | at the boundary | across it |
+| --- | --- | --- | --- |
+| `rankBm25, rankTfidf` | ranked | a score above 0 is ranked | a score of 0 (no query term) is never ranked |
+| `ranking` | tie | equal 12-digit keys tie and the id decides | keys that differ within 12 significant digits do not tie |
+| `retrievalMetrics` | relevant | a grade equal to relevantGrade is relevant | a grade one below is not |
+| `retrievalMetrics` | precision at k | k ranked: relevant / k | fewer than k ranked: still divides by k |
+| `retrievalMetrics` | reciprocal rank and AP | a relevant passage at rank k counts | at rank k + 1 it does not |
+| `evaluateRetrieval` | no relevant | one judged passage at the threshold: the query is included | none: excluded (default) or zeroed |
+| `retrievalMetrics` | nDCG | an ideal DCG above 0: a value | an ideal DCG of 0: null with the reason |
+| `scoreExtraction` | number match | |p - l| equal to the tolerance: correct (inclusive) | above it: wrong |
+| `checkGroundedness` | number match | |c - v| equal to numericRelTol x |v|: supported | above it: unsupported; numericRelTol 0 means equal values |
+| `checkGroundedness` | numericRelTol | from 0 up to just below 1 accepted | 1 refused |
+| `scoreExtraction` | empty | null, absent or a blank string is empty | "the" is a value (it normalises to nothing) |
+| `checkGroundedness` | comma groups | exactly three digits after a comma join the number | four digits: "12,1234" reads as "12" and "1234" |
+| `checkGroundedness` | minus sign | after a space: "-2" is a negative number | after a letter or digit: "Ekene-2" is an identifier |
+| `checkGroundedness` | date | YYYY-MM-DD touching no letter or digit is a date | "2023-01-01x" is read as numbers: the one number claim 2023, each "-01" after a digit being part of an identifier |
+| `calibration` | bin edge | p = i / M opens bin i | scikit-learn closes bin i - 1 at that value |
+| `calibration` | last bin | p = 1 is in bin M - 1 (closed) | no bin above it |
+| `cohenKappa` | expected disagreement | above 0: a kappa | 0: null with the reason |
+| `pairedBootstrap` | share at or below 0 | a replicate exactly 0 is counted | only replicates above 0 are not |
+| `bootstrapMean, pairedBootstrap` | level | 0.8, 0.9, 0.95, 0.99 accepted | any other level refused |
+| `bootstrapMean, pairedBootstrap` | seed | 0 and 4294967295 accepted | -1 and 4294967296 refused |
+| `bootstrapMean` | values | 2 values accepted | 1 refused |
+| `retrievalMetrics` | grade | 0 and 10 accepted | -1, 2.5, 11 refused |
+| `rankBm25` | k1 and b | k1 0 and b 0 and 1 accepted | k1 below 0 and b outside 0 to 1 refused |
+
+23 rules, each probed by a call either side.
+
+# SECTION 22: Size caps, the tie key and the bootstrap levels and labels (owned by Expert m05)
+
+THE CAPS trade time for size. Each is probed at the cap (accepted) and one above (refused):
+
+| cap | value | the refusal one above (verbatim) |
+| --- | --- | --- |
+| `MAX_DOCS` | 5000 | documents has 5001 entries, above the 5000 this engine accepts |
+| `MAX_CHARS` | 20000 | text has 20001 characters, above the 20000 this engine accepts |
+| `MAX_QUERIES` | 1000 | queries has 1001 entries, above the 1000 this engine accepts |
+| `MAX_K` | 1000 | k must be a whole number from 1 to 1000 |
+| `MAX_RECORDS` | 5000 | labels has 5001 records, above the 5000 this engine accepts |
+| `MAX_FIELDS` | 50 | fields has 51 entries, above the 50 this engine accepts |
+| `MAX_ANSWERS` | 5000 | answers has 5001 entries, above the 5000 this engine accepts |
+| `MAX_ROWS` | 100000 | yTrue has 100001 rows, above the 100000 this engine accepts |
+| `MAX_LABELS` | 50 | labels has 51 entries, above the 50 this engine accepts |
+| `MAX_BINS` | 100 | bins must be a whole number from 1 to 100 |
+| `MAX_VALUES` | 10000 | values has 10001 values, above the 10000 this engine accepts |
+| `MAX_BOOT` | 100000 | nBoot must be a whole number from 1 to 100000 |
+
+THE TIE KEY. 12 significant digits (section 8). A score is a sum of floating-point terms, and two passages with the same text can land a few bits apart when their terms are added in a different order; the key absorbs that, and a difference the key sees is a real difference in the inputs.
+
+THE BOOTSTRAP LEVELS AND THEIR LABELS. level is one of the four accepted values. Each interval is a percentile of a statistic, so it is labelled as a parameter percentile (lib/conventions/percentile.js), and never with a P label, which the platform keeps for outcomes:
+
+| level | lower label (verbatim) | upper label (verbatim) | lower, A nDCG, seed 7 | upper |
+| --- | --- | --- | --- | --- |
+| 0.8 | 10th percentile of the bootstrap mean | 90th percentile of the bootstrap mean | 0.691350 | 0.822582 |
+| 0.9 | 5th percentile of the bootstrap mean | 95th percentile of the bootstrap mean | 0.671684 | 0.838560 |
+| 0.95 | 2.5th percentile of the bootstrap mean | 97.5th percentile of the bootstrap mean | 0.653604 | 0.852644 |
+| 0.99 | 0.5th percentile of the bootstrap mean | 99.5th percentile of the bootstrap mean | 0.623984 | 0.877278 |
+
+The tails at level 0.95 are 0.025 and 0.975. In floating point (1 - 0.95) / 2 is 0.025000000000000022, which would move the quantile index off a whole number, so the engine rounds each tail to 12 decimals first (read from its source). A fixed list of levels keeps every label a well-formed ordinal.
+
+# SECTION 23: Conventions that are choices, what is not built, and the evaluation report (owned by Expert m06)
+
+Every convention below is a choice the engine states in its basis. Each has a real alternative in common use; name the choice when a number from this engine is compared with one from another tool.
+
+| convention | this engine | a common alternative | why the engine chose it |
+| --- | --- | --- | --- |
+| tokens | ASCII lowercase, split outside [a-z0-9], single characters kept, no stemming | a word pattern of two characters or more (scikit-learn's default), stemming | a learner can tokenise by hand, and single-character tokens such as well numbers matter |
+| stop list | off | on | the list removes well, top, bottom, fire and system |
+| TF-IDF | raw counts, smooth idf ln((1 + N) / (1 + df)) + 1, unit vectors | unsmoothed idf, other norms | scikit-learn's defaults, so a figure compares directly |
+| BM25 idf | Lucene ln(1 + (N - df + 0.5) / (df + 0.5)) | the Robertson form, negative for common terms | never negative |
+| BM25 numerator | keeps (k1 + 1) | Lucene 8 and later drop it | Robertson and Zaragoza's form; dropping it scales every score and leaves the order |
+| repeated query words | counted once (k3 = 0) | weighted by query frequency | a query is a set of words |
+| ties | 12 significant digits, then the id ascending | a relative tolerance, or input order | a key is transitive |
+| relevance threshold | grade 1 or more | grade 2 or more | trec_eval's default; state it with every figure |
+| precision at k | divides by k | divides by the passages ranked | trec_eval |
+| average precision | divides by every relevant judged passage | divides by min(k, relevant) | trec_eval; a missed passage lowers AP |
+| ideal DCG | every judged grade | the retrieved grades only | missing a good passage is penalised |
+| no relevant passage | excluded from the means and listed | scored 0 | trec_eval |
+| short answers | SQuAD normalisation | numeric-aware matching | the published script's rule, stated |
+| groundedness | cited and retrieved; numericRelTol 0 | any passage; a tolerance by default | a claim must be traceable to what the system saw |
+| calibration bins | an edge value opens the upper bin | scikit-learn closes the lower bin | numpy histogram's rule, the lead's choice |
+| ECE | non-empty bins, weighted by rows | unweighted mean over bins | Guo et al. (2017) |
+| bootstrap interval | lib/stats quantile on the replicates, parameter-percentile labels | linear interpolation | the platform's one quantile |
+
+WHAT IS NOT BUILT. No language model; no embedding or dense retrieval; no reranker; no stemming or synonyms; no query expansion; no model judging an answer; no truth check of a claim beyond finding it in a cited passage; no p-value; no fitting of the classifier behind the calibration set (the machine learning course fits classifiers).
+
+WHEN A MODEL HELPER IS NEVER GRADED. A model may draft text for a person to review. Its output is scored by the checks above and never used as a key, a label or a judgment in a graded set, because a key must have one right answer that does not change when the model does (section 4).
+
+WRITING THE EVALUATION REPORT names: the corpus and its size; the queries and how their judgments were pooled, the threshold and the gain; each system's retriever and its settings (method, k, k1, b, stop list); every metric with its cutoff and the queries excluded and why; the unjudged passages each system retrieved; the answer scores (exact match, token F1) and the groundedness figures with numericRelTol and whether the retrieved lists were used; the comparison with its seed, replicate count, level and whether it was paired; annotator agreement; and, for a probability, the Brier score, ECE and MCE with the bin count and the edge rule.
+
+# SECTION 24: Vocabulary this course legislates before a word is written (owned by Associate m01 and Professional m01 and Expert m01)
+
+Six words in this course carry a narrower meaning than they have in conversation or elsewhere in the academy. The rule for each is binding on every lesson, bank question, key truth and panel.
+
+| word | what it can mean elsewhere | the rule here |
+| --- | --- | --- |
+| relevant | useful in any way | a judged grade at or above the stated threshold, grade 1 by default; "related" is grade 1 itself, and a threshold is stated with every figure that depends on it |
+| hallucination | anything a model gets wrong | an unsupported claim: a number, date or quote the check could not find in a cited, retrieved passage, named with the engine's reason |
+| grounded | true, or well sourced | supported by a cited and retrieved passage; a statement about the passage, never about the truth of the answer |
+| accuracy | any agreement | correct cells over cells (extraction), named with its denominator; precision and recall name their cutoff or their filled cells |
+| score | any number | a BM25 score or a TF-IDF cosine, named with its method; a score is never a probability, and a probability is the calibration set's given input |
+| AI | the system, the method, or anything automated | the system being evaluated; the engine runs no model, and every method is named by what it is: TF-IDF, BM25, SQuAD matching, a claim check, kappa, a Brier decomposition, a seeded bootstrap |
+
+A SEEDED NUMBER is quoted with its seed, replicate count and level; a retrieval metric with its cutoff, threshold and gain; a calibration figure with its bin count.

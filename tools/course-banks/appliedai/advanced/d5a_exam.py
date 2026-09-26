@@ -1,0 +1,353 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# D5 Expert final exam. Figures from the agreement, calibration,
+# decomposition, judged-set, boundary, cap and conventions sections, with
+# recaps quoted from the ranking, metrics, extraction, groundedness and
+# comparison sections the Expert tier reads back.
+
+K = [3, 0, 2, 3, 2, 0, 3, 1, 2, 2, 0, 1, 0, 3, 0, 2, 0, 3, 1, 2, 3,
+     2, 1, 0, 1, 0, 3, 0, 0, 1, 3, 1, 2, 3, 1, 3, 0, 1, 2, 2, 1, 2]
+_i = iter(K)
+def x(p, c, ds, e): q(next(_i), p, c, ds, e)
+
+# 1
+x("In the Ekene confusion table, rows the primary grades and columns the second annotator's, the largest off-diagonal cell is row 0, column 1, with 24 pairs. Why does that cell matter most to the retrieval metrics' default setting?",
+ "It holds passages one annotator calls not relevant and the other related, which is the grade 1 line the default threshold draws",
+ ["It holds the pairs where both annotators agree on grade 1, so it is the base every relevant passage in the metrics rests on",
+  "It holds the three-grade reversals, which quadratic kappa charges 9 each and which drive the weighted kappa down",
+  "It is where the second annotator's draw moved two grades, the rarer move, so it measures the fixture's own noise"],
+ "Row 0, column 1 counts pairs the primary annotator graded 0 and the second graded 1. At the default relevantGrade of 1, those passages flip between not relevant and relevant depending on the key. The diagonal holds agreement; a three-grade reversal would sit in a far corner; and a one-grade move is the common draw, with probability 0.25.")
+
+# 2
+x("What are the observed agreement and the kappa when each Ekene grade is first reduced to relevant or not at grade 2 or more?",
+ "Observed agreement 0.928962 and kappa 0.794115",
+ ["Observed agreement 0.814208 and kappa 0.634430",
+  "Observed agreement 0.721311 and kappa 0.771549",
+  "Observed agreement 0.928962 and kappa 0.579841"],
+ "At grade 2 or more the derived two-way ratings agree on 0.928962 of the pairs with kappa 0.794115. 0.814208 and 0.634430 belong to the grade 1 reduction. 0.721311 is the four-grade observed agreement and 0.771549 the quadratic kappa on four grades. 0.579841 is the four-grade unweighted kappa.")
+
+# 3
+x("From the quadratic row of the Ekene agreement table, observed disagreement 0.459016 and expected disagreement 2.009257, which figure does the engine's formula give?",
+ "A kappa of 0.771549, one minus the ratio of the two",
+ ["A kappa of 0.459016, since the observed disagreement is the figure kappa reports",
+  "A kappa of 0.721311, the observed agreement, which weights never alter at all",
+  "No kappa: a disagreement above 1 makes the quadratic weighting undefined here"],
+ "Kappa is 1 - sum w O / sum w E, the same formula for every weighting, so 1 - 0.459016 / 2.009257 gives 0.771549. A disagreement is an input to kappa, never kappa itself. The observed agreement 0.721311 is reported unweighted in every row and is not a kappa. A weighted disagreement above 1 is expected, because a weight can exceed 1.")
+
+# 4
+x("Four calls are made. Which one is a refusal, as distinct from a result returned with a note?",
+ "cohenKappa with rater a an empty list, which names the field `a`",
+ ["cohenKappa where both raters give every item the same label, 2, which names no field",
+  "retrievalMetrics for system A on Q24, where recall and average precision have no value",
+  "checkGroundedness on an answer that states no quote, date or number for the check"],
+ "An empty rater list is refused: \"a must be a non-empty array of ratings\", with the field named. The other three calls run on valid inputs and return a figure as null with the reason beside it: kappa when the expected disagreement is 0, recall and average precision on Q24 where no judged passage has grade 1 or more, and the supported fraction of an answer with no checkable claim.")
+
+# 5
+x("A kappa call passes 51 distinct labels. What does the engine return?",
+ "A refusal: \"labels has 51 entries, above the 50 this engine accepts\"",
+ ["A kappa over the first 50 labels, with a note that the last label was dropped from the table",
+  "A refusal: \"labels[2] repeats 1\", as 51 labels on a four-grade scale must hold a repeat",
+  "A kappa, since MAX_LABELS limits only the calibration bins and has no effect on the kappa"],
+ "MAX_LABELS is 50, and one above is refused with the field and the cap named, in the words quoted. No label is dropped quietly. The repeat message is for a label listed twice, and 51 distinct labels hold no repeat. MAX_LABELS is the kappa cap; the calibration bins have their own cap, MAX_BINS 100.")
+
+# 6
+x("A team reads the Ekene annotators' unweighted kappa, 0.579841, as evidence that system B retrieves better than system A. What is wrong with that reading?",
+ "Kappa measures how far two raters agree on the grades; it says nothing about either system",
+ ["Kappa of 0.579841 favours system A, since it is closer to A's MAP than to B's on the same key",
+  "The reading is sound, since a kappa above 0.5 means the higher-scoring system is the better one",
+  "Kappa compares the two systems' rankings query by query, so it favours neither when it is positive"],
+ "Kappa is computed from two raters' labels on the same items, the primary and second annotators' grades here, and no system output enters it. It tells a reader how stable the key is, and a modest kappa warns that a small difference between systems may be the annotators disagreeing. No kappa threshold names a better system, and kappa never compares rankings.")
+
+# 7
+x("A second classifier is scored on the same 200 Ekene rows and returns a different Brier score. Which decomposition term must be identical for the two classifiers?",
+ "Uncertainty, 0.153900, since it depends on the outcomes alone",
+ ["Reliability, 0.080032, since it is set by the bin edges alone",
+  "Resolution, 0.064570, since both use the same 10 bin edges",
+  "WBC, 0.001669, since the six stated rows fix the covariance"],
+ "UNC is base rate x (1 - base rate) and the base rate belongs to the outcomes, so any classifier on these rows has UNC 0.153900. Reliability depends on each bin's mean probability, resolution on each bin's observed frequency, and both follow where the probabilities put the rows. WBC depends on the probabilities inside each bin; the six stated rows are a separate worked example.")
+
+# 8
+x("The Ekene ECE of 0.209300 equals the mean probability over all 200 rows minus the base rate. What is that mean probability?",
+ "0.399300",
+ ["0.190000",
+  "0.168382",
+  "0.209300"],
+ "Because every non-empty bin is over-confident, ECE comes to the mean probability minus the base rate, 0.399300 - 0.190000 = 0.209300. 0.190000 is the base rate itself, 0.168382 the Brier score, and 0.209300 the ECE, which the subtraction produces.")
+
+# 9
+x("In the ten-bin Ekene table, which bin's observed frequency sits farthest from the base rate of 0.190000, and so adds most to resolution per row?",
+ "Bin 9, where 0.904762 of the 21 rows are relevant",
+ ["Bin 7, where 3 rows carry the largest gap, 0.723333",
+  "Bin 2, the bin holding the most rows, 39 of the 200",
+  "Bin 6, with 15 rows and an observed frequency of 0"],
+ "Resolution is sum n_k (observed_k - base rate)^2 / N, and bin 9's 0.904762 is the farthest observed frequency from 0.190000 in either direction. Bin 7's figure is its gap between mean probability and frequency, which feeds reliability and MCE. Bin 2 has the most rows and an observed frequency of 0.128205, near the base rate. Bin 6's frequency, 0, lies 0.190000 away, far less than bin 9's distance.")
+
+# 10
+x("Which two figures in a calibration result need neither a bin count nor an edge rule to be reproduced?",
+ "The Brier score and log loss, since each is a mean over rows",
+ ["ECE and MCE, since each is read off the whole reliability table at once",
+  "REL and RES, since the bins cancel inside the decomposition",
+  "The closure and WBV, since both are 0 up to rounding anyway"],
+ "The Brier score is mean (p - y)^2 and log loss a mean of logarithms over rows, so neither uses a bin. ECE and MCE are computed from the bins and move with them, as MCE does from 0.660556 at 5 bins to 0.750000 at 15. REL and RES are bin sums, and REL moves under the library's edge rule. WBV is a within-bin spread, 0.000689 at 10 bins, well above rounding.")
+
+# 11
+x("A report computes the pooled within-bin covariance of the Ekene rows at 10 bins and prints it in the WBC line of its decomposition. What is wrong?",
+ "WBC as Stephenson, Coelho and Jolliffe (2008) label it is twice that covariance; the engine's WBC, 0.001669, is the paper's",
+ ["Nothing: WBC is the pooled within-bin covariance, and the engine's 0.001669 is that covariance printed at six decimals",
+  "The covariance should be halved before it is printed, since the paper's eq. 7 splits it across the WBV and WBC lines",
+  "WBC is the within-bin variance of the probabilities, 0.000689 on these rows, so the covariance belongs on another line"],
+ "The paper writes the fifth term of eq. 7 as -(2/N) sum (y - observed_k)(p - mean p_k) and names it -WBC, so WBC carries the factor 2. The engine's WBC is the paper's, and printing the bare covariance as WBC is a real wrong method that leaves the identity open. Nothing is halved or split, and 0.000689 is WBV.")
+
+# 12
+x("A reviewer writes the Ekene decomposition as REL - RES + UNC + WBV - 2 WBC and substitutes the engine's five figures. What does the sum do?",
+ "It misses the Brier score of 0.168382, since the 2 is counted twice when the engine's WBC already carries it",
+ ["It lands on 0.168382, since the engine prints only half of WBC and the reviewer's 2 restores the missing half",
+  "It lands on 0.169362, the three classic terms, because the two within-bin terms cancel under that form",
+  "It closes at -8.33e-17 as before, since a factor on a term as small as WBC is lost in the rounding"],
+ "The engine's identity is Brier = REL - RES + UNC + WBV - WBC with no further 2, because WBC as the paper labels it already includes the factor. Subtracting 2 WBC removes an extra 0.001669 and the sum no longer equals 0.168382. The engine prints WBC whole. 0.169362 is REL - RES + UNC alone, and 0.001669 is far larger than any rounding.")
+
+# 13
+x("The Ekene rows are decomposed at 5, 10 and 15 bins. Which figures can move with the bin count, and which cannot?",
+ "REL and RES can move; UNC and the Brier score cannot",
+ ["UNC and the Brier score move; REL and RES stay fixed",
+  "All five terms move, and the Brier score moves with them",
+  "None move: the decomposition is fixed by the 200 rows"],
+ "REL and RES are sums over bins, so the bins decide them, as the one-bin case shows with RES 0.000000. UNC depends on the outcomes alone and the Brier score is a mean over rows, so both hold at 0.153900 and 0.168382. The within-bin terms move with the bins too, but the Brier score they close to does not.")
+
+# 14
+x("Comparing the engine's bin-edge rule with scikit-learn's on the Ekene rows at 10 bins, which of REL, ECE and MCE differ?",
+ "REL alone, by -1.18e-3; ECE and MCE come out the same on this set",
+ ["All three, since 6 of the 10 bins hold a different number of rows",
+  "ECE alone, since it weights each bin by the rows the rule moves in",
+  "None, since the rule moves only 17 rows out of the full 200 rows"],
+ "By the library rule REL is 0.078849 against the engine's 0.080032; ECE 0.209300 and MCE 0.723333 agree, ECE because every bin is over-confident and MCE because bin 7 holds no edge value. Six bins change their counts, yet only REL moves on this set. Seventeen rows are enough to move REL, so the rule is named whenever tables are compared.")
+
+# 15
+x("The log loss of the Ekene rows reports 5 probabilities clipped. What does that count say about the calibration set?",
+ "It holds probabilities of exactly 0 or 1, whose cost is set by eps 1e-15",
+ ["Five rows were dropped from the log loss mean as out of range, so it runs over fewer rows",
+  "Rows on an interior bin edge, five of them, which log loss moves into the lower bin",
+  "Five probabilities were above 0.5 on rows whose outcome was 0, the confident misses"],
+ "Clipping moves a probability into [eps, 1 - eps] only when it lies outside that range, which for probabilities given to 2 decimals means exactly 0 or 1; each clipped row's cost is then set by eps. No row is dropped, log loss uses no bins, and a confident miss such as 0.9 on an outcome of 0 is not clipped.")
+
+# 16
+x("Scored under the primary grades and again under the second annotator's, at k 5 and grade 1, which metric keeps the same order of systems A and B on both keys?",
+ "MAP: A leads on both, 0.600278 against 0.593007 and 0.551119 against 0.542743",
+ ["Mean nDCG: B leads on both, 0.764137 against 0.762753 and 0.701037 against 0.718064",
+  "Neither: both MAP and mean nDCG change leader when the key changes to the second one",
+  "MRR, the only metric the course reports under the second annotator's grades at all"],
+ "Under the primary grades A's MAP 0.600278 beats B's 0.593007, and under the second annotator A's 0.551119 beats 0.542743, so MAP keeps its order. Mean nDCG flips: B leads on the primary grades and A, 0.718064 against 0.701037, on the second. The course's second-annotator table reports MAP and mean nDCG and leaves MRR out.")
+
+# 17
+x("Judging the 80 unjudged passages that BM25 at k 10 retrieves could move its MAP of 0.670893 which way?",
+ "Either way: a passage judged relevant adds precision at its rank and also enlarges its query's divisor",
+ ["Only upward, since every unjudged passage now scored 0 can only gain grade when an assessor finally reads it",
+  "Only downward, since the newly judged passages raise the number of relevant passages the run is measured on",
+  "Not at all, since MAP reads only the relevant passages the run retrieved and those are judged already"],
+ "Every one of the 80 sits in the run's own lists. Judged relevant, a passage adds a precision term at its rank and also joins the divisor of every relevant judged passage for its query, so that query's average precision rises when the passage sits high in the list and can fall when it sits near the foot. Judged not relevant, it leaves the figure as it stands. So judging can move MAP either way, which is why the course says those figures bound nothing in either direction until the passages are judged.")
+
+# 18
+x("Under the primary grades, system A's evaluateRetrieval at k 5 lists Q24 as excluded. What reason does the engine give?",
+ "\"no judged document has grade 1 or more\"",
+ ["\"runs has no ranking for query Q24\"",
+  "\"the query has no token, so no document is ranked\"",
+  "\"nDCG is undefined: the query has no judged documents, so the ideal DCG is 0\""],
+ "The no-relevant rule excludes a query with no judged passage at grade 1 or more and lists it with the reason quoted. Q24 has a ranking and 8 judged passages, all at grade 0, so neither the missing-ranking refusal nor the no-judged-documents note applies, and its query text holds tokens.")
+
+# 19
+x("With noRelevant set to 'zero' in place of the default, how do system A's MAP and the query count change?",
+ "Q24 is kept and scored 0, so 24 queries enter the means and A's MAP falls from 0.600278 to 0.575266",
+ ["Q24 is dropped from the list of excluded queries, and A's MAP rises to 0.670893 over 24 queries",
+  "Nothing changes, since Q24 has no relevant passage and adding a zero changes nothing in a mean over 23 queries",
+  "The call is refused: \"noRelevant must be 'exclude' or 'zero'\", since zero is not a rule it offers"],
+ "Under 'zero' the query nothing answers is kept with every metric it cannot give scored 0, so the mean is over 24 queries and falls to 0.575266, and Q24 is listed as zeroed. A zero added to the count does change a mean. 0.670893 is BM25's MAP at k 10. 'zero' is one of the two rules offered.")
+
+# 20
+x("A new team wants the test set for its copilot kept safe. Which practice does the course prescribe?",
+ "Keep the judged queries and their references out of every prompt, every example and every fine-tuning set",
+ ["Score the copilot twice and discard any run that reaches 24 exact matches of 24 as a likely leak of the key",
+  "Run the groundedness check, which flags any answer whose figure was copied from the reference",
+  "Raise the relevance threshold to grade 2 or more, so that a leaked key earns rather less credit in the means"],
+ "No score can tell a leaked key from skill, because a leaked answer compares perfectly with its reference, so the leak is prevented by process before the score is computed. Discarding a perfect run would punish a system that is simply right. Groundedness checks cited passages and cannot see where a figure came from. The threshold changes retrieval metrics and leaves short-answer matching alone.")
+
+# 21
+x("A pooled key is set beside a full key that keeps every grade the pool gave and adds an assessor's grades for the passages a new system retrieved that the pool left unjudged. Where in their confusion table do all the disagreements fall?",
+ "In the row where the pooled key says 0 and the assessor gives grade 1 or more, since the key scores every unjudged passage 0",
+ ["Along the diagonal, since the pooled key and the full judging agree on every passage that the pool happened to judge",
+  "In the column where the assessor says 0 and the pooled key gives grade 1 or more, since pools over-grade passages",
+  "Spread evenly over the table, since pooling errors are random and fall on both sides of the diagonal equally"],
+ "On the passages the pool judged, both keys carry the same grade, because the full key keeps them; the rest are unjudged, which the pooled key scores 0, so every disagreement sits where the key says 0 and the assessor says 1 or more. A one-sided table is the signature of pooling bias. The diagonal is agreement, pools never grade an unjudged passage above 0, and the error is systematic.")
+
+# 22
+x("BM25 at k 5 reports a tie at the cutoff on four queries. Which, and what does a metric computed there depend on?",
+ "Q01, Q06, Q17 and Q22; the id order of the tied passages decides which stay inside the cut",
+ ["Q06, Q10, Q14 and Q24; the length of the tied passages decides which of them stay inside the cut",
+  "Q01, Q06, Q17 and Q22; the scores alone decide, since tied passages are reported past the cutoff",
+  "Q10 alone, the duplicate spill note; ties elsewhere are broken by score at the full double first"],
+ "Across the 24 queries at k 5, BM25 flags tieAtCutoff on Q01, Q06, Q17 and Q22, and TF-IDF on Q22. When the cut falls inside a tie, the id ascending decides which tied passages stay, so the metric depends on the ids. The list is never lengthened past k. Q10 ties at rank 1 and 2 with a list of 2, which falls inside the cut only at k 1.")
+
+# 23
+x("At relevantGrade 2, a passage graded 2 sits exactly on the threshold and one graded 1 sits just below. How does the engine treat the two?",
+ "The grade 2 passage is relevant, since the threshold names the lowest relevant grade; the grade 1 passage is not",
+ ["Neither is relevant, since a passage counts only strictly above the threshold, as a limit is always exclusive",
+  "Both are relevant, since any passage with a grade of 1 or more counts, whatever value the relevantGrade happens to be set to",
+  "The grade 2 passage is relevant only for nDCG, while precision and recall ignore any grade under 3 altogether"],
+ "The boundary table states that a grade equal to relevantGrade is relevant and a grade one below is not. Boundaries are per rule: this one includes its limit. relevantGrade replaces the default of 1 when it is passed. nDCG uses every grade as gain and ignores the threshold, while precision and recall follow it.")
+
+# 24
+x("Q10 by BM25 ranks only 2 passages, both relevant. What precision at 5 does the engine return, and why?",
+ "0.400000, since precision at k divides by k even when fewer than k are ranked",
+ ["1.000000, since both of the passages ranked are relevant and precision reads the list",
+  "Null with a reason, since a list shorter than k leaves precision at k undefined",
+  "0.500000, since the engine divides by the relevant passages the query was judged to have"],
+ "The basis states precision: relevant in the top 5 / 5, 5 even when fewer are ranked, so 2 / 5 = 0.400000. Dividing by the passages ranked is the common alternative the engine declined, following trec_eval. A short list is a result, never a null, and dividing by the relevant judged passages is recall.")
+
+# 25
+x("A retrievalMetrics call is made at k 3, where the first relevant passage sits at rank 4. What reciprocal rank does it return?",
+ "0: a relevant passage at rank k + 1 does not count, so there is none in the top k",
+ ["0.250000, one over the rank of the first relevant passage wherever it sits in the list",
+  "Null with a note, since the first relevant passage lies outside the stated cutoff",
+  "0.333333, one over k, as the engine credits a passage found just past the cutoff"],
+ "The basis says reciprocal rank is 1 / rank of the first relevant document in the top k, and 0 when there is none; the boundary table confirms a relevant passage at rank k counts and at rank k + 1 does not. So the value is 0. Reciprocal rank never looks past the cutoff and is never null for a query with a relevant passage.")
+
+# 26
+x("An answer writes \"45% water\". How does the claim reader take the figure?",
+ "As the number 45, since a percent sign is ignored when a number claim is read",
+ ["As a quote, since a symbol attached to digits turns the whole figure into quoted text",
+  "As no claim at all, since a figure carrying a unit or a sign makes an identifier of it",
+  "As a fraction of one, since the reader divides a percentage by a hundred before matching"],
+ "The claim grammar reads digits with optional comma groups and a decimal part, a percent sign ignored, so \"45%\" is the number 45 and must equal a passage number at numericRelTol 0. A quote needs double quotation marks. The identifier rule is about a number glued to a letter, or to - _ or / after a letter or digit, and nothing is divided before matching.")
+
+# 27
+x("An answer cites a passage and writes the date \"2023-01-01x\". What does the claim reader take from it?",
+ "Numbers only: a date must touch no letter or digit, so the trailing x makes it read as numbers",
+ ["The date 2023-01-01, since the reader strips a trailing letter before it matches a date",
+  "Nothing at all, since any text that touches a letter is part of an identifier and is skipped entirely",
+  "A quote, since a date that is followed by a letter is taken as quoted text by the reader"],
+ "The boundary table states the date rule: YYYY-MM-DD touching no letter or digit is a date, and \"2023-01-01x\" is read as numbers: 2023 is a number claim, and each later piece follows a hyphen after a digit, so it is part of an identifier. The reader strips nothing before matching. A quote needs quotation marks. The identifier rule is about a number directly after a letter, or after - _ or / that follows a letter or digit.")
+
+# 28
+x("To let any rounded figure stand, someone sets numericRelTol to 1 in checkGroundedness. How does the engine respond?",
+ "It refuses, naming the field: \"numericRelTol must be a number from 0 (inclusive) to 1 (exclusive)\"",
+ ["Every number is supported, since a tolerance of 1 accepts any figure within its own size",
+  "The call runs with numericRelTol capped at 0.002, the setting the course uses for rounding",
+  "A refusal naming `citations`, as a tolerance of 1 means the citations are not checked at all"],
+ "numericRelTol runs from 0 up to just below 1, and 1 is refused with the field named, in the words quoted. The engine never caps a value in place of refusing it. 0.002 is a setting the course passes to show a rounded figure standing, and the citations refusal is for citations that are not a list.")
+
+# 29
+x("A retrievalMetrics call passes a judgment of grade 11 for EKD-018. What does the engine return?",
+ "The call is refused with the judgment's path named: \"judgments.EKD-018 must be a whole-number grade from 0 to 10\"",
+ ["A result with the grade clipped to 10, the highest grade that the engine accepts at all",
+  "Grades above 3 are read as grade 3 on the four-grade Ekene scale, and a result comes back",
+  "A refusal: \"relevantGrade must be a whole number from 1 to 10\", naming relevantGrade"],
+ "Grades 0 and 10 are accepted and -1, 2.5 and 11 are refused, with the judgment's own path named, in the words quoted. The engine clips nothing. MAX_GRADE is 10, so the four-grade scale belongs to the fixture and the engine's own limit is 10. The relevantGrade message is for a threshold of 0.")
+
+# 30
+x("System A's bootstrap of mean nDCG, seed 7 and 2000 replicates, gives 0.691350 to 0.822582 at level 0.8 and 0.623984 to 0.877278 at level 0.99. Why does the wider interval contain the narrower one?",
+ "Every bound is read from the same 2000 sorted replicate means, with the tails simply further out",
+ ["Each level draws its own replicates, and the engine draws more of them at 0.99 so the interval widens",
+  "The 0.99 interval is the 0.8 one stretched by a ratio of normal quantiles about the mean nDCG",
+  "They need not nest at all; on seed 7 they happen to, and on another seed they could cross over"],
+ "One seeded stream gives one set of 2000 replicate means; each level reads its two bounds from that sorted set, the 10th and 90th percentiles at 0.8 and the 0.5th and 99.5th at 0.99, so the intervals nest. The replicate count is set by nBoot and not by the level, no normal quantile enters a percentile interval, and nesting follows from reading one sorted set.")
+
+# 31
+x("At 2000 replicates and a lower tail of 0.025, which replicate means does the platform's quantile read for the lower bound?",
+ "The mean of the 50th and 51st smallest, since idx = 2000 x 0.025 = 50 is whole and nBoot is even",
+ ["The 50th smallest alone, since a whole index always takes the idx-th smallest value directly, with no mean",
+  "The 51st smallest, the ceiling of the index, since the tail is read a few bits above 0.025",
+  "A linear interpolation between the 50th and 51st smallest, weighted by the fractional index"],
+ "The stated rule: idx = nBoot x p; idx not whole takes the ceil(idx)-th smallest; idx whole with nBoot even takes the mean of the idx-th and (idx+1)-th; idx whole with nBoot odd the (idx+1)-th. Here idx is 50 and nBoot even. The engine rounds each tail to 12 decimals, so 0.025 is read exactly. Linear interpolation is the alternative the platform did not take.")
+
+# 32
+x("A ranking call passes one passage of 20001 characters as documents[0]. What does the refusal say?",
+ "\"documents[0].text has 20001 characters, above the 20000 this engine accepts\"",
+ ["\"text has 20001 characters, above the 20000 this engine accepts\" for all texts",
+  "\"documents has 5001 entries, above the 5000 this engine accepts\" for the list",
+  "Nothing: the passage is cut at 20000 characters and ranked with a note about it"],
+ "The character cap applies to each text on its own, and a passage that breaks it is named by its position in the list, in the words quoted. The bare `text` wording is the tokenize call's version of the same cap. The documents count cap is a different rule. No text is truncated: a cap either lets the call run exactly or refuses it.")
+
+# 33
+x("The query \"the well top\" is ranked with the stop list on. What happens, and why does the engine keep the list off by default?",
+ "No document is ranked, as the query has no token left; the list removes well, top, bottom, fire and system",
+ ["The query ranks on well and top alone, since the list only removes the word the and other small function words",
+  "It returns the note \"no document contains a query term\", as the corpus lacks the three words",
+  "A refusal naming `stopWords`, since a query made only of stop words cannot be passed to the engine at all"],
+ "scikit-learn's list removes every token of that query, and the engine returns \"the query has no token after the stop list, so no document is ranked\" as a result with a note. The list removes words that carry meaning in oilfield text, well, top, bottom, fire and system among them, so the engine keeps it off. The stopWords refusal is for a switch that is not true or false.")
+
+# 34
+x("The query \"oil oil rate\" is scored on the hand set by BM25 and by TF-IDF. How do d1's two figures compare with those for \"oil rate\"?",
+ "BM25 is unchanged at 2.191027, since a repeated query word counts once; the TF-IDF cosine moves to 0.679173",
+ ["Both are unchanged, since each method keeps the distinct query terms and weights them the same",
+  "BM25 rises above 2.191027, since oil now counts twice; the TF-IDF cosine stays at 0.715911",
+  "Both move, BM25 to 1.750937 and the cosine to 0.679173, since the query is longer in each"],
+ "BM25 keeps the distinct query terms (k3 = 0), so \"oil oil rate\" returns exactly the scores of \"oil rate\", d1 2.191027. TF-IDF weights the query like a passage, with raw counts, so its vector becomes oil 0.894427, rate 0.447214 and d1's cosine falls from 0.715911 to 0.679173. 1.750937 is d1's BM25 score at k1 = 0.")
+
+# 35
+x("On the stated ranking c, a, x, b, d with judgments a 3, b 2, c 0, d 1, e 2, nDCG at 5 with linear gain is 0.551774. Why does the ideal DCG count e?",
+ "The ideal ranks every judged grade, retrieved or not, so a system is penalised for missing a good passage",
+ ["It does not: the ideal ranks only the retrieved passages, and e was never retrieved by the run",
+  "Because e is unjudged in the ranking and so counts as grade 0 there, lowering the ideal DCG",
+  "Because e's grade 2 is the median of the judged grades, and the ideal starts from the median"],
+ "The basis says the ideal ranks every judged grade descending, retrieved or not, here 3, 2, 2, 1, 0, which gives an ideal DCG of 5.692536 against the run's 3.140995. Building the ideal from the retrieved passages alone would reward a system for missing e. e is judged grade 2 and never ranked; x is the unjudged passage. No median enters.")
+
+# 36
+x("System A's extraction micro accuracy and macro accuracy, correct cells over cells, both print 0.972222. When may a report call them equal?",
+ "When the reason is stated: every labelled record is scored on every field, so they are equal by construction",
+ ["Always, since any two figures that agree at six decimals are the same number and may be called equal in a report",
+  "Never, since micro and macro accuracy are computed differently and cannot be equal on any real set",
+  "Only when the macro F1 also equals the micro F1, which on system A it does, at 0.966825 in both of the two cases"],
+ "Printed alike is not equal in general, and the course prints the differences, 1.11e-16 and 2.22e-16, and the reason before calling them equal: each field has the same 30 cells, so the mean of the per-field accuracies equals the pooled accuracy. Micro and macro F1 differ, 0.966825 against 0.942735, because filled cells differ by field.")
+
+# 37
+x("System B's MRR at 5 is 0.923913 against system A's 0.880435, while A has the higher MAP at grade 1. What does each figure reward?",
+ "MRR rewards where the first relevant passage sits; MAP rewards placing every relevant judged passage high",
+ ["MRR averages precision at every relevant rank; MAP counts only the first relevant passage found for each query",
+  "Both reward the same thing, so the two orders disagree only through rounding at six decimals",
+  "MRR divides by k and MAP by the passages ranked, so MRR favours whichever system returns the shorter lists"],
+ "Reciprocal rank is 1 / rank of the first relevant passage, so MRR is about the first hit; average precision sums precision at every relevant rank and divides by every relevant judged passage, so MAP rewards finding and ranking them all. They measure different things and can disagree, as here. Neither divides by k or by the passages ranked.")
+
+# 38
+x("System B's pooled supported fraction is 0.731707, while the mean of its per-answer fractions is 0.687500. What separates the two?",
+ "The pooled figure counts every claim of every answer together; the mean averages the answers that have a claim",
+ ["The pooled figure uses numericRelTol 0.002; the mean uses the default of 0, so it is the lower",
+  "The mean includes the answers with no claim at 0; the pooled figure leaves them out altogether",
+  "The pooled figure counts only the cited passages; the mean counts every passage of the corpus"],
+ "The basis: supportedFraction pools every claim of every answer, 30 of 41 for system B, and meanAnswerSupportedFraction averages the answers that have at least one claim. Both use numericRelTol 0 here; at 0.002 the pooled fraction rises to 0.756098. An answer with no claim has a null fraction and is left out of the mean. Both figures use cited and retrieved passages.")
+
+# 39
+x("The paired nDCG bootstrap on seed 7 reports a share of 0.511000 at or below 0. What is that figure, and what does the engine compute from it?",
+ "The share of replicates in which A did not beat B, a count of replicates; the engine computes no p-value",
+ ["The p-value of the difference, which the engine prints beside the interval as its test result",
+  "A p-value needs an unpaired bootstrap, so it is reported only on the unpaired row, 0.505000",
+  "A refusal naming `paired`, returned because a paired comparison has no share to give"],
+ "The share at or below 0 is the share of replicates in which A did not beat B, a count of replicates, and the engine does not call it a p-value; the course lists a p-value among what is not built. The unpaired share, 0.505000, is also a share, and the `paired` refusal is for a value that is not true or false.")
+
+# 40
+x("Which statement about the Ekene second annotator's grades is supported by the course?",
+ "They were drawn from the primary grades by a stated synthetic rule, and under them no query is excluded from the means",
+ ["They were written by a language model and checked by hand, and under them Q24 is still excluded from every mean",
+  "They are the primary grades with every grade 1 raised to 2, so under them MAP and nDCG rise for both systems",
+  "They cover only the passages system B retrieved, so under them system A's figures cannot be computed at all"],
+ "The fixture draws each second grade from the primary one, moved one grade with probability 0.25 and two with probability 0.05, on a stated seed, and under those grades no query is excluded, so 24 enter the means. No language model wrote any fixture. Both systems' MAP and nDCG fall under the second key, and the second annotator graded every judged pair.")
+
+# 41
+x("A copilot's answer is fully supported by the passages it cites and retrieved. What else must be checked before it is called correct?",
+ "Its short answer against the reference, since a supported claim can come from a passage about another well",
+ ["Nothing more: a fully supported answer is correct by the engine's rule, so exact match adds nothing further to the verdict",
+  "Its kappa against a second annotator, since agreement on the grades is what makes any answer correct",
+  "Its calibration, since a supported answer with a probability under 0.5 is counted as not correct"],
+ "Grounded is a statement about the passage and never about truth: system B's Q05 date 2024-09-01 is supported by EKD-027, which is about Ekene-3, and its short answer scores exact match 0 against the reference 2024-03-01. Correctness is scored against a reference by exact match and token F1. Kappa measures raters, and calibration scores probabilities and never answers.")
+
+# 42
+x("The engine's calibration bins follow numpy histogram's edge rule where scikit-learn closes the lower bin. How should a report handle a reliability table compared across the two tools?",
+ "Name the edge rule and the bin count, since the table and REL can differ under the other convention",
+ ["Convert the engine's table to the library rule first, since the engine's own rule is an error to fix",
+  "Ignore the difference, since interior-edge probabilities never occur when they are given to 2 decimals",
+  "Report ECE alone, since it agrees under both rules on every set, whatever the bins and the rows"],
+ "Neither rule is an error; they are two conventions, and on the Ekene rows 6 of the 10 bins change their counts and REL moves from 0.080032 to 0.078849. Probabilities to 2 decimals do land on edges: 17 of them at 10 bins. ECE agrees on this set only because every bin is over-confident, which need not hold elsewhere, so the rule and the bin count are named.")
+
+emit(Q, '/root/dai-wip-appliedai/banks/d5a_exam.json', expect_n=42)
+finish()

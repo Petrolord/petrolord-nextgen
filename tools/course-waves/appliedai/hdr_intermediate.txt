@@ -1,0 +1,20 @@
+-- ============================================================================
+-- D5 PROFESSIONAL DEEP SEED: Applied AI and Language Models, intermediate
+-- tier.
+--
+-- Six modules, 26 lessons, 132 questions. Generated from the tier's
+-- manifest.json and the committed bank JSONs under
+-- tools/course-banks/appliedai/intermediate.
+--
+-- What this tier owns: SCORING RETRIEVAL AND ANSWERS HONESTLY. Average
+-- precision and MAP, the no-relevant rule and the relevance threshold; DCG,
+-- the ideal ranking, linear and exponential gain and unjudged passages; SQuAD
+-- normalisation, exact match and token F1; field extraction by outcome with
+-- micro and macro figures; groundedness, cited and retrieved, and its limits;
+-- two systems compared with a seeded paired bootstrap. Digest sections 11 to
+-- 16, and section 24.
+--
+-- THE TRAP THE TIER IS BUILT ON. A setting changes the verdict: the threshold
+-- reverses the MAP order of the two systems, grounded is not correct, and a
+-- difference inside its interval is not a finding.
+-- ============================================================================

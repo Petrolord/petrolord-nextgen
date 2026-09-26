@@ -1,0 +1,366 @@
+{
+ "app_slug": "appliedai",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-annotator-agreement",
+   "title": "Annotator Agreement",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-two-annotators-one-judged-set",
+     "title": "Two annotators, one judged set",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-observed-and-expected-agreement",
+     "title": "Observed and expected agreement",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-cohens-kappa",
+     "title": "Cohen's kappa",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-weighted-kappa",
+     "title": "Linear and quadratic weights",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-when-kappa-is-undefined",
+     "title": "When kappa has no value",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-calibration",
+   "title": "Calibration",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-a-probability-and-an-outcome",
+     "title": "A probability and an outcome",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-brier-score",
+     "title": "The Brier score",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-reliability-table",
+     "title": "The reliability table",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-ece-and-mce",
+     "title": "Expected and maximum calibration error",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-decomposing-the-brier-score",
+   "title": "Decomposing the Brier Score",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-reliability-resolution-uncertainty",
+     "title": "Reliability, resolution and uncertainty",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-within-bin-terms",
+     "title": "The within-bin terms that close the identity",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-bin-edge-rule",
+     "title": "The bin-edge rule and the library rule",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-log-loss-from-the-ml-engine",
+     "title": "Log loss from the machine learning engine",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-judged-sets-and-leakage",
+   "title": "Judged Sets, Pooling and Leakage",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-how-the-judged-set-was-pooled",
+     "title": "How the judged set was pooled",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "ae-trust-explorer",
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-unjudged-is-not-irrelevant",
+     "title": "Unjudged and irrelevant are different",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ae-trust-explorer",
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-pooling-bias",
+     "title": "Pooling bias",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-test-questions-in-a-prompt",
+     "title": "Test questions in a prompt",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-second-annotator-as-a-check",
+     "title": "A second annotator as a check",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-boundaries-ties-and-caps",
+   "title": "Boundaries, Ties and Caps",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-boundaries-rule-by-rule",
+     "title": "Boundaries, rule by rule",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-twelve-digit-tie-key",
+     "title": "The twelve-digit tie key",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ae-trust-explorer",
+      "ae-retrieval-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-bootstrap-levels-and-labels",
+     "title": "Bootstrap levels and their labels",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ae-trust-explorer",
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-row-and-size-caps",
+     "title": "Row and size caps",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-reading-the-engine-honestly",
+   "title": "Reading the Engine Honestly",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-conventions-that-are-choices",
+     "title": "Conventions that are choices",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-when-a-model-helper-is-never-graded",
+     "title": "When a model helper is never graded",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-the-evaluation-report",
+     "title": "Writing the evaluation report",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "ae-trust-explorer",
+      "ae-scoring-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "ae-trust-explorer"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

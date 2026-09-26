@@ -1,0 +1,22 @@
+-- ============================================================================
+-- D5 ASSOCIATE DEEP SEED: Applied AI and Language Models, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/appliedai/beginner.
+--
+-- What this tier owns: RETRIEVAL AND CITED ANSWERS, BY HAND. What a copilot
+-- and a retrieval step do; the tokeniser, the stop list left off; TF-IDF with
+-- the smoothed idf, unit vectors and the cosine; BM25 with the Lucene idf, k1
+-- saturation, b length normalisation and a score read term by term; the
+-- ranking and its twelve-digit tie rule; precision, recall, hit and
+-- reciprocal rank at a cutoff and their means; answers that cite their
+-- sources, and unsupported claims. Digest sections 1 to 10, and section 24.
+--
+-- THE TRAP THE TIER IS BUILT ON. A retrieval score matches words, and a cited
+-- figure is checkable only in a passage the answer cites and retrieved. No
+-- language model runs anywhere in this course and no graded value depends on
+-- one. The Associate capstone grades six Associate quantities and grades no
+-- MAP, no nDCG, no extraction and no kappa.
+-- ============================================================================
