@@ -96,7 +96,7 @@
    "Coiled tubing falls short at 75.000000, at its minimum"
   ],
   "answer": 1,
-  "explanation": "The engine's reason is \"WS5: item stimulation: Nigerian content 75% by man-hours is below the minimum 85%\". Coiled tubing at 75.000000 meets its 75% minimum, and pumping at 95.000000 meets 95%. The overall figure hides which item falls short, so a report gives both."
+  "explanation": "The engine's reason for WS5 is \"item stimulation: Nigerian content 75% by man-hours is below the minimum 85%\". Coiled tubing at 75.000000 meets its 75% minimum, and pumping at 95.000000 meets 95%. The overall figure hides which item falls short, so a report gives both."
  },
  {
   "prompt": "MS2's overall content is 61.584657. How does the engine reach it on the materials tender?",

@@ -58,14 +58,14 @@ q(0, "MS1's evaluated cost is 543001.500000 without the life cycle. What is it w
 
 # ---- rated criteria and price scoring
 
-q(1, "The Guidance on Evaluating Bids (February 2025), Figures X to XII, prints company D's combined score as 98.34. The engine computes 98.333333. How should a report treat the two?",
+q(1, "The World Bank Guidance on Evaluating Bids and Proposals (February 2025), Figures X to XII, prints company D's combined score as 98.34. The engine computes 98.333333. How should a report treat the two?",
  "As different figures: the Guidance rounded up at two decimals, and the engine's figure is exact",
  ["Equal, since two figures that agree to the second decimal place must describe the same bid's combined score",
   "An engine defect, since a combined score must reproduce the Guidance's published figure to every printed digit",
   "As the Guidance's error, since 98.34 cannot come from any rounding of the figure 98.333333"],
  "The engine's 98.333333 is exact; the Guidance prints to two decimals and rounded D's figure up. The ranking agrees, D, C, B, A, and every printed combined figure is within 0.01 of the engine's. Printed alike is not equal, and a printed source figure is quoted as the source's.")
 
-q(2, "Annex 3 of the same Guidance weights the technical score 0.4. The engine gives company A a combined 94.375000. What does the Guidance print, and how was it reached?",
+q(2, "Annex 3 of the World Bank Guidance on Evaluating Bids and Proposals (February 2025) weights the technical score 0.4. The engine gives company A a combined 94.375000. What does the Guidance print, and how was it reached?",
  "94.37, two decimals of the engine's figure with the third one dropped",
  ["94.375000 in full, since the Guidance prints the engine's figure to six decimals",
   "90.625000, company A's financial score Sc, printed in the place of its combined figure",
@@ -79,7 +79,7 @@ q(0, "A contract rated Moderate risk is estimated at US$12000000. What weighting
   "Cell b, 0.600000 to 1.000000, the band the well services tender sits inside"],
  "The engine maps Moderate onto its low row, and US$12000000 is at or above the US$10 million line, so the contract is high value: the rule reads \"Moderate/Low Procurement Risk and High Value, Rated Criteria weighting between 10% and 40%\". Low risk does not always give the narrowest band; cells a and b belong to the High/Substantial row.")
 
-q(3, "Under linear pricing with the relative technical score, the stepped table on the well services bids prints WS1 most advantageous at 0.9 (90.460955) and WS3 at 0.95 (95.000000). What does the table show about the award as the technical weight rises from 0.7?",
+q(3, "Under linear pricing with the relative technical score, the course steps the technical weight on the well services bids from 0.7 to 1. What does the stepped table show about the award as the technical weight rises?",
  "It moves from WS5 to WS1 and then to WS3",
  ["Straight from WS5 to WS3, since WS3 has the highest technical percentage",
   "WS5 keeps it at every step, since the linear method gives WS5 a commercial 100",
@@ -130,7 +130,7 @@ q(3, "The materials tender has five bids, yet the abnormally low test on its eva
   "MS3 is indigenous with capacity, and s.16 removes it from the count the relative test reads"],
  "MS5 scores 50.000000 against a pass mark of 60, so its price envelope stays shut and MS1 to MS4 remain. Four is below ALB_RELATIVE_MIN_BIDS, so the absolute test runs and a cost estimate must be typed in before any flag can be read. Nothing about materials, the life cycle or s.16 enters the count.")
 
-q(1, "The engine's reason for Example 1's Bid 1 reads \"Bid 1: evaluated cost 1145142 is below the average 1664426.375 less one standard deviation 315974.5374956808, that is below 1348451.8375043191: a potential abnormally low bid: clarify the price with the bidder before any decision; it is never rejected automatically\". Which standard deviation does a report quote?",
+q(1, "The engine's reason for Example 1's Bid 1 prints the standard deviation as the shortest round-trip decimal of the double the engine holds, with ten decimal places. Which standard deviation does a report quote?",
  "The numeric field at six decimals, 315974.537496, with the reason quoted only whole",
  ["The figure inside the reason, with every digit it prints",
   "315975, the Guidance's printed figure, which is the published value a report should cite",
@@ -276,7 +276,7 @@ q(3, "Suppose the well services tender wanted Nigerian content to count under it
   "As a stated nigerianContent reading, after which the para 5.50 band no longer applies"],
  "With a combined award the engine refuses the content rule and asks for Nigerian content as a rated criterion with its weight. A content criterion is a rated criterion, so the technical weight carrying it must sit inside the para 5.50 cell; for high risk at US$900000 that is cell b, 0.600000 to 1.000000, which holds 0.7.")
 
-q(1, "Under the relative reading the materials award goes to MS2. In that run, which bid does the engine name as the lowest evaluated cost?",
+q(1, "On the fixture settings and under the relative reading the materials award goes to MS2. In that run, which bid does the engine name as the lowest evaluated cost?",
  "MS4, at 546244.982386; the award moves by s.14 and the lowest evaluated cost stays with MS4",
  ["MS2, since the bid awarded under a lowest-cost basis is by definition the lowest evaluated cost",
   "MS2, once its content lead is subtracted from its evaluated cost as a price preference",
@@ -290,7 +290,7 @@ q(0, "Four percentages sit in the Professional rules: 1, 5, 10 and 20. Which pai
   "1 the ALB tolerance, 5 the s.16 margin, 10 the s.14 lead, 20 the s.14 group"],
  "The constants are NC_PRICE_MARGIN_PCT 1 and NC_LEAD_PCT 5 (s.14), INDIGENOUS_MARGIN_PCT 10 (s.16) and ALB_ABSOLUTE_PCT 20 (the ALB Guidance, Stage 1). The 5 in ALB_RELATIVE_MIN_BIDS is a count of bids, a different quantity.")
 
-q(2, "With no content rule stated, the materials award reason reads \"MS4 has the lowest evaluated cost\". Which two bids does that award pass over, and why?",
+q(2, "On the fixture settings with no content rule stated, the materials award reason reads \"MS4 has the lowest evaluated cost\". Which option gives a true reason for passing over each of the two bids it names?",
  "MS5, whose lower quoted total was never opened, and MS3, whose technical 90.000000 earns only a pass",
  ["MS2, whose Nigerian content lead is applied in every run, and MS1, which delivers late",
   "MS3, whose s.16 protection outranks price, and MS5, which is protected the same way",
@@ -311,12 +311,12 @@ q(1, "Under a lowest-cost award on the well services tender, which bid does eval
   "WS5 both ways, since the lowest evaluated cost always scores the highest combined score"],
  "The lowest-cost award goes to WS5, 862141.000000; the combined award at technical weight 0.7, lowest-ratio and relative goes to WS3 at 96.998434. WS4 fails the pass mark, so its quoted total is never opened. The Professional tier follows the lowest-cost road on the materials tender with a life cycle added.")
 
-q(0, "A materials bid's delivery is stated as 15 weeks against maxWeeks 14. What does the evaluation do with it?",
- "It rejects the bid at the commercial stage as nonresponsive, since it is beyond the maximum",
+q(0, "On the materials tender's fixture schedule (minWeeks 8, maxWeeks 14, ratePerWeek 0.0025), a bid's delivery is stated as 15 weeks. What does the evaluation do with it?",
+ "The bid is excluded at the commercial stage with its reason, since beyond maxWeeks a bid is rejected",
  ["An adjustment of 0.0025 x 7 of the price is added and the bid is kept in the ranking as a late one",
   "A cap at 14 weeks on the adjustment, with the bid ranked on that capped figure among the responsive bids",
   "It refuses the whole call, since a completion beyond maxWeeks is an input error"],
- "The engine's schedule basis says that beyond maxWeeks the bid is rejected; a late bid is excluded with a reason that it is nonresponsive. The adjustment applies only to weeks beyond minWeeks within the window, and a late bid is a result with a reason: nothing is refused.")
+ "The engine's schedule basis ends with the maximum: on the well services tender it reads \"beyond 10 weeks the bid is rejected\", and the materials tender states maxWeeks 14. A bid beyond the maximum leaves the commercial envelope as an exclusion with its reason, and the adjustment applies only to the weeks beyond minWeeks up to the maximum. A late bid is a result with a reason, so nothing is refused.")
 
 emit(Q, '/root/cat-wip-procurement/banks/sc2i_exam.json', expect_n=42)
 finish()

@@ -101,7 +101,7 @@ q(3, "The World Bank Guidance on Evaluating Bids and Proposals (February 2025), 
  "E enters the call as a rejected bid with a stated reason, so the engine excludes it with that reason and ranks the other four: D, C, B, A. The ranking agrees with the Guidance. The combined score does not run the abnormally low test, and a stated rejection is an ordinary result.")
 
 q(0, "Under the relative approach, what happens to the limit when a committee removes a flagged bid from the field?",
- "The mean and standard deviation are computed again over the bids left, so the limit moves for every bid",
+ "The mean and standard deviation are computed again over the bids left, so the limit is computed again for every bid",
  ["Nothing moves, as the limit is fixed on the first run and read again for each remaining bid",
   "The limit moves only for bids that were flagged, while the unflagged bids keep their old verdict",
   "The engine keeps the removed bid in the statistics and drops it only from the list to clarify"],

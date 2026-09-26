@@ -71,7 +71,7 @@ q(1, "WS5's overall content is 78.750000. What does the item test add to that si
  ["Nothing, as an overall above every minimum shows each item meets it",
   "All three items meet their minimums, since 78.750000 is above the coiled tubing minimum of 75%",
   "Coiled tubing falls short at 75.000000, at its minimum"],
- "The engine's reason is \"WS5: item stimulation: Nigerian content 75% by man-hours is below the minimum 85%\". Coiled tubing at 75.000000 meets its 75% minimum, and pumping at 95.000000 meets 95%. The overall figure hides which item falls short, so a report gives both.")
+ "The engine's reason for WS5 is \"item stimulation: Nigerian content 75% by man-hours is below the minimum 85%\". Coiled tubing at 75.000000 meets its 75% minimum, and pumping at 95.000000 meets 95%. The overall figure hides which item falls short, so a report gives both.")
 
 q(3, "MS2's overall content is 61.584657. How does the engine reach it on the materials tender?",
  "A mean of its item contents weighted by its own quoted amount for each item",

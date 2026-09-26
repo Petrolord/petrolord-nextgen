@@ -60,7 +60,7 @@ q(3, "Under a combined award Nigerian content enters as a rated criterion. What 
   "The s.16 margin, so the content criterion must carry a weight of 10 percent within the score"],
  "A content criterion is part of the rated criteria, so the technical weight that carries it must still sit inside its para 5.50 cell, which the weighting band returns from the risk and the estimated cost. The s.14 and s.16 margins are price tests at the commercial stage and set no weight.")
 
-q(2, "On the materials tender, evaluateTender with a lowest-cost award is run three ways. Which awards does it return?",
+q(2, "On the materials tender's fixture settings, evaluateTender with a lowest-cost award is run three ways. Which awards does it return?",
  "MS4 with no content rule stated, MS4 under the points reading, and MS2 under the relative reading",
  ["MS4 in all three runs, since s.14 cannot move a lowest-cost award away from the lowest evaluated cost at all",
   "MS2 in all three, as MS2 leads MS4 on Nigerian content whichever reading is stated",
@@ -79,7 +79,7 @@ q(0, "Stating the relative reading moves the materials award. How is the move ex
  ["\"MS2 has the lowest evaluated cost\", since the award moves to MS2 under the relative reading",
   "\"MS4 has the lowest evaluated cost\", followed by a note that s.14 changed the bid selected",
   "A reason naming MS3, the indigenous bid protected by s.16 inside the 10 percent margin"],
- "Under the relative reading the award reason is the s.14 reason: \"2 bids within 1% of the lowest evaluated cost; MS2 has the highest Nigerian content ... at least 5% higher, so s.14 selects MS2 over the lowest evaluated cost MS4\", with its readings. MS2 does not have the lowest evaluated cost; MS4 does, at 546244.982386.")
+ "Under the relative reading the award reason is the s.14 reason, which begins \"2 bids within 1% of the lowest evaluated cost\" and ends its finding with \"at least 5% higher, so s.14 selects MS2 over the lowest evaluated cost MS4\", before its readings. MS2 does not have the lowest evaluated cost; MS4 does, at 546244.982386.")
 
 q(3, "With a Nigerian content rule stated, one bid that reaches the commercial stage carries no ncPct. What does evaluateTender return?",
  "A refusal: \"bids[4].ncPct is required for every bid that reaches the commercial stage when nigerianContent is given\"",

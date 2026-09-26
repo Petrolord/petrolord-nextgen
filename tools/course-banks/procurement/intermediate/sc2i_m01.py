@@ -18,7 +18,7 @@ q(1, "On the materials tender, MS5 quotes a total of 487200.000000, the lowest o
 
 q(3, "Which texts does the engine cite for an award that goes to the lowest evaluated cost with no rated criteria?",
  "World Bank Procurement Regulations (7th ed.) para 5.70 and the Public Procurement Act 2007 s.24(3) and s.33(1)",
- ["World Bank Regulations (7th ed.) para 5.50, the weighting matrix, together with the Act 2010 s.14 on Nigerian content",
+ ["World Bank Regulations (7th ed.) para 5.50, the weighting matrix, with s.14 of the Nigerian Oil and Gas Industry Content Development Act 2010",
   "The Standard Procurement Document ITB 34.1 alone, because the award is made on price after any omission is priced",
   "Annex X paras 3.7 and 3.8 only, since every award without rated criteria must include a life-cycle cost"],
  "The engine's award source for a lowest-cost award reads \"World Bank Procurement Regulations (7th ed.) para 5.70; Nigeria Public Procurement Act 2007 s.24(3) and s.33(1)\". Para 5.50 sets the Rated Criteria band for a combined award. ITB 34.1 prices an omission and Annex X paras 3.7 and 3.8 support the life-cycle cost; both are terms inside the evaluated cost, and neither is the award rule.")
@@ -41,7 +41,7 @@ q(1, "At 0.1 a year and end-of-year discounting, MS4's valve maintenance of 7000
  "4346.449261, discounted by the year 5 factor 0.620921",
  ["6363.636364, as every year is discounted from the end of year 1",
   "7000.000000 in full, since the last year of a life cycle is left undiscounted by the engine",
-  "5259.203606, which is the figure the engine gives for the middle year of the five"],
+  "5259.203606, which is the discounted figure for the middle year of the five"],
  "Each year's cost is discounted from the end of its own year by 1 / (1 + 0.1) raised to the year. Year 5's factor is 0.620921, and 7000.000000 discounts to 4346.449261. 6363.636364 is year 1 and 5259.203606 is year 3. No year is left undiscounted; the five discounted figures sum to 26535.507386.")
 
 q(3, "MS4's corrected price is 503930.000000 and its life-cycle cost 26535.507386. How does the engine treat the award price when it builds the life-cycle term?",
@@ -112,7 +112,7 @@ q(2, "A materials report states: \"The lowest evaluated cost is MS4.\" Which rea
  ["Its quoted price was the lowest of the five materials bids that answered the invitation",
   "Once the bid below the pass mark is set aside, MS4 carries the lowest price of those left",
   "MS4 scores the highest combined score at a stated technical weight on the materials tender"],
- "\"Lowest evaluated cost\" names the evaluated cost as the engine builds it: corrected price, discount, deviations, omissions, schedule and life cycle. MS4's quoted total is 503930.000000, and MS5 quotes less at 487200.000000. \"Most advantageous\" is the term for the highest combined score, and the materials tender has no combined score.")
+ "\"Lowest evaluated cost\" names the evaluated cost as the engine builds it: corrected price, discount, deviations, omissions, schedule and life cycle. MS4's quoted total is 503930.000000, and MS5 quotes less at 487200.000000. Among the four passing bids MS4 does quote the lowest total, yet that is a fact about price: the course never reads \"lowest evaluated cost\" as a quoted price, even where the two point at the same bid. \"Most advantageous\" is the term for the highest combined score, and the materials tender has no combined score.")
 
 emit(Q, '/root/cat-wip-procurement/banks/sc2i_m01.json', expect_n=15)
 finish()
