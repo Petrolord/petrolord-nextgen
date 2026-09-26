@@ -70,8 +70,11 @@ const isObj = (o) => o !== null && typeof o === 'object' && !Array.isArray(o);
  */
 export const pick = (c, key) => (isObj(c) && Object.prototype.hasOwnProperty.call(c, key) ? c[key] : c);
 
-/** The value at a dotted path of an object, or undefined. */
-export const getAt = (o, path) => path.split('.').reduce((a, k) => (isObj(a) ? a[k] : undefined), o);
+const INDEX = /^\d+$/;
+const step = (a, k) => (isObj(a) ? a[k] : (Array.isArray(a) && INDEX.test(k) ? a[Number(k)] : undefined));
+
+/** The value at a dotted path of an object, or undefined. A numeric step reads an array entry (scale.operating.bands.0.upTo). */
+export const getAt = (o, path) => path.split('.').reduce(step, o);
 
 /**
  * Write ONE stated input into the view's block of the text in a box (a whole
@@ -87,17 +90,53 @@ export const setStated = (text, viewKey, path, value) => {
   const block = pick(next, viewKey);
   if (!isObj(block)) return { error: `the box does not hold an object at ${viewKey}` };
   const keys = path.split('.');
+  const container = (x) => isObj(x) || Array.isArray(x);
   let o = block;
-  for (const k of keys.slice(0, -1)) {
-    if (!isObj(o[k])) {
+  for (let i = 0; i < keys.length - 1; i += 1) {
+    const k = Array.isArray(o) ? Number(keys[i]) : keys[i];
+    if (Array.isArray(o) && !INDEX.test(keys[i])) return { error: `${keys.slice(0, i + 1).join('.')} is a list and needs a number` };
+    if (!container(o[k])) {
       if (value === undefined) return { text: pretty(next) };
-      o[k] = {};
+      o[k] = INDEX.test(keys[i + 1]) ? [] : {};
     }
     o = o[k];
   }
-  const last = keys[keys.length - 1];
-  if (value === undefined) delete o[last]; else o[last] = value;
+  const lastKey = keys[keys.length - 1];
+  if (Array.isArray(o)) {
+    if (!INDEX.test(lastKey)) return { error: `${path} is a list entry and needs a number` };
+    if (value === undefined) o.splice(Number(lastKey), 1); else o[Number(lastKey)] = value;
+  } else if (value === undefined) delete o[lastKey]; else o[lastKey] = value;
   return { text: pretty(next) };
+};
+
+/**
+ * THE UPLIFT OF A CARRY, REWRITTEN WHOLE FOR A NEW TYPE, so no term of the old
+ * type is left behind for the engine to refuse. A rate (compound) or a multiple
+ * (multiple) is kept only when the old uplift was already of that type;
+ * otherwise it is left out and the panel asks for it ("not stated").
+ * type undefined returns undefined: the uplift is not stated at all.
+ */
+export const upliftFor = (type, old) => {
+  if (type === undefined) return undefined;
+  const was = isObj(old) ? old : {};
+  if (type === 'compound') return was.type === 'compound' && was.ratePctPerYear !== undefined ? { type, ratePctPerYear: was.ratePctPerYear } : { type };
+  if (type === 'multiple') return was.type === 'multiple' && was.multiplePct !== undefined ? { type, multiplePct: was.multiplePct } : { type };
+  return { type };
+};
+
+/**
+ * Stated carrier shares for a carry: every party no carry names as carried,
+ * in equal shares that sum to 100 (the last share takes the remainder). These
+ * are PLACEHOLDERS the learner then states, each with its own control.
+ */
+export const equalCarrierShares = (parties, carries) => {
+  const carried = new Set((Array.isArray(carries) ? carries : []).map((c) => c && c.carried));
+  const ids = (Array.isArray(parties) ? parties : []).map((p) => p && p.id).filter((id) => typeof id === 'string' && !carried.has(id));
+  if (!ids.length) return {};
+  const each = Number((100 / ids.length).toFixed(6));
+  const out = {};
+  ids.forEach((id, i) => { out[id] = i === ids.length - 1 ? Number((100 - each * (ids.length - 1)).toFixed(6)) : each; });
+  return out;
 };
 
 /* ------------------------------------------------ the engine routes, unchanged */
@@ -141,6 +180,11 @@ export const STARTS = Object.freeze({
   cashCalls: G('cc-ekene-2027'),
   cashCallsRefund: G('cc-ekene-2027-refund'),
   cashCallsLag1: G('cc-ekene-2027-lag1'),
+  ccZeroCall: G('cc-zero-call-month'),
+  ccZeroCallRefund: G('cc-zero-call-month-refund'),
+  ccThreshold: G('cc-threshold-exactly'),
+  ccLastUncalled: G('cc-last-month-uncalled'),
+  ccYearBoundary: G('cc-year-boundary'),
   budget: G('budget-ekene-2027'),
   budgetNorway: G('budget-norway-lower-of'),
   overhead: G('overhead-ekene-2031'),
@@ -157,6 +201,7 @@ export const STARTS = Object.freeze({
   psc: G('psc-ekene'),
   pscWorldBank: G('psc-wb-bn8-2007'),
   pscFari: G('psc-fari-table-12'),
+  pscFariFigure5: G('psc-fari-figure-5'),
   soleRisk: G('nc-ekene-sidetrack'),
   buyIn: G('nc-ekene-buy-in-norway-1000'),
 });

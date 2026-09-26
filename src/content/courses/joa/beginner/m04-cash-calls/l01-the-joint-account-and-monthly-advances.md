@@ -40,6 +40,10 @@ Leave the lag unstated and the engine refuses:
 
 > reconciliationLagMonths must be an integer at or above 1; got nothing
 
+Set the negative call rule to not stated and it refuses again, naming that term:
+
+> negativeCall must be one of "refund", "carry"; got nothing
+
 ## Exercise
 
-Open the account calculator, the course's own calculator panel, and choose "Cash calls". Run the Ekene 2027 box and find the three controls above it. Clear the control "Reconciliation lag, months (stated)" and read the refusal. Restore it to 2. Then set "A negative call is (stated)" to "not stated" and write down the field the refusal names.
+Open the account calculator, the course's own calculator panel, and choose "Cash calls". Run the Ekene 2027 box and find the three controls above it. Clear the control "Reconciliation lag, months (stated)" and read the refusal. Restore it to 2. Then set "A negative call is (stated)" to "not stated", read the refusal and check it against the one quoted above.

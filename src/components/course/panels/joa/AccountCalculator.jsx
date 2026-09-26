@@ -7,6 +7,7 @@ import {
 } from '@/components/course/panels/petrophysics/panelKit';
 import {
   six, orNone, Tbl, TextField, Refusal, EngineNote, Reasons, Source, useJsonBox, StatedControl, MissingStated,
+  statedIn, writeStated, ActionButton, CarriersControl,
 } from './panelBits';
 
 // The account calculator (Associate): participating, paying and beneficial
@@ -39,12 +40,33 @@ export const Starts = ({ box, starts }) => {
   );
 };
 
+/** The terms of every carry in the box: carriedPct, the carriers rule and, for stated shares, each carrier's share. */
+export const CarryTermControls = ({ box, viewKey }) => {
+  const carries = statedIn(box, viewKey, 'carries');
+  if (!Array.isArray(carries) || !carries.length) return null;
+  return carries.map((c, i) => {
+    const who = c && typeof c.carried === 'string' ? c.carried : `carry ${i + 1}`;
+    const shares = c && c.carriers && typeof c.carriers === 'object' ? Object.keys(c.carriers) : [];
+    return (
+      <div key={i}>
+        <FieldGrid>
+          <StatedControl box={box} viewKey={viewKey} path={`carries.${i}.carriedPct`} label={`${who}: carried, percent of its cost share (stated)`} />
+          <CarriersControl box={box} viewKey={viewKey} index={i} label={`${who}: carriers (stated)`} />
+          {shares.map((id) => <StatedControl key={id} box={box} viewKey={viewKey} path={`carries.${i}.carriers.${id}`} label={`${who}: share carried by ${id}, percent (stated)`} />)}
+        </FieldGrid>
+        <MissingStated box={box} viewKey={viewKey} required={[[`carries.${i}.carriedPct`, `carriedPct for ${who}`], [`carries.${i}.carriers`, `the carriers of ${who}`]]} />
+      </div>
+    );
+  });
+};
+
 export const InterestsMode = ({ initialCase = null, initialText = null }) => {
   const box = useJsonBox(initialCase ? pick(initialCase, 'interests') : STARTS.interests, initialText);
   const r = box.parsed.error ? null : viewInterests(box.parsed.value);
   return (
     <>
       <Starts box={box} starts={[['interests', 'The Ekene joint venture, NOC carried pro rata'], ['interestsStated', 'A half carry in stated shares'], ['interestsTwo', 'Two carries']]} />
+      <CarryTermControls box={box} viewKey="interests" />
       <Box box={box} label="participatingInterests inputs (JSON: parties, carries), or a whole case file" rows={10} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
       {r && r.error && <Refusal text={r.error} />}
@@ -74,6 +96,14 @@ export const CashCallTable = ({ r }) => (
     rows={r.months.flatMap((m) => m.parties.map((p) => [`${m.month} ${p.id}`, String(m.called), six(p.forecastShare), six(p.adjustment), six(p.call), six(p.arrearsBilling), six(p.paid), six(p.actualShare), six(p.difference), six(p.carried), six(p.balance)]))} />
 );
 
+/** The cash call starts: the Ekene ledgers and the small digest cases, golden inputs only. */
+export const CASH_CALL_STARTS = [
+  ['cashCalls', 'The Ekene 2027 ledger, a credit carried'], ['cashCallsRefund', 'The same ledger, a negative call refunded'],
+  ['cashCallsLag1', 'The same ledger, a lag of one month'], ['ccZeroCall', 'A month with a zero forecast, credit carried'],
+  ['ccZeroCallRefund', 'A month with a zero forecast, refunded'], ['ccThreshold', 'A forecast at the threshold, then one below'],
+  ['ccLastUncalled', 'The last month below the threshold'], ['ccYearBoundary', 'A ledger across the year end'],
+];
+
 /** The cash call terms, each a visible control that writes the stated input into the box. */
 export const CashCallControls = ({ box }) => (
   <>
@@ -91,6 +121,7 @@ export const CashCallsMode = ({ initialCase = null, initialText = null }) => {
   const r = box.parsed.error ? null : viewCashCalls(box.parsed.value);
   return (
     <>
+      <Starts box={box} starts={CASH_CALL_STARTS} />
       <CashCallControls box={box} />
       <Box box={box} label="cashCalls inputs (JSON: parties, carries, months, reconciliationLagMonths, negativeCall, noCallBelow), or a whole case file" rows={12} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
@@ -150,12 +181,47 @@ export const BudgetMode = ({ initialCase = null, initialText = null }) => {
   );
 };
 
+/**
+ * THE OVERHEAD TERMS OF EVERY CATEGORY THE BOX CARRIES: the exclusion, each
+ * band's upper limit and per cent, the per cent above the last band, and a
+ * button to add or remove a band (a new band is empty, so the engine refuses
+ * until its upper limit and per cent are stated).
+ */
+export const OverheadControls = ({ box }) => {
+  const costs = statedIn(box, 'overhead', 'costs');
+  const cats = costs && typeof costs === 'object' && !Array.isArray(costs) ? Object.keys(costs) : [];
+  return cats.map((cat) => {
+    const scale = statedIn(box, 'overhead', `scale.${cat}`);
+    const bands = scale && Array.isArray(scale.bands) ? scale.bands : [];
+    return (
+      <div key={cat} className="mt-2">
+        <FieldGrid>
+          <StatedControl box={box} viewKey="overhead" path={`excluded.${cat}`} label={`${cat}: excluded from the base (optional)`} />
+          {bands.map((_, j) => (
+            <React.Fragment key={j}>
+              <StatedControl box={box} viewKey="overhead" path={`scale.${cat}.bands.${j}.upTo`} label={`${cat}: band ${j + 1} up to (stated)`} />
+              <StatedControl box={box} viewKey="overhead" path={`scale.${cat}.bands.${j}.pct`} label={`${cat}: band ${j + 1} per cent (stated)`} />
+            </React.Fragment>
+          ))}
+          {scale && <StatedControl box={box} viewKey="overhead" path={`scale.${cat}.abovePct`} label={`${cat}: per cent above the last band (stated)`} />}
+          {scale
+            ? <ActionButton label={`Add a band to ${cat}`} onClick={() => writeStated(box, 'overhead', `scale.${cat}.bands`, [...bands, {}])} />
+            : <ActionButton label={`State a scale for ${cat}`} onClick={() => writeStated(box, 'overhead', `scale.${cat}`, { bands: [] })} />}
+          {bands.length > 0 && <ActionButton label={`Remove the last band of ${cat}`} onClick={() => writeStated(box, 'overhead', `scale.${cat}.bands.${bands.length - 1}`, undefined)} />}
+        </FieldGrid>
+        <MissingStated box={box} viewKey="overhead" required={[[`scale.${cat}`, `a scale for ${cat}`], ...(scale ? [[`scale.${cat}.abovePct`, `the per cent above the last band for ${cat}`]] : [])]} />
+      </div>
+    );
+  });
+};
+
 export const OverheadMode = ({ initialCase = null, initialText = null }) => {
   const box = useJsonBox(initialCase ? pick(initialCase, 'overhead') : STARTS.overhead, initialText);
   const r = box.parsed.error ? null : viewOverhead(box.parsed.value);
   return (
     <>
       <Starts box={box} starts={[['overhead', 'The Ekene 2031 overhead'], ['overheadNorway', 'The Norwegian development scale, NOK million']]} />
+      <OverheadControls box={box} />
       <Box box={box} label="overhead inputs (JSON: costs, excluded, scale with bands and abovePct per category, every rate stated), or a whole case file" rows={14} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
       {r && r.error && <Refusal text={r.error} />}

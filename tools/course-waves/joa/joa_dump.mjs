@@ -351,6 +351,20 @@ must('every exported function has at least one refusal tabled', EXPORTS.every(([
 must('no refusal message carries an em or en dash', REFUSED.every((r) => !/[–—]/.test(r[3])), 'dash');
 must('seventy-eight refusal cases in the golden file', REF.length === 78, REF.length);
 w();
+w('REFUSALS A PANEL CONTROL CAN PRODUCE. Each calculator panel writes every required term into the box through a visible control, and setting a control to "not stated" removes the term. Four such calls are not golden cases; each is a golden input with one term removed or changed (stated probes), handed to the engine here, and the message is the engine\'s, verbatim:');
+w();
+const dropAt = (o, path) => { const ks = path.split('.'); let t = o; ks.slice(0, -1).forEach((k) => { t = t[k]; }); delete t[ks[ks.length - 1]]; return o; };
+const PANEL_REFUSALS = [
+  ['budget-ekene-2027', 'budgetTolerance.pct removed (the budget tolerance percent control cleared)', (a) => dropAt(a, 'budgetTolerance.pct'), 'budgetTolerance.pct'],
+  ['cc-ekene-2027', 'negativeCall removed (the negative call control set to not stated)', (a) => dropAt(a, 'negativeCall'), 'negativeCall'],
+  ['carry-ekene-multiple', 'uplift.type set to "none" with multiplePct left in the box', (a) => { a.uplift.type = 'none'; return a; }, 'uplift.multiplePct'],
+  ['carry-ekene-pia', 'uplift set to { type: "compound" } with no rate', (a) => { a.uplift = { type: 'compound' }; return a; }, 'uplift.ratePctPerYear'],
+];
+table(['golden input', 'the change (stated probe)', 'field', 'the engine\'s message, verbatim'], PANEL_REFUSALS.map(([id, what, f, field]) => {
+  const r = refusal(`${GC[id].fn} on ${id} with ${what}`, J[GC[id].fn](f(argsOf(id))), field);
+  return [id, what, `\`${field}\``, r && r.error];
+}));
+w();
 w('Four rules the table shows:');
 w('- A contract term with no default is refused when it is missing, and the message says so: the carriers of a carry, the uplift, the reconciliation lag, the negative call rule, the budget tolerance, the overhead scale of every category, the default interest with its rate, method and grace, the premium multiple, the refundable kinds under basis "contract", the opening cost pool.');
 w('- An input key a function does not read is refused at whatever level it sits (a top-level option, a party, a month, a year, a band, an uplift), with the path to the key and the full list of accepted keys.');
@@ -435,6 +449,17 @@ const zc = runG('cc-zero-call-month');
 must('a zero-forecast month with no threshold is called, and its call is the adjustment alone', zc.months[1].called === true && zc.months[1].forecast === 0 && zc.months[1].reasons.some((t) => /cash call is the adjustment alone/.test(t)), JSON.stringify(zc.months[1].reasons));
 const te = runG('cc-threshold-exactly');
 must('a forecast equal to the threshold is called; one below is not', te.months[0].called === true && te.months[1].called === false, 'threshold');
+w();
+const mar = mRow(ccE, '2027-03');
+const jun = mRow(ccE, '2027-06');
+w(`THE EKENE ADJUSTMENT AND A MONTH THAT PAYS ARREARS (cc-ekene-2027, lag ${S(argsOf('cc-ekene-2027').reconciliationLagMonths)}, threshold ${f6(argsOf('cc-ekene-2027').noCallBelow)}). March 2027 carries January's difference; June 2027 is called and also bills May's actual in arrears, May's forecast being below the threshold. Per party (engine); what a party pays in a month is its call plus its arrears billing:`);
+w();
+table(['month', 'party', 'forecast share', 'adjustment', 'call', 'arrears billing', 'paid'], [mar, jun].flatMap((m) => m.parties.map((p) => [m.month, p.id, f6(p.forecastShare), f6(p.adjustment), f6(p.call), f6(p.arrearsBilling), f6(p.paid)])));
+[mar, jun].forEach((m) => m.parties.forEach((p) => must(`paid = call + arrears billing for ${m.month} ${p.id}`, p.paid === p.call + p.arrearsBilling, `${p.paid}`)));
+must('June 2027 bills arrears', jun.parties.some((p) => p.arrearsBilling > 0), 'june');
+w();
+w('The engine\'s reasons for March and June 2027, verbatim:');
+reasons([...mar.reasons, ...jun.reasons]);
 w();
 w(`A MONTH WITH A ZERO FORECAST. With no threshold stated, February on cc-zero-call-month is called with a forecast of ${f6(zc.months[1].forecast)}, and the call is the adjustment alone; under "carry" the credit waits, under "refund" it is paid back as a negative call (cc-zero-call-month-refund). A forecast equal to the threshold is called; one below it is not (cc-threshold-exactly).`);
 
@@ -661,6 +686,12 @@ w();
 w(`THE COVER. The unpaid ${f6(dE.unpaidTotal)} is advanced by EKO ${f6(byId(dE.cover, 'EKO').cover)} and PA ${f6(byId(dE.cover, 'PA').cover)}, in proportion to their paying interests of ${f6(byId(dE.cover, 'EKO').payingPct)} and ${f6(byId(dE.cover, 'PA').payingPct)}; NOC, carried, pays no cost and covers none (engine).`);
 must('NOC covers none of the Ekene default', !dE.cover.some((c) => c.id === 'NOC'), 'noc');
 const unc = runG('default-ekene-uncured');
+const d365a = argsOf('default-ekene-march'); d365a.interest.dayBasis = 365;
+const d365 = success('defaultCover on default-ekene-march with dayBasis 365 (stated probe)', J.defaultCover(d365a));
+w(`THE DAY BASIS IS A STATED TERM. The same Ekene default on a ${S(d365a.interest.dayBasis)}-day basis (stated probe: default-ekene-march with dayBasis ${S(d365a.interest.dayBasis)}) gives ${f6(d365.interestTotal)} for the same ${S(d365.defaulters[0].days)} days, against ${f6(dE.interestTotal)} on the ${S(argsOf('default-ekene-march').interest.dayBasis)}-day basis the fixture states (engine). The engine's reason, verbatim:`);
+reasons(d365.reasons.filter((t) => /interest/.test(t) && /days/.test(t)));
+must('the 365-day interest is below the 360-day interest', d365.interestTotal < dE.interestTotal, `${d365.interestTotal}`);
+w();
 w(`FORFEITURE AVAILABLE. On default-ekene-uncured the default is still open after the forfeiture trigger, and the interests if PB's assignment is demanded are ${unc.interestsAfterForfeiture.map((p) => `${p.id} ${f6(p.participatingPct)}`).join(', ')} (engine), pro rata to the participating interests of the others.`);
 
 /* ============================================================ SECTION 15 */
@@ -752,7 +783,7 @@ const FT = {
   jvProfit: [0, 0, 26, 61, 166, 238, 160, 181, 156, 130, 108],
   govProfit: [0, 0, 17, 48, 229, 276, 166, 169, 129, 102, 79],
 };
-w(`IMF FARI TABLES 12 AND 13 (February 2016), golden input psc-fari-table-12: eleven years in USD million, royalty ${f6(argsOf('psc-fari-table-12').royaltyPct)} percent, ceiling ${f6(argsOf('psc-fari-table-12').costOilLimitPct)} percent of ${argsOf('psc-fari-table-12').costOilLimitBase}, the government share of profit petroleum per year as Table 13 prints it (a daily-rate scale the tables compute outside this engine). The printed figures (text, Tables 12 and 13) are whole numbers of an unrounded model:`);
+w(`IMF FARI TABLES 12 AND 13 (February 2016), golden input psc-fari-table-12: eleven years in USD million, royalty ${f6(argsOf('psc-fari-table-12').royaltyPct)} percent, ceiling ${f6(argsOf('psc-fari-table-12').costOilLimitPct)} percent of ${argsOf('psc-fari-table-12').costOilLimitBase}, the contractor's share of profit petroleum per year stated as contractorProfitSharePct, read from Table 13's government share (a daily-rate scale the tables compute outside this engine). The printed figures (text, Tables 12 and 13) are whole numbers of an unrounded model:`);
 w();
 table(['year', 'ceiling printed', 'ceiling engine', 'cost petroleum printed', 'cost recovered engine', 'closing printed', 'pool out engine', 'profit printed', 'profit oil engine', 'contractor printed', 'contractor engine', 'government printed', 'government engine'],
   ft.years.map((y, i) => [S(y.year), S(FT.ceiling[i]), f6(y.costOilLimit), S(FT.costPetroleum[i]), f6(y.costRecovered), S(FT.closing[i]), f6(y.poolOut), S(FT.profit[i]), f6(y.profitOil), S(FT.jvProfit[i]), f6(y.contractorProfitOil), S(FT.govProfit[i]), f6(y.governmentProfitOil)]));
@@ -764,7 +795,7 @@ must('every FARI Table 13 split is within 1.5 plus half a per cent of the profit
 const worstCost = Math.max(...ft.years.flatMap((y, i) => [Math.abs(y.costOilLimit - FT.ceiling[i]), Math.abs(y.costRecovered - FT.costPetroleum[i]), Math.abs(y.poolOut - FT.closing[i]), Math.abs(y.profitOil - FT.profit[i])]));
 const worstSplit = Math.max(...ft.years.flatMap((y, i) => [Math.abs(y.contractorProfitOil - FT.jvProfit[i]), Math.abs(y.governmentProfitOil - FT.govProfit[i])]));
 w();
-w(`AGREEMENT AT THE PRINTED PRECISION (derived): the largest difference on a cost line (ceiling, cost petroleum, closing balance, profit) is ${f6(worstCost)}, inside the ${S(PRINTED_BAND)} a line made of at most three printed whole numbers can carry; the largest on the profit split is ${f6(worstSplit)}, inside ${S(PRINTED_BAND)} plus half a per cent of the year's profit petroleum, because Table 13 prints the government share as a whole per cent. The carry of ${S(FT.closing[0])} through the first two years and the ceilings that bind in the third and fourth are reproduced.`);
+w(`AGREEMENT AT THE PRINTED PRECISION (derived): the largest difference on a cost line (ceiling, cost petroleum, closing balance, profit) is ${f6(worstCost)}, inside the ${S(PRINTED_BAND)} a line made of at most three printed whole numbers can carry; the largest on the profit split is ${f6(worstSplit)}, inside ${S(PRINTED_BAND)} plus half a per cent of the year's profit petroleum, because Table 13 prints the government share as a whole per cent, from which each year's stated contractor share is read. The carry of ${S(FT.closing[0])} through the first two years and the ceilings that bind in the third and fourth are reproduced.`);
 w();
 w('NO DEFECT, AND WHAT IT PROVES. The validation record states, verbatim:');
 const NODEF = FINDINGS.match(/Result: NO DEFECT\. The cost pool arithmetic of `applyPSC` \(royalty on gross;\s+the limit on revenue after royalty; cost recovered = min\(pool \+ capex \+\s+opex, limit\); the rest carried; profit oil = revenue after royalty - cost\s+recovered\) reproduces the IMF schedule year by year/);
@@ -870,7 +901,7 @@ w('MODEL AGREEMENTS AND LICENSED FORMS. The industry\'s common model joint opera
 w();
 w('THE TRANSLATION PRINTS WHAT IT PRINTS. The Norwegian Article 9.2 reads "he looses his right to vote" (' + C('nojoa_9_2_vote').cite + '); the course quotes it as printed and paraphrases it as the loss of the vote.');
 w();
-w('THE NORWEGIAN SCALE IS A RESEARCH AND DEVELOPMENT CHARGE. Accounting Agreement Art. 2.2.2 charges the operator\'s general research and development cost by per cent rates in bands, and Art. 2.2.3 charges corporate management at a flat per cent of annual cost (' + C('noaa_2_2_3_corporate').cite + '); the engine\'s `overhead` computes any marginal scale of this shape, with every band and rate a stated input. The printed bands are in NOK million and move each year with the consumer price index from 15 July 2004 (' + C('noaa_2_2_2_cpi').cite + '); the engine does not index them.');
+w('THE NORWEGIAN SCALE IS A RESEARCH AND DEVELOPMENT CHARGE. Accounting Agreement Art. 2.2.2 charges the operator\'s general research and development cost by per cent rates in bands, and Art. 2.2.3 charges corporate management at a flat per cent of annual cost (' + C('noaa_2_2_3_corporate').cite + '); the engine\'s `overhead` computes any marginal scale of this shape, with every band and rate a stated input. The printed bands are in NOK million and are adjusted each year on the consumer price index as published per 15 July of the current year (' + C('noaa_2_2_2_cpi').cite + '); the engine does not index them.');
 w();
 w(`PRINTED FIGURES AND EXACT FIGURES. The World Bank note prints ${S(WBP[7][1])} and ${S(WBP[8][1])}; the engine returns ${f6(wb.contractorEntitlement)} and ${f6(wb.governmentTake)} (${ref('published')}). IMF FARI Tables 12 and 13 print whole numbers of an unrounded model; the engine agrees with them within the printed precision. A reason the engine prints rounds money to the cent: the Ekene carry recovery reads, verbatim,`);
 const lastCarry = crE.reasons.find((t) => /^2033: the balance/.test(t));
@@ -970,7 +1001,7 @@ quote(dE.basis.notComputed);
 quote(biE.basis.notComputed);
 must('FINDINGS lists the not-computed items', /Not computed \(concept only\)/.test(FINDINGS) && /interest on cash balances/.test(FINDINGS) && /expert determination/.test(FINDINGS) && /DROP and R-factor/.test(FINDINGS), 'not computed');
 w();
-w(`A SLIDING SCALE COMPUTED OUTSIDE. When a year states its own contractor share, the engine uses it (psc-fari-table-12 carries the Table 13 shares, ${list(argsOf('psc-fari-table-12').years.filter((y) => y.contractorProfitSharePct !== undefined).map((y) => `${S(y.year)} ${S(y.contractorProfitSharePct)}`))}); the scale that sets each share is the contract's and is worked outside the engine.`);
+w(`A SLIDING SCALE COMPUTED OUTSIDE. When a year states its own contractor share, the engine uses it (psc-fari-table-12 states each year's contractor share read from Table 13, ${list(argsOf('psc-fari-table-12').years.filter((y) => y.contractorProfitSharePct !== undefined).map((y) => `${S(y.year)} ${S(y.contractorProfitSharePct)}`))}); the scale that sets each share is the contract's and is worked outside the engine.`);
 
 /* ============================================================ SECTION 23 */
 

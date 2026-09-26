@@ -157,7 +157,7 @@ def main():
     body_src = re.sub(r'^\s*//.*$', '', body_src, flags=re.M)
     # THE ASSERTION MACHINERY IS NOT OUTPUT. Its string arguments are what a
     # failed assertion prints to stderr, never what the digest carries.
-    body_src = strip_calls(body_src, ['must', 'refusal', 'ok', 'runG', 'runCfg', 'process.stderr.write'])
+    body_src = strip_calls(body_src, ['must', 'refusal', 'success', 'ok', 'runG', 'runCfg', 'process.stderr.write'])
     # THE STATED INPUT TABLES. Each is a declaration of inputs the dump hands
     # to the engine (the hand set, the tokeniser and normaliser strings, the
     # saturation and near-tie passages, the refusal calls, the text probes,

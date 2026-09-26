@@ -49,4 +49,4 @@ Work in the course's own recovery calculator, view "A carry and its recovery".
 2. Read NOC's NPV and compare it with the compound carry's.
 3. With the control "Uplift multiple, percent (stated)", set 100. Read the tiles again and say what the carriers now recover.
 4. Set the multiple to 90 and read the refusal.
-5. In the box, replace the whole `uplift` object with `{ "type": "none", "ratePctPerYear": 5 }` and read the refusal.
+5. With "Uplift (stated)", choose no uplift. The control rewrites the whole uplift, so no multiple is left behind and the carry runs; read what the carriers now recover.

@@ -1,6 +1,8 @@
 import React from 'react';
 import { Label } from '@/components/ui/label';
-import { setStated, getAt, pick } from './joaLab';
+import {
+  setStated, getAt, pick, upliftFor, equalCarrierShares,
+} from './joaLab';
 
 // Small shared pieces for the three EC9 calculator panels. Nothing here computes a number.
 
@@ -179,4 +181,60 @@ export const MissingStated = ({ box, viewKey, required }) => {
   return missing.map(([path, name]) => (
     <p key={path} className="text-xs text-gray-500 mt-1 mb-0">The box does not state {name}, so the engine refuses: choose it above, or type it.</p>
   ));
+};
+
+/** Write one stated input (any JSON value, or undefined to remove it) into the box. */
+export const writeStated = (box, viewKey, path, value) => {
+  const r = setStated(box.text, viewKey, path, value);
+  if (!r.error) box.setText(r.text);
+};
+
+/** A plain button that changes what the box states. */
+export const ActionButton = ({ label, onClick }) => (
+  <div className="flex items-end">
+    <button type="button" onClick={onClick}
+      className="h-8 px-2 text-xs rounded-md border border-gray-600 bg-gray-800 text-gray-200 hover:bg-gray-700">{label}</button>
+  </div>
+);
+
+const ChoiceControl = ({ label, value, options, onChange }) => (
+  <div>
+    <Label className="text-gray-400 text-xs mb-1 block">{label}</Label>
+    <select value={value} onChange={(e) => onChange(e.target.value)}
+      className="w-full bg-gray-700 text-white border border-gray-600 rounded-md h-8 text-sm px-2">
+      {[['', 'not stated'], ...options].map(([v, l]) => <option key={v} value={v}>{l}</option>)}
+    </select>
+  </div>
+);
+
+/**
+ * THE UPLIFT TYPE OF A CARRY. Choosing a type rewrites the whole uplift for
+ * that type (upliftFor), so no term of the old type stays behind; the rate or
+ * the multiple the new type needs is then asked for beside it ("not stated"
+ * until the learner states it).
+ */
+export const UpliftControl = ({ box, viewKey, label, options }) => {
+  const old = statedIn(box, viewKey, 'uplift');
+  const current = old && typeof old === 'object' && typeof old.type === 'string' ? old.type : '';
+  return <ChoiceControl label={label} value={current} options={options} onChange={(v) => writeStated(box, viewKey, 'uplift', upliftFor(v === '' ? undefined : v, old))} />;
+};
+
+const CARRIER_RULES = [['pro-rata', 'pro rata to their participating interests (pro-rata)'], ['stated', 'in stated shares, each stated below']];
+
+/**
+ * THE CARRIERS OF ONE CARRY: "pro-rata", stated shares (written as placeholder
+ * equal shares of the parties no carry names as carried, each then stated with
+ * its own control), or not stated.
+ */
+export const CarriersControl = ({ box, viewKey, index, label }) => {
+  const path = `carries.${index}.carriers`;
+  const cur = statedIn(box, viewKey, path);
+  const value = cur === 'pro-rata' ? 'pro-rata' : (cur && typeof cur === 'object' ? 'stated' : '');
+  const block = box.parsed.error ? null : pick(box.parsed.value, viewKey);
+  const choose = (v) => {
+    if (v === '') writeStated(box, viewKey, path, undefined);
+    else if (v === 'pro-rata') writeStated(box, viewKey, path, 'pro-rata');
+    else writeStated(box, viewKey, path, equalCarrierShares(block && block.parties, block && block.carries));
+  };
+  return <ChoiceControl label={label} value={value} options={CARRIER_RULES} onChange={choose} />;
 };

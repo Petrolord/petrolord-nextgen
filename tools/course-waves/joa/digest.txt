@@ -409,6 +409,15 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 
 78 refusals across 9 functions: participatingInterests 11, cashCalls 8, budgetControl 4, overhead 9, defaultCover 14, carryRecovery 11, backIn 8, nonConsent 7, pscCostRecovery 6.
 
+REFUSALS A PANEL CONTROL CAN PRODUCE. Each calculator panel writes every required term into the box through a visible control, and setting a control to "not stated" removes the term. Four such calls are not golden cases; each is a golden input with one term removed or changed (stated probes), handed to the engine here, and the message is the engine's, verbatim:
+
+| golden input | the change (stated probe) | field | the engine's message, verbatim |
+| --- | --- | --- | --- |
+| budget-ekene-2027 | budgetTolerance.pct removed (the budget tolerance percent control cleared) | `budgetTolerance.pct` | budgetTolerance.pct must be a finite number at or above 0; got nothing |
+| cc-ekene-2027 | negativeCall removed (the negative call control set to not stated) | `negativeCall` | negativeCall must be one of "refund", "carry"; got nothing |
+| carry-ekene-multiple | uplift.type set to "none" with multiplePct left in the box | `uplift.multiplePct` | uplift.multiplePct must be left out when type is "none"; got 150 |
+| carry-ekene-pia | uplift set to { type: "compound" } with no rate | `uplift.ratePctPerYear` | uplift.ratePctPerYear must be a finite number at or above 0; got nothing |
+
 Four rules the table shows:
 - A contract term with no default is refused when it is missing, and the message says so: the carriers of a carry, the uplift, the reconciliation lag, the negative call rule, the budget tolerance, the overhead scale of every category, the default interest with its rate, method and grace, the premium multiple, the refundable kinds under basis "contract", the opening cost pool.
 - An input key a function does not read is refused at whatever level it sits (a top-level option, a party, a month, a year, a band, an uplift), with the path to the key and the full list of accepted keys.
@@ -526,6 +535,24 @@ cc-last-month-uncalled, the engine's reasons, verbatim:
 > 2027-12: no cash call: the forecast 100 is below the stated threshold 500; the actual is billed in arrears in the next month
 cc-year-boundary, the engine's reasons, verbatim:
 > 2027-01: the over-call of 100 in 2026-12 (forecast 1000, actual 900) is credited against this cash call, 1 month later
+
+THE EKENE ADJUSTMENT AND A MONTH THAT PAYS ARREARS (cc-ekene-2027, lag 2, threshold 500000.000000). March 2027 carries January's difference; June 2027 is called and also bills May's actual in arrears, May's forecast being below the threshold. Per party (engine); what a party pays in a month is its call plus its arrears billing:
+
+| month | party | forecast share | adjustment | call | arrears billing | paid |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2027-03 | EKO | 6000000.000000 | 200000.000000 | 5800000.000000 | 0.000000 | 5800000.000000 |
+| 2027-03 | PA | 3750000.000000 | 125000.000000 | 3625000.000000 | 0.000000 | 3625000.000000 |
+| 2027-03 | PB | 2250000.000000 | 75000.000000 | 2175000.000000 | 0.000000 | 2175000.000000 |
+| 2027-03 | NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-06 | EKO | 4500000.000000 | 150000.000000 | 4350000.000000 | 224000.000000 | 4574000.000000 |
+| 2027-06 | PA | 2812500.000000 | 93750.000000 | 2718750.000000 | 140000.000000 | 2858750.000000 |
+| 2027-06 | PB | 1687500.000000 | 56250.000000 | 1631250.000000 | 84000.000000 | 1715250.000000 |
+| 2027-06 | NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+
+The engine's reasons for March and June 2027, verbatim:
+> 2027-03: the over-call of 400000 in 2027-01 (forecast 4000000, actual 3600000) is credited against this cash call, 2 months later
+> 2027-06: the actual of 2027-05, 448000, made without a cash call, is billed in arrears
+> 2027-06: a credit of 300000 held from 2027-05 is applied to this cash call
 
 A MONTH WITH A ZERO FORECAST. With no threshold stated, February on cc-zero-call-month is called with a forecast of 0.000000, and the call is the adjustment alone; under "carry" the credit waits, under "refund" it is paid back as a negative call (cc-zero-call-month-refund). A forecast equal to the threshold is called; one below it is not (cc-threshold-exactly).
 
@@ -1333,6 +1360,9 @@ default-calendar-days, the engine's reasons, verbatim:
 SIMPLE AND COMPOUNDED MONTHLY ON THE SAME DEFAULT. PB's unpaid 2000000.000000 from 2027-03-01 to 2027-04-15: simple at 8.25 percent on a 360-day basis, 45 days, gives 20625.000000; compounded monthly with a 72-hour grace (default-ekene-monthly-compound-kenya), 1 whole month and 14 days, gives 20210.781250 (engine).
 
 THE COVER. The unpaid 2000000.000000 is advanced by EKO 1230769.230769 and PA 769230.769231, in proportion to their paying interests of 50.000000 and 31.250000; NOC, carried, pays no cost and covers none (engine).
+THE DAY BASIS IS A STATED TERM. The same Ekene default on a 365-day basis (stated probe: default-ekene-march with dayBasis 365) gives 20342.465753 for the same 45 days, against 20625.000000 on the 360-day basis the fixture states (engine). The engine's reason, verbatim:
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; interest 2000000 x 8.25% x 45 days / 365 = 20342.47 (from 2027-03-01 to the cure on 2027-04-15, the last date excluded)
+
 FORFEITURE AVAILABLE. On default-ekene-uncured the default is still open after the forfeiture trigger, and the interests if PB's assignment is demanded are EKO 47.058824, PA 29.411765, NOC 23.529412 (engine), pro rata to the participating interests of the others.
 
 # SECTION 15: PSC cost recovery through the canonical applyPSC: the order, the limit and its base, the pool, the partner split (owned by Professional m05)
@@ -1450,7 +1480,7 @@ IMF FARI FIGURE 5 (February 2016), golden input psc-fari-figure-5: one barrel at
 | income tax | 6 | 6.000000 |
 | government | 36 | 36.000000 |
 
-IMF FARI TABLES 12 AND 13 (February 2016), golden input psc-fari-table-12: eleven years in USD million, royalty 0.000000 percent, ceiling 80.000000 percent of after-royalty, the government share of profit petroleum per year as Table 13 prints it (a daily-rate scale the tables compute outside this engine). The printed figures (text, Tables 12 and 13) are whole numbers of an unrounded model:
+IMF FARI TABLES 12 AND 13 (February 2016), golden input psc-fari-table-12: eleven years in USD million, royalty 0.000000 percent, ceiling 80.000000 percent of after-royalty, the contractor's share of profit petroleum per year stated as contractorProfitSharePct, read from Table 13's government share (a daily-rate scale the tables compute outside this engine). The printed figures (text, Tables 12 and 13) are whole numbers of an unrounded model:
 
 | year | ceiling printed | ceiling engine | cost petroleum printed | cost recovered engine | closing printed | pool out engine | profit printed | profit oil engine | contractor printed | contractor engine | government printed | government engine |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -1466,7 +1496,7 @@ IMF FARI TABLES 12 AND 13 (February 2016), golden input psc-fari-table-12: eleve
 | 2010 | 480 | 480.000000 | 368 | 369.000000 | 0 | 0.000000 | 232 | 231.000000 | 130 | 129.360000 | 102 | 101.640000 |
 | 2011 | 392 | 392.000000 | 303 | 302.000000 | 0 | 0.000000 | 187 | 188.000000 | 108 | 109.040000 | 79 | 78.960000 |
 
-AGREEMENT AT THE PRINTED PRECISION (derived): the largest difference on a cost line (ceiling, cost petroleum, closing balance, profit) is 1.000000, inside the 1.5 a line made of at most three printed whole numbers can carry; the largest on the profit split is 1.560000, inside 1.5 plus half a per cent of the year's profit petroleum, because Table 13 prints the government share as a whole per cent. The carry of 250 through the first two years and the ceilings that bind in the third and fourth are reproduced.
+AGREEMENT AT THE PRINTED PRECISION (derived): the largest difference on a cost line (ceiling, cost petroleum, closing balance, profit) is 1.000000, inside the 1.5 a line made of at most three printed whole numbers can carry; the largest on the profit split is 1.560000, inside 1.5 plus half a per cent of the year's profit petroleum, because Table 13 prints the government share as a whole per cent, from which each year's stated contractor share is read. The carry of 250 through the first two years and the ceilings that bind in the third and fourth are reproduced.
 
 NO DEFECT, AND WHAT IT PROVES. The validation record states, verbatim:
 > Result: NO DEFECT. The cost pool arithmetic of `applyPSC` (royalty on gross; the limit on revenue after royalty; cost recovered = min(pool + capex + opex, limit); the rest carried; profit oil = revenue after royalty - cost recovered) reproduces the IMF schedule year by year
@@ -1627,7 +1657,7 @@ MODEL AGREEMENTS AND LICENSED FORMS. The industry's common model joint operating
 
 THE TRANSLATION PRINTS WHAT IT PRINTS. The Norwegian Article 9.2 reads "he looses his right to vote" (Norway JOA Art. 9.2); the course quotes it as printed and paraphrases it as the loss of the vote.
 
-THE NORWEGIAN SCALE IS A RESEARCH AND DEVELOPMENT CHARGE. Accounting Agreement Art. 2.2.2 charges the operator's general research and development cost by per cent rates in bands, and Art. 2.2.3 charges corporate management at a flat per cent of annual cost (Norway Accounting Agreement Art. 2.2.3); the engine's `overhead` computes any marginal scale of this shape, with every band and rate a stated input. The printed bands are in NOK million and move each year with the consumer price index from 15 July 2004 (Norway Accounting Agreement Art. 2.2.2); the engine does not index them.
+THE NORWEGIAN SCALE IS A RESEARCH AND DEVELOPMENT CHARGE. Accounting Agreement Art. 2.2.2 charges the operator's general research and development cost by per cent rates in bands, and Art. 2.2.3 charges corporate management at a flat per cent of annual cost (Norway Accounting Agreement Art. 2.2.3); the engine's `overhead` computes any marginal scale of this shape, with every band and rate a stated input. The printed bands are in NOK million and are adjusted each year on the consumer price index as published per 15 July of the current year (Norway Accounting Agreement Art. 2.2.2); the engine does not index them.
 
 PRINTED FIGURES AND EXACT FIGURES. The World Bank note prints 43 and 57; the engine returns 43.200000 and 56.800000 (section 16). IMF FARI Tables 12 and 13 print whole numbers of an unrounded model; the engine agrees with them within the printed precision. A reason the engine prints rounds money to the cent: the Ekene carry recovery reads, verbatim,
 > 2033: the balance 7267760.62 is recovered with 7267760.62 of the 9400000 available; the carried party receives 11532239.38 of its share 18800000
@@ -1689,7 +1719,7 @@ WHAT THE ENGINE SAYS IT DOES NOT COMPUTE, in its own bases, verbatim:
 > the cover by acquiring the defaulting party's share of petroleum, and the compensation on an assignment, are reported only
 > the expert determination of the unrecovered costs (s.85(4)(e)); the unrecovered cost figures are stated inputs
 
-A SLIDING SCALE COMPUTED OUTSIDE. When a year states its own contractor share, the engine uses it (psc-fari-table-12 carries the Table 13 shares, 2003 60, 2004 56, 2005 42, 2006 46, 2007 49, 2008 52, 2009 55, 2010 56, 2011 58); the scale that sets each share is the contract's and is worked outside the engine.
+A SLIDING SCALE COMPUTED OUTSIDE. When a year states its own contractor share, the engine uses it (psc-fari-table-12 states each year's contractor share read from Table 13, 2003 60, 2004 56, 2005 42, 2006 46, 2007 49, 2008 52, 2009 55, 2010 56, 2011 58); the scale that sets each share is the contract's and is worked outside the engine.
 
 # SECTION 23: Size caps and refusals at scale (owned by Expert m06 l02)
 

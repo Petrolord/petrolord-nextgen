@@ -40,9 +40,10 @@ The Ekene figures are printed in this course, so it is a safe place to practise 
 | the allowed overrun of the 2027 budget | 3000000.000000 |
 | the 2031 operating overhead charge | 1455000.000000 |
 | the 2031 development overhead charge | 2000000.000000 |
+| what EKO pays in June 2027, its call plus May's arrears billing | 4574000.000000 |
 
-For a payment, rehearse on the Ekene June 2027 rows: check for each paying party that its paid figure is its call plus its arrears billing for May.
+For a payment, check on the Ekene June 2027 rows that each paying party's paid figure is its call plus its arrears billing for May: EKO's call of 4350000.000000 and billing of 224000.000000 make 4574000.000000.
 
 ## Exercise
 
-Open the account calculator, the course's own calculator panel. Work the five Ekene steps in the table, one view at a time, and check each figure against the table. Then, in "Cash calls", read the June 2027 rows of the per-party table and write down each paying party's call, arrears billing and paid, and check that the three agree.
+Open the account calculator, the course's own calculator panel. Work the six Ekene steps in the table, one view at a time, and check each figure against the table. Then, in "Cash calls", read the June 2027 rows of the per-party table and write down each paying party's call, arrears billing and paid, and check that the three agree.

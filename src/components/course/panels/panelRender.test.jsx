@@ -441,7 +441,7 @@ describe('every course panel renders with no props', () => {
     const MODES = {
       'joa/AccountCalculator.jsx': ['interests', 'cashCalls', 'budget', 'overhead'],
       'joa/RecoveryCalculator.jsx': ['ledger', 'carry', 'backIn', 'default', 'psc'],
-      'joa/AgreementCalculator.jsx': ['soleRisk', 'buyIn', 'carry', 'psc', 'default', 'readings'],
+      'joa/AgreementCalculator.jsx': ['soleRisk', 'buyIn', 'carry', 'backIn', 'psc', 'default', 'readings'],
     };
     let rendered = 0;
     for (const [name, modes] of Object.entries(MODES)) {
@@ -455,7 +455,7 @@ describe('every course panel renders with no props', () => {
         rendered += 1;
       }
     }
-    expect(rendered).toBe(15);
+    expect(rendered).toBe(16);
   }, 120000);
   it('finds the D5 appliedai panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);

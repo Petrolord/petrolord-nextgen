@@ -52,6 +52,13 @@ case file pasted WHOLE, as the capstone card offers it. Every view shows the
 engine's own refusal and reasons, verbatim, and a Source block with the
 engine's `basis.source`.
 
+The interests view carries a control for each carry's carried percent and
+carriers; the overhead view a control for each category's exclusion, band
+limits, band rates and the rate above the last band; the cash call views a
+start selector over the Ekene ledgers and the small cases the digest teaches;
+the uplift control rewrites the whole uplift for the type chosen; the PSC view
+starts from the Ekene variant or any of the three published examples.
+
 EVERY REQUIRED STATED INPUT HAS A VISIBLE CONTROL, and no panel holds a hidden
 default. A control shows the term as the box states it, or "not stated", and
 writes the learner's choice into the box through `setStated`; a term left
@@ -80,8 +87,9 @@ the tax and the opening pool as controls.
 
 Sole risk and non-consent with the premium multiple and the mode as controls
 (PB's premium of 10800000.000000); buy-in (27000000.000000 at the Norwegian
-multiple); the carry with the NPV of every party, the PSC and the default,
-reused from the recovery calculator; and the three stated readings, each
+multiple); the carry with the NPV of every party, the back-in under PIA 2021
+s.85(4) with the engine's line on the expert determination, the PSC and the
+default, reused from the recovery calculator; and the three stated readings, each
 printed from the engine's basis on the golden input where it acts.
 
 ## THE RULES FOR EVERY PANEL

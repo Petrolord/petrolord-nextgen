@@ -9,7 +9,9 @@ import {
   six, orNone, Tbl, Refusal, EngineNote, Reasons, Source, useJsonBox, StatedControl, MissingStated, Declared,
 } from './panelBits';
 import { Box } from './AccountCalculator';
-import { CarryMode, PscMode, DefaultMode } from './RecoveryCalculator';
+import {
+  CarryMode, PscMode, DefaultMode, BackInMode,
+} from './RecoveryCalculator';
 
 // The agreement calculator (Expert): sole risk and non-consent with the premium
 // and its recovery from production, buy-in at a stated multiple, a carry with
@@ -23,6 +25,7 @@ export const MODES = [
   ['soleRisk', 'Sole risk: the premium recovered from production'],
   ['buyIn', 'Buy-in at a stated multiple'],
   ['carry', 'A carry, its recovery and the NPV'],
+  ['backIn', 'A back-in under PIA 2021 s.85(4)'],
   ['psc', 'PSC cost recovery'],
   ['default', 'A default and forfeiture'],
   ['readings', 'The three stated readings'],
@@ -119,24 +122,28 @@ export const ReadingsMode = () => {
   const inside = defaultOf(READING_CASES.graceInside);
   const cover = defaultOf(READING_CASES.cover);
   const limit = pscOf(READING_CASES.limitBase);
-  const bound = tax.years.find((y) => y.poolOut > 0 && y.grossRevenue > 0);
+  // The first two years in which the limit binds (a pool is carried out of a year with revenue): the digest illustrates the second.
+  const bound = tax.years.filter((y) => y.poolOut > 0 && y.grossRevenue > 0).slice(0, 2);
   return (
     <>
       <Declared title="Reading one: the PSC income tax, in the engine's words">{tax.basis.tax}</Declared>
+      {bound.map((y) => (
+        <TileGrid key={y.year}>
+          <Tile label={`psc-ekene ${y.year}: capex and opex`} value={six(y.capex + y.opex)} />
+          <Tile label={`psc-ekene ${y.year}: cost recovered`} value={six(y.costRecovered)} />
+          <Tile label={`psc-ekene ${y.year}: contractor profit oil`} value={six(y.contractorProfitOil)} />
+          <Tile label={`psc-ekene ${y.year}: tax`} value={six(y.tax)} />
+        </TileGrid>
+      ))}
+      <Declared title="Reading two: the grace, in the engine's words (default-grace-exceeded)">{grace.basis.grace}</Declared>
       <TileGrid>
-        <Tile label={`The Ekene PSC, ${bound.year}: cost recovered`} value={six(bound.costRecovered)} />
-        <Tile label={`${bound.year}: contractor profit oil`} value={six(bound.contractorProfitOil)} />
-        <Tile label={`${bound.year}: tax`} value={six(bound.tax)} />
+        <Tile label={`default-grace-exceeded, cured after ${grace.defaulters[0].days} days: default interest`} value={six(grace.interestTotal)} />
+        <Tile label={`default-grace-last-hour, cured after ${inside.defaulters[0].days} days: default interest`} value={six(inside.interestTotal)} />
       </TileGrid>
-      <Declared title="Reading two: the grace, in the engine's words">{grace.basis.grace}</Declared>
-      <TileGrid>
-        <Tile label={`Cured after ${grace.defaulters[0].days} days: default interest`} value={six(grace.interestTotal)} />
-        <Tile label={`Cured after ${inside.defaulters[0].days} days: default interest`} value={six(inside.interestTotal)} />
-      </TileGrid>
-      <Declared title="Reading three: the cover, in the engine's words">{cover.basis.cover}</Declared>
+      <Declared title="Reading three: the cover, in the engine's words (default-ekene-march)">{cover.basis.cover}</Declared>
       <Tbl head={['party', 'paying interest', 'cover percent', 'cover']}
         rows={cover.cover.map((c) => [c.id, six(c.payingPct), six(c.coverPct), six(c.cover)])} />
-      <Declared title="The limit base is a stated input, in the engine's words">{limit.basis.limitBase}</Declared>
+      <Declared title="The limit base is a stated input, in the engine's words (psc-wb-bn8-2007)">{limit.basis.limitBase}</Declared>
       <Source text={tax.basis.source} />
       <Note>No graded figure depends on any of these readings: each capstone value is the same number under each reading and under the alternative it names.</Note>
     </>
@@ -157,6 +164,7 @@ const AgreementCalculator = ({ initialMode = 'soleRisk', initialCase = null, ini
         {mode === 'soleRisk' && <SoleRiskMode initialCase={initialCase} initialText={initialText} />}
         {mode === 'buyIn' && <BuyInMode initialCase={initialCase} initialText={initialText} />}
         {mode === 'carry' && <CarryMode initialCase={initialCase} initialText={initialText} />}
+        {mode === 'backIn' && <BackInMode initialCase={initialCase} initialText={initialText} />}
         {mode === 'psc' && <PscMode initialCase={initialCase} initialText={initialText} />}
         {mode === 'default' && <DefaultMode initialCase={initialCase} initialText={initialText} />}
         {mode === 'readings' && <ReadingsMode />}

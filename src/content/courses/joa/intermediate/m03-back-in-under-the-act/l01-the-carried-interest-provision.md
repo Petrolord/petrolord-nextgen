@@ -45,6 +45,6 @@ Every cost figure on the Ekene back-in is a synthetic stated input.
 Work in the course's own recovery calculator.
 
 1. Open the view "A carry and its recovery" and start from "The Ekene carry under PIA s.85(4)". Read the basis notes under the ledger and find the one that cites s.85(4)(c).
-2. With the control "Uplift (stated)", choose the compound uplift and type 8 into "Uplift, percent a year (stated)". Read the refusal.
+2. With the control "Uplift (stated)", choose the compound uplift: its rate control appears. Type 8 into "Uplift, percent a year (stated)" and read the refusal.
 3. With the control "Basis (stated)", switch to the contract's stated terms. The carry now runs: say which term the Act fixed in step 2 is now the contract's to state.
-4. Open the view "A back-in under the Act", start from "The Ekene back-in under PIA s.85(4)", and read the basis note on what the engine does not compute.
+4. Open the view "A back-in under the Act", start from "The Ekene back-in under PIA s.85(4)", and read what the engine does not compute.

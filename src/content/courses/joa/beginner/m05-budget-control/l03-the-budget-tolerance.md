@@ -24,7 +24,7 @@ The Ekene terms state a budget tolerance of the lower of 5.000000 percent and 30
 
 > the budget: 81950000 against 76000000 approved, an overrun of 5950000; the allowed overrun is the lower of 5% of the approved total (3800000) and 3000000: 3000000; beyond the budget tolerance
 
-The allowed overrun is 3000000.000000, held by the amount. The overrun of 5950000.000000 is beyond it, though four of the five approved lines are inside theirs.
+The allowed overrun is 3000000.000000, held by the amount. The overrun of 5950000.000000 is beyond it.
 
 ## The Norwegian figures, stated as inputs
 
@@ -40,6 +40,10 @@ Leave the budget tolerance out and the engine refuses by name:
 
 > budgetTolerance must be an object { pct, amount } (amount optional; no default); got nothing
 
+Clear only its percentage and the refusal names that term:
+
+> budgetTolerance.pct must be a finite number at or above 0; got nothing
+
 ## Exercise
 
-Open the account calculator, the course's own calculator panel, and choose "Budget control". Start from "The Ekene 2027 budget" and run it; read the "Allowed overrun" and "Held by" tiles. Clear the control "Budget tolerance amount (optional)", run it, and write down the new allowed overrun and which limit holds it. Then choose the start "The Norwegian figures, in NOK million" and change the approved amount to 1000 and the actual to 1050. Finally, delete the `budgetTolerance` key from the box and read the refusal.
+Open the account calculator, the course's own calculator panel, and choose "Budget control". Start from "The Ekene 2027 budget"; read the "Allowed overrun" and "Held by" tiles. Clear the control "Budget tolerance amount (optional)", run it, and write down the new allowed overrun and which limit holds it. Then choose the start "The Norwegian figures, in NOK million" and change the approved amount to 1000 and the actual to 1050. Finally, clear the control "Budget tolerance, percent (stated)" and read the refusal.

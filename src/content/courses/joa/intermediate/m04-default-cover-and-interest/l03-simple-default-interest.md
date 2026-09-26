@@ -56,6 +56,6 @@ The method, too, must be stated. A call that names none is refused:
 Work in the course's own recovery calculator, view "A default: cover, interest and consequences".
 
 1. Start from "The Ekene March default, simple interest". Check PB's days and default interest, and the tile "Total default interest".
-2. With the control "Day basis (stated)", choose 365 days. Write down the new default interest and say why it moved the way it did. Choose 360 again.
+2. With the control "Day basis (stated)", choose 365 days. Check the new default interest, 20342.465753, and say why it fell. Choose 360 again.
 3. Start from "The same default left open" and check the second row of the table above.
 4. With the control "Interest method (stated)", choose "not stated" and read the refusal. Then clear "Default interest, percent a year (stated)" and read what the panel says is missing.

@@ -38,11 +38,8 @@ The World Bank example states its limit on gross, and the IMF figure on revenue 
 
 ## Exercise
 
-The panel has no starting case for this figure, so you build it from the World Bank one. Work in the course's own recovery calculator, view "PSC cost recovery", starting from "World Bank Briefing Note 8, the two-barrel example".
+Work in the course's own recovery calculator, view "PSC cost recovery", starting from "IMF FARI Figure 5, one barrel".
 
-1. With the control "Royalty, percent (stated)", set 0.
-2. With "Cost oil limit, percent (stated)", set 50, and with "Cost oil limit base (stated)", choose revenue after royalty.
-3. Check that "Contractor profit share, percent (stated)" reads 40 and "Tax, percent (stated)" reads 30.
-4. In the box, set the year's `capex` to 50.
-5. Check the cost recovered, government profit oil, contractor profit oil, tax and government take against the engine column above.
-6. Switch the limit base to gross. Say why nothing changes on this barrel.
+1. Read the controls: royalty 0, a limit of 50 on revenue after royalty, a contractor share of 40 and tax of 30.
+2. Check the revenue after royalty, capex, cost recovered, government profit oil, contractor profit oil, tax and government take against the engine column above.
+3. Switch "Cost oil limit base (stated)" to gross. Say why nothing changes on this barrel.

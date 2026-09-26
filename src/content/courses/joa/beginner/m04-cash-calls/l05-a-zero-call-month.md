@@ -40,8 +40,4 @@ On the Ekene terms a threshold is stated, so April 2027, with a forecast of 0.00
 
 ## Exercise
 
-Open the account calculator, the course's own calculator panel, and choose "Cash calls". Replace the box with the small case:
-
-    {"parties":[{"id":"A","participatingPct":50},{"id":"B","participatingPct":30},{"id":"C","participatingPct":20}],"months":[{"month":"2027-01","forecast":1000,"actual":800},{"month":"2027-02","forecast":0,"actual":0},{"month":"2027-03","forecast":400,"actual":400}],"reconciliationLagMonths":1,"negativeCall":"carry"}
-
-Run it and read February's calls and carried amounts. Then switch "A negative call is (stated)" to refund, run again, and write down February's and March's calls under each rule.
+Open the account calculator, the course's own calculator panel, and choose "Cash calls". With "Start from", choose "A month with a zero forecast, credit carried" and read February's calls and carried amounts. Then choose "A month with a zero forecast, refunded", or switch "A negative call is (stated)" to refund on the first start, and write down February's and March's calls under each rule. Finally choose "A forecast at the threshold, then one below" and say which month is called.

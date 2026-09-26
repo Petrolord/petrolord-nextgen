@@ -6,10 +6,10 @@ import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
 import {
-  six, orNone, Tbl, Refusal, EngineNote, Reasons, Source, useJsonBox, StatedControl, MissingStated, statedIn,
+  six, orNone, Tbl, Refusal, EngineNote, Reasons, Source, useJsonBox, StatedControl, MissingStated, statedIn, UpliftControl,
 } from './panelBits';
 import {
-  Box, Starts, CashCallTable, CashCallControls,
+  Box, Starts, CashCallTable, CashCallControls, CASH_CALL_STARTS,
 } from './AccountCalculator';
 
 // The recovery calculator (Professional): the cash call ledger with its
@@ -33,7 +33,7 @@ export const LedgerMode = ({ initialCase = null, initialText = null }) => {
   const r = box.parsed.error ? null : viewCashCalls(box.parsed.value);
   return (
     <>
-      <Starts box={box} starts={[['cashCalls', 'The Ekene 2027 ledger, a credit carried'], ['cashCallsRefund', 'The same ledger, a negative call refunded'], ['cashCallsLag1', 'The same ledger, a lag of one month']]} />
+      <Starts box={box} starts={CASH_CALL_STARTS} />
       <CashCallControls box={box} />
       <Box box={box} label="cashCalls inputs (JSON: parties, carries, months, reconciliationLagMonths, negativeCall, noCallBelow), or a whole case file" rows={12} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
@@ -70,7 +70,7 @@ export const CarryMode = ({ initialCase = null, initialText = null }) => {
     <>
       <Starts box={box} starts={[['carry', 'The Ekene carry, compound uplift'], ['carryPia', 'The Ekene carry under PIA s.85(4)'], ['carryMultiple', 'The Ekene carry, multiple uplift'], ['carryCapped', 'The Ekene carry with a cap']]} />
       <FieldGrid>
-        <StatedControl box={box} viewKey="carry" path="uplift.type" label="Uplift (stated)" options={UPLIFT} />
+        <UpliftControl box={box} viewKey="carry" label="Uplift (stated)" options={UPLIFT} />
         {type === 'compound' && <StatedControl box={box} viewKey="carry" path="uplift.ratePctPerYear" label="Uplift, percent a year (stated)" />}
         {type === 'multiple' && <StatedControl box={box} viewKey="carry" path="uplift.multiplePct" label="Uplift multiple, percent (stated)" />}
         <StatedControl box={box} viewKey="carry" path="recoverFromPct" label="Recovered from, percent of the share (stated)" />
@@ -207,7 +207,7 @@ export const PscMode = ({ initialCase = null, initialText = null }) => {
   const r = box.parsed.error ? null : viewPsc(box.parsed.value);
   return (
     <>
-      <Starts box={box} starts={[['psc', 'The Ekene PSC variant'], ['pscWorldBank', 'World Bank Briefing Note 8, the two-barrel example'], ['pscFari', 'IMF FARI Tables 12 and 13']]} />
+      <Starts box={box} starts={[['psc', 'The Ekene PSC variant'], ['pscWorldBank', 'World Bank Briefing Note 8, the two-barrel example'], ['pscFariFigure5', 'IMF FARI Figure 5, one barrel'], ['pscFari', 'IMF FARI Tables 12 and 13']]} />
       <FieldGrid>
         <StatedControl box={box} viewKey="psc" path="royaltyPct" label="Royalty, percent (stated)" />
         <StatedControl box={box} viewKey="psc" path="costOilLimitPct" label="Cost oil limit, percent (stated)" />
@@ -222,8 +222,8 @@ export const PscMode = ({ initialCase = null, initialText = null }) => {
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && (
         <>
-          <Tbl head={['year', 'gross revenue', 'royalty', 'pool in', 'cost oil limit', 'cost recovered', 'pool out', 'profit oil', 'contractor share', 'contractor profit oil', 'government profit oil', 'tax', 'contractor entitlement', 'government take']}
-            rows={r.years.map((y) => [String(y.year), six(y.grossRevenue), six(y.royalty), six(y.poolIn), six(y.costOilLimit), six(y.costRecovered), six(y.poolOut), six(y.profitOil), six(y.contractorProfitSharePct), six(y.contractorProfitOil), six(y.governmentProfitOil), six(y.tax), six(y.contractorEntitlement), six(y.governmentTake)])} />
+          <Tbl head={['year', 'gross revenue', 'royalty', 'revenue after royalty', 'capex', 'opex', 'pool in', 'cost oil limit', 'cost recovered', 'pool out', 'profit oil', 'contractor share', 'contractor profit oil', 'government profit oil', 'tax', 'contractor entitlement', 'government take']}
+            rows={r.years.map((y) => [String(y.year), six(y.grossRevenue), six(y.royalty), six(y.revenueAfterRoyalty), six(y.capex), six(y.opex), six(y.poolIn), six(y.costOilLimit), six(y.costRecovered), six(y.poolOut), six(y.profitOil), six(y.contractorProfitSharePct), six(y.contractorProfitOil), six(y.governmentProfitOil), six(y.tax), six(y.contractorEntitlement), six(y.governmentTake)])} />
           <TileGrid>
             <Tile label="Cost recovered, total" value={six(r.totals.costRecovered)} />
             <Tile label="Government take, total" value={six(r.totals.governmentTake)} />

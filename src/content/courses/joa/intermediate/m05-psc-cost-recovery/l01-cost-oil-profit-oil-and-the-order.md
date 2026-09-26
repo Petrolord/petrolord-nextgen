@@ -54,7 +54,7 @@ A royalty must leave something to share. A royalty of 100 percent is refused:
 
 Work in the course's own recovery calculator, view "PSC cost recovery", starting from "The Ekene PSC variant".
 
-1. Find the 2030 row and check each line the panel prints against the table above. The panel leaves out revenue after royalty: work it out from gross revenue and royalty.
+1. Find the 2030 row and check each line the panel prints against the table above. Read revenue after royalty, capex and opex in their own columns.
 2. Check that the contractor entitlement and the government take add up to the gross revenue.
 3. Find the basis note on the tax.
 4. With the control "Royalty, percent (stated)", set 100 and read the refusal. Then set 10: the 2030 royalty moves and the cost oil limit does not. Say why, from the base the limit is stated on.
