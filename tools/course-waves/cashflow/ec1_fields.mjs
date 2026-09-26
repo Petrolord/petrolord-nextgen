@@ -32,13 +32,14 @@
 //
 //   3. THE EXPERT TIER READS THE SAME ROWS UNDER THE PIA as a NEW shallow-
 //      water lease whose prior cumulative production sits 2.3875 MMbbl short of
-//      the 100 MMbbl production-allowance cap, so the cap crosses in the
-//      SECOND year; a CPR limit of 35 percent that defers cost in the first
-//      year; a 2031 base year so the date trigger selects the NTA framework
-//      and the development levy replaces TET; and a 40 MUSD post-tax
-//      abandonment lump sum in the final year, which gives the nominal net
-//      cash flow a terminal negative and therefore a second IRR root (the
-//      tier grades NPV and the fiscal lines, never the IRR).
+//      the 100 MMbbl production-allowance cap, so the cap is crossed in the
+//      SECOND year and the after-cap barrels earn the lower allowance; the 65
+//      percent cost price ratio cap starts deferring cost in the fourth year and
+//      the carry grows into the fifth; every year is a year of assessment from
+//      2026, so each is an NTA 2025 year and the development levy applies; and a
+//      40 MUSD post-tax abandonment lump sum in the final year gives the nominal
+//      net cash flow a terminal negative and therefore a second IRR root (the
+//      tier grades the fiscal lines, never the IRR or the NPV).
 // ---------------------------------------------------------------------------
 import fs from 'fs';
 import { fileURLToPath } from 'url';
@@ -66,14 +67,17 @@ const JV = {
   jv_working_interest_pct: 80, jv_royalty_pct: 12.5, jv_tax_rate_pct: 45,
 };
 // THE EXPERT TIER ON THE DEFAULT PATH (engines 3.12.0, EC7 recut 2026-09-26,
-// PROPOSED, pending the lead's decision). The live IKPOTO config is refused by
-// the corrected engine twice over: pia_capex_recovery_years 4 (the texts fix
-// five years) and a new-acreage PML with no pia_new_pml_hct_rate_pct (the texts
-// do not say 15 or 30). Every non-statutory override is removed (TET, recovery
-// years, the NDDC opex base, the 35 percent CPR limit), and the new-PML rate is
-// STATED at 30. Because that rate is a reading the texts leave open, the six
-// Expert fields are chosen so that NONE depends on it: the generator runs the
-// field at 15 and at 30 and refuses unless every field agrees exactly.
+// lead decisions L1 and L3). Every input the texts fix is left at the engine's
+// default (TET at the statutory rate, capital allowance over five years, NDDC on
+// the total annual budget, the 65 percent CPR limit, the Sixth Schedule
+// allowance). The new-acreage PML hydrocarbon tax rate is a reading the texts
+// leave open, so the prompt STATES it at 30 and says it is a stated reading; the
+// six Expert fields are chosen so that NONE depends on it: the generator runs
+// the field at 15 and at 30 and refuses unless every field agrees exactly. The
+// royalty by price is read on the Regulations (2021) base, the engine default,
+// and the prompt says so (L2). L3: the 2035 CPR carry replaces the 2034 one,
+// because two plausible wrong methods move it (discriminate_expert.mjs) and
+// neither the stated rate nor the benchmark base year does.
 const PIA = {
   ...JV, fiscal_regime: 'PIA',
   pia_terrain: 'shallow_water', pia_license_type: 'PML', pia_lease_status: 'new', pia_water_depth_m: 45,
@@ -83,8 +87,8 @@ const PIA = {
   pia_working_interest_pct: 80,
   abandonment_cost_usd: 40000000,
 };
-// The live Expert config as published (engines 3.10.0), kept only so the recut
-// report can show that the default path refuses it.
+// The Expert config served before the EC7 recut, kept only so the recut record
+// can show that the default path refuses it. Nothing is graded on it.
 export const PIA_LIVE = {
   ...JV, fiscal_regime: 'PIA',
   pia_terrain: 'shallow_water', pia_license_type: 'PML', pia_lease_status: 'new', pia_water_depth_m: 45,
@@ -122,7 +126,7 @@ const fields = [
   ['advanced', 'pia_2031_nddc_usd', row(pia, 2031).nddc, 1],
   ['advanced', 'pia_total_cit_usd', pia.kpis.total_cit, 1],
   ['advanced', 'pia_2033_dev_levy_usd', row(pia, 2033).dev_levy_tax, 1],
-  ['advanced', 'pia_2034_cpr_deferred_usd', row(pia, 2034).cpr_deferred_to_next, 1],
+  ['advanced', 'pia_2035_cpr_deferred_usd', row(pia, 2035).cpr_deferred_to_next, 1],
 ];
 for (const [, k, x] of fields) if (!Number.isFinite(x)) throw new Error(`field ${k} is not finite: ${x}`);
 // The stated new-PML reading must not reach any graded field.
@@ -130,7 +134,7 @@ for (const [, k, x] of fields) if (!Number.isFinite(x)) throw new Error(`field $
   const at15 = {
     pia_2032_price_royalty_usd: row(pia15, 2032).price_royalty, pia_2032_production_allowance_usd: row(pia15, 2032).production_allowance,
     pia_2031_nddc_usd: row(pia15, 2031).nddc, pia_total_cit_usd: pia15.kpis.total_cit, pia_2033_dev_levy_usd: row(pia15, 2033).dev_levy_tax,
-    pia_2034_cpr_deferred_usd: row(pia15, 2034).cpr_deferred_to_next,
+    pia_2035_cpr_deferred_usd: row(pia15, 2035).cpr_deferred_to_next,
   };
   for (const [t, k, x] of fields) if (t === 'advanced' && at15[k] !== x) throw new Error(`field ${k} depends on the stated new-PML HCT reading: ${x} at 30, ${at15[k]} at 15`);
 }

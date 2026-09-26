@@ -89,13 +89,16 @@
       "ec1_dump.mjs",
       "ec1_fields.mjs",
       "discriminate_expert.mjs",
-      "prove_prior_courses.sh"
+      "prove_prior_courses.sh",
+      "ec1_capstone.mjs",
+      "capstones.json",
+      "precision.json"
     ],
     "pins": {
       "digest.txt": "3f88d819840f8e1d447d362d03328c827e9b61935bd13912ee131e93f7a90aa8",
-      "fields.json": "7423f4e1c8a20bed294d2228e79368bc1e230f980992de4ac5586166be8050d5"
+      "fields.json": "7e55e1ade9cdaf32abd296e470bb4cf767ef7d989883a9c9851e6b07764ed3eb"
     },
-    "recutNote": "EC7 PIA recut 2026-09-26 (engines 3.12.0 at 3778451, default path). First commit of the EC1 kit. fields.json carries the PROPOSED Expert fields (pending the lead's decision; the live IKPOTO Expert config is refused by the corrected engine). discriminate_expert.mjs proves each Expert field independent of the stated new-PML HCT reading. prove_prior_courses.sh proves qra unchanged."
+    "recutNote": "EC7 PIA recut 2026-09-26 (engines 3.12.0 at 3778451, default path). First commit of the EC1 kit. fields.json carries the Expert set of lead decisions L1 and L3 (the served IKPOTO Expert config is refused by the corrected engine): the new-PML HCT rate is stated at 30 in the prompt and no Expert field depends on it; the 2035 CPR carry replaces the 2034 one (L3). discriminate_expert.mjs proves both. ec1_capstone.mjs renders all three prompts from the engine inputs into capstones.json and proves the Associate and Professional capstones byte-identical to the served rows. prove_prior_courses.sh proves qra unchanged."
   },
   "fiscal": {
     "course": "EC2",

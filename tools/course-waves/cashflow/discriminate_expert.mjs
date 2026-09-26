@@ -11,10 +11,14 @@ const row = (res, y) => res.cashFlowData.find((q) => q.year === y);
 const read = (res) => ({
   pia_2032_price_royalty_usd: row(res, 2032).price_royalty, pia_2032_production_allowance_usd: row(res, 2032).production_allowance,
   pia_2031_nddc_usd: row(res, 2031).nddc, pia_total_cit_usd: res.kpis.total_cit, pia_2033_dev_levy_usd: row(res, 2033).dev_levy_tax,
-  pia_2034_cpr_deferred_usd: row(res, 2034).cpr_deferred_to_next,
+  pia_2035_cpr_deferred_usd: row(res, 2035).cpr_deferred_to_next,
 });
 const RIGHT = Object.fromEntries(fields.filter(([t]) => t === 'advanced').map(([, k, x, tol]) => [k, [x, tol]]));
+// L1/L2/L3: no field may depend on the stated new-PML rate; the L3 field must
+// also not depend on the royalty-by-price base year.
 const SAME = [['stated new-PML rate 15 (the field must not depend on it)', { pia_new_pml_hct_rate_pct: 15 }]];
+const L3 = 'pia_2035_cpr_deferred_usd';
+const L3_SAME = [['royalty by price on the act_2020 base', { pia_price_royalty_base: 'act_2020' }]];
 const WRONG = [
   ['pre-audit engine (pia_legacy_pre_audit)', { pia_legacy_pre_audit: true, pia_new_pml_hct_rate_pct: undefined }],
   ['royalty by price on the act_2020 base', { pia_price_royalty_base: 'act_2020' }],
@@ -42,6 +46,18 @@ for (const k of Object.keys(RIGHT)) {
   const by = WRONG.filter(([, patch]) => { const cfg = { ...PIA, ...patch }; for (const q of Object.keys(cfg)) if (cfg[q] === undefined) delete cfg[q]; try { return Math.abs(read(run(cfg))[k] - RIGHT[k][0]) > 10 * RIGHT[k][1]; } catch { return false; } }).map(([l]) => l);
   console.log(`${k} = ${RIGHT[k][0]}: moved beyond ten tolerances by ${by.length ? by.join('; ') : 'NOTHING'}`);
   if (!moved) { weak += 1; console.log(`WEAK ${k}: no wrong method moves it beyond ten tolerances`); }
+}
+// L3: the swapped field is moved by at least two wrong methods and by neither
+// the stated rate nor the benchmark base year.
+{
+  const clean = (patch) => { const cfg = { ...PIA, ...patch }; for (const q of Object.keys(cfg)) if (cfg[q] === undefined) delete cfg[q]; return cfg; };
+  for (const [label, patch] of L3_SAME) {
+    const got = read(run(clean(patch)))[L3]; checked += 1;
+    if (got !== RIGHT[L3][0]) { weak += 1; console.log(`DEPENDS ${L3} on ${label}: ${got} vs ${RIGHT[L3][0]}`); }
+  }
+  const by = WRONG.filter(([l, patch]) => !L3_SAME.some(([m]) => m === l)).filter(([, patch]) => { try { return Math.abs(read(run(clean(patch)))[L3] - RIGHT[L3][0]) > 10 * RIGHT[L3][1]; } catch { return false; } }).map(([l]) => l);
+  console.log(`L3 ${L3}: moved by ${by.length} wrong method(s) other than the base year (${by.join('; ')}); unmoved by the stated rate and the base year`);
+  if (by.length < 2) { weak += 1; console.log(`WEAK ${L3}: L3 needs at least two wrong methods`); }
 }
 console.log(`${checked} field readings checked; ${weak === 0 ? 'every Expert field is independent of the stated reading and moved by at least one wrong method' : `${weak} problem(s)`}`);
 process.exit(weak === 0 ? 0 : 1);

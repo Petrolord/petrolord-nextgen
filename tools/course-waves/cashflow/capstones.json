@@ -1,0 +1,158 @@
+[
+ {
+  "app_slug": "cashflow",
+  "tier": "beginner",
+  "cert_tier": "associate",
+  "title": "Read the ledger",
+  "dataset": "IKPOTO, a six-year oil field with associated gas under joint venture terms at an 80 percent working interest, a field the lessons never use",
+  "prompt": "Six values from the IKPOTO joint venture ledger supplied with this capstone. First oil 2031, six years of production: 1,600,000 bbl of oil in 2031 declining twenty percent a year (1,280,000; 1,024,000; 819,200; 655,360; 524,288), with gas at 900 scf per barrel (1,440,000 Mscf in 2031, then 1,152,000; 921,600; 737,280; 589,824; 471,859.2). Capex 120,000,000 USD in 2031 and 30,000,000 USD in 2032; opex 19,000,000 USD a year in 2031 money escalating at 3.5 percent. Oil 76 USD/bbl and gas 3.0 USD/Mscf in 2031, both escalating at 1.5 percent; inflation 2.5 percent; base year 2031. Joint venture terms: working interest 80 percent, royalty 12.5 percent, tax 45 percent, depreciation on the engine's default straight line. Report: (1) the GROSS REVENUE in 2033; (2) the TAX in 2032; (3) the NET CASH FLOW in 2034; (4) the PAYBACK in years; (5) the TOTAL barrels of oil equivalent; and (6) the GOVERNMENT TAKE in percent. Traps. The joint venture ledger reports EVERY line at the 80 percent SHARE, the way the production sharing and PIA regimes already did: gross revenue, volumes, opex, capex and depreciation as well as royalty, taxable income, tax and net cash flow. So fields 1, 2, 3 and 5 are all the share, and a reader who takes the gross field ledger is wrong on each of them by a factor of 1.25. Gas counts at 6 Mscf per barrel of oil equivalent. Depreciation is a deduction in the tax line and NOT a cash flow in field 3. Payback is read off the CUMULATIVE nominal cash flow and interpolated inside the year it turns positive. Take is the engine's: the pre-take value at your share (revenue less capex less opex, undiscounted) minus the contractor's net cash flow, over the pre-take value, so it no longer moves when the working interest does; report the engine's number as the engine defines it.",
+  "fields": [
+   {
+    "key": "jv_2033_gross_revenue_usd",
+    "tol": 1,
+    "unit": "USD",
+    "label": "Gross revenue in 2033",
+    "expected": 66419677.183999985
+   },
+   {
+    "key": "jv_2032_tax_usd",
+    "tol": 1,
+    "unit": "USD",
+    "label": "Tax in 2032",
+    "expected": 19728417.6
+   },
+   {
+    "key": "jv_2034_net_cash_flow_usd",
+    "tol": 1,
+    "unit": "USD",
+    "label": "Net cash flow in 2034",
+    "expected": 22086267.91657759
+   },
+   {
+    "key": "jv_payback_years",
+    "tol": 0.00001,
+    "unit": "years",
+    "label": "Payback",
+    "expected": 3.4998246420308123
+   },
+   {
+    "key": "jv_total_boe",
+    "tol": 1,
+    "unit": "boe",
+    "label": "Total barrels of oil equivalent",
+    "expected": 5430620.16
+   },
+   {
+    "key": "jv_government_take_pct",
+    "tol": 0.0001,
+    "unit": "percent",
+    "label": "Government take",
+    "expected": 75.09574181027746
+   }
+  ]
+ },
+ {
+  "app_slug": "cashflow",
+  "tier": "intermediate",
+  "cert_tier": "professional",
+  "title": "Put a time value on the ledger",
+  "dataset": "the IKPOTO joint venture ledger valued in time: two discounting conventions, a real basis, and the price at which the value is nought",
+  "prompt": "Six values for the same IKPOTO joint venture run as the Associate capstone (identical rows and terms), now valued at a 9 percent NOMINAL discount rate on the REAL basis with 2.5 percent inflation, valuation year equal to the 2031 base year, nothing sunk. Report: (1) the NPV under END-YEAR discounting; (2) the NPV under MID-YEAR discounting; (3) the INTERNAL RATE OF RETURN in percent; (4) the DISCOUNTED PAYBACK in years; (5) the DPI (NPV over the present value of capex); and (6) the BREAKEVEN flat oil price in USD/bbl at which the end-year NPV is nought. Traps. The applied rate is the Fisher REAL rate, (1.09 / 1.025) - 1, not 9 percent, and the flows it discounts are the DEFLATED flows; discounting the nominal flows at 9 percent gives the same NPV, which is the point, but discounting the deflated flows at 9 percent does not. Mid-year adds one half to every exponent including the first. IRR is solved on the NOMINAL flows and does not depend on the basis. DPI here is NPV over PV(capex), which is the profitability index MINUS ONE; report the engine's definition. The breakeven is the FLAT price with the 1.5 percent escalator still applied from it, found by bisection to the cent.",
+  "fields": [
+   {
+    "key": "jv_npv_real_usd",
+    "tol": 1,
+    "unit": "USD",
+    "label": "NPV, real basis, end year",
+    "expected": 20656337.21686185
+   },
+   {
+    "key": "jv_npv_mid_year_usd",
+    "tol": 1,
+    "unit": "USD",
+    "label": "NPV, real basis, mid year",
+    "expected": 20030970.834339857
+   },
+   {
+    "key": "jv_irr_pct",
+    "tol": 0.0001,
+    "unit": "percent",
+    "label": "Internal rate of return",
+    "expected": 23.719272956750835
+   },
+   {
+    "key": "jv_discounted_payback_years",
+    "tol": 0.0001,
+    "unit": "years",
+    "label": "Discounted payback",
+    "expected": 3.9696530221864026
+   },
+   {
+    "key": "jv_dpi",
+    "tol": 0.000001,
+    "unit": "ratio",
+    "label": "Discounted profitability index",
+    "expected": 0.17502648916650668
+   },
+   {
+    "key": "jv_breakeven_oil_price_usd_bbl",
+    "tol": 0.005,
+    "unit": "USD/bbl",
+    "label": "Breakeven oil price",
+    "expected": 66.10100889205933
+   }
+  ]
+ },
+ {
+  "app_slug": "cashflow",
+  "tier": "advanced",
+  "cert_tier": "expert",
+  "title": "Run the same rows through the cascade",
+  "dataset": "the IKPOTO rows under the Petroleum Industry Act and the Nigeria Tax Act 2025: a new shallow-water lease crossing the allowance cap in its second year, a cost price ratio carry that grows, and a terminal abandonment",
+  "prompt": "Six values for IKPOTO run under the PIA with the SAME production, capex and opex rows and the same prices, escalators, inflation, base year and 9 percent nominal rate as the Professional capstone. Fiscal terms: shallow water at 45 m, PML, a NEW lease granted out of new acreage, not a pre-2021 marginal field, 80 percent working interest, no HCT override, CIT 30 percent, no prior-year opex, framework override auto, prior cumulative production 97,612,500 bbl, and a 40,000,000 USD post-tax abandonment lump sum in the final modeled year. Every other term is the engine's default, which follows the texts: NDDC at 3 percent of the total annual budget, the capital allowance over the five years the texts fix, the cost price ratio limit of 65 percent, the Sixth Schedule production allowance, and the tertiary education tax at its statutory rate. The texts do not say which hydrocarbon tax rate a PML granted out of new acreage onshore or in shallow water pays, so this capstone states 30 percent as a stated reading; none of the six values depends on it. The royalty by price is read on the Petroleum Royalty Regulations 2022 base, benchmarks of 50, 100 and 150 USD/bbl at 2021 levels, which is the engine's default. Report: (1) the PRICE ROYALTY in 2032; (2) the PRODUCTION ALLOWANCE in 2032; (3) the NDDC levy in 2031; (4) the TOTAL companies income tax; (5) the DEVELOPMENT LEVY in 2033; and (6) the cost the CPR cap carries out of 2035 into 2036. Traps. The framework is chosen for each year of assessment, and every year from 2031 to 2036 is 2026 or later, so each is an NTA 2025 year: the development levy at 4 percent applies and TET is nought in every year. The production royalty tranches, the price-royalty benchmarks and the allowance volume cap are read at FIELD level and applied before the 80 percent share. The cap is 100 MMbbl for shallow water and the prior production counts against it; the barrels below the cap earn the new-lease allowance and the barrels after it still earn the lower after-cap allowance, each limited to 20 percent of the oil price. NDDC is charged on opex plus capex at your share and is deducted in the hydrocarbon tax base. The CPR cap is 65 percent of crude plus condensate revenue and limits only the costs claimed against the hydrocarbon tax; shared costs enter it at the crude-plus-condensate share, and what does not fit carries to the next year and is claimed there within that year's cap. Companies income tax deducts the full opex, royalties, HCDT, NDDC and its own capital allowance, and the CPR cap never touches it. The abandonment is post-tax and moves no tax line.",
+  "fields": [
+   {
+    "key": "pia_2032_price_royalty_usd",
+    "tol": 1,
+    "unit": "USD",
+    "label": "Price royalty in 2032",
+    "expected": 951174.9189189179
+   },
+   {
+    "key": "pia_2032_production_allowance_usd",
+    "tol": 1,
+    "unit": "USD",
+    "label": "Production allowance in 2032",
+    "expected": 6616000
+   },
+   {
+    "key": "pia_2031_nddc_usd",
+    "tol": 1,
+    "unit": "USD",
+    "label": "NDDC levy in 2031",
+    "expected": 3336000
+   },
+   {
+    "key": "pia_total_cit_usd",
+    "tol": 1,
+    "unit": "USD",
+    "label": "Total companies income tax",
+    "expected": 39056834.778322995
+   },
+   {
+    "key": "pia_2033_dev_levy_usd",
+    "tol": 1,
+    "unit": "USD",
+    "label": "Development levy in 2033",
+    "expected": 1804107.954906831
+   },
+   {
+    "key": "pia_2035_cpr_deferred_usd",
+    "tol": 1,
+    "unit": "USD",
+    "label": "Cost the CPR cap carries out of 2035",
+    "expected": 18128786.5348819
+   }
+  ]
+ }
+]
