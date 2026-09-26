@@ -2,7 +2,7 @@
 
 {{panel:joa-account-calculator}}
 
-Two details decide whether an overhead charge is right to the dollar: what is taken out of the base before the scale is applied, and what happens to a base that lands exactly on a band's upper limit. This lesson works both, and the refusals that guard a scale.
+Two details decide an overhead charge to the dollar: what is taken out of the base, and what happens to a base exactly on a band's upper limit. This lesson works both, and the refusals that guard a scale.
 
 ## Exclusions
 
@@ -40,13 +40,13 @@ The rate above the last band must be stated, even as zero:
 
 > scale.operating.abovePct must be a number from 0 to 100; got nothing
 
-And a band reads only `upTo` and `pct`, so a rate typed under another name is refused:
+A band reads only `upTo` and `pct`:
 
 > scale.operating.bands[0].rate is not an accepted key; the accepted keys of scale.operating.bands[0] are upTo, pct
 
 ## What the scale does not do
 
-The Norwegian text moves its band limits every year with the consumer price index:
+The Norwegian accounting agreement (Attachment B, an unofficial English translation of the 2007 text, cited from its Wayback Machine capture of 26 May 2024) moves its band limits every year with the consumer price index:
 
 > "The intervals above will be adjusted at the beginning of each Year on the basis of the consumer price index as published by Statistics Norway per 15 July of the current year." (Norway Accounting Agreement Art. 2.2.2)
 

@@ -10,7 +10,7 @@ With no carry in the agreement, one percentage decides two things at once: how m
 
 > "the amount to be contributed by each Party shall be calculated in accordance with the Participating interest at the time the payment is made." (Norway JOA Art. 8.1)
 
-The words "at the time the payment is made" matter. Interests can change during the life of a licence, and a payment is split by the interests in force when it is made. The engine computes one set of interests for each call, from the parties you state in the box.
+The words "at the time the payment is made" matter. Participating interests can change during the life of a licence, and a payment is split by the participating interests in force when it is made. The engine computes the interests once for each call, from the parties you state in the box.
 
 ## Three interests in the engine's output
 
@@ -35,7 +35,7 @@ Every party pays what it owns and owns what it pays. The engine returns no reaso
 
 ## What the participating interest does not say
 
-A participating interest is a share of the joint venture's costs and production under the agreement. It says nothing about the host government's take, royalty or tax; those belong to the fiscal regime course and the Petroleum Industry Act course. It is also a share of this one licence only: a company can hold different interests in different licences, each under its own agreement.
+A participating interest is a share of the joint venture's costs and production under the agreement. It says nothing about the host government's take, royalty or tax; those belong to the fiscal regime course and the Petroleum Industry Act course. It is also a share of this one licence only: a company can hold different participating interests in different licences, each under its own agreement.
 
 ## Exercise
 

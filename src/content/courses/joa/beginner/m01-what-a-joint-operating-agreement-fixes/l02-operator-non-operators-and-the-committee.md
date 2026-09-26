@@ -18,15 +18,15 @@ The request rests on an estimate of next month's spending and carries a due date
 
 ## The committee sets the limits
 
-The operator spends inside a work programme and budget the committee approved. The agreement then states how far the operator may go beyond them on its own authority. The Norwegian agreement allows a margin on a single line:
+The operator spends inside a work programme and budget the committee approved, and the agreement states how far it may go beyond them on its own authority. The Norwegian joint operating agreement (Attachment A, an unofficial English translation of the 2007 text, cited from its Wayback Machine capture of 26 May 2024) allows a margin on a single line:
 
 > "In carrying out an approved work program, however, the Operator may exceed a budget item or an AFE by up to 10%." (Norway JOA Art. 12.5)
 
-A budget module later in this tier computes that margin and a second one on the budget as a whole. In the engine every such margin is a stated input: the 10% is the Norwegian text's figure, and the engine holds none of its own.
+A later module computes that margin and a second one on the whole budget. The 10% is the Norwegian text's figure; the engine holds none of its own.
 
 ## The operator charges an overhead
 
-Running a joint venture costs the operator money it cannot book line by line: head office staff, research, management. Agreements let the operator charge an overhead to the joint account on a stated scale over a stated base. The last module of this tier computes it.
+Some of the operator's costs cannot be booked line by line, so agreements let the operator charge an overhead to the joint account on a stated scale over a stated base. The last module of this tier computes it.
 
 ## Roles in the engine
 

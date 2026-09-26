@@ -41,7 +41,7 @@ This tier works only cost figures, so every split you compute in the account cal
 
 ## A common slip
 
-A partner report that prints only one interest column is ambiguous under a carry. If a table labels NOC at 20 percent and asks for its cash call, the answer on the Ekene terms is zero, because its paying interest is 0.000000. If a table labels EKO at 40 percent and splits a cash call on it, EKO is called for 40 percent of the cost when its paying interest is 50.000000. Always read which interest a column is.
+A partner report that prints a single share column is ambiguous under a carry. If a table labels NOC at 20 percent and asks for its cash call, the answer on the Ekene terms is zero, because its paying interest is 0.000000. If a table labels EKO at 40 percent and splits a cash call on it, EKO is called for 40 percent of the cost when its paying interest is 50.000000. Always read which of the two shares a column holds.
 
 ## Other courses
 

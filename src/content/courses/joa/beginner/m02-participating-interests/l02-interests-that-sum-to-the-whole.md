@@ -18,11 +18,11 @@ Each party must be distinct and must hold a real share. Two parties with the sam
 
 > parties[1].id must be an id no other party has; got "A"
 
-A party with a share of zero is refused, because a party with no interest is no party to the venture:
+A party with a share of zero is refused, because a party with no participating interest is no party to the venture:
 
 > parties[0].participatingPct must be a number above 0 and at most 100; got 0
 
-And a key the function does not read is refused wherever it sits. The participating interest is often called the working interest, and a spreadsheet may label its column `wi`. The engine reads only `id`, `name` and `participatingPct` for a party:
+And a key the function does not read is refused wherever it sits. A spreadsheet may label the participating interest column `wi`. The engine reads only `id`, `name` and `participatingPct` for a party:
 
 > parties[0].wi is not an accepted key; the accepted keys of parties[0] are id, name, participatingPct
 

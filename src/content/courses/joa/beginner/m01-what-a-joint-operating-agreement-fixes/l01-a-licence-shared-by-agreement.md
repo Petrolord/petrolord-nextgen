@@ -13,7 +13,7 @@ Every joint operating agreement answers the same few questions:
 * **Control of spending.** The parties approve a work programme and a budget, and the agreement states how far the operator may overspend a line or the whole budget before it must come back to them.
 * **The operator's own charge.** The operator may add an overhead to the joint account on a stated scale.
 
-The later tiers take up what happens when a party is carried, defaults, declines an operation or backs in under the Petroleum Industry Act 2021.
+The later tiers take up what happens when a party is carried, defaults, declines an operation or backs in.
 
 ## Money follows the participating interest
 
