@@ -1,0 +1,188 @@
+{
+ "dataset": "IDUMU (synthetic)",
+ "label": "IDUMU, the Idumu satellite joint venture on the Ekene licence (synthetic)",
+ "interests": {
+  "parties": [
+   {
+    "id": "IOP",
+    "name": "Idumu Operating (synthetic), operator",
+    "participatingPct": 42.5
+   },
+   {
+    "id": "KAP",
+    "name": "Kapa Energy (synthetic)",
+    "participatingPct": 23.75
+   },
+   {
+    "id": "ZED",
+    "name": "Zedora Energy (synthetic)",
+    "participatingPct": 18.75
+   },
+   {
+    "id": "SNP",
+    "name": "State participant (synthetic)",
+    "participatingPct": 15
+   }
+  ],
+  "carries": [
+   {
+    "carried": "SNP",
+    "carriedPct": 80,
+    "carriers": "pro-rata"
+   }
+  ]
+ },
+ "cashCalls": {
+  "parties": [
+   {
+    "id": "IOP",
+    "name": "Idumu Operating (synthetic), operator",
+    "participatingPct": 42.5
+   },
+   {
+    "id": "KAP",
+    "name": "Kapa Energy (synthetic)",
+    "participatingPct": 23.75
+   },
+   {
+    "id": "ZED",
+    "name": "Zedora Energy (synthetic)",
+    "participatingPct": 18.75
+   },
+   {
+    "id": "SNP",
+    "name": "State participant (synthetic)",
+    "participatingPct": 15
+   }
+  ],
+  "carries": [
+   {
+    "carried": "SNP",
+    "carriedPct": 80,
+    "carriers": "pro-rata"
+   }
+  ],
+  "reconciliationLagMonths": 1,
+  "negativeCall": "refund",
+  "noCallBelow": 750000,
+  "months": [
+   {
+    "month": "2029-03",
+    "forecast": 5250000,
+    "actual": 4812500.5
+   },
+   {
+    "month": "2029-04",
+    "forecast": 7125000,
+    "actual": 7390250.25
+   },
+   {
+    "month": "2029-05",
+    "forecast": 6480000,
+    "actual": 6915125.5
+   },
+   {
+    "month": "2029-06",
+    "forecast": 8905500,
+    "actual": 8212750.75
+   },
+   {
+    "month": "2029-07",
+    "forecast": 620000,
+    "actual": 704300.25
+   },
+   {
+    "month": "2029-08",
+    "forecast": 9240000,
+    "actual": 9011000.5
+   }
+  ]
+ },
+ "budget": {
+  "itemTolerancePct": 10,
+  "budgetTolerance": {
+   "pct": 4,
+   "amount": 3500000
+  },
+  "unbudgetedAllowance": 400000,
+  "items": [
+   {
+    "item": "subsurface studies",
+    "approved": 7850000,
+    "actual": 8535500.5
+   },
+   {
+    "item": "appraisal well Idumu-2",
+    "approved": 41600000,
+    "actual": 46212750.25
+   },
+   {
+    "item": "facilities concept",
+    "approved": 9400000,
+    "actual": 8975250
+   },
+   {
+    "item": "logistics and marine",
+    "approved": 12300000,
+    "actual": 12960400.75
+   },
+   {
+    "item": "general and administration",
+    "approved": 3950012.5,
+    "actual": 4012300.5
+   },
+   {
+    "item": "community baseline study",
+    "approved": 0,
+    "actual": 180250
+   }
+  ]
+ },
+ "overhead": {
+  "costs": {
+   "exploration": 4275500.5,
+   "operating": 68412250.25,
+   "development": 136950000.75
+  },
+  "excluded": {
+   "operating": 2860000
+  },
+  "scale": {
+   "exploration": {
+    "bands": [
+     {
+      "upTo": 25000000,
+      "pct": 2.4
+     }
+    ],
+    "abovePct": 0
+   },
+   "operating": {
+    "bands": [
+     {
+      "upTo": 50000000,
+      "pct": 2.6
+     },
+     {
+      "upTo": 110000000,
+      "pct": 1.1
+     }
+    ],
+    "abovePct": 0.5
+   },
+   "development": {
+    "bands": [
+     {
+      "upTo": 60000000,
+      "pct": 2.4
+     },
+     {
+      "upTo": 120000000,
+      "pct": 1.2
+     }
+    ],
+    "abovePct": 0.6
+   }
+  }
+ }
+}
