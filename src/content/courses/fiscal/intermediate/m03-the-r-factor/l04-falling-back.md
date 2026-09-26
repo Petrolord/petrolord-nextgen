@@ -6,7 +6,7 @@ The R factor is a ratio of cumulatives, and it is not monotone. Late in life rev
 
 ## The published case
 
-`rfactor_falls_back` is the "Nigeria - PIA (2021)" tranches, 60 percent at R 1, 40 percent at R 1.6 and 30 percent at R 2.5, on the same 10000 bopd project as the crossing case but with capex 320 and opex 25:
+`rfactor_falls_back` is the tiered teaching regime's tranches, 60 percent at R 1, 40 percent at R 1.6 and 30 percent at R 2.5, on the same 10000 bopd project as the crossing case but with capex 320 and opex 25:
 
 | year | rFactor | profitOil | implied split |
 | --- | --- | --- | --- |
@@ -24,7 +24,7 @@ The ratio peaks at 2.972625 in year 11 and falls in every year afterwards. In ye
 
 ## Why the ratio turns
 
-Nothing is broken. Cumulative revenue grows by a smaller amount every year as production declines, while cumulative cost grows by a fixed component plus a shrinking variable one and never stops growing. Eventually the denominator gains faster than the numerator and the ratio falls. Profit oil in year 23 is 3.1570 million USD, so the step back up moves very little money on this case. That is an accident of when the reversal happened, not a property of it.
+Nothing is broken. Cumulative revenue grows by a smaller amount every year as production declines, while cumulative cost grows by a fixed component plus a shrinking variable one and never stops growing. Eventually the denominator gains faster than the numerator and the ratio falls. Profit oil in year 23 is 3.1570 million USD, so the step back up moves very little money on this case. That is an accident of when the reversal happened and says nothing about the reversal itself.
 
 The same tier list on the crossing case never falls back. There the ratio peaks at 3.109087 in year 12 and declines to 2.654466 by year 25, which is still above 2.5, so the split holds at 0.300000 for the whole run. Two cases, the same tranches, and the only differences are capex 350 against 320 and opex 20 against 25.
 

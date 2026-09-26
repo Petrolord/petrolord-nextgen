@@ -13,15 +13,13 @@ For each regime, write its royalty, its cost recovery limit, its profit split an
 | Brazil - Concession | flat 10 percent | 100 | flat 100 percent | CIT 34, RRT 40 |
 | Angola - Deepwater PSC | flat 0 percent | 50 | R factor 70, 50, 30 percent | CIT 25, RRT 50 |
 
-Two lines like those predict most of what the ledgers will do.
-
 ## Step two: read the cost columns, which no regime touches
 
 Opex is 25.0037 million USD in year 1, falls to 12.3405 by year 25 and totals 390.2137. Capex is 420.0000 in year 1 and 0.0000 after. Every regime shares those columns, so any difference between regimes is fiscal by construction.
 
 ## Step three: take the implied royalty rate, year by year
 
-Under a flat 18.75 percent royalty the teaching field pays 26.1856 million USD on gross revenue of 139.6563 in year 1 and 1.2953 on 6.9081 in year 25, an implied 0.187500 in both. Under the Nigerian sliding royalty the implied rate is 0.075000 in years 1 to 5 and 0.100000 from year 6, because the deck steps from 45 to 65 USD per bbl at year 6. A royalty rate that changes mid life is a sliding scale, and the year it changes is a price event.
+Under a flat 18.75 percent royalty the implied rate is 0.187500 in every year. Under the tiered teaching regime's sliding royalty the implied rate is 0.075000 in years 1 to 5 and 0.100000 from year 6, because the deck steps from 45 to 65 USD per bbl at year 6. Under "Nigeria - PIA (2021)" it is 0.050000 in years 1 to 5 and 0.052163 in year 6, moving again in years 7, 8, 9 and 12 against each year's benchmark on the Regulations (2021) base, the engine default.
 
 ## Step four: check the limit against the closing pool
 
@@ -37,18 +35,18 @@ The field's own discount rate is 12 percent.
 
 | regime | NPV at 12 percent | IRR percent | payback year |
 | --- | --- | --- | --- |
+| Nigeria - PIA (2021) | 1.7389 | null | 7 |
 | Brazil - Concession | -5.8662 | null | 6 |
 | Generic Royalty/Tax | -13.3840 | null | 7 |
 | Ghana - Deepwater | -27.4074 | null | 6 |
 | USA - Gulf of Mexico | -37.3123 | null | 7 |
-| Nigeria - PIA (2021) | -43.7842 | null | 7 |
 | Angola - Deepwater PSC | -58.1813 | null | 8 |
 
-Every net present value is negative, and no regime here has a single rate of return to set beside the 12 percent, because the contractor's cash flow turns negative late in the life.
+Five of the six net present values are negative and "Nigeria - PIA (2021)" is barely positive at 1.7389. No regime here has a single rate of return to set beside the 12 percent, because the contractor's cash flow turns negative late in the life.
 
 ## Step seven: rank, and say what the ranking is of
 
-The summary sorts by contractor net present value descending, so Brazil is first and Angola last. Government cash flow runs the other way, 316.7898 million USD for Angola against 232.9950 for Brazil. Both orders are correct, and they are orders of different things.
+The summary sorts by contractor net present value descending, so "Nigeria - PIA (2021)" is first, Brazil second and Angola last. Government cash flow runs the other way, 316.7898 million USD for Angola against 196.0260 for the PIA template. Both orders are correct, and they are orders of different things.
 
 ## The mistake
 
@@ -56,7 +54,7 @@ The careful mistake is answering with a number and no label. A total contractor 
 
 ## What it refuses
 
-The method produces labelled readings, never a recommendation. It cannot say which regime a government should offer or a contractor should sign.
+The method produces labelled readings, never a recommendation.
 
 ## Exercise
 

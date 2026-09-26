@@ -1,6 +1,6 @@
 # When IRR returns zero
 
-It does not, any more. Until the 2026-09-15 repair one value, 0.0000 percent, stood for two situations that could hardly be further apart, and neither of them meant the project had broken even.
+It does not. One value, 0.0000 percent, would stand for two situations that could hardly be further apart, and neither of them means the project has broken even, so the engine names each one instead.
 
 {{panel:ec-instrument-explorer}}
 
@@ -8,9 +8,9 @@ It does not, any more. Until the 2026-09-15 repair one value, 0.0000 percent, st
 
 The first is a set of flows that never changes sign. With nothing negative in the vector there is no root, because the present value is positive at every rate. `irr_all_positive_no_sign_change` is exactly that: null with the status no-sign-change, and a present value of 25.6198 million USD at 10 percent. There is no outlay against which a return could be measured.
 
-The second is a project whose only root is negative. `irr_negative_root_reported` has flows of negative 100 then 90 and loses money at every rate. Its root is negative 10.0000 percent, which is inside the band, so the engine now reports that rate as the negative rate it is, and its present value at 10 percent is negative 16.5289.
+The second is a project whose only root is negative. `irr_negative_root_reported` has flows of negative 100 then 90 and loses money at every rate. Its root is negative 10.0000 percent, which is inside the band, so the engine reports that rate as the negative rate it is, and its present value at 10 percent is negative 16.5289.
 
-The retired rule printed 0.0000 for both, so one zero meant a project that never loses and the other a project that never wins.
+A rule that printed 0.0000 for both would make one zero mean a project that never loses and the other a project that never wins.
 
 ## A root the band cannot reach
 
@@ -26,7 +26,7 @@ Read the status word first and the present value beside it. A null is not a miss
 
 ## The mistake
 
-The mistake that survives the repair is sorting or filtering on the rate column. A comparison in which several regimes come back null has not ranked them, and a filter set above a threshold rate drops every one of them, the hopeless project and the one that never needed capital together. The mirror mistake is treating a null as a zero and reaching for the present value instead, which ranks a project worth 25.6198 million USD beside one at negative 15453.8510.
+The mistake that remains is sorting or filtering on the rate column. A comparison in which several regimes come back null has not ranked them, and a filter set above a threshold rate drops every one of them, the hopeless project and the one that never needed capital together. The mirror mistake is treating a null as a zero and reaching for the present value instead, which ranks a project worth 25.6198 million USD beside one at negative 15453.8510.
 
 ## What it refuses
 
@@ -34,4 +34,4 @@ It will not name a rate it cannot make unique inside the band, and it will not r
 
 ## Exercise
 
-Write the three statuses with the published case that produces each and its present value at 10 percent. Then say what those same cases used to report, and name the two ledger numbers you would read before quoting any rate at all.
+Write the three statuses with the published case that produces each and its present value at 10 percent. Then say what a single zero would hide if it stood for the first two, and name the two ledger numbers you would read before quoting any rate at all.

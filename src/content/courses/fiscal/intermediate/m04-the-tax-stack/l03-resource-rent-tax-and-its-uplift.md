@@ -35,13 +35,13 @@ Total capex here is 500.0000 million USD, so a 20 percent uplift opens a pool of
 | 30 | 330.7165 | 1146.0748 | 8 |
 | 50 | 290.7165 | 1186.0748 | 9 |
 
-Total tax falls by a fixed amount for each point of uplift while the first charged year slides later, which is what a pool looks like under a sweep. Until the 2026-09-15 repair the engine subtracted the capex times the uplift in every one of the 25 years.
+Total tax falls by a fixed amount for each point of uplift while the first charged year slides later, which is what a pool looks like under a sweep. An annual allowance of capex times the uplift in every one of the 25 years would cut the tax by far more per point.
 
 Two published cases pin it on the Suite test project. With the uplift omitted so the default applies, total tax is 2127.5549 million USD and contractor net cash flow 1323.4598; with the uplift set to 0, total tax is 2207.5549 and 1243.4598. The two ledgers agree in year 2 at 95.1483 and in year 3 at 175.6502, part company in year 4 at 169.6803 against 249.6803, and agree again from year 5. The gap is one pool larger than the other, given once and then gone.
 
 ## The mistake
 
-The mistake is reading the parameter as an allowance granted every year, which is what it used to be. `rrt_pool_never_exhausted` marks the far end: an uplift of 900 percent opens a pool of 10000 against a capex of 1000, so the base is zero in all 25 years and total tax is 1198.0658, the corporate income tax alone.
+The mistake is reading the parameter as an allowance granted every year. `rrt_pool_never_exhausted` marks the far end: an uplift of 900 percent opens a pool of 10000 against a capex of 1000, so the base is zero in all 25 years and total tax is 1198.0658, the corporate income tax alone.
 
 ## What it refuses
 
