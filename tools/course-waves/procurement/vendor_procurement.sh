@@ -37,7 +37,9 @@ set -euo pipefail
 ENG=/root/petrolord-engines
 NG=${NG:-/root/wt-sc2-nextgen}
 PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
-REV=${REV:-91877017f}
+# First vendored at 91877017f (engines PR #261); re-vendored at 527a197 (engines PR #264, the four
+# foundation wording and consistency findings; no graded number moves).
+REV=${REV:-527a197}
 FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 EXP=$(mktemp -d)
 LEDGER_PY=$(mktemp)
@@ -122,9 +124,16 @@ printf '%s\n' "$PATHS" | while read -r p; do
   if [ -n "${SHARED[$p]+x}" ]; then continue; fi
   if [ -f "$b" ]; then
     if [ "$(git hash-object "$b")" != "$(git -C "$ENG" rev-parse "$FULL:$p")" ]; then
-      echo "REFUSES: $p is already vendored at a different blob and is not a declared shared path"; exit 1
+      # A path this wave already ledgered (group sc2-procurement-course) may move
+      # on a re-vendor; any other differing path refuses.
+      if python3 -c "import json,sys;v=json.load(open(sys.argv[1]));sys.exit(0 if any(e['path']==sys.argv[2] and e.get('group')=='sc2-procurement-course' for e in v['knownDeviations']) else 1)" "$NG/packages/engines/VENDOR.json" "$p"; then
+        echo "  MOVES    $p (this wave's own ledgered path)"
+      else
+        echo "REFUSES: $p is already vendored at a different blob and is not a declared shared path"; exit 1
+      fi
+    else
+      echo "  same     $p"
     fi
-    echo "  same     $p"
   else
     echo "  NEW      $p"
   fi
@@ -192,7 +201,7 @@ for p in paths:
     added.append({
         'path': p, 'kind': kind, 'group': GROUP, 'vendoredSha': blob,
         'reason': (f"SC2 procurement course: vendored sha-identical from petrolord-engines {full[:7]} "
-                   f"(PR #261: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, "
+                   f"(PR #261 and the findings repair #264: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, "
                    f"timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. "
                    f"{'New since' if kind == 'extra' else 'Differing from'} the canonical pin {pin[:7]}, which stays: moving it "
                    f"would also move economics (cashflow.ts 3.11), AFE and other paths other courses grade. "

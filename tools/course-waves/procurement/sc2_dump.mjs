@@ -192,7 +192,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w(`# PRECISION. Every price, amount, total, correction, discount, deviation, omission, adjustment, evaluated cost, life-cycle cost, estimate, share amount, payment, margin, overrun, cost, day count, score, points total, percentage, content, lead, ratio, weight, mean, standard deviation, limit, percentile and probability prints to SIX decimals; counts, ranks, weeks, years, seeds and iterations are whole numbers; the ${D.TIE_DIGITS}-digit tie key prints at twelve significant digits where the tie rule is shown; an engine message is printed verbatim, figures and all, and a figure inside a message is the shortest round-trip decimal of the double the engine holds.`);
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 9187701 (engines PR #261), ${engineLines} lines. It imports lib/stats (mulberry32, triInvCDF, basicStats, mean, standardDeviation), lib/conventions/percentile.js (EXCEEDANCE_DEFINITION), engines/economics/cashflow.ts (npv), engines/drilling/wellCost.js (evaluateProgram, afeCosts) and engines/economics/afe.js (calculatePartnerCosts). It makes no network call.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 527a197 (engines PRs #261 and #264), ${engineLines} lines. It imports lib/stats (mulberry32, triInvCDF, basicStats, mean, standardDeviation), lib/conventions/percentile.js (EXCEEDANCE_DEFINITION), engines/economics/cashflow.ts (npv), engines/drilling/wellCost.js (evaluateProgram, afeCosts) and engines/economics/afe.js (calculatePartnerCosts). It makes no network call.`);
 w();
 w('# AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course\'s own calculator panels, which call this same vendored engine on the learner\'s own bids and settings.');
 w();
@@ -1238,7 +1238,7 @@ const wsHigh = success('evaluatedCosts on the well services tender, highest rule
 w('THE UNCITED OPTION. The omission rule of the World Bank SPDs (ITB 34.1) is the AVERAGE price quoted by the substantially responsive bidders, and it is the engine\'s default. The engine also accepts `highest`, which no text read uses, and says so in its own words. Its basis and its reason on the well services tender, verbatim:');
 quote(wsHigh.basis.omission);
 quote(`WS3: ${wsHigh.bids.find((b) => b.id === 'WS3').omissions[0].reason}`);
-must('the highest option says it is not from the cited texts', /not from the cited texts/.test(wsHigh.basis.omission) && /not from the cited texts/.test(wsHigh.bids.find((b) => b.id === 'WS3').omissions[0].reason), 'uncited');
+must('the highest option says the cited texts do not use it', /which the cited texts do not use/.test(wsHigh.basis.omission) && /which the cited texts do not use/.test(wsHigh.bids.find((b) => b.id === 'WS3').omissions[0].reason), 'uncited');
 w();
 w(`Under 'highest' WS3's nitrogen is priced at ${f6(wsHigh.bids.find((b) => b.id === 'WS3').omissionTotal)} where the average gives ${f6(ws3.omissionTotal)}; on the materials tender the rule moves the award (${ref('whole')}). This course teaches and grades the cited rule only; 'highest' is shown so a reader of the engine knows it is there and what it says about itself. A rule the engine is asked for by a name it does not hold is refused, verbatim:`);
 quote(T.evaluatedCosts({ ...clone(EC_WS), omissionRule: 'lowest' }).error);

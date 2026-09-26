@@ -4,7 +4,7 @@
 # runs in the course's own calculator panels over the vendored engine.
 #
 # Engine: engines/supplychain/tender.js, vendored sha-identical with
-# petrolord-engines 9187701 (engines PR #261). It imports lib/stats
+# petrolord-engines 527a197 (engines PRs #261 and #264). It imports lib/stats
 # (mulberry32, triInvCDF, basicStats, mean, standardDeviation),
 # lib/conventions/percentile.js (EXCEEDANCE_DEFINITION),
 # engines/economics/cashflow.ts (the canonical npv), engines/drilling/wellCost.js
@@ -13,7 +13,7 @@
 # jest suite (sixteen paths vendored sha-identical, eleven of them new) and
 # leaves cashflow.ts and afe.js at the blobs their owner courses grade: the two
 # functions tender.js calls are source-identical in both, and the engine's own
-# suite passes 175 of 175 against NextGen's copies.
+# suite passes 180 of 180 against NextGen's copies.
 #
 # THE DIGEST IS THE ONLY TEACHING TRUTH. digest.txt, built by sc2_dump.mjs. The
 # engine's FINDINGS record, the oracle, the fixture README and the engine's

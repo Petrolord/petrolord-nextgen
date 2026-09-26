@@ -179,10 +179,7 @@ Expert m05 as what the engine offers today and says about itself.
 ## THE COPY RULE
 
 No em dashes, no en dashes, and no "X, not Y" contrastive anywhere a learner
-reads, headings and titles included. Never write a contrastive of your own. One
-engine string carries the pattern (the uncited option's "(the 'highest'
-option, not from the cited texts"): quote it only verbatim, in a blockquote, as
-the engine's words.
+reads, headings and titles included. Never write a contrastive of your own.
 
 ## THE SHAPE OF THE WAVE
 

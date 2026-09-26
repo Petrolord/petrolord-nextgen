@@ -18,7 +18,7 @@
   "engines/economics/afe.js",
   "engines/economics/cashflow.ts"
  ],
- "enginesVendoredAt": "NextGen packages/engines: the tender.js closure vendored sha-identical with petrolord-engines 9187701 (engines PR #261, squash-merged) by vendor_procurement.sh, walked from the jest suite over a git-archive export: 18 closure paths, 7 reached by the walk and 9 NAMED (golden, the two ekene-tender fixtures and their README, the fixture writer, the oracle, the timing script, FINDINGS, the negative control); 16 vendored with 4 proofs each (64 IDENTICAL), 11 of them new and ledgered as kind extra, group sc2-procurement-course, 5 already matching the manifest (lib/stats, percentile.js, wellCost.js, irrContract.js, lib/dates). SHARED PATHS LEFT WITH THEIR OWNERS: engines/economics/cashflow.ts (NextGen carries the 3.10.0 manifest blob; 9187701 carries 3.11.0, the economic-limit capex rule) and engines/economics/afe.js (the 4-economics-revendor blob) are NOT moved: npv and calculatePartnerCosts, the two functions tender.js calls, are source-identical in both blobs (compared by their exported text), and the vendored tender suite passes 175/175 against NextGen's own copies. The canonical pin stays 54cf7c4. All vendored suites: 165 discovered, 15122 tests, 24 failing, all 24 allow-listed (unchanged). PRIOR-COURSE PROOF (prove_prior_courses.sh): every pre-existing packages/engines path is byte-identical to origin/main (VENDOR.json gains sc2 entries only); D1 to D5, H4 and H5 rebuild digest.txt, fields.json and precision.json byte-identical and match their waves.json pins.",
+ "enginesVendoredAt": "NextGen packages/engines: the tender.js closure vendored sha-identical with petrolord-engines 527a197 (engines PR #261 at 9187701, then the findings repair PR #264 at 527a197, wording and the 12-digit s.14 content tie; no graded number moved) by vendor_procurement.sh, walked from the jest suite over a git-archive export: 18 closure paths, 7 reached by the walk and 9 NAMED (golden, the two ekene-tender fixtures and their README, the fixture writer, the oracle, the timing script, FINDINGS, the negative control); 16 vendored with 4 proofs each (64 IDENTICAL), 11 of them new and ledgered as kind extra, group sc2-procurement-course, 5 already matching the manifest (lib/stats, percentile.js, wellCost.js, irrContract.js, lib/dates). SHARED PATHS LEFT WITH THEIR OWNERS: engines/economics/cashflow.ts (NextGen carries the 3.10.0 manifest blob; 9187701 carries 3.11.0, the economic-limit capex rule) and engines/economics/afe.js (the 4-economics-revendor blob) are NOT moved: npv and calculatePartnerCosts, the two functions tender.js calls, are source-identical in both blobs (compared by their exported text), and the vendored tender suite passes 175/175 against NextGen's own copies. The tender suite at 527a197 passes 180/180 against NextGen's own shared copies. The canonical pin stays 54cf7c4. All vendored suites: 165 discovered, 15122 tests, 24 failing, all 24 allow-listed (unchanged). PRIOR-COURSE PROOF (prove_prior_courses.sh): every pre-existing packages/engines path is byte-identical to origin/main (VENDOR.json gains sc2 entries only); D1 to D5, H4 and H5 rebuild digest.txt, fields.json and precision.json byte-identical and match their waves.json pins.",
  "constants": {
   "$comment": "The engine exports DEFAULTS (TIE_DIGITS 12, ARITHMETIC_TOLERANCE 0.005, WEIGHT_SUM 100, WEIGHT_SUM_TOLERANCE 1e-9, MAX_BIDS 100, MAX_CRITERIA 50, MAX_LINES 5000, MAX_ITEMS 200, MAX_YEARS 100, MAX_ITERATIONS 200000, HIGH_VALUE_USD 10000000, NC_PRICE_MARGIN_PCT 1, NC_LEAD_PCT 5, INDIGENOUS_MARGIN_PCT 10, ALB_ABSOLUTE_PCT 20, ALB_RELATIVE_MIN_BIDS 5), NC_SCHEDULE (45 lines of the 2010 Schedule) and NC_MEASURES. Digest section 1 prints them from the export. None is graded."
  },
@@ -52,14 +52,11 @@
   "should-cost": "the company's independent estimate, never a bid. Sections 19, 25."
  },
  "openItems": {
-  "ENGINE FINDING 1 (wording)": "The completion-time reasons pluralise weeks after 1: evaluatedCosts prints 'completion in 7 weeks is 1 weeks beyond the minimum 6' (tender.js line 519; the well services WS3 reason, quoted verbatim in digest section 8) and 'offers completion in 1 weeks, beyond the maximum' (line 488). Learners read engine messages as course content; repair first (engines PR), then re-cut. No number changes.",
   "DECISION omission rule": "Lead decision: the course teaches and grades the cited 'average' rule only; 'highest' is shown in Expert m05 in the engine's own words as the uncited option.",
   "DECISION s.14 reading": "Lead decision: both readings side by side as an open question of the Act; the Professional capstone grades the lead under BOTH readings, each field naming its reading.",
   "DECISION cost P labels": "Lead decision: kept per lib/conventions/percentile.js; Expert m02 teaches the reversal; the Expert capstone grades a reimbursable P90 cost (the LOW cost) and the discriminate sweep carries the 90th percentile as a wrong method.",
   "DECISION shared vendored paths": "cashflow.ts and afe.js stay at NextGen's blobs (see enginesVendoredAt). When the pin moves to 9187701 or later, cashflow.ts 3.11 and afe.js arrive with their own re-cuts, not with this course.",
-  "ENGINE FINDING 2 (copy rule)": "The uncited omission option labels itself with an 'X, not Y' contrastive the owner copy rule forbids in learner-facing copy: the omission basis \"(the 'highest' option, not from the cited texts; the cited rule is the average of World Bank SPD ITB 34.1)\" and each omission reason \"(the 'highest' option, not from the cited texts)\". The envelope calculator shows the basis when a learner picks 'highest'. Suggested wording: \"(the 'highest' option, which the cited texts do not use)\". gate_copy_rule.py exempts the current string by exact text until the repair lands; the digest quotes it verbatim in Expert m05's section. No number changes.",
-  "ENGINE FINDING 3 (wording)": "The s.14 reason for a runner-up with no content reads '30% against 0% (LO), more than 5% higher by any reading, at least 5% higher, so s.14 selects' (line 755 feeding line 762): the lead clause and the verdict clause repeat each other. Suggest dropping ', at least 5% higher' in that branch. No number changes.",
-  "ENGINE FINDING 4 (consistency, outcome unaffected)": "contentPreference detects a shared highest content by exact equality (tiedTop, b.ncPct === top.ncPct) where the engine's stated convention ties figures that agree to 12 significant digits. Contents 65 and 65.00000000000001 report N as leader over M with a lead of 1.4210854715202004e-14 points instead of 'no single bid leads'. The award cannot differ (a lead that small never reaches 5 by either reading), only the leader, runnerUp, lead fields and the reason. Suggest key12 for the shared-top test, with a golden."
+  "ENGINE FINDINGS": "None open. The foundation's four findings (weeks pluralisation, the uncited option's contrastive label, a doubled s.14 clause, exact equality in the s.14 shared-top test) went to engines PR #264, merged as 527a197, before any lesson; the foundation re-cut at 527a197 and fields.json is byte-identical (sha 4f34a889). The copy-rule exemption for the old wording is removed."
  },
  "fieldsDiscrimination": {
   "onitsha_on3_technical_percent": "weighted points quoted, unweighted mean of the scores, weights reversed, scores read out of four, the top bid s relative score",
@@ -85,8 +82,8 @@
  "digest": {
   "lines": 1100,
   "sections": 25,
-  "md5": "d2d161428e7d7dce1973c4965983adc5",
-  "sha256": "610daa9ef9e6a1fb6534df15f8e1631438dc6821712b44ac6a287dad322da5f5"
+  "md5": "2b42429236b62e058dbc9c5fab002b04",
+  "sha256": "259efd32e2f16cc7e8f21717f51a491cb15db21fad605c9531fb25261219c039"
  },
  "fields": {
   "count": 18,
@@ -114,7 +111,7 @@
  },
  "gates": {
   "structure.py": {
-   "md5": "c20121e485772b64304e981b8ceb01b2",
+   "md5": "677000ff9700ca80238211d498afd328",
    "command": "python3 structure.py",
    "expected": 0,
    "exit": 0,
@@ -160,7 +157,7 @@
    "command": "python3 oracle_check.py",
    "expected": 0,
    "exit": 0,
-   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 5 s; every chain the oracle's own; worst relative difference 3.29e-15; disagreements: 0"
+   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 1 s; every chain the oracle's own; worst relative difference 3.29e-15; disagreements: 0"
   },
   "oracle_check.py NEGATIVE CONTROL": {
    "md5": "946ad5ed8bb761368063b61ec434fa2a",
@@ -303,35 +300,35 @@
    "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
   },
   "gate_copy_rule.py": {
-   "md5": "e9ed63085ace019e4c706c855f09ee68",
+   "md5": "ea06bd4eda1455ad1ddab500b79705e7",
    "command": "python3 gate_copy_rule.py",
    "expected": 0,
    "exit": 0,
    "summary": "VIOLATIONS: 0"
   },
   "gate_copy_rule.py NEGATIVE CONTROL": {
-   "md5": "e9ed63085ace019e4c706c855f09ee68",
+   "md5": "ea06bd4eda1455ad1ddab500b79705e7",
    "command": "python3 gate_copy_rule.py --plant",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got 2"
   },
   "gate_copy_rule.py NEGATIVE CONTROL bank": {
-   "md5": "e9ed63085ace019e4c706c855f09ee68",
+   "md5": "ea06bd4eda1455ad1ddab500b79705e7",
    "command": "python3 gate_copy_rule.py --plant-bank",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in a bank string; expected 2 caught, got 2"
   },
   "gate_typed_literals.py": {
-   "md5": "88cc31e8dd376a06153559366994fb85",
+   "md5": "6a714f7cbc33a0bdb1c2c157baf0f35c",
    "command": "python3 gate_typed_literals.py",
    "expected": 0,
    "exit": 0,
    "summary": "UNEXPLAINED TYPED NUMBERS: 0"
   },
   "gate_typed_literals.py NEGATIVE CONTROL": {
-   "md5": "88cc31e8dd376a06153559366994fb85",
+   "md5": "6a714f7cbc33a0bdb1c2c157baf0f35c",
    "command": "python3 gate_typed_literals.py --plant",
    "expected": 1,
    "exit": 1,

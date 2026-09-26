@@ -4,7 +4,7 @@
 
 # PRECISION. Every price, amount, total, correction, discount, deviation, omission, adjustment, evaluated cost, life-cycle cost, estimate, share amount, payment, margin, overrun, cost, day count, score, points total, percentage, content, lead, ratio, weight, mean, standard deviation, limit, percentile and probability prints to SIX decimals; counts, ranks, weeks, years, seeds and iterations are whole numbers; the 12-digit tie key prints at twelve significant digits where the tie rule is shown; an engine message is printed verbatim, figures and all, and a figure inside a message is the shortest round-trip decimal of the double the engine holds.
 
-# ENGINE. engines/supplychain/tender.js, vendored sha-identical with petrolord-engines 9187701 (engines PR #261), 1096 lines. It imports lib/stats (mulberry32, triInvCDF, basicStats, mean, standardDeviation), lib/conventions/percentile.js (EXCEEDANCE_DEFINITION), engines/economics/cashflow.ts (npv), engines/drilling/wellCost.js (evaluateProgram, afeCosts) and engines/economics/afe.js (calculatePartnerCosts). It makes no network call.
+# ENGINE. engines/supplychain/tender.js, vendored sha-identical with petrolord-engines 527a197 (engines PRs #261 and #264), 1098 lines. It imports lib/stats (mulberry32, triInvCDF, basicStats, mean, standardDeviation), lib/conventions/percentile.js (EXCEEDANCE_DEFINITION), engines/economics/cashflow.ts (npv), engines/drilling/wellCost.js (evaluateProgram, afeCosts) and engines/economics/afe.js (calculatePartnerCosts). It makes no network call.
 
 # AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course's own calculator panels, which call this same vendored engine on the learner's own bids and settings.
 
@@ -208,7 +208,7 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `technicalEvaluation` | no scores | `bids[0].scores` | bids[0].scores must be an object with one score per criterion id |
 | `technicalEvaluation` | a score above the maxScore | `bids[0].scores.methodology` | bids[0].scores.methodology must be a number from 0 to 4 (the criterion's maxScore) |
 | `technicalEvaluation` | a missing score | `bids[0].scores.hse` | bids[0].scores.hse must be a number from 0 to 4 (the criterion's maxScore) |
-| `evaluatedCosts` | omission rule lowest | `omissionRule` | omissionRule must be 'average' (the default, World Bank SPD ITB 34.1: the average price quoted by the substantially responsive bidders) or 'highest' (the highest price quoted by them, an option not from the cited texts) |
+| `evaluatedCosts` | omission rule lowest | `omissionRule` | omissionRule must be 'average' (the default, World Bank SPD ITB 34.1: the average price quoted by the substantially responsive bidders) or 'highest' (the highest price quoted by them, an option the cited texts do not use) |
 | `evaluatedCosts` | a negative tolerance | `tolerance` | tolerance must be a finite number at or above 0 |
 | `evaluatedCosts` | bestEstimates given as a list | `bestEstimates` | bestEstimates must be an object of item id to amount when given |
 | `evaluatedCosts` | a negative best estimate | `bestEstimates.nitrogen` | bestEstimates.nitrogen must be a finite number at or above 0 |
@@ -423,13 +423,13 @@ Lowest evaluated cost (engine): WS5. Each row is the sum of its terms (checked).
 
 Every reason the engine returns for these bids, verbatim, in the order it returns them:
 > WS5: line acid: quantity x unit rate = 828 differs from the quoted 82800 and the decimal point in the unit rate is obviously misplaced, so the quoted amount governs and the unit rate is corrected to 1380
-> WS5: completion in 9 weeks is 3 weeks beyond the minimum 6; 0.005 x 3 x 849400 = 12741 is added
+> WS5: completion in 9 weeks is 3 weeks beyond the minimum 6 weeks; 0.005 x 3 x 849400 = 12741 is added
 > WS2: line ct-spread: quantity x unit rate = 486000 differs from the quoted 468000 by more than 0.005, so the unit rate prevails and the amount is corrected to 486000
 > WS2: deviation payment-terms: asks for payment in 30 days where the conditions give 60; priced at the interest on the earlier payment (9500)
-> WS2: completion in 8 weeks is 2 weeks beyond the minimum 6; 0.005 x 2 x 867400 = 8674 is added
-> WS1: completion in 6 weeks is not beyond the minimum 6; no adjustment and no credit for earlier completion
+> WS2: completion in 8 weeks is 2 weeks beyond the minimum 6 weeks; 0.005 x 2 x 867400 = 8674 is added
+> WS1: completion in 6 weeks is not beyond the minimum 6 weeks; no adjustment and no credit for earlier completion
 > WS3: item nitrogen omitted; the average of the 3 prices quoted by the other responsive bids, 35400, is added
-> WS3: completion in 7 weeks is 1 weeks beyond the minimum 6; 0.005 x 1 x 918000 = 4590 is added
+> WS3: completion in 7 weeks is 1 week beyond the minimum 6 weeks; 0.005 x 1 x 918000 = 4590 is added
 
 AN OMITTED ITEM AT THE AVERAGE. WS3 prices no nitrogen line. The other responsive bids price it at (corrected amounts, engine): WS5 33600.000000, WS2 35400.000000, WS1 37200.000000. Their average, which the engine adds to WS3, is 35400.000000.
 
@@ -762,7 +762,7 @@ THE RULE AT ITS EDGES, on stated bids (each call names its reading):
 The engine's reasons for four of these, verbatim (each reason also carries the three readings, shortened here after its opening words "(readings of s.14:"):
 > one unit more than the margin above: only LO is within 1% of the lowest evaluated cost 2000000; s.14 is not engaged (readings of s.14: ...)
 > a shared highest content: S1 and S2 share the highest Nigerian content 65%, so no single bid leads; the lowest evaluated cost LO stands (readings of s.14: ...)
-> a runner-up at no content, read as relative: 2 bids within 1% of the lowest evaluated cost; Z1 has the highest Nigerian content, 30% against 0% (LO), more than 5% higher by any reading, at least 5% higher, so s.14 selects Z1 over the lowest evaluated cost LO (readings of s.14: ...)
+> a runner-up at no content, read as relative: 2 bids within 1% of the lowest evaluated cost; Z1 has the highest Nigerian content, 30% against 0% (LO), a runner-up with no Nigerian content, at least 5% higher, so s.14 selects Z1 over the lowest evaluated cost LO (readings of s.14: ...)
 > the lowest also leads: LO is the lowest evaluated cost and also leads on Nigerian content, 88% against 75% (L3), a lead of 13 percentage points; s.14 confirms it (readings of s.14: ...)
 
 A shared highest content means no single bid "contains the highest level", so s.14 is engaged and selects nothing: the lowest evaluated cost stands. A runner-up with no Nigerian content makes the relative lead a division by zero, and the engine returns the lead as null while any positive content is more than 5% higher by any reading.
@@ -960,10 +960,10 @@ The rule decides the award. Section 21 reads why the course grades only the cite
 WHEN NOBODY PASSES (stated: the well services tender at a pass mark of 90): award null, commercial null; reason (engine), verbatim: no bid passed the technical envelope; no commercial envelope is opened.
 
 WHEN EVERY OPENED BID IS REJECTED AT THE COMMERCIAL STAGE (stated: the same tender with maxWeeks 5, so every passing bid is late): award null; reason (engine), verbatim: every opened bid was rejected at the commercial stage. Each late bid's exclusion, verbatim:
-> WS1: offers completion in 6 weeks, beyond the maximum 5; the bid is nonresponsive
-> WS2: offers completion in 8 weeks, beyond the maximum 5; the bid is nonresponsive
-> WS3: offers completion in 7 weeks, beyond the maximum 5; the bid is nonresponsive
-> WS5: offers completion in 9 weeks, beyond the maximum 5; the bid is nonresponsive
+> WS1: offers completion in 6 weeks, beyond the maximum 5 weeks; the bid is nonresponsive
+> WS2: offers completion in 8 weeks, beyond the maximum 5 weeks; the bid is nonresponsive
+> WS3: offers completion in 7 weeks, beyond the maximum 5 weeks; the bid is nonresponsive
+> WS5: offers completion in 9 weeks, beyond the maximum 5 weeks; the bid is nonresponsive
 
 # SECTION 21: Reading the engine honestly: cited readings, the uncited option, an erratum and printed figures (owned by Expert m05)
 
@@ -979,11 +979,11 @@ THE CITED READINGS. Every rule the engine applies is tied to a cited text (secti
 | the pass mark, the weights, the technical weight, the band | required inputs with no default (section 4) |
 
 THE UNCITED OPTION. The omission rule of the World Bank SPDs (ITB 34.1) is the AVERAGE price quoted by the substantially responsive bidders, and it is the engine's default. The engine also accepts `highest`, which no text read uses, and says so in its own words. Its basis and its reason on the well services tender, verbatim:
-> an omitted item is priced at the highest corrected amount quoted for it by the other responsive bids, else the Employer's best estimate (the 'highest' option, not from the cited texts; the cited rule is the average of World Bank SPD ITB 34.1)
-> WS3: item nitrogen omitted; the highest of the 3 prices quoted by the other responsive bids, 37200, is added (the 'highest' option, not from the cited texts)
+> an omitted item is priced at the highest corrected amount quoted for it by the other responsive bids, else the Employer's best estimate (the 'highest' option, which the cited texts do not use; the cited rule is the average of World Bank SPD ITB 34.1)
+> WS3: item nitrogen omitted; the highest of the 3 prices quoted by the other responsive bids, 37200, is added (the 'highest' option, which the cited texts do not use)
 
 Under 'highest' WS3's nitrogen is priced at 37200.000000 where the average gives 35400.000000; on the materials tender the rule moves the award (section 20). This course teaches and grades the cited rule only; 'highest' is shown so a reader of the engine knows it is there and what it says about itself. A rule the engine is asked for by a name it does not hold is refused, verbatim:
-> omissionRule must be 'average' (the default, World Bank SPD ITB 34.1: the average price quoted by the substantially responsive bidders) or 'highest' (the highest price quoted by them, an option not from the cited texts)
+> omissionRule must be 'average' (the default, World Bank SPD ITB 34.1: the average price quoted by the substantially responsive bidders) or 'highest' (the highest price quoted by them, an option the cited texts do not use)
 
 A PRICE-SCORING METHOD WITH NO PUBLISHED FORMULA IS NOT OFFERED. Average-price scoring methods (a score that falls as a price moves away from the mean of the prices) are described and warned against by Kiiver and Kodym (2015) and by Chen (2008); neither prints a formula, and no text read does. The engine offers `lowest-ratio` (the World Bank's) and `linear` (the family Kiiver and Kodym describe) and refuses any other name, verbatim:
 > priceMethod must be 'lowest-ratio' or 'linear'; there is no default

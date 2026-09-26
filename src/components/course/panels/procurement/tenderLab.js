@@ -2,7 +2,7 @@
 //
 // Every number this lab returns is a return value of the vendored engine
 // (packages/engines/engines/supplychain/tender.js, sha-identical with
-// petrolord-engines 9187701, which imports lib/stats for the seeded Monte
+// petrolord-engines 527a197, which imports lib/stats for the seeded Monte
 // Carlo, lib/conventions/percentile.js for the cost P-label definition,
 // engines/economics/cashflow.ts for the canonical npv, engines/drilling/
 // wellCost.js for the programme days and the should-cost, and

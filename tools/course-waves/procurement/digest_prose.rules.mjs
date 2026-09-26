@@ -53,7 +53,7 @@ const HEADINGS = [
   {
     id: 'sc2-erratum',
     heading: /Reading the engine honestly: cited readings, the uncited option, an erratum and printed figures/i,
-    body: (b) => !/\| B \| 12, 11, 54 \| 82 \| 77\.000000 \| fail-pass-mark \|/.test(b) || !/not from the cited texts/.test(b),
+    body: (b) => !/\| B \| 12, 11, 54 \| 82 \| 77\.000000 \| fail-pass-mark \|/.test(b) || !/which the cited texts do not use/.test(b),
     why: 'the honest-reading section no longer shows the Annex 2 erratum or the uncited option in the engine\'s words',
   },
   {
@@ -98,9 +98,9 @@ const TENDER = [
   'the decimal point in the unit rate is obviously misplaced, so the quoted amount governs and the unit rate is corrected to',
   '; the subtotals prevail',
   'no adjustment and no credit for earlier completion',
-  "(the 'highest' option, not from the cited texts)",
-  "(the 'highest' option, not from the cited texts; the cited rule is the average of World Bank SPD ITB 34.1)",
-  'an option not from the cited texts',
+  "(the 'highest' option, which the cited texts do not use)",
+  "(the 'highest' option, which the cited texts do not use; the cited rule is the average of World Bank SPD ITB 34.1)",
+  'an option the cited texts do not use',
   's.14 does not say which, so there is no default',
   ' (readings of s.14: ',
   'is read as within 1% of the lowest evaluated cost',

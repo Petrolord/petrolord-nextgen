@@ -11,15 +11,10 @@ The digest is swept because every lesson is written from it, so a contrastive
 in the digest becomes a contrastive in a lesson. structure.py is NOT swept for
 prose: its own gate lines have to contain the characters this gate looks for.
 
-ENGINE TEXT. One engine string the digest quotes carries the contrastive
-pattern: the 'highest' omission option labels itself "(the 'highest' option,
-not from the cited texts". It is the engine's own words, quoted verbatim in a
-blockquote, and it is reported to the lead as an engines wording finding
-(repair first). ENGINE_TEXT below exempts exactly that string. An exemption
-is BY EXACT STRING, and a DEAD exemption fails this gate: a row that clears
-nothing is a claim about work never done. Every writer brief in this wave says: quote the
-message in a blockquote as the engine's own words, and never write a
-contrastive of your own.
+ENGINE TEXT. Every engine message the digest quotes meets the owner copy rule,
+so ENGINE_TEXT below exempts nothing. An exemption added there is BY EXACT
+STRING, and a DEAD exemption fails this gate: a row that clears nothing is a
+claim about work never done.
 
 --plant is THE NEGATIVE CONTROL: it plants a contrastive and an em dash in the
 digest text in memory and must exit 1 with both caught. --plant-bank plants the
@@ -42,9 +37,7 @@ APP_TEXT = [os.path.join(REPO, 'src/components/course/panels/procurement', f) fo
 DASHES = re.compile('[—–]')
 CONTRASTIVE = re.compile(r',\s+not\s+\w')
 
-ENGINE_TEXT = {
-    "(the 'highest' option, not from the cited texts": 'engines/supplychain/tender.js evaluatedCosts: the omission basis and reason of the uncited option',
-}
+ENGINE_TEXT = {}
 
 
 def sweep(label, text):
