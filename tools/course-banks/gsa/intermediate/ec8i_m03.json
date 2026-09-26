@@ -33,7 +33,7 @@
   "explanation": "Credits are drawn first in first out, so the 2029 deficiency of 100.000000 is met from 2027, and a 2027 surplus carried for 2 contract years lasts to the end of 2029: the engine's reasons read \"a carry-forward credit of 100 (at most 100% of the deficiency, first in first out: 100 from 2027) leaves 0\" and \"carry-forward of 200 from 2027 expired unused at the end of 2029\". Drawing 2028 first reverses the order. A credit is never larger than the deficiency it meets. Credits apply in the year of the deficiency."
  },
  {
-  "prompt": "Suppose the credit is capped at half of any deficiency. Carrying 100.000000 of excess from 2027, the buyer comes up 100.000000 below its take-or-pay quantity in 2029, priced at 3. What credit and payment result?",
+  "prompt": "Suppose the credit is capped at half of any deficiency. Carrying 100.000000 of excess from 2027 for 2 contract years, the buyer comes up 100.000000 below its take-or-pay quantity in 2029, priced at 3. What credit and payment result?",
   "options": [
    "A credit of 100.000000 and a deficiency payment of 0.000000, since the carried surplus covers the whole deficiency",
    "A credit of 50.000000 and a deficiency payment of 300.000000, because a capped credit reduces make-up and leaves the payment whole",

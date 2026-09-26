@@ -22,7 +22,7 @@
   "explanation": "Make-up is usable in the last year of its period and the rest expires at that year's end: the engine's reasons read \"make-up of 100 taken from the make-up aggregate 200\" and \"make-up of 100 from 2027 expired unrecovered at the end of 2029, the last year of its make-up period\". Nothing of the entry reaches 2030. The last year is inside the period, so a draw in it is allowed. The draw is limited by the take above the Adjusted ACQ, so the last year releases nothing extra."
  },
  {
-  "prompt": "A buyer who paid a deficiency of 200.000000 in 2027, with a make-up period of 2 contract years, takes nothing above its Adjusted ACQ in 2028 or 2029 and plans to recover the gas in 2030. What does the engine hold for it in 2030?",
+  "prompt": "A buyer who paid a deficiency of 200.000000 in 2027, with a make-up period of 2 contract years and the order 'after-adjusted-acq', takes nothing above its Adjusted ACQ in 2028 or 2029 and plans to recover the gas in 2030. What does the engine hold for it in 2030?",
   "options": [
    "Nothing: the whole 200.000000 expired at the end of 2029",
    "200.000000, available in 2030 because the entry never had a year with a take above the Adjusted ACQ to draw on",

@@ -68,7 +68,7 @@ q(1, "Priced at 4, a 2027 deficiency of 200.000000 opens make-up usable for two 
   "Nothing, the payment covering it"],
  "The engine's reasons read \"make-up of 150 taken from the make-up aggregate 200\" and \"the delivery period ends with make-up of 50 unrecovered; the buyer forfeits it\". The case states forfeit, so no refund. The term ends in 2028, before the period would, so the end-of-term rule settles the rest. The payment of 200 x 4 = 800 bought the right to 200.000000 of gas; 50.000000 of it goes untaken.")
 
-q(3, "In the golden case with make-up of 100.000000 from 2027 and 50.000000 from 2028, each for 3 contract years, the 2027 entry is fully drawn by 2030. In 2031 the buyer takes nothing above the Adjusted ACQ. What does the engine report for 2031?",
+q(3, "In the golden case with make-up of 100.000000 from 2027 and 50.000000 from 2028, each for 3 contract years, the 2027 entry is fully drawn by 2030 under the order 'after-adjusted-acq'. In 2031 the buyer takes nothing above the Adjusted ACQ. What does the engine report for 2031?",
  "40.000000 from 2028 expired unrecovered at the end of 2031",
  ["40.000000 from 2027 expired",
   "40.000000 kept open to 2032",
@@ -208,7 +208,7 @@ q(3, "A golden basket prices 5 x the weighted sum of each index over its base, w
  ["5.030000, the next month",
   "5.105000, with a floor",
   "5.000000, the price at the base values, since a basket reprices only when an index moves outside its band"],
- "The engine weights each averaged index over its base value, fo 410.000000 over 400 and cpi 100.500000 over 100, sums them at 0.6 and 0.4 and multiplies by 5, which gives 5.085000. 5.030000 is the 2026-01 price. 5.105000 is 2026-01 again with an index floor on fo. A basket reprices on every move of its indices.")
+ "The engine weights each averaged index over its base value, fo 410.000000 over 400 and cpi 100.500000 over 100, sums them at 0.6 and 0.4 and multiplies by 5, which gives 5.085000. 5.030000 is the 2026-01 price. 5.105000 is 2026-01 again with an index floor on fo. This case reprices every month on its averaged indices and states no band.")
 
 # Domestic gas prices
 q(1, "Suppose a city distribution company agrees 2.5 US$ per MMBtu with its supplier, on the base price reported for 2026. Which figure does the engine price?",

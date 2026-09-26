@@ -14,7 +14,7 @@ q(2, "In 2027 the Ekene power plant agreement (synthetic) states an ACQ of 76650
  ["6132000.000000, which is 80 percent of the full ACQ before any reduction is taken off it",
   "7616700.000000, the Adjusted ACQ itself",
   "6148800.000000, the leap-year quantity of 2028"],
- "The engine takes the force majeure and the seller shortfall off the ACQ first (7665000.000000 less 48300.000000 is an Adjusted ACQ of 7616700.000000) and then applies 80 percent, giving 6093360.000000. 6132000.000000 is 80 percent of the ACQ with the reductions left in, which is the take-or-pay quantity of a year with nothing to reduce. The Adjusted ACQ is the base of the percentage, so it is never the take-or-pay quantity itself. 6148800.000000 belongs to 2028, a leap year of 366 days, and each year is reconciled on its own ACQ.")
+ "The engine takes the force majeure and the seller shortfall off the ACQ first (7665000.000000 less 48300.000000 is an Adjusted ACQ of 7616700.000000) and then applies 80 percent, giving 6093360.000000. 6132000.000000 is 80 percent of the ACQ with the reductions left in, which is the take-or-pay quantity of a year with nothing to reduce. The Adjusted ACQ is the base of the percentage, and at 80 percent the take-or-pay quantity sits below it. 6148800.000000 belongs to 2028, a leap year of 366 days, and each year is reconciled on its own ACQ.")
 
 q(0, "A learner builds a takeOrPay call whose years run 2027 and then 2029, leaving 2028 out. What does the engine return?",
  "A refusal naming years[1].year, which in the engine's own words must be 2028, the year after 2027 (contract years are consecutive)",
@@ -72,7 +72,7 @@ q(3, "In 2029 the power plant takes 7875000.000000 against an Adjusted ACQ of 76
   "0.000000, until the period's last year"],
  "With make-up taken only after the Adjusted ACQ, the draw is 7875000.000000 less 7665000.000000, which is 210000.000000, and the engine's reason reads \"make-up of 210000 taken from the make-up aggregate 688800\". Passing the take-or-pay quantity does not release the whole aggregate under this order. 478800.000000 is what stays open after the draw. Make-up is usable in every year of its period, from the first year after the deficiency.")
 
-q(0, "In 2030 the Ekene power plant's take lands exactly on its Adjusted ACQ of 7665000.000000 while 478800.000000 of make-up is still open under its stated order. How much of that make-up is drawn?",
+q(0, "In 2030 the Ekene power plant's take lands exactly on its Adjusted ACQ of 7665000.000000 while 478800.000000 of make-up is still open under its stated order, 'after-adjusted-acq'. How much of that make-up is drawn?",
  "None, because make-up is taken only strictly above the Adjusted ACQ",
  ["478800.000000, because the take is well above the take-or-pay quantity of 6132000.000000 and the aggregate is open",
   "The gap between the Adjusted ACQ and the take-or-pay quantity, which the engine draws as make-up whenever the aggregate can cover it",
