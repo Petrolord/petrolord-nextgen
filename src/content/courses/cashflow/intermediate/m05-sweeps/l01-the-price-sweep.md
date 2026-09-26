@@ -30,7 +30,7 @@ Take is the government's share of the pre-take value, revenue less capex less op
 
 ## The published PIA sweep
 
-oil_price_multiyear_pia_real moves a six-year PIA field from 40 to 120 USD/bbl. NPV runs from -145273028.51 to 423341704.82, IRR from -12.3012 to 107.7859 percent. Take reads 144.0232 at 40, 71.1024 at 80 and 71.3286 at 120: the PIA cascade holds its take almost flat where the JV take on AKATA keeps falling, because the PIA's price royalty tiers rise with price. Unit technical cost is 32.823299 USD/boe at every point, since cost per barrel has no price in it.
+oil_price_multiyear_pia_real moves a six-year PIA field from 40 to 120 USD/bbl. NPV runs from -96780763.39 to 447901161.52, IRR from -3.8626 to 115.0346 percent. Take reads 114.9262 at 40, 69.3025 at 80 and 69.8048 at 120: the PIA cascade holds its take almost flat where the JV take on AKATA keeps falling, because the PIA's price royalty tiers rise with price. Unit technical cost is 32.823299 USD/boe at every point, since cost per barrel has no price in it.
 
 ## The mistake
 

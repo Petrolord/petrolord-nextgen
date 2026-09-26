@@ -16,11 +16,11 @@ Valuing AKATA from 2030 with prior years kept gives 77464382.26. Valuing from 20
 
 ## NPV and its profile
 
-The profile reads 117362408.71 at 0 percent, 83023565.60 at 5, 65968275.69 at 8, 55805775.02 at 10, 46487466.07 at 12, 33900281.71 at 15 and 16026160.80 at 20. The point labelled 6.8 reads 72534830.66, the headline at 6.796117 percent, so the gap is 0.00: the point is labelled at the rounded rate and evaluated at the exact one. Until engines 3.10.0 it was evaluated at the label too and read 72513070.98, a gap of -21759.68.
+The profile reads 117362408.71 at 0 percent, 83023565.60 at 5, 65968275.69 at 8, 55805775.02 at 10, 46487466.07 at 12, 33900281.71 at 15 and 16026160.80 at 20. The point labelled 6.8 reads 72534830.66, the headline at 6.796117 percent, so the gap is 0.00: the point is labelled at the rounded rate and evaluated at the exact one.
 
 ## The internal rate of return
 
-29.2361 percent on the nominal flows, unmoved by rate, basis, convention or working interest. The engine names a rate only where exactly one rate in the band from -99 to 1000 percent zeroes the NPV, and otherwise returns null with a status. [-100, 208, -108.12] is zero at 2 percent and at 6, so it is null with irrStatus multiple-roots; it reported 6.0000 against the oracle's 2.0000 before the repair. AKATA with an abandonment of 60000000 is null for the same reason, and with 200000000 because no rate zeroes it at all.
+29.2361 percent on the nominal flows, unmoved by rate, basis, convention or working interest. The engine names a rate only where exactly one rate in the band from -99 to 1000 percent zeroes the NPV, and otherwise returns null with a status. [-100, 208, -108.12] is zero at 2 percent and at 6, so it is null with irrStatus multiple-roots; both roots are listed beside the status. AKATA with an abandonment of 60000000 is null for the same reason, and with 200000000 because no rate zeroes it at all.
 
 ## Sweeps and the breakeven
 

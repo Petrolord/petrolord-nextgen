@@ -10,21 +10,21 @@ A ten-year PIA oil field on the nominal basis with the economic limit on, swept 
 
 | decline, percent | rows | limit year | years trimmed | NPV | IRR, percent | take, percent | unit technical cost, USD/boe |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 5 | 10 | 2034 | 0 | 281783674.60 | 35.7256 | 72.8069 | 36.925616 |
-| 10 | 10 | 2034 | 0 | 153012318.45 | 26.9948 | 75.6417 | 45.497913 |
-| 20 | 6 | 2030 | 4 | -76483227.81 | -4.3446 | 105.7792 | 57.021318 |
-| 30 | 4 | 2028 | 6 | -192240981.82 | -42.2725 | 202.4061 | 67.976085 |
-| 40 | 3 | 2027 | 7 | -261416751.74 | -76.4611 | 1199.4096 | 78.666122 |
+| 5 | 10 | 2034 | 0 | 310869249.17 | 37.8517 | 70.4788 | 36.925616 |
+| 10 | 10 | 2034 | 0 | 182401961.12 | 29.6717 | 72.1778 | 45.497913 |
+| 20 | 7 | 2031 | 3 | -30055502.32 | null | 93.0311 | 58.361925 |
+| 30 | 5 | 2029 | 5 | -165659120.63 | null | 179.7616 | 68.840345 |
+| 40 | 3 | 2027 | 7 | -236566396.64 | -65.5151 | 1079.0391 | 78.666122 |
 
-At 5 and 10 percent the field runs its full ten rows. At 20 percent the limit year is 2030, four years are trimmed, and the ledger that is valued has six rows. At 40 percent three rows survive. Total revenue falls from 3485716284.18 to 794617600.00 across the sweep.
+At 5 and 10 percent the field runs its full ten rows. At 20 percent the limit year is 2031, three years are trimmed, and the ledger that is valued has seven rows. At 40 percent three rows survive. At 20 and 30 percent the IRR reads null: the engine could not name exactly one rate for those shortened ledgers, and the NPV beside it carries the verdict. Total revenue falls from 3485716284.18 to 794617600.00 across the sweep.
 
 ## Why the KPIs jump rather than slide
 
-Between 10 and 20 percent the NPV moves from 153012318.45 to -76483227.81 and the payback from 3.67 years to Beyond project life. Part of that is volume. Part of it is the four years removed, which took their revenue with them while the capex in the early rows stayed. Unit technical cost rises from 45.497913 to 57.021318 USD/boe for the same reason: the cost is spread over fewer barrels.
+Between 10 and 20 percent the NPV moves from 182401961.12 to -30055502.32 and the payback from 3.58 years to 4.63 years. Part of that is volume. Part of it is the three years removed, which took their revenue with them while the capex in the early rows stayed. Unit technical cost rises from 45.497913 to 58.361925 USD/boe for the same reason: the cost is spread over fewer barrels.
 
 ## Take past 100 percent
 
-Take is 105.7792 percent at 20 percent decline, 202.4061 at 30 and 1199.4096 at 40. The pre-take value shrinks toward zero as rows are trimmed while royalties are still charged on what remains, and a share of a value near zero is a large percentage. The 1199.4096 is not a rounding fault; it is a denominator that has almost vanished.
+Take is 93.0311 percent at 20 percent decline, 179.7616 at 30 and 1079.0391 at 40. The pre-take value shrinks toward zero as rows are trimmed while royalties are still charged on what remains, and a share of a value near zero is a large percentage. The 1079.0391 is not a rounding fault; it is a denominator that has almost vanished.
 
 ## The other levers
 
@@ -32,7 +32,7 @@ Capex and opex scale change every row's size and leave the row count alone. AKAT
 
 ## The mistake
 
-The careful mistake is to read the decline sweep as a volume sensitivity and plot NPV against total barrels. Two runs with different row counts are two different fields, and the one with four years trimmed has lost its late-life tax as well as its late-life production. Compare the rows column before comparing anything else.
+The careful mistake is to read the decline sweep as a volume sensitivity and plot NPV against total barrels. Two runs with different row counts are two different fields, and the one with three years trimmed has lost its late-life tax as well as its late-life production. Compare the rows column before comparing anything else.
 
 ## What it refuses
 

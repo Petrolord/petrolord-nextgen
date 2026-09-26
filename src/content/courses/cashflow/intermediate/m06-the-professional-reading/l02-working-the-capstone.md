@@ -22,7 +22,7 @@ If the valuation year is later than the first row, ask whether prior years are k
 
 ## Step five: read the profile and its label
 
-Profile at 0, 5, 8, 10, 12, 15 and 20 percent: 117362408.71, 83023565.60, 65968275.69, 55805775.02, 46487466.07, 33900281.71, 16026160.80. The applied-rate point is labelled 6.8 and reads 72534830.66, the headline, so the gap is 0.00. The label is the applied rate rounded to two decimals; the evaluation is at 6.796117. Before engines 3.10.0 the point was evaluated at the label and read 72513070.98, a gap of -21759.68.
+Profile at 0, 5, 8, 10, 12, 15 and 20 percent: 117362408.71, 83023565.60, 65968275.69, 55805775.02, 46487466.07, 33900281.71, 16026160.80. The applied-rate point is labelled 6.8 and reads 72534830.66, the headline, so the gap is 0.00. The label is the applied rate rounded to two decimals; the evaluation is at 6.796117. A reader who recomputes at the printed 6.8 lands slightly below the headline and should put that down to the label.
 
 ## Step six: the IRR and the sign of the last flow
 

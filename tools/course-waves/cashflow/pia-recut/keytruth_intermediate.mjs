@@ -1,3 +1,60 @@
-// Key-truth checks for the cashflow intermediate rows this re-cut changes (see keytruth.mjs).
+// Key-truth checks for the cashflow Professional rows this re-cut changes. Every
+// value is an engine return value (lib.mjs); nothing restates a formula.
+const k = (L, name) => L.run(L.CASE[name]).kpis;
+const prof = (kp, rate) => kp.npv_profile.find((p) => p.rate_pct === rate).npv;
+const decline = (L, pct) => L.run(L.GOLDEN.sweeps.decline_rate_multiyear_pia.points.find((p) => p.decline_pct === pct).inputs);
+const price = (L, px) => L.run(L.GOLDEN.sweeps.oil_price_multiyear_pia_real.points.find((p) => p.oil_price_usd_bbl === px).inputs);
+const be = (L, name) => { const c = L.CASE[name]; const cfg = L.DP(c.cfg);
+  const b = L.E.computeBreakevenOilPrice({ cfg, prodRows: c.prodRows, capexRows: c.capexRows, opexRows: c.opexRows });
+  return L.E.computeCashFlow({ cfg: { ...cfg, oil_price_usd_bbl: b }, prodRows: c.prodRows, capexRows: c.capexRows, opexRows: c.opexRows }).kpis.npv; };
 export default [
+  { q: 'intermediate final 4', where: 'prompt', printed: '219158380.04', value: (L) => k(L, 'multiyear_pia_real').npv },
+  { q: 'intermediate final 4', where: 'prompt', printed: '212070544.45', value: (L) => k(L, 'multiyear_pia_midyear_real').npv },
+  { q: 'intermediate final 4', where: 'explanation', printed: '239552507.28', value: (L) => prof(k(L, 'multiyear_pia_real'), 5) },
+  { q: 'intermediate final 4', where: 'explanation', printed: '233779309.33', value: (L) => prof(k(L, 'multiyear_pia_midyear_real'), 5) },
+  { q: 'intermediate final 15', where: 'prompt', printed: '219158380.04', value: (L) => prof(k(L, 'multiyear_pia_real'), 6.8) },
+  { q: 'intermediate final 15', where: 'key', printed: 'evaluated at the exact rate', value: (L) => { const x = k(L, 'multiyear_pia_real'); return prof(x, 6.8) === x.npv; } },
+  { q: 'intermediate final 16', where: 'key', printed: '10.000000', value: (L) => k(L, 'multiyear_pia_nominal').discount_rate_applied_pct },
+  { q: 'intermediate final 16', where: 'prompt', printed: '6.796117', value: (L) => L.run(L.AKATA).kpis.discount_rate_applied_pct },
+  { q: 'intermediate final 16', where: 'prompt', printed: 'read their headlines', value: (L) => ['multiyear_pia_nominal', 'jv_analytic_decision_kpis'].every((n) => { const x = k(L, n); return prof(x, 10) === x.npv; }) },
+  { q: 'intermediate final 21', where: 'explanation', printed: '69.3025', value: (L) => k(L, 'multiyear_pia_real').government_take_pct },
+  { q: 'intermediate final 21', where: 'explanation', printed: '75.6850', value: (L) => k(L, 'multiyear_pia_real').government_take_pct_discounted },
+  { q: 'intermediate final 22', where: 'explanation', printed: '43520898.40', value: (L) => L.run(L.withCfg(L.AKATA, { jv_working_interest_pct: 60 })).kpis.npv },
+  { q: 'intermediate final 24', where: 'key', printed: 'multiple-roots', value: (L) => L.E.irrResult([-100, 230, -132]).irr_status },
+  { q: 'intermediate final 24', where: 'explanation', printed: 'is null the same way', value: (L) => L.E.irrResult([-100, 208, -108.12]).irr === null },
+  { q: 'intermediate final 26', where: 'explanation', printed: '173.6932', value: (L) => L.E.irrResult([-12500000, 37500000, -9000000]).irr_roots[1] },
+  { q: 'intermediate final 34', where: 'prompt', printed: '58.361925', value: (L) => decline(L, 20).kpis.unit_technical_cost_usd_per_boe },
+  { q: 'intermediate final 34', where: 'key', printed: 'seven-row', value: (L) => decline(L, 20).cashFlowData.length === 7 && decline(L, 10).cashFlowData.length === 10 },
+  { q: 'intermediate final 34', where: 'option 3', printed: '93.0311', value: (L) => decline(L, 20).kpis.government_take_pct },
+  { q: 'intermediate final 34', where: 'explanation', printed: '-30055502.32', value: (L) => decline(L, 20).kpis.npv },
+  { q: 'intermediate final 34', where: 'explanation', printed: '182401961.12', value: (L) => decline(L, 10).kpis.npv },
+  { q: 'intermediate final 38', where: 'key', printed: '212070544.45', value: (L) => k(L, 'multiyear_pia_midyear_real').npv },
+  { q: 'intermediate final 38', where: 'explanation', printed: '219158380.04', value: (L) => k(L, 'multiyear_pia_nominal').npv },
+  { q: 'intermediate final 40', where: 'key', printed: '72.1778', value: (L) => decline(L, 10).kpis.government_take_pct },
+  { q: 'intermediate final 40', where: 'key', printed: 'seven-row', value: (L) => decline(L, 20).cashFlowData.length === 7 },
+  { q: 'intermediate final 40', where: 'prompt', printed: '93.0311', value: (L) => decline(L, 20).kpis.government_take_pct },
+  { q: 'intermediate final 40', where: 'explanation', printed: '1079.0391', value: (L) => decline(L, 40).kpis.government_take_pct },
+  { q: 'intermediate final 41', where: 'key', printed: '6.796117', value: (L) => L.run(L.AKATA).kpis.discount_rate_applied_pct },
+  { q: 'intermediate final 41', where: 'prompt', printed: '72534830.66', value: (L) => prof(L.run(L.AKATA).kpis, 6.8) },
+  { q: 'intermediate m03 5', where: 'key', printed: 'Down', value: (L) => { const p = L.run(L.AKATA).kpis.npv_profile.map((x) => x.npv); return p.every((v, i) => i === 0 || v < p[i - 1]); } },
+  { q: 'intermediate m03 13', where: 'prompt', printed: '0.429569', value: (L) => k(L, 'multiyear_pia_real').dpi },
+  { q: 'intermediate m04 9', where: 'explanation', printed: 'two crossings', value: (L) => L.run(L.withCfg(L.AKATA, { abandonment_cost_usd: 60000000 })).kpis.irr_status === 'multiple-roots' },
+  { q: 'intermediate m05 5', where: 'prompt', printed: '114.9262', value: (L) => price(L, 40).kpis.government_take_pct },
+  { q: 'intermediate m05 5', where: 'prompt', printed: '69.3025', value: (L) => price(L, 80).kpis.government_take_pct },
+  { q: 'intermediate m05 5', where: 'prompt', printed: '69.8048', value: (L) => price(L, 120).kpis.government_take_pct },
+  { q: 'intermediate m05 10', where: 'explanation', printed: '-1391.65', value: (L) => be(L, 'pia_worked_example') },
+  { q: 'intermediate m05 10', where: 'explanation', printed: '-3574.39', value: (L) => be(L, 'multiyear_pia_real') },
+  { q: 'intermediate m05 14', where: 'option 2', printed: '-30055502.32', value: (L) => decline(L, 20).kpis.npv },
+  { q: 'intermediate m05 14', where: 'prompt', printed: 'three years are trimmed', value: (L) => decline(L, 20).cashFlowData.length === 7 && decline(L, 20).cashFlowData[6].year === 2031 },
+  { q: 'intermediate m05 15', where: 'prompt', printed: '1079.0391', value: (L) => decline(L, 40).kpis.government_take_pct },
+  { q: 'intermediate m05 15', where: 'option 2', printed: '72878470.21', value: (L) => decline(L, 40).kpis.total_royalties },
+  { q: 'intermediate m05 15', where: 'explanation', printed: '179.7616', value: (L) => decline(L, 30).kpis.government_take_pct },
+  { q: 'intermediate m06 11', where: 'key', printed: 'seven rows', value: (L) => decline(L, 20).cashFlowData.length === 7 && decline(L, 40).cashFlowData.length === 3 },
+  { q: 'intermediate m06 11', where: 'explanation', printed: '182401961.12', value: (L) => decline(L, 10).kpis.npv },
+  { q: 'intermediate m06 10', where: 'explanation', printed: '2031', value: (L) => decline(L, 20).cashFlowData.at(-1).year },
+  { q: 'intermediate m06 13', where: 'prompt', printed: '47.9020', value: (L) => k(L, 'multiyear_jv_real').irr },
+  { q: 'intermediate m06 15', where: 'key', printed: 'multiple-roots', value: (L) => L.E.irrResult([-100, 208, -108.12]).irr_status },
+  { q: 'intermediate m03 5', where: 'explanation', printed: '83023565.60', value: (L) => prof(L.run(L.AKATA).kpis, 5) },
+  { q: 'intermediate m03 5', where: 'explanation', printed: '65968275.69', value: (L) => prof(L.run(L.AKATA).kpis, 8) },
+  { q: 'intermediate m06 9', where: 'option 3', printed: '29.2361', value: (L) => L.run(L.AKATA).kpis.irr },
 ];

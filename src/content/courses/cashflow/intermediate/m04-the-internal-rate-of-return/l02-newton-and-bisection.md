@@ -28,13 +28,13 @@ Bisection needs two rates with NPVs of opposite sign and halves the interval bet
 
 There is a sign change between -75 and -50 and another between 150 and 175. Two crossings lie inside the band, so the engine names neither: it returns null with irrStatus multiple-roots and lists them as -73.6932 and 173.6932 percent.
 
-## What it used to do
+## Why the count comes first
 
-Until engines 3.10.0 the finder's statement read "Newton now falls back to bisection when unconverged and returns null when no sign change brackets a root", and said nothing about how many roots there were. On this vector it reported 173.6932 percent, the crossing Newton reached from 10 percent, with the one near -73.6932 unmentioned.
+A finder that stops at the first crossing it reaches lets its starting point choose. On this vector a search from 10 percent would settle on 173.6932 percent and never mention the crossing near -73.6932. So the engine counts the crossings in the band before naming any rate, and a second crossing turns the answer into null with both roots listed.
 
 ## The mistake
 
-The careful mistake is to trust a residual as a proof of uniqueness. A residual of 0.000000 proves that the rate beside it is a root, and says nothing about the rest of the curve. The engine does that counting now: a named rate means one crossing was found in the band.
+The careful mistake is to trust a residual as a proof of uniqueness. A residual of 0.000000 proves that the rate beside it is a root, and says nothing about the rest of the curve. The engine does that counting: a named rate means one crossing was found in the band.
 
 ## What it refuses
 

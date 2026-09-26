@@ -20,7 +20,7 @@ The discounted running total starts at the same minus 121123680.00 and adds 2886
 
 ## Other fields
 
-jv_analytic_decision_kpis pays back at 1.333333 years and discounted at 1.366667. multiyear_jv_real at 2.889357 and 3.165997. multiyear_pia_real at 2.892034 and 3.154942. The discounted figure is never earlier, and the gap between the two grows with the rate and with how much of the recovery sits in later years.
+jv_analytic_decision_kpis pays back at 1.333333 years and discounted at 1.366667. multiyear_jv_real at 2.889357 and 3.165997. multiyear_pia_real at 2.844931 and 3.082405. The discounted figure is never earlier, and the gap between the two grows with the rate and with how much of the recovery sits in later years.
 
 Discounted payback is unmoved by the discounting convention and by the basis. AKATA reports 3.961607 years under nominal end-year, nominal mid-year, real end-year and real mid-year alike. The mid-year shift scales every discounted row by one factor, and a crossing does not move when everything is scaled together.
 

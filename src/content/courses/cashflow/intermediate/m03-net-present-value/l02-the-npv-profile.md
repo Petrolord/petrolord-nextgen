@@ -29,18 +29,18 @@ AKATA's applied rate is 6.796117 percent. The point is labelled 6.8 and reads 72
 | case | point labelled 6.8 | headline at 6.796117 | gap |
 | --- | --- | --- | --- |
 | AKATA | 72534830.66 | 72534830.66 | 0.00 |
-| multiyear_pia_real | 203250580.21 | 203250580.21 | 0.00 |
+| multiyear_pia_real | 219158380.04 | 219158380.04 | 0.00 |
 | multiyear_jv_real | 88104639.00 | 88104639.00 | 0.00 |
-| pia_loss_relief | -5475212.04 | -5475212.04 | 0.00 |
-| allowance_cap_midyear | 2406447.46 | 2406447.46 | 0.00 |
+| pia_loss_relief | 4985473.45 | 4985473.45 | 0.00 |
+| multiyear_pia_midyear_real | 212070544.45 | 212070544.45 | 0.00 |
 
-## What the engine used to do
+## Why the label and the rate part
 
-Until engines 3.10.0 the point was evaluated at its rounded label. On a real basis whose Fisher rate is not a round number the profile then missed its own headline: AKATA's point read 72513070.98 against 72534830.66, a gap of -21759.68 USD, and the same defect cost -40996.42 on multiyear_pia_real, -18628.18 on multiyear_jv_real and -453.74 on allowance_cap_midyear. The gap was always negative, because 6.8 discounts harder than 6.796117, and it scaled with the size of the field. The golden records no profile disagreement now.
+On a nominal basis the applied rate is the configured one, 10 percent on multiyear_pia_nominal, and label and rate agree to the digit: its 10 percent point reads 219158380.04, the headline. On a real basis the Fisher rate is rarely round, so the printed label and the rate behind it differ in the third decimal. A point computed at the printed 6.8 would discount a little harder than 6.796117 and land a little below the headline, by an amount that grows with the size of the field. Evaluated at the exact rate, every case in the table closes to 0.00.
 
 ## The mistake
 
-The careful mistake is to read the label as the rate. A marker printed at 6.8 on a chart was evaluated at 6.796117, so a reader who recomputes at 6.8 to check it finds a difference the engine never made. The older mistake, hunting a spreadsheet for the USD the profile used to lose, is worth knowing only so that a figure from an older report can be placed.
+The careful mistake is to read the label as the rate. A marker printed at 6.8 on a chart was evaluated at 6.796117, so a reader who recomputes at 6.8 to check it finds a difference the engine never made. The second mistake follows from the first: recomputing at the label, finding a small shortfall and reporting it as an engine error, when the shortfall is the reader's own rounding.
 
 ## What the profile refuses
 

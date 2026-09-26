@@ -26,9 +26,9 @@ Scaling inside the regime means the fiscal cascade runs once on the whole field 
 
 The hand-derived case says the same thing with round numbers. At 60 percent the year 1 royalty is 12000000.00, the tax 19500000.00, the net -7500000.00 and the year 2 net 22500000.00; at 25 percent the year 2 net is 9375000.00. Its take is 80.7692 percent at 100, at 60 and at 25 percent.
 
-## What the take used to do
+## Why the take stays put
 
-Until the 2026-09-15 repair the JV ledger was the odd regime out. It kept gross revenue, volumes and costs at field level while reporting royalty, tax and net cash flow at the share, so take compared a partner's scaled net with the field's unscaled value and rose as the interest fell: 74.6292 percent at 75, 79.7034 at 60, 86.4689 at 40 and 91.5431 at 25. Those numbers are history. A take that moves with the interest is a reading about the partnership and not about the government.
+Every JV line is printed at the share, the same way the production sharing and PIA ledgers print theirs, so the government's lines and the contractor's scale together and the share cancels out of the ratio. A reader who divides a partner's scaled net cash flow by the field's unscaled value builds a take that climbs as the interest falls. That figure describes the partnership and tells you nothing about the government. Keep both sides of the ratio at the same basis and the working interest drops out of it.
 
 ## What it refuses
 
