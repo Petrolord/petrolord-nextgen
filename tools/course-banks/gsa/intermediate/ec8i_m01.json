@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "In 2027 the Ekene power plant agreement (synthetic) states an ACQ of 7665000.000000 MMBtu, force majeure of 42000.000000 and a seller shortfall of 6300.000000, with take-or-pay at 80 percent. What take-or-pay quantity does the engine return for the year?",
+  "options": [
+   "6132000.000000, which is 80 percent of the full ACQ before any reduction is taken off it",
+   "7616700.000000, the Adjusted ACQ itself",
+   "6093360.000000, which is 80 percent of the Adjusted ACQ of 7616700.000000",
+   "6148800.000000, the leap-year quantity of 2028"
+  ],
+  "answer": 2,
+  "explanation": "The engine takes the force majeure and the seller shortfall off the ACQ first (7665000.000000 less 48300.000000 is an Adjusted ACQ of 7616700.000000) and then applies 80 percent, giving 6093360.000000. 6132000.000000 is 80 percent of the ACQ with the reductions left in, which is the take-or-pay quantity of a year with nothing to reduce. The Adjusted ACQ is the base of the percentage, so it is never the take-or-pay quantity itself. 6148800.000000 belongs to 2028, a leap year of 366 days, and each year is reconciled on its own ACQ."
+ },
+ {
+  "prompt": "A learner builds a takeOrPay call whose years run 2027 and then 2029, leaving 2028 out. What does the engine return?",
+  "options": [
+   "A refusal naming years[1].year, which in the engine's own words must be 2028, the year after 2027 (contract years are consecutive)",
+   "A two-year ledger in which 2028 is treated as a year with nothing taken and a full deficiency paid on its ACQ",
+   "Two separate one-year reconciliations, each closing its own make-up account at the end of its own year",
+   "A ledger for 2027 and 2029 in which any make-up opened in 2027 counts one extra year of its period as spent"
+  ],
+  "answer": 0,
+  "explanation": "The engine refuses a list of contract years that skips a year, and its message reads: \"years[1].year must be 2028, the year after 2027 (contract years are consecutive); got 2029\". It invents no missing year, so there is no 2028 with a zero take. It does not split the call into one-year cases either, and it does not guess how a gap would age a make-up entry: the call is refused before anything is computed."
+ },
+ {
+  "prompt": "The power plant takes 5460000.000000 in 2028 against a take-or-pay quantity of 6148800.000000. The fixture's take-or-pay price of 2.180000 is the reported 2026 domestic base price held flat as a stated planning assumption. What does the engine return for the year?",
+  "options": [
+   "A deficiency of 688800.000000 and a payment of 0.000000, because the make-up right opened in 2028 cancels the payment for the year",
+   "A deficiency of 357000.000000 paid at 778260.000000",
+   "A deficiency payment of 13404384.000000, the whole of the year's money when the buyer falls under take-or-pay",
+   "A deficiency of 688800.000000 and a deficiency payment of 1501584.000000, on that planning price"
+  ],
+  "answer": 3,
+  "explanation": "The deficiency is the take-or-pay quantity less the quantity counted, 6148800.000000 less 5460000.000000, which is 688800.000000, and the engine's reason prices it at 688800 x 2.18 = 1501584 on the fixture's stated planning price. The make-up right does not cancel the payment: make-up is gas paid for now and taken later. 357000.000000 and 778260.000000 are the 2033 deficiency and its payment, a second entry in the same term. 13404384.000000 is the whole net to the seller for 2028, which adds the gas taken at the contract price to the deficiency payment."
+ },
+ {
+  "prompt": "In this course's legislated vocabulary, what is make-up?",
+  "options": [
+   "Gas the seller failed to make available on a day, owed back later",
+   "Gas paid for in a deficiency year and taken in a later year of its make-up period",
+   "Takes above a stated base in one year, credited against a deficiency that arises in some later year",
+   "Any quantity nominated above the MaxDCQ, supplied the next year"
+  ],
+  "answer": 1,
+  "explanation": "The vocabulary fixes make-up as gas paid for in a deficiency year and taken later, inside its make-up period. Gas the seller did not make available is a seller shortfall, which reduces the Adjusted ACQ and may carry damages; it is no make-up. Takes above a base credited against a later deficiency are carry-forward, the buyer's other right. A nomination above the MaxDCQ is simply not properly nominated for the part above it, and no right to later gas follows from it."
+ },
+ {
+  "prompt": "Which statement matches the engine's own basis for the order in which make-up is recovered?",
+  "options": [
+   "It defaults to 'first' when the contract is silent, since HMRC's manual lists make-up in priority as the usual arrangement",
+   "It is a required input with no default; 'after-adjusted-acq' is named as the reference text's order and the other two are variants the engine also computes",
+   "It is fixed at 'after-top-quantity', since ESMAP describes that order as normal, and the engine refuses the two other orders",
+   "It is chosen by the engine in each year as whichever of the three orders lets the buyer draw the most make-up gas"
+  ],
+  "answer": 1,
+  "explanation": "The engine's basis reads that 'after-adjusted-acq' is the reference text's order (the Commonwealth model agreement's Article 12.7.1) and that 'after-top-quantity' and 'first' are variants the engine also computes, and a call without an order is refused. There is no default, so a silent contract never falls back to 'first'. ESMAP's order is one of the three the engine computes, and it refuses none of them. The engine takes the order a contract states and never searches for the one that suits a party."
+ },
+ {
+  "prompt": "Three golden cases run the same years under each recovery order. In 2028 the buyer has 200.000000 of make-up open, an Adjusted ACQ of 1000.000000, a take-or-pay quantity of 800.000000, and takes 1100.000000. Under 'after-adjusted-acq', how much make-up does the engine take?",
+  "options": [
+   "200.000000, since make-up starts once the year's take-or-pay quantity of 800.000000 is taken and the whole aggregate fits",
+   "300.000000, the whole take above the take-or-pay quantity, which is more make-up than the aggregate holds for the buyer",
+   "0.000000, since make-up opened in 2027 cannot be drawn until the contract year after it has fully aged",
+   "100.000000, the take above the Adjusted ACQ"
+  ],
+  "answer": 3,
+  "explanation": "Under 'after-adjusted-acq' make-up is taken only after the Adjusted ACQ of the year is taken, so 1100.000000 less 1000.000000 gives 100.000000. The figure 200.000000 is what the engine returns under 'after-top-quantity' and 'first' on the same years, which is why the order is a stated term. 300.000000 is more than the 200.000000 the aggregate holds, so no order can draw it. Make-up opened in 2027 is usable from 2028, the first year of its period."
+ },
+ {
+  "prompt": "Under the 'first' order, a buyer with 200.000000 of make-up open takes 800.000000 in 2028 against a take-or-pay quantity of 800.000000. What does the engine return for the year?",
+  "options": [
+   "Make-up of 200.000000 taken first, 600.000000 counted and a new deficiency of 200.000000",
+   "800.000000 counted and no deficiency, because the year's whole take meets the take-or-pay quantity exactly",
+   "Make-up of 0.000000, because under 'first' make-up waits until the year's own take-or-pay quantity has been taken",
+   "Make-up of 200.000000 taken and 800.000000 counted"
+  ],
+  "answer": 0,
+  "explanation": "Under 'first' make-up is taken in priority, before the year's own quantity, so the engine draws 200.000000 of make-up and counts only 600.000000 toward the year's take-or-pay quantity. That leaves a deficiency of 200.000000, paid at 200 x 3 = 600, which opens a new make-up entry. Counting the whole 800.000000 ignores the make-up taken. Waiting for the take-or-pay quantity is the 'after-top-quantity' order. Make-up gas is never counted twice: the counted quantity is the take less the make-up taken."
+ },
+ {
+  "prompt": "A golden case opens make-up of 100.000000 from 2027 and 50.000000 from 2028, each for 3 contract years. In 2029 the buyer takes 80.000000 of make-up. In 2030 it takes 30.000000 more. Where does the engine draw the 2030 make-up from?",
+  "options": [
+   "30.000000 from 2028, the newer entry, since the latest deficiency is recovered before the older ones",
+   "15.000000 from each of the two entries, split evenly because both are still inside their make-up periods",
+   "20.000000 from 2027 and 10.000000 from 2028",
+   "30.000000 from 2027, the older entry, which the rule draws first whatever balance it has left open"
+  ],
+  "answer": 2,
+  "explanation": "The model agreement's Article 12.7 attributes make-up first in first out, so the engine drains 2027 first: 80.000000 in 2029 leaves 20.000000 of it, and the 2030 draw takes that 20.000000 and then 10.000000 from 2028. Drawing the newest entry first reverses the stated rule. An even split has no basis in the text. The 2027 entry held only 20.000000 by 2030, so 30.000000 cannot come from it alone."
+ },
+ {
+  "prompt": "In 2029 the power plant takes 7875000.000000 against an Adjusted ACQ of 7665000.000000, with 688800.000000 of make-up open from 2028 and the order 'after-adjusted-acq'. How much make-up does the engine take?",
+  "options": [
+   "688800.000000, the whole aggregate, since the take is above the year's take-or-pay quantity of 6132000.000000",
+   "478800.000000, what stays open",
+   "0.000000, until the period's last year",
+   "210000.000000, drawn from the 2028 entry"
+  ],
+  "answer": 3,
+  "explanation": "With make-up taken only after the Adjusted ACQ, the draw is 7875000.000000 less 7665000.000000, which is 210000.000000, and the engine's reason reads \"make-up of 210000 taken from the make-up aggregate 688800\". Passing the take-or-pay quantity does not release the whole aggregate under this order. 478800.000000 is what stays open after the draw. Make-up is usable in every year of its period, from the first year after the deficiency."
+ },
+ {
+  "prompt": "In 2030 the Ekene power plant's take lands exactly on its Adjusted ACQ of 7665000.000000 while 478800.000000 of make-up is still open under its stated order. How much of that make-up is drawn?",
+  "options": [
+   "None, because make-up is taken only strictly above the Adjusted ACQ",
+   "478800.000000, because the take is well above the take-or-pay quantity of 6132000.000000 and the aggregate is open",
+   "The gap between the Adjusted ACQ and the take-or-pay quantity, which the engine draws as make-up whenever the aggregate can cover it",
+   "Half of the open aggregate, released at the Adjusted ACQ"
+  ],
+  "answer": 0,
+  "explanation": "The engine's reason reads \"make-up aggregate 478800 available and none taken, because taken 7665000 does not exceed the Adjusted ACQ 7665000\": a take equal to the Adjusted ACQ leaves nothing above it to count as make-up. Clearing the take-or-pay quantity matters under 'after-top-quantity', which this agreement does not state. No rule measures make-up from the gap between the two quantities, and no rule releases half an aggregate."
+ },
+ {
+  "prompt": "A contract's make-up terms are typed with the key makeup, all in lower case. What does the engine return?",
+  "options": [
+   "A ledger run with no make-up right, the block being dropped",
+   "A ledger run on the make-up terms, since the engine matches its keys without regard to upper or lower case",
+   "A refusal: makeup is not an accepted key, with the accepted top-level keys listed",
+   "A ledger run on the model agreement's own make-up terms"
+  ],
+  "answer": 2,
+  "explanation": "The engine refuses any key it does not read, and the message is its own: \"makeup is not an accepted key; the accepted keys at the top level are years, topPct, makeUp, carryForward\". It never drops a misspelt block silently, so no ledger runs without make-up. Keys are matched exactly, case included. The engine holds no default make-up terms to fill in, which is why a missing makeUp block is refused too."
+ },
+ {
+  "prompt": "What quantity does the engine count toward the power plant's 2029 take-or-pay quantity, in a year it takes 7875000.000000 and draws 210000.000000 of make-up?",
+  "options": [
+   "7875000.000000, the whole take",
+   "7665000.000000, the take less the make-up taken",
+   "7875000.000000 plus the 210000.000000 drawn, since the draw is paid gas that the buyer has now received",
+   "6132000.000000, the take-or-pay quantity itself, which is all the counted quantity can ever reach in a year"
+  ],
+  "answer": 1,
+  "explanation": "The counted quantity is the take less the make-up taken, 7875000.000000 less 210000.000000, which is 7665000.000000, as the ledger prints it. Counting the whole take would count the make-up gas twice, once in 2028 when it was paid for and again in 2029. Adding the draw doubles it the other way. The counted quantity is not capped at the take-or-pay quantity: in 2029 it is above it and there is no deficiency."
+ },
+ {
+  "prompt": "The model agreement published by the Commonwealth Secretariat (2025, CC BY 4.0) states the obligation that every row of the ledger tests. Which quantity does its Article 12.6 oblige the buyer to take and pay for, or pay for if not taken, in each contract year?",
+  "options": [
+   "At least the Take or Pay Quantity",
+   "At least the Annual Contract Quantity, before the stated reductions for maintenance and force majeure",
+   "At least the Adjusted ACQ, with the deficiency payment charged on anything the buyer leaves untaken",
+   "At least the DCQ on every day, with each day's buyer shortfall paid for at the end of the month"
+  ],
+  "answer": 0,
+  "explanation": "Article 12.6 reads: \"In each Contract Year Buyer shall be obligated to take and pay for, or to pay for if not taken, a quantity of Gas at least equal to the Take or Pay Quantity.\" The ACQ and the Adjusted ACQ are the quantities the take-or-pay quantity is built from; the obligation is the stated percentage of the Adjusted ACQ. The daily balance records buyer shortfall by day, but the payment is reconciled once a contract year."
+ },
+ {
+  "prompt": "At the end of 2028, what does the power plant ledger carry into 2029?",
+  "options": [
+   "A carry-forward credit of 688800.000000, available against any deficiency the buyer runs up later in the term",
+   "A 2029 take-or-pay quantity raised by 688800.000000, so that the buyer takes the deficiency on top of the year",
+   "Nothing, since the payment closes every account",
+   "Make-up outstanding of 688800.000000, recoverable to the end of 2031"
+  ],
+  "answer": 3,
+  "explanation": "The 2028 deficiency is paid and opens as make-up: the engine's reason reads \"the buyer may make up 688800 in the 3 contract years after 2028, to the end of 2031\". Carry-forward is a different right, credited from takes above a base, and the power plant agreement states none. The ledger never raises a later year's take-or-pay quantity. The payment closes the year's obligation and opens the make-up account; it does not close that account."
+ },
+ {
+  "prompt": "Why does the power plant's take-or-pay quantity read 6148800.000000 in 2028 and 6132000.000000 in 2029, with no reduction stated in either year?",
+  "options": [
+   "2028 carries the deficiency that the buyer runs up that year, which raises its take-or-pay quantity above the next year's",
+   "2029 takes the make-up of 210000.000000 off its ACQ before the percentage of 80 percent is applied to it",
+   "2028 is a leap year of 366 days, so its ACQ is 7686000.000000",
+   "2028 is the year the domestic base price is re-determined, so the engine scales its ACQ by the new price"
+  ],
+  "answer": 2,
+  "explanation": "The ACQ is the DCQ times the days in the contract year: 21000.000000 over 366 days gives 7686000.000000 in 2028 and over 365 days 7665000.000000 in 2029, and 80 percent of each gives the two take-or-pay quantities. A deficiency is measured against the take-or-pay quantity and does not change it. Make-up taken reduces the counted quantity and leaves the ACQ alone. Prices do not enter the quantities at all."
+ }
+]
