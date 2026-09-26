@@ -224,9 +224,9 @@ q(1, "What does modularrefinery_cases.json hold?",
  "oracle_modularrefinery.py writes it, keeping annual accounts and a dated tax-loss ledger used oldest first, and restating the mid-year NPV from the screening engine.")
 
 q(0, "Held item H2 leaves a fuller capital allowance model open. Which part of the Academy owns it?",
- "The Economics module",
+ "The Economics & Commercial module",
  ["The supply course", "The crude course", "This course's Expert tier"],
- "The held item names the Economics module as the owner of a fuller allowance model, and says carrying the loss forward covers the refinery case.")
+ "The held item names the Economics & Commercial module as the owner of a fuller allowance model, and says carrying the loss forward covers the refinery case.")
 
 q(3, "Is there a published source in the engines repository for the 0.6 and 0.9 exponents?",
  "No; none is in the engines repository.",

@@ -87,7 +87,7 @@ q(2, "Held item H2 is taught as a limit of the screening engine. What does it sa
  ["A royalty setting for a plant that buys its crude.",
   "Any way to carry a tax loss into later years.",
   "A mid-year discounting convention for the NPV."],
- "H2: the screening engine depreciates capital in the year it is spent and offers no capital allowance schedule starting at commissioning. Carrying the loss forward covers the refinery case, and a fuller allowance model belongs to the Economics module.")
+ "H2: the screening engine depreciates capital in the year it is spent and offers no capital allowance schedule starting at commissioning. Carrying the loss forward covers the refinery case, and a fuller allowance model belongs to the Economics & Commercial module.")
 
 q(1, "What net cash flow does the ODIOMA expansion read in 2028?",
  "-58.9160, capex with nothing earned",

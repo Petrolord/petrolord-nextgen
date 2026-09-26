@@ -6,7 +6,7 @@ The clipping rule is now applied to the whole grid. Every one of the 201 live no
 
 Of the 201 mapped nodes, 169 hold oil at the 1560 m contact. The other 32 do not, because their TOP_SAND value is below the contact, so the clipped column comes out zero or less and the node is discarded.
 
-Those 32 nodes are not blank. They are fully mapped, they carry a top and a base, and the mapping course would report them as live. They are ground where the sand lies entirely beneath the water. Two counts now travel with the map, and they answer different questions.
+Those 32 nodes are not blank. They are fully mapped, they carry a top and a base, and the Subsurface Mapping course would report them as live. They are ground where the sand lies entirely beneath the water. Two counts now travel with the map, and they answer different questions.
 
 | Count | Value | What it measures |
 | --- | --- | --- |
@@ -29,7 +29,7 @@ Each node stands for one cell of 100 by 100 m, which is 10,000 square metres. So
 
 $$169 \times 10{,}000 = 1{,}690{,}000 \text{ square metres} = 1.69 \text{ km}^2$$
 
-That is the oil area: the footprint of the accumulation at this contact. Area is the quantity worth quoting, for the reason the mapping course gave when it dealt with live node counts. A count depends on the cell size you happened to choose, and an area does not. If someone regridded Ekene at 50 m the cell count would go up by roughly a factor of four and the area would land in the same place.
+That is the oil area: the footprint of the accumulation at this contact. Area is the quantity worth quoting, for the reason the Subsurface Mapping course gave when it dealt with live node counts. A count depends on the cell size you happened to choose, and an area does not. If someone regridded Ekene at 50 m the cell count would go up by roughly a factor of four and the area would land in the same place.
 
 The oil area is also the number a facilities engineer or a well planner will ask for first, because it says how much ground has to be drained and therefore how the wells might be spaced across it.
 

@@ -32,7 +32,7 @@ And it cannot make a predicted depth into a pick. That boundary held through all
 
 Two places, and they take different things from you.
 
-**Mapping takes the picks.** A mapper contours a surface from control points, and your correlated tops are those points. What they need from you is the depth, the surface name and the confidence, which is why the labelling discipline matters more than it looks. A predicted TOP_B handed over as a measured one becomes a control point that pulls a contour toward a depth nobody drilled, and the map will look no different from a correct one. The mapping course also uses relief the way this course defined it, as the spread of a surface across its control, so the 34 m over three wells goes upward exactly as written.
+**Mapping takes the picks.** A mapper contours a surface from control points, and your correlated tops are those points. What they need from you is the depth, the surface name and the confidence, which is why the labelling discipline matters more than it looks. A predicted TOP_B handed over as a measured one becomes a control point that pulls a contour toward a depth nobody drilled, and the map will look no different from a correct one. The Subsurface Mapping course also uses relief the way this course defined it, as the spread of a surface across its control, so the 34 m over three wells goes upward exactly as written.
 
 **Volumetrics takes the surfaces.** Gross rock volume is built between a top surface and a base surface or a contact, so the intervals you measured are what a resource number rests on. The growth you found is why a constant thickness assumption is wrong on this section, and an evaluator who books a volume from a single average thickness has thrown away the 14 m range you measured.
 

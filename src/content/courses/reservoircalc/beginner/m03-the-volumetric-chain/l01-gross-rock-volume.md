@@ -6,7 +6,7 @@ That is why it comes first, and it is also why an error here is the most expensi
 
 ## The cell is the unit of accounting
 
-The mapping course left you with a gridded surface rather than a smooth mathematical shape, and volumetrics works with what mapping produced. The grid has a 100 m cell, so each live node stands for one square cell of
+The Subsurface Mapping course left you with a gridded surface rather than a smooth mathematical shape, and volumetrics works with what mapping produced. The grid has a 100 m cell, so each live node stands for one square cell of
 
 $$100 \times 100 = 10{,}000 \text{ square metres}$$
 
@@ -42,7 +42,7 @@ The largest column is at the crest of the mapped surface:
 
 $$1560 - 1539.7181396484375 = 20.2818603515625 \text{ m}$$
 
-That crest, as the mapping course explained at length, is 1.2819 m shallower than any well pick, because a spline bending through six control points rises slightly above its highest pin. The maximum oil column therefore inherits an artefact of the interpolator. It is the right answer to the question the panel asks, and it is also a reminder that the tallest column on a map is usually the least supported number on it.
+That crest, as the Subsurface Mapping course explained at length, is 1.2819 m shallower than any well pick, because a spline bending through six control points rises slightly above its highest pin. The maximum oil column therefore inherits an artefact of the interpolator. It is the right answer to the question the panel asks, and it is also a reminder that the tallest column on a map is usually the least supported number on it.
 
 ## The sum
 

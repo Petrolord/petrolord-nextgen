@@ -911,7 +911,7 @@ section('HELD, DECIDED, AND WHAT THE ORACLES CHECK');
   out('');
   out('HELD, taught as stated limits and never graded:');
   out(`- H1. The scaling exponents ${RAW.modularRefinery.SCALING_EXPONENT.STICK_BUILT} and ${RAW.modularRefinery.SCALING_EXPONENT.MODULAR} are defaults for a vendor's own figures to replace. No published source for them is in the engines repository.`);
-  out('- H2. The screening engine depreciates capital in the year it is spent and offers no capital allowance schedule starting at commissioning. Carrying the loss forward covers the refinery case; a fuller allowance model belongs to the Economics module.');
+  out('- H2. The screening engine depreciates capital in the year it is spent and offers no capital allowance schedule starting at commissioning. Carrying the loss forward covers the refinery case; a fuller allowance model belongs to the Economics & Commercial module.');
   out('- H3. materialBalance counts receipts in and deliveries, burns, flares, vents and losses out, and a unit run moves nothing. A refinery\'s crude leaves its tank through the crude unit and its products arrive from units, so the function cannot close a refinery tank; it serves a tank whose movements are receipts and deliveries. This course prints no material balance.');
   out('');
   out('Limits the engines state themselves: yields are fixed vectors; quality is not carried through the plan; one period at a time with no inventory between periods; the schedule models no tank capacity, jetty window or turnaround.');

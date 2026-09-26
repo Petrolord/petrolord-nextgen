@@ -1102,7 +1102,7 @@ w(sec(24, 'Vocabulary collisions, legislated before any lesson is written (bindi
 w();
 w('1. "dose" already means an inhibitor or methanol dose in the Flow Assurance and Gas Processing courses. Here it is a percentage of a daily noise allowance. RULE: write "noise dose" on first use in every lesson and every bank question, and never bare "dose" in a prompt, an option or a heading.');
 w('2. "exposure" already means a financial or cost exposure in the Field Development Planning, Uncertainty and Well Cost courses. RULE: always qualify it: noise exposure, chemical exposure, heat exposure.');
-w('3. "noise" already means scatter in data in the Decline Curve Analysis, Well Test and Seismolord courses. Here it is sound. RULE: say "sound level" for a reading and "noise exposure" for a dose.');
+w('3. "noise" already means scatter in data in the Decline Curve Analysis, Well Test and Seismic Interpretation courses. Here it is sound. RULE: say "sound level" for a reading and "noise exposure" for a dose.');
 w('4. "exchange rate" already means a currency rate in the Economics courses. RULE: always "decibel exchange rate" or "an exchange rate of 5 dB".');
 w('5. "heat" already means a heat duty in the Heat Transfer course and flare radiation in the Separation and Relief courses. RULE: always "heat stress" for this course\'s subject.');
 w();

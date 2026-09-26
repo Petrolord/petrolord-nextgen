@@ -1,6 +1,6 @@
 # Reporting a volume honestly
 
-The mapping course closed its reading module with a list of five questions to ask of a map before believing a single contour. This lesson does the same job for a volume, and the rule behind it is the same rule: a number is only as good as the statement of what supports it.
+The Subsurface Mapping course closed its reading module with a list of five questions to ask of a map before believing a single contour. This lesson does the same job for a volume, and the rule behind it is the same rule: a number is only as good as the statement of what supports it.
 
 ## A single STOIIP is not a result
 

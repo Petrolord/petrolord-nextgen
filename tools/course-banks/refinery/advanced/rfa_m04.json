@@ -129,7 +129,7 @@
    "A mid-year discounting convention for the NPV."
   ],
   "answer": 2,
-  "explanation": "H2: the screening engine depreciates capital in the year it is spent and offers no capital allowance schedule starting at commissioning. Carrying the loss forward covers the refinery case, and a fuller allowance model belongs to the Economics module."
+  "explanation": "H2: the screening engine depreciates capital in the year it is spent and offers no capital allowance schedule starting at commissioning. Carrying the loss forward covers the refinery case, and a fuller allowance model belongs to the Economics & Commercial module."
  },
  {
   "prompt": "What net cash flow does the ODIOMA expansion read in 2028?",

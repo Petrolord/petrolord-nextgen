@@ -32,7 +32,7 @@ The whole map hangs on that word zero.
 
 A zero at a node says the model computed a thickness there and found none. TopB and BaseB occupy the same depth at that node, there is no rock between them, and the zone is absent. It is a result, produced from data, at a node where everything the calculation needed was present.
 
-Compare that with what the mapping course called a dead node. There, the grid held a null, the industry sentinel value, at nodes the extrapolation limit had masked. A null says nothing was computed here, because the control points did not reach this ground. It is a statement about the map's support rather than about the subsurface. The rock beyond that limit may be thick, thin or absent, and the map declines to guess.
+Compare that with what the Subsurface Mapping course called a dead node. There, the grid held a null, the industry sentinel value, at nodes the extrapolation limit had masked. A null says nothing was computed here, because the control points did not reach this ground. It is a statement about the map's support rather than about the subsurface. The rock beyond that limit may be thick, thin or absent, and the map declines to guess.
 
 Two words that look similar on a colour scale, two entirely different claims:
 

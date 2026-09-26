@@ -398,13 +398,13 @@
  {
   "prompt": "Held item H2 leaves a fuller capital allowance model open. Which part of the Academy owns it?",
   "options": [
-   "The Economics module",
+   "The Economics & Commercial module",
    "The supply course",
    "The crude course",
    "This course's Expert tier"
   ],
   "answer": 0,
-  "explanation": "The held item names the Economics module as the owner of a fuller allowance model, and says carrying the loss forward covers the refinery case."
+  "explanation": "The held item names the Economics & Commercial module as the owner of a fuller allowance model, and says carrying the loss forward covers the refinery case."
  },
  {
   "prompt": "Is there a published source in the engines repository for the 0.6 and 0.9 exponents?",
