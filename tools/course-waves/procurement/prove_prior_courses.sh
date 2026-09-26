@@ -18,9 +18,11 @@
 # engines: the digest (build_digest.sh), fields.json and precision.json
 # (make_fields.mjs, which runs the capstone generator), and compares each byte
 # for byte with the committed copy and with the sha256 pinned in waves.json.
-# The economics courses that share cashflow.ts and afe.js (EC2 fiscal, EC3
-# uncertainty, EC5 portfolio) are "inputs" kits that cannot be rebuilt from the
-# repository; part 1 proves the files they run did not move.
+# EC1 cashflow and EC2 fiscal, re-cut at main e8fb6fa8c, rebuild their digest
+# and fields.json from their committed kits too. The other economics courses
+# that share cashflow.ts and afe.js (EC3 uncertainty, EC5 portfolio) are
+# "inputs" kits that cannot be rebuilt from the repository; part 1 proves the
+# files they run did not move.
 set -euo pipefail
 NG=${NG:-/root/wt-sc2-nextgen}
 ENG="$NG/packages/engines"
@@ -88,4 +90,25 @@ for spec in "D1:dataqc" "D2:mlcore" "D3:facies" "D4:forecastml" "D5:appliedai" "
   done
   unset ${P}_WAVE_DIR ${P}_ENGINES ${P}_REPO ${P}_TOLERANCE
 done
-[ $fail = 0 ] && echo "PRIOR COURSES UNCHANGED: no shared vendored path moved; D1, D2, D3, D4, D5, H4 and H5 digests, fields and precision rebuild byte-identical against $ENG" || { echo "PRIOR COURSES: A DIFFERENCE"; exit 1; }
+# EC1 cashflow and EC2 fiscal, re-cut onto the PIA 2021 / NTA 2025 repair at
+# main e8fb6fa8c (#266), run cashflow.ts itself (and fiscal afe.js), the two
+# shared files vendor_procurement.sh leaves with their owners. Their kits now
+# rebuild from the repository, the way their own
+# tools/course-waves/cashflow/prove_prior_courses.sh does it.
+for W in cashflow fiscal; do
+  src="$NG/tools/course-waves/$W"; dst="$SCR/$W"; cp -rp "$src" "$dst"
+  if [ $W = cashflow ]; then
+    (cd "$dst" && EC1_WAVE_DIR="$dst" EC1_ENGINES="$ENG" EC1_REPO="$NG" sh ./build_digest.sh > digest.tmp 2>digest.err && mv digest.tmp digest.txt \
+      && EC1_WAVE_DIR="$dst" EC1_ENGINES="$ENG" node ./ec1_fields.mjs > fields.log 2>&1) || { echo "EC1 $W: rebuild FAILED"; tail -3 "$dst/digest.err" "$dst/fields.log"; fail=1; continue; }
+  else
+    (cd "$dst" && EC2_WAVE_DIR="$dst" EC2_ENGINES="$ENG" EC2_REPO="$NG" sh ./build_digest.sh > digest.tmp 2>digest.err && mv digest.tmp digest.txt \
+      && EC2_WAVE_DIR="$dst" EC2_ENGINES="$ENG" EC2_REPO="$NG" node ./ec2_fields.mjs --json > fields.log 2>&1) || { echo "EC2 $W: rebuild FAILED"; tail -3 "$dst/digest.err" "$dst/fields.log"; fail=1; continue; }
+  fi
+  for f in digest.txt fields.json; do
+    if cmp -s "$src/$f" "$dst/$f"; then v=IDENTICAL; else v=DIFFERS; fail=1; fi
+    pin=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))[sys.argv[2]]['pins'][sys.argv[3]])" "$NG/tools/course-waves/waves.json" "$W" "$f")
+    got=$(sha256sum "$dst/$f" | cut -d' ' -f1); [ "$pin" = "$got" ] && pv="matches its waves.json pin" || { pv="DOES NOT MATCH its waves.json pin"; fail=1; }
+    printf 'EC %-12s %-15s %s, %s  sha256 %s\n' "$W" "$f" "$v" "$pv" "${got:0:16}"
+  done
+done
+[ $fail = 0 ] && echo "PRIOR COURSES UNCHANGED: no shared vendored path moved; D1, D2, D3, D4, D5, H4, H5, EC1 cashflow and EC2 fiscal digests and fields rebuild byte-identical against $ENG" || { echo "PRIOR COURSES: A DIFFERENCE"; exit 1; }
