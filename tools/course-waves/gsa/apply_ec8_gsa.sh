@@ -87,11 +87,11 @@ FILES="$SEEDS
 $GOLIVE"
 digest_for() {
   case $1 in
-    20261109_ec8_gsa_course               ) echo 723fb241707b040bc727db2d88ecd15497a2a6dac67e509a5cbd77ca944ff9a5 ;;
-    20261109_ec8_gsa_beginner_deep        ) echo 85717de1cbff7d06d6c4a4c1cd60d83fbe02e8d65525a54c201f9867aa930436 ;;
-    20261109_ec8_gsa_intermediate_deep    ) echo 4d76c6b959ad2235c2d50152ae30e64d920c8055227b50e15a9ebba5e5fd6048 ;;
-    20261109_ec8_gsa_advanced_deep        ) echo 591e4a11eb7d97b318d274fc606ccafdff54a81ba62a545969ee6e8b9f0bd3a3 ;;
-    20261109_ec8_gsa_go_live              ) echo 31e6fdc0d8ea3503e0405dc03db4a7faeb84eb3fb016ba0ebedc42237c1c87c5 ;;
+    20261109_ec8_gsa_course               ) echo 6d9c310c5e8929f75adeae61abad1910a6f42484a92f08100c464c49e640d790 ;;
+    20261109_ec8_gsa_beginner_deep        ) echo 262d52eda4074b43e6b2f1955a0f1ab4652b2205da4d3ae3b3d57b6be4f5ccfc ;;
+    20261109_ec8_gsa_intermediate_deep    ) echo fcf7612a8f633c3795cf374b5b039ceda9c2f081ad631a3d2619547c6795c36d ;;
+    20261109_ec8_gsa_advanced_deep        ) echo e32c35c500338569ae8ce6c04cee9d8c2c631d93cf8a86dccb67d0ea5c3e7ed6 ;;
+    20261109_ec8_gsa_go_live              ) echo 93f39a3ec2b0394a46c2fae7400eb38b4dd78bd804d8396772a0f220fe1b4b83 ;;
     *) echo UNPINNED ;;
   esac
 }
