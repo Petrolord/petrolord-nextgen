@@ -41,7 +41,7 @@ Under the table two tiles print the total beneficial interest and the total payi
 
 ## Basis and source
 
-Under the reasons, the engine prints its rule and its carriers' rule, the same two sentences on every case, so you can check any row of the table against them by hand. Then comes the Source block, which cites Norway JOA Art. 8.1 for contribution by participating interest and PIA s.85(4) for the carried interest provision.
+Under the reasons, the engine prints its rule and its carriers' rule, so you can check any row of the table against them by hand. Then comes the Source block, which cites Norway JOA Art. 8.1 for contribution by participating interest and PIA s.85(4) for the carried interest provision.
 
 ## Exercise
 
