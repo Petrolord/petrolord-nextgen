@@ -87,7 +87,7 @@ is EXACTLY a message the digest prints.
 
 ## THE REFUSALS, BY NAME
 
-Digest section 7 tables 20 refusals. **Quote the engine's message in a
+Digest section 7 tables 19 refusals. **Quote the engine's message in a
 blockquote.** The ones each tier must teach:
 
 * Associate m01 l05 and m02: a marginal field given as a terrain (first

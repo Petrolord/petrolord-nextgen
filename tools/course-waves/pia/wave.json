@@ -40,10 +40,10 @@
   "state": "FOUNDATION: structure, digest, capstones, gates, panels, learning page and writer briefs; STOPS BEFORE LESSONS."
  },
  "digest": {
-  "lines": 1026,
+  "lines": 1025,
   "sections": 25,
-  "md5": "5cb2b1ee311322980399b35e3469fe4e",
-  "sha256": "11b45b5089dc3bbb3c9a5c159c3a4721e44aea68f011612570bd39bb5299027d"
+  "md5": "34863cf1ac2d1615e6559c3c1f58b535",
+  "sha256": "4b68f39152c3c3b2fe55ab93b69fd1a26a4003ccb31be7d26616aa81c6818706"
  },
  "fields": {
   "count": 18,
@@ -159,14 +159,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh cat-wip-pia /root/wt-ec7-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "pia_dump: 724 label-and-call, measurement and claim assertions run, 0 failed; 25 sections"
+   "summary": "pia_dump: 722 label-and-call, measurement and claim assertions run, 0 failed; 25 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules cat-wip-pia",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/cat-wip-pia/digest.txt: 1026 line(s), 25 section title(s) and 72 in-body marker(s) swept against their blocks, 32 history framings, 25 engine pin(s); 0 warned for a human read and 0 framed as curricul"
+   "summary": "[digestprose] /root/cat-wip-pia/digest.txt: 1025 line(s), 25 section title(s) and 72 in-body marker(s) swept against their blocks, 32 history framings, 25 engine pin(s); 0 warned for a human read and 0 framed as curricul"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -397,5 +397,31 @@
    "exit": 0,
    "summary": "gen_course: engine run 18 of 18 fields.json values equal what pia_capstone.mjs returned through /root/wt-ec7-nextgen/packages/engines, every tolerance the one gradedTolerance.js derives; case-file data re-read and equal "
   }
+ },
+ "fieldsDiscrimination": {
+  "odozi_2028_liquids_royalty_rate": "flat royalty, daily rate 365 days, tranche read on the share of the volume, five percent on every barrel",
+  "odozi_2029_production_royalty_usd": "flat royalty, old gas rates, gas in country ignored, working interest ignored",
+  "odozi_2030_hct_usd": "flat royalty, nddc outside hct base, hcdt current year, read as a prospecting licence, working interest ignored",
+  "odozi_2031_dev_levy_usd": "flat royalty, old gas rates, hcdt current year, gas in country ignored, working interest ignored",
+  "odozi_total_cit_usd": "flat royalty, old gas rates, hcdt current year, gas in country ignored, working interest ignored",
+  "odozi_government_take_pct": "flat royalty, old gas rates, nddc outside hct base, hcdt current year, read as a prospecting licence",
+  "nkemdi_2028_liquids_royalty_usd": "flat royalty, daily rate 365 days, daily rate crude only, working interest ignored",
+  "nkemdi_2029_production_allowance_usd": "no allowance after cap, prior production left out of the cap, read as a converted lease, working interest ignored",
+  "nkemdi_2029_hct_chargeable_profit_usd": "flat royalty, nddc outside hct base, no allowance after cap, daily rate crude only, working interest ignored",
+  "nkemdi_2031_cpr_deferred_usd": "cpr on gross revenue, cpr costs not apportioned, cpr carry dropped, working interest ignored",
+  "nkemdi_cpr_forfeited_usd": "cpr on gross revenue, cpr costs not apportioned, cpr carry dropped, working interest ignored",
+  "nkemdi_total_cit_usd": "flat royalty, old gas rates, hcdt current year, daily rate crude only, working interest ignored",
+  "alaku_2026_total_royalty_usd": "deep offshore step, flat royalty, old gas rates, gas in country ignored, price royalty on gas, working interest ignored",
+  "alaku_2026_hct_chargeable_profit_usd": "nta deep allowance kept, one framework per ledger, nddc outside hct base, deep offshore step, working interest ignored",
+  "alaku_2025_tet_usd": "tet 25 after 2023, levy in pia years, deep offshore step, price royalty on gas, working interest ignored",
+  "alaku_2027_dev_levy_usd": "one framework per ledger, flat royalty, old gas rates, price royalty on gas, working interest ignored",
+  "alaku_2028_cit_usd": "escrow condition taken as met, one framework per ledger, flat royalty, price royalty on gas, working interest ignored",
+  "alaku_total_cit_usd": "deep offshore step, one framework per ledger, escrow condition taken as met, flat royalty, price royalty on gas, working interest ignored"
+ },
+ "openItems": {
+  "ENGINE FINDINGS": "No engine defect found at the foundation. One WORDING finding for the lead: two refusal messages (pia_terrain \"marginal_field\" and pia_capex_recovery_years other than 5) end with a sentence telling the user to set pia_legacy_pre_audit to reproduce a pre-audit run, which is repair history in learner-visible engine text. The course prints both verbatim in the digest and the briefs tell writers to quote their first sentences only; gate_vocabulary exempts the two sentences by exact string in the digest only. An engines rewording would remove the exemption.",
+  "TEXT FINDINGS (concepts.json, for the audit record)": "NTA s.197(1)(d) also deletes PIA Seventh Schedule para 14(6), which AUDIT-PIA-2021 does not list. Under the NTA the Service administers royalty (NTA s.89(2), Seventh Schedule para 1(1)); PIA s.259(b) gave royalty to the Commission. REGS r.13(2)(b) covers 'less than 10,000bopd' and (c),(d) 'greater than 10,000bopd', so exactly 10,000 bopd is in neither; both formulas give 0.0625 there and the engine returns 0.0625, so no figure moves. The NTA prints the top royalty by price band as 'at US $150 per barrel and above' where the PIA says 'above US $150'; the rate is continuous there. PIA Seventh Schedule para 14(4)(d) prints 250 where 350 is meant (quoted as printed).",
+  "SC2 PROOF": "prove_prior_courses.sh rebuilds SC2 procurement too whenever tools/course-waves/procurement is committed on the base; SC2 is not yet on NextGen origin/main (its PR is open), so the proof covers D1 to D5, H5, cashflow and fiscal today. This course vendors nothing, so no SC2 vendored path can move.",
+  "OPEN READINGS": "Taught as open questions, never graded; every graded field is bit-identical under act_2020, new-lease 15, aggressive_pml_30 and custom 20 (pia_capstone.mjs and discriminate.mjs)."
  }
 }

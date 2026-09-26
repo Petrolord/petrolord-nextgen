@@ -205,7 +205,7 @@ Every case in this course is an Ekene synthetic case (ours), read from the vendo
 
 Every case keeps its prices, opex and capex flat in money of the day (every escalator 0), discounts at 10 percent nominal, and states no hydrocarbon tax override, no tertiary education tax rate and no capital allowance life, so the engine applies the statutory values. Each section prints the production, capex and opex rows of the case it uses.
 
-# SECTION 7: Every refusal, with the engine's own words (owned by Associate m01 l05 and Associate m02 and Professional m02 and Expert m03)
+# SECTION 7: The refusals, with the engine's own words (owned by Associate m01 l05 and Associate m02 and Professional m02 and Expert m03)
 
 A refusal is a thrown error. The message states the exact condition that failed and, where the texts leave a value open, why there is no default. Each row below is a stated bad input handed to the engine; the message is the engine's, verbatim. A result returned with a note in `kpis.pia_notes` is a result, never a refusal.
 
@@ -226,17 +226,16 @@ A refusal is a thrown error. The message states the exact condition that failed 
 | `computeCashFlow` | pia_gas_in_country_share_pct 120 | pia_gas_in_country_share_pct must be a number from 0 to 100; got 120. |
 | `computeCashFlow` | pia_price_royalty_base "act_2021" | pia_price_royalty_base must be "regulations_2021" or "act_2020"; got "act_2021". |
 | `computeCashFlow` | pia_under_nta_2025_override "nta" | pia_under_nta_2025_override must be "auto", "force_pia" or "force_nta"; got "nta". |
-| `computeCashFlow` | pia_legacy_pre_audit "yes" | pia_legacy_pre_audit must be true or false; got "yes". |
 | `computeCashFlow` | no production rows | No production data found. Upload and process a CSV first. |
 | `deriveOilRoyaltyRate` | a daily rate of -1 | The crude oil and condensate daily rate must be a finite number of 0 or more; got -1. |
 | `deriveGasRoyaltyRate` | an in-country share of 100.5 | pia_gas_in_country_share_pct must be a number from 0 to 100; got 100.5. |
 | `priceRoyaltyBenchmarks` | base "act" | pia_price_royalty_base must be "regulations_2021" or "act_2020"; got "act". |
 
-20 refusals. Four rules the table shows:
+19 refusals. Four rules the table shows:
 - A value the texts leave open is a stated input with no default, and a run without it is refused with the reason: the hydrocarbon tax rate of a lease granted out of new acreage onshore or in shallow water (15 or 30), the deep offshore reading in a year under the Nigeria Tax Act 2025, and the escrow condition for a decommissioning fund in such a year.
 - A marginal field is not a terrain. The refusal names the two terrains a marginal field can be in and the flag that gives a converted producing marginal field its rate.
 - The capital allowance life is fixed by the texts at five years, so any other life is refused.
-- A refusal message is course content: quote it in a blockquote as the engine's own words. Two messages end with a sentence about `pia_legacy_pre_audit`, a platform switch that reproduces runs made before the engine followed the texts; the course does not teach that switch, and a lesson quoting one of those two messages quotes its first sentences only.
+- A refusal message is course content: quote it in a blockquote as the engine's own words. Two messages end with a sentence naming `pia_legacy_pre_audit`, a platform reproduction switch the course does not teach; a lesson quoting one of those two messages quotes its first sentences only.
 
 # SECTION 8: What is graded, where the practicals run, and what is never graded (owned by Associate m06 and Professional m06 and Expert m06)
 

@@ -162,7 +162,7 @@ field; frontier acreage; the NDDC opex base; a ledger forced to the Act alone.
 
 ## THE REFUSALS
 
-Digest section 7 tables 20 refusals. **Quote a refusal in a blockquote as the
+Digest section 7 tables 19 refusals. **Quote a refusal in a blockquote as the
 engine's own words.** Two of them end with a sentence naming the platform
 switch `pia_legacy_pre_audit`; this course does not teach that switch, so quote
 their first sentences only. A result returned with a note in `kpis.pia_notes` is

@@ -372,7 +372,7 @@ const rowsTable = (n) => {
 
 /* ============================================================ SECTION 7 */
 
-section('refusals', 'Every refusal, with the engine\'s own words', ['Associate m01 l05', 'Associate m02', 'Professional m02', 'Expert m03']);
+section('refusals', 'The refusals, with the engine\'s own words', ['Associate m01 l05', 'Associate m02', 'Professional m02', 'Expert m03']);
 w('A refusal is a thrown error. The message states the exact condition that failed and, where the texts leave a value open, why there is no default. Each row below is a stated bad input handed to the engine; the message is the engine\'s, verbatim. A result returned with a note in `kpis.pia_notes` is a result, never a refusal.');
 w();
 const ALPHA = GC.ekene_alpha_shallow_converted_nta;
@@ -399,7 +399,6 @@ const PROBES = [
   ['computeCashFlow', 'pia_gas_in_country_share_pct 120', alphaWith({ pia_gas_in_country_share_pct: 120 })],
   ['computeCashFlow', 'pia_price_royalty_base "act_2021"', alphaWith({ pia_price_royalty_base: 'act_2021' })],
   ['computeCashFlow', 'pia_under_nta_2025_override "nta"', alphaWith({ pia_under_nta_2025_override: 'nta' })],
-  ['computeCashFlow', 'pia_legacy_pre_audit "yes"', alphaWith({ pia_legacy_pre_audit: 'yes' })],
   ['computeCashFlow', 'no production rows', () => E.computeCashFlow({ cfg: clone(ALPHA.cfg), prodRows: [], capexRows: [], opexRows: [] })],
   ['deriveOilRoyaltyRate', 'a daily rate of -1', () => E.deriveOilRoyaltyRate('onshore', -1)],
   ['deriveGasRoyaltyRate', 'an in-country share of 100.5', () => E.deriveGasRoyaltyRate('onshore', 100.5)],
@@ -413,7 +412,7 @@ w(`${PROBES.length} refusals. Four rules the table shows:`);
 w('- A value the texts leave open is a stated input with no default, and a run without it is refused with the reason: the hydrocarbon tax rate of a lease granted out of new acreage onshore or in shallow water (15 or 30), the deep offshore reading in a year under the Nigeria Tax Act 2025, and the escrow condition for a decommissioning fund in such a year.');
 w('- A marginal field is not a terrain. The refusal names the two terrains a marginal field can be in and the flag that gives a converted producing marginal field its rate.');
 w('- The capital allowance life is fixed by the texts at five years, so any other life is refused.');
-w('- A refusal message is course content: quote it in a blockquote as the engine\'s own words. Two messages end with a sentence about `pia_legacy_pre_audit`, a platform switch that reproduces runs made before the engine followed the texts; the course does not teach that switch, and a lesson quoting one of those two messages quotes its first sentences only.');
+w('- A refusal message is course content: quote it in a blockquote as the engine\'s own words. Two messages end with a sentence naming `pia_legacy_pre_audit`, a platform reproduction switch the course does not teach; a lesson quoting one of those two messages quotes its first sentences only.');
 must('the two refusals that name the platform switch are the marginal field and the recovery life', REFUSED.filter((r) => /pia_legacy_pre_audit to true/.test(r[2])).map((r) => r[1]).join('|') === 'pia_terrain "marginal_field"|pia_capex_recovery_years 4', REFUSED.filter((r) => /pia_legacy_pre_audit/.test(r[2])).map((r) => r[1]).join('|'));
 
 /* ============================================================ SECTION 8 */
