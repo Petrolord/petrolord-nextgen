@@ -95,7 +95,7 @@
       "precision.json"
     ],
     "pins": {
-      "digest.txt": "3f88d819840f8e1d447d362d03328c827e9b61935bd13912ee131e93f7a90aa8",
+      "digest.txt": "54e0445278d47958f847cd8d58dd869c8d0473b1f24b1a68156c601212991fea",
       "fields.json": "7e55e1ade9cdaf32abd296e470bb4cf767ef7d989883a9c9851e6b07764ed3eb"
     },
     "recutNote": "EC7 PIA recut 2026-09-26 (engines 3.12.0 at 3778451, default path). First commit of the EC1 kit. fields.json carries the Expert set of lead decisions L1 and L3 (the served IKPOTO Expert config is refused by the corrected engine): the new-PML HCT rate is stated at 30 in the prompt and no Expert field depends on it; the 2035 CPR carry replaces the 2034 one (L3). discriminate_expert.mjs proves both. ec1_capstone.mjs renders all three prompts from the engine inputs into capstones.json and proves the Associate and Professional capstones byte-identical to the served rows. prove_prior_courses.sh proves qra unchanged."

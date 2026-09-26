@@ -355,7 +355,7 @@ w();
 // ---------------------------------------------------------------- Section 8
 w('# SECTION 8: The NPV profile, and the point that misses (owned by Professional m03, Expert m05)');
 w();
-w('The engine reports NPV at 0, 5, 8, 10, 12, 15 and 20 percent plus the applied rate. The header says the applied point always passes through the headline NPV. The engine labels and evaluates that point at the applied rate ROUNDED TO TWO DECIMALS, so on a real basis whose Fisher rate is not a round number it does not. Below, the profile as the engine returns it, then the headline NPV, then NPV recomputed by the engine\'s own npv() at the exact applied rate on the same discounted flows, then the oracle\'s number from the golden.');
+w('The engine reports NPV at 0, 5, 8, 10, 12, 15 and 20 percent plus the applied rate. The header says the applied point always passes through the headline NPV. The engine LABELS that point with the applied rate rounded to two decimals and EVALUATES it at the exact applied rate, so it passes through the headline NPV on a real basis whose Fisher rate is not a round number too; every gap below is 0.00. Below, the profile as the engine returns it, then the headline NPV, then NPV recomputed by the engine\'s own npv() at the exact applied rate on the same discounted flows, then the oracle\'s number from the golden.');
 w();
 const DIS = Object.fromEntries(G.disagreements.map((d) => [d.case, d]));
 for (const [label, res, c] of [['AKATA', AK, AKATA], ...['multiyear_pia_real', 'multiyear_jv_real', 'multiyear_pia_midyear_real', 'pia_loss_relief', 'allowance_cap_midyear', 'jv_analytic_decision_kpis', 'multiyear_pia_nominal'].map((n) => [n, RESULT[n], CASE[n]])]) {

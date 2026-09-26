@@ -11,7 +11,7 @@
   "explanation": "The levy lags the cost by a year, and the first year of a new field pays none unless somebody supplies a prior year; with pia_prior_year_opex_usd 20000000 the 2029 row reads 600000.00."
  },
  {
-  "prompt": "The worked example prints nddc 15000000.00 on opex of 182500000.00 while pia_onshore_new_lease prints 900000.00 on opex of 30000000.00. Both carry pia_nddc_levy_pct_of_opex 3. What makes the first one so large?",
+  "prompt": "The worked example prints nddc 15000000.00 on opex of 182500000.00 while pia_onshore_new_lease prints 2400000.00 on opex of 30000000.00 and capex of 50000000.00. Both carry the 3 percent rate. What makes the first one so large?",
   "options": [
    "pia_nddc_levy_fixed_usd 15000000 is set on the worked example, and a fixed sum replaces the percentage whatever the opex is.",
    "The worked example reads the levy on the prior year's opex of 170000000, and 3 percent of that is 5100000.00, which the engine then grosses up for the deductible NDDC.",
@@ -19,10 +19,10 @@
    "The worked example's opex is uploaded as twelve monthly rows and the levy is charged on each row at 3 percent and then summed twelve times over."
   ],
   "answer": 0,
-  "explanation": "A 3 percent field with no opex pays none, but the fixed sum is a flat 15000000.00 in every year regardless of opex; on AKATA, with no fixed sum, hcdt and nddc read the same 720000.00 and 741600.00 one year apart."
+  "explanation": "Without a fixed sum the levy is 3 percent of the year's total annual budget, opex plus capex: 3 percent of 80000000.00 is 2400000.00. The fixed sum is a flat 15000000.00 in every year regardless of spend. On AKATA, with no fixed sum, the NDDC reads 7020000.00, 2091600.00 and 763848.00 in 2029 to 2031 beside HCDT of 0.00, 720000.00 and 741600.00. The prior-year opex feeds HCDT only, the terrain sets no NDDC rate, and monthly rows are summed to a year before any levy."
  },
  {
-  "prompt": "pia_prior_year_opex_zero removes the 5100000.00 HCDT from the worked example. Both tax bases rise by exactly 5100000.00, HCT rises from 284810956.27 to 286340956.27, and NPV rises from 135185570.34 to 137098070.34, less than the levy saved. Why less?",
+  "prompt": "pia_prior_year_opex_zero removes the 5100000.00 HCDT from the worked example. Both tax bases rise by exactly 5100000.00, HCT rises from 285784994.46 to 287314994.46, and NPV rises from 141236909.83 to 143123909.83, less than the levy saved. Why less?",
   "options": [
    "The NPV is on the real basis, and the 5100000.00 saved in 2025 money is deflated by the 3 percent inflation before it reaches the NPV.",
    "The levy is deductible from both bases, so removing it raises HCT, CIT and TET, and the extra taxes take back part of the 5100000.00.",
@@ -30,21 +30,21 @@
    "The 5100000.00 comes back as a deferred CPR cost, which the cap defers to a later year that the one-year field does not have."
   ],
   "answer": 1,
-  "explanation": "Removing the levy raised both bases by the levy, and the CIT base sits 15000000.00 below the HCT base in both rows because NDDC is deducted for CIT and not for HCT."
+  "explanation": "Removing the levy raised both bases by the levy, so HCT, CIT and TET all rose and took back part of the saving. The two assessable profits stay equal to each other, 1058241648.19 with the levy and 1063341648.19 without it, because this oil-only field deducts HCDT and NDDC in both. The one-year field has no deflation to apply in its base year, HCDT has no minimum on the current year's opex, and the cost price ratio cap does not reach the levies."
  },
  {
-  "prompt": "On the worked example cit_assessable_profit is 1039994854.24 and hct_assessable_profit is 1054994854.24, a gap of exactly 15000000.00. What sits in that gap?",
+  "prompt": "On the worked example cit_assessable_profit and hct_assessable_profit both read 1058241648.19, and the NDDC is a fixed 15000000.00. Where does that NDDC sit?",
   "options": [
-   "The production allowance, which is deducted from the HCT base and not from the CIT base, and on this case the allowance is 45625000.00 before the price cap.",
-   "The HCDT of 5100000.00 together with the TET of 25999871.36, which are deducted for CIT because they are levies and not for HCT because they are taxes.",
-   "One year of the capital allowance on the 300000000.00 of capex, which CIT deducts at the assessable stage and HCT deducts one stage later.",
-   "The NDDC, which is deducted for CIT and not for HCT, and 15000000.00 is the fixed NDDC."
+   "Only in the HCT base; CIT takes the production allowance of 45625000.00 at the assessable stage in its place, and the two figures agree by coincidence of the round inputs.",
+   "In neither base: the HCDT of 5100000.00 and the TET of 31747249.45 are deducted there, and the NDDC comes off the cash alone, beside the taxes.",
+   "Only in the CIT base, with HCT deducting one year of capital allowance on the 300000000.00 of capex at the assessable stage to make up the difference.",
+   "In both bases: the hydrocarbon tax deducts it (PIA s.263(1)(f), (h)) as CIT does, so the two assessable profits agree."
   ],
   "answer": 3,
-  "explanation": "The allowance comes off later: hct_assessable_profit less 60000000.00 of capital allowance less 45625000.00 of production allowance is hct_chargeable_profit 949369854.24."
+  "explanation": "Both profit taxes deduct HCDT and NDDC, and on an oil-only field the shared costs enter the hydrocarbon tax whole, so the two assessable profits are equal. The allowances come off later: 1058241648.19 less 60000000.00 of capital allowance less 45625000.00 of production allowance is hct_chargeable_profit 952616648.19, while CIT takes the capital allowance only, for cit_chargeable_profit 998241648.19. The production allowance never reaches CIT, TET is a tax and is deducted from neither base, and no capital allowance enters either assessable profit."
  },
  {
-  "prompt": "The worked example's CPR cap is swept from 30 to 100 percent and cpr_costs_claimed stays 242500000.00 and NPV stays 135185570.34 at every setting. What does the sweep show about the cap?",
+  "prompt": "The worked example's CPR limit is swept from 30 to 100 percent and cpr_costs_claimed stays 242500000.00 and NPV stays 141236909.83 at every setting. What does the sweep show about the cap?",
   "options": [
    "The cap is a share of revenue, 438000000.00 even at 30 percent, and it does nothing while the claim of 242500000.00 sits below it.",
    "The cap is a share of the costs, and a cap that ranges from 30 to 100 percent of 242500000.00 is always satisfied by claiming the whole 242500000.00.",
@@ -52,10 +52,10 @@
    "The cap acts on the deferred pool from earlier years and the worked example, having one year, has no pool for the cap to bind on."
   ],
   "answer": 0,
-  "explanation": "The cap only exists where costs approach revenue: on AKATA in 2032 the cap is 75826707.47 against opex 26225448.00 plus 51000000.00 of allowance, and 1398740.53 defers."
+  "explanation": "The cap only acts where costs approach the liquids revenue: on AKATA in 2032 the cap, 65 percent of the oil revenue, is 73531102.32, and 1356394.56 defers. The cap is a share of revenue and never of the costs, it acts on converted and new leases alike, and on the worked example there is no pool and no binding cap in the only year."
  },
  {
-  "prompt": "cpr_forfeiture has a cpr_cap of 52000000.00, claims 52000000.00, defers 8000000.00 and prints hct_loss_carryforward 0.00. The field has no later year. What is the 8000000.00?",
+  "prompt": "cpr_forfeiture has a cpr_cap of 52000000.00, claims 52000000.00 and defers 8000000.00; the same row also carries a separate HCT loss of 512786.40 in hct_loss_carryforward. The field has no later year. What is the 8000000.00?",
   "options": [
    "A tax loss carried forward at the HCT rate, which the engine reports in cpr_deferred_to_next rather than in the loss column because it arose from the cap.",
    "A capital allowance the engine will claim in the next recovery year of the five, since the cap defers the allowance and not the opex.",
@@ -63,18 +63,18 @@
    "A cost that earns interest at the discount rate while it waits, so that the 8000000.00 grows to a larger claim in whichever year the cap next allows it."
   ],
   "answer": 2,
-  "explanation": "pia_cpr_carry_two_years adds 22000000.00 to the deferred pool in every year and forfeits 66000000.00 at cessation while hct_loss_carryforward reads 0.00 on every row; a deferral is not a loss."
+  "explanation": "pia_cpr_carry_two_years, at its stated 30 percent limit, adds 22000000.00 to the deferred pool in every year and forfeits 66000000.00 at cessation while hct_loss_carryforward reads 0.00 on every row; a deferral is not a loss. The 512786.40 on cpr_forfeiture is a real HCT loss: the production allowance takes the chargeable profit below zero after the capped claim. The deferral earns no interest and does not wait for the next allowance year."
  },
  {
-  "prompt": "AKATA at a CPR limit of 65 percent defers 1398740.53 in 2032 and 14561618.62 in 2033, then clears in 2034. At a limit of 40 percent HCT rises from 77020493.72 to 107354738.83 and NPV falls from 43223505.88 to minus 1723561.25. Why does a tighter cap hurt a declining field so much?",
+  "prompt": "AKATA at a CPR limit of 65 percent defers 1356394.56 in 2032 and 14120774.92 in 2033, then clears in 2034. At a limit of 40 percent HCT rises from 91654840.32 to 121989085.43 and NPV falls from 59766796.57 to 37056190.44. Why does a tighter cap hurt a declining field so much?",
   "options": [
    "A tighter cap lengthens the capex recovery from five years to more, and the allowance that is pushed past 2035 is never claimed.",
    "The cap is a share of a shrinking revenue while the costs are not shrinking, so more is deferred each year and what is still deferred when the field stops is lost.",
    "The cap at 40 percent is read on the costs rather than on the revenue, and 40 percent of the costs is far less than 65 percent of them.",
-   "The deferred costs become tax losses, and losses under the PIA are relieved at a lower rate than the 30 percent HCT that the costs would have offset."
+   "The deferred costs become tax losses, and losses under the PIA are relieved at a lower rate than the 30 percent HCT that the costs would have offset in the year they arose."
   ],
   "answer": 1,
-  "explanation": "In 2032 the cap is 75826707.47 against opex 26225448.00 and 51000000.00 of allowance; in 2034 the cap is 55829921.49 and the claim 51384196.40. The cap on a declining field is a tax on the decline."
+  "explanation": "At 40 percent the deferral starts in 2030 and grows in every later year, and more than 101 million is still deferred when the field stops, so it is never claimed. At 65 percent in 2032 the cap is 73531102.32; in 2034 it is 54139706.27 against a claim of 49828572.67. CIT stays 102166298.31 at either limit because the cap limits the hydrocarbon tax only. The cap does not lengthen the five-year allowance, is read on revenue, and never turns a deferral into a loss."
  },
  {
   "prompt": "computeProductionAllowance on a converted lease at 10 USD/bbl returns 2000000.00 on 1000000 bbl with cap applied false, where the same barrels at 80 USD/bbl return 2500000.00. What does the false flag report?",
@@ -88,40 +88,40 @@
   "explanation": "At 12.5 USD/bbl the two rules meet and the allowance is 2500000.00 either way; a reader who reads false as no cap reports 2500000.00 where the engine prints 2000000.00."
  },
  {
-  "prompt": "A new shallow water lease with 1000000 bbl in the year earns 8000000.00 from a prior cumulative of 99000000, 4000000.00 on 500000.00 eligible bbl from 99500000, and 0.00 from 100000000. How is the cap read?",
+  "prompt": "A new shallow water lease with 1000000 bbl in the year earns 8000000.00 from a prior cumulative of 99000000, 6000000.00 from 99500000, and 4000000.00 from 100000000. How is the cap read?",
   "options": [
-   "On lifetime barrels against pia_new_lease_prod_alw_cap_shallow_bbl 100000000, and the year that crosses the cap is split at the barrel that crosses it.",
+   "On lifetime barrels against the 100000000 cap: barrels below it earn 8 USD/bbl, later barrels 4 USD/bbl, and a crossing year is split.",
    "On the year's own barrels, so any year that lifts more than the remaining headroom loses the whole allowance for that year.",
    "On the prior cumulative alone, so a field that starts the year under 100000000 keeps the full 8000000.00 whatever it lifts in the year.",
    "On the price, since 8 USD/bbl is 10 percent of 80 and the 20 percent of price limit leaves headroom that shrinks as the cumulative rises."
   ],
   "answer": 0,
-  "explanation": "allowance_cap_midyear lifts 2000000.00 bbl from a prior 99000000 and reports prod_alw_eligible_bbl 1000000.00, allowance 8000000.00, cap applied true and cumulative_oil_bbl_lifetime 101000000.00; the 2026 row earns 0.00."
+  "explanation": "allowance_cap_midyear lifts 2000000.00 bbl from a prior 99000000: 1000000.00 below the cap and 1000000.00 after it, allowance 12000000.00, cap applied true, cumulative_oil_bbl_lifetime 101000000.00; its 2026 row earns 4000000.00 on 1000000.00 barrels, all after the cap. The year's own barrels, the prior cumulative alone and the price do not decide the split."
  },
  {
-  "prompt": "AKATA as a new lease from a prior cumulative of 0 and from a prior cumulative of 96000000 print identical 2029 rows, allowance 17600000.00 on 2200000.00 eligible bbl with the flag false, yet the life totals are 77440000.00 and 32000000.00 and NPV 56241834.89 against 46513356.33. Why is the first row identical?",
+  "prompt": "AKATA as a new lease, with the new-acreage hydrocarbon tax rate stated at 30 (a reading the texts leave open), prints identical 2029 rows from a prior cumulative of 0 and of 96000000: allowance 17600000.00 on 2200000.00 eligible bbl with the flag false. Yet the life allowances are 77440000.00 and 54720000.00. Why is the first row identical?",
   "options": [
    "The engine reads the prior cumulative only from the second year onward, so the first row of every new lease is priced as if the field were fresh.",
    "The 2029 row earns the allowance on the price cap alone, 20 percent of 82.000000, and the volume cap is only tested once the price cap stops binding.",
-   "The cap has not yet been reached in 2029; it is read on lifetime barrels, and it is the later years that lose the allowance, so only the totals show the difference.",
+   "The cap has not yet been reached in 2029; it is read on lifetime barrels, and the later years earn the after-cap rate.",
    "The flag false on both rows means the volume cap was disabled for the run, and the difference in totals comes from the shorter recovery period of the second case."
   ],
   "answer": 2,
-  "explanation": "At 96000000 prior the field passes 100000000 inside the life, and from that barrel on the eligible count is 0.00; HCT reads 74680493.72 against 61048493.72 with no cap."
+  "explanation": "From a prior of 96000000 the field passes 100000000 in 2030, and every barrel after that earns 4.00 USD/bbl where the fresh field earns 8.00, so only the totals differ. The allowances do not depend on the stated hydrocarbon tax rate; the HCT does, 75682840.32 against 82498840.32 at the stated 30. The prior cumulative is read from the first year, the price limit does not bind at 82, and the recovery period is five years in both runs."
  },
  {
-  "prompt": "pia_gas_only_hct_zero sells 20000000.00 Mscf and no liquids for 90000000.00. hct_assessable_profit is 0.00 and hct_tax 0.00, while CIT is 14880000.00 on cit_chargeable_profit 49600000.00. Why is one profit tax charged and not the other?",
+  "prompt": "pia_gas_only_hct_zero sells 20000000.00 Mscf and no liquids for 90000000.00. hct_assessable_profit is 0.00 and hct_tax 0.00, while CIT is 15420000.00 on cit_chargeable_profit 51400000.00. Why is one profit tax charged and not the other?",
   "options": [
    "The HCT rate is 0.000000 for a gas field under the conservative deep offshore reading, and the engine applies that reading to any field without oil.",
    "The production allowance on a gas field takes the HCT base to zero, while CIT, which has no allowance, is still charged.",
    "The HCT is charged only above the minimum effective tax rate of 15 percent, and CIT at 30 percent already satisfies it on a gas field.",
-   "The HCT base is oil and condensate; gas is left out unless pia_hct_include_gas_revenue is opened, while the CIT base includes gas."
+   "The HCT base is crude oil and condensate only (PIA s.260(1)), while the CIT base includes the gas revenue."
   ],
   "answer": 3,
-  "explanation": "With the hatch open the base is rebuilt on the whole revenue, hct_assessable_profit 68600000.00, hct_tax 19380000.00, and NPV falls from 17380000.00 to minus 2000000.00."
+  "explanation": "The hydrocarbon tax is charged on crude oil and condensate, so a gas-only field has no base for it. pia_gas_only_legacy_hct, the same field with pia_hct_include_gas_revenue true, prints the same HCT 0.00 and NPV 18318000.00. No deep offshore reading applies to a shallow water field, the production allowance is 0.00 with no liquids, and no minimum tax test runs in a 2025 year."
  },
  {
-  "prompt": "On the worked example's chargeable profit of 949369854.24 the HCT is 284810956.27 on a PML and 142405478.14 on a PPL, and the NPV moves from 135185570.34 to 277591048.48. What moved the tax?",
+  "prompt": "On the worked example's chargeable profit of 952616648.19 the HCT is 285784994.46 on a PML and 142892497.23 on a PPL, and the NPV moves from 141236909.83 to 284129407.06. What moved the tax?",
   "options": [
    "The PPL halves the production allowance and the capital allowance together, which halves the chargeable profit and therefore the tax charged on it.",
    "The licence type alone: deriveHctRate reads 0.300000 for a shallow water PML converted lease and 0.150000 for a PPL, on the same base.",
@@ -129,39 +129,39 @@
    "The PPL is read as a new lease, and the 8 USD/bbl allowance takes the base down to half of the converted lease figure."
   ],
   "answer": 1,
-  "explanation": "The framework does not move HCT: AKATA under force_pia reports the same 77020493.72 as under nta_2025. The licence moves take from 86.1703 percent to 71.6019 with nothing else changed."
+  "explanation": "The licence moves take from 85.5512 percent to 70.9331 with nothing else changed. The framework sets no different rate for a converted shallow water PML: AKATA reads 0.300000 in every year under force_pia and on auto. The PPL changes neither allowance, stays in the same 2025 year, and is not a new lease."
  },
  {
-  "prompt": "pia_deep_offshore_full pays HCT 0.00 and reports NPV 890564331.93; the same field reads HCT 419659147.53 under pia_deep_offshore_nta_aggressive with NPV 449025977.03, and 174857978.14 under the custom 12.5 with NPV 693827146.42. What decides which one is right?",
+  "prompt": "pia_deep_offshore_full, a 2025 year, pays HCT 0.00 and reports NPV 907723685.14. The same field under force_nta reads HCT 426107993.35 with the stated reading aggressive_pml_30 (NPV 466664592.02) and 177544997.23 with custom 12.5 (NPV 715227588.14). What decides the HCT?",
   "options": [
-   "Nothing in the engine. pia_deep_offshore_hct_interpretation is a string somebody chose, and conservative_zero is a default, not a finding.",
-   "The water depth: pia_water_depth_m 100 is the boundary at which the engine switches from the conservative reading to the aggressive one.",
-   "The framework date trigger: a base year of 2025 selects the 2021 Act and the conservative reading, and a later base year selects the aggressive one automatically.",
-   "The licence: a PML pays the aggressive 0.300000 and a PPL the custom rate, so the string is only a label for what the licence already decided."
+   "In a PIA year the Act, which charges deep offshore nothing; in an NTA year no text does, and the engine refuses the year until a reading is stated.",
+   "Water depth: pia_water_depth_m 100 is the boundary at which the engine switches from the conservative reading to the aggressive one by itself.",
+   "The date trigger alone: every NTA year takes aggressive_pml_30 by default, because the NTA extends the shallow water PML rate to every terrain it names.",
+   "A PML pays the aggressive 0.300000 and a PPL the custom rate, so the reading string is only a label for what the licence has already decided."
   ],
   "answer": 0,
-  "explanation": "On AKATA the same choice is NPV 141623594.88 against 61725382.46, a larger move than the oil price sweep from 82 to 120, which reaches 128984232.18."
+  "explanation": "NTA s.65(1) brings deep offshore into the hydrocarbon tax and s.72 prints rates only for onshore and shallow water, so conservative_zero, aggressive_pml_30 and custom are readings somebody states, and the choice stays open. On AKATA the choice is NPV 136554243.51 against 60060654.75, less than the move an oil price sweep from 82 to 120 makes, to 153901708.13. Water depth and licence do not set the NTA reading, and no reading is applied by default."
  },
  {
-  "prompt": "cpr_forfeiture has cit_assessable_profit 7987389.27 and its recoverable costs would take the base below zero. The engine reports cit_chargeable_profit 2662463.09 and cit_tax 798738.93. What became of the allowance the restriction refused?",
+  "prompt": "cpr_forfeiture has cit_assessable_profit 13987213.60 and a first-year allowance that would take the base below zero. The engine reports cit_chargeable_profit 4662404.53 and cit_tax 1398721.36. What became of the allowance the restriction refused?",
   "options": [
    "It became the 8000000.00 in cpr_deferred_to_next, which is the same refused allowance reported under the CPR label rather than the CIT one.",
-   "It was carried to the HCT computation on the same row, which is why the HCT base of 8487389.27 is higher than the CIT base.",
-   "It went into the allowance carryforward that engines 3.10.0 added, and then died with the field, because one year has no later year to claim it in.",
+   "It was carried into the HCT computation on the same row, where it lowers the hydrocarbon tax base below the CIT base by the refused amount.",
+   "It sits in cit_allowance_carryforward, 10675190.93, as CITA para 24(7) provides, and dies with the one-year field.",
    "It was written off in the year it arose, since this engine has never carried what the two-thirds restriction refuses."
   ],
   "answer": 2,
-  "explanation": "The chargeable profit is exactly one third of 7987389.27 because two thirds is the most the allowance may take; the published pair prices the carry, pia_cit_allowance_restricted_carry at NPV -113389070.73 against pia_cit_allowance_no_carry at -115209545.41."
+  "explanation": "The chargeable profit is exactly one third of 13987213.60 because two thirds is the most the allowance may take in a pre-2026 year (CITA Second Schedule para 24(7), as substituted by Finance Act 2023 s.9(b)). The published pair prices the carry: pia_cit_allowance_restricted_carry at NPV -102455984.11 against pia_cit_allowance_no_carry at -116276490.72. The 8000000.00 in cpr_deferred_to_next is the cost price ratio deferral, a different amount, and the two assessable profits are equal."
  },
  {
-  "prompt": "On the one-year worked example, pia_capex_recovery_years 1 claims 482500000.00 and gives NPV 279185570.34, while 10 claims 212500000.00 and gives NPV 117185570.34. What does the setting decide on a field that stops before its recovery years run out?",
+  "prompt": "On the one-year worked example, pia_capex_recovery_years 5 runs to NPV 141236909.83, while 1 and 10 are both refused. Why does the engine refuse them?",
   "options": [
-   "The timing only, because the unclaimed allowance is carried to the cessation year and claimed there in a single final deduction.",
-   "How much of the 300000000.00 is ever claimed: one year claims all of it, ten years claim a tenth, and the rest is never claimed at all.",
-   "The rate at which the deferred CPR pool is released, since the recovery years set the cap on cost claims and not the capital allowance.",
-   "Whether the two thirds restriction binds, since a faster recovery lifts the allowance above two thirds of a thin profit in the first year."
+   "A one-year field cannot carry any allowance past its only year, so the engine refuses every recovery life longer than the ledger it is given.",
+   "The texts fix the capital allowance at five years (PIA Fifth Schedule para 17(1); NTA First Schedule Part II para 14(1)).",
+   "The recovery years set the CPR limit as well, and a limit outside the range from 30 to 100 percent is refused by the cap itself.",
+   "Because the two-thirds restriction would bind at one year and at ten, and the engine refuses any run in which that restriction binds."
   ],
   "answer": 1,
-  "explanation": "At 5 years the claim is 242500000.00 and NPV 135185570.34; on AKATA the second year's 45000000.00 of capex starts its own five-year recovery, and a field that stops early leaves its allowance unclaimed."
+  "explanation": "The PIA sets the allowance at 20, 20, 20, 20 and 19 percent and the NTA at 20 percent a year, so any other recovery life is refused with both texts named. At five years the worked example claims 242500000.00 against the cap. The CPR limit is a separate input, the ledger length does not decide the recovery life, and the restriction never causes a refusal."
  }
 ]
