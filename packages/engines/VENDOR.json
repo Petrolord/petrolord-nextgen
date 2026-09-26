@@ -1883,113 +1883,113 @@
       "path": "__tests__/dataai.evaluate.test.js",
       "kind": "extra",
       "group": "d5-appliedai-course",
-      "vendoredSha": "3ac4845041bc2c3f8c095a580ec17e3d2a69cd0b",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "vendoredSha": "33a08c75aec035908329e2cb9f23aa3e036020d2",
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "engines/dataai/evaluate.js",
       "kind": "extra",
       "group": "d5-appliedai-course",
-      "vendoredSha": "9e42e1ca89d5751cc7984438504e1bab24391eb0",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "vendoredSha": "7080ec45f33a6d560b57dcc53751ec89c738e7fb",
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "test-data/dataai/ekene-docs/README.md",
       "kind": "extra",
       "group": "d5-appliedai-course",
       "vendoredSha": "05617f2c31d0c807f3796a7b93a787dd2b26df8c",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "test-data/dataai/ekene-docs/calibration.json",
       "kind": "extra",
       "group": "d5-appliedai-course",
       "vendoredSha": "95828ae7568480dc56c35626b4a0f28e1b4b74c6",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "test-data/dataai/ekene-docs/corpus.json",
       "kind": "extra",
       "group": "d5-appliedai-course",
       "vendoredSha": "fc416c3380709828629e630274a9137e9b83296e",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "test-data/dataai/ekene-docs/extraction.json",
       "kind": "extra",
       "group": "d5-appliedai-course",
       "vendoredSha": "037a56c48e0d5802a0aa6fc5754c076580f4fcc9",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "test-data/dataai/ekene-docs/queries.json",
       "kind": "extra",
       "group": "d5-appliedai-course",
       "vendoredSha": "b50bad35487f5e8696931f47348cc7206c1d9a40",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "test-data/dataai/ekene-docs/systems.json",
       "kind": "extra",
       "group": "d5-appliedai-course",
       "vendoredSha": "08bf90d62e74a6b1bbdf2f8de76f71fcf6af936c",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "test-data/dataai/goldens/evaluate_cases.json",
       "kind": "extra",
       "group": "d5-appliedai-course",
-      "vendoredSha": "dfdab745d22278637ed8baaed7e325e9004efdd2",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "vendoredSha": "dda4c2913c758f59d7779f70235ed27e75608a98",
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "test-data/dataai/pins/evaluate_pins.json",
       "kind": "extra",
       "group": "d5-appliedai-course",
       "vendoredSha": "144c49ea802f363ad2c33f6f986fc6a5e0c2645e",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "tools/validation/dataai/FINDINGS-evaluate.md",
       "kind": "extra",
       "group": "d5-appliedai-course",
-      "vendoredSha": "eeb595c17da187f9b8c83c1bdbac5a8fa0f499e6",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "vendoredSha": "a00e4fb8ac7c6587368ae861a016f9080f07b21a",
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "tools/validation/dataai/make_evaluate_fixtures.py",
       "kind": "extra",
       "group": "d5-appliedai-course",
       "vendoredSha": "e9b560d2274dea095ae34daba0d707e6475bb189",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "tools/validation/dataai/negcontrol_evaluate.sh",
       "kind": "extra",
       "group": "d5-appliedai-course",
-      "vendoredSha": "da6f53d205b4da922865c79b8250326de9906194",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "vendoredSha": "bf9e404c54b77807cf31e645ab790aaaf186f7dd",
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "tools/validation/dataai/oracle_evaluate.py",
       "kind": "extra",
       "group": "d5-appliedai-course",
-      "vendoredSha": "d47ef35336dfddc0357e6f391a32517d91fb2311",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "vendoredSha": "ae28f267d0b23a79cc54d77275927d090823d135",
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "tools/validation/dataai/pin_evaluate.py",
       "kind": "extra",
       "group": "d5-appliedai-course",
       "vendoredSha": "140550b0607986453d0e8558415f920387b586b8",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     },
     {
       "path": "tools/validation/dataai/timing_evaluate.mjs",
       "kind": "extra",
       "group": "d5-appliedai-course",
       "vendoredSha": "1a127166c6ee9cd3f01109ebb628572811be551d",
-      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines 1906182 (PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to 1906182 or later."
+      "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
     }
   ]
 }
