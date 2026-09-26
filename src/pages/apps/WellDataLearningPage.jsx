@@ -45,9 +45,9 @@ const LESSONS = [
 
 function ScopeGate() {
   return (
-    <LearningModeGate app={APP} title="Well Data Manager: Learning Mode locked">
+    <LearningModeGate app={APP} title="Well Data Management: Learning Mode locked">
       <p>
-        Enrol in the Well Data Manager course and activate your account to open this app in
+        Enrol in the Well Data Management course and activate your account to open Well Data Manager in
         Learning Mode against the bundled teaching LAS files. This course is the root of the
         geoscience path: certifying here unlocks enrollment in the other geoscience courses.
       </p>
@@ -148,7 +148,7 @@ const WellDataLearningPage = () => {
 
   return (
     <>
-      <Helmet><title>Well Data Manager (Learning Mode) - Petrolord NextGen Academy</title></Helmet>
+      <Helmet><title>Well Data Management (Learning Mode) - Petrolord NextGen Academy</title></Helmet>
       <div className="relative max-w-6xl mx-auto p-6 space-y-6">
         {watermark && (
           <div className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
@@ -160,7 +160,7 @@ const WellDataLearningPage = () => {
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
               <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-                <HardDrive className="h-7 w-7 text-[#BFFF00]" /> Well Data Manager
+                <HardDrive className="h-7 w-7 text-[#BFFF00]" /> Well Data Management
                 <span className="text-xs px-2 py-0.5 rounded-full bg-[#BFFF00]/20 text-[#BFFF00] border border-[#BFFF00]/40">Learning Mode</span>
               </h1>
               <p className="mt-1 text-gray-400">

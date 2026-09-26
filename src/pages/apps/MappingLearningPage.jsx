@@ -45,10 +45,10 @@ const LESSONS = [
 
 function ScopeGate() {
   return (
-    <LearningModeGate app={APP} title="Mapping: Learning Mode locked">
+    <LearningModeGate app={APP} title="Subsurface Mapping: Learning Mode locked">
       <p>
-        Enrol in the Mapping course and activate your account to open this app in Learning
-        Mode. This course requires a Well Data Manager certification first (it is the root of
+        Enrol in the Subsurface Mapping course and activate your account to open this app in Learning
+        Mode. This course requires a Well Data Management certification first (it is the root of
         the geoscience path).
       </p>
     </LearningModeGate>
@@ -194,7 +194,7 @@ const MappingLearningPage = () => {
 
   return (
     <>
-      <Helmet><title>Mapping (Learning Mode) - Petrolord NextGen Academy</title></Helmet>
+      <Helmet><title>Subsurface Mapping (Learning Mode) - Petrolord NextGen Academy</title></Helmet>
       <div className="relative max-w-6xl mx-auto p-6 space-y-6">
         {watermark && (
           <div className="pointer-events-none fixed inset-0 z-0 flex items-center justify-center overflow-hidden">
@@ -205,7 +205,7 @@ const MappingLearningPage = () => {
         <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }} className="relative z-10 space-y-6">
           <div>
             <h1 className="text-3xl font-bold text-white flex items-center gap-2">
-              <Map className="h-7 w-7 text-[#BFFF00]" /> Mapping
+              <Map className="h-7 w-7 text-[#BFFF00]" /> Subsurface Mapping
               <span className="text-xs px-2 py-0.5 rounded-full bg-[#BFFF00]/20 text-[#BFFF00] border border-[#BFFF00]/40">Learning Mode</span>
             </h1>
             <p className="mt-1 text-gray-400">
