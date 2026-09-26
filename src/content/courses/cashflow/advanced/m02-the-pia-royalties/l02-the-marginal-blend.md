@@ -1,4 +1,4 @@
-# The marginal blend
+# The small-field tranches
 
 The onshore and shallow water royalty prices a year's barrels in tranches, so its rate is a blend of the tranche rates, a function of the daily rate that is almost never a round number. A marginal field pays the same blend.
 

@@ -10,7 +10,7 @@ A PSC row reports gross_revenue, royalty, opex, capex, taxable_income (the contr
 
 ## The number that is not there
 
-AKATA under production sharing at a 30 percent cap ends 2035 with 207346412.26 of cost still in the pool, read by marching applyPSC over the engine's own rows. Its NPV is -104151944.05 and its take 120.4874 percent, and neither number says why. At a 45 percent cap the pool ends at 91570072.23 and the take at 99.0577 percent. The only column that moves with the pool is tax (10393930.24 in 2035 at 30 percent against 8400589.37 at 60), and a reader who has not marched the pool cannot tell a low tax from a low profit.
+AKATA under production sharing at a 30 percent cap ends 2035 with 207346412.26 of cost still in the pool, the balance psc_cost_pool_after reports on its last row. Its NPV is -104151944.05 and its take 120.4874 percent, and neither number says why. At a 45 percent cap the pool ends at 91570072.23 and the take at 99.0577 percent. The only column that moves with the pool is tax (10393930.24 in 2035 at 30 percent against 8400589.37 at 60), and a reader who looks only at the tax column cannot tell a low tax from a low profit.
 
 ## Working interest halves everything
 

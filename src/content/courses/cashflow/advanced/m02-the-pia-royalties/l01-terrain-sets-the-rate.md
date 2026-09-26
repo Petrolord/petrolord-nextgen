@@ -1,4 +1,4 @@
-# Terrain sets the rate
+# Terrain and daily rate set the rate
 
 The PIA production royalty is a rate on the year's liquids revenue chosen by where the field sits and how much it produces a day, and in three of the four terrains the daily rate moves it.
 
