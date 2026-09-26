@@ -10,7 +10,8 @@
 # bank JSONs under tools/course-banks/procurement, the three manifests, the
 # tolerance module gradedTolerance.js and the whole of packages/engines (the
 # vendored tender.js closure, the shared cashflow.ts and afe.js it calls, and
-# the vendored stdlib oracle). Every generator is then run from that export,
+# the vendored stdlib oracle), and the root package.json, whose "type":
+# "module" makes Node read gradedTolerance.js as the ES module it is. Every generator is then run from that export,
 # pointed at that export. The ENGINE the course generator runs is the committed
 # one, so the answer key the migrations carry is what the committed engine
 # returns.
@@ -45,7 +46,7 @@ echo "repo:    $REPO"
 echo "exporting the committed tree at $REF into $STAGE"
 git -C "$REPO" archive "$REF" \
   "tools/course-waves/$SLUG" "tools/course-banks/$SLUG" "src/content/courses/$SLUG" \
-  "src/components/course/panels/$SLUG/gradedTolerance.js" packages/engines \
+  "src/components/course/panels/$SLUG/gradedTolerance.js" packages/engines package.json \
   | tar -x -C "$STAGE/repo"
 W="$STAGE/repo/tools/course-waves/$SLUG"
 # wave.json, with its repo pointed at the export so nothing the generators read
