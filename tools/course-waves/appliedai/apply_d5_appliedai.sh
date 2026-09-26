@@ -83,11 +83,11 @@ FILES="$SEEDS
 $GOLIVE"
 digest_for() {
   case $1 in
-    20261104_d5_appliedai_course             ) echo 593f9a356e6379b0e6141cf0929b521398bad634e2af69d05b3e8f28a6a88fc9 ;;
-    20261104_d5_appliedai_beginner_deep      ) echo dd96db8bf9c95cddd741bf9ef7b27c78fa2d4a063e413b8bf57964af94cadf03 ;;
-    20261104_d5_appliedai_intermediate_deep  ) echo fde06ac26d1ad311e43b5a0f4edf7730df3d39ddb27efbc0b513f71b1cb9055c ;;
-    20261104_d5_appliedai_advanced_deep      ) echo 386e6d1f17bf4629e073149f40e2b4dfdac3f8e9c4978ec8020a151e6ab1380c ;;
-    20261104_d5_appliedai_go_live            ) echo 6f66bb3c7d3f5c3343e27e7c0c7934b1bea9e8ecc6bb097055572d958f1d8e77 ;;
+    20261104_d5_appliedai_course             ) echo bca32b8f1653de310ab1583df527376354bc55c3ae559990e3ec9f536ec87866 ;;
+    20261104_d5_appliedai_beginner_deep      ) echo ac5b01e3aa27f3c8d92f38679fbf336b8057a3eafa5d9774646197f0b3eaa0d5 ;;
+    20261104_d5_appliedai_intermediate_deep  ) echo 3b072ea4bbd45692a042a649c978f82e84b99908e1e9a3a03da7a33d0a07caab ;;
+    20261104_d5_appliedai_advanced_deep      ) echo afa5f576c8930032bf9a6d1d7f153a13519f24d754df4ae991ee780f7bb479a4 ;;
+    20261104_d5_appliedai_go_live            ) echo 279ca686213dd8efe2755d9021b43f8777cb06ec549fbb386b0eaa76a16ae87e ;;
     *) echo UNPINNED ;;
   esac
 }
