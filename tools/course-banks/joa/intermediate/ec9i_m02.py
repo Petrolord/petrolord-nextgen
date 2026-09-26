@@ -28,7 +28,7 @@ q(0, "The engine's 2033 reason on the Ekene compound carry prints the balance re
  ["7267760.62, because the reason is the engine's own words and the field is a display figure",
   "The reason's 7267760.62, padded with zeros to six decimals for the report, since a report quotes the engine's own words",
   "Either one, since the two agree at the cent and so are the same figure"],
- "The course quotes the balance as the numeric field, 7267760.617882, and quotes the reason only verbatim. The digest says a reason rounds money to the cent, with trailing zeros dropped, while every numeric field keeps full precision. Two figures that agree when printed at a coarser precision are not keyed as equal, and no whole-dollar rounding is applied to a field.")
+ "The course quotes the balance as the numeric field, 7267760.617882, and quotes the reason only verbatim. The course says a reason rounds money to the cent, with trailing zeros dropped, while every numeric field keeps full precision. Two figures that agree when printed at a coarser precision are not keyed as equal, and no whole-dollar rounding is applied to a field.")
 
 q(2, "The golden input carry-ekene-pia states the Ekene carry with no uplift, carry recovery from 100.000000 percent of NOC's share, and basis \"pia-s85-4\". In which year is the carry recovered, and what does NOC keep that year?",
  "In 2031, keeping 13200000.000000 of its share of 22400000.000000",
@@ -49,7 +49,7 @@ q(3, "In the recovery calculator a learner starts from the Ekene carry under PIA
  ["uplift.type must be \"none\" under basis \"pia-s85-4\", since the basis is checked before the terms of the uplift are read",
   "uplift must be an object { type } with type \"none\", \"compound\" or \"multiple\" (no default); got nothing",
   "None: the engine fills the missing rate with 0 and returns the Act's ledger, recovered in 2031"],
- "The digest prints this change as a stated probe on carry-ekene-pia, with the engine's message \"uplift.ratePctPerYear must be a finite number at or above 0; got nothing\". The missing rate is refused before the Act's bar on an uplift is reached, so a learner must state a rate to see the Act's refusal. The uplift object is present here, so the no-uplift refusal does not fire, and the engine holds no rate of its own.")
+ "The course prints this change as a stated probe on carry-ekene-pia, with the engine's message \"uplift.ratePctPerYear must be a finite number at or above 0; got nothing\". The missing rate is refused before the Act's bar on an uplift is reached, so a learner must state a rate to see the Act's refusal. The uplift object is present here, so the no-uplift refusal does not fire, and the engine holds no rate of its own.")
 
 q(0, "The golden input carry-ekene-multiple states a multiple uplift of 150 percent, carry recovery from 50.000000 percent of NOC's share and basis \"contract\". How does the engine build the balance due?",
  "It adds 8200000.000000 in 2027 and 6000000.000000 in 2028, each in the year its cost is carried, fixing the due at 42600000.000000",
@@ -105,7 +105,7 @@ q(0, "On the carry with 8.000000 percent compounding, half of NOC's share taken 
  ["All of it to EKO as operator, which settles with PA and PB outside the recovery ledger",
   "To EKO, PA, PB and NOC by their beneficial interests of 40, 25, 15 and 20 percent",
   "To the joint account, where it reduces the next cash call of every paying party"],
- "The digest prints the 2033 party flows: EKO recovery 3633880.308941, PA 2271175.193088, PB 1362705.115853 and NOC -7267760.617882, and states that the recovered amount goes to the carriers in their carry shares. NOC is the party paying the recovery, so it receives none of it, and the carry recovery is settled through the party flows of the recovery ledger.")
+ "The course prints the 2033 party flows: EKO recovery 3633880.308941, PA 2271175.193088, PB 1362705.115853 and NOC -7267760.617882, and states that the recovered amount goes to the carriers in their carry shares. NOC is the party paying the recovery, so it receives none of it, and the carry recovery is settled through the party flows of the recovery ledger.")
 
 q(1, "At a discount rate of 0.100000 to a base year of 2027, what NPV does the engine return for NOC on the Ekene compound carry (8.000000 percent a year, from 50.000000 percent of its share, basis \"contract\") and on carry-ekene-pia (no uplift, from 100.000000 percent, basis \"pia-s85-4\")?",
  "49870804.456959 on the compound carry and 54584252.437515 on the carry under the Act",

@@ -32,7 +32,7 @@ q(3, f"The golden input cc-ekene-2027-lag1 runs the same twelve Ekene months wit
   "69052000.000000, the calls of a ledger in which every month is called whatever its forecast"],
  "The engine returns calls of 68500000.000000 over the year with a lag of 1, against 68604000.000000 with the fixture's lag of 2. Both ledgers bill 448000.000000 in arrears and both spend 69148000.000000; the lag moves the month in which a difference is settled, so what is still open at the close differs. 69052000.000000 belongs to the golden input with no threshold, cc-ekene-2027-every-month.")
 
-q(1, "On the same lag-1 ledger (the rule \"carry\", no cash call below 500000.000000), November 2027 is forecast at 7000000.000000 and spends 6896000.000000. Where does the engine put that over-call of 104000?",
+q(1, "On the golden input cc-ekene-2027-lag1 (a lag of 1 month, the rule \"carry\", no cash call below 500000.000000), November 2027 is forecast at 7000000.000000 and spends 6896000.000000. Where does the engine put that over-call of 104000?",
  "Against the December 2027 call, one month later, in the engine's own reason",
  ["Into January 2028, outside the ledger, left open at the close",
   "Written off to the operator at the year end",
@@ -65,14 +65,14 @@ q(1, "Suppose the Ekene months are rerun as cc-ekene-2027-refund: the same two-m
  ["0.000000 in September with 200000.000000 carried to October, and 68604000.000000 over the year",
   "-200000.000000 in September, and 68500000.000000 over the year, the refund having settled the July over-call a month early",
   "1000000.000000 called in full in September"],
- "Under \"refund\" the excess is paid back as a negative call of -200000.000000 in total, and the engine's reason reads \"2027-09: the adjustment exceeds the forecast share of EKO, PA, PB: the excess is refunded (a negative call)\". The digest prints calls over the year of 68604000.000000 for both the carried and the refunded ledger. A September of 0.000000 with 200000.000000 carried is the \"carry\" ledger. 68500000.000000 is the yearly total of the lag-1 ledger, a different term.")
+ "Under \"refund\" the excess is paid back as a negative call of -200000.000000 in total, and the engine's reason reads \"2027-09: the adjustment exceeds the forecast share of EKO, PA, PB: the excess is refunded (a negative call)\". The course prints calls over the year of 68604000.000000 for both the carried and the refunded ledger. A September of 0.000000 with 200000.000000 carried is the \"carry\" ledger. 68500000.000000 is the yearly total of the lag-1 ledger, a different term.")
 
 q(3, "A learner loads the Ekene 2027 ledger and sets the control \"A negative call is (stated)\" to not stated, which removes negativeCall from the box. What does the engine return?",
  "A refusal: negativeCall must be one of \"refund\", \"carry\"; got nothing",
  ["The same ledger computed under \"refund\", which the Norwegian Accounting Agreement prints as the rule absent an agreement",
   "The same ledger computed under \"carry\", which the Kenya Model PSC 2015 prints as the reduction of the next advance",
   "A refusal only at September's call"],
- "The engine holds no negative call rule, and the digest prints the refusal for this very change, in the engine's words: negativeCall must be one of \"refund\", \"carry\"; got nothing. Both public texts allow both outcomes, which is why the rule is a stated input with no default. The refusal comes before any month is computed; the engine never runs part of a ledger.")
+ "The engine holds no negative call rule, and the course prints the refusal for this very change, in the engine's words: negativeCall must be one of \"refund\", \"carry\"; got nothing. Both public texts allow both outcomes, which is why the rule is a stated input with no default. The refusal comes before any month is computed; the engine never runs part of a ledger.")
 
 q(0, f"At the end of May 2027 on the Ekene ledger {T}, EKO has 150000.000000 carried and May's actual share of 224000.000000 not yet billed. What balance with the operator does the engine return for EKO?",
  "-74000.000000",
@@ -86,7 +86,7 @@ q(2, f"The course checks the closing rows of the Ekene 2027 ledger {T}. EKO clos
  ["For each party, the closing balance equals its share of the year's calls less its share of the year's actual spend, to the cent",
   "The four closing balances sum to 0.000000, since whatever one party holds with the operator another owes it",
   "Every closing balance is 0.000000 once the differences not yet adjusted are billed in arrears in the following month"],
- "The digest states the identity on the closing rows as derived: \"for each party the balance less (the differences not yet adjusted + carried - arrears due) is within 0.000001 of zero\", checked for EKO, PA, PB and NOC. It is checked within a stated bound. The closing balances of EKO, PA and PB are -48000.000000, -30000.000000 and -18000.000000, which do not cancel. An unadjusted difference is left for a later call; it is not billed in arrears.")
+ "The course states the identity on the closing rows as derived: \"for each party the balance less (the differences not yet adjusted + carried - arrears due) is within 0.000001 of zero\", checked for EKO, PA, PB and NOC. It is checked within a stated bound. The closing balances of EKO, PA and PB are -48000.000000, -30000.000000 and -18000.000000, which do not cancel. An unadjusted difference is left for a later call; it is not billed in arrears.")
 
 q(1, "The golden input cc-ekene-2027-every-month runs the Ekene months with a lag of 2 months, the rule \"carry\" and no threshold stated. What does the engine return?",
  "Calls of 69052000.000000 over the year, 0.000000 billed in arrears, and EKO closing at -48000.000000",

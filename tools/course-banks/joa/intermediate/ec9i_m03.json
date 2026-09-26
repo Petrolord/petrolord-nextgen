@@ -52,7 +52,7 @@
    "The Ekene back-in to 40 percent, the engine reading a target at the current interest as a doubling"
   ],
   "answer": 2,
-  "explanation": "The digest prints the refusal \"targetPct must be above the back-in party's current interest 20; got 20\". A back-in raises the back-in party's participating interest, so a target at its current figure is refused before any refund is computed, and the engine reads no target it was not given."
+  "explanation": "The course prints the refusal \"targetPct must be above the back-in party's current interest 20; got 20\". A back-in raises the back-in party's participating interest, so a target at its current figure is refused before any refund is computed, and the engine reads no target it was not given."
  },
  {
   "prompt": "A contract under basis \"pia-s85-4\" states refundForm \"upfront\" for NOC's back-in. What does the engine return?",

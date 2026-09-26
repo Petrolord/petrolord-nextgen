@@ -42,7 +42,7 @@ q(2, "Under basis \"pia-s85-4\", what does the engine return for a back-in whose
  ["A result with no change of participating interests and a refund of 0.000000, reported with its reason",
   "A refusal naming refundForm, since a back-in with no change of interest has nothing to refund",
   "The Ekene back-in to 40 percent, the engine reading a target at the current interest as a doubling"],
- "The digest prints the refusal \"targetPct must be above the back-in party's current interest 20; got 20\". A back-in raises the back-in party's participating interest, so a target at its current figure is refused before any refund is computed, and the engine reads no target it was not given.")
+ "The course prints the refusal \"targetPct must be above the back-in party's current interest 20; got 20\". A back-in raises the back-in party's participating interest, so a target at its current figure is refused before any refund is computed, and the engine reads no target it was not given.")
 
 q(0, "A contract under basis \"pia-s85-4\" states refundForm \"upfront\" for NOC's back-in. What does the engine return?",
  "A refusal citing s.85(4)(d) and s.85(4)(f): the refund must be \"from-future-entitlement\" under the Act's basis",
