@@ -1,0 +1,119 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC9 Associate m02, Participating Interests.
+# Sources: the interests rule and the golden interests cases, the partner split
+# through calculatePartnerCosts, January 2027's forecast split, the parties'
+# refusals, the stated constants and the Norwegian Art. 8.1. Every key rests on
+# a digest-printed line or an engine return re-run in
+# /root/cat-wip-joa/scratch/bank-beginner/witness.mjs.
+
+q(1, "On the worked case int-ekene-no-carry, the four Ekene parties are stated with no carry. What paying interests does the engine return?",
+ "EKO 40.000000, PA 25.000000, PB 15.000000 and NOC 20.000000.",
+ ["EKO 50.000000, PA 31.250000, PB 18.750000 and NOC 0.000000.",
+  "EKO 47.500000, PA 27.500000, PB 15.000000 and NOC 10.000000, as a half share of NOC's cost moves.",
+  "EKO 59.807692, PA 40.192308, PB 0.000000 and NOC 0.000000, with two parties paying for all four."],
+ "With no carry, the paying interest equals the participating interest, so the engine returns 40.000000, 25.000000, 15.000000 and 20.000000. The set with NOC at 0.000000 is the Ekene carry, the set with NOC at 10.000000 is the half carry in stated shares, and the set with PB and NOC both at 0.000000 is the case with two carries.")
+
+q(3, "Four parties are typed with participating interests that sum to 90. What does the engine return?",
+ "A refusal naming parties, with the sum it found.",
+ ["The participating interests rescaled to make up 100, with a reason printing the factor applied.",
+  "The participating interests as typed, with the unassigned 10 points of cost left to the operator.",
+  "A result with a reason that flags the gap and names the party whose share is most likely wrong."],
+ "The engine checks the sum before anything else and refuses, in its own words: parties must have participatingPct summing to 100; got a sum of 90. It rescales nothing, assigns no share to the operator and guesses no party: a refusal returns no figures at all.")
+
+q(0, "How far from 100 may the participating interests sum and still be accepted?",
+ "1e-9, the engine convention DEFAULTS.SUM_TOLERANCE.",
+ ["0.5 of a point, so spreadsheet rounding passes.",
+  "Nothing: the sum must equal 100 exactly.",
+  "One whole point, since a contract never writes a share finer than a whole percent."],
+ "DEFAULTS.SUM_TOLERANCE is 1e-9, how far participating interests or carrier shares may sum from 100, an engine convention. A tolerance of 0.5 or of a whole point would accept a set of parties that does not make up the whole, and an exact test would refuse sums that differ only by floating point noise.")
+
+q(2, "Two parties in one box are both given the id A. Which answer does the engine give?",
+ "A refusal: parties[1].id must be an id no other party has.",
+ ["Both are merged into one party with both shares.",
+  "It renames the second A2 and says so in a reason.",
+  "It keeps the first A and drops the second."],
+ "The engine refuses, in its own words: parties[1].id must be an id no other party has; got \"A\". Its message names the second party's path, counting from zero. It never merges, renames or drops a party, because each would compute on terms nobody stated.")
+
+q(1, "A party's participatingPct is typed as 0. What happens?",
+ "The call is refused: a participating interest must be above 0 and at most 100.",
+ ["The party stays, with no share, and is called for nothing.",
+  "That party is dropped, and the others rescaled to 100.",
+  "The party is treated as carried in full by the other parties, pro rata, for its whole share."],
+ "A party with no participating interest is no party to the venture, so the check on each party's share comes before any split. The engine's message names the first party's path: parties[0].participatingPct must be a number above 0 and at most 100; got 0. Keeping a shareless party, rescaling the others or inventing a carry would each compute on terms nobody stated.")
+
+q(3, "A spreadsheet labels the participating interest column wi, and the box keeps that key for each party. What does the engine do?",
+ "It refuses: a party's accepted keys are id, name, participatingPct.",
+ ["It reads wi as the participating interest, since that is the industry's usual short name for it.",
+  "It ignores wi and computes each party as though its participating interest were 0 in every month.",
+  "It takes wi as the paying interest of each party."],
+ "An unknown key is refused wherever it sits, with the full list of accepted keys. In the engine's own words: parties[0].wi is not an accepted key; the accepted keys of parties[0] are id, name, participatingPct. The engine reads no alias, and it never drops a key and carries on.")
+
+q(2, "The Norwegian joint operating agreement, Art. 8.1, fixes each party's contribution to the joint venture's funds by what?",
+ "Its participating interest at the time the payment is made.",
+ ["Its participating interest at the licence's grant date.",
+  "The production it lifted in the month before.",
+  "The budget share it voted for in committee."],
+ "Art. 8.1 of the Norwegian agreement reads that the amount to be contributed by each party shall be calculated in accordance with the participating interest at the time the payment is made. The date of the licence, a month's lifting and a committee vote are none of them the measure the article states.")
+
+q(0, "Which code splits a joint account amount between the parties?",
+ "The canonical calculatePartnerCosts of engines/economics/afe.js.",
+ ["A split inside jointVenture.js for cash calls alone.",
+  "The applyPSC function of cashflow.ts, run with a royalty of 0 and no cost oil limit.",
+  "The npv of cashflow.ts at a discount rate of 0."],
+ "Every joint account amount the engine splits between parties goes through the canonical calculatePartnerCosts of engines/economics/afe.js. The engine's basis says every split of a joint account amount is calculatePartnerCosts from engines/economics/afe.js on the paying interests. applyPSC and npv are imported from cashflow.ts for PSC cost recovery and discounting, and neither splits an amount between parties.")
+
+q(3, "The Ekene forecast for January 2027 is 4000000.000000. What is PB's forecast share?",
+ "750000.000000, on its paying interest of 18.750000.",
+ ["600000.000000, on its participating interest of 15.000000 in the joint venture.",
+  "675000.000000, its share of January's actual.",
+  "1250000.000000, on a paying interest of 31.250000 under the Ekene carry."],
+ "January's forecast of 4000000.000000 splits as EKO 2000000.000000, PA 1250000.000000, PB 750000.000000 and NOC 0.000000 on the paying interests. 675000.000000 is PB's actual share, and 1250000.000000 is PA's share on its paying interest of 31.250000. Splitting on PB's participating interest of 15.000000 would ignore the carry that raises its paying interest to 18.750000.")
+
+q(1, "Which share does the engine use when it splits production between the parties?",
+ "The beneficial interests, through the same calculatePartnerCosts.",
+ ["The paying interests, as for every joint account amount.",
+  "The carriers' shares, as they paid for the barrels.",
+  "The paying interests of the month of lifting."],
+ "Every split goes through the canonical calculatePartnerCosts, on the paying interests for cost and the beneficial interests for production. The carriers pay a carried party's cost share, and a carry moves cost and never moves production, so the carried party keeps its whole production share.")
+
+q(0, "What is the most parties one call of the engine accepts?",
+ "20, the stated cap DEFAULTS.MAX_PARTIES.",
+ ["100, the cap DEFAULTS.MAX_YEARS on years, which also bounds the parties.",
+  "200, the cap on budget items, cost categories and cost lines in one call.",
+  "600, the cap on months in one cash call ledger, which also bounds parties."],
+ "DEFAULTS.MAX_PARTIES is 20, the most parties (and carries, and defaulters) one call accepts. 100 is DEFAULTS.MAX_YEARS, 200 is DEFAULTS.MAX_ITEMS for budget items, cost categories and cost lines, and 600 is DEFAULTS.MAX_MONTHS for one cash call ledger; none of the three bounds the parties.")
+
+q(2, "What reason does the engine print for int-ekene-no-carry, the Ekene parties with no carry?",
+ "None: the engine returns no reason for that case.",
+ ["One line per party: paying equals participating.",
+  "A line saying pro rata carriers were assumed.",
+  "A warning that NOC, as the state participant, is usually carried by the others."],
+ "For int-ekene-no-carry the engine returns no reason. A carry prints a reason naming the carried party, its carried points and who pays them, and with no carry there is nothing to report. The engine assumes no carriers and prints no warning about a party it is not told is carried.")
+
+q(3, "In the engine's rule, which share always equals the participating interest?",
+ "The beneficial interest, the share of production.",
+ ["The paying interest, the share of cost, whatever carry the agreement states.",
+  "The carried part, when carried in full.",
+  "The carry points each carrier pays, when its carriers share pro rata."],
+ "The engine's basis reads: beneficial interest = participating interest (the share of production); paying interest = participating interest - the carried part of a carried party's share + the carriers' shares of every carry. The paying interest moves under a carry, while the carried part and the carry points are the terms that move it.")
+
+q(1, "Which inputs does participatingInterests read at the top level?",
+ "parties and carries.",
+ ["parties, carries and months, since a participating interest can change from month to month.",
+  "parties alone, with every carry stated in the cash calls box that uses the paying interests.",
+  "parties, carries and a date on which each participating interest takes effect in the venture."],
+ "The function table gives participatingInterests two inputs, parties and carries, and the engine's refusal of an unknown key lists the same two: the accepted keys at the top level are parties, carries. Months belong to cashCalls, and an input key the function does not read, such as a date, is refused.")
+
+q(0, "A partner report splits the Ekene January 2027 cash call on the participating interests. Which party does that split call for a cost it does not bear?",
+ "NOC, whose paying interest is 0.000000 while it is carried in full.",
+ ["EKO, whose paying interest as operator is 40.000000.",
+  "PB, whose paying interest is 15.000000 under the carry.",
+  "PA, whose paying interest stays at 25.000000."],
+ "Under the Ekene carry the paying interests are EKO 50.000000, PA 31.250000, PB 18.750000 and NOC 0.000000, so NOC's forecast share of January is 0.000000. A split on the participating interests calls NOC for 20 percent of a cost it does not bear. EKO, PA and PB pay more than their participating interests, 50.000000, 31.250000 and 18.750000.")
+
+emit(Q, '/root/cat-wip-joa/banks/ec9b_m02.json', expect_n=15)
+finish()
