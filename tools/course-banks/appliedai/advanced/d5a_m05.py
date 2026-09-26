@@ -32,7 +32,7 @@ x("Why does the engine compare scores through a 12-significant-digit key and dec
 x("What does the 12-digit key absorb that a direct comparison of two doubles would not?",
  "Last-bit differences that arise when the terms of equal texts are added in a different order",
  ["Differences in passage length, which b already normalises away before any tie is ever tested",
-  "Any gap below 0.000001, so that every pair of scores printing alike at six decimals is a tie",
+  "Any gap too small to show at six decimals, so that every pair of scores printing alike is a tie",
   "Unicode case differences in two copies of a passage, which the tokeniser keeps apart"],
  "A score is a sum of floating-point terms, and two passages with the same text can land a few bits apart when the terms are summed in another order. The key rounds that away, so a difference the key still sees is a real difference in the inputs. It does not tie scores that merely print alike, as the n1 and n2 pair shows, and it knows nothing of lengths or text.")
 
@@ -63,7 +63,7 @@ x("In the paired bootstrap, how is a replicate whose A minus B difference is exa
 # 7
 x("A bootstrap call asks for level 0.5. What does the engine return?",
  "A refusal naming `level`: \"level must be 0.8, 0.9, 0.95 or 0.99\"",
- ["A 50 percent interval, the 25th to the 75th percentile of the bootstrap mean",
+ ["A 50 percent interval, read from the middle half of the bootstrap means",
   "The 0.95 interval, the default, with a note that 0.5 was not one of the levels",
   "A refusal naming `nBoot`, since level 0.5 needs more replicates to be read"],
  "The engine accepts four levels and refuses every other, naming the field `level`, in the words quoted. It never substitutes the default for a refused value. A fixed list keeps every label a well-formed ordinal, and the replicate count has its own rule, from 1 to 100000.")
@@ -96,7 +96,7 @@ x("Which seeds does the bootstrap accept at its boundaries, and which does it re
 x("A ranking call passes 5000 documents, and a second passes 5001. What happens to each?",
  "5000 run, since the cap is inclusive; 5001 is refused with \"documents has 5001 entries, above the 5000 this engine accepts\"",
  ["Both run, since the cap only warns, and the 5001st document is ranked after all the others as usual",
-  "5000 is refused as well, since the cap is exclusive and the engine accepts at most 4999 documents",
+  "5000 is refused as well, since the cap is exclusive and the engine accepts only fewer than 5000 documents",
   "Both are refused, since MAX_DOCS limits the passages a query can rank to 1000, the largest cutoff k"],
  "Each cap is probed at the limit, where the call is accepted, and one above, where it is refused with the field and the cap named. MAX_DOCS is 5000 and applies to the documents one call accepts; MAX_K, 1000, is the largest cutoff, a separate rule. A cap never warns: it lets the call run exactly or refuses it.")
 

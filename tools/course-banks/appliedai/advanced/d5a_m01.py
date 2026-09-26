@@ -17,7 +17,7 @@ def x(p, c, ds, e): q(next(_i), p, c, ds, e)
 x("The Ekene annotators graded the same 183 judged pairs. What is their observed agreement, and how does the engine get it?",
  "0.721311: the pairs on the diagonal of the confusion table, divided by the 183 pairs",
  ["0.336708: every row total times its column total, summed and divided by 183 squared",
-  "0.579841: the share of the pairs that remain in agreement once chance is taken away",
+  "0.579841: the share of the 183 pairs that remain in agreement once chance is taken away",
   "0.814208: the pairs both annotators placed on the same side of the grade 1 line, over 183"],
  "The engine's basis says observedAgreement = diagonal / n, a count over a count: 0.721311. The row-times-column sum over n squared is the expected agreement, 0.336708. The unweighted kappa, 0.579841, rescales the observed figure against the expected one. 0.814208 is the observed agreement after each grade is reduced to relevant or not at grade 1 or more, a different set of ratings.")
 

@@ -15,7 +15,7 @@ def x(p, c, ds, e): q(next(_i), p, c, ds, e)
 # 1
 x("In the Ekene calibration set, when is a row's outcome 1, and what share of the 200 rows has it?",
  "When the judged grade is 2 or 3; the base rate is 0.190000",
- ["At grade 1 or more; the base rate is 0.190000",
+ ["At grade 1 or more, the retrieval default; the base rate is 0.190000",
   "Whenever the probability is at least 0.5, so the base rate is the share above that line",
   "In system A's top 5; the base rate is 0.443478"],
  "The fixture defines the outcome as 1 when the judged grade is 2 or 3, which is stricter than the grade 1 default of the retrieval metrics; 0.190000 of the 200 rows have it. An outcome is what happened, so it never comes from the probability. 0.443478 is system A's mean precision at 5, a retrieval figure with nothing to do with these rows.")
@@ -86,7 +86,7 @@ x("A BM25 score of 2.191027 is pasted in as the second of the probabilities of a
 
 # 10
 x("Two outcomes are passed with one probability. Which field does the engine name?",
- "`probabilities`, with \"probabilities must be an array of 2 numbers, one per outcome\"",
+ "It names `probabilities`: \"probabilities must be an array of 2 numbers, one per outcome\"",
  ["`yTrue`, with \"yTrue must be a non-empty array of 0 and 1 outcomes\" for the lost pair",
   "None: the unmatched outcome is dropped",
   "`bins`, with \"bins must be a whole number from 1 to 100\", as the rows cannot be binned"],

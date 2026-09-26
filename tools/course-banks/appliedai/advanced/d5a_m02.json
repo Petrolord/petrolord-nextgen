@@ -2,7 +2,7 @@
  {
   "prompt": "In the Ekene calibration set, when is a row's outcome 1, and what share of the 200 rows has it?",
   "options": [
-   "At grade 1 or more; the base rate is 0.190000",
+   "At grade 1 or more, the retrieval default; the base rate is 0.190000",
    "When the judged grade is 2 or 3; the base rate is 0.190000",
    "Whenever the probability is at least 0.5, so the base rate is the share above that line",
    "In system A's top 5; the base rate is 0.443478"
@@ -104,7 +104,7 @@
    "`yTrue`, with \"yTrue must be a non-empty array of 0 and 1 outcomes\" for the lost pair",
    "None: the unmatched outcome is dropped",
    "`bins`, with \"bins must be a whole number from 1 to 100\", as the rows cannot be binned",
-   "`probabilities`, with \"probabilities must be an array of 2 numbers, one per outcome\""
+   "It names `probabilities`: \"probabilities must be an array of 2 numbers, one per outcome\""
   ],
   "answer": 3,
   "explanation": "The outcomes come first and fix the length, so the probabilities list is measured against them and the refusal names `probabilities`, stating the 2 it needed. The `yTrue` message is for no outcomes at all. The engine never drops an unmatched row. The bins message is for a bin count outside 1 to 100."

@@ -3,7 +3,7 @@
   "prompt": "The Ekene annotators graded the same 183 judged pairs. What is their observed agreement, and how does the engine get it?",
   "options": [
    "0.336708: every row total times its column total, summed and divided by 183 squared",
-   "0.579841: the share of the pairs that remain in agreement once chance is taken away",
+   "0.579841: the share of the 183 pairs that remain in agreement once chance is taken away",
    "0.721311: the pairs on the diagonal of the confusion table, divided by the 183 pairs",
    "0.814208: the pairs both annotators placed on the same side of the grade 1 line, over 183"
   ],

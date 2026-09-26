@@ -25,7 +25,7 @@
   "prompt": "What does the 12-digit key absorb that a direct comparison of two doubles would not?",
   "options": [
    "Differences in passage length, which b already normalises away before any tie is ever tested",
-   "Any gap below 0.000001, so that every pair of scores printing alike at six decimals is a tie",
+   "Any gap too small to show at six decimals, so that every pair of scores printing alike is a tie",
    "Last-bit differences that arise when the terms of equal texts are added in a different order",
    "Unicode case differences in two copies of a passage, which the tokeniser keeps apart"
   ],
@@ -68,7 +68,7 @@
  {
   "prompt": "A bootstrap call asks for level 0.5. What does the engine return?",
   "options": [
-   "A 50 percent interval, the 25th to the 75th percentile of the bootstrap mean",
+   "A 50 percent interval, read from the middle half of the bootstrap means",
    "A refusal naming `level`: \"level must be 0.8, 0.9, 0.95 or 0.99\"",
    "The 0.95 interval, the default, with a note that 0.5 was not one of the levels",
    "A refusal naming `nBoot`, since level 0.5 needs more replicates to be read"
@@ -114,7 +114,7 @@
   "options": [
    "Both run, since the cap only warns, and the 5001st document is ranked after all the others as usual",
    "5000 run, since the cap is inclusive; 5001 is refused with \"documents has 5001 entries, above the 5000 this engine accepts\"",
-   "5000 is refused as well, since the cap is exclusive and the engine accepts at most 4999 documents",
+   "5000 is refused as well, since the cap is exclusive and the engine accepts only fewer than 5000 documents",
    "Both are refused, since MAX_DOCS limits the passages a query can rank to 1000, the largest cutoff k"
   ],
   "answer": 1,
