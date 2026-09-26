@@ -31,7 +31,7 @@ q(0, "On the Ekene gas field, which tax charges the 2026 gas profit, and at what
  "Gas revenue is outside the hydrocarbon tax, and companies income tax is charged on oil and gas together, so the gas profit carries companies income tax: an assessable profit of 47710000.000000 and a tax of 10713000.000000 in 2026. The 47710000.000000 figure is the companies income tax base and belongs to no hydrocarbon tax computation. The royalty is one instrument among several and leaves the profit taxable. Section 267 sets rates on profit from crude oil and gives no gas class.")
 
 q(2, "Ekene Alpha sells associated gas, and its liquids share of gross revenue is 0.970075 in 2026. Which of these enters its hydrocarbon tax at that share?",
- "Opex, HCDT, the NDDC levy and the capital allowance",
+ "Each cost shared with the gas: opex, the capital allowance, HCDT and the NDDC levy",
  ["The cap, scaled down by 0.970075",
   "Both liquids royalties, the production royalty and the royalty by price, cut to the share by s.263(1)(b)",
   "The rate, charged on the liquids share only"],

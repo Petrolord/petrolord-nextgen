@@ -56,7 +56,7 @@ q(3, "A lease granted out of new acreage onshore produces 1000000 barrels at 30 
   "4000000.000000, the tier after the cap, since the price is low"],
  "Para 1(2)(a) gives the lower of 8.00 USD and 20 percent of the price below the cap. At 30 USD/bbl, 20 percent of the price is below 8.00 USD, so the allowance is 6000000.000000. 8000000.000000 is the return at 75 USD/bbl. The converted-lease allowance applies to converted leases, and this is a new lease. The 4.00 USD tier starts only after 50 million barrels, and a low price does not move a barrel across the cap.")
 
-q(1, "A new onshore lease has produced 49500000 barrels before the year, then produces 1000000 barrels at 75 USD/bbl. What does the engine return?",
+q(1, "Suppose 49500000 barrels came out of a new onshore field before this year, and this year adds 1000000 at 75 USD/bbl. What allowance results?",
  "6000000.000000, with 500000 barrels below the cap and 500000 after it",
  ["8000000.000000, since the year started below the cap and the whole year stays in the first tier",
   "4000000.000000, as crossing the cap puts every barrel of that year on the 4.00 USD tier",

@@ -37,7 +37,7 @@
   "options": [
    "The cap, scaled down by 0.970075",
    "Both liquids royalties, the production royalty and the royalty by price, cut to the share by s.263(1)(b)",
-   "Opex, HCDT, the NDDC levy and the capital allowance",
+   "Each cost shared with the gas: opex, the capital allowance, HCDT and the NDDC levy",
    "The rate, charged on the liquids share only"
   ],
   "answer": 2,
