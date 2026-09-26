@@ -44,15 +44,15 @@
   "explanation": "A government take of several hundred percent is arithmetic and not a fiscal term, which is why those two points are flagged exceeds and never set the chart's scale."
  },
  {
-  "prompt": "Until the 2026-09-15 repair the capex sweep was a loop from a multiplier of 0.8 to 1.5 in steps of 0.1 that returned seven points. What ended it early, and what replaced it?",
+  "prompt": "The capex sweep's axis runs from a multiplier of 0.8 to 1.5. What confirms that the sweep's last point is really the 1.5 point?",
   "options": [
-   "The engine capped the sweep at seven points to hold the comparison inside its time budget, and the cap was later raised to eight.",
-   "The eighth point was skipped because a multiplier of 1.5 makes the contractor NPV negative for several templates, and the axis was rescaled instead.",
-   "The accumulating multiplier reached 1.5000000000000004, which fails the test that it be at most 1.5, and an integer step count replaced the accumulation.",
-   "The loop tested the rounded label rather than the accumulator, so a label of 1.5 was never produced, and the label is now read from the loop bound."
+   "The chart's last tick label reads 1.5, and a label is written from the same multiplier the point was computed at.",
+   "The loss the resilience verdict quotes is larger than the last step alone, which can only happen when the range is complete.",
+   "The last swept point equals the engine called directly at a multiplier of 1.5, on every regime, to the last printed digit.",
+   "The sweep returns as many points as the published capex cases, nine, so the grid and the golden describe one range."
   ],
   "answer": 2,
-  "explanation": "The engine returns the labels 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4 and 1.5, and the last swept value equals the engine called directly at 1.5 on every regime."
+  "explanation": "On the default project Nigeria - PIA (2021) returns 255.8175 million USD at the last swept point and 255.8175 when the engine is called directly at 1.5; the grid is `CAPEX_SWEEP_MULTIPLIERS`, eight points written from a step count."
  },
  {
   "prompt": "For USA - Gulf of Mexico on the default project the resilience verdict quotes a loss of 267.7301 million USD. Which two points is that measured between?",
@@ -99,18 +99,18 @@
   "explanation": "The last swept point is ordinary, 189.4674 million USD for USA - Gulf of Mexico at a multiplier of 1.5, but reaching anything past it means calling the ledger function directly."
  },
  {
-  "prompt": "On flows of -1 in year 1 and 2000 in year 2 the retired bisection reported 102400 percent. What does `calculateIRR` return now?",
+  "prompt": "On flows of -1 in year 1 and 2000 in year 2 the NPV at 102400 percent is 0.0009. What does `calculateIRR` return?",
   "options": [
-   "102400 percent still, the top of a doubling bracket that the band from -99 to 1000 percent does not change.",
+   "102400 percent, the rate at which the NPV first falls below a thousandth of a million USD on these flows.",
    "Null, with the status above-clamp and `irrRootAboveBand` true, because the only root is 199900 percent.",
    "199900.0000 percent, the true root, which the widened search now reaches.",
    "1000.0000 percent, the top of the band, reported as a clamp in the way the screening engine reports its own."
   ],
   "answer": 1,
-  "explanation": "The NPV at 102400 percent is 0.0009, small, positive and not zero, so the retired value was the edge of a search and never a root."
+  "explanation": "The NPV at 102400 percent is 0.0009, small, positive and above zero, so 102400 is no root; the only root, 199900 percent, lies above the band."
  },
  {
-  "prompt": "Two solvers in this package once reported suspiciously round rates, 102400 percent and 1000 percent. What is the tell a reader should carry?",
+  "prompt": "A rate of exactly 102400 percent or exactly 1000 percent appears where an IRR should be. What is the tell a reader should carry?",
   "options": [
    "Size rather than roundness, since no real project returns a rate in the thousands of percent and any such value is the edge of a search.",
    "A rate quoted to four decimal places, which is the format the bisection uses and the Newton iteration does not.",
@@ -118,7 +118,7 @@
    "Roundness rather than size, because both numbers were the edge of a search."
   ],
   "answer": 3,
-  "explanation": "On the published `capex_multiplier_0_7` case 1095.4783 percent is a real root and 102400 never was one, and the engine now returns null with a status rather than either."
+  "explanation": "On the published `capex_multiplier_0_7` case 1095.4783 percent is a real root and 102400 is no root at all; the engine returns null with a status rather than either, and a round figure is the mark of a search edge."
  },
  {
   "prompt": "`irr_all_positive_no_sign_change` and `irr_negative_root_reported` both printed 0.0000 percent under the retired rule. What does each return now?",

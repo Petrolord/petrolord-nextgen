@@ -8,7 +8,7 @@
    "Six labels, one per template."
   ],
   "answer": 2,
-  "explanation": "The multipliers are written from a step count, as 8 plus the step number over 10, so the last is exactly 1.5. The loop they replaced accumulated 0.1, arrived at 1.5000000000000004 and stopped at 1.4."
+  "explanation": "The multipliers are written from a step count, as 8 plus the step number over 10, so the last is exactly 1.5 and the last swept point equals a direct call at 1.5."
  },
  {
   "prompt": "A capex sweep written as a loop that adds 0.1 to a multiplier starting at 0.8, while it stays at or below 1.5, returns seven points and its last reads 1.4. What ends that loop early?",

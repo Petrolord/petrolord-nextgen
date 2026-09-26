@@ -264,7 +264,7 @@
   "explanation": "Every insight sentence rounds money and rates to one decimal place while the ranking underneath runs at full precision."
  },
  {
-  "prompt": "On flows of -1 then 2000 the retired bisection returned 102400 percent where the true rate is 199900 percent. What does the engine do with those flows now?",
+  "prompt": "A two-year project spends 1 million USD and then earns 2000, so its one real root sits at 199900 percent. Which answer does `calculateIRR` give for it, and on what grounds?",
   "options": [
    "It returns 199900.0000 percent, the band having been widened until the search reached the root.",
    "It returns 1000.0000 percent, the top of the band, as the screening engine returns its own clamp.",
@@ -272,10 +272,10 @@
    "It returns null with the status above-clamp, because the only root lies beyond the band from -99 to 1000 percent."
   ],
   "answer": 3,
-  "explanation": "The NPV at 102400 percent is 0.0009 and at 199900 percent is 0.0000, so the retired value was the edge of a search and never a root."
+  "explanation": "The NPV at 102400 percent is 0.0009 and at 199900 percent is 0.0000, so 102400 is no root; the only root lies above the band, and the engine says so with a status instead of a rate."
  },
  {
-  "prompt": "Two published cases once returned an IRR of 0.0000 percent, one with an NPV at 10 percent of 25.6198 million USD and one of -16.5289. What does each return today?",
+  "prompt": "Two published cases have an NPV at 10 percent of 25.6198 and of -16.5289 million USD: one never changes sign, the other is -100 then 90. What does `calculateIRR` return for each?",
   "options": [
    "Null with the status no-root on both, neither having a rate inside the band from -99 to 1000 percent.",
    "Null with the status no-sign-change on the profitable one, and the negative root itself, -10.0000 percent, on the one that loses money at every rate.",
@@ -283,7 +283,7 @@
    "-10.0000 percent on both, the shared contract reporting the nearest root inside the band whatever the flows do."
   ],
   "answer": 1,
-  "explanation": "A reader who rejected 102400 percent as absurd and accepted 0.0000 percent as break even had caught the harmless case and swallowed the dangerous one."
+  "explanation": "A profitable flow with no sign change has no rate to report, and a loss at every positive rate has a real negative root; a reader who would accept 0.0000 percent for either has read neither status."
  },
  {
   "prompt": "What does an `rrtUpliftPct` of 20 do to the resource rent tax base?",
@@ -308,15 +308,15 @@
   "explanation": "At a zero uplift the pool is the capex itself and the first charged year is 6; at 20 percent it is 1.2 times the capex and the first charged year is 7."
  },
  {
-  "prompt": "Why did the capex sweep once return seven points rather than eight?",
+  "prompt": "On the default project Nigeria - PIA (2021) keeps 291.8238 million USD of contractor NPV at a capex multiplier of 1.4 and 255.8175 at 1.5. What does that single last step cost, set against the 243.6525 the regime gives up over the whole sweep?",
   "options": [
-   "The engine dropped the last point to keep the axis readable.",
-   "The loop counted steps from 0.8 in tenths, and seven steps is what the 0.7 range of the published cases allows.",
-   "The last multiplier was reserved for the direct call the golden publishes beside the sweep, so it was computed but not returned.",
-   "The accumulating multiplier reached 1.5000000000000004 and failed its own test."
+   "243.6525 million USD, since the last step of a sweep carries its whole loss once the grid reaches the overrun on the label.",
+   "255.8175 million USD, the NPV at 1.5, because a loss is read from the endpoint of the axis and never from a difference.",
+   "About 15 percent of the range loss, which is the share of the axis the last step covers, one step in seven.",
+   "About 36.01 million USD, roughly a seventh of the loss over the sweep."
   ],
   "answer": 3,
-  "explanation": "The engine returns the labels 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4 and 1.5, written from a step count, and the last of them equals the engine called directly at 1.5."
+  "explanation": "The last step is the 1.4 point minus the 1.5 point; the range loss runs from the first swept point at 0.8 to the eighth at 1.5, and the two are different spans of one sweep."
  },
  {
   "prompt": "The verdict quotes Angola - Deepwater PSC as giving up 88.6123 million USD across the swept capex range. What is that measured over?",
@@ -423,7 +423,7 @@
    "A regime that takes a rising share of the upside absorbs a share of the downside, so the contractor's NPV under it moves less when capital cost rises.",
    "Both sweeps are computed from the same series, since the capex sweep is the price sweep re-expressed in money rather than in percentage points of government take.",
    "Both sweeps hold the other variable at the base case, so the two rankings are the same ranking measured twice.",
-   "Both are endpoint differences over seven points, so a regime that leads one must lead the other by construction."
+   "Both are endpoint differences over eight points, so a regime that leads one must lead the other by construction."
   ],
   "answer": 0,
   "explanation": "The two steepest climbers give up the least at 100.7185 and 88.6123 million USD and the two most regressive give up 244.0782 and 267.7301, while Nigeria - PIA (2021), almost flat at -0.0068, gives up 243.6525, so the orders still differ row for row."

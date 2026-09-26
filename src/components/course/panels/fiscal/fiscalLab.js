@@ -1580,7 +1580,9 @@ export const uruanCapstoneFields = async () => {
     ['beginner', 'con_y4_royalty_musd', con[3].royalty, URUAN_MONEY],
     ['beginner', 'con_y4_opex_musd', con[3].opex, URUAN_MONEY],
     ['beginner', 'con_y5_contractor_ncf_musd', con[4].contractorNCF, URUAN_MONEY],
-    ['beginner', 'con_payback_year_cum_ncf_musd', con.find((x) => x.cumulativeNCF > 0).cumulativeNCF, URUAN_MONEY],
+    // Tolerance 0.0003 (PIA re-cut lead decision): the PIA template's year 2
+    // royalty on the default project sits 0.000606 away, inside a 0.001 band.
+    ['beginner', 'con_payback_year_cum_ncf_musd', con.find((x) => x.cumulativeNCF > 0).cumulativeNCF, 0.0003],
     ['beginner', 'con_total_government_take_musd', sum(con, 'governmentTake'), URUAN_MONEY],
     ['intermediate', 'psc_y1_cost_recovered_musd', psc[0].costRecovered, URUAN_MONEY],
     ['intermediate', 'psc_y3_unrecovered_pool_musd', psc[2].unrecoveredCostPool, URUAN_MONEY],

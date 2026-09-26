@@ -30,7 +30,18 @@ LETTER = {'beginner': 'b', 'intermediate': 'i', 'advanced': 'a'}
 DASH = re.compile('[—–]')
 CONTRAST = re.compile(r',\s+not\s+\w', re.I)
 EDITS = os.path.join(REPO, 'docs', 'pia-recut', 'fiscal_edits.json')
-CAPSTONE_CHANGES = []   # no capstone prompt contradicts the digest (see RECUT-fiscal-DONE.md)
+_CP = json.load(open(os.path.join(HERE, 'capstone_advanced_prompt.json')))
+CAPSTONE_CHANGES = [{   # lead decision 4: the Expert prompt states the sweep plainly (and loses a contrastive)
+    'slug': 'fiscal', 'tier': 'advanced', 'field': 'prompt', 'old': _CP['old'], 'new': _CP['new'],
+    'why': 'no repair framing ("The sweep now reaches ...") and no "X, not Y" contrastive; graded fields unchanged'}]
+# Graded-field changes the ship step writes into a guarded capstone migration.
+GRADED_FIELD_CHANGES = [
+    {'slug': 'fiscal', 'tier': 'beginner', 'key': 'con_payback_year_cum_ncf_musd',
+     'expected': 14.740261270763284, 'old_tol': 0.001, 'new_tol': 0.0003,
+     'why': ("lead decision (PIA re-cut leak gate): the Nigeria - PIA (2021) template's year 2 royalty on the "
+             "Designer's default project, 14.739655314252133, sat 0.000606 from the answer, inside the 0.001 band; "
+             "at 0.0003 it is 2.02 bands clear. Expected value unchanged. Precedent: psc_y8_royalty_musd, 2026-09-13 recut.")},
+]
 
 
 def key(r):
@@ -119,6 +130,12 @@ def main():
              'new': new[k]}
             for k in sorted(new, key=order)],
         'capstone_prompt_changes': CAPSTONE_CHANGES,
+        'graded_field_changes': GRADED_FIELD_CHANGES,
+        'lesson_title_changes': [  # manifest titles (lead decision 4, L5); the ship step carries them if the served structure holds titles
+            {'tier': 'advanced', 'module_key': 'm03-the-capex-sweep', 'lesson_key': 'l02-the-point-the-loop-never-reaches',
+             'old': 'The point the loop never reaches', 'new': 'The eighth point and the direct call'},
+            {'tier': 'advanced', 'module_key': 'm05-numbers-to-distrust', 'lesson_key': 'l03-the-irr-that-reports-its-bracket',
+             'old': 'The IRR that reports its bracket', 'new': 'The IRR that answers with a status'}],
     }
     edits_txt = json.dumps(edits, ensure_ascii=False, indent=1) + '\n'
     bank_dir = os.path.join(HERE, 'banks')

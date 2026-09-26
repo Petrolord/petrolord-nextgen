@@ -6,7 +6,7 @@
  "counts": {
   "beginner": 30,
   "intermediate": 34,
-  "advanced": 39
+  "advanced": 46
  },
  "questions": [
   {
@@ -2315,6 +2315,112 @@
    "tier": "advanced",
    "scope": "final",
    "module_key": null,
+   "ord": 25,
+   "fields": [
+    "prompt",
+    "explanation"
+   ],
+   "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history",
+   "old": {
+    "prompt": "On flows of -1 then 2000 the retired bisection returned 102400 percent where the true rate is 199900 percent. What does the engine do with those flows now?",
+    "options": [
+     "It returns 199900.0000 percent, the band having been widened until the search reached the root.",
+     "It returns 1000.0000 percent, the top of the band, as the screening engine returns its own clamp.",
+     "It returns null with the status no-root, since a root outside the band is a root the engine did not find.",
+     "It returns null with the status above-clamp, because the only root lies beyond the band from -99 to 1000 percent."
+    ],
+    "answer_index": 3,
+    "explanation": "The NPV at 102400 percent is 0.0009 and at 199900 percent is 0.0000, so the retired value was the edge of a search and never a root."
+   },
+   "new": {
+    "prompt": "A two-year project spends 1 million USD and then earns 2000, so its one real root sits at 199900 percent. Which answer does `calculateIRR` give for it, and on what grounds?",
+    "options": [
+     "It returns 199900.0000 percent, the band having been widened until the search reached the root.",
+     "It returns 1000.0000 percent, the top of the band, as the screening engine returns its own clamp.",
+     "It returns null with the status no-root, since a root outside the band is a root the engine did not find.",
+     "It returns null with the status above-clamp, because the only root lies beyond the band from -99 to 1000 percent."
+    ],
+    "answer_index": 3,
+    "explanation": "The NPV at 102400 percent is 0.0009 and at 199900 percent is 0.0000, so 102400 is no root; the only root lies above the band, and the engine says so with a status instead of a rate."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 26,
+   "fields": [
+    "prompt",
+    "explanation"
+   ],
+   "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history",
+   "old": {
+    "prompt": "Two published cases once returned an IRR of 0.0000 percent, one with an NPV at 10 percent of 25.6198 million USD and one of -16.5289. What does each return today?",
+    "options": [
+     "Null with the status no-root on both, neither having a rate inside the band from -99 to 1000 percent.",
+     "Null with the status no-sign-change on the profitable one, and the negative root itself, -10.0000 percent, on the one that loses money at every rate.",
+     "0.0000 percent on the profitable one and null on the other, the engine still declining to print a negative rate.",
+     "-10.0000 percent on both, the shared contract reporting the nearest root inside the band whatever the flows do."
+    ],
+    "answer_index": 1,
+    "explanation": "A reader who rejected 102400 percent as absurd and accepted 0.0000 percent as break even had caught the harmless case and swallowed the dangerous one."
+   },
+   "new": {
+    "prompt": "Two published cases have an NPV at 10 percent of 25.6198 and of -16.5289 million USD: one never changes sign, the other is -100 then 90. What does `calculateIRR` return for each?",
+    "options": [
+     "Null with the status no-root on both, neither having a rate inside the band from -99 to 1000 percent.",
+     "Null with the status no-sign-change on the profitable one, and the negative root itself, -10.0000 percent, on the one that loses money at every rate.",
+     "0.0000 percent on the profitable one and null on the other, the engine still declining to print a negative rate.",
+     "-10.0000 percent on both, the shared contract reporting the nearest root inside the band whatever the flows do."
+    ],
+    "answer_index": 1,
+    "explanation": "A profitable flow with no sign change has no rate to report, and a loss at every positive rate has a real negative root; a reader who would accept 0.0000 percent for either has read neither status."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "fields": [
+    "prompt",
+    "explanation",
+    "options[0]",
+    "options[1]",
+    "options[2]",
+    "options[3] (keyed)"
+   ],
+   "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history",
+   "old": {
+    "prompt": "Why did the capex sweep once return seven points rather than eight?",
+    "options": [
+     "The engine dropped the last point to keep the axis readable.",
+     "The loop counted steps from 0.8 in tenths, and seven steps is what the 0.7 range of the published cases allows.",
+     "The last multiplier was reserved for the direct call the golden publishes beside the sweep, so it was computed but not returned.",
+     "The accumulating multiplier reached 1.5000000000000004 and failed its own test."
+    ],
+    "answer_index": 3,
+    "explanation": "The engine returns the labels 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4 and 1.5, written from a step count, and the last of them equals the engine called directly at 1.5."
+   },
+   "new": {
+    "prompt": "On the default project Nigeria - PIA (2021) keeps 291.8238 million USD of contractor NPV at a capex multiplier of 1.4 and 255.8175 at 1.5. What does that single last step cost, set against the 243.6525 the regime gives up over the whole sweep?",
+    "options": [
+     "243.6525 million USD, since the last step of a sweep carries its whole loss once the grid reaches the overrun on the label.",
+     "255.8175 million USD, the NPV at 1.5, because a loss is read from the endpoint of the axis and never from a difference.",
+     "About 15 percent of the range loss, which is the share of the axis the last step covers, one step in seven.",
+     "About 36.01 million USD, roughly a seventh of the loss over the sweep."
+    ],
+    "answer_index": 3,
+    "explanation": "The last step is the 1.4 point minus the 1.5 point; the range loss runs from the first swept point at 0.8 to the eighth at 1.5, and the two are different spans of one sweep."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "advanced",
+   "scope": "final",
+   "module_key": null,
    "ord": 31,
    "fields": [
     "explanation"
@@ -2491,7 +2597,8 @@
    "module_key": null,
    "ord": 39,
    "fields": [
-    "explanation"
+    "explanation",
+    "options[3]"
    ],
    "why": "three templates now fall on the price sweep; PIA gives up 243.6525",
    "old": {
@@ -2511,7 +2618,7 @@
      "A regime that takes a rising share of the upside absorbs a share of the downside, so the contractor's NPV under it moves less when capital cost rises.",
      "Both sweeps are computed from the same series, since the capex sweep is the price sweep re-expressed in money rather than in percentage points of government take.",
      "Both sweeps hold the other variable at the base case, so the two rankings are the same ranking measured twice.",
-     "Both are endpoint differences over seven points, so a regime that leads one must lead the other by construction."
+     "Both are endpoint differences over eight points, so a regime that leads one must lead the other by construction."
     ],
     "answer_index": 0,
     "explanation": "The two steepest climbers give up the least at 100.7185 and 88.6123 million USD and the two most regressive give up 244.0782 and 267.7301, while Nigeria - PIA (2021), almost flat at -0.0068, gives up 243.6525, so the orders still differ row for row."
@@ -2927,6 +3034,39 @@
    "tier": "advanced",
    "scope": "module",
    "module_key": "m03-the-capex-sweep",
+   "ord": 1,
+   "fields": [
+    "explanation"
+   ],
+   "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history",
+   "old": {
+    "prompt": "What multipliers does the capex sweep hand back with its points?",
+    "options": [
+     "Seven labels, 0.8 through 1.4, the eighth being unreachable in floating point.",
+     "Nine labels from 0.7 to 1.5, the multipliers the published capex cases are run at.",
+     "Eight labels: 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4 and 1.5.",
+     "Six labels, one per template."
+    ],
+    "answer_index": 2,
+    "explanation": "The multipliers are written from a step count, as 8 plus the step number over 10, so the last is exactly 1.5. The loop they replaced accumulated 0.1, arrived at 1.5000000000000004 and stopped at 1.4."
+   },
+   "new": {
+    "prompt": "What multipliers does the capex sweep hand back with its points?",
+    "options": [
+     "Seven labels, 0.8 through 1.4, the eighth being unreachable in floating point.",
+     "Nine labels from 0.7 to 1.5, the multipliers the published capex cases are run at.",
+     "Eight labels: 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4 and 1.5.",
+     "Six labels, one per template."
+    ],
+    "answer_index": 2,
+    "explanation": "The multipliers are written from a step count, as 8 plus the step number over 10, so the last is exactly 1.5 and the last swept point equals a direct call at 1.5."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m03-the-capex-sweep",
    "ord": 2,
    "fields": [
     "prompt",
@@ -3239,6 +3379,44 @@
    "tier": "advanced",
    "scope": "module",
    "module_key": "m05-numbers-to-distrust",
+   "ord": 5,
+   "fields": [
+    "prompt",
+    "explanation",
+    "options[0]",
+    "options[1]",
+    "options[2] (keyed)",
+    "options[3]"
+   ],
+   "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history",
+   "old": {
+    "prompt": "Until the 2026-09-15 repair the capex sweep was a loop from a multiplier of 0.8 to 1.5 in steps of 0.1 that returned seven points. What ended it early, and what replaced it?",
+    "options": [
+     "The engine capped the sweep at seven points to hold the comparison inside its time budget, and the cap was later raised to eight.",
+     "The eighth point was skipped because a multiplier of 1.5 makes the contractor NPV negative for several templates, and the axis was rescaled instead.",
+     "The accumulating multiplier reached 1.5000000000000004, which fails the test that it be at most 1.5, and an integer step count replaced the accumulation.",
+     "The loop tested the rounded label rather than the accumulator, so a label of 1.5 was never produced, and the label is now read from the loop bound."
+    ],
+    "answer_index": 2,
+    "explanation": "The engine returns the labels 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4 and 1.5, and the last swept value equals the engine called directly at 1.5 on every regime."
+   },
+   "new": {
+    "prompt": "The capex sweep's axis runs from a multiplier of 0.8 to 1.5. What confirms that the sweep's last point is really the 1.5 point?",
+    "options": [
+     "The chart's last tick label reads 1.5, and a label is written from the same multiplier the point was computed at.",
+     "The loss the resilience verdict quotes is larger than the last step alone, which can only happen when the range is complete.",
+     "The last swept point equals the engine called directly at a multiplier of 1.5, on every regime, to the last printed digit.",
+     "The sweep returns as many points as the published capex cases, nine, so the grid and the golden describe one range."
+    ],
+    "answer_index": 2,
+    "explanation": "On the default project Nigeria - PIA (2021) returns 255.8175 million USD at the last swept point and 255.8175 when the engine is called directly at 1.5; the grid is `CAPEX_SWEEP_MULTIPLIERS`, eight points written from a step count."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-numbers-to-distrust",
    "ord": 8,
    "fields": [
     "explanation",
@@ -3266,6 +3444,75 @@
     ],
     "answer_index": 0,
     "explanation": "Two ranges live in one engine: the sweep visits 0.8 to 1.5 on the six templates and the published cases 0.7 to 1.5 on the Designer's sample PSC regime, where payback slips from year 3 to year 6."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-numbers-to-distrust",
+   "ord": 10,
+   "fields": [
+    "prompt",
+    "explanation",
+    "options[0]"
+   ],
+   "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history",
+   "old": {
+    "prompt": "On flows of -1 in year 1 and 2000 in year 2 the retired bisection reported 102400 percent. What does `calculateIRR` return now?",
+    "options": [
+     "102400 percent still, the top of a doubling bracket that the band from -99 to 1000 percent does not change.",
+     "Null, with the status above-clamp and `irrRootAboveBand` true, because the only root is 199900 percent.",
+     "199900.0000 percent, the true root, which the widened search now reaches.",
+     "1000.0000 percent, the top of the band, reported as a clamp in the way the screening engine reports its own."
+    ],
+    "answer_index": 1,
+    "explanation": "The NPV at 102400 percent is 0.0009, small, positive and not zero, so the retired value was the edge of a search and never a root."
+   },
+   "new": {
+    "prompt": "On flows of -1 in year 1 and 2000 in year 2 the NPV at 102400 percent is 0.0009. What does `calculateIRR` return?",
+    "options": [
+     "102400 percent, the rate at which the NPV first falls below a thousandth of a million USD on these flows.",
+     "Null, with the status above-clamp and `irrRootAboveBand` true, because the only root is 199900 percent.",
+     "199900.0000 percent, the true root, which the widened search now reaches.",
+     "1000.0000 percent, the top of the band, reported as a clamp in the way the screening engine reports its own."
+    ],
+    "answer_index": 1,
+    "explanation": "The NPV at 102400 percent is 0.0009, small, positive and above zero, so 102400 is no root; the only root, 199900 percent, lies above the band."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "advanced",
+   "scope": "module",
+   "module_key": "m05-numbers-to-distrust",
+   "ord": 11,
+   "fields": [
+    "prompt",
+    "explanation"
+   ],
+   "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history",
+   "old": {
+    "prompt": "Two solvers in this package once reported suspiciously round rates, 102400 percent and 1000 percent. What is the tell a reader should carry?",
+    "options": [
+     "Size rather than roundness, since no real project returns a rate in the thousands of percent and any such value is the edge of a search.",
+     "A rate quoted to four decimal places, which is the format the bisection uses and the Newton iteration does not.",
+     "An IRR reported beside a negative NPV, which is the only combination that a bracket return can produce in either engine.",
+     "Roundness rather than size, because both numbers were the edge of a search."
+    ],
+    "answer_index": 3,
+    "explanation": "On the published `capex_multiplier_0_7` case 1095.4783 percent is a real root and 102400 never was one, and the engine now returns null with a status rather than either."
+   },
+   "new": {
+    "prompt": "A rate of exactly 102400 percent or exactly 1000 percent appears where an IRR should be. What is the tell a reader should carry?",
+    "options": [
+     "Size rather than roundness, since no real project returns a rate in the thousands of percent and any such value is the edge of a search.",
+     "A rate quoted to four decimal places, which is the format the bisection uses and the Newton iteration does not.",
+     "An IRR reported beside a negative NPV, which is the only combination that a bracket return can produce in either engine.",
+     "Roundness rather than size, because both numbers were the edge of a search."
+    ],
+    "answer_index": 3,
+    "explanation": "On the published `capex_multiplier_0_7` case 1095.4783 percent is a real root and 102400 is no root at all; the engine returns null with a status rather than either, and a round figure is the mark of a search edge."
    }
   },
   {
@@ -3550,5 +3797,41 @@
    }
   }
  ],
- "capstone_prompt_changes": []
+ "capstone_prompt_changes": [
+  {
+   "slug": "fiscal",
+   "tier": "advanced",
+   "field": "prompt",
+   "old": "Six values from ONE call of runFiscalComparison on the SAME URUAN project as the other two tiers, with BOTH regimes in it: the concession (royalty flat 14 percent, cost recovery limit 100 percent, profit split flat 100 percent, corporate income tax 28 percent, no resource rent tax, no minimum tax) and the production sharing contract (royalty sliding, 6 percent from 0 USD/bbl and 9.5 percent from 60 USD/bbl; cost recovery limit 65 percent; profit split 65 percent from R 1.0, 45 percent from R 1.4, 32 percent from R 1.65; corporate income tax 32 percent, no resource rent tax, no minimum tax). Report: (1) the NPV of the regime the summary puts FIRST, in millions of USD; (2) the PRODUCTION SHARING CONTRACT's government share of net revenue (undiscounted) as the SUMMARY TABLE reports it, the engine's effectiveTaxRate key, in percent; (3) the PRODUCTION SHARING CONTRACT's government take (undiscounted) on the PRICE SWEEP at 60 USD/bbl, in percent; (4) the contractor NPV the production sharing contract gives up over the LAST TENTH of the capex sweep, the swept point at a multiplier of 1.4 minus the swept point at 1.5, in millions of USD; (5) the loss over the WHOLE swept range, the first swept point minus the engine called directly at a capex multiplier of 1.5, in millions of USD; and (6) the CONCESSION's climb across the price sweep, last point minus first point, in percentage points. Traps. Fields 2 and 3 are two different ratios of the same government cash flow and they are NOT the same number: government share of net revenue adds TOTAL CAPEX back into contractor take and government take does not, and field 3 is also read at a swept price. Fields 4 and 5 are two different spans of one sweep, so one is much smaller than the other: field 4 is the last step alone and field 5 is the whole range. The sweep now reaches the multiplier its axis is labelled with, so its last swept point and a direct call at 1.5 are the same number; count the points the engine returns before subtracting, and read the last two. Field 6 is negative on this project and that is the answer, not an error: the concession's line falls as the price rises, and field 6 is the endpoint difference asked for whatever state each endpoint carries. The summary is sorted by contractor NPV descending, so field 1 is a lookup only after the sort. The price sweep reaches each price by a multiplier on the FIRST deck point's oil price, and that multiplier scales OIL ONLY.",
+   "new": "Six values from ONE call of runFiscalComparison on the SAME URUAN project as the other two tiers, with BOTH regimes in it: the concession (royalty flat 14 percent, cost recovery limit 100 percent, profit split flat 100 percent, corporate income tax 28 percent, no resource rent tax, no minimum tax) and the production sharing contract (royalty sliding, 6 percent from 0 USD/bbl and 9.5 percent from 60 USD/bbl; cost recovery limit 65 percent; profit split 65 percent from R 1.0, 45 percent from R 1.4, 32 percent from R 1.65; corporate income tax 32 percent, no resource rent tax, no minimum tax). Report: (1) the NPV of the regime the summary puts FIRST, in millions of USD; (2) the PRODUCTION SHARING CONTRACT's government share of net revenue (undiscounted) as the SUMMARY TABLE reports it, the engine's effectiveTaxRate key, in percent; (3) the PRODUCTION SHARING CONTRACT's government take (undiscounted) on the PRICE SWEEP at 60 USD/bbl, in percent; (4) the contractor NPV the production sharing contract gives up over the LAST TENTH of the capex sweep, the swept point at a multiplier of 1.4 minus the swept point at 1.5, in millions of USD; (5) the loss over the WHOLE swept range, the first swept point minus the engine called directly at a capex multiplier of 1.5, in millions of USD; and (6) the CONCESSION's climb across the price sweep, last point minus first point, in percentage points. Traps. Fields 2 and 3 are two different ratios of the same government cash flow and they are NOT the same number: government share of net revenue adds TOTAL CAPEX back into contractor take and government take does not, and field 3 is also read at a swept price. Fields 4 and 5 are two different spans of one sweep, so one is much smaller than the other: field 4 is the last step alone and field 5 is the whole range. The sweep returns eight points, 0.8 to 1.5, so its last swept point and a direct call at 1.5 are the same number; count the points the engine returns before subtracting, and read the last two. Field 6 is negative on this project, and that negative number is the answer: the concession's line falls as the price rises, and field 6 is the endpoint difference asked for whatever state each endpoint carries. The summary is sorted by contractor NPV descending, so field 1 is a lookup only after the sort. The price sweep reaches each price by a multiplier on the FIRST deck point's oil price, and that multiplier scales OIL ONLY.",
+   "why": "no repair framing (\"The sweep now reaches ...\") and no \"X, not Y\" contrastive; graded fields unchanged"
+  }
+ ],
+ "graded_field_changes": [
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "key": "con_payback_year_cum_ncf_musd",
+   "expected": 14.740261270763284,
+   "old_tol": 0.001,
+   "new_tol": 0.0003,
+   "why": "lead decision (PIA re-cut leak gate): the Nigeria - PIA (2021) template's year 2 royalty on the Designer's default project, 14.739655314252133, sat 0.000606 from the answer, inside the 0.001 band; at 0.0003 it is 2.02 bands clear. Expected value unchanged. Precedent: psc_y8_royalty_musd, 2026-09-13 recut."
+  }
+ ],
+ "lesson_title_changes": [
+  {
+   "tier": "advanced",
+   "module_key": "m03-the-capex-sweep",
+   "lesson_key": "l02-the-point-the-loop-never-reaches",
+   "old": "The point the loop never reaches",
+   "new": "The eighth point and the direct call"
+  },
+  {
+   "tier": "advanced",
+   "module_key": "m05-numbers-to-distrust",
+   "lesson_key": "l03-the-irr-that-reports-its-bracket",
+   "old": "The IRR that reports its bracket",
+   "new": "The IRR that answers with a status"
+  }
+ ]
 }

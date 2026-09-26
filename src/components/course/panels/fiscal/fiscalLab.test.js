@@ -1526,6 +1526,8 @@ describe('THE LEAK GATE: the guard itself', () => {
       ['cmp_psc_effective_tax_rate_pct', 0.0001, 0.001, 0.1, 1, 1e-7, 1e-6],
       // The one field the capstone grades tighter than the rest.
       ['psc_y8_royalty_musd', 0.0003, 0.003, 0.3, 3, 3e-7, 3e-6],
+      // Narrowed in the PIA re-cut: the PIA template's year 2 royalty sat inside 0.001.
+      ['con_payback_year_cum_ncf_musd', 0.0003, 0.003, 0.3, 3, 3e-7, 3e-6],
     ].forEach(([key, g1, b1, g2, b2, g3, b3]) => {
       const [, , value, tol] = published(key);
       expect(tol, key).toBe(g1);
@@ -1539,9 +1541,9 @@ describe('THE LEAK GATE: the guard itself', () => {
       expect(c.gradingBand, key).toBeCloseTo(g3, 15); expect(c.band, key).toBeCloseTo(b3, 15);
       expect(c.value, key).toBeCloseTo(value / 1000, 12);
     });
-    // Seventeen fields at the usual bands and one narrowed, so a future recut
-    // that silently widens the odd one out fails here.
-    expect(CAPSTONE_FIELDS.filter((f2) => f2[3] === 0.0003).map((f2) => f2[1])).toEqual(['psc_y8_royalty_musd']);
+    // Sixteen fields at the usual bands and two narrowed, so a future recut
+    // that silently widens either fails here.
+    expect(CAPSTONE_FIELDS.filter((f2) => f2[3] === 0.0003).map((f2) => f2[1])).toEqual(['con_payback_year_cum_ncf_musd', 'psc_y8_royalty_musd']);
   });
 
   it('walks a large teaching surface and every reader answers a bare call', async () => {
@@ -1644,22 +1646,11 @@ const KNOWN_COINCIDENCES = [
   },
   {
     path: 'ledger(nigeria___pia__2021, default).rows[1].royalty',
-    value: 14.739655314252133, key: 'con_payback_year_cum_ncf_musd', tag: 'as graded', clearance: 0.61,
-    is: 'the Nigeria - PIA (2021) template royalty in year 2 of the DEFAULT PROJECT, a single year royalty of another regime on another project, against a cumulative net cash flow on the capstone field',
+    value: 14.739655314252133, key: 'con_payback_year_cum_ncf_musd', tag: 'as graded', clearance: 2.02,
+    is: 'the Nigeria - PIA (2021) template royalty in year 2 of the DEFAULT PROJECT, a single year royalty of another regime on another project, against a cumulative net cash flow on the capstone field; it sat inside the old 0.001 band, and the PIA re-cut narrowed that field to 0.0003, which puts it 2.02 grading bands clear',
   },
 ];
 
-/**
- * THE ONE COINCIDENCE INSIDE A GRADING BAND, and it is a lead decision rather
- * than a pass. The PIA 2021 template carries the Act's royalty, so its year 2
- * royalty on the DEFAULT PROJECT is 14.739655, which sits 0.000606 from the
- * graded Associate cumulative net cash flow in the payback year (14.740261,
- * tolerance 0.001). The eighteen graded fields are held byte-identical in this
- * re-cut, so the band is not narrowed here; the choice (narrow that field's
- * tolerance to 0.0003 in a graded-field migration, or accept) is recorded in
- * RECUT-fiscal-DONE.md for the lead. Pinned exactly so it cannot drift or grow.
- */
-const INSIDE_BAND_FOR_LEAD = ['ledger(nigeria___pia__2021, default).rows[1].royalty'];
 
 /**
  * THE TWO COLLISIONS THE EC2-3 REPAIR REMOVED, kept rather than deleted so the
@@ -1755,7 +1746,7 @@ describe('THE LEAK GATE: no teaching number may be a graded capstone answer', ()
     KNOWN_COINCIDENCES.forEach((k) => expect(k.is.length, k.path).toBeGreaterThan(40));
   });
 
-  it('NOT ONE coincidence is inside the grader own tolerance, and the closest stands nearly three bands clear', async () => {
+  it('NOT ONE coincidence is inside the grader own tolerance, and the closest stands two bands clear', async () => {
     const hits = await collisions();
     const inside = hits.filter((h) => {
       const graded = CAPSTONE_FIELDS.find((f2) => f2[1] === h.key);
@@ -1764,15 +1755,17 @@ describe('THE LEAK GATE: no teaching number may be a graded capstone answer', ()
     // THIS IS THE ASSERTION THAT MATTERS. A teaching number inside the grading
     // band is a number a learner can be marked correct for reading off the
     // wrong table, and the previous cut had one.
-    expect(inside.map((h) => h.path)).toEqual(INSIDE_BAND_FOR_LEAD);
+    expect(inside.map((h) => h.path)).toEqual([]);
     // The clearance written down beside each entry is the real one, and the
     // smallest of them stays above one grading band.
     hits.forEach((h) => {
       const k = KNOWN_COINCIDENCES.find((x) => x.path === h.path && x.key === h.key);
       expect(k, h.path).toBeDefined();
       expect(h.clearance, `${h.path} clearance`).toBeCloseTo(k.clearance, 2);
-      if (!INSIDE_BAND_FOR_LEAD.includes(h.path)) expect(h.clearance, `${h.path} is inside the grading band`).toBeGreaterThan(1);
+      expect(h.clearance, `${h.path} is inside the grading band`).toBeGreaterThan(1);
     });
-    expect(Math.min(...hits.filter((h) => !INSIDE_BAND_FOR_LEAD.includes(h.path)).map((h) => h.clearance))).toBeGreaterThan(2.9);
+    // The closest is the PIA template's year 2 royalty, 2.02 bands clear of the
+    // narrowed payback-year field; every other coincidence is nearly three clear.
+    expect(Math.min(...hits.map((h) => h.clearance))).toBeGreaterThan(2);
   });
 });

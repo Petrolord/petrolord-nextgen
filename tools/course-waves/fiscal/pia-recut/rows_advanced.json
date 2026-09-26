@@ -137,7 +137,7 @@
    "A regime that takes a rising share of the upside absorbs a share of the downside, so the contractor's NPV under it moves less when capital cost rises.",
    "Both sweeps are computed from the same series, since the capex sweep is the price sweep re-expressed in money rather than in percentage points of government take.",
    "Both sweeps hold the other variable at the base case, so the two rankings are the same ranking measured twice.",
-   "Both are endpoint differences over seven points, so a regime that leads one must lead the other by construction."
+   "Both are endpoint differences over eight points, so a regime that leads one must lead the other by construction."
   ],
   "answer_index": 0,
   "explanation": "The two steepest climbers give up the least at 100.7185 and 88.6123 million USD and the two most regressive give up 244.0782 and 267.7301, while Nigeria - PIA (2021), almost flat at -0.0068, gives up 243.6525, so the orders still differ row for row.",
@@ -622,5 +622,117 @@
   "answer_index": 1,
   "explanation": "A number without its definition is not a number, which is the same lesson as one regime reading 30.6156 as government share of net revenue and 39.3855 as government take.",
   "why": "PIA capex losses 243.6525 (default) and 244.8503 (ODIDI); pair 30.6156/39.3855"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 25,
+  "prompt": "A two-year project spends 1 million USD and then earns 2000, so its one real root sits at 199900 percent. Which answer does `calculateIRR` give for it, and on what grounds?",
+  "options": [
+   "It returns 199900.0000 percent, the band having been widened until the search reached the root.",
+   "It returns 1000.0000 percent, the top of the band, as the screening engine returns its own clamp.",
+   "It returns null with the status no-root, since a root outside the band is a root the engine did not find.",
+   "It returns null with the status above-clamp, because the only root lies beyond the band from -99 to 1000 percent."
+  ],
+  "answer_index": 3,
+  "explanation": "The NPV at 102400 percent is 0.0009 and at 199900 percent is 0.0000, so 102400 is no root; the only root lies above the band, and the engine says so with a status instead of a rate.",
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 26,
+  "prompt": "Two published cases have an NPV at 10 percent of 25.6198 and of -16.5289 million USD: one never changes sign, the other is -100 then 90. What does `calculateIRR` return for each?",
+  "options": [
+   "Null with the status no-root on both, neither having a rate inside the band from -99 to 1000 percent.",
+   "Null with the status no-sign-change on the profitable one, and the negative root itself, -10.0000 percent, on the one that loses money at every rate.",
+   "0.0000 percent on the profitable one and null on the other, the engine still declining to print a negative rate.",
+   "-10.0000 percent on both, the shared contract reporting the nearest root inside the band whatever the flows do."
+  ],
+  "answer_index": 1,
+  "explanation": "A profitable flow with no sign change has no rate to report, and a loss at every positive rate has a real negative root; a reader who would accept 0.0000 percent for either has read neither status.",
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history"
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 29,
+  "prompt": "On the default project Nigeria - PIA (2021) keeps 291.8238 million USD of contractor NPV at a capex multiplier of 1.4 and 255.8175 at 1.5. What does that single last step cost, set against the 243.6525 the regime gives up over the whole sweep?",
+  "options": [
+   "243.6525 million USD, since the last step of a sweep carries its whole loss once the grid reaches the overrun on the label.",
+   "255.8175 million USD, the NPV at 1.5, because a loss is read from the endpoint of the axis and never from a difference.",
+   "About 15 percent of the range loss, which is the share of the axis the last step covers, one step in seven.",
+   "About 36.01 million USD, roughly a seventh of the loss over the sweep."
+  ],
+  "answer_index": 3,
+  "explanation": "The last step is the 1.4 point minus the 1.5 point; the range loss runs from the first swept point at 0.8 to the eighth at 1.5, and the two are different spans of one sweep.",
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m03-the-capex-sweep",
+  "ord": 1,
+  "prompt": "What multipliers does the capex sweep hand back with its points?",
+  "options": [
+   "Seven labels, 0.8 through 1.4, the eighth being unreachable in floating point.",
+   "Nine labels from 0.7 to 1.5, the multipliers the published capex cases are run at.",
+   "Eight labels: 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4 and 1.5.",
+   "Six labels, one per template."
+  ],
+  "answer_index": 2,
+  "explanation": "The multipliers are written from a step count, as 8 plus the step number over 10, so the last is exactly 1.5 and the last swept point equals a direct call at 1.5.",
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-numbers-to-distrust",
+  "ord": 5,
+  "prompt": "The capex sweep's axis runs from a multiplier of 0.8 to 1.5. What confirms that the sweep's last point is really the 1.5 point?",
+  "options": [
+   "The chart's last tick label reads 1.5, and a label is written from the same multiplier the point was computed at.",
+   "The loss the resilience verdict quotes is larger than the last step alone, which can only happen when the range is complete.",
+   "The last swept point equals the engine called directly at a multiplier of 1.5, on every regime, to the last printed digit.",
+   "The sweep returns as many points as the published capex cases, nine, so the grid and the golden describe one range."
+  ],
+  "answer_index": 2,
+  "explanation": "On the default project Nigeria - PIA (2021) returns 255.8175 million USD at the last swept point and 255.8175 when the engine is called directly at 1.5; the grid is `CAPEX_SWEEP_MULTIPLIERS`, eight points written from a step count.",
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-numbers-to-distrust",
+  "ord": 10,
+  "prompt": "On flows of -1 in year 1 and 2000 in year 2 the NPV at 102400 percent is 0.0009. What does `calculateIRR` return?",
+  "options": [
+   "102400 percent, the rate at which the NPV first falls below a thousandth of a million USD on these flows.",
+   "Null, with the status above-clamp and `irrRootAboveBand` true, because the only root is 199900 percent.",
+   "199900.0000 percent, the true root, which the widened search now reaches.",
+   "1000.0000 percent, the top of the band, reported as a clamp in the way the screening engine reports its own."
+  ],
+  "answer_index": 1,
+  "explanation": "The NPV at 102400 percent is 0.0009, small, positive and above zero, so 102400 is no root; the only root, 199900 percent, lies above the band.",
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history"
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m05-numbers-to-distrust",
+  "ord": 11,
+  "prompt": "A rate of exactly 102400 percent or exactly 1000 percent appears where an IRR should be. What is the tell a reader should carry?",
+  "options": [
+   "Size rather than roundness, since no real project returns a rate in the thousands of percent and any such value is the edge of a search.",
+   "A rate quoted to four decimal places, which is the format the bisection uses and the Newton iteration does not.",
+   "An IRR reported beside a negative NPV, which is the only combination that a bracket return can produce in either engine.",
+   "Roundness rather than size, because both numbers were the edge of a search."
+  ],
+  "answer_index": 3,
+  "explanation": "On the published `capex_multiplier_0_7` case 1095.4783 percent is a real root and 102400 is no root at all; the engine returns null with a status rather than either, and a round figure is the mark of a search edge.",
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history"
  }
 ]

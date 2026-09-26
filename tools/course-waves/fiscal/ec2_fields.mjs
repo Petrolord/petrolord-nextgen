@@ -96,7 +96,13 @@ export const FIELDS = [
   // cumulative cash flow IN the payback year tests the same skill, since the
   // learner must find the year before they can read the row, and the value is
   // a real number nobody can reach by guessing.
-  ['beginner', 'con_payback_year_cum_ncf_musd', con.find((x) => x.cumulativeNCF > 0).cumulativeNCF, MONEY],
+  // Tolerance 0.0003 (lead decision, PIA re-cut 2026-09-26). The Nigeria - PIA
+  // (2021) template's year 2 royalty on the Designer's default project is
+  // 14.739655, 0.000606 from this value: inside a 0.001 band, so a learner
+  // copying that unrelated cell would have been marked correct. At 0.0003 it
+  // stands 2.02 tolerances clear, and a learner reading four decimals is still
+  // inside the band (same precedent as psc_y8_royalty_musd below).
+  ['beginner', 'con_payback_year_cum_ncf_musd', con.find((x) => x.cumulativeNCF > 0).cumulativeNCF, 0.0003],
   ['beginner', 'con_total_government_take_musd', sum(con, 'governmentTake'), MONEY],
   // Professional: the instruments, on the URUAN production sharing contract.
   ['intermediate', 'psc_y1_cost_recovered_musd', psc[0].costRecovered, MONEY],

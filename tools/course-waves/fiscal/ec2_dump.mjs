@@ -776,9 +776,9 @@ w('The sweep\'s definition has a second problem that the summary\'s does not, be
 w();
 
 // -------------------------------------------------------------- Section 20
-w('# SECTION 20: The capex sweep and the point the loop never reaches (owned by Expert m03)');
+w('# SECTION 20: The capex sweep and its eight points (owned by Expert m03)');
 w();
-w('This is finding F1. The capex sweep is written as a for loop from a multiplier of 0.8 to 1.5 in steps of 0.1, and its axis is labelled 0.8 to 1.5. Adding 0.1 to a binary floating point number does not land on 1.5: the accumulated multiplier reaches 1.5000000000000004, which fails the `<= 1.5` test, so the sweep has SEVEN points and its last label reads "1.4".');
+w('The capex sweep runs the whole comparison again at a fixed list of eight capex multipliers, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4 and 1.5 (`CAPEX_SWEEP_MULTIPLIERS`), and its axis is labelled with the same eight. Each point is the contractor NPV at that multiplier, so the last swept point IS the NPV at a 50 percent overrun and equals a direct call of the engine at 1.5.');
 w();
 {
   const c = CMP['cmp_all_templates_default_project'];
@@ -786,9 +786,9 @@ w();
   const sw = res.sensitivityData.capex;
   w(`The engine returns ${sw.labels.length} labels: ${sw.labels.join(', ')}.`);
   w();
-  w('All six templates on the DEFAULT PROJECT, contractor NPV at each swept capex multiplier, and the eighth point the loop never reaches computed by calling the engine directly at a multiplier of 1.5:');
+  w('All six templates on the DEFAULT PROJECT, contractor NPV at each swept capex multiplier, with the engine called directly at a multiplier of 1.5 beside the last swept point:');
   w();
-  w(`| regime | ${sw.labels.map((x) => `x${x}`).join(' | ')} | x1.5, called directly | loss over the SEVEN swept points, 0.8 to 1.4 (derived) | loss over EIGHT points, 0.8 to 1.5 (derived) |`);
+  w(`| regime | ${sw.labels.map((x) => `x${x}`).join(' | ')} | x1.5, called directly | loss over the swept points, first minus last (derived) | loss to the direct call at 1.5 (derived) |`);
   w(`| --- | ${sw.labels.map(() => '---').join(' | ')} | --- | --- | --- |`);
   for (const d of sw.data) {
     const g = c.regimes.find((x) => x.id === d.regimeId);
@@ -796,7 +796,7 @@ w();
     w(`| ${g.name} | ${d.values.map((v) => m(v)).join(' | ')} | ${m(at15)} | ${m(d.values[0] - d.values[d.values.length - 1])} | ${m(d.values[0] - at15)} |`);
   }
   w();
-  w(`The golden publishes the seven engine points as \`engineCapexPoints\` and the seven engine losses as \`capexLossesAsEngine\`, beside the oracle's eight point sweep, so both are pinned and a silent change to either is caught.`);
+  w(`The two loss columns agree on every row, because the last swept point and the direct call are the same number. The golden pins each regime's loss over the sweep as \`capexLosses\`, so a silent change to the sweep is caught.`);
   w();
 }
 w('The seven published capex-sweep cases run the same Designer default regime as the price sweep, id 1, at multipliers of 0.7 to 1.3, and pin the whole result at each. They are NOT the "Nigeria - PIA (2021)" template either:');
@@ -808,7 +808,7 @@ for (const x of G.capexSweep) {
   w(`| ${x.id} | ${m(e.npv)} | ${e.irr === null ? `null${e.irrStatus ? ` (${e.irrStatus})` : ''}` : p(e.irr)} | ${m(e.totalContractorNCF)} | ${m(e.totalGovTake)} | ${e.paybackYear ?? 'null'} | ${e.rFactorPayoutYear ?? 'null'} |`);
 }
 w();
-w('What "resilience to cost overrun" therefore measures is the NPV given up between a 20 percent UNDERSPEND and a 40 percent overrun, not the 50 percent overrun the axis promises. The verdict sentence is not false, it is answering a narrower question than the label on the chart.');
+w('What "resilience to cost overrun" therefore measures is the NPV given up between a 20 percent UNDERSPEND and a 50 percent overrun, the whole range on the axis. It ranks money given up across that range, which is a statement about the sweep and says nothing about which overrun is likely.');
 w();
 
 // -------------------------------------------------------------- Section 21

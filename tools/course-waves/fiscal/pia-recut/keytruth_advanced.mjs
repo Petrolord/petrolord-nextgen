@@ -112,8 +112,28 @@ export default [
   { q: 'advanced m06 14', where: 'prompt', printed: '3.8097', value: (L) => L.cf(L.PIA, L.ODIDI)[4].royalty },
   { q: 'advanced m06 14', where: 'prompt', printed: '4.9025', value: (L) => L.cf(L.PIA, L.ODIDI)[5].royalty },
   { q: 'advanced m06 14', where: 'key', printed: 'so the royalty by price began', value: (L) => { const r = L.cf(L.PIA, L.ODIDI); const rate = (i) => r[i].royalty / r[i].grossRevenue; return rate(4) < 0.0500001 && rate(5) > 0.052 && L.ODIDI.prices[1].year === 6 ? 'so the royalty by price began' : 'no'; } },
-  { q: 'advanced m06 14', where: 'explanation', printed: '0.002276', value: (L) => { const r = L.cf(L.PIA, L.ODIDI)[5]; return (r.royalty - 0.05 * r.grossRevenue) / (r.grossRevenue - (0.0145 * 0)) && Number(((r.royalty - 0.05 * r.grossRevenue) / (r.grossRevenue * 1)).toFixed(6)) > 0 ? 0.002276 : NaN; } },
+  // The royalty-by-price rate in ODIDI year 6: (royalty - 5 percent of gross) over the oil revenue,
+  // the oil revenue read from an engine probe with gas and NGL zeroed and every instrument off.
+  { q: 'advanced m06 14', where: 'explanation', printed: '0.002276', value: (L) => {
+    const r = L.cf(L.PIA, L.ODIDI)[5];
+    const probe = JSON.parse(JSON.stringify(L.ODIDI)); probe.production.gas.initial = 0; probe.production.ngl.initial = 0;
+    const off = { id: 'probe', name: 'probe', royalty: { type: 'flat', rate: 0 }, costRecoveryLimit: 100, profitSplit: { type: 'flat', split: 100 }, tax: { cit: 0, rrt: 0, minTax: 0 } };
+    const oil = L.cf(off, probe)[5].grossRevenue;
+    return (r.royalty - 0.05 * r.grossRevenue) / oil; } },
   { q: 'advanced m06 15', where: 'key', printed: '243.6525', value: async (L) => { const v = await series(L, 'dflt', 'capex', L.PIA.id); return v[0] - v[7]; } },
   { q: 'advanced m06 15', where: 'key', printed: '244.8503', value: async (L) => { const v = await series(L, 'odidi', 'capex', L.PIA.id); return v[0] - v[7]; } },
   { q: 'advanced m06 15', where: 'explanation', printed: '39.3855', value: async (L) => (await series(L, 'dflt', 'price', L.PIA.id))[3] },
+  // Lead decision 4 rows: the IRR contract and the eight-point sweep stated as they are.
+  { q: 'advanced final 25', where: 'key', printed: 'above-clamp', value: (L) => L.E.calculateIRRResult([{ year: 1, contractorNCF: -1 }, { year: 2, contractorNCF: 2000 }]).irrStatus },
+  { q: 'advanced final 25', where: 'explanation', printed: '0.0009', value: (L) => L.E.calculateNPV([{ year: 1, contractorNCF: -1 }, { year: 2, contractorNCF: 2000 }], 102400) },
+  { q: 'advanced final 26', where: 'key', printed: 'no-sign-change', value: (L) => L.E.calculateIRRResult([{ year: 1, contractorNCF: 10 }, { year: 2, contractorNCF: 20 }]).irrStatus },
+  { q: 'advanced final 26', where: 'key', printed: '-10.0000', value: (L) => L.E.calculateIRRResult([{ year: 1, contractorNCF: -100 }, { year: 2, contractorNCF: 90 }]).irr },
+  { q: 'advanced final 29', where: 'key', printed: '36.01', value: async (L) => { const v = await series(L, 'dflt', 'capex', L.PIA.id); return v[6] - v[7]; } },
+  { q: 'advanced final 29', where: 'prompt', printed: '291.8238', value: async (L) => (await series(L, 'dflt', 'capex', L.PIA.id))[6] },
+  { q: 'advanced final 29', where: 'prompt', printed: '243.6525', value: async (L) => { const v = await series(L, 'dflt', 'capex', L.PIA.id); return v[0] - v[7]; } },
+  { q: 'advanced m03 1', where: 'key', printed: '1.5', value: (L) => L.E.CAPEX_SWEEP_MULTIPLIERS.length === 8 && L.E.CAPEX_SWEEP_MULTIPLIERS[7] === 1.5 },
+  { q: 'advanced m05 5', where: 'explanation', printed: '255.8175', value: async (L) => (await series(L, 'dflt', 'capex', L.PIA.id))[7] },
+  { q: 'advanced m05 5', where: 'explanation', printed: '255.8175 when', value: (L) => L.E.calculateNPV(L.cf(L.PIA, L.DEFAULT_PROJECT, 1.5, 1), L.DEFAULT_PROJECT.discountRate).toFixed(4) + ' when' },
+  { q: 'advanced m05 10', where: 'key', printed: 'above-clamp', value: (L) => L.E.calculateIRRResult([{ year: 1, contractorNCF: -1 }, { year: 2, contractorNCF: 2000 }]).irrStatus },
+  { q: 'advanced m05 11', where: 'explanation', printed: 'the engine returns null with a status', value: (L) => { const c = L.CASE.capex_multiplier_0_7; return L.E.calculateIRRResult(L.cf({ ...c.regime }, c.project, c.capexMultiplier, 1)).irrStatus === 'multiple-roots'; } },
 ];

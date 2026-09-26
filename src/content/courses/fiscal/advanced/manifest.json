@@ -124,7 +124,7 @@
         },
         {
           "key": "l02-the-point-the-loop-never-reaches",
-          "title": "The point the loop never reaches",
+          "title": "The eighth point and the direct call",
           "order": 2,
           "est_minutes": 14,
           "panels": [
@@ -248,7 +248,7 @@
         },
         {
           "key": "l03-the-irr-that-reports-its-bracket",
-          "title": "The IRR that reports its bracket",
+          "title": "The IRR that answers with a status",
           "order": 3,
           "est_minutes": 14,
           "panels": [

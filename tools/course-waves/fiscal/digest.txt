@@ -1082,15 +1082,15 @@ Neither number is wrong on its own terms. Take over profit and take over cash ar
 
 The sweep's definition has a second problem that the summary's does not, because its denominator can reach zero and go through it. See Section 26.
 
-# SECTION 20: The capex sweep and the point the loop never reaches (owned by Expert m03)
+# SECTION 20: The capex sweep and its eight points (owned by Expert m03)
 
-This is finding F1. The capex sweep is written as a for loop from a multiplier of 0.8 to 1.5 in steps of 0.1, and its axis is labelled 0.8 to 1.5. Adding 0.1 to a binary floating point number does not land on 1.5: the accumulated multiplier reaches 1.5000000000000004, which fails the `<= 1.5` test, so the sweep has SEVEN points and its last label reads "1.4".
+The capex sweep runs the whole comparison again at a fixed list of eight capex multipliers, 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4 and 1.5 (`CAPEX_SWEEP_MULTIPLIERS`), and its axis is labelled with the same eight. Each point is the contractor NPV at that multiplier, so the last swept point IS the NPV at a 50 percent overrun and equals a direct call of the engine at 1.5.
 
 The engine returns 8 labels: 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4, 1.5.
 
-All six templates on the DEFAULT PROJECT, contractor NPV at each swept capex multiplier, and the eighth point the loop never reaches computed by calling the engine directly at a multiplier of 1.5:
+All six templates on the DEFAULT PROJECT, contractor NPV at each swept capex multiplier, with the engine called directly at a multiplier of 1.5 beside the last swept point:
 
-| regime | x0.8 | x0.9 | x1.0 | x1.1 | x1.2 | x1.3 | x1.4 | x1.5 | x1.5, called directly | loss over the SEVEN swept points, 0.8 to 1.4 (derived) | loss over EIGHT points, 0.8 to 1.5 (derived) |
+| regime | x0.8 | x0.9 | x1.0 | x1.1 | x1.2 | x1.3 | x1.4 | x1.5 | x1.5, called directly | loss over the swept points, first minus last (derived) | loss to the direct call at 1.5 (derived) |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | Nigeria - PIA (2021) | 499.4700 | 466.1066 | 432.0925 | 397.9011 | 362.8470 | 327.7928 | 291.8238 | 255.8175 | 255.8175 | 243.6525 | 243.6525 |
 | Ghana - Deepwater | 195.6257 | 185.0914 | 172.7531 | 160.6465 | 143.3384 | 129.9510 | 107.3627 | 85.7833 | 85.7833 | 109.8425 | 109.8425 |
@@ -1099,7 +1099,7 @@ All six templates on the DEFAULT PROJECT, contractor NPV at each swept capex mul
 | Angola - Deepwater PSC | 213.5335 | 218.7874 | 211.3787 | 206.8935 | 189.9459 | 174.9866 | 147.4539 | 124.9212 | 124.9212 | 88.6123 | 88.6123 |
 | Generic Royalty/Tax | 465.4141 | 431.2293 | 397.0445 | 362.8597 | 327.8018 | 292.5924 | 257.3831 | 221.3360 | 221.3360 | 244.0782 | 244.0782 |
 
-The golden publishes the seven engine points as `engineCapexPoints` and the seven engine losses as `capexLossesAsEngine`, beside the oracle's eight point sweep, so both are pinned and a silent change to either is caught.
+The two loss columns agree on every row, because the last swept point and the direct call are the same number. The golden pins each regime's loss over the sweep as `capexLosses`, so a silent change to the sweep is caught.
 
 The seven published capex-sweep cases run the same Designer default regime as the price sweep, id 1, at multipliers of 0.7 to 1.3, and pin the whole result at each. They are NOT the "Nigeria - PIA (2021)" template either:
 
@@ -1115,7 +1115,7 @@ The seven published capex-sweep cases run the same Designer default regime as th
 | capex_1.4_pia_default | 69.4751 | 13.8121 | 435.5277 | 1109.9564 | 6 | 4 |
 | capex_1.5_pia_default | 41.2671 | 12.0333 | 421.1846 | 1074.2995 | 6 | 4 |
 
-What "resilience to cost overrun" therefore measures is the NPV given up between a 20 percent UNDERSPEND and a 40 percent overrun, not the 50 percent overrun the axis promises. The verdict sentence is not false, it is answering a narrower question than the label on the chart.
+What "resilience to cost overrun" therefore measures is the NPV given up between a 20 percent UNDERSPEND and a 50 percent overrun, the whole range on the axis. It ranks money given up across that range, which is a statement about the sweep and says nothing about which overrun is likely.
 
 # SECTION 21: The derived insights (owned by Expert m04)
 
