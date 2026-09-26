@@ -40,7 +40,7 @@ q(0, "Why does this course call a reading from a sound level meter a sound level
  ["OSHA's Appendix A has no other word for a reading taken by an instrument.",
   "The engine refuses any input field whose name refers to noise directly.",
   "A sound level is a percentage of an allowance, while a reading is in dBA."],
- "The course's naming rule 3: noise already means scatter in data in the Decline Curve Analysis, Well Test and Seismolord courses, so a reading is a sound level and noise exposure is kept for a noise dose. It is a rule about readers arriving from other courses. A sound level is in dBA; the percentage of an allowance is the noise dose.")
+ "The course's naming rule 3: noise already means scatter in data in the Decline Curve Analysis, Well Test and Seismic Interpretation courses, so a reading is a sound level and noise exposure is kept for a noise dose. It is a rule about readers arriving from other courses. A sound level is in dBA; the percentage of an allowance is the noise dose.")
 
 q(3, "The capstone TWAs are graded on which coefficient, and why?",
  "The printed ones, 16.61 and 10.0, as judgement J1 has each preset use.",

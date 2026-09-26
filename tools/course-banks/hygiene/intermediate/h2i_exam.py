@@ -288,7 +288,7 @@ q(3, "Which of these is a judgement call the engine makes where its sources leav
 
 # 42
 q(2, "This course writes \"sound level\" for an instrument reading. Which courses make that rule necessary?",
- "Decline Curve Analysis, Well Test and Seismolord, where the short word means scatter in data",
+ "Decline Curve Analysis, Well Test and Seismic Interpretation, where the short word means scatter in data",
  ["The Economics courses, where the short word already means a currency rate",
   "Flow Assurance and Gas Processing, where the short word means an inhibitor or a methanol charge",
   "Field Development Planning and Well Cost, where the short word means money that is at risk"],

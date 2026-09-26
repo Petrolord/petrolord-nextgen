@@ -502,7 +502,7 @@
       "apply_h2_hygiene.sh"
     ],
     "pins": {
-      "digest.txt": "2b5da26ae40d5dc9c845e050c7a3400491478888039878cbac915d1d25815cff",
+      "digest.txt": "8b13bef461d40dfb9a668dd055a167f5c4dce2f6a62995599a9e40e8460baa7f",
       "fields.json": "5271e9615617356f27a0febed887f311e5a4cdd4bc94c65644eb6bf0a6ac88a1"
     },
     "note": "FULL kit, foundation phase plus the five-migration seed ladder. The digest and its generator, the teaching records, the capstone generator, the answer key and its precision declaration, every wave gate, the build, finalise and mirror scripts, the structure and scaffold, all five writer briefs, the three tier headers, the course and go-live generators, gen_seeds.sh and its WORKTREE escape hatch, the local scratch database, the rollback-wrapped dry run with its negative-control block cutter, and the content-addressed apply script the owner runs. HSE module, path_order 62. The gates read /root paths by DEFAULT and every one takes an override."
@@ -827,7 +827,7 @@
       "apply_rf_refinery.sh"
     ],
     "pins": {
-      "digest.txt": "5742949dc528a3ac432e96dddf43a2d90c775cd8162fd14936e71ea173d0513f",
+      "digest.txt": "d78fd143abdf2db7e8447c7da8b9166e71e98f97dbec8f661854781814b36f16",
       "fields.json": "a7eb4fa757dfc7408ccb987b205965f5fc9ad56da67c02d65535e0e6713a2bcd"
     }
   },
