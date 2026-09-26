@@ -39,7 +39,7 @@ q(2, "A first contract year is stated as a period from 2027-07-01 to 2028-01-01 
   "365 days, because a period is always rounded up to the full calendar year."],
  "The engine's own wording: \"2027-07-01 up to 2028-01-01 (end date excluded, as a contract year that finishes on the following 1 January): 184 days\". 63000 x 184 is 11592000.000000. A period may be any length with its end after its start; the end date is excluded, and nothing is rounded to a calendar year.")
 
-q(2, "Fifty thousand MMBtu a day over a stated 350 days: which annual quantity results?",
+q(2, "Fifty thousand MMBtu a day over a stated 350 days: which ACQ does the engine return?",
  "17500000.000000, for 350 days as stated.",
  ["A result for 365 days, as every contract year is read as a calendar year.",
   "A refusal, since a contract year must hold 365 or 366 days to be counted by the engine.",
@@ -51,7 +51,7 @@ q(0, "What MaxDCQ and swing factor does the engine return for the power plant's 
  ["A MaxDCQ of 21000.000000 and a swing factor of 1.375000.",
   "A MaxDCQ of 66150.000000 and a swing factor of 1.050000.",
   "A swing factor of 1.100000 and no MaxDCQ."],
- "MaxDCQ = maxDcqPct % of DCQ, so 110 percent of 21000 is 23100.000000, and the swing factor is MaxDCQ / DCQ, 1.100000. 1.375000 is the power plant's EFFECTIVE swing, the swing factor over the take-or-pay fraction. 66150.000000 and 1.050000 are the export feed's 105 percent of 63000. A stated MaxDCQ percentage always returns a MaxDCQ.")
+ "MaxDCQ = maxDcqPct % of DCQ, so 110 percent of 21000 is 23100.000000, and the swing factor is MaxDCQ / DCQ, 1.100000. 1.375000 is the power plant's EFFECTIVE swing, the swing factor over the take-or-pay fraction. 66150.000000 and 1.050000 are the export feed's 105 percent of 63000. A MaxDCQ percentage the engine accepts returns a MaxDCQ beside the swing factor.")
 
 q(3, "The power plant pairs a MaxDCQ of 110 percent with take-or-pay at 80 percent. Which effective swing results?",
  "1.375000.",
@@ -107,7 +107,7 @@ q(2, "A contract states no MaxDCQ. On a stated day the buyer nominates, is offer
  ["A seller shortfall of 80, since the nomination runs above the DCQ.",
   "A refusal, as a nomination may never exceed the DCQ.",
   "Trimmed to 100, with 80 not properly nominated."],
- "Without a MaxDCQ there is no ceiling, and every nomination is properly nominated: the golden day daily-no-maxdcq returns a properly nominated quantity of 180.000000 and prints \"(no reason: nothing is owed either way)\". The 80 above the DCQ is over-take, taken and paid for, and neither side owes anything for it.")
+ "Without a MaxDCQ there is no ceiling, and every nomination is properly nominated: the golden day daily-no-maxdcq returns a properly nominated quantity of 180.000000 and an empty list of reasons, since nothing is owed either way. The 80 above the DCQ is over-take, taken and paid for, and neither side owes anything for it.")
 
 q(3, "Four contractQuantities calls are drafted, and only one comes back refused. Which?",
  "Days stated as 365.5.",

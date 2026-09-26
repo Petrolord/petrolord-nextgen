@@ -100,7 +100,7 @@ q(3, "How should a learner quote the power plant's daily contract quantity in en
  ["21000 MMBtu, with no basis needed for a daily figure.",
   "22156.172905 MMBtu, net.",
   "20 MMscf, the volume, since energy is only an invoice unit and has no place in a contract."],
- "The course quotes every energy figure with its basis, at the digest's six decimals: the power plant's DCQ is 21000.000000 MMBtu on a gross basis. 22156.172905 is that energy in GJ on the same gross basis. The contract counts quantity in energy; the volume is where the energy came from.")
+ "The course quotes every energy figure with its basis, at six decimals: the power plant's DCQ is 21000.000000 MMBtu on a gross basis. 22156.172905 is that energy in GJ on the same gross basis. The contract counts quantity in energy; the volume is where the energy came from.")
 
 q(0, "Zero cubic metres go into the volume-to-energy view. Refused, or returned?",
  "Returned: 0.000000 MMBtu and 0.000000 GJ, with the rule printed as usual.",
@@ -236,7 +236,7 @@ q(2, "Two figures near the take-or-pay edge print the same at six decimals. What
  ["Their printed agreement, read as equality.",
   "A comparison of the two figures by eye, rounded to four decimals first.",
   "The reason line's round-trip figures."],
- "The engine compares exact numbers. Two figures that print alike at six decimals are not, for that reason alone, met or equal: printed alike is not equal. Only the engine's own deficiency says whether the take-or-pay quantity was met, and the course keys a figure as equal only where the digest checks it exactly.")
+ "The engine compares exact numbers. Two figures that print alike at six decimals are not, for that reason alone, met or equal: printed alike is not equal. Only the engine's own deficiency says whether the take-or-pay quantity was met, and the course keys a figure as equal only where it checks the engine's two values equal exactly.")
 
 q(1, "Why does the engine refuse a take-or-pay year that states no makeUp object, even when only one year is run?",
  "It must know what happens to a deficiency, and the make-up terms carry no default.",

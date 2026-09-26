@@ -19,7 +19,7 @@
    "2700.000000."
   ],
   "answer": 3,
-  "explanation": "In one year with no make-up, damages or refund, the net is counted x contract price + deficiency payment: the counted gas at 3 plus the 1200.000000 paid for the rest of the take-or-pay quantity of 900, which the engine returns as 2700.000000. That case's take-or-pay quantity is 900 at 90 percent, and the ACQ is never paid for whole."
+  "explanation": "In one year with no make-up, damages or refund, the net is counted x contract price + deficiency payment: the counted gas at 3 plus the 1200.000000 paid for the rest of the take-or-pay quantity of 900, which the engine returns as 2700.000000. That case's take-or-pay quantity is 900 at 90 percent, and the ACQ is paid for whole only in a year the buyer takes all of it."
  },
  {
   "prompt": "The exactly-met golden year and the zero-take golden year both return a net to the seller of 2400.000000. Why?",
@@ -74,7 +74,7 @@
    "48300.000000, the year's reductions at the stated rate."
   ],
   "answer": 0,
-  "explanation": "The engine's reason, verbatim: \"2027: seller shortfall 6300 reduces the Adjusted ACQ and is paid to the buyer at 1.25: 7875\". The fixture's note reads \"seller shortfall liquidated damages at a stated 1.25 US$ per MMBtu not made available (synthetic contract term)\". No Act or model clause sets the rate; force majeure earns no damages."
+  "explanation": "The engine's reason, verbatim: \"2027: seller shortfall 6300 reduces the Adjusted ACQ and is paid to the buyer at 1.25: 7875\". The fixture's note reads \"seller shortfall liquidated damages at a stated 1.25 US$ per MMBtu not made available (synthetic contract term)\". The rate is a stated contract term with no default, and force majeure earns no damages."
  },
  {
   "prompt": "The power plant's 2027 run alone returns a net to the seller of 15786225.000000. Which statement about that figure can the course defend?",
@@ -118,7 +118,7 @@
    "A line confirming the DCQ was met exactly and that both sides of the delivery point are square for the day."
   ],
   "answer": 2,
-  "explanation": "The daily balance prints a reason only on a day on which something is owed, excused or trimmed. On 2027-01-11 the buyer shortfall and over-take are both 0.000000, and the engine prints nothing. A day with nothing to say gets no reason, just as a year with nothing to reconcile prints \"(no reason: nothing to reconcile)\"."
+  "explanation": "The daily balance prints a reason only on a day on which something is owed, excused or trimmed. On 2027-01-11 the buyer shortfall and over-take are both 0.000000, and the engine prints nothing. A day with nothing to say gets no reason, just as a year with nothing to reconcile returns an empty list of reasons."
  },
  {
   "prompt": "What is a liquidated damages rate for a seller shortfall?",

@@ -52,7 +52,7 @@
    "1845.000000."
   ],
   "answer": 0,
-  "explanation": "The Adjusted ACQ is 800.000000 and the take-or-pay quantity 640.000000, so 600 taken leaves a deficiency of 40.000000; the engine's reason: \"2027: 600 counted against the take-or-pay quantity 640 leaves a deficiency of 40; the deficiency payment is 40 x 3 = 120; the buyer may make up 40 in the 2 contract years after 2027, to the end of 2029\". Skipping the reductions gives the wrong 600. 75.000000 is that year's seller shortfall damages and 1845.000000 its net to the seller."
+  "explanation": "The Adjusted ACQ is 800.000000 and the take-or-pay quantity 640.000000, so 600 taken leaves a deficiency of 40.000000; the engine's reason opens: \"2027: 600 counted against the take-or-pay quantity 640 leaves a deficiency of 40; the deficiency payment is 40 x 3 = 120\". Skipping the reductions gives the wrong 600. 75.000000 is that year's seller shortfall damages and 1845.000000 its net to the seller."
  },
  {
   "prompt": "Ninety percent take-or-pay on an ACQ of 1000, and only 500 taken in the case's one year: find the deficiency.",
@@ -74,7 +74,7 @@
    "A refusal, since a take equal to the take-or-pay quantity needs a tie-break rule stated in the contract."
   ],
   "answer": 1,
-  "explanation": "The deficiency is the take-or-pay quantity less the quantity counted when that is above 0, so taking exactly 800 leaves 0.000000, and the engine prints \"(no reason: nothing to reconcile)\". The model agreement asks the buyer to take \"at least\" the take-or-pay quantity, and at least includes equal. A deficiency of 1.000000 belongs to the case one unit short."
+  "explanation": "The deficiency is the take-or-pay quantity less the quantity counted when that is above 0, so taking exactly 800 leaves 0.000000, and the engine returns an empty list of reasons, since nothing is left to reconcile. The model agreement asks the buyer to take \"at least\" the take-or-pay quantity, and at least includes equal. A deficiency of 1.000000 belongs to the case one unit short."
  },
  {
   "prompt": "One unit short: a take-or-pay quantity of 800, 799 taken, a take-or-pay price of 3. What deficiency payment does the engine return?",
@@ -85,10 +85,10 @@
    "3.000000."
   ],
   "answer": 3,
-  "explanation": "The engine's reason, verbatim: \"2027: 799 counted against the take-or-pay quantity 800 leaves a deficiency of 1; the deficiency payment is 1 x 3 = 3; the buyer may make up 1 in the 2 contract years after 2027, to the end of 2029\". The engine compares exact numbers, with no rounding band. 2400.000000 is the payment of a year in which nothing was taken."
+  "explanation": "The engine's reason opens, verbatim: \"2027: 799 counted against the take-or-pay quantity 800 leaves a deficiency of 1; the deficiency payment is 1 x 3 = 3\". The engine compares exact numbers, with no rounding band. 2400.000000 is the payment of a year in which nothing was taken."
  },
  {
-  "prompt": "Suppose the buyer's plant stands idle all year and takes no gas at all, against 800 owed. What comes back?",
+  "prompt": "A golden year has an ACQ of 1000, a take-or-pay quantity of 800 and a take-or-pay price of 3, and the buyer's plant stands idle all year, taking no gas. What comes back?",
   "options": [
    "A deficiency of 1000.000000, paid at 3000.000000.",
    "No deficiency, as for force majeure.",
@@ -96,7 +96,7 @@
    "A deficiency of 800.000000, paid at 2400.000000."
   ],
   "answer": 3,
-  "explanation": "The engine's reason: \"2027: 0 counted against the take-or-pay quantity 800 leaves a deficiency of 800; the deficiency payment is 800 x 3 = 2400\". The whole take-or-pay quantity is the deficiency; the ACQ above it is never owed. A zero take is a result, and force majeure is only ever a stated input."
+  "explanation": "The engine's reason opens: \"2027: 0 counted against the take-or-pay quantity 800 leaves a deficiency of 800; the deficiency payment is 800 x 3 = 2400\". The whole take-or-pay quantity is the deficiency; the ACQ above it is never owed. A zero take is a result, and force majeure is only ever a stated input."
  },
  {
   "prompt": "A golden year states force majeure covering its whole ACQ of 1000. What does the engine return?",
@@ -107,7 +107,7 @@
    "An Adjusted ACQ of 1000.000000, force majeure being counted only day by day."
   ],
   "answer": 0,
-  "explanation": "The golden case top-fm-whole-year returns an Adjusted ACQ of 0.000000, a take-or-pay quantity of 0.000000 and no deficiency, with \"(no reason: nothing to reconcile)\". Reductions may equal the ACQ; only reductions ABOVE it are refused. Force majeure stated for the year comes off the ACQ like any other reduction."
+  "explanation": "The golden case top-fm-whole-year returns an Adjusted ACQ of 0.000000, a take-or-pay quantity of 0.000000 and no deficiency, with no reason, since nothing is left to reconcile. Reductions may equal the ACQ; only reductions ABOVE it are refused. Force majeure stated for the year comes off the ACQ like any other reduction."
  },
  {
   "prompt": "The power plant's leap year 2032 is run alone: ACQ 7686000, no reductions, 80 percent, and 6148800 taken. What does the engine find?",
@@ -118,7 +118,7 @@
    "A deficiency of 0.000000 and an over-take credited forward to the next year of the term."
   ],
   "answer": 1,
-  "explanation": "In 2032 the take-or-pay quantity is 80 percent of 7686000.000000, which is 6148800.000000, and the buyer took exactly that. It is the fixture's planted boundary: deficiency 0 at the boundary, and the one-year run prints \"(no reason: nothing to reconcile)\". The ACQ is not the yardstick, 2032 counts 366 days, and a single year carries nothing forward."
+  "explanation": "In 2032 the take-or-pay quantity is 80 percent of 7686000.000000, which is 6148800.000000, and the buyer took exactly that. It is the fixture's planted boundary: deficiency 0 at the boundary, and the one-year run returns no reason, since nothing is left to reconcile. The ACQ is not the yardstick, 2032 counts 366 days, and a single year carries nothing forward."
  },
  {
   "prompt": "A learner sets topPct to 101 in the one take-or-pay year view. What does the engine return?",

@@ -16,14 +16,14 @@ q(0, "Over the 31 days of January 2027, what total buyer shortfall does the engi
  ["24740.000000, the month's buyer shortfall once the over-take of 6530.000000 is netted off it.",
   "6300.000000, the gap on 2027-01-20.",
   "8400.000000, from the buyer-caused day."],
- "The January 2027 totals print a buyer shortfall of 31270.000000 and an over-take of 6530.000000, each summed separately. 24740.000000 is the difference between the two, one side of the reconciliation identity and no total the engine labels buyer shortfall. 6300.000000 is the month's seller shortfall, all of it on 2027-01-20, and 8400.000000 is the single largest buyer-caused day.")
+ "The January 2027 totals print a buyer shortfall of 31270.000000 and an over-take of 6530.000000, each summed separately. 24740.000000 is the difference between the two, one side of the reconciliation identity and no total the engine labels buyer shortfall. 6300.000000 is the month's seller shortfall, all of it on 2027-01-20, and 8400.000000 is the buyer shortfall of the one buyer-caused day, 2027-01-30.")
 
 q(2, "The engine's identity for January 2027 sets the sum of buyer shortfall less over-take against the Adjusted ACQ for the days less taken. What does it find?",
  "Both sides equal 24740.000000, checked exactly.",
  ["31270.000000 on one side and 24740.000000 on the other, the gap being the month's over-take.",
   "The two sides agree to six decimals, which the course reads as equal whatever the engine holds.",
   "Both are 592200.000000."],
- "The identity, in the engine's basis: sum of buyer shortfall - sum of over-take = Adjusted ACQ - taken. Buyer shortfall less over-take is 31270.000000 less 6530.000000; the Adjusted ACQ for the days less taken is 592200.000000 less 567460.000000. Both are 24740.000000, and the digest checks them equal exactly. Agreement at six decimals alone would prove nothing: printed alike is not equal.")
+ "The identity, in the engine's basis: sum of buyer shortfall - sum of over-take = Adjusted ACQ - taken. Buyer shortfall less over-take is 31270.000000 less 6530.000000; the Adjusted ACQ for the days less taken is 592200.000000 less 567460.000000. Both are 24740.000000, and the course checks them equal exactly. Agreement at six decimals alone would prove nothing: printed alike is not equal.")
 
 q(3, "On 2027-01-20 the power plant's buyer properly nominated 22050 and the seller made 15750 available, with no tolerance, force majeure or maintenance. What seller shortfall does the engine return?",
  "6300.000000.",
@@ -79,7 +79,7 @@ q(0, "On a golden day the seller makes 100 available against a properly nominate
  ["A seller shortfall of 40.000000 and no buyer shortfall, as the model agreement's formula subtracts the gas taken.",
   "A seller shortfall of 40.000000 and a buyer shortfall of 40.000000, the gap counted once on each side.",
   "No shortfall on either side, settled as over-take."],
- "The engine's basis states the reading: \"seller shortfall measured against the quantity the seller made available\". The model agreement's printed formula, SFQ = (PNQ − DTQ ) − DAQ, subtracts the Daily Actual Quantity, which would put the 40 on the seller. The course teaches this as the engine's stated choice beside the text it reads and grades none of it. Over-take is gas taken above the adjusted DCQ, which this day has none of.")
+ "The engine's basis states the reading: \"seller shortfall measured against the quantity the seller made available\". The model agreement's printed formula, SFQ = (PNQ − DTQ ) − DAQ, subtracts the Daily Actual Quantity, which would put the 40 on the seller. The key is what the engine returns under its own stated choice, set beside the text it reads; the reading is the engine's, and no capstone figure depends on it. Over-take is gas taken above the adjusted DCQ, which this day has none of.")
 
 q(2, "The power plant's 2027-01-30 is flagged buyerCaused: 21000 properly nominated, 12600 made available and taken. What does the engine return for the day?",
  "A buyer shortfall of 8400.000000.",

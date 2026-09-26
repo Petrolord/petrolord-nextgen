@@ -140,7 +140,7 @@
    "21000.000000 MMBtu, on a gross basis."
   ],
   "answer": 3,
-  "explanation": "The course quotes every energy figure with its basis, at the digest's six decimals: the power plant's DCQ is 21000.000000 MMBtu on a gross basis. 22156.172905 is that energy in GJ on the same gross basis. The contract counts quantity in energy; the volume is where the energy came from."
+  "explanation": "The course quotes every energy figure with its basis, at six decimals: the power plant's DCQ is 21000.000000 MMBtu on a gross basis. 22156.172905 is that energy in GJ on the same gross basis. The contract counts quantity in energy; the volume is where the energy came from."
  },
  {
   "prompt": "Zero cubic metres go into the volume-to-energy view. Refused, or returned?",
@@ -349,7 +349,7 @@
    "The reason line's round-trip figures."
   ],
   "answer": 2,
-  "explanation": "The engine compares exact numbers. Two figures that print alike at six decimals are not, for that reason alone, met or equal: printed alike is not equal. Only the engine's own deficiency says whether the take-or-pay quantity was met, and the course keys a figure as equal only where the digest checks it exactly."
+  "explanation": "The engine compares exact numbers. Two figures that print alike at six decimals are not, for that reason alone, met or equal: printed alike is not equal. Only the engine's own deficiency says whether the take-or-pay quantity was met, and the course keys a figure as equal only where it checks the engine's two values equal exactly."
  },
  {
   "prompt": "Why does the engine refuse a take-or-pay year that states no makeUp object, even when only one year is run?",

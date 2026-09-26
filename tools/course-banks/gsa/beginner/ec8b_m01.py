@@ -16,7 +16,7 @@ q(2, "The Commonwealth model gas sales agreement (2025), Article 12.6, states th
  ["Take every unit the seller makes available up to MaxDCQ on each day of the year.",
   "Pay the domestic base price for the whole ACQ whether or not any gas is delivered.",
   "Nominate the DCQ daily, settling any gap on the day at the contract price."],
- "Article 12.6 reads: \"In each Contract Year Buyer shall be obligated to take and pay for, or to pay for if not taken, a quantity of Gas at least equal to the Take or Pay Quantity.\" The obligation is annual and runs to the take-or-pay quantity only. MaxDCQ is a ceiling on a day's proper nomination, and no clause obliges the buyer to take up to it. The domestic base price is a Nigerian sector price quoted only as reported, and it has nothing to do with the model clause. Daily gaps are carried to the year's end and are never settled day by day.")
+ "Article 12.6 reads: \"In each Contract Year Buyer shall be obligated to take and pay for, or to pay for if not taken, a quantity of Gas at least equal to the Take or Pay Quantity.\" The obligation is annual and runs to the take-or-pay quantity only. MaxDCQ is a ceiling on a day's proper nomination, and no clause obliges the buyer to take up to it. The domestic base price is a Nigerian sector price quoted only as reported, and it has nothing to do with the model clause. The obligation is reconciled by contract year, and the clause prices no daily gap at the contract price.")
 
 q(0, "Which four of the engine's nine functions does the Associate tier work with?",
  "toEnergy, contractQuantities, dailyBalance and takeOrPay.",

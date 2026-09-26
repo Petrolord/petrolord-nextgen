@@ -24,7 +24,7 @@ q(3, "The single-year golden case counts 500 at a contract price of 3 and return
  ["1200.000000, the deficiency payment alone, as the gas counted is paid for separately.",
   "2400.000000, the take-or-pay quantity of 800 at the price of 3 for the year.",
   "3000.000000, the whole ACQ of 1000 at the price of 3, as the buyer's full year."],
- "In one year with no make-up, damages or refund, the net is counted x contract price + deficiency payment: the counted gas at 3 plus the 1200.000000 paid for the rest of the take-or-pay quantity of 900, which the engine returns as 2700.000000. That case's take-or-pay quantity is 900 at 90 percent, and the ACQ is never paid for whole.")
+ "In one year with no make-up, damages or refund, the net is counted x contract price + deficiency payment: the counted gas at 3 plus the 1200.000000 paid for the rest of the take-or-pay quantity of 900, which the engine returns as 2700.000000. That case's take-or-pay quantity is 900 at 90 percent, and the ACQ is paid for whole only in a year the buyer takes all of it.")
 
 q(0, "The exactly-met golden year and the zero-take golden year both return a net to the seller of 2400.000000. Why?",
  "Up to the take-or-pay quantity the seller is paid whether the gas flows or not.",
@@ -59,7 +59,7 @@ q(0, "When the power plant's 2027 is reconciled on its own, how much does the se
  ["7875.000000, at a rate the PIA sets for every domestic power sector agreement in Nigeria.",
   "6300.000000, one US$ per MMBtu of seller shortfall under the model agreement.",
   "48300.000000, the year's reductions at the stated rate."],
- "The engine's reason, verbatim: \"2027: seller shortfall 6300 reduces the Adjusted ACQ and is paid to the buyer at 1.25: 7875\". The fixture's note reads \"seller shortfall liquidated damages at a stated 1.25 US$ per MMBtu not made available (synthetic contract term)\". No Act or model clause sets the rate; force majeure earns no damages.")
+ "The engine's reason, verbatim: \"2027: seller shortfall 6300 reduces the Adjusted ACQ and is paid to the buyer at 1.25: 7875\". The fixture's note reads \"seller shortfall liquidated damages at a stated 1.25 US$ per MMBtu not made available (synthetic contract term)\". The rate is a stated contract term with no default, and force majeure earns no damages.")
 
 q(2, "The power plant's 2027 run alone returns a net to the seller of 15786225.000000. Which statement about that figure can the course defend?",
  "It is what the stated clauses give on the fixture's planning-assumption price, and no forecast of payment.",
@@ -87,7 +87,7 @@ q(2, "Nothing unusual happened on 2027-01-11: the buyer asked for, was offered a
  ["A buyer shortfall of 0, as its reason line.",
   "Its over-take, recorded as zero.",
   "A line confirming the DCQ was met exactly and that both sides of the delivery point are square for the day."],
- "The daily balance prints a reason only on a day on which something is owed, excused or trimmed. On 2027-01-11 the buyer shortfall and over-take are both 0.000000, and the engine prints nothing. A day with nothing to say gets no reason, just as a year with nothing to reconcile prints \"(no reason: nothing to reconcile)\".")
+ "The daily balance prints a reason only on a day on which something is owed, excused or trimmed. On 2027-01-11 the buyer shortfall and over-take are both 0.000000, and the engine prints nothing. A day with nothing to say gets no reason, just as a year with nothing to reconcile returns an empty list of reasons.")
 
 q(1, "What is a liquidated damages rate for a seller shortfall?",
  "A rate the parties agree at signing for each unit not made available.",

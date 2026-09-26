@@ -44,7 +44,7 @@ q(0, "A golden year has an ACQ of 1000 with reductions of 200, take-or-pay at 80
  ["600.000000, for a deficiency of 200 against 80 percent of the full ACQ.",
   "75.000000, the seller shortfall damages of that same year.",
   "1845.000000."],
- "The Adjusted ACQ is 800.000000 and the take-or-pay quantity 640.000000, so 600 taken leaves a deficiency of 40.000000; the engine's reason: \"2027: 600 counted against the take-or-pay quantity 640 leaves a deficiency of 40; the deficiency payment is 40 x 3 = 120; the buyer may make up 40 in the 2 contract years after 2027, to the end of 2029\". Skipping the reductions gives the wrong 600. 75.000000 is that year's seller shortfall damages and 1845.000000 its net to the seller.")
+ "The Adjusted ACQ is 800.000000 and the take-or-pay quantity 640.000000, so 600 taken leaves a deficiency of 40.000000; the engine's reason opens: \"2027: 600 counted against the take-or-pay quantity 640 leaves a deficiency of 40; the deficiency payment is 40 x 3 = 120\". Skipping the reductions gives the wrong 600. 75.000000 is that year's seller shortfall damages and 1845.000000 its net to the seller.")
 
 q(2, "Ninety percent take-or-pay on an ACQ of 1000, and only 500 taken in the case's one year: find the deficiency.",
  "400.000000.",
@@ -58,35 +58,35 @@ q(1, "A golden year has a take-or-pay quantity of 800 and the buyer takes exactl
  ["A deficiency of 1.000000, because the take must exceed the quantity.",
   "A deficiency of 0.000000 with a reason naming a make-up right of 0 opened for the year that follows it.",
   "A refusal, since a take equal to the take-or-pay quantity needs a tie-break rule stated in the contract."],
- "The deficiency is the take-or-pay quantity less the quantity counted when that is above 0, so taking exactly 800 leaves 0.000000, and the engine prints \"(no reason: nothing to reconcile)\". The model agreement asks the buyer to take \"at least\" the take-or-pay quantity, and at least includes equal. A deficiency of 1.000000 belongs to the case one unit short.")
+ "The deficiency is the take-or-pay quantity less the quantity counted when that is above 0, so taking exactly 800 leaves 0.000000, and the engine returns an empty list of reasons, since nothing is left to reconcile. The model agreement asks the buyer to take \"at least\" the take-or-pay quantity, and at least includes equal. A deficiency of 1.000000 belongs to the case one unit short.")
 
 q(3, "One unit short: a take-or-pay quantity of 800, 799 taken, a take-or-pay price of 3. What deficiency payment does the engine return?",
  "3.000000.",
  ["0.000000, as one unit is within any rounding of the take-or-pay quantity.",
   "1.000000, the deficiency quantity, read as the payment.",
   "2400.000000, the whole take-or-pay quantity at 3, since the quantity was missed."],
- "The engine's reason, verbatim: \"2027: 799 counted against the take-or-pay quantity 800 leaves a deficiency of 1; the deficiency payment is 1 x 3 = 3; the buyer may make up 1 in the 2 contract years after 2027, to the end of 2029\". The engine compares exact numbers, with no rounding band. 2400.000000 is the payment of a year in which nothing was taken.")
+ "The engine's reason opens, verbatim: \"2027: 799 counted against the take-or-pay quantity 800 leaves a deficiency of 1; the deficiency payment is 1 x 3 = 3\". The engine compares exact numbers, with no rounding band. 2400.000000 is the payment of a year in which nothing was taken.")
 
-q(3, "Suppose the buyer's plant stands idle all year and takes no gas at all, against 800 owed. What comes back?",
+q(3, "A golden year has an ACQ of 1000, a take-or-pay quantity of 800 and a take-or-pay price of 3, and the buyer's plant stands idle all year, taking no gas. What comes back?",
  "A deficiency of 800.000000, paid at 2400.000000.",
  ["A deficiency of 1000.000000, paid at 3000.000000.",
   "No deficiency, as for force majeure.",
   "A refusal: nothing taken, nothing to reconcile."],
- "The engine's reason: \"2027: 0 counted against the take-or-pay quantity 800 leaves a deficiency of 800; the deficiency payment is 800 x 3 = 2400\". The whole take-or-pay quantity is the deficiency; the ACQ above it is never owed. A zero take is a result, and force majeure is only ever a stated input.")
+ "The engine's reason opens: \"2027: 0 counted against the take-or-pay quantity 800 leaves a deficiency of 800; the deficiency payment is 800 x 3 = 2400\". The whole take-or-pay quantity is the deficiency; the ACQ above it is never owed. A zero take is a result, and force majeure is only ever a stated input.")
 
 q(0, "A golden year states force majeure covering its whole ACQ of 1000. What does the engine return?",
  "An Adjusted ACQ of 0.000000, a take-or-pay quantity of 0.000000 and no deficiency.",
  ["A deficiency of 800.000000, since force majeure excuses the seller but leaves the buyer's obligation.",
   "A refusal, as reductions may not equal the ACQ.",
   "An Adjusted ACQ of 1000.000000, force majeure being counted only day by day."],
- "The golden case top-fm-whole-year returns an Adjusted ACQ of 0.000000, a take-or-pay quantity of 0.000000 and no deficiency, with \"(no reason: nothing to reconcile)\". Reductions may equal the ACQ; only reductions ABOVE it are refused. Force majeure stated for the year comes off the ACQ like any other reduction.")
+ "The golden case top-fm-whole-year returns an Adjusted ACQ of 0.000000, a take-or-pay quantity of 0.000000 and no deficiency, with no reason, since nothing is left to reconcile. Reductions may equal the ACQ; only reductions ABOVE it are refused. Force majeure stated for the year comes off the ACQ like any other reduction.")
 
 q(1, "The power plant's leap year 2032 is run alone: ACQ 7686000, no reductions, 80 percent, and 6148800 taken. What does the engine find?",
  "A deficiency of 0.000000, the take-or-pay quantity exactly met.",
  ["A deficiency measured from the ACQ of 7686000.000000.",
   "A deficiency, since 2032 is scored on 365 days.",
   "A deficiency of 0.000000 and an over-take credited forward to the next year of the term."],
- "In 2032 the take-or-pay quantity is 80 percent of 7686000.000000, which is 6148800.000000, and the buyer took exactly that. It is the fixture's planted boundary: deficiency 0 at the boundary, and the one-year run prints \"(no reason: nothing to reconcile)\". The ACQ is not the yardstick, 2032 counts 366 days, and a single year carries nothing forward.")
+ "In 2032 the take-or-pay quantity is 80 percent of 7686000.000000, which is 6148800.000000, and the buyer took exactly that. It is the fixture's planted boundary: deficiency 0 at the boundary, and the one-year run returns no reason, since nothing is left to reconcile. The ACQ is not the yardstick, 2032 counts 366 days, and a single year carries nothing forward.")
 
 q(2, "A learner sets topPct to 101 in the one take-or-pay year view. What does the engine return?",
  "A refusal: topPct must be a number from 0 to 100.",
