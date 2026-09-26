@@ -112,7 +112,7 @@
  },
  "gates": {
   "structure.py": {
-   "md5": "677000ff9700ca80238211d498afd328",
+   "md5": "740b02c698d76efda39a39aa310c2907",
    "command": "python3 structure.py",
    "expected": 0,
    "exit": 0,
@@ -133,7 +133,7 @@
    "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
   },
   "sc2_capstone.mjs": {
-   "md5": "05720d439b8cdee0bd1e71cd31bb6bc4",
+   "md5": "dcf94ab6f2faac61e41fc9b42a2e4f1e",
    "command": "node sc2_capstone.mjs",
    "expected": 0,
    "exit": 0,
@@ -168,14 +168,14 @@
    "summary": "NEGATIVE CONTROL: umuahia_s14_lead_relative was moved by ten tolerances; caught"
   },
   "discriminate.mjs": {
-   "md5": "f899855d88a795f8b610bf9512432e1c",
+   "md5": "4dcd8941c661ed56de9a8959dbd3864e",
    "command": "node discriminate.mjs",
    "expected": 0,
    "exit": 0,
    "summary": "CLOSEST MISS ACROSS THE WHOLE SWEEP: okigwe_award_ratio via the_quoted_total, 3.047e+4 tolerances away"
   },
   "discriminate.mjs NEGATIVE CONTROL": {
-   "md5": "f899855d88a795f8b610bf9512432e1c",
+   "md5": "4dcd8941c661ed56de9a8959dbd3864e",
    "command": "node discriminate.mjs --slack-tolerances",
    "expected": 1,
    "exit": 1,
@@ -186,14 +186,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh cat-wip-procurement /root/wt-sc2-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "sc2_dump: 957 label-and-call, measurement and claim assertions run, 0 failed; 25 sections"
+   "summary": "sc2_dump: 1036 label-and-call, measurement and claim assertions run, 0 failed; 25 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules cat-wip-procurement",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/cat-wip-procurement/digest.txt: 1100 line(s), 25 section title(s) and 112 in-body marker(s) swept against their blocks, 32 history framings, 37 engine pin(s); 0 warned for a human read and 0 framed as"
+   "summary": "[digestprose] /root/cat-wip-procurement/digest.txt: 1165 line(s), 25 section title(s) and 115 in-body marker(s) swept against their blocks, 32 history framings, 37 engine pin(s); 0 warned for a human read and 0 framed as"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -322,14 +322,14 @@
    "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in a bank string; expected 2 caught, got 2"
   },
   "gate_typed_literals.py": {
-   "md5": "6a714f7cbc33a0bdb1c2c157baf0f35c",
+   "md5": "3adc48be03a1d672b7bd6a48ca834b57",
    "command": "python3 gate_typed_literals.py",
    "expected": 0,
    "exit": 0,
    "summary": "UNEXPLAINED TYPED NUMBERS: 0"
   },
   "gate_typed_literals.py NEGATIVE CONTROL": {
-   "md5": "6a714f7cbc33a0bdb1c2c157baf0f35c",
+   "md5": "3adc48be03a1d672b7bd6a48ca834b57",
    "command": "python3 gate_typed_literals.py --plant",
    "expected": 1,
    "exit": 1,
@@ -354,7 +354,7 @@
    "command": "python3 truth_check.py",
    "expected": 0,
    "exit": 0,
-   "summary": "truth_check: truth-procurement.json (535 digest lines) IS the harvest of digest.txt"
+   "summary": "truth_check: truth-procurement.json (574 digest lines) IS the harvest of digest.txt"
   },
   "truth_check.py NEGATIVE CONTROL": {
    "md5": "d0b4ccd016aeada74696ae3d7fb7bf87",
@@ -366,10 +366,9 @@
   "numsweep_procurement.mjs": {
    "md5": "d58d87208e792283c829be3e42faafe2",
    "command": "node numsweep_procurement.mjs",
-   "expected": "held NOT ONE literal of seven or more significant figures",
-   "exit": 1,
-   "summary": "This gate does not pass on an empty or unreadable sweep.",
-   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+   "expected": 0,
+   "exit": 0,
+   "summary": "serialised floats outside an exact reason quote: 0"
   },
   "numsweep_procurement.mjs --selftest": {
    "md5": "d58d87208e792283c829be3e42faafe2",
@@ -381,13 +380,9 @@
   "lengths.py": {
    "md5": "f2e67ba644e37a77bd50806b3da95a03",
    "command": "python3 lengths.py",
-   "expected": [
-    "UNDER ITS OWN FLOOR",
-    78
-   ],
-   "exit": 1,
-   "summary": "tiers read: 3  out of band: 80  not written yet: 0",
-   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+   "expected": 0,
+   "exit": 0,
+   "summary": "tiers read: 3  out of band: 0  not written yet: 0"
   },
   "lengths.py --selftest": {
    "md5": "f2e67ba644e37a77bd50806b3da95a03",

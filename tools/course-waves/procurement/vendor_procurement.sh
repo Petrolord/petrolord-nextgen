@@ -15,18 +15,15 @@
 # engines/economics/cashflow.ts (npv), and cashflow.ts and afe.js walk on to
 # engines/economics/irrContract.js and lib/dates/dates.js.
 #
-# SHARED PATHS STAY WITH THEIR OWNERS. At 9187701 two of the imported files
-# differ from what NextGen vendors: cashflow.ts (3.11.0 at 9187701, the
-# economic-limit capex rule; NextGen carries 3.10.0, the manifest blob) and
-# afe.js (NextGen carries the blob ledgered by group 4-economics-revendor).
-# Moving either would move numbers other courses grade (cashflow, fiscal, the
-# economics and AFE courses) and would take a path another group owns. The
-# two functions tender.js calls are SOURCE-IDENTICAL in both blobs (npv and
-# calculatePartnerCosts, compared below by their exported text), so this
-# script vendors every OTHER closure path sha-identical and leaves those two
-# where they are; the tender suite at 9187701 is then run against NextGen's own
-# copies and must pass every test. SHARED lists them; any other closure path
-# that differs from NextGen and is already vendored REFUSES.
+# SHARED PATHS STAY WITH THEIR OWNERS. tender.js imports cashflow.ts (npv) and
+# afe.js (calculatePartnerCosts). cashflow.ts is owned by the economics courses
+# (the EC7 PIA re-cut brought NextGen's copy to the 006ed85 blob); afe.js is
+# owned by group 4-economics-revendor and differs from 006ed85. Neither is moved
+# by this wave: the two functions tender.js calls are compared by their exported
+# text and must be SOURCE-IDENTICAL, and the tender suite is then run against
+# NextGen's own copies and must pass every test. SHARED lists them; any other
+# closure path that differs from NextGen and is not this wave's own ledgered
+# path REFUSES.
 #
 # LEDGER MODE: THE PIN DOES NOT MOVE. New paths are ledgered as kind "extra",
 # group "sc2-procurement-course", pinned to the vendored blob, and clear by the
@@ -205,7 +202,7 @@ for p in paths:
                    f"(PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, "
                    f"timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. "
                    f"{'New since' if kind == 'extra' else 'Differing from'} the canonical pin {pin[:7]}, which stays: moving it "
-                   f"would also move economics (cashflow.ts 3.11), AFE and other paths other courses grade. "
+                   f"would also move AFE and other paths other courses grade. "
                    f"Clears as STALE when the pin moves to {full[:7]} or later."),
     })
 v['knownDeviations'] = keep + added
