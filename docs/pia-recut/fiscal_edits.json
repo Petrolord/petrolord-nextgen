@@ -1,0 +1,9 @@
+{
+ "course": "fiscal",
+ "recut": "PIA 2021 re-cut, phase 2 (branch fix/cashflow-fiscal-pia-recut)",
+ "served": "tools/course-waves/fiscal/pia-recut/served_fiscal.json (replay_banks.sh on a local scratch database)",
+ "digest": "tools/course-waves/fiscal/digest.txt",
+ "counts": {},
+ "questions": [],
+ "capstone_prompt_changes": []
+}

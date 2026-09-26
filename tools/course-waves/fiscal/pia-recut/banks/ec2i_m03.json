@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "How does the engine compute the R factor for a year?",
+  "options": [
+   "Cumulative gross revenue divided by cumulative capex plus opex, both running totals taken through and including that year, and the division is done before the split for the year is chosen.",
+   "That year's gross revenue divided by that year's capex plus opex, which is why a year with no capex at all can carry a very large ratio.",
+   "Cumulative gross revenue after royalty divided by cumulative cost, so the royalty instrument moves the ratio and the tranche it selects.",
+   "Cumulative revenue through the previous year divided by cumulative cost through the previous year, so the split is set before the year is priced."
+  ],
+  "answer": 0,
+  "explanation": "It is a ratio of cumulatives that already contains the year being priced. On the default project year 3 the ratio is 1.254640."
+ },
+ {
+  "prompt": "On the default project year 2 sells 244.4628 million USD of gross revenue against opex of 28.8480 and no capex at all, yet the R factor reads 0.922481. Why is it below 1?",
+  "options": [
+   "Because the R factor is computed from revenue after royalty, and the royalty charged in years 1 and 2 has pushed the numerator below the cost total.",
+   "Because a year carrying no capex is scored on its opex alone, and the ratio is floored at last year's value.",
+   "Because the 500.0000 of year 1 capex is permanently in the denominator, and cumulative revenue has not yet overtaken cumulative cost.",
+   "Because the ratio is discounted before it is compared with a threshold, and two years of discounting at 10 percent hold the year 2 value below 1."
+  ],
+  "answer": 2,
+  "explanation": "A year ratio would be enormous here. The R factor crosses 1 when cumulative revenue overtakes cumulative cost, which on this project is year 3."
+ },
+ {
+  "prompt": "On `rfactor_tranche_crossing` the R factor reads 0.781480 in year 1, 1.383252 in year 2 and 1.846809 in year 3, with splits of 0.600000, 0.600000 and 0.400000. Which threshold moved the split, and where did the ratio cross 1.0?",
+  "options": [
+   "The 1.0 threshold moved it, in year 3, which is the first tranche the ratio reaches on its way up the list.",
+   "The 1.6 threshold moved it, in year 3. The ratio crossed 1.0 in year 2 and that changed nothing, because 60 percent is the lowest tranche's split and was already in force.",
+   "The 1.0 threshold moved it, in year 2, and the year 3 row is that same crossing arriving one year late through the cumulative totals the ratio is built from, which always lag the year they price.",
+   "The 2.5 threshold moved it, in year 3, because the ratio passes 2.5 on its way to a peak above 3 later in the life."
+  ],
+  "answer": 1,
+  "explanation": "Every number here appears somewhere in the case, so no mechanical sweep separates a crossing from the step it is credited with. Only the arithmetic does."
+ },
+ {
+  "prompt": "On `rfactor_falls_back`, where does the R factor peak, and what is the value 2.501684?",
+  "options": [
+   "It peaks at 2.501684 in year 5, and 2.972625 is the peak of the crossing case rather than of this one.",
+   "It peaks at 2.545295 in year 22, the last year before the split steps back up from 30 to 40 percent.",
+   "It peaks at 2.494796 in year 23, which is the value that fails the 2.5 threshold and returns the contractor to the 1.6 tranche.",
+   "It peaks at 2.972625 in year 11. The value 2.501684 is where it crosses 2.5 going up, in year 5."
+  ],
+  "answer": 3,
+  "explanation": "The peak sits nearly half a unit above the threshold the split steps at. Key on the table and never on a sentence written beside it."
+ },
+ {
+  "prompt": "On `rfactor_falls_back` the R factor is 2.545295 in year 22 with a split of 0.300000 and 2.494796 in year 23 with a split of 0.400000. What is happening?",
+  "options": [
+   "The engine has detected that the field is approaching its economic limit and applies the relief tranche reserved for the tail of the life.",
+   "The tranche list has been re-entered from the top after the peak, so the walk restarts at 60 percent.",
+   "The ratio has fallen back below the 2.5 threshold, so the walk stops at the 1.6 tier and the contractor's share steps back UP.",
+   "Profit oil has fallen below the level at which a tranche can be applied, so the engine reverts to the split it used before the crossing."
+  ],
+  "answer": 2,
+  "explanation": "The R factor is a ratio of cumulatives and it is not monotone. A share given up in year 5 is handed back in year 23, and nothing in the engine says a real contract would usually ratchet."
+ },
+ {
+  "prompt": "Why does the R factor turn down late in the life of a field?",
+  "options": [
+   "Cumulative revenue is reduced by the royalty and the tax as they accrue, and both keep accruing after the production peak has passed.",
+   "Cumulative revenue grows by a smaller amount every year as production declines, while cumulative cost keeps growing on opex that never stops.",
+   "The denominator is reset at the point the recoverable pool clears, and every year after that adds cost to a base that no longer carries the capex.",
+   "The engine applies its year end discounting to the numerator only, so the ratio decays at the discount rate once revenue stops growing."
+  ],
+  "answer": 1,
+  "explanation": "On `rfactor_falls_back` the ratio peaks at 2.972625 in year 11 and falls in every year afterwards, reaching 2.395606 by year 25."
+ },
+ {
+  "prompt": "`rfactor_tranche_crossing` and `rfactor_falls_back` run the same tranches of 60 percent at R 1, 40 percent at R 1.6 and 30 percent at R 2.5 on the same project. Why does only one of them fall back?",
+  "options": [
+   "The crossing case ratchets its tranche once reached, and the falling back case has that behaviour switched off by its higher opex figure.",
+   "The crossing case reaches the third tranche a year later, and a tranche entered later in the life has fewer years left in which to be lost again.",
+   "The crossing case has no cost recovery limit binding on it, so its cumulative cost stops growing once the pool clears and the ratio cannot fall.",
+   "The crossing case peaks at 3.109087 in year 12 and has only declined to 2.654466 by year 25, which is still above 2.5, so its split never leaves the 30 percent tranche."
+  ],
+  "answer": 3,
+  "explanation": "The only differences are capex 350 against 320 and opex 20 against 25. A reversal is an accident of where the ratio settles, not a property one case has and the other lacks."
+ },
+ {
+  "prompt": "On the default project year 1 the R factor is 0.512217, below every threshold in the PIA tranche list. What contractor split is applied?",
+  "options": [
+   "0.600000, the lowest tranche's split, used as the fallback before any threshold has been reached.",
+   "No split at all, since a tranche list cannot select a rate until its lowest threshold has actually been reached by the ratio.",
+   "0.300000, because the walk falls through a list none of whose thresholds are met and keeps the split carried by the last entry.",
+   "A split interpolated between zero and the first tier's 60 percent in proportion to how far the ratio has climbed toward 1."
+  ],
+  "answer": 0,
+  "explanation": "`getTieredSplit` keeps the lowest tranche's split until a threshold is reached, exactly as the sliding royalty falls back to its lowest tier's rate."
+ },
+ {
+  "prompt": "In year 5 on the default project the PIA tranches give the contractor 59.3639 out of profit oil of 148.4098, at an R factor of 1.769792. How was that computed?",
+  "options": [
+   "The first 1.6 of the ratio was priced at the 60 percent rate and the balance of it at 40 percent, in the manner of a marginal income tax band.",
+   "The profit oil was apportioned between the tranches in proportion to the years spent in each, then split at the two rates.",
+   "The whole of the 148.4098 was split at 0.400000, the rate the 1.6 tranche carries, with no part of it left at the rate below.",
+   "The 40 percent rate was applied to profit oil after the year's cost recovery draw had been taken out of it a second time."
+  ],
+  "answer": 2,
+  "explanation": "The tranches are not marginal bands. A blended answer lands above 59.3639 and below what a 60 percent rate would give, which is the most plausible-looking wrong answer available."
+ },
+ {
+  "prompt": "On `rfactor_tranche_crossing` the contractor's split falls from 0.600000 in year 2 to 0.400000 in year 3, and profit oil in those years is 46.2528 and 179.0750. What does year 3 show?",
+  "options": [
+   "That the engine compensates a tranche crossing by releasing profit oil in the same year, so the contractor is held whole across the step.",
+   "A split rate and a share of money are different quantities, and the contractor is better off on a lower rate because the pool cleared and released profit oil.",
+   "That the split is applied to cumulative profit oil rather than to the year's, which is why a lower rate can return a larger amount.",
+   "That the crossing was mis-timed by one year, since a genuine step down would have reduced the contractor's share of the ledger."
+  ],
+  "answer": 1,
+  "explanation": "The cost recovery pool cleared and the tranche crossing landed in the same year. Two things moved in opposite directions in one row."
+ },
+ {
+  "prompt": "In year 11 on the default project the R factor is 2.581420, which has reached all three PIA thresholds, and the implied split reads 0.300000 on profit oil of 80.0217. What would happen if the 2.5 tranche were typed first?",
+  "options": [
+   "The split would be whichever qualifying tranche came last in the reordered list, so 0.600000 would be charged on that year's profit oil and no error would be raised.",
+   "The engine would refuse the regime, since a tranche list whose thresholds do not ascend fails validation before any year is computed.",
+   "The split would be interpolated between the tranches the reordering brackets, which is how the engine resolves a list it cannot read in order.",
+   "Nothing at all. A sorted copy of the list is read, so the highest threshold reached is still 2.5 and the split in that row is still 0.300000."
+  ],
+  "answer": 3,
+  "explanation": "`tiers_unsorted_selected_by_threshold` types these tranches out of order and returns every row of the sorted case, closing at 279.5803 million USD of contractor net cash flow. Only a repeated threshold is refused, and it is refused by name."
+ },
+ {
+  "prompt": "On `harsh_split_40_royalty_20` the year 1 profit oil is 0.0000 and the implied split is null. What does that mean?",
+  "options": [
+   "The engine chose a split for that year as it does for every year. It simply had nothing to apply it to, and no ratio of a share to zero can recover which one it chose.",
+   "The engine declined to select a tranche because the R factor of 0.793622 had not reached the first threshold in the list.",
+   "The split was recorded as null because a flat 40 percent regime carries no tranche list for the walk to select from at all.",
+   "The year was excluded from the split calculation entirely, which is why the R factor for that year is also not reported."
+  ],
+  "answer": 0,
+  "explanation": "The implied split is read back out of the ledger as a ratio, and years 20 to 25 of that case are null for the same reason: profit oil is 0.0000."
+ },
+ {
+  "prompt": "Someone reads the `rfactor_tranche_crossing` table looking for the row where the R factor equals 1.6. What will they find?",
+  "options": [
+   "The year 3 row, since the engine snaps the R factor to the threshold value in the year a crossing is recognised, which is how the step is dated.",
+   "The year 2 row at 1.383252, which the engine rounds up to the threshold for the purpose of choosing the tranche.",
+   "No such row. The ratio moves in jumps the size of the year's revenue and cost, and 1.6 sits in the gap between 1.383252 and 1.846809.",
+   "Two rows, one where the ratio crosses each threshold going up and one where it crosses that same threshold coming back down later in the life."
+  ],
+  "answer": 2,
+  "explanation": "A crossing is identified by the pair of rows that straddle it, never by a row that lands on it, and the ledger prints no marker on a crossing year."
+ },
+ {
+  "prompt": "The R factor column on the default project is identical under the USA Gulf of Mexico template and under Nigeria PIA. What does that say about it?",
+  "options": [
+   "It is cached from the first template loaded in a comparison run, which is why the six templates report the same column.",
+   "It responds only to production, price and cost, so no royalty, cost recovery limit, split or tax setting can move it.",
+   "It is computed from the contractor's own position, and the two templates happen to leave the contractor in the same place on this project.",
+   "It is fixed by the Designer's default project rather than by the regime, and a different project would make the two columns diverge."
+  ],
+  "answer": 1,
+  "explanation": "Neither cumulative depends on the regime. Royalty is not subtracted from the revenue side and tax is not added to the cost side."
+ },
+ {
+  "prompt": "What can the R factor instrument not be told to do?",
+  "options": [
+   "Select a tranche from a threshold expressed as a ratio rather than as an oil price, which is what a sliding royalty does instead.",
+   "Choose a split from the year's own ratio, since the engine reads the previous year's ratio and applies it with a one year lag.",
+   "Change the split it applies partway through a life, which is why a tranche once selected governs every year that follows it.",
+   "See time value, ignore late revenue, or exclude any cost from either running total."
+  ],
+  "answer": 3,
+  "explanation": "Revenue in year 1 and revenue in year 25 enter the numerator at face value, so a slow project and a fast one with the same totals share an R factor."
+ }
+]

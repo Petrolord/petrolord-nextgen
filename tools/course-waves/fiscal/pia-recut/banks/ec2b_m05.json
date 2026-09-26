@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The Gulf of Mexico ledger on the Designer's default project closes cumulativeNCF at 980.9313. What else in the same ledger must read 980.9313, and what does it mean if it does not?",
+  "options": [
+   "The life total of the contractor net cash flow column, and a disagreement means one of the two was built from a different column.",
+   "The life total of government cash flow, since the running sum is a division of one quantity and the two sides of it must close together.",
+   "The net present value at the project's 10 percent, because a running sum and a discounted sum differ only in the order they are taken.",
+   "The life total of gross revenue less royalty, because everything else in the cascade is either recovered or carried forward."
+  ],
+  "answer": 0,
+  "explanation": "The closing cumulative and the contractor total are the same 25 numbers added in the same order, so they are the cheapest check in the ledger."
+ },
+ {
+  "prompt": "The deepest point of the cumulative curve under the Gulf of Mexico terms is -310.0117, against a capital spend of 500.0000. Why is the trough shallower than the spend?",
+  "options": [
+   "The capex is spread over the first three years by the recovery machinery, and the trough records only the part charged in year 1.",
+   "The trough is taken after the year's royalty of 50.9979 has been returned to the contractor through the cost pool.",
+   "The same year recovered 220.9910 of cost oil and paid opex of 31.0027, so the exposure the ledger records is smaller.",
+   "The trough is the discounted value of the year 1 row at the project's 10 percent, which is smaller than the cash figure."
+  ],
+  "answer": 2,
+  "explanation": "Under Angola the same project troughs at -323.6112, because a 50 percent recovery limit returned less of the spend in the year it happened."
+ },
+ {
+  "prompt": "Under the Gulf of Mexico terms on the default project the cumulative reads -140.2337 in year 2 and 8.9905 in year 3. What is payback, and by what rule?",
+  "options": [
+   "Year 3, interpolated between the two rows to the fraction of the year at which the cumulative crossed zero.",
+   "Year 3, because payback is the first year the cumulative contractor net cash flow stands above zero.",
+   "Year 2, because year 2 is the last year of exposure and the crossing is booked to the year the deficit ended.",
+   "Year 3, because payback is the first year in which the unrecovered cost pool closes at 0.0000."
+  ],
+  "answer": 1,
+  "explanation": "It is a whole year and not a fraction, and the pool clearing is a separate event that happens to fall in year 3 here as well."
+ },
+ {
+  "prompt": "On the default project the PIA and Angola templates report payback in year 4 while payout is year 3, and the other four report 3 for both. What does the one year gap say?",
+  "options": [
+   "The R factor and the cumulative are computed on different production profiles, so the two clocks are never strictly comparable.",
+   "The pool cleared a year later under those two templates, and payback cannot be reported before the pool closes.",
+   "Payout is discounted at the project's 10 percent and payback is not, so payout always arrives in an earlier year.",
+   "The project earned its cost back before the contractor got its cash back, because the state takes its share in between."
+  ],
+  "answer": 3,
+  "explanation": "Payout is the first year the R factor is above 1.0, cumulative revenue over cumulative cost, and it knows nothing about who kept the money."
+ },
+ {
+  "prompt": "A published case caps cost recovery at 5 percent, closes the life with 2543.7575 still unrecovered, and is named for a pool that never recovers. What does it report for payback?",
+  "options": [
+   "No payback at all, and an IRR of 0, on the reasoning that a cost pool which never clears is capital that never comes home to the contractor.",
+   "Payback in year 3, with no single IRR because its NPV is zero at 54.6792 percent and again at -14.2614 percent.",
+   "Payback in year 3 on a life total of 1530.0622, but with the IRR suppressed to 0 because the pool never closed.",
+   "No payback, because the engine reports payback only once the closing unrecovered pool has reached 0.0000."
+  ],
+  "answer": 1,
+  "explanation": "The revenue the limit could not recover became profit oil, and this regime splits profit oil 100 percent to the contractor, so the capital came home through the profit share on a life total of 1530.0622."
+ },
+ {
+  "prompt": "Four of the six templates report payback in year 3 on the default project. Why is that a poor place to rank them?",
+  "options": [
+   "Payback is measured on the discounted cumulative, and the discounting compresses the differences between the templates into one year.",
+   "Payback is measured from the R factor, which is a ratio of cumulatives and moves too little between templates to separate them.",
+   "Payback is a whole year, so a tie in the column is not a tie in the money: the same year 3 covers 986.7327 under Generic and 623.9658 under Brazil.",
+   "Payback is reported to the nearest year and the engine rounds up, so four templates that really differ are printed as the same year."
+  ],
+  "answer": 2,
+  "explanation": "It is an integer clock on an undiscounted running sum, and it has no view of anything that happens after the crossing."
+ },
+ {
+  "prompt": "The published case at capex 20000 returns payback null and payout null. What is the correct way to read that pair?",
+  "options": [
+   "As a reading in its own right: the cumulative was never above zero and the R factor never above 1.0 in any of the 25 rows.",
+   "As a gap in the table, since the engine leaves the field empty when a project is stopped before the horizon is reached.",
+   "As a sign the run was terminated early, so the rows after the shut in were never computed and never taxed.",
+   "As an error state, since a project that cannot pay back is outside the range the sandbox is able to report on."
+  ],
+  "answer": 0,
+  "explanation": "Every one of the 25 rows was still computed and still counted: government cash flow is royalty of 875.1492 on revenue of 7001.1938."
+ },
+ {
+  "prompt": "Run all six templates on the default project. Opex and capex are the project's own and print identically on every line whatever the terms are. Which two of the remaining seven totals are also identical on all six lines, and why?",
+  "options": [
+   "Total revenue at 2686.9277 and total profit oil at 1241.6852, because the regime divides the residual between the two sides without changing its size.",
+   "Total royalty at 503.7989 and total capex at 500.0000, because the royalty base and the capital spend are both fixed before any regime is applied.",
+   "Total cost recovered at 941.4436 and total tax at 260.7539, because the recovery machinery runs the same way under every one of the six templates.",
+   "Total revenue at 2686.9277 and total cost recovered at 941.4436, because the regime never touches price or production and every pool clears inside the life here."
+  ],
+  "answer": 3,
+  "explanation": "Cost recovered matches the life costs only when the pool empties. On the test project none of them empties, from 72.7082 under Brazil to 251.6537 under Angola."
+ },
+ {
+  "prompt": "Brazil pays the most tax of the six templates on the default project at 852.8256 and leaves the contractor 623.9658, the third highest figure in the table. What does that show?",
+  "options": [
+   "That the tax column is charged on gross revenue under Brazil and on the profit share under the other five, so the two are not comparable.",
+   "Tax and take rank differently, because the state also collects through royalty and through its share of profit oil.",
+   "That the resource rent tax of 40 percent is refunded to the contractor through the cost pool, which is why the cash survives the tax.",
+   "That a high tax bill signals a high residual, so the contractor's cash and the tax column will normally move together across templates."
+  ],
+  "answer": 1,
+  "explanation": "PIA pays the least tax of the six, 174.0882, and leaves the contractor the least cash, 406.2057."
+ },
+ {
+  "prompt": "Contractor total 980.9313 and government total 764.5528 do not add to revenue of 2686.9277 on the default project. What is the difference?",
+  "options": [
+   "Cost recovered of 941.4436, which is assigned to the contractor's cash separately and so is counted outside the two takes.",
+   "The royalty of 503.7989, which is settled off the top line before the two takes are struck and is reported on its own row.",
+   "Opex of 441.4436 and capex of 500.0000, which are the contractor's alone and belong to neither take.",
+   "The closing unrecovered pool, which holds the revenue neither side was able to claim within the horizon of 25 years."
+  ],
+  "answer": 2,
+  "explanation": "The two takes add to revenue less opex less capex on every row, and 441.4436 plus 500.0000 is the whole of the gap in the totals."
+ },
+ {
+  "prompt": "On the teaching field ODIDI every template closes its cumulative in the black and every template returns a negative value at the project's 12 percent. What does that pair of readings mean?",
+  "options": [
+   "The field returns the contractor's nominal money and still is not worth building at the rate the project is discounted at.",
+   "The cumulative was computed on a different set of rows from the value, so one of the two readings has to be discarded.",
+   "The field pays back inside the horizon but the closing unrecovered pool is larger than the cash returned in every case.",
+   "The value is negative because the horizon of 25 years ends before the cumulative has finished climbing."
+  ],
+  "answer": 0,
+  "explanation": "Brazil ends the life with 192.9896 of contractor cash and a value of -5.8662, and Angola with 109.1947 and -58.1813."
+ },
+ {
+  "prompt": "A cumulative curve does not only rise. What turns it back down late in the life of a declining field?",
+  "options": [
+   "The unrecovered cost pool refilling, which is subtracted from the cumulative in the year the balance starts to grow again.",
+   "The discount exponent growing with the year number, until each new row shrinks to nothing.",
+   "The abandonment provision, which the engine charges against the last rows of the life once production has fallen far enough.",
+   "A year whose revenue after royalty no longer covers the year's opex, which makes the contractor's line negative."
+  ],
+  "answer": 3,
+  "explanation": "ODIDI's year 25 sells 6.9081 of gross revenue against opex of 12.3405 under the Gulf of Mexico terms, so the row is negative and the running sum falls."
+ },
+ {
+  "prompt": "Swept from 40 to 120 USD per bbl on ODIDI, government take under the Gulf of Mexico terms falls from 78.5512 percent to 40.8517 while under PIA it stays within 75.1077 to 79.4678. What does a single ledger tell you about that?",
+  "options": [
+   "It tells you the ranking at the run's own price, and that ranking holds across the sweep.",
+   "Nothing at all, because one run is one price deck and the shape of a regime across prices is not in it.",
+   "It tells you the direction of the movement, since a regime with a higher take at the base price always gives up more of it as prices rise.",
+   "It tells you which template is progressive, from government take at the base price."
+  ],
+  "answer": 1,
+  "explanation": "Two regimes that look similar on one run behave nothing alike on the next, and the single ledger shows neither shape."
+ },
+ {
+  "prompt": "Across the swept capex range on ODIDI, Ghana gives up 181.1922 of contractor value and Angola gives up 252.6075. What does that difference measure?",
+  "options": [
+   "Which regime has the higher capex, since the sweep moves each template's own spend by its own multiplier before the ledgers are run.",
+   "Which regime discounts the overrun hardest, since the value given up is a present value.",
+   "Which regime makes the contractor carry more of a cost overrun, which is decided by the instruments that recover cost.",
+   "Which regime has the larger tax base, since an overrun is deducted from tax in the year it is spent."
+  ],
+  "answer": 2,
+  "explanation": "One ledger at one capex never asks the question, and the cost columns themselves are identical under all six templates."
+ },
+ {
+  "prompt": "The same Gulf of Mexico terms return 980.9313 to the contractor on the default project and 2221.9251 on the Suite test project. What has been shown?",
+  "options": [
+   "That the test project is a bigger field, turning over 7001.1938 of revenue against 2686.9277, and nothing at all about the regime.",
+   "That the terms are more generous on the higher price deck of the test project, which prices its oil at 80 USD per bbl in every one of the 25 years.",
+   "That a single stream project recovers cost faster, because gas and NGL volumes never enter the boe the opex is charged on.",
+   "That the regime is better suited to a project whose capex is larger, which the test project's 1000 of spend confirms."
+  ],
+  "answer": 0,
+  "explanation": "Totals only compare across regimes on one project, because that is the design that holds revenue constant at 2686.9277 on every line."
+ }
+]

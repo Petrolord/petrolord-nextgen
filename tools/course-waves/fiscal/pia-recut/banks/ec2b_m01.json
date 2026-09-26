@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "What is a fiscal regime, as this engine represents one?",
+  "options": [
+   "Whatever the jurisdiction's fiscal code contains, since each template is a reading of the statute it is named for and the engine executes that reading.",
+   "The four fields together with a signature bonus and a state participation share, which the templates carry as separate entries beside the tax block.",
+   "Four fields on one object: a royalty, a cost recovery limit, a profit split, and a tax block holding cit, rrt, minTax and an optional rrtUpliftPct.",
+   "A royalty and a tax, with the cost recovery limit and the profit split supplied by the project inputs rather than by the regime."
+  ],
+  "answer": 2,
+  "explanation": "Nothing else exists. A regime that needs an instrument outside those four cannot be expressed in this sandbox at all."
+ },
+ {
+  "prompt": "A regime sets cit and rrt and omits rrtUpliftPct entirely. What uplift does the run charge?",
+  "options": [
+   "20 percent, the documented default the engine substitutes whenever the field is absent.",
+   "Zero, because a field that was never supplied cannot grant relief, so the resource rent tax falls on the profit share itself.",
+   "The same figure as rrt, since the uplift is written as a fraction of the resource rent tax rate it belongs to.",
+   "None, and the run refuses the regime until an uplift is supplied for it."
+  ],
+  "answer": 0,
+  "explanation": "The uplift is optional in the object and defaults to 20, so a template that says nothing about it is not running without one."
+ },
+ {
+  "prompt": "Nigeria - PIA (2021) and Generic Royalty/Tax both carry CIT 30 percent, RRT 0 percent and minimum tax 0 percent, yet on the Designer's default project the contractor keeps 406.2057 million USD under one and 986.7327 million USD under the other. What opened that gap?",
+  "options": [
+   "A heavier tax bill under the PIA terms, which totals 422.8854 million USD over the life against 174.0882 million USD for the Generic terms.",
+   "The other three fields, a cost recovery limit of 80 percent instead of 100 and an R factor split of 60, then 40, then 30 percent instead of a flat 100 percent to the contractor.",
+   "A larger royalty under the PIA slider, which collects 335.8660 million USD against the 268.6928 million USD the Generic rate collects.",
+   "Different sales, since the PIA line is run against a lower price deck than the Generic line is."
+  ],
+  "answer": 1,
+  "explanation": "The PIA line pays the smaller tax of the two, 174.0882 million USD against 422.8854, and the smaller royalty, 268.6928 against 335.8660. A tax rate quoted on its own predicts nothing."
+ },
+ {
+  "prompt": "Six templates are run on the published test project. What does the total revenue column read down those six lines?",
+  "options": [
+   "It falls as the royalty rate rises, since royalty is charged on the top line before anything else is deducted from it.",
+   "It moves by a few million USD, because each template recovers cost at a different limit and cost recovery is netted against sales.",
+   "It reads 2686.9277 million USD, which is the revenue figure every comparison in this sandbox reports.",
+   "7001.1938 million USD on every one of them, because a regime touches neither production nor price."
+  ],
+  "answer": 3,
+  "explanation": "2686.9277 million USD is the default project's constant. Whichever project is loaded, the revenue column is the same on all six lines, so any spread in the answer is the regime."
+ },
+ {
+  "prompt": "Which project input shortens the sandbox horizon below 25 years?",
+  "options": [
+   "None of them. PROJECT_LIFE is 25 rows and the engine returns 25 rows for every regime and every project.",
+   "The economic limit, reached in the year opex first exceeds gross revenue, after which the remaining rows are dropped from the totals.",
+   "The price deck, whose last dated point closes the profile in the year that point falls in.",
+   "A steep decline, which ends the profile once the rate has fallen far enough below the initial rate."
+  ],
+  "answer": 0,
+  "explanation": "There is no input anywhere that changes 25 to another number, which is why year 25 of the default project still produces 0.291148 million bbl."
+ },
+ {
+  "prompt": "The published case that puts capex of 20000 on the test project reports payback year null and payout year null. What does that say about its 25 rows?",
+  "options": [
+   "The engine truncated the run in the year the pool was judged unrecoverable, so the totals cover fewer than 25 rows.",
+   "The rows after the loss were computed but left out of government cash flow, which is why that figure stops at 875.1492 million USD.",
+   "Nothing stopped. All 25 were computed, taxed and counted into the totals, and null records only that cumulative contractor net cash flow never rose above zero.",
+   "The project was abandoned inside the model, and the abandonment charge is the closing pool of 15724.0151 million USD."
+  ],
+  "answer": 2,
+  "explanation": "Reading null as a stop is how a reader ends up quoting a 25 year royalty stream as a short one. Total contractor net cash flow on that case is -15724.0151 million USD."
+ },
+ {
+  "prompt": "On that same 20000 capex case the treasury collects 875.1492 million USD. Which instrument delivered it?",
+  "options": [
+   "The minimum tax, which floors the government at a percent of gross revenue in any year the profit share collapses.",
+   "Royalty alone, since total profit oil and total tax are both 0.0000 million USD there.",
+   "Cost recovery, which hands the unrecovered pool back to the state once the horizon ends without clearing it.",
+   "Resource rent tax charged on the negative cash flow, against the capital uplift the tax block carries."
+  ],
+  "answer": 1,
+  "explanation": "No abandonment and no economic limit exist to stop the field, so it produces for 25 years and pays royalty on total revenue of 7001.1938 million USD while losing money."
+ },
+ {
+  "prompt": "A template field reads 18.75 and the derived rate column beside the royalty reads 0.187500. How do the two relate?",
+  "options": [
+   "The column is the rate after the cost recovery limit has been applied to it, which is why it prints so much smaller than the field does.",
+   "The field is quoted on gross revenue and the column on revenue after royalty, so the two differ by the royalty itself.",
+   "The column is a rate of 0.187500 percent, which is what a royalty of 50.9979 million USD on 271.9889 million USD of revenue works out at.",
+   "They are one instrument in two conventions, a percent and a ratio."
+  ],
+  "answer": 3,
+  "explanation": "A rate of 0.187500 percent charged on gross revenue of 271.9889 million USD could never produce the 50.9979 million USD the royalty column prints."
+ },
+ {
+  "prompt": "Year 1 gross revenue on the Designer's default project prints as 271.9889. In what unit?",
+  "options": [
+   "United States dollars, which makes the year 1 capex charge of 500.0000 a rounding error.",
+   "Millions of United States dollars, so 271.9889 million USD against a capex row of 500.0000 million USD.",
+   "Millions of barrels of oil equivalent, converted at 6000 scf per barrel before the deck price for the year is applied.",
+   "Millions of United States dollars on a real basis, restated to year 1 money by the deflator the sandbox carries."
+  ],
+  "answer": 1,
+  "explanation": "Money is millions of USD everywhere in the ledger, printed to four decimals and quoted as printed. A reader who carries 271.9889 as USD believes the project pays back instantly."
+ },
+ {
+  "prompt": "What is the 6000 scf per barrel conversion used for in this model?",
+  "options": [
+   "The variable half of opex, which is charged in USD per boe, and nothing else.",
+   "Gross revenue, where the three streams are priced as one boe total.",
+   "The royalty base, charging gas and NGL at the oil rate.",
+   "The R factor, whose cumulative revenue is expressed in boe before it is divided by cumulative cost."
+  ],
+  "answer": 0,
+  "explanation": "Revenue prices each stream at its own deck point. The engine writes the boe conversion as a multiply by 1000 and a divide by 6000, and the variable opex rate is the only place it is needed."
+ },
+ {
+  "prompt": "Year 1 of the default project shows oil at 3.650000 and gas at 0.018250. Is the gas negligible?",
+  "options": [
+   "Yes, and the published case that adds gas and NGL to the default project confirms it by leaving total revenue unchanged.",
+   "Yes, since a stream contributing under one percent of the volume is dropped from the boe total the variable opex is charged on.",
+   "The comparison cannot be made from those two figures, because oil is in million bbl and gas is in million Mscf.",
+   "No, because the gas column has already been converted to barrels of oil equivalent at 6000 scf per barrel."
+  ],
+  "answer": 2,
+  "explanation": "The two columns are not on the same axis at all. The oil and NGL columns are million bbl and the gas column is million Mscf."
+ },
+ {
+  "prompt": "Why is subtracting the two printed endpoints of a derived column and matching the printed difference a bad check?",
+  "options": [
+   "The printed endpoints belong to different rows of the ledger, while a derived difference is only ever computed within one row.",
+   "A derived column is computed at full precision and then rounded, and its endpoints are rounded too, so a printed pair of 79.2711 and 79.4678 carries a printed climb of 0.1968.",
+   "A derived column is an estimate the engine never returns, so it carries no defined precision to check anything against.",
+   "Derived columns print to six decimals and returned columns to four, so the two can never be put in the same subtraction."
+  ],
+  "answer": 1,
+  "explanation": "Both figures are correct and the hand subtraction is off by one in the last place. The default project's Generic Royalty/Tax pair does the same thing, printing 51.2558 and 41.0660 against a climb of -10.1897."
+ },
+ {
+  "prompt": "What separates a million USD in year 25 from a million USD in year 1 here?",
+  "options": [
+   "An escalation carried by the price deck past its last dated point.",
+   "A real basis, so every row prints in year 1 money.",
+   "A valuation date the rows are restated against.",
+   "Only the discount exponent, since there is no inflation and no deflator anywhere."
+  ],
+  "answer": 3,
+  "explanation": "The units refuse to carry a currency year. A row is a year and the year is its own discount exponent, and nothing else distinguishes the two."
+ },
+ {
+  "prompt": "The engine header names a single source of truth for Nigerian fiscal math. What is this model for?",
+  "options": [
+   "Comparing the shape of regimes against each other, with the Petroleum Economics Studio engine holding the fiscal truth.",
+   "Assessing a Nigerian liability under the Petroleum Industry Act, which is why the template set carries a PIA entry at all.",
+   "Producing a filing figure, once a template has been reconciled against the Petroleum Economics Studio engine on the same project.",
+   "Replacing that engine for screening work, since the two agree on a total government cash flow of 1339.2784 million USD."
+  ],
+  "answer": 0,
+  "explanation": "A template named for a jurisdiction is a caricature in six numbers, useful for asking which instrument moved which result and unfit for filing anything."
+ },
+ {
+  "prompt": "A term sheet carries a signature bonus, a domestic supply obligation and a state participation share. How are the three entered?",
+  "options": [
+   "The bonus goes into a capex bucket, the obligation into the variable opex rate, and the participation share into the contractor split.",
+   "Each becomes a tier on the profit split, the one field taking more than one entry.",
+   "They are not. A regime needing any of them cannot be expressed in this sandbox at all.",
+   "They ride on the template's description string into government cash flow."
+  ],
+  "answer": 2,
+  "explanation": "There is no signature bonus, no domestic supply obligation, no state participation and no flare penalty. Four fields, and the ledger they act on, are the whole of it."
+ }
+]

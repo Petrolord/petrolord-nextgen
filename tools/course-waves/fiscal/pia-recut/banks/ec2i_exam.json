@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "A tier list keyed at 60 and 80 USD per bbl is run against a deck the price never lifts above 35. What royalty rate is charged?",
+  "options": [
+   "No royalty at all, since the lowest threshold on the list was never reached in any year of the life and a tier nobody reaches charges nothing.",
+   "A rate interpolated between zero and 12.5 percent according to how close the price came to the first threshold, in the way a scale that slides on price is usually taken to work.",
+   "The lowest tier's rate of 12.5 percent, in every year, because the selection falls back to it before any threshold is reached.",
+   "The first tier's rate, but only in the years the project is profitable, since a royalty is not charged against a loss."
+  ],
+  "answer": 2,
+  "explanation": "The published case pays 18.0299 million USD on gross revenue of 144.2389 in year 1, an implied 0.125000, and 177.3774 over a life whose present value at 10 percent is negative 111.7254."
+ },
+ {
+  "prompt": "Three probe decks priced at 49.990000, 50.000000 and 50.010000 USD per bbl run against tiers of 0 and 50 USD per bbl. Which tier owns the threshold itself?",
+  "options": [
+   "The tier above it. The comparison is greater than or equal to, so 49.990000 pays 0.075000 while 50.000000 and 50.010000 both pay 0.100000.",
+   "The tier below it, so a price sitting exactly on 50 pays 0.075000 and only a price above it moves to the upper rate.",
+   "Neither, because the engine treats a price equal to a threshold as ambiguous and holds the rate of the year before.",
+   "It depends on the deck, since a threshold reached by a price multiplier is treated differently from one reached by a deck price."
+  ],
+  "answer": 0,
+  "explanation": "The three probes read royalties of 14.9214, 19.8989 and 19.9025 million USD on almost identical revenue, which is what makes the ownership of the threshold visible."
+ },
+ {
+  "prompt": "The selection that picks a royalty tier keeps no memory of the tier it chose the year before. What follows on a deck whose price falls back?",
+  "options": [
+   "The rate holds at the highest tier the price has ever reached, in the way a real sliding scale ratchets once a threshold has been passed.",
+   "The rate is averaged across the tiers the deck has visited, which is what keeps a royalty line smooth across a step in the price deck.",
+   "The rate cannot fall, because the selection starts each year from the rate it finished the year before and only tests the tiers above it.",
+   "The rate can move up one year and down the next, since the tier is chosen fresh from that year's own price."
+  ],
+  "answer": 3,
+  "explanation": "The teaching field pays an implied 0.075000 through year 5 and 0.100000 from year 6 under the PIA tiers, and a deck falling back below 50 USD per bbl would return it to 0.075000 with nothing in the instrument to prevent it."
+ },
+ {
+  "prompt": "A sweep prints an applied oil price of 50.000000 USD per bbl and an implied royalty rate of 0.075000 against tiers of 0 and 50. What has happened?",
+  "options": [
+   "The engine has a tolerance around a threshold and treats a price within it as not yet reached.",
+   "The printed price is a rounding of a price strictly below the threshold, such as 49.99999999999998, and the implied rate is the measurement of which side the engine was on.",
+   "The tier list repeated a threshold, so the engine kept the lower of the two rates written at that price.",
+   "The sweep applied its multiplier to the revenue column but not to the price the royalty function actually reads, so the two columns printed beside each other disagree by construction."
+  ],
+  "answer": 1,
+  "explanation": "Read a printed price column as a rounding of the price the engine used, never as the price itself. The rate says which side of the threshold the run was actually on."
+ },
+ {
+  "prompt": "Angola - Deepwater PSC takes 0.0000 of royalty on the default project while USA - Gulf of Mexico takes 503.7989 million USD. What does a royalty of zero say about the burden of a regime?",
+  "options": [
+   "That the government has given up its first claim on gross revenue, which is why the contractor keeps more of this ledger under Angola than under any other template.",
+   "That the regime has to recover cost faster, since a royalty of zero leaves the whole of gross revenue available to the recovery allowance in year 1.",
+   "That the template is incomplete, because a production sharing contract with no royalty in it cannot express a government's claim at all.",
+   "Nothing on its own. Angola collects 1263.7523 million USD of government cash flow on that project against 764.5528 for USA, through the profit split instead."
+  ],
+  "answer": 3,
+  "explanation": "USA - Gulf of Mexico leaves the contractor 980.9313 million USD of net cash flow against 481.7318 for Angola. A royalty is one instrument out of four, and the take is the reading."
+ },
+ {
+  "prompt": "A sliding royalty selects its tier from the oil price. What happens to the gas and NGL revenue in that year?",
+  "options": [
+   "It is charged at the first tier's rate, because no gas price reaches a threshold keyed in USD per bbl.",
+   "It is left out of the royalty base, which is why the implied rate on gross revenue reads below the tier's own rate.",
+   "It is charged at whatever rate the oil price chose, since the rate applies to the whole of gross revenue.",
+   "It is charged at a rate selected from the gas price against the same tier list, so a field can carry two royalty rates in one year."
+  ],
+  "answer": 2,
+  "explanation": "Only the oil price selects the tier, and the instrument can see nothing else: not cost, not cumulative revenue, not production rate."
+ },
+ {
+  "prompt": "The teaching field under the PIA template sells 139.6563 million USD in year 1, pays a royalty of 10.4742 and recovers 103.3457 against an 80 percent limit. What was the limit taken as a percent of?",
+  "options": [
+   "Revenue after royalty, because 103.3457 million USD is 80 percent of what is left once the royalty has been taken off the top.",
+   "Gross revenue, so the allowance for the year was 80 percent of 139.6563 million USD and the pool released as much of it as it held.",
+   "The recoverable pool, which is the balance brought forward plus the year's capex and opex, drawn down at 80 percent of itself.",
+   "Profit oil, since the allowance and the profit share are the two halves of what is left after royalty."
+  ],
+  "answer": 0,
+  "explanation": "Royalty is taken first and never becomes recoverable cost. The pool closes that year at 341.6581 million USD with the capex of 420.0000 inside it."
+ },
+ {
+  "prompt": "In year 5 of the default project the ledger spends 23.6264 million USD of opex and no capex, and recovers 83.6287 under a 50 percent limit. How is that possible?",
+  "options": [
+   "The engine recovers the following years' opex in advance once the capex has been dealt with, which is what the carryforward does.",
+   "Cost recovered is a draw on a historic balance, so a year that spent almost nothing can recover a great deal.",
+   "The 83.6287 million USD includes the uplift the pool earns while waiting.",
+   "The figure is the cumulative recovery to that year rather than the year's own draw, which is why it is larger than the year's spend."
+  ],
+  "answer": 1,
+  "explanation": "Year 1 spent 500.0000 million USD of capex and recovered 118.9951. A reader who treats the recovery column as a cost column double counts the whole of that capex."
+ },
+ {
+  "prompt": "On the teaching field under the PIA template the pool closes year 8 at 14.5837 million USD and year 9 at 0.0000, and cost recovered falls from 49.9934 in year 8 to 30.4412 in year 9 and 15.3141 in year 10. What is that last figure?",
+  "options": [
+   "The remainder of the year 1 capex of 420.0000 million USD, released on the schedule the engine follows once the early years are settled.",
+   "The 80 percent allowance on that year's revenue after royalty, which is the binding number in every year of the run.",
+   "A partial draw, since year 10 is the year the pool empties and only part of the allowance can be taken in it.",
+   "That year's own opex, because the pool is empty and nothing else is left to recover."
+  ],
+  "answer": 3,
+  "explanation": "Year 9 is the partial draw at 30.4412 million USD. From year 10 the instrument hands back each year's opex and passes the rest through as profit oil."
+ },
+ {
+  "prompt": "A published case closes its 25 year life with 2543.7575 million USD still in the unrecovered cost pool. What is that balance worth to the contractor?",
+  "options": [
+   "It is a receivable, so the contractor's position should be read as the ledger total plus the 2543.7575 million USD still owed.",
+   "It is a tax attribute, since an unrecovered balance shelters the profit share of the years that follow it.",
+   "Nothing. The engine never pays it, nothing carries it past the horizon, and it appears in no other column.",
+   "It is written off against government cash flow on that case."
+  ],
+  "answer": 2,
+  "explanation": "That case still pays back in year 3, because the contractor is also paid through its profit share, and its rate of return is null with the status multiple-roots."
+ },
+ {
+  "prompt": "On the default project the 80, 90 and 100 percent recovery limits all return a total cost recovered of 941.4436 million USD and a contractor net cash flow of 986.7327. What does the limit decide here?",
+  "options": [
+   "Nothing at all, since the limit is only read in the first year and the default project spends its capex there.",
+   "When the money arrives and not how much of it arrives, because the pool clears inside the life under all three.",
+   "The size of the tax bill, which is the only column a cost recovery limit can reach once the pool has cleared.",
+   "The total recovered, which happens to agree here because the three limits are close together and the project is small."
+  ],
+  "answer": 1,
+  "explanation": "Only the 50 percent run differs, at 940.4991 recovered and 986.4494 of contractor net cash flow, and only because it leaves 0.9444 million USD unrecovered at the horizon."
+ },
+ {
+  "prompt": "Capping cost recovery at 5 percent on the test project recovers 306.3022 million USD instead of 2770.6665 and the total tax rises from 1006.6134 to 1745.9227. Why does recovering less cost raise the tax?",
+  "options": [
+   "Cost that cannot be recovered stays inside profit oil, which rises from 3355.3781 to 5819.7423 million USD, and profit oil is what the tax base is cut from.",
+   "The tighter limit lengthens the life of the pool, and the engine charges a carrying cost on an unrecovered balance through the tax line.",
+   "The unrecovered cost is added back to the base as a disallowed deduction, in the way a tax authority treats a cost it will not accept.",
+   "The tax rate rises with the limit, because a regime that recovers less is compensating the government for a longer wait."
+  ],
+  "answer": 0,
+  "explanation": "If cost recovery were a deduction, less recovery would mean a smaller base. It means a larger one, and government cash flow rises from 1881.7626 to 2621.0719 million USD."
+ },
+ {
+  "prompt": "Two projects have identical lifetime revenue and lifetime cost totals, one producing them quickly and the other slowly. What does the R factor read on each at the close of the life?",
+  "options": [
+   "A larger value on the fast project, since the ratio is built from cumulatives that already contain the current year and the fast one banks its revenue sooner.",
+   "A larger value on the slow project, because its cost side stops growing while the revenue side keeps accruing to the end of the horizon.",
+   "The same value on both, because revenue in year 1 and revenue in year 25 enter the numerator at face value.",
+   "Values that cannot be compared, since the ratio is defined only against a tier list and two projects rarely carry the same one."
+  ],
+  "answer": 2,
+  "explanation": "The R factor is blind to time value, and it ignores royalty and tax as well, so it is a measure of the project and never of the contractor's own position."
+ },
+ {
+  "prompt": "The tranche a ratio selects carries a contractor split. Which part of the ledger does that split reach?",
+  "options": [
+   "Profit oil alone. Cost oil is not split, royalty is not split, and the government's share of profit oil is one minus the contractor's.",
+   "Profit oil and cost oil together, since both are shares of revenue after royalty and the tranche divides that whole quantity.",
+   "Profit oil and then the tax base, because the split is applied a second time to the contractor's share when the tax is charged.",
+   "The whole of gross revenue, with the royalty taken out of the government's side of the split afterwards."
+  ],
+  "answer": 0,
+  "explanation": "There is no signature bonus, no production bonus and no state participation line, so a tranche of 0.300000 on profit oil of 80.0217 million USD leaves the contractor 24.0065."
+ },
+ {
+  "prompt": "The tranche for a year is chosen from a ratio that already contains that year's own revenue and cost. What does that rule out?",
+  "options": [
+   "The use of the first tier as a default, because a ratio that includes the current year has always reached at least one threshold by the time it is read.",
+   "A crossing that lands between two printed rows, since a ratio computed from the current year takes a value on the threshold itself in the year it steps.",
+   "A split that steps back up late in life, because a running total that includes the current year can only ever grow from one row to the next.",
+   "Any lag. There is no averaging, no memory of last year's tranche and no proration across a crossing."
+  ],
+  "answer": 3,
+  "explanation": "Nothing is interpolated and nothing is smoothed. On the fall back case the ratio peaks at 2.972625 in year 11 and is down to 2.494796 by year 23, so the split does step back up."
+ },
+ {
+  "prompt": "On the published crossing case the split falls from 0.600000 in year 2 to 0.400000 in year 3, with R factors of 1.383252 and 1.846809. Which threshold caused it?",
+  "options": [
+   "The 1.0 threshold, reached in year 3, which is the first tranche the ratio meets on its way up the list.",
+   "The 1.6 threshold. Crossing 1.0 happened between years 1 and 2 and changed nothing, because 60 percent was already in force.",
+   "The 2.5 threshold, which the ratio passes in year 3 on its way to a peak above 3 later in the life.",
+   "Both the 1.0 and the 1.6 thresholds in the same year, since the walk applies every tier it has reached and the last one wins."
+  ],
+  "answer": 1,
+  "explanation": "Quote a case's numbers and never the prose beside them, because no mechanical check reads the association between a number and the event it is credited with."
+ },
+ {
+  "prompt": "On the published fall back case the R factor peaks at 2.972625 in year 11 and reads 2.494796 in year 23. What does the split do in year 23?",
+  "options": [
+   "It holds at 0.300000, because a tranche once entered is retained for the rest of the life the way a real contract ratchets.",
+   "It falls again to the lowest split on the list, since any movement in the ratio late in life is read as further maturity.",
+   "It steps back up from 0.300000 to 0.400000, because the ratio has fallen below 2.5 and the walk now stops at the 1.6 tier.",
+   "It becomes undefined, because profit oil of 3.1570 million USD is too small for the engine to select a tranche against."
+  ],
+  "answer": 2,
+  "explanation": "Cumulative revenue grows more slowly every year while cumulative cost never stops growing, so the ratio turns. Nothing in the engine ratchets and nothing warns."
+ },
+ {
+  "prompt": "A tranche list is read to choose one split for the year. Which tranche's split survives?",
+  "options": [
+   "The one carrying the highest threshold the ratio has reached, because a copy of the list is sorted by threshold before it is read.",
+   "The one that came last in the list as typed among those whose threshold was reached, since the list is read in the order it was written.",
+   "The one carrying the lowest split among those whose threshold was reached, because the engine resolves a choice in the government's favour.",
+   "The one the previous year selected, unless a new threshold has been reached since."
+  ],
+  "answer": 0,
+  "explanation": "Every shipped template is written sorted, so no template ledger moved. A list with two tranches at one threshold is the case the engine refuses, and it refuses it by naming the repeated threshold."
+ },
+ {
+  "prompt": "Which instruments in this model are charged on gross revenue?",
+  "options": [
+   "The royalty alone, since every tax in the stack is charged on the contractor's profit share.",
+   "The royalty and the minimum tax, and nothing else.",
+   "The royalty, the minimum tax and the corporate income tax, which between them are the three charges taken before cost recovery.",
+   "The royalty and the resource rent tax, because the uplift makes the second of them a charge on production rather than on profit."
+  ],
+  "answer": 1,
+  "explanation": "The other two taxes are charged on the profit share. That is why a 10 percent minimum can collect 700.1194 million USD in a case whose year 1 profit oil is 0.0000."
+ },
+ {
+  "prompt": "In the case where the minimum tax binds, year 3 has gross revenue of 678.3744 million USD, profit oil of 499.6589 and a tax of 67.8374, with the corporate income tax set to 0. What is the tax?",
+  "options": [
+   "A 10 percent charge on the profit share, reduced by the cost still sitting in the recovery pool in that year of the life.",
+   "The larger of the corporate income tax and the minimum, which on a rate of 0 means the profit share was charged at a residual rate.",
+   "A blend of the minimum tax and the profits taxes, weighted by how far the floor stands above them in that year.",
+   "A 10 percent minimum tax on gross revenue."
+  ],
+  "answer": 3,
+  "explanation": "The tax charged is the larger of the profits taxes and the minimum, never their sum. Here the profits taxes are 0.0000 so the floor is the whole charge, and it follows revenue down."
+ },
+ {
+  "prompt": "Isolated on the default project, a corporate income tax of 34 percent collects 502.1091 million USD over the life and a resource rent tax of 40 percent collects 350.7165. What makes the second the smaller?",
+  "options": [
+   "It draws relief from a pool of 1.2 times the 500.0000 million USD of capex before it charges anything, so its first positive charge falls only in year 7.",
+   "Its base is the profit share less the cost recovered in that same year, and the cost recovered on this project comes to 941.4436 million USD over the whole of the life.",
+   "It is charged only in the years after the recovery pool has cleared, and the pool clears late on this project.",
+   "It is charged on the government's share of profit oil, which is the smaller side of the split on this regime."
+  ],
+  "answer": 0,
+  "explanation": "The pool is drawn against the profit share and never refilled, so the column reads 0.0000 for six years and then charges the full rate on the whole base."
+ },
+ {
+  "prompt": "A sweep of the resource rent tax uplift reports a government cash flow of 619.4093 million USD at the default 20 percent. Why is that not the regime's government cash flow on that project?",
+  "options": [
+   "The sweep reports take before royalty, which has to be added back before the figure can be compared with a published one.",
+   "The sweep runs a different project, so its columns are not comparable with the default project at all.",
+   "The sweep sets the template's own corporate income tax of 34 percent to zero in every row, so the take it prints is one instrument short.",
+   "The sweep reports the discounted take, which is why it is smaller than the published figure on the same regime."
+  ],
+  "answer": 2,
+  "explanation": "The published take for that regime on the default project is 1121.5184 million USD. The sweep prints an isolation of one instrument and never the stack."
+ },
+ {
+  "prompt": "By what route does the 500.0000 million USD of capex on the default project enter the tax computation?",
+  "options": [
+   "Through cost recovery, which returns the capital and reduces the base by the same amount in the year it is returned.",
+   "Through the resource rent tax uplift and no other, and four of the six templates set that rate to 0.",
+   "Through a capital allowance spread over the 25 year horizon, which is what the uplift percent expresses.",
+   "Through the royalty, which is charged on gross revenue and so reduces every quantity the tax base is built from."
+  ],
+  "answer": 1,
+  "explanation": "The base is the profit share and recovery has been settled in cash, so no part of the 941.4436 million USD recovered appears in the tax computation."
+ },
+ {
+  "prompt": "On the test project USA - Gulf of Mexico collects 616.4851 million USD of tax inside a government cash flow of 1929.2089, and Nigeria - PIA (2021) collects 389.4896 inside 3372.6496. Which regime is the heavier?",
+  "options": [
+   "USA, on the tax, since tax is the only column in which a government's claim on a contractor is actually collected.",
+   "Neither, because the two columns disagree and a comparison can only be made on regimes whose orders agree.",
+   "Nigeria, on the take. The tax column measures one instrument and the take measures the regime.",
+   "USA, because a higher tax against a lower take means more of its claim is being taken through instruments the take does not include."
+  ],
+  "answer": 2,
+  "explanation": "The two columns point in opposite directions on the same ledger, because the government's share of profit oil never passes through the tax line."
+ },
+ {
+  "prompt": "On identical cash flows the mid year present value at 20 percent is 176.3275 million USD against a year end 160.9642. What is the relation?",
+  "options": [
+   "A fixed premium of about 15 million USD, which is the half year of discounting the mid year convention gives back on the first row.",
+   "A ratio that grows with the size of the ledger, so a larger field shows a larger gap between the two conventions.",
+   "A ratio set by the shape of the decline, since a steeper profile puts more of its cash in the years the two conventions treat differently.",
+   "The square root of one plus the rate, 1.095445 at 20 percent."
+  ],
+  "answer": 3,
+  "explanation": "The relation is pinned by a parity gate and depends on the rate alone: 1.024695 at 5 percent, 1.048809 at 10 and 1.140175 at 30."
+ },
+ {
+  "prompt": "A swept table of present values reports 980.9313 million USD at a rate of 0 percent. What must that value equal?",
+  "options": [
+   "The undiscounted total contractor net cash flow of the same ledger, which is the cheapest check there is on a discounted number.",
+   "The present value at the project's own rate, since a rate of zero is read as an instruction to use the project default.",
+   "The total government cash flow, because at a rate of zero the two sides of the ledger are no longer separated by timing.",
+   "Nothing in particular, since a rate of zero is a degenerate case the function handles separately."
+  ],
+  "answer": 0,
+  "explanation": "A rate of zero simply makes every divisor one. A top row that does not match the ledger total is reading different flows, since at a rate of zero every discounting convention returns the same sum."
+ },
+ {
+  "prompt": "Two published cases have their only root ABOVE the band: -1 then 2000, whose root is 199900 percent, and -100 then 1500, whose root is 1400 percent. What does the engine report for each, and which one would the retired rule have printed a rate for?",
+  "options": [
+   "A rate for both, 199900 and 1400 percent, because a root that exists is reported wherever it lies and only a missing root gives null.",
+   "Null with the status above-clamp for both, and the retired bisection would have printed 1400 percent for the second, because that root sat inside the doubling bracket it searched.",
+   "Null with the status no-root for both, because a rate above the band is treated exactly as a rate that does not exist at all anywhere.",
+   "Null for the first and 1400 percent for the second, because the band is applied to the search range rather than to the answer the search returns."
+  ],
+  "answer": 1,
+  "explanation": "The band runs from -99 to 1000 percent and a root outside it is not a rate the engine will name, so both are null with the status above-clamp and irrRootAboveBand set. The distinction worth carrying is what the retired rule did: it doubled from 100 percent to 102400, so it reported 102400 for the first, whose root is past even that, and it reported the real 1400 percent for the second, whose root sat inside the bracket."
+ },
+ {
+  "prompt": "Flows of negative 1 then 2000 have a root at 199900.0000 percent. What does the solver return for them, and why?",
+  "options": [
+   "199900.0000 percent, since the root is exact and the band is a search hint rather than a limit on what may be reported.",
+   "1000.0000 percent, the top of the band, because a root above the band is reported at the boundary it passed.",
+   "Null with the status above-clamp, because the only root lies beyond the top of the band the engine will search.",
+   "A rate read off the top of a doubling search, since that is what the solver falls back on when no root is bracketed."
+  ],
+  "answer": 2,
+  "explanation": "A root above the band is not a rate the engine will name. The published case with flows of negative 100 then 1500, whose root is 1400.0000 percent, carries the same status."
+ },
+ {
+  "prompt": "A comparison is filtered to regimes returning more than a threshold rate. What does that filter remove?",
+  "options": [
+   "Only the projects whose present value at a rate of zero is negative, which is one of the four statuses the engine records.",
+   "The projects whose rate is the edge of a search rather than a root, because such a rate is always above any sensible threshold.",
+   "Nothing that matters, provided the threshold sits below the lowest genuine rate returned.",
+   "Every regime whose rate is null, which puts the hopeless projects and the ones that never needed capital on the same side of the line."
+  ],
+  "answer": 3,
+  "explanation": "The case with capex of 20000 comes back null with the status no-root, on a contractor net cash flow of negative 15724.0151 million USD, and a case with no outlay at all comes back null with the status no-sign-change."
+ },
+ {
+  "prompt": "The published case with flows of negative 100 then 121 returns 21.0000 percent. What does that case pin?",
+  "options": [
+   "The convention, because under year end discounting one plus the rate is 1.21 and the root is therefore 21 percent.",
+   "The bracketing, since the doubling from 100 percent has to step past the root before any bisection can begin.",
+   "The precision of the 80 bisections, which is what lets the engine and the golden agree to four decimals.",
+   "The sign change guard, since a vector holding one negative and one positive entry is the smallest case with a root in it."
+  ],
+  "answer": 0,
+  "explanation": "A rate is a year end rate here, and a mid year convention on those same two flows would not solve to 21.0000 percent."
+ },
+ {
+  "prompt": "On the teaching field every regime shares an opex column starting at 25.0037 million USD and totalling 390.2137, and a capex of 420.0000 in year 1. What follows from that?",
+  "options": [
+   "The regimes cannot be compared, since one cost profile cannot carry each contract's operating terms.",
+   "Any difference between two regimes on that field is fiscal by construction, because no regime touches the cost columns.",
+   "The cost recovery limit is the only instrument that can separate them, because it is the only one that reads the cost columns at all.",
+   "The comparison is only valid at the field's own discount rate of 12 percent, since cost held constant biases every other rate."
+  ],
+  "answer": 1,
+  "explanation": "Reading the columns no regime touches first is what makes the rest of the comparison legible. Capex is 0.0000 in every year after the first."
+ },
+ {
+  "prompt": "Brazil - Concession charges 34 and 40 percent on the teaching field and collects 109.3752 million USD of tax. USA - Gulf of Mexico charges 21 percent alone and collects 45.8808, and Angola - Deepwater PSC charges 25 and 50 and collects 100.4364. What ranks the collections?",
+  "options": [
+   "The number of instruments each regime carries, since two profits taxes will always collect more than one.",
+   "The royalty each regime takes first, because a larger royalty leaves a smaller profit share for the rates to reach.",
+   "The base each rate is charged on, which is why the rates and the collections do not run in the same order.",
+   "The discount rate, since the tax column on a 25 year ledger is dominated by the years the discounting weights most heavily."
+  ],
+  "answer": 2,
+  "explanation": "Brazil carries the highest pair of rates and does not collect the most per point of rate. Naming the base before the rate is the habit that survives into the comparison."
+ },
+ {
+  "prompt": "On the teaching field Angola - Deepwater PSC recovers 618.0991 million USD and closes with 192.1146 still in the pool, while Brazil - Concession recovers 790.8868 and closes at 19.3270. What is the closing pool telling a reader?",
+  "options": [
+   "It is money the contractor spent that the ledger never paid back, so a recovery total should never be read without it.",
+   "It is the cost still to be recovered in the years after the horizon, which the model settles when the licence is handed back.",
+   "It is the difference between the two regimes' cost recovery limits, expressed in the currency of the ledger.",
+   "It is the balance on which the resource rent tax uplift is computed, which is why Angola's tax is the larger of the two."
+  ],
+  "answer": 0,
+  "explanation": "Angola runs a 50 percent limit and Brazil a 100 percent one. The limit costs the contractor time until the pool fails to clear, and then it costs money."
+ },
+ {
+  "prompt": "The teaching field summary is sorted by contractor net present value descending and Brazil - Concession is first at negative 5.8662 million USD. Government cash flow runs the other way, 316.7898 for Angola against 232.9950 for Brazil. Which order is right?",
+  "options": [
+   "The take order, since a present value that is negative for every regime cannot rank anything and should not be sorted on at all.",
+   "The present value order, because the summary's own sort is the engine's verdict and the take column is a derived quantity beside it.",
+   "Neither, because the two disagree, and a ranking that reverses under a second column is evidence that the comparison was mis-specified.",
+   "Both, and they are orders of different things."
+  ],
+  "answer": 3,
+  "explanation": "The best regime for the contractor on that field has a present value of negative 5.8662 million USD. Being least bad is a real answer, and it needs its label saying so."
+ },
+ {
+  "prompt": "Three of the six templates split profit oil on the R factor. What does a year in which the contractor's tranche is 0.300000 do to the tax base?",
+  "options": [
+   "It leaves the whole of profit oil taxable, since the tax is charged before the split and the split then divides what is left of it.",
+   "It leaves 0.300000 of profit oil taxable and charges the government's share at the same rate, which the take column reports on its own.",
+   "It leaves only the contractor's 0.300000 of profit oil taxable, because the government's share of profit oil never passes through the tax line.",
+   "It leaves the whole of profit oil taxable but at 0.300000 of the rate, which is how a split is expressed inside the stack."
+  ],
+  "answer": 2,
+  "explanation": "In year 11 of the default project a tranche of 0.300000 on 80.0217 million USD of profit oil leaves a base of 24.0065, which is how Ghana - Deepwater collects 230.9340 over the life at 35 percent while Generic Royalty/Tax collects 422.8854 at 30."
+ },
+ {
+  "prompt": "In year 3 of the published crossing case profit oil jumps from 46.2528 to 179.0750 million USD while the contractor's split falls from 0.600000 to 0.400000. Is the contractor worse off?",
+  "options": [
+   "No. A larger share of a much smaller quantity is less money than a smaller share of a much larger one, and the pool clearing is what released the profit oil.",
+   "Yes, because the tranche crossing takes a fifth of the contractor's profit oil away in the year it happens.",
+   "Yes, because a split falling in the same year that profit oil rises means the government captured the whole of the increase.",
+   "It cannot be told from those figures, because the split applies to cost oil as well and that column is not shown."
+  ],
+  "answer": 0,
+  "explanation": "A split rate and a share of money are different quantities and can move in opposite directions in one row. Cost recovery cleared and the tranche crossed in the same year."
+ },
+ {
+  "prompt": "Two runs of the same regime on the same project differ only in the resource rent tax uplift, one taking the default and one set to 0. Total tax is 2127.5549 million USD against 2207.5549 and present value at 10 percent 831.8148 against 777.1737. What moved them?",
+  "options": [
+   "The discount rate, since the two runs are reported at different rates and only one of them is the project's own.",
+   "One field left out of the inputs, which took its documented default of 20 percent and opened the larger of the two relief pools.",
+   "The cost recovery limit, which is the only input that can move a present value and a total tax together on one project.",
+   "A minimum tax that bound in one run and not the other, which changed the years the charge falls in and therefore the discounting."
+  ],
+  "answer": 1,
+  "explanation": "The two ledgers differ in one year only, year 4, at 169.6803 against 249.6803 million USD. A default worth 80 million USD of tax is worth reading in the inputs and not in the output."
+ },
+ {
+  "prompt": "One published run reaches payback only in year 12, closes at negative 111.7254 million USD of present value and is given no rate of return at all, and it still hands over 177.3774 of royalty. What do those readings show together?",
+  "options": [
+   "That the royalty is the reason the rate of return is so low, since an instrument charged before cost is what a marginal project cannot carry.",
+   "That the present value is the binding reading, because a charge on revenue is waived in any year a project earns less than its discount rate.",
+   "That the two readings belong to different runs, since a project that pays back at all cannot also carry a negative present value.",
+   "A royalty is charged on gross revenue whether or not the project makes money."
+  ],
+  "answer": 3,
+  "explanation": "The royalty collected is more than twice the contractor's whole lifetime cash flow of 80.8085 million USD. The instrument sees a price, picks a rate and charges gross revenue."
+ },
+ {
+  "prompt": "A test project run at 20000 of capex closes with 15724.0151 million USD in the pool and reports a contractor net cash flow of negative 15724.0151. What does its rate of return column say?",
+  "options": [
+   "Null, with the status no-sign-change, since a ledger carrying no positive contractor cash flow in any year never changes sign.",
+   "0.0000 percent, from the check on the present value at a rate of zero, which is not above zero on this ledger.",
+   "Null, with the status no-root, because no rate from negative 99 to 1000 percent brings its present value to zero.",
+   "A negative rate, since a project that never recovers its outlay solves to a root below zero."
+  ],
+  "answer": 2,
+  "explanation": "Present value at 10 percent is negative 15453.8510 million USD, government cash flow is 875.1492 and all of it is royalty, because royalty does not wait for cost to be recovered."
+ },
+ {
+  "prompt": "On the teaching field under the PIA template the implied royalty rate steps from 0.075000 to 0.100000 in year 6, and the R factor crosses 1.0 in the same year, from 0.997329 to 1.136133. Are those the same event?",
+  "options": [
+   "Yes. Reaching payout is what moves a field into the upper royalty tier, which is why both columns change in the same row.",
+   "No. The royalty moved because the deck steps to 65 USD per bbl in year 6, and the ratio crossed because cumulative revenue overtook cumulative cost.",
+   "Yes, because both instruments read the applied oil price, and a deck step therefore moves the royalty tier and the ratio together.",
+   "No, and the royalty step is the earlier of the two, since a price event reaches the ledger a year before a cumulative one can."
+  ],
+  "answer": 1,
+  "explanation": "One is a price event and the other is a cumulative one, and this field is the only teaching case where a royalty tier changes inside the life."
+ },
+ {
+  "prompt": "Every regime on the teaching field reports an R factor payout year of 6, while payback years run 6 for Brazil - Concession, 7 for Generic Royalty/Tax and 8 for Angola - Deepwater PSC. Why does one agree across regimes and the other not?",
+  "options": [
+   "Payout is the first year the R factor is above 1.0 and the ratio is net of nothing fiscal, while payback is the first year cumulative contractor net cash flow turns positive and that is net of royalty, tax and the split.",
+   "Payout is computed from the summary and payback from the ledger, and the two are produced by different functions on different projects.",
+   "Payout is rounded to the nearest year across the six regimes, while payback is reported exactly as each ledger returns it.",
+   "Payback moves because each regime carries a different cost recovery limit, and payout does not because the limit is applied after the ratio."
+  ],
+  "answer": 0,
+  "explanation": "The R factor responds only to production, price and cost. Two measures that agree on one project encourage the habit of treating them as one, and they are not."
+ },
+ {
+  "prompt": "What does this sandbox refuse to be?",
+  "options": [
+   "A comparison of the shapes of regimes, which requires the real fiscal codes rather than four instruments on one ledger.",
+   "A model of the timing of cost recovery, since the pool it carries has no schedule and cannot represent a real recovery profile.",
+   "A ledger for a field with more than one product stream, because only the oil price selects a royalty tier.",
+   "A second fiscal truth, and a source of any number quotable as a tax liability."
+  ],
+  "answer": 3,
+  "explanation": "The module's single source of truth for Nigerian fiscal math is the Petroleum Economics Studio engine. A comparison of shapes is worth a great deal; a number lifted out of it and quoted as a liability is worth nothing."
+ }
+]

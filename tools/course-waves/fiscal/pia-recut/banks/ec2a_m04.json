@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "On `cmp_all_templates_default_project` four of the six templates pay back in year 3. How does the payback verdict report that?",
+  "options": [
+   "It names the first of them in summary order, which is the highest NPV regime, and says nothing of the other three.",
+   "It names all four of them, in summary order, against year 4 for Angola - Deepwater PSC.",
+   "It is omitted, because a four way tie at the top cannot be ranked and an unsupportable claim is dropped.",
+   "It names whichever of them crosses zero cumulative contractor net cash flow earliest inside year 3, the engine interpolating within the year to separate a tie."
+  ],
+  "answer": 1,
+  "explanation": "Nigeria - PIA (2021) also pays back in year 4 and is not named, because the closing clause reports one regime at the slowest year. Naming every regime tied at the fastest year is the 2026-09-15 repair; the retired rule named the first of them, which was the NPV winner at 397.0445 million USD."
+ },
+ {
+  "prompt": "A payback verdict on ODIDI reads that Brazil - Concession and Ghana - Deepwater pay back in year 6, against year 8 for Angola - Deepwater PSC. What is the last regime in that sentence?",
+  "options": [
+   "The runner up, the second fastest of the six, which the sentence quotes so a reader can see how tight the top of the column is.",
+   "The regime immediately below the winners in the summary sort, which on ODIDI is Generic Royalty/Tax at year 7.",
+   "The slowest of the rest, because the function takes the fastest, removes it, and then takes the maximum of what is left.",
+   "The median of the payback column, chosen so that one outlier cannot make the spread look wider than it is."
+  ],
+  "answer": 2,
+  "explanation": "It reads like a top two and is a top and a bottom, with the three ODIDI regimes that pay back in year 7 silently in between."
+ },
+ {
+  "prompt": "On `cmp_never_recovers` all six templates give up 12727.272727 million USD of contractor NPV across the capex sweep. Why are the six losses identical rather than merely close?",
+  "options": [
+   "At both ends of the sweep every regime recovers cost at its own limit, so nothing below the capex line moves and the whole capex difference reaches the contractor's year 1 line undiluted, discounted by the same one year.",
+   "The sweep reuses the first regime's ledger for the other five, because nothing pays back and the comparison stops early.",
+   "Every template applies the same cost recovery limit at that capex, so each one recovers an identical fraction of the overrun.",
+   "The loss is rounded before the verdict ranks it, and the six regimes differ only past the sixth decimal place."
+  ],
+  "answer": 0,
+  "explanation": "The capex delta passes straight to the contractor's year 1 line, so the loss is the same discounted amount for all six whatever royalty, profit oil and tax each of them carries."
+ },
+ {
+  "prompt": "The capex verdict on that same comparison declines to rank and names all six regimes at 12,727.3 million USD each. What has it established?",
+  "options": [
+   "That USA - Gulf of Mexico is the safer regime under an overrun, since that is the regime the golden pins for this case.",
+   "Nothing, because a verdict that names no winner has not read the column it was handed.",
+   "That the six regimes are separated somewhere past the printed decimals, so one more decimal place in the sentence would rank them.",
+   "The only true thing available, that the six quantities are one quantity, so no regime is more resilient than another here."
+  ],
+  "answer": 3,
+  "explanation": "The tie is exact by construction, the golden pins the ranked quantities rather than a winner, and no tie break rule could be right among six answers that are one answer. The retired reduce named USA - Gulf of Mexico and the oracle named Brazil - Concession."
+ },
+ {
+  "prompt": "An earlier build called Nigeria - PIA (2021) the most progressive on `cmp_never_recovers`, rising 0.0 percentage points. What does the price verdict return there now, and why?",
+  "options": [
+   "It declines to rank, because every point is undefined and so no swept price gives every regime a government take within 0 to 100 percent.",
+   "It still names Nigeria - PIA (2021), since two null endpoints subtract to a climb of zero that ranks like any other.",
+   "It names Angola - Deepwater PSC, the regime that collected the most, because the take column breaks a tie in the climbs.",
+   "It is omitted entirely, as it is for a single regime, because the verdict needs at least two regimes whose series carry usable points before it will rank anything."
+  ],
+  "answer": 0,
+  "explanation": "Lifetime contractor net cash flow of -16279.9099 million USD outweighs a government cash flow of 1431.0440, profit is not positive at any swept price, and the sentence says no regime is economic at any swept price from 40 to 120 USD per bbl."
+ },
+ {
+  "prompt": "The Insights tab once called the second ranked regime the one that maximises government revenue. What does the second row of `cmp_all_templates_default_project` actually collect?",
+  "options": [
+   "1339.2784 million USD, because government cash flow descending is the summary's secondary sort once contractor NPV has ordered the rows.",
+   "758.7514 million USD, the largest of the six, which is why the old sentence looked right on this project.",
+   "764.5528 million USD, while the largest take on that comparison is 1339.2784 million USD and belongs to the regime in sixth place.",
+   "1263.7523 million USD, for Angola - Deepwater PSC, the regime the take column puts second."
+  ],
+  "answer": 2,
+  "explanation": "The sort carries no information about take, and on this project the take column runs the other way, from 758.7514 at rank 1 to 1339.2784 at rank 6."
+ },
+ {
+  "prompt": "`insights_single_regime` returns three verdicts rather than five. Which two are missing, and why?",
+  "options": [
+   "The payback and government verdicts, because each of their sentences carries a comparison clause that a second regime is needed to fill.",
+   "The capex and price verdicts, because a ranking of one regime is not a ranking.",
+   "The npv and payback verdicts, since one regime has nothing to be best against while both sweeps still return a series to rank.",
+   "None of them, because all five sentence templates fire and the two sweep verdicts name the only regime as both the most and the least resilient."
+  ],
+  "answer": 1,
+  "explanation": "Both sweeps still run and still produce a series, and the function declines to name a winner among one."
+ },
+ {
+  "prompt": "What does `insights_empty` return when the comparison is given no regimes at all?",
+  "options": [
+   "Five verdicts whose regime names render blank, since the sentence templates are built before the summary is read.",
+   "One verdict stating that there was nothing to compare, so a panel always has something to render on the tab.",
+   "The three verdicts that do not need a second regime, each reporting the absence rather than a value.",
+   "An empty list."
+  ],
+  "answer": 3,
+  "explanation": "An empty result is the honest shape for an empty question, and the panel rendering the list has to handle it."
+ },
+ {
+  "prompt": "The single regime payback verdict reads that Alpha pays back in year 6, and that no other regime pays back within the project life. What is wrong with the second clause?",
+  "options": [
+   "It is true only because there is no other regime, so it reads as a finding about rejected alternatives when it is a statement about an empty set.",
+   "It is false, because the other regimes were compared and at least one of them did pay back inside the 25 years.",
+   "It reports a null as a sentence, which hides that the payback column for the run was never computed at all.",
+   "It quotes the project life as 25 years when the horizon the comparison used was the last year with positive production."
+  ],
+  "answer": 0,
+  "explanation": "The heading above it still reads Fastest capital recovery, the same wording it carries when six regimes were ranked."
+ },
+ {
+  "prompt": "On ODIDI the capex verdict names Ghana - Deepwater as giving up the least contractor NPV and Angola - Deepwater PSC the most. What are the two ranked quantities?",
+  "options": [
+   "88.6123 million USD for Ghana - Deepwater and 267.7301 million USD for Angola - Deepwater PSC, the two losses the same verdict reports on the default project.",
+   "181.1922 million USD for Ghana - Deepwater and 252.6075 million USD for Angola - Deepwater PSC.",
+   "16.4714 and 10.9118 million USD, the NPV each returns at the first swept point.",
+   "-164.7208 million USD and -241.6957 million USD, the contractor NPV each regime returns at the last swept multiplier."
+  ],
+  "answer": 1,
+  "explanation": "The quantity is the first swept point minus the last: Ghana runs 16.4714 down to -164.7208 and Angola 10.9118 down to -241.6957."
+ },
+ {
+  "prompt": "On ODIDI the price verdict calls Brazil - Concession the most progressive, rising 7.5 percentage points. What does winning on that number say about the field?",
+  "options": [
+   "Brazil - Concession is a progressive regime, a property of its four instruments that the sweep has now measured on a second field.",
+   "The climb is small because the sweep scales oil only, and ODIDI carries gas at 40 Mscf/d and NGL at 900 bbl/d that never move.",
+   "Half the field is going the other way: only Ghana - Deepwater at 1.9971 and Nigeria - PIA (2021) at 0.1968 climb beside it, and the other three fall.",
+   "Seven percentage points is the smallest climb the verdict will report, below which the sentence is omitted for want of separation."
+  ],
+  "answer": 2,
+  "explanation": "The three falling climbs run as far down as -37.6994 for USA - Gulf of Mexico, so the winner leads a field on which half the regimes hand the state a shrinking fraction as price rises."
+ },
+ {
+  "prompt": "`insights_rounding` pins how the verdict sentences print their numbers. What is it guarding?",
+  "options": [
+   "That every money and rate figure inside a sentence renders at one fixed decimal place, so 0.25 prints as 0.3 and 1.05 prints as 1.1.",
+   "That the engine rounds a quantity before ranking it, which is what lets two regimes tie in a verdict at all.",
+   "That JavaScript and Python agree on every half way case, so a golden written in one language can grade the other.",
+   "That a verdict refuses to print a value it cannot render exactly, and omits the sentence instead."
+  ],
+  "answer": 0,
+  "explanation": "The ranking runs at full precision and only the sentence rounds, which is why two regimes printing the same figure have not been separated by it."
+ },
+ {
+  "prompt": "On `insights_never_pays_back` every `paybackPeriod` is null. What does the payback verdict do?",
+  "options": [
+   "It reports the first null it meets as a payback year, which a panel then renders as a blank cell beside the NPV column.",
+   "It changes its heading to Capital recovery and states in one sentence that no regime pays back within the project life.",
+   "It falls back on the R factor payout year, which is a gross test of cumulative revenue over cumulative cost and is defined on the very same ledger.",
+   "It is omitted entirely, in the same way the capex and price verdicts are omitted when only one regime is compared."
+  ],
+  "answer": 1,
+  "explanation": "The other four verdicts still fire: the contractor sentence still names Alpha at 150.0 million USD with an IRR of 22.0 percent."
+ },
+ {
+  "prompt": "`never_recovers_huge_capex` returns total profit oil 0.0000, total tax 0.0000 and total government cash flow 875.1492 million USD. Which instrument produced the take?",
+  "options": [
+   "The government's share of profit oil, which is charged before the cost recovery limit is applied and therefore survives the overrun.",
+   "Corporate income tax on the profit share, levied on the gross revenue of 7001.1938 million USD rather than on a base that went negative.",
+   "The minimum tax, which the tax stack applies whenever the computed charge on a loss making project would otherwise be zero.",
+   "Royalty, taken off the top."
+  ],
+  "answer": 3,
+  "explanation": "Profit oil never appears, so the tax stack never charges anything, and every dollar of the 875.1492 is royalty off the top of revenue."
+ },
+ {
+  "prompt": "On `cmp_never_recovers` the contractor verdict names Brazil - Concession at -15,354.7 million USD with no IRR, under a heading that reads best for the contractor. Is the sentence wrong?",
+  "options": [
+   "Yes, because a negative NPV cannot be the highest of anything, and a claim that cannot be supported is supposed to be omitted rather than printed.",
+   "Yes, because a withheld IRR means the flows never changed sign, so this project broke even rather than lost money.",
+   "No, it is correct and it describes a catastrophe, because the sort ranks six ways of losing money and rank 1 is the least bad.",
+   "No, and the withheld IRR confirms it: the engine declines a rate only when a project exactly returns its outlay."
+  ],
+  "answer": 2,
+  "explanation": "The sentence gives its reason, that no rate from -99 to 1000 percent brings the NPV to zero. Highest here means least negative, against -15900.1132 million USD for the worst of the six."
+ }
+]

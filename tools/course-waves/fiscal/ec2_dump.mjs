@@ -49,6 +49,19 @@ const irrRows = (rows) => irrOf(E.calculateIRRResult(rows));
 // stripped ("USA - Gulf of Mexico" -> "usa___gulf_of_mexico").
 const slug = (s) => s.toLowerCase().replace(/[^a-z0-9]/g, '_').replace(/^_+|_+$/g, '');
 
+// COURSE LABELS IN THREE GOLDEN NOTES. The golden's notes on rfactor_tranche_crossing,
+// tiers_unsorted_selected_by_threshold and sliding_royalty_price_deck_crossing name
+// their regimes "the Nigeria PIA tranches" and "the Designer's default PIA sliding
+// royalty". Neither regime is the Act: the first is this course's tiered teaching
+// regime value for value, the second is the Designer's sample PSC regime. The notes
+// print with those two labels relabelled and every number untouched; the golden's
+// own wording is listed for a separate engines rename (RECUT-fiscal-DONE.md, L6).
+const NOTE_LABELS = [
+  ['The Nigeria PIA tranches', "The tiered teaching regime's tranches"],
+  ['the Nigeria PIA tranches', "the tiered teaching regime's tranches"],
+  ["the Designer's default PIA sliding royalty", "the Designer's sample PSC regime's sliding royalty"],
+];
+for (const c of G.cashflow) for (const [a, b] of NOTE_LABELS) c.note = c.note.split(a).join(b);
 const CASE = Object.fromEntries(G.cashflow.map((c) => [c.id, c]));
 const CMP = Object.fromEntries(G.comparisons.map((c) => [c.id, c]));
 const INS = Object.fromEntries(G.insights.map((c) => [c.id, c]));
@@ -382,7 +395,7 @@ for (const c of G.cashflow) {
   w(`  total contractor NCF ${m(s.ncf)}, total government take ${m(s.gov)}, total revenue ${m(s.rev)}, total royalty ${m(s.roy)}, total cost recovered ${m(s.rec)}, total profit oil ${m(s.po)}, total tax ${m(s.tax)}, payback year ${payback(rows) ?? 'null'}, payout year ${payout(rows) ?? 'null'}, NPV ${m(E.calculateNPV(rows, c.project.discountRate))} at ${c.project.discountRate} percent, IRR ${irrRows(rows)}, closing unrecovered pool ${m(rows[rows.length - 1].unrecoveredCostPool)}.`);
 }
 w();
-w('A NOTE ON THE NOTES. Each note is the golden\'s own prose, reprinted verbatim. Three of them once made a claim their own numbers refused, and all three were corrected at source (EC2-4):');
+w('A NOTE ON THE NOTES. Each note is the golden\'s own prose, reprinted verbatim except for two regime labels: the tranches the golden calls "the Nigeria PIA tranches" print as the tiered teaching regime\'s, which they are value for value, and "the Designer\'s default PIA sliding royalty" prints as the Designer\'s sample PSC regime\'s sliding royalty. Three of them once made a claim their own numbers refused, and all three were corrected at source (EC2-4):');
 w();
 w('- `capped_5pct_pool_never_clears` (formerly capped_5pct_never_recovers) once said "no payback, IRR 0". It pays back in year 3, because at a 5 percent cost recovery limit the revenue that cannot be recovered becomes profit oil and this regime splits profit oil 100 percent to the contractor. Its NPV is zero at 54.6792 percent and again at -14.2614 percent, so the IRR is null with the status multiple-roots. Cost recovery is not the only way a contractor is paid back.');
 w('- `rfactor_tranche_crossing` once dated the 1.0 crossing to year 3. The R factor crosses 1.0 in year 2 and that crossing steps nothing, because 60 percent is already the first tier\'s split; the step to 40 percent in year 3 is the 1.6 threshold.');

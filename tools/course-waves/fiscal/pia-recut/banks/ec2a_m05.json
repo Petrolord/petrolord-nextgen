@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Nigeria - PIA (2021) on the default project reads 59.6432 as government share of net revenue in the summary table and 76.7282 as government take on the price sweep at 70 USD per bbl. What separates the two?",
+  "options": [
+   "The summary is computed on discounted cash flows at 10 percent while the sweep totals the same ledger undiscounted, so the two answer the same question at different dates.",
+   "The sweep re-ran the comparison at a higher oil price than the deck's own, so 76.7282 belongs to a later point of the nine, not the base case.",
+   "The summary adds total capex back into the contractor side of the denominator and the sweep does not, on the same cash flows over the same 25 years.",
+   "The summary counts royalty inside government cash flow and the sweep counts only profit oil and tax, which is why the sweep reads the higher of the two."
+  ],
+  "answer": 2,
+  "explanation": "Both come out of one call to `runFiscalComparison` an earlier build gave them one label, and 17.0850 percentage points separate them."
+ },
+ {
+  "prompt": "A reader proposes to translate between government take and government share of net revenue with a fixed offset, because the chart runs about ten points above the table. Why does that fail?",
+  "options": [
+   "The gap is not fixed: on one comparison at one price it runs from 9.6793 percentage points for Generic Royalty/Tax to 17.0850 for Nigeria - PIA (2021), and it grows with the share itself.",
+   "The gap changes with the swept price, so an offset taken at 70 USD per bbl is wrong at every other one of the nine points.",
+   "The offset is stable in percentage points and unstable in money, so it can be carried between rates but never between takes.",
+   "The two rates are computed from different ledgers, so no arithmetic relation between them exists to be approximated by an offset."
+  ],
+  "answer": 0,
+  "explanation": "Government take is government share of net revenue times 1.286453 on this project, so the gap is proportional to the share: Ghana - Deepwater shows 16.7958 where Generic Royalty/Tax shows 9.6793."
+ },
+ {
+  "prompt": "On `cmp_never_recovers` the price sweep returns null with the state undefined for every template at all nine prices, while Angola - Deepwater PSC collected 1662.7835 million USD for the government. What does the null mean?",
+  "options": [
+   "The government took nothing, because a project that never pays back generates no profit oil and therefore no take at all.",
+   "Lifetime profit is not positive: contractor net cash flow outweighs the take, so no share exists and the engine declines to return one.",
+   "The share was too large to render, so the point was flagged and then dropped rather than being drawn off the top of the axis with its true value kept.",
+   "The sweep could not scale the oil price on a project of that capex, so it returned the untouched deck at every point."
+  ],
+  "answer": 1,
+  "explanation": "Take of 1662.7835 against contractor net cash flow of -16511.6494 million USD sums to -14848.8659. An earlier build returned 0 there, drawn in the same colour as a zero that would mean nothing collected."
+ },
+ {
+  "prompt": "The Angola template on the default project at three times capex returns null, then 2223.0766, then 144.0692, then 85.6015 across the first four swept prices. How many states are on that line?",
+  "options": [
+   "One, a government take that is simply very sensitive to price on a project carrying that much capital.",
+   "Two, an unrenderable value at the first point and a share at the other three, since 2223.0766 is a share of a small denominator.",
+   "Two, a share below the axis at the first point and a share above 100 percent at the other three, which is what an overrun does to any curve.",
+   "Three: undefined at the first point, then exceeds twice with the true values kept, then an ordinary share."
+  ],
+  "answer": 3,
+  "explanation": "A government take of several hundred percent is arithmetic and not a fiscal term, which is why those two points are flagged exceeds and never set the chart's scale."
+ },
+ {
+  "prompt": "Until the 2026-09-15 repair the capex sweep was a loop from a multiplier of 0.8 to 1.5 in steps of 0.1 that returned seven points. What ended it early, and what replaced it?",
+  "options": [
+   "The engine capped the sweep at seven points to hold the comparison inside its time budget, and the cap was later raised to eight.",
+   "The eighth point was skipped because a multiplier of 1.5 makes the contractor NPV negative for several templates, and the axis was rescaled instead.",
+   "The accumulating multiplier reached 1.5000000000000004, which fails the test that it be at most 1.5, and an integer step count replaced the accumulation.",
+   "The loop tested the rounded label rather than the accumulator, so a label of 1.5 was never produced, and the label is now read from the loop bound."
+  ],
+  "answer": 2,
+  "explanation": "The engine returns the labels 0.8, 0.9, 1.0, 1.1, 1.2, 1.3, 1.4 and 1.5, and the last swept value equals the engine called directly at 1.5 on every regime."
+ },
+ {
+  "prompt": "For USA - Gulf of Mexico on the default project the resilience verdict quotes a loss of 267.7301 million USD. Which two points is that measured between?",
+  "options": [
+   "457.1975 million USD at 0.8 and 228.4023 at 1.4, the last point the sweep visits.",
+   "A contractor NPV of 457.1975 million USD at a multiplier of 0.8 and 189.4674 at 1.5.",
+   "382.0660 million USD at the base multiplier and 189.4674 at 1.5, so the loss runs down from the base case.",
+   "465.4141 million USD at 0.8 and 221.3360 at 1.5, which are the points of Generic Royalty/Tax rather than of this regime."
+  ],
+  "answer": 1,
+  "explanation": "Angola - Deepwater PSC sits at the other end of the same table, quoted at 88.6123 million USD over the same eight multipliers."
+ },
+ {
+  "prompt": "While the sweep stopped at a multiplier of 1.4, was the resilience sentence false?",
+  "options": [
+   "Yes, because it named a winner the eight point range would not have named, and the ranking is what the sentence claims to establish.",
+   "Yes, because it quoted a 50 percent overrun while it was measuring a 40 percent one, and the range is half of what such a claim asserts.",
+   "No, because the loop did reach 1.5 and only the axis label was short, so the number and the range agreed all along.",
+   "No, it reported the range the sweep produced, a 20 percent underspend to a 40 percent overrun."
+  ],
+  "answer": 3,
+  "explanation": "It was answering a narrower question than the label asked, which is harder to catch than a wrong number, and on the default project the named winners survived the change of range."
+ },
+ {
+  "prompt": "The nine published capex cases run multipliers of 0.7 to 1.5 and return NPVs from 220.1703 down to 41.2671 million USD. Which regime do they run?",
+  "options": [
+   "The Designer's own default regime, the one the price cases also use, which is not the Nigeria - PIA (2021) template despite sharing a country with it.",
+   "The Nigeria - PIA (2021) template, which is why the case at a multiplier of 1.0 returns the same NPV as that template's summary row.",
+   "All six templates at once, with the case reporting the best contractor NPV of the six at each multiplier.",
+   "The Brazil - Concession template, the regime whose resource rent tax makes a capex sweep worth publishing at all."
+  ],
+  "answer": 0,
+  "explanation": "Two ranges live in one engine: the sweep visits 0.8 to 1.5 on the six templates and the published cases 0.7 to 1.5 on the Designer's own regime, where payback slips from year 3 to year 6."
+ },
+ {
+  "prompt": "What can a reader change about the capex sweep to see a 70 percent overrun?",
+  "options": [
+   "The multiplier list, which the comparison accepts alongside the project and the regimes.",
+   "The axis maximum, which is the value the step count is built from and therefore also the value it stops at.",
+   "Nothing about the sweep, since the range, the step and the number of points are written into the engine and no input reaches them.",
+   "The capex lines of the project itself, which the sweep reads in order to set its own multipliers, so that a larger capital base widens the swept range."
+  ],
+  "answer": 2,
+  "explanation": "The last swept point is ordinary, 189.4674 million USD for USA - Gulf of Mexico at a multiplier of 1.5, but reaching anything past it means calling the ledger function directly."
+ },
+ {
+  "prompt": "On flows of -1 in year 1 and 2000 in year 2 the retired bisection reported 102400 percent. What does `calculateIRR` return now?",
+  "options": [
+   "102400 percent still, the top of a doubling bracket that the band from -99 to 1000 percent does not change.",
+   "Null, with the status above-clamp and `irrRootAboveBand` true, because the only root is 199900 percent.",
+   "199900.0000 percent, the true root, which the widened search now reaches.",
+   "1000.0000 percent, the top of the band, reported as a clamp in the way the screening engine reports its own."
+  ],
+  "answer": 1,
+  "explanation": "The NPV at 102400 percent is 0.0009, small, positive and not zero, so the retired value was the edge of a search and never a root."
+ },
+ {
+  "prompt": "Two solvers in this package once reported suspiciously round rates, 102400 percent and 1000 percent. What is the tell a reader should carry?",
+  "options": [
+   "Size rather than roundness, since no real project returns a rate in the thousands of percent and any such value is the edge of a search.",
+   "A rate quoted to four decimal places, which is the format the bisection uses and the Newton iteration does not.",
+   "An IRR reported beside a negative NPV, which is the only combination that a bracket return can produce in either engine.",
+   "Roundness rather than size, because both numbers were the edge of a search."
+  ],
+  "answer": 3,
+  "explanation": "On the published `capex_multiplier_0_7` case 1095.4783 percent is a real root and 102400 never was one, and the engine now returns null with a status rather than either."
+ },
+ {
+  "prompt": "`irr_all_positive_no_sign_change` and `irr_negative_root_reported` both printed 0.0000 percent under the retired rule. What does each return now?",
+  "options": [
+   "Null with the status no-sign-change on the first, whose NPV at 10 percent is 25.6198, and the negative root itself, -10.0000 percent, on the second, whose NPV at 10 percent is -16.5289.",
+   "Null with the status no-root on both, since neither has a rate inside the band from -99 to 1000 percent.",
+   "0.0000 percent on the first and null on the second, the engine still declining to print a negative rate.",
+   "-10.0000 percent on both, the shared contract reporting the nearest root inside the band whatever the flows do."
+  ],
+  "answer": 0,
+  "explanation": "One zero used to mean the question was ill posed and the other that the answer was negative, and they printed the same. Each now carries either a status word or the rate itself."
+ },
+ {
+  "prompt": "The resource rent tax is relieved from a pool opened at total capex times one plus `rrtUpliftPct` over 100. What does the default of 20 grant over the project life?",
+  "options": [
+   "Five times the whole capex, a fifth of it being subtracted from the base in every one of the 25 years.",
+   "A fifth of the capex, deducted once in year 1 alongside the capital spend it uplifts.",
+   "At most 1.2 times the capex, once, because the pool is drawn against the profit share and never refilled.",
+   "A fifth of the profit share each year, which is what makes the relief proportional to the rent the tax is aimed at."
+  ],
+  "answer": 2,
+  "explanation": "Total capex on the default project is 500.0000 million USD, and the retired rule subtracted total capex times the uplift over 100 in every one of the 25 years, which the engine called a screening approximation in its own comment."
+ },
+ {
+  "prompt": "Sweeping `rrtUpliftPct` on the Brazil - Concession instruments with the corporate income tax set to zero, so the resource rent tax stands alone, the total tax reads 390.7165 at an uplift of 0, 350.7165 at 20 and 290.7165 at 50. What does the sweep show?",
+  "options": [
+   "An annual allowance, since a total tax that keeps falling with every point of uplift can only come from a deduction repeated in every year of the life.",
+   "A pool: the relief is the same size in the end and the uplift only moves how long it lasts, so the first charged year slides from 6 to 9.",
+   "The instrument switching itself off, since at an uplift of 50 no year of the ledger carries a positive resource rent tax charge.",
+   "A minimum tax floor, below which the stack will not charge a regime whose base has gone negative."
+  ],
+  "answer": 1,
+  "explanation": "Total capex here is 500.0000 million USD, so an uplift of 20 opens a pool of 1.2 times that and a zero uplift opens one at the capex itself. The total falls by a fixed amount per point of uplift and the first charged year slides later."
+ },
+ {
+  "prompt": "`rrt_uplift_default_20` omits the uplift field and returns total tax of 2127.5549 million USD, while `rrt_uplift_zero_respected` sets it to 0 and returns 2207.5549. What does a blank field give?",
+  "options": [
+   "A zero uplift, on the ordinary rule that an absent numeric field contributes nothing to the base it would have reduced.",
+   "Whatever the template carried, since a comparison fills a missing tax field from the regime it was cloned from before the ledger runs.",
+   "An error the comparison reports rather than a ledger, because the resource rent tax cannot be charged without a stated uplift.",
+   "The default of 20, and 2127.5549 million USD with it."
+  ],
+  "answer": 3,
+  "explanation": "Contractor net cash flow moves with it, 1323.4598 million USD on the default against 1243.4598 on an explicit zero, so omitting the field is a decision."
+ }
+]

@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "One call to runFiscalComparison returns four objects. Which one holds the table a reader looks at first, and what decides how many rows it has?",
+  "options": [
+   "summary, one row per regime, so the list of regimes passed in is the only thing that grows it.",
+   "annualCashFlows, whose row count is the fixed 25 year life.",
+   "sensitivityData, because the nine swept prices and the seven swept capex multipliers are what the table reports at each rank.",
+   "insights, which formats one of its five verdicts into each row."
+  ],
+  "answer": 0,
+  "explanation": "One project goes in and each regime comes back with a complete life of its own, and every ledger inside annualCashFlows is 25 rows long whatever the regime."
+ },
+ {
+  "prompt": "All six templates on the default project return gross revenue of 2686.9277 million USD. What does that identical figure say about a fiscal regime?",
+  "options": [
+   "The six templates happen to share a royalty base, and a template built on a different base would return a different revenue.",
+   "Cost recovery is struck before revenue is reported, so the revenue line is already net of the recoverable pool and equal by construction.",
+   "It touches neither production nor price, so revenue belongs to the field and only the division of it moves.",
+   "Revenue is the figure discounted at 10 percent, which removes the regime's effect on timing."
+  ],
+  "answer": 2,
+  "explanation": "On that same 2686.9277 million USD, lifetime contractor net cash flow is 406.2057 million USD under Nigeria - PIA (2021) and 986.7327 under Generic Royalty/Tax."
+ },
+ {
+  "prompt": "The summary comes back sorted. What can be read off a row's position, and what tie break applies when two regimes match?",
+  "options": [
+   "Contractor NPV descending, with the payback year as the secondary key wherever two NPVs are equal.",
+   "Contractor NPV descending and nothing else, and there is no secondary key at all, so equal NPVs keep the order they were passed in.",
+   "Contractor NPV descending and government cash flow ascending together, since the two mirror each other.",
+   "The internal rate of return descending, so rank 2 at 40.2125 percent above rank 3 at 44.0823 is an error."
+  ],
+  "answer": 1,
+  "explanation": "summary[0] is the best regime for the contractor and nothing else can be read off a position, and the comparison exposes no option to sort on another column."
+ },
+ {
+  "prompt": "On the default project rank 2 returns an internal rate of return of 40.2125 percent and rank 3 returns 44.0823 percent. What has gone wrong?",
+  "options": [
+   "The two rates were solved at different discount rates, because the bisection reruns each regime against its own hurdle.",
+   "The rank 2 regime failed to converge, so the solver reported the edge of its own bracket in that row instead of a root.",
+   "The rows were ordered on the payback year, which puts a regime with a later payout above one with a higher rate.",
+   "Nothing at all."
+  ],
+  "answer": 3,
+  "explanation": "Generic Royalty/Tax leads on NPV at 397.0445 million USD with a rate of 44.6574 percent, and Brazil - Concession sits at rank 3 with 287.2804 and 44.0823, so the higher rate and the higher NPV belong to different regimes."
+ },
+ {
+  "prompt": "On ODIDI, Ghana - Deepwater sits at rank 3 collecting 308.8447 million USD for the government and USA - Gulf of Mexico at rank 4 collecting 277.6679. Why does the lower ranked regime collect less?",
+  "options": [
+   "The take column is reported after royalty on that field, and USA - Gulf of Mexico charges the higher flat royalty of the two.",
+   "The sort key is NPV discounted at 12 percent while take is an undiscounted lifetime total, and the larger contractor sum arrives later.",
+   "The ranking was set by the government share of net revenue column, where 32.8219 percent sits below 36.5071 percent.",
+   "USA - Gulf of Mexico never pays back on ODIDI, so its take was truncated at the fixed 25 year horizon."
+  ],
+  "answer": 1,
+  "explanation": "USA - Gulf of Mexico keeps 148.3166 million USD of lifetime contractor net cash flow against 117.1399 for Ghana - Deepwater and ranks lower anyway, paying back in year 7 against year 6."
+ },
+ {
+  "prompt": "Which regime is best for the government on ODIDI, and where is that read from?",
+  "options": [
+   "The regime at rank 2, Generic Royalty/Tax, since the second row is the state's preference once the contractor's own pick is set aside.",
+   "Brazil - Concession at rank 1, because on a field where every NPV is negative the leading row is the one the state has squeezed hardest.",
+   "Angola - Deepwater PSC, read out of the take column at 316.7898 million USD, from rank 6.",
+   "Nigeria - PIA (2021), whose 36.9937 percent is the harshest rate of the six."
+  ],
+  "answer": 2,
+  "explanation": "Nothing in the summary sorts by take, and quoting the second row as the government's preference is the exact claim the Insights tab used to make."
+ },
+ {
+  "prompt": "The summary's government share of net revenue column divides which two quantities?",
+  "options": [
+   "Government cash flow over government cash flow plus contractor take, with total capex added back into the contractor's side.",
+   "Government cash flow over government cash flow plus contractor net cash flow, with no adjustment made to either quantity.",
+   "Total tax over total profit oil, which is why a template carrying no resource rent tax reads the lower number.",
+   "Government cash flow over gross revenue, which is why every template on one project shares a denominator."
+  ],
+  "answer": 0,
+  "explanation": "Total capex on the default project is 500.0000 million USD and the same add-back goes into every row, which turns the denominator into revenue less opex, the net revenue the name refers to."
+ },
+ {
+  "prompt": "Angola - Deepwater PSC pays 245.1955 million USD of tax on the default project inside a take of 1263.7523, and its government share of net revenue reads 56.2797 percent. What is the column counting?",
+  "options": [
+   "The corporate income tax of 25 percent and the resource rent tax of 50 percent, weighted by the years each of them was actually charged.",
+   "Tax over the contractor's profit share, which is the statutory rate this template was built to reproduce on a deepwater block.",
+   "The share of gross revenue the state received, which is why it exceeds 25 percent.",
+   "Royalty, the government's profit oil share and tax together, so most of what it counts is not tax."
+  ],
+  "answer": 3,
+  "explanation": "USA - Gulf of Mexico is clearer still: its only tax is corporate income tax at 21 percent, its column reads 34.0485 percent, and a flat royalty contributes 503.7989 million USD of the 764.5528 collected."
+ },
+ {
+  "prompt": "On the published comparison built with capex of 20000, Brazil - Concession shows the gentlest government share of net revenue in the course, 13.5916 percent, on an NPV of -15354.6816 million USD. Why is it so low?",
+  "options": [
+   "Brazil - Concession charges no royalty on that project, so only its corporate income tax and its resource rent tax reach the numerator.",
+   "The 20000 of capex was added back into the denominator and swamped everything else in it.",
+   "Cost recovery ran at the full limit for all 25 years, so the government's profit share never began and the tax base stayed at nought.",
+   "The rate is discounted at 10 percent while the take it divides is not."
+  ],
+  "answer": 1,
+  "explanation": "A rate that falls as the project gets worse is not measuring the harshness of the terms. Angola - Deepwater PSC on the same comparison collects 1662.7835 million USD and reads 32.2800 percent."
+ },
+ {
+  "prompt": "What is the summary's government share of net revenue column not able to be compared with?",
+  "options": [
+   "Another regime in the same table, because the capex added back differs by regime.",
+   "The same regime on a second field, because the add-back is discounted to that field's own valuation date before the ratio is struck.",
+   "A statutory rate, and government take on the price sweep, which reads 43.4694 percent where the column reads 33.7901.",
+   "The government cash flow column beside it, which the ratio is built from and therefore ranks in the same order on every project."
+  ],
+  "answer": 2,
+  "explanation": "Both totals are undiscounted lifetime sums while the NPV beside them is discounted, and the same 500.0000 million USD add-back is applied to every row of one project."
+ },
+ {
+  "prompt": "paybackPeriod and rFactorPayoutYear sit next to each other in the summary. What is the difference between them?",
+  "options": [
+   "Payback is the first year cumulative contractor cash after tax is above zero, and payout is the first year the R factor is above 1.0, a gross test that ignores the government.",
+   "Payback is discounted at the comparison's rate and payout is not, which is why payout arrives first.",
+   "Payback counts the year capex clears the cost pool, and payout the year the profit oil split first steps down a tranche.",
+   "They test the same event and differ only in rounding, payback down to the whole year and payout up."
+  ],
+  "answer": 0,
+  "explanation": "USA - Gulf of Mexico on the default project runs cumulative contractor net cash flow of -310.0117, -140.2337 then 8.9905 million USD, and its R factor reads 0.512217, 0.922481 then 1.254640, so both land in year 3."
+ },
+ {
+  "prompt": "On the comparison built with capex of 20000 both year columns come back null for every regime. What does that null mean, and what does it not mean?",
+  "options": [
+   "It means the bisection did not converge, so a longer horizon returns the same nulls.",
+   "It means the government collected nothing on that comparison, which is why the take column reads a flat 0.0000 beside it.",
+   "It means payback falls outside the swept price range and exists at an unswept price.",
+   "It means neither event happened inside the fixed 25 year horizon, and it is neither a zero nor a fast result."
+  ],
+  "answer": 3,
+  "explanation": "The R factor never passes 1.0 there while the government still collects between 700.1194 and 1662.7835 million USD."
+ },
+ {
+  "prompt": "Both year columns are whole numbers with no interpolation. What does that cost a reader separating two regimes?",
+  "options": [
+   "The columns round to the nearest year, so a regime turning positive halfway through year 4 reports year 4 or year 5 depending on the sign of that year's cash flow.",
+   "A project that turns positive in the first week of a year and one that turns positive in its last week report the same year.",
+   "Nothing at all, because both are computed on monthly cash flow inside the engine and only reported annually.",
+   "The years are discounted at 10 percent before they are rounded, which compresses a later year against an earlier one."
+  ],
+  "answer": 1,
+  "explanation": "Neither column is discounted either, while the NPV standing beside them is, so the two year columns and the NPV are not measured on the same money."
+ },
+ {
+  "prompt": "The two Suite test regimes return Flat with an NPV of 1262.3470 million USD, take of 1881.7626 and a government share of net revenue of 36.5310, which is exactly the row Generic Royalty/Tax returns on the test project. Why?",
+  "options": [
+   "Both rows were run at the same discount rate of 10 percent, and government share of net revenue is insensitive to everything except the rate.",
+   "The comparison caches one result per project and reuses it whenever the first regime in the list sorts to rank 1 of the summary.",
+   "The four instruments are identical, so a name is not a regime.",
+   "Generic Royalty/Tax is the fallback the engine substitutes for any regime that carries no resource rent tax and no tiered split."
+  ],
+  "answer": 2,
+  "explanation": "One field and one deck divided by the same royalty, the same cost recovery, the same split and the same tax stack returns the same ledger under either label."
+ },
+ {
+  "prompt": "Which of these does the comparison refuse to do?",
+  "options": [
+   "Accept a discount rate above 10 percent, which is why every published comparison in the course is run at that rate.",
+   "Accept more than six regimes in one call, which is the reason the template set was built with six members in it.",
+   "Vary the 25 year life, though it will accept a capex schedule spread across drilling, facilities and subsea in separate years.",
+   "Schedule capex, which it spends in year 1."
+  ],
+  "answer": 3,
+  "explanation": "Every dollar of capex lands in year 1, the horizon is fixed at 25 years, and the model carries no abandonment, no depreciation, no loss carryforward and no ring fence."
+ }
+]

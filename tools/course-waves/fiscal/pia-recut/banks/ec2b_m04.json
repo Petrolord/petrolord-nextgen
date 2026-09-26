@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Add contractor net cash flow and government cash flow on one row of a ledger this engine returns. What does the pair equal?",
+  "options": [
+   "Gross revenue less opex less capex, in every year, under every one of the six templates.",
+   "Gross revenue less opex less capex, less the movement in the unrecovered cost pool, because cost that was not recovered in the year reached neither party.",
+   "Gross revenue less royalty, because the royalty is settled off the top before the cascade begins and belongs to neither of the two takes.",
+   "Gross revenue, since every dollar the field sold is assigned in the year to the contractor or to the state and nothing else is done with it."
+  ],
+  "answer": 0,
+  "explanation": "Year 1 of the default project reads -259.0138 for both sums under the Gulf of Mexico terms at a 100 percent limit and under Angola at 50 percent, though the closing pools are 310.0117 and 395.0083."
+ },
+ {
+  "prompt": "Angola recovers cost at a 50 percent limit and closes year 1 of the default project with 395.0083 still in the pool, yet its two takes add to the same -259.0138 as a regime that recovered everything. Why does the unrecovered balance open no gap?",
+  "options": [
+   "The engine writes the shortfall off against the state's share of profit oil in the same year, so the pair is restored on the government side of the row.",
+   "The limit is taken on revenue after royalty, and royalty sits outside the identity, so the shortfall cancels against the royalty column instead.",
+   "An unrecovered balance is not a cash movement. It stays in the pool and becomes somebody's profit oil in a later year.",
+   "The contractor is credited with the shortfall as a receivable in the year it arises, and that receivable is carried inside contractor net cash flow."
+  ],
+  "answer": 2,
+  "explanation": "Cost recovered plus profit oil is revenue after royalty in every year, so recovery and royalty both cancel out of the sum. Swept over 450 rows the largest disagreement is 1.1369e-13."
+ },
+ {
+  "prompt": "The engine's own header records that this identity used to fail before the E1 pass. What was wrong?",
+  "options": [
+   "Royalty was charged on revenue after cost recovery rather than on gross revenue, so the two takes overstated every year by the size of the royalty column.",
+   "Recovered cost was subtracted from profit oil and then dropped, credited to neither side, so the two takes fell short of revenue less cost by exactly the cost recovered.",
+   "The unrecovered pool was discounted at the project rate before being carried forward, which quietly lost a part of the balance in each year of the life.",
+   "Tax was charged on gross revenue instead of on the contractor's profit share, so the government side of the row collected more than the cascade had produced."
+  ],
+  "answer": 1,
+  "explanation": "Cost oil is now credited to the contractor and the full cost outflow enters the pool. The second defect was that opex never became recoverable at all."
+ },
+ {
+  "prompt": "The Gulf of Mexico terms set the cost recovery limit at 100 percent, and year 1 of the Designer's default project still closes with a pool of 310.0117. What did that limit actually allow?",
+  "options": [
+   "Recovery of 271.9889, the whole of gross revenue, which still falls short of the year's spending and leaves the remainder to be carried forward.",
+   "Recovery of the year's opex of 31.0027 and capex of 500.0000 in full, with the pool holding only what the revenue could not fund.",
+   "Recovery of nothing at all in year 1, because the pool is seeded with the capex before any allowance against revenue is computed for the year.",
+   "Recovery of 220.9910, the whole of revenue after royalty, against opex of 31.0027 and capex of 500.0000."
+  ],
+  "answer": 3,
+  "explanation": "A 100 percent limit is a ceiling on revenue after royalty, not a promise to return the spend, so 310.0117 is carried into year 2."
+ },
+ {
+  "prompt": "A published case runs the test project at capex 20000. Life contractor net cash flow is -15724.0151 and the closing unrecovered pool is 15724.0151. Why is it one figure with two signs?",
+  "options": [
+   "The pool is charged to the contractor as a cash cost in the closing year, and that charge is what makes the two columns agree at the end of the life.",
+   "The engine floors the pool at the size of the loss, so it is one quantity printed twice.",
+   "Profit oil never appears, so the contractor's life is exactly the cost that recovery could not reach.",
+   "Royalty of 875.1492 was recovered out of the pool, which balances the two."
+  ],
+  "answer": 2,
+  "explanation": "Total profit oil is 0.0000 and total tax is 0.0000, so the state collected royalty of 875.1492 and the contractor absorbed all the rest."
+ },
+ {
+  "prompt": "From year 4 of the Gulf of Mexico ledger on the default project, costRecovered and opex are one number, 25.1816. What does that show?",
+  "options": [
+   "The pool closed at 0.0000 in year 3, so the only cost left to assign is the year's own opex.",
+   "The limit started to bind in year 4, capping recovery at the opex figure and carrying the rest of the standing pool forward into year 5.",
+   "Opex became recoverable in year 4, once the whole of the capex had been returned.",
+   "Recovery moved onto a straight line schedule once the capex came back."
+  ],
+  "answer": 0,
+  "explanation": "Year 3 recovered 167.1490 and closed the pool at 0.0000, so from year 4 the two columns cancel and the row is worth the profit share less tax."
+ },
+ {
+  "prompt": "Year 1 of the Gulf of Mexico ledger reports profitOil 0.0000 beside a contractor line of -310.0117. What does the 0.0000 say about the year?",
+  "options": [
+   "The year broke even, because a residual of zero is what a year that exactly covered its own costs is bound to produce in this ledger.",
+   "Revenue after royalty of 220.9910 went entirely to cost recovery, leaving no residual for the split to act on.",
+   "The regime assigned the whole residual to the state, which is the reason the contractor's line is negative by the size of the capex.",
+   "Profit oil is floored at zero and the true residual was negative by 310.0117."
+  ],
+  "answer": 1,
+  "explanation": "Profit oil carries no opex, no capex and no tax, and this 0.0000 sits in a year that spent 500.0000 of capex."
+ },
+ {
+  "prompt": "Profit oil under the Gulf of Mexico terms steps from 11.3804 in year 3 to 135.2891 in year 4 while gross revenue falls from 219.7286 to 197.5024. What moved?",
+  "options": [
+   "The contractor's split stepped up a tier, which applies a larger share of profit oil to a residual that was much the same size in both years.",
+   "The royalty rate stepped down as the price deck moved at year 5, so more of the top line survived to reach the residual in year 4.",
+   "The capex finally left the recoverable pool in year 4.",
+   "The cost pool cleared, so recovery stopped taking the whole stream and the residual is what jumped."
+  ],
+  "answer": 3,
+  "explanation": "The split here is flat at 100 percent and the royalty is flat at 18.75 percent, so neither instrument moved at all."
+ },
+ {
+  "prompt": "Year 1 of the default project spends 500.0000 of capex under the Gulf of Mexico terms and pays tax of 0.0000. Why is nothing owed?",
+  "options": [
+   "The capex is deducted from the tax base in the year it is spent.",
+   "The loss in year 1 is carried forward against the tax of the later years, so the year itself settles at nothing and the relief arrives later.",
+   "The base is the contractor's share of profit oil, and profit oil is 0.0000 that year.",
+   "Corporate income tax at 21 percent starts only once the pool clears."
+  ],
+  "answer": 2,
+  "explanation": "Cost recovery had already assigned all 220.9910 of revenue after royalty, so the rate had nothing to act on. The model carries no depreciation and no loss carryforward."
+ },
+ {
+  "prompt": "Ghana carries the highest corporate rate of the six templates at 35 percent and pays life tax of 230.9340 on the default project, against 422.8854 under Generic at 30 percent. What explains it?",
+  "options": [
+   "Ghana's tiered split hands the contractor a smaller share of profit oil, so the rate has less to act on.",
+   "Ghana's royalty of 5 percent leaves more of the top line inside the recoverable pool, and cost recovery is deducted before the tax base is struck.",
+   "Ghana's cost recovery limit of 90 percent shelters part of the residual from tax in every year until the standing pool has cleared.",
+   "Generic carries a resource rent tax beside its corporate rate, on the same base."
+  ],
+  "answer": 0,
+  "explanation": "Tax is charged on the contractor's profit share, so tiers of 70, 50 and 35 percent shrink the base that a 35 percent rate is applied to."
+ },
+ {
+  "prompt": "Two published runs share a revenue of 7001.1938 and a profit oil of 3523.7229 and collect life tax of 2127.5549 and 2207.5549. What is different between them?",
+  "options": [
+   "One arms the minimum tax at 10 percent of gross revenue while the other leaves it at 0, which changes the years in which the stack binds.",
+   "One leaves the resource rent tax uplift unstated, which takes the default of 20 percent, and the other sets it to 0.",
+   "One runs the Brazil resource rent rate of 40 percent and the other the Angola rate of 50 percent, on the same contractor profit share.",
+   "One recovers cost at 100 percent and the other at 70 percent, which moves the residual."
+  ],
+  "answer": 1,
+  "explanation": "A setting nobody typed moved the life tax from 2207.5549 to 2127.5549, which is why an unstated field is read as carefully as a rate."
+ },
+ {
+  "prompt": "Year 2 of the Gulf of Mexico ledger on the default project is the largest positive contractor row of the life at 169.7780, and its profit oil is 0.0000. How?",
+  "options": [
+   "It takes a residual of 198.6260 at a flat 100 percent split and pays no tax.",
+   "It collects the profit share the pool held back in year 1.",
+   "It recovers the whole 500.0000 of capex in the one year.",
+   "It recovers 198.6260 of cost oil against opex of 28.8480, pays no tax and carries no capex."
+  ],
+  "answer": 3,
+  "explanation": "Cost oil is added to the contractor and not subtracted, so the row is 198.6260 less 28.8480 with nothing else in it."
+ },
+ {
+  "prompt": "Royalty never appears as a subtraction on the contractor's line, though it is printed on the row. Why not?",
+  "options": [
+   "It is charged to the government cash flow column instead.",
+   "It is returned to the pool as a recoverable cost in the next year.",
+   "It came off before cost recovery began, so year 1 cost oil of 220.9910 is already net of it.",
+   "It is netted against the tax owed on the contractor's profit share."
+  ],
+  "answer": 2,
+  "explanation": "Subtract it a second time and year 1 reads 50.9979 too low, with a life total to match."
+ },
+ {
+  "prompt": "Year 1 on the default project shows government cash flow of 50.9979 against a contractor line of -310.0117. What is the state's figure made of?",
+  "options": [
+   "Royalty plus the state's share of profit oil, which is small in this year because the residual left after recovery is itself small.",
+   "Royalty alone, collected on gross revenue in a year that destroyed 259.0138 of value.",
+   "Royalty net of the state's share of the year's opex and capex.",
+   "Royalty plus tax on the contractor's share of a residual of 220.9910."
+  ],
+  "answer": 1,
+  "explanation": "The contractor takes 100 percent of profit oil here and profit oil is 0.0000, so royalty is the whole column. The state carries none of the cost."
+ },
+ {
+  "prompt": "Angola charges no royalty at all and collects 1263.7523 on the default project, while the Gulf of Mexico terms charge 18.75 percent and collect 764.5528. Which instruments carry the Angola collection?",
+  "options": [
+   "A 50 percent recovery limit, a tiered split that leaves part of the residual with the state, and resource rent tax at 50 percent.",
+   "A corporate income tax of 25 percent charged on gross revenue rather than on the contractor's share of the residual.",
+   "A minimum tax that binds in each year where the residual is too small for the ordinary rate to reach.",
+   "A wider revenue base, because a regime that waives its royalty leaves more of the field's sales to be divided."
+  ],
+  "answer": 0,
+  "explanation": "Total revenue is 2686.9277 under every template on this project, so the whole of the difference is instrument."
+ }
+]

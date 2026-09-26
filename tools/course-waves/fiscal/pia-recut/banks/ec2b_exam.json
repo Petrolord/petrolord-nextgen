@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "Which of these can a fiscal regime in this sandbox actually express?",
+  "options": [
+   "A ceiling on cost recovery, written as a percent of revenue after royalty.",
+   "A signature bonus payable to the state in the year the licence is awarded.",
+   "A state participation share carried through the development and paid out of production.",
+   "A flare penalty charged on the gas stream in every year it is not utilised."
+  ],
+  "answer": 0,
+  "explanation": "A regime is royalty, cost recovery limit, profit split and a tax stack holding CIT, RRT, a minimum tax and an optional uplift. Nothing else exists."
+ },
+ {
+  "prompt": "PIA and Generic both carry corporate income tax at 30 percent, resource rent tax at 0 and a minimum tax of 0, yet the default project returns 406.2057 to the contractor under PIA and 986.7327 under Generic. What opened the gap?",
+  "options": [
+   "The PIA sliding royalty, which reaches 10 percent on this deck against the Generic flat rate of 12.5 percent.",
+   "The tax base, which is gross revenue under PIA and the contractor's profit share under Generic.",
+   "A cost recovery limit of 80 percent instead of 100, and an R factor split handing over 60, then 40, then 30 percent of profit oil instead of all of it.",
+   "The production profile, which the PIA template shortens to the years in which its tranches apply."
+  ],
+  "answer": 2,
+  "explanation": "PIA pays the smaller tax bill of the two, 174.0882 against 422.8854, and still leaves the contractor less than half the cash. A tax rate quoted alone predicts nothing."
+ },
+ {
+  "prompt": "How many rows does calculateCashFlowForRegime return, and what changes that count?",
+  "options": [
+   "25 rows by default, extended automatically while the field is still producing above its economic limit.",
+   "As many rows as the price deck carries points for, so a three point deck returns a shorter ledger.",
+   "25 rows for a project that pays back, and rows only up to the year payback is reported in when it does not.",
+   "25 rows for every regime and every project, and no input changes it."
+  ],
+  "answer": 3,
+  "explanation": "PROJECT_LIFE is fixed at 25, so year 25 of the default project still produces 0.291148 million bbl of oil and still costs 11.5851 of opex."
+ },
+ {
+  "prompt": "A template field reads 18.75 and a derived column reads 0.187500. What is the relation?",
+  "options": [
+   "The field is the rate before the boe conversion and the column is the same rate after it.",
+   "They are one instrument in two conventions, a percent and a ratio, and 0.187500 percent would never produce a royalty of 50.9979 on 271.9889.",
+   "The field is the statutory rate and the column is the rate actually collected once the pool has cleared.",
+   "The field is the rate on gross revenue and the column is the same rate restated on revenue after royalty."
+  ],
+  "answer": 1,
+  "explanation": "Rates are percent and a value of 10 means ten percent. The implied rate column is royalty over gross revenue, printed to six decimals."
+ },
+ {
+  "prompt": "The published case at capex 20000 produces for 25 years, loses 15724.0151 and hands the treasury 875.1492. Which two omissions let that happen?",
+  "options": [
+   "No depreciation and no loss carryforward, so the losses of the early years never shelter the later ones from tax.",
+   "No ring fence and no valuation date, so the losses of one field are never set against the profits of another.",
+   "No economic limit and no abandonment cost, so nothing shuts the field in and nothing is paid at the end.",
+   "No price escalation and no inflation, so a deck that ends in year 10 prices the last fifteen years too low."
+  ],
+  "answer": 2,
+  "explanation": "Total tax is 0.0000 and total profit oil is 0.0000, so the government cash flow is pure royalty on revenue of 7001.1938."
+ },
+ {
+  "prompt": "The engine returns a total government cash flow of 1339.2784 under the PIA template on the default project. What is that number?",
+  "options": [
+   "A shape, useful for asking which instrument moved which result, and unfit for filing anything.",
+   "An assessment of the Nigerian take on a deepwater project, computed under the Petroleum Industry Act.",
+   "A screening estimate that the Petroleum Economics Studio engine would reproduce to within a rounding.",
+   "A statutory minimum, since the templates are calibrated to the floor each jurisdiction would accept."
+  ],
+  "answer": 0,
+  "explanation": "The engine's own header says the single source of truth for Nigerian fiscal math is the Petroleum Economics Studio engine, and that this model compares the shape of regimes."
+ },
+ {
+  "prompt": "ODIDI is declared at 8000 bbl/d of oil declining 14 percent a year, and its first year lifts 2.920000 million bbl. What has become of that year's decline?",
+  "options": [
+   "It is applied at the midpoint of year 1, which is why the figure is close to the undeclined volume but not equal to it.",
+   "Nowhere. The decline is applied after the year is booked, so year 1 is the rate times 365 days undeclined.",
+   "It is deferred to year 2, which carries two years of decline at once to keep the cumulative correct.",
+   "It is applied to the price rather than the volume in the first year, so the revenue carries it instead."
+  ],
+  "answer": 1,
+  "explanation": "The Designer's own field declares 10000 bbl/d and lifts 3.650000 million bbl in its first year on the same rule."
+ },
+ {
+  "prompt": "ODIDI carries deck points of 45 in year 1, 65 in year 6 and 85 in year 12. What oil price is applied in year 5, and in year 25?",
+  "options": [
+   "A price between 45.000000 and 65.000000 in year 5, and 85.000000 in year 25, because the deck interpolates and then holds.",
+   "45.000000 in year 5 and a figure above 85.000000 in year 25, since the engine escalates past the deck's last point.",
+   "65.000000 in year 5 and 85.000000 in year 25, because a deck point applies from the year before it is dated.",
+   "45.000000 in year 5 and 85.000000 in year 25, because the deck holds each point until the next and never escalates past the last."
+  ],
+  "answer": 3,
+  "explanation": "The deck holds 45 through year 5, steps to 65 at year 6 and to 85 at year 12, and no column in the output reports the price."
+ },
+ {
+  "prompt": "Year 25 opex is 11.5851 on the default project and 12.3405 on ODIDI, though ODIDI charges 4 USD per boe against the default project's 5. Why is the smaller field dearer at the end?",
+  "options": [
+   "ODIDI's oil declines at 14 percent a year, and a faster decline raises the cost of every barrel that is left.",
+   "ODIDI's deck prices oil at 85 USD per bbl by year 25, and the variable half of opex is charged on the value produced.",
+   "By year 25 almost the whole bill is the fixed half, and ODIDI's fixed half is 12 million USD a year against 10.",
+   "ODIDI carries a larger closing unrecovered pool, and the pool is added to the year's opex until it clears."
+  ],
+  "answer": 2,
+  "explanation": "Opex is fixed plus variable times the boe, so the curve heads for the fixed number and would only arrive there at zero production."
+ },
+ {
+  "prompt": "The capex multiplier on the flat regime moves the test project NPV from 1262.3470 to 1062.6176 at 1.3 and to 1460.6941 at 0.7. What does it not do?",
+  "options": [
+   "Move the internal rate of return, which the engine reports unchanged because the multiplier scales the cash flows in proportion.",
+   "Phase the spend, because every dollar of capex is charged in year 1 whatever the multiplier is.",
+   "Change the recoverable pool, since the pool is seeded from the revenue side and not from the capex.",
+   "Alter the royalty, which is the one column the multiplier is allowed to reach through gross revenue."
+  ],
+  "answer": 1,
+  "explanation": "Faking a schedule by lowering the multiplier changes the total rather than the timing, and answers a different question."
+ },
+ {
+  "prompt": "Year 1 of the default project lifts 3.650000 million bbl of oil and 0.018250 million Mscf of gas. What is wrong with calling the gas negligible on those two figures?",
+  "options": [
+   "They are not the same unit. One is million bbl and the other million Mscf, and gas converts at 6000 scf per barrel for opex.",
+   "The gas declines at 8 percent against the oil's 10, so its share of the barrel mix grows through the life.",
+   "The gas is priced at 3.5 USD in year 1 and 4.5 from year 10, so its revenue grows while its volume falls.",
+   "The gas column is quoted before shrinkage while the oil column is quoted after it, so the two are not comparable."
+  ],
+  "answer": 0,
+  "explanation": "The conversion exists for one purpose, the variable half of opex, which is charged in USD per boe."
+ },
+ {
+  "prompt": "On the default project gas falls from 0.018250 to 0.002467 million Mscf between year 1 and year 25 while NGL falls from 0.547500 to 0.025466 million bbl. Why does the gas keep the larger fraction of itself?",
+  "options": [
+   "The gas price steps from 3.5 to 4.5 USD across the life, which holds the gas volume up in the later years.",
+   "Gas is converted at 6000 scf per barrel, and the conversion compresses its decline once the column is scaled.",
+   "The gas stream is held at the deck's last point from year 10, so its volume stops falling while the liquids carry on.",
+   "Each stream carries its own decline, and the gas declines at 8 percent a year against the NGL at 12."
+  ],
+  "answer": 3,
+  "explanation": "Three independent exponentials, so their proportions move: ODIDI shows the same thing harder at 9 percent on gas against 15 on NGL."
+ },
+ {
+  "prompt": "Gross revenue in year 1 of the default project is 271.9889. What has been taken out of it?",
+  "options": [
+   "Transport and processing, which is why it is described as a revenue rather than a wellhead value.",
+   "The royalty, which is charged at the point of sale and so never appears in the top line of the ledger.",
+   "Nothing at all. It is three volumes at their deck prices, divided by one million.",
+   "A quality differential on the oil stream, which the deck's single price per stream per year already carries."
+  ],
+  "answer": 2,
+  "explanation": "The royalty base is exactly this number, and 18.75 percent of it is the 50.9979 the Gulf of Mexico terms collect."
+ },
+ {
+  "prompt": "Under the Gulf of Mexico terms the implied royalty rate reads 0.187500 in year 1 and in year 25, on both the default project and ODIDI. What does the derived column prove?",
+  "options": [
+   "That the deck never crossed a tier threshold in either field, which a sliding instrument would have done.",
+   "That the rate is flat, charged on gross revenue whatever the year did.",
+   "That the royalty is settled after cost recovery, since a rate on a moving base could not stay constant.",
+   "That the two fields share a price deck, because the implied rate is a ratio of revenue to volume."
+  ],
+  "answer": 1,
+  "explanation": "Year 1 of the default project pays 50.9979 on 271.9889 and year 25 pays 4.5603 on 24.3216."
+ },
+ {
+  "prompt": "Revenue after royalty is not a column the engine prints, yet it decides the size of cost recovery. Why does it matter which base is used?",
+  "options": [
+   "The cost recovery limit is a percent of it, so on year 1 of the default project the ceiling is 220.9910 and not 271.9889.",
+   "The royalty is charged on it, so using gross revenue instead overstates the state's collection in every year.",
+   "The profit split acts on it directly, so a flat 100 percent split returns it whole to the contractor.",
+   "The R factor is computed from it, so the tier a split selects moves with the base that was chosen."
+  ],
+  "answer": 0,
+  "explanation": "The difference is exactly the royalty, 50.9979 of extra recovery in the first year alone, and it flows into the pool and into every R factor keyed on it."
+ },
+ {
+  "prompt": "Nigeria PIA and Brazil collect exactly the same total royalty on both published projects, 268.6928 and 700.1194. One is a slider and one is flat 10 percent. How?",
+  "options": [
+   "The slider averages its two tiers of 7.5 and 10 percent across the life, which lands on the flat rate.",
+   "A sliding royalty defaults to the flat rate of the template it is compared against when no tier is crossed.",
+   "The two templates share a cost recovery limit, and royalty is charged after the limit has been applied.",
+   "Every applied price in both fields is above the slider's 50 USD per bbl threshold, so it sits in its 10 percent tier throughout."
+  ],
+  "answer": 3,
+  "explanation": "The default project prices oil at 70, 75 and 80 and the test project at 80, so a sliding instrument that never slides is a flat one."
+ },
+ {
+  "prompt": "Angola collects total royalty of 0.0000 on the default project and still leaves the contractor 481.7318, against 980.9313 under the Gulf of Mexico terms at 18.75 percent. Which fields make Angola the harsher regime?",
+  "options": [
+   "Its corporate income tax of 25 percent, which is charged on gross revenue rather than on the profit share.",
+   "Its minimum tax, which binds in the years when the contractor's residual is too small to reach.",
+   "Its cost recovery limit of 50 percent, its tiered split, and resource rent tax at 50 percent.",
+   "Its royalty of 0 percent, which leaves a larger base for the tax stack to be charged on."
+  ],
+  "answer": 2,
+  "explanation": "A regime cannot be ranked by the instrument its press release quotes. Total revenue is 2686.9277 under both."
+ },
+ {
+  "prompt": "The six templates fall into two families. What defines the family that Brazil, the Gulf of Mexico and Generic belong to?",
+  "options": [
+   "A flat royalty rate, which the other three replace with a slider keyed on the oil price.",
+   "A flat split handing the contractor 100 percent of profit oil, with cost recovery at a 100 percent limit.",
+   "A tax stack with no resource rent tax, which is what leaves the contractor the whole of the residual.",
+   "A cost recovery limit above 80 percent, which stops the pool from ever carrying a balance forward."
+  ],
+  "answer": 1,
+  "explanation": "That is what a concession looks like inside a model built around a production sharing ledger, and the other three cap recovery at 80, 90 and 50 percent."
+ },
+ {
+  "prompt": "Which statement about the contractor and government columns holds in every year, for every one of the six templates, at every cost recovery limit they use?",
+  "options": [
+   "Added together they equal gross revenue, since every dollar sold is assigned to one side or the other.",
+   "Added together they equal gross revenue less opex less capex only while the cost recovery limit is not binding.",
+   "Added together they equal gross revenue less opex less capex, less whatever moved into the unrecovered pool that year.",
+   "Added together they equal gross revenue less opex less capex."
+  ],
+  "answer": 3,
+  "explanation": "Swept across all six templates on all three projects, 450 rows, the largest disagreement between the two sums is 1.1369e-13."
+ },
+ {
+  "prompt": "That identity holds across every published case. What is the one condition stated on it?",
+  "options": [
+   "It holds only while the pool clears inside the life, since a closing balance leaves revenue assigned to nobody.",
+   "It holds only for a flat profit split, because a tiered split moves part of the residual between the two takes.",
+   "It holds while the cost recovery limit is 100 percent or less, which covers every template and every published case.",
+   "It holds only in years with no capex, because capex enters the ledger twice, as cash and through the pool."
+  ],
+  "answer": 2,
+  "explanation": "Profit oil is floored at zero, so a limit above 100 percent could in principle recover more than revenue after royalty. Nothing in the template set does this."
+ },
+ {
+  "prompt": "A reader building the contractor's line treats costRecovered as a cost rather than as revenue, and takes it out of the line. What is the error?",
+  "options": [
+   "Cost oil is revenue assigned to the contractor and is added, so year 1 comes out 220.9910 too low.",
+   "Cost oil is a cost but belongs in the year the spend happened, so it should be subtracted in year 1 alone.",
+   "Cost oil is already net of the year's opex, so subtracting it charges the opex of 31.0027 a second time.",
+   "Cost oil is a government payment, so subtracting it moves 220.9910 onto the wrong side of the row."
+  ],
+  "answer": 0,
+  "explanation": "Contractor net cash flow is cost oil plus the profit share, less tax, less opex, less capex, and year 1 reads -310.0117."
+ },
+ {
+  "prompt": "A reader builds the tax base as revenue less opex less capex, then checks year 4 of the Gulf of Mexico ledger, which prints tax of 28.4107 on profit oil of 135.2891. What goes wrong?",
+  "options": [
+   "The capex is deducted in a year that carries none, so the base is unchanged and the answer happens to agree.",
+   "The year's opex of 25.1816 is deducted twice, once through cost recovery and again in the invented base.",
+   "The royalty of 37.0317 is left in the base, so the tax comes out above 28.4107 rather than below it.",
+   "The base is right but the rate is wrong, since the corporate rate applies to the state's share and not the contractor's."
+  ],
+  "answer": 1,
+  "explanation": "The base in this model is the contractor's share of profit oil. That is also why year 1 pays 0.0000 while spending 500.0000 of capex."
+ },
+ {
+  "prompt": "Year 4 of the Gulf of Mexico ledger on the default project reports government cash flow of 65.4424. What is in it?",
+  "options": [
+   "Royalty of 37.0317 and the state's half of a residual of 135.2891, with the tax settled inside that share.",
+   "Tax of 28.4107 and the state's share of cost oil, since recovery is charged against the state's own entitlement.",
+   "Royalty of 37.0317 alone, with the tax of 28.4107 reported separately and not counted into the take.",
+   "Royalty of 37.0317 and tax of 28.4107, with no profit share because the contractor takes all of the residual."
+  ],
+  "answer": 3,
+  "explanation": "The state's line is royalty plus its share of profit oil plus tax, and here the middle term is nothing."
+ },
+ {
+  "prompt": "A published case arms a minimum tax at 10 percent of gross revenue with corporate income tax at 0. What does it collect over the life?",
+  "options": [
+   "0.0000 of tax, because a corporate rate of 0 leaves no base for a minimum to be measured against.",
+   "1006.6134 of tax, the same as the flat regime, because the minimum can never exceed the ordinary charge.",
+   "700.1194 of tax on total revenue of 7001.1938, because the minimum binds in every year.",
+   "700.1194 of tax, charged only in the years whose profit oil was too small to reach the ordinary rate."
+  ],
+  "answer": 2,
+  "explanation": "A minimum tax is charged on gross revenue rather than on the profit share, which is why it binds in a year with no residual at all."
+ },
+ {
+  "prompt": "Angola closes year 1 of the default project at -323.6112 against -310.0117 under the Gulf of Mexico terms, on the same gross revenue of 271.9889, opex of 31.0027 and capex of 500.0000. What did it?",
+  "options": [
+   "A royalty of 0 percent, which leaves more revenue in the pool and therefore less cost oil in the year.",
+   "A 50 percent recovery limit and a split that keeps part of the residual for the state.",
+   "A resource rent tax of 50 percent charged in year 1 on the contractor's share of the residual.",
+   "A larger capex, since the Angola template applies its own multiplier to the drilling and facilities buckets."
+  ],
+  "answer": 1,
+  "explanation": "The state's slice rises from 50.9979 to 64.5974 in the same year, and the two takes still add to -259.0138 under both."
+ },
+ {
+  "prompt": "Profit oil under the Gulf of Mexico terms totals 1241.6852 over the life of the default project, the smallest of the six templates, while Angola's totals 1745.4841, the largest. Which regime returns the contractor more?",
+  "options": [
+   "The Gulf of Mexico terms, at 980.9313 against 481.7318, because the residual is not the contractor's cash.",
+   "Angola, since a larger residual is the pool that a tiered split draws from, and its first tier hands the contractor 70 percent.",
+   "Angola, because its royalty of 0 percent leaves the whole of the top line inside the ledger.",
+   "Neither, because the two are equal once the closing unrecovered pool has been added back to the contractor."
+  ],
+  "answer": 0,
+  "explanation": "Royalty and the recovery limit sit upstream of the residual, so a bigger residual can mean a harsher regime rather than a kinder one."
+ },
+ {
+  "prompt": "You are handed a ledger whose closing cumulativeNCF and whose life total of contractor net cash flow disagree. What have you learned?",
+  "options": [
+   "That the ledger carries a closing unrecovered pool, which the total counts and the running sum does not.",
+   "That the cumulative is discounted at the project rate while the total is not, so the two only agree at a rate of 0.",
+   "That one of the two was built from a different column, because they are the same 25 numbers added the same way.",
+   "That a year in the middle of the life turned negative, which breaks the running sum but not the total."
+  ],
+  "answer": 2,
+  "explanation": "On the Gulf of Mexico ledger for the default project both read 980.9313, and it is the cheapest check there is."
+ },
+ {
+  "prompt": "A case named for a cost pool that never recovers closes the life with 2543.7575 unrecovered. Which readings of it are the ones its own numbers support?",
+  "options": [
+   "No payback and an IRR of 0, since a pool that never clears is capital that never comes home.",
+   "Payback in year 3 and an IRR of 0, because the engine suppresses a rate whenever the pool is still open.",
+   "No payback and an IRR of 54.6792 percent, since a positive rate can be reported without a crossing.",
+   "Payback in year 3, payout in year 2 and no single IRR, its NPV being zero at 54.6792 percent and again at -14.2614 percent, on a life contractor total of 1530.0622."
+  ],
+  "answer": 3,
+  "explanation": "At a 5 percent limit almost nothing comes back as cost oil, but the revenue that cannot be recovered becomes profit oil, and this regime splits it 100 percent to the contractor."
+ },
+ {
+  "prompt": "Payback and payout are two clocks on one ledger. What does each one measure?",
+  "options": [
+   "Payback is the first year the unrecovered pool closes at 0.0000, and payout the first year profit oil is positive.",
+   "Payback is the first year cumulative contractor net cash flow is above zero, and payout the first year the R factor is above 1.0.",
+   "Payback is measured on the contractor's cash and payout on the state's, so the two together bracket the project.",
+   "Payback is the undiscounted crossing and payout the same crossing taken at the project's discount rate."
+  ],
+  "answer": 1,
+  "explanation": "Both are null when the event never happens, and on the default project PIA and Angola report payback 4 against payout 3."
+ },
+ {
+  "prompt": "Run six templates on the default project and total revenue reads 2686.9277 on every line. What does that constant make possible?",
+  "options": [
+   "It makes the whole of the spread in the answer attributable to the regime and to nothing else.",
+   "It makes the six ledgers comparable with the test project's 7001.1938.",
+   "It makes the cost recovery totals comparable, since a constant revenue means a constant recoverable pool.",
+   "It makes the government cash flow rankable by royalty rate, since the base of the royalty is the same in each."
+  ],
+  "answer": 0,
+  "explanation": "A fiscal regime prices barrels, it does not produce them. Contractor cash ranges from 406.2057 to 986.7327 against that identical sales figure."
+ },
+ {
+  "prompt": "On the default project cost recovered totals 941.4436 under all six templates, and on the Suite test project it does not. What changed?",
+  "options": [
+   "The test project has one stream instead of three, so the boe the recovery machinery works on is smaller.",
+   "The test project's higher revenue lifts every ceiling above the costs, so each template recovers a different amount early.",
+   "No pool empties inside the test project's life, so the closing balances run from 72.7082 to 251.6537 and the recovered totals differ.",
+   "The test project's capex of 1000 is larger than its life opex, which the recovery machinery treats differently."
+  ],
+  "answer": 2,
+  "explanation": "Cost the ledger never assigned to cost oil is cost the contractor still paid, and the totals row is where that shows."
+ },
+ {
+  "prompt": "ODIDI closes its cumulative in the black under all six templates and returns a negative value under all six at the project's 12 percent. What is the reading?",
+  "options": [
+   "The value and the cumulative disagree because the value excludes the year 1 capex of 420.0000.",
+   "The field returns its nominal money and is still not worth building at the rate it is discounted at.",
+   "The field is worth building under the templates whose cumulative is largest, which the value fails to rank.",
+   "The negative values are an artefact of the fixed 25 year horizon cutting the life short."
+  ],
+  "answer": 1,
+  "explanation": "Brazil ends with 192.9896 of cash and a value of -5.8662, and Angola with 109.1947 and -58.1813."
+ },
+ {
+  "prompt": "Under PIA the government take on ODIDI stays inside a band from 75.1077 to 79.4678 across nine price points, where another template gives up tens of percentage points across the same range. What does one run at one deck tell you about that difference?",
+  "options": [
+   "The ranking at the base price, which the sweep then preserves at every other price it visits.",
+   "The direction of the movement, since a regime with the higher take at one price gives up more of it as prices climb.",
+   "The size of the movement, which is proportional to the royalty rate the template carries.",
+   "Nothing, because one run is one deck and the shape of a regime across prices is not in a single ledger."
+  ],
+  "answer": 3,
+  "explanation": "Two regimes that look similar on one run behave nothing alike on the next, and the same holds for a cost overrun."
+ },
+ {
+  "prompt": "ODIDI's year 1 under the Gulf of Mexico terms sells 139.6563 and spends 420.0000 of capex and 25.0037 of opex. What does the state collect that year?",
+  "options": [
+   "26.1856, all of it royalty, charged on gross revenue in the year the whole of the capital was spent.",
+   "0.0000, because the year's residual is nothing and there is no profit oil for the state to share.",
+   "26.1856 of royalty less the state's share of the year's opex, which the recovery machinery credits back.",
+   "10.4742, which is the 7.5 percent the PIA slider charges at a deck price of 45 USD per bbl."
+  ],
+  "answer": 0,
+  "explanation": "Royalty comes off gross revenue before any cost is considered, and revenue after royalty for the year is 113.4707."
+ },
+ {
+  "prompt": "ODIDI's gross revenue is 76.1939 in year 5 and 93.9859 in year 6, while the default project's falls from 197.5024 in year 4 to 191.1513 in year 5. Both fields step their deck. Why do the two steps land differently?",
+  "options": [
+   "ODIDI's step arrives a year later in the life, at year 6 rather than at year 5, by which time the decline has already taken most of what it is ever going to take.",
+   "The default project's step at year 5 moves the gas price to 4 and the NGL price to 35 and leaves the oil price alone, so its oil revenue keeps falling straight through.",
+   "ODIDI's step from 45 to 65 USD per bbl outruns a 14 percent oil decline, and the default project's step from 70 to 75 does not outrun a 10 percent decline.",
+   "ODIDI's three streams decline at rates far closer together, so its revenue tracks the deck more faithfully."
+  ],
+  "answer": 2,
+  "explanation": "Same mechanism, opposite sign. Whether the jump wins depends on the size of the step against the size of the decline."
+ },
+ {
+  "prompt": "The Designer's own field empties its cost pool in year 3 under the Gulf of Mexico terms and closes the life at 0.0000, while the teaching field empties its own and then closes the life with 24.2824 unrecovered, at the same 100 percent limit. What differs?",
+  "options": [
+   "Its cost recovery limit of 100 percent is reached in every one of its 25 years, where the other field's stops binding altogether once the standing pool has cleared in year 3.",
+   "The teaching field declines 14 percent a year, so late revenue after royalty of 5.6128 no longer covers opex of 12.3405 and the pool refills.",
+   "Its capex of 420.0000 is smaller than the 500.0000 of the other field, and a smaller pool takes longer to clear.",
+   "Its cash flows are discounted at 12 percent rather than 10, and the pool is carried forward at the project rate."
+  ],
+  "answer": 1,
+  "explanation": "A full limit is a ceiling on revenue after royalty, not a promise to return the spend, and this field closes with 24.2824 unrecovered."
+ },
+ {
+  "prompt": "Of the capstone method's four checks, which one can be settled on the year 1 row on its own?",
+  "options": [
+   "That the closing cumulative equals the life total of the contractor column, at 980.9313.",
+   "That a null payback is an answer and not a gap in the table, which the published case at capex 20000 returns beside a null payout.",
+   "That the payback year and the payout year agree, which they do in year 3 on this ledger.",
+   "That the two takes add to gross revenue less opex less capex, which reads -259.0138 on both sides in year 1."
+  ],
+  "answer": 3,
+  "explanation": "The row checks are the identity and the zero tax on a zero residual. The other two need the whole column."
+ },
+ {
+  "prompt": "The teaching field returns a life contractor total of 148.3166 under one template and 192.9896 under another, on identical volumes and an identical deck. What does that require of a reader quoting either figure?",
+  "options": [
+   "Quote the range rather than a figure, since a single template's reading is never a property of the field.",
+   "Quote the payout year of 6 instead, which reads the same under all six templates and so belongs to the field rather than to the terms.",
+   "Name the regime beside every reading, because both payback years and both totals are true of the same field.",
+   "Quote the highest of the six, since the best available terms bound what the field can be worth."
+  ],
+  "answer": 2,
+  "explanation": "Payback in year 6 and payback in year 8 are both true of ODIDI, and a reading without its regime means nothing."
+ },
+ {
+  "prompt": "The capstone method proves two rows by hand and reads the remaining twenty three. What is it blind to?",
+  "options": [
+   "A tier crossing, a deck step and a pool that refills late in life, none of which appear in the two rows it proves.",
+   "A royalty taken on the wrong base, since an error of that kind only shows itself once the cumulative column has been totalled.",
+   "A tax charged where profit oil is 0.0000, which the year 1 row cannot reveal.",
+   "A capex spread across the early years instead of landing whole in year 1, since the year 4 row would still balance under either treatment."
+  ],
+  "answer": 0,
+  "explanation": "Nothing in the method discounts anything either, so ODIDI's value of -37.3123 under those terms is invisible to it."
+ },
+ {
+  "prompt": "ODIDI under Brazil returns 192.9896 of contractor cash over 25 years and a value of -5.8662 at 12 percent. Which reading is wrong?",
+  "options": [
+   "The value, because a life that returns positive cash cannot be worth less than nothing.",
+   "Neither. Both are readings of the same 25 rows, and the Associate answer quotes each with its basis.",
+   "The total, because it adds year 25 money to year 1 money and so overstates what came back.",
+   "The pair, because a total and a value that disagree in sign cannot both be readings of one ledger."
+  ],
+  "answer": 1,
+  "explanation": "Which of the two a decision rests on takes a discount convention, and every one of the six templates on ODIDI shows the same pair of signs."
+ },
+ {
+  "prompt": "What can the Associate reading of ODIDI, which puts the state's collection between 232.9950 and 316.7898, not say?",
+  "options": [
+   "Which template collects the most, since two collections are only comparable when the closing unrecovered pools of the two ledgers are equal.",
+   "Which template leaves the contractor the most cash over the life of the field, which is a ranking that needs a discount convention this tier does not carry.",
+   "How much of each collection came from royalty rather than from tax.",
+   "Which of those splits is fair, which survives a price collapse, and which numbers on a comparison screen are measurements at all."
+  ],
+  "answer": 3,
+  "explanation": "The contractor keeps between 109.1947 and 192.9896 across the same six templates, and stating the range is not judging it."
+ },
+ {
+  "prompt": "Every template in the Associate tier was read at one setting, yet three of the six carry an instrument that moves on its own. Which are they?",
+  "options": [
+   "A cost recovery limit that tightens automatically as the standing pool grows, and a minimum tax that arms itself once the residual has fallen far enough.",
+   "A corporate rate that steps with the R factor, and a royalty that steps with cumulative production.",
+   "A royalty keyed on the oil price and a profit split keyed on the R factor, which under PIA steps the share from 60 to 40 to 30 percent.",
+   "A discount rate that follows the price deck from one year to the next, and a profit split that follows the closing unrecovered pool of the year before it."
+  ],
+  "answer": 2,
+  "explanation": "The R factor is a ratio of cumulatives, so it can fall back below a threshold it passed and step the contractor's share up again."
+ }
+]

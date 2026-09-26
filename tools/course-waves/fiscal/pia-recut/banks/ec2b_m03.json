@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "How is the gross revenue row built?",
+  "options": [
+   "The three streams converted to boe at 6000 scf per barrel and then priced at the deck's oil point for the year.",
+   "Volumes at deck prices less the transport and processing the project declares, which is what states the row in millions of USD.",
+   "Oil volume times the applied oil price, plus gas times its price, plus NGL times its price, all divided by one million.",
+   "Oil at the deck price plus the gas and NGL taken at a fraction of it, the deck carrying only one dated series."
+  ],
+  "answer": 2,
+  "explanation": "The divide by one million is what puts the ledger in millions of USD. Year 1 of the default project is 271.9889 million USD and year 25 is 24.3216."
+ },
+ {
+  "prompt": "What is the royalty charged on?",
+  "options": [
+   "Gross revenue, before any cost is deducted and before anything else in the ledger happens.",
+   "Revenue after opex, which is the netback a production sharing contract normally charges a royalty against.",
+   "Revenue after cost recovery, so that the cost pool is served before the state takes a share of the year.",
+   "Profit oil, royalty and the profit split being the two instruments that divide what is left once cost is met."
+  ],
+  "answer": 0,
+  "explanation": "Year 1 of the default project pays 50.9979 million USD of royalty on 271.9889 million USD of revenue. Nothing has been deducted from the base."
+ },
+ {
+  "prompt": "The implied rate column under USA - Gulf of Mexico reads 0.187500 in year 1, in year 5 and in year 25 of the default project. What has that demonstrated?",
+  "options": [
+   "That the deck holds one oil price across those years, since the implied rate would move with the price if it did not.",
+   "That the royalty really is flat, proved from the two printed columns rather than assumed from the template field of 18.75.",
+   "That the royalty is charged on a base declining at the same rate as revenue, which is what holds the ratio still.",
+   "That the rate has been checked in the three years where a check is possible, the deck steps being the years where it is not."
+  ],
+  "answer": 1,
+  "explanation": "Royalty is 50.9979 million USD on 271.9889 in year 1 and 4.5603 on 24.3216 in year 25. One rate, one base, twenty five years."
+ },
+ {
+  "prompt": "Year 1 of the default project under the Gulf of Mexico terms carries capex of 500.0000 million USD and a contractor net cash flow of -310.0117. What royalty is charged that year?",
+  "options": [
+   "Nothing, since a royalty is charged on revenue after royalty and no profit oil arises in the year the capex lands.",
+   "A reduced charge, the sandbox waiving royalty in a year that closes below zero.",
+   "50.9979 million USD, which then enters the unrecovered cost pool and comes back to the contractor in a later year.",
+   "50.9979 million USD, the full rate on the top line, and that is the whole of government cash flow for the year."
+  ],
+  "answer": 3,
+  "explanation": "A loss making year pays royalty at the same rate as the best year in the field. There is no profit oil and no tax in year 1, so government cash flow is the royalty alone."
+ },
+ {
+  "prompt": "Which column of the returned ledger holds revenue after royalty?",
+  "options": [
+   "The costRecovered column, which equals it whenever the limit is 100 percent and the pool is deep enough to absorb the whole of the year's cost.",
+   "The profitOil column, which is revenue after royalty once the profit split has been applied to it.",
+   "No column does. It is the difference of two printed columns, and it is the base the cost recovery limit is a percent of.",
+   "The grossRevenue column, the royalty being settled outside the ledger and never entering the revenue row that the recovery limit is taken on."
+  ],
+  "answer": 2,
+  "explanation": "Under the Gulf of Mexico terms year 1 of the default project carries revenue after royalty of 220.9910 million USD, and that is the ceiling a 100 percent limit gives."
+ },
+ {
+  "prompt": "In year 1 of the default project revenue after royalty is 220.9910 million USD and the costs are capex of 500.0000 and opex of 31.0027. What does a cost recovery limit of 100 percent do?",
+  "options": [
+   "Nothing, a 100 percent limit not being a limit, so the whole of the year's cost is recovered against it.",
+   "It binds. The ceiling of 220.9910 million USD is below the capex charge on its own, so costRecovered stops there and the pool closes at 310.0117 million USD.",
+   "It caps recovery at 271.9889 million USD, the year's gross revenue being what a 100 percent limit is a percent of.",
+   "It leaves the capex in the pool untouched and recovers the opex of 31.0027 million USD, the recoverable half in a capex year."
+  ],
+  "answer": 1,
+  "explanation": "A 100 percent limit is not the same thing as recovering everything. It binds whenever the year's costs exceed its revenue after royalty, which a year one capex charge guarantees."
+ },
+ {
+  "prompt": "A reader takes the cost recovery ceiling as a percent of gross revenue instead. How large is the error in year 1 of the default project?",
+  "options": [
+   "Exactly the royalty, 50.9979 million USD of extra recovery, which then flows into the pool, into the R factor and into every split keyed on it.",
+   "It is immaterial at a 100 percent limit, since the ceiling binds either way in the year the capex lands.",
+   "It is the spread between the two limits the template set uses, 80 percent against 100, applied to the year's revenue.",
+   "It cancels in the totals, a larger recovery in year 1 leaving a smaller pool for the years that follow it."
+  ],
+  "answer": 0,
+  "explanation": "The tell is worth memorising: if a cost recovery ceiling ever equals gross revenue, the wrong base has been used, because royalty is always taken first."
+ },
+ {
+  "prompt": "Angola - Deepwater PSC charges a royalty of 0 percent and collects 0.0000 million USD on the default project, yet its contractor keeps 481.7318 million USD against 980.9313 under the Gulf of Mexico terms. Why?",
+  "options": [
+   "Its production is lower, the Angola template being run on a deepwater profile rather than on the Designer's default project.",
+   "Its royalty is collected later as an additional entitlement, which the template description records and the run applies at the end.",
+   "Its CIT of 25 percent is charged on gross revenue rather than on the contractor profit share, which is the harsher base.",
+   "Its other three fields are hard: cost recovery capped at 50 percent, a tiered profit split, and RRT at 50 percent."
+  ],
+  "answer": 3,
+  "explanation": "A low headline rate is not a soft regime. The template with no royalty at all is the harsher of the two here."
+ },
+ {
+  "prompt": "Nigeria - PIA (2021) collects total royalty of 268.6928 million USD on the default project and 700.1194 on the test project, and Brazil - Concession collects exactly the same on both. How does a slider match a flat 10 percent?",
+  "options": [
+   "The engine averages a sliding scale over the life of the field and charges one mean rate, which for tiers of 7.5 and 10 percent works out at 10 percent on both decks.",
+   "The slider keys on the first dated point of the deck, which is above 50 USD per bbl on both projects, and that point then fixes the rate for the whole of the 25 year run.",
+   "Every applied price on both decks is above the 50 USD per bbl threshold, so the slider sits in its 10 percent tier in every year and never slides.",
+   "A sliding royalty falls back to the flat rate of the nearest template whenever its two tiers straddle the deck."
+  ],
+  "answer": 2,
+  "explanation": "The default deck prices oil at 70, 75 and 80 USD per bbl and the test deck at 80. A sliding instrument that never slides is a flat one, and whether it slides is a property of the deck."
+ },
+ {
+  "prompt": "What can move the tier a sliding royalty selects?",
+  "options": [
+   "The applied oil price for the year, and nothing else.",
+   "The oil price or the gas price, whichever of the two streams contributed more revenue in the year being priced.",
+   "Cumulative production, which is the variable a progressive royalty is normally keyed on in a real contract.",
+   "The R factor, the ratio this sandbox uses to key the royalty tiers and the profit split tiers alike."
+  ],
+  "answer": 0,
+  "explanation": "It reads the applied oil price, so anything that changes that price changes the tier as well as the revenue. Not gas, not NGL, not rate, not cumulative volume, not the R factor."
+ },
+ {
+  "prompt": "Ghana - Deepwater is described as featuring an additional oil entitlement and Brazil - Concession as carrying a special participation tax. Where do those two instruments appear in a run?",
+  "options": [
+   "Both are charged after tax, as a further deduction from the contractor's profit share in the years their descriptions cover.",
+   "Nowhere as instruments. Ghana's entitlement is expressed as an R factor split and Brazil's windfall as RRT at 40 percent, and only the four fields execute.",
+   "Ghana's entitlement is the cost recovery limit of 90 percent and Brazil's participation tax is the CIT of 34 percent.",
+   "Both are carried as extra tiers, Ghana's on the profit split and Brazil's on the royalty, which is why the two read as tiered."
+  ],
+  "answer": 1,
+  "explanation": "The description is prose. Six fields are executed, and a template cannot hold an instrument that has no field."
+ },
+ {
+  "prompt": "Three of the six templates take a flat 100 percent of profit oil to the contractor and recover cost at 100 percent. What are the other three?",
+  "options": [
+   "Tiered on the oil price, at those same three limits, a sharing regime keying its split on the price it sells at.",
+   "Flat splits below 100 percent, the difference between the split and 100 being the government's share of profit oil.",
+   "Concessions as well, differing only in the royalty rates of 7.5, 5 and 0 percent that the three of them carry.",
+   "Tiered on the R factor, with cost recovery capped at 80, 90 and 50 percent."
+  ],
+  "answer": 3,
+  "explanation": "Those are the templates where the middle columns do real work, because an unrecovered balance has somewhere to accumulate and the contractor's share changes as the field matures."
+ },
+ {
+  "prompt": "Which template collects the most royalty on the default project, and what does that predict about its contractor?",
+  "options": [
+   "USA - Gulf of Mexico at 503.7989 million USD, which leaves that contractor the least cash of the six at 406.2057 million USD.",
+   "Generic Royalty/Tax at 335.8660 million USD, since 12.5 percent is the highest flat rate anywhere in the list.",
+   "USA - Gulf of Mexico at 503.7989 million USD, and it predicts nothing: that contractor keeps 980.9313 million USD, more than four of the other five.",
+   "Nigeria - PIA (2021) at 268.6928 million USD, a slider in its top tier outcollecting every flat rate in the set."
+  ],
+  "answer": 2,
+  "explanation": "406.2057 million USD is the PIA contractor, under a royalty of 268.6928 million USD. The royalty ranking and the contractor ranking are not the same ranking."
+ },
+ {
+  "prompt": "What has been deducted from the 271.9889 million USD on the default project's year 1 top line?",
+  "options": [
+   "A quality differential against the marker the deck's dated points are quoted on for each of the three streams.",
+   "Nothing at all. No transport, no processing, no quality bank, no marketing fee and no working interest adjustment.",
+   "A marketing fee, taken before the royalty base is set so that the state and the contractor share the cost of the sale.",
+   "The gas and NGL streams, which are carried below the oil line and added back before the royalty is charged on it."
+  ],
+  "answer": 1,
+  "explanation": "It is volumes at deck prices and nothing else, and that number is exactly the royalty base."
+ },
+ {
+  "prompt": "Two regimes in one comparison report different total revenue. What has happened?",
+  "options": [
+   "They were not run on the same project, because a regime touches neither production nor price.",
+   "One of them charged its royalty on the top line, which is deducted from the revenue column before that column prints.",
+   "One of them ran at a different cost recovery limit, so a different part of the top line reached the revenue total.",
+   "Their decks stepped in different years, a deck being a regime setting."
+  ],
+  "answer": 0,
+  "explanation": "Total revenue reads 2686.9277 million USD down all six lines of a default project comparison and 7001.1938 down all six of a test project comparison. It is a constant, and that is what makes the spread legible."
+ }
+]

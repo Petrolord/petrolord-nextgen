@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Three probe decks on the Designer's default project, priced at 49.990000, 50.000000 and 50.010000 USD per bbl, are run against the PIA royalty tiers of 0 USD/bbl at 7.5 percent and 50 USD/bbl at 10 percent. What rate does the deck priced exactly at the threshold pay?",
+  "options": [
+   "0.075000, the lower tier, because a threshold is the price at which the next tier BEGINS and a price merely equal to it has not yet passed into the band above.",
+   "The mean of the two tiers, because the engine interpolates the rate over the last cent of approach to a threshold rather than jumping.",
+   "0.100000, the upper tier, on gross revenue of 198.9889 giving a royalty of 19.8989.",
+   "0.075000, because the walk stops at the first tier whose threshold is not yet strictly exceeded and keeps the rate it was holding."
+  ],
+  "answer": 2,
+  "explanation": "The comparison in the engine is `oilPrice >= tier.threshold`, so the threshold belongs to the tier above it: 49.990000 pays 14.9214 at 0.075000 while 50.000000 pays 19.8989 at 0.100000."
+ },
+ {
+  "prompt": "Why can a price multiplier sweep of the default project, run at 0.700000, 0.710000, 0.720000 and 0.800000, not settle which tier owns a threshold?",
+  "options": [
+   "A sweep brackets a threshold and never lands on one: 0.710000 puts the price at 49.700000 and 0.720000 puts it at 50.400000, so no swept point is ever the threshold itself.",
+   "The sweep changes gross revenue at the same time as the rate, so the implied rate of royalty over gross revenue is contaminated and cannot be read.",
+   "The sweep reports the royalty only as a lifetime total, so no single year's rate can be recovered from it.",
+   "The multiplier is applied after the royalty is charged, so the tier a swept point selects belongs to the unswept deck price and not to the price printed."
+  ],
+  "answer": 0,
+  "explanation": "The implied rate steps from 0.075000 to 0.100000 somewhere between the multipliers 0.710000 and 0.720000, and a bracket names an interval rather than a side."
+ },
+ {
+  "prompt": "A reader tries to place the default project's 70 USD per bbl deck exactly on a 50 USD per bbl threshold by choosing the multiplier 50 divided by 70. The sweep prints an applied price of 50.000000 and the implied rate reads 0.075000. What happened?",
+  "options": [
+   "The engine rounds the applied price to six decimals before comparing it with the threshold, and a rounded 50.000000 is compared as a value strictly less than 50.",
+   "The applied price is 49.99999999999998 in binary floating point, strictly below the threshold, and six decimal places of printing hid the shortfall.",
+   "The multiplier is applied to the royalty rate rather than to the price, so the tier was selected from the unmultiplied 70 USD per bbl deck.",
+   "The threshold genuinely belongs to the tier below it, and the three probe decks at 49.990000, 50.000000 and 50.010000 are the exception rather than the rule."
+  ],
+  "answer": 1,
+  "explanation": "Read a printed price column as a rounding of the price the engine used. The implied rate is the measurement, and 0.075000 says the engine was below 50."
+ },
+ {
+  "prompt": "`price_below_every_threshold` runs the default project at a 0.5 multiplier, putting oil at 35 USD per bbl against tiers of 60 USD/bbl at 12.5 percent and 80 USD/bbl at 15 percent. What royalty rate does the field pay?",
+  "options": [
+   "Zero, because a tier list keyed at 60 and 80 USD per bbl charges nothing until the lower of the two keys is reached by the price.",
+   "The 15 percent rate of the upper tier, because with no threshold reached the walk falls through to the last entry in the list.",
+   "0.125000, but only from the year the deck's step hold lifts the applied price above the 60 USD/bbl key for the first time.",
+   "0.125000 in every year, which is the lowest tier's rate, charged as the fallback before any threshold is reached."
+  ],
+  "answer": 3,
+  "explanation": "`getSlidingScaleRoyalty` falls back to the lowest tier's rate when the price has reached no threshold, which is why year 1 pays 18.0299 on gross revenue of 144.2389."
+ },
+ {
+  "prompt": "At a price multiplier of 1.200000 on the default project the PIA royalty charges 32.3089 on gross revenue of 323.0889. How much of that revenue was charged at 7.5 percent?",
+  "options": [
+   "None of it. One tier is selected for the year and its rate is charged on the whole of gross revenue, with nothing left in the lower band.",
+   "The share of revenue attributable to the first 50 USD per bbl of price, with the remainder taken at 10 percent in the manner of an income tax bracket.",
+   "The gas and NGL portion of revenue, which stays in the first tier because only the oil price is allowed to select a tier above it.",
+   "The portion earned before the applied price crossed the threshold, which on a rising deck is the earlier years of the same run."
+  ],
+  "answer": 0,
+  "explanation": "The implied rate at 1.200000 is 0.100000 on every dollar. A blended answer lands between the two printed royalties and looks reasonable, which is what makes it dangerous."
+ },
+ {
+  "prompt": "The teaching field ODIDI holds 45 USD per bbl through year 5 and steps to 65 at year 6. Under the PIA royalty its year 5 royalty is 5.7145 on gross revenue of 76.1939 and its year 6 royalty is 9.3986 on 93.9859. What moved?",
+  "options": [
+   "Only the rate, since the oil volume is declining and the deck step merely holds gross revenue flat while the tier above takes over.",
+   "Only the revenue, because a deck that steps inside the life of a field cannot move a tier that was fixed when the regime was loaded.",
+   "Both the revenue and the rate: the deck lifted the price so revenue rose, and the same step carried the price past 50 so the implied rate went from 0.075000 to 0.100000.",
+   "The cost recovery limit released profit oil in that year, and the royalty follows the profit oil upward while the rate itself holds at 0.075000."
+  ],
+  "answer": 2,
+  "explanation": "Two effects compound in one row. Revenue rises from 76.1939 to 93.9859 and the implied rate rises from 0.075000 to 0.100000, so the royalty rises by more than the price move alone."
+ },
+ {
+  "prompt": "`sliding_royalty_price_deck_crossing` runs a deck of 70 USD per bbl, 75 from year 5 and 80 from year 10 against tiers of 60 USD/bbl at 12.5 percent and 80 USD/bbl at 15 percent. Why does the rate not change in year 5?",
+  "options": [
+   "Because the engine holds the tier chosen in year 1 for the whole of the life once cost recovery has begun against that year's revenue.",
+   "Because 75 USD per bbl has not reached the 80 USD/bbl threshold, so the deck's step moves the price without moving the tier.",
+   "Because a rate change is deferred to the year after the deck step, which is why the rate becomes 15 percent in year 10 rather than in year 9.",
+   "Because the deck's second point is a hold rather than a step, and `getPriceForYear` reads it as a continuation of the 70 USD per bbl point."
+  ],
+  "answer": 1,
+  "explanation": "The rate holds at 12.5 percent until year 9 and becomes 15 percent from year 10. Two schedules run at once, one for price and one for rate, and they change in different years."
+ },
+ {
+  "prompt": "Under a sliding royalty, what selects the tier for a year?",
+  "options": [
+   "The applied price of the highest-value stream in that year, so a gas-weighted field can be lifted into an upper tier by its Mscf price.",
+   "The boe-weighted average of the oil, gas and NGL prices, converted at 6000 scf per barrel before the thresholds are read.",
+   "Gross revenue for the year, which is why a larger field reaches an upper tier at a price a smaller field would not.",
+   "The applied oil price for that year, and nothing else."
+  ],
+  "answer": 3,
+  "explanation": "Gas and NGL revenue is charged at whatever rate the oil price chose, and neither the gas price nor the NGL price can move it."
+ },
+ {
+  "prompt": "`price_below_every_threshold` pays 177.3774 million USD of royalty over its life on total revenue of 1419.0195, while contractor net cash flow reaches 80.8085 and NPV at 10 percent is negative 111.7254. What does that show about the instrument?",
+  "options": [
+   "It shows the first tier's rate is charged only until the project's cumulative position turns negative, after which the royalty line stops.",
+   "It shows a royalty charged on gross revenue is refunded through the cost recovery pool whenever contractor net cash flow closes below the royalty total.",
+   "It has no relief mechanism: there is no minimum price below which the royalty is waived and no link at all to whether the field is making money.",
+   "It shows the instrument reduces its rate when cost recovery is failing, which is why the rate never rises above the first tier's 12.5 percent here."
+  ],
+  "answer": 2,
+  "explanation": "A royalty larger than twice the contractor's whole lifetime cash flow was collected from a project that destroyed value, and 72.2941 million USD of cost was still unrecovered at the horizon."
+ },
+ {
+  "prompt": "A sweep prints an applied price column and an implied rate column. Which is the measurement of which side of a threshold the engine was on?",
+  "options": [
+   "The applied price, because the tier is chosen from that price and the rate is only a consequence of the choice already made.",
+   "The implied rate, royalty over gross revenue, because it reports the tier the engine actually selected.",
+   "Neither, since both are derived columns rounded from full precision before printing.",
+   "The applied price, provided it is quoted to six decimals, which is enough places to separate any two thresholds a template uses."
+  ],
+  "answer": 1,
+  "explanation": "A price printing as 50.000000 can be 49.99999999999998, and the implied rate of 0.075000 is what says so."
+ },
+ {
+  "prompt": "Across the default project sweep the PIA implied rate is 0.075000 at multipliers 0.500000, 0.600000, 0.700000 and 0.710000, and 0.100000 at 0.720000, 0.800000, 1.000000 and 1.200000. What is that pattern?",
+  "options": [
+   "A step function with one break, flat inside each tier and discontinuous where the applied price crosses 50 USD per bbl.",
+   "A ramp that rises with price throughout, sampled coarsely enough at these eight multipliers that its slope looks flat inside each band.",
+   "A step that repeats at every multiple of the threshold, with a further break at 100 USD per bbl.",
+   "A progressive schedule whose average rate rises with price while the marginal rate holds."
+  ],
+  "answer": 0,
+  "explanation": "Nothing between two thresholds is interpolated. The rate is 0.100000 at an applied price of 50.400000 and still 0.100000 at 84.000000."
+ },
+ {
+  "prompt": "The PIA template's lowest royalty tier is keyed at 0 USD/bbl. Why does that hide something a reader needs to check?",
+  "options": [
+   "Because a threshold of 0 USD/bbl is skipped by the walk, leaving the 50 USD/bbl tier as the only rate the template can charge.",
+   "Because a zero threshold makes the implied rate undefined in any year the applied oil price is itself below one dollar.",
+   "Because the engine treats a 0 USD/bbl key as an instruction to charge no royalty until the next threshold in the list is reached.",
+   "Because at any positive price that tier is genuinely reached, so the fallback to the lowest tier's rate never shows itself and the selection looks like an ordinary threshold rule."
+  ],
+  "answer": 3,
+  "explanation": "On tiers keyed at 60 and 80 USD/bbl the fallback is visible as 0.125000 charged below every threshold, and that is the entry every tier list has to be checked for."
+ },
+ {
+  "prompt": "What does `getSlidingScaleRoyalty` do with a tier list whose thresholds are not typed in ascending order?",
+  "options": [
+   "It reads the list exactly as typed and keeps the last qualifying entry it meets, so a list written out of order charges the wrong rate for the year and raises nothing at all.",
+   "It sorts a copy before reading it, so the rate charged is the one keyed to the highest threshold the price has reached, whatever the typed order.",
+   "It rejects the regime outright, because a list whose thresholds do not ascend fails validation before any year is computed.",
+   "It reads the first and the last entry only, so a tier typed out of order in the middle of the list is passed over."
+  ],
+  "answer": 1,
+  "explanation": "Selection is by threshold, from a sorted copy. The one table the engine does refuse is a list with two tiers at one threshold, and it names the repeated threshold rather than choosing between them."
+ },
+ {
+  "prompt": "A year's oil price has reached two of a royalty's thresholds. Which rate is charged?",
+  "options": [
+   "The rate of whichever of the two qualifying tiers was typed last in the list.",
+   "The sum of the two rates, since every qualifying tier charges its own rate on gross revenue.",
+   "The rate keyed to the higher of the two thresholds, and the order the tiers were typed in makes no difference to it.",
+   "The rate of the lower of the two thresholds, since the selection stops at the first threshold the price has passed on its way up."
+  ],
+  "answer": 2,
+  "explanation": "A sorted copy of the list is read, so the highest threshold reached is the one that governs. Nothing between two thresholds is interpolated and no rates are added."
+ },
+ {
+  "prompt": "The USA Gulf of Mexico template charges a flat 18.75 percent. What is its implied rate on the default project in year 25?",
+  "options": [
+   "0.187500, the same as in year 1, because a flat royalty carries a single rate and no price can move it.",
+   "Lower than 0.187500, because a flat rate is charged on gross revenue and gross revenue has declined through the life of the field.",
+   "Undefined, since the implied rate can only be computed in a year that carries capex in the same row.",
+   "0.187500 on oil revenue only, with the gas and NGL streams left outside the royalty base."
+  ],
+  "answer": 0,
+  "explanation": "Year 1 charges 50.9979 million USD on gross revenue of 271.9889, and the ratio reads 0.187500 in year 1 and in year 25 alike."
+ }
+]
