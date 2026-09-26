@@ -99,7 +99,7 @@ q(3, "Section 260(3) keeps deep offshore outside the hydrocarbon tax. On the 60,
  "Section 260(3) takes deep offshore out of the hydrocarbon tax Part only, so the tax is not zero; companies income tax is charged on the whole profit, 291253998.059867 in 2025. 795646660.199557 is the hydrocarbon tax chargeable profit, a base and never a tax. The production allowance is a deduction in the hydrocarbon tax base and is not taxed.")
 
 q(1, "Which deduction in the hydrocarbon tax base has no counterpart in the companies income tax base?",
- "The production allowance",
+ "The Sixth Schedule's per-barrel allowance",
  ["The capital allowance",
   "The HCDT contribution, which s.257(1) allows for the hydrocarbon tax alone",
   "The royalty by price, which companies income tax adds back as a charge on price"],
