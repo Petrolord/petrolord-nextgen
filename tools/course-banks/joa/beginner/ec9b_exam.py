@@ -30,7 +30,7 @@ q(3, "Which of these is a legal figure the engine applies from an Act, cited to 
  "PIA_JV.maxGovernmentParticipationPct, 60.000000, from PIA s.85(4)(a).",
  ["The item tolerance of 10 percent, which Norway JOA Art. 12.5 fixes for every call.",
   "The no-call threshold of 500000.000000 the Ekene fixture applies.",
-  "DEFAULTS.SUM_TOLERANCE, 1e-9, a limit the Act sets on how far interests may sum from 100."],
+  "DEFAULTS.SUM_TOLERANCE, 1e-9, a limit the Act sets on how far participating interests may sum from 100."],
  "The engine's stated constants cite PIA_JV.maxGovernmentParticipationPct, 60.000000, to PIA s.85(4)(a), applied only under basis \"pia-s85-4\". The Norwegian 10 percent is the text's figure and a stated input, the 500000.000000 is a term of the synthetic Ekene contract, and DEFAULTS.SUM_TOLERANCE is an engine convention with no Act behind it.")
 
 q(1, "What does the engine export under the name ACCEPTED_KEYS?",
@@ -90,7 +90,7 @@ q(3, "Name PA's call once the lag of 2 months brings January's credit into March
   "2175000.000000."],
  "PA's paying interest of 31.250000 gives a March forecast share of 3750000.000000, and its January difference of 125000.000000 reaches March under the lag of 2 months, so its call is 3625000.000000 and it pays 3625000.000000 with no arrears billing. May's actual is billed in June, and 2175000.000000 is PB's March call.")
 
-q(0, "Sum up PA's June 2027 payment on the Ekene terms.",
+q(0, "Sum up PA's June 2027 payment on the Ekene terms, a lag of 2 months and a threshold of 500000.",
  "2858750.000000: its call of 2718750.000000 plus 140000.000000.",
  ["2718750.000000, its June call, with May's actual left for July.",
   "2812500.000000, its June forecast share before the adjustment comes off.",
@@ -162,14 +162,14 @@ q(3, "Why is every adjustment in January 2027 on the Ekene terms 0.000000?",
  "The call is the forecast share less the difference of the month reconciliationLagMonths earlier plus any amount carried, and the Ekene ledger starts in January 2027, so January has nothing to apply: every adjustment is 0.000000 and each call equals its forecast share, EKO's 2000000.000000. January's forecast of 4000000.000000 is above the threshold, carry holds a credit only until the next call, and NOC's carry only makes its own row zero.")
 
 # m05: budget control
-q(1, "Where does operations support, 8300000.000000 spent on 8000000.000000 approved, stand against its item limit?",
+q(1, "Where does operations support, 8300000.000000 spent on 8000000.000000 approved, stand against its 10 percent item limit?",
  "Inside, an overrun of 3.750000 percent against a limit of 8800000.000000.",
  ["Beyond, as any overrun on an approved line needs the committee's fresh approval.",
   "Inside, since the limit is set 10 percent above its actual spend of 8300000.000000.",
   "Beyond, as the budget as a whole is beyond its tolerance."],
  "The engine's reason reads: operations support: 8300000 against 8000000 approved is an overrun of 300000, inside the item tolerance of 10% (limit 8800000). The overrun percent is 3.750000. The limit is taken on the approved amount, an item inside its tolerance needs no fresh approval, and the budget test is separate from the item test.")
 
-q(2, "General and administration was approved at 4000000.000000 and spent 4100000.000000. What limit and overrun percent does the engine return?",
+q(2, "General and administration was approved at 4000000.000000 and spent 4100000.000000 under a 10 percent item tolerance. What limit and overrun percent does the engine return?",
  "Limit 4400000.000000 and 2.500000 percent, inside.",
  ["Limit 4100000.000000 and 10.000000 percent.",
   "Limit 4400000.000000 and 10.000000 percent, exactly at the tolerance.",
@@ -183,7 +183,7 @@ q(0, "On which total does the engine take the percentage of the budget tolerance
   "The approved total less the unbudgeted items."],
  "The engine's rule reads: the budget is inside when the total overrun <= the lower of pct % of the approved total and the stated amount. On the Ekene 2027 budget the reason prints 5% of the approved total (3800000), on 76000000.000000. The actual total and the largest item are no part of the test, and an unbudgeted item has an approved amount of 0.")
 
-q(3, "With no unbudgeted allowance stated, which Ekene 2027 items does the engine list as outside their tolerance?",
+q(3, "With the 10 percent item tolerance and no unbudgeted allowance stated, which Ekene 2027 items does the engine list as outside their tolerance?",
  "Exploration drilling and environmental baseline survey.",
  ["Exploration drilling alone, since an unbudgeted item has no tolerance to be outside.",
   "Exploration drilling and geology and geophysics.",
@@ -212,21 +212,21 @@ q(3, "Where does the engine's source for budgetControl say the percentages and a
  "The engine's basis.source for budgetControl ends: every percentage and amount is a stated input with no default. The Norwegian 10 percent and the lower of 5 percent and NOK 75 million are the text's figures, and the Ekene fixture's figures are the terms of one synthetic contract.")
 
 # m06: overhead
-q(0, "overhead-norway-operating-1800: which charge does the Art. 2.2.2 operating scale produce on 1800?",
+q(0, "overhead-norway-operating-1800: which charge does the Art. 2.2.2 operating scale, as the case states it, produce on 1800?",
  "35.000000: 2.7% of 1000 plus 1% of 800.",
  ["27.000000, the first band alone.",
   "1% of the whole base of 1800.",
   "40.000000, the development scale."],
  "The engine's reason reads: operating: base 1800; 2.7% of 1000 + 1% of 800 = 35. The scale is marginal, so the first band's 27.000000 is only part of the charge, the band the base ends in charges only its own part, and 40.000000 belongs to the development scale on a base of 3000.")
 
-q(1, "overhead-norway-development-3000 runs a development base through three Norwegian bands. What total comes back?",
+q(1, "overhead-norway-development-3000 runs a development base through the three Norwegian bands the case states. What total comes back?",
  "40.000000, over the three bands.",
  ["42.500000, the charge on 4000 with 500 above the last band.",
   "35.000000, as for the operating scale.",
   "30.000000, 1% of the whole base."],
  "The engine's reason reads: development: base 3000; 2.5% of 1000 + 1% of 1000 + 0.5% of 1000 = 40. 42.500000 is the charge on a base of 4000, 35.000000 is the operating scale on 1800, and the marginal scale charges no single rate on the whole base.")
 
-q(2, "The Norwegian exploration scale is stated on a base of 250 NOK million. What does the engine charge?",
+q(2, "The Norwegian exploration scale, 2.5% in its first band, is stated on a base of 250 NOK million. What does the engine charge?",
  "6.250000, at 2.5% inside the first band.",
  ["7.5, the charge on a base of 400.",
   "0.000000, as a base below the first band's limit is not charged.",
@@ -254,7 +254,7 @@ q(0, "An exclusion is stated for a category named drilling, and the box's costs 
   "It ignores the unknown category and charges operating in full."],
  "The engine refuses, in its own words: excluded.drilling is not a cost category; the categories are operating. An exclusion belongs to the category it names, and a name that matches no category is refused, and is neither moved, held nor ignored.")
 
-q(2, "The Ekene 2031 exploration base is 5000000.000000 on a scale whose first band runs to 30000000.000000. What is charged above the last band?",
+q(2, "The Ekene 2031 exploration base is 5000000.000000 on a scale whose single band charges 2.5% to 30000000.000000, with 0 above. What is charged above the last band?",
  "0.000000, as the base does not reach the last band.",
  ["125000.000000, the whole exploration charge.",
   "30000000.000000, the band's width, at 0 per cent.",
