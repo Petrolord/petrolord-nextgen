@@ -21,7 +21,7 @@ Six different NPVs, and one loss figure repeated to every printed digit.
 
 ## What the sentence says
 
-The capex verdict declines: no regime can be ranked on resilience to cost overrun, and all six are named as giving up 12,727.3 million USD each, within 0.1 million USD of each other. `leadOrTie` names a leader only when it leads the next regime by at least one printed step, 0.1 million USD for the capex verdict and one percentage point for the price verdict. A strict less-than keeps the first of two equals, and noise in the last binary digits lets the engine name "USA - Gulf of Mexico" and the oracle "Brazil - Concession". Neither is a result.
+The capex verdict declines: no regime can be ranked on resilience to cost overrun, and all six are named as giving up 12,727.3 million USD each, within 0.1 million USD of each other. `leadOrTie` names a leader only when it leads the next regime by at least one printed step, 0.1 million USD for the capex verdict and one percentage point for the price verdict. A strict less-than keeps the first of two equals, and here the six losses differ only in their last binary digits, so a strict pick on the engine's values would name "USA - Gulf of Mexico" on noise, which is no result.
 
 The price verdict stays out too: every point is null and flagged undefined, so it says no regime is economic from 40 to 120 USD per bbl.
 

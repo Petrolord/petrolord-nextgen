@@ -35,7 +35,7 @@ A quieter slip is reading a 100 percent limit as "no limit". The limit binds whe
 
 ## What the base refuses
 
-It refuses to be reordered. Royalty comes off gross revenue first in every ledger, and profit oil is always what is left of revenue after royalty once cost is recovered. The one field that moves is the ceiling's base: `costRecoveryBase` set to `liquids_gross` sizes the ceiling on the gross crude oil and NGL value instead. Revenue after royalty also never appears in the output, so every reader builds it from the grossRevenue and royalty columns.
+It refuses to be reordered. Royalty comes off gross revenue first in every ledger, and profit oil is always what is left of revenue after royalty once cost is recovered. The one field that moves is the ceiling's base: `costRecoveryBase` set to `liquids_gross` sizes the ceiling on the gross crude oil and NGL value instead. Revenue after royalty also never appears in the output.
 
 ## Exercise
 

@@ -136,4 +136,13 @@ export default [
   { q: 'advanced m05 5', where: 'explanation', printed: '255.8175 when', value: (L) => L.E.calculateNPV(L.cf(L.PIA, L.DEFAULT_PROJECT, 1.5, 1), L.DEFAULT_PROJECT.discountRate).toFixed(4) + ' when' },
   { q: 'advanced m05 10', where: 'key', printed: 'above-clamp', value: (L) => L.E.calculateIRRResult([{ year: 1, contractorNCF: -1 }, { year: 2, contractorNCF: 2000 }]).irrStatus },
   { q: 'advanced m05 11', where: 'explanation', printed: 'the engine returns null with a status', value: (L) => { const c = L.CASE.capex_multiplier_0_7; return L.E.calculateIRRResult(L.cf({ ...c.regime }, c.project, c.capexMultiplier, 1)).irrStatus === 'multiple-roots'; } },
+  // AUDIT (key-truth auditor): final 35 asks for government share of net revenue, which is the summary figure
+  { q: 'advanced final 35', where: 'key', printed: '46.3452', value: async (L) => { const c = L.CMP.cmp_designer_defaults; const res = await L.E.runFiscalComparison({ projectInputs: c.project, regimes: c.regimes }); return res.summary.find((s) => s.name === 'Concessionary (Royalty/Tax)').governmentShareOfNetRevenuePct; } },
+  { q: 'advanced final 35', where: 'prompt', printed: 'Which one is government share of net revenue', value: async (L) => { const c = L.CMP.cmp_designer_defaults; const res = await L.E.runFiscalComparison({ projectInputs: c.project, regimes: c.regimes }); const s = res.summary.find((x) => x.name === 'Concessionary (Royalty/Tax)'); return s.governmentShareOfNetRevenuePct.toFixed(4) === '46.3452' && s.governmentTakePct.toFixed(4) === '59.6210'; } },
+  // final 29: the key is the last step; the even split (a distractor) is a different number
+  { q: 'advanced final 29', where: 'key', printed: '36.01', value: async (L) => { const v = await series(L, 'dflt', 'capex', L.PIA.id); return v[6] - v[7]; } },
+  { q: 'advanced final 29', where: 'option 2', printed: '34.81', value: async (L) => { const v = await series(L, 'dflt', 'capex', L.PIA.id); return (v[0] - v[7]) / 7; } },
+  { q: 'advanced final 29', where: 'option 2', printed: 'spread evenly over the seven steps', value: async (L) => { const v = await series(L, 'dflt', 'capex', L.PIA.id); return Math.abs((v[6] - v[7]) - (v[0] - v[7]) / 7) > 1; } },
+  // final 26: -100 then 90 loses money at every POSITIVE rate, not at every rate
+  { q: 'advanced final 26', where: 'key', printed: 'every positive rate', value: (L) => { const r = L.E.calculateIRRResult([{ year: 1, contractorNCF: -100 }, { year: 2, contractorNCF: 90 }]); return r.irr !== null && r.irr.toFixed(4) === '-10.0000' && L.E.calculateNPV([{ year: 1, contractorNCF: -100 }, { year: 2, contractorNCF: 90 }], -50) > 0; } },
 ];

@@ -683,7 +683,7 @@ for (const c of G.comparisons) {
   res.summary.forEach((s, i) => w(`| ${i + 1} | ${s.name} | ${m(s.npv)} | ${irrOf(s)} | ${s.paybackPeriod ?? 'null'} | ${s.rFactorPayoutYear ?? 'null'} | ${m(s.govTake)} | ${p(s.effectiveTaxRate)} |`));
   w();
 }
-w('`effectiveTaxRate` in this table is government take divided by government take plus contractor take, where contractor take has TOTAL CAPEX ADDED BACK. The add-back is what makes it a rate on profit rather than a rate on cash. Section 19 shows the other definition, in the same result object.');
+w('`effectiveTaxRate` in this table is government take divided by government take plus contractor take, where contractor take has TOTAL CAPEX ADDED BACK. With the add-back the denominator is revenue less opex, so this figure is government share of net revenue; without it the denominator is revenue less opex less capex, the rate on profit that the price sweep reports as government take. Section 19 shows the other definition, in the same result object.');
 w();
 w('`paybackPeriod` is the first year cumulative contractor net cash flow is above zero, and `null` when it never is. `rFactorPayoutYear` is the first year the R factor is above 1.0. They answer different questions and on these cases they often differ, because the R factor is gross revenue over cost while payback is cash after tax and after the government\'s share.');
 w();

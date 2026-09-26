@@ -30,7 +30,7 @@
    "Cost recovery was capped by the profit oil split rather than by the limit, since a low price walks the R factor into a generous tranche."
   ],
   "answer": 0,
-  "explanation": "A limit that never binds at the deck price binds at 40 USD per bbl, where NPV is -51.1673 million USD and the engine names no internal rate of return at all."
+  "explanation": "At the deck price the limit binds only in the first four years and the pool clears; at 40 USD per bbl the pool is still open after year 25, NPV is -51.1673 million USD, and the engine reports no single IRR, the NPV being zero at -40.1442 and 6.6994 percent."
  },
  {
   "prompt": "The nine published price runs are named price_40_pia_default through price_120_pia_default. Which regime do they actually run?",
@@ -41,7 +41,7 @@
    "The Designer's sample PSC regime, id 1, which the engine names Nigerian PIA (PSC)."
   ],
   "answer": 3,
-  "explanation": "The template and the Designer's sample PSC regime, whose values are illustrative samples, share little: the sample regime recovers cost to 70 percent of revenue after royalty and charges royalty of 12.5 percent from 60 USD/bbl, while the template recovers to 70 percent of the gross value of crude oil and NGL and charges the PIA 2021 royalty. The template returns 432.0925 million USD on that project and the sample regime 169.7176."
+  "explanation": "The template and the Designer's sample PSC regime, whose values are illustrative samples, share little: the sample regime recovers cost to 70 percent of revenue after royalty and charges a royalty of 12.5 percent below 80 USD/bbl and 15 percent from 80, while the template recovers to 70 percent of the gross value of crude oil and NGL and charges the PIA 2021 royalty. The template returns 432.0925 million USD on that project and the sample regime 169.7176."
  },
  {
   "prompt": "What does the price sweep return for a regime when total government cash flow plus total contractor net cash flow is not greater than zero?",

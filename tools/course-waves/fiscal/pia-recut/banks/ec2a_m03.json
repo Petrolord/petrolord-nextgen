@@ -14,8 +14,8 @@
   "prompt": "A capex sweep written as a loop that adds 0.1 to a multiplier starting at 0.8, while it stays at or below 1.5, returns seven points and its last reads 1.4. What ends that loop early?",
   "options": [
    "Accumulating 0.1 in binary floating point arrives at 1.5000000000000004, which is greater than 1.5.",
-   "The engine refused a multiplier above 1.4 because no cost recovery limit can absorb a larger overrun.",
-   "The eighth point returned a negative NPV for one regime, so the sweep dropped it.",
+   "A refusal by the engine of any multiplier above 1.4, because no cost recovery limit can absorb a larger overrun.",
+   "Its eighth point returned a negative NPV for one regime, so the sweep dropped it.",
    "The label came from the loop bound and the points from a step count."
   ],
   "answer": 0,
@@ -79,9 +79,9 @@
  {
   "prompt": "The nine published capex cases are named capex_0.7_pia_default to capex_1.5_pia_default. How do they relate to the sweep the chart draws?",
   "options": [
-   "They are the swept points themselves, published one case per label on the chart's axis.",
+   "Identical to the swept points, published one case per label on the chart's axis.",
    "They are the same regime as the chart over a shifted range, the Nigeria - PIA (2021) template under the name the Designer gives it.",
-   "They are the oracle's own sweep rather than the engine's, published so that the two can be compared point by point.",
+   "The oracle's own sweep rather than the engine's, published so that the two can be compared point by point.",
    "A different range on a different regime."
   ],
   "answer": 3,

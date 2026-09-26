@@ -95,7 +95,7 @@
       "precision.json"
     ],
     "pins": {
-      "digest.txt": "54e0445278d47958f847cd8d58dd869c8d0473b1f24b1a68156c601212991fea",
+      "digest.txt": "a00ca71b1c56c93a7f5a18e1faa5769f41492c6410dcef29a7b8238197bea479",
       "fields.json": "7e55e1ade9cdaf32abd296e470bb4cf767ef7d989883a9c9851e6b07764ed3eb"
     },
     "recutNote": "EC7 PIA recut 2026-09-26 (engines 3.12.0 at 3778451, default path). First commit of the EC1 kit. fields.json carries the Expert set of lead decisions L1 and L3 (the served IKPOTO Expert config is refused by the corrected engine): the new-PML HCT rate is stated at 30 in the prompt and no Expert field depends on it; the 2035 CPR carry replaces the 2034 one (L3). discriminate_expert.mjs proves both. ec1_capstone.mjs renders all three prompts from the engine inputs into capstones.json and proves the Associate and Professional capstones byte-identical to the served rows. prove_prior_courses.sh proves qra unchanged."
@@ -113,7 +113,7 @@
       "ts_loader.mjs"
     ],
     "pins": {
-      "digest.txt": "e6e61e89277f2ef22bb93497975e72b54a6f7a1ee05dc6b11a26258b9f95b6c8",
+      "digest.txt": "89641a6c3f80eac6bfc640cccf83b22c757edc14fff971961611cc961f8b3f4b",
       "fields.json": "06eef99fb60dc4ddbb255d4821a5b10208fde1d66ea175ca7dbe227933b8702e"
     },
     "recutNote": "EC7 PIA recut 2026-09-26 (engines 3.12.0 at 3778451, default path): the digest is re-cut; every graded value in fields.json is unchanged (the URUAN capstone runs its own two regimes and reads no template) and con_payback_year_cum_ncf_musd is narrowed to tolerance 0.0003 (lead decision: the PIA template's year 2 royalty on the default project sat inside the 0.001 band). ec2_fields.mjs now spells cmp_psc_capex_loss_last_tenth_musd, so the fieldsNoGeneratorSpells exception is retired. fiscalRegime.js imports cashflow.ts, so the dump registers ts_loader.mjs."

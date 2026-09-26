@@ -68,10 +68,10 @@
  {
   "prompt": "A regime in this sandbox is four fields. Which are they?",
   "options": [
-   "The royalty, the discount rate, the profit split and the tax block, since the rate is what turns a regime's timing into a value.",
-   "The royalty, the cost recovery limit, the capex schedule and the tax block, because when capital is spent decides what is recovered.",
+   "The royalty, the discount rate, the profit split and the tax block, since the rate is what turns a regime's timing into a value and each template carries the rate it was written for.",
+   "The royalty, the cost recovery limit, the capex schedule and the tax block, because when capital is spent decides what is recovered, and a regime that moved capex to year 3 would recover it later.",
    "The royalty, flat, sliding on price or the PIA 2021 royalty; the cost recovery limit and its base; the profit split, flat, tiered on the R factor or by cumulative production; and the tax block.",
-   "The royalty, the cost recovery limit, the profit split and the production forecast, which is what makes one regime harsher than another."
+   "The royalty, the cost recovery limit, the profit split and the production forecast, which is what makes one regime harsher than another, since a regime that shortens the forecast shortens the government's collection too."
   ],
   "answer": 2,
   "explanation": "The tax block holds corporate income tax, the resource rent tax, a minimum tax and an `rrtUpliftPct` that defaults to 20 when the field is absent."
@@ -124,9 +124,9 @@
   "prompt": "Under the PIA template on ODIDI, cumulative contractor net cash flow first turns positive in year 7 at 43.8352 million USD, against capex of 420.0000. What does the payback year say?",
   "options": [
    "That the contractor had recovered the whole 420.0000 million USD of capex, and 43.8352 million USD of profit on top of it, by the end of year 7 discounted at 12 percent.",
-   "That the project is viable, since a payback inside the first third of a 25 year life is what the summary's payback column is there to show.",
+   "The project is viable, since a payback inside the first third of a 25 year life is what the summary's payback column is there to show.",
    "Only that the cumulative crossed zero in that year, on a field where the cumulative later peaks at 250.9149 and falls back to 229.9586 million USD by year 25.",
-   "That year 7 is the best year of the ledger, because it is the year the contractor's own cash position stopped falling and began to rise."
+   "Year 7 is the best year of the ledger, because it is the year the contractor's own cash position stopped falling and began to rise."
   ],
   "answer": 2,
   "explanation": "Payback is undiscounted and is a first crossing rather than a maximum, and the same ledger returns an NPV of only 1.7389 million USD at 12 percent."

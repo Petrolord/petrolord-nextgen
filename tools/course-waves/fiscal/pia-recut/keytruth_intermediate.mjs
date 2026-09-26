@@ -89,4 +89,10 @@ export default [
   { q: 'intermediate m06 15', where: 'explanation', printed: '11.9734', value: (L) => odidiPia(L)[18].costRecovered },
   { q: 'intermediate m06 15', where: 'explanation', printed: '12.8457', value: (L) => odidiPia(L)[18].opex },
   { q: 'intermediate m06 15', where: 'key', printed: 'the allowance no longer covered the year\'s own cost', value: (L) => { const r = odidiPia(L); return r[17].unrecoveredCostPool === 0 && r[18].costRecovered < r[18].opex; } },
+  // AUDIT (key-truth auditor): final 24's gloss, GoM's heavier take is royalty
+  { q: 'intermediate final 24', where: 'explanation', printed: '1312.7238', value: (L) => L.totals(L.GOM, L.TEST_PROJECT).royalty },
+  { q: 'intermediate final 24', where: 'explanation', printed: '5 and later 10 percent of profit oil', value: (L) => { const r = L.cf(L.PIA, L.TEST_PROJECT); const sh = [...new Set(r.filter((x) => x.profitOil > 0).map((x) => ((x.governmentTake - x.royalty - x.tax) / x.profitOil).toFixed(6)))]; return sh.join() === '0.050000,0.100000'; } },
+  // m04 8: the first positive resource rent tax charge, per regime
+  { q: 'intermediate m04 8', where: 'explanation', printed: 'year 13', value: (L) => { const z = JSON.parse(JSON.stringify(L.ANGOLA)); z.tax.rrt = 0; const a = L.cf(L.ANGOLA, L.DEFAULT_PROJECT); const b = L.cf(z, L.DEFAULT_PROJECT); return `year ${a.findIndex((r, k) => r.tax - b[k].tax > 1e-9) + 1}`; } },
+  { q: 'intermediate m04 8', where: 'explanation', printed: 'year 7', value: (L) => { const z = JSON.parse(JSON.stringify(L.BRAZIL)); z.tax.rrt = 0; const a = L.cf(L.BRAZIL, L.DEFAULT_PROJECT); const b = L.cf(z, L.DEFAULT_PROJECT); return `year ${a.findIndex((r, k) => r.tax - b[k].tax > 1e-9) + 1}`; } },
 ];

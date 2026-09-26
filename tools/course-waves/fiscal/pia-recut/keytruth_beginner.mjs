@@ -103,4 +103,6 @@ export default [
   { q: 'beginner m06 13', where: 'explanation', printed: '229.9586', value: (L) => T(L, L.PIA, 'odidi').contractorNCF },
   // m06 14: the instruments that move
   { q: 'beginner m06 14', where: 'key', printed: 'The R factor split Ghana and Angola carry', value: (L) => ok(L.SIX.filter((g) => g.profitSplit.type === 'tiered_r_factor').map((g) => g.id).sort().join() === [L.ANGOLA.id, L.GHANA.id].sort().join() && L.PIA.profitSplit.type === 'pia_cumulative_production', 'The R factor split Ghana and Angola carry') },
+  // AUDIT (key-truth auditor): m03 7's key, the pool is smaller by the royalty and the R factor does not move
+  { q: 'beginner m03 7', where: 'key', printed: 'a pool that much smaller going into year 2', value: (L) => { const right = L.cf(L.GOM, L.DEFAULT_PROJECT)[0]; const wrongPool = right.capex + right.opex - right.grossRevenue; return Math.abs((right.unrecoveredCostPool - wrongPool) - right.royalty) < 1e-9; } },
 ];

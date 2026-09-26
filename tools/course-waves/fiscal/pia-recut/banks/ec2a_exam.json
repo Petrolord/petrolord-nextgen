@@ -91,9 +91,9 @@
   "prompt": "USA - Gulf of Mexico shows a price climb of -17.2498 percentage points and Generic Royalty/Tax -10.1897 on the default project. What makes those two regressive?",
   "options": [
    "A fixed royalty rate and a fixed tax rate on a growing profit hand the government a shrinking fraction once cost recovery has been paid off.",
-   "A cost recovery limit that rises with price, which returns more of the contractor's cost before any split is taken.",
+   "A cost recovery limit that rises with price, which returns more of the contractor's cost before any split is taken and so shrinks the state's share of each barrel.",
    "A profit split tiered on the R factor, which walks the contractor into a more generous tranche as revenue grows.",
-   "A minimum tax that binds at low prices and stops binding once the computed charge exceeds it."
+   "A minimum tax that binds at low prices and stops binding once the computed charge exceeds it, which flattens the government's share as price rises."
   ],
   "answer": 0,
   "explanation": "Brazil - Concession climbs the most at 20.5076 percentage points, the two templates whose split is tiered on the R factor climb by 19.6873 and 7.8960, and Nigeria - PIA (2021) is almost flat at -0.0068."
@@ -277,10 +277,10 @@
  {
   "prompt": "Two published cases have an NPV at 10 percent of 25.6198 and of -16.5289 million USD: one never changes sign, the other is -100 then 90. What does `calculateIRR` return for each?",
   "options": [
-   "Null with the status no-root on both, neither having a rate inside the band from -99 to 1000 percent.",
-   "Null with the status no-sign-change on the profitable one, and the negative root itself, -10.0000 percent, on the one that loses money at every rate.",
-   "0.0000 percent on the profitable one and null on the other, the engine still declining to print a negative rate.",
-   "-10.0000 percent on both, the shared contract reporting the nearest root inside the band whatever the flows do."
+   "Null with the status no-root on both, neither having a rate inside the band from -99 to 1000 percent that brings its NPV to zero at year-end discounting.",
+   "Null with the status no-sign-change on the profitable one, and the negative root itself, -10.0000 percent, on the one that loses money at every positive rate.",
+   "0.0000 percent on the profitable one and null on the other, the engine still declining to print a negative rate even where the only root lies well inside its band.",
+   "-10.0000 percent on both, the shared contract reporting the nearest root inside the band whatever the flows do, including flows that never change sign."
   ],
   "answer": 1,
   "explanation": "A profitable flow with no sign change has no rate to report, and a loss at every positive rate has a real negative root; a reader who would accept 0.0000 percent for either has read neither status."
@@ -312,8 +312,8 @@
   "options": [
    "243.6525 million USD, since the last step of a sweep carries its whole loss once the grid reaches the overrun on the label.",
    "255.8175 million USD, the NPV at 1.5, because a loss is read from the endpoint of the axis and never from a difference.",
-   "About 15 percent of the range loss, which is the share of the axis the last step covers, one step in seven.",
-   "About 36.01 million USD, roughly a seventh of the loss over the sweep."
+   "34.81 million USD, the range loss of 243.6525 spread evenly over the seven steps, since a sweep loses the same amount at every step.",
+   "About 36.01 million USD, the swept point at 1.4 minus the swept point at 1.5."
   ],
   "answer": 3,
   "explanation": "The last step is the 1.4 point minus the 1.5 point; the range loss runs from the first swept point at 0.8 to the eighth at 1.5, and the two are different spans of one sweep."
@@ -374,7 +374,7 @@
   "explanation": "The cumulative first turns positive in year 7 at 43.8352 million USD, and late year opex against a declining revenue is what pulls it back."
  },
  {
-  "prompt": "On the Designer's defaults the Concessionary regime reads 46.3452 percent in the summary and 59.6210 percent on the price chart at the base price. Which one is the rate on profit, and why do they differ?",
+  "prompt": "On the Designer's defaults the Concessionary regime reads 46.3452 percent in the summary and 59.6210 percent on the price chart at the base price. Which one is government share of net revenue, and why do they differ?",
   "options": [
    "The summary's 46.3452, because it adds total capex back to the contractor side, while the chart's 59.6210 divides the same two totals with nothing added back.",
    "The chart's 59.6210, because the sweep re-runs the whole ledger at each of its nine prices and therefore works on profit, while the summary reports a single ratio taken on cash.",
@@ -421,9 +421,9 @@
   "prompt": "On the default project the price climb and the capex loss rank the six templates in nearly the same order. What connects the two sweeps?",
   "options": [
    "A regime that takes a rising share of the upside absorbs a share of the downside, so the contractor's NPV under it moves less when capital cost rises.",
-   "Both sweeps are computed from the same series, since the capex sweep is the price sweep re-expressed in money rather than in percentage points of government take.",
+   "They are computed from the same series, since the capex sweep is the price sweep re-expressed in money rather than in percentage points of government take.",
    "Both sweeps hold the other variable at the base case, so the two rankings are the same ranking measured twice.",
-   "Both are endpoint differences over eight points, so a regime that leads one must lead the other by construction."
+   "Each is an endpoint difference over eight points, so a regime that leads one must lead the other by construction."
   ],
   "answer": 0,
   "explanation": "The two steepest climbers give up the least at 100.7185 and 88.6123 million USD and the two most regressive give up 244.0782 and 267.7301, while Nigeria - PIA (2021), almost flat at -0.0068, gives up 243.6525, so the orders still differ row for row."
@@ -459,6 +459,6 @@
    "That the sweep reaches its endpoint rather than approaching it, which is the check a step count buys over an accumulating sum."
   ],
   "answer": 3,
-  "explanation": "The golden also pins the grid itself as `capexGrid`, eight multipliers from 0.8 to 1.5, so neither the count nor the labels can drift back."
+  "explanation": "The golden also pins the grid itself as `capexGrid`, eight multipliers from 0.8 to 1.5, so the count and the labels are pinned as well as the values."
  }
 ]

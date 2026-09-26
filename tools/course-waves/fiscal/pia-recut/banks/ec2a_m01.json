@@ -24,10 +24,10 @@
  {
   "prompt": "The summary comes back sorted. What can be read off a row's position, and what tie break applies when two regimes match?",
   "options": [
-   "Contractor NPV descending, with the payback year as the secondary key wherever two NPVs are equal.",
+   "Contractor NPV descending, with the payback year as the secondary key wherever two NPVs are equal, so the faster regime is listed first on a tie.",
    "Contractor NPV descending and nothing else, and there is no secondary key at all, so equal NPVs keep the order they were passed in.",
-   "Contractor NPV descending and government cash flow ascending together, since the two mirror each other.",
-   "The internal rate of return descending, so rank 3 at 40.2125 percent above rank 4 at 44.0823 is an error."
+   "Contractor NPV descending and government cash flow ascending together, since the two mirror each other on every comparison the engine runs.",
+   "The internal rate of return descending, so rank 3 at 40.2125 percent sitting above rank 4 at 44.0823 percent is an error in the sort."
   ],
   "answer": 1,
   "explanation": "summary[0] is the best regime for the contractor and nothing else can be read off a position, and the comparison exposes no option to sort on another column."
@@ -35,9 +35,9 @@
  {
   "prompt": "On the default project rank 3 returns an internal rate of return of 40.2125 percent and rank 4 returns 44.0823 percent. What has gone wrong?",
   "options": [
-   "The two rates were solved at different discount rates, because the bisection reruns each regime against its own hurdle.",
+   "Each rate was solved at a different discount rate, since the solver reruns each regime against its own hurdle.",
    "The rank 3 regime failed to converge, so the solver reported the edge of its own bracket in that row instead of a root.",
-   "The rows were ordered on the payback year, which puts a regime with a later payout above one with a higher rate.",
+   "A payback sort ordered the rows, which puts a regime with a later payout above one with a higher rate.",
    "Nothing at all."
   ],
   "answer": 3,

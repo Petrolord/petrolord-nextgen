@@ -80,9 +80,9 @@
   "prompt": "The nine published capex cases run multipliers of 0.7 to 1.5 and return NPVs from 220.1703 down to 41.2671 million USD. Which regime do they run?",
   "options": [
    "The Designer's sample PSC regime, the one the price cases also use, which is not the Nigeria - PIA (2021) template despite the country in its engine name.",
-   "The Nigeria - PIA (2021) template, which is why the case at a multiplier of 1.0 returns the same NPV as that template's summary row.",
-   "All six templates at once, with the case reporting the best contractor NPV of the six at each multiplier.",
-   "The Brazil - Concession template, the regime whose resource rent tax makes a capex sweep worth publishing at all."
+   "The Nigeria - PIA (2021) template, which is why the case at a multiplier of 1.0 returns the same NPV as that template's summary row on the default project, 432.0925 million USD.",
+   "All six templates at once, with the case reporting the best contractor NPV of the six at each multiplier, which is why its NPV falls more slowly than any one template's.",
+   "The Brazil - Concession template, the regime whose resource rent tax makes a capex sweep worth publishing at all, since its uplifted pool is the one quantity a capex multiplier scales."
   ],
   "answer": 0,
   "explanation": "Two ranges live in one engine: the sweep visits 0.8 to 1.5 on the six templates and the published cases 0.7 to 1.5 on the Designer's sample PSC regime, where payback slips from year 3 to year 6."

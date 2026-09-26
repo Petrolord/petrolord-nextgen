@@ -23,13 +23,13 @@
   "prompt": "USA - Gulf of Mexico shows a price climb of -17.2498 percentage points and Generic Royalty/Tax -10.1897 on the default project. What makes those two regressive?",
   "options": [
    "A fixed royalty rate and a fixed tax rate on a growing profit hand the government a shrinking fraction once cost recovery has been paid off.",
-   "A cost recovery limit that rises with price, which returns more of the contractor's cost before any split is taken.",
+   "A cost recovery limit that rises with price, which returns more of the contractor's cost before any split is taken and so shrinks the state's share of each barrel.",
    "A profit split tiered on the R factor, which walks the contractor into a more generous tranche as revenue grows.",
-   "A minimum tax that binds at low prices and stops binding once the computed charge exceeds it."
+   "A minimum tax that binds at low prices and stops binding once the computed charge exceeds it, which flattens the government's share as price rises."
   ],
   "answer_index": 0,
   "explanation": "Brazil - Concession climbs the most at 20.5076 percentage points, the two templates whose split is tiered on the R factor climb by 19.6873 and 7.8960, and Nigeria - PIA (2021) is almost flat at -0.0068.",
-  "why": "only two templates split on the R factor; the PIA template is almost flat"
+  "why": "only two templates split on the R factor; the PIA template is almost flat; audit: key was uniquely longest; distractors lengthened (neither template has a minimum tax or a rising limit)"
  },
  {
   "tier": "advanced",
@@ -100,7 +100,7 @@
   "scope": "final",
   "module_key": null,
   "ord": 35,
-  "prompt": "On the Designer's defaults the Concessionary regime reads 46.3452 percent in the summary and 59.6210 percent on the price chart at the base price. Which one is the rate on profit, and why do they differ?",
+  "prompt": "On the Designer's defaults the Concessionary regime reads 46.3452 percent in the summary and 59.6210 percent on the price chart at the base price. Which one is government share of net revenue, and why do they differ?",
   "options": [
    "The summary's 46.3452, because it adds total capex back to the contractor side, while the chart's 59.6210 divides the same two totals with nothing added back.",
    "The chart's 59.6210, because the sweep re-runs the whole ledger at each of its nine prices and therefore works on profit, while the summary reports a single ratio taken on cash.",
@@ -109,7 +109,7 @@
   ],
   "answer_index": 0,
   "explanation": "The Designer's sample PSC regime, whose values are illustrative samples, shows the same pair, 56.5354 against 72.7302, a gap of 16.1948 percentage points on one screen.",
-  "why": "L6: the Designer's sample PSC regime"
+  "why": "L6: the Designer's sample PSC regime; audit: WRONG KEY: the summary 46.3452 is government share of net revenue (capex added back); the rate on profit is the chart 59.6210 (governmentTakePct). Question re-pointed so the keyed option is true; options unchanged"
  },
  {
   "tier": "advanced",
@@ -135,13 +135,13 @@
   "prompt": "On the default project the price climb and the capex loss rank the six templates in nearly the same order. What connects the two sweeps?",
   "options": [
    "A regime that takes a rising share of the upside absorbs a share of the downside, so the contractor's NPV under it moves less when capital cost rises.",
-   "Both sweeps are computed from the same series, since the capex sweep is the price sweep re-expressed in money rather than in percentage points of government take.",
+   "They are computed from the same series, since the capex sweep is the price sweep re-expressed in money rather than in percentage points of government take.",
    "Both sweeps hold the other variable at the base case, so the two rankings are the same ranking measured twice.",
-   "Both are endpoint differences over eight points, so a regime that leads one must lead the other by construction."
+   "Each is an endpoint difference over eight points, so a regime that leads one must lead the other by construction."
   ],
   "answer_index": 0,
   "explanation": "The two steepest climbers give up the least at 100.7185 and 88.6123 million USD and the two most regressive give up 244.0782 and 267.7301, while Nigeria - PIA (2021), almost flat at -0.0068, gives up 243.6525, so the orders still differ row for row.",
-  "why": "three templates now fall on the price sweep; PIA gives up 243.6525"
+  "why": "three templates now fall on the price sweep; PIA gives up 243.6525; audit: opening tell removed"
  },
  {
   "tier": "advanced",
@@ -172,8 +172,8 @@
    "That the sweep reaches its endpoint rather than approaching it, which is the check a step count buys over an accumulating sum."
   ],
   "answer_index": 3,
-  "explanation": "The golden also pins the grid itself as `capexGrid`, eight multipliers from 0.8 to 1.5, so neither the count nor the labels can drift back.",
-  "why": "PIA template capex endpoint 255.8175 against base 432.0925"
+  "explanation": "The golden also pins the grid itself as `capexGrid`, eight multipliers from 0.8 to 1.5, so the count and the labels are pinned as well as the values.",
+  "why": "PIA template capex endpoint 255.8175 against base 432.0925; audit: repair framing removed"
  },
  {
   "tier": "advanced",
@@ -198,14 +198,14 @@
   "ord": 3,
   "prompt": "The summary comes back sorted. What can be read off a row's position, and what tie break applies when two regimes match?",
   "options": [
-   "Contractor NPV descending, with the payback year as the secondary key wherever two NPVs are equal.",
+   "Contractor NPV descending, with the payback year as the secondary key wherever two NPVs are equal, so the faster regime is listed first on a tie.",
    "Contractor NPV descending and nothing else, and there is no secondary key at all, so equal NPVs keep the order they were passed in.",
-   "Contractor NPV descending and government cash flow ascending together, since the two mirror each other.",
-   "The internal rate of return descending, so rank 3 at 40.2125 percent above rank 4 at 44.0823 is an error."
+   "Contractor NPV descending and government cash flow ascending together, since the two mirror each other on every comparison the engine runs.",
+   "The internal rate of return descending, so rank 3 at 40.2125 percent sitting above rank 4 at 44.0823 percent is an error in the sort."
   ],
   "answer_index": 1,
   "explanation": "summary[0] is the best regime for the contractor and nothing else can be read off a position, and the comparison exposes no option to sort on another column.",
-  "why": "ranks moved: GoM rank 3, Brazil rank 4"
+  "why": "ranks moved: GoM rank 3, Brazil rank 4; audit: key was uniquely longest; distractors lengthened"
  },
  {
   "tier": "advanced",
@@ -214,14 +214,14 @@
   "ord": 4,
   "prompt": "On the default project rank 3 returns an internal rate of return of 40.2125 percent and rank 4 returns 44.0823 percent. What has gone wrong?",
   "options": [
-   "The two rates were solved at different discount rates, because the bisection reruns each regime against its own hurdle.",
+   "Each rate was solved at a different discount rate, since the solver reruns each regime against its own hurdle.",
    "The rank 3 regime failed to converge, so the solver reported the edge of its own bracket in that row instead of a root.",
-   "The rows were ordered on the payback year, which puts a regime with a later payout above one with a higher rate.",
+   "A payback sort ordered the rows, which puts a regime with a later payout above one with a higher rate.",
    "Nothing at all."
   ],
   "answer_index": 3,
   "explanation": "Nigeria - PIA (2021) leads on NPV at 432.0925 million USD with a rate of 46.7732 percent, USA - Gulf of Mexico sits at rank 3 with 382.0660 and 40.2125, and Brazil - Concession at rank 4 with 287.2804 and 44.0823, so the higher rate and the higher NPV belong to different regimes.",
-  "why": "ranks moved; PIA leads the default sort"
+  "why": "ranks moved; PIA leads the default sort; audit: opening tell removed (three distractors opened \"The\")"
  },
  {
   "tier": "advanced",
@@ -268,8 +268,8 @@
    "Cost recovery was capped by the profit oil split rather than by the limit, since a low price walks the R factor into a generous tranche."
   ],
   "answer_index": 0,
-  "explanation": "A limit that never binds at the deck price binds at 40 USD per bbl, where NPV is -51.1673 million USD and the engine names no internal rate of return at all.",
-  "why": "L6: the Designer's sample PSC regime"
+  "explanation": "At the deck price the limit binds only in the first four years and the pool clears; at 40 USD per bbl the pool is still open after year 25, NPV is -51.1673 million USD, and the engine reports no single IRR, the NPV being zero at -40.1442 and 6.6994 percent.",
+  "why": "L6: the Designer's sample PSC regime; audit: explanation said the limit never binds at the deck price (it binds in years 1 to 4) and that no rate exists at 40 (status multiple-roots, two roots)"
  },
  {
   "tier": "advanced",
@@ -284,8 +284,8 @@
    "The Designer's sample PSC regime, id 1, which the engine names Nigerian PIA (PSC)."
   ],
   "answer_index": 3,
-  "explanation": "The template and the Designer's sample PSC regime, whose values are illustrative samples, share little: the sample regime recovers cost to 70 percent of revenue after royalty and charges royalty of 12.5 percent from 60 USD/bbl, while the template recovers to 70 percent of the gross value of crude oil and NGL and charges the PIA 2021 royalty. The template returns 432.0925 million USD on that project and the sample regime 169.7176.",
-  "why": "template NPV 432.0925; template instruments re-stated; L6 naming"
+  "explanation": "The template and the Designer's sample PSC regime, whose values are illustrative samples, share little: the sample regime recovers cost to 70 percent of revenue after royalty and charges a royalty of 12.5 percent below 80 USD/bbl and 15 percent from 80, while the template recovers to 70 percent of the gross value of crude oil and NGL and charges the PIA 2021 royalty. The template returns 432.0925 million USD on that project and the sample regime 169.7176.",
+  "why": "template NPV 432.0925; template instruments re-stated; L6 naming; audit: the lowest tier applies below every threshold, so 12.5 percent also runs below 60"
  },
  {
   "tier": "advanced",
@@ -343,13 +343,13 @@
   "prompt": "A capex sweep written as a loop that adds 0.1 to a multiplier starting at 0.8, while it stays at or below 1.5, returns seven points and its last reads 1.4. What ends that loop early?",
   "options": [
    "Accumulating 0.1 in binary floating point arrives at 1.5000000000000004, which is greater than 1.5.",
-   "The engine refused a multiplier above 1.4 because no cost recovery limit can absorb a larger overrun.",
-   "The eighth point returned a negative NPV for one regime, so the sweep dropped it.",
+   "A refusal by the engine of any multiplier above 1.4, because no cost recovery limit can absorb a larger overrun.",
+   "Its eighth point returned a negative NPV for one regime, so the sweep dropped it.",
    "The label came from the loop bound and the points from a step count."
   ],
   "answer_index": 0,
   "explanation": "The engine sweeps a fixed grid of eight multipliers, so Nigeria - PIA (2021) returns 255.8175 million USD of contractor NPV at 1.5 as a swept point, against 291.8238 at 1.4.",
-  "why": "PIA capex points 255.8175 at 1.5 and 291.8238 at 1.4; repair history removed"
+  "why": "PIA capex points 255.8175 at 1.5 and 291.8238 at 1.4; repair history removed; audit: opening tell removed"
  },
  {
   "tier": "advanced",
@@ -358,14 +358,14 @@
   "ord": 8,
   "prompt": "The nine published capex cases are named capex_0.7_pia_default to capex_1.5_pia_default. How do they relate to the sweep the chart draws?",
   "options": [
-   "They are the swept points themselves, published one case per label on the chart's axis.",
+   "Identical to the swept points, published one case per label on the chart's axis.",
    "They are the same regime as the chart over a shifted range, the Nigeria - PIA (2021) template under the name the Designer gives it.",
-   "They are the oracle's own sweep rather than the engine's, published so that the two can be compared point by point.",
+   "The oracle's own sweep rather than the engine's, published so that the two can be compared point by point.",
    "A different range on a different regime."
   ],
   "answer_index": 3,
   "explanation": "The published set runs the Designer's sample PSC regime, id 1, at multipliers of 0.7 to 1.5, returning 169.7176 million USD of NPV at 1.0 where the template returns 432.0925, and the chart sweeps 0.8 to 1.5 on the six templates.",
-  "why": "template NPV 432.0925"
+  "why": "template NPV 432.0925; audit: opening tell removed"
  },
  {
   "tier": "advanced",
@@ -487,13 +487,13 @@
   "prompt": "The nine published capex cases run multipliers of 0.7 to 1.5 and return NPVs from 220.1703 down to 41.2671 million USD. Which regime do they run?",
   "options": [
    "The Designer's sample PSC regime, the one the price cases also use, which is not the Nigeria - PIA (2021) template despite the country in its engine name.",
-   "The Nigeria - PIA (2021) template, which is why the case at a multiplier of 1.0 returns the same NPV as that template's summary row.",
-   "All six templates at once, with the case reporting the best contractor NPV of the six at each multiplier.",
-   "The Brazil - Concession template, the regime whose resource rent tax makes a capex sweep worth publishing at all."
+   "The Nigeria - PIA (2021) template, which is why the case at a multiplier of 1.0 returns the same NPV as that template's summary row on the default project, 432.0925 million USD.",
+   "All six templates at once, with the case reporting the best contractor NPV of the six at each multiplier, which is why its NPV falls more slowly than any one template's.",
+   "The Brazil - Concession template, the regime whose resource rent tax makes a capex sweep worth publishing at all, since its uplifted pool is the one quantity a capex multiplier scales."
   ],
   "answer_index": 0,
   "explanation": "Two ranges live in one engine: the sweep visits 0.8 to 1.5 on the six templates and the published cases 0.7 to 1.5 on the Designer's sample PSC regime, where payback slips from year 3 to year 6.",
-  "why": "L6: the Designer's sample PSC regime"
+  "why": "L6: the Designer's sample PSC regime; audit: key was uniquely longest; distractors lengthened"
  },
  {
   "tier": "advanced",
@@ -550,14 +550,14 @@
   "ord": 7,
   "prompt": "A regime in this sandbox is four fields. Which are they?",
   "options": [
-   "The royalty, the discount rate, the profit split and the tax block, since the rate is what turns a regime's timing into a value.",
-   "The royalty, the cost recovery limit, the capex schedule and the tax block, because when capital is spent decides what is recovered.",
+   "The royalty, the discount rate, the profit split and the tax block, since the rate is what turns a regime's timing into a value and each template carries the rate it was written for.",
+   "The royalty, the cost recovery limit, the capex schedule and the tax block, because when capital is spent decides what is recovered, and a regime that moved capex to year 3 would recover it later.",
    "The royalty, flat, sliding on price or the PIA 2021 royalty; the cost recovery limit and its base; the profit split, flat, tiered on the R factor or by cumulative production; and the tax block.",
-   "The royalty, the cost recovery limit, the profit split and the production forecast, which is what makes one regime harsher than another."
+   "The royalty, the cost recovery limit, the profit split and the production forecast, which is what makes one regime harsher than another, since a regime that shortens the forecast shortens the government's collection too."
   ],
   "answer_index": 2,
   "explanation": "The tax block holds corporate income tax, the resource rent tax, a minimum tax and an `rrtUpliftPct` that defaults to 20 when the field is absent.",
-  "why": "the four fields admit the PIA 2021 royalty, the liquids-gross cost base and the cumulative-production split"
+  "why": "the four fields admit the PIA 2021 royalty, the liquids-gross cost base and the cumulative-production split; audit: key was uniquely longest by 57 characters; distractors lengthened"
  },
  {
   "tier": "advanced",
@@ -567,13 +567,13 @@
   "prompt": "Under the PIA template on ODIDI, cumulative contractor net cash flow first turns positive in year 7 at 43.8352 million USD, against capex of 420.0000. What does the payback year say?",
   "options": [
    "That the contractor had recovered the whole 420.0000 million USD of capex, and 43.8352 million USD of profit on top of it, by the end of year 7 discounted at 12 percent.",
-   "That the project is viable, since a payback inside the first third of a 25 year life is what the summary's payback column is there to show.",
+   "The project is viable, since a payback inside the first third of a 25 year life is what the summary's payback column is there to show.",
    "Only that the cumulative crossed zero in that year, on a field where the cumulative later peaks at 250.9149 and falls back to 229.9586 million USD by year 25.",
-   "That year 7 is the best year of the ledger, because it is the year the contractor's own cash position stopped falling and began to rise."
+   "Year 7 is the best year of the ledger, because it is the year the contractor's own cash position stopped falling and began to rise."
   ],
   "answer_index": 2,
   "explanation": "Payback is undiscounted and is a first crossing rather than a maximum, and the same ledger returns an NPV of only 1.7389 million USD at 12 percent.",
-  "why": "PIA ODIDI cumulative: year 7 43.8352, peak 250.9149, year 25 229.9586, NPV +1.7389"
+  "why": "PIA ODIDI cumulative: year 7 43.8352, peak 250.9149, year 25 229.9586, NPV +1.7389; audit: opening tell removed"
  },
  {
   "tier": "advanced",
@@ -646,14 +646,14 @@
   "ord": 26,
   "prompt": "Two published cases have an NPV at 10 percent of 25.6198 and of -16.5289 million USD: one never changes sign, the other is -100 then 90. What does `calculateIRR` return for each?",
   "options": [
-   "Null with the status no-root on both, neither having a rate inside the band from -99 to 1000 percent.",
-   "Null with the status no-sign-change on the profitable one, and the negative root itself, -10.0000 percent, on the one that loses money at every rate.",
-   "0.0000 percent on the profitable one and null on the other, the engine still declining to print a negative rate.",
-   "-10.0000 percent on both, the shared contract reporting the nearest root inside the band whatever the flows do."
+   "Null with the status no-root on both, neither having a rate inside the band from -99 to 1000 percent that brings its NPV to zero at year-end discounting.",
+   "Null with the status no-sign-change on the profitable one, and the negative root itself, -10.0000 percent, on the one that loses money at every positive rate.",
+   "0.0000 percent on the profitable one and null on the other, the engine still declining to print a negative rate even where the only root lies well inside its band.",
+   "-10.0000 percent on both, the shared contract reporting the nearest root inside the band whatever the flows do, including flows that never change sign."
   ],
   "answer_index": 1,
   "explanation": "A profitable flow with no sign change has no rate to report, and a loss at every positive rate has a real negative root; a reader who would accept 0.0000 percent for either has read neither status.",
-  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history"
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history; audit: key said the -100/90 flow loses money at every rate (NPV is positive at -50 percent); now \"every positive rate\"; key no longer uniquely longest"
  },
  {
   "tier": "advanced",
@@ -664,12 +664,12 @@
   "options": [
    "243.6525 million USD, since the last step of a sweep carries its whole loss once the grid reaches the overrun on the label.",
    "255.8175 million USD, the NPV at 1.5, because a loss is read from the endpoint of the axis and never from a difference.",
-   "About 15 percent of the range loss, which is the share of the axis the last step covers, one step in seven.",
-   "About 36.01 million USD, roughly a seventh of the loss over the sweep."
+   "34.81 million USD, the range loss of 243.6525 spread evenly over the seven steps, since a sweep loses the same amount at every step.",
+   "About 36.01 million USD, the swept point at 1.4 minus the swept point at 1.5."
   ],
   "answer_index": 3,
   "explanation": "The last step is the 1.4 point minus the 1.5 point; the range loss runs from the first swept point at 0.8 to the eighth at 1.5, and the two are different spans of one sweep.",
-  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history"
+  "why": "L5 (lead decision 4): state the IRR contract and the eight-point sweep as they are, no retired-solver or retired-loop history; audit: distractor \"about 15 percent of the range loss\" was TRUE (36.0062 / 243.6525 = 14.78 percent); replaced by a false even-split figure (34.8075); key drops \"roughly a seventh\""
  },
  {
   "tier": "advanced",
