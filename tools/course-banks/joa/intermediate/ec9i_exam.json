@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "Add up what the paying parties are asked for in March 2027 on the Ekene ledger: forecast 12000000.000000, January's 400000 over-call arriving under a two-month lag, credits carried, threshold 500000.000000.",
+  "options": [
+   "12000000.000000, the whole forecast, the credit waiting for the year-end reconciliation",
+   "11200000.000000, March's own actual, since a call is trued up to the month's spend",
+   "11600000.000000",
+   "The forecast with the credit added on top"
+  ],
+  "answer": 2,
+  "explanation": "March's month row prints calls of 11600000.000000 on a forecast of 12000000.000000: January's over-call reaches March two months later and reduces each paying party's call by its own January difference. 11200000.000000 is March's actual, known only after the call. A credit lowers a call; it never raises it."
+ },
+ {
+  "prompt": "On the Ekene ledger (lag 2 months, rule \"carry\", threshold 500000.000000), EKO over-calls by 200000.000000 in January and under-calls by -250000.000000 in February. What balance with the operator does EKO hold at the end of February 2027?",
+  "options": [
+   "-50000.000000",
+   "200000.000000, since February's under-call is not counted until the call it adjusts",
+   "-250000.000000, February's difference alone, as January's credit was used up in February",
+   "0.000000, the January credit and the February under-call cancelling out"
+  ],
+  "answer": 0,
+  "explanation": "EKO's February row prints a balance of -50000.000000: both differences are still waiting for the calls their lag names, and the balance with the operator counts the differences not yet adjusted. January's credit is used in March, so it is still held at the end of February."
+ },
+ {
+  "prompt": "October 2027 on the Ekene ledger (lag 2 months, rule \"carry\", threshold 500000.000000) meets two things at once: August's under-call and the credit carried from September. What does EKO's October row show?",
+  "options": [
+   "An adjustment of 100000.000000, the carried credit alone, since an under-call waits for the month after a carried credit is spent",
+   "An adjustment of -52000.000000, August's under-call alone, the carried credit waiting a month",
+   "A call of 4000000.000000, the forecast share, with both items netted at the close",
+   "An adjustment of 48000.000000 and a call of 3952000.000000 on a forecast share of 4000000.000000"
+  ],
+  "answer": 3,
+  "explanation": "The engine applies both in October: \"2027-10: the under-call of 104000 in 2027-08 (forecast 3000000, actual 3104000) is added to this cash call, 2 months later\" and \"2027-10: a credit of 200000 held from 2027-09 is applied to this cash call\". EKO's row prints an adjustment of 48000.000000 and a call of 3952000.000000."
+ },
+ {
+  "prompt": "EKO's forecast share for December 2027 is 2500000.000000, and October's under-call of 400000 reaches that call under the Ekene terms (lag 2, carry, threshold 500000.000000). What is EKO asked for?",
+  "options": [
+   "The forecast share less the under-call, as if it were a credit",
+   "2700000.000000 on a forecast share of 2500000.000000, its adjustment being -200000.000000",
+   "2500000.000000, as an under-call is billed in arrears in the next month",
+   "The whole 400000 under-call added to EKO's call alone as operator"
+  ],
+  "answer": 1,
+  "explanation": "An under-call adds to the call it reaches: EKO's December row prints an adjustment of -200000.000000, its half of October's 400000, and a call of 2700000.000000, the engine's reason naming October's forecast of 8000000 and actual of 8400000. Treating the under-call as a credit moves the call the wrong way, and arrears billing is only for spend made in a month with no call."
+ },
+ {
+  "prompt": "Three parties (A 50, B 30, C 20 percent) run cc-zero-call-month: a one-month lag, credits carried, no threshold. January over-calls by 200 and February is forecast at 0.000000. What happens in February and March?",
+  "options": [
+   "February is called at 0.000000 with 200.000000 carried; March is called 200.000000 on a forecast of 400.000000",
+   "February makes no call, its forecast being 0; January's credit waits and March is called 400.000000",
+   "February is called -200.000000, the credit refunded; March is called 400.000000",
+   "February and March are each called 0.000000"
+  ],
+  "answer": 0,
+  "explanation": "With no threshold, February is called: \"2027-02: a forecast of 0: the cash call is the adjustment alone\", and under \"carry\" the credit waits (\"the call is 0 and the rest of the credit is carried to the next cash call\"). March applies it: \"2027-03: a credit of 200 held from 2027-02 is applied to this cash call\". A negative call of -200.000000 is the \"refund\" rule's answer."
+ },
+ {
+  "prompt": "A ledger's final month, December 2027, is forecast at just 100.000000 against a threshold of 500 (cc-last-month-uncalled, two-month lag, credits carried) and spends 120.000000. How is December treated?",
+  "options": [
+   "It calls the 100.000000 anyway, since the last month of a ledger is always called to close the year",
+   "It refuses the ledger, as its last month cannot be billed in arrears inside the months given",
+   "It makes no call, and its reason says the actual is billed in arrears in the next month",
+   "It adds December's 120.000000 to November's call"
+  ],
+  "answer": 2,
+  "explanation": "The forecast of 100 is below the stated threshold, so December is not called: \"2027-12: no cash call: the forecast 100 is below the stated threshold 500; the actual is billed in arrears in the next month\". A month's own call is never re-opened, and the last month gets no special rule."
+ },
+ {
+  "prompt": "A cash call ledger lists 2027-01 and then 2027-03 as its first two months. What does the engine return?",
+  "options": [
+   "A ledger that treats February as a month with a zero forecast and calls only the adjustment in it",
+   "A ledger of two months, the gap ignored, with January's difference adjusting the March call",
+   "A ledger in which the missing month is billed in arrears in March",
+   "A refusal naming months[1].month, which must be 2027-02, the months being consecutive"
+  ],
+  "answer": 3,
+  "explanation": "The engine refuses the gap, in its own words: months[1].month must be 2027-02, the month after 2027-01 (the months are consecutive); got \"2027-03\". It invents no missing month and skips nothing, because the lag counts calendar months."
+ },
+ {
+  "prompt": "The golden input carry-partial-stated states parties A 60, B 20 and N 20 percent, a compound uplift of 12.5 percent and carry recovery from 50 percent of N's share. 2029 opens at 12.500000 with 100.000000 available. What is recovered in 2029?",
+  "options": [
+   "12.500000, the opening balance, since a carried party pays no uplift on an uplift",
+   "14.062500, the balance with its uplift of 1.562500",
+   "100.000000, the whole amount available",
+   "12.500000, with 1.562500 written off"
+  ],
+  "answer": 1,
+  "explanation": "The uplift is charged on the opening balance, 12.5 percent of 12.500000 being 1.562500, and the balance of 14.062500 is less than the 100.000000 available: \"2029: the balance 14.06 is recovered with 14.06 of the 100 available; the carried party receives 185.94 of its share 200\". Compounding charges uplift on an uplift carried forward, and nothing is written off without a cap."
+ },
+ {
+  "prompt": "On the Ekene carry (compound 8.000000 percent a year on the opening balance, carry recovery from 50.000000 percent of NOC's share, basis \"contract\"), 2030 is the first year NOC has entitlement. What closes 2030?",
+  "options": [
+   "What is left once the whole share of 19200000.000000 is taken against the balance",
+   "32088960.000000, the opening balance, since the carry recovery starts in the year after the first entitlement",
+   "What is left with the uplift charged only after the year's carry recovery is taken off",
+   "25056076.800000, after 9600000.000000 recovered of 34656076.800000 due"
+  ],
+  "answer": 3,
+  "explanation": "The engine's reason reads \"2030: 9600000 recovered of 34656076.8 due; 25056076.8 carried to 2031\". The stated carry recovery share is 50 percent of the share of 19200000.000000, so 9600000.000000 is available, and the uplift of 2567116.800000 is charged on the opening 32088960.000000 before the year-end carry recovery."
+ },
+ {
+  "prompt": "Across 2027 to 2036, how much uplift does the 8.000000 percent compound Ekene carry (half of NOC's share, basis \"contract\") earn in all, and how much do the carriers get back on their 28400000.000000?",
+  "options": [
+   "An uplift of 14200000.000000 and 42600000.000000 recovered",
+   "An uplift of 9529407.979520 and 25000000.000000 recovered",
+   "An uplift of 10067760.617882 and 38467760.617882 recovered",
+   "An uplift of 0.000000 and 28400000.000000 recovered, the Act barring any uplift on the Ekene carry"
+  ],
+  "answer": 2,
+  "explanation": "The totals print carried cost 28400000.000000, uplift 10067760.617882, recovered 38467760.617882 and nothing written off, recovered in 2033. 14200000.000000 and 42600000.000000 are the 150 percent multiple's totals; 9529407.979520 and 25000000.000000 are the capped carry's. The Act's bar on uplift applies under basis \"pia-s85-4\", which this carry does not state."
+ },
+ {
+  "prompt": "Which carrier gains from an uplift? At 0.100000 to 2027, EKO's value is 95024921.509253 when the Ekene carry compounds at 8.000000 percent from half of NOC's share under a contract. What is it when the carry follows s.85(4), with no uplift, from the whole share?",
+  "options": [
+   "92668197.518975, lower, as EKO recovers no uplift",
+   "95024921.509253, unchanged, since EKO's NPV depends only on its own costs and entitlement",
+   "96139876.399404, higher, since EKO is repaid sooner and so gains in value",
+   "54584252.437515, the carried party's figure"
+  ],
+  "answer": 0,
+  "explanation": "The canonical npv returns EKO 92668197.518975 on the Act's carry against 95024921.509253 on the compound carry: the carrier gives up the uplift. 96139876.399404 is EKO's NPV under the 150 percent multiple. 54584252.437515 is NOC's NPV on the Act's carry."
+ },
+ {
+  "prompt": "A learner builds a carryRecovery call on the Ekene carry and leaves out the basis. What does the engine return?",
+  "options": [
+   "A carry recovery under the contract basis, the Act's basis applying only when stated",
+   "A carry recovery under the Act, since NOC is the state participant",
+   "A carry recovery with no basis line in its report",
+   "Refused, the basis being a required term the engine picks for no caller"
+  ],
+  "answer": 3,
+  "explanation": "The basis is a required term: the engine refuses a call without it and chooses neither basis for the caller. Only the stated basis \"pia-s85-4\" brings in the Act's bar on uplift; a party's name brings in nothing."
+ },
+ {
+  "prompt": "In the first year of NOC's entitlement after its back-in to 40 percent under the Act (half its new share available), how much of the refund of 98000000.000000 is paid back, and what is left?",
+  "options": [
+   "38400000.000000 recovered, the whole new share, as the Act takes the refund from future production",
+   "19200000.000000 recovered of NOC's share of 38400000.000000, and 78800000.000000 carried to 2031",
+   "9600000.000000 recovered, half of NOC's old 20 percent share",
+   "Nothing recovered until 2031, a year after participation"
+  ],
+  "answer": 1,
+  "explanation": "The engine's reason reads \"2030: 19200000 recovered of 98000000 due; 78800000 carried to 2031\"; NOC's new share of 38400000.000000 makes 19200000.000000 available at the stated 50 percent, and NOC receives the other 19200000.000000. The refund recovery reads the new share after the back-in."
+ },
+ {
+  "prompt": "On backin-pia-at-60 NOC backs in from 20 to 60 percent under basis \"pia-s85-4\". What does EKO hold after it, and what refund does it receive?",
+  "options": [
+   "0.000000, EKO ceding all 40 points as operator, and a refund of 196000000.000000",
+   "30.000000, as in the back-in to 40, and a refund of 49000000.000000",
+   "20.000000, and no refund, since at the ceiling the Act refunds nothing",
+   "20.000000, keeping 40 / 80 of its 40, and a refund of 98000000.000000"
+  ],
+  "answer": 3,
+  "explanation": "The engine's reason reads \"NOC backs in from 20% to 60%: the others keep 40 / 80 of their interests; refund 40% x refundable costs 490000000 = 196000000 (156000000 excluded)\"; its table prints EKO after 20.000000 and a refund received of 98000000.000000, in proportion to the 20.000000 points EKO gives up."
+ },
+ {
+  "prompt": "On backin-ekene-contract-upfront (basis \"contract\", refundable kinds stated to include exploration), what reason does the engine give for the signature bonus of 10000000.000000?",
+  "options": [
+   "It is not refundable, being not a stated refundable kind",
+   "It is not refundable under PIA s.85(4)(c), the Act's list applying to every back-in",
+   "It is refundable, a bonus being a proven cost of the licence",
+   "It is refundable at 20 percent, NOC's change of participating interest"
+  ],
+  "answer": 0,
+  "explanation": "Under a contract basis the reason reads \"signature bonus: 10000000 (bonus) is not refundable (not a stated refundable kind)\". The same line under the Act reads the s.85(4)(c) citation. The basis decides which list applies."
+ },
+ {
+  "prompt": "Under basis \"contract\", a learner forgets to list which cost kinds may be refunded. What comes back?",
+  "options": [
+   "A back-in using the Act's development and production list",
+   "A back-in in which every cost line is refundable",
+   "A refusal: under a contract the refundable kinds must be stated, with no default",
+   "A back-in in which no line is refundable, the refund being 0.000000"
+  ],
+  "answer": 2,
+  "explanation": "The engine's message reads: refundableKinds must be an array of cost kinds stated under basis \"contract\" (exploration, development, production, bonus, penalty, interest, premium, markup; no default); got nothing. The Act's list is used only under \"pia-s85-4\", and a contract's list is never guessed."
+ },
+ {
+  "prompt": "Paid in one sum on entry (refundForm \"upfront\", basis \"contract\"), a refund is typed together with a list of future years. What comes back?",
+  "options": [
+   "An upfront refund, with the years serving to discount it",
+   "A refusal naming years, which must be left out when the refund is paid upfront",
+   "A refund recovered from the stated years, the upfront form set aside",
+   "A refusal naming refundForm, since an upfront refund is barred on every basis"
+  ],
+  "answer": 1,
+  "explanation": "The engine refuses the extra term: years must be left out when refundForm is \"upfront\". An upfront refund has no refund recovery ledger. The bar on an upfront refund is the Act's and applies under \"pia-s85-4\"; the contract-basis case backin-ekene-contract-upfront returns a refund of 125200000.000000."
+ },
+ {
+  "prompt": "Suppose PB never cures its Ekene default and the call is read at 2027-07-01, with simple default interest at 8.250000 percent on 360 days and no grace. What does the engine charge?",
+  "options": [
+   "55569.791577 on 4 whole months, the method switching to monthly once a month has passed",
+   "20625.000000, the default interest stopping at the cure date the fixture states",
+   "56718.750000, the default interest received by EKO when it covers two defaulters",
+   "55916.666667 on 122 days"
+  ],
+  "answer": 3,
+  "explanation": "The engine's reason reads \"interest 2000000 x 8.25% x 122 days / 360 = 55916.67 (from 2027-03-01 to asOf 2027-07-01, the default still open, the last date excluded)\". 55569.791577 is the monthly-compound case; the method is a stated term. An open default runs to asOf."
+ },
+ {
+  "prompt": "On default-monthly-compound-uncured PB's 2000000.000000 is still unpaid four months after its due date, at 8.25 percent compounded monthly on 360 days with a 72-hour grace. What is charged?",
+  "options": [
+   "55569.791577, on 4 whole months and 0 days",
+   "55916.666667 on 122 days",
+   "0.000000, the 72-hour grace suspending default interest while a default is open",
+   "56718.750000, compounding the four months and the 72 hours of grace on top"
+  ],
+  "answer": 0,
+  "explanation": "The reason prints \"interest 2000000 x ((1 + 8.25% / 12)^4 x (1 + 8.25% x 0 days / 360) - 1), 4 whole months and 0 days = 55569.79\". 55916.666667 is the simple figure on the same days. Past the grace, default interest runs from the due date."
+ },
+ {
+  "prompt": "On default-monthly-compound-whole-months PB (2000000.000000 unpaid, 8.250000 percent, monthly-compound, 360-day basis, grace 0 hours) cures on 2027-05-01, due 2027-03-01. What does the engine count?",
+  "options": [
+   "61 days simple, the month count being used only for defaults still open",
+   "1 whole month and 30 remaining days",
+   "27594.531250: two whole months, no days left over",
+   "2 whole months and 1 remaining day, the cure date counted in"
+  ],
+  "answer": 2,
+  "explanation": "A cure on a month anniversary gives whole months only: \"interest 2000000 x ((1 + 8.25% / 12)^2 x (1 + 8.25% x 0 days / 360) - 1), 2 whole months and 0 days = 27594.53\". The cure date is excluded, and months keep the day of the month."
+ },
+ {
+  "prompt": "On default-monthly-compound-month-end party C owes 200000.000000 from 2027-01-31, open at asOf 2027-04-15, at 12 percent, monthly-compound, 365-day basis, grace 0 hours. How does the engine count the time?",
+  "options": [
+   "74 days simple on a 365-day year",
+   "2 whole months and then 15 days, giving 5026.126027",
+   "2 whole months ending 2027-03-31, then 15 days, each month taken to the month end",
+   "3 whole months, the part-month rounded up"
+  ],
+  "answer": 1,
+  "explanation": "The reason prints \"interest 200000 x ((1 + 12% / 12)^2 x (1 + 12% x 15 days / 365) - 1), 2 whole months and 15 days = 5026.13\"; the field is 5026.126027. A month from a month end keeps the day of the month, the last day when the month is shorter."
+ },
+ {
+  "prompt": "PB's Ekene default earns 20625.000000 of default interest (8.250000 percent, simple, 360-day basis, grace 0 hours, cured 2027-04-15). How does the engine share it, as it states its cover?",
+  "options": [
+   "EKO and PA in equal halves, each having advanced part of the cover",
+   "EKO alone, as the operator that administers the joint account",
+   "EKO, PA and NOC by participating interest",
+   "EKO 12692.307692 and PA 7932.692308, in proportion to their cover"
+  ],
+  "answer": 3,
+  "explanation": "The engine's basis reads \"distributed to the parties financing the default in proportion to their cover\", and the table prints EKO 12692.307692 and PA 7932.692308. NOC, carried, advances none of the cover and receives none of the default interest."
+ },
+ {
+  "prompt": "Party C's default on default-working-days-holiday states suspension after 5 working-days from 2027-12-22, with stated holidays. When does the engine put the trigger?",
+  "options": [
+   "After 2028-01-03, working days being Monday to Friday less the stated holidays",
+   "After five calendar days, the weekend and the holidays counted like any other day",
+   "After the fifth weekday, the stated holidays ignored since the engine keeps no calendar of them",
+   "After 2028-01-05, the asOf date, since a suspension waits for the date the call is read at"
+  ],
+  "answer": 0,
+  "explanation": "The engine's reason reads \"the suspension of its rights (as the contract states) starts after 5 working days from 2027-12-22, that is after 2028-01-03: triggered, the default being open after 2028-01-03\". A weekend and the stated holidays fall inside the count."
+ },
+ {
+  "prompt": "PB's Ekene default states forfeiture after 3 months from 2027-03-10, a trigger date of 2027-06-10. The default is still open at asOf 2027-06-10 on one golden input and at asOf 2027-06-11 on another. What does the engine report?",
+  "options": [
+   "Triggered on both, as the default is open on the trigger date itself",
+   "Not triggered on either, forfeiture needing a fourth month",
+   "Not triggered at 2027-06-10; triggered at 2027-06-11",
+   "Triggered at 2027-06-10 and reported with the compensation computed"
+  ],
+  "answer": 2,
+  "explanation": "A consequence applies when the default is open after the whole trigger date: the first reads \"not triggered, the default being open only to asOf 2027-06-10\", the second \"triggered, the default being open after 2027-06-10\". The compensation on an assignment is reported only; the engine computes none."
+ },
+ {
+  "prompt": "A contract's default interest states a day basis of 366. What does the engine return?",
+  "options": [
+   "Default interest on a 366-day year, the stated basis being used as given",
+   "A refusal: interest.dayBasis must be 365 or 360; got 366",
+   "Default interest on a 365-day year, the nearest basis the engine accepts",
+   "Default interest on a 360-day year, the Norwegian agreement's basis"
+  ],
+  "answer": 1,
+  "explanation": "The engine accepts 365 or 360 and refuses anything else by name. It rounds no basis to the nearest accepted one, and the day basis is a stated term with no default."
+ },
+ {
+  "prompt": "Read the 2031 row of the Ekene PSC variant: royalty 12.5, a cost oil limit of 60 on gross, contractor share 60, tax 30, opening pool 142000000.000000. What royalty, cost recovered and profit oil does it hold?",
+  "options": [
+   "Royalty 24637500.000000, with only the year's capex and opex recovered and the pool carried in left alone",
+   "Royalty 27375000.000000, cost recovered 131400000.000000 and profit oil 60225000.000000",
+   "Royalty 24637500.000000, cost recovered 103477500.000000 and profit oil 68985000.000000",
+   "Royalty 24637500.000000, cost recovered 118260000.000000 and profit oil 54202500.000000"
+  ],
+  "answer": 3,
+  "explanation": "The 2031 row prints royalty 24637500.000000, cost recovered 118260000.000000 (the limit binds, the pool carried in being 400600000.000000) and profit oil 54202500.000000. The 2030 figures are 27375000.000000, 131400000.000000 and 60225000.000000. 103477500.000000 and 68985000.000000 are 2031 on the after-royalty base."
+ },
+ {
+  "prompt": "Add up the government's take over the ten years of the Ekene PSC variant, whose terms are a 12.5 percent royalty, cost oil capped at 60 percent of gross, a 60 percent contractor share, 30 percent tax and 142000000.000000 of opening pool. How much is it, and how much of it is tax?",
+  "options": [
+   "Government take 420489742.500000, of which tax 78453967.500000",
+   "Government take 174342150.000000, its profit oil alone, with tax counted to the contractor",
+   "Government take 78453967.500000, the tax alone",
+   "Government take 921059257.500000"
+  ],
+  "answer": 0,
+  "explanation": "The totals print government profit oil 174342150.000000, tax 78453967.500000, contractor entitlement 921059257.500000 and government take 420489742.500000. The government take counts more than its profit oil, and 921059257.500000 is the contractor's entitlement."
+ },
+ {
+  "prompt": "By 2038 the Ekene variant's pool is gone and opex is 28000000.000000 (a limit of 60 on gross after a 12.5 royalty). What is recovered, and against what limit?",
+  "options": [
+   "56563200.000000 recovered, the whole limit, the excess going to the contractor as cost oil",
+   "0.000000 recovered, since cost recovery ends when the pool is cleared",
+   "28000000.000000 recovered against a limit of 56563200.000000",
+   "49492800.000000 recovered, the limit binding"
+  ],
+  "answer": 2,
+  "explanation": "The 2038 row prints cost recovered 28000000.000000 and a limit of 56563200.000000: cost recovered is the lesser of what is recoverable and the limit. Opex stays recoverable after the pool is cleared. 49492800.000000 is the 2038 limit on the after-royalty base."
+ },
+ {
+  "prompt": "A 60.000000 percent limit is tried on both bases for 2030 of the Ekene PSC variant (12.5 royalty, 60 share, 30 tax, 142000000.000000 carried in). How much profit oil is left on each?",
+  "options": [
+   "76650000.000000 on gross and 60225000.000000 on revenue after royalty",
+   "Profit oil of 60225000.000000 with the gross limit, 76650000.000000 with the after-royalty one",
+   "60225000.000000 on both, the base changing only the pool",
+   "191625000.000000 on both, the revenue after royalty"
+  ],
+  "answer": 1,
+  "explanation": "On gross the limit of 131400000.000000 recovers more cost and leaves profit oil of 60225000.000000; on revenue after royalty the smaller limit of 114975000.000000 leaves 76650000.000000. The base moves the limit and so the split."
+ },
+ {
+  "prompt": "A learner types costRecoveryLimitPct in place of the engine's term for the limit. What does the engine return?",
+  "options": [
+   "A PSC run that reads the unknown key as costOilLimitPct, the nearest term the engine accepts, and says so in a reason",
+   "A PSC run with no limit, the unknown key dropped",
+   "A refusal naming costOilLimitPct as missing",
+   "Refused by name as a key the engine does not read, with its accepted keys listed"
+  ],
+  "answer": 3,
+  "explanation": "The engine refuses the key it does not read and lists the accepted keys: years, royaltyPct, costOilLimitPct, costOilLimitBase, contractorProfitSharePct, taxRatePct, openingCostPool, parties, discountRate, baseYear. It maps no key onto another and drops nothing silently."
+ },
+ {
+  "prompt": "PIA 2021 s.311(2)(a)(iii) sets a cost oil limit of not more than 60 percent for a renegotiated PSC. What does the engine do with that figure?",
+  "options": [
+   "It reports it in the basis only; the limit applied is the contract's stated figure",
+   "It caps every stated costOilLimitPct at 60, the Act's ceiling for a renegotiated contract",
+   "It applies 60 percent of gross as the limit whenever a PSC call leaves the cost oil limit unstated",
+   "It refuses any limit above 60 under basis \"pia-s85-4\", as it refuses a back-in above 60"
+  ],
+  "answer": 0,
+  "explanation": "The engine's basis reads \"PIA s.311(2)(a)(iii): a renegotiated production sharing contract features a cost oil limit of not more than 60% of the total oil production; the limit here is the contract's stated figure\", and PIA_JV.renegotiatedPscCostOilLimitPct is reported in the basis only. The limit is a required input."
+ },
+ {
+  "prompt": "Divide the one-barrel profit oil of IMF FARI TNM/16/01 (February 2016) Figure 5 as the engine does: the contractor holds 40 percent of it, cost oil is capped at half of what royalty leaves, tax is 30 percent, and the barrel sells for 100. Who gets what?",
+  "options": [
+   "Contractor 30.000000 and government 20.000000",
+   "Contractor 26.000000 and government 39.000000",
+   "Contractor 20.000000 and government 30.000000",
+   "Contractor 20.000000 and government 36.000000"
+  ],
+  "answer": 2,
+  "explanation": "The engine returns contractor profit oil 20.000000 and government profit oil 30.000000, as the figure prints. 26.000000 and 39.000000 are the World Bank note's split, and 36.000000 is the government's profit oil and tax together."
+ },
+ {
+  "prompt": "In 2008 of the IMF schedule (psc-fari-table-12), Table 13 prints the contractor's profit petroleum as 181. What does the engine return, and how does the course read the gap?",
+  "options": [
+   "181, the engine matching the printed figure once its own figure is rounded to the whole number the table prints",
+   "182.000000, one more than printed, and within the bound the course sets for the profit split",
+   "182.000000, a gap the validation record reports as a defect in applyPSC and leaves open for the reader to settle",
+   "A share one lower, the engine truncating it"
+  ],
+  "answer": 1,
+  "explanation": "The engine returns 182.000000 where Table 13 prints 181. The course bounds the split more widely than the cost lines, since the tables print the government's share to a whole per cent, and every year of the schedule falls inside that wider bound. Nothing is rounded to match a table, and the record finds no defect."
+ },
+ {
+  "prompt": "OpenOil, Oil Contracts: How to read and understand them (version 1, November 2012) prints \"This is calculated by: 0.25 x 49 = 11.75 million dollars\". How does the course use the book?",
+  "options": [
+   "It uses the example as a golden check of the engine's PSC tax",
+   "It quotes the book's 11.75 as its result",
+   "It is a licensed text, taught by concept only",
+   "It uses no schedule from it and teaches its state participation example as a printed arithmetic error"
+  ],
+  "answer": 3,
+  "explanation": "The sources table records OpenOil, version 1, November 2012, Creative Commons: no schedule is used, and its state participation example is taught as a printed arithmetic error. A figure copied from a reference text is checked before it is taught."
+ },
+ {
+  "prompt": "NOC is carried in full on the Ekene joint venture. Reading the 2027 cash call ledger (lag 2, \"carry\", threshold 500000.000000) and the compound carry together, what happens to NOC's cost share in 2027?",
+  "options": [
+   "NOC is called 0.000000 every month, and its carried cost of 16400000.000000 opens its carry balance",
+   "NOC is called 20 percent of each forecast and the carriers repay it at the year end",
+   "NOC is called nothing and owes nothing, the carry being a gift of its cost share",
+   "NOC's share is billed in arrears in December and the carry covers it"
+  ],
+  "answer": 0,
+  "explanation": "Every NOC row of the ledger prints a call of 0.000000 on a paying interest of 0.000000, and the carry ledger's 2027 row carries NOC's cost of 16400000.000000 to 2028, to be recovered from NOC's share of entitlement from 2030. A carry is financing to be recovered."
+ },
+ {
+  "prompt": "Both the Ekene carry under the Act (carry-ekene-pia, carry recovery from 100.000000 percent of the share) and the Ekene back-in (backin-ekene-pia, refund from 50.000000 percent of NOC's new share) state basis \"pia-s85-4\". What do they share, and when does each close?",
+  "options": [
+   "Both carry the Act's uplift; the carry closes in 2033 and the refund in 2031",
+   "Neither carries an uplift; both close in 2031",
+   "Neither carries an uplift; the carry is recovered in 2031 and the refund in 2034",
+   "Both take the whole share; both close in 2034"
+  ],
+  "answer": 2,
+  "explanation": "Under \"pia-s85-4\" the carry's uplift must be none (s.85(4)(c)) and the refund is \"recovered with no uplift\". The carry is recovered in 2031 and the refund in 2034, each on its own balance and stated share."
+ },
+ {
+  "prompt": "Which of these contract terms may a call leave out and still get a result?",
+  "options": [
+   "The reconciliation lag of a cash call ledger",
+   "The cash call threshold, noCallBelow",
+   "The uplift of a carry recovery",
+   "The grace hours of default interest"
+  ],
+  "answer": 1,
+  "explanation": "cc-ekene-2027-every-month runs with no threshold and returns calls of 69052000.000000. The lag, the uplift and the grace are required terms with no default, each refused by name when missing (\"reconciliationLagMonths must be an integer at or above 1; got nothing\")."
+ },
+ {
+  "prompt": "The engine cites the Act for both a back-in and PSC cost recovery. Which provisions does each call's basis cite?",
+  "options": [
+   "Both cite s.85(4), the carried interest provision",
+   "backIn cites s.311(2)(a)(iii); pscCostRecovery cites s.85(4)",
+   "Neither cites the Act, both citing the Norwegian agreement",
+   "backIn cites PIA s.85(4); pscCostRecovery cites s.85(2)(a) and s.311(2)(a)(iii) with applyPSC"
+  ],
+  "answer": 3,
+  "explanation": "The engine's basis.source for backIn reads the Petroleum Industry Act 2021 (Act No. 6), Official Gazette No. 142, Vol. 108, 27 August 2021 s.85(4); for pscCostRecovery it adds s.85(2)(a) and s.311(2)(a)(iii) and engines/economics/cashflow.ts applyPSC. Section 85(4) governs the concession agreement of s.85(2)(d)."
+ },
+ {
+  "prompt": "The Kenya Model PSC 2015, Participation Agreement, is quoted in the cash call module and the default module. Which of its figures does the engine hold?",
+  "options": [
+   "None: its rate, grace and refund timing are stated inputs, the golden input stating the 72 hours",
+   "The 72-hour grace of Art. 6.7, which the engine applies whenever a contract states no grace of its own",
+   "The margin over LIBOR that Art. 6.7 prints, which the engine adds to every stated default interest rate",
+   "The fifteen-day refund of an excess advance"
+  ],
+  "answer": 0,
+  "explanation": "Every contractual rate, grace and rule is a stated input with no default. The Kenya case states its grace (\"rate and grace stated here\"), and the model leaves the margin over LIBOR blank. A missing grace is refused by name."
+ },
+ {
+  "prompt": "On the Ekene joint venture, cash calls and the PSC variant split costs between the same four partners. Does each split on paying or on participating interests, and what does NOC bear?",
+  "options": [
+   "Both use paying interests, so NOC pays nothing in either",
+   "Both use participating interests, so NOC pays 20 percent in both",
+   "Cash calls use paying interests (NOC 0.000000); the PSC splits by participating interest (NOC -56000000.000000 of the 2029 capex)",
+   "Cash calls use participating interests; the PSC uses paying interests"
+  ],
+  "answer": 2,
+  "explanation": "Cash calls split on paying interests through calculatePartnerCosts, where NOC carried pays 0.000000. The PSC variant states no carry and splits by participating interest, so NOC's 2029 net is -56000000.000000."
+ },
+ {
+  "prompt": "The engine's reasons say \"400600000 carried to 2031\" on the PSC and \"16400000 carried to 2028\" on the carry ledger. Under the course's vocabulary, what is a \"carry\"?",
+  "options": [
+   "Any amount moved to a later period, the PSC cost pool and a credit held from a cash call both included",
+   "A carried party's cost share paid by its carriers; a pool or balance is \"carried to\" a named period",
+   "The PSC cost pool, recovered from cost oil",
+   "The uplift on a carried balance"
+  ],
+  "answer": 1,
+  "explanation": "The course legislates: a carry is a carried party's cost share paid by its carriers, and a pool, a credit or a balance moved to a later period is carried forward, or carried to a named period. The PSC pool is carried to 2031; NOC's carry is a cost share."
+ },
+ {
+  "prompt": "In 2030 NOC's carry recovery (Ekene compound carry) and its back-in refund recovery (Ekene back-in to 40 percent) each read NOC's share of entitlement. Which share does each read?",
+  "options": [
+   "19200000.000000 for both",
+   "38400000.000000 for both, the back-in applying to the carry as well",
+   "9600000.000000 and 19200000.000000",
+   "19200000.000000 for the carry, on NOC's 20 percent, and 38400000.000000 for the refund, on its new 40 percent"
+  ],
+  "answer": 3,
+  "explanation": "The carry ledger's 2030 share is 19200000.000000 on NOC's beneficial interest of 20.000000; the back-in's 2030 share is 38400000.000000 on NOC's new 40 percent. 9600000.000000 and 19200000.000000 are the amounts available at 50 percent of each."
+ }
+]

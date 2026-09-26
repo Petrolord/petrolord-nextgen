@@ -27,7 +27,7 @@
    "From and including the due date to, but excluding, the cure date: 45 days",
    "From the day after the due date to and including the cure date, the way a loan accrues from its drawdown",
    "Whole months only, the part-month ignored",
-   "From the end of the stated grace to the cure date, since interest cannot start inside a grace"
+   "From the end of the stated grace to the cure date, since default interest cannot start inside a grace"
   ],
   "answer": 0,
   "explanation": "The Norwegian Accounting Agreement Art. 1.2.2 prints \"Interest is due for the period starting on and including the due date of payment and ending on, but excluding, the value date for payment.\", and the engine's basis says the same: \"from and including the due date to, but excluding, the cure date (or asOf)\"; the table prints 45 days for this default. Whole months enter only the monthly-compound method, and on a default cured after the grace the engine runs default interest from the due date."
@@ -88,18 +88,18 @@
   "explanation": "Seventy-two hours have passed, which is more than 71.5, so the grace is exceeded and default interest runs over all 3 days: 1375.000000. Hours are compared as stated; the engine rounds no grace to whole days, and a fractional grace is a valid input."
  },
  {
-  "prompt": "A learner sets the interest method control to \"compound\" on the Ekene default. What does the engine return?",
+  "prompt": "A learner sets the default interest method control to \"compound\" on the Ekene default. What does the engine return?",
   "options": [
    "20210.781250, reading \"compound\" as monthly compounding, the only compounding the engine computes",
-   "A figure compounded daily on the stated day basis, the finest compounding the dates allow",
-   "20625.000000, with the unknown method ignored and simple interest applied in its place",
+   "Daily compounding on the stated day basis",
+   "20625.000000, with the unknown method ignored and simple default interest applied in its place",
    "Refused by name: the method takes only the words \"simple\" and \"monthly-compound\""
   ],
   "answer": 3,
   "explanation": "The engine refuses the word it does not accept, naming the field: interest.interestMethod must be one of \"simple\", \"monthly-compound\"; got \"compound\". The method is a stated term with no default: \"simple\" and \"monthly-compound\" are the two it computes, and it maps no other word onto either."
  },
  {
-  "prompt": "A contract gives no grace at all, and the learner leaves graceHours out of the interest terms. What does the engine return?",
+  "prompt": "A contract gives no grace at all, and the learner leaves graceHours out of the default interest terms. What does the engine return?",
   "options": [
    "The Kenya model's 72 hours, the only grace a public text this course reads prints",
    "A refusal: graceHours must be stated, 0 when the contract gives no grace, since the engine holds no default",
@@ -145,7 +145,7 @@
  {
   "prompt": "Suppose PB, in default on the Ekene call due 2027-03-01, pays up on 2027-04-15. Its contract states suspension after 5 working-days from 2027-03-01 and forfeiture after 3 months from 2027-03-10. Which consequences does the engine report as triggered?",
   "options": [
-   "Suspension triggered after 2027-03-08; forfeiture, due after 2027-06-10, not triggered",
+   "Suspension triggered after 2027-03-08; forfeiture, due after 2027-06-10, left untriggered",
    "Neither triggered, since a default cured before the forfeiture date clears every consequence",
    "Both triggered, since both run from dates earlier than the cure on 2027-04-15",
    "Suspension triggered five calendar days on, with forfeiture triggered too"
@@ -156,12 +156,12 @@
  {
   "prompt": "On default-ekene-uncured PB's default (8.250000 percent, simple, 360-day basis, grace 0 hours) is still open at 2027-07-01, after the forfeiture trigger. What does the engine report if PB's assignment is demanded?",
   "options": [
-   "EKO 61.538462 and PA 38.461538, the assigned interest following the cover by paying interest",
+   "EKO 61.538462 and PA 38.461538, the assigned participating interest following the cover by paying interest",
    "Participating interests of EKO 47.058824, PA 29.411765 and NOC 23.529412, the compensation not computed",
    "The compensation for PB's share at its book value, computed by the engine, with PB's participating interest shared pro rata among the others",
    "A forfeiture to EKO alone as operator, PB's 15 points moving whole to the party that advanced the larger part of its cover"
   ],
   "answer": 1,
-  "explanation": "The engine's reason reads \"if the assignment of PB is demanded, the interest is apportioned pro rata: EKO 47.05882352941177%, PA 29.41176470588235%, NOC 23.529411764705884%; the compensation (at most the book value less unpaid contributions) is not computed\". The assigned interest is pro rata to the others' participating interests, NOC included; the compensation is reported only."
+  "explanation": "The engine's reason reads \"if the assignment of PB is demanded, the interest is apportioned pro rata: EKO 47.05882352941177%, PA 29.41176470588235%, NOC 23.529411764705884%; the compensation (at most the book value less unpaid contributions) is not computed\". The assigned participating interest is pro rata to the others' participating interests, NOC included; the compensation is reported only."
  }
 ]

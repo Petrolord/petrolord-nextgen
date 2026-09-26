@@ -36,12 +36,12 @@
   "prompt": "The golden input carry-ekene-pia states the Ekene carry with no uplift, carry recovery from 100.000000 percent of NOC's share, and basis \"pia-s85-4\". In which year is the carry recovered, and what does NOC keep that year?",
   "options": [
    "In 2030, when NOC's first share of 19200000.000000 arrives and is taken whole against the balance of 28400000.000000",
-   "In 2033, the same payout year as the compound carry, since a recovery share does not move the payout year",
+   "In 2033, the same payout year as the compound carry, since a carry recovery share does not move the payout year",
    "In 2031, keeping 13200000.000000 of its share of 22400000.000000",
    "In 2031, keeping 11200000.000000"
   ],
   "answer": 2,
-  "explanation": "Under the Act's basis the balance stays 28400000.000000; 2030 recovers 19200000.000000 and leaves 9200000.000000, which 2031 clears: \"2031: the balance 9200000 is recovered with 9200000 of the 22400000 available; the carried party receives 13200000 of its share 22400000\". The golden input states recovery from the whole share; the engine holds no half. The compound carry runs to 2033 because its uplift grows the balance and it takes half the share."
+  "explanation": "Under the Act's basis the balance stays 28400000.000000; 2030 recovers 19200000.000000 and leaves 9200000.000000, which 2031 clears: \"2031: the balance 9200000 is recovered with 9200000 of the 22400000 available; the carried party receives 13200000 of its share 22400000\". The golden input states carry recovery from the whole share; the engine holds no half. The compound carry runs to 2033 because its uplift grows the balance and it takes half the share."
  },
  {
   "prompt": "A learner states the Ekene carry with basis \"pia-s85-4\" and an uplift of { type: \"compound\", ratePctPerYear: 8 }. What does the engine return?",
@@ -71,7 +71,7 @@
    "It adds 8200000.000000 in 2027 and 6000000.000000 in 2028, each in the year its cost is carried, fixing the due at 42600000.000000",
    "It adds 150 percent of the opening balance every year, compounding until the carry recovery is complete in 2034",
    "It adds 14200000.000000 in 2030, the first year NOC has any entitlement to recover from",
-   "It adds nothing to the balance and takes 150 percent of each year's recovery"
+   "It adds nothing to the balance and takes 150 percent of each year's carry recovery"
   ],
   "answer": 0,
   "explanation": "The engine's reasons read \"2027: the 150% multiple on the carried cost of 16400000 adds 8200000\" and \"2028: the 150% multiple on the carried cost of 12000000 adds 6000000\". After 2028 the uplift column is 0.000000 and the due stays 42600000.000000 until it is paid down; the carry is recovered in 2034 with 42600000.000000 recovered in all. A multiple is not a yearly rate and is not deferred to the first year of entitlement."
@@ -79,7 +79,7 @@
  {
   "prompt": "A contract for a carry states a multiple uplift of 90 percent, intending that the carriers forgive a tenth of the cost. What does the engine return?",
   "options": [
-   "A ledger that recovers 90 percent of the carried cost and writes the other 10 percent off in the first year of recovery",
+   "A ledger that recovers 90 percent of the carried cost and writes the other 10 percent off in the first year of carry recovery",
    "A ledger identical to no uplift, since the engine floors any multiple below 100 at 100",
    "Refused by name, since a multiple under 100 would give back less than the cost",
    "A refusal naming the cap, as a partial carry recovery is written as a cap"
@@ -118,7 +118,7 @@
    "Neither closes in 2028: a balance is closed only by a year with more available than it owes"
   ],
   "answer": 0,
-  "explanation": "At the boundary the engine recovers the carry in that year: \"2028: the balance 200 is recovered exactly by the 200 available; the carried party receives 0 of its share 200\". One short, it carries the rest: \"2028: 199.8 recovered of 200 due; 0.2 carried to 2029\" and \"2029: the balance 0.2 is recovered with 0.2 of the 200 available\". Nothing is written off without a cap, and the summing tolerance applies to interests summing to 100."
+  "explanation": "At the boundary the engine recovers the carry in that year: \"2028: the balance 200 is recovered exactly by the 200 available; the carried party receives 0 of its share 200\". One short, it carries the rest: \"2028: 199.8 recovered of 200 due; 0.2 carried to 2029\" and \"2029: the balance 0.2 is recovered with 0.2 of the 200 available\". Nothing is written off without a cap, and the summing tolerance applies to participating interests summing to 100."
  },
  {
   "prompt": "The golden input carry-cap-exactly-cost states parties A 60, B 20 and N 20 percent, a compound uplift of 10 percent, carry recovery from 100 percent of N's share and a cap of 200, equal to N's carried cost. What happens in 2028?",
@@ -136,22 +136,22 @@
   "options": [
    "200.000000, with the 25 percent uplift charged on the year's new cost as well as on the opening balance",
    "225, the amount due, since nothing is recovered while the carry is still adding cost",
-   "150.000000, as the year's new cost is added only after the year's recovery is taken and earns no uplift",
+   "150.000000, as the year's new cost is added only after the year's carry recovery is taken and earns no uplift",
    "175.000000"
   ],
   "answer": 3,
-  "explanation": "The engine charges the uplift on the opening balance alone (25.000000 on 100.000000), adds the year's carried cost, and recovers from the same year's entitlement at the year end: \"2028: 50 recovered of 225 due; 175 carried to 2029\". Recovery runs while cost is still being carried, so the due of 225 is reduced by the 50 recovered."
+  "explanation": "The engine charges the uplift on the opening balance alone (25.000000 on 100.000000), adds the year's carried cost, and recovers from the same year's entitlement at the year end: \"2028: 50 recovered of 225 due; 175 carried to 2029\". Carry recovery runs while cost is still being carried, so the due of 225 is reduced by the 50 recovered."
  },
  {
   "prompt": "On the carry with 8.000000 percent compounding, half of NOC's share taken and basis \"contract\", the carriers get back 7267760.617882 in 2033. How is that sum divided?",
   "options": [
    "To the carriers in their carry shares: EKO 3633880.308941, PA 2271175.193088, PB 1362705.115853",
-   "All of it to EKO as operator, which settles with PA and PB outside the recovery ledger",
+   "All of it to EKO as operator, which settles with PA and PB outside the carry recovery ledger",
    "To EKO, PA, PB and NOC by their beneficial interests of 40, 25, 15 and 20 percent",
    "To the joint account, where it reduces the next cash call of every paying party"
   ],
   "answer": 0,
-  "explanation": "The course prints the 2033 party flows: EKO recovery 3633880.308941, PA 2271175.193088, PB 1362705.115853 and NOC -7267760.617882, and states that the recovered amount goes to the carriers in their carry shares. NOC is the party paying the recovery, so it receives none of it, and the carry recovery is settled through the party flows of the recovery ledger."
+  "explanation": "The course prints the 2033 party flows: EKO recovery 3633880.308941, PA 2271175.193088, PB 1362705.115853 and NOC -7267760.617882, and states that the recovered amount goes to the carriers in their carry shares. NOC is the party paying the carry recovery, so it receives none of it, and the carry recovery is settled through the party flows of the carry recovery ledger."
  },
  {
   "prompt": "At a discount rate of 0.100000 to a base year of 2027, what NPV does the engine return for NOC on the Ekene compound carry (8.000000 percent a year, from 50.000000 percent of its share, basis \"contract\") and on carry-ekene-pia (no uplift, from 100.000000 percent, basis \"pia-s85-4\")?",

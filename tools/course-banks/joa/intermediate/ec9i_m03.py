@@ -10,18 +10,18 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # 2021, read on 2026-09-26. No capstone name, term, series or value appears.
 
 q(2, "On the Ekene joint venture (synthetic) NOC backs in from a participating interest of 20.000000 to 40.000000 percent under basis \"pia-s85-4\". What participating interests does the engine return for EKO, PA and PB after the back-in?",
- "EKO 30.000000, PA 18.750000 and PB 11.250000, each keeping 60 / 80 of its interest",
+ "EKO 30.000000, PA 18.750000 and PB 11.250000, each keeping 60 / 80 of its participating interest",
  ["EKO 20.000000, PA 25.000000 and PB 15.000000, the operator alone ceding the 20 points",
   "EKO 40.000000, PA 25.000000 and PB 15.000000, as a back-in moves cost shares and leaves the participating interests as they were",
-  "EKO 20.000000, PA 12.500000 and PB 7.500000, each giving up half its interest"],
- "The engine's rule reads \"new interest of another party = old x (100 - target) / (100 - current)\", and its reason \"NOC backs in from 20% to 40%: the others keep 60 / 80 of their interests\"; the table prints EKO 30.000000, PA 18.750000 and PB 11.250000. EKO 20.000000, PA 12.500000 and PB 7.500000 are the interests after a back-in to 60, where the others keep 40 / 80. A back-in changes participating interests; that is what distinguishes it from a carry.")
+  "EKO 20.000000, PA 12.500000 and PB 7.500000, each giving up half its participating interest"],
+ "The engine's rule reads \"new interest of another party = old x (100 - target) / (100 - current)\", and its reason \"NOC backs in from 20% to 40%: the others keep 60 / 80 of their interests\"; the table prints EKO 30.000000, PA 18.750000 and PB 11.250000. EKO 20.000000, PA 12.500000 and PB 7.500000 are the participating interests after a back-in to 60, where the others keep 40 / 80. A back-in changes participating interests; that is what distinguishes it from a carry.")
 
 q(0, "The Ekene back-in golden input backin-ekene-pia states six cost lines, NOC's move from 20 to 40 percent, basis \"pia-s85-4\" and a refund from future entitlement. What refund does the engine return?",
  "98000000.000000: 20 percent of refundable costs of 490000000.000000, with 156000000.000000 excluded",
  ["490000000.000000: the refundable costs in full, since the Act says the Government shall refund fully",
   "196000000.000000: 40 percent of the refundable costs, NOC's new participating interest",
   "125200000.000000: 20 percent of the costs left once the bonus, the interest line and the markup are taken out"],
- "The engine's reason reads \"NOC backs in from 20% to 40%: the others keep 60 / 80 of their interests; refund 20% x refundable costs 490000000 = 98000000 (156000000 excluded)\". The refund is the change in interest (target less current) times the refundable costs. 196000000.000000 is the refund of the back-in to 60, a change of 40 points. 125200000.000000 is the contract-basis refund, which leaves the exploration wells in; the Act refunds development and production only.")
+ "The engine's reason reads \"NOC backs in from 20% to 40%: the others keep 60 / 80 of their interests; refund 20% x refundable costs 490000000 = 98000000 (156000000 excluded)\". The refund is the change in participating interest (target less current) times the refundable costs. 196000000.000000 is the refund of the back-in to 60, a change of 40 points. 125200000.000000 is the contract-basis refund, which leaves the exploration wells in; the Act refunds development and production only.")
 
 q(3, "Which of the Ekene back-in cost lines does the engine count as refundable under basis \"pia-s85-4\"?",
  "Front end engineering design, 40000000.000000 of development cost",
@@ -40,8 +40,8 @@ q(1, "Could NOC take 61 percent under the Act? A learner types targetPct 61 with
 q(2, "Under basis \"pia-s85-4\", what does the engine return for a back-in whose target equals the back-in party's current participating interest of 20?",
  "A refusal: targetPct must be above the back-in party's current interest 20; got 20",
  ["A result with no change of participating interests and a refund of 0.000000, reported with its reason",
-  "A refusal naming refundForm, since a back-in with no change of interest has nothing to refund",
-  "The Ekene back-in to 40 percent, the engine reading a target at the current interest as a doubling"],
+  "A refusal naming refundForm, since a back-in with no change of participating interest has nothing to refund",
+  "The Ekene back-in to 40 percent, the engine reading a target at the current participating interest as a doubling"],
  "The course prints the refusal \"targetPct must be above the back-in party's current interest 20; got 20\". A back-in raises the back-in party's participating interest, so a target at its current figure is refused before any refund is computed, and the engine reads no target it was not given.")
 
 q(0, "NOC's refund is to be paid in one sum on entry, the contract says (refundForm \"upfront\"), and the call is made under the Act's basis. What comes back?",
@@ -70,7 +70,7 @@ q(2, "On the Ekene back-in under the Act, NOC's refund of 98000000.000000 is rec
  ["In 2033, receiving 18800000.000000, as the balance of 35600000.000000 is cleared from the whole share that year",
   "In 2034, receiving 17200000.000000, the half of its share the refund recovery does not take",
   "In 2031, the year the Ekene carry under the Act is recovered, since both run on the same entitlement"],
- "The engine's reason reads \"2034: the balance 16800000 is recovered with 16800000 of the 17200000 available; the back-in party receives 17600000 of its share 34400000\". The refund recovery takes only the balance in its last year, so NOC keeps more than half its share. The recovery share is stated at 50 percent, so no year takes the whole share. The carry under the Act recovers a different, smaller balance from a different share.")
+ "The engine's reason reads \"2034: the balance 16800000 is recovered with 16800000 of the 17200000 available; the back-in party receives 17600000 of its share 34400000\". The refund recovery takes only the balance in its last year, so NOC keeps more than half its share. The refund recovery share is stated at 50 percent, so no year takes the whole share. The carry under the Act recovers a different, smaller balance from a different share.")
 
 q(0, "The golden input backin-pia-at-60 takes NOC from 20 to 60 percent under basis \"pia-s85-4\", recovering the refund from 50.000000 percent of its new share over 2030 to 2036. What do the totals show?",
  "196000000.000000 refunded, 192000000.000000 recovered and 4000000.000000 outstanding, recovered in year none",
@@ -79,7 +79,7 @@ q(0, "The golden input backin-pia-at-60 takes NOC from 20 to 60 percent under ba
   "196000000.000000 refunded with 4000000.000000 written off in 2036"],
  "A target equal to 60 is accepted (the boundary), and the refund of 196000000.000000 is 40 percent of 490000000.000000. By 2036 192000000.000000 has been recovered: \"2036: 4000000 of the refund is not recovered by the last year\". Outstanding means still owed; nothing is written off, because a back-in states no cap.")
 
-q(3, "The small golden input backin-recovered-on-last-year takes N from 20 to 40 percent (parties A 60, B 20, N 20) with refundable costs of 1000.000000 and recovery from 50.000000 percent of N's new share. In 2031 the balance of 100.000000 meets 100.000000 available. What does the engine return?",
+q(3, "The small golden input backin-recovered-on-last-year takes N from 20 to 40 percent (parties A 60, B 20, N 20) with refundable costs of 1000.000000 and refund recovery from 50.000000 percent of N's new share. In 2031 the balance of 100.000000 meets 100.000000 available. What does the engine return?",
  "The refund is recovered in 2031, exactly, and N receives 100 of its share 200",
  ["100.000000 carried to 2032, since a balance is cleared only when more is available than is due",
   "The refund is recovered in 2030, when the first 100.000000 is taken",
