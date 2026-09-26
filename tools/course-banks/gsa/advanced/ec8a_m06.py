@@ -1,0 +1,138 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC8 Expert m06, Conventions and the Contract Report. Keys rest on the
+# course's table of conventions that are choices (index window, reset, the
+# four-decimal rule, year-end NPV, the strict make-up threshold, first in
+# first out, one set of reference conditions), the size caps and their
+# messages, the four rules of the refusal table, what the contract report
+# names and what a computed figure does not say.
+
+K = [1, 0, 3, 2, 1, 3, 0, 2, 0, 1, 3, 2, 0, 3, 1]
+_i = iter(K)
+def x(p, c, ds, e): q(next(_i), p, c, ds, e)
+
+# 1
+x("The Ekene export feed (synthetic) averages its oil index over 6 months with a lag of 1. Which window prices January 2027, and what average does it give?",
+ "2026-07 to 2026-12, averaging 76.925000",
+ ["2026-08 to 2027-01, the window ending at the delivery month itself, averaging 76.925000",
+  "2026-10 to 2027-03, averaging 71.461667",
+  "2026-06 to 2026-11, six months that end two months before January"],
+ "The engine's convention takes the mean of averagingMonths months ending lagMonths months before the delivery month, so a lag of 1 ends the window in December: 2026-07 to 2026-12, 76.925000, price 9.731000. A window ending at the delivery month is what a lag of zero gives; 2026-10 to 2027-03 is the April block's window; and a lag of 2 is not what the contract states.")
+
+# 2
+x("The export feed resets its price every 3 months from 2027-01. What price does 2027-02 carry?",
+ "9.731000, the price of its block's first month",
+ ["9.075400, the next block's price",
+  "A price on its own window, 2026-08 to 2027-01",
+  "8.694450"],
+ "Under the reset convention every month of a block carries the price of the block's first month, counted from `from`: 2027-01 to 2027-03 all price 9.731000. 9.075400 is the price of the block starting 2027-04; months inside a block do not reprice on their own windows; and 8.694450 is the 2027 annual average.")
+
+# 3
+x("Under the model-gsa-4dp rounding, a golden index of 11.234346 is priced with no other term. What price does the engine return?",
+ "11.234300",
+ ["11.234400, rounded in stages from the sixth decimal upwards",
+  "11.234346, rounding applying only to the annual averages",
+  "11.234500, read at the fifth decimal after a first round to five places"],
+ "The engine computes the price in full, normalises the double to 12 significant digits, and only then reads the fifth decimal: 11.234346 has a 4 there, so the price is 11.234300. Rounding in stages could land a different fourth decimal (11.234400 is the golden price of a different index); the rule applies to every price; and 11.234500 is the price of the index 11.23449.")
+
+# 4
+x("Under the same four-decimal rule, what do the golden indices 11.23459 and 100.00005 price at?",
+ "11.234600 and 100.000100",
+ ["11.234500 and 100.000000, a fifth decimal of five leaving the fourth untouched",
+  "11.234590 and 100.000050",
+  "11.234600 and 100.000000, the second price rounded down as a whole number"],
+ "The model agreement's Article 15.4 rounds the fourth decimal up when the fifth is five or more, and the engine applies it to every price: 11.23459 prices 11.234600 and 100.00005 prices 100.000100. A five rounds up; the golden case states rounding, so the figures are not left as they are; and a large price follows the same rule.")
+
+# 5
+x("Which timing convention does the NPV in gsaCashFlows use?",
+ "Year-end flows, discounted to the stated base year through the canonical npv",
+ ["Mid-year flows, the usual convention for a contract's revenue over each year",
+  "Monthly flows from priceSeries",
+  "Start-of-year flows, so that the first contract year of the agreement is not discounted at all"],
+ "The engine's basis states \"year-end flows discounted to 2026 at 0.1\" through the canonical npv of cashflow.ts, and the course names it a convention: discounting from the middle of each year would give a different present value on the same flows. The engine discounts annual rows, one per contract year.")
+
+# 6
+x("On the power plant in 2030 the buyer takes 7665000.000000, exactly the Adjusted ACQ, with 478800.000000 of make-up open under after-adjusted-acq. What is drawn?",
+ "None: make-up begins strictly above the Adjusted ACQ",
+ ["All 478800.000000, the Adjusted ACQ being met",
+  "Half, the rest carried into 2031",
+  "The 210000.000000 due to expire in 2031"],
+ "The engine's reason reads \"make-up aggregate 478800 available and none taken, because taken 7665000 does not exceed the Adjusted ACQ 7665000\". The make-up threshold is strictly above the Adjusted ACQ, the engine's convention on the model's \"after Buyer has taken delivery of at least\". Meeting the threshold exactly draws nothing, and no rule halves a draw.")
+
+# 7
+x("A golden case holds make-up of 100.000000 from 2027 and 50.000000 from 2028. After 80.000000 is drawn in 2029, the buyer takes 30.000000 of make-up in 2030. How is it attributed?",
+ "20.000000 from 2027, then 10.000000 from 2028, first in first out",
+ ["30.000000 from 2028, the newest entry first",
+  "15.000000 from each year",
+  "10.000000 from 2027 and 20.000000 from 2028, in proportion to what each entry has left open"],
+ "The engine draws make-up first in first out, as the model's Article 12.7 states: 20 is left from 2027 after 2029, so 20.000000 comes from 2027 and 10.000000 from 2028. Drawing the newest first would let older entries expire sooner; the engine shares nothing evenly or in proportion.")
+
+# 8
+x("A takeOrPay call carries 101 contract years. What does the engine return?",
+ "The refusal \"years must have at most 100 entries; got 101\"",
+ ["The first 100 years computed and the last dropped with a note",
+  "Every year computed, since the size caps bind only daily balances and price series of more than 400 entries",
+  "A refusal of the ledger at 400 entries, the cap it shares"],
+ "DEFAULTS.MAX_YEARS is 100, the most contract years one call accepts, and a call over the cap is refused with that message. The engine truncates nothing; every function has its cap; and 400 is MAX_DAYS, the cap of a daily balance.")
+
+# 9
+x("A learner lists four outcomes met in the contract calculator. Which one comes back as a result with a reason?",
+ "A gas based industries price held at its floor",
+ ["A year that states years[0].fm",
+  "Gas taken above gas made available",
+  "A domesticPrice call with no domestic base price stated"],
+ "A price held at its floor is a result, returned with a reason such as \"the formula gives 0.8, below the floor US$0.90 per MMBtu, so the price is held at 0.9 (s.168(2))\". An unknown key such as years[0].fm, gas taken above gas made available and a missing domestic base price are each refused by name.")
+
+# 10
+x("A gsaCashFlows call states contract.makeUp.order as lifo. How is the refusal worded?",
+ "With the path prefixed by contract, listing the three accepted orders",
+ ["As takeOrPay words it, makeUp.order with no prefix, since the ledger is run first",
+  "Not refused: lifo reverses first in first out",
+  "As a royalty refusal"],
+ "The engine's message, verbatim, is \"contract.makeUp.order must be one of \"after-adjusted-acq\", \"after-top-quantity\", \"first\"; got \"lifo\"\". A whole-contract call meets the ledger's refusals with the path prefixed by contract, so the learner sees where the key sits; an order outside the list is refused, and inner contract keys are checked as well as the top level.")
+
+# 11
+x("What must the contract report carry beside every NPV it quotes?",
+ "The discount rate and the base year",
+ ["The royalty terrain and in-country share, and nothing more, since each NPV is stated after royalty",
+  "The source of the canonical npv function",
+  "The oil index series, every NPV resting on it"],
+ "The report names the discount rate and base year beside every NPV, because an NPV depends on both. The NPV of the seller revenue is before royalty, so the royalty terms are not what it needs; the canonical npv is named once as the method; and the power plant's NPV rests on no oil index at all.")
+
+# 12
+x("What does the course say a deficiency payment computed by the engine is?",
+ "What the stated clauses produce on stated takes, and no forecast of what a buyer will pay",
+ ["An estimate of what the buyer is most likely to pay, given the take history of earlier years",
+  "The expected value across the seeded index scenarios the engine samples for each contract year",
+  "The upper bound of the buyer's liability"],
+ "A deficiency payment is what the stated clauses produce on stated takes; it is not a forecast of what a buyer will pay, and each figure is quoted with its terms. The engine samples and searches nothing, so there are no scenarios, estimates or bounds.")
+
+# 13
+x("Why does every capstone field in this course have exactly one right answer?",
+ "Each is a return value of the engine on fixed inputs, and nothing in the engine samples or searches",
+ ["Each is rounded to four decimals, which removes any difference between machines",
+  "Each is averaged over many seeded runs",
+  "Each is checked against the domestic base price of the year before it is issued"],
+ "Every graded number is a return value of the engine on contract terms written down in advance; nothing samples or searches, so the same terms give the same number on any machine. Fields are quoted at six decimals, there are no runs to average, and no graded figure uses the domestic base price.")
+
+# 14
+x("A contract states a volume in standard cubic metres and a heating value in Btu per standard cubic foot. What does the engine assume?",
+ "One set of reference conditions for both, stated by the caller",
+ ["15 C and 101.325 kPa for the volume and 60 F and 14.696 psia for the heating value, each set by its unit",
+  "A correction between the two sets of reference conditions, computed from the temperatures stated",
+  "Nothing: a mixed pair is refused until both figures are stated in the same system of units"],
+ "A mixed pair converts the volume by the exact geometric factor and assumes one set of reference conditions, which the caller states and the engine echoes back. The engine makes no correction between conditions (a contract stating them differently needs a conversion it does not make), and it computes mixed pairs, 37080.400058 MMBtu on 1.000000 MMSm3 at 1050.000000 Btu/scf.")
+
+# 15
+x("Which input does the engine refuse before anything is computed, as a quantity that cannot be true?",
+ "Force majeure and maintenance above the DCQ",
+ ["A deficiency in the last contract year of the delivery period",
+  "A formula price below the s.168(2) floor",
+  "Voluntary contracts above the obligation"],
+ "The refusal table's third rule: a quantity that cannot be true is refused before anything is computed, including force majeure and maintenance above the DCQ (\"days[0].forceMajeure must be a quantity that with maintenance 30 is at or below the DCQ 100; got 80\"). The other three are results: a deficiency paid with no make-up right, a price held at the floor, and an obligation deemed fulfilled.")
+
+emit(Q, '/root/cat-wip-gsa/banks/ec8a_m06.json', expect_n=15)
+finish()
