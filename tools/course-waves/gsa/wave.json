@@ -106,11 +106,11 @@
    "summary": "PROBLEMS: 0"
   },
   "prove_prior_courses.sh": {
-   "md5": "a0fabe85f3bdef215099b90582243632",
+   "md5": "eae368991ff3e0ce5ced55345b183cce",
    "command": "bash prove_prior_courses.sh",
    "expected": 0,
    "exit": 0,
-   "summary": "PRIOR COURSES UNCHANGED: packages/engines differs from origin/main only by the eleven ec8-gsa-course paths (sha-identical to d745b88) and their ledger entries; D1 to D5, H5, SC2 procurement and EC7 pia digests, fields an"
+   "summary": "PRIOR COURSES UNCHANGED: packages/engines differs from origin/main only by the eleven ec8-gsa-course paths (sha-identical to 7f5d462) and their ledger entries; D1 to D5, H5, SC2 procurement and EC7 pia digests, fields an"
   },
   "scaffold.py --check": {
    "md5": "9ba437dbe5c1ff4699a57ad19d991778",
@@ -729,35 +729,35 @@
    "summary": "AGREE: all five migrations and the three case files and their index regenerate byte for byte from the committed inputs at HEAD."
   },
   "verify_sql.py HEAD": {
-   "md5": "8727a3de3e3bdff71ed960465179f4d7",
+   "md5": "7e3bda63c92f49e21540412b4caa9cbf",
    "command": "python3 verify_sql.py HEAD",
    "expected": 0,
    "exit": 0,
    "summary": "AGREE: all 396 questions (prompt, options, answer key, explanation), 78 lesson keys in 18 modules, 18 graded fields (key, expected, tolerance) and the catalogue row are byte for byte what the committed banks, manifests, "
   },
   "verify_sql.py CANARY text": {
-   "md5": "8727a3de3e3bdff71ed960465179f4d7",
+   "md5": "7e3bda63c92f49e21540412b4caa9cbf",
    "command": "python3 verify_sql.py HEAD --canary",
    "expected": 2,
    "exit": 2,
    "summary": "intermediate/module/11 explanation: seed 'The engine\\'s message reads \"years[0].shortfallPrice must be stated when sellerShortfall is above 0 (5); the engine holds no default rate; got nothing\". US$3.50 per MMBtu is the "
   },
   "verify_sql.py CANARY key": {
-   "md5": "8727a3de3e3bdff71ed960465179f4d7",
+   "md5": "7e3bda63c92f49e21540412b4caa9cbf",
    "command": "python3 verify_sql.py HEAD --canary-key",
    "expected": 2,
    "exit": 2,
    "summary": "advanced/module/3 answer_index: seed '3' against bank '0'"
   },
   "verify_sql.py CANARY field": {
-   "md5": "8727a3de3e3bdff71ed960465179f4d7",
+   "md5": "7e3bda63c92f49e21540412b4caa9cbf",
    "command": "python3 verify_sql.py HEAD --canary-field",
    "expected": 2,
    "exit": 2,
-   "summary": "capstone field ifeyi_2031_make_up_expired expected: seed 253123.75 against fields.json 253123.77531237502"
+   "summary": "capstone field ifeyi_2031_make_up_expired expected: the seed differs from fields.json by 0.025312375015346333"
   },
   "verify_sql.py CANARY lesson": {
-   "md5": "8727a3de3e3bdff71ed960465179f4d7",
+   "md5": "7e3bda63c92f49e21540412b4caa9cbf",
    "command": "python3 verify_sql.py HEAD --canary-lesson",
    "expected": 2,
    "exit": 2,

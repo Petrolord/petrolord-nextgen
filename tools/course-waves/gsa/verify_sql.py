@@ -258,7 +258,11 @@ for g, w in zip(got_fields, fields):
     for i, what in enumerate(('tier', 'key', 'expected', 'tol')):
         compared += 1
         if g[i] != w[i] or type(g[i]) is not type(w[i]):
-            disagree.append(f'capstone field {w[1]} {what}: seed {g[i]!r} against fields.json {w[i]!r}')
+            # A graded value is never printed (wave.json records this line): the gap is.
+            if what == 'expected':
+                disagree.append(f'capstone field {w[1]} {what}: the seed differs from fields.json by {abs(float(g[i]) - float(w[i]))!r}')
+            else:
+                disagree.append(f'capstone field {w[1]} {what}: seed {g[i]!r} against fields.json {w[i]!r}')
 
 # ------------------------------------------- the catalogue row against wave.json
 wave = json.loads(show(f'{WAVE}/wave.json'))

@@ -2,11 +2,11 @@
 # PROVE THE EC8 FOUNDATION LEAVES EVERY EARLIER COURSE THAT SHARES ITS FILES
 # UNCHANGED.
 #
-# PART 1, THE TREE. This course vendors the gasContract.js closure at d745b88
+# PART 1, THE TREE. This course vendors the gasContract.js closure at 7f5d462
 # (vendor_gsa.sh) and moves nothing else: every packages/engines path on this
 # branch that differs from origin/main must be one of the eleven paths VENDOR.json
 # ledgers as group ec8-gsa-course, each byte-identical to petrolord-engines
-# d745b88, plus VENDOR.json itself, whose only change is those eleven ledger
+# 7f5d462, plus VENDOR.json itself, whose only change is those eleven ledger
 # entries; engines/economics/cashflow.ts must be byte-identical to origin/main.
 # Nothing under packages/engines may be left uncommitted.
 #
@@ -108,4 +108,4 @@ for W in cashflow fiscal; do
     printf 'EC %-9s %-12s %s, %s  sha256 %s\n' "$W" "$f" "$v" "$pv" "${got:0:16}"
   done
 done
-[ $fail = 0 ] && echo "PRIOR COURSES UNCHANGED: packages/engines differs from $BASE only by the eleven ec8-gsa-course paths (sha-identical to d745b88) and their ledger entries; D1 to D5, H5, SC2 procurement and EC7 pia digests, fields and precision rebuild byte-identical; cashflow and fiscal rebuild byte-identical against $ENG" || { echo "PRIOR COURSES: A DIFFERENCE"; exit 1; }
+[ $fail = 0 ] && echo "PRIOR COURSES UNCHANGED: packages/engines differs from $BASE only by the eleven ec8-gsa-course paths (sha-identical to 7f5d462) and their ledger entries; D1 to D5, H5, SC2 procurement and EC7 pia digests, fields and precision rebuild byte-identical; cashflow and fiscal rebuild byte-identical against $ENG" || { echo "PRIOR COURSES: A DIFFERENCE"; exit 1; }
