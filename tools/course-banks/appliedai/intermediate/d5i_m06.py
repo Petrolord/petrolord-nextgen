@@ -17,11 +17,11 @@ q(2, "Per-query nDCG at 5, linear gain, on the 23 included queries: on how many 
  "The course counts the per-query differences: 7 queries favour A, 3 favour B and 13 are equal. B still has the higher mean, which is why the count of wins and the mean must be read together. An equal query goes to nobody, and a close mean says nothing about how the wins are spread.")
 
 q(0, "B's mean nDCG at 5 is the higher, a difference A minus B of -0.001384, although A wins more queries. What explains it?",
- "Two large B wins, Q02 at -0.472652 and Q14 at -0.310738, outweigh A's",
- ["B's mean includes Q24, where A's nDCG is null and B's counts",
-  "Each of A's seven wins is smaller than 0.001384 in size",
-  "The mean weights each query by how many relevant passages it has"],
- "Q02 and Q14 are two queries where BM25's word matching failed: EKD-043's rate of penetration outranks the answer on Q02, and Q14 is the lexical trap. Q24 is excluded for both systems. A's wins include Q15 at 0.363114 and Q20 at 0.197904, far above 0.001384. The mean over queries is an arithmetic mean with every query weighted alike.")
+ "B's three wins, led by Q02 at -0.472652 and Q14 at -0.310738, outweigh A's seven",
+ ["B's mean takes in Q24, where A's nDCG comes back null while B's counts",
+  "Each of A's seven wins is smaller than 0.001384, too small to move the mean",
+  "The mean weights each query by how many relevant judged passages it holds"],
+ "The mean difference is the sum of the 23 per-query differences over 23, and the 13 equal queries add 0, so a negative mean says B's three wins add up to more than A's seven. Q02 and Q14 carry most of B's total and Q23 at -0.055152 makes up the rest. Q02 and Q14 are two queries where BM25's word matching failed: EKD-043's rate of penetration outranks the answer on Q02, and Q14 is the lexical trap. Q24 is excluded for both systems. A's wins include Q15 at 0.363114 and Q20 at 0.197904, far above 0.001384. The mean over queries is an arithmetic mean with every query weighted alike.")
 
 q(3, "At seed 7, 2000 replicates and level 0.95, the paired interval for the nDCG difference, A minus B, runs from -0.068015 to 0.058726. What is the reading?",
  "It crosses 0, so on these 23 queries the data do not separate the two systems",
@@ -46,9 +46,9 @@ q(0, "The share at or below 0 for the paired nDCG difference is 0.511000. What i
 
 q(3, "On seed 8 the paired nDCG interval is -0.063543 to 0.055562; on seed 7 it is -0.068015 to 0.058726. What should a reader take from this?",
  "The bounds move with the seed while the reading holds, so quote seed, replicates and level",
- ["One of the two seeds must be wrong, since a bootstrap has one right interval",
-  "Seed 8 is the better estimate, since its interval is the narrower of the two",
-  "The seeds should be averaged, giving the interval the engine ought to report"],
+ ["One of the two seeds must be wrong, since a bootstrap has one right interval for its data",
+  "Seed 8 is the better estimate to report, since its interval is the narrower of the two",
+  "The seeds should be averaged bound by bound, giving the interval the engine ought to report"],
  "Each seed gives its own exact result, and both intervals cross 0, so the conclusion stands. A seed and a replicate count name a bootstrap result, which is why a figure is quoted with its seed, its replicate count and its level. Neither seed is wrong or better, and averaging seeds is no rule the engine states.")
 
 q(2, "How does the engine label the lower bound of a level 0.95 bootstrap interval on A's mean nDCG?",
@@ -88,9 +88,9 @@ q(2, "Which interval levels does the engine's bootstrap accept?",
 
 q(1, "pairedBootstrap receives 23 values for A and 22 for B. What happens, and what can the engine not check?",
  "It refuses the unequal lengths, and it cannot see equal lists given in different query orders",
- ["Pads B with 0 at the end, pairs by position and records the padding in its basis",
+ ["Pads B with a 0 at the end, pairs the two lists by position and records the padding in its basis",
   "B is paired with A's first 22 values, and a warning notes that A's last value went unmatched",
-  "Refuses, and also checks that both lists name the same queries in the same order"],
+  "Refuses it, and also checks that both lists name the same queries in the same order as each other"],
  "The engine pairs by position and refuses lists of different length, as in its message for three values against two: \"b must have 3 values, one per value of a (the same queries in the same order)\". The values carry no query ids, so two lists of equal length in different orders pair the wrong queries silently; keep both in query order. Nothing is padded or truncated.")
 
 q(3, "A write-up reports a paired bootstrap comparison. Which settings must it name so that a reader can reproduce the result?",

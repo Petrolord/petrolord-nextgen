@@ -33,7 +33,7 @@ q(1, "System B answers Q03 with \"Ekene 2 and Ekene 4\"; the reference is \"Eken
  "The hyphen is dropped so the reference reads ekene2, while B's space keeps ekene and 2 apart",
  ["The word \"and\" is treated as an article and removed from one of the two sides",
   "Hyphens split words, so the reference ends up with more tokens than B's answer",
-  "Exact match compares the raw text before normalisation, so a space change misses"],
+  "Exact match compares the raw text before normalisation, so a space in place of a hyphen misses"],
  "Normalised, the reference is \"ekene2 and ekene4\", three tokens, and B's answer \"ekene 2 and ekene 4\", five. Only \"and\" is common, so precision is 1 in 5, recall 1 in 3 and F1 0.250000; the strings differ, so exact match is 0. Only a, an and the are articles. Dropping the hyphen joins the words, and both scores are read after normalisation.")
 
 q(0, "Scored against the references, how many exact matches do the two systems' short answers make?",
@@ -52,8 +52,8 @@ q(3, "What is token F1 for the stated answer \"oil oil water\" against the refer
 
 q(1, "System A answers Q08 with \"0.5 to 0.35 bbl/d/psi\"; the reference is \"from 0.5 to 0.35 bbl/d/psi\". Token F1 is 0.888889. What keeps it below 1?",
  "Every answer token is in the reference, and the reference's \"from\" is missing, which lowers recall",
- ["The decimal points are dropped differently on the two sides, splitting 0.35",
-  "The slashes in bbl/d/psi split into three tokens on the answer side alone",
+ ["The decimal points are dropped differently on the two sides, which splits 0.35 into two tokens on one side",
+  "The slashes in bbl/d/psi split into three tokens on the answer side alone, which then lowers precision",
   "Precision falls because the answer adds a token the reference lacks"],
  "Both sides go through the same normalisation, so 0.35 and bbl/d/psi become the same tokens on each side. The answer's four tokens are all in the reference's five, so precision is 1 and recall 4 of 5, which gives F1 0.888889. Nothing is added, so precision stays at 1; the missing \"from\" costs recall.")
 
@@ -67,7 +67,7 @@ q(2, "System A leaves Q24 unanswered, and the Q24 reference is empty too. What d
 q(0, "System A's short answer to Q14 is empty; the reference is \"water free\". What does it score, and where did the failure start?",
  "F1 0.000000, a miss that began upstream, where the lexical trap left no answering passage",
  ["F1 1.000000, since an honest abstention earns full credit on any query",
-  "A null F1, as an answer with no token leaves the score undefined",
+  "A null F1, as an answer with no token leaves the score undefined, with a note beside it",
   "F1 0.500000, half credit for abstaining when the passages say \"no water\""],
  "One side is empty and the other is not, so the SQuAD 2.0 rule gives 0, and exact match is 0. Full credit for an empty answer needs an empty reference, as on Q24. The rule covers the empty case, so nothing is null, and there is no half credit. The miss began in retrieval: Q14 is the planted lexical trap, with hit 0 at 5 for BM25.")
 
@@ -102,8 +102,8 @@ q(0, "A short answer is supplied as the number 45 where the text \"45\" belongs.
 q(3, "System B's Q16 answer lists Ekene-1 91,667 stb and Ekene-5 153,506 stb, two of the four wells the reference names. How is it scored?",
  "Exact 0 and F1 0.666667, every answer token in the reference and half the reference found",
  ["Exact 1, since every figure the answer gives appears in the reference",
-  "F1 0.500000, the share of the four wells that the answer names",
-  "Exact 0 and F1 0.000000, since an incomplete list earns nothing"],
+  "F1 0.500000, the share of the four wells that the answer names with their EUR figures",
+  "Exact 0 and F1 0.000000, since an incomplete list of wells earns nothing on either score"],
  "Normalised, the answer holds 6 tokens, all in the reference's 12, so precision is 1, recall one half and F1 0.666667: partial credit. The strings differ, so exact match is 0. F1 counts tokens, and half the wells is half the recall, which F1 combines with a precision of 1. Partial overlap is exactly what token F1 rewards.")
 
 q(1, "The retrieval tokeniser and the SQuAD normaliser both meet \"Ekene-3\". What does each produce?",

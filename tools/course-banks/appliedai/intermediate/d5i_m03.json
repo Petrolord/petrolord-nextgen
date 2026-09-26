@@ -38,7 +38,7 @@
    "The word \"and\" is treated as an article and removed from one of the two sides",
    "The hyphen is dropped so the reference reads ekene2, while B's space keeps ekene and 2 apart",
    "Hyphens split words, so the reference ends up with more tokens than B's answer",
-   "Exact match compares the raw text before normalisation, so a space change misses"
+   "Exact match compares the raw text before normalisation, so a space in place of a hyphen misses"
   ],
   "answer": 1,
   "explanation": "Normalised, the reference is \"ekene2 and ekene4\", three tokens, and B's answer \"ekene 2 and ekene 4\", five. Only \"and\" is common, so precision is 1 in 5, recall 1 in 3 and F1 0.250000; the strings differ, so exact match is 0. Only a, an and the are articles. Dropping the hyphen joins the words, and both scores are read after normalisation."
@@ -68,9 +68,9 @@
  {
   "prompt": "System A answers Q08 with \"0.5 to 0.35 bbl/d/psi\"; the reference is \"from 0.5 to 0.35 bbl/d/psi\". Token F1 is 0.888889. What keeps it below 1?",
   "options": [
-   "The decimal points are dropped differently on the two sides, splitting 0.35",
+   "The decimal points are dropped differently on the two sides, which splits 0.35 into two tokens on one side",
    "Every answer token is in the reference, and the reference's \"from\" is missing, which lowers recall",
-   "The slashes in bbl/d/psi split into three tokens on the answer side alone",
+   "The slashes in bbl/d/psi split into three tokens on the answer side alone, which then lowers precision",
    "Precision falls because the answer adds a token the reference lacks"
   ],
   "answer": 1,
@@ -92,7 +92,7 @@
   "options": [
    "F1 0.000000, a miss that began upstream, where the lexical trap left no answering passage",
    "F1 1.000000, since an honest abstention earns full credit on any query",
-   "A null F1, as an answer with no token leaves the score undefined",
+   "A null F1, as an answer with no token leaves the score undefined, with a note beside it",
    "F1 0.500000, half credit for abstaining when the passages say \"no water\""
   ],
   "answer": 0,
@@ -146,8 +146,8 @@
   "prompt": "System B's Q16 answer lists Ekene-1 91,667 stb and Ekene-5 153,506 stb, two of the four wells the reference names. How is it scored?",
   "options": [
    "Exact 1, since every figure the answer gives appears in the reference",
-   "F1 0.500000, the share of the four wells that the answer names",
-   "Exact 0 and F1 0.000000, since an incomplete list earns nothing",
+   "F1 0.500000, the share of the four wells that the answer names with their EUR figures",
+   "Exact 0 and F1 0.000000, since an incomplete list of wells earns nothing on either score",
    "Exact 0 and F1 0.666667, every answer token in the reference and half the reference found"
   ],
   "answer": 3,

@@ -48,7 +48,7 @@ q(3, "System B writes 45.25 for the label 45.2 on EKD-032, where water_cut_pct h
  ["Wrong, since a difference equal to the tolerance lies outside it",
   "Wrong, since 45.25 carries a digit that the label does not have",
   "Unsupported, since a two-decimal figure has no match in a one-decimal label"],
- "The rule is |prediction - label| <= max(absTol, relTol x |label|), a less-than-or-equal. The difference sits on 0.05, and in double precision it computes just under 0.05, so the cell is correct. Numbers are compared as values, so an extra digit is no mismatch, and both sides hold a value, which rules out unsupported.")
+ "The rule is |prediction - label| <= max(absTol, relTol x |label|), a less-than-or-equal. As written the difference is exactly 0.05, which that rule accepts; in double precision the engine computes it just under 0.05, so the cell is correct on either reading. Numbers are compared as values, so an extra digit is no mismatch, and both sides hold a value, which rules out unsupported.")
 
 q(2, "On EKD-033 the oil rate label is 64.6 and B predicts 64.7, against an absTol of 0.05. Which outcome follows?",
  "Wrong, with the reason \"64.7 differs from 64.6 by 0.10000000000000853, above the tolerance 0.05\"",
@@ -78,12 +78,12 @@ q(0, "System A's micro and macro accuracy both print 0.972222. What makes them e
   "All six fields have the same accuracy, so any average of them agrees"],
  "Every labelled record is scored on every field, so each field has 30 cells, and the mean of six rates over equal counts is the pooled rate: equal by construction. The course checked it, a difference of 1.11e-16 for A, the last bits of the arithmetic. Nothing is copied, and the fields differ: A's event field has 28 correct of 30, its well field 30.")
 
-q(3, "System A's micro F1 is 0.966825 and its macro F1 0.942735. Which field pulls macro below micro?",
+q(3, "System A's micro F1 is 0.966825 and its macro F1 0.942735. Which field pulls macro F1 furthest below micro?",
  "water_cut_pct, with few filled cells and an F1 of 0.800000",
  ["well, where a single wrong well name counts against every field",
   "oil_rate_bopd, where a number field's tolerance cuts its F1 in half",
   "reservoir_pressure_psia, whose missed cells count double in the macro mean"],
- "Macro F1 gives each field one vote. water_cut_pct holds A's planted missed zero and its wrong-well water cut among few filled cells, so its F1 of 0.800000 pulls the mean of the six down. A's well and oil_rate_bopd fields both score 1.000000, and A has no missed cell in reservoir_pressure_psia.")
+ "Macro F1 gives each field one vote. water_cut_pct holds A's planted missed zero and its wrong-well water cut among few filled cells, so its F1 of 0.800000, the lowest of the six, pulls the mean down furthest. A's well and oil_rate_bopd fields both score 1.000000, and reservoir_pressure_psia, at 0.923077, pulls less and holds no missed cell.")
 
 q(1, "The first field passed to scoreExtraction is declared {\"name\": \"well\", \"type\": \"text\", \"absTol\": 1}. What happens?",
  "It is refused: \"fields[0].absTol applies to 'number' fields only\"",

@@ -33,7 +33,7 @@ q(1, "System A's BM25 list for Q02, \"initial oil rate of Ekene-3\", holds one o
  "Precision at rank 4 is one in four, and that single term is divided by the 5 relevant judged passages",
  ["It multiplies the reciprocal rank, 0.250000, by the list's precision at 5, 0.200000",
   "Precision at 5, 0.200000, is divided by the 4 ranks that sit at or above the relevant passage",
-  "Every rank from 1 to 5 adds its precision to the sum, and the five are then averaged"],
+  "Every rank from 1 to 5 adds its precision to the sum, and the five precisions are then averaged together"],
  "AP sums precision at each relevant rank and divides by relevant judged. The only relevant passage is at rank 4, where precision is 1 in 4, and 5 passages are relevant, so 0.050000. Multiplying reciprocal rank by precision at 5 lands on the same figure here by coincidence; it is no rule the engine states. Precision is read only at relevant ranks, so ranks 1 to 3 and 5 add nothing, and nothing is divided by a count of ranks.")
 
 q(1, "System A's Q01, \"What was the reservoir pressure when the waterflood started?\", has 8 relevant judged passages at grade 1 or more, and its AP at 5 is 0.262500. Why can its AP at 5 never reach 1?",

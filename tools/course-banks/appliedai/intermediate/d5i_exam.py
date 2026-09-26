@@ -173,12 +173,12 @@ q(1, "System B's short answer to Q05 is \"2024-09-01\" against the reference \"2
 
 # Field extraction
 
-q(3, "System B writes 2230 for the reservoir pressure of EKD-017, labelled 2226, with absTol 0.5. What does the engine return?",
+q(3, "System B writes 2230 for the reservoir pressure of EKD-017, labelled 2226, with absTol 0.5 and no relTol. What does the engine return?",
  "Wrong: a gap of 4 psi is far beyond the 0.5 the field allows",
  ["Correct, as 2230 is 2226 rounded to the nearest ten psi",
   "Unsupported, since 2230 appears in no passage of the corpus",
-  "Correct at relTol 0.002, the allowance the groundedness check uses"],
- "The field's tolerance is its absTol of 0.5 and the difference is 4, so both sides hold a value and they do not match; the engine's reason is \"2230 differs from 2226 by 4, above the tolerance 0.5\". Rounding earns nothing in a number field. Unsupported needs an empty label. numericRelTol belongs to the groundedness check, and no relTol is stated on this field.")
+  "Correct, since the groundedness check's numericRelTol carries over to number fields"],
+ "The field's tolerance is its absTol of 0.5 and the difference is 4, so both sides hold a value and they do not match; the engine's reason is \"2230 differs from 2226 by 4, above the tolerance 0.5\". Rounding earns nothing in a number field. Unsupported needs an empty label. numericRelTol belongs to the groundedness check and never reaches a number field, which reads only its own absTol and relTol.")
 
 q(2, "System A writes \"3,038\" in a number field whose label is 3038. How is the cell scored?",
  "Correct: a comma followed by three digits is a thousands group",

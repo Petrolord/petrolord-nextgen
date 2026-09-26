@@ -38,9 +38,9 @@ q(2, "With exponential gain on the stated ranking, the engine returns DCG 6.0953
 
 q(3, "Exponential gain 2^g - 1 values grades 0, 1, 2 and 3 at 0, 1, 3 and 7. What does it change about nDCG against linear gain?",
  "A grade 3 passage now outweighs two grade 2 passages, so putting the answering passage first matters most",
- ["Nothing about how credit is ordered, since both gains are the grade rescaled by the ideal",
-  "Grades 0 and 1 part company, so a related passage stops counting at all",
-  "The ideal DCG is built from the retrieved list alone under this gain"],
+ ["Nothing about how credit is ordered, since under both gains the grade is simply rescaled by the ideal DCG",
+  "Grades 0 and 1 part company, so a related passage stops counting toward nDCG at all",
+  "The ideal DCG is built from the retrieved list alone under this gain, so a missed passage costs nothing at all"],
  "Under exponential gain a grade 3 passage is worth 7 against a grade 2's 3, so answering is worth much more than being relevant and the first rank of the answering passage dominates. Grades 0 and 1 carry the same gain on both scales, 0 and 1. The ideal is built the same way under both gains, from every judged grade, which keeps the ratio between 0 and 1.")
 
 q(0, "System A's Q04 scores nDCG at 5 of 0.935166 with linear gain and 0.863604 with exponential gain; its Q02 goes from 0.261097 to 0.336900. What do the two rows show?",
