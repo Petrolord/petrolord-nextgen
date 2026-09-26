@@ -16,7 +16,7 @@
    "0.000000, because NOC is carried in full and a carried party pays no cost",
    "3600000.000000, its 20.000000 participating interest applied to the cost",
    "2700000.000000, the same proportionate share of the cost that PB declined",
-   "4235294.117647, its share of the project, 23.529412, applied to the cost"
+   "4235294.117647, what NOC's 23.529412 percent of the project comes to"
   ],
   "answer": 3,
   "explanation": "With no carry stated in this call, NOC consents as a party paying its own share of the project, and the engine returns 4235294.117647. Its paying interest of 0.000000 belongs to the Ekene carry, which this call does not state; 3600000.000000 would leave PB's 15.000000 unpaid; 2700000.000000 is PB's proportionate share, the premium base."

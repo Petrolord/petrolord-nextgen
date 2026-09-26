@@ -23,7 +23,7 @@ x("A nonConsent call on the synthetic Ekene-4 sidetrack names EKO (participating
 
 # 2
 x("NOC, with a participating interest of 20.000000, consents to an 18000000.000000 sidetrack that PB declines, on a call stating no carry. How much of that cost falls on NOC?",
- "4235294.117647, its share of the project, 23.529412, applied to the cost",
+ "4235294.117647, what NOC's 23.529412 percent of the project comes to",
  ["0.000000, because NOC is carried in full and a carried party pays no cost",
   "3600000.000000, its 20.000000 participating interest applied to the cost",
   "2700000.000000, the same proportionate share of the cost that PB declined"],
