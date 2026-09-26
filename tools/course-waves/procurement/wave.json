@@ -406,7 +406,7 @@
    "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 1."
   },
   "gen_course.py (self checks)": {
-   "md5": "2d952259715119e405001bc0439d6606",
+   "md5": "bf5b60a38fc612119e4f6cbbf70a7c1c",
    "command": "python3 gen_course.py",
    "expected": 0,
    "exit": 0,
