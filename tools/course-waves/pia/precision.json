@@ -1,0 +1,14 @@
+{
+ "money": {
+  "decimals": 6,
+  "match": "^(?:alaku_2025_tet_usd|alaku_2026_hct_chargeable_profit_usd|alaku_2026_total_royalty_usd|alaku_2027_dev_levy_usd|alaku_2028_cit_usd|alaku_total_cit_usd|nkemdi_2028_liquids_royalty_usd|nkemdi_2029_hct_chargeable_profit_usd|nkemdi_2029_production_allowance_usd|nkemdi_2031_cpr_deferred_usd|nkemdi_cpr_forfeited_usd|nkemdi_total_cit_usd|odozi_2029_production_royalty_usd|odozi_2030_hct_usd|odozi_2031_dev_levy_usd|odozi_total_cit_usd)$"
+ },
+ "percent": {
+  "decimals": 6,
+  "match": "^(?:odozi_government_take_pct)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:odozi_2028_liquids_royalty_rate)$"
+ }
+}

@@ -1,0 +1,42 @@
+{
+ "slug": "pia",
+ "prefix": "ec7",
+ "name": "Petroleum Industry Act 2021 & Nigerian Fiscal Terms",
+ "pathOrder": 72,
+ "module": "economics",
+ "prerequisite": null,
+ "engineCourse": "An ENGINE COURSE: no Suite app. The practicals run in the course's own calculator panels (pia-royalty-calculator, pia-hct-calculator, pia-ledger-calculator) over the vendored engine engines/economics/cashflow.ts; the learning page says so plainly. Lead decisions (cat-brief): the same published fee and the same Associate/Professional/Expert certificate ladder as app courses; no Suite bridge mapping; prerequisite null.",
+ "repo": "/root/wt-ec7-nextgen",
+ "branch": "feat/ec7-pia-course",
+ "goldens": [],
+ "goldensNote": "EMPTY BY DECISION, as SC2 and D5. The vendored golden test-data/economics/goldens/pia2021_cases.json carries oracle output beside its inputs. The digest reads its INPUTS only and prints the engine's own figures; naming the golden here would let numsweep resolve a lesson literal against an oracle figure the digest never prints.",
+ "engines": [
+  "engines/economics/cashflow.ts",
+  "engines/economics/fiscalConventions.js"
+ ],
+ "enginesVendoredAt": "NextGen packages/engines already carries engines/economics/cashflow.ts at ENGINE_VERSION 3.12.0, sha-identical with petrolord-engines 3778451 (engines PR #262), with its golden pia2021_cases.json, oracle_pia2021.py, FINDINGS-pia2021.md and AUDIT-PIA-2021.md, vendored by the cashflow and fiscal re-cut (NextGen #266, VENDOR.json group ec7-pia-recut). THIS COURSE VENDORS NOTHING: every packages/engines path is byte-identical to origin/main (prove_prior_courses.sh part 1).",
+ "history": {
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The engine was brought into line with the gazetted texts (engines PR #262) before any lesson was written; that is provenance. The digest describes the engine as it is. Two engine refusals end with a sentence naming the platform reproduction switch pia_legacy_pre_audit; the digest prints them verbatim and the briefs tell writers to quote their first sentences only."
+ },
+ "regulatoryRule": "Every Act, regulation and statement taught is named with its edition or gazette date and the date read (2026-09-26), printed in digest section 2 and asserted against the vendored FINDINGS-pia2021.md. Every quotation is in concepts.json with its citation and is verified against the gazetted text by quote_check.py (the PDFs hash to the sha256 FINDINGS records). Licensed texts are never quoted. No legal threshold is invented: every rule figure typed in the digest prose is a text figure with its citation (gate_typed_literals.py ALLOWED); a value the texts leave open is a stated input with no default.",
+ "openReadings": {
+  "price royalty base year": "The Act (PIA Seventh Schedule para 11(1)) starts the benchmarks in 2020, the Regulations' Schedule in 2021. The engine default is the Regulations; graded figures state it; the course teaches both and grades neither. Every graded field is bit-identical under act_2020 (pia_capstone.mjs, discriminate.mjs).",
+  "new-acreage lease HCT rate": "PIA s.267 / NTA s.72 do not say whether a PML granted out of new acreage onshore or in shallow water pays 15 or 30. The Professional capstone states 30 as a reading; no field depends on it (proved under 15).",
+  "deep offshore HCT under the NTA": "NTA s.65(1) against s.72. The Expert capstone states conservative_zero; no field depends on it (proved under aggressive_pml_30 and custom 20)."
+ },
+ "scopeSeams": {
+  "ledger arithmetic": "OWNED BY the cash flow course (cashflow): discounting, NPV, IRR, payback, the ledger row order, loss-pool arithmetic, working-interest scaling. This course names the provision behind a line and refers there.",
+  "fiscal regime design": "OWNED BY the fiscal course (fiscal): the four instruments in the abstract, sliding scales, R-factors, templates, progressivity. The take wording is fiscalConventions.js, shared.",
+  "procurement and the 2010 content Act": "OWNED BY the procurement course (SC2)."
+ },
+ "namingCollisions": {
+  "royalty": "the engine's total royalty (production royalty on liquids and gas plus the royalty by price); name the part when only one is meant. Vocabulary section.",
+  "royalty by price": "the Seventh Schedule para 11 royalty, always with its base year. Vocabulary section.",
+  "a year under the Act alone": "a pia_only year of assessment. Vocabulary section.",
+  "open reading": "one of the three questions the texts leave open; never graded. Vocabulary section.",
+  "government take": "the engine's undiscounted take (fiscalConventions.js wording); never a tax rate. Vocabulary section."
+ },
+ "plan": {
+  "state": "FOUNDATION: structure, digest, capstones, gates, panels, learning page and writer briefs; STOPS BEFORE LESSONS."
+ }
+}

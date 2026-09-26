@@ -1,0 +1,363 @@
+{
+ "app_slug": "pia",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-conversion-and-the-legacy-terms",
+   "title": "Conversion and the Legacy Terms",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-voluntary-conversion",
+     "title": "Voluntary conversion and its deadline",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-relinquishment-and-the-split",
+     "title": "Relinquishment and the prospecting and mining split",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-marginal-fields",
+     "title": "Marginal fields",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-leases-that-do-not-convert",
+     "title": "Leases that do not convert",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-production-sharing-contracts-under-the-act",
+     "title": "Production sharing contracts under the Act",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-what-the-tax-act-moved",
+   "title": "What the Nigeria Tax Act Moved",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-deleted-and-re-enacted",
+     "title": "Deleted and re-enacted",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-levy-replaces-the-education-tax",
+     "title": "The development levy replaces the education tax",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-framework-year-by-year",
+     "title": "The framework read year by year",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-allowances-and-the-restriction-by-year",
+     "title": "Capital allowance and the restriction by year",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator",
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-gazette-version",
+     "title": "The gazette version and its date",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-what-the-tax-act-changed",
+   "title": "What the Nigeria Tax Act Changed at the Edges",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-deep-offshore-three-readings",
+     "title": "Deep offshore under the Tax Act, three readings",
+     "order": 1,
+     "est_minutes": 14,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-deleted-deep-offshore-allowance",
+     "title": "The deleted deep offshore allowance",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-decommissioning-escrow-condition",
+     "title": "The decommissioning escrow condition",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-minimum-effective-tax-rate",
+     "title": "The minimum effective tax rate",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-what-did-not-change",
+     "title": "What did not change",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-gas-and-incentives",
+   "title": "Gas and Incentives",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-gas-royalty-at-the-ledger-level",
+     "title": "Gas royalty at the ledger level",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pia-royalty-calculator",
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-associated-and-non-associated-gas",
+     "title": "Associated and non-associated gas",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-greenfield-gas-credit",
+     "title": "The greenfield gas credit",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-pipeline-and-utilisation-incentives",
+     "title": "Pipeline and utilisation incentives",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-reading-a-fiscal-outcome",
+   "title": "Reading a Fiscal Outcome",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-government-cash-flow-by-provision",
+     "title": "Government cash flow by provision",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-which-provision-moved",
+     "title": "Which provision moved",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-price-year-and-terrain-side-by-side",
+     "title": "Price, year and terrain side by side",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-stated-readings-and-approximations",
+     "title": "Stated readings and engine approximations",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-the-expert-reading",
+   "title": "The Expert Reading",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-transitions-so-far",
+     "title": "The transitions so far",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-reading-a-ledger-across-the-switch",
+     "title": "Reading a ledger across the switch",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pia-ledger-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,1514 @@
+[
+  {
+    "id": "pia_federation_account",
+    "text": "PIA",
+    "cite": "PIA s.258(2)",
+    "quote": "(2) All money collected from the petroleum industry that are due to the Government shall be transferred to the Federation Account in a timely manner, subject to this Act and these payments shall include taxes, royalties, production shares, profit shares, signature bonuses, production bonuses,",
+    "paraphrase": "All money due to Government from the petroleum industry must be paid into the Federation Account in a timely manner. This covers taxes, royalties, production and profit shares, and signature and production bonuses, among other payments.",
+    "found": true,
+    "note": "The list continues after the quote: renewal bonuses, rents, fees, fines and other levies connected with licences, leases and permits."
+  },
+  {
+    "id": "pia_administration_service_hct",
+    "text": "PIA",
+    "cite": "PIA s.259 (opening words) and s.259(a)(i)",
+    "quote": "collection of Government revenue in the petroleum industry shall be the function of the Federal Inland Revenue Service (the Service) and the Commission, and— (a) the Service shall be responsible for the assessment and collection of— (i) hydrocarbon tax",
+    "paraphrase": "Government petroleum revenue is administered and collected by the Federal Inland Revenue Service (the Service) and the Commission. The Service assesses and collects hydrocarbon tax.",
+    "found": true,
+    "note": "s.259 has no numbered subsections; it is an opening sentence with paragraphs (a) to (c). In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The words '259. From the commencement of this Act, the administration and' come before the quote and are followed by the side note 'Administration.'"
+  },
+  {
+    "id": "pia_administration_service_cit",
+    "text": "PIA",
+    "cite": "PIA s.259(a)(ii)",
+    "quote": "(ii) companies income tax and tertiary education tax in accordance with this Act as it relates to taxable petroleum operations",
+    "paraphrase": "The Service also assesses and collects companies income tax and tertiary education tax on taxable petroleum operations.",
+    "found": true,
+    "note": "NTA s.197(5) later deletes the TETFund Act charging sections, so tertiary education tax gives way to the NTA development levy."
+  },
+  {
+    "id": "pia_administration_commission_royalty",
+    "text": "PIA",
+    "cite": "PIA s.259(b)(i)",
+    "quote": "(b) the Commission shall be responsible for the determination and collection of — (i) royalties, signature bonus, rents, and related payments and its enforcement under this Act, and",
+    "paraphrase": "The Commission determines and collects royalties, signature bonus, rents and related payments and enforces them under the Act.",
+    "found": true,
+    "note": "s.259(b)(ii) adds production shares and profit shares under model contracts; s.259(c) gives the Authority the midstream gas flare penalty. Change under the NTA: NTA s.89(2) makes 'The Service ... the relevant tax authority for the administration of the royalty imposed under this Part', and NTA Seventh Schedule para 1(1) says 'The Service shall administer royalties'. NTA s.197(1)(a) deletes PIA Chapter 4 Parts I to X, which include s.259."
+  },
+  {
+    "id": "pia_price_royalty_frontier",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 11(2)",
+    "quote": "(2) There shall be no royalty by price for frontier acreages.",
+    "paraphrase": "Frontier acreages pay no royalty by price.",
+    "found": true,
+    "note": "Deleted from the PIA by NTA s.197(1)(c) and re-enacted in NTA Seventh Schedule para 6(3)(b)."
+  },
+  {
+    "id": "pia_price_royalty_nsia",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 11(3)",
+    "quote": "(3) Royalty derived from “royalty by price” shall be for the credit of Nigerian Sovereign Investment Authority.",
+    "paraphrase": "Royalty by price is credited to the Nigerian Sovereign Investment Authority.",
+    "found": true,
+    "note": "Matches the audit (para 11(3)). Deleted from the PIA by NTA s.197(1)(c) and re-enacted in NTA Seventh Schedule para 6(3)(c) with the same destination."
+  },
+  {
+    "id": "nta_development_levy_rate",
+    "text": "NTA",
+    "cite": "NTA s.59(1)",
+    "quote": "59. (1) A development levy of 4% is imposed on the assessable profits of",
+    "paraphrase": "A development levy of 4% is charged on assessable profits.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The sentence continues 'all companies chargeable to tax under Chapters Two and Three of this Act,' then the side note 'ment Levy', then the exclusion (see nta_development_levy_exclusions)."
+  },
+  {
+    "id": "nta_development_levy_exclusions",
+    "text": "NTA",
+    "cite": "NTA s.59(1) (closing words) and s.59(2)",
+    "quote": "other than small companies and non-resident companies. (2) The Service shall collect the levy and pay it into a special account created for that purpose.",
+    "paraphrase": "Small companies and non-resident companies are outside the levy. The Service collects the levy into a special account.",
+    "found": true,
+    "note": "The companies charged are those 'chargeable to tax under Chapters Two and Three of this Act' (Chapter Three is petroleum operations)."
+  },
+  {
+    "id": "nta_development_levy_distribution_a_d",
+    "text": "NTA",
+    "cite": "NTA s.59(3)(a)-(d)",
+    "quote": "(3) The revenue accruing from the levy shall be distributed as follows – (a) Tertiary Education Trust Fund – 50%; (b) Nigerian Education Loan – 15%; (c) National Information Technology Development Fund – 8%; (d) National Agency for Science and Engineering Infrastructure – 8%;",
+    "paraphrase": "Levy revenue is shared out by fixed percentages: 50% to the Tertiary Education Trust Fund, 15% to the Nigerian Education Loan, 8% to the National Information Technology Development Fund and 8% to the National Agency for Science and Engineering Infrastructure.",
+    "found": true,
+    "note": "Split across two entries because the full list is over 45 words. The seven shares total 100%."
+  },
+  {
+    "id": "nta_development_levy_distribution_e_g",
+    "text": "NTA",
+    "cite": "NTA s.59(3)(e)-(g)",
+    "quote": "(e) National Board for Technological Incubation –4%; (f) Defence and Security Infrastructure Fund –10%; and (g) National Cybersecurity Fund –5%.",
+    "paraphrase": "The remaining shares are 4% to the National Board for Technological Incubation, 10% to the Defence and Security Infrastructure Fund and 5% to the National Cybersecurity Fund.",
+    "found": true,
+    "note": "The gazette prints the dash with no space before 4%, 10% and 5% (e.g. 'Incubation –4%'). s.59(6) sends the Defence and Security share (3)(f) through the Fourteenth Schedule."
+  },
+  {
+    "id": "nta_development_levy_not_hct",
+    "text": "NTA",
+    "cite": "NTA s.59(4)",
+    "quote": "(4) The tax imposed under this Part shall not be levied on assessable profits computed for the purposes of hydrocarbon tax.",
+    "paraphrase": "The development levy is not charged on assessable profits computed for hydrocarbon tax.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_voluntary_conversion",
+    "text": "PIA",
+    "cite": "PIA s.92(1)",
+    "quote": "lease may enter into a voluntary conversion contract under this Act.",
+    "paraphrase": "A holder of an existing oil prospecting licence or oil mining lease may choose to sign a conversion contract under the Act.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The sentence opens '92.—(1) A holder of an existing oil prospecting licence or oil mining' before the side note 'Voluntary'. s.92(2): a converting licensee or lessee benefits from the Chapter 4 fiscal provisions. s.92(3)(b): PPT Act ss.11 and 12 incentives cease to apply on conversion."
+  },
+  {
+    "id": "pia_conversion_deadline",
+    "text": "PIA",
+    "cite": "PIA s.92(4)",
+    "quote": "(4) A conversion contract shall be concluded at a date (“conversion date”) which is the earlier of— (a) 18 months from the effective date ; and (b) the expiration date of the oil mining lease",
+    "paraphrase": "A conversion contract must be concluded by the conversion date, which is the earlier of 18 months from the effective date and the expiry of the oil mining lease (or the date an oil prospecting licence converts to an oil mining lease).",
+    "found": true,
+    "note": "'effective date' is defined in PIA s.318 as 'the date on which this Act comes into force'. The audit gives commencement as 16 August 2021; that date is not in the quote. s.94(1) uses the same 18 month window for producing marginal fields."
+  },
+  {
+    "id": "pia_unconverted_terms_continue",
+    "text": "PIA",
+    "cite": "PIA s.92(6)",
+    "quote": "does not enter into a conversion contract prior to the conversion date, the terms and conditions applicable to the oil prospecting licence or oil mining lease prior to the effective date of this Act shall continue to apply",
+    "paraphrase": "If a holder does not sign a conversion contract before the conversion date, the terms that applied to its licence or lease before the effective date continue to apply.",
+    "found": true,
+    "note": "The sentence continues 'to the oil prospecting licence or oil mining lease, subject to sections 124 (2), 125 (6), 174 (6), 303 (1) and 311 (2) (b) of this Act.'"
+  },
+  {
+    "id": "pia_conversion_40pct_selection",
+    "text": "PIA",
+    "cite": "PIA s.93(2)",
+    "quote": "(2) Where the total acreage selected under subsection (1) is less than 40% of the area to which the applicable oil mining lease applies, the holder may select additional areas covered by the oil mining lease for conversion to a petroleum prospecting licence",
+    "paraphrase": "If the areas a holder selects for retention under subsection (1) come to less than 40% of the oil mining lease, it may pick further areas for conversion to a petroleum prospecting licence.",
+    "found": true,
+    "note": "The sentence continues past a page break: the total selected 'shall not be more than 40% of the oil mining lease area', but a holder whose s.93(1) selections already exceed 40% keeps that larger area."
+  },
+  {
+    "id": "pia_relinquishment_unselected",
+    "text": "PIA",
+    "cite": "PIA s.93(4)",
+    "quote": "(4) Areas and zones subject to an oil mining lease and not selected by the holder under subsections (1) and (2) shall be relinquished by the holder.",
+    "paraphrase": "Areas of an oil mining lease that the holder does not select under subsections (1) and (2) are relinquished.",
+    "found": true,
+    "note": "s.93(5): relinquishment takes effect at the renewal date or, for a holder converting under s.92(1), the conversion date."
+  },
+  {
+    "id": "pia_oml_conversion_ppl_terms",
+    "text": "PIA",
+    "cite": "PIA s.93(6)(a)",
+    "quote": "(a) designated by a holder under subsection (1) (a), (b), (c) or (2) into a petroleum prospecting licence in accordance with section 78 of this Act, with fiscal terms as applicable under section 267 (b)",
+    "paraphrase": "On conversion of an oil mining lease, areas designated for appraisal or discovery work (subsection (1) (a), (b), (c) or (2)) become a petroleum prospecting licence on the new-acreage fiscal terms of section 267 (b).",
+    "found": true,
+    "note": "Links to s.267(b) (the 15% hydrocarbon tax class)."
+  },
+  {
+    "id": "pia_oml_conversion_pml_terms",
+    "text": "PIA",
+    "cite": "PIA s.93(6)(b)",
+    "quote": "(b) selected under subsection (1) (d) and (e), into petroleum mining leases, with fiscal terms as applicable under section 267 (a) and other terms of Chapter 4 of this Act to the lease,",
+    "paraphrase": "On conversion of an oil mining lease, areas under development or in regular commercial production (subsection (1) (d) and (e)) become petroleum mining leases on the fiscal terms of section 267 (a).",
+    "found": true,
+    "note": "Links to s.267(a) (the 30% hydrocarbon tax class). The proviso that follows: for PSC profit oil the cumulative production of all the PMLs counts, but royalty is by each PML's own production."
+  },
+  {
+    "id": "pia_opl_conversion_ppl_terms",
+    "text": "PIA",
+    "cite": "PIA s.93(7)(a)",
+    "quote": "(a) designated by a holder under section 93 (1) (a), (b) and (c) of this Act as areas to be continued under the petroleum prospecting licence under this Act, with fiscal terms as applicable under section 267 (b)",
+    "paraphrase": "When an oil prospecting licence converts, the areas designated under section 93 (1) (a), (b) and (c) continue as a petroleum prospecting licence on the fiscal terms of section 267 (b).",
+    "found": true,
+    "note": "The quote continues 'and other terms under Chapter 4 of this Act for new acreage'. s.93(7)(c): the remaining area stays as PPL exploration area on new-acreage terms."
+  },
+  {
+    "id": "pia_opl_conversion_pml_terms",
+    "text": "PIA",
+    "cite": "PIA s.93(7)(b)",
+    "quote": "(b) selected under section 93 (1) (d) and (e) of this Act shall be converted into petroleum mining leases with fiscal terms as applicable under section 267 (a) and other terms of Chapter 4 of this Act,",
+    "paraphrase": "When an oil prospecting licence converts, the areas selected under section 93 (1) (d) and (e) become petroleum mining leases on the fiscal terms of section 267 (a).",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_marginal_field_conversion",
+    "text": "PIA",
+    "cite": "PIA s.94(1)",
+    "quote": "operate under the original royalty rates and farm out agreements, but shall convert to a petroleum mining lease under this Act, with terms applicable under sections 267 (b), 302, and other provisions under the Act within 18 months from the effective date.",
+    "paraphrase": "A producing marginal field may keep its original royalty rates and farm-out agreements but must convert to a petroleum mining lease, on the terms of sections 267 (b) and 302, within 18 months from the effective date.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The sentence opens '94.—(1) A producing marginal field shall be allowed to continue to' before the side note 'field.' Matches the audit (s.94(1), terms under s.267(b) and s.302). s.94(2): a marginal field declared before 1 January 2021 and not producing converts to a PPL on new-acreage terms."
+  },
+  {
+    "id": "pia_no_new_marginal_fields",
+    "text": "PIA",
+    "cite": "PIA s.94(9)",
+    "quote": "(9) No new marginal fields shall be declared under this Act.",
+    "paraphrase": "The Act allows no new marginal fields to be declared.",
+    "found": true,
+    "note": "Matches the audit (s.94(9)). s.94(8)(a) defines a marginal field as one declared before 1 January 2021 or lying fallow for seven years after discovery before the effective date."
+  },
+  {
+    "id": "pia_unconverted_act_not_applicable",
+    "text": "PIA",
+    "cite": "PIA s.303(1)",
+    "quote": "prospecting licence or oil mining lease who do not enter into a conversion",
+    "paraphrase": "The Act does not apply to holders of an oil prospecting licence or oil mining lease who do not sign a conversion contract, until that licence or lease ends or expires.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The quote is one printed line of the sentence '303.—(1) The provisions of this Act shall not apply to holders of an oil / prospecting licence or oil mining lease who do not enter into a conversion / contract until the termination or expiration of the respective oil prospecting / licence or oil mining lease'; each line break carries a side note ('General', 'application of this Part', 'and other'). Exception in the same sentence: s.311 and Seventh Schedule paras 10 and 11 apply to sole-risk indigenous licences where Government exercised back-in rights before the effective date, and any OML renewal is on PIA terms. The subsection does not itself name PPT or the old royalty; for unconverted leases the 'old terms' come from s.92(6), and under the NTA from Chapter 3 Part II (petroleum profits tax) and Seventh Schedule Part IV."
+  },
+  {
+    "id": "nta_unconverted_part_not_applicable",
+    "text": "NTA",
+    "cite": "NTA s.87(1)",
+    "quote": "not apply to holders of an oil prospecting licence or oil mining lease who do not",
+    "paraphrase": "The NTA hydrocarbon tax Part and the PIA do not apply to holders of an oil prospecting licence or oil mining lease who do not sign a conversion contract, until that licence or lease ends or expires.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Full sentence: '87. (1) This Part and the provisions of the Petroleum Industry Act shall / not apply to holders ... who do not / enter into a conversion contract until the termination or expiration of the / respective oil prospecting licence or oil mining lease.' NTA s.87(2) moves the sole-risk carve-out to 'Chapter Two of this Act and paragraph 6 of the First Schedule to the Petroleum Industry Act' (the PIA said s.311 and Seventh Schedule paras 10 and 11) and cites 'Cap. P10, LFN 2024' (sic, 2004 elsewhere). NTA s.196(h) repeals the Petroleum Profits Tax Act, so PPT for unconverted leases now runs under NTA Chapter 3 Part II."
+  },
+  {
+    "id": "nta_unconverted_gas_royalty",
+    "text": "NTA",
+    "cite": "NTA Seventh Schedule Part IV para 7(3)(c)",
+    "quote": "any flare or waste gas appropriated by the Government of the Federation for its own use or for any purpose approved by it, as follows – (i) onshore areas – 7 %, and (ii) offshore areas – 5%;",
+    "paraphrase": "For leases under NTA Chapter Three Parts II and III, natural gas royalty is 7% onshore and 5% offshore of the price received (or a floor price tied to gas flare fees).",
+    "found": true,
+    "note": "The opening words of 7(3)(c) are 'royalty based on production for natural gas shall be at a rate per centum of the price received by a licensee, lessee or marginal field holder...'; the full paragraph is over 45 words, so the quote is its tail. The gazette prints '7 %' with a space. Part IV is headed 'DETERMINATION OF ROYALTIES FOR PART II AND III OF CHAPTER THREE', so it covers deep offshore and inland basin PSCs (Part III) as well as unconverted PPT leases (Part II). Audit citation confirmed."
+  },
+  {
+    "id": "pia_hct_scope_liquids",
+    "text": "PIA",
+    "cite": "PIA s.260(1)(a)",
+    "quote": "(a) hydrocarbon tax shall apply to crude oil as well as field condensates and liquid natural gas liquids derived from associated gas and produced in the field upstream of the measurement points ;",
+    "paraphrase": "Hydrocarbon tax applies to crude oil, field condensates and liquid natural gas liquids from associated gas, produced in the field upstream of the measurement points.",
+    "found": true,
+    "note": "s.260(1)(b)(i) excludes associated gas (including gaseous NGLs in the rich gas) and non-associated gas."
+  },
+  {
+    "id": "pia_hct_nag_condensate_excluded",
+    "text": "PIA",
+    "cite": "PIA s.260(1)(b)(ii)",
+    "quote": "(ii) condensates and natural gas liquids produced from non-associated gas in fields or gas processing plants, provided the related volumes are determined at the measurement points or at the exit of the gas processing plant,",
+    "paraphrase": "Condensates and natural gas liquids produced from non-associated gas in fields or gas processing plants are outside hydrocarbon tax, provided their volumes are determined at the measurement points or the gas plant exit.",
+    "found": true,
+    "note": "The paragraph continues 'regardless of whether the condensates or natural gas liquids are subsequently commingled with crude oil'."
+  },
+  {
+    "id": "pia_hct_ag_cost_allocation",
+    "text": "PIA",
+    "cite": "PIA s.260(2)",
+    "quote": "(2) The costs of production of associated gas, upstream of the measurement point shall be allocated to crude oil for the purposes of calculating hydrocarbon tax, provided that capital and operating costs for wells solely",
+    "paraphrase": "Costs of producing associated gas upstream of the measurement point are allocated to crude oil for hydrocarbon tax, with an exception for wells that produce only gas-cap gas.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The exception continues after the side note 'Cap. C21,': gas-cap wells' costs 'shall not be allocated to crude oil, but shall be claimed under the Companies Income Tax Act.'"
+  },
+  {
+    "id": "pia_hct_not_deep_frontier",
+    "text": "PIA",
+    "cite": "PIA s.260(3)",
+    "quote": "(3) This Part shall not apply to a frontier acreage until it is reclassified under section 68 (3) of this Act and to deep offshore.",
+    "paraphrase": "The hydrocarbon tax Part does not apply to deep offshore, or to frontier acreage until it is reclassified under section 68 (3).",
+    "found": true,
+    "note": "NTA s.65(4) re-enacts only the frontier exclusion; NTA s.65(1) lists deep offshore within the Part (see the NTA s.65 entries)."
+  },
+  {
+    "id": "pia_hct_deduct_royalties",
+    "text": "PIA",
+    "cite": "PIA s.263(1)(b)",
+    "quote": "(b) all royalties the liability for which was incurred and were paid by the company during that period in respect of crude oil and associated gas",
+    "paraphrase": "Royalties incurred and paid in the period on crude oil and associated gas are deductible for hydrocarbon tax.",
+    "found": true,
+    "note": "The paragraph continues to cover payments to the Federation Account under production sharing, profit sharing or risk service features of a model contract."
+  },
+  {
+    "id": "pia_hct_deduct_decom_fund",
+    "text": "PIA",
+    "cite": "PIA s.263(1)(e)",
+    "quote": "any amount contributed to a fund, scheme or arrangement approved by the Commission for the purpose of decommissioning and abandonment, provided that the surplus or residue of the fund shall be subject to tax under this Act at the end of life of the field,",
+    "paraphrase": "Contributions to a Commission-approved decommissioning and abandonment fund are deductible, and any surplus returned to the lessee is taxed at the end of field life.",
+    "found": true,
+    "note": "NTA s.86 adds a 30% escrow condition for deductibility under the NTA."
+  },
+  {
+    "id": "pia_hct_deduct_levies",
+    "text": "PIA",
+    "cite": "PIA s.263(1)(f)",
+    "quote": "(f ) all sums the liability of which was incurred by the company to the Federal Government or any State or Local Government Council by way of levies, stamp duties and fees ;",
+    "paraphrase": "Levies, stamp duties and fees owed to the Federal, State or Local Government are deductible for hydrocarbon tax.",
+    "found": true,
+    "note": "The gazette prints '(f )' with a space."
+  },
+  {
+    "id": "pia_hct_deduct_hcdt_nddc",
+    "text": "PIA",
+    "cite": "PIA s.263(1)(h)",
+    "quote": "(h) any amount contributed to any fund, scheme or arrangement approved by the Commission pursuant to the establishment of host communities development trusts under Chapter 3 of this Act, Environmental Remediation Fund, Niger Delta Development Commission and other similar contributions.",
+    "paraphrase": "Contributions to host communities development trusts, the Environmental Remediation Fund, the Niger Delta Development Commission and similar approved funds are deductible for hydrocarbon tax.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_hct_nondeduct_income_taxes",
+    "text": "PIA",
+    "cite": "PIA s.264(l)",
+    "quote": "(l) amounts incurred in respect of tertiary education tax, companies income tax, any income tax, profits tax or other similar taxes, whether charged within Nigeria or elsewhere ;",
+    "paraphrase": "Tertiary education tax, companies income tax and other income or profits taxes, in Nigeria or abroad, cannot be deducted for hydrocarbon tax.",
+    "found": true,
+    "note": "Matches the audit (s.264(l))."
+  },
+  {
+    "id": "pia_hct_nondeduct_bonuses",
+    "text": "PIA",
+    "cite": "PIA s.264(f)",
+    "quote": "(f ) production bonuses, signature bonuses paid for the acquisition of, or of rights in or over, petroleum deposits, bonuses or fees paid for renewing petroleum mining lease or petroleum prospecting licence or marginal field or fees paid for assigning rights to another party ;",
+    "paraphrase": "Production bonuses, signature bonuses, lease or licence renewal bonuses or fees, and fees for assigning rights cannot be deducted for hydrocarbon tax.",
+    "found": true,
+    "note": "Matches the audit (s.264(f)). The gazette prints '(f )' with a space."
+  },
+  {
+    "id": "pia_hct_nondeduct_cpr_forfeit",
+    "text": "PIA",
+    "cite": "PIA s.264(q)",
+    "quote": "(q) costs under paragraph 2 (2) (c) of the Sixth Schedule to this Act.",
+    "paraphrase": "Costs still above the cost price ratio limit when crude oil operations end (Sixth Schedule paragraph 2 (2) (c)) cannot be deducted.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_loss_relief",
+    "text": "PIA",
+    "cite": "PIA s.265(1)",
+    "quote": "that period after the deduction of the amount of any loss incurred by that company during any previous accounting period.",
+    "paraphrase": "Assessable profit for a period is the adjusted profit after deducting losses the company incurred in any previous accounting period.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The subsection opens '265.—(1) The assessable profits for each company or petroleum mining lease for any accounting period shall be the amount of the adjusted profit of' with side notes 'Assessable / profits and / losses.' inside it."
+  },
+  {
+    "id": "pia_loss_relief_by_class",
+    "text": "PIA",
+    "cite": "PIA s.265(2)",
+    "quote": "(2) The assessable profit shall be determined separately for each of the two classes of chargeable tax identified in section 267 (a) and (b).",
+    "paraphrase": "Assessable profit, and so loss relief, is worked out separately for each of the two hydrocarbon tax classes in section 267 (a) and (b).",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_loss_relief_order",
+    "text": "PIA",
+    "cite": "PIA s.265(3)",
+    "quote": "(3) A deduction under subsection (1) shall be made so far as possible from the amount, if any, of the adjusted profit of the first accounting period after that in which the loss was incurred,",
+    "paraphrase": "A loss is deducted as far as possible from the adjusted profit of the first accounting period after the one in which it was incurred.",
+    "found": true,
+    "note": "The subsection continues: any balance goes against the next succeeding period 'and so on until such loss is fully deducted'. No time limit on carryforward appears."
+  },
+  {
+    "id": "pia_loss_relief_deferral_election",
+    "text": "PIA",
+    "cite": "PIA s.265(4)",
+    "quote": "the company may elect in writing that a deduction or any part to be made under this section shall be deferred to and be made in the succeeding accounting period, and may so elect in any succeeding accounting period.",
+    "paraphrase": "A company may elect in writing to defer all or part of a loss deduction to the next accounting period, and may make the same election in later periods.",
+    "found": true,
+    "note": "The election must be made '(4) Within five months after the end of any accounting period of a company, or within such further time as the Service may permit in writing' (words before the quote)."
+  },
+  {
+    "id": "pia_cpr_reference",
+    "text": "PIA",
+    "cite": "PIA s.266(2)",
+    "quote": "(2) In determining the chargeable profit, the total cost shall not exceed",
+    "paraphrase": "In working out chargeable profit, total cost may not exceed the cost price ratio set in the Sixth Schedule.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The sentence ends 'the cost-price ratio as determined in the Sixth Schedule to this Act.' after the side note 'Sixth'."
+  },
+  {
+    "id": "pia_cpr_limit_65",
+    "text": "PIA",
+    "cite": "PIA Sixth Schedule para 2(1)",
+    "quote": "excluding those related to section 263 (1) (a), (b) and (h), in an accounting period the sum of which is eligible for deduction under the hydrocarbon tax shall be subject to a cost price ratio limit of 65% of gross revenues",
+    "paraphrase": "Hydrocarbon tax deductions under section 263 and the Fifth Schedule, except rents, royalties and host community and similar contributions (section 263 (1) (a), (b) and (h)), are capped at a cost price ratio of 65% of gross revenues.",
+    "found": true,
+    "note": "Quote starts mid-sentence to fit 45 words; the sentence opens '2.—(1) All costs prescribed under section 263 and under the Fifth Schedule to this Act,', and it ends 'determined at the measurement points.'"
+  },
+  {
+    "id": "pia_cpr_carryforward",
+    "text": "PIA",
+    "cite": "PIA Sixth Schedule para 2(2)(a)",
+    "quote": "(a) the costs may be allowed for deduction for the purposes of ascertaining the profits of the company for subsequent years of assessment provided that the total costs to be deducted shall not exceed the actual costs incurred ;",
+    "paraphrase": "Costs disallowed by the cost price ratio limit can be deducted in later years, but total deductions may never exceed the costs actually incurred.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_cpr_carryforward_within_limit",
+    "text": "PIA",
+    "cite": "PIA Sixth Schedule para 2(2)(b)",
+    "quote": "shall be such an amount that if added to the sum of the total costs to be allowed as deduction under subparagraph (1) shall not exceed the specified cost price ratio limit of 65% ;",
+    "paraphrase": "Carried-forward costs claimed in a later year, added to that year's own costs, must stay within the 65% cost price ratio limit.",
+    "found": true,
+    "note": "Quote starts mid-sentence; (b) opens '(b) the total costs to be allowed as deduction in those subsequent years'."
+  },
+  {
+    "id": "pia_cpr_forfeiture",
+    "text": "PIA",
+    "cite": "PIA Sixth Schedule para 2(2)(c)",
+    "quote": "(c) where under paragraph 2 (2) (b), any cost exceed the cost price ratio limit upon the termination of upstream petroleum operations related to crude oil, such costs shall not be deductible for purpose of calculation of the hydrocarbon tax.",
+    "paraphrase": "Costs still above the cost price ratio limit when crude oil operations terminate are not deductible for hydrocarbon tax.",
+    "found": true,
+    "note": "Gazette grammar 'any cost exceed' (NTA Sixth Schedule 2(2)(c) prints 'exceeds'). s.264(q) repeats the disallowance."
+  },
+  {
+    "id": "pia_hct_rate_30",
+    "text": "PIA",
+    "cite": "PIA s.267(a)",
+    "quote": "(a) 30% of the profit from crude oil for petroleum mining leases selected under section 93 (6) (b) and (7) (b) of this Act with respect to onshore and shallow water areas ;",
+    "paraphrase": "Hydrocarbon tax is 30% of crude oil profit for onshore and shallow water petroleum mining leases selected under section 93 (6) (b) and (7) (b), that is, converted producing areas.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The opening words '267. The chargeable tax for any accounting period of a company shall be a percentage of the chargeable profit for that period aggregated and it shall be—' carry the side notes 'Chargeable / tax.'."
+  },
+  {
+    "id": "pia_hct_rate_15",
+    "text": "PIA",
+    "cite": "PIA s.267(b)",
+    "quote": "(b) 15% of profit from crude oil for onshore and shallow water and for petroleum prospecting licences selected under section 93 (6) (a) and (7) (a) of this Act.",
+    "paraphrase": "Hydrocarbon tax is 15% of crude oil profit for onshore and shallow water and for petroleum prospecting licences selected under section 93 (6) (a) and (7) (a).",
+    "found": true,
+    "note": "As printed, 'for onshore and shallow water' has no qualifier, so whether a PML later granted from a new-acreage PPL stays at 15% is not stated (audit H09). Deep offshore has no rate here (s.260(3))."
+  },
+  {
+    "id": "pia_additional_tax_trigger",
+    "text": "PIA",
+    "cite": "PIA s.268(1)",
+    "quote": "in subsection (2), the company is liable to pay an additional amount of chargeable",
+    "paraphrase": "If chargeable tax computed normally is below the amount in subsection (2), the company pays additional chargeable tax equal to the difference.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Each line of s.268(1) carries part of the side note 'Additional chargeable tax payable in certain circumstances.'; the quote is the one clean line."
+  },
+  {
+    "id": "pia_additional_tax_fiscal_price",
+    "text": "PIA",
+    "cite": "PIA s.268(2)",
+    "quote": "the reference in section 262 (1) (a) of this Act to the proceeds of sale were a reference to the amount obtained by multiplying the number of barrels of that crude oil determined at the measurement point by the fiscal oil price per barrel.",
+    "paraphrase": "The comparison amount is the tax that would be due if crude oil exported were valued at barrels at the measurement point times the fiscal oil price per barrel.",
+    "found": true,
+    "note": "s.268(3): the Commission sets the fiscal oil price per measurement point on an export parity basis under Seventh Schedule para 8(1) and (2)."
+  },
+  {
+    "id": "nta_additional_tax_trigger",
+    "text": "NTA",
+    "cite": "NTA s.73(1)",
+    "quote": "chargeable oil between connected persons, or disposal of chargeable oil be-",
+    "paraphrase": "Under the NTA the top-up applies where chargeable oil is sold between connected persons or disposed of between connected or unconnected persons and hydrocarbon tax falls below the fiscal-price amount.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Difference from PIA s.268(1): the NTA adds the connected-person sale or disposal trigger, which the PIA did not have. The rest of 73(1) (after a page break) reads 'is less than the amount prescribed in sub- section (2), the company shall pay an additional amount of chargeable hydro- carbon tax for that period equal to the difference between those two amounts.'"
+  },
+  {
+    "id": "nta_additional_tax_fiscal_price",
+    "text": "NTA",
+    "cite": "NTA s.73(2)",
+    "quote": "in section 67 (1) (a) of this Act to the proceeds of sale were a reference to the amount obtained by multiplying the number of barrels of that crude oil determined at the measurement point by the fiscal oil price per barrel.",
+    "paraphrase": "The comparison amount is the hydrocarbon tax that would be due if the crude oil were valued at barrels at the measurement point times the fiscal oil price per barrel.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_hcdt_contribution",
+    "text": "PIA",
+    "cite": "PIA s.240(2)",
+    "quote": "of an amount equal to 3% of its actual annual operating expenditure of the preceding financial year in the upstream petroleum operations affecting the host communities for which the applicable host communities development trust fund was established.",
+    "paraphrase": "Each settlor pays into the host communities development trust fund each year an amount equal to 3% of its actual operating expenditure of the preceding financial year in the upstream operations affecting those host communities.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The subsection opens '(2) Each settlor, where applicable through the operator, shall make an annual contribution to the applicable host communities development trust fund' with side notes inside it. Matches the audit."
+  },
+  {
+    "id": "pia_hcdt_deductible",
+    "text": "PIA",
+    "cite": "PIA s.257(1)",
+    "quote": "this Act, shall be deductible for the purposes of hydrocarbon tax and companies",
+    "paraphrase": "The settlor's annual host communities trust payment is deductible for hydrocarbon tax and companies income tax as applicable.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Full sentence: '257.—(1) Any payment made by the settlor under section 240 (2) of / this Act, shall be deductible for the purposes of hydrocarbon tax and companies / income tax as applicable.' The quote is the middle line. Chapter 3 is not deleted by the NTA."
+  },
+  {
+    "id": "pia_capital_allowance_rates",
+    "text": "PIA",
+    "cite": "PIA Fifth Schedule para 17(1)",
+    "quote": "17.—(1) Qualifying expenditure shall be subject to the rates below— Qualifying Capital Expenditure 1st 2nd 3rd 4th 5th Year Year Year Year Year Qualifying Plant Expenditure 20% 20% 20% 20% 19%",
+    "paraphrase": "Qualifying capital expenditure is written off at 20% a year for four years and 19% in the fifth year.",
+    "found": true,
+    "note": "The table prints the same 20/20/20/20/19 row for plant, pipeline, building and drilling expenditure; the quote shows the header and the plant row. The whole Fifth Schedule is deleted by NTA s.197(1)(b); NTA First Schedule Part II para 14(1) gives 20% in all five years."
+  },
+  {
+    "id": "pia_capital_allowance_retention",
+    "text": "PIA",
+    "cite": "PIA Fifth Schedule para 5(2)",
+    "quote": "(2) Notwithstanding the provisions of subparagraph (1) of this paragraph, there shall be retained in the books, in respect of each asset 1% of the initial cost of the asset which may only be written off in accordance with subparagraph (3).",
+    "paraphrase": "1% of each asset's initial cost stays in the books and can only be written off on disposal under a Commission certificate (subparagraph (3)).",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_exploration_appraisal_expensing",
+    "text": "PIA",
+    "cite": "PIA Fifth Schedule para 17(2)",
+    "quote": "Exploration expenditure and the first two appraisal wells expenditure in the same field are to be treated as deductible costs 100% in the year incurred, while for additional exploration expenditures and appraisal expenditures in the same field relating to pre-production period are to be amortised",
+    "paraphrase": "Exploration spending and the first two appraisal wells in a field are deducted 100% in the year incurred; further pre-production exploration and appraisal spending in the same field is amortised.",
+    "found": true,
+    "note": "The sentence continues 'and deducted on commencement of accounting period at an annual allowance of 20% in the first to fourth year and 19% in the fifth year with a 1% retention value.' See also s.263(1)(d)."
+  },
+  {
+    "id": "pia_production_allowance_converted",
+    "text": "PIA",
+    "cite": "PIA Sixth Schedule para 1(1)",
+    "quote": "1.—(1) There shall be a production allowance for crude oil production by leases which are converted oil mining leases based on a conversion contract and their renewals, which shall be the lower of US $2.50 per barrel and 20% of the fiscal oil price.",
+    "paraphrase": "Converted oil mining leases and their renewals get a production allowance equal to the lower of US $2.50 per barrel and 20% of the fiscal oil price.",
+    "found": true,
+    "note": "NTA Sixth Schedule para 1(1) repeats this."
+  },
+  {
+    "id": "pia_production_allowance_new_per_field",
+    "text": "PIA",
+    "cite": "PIA Sixth Schedule para 1(2) (opening words)",
+    "quote": "(2) There shall be a production allowance per field for crude oil production by a company for leases granted after the commencement of this Act and determined as follows—",
+    "paraphrase": "Leases granted after the Act commenced get a production allowance per field, set out by terrain in paragraphs (a) to (c).",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_production_allowance_onshore",
+    "text": "PIA",
+    "cite": "PIA Sixth Schedule para 1(2)(a)",
+    "quote": "lower of US $8.00 per barrel and 20% of the fiscal oil price per barrel up to a cumulative maximum production of 50 million barrels from commencement of production and the lower of US $4.00 per barrel and 20% of the fiscal oil price thereafter",
+    "paraphrase": "Onshore: the lower of US $8.00 per barrel and 20% of the fiscal oil price up to 50 million barrels cumulative production, then the lower of US $4.00 per barrel and 20% of the fiscal oil price.",
+    "found": true,
+    "note": "Quote omits the opening words '(a) for onshore areas — the' to fit 45 words."
+  },
+  {
+    "id": "pia_production_allowance_shallow",
+    "text": "PIA",
+    "cite": "PIA Sixth Schedule para 1(2)(b)",
+    "quote": "20% of the fiscal oil price, up to a cumulative maximum production of 100 million barrels from commencement of production and the lower of US $4.00 per barrel and 20% of the fiscal oil price thereafter ; and",
+    "paraphrase": "Shallow water: the first-tier allowance runs up to 100 million barrels cumulative production, then the lower of US $4.00 per barrel and 20% of the fiscal oil price.",
+    "found": true,
+    "note": "Quote starts mid-paragraph; it opens '(b) for shallow water areas — the lower of US $8.00 per barrel and'."
+  },
+  {
+    "id": "pia_production_allowance_deep_frontier",
+    "text": "PIA",
+    "cite": "PIA Sixth Schedule para 1(2)(c)",
+    "quote": "(c) for deep offshore areas and frontier basins — the lower of US $8.00 per barrel and 20% of the fiscal oil price, up to a cumulative maximum production of 500 million barrels",
+    "paraphrase": "Deep offshore and frontier: the lower of US $8.00 per barrel and 20% of the fiscal oil price up to 500 million barrels cumulative production.",
+    "found": true,
+    "note": "The paragraph continues 'from the commencement of production and the lower of US $4.00 per barrel and 20% of the fiscal oil price thereafter.' Not re-enacted by the NTA (see nta_production_allowance_two_terrains)."
+  },
+  {
+    "id": "pia_production_allowance_condensate",
+    "text": "PIA",
+    "cite": "PIA Sixth Schedule para 1(4)",
+    "quote": "(4) Any allowances for crude oil shall also apply to condensates and liquid natural gas liquids under section 260 (1) (a) of this Act.",
+    "paraphrase": "Production allowances for crude oil also apply to condensates and liquid natural gas liquids that are within hydrocarbon tax under section 260 (1) (a).",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_royalty_condensate_ngl",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 6",
+    "quote": "shall be paid into the Federation Account and verified by the Commission and for royalty purposes condensates shall be treated as crude oil and natural gas liquids shall be treated as natural gas.",
+    "paraphrase": "Royalties are paid into the Federation Account and verified by the Commission; for royalty, condensates count as crude oil and natural gas liquids count as natural gas.",
+    "found": true,
+    "note": "The paragraph opens 'All production of petroleum, including production tests, shall be subject to royalties on a non-discriminatory basis'. PIA s.260(4) says the same. Deleted by NTA s.197(1)(c); NTA Seventh Schedule para 6(1) proviso re-enacts the treatment."
+  },
+  {
+    "id": "pia_fiscal_oil_price",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 8(1)",
+    "quote": "8.—(1) The royalties applicable to crude oil and condensates shall be based on the fiscal oil price determined for the field at the measurement points under applicable regulations or guidelines, and this price shall be determined by the Commission",
+    "paraphrase": "Royalties on crude oil and condensates are based on a fiscal oil price for the field at the measurement points, set by the Commission.",
+    "found": true,
+    "note": "Para 8(1) goes on: the price approximates the month's average fair market value using lessee data and independent publications, adjusted for quality and transport. Para 8 is not in the NTA s.197(1)(c) deletion list, so it survives."
+  },
+  {
+    "id": "pia_fiscal_oil_price_export_parity",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 8(2)",
+    "quote": "(2) The fiscal oil price for each field shall consider any quality differentials related to international crude oils and condensates and shall be an export parity price taking into consideration the deduction of transportation costs within Nigeria",
+    "paraphrase": "The fiscal oil price reflects quality differentials against international crudes and is an export parity price net of transport costs within Nigeria.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_royalty_terrain_rates",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 10(2)(a)-(d)",
+    "quote": "on terrain basis as follows— (a) onshore areas 15% ; (b) shallow water (up to 200m water depth) 12.5% ; (c) deep offshore (greater than 200m water depth) 7.5% ; and (d) frontier basins 7.5%.",
+    "paraphrase": "Production royalty is charged by terrain: onshore 15%, shallow water up to 200m 12.5%, deep offshore beyond 200m 7.5%, and frontier basins 7.5%.",
+    "found": true,
+    "note": "Para 10 is deleted by NTA s.197(1)(c) and re-enacted in NTA Seventh Schedule para 6(2)(b), which prints deep offshore as 'beyond 200m' where the PIA says 'greater than 200m'."
+  },
+  {
+    "id": "pia_royalty_deep_offshore_tranche",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 10(3)",
+    "quote": "(3) For deep offshore fields with a production during a month of not more than 50,000 bopd, the royalty rate shall be 5% and the share of the production above 50,000 bopd shall be at the royalty rate specified in subparagraph (2).",
+    "paraphrase": "Deep offshore fields pay 5% on production up to 50,000 bopd in a month, and the share above 50,000 bopd pays the subparagraph (2) rate.",
+    "found": true,
+    "note": "REGS r.13(1)(b) turns this into a weighted average."
+  },
+  {
+    "id": "pia_royalty_small_field_scope",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 10(4) (opening words)",
+    "quote": "(4) Royalties for onshore fields and shallow water fields, including marginal fields, with crude oil and condensate production not more than 10,000 bopd during a month shall be at a rate per centum of the chargeable volume",
+    "paraphrase": "Onshore and shallow water fields, marginal fields included, producing not more than 10,000 bopd in a month pay royalty on a tranched basis.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_royalty_small_field_tranches",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 10(4)(a),(b)",
+    "quote": "on tranched basis as follows— (a) for the first 5,000 bopd 5% ; and (b) for the next 5,000 bopd, for the share of production over 5000 bopd 7.5% :",
+    "paraphrase": "The first 5,000 bopd pays 5% and the next 5,000 bopd pays 7.5%.",
+    "found": true,
+    "note": "The gazette prints '5000' without a comma in (b); the NTA re-enactment (Seventh Schedule 6(2)(d)(ii)) misprints 'over 5,000 bop'."
+  },
+  {
+    "id": "pia_royalty_small_field_above_10000",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 10(4) proviso",
+    "quote": "Provided that fields with crude oil and condensate production more than 10,000 bopd during a month, the share of the production over 10,000 bopd per month shall be at the royalty rates specified under subparagraph (2).",
+    "paraphrase": "For fields producing more than 10,000 bopd in a month, the production over 10,000 bopd pays the terrain rate in subparagraph (2).",
+    "found": true,
+    "note": "Read with the tranches, a larger onshore or shallow water field still pays 5% and 7.5% on its first 10,000 bopd (REGS r.13(2)(c),(d) make this explicit)."
+  },
+  {
+    "id": "pia_royalty_gas",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 10(6)",
+    "quote": "(6) Royalty based on production for natural gas and natural gas liquids shall be at a rate of 5% of the chargeable volume and royalty rate for natural gas produced and utilised in-country shall be 2.5% of the chargeable volume.",
+    "paraphrase": "Natural gas and natural gas liquids pay 5% production royalty; gas produced and used in Nigeria pays 2.5%.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_royalty_straddling",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 10(7)",
+    "quote": "(7) Where a field is located partially in onshore and in shallow water or partially in shallow water and deep offshore areas, the weighted average royalty shall be calculated as per regulations.",
+    "paraphrase": "A field straddling onshore and shallow water, or shallow water and deep offshore, pays a weighted average royalty worked out under regulations.",
+    "found": true,
+    "note": "The regulations are REGS r.14(5),(6)."
+  },
+  {
+    "id": "pia_price_royalty_levels",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 11(1)(a)-(c)",
+    "quote": "a royalty by price with respect to crude oil and condensates at the rates set out below— (a) below US $50 per barrel — 0%, (b) at US $100 per barrel — 5%, (c) above US $150 per barrel — 10%,",
+    "paraphrase": "On top of production royalty, onshore, shallow water and deep offshore crude oil and condensates pay a royalty by price of 0% below US $50 per barrel, 5% at US $100 and 10% above US $150.",
+    "found": true,
+    "note": "Para 11(1)(d) sets linear interpolation between US $50 and US $100 and between US $100 and US $150. The NTA re-enactment (7th Sch 6(3)(a)(iii)) reads 'at US $150 per barrel and above – 10%' where the PIA says 'above US $150'."
+  },
+  {
+    "id": "pia_price_royalty_example",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 11(1) (worked example)",
+    "quote": "as an example, if in 2020 the price is US $75 per barrel, the royalty by price shall be 2.5%, and the price levels mentioned in sub-subparagraphs (a), (b) (c) and (d) shall apply to the year 2020,",
+    "paraphrase": "The Act's own example: at US $75 per barrel in 2020 the royalty by price is 2.5%, and the price levels apply to the year 2020.",
+    "found": true,
+    "note": "The Act makes 2020 the base year; REGS Schedule starts escalation on 1 January 2022 with 2021 at 50.00/100.00/150.00, a one-year difference (audit R12). NTA 7th Sch 6(3)(a) repeats the example word for word."
+  },
+  {
+    "id": "pia_price_royalty_escalation",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 11(1) (escalation)",
+    "quote": "and at the beginning of 2021 and of each succeeding calendar year these price levels shall be increased by 2% relative to the values of the previous year.",
+    "paraphrase": "From the start of 2021 and each later calendar year, the price levels rise by 2% on the previous year's values.",
+    "found": true,
+    "note": "Read with the example, the Act's 2021 levels would be 2% above 2020, which the REGS Schedule table does not do (it prints 2021 = 50.00 / 100.00 / 150.00)."
+  },
+  {
+    "id": "pia_psc_cost_limit_new",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 14(4) (cost limit)",
+    "quote": "(4) For new acreage any production sharing contract shall have a cost limit of 70% based on total oil production, and where applicable condensates",
+    "paraphrase": "A production sharing contract on new acreage has a cost limit of 70% of total oil production (with condensates and associated-gas NGLs where applicable).",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_psc_cost_limit_converted",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 14(9)",
+    "quote": "(9) For a production sharing contract subject to a conversion contract under this Act, the cost limit shall be 60%.",
+    "paraphrase": "A production sharing contract under a conversion contract has a cost limit of 60%.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_psc_min_profit_oil_a_c",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 14(4)(a)-(c)",
+    "quote": "(a) up to and including 50 million barrels - 5% ; (b) over 50 million barrels and up to and including 100 million barrels — 10% ; (c) over 100 million barrels and up to and including 350 million barrels — 15% ;",
+    "paraphrase": "Government's minimum profit oil share, by cumulative production per field: 5% up to 50 million barrels, 10% over 50 up to 100 million, 15% over 100 up to 350 million barrels.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "pia_psc_min_profit_oil_d_f",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 14(4)(d)-(f)",
+    "quote": "(d) over 250 million barrels up to and including 750 million barrels — 25% ; (e) over 750 million barrels ad up to and including 1500 million barrels — 35% ; or (f ) over 1500 million barrels — 45%.",
+    "paraphrase": "The scale continues at 25% up to 750 million barrels, 35% up to 1500 million barrels and 45% over 1500 million barrels.",
+    "found": true,
+    "note": "MISPRINT confirmed as the audit says: (d) reads 'over 250 million barrels' although (c) already runs to 350 million; 350 is evidently meant, so the paraphrase avoids restating the lower bound. (e) also misprints 'ad up to' for 'and up to'. Para 14 is not deleted by NTA s.197(1) except 14(6)."
+  },
+  {
+    "id": "pia_consolidation_cit",
+    "text": "PIA",
+    "cite": "PIA s.272(1)",
+    "quote": "terrains shall be allowed to consolidate costs for the purpose of companies",
+    "paraphrase": "A company operating upstream across terrains may consolidate costs for companies income tax.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Full sentence: '272.—(1) A company engaged in upstream petroleum operations across / terrains shall be allowed to consolidate costs for the purpose of companies / income tax.' with the side note 'Consolidation of costs and taxes.' inside it."
+  },
+  {
+    "id": "pia_consolidation_hct",
+    "text": "PIA",
+    "cite": "PIA s.272(2)",
+    "quote": "(2) A company engaged in upstream petroleum operations related to crude oil across terrains shall be allowed to consolidate costs and taxes for the purposes of hydrocarbon tax only across assets in which it holds licences and leases",
+    "paraphrase": "For hydrocarbon tax, a company may consolidate costs and taxes across terrains only across the assets it holds licences and leases in.",
+    "found": true,
+    "note": "The sentence ends 'in accordance with the two categories of chargeable tax stipulated in section 267 of this Act', so consolidation stays within each s.267 class. s.272(4): PSC contractors may consolidate losses and revenues across post-commencement PPLs and PMLs."
+  },
+  {
+    "id": "pia_hct_not_deductible_cit",
+    "text": "PIA",
+    "cite": "PIA s.302(5)",
+    "quote": "(5) In determining the companies income tax, the hydrocarbon tax under this Act shall not be deductible.",
+    "paraphrase": "Hydrocarbon tax cannot be deducted in computing companies income tax.",
+    "found": true,
+    "note": "NTA s.78(3)(a) per the audit (not re-checked here)."
+  },
+  {
+    "id": "pia_gas_incentives",
+    "text": "PIA",
+    "cite": "PIA s.302(6)",
+    "quote": "in this Act, shall be entitled to benefit from the incentives provided under section 39 of the Companies Income Tax Act, and investors in gas pipeline will be granted an additional tax-free period of five years at the expiration of the tax-free period",
+    "paraphrase": "Midstream, downstream gas and large-scale gas utilisation companies get the section 39 Companies Income Tax Act incentives, and gas pipeline investors get an extra five-year tax-free period after that.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The subsection opens '(6) All companies engaged in domestic midstream petroleum operations, downstream gas operations and large-scale gas utilisation industries as defined' with side notes 'Cap. C21, LFN, 2004.' inside it. CITA is repealed by NTA s.196(c)."
+  },
+  {
+    "id": "pia_cit_deduct_royalties",
+    "text": "PIA",
+    "cite": "PIA s.302(11)(a)",
+    "quote": "(a) all rents and royalties the liability for which was incurred by the company during that period in respect of crude oil sold, condensate sold and natural gas sold or delivered or disposed of in any other commercial manner",
+    "paraphrase": "For companies income tax, rents and royalties on crude oil, condensate and natural gas sold or disposed of are deductible.",
+    "found": true,
+    "note": "s.302(11) reads CITA s.24 together with these items. Deleted by NTA s.197(1)(a) (Part X is within Parts I to X); NTA s.82(1) per the audit."
+  },
+  {
+    "id": "pia_cit_deduct_funds",
+    "text": "PIA",
+    "cite": "PIA s.302(11)(b)",
+    "quote": "(b) any amount contributed to any fund, scheme or arrangement approved by the Commission or Authority for the purpose of providing for— (i) abandonment and decommissioning, (ii) petroleum host communities development trust, or (iii) environmental remediation ;",
+    "paraphrase": "For companies income tax, contributions to approved funds for decommissioning, host communities development trusts or environmental remediation are deductible.",
+    "found": true,
+    "note": "s.302(11)(c) adds other deductions prescribed by the Minister of Finance."
+  },
+  {
+    "id": "pia_fiscal_stabilisation",
+    "text": "PIA",
+    "cite": "PIA s.305",
+    "quote": "contract or other contract entered into after the commencement of this Act shall not be applicable to the fiscal provisions listed in this section, regardless of whether these changes affect the contractor favorably or unfavorably,",
+    "paraphrase": "Stabilisation clauses in PSCs or other contracts signed after commencement do not shield contractors from changes to the listed fiscal provisions, whether the change helps or hurts them.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Opens '305. Fiscal stabilisation clauses contained in any production sharing' with the side note 'Fiscal stabilisation.' The condition is that changes are not discriminatory to the industry or the contractor. Listed items: (a) generally applicable taxes such as withholding tax, CIT, TET and VAT; (b) environment, labour, health and safety levies; (c) new climate change taxes. s.305 sits in Part XI, which NTA s.197(1)(a) does not delete; NTA s.88 re-enacts it for the NTA Part."
+  },
+  {
+    "id": "regs_sliding_scale_crude_plus_condensate",
+    "text": "REGS",
+    "cite": "REGS r.12(1)(b)",
+    "quote": "(b) field produces both crude oil and condensates, the sliding scale shall be applied to the total production of crude oil plus condensates ;",
+    "paraphrase": "Where a field produces crude oil and condensates, the royalty sliding scale applies to their combined production.",
+    "found": true,
+    "note": "r.12(1)(c): a non-associated gas field producing only condensates applies the scale to condensates alone."
+  },
+  {
+    "id": "regs_daily_rate_basis",
+    "text": "REGS",
+    "cite": "REGS r.12(2)",
+    "quote": "barrels of oil per day shall be determined by taking the total production for the applicable month and dividing this amount with the number of days during which oil was produced in such month, and the result shall be rounded to entire barrels.",
+    "paraphrase": "Barrels of oil per day are the month's total production divided by the number of days oil was produced that month, rounded to whole barrels.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "regs_deep_offshore_weighted",
+    "text": "REGS",
+    "cite": "REGS r.13(1)(a),(b)",
+    "quote": "5% ; and (b) for production greater than 50,000bopd, the rate shall be a weighted average rate of 5% of 50,000bopd plus 7.5% of the incremental daily production above 50,000bopd divided by the total production per day.",
+    "paraphrase": "Deep offshore production up to 50,000 bopd pays 5%; above that, the rate is a weighted average of 5% on 50,000 bopd plus 7.5% on the production above 50,000 bopd, divided by total daily production.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. (a) reads '(a) for production less than or equal to 50,000bopd, the rate shall be' then the side note 'of royalty.' then '5% ; and'. The gazette prints '50,000bopd' with no space."
+  },
+  {
+    "id": "regs_onshore_shallow_up_to_5000",
+    "text": "REGS",
+    "cite": "REGS r.13(2)(a)",
+    "quote": "(a) for production less than or equal to 5,000bopd, the rate shall be 5% ;",
+    "paraphrase": "Onshore and shallow water production up to 5,000 bopd pays 5%.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "regs_onshore_shallow_5000_10000",
+    "text": "REGS",
+    "cite": "REGS r.13(2)(b)",
+    "quote": "(b) for production greater than 5,000bopd but less than 10,000bopd, the rate shall be a weighted average rate of 5% of 5,000bopd plus 7.5% of the incremental daily production above 5,000bopd divided by the total production per day ;",
+    "paraphrase": "Between 5,000 and 10,000 bopd the rate is a weighted average of 5% on 5,000 bopd plus 7.5% on production above 5,000 bopd, divided by total daily production.",
+    "found": true,
+    "note": "GAP: (b) covers 'less than 10,000bopd' and (c),(d) cover 'greater than 10,000bopd', so production of exactly 10,000 bopd is not expressly covered (the Act's para 10(4) covers 'not more than 10,000 bopd')."
+  },
+  {
+    "id": "regs_onshore_above_10000",
+    "text": "REGS",
+    "cite": "REGS r.13(2)(c)",
+    "quote": "(c) for onshore areas where production is greater than 10,000bopd, the rate shall be a weighted average rate of 5% of 5,000bopd plus 7.5% of 5,000bopd plus 15% of the incremental daily production above 10,000bopd divided by the total production per day ; and",
+    "paraphrase": "Onshore above 10,000 bopd the rate is a weighted average of 5% on 5,000 bopd, 7.5% on the next 5,000 bopd and 15% on production above 10,000 bopd, divided by total daily production.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "regs_shallow_above_10000",
+    "text": "REGS",
+    "cite": "REGS r.13(2)(d)",
+    "quote": "(d) for shallow waters where production is greater than 10,000bopd, the rate shall be a weighted average rate of 5% of 5,000bopd plus 7.5% of 5,000bopd plus 12.5% of the incremental daily production above 10,000bopd divided by the total production per day.",
+    "paraphrase": "Shallow water above 10,000 bopd the rate is a weighted average of 5% on 5,000 bopd, 7.5% on the next 5,000 bopd and 12.5% on production above 10,000 bopd, divided by total daily production.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "regs_frontier_flat",
+    "text": "REGS",
+    "cite": "REGS r.13(3)",
+    "quote": "(3) For frontier basin, the sliding scale shall not apply and the applicable rate shall be 7.5%.",
+    "paraphrase": "Frontier basins pay a flat 7.5% with no sliding scale.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "regs_straddling_onshore_shallow",
+    "text": "REGS",
+    "cite": "REGS r.14(5)",
+    "quote": "(5) The weighted average royalty rate calculation for a field partially in onshore and partially in shallow water shall be as follows — (a) determine the royalty rate as if the entire field is onshore ;",
+    "paraphrase": "For a field partly onshore and partly in shallow water, the royalty rate is computed as if the whole field were onshore and as if it were all shallow water, and the two rates are weighted by each terrain's share of production.",
+    "found": true,
+    "note": "Steps (b) to (e) follow the quote. r.14(2),(3): terrain production is assigned by well location (vertical projection of where the well meets the top of the producing reservoir)."
+  },
+  {
+    "id": "regs_straddling_shallow_deep",
+    "text": "REGS",
+    "cite": "REGS r.14(6)",
+    "quote": "(6) The weighted average royalty rate calculation for a field partially in shallow water and partially in deep offshore shall be as follows — (a) determine the royalty rate as if the entire field is in shallow water ;",
+    "paraphrase": "For a field partly in shallow water and partly in deep offshore, the same method weights the shallow water rate and the deep offshore rate by each terrain's share of production.",
+    "found": true,
+    "note": "DRAFTING SLIP: r.14(6)(c) multiplies the shallow water share by 'the royalty rate under sub-regulation (5) (a) of this regulation' (the as-if-onshore rate); r.14(6)(a) is evidently meant."
+  },
+  {
+    "id": "regs_price_royalty_per_stream",
+    "text": "REGS",
+    "cite": "REGS r.15(2)",
+    "quote": "(2) The royalty by price shall be based on the fiscal oil price for crude oil",
+    "paraphrase": "Royalty by price is based on the fiscal oil price for crude oil or for condensates.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The sentence ends 'or for condensates.' after the side note 'price.'."
+  },
+  {
+    "id": "regs_gas_in_country",
+    "text": "REGS",
+    "cite": "REGS r.16(1)(a)",
+    "quote": "(a) the applicable rate shall be 2.5% pursuant to paragraph 10(6) of the",
+    "paraphrase": "Marketable natural gas used in Nigeria pays royalty at 2.5% under paragraph 10(6) of the Seventh Schedule.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. r.16(1)(b): the 2.5% needs the lessee to give the Commission in-country and export volumes and destination certificates. r.16(2): gas used in Nigeria as fuel for conditioning, processing or pipeline transport counts as in-country use."
+  },
+  {
+    "id": "regs_ngl_5pct",
+    "text": "REGS",
+    "cite": "REGS r.16(4)",
+    "quote": "(4) The royalty rate of natural gas liquids produced separately, shall be 5% regardless of whether the natural gas liquids are used in-country or exported.",
+    "paraphrase": "Separately produced natural gas liquids pay 5% royalty whether used in Nigeria or exported.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "regs_gas_export_5pct",
+    "text": "REGS",
+    "cite": "REGS r.16(5)",
+    "quote": "(5) The royalty based on production of natural gas for export shall be at a rate of 5% of the chargeable volumes",
+    "paraphrase": "Natural gas for export pays production royalty at 5% of the chargeable volumes.",
+    "found": true,
+    "note": "The gazette prints no full stop at the end of r.16(5)."
+  },
+  {
+    "id": "regs_benchmark_escalation",
+    "text": "REGS",
+    "cite": "REGS Schedule (Royalty Price Benchmarks)",
+    "quote": "shall be adjusted by applying an adjustment figure of 2% per year, every 1st January, commencing 1st January 2022 in such a way as to achieve a 2% escalation of the previous year benchmark. The results shall be rounded to entire US $ cents.",
+    "paraphrase": "The royalty by price benchmarks rise by 2% a year every 1 January, starting 1 January 2022, each on the previous year's benchmark, rounded to whole US cents.",
+    "found": true,
+    "note": "The Schedule then says the calculations are given 'for the years up to and including 2025', yet the table prints 2026 as well. Base-year conflict with the Act: see pia_price_royalty_example."
+  },
+  {
+    "id": "regs_benchmark_table",
+    "text": "REGS",
+    "cite": "REGS Schedule (Royalty Price Benchmarks table)",
+    "quote": "Royalty price benchmarks 2021 2022 2023 2024 2025 2026 11(1) (a) 50.00 51.00 52.02 53.06 54.12 55.20 11(1) (b) 100.00 102.00 104.00 106.00 108.00 110.00 11(1) (c) 150.00 153.00 156.06 159.18 162.36 165.61",
+    "paraphrase": "The printed benchmarks for 2021 to 2026 are 50.00, 51.00, 52.02, 53.06, 54.12, 55.20 for 11(1) (a); 100.00, 102.00, 104.00, 106.00, 108.00, 110.00 for 11(1) (b); and 150.00, 153.00, 156.06, 159.18, 162.36, 165.61 for 11(1) (c).",
+    "found": true,
+    "note": "The printed layout is three rows (paragraph 11(1)(a), (b), (c)) across six year columns 2021 to 2026. INTERNAL INCONSISTENCY confirmed as the audit says: rows (a) and (c) follow 2% compounding with cent rounding (e.g. 54.12 x 1.02 = 55.20; 162.36 x 1.02 = 165.61), but row (b) rises by a flat 2.00 a year (100, 102, 104, 106, 108, 110), where 2% compounding gives 104.04 in 2023 and 108.24 in 2025."
+  },
+  {
+    "id": "nta_pia_deletions",
+    "text": "NTA",
+    "cite": "NTA s.197(1)(a)-(d)",
+    "quote": "(a) Part I - X of Chapter Four; (b) the Fifth and Sixth Schedules; (c) paragraphs 6, 9, 10, 11 and 12, of the Seventh Schedule; and (d) paragraph 14 (6) of Part IV of the Seventh Schedule.",
+    "paraphrase": "The NTA deletes from the Petroleum Industry Act Chapter Four Parts I to X, the Fifth and Sixth Schedules, Seventh Schedule paragraphs 6, 9, 10, 11 and 12, and paragraph 14 (6).",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Opening words: '197. (1) The Petroleum Industry Act, No. 6, 2021 is amended by' (side note 'Consequential amendments' interleaved) 'deleting –'. Matches the audit on (a)-(c); the audit does not mention (d), which also deletes Seventh Schedule para 14(6) (PSC contractors are licensees entitled to Fifth Schedule allowances). PIA Chapter 4 Part XI (ss.303-306) and Chapter 3 (HCDT) remain."
+  },
+  {
+    "id": "nta_tetfund_deletions",
+    "text": "NTA",
+    "cite": "NTA s.197(5)",
+    "quote": "(5) The Tertiary Education Trust Fund (Establishment, Etc.) Act, 2011 is amended by deleting sections 1, 2, and 3(3).",
+    "paraphrase": "The NTA deletes sections 1, 2 and 3(3) of the Tertiary Education Trust Fund Act 2011.",
+    "found": true,
+    "note": "Matches the audit. The NTA development levy (s.59) funds TETFund instead."
+  },
+  {
+    "id": "nta_repeals_opening",
+    "text": "NTA",
+    "cite": "NTA s.196 (opening words)",
+    "quote": "196. From the commencement of this Act, the following enactments are repealed (repealed enactments) –",
+    "paraphrase": "From the NTA's commencement the enactments listed in section 196 are repealed.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "nta_repeal_cita",
+    "text": "NTA",
+    "cite": "NTA s.196(c)",
+    "quote": "(c) Companies Income Tax Act, Cap. C21, Laws of the Federation of Nigeria, 2004; (d) Deep offshore and Inland Basin Act, Cap. D3, Laws of the Federation",
+    "paraphrase": "The repealed enactments include the Companies Income Tax Act and the Deep Offshore and Inland Basin Act.",
+    "found": true,
+    "note": "Quote runs into (d) to reach 8 words; (d) (Deep Offshore and Inland Basin Act) is itself notable for PSCs."
+  },
+  {
+    "id": "nta_repeal_ppta",
+    "text": "NTA",
+    "cite": "NTA s.196(h)",
+    "quote": "(h) Petroleum Profits Tax Act, Cap. P13, Laws of the Federation of Nigeria,2004;",
+    "paraphrase": "The Petroleum Profits Tax Act is also repealed.",
+    "found": true,
+    "note": "PPT continues for unconverted leases under NTA Chapter 3 Part II (ss.90 onward). Gazette prints 'Nigeria,2004' with no space."
+  },
+  {
+    "id": "nta_cit_rate",
+    "text": "NTA",
+    "cite": "NTA s.56(a),(b)",
+    "quote": "(a) a small company, at 0%; and (b) any other company, at the rate of 30 per cent from the commence- ment of this Act.",
+    "paraphrase": "Company income tax is 0% for a small company and 30 per cent for any other company from the commencement of the Act.",
+    "found": true,
+    "note": "Gazette hyphenates 'commence- ment' across a line."
+  },
+  {
+    "id": "nta_min_etr",
+    "text": "NTA",
+    "cite": "NTA s.57(1)",
+    "quote": "where, in any year of assessment, the effective tax rate of a company is less than 15%, such company shall recompute and pay an additional tax that makes its effective tax rate equal to 15%.",
+    "paraphrase": "A company whose effective tax rate for a year of assessment is below 15% must recompute and pay additional tax to bring it up to 15%.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Opening words '57. (1) Notwithstanding any provision of this Act or any other enactment,' are followed by the side note 'Effective Tax Rate' and a page header."
+  },
+  {
+    "id": "nta_min_etr_scope",
+    "text": "NTA",
+    "cite": "NTA s.57(2)",
+    "quote": "(2) The provisions of this section shall apply to – (a) a company that is a constituent entity of an MNE group; and (b) any other company with an aggregate turnover of N20,000,000,000 and above in the relevant year of assessment.",
+    "paraphrase": "The minimum rate applies only to constituent entities of an MNE group and to other companies with aggregate turnover of N20,000,000,000 or more in the year.",
+    "found": true,
+    "note": "NUMBERING GAP confirmed: s.57 runs (1), (2), (4); there is no (3) in the gazette text."
+  },
+  {
+    "id": "nta_min_etr_definition",
+    "text": "NTA",
+    "cite": "NTA s.57(4) (\"effective tax rate\")",
+    "quote": "\"effective tax rate\" means the rate produced by dividing the aggre- gate covered tax paid by a company for a year of assessment by the profits of the company; and",
+    "paraphrase": "The effective tax rate is the aggregate covered tax paid for the year divided by the company's profits.",
+    "found": true,
+    "note": "'covered tax' is not defined in s.57 (confirmed; the audit says it is not defined in the text read). Gazette hyphenates 'aggre- gate'."
+  },
+  {
+    "id": "nta_min_etr_profits",
+    "text": "NTA",
+    "cite": "NTA s.57(4) (\"profits\")",
+    "quote": "\"profits\" means the net profits before tax as reported in the audited financial statement less 5% of depreciation and personnel cost for the year.",
+    "paraphrase": "Profits for this test are net profit before tax in the audited financial statements, less 5% of depreciation and personnel cost for the year.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "nta_hct_scope_terrains",
+    "text": "NTA",
+    "cite": "NTA s.65(1)",
+    "quote": "operations in the onshore, shallow water and deep offshore with licences and",
+    "paraphrase": "The NTA hydrocarbon tax Part applies to upstream companies in the onshore, shallow water and deep offshore holding PIA licences and leases.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Full sentence: '65. (1) This Part shall apply to companies engaged in upstream petroleum / operations in the onshore, shallow water and deep offshore with licences and / leases under the Petroleum Industry Act.' Unlike PIA s.260(3), no deep offshore exclusion follows (see nta_hct_not_frontier)."
+  },
+  {
+    "id": "nta_hct_scope_liquids",
+    "text": "NTA",
+    "cite": "NTA s.65(2)(a)",
+    "quote": "(2) In this Part– (a) hydrocarbon tax shall apply to crude oil as well as field condensates and liquid natural gas liquids derived from associated gas and produced in the field upstream of the measurement points;",
+    "paraphrase": "Hydrocarbon tax applies to crude oil, field condensates and liquid natural gas liquids from associated gas produced upstream of the measurement points.",
+    "found": true,
+    "note": "s.65(2)(b) repeats the PIA exclusions, including (ii) non-associated gas condensates and NGLs."
+  },
+  {
+    "id": "nta_hct_not_frontier",
+    "text": "NTA",
+    "cite": "NTA s.65(4)",
+    "quote": "(4) This Part shall not apply to a frontier acreage until it is reclassified under section 68 (3) of the Petroleum Industry Act.",
+    "paraphrase": "The Part does not apply to frontier acreage until it is reclassified under section 68 (3) of the PIA.",
+    "found": true,
+    "note": "Confirmed as the audit says: the PIA s.260(3) words 'and to deep offshore' are absent, while NTA s.72 prints rates only for onshore and shallow water (audit H10, ambiguous)."
+  },
+  {
+    "id": "nta_hct_rate_30",
+    "text": "NTA",
+    "cite": "NTA s.72(a)",
+    "quote": "(a) 30% of the profit from crude oil for petroleum mining leases selected under section 93 (6) (b) and (7) (b) of the Petroleum Industry Act with respect to onshore and shallow water areas; and",
+    "paraphrase": "Hydrocarbon tax is 30% of crude oil profit for onshore and shallow water petroleum mining leases selected under PIA section 93 (6) (b) and (7) (b).",
+    "found": true,
+    "note": "The s.72 opening words say 'a percentage of the aggregated chargeable profit'."
+  },
+  {
+    "id": "nta_hct_rate_15",
+    "text": "NTA",
+    "cite": "NTA s.72(b)",
+    "quote": "(b) 15% of profit from crude oil for onshore and shallow water and for",
+    "paraphrase": "Hydrocarbon tax is 15% of crude oil profit for onshore and shallow water and for petroleum prospecting licences selected under the PIA conversion rules.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The paragraph continues after the side note 'Act No. 6,': 'petroleum prospecting licences selected under section 93 (6) (a) and (7) (a) of Petroleum Industry Act.'"
+  },
+  {
+    "id": "nta_nag_window",
+    "text": "NTA",
+    "cite": "NTA s.85(1) (opening words)",
+    "quote": "gas production from the commencement of this Act to 1 January, 2029 –",
+    "paraphrase": "The non-associated gas incentive covers onshore and shallow water greenfield developments reaching first commercial gas production between the NTA's commencement and 1 January 2029.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Preceding lines: '85. (1) Notwithstanding the provisions of this Act or any other law, the provisions of this section shall apply to all Non-Associated Gas greenfield developments in onshore and shallow water terrains reaching first commercial' with the side note 'Non-Associated gas greenfield developments in onshore and shallow water terrains' interleaved."
+  },
+  {
+    "id": "nta_nag_credit_low_liquids",
+    "text": "NTA",
+    "cite": "NTA s.85(1)(a)",
+    "quote": "rate of US$1.00 per thousand cubic feet or 30% of the fiscal gas price, whichever is lower;",
+    "paraphrase": "Where hydrocarbon liquids do not exceed 30 barrels per million standard cubic feet, the gas production tax credit is the lower of US$1.00 per thousand cubic feet and 30% of the fiscal gas price.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The paragraph opens '(a) where the hydrocarbon liquids do not exceed 30 barrels per million standard cubic feet, there shall be granted a gas production tax credit at the' with side-note words 'water' and 'terrains' interleaved; the 30 barrels threshold is not inside the quote. s.85(1)(c): above 100 barrels per MMscf no credit applies."
+  },
+  {
+    "id": "nta_nag_credit_mid_liquids",
+    "text": "NTA",
+    "cite": "NTA s.85(1)(b)",
+    "quote": "but do not exceed 100 barrels per million standard cubic feet, there shall be granted a gas production tax credit at the rate of US$0.50 per thousand cubic feet or 30% of the fiscal gas price, whichever is lower;",
+    "paraphrase": "In the middle liquids band, up to 100 barrels per million standard cubic feet, the credit is the lower of US$0.50 per thousand cubic feet and 30% of the fiscal gas price.",
+    "found": true,
+    "note": "Quote starts mid-paragraph; (b) opens '(b) where the hydrocarbon liquids exceed 30 barrels per million standard cubic feet', so the band is above 30 and not above 100 barrels per MMscf."
+  },
+  {
+    "id": "nta_nag_credit_10_years",
+    "text": "NTA",
+    "cite": "NTA s.85(1)(d)",
+    "quote": "(d) the gas tax credit granted by this section shall apply on Non-Associated Gas sales for 10 years only, beginning from the date of attaining first gas production; and",
+    "paraphrase": "The gas tax credit applies to non-associated gas sales for 10 years from first gas production.",
+    "found": true,
+    "note": "s.85(1)(e): after the 10 years a gas production allowance applies at the (a)/(b) rates; credit and allowance are never given for the same period."
+  },
+  {
+    "id": "nta_nag_after_2029",
+    "text": "NTA",
+    "cite": "NTA s.85(2)",
+    "quote": "(2) In the case of all other Non-Associated Gas Greenfield projects with first commercial gas production after 1 January, 2029, gas production allow- ance shall be granted at US$0.50 per thousand cubic feet or 30% of the fiscal gas price, whichever is lower,",
+    "paraphrase": "Non-associated gas greenfield projects with first commercial gas after 1 January 2029 get a gas production allowance of the lower of US$0.50 per thousand cubic feet and 30% of the fiscal gas price.",
+    "found": true,
+    "note": "The subsection continues: only where hydrocarbon liquids do not exceed 100 barrels per million standard cubic feet."
+  },
+  {
+    "id": "nta_nag_credit_carryforward",
+    "text": "NTA",
+    "cite": "NTA s.85(4)",
+    "quote": "(4) Unrecouped tax credit in one year may be carried forward for a maximum of three years.",
+    "paraphrase": "Tax credit not used in a year can be carried forward for up to three years.",
+    "found": true,
+    "note": "s.85(3): the credit used in a year cannot exceed that year's tax on the field income, subject to any minimum tax. s.85(6): applies to OMLs and PMLs."
+  },
+  {
+    "id": "nta_decom_not_deductible",
+    "text": "NTA",
+    "cite": "NTA s.86 (opening words)",
+    "quote": "provision made for decommissioning and abandonment fund shall not be",
+    "paraphrase": "A provision for a decommissioning and abandonment fund is not tax deductible except where the escrow conditions in paragraphs (a) and (b) are met.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Full opening: '86. Notwithstanding section 233(1) of the Petroleum Industry Act, a / provision made for decommissioning and abandonment fund shall not be / deductible for tax purposes, except –' with the side note 'Provision Relating to Decommissioning and Abandonment of Funds' interleaved. PIA s.233 is the decommissioning and abandonment fund section."
+  },
+  {
+    "id": "nta_decom_escrow_30",
+    "text": "NTA",
+    "cite": "NTA s.86(a)",
+    "quote": "(a) the licensee or lessee deposit a minimum of 30% of the",
+    "paraphrase": "The licensee or lessee must deposit at least 30% of the decommissioning and abandonment fund with a Nigerian bank in an escrow account the Commission or Authority can access.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Continues after the side note 'Act No. 6,': 'decommissioning and abandonment fund with a Nigerian Bank, in the form of an escrow account accessible by the Commission or Authority; and'. Matches the audit (30%)."
+  },
+  {
+    "id": "nta_decom_bank_accredited",
+    "text": "NTA",
+    "cite": "NTA s.86(b)",
+    "quote": "(b) the Nigerian bank is accredited in accordance with the criteria for accreditation for participation in the management of the fund, determined by the Central Bank of Nigeria in collaboration with the Service.",
+    "paraphrase": "The bank must be accredited under criteria set by the Central Bank of Nigeria with the Service.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "nta_fiscal_stabilisation",
+    "text": "NTA",
+    "cite": "NTA s.88(1)",
+    "quote": "this Part, regardless of whether the changes in fiscal provisions affect the contractor favourably or unfavourably, provided such changes in fiscal provi- sion are being made in a manner that is not discriminatory to the petroleum industry or the contractor.",
+    "paraphrase": "Stabilisation clauses in contracts made after the PIA commenced do not protect against changes to the listed fiscal provisions, favourable or unfavourable, if the changes do not discriminate against the industry or the contractor.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Opening lines '88. (1) Fiscal stabilisation sections contained in a production sharing contract or other contracts entered into after the commencement of the Petroleum Industry Act shall not be applicable to the fiscal provisions listed in' carry side notes and a page header."
+  },
+  {
+    "id": "nta_fiscal_stabilisation_list",
+    "text": "NTA",
+    "cite": "NTA s.88(2)(a)",
+    "quote": "(2) The respective fiscal provisions referred to in subsection (1) are – (a) generally applicable taxes, such as income tax, development levy, value added tax, stamp duties, and deduction of tax at source;",
+    "paraphrase": "The listed provisions include generally applicable taxes such as income tax, development levy, VAT, stamp duties and withholding at source.",
+    "found": true,
+    "note": "(b) and (c) mirror PIA s.305(b),(c); (c) now names the Climate Change Act. The PIA list named tertiary education tax; the NTA list names development levy."
+  },
+  {
+    "id": "nta_production_allowance_two_terrains",
+    "text": "NTA",
+    "cite": "NTA Sixth Schedule para 1(2)(a),(b)",
+    "quote": "and the lower of US $4.00 per barrel and 20% of the fiscal oil price thereafter; and (b) for shallow water areas, the lower of US $8.00 per barrel and 20% of the fiscal oil price, up to a cumulative maximum production of 100",
+    "paraphrase": "The NTA new-lease production allowance list ends with (b) shallow water, so only onshore and shallow water leases get the per-field allowance of the lower of US $8.00 per barrel and 20% of the fiscal oil price.",
+    "found": true,
+    "note": "Confirmed as the audit says: the PIA's para 1(2)(c) for deep offshore and frontier (500 million barrels) is not re-enacted. The NTA text of (a) and (b) is otherwise the PIA's (50 and 100 million barrels, US $4.00 thereafter)."
+  },
+  {
+    "id": "nta_capital_allowance_rates",
+    "text": "NTA",
+    "cite": "NTA First Schedule Part II para 14(1)",
+    "quote": "14. (1) Qualifying expenditure shall be subject to the rates below – Qualifying Capital Expenditure 1st 2nd 3rd 4th 5th Qualifying Plant Expenditure 20% 20% 20% 20% 20%",
+    "paraphrase": "Under the NTA, upstream qualifying capital expenditure is written off at 20% a year for five years.",
+    "found": true,
+    "note": "The table prints 20% in all five years for plant, pipeline, building and drilling (the PIA had 19% in year 5)."
+  },
+  {
+    "id": "nta_capital_allowance_notional_1pct",
+    "text": "NTA",
+    "cite": "NTA First Schedule Part II para 4(2)",
+    "quote": "there shall be recorded in the capital allowance computation schedule for statistical purposes until the asset is disposed, 1% of the qualifying capital expenditure, which being a notional amount, shall not increase or reduce the amount of capital allowance claimable under this Part.",
+    "paraphrase": "1% of the qualifying expenditure is recorded for statistical purposes until disposal, but as a notional figure it does not change the capital allowance that can be claimed.",
+    "found": true,
+    "note": "Quote omits the opening words '(2) Notwithstanding the provisions of subparagraph (1),' to fit 45 words. Contrast PIA Fifth Schedule para 5(2) (1% retained and not written off until disposal). The same wording recurs in NTA First Schedule Part III (PPT capital allowances), so the quote occurs twice in the NTA text; this entry is the Part II occurrence."
+  },
+  {
+    "id": "nta_commencement_note",
+    "text": "NTA",
+    "cite": "NTA commencement note (long title)",
+    "quote": "[ 26th June, 2025 ] Commence- ment ENECTED by the National Assembly of the Federal Republic of Nigeria",
+    "paraphrase": "The gazette prints the NTA's commencement note as 26th June, 2025.",
+    "found": true,
+    "note": "Confirmed as the audit says; the text layer prints it with inner spaces as '[ 26th June, 2025 ]' followed by the side note 'Commence- ment'. MISPRINT: the enacting words read 'ENECTED by the National Assembly'. The 1 January 2026 effective date comes from a government statement (per the audit), not from this gazette."
+  },
+  {
+    "id": "pia_licence_types_pel_ppl",
+    "text": "PIA",
+    "cite": "PIA s.70(1)(a),(b)",
+    "quote": "(a) petroleum exploration licence, which may be granted to qualified applicants to carry out petroleum exploration operations on a non-exclusive basis ; (b) petroleum prospecting licence, which may be granted to qualified applicants to— (i) drill exploration and appraisal wells",
+    "paraphrase": "The Act creates a petroleum exploration licence for exploration on a non-exclusive basis, and a petroleum prospecting licence under which the holder may drill exploration and appraisal wells.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Opening words '70.—(1) There shall be the following licences and leases under this Act related to upstream petroleum operations—' carry the side note 'Licences and leases.' (b)(i) continues 'and do corresponding test production on an exclusive basis', and (b)(ii) adds non-exclusive exploration operations; s.70(2) limits grants to companies incorporated in Nigeria under CAMA."
+  },
+  {
+    "id": "pia_licence_type_pml",
+    "text": "PIA",
+    "cite": "PIA s.70(1)(c)",
+    "quote": "(c) petroleum mining lease, which may be granted to qualified applicants to— (i) win, work, carry away and dispose of crude oil, condensates and natural gas on an exclusive basis,",
+    "paraphrase": "A petroleum mining lease gives the exclusive right to win, work, carry away and dispose of crude oil, condensates and natural gas.",
+    "found": true,
+    "note": "(c)(ii) adds the exclusive right to drill exploration and appraisal wells with test production; (c)(iii) adds non-exclusive exploration operations."
+  },
+  {
+    "id": "pia_pel_duration",
+    "text": "PIA",
+    "cite": "PIA s.71(3)",
+    "quote": "(3) A petroleum exploration licence shall be for three years and may be renewable for additional period of three years subject to fulfilment of prescribed conditions,",
+    "paraphrase": "A petroleum exploration licence lasts three years and may be renewed for a further three years if prescribed conditions are met.",
+    "found": true,
+    "note": "The subsection continues: a PEL gives no right to win, extract, store, carry away, transport, export or otherwise treat petroleum discovered in the licence area. s.71(1): the Commission grants PELs."
+  },
+  {
+    "id": "pia_ppl_duration",
+    "text": "PIA",
+    "cite": "PIA s.77(2)",
+    "quote": "(2) A petroleum prospecting licence for deep offshore and frontier acreages shall be for a duration of not more than 10 years, comprising of an initial exploration period of five years and an optional extension period of five years.",
+    "paraphrase": "A deep offshore or frontier petroleum prospecting licence lasts at most 10 years: a five-year initial exploration period and an optional five-year extension.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. s.77(1) (onshore and shallow water) is broken by side notes: '77.—(1) A petroleum prospecting licence for onshore and shallow water / acreages shall be for a duration of not more than six years, comprising of an / initial exploration period of three years and an optional extension period of / three years.' So onshore and shallow water PPLs run at most six years (3 + 3). s.77(3): PPL areas are capped at 350 km2 onshore or shallow water, 1,000 km2 deep offshore and 1,500 km2 frontier (printed '1, 500')."
+  },
+  {
+    "id": "pia_pml_duration",
+    "text": "PIA",
+    "cite": "PIA s.86(1)",
+    "quote": "shall be for a maximum period of 20 years, which term shall include the",
+    "paraphrase": "A petroleum mining lease runs for at most 20 years, including its development period.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Full sentence: '86.—(1) A petroleum mining lease granted under section 81 of this Act / shall be for a maximum period of 20 years, which term shall include the / development period prescribed under subsection (4).' s.86(4): where the field development plan sets no development period it is five years onshore and seven years for shallow water, deep offshore or frontier. s.86(2): a PML not in regular commercial production by the end of the development period may be revoked."
+  },
+  {
+    "id": "nta_royalty_collection_service",
+    "text": "NTA",
+    "cite": "NTA s.89(2)",
+    "quote": "(2) The Service shall be the relevant tax authority for the administration of the",
+    "paraphrase": "Under the NTA the Service is the tax authority that administers royalty.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The sentence ends 'royalty imposed under this Part, and the Seventh Schedule to this Act.' after the side note 'Seventh'. The text says 'administration'; it does not use the word 'collect'. Contrast PIA s.259(b)(i), which gave royalty determination and collection to the Commission."
+  },
+  {
+    "id": "nta_royalty_administration_service_sch7",
+    "text": "NTA",
+    "cite": "NTA Seventh Schedule para 1(1)",
+    "quote": "1. (1) The Service shall administer royalties payable in accordance with the provision of the Nigeria Tax Administration Act, 2025.",
+    "paraphrase": "The Service administers royalties under the Nigeria Tax Administration Act, 2025.",
+    "found": true,
+    "note": "Says the same as s.89(2). Para 3: the Commission gives the Service a monthly schedule of production, chargeable volumes and fiscal prices; para 2: royalties are paid in cash."
+  },
+  {
+    "id": "nta_royalty_rates_restated",
+    "text": "NTA",
+    "cite": "NTA Seventh Schedule para 6(2)(b)(i)-(iv)",
+    "quote": "(i) onshore areas - 15%, (ii) shallow water (up to 200m water depth) – 12.5%, (iii) deep offshore (beyond 200m water depth) – 7.5%, and (iv) frontier basins – 7.5%;",
+    "paraphrase": "The NTA restates the production royalty by terrain: onshore 15%, shallow water up to 200m 12.5%, deep offshore beyond 200m 7.5%, and frontier basins 7.5%.",
+    "found": true,
+    "note": "The chapeau of 6(2)(b) ('the royalty shall be at a rate per centum of the chargeable volume ... on terrain basis as follows –') is separated from the list by a page header. Deep offshore is 'beyond 200m' (PIA: 'greater than 200m')."
+  },
+  {
+    "id": "nta_royalty_deep_offshore_tranche_restated",
+    "text": "NTA",
+    "cite": "NTA Seventh Schedule para 6(2)(c)",
+    "quote": "(c) for deep offshore fields with a production during a month of not more than 50,000 bopd, the royalty rate shall be 5% and the share of the production above 50,000 bopd shall be at the royalty rate specified in paragraph (b);",
+    "paraphrase": "Deep offshore fields pay 5% on production up to 50,000 bopd in a month, and the share above 50,000 bopd pays the terrain rate in paragraph (b).",
+    "found": true,
+    "note": "Same rule as PIA Seventh Schedule para 10(3)."
+  },
+  {
+    "id": "nta_royalty_small_field_scope_restated",
+    "text": "NTA",
+    "cite": "NTA Seventh Schedule para 6(2)(d) (opening words)",
+    "quote": "(d) royalties for onshore fields and shallow water fields, including mar- ginal fields, with crude oil and condensate production not more than 10,000 bopd during a month shall be at a rate per centum",
+    "paraphrase": "Onshore and shallow water fields, marginal fields included, producing not more than 10,000 bopd in a month pay royalty on a tranched basis.",
+    "found": true,
+    "note": "The gazette hyphenates 'mar- ginal' across a line."
+  },
+  {
+    "id": "nta_royalty_small_field_tranches_restated",
+    "text": "NTA",
+    "cite": "NTA Seventh Schedule para 6(2)(d)(i),(ii)",
+    "quote": "(i) for the first 5,000 bopd - 5%, and (ii) for the next 5,000 bopd, for the share of production over 5,000 bop - 7.5%:",
+    "paraphrase": "The first 5,000 bopd pays 5% and the next 5,000 bopd pays 7.5%.",
+    "found": true,
+    "note": "MISPRINT: (ii) reads 'over 5,000 bop' (for bopd)."
+  },
+  {
+    "id": "nta_royalty_small_field_above_10000_restated",
+    "text": "NTA",
+    "cite": "NTA Seventh Schedule para 6(2)(d) proviso",
+    "quote": "Provided that for fields with crude oil and condensate production more than 10,000 bopd during a month, the share of the production over 10,000 bopd during a month shall be at the royalty rates specified under para- graph (b);",
+    "paraphrase": "For fields producing more than 10,000 bopd in a month, the production over 10,000 bopd pays the terrain rate in paragraph (b).",
+    "found": true,
+    "note": "The gazette hyphenates 'para- graph'."
+  },
+  {
+    "id": "nta_price_royalty_restated",
+    "text": "NTA",
+    "cite": "NTA Seventh Schedule para 6(3)(a)(i)-(iii)",
+    "quote": "a royalty by price with respect to crude oil and condensates at the rates set out below – (i) below US $50 per barrel – 0%, (ii) at US $100 per barrel – 5%, (iii) at US $150 per barrel and above – 10%, and",
+    "paraphrase": "The NTA restates royalty by price on crude oil and condensates: 0% below US $50 per barrel, 5% at US $100 and 10% at US $150 and above.",
+    "found": true,
+    "note": "Para 6(3)(a)(iv) (interpolation between the anchors) is split from the example by a page header."
+  },
+  {
+    "id": "nta_price_royalty_example_restated",
+    "text": "NTA",
+    "cite": "NTA Seventh Schedule para 6(3)(a) (worked example)",
+    "quote": "on linear interpolation, as an example, if in 2020 the price is US $75 per barrel, the royalty by price shall be 2.5%,",
+    "paraphrase": "The NTA keeps the Act's example: at US $75 per barrel in 2020 the royalty by price is 2.5%.",
+    "found": true,
+    "note": "Word for word as PIA Seventh Schedule para 11(1), so the same one-year conflict with the REGS Schedule (2021 base) carries into the NTA."
+  },
+  {
+    "id": "nta_price_royalty_escalation_restated",
+    "text": "NTA",
+    "cite": "NTA Seventh Schedule para 6(3)(a) (escalation)",
+    "quote": "the price levels mentioned in subparagraphs (i), (ii) (iii) and (iv) shall apply to the year 2020, and at the beginning of 2021 and of each succeeding calendar year these price levels shall be increased by 2% relative to the values of the previous year;",
+    "paraphrase": "The price levels apply to 2020 and rise by 2% on the previous year's values at the start of 2021 and each later calendar year.",
+    "found": true,
+    "note": "The gazette prints '(i), (ii) (iii) and (iv)' with no comma after (ii)."
+  },
+  {
+    "id": "nta_gas_royalty_restated",
+    "text": "NTA",
+    "cite": "NTA Seventh Schedule para 6(2)(f)",
+    "quote": "(f) royalty based on production for natural gas and natural gas liquids shall be at a rate of 5% of the chargeable volume and royalty rate for natural gas produced and utilised in-country shall be 2.5% of the chargeable volume; and",
+    "paraphrase": "Natural gas and natural gas liquids pay 5% production royalty; gas produced and used in Nigeria pays 2.5%.",
+    "found": true,
+    "note": "Same rule as PIA Seventh Schedule para 10(6)."
+  },
+  {
+    "id": "nta_cpr_65",
+    "text": "NTA",
+    "cite": "NTA Sixth Schedule para 2(1)",
+    "quote": "(b) and (h), in an accounting period the sum of which is eligible for deduction under the hydrocarbon tax shall be subject to a cost price ratio limit of 65% of gross revenues determined at the measurement points.",
+    "paraphrase": "Hydrocarbon tax costs, except rents, royalties and host community and similar contributions, are capped at a cost price ratio of 65% of gross revenues determined at the measurement points.",
+    "found": true,
+    "note": "The paragraph opens '2. (1) All costs prescribed under section 68 of this Act and under Part II of the First Schedule to this Act, excluding those related to section 68(1)(a),' and a page header separates that from the quote."
+  },
+  {
+    "id": "nta_production_allowance_converted",
+    "text": "NTA",
+    "cite": "NTA Sixth Schedule para 1(1)",
+    "quote": "1. (1) There shall be a production allowance for crude oil production by leases which are converted oil mining leases based on a conversion contract and their renewals, which shall be the lower of US $2.50 per barrel and 20% of the fiscal oil price.",
+    "paraphrase": "Converted oil mining leases and their renewals get a production allowance equal to the lower of US $2.50 per barrel and 20% of the fiscal oil price.",
+    "found": true,
+    "note": "Same as PIA Sixth Schedule para 1(1)."
+  },
+  {
+    "id": "nta_hct_deduct_royalties",
+    "text": "NTA",
+    "cite": "NTA s.68(1)(b)",
+    "quote": "(b) all royalties incurred by the company during that period in respect of crude oil and associated gas",
+    "paraphrase": "Royalties incurred in the period on crude oil and associated gas are deductible for hydrocarbon tax.",
+    "found": true,
+    "note": "PIA s.263(1)(b) read 'incurred and were paid'; the NTA drops 'and were paid'. Also the s.68(1) chapeau says 'wholly and exclusively incurred' (PIA: 'wholly, reasonably, exclusively and necessarily')."
+  },
+  {
+    "id": "nta_hct_deduct_levies",
+    "text": "NTA",
+    "cite": "NTA s.68(1)(f)",
+    "quote": "(f) all sums incurred by the company to the Federal Government or any State or Local Government Council by way of levies, stamp duties and fees;",
+    "paraphrase": "Levies, stamp duties and fees owed to the Federal, State or Local Government are deductible for hydrocarbon tax.",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "nta_hct_deduct_hcdt_nddc",
+    "text": "NTA",
+    "cite": "NTA s.68(1)(h)",
+    "quote": "development trusts under Chapter 3 of the Petroleum Industry Act, Environmental Remediation Fund, Niger Delta Development Commission and other similar contributions.",
+    "paraphrase": "Contributions to host communities development trusts, the Environmental Remediation Fund, the Niger Delta Development Commission and similar approved funds are deductible for hydrocarbon tax.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The paragraph opens '(h) any amount contributed to any fund, scheme or arrangement approved by the Commission pursuant to the establishment of host communities'' with the side note 'Act No. 6, 2021' interleaved."
+  },
+  {
+    "id": "nta_loss_relief",
+    "text": "NTA",
+    "cite": "NTA s.70(1)",
+    "quote": "that period after the deduction of the amount of any loss incurred by that company during any previous accounting period.",
+    "paraphrase": "Assessable profit for a period is the adjusted profit after deducting losses incurred in any previous accounting period.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Opening words '70. (1) The assessable profits for each company or petroleum mining lease for any accounting period shall be the amount of the adjusted profit of' carry the side note 'Assessable profits and losses'. Identical wording to PIA s.265(1)."
+  },
+  {
+    "id": "nta_loss_relief_by_class",
+    "text": "NTA",
+    "cite": "NTA s.70(2)",
+    "quote": "(2) The assessable profit shall be determined separately for each of the two classes of chargeable tax identified in section 72 (a) and (b) of this Act.",
+    "paraphrase": "Assessable profit is worked out separately for each of the two hydrocarbon tax classes in section 72 (a) and (b).",
+    "found": true,
+    "note": ""
+  },
+  {
+    "id": "nta_loss_relief_order",
+    "text": "NTA",
+    "cite": "NTA s.70(3)",
+    "quote": "(3) The loss referred to in subsection (1) shall be deducted to the extent possible from the amount of the adjusted profits of the accounting period immediately succeeding the accounting period in which the loss was incurred,",
+    "paraphrase": "A loss is deducted as far as possible from the adjusted profits of the accounting period immediately after the one in which it was incurred.",
+    "found": true,
+    "note": "Continues 'and in subsequent accounting periods, until the loss is fully recouped.' No time limit. s.70(4) keeps the PIA's five-month deferral election."
+  },
+  {
+    "id": "nta_consolidation_cit",
+    "text": "NTA",
+    "cite": "NTA s.76(1)",
+    "quote": "terrains shall be allowed to consolidate costs and incomes for the purpose of",
+    "paraphrase": "A company operating upstream across terrains may consolidate costs and incomes for income tax under Chapter Two.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Full sentence: '76. (1) A company engaged in upstream petroleum operations across / terrains shall be allowed to consolidate costs and incomes for the purpose of / income tax under Chapter Two of this Act.' The PIA said 'costs' only; the NTA adds 'incomes'."
+  },
+  {
+    "id": "nta_consolidation_hct",
+    "text": "NTA",
+    "cite": "NTA s.76(2)",
+    "quote": "(2) A company engaged in upstream petroleum operations related to crude oil across terrains shall be allowed to consolidate costs and revenue for the purposes of hydrocarbon tax, only across assets in which it holds licences and",
+    "paraphrase": "For hydrocarbon tax, a company may consolidate costs and revenue across terrains only across the assets it holds licences and leases in.",
+    "found": true,
+    "note": "Continues 'leases in accordance with the two categories of chargeable tax stipulated in section 72 of this Act' (no closing full stop in the gazette). The NTA says 'costs and revenue' where PIA s.272(2) said 'costs and taxes'. The PIA s.272(4) contractor consolidation has no counterpart in s.76."
+  },
+  {
+    "id": "nta_gas_pipeline_incentive",
+    "text": "NTA",
+    "cite": "NTA s.80(1)",
+    "quote": "shall be granted a tax-free period of five years at the expiration of the economic",
+    "paraphrase": "Gas pipeline investors get a tax-free period of five years after their economic development incentive certificate expires.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. Full sentence: '80. (1) In addition to the economic development tax incentive that may be granted under Part II of Chapter Eight of this Act, investors in gas pipeline shall be granted a tax-free period of five years at the expiration of the economic development incentive certificate.' Change from PIA s.302(6): the NTA keeps only the pipeline extension; the PIA's general grant of CITA s.39 incentives to midstream, downstream gas and large-scale gas utilisation companies has no restatement in s.80 (those companies would look to the Chapter Eight economic development incentive)."
+  },
+  {
+    "id": "nta_gas_transfer_taxed",
+    "text": "NTA",
+    "cite": "NTA s.80(2),(3)",
+    "quote": "(2) Natural gas transferred or disposed from the upstream to the midstream or downstream shall be subject to tax under the relevant provisions of Chapter Two of this Act.",
+    "paraphrase": "Natural gas transferred from upstream to midstream or downstream is taxed under Chapter Two.",
+    "found": true,
+    "note": "s.80(3): NGLs and LPG derived from natural gas are subject to income tax under Chapter Two."
+  },
+  {
+    "id": "nta_hct_not_deductible_cit",
+    "text": "NTA",
+    "cite": "NTA s.78(3)(a)",
+    "quote": "(3) In determining the income tax under Chapter Two of this Act – (a) hydrocarbon tax is not deductible; and",
+    "paraphrase": "Hydrocarbon tax cannot be deducted in computing income tax under Chapter Two.",
+    "found": true,
+    "note": "Matches the audit (NTA 78(3)(a)); same rule as PIA s.302(5)."
+  },
+  {
+    "id": "nta_cit_deduct_royalties",
+    "text": "NTA",
+    "cite": "NTA s.82(1)(a)",
+    "quote": "(a) all rents and royalties the liability for which was incurred by the company during that period in respect of crude oil sold, condensate sold and natural gas sold or delivered or disposed of in any other commercial manner",
+    "paraphrase": "For income tax, rents and royalties on crude oil, condensate and natural gas sold or disposed of are deductible.",
+    "found": true,
+    "note": "In the text layer the gazette's side notes are interleaved with the body text, so the quote stops where a side note breaks the sentence. The s.82(1) chapeau reads 'For the purpose of determining income tax, section 20 of this Act shall be read in conjunction with the provisions of this subsection' with the side note 'Expense deductibility' interleaved. Same as PIA s.302(11)(a)."
+  },
+  {
+    "id": "nta_cit_deduct_funds",
+    "text": "NTA",
+    "cite": "NTA s.82(1)(b)",
+    "quote": "(b) any amount contributed to any fund, scheme or arrangement approved by the Commission or Authority for the purpose of providing for – (i) abandonment and decommissioning, (ii) petroleum host communities development trust, or (iii) environmental remediation; and",
+    "paraphrase": "For income tax, contributions to approved funds for decommissioning, host communities development trusts or environmental remediation are deductible.",
+    "found": true,
+    "note": "s.82(1)(c): other deductions prescribed by the Minister. NTA s.86's 30% escrow condition applies to decommissioning fund provisions 'for tax purposes'."
+  },
+  {
+    "id": "nta_pia_deletion_para_14_6",
+    "text": "NTA",
+    "cite": "NTA s.197(1)(d)",
+    "quote": "(d) paragraph 14 (6) of Part IV of the Seventh Schedule.",
+    "paraphrase": "The NTA also deletes paragraph 14 (6) of Part IV of the PIA Seventh Schedule.",
+    "found": true,
+    "note": "Covered inside nta_pia_deletions as well; this is the separate exact quote. The deleted PIA para 14(6) reads 'The contractors shall be the licensees or lessees and shall thereby be entitled to the capital allowances under the Fifth Schedule.' The audit does not mention (d)."
+  },
+  {
+    "id": "regs_r13_2_b_less_than",
+    "text": "REGS",
+    "cite": "REGS r.13(2)(b) (opening words)",
+    "quote": "(b) for production greater than 5,000bopd but less than 10,000bopd,",
+    "paraphrase": "The middle band covers production greater than 5,000 bopd and less than 10,000 bopd.",
+    "found": true,
+    "note": "Teaching point: production of exactly 10,000 bopd is neither 'less than 10,000bopd' here nor 'greater than 10,000bopd' in (c) and (d). The Act's para 10(4) covers 'not more than 10,000 bopd', which includes it."
+  },
+  {
+    "id": "regs_r13_2_c_greater_than",
+    "text": "REGS",
+    "cite": "REGS r.13(2)(c) (opening words)",
+    "quote": "(c) for onshore areas where production is greater than 10,000bopd, the",
+    "paraphrase": "The onshore upper band covers production greater than 10,000 bopd.",
+    "found": true,
+    "note": "(d) uses the same 'greater than 10,000bopd' wording for shallow waters. Together with (b) this leaves exactly 10,000 bopd unstated."
+  },
+  {
+    "id": "pia_price_royalty_high_wording",
+    "text": "PIA",
+    "cite": "PIA Seventh Schedule para 11(1)(c)",
+    "quote": "(c) above US $150 per barrel — 10%, and",
+    "paraphrase": "The PIA sets royalty by price at 10% above US $150 per barrel.",
+    "found": true,
+    "note": "Read literally, US $150 exactly falls under (d) interpolation, which gives the same 10% at that point. REGS r.15(3)(c) says 'greater than or equal to'."
+  },
+  {
+    "id": "nta_price_royalty_high_wording",
+    "text": "NTA",
+    "cite": "NTA Seventh Schedule para 6(3)(a)(iii)",
+    "quote": "(iii) at US $150 per barrel and above – 10%, and",
+    "paraphrase": "The NTA sets royalty by price at 10% at US $150 per barrel and above.",
+    "found": true,
+    "note": "Wording differs from the PIA ('above US $150') but gives the same rate at every price."
+  }
+]
