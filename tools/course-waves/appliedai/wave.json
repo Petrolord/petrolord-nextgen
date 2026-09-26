@@ -82,10 +82,10 @@
  },
  "cleared_claimsNote": "Read by hand: the reliability table prints bin 7 with 3 rows, mean probability 0.723333 and observed frequency 0.000000, and the sentence says exactly that.",
  "digest": {
-  "lines": 1281,
+  "lines": 1294,
   "sections": 24,
-  "md5": "8eba2b61a083480b1bc4895ab93f44bb",
-  "sha256": "76647fb0b897246e04391d9f4877a560c4af99273d292de576bdb5ce22b31cf1"
+  "md5": "50f9d2728eb0e6c47c02632bcf1735d3",
+  "sha256": "6215305f9dbd0cb69017b8264366204baf3d66842fa9cc448db8d14601135aff"
  },
  "fields": {
   "count": 18,
@@ -120,7 +120,7 @@
    "summary": "PROBLEMS: 0"
   },
   "prove_prior_courses.sh": {
-   "md5": "b05422e6d13001840ee0491202e251cd",
+   "md5": "ef02f79b516e73e1375fd47505f3a48a",
    "command": "bash prove_prior_courses.sh",
    "expected": 0,
    "exit": 0,
@@ -187,14 +187,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh dai-wip-appliedai /root/wt-dai-d5-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "d5_dump: 1097 label-and-call, measurement and claim assertions run, 0 failed; 24 sections"
+   "summary": "d5_dump: 1102 label-and-call, measurement and claim assertions run, 0 failed; 24 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-appliedai",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/dai-wip-appliedai/digest.txt: 1281 line(s), 24 section title(s) and 106 in-body marker(s) swept against their blocks, 32 history framings, 42 engine pin(s); 0 warned for a human read and 0 framed as c"
+   "summary": "[digestprose] /root/dai-wip-appliedai/digest.txt: 1294 line(s), 24 section title(s) and 108 in-body marker(s) swept against their blocks, 32 history framings, 42 engine pin(s); 0 warned for a human read and 0 framed as c"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -344,14 +344,14 @@
    "summary": "NEGATIVE CONTROL: expected a P label and an AI claim caught; got ['a P label', 'an AI or model claim about a method']"
   },
   "truth_check.py": {
-   "md5": "be8e98611b93f451b3cbcd867d4afe57",
+   "md5": "b20fbb2eb8f9d9c93cd88ee02b448313",
    "command": "python3 truth_check.py",
    "expected": 0,
    "exit": 0,
-   "summary": "truth_check: truth-appliedai.json (753 digest lines) IS the harvest of digest.txt"
+   "summary": "truth_check: truth-appliedai.json (760 digest lines) IS the harvest of digest.txt"
   },
   "truth_check.py NEGATIVE CONTROL": {
-   "md5": "be8e98611b93f451b3cbcd867d4afe57",
+   "md5": "b20fbb2eb8f9d9c93cd88ee02b448313",
    "command": "python3 truth_check.py --plant",
    "expected": 1,
    "exit": 1,
@@ -360,10 +360,9 @@
   "numsweep_appliedai.mjs": {
    "md5": "9166b7f157d0473565c19386026fbbc4",
    "command": "node numsweep_appliedai.mjs",
-   "expected": "held NOT ONE literal of seven or more significant figures",
-   "exit": 1,
-   "summary": "This gate does not pass on an empty or unreadable sweep.",
-   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+   "expected": 0,
+   "exit": 0,
+   "summary": "serialised floats outside an exact reason quote: 0"
   },
   "numsweep_appliedai.mjs --selftest": {
    "md5": "9166b7f157d0473565c19386026fbbc4",
@@ -375,13 +374,9 @@
   "lengths.py": {
    "md5": "16a799f6b8ec0b2e450051f529f63498",
    "command": "python3 lengths.py",
-   "expected": [
-    "UNDER ITS OWN FLOOR",
-    78
-   ],
-   "exit": 1,
-   "summary": "tiers read: 3  out of band: 81  not written yet: 0",
-   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+   "expected": 0,
+   "exit": 0,
+   "summary": "tiers read: 3  out of band: 0  not written yet: 0"
   },
   "lengths.py --selftest": {
    "md5": "16a799f6b8ec0b2e450051f529f63498",

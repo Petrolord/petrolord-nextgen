@@ -63,6 +63,8 @@ export const EvaluateMode = () => {
             <Tile label="MRR" value={six(ev.mean.mrr)} />
           </TileGrid>
           {[...ev.excluded, ...ev.zeroed].map((x) => <Note key={x.query}>{`${x.query}: ${x.reason}.`}</Note>)}
+          {ev.note && <Note>{`Every mean: ${ev.note}.`}</Note>}
+          {ev.perQuery.filter((x) => x.notes).flatMap((x) => Object.entries(x.notes).map(([f, t]) => <Note key={`${x.query}-${f}`}>{`${x.query}, returned as null with the reason: ${t}.`}</Note>))}
           <Declared title="AVERAGE PRECISION, in the engine's words">{ev.basis.averagePrecision}</Declared>
           <Declared title="nDCG, in the engine's words">{ev.basis.ndcg}</Declared>
           <Declared title="THE NO-RELEVANT RULE, in the engine's words">{ev.basis.noRelevant}</Declared>

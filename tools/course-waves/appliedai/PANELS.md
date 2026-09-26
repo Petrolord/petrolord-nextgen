@@ -52,7 +52,8 @@ against the passages each cites and retrieved.
 ### `ae-scoring-explorer` (Professional)
 
 Score a set of runs with average precision, DCG, the ideal DCG and nDCG at a
-stated cutoff, threshold, gain and no-relevant rule; score short answers by
+stated cutoff, threshold, gain and no-relevant rule, with the engine's
+per-query null reasons and its every-mean-is-null note printed verbatim; score short answers by
 exact match and token F1; score field extraction by outcome with micro and
 macro figures; check a set of answers for groundedness with or without the
 retrieved lists and at a stated numericRelTol (system B: 0.731707 pooled); and
@@ -66,7 +67,9 @@ Cohen's kappa of two raters, unweighted or weighted, with the labels in order
 the reliability table, ECE, MCE and log loss at a stated bin count (Brier
 0.168382); the Murphy decomposition with its closure; the seeded bootstrap of
 a mean with its parameter-percentile labels (system A's nDCG at seed 7: 0.653604
-to 0.852644); and a boundary rule probed either side.
+to 0.852644); and a boundary rule probed either side, the probed value passed to the engine
+as typed (a grade or a k that is not a whole number in range shows the
+engine's refusal verbatim).
 
 ## THE RULES FOR EVERY PANEL
 

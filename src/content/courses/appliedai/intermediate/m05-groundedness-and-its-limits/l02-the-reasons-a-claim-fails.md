@@ -33,11 +33,11 @@ A fabrication, on Q07, "volumetric STOIIP estimate for the Ekene Sand":
 
 > the number 12.1 is not in the cited passage EKD-008; it appears in no passage of the corpus
 
-The reference gives the volume in full, in stb. The answer said 12.1 million stb, a planted unit change. The value is a fair rounding, and the check still cannot support it: it compares numbers, and it does not convert units.
+The reference is "12,139,208 stb". The answer said 12.1 million stb, a planted unit change. The value is a fair rounding, and the check still cannot support it: it compares numbers, and it does not convert units.
 
 ## The whole of system B
 
-| where the figure is | claims (counted from the reasons) |
+| where the figure is | unsupported claims |
 | --- | --- |
 | in a retrieved passage the answer does not cite | 3 |
 | in a cited passage that was not retrieved | 1 |
@@ -56,4 +56,4 @@ The check scores one answer per query. A set with two answers to the same query 
 
 ## Exercise
 
-Open the view for groundedness with its defaults: every passage, system B's answers and retrieved lists, and numericRelTol 0. Read the table of unsupported claims, and put each of the 11 rows into one of the four kinds by reading its reason. Check your counts against the table above. Then copy B's Q01 answer, paste it as a second entry in the answers list, and read the refusal.
+Open the view for groundedness with its defaults: every passage, system B's answers and retrieved lists, and numericRelTol 0. Read the table of unsupported claims, and put each of the 11 rows into one of the four kinds by reading its reason. Check your counts against the table above, which the course prints from the same 11 reasons. Then copy B's Q01 answer, paste it as a second entry in the answers list, and read the refusal.

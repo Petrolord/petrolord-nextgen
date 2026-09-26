@@ -195,7 +195,7 @@ export const BoundsMode = () => {
   let refusal = null;
   const v = parseNumber(x);
   if (rule === 'grade') {
-    const r = metricsOf({ ranking: ['p'], judgments: { p: Number.isInteger(v) ? v : 0 }, k: 1, relevantGrade: 2 });
+    const r = metricsOf({ ranking: ['p'], judgments: { p: v }, k: 1, relevantGrade: 2 });
     if (r.error) refusal = r; else rows = [[`grade ${x} at relevantGrade 2`, `hit ${r.hit}`]];
   } else if (rule === 'tolerance') {
     const r = extractionOf({ labels: [{ id: 'r', fields: { q: 100 } }], predictions: [{ id: 'r', fields: { q: v } }], fields: [{ name: 'q', type: 'number', absTol: 1 }] });
@@ -204,9 +204,10 @@ export const BoundsMode = () => {
     const r = calibrationOf({ yTrue: [1], probabilities: [v], bins: parseNumber(bins) });
     if (r.error) refusal = r; else rows = [[`probability ${x}, ${bins} bins`, `bin ${r.table.findIndex((t) => t.n === 1)}`]];
   } else {
-    const k = Number.isInteger(v) ? v : 1;
-    const r1 = metricsOf({ ranking: ['n1', 'n2', 'rel'], judgments: { rel: 3 }, k });
-    if (r1.error) refusal = r1; else rows = [[`the relevant passage at rank 3, k ${k}`, `reciprocal rank ${six(r1.reciprocalRank)}`]];
+    // The probed value goes to the engine as typed: a grade or a k that is not
+    // a whole number in range is refused, and the refusal is shown verbatim.
+    const r1 = metricsOf({ ranking: ['n1', 'n2', 'rel'], judgments: { rel: 3 }, k: v });
+    if (r1.error) refusal = r1; else rows = [[`the relevant passage at rank 3, k ${r1.k}`, `reciprocal rank ${six(r1.reciprocalRank)}`]];
   }
   return (
     <>
