@@ -59,8 +59,8 @@
   "options": [
    "Ranks at a technical weight of 0.7, the figure the well services tender states in its settings.",
    "A refusal: \"technicalWeight must be a number from 0 to 1 (the technical share of the combined score); there is no default\".",
-   "An even split of 0.5 between the technical and the commercial score of each bid.",
-   "Ranks on the commercial score alone, as a missing weight is read as a weight of zero."
+   "An even split of 0.5 between the technical and the commercial score of each bid, applied until a weight is typed.",
+   "Ranks on the commercial score alone, as a missing technical weight is read as a weight of zero."
   ],
   "answer": 1,
   "explanation": "The technical weight has no default, so a combined score without one is refused in the engine's own words. It borrows no weight from a fixture, assumes no even split, and never reads a blank as zero, because each of those would decide the award silently."
@@ -118,7 +118,7 @@
    "91.666667, D's commercial score, which the Guidance prints as 91.7 in its table."
   ],
   "answer": 1,
-  "explanation": "At technical weight 0.8 the engine returns D's B as 98.333333, within 0.01 of the printed 98.34; two figures that look close are still different, and the course quotes each as printed. 80.000000 is 0.8 x St, 91.666667 is Sc, and the ranking D, C, B, A agrees with the Guidance."
+  "explanation": "At the technical weight of 0.8 that the World Bank Guidance (February 2025) states, the engine returns D's B as 98.333333, within 0.01 of the printed 98.34; two figures that look close are still different, and the course quotes each as printed. 80.000000 is 0.8 x St, 91.666667 is Sc, and the ranking D, C, B, A agrees with the Guidance."
  },
  {
   "prompt": "In the Guidance's Figures X to XII, Company C scores Sc 100.000000. Why is D most advantageous at technical weight 0.8?",
@@ -129,7 +129,7 @@
    "A tie goes to D, received first."
   ],
   "answer": 2,
-  "explanation": "At 0.8 the technical score carries most of the weight: D's 0.8 x St is 80.000000 against C's 68.333333, and C's Sc of 100.000000 against D's 91.666667 cannot close that gap, so D scores 98.333333 and C 88.333333. The excluded company is E, C holds the lowest cost, and there is no tie."
+  "explanation": "At the 0.8 that the World Bank Guidance (February 2025) states, the technical score carries most of the weight: D's 0.8 x St is 80.000000 against C's 68.333333, and C's Sc of 100.000000 against D's 91.666667 cannot close that gap, so D scores 98.333333 and C 88.333333. The excluded company is E, C holds the lowest cost, and there is no tie."
  },
  {
   "prompt": "The Guidance's Annex 3 states a technical weight of 0.4. What does the engine return for Company A?",
@@ -140,7 +140,7 @@
    "B 240.000000, A's weighted points, which the Annex uses as its combined score."
   ],
   "answer": 0,
-  "explanation": "The engine returns A at St 100.000000, Sc 90.625000, B 94.375000, and B at St 79.166667, Sc 100.000000, B 91.666667, so A wins on both. The Guidance prints 94.37, two decimals of the engine's figure with the third dropped. 240.000000 is A's weighted points and plays no part in B."
+  "explanation": "The engine returns A at St 100.000000, Sc 90.625000, B 94.375000, and B at St 79.166667, Sc 100.000000, B 91.666667, so A wins on both. The World Bank Guidance (February 2025) prints 94.37, two decimals of the engine's figure with the third dropped. 240.000000 is A's weighted points and plays no part in B."
  },
  {
   "prompt": "On the well services bids, what happens to the most advantageous bid if the technical weight is set to 0, and if it is set to 1?",
@@ -154,7 +154,7 @@
   "explanation": "B = technical weight x St + the rest x Sc, so a weight of 0 ranks on Sc alone and WS5, with the lowest evaluated cost, is most advantageous; a weight of 1 ranks on St alone and WS3 leads (engine run on the four responsive bids). The input is the technical share, and the engine accepts any weight from 0 to 1."
  },
  {
-  "prompt": "The Works SPD writes the combined evaluation as B = Clow / C x X x 100 + T / Thigh x (1 - X) x 100. What does X stand for, and what does the engine take as its input?",
+  "prompt": "The Works SPD (September 2025) writes the combined evaluation as B = Clow / C x X x 100 + T / Thigh x (1 - X) x 100. What does X stand for, and what does the engine take as its input?",
   "options": [
    "The technical weight, which the engine takes directly as its own input.",
    "X is the weight on price; the engine takes the technical weight and gives the rest to Sc.",

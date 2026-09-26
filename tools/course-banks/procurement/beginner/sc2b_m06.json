@@ -70,7 +70,7 @@
   "options": [
    "Twelve, an engine convention (TIE_DIGITS 12).",
    "Six, the number of decimals every figure in the course is printed to.",
-   "Two, as the Guidance prints.",
+   "Two, as the Guidance (February 2025) prints.",
    "Every digit of the double, so only bit-for-bit equal figures tie."
   ],
   "answer": 0,
@@ -90,10 +90,10 @@
  {
   "prompt": "How should an evaluation report describe what happened to WS4 and WS6?",
   "options": [
-   "Refusals, because the engine would not evaluate either bid.",
+   "Refusals, because the engine would not evaluate either bid and returned an error.",
    "As exclusions: results the engine returned, each with its stage and its reason in quotation marks.",
-   "Input errors to fix before the tender is run again.",
-   "As bids withdrawn by their bidders before the envelopes were opened."
+   "Input errors in the two bids, to be corrected before the tender is run again.",
+   "As bids withdrawn by their own bidders before the envelopes were opened."
   ],
   "answer": 1,
   "explanation": "An exclusion is a result: the engine evaluated both bids and returned them excluded with the reason beside each. A refusal returns no result for a bad input, nothing in either bid is an input error, and neither bidder withdrew."

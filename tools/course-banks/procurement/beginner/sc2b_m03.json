@@ -2,9 +2,9 @@
  {
   "prompt": "WS2 prices 18 days of the coiled tubing spread at 27000.000000 a day and writes the amount as 468000.000000. Which figure stands?",
   "options": [
-   "The written amount, since 468000.000000 is what the bidder signed.",
-   "Neither: the line is struck and priced as an omission.",
-   "The lower of the two, to protect the company.",
+   "The written amount stands, since 468000.000000 is the figure the bidder signed and the bid form carries it into the total.",
+   "Neither figure stands: the line is struck and priced as an omission at the average of the other bids.",
+   "The lower of the two figures stands, so that the company never pays more than the line's lower reading.",
    "The unit rate stands, and the engine corrects the line amount to 486000.000000 because 18 x 27000 is that figure."
   ],
   "answer": 3,
@@ -44,22 +44,22 @@
   "explanation": "When the quoted amount governs, the amount stays and only the unit rate changes, so the corrected total equals the quoted total and the correction is 0.000000. 18000.000000 is WS2's correction, the acid amount is unchanged, and 12741.000000 is WS5's completion-time adjustment, a later term of its evaluated cost."
  },
  {
-  "prompt": "Who decides that a unit rate's decimal point is obviously misplaced?",
+  "prompt": "How does the engine know that a unit rate's decimal point is obviously misplaced?",
   "options": [
-   "The evaluation does, and states it as decimalMisplaced true on the line.",
-   "The engine does, by testing whether the gap is a power of ten.",
-   "The bidder's total decides it when the gap exceeds 0.005.",
-   "No one; every misplaced point is read as a unit-rate slip."
+   "It reads the flag decimalMisplaced true, stated on that bill line.",
+   "By testing whether the gap is a power of ten.",
+   "From the bid's stated total, whenever it differs from the lines by more than 0.005.",
+   "It never knows; every misplaced point is read as an ordinary unit-rate slip."
   ],
   "answer": 0,
-  "explanation": "The flag is an input on the line, set when the evaluation has judged the point misplaced, so the judgement stays visible in the report and a reader can disagree with it. The engine does not guess from the size of the gap, and a gap above the tolerance alone triggers the unit rate rule."
+  "explanation": "decimalMisplaced is an input on the bill line, and the engine applies the exception only where the flag is stated true on a line already in discrepancy. It does not guess from the size of the gap, a stated total that differs from its lines is a separate check where the subtotals prevail, and without the flag a gap above the tolerance triggers the unit rate rule."
  },
  {
   "prompt": "decimalMisplaced is set to true on a line whose quantity is 0. What does the engine return?",
   "options": [
-   "A unit rate of zero, since any amount divided across no units is taken as nothing.",
-   "The line left as quoted, because a flag on a quantity of 0 changes nothing in the bill.",
-   "Silence: the flag is dropped and the unit rate rule applies to the line as usual.",
+   "A corrected unit rate of zero for the line, since any quoted amount divided across no units is taken as nothing.",
+   "The line left as quoted with no reason printed, because a decimalMisplaced flag on a quantity of 0 changes nothing.",
+   "Silence: the flag is dropped from the line without a word, and the rule that the unit rate prevails applies as usual.",
    "A refusal: \"lines[0].quantity must be above 0 when decimalMisplaced is true (the unit rate is corrected as quoted amount / quantity)\"."
   ],
   "answer": 3,
@@ -113,7 +113,7 @@
   "prompt": "Which texts does the course name for the rule that the unit rate prevails?",
   "options": [
    "ITB 35.1 of the SPD for Works, two-envelope (September 2025); the 2007 Act s.31(4) permits it.",
-   "ITB 34.1 of the SPD for Works, two-envelope, and s.32(3) of the Public Procurement Act 2007.",
+   "ITB 34.1 of the SPD for Works, two-envelope (September 2025), and s.32(3) of the Public Procurement Act 2007.",
    "Para 6.29 of the Regulations (Seventh Edition, September 2025), which opens the commercial envelope.",
    "The Guidance on Evaluating Bids and Proposals (February 2025), Annex 3 on comparative scoring."
   ],

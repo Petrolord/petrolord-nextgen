@@ -47,9 +47,9 @@ q(0, "WS4 is scored at 65.000000 against a pass mark of 70. How does the engine 
 
 q(2, "Stated as a test, WS1 fails both bid-security and signed-bid-form. What reason does the engine give?",
  "It names both: \"failed the mandatory requirements bid-security, signed-bid-form; the bid is not scored and its commercial envelope is not opened\".",
- ["Only bid-security, the first requirement failed, since the check stops at the first failure it meets.",
-  "A reason for each requirement on separate rows, with WS1 listed twice among the bids excluded.",
-  "A technical percentage of 0.000000 and the status fail-pass-mark, since no requirement counted."],
+ ["Only bid-security, the first requirement it failed, since the engine stops checking at the first failed requirement and names that one alone.",
+  "A separate reason for each failed requirement, printed on separate rows, so that WS1 appears twice in the list of bids the technical envelope excludes.",
+  "A technical percentage of 0.000000 and the status fail-pass-mark, since no requirement counted and every criterion score is then read as zero."],
  "When a bid fails more than one requirement the engine names every failed requirement in one reason, so the report to the bidder is complete. It does not stop at the first, it lists the bid once, and a mandatory failure is never scored, so there is no percentage and no fail-pass-mark status.")
 
 q(1, "An evaluator leaves WS1's hse score blank. What does the technical envelope do?",
@@ -71,7 +71,7 @@ q(3, "The Guidance's Figure IX scores Company A 2, 2, 2 and 1 on criteria weight
  ["The technical percentage, which the engine returns as 190.000000 for Company A.",
   "Neither of the two, since the Guidance prints weighted points to two decimals only.",
   "Both of them, because on a scale of 4 the percentage and the points always agree."],
- "Weighted points are the sum of weight x score, the total the Guidance prints in Figure IX, and the engine returns 190.000000 against the printed 190. The technical percentage divides each term by its maxScore and is 47.500000. On a scale of 4 the points are four times the percentage, so the two share an order and differ in value.")
+ "Weighted points are the sum of weight x score, the total the World Bank Guidance (February 2025) prints in Figure IX, and the engine returns 190.000000 against the printed 190. The technical percentage divides each term by its maxScore and is 47.500000. On a scale of 4 the points are four times the percentage, so the two share an order and differ in value.")
 
 q(0, "On the materials tender, with a pass mark of 60, which bid fails?",
  "MS5, at 50.000000, whose price is never opened.",
@@ -85,13 +85,13 @@ q(2, "The Guidance's Annex 2 scores companies in points out of 15, 15 and 70 aga
  ["B and C, since B's 77.000000 rounds up to the threshold once the scores are weighted.",
   "All three, since the threshold applies criterion by criterion.",
   "A and C, as A's 48 points outweigh its first two scores."],
- "With weights equal to the maximum points, the technical percentage equals the points total: A 59.000000, B 77.000000, C 91.000000. Only C reaches 80, so the engine returns fail-pass-mark for A and B. Nothing rounds 77.000000 up, the threshold applies to the total, and A's total is lowest of the three.")
+ "On the Annex 2 scores of the World Bank Guidance (February 2025), with weights equal to the maximum points, the technical percentage equals the points total: A 59.000000, B 77.000000, C 91.000000. Only C reaches 80, so the engine returns fail-pass-mark for A and B. Nothing rounds 77.000000 up, the threshold applies to the total, and A's total is lowest of the three.")
 
 q(1, "Why does the engine require the criterion weights to sum to 100?",
  "It reads the weights as percentages of the technical judgement, checked to within 1e-9.",
  ["Because the pass mark is fixed at 100 points and the weights must add up to meet it.",
   "So that weighted points and the technical percentage return the same figure for each bid.",
-  "Because the World Bank Guidance requires every tender to use exactly five criteria."],
+  "Because the World Bank Guidance (February 2025) requires every tender to use exactly five criteria."],
  "WEIGHT_SUM is 100 and WEIGHT_SUM_TOLERANCE is 1e-9: the weights are percentages, and the tolerance absorbs binary rounding. The pass mark is a stated input with no default, weighted points differ from the percentage by the maxScore, and the materials tender has three criteria.")
 
 q(0, "On the well services tender, how do each bid's weighted points relate to its technical percentage?",

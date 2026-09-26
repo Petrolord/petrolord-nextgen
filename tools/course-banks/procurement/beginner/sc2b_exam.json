@@ -2,8 +2,8 @@
  {
   "prompt": "A bill line carries a key named unitPrice, which the engine does not read. What happens?",
   "options": [
-   "The key is dropped and the line priced from its unitRate.",
-   "Its value replaces the unit rate.",
+   "The unknown key is dropped without a word and the line is priced from its unitRate as usual.",
+   "Its value replaces the unit rate, since unitPrice is read as another name for it.",
    "The call is refused, naming the key, its path and the keys a bill line accepts.",
    "The line is excluded from the bill."
   ],
@@ -135,8 +135,8 @@
   "prompt": "The technical envelope's basis carries a source string. Which texts does it cite?",
   "options": [
    "Para 6.29 of the World Bank Regulations (7th ed.) and s.51(2) of the Public Procurement Act 2007.",
-   "ITB 35.1(a) and (b) of the Works SPD, two-envelope, with s.31(4) of the Public Procurement Act 2007.",
-   "Annex X para 3.6 of the Regulations with s.24(3) and s.33(1) of the Public Procurement Act 2007.",
+   "ITB 35.1(a) and (b) of the Works SPD, two-envelope (Sep 2025), with s.31(4) of the Public Procurement Act 2007.",
+   "Annex X para 3.6 of the Regulations (7th ed.) with s.24(3) and s.33(1) of the Public Procurement Act 2007.",
    "Figure IX and Annex 2 of the Guidance on Evaluating Bids and Proposals (February 2025)."
   ],
   "answer": 0,
@@ -156,10 +156,10 @@
  {
   "prompt": "Across all six well services bills, how many lines does the engine correct, and by which rules?",
   "options": [
-   "One, WS2's ct-spread, as WS5's flagged line is left alone.",
+   "One, WS2's ct-spread by unit-rate-prevails, as WS5's flagged acid line is left alone.",
    "Two: WS2's ct-spread by unit-rate-prevails and WS5's acid by total-governs.",
    "Six, one on each bill.",
-   "Two, both by unit-rate-prevails."
+   "Two, WS2's ct-spread and WS5's acid, both by the rule unit-rate-prevails."
   ],
   "answer": 1,
   "explanation": "The correction table shows WS2 with 1 line corrected by unit-rate-prevails and WS5 with 1 line corrected by total-governs; every other line of every bid passes the test. WS5's line is corrected, its unit rate going to 1380, even though its amount and total stand."
@@ -167,9 +167,9 @@
  {
   "prompt": "correctArithmetic run on WS6's bill returns a correction of 0.000000 on 1004400.000000. Does that bill reach an evaluated cost?",
   "options": [
-   "Yes, a clean bill goes straight on.",
-   "Only as a reference for omissions.",
-   "If the committee waives the requirement.",
+   "Yes, a bill with no correction goes straight on to the evaluated cost.",
+   "Only as a reference price for items other bids omit.",
+   "Only if the committee waives the signed-bid-form requirement.",
    "No; WS6 failed signed-bid-form, so its commercial envelope is never opened."
   ],
   "answer": 3,
@@ -277,9 +277,9 @@
  {
   "prompt": "A schedule is stated but one bid gives no completion weeks. What happens?",
   "options": [
-   "Charged for the maximum of 10 weeks, the worst case the tender allows.",
+   "The bid is charged for the maximum of 10 weeks, the worst case the tender allows, and ranked with the rest.",
    "The engine refuses, because every bid must give its completion weeks when a schedule is given.",
-   "Treated as finishing at the minimum of 6 weeks, so no charge is added.",
+   "The bid is treated as finishing at the minimum of 6 weeks, so no completion charge is added to its cost.",
    "Excluded at the commercial stage for failing to state a completion time."
   ],
   "answer": 1,
@@ -288,10 +288,10 @@
  {
   "prompt": "A learner types maxWeek for maxWeeks in the schedule. What comes back?",
   "options": [
-   "A schedule with no maximum, so that no bid is rejected however late it finishes.",
-   "The value read as maxWeeks, since the engine corrects a near miss in a key name.",
+   "A schedule with no maximum at all, so that no bid is rejected at the commercial stage however late it offers to finish.",
+   "The value read as maxWeeks, since the engine corrects a near miss in a key name and says so beside it.",
    "The refusal \"schedule.maxWeek is not an accepted key; the accepted keys of schedule are minWeeks, maxWeeks, ratePerWeek\".",
-   "The schedule dropped, with every completion adjustment returned as 0.000000."
+   "The whole schedule dropped without a word, with every completion adjustment in the tender returned as 0.000000."
   ],
   "answer": 2,
   "explanation": "An input key the function does not read is refused at whatever level it sits, with its path and the accepted keys, in the engine's words. A misspelt optional key never silently drops a term, so the engine neither runs without a maximum, guesses the intended key, nor drops the schedule."
@@ -308,7 +308,7 @@
   "explanation": "The engine's message is \"bestEstimates.mob is not an item any bid omits; the accepted keys of bestEstimates are the omitted item ids nitrogen\". A key that is an id is checked against the ids the call carries, so an estimate for an item nobody omits is neither stored, applied nor ignored."
  },
  {
-  "prompt": "Which paragraph of the World Bank Regulations does the engine cite first as the source of the evaluated cost?",
+  "prompt": "Which paragraph of the World Bank Procurement Regulations (Seventh Edition, September 2025) does the engine cite first as the source of the evaluated cost?",
   "options": [
    "Para 6.29, the paragraph that describes the two-envelope process itself.",
    "Para 5.69, the paragraph that sets out the Most Advantageous Bid award.",
@@ -360,7 +360,7 @@
    "100.000000, as for C."
   ],
   "answer": 0,
-  "explanation": "At technical weight 0.8 the engine returns B's Sc as 88.000018, which the Guidance prints to its own precision as 88; a printed figure that agrees to its shown digits is still a rounding of the engine's. 84.266670 is B's combined score B, 66.666667 is 0.8 x St, and Sc 100.000000 belongs to C, the lowest cost of the four."
+  "explanation": "Company B's commercial score from the engine is 88.000018; Figures X to XII of the World Bank Guidance (February 2025) show 88, so the two print alike at that precision and remain two different figures. 84.266670 is B's combined score, 66.666667 is its technical part at 0.8, and Sc 100.000000 belongs to C, the lowest cost of the four."
  },
  {
   "prompt": "In the Guidance's Annex 3, A has 240.000000 weighted points and B 190.000000. What St does B receive under relative scoring?",
@@ -371,7 +371,7 @@
    "91.666667, the combined score B reaches at technical weight 0.4."
   ],
   "answer": 2,
-  "explanation": "Relative scoring divides by the top bid: 100 x 190 / 240 = 79.166667, and A scores St 100.000000. Weighted points enter only as that ratio, B's 100.000000 is its Sc, and 91.666667 is B's combined score, below A's 94.375000."
+  "explanation": "In the World Bank Guidance (February 2025) example, relative scoring divides by the top bid: 100 x 190 / 240 = 79.166667, and A scores St 100.000000. Weighted points enter only as that ratio, B's 100.000000 is its Sc, and 91.666667 is B's combined score, below A's 94.375000."
  },
  {
   "prompt": "The technical method is left out of a combined score. What does the engine return?",
@@ -387,10 +387,10 @@
  {
   "prompt": "What is wrong with entering 120 as a bid's technicalPercent in the combined score view?",
   "options": [
-   "Nothing, as an St above 100 simply sets Thigh.",
+   "Nothing, as a technical percentage above 100 simply sets Thigh.",
    "It exceeds the whole available score; the engine refuses any value above 100.",
-   "Only that it is capped at 100 in silence.",
-   "The bid is then excluded with a reason."
+   "Only that the engine caps it at 100 in silence before the ranking.",
+   "The bid is then excluded from the ranking with a reason beside it."
   ],
   "answer": 1,
   "explanation": "No proposal can earn more than the whole available score, so the engine refuses the value with \"bids[0].technicalPercent must be a number from 0 to 100\". It computes no St above 100, caps nothing silently and returns no exclusion, since a bad input is refused before any ranking."
@@ -434,10 +434,10 @@
    "WS5, as the rejection of two bids moves the award to the lowest evaluated cost.",
    "No bid at all.",
    "WS1, charged for lateness.",
-   "WS3, since neither change touches it or its lead over WS5."
+   "WS3, still ahead of WS5, the one other bid left responsive."
   ],
   "answer": 3,
-  "explanation": "WS2 and WS1 are both excluded at the commercial stage with their reasons, and the engine still awards WS3 (engine run): WS3 and WS5 remain, and Cmin and Thigh are unchanged. A bid beyond maxWeeks is excluded without a charge, and the award basis stays combined whatever is excluded."
+  "explanation": "WS2 and WS1 are both excluded at the commercial stage with their reasons, and the engine still awards WS3 (engine run). The change does reach WS3: its nitrogen is now priced from the one responsive bid left that quotes it, WS5, so its evaluated cost moves; Thigh stays with WS3 and Cmin with WS5, and WS3 keeps the lead. A bid beyond maxWeeks is excluded without a charge, and the award basis stays combined whatever is excluded."
  },
  {
   "prompt": "Which function returns the refusal \"bids has no bid left to score: every bid is rejected\"?",

@@ -55,7 +55,7 @@ q(2, "Stated as a test, U2 has T 100 and C 1000 and U1 has T 50 and C 500, at te
 q(0, "At how many significant digits does the engine treat two figures as tied?",
  "Twelve, an engine convention (TIE_DIGITS 12).",
  ["Six, the number of decimals every figure in the course is printed to.",
-  "Two, as the Guidance prints.",
+  "Two, as the Guidance (February 2025) prints.",
   "Every digit of the double, so only bit-for-bit equal figures tie."],
  "TIE_DIGITS is 12: two routes to the same score can land a hair apart in the last binary digits, and twelve significant digits treat such hairs as equal while keeping every difference a person could print. Six decimals is only the printing precision, so figures printed alike at six decimals are not for that reason tied.")
 
@@ -68,9 +68,9 @@ q(3, "Which bids does the whole well services call list as excluded, and at what
 
 q(1, "How should an evaluation report describe what happened to WS4 and WS6?",
  "As exclusions: results the engine returned, each with its stage and its reason in quotation marks.",
- ["Refusals, because the engine would not evaluate either bid.",
-  "Input errors to fix before the tender is run again.",
-  "As bids withdrawn by their bidders before the envelopes were opened."],
+ ["Refusals, because the engine would not evaluate either bid and returned an error.",
+  "Input errors in the two bids, to be corrected before the tender is run again.",
+  "As bids withdrawn by their own bidders before the envelopes were opened."],
  "An exclusion is a result: the engine evaluated both bids and returned them excluded with the reason beside each. A refusal returns no result for a bad input, nothing in either bid is an input error, and neither bidder withdrew.")
 
 q(0, "A receipt time is typed as 2027-05-01T09:00:00 with no zone letter. What does the engine return?",

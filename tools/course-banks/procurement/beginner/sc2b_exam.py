@@ -14,8 +14,8 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # m01: what a tender evaluation decides
 q(2, "A bill line carries a key named unitPrice, which the engine does not read. What happens?",
  "The call is refused, naming the key, its path and the keys a bill line accepts.",
- ["The key is dropped and the line priced from its unitRate.",
-  "Its value replaces the unit rate.",
+ ["The unknown key is dropped without a word and the line is priced from its unitRate as usual.",
+  "Its value replaces the unit rate, since unitPrice is read as another name for it.",
   "The line is excluded from the bill."],
  "The engine refuses any input key a function does not read, at every level, with the message \"bids[0].lines[0].unitPrice is not an accepted key; the accepted keys of bids[0].lines[0] are id, quantity, unitRate, quotedAmount, decimalMisplaced\". A misspelt key never silently drops a term, so nothing is ignored, substituted or excluded.")
 
@@ -99,8 +99,8 @@ q(1, "A bid's scores include a score for price, which is not a criterion of the 
 
 q(0, "The technical envelope's basis carries a source string. Which texts does it cite?",
  "Para 6.29 of the World Bank Regulations (7th ed.) and s.51(2) of the Public Procurement Act 2007.",
- ["ITB 35.1(a) and (b) of the Works SPD, two-envelope, with s.31(4) of the Public Procurement Act 2007.",
-  "Annex X para 3.6 of the Regulations with s.24(3) and s.33(1) of the Public Procurement Act 2007.",
+ ["ITB 35.1(a) and (b) of the Works SPD, two-envelope (Sep 2025), with s.31(4) of the Public Procurement Act 2007.",
+  "Annex X para 3.6 of the Regulations (7th ed.) with s.24(3) and s.33(1) of the Public Procurement Act 2007.",
   "Figure IX and Annex 2 of the Guidance on Evaluating Bids and Proposals (February 2025)."],
  "The engine's basis.source for the technical envelope reads \"World Bank Procurement Regulations (7th ed.) para 6.29; Nigeria Public Procurement Act 2007 s.51(2)\". ITB 35.1 is the arithmetic rule, Annex X para 3.6 with s.24(3) belongs to the evaluated cost, and the Guidance's examples are recomputed as checks.")
 
@@ -114,16 +114,16 @@ q(3, "WS2 scores 3 of 4 on every well services criterion. What technical percent
 # m03: arithmetic correction
 q(1, "Across all six well services bills, how many lines does the engine correct, and by which rules?",
  "Two: WS2's ct-spread by unit-rate-prevails and WS5's acid by total-governs.",
- ["One, WS2's ct-spread, as WS5's flagged line is left alone.",
+ ["One, WS2's ct-spread by unit-rate-prevails, as WS5's flagged acid line is left alone.",
   "Six, one on each bill.",
-  "Two, both by unit-rate-prevails."],
+  "Two, WS2's ct-spread and WS5's acid, both by the rule unit-rate-prevails."],
  "The correction table shows WS2 with 1 line corrected by unit-rate-prevails and WS5 with 1 line corrected by total-governs; every other line of every bid passes the test. WS5's line is corrected, its unit rate going to 1380, even though its amount and total stand.")
 
 q(3, "correctArithmetic run on WS6's bill returns a correction of 0.000000 on 1004400.000000. Does that bill reach an evaluated cost?",
  "No; WS6 failed signed-bid-form, so its commercial envelope is never opened.",
- ["Yes, a clean bill goes straight on.",
-  "Only as a reference for omissions.",
-  "If the committee waives the requirement."],
+ ["Yes, a bill with no correction goes straight on to the evaluated cost.",
+  "Only as a reference price for items other bids omit.",
+  "Only if the committee waives the signed-bid-form requirement."],
  "The arithmetic view corrects any bill it is given, but in the tender the stages decide: WS6 fails a mandatory requirement at the technical stage, so its price is never opened, it prices no one's omission, and a clean bill is no ground to revisit a failed requirement.")
 
 q(0, "A bill line gives decimalMisplaced as the text \"yes\". What does the engine return?",
@@ -192,16 +192,16 @@ q(3, "What happens when the schedule's ratePerWeek is typed as 2?",
 
 q(1, "A schedule is stated but one bid gives no completion weeks. What happens?",
  "The engine refuses, because every bid must give its completion weeks when a schedule is given.",
- ["Charged for the maximum of 10 weeks, the worst case the tender allows.",
-  "Treated as finishing at the minimum of 6 weeks, so no charge is added.",
+ ["The bid is charged for the maximum of 10 weeks, the worst case the tender allows, and ranked with the rest.",
+  "The bid is treated as finishing at the minimum of 6 weeks, so no completion charge is added to its cost.",
   "Excluded at the commercial stage for failing to state a completion time."],
  "The engine's message is \"bids[0].completionWeeks must be a finite number at or above 0 when a schedule is given\". It assumes neither the maximum nor the minimum, and a missing input is a refusal before the evaluation runs, so no exclusion is returned.")
 
 q(2, "A learner types maxWeek for maxWeeks in the schedule. What comes back?",
  "The refusal \"schedule.maxWeek is not an accepted key; the accepted keys of schedule are minWeeks, maxWeeks, ratePerWeek\".",
- ["A schedule with no maximum, so that no bid is rejected however late it finishes.",
-  "The value read as maxWeeks, since the engine corrects a near miss in a key name.",
-  "The schedule dropped, with every completion adjustment returned as 0.000000."],
+ ["A schedule with no maximum at all, so that no bid is rejected at the commercial stage however late it offers to finish.",
+  "The value read as maxWeeks, since the engine corrects a near miss in a key name and says so beside it.",
+  "The whole schedule dropped without a word, with every completion adjustment in the tender returned as 0.000000."],
  "An input key the function does not read is refused at whatever level it sits, with its path and the accepted keys, in the engine's words. A misspelt optional key never silently drops a term, so the engine neither runs without a maximum, guesses the intended key, nor drops the schedule.")
 
 q(0, "A best estimate is stated for mob, an item no bid omits. What does the engine return?",
@@ -211,7 +211,7 @@ q(0, "A best estimate is stated for mob, an item no bid omits. What does the eng
   "Ignored, with nitrogen priced at the average of the three other bids."],
  "The engine's message is \"bestEstimates.mob is not an item any bid omits; the accepted keys of bestEstimates are the omitted item ids nitrogen\". A key that is an id is checked against the ids the call carries, so an estimate for an item nobody omits is neither stored, applied nor ignored.")
 
-q(3, "Which paragraph of the World Bank Regulations does the engine cite first as the source of the evaluated cost?",
+q(3, "Which paragraph of the World Bank Procurement Regulations (Seventh Edition, September 2025) does the engine cite first as the source of the evaluated cost?",
  "Annex X para 3.6 of the Seventh Edition",
  ["Para 6.29, the paragraph that describes the two-envelope process itself.",
   "Para 5.69, the paragraph that sets out the Most Advantageous Bid award.",
@@ -245,14 +245,14 @@ q(0, "Which commercial score does the engine return for Company B, where the Gui
  ["84.266670, B's combined score, printed as 84.26.",
   "66.666667, B's weighted technical part at 0.8.",
   "100.000000, as for C."],
- "At technical weight 0.8 the engine returns B's Sc as 88.000018, which the Guidance prints to its own precision as 88; a printed figure that agrees to its shown digits is still a rounding of the engine's. 84.266670 is B's combined score B, 66.666667 is 0.8 x St, and Sc 100.000000 belongs to C, the lowest cost of the four.")
+ "Company B's commercial score from the engine is 88.000018; Figures X to XII of the World Bank Guidance (February 2025) show 88, so the two print alike at that precision and remain two different figures. 84.266670 is B's combined score, 66.666667 is its technical part at 0.8, and Sc 100.000000 belongs to C, the lowest cost of the four.")
 
 q(2, "In the Guidance's Annex 3, A has 240.000000 weighted points and B 190.000000. What St does B receive under relative scoring?",
  "79.166667, from 100 x 190 / 240",
  ["190.000000, as B's points pass unchanged into the combined score.",
   "100.000000, since B has the lowest cost and scores 100 on price.",
   "91.666667, the combined score B reaches at technical weight 0.4."],
- "Relative scoring divides by the top bid: 100 x 190 / 240 = 79.166667, and A scores St 100.000000. Weighted points enter only as that ratio, B's 100.000000 is its Sc, and 91.666667 is B's combined score, below A's 94.375000.")
+ "In the World Bank Guidance (February 2025) example, relative scoring divides by the top bid: 100 x 190 / 240 = 79.166667, and A scores St 100.000000. Weighted points enter only as that ratio, B's 100.000000 is its Sc, and 91.666667 is B's combined score, below A's 94.375000.")
 
 q(3, "The technical method is left out of a combined score. What does the engine return?",
  "A refusal naming technicalMethod, with no default.",
@@ -263,9 +263,9 @@ q(3, "The technical method is left out of a combined score. What does the engine
 
 q(1, "What is wrong with entering 120 as a bid's technicalPercent in the combined score view?",
  "It exceeds the whole available score; the engine refuses any value above 100.",
- ["Nothing, as an St above 100 simply sets Thigh.",
-  "Only that it is capped at 100 in silence.",
-  "The bid is then excluded with a reason."],
+ ["Nothing, as a technical percentage above 100 simply sets Thigh.",
+  "Only that the engine caps it at 100 in silence before the ranking.",
+  "The bid is then excluded from the ranking with a reason beside it."],
  "No proposal can earn more than the whole available score, so the engine refuses the value with \"bids[0].technicalPercent must be a number from 0 to 100\". It computes no St above 100, caps nothing silently and returns no exclusion, since a bad input is refused before any ranking.")
 
 # m06: reading an award
@@ -291,11 +291,11 @@ q(1, "Every well services row of the evaluated cost ranking shows tieBrokenBy as
  "tieBrokenBy names the rule that ordered a row against the row above it, and it is null when no rule was needed. The four evaluated costs all differ, the tie-break is always on, and every bid carries a receipt time in the stated UTC form.")
 
 q(3, "In the whole tender, WS2 is given a stated rejection reason and WS1 a completion of 11 weeks. Which bid is awarded under the combined basis?",
- "WS3, since neither change touches it or its lead over WS5.",
+ "WS3, still ahead of WS5, the one other bid left responsive.",
  ["WS5, as the rejection of two bids moves the award to the lowest evaluated cost.",
   "No bid at all.",
   "WS1, charged for lateness."],
- "WS2 and WS1 are both excluded at the commercial stage with their reasons, and the engine still awards WS3 (engine run): WS3 and WS5 remain, and Cmin and Thigh are unchanged. A bid beyond maxWeeks is excluded without a charge, and the award basis stays combined whatever is excluded.")
+ "WS2 and WS1 are both excluded at the commercial stage with their reasons, and the engine still awards WS3 (engine run). The change does reach WS3: its nitrogen is now priced from the one responsive bid left that quotes it, WS5, so its evaluated cost moves; Thigh stays with WS3 and Cmin with WS5, and WS3 keeps the lead. A bid beyond maxWeeks is excluded without a charge, and the award basis stays combined whatever is excluded.")
 
 q(0, "Which function returns the refusal \"bids has no bid left to score: every bid is rejected\"?",
  "rankTender, the combined score view of the envelope calculator.",

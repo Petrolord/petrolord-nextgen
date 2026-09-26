@@ -30,7 +30,7 @@ q(0, "WS4 quotes 763200.000000, the lowest total of the six well services bids, 
  ["It is opened and ranked first on cost, since a low price outweighs a narrow technical miss of five points.",
   "Its price is held in reserve and opened if the award to a passing bid later falls through for any reason.",
   "It lowers the average that prices WS3's missing nitrogen, although WS4 itself cannot be awarded."],
- "Only passing bids have their commercial envelope opened (World Bank Procurement Regulations para 6.29; Public Procurement Act 2007 s.51(2)). WS4 fails at 65.000000, so its price is never read: it cannot rank on cost, nothing is held in reserve, and its nitrogen line does not reach the average, which uses the other responsive bids only.")
+ "Only passing bids have their commercial envelope opened (World Bank Procurement Regulations (7th ed.) para 6.29; Public Procurement Act 2007 s.51(2)). WS4 fails at 65.000000, so its price is never read: it cannot rank on cost, nothing is held in reserve, and its nitrogen line does not reach the average, which uses the other responsive bids only.")
 
 q(2, "Which edition of the World Bank Procurement Regulations for IPF Borrowers does this course read?",
  "The Seventh Edition, September 2025.",
@@ -78,7 +78,7 @@ q(2, "What is true of the bidders WS1 to WS6 and MS1 to MS5?",
  "They are codes in synthetic fixtures written by a stated script.",
  ["Anonymised contractors from an Ekene tender held in 2027, with their real prices kept.",
   "Firms on a national contractor register, renamed so that no bid can be traced back.",
-  "Sample bids taken from the World Bank Guidance and moved onto the Ekene wells."],
+  "Sample bids taken from the World Bank Guidance (February 2025) and moved onto the Ekene wells."],
  "Every Ekene tender, bidder, price and score is synthetic, written for this platform by a stated script that reproduces the files byte for byte, and each file is labelled SYNTHETIC. No real company, tender or price list appears, and the Guidance's worked examples are separate cases the course recomputes on their own.")
 
 q(3, "What makes a figure a gradable answer in this course?",

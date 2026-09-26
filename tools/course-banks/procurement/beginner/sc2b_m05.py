@@ -49,8 +49,8 @@ q(0, "Which bid sets Thigh in the well services combined score, and why can WS6 
 q(1, "The technical weight box of the combined score view is left empty. What comes back?",
  "A refusal: \"technicalWeight must be a number from 0 to 1 (the technical share of the combined score); there is no default\".",
  ["Ranks at a technical weight of 0.7, the figure the well services tender states in its settings.",
-  "An even split of 0.5 between the technical and the commercial score of each bid.",
-  "Ranks on the commercial score alone, as a missing weight is read as a weight of zero."],
+  "An even split of 0.5 between the technical and the commercial score of each bid, applied until a weight is typed.",
+  "Ranks on the commercial score alone, as a missing technical weight is read as a weight of zero."],
  "The technical weight has no default, so a combined score without one is refused in the engine's own words. It borrows no weight from a fixture, assumes no even split, and never reads a blank as zero, because each of those would decide the award silently.")
 
 q(3, "In the envelope calculator's combined score view, every bid carries a rejection reason. What does the engine return?",
@@ -86,21 +86,21 @@ q(1, "The Guidance's Figures X to XII print Company D's combined score as 98.34.
  ["98.34 exactly, the printed figure, which the engine reproduces to the last digit.",
   "80.000000, the technical part alone, since D wins on its technical score.",
   "91.666667, D's commercial score, which the Guidance prints as 91.7 in its table."],
- "At technical weight 0.8 the engine returns D's B as 98.333333, within 0.01 of the printed 98.34; two figures that look close are still different, and the course quotes each as printed. 80.000000 is 0.8 x St, 91.666667 is Sc, and the ranking D, C, B, A agrees with the Guidance.")
+ "At the technical weight of 0.8 that the World Bank Guidance (February 2025) states, the engine returns D's B as 98.333333, within 0.01 of the printed 98.34; two figures that look close are still different, and the course quotes each as printed. 80.000000 is 0.8 x St, 91.666667 is Sc, and the ranking D, C, B, A agrees with the Guidance.")
 
 q(2, "In the Guidance's Figures X to XII, Company C scores Sc 100.000000. Why is D most advantageous at technical weight 0.8?",
  "D's technical lead outweighs C's cost lead at that weight.",
  ["C is rejected after examination, leaving D ahead of the rest.",
   "D has the lower evaluated cost once corrected.",
   "A tie goes to D, received first."],
- "At 0.8 the technical score carries most of the weight: D's 0.8 x St is 80.000000 against C's 68.333333, and C's Sc of 100.000000 against D's 91.666667 cannot close that gap, so D scores 98.333333 and C 88.333333. The excluded company is E, C holds the lowest cost, and there is no tie.")
+ "At the 0.8 that the World Bank Guidance (February 2025) states, the technical score carries most of the weight: D's 0.8 x St is 80.000000 against C's 68.333333, and C's Sc of 100.000000 against D's 91.666667 cannot close that gap, so D scores 98.333333 and C 88.333333. The excluded company is E, C holds the lowest cost, and there is no tie.")
 
 q(0, "The Guidance's Annex 3 states a technical weight of 0.4. What does the engine return for Company A?",
  "St 100.000000, Sc 90.625000 and B 94.375000, the Guidance printing 94.37",
  ["St 79.166667, Sc 100.000000 and B 91.666667, the winning figures for the bid.",
   "St 100.000000 and B 94.37, since the printed figure is the engine's own.",
   "B 240.000000, A's weighted points, which the Annex uses as its combined score."],
- "The engine returns A at St 100.000000, Sc 90.625000, B 94.375000, and B at St 79.166667, Sc 100.000000, B 91.666667, so A wins on both. The Guidance prints 94.37, two decimals of the engine's figure with the third dropped. 240.000000 is A's weighted points and plays no part in B.")
+ "The engine returns A at St 100.000000, Sc 90.625000, B 94.375000, and B at St 79.166667, Sc 100.000000, B 91.666667, so A wins on both. The World Bank Guidance (February 2025) prints 94.37, two decimals of the engine's figure with the third dropped. 240.000000 is A's weighted points and plays no part in B.")
 
 q(3, "On the well services bids, what happens to the most advantageous bid if the technical weight is set to 0, and if it is set to 1?",
  "At 0 it is WS5 (Sc alone); at 1 it is WS3 (St alone).",
@@ -109,7 +109,7 @@ q(3, "On the well services bids, what happens to the most advantageous bid if th
   "Both are refused as out of range."],
  "B = technical weight x St + the rest x Sc, so a weight of 0 ranks on Sc alone and WS5, with the lowest evaluated cost, is most advantageous; a weight of 1 ranks on St alone and WS3 leads (engine run on the four responsive bids). The input is the technical share, and the engine accepts any weight from 0 to 1.")
 
-q(1, "The Works SPD writes the combined evaluation as B = Clow / C x X x 100 + T / Thigh x (1 - X) x 100. What does X stand for, and what does the engine take as its input?",
+q(1, "The Works SPD (September 2025) writes the combined evaluation as B = Clow / C x X x 100 + T / Thigh x (1 - X) x 100. What does X stand for, and what does the engine take as its input?",
  "X is the weight on price; the engine takes the technical weight and gives the rest to Sc.",
  ["The technical weight, which the engine takes directly as its own input.",
   "A fraction for the pass mark, which the engine reads from the technical envelope.",

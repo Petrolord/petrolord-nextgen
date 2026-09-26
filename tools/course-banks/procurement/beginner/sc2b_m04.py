@@ -30,7 +30,7 @@ q(3, "WS3 omits nitrogen. The other responsive bids price it at 33600.000000, 35
  ["33600.000000, the lowest of the three, which gives WS3 the benefit of the doubt.",
   "No price until an estimate is stated.",
   "Nothing, because a bid that omits an item is held to have included it in another line."],
- "The engine's reason is \"item nitrogen omitted; the average of the 3 prices quoted by the other responsive bids, 35400, is added\", following ITB 34.1 of the Works SPD. The average is the cited rule; the engine offers no lowest option (asked for one, it refuses), nothing sums the three, and an omission is priced in and not assumed away.")
+ "The engine's reason is \"item nitrogen omitted; the average of the 3 prices quoted by the other responsive bids, 35400, is added\", following ITB 34.1 of the Works SPD (September 2025). The average is the cited rule; the engine offers no lowest option (asked for one, it refuses), nothing sums the three, and an omission is priced in and not assumed away.")
 
 q(1, "WS4 also quotes a nitrogen line. Why is its price left out of the average that prices WS3's omission?",
  "WS4 failed the pass mark, so its price envelope was never opened and it is not responsive.",
@@ -58,7 +58,7 @@ q(1, "What price does the engine multiply to find the completion-time adjustment
  ["Whatever total the bidder wrote, before any arithmetic correction.",
   "The corrected price before the discount, so a discount leaves the charge unchanged.",
   "One common base for all, the lowest evaluated cost in the tender."],
- "The engine's schedule basis reads \"ratePerWeek 0.005 of (corrected price - discount) for each week beyond 6\". The Works SPD gives the rate and leaves the base open, so the engine states its choice. The quoted total would carry an arithmetic slip into the charge, and charging before the discount would bill time on money already given back.")
+ "The engine's schedule basis reads \"ratePerWeek 0.005 of (corrected price - discount) for each week beyond 6\". The Works SPD (September 2025) gives the rate and leaves the base open, so the engine states its choice. The quoted total would carry an arithmetic slip into the charge, and charging before the discount would bill time on money already given back.")
 
 q(2, "WS1 promises completion in 6 weeks, the minimum. What does the engine return for its schedule term?",
  "0.000000, with no credit for finishing early.",
@@ -67,7 +67,7 @@ q(2, "WS1 promises completion in 6 weeks, the minimum. What does the engine retu
   "A charge of 0.005 on the first week."],
  "The engine's reason is \"completion in 6 weeks is not beyond the minimum 6 weeks; no adjustment and no credit for earlier completion\". The minimum is the fastest completion the company values, so no bid earns a credit for speed, against WS3 or against the maximum, and no week up to the minimum is charged.")
 
-q(2, "A well services bid offers completion in 11 weeks, beyond the maximum of 10. What does the engine do?",
+q(2, "Under the well services schedule, minWeeks 6 and maxWeeks 10, a bid offers completion in 11 weeks. What does the engine do?",
  "It excludes the bid at the commercial stage and names the reason.",
  ["Charging 0.005 of the price for each of the 5 weeks beyond the minimum, it ranks the bid.",
   "A refusal naming schedule.maxWeeks, because a bid lies outside the stated band.",
@@ -114,7 +114,7 @@ q(1, "What does WS5's evaluated cost of 862141.000000 tell the company?",
  ["What the job will cost, since every correction and adjustment has already been made.",
   "The sum the company will pay WS5 if the contract is awarded to it on these terms.",
   "The lowest total quoted in the tender, before any correction or adjustment of the bills."],
- "An evaluated cost ranks bids under stated rules, with omissions at the average and the stated schedule, and is not a forecast of what the job will cost. The completion charge is a comparison device the company never pays, so the figure is not the contract sum, and the lowest quoted total was WS4's, whose envelope stayed sealed.")
+ "An evaluated cost ranks bids under stated rules, with omissions at the average and the stated schedule, and is not a forecast of what the job will cost. Its completion-time adjustment of 12741.000000 is a term the stated schedule adds for the comparison, so the figure is no contract sum either, and the lowest quoted total was WS4's, whose envelope stayed sealed.")
 
 emit(Q, '/root/cat-wip-procurement/banks/sc2b_m04.json', expect_n=15)
 finish()

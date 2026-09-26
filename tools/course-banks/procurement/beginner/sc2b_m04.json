@@ -30,7 +30,7 @@
    "35400.000000, the average of the three"
   ],
   "answer": 3,
-  "explanation": "The engine's reason is \"item nitrogen omitted; the average of the 3 prices quoted by the other responsive bids, 35400, is added\", following ITB 34.1 of the Works SPD. The average is the cited rule; the engine offers no lowest option (asked for one, it refuses), nothing sums the three, and an omission is priced in and not assumed away."
+  "explanation": "The engine's reason is \"item nitrogen omitted; the average of the 3 prices quoted by the other responsive bids, 35400, is added\", following ITB 34.1 of the Works SPD (September 2025). The average is the cited rule; the engine offers no lowest option (asked for one, it refuses), nothing sums the three, and an omission is priced in and not assumed away."
  },
  {
   "prompt": "WS4 also quotes a nitrogen line. Why is its price left out of the average that prices WS3's omission?",
@@ -74,7 +74,7 @@
    "One common base for all, the lowest evaluated cost in the tender."
   ],
   "answer": 1,
-  "explanation": "The engine's schedule basis reads \"ratePerWeek 0.005 of (corrected price - discount) for each week beyond 6\". The Works SPD gives the rate and leaves the base open, so the engine states its choice. The quoted total would carry an arithmetic slip into the charge, and charging before the discount would bill time on money already given back."
+  "explanation": "The engine's schedule basis reads \"ratePerWeek 0.005 of (corrected price - discount) for each week beyond 6\". The Works SPD (September 2025) gives the rate and leaves the base open, so the engine states its choice. The quoted total would carry an arithmetic slip into the charge, and charging before the discount would bill time on money already given back."
  },
  {
   "prompt": "WS1 promises completion in 6 weeks, the minimum. What does the engine return for its schedule term?",
@@ -88,7 +88,7 @@
   "explanation": "The engine's reason is \"completion in 6 weeks is not beyond the minimum 6 weeks; no adjustment and no credit for earlier completion\". The minimum is the fastest completion the company values, so no bid earns a credit for speed, against WS3 or against the maximum, and no week up to the minimum is charged."
  },
  {
-  "prompt": "A well services bid offers completion in 11 weeks, beyond the maximum of 10. What does the engine do?",
+  "prompt": "Under the well services schedule, minWeeks 6 and maxWeeks 10, a bid offers completion in 11 weeks. What does the engine do?",
   "options": [
    "Charging 0.005 of the price for each of the 5 weeks beyond the minimum, it ranks the bid.",
    "A refusal naming schedule.maxWeeks, because a bid lies outside the stated band.",
@@ -162,6 +162,6 @@
    "The lowest total quoted in the tender, before any correction or adjustment of the bills."
   ],
   "answer": 1,
-  "explanation": "An evaluated cost ranks bids under stated rules, with omissions at the average and the stated schedule, and is not a forecast of what the job will cost. The completion charge is a comparison device the company never pays, so the figure is not the contract sum, and the lowest quoted total was WS4's, whose envelope stayed sealed."
+  "explanation": "An evaluated cost ranks bids under stated rules, with omissions at the average and the stated schedule, and is not a forecast of what the job will cost. Its completion-time adjustment of 12741.000000 is a term the stated schedule adds for the comparison, so the figure is no contract sum either, and the lowest quoted total was WS4's, whose envelope stayed sealed."
  }
 ]
