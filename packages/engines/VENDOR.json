@@ -2179,6 +2179,83 @@
       "group": "sc2-procurement-course",
       "vendoredSha": "264d0ed2ba101b2538aefdc0e9e7242f38c6968d",
       "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
+    },
+    {
+      "path": "__tests__/economics.gasContract.test.js",
+      "kind": "extra",
+      "group": "ec8-gsa-course",
+      "vendoredSha": "e69c4c170e9be399c216bf7c838a4e265f7a8fb3",
+      "reason": "EC8 gsa course: vendored sha-identical from petrolord-engines d745b88 (PR #267: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to d745b88 or later."
+    },
+    {
+      "path": "engines/economics/gasContract.js",
+      "kind": "extra",
+      "group": "ec8-gsa-course",
+      "vendoredSha": "98aa43def4d64c0d5cf9ec9a986454b8ba8cc47f",
+      "reason": "EC8 gsa course: vendored sha-identical from petrolord-engines d745b88 (PR #267: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to d745b88 or later."
+    },
+    {
+      "path": "test-data/economics/ekene-gsa/README.md",
+      "kind": "extra",
+      "group": "ec8-gsa-course",
+      "vendoredSha": "d2d39d35ea1dbbeecf6f49dbcbf88aea335f15d0",
+      "reason": "EC8 gsa course: vendored sha-identical from petrolord-engines d745b88 (PR #267: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to d745b88 or later."
+    },
+    {
+      "path": "test-data/economics/ekene-gsa/domestic-power.json",
+      "kind": "extra",
+      "group": "ec8-gsa-course",
+      "vendoredSha": "acb517f62d76a6034789623eed7f77c32fc1470e",
+      "reason": "EC8 gsa course: vendored sha-identical from petrolord-engines d745b88 (PR #267: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to d745b88 or later."
+    },
+    {
+      "path": "test-data/economics/ekene-gsa/export-feed.json",
+      "kind": "extra",
+      "group": "ec8-gsa-course",
+      "vendoredSha": "cc27e60dd2bc036830812e735f638dbdbafd0e81",
+      "reason": "EC8 gsa course: vendored sha-identical from petrolord-engines d745b88 (PR #267: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to d745b88 or later."
+    },
+    {
+      "path": "test-data/economics/goldens/gascontract_cases.json",
+      "kind": "extra",
+      "group": "ec8-gsa-course",
+      "vendoredSha": "533729474d489c51456b0611072927d2caa0e9db",
+      "reason": "EC8 gsa course: vendored sha-identical from petrolord-engines d745b88 (PR #267: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to d745b88 or later."
+    },
+    {
+      "path": "tools/validation/economics/FINDINGS-gasContract.md",
+      "kind": "extra",
+      "group": "ec8-gsa-course",
+      "vendoredSha": "bf2ea2b360feb39ebcf6a4d13b98bc7cd49c65f6",
+      "reason": "EC8 gsa course: vendored sha-identical from petrolord-engines d745b88 (PR #267: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to d745b88 or later."
+    },
+    {
+      "path": "tools/validation/economics/make_gsa_fixtures.py",
+      "kind": "extra",
+      "group": "ec8-gsa-course",
+      "vendoredSha": "006a3cc667b383c5e18897ba4b030db9809335ae",
+      "reason": "EC8 gsa course: vendored sha-identical from petrolord-engines d745b88 (PR #267: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to d745b88 or later."
+    },
+    {
+      "path": "tools/validation/economics/negcontrol_gascontract.sh",
+      "kind": "extra",
+      "group": "ec8-gsa-course",
+      "vendoredSha": "d8734e0fb6da28c6402e5c91b12865d909a08199",
+      "reason": "EC8 gsa course: vendored sha-identical from petrolord-engines d745b88 (PR #267: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to d745b88 or later."
+    },
+    {
+      "path": "tools/validation/economics/oracle_gascontract.py",
+      "kind": "extra",
+      "group": "ec8-gsa-course",
+      "vendoredSha": "31a0ece1ef2e462782966f5767ab1d1cf02f116b",
+      "reason": "EC8 gsa course: vendored sha-identical from petrolord-engines d745b88 (PR #267: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to d745b88 or later."
+    },
+    {
+      "path": "tools/validation/economics/timing_gascontract.js",
+      "kind": "extra",
+      "group": "ec8-gsa-course",
+      "vendoredSha": "26d6062d3486648c9a906a280a95bf13166805b1",
+      "reason": "EC8 gsa course: vendored sha-identical from petrolord-engines d745b88 (PR #267: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move paths other courses grade. Clears as STALE when the pin moves to d745b88 or later."
     }
   ]
 }
