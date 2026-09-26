@@ -58,8 +58,8 @@ for (const c of checks) {
   else field = n[c.where];
   if (field === undefined) { console.error(`REFUSED: ${c.q} has no field ${c.where}`); process.exit(2); }
   if (c.where === 'key') keyed.add(c.q);
-  const printed = plant && typeof c.printed === 'string' && /\d/.test(c.printed) ? bump(c.printed) : c.printed;
-  let v = await c.value(L);
+  const v = await c.value(L);
+  const printed = plant && typeof v === 'number' ? bump(c.printed) : c.printed;
   let ok; let got;
   if (typeof v === 'number') {
     numeric += 1;
