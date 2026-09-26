@@ -1,0 +1,137 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# SC2 Expert m03, Should-Cost. Every figure is quoted from digest.txt: the
+# company's estimate for the Ekene two-well programme through wellCost and the
+# AFE rollup, its contingency and partner split, the NPT sensitivity, the
+# stated screening band and its edges, and the estimate beside the World
+# Bank's absolute test for an abnormally low bid on four responsive bids.
+
+K = [3, 1, 0, 2, 0, 3, 1, 2, 1, 0, 3, 2, 0, 1, 3]
+_i = iter(K)
+def x(p, c, ds, e): q(next(_i), p, c, ds, e)
+
+# 1
+x("In this course, what does the word should-cost name?",
+ "The company's own independent estimate, built from the programme through wellCost and the AFE rollup",
+ ["The lowest evaluated cost among the passing bids, used as the benchmark for the other bids",
+  "A budget set at the P90 contractor cost of the contract comparison",
+  "An estimator's figure after the envelopes open, adjusted toward the prices received"],
+ "The vocabulary rule is that should-cost is the company's independent estimate built from the programme through wellCost and the AFE rollup, and it is never a bid. The lowest evaluated cost is a bid's figure. A cost percentile comes from the seeded contract comparison, and the should-cost is deterministic with no seed. An estimate adjusted toward the bids is no longer independent, which is its whole point.")
+
+# 2
+x("The engine's estimate basis names how the cost items become the base. Which rule is it?",
+ "Per-day items times total days, per-metre items times drilled metres, lump items as valued",
+ ["Every item times the total days, so the lump items scale with the duration of the job too",
+  "Per-day items times the mean sampled days, 15.277257, with lump items added once",
+  "Lump items only, since per-day rates are already inside the contractor's bid prices"],
+ "The basis, verbatim: engines/drilling/wellCost.js evaluateProgram then afeCosts: per-day items x total days, per-meter items x drilled metres, lump items as valued, contingency as a fraction of the base. Lump items do not scale with days. The should-cost runs the programme at one stated NPT fraction and uses no sampled days. The estimate is built from the company's own rates, and no bid enters it.")
+
+# 3
+x("What base, contingency and estimate does the engine return for the Ekene two-well programme at an NPT fraction of 0.15 and a contingency of 0.1?",
+ "813964.583333, 81396.458333 and 895361.041667",
+ ["722350.416667 plus 81396.458333, the plan's contractor cost with contingency",
+  "895361.041667 as the base itself",
+  "813964.583333 with no contingency, since 0.1 applies to the bids"],
+ "The engine returns a base of 813964.583333, a contingency of 81396.458333 (0.1 of the base) and an estimate of 895361.041667, their sum. 722350.416667 is the contractor's planned cost in the contract comparison, built from the contractor's daily cost and fixed cost, a different set of rates. 895361.041667 is the estimate itself, already including contingency. The contingency fraction applies to the base.")
+
+# 4
+x("The should-cost's total days, 13.865486, are the same figure as the contract comparison's planned days. Why?",
+ "Both run the same eleven-activity programme through wellCost at an NPT fraction of 0.15",
+ ["The should-cost reads the mean sampled days of the contract run and rounds it to the plan",
+  "Days are a stated input of the should-cost, copied by the fixture from the plan",
+  "Coincidence of the fixture: the two figures only print alike at six decimals"],
+ "The course checks that the total days equal the planned days: the same programme at the same NPT fraction, which is the mode of the contract comparison's triangle. The mean sampled days are 15.277257, a different figure. The days come from wellCost evaluateProgram and are not typed in. The equality is the engine's own check, so it rests on more than two figures that print alike.")
+
+# 5
+x("No per-metre cost item enters the Ekene should-cost. What does the engine return that explains it?",
+ "Drilled metres of 0.000000: a coiled tubing job drills nothing",
+ ["A refusal for per-metre items, which the should-cost does not accept on any job",
+  "Per-metre items priced at the trip depth of 1600 m, then cancelled by the contingency",
+  "It drops per-metre items when the band is stated, to keep the ratios comparable"],
+ "The engine returns drilled metres of 0.000000, since no metres are drilled in a coiled tubing job, so per-metre items x drilled metres adds nothing. The basis accepts per-metre items. A trip depth is how far the coiled tubing runs and drills nothing, and the band is a screen on the ratios with no effect on the estimate.")
+
+# 6
+x("Partner EK-B holds 40% and Partner EK-C 15% of the Ekene estimate. What does the operator carry, and why?",
+ "402912.468750, its 45%, since the operator carries 100 less the partner total",
+ ["358144.416667, matching the largest partner's share under the AFE rules",
+  "Nothing, since calculatePartnerCosts splits the estimate among the listed partners only",
+  "134304.156250, the balance the two partners leave once the contingency is taken out"],
+ "The partner split basis: engines/economics/afe.js calculatePartnerCosts: each partner pays its working interest; the operator carries 100 less the partner total. That is 45%, or 402912.468750 of the 895361.041667 estimate. 358144.416667 is EK-B's 40% and 134304.156250 EK-C's 15%. The operator is not listed as a partner, yet it carries the remainder.")
+
+# 7
+x("At a stated NPT fraction of 0.25 the engine returns 15.071181 days and an estimate of 935148.958333, a rise of 39787.916667. What produces the rise?",
+ "(1 + contingency) x the per-day rates of 30000.000000 a day x the 1.205694 extra days",
+ ["The lump items scaled by the extra days, since mobilisation grows with the job's length",
+  "Contingency of 0.1 applied to the extra days only, while the base stays fixed",
+  "The coiled tubing spread alone, 26500.000000 a day, over the 15.071181 days"],
+ "More NPT raises the estimate through the per-day items only: coiled tubing spread and company supervision, 30000.000000 a day together, times the extra 1.205694 days, times one plus the contingency, gives 39787.916667 (derived and checked). Lump items are valued as lumps whatever the duration. Contingency applies to the whole base, including the added days. Supervision is per day too, and the rise is on the extra days only.")
+
+# 8
+x("The fixture states a screening band of low 0.8 and high 1.25. Where do those limits come from, according to the engine?",
+ "From the fixture as stated inputs, since no published threshold exists for such a band",
+ ["The World Bank's 20 percent abnormally low test, restated as a ratio of 0.8",
+  "From para 5.50 of the World Bank Regulations, which sets the band for high-risk tenders",
+  "The engine's DEFAULTS, which the fixture restates so a caller can see them"],
+ "No published threshold exists for a band like this, so it is always a stated input, and a call with no band is refused because there is no default. The abnormally low test is a separate rule with its own published threshold. Para 5.50 sets the Rated Criteria weighting ranges. The exported DEFAULTS hold no band.")
+
+# 9
+x("A stated bid has a ratio to the estimate of exactly 0.800000 and the band's low is 0.8. What does the engine return?",
+ "A flag of null, since both limits are inside the band",
+ ["Flagged below, since a ratio at the limit counts as outside",
+  "A refusal, since a ratio equal to a limit cannot be classified either way by the band",
+  "The flag below with the reason to examine it as possibly abnormally low"],
+ "The band basis says flag when ratio < 0.8 or ratio > 1.25; both limits are inside the band. The AT-LOW probe at 80000.000000 against 100000.000000 returns 0.800000 and a null flag, while BELOW at 79999.000000 returns 0.799990 and the flag below. A ratio at the limit is a well-formed input, so nothing is refused.")
+
+# 10
+x("On the probe estimate of 100000.000000, an evaluated cost of 79999.000000 is flagged below. What instruction does the engine's reason carry?",
+ "Examine it as a possibly abnormally low bid",
+ ["Reject it at once as an abnormally low bid under the World Bank's Stage 1",
+  "Invite a best and final offer so the price rises back inside the band",
+  "Raise the should-cost until the ratio clears the lower limit"],
+ "The reason, verbatim: \"bid-to-estimate ratio 0.79999 is below the band's lower limit 0.8: examine it as a possibly abnormally low bid\". A flag is a result returned with its reason; the band rejects nothing. The engine computes no negotiation or best and final offer, and moving the estimate to suit a bid would defeat an independent estimate.")
+
+# 11
+x("Against the should-cost of 895361.041667, which well services bid carries the highest ratio, and does the band flag it?",
+ "WS3 at 1.069948, inside the band and unflagged",
+ ["WS5 at 0.962898, the lowest evaluated cost, flagged below the band",
+  "WS3 at 1.069948, flagged above because the award costs more than the estimate does",
+  "WS1 at 1.036677, the dearest of the four, and not flagged by the band"],
+ "The ratios are WS5 0.962898, WS2 0.989069, WS1 1.036677 and WS3 1.069948, every flag null, so WS3, the combined-score award, carries the highest ratio inside the band. The upper limit is 1.25, and costing more than the estimate is no flag on its own. WS5 carries the lowest ratio and is not flagged. WS1 is not the dearest: WS3's evaluated cost, 957990.000000, is higher.")
+
+# 12
+x("The four responsive well services bids go to the abnormally low test with no cost estimate stated. What does the engine return?",
+ "A refusal: with 4 bids, below 5, the absolute approach needs the Borrower's cost estimate",
+ ["The relative test on the four bids, flagging any below the mean less one standard deviation",
+  "A result with no flags, since without an estimate no bid can be shown to be low",
+  "The should-cost of 895361.041667, taken as the estimate by default"],
+ "In the engine's words: \"estimate is required: with 4 substantially responsive bids (fewer than 5) the absolute approach compares each bid with the Borrower's cost estimate\". The relative approach needs 5 or more substantially responsive bids. The engine never returns an unflagged result for a test it cannot run, and it has no default estimate: the should-cost enters only when stated.")
+
+# 13
+x("With the should-cost as the cost estimate, how far below it does WS5 sit on the absolute test, and is WS5 flagged?",
+ "3.710240 percent below, far short of 20 percent, so no flag",
+ ["20 percent below, the flag line",
+  "1.093083 percent below, flagged as any bid under the estimate is examined",
+  "3.710240 percent, flagged since the band's lower limit is crossed"],
+ "The engine returns 3.710240 percent below the estimate for WS5, and the absolute approach flags a bid 20 percent or more below, so no bid on this tender is flagged. 1.093083 is WS2's figure, and a bid below the estimate is not flagged for that alone. WS5's band ratio is 0.962898, inside the band's lower limit of 0.8.")
+
+# 14
+x("As a bid's evaluated cost falls toward 80 percent of the estimate, with the band's low at 0.8, at what point do the band and the absolute test first disagree?",
+ "Exactly at 0.8 of the estimate: the absolute test flags 20 percent below, the band takes the ratio as inside",
+ ["Just above 0.8: the absolute test fires first because it rounds the percentage down",
+  "They never disagree, since the band's 0.8 is the absolute test restated",
+  "Only below 0.8, where the band flags and the absolute test waits for 20 percent more"],
+ "The boundary table gives the absolute ALB test as flagged at EXACTLY 20 percent below the estimate (\"20% or more below\"), and the band as inside, no flag, at a ratio EQUAL to either limit. So at exactly 0.8 of the estimate one screen flags and the other does not; just below it both flag. The engine rounds nothing, and the band is the company's own stated screen with its own edge rule.")
+
+# 15
+x("Cost items that price the programme at nothing give an estimate of 0. What does the tender engine return, and why?",
+ "Its own refusal, since every bid is later divided by the estimate",
+ ["wellCost's refusal passed through under program, as the cost items belong to wellCost",
+  "An estimate of 0.000000 with every ratio flagged above the band",
+  "A result with a null estimate and every bid's flag left empty, as nothing can be compared"],
+ "In the engine's words, under the field items: \"items give an estimate of 0; the bid-to-estimate ratio is undefined\". It is the tender engine's own check on its own division. The pass-through under program is for a programme wellCost refuses, such as an empty one, whose message ends with wellCost's words, The program has no activities. A division by zero is never returned as a result.")
+
+emit(Q, '/root/cat-wip-procurement/banks/sc2a_m03.json', expect_n=15)
+finish()
