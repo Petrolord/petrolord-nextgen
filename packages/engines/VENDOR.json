@@ -2108,77 +2108,77 @@
       "kind": "extra",
       "group": "sc2-procurement-course",
       "vendoredSha": "39f0d254e3e8b55dc7078810f1094fa3c0c4c015",
-      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics (cashflow.ts 3.11), AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
+      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
     },
     {
       "path": "engines/supplychain/tender.js",
       "kind": "extra",
       "group": "sc2-procurement-course",
       "vendoredSha": "3b60842bcd54971065e0f1cbefe50eca620d350b",
-      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics (cashflow.ts 3.11), AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
+      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
     },
     {
       "path": "test-data/supplychain/ekene-tender/README.md",
       "kind": "extra",
       "group": "sc2-procurement-course",
       "vendoredSha": "7086125873dbf8c33d0d238f716d64cf34be7abb",
-      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics (cashflow.ts 3.11), AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
+      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
     },
     {
       "path": "test-data/supplychain/ekene-tender/materials.json",
       "kind": "extra",
       "group": "sc2-procurement-course",
       "vendoredSha": "4e1423dfa90d26b62a10fe34d819c908f2a27d87",
-      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics (cashflow.ts 3.11), AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
+      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
     },
     {
       "path": "test-data/supplychain/ekene-tender/well-services.json",
       "kind": "extra",
       "group": "sc2-procurement-course",
       "vendoredSha": "30d7950d9cfc2cc7dec61f5e6d5b7e6c0859beed",
-      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics (cashflow.ts 3.11), AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
+      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
     },
     {
       "path": "test-data/supplychain/goldens/tender_cases.json",
       "kind": "extra",
       "group": "sc2-procurement-course",
       "vendoredSha": "ef21c444a97ef3275d287e6551555f8cb2ad7b39",
-      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics (cashflow.ts 3.11), AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
+      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
     },
     {
       "path": "tools/validation/supplychain/FINDINGS-tender.md",
       "kind": "extra",
       "group": "sc2-procurement-course",
       "vendoredSha": "f2bbd34d355401a76efa811b63d9aa49baa592b8",
-      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics (cashflow.ts 3.11), AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
+      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
     },
     {
       "path": "tools/validation/supplychain/make_tender_fixtures.py",
       "kind": "extra",
       "group": "sc2-procurement-course",
       "vendoredSha": "ba12cdf70859b3409d884991253b76500b9ec0d9",
-      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics (cashflow.ts 3.11), AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
+      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
     },
     {
       "path": "tools/validation/supplychain/negcontrol_tender.sh",
       "kind": "extra",
       "group": "sc2-procurement-course",
       "vendoredSha": "bcbea3cb0c61eb0a043b5edb25d9402960970631",
-      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics (cashflow.ts 3.11), AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
+      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
     },
     {
       "path": "tools/validation/supplychain/oracle_tender.py",
       "kind": "extra",
       "group": "sc2-procurement-course",
       "vendoredSha": "efb85801dab12bdb361118f6694cb3971f331ab5",
-      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics (cashflow.ts 3.11), AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
+      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
     },
     {
       "path": "tools/validation/supplychain/timing_tender.js",
       "kind": "extra",
       "group": "sc2-procurement-course",
       "vendoredSha": "264d0ed2ba101b2538aefdc0e9e7242f38c6968d",
-      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics (cashflow.ts 3.11), AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
+      "reason": "SC2 procurement course: vendored sha-identical from petrolord-engines 006ed85 (PRs #261, #264 and #266: engines/supplychain/tender.js, its jest suite, golden, the ekene-tender fixtures and their writer, oracle, timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move AFE and other paths other courses grade. Clears as STALE when the pin moves to 006ed85 or later."
     }
   ]
 }
