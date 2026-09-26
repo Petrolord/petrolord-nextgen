@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Helmet } from 'react-helmet-async';
 import { motion } from 'framer-motion';
 import { Button } from '@/components/ui/button';
@@ -13,7 +14,9 @@ import {
   listMyBridgeCodes, bridgeCodeStatus,
 } from '@/services/academyService';
 import { useAuth } from '@/contexts/SupabaseAuthContext';
-import { appName, CERT_TIER_LABELS } from '@/lib/appNames';
+import {
+  courseName, CERT_TIER_LABELS, formalDate, certificateHolder, titleCaseSlug,
+} from '@/lib/appNames';
 import CertificateView from '@/components/academy/CertificateView';
 const STATUS_PILL = {
   valid: { cls: 'bg-emerald-900/40 text-emerald-300 border-emerald-700', icon: CheckCircle2, label: 'Valid' },
@@ -27,13 +30,15 @@ const STATUS_PILL = {
 // `certificates` table view.
 const AcademyCertificatesPage = () => {
   const { toast } = useToast();
-  const { user, profile } = useAuth();
+  const { profile } = useAuth();
   const [certs, setCerts] = useState([]);
   const [bridgeCodes, setBridgeCodes] = useState([]);
   const [loading, setLoading] = useState(true);
   const [viewCert, setViewCert] = useState(null);
 
-  const holderName = profile?.display_name || user?.email || 'Certificate holder';
+  // Never an email address: without a display name the certificate asks
+  // the learner to set one in Settings.
+  const holderName = certificateHolder(profile?.display_name);
 
   useEffect(() => {
     (async () => {
@@ -92,6 +97,15 @@ const AcademyCertificatesPage = () => {
           <p className="mt-1 text-gray-400">
             View and print each certificate, and share its public verification link so anyone can confirm it.
           </p>
+          {!holderName && certs.length > 0 && (
+            <p className="mt-3 rounded-md border border-[#BFFF00]/40 bg-[#BFFF00]/5 px-4 py-3 text-sm text-gray-200">
+              Your certificates print the display name on your profile.{' '}
+              <Link to="/dashboard/settings" className="font-semibold text-[#BFFF00] hover:underline">
+                Set your display name in Settings
+              </Link>{' '}
+              before you print or share one.
+            </p>
+          )}
         </div>
 
         {certs.length === 0 ? (
@@ -113,10 +127,10 @@ const AcademyCertificatesPage = () => {
                       <div>
                         <div className="flex items-center gap-2">
                           <h3 className="text-lg font-semibold text-white">
-                            {appName(c.app_slug)}
+                            {courseName(c.app_slug, c.course_name)}
                           </h3>
                           <span className="text-[#BFFF00] text-sm font-medium">
-                            {CERT_TIER_LABELS[c.tier] || c.tier}
+                            {CERT_TIER_LABELS[c.tier] || titleCaseSlug(c.tier)}
                           </span>
                         </div>
                         <p className="text-xs text-gray-500 font-mono mt-1">{c.certificate_number}</p>
@@ -129,11 +143,11 @@ const AcademyCertificatesPage = () => {
                     <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
                       <div>
                         <p className="text-gray-500">Issued</p>
-                        <p className="text-white">{new Date(c.issued_at).toLocaleDateString()}</p>
+                        <p className="text-white">{formalDate(c.issued_at)}</p>
                       </div>
                       <div>
                         <p className="text-gray-500">Valid until</p>
-                        <p className="text-white">{new Date(c.valid_until).toLocaleDateString()}</p>
+                        <p className="text-white">{formalDate(c.valid_until)}</p>
                       </div>
                     </div>
 
@@ -155,7 +169,7 @@ const AcademyCertificatesPage = () => {
                           )}
                         </div>
                         <p className="mt-2 text-xs text-gray-500">
-                          Single use at Petrolord Suite checkout. Valid until {new Date(bridge.valid_until).toLocaleDateString()}.
+                          Single use at Petrolord Suite checkout. Valid until {formalDate(bridge.valid_until)}.
                         </p>
                       </div>
                     )}

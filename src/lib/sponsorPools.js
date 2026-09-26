@@ -3,6 +3,8 @@
 // truth (seats_used is maintained by the assign and cancel functions); these
 // only read a pool row.
 
+import { courseName } from './appNames';
+
 export const TIER_LABELS = { beginner: 'Associate', intermediate: 'Professional', advanced: 'Expert' };
 export const TIERS = ['beginner', 'intermediate', 'advanced'];
 
@@ -153,7 +155,7 @@ export function progressCsv(rows, nowMs = Date.now()) {
     'capstone_best', 'capstone_attempts', 'capstone_passed', 'certificate', 'certificate_valid_until', 'last_active', 'inactive'];
   const lines = (Array.isArray(rows) ? rows : []).filter((r) => r.status === 'active').map((r) => {
     const q = quizSummary(r);
-    return [r.display_name, r.email, r.course_name || r.app_slug, TIER_LABELS[r.course_tier] || r.course_tier,
+    return [r.display_name, r.email, courseName(r.app_slug, r.course_name), TIER_LABELS[r.course_tier] || r.course_tier,
       progressPct(r), r.lessons_read, r.lessons_total, r.modules_complete, r.modules_total,
       `${q.passed}/${q.total}`, q.avgPct ?? '',
       scoreText(r.final_exam?.best_score, r.final_exam?.max_score), r.final_exam?.attempts ?? 0, r.final_exam?.passed ? 'yes' : 'no',

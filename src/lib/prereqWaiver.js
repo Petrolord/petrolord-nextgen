@@ -4,6 +4,8 @@
 // only shape what the RPCs return for the Enroll page and the sponsor
 // console, so they are unit-testable without a browser.
 
+import { courseName } from './appNames';
+
 /** True when `tier` of an academy_apps row is a bonus tier (no seat, zero fee). */
 export function isBonusTier(app, tier) {
   const tiers = Array.isArray(app?.bonus_tiers) ? app.bonus_tiers : [];
@@ -15,7 +17,7 @@ export function prereqRootOf(apps, appSlug) {
   const list = Array.isArray(apps) ? apps : [];
   const app = list.find((a) => a.slug === appSlug);
   if (!app?.prereq_slug) return null;
-  return list.find((a) => a.slug === app.prereq_slug) || { slug: app.prereq_slug, name: app.prereq_slug };
+  return list.find((a) => a.slug === app.prereq_slug) || { slug: app.prereq_slug, name: courseName(app.prereq_slug) };
 }
 
 /**
@@ -24,7 +26,7 @@ export function prereqRootOf(apps, appSlug) {
  */
 export function waiverPresentation(status, nowMs = Date.now()) {
   if (!status || status.required === false) return { kind: 'none', text: '' };
-  const name = status.prereq_name || status.prereq_slug;
+  const name = courseName(status.prereq_slug, status.prereq_name);
   if (status.satisfied) {
     const via = status.via === 'certification' ? `your ${name} certification`
       : status.via === 'waiver' ? `your ${name} waiver exam pass`

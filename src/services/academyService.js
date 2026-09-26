@@ -177,7 +177,8 @@ export async function adminListResidencyApplications() {
     .select('id, display_name, email')
     .in('id', userIds);
   const byId = Object.fromEntries((profiles || []).map((p) => [p.id, p]));
-  return data.map((a) => ({ ...a, applicant: byId[a.user_id] || null }));
+  const named = await withCourseNames(data);
+  return named.map((a) => ({ ...a, applicant: byId[a.user_id] || null }));
 }
 
 export async function adminDecideResidency(applicationId, decision, note = null) {
@@ -311,13 +312,28 @@ export async function verifyCertificate(verifyCode) {
   return data; // null when not found
 }
 
+// Adds course_name (academy_apps.name, the catalog title) to each
+// certificate row. academy_certifications has no foreign key to the
+// catalog, so the names come from one anon-readable catalog read; when that
+// read fails the pages fall back to the static map in lib/appNames.
+async function withCourseNames(rows) {
+  if (!rows?.length) return rows || [];
+  const slugs = [...new Set(rows.map((c) => c.app_slug))];
+  const { data: apps } = await supabase
+    .from('academy_apps')
+    .select('slug, name')
+    .in('slug', slugs);
+  const byslug = Object.fromEntries((apps || []).map((a) => [a.slug, a.name]));
+  return rows.map((c) => ({ ...c, course_name: byslug[c.app_slug] || null }));
+}
+
 export async function listMyCertifications() {
   const { data, error } = await supabase
     .from('academy_certifications')
     .select('*')
     .order('issued_at', { ascending: false });
   if (error) throw error;
-  return data;
+  return withCourseNames(data);
 }
 
 export function certificateStatus(cert) {
@@ -392,12 +408,13 @@ export async function adminListCertifications(limit = 100) {
   if (error) throw error;
   const userIds = [...new Set((data || []).map((c) => c.user_id))];
   if (!userIds.length) return data;
+  const named = await withCourseNames(data);
   const { data: profiles } = await supabase
     .from('profiles')
     .select('id, display_name, email')
     .in('id', userIds);
   const byId = Object.fromEntries((profiles || []).map((p) => [p.id, p]));
-  return data.map((c) => ({ ...c, holder: byId[c.user_id] || null }));
+  return named.map((c) => ({ ...c, holder: byId[c.user_id] || null }));
 }
 
 // look up a learner by email for issuance (admins can read profiles)

@@ -8,7 +8,9 @@ import {
   Loader2, ShieldCheck, ShieldX, ShieldAlert, Search, GraduationCap,
 } from 'lucide-react';
 import { verifyCertificate } from '@/services/academyService';
-import { APP_NAMES, CERT_TIER_LABELS as TIER_LABEL } from '@/lib/appNames';
+import {
+  courseName, CERT_TIER_LABELS as TIER_LABEL, formalDate, titleCaseSlug,
+} from '@/lib/appNames';
 
 const STATUS = {
   valid: { icon: ShieldCheck, color: 'text-[#BFFF00]', border: 'border-[#BFFF00]', label: 'Valid certificate' },
@@ -116,22 +118,22 @@ const VerifyCertificatePage = () => {
                 </div>
                 <div className="flex justify-between border-b border-gray-700 pb-2">
                   <dt className="text-gray-400">Course</dt>
-                  <dd className="text-white">{APP_NAMES[result.app_slug] || result.app_slug}</dd>
+                  <dd className="text-white">{courseName(result.app_slug, result.course_name)}</dd>
                 </div>
                 <div className="flex justify-between border-b border-gray-700 pb-2">
                   <dt className="text-gray-400">Certification</dt>
                   <dd className="text-white flex items-center gap-1">
                     <GraduationCap className="h-4 w-4 text-[#BFFF00]" />
-                    {TIER_LABEL[result.tier] || result.tier}
+                    {TIER_LABEL[result.tier] || titleCaseSlug(result.tier)}
                   </dd>
                 </div>
                 <div className="flex justify-between border-b border-gray-700 pb-2">
                   <dt className="text-gray-400">Issued</dt>
-                  <dd className="text-white">{new Date(result.issued_at).toLocaleDateString()}</dd>
+                  <dd className="text-white">{formalDate(result.issued_at)}</dd>
                 </div>
                 <div className="flex justify-between">
                   <dt className="text-gray-400">Valid until</dt>
-                  <dd className="text-white">{new Date(result.valid_until).toLocaleDateString()}</dd>
+                  <dd className="text-white">{formalDate(result.valid_until)}</dd>
                 </div>
               </dl>
             </div>

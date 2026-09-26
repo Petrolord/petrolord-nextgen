@@ -14,6 +14,7 @@ import {
   adminListCodes, adminIssueCode, adminListResidencyApplications,
   adminDecideResidency, adminListSessions, grantReviewAccess, revokeReviewAccess,
 } from '@/services/academyService';
+import { courseName } from '@/lib/appNames';
 
 const SESSION_EVENT = {
   register: { label: 'Device registered', cls: 'text-emerald-400' },
@@ -352,7 +353,7 @@ const AdminAcademyDoorsPage = () => {
                               <span className="text-gray-500 font-normal"> · {a.applicant?.email}</span>
                             </p>
                             <p className="text-xs text-gray-500">
-                              {a.app_slug} · {new Date(a.created_at).toLocaleString()} ·{' '}
+                              {courseName(a.app_slug, a.course_name)} · {new Date(a.created_at).toLocaleString()} ·{' '}
                               <span className={
                                 a.status === 'accepted' ? 'text-emerald-400'
                                 : a.status === 'rejected' ? 'text-red-400' : 'text-yellow-400'
