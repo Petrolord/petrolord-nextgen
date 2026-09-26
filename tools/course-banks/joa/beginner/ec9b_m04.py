@@ -25,7 +25,7 @@ q(3, "January's differences reach the Ekene March calls. By how much is EKO's ca
   "125000.000000, PA's January difference."],
  "EKO's January difference is its forecast share of 2000000.000000 less its actual share of 1800000.000000, which is 200000.000000, and that is the adjustment on its March row. 400000.000000 is the month's difference over every party, split on the paying interests. 150000.000000 is EKO's June adjustment, and 125000.000000 is PA's January difference.")
 
-q(0, "What is EKO's March 2027 cash call on the Ekene terms?",
+q(0, "With the Ekene lag of 2 months, what is EKO's March 2027 cash call?",
  "5800000.000000, its forecast share less January's difference.",
  ["6000000.000000, its forecast share, unadjusted.",
   "5800000.000000 plus May's arrears billing, since March pays arrears.",
@@ -46,7 +46,7 @@ q(1, "On the Ekene terms, what does the no-call threshold of 500000 test?",
   "The call after its adjustment."],
  "The engine's basis reads: no cash call in a month whose forecast is below 500000; its actual share is billed in arrears the next month. The test reads the month's forecast, since the call is made before the actuals are known, and it reads the whole month's forecast. A call reduced below 500000 by its adjustment is still a call.")
 
-q(3, "May 2027's forecast is below the Ekene threshold. What does PB pay in June 2027?",
+q(3, "May 2027's forecast is below the Ekene threshold of 500000, and the lag is 2 months. What does PB pay in June 2027?",
  "1715250.000000, its call plus May's arrears billing.",
  ["1631250.000000, its June call; May waits for July.",
   "1687500.000000, its June forecast share.",
