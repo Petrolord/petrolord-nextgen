@@ -6,7 +6,7 @@ A ledger question hands you files and a configuration and asks for readings. The
 
 ## Step one: the files must be readable
 
-Before any arithmetic, check what the engine will accept. Production needs a year, a date or a month_index, and volume columns ending in _oil_bbl, _gas_mscf or _condensate_bbl, or the bare forms. Capex and opex need one cost column each, and every stream with volumes needs a price. AKATA passes: akata_oil_bbl and akata_gas_mscf by year, amount_usd for capex, total_opex_usd for opex, oil_price_usd_bbl 82 and gas_price_usd_mscf 3.2. A file that fails is refused with a message and never run with a zero, and the reading of a refused run is the refusal, with its reason.
+Before any arithmetic, check what the engine will accept. Production needs a year, a date or a month_index, and volume columns ending in _oil_bbl, _gas_mscf or _condensate_bbl, or the bare forms. Capex and opex need one cost column each, and every stream with volumes needs a price. AKATA passes: akata_oil_bbl and akata_gas_mscf by year, amount_usd for capex, total_opex_usd for opex, oil_price_usd_bbl 82 and gas_price_usd_mscf 3.2. A failing file is refused with a message and never run with a zero, and the reading of a refused run is the refusal, with its reason.
 
 ## Step two: build one row by hand
 

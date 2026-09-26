@@ -14,7 +14,7 @@ Fisher: 10 percent nominal at 3 percent inflation is an applied real rate of 6.7
 
 ## Step three: read the NPV under both conventions
 
-End-year 72534830.66, mid-year 70188970.32 on the real basis; the nominal-basis mid-year figure is 69159247.46. Report the convention with each; the pair is the answer, and either number alone falls short.
+End-year 72534830.66, mid-year 70188970.32 on the real basis; the nominal-basis mid-year figure is 69159247.46. Report the convention with each; the pair is the answer.
 
 ## Step four: check the valuation year and sunk
 
