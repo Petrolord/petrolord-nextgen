@@ -203,7 +203,7 @@
    "2.400000, the formula price, since the Fourth Schedule sets no ceiling",
    "2.680000 on the reported base, the commercial sector price as a ceiling",
    "0.900000, the floor, the formula price being outside the band",
-   "2.180000 on the reported base, held at the domestic base price under s.168(3)"
+   "The domestic base price stated in the call, the s.168(3) ceiling"
   ],
   "answer": 3,
   "explanation": "EPF = (600 - 250) / 250 = 1.400000, so CP = 1 x (1 + 1.400000) = 2.4, above the ceiling of the domestic base price (s.168(3)), so the reason reads that the price is held at 2.18, the reported base price stated in the call. The commercial price caps gas distributors (s.167(7)); the floor holds prices below 0.9; and the ceiling applies before the floor."

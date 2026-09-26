@@ -161,7 +161,7 @@ x("A lessee's voluntary contracts with the strategic sectors equal its obligatio
 
 # 19
 x("For urea at a stated CMPP of 600.000000, the Fourth Schedule formula gives 2.4. With the reported 2026 domestic base price stated at 2.180000, what price does domesticPrice return?",
- "2.180000 on the reported base, held at the domestic base price under s.168(3)",
+ "The domestic base price stated in the call, the s.168(3) ceiling",
  ["2.400000, the formula price, since the Fourth Schedule sets no ceiling",
   "2.680000 on the reported base, the commercial sector price as a ceiling",
   "0.900000, the floor, the formula price being outside the band"],
