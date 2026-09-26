@@ -1,0 +1,544 @@
+{
+ "dataset": "UMUAHIA (synthetic)",
+ "tender": "EK-11/MS/2027-23 (synthetic)",
+ "scope": "Casing, gate valves, cement, baryte and inspection for two Ekene infill wells",
+ "criteria": [
+  {
+   "id": "specification",
+   "weight": 55,
+   "maxScore": 4
+  },
+  {
+   "id": "delivery",
+   "weight": 30,
+   "maxScore": 4
+  },
+  {
+   "id": "after-sales",
+   "weight": 15,
+   "maxScore": 4
+  }
+ ],
+ "contentItems": [
+  {
+   "id": "casing",
+   "scheduleLine": "steel-pipes"
+  },
+  {
+   "id": "valves",
+   "scheduleLine": "valves"
+  },
+  {
+   "id": "cement",
+   "scheduleLine": "cement-portland"
+  },
+  {
+   "id": "baryte",
+   "scheduleLine": "drilling-mud-baryte-bentonite"
+  }
+ ],
+ "bids": [
+  {
+   "id": "UM1",
+   "receivedAt": "2027-09-06T09:30:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    },
+    {
+     "id": "manufacturer-authorisation",
+     "met": true
+    }
+   ],
+   "scores": {
+    "specification": 3,
+    "delivery": 3,
+    "after-sales": 3
+   },
+   "completionWeeks": 10,
+   "annualCosts": [
+    5200,
+    5200,
+    5200,
+    5200,
+    5200,
+    5200
+   ],
+   "lines": [
+    {
+     "id": "casing",
+     "quantity": 200,
+     "unitRate": 1612.5,
+     "quotedAmount": 322500
+    },
+    {
+     "id": "valves",
+     "quantity": 30,
+     "unitRate": 3965,
+     "quotedAmount": 118950
+    },
+    {
+     "id": "cement",
+     "quantity": 160,
+     "unitRate": 302.4,
+     "quotedAmount": 48384
+    },
+    {
+     "id": "baryte",
+     "quantity": 220,
+     "unitRate": 405.2,
+     "quotedAmount": 89144
+    },
+    {
+     "id": "inspection",
+     "quantity": 1,
+     "unitRate": 11800,
+     "quotedAmount": 11800
+    }
+   ],
+   "nc": {
+    "casing": {
+     "measure": "tonnage",
+     "nigerian": 118,
+     "total": 200
+    },
+    "valves": {
+     "measure": "number",
+     "nigerian": 19,
+     "total": 30
+    },
+    "cement": {
+     "measure": "tonnage",
+     "nigerian": 131,
+     "total": 160
+    },
+    "baryte": {
+     "measure": "tonnage",
+     "nigerian": 139,
+     "total": 220
+    }
+   },
+   "indigenous": false,
+   "capacity": true
+  },
+  {
+   "id": "UM2",
+   "receivedAt": "2027-09-06T13:10:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    },
+    {
+     "id": "manufacturer-authorisation",
+     "met": true
+    }
+   ],
+   "scores": {
+    "specification": 3,
+    "delivery": 3,
+    "after-sales": 3
+   },
+   "completionWeeks": 9,
+   "annualCosts": [
+    4850,
+    4850,
+    4850,
+    4850,
+    4850,
+    4850
+   ],
+   "lines": [
+    {
+     "id": "casing",
+     "quantity": 200,
+     "unitRate": 1628.4,
+     "quotedAmount": 325680
+    },
+    {
+     "id": "valves",
+     "quantity": 30,
+     "unitRate": 4015.5,
+     "quotedAmount": 120465
+    },
+    {
+     "id": "cement",
+     "quantity": 160,
+     "unitRate": 298.75,
+     "quotedAmount": 47800
+    },
+    {
+     "id": "baryte",
+     "quantity": 220,
+     "unitRate": 399.6,
+     "quotedAmount": 87912
+    },
+    {
+     "id": "inspection",
+     "quantity": 1,
+     "unitRate": 10400,
+     "quotedAmount": 10400
+    }
+   ],
+   "nc": {
+    "casing": {
+     "measure": "tonnage",
+     "nigerian": 124,
+     "total": 200
+    },
+    "valves": {
+     "measure": "number",
+     "nigerian": 18,
+     "total": 30
+    },
+    "cement": {
+     "measure": "tonnage",
+     "nigerian": 128,
+     "total": 160
+    },
+    "baryte": {
+     "measure": "tonnage",
+     "nigerian": 134,
+     "total": 220
+    }
+   },
+   "indigenous": false,
+   "capacity": true,
+   "residualValue": 3000
+  },
+  {
+   "id": "UM3",
+   "receivedAt": "2027-09-07T08:55:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    },
+    {
+     "id": "manufacturer-authorisation",
+     "met": true
+    }
+   ],
+   "scores": {
+    "specification": 4,
+    "delivery": 3,
+    "after-sales": 3
+   },
+   "completionWeeks": 8,
+   "annualCosts": [
+    4600,
+    4600,
+    4600,
+    4600,
+    4600,
+    4600
+   ],
+   "lines": [
+    {
+     "id": "casing",
+     "quantity": 200,
+     "unitRate": 1705.2,
+     "quotedAmount": 341040
+    },
+    {
+     "id": "valves",
+     "quantity": 30,
+     "unitRate": 4180,
+     "quotedAmount": 125400
+    },
+    {
+     "id": "cement",
+     "quantity": 160,
+     "unitRate": 316.5,
+     "quotedAmount": 50640
+    },
+    {
+     "id": "baryte",
+     "quantity": 220,
+     "unitRate": 421.8,
+     "quotedAmount": 92796
+    },
+    {
+     "id": "inspection",
+     "quantity": 1,
+     "unitRate": 14100,
+     "quotedAmount": 14100
+    }
+   ],
+   "nc": {
+    "casing": {
+     "measure": "tonnage",
+     "nigerian": 196,
+     "total": 200
+    },
+    "valves": {
+     "measure": "number",
+     "nigerian": 21,
+     "total": 30
+    },
+    "cement": {
+     "measure": "tonnage",
+     "nigerian": 144,
+     "total": 160
+    },
+    "baryte": {
+     "measure": "tonnage",
+     "nigerian": 150,
+     "total": 220
+    }
+   },
+   "indigenous": true,
+   "capacity": true
+  },
+  {
+   "id": "UM4",
+   "receivedAt": "2027-09-07T11:25:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    },
+    {
+     "id": "manufacturer-authorisation",
+     "met": true
+    }
+   ],
+   "scores": {
+    "specification": 3,
+    "delivery": 2,
+    "after-sales": 4
+   },
+   "completionWeeks": 11,
+   "annualCosts": [
+    6100,
+    6100,
+    6100,
+    6100,
+    6100,
+    6100
+   ],
+   "lines": [
+    {
+     "id": "casing",
+     "quantity": 200,
+     "unitRate": 1571.8,
+     "quotedAmount": 314360
+    },
+    {
+     "id": "valves",
+     "quantity": 30,
+     "unitRate": 3902.25,
+     "quotedAmount": 117067.5
+    },
+    {
+     "id": "cement",
+     "quantity": 160,
+     "unitRate": 294.6,
+     "quotedAmount": 47136
+    },
+    {
+     "id": "baryte",
+     "quantity": 220,
+     "unitRate": 396.4,
+     "quotedAmount": 87208
+    }
+   ],
+   "nc": {
+    "casing": {
+     "measure": "tonnage",
+     "nigerian": 112,
+     "total": 200
+    },
+    "valves": {
+     "measure": "number",
+     "nigerian": 17,
+     "total": 30
+    },
+    "cement": {
+     "measure": "tonnage",
+     "nigerian": 129,
+     "total": 160
+    },
+    "baryte": {
+     "measure": "tonnage",
+     "nigerian": 136,
+     "total": 220
+    }
+   },
+   "indigenous": false,
+   "capacity": true,
+   "omitted": [
+    "inspection"
+   ]
+  },
+  {
+   "id": "UM5",
+   "receivedAt": "2027-09-07T15:40:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    },
+    {
+     "id": "manufacturer-authorisation",
+     "met": true
+    }
+   ],
+   "scores": {
+    "specification": 3,
+    "delivery": 3,
+    "after-sales": 2
+   },
+   "completionWeeks": 12,
+   "annualCosts": [
+    5600,
+    5600,
+    5600,
+    5600,
+    5600,
+    5600
+   ],
+   "lines": [
+    {
+     "id": "casing",
+     "quantity": 200,
+     "unitRate": 1650.7,
+     "quotedAmount": 330140
+    },
+    {
+     "id": "valves",
+     "quantity": 30,
+     "unitRate": 4088,
+     "quotedAmount": 122640
+    },
+    {
+     "id": "cement",
+     "quantity": 160,
+     "unitRate": 309.9,
+     "quotedAmount": 49584
+    },
+    {
+     "id": "baryte",
+     "quantity": 220,
+     "unitRate": 411.5,
+     "quotedAmount": 90530
+    },
+    {
+     "id": "inspection",
+     "quantity": 1,
+     "unitRate": 12650,
+     "quotedAmount": 12650
+    }
+   ],
+   "nc": {
+    "casing": {
+     "measure": "tonnage",
+     "nigerian": 140,
+     "total": 200
+    },
+    "valves": {
+     "measure": "number",
+     "nigerian": 20,
+     "total": 30
+    },
+    "cement": {
+     "measure": "tonnage",
+     "nigerian": 134,
+     "total": 160
+    },
+    "baryte": {
+     "measure": "tonnage",
+     "nigerian": 141,
+     "total": 220
+    }
+   },
+   "indigenous": true,
+   "capacity": true
+  },
+  {
+   "id": "UM6",
+   "receivedAt": "2027-09-08T10:15:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    },
+    {
+     "id": "manufacturer-authorisation",
+     "met": true
+    }
+   ],
+   "scores": {
+    "specification": 2,
+    "delivery": 2,
+    "after-sales": 2
+   },
+   "completionWeeks": 9,
+   "annualCosts": [
+    6400,
+    6400,
+    6400,
+    6400,
+    6400,
+    6400
+   ],
+   "lines": [
+    {
+     "id": "casing",
+     "quantity": 200,
+     "unitRate": 1498.3,
+     "quotedAmount": 299660
+    },
+    {
+     "id": "valves",
+     "quantity": 30,
+     "unitRate": 3780,
+     "quotedAmount": 113400
+    },
+    {
+     "id": "cement",
+     "quantity": 160,
+     "unitRate": 281.2,
+     "quotedAmount": 44992
+    },
+    {
+     "id": "baryte",
+     "quantity": 220,
+     "unitRate": 377.9,
+     "quotedAmount": 83138
+    },
+    {
+     "id": "inspection",
+     "quantity": 1,
+     "unitRate": 8900,
+     "quotedAmount": 8900
+    }
+   ],
+   "nc": {
+    "casing": {
+     "measure": "tonnage",
+     "nigerian": 100,
+     "total": 200
+    },
+    "valves": {
+     "measure": "number",
+     "nigerian": 14,
+     "total": 30
+    },
+    "cement": {
+     "measure": "tonnage",
+     "nigerian": 110,
+     "total": 160
+    },
+    "baryte": {
+     "measure": "tonnage",
+     "nigerian": 118,
+     "total": 220
+    }
+   },
+   "indigenous": false,
+   "capacity": true
+  }
+ ]
+}

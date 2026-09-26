@@ -149,11 +149,13 @@ const MS_NC_ARGS = { items: MS.nc.items, bids: MS.bids.map((b) => ({ id: b.id, i
 const WS_NC_ARGS = { items: WS.nc.items, bids: WS.bids.map((b) => ({ id: b.id, items: b.nc })) };
 
 // STATED TEACHING INPUTS, each passed to the engine AND printed from here.
-const TIE_ALT = '2027-01-01T00:00:00Z'; // the stated receipt time of every published example's bids
+// the stated receipt time of every published example's bids
+const TIE_ALT = '2027-01-01T00:00:00Z';
 // The published worked examples, typed from the cited sources (figures in the
 // source's own table; the text column names the figure).
 const PUB = {
   figIX: { passMark: 0, criteria: [{ id: 'effectiveness', weight: 50, maxScore: 4 }, { id: 'methodology', weight: 25, maxScore: 4 }, { id: 'team', weight: 15, maxScore: 4 }, { id: 'sustainability', weight: 10, maxScore: 4 }], bids: [{ id: 'A', scores: { effectiveness: 2, methodology: 2, team: 2, sustainability: 1 } }] },
+  figIXPrinted: 190,
   figX: {
     technicalWeight: 0.8, priceMethod: 'lowest-ratio', technicalMethod: 'relative',
     bids: [
@@ -174,6 +176,7 @@ const PUB = {
   annex3Printed: { A: 94.37, B: 91.66 },
   kk: (priceMethod) => ({ technicalWeight: 0, priceMethod, technicalMethod: 'absolute', bids: [{ id: 'A', technicalPercent: 50, evaluatedCost: 50, receivedAt: TIE_ALT }, { id: 'B', technicalPercent: 50, evaluatedCost: 75, receivedAt: TIE_ALT }, { id: 'C', technicalPercent: 50, evaluatedCost: 100, receivedAt: TIE_ALT }] }),
   kkPrinted: { A: 100, B: 67, C: 50 },
+  kkLinearPrinted: 75,
   chen: (aInvalid) => ({ technicalWeight: 0.5, priceMethod: 'lowest-ratio', technicalMethod: 'absolute', bids: [{ id: 'A', technicalPercent: 0, evaluatedCost: 40, receivedAt: TIE_ALT, ...(aInvalid ? { rejected: 'declared invalid after opening' } : {}) }, { id: 'B', technicalPercent: 0, evaluatedCost: 50, receivedAt: TIE_ALT }, { id: 'C', technicalPercent: 0, evaluatedCost: 80, receivedAt: TIE_ALT }] }),
   albEx1: { estimate: 2938140000, bids: [1145142, 1330191, 1342106, 1378232, 1462176, 1476269, 1486226, 1579100, 1613371, 1657703, 1856166, 1900885, 1912355, 2099006, 2149893, 2242001].map((c, i) => ({ id: `Bid ${i + 1}`, evaluatedCost: c })) },
   albEx1Printed: { mean: 1664426, sd: 315975, limit: 1348452 },
@@ -187,7 +190,7 @@ w('# SC2 TEACHING DIGEST: Procurement, Tendering & Contracting');
 w();
 w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The engine FINDINGS record, the oracle, the fixture README and the engine source comments are PROVENANCE and not teaching truth.');
 w();
-w('# PRECISION. Every price, amount, total, correction, discount, deviation, omission, adjustment, evaluated cost, life-cycle cost, estimate, share amount, payment, margin, overrun, cost, day count, score, points total, percentage, content, lead, ratio, weight, mean, standard deviation, limit, percentile and probability prints to SIX decimals; counts, ranks, weeks, years, seeds and iterations are whole numbers; the 12-digit tie key prints at twelve significant digits where the tie rule is shown; an engine message is printed verbatim, figures and all, and a figure inside a message is the shortest round-trip decimal of the double the engine holds.');
+w(`# PRECISION. Every price, amount, total, correction, discount, deviation, omission, adjustment, evaluated cost, life-cycle cost, estimate, share amount, payment, margin, overrun, cost, day count, score, points total, percentage, content, lead, ratio, weight, mean, standard deviation, limit, percentile and probability prints to SIX decimals; counts, ranks, weeks, years, seeds and iterations are whole numbers; the ${D.TIE_DIGITS}-digit tie key prints at twelve significant digits where the tie rule is shown; an engine message is printed verbatim, figures and all, and a figure inside a message is the shortest round-trip decimal of the double the engine holds.`);
 w();
 w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 9187701 (engines PR #261), ${engineLines} lines. It imports lib/stats (mulberry32, triInvCDF, basicStats, mean, standardDeviation), lib/conventions/percentile.js (EXCEEDANCE_DEFINITION), engines/economics/cashflow.ts (npv), engines/drilling/wellCost.js (evaluateProgram, afeCosts) and engines/economics/afe.js (calculatePartnerCosts). It makes no network call.`);
 w();
@@ -253,9 +256,9 @@ must('the Schedule carries 45 lines in three sections', Object.keys(NCS).length 
 must('NC_SCHEDULE is frozen', Object.isFrozen(NCS), 'frozen');
 w();
 w('WHAT THE ENGINE DOES NOT DO, checked here against its exports and its source:');
-const IMPORTS = [...ENGINE_SRC.matchAll(/^import .* from '([^']+)';$/gm)].map((m) => m[1]);
+const IMPORTS = [...ENGINE_SRC.matchAll(/^import .* from \x27([^\x27]+)\x27;$/gm)].map((m) => m[1]);
 must('the engine imports exactly lib/stats, the percentile convention, cashflow.ts, wellCost.js and afe.js', IMPORTS.join() === '../../lib/stats/stats.js,../../lib/conventions/percentile.js,../economics/cashflow.ts,../drilling/wellCost.js,../economics/afe.js', IMPORTS.join());
-must('the engine source makes no network call, reads no clock and draws no unseeded random number', !/\bfetch\(|XMLHttpRequest|\bimport\(|require\(|Math\.random|Date\.now|new Date\(/.test(ENGINE_SRC), 'none');
+must('the engine source makes no network call, reads no clock and draws no unseeded random number', !/\bfetch\x28|XMLHttpRequest|\bimport\x28|require\x28|Math\.random|Date\.now|new Date\x28/.test(ENGINE_SRC), 'none');
 w(`- Its imports are, in full: ${list(IMPORTS.map((p) => p.replace(/^(\.\.\/)+/, '')))}. It discounts through the canonical npv of engines/economics/cashflow.ts and samples through lib/stats; it carries no Monte Carlo or NPV code of its own.`);
 w('- It applies no domestic preference margin, compares no amount in words against figures, computes no negotiation or best and final offer, splits no tender into lots and deducts nothing for the Nigerian Content Development Fund. ' + refCap('choices') + ' lists each with where it would come from.');
 w('- It decides nothing a rule does not state. The pass mark, the weights, the technical weight, the price and technical scoring methods, the s.14 reading, the should-cost band and the Monte Carlo seed are inputs with no default, and a call without one is refused by name.');
@@ -333,7 +336,7 @@ w();
 tenderBlock(MS, MS_CRIT);
 w(`Stated in the fixture: pass mark ${MS.passMark}; delivery schedule minWeeks ${MS.schedule.minWeeks}, maxWeeks ${MS.schedule.maxWeeks}, ratePerWeek ${MS.schedule.ratePerWeek}; life cycle ${MS.lifeCycle.years} years at a discountRate of ${MS.lifeCycle.discountRate}; omission rule ${MS.omissionRule}; award ${MS.award.basis}; Nigerian content items ${list(MS.nc.items.map((i) => `${i.id} (Schedule line ${i.scheduleLine})`))}; content weights (fixture): ${MS.nc.weights}.`);
 w();
-table(['bid', 'received (UTC)', 'scores (fixture)', 'quoted total', 'weeks', 'annual valve maintenance (years 1 to 5)', 'omitted', 'indigenous', 'capacity'],
+table(['bid', 'received (UTC)', 'scores (fixture)', 'quoted total', 'weeks', `annual valve maintenance (years 1 to ${MS.lifeCycle.years})`, 'omitted', 'indigenous', 'capacity'],
   MS.bids.map((b) => [b.id, b.receivedAt, Object.entries(b.scores).map(([k, v]) => `${k} ${v}`).join(', '), f6(arith(b).quotedTotal), S(b.completionWeeks), b.annualCosts.map(f6).join(', '), (b.omitted || []).join(', ') || 'none', S(b.indigenous), S(b.capacity)]));
 must('every materials bid meets both mandatory requirements', MS.bids.every((b) => b.mandatory.every((m) => m.met)), 'mandatory');
 w();
@@ -516,16 +519,18 @@ w();
 w('THE PRACTICALS RUN IN THE COURSE\'S OWN CALCULATOR PANELS. This is an engine course with no Suite app. Each tier has a calculator panel that calls this same vendored engine: the envelope calculator (Associate), the award calculator (Professional) and the contract calculator (Expert). A learner types or pastes their own bids, criteria and settings; the panel prints what the engine returns, every refusal in the engine\'s own words, and the reasons beside each figure.');
 w();
 w('THE ONE RANDOM DRAW IS SEEDED. The contract-type comparison samples the duration and the daily cost through lib/stats mulberry32 on a stated seed and a stated iteration count, so a seed and an iteration count name its result exactly:');
-const ctA = T.contractTypes(clone({ ...CT_WS, iterations: 200 }));
-const ctB = T.contractTypes(clone({ ...CT_WS, iterations: 200 }));
-const ctC = T.contractTypes(clone({ ...CT_WS, iterations: 200, seed: CT_WS.seed + 1 }));
+// the stated iteration count of the determinism demonstration
+const IT_SHORT = 200;
+const ctA = T.contractTypes(clone({ ...CT_WS, iterations: IT_SHORT }));
+const ctB = T.contractTypes(clone({ ...CT_WS, iterations: IT_SHORT }));
+const ctC = T.contractTypes(clone({ ...CT_WS, iterations: IT_SHORT, seed: CT_WS.seed + 1 }));
 must('the same seed gives the same result, bit for bit', JSON.stringify(ctA) === JSON.stringify(ctB), 'same');
 must('the next seed gives a different mean day-rate cost', ctA.types.dayRate.companyCost.mean !== ctC.types.dayRate.companyCost.mean, `${ctA.types.dayRate.companyCost.mean} ${ctC.types.dayRate.companyCost.mean}`);
 w();
 table(['run (stated)', 'seed', 'iterations', 'day rate: mean company cost'], [
-  ['first', S(CT_WS.seed), '200', f6(ctA.types.dayRate.companyCost.mean)],
-  ['second, same inputs', S(CT_WS.seed), '200', f6(ctB.types.dayRate.companyCost.mean)],
-  ['the next seed', S(CT_WS.seed + 1), '200', f6(ctC.types.dayRate.companyCost.mean)],
+  ['first', S(CT_WS.seed), S(IT_SHORT), f6(ctA.types.dayRate.companyCost.mean)],
+  ['second, same inputs', S(CT_WS.seed), S(IT_SHORT), f6(ctB.types.dayRate.companyCost.mean)],
+  ['the next seed', S(CT_WS.seed + 1), S(IT_SHORT), f6(ctC.types.dayRate.companyCost.mean)],
 ]);
 w();
 w('The first two runs return the same object in every field (checked); the third differs.');
@@ -561,7 +566,7 @@ must('WS5 sits exactly on the pass mark and passes', wsTech.bids.find((b) => b.i
 w();
 w(`Passed (engine, in input order): ${list(wsTech.passed)}. WS5 scores ${f6(wsTech.bids.find((b) => b.id === 'WS5').technicalPercent)}, exactly the pass mark, and passes: a bid passes AT the pass mark. WS6 is not scored at all, so its row carries no technical percentage.`);
 w();
-w('WEIGHTED POINTS are the sum of weight x score, the total the World Bank Guidance prints in its Figure IX (on a 0 to 4 scale the maximum is 400). The technical percentage divides each term by its maxScore, so the two carry the same order.');
+w(`WEIGHTED POINTS are the sum of weight x score, the total the World Bank Guidance prints in its Figure IX (on the well services scale, scores ${0} to ${WS_CRIT[0].maxScore}, the maximum is ${WS_CRIT.reduce((t, c) => t + c.weight * c.maxScore, 0)}, derived). The technical percentage divides each term by its maxScore, so the two carry the same order.`);
 w();
 const msTech = success('technicalEvaluation on the materials tender', T.technicalEvaluation({ criteria: MS_CRIT, bids: MS_BIDS, passMark: MS.passMark }));
 w(`THE MATERIALS TENDER, pass mark ${MS.passMark} (fixture):`);
@@ -576,13 +581,13 @@ w();
 msTech.bids.filter((b) => b.reason).forEach((b) => quote(`${b.id}: ${b.reason}`));
 w();
 const fig9 = success('technicalEvaluation on Guidance Figure IX', T.technicalEvaluation(clone(PUB.figIX)));
-w('THE WORLD BANK GUIDANCE, FIGURE IX (stated from the source: four criteria weighted 50, 25, 15 and 10, scored 0 to 4; Company A scores 2, 2, 2 and 1; the Guidance prints a weighted score of 190):');
+w(`THE WORLD BANK GUIDANCE, FIGURE IX (stated from the source: four criteria weighted ${list(PUB.figIX.criteria.map((c) => c.weight))}, scored 0 to ${PUB.figIX.criteria[0].maxScore}; Company A scores ${list(Object.values(PUB.figIX.bids[0].scores))}; the Guidance prints a weighted score of ${PUB.figIXPrinted}):`);
 w();
-table(['company', 'weightedPoints (engine)', 'technicalPercent (engine)', 'the Guidance prints'], [['A', f6(fig9.bids[0].weightedPoints), f6(fig9.bids[0].technicalPercent), '190']]);
-must('Figure IX: the engine returns 190 weighted points', fig9.bids[0].weightedPoints === 190, fig9.bids[0].weightedPoints);
+table(['company', 'weightedPoints (engine)', 'technicalPercent (engine)', 'the Guidance prints'], [['A', f6(fig9.bids[0].weightedPoints), f6(fig9.bids[0].technicalPercent), S(PUB.figIXPrinted)]]);
+must('Figure IX: the engine returns the printed weighted points', fig9.bids[0].weightedPoints === PUB.figIXPrinted, fig9.bids[0].weightedPoints);
 w();
 const an2 = success('technicalEvaluation on Guidance Annex 2', T.technicalEvaluation(clone(PUB.annex2)));
-w('THE WORLD BANK GUIDANCE, ANNEX 2, a minimum quality threshold (stated from the source: three criteria scored in points out of 15, 15 and 70, threshold 80). With weights equal to the maximum points, the technical percentage equals the points total:');
+w(`THE WORLD BANK GUIDANCE, ANNEX 2, a minimum quality threshold (stated from the source: three criteria scored in points out of ${list(PUB.annex2.criteria.map((c) => c.maxScore))}, threshold ${PUB.annex2.passMark}). With weights equal to the maximum points, the technical percentage equals the points total:`);
 w();
 table(['company', 'scores (source)', 'technicalPercent (engine)', 'status (engine)'], PUB.annex2.bids.map((b) => {
   const r = an2.bids.find((x) => x.id === b.id);
@@ -614,29 +619,33 @@ quote(`WS5: ${wsArith.WS5.reasons[0]}`);
 must('WS2 corrects its amount upward and the corrected total rises', wsArith.WS2.correction > 0, wsArith.WS2.correction);
 must('WS5 keeps its total: the quoted amount governs', wsArith.WS5.correction === 0 && wsArith.WS5.linesCorrected === 1, wsArith.WS5.correction);
 w();
-w(`WS2 quoted ${f6(wsArith.WS2.lines.find((l) => l.id === 'ct-spread').quotedAmount)} for the coiled tubing spread where 18 x 27000 is ${f6(wsArith.WS2.lines.find((l) => l.id === 'ct-spread').correctedAmount)}: the unit rate prevails and its total rises by ${f6(wsArith.WS2.correction)}. WS5 typed its acid rate as 13.8 where its amount, ${f6(82800)}, implies ${f6(wsArith.WS5.lines.find((l) => l.id === 'acid').correctedUnitRate)}; the bid flags the decimal point as obviously misplaced (decimalMisplaced true), so the quoted amount governs, the unit rate is corrected and the total does not move.`);
+w(`WS2 quoted ${f6(wsArith.WS2.lines.find((l) => l.id === 'ct-spread').quotedAmount)} for the coiled tubing spread where ${wsArith.WS2.lines.find((l) => l.id === 'ct-spread').quantity} x ${wsArith.WS2.lines.find((l) => l.id === 'ct-spread').unitRate} is ${f6(wsArith.WS2.lines.find((l) => l.id === 'ct-spread').correctedAmount)}: the unit rate prevails and its total rises by ${f6(wsArith.WS2.correction)}. WS5 typed its acid rate as ${wsArith.WS5.lines.find((l) => l.id === 'acid').unitRate} where its amount, ${f6(82800)}, implies ${f6(wsArith.WS5.lines.find((l) => l.id === 'acid').correctedUnitRate)}; the bid flags the decimal point as obviously misplaced (decimalMisplaced true), so the quoted amount governs, the unit rate is corrected and the total does not move.`);
 must('the WS5 fixture flags its acid line decimalMisplaced', WS.bids[4].lines.find((l) => l.id === 'acid').decimalMisplaced === true, 'flag');
 w();
-w('THE TOLERANCE, at its boundary (stated lines, stated tolerance 0.5):');
-const tolEq = success('correctArithmetic gap equal to the tolerance', T.correctArithmetic({ lines: [{ id: 'x', quantity: 1, unitRate: 100.5, quotedAmount: 100 }], tolerance: 0.5 }));
-const tolAbove = success('correctArithmetic gap above the tolerance', T.correctArithmetic({ lines: [{ id: 'x', quantity: 1, unitRate: 100.75, quotedAmount: 100 }], tolerance: 0.5 }));
-table(['quantity x unit rate (stated)', 'quoted (stated)', 'gap', 'tolerance', 'corrected amount (engine)', 'rule (engine)'], [
-  ['1 x 100.5', '100', '0.5', '0.5', f6(tolEq.lines[0].correctedAmount), S(tolEq.lines[0].rule)],
-  ['1 x 100.75', '100', '0.75', '0.5', f6(tolAbove.lines[0].correctedAmount), S(tolAbove.lines[0].rule)],
-]);
+// stated: one line of quantity 1 at each rate, quoted 100
+const TOL_PROBE = { tolerance: 0.5, quoted: 100, rates: [100.5, 100.75] };
+w(`THE TOLERANCE, at its boundary (stated lines, stated tolerance ${TOL_PROBE.tolerance}):`);
+const tolLine = (rate) => ({ lines: [{ id: 'x', quantity: 1, unitRate: rate, quotedAmount: TOL_PROBE.quoted }], tolerance: TOL_PROBE.tolerance });
+const tolEq = success('correctArithmetic gap equal to the tolerance', T.correctArithmetic(tolLine(TOL_PROBE.rates[0])));
+const tolAbove = success('correctArithmetic gap above the tolerance', T.correctArithmetic(tolLine(TOL_PROBE.rates[1])));
+table(['quantity x unit rate (stated)', 'quoted (stated)', 'gap (derived)', 'tolerance', 'corrected amount (engine)', 'rule (engine)'], [tolEq, tolAbove].map((r, i) => [`1 x ${TOL_PROBE.rates[i]}`, S(TOL_PROBE.quoted), S(TOL_PROBE.rates[i] - TOL_PROBE.quoted), S(TOL_PROBE.tolerance), f6(r.lines[0].correctedAmount), S(r.lines[0].rule)]));
 must('a gap equal to the tolerance is not corrected', tolEq.lines[0].rule === null && tolAbove.lines[0].rule === 'unit-rate-prevails', `${tolEq.lines[0].rule} ${tolAbove.lines[0].rule}`);
 w();
 w('A gap EQUAL to the tolerance is not a discrepancy; only a gap above it is corrected.');
 w();
-const qtMis = success('correctArithmetic with a quoted total that differs from its lines', T.correctArithmetic({ lines: clone(WS.bids[0].lines), quotedTotal: 940000 }));
-w('THE QUOTED TOTAL. A bid whose stated total (stated: 940000 on WS1\'s lines) differs from the sum of its own lines is corrected to the sum of the corrected lines: the subtotals prevail. The engine\'s reason, verbatim:');
+// the stated total handed in with WS1's lines
+const QT_PROBE = 940000;
+const qtMis = success('correctArithmetic with a quoted total that differs from its lines', T.correctArithmetic({ lines: clone(WS.bids[0].lines), quotedTotal: QT_PROBE }));
+w(`THE QUOTED TOTAL. A bid whose stated total (stated: ${QT_PROBE} on WS1's lines) differs from the sum of its own lines is corrected to the sum of the corrected lines: the subtotals prevail. The engine's reason, verbatim:`);
 quote(qtMis.reasons[0]);
 w(`Its corrected total is ${f6(qtMis.correctedTotal)} and its correction ${f6(qtMis.correction)}.`);
 must('the subtotals prevail over a stated total', qtMis.correctedTotal === 943200 && /the subtotals prevail/.test(qtMis.reasons[0]), qtMis.correctedTotal);
 w();
-const decNo = success('correctArithmetic decimalMisplaced with no discrepancy', T.correctArithmetic({ lines: [{ id: 'x', quantity: 60, unitRate: 1380, quotedAmount: 82800, decimalMisplaced: true }] }));
+// stated
+const DEC_PROBE = { id: 'x', quantity: 60, unitRate: 1380, quotedAmount: 82800, decimalMisplaced: true };
+const decNo = success('correctArithmetic decimalMisplaced with no discrepancy', T.correctArithmetic({ lines: [clone(DEC_PROBE)] }));
 must('a decimalMisplaced flag on a line with no discrepancy changes nothing', decNo.linesCorrected === 0 && decNo.lines[0].rule === null, decNo.linesCorrected);
-w('A decimalMisplaced flag on a line with no discrepancy changes nothing (stated: 60 x 1380 quoted as 82800 with the flag set; the engine corrects 0 lines).');
+w(`A decimalMisplaced flag on a line with no discrepancy changes nothing (stated: ${DEC_PROBE.quantity} x ${DEC_PROBE.unitRate} quoted as ${DEC_PROBE.quotedAmount} with the flag set; the engine corrects ${decNo.linesCorrected} lines).`);
 w();
 w('WORDS AGAINST FIGURES (ITB 35.1(c), where an amount in words differs from the amount in figures) is not computed by the engine; the course teaches it as a concept.');
 
@@ -665,7 +674,7 @@ w(`AN OMITTED ITEM AT THE AVERAGE. WS3 prices no nitrogen line. The other respon
 must('the omission is the average of the other responsive bids\' corrected amounts', nearly(ws3.omissions[0].amount, sum(nitroOthers.map((x) => x[1])) / nitroOthers.length), ws3.omissions[0].amount);
 must('WS4, which failed the technical envelope, does not price the omission', !nitroOthers.some(([id]) => id === 'WS4'), 'WS4');
 w();
-w(`Only responsive bids price an omission: WS4 quoted a nitrogen line too, but its price envelope was never opened, so its figure is not in the average. A bid never prices its own omission. The engine's omission basis: ${wsEc.basis.omission}.`);
+w(`Only responsive bids price an omission: WS4 quotes a nitrogen line too, but its price envelope is never opened, so its figure is not in the average. A bid never prices its own omission. The engine's omission basis: ${wsEc.basis.omission}.`);
 w();
 w(`COMPLETION TIME. The engine's schedule basis: ${wsEc.basis.schedule}. The adjustment is ratePerWeek x the weeks beyond minWeeks x (corrected price - discount). No credit is given for completion before minWeeks.`);
 must('the schedule basis names no credit rule through its reasons', wsEc.bids.find((b) => b.id === 'WS1').scheduleReason.includes('no credit for earlier completion'), wsEc.bids.find((b) => b.id === 'WS1').scheduleReason);
@@ -680,38 +689,43 @@ w(`A PRICED DEVIATION is a minor deviation quantified in money (Public Procureme
 section('combined', 'The combined score: the commercial score, the relative technical score and their weights', ['Associate m05', 'Professional m02']);
 const wsRank = wsCombined.ranking;
 w(`THE RULE, in the engine's basis: ${wsRank.basis.combined}, where ${wsRank.basis.technical} and ${wsRank.basis.commercial}. Source (engine): ${wsRank.basis.source}.`);
-must('the combined basis prints the commercial weight as the double 1 - 0.7', wsRank.basis.combined === `B = 0.7 x St + ${1 - 0.7} x Sc` && 1 - 0.7 !== 0.3, wsRank.basis.combined);
+const TW = WS.award.technicalWeight;
+// the decimal a reader expects for 1 less the technical weight
+const CW_DECIMAL = 0.3;
+must('the combined basis prints the commercial weight as the double 1 - 0.7', wsRank.basis.combined === `B = ${TW} x St + ${1 - TW} x Sc` && 1 - TW !== CW_DECIMAL, wsRank.basis.combined);
 w();
-w(`The engine prints the commercial weight as ${1 - 0.7}: it computes 1 - 0.7 in binary floating point and prints the shortest decimal of the double it holds. That double is not the double 0.3 (checked).`);
+w(`The engine prints the commercial weight as ${1 - TW}: it computes 1 - ${TW} in binary floating point and prints the shortest decimal of the double it holds. That double is not the double ${CW_DECIMAL} (checked).`);
 w();
 w(`THE WELL SERVICES TENDER, technical weight ${WS.award.technicalWeight}, priceMethod lowest-ratio, technicalMethod relative (fixture). Thigh ${f6(wsRank.tHigh)}, Cmin ${f6(wsRank.cMin)}, Cmax ${f6(wsRank.cMax)} (engine):`);
 w();
 table(['rank', 'bid', 'technicalPercent T', 'evaluated cost C', 'St = 100 x T / Thigh', 'Sc = 100 x Cmin / C', 'B combined'],
   wsRank.bids.map((b) => [S(b.rank), b.id, f6(b.technicalPercent), f6(b.evaluatedCost), f6(b.technicalScore), f6(b.commercialScore), f6(b.combinedScore)]));
-wsRank.bids.forEach((b) => must(`${b.id}: B is the weighted sum`, nearly(b.combinedScore, 0.7 * b.technicalScore + (1 - 0.7) * b.commercialScore), b.combinedScore));
+wsRank.bids.forEach((b) => must(`${b.id}: B is the weighted sum`, nearly(b.combinedScore, TW * b.technicalScore + (1 - TW) * b.commercialScore), b.combinedScore));
 must('WS3 is the most advantageous', wsRank.mostAdvantageous === 'WS3', wsRank.mostAdvantageous);
 w();
 w(`Most advantageous (engine): ${wsRank.mostAdvantageous}. The bid with the highest technical percentage scores St 100; the bid with the lowest evaluated cost scores Sc 100.`);
 must('the top technical bid scores St 100 and the lowest cost Sc 100', wsRank.bids.find((b) => b.technicalPercent === wsRank.tHigh).technicalScore === 100 && wsRank.bids.find((b) => b.evaluatedCost === wsRank.cMin).commercialScore === 100, 'St Sc');
 w();
 const fx = success('rankTender on Guidance Figures X to XII', T.rankTender(clone(PUB.figX)));
-w('THE WORLD BANK GUIDANCE, FIGURES X TO XII (stated from the source: technical 80 percent and cost 20 percent; five companies, E rejected as an abnormally low bid; technical points on the 0 to 4 scale entered as percentages, of which only T / Thigh matters). The Guidance prints its figures to two decimals; the engine\'s are exact:');
+w(`THE WORLD BANK GUIDANCE, FIGURES X TO XII (stated from the source: technical weight ${PUB.figX.technicalWeight}, the cost taking the rest; five companies, E rejected as an abnormally low bid; technical points on the Guidance's scoring scale entered as percentages, of which only T / Thigh matters). The Guidance prints its figures to two decimals; the engine's are exact:`);
 w();
-table(['rank', 'company', '0.8 x St (engine)', 'the Guidance prints', 'Sc (engine)', 'the Guidance prints', 'B (engine)', 'the Guidance prints'],
-  fx.bids.map((b) => [S(b.rank), b.id, f6(0.8 * b.technicalScore), S(PUB.figXPrinted.technicalWeighted[b.id]), f6(b.commercialScore), S(PUB.figXPrinted.commercial[b.id]), f6(b.combinedScore), S(PUB.figXPrinted.combined[b.id])]));
+table(['rank', 'company', `${PUB.figX.technicalWeight} x St (engine)`, 'the Guidance prints', 'Sc (engine)', 'the Guidance prints', 'B (engine)', 'the Guidance prints'],
+  fx.bids.map((b) => [S(b.rank), b.id, f6(PUB.figX.technicalWeight * b.technicalScore), S(PUB.figXPrinted.technicalWeighted[b.id]), f6(b.commercialScore), S(PUB.figXPrinted.commercial[b.id]), f6(b.combinedScore), S(PUB.figXPrinted.combined[b.id])]));
 must('Figures X to XII: the engine ranks D, C, B, A as the Guidance does', fx.bids.map((b) => b.id).join() === 'D,C,B,A', fx.bids.map((b) => b.id).join());
-must('every printed Guidance figure is within 0.01 of the engine figure', fx.bids.every((b) => Math.abs(b.combinedScore - PUB.figXPrinted.combined[b.id]) <= 0.01 + 1e-12), 'within');
+// the Guidance prints to two decimals
+const PRINT_STEP = 0.01;
+must('every printed Guidance figure is within 0.01 of the engine figure', fx.bids.every((b) => Math.abs(b.combinedScore - PUB.figXPrinted.combined[b.id]) <= PRINT_STEP + 1e-12), 'within');
 w();
-w(`The ranking agrees: ${list(fx.bids.map((b) => b.id))}. E is excluded with the reason it was given (engine): ${fx.excluded[0].reason}. Every printed combined figure is within 0.01 of the engine\'s, and ${ref('honest')} reads where each printed figure is truncated or rounded.`);
+w(`The ranking agrees: ${list(fx.bids.map((b) => b.id))}. E is excluded with the reason stated for it (engine): ${fx.excluded[0].reason}. Every printed combined figure is within ${PRINT_STEP} of the engine's, and ${ref('honest')} reads where each printed figure is truncated or rounded.`);
 w();
 const a3t = success('technicalEvaluation on Guidance Annex 3', T.technicalEvaluation(clone(PUB.annex3Tech)));
 const a3 = success('rankTender on Guidance Annex 3', T.rankTender(clone(PUB.annex3)));
-w(`THE WORLD BANK GUIDANCE, ANNEX 3 (stated from the source: technical 40 percent, financial 60 percent). Weighted points (engine): A ${f6(a3t.bids[0].weightedPoints)}, B ${f6(a3t.bids[1].weightedPoints)}. Combined (engine) against the Guidance's printed figures:`);
+w(`THE WORLD BANK GUIDANCE, ANNEX 3 (stated from the source: technical weight ${PUB.annex3.technicalWeight}, the financial score taking the rest). Weighted points (engine): A ${f6(a3t.bids[0].weightedPoints)}, B ${f6(a3t.bids[1].weightedPoints)}. Combined (engine) against the Guidance's printed figures:`);
 w();
 table(['company', 'St (engine)', 'Sc (engine)', 'B (engine)', 'the Guidance prints'], a3.bids.map((b) => [b.id, f6(b.technicalScore), f6(b.commercialScore), f6(b.combinedScore), S(PUB.annex3Printed[b.id])]));
-must('Annex 3: A wins, 94.375 exactly', a3.mostAdvantageous === 'A' && a3.bids[0].combinedScore === 94.375, a3.bids[0].combinedScore);
+must('Annex 3: A wins, 94.375 exactly', a3.mostAdvantageous === 'A' && a3.bids[0].combinedScore === 94.375 && Math.floor(a3.bids[0].combinedScore * 100) / 100 === PUB.annex3Printed.A, a3.bids[0].combinedScore);
 w();
-w(`A wins on both. The engine's A is ${f6(a3.bids[0].combinedScore)}; the Guidance prints 94.37, two decimals of that figure with the third dropped.`);
+w(`A wins on both. The engine's A is ${f6(a3.bids[0].combinedScore)}; the Guidance prints ${PUB.annex3Printed.A}, two decimals of that figure with the third dropped (checked).`);
 
 /* ============================================================ SECTION 10 */
 
@@ -728,21 +742,23 @@ w(`THE SAME TENDER UNDER A LOWEST-COST AWARD: award (engine) ${wsLow.award}; rea
 must('the two award bases pick different bids', wsLow.award === 'WS5' && wsCombined.award === 'WS3', `${wsLow.award} ${wsCombined.award}`);
 must('WS3 is fourth by evaluated cost', wsEc.bids.find((b) => b.id === 'WS3').rank === 4, wsEc.bids.find((b) => b.id === 'WS3').rank);
 w();
-w('THE TIE-BREAK, stated once for every ranking: the lower evaluated cost, then the earlier receipt time, then the bidder id. Three stated bids with the same technical percentage (80) and the same combined score:');
 const tieBids = [
   { id: 'T3', technicalPercent: 80, evaluatedCost: 500000, receivedAt: '2027-05-01T10:00:00Z' },
   { id: 'T1', technicalPercent: 80, evaluatedCost: 500000, receivedAt: '2027-05-01T09:00:00Z' },
   { id: 'T2', technicalPercent: 80, evaluatedCost: 500000, receivedAt: '2027-05-01T09:00:00Z' },
 ];
+w(`THE TIE-BREAK, stated once for every ranking: the lower evaluated cost, then the earlier receipt time, then the bidder id. Three stated bids with the same technical percentage (${tieBids[0].technicalPercent}) and the same evaluated cost (${tieBids[0].evaluatedCost}), so the same combined score:`);
 const tie = success('rankTender on three tied bids', T.rankTender({ bids: clone(tieBids), technicalWeight: 0.7, priceMethod: 'lowest-ratio', technicalMethod: 'relative' }));
 w();
 table(['rank (engine)', 'bid', 'received (stated)', 'combined score', 'tieBrokenBy (engine)'], tie.bids.map((b) => [S(b.rank), b.id, b.receivedAt, f6(b.combinedScore), S(b.tieBrokenBy)]));
 must('the tie goes to the earlier receipt, then the id', tie.bids.map((b) => b.id).join() === 'T1,T2,T3' && tie.bids[1].tieBrokenBy === 'bidder id' && tie.bids[2].tieBrokenBy === 'earlier receipt', tie.bids.map((b) => `${b.id}:${b.tieBrokenBy}`).join());
 w();
 w('T1 and T2 were received at the same second, so the bidder id decides them; T3 was received later. tieBrokenBy names the rule that ordered each row against the row above it (null on the first row). ' + refCap('boundaries') + ' shows two figures that differ only past the twelfth significant digit, which tie.');
-const tieCost = success('rankTender on two bids tied on the combined score with different costs', T.rankTender({ bids: [{ id: 'U2', technicalPercent: 100, evaluatedCost: 1000, receivedAt: '2027-05-01T09:00:00Z' }, { id: 'U1', technicalPercent: 50, evaluatedCost: 500, receivedAt: '2027-05-01T10:00:00Z' }], technicalWeight: 0.5, priceMethod: 'lowest-ratio', technicalMethod: 'relative' }));
+// stated
+const TIE_COST = { bids: [{ id: 'U2', technicalPercent: 100, evaluatedCost: 1000, receivedAt: '2027-05-01T09:00:00Z' }, { id: 'U1', technicalPercent: 50, evaluatedCost: 500, receivedAt: '2027-05-01T10:00:00Z' }], technicalWeight: 0.5, priceMethod: 'lowest-ratio', technicalMethod: 'relative' };
+const tieCost = success('rankTender on two bids tied on the combined score with different costs', T.rankTender(clone(TIE_COST)));
 w();
-w(`When the combined scores tie and the evaluated costs differ, the lower evaluated cost ranks first (stated: U2 with T 100 and C 1000, U1 with T 50 and C 500, technical weight 0.5, both score ${f6(tieCost.bids[0].combinedScore)}): the engine ranks ${list(tieCost.bids.map((b) => b.id))}, tieBrokenBy "${tieCost.bids[1].tieBrokenBy}".`);
+w(`When the combined scores tie and the evaluated costs differ, the lower evaluated cost ranks first (stated: ${TIE_COST.bids.map((b) => `${b.id} with T ${b.technicalPercent} and C ${b.evaluatedCost}`).join(', ')}, technical weight ${TIE_COST.technicalWeight}, both score ${f6(tieCost.bids[0].combinedScore)}): the engine ranks ${list(tieCost.bids.map((b) => b.id))}, tieBrokenBy "${tieCost.bids[1].tieBrokenBy}".`);
 must('equal combined scores go to the lower evaluated cost', tieCost.bids[0].id === 'U1' && tieCost.bids[1].tieBrokenBy === 'lower evaluated cost' && tieCost.bids[0].combinedScore === tieCost.bids[1].combinedScore, tieCost.bids.map((b) => b.id).join());
 
 /* ============================================================ SECTION 11 */
@@ -763,7 +779,7 @@ w();
 w(`Lowest evaluated cost (engine): ${msEc.lowestEvaluatedCost}.`);
 w();
 const DF = [1, 2, 3, 4, 5].map((t) => 1 / (1 + MS.lifeCycle.discountRate) ** t);
-w('THE DISCOUNTING, year by year. Each year\'s cost is discounted to the award date at the end of its year: factor 1 / (1 + 0.1) raised to the year (derived, stated arithmetic):');
+w(`THE DISCOUNTING, year by year. Each year's cost is discounted to the award date at the end of its year: factor 1 / (1 + ${MS.lifeCycle.discountRate}) raised to the year (derived, stated arithmetic):`);
 w();
 table(['year', 'factor (derived)', 'MS4 valve maintenance (fixture)', 'discounted (derived)'], DF.map((d, i) => [S(i + 1), f6(d), f6(7000), f6(7000 * d)]));
 const ms4 = msEc.bids.find((b) => b.id === 'MS4');
@@ -780,28 +796,31 @@ w();
 w(`On this tender the order is the same both ways (checked); the life cycle adds between ${f6(Math.min(...msEc.bids.map((b) => b.lifeCycleCost)))} and ${f6(Math.max(...msEc.bids.map((b) => b.lifeCycleCost)))} to a bid, and the gap between MS4 and MS2 narrows from ${f6(msNoLc.bids[1].evaluatedCost - msNoLc.bids[0].evaluatedCost)} to ${f6(msEc.bids[1].evaluatedCost - msEc.bids[0].evaluatedCost)} (derived, second row less first).`);
 must('the gap narrows with the life cycle', msEc.bids[1].evaluatedCost - msEc.bids[0].evaluatedCost < msNoLc.bids[1].evaluatedCost - msNoLc.bids[0].evaluatedCost && msNoLc.bids[0].id === 'MS4' && msNoLc.bids[1].id === 'MS2', 'gap');
 w();
-const RV = { lifeCycle: { years: 3, discountRate: 0.08 }, bids: [
+const RV_PROBE = { lifeCycle: { years: 3, discountRate: 0.08 }, bids: [
   { id: 'R1', receivedAt: '2027-06-01T09:00:00Z', lines: [{ id: 'unit', quantity: 1, unitRate: 20000, quotedAmount: 20000 }], annualCosts: [1500, 1500, 1500], residualValue: 4000 },
   { id: 'R2', receivedAt: '2027-06-01T10:00:00Z', lines: [{ id: 'unit', quantity: 1, unitRate: 20000, quotedAmount: 20000 }], annualCosts: [1500, 1500, 1500] },
 ] };
-const rv = success('evaluatedCosts with a residual value', T.evaluatedCosts(clone(RV)));
+const rv = success('evaluatedCosts with a residual value', T.evaluatedCosts(clone(RV_PROBE)));
+const RVY = RV_PROBE.lifeCycle.years; const RVR = RV_PROBE.lifeCycle.discountRate; const RVV = RV_PROBE.bids[0].residualValue;
 const r1 = rv.bids.find((b) => b.id === 'R1'); const r2 = rv.bids.find((b) => b.id === 'R2');
-w('RESIDUAL VALUE is credited in the last year. Two stated bids, identical but for a residual value of 4000 on R1 (life cycle 3 years at 0.08; annual costs 1500 a year):');
+w(`RESIDUAL VALUE is credited in the last year. Two stated bids, identical but for a residual value of ${RVV} on R1 (life cycle ${RVY} years at ${RVR}; annual costs ${RV_PROBE.bids[0].annualCosts[0]} a year):`);
 w();
 table(['bid', 'life-cycle cost (engine)', 'evaluated cost (engine)'], [[r1.id, f6(r1.lifeCycleCost), f6(r1.evaluatedCost)], [r2.id, f6(r2.lifeCycleCost), f6(r2.evaluatedCost)]]);
-must('the residual value lowers the life-cycle cost by its value discounted three years', nearly(r2.lifeCycleCost - r1.lifeCycleCost, 4000 / 1.08 ** 3), r2.lifeCycleCost - r1.lifeCycleCost);
+must('the residual value lowers the life-cycle cost by its value discounted three years', nearly(r2.lifeCycleCost - r1.lifeCycleCost, RVV / (1 + RVR) ** RVY), r2.lifeCycleCost - r1.lifeCycleCost);
 w();
-w(`The difference, ${f6(r2.lifeCycleCost - r1.lifeCycleCost)} (derived), is 4000 / 1.08^3: the residual value is taken off year 3's cost before discounting (checked).`);
+w(`The difference, ${f6(r2.lifeCycleCost - r1.lifeCycleCost)} (derived), is ${RVV} / ${1 + RVR}^${RVY}: the residual value is taken off year ${RVY}'s cost before discounting (checked).`);
 w();
-w(`THE OMISSION ON THIS TENDER. MS4 omits the inspection line. The other responsive bids price it (fixture): MS1 ${f6(12000)}, MS2 ${f6(9500)}, MS3 ${f6(14500)}; MS5 failed the pass mark and does not price it. The average the engine adds: ${f6(ms4.omissions[0].amount)}. The omission rule decides this award; ${ref('whole')} runs the same tender under the other rule the engine accepts.`);
-must('the MS4 omission is the average of MS1, MS2 and MS3', ms4.omissions[0].amount === 12000 && ms4.omissions[0].rule === 'average', ms4.omissions[0].amount);
+w(`THE OMISSION ON THIS TENDER. MS4 omits the inspection line. The other responsive bids price it (fixture): ${list(msEc.bids.filter((b) => b.id !== 'MS4').map((b) => `${b.id} ${f6(MS.bids.find((x) => x.id === b.id).lines.find((l) => l.id === 'inspection').quotedAmount)}`))}; MS5 failed the pass mark and does not price it. The average the engine adds: ${f6(ms4.omissions[0].amount)}. The omission rule decides this award; ${ref('whole')} runs the same tender under the other rule the engine accepts.`);
+must('the MS4 omission is the average of MS1, MS2 and MS3', nearly(ms4.omissions[0].amount, sum(msEc.bids.filter((b) => b.id !== 'MS4').map((b) => MS.bids.find((x) => x.id === b.id).lines.find((l) => l.id === 'inspection').quotedAmount)) / 3) && ms4.omissions[0].rule === 'average', ms4.omissions[0].amount);
 
 /* ============================================================ SECTION 12 */
 
 section('band', 'The Rated Criteria weighting band, linear price scoring and the ranking paradox', ['Professional m02']);
 const bandRow = (risk, cost, tw) => success(`weightingBand ${risk} ${cost} ${tw}`, T.weightingBand({ risk, estimatedCostUsd: cost, ...(tw === undefined ? {} : { technicalWeight: tw }) }));
-const cells = [['high', 12000000], ['high', 900000], ['low', 12000000], ['low', 900000]].map(([r, c]) => [r, c, bandRow(r, c)]);
-w('THE MATRIX of the World Bank Procurement Regulations para 5.50: the weight of the Rated Criteria depends on the procurement risk and on whether the contract is high value (stated estimated costs: US$12000000 and US$900000):');
+const BIG = 12000000;
+const SMALL = WS.award.estimatedCostUsd;
+const cells = [['high', BIG], ['high', SMALL], ['low', BIG], ['low', SMALL]].map(([r, c]) => [r, c, bandRow(r, c)]);
+w(`THE MATRIX of the World Bank Procurement Regulations para 5.50: the weight of the Rated Criteria depends on the procurement risk and on whether the contract is high value (stated estimated costs: US$${BIG} and US$${SMALL}):`);
 w();
 table(['risk (stated)', 'estimated cost (stated)', 'cell (engine)', 'high value (engine)', 'weighting range (engine)', 'the engine\'s rule, verbatim'], cells.map(([r, c, b]) => [r, S(c), b.cell, S(b.highValue), `${f6(b.min)} to ${f6(b.max)}`, b.basis.rule]));
 must('the four cells are a, b, c, d', cells.map((x) => x[2].cell).join() === 'a,b,c,d', cells.map((x) => x[2].cell).join());
@@ -811,17 +830,19 @@ w(`THE HIGH-VALUE LINE. At exactly US$${D.HIGH_VALUE_USD} a contract is high val
 must('the high-value line is inclusive', at10.highValue === true && below10.highValue === false, `${at10.highValue} ${below10.highValue}`);
 w();
 const inB = bandRow('high', WS.award.estimatedCostUsd, WS.award.technicalWeight);
-const edge = bandRow('high', 12000000, 0.5);
-const outB = bandRow('low', 900000, 0.35);
+const EDGE_TW = 0.5;
+const OUT_TW = 0.35;
+const edge = bandRow('high', BIG, EDGE_TW);
+const outB = bandRow('low', SMALL, OUT_TW);
 w('A STATED TECHNICAL WEIGHT against its range (both ends inside). The engine\'s reasons, verbatim:');
 table(['risk', 'estimated cost', 'technical weight (stated)', 'within band (engine)', 'reason (engine)'], [
   ['high', S(WS.award.estimatedCostUsd), S(WS.award.technicalWeight), S(inB.withinBand), inB.reason],
-  ['high', '12000000', '0.5', S(edge.withinBand), edge.reason],
-  ['low', '900000', '0.35', S(outB.withinBand), outB.reason],
+  ['high', S(BIG), S(EDGE_TW), S(edge.withinBand), edge.reason],
+  ['low', S(SMALL), S(OUT_TW), S(outB.withinBand), outB.reason],
 ]);
 must('the well services weight 0.7 is inside cell b, 0.5 sits on the edge of a, 0.35 is outside d', inB.withinBand && inB.cell === 'b' && edge.withinBand && !outB.withinBand, `${inB.withinBand} ${edge.withinBand} ${outB.withinBand}`);
 w();
-w('The well services tender (high risk, US$900000, technical weight 0.7) sits inside its cell.');
+w(`The well services tender (high risk, US$${SMALL}, technical weight ${TW}) sits inside its cell.`);
 w();
 const lin = success('rankTender on the well services tender, linear price scoring', T.rankTender({ ...clone(RANK_WS), priceMethod: 'linear' }));
 w(`LINEAR PRICE SCORING. The engine's second price method, 'linear', scores ${lin.basis.commercial.replace(/^Sc = /, 'Sc = ')}; source (engine): ${lin.basis.source}. On the well services bids (everything else as the fixture):`);
@@ -830,11 +851,11 @@ table(['rank', 'bid', 'Sc lowest-ratio', 'Sc linear', 'B lowest-ratio', 'B linea
 must('linear gives the dearest bid 0 and the cheapest 100', lin.bids.find((b) => b.evaluatedCost === lin.cMax).commercialScore === 0 && lin.bids.find((b) => b.evaluatedCost === lin.cMin).commercialScore === 100, 'ends');
 must('the price method changes the award on this tender: WS3 under lowest-ratio, WS5 under linear', wsRank.mostAdvantageous === 'WS3' && lin.mostAdvantageous === 'WS5', `${wsRank.mostAdvantageous} ${lin.mostAdvantageous}`);
 w();
-w(`Under 'linear' the dearest responsive bid scores 0 and the cheapest 100, so the same price spread moves the commercial score further. On this tender the price method changes the award: the most advantageous bid (engine) is ${wsRank.mostAdvantageous} under 'lowest-ratio' and ${lin.mostAdvantageous} under 'linear', with the technical weight, the technical method and the bids unchanged.`);
+w(`Under 'linear' the dearest responsive bid scores ${f6(lin.bids.find((b) => b.evaluatedCost === lin.cMax).commercialScore)} and the cheapest ${f6(lin.bids.find((b) => b.evaluatedCost === lin.cMin).commercialScore)}, so the same price spread moves the commercial score further. On this tender the price method changes the award: the most advantageous bid (engine) is ${wsRank.mostAdvantageous} under 'lowest-ratio' and ${lin.mostAdvantageous} under 'linear', with the technical weight, the technical method and the bids unchanged.`);
 w();
 const kk = success('rankTender Kiiver and Kodym lowest-ratio', T.rankTender(clone(PUB.kk('lowest-ratio'))));
 const kkl = success('rankTender Kiiver and Kodym linear', T.rankTender(clone(PUB.kk('linear'))));
-w('KIIVER AND KODYM (2015), TABLE 1 (stated from the source: three prices 50, 75 and 100; price only). The source prints the lowest-bid ratio scores to whole points:');
+w(`KIIVER AND KODYM (2015), TABLE 1 (stated from the source: three prices ${list(PUB.kk('linear').bids.map((b) => b.evaluatedCost))}; price only). The source prints the lowest-bid ratio scores to whole points:`);
 w();
 table(['bid', 'price (source)', 'lowest-ratio Sc (engine)', 'the source prints', 'linear Sc (engine)'], ['A', 'B', 'C'].map((id) => [id, S(PUB.kk('linear').bids.find((b) => b.id === id).evaluatedCost), f6(kk.bids.find((b) => b.id === id).commercialScore), S(PUB.kkPrinted[id]), f6(kkl.bids.find((b) => b.id === id).commercialScore)]));
 must('Kiiver and Kodym: 100, 66.666667, 50', kk.bids.map((b) => f6(b.commercialScore)).join() === '100.000000,66.666667,50.000000', kk.bids.map((b) => b.commercialScore).join());
@@ -842,7 +863,7 @@ w();
 const ch = success('rankTender Chen 2008', T.rankTender(clone(PUB.chen(false))));
 const chx = success('rankTender Chen 2008, A invalid', T.rankTender(clone(PUB.chen(true))));
 const gap = (r) => r.bids.find((b) => b.id === 'B').combinedScore - r.bids.find((b) => b.id === 'C').combinedScore;
-w('THE RANKING PARADOX, CHEN (2008) p. 409 (stated from the source: price score 50 x L / P on prices 40, 50 and 80; entered as technical weight 0.5 with every technical score 0, so B = 0.5 x 100 x Cmin / C):');
+w(`THE RANKING PARADOX, CHEN (2008) p. 409 (stated from the source: price score "50 x L / P" on prices ${list(PUB.chen(false).bids.map((b) => b.evaluatedCost))}; entered as technical weight ${PUB.chen(false).technicalWeight} with every technical score ${PUB.chen(false).bids[0].technicalPercent}, so B = ${PUB.chen(false).technicalWeight} x 100 x Cmin / C, which is Chen's "50 x L / P"):`);
 w();
 table(['bid', 'price (source)', 'B with A in the field (engine)', 'B with A declared invalid (engine)'], ['A', 'B', 'C'].map((id) => [id, S(PUB.chen(false).bids.find((b) => b.id === id).evaluatedCost), f6(ch.bids.find((b) => b.id === id).combinedScore), chx.bids.find((b) => b.id === id) ? f6(chx.bids.find((b) => b.id === id).combinedScore) : `excluded: ${chx.excluded[0].reason}`]));
 must('Chen: the B to C gap widens from 15 to 18.75', gap(ch) === 15 && gap(chx) === 18.75, `${gap(ch)} ${gap(chx)}`);
@@ -877,7 +898,7 @@ w();
 table(['bid', 'evaluated cost (source)', 'percent below the estimate (engine)', 'flag (engine)'], e2.bids.map((b) => [b.id, S(b.evaluatedCost), f6(b.belowEstimatePct), S(b.flag)]));
 must('Example 2: absolute, bids 1 and 2 flagged', e2.approach === 'absolute' && e2.flagged.join() === 'Bid 1,Bid 2', e2.flagged.join());
 w();
-w(`Flagged (engine): ${list(e2.flagged)}. The Guidance discusses Bid 1, the lowest; Bid 2 sits ${f6(e2.bids[1].belowEstimatePct)} percent below the estimate, which is 20 percent or more by the same rule, and the engine flags every bid the rule reaches. The engine's reasons, verbatim:`);
+w(`Flagged (engine): ${list(e2.flagged)}. The Guidance discusses ${e2.bids[0].id}, the lowest; ${e2.bids[1].id} sits ${f6(e2.bids[1].belowEstimatePct)} percent below the estimate, which is ${D.ALB_ABSOLUTE_PCT} percent or more by the same rule, and the engine flags every bid the rule reaches. The engine's reasons, verbatim:`);
 e2.bids.filter((b) => b.flag).forEach((b) => quote(b.reason));
 w();
 const wsAlb = success('abnormallyLow on the well services responsive bids against the should-cost estimate', T.abnormallyLow({ bids: wsEc.bids.map((b) => ({ id: b.id, evaluatedCost: b.evaluatedCost })), estimate: T.shouldCost(clone(SC_WS)).estimate }));
@@ -925,19 +946,21 @@ w();
 w('MEASURED UNITS are enforced. Valves are counted by number in the Schedule; a bid that reports them by tonnage is refused, verbatim:');
 quote(T.nigerianContent(mut(MS_NC_ARGS, (a) => { a.bids[0].items.valves.measure = 'tonnage'; })).error);
 w();
-const userT = success('nigerianContent with a user-stated target', T.nigerianContent({ items: [{ id: 'rig', scheduleLine: 'drilling-rigs-land' }, { id: 'catering', targetPct: 90, measure: 'man-hours', source: 'a level stated for this example by the course; no Board target was read' }], bids: [{ id: 'P1', items: { rig: { measure: 'man-hours', nigerian: 7000, total: 10000 }, catering: { measure: 'man-hours', nigerian: 1800, total: 2000 } } }, { id: 'P2', items: { rig: { measure: 'man-hours', nigerian: 6990, total: 10000 }, catering: { measure: 'man-hours', nigerian: 1790, total: 2000 } } }] }));
-w('A TARGET THE SCHEDULE DOES NOT LIST enters with its source stated (s.11(2) lets the Board set one). Two stated bids, one Schedule line (land rigs, 70% by man-hours) and one stated target (catering, 90% by man-hours):');
+const USER_T = { items: [{ id: 'rig', scheduleLine: 'drilling-rigs-land' }, { id: 'catering', targetPct: 90, measure: 'man-hours', source: 'a level stated for this example by the course; no Board target was read' }], bids: [{ id: 'B1', items: { rig: { measure: 'man-hours', nigerian: 7000, total: 10000 }, catering: { measure: 'man-hours', nigerian: 1800, total: 2000 } } }, { id: 'B2', items: { rig: { measure: 'man-hours', nigerian: 6990, total: 10000 }, catering: { measure: 'man-hours', nigerian: 1790, total: 2000 } } }] };
+const userT = success('nigerianContent with a user-stated target', T.nigerianContent(clone(USER_T)));
+w(`A TARGET THE SCHEDULE DOES NOT LIST enters with its source stated (s.11(2) lets the Board set one). Two stated bids, one Schedule line (land rigs, ${NCS['drilling-rigs-land'].ncPct}% by ${NCS['drilling-rigs-land'].measures[0]}) and one stated target (catering, ${USER_T.items[1].targetPct}% by ${USER_T.items[1].measure}):`);
 w();
 table(['bid', 'rig', 'catering', 'overall', 'items met'], ncRows(userT, ['rig', 'catering']));
 w();
 table(['item', 'target (engine)', 'its source, as the engine returns it'], userT.targets.map((t) => [t.id, `${t.targetPct}%`, t.source]));
-must('P1 meets both at exactly the minimum; P2 meets neither', userT.bids[0].allMet && userT.bids[0].items.every((x) => x.ncPct === x.targetPct) && userT.bids[1].itemsMet === 0, 'P1 P2');
+must('B1 meets both at exactly the minimum; B2 meets neither', userT.bids[0].allMet && userT.bids[0].items.every((x) => x.ncPct === x.targetPct) && userT.bids[1].itemsMet === 0, 'P1 P2');
 w();
-w('P1 sits exactly on both minimums and meets both; P2 sits below both. A stated target with no source is refused (' + ref('refusals') + ').');
+w('B1 sits exactly on both minimums and meets both; B2 sits below both. A stated target with no source is refused (' + ref('refusals') + ').');
 
 /* ============================================================ SECTION 15 */
 
-section('s14', 'Section 14: bids within 1 percent, the closest competitor, and two readings of at least 5% higher', ['Professional m05']);
+must('the s.14 title words match the engine constants', D.NC_PRICE_MARGIN_PCT === 1 && D.NC_LEAD_PCT === 5, `${D.NC_PRICE_MARGIN_PCT} ${D.NC_LEAD_PCT}`);
+section('s14', 'Section 14: bids within one percent, the closest competitor, and two readings of at least five percent higher', ['Professional m05']);
 w(`THE ACT, s.14, as the engine states it: a bid whose evaluated cost is within ${D.NC_PRICE_MARGIN_PCT}% of the lowest at the commercial stage joins a group; with two or more in the group, the bid with the highest Nigerian content is selected provided its content is at least ${D.NC_LEAD_PCT}% higher than its closest competitor's.`);
 w();
 w('THE ACT DOES NOT SAY whether "at least 5% higher" means five percentage points or five percent of the competitor\'s content. The engine has no default: `ncLeadBasis` must be stated, and every s.14 reason prints the three readings it applied. This course presents both readings side by side, as an open question of the Act, and states the reading beside every figure that depends on it.');
@@ -972,48 +995,51 @@ w();
 w('THE RULE AT ITS EDGES, on stated bids (each call names its reading):');
 const s14 = (label, basis, bids) => success(`contentPreference ${label}`, T.contentPreference({ ncLeadBasis: basis, bids: bids.map(([id, c, nc]) => ({ id, evaluatedCost: c, ncPct: nc, receivedAt: '2027-06-01T09:00:00Z' })) }));
 const EDGE = [
-  ['exactly 1 percent above the lowest', 'points', [['LO', 2000000, 50], ['E1', 2020000, 56]]],
-  ['one unit more than 1 percent above', 'points', [['LO', 2000000, 50], ['E2', 2020001, 90]]],
-  ['a lead of exactly 5 points', 'points', [['LO', 2000000, 70], ['P5', 2010000, 75]]],
-  ['a lead of 4 points, read as points', 'points', [['LO', 2000000, 80], ['P4', 2010000, 84]]],
-  ['the same 4 points, read as relative (exactly 5 percent of 80)', 'relative', [['LO', 2000000, 80], ['P4', 2010000, 84]]],
+  ['exactly the margin above the lowest', 'points', [['LO', 2000000, 50], ['E1', 2020000, 56]]],
+  ['one unit more than the margin above', 'points', [['LO', 2000000, 50], ['E2', 2020001, 90]]],
+  ['a lead of exactly the stated points', 'points', [['LO', 2000000, 70], ['K5', 2010000, 75]]],
+  ['a lead one point short, read as points', 'points', [['LO', 2000000, 80], ['K4', 2010000, 84]]],
+  ['the same lead, read as relative (exactly the stated percent of the runner-up)', 'relative', [['LO', 2000000, 80], ['K4', 2010000, 84]]],
   ['a shared highest content', 'points', [['LO', 2000000, 40], ['S1', 2005000, 65], ['S2', 2010000, 65]]],
-  ['a runner-up at 0, read as relative', 'relative', [['LO', 2000000, 0], ['Z1', 2004000, 30]]],
+  ['a runner-up at no content, read as relative', 'relative', [['LO', 2000000, 0], ['Z1', 2004000, 30]]],
   ['the lowest also leads', 'points', [['LO', 2000000, 88], ['L2', 2006000, 70], ['L3', 2012000, 75]]],
 ];
 const edgeRows = EDGE.map(([label, basis, bids]) => { const r = s14(label, basis, bids); return [label, basis, bids.map(([id, c, nc]) => `${id} ${c} at ${nc}%`).join('; '), r.section14.group.join(', '), S(r.section14.lead === null ? 'null' : f6(r.section14.lead)), S(r.section14.applied), r.selected, r]; });
 table(['case (stated)', 'reading', 'bids: evaluated cost at content', 'group', 'lead', 'applied', 'selected'], edgeRows.map((x) => x.slice(0, 7)));
 const er = Object.fromEntries(edgeRows.map((x) => [x[0], x[7]]));
-must('exactly 1 percent is in the group', er['exactly 1 percent above the lowest'].section14.group.length === 2, 'in');
-must('one unit more is out', er['one unit more than 1 percent above'].section14.group.length === 1 && !er['one unit more than 1 percent above'].section14.engaged, 'out');
-must('exactly 5 points applies', er['a lead of exactly 5 points'].section14.applied && er['a lead of exactly 5 points'].selected === 'P5', 'P5');
-must('4 points does not apply as points and applies as relative', !er['a lead of 4 points, read as points'].section14.applied && er['the same 4 points, read as relative (exactly 5 percent of 80)'].section14.applied, '4 points');
+must('exactly 1 percent is in the group', er['exactly the margin above the lowest'].section14.group.length === 2, 'in');
+must('one unit more is out', er['one unit more than the margin above'].section14.group.length === 1 && !er['one unit more than the margin above'].section14.engaged, 'out');
+must('exactly 5 points applies', er['a lead of exactly the stated points'].section14.applied && er['a lead of exactly the stated points'].selected === 'K5', 'K5');
+must('4 points does not apply as points and applies as relative', !er['a lead one point short, read as points'].section14.applied && er['the same lead, read as relative (exactly the stated percent of the runner-up)'].section14.applied, '4 points');
 must('a shared top is not a single leader', er['a shared highest content'].section14.leader === null && er['a shared highest content'].selected === 'LO', 'shared');
-must('a zero runner-up gives a null lead and applies', er['a runner-up at 0, read as relative'].section14.lead === null && er['a runner-up at 0, read as relative'].section14.applied, 'zero');
+must('a zero runner-up gives a null lead and applies', er['a runner-up at no content, read as relative'].section14.lead === null && er['a runner-up at no content, read as relative'].section14.applied, 'zero');
 must('the lowest also leading is confirmed', er['the lowest also leads'].selected === 'LO' && er['the lowest also leads'].section14.applied, 'confirm');
 w();
 w('The engine\'s reasons for four of these, verbatim (each reason also carries the three readings, shortened here after its opening words "(readings of s.14:"):');
-['one unit more than 1 percent above', 'a shared highest content', 'a runner-up at 0, read as relative', 'the lowest also leads'].forEach((k) => quote(`${k}: ${er[k].section14.reason.split(' (readings of s.14:')[0]} (readings of s.14: ...)`));
-must('every s.14 reason carries its readings', edgeRows.every((x) => x[7].section14.reason.includes('(readings of s.14: "within 1 % of each other at commercial stage" is read as within 1% of the lowest evaluated cost;')), 'readings');
+['one unit more than the margin above', 'a shared highest content', 'a runner-up at no content, read as relative', 'the lowest also leads'].forEach((k) => quote(`${k}: ${er[k].section14.reason.split(' (readings of s.14:')[0]} (readings of s.14: ...)`));
+must('every s.14 reason carries its readings', edgeRows.every((x) => x[7].section14.reason.includes('\x28readings of s.14: "within 1 % of each other at commercial stage" is read as within 1% of the lowest evaluated cost;')), 'readings');
 w();
-w('A shared highest content means no single bid "contains the highest level", so s.14 is engaged and selects nothing: the lowest evaluated cost stands. A runner-up at 0 percent makes the relative lead a division by 0, and the engine returns the lead as null while any positive content is more than 5% higher by any reading.');
+w(`A shared highest content means no single bid "contains the highest level", so s.14 is engaged and selects nothing: the lowest evaluated cost stands. A runner-up with no Nigerian content makes the relative lead a division by zero, and the engine returns the lead as null while any positive content is more than ${D.NC_LEAD_PCT}% higher by any reading.`);
 
 /* ============================================================ SECTION 16 */
 
-section('s16', 'Section 16: an indigenous company within 10 percent, content in a combined award, and the materials award end to end', ['Professional m06']);
+must('the s.16 title word matches the engine constant', D.INDIGENOUS_MARGIN_PCT === 10, D.INDIGENOUS_MARGIN_PCT);
+section('s16', 'Section 16: an indigenous company within ten percent, content in a combined award, and the materials award end to end', ['Professional m06']);
 w(`THE ACT, s.16, as the engine states it: ${prefPts.basis.section16}. It protects a Nigerian indigenous company with capacity from exclusion solely on price; it never selects a bid. "Indigenous" and "capacity" are stated by the caller for each bid.`);
 w();
 const s16 = prefRel.section16;
 table(['bid', 'above the lowest, percent (engine)', 'within the margin (engine)', 'reason (engine), verbatim'], s16.map((x) => [x.id, f6(x.abovePct), S(x.withinMargin), x.reason]));
 must('MS3 is the only indigenous company with capacity and sits within 10 percent', s16.length === 1 && s16[0].id === 'MS3' && s16[0].withinMargin, JSON.stringify(s16));
 w();
-const s16e = success('contentPreference s.16 edges', T.contentPreference({ ncLeadBasis: 'points', bids: [
+const S16_PROBE = { ncLeadBasis: 'points', bids: [
   { id: 'LO', evaluatedCost: 3000000, ncPct: 40, receivedAt: '2027-06-01T09:00:00Z' },
   { id: 'I10', evaluatedCost: 3300000, ncPct: 95, receivedAt: '2027-06-01T09:00:00Z', indigenous: true, capacity: true },
   { id: 'I11', evaluatedCost: 3300001, ncPct: 95, receivedAt: '2027-06-01T09:00:00Z', indigenous: true, capacity: true },
   { id: 'NC', evaluatedCost: 3100000, ncPct: 95, receivedAt: '2027-06-01T09:00:00Z', indigenous: true, capacity: false },
-] }));
-w('AT THE MARGIN (stated bids: the lowest at 3000000; I10 at 3300000, exactly 10 percent above; I11 one unit more; NC within the margin but without capacity):');
+] };
+const s16e = success('contentPreference s.16 edges', T.contentPreference(clone(S16_PROBE)));
+const s16c = (id) => S16_PROBE.bids.find((b) => b.id === id).evaluatedCost;
+w(`AT THE MARGIN (stated bids: the lowest at ${s16c('LO')}; I10 at ${s16c('I10')}, exactly ${D.INDIGENOUS_MARGIN_PCT} percent above; I11 one unit more; NC within the margin but without capacity):`);
 w();
 table(['bid', 'above the lowest, percent (engine)', 'within the margin (engine)'], s16e.section16.map((x) => [x.id, f6(x.abovePct), S(x.withinMargin)]));
 must('exactly 10 percent is protected, one unit more is not, and no capacity means no row', s16e.section16.map((x) => `${x.id}:${x.withinMargin}`).join() === 'I10:true,I11:false', s16e.section16.map((x) => `${x.id}:${x.withinMargin}`).join());
@@ -1077,15 +1103,17 @@ w(`The engine's overrun basis, verbatim: ${ct.basis.overrun}. Each row adds to t
 w();
 w('- Under the lump sum the company pays nothing above its planned payment; the contractor absorbs the whole overrun, and its margin goes negative in ' + f6(ct.types.lumpSum.contractorMargin.probabilityOfLoss) + ' of the iterations.');
 w('- Under the day rate the company pays for the extra days at the day rate and the contractor absorbs the rest: a daily cost above plan, and the gap between its daily cost and the day rate on the extra days.');
-w('- Under cost plus 12 percent the company pays the whole overrun and 12 percent on top of it, so its share is ' + f6(ct.types.reimbursable.overrun.companyShare) + ' and the contractor\'s part is negative: the contractor earns more when the job overruns. Its probability of a loss is ' + f6(ct.types.reimbursable.contractorMargin.probabilityOfLoss) + '.');
+w(`- Under cost plus ${100 * C.reimbursable.feeFraction} percent the company pays the whole overrun and ${100 * C.reimbursable.feeFraction} percent on top of it, so its share is ` + f6(ct.types.reimbursable.overrun.companyShare) + ' and the contractor\'s part is negative: the contractor earns more when the job overruns. Its probability of a loss is ' + f6(ct.types.reimbursable.contractorMargin.probabilityOfLoss) + '.');
 must('reimbursable: no loss', ct.types.reimbursable.contractorMargin.probabilityOfLoss === 0, ct.types.reimbursable.contractorMargin.probabilityOfLoss);
 w();
-const ctFlat = success('contractTypes with every input constant', T.contractTypes({ duration: 10, dailyCost: 40000, fixedCost: 100000, lumpSum: { price: 500000 }, dayRate: { rate: 50000, mobilisationFee: 0 }, reimbursable: { fixedFee: 0 }, iterations: 10, seed: 1 }));
-w(`WITH NOTHING UNCERTAIN (stated: 10 days, 40000 a day, fixed cost 100000; lump sum 500000; day rate 50000 with no mobilisation fee; reimbursable at cost plus a fixed fee of 0; 10 iterations, seed 1) nothing is drawn, no iteration overruns (probability ${f6(ctFlat.overrun.probability)}), and the reimbursable margin is exactly ${f6(ctFlat.types.reimbursable.contractorMargin.mean)} with a probability of a loss of ${f6(ctFlat.types.reimbursable.contractorMargin.probabilityOfLoss)}: a margin of exactly 0 is not a loss. The engine's sampling basis, verbatim: ${ctFlat.basis.sampling}.`);
+const CT_FLAT = { duration: 10, dailyCost: 40000, fixedCost: 100000, lumpSum: { price: 500000 }, dayRate: { rate: 50000, mobilisationFee: 0 }, reimbursable: { fixedFee: 0 }, iterations: 10, seed: 1 };
+const ctFlat = success('contractTypes with every input constant', T.contractTypes(clone(CT_FLAT)));
+w(`WITH NOTHING UNCERTAIN (stated: ${CT_FLAT.duration} days, ${CT_FLAT.dailyCost} a day, fixed cost ${CT_FLAT.fixedCost}; lump sum ${CT_FLAT.lumpSum.price}; day rate ${CT_FLAT.dayRate.rate} with no mobilisation fee; reimbursable at cost plus a fixed fee of ${CT_FLAT.reimbursable.fixedFee}; ${CT_FLAT.iterations} iterations, seed ${CT_FLAT.seed}) nothing is drawn, no iteration overruns (probability ${f6(ctFlat.overrun.probability)}), and the reimbursable margin is exactly ${f6(ctFlat.types.reimbursable.contractorMargin.mean)} with a probability of a loss of ${f6(ctFlat.types.reimbursable.contractorMargin.probabilityOfLoss)}: a margin of exactly ${f6(ctFlat.types.reimbursable.contractorMargin.mean)} is not a loss. The engine's sampling basis, verbatim: ${ctFlat.basis.sampling}.`);
 must('constant inputs: no overrun, zero margin is not a loss, and no draw', ctFlat.overrun.probability === 0 && ctFlat.types.reimbursable.contractorMargin.mean === 0 && ctFlat.types.reimbursable.contractorMargin.probabilityOfLoss === 0 && /constant: no draw/.test(ctFlat.basis.sampling), ctFlat.basis.sampling);
 
 /* ============================================================ SECTION 18 */
 
+const PCT_P90 = Number(PCT.EXCEEDANCE_DEFINITION.match(/a (\d+)% probability/)[1]);
 section('percentiles', 'Cost percentiles and their labels: the exceedance definition and the low-cost P90', ['Expert m02']);
 w(`THE DEFINITION, from lib/conventions/percentile.js, verbatim: ${ct.percentileDefinition}`);
 must('the definition is the exported one', ct.percentileDefinition === PCT.EXCEEDANCE_DEFINITION, ct.percentileDefinition);
@@ -1093,7 +1121,7 @@ w();
 w(`THE ENGINE'S PERCENTILE BASIS, verbatim: ${ct.basis.percentiles}.`);
 must('the basis states the reversal for a cost', /for a cost P90 is the LOW cost \(10th percentile\) and P10 the HIGH cost \(90th percentile\)/.test(ct.basis.percentiles), ct.basis.percentiles);
 w();
-w('For a COST, a 90% probability of meeting or exceeding a value makes that value a LOW cost: nine iterations in ten cost at least that much. So the P90 cost is the smaller figure and the P10 cost the larger. A reader who takes P90 to name the high cost reads every cost percentile here backwards. The engine follows the platform convention and prints the definition beside every cost percentile. On the well services contract types (engine):');
+w(`For a COST, a ${PCT_P90}% probability of meeting or exceeding a value makes that value a LOW cost: nine iterations in ten cost at least that much. So the P90 cost is the smaller figure and the P10 cost the larger. A reader who takes P90 to name the high cost reads every cost percentile here backwards. The engine follows the platform convention and prints the definition beside every cost percentile. On the well services contract types (engine):`);
 w();
 table(['contract type', 'P90 (low)', 'P50', 'P10 (high)', 'P90 at or below P50 at or below P10'], TY.map((t) => { const c = ct.types[t].companyCost; return [TYN[t], f6(c.p90), f6(c.p50), f6(c.p10), S(c.p90 <= c.p50 && c.p50 <= c.p10)]; }));
 TY.forEach((t) => { const c = ct.types[t].companyCost; must(`${t}: exceedance order`, c.p90 <= c.p50 && c.p50 <= c.p10, `${c.p90} ${c.p50} ${c.p10}`); });
@@ -1101,7 +1129,8 @@ must('the lump sum percentiles are one figure', ct.types.lumpSum.companyCost.p90
 w();
 w(`The lump sum is the same at every percentile: the company pays ${f6(ct.types.lumpSum.companyCost.p50)} whatever happens. The day rate and the reimbursable contract spread from their P90 to their P10.`);
 w();
-w(`THE INDEX RULE. lib/stats basicStats sorts the ${C.iterations} values and reads P90 at index floor(0.1 x ${C.iterations}) = ${Math.floor(0.1 * C.iterations)}, P50 at ${Math.floor(0.5 * C.iterations)} and P10 at ${Math.floor(0.9 * C.iterations)} (counting from 0): no interpolation.`);
+const IDX = Object.fromEntries(['P90', 'P50', 'P10'].map((k) => [k.toLowerCase(), Number(ct.basis.percentiles.match(new RegExp(`${k} = (?:index )?floor\\x28([\\d.]+) n\\x29`))[1])]));
+w(`THE INDEX RULE. lib/stats basicStats sorts the ${C.iterations} values and reads P90 at index floor(${IDX.p90} x ${C.iterations}) = ${Math.floor(IDX.p90 * C.iterations)}, P50 at ${Math.floor(IDX.p50 * C.iterations)} and P10 at ${Math.floor(IDX.p10 * C.iterations)} (the first sorted value is index ${0}), the fractions read from the engine's basis: no interpolation.`);
 w();
 w(`THE PLAN, THE MEAN AND THE PERCENTILES are three different figures. On the day rate the planned payment is ${f6(ct.types.dayRate.plannedPayment)}, the mean company cost ${f6(ct.types.dayRate.companyCost.mean)} and the P50 ${f6(ct.types.dayRate.companyCost.p50)} (engine). The plan is built from the modes; the triangular NPT fraction has a long upper tail (mode ${C.duration.nptFrac.mode}, max ${C.duration.nptFrac.max}), so ${f6(ct.overrun.probability)} of the iterations overrun the plan.`);
 must('the day-rate mean and P50 both sit above the planned payment', ct.types.dayRate.companyCost.mean > ct.types.dayRate.plannedPayment && ct.types.dayRate.companyCost.p50 > ct.types.dayRate.plannedPayment, 'plan');
@@ -1133,15 +1162,17 @@ w();
 table(['bid', 'evaluated cost', 'ratio to the estimate (engine)', 'flag (engine)'], sc.bids.map((b) => [b.id, f6(b.evaluatedCost), f6(b.ratio), S(b.flag)]));
 must('no well services bid is flagged by the band', sc.bids.every((b) => b.flag === null), 'none');
 w();
-const bandEdge = success('shouldCost band edges', T.shouldCost({ program: [{ id: 'job', kind: 'flat', durationHr: 120 }], items: [{ id: 'spread', basis: 'per-day', rate: 20000, category: 'intangible' }], band: { low: 0.8, high: 1.25 }, bids: [{ id: 'AT-LOW', evaluatedCost: 80000 }, { id: 'BELOW', evaluatedCost: 79999 }, { id: 'AT-HIGH', evaluatedCost: 125000 }, { id: 'ABOVE', evaluatedCost: 125001 }] }));
-w(`AT THE BAND'S EDGES (stated: one flat activity of 120 hours, a spread at 20000 a day, estimate ${f6(bandEdge.estimate)}):`);
+const SC_EDGE = { program: [{ id: 'job', kind: 'flat', durationHr: 120 }], items: [{ id: 'spread', basis: 'per-day', rate: 20000, category: 'intangible' }], band: { low: 0.8, high: 1.25 }, bids: [{ id: 'AT-LOW', evaluatedCost: 80000 }, { id: 'BELOW', evaluatedCost: 79999 }, { id: 'AT-HIGH', evaluatedCost: 125000 }, { id: 'ABOVE', evaluatedCost: 125001 }] };
+const bandEdge = success('shouldCost band edges', T.shouldCost(clone(SC_EDGE)));
+w(`AT THE BAND'S EDGES (stated: one flat activity of ${SC_EDGE.program[0].durationHr} hours, a spread at ${SC_EDGE.items[0].rate} a day, estimate ${f6(bandEdge.estimate)}):`);
 w();
 table(['bid (stated)', 'evaluated cost', 'ratio (engine)', 'flag (engine)', 'reason (engine)'], bandEdge.bids.map((b) => [b.id, f6(b.evaluatedCost), f6(b.ratio), S(b.flag), S(b.reason)]));
 must('both band limits are inside', bandEdge.bids.map((b) => S(b.flag)).join() === 'null,below,null,above', bandEdge.bids.map((b) => b.flag).join());
 w();
-const scMore = success('shouldCost at a higher NPT', T.shouldCost({ ...clone(SC_WS), nptFrac: 0.25 }));
+const NPT_MORE = 0.25;
+const scMore = success('shouldCost at a higher NPT', T.shouldCost({ ...clone(SC_WS), nptFrac: NPT_MORE }));
 const perDay = SCF.items.filter((i) => i.basis === 'per-day').reduce((s, i) => s + i.rate, 0);
-w(`MORE NPT raises the estimate through the per-day items only. At a stated NPT fraction of 0.25 the engine returns ${f6(scMore.totalDays)} days and an estimate of ${f6(scMore.estimate)}; the rise, ${f6(scMore.estimate - sc.estimate)}, is (1 + contingency) x the per-day rates (${f6(perDay)} a day) x the extra days, ${f6(scMore.totalDays - sc.totalDays)} (derived, checked).`);
+w(`MORE NPT raises the estimate through the per-day items only. At a stated NPT fraction of ${NPT_MORE} the engine returns ${f6(scMore.totalDays)} days and an estimate of ${f6(scMore.estimate)}; the rise, ${f6(scMore.estimate - sc.estimate)}, is (1 + contingency) x the per-day rates (${f6(perDay)} a day) x the extra days, ${f6(scMore.totalDays - sc.totalDays)} (derived, checked).`);
 must('the NPT rise is the per-day items only', nearly(scMore.estimate - sc.estimate, (1 + SCF.contingencyFrac) * perDay * (scMore.totalDays - sc.totalDays), 1e-9), scMore.estimate - sc.estimate);
 w();
 w(`SHOULD-COST BESIDE THE ABNORMALLY LOW TEST. The band is the company's own screen. The World Bank's test for a low price is ${ref('alb')}'s, and with fewer than five responsive bids it needs a cost estimate: this one. The engine's band reason for a bid below the band says to examine it as a possibly abnormally low bid (verbatim above), and neither test rejects a bid on its own.`);
@@ -1164,8 +1195,8 @@ w();
 w('The chained technical and commercial objects are the same objects the separate calls return (checked).');
 w();
 table(['award basis (stated)', 'price method', 'award (engine)'], [
-  ['combined, technical weight 0.7', 'lowest-ratio', wsCombined.award],
-  ['combined, technical weight 0.7', 'linear', success('evaluateTender linear', T.evaluateTender({ ...clone(TENDER_WS), priceMethod: 'linear' })).award],
+  [`combined, technical weight ${TW}`, 'lowest-ratio', wsCombined.award],
+  [`combined, technical weight ${TW}`, 'linear', success('evaluateTender linear', T.evaluateTender({ ...clone(TENDER_WS), priceMethod: 'linear' })).award],
   ['lowest-cost', 'not used', wsLow.award],
 ]);
 w();
@@ -1178,12 +1209,14 @@ table(['omission rule', 'MS4 omission added (engine)', 'MS4 evaluated cost', 'MS
 w();
 w(`The rule decides the award. ${refCap('honest')} reads why the course grades only the cited rule.`);
 w();
-const nobody = success('evaluateTender with nobody passing', T.evaluateTender({ ...clone(TENDER_WS), passMark: 90 }));
-w(`WHEN NOBODY PASSES (stated: the well services tender at a pass mark of 90): award ${S(nobody.award)}, commercial ${S(nobody.commercial)}; reason (engine), verbatim: ${nobody.reason}.`);
+const PASS_HIGH = 90;
+const nobody = success('evaluateTender with nobody passing', T.evaluateTender({ ...clone(TENDER_WS), passMark: PASS_HIGH }));
+w(`WHEN NOBODY PASSES (stated: the well services tender at a pass mark of ${PASS_HIGH}): award ${S(nobody.award)}, commercial ${S(nobody.commercial)}; reason (engine), verbatim: ${nobody.reason}.`);
 must('nobody passing opens no envelope', nobody.award === null && nobody.commercial === null && nobody.technical.passed.length === 0, nobody.reason);
 w();
-const allLate = success('evaluateTender with every opened bid late', T.evaluateTender({ ...clone(TENDER_WS), schedule: { minWeeks: 2, maxWeeks: 5, ratePerWeek: 0.005 } }));
-w(`WHEN EVERY OPENED BID IS REJECTED AT THE COMMERCIAL STAGE (stated: the same tender with maxWeeks 5, so every passing bid is late): award ${S(allLate.award)}; reason (engine), verbatim: ${allLate.reason}. Each late bid's exclusion, verbatim:`);
+const LATE = { minWeeks: 2, maxWeeks: 5, ratePerWeek: 0.005 };
+const allLate = success('evaluateTender with every opened bid late', T.evaluateTender({ ...clone(TENDER_WS), schedule: clone(LATE) }));
+w(`WHEN EVERY OPENED BID IS REJECTED AT THE COMMERCIAL STAGE (stated: the same tender with maxWeeks ${LATE.maxWeeks}, so every passing bid is late): award ${S(allLate.award)}; reason (engine), verbatim: ${allLate.reason}. Each late bid's exclusion, verbatim:`);
 allLate.excluded.filter((x) => x.stage === 'commercial').forEach((x) => quote(`${x.id}: ${x.reason}`));
 must('every opened bid rejected leaves no award', allLate.award === null && allLate.commercial.bids.length === 0, allLate.reason);
 
@@ -1213,14 +1246,15 @@ w();
 w('A PRICE-SCORING METHOD WITH NO PUBLISHED FORMULA IS NOT OFFERED. Average-price scoring methods (a score that falls as a price moves away from the mean of the prices) are described and warned against by Kiiver and Kodym (2015) and by Chen (2008); neither prints a formula, and no text read does. The engine offers `lowest-ratio` (the World Bank\'s) and `linear` (the family Kiiver and Kodym describe) and refuses any other name, verbatim:');
 quote(T.rankTender({ ...clone(RANK_WS), priceMethod: 'mean-deviation' }).error);
 w();
-w('AN ERRATUM IN THE GUIDANCE. The World Bank Guidance, Annex 2, prints Company B\'s criterion scores as 12, 11 and 54 and its total as 82 (source). The printed scores sum to 77 (the engine\'s total on them, ' + ref('technical') + '), below the threshold of 80, so on its own printed scores B fails the threshold with A. The Guidance names only A as rejected. The outcome it states, C first, is the same either way:');
+const anB = an2.bids.find((x) => x.id === 'B');
+w(`AN ERRATUM IN THE GUIDANCE. The World Bank Guidance, Annex 2, prints Company B's criterion scores as ${list(Object.values(PUB.annex2.bids[1].scores))} and its total as ${PUB.annex2PrintedB} (source). The printed scores sum to ${anB.technicalPercent} (the engine's total on them, ${ref('technical')}), below the threshold of ${PUB.annex2.passMark}, so on its own printed scores B fails the threshold with A. The Guidance names only A as rejected. The outcome it states, C first, is the same either way:`);
 w();
-table(['company', 'printed scores (source)', 'total the Guidance prints (source)', 'total on the printed scores (engine)', 'status at 80 (engine)'], PUB.annex2.bids.map((b) => { const r = an2.bids.find((x) => x.id === b.id); return [b.id, Object.values(b.scores).join(', '), b.id === 'B' ? S(PUB.annex2PrintedB) : S(r.technicalPercent), f6(r.technicalPercent), r.status]; }));
+table(['company', 'printed scores (source)', 'total the Guidance prints (source)', 'total on the printed scores (engine)', `status at ${PUB.annex2.passMark} (engine)`], PUB.annex2.bids.map((b) => { const r = an2.bids.find((x) => x.id === b.id); return [b.id, Object.values(b.scores).join(', '), b.id === 'B' ? S(PUB.annex2PrintedB) : S(r.technicalPercent), f6(r.technicalPercent), r.status]; }));
 must('the erratum: printed 82, engine 77', an2.bids.find((x) => x.id === 'B').technicalPercent === 77 && PUB.annex2PrintedB === 82, 'erratum');
 w();
 w('A reader who finds a source that disagrees with itself records both figures and which one the engine uses; the course does the same.');
 w();
-w('PRINTED FIGURES AND EXACT FIGURES. The Guidance prints Figures X to XII to two decimals. None of its printed combined scores is the exact figure: some are truncated (the third decimal dropped) and some rounded up. Company C\'s technical figure is printed 68.33 in Figure X and 68.34 in Figure XII for the same quantity (source):');
+w(`PRINTED FIGURES AND EXACT FIGURES. The Guidance prints Figures X to XII to two decimals. None of its printed combined scores is the exact figure: some are truncated (the third decimal dropped) and some rounded up. Company C's technical figure is printed ${PUB.figXPrinted.technicalWeighted.C} in Figure X and ${PUB.figXPrinted.cFigXII} in Figure XII for the same quantity (source):`);
 w();
 const kind2 = (printed, exact) => (printed === Math.floor(exact * 100) / 100 ? 'truncated' : printed === Math.ceil(exact * 100) / 100 ? 'rounded up' : printed === exact ? 'exact' : 'other');
 const pxRows = fx.bids.map((b) => [b.id, f6(b.combinedScore), S(PUB.figXPrinted.combined[b.id]), f6(PUB.figXPrinted.combined[b.id] - b.combinedScore), kind2(PUB.figXPrinted.combined[b.id], b.combinedScore)]);
@@ -1230,7 +1264,7 @@ must('D and C are rounded up, B and A truncated', pxRows.map((r) => r[4]).join()
 w();
 w('Two figures that print alike at two decimals are not the same figure. A capstone field is quoted to six decimals as the panel prints it, and a printed source figure is quoted as the source prints it, labelled as the source\'s.');
 w();
-w('KIIVER AND KODYM\'S OWN LINE. Their text says that "under linear conditions" bid B would receive 75 points (source), which is the straight line drawn between A\'s 100 and C\'s 50. The engine\'s `linear` method gives the dearest bid 0, the family their text describes, so B scores ' + f6(kkl.bids.find((b) => b.id === 'B').commercialScore) + ' on it (' + ref('band') + '). The engine has no method that reproduces their 75, and the course does not claim one.');
+w(`KIIVER AND KODYM'S OWN LINE. Their text says that "under linear conditions" bid B would receive ${PUB.kkLinearPrinted} points (source), which is the straight line drawn between A's ${PUB.kkPrinted.A} and C's ${PUB.kkPrinted.C}. The engine's linear method gives the dearest bid ${f6(kkl.bids.find((b) => b.id === 'C').commercialScore)}, the family their text describes, so B scores ${f6(kkl.bids.find((b) => b.id === 'B').commercialScore)} on it (${ref('band')}). The engine has no method that reproduces their ${PUB.kkLinearPrinted}, and the course does not claim one.`);
 w();
 w('THE EDITIONS. The World Bank Regulations were read in their Seventh Edition (September 2025); the Sixth (February 2025) is superseded and none of the evaluation rules used here changed between them. The content Schedule is the 2010 Act\'s as enacted; any later Board target must be read and cited before it enters (' + ref('content') + ').');
 must('FINDINGS records the superseded sixth edition', /the 6th, February 2025, was also fetched and is superseded/.test(FINDINGS), 'sixth');
@@ -1240,62 +1274,68 @@ must('FINDINGS records the superseded sixth edition', /the 6th, February 2025, w
 section('boundaries', 'Boundaries, rule by rule, and the twelve-digit tie key', ['Expert m05']);
 w('Every rule the engine applies has its own boundary; no single rule covers them all. Each row below was probed by a call when this digest was built:');
 w();
-const wOk = T.technicalEvaluation(mut(TECH_WS, (a) => { a.criteria[4].weight = 10.0000000001; }));
-const wNo = T.technicalEvaluation(mut(TECH_WS, (a) => { a.criteria[4].weight = 10.000000002; }));
+const W_PROBE = [10.0000000001, 10.000000002];
+const wOk = T.technicalEvaluation(mut(TECH_WS, (a) => { a.criteria[4].weight = W_PROBE[0]; }));
+const wNo = T.technicalEvaluation(mut(TECH_WS, (a) => { a.criteria[4].weight = W_PROBE[1]; }));
+const wSum = (x) => WS_CRIT.slice(0, 4).reduce((t, c) => t + c.weight, 0) + x;
 must('weights within 1e-9 of 100 are accepted and beyond are refused', !wOk.error && wNo.field === 'criteria', `${wOk.error} ${wNo.error}`);
-const sched = success('evaluatedCosts at the schedule boundaries', T.evaluatedCosts({ schedule: { minWeeks: 4, maxWeeks: 8, ratePerWeek: 0.01 }, bids: [
+const SCHED_PROBE = { schedule: { minWeeks: 4, maxWeeks: 8, ratePerWeek: 0.01 }, bids: [
   { id: 'AT-MAX', receivedAt: TIE_ALT, lines: [{ id: 'a', quantity: 1, unitRate: 1000, quotedAmount: 1000 }], completionWeeks: 8 },
   { id: 'BEYOND', receivedAt: TIE_ALT, lines: [{ id: 'a', quantity: 1, unitRate: 900, quotedAmount: 900 }], completionWeeks: 8.5 },
   { id: 'EARLY', receivedAt: TIE_ALT, lines: [{ id: 'a', quantity: 1, unitRate: 1050, quotedAmount: 1050 }], completionWeeks: 3 },
   { id: 'AT-MIN', receivedAt: TIE_ALT, lines: [{ id: 'a', quantity: 1, unitRate: 1060, quotedAmount: 1060 }], completionWeeks: 4 },
-] }));
+] };
+const sched = success('evaluatedCosts at the schedule boundaries', T.evaluatedCosts(clone(SCHED_PROBE)));
+const wk = (id) => SCHED_PROBE.bids.find((b) => b.id === id).completionWeeks;
 const sRow = (id) => sched.bids.find((b) => b.id === id);
 must('at maxWeeks responsive, beyond rejected, at or before minWeeks nothing added', sRow('AT-MAX') && sRow('AT-MAX').scheduleAdjustment === 40 && sched.excluded.some((x) => x.id === 'BEYOND') && sRow('EARLY').scheduleAdjustment === 0 && sRow('AT-MIN').scheduleAdjustment === 0, 'schedule');
-const tie12 = success('evaluatedCosts at the twelve-digit tie', T.evaluatedCosts({ bids: [
-  { id: 'B', receivedAt: TIE_ALT, lines: [{ id: 'a', quantity: 1, unitRate: 1000000.0000001, quotedAmount: 1000000.0000001 }] },
-  { id: 'A', receivedAt: TIE_ALT, lines: [{ id: 'a', quantity: 1, unitRate: 1000000, quotedAmount: 1000000 }] },
-] }));
+const TIE12 = [1000000.0000001, 1000000];
+const NOTIE = [1000000.00001, 1000000.0001];
+const oneLine = (id, c) => ({ id, receivedAt: TIE_ALT, lines: [{ id: 'a', quantity: 1, unitRate: c, quotedAmount: c }] });
+const tie12 = success('evaluatedCosts at the twelve-digit tie', T.evaluatedCosts({ bids: [oneLine('B', TIE12[0]), oneLine('A', TIE12[1])] }));
 must('two costs equal to 12 digits tie and the id decides', tie12.bids[0].id === 'A' && tie12.bids[1].tieBrokenBy === 'bidder id' && tie12.bids[0].evaluatedCost !== tie12.bids[1].evaluatedCost, tie12.bids.map((b) => b.id).join());
-const tie13 = success('evaluatedCosts one place wider than the tie', T.evaluatedCosts({ bids: [
-  { id: 'B', receivedAt: TIE_ALT, lines: [{ id: 'a', quantity: 1, unitRate: 1000000.00001, quotedAmount: 1000000.00001 }] },
-  { id: 'A', receivedAt: TIE_ALT, lines: [{ id: 'a', quantity: 1, unitRate: 1000000.0001, quotedAmount: 1000000.0001 }] },
-] }));
+const tie13 = success('evaluatedCosts one place wider than the tie', T.evaluatedCosts({ bids: [oneLine('B', NOTIE[0]), oneLine('A', NOTIE[1])] }));
 must('costs apart at the twelfth digit do not tie', tie13.bids[0].id === 'B' && tie13.bids[1].tieBrokenBy === null, tie13.bids.map((b) => b.id).join());
-const albAbs = success('abnormallyLow exactly 20 percent', T.abnormallyLow({ estimate: 2000000, bids: [{ id: 'AT', evaluatedCost: 1600000 }, { id: 'ABOVE', evaluatedCost: 1600001 }] }));
+const ALB_EDGE = { estimate: 2000000, bids: [{ id: 'AT', evaluatedCost: 1600000 }, { id: 'ABOVE', evaluatedCost: 1600001 }] };
+const albAbs = success('abnormallyLow exactly 20 percent', T.abnormallyLow(clone(ALB_EDGE)));
 must('exactly 20 percent below is flagged, one unit less is not', albAbs.flagged.join() === 'AT', albAbs.flagged.join());
-const albRel = success('abnormallyLow relative at the limit', T.abnormallyLow({ bids: ['L1', 'L2', 'L3', 'L4', 'L5', 'H1', 'H2', 'H3', 'H4', 'H5'].map((id) => ({ id, evaluatedCost: id[0] === 'L' ? 99 : 101 })) }));
+const ALB_REL = { low: 99, high: 101, each: 5 };
+const albRel = success('abnormallyLow relative at the limit', T.abnormallyLow({ bids: ['L', 'H'].flatMap((h) => Array.from({ length: ALB_REL.each }, (_, i) => ({ id: `${h}${i + 1}`, evaluatedCost: h === 'L' ? ALB_REL.low : ALB_REL.high }))) }));
 must('a price equal to mean less one SD is not flagged', albRel.limit === 99 && albRel.flagged.length === 0 && albRel.approach === 'relative', `${albRel.limit} ${albRel.flagged}`);
-const albFour = success('abnormallyLow four bids', T.abnormallyLow({ estimate: 100, bids: ['A', 'B', 'C', 'D'].map((id, i) => ({ id, evaluatedCost: 90 + i })) }));
-const albFive = success('abnormallyLow five bids', T.abnormallyLow({ bids: ['A', 'B', 'C', 'D', 'E'].map((id, i) => ({ id, evaluatedCost: 90 + i })) }));
+const nBids = (n) => Array.from({ length: n }, (_, i) => ({ id: `N${i + 1}`, evaluatedCost: 90 + i }));
+const albFour = success('abnormallyLow four bids', T.abnormallyLow({ estimate: 100, bids: nBids(D.ALB_RELATIVE_MIN_BIDS - 1) }));
+const albFive = success('abnormallyLow five bids', T.abnormallyLow({ bids: nBids(D.ALB_RELATIVE_MIN_BIDS) }));
 must('four bids absolute, five relative', albFour.approach === 'absolute' && albFive.approach === 'relative', `${albFour.approach} ${albFive.approach}`);
 const lumpLoss = ct.types.lumpSum.contractorMargin;
+const e14 = (k) => EDGE.find((x) => x[0] === k)[2];
+const ws1pump = nc0.bids.find((b) => b.id === 'WS1').items.find((x) => x.id === 'pumping');
 table(['rule', 'at the boundary (probed)', 'engine result'], [
-  ['arithmetic discrepancy', 'a gap EQUAL to the tolerance (1 x 100.5 quoted 100, tolerance 0.5)', `not corrected (rule ${S(tolEq.lines[0].rule)})`],
-  ['technical pass mark', 'a score EQUAL to the pass mark (WS5 at 70)', 'passes'],
-  ['criterion weights', `weights summing to 100.0000000001, then 100.000000002 (tolerance ${D.WEIGHT_SUM_TOLERANCE})`, `the first accepted; the second refused: ${wNo.error}`],
-  ['completion time', 'EQUAL to maxWeeks 8; 8.5 weeks; 3 weeks; EQUAL to minWeeks 4 (stated, rate 0.01)', `8 weeks responsive with ${f6(sRow('AT-MAX').scheduleAdjustment)} added; 8.5 weeks excluded; 3 and 4 weeks nothing added and no credit`],
+  ['arithmetic discrepancy', `a gap EQUAL to the tolerance (1 x ${TOL_PROBE.rates[0]} quoted ${TOL_PROBE.quoted}, tolerance ${TOL_PROBE.tolerance})`, `not corrected (rule ${S(tolEq.lines[0].rule)})`],
+  ['technical pass mark', `a score EQUAL to the pass mark (WS5 at ${f6(wsTech.bids.find((b) => b.id === 'WS5').technicalPercent)})`, 'passes'],
+  ['criterion weights', `weights summing to ${wSum(W_PROBE[0])}, then ${wSum(W_PROBE[1])} (tolerance ${D.WEIGHT_SUM_TOLERANCE})`, `the first accepted; the second refused: ${wNo.error}`],
+  ['completion time', `EQUAL to maxWeeks ${SCHED_PROBE.schedule.maxWeeks}; ${wk('BEYOND')} weeks; ${wk('EARLY')} weeks; EQUAL to minWeeks ${SCHED_PROBE.schedule.minWeeks} (stated, rate ${SCHED_PROBE.schedule.ratePerWeek})`, `${wk('AT-MAX')} weeks responsive with ${f6(sRow('AT-MAX').scheduleAdjustment)} added; ${wk('BEYOND')} weeks excluded; ${wk('EARLY')} and ${wk('AT-MIN')} weeks nothing added and no credit`],
   ['high value', `an estimated cost EQUAL to US$${D.HIGH_VALUE_USD}`, 'high value'],
-  ['weighting range', 'a technical weight EQUAL to the lower end 0.5 of cell a', 'inside'],
-  ['ties', 'costs 1000000.0000001 and 1000000 (equal to 12 significant digits)', `tie; the bidder id decides (${list(tie12.bids.map((b) => b.id))})`],
-  ['no tie', 'costs 1000000.00001 and 1000000.0001 (apart at the twelfth digit)', `no tie; the lower cost first (${list(tie13.bids.map((b) => b.id))})`],
-  ['content minimum', 'content EQUAL to the minimum (WS1 pumping at 95)', 'meets it'],
-  ['s.14 group', 'EXACTLY 1 percent above the lowest; one unit more', 'in; out'],
-  ['s.14 lead, points', 'EXACTLY 5 percentage points', 'applies'],
-  ['s.14 lead, relative', 'EXACTLY 5 percent of the runner-up (84 against 80)', 'applies'],
+  ['weighting range', `a technical weight EQUAL to the lower end ${EDGE_TW} of cell ${edge.cell}`, 'inside'],
+  ['ties', `costs ${TIE12[0]} and ${TIE12[1]} (equal to ${D.TIE_DIGITS} significant digits)`, `tie; the bidder id decides (${list(tie12.bids.map((b) => b.id))})`],
+  ['no tie', `costs ${NOTIE[0]} and ${NOTIE[1]} (apart at the twelfth digit)`, `no tie; the lower cost first (${list(tie13.bids.map((b) => b.id))})`],
+  ['content minimum', `content EQUAL to the minimum (WS1 pumping at ${f6(ws1pump.ncPct)})`, 'meets it'],
+  ['s.14 group', `EXACTLY ${D.NC_PRICE_MARGIN_PCT} percent above the lowest (${e14('exactly the margin above the lowest')[1][1]} against ${e14('exactly the margin above the lowest')[0][1]}); one unit more`, 'in; out'],
+  ['s.14 lead, points', `EXACTLY ${D.NC_LEAD_PCT} percentage points (${e14('a lead of exactly the stated points')[1][2]} against ${e14('a lead of exactly the stated points')[0][2]})`, 'applies'],
+  ['s.14 lead, relative', `EXACTLY ${D.NC_LEAD_PCT} percent of the runner-up (${e14('the same lead, read as relative (exactly the stated percent of the runner-up)')[1][2]} against ${e14('the same lead, read as relative (exactly the stated percent of the runner-up)')[0][2]})`, 'applies'],
   ['s.14 shared top', 'two bids share the highest content', 'no single leader; the lowest stands'],
-  ['s.16 margin', 'EXACTLY 10 percent above the lowest; one unit more', 'protected; not protected'],
-  ['should-cost band', 'a ratio EQUAL to either limit (0.8, 1.25)', 'inside, no flag'],
-  ['ALB absolute', 'EXACTLY 20 percent below the estimate (1600000 against 2000000); one unit more', `flagged; not flagged (${list(albAbs.flagged)})`],
-  ['ALB relative', `a price EQUAL to the mean less one SD (five bids at 99, five at 101: limit ${f6(albRel.limit)})`, 'not flagged'],
-  ['ALB approach', '4 responsive bids; 5', `${albFour.approach}; ${albFive.approach}`],
-  ['contract margin', 'a margin of exactly 0', 'not a loss'],
+  ['s.16 margin', `EXACTLY ${D.INDIGENOUS_MARGIN_PCT} percent above the lowest (${s16c('I10')} against ${s16c('LO')}); one unit more`, 'protected; not protected'],
+  ['should-cost band', `a ratio EQUAL to either limit (${SC_EDGE.band.low}, ${SC_EDGE.band.high})`, 'inside, no flag'],
+  ['ALB absolute', `EXACTLY ${D.ALB_ABSOLUTE_PCT} percent below the estimate (${ALB_EDGE.bids[0].evaluatedCost} against ${ALB_EDGE.estimate}); one unit more`, `flagged; not flagged (${list(albAbs.flagged)})`],
+  ['ALB relative', `a price EQUAL to the mean less one SD (${ALB_REL.each} bids at ${ALB_REL.low}, ${ALB_REL.each} at ${ALB_REL.high}: limit ${f6(albRel.limit)})`, 'not flagged'],
+  ['ALB approach', `${D.ALB_RELATIVE_MIN_BIDS - 1} responsive bids; ${D.ALB_RELATIVE_MIN_BIDS}`, `${albFour.approach}; ${albFive.approach}`],
+  ['contract margin', `a margin of exactly ${f6(ctFlat.types.reimbursable.contractorMargin.mean)}`, 'not a loss'],
   ['overrun', 'a cost EQUAL to the planned cost', 'not an overrun'],
 ]);
 w();
-w(`THE TIE KEY. Two figures tie when Number(x.toPrecision(${D.TIE_DIGITS})) agrees. The stated costs ${S(1000000.0000001)} and ${S(1000000)} are different doubles (the engine returns both as typed); they tie because both keys are ${key12(1000000.0000001).toPrecision(12)}. The stated costs ${S(1000000.00001)} and ${S(1000000.0001)} have the keys ${key12(1000000.00001).toPrecision(12)} and ${key12(1000000.0001).toPrecision(12)}, so they do not tie. The ranking then uses the stated tie-break, and tieBrokenBy names it. A tie is a stated rule, never a guess.`);
-must('the no-tie pair has different keys', key12(1000000.00001) !== key12(1000000.0001), 'keys');
-must('the engine returns the tied costs as typed', tie12.bids.find((b) => b.id === 'B').evaluatedCost === 1000000.0000001 && tie12.bids.find((b) => b.id === 'A').evaluatedCost === 1000000, 'typed');
-must('the tie key agrees', key12(1000000.0000001) === key12(1000000), 'key');
+w(`THE TIE KEY. Two figures tie when Number(x.toPrecision(${D.TIE_DIGITS})) agrees. The stated costs ${S(TIE12[0])} and ${S(TIE12[1])} are different doubles (the engine returns both as typed); they tie because both keys are ${key12(TIE12[0]).toPrecision(D.TIE_DIGITS)}. The stated costs ${S(NOTIE[0])} and ${S(NOTIE[1])} have the keys ${key12(NOTIE[0]).toPrecision(D.TIE_DIGITS)} and ${key12(NOTIE[1]).toPrecision(D.TIE_DIGITS)}, so they do not tie. The ranking then uses the stated tie-break, and tieBrokenBy names it. A tie is a stated rule, never a guess.`);
+must('the no-tie pair has different keys', key12(NOTIE[0]) !== key12(NOTIE[1]), 'keys');
+must('the engine returns the tied costs as typed', tie12.bids.find((b) => b.id === 'B').evaluatedCost === TIE12[0] && tie12.bids.find((b) => b.id === 'A').evaluatedCost === TIE12[1], 'typed');
+must('the tie key agrees', key12(TIE12[0]) === key12(TIE12[1]), 'key');
 w();
 w('ONE MORE BOUNDARY IS A PROPERTY OF DOUBLES. A limit a person types (a tolerance, a band) is compared in binary floating point; the engine\'s FINDINGS states that its oracle and the engine agree except within one unit in the last place of such a limit. Every boundary above was probed with figures exactly representable or far from that unit.');
 must('FINDINGS states the one-unit caveat', /within one unit in the\s+last place of the limit/.test(FINDINGS), 'ulp');
@@ -1327,7 +1367,7 @@ table(['convention', 'the engine\'s choice', 'where it comes from'], [
   ['completion-time base', 'corrected price less the discount', 'engine convention; the SPD gives the rate without its base'],
   ['who prices an omission', 'the other bids still responsive', 'engine reading of ITB 34.1'],
   ['overall content across units', 'weighted mean with stated weights', 'engine convention; the Act has no rule'],
-  ['the s.14 group', 'within 1 percent of the lowest', 'engine reading of s.14, stated in every reason'],
+  ['the s.14 group', `within ${D.NC_PRICE_MARGIN_PCT} percent of the lowest`, 'engine reading of s.14, stated in every reason'],
   ['the plan of a contract', 'the modes, unless a plan is stated', 'engine convention'],
   ['an overrun', 'a contractor cost above the planned cost', 'engine convention'],
   ['cost percentiles', 'exceedance labels; floor-index percentiles', 'lib/conventions/percentile.js and lib/stats basicStats'],
@@ -1355,7 +1395,7 @@ table(['word', 'what it can mean elsewhere', 'the rule here'], [
   ['lowest evaluated cost', 'the cheapest price', 'the lowest evaluated cost as the engine builds it (corrected price, discount, deviations, omissions, schedule, life cycle); never the quoted price'],
   ['most advantageous', 'the best bid in any sense', 'the highest combined score under a stated technical weight and stated methods'],
   ['content', 'any local participation', 'Nigerian content, a percentage in the measured unit the Schedule names for the item, stated as by item or overall'],
-  ['P90', 'the high case', 'for a cost, the LOW figure: a 90 percent probability of meeting or exceeding it; every cost percentile is printed beside that definition'],
+  ['P90', 'the high case', `for a cost, the LOW figure: a ${PCT_P90} percent probability of meeting or exceeding it; every cost percentile is printed beside that definition`],
   ['should-cost', 'a budget, or any estimate', 'the company\'s independent estimate built from the programme through wellCost and the AFE rollup; never a bid'],
 ]);
 w();
@@ -1370,7 +1410,7 @@ must('every module of every tier is owned by at least one section', process.env.
 must('every declared section was written', process.env.SC2_DUMP_PARTIAL || SECTION === ORDER.length, `${SECTION} of ${ORDER.length}`);
 must('no unrendered template placeholder reaches the digest', !OUT.some((l) => l.includes('${')), OUT.find((l) => l.includes('${')));
 // The engine's own refusal says "the 'relative' technical score is undefined"; it is quoted verbatim and exempt.
-const bare = (l) => l.replace(/the 'relative' technical score is undefined|the bid-to-estimate ratio is undefined/g, '');
+const bare = (l) => l.replace(/the \x27relative\x27 technical score is undefined|the bid-to-estimate ratio is undefined/g, '');
 must('no NaN, undefined or Infinity reaches the digest', !OUT.some((l) => /\bNaN\b|\bundefined\b|Infinity/.test(bare(l))), OUT.find((l) => /\bNaN\b|\bundefined\b|Infinity/.test(bare(l))));
 must('no em or en dash reaches the digest', !OUT.some((l) => /[–—]/.test(l)), OUT.find((l) => /[–—]/.test(l)));
 

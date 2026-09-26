@@ -172,7 +172,7 @@ const UMUAHIA = {
   lifeCycle: { years: 6, discountRate: 0.08 },
   award: 'lowest-cost',
   ncItems: [{ id: 'casing', scheduleLine: 'steel-pipes' }, { id: 'valves', scheduleLine: 'valves' }, { id: 'cement', scheduleLine: 'cement-portland' }, { id: 'baryte', scheduleLine: 'drilling-mud-baryte-bentonite' }],
-  ncWeights: 'each bid weights its items by its own quoted amount for that item',
+  ncWeights: 'its own quoted amount for each item, its spend on the item',
   bids: [
     umBid('UM1', '2027-09-06T09:30:00Z', { specification: 3, delivery: 3, 'after-sales': 3 }, 10, [5200, 5200, 5200, 5200, 5200, 5200], [1612.5, 3965, 302.4, 405.2, 11800], [118, 19, 131, 139], { indigenous: false, capacity: true }),
     umBid('UM2', '2027-09-06T13:10:00Z', { specification: 3, delivery: 3, 'after-sales': 3 }, 9, [4850, 4850, 4850, 4850, 4850, 4850], [1628.4, 4015.5, 298.75, 399.6, 10400], [124, 18, 128, 134], { indigenous: false, capacity: true, residualValue: 3000 }),

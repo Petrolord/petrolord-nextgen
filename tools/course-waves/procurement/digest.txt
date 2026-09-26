@@ -333,7 +333,7 @@ The engine's reason for each bid it does not pass, verbatim:
 
 Passed (engine, in input order): WS1, WS2, WS3, WS5. WS5 scores 70.000000, exactly the pass mark, and passes: a bid passes AT the pass mark. WS6 is not scored at all, so its row carries no technical percentage.
 
-WEIGHTED POINTS are the sum of weight x score, the total the World Bank Guidance prints in its Figure IX (on a 0 to 4 scale the maximum is 400). The technical percentage divides each term by its maxScore, so the two carry the same order.
+WEIGHTED POINTS are the sum of weight x score, the total the World Bank Guidance prints in its Figure IX (on the well services scale, scores 0 to 4, the maximum is 400, derived). The technical percentage divides each term by its maxScore, so the two carry the same order.
 
 THE MATERIALS TENDER, pass mark 60 (fixture):
 
@@ -347,13 +347,13 @@ THE MATERIALS TENDER, pass mark 60 (fixture):
 
 > MS5: technical score 50 is below the pass mark 60; the commercial envelope is not opened
 
-THE WORLD BANK GUIDANCE, FIGURE IX (stated from the source: four criteria weighted 50, 25, 15 and 10, scored 0 to 4; Company A scores 2, 2, 2 and 1; the Guidance prints a weighted score of 190):
+THE WORLD BANK GUIDANCE, FIGURE IX (stated from the source: four criteria weighted 50, 25, 15, 10, scored 0 to 4; Company A scores 2, 2, 2, 1; the Guidance prints a weighted score of 190):
 
 | company | weightedPoints (engine) | technicalPercent (engine) | the Guidance prints |
 | --- | --- | --- | --- |
 | A | 190.000000 | 47.500000 | 190 |
 
-THE WORLD BANK GUIDANCE, ANNEX 2, a minimum quality threshold (stated from the source: three criteria scored in points out of 15, 15 and 70, threshold 80). With weights equal to the maximum points, the technical percentage equals the points total:
+THE WORLD BANK GUIDANCE, ANNEX 2, a minimum quality threshold (stated from the source: three criteria scored in points out of 15, 15, 70, threshold 80). With weights equal to the maximum points, the technical percentage equals the points total:
 
 | company | scores (source) | technicalPercent (engine) | status (engine) |
 | --- | --- | --- | --- |
@@ -391,7 +391,7 @@ The engine's reasons, verbatim:
 WS2 quoted 468000.000000 for the coiled tubing spread where 18 x 27000 is 486000.000000: the unit rate prevails and its total rises by 18000.000000. WS5 typed its acid rate as 13.8 where its amount, 82800.000000, implies 1380.000000; the bid flags the decimal point as obviously misplaced (decimalMisplaced true), so the quoted amount governs, the unit rate is corrected and the total does not move.
 
 THE TOLERANCE, at its boundary (stated lines, stated tolerance 0.5):
-| quantity x unit rate (stated) | quoted (stated) | gap | tolerance | corrected amount (engine) | rule (engine) |
+| quantity x unit rate (stated) | quoted (stated) | gap (derived) | tolerance | corrected amount (engine) | rule (engine) |
 | --- | --- | --- | --- | --- | --- |
 | 1 x 100.5 | 100 | 0.5 | 0.5 | 100.000000 | null |
 | 1 x 100.75 | 100 | 0.75 | 0.5 | 100.750000 | unit-rate-prevails |
@@ -433,7 +433,7 @@ Every reason the engine returns for these bids, verbatim, in the order it return
 
 AN OMITTED ITEM AT THE AVERAGE. WS3 prices no nitrogen line. The other responsive bids price it at (corrected amounts, engine): WS5 33600.000000, WS2 35400.000000, WS1 37200.000000. Their average, which the engine adds to WS3, is 35400.000000.
 
-Only responsive bids price an omission: WS4 quoted a nitrogen line too, but its price envelope was never opened, so its figure is not in the average. A bid never prices its own omission. The engine's omission basis: an omitted item is priced at the average of the corrected amounts quoted for it by the other responsive bids, else the Employer's best estimate (World Bank SPD Request for Bids, Works, two-envelope (Sep 2025) ITB 34.1).
+Only responsive bids price an omission: WS4 quotes a nitrogen line too, but its price envelope is never opened, so its figure is not in the average. A bid never prices its own omission. The engine's omission basis: an omitted item is priced at the average of the corrected amounts quoted for it by the other responsive bids, else the Employer's best estimate (World Bank SPD Request for Bids, Works, two-envelope (Sep 2025) ITB 34.1).
 
 COMPLETION TIME. The engine's schedule basis: ratePerWeek 0.005 of (corrected price - discount) for each week beyond 6; beyond 10 weeks the bid is rejected (World Bank SPD Request for Bids, Works, two-envelope (Sep 2025) Section III, time for completion). The adjustment is ratePerWeek x the weeks beyond minWeeks x (corrected price - discount). No credit is given for completion before minWeeks.
 
@@ -458,7 +458,7 @@ THE WELL SERVICES TENDER, technical weight 0.7, priceMethod lowest-ratio, techni
 
 Most advantageous (engine): WS3. The bid with the highest technical percentage scores St 100; the bid with the lowest evaluated cost scores Sc 100.
 
-THE WORLD BANK GUIDANCE, FIGURES X TO XII (stated from the source: technical 80 percent and cost 20 percent; five companies, E rejected as an abnormally low bid; technical points on the 0 to 4 scale entered as percentages, of which only T / Thigh matters). The Guidance prints its figures to two decimals; the engine's are exact:
+THE WORLD BANK GUIDANCE, FIGURES X TO XII (stated from the source: technical weight 0.8, the cost taking the rest; five companies, E rejected as an abnormally low bid; technical points on the Guidance's scoring scale entered as percentages, of which only T / Thigh matters). The Guidance prints its figures to two decimals; the engine's are exact:
 
 | rank | company | 0.8 x St (engine) | the Guidance prints | Sc (engine) | the Guidance prints | B (engine) | the Guidance prints |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -467,16 +467,16 @@ THE WORLD BANK GUIDANCE, FIGURES X TO XII (stated from the source: technical 80 
 | 3 | B | 66.666667 | 66.66 | 88.000018 | 88 | 84.266670 | 84.26 |
 | 4 | A | 63.333333 | 63.33 | 84.615385 | 84.6 | 80.256410 | 80.25 |
 
-The ranking agrees: D, C, B, A. E is excluded with the reason it was given (engine): abnormally low bid, rejected after examination. Every printed combined figure is within 0.01 of the engine's, and section 21 reads where each printed figure is truncated or rounded.
+The ranking agrees: D, C, B, A. E is excluded with the reason stated for it (engine): abnormally low bid, rejected after examination. Every printed combined figure is within 0.01 of the engine's, and section 21 reads where each printed figure is truncated or rounded.
 
-THE WORLD BANK GUIDANCE, ANNEX 3 (stated from the source: technical 40 percent, financial 60 percent). Weighted points (engine): A 240.000000, B 190.000000. Combined (engine) against the Guidance's printed figures:
+THE WORLD BANK GUIDANCE, ANNEX 3 (stated from the source: technical weight 0.4, the financial score taking the rest). Weighted points (engine): A 240.000000, B 190.000000. Combined (engine) against the Guidance's printed figures:
 
 | company | St (engine) | Sc (engine) | B (engine) | the Guidance prints |
 | --- | --- | --- | --- | --- |
 | A | 100.000000 | 90.625000 | 94.375000 | 94.37 |
 | B | 79.166667 | 100.000000 | 91.666667 | 91.66 |
 
-A wins on both. The engine's A is 94.375000; the Guidance prints 94.37, two decimals of that figure with the third dropped.
+A wins on both. The engine's A is 94.375000; the Guidance prints 94.37, two decimals of that figure with the third dropped (checked).
 
 # SECTION 10: Reading an award: the most advantageous bid, the tie-break and every exclusion (owned by Associate m06 and Expert m04 l01)
 
@@ -491,7 +491,7 @@ Award (engine): WS3. Reason (engine): WS3 has the highest combined score. Award 
 
 THE SAME TENDER UNDER A LOWEST-COST AWARD: award (engine) WS5; reason (engine): WS5 has the lowest evaluated cost. The two awards differ because the combined score weighs the technical percentage at 0.7: WS3 carries the highest technical percentage and the fourth-lowest evaluated cost.
 
-THE TIE-BREAK, stated once for every ranking: the lower evaluated cost, then the earlier receipt time, then the bidder id. Three stated bids with the same technical percentage (80) and the same combined score:
+THE TIE-BREAK, stated once for every ranking: the lower evaluated cost, then the earlier receipt time, then the bidder id. Three stated bids with the same technical percentage (80) and the same evaluated cost (500000), so the same combined score:
 
 | rank (engine) | bid | received (stated) | combined score | tieBrokenBy (engine) |
 | --- | --- | --- | --- | --- |
@@ -552,7 +552,7 @@ RESIDUAL VALUE is credited in the last year. Two stated bids, identical but for 
 
 The difference, 3175.328964 (derived), is 4000 / 1.08^3: the residual value is taken off year 3's cost before discounting (checked).
 
-THE OMISSION ON THIS TENDER. MS4 omits the inspection line. The other responsive bids price it (fixture): MS1 12000.000000, MS2 9500.000000, MS3 14500.000000; MS5 failed the pass mark and does not price it. The average the engine adds: 12000.000000. The omission rule decides this award; section 20 runs the same tender under the other rule the engine accepts.
+THE OMISSION ON THIS TENDER. MS4 omits the inspection line. The other responsive bids price it (fixture): MS2 9500.000000, MS1 12000.000000, MS3 14500.000000; MS5 failed the pass mark and does not price it. The average the engine adds: 12000.000000. The omission rule decides this award; section 20 runs the same tender under the other rule the engine accepts.
 
 # SECTION 12: The Rated Criteria weighting band, linear price scoring and the ranking paradox (owned by Professional m02)
 
@@ -585,9 +585,9 @@ LINEAR PRICE SCORING. The engine's second price method, 'linear', scores Sc = 10
 | 3 | WS1 | 92.883107 | 31.080136 | 95.806109 | 77.265217 |
 | 4 | WS3 | 89.994781 | 0.000000 | 96.998434 | 70.000000 |
 
-Under 'linear' the dearest responsive bid scores 0 and the cheapest 100, so the same price spread moves the commercial score further. On this tender the price method changes the award: the most advantageous bid (engine) is WS3 under 'lowest-ratio' and WS5 under 'linear', with the technical weight, the technical method and the bids unchanged.
+Under 'linear' the dearest responsive bid scores 0.000000 and the cheapest 100.000000, so the same price spread moves the commercial score further. On this tender the price method changes the award: the most advantageous bid (engine) is WS3 under 'lowest-ratio' and WS5 under 'linear', with the technical weight, the technical method and the bids unchanged.
 
-KIIVER AND KODYM (2015), TABLE 1 (stated from the source: three prices 50, 75 and 100; price only). The source prints the lowest-bid ratio scores to whole points:
+KIIVER AND KODYM (2015), TABLE 1 (stated from the source: three prices 50, 75, 100; price only). The source prints the lowest-bid ratio scores to whole points:
 
 | bid | price (source) | lowest-ratio Sc (engine) | the source prints | linear Sc (engine) |
 | --- | --- | --- | --- | --- |
@@ -595,7 +595,7 @@ KIIVER AND KODYM (2015), TABLE 1 (stated from the source: three prices 50, 75 an
 | B | 75 | 66.666667 | 67 | 50.000000 |
 | C | 100 | 50.000000 | 50 | 0.000000 |
 
-THE RANKING PARADOX, CHEN (2008) p. 409 (stated from the source: price score 50 x L / P on prices 40, 50 and 80; entered as technical weight 0.5 with every technical score 0, so B = 0.5 x 100 x Cmin / C):
+THE RANKING PARADOX, CHEN (2008) p. 409 (stated from the source: price score "50 x L / P" on prices 40, 50, 80; entered as technical weight 0.5 with every technical score 0, so B = 0.5 x 100 x Cmin / C, which is Chen's "50 x L / P"):
 
 | bid | price (source) | B with A in the field (engine) | B with A declared invalid (engine) |
 | --- | --- | --- | --- |
@@ -702,17 +702,17 @@ A TARGET THE SCHEDULE DOES NOT LIST enters with its source stated (s.11(2) lets 
 
 | bid | rig | catering | overall | items met |
 | --- | --- | --- | --- | --- |
-| P1 | 70.000000 (meets 70) | 90.000000 (meets 90) | 73.333333 | 2 of 2 |
-| P2 | 69.900000 (below 70) | 89.500000 (below 90) | 73.166667 | 0 of 2 |
+| B1 | 70.000000 (meets 70) | 90.000000 (meets 90) | 73.333333 | 2 of 2 |
+| B2 | 69.900000 (below 70) | 89.500000 (below 90) | 73.166667 | 0 of 2 |
 
 | item | target (engine) | its source, as the engine returns it |
 | --- | --- | --- |
 | rig | 70% | Nigerian Oil and Gas Industry Content Development Act 2010 (Act No. 2, commenced 22 April 2010) s.11 and the Schedule as enacted in 2010 (later Board targets are not included), EXPLORATION, SUBSURFACE, PETROLEUM ENGINEERING AND SEISMIC: Drilling Rigs (Land) 70% by man-hours |
 | catering | 90% | stated by the user: a level stated for this example by the course; no Board target was read |
 
-P1 sits exactly on both minimums and meets both; P2 sits below both. A stated target with no source is refused (section 4).
+B1 sits exactly on both minimums and meets both; B2 sits below both. A stated target with no source is refused (section 4).
 
-# SECTION 15: Section 14: bids within 1 percent, the closest competitor, and two readings of at least 5% higher (owned by Professional m05)
+# SECTION 15: Section 14: bids within one percent, the closest competitor, and two readings of at least five percent higher (owned by Professional m05)
 
 THE ACT, s.14, as the engine states it: a bid whose evaluated cost is within 1% of the lowest at the commercial stage joins a group; with two or more in the group, the bid with the highest Nigerian content is selected provided its content is at least 5% higher than its closest competitor's.
 
@@ -750,24 +750,24 @@ THE ENGINE'S BASIS, verbatim: group: 100 x (C - Cmin) <= 1 x Cmin; lead read as 
 THE RULE AT ITS EDGES, on stated bids (each call names its reading):
 | case (stated) | reading | bids: evaluated cost at content | group | lead | applied | selected |
 | --- | --- | --- | --- | --- | --- | --- |
-| exactly 1 percent above the lowest | points | LO 2000000 at 50%; E1 2020000 at 56% | LO, E1 | 6.000000 | true | E1 |
-| one unit more than 1 percent above | points | LO 2000000 at 50%; E2 2020001 at 90% | LO | null | false | LO |
-| a lead of exactly 5 points | points | LO 2000000 at 70%; P5 2010000 at 75% | LO, P5 | 5.000000 | true | P5 |
-| a lead of 4 points, read as points | points | LO 2000000 at 80%; P4 2010000 at 84% | LO, P4 | 4.000000 | false | LO |
-| the same 4 points, read as relative (exactly 5 percent of 80) | relative | LO 2000000 at 80%; P4 2010000 at 84% | LO, P4 | 5.000000 | true | P4 |
+| exactly the margin above the lowest | points | LO 2000000 at 50%; E1 2020000 at 56% | LO, E1 | 6.000000 | true | E1 |
+| one unit more than the margin above | points | LO 2000000 at 50%; E2 2020001 at 90% | LO | null | false | LO |
+| a lead of exactly the stated points | points | LO 2000000 at 70%; K5 2010000 at 75% | LO, K5 | 5.000000 | true | K5 |
+| a lead one point short, read as points | points | LO 2000000 at 80%; K4 2010000 at 84% | LO, K4 | 4.000000 | false | LO |
+| the same lead, read as relative (exactly the stated percent of the runner-up) | relative | LO 2000000 at 80%; K4 2010000 at 84% | LO, K4 | 5.000000 | true | K4 |
 | a shared highest content | points | LO 2000000 at 40%; S1 2005000 at 65%; S2 2010000 at 65% | LO, S1, S2 | null | false | LO |
-| a runner-up at 0, read as relative | relative | LO 2000000 at 0%; Z1 2004000 at 30% | LO, Z1 | null | true | Z1 |
+| a runner-up at no content, read as relative | relative | LO 2000000 at 0%; Z1 2004000 at 30% | LO, Z1 | null | true | Z1 |
 | the lowest also leads | points | LO 2000000 at 88%; L2 2006000 at 70%; L3 2012000 at 75% | LO, L2, L3 | 13.000000 | true | LO |
 
 The engine's reasons for four of these, verbatim (each reason also carries the three readings, shortened here after its opening words "(readings of s.14:"):
-> one unit more than 1 percent above: only LO is within 1% of the lowest evaluated cost 2000000; s.14 is not engaged (readings of s.14: ...)
+> one unit more than the margin above: only LO is within 1% of the lowest evaluated cost 2000000; s.14 is not engaged (readings of s.14: ...)
 > a shared highest content: S1 and S2 share the highest Nigerian content 65%, so no single bid leads; the lowest evaluated cost LO stands (readings of s.14: ...)
-> a runner-up at 0, read as relative: 2 bids within 1% of the lowest evaluated cost; Z1 has the highest Nigerian content, 30% against 0% (LO), more than 5% higher by any reading, at least 5% higher, so s.14 selects Z1 over the lowest evaluated cost LO (readings of s.14: ...)
+> a runner-up at no content, read as relative: 2 bids within 1% of the lowest evaluated cost; Z1 has the highest Nigerian content, 30% against 0% (LO), more than 5% higher by any reading, at least 5% higher, so s.14 selects Z1 over the lowest evaluated cost LO (readings of s.14: ...)
 > the lowest also leads: LO is the lowest evaluated cost and also leads on Nigerian content, 88% against 75% (L3), a lead of 13 percentage points; s.14 confirms it (readings of s.14: ...)
 
-A shared highest content means no single bid "contains the highest level", so s.14 is engaged and selects nothing: the lowest evaluated cost stands. A runner-up at 0 percent makes the relative lead a division by 0, and the engine returns the lead as null while any positive content is more than 5% higher by any reading.
+A shared highest content means no single bid "contains the highest level", so s.14 is engaged and selects nothing: the lowest evaluated cost stands. A runner-up with no Nigerian content makes the relative lead a division by zero, and the engine returns the lead as null while any positive content is more than 5% higher by any reading.
 
-# SECTION 16: Section 16: an indigenous company within 10 percent, content in a combined award, and the materials award end to end (owned by Professional m06)
+# SECTION 16: Section 16: an indigenous company within ten percent, content in a combined award, and the materials award end to end (owned by Professional m06)
 
 THE ACT, s.16, as the engine states it: 100 x (C - Cmin) <= 10 x Cmin for a Nigerian indigenous company with capacity (Nigerian Oil and Gas Industry Content Development Act 2010 s.16). It protects a Nigerian indigenous company with capacity from exclusion solely on price; it never selects a bid. "Indigenous" and "capacity" are stated by the caller for each bid.
 
@@ -850,7 +850,7 @@ The engine's overrun basis, verbatim: an iteration overruns when its contractor 
 - Under the day rate the company pays for the extra days at the day rate and the contractor absorbs the rest: a daily cost above plan, and the gap between its daily cost and the day rate on the extra days.
 - Under cost plus 12 percent the company pays the whole overrun and 12 percent on top of it, so its share is 1.120000 and the contractor's part is negative: the contractor earns more when the job overruns. Its probability of a loss is 0.000000.
 
-WITH NOTHING UNCERTAIN (stated: 10 days, 40000 a day, fixed cost 100000; lump sum 500000; day rate 50000 with no mobilisation fee; reimbursable at cost plus a fixed fee of 0; 10 iterations, seed 1) nothing is drawn, no iteration overruns (probability 0.000000), and the reimbursable margin is exactly 0.000000 with a probability of a loss of 0.000000: a margin of exactly 0 is not a loss. The engine's sampling basis, verbatim: 10 iterations, one mulberry32(1) stream; per iteration a uniform for the duration (constant: no draw) then one for the daily cost (constant: no draw); triangular inverse CDF (lib/stats triInvCDF).
+WITH NOTHING UNCERTAIN (stated: 10 days, 40000 a day, fixed cost 100000; lump sum 500000; day rate 50000 with no mobilisation fee; reimbursable at cost plus a fixed fee of 0; 10 iterations, seed 1) nothing is drawn, no iteration overruns (probability 0.000000), and the reimbursable margin is exactly 0.000000 with a probability of a loss of 0.000000: a margin of exactly 0.000000 is not a loss. The engine's sampling basis, verbatim: 10 iterations, one mulberry32(1) stream; per iteration a uniform for the duration (constant: no draw) then one for the daily cost (constant: no draw); triangular inverse CDF (lib/stats triInvCDF).
 
 # SECTION 18: Cost percentiles and their labels: the exceedance definition and the low-cost P90 (owned by Expert m02)
 
@@ -868,7 +868,7 @@ For a COST, a 90% probability of meeting or exceeding a value makes that value a
 
 The lump sum is the same at every percentile: the company pays 900000.000000 whatever happens. The day rate and the reimbursable contract spread from their P90 to their P10.
 
-THE INDEX RULE. lib/stats basicStats sorts the 20000 values and reads P90 at index floor(0.1 x 20000) = 2000, P50 at 10000 and P10 at 18000 (counting from 0): no interpolation.
+THE INDEX RULE. lib/stats basicStats sorts the 20000 values and reads P90 at index floor(0.1 x 20000) = 2000, P50 at 10000 and P10 at 18000 (the first sorted value is index 0), the fractions read from the engine's basis: no interpolation.
 
 THE PLAN, THE MEAN AND THE PERCENTILES are three different figures. On the day rate the planned payment is 853274.305556, the mean company cost 923862.832721 and the P50 912667.421771 (engine). The plan is built from the modes; the triangular NPT fraction has a long upper tail (mode 0.15, max 0.6), so 0.902400 of the iterations overrun the plan.
 
@@ -988,7 +988,7 @@ Under 'highest' WS3's nitrogen is priced at 37200.000000 where the average gives
 A PRICE-SCORING METHOD WITH NO PUBLISHED FORMULA IS NOT OFFERED. Average-price scoring methods (a score that falls as a price moves away from the mean of the prices) are described and warned against by Kiiver and Kodym (2015) and by Chen (2008); neither prints a formula, and no text read does. The engine offers `lowest-ratio` (the World Bank's) and `linear` (the family Kiiver and Kodym describe) and refuses any other name, verbatim:
 > priceMethod must be 'lowest-ratio' or 'linear'; there is no default
 
-AN ERRATUM IN THE GUIDANCE. The World Bank Guidance, Annex 2, prints Company B's criterion scores as 12, 11 and 54 and its total as 82 (source). The printed scores sum to 77 (the engine's total on them, section 6), below the threshold of 80, so on its own printed scores B fails the threshold with A. The Guidance names only A as rejected. The outcome it states, C first, is the same either way:
+AN ERRATUM IN THE GUIDANCE. The World Bank Guidance, Annex 2, prints Company B's criterion scores as 12, 11, 54 and its total as 82 (source). The printed scores sum to 77 (the engine's total on them, section 6), below the threshold of 80, so on its own printed scores B fails the threshold with A. The Guidance names only A as rejected. The outcome it states, C first, is the same either way:
 
 | company | printed scores (source) | total the Guidance prints (source) | total on the printed scores (engine) | status at 80 (engine) |
 | --- | --- | --- | --- | --- |
@@ -1009,7 +1009,7 @@ PRINTED FIGURES AND EXACT FIGURES. The Guidance prints Figures X to XII to two d
 
 Two figures that print alike at two decimals are not the same figure. A capstone field is quoted to six decimals as the panel prints it, and a printed source figure is quoted as the source prints it, labelled as the source's.
 
-KIIVER AND KODYM'S OWN LINE. Their text says that "under linear conditions" bid B would receive 75 points (source), which is the straight line drawn between A's 100 and C's 50. The engine's `linear` method gives the dearest bid 0, the family their text describes, so B scores 50.000000 on it (section 12). The engine has no method that reproduces their 75, and the course does not claim one.
+KIIVER AND KODYM'S OWN LINE. Their text says that "under linear conditions" bid B would receive 75 points (source), which is the straight line drawn between A's 100 and C's 50. The engine's linear method gives the dearest bid 0.000000, the family their text describes, so B scores 50.000000 on it (section 12). The engine has no method that reproduces their 75, and the course does not claim one.
 
 THE EDITIONS. The World Bank Regulations were read in their Seventh Edition (September 2025); the Sixth (February 2025) is superseded and none of the evaluation rules used here changed between them. The content Schedule is the 2010 Act's as enacted; any later Board target must be read and cited before it enters (section 14).
 
@@ -1020,24 +1020,24 @@ Every rule the engine applies has its own boundary; no single rule covers them a
 | rule | at the boundary (probed) | engine result |
 | --- | --- | --- |
 | arithmetic discrepancy | a gap EQUAL to the tolerance (1 x 100.5 quoted 100, tolerance 0.5) | not corrected (rule null) |
-| technical pass mark | a score EQUAL to the pass mark (WS5 at 70) | passes |
-| criterion weights | weights summing to 100.0000000001, then 100.000000002 (tolerance 1e-9) | the first accepted; the second refused: criteria weights must sum to 100; they sum to 100.00000000200001 |
+| technical pass mark | a score EQUAL to the pass mark (WS5 at 70.000000) | passes |
+| criterion weights | weights summing to 100.0000000001, then 100.00000000200001 (tolerance 1e-9) | the first accepted; the second refused: criteria weights must sum to 100; they sum to 100.00000000200001 |
 | completion time | EQUAL to maxWeeks 8; 8.5 weeks; 3 weeks; EQUAL to minWeeks 4 (stated, rate 0.01) | 8 weeks responsive with 40.000000 added; 8.5 weeks excluded; 3 and 4 weeks nothing added and no credit |
 | high value | an estimated cost EQUAL to US$10000000 | high value |
 | weighting range | a technical weight EQUAL to the lower end 0.5 of cell a | inside |
 | ties | costs 1000000.0000001 and 1000000 (equal to 12 significant digits) | tie; the bidder id decides (A, B) |
 | no tie | costs 1000000.00001 and 1000000.0001 (apart at the twelfth digit) | no tie; the lower cost first (B, A) |
-| content minimum | content EQUAL to the minimum (WS1 pumping at 95) | meets it |
-| s.14 group | EXACTLY 1 percent above the lowest; one unit more | in; out |
-| s.14 lead, points | EXACTLY 5 percentage points | applies |
+| content minimum | content EQUAL to the minimum (WS1 pumping at 95.000000) | meets it |
+| s.14 group | EXACTLY 1 percent above the lowest (2020000 against 2000000); one unit more | in; out |
+| s.14 lead, points | EXACTLY 5 percentage points (75 against 70) | applies |
 | s.14 lead, relative | EXACTLY 5 percent of the runner-up (84 against 80) | applies |
 | s.14 shared top | two bids share the highest content | no single leader; the lowest stands |
-| s.16 margin | EXACTLY 10 percent above the lowest; one unit more | protected; not protected |
+| s.16 margin | EXACTLY 10 percent above the lowest (3300000 against 3000000); one unit more | protected; not protected |
 | should-cost band | a ratio EQUAL to either limit (0.8, 1.25) | inside, no flag |
 | ALB absolute | EXACTLY 20 percent below the estimate (1600000 against 2000000); one unit more | flagged; not flagged (AT) |
-| ALB relative | a price EQUAL to the mean less one SD (five bids at 99, five at 101: limit 99.000000) | not flagged |
+| ALB relative | a price EQUAL to the mean less one SD (5 bids at 99, 5 at 101: limit 99.000000) | not flagged |
 | ALB approach | 4 responsive bids; 5 | absolute; relative |
-| contract margin | a margin of exactly 0 | not a loss |
+| contract margin | a margin of exactly 0.000000 | not a loss |
 | overrun | a cost EQUAL to the planned cost | not an overrun |
 
 THE TIE KEY. Two figures tie when Number(x.toPrecision(12)) agrees. The stated costs 1000000.0000001 and 1000000 are different doubles (the engine returns both as typed); they tie because both keys are 1000000.00000. The stated costs 1000000.00001 and 1000000.0001 have the keys 1000000.00001 and 1000000.00010, so they do not tie. The ranking then uses the stated tie-break, and tieBrokenBy names it. A tie is a stated rule, never a guess.

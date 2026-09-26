@@ -285,6 +285,9 @@ export const PANELS = {
   'ae-retrieval-explorer': React.lazy(() => import('@/components/course/panels/appliedai/RetrievalExplorer')),
   'ae-scoring-explorer': React.lazy(() => import('@/components/course/panels/appliedai/ScoringExplorer')),
   'ae-trust-explorer': React.lazy(() => import('@/components/course/panels/appliedai/TrustExplorer')),
+  'pr-envelope-calculator': React.lazy(() => import('@/components/course/panels/procurement/EnvelopeCalculator')),
+  'pr-award-calculator': React.lazy(() => import('@/components/course/panels/procurement/AwardCalculator')),
+  'pr-contract-calculator': React.lazy(() => import('@/components/course/panels/procurement/ContractCalculator')),
 };
 
 export function resolvePanel(id) {
