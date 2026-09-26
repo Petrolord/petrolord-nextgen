@@ -21,7 +21,8 @@
 // observed agreement quoted, the wrong weights, ten bins for eight. A few are
 // hand arithmetic a learner might do instead of calling the engine (the
 // Robertson idf without the 1 +, log base 10, a library's bin-edge rule, the
-// within-bin covariance without its factor 2); they live here, among the wrong
+// pooled within-bin covariance quoted as WBC, which is half of WBC as
+// Stephenson, Coelho and Jolliffe 2008 eq. 7 label it); they live here, among the wrong
 // methods, and nowhere else.
 //
 //   node discriminate.mjs

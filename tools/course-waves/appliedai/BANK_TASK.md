@@ -75,6 +75,11 @@ is a real wrong method with its real number:
     by the engine and 0.078849 by the library rule; ECE agrees on this set.
 15. **with and without the within-bin terms.** The Brier score is 0.168382;
     REL - RES + UNC alone gives 0.169362.
+16. **WBC against the pooled within-bin covariance.** WBC as Stephenson,
+    Coelho and Jolliffe (2008) label it in eq. 7 carries the factor 2: on the
+    six stated rows the pooled covariance is 0.003333 and WBC 0.006667. The
+    covariance quoted as WBC is a real wrong method; keying it as WBC, or
+    writing the identity with - 2 WBC, is a defect.
 
 ## THE CAPSTONES ARE NOT YOURS
 

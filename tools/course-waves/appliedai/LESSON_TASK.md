@@ -106,6 +106,21 @@ nDCG with an ideal DCG of 0, an answer with no checkable claim and kappa when
 both raters used one label return null with the reason. Say "returned as null,
 with the reason", never "refused".
 
+**The nDCG note names its case.** The ideal DCG is 0 in exactly two cases: the
+query has no judged documents, or every judged document has grade 0. The
+engine's note says which, and section 3 prints all three wordings ("the query
+has no judged documents", "the 1 judged document has grade 0", "the 8 judged
+documents all have grade 0" for Q24). Quote the one for the case you show.
+
+**WBC as the paper labels it (Expert m03, section 19).** WBC is the fifth term
+of Stephenson, Coelho and Jolliffe (2008) eq. 7, factor 2 included, so WBC is
+twice the pooled within-bin covariance, and the identity is Brier = REL - RES +
+UNC + WBV - WBC with no further 2. On the six stated rows the pooled covariance
+is 0.003333 and WBC 0.006667. Name it "the within-bin covariance term WBC"; a
+lesson that calls WBC "the within-bin covariance" without the factor, or that
+frames the 2 as an engine choice or correction, is a defect. The engine's WBC
+is the paper's.
+
 ## SIX SENTENCES THE DIGEST WILL LET YOU WRITE, AND THEIR FIGURES
 
 1. **BM25 matches words and knows nothing of meaning, section 7.** For Q02 "initial oil rate of

@@ -133,7 +133,7 @@ export const MurphyMode = () => {
           <Tbl head={['term', 'value']} rows={[
             ['reliability REL', six(r.murphy.reliability)], ['resolution RES', six(r.murphy.resolution)],
             ['uncertainty UNC', six(r.murphy.uncertainty)], ['within-bin variance WBV', six(r.murphy.withinBinVariance)],
-            ['within-bin covariance WBC', six(r.murphy.withinBinCovariance)], ['REL - RES + UNC + WBV - WBC', six(r.murphy.sum)],
+            ['within-bin covariance term WBC (twice the pooled within-bin covariance)', six(r.murphy.withinBinCovariance)], ['REL - RES + UNC + WBV - WBC', six(r.murphy.sum)],
             ['Brier', six(r.brier)], ['closure', eX(r.murphy.closure)],
           ]} />
           <Declared title="THE DECOMPOSITION, in the engine's words">{r.basis.murphy}</Declared>

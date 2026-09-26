@@ -26,7 +26,8 @@ are PROVENANCE.
    returns as null with its reason (recall and AP on a query with no relevant
    passage, nDCG with an ideal DCG of 0, kappa when both raters used one
    label); "hallucination" said of a claim that is supported; "grounded" said
-   to mean correct.
+   to mean correct; the nDCG note quoted for the wrong case (Q24's judged
+   documents all have grade 0; "no judged documents" is the other case).
 3. **A false superlative.** "the better system", "always", "never" where the
    digest shows one set of queries at one setting. The MAP order of the two
    systems reverses with the threshold.
@@ -99,7 +100,12 @@ are PROVENANCE.
 17. ECE averages, MCE finds the worst bin: the Ekene rows score Brier 0.168382,
     ECE 0.209300 and MCE 0.723333.
 18. The Murphy identity closes only with the within-bin terms: the closure is
-    -8.33e-17, and the three classic terms alone give 0.169362.
+    -8.33e-17, and the three classic terms alone give 0.169362. WBC is the
+    fifth term of Stephenson, Coelho and Jolliffe (2008) eq. 7 as the paper
+    labels it, so it is twice the pooled within-bin covariance (six stated
+    rows: covariance 0.003333, WBC 0.006667). A key or explanation that calls
+    WBC the covariance itself, halves it, or writes the identity with - 2 WBC
+    is wrong; one that calls the factor 2 an engine quirk or fix is wrong.
 19. The bin-edge rule is a choice: REL is 0.080032 by the engine's rule and
     0.078849 by the library's.
 20. Unjudged is not irrelevant: BM25 at k 10 retrieves 80 unjudged passages,

@@ -96,7 +96,12 @@ hand set** is five stated passages d1 to d5 (d5 empty) scored for the query
 4. **Metrics at k** (sections 9, 11, 12): relevant means grade 1 or more by
    default; precision divides by k; average precision divides by every
    relevant judged passage; the ideal DCG uses every judged grade; a query with
-   no relevant passage is excluded from every mean and listed.
+   no relevant passage is excluded from every mean and listed. The ideal DCG
+   is 0 in exactly two cases, and nDCG is then returned as null with a note
+   naming the case (section 3 prints all three wordings): the query has no
+   judged documents, or every judged document has grade 0 ("the 1 judged
+   document has grade 0", "the 8 judged documents all have grade 0" on Q24).
+   Quote the note for the case at hand, verbatim.
 5. **Short answers** (section 13) use SQuAD normalisation, so "45.0 percent"
    and "45 percent" do not match.
 6. **Extraction** (section 14) has four outcomes; a cell with both sides empty
@@ -106,7 +111,15 @@ hand set** is five stated passages d1 to d5 (d5 empty) scored for the query
 8. **Calibration** (sections 18 and 19): an interior edge opens the upper bin
    (scikit-learn's library closes the lower one); the Murphy decomposition
    carries the within-bin terms and closes; log loss is imported from the
-   machine learning engine.
+   machine learning engine. **WBC is taught as the paper labels it**
+   (section 19): Stephenson, Coelho and Jolliffe (2008) write the Brier score
+   out in their eq. 7, and WBC names the whole fifth term, factor 2 included,
+   so WBC is TWICE the pooled within-bin covariance. The engine's WBC is the
+   paper's. Call it "the within-bin covariance term WBC"; when a lesson names
+   the covariance itself, it says WBC is twice it (six stated rows: pooled
+   covariance 0.003333, WBC 0.006667). The identity is Brier = REL - RES +
+   UNC + WBV - WBC with no further 2. Never present the factor 2 as an engine
+   choice or an engine error: it is the source's own labelling.
 9. **The bootstrap** (sections 16 and 22) is one seeded stream, labelled as
    parameter percentiles, never with a P label; its share at or below 0 is not
    a p-value.

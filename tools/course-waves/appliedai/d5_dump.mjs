@@ -200,7 +200,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w(`# PRECISION. Every score, idf, weight, cosine, term contribution, average length, metric (precision, recall, hit rate, reciprocal rank, average precision, DCG, nDCG and their means), F1, accuracy, fraction, agreement, kappa, probability, Brier score and each of its terms, calibration error, log loss, bootstrap mean, bound, difference, share and standard error prints to SIX decimals; counts, ranks, grades, lengths, seeds, replicates and bins are whole numbers; the ${KD.TIE_DIGITS}-digit tie key prints at twelve significant digits where the tie rule is shown; very small magnitudes print in exponent form; an engine message is printed verbatim, figures and all.`);
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 1906182, ${engineLines} lines. It imports lib/stats (mulberry32 and quantile), lib/conventions/percentile.js (parameterPercentileLabel) and, from engines/dataai/ml.js, logLoss. It runs no language model and makes no network call.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines f50251d, ${engineLines} lines. It imports lib/stats (mulberry32 and quantile), lib/conventions/percentile.js (parameterPercentileLabel) and, from engines/dataai/ml.js, logLoss. It runs no language model and makes no network call.`);
 w();
 w('# THE DATA. Every Ekene document, query, judgment, answer, label and probability is SYNTHETIC, written for this platform by a stated script, and no language model wrote or scores any of it. No real company, person or incident appears.');
 w();
@@ -475,6 +475,9 @@ const nt3 = EV.rankTfidf({ documents: DOCS, query: 'helicopter' }); noteRow('ran
 const nt4 = EV.retrievalMetrics({ ranking: RUNS('A').Q24, judgments: J.Q24, k: K }); noteRow('retrievalMetrics', 'system A on Q24', nt4, '`notes.recall`', nt4.notes.recall);
 noteRow('retrievalMetrics', 'system A on Q24', nt4, '`notes.averagePrecision`', nt4.notes.averagePrecision);
 noteRow('retrievalMetrics', 'system A on Q24', nt4, '`notes.ndcg`', nt4.notes.ndcg);
+const nt4z = EV.retrievalMetrics({ ranking: RUNS('A').Q24, judgments: {}, k: K }); noteRow('retrievalMetrics', 'system A on Q24 with no judgments', nt4z, '`notes.ndcg`', nt4z.notes.ndcg);
+const nt4o = EV.retrievalMetrics({ ranking: RUNS('A').Q24, judgments: { [RUNS('A').Q24[0]]: 0 }, k: K }); noteRow('retrievalMetrics', `system A on Q24 with one judgment, ${RUNS('A').Q24[0]} at grade 0`, nt4o, '`notes.ndcg`', nt4o.notes.ndcg);
+must('the nDCG note names each of its cases', nt4.ndcg === null && nt4z.ndcg === null && nt4o.ndcg === null && new Set([nt4.notes.ndcg, nt4z.notes.ndcg, nt4o.notes.ndcg]).size === 3, [nt4.notes.ndcg, nt4z.notes.ndcg, nt4o.notes.ndcg].join(' / '));
 const nt5 = EV.evaluateRetrieval({ runs: RUNS('A'), judgments: J, k: K }); noteRow('evaluateRetrieval', `system A, k ${K}`, nt5, '`excluded[0].reason`', nt5.excluded[0].reason);
 const nt6 = EV.evaluateRetrieval({ runs: { Q24: RUNS('A').Q24 }, judgments: { Q24: J.Q24 }, k: K }); noteRow('evaluateRetrieval', 'Q24 alone', nt6, '`note`', nt6.note);
 const nt7 = EV.checkGroundedness({ answer: 'No passage says so.', citations: [], documents: DOCS }); noteRow('checkGroundedness', 'an answer with no figure', nt7, '`note`', nt7.note);
@@ -1160,7 +1163,7 @@ section('murphy', 'Decomposing the Brier score: reliability, resolution, uncerta
 w(`THE DECOMPOSITION (the engine's basis, verbatim): ${cal.basis.murphy}.`);
 w();
 const M = cal.murphy;
-table(['term', `value (${cal.bins} bins)`], [['reliability REL', f6(M.reliability)], ['resolution RES', f6(M.resolution)], ['uncertainty UNC', f6(M.uncertainty)], ['within-bin variance WBV', f6(M.withinBinVariance)], ['within-bin covariance WBC', f6(M.withinBinCovariance)], ['REL - RES + UNC + WBV - WBC', f6(M.sum)], ['Brier', f6(cal.brier)], ['closure, Brier minus the sum', eX(M.closure)]]);
+table(['term', `value (${cal.bins} bins)`], [['reliability REL', f6(M.reliability)], ['resolution RES', f6(M.resolution)], ['uncertainty UNC', f6(M.uncertainty)], ['within-bin variance WBV', f6(M.withinBinVariance)], ['within-bin covariance term WBC (twice the pooled within-bin covariance)', f6(M.withinBinCovariance)], ['REL - RES + UNC + WBV - WBC', f6(M.sum)], ['Brier', f6(cal.brier)], ['closure, Brier minus the sum', eX(M.closure)]]);
 must('the identity closes to rounding', Math.abs(M.closure) < 1e-15, M.closure);
 w();
 w(`The identity closes: the closure is ${eX(M.closure)}, rounding in the last bits. Without WBV and WBC, REL - RES + UNC would be ${f6(M.reliability - M.resolution + M.uncertainty)} (derived), which is not the Brier score. Uncertainty is base rate x (1 - base rate) = ${f6(cal.baseRate)} x ${f6(1 - cal.baseRate)} (derived); it depends on the outcomes alone. Reliability is small when each bin's mean probability matches its observed frequency; resolution is large when the bins' frequencies differ from the base rate.`);
@@ -1174,6 +1177,16 @@ const cw = success('calibration within bin', EV.calibration({ yTrue: CW.y, proba
 const cwBin = cw.table.findIndex((t) => t.n > 0);
 must('the within-bin rows share one bin', cw.table[cwBin].n === CW.p.length, cwBin);
 w(`THE WITHIN-BIN TERMS. Six stated rows with probabilities ${CW.p.slice(0, -1).join(', ')} and ${CW.p[CW.p.length - 1]} and outcomes ${CW.y.join(', ')} all fall in bin ${cwBin}. WBV ${f6(cw.murphy.withinBinVariance)}, WBC ${f6(cw.murphy.withinBinCovariance)}, closure ${eX(cw.murphy.closure)}. The spread of the probabilities inside the bin is what WBV measures.`);
+w();
+const cwN = CW.p.length;
+const cwO = CW.y.reduce((a, b) => a + b, 0) / cwN; const cwF = CW.p.reduce((a, b) => a + b, 0) / cwN;
+const cwCov = CW.y.reduce((a, y, i) => a + (y - cwO) * (CW.p[i] - cwF), 0) / cwN;
+must('WBC is twice the pooled within-bin covariance (one bin)', nearly(cw.murphy.withinBinCovariance, 2 * cwCov), `${cw.murphy.withinBinCovariance} vs ${2 * cwCov}`);
+must('WBC is twice the pooled within-bin covariance (the Ekene rows)', (() => { let c = 0; const bi = (p) => { let k = 0; for (let i = 1; i < cal.bins; i += 1) if (i / cal.bins <= p) k = i; return k; }; const byB = {}; P.forEach((p, i) => { (byB[bi(p)] ||= []).push(i); }); Object.values(byB).forEach((ix) => { const o = ix.reduce((a, i) => a + Y[i], 0) / ix.length; const f = ix.reduce((a, i) => a + P[i], 0) / ix.length; ix.forEach((i) => { c += (Y[i] - o) * (P[i] - f); }); }); c /= P.length; return nearly(M.withinBinCovariance, 2 * c); })(), M.withinBinCovariance);
+must('without the 2 the identity does not close', Math.abs(cw.brier - (cw.murphy.reliability - cw.murphy.resolution + cw.murphy.uncertainty + cw.murphy.withinBinVariance - cw.murphy.withinBinCovariance / 2)) > 1e-6, cw.murphy.withinBinCovariance);
+const SCJ = /Stephenson, Coelho and Jolliffe (\d{4}), eq\. (\d+)\)/.exec(cal.basis.murphy);
+must('the basis cites the paper and its equation', SCJ !== null, cal.basis.murphy);
+w(`WBC AS THE PAPER LABELS IT. Stephenson, Coelho and Jolliffe (${SCJ[1]}) write the Brier score out in their eq. ${SCJ[2]} with five components; the fifth is -(2/N) sum over bins k and rows j in bin k of (y_kj - observed_k)(p_kj - mean p_k), and the line after eq. ${SCJ[2]} names the five BS = REL - RES + UNC + WBV - WBC. So WBC is (2/N) sum (y_kj - observed_k)(p_kj - mean p_k), the fifth term without its minus sign, and it carries the factor 2: WBC as the paper labels it is twice the pooled within-bin covariance, and the engine's WBC is the paper's. On the six rows above the pooled within-bin covariance, sum (y - observed)(p - mean p) / N with observed ${f6(cwO)} and mean p ${f6(cwF)}, is ${f6(cwCov)} (derived), and WBC is 2 x ${f6(cwCov)} = ${f6(2 * cwCov)} (derived), the engine's ${f6(cw.murphy.withinBinCovariance)}. Drop the 2 and the identity no longer closes.`);
 w();
 const edgeIdx = P.map((p, i) => [p, i]).filter(([p]) => { const i = Math.round(p * 10); return i >= 1 && i <= 9 && p === i / 10; });
 w(`THE BIN-EDGE RULE. p is in bin i when i/M <= p < (i+1)/M, with the edges as computed in double precision, so a probability exactly on an interior edge OPENS the upper bin; 1 closes the last bin. Counted over the whole calibration set, ${edgeIdx.length} probabilities sit exactly on an interior edge at ${cal.bins} bins, with the values ${[...new Set(edgeIdx.map(([p]) => p))].sort().join(', ')}.`);

@@ -15,8 +15,9 @@
 //                         paired-bootstrap upper bound, and a grounded fraction
 //   AWKA    Expert        agreement and calibration: unweighted and linear
 //                         kappa, the Brier score, and the reliability,
-//                         resolution and within-bin covariance terms at eight
-//                         bins
+//                         resolution and WBC terms at eight bins (WBC as the
+//                         paper labels it: twice the pooled within-bin
+//                         covariance)
 //
 // THE DATASETS ARE SEEDED VARIANTS OF THE EKENE DOCUMENT FIXTURE, generated
 // here deterministically through the canonical mulberry32 of lib/stats on
@@ -252,7 +253,9 @@ NNEWI.stated = nnS;
    Ninety-six rating pairs and one hundred and twenty-two calibration rows. The
    brief states: kappa unweighted and linear on the grades 0 to 3 (labels 0,
    1, 2, 3); the Brier score, and the Murphy reliability, resolution and
-   within-bin covariance terms at eight equal-width bins. */
+   WBC terms at eight equal-width bins. WBC is the fifth term of Stephenson,
+   Coelho and Jolliffe (2008) eq. 7 as the paper labels it, so it carries the
+   factor 2: twice the pooled within-bin covariance. */
 
 const AWKA = (() => {
   const seed = 70533;

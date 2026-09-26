@@ -12,8 +12,10 @@
 # (parameterPercentileLabel) and engines/dataai/ml.js (logLoss); the suite
 # imports ml.js and percentile.js directly as well.
 #
-# VENDORED AT 1906182 (engines PR #257, squash-merged; content identical to the
-# CI-green PR head, diff empty). RE-PIN with REV=<sha>: the blobs must be identical or the course
+# FIRST VENDORED AT 1906182 (engines PR #257, squash-merged). RE-VENDORED AT
+# f50251d (engines PR #258, squash-merged: wording only, the nDCG-undefined note
+# states its exact condition and WBC is anchored to Stephenson, Coelho and
+# Jolliffe 2008 eq. 7; no number changes). RE-PIN with REV=<sha>: the blobs must be identical or the course
 # foundation re-cuts.
 #
 # LEDGER MODE: THE PIN DOES NOT MOVE. Every closure path either matches the
@@ -28,7 +30,7 @@ set -euo pipefail
 ENG=/root/petrolord-engines
 NG=${NG:-/root/wt-dai-d5-nextgen}
 PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
-REV=${REV:-1906182}
+REV=${REV:-f50251d}
 FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 EXP=$(mktemp -d)
 LEDGER_PY=$(mktemp)
@@ -156,7 +158,7 @@ for p in paths:
     added.append({
         'path': p, 'kind': kind, 'group': GROUP, 'vendoredSha': blob,
         'reason': (f"D5 appliedai course: vendored sha-identical from petrolord-engines {full[:7]} "
-                   f"(PR #257: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, "
+                   f"(PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, "
                    f"timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. "
                    f"{'New since' if kind == 'extra' else 'Differing from'} the canonical pin {pin[:7]}, which stays: moving it "
                    f"would also move economics, facilities, production, seismolord and wellsite paths other courses grade. "

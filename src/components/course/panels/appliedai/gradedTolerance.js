@@ -68,8 +68,9 @@ export const GRADED_FIELDS = [
   ['intermediate', 'nnewi_q_supported_fraction', 'fraction', 1e-9],
   // Expert: AWKA, ninety-six rating pairs and one hundred and twenty-two
   // calibration rows. AGREEMENT AND CALIBRATION: unweighted and linear kappa,
-  // the Brier score, and the Murphy reliability, resolution and within-bin
-  // covariance terms at eight bins.
+  // the Brier score, and the Murphy reliability, resolution and WBC terms at
+  // eight bins (WBC as Stephenson, Coelho and Jolliffe 2008 eq. 7 label it:
+  // twice the pooled within-bin covariance).
   ['advanced', 'awka_kappa_unweighted', 'kappa', 1e-9],
   ['advanced', 'awka_kappa_linear', 'kappa', 1e-9],
   ['advanced', 'awka_brier', 'brier', 1e-9],

@@ -4,7 +4,7 @@
 # Data, D3 Electrofacies and D4 Data-Driven Production Forecasting.
 #
 # Engine: engines/dataai/evaluate.js, vendored sha-identical with
-# petrolord-engines 1906182 (engines PR #257, squash-merged). It imports
+# petrolord-engines f50251d (engines PR #257, with the wording repair #258). It imports
 # lib/stats (mulberry32, quantile), lib/conventions/percentile.js
 # (parameterPercentileLabel) and engines/dataai/ml.js (logLoss), all three
 # already vendored byte-identical. The vendoring closure walked from the jest
