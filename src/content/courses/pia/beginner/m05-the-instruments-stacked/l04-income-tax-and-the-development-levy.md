@@ -22,9 +22,7 @@ In a year under the Act alone the education charge is the tertiary education tax
 
 ## The development levy
 
-The Nigeria Tax Act 2025 removed the tertiary education tax. It deletes the charging sections of the Tertiary Education Trust Fund Act, NTA s.197(5):
-
-> "(5) The Tertiary Education Trust Fund (Establishment, Etc.) Act, 2011 is amended by deleting sections 1, 2, and 3(3)."
+The Nigeria Tax Act 2025 removed the tertiary education tax: NTA s.197(5) deletes the charging sections of the Tertiary Education Trust Fund Act, so a year under the Nigeria Tax Act 2025 carries no tertiary education tax at all.
 
 In its place it charges a development levy, NTA s.59(1):
 

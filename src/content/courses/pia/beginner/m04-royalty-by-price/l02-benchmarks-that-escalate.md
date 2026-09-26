@@ -34,13 +34,9 @@ All on the Regulations base. Before its base year the base keeps 50, 100 and 150
 
 ## A misprint in the Regulations' table
 
-The Regulations' Schedule also prints its benchmarks as a table:
+The Regulations' Schedule also prints its benchmarks as a table for 2021 to 2026. Its low and high rows follow the 2 percent rule and match the engine's table above. Its middle row does not: the Schedule prints the middle column as 102.00, 104.00, 106.00, 108.00 and 110.00 for 2022 to 2026, which does not follow its own 2 percent rule. From 2023 the printed row rises by the same step each year and falls behind the rule, while the engine's middle benchmark is 104.040000 in 2023.
 
-> "Royalty price benchmarks 2021 2022 2023 2024 2025 2026 11(1) (a) 50.00 51.00 52.02 53.06 54.12 55.20 11(1) (b) 100.00 102.00 104.00 106.00 108.00 110.00 11(1) (c) 150.00 153.00 156.06 159.18 162.36 165.61"
-
-The low and high rows follow the 2 percent rule. The middle row, 102.00 to 110.00, does not: from 2023 it rises by the same step each year and falls behind the rule. The course quotes it as printed and says it is a misprint. The engine applies the rule, and says so in a note on every ledger with a year of 2023 or later:
-
-> The Regulations' benchmark table prints the 100 USD level as 102.00, 104.00, 106.00, 108.00 and 110.00 for 2022 to 2026, which does not follow its own 2% rule; the engine applies the rule (104.04 in 2023).
+The course quotes the printed row as it stands and says it is a misprint. The engine applies the rule, and it says so in a note on every ledger with a year of 2023 or later, so a reader of any ledger in the calculator sees the conflict named beside the figures. Where a text and its own rule disagree, the engine follows the rule and the course names the disagreement.
 
 ## Why the escalation matters
 
@@ -48,4 +44,4 @@ A constant price pays less royalty by price every year, because the benchmarks c
 
 ## Exercise
 
-Open the royalty calculator and choose "Royalty by price and its benchmarks". Keep the Regulations base and a price of 75. Step the year from 2021 to 2027 and copy the three benchmarks the panel prints each year. Compare your middle column with the Regulations' printed table above and mark each year where they differ. Then set the year to 2032 and confirm the rate 0.010320, and explain in one sentence why the rate fell at a constant price.
+Open the royalty calculator and choose "Royalty by price and its benchmarks". Keep the Regulations base and a price of 75. Step the year from 2021 to 2027 and copy the three benchmarks the panel prints each year. Compare your middle column with the Regulations' printed middle row above and mark each year where they differ. Then set the year to 2032 and confirm the rate 0.010320, and explain in one sentence why the rate fell at a constant price.

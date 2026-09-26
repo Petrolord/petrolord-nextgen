@@ -28,9 +28,9 @@ The hydrocarbon tax reads crude oil and condensate only. Gas sits outside it. Th
 
 > "(b) all royalties the liability for which was incurred and were paid by the company during that period in respect of crude oil and associated gas"
 
-and the contributions, PIA s.263(1)(h), which names host communities development trusts and the Niger Delta Development Commission among the approved funds. The same base is limited by a cost price ratio and reduced by allowances; the Professional tier works both. The Act also says what may never come off, PIA s.264(l):
+and the contributions, PIA s.263(1)(h), which names host communities development trusts and the Niger Delta Development Commission among the approved funds. The same base is limited by a cost price ratio and reduced by allowances; the Professional tier works both, and it also reads the list of items the Act keeps out of the base.
 
-> "(l) amounts incurred in respect of tertiary education tax, companies income tax, any income tax, profits tax or other similar taxes, whether charged within Nigeria or elsewhere ;"
+The gas royalty does not come off this base. Gas sits outside the tax, so its royalty has nothing to reduce there, and the engine deducts only the production royalty on liquids and the royalty by price.
 
 ## Companies income tax reads the whole profit
 
