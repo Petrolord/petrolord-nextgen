@@ -23,7 +23,7 @@ export default [
   // final 9: the two R factor templates' climbs
   { q: 'advanced final 9', where: 'explanation', printed: '19.6873', value: async (L) => climb(await series(L, 'dflt', 'price', L.ANGOLA.id)) },
   { q: 'advanced final 9', where: 'explanation', printed: '7.8960', value: async (L) => climb(await series(L, 'dflt', 'price', L.GHANA.id)) },
-  { q: 'advanced final 9', where: 'explanation', printed: 'two R factor templates', value: (L) => (L.SIX.filter((r) => r.profitSplit.type === 'tiered_r_factor').length === 2 ? 'two R factor templates' : 'no') },
+  { q: 'advanced final 9', where: 'explanation', printed: 'the two templates whose split is tiered on the R factor', value: (L) => (L.SIX.filter((r) => r.profitSplit.type === 'tiered_r_factor').length === 2 ? 'the two templates whose split is tiered on the R factor' : 'no') },
   // final 24: summary[0] on ODIDI
   { q: 'advanced final 24', where: 'key', printed: '1.7389', value: async (L) => (await row(L, 'odidi', 1)).npv },
   { q: 'advanced final 24', where: 'prompt', printed: 'prints 1.7 million USD', value: async (L) => ((await insight(L, 'odidi', 'npv')).includes('at 1.7 million USD') ? 'prints 1.7 million USD' : 'no') },
@@ -40,9 +40,9 @@ export default [
   // final 35: the Designer's sample regime pair
   { q: 'advanced final 35', where: 'explanation', printed: '56.5354', value: (L) => L.CMP.cmp_designer_defaults && 56.5354 },
   // final 36: payback verdict on the default project
-  { q: 'advanced final 36', where: 'prompt', printed: '3, 3, 3, 3, 4 and 3', value: async (L) => (await cmp(L, 'dflt')).summary.map((s) => s.paybackPeriod).join(', ').replace(/, (\d+)$/, ' and $1') },
-  { q: 'advanced final 36', where: 'key', printed: 'All five regimes at year 3', value: async (L) => { const t = await insight(L, 'dflt', 'payback'); const names = (t.split('pay back in year 3')[0].match(/"[^"]+"/g) || []).length; return names === 5 && t.includes('against year 4 for "Angola - Deepwater PSC"') ? 'All five regimes at year 3' : `names ${names}`; } },
-  { q: 'advanced final 36', where: 'explanation', printed: '432.0925', value: async (L) => ((await row(L, 'dflt', 1)).name === PIA ? (await row(L, 'dflt', 1)).npv : NaN) },
+  { q: 'advanced final 36', where: 'explanation', printed: '3, 3, 3, 3, 4 and 3', value: async (L) => (await cmp(L, 'dflt')).summary.map((s) => s.paybackPeriod).join(', ').replace(/, (\d+)$/, ' and $1') },
+  { q: 'advanced final 36', where: 'key', printed: 'the only one paying back in year 4', value: async (L) => { const s = (await cmp(L, 'dflt')).summary; const t = await insight(L, 'dflt', 'payback'); const four = s.filter((x) => x.paybackPeriod === 4); return four.length === 1 && four[0].name === 'Angola - Deepwater PSC' && Math.max(...s.map((x) => x.paybackPeriod)) === 4 && t.endsWith('against year 4 for "Angola - Deepwater PSC".'); } },
+  { q: 'advanced final 36', where: 'explanation', printed: 'Angola pays out in year 3', value: async (L) => (await byName(L, 'dflt', 'Angola - Deepwater PSC')).rFactorPayoutYear === 3 },
   // final 39: the losses of the two most regressive templates
   { q: 'advanced final 39', where: 'explanation', printed: '267.7301', value: async (L) => { const v = await series(L, 'dflt', 'capex', L.GOM.id); return v[0] - v[v.length - 1]; } },
   { q: 'advanced final 39', where: 'explanation', printed: '244.0782', value: async (L) => { const v = await series(L, 'dflt', 'capex', L.GENERIC.id); return v[0] - v[v.length - 1]; } },
@@ -86,11 +86,15 @@ export default [
   { q: 'advanced m05 1', where: 'prompt', printed: '30.6156', value: async (L) => (await byName(L, 'dflt', PIA)).governmentShareOfNetRevenuePct },
   { q: 'advanced m05 1', where: 'prompt', printed: '39.3855', value: async (L) => (await series(L, 'dflt', 'price', L.PIA.id))[3] },
   { q: 'advanced m05 1', where: 'explanation', printed: '8.7699', value: async (L) => gap(await byName(L, 'dflt', PIA)) },
-  { q: 'advanced m05 2', where: 'key', printed: '8.7699 percentage points for Nigeria - PIA (2021)', value: async (L) => { const s = (await cmp(L, 'dflt')).summary; const m = s.reduce((a, b) => (gap(b) < gap(a) ? b : a)); return `${gap(m).toFixed(4)} percentage points for ${m.name}`; } },
-  { q: 'advanced m05 2', where: 'key', printed: '16.7958 for Ghana - Deepwater', value: async (L) => { const s = (await cmp(L, 'dflt')).summary; const m = s.reduce((a, b) => (gap(b) > gap(a) ? b : a)); return `${gap(m).toFixed(4)} for ${m.name}`; } },
+  { q: 'advanced m05 2', where: 'key', printed: 'the share times 1.286453', value: async (L) => { const s = (await cmp(L, 'dflt')).summary; const f = s.map((x) => (x.governmentTakePct / x.governmentShareOfNetRevenuePct).toFixed(6)); return new Set(f).size === 1 ? `the share times ${f[0]}` : f.join(','); } },
+  { q: 'advanced m05 2', where: 'explanation', printed: '75.4293', value: async (L) => (await byName(L, 'dflt', 'Ghana - Deepwater')).governmentTakePct },
+  { q: 'advanced m05 2', where: 'explanation', printed: '58.6335', value: async (L) => (await byName(L, 'dflt', 'Ghana - Deepwater')).governmentShareOfNetRevenuePct },
+  { q: 'advanced m05 2', where: 'explanation', printed: '39.3855', value: async (L) => (await byName(L, 'dflt', PIA)).governmentTakePct },
+  { q: 'advanced m05 2', where: 'explanation', printed: '30.6156', value: async (L) => (await byName(L, 'dflt', PIA)).governmentShareOfNetRevenuePct },
   // m06
   { q: 'advanced m06 4', where: 'prompt', printed: 'Nigeria - PIA (2021) at 1.7389', value: async (L) => `${(await row(L, 'odidi', 1)).name} at ${(await row(L, 'odidi', 1)).npv.toFixed(4)}` },
-  { q: 'advanced m06 4', where: 'key', printed: 'the other five NPVs at 12 percent negative', value: async (L) => { const s = (await cmp(L, 'odidi')).summary; return s[0].npv > 0 && s.slice(1).every((x) => x.npv < 0) ? 'the other five NPVs at 12 percent negative' : 'no'; } },
+  { q: 'advanced m06 4', where: 'key', printed: 'The only contractor NPV of the six that clears 12 percent', value: async (L) => { const s = (await cmp(L, 'odidi')).summary; return s[0].npv > 0 && s.slice(1).every((x) => x.npv < 0) ? 'The only contractor NPV of the six that clears 12 percent' : 'no'; } },
+  { q: 'advanced m06 4', where: 'key', printed: '-58.1813', value: async (L) => Math.min(...(await cmp(L, 'odidi')).summary.map((x) => x.npv)) },
   { q: 'advanced m06 4', where: 'key', printed: '-58.1813', value: async (L) => (await row(L, 'odidi', 6)).npv },
   { q: 'advanced m06 5', where: 'key', printed: '316.7898 million USD, at rank 6', value: async (L) => { const s = (await cmp(L, 'odidi')).summary; const i = s.findIndex((x) => x.govTake === Math.max(...s.map((y) => y.govTake))); return `${s[i].govTake.toFixed(4)} million USD, at rank ${i + 1}`; } },
   { q: 'advanced m06 5', where: 'option 1', printed: '196.0260', value: async (L) => (await row(L, 'odidi', 1)).govTake },
@@ -107,7 +111,7 @@ export default [
   { q: 'advanced m06 13', where: 'option 1', printed: '777.9904', value: (L) => L.totals(L.PIA, L.ODIDI).costRecovered },
   { q: 'advanced m06 14', where: 'prompt', printed: '3.8097', value: (L) => L.cf(L.PIA, L.ODIDI)[4].royalty },
   { q: 'advanced m06 14', where: 'prompt', printed: '4.9025', value: (L) => L.cf(L.PIA, L.ODIDI)[5].royalty },
-  { q: 'advanced m06 14', where: 'key', printed: 'starting the royalty by price', value: (L) => { const r = L.cf(L.PIA, L.ODIDI); const rate = (i) => r[i].royalty / r[i].grossRevenue; return rate(4) < 0.0500001 && rate(5) > 0.052 && L.ODIDI.prices[1].year === 6 ? 'starting the royalty by price' : 'no'; } },
+  { q: 'advanced m06 14', where: 'key', printed: 'so the royalty by price began', value: (L) => { const r = L.cf(L.PIA, L.ODIDI); const rate = (i) => r[i].royalty / r[i].grossRevenue; return rate(4) < 0.0500001 && rate(5) > 0.052 && L.ODIDI.prices[1].year === 6 ? 'so the royalty by price began' : 'no'; } },
   { q: 'advanced m06 14', where: 'explanation', printed: '0.002276', value: (L) => { const r = L.cf(L.PIA, L.ODIDI)[5]; return (r.royalty - 0.05 * r.grossRevenue) / (r.grossRevenue - (0.0145 * 0)) && Number(((r.royalty - 0.05 * r.grossRevenue) / (r.grossRevenue * 1)).toFixed(6)) > 0 ? 0.002276 : NaN; } },
   { q: 'advanced m06 15', where: 'key', printed: '243.6525', value: async (L) => { const v = await series(L, 'dflt', 'capex', L.PIA.id); return v[0] - v[7]; } },
   { q: 'advanced m06 15', where: 'key', printed: '244.8503', value: async (L) => { const v = await series(L, 'odidi', 'capex', L.PIA.id); return v[0] - v[7]; } },

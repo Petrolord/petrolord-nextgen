@@ -116,16 +116,16 @@
   "scope": "final",
   "module_key": null,
   "ord": 36,
-  "prompt": "The payback column of `cmp_all_templates_default_project` reads 3, 3, 3, 3, 4 and 3 down the summary. What does the payback verdict then report?",
+  "prompt": "The payback verdict on `cmp_all_templates_default_project` closes with \"against year 4 for Angola - Deepwater PSC\". What is Angola in that sentence?",
   "options": [
-   "The regime with the highest NPV, because the tie is broken by summary order and the summary is sorted on contractor NPV.",
-   "No verdict at all, because a five way tie at the top cannot be ranked and an unsupportable claim is omitted.",
-   "All five regimes at year 3, in summary order, against year 4 for Angola - Deepwater PSC.",
-   "The regime whose R factor payout year is earliest, which is the tie break the engine applies whenever an integer column ties in the summary."
+   "The runner-up, the regime that recovers its capital second fastest of the six templates.",
+   "The regime with the lowest contractor NPV, which the sentence quotes as the comparison's floor.",
+   "The slowest regime left once the tied fastest ones are named, here the only one paying back in year 4.",
+   "The one regime whose R factor payout comes later than its cash payback, which the sentence flags as a warning."
   ],
   "answer_index": 2,
-  "explanation": "The verdict names every regime tied at the fastest year, so the sentence opens with Nigeria - PIA (2021), which leads the sort at 432.0925 million USD, and lists four more. A sentence naming only the first would be the NPV ranking under another label.",
-  "why": "five templates pay back in year 3 on the default project; repair history removed"
+  "explanation": "The verdict names every regime tied at the fastest year, sets them aside and takes the maximum of what is left, so the second name is the slowest of the rest. The payback column reads 3, 3, 3, 3, 4 and 3 down the summary, and Angola pays out in year 3, before its payback.",
+  "why": "five templates pay back in year 3 on the default project; the question now tests the second name (slowest of the rest), avoiding a duplicate of m04 ord 1"
  },
  {
   "tier": "advanced",
@@ -404,7 +404,7 @@
   "scope": "module",
   "module_key": "m04-the-insights",
   "ord": 5,
-  "prompt": "On `cmp_never_recovers` every regime's price series is null and flagged undefined at all nine prices. What does the price verdict return there, and why?",
+  "prompt": "Every price series on `cmp_never_recovers` comes back null, flagged undefined, at each of the nine prices. How does the price verdict read there, and on what grounds?",
   "options": [
    "It declines to rank, because every point is undefined and so no swept price gives every regime a government take within 0 to 100 percent.",
    "It names Nigeria - PIA (2021), since two null endpoints subtract to a climb of zero that ranks like any other.",
@@ -470,14 +470,14 @@
   "ord": 2,
   "prompt": "A reader proposes to translate between government take and government share of net revenue with a fixed offset, because the chart runs about ten points above the table. Why does that fail?",
   "options": [
-   "The gap is not fixed: on one comparison at one price it runs from 8.7699 percentage points for Nigeria - PIA (2021) to 16.7958 for Ghana - Deepwater, and it grows with the share itself.",
+   "The gap is proportional to the share: here government take is the share times 1.286453, so a larger share carries a larger gap.",
    "The gap changes with the swept price, so an offset taken at 70 USD per bbl is wrong at every other one of the nine points.",
    "The offset is stable in percentage points and unstable in money, so it can be carried between rates but never between takes.",
    "The two rates are computed from different ledgers, so no arithmetic relation between them exists to be approximated by an offset."
   ],
   "answer_index": 0,
-  "explanation": "Government take is government share of net revenue times 1.286453 on this project, so the gap is proportional to the share: Ghana - Deepwater shows 16.7958 where Nigeria - PIA (2021) shows 8.7699.",
-  "why": "gap range now 8.7699 (PIA) to 16.7958 (Ghana)"
+  "explanation": "Revenue less opex and capex do not depend on the regime, so the factor is one number for the whole comparison: Ghana - Deepwater's share of 58.6335 becomes a take of 75.4293, while Nigeria - PIA (2021) goes from 30.6156 to 39.3855.",
+  "why": "gap runs 8.7699 (PIA) to 16.7958 (Ghana); key restated as the fixed ratio 1.286453 to stay clear of m02 ord 15"
  },
  {
   "tier": "advanced",
