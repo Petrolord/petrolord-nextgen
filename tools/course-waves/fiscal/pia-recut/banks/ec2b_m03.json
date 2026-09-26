@@ -66,15 +66,15 @@
   "explanation": "A 100 percent limit is not the same thing as recovering everything. It binds whenever the year's costs exceed its revenue after royalty, which a year one capex charge guarantees."
  },
  {
-  "prompt": "A reader takes the cost recovery ceiling as a percent of gross revenue instead. How large is the error in year 1 of the default project?",
+  "prompt": "Under the Gulf of Mexico terms a reader takes the cost recovery ceiling as a percent of gross revenue instead. How large is the error in year 1 of the default project?",
   "options": [
    "Exactly the royalty, 50.9979 million USD of extra recovery, which then flows into the pool, into the R factor and into every split keyed on it.",
    "It is immaterial at a 100 percent limit, since the ceiling binds either way in the year the capex lands.",
-   "It is the spread between the two limits the template set uses, 80 percent against 100, applied to the year's revenue.",
+   "It is the spread between two limits the template set uses, 50 percent against 100, applied to the year's revenue.",
    "It cancels in the totals, a larger recovery in year 1 leaving a smaller pool for the years that follow it."
   ],
   "answer": 0,
-  "explanation": "The tell is worth memorising: if a cost recovery ceiling ever equals gross revenue, the wrong base has been used, because royalty is always taken first."
+  "explanation": "The tell is worth memorising: if an after-royalty ceiling ever equals gross revenue, the wrong base has been used. Only Nigeria - PIA (2021) takes its limit on a gross base, 70 percent of the value of crude oil and NGL."
  },
  {
   "prompt": "Angola - Deepwater PSC charges a royalty of 0 percent and collects 0.0000 million USD on the default project, yet its contractor keeps 481.7318 million USD against 980.9313 under the Gulf of Mexico terms. Why?",
@@ -88,15 +88,15 @@
   "explanation": "A low headline rate is not a soft regime. The template with no royalty at all is the harsher of the two here."
  },
  {
-  "prompt": "Nigeria - PIA (2021) collects total royalty of 268.6928 million USD on the default project and 700.1194 on the test project, and Brazil - Concession collects exactly the same on both. How does a slider match a flat 10 percent?",
+  "prompt": "Nigeria - PIA (2021) collects total royalty of 154.4828 million USD on the default project and 443.2226 on the test project, against Brazil's flat 10 percent at 268.6928 and 700.1194. Why is the PIA total the smaller on both?",
   "options": [
-   "The engine averages a sliding scale over the life of the field and charges one mean rate, which for tiers of 7.5 and 10 percent works out at 10 percent on both decks.",
-   "The slider keys on the first dated point of the deck, which is above 50 USD per bbl on both projects, and that point then fixes the rate for the whole of the 25 year run.",
-   "Every applied price on both decks is above the 50 USD per bbl threshold, so the slider sits in its 10 percent tier in every year and never slides.",
-   "A sliding royalty falls back to the flat rate of the nearest template whenever its two tiers straddle the deck."
+   "The engine averages the template's two price tiers of 7.5 and 10 percent over the life and charges one mean rate, which falls below Brazil's flat 10 percent.",
+   "The PIA royalty keys on the first dated point of the deck, which fixes a single 5 percent rate for the whole of the 25 year run on both of the projects.",
+   "Its oil pays 5 percent below 50,000 bopd plus a royalty by price only while the price clears the year's low benchmark, and gas and NGL pay 5 percent.",
+   "A PIA royalty falls back to half the flat rate of the nearest template whenever the deck sits above its price benchmark for the year in question."
   ],
   "answer": 2,
-  "explanation": "The default deck prices oil at 70, 75 and 80 USD per bbl and the test deck at 80. A sliding instrument that never slides is a flat one, and whether it slides is a property of the deck."
+  "explanation": "On the default project that is 154.4828 on revenue of 2686.9277. The two never collect the same total, because only Brazil's rate is flat."
  },
  {
   "prompt": "What can move the tier a sliding royalty selects?",
@@ -107,7 +107,7 @@
    "The R factor, the ratio this sandbox uses to key the royalty tiers and the profit split tiers alike."
   ],
   "answer": 0,
-  "explanation": "It reads the applied oil price, so anything that changes that price changes the tier as well as the revenue. Not gas, not NGL, not rate, not cumulative volume, not the R factor."
+  "explanation": "It reads the applied oil price, so anything that changes that price changes the tier as well as the revenue. Gas, NGL, rate, cumulative volume and the R factor play no part."
  },
  {
   "prompt": "Ghana - Deepwater is described as featuring an additional oil entitlement and Brazil - Concession as carrying a special participation tax. Where do those two instruments appear in a run?",
@@ -123,24 +123,24 @@
  {
   "prompt": "Three of the six templates take a flat 100 percent of profit oil to the contractor and recover cost at 100 percent. What are the other three?",
   "options": [
-   "Tiered on the oil price, at those same three limits, a sharing regime keying its split on the price it sells at.",
-   "Flat splits below 100 percent, the difference between the split and 100 being the government's share of profit oil.",
-   "Concessions as well, differing only in the royalty rates of 7.5, 5 and 0 percent that the three of them carry.",
-   "Tiered on the R factor, with cost recovery capped at 80, 90 and 50 percent."
+   "Tiered on the oil price, at those same three limits of 100 percent, a sharing regime keying its split on the price it sells at in the year.",
+   "Flat splits below 100 percent, the difference between the split and 100 being the government's share of profit oil in every year of the life of the field.",
+   "Concessions as well, differing only in the royalty rates of 12.5, 5 and 0 percent that the three of them carry.",
+   "Two tiered on the R factor, capped at 90 and 50 percent, and Nigeria - PIA (2021), capped at 70 percent of gross crude and NGL value with a split by cumulative production."
   ],
   "answer": 3,
-  "explanation": "Those are the templates where the middle columns do real work, because an unrecovered balance has somewhere to accumulate and the contractor's share changes as the field matures."
+  "explanation": "Those are the templates where the middle columns do real work, because an unrecovered balance has somewhere to accumulate and the contractor's share can change as the field matures."
  },
  {
   "prompt": "Which template collects the most royalty on the default project, and what does that predict about its contractor?",
   "options": [
-   "USA - Gulf of Mexico at 503.7989 million USD, which leaves that contractor the least cash of the six at 406.2057 million USD.",
+   "USA - Gulf of Mexico at 503.7989 million USD, which leaves that contractor the least cash of the six, 428.8774 million USD.",
    "Generic Royalty/Tax at 335.8660 million USD, since 12.5 percent is the highest flat rate anywhere in the list.",
-   "USA - Gulf of Mexico at 503.7989 million USD, and it predicts nothing: that contractor keeps 980.9313 million USD, more than four of the other five.",
-   "Nigeria - PIA (2021) at 268.6928 million USD, a slider in its top tier outcollecting every flat rate in the set."
+   "USA - Gulf of Mexico at 503.7989 million USD, and it predicts nothing: that contractor keeps 980.9313 million USD, more than three of the other five.",
+   "Nigeria - PIA (2021) at 154.4828 million USD, its royalty by price outcollecting every flat rate in the set of six templates."
   ],
   "answer": 2,
-  "explanation": "406.2057 million USD is the PIA contractor, under a royalty of 268.6928 million USD. The royalty ranking and the contractor ranking are not the same ranking."
+  "explanation": "The most contractor cash, 1058.0159 million USD, sits under the PIA template's royalty of 154.4828 million USD. The royalty ranking and the contractor ranking are not the same ranking."
  },
  {
   "prompt": "What has been deducted from the 271.9889 million USD on the default project's year 1 top line?",

@@ -4,10 +4,1051 @@
  "served": "tools/course-waves/fiscal/pia-recut/served_fiscal.json (replay_banks.sh on a local scratch database)",
  "digest": "tools/course-waves/fiscal/digest.txt",
  "counts": {
-  "intermediate": 32,
+  "beginner": 30,
+  "intermediate": 34,
   "advanced": 39
  },
  "questions": [
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 2,
+   "fields": [
+    "prompt",
+    "explanation",
+    "options[0]",
+    "options[2] (keyed)"
+   ],
+   "why": "PIA template now keeps the contractor more than Generic; key rewritten to the royalty that opens the gap",
+   "old": {
+    "prompt": "PIA and Generic both carry corporate income tax at 30 percent, resource rent tax at 0 and a minimum tax of 0, yet the default project returns 406.2057 to the contractor under PIA and 986.7327 under Generic. What opened the gap?",
+    "options": [
+     "The PIA sliding royalty, which reaches 10 percent on this deck against the Generic flat rate of 12.5 percent.",
+     "The tax base, which is gross revenue under PIA and the contractor's profit share under Generic.",
+     "A cost recovery limit of 80 percent instead of 100, and an R factor split handing over 60, then 40, then 30 percent of profit oil instead of all of it.",
+     "The production profile, which the PIA template shortens to the years in which its tranches apply."
+    ],
+    "answer_index": 2,
+    "explanation": "PIA pays the smaller tax bill of the two, 174.0882 against 422.8854, and still leaves the contractor less than half the cash. A tax rate quoted alone predicts nothing."
+   },
+   "new": {
+    "prompt": "On the default project the contractor keeps 1058.0159 under the PIA template and 986.7327 under Generic, though both tax profit at 30 percent with no resource rent tax and no minimum tax. What opened the gap?",
+    "options": [
+     "The PIA cost recovery limit of 70 percent of the gross value of crude oil and NGL, which hands cost back to the contractor faster than Generic's full limit does.",
+     "The tax base, which is gross revenue under PIA and the contractor's profit share under Generic.",
+     "A much smaller royalty, 154.4828 against 335.8660, which the government's 5 percent of profit oil and the larger PIA tax win back only in part.",
+     "The production profile, which the PIA template shortens to the years in which its tranches apply."
+    ],
+    "answer_index": 2,
+    "explanation": "Totals do not care when cost comes back: both templates recover 941.4436 over the life. The PIA line pays the larger tax, 453.4354 against 422.8854, and still keeps more cash. A tax rate quoted alone predicts nothing."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 6,
+   "fields": [
+    "prompt",
+    "options[1]",
+    "options[3]"
+   ],
+   "why": "moved figure; two distractors reworded so they stay false now the template carries the Act base terms",
+   "old": {
+    "prompt": "The engine returns a total government cash flow of 1339.2784 under the PIA template on the default project. What is that number?",
+    "options": [
+     "A shape, useful for asking which instrument moved which result, and unfit for filing anything.",
+     "An assessment of the Nigerian take on a deepwater project, computed under the Petroleum Industry Act.",
+     "A screening estimate that the Petroleum Economics Studio engine would reproduce to within a rounding.",
+     "A statutory minimum, since the templates are calibrated to the floor each jurisdiction would accept."
+    ],
+    "answer_index": 0,
+    "explanation": "The engine's own header says the single source of truth for Nigerian fiscal math is the Petroleum Economics Studio engine, and that this model compares the shape of regimes."
+   },
+   "new": {
+    "prompt": "The engine returns a total government cash flow of 687.4682 under the PIA template on the default project. What is that number?",
+    "options": [
+     "A shape, useful for asking which instrument moved which result, and unfit for filing anything.",
+     "A filed assessment of the Nigerian take on this project, ready to lodge because the template carries the terms of the Act.",
+     "A screening estimate that the Petroleum Economics Studio engine would reproduce to within a rounding.",
+     "A statutory ceiling on what the state may collect, since each template is calibrated to the most its jurisdiction allows."
+    ],
+    "answer_index": 0,
+    "explanation": "The engine's own header says the single source of truth for Nigerian fiscal math is the Petroleum Economics Studio engine, and that this model compares the shape of regimes."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 16,
+   "fields": [
+    "prompt",
+    "explanation",
+    "options[0]",
+    "options[1]",
+    "options[2]",
+    "options[3] (keyed)"
+   ],
+   "why": "premise false: PIA royalty is type pia_2021 and no longer equals Brazil; question rewritten on what the PIA royalty charges",
+   "old": {
+    "prompt": "Nigeria PIA and Brazil collect exactly the same total royalty on both published projects, 268.6928 and 700.1194. One is a slider and one is flat 10 percent. How?",
+    "options": [
+     "The slider averages its two tiers of 7.5 and 10 percent across the life, which lands on the flat rate.",
+     "A sliding royalty defaults to the flat rate of the template it is compared against when no tier is crossed.",
+     "The two templates share a cost recovery limit, and royalty is charged after the limit has been applied.",
+     "Every applied price in both fields is above the slider's 50 USD per bbl threshold, so it sits in its 10 percent tier throughout."
+    ],
+    "answer_index": 3,
+    "explanation": "The default project prices oil at 70, 75 and 80 and the test project at 80, so a sliding instrument that never slides is a flat one."
+   },
+   "new": {
+    "prompt": "Brazil - Concession charges a flat 10 percent and collects 268.6928 of royalty on the default project, where Nigeria - PIA (2021) collects 154.4828. What does the PIA template's royalty charge in each year?",
+    "options": [
+     "Two price tiers, 7.5 percent from 0 and 10 percent from 50 USD per bbl, which on this deck sit in the 10 percent tier in every one of the 25 years of the life.",
+     "A flat 5 percent on the whole of gross revenue in every year, oil, gas and NGL alike, which is why its total comes to about half of Brazil's flat 10 percent.",
+     "A rate keyed on the R factor, stepping up each time cumulative revenue overtakes another multiple of cumulative cost on the field, whatever the oil price.",
+     "A production royalty at the deep offshore rate for the year's daily oil rate, a royalty by price once oil passes that year's low benchmark, and 5 percent on gas and NGL."
+    ],
+    "answer_index": 3,
+    "explanation": "Over the life that comes to 154.4828 on revenue of 2686.9277, and on the test project 443.2226 against Brazil's 700.1194. The two templates never collect the same total."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 18,
+   "fields": [
+    "explanation",
+    "options[0]"
+   ],
+   "why": "PIA template no longer caps at 80 percent; no template carries a slider",
+   "old": {
+    "prompt": "The six templates fall into two families. What defines the family that Brazil, the Gulf of Mexico and Generic belong to?",
+    "options": [
+     "A flat royalty rate, which the other three replace with a slider keyed on the oil price.",
+     "A flat split handing the contractor 100 percent of profit oil, with cost recovery at a 100 percent limit.",
+     "A tax stack with no resource rent tax, which is what leaves the contractor the whole of the residual.",
+     "A cost recovery limit above 80 percent, which stops the pool from ever carrying a balance forward."
+    ],
+    "answer_index": 1,
+    "explanation": "That is what a concession looks like inside a model built around a production sharing ledger, and the other three cap recovery at 80, 90 and 50 percent."
+   },
+   "new": {
+    "prompt": "The six templates fall into two families. What defines the family that Brazil, the Gulf of Mexico and Generic belong to?",
+    "options": [
+     "A flat royalty rate, which none of the other three templates carries in any form at all.",
+     "A flat split handing the contractor 100 percent of profit oil, with cost recovery at a 100 percent limit.",
+     "A tax stack with no resource rent tax, which is what leaves the contractor the whole of the residual.",
+     "A cost recovery limit above 80 percent, which stops the pool from ever carrying a balance forward."
+    ],
+    "answer_index": 1,
+    "explanation": "That is what a concession looks like inside a model built around a production sharing ledger. Ghana and Angola cap recovery at 90 and 50 percent of revenue after royalty, and Nigeria - PIA (2021) at 70 percent of the gross value of crude oil and NGL."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 29,
+   "fields": [
+    "explanation"
+   ],
+   "why": "PIA payback moved to 3; only Angola separates",
+   "old": {
+    "prompt": "Payback and payout are two clocks on one ledger. What does each one measure?",
+    "options": [
+     "Payback is the first year the unrecovered pool closes at 0.0000, and payout the first year profit oil is positive.",
+     "Payback is the first year cumulative contractor net cash flow is above zero, and payout the first year the R factor is above 1.0.",
+     "Payback is measured on the contractor's cash and payout on the state's, so the two together bracket the project.",
+     "Payback is the undiscounted crossing and payout the same crossing taken at the project's discount rate."
+    ],
+    "answer_index": 1,
+    "explanation": "Both are null when the event never happens, and on the default project PIA and Angola report payback 4 against payout 3."
+   },
+   "new": {
+    "prompt": "Payback and payout are two clocks on one ledger. What does each one measure?",
+    "options": [
+     "Payback is the first year the unrecovered pool closes at 0.0000, and payout the first year profit oil is positive.",
+     "Payback is the first year cumulative contractor net cash flow is above zero, and payout the first year the R factor is above 1.0.",
+     "Payback is measured on the contractor's cash and payout on the state's, so the two together bracket the project.",
+     "Payback is the undiscounted crossing and payout the same crossing taken at the project's discount rate."
+    ],
+    "answer_index": 1,
+    "explanation": "Both are null when the event never happens, and on the default project Angola - Deepwater PSC reports payback 4 against payout 3."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 30,
+   "fields": [
+    "explanation"
+   ],
+   "why": "contractor range moved",
+   "old": {
+    "prompt": "Run six templates on the default project and total revenue reads 2686.9277 on every line. What does that constant make possible?",
+    "options": [
+     "It makes the whole of the spread in the answer attributable to the regime and to nothing else.",
+     "It makes the six ledgers comparable with the test project's 7001.1938.",
+     "It makes the cost recovery totals comparable, since a constant revenue means a constant recoverable pool.",
+     "It makes the government cash flow rankable by royalty rate, since the base of the royalty is the same in each."
+    ],
+    "answer_index": 0,
+    "explanation": "A fiscal regime prices barrels, it does not produce them. Contractor cash ranges from 406.2057 to 986.7327 against that identical sales figure."
+   },
+   "new": {
+    "prompt": "Run six templates on the default project and total revenue reads 2686.9277 on every line. What does that constant make possible?",
+    "options": [
+     "It makes the whole of the spread in the answer attributable to the regime and to nothing else.",
+     "It makes the six ledgers comparable with the test project's 7001.1938.",
+     "It makes the cost recovery totals comparable, since a constant revenue means a constant recoverable pool.",
+     "It makes the government cash flow rankable by royalty rate, since the base of the royalty is the same in each."
+    ],
+    "answer_index": 0,
+    "explanation": "A fiscal regime prices barrels, it does not produce them. Contractor cash ranges from 428.8774 to 1058.0159 against that identical sales figure."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 32,
+   "fields": [
+    "prompt",
+    "explanation",
+    "options[1] (keyed)",
+    "options[2]"
+   ],
+   "why": "premise false: PIA template NPV on ODIDI is positive; question now about the five negative templates",
+   "old": {
+    "prompt": "ODIDI closes its cumulative in the black under all six templates and returns a negative value under all six at the project's 12 percent. What is the reading?",
+    "options": [
+     "The value and the cumulative disagree because the value excludes the year 1 capex of 420.0000.",
+     "The field returns its nominal money and is still not worth building at the rate it is discounted at.",
+     "The field is worth building under the templates whose cumulative is largest, which the value fails to rank.",
+     "The negative values are an artefact of the fixed 25 year horizon cutting the life short."
+    ],
+    "answer_index": 1,
+    "explanation": "Brazil ends with 192.9896 of cash and a value of -5.8662, and Angola with 109.1947 and -58.1813."
+   },
+   "new": {
+    "prompt": "Five of the six templates leave ODIDI with a negative value at 12 percent even though every cumulative closes positive. How should those five be read?",
+    "options": [
+     "The value and the cumulative disagree because the value excludes the year 1 capex of 420.0000.",
+     "The money comes back in nominal terms under those five, and the field still fails the discount rate it is judged at.",
+     "The five are worth building after all, because a cumulative in the black outranks a value taken at any discount rate.",
+     "The negative values are an artefact of the fixed 25 year horizon cutting the life short."
+    ],
+    "answer_index": 1,
+    "explanation": "Brazil ends with 192.9896 of cash and a value of -5.8662, and Angola with 109.1947 and -58.1813. Under Nigeria - PIA (2021) the same field clears 12 percent, with a value of 1.7389."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 33,
+   "fields": [
+    "prompt"
+   ],
+   "why": "PIA ODIDI price sweep band moved",
+   "old": {
+    "prompt": "Under PIA the government take on ODIDI stays inside a band from 75.1077 to 79.4678 across nine price points, where another template gives up tens of percentage points across the same range. What does one run at one deck tell you about that difference?",
+    "options": [
+     "The ranking at the base price, which the sweep then preserves at every other price it visits.",
+     "The direction of the movement, since a regime with the higher take at one price gives up more of it as prices climb.",
+     "The size of the movement, which is proportional to the royalty rate the template carries.",
+     "Nothing, because one run is one deck and the shape of a regime across prices is not in a single ledger."
+    ],
+    "answer_index": 3,
+    "explanation": "Two regimes that look similar on one run behave nothing alike on the next, and the same holds for a cost overrun."
+   },
+   "new": {
+    "prompt": "On ODIDI the PIA template's government take moves only between 42.2597 and 50.4050 over nine swept prices, while another template loses tens of percentage points over the same range. What does a single run at a single deck tell you about that contrast?",
+    "options": [
+     "The ranking at the base price, which the sweep then preserves at every other price it visits.",
+     "The direction of the movement, since a regime with the higher take at one price gives up more of it as prices climb.",
+     "The size of the movement, which is proportional to the royalty rate the template carries.",
+     "Nothing, because one run is one deck and the shape of a regime across prices is not in a single ledger."
+    ],
+    "answer_index": 3,
+    "explanation": "Two regimes that look similar on one run behave nothing alike on the next, and the same holds for a cost overrun."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 34,
+   "fields": [
+    "options[3]"
+   ],
+   "why": "distractor used the old PIA slider; now labelled the tiered teaching regime",
+   "old": {
+    "prompt": "ODIDI's year 1 under the Gulf of Mexico terms sells 139.6563 and spends 420.0000 of capex and 25.0037 of opex. What does the state collect that year?",
+    "options": [
+     "26.1856, all of it royalty, charged on gross revenue in the year the whole of the capital was spent.",
+     "0.0000, because the year's residual is nothing and there is no profit oil for the state to share.",
+     "26.1856 of royalty less the state's share of the year's opex, which the recovery machinery credits back.",
+     "10.4742, which is the 7.5 percent the PIA slider charges at a deck price of 45 USD per bbl."
+    ],
+    "answer_index": 0,
+    "explanation": "Royalty comes off gross revenue before any cost is considered, and revenue after royalty for the year is 113.4707."
+   },
+   "new": {
+    "prompt": "ODIDI's year 1 under the Gulf of Mexico terms sells 139.6563 and spends 420.0000 of capex and 25.0037 of opex. What does the state collect that year?",
+    "options": [
+     "26.1856, all of it royalty, charged on gross revenue in the year the whole of the capital was spent.",
+     "0.0000, because the year's residual is nothing and there is no profit oil for the state to share.",
+     "26.1856 of royalty less the state's share of the year's opex, which the recovery machinery credits back.",
+     "10.4742, which is the 7.5 percent the tiered teaching regime charges at a deck price of 45 USD per bbl."
+    ],
+    "answer_index": 0,
+    "explanation": "Royalty comes off gross revenue before any cost is considered, and revenue after royalty for the year is 113.4707."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 36,
+   "fields": [
+    "explanation"
+   ],
+   "why": "copy rule: contrastive removed",
+   "old": {
+    "prompt": "The Designer's own field empties its cost pool in year 3 under the Gulf of Mexico terms and closes the life at 0.0000, while the teaching field empties its own and then closes the life with 24.2824 unrecovered, at the same 100 percent limit. What differs?",
+    "options": [
+     "Its cost recovery limit of 100 percent is reached in every one of its 25 years, where the other field's stops binding altogether once the standing pool has cleared in year 3.",
+     "The teaching field declines 14 percent a year, so late revenue after royalty of 5.6128 no longer covers opex of 12.3405 and the pool refills.",
+     "Its capex of 420.0000 is smaller than the 500.0000 of the other field, and a smaller pool takes longer to clear.",
+     "Its cash flows are discounted at 12 percent rather than 10, and the pool is carried forward at the project rate."
+    ],
+    "answer_index": 1,
+    "explanation": "A full limit is a ceiling on revenue after royalty, not a promise to return the spend, and this field closes with 24.2824 unrecovered."
+   },
+   "new": {
+    "prompt": "The Designer's own field empties its cost pool in year 3 under the Gulf of Mexico terms and closes the life at 0.0000, while the teaching field empties its own and then closes the life with 24.2824 unrecovered, at the same 100 percent limit. What differs?",
+    "options": [
+     "Its cost recovery limit of 100 percent is reached in every one of its 25 years, where the other field's stops binding altogether once the standing pool has cleared in year 3.",
+     "The teaching field declines 14 percent a year, so late revenue after royalty of 5.6128 no longer covers opex of 12.3405 and the pool refills.",
+     "Its capex of 420.0000 is smaller than the 500.0000 of the other field, and a smaller pool takes longer to clear.",
+     "Its cash flows are discounted at 12 percent rather than 10, and the pool is carried forward at the project rate."
+    ],
+    "answer_index": 1,
+    "explanation": "Late in its life this field's revenue after royalty no longer covers opex, so the pool refills and closes at 24.2824 even under a full limit."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 40,
+   "fields": [
+    "explanation"
+   ],
+   "why": "explanation no longer true of all six: PIA template is positive on both readings",
+   "old": {
+    "prompt": "ODIDI under Brazil returns 192.9896 of contractor cash over 25 years and a value of -5.8662 at 12 percent. Which reading is wrong?",
+    "options": [
+     "The value, because a life that returns positive cash cannot be worth less than nothing.",
+     "Neither. Both are readings of the same 25 rows, and the Associate answer quotes each with its basis.",
+     "The total, because it adds year 25 money to year 1 money and so overstates what came back.",
+     "The pair, because a total and a value that disagree in sign cannot both be readings of one ledger."
+    ],
+    "answer_index": 1,
+    "explanation": "Which of the two a decision rests on takes a discount convention, and every one of the six templates on ODIDI shows the same pair of signs."
+   },
+   "new": {
+    "prompt": "ODIDI under Brazil returns 192.9896 of contractor cash over 25 years and a value of -5.8662 at 12 percent. Which reading is wrong?",
+    "options": [
+     "The value, because a life that returns positive cash cannot be worth less than nothing.",
+     "Neither. Both are readings of the same 25 rows, and the Associate answer quotes each with its basis.",
+     "The total, because it adds year 25 money to year 1 money and so overstates what came back.",
+     "The pair, because a total and a value that disagree in sign cannot both be readings of one ledger."
+    ],
+    "answer_index": 1,
+    "explanation": "Which of the two a decision rests on takes a discount convention. Five of the six templates on ODIDI show this pair of signs; under Nigeria - PIA (2021) both are positive, 229.9586 and 1.7389."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 41,
+   "fields": [
+    "prompt",
+    "explanation"
+   ],
+   "why": "ODIDI ranges moved: PIA template collects least and keeps the contractor most",
+   "old": {
+    "prompt": "What can the Associate reading of ODIDI, which puts the state's collection between 232.9950 and 316.7898, not say?",
+    "options": [
+     "Which template collects the most, since two collections are only comparable when the closing unrecovered pools of the two ledgers are equal.",
+     "Which template leaves the contractor the most cash over the life of the field, which is a ranking that needs a discount convention this tier does not carry.",
+     "How much of each collection came from royalty rather than from tax.",
+     "Which of those splits is fair, which survives a price collapse, and which numbers on a comparison screen are measurements at all."
+    ],
+    "answer_index": 3,
+    "explanation": "The contractor keeps between 109.1947 and 192.9896 across the same six templates, and stating the range is not judging it."
+   },
+   "new": {
+    "prompt": "The Associate reading of ODIDI puts the state's collection between 196.0260 and 316.7898. What can that reading not say?",
+    "options": [
+     "Which template collects the most, since two collections are only comparable when the closing unrecovered pools of the two ledgers are equal.",
+     "Which template leaves the contractor the most cash over the life of the field, which is a ranking that needs a discount convention this tier does not carry.",
+     "How much of each collection came from royalty rather than from tax.",
+     "Which of those splits is fair, which survives a price collapse, and which numbers on a comparison screen are measurements at all."
+    ],
+    "answer_index": 3,
+    "explanation": "Stating a range is one reading and judging it is another. On the contractor's side, the same six runs span 109.1947 to 229.9586."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "final",
+   "module_key": null,
+   "ord": 42,
+   "fields": [
+    "explanation",
+    "options[0]",
+    "options[1]",
+    "options[2] (keyed)",
+    "options[3]"
+   ],
+   "why": "key named old R factor tiers as the PIA template; PIA moves on price, daily rate and cumulative production",
+   "old": {
+    "prompt": "Every template in the Associate tier was read at one setting, yet three of the six carry an instrument that moves on its own. Which are they?",
+    "options": [
+     "A cost recovery limit that tightens automatically as the standing pool grows, and a minimum tax that arms itself once the residual has fallen far enough.",
+     "A corporate rate that steps with the R factor, and a royalty that steps with cumulative production.",
+     "A royalty keyed on the oil price and a profit split keyed on the R factor, which under PIA steps the share from 60 to 40 to 30 percent.",
+     "A discount rate that follows the price deck from one year to the next, and a profit split that follows the closing unrecovered pool of the year before it."
+    ],
+    "answer_index": 2,
+    "explanation": "The R factor is a ratio of cumulatives, so it can fall back below a threshold it passed and step the contractor's share up again."
+   },
+   "new": {
+    "prompt": "Every template in the Associate tier was read at one setting, yet three of the six carry an instrument that moves on its own. Which are they?",
+    "options": [
+     "A cost recovery limit that tightens automatically as the standing pool grows, and a minimum tax that arms itself once the residual has fallen far enough to trigger it.",
+     "A corporate rate that steps with the R factor, and a royalty that steps with cumulative production, so that both of them tighten together as the field matures.",
+     "A profit split keyed on the R factor under Ghana and Angola, and under the PIA template a royalty that follows price and daily rate and a split that follows cumulative production.",
+     "A discount rate that follows the price deck from one year to the next, and a profit split that follows the closing unrecovered pool of the year before it, whatever the price."
+    ],
+    "answer_index": 2,
+    "explanation": "Under Ghana and Angola the R factor is a ratio of cumulatives, so it can fall back below a threshold it passed and step the contractor's share back up. Cumulative production only grows, so the PIA split can only move one way."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-a-fiscal-regime-is",
+   "ord": 3,
+   "fields": [
+    "prompt",
+    "explanation",
+    "options[0]",
+    "options[1] (keyed)",
+    "options[2]",
+    "options[3]"
+   ],
+   "why": "PIA template now keeps more than Generic and pays more tax; key rewritten to the royalty",
+   "old": {
+    "prompt": "Nigeria - PIA (2021) and Generic Royalty/Tax both carry CIT 30 percent, RRT 0 percent and minimum tax 0 percent, yet on the Designer's default project the contractor keeps 406.2057 million USD under one and 986.7327 million USD under the other. What opened that gap?",
+    "options": [
+     "A heavier tax bill under the PIA terms, which totals 422.8854 million USD over the life against 174.0882 million USD for the Generic terms.",
+     "The other three fields, a cost recovery limit of 80 percent instead of 100 and an R factor split of 60, then 40, then 30 percent instead of a flat 100 percent to the contractor.",
+     "A larger royalty under the PIA slider, which collects 335.8660 million USD against the 268.6928 million USD the Generic rate collects.",
+     "Different sales, since the PIA line is run against a lower price deck than the Generic line is."
+    ],
+    "answer_index": 1,
+    "explanation": "The PIA line pays the smaller tax of the two, 174.0882 million USD against 422.8854, and the smaller royalty, 268.6928 against 335.8660. A tax rate quoted on its own predicts nothing."
+   },
+   "new": {
+    "prompt": "Nigeria - PIA (2021) and Generic Royalty/Tax both carry CIT 30 percent, RRT 0 percent and minimum tax 0 percent, yet on the Designer's default project the contractor keeps 1058.0159 million USD under one and 986.7327 million USD under the other. What opened that gap?",
+    "options": [
+     "A lighter tax bill under the PIA terms, which totals 422.8854 million USD over the life against 453.4354 million USD for the Generic terms.",
+     "The royalty field: the PIA royalty collects 154.4828 million USD against Generic's 335.8660, more than its heavier tax wins back.",
+     "A larger cost recovery under the PIA limit, which returns 1591.0013 million USD of cost against the 941.4436 million USD the Generic limit returns.",
+     "Different sales, since the PIA line is run against a lower price deck than the Generic line is, year after year across the life."
+    ],
+    "answer_index": 1,
+    "explanation": "Both lines sell the same 2686.9277 million USD and recover the same 941.4436. The PIA line pays the larger tax, 453.4354 million USD against 422.8854, and the smaller royalty, 154.4828 against 335.8660. A tax rate quoted on its own predicts nothing."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-a-fiscal-regime-is",
+   "ord": 12,
+   "fields": [
+    "options[1] (keyed)",
+    "options[3]"
+   ],
+   "why": "example pair re-derived on the default project price sweep",
+   "old": {
+    "prompt": "Why is subtracting the two printed endpoints of a derived column and matching the printed difference a bad check?",
+    "options": [
+     "The printed endpoints belong to different rows of the ledger, while a derived difference is only ever computed within one row.",
+     "A derived column is computed at full precision and then rounded, and its endpoints are rounded too, so a printed pair of 79.2711 and 79.4678 carries a printed climb of 0.1968.",
+     "A derived column is an estimate the engine never returns, so it carries no defined precision to check anything against.",
+     "Derived columns print to six decimals and returned columns to four, so the two can never be put in the same subtraction."
+    ],
+    "answer_index": 1,
+    "explanation": "Both figures are correct and the hand subtraction is off by one in the last place. The default project's Generic Royalty/Tax pair does the same thing, printing 51.2558 and 41.0660 against a climb of -10.1897."
+   },
+   "new": {
+    "prompt": "Why is subtracting the two printed endpoints of a derived column and matching the printed difference a bad check?",
+    "options": [
+     "The printed endpoints belong to different rows of the ledger, while a derived difference is only ever computed within one row.",
+     "A derived column is computed at full precision and then rounded, and its endpoints are rounded too, so a printed pair of 41.6869 and 41.6802 carries a printed climb of -0.0068.",
+     "A derived column is an estimate the engine never returns, so it carries no defined precision to check anything against.",
+     "Derived columns print to six decimals and returned columns to four, so the two can never be put in the same subtraction, whichever two rows the printed endpoints come from."
+    ],
+    "answer_index": 1,
+    "explanation": "Both figures are correct and the hand subtraction is off by one in the last place. The default project's Generic Royalty/Tax pair does the same thing, printing 51.2558 and 41.0660 against a climb of -10.1897."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m01-what-a-fiscal-regime-is",
+   "ord": 14,
+   "fields": [
+    "explanation",
+    "options[3]"
+   ],
+   "why": "moved figure; template described as a model of the terms",
+   "old": {
+    "prompt": "The engine header names a single source of truth for Nigerian fiscal math. What is this model for?",
+    "options": [
+     "Comparing the shape of regimes against each other, with the Petroleum Economics Studio engine holding the fiscal truth.",
+     "Assessing a Nigerian liability under the Petroleum Industry Act, which is why the template set carries a PIA entry at all.",
+     "Producing a filing figure, once a template has been reconciled against the Petroleum Economics Studio engine on the same project.",
+     "Replacing that engine for screening work, since the two agree on a total government cash flow of 1339.2784 million USD."
+    ],
+    "answer_index": 0,
+    "explanation": "A template named for a jurisdiction is a caricature in six numbers, useful for asking which instrument moved which result and unfit for filing anything."
+   },
+   "new": {
+    "prompt": "The engine header names a single source of truth for Nigerian fiscal math. What is this model for?",
+    "options": [
+     "Comparing the shape of regimes against each other, with the Petroleum Economics Studio engine holding the fiscal truth.",
+     "Assessing a Nigerian liability under the Petroleum Industry Act, which is why the template set carries a PIA entry at all.",
+     "Producing a filing figure, once a template has been reconciled against the Petroleum Economics Studio engine on the same project.",
+     "Replacing that engine for screening work, since the two agree on a total government cash flow of 687.4682 million USD on this project."
+    ],
+    "answer_index": 0,
+    "explanation": "Even the template carrying the Act's base terms is a model of them. It answers which instrument moved which result, and no filing can rest on it."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-revenue-and-royalty",
+   "ord": 7,
+   "fields": [
+    "prompt",
+    "explanation",
+    "options[2]"
+   ],
+   "why": "only after-royalty limits; the PIA template takes a gross base; regime named in the prompt",
+   "old": {
+    "prompt": "A reader takes the cost recovery ceiling as a percent of gross revenue instead. How large is the error in year 1 of the default project?",
+    "options": [
+     "Exactly the royalty, 50.9979 million USD of extra recovery, which then flows into the pool, into the R factor and into every split keyed on it.",
+     "It is immaterial at a 100 percent limit, since the ceiling binds either way in the year the capex lands.",
+     "It is the spread between the two limits the template set uses, 80 percent against 100, applied to the year's revenue.",
+     "It cancels in the totals, a larger recovery in year 1 leaving a smaller pool for the years that follow it."
+    ],
+    "answer_index": 0,
+    "explanation": "The tell is worth memorising: if a cost recovery ceiling ever equals gross revenue, the wrong base has been used, because royalty is always taken first."
+   },
+   "new": {
+    "prompt": "Under the Gulf of Mexico terms a reader takes the cost recovery ceiling as a percent of gross revenue instead. How large is the error in year 1 of the default project?",
+    "options": [
+     "Exactly the royalty, 50.9979 million USD of extra recovery, which then flows into the pool, into the R factor and into every split keyed on it.",
+     "It is immaterial at a 100 percent limit, since the ceiling binds either way in the year the capex lands.",
+     "It is the spread between two limits the template set uses, 50 percent against 100, applied to the year's revenue.",
+     "It cancels in the totals, a larger recovery in year 1 leaving a smaller pool for the years that follow it."
+    ],
+    "answer_index": 0,
+    "explanation": "The tell is worth memorising: if an after-royalty ceiling ever equals gross revenue, the wrong base has been used. Only Nigeria - PIA (2021) takes its limit on a gross base, 70 percent of the value of crude oil and NGL."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-revenue-and-royalty",
+   "ord": 9,
+   "fields": [
+    "prompt",
+    "explanation",
+    "options[0]",
+    "options[1]",
+    "options[2] (keyed)",
+    "options[3]"
+   ],
+   "why": "premise false: PIA royalty moved and is not a slider; question now asks why the PIA total is smaller",
+   "old": {
+    "prompt": "Nigeria - PIA (2021) collects total royalty of 268.6928 million USD on the default project and 700.1194 on the test project, and Brazil - Concession collects exactly the same on both. How does a slider match a flat 10 percent?",
+    "options": [
+     "The engine averages a sliding scale over the life of the field and charges one mean rate, which for tiers of 7.5 and 10 percent works out at 10 percent on both decks.",
+     "The slider keys on the first dated point of the deck, which is above 50 USD per bbl on both projects, and that point then fixes the rate for the whole of the 25 year run.",
+     "Every applied price on both decks is above the 50 USD per bbl threshold, so the slider sits in its 10 percent tier in every year and never slides.",
+     "A sliding royalty falls back to the flat rate of the nearest template whenever its two tiers straddle the deck."
+    ],
+    "answer_index": 2,
+    "explanation": "The default deck prices oil at 70, 75 and 80 USD per bbl and the test deck at 80. A sliding instrument that never slides is a flat one, and whether it slides is a property of the deck."
+   },
+   "new": {
+    "prompt": "Nigeria - PIA (2021) collects total royalty of 154.4828 million USD on the default project and 443.2226 on the test project, against Brazil's flat 10 percent at 268.6928 and 700.1194. Why is the PIA total the smaller on both?",
+    "options": [
+     "The engine averages the template's two price tiers of 7.5 and 10 percent over the life and charges one mean rate, which falls below Brazil's flat 10 percent.",
+     "The PIA royalty keys on the first dated point of the deck, which fixes a single 5 percent rate for the whole of the 25 year run on both of the projects.",
+     "Its oil pays 5 percent below 50,000 bopd plus a royalty by price only while the price clears the year's low benchmark, and gas and NGL pay 5 percent.",
+     "A PIA royalty falls back to half the flat rate of the nearest template whenever the deck sits above its price benchmark for the year in question."
+    ],
+    "answer_index": 2,
+    "explanation": "On the default project that is 154.4828 on revenue of 2686.9277. The two never collect the same total, because only Brazil's rate is flat."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-revenue-and-royalty",
+   "ord": 10,
+   "fields": [
+    "explanation"
+   ],
+   "why": "copy rule: contrastives removed",
+   "old": {
+    "prompt": "What can move the tier a sliding royalty selects?",
+    "options": [
+     "The applied oil price for the year, and nothing else.",
+     "The oil price or the gas price, whichever of the two streams contributed more revenue in the year being priced.",
+     "Cumulative production, which is the variable a progressive royalty is normally keyed on in a real contract.",
+     "The R factor, the ratio this sandbox uses to key the royalty tiers and the profit split tiers alike."
+    ],
+    "answer_index": 0,
+    "explanation": "It reads the applied oil price, so anything that changes that price changes the tier as well as the revenue. Not gas, not NGL, not rate, not cumulative volume, not the R factor."
+   },
+   "new": {
+    "prompt": "What can move the tier a sliding royalty selects?",
+    "options": [
+     "The applied oil price for the year, and nothing else.",
+     "The oil price or the gas price, whichever of the two streams contributed more revenue in the year being priced.",
+     "Cumulative production, which is the variable a progressive royalty is normally keyed on in a real contract.",
+     "The R factor, the ratio this sandbox uses to key the royalty tiers and the profit split tiers alike."
+    ],
+    "answer_index": 0,
+    "explanation": "It reads the applied oil price, so anything that changes that price changes the tier as well as the revenue. Gas, NGL, rate, cumulative volume and the R factor play no part."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-revenue-and-royalty",
+   "ord": 12,
+   "fields": [
+    "explanation",
+    "options[0]",
+    "options[1]",
+    "options[2]",
+    "options[3] (keyed)"
+   ],
+   "why": "only two templates split on the R factor; PIA template takes a gross limit and a cumulative production split",
+   "old": {
+    "prompt": "Three of the six templates take a flat 100 percent of profit oil to the contractor and recover cost at 100 percent. What are the other three?",
+    "options": [
+     "Tiered on the oil price, at those same three limits, a sharing regime keying its split on the price it sells at.",
+     "Flat splits below 100 percent, the difference between the split and 100 being the government's share of profit oil.",
+     "Concessions as well, differing only in the royalty rates of 7.5, 5 and 0 percent that the three of them carry.",
+     "Tiered on the R factor, with cost recovery capped at 80, 90 and 50 percent."
+    ],
+    "answer_index": 3,
+    "explanation": "Those are the templates where the middle columns do real work, because an unrecovered balance has somewhere to accumulate and the contractor's share changes as the field matures."
+   },
+   "new": {
+    "prompt": "Three of the six templates take a flat 100 percent of profit oil to the contractor and recover cost at 100 percent. What are the other three?",
+    "options": [
+     "Tiered on the oil price, at those same three limits of 100 percent, a sharing regime keying its split on the price it sells at in the year.",
+     "Flat splits below 100 percent, the difference between the split and 100 being the government's share of profit oil in every year of the life of the field.",
+     "Concessions as well, differing only in the royalty rates of 12.5, 5 and 0 percent that the three of them carry.",
+     "Two tiered on the R factor, capped at 90 and 50 percent, and Nigeria - PIA (2021), capped at 70 percent of gross crude and NGL value with a split by cumulative production."
+    ],
+    "answer_index": 3,
+    "explanation": "Those are the templates where the middle columns do real work, because an unrecovered balance has somewhere to accumulate and the contractor's share can change as the field matures."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m03-revenue-and-royalty",
+   "ord": 13,
+   "fields": [
+    "explanation",
+    "options[0]",
+    "options[2] (keyed)",
+    "options[3]"
+   ],
+   "why": "GoM contractor now beats three of the other five; PIA figures moved",
+   "old": {
+    "prompt": "Which template collects the most royalty on the default project, and what does that predict about its contractor?",
+    "options": [
+     "USA - Gulf of Mexico at 503.7989 million USD, which leaves that contractor the least cash of the six at 406.2057 million USD.",
+     "Generic Royalty/Tax at 335.8660 million USD, since 12.5 percent is the highest flat rate anywhere in the list.",
+     "USA - Gulf of Mexico at 503.7989 million USD, and it predicts nothing: that contractor keeps 980.9313 million USD, more than four of the other five.",
+     "Nigeria - PIA (2021) at 268.6928 million USD, a slider in its top tier outcollecting every flat rate in the set."
+    ],
+    "answer_index": 2,
+    "explanation": "406.2057 million USD is the PIA contractor, under a royalty of 268.6928 million USD. The royalty ranking and the contractor ranking are not the same ranking."
+   },
+   "new": {
+    "prompt": "Which template collects the most royalty on the default project, and what does that predict about its contractor?",
+    "options": [
+     "USA - Gulf of Mexico at 503.7989 million USD, which leaves that contractor the least cash of the six, 428.8774 million USD.",
+     "Generic Royalty/Tax at 335.8660 million USD, since 12.5 percent is the highest flat rate anywhere in the list.",
+     "USA - Gulf of Mexico at 503.7989 million USD, and it predicts nothing: that contractor keeps 980.9313 million USD, more than three of the other five.",
+     "Nigeria - PIA (2021) at 154.4828 million USD, its royalty by price outcollecting every flat rate in the set of six templates."
+    ],
+    "answer_index": 2,
+    "explanation": "The most contractor cash, 1058.0159 million USD, sits under the PIA template's royalty of 154.4828 million USD. The royalty ranking and the contractor ranking are not the same ranking."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m04-the-concession-ledger",
+   "ord": 4,
+   "fields": [
+    "explanation"
+   ],
+   "why": "copy rule: contrastive removed",
+   "old": {
+    "prompt": "The Gulf of Mexico terms set the cost recovery limit at 100 percent, and year 1 of the Designer's default project still closes with a pool of 310.0117. What did that limit actually allow?",
+    "options": [
+     "Recovery of 271.9889, the whole of gross revenue, which still falls short of the year's spending and leaves the remainder to be carried forward.",
+     "Recovery of the year's opex of 31.0027 and capex of 500.0000 in full, with the pool holding only what the revenue could not fund.",
+     "Recovery of nothing at all in year 1, because the pool is seeded with the capex before any allowance against revenue is computed for the year.",
+     "Recovery of 220.9910, the whole of revenue after royalty, against opex of 31.0027 and capex of 500.0000."
+    ],
+    "answer_index": 3,
+    "explanation": "A 100 percent limit is a ceiling on revenue after royalty, not a promise to return the spend, so 310.0117 is carried into year 2."
+   },
+   "new": {
+    "prompt": "The Gulf of Mexico terms set the cost recovery limit at 100 percent, and year 1 of the Designer's default project still closes with a pool of 310.0117. What did that limit actually allow?",
+    "options": [
+     "Recovery of 271.9889, the whole of gross revenue, which still falls short of the year's spending and leaves the remainder to be carried forward.",
+     "Recovery of the year's opex of 31.0027 and capex of 500.0000 in full, with the pool holding only what the revenue could not fund.",
+     "Recovery of nothing at all in year 1, because the pool is seeded with the capex before any allowance against revenue is computed for the year.",
+     "Recovery of 220.9910, the whole of revenue after royalty, against opex of 31.0027 and capex of 500.0000."
+    ],
+    "answer_index": 3,
+    "explanation": "A 100 percent limit is a ceiling on revenue after royalty and makes no promise to return the spend, so 310.0117 is carried into year 2."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-reading-the-ledger",
+   "ord": 4,
+   "fields": [
+    "prompt",
+    "options[1]"
+   ],
+   "why": "PIA payback moved: only Angola separates",
+   "old": {
+    "prompt": "On the default project the PIA and Angola templates report payback in year 4 while payout is year 3, and the other four report 3 for both. What does the one year gap say?",
+    "options": [
+     "The R factor and the cumulative are computed on different production profiles, so the two clocks are never strictly comparable.",
+     "The pool cleared a year later under those two templates, and payback cannot be reported before the pool closes.",
+     "Payout is discounted at the project's 10 percent and payback is not, so payout always arrives in an earlier year.",
+     "The project earned its cost back before the contractor got its cash back, because the state takes its share in between."
+    ],
+    "answer_index": 3,
+    "explanation": "Payout is the first year the R factor is above 1.0, cumulative revenue over cumulative cost, and it knows nothing about who kept the money."
+   },
+   "new": {
+    "prompt": "On the default project the Angola template reports payback in year 4 while payout is year 3, and the other five report 3 for both. What does the one year gap say?",
+    "options": [
+     "The R factor and the cumulative are computed on different production profiles, so the two clocks are never strictly comparable.",
+     "The pool cleared a year later under that template, and payback cannot be reported before the pool closes.",
+     "Payout is discounted at the project's 10 percent and payback is not, so payout always arrives in an earlier year.",
+     "The project earned its cost back before the contractor got its cash back, because the state takes its share in between."
+    ],
+    "answer_index": 3,
+    "explanation": "Payout is the first year the R factor is above 1.0, cumulative revenue over cumulative cost, and it knows nothing about who kept the money."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-reading-the-ledger",
+   "ord": 6,
+   "fields": [
+    "prompt",
+    "options[3]"
+   ],
+   "why": "count moved to five",
+   "old": {
+    "prompt": "Four of the six templates report payback in year 3 on the default project. Why is that a poor place to rank them?",
+    "options": [
+     "Payback is measured on the discounted cumulative, and the discounting compresses the differences between the templates into one year.",
+     "Payback is measured from the R factor, which is a ratio of cumulatives and moves too little between templates to separate them.",
+     "Payback is a whole year, so a tie in the column is not a tie in the money: the same year 3 covers 986.7327 under Generic and 623.9658 under Brazil.",
+     "Payback is reported to the nearest year and the engine rounds up, so four templates that really differ are printed as the same year."
+    ],
+    "answer_index": 2,
+    "explanation": "It is an integer clock on an undiscounted running sum, and it has no view of anything that happens after the crossing."
+   },
+   "new": {
+    "prompt": "Five of the six templates report payback in year 3 on the default project. Why is that a poor place to rank them?",
+    "options": [
+     "Payback is measured on the discounted cumulative, and the discounting compresses the differences between the templates into one year.",
+     "Payback is measured from the R factor, which is a ratio of cumulatives and moves too little between templates to separate them.",
+     "Payback is a whole year, so a tie in the column is not a tie in the money: the same year 3 covers 986.7327 under Generic and 623.9658 under Brazil.",
+     "Payback is reported to the nearest year and the engine rounds up, so five templates that really differ are printed as the same year."
+    ],
+    "answer_index": 2,
+    "explanation": "It is an integer clock on an undiscounted running sum, and it has no view of anything that happens after the crossing."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-reading-the-ledger",
+   "ord": 9,
+   "fields": [
+    "prompt",
+    "explanation"
+   ],
+   "why": "Brazil contractor now fourth highest; PIA now pays second most tax and keeps the most",
+   "old": {
+    "prompt": "Brazil pays the most tax of the six templates on the default project at 852.8256 and leaves the contractor 623.9658, the third highest figure in the table. What does that show?",
+    "options": [
+     "That the tax column is charged on gross revenue under Brazil and on the profit share under the other five, so the two are not comparable.",
+     "Tax and take rank differently, because the state also collects through royalty and through its share of profit oil.",
+     "That the resource rent tax of 40 percent is refunded to the contractor through the cost pool, which is why the cash survives the tax.",
+     "That a high tax bill signals a high residual, so the contractor's cash and the tax column will normally move together across templates."
+    ],
+    "answer_index": 1,
+    "explanation": "PIA pays the least tax of the six, 174.0882, and leaves the contractor the least cash, 406.2057."
+   },
+   "new": {
+    "prompt": "Brazil pays the most tax of the six templates on the default project at 852.8256 and leaves the contractor 623.9658, the fourth highest figure in the table. What does that show?",
+    "options": [
+     "That the tax column is charged on gross revenue under Brazil and on the profit share under the other five, so the two are not comparable.",
+     "Tax and take rank differently, because the state also collects through royalty and through its share of profit oil.",
+     "That the resource rent tax of 40 percent is refunded to the contractor through the cost pool, which is why the cash survives the tax.",
+     "That a high tax bill signals a high residual, so the contractor's cash and the tax column will normally move together across templates."
+    ],
+    "answer_index": 1,
+    "explanation": "Nigeria - PIA (2021) pays the second most tax, 453.4354, and leaves the contractor the most cash, 1058.0159, while Ghana pays the least tax, 230.9340, and leaves the least cash, 428.8774."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-reading-the-ledger",
+   "ord": 11,
+   "fields": [
+    "prompt",
+    "explanation",
+    "options[0] (keyed)"
+   ],
+   "why": "premise false for the PIA template; question now about the five negative templates",
+   "old": {
+    "prompt": "On the teaching field ODIDI every template closes its cumulative in the black and every template returns a negative value at the project's 12 percent. What does that pair of readings mean?",
+    "options": [
+     "The field returns the contractor's nominal money and still is not worth building at the rate the project is discounted at.",
+     "The cumulative was computed on a different set of rows from the value, so one of the two readings has to be discarded.",
+     "The field pays back inside the horizon but the closing unrecovered pool is larger than the cash returned in every case.",
+     "The value is negative because the horizon of 25 years ends before the cumulative has finished climbing."
+    ],
+    "answer_index": 0,
+    "explanation": "Brazil ends the life with 192.9896 of contractor cash and a value of -5.8662, and Angola with 109.1947 and -58.1813."
+   },
+   "new": {
+    "prompt": "On the teaching field ODIDI every template closes its cumulative in the black, and five of the six return a negative value at the project's 12 percent. What does that pair of readings mean for those five?",
+    "options": [
+     "Under those five the field returns the contractor's nominal money and still is not worth building at the rate the project is discounted at.",
+     "The cumulative was computed on a different set of rows from the value, so one of the two readings has to be discarded.",
+     "The field pays back inside the horizon but the closing unrecovered pool is larger than the cash returned in every case.",
+     "The value is negative because the horizon of 25 years ends before the cumulative has finished climbing."
+    ],
+    "answer_index": 0,
+    "explanation": "Brazil ends the life with 192.9896 of contractor cash and a value of -5.8662, and Angola with 109.1947 and -58.1813. The sixth, Nigeria - PIA (2021), clears 12 percent with a value of 1.7389."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m05-reading-the-ledger",
+   "ord": 13,
+   "fields": [
+    "prompt"
+   ],
+   "why": "PIA ODIDI band moved",
+   "old": {
+    "prompt": "Swept from 40 to 120 USD per bbl on ODIDI, government take under the Gulf of Mexico terms falls from 78.5512 percent to 40.8517 while under PIA it stays within 75.1077 to 79.4678. What does a single ledger tell you about that?",
+    "options": [
+     "It tells you the ranking at the run's own price, and that ranking holds across the sweep.",
+     "Nothing at all, because one run is one price deck and the shape of a regime across prices is not in it.",
+     "It tells you the direction of the movement, since a regime with a higher take at the base price always gives up more of it as prices rise.",
+     "It tells you which template is progressive, from government take at the base price."
+    ],
+    "answer_index": 1,
+    "explanation": "Two regimes that look similar on one run behave nothing alike on the next, and the single ledger shows neither shape."
+   },
+   "new": {
+    "prompt": "Swept from 40 to 120 USD per bbl on ODIDI, government take under the Gulf of Mexico terms falls from 78.5512 percent to 40.8517 while under Nigeria - PIA (2021) it stays within 42.2597 to 50.4050. What does a single ledger tell you about that?",
+    "options": [
+     "It tells you the ranking at the run's own price, and that ranking holds across the sweep.",
+     "Nothing at all, because one run is one price deck and the shape of a regime across prices is not in it.",
+     "It tells you the direction of the movement, since a regime with a higher take at the base price always gives up more of it as prices rise.",
+     "It tells you which template is progressive, from government take at the base price."
+    ],
+    "answer_index": 1,
+    "explanation": "Two regimes that look similar on one run behave nothing alike on the next, and the single ledger shows neither shape."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-associate-reading",
+   "ord": 5,
+   "fields": [
+    "prompt",
+    "explanation"
+   ],
+   "why": "Brazil no longer the most; PIA template value is positive",
+   "old": {
+    "prompt": "ODIDI under Brazil returns the contractor 192.9896 over 25 years, the most of the six templates, and a value of -5.8662 at the project's 12 percent. How can both be true?",
+    "options": [
+     "The value is computed on the government's cash flows rather than the contractor's, which is why it carries the opposite sign.",
+     "The total adds 25 undiscounted rows and the value discounts each of them, and at 12 percent the year 1 capex outweighs cash that arrives late, so positive nominal cash is still worth less than nothing today.",
+     "The 192.9896 is a total of undiscounted rows and the value excludes the capex, so the two are not readings of the same ledger.",
+     "The closing unrecovered pool of 19.3270 is subtracted in the value and not in the total, and that is the whole of the difference."
+    ],
+    "answer_index": 1,
+    "explanation": "Same rows, two verdicts. Every one of the six templates closes ODIDI's cumulative in the black and returns a negative value at 12 percent."
+   },
+   "new": {
+    "prompt": "ODIDI under Brazil returns the contractor 192.9896 over 25 years, the second most of the six templates, and a value of -5.8662 at the project's 12 percent. How can both be true?",
+    "options": [
+     "The value is computed on the government's cash flows rather than the contractor's, which is why it carries the opposite sign.",
+     "The total adds 25 undiscounted rows and the value discounts each of them, and at 12 percent the year 1 capex outweighs cash that arrives late, so positive nominal cash is still worth less than nothing today.",
+     "The 192.9896 is a total of undiscounted rows and the value excludes the capex, so the two are not readings of the same ledger.",
+     "The closing unrecovered pool of 19.3270 is subtracted in the value and not in the total, and that is the whole of the difference."
+    ],
+    "answer_index": 1,
+    "explanation": "Same rows, two verdicts. Five of the six templates close ODIDI's cumulative in the black and return a negative value at 12 percent; the PIA template's value is 1.7389."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-associate-reading",
+   "ord": 13,
+   "fields": [
+    "prompt",
+    "explanation"
+   ],
+   "why": "ODIDI ranges moved",
+   "old": {
+    "prompt": "ODIDI hands the state between 232.9950 and 316.7898 depending on which of the six templates prices it. What can the Associate reading not say about that range?",
+    "options": [
+     "Which template collects the most, since the six collections are only comparable when the closing pools are equal.",
+     "Which template leaves the contractor the least cash, which needs a discount convention the tier does not carry.",
+     "Which of the splits is fair, which survives a price collapse, and which numbers on a comparison screen are measurements at all.",
+     "How much of each collection is royalty, since the ledger prints government cash flow as a single undivided column."
+    ],
+    "answer_index": 2,
+    "explanation": "The contractor keeps between 109.1947 and 192.9896 across the same six templates, and the tier can state the range without judging it."
+   },
+   "new": {
+    "prompt": "ODIDI hands the state between 196.0260 and 316.7898 depending on which of the six templates prices it. What can the Associate reading not say about that range?",
+    "options": [
+     "Which template collects the most, since the six collections are only comparable when the closing pools are equal.",
+     "Which template leaves the contractor the least cash, which needs a discount convention the tier does not carry.",
+     "Which of the splits is fair, which survives a price collapse, and which numbers on a comparison screen are measurements at all.",
+     "How much of each collection is royalty, since the ledger prints government cash flow as a single undivided column."
+    ],
+    "answer_index": 2,
+    "explanation": "The contractor keeps between 109.1947 and 229.9586 across the same six templates, and the tier can state the range without judging it."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "beginner",
+   "scope": "module",
+   "module_key": "m06-the-associate-reading",
+   "ord": 14,
+   "fields": [
+    "explanation",
+    "options[0]",
+    "options[1] (keyed)",
+    "options[3]"
+   ],
+   "why": "key named old R factor tiers as the PIA template",
+   "old": {
+    "prompt": "Every regime in the Associate tier was read at one setting. Which instruments actually move on their own in the templates this tier held still?",
+    "options": [
+     "The cost recovery limit, which tightens as the standing pool grows, and the minimum tax, which arms itself once the residual falls.",
+     "A royalty keyed on price and a profit split keyed on the R factor, which under PIA steps the contractor's share from 60 to 40 to 30 percent.",
+     "The corporate rate, which steps with the R factor tier, and the royalty, which steps with cumulative production.",
+     "The discount rate, which follows the price deck, and the profit split, which follows the closing unrecovered pool."
+    ],
+    "answer_index": 1,
+    "explanation": "The R factor is a ratio of cumulatives, so it can fall back below a threshold it passed and step the contractor's share up again."
+   },
+   "new": {
+    "prompt": "Every regime in the Associate tier was read at one setting. Which instruments actually move on their own in the templates this tier held still?",
+    "options": [
+     "The cost recovery limit, which tightens as the standing pool grows, and the minimum tax, which arms itself once the residual falls away.",
+     "The R factor split Ghana and Angola carry, and the PIA template's royalty on price and daily rate with its split on cumulative production.",
+     "The corporate rate, which steps with the R factor tier, and the royalty, which steps with cumulative production.",
+     "The discount rate, which follows the price deck, and the profit split, which follows the closing unrecovered pool of the year before."
+    ],
+    "answer_index": 1,
+    "explanation": "A split on cumulative production can only move one way, since production only accumulates. Ghana's and Angola's R factor, a ratio of cumulatives, can fall back and hand the contractor a larger share again."
+   }
+  },
   {
    "slug": "fiscal",
    "tier": "intermediate",
@@ -124,7 +1165,7 @@
     "options[1]",
     "options[2]"
    ],
-   "why": "PIA template ODIDI pool and cost recovered re-derived: year 10 is the partial draw, year 11 recovers its own opex",
+   "why": "re-cut onto the PIA template's years 9 to 11 on ODIDI: year 10 is the partial draw (30.1819 = 14.8678 carried + 15.3141 opex); the audited key words 'That year's own opex' are kept because they are TRUE of year 11 (cost recovered 14.8473 = opex 14.8473, pool 0), confirmed by engine call in keytruth_intermediate.mjs",
    "old": {
     "prompt": "On the teaching field under the PIA template the pool closes year 8 at 14.5837 million USD and year 9 at 0.0000, and cost recovered falls from 49.9934 in year 8 to 30.4412 in year 9 and 15.3141 in year 10. What is that last figure?",
     "options": [
@@ -386,6 +1427,39 @@
     ],
     "answer_index": 2,
     "explanation": "The comparison in the engine is `oilPrice >= tier.threshold`, so the threshold belongs to the tier above it: 49.990000 pays 14.9214 at 0.075000 while 50.000000 pays 19.8989 at 0.100000."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "intermediate",
+   "scope": "module",
+   "module_key": "m01-the-sliding-scale",
+   "ord": 2,
+   "fields": [
+    "prompt"
+   ],
+   "why": "copy rule: the prompt read as an \"X, not Y\" contrastive",
+   "old": {
+    "prompt": "Why can a price multiplier sweep of the default project, run at 0.700000, 0.710000, 0.720000 and 0.800000, not settle which tier owns a threshold?",
+    "options": [
+     "A sweep brackets a threshold and never lands on one: 0.710000 puts the price at 49.700000 and 0.720000 puts it at 50.400000, so no swept point is ever the threshold itself.",
+     "The sweep changes gross revenue at the same time as the rate, so the implied rate of royalty over gross revenue is contaminated and cannot be read.",
+     "The sweep reports the royalty only as a lifetime total, so no single year's rate can be recovered from it.",
+     "The multiplier is applied after the royalty is charged, so the tier a swept point selects belongs to the unswept deck price and not to the price printed."
+    ],
+    "answer_index": 0,
+    "explanation": "The implied rate steps from 0.075000 to 0.100000 somewhere between the multipliers 0.710000 and 0.720000, and a bracket names an interval rather than a side."
+   },
+   "new": {
+    "prompt": "Why is a price multiplier sweep of the default project, run at 0.700000, 0.710000, 0.720000 and 0.800000, unable to settle which tier owns a threshold?",
+    "options": [
+     "A sweep brackets a threshold and never lands on one: 0.710000 puts the price at 49.700000 and 0.720000 puts it at 50.400000, so no swept point is ever the threshold itself.",
+     "The sweep changes gross revenue at the same time as the rate, so the implied rate of royalty over gross revenue is contaminated and cannot be read.",
+     "The sweep reports the royalty only as a lifetime total, so no single year's rate can be recovered from it.",
+     "The multiplier is applied after the royalty is charged, so the tier a swept point selects belongs to the unswept deck price and not to the price printed."
+    ],
+    "answer_index": 0,
+    "explanation": "The implied rate steps from 0.075000 to 0.100000 somewhere between the multipliers 0.710000 and 0.720000, and a bracket names an interval rather than a side."
    }
   },
   {
@@ -657,6 +1731,39 @@
    "slug": "fiscal",
    "tier": "intermediate",
    "scope": "module",
+   "module_key": "m03-the-r-factor",
+   "ord": 14,
+   "fields": [
+    "prompt"
+   ],
+   "why": "template named as the engine names it; identity confirmed by engine call (every row equal)",
+   "old": {
+    "prompt": "The R factor column on the default project is identical under the USA Gulf of Mexico template and under Nigeria PIA. What does that say about it?",
+    "options": [
+     "It is cached from the first template loaded in a comparison run, which is why the six templates report the same column.",
+     "It responds only to production, price and cost, so no royalty, cost recovery limit, split or tax setting can move it.",
+     "It is computed from the contractor's own position, and the two templates happen to leave the contractor in the same place on this project.",
+     "It is fixed by the Designer's default project rather than by the regime, and a different project would make the two columns diverge."
+    ],
+    "answer_index": 1,
+    "explanation": "Neither cumulative depends on the regime. Royalty is not subtracted from the revenue side and tax is not added to the cost side."
+   },
+   "new": {
+    "prompt": "The R factor column on the default project is identical under the \"USA - Gulf of Mexico\" template and under \"Nigeria - PIA (2021)\". What does that say about it?",
+    "options": [
+     "It is cached from the first template loaded in a comparison run, which is why the six templates report the same column.",
+     "It responds only to production, price and cost, so no royalty, cost recovery limit, split or tax setting can move it.",
+     "It is computed from the contractor's own position, and the two templates happen to leave the contractor in the same place on this project.",
+     "It is fixed by the Designer's default project rather than by the regime, and a different project would make the two columns diverge."
+    ],
+    "answer_index": 1,
+    "explanation": "Neither cumulative depends on the regime. Royalty is not subtracted from the revenue side and tax is not added to the cost side."
+   }
+  },
+  {
+   "slug": "fiscal",
+   "tier": "intermediate",
+   "scope": "module",
    "module_key": "m04-the-tax-stack",
    "ord": 8,
    "fields": [
@@ -744,7 +1851,7 @@
     "explanation": "Brazil returns 192.9896 million USD of undiscounted contractor net cash flow and pays back in year 6. A negative present value on a field whose rate column is empty is not a loss."
    },
    "new": {
-    "prompt": "Five of the six templates return a negative present value on the teaching field at 12 percent, and Brazil - Concession is the least negative of those five at negative 5.8662 million USD. What does the engine report in its rate of return column for Brazil there?",
+    "prompt": "On the teaching field at 12 percent, Brazil - Concession returns negative 5.8662 million USD, the least negative of the five templates below zero. What sits in the engine's rate of return column for Brazil?",
     "options": [
      "The field loses money under that regime, as a negative present value reports, so the column carries a negative rate.",
      "A rate just under 12 percent, which is the crossing that matters and the one the summary reports.",
@@ -762,9 +1869,13 @@
    "module_key": "m05-rate-and-return",
    "ord": 9,
    "fields": [
-    "explanation"
+    "prompt",
+    "explanation",
+    "options[0]",
+    "options[2]",
+    "options[3]"
    ],
-   "why": "repair-history framing removed",
+   "why": "repair-history framing removed; re-aimed at the 1400 percent case so it no longer duplicates the exam question on the 199900 percent case",
    "old": {
     "prompt": "The published case with flows of negative 1 then 2000 has a root at 199900.0000 percent. What does the engine report for it?",
     "options": [
@@ -777,15 +1888,15 @@
     "explanation": "`irr_above_clamp_inside_old_bracket`, with flows of negative 100 then 1500, has a root of 1400.0000 percent and the same status, so a root the retired bisection would have printed is refused as well."
    },
    "new": {
-    "prompt": "The published case with flows of negative 1 then 2000 has a root at 199900.0000 percent. What does the engine report for it?",
+    "prompt": "The published case with flows of negative 100 then 1500 has its only root at 1400.0000 percent. What does the engine put in the rate column?",
     "options": [
-     "199900.0000 percent, since the root is exact and the band is a search hint rather than a limit on what may be reported.",
+     "1400.0000 percent, since a root the solver can verify exactly is reported wherever it lies on the rate axis.",
      "Null, with the status above-clamp, because the only root sits beyond the top of the band the engine searches.",
-     "1000.0000 percent, the top of the band, which is the nearest rate the engine is prepared to defend.",
-     "The top of a doubling search that started at 100 percent, since a bracket that stopped short is still the engine's fallback."
+     "1000.0000 percent, the upper edge of the searched band, which is the closest defensible rate the engine can print.",
+     "Null with the status no-root, since a single root is treated as a failed search whenever it falls outside the band."
     ],
     "answer_index": 1,
-    "explanation": "`irr_above_clamp_inside_old_bracket`, with flows of negative 100 then 1500, has a root of 1400.0000 percent and the same status, so a finite root beyond the band is refused as well."
+    "explanation": "The band runs from -99 to 1000 percent and neither edge is ever returned as a rate. A root above it, however exact, leaves the column null with the status above-clamp."
    }
   },
   {
@@ -957,7 +2068,7 @@
      "That the first row is the best regime for the contractor, and nothing else."
     ],
     "answer_index": 3,
-    "explanation": "On the teaching field the sort puts Nigeria - PIA (2021) first and Angola - Deepwater PSC last, while government cash flow runs the other way at 316.7898 million USD for Angola against 196.0260 for the PIA template."
+    "explanation": "On the teaching field the sort puts Nigeria - PIA (2021) first and Angola - Deepwater PSC last, and neither position says anything about payback, rate of return or the government's share."
    }
   },
   {
@@ -1344,10 +2455,12 @@
    "fields": [
     "prompt",
     "explanation",
+    "options[0]",
     "options[1]",
-    "options[2] (keyed)"
+    "options[2] (keyed)",
+    "options[3]"
    ],
-   "why": "five templates pay back in year 3 on the default project; repair history removed",
+   "why": "five templates pay back in year 3 on the default project; the question now tests the second name (slowest of the rest), avoiding a duplicate of m04 ord 1",
    "old": {
     "prompt": "The payback column of `cmp_all_templates_default_project` reads 3, 3, 3, 4, 3 and 4 down the summary. What does the payback verdict then report?",
     "options": [
@@ -1360,15 +2473,15 @@
     "explanation": "Naming every regime tied at the fastest year is the 2026-09-15 repair. Until then the sentence named Generic Royalty/Tax alone, which leads the sort at 397.0445 million USD, so a tied payback verdict was the NPV ranking under another label."
    },
    "new": {
-    "prompt": "The payback column of `cmp_all_templates_default_project` reads 3, 3, 3, 3, 4 and 3 down the summary. What does the payback verdict then report?",
+    "prompt": "The payback verdict on `cmp_all_templates_default_project` closes with \"against year 4 for Angola - Deepwater PSC\". What is Angola in that sentence?",
     "options": [
-     "The regime with the highest NPV, because the tie is broken by summary order and the summary is sorted on contractor NPV.",
-     "No verdict at all, because a five way tie at the top cannot be ranked and an unsupportable claim is omitted.",
-     "All five regimes at year 3, in summary order, against year 4 for Angola - Deepwater PSC.",
-     "The regime whose R factor payout year is earliest, which is the tie break the engine applies whenever an integer column ties in the summary."
+     "The runner-up, the regime that recovers its capital second fastest of the six templates.",
+     "The regime with the lowest contractor NPV, which the sentence quotes as the comparison's floor.",
+     "The slowest regime left once the tied fastest ones are named, here the only one paying back in year 4.",
+     "The one regime whose R factor payout comes later than its cash payback, which the sentence flags as a warning."
     ],
     "answer_index": 2,
-    "explanation": "The verdict names every regime tied at the fastest year, so the sentence opens with Nigeria - PIA (2021), which leads the sort at 432.0925 million USD, and lists four more. A sentence naming only the first would be the NPV ranking under another label."
+    "explanation": "The verdict names every regime tied at the fastest year, sets them aside and takes the maximum of what is left, so the second name is the slowest of the rest. The payback column reads 3, 3, 3, 3, 4 and 3 down the summary, and Angola pays out in year 3, before its payback."
    }
   },
   {
@@ -1970,7 +3083,7 @@
     "explanation": "Lifetime contractor net cash flow of -16279.9099 million USD outweighs a government cash flow of 1431.0440, profit is not positive at any swept price, and the sentence says no regime is economic at any swept price from 40 to 120 USD per bbl."
    },
    "new": {
-    "prompt": "On `cmp_never_recovers` every regime's price series is null and flagged undefined at all nine prices. What does the price verdict return there, and why?",
+    "prompt": "Every price series on `cmp_never_recovers` comes back null, flagged undefined, at each of the nine prices. How does the price verdict read there, and on what grounds?",
     "options": [
      "It declines to rank, because every point is undefined and so no swept price gives every regime a government take within 0 to 100 percent.",
      "It names Nigeria - PIA (2021), since two null endpoints subtract to a climb of zero that ranks like any other.",
@@ -2097,7 +3210,7 @@
     "explanation",
     "options[0] (keyed)"
    ],
-   "why": "gap range now 8.7699 (PIA) to 16.7958 (Ghana)",
+   "why": "gap runs 8.7699 (PIA) to 16.7958 (Ghana); key restated as the fixed ratio 1.286453 to stay clear of m02 ord 15",
    "old": {
     "prompt": "A reader proposes to translate between government take and government share of net revenue with a fixed offset, because the chart runs about ten points above the table. Why does that fail?",
     "options": [
@@ -2112,13 +3225,13 @@
    "new": {
     "prompt": "A reader proposes to translate between government take and government share of net revenue with a fixed offset, because the chart runs about ten points above the table. Why does that fail?",
     "options": [
-     "The gap is not fixed: on one comparison at one price it runs from 8.7699 percentage points for Nigeria - PIA (2021) to 16.7958 for Ghana - Deepwater, and it grows with the share itself.",
+     "The gap is proportional to the share: here government take is the share times 1.286453, so a larger share carries a larger gap.",
      "The gap changes with the swept price, so an offset taken at 70 USD per bbl is wrong at every other one of the nine points.",
      "The offset is stable in percentage points and unstable in money, so it can be carried between rates but never between takes.",
      "The two rates are computed from different ledgers, so no arithmetic relation between them exists to be approximated by an offset."
     ],
     "answer_index": 0,
-    "explanation": "Government take is government share of net revenue times 1.286453 on this project, so the gap is proportional to the share: Ghana - Deepwater shows 16.7958 where Nigeria - PIA (2021) shows 8.7699."
+    "explanation": "Revenue less opex and capex do not depend on the regime, so the factor is one number for the whole comparison: Ghana - Deepwater's share of 58.6335 becomes a take of 75.4293, while Nigeria - PIA (2021) goes from 30.6156 to 39.3855."
    }
   },
   {

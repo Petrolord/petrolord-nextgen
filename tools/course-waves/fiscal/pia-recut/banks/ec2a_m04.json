@@ -44,7 +44,7 @@
   "explanation": "The tie is exact by construction, the golden pins the ranked quantities rather than a winner, and no tie break rule could be right among six answers that are one answer. The retired reduce named USA - Gulf of Mexico and the oracle named Brazil - Concession."
  },
  {
-  "prompt": "On `cmp_never_recovers` every regime's price series is null and flagged undefined at all nine prices. What does the price verdict return there, and why?",
+  "prompt": "Every price series on `cmp_never_recovers` comes back null, flagged undefined, at each of the nine prices. How does the price verdict read there, and on what grounds?",
   "options": [
    "It declines to rank, because every point is undefined and so no swept price gives every regime a government take within 0 to 100 percent.",
    "It names Nigeria - PIA (2021), since two null endpoints subtract to a climb of zero that ranks like any other.",

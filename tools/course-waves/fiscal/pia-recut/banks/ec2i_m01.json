@@ -11,7 +11,7 @@
   "explanation": "The comparison in the engine is `oilPrice >= tier.threshold`, so the threshold belongs to the tier above it: 49.990000 pays 14.9214 at 0.075000 while 50.000000 pays 19.8989 at 0.100000."
  },
  {
-  "prompt": "Why can a price multiplier sweep of the default project, run at 0.700000, 0.710000, 0.720000 and 0.800000, not settle which tier owns a threshold?",
+  "prompt": "Why is a price multiplier sweep of the default project, run at 0.700000, 0.710000, 0.720000 and 0.800000, unable to settle which tier owns a threshold?",
   "options": [
    "A sweep brackets a threshold and never lands on one: 0.710000 puts the price at 49.700000 and 0.720000 puts it at 50.400000, so no swept point is ever the threshold itself.",
    "The sweep changes gross revenue at the same time as the rate, so the implied rate of royalty over gross revenue is contaminated and cannot be read.",

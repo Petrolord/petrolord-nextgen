@@ -143,7 +143,7 @@
   "explanation": "A crossing is identified by the pair of rows that straddle it, never by a row that lands on it, and the ledger prints no marker on a crossing year."
  },
  {
-  "prompt": "The R factor column on the default project is identical under the USA Gulf of Mexico template and under Nigeria PIA. What does that say about it?",
+  "prompt": "The R factor column on the default project is identical under the \"USA - Gulf of Mexico\" template and under \"Nigeria - PIA (2021)\". What does that say about it?",
   "options": [
    "It is cached from the first template loaded in a comparison run, which is why the six templates report the same column.",
    "It responds only to production, price and cost, so no royalty, cost recovery limit, split or tax setting can move it.",

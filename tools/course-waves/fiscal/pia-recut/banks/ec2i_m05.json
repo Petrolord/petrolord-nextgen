@@ -66,7 +66,7 @@
   "explanation": "There is no valuation year, no partial period and no inflation term, and the horizon is 25 rows for every regime and every project."
  },
  {
-  "prompt": "Five of the six templates return a negative present value on the teaching field at 12 percent, and Brazil - Concession is the least negative of those five at negative 5.8662 million USD. What does the engine report in its rate of return column for Brazil there?",
+  "prompt": "On the teaching field at 12 percent, Brazil - Concession returns negative 5.8662 million USD, the least negative of the five templates below zero. What sits in the engine's rate of return column for Brazil?",
   "options": [
    "The field loses money under that regime, as a negative present value reports, so the column carries a negative rate.",
    "A rate just under 12 percent, which is the crossing that matters and the one the summary reports.",
@@ -88,15 +88,15 @@
   "explanation": "A number comes back only when exactly one rate in the band brings the present value to zero. The four words that come back instead are no-sign-change, no-root, above-clamp and multiple-roots."
  },
  {
-  "prompt": "The published case with flows of negative 1 then 2000 has a root at 199900.0000 percent. What does the engine report for it?",
+  "prompt": "The published case with flows of negative 100 then 1500 has its only root at 1400.0000 percent. What does the engine put in the rate column?",
   "options": [
-   "199900.0000 percent, since the root is exact and the band is a search hint rather than a limit on what may be reported.",
+   "1400.0000 percent, since a root the solver can verify exactly is reported wherever it lies on the rate axis.",
    "Null, with the status above-clamp, because the only root sits beyond the top of the band the engine searches.",
-   "1000.0000 percent, the top of the band, which is the nearest rate the engine is prepared to defend.",
-   "The top of a doubling search that started at 100 percent, since a bracket that stopped short is still the engine's fallback."
+   "1000.0000 percent, the upper edge of the searched band, which is the closest defensible rate the engine can print.",
+   "Null with the status no-root, since a single root is treated as a failed search whenever it falls outside the band."
   ],
   "answer": 1,
-  "explanation": "`irr_above_clamp_inside_old_bracket`, with flows of negative 100 then 1500, has a root of 1400.0000 percent and the same status, so a finite root beyond the band is refused as well."
+  "explanation": "The band runs from -99 to 1000 percent and neither edge is ever returned as a rate. A root above it, however exact, leaves the column null with the status above-clamp."
  },
  {
   "prompt": "What tells a reader that the engine refused to name a rate rather than failing to find one?",

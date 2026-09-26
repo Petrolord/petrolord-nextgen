@@ -13,13 +13,13 @@
  {
   "prompt": "A reader proposes to translate between government take and government share of net revenue with a fixed offset, because the chart runs about ten points above the table. Why does that fail?",
   "options": [
-   "The gap is not fixed: on one comparison at one price it runs from 8.7699 percentage points for Nigeria - PIA (2021) to 16.7958 for Ghana - Deepwater, and it grows with the share itself.",
+   "The gap is proportional to the share: here government take is the share times 1.286453, so a larger share carries a larger gap.",
    "The gap changes with the swept price, so an offset taken at 70 USD per bbl is wrong at every other one of the nine points.",
    "The offset is stable in percentage points and unstable in money, so it can be carried between rates but never between takes.",
    "The two rates are computed from different ledgers, so no arithmetic relation between them exists to be approximated by an offset."
   ],
   "answer": 0,
-  "explanation": "Government take is government share of net revenue times 1.286453 on this project, so the gap is proportional to the share: Ghana - Deepwater shows 16.7958 where Nigeria - PIA (2021) shows 8.7699."
+  "explanation": "Revenue less opex and capex do not depend on the regime, so the factor is one number for the whole comparison: Ghana - Deepwater's share of 58.6335 becomes a take of 75.4293, while Nigeria - PIA (2021) goes from 30.6156 to 39.3855."
  },
  {
   "prompt": "On `cmp_never_recovers` the price sweep returns null with the state undefined for every template at all nine prices, while Angola - Deepwater PSC collected 1662.7835 million USD for the government. What does the null mean?",

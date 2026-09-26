@@ -33,10 +33,10 @@
   "explanation": "It is a whole year and not a fraction, and the pool clearing is a separate event that happens to fall in year 3 here as well."
  },
  {
-  "prompt": "On the default project the PIA and Angola templates report payback in year 4 while payout is year 3, and the other four report 3 for both. What does the one year gap say?",
+  "prompt": "On the default project the Angola template reports payback in year 4 while payout is year 3, and the other five report 3 for both. What does the one year gap say?",
   "options": [
    "The R factor and the cumulative are computed on different production profiles, so the two clocks are never strictly comparable.",
-   "The pool cleared a year later under those two templates, and payback cannot be reported before the pool closes.",
+   "The pool cleared a year later under that template, and payback cannot be reported before the pool closes.",
    "Payout is discounted at the project's 10 percent and payback is not, so payout always arrives in an earlier year.",
    "The project earned its cost back before the contractor got its cash back, because the state takes its share in between."
   ],
@@ -55,12 +55,12 @@
   "explanation": "The revenue the limit could not recover became profit oil, and this regime splits profit oil 100 percent to the contractor, so the capital came home through the profit share on a life total of 1530.0622."
  },
  {
-  "prompt": "Four of the six templates report payback in year 3 on the default project. Why is that a poor place to rank them?",
+  "prompt": "Five of the six templates report payback in year 3 on the default project. Why is that a poor place to rank them?",
   "options": [
    "Payback is measured on the discounted cumulative, and the discounting compresses the differences between the templates into one year.",
    "Payback is measured from the R factor, which is a ratio of cumulatives and moves too little between templates to separate them.",
    "Payback is a whole year, so a tie in the column is not a tie in the money: the same year 3 covers 986.7327 under Generic and 623.9658 under Brazil.",
-   "Payback is reported to the nearest year and the engine rounds up, so four templates that really differ are printed as the same year."
+   "Payback is reported to the nearest year and the engine rounds up, so five templates that really differ are printed as the same year."
   ],
   "answer": 2,
   "explanation": "It is an integer clock on an undiscounted running sum, and it has no view of anything that happens after the crossing."
@@ -88,7 +88,7 @@
   "explanation": "Cost recovered matches the life costs only when the pool empties. On the test project none of them empties, from 72.7082 under Brazil to 251.6537 under Angola."
  },
  {
-  "prompt": "Brazil pays the most tax of the six templates on the default project at 852.8256 and leaves the contractor 623.9658, the third highest figure in the table. What does that show?",
+  "prompt": "Brazil pays the most tax of the six templates on the default project at 852.8256 and leaves the contractor 623.9658, the fourth highest figure in the table. What does that show?",
   "options": [
    "That the tax column is charged on gross revenue under Brazil and on the profit share under the other five, so the two are not comparable.",
    "Tax and take rank differently, because the state also collects through royalty and through its share of profit oil.",
@@ -96,7 +96,7 @@
    "That a high tax bill signals a high residual, so the contractor's cash and the tax column will normally move together across templates."
   ],
   "answer": 1,
-  "explanation": "PIA pays the least tax of the six, 174.0882, and leaves the contractor the least cash, 406.2057."
+  "explanation": "Nigeria - PIA (2021) pays the second most tax, 453.4354, and leaves the contractor the most cash, 1058.0159, while Ghana pays the least tax, 230.9340, and leaves the least cash, 428.8774."
  },
  {
   "prompt": "Contractor total 980.9313 and government total 764.5528 do not add to revenue of 2686.9277 on the default project. What is the difference?",
@@ -110,15 +110,15 @@
   "explanation": "The two takes add to revenue less opex less capex on every row, and 441.4436 plus 500.0000 is the whole of the gap in the totals."
  },
  {
-  "prompt": "On the teaching field ODIDI every template closes its cumulative in the black and every template returns a negative value at the project's 12 percent. What does that pair of readings mean?",
+  "prompt": "On the teaching field ODIDI every template closes its cumulative in the black, and five of the six return a negative value at the project's 12 percent. What does that pair of readings mean for those five?",
   "options": [
-   "The field returns the contractor's nominal money and still is not worth building at the rate the project is discounted at.",
+   "Under those five the field returns the contractor's nominal money and still is not worth building at the rate the project is discounted at.",
    "The cumulative was computed on a different set of rows from the value, so one of the two readings has to be discarded.",
    "The field pays back inside the horizon but the closing unrecovered pool is larger than the cash returned in every case.",
    "The value is negative because the horizon of 25 years ends before the cumulative has finished climbing."
   ],
   "answer": 0,
-  "explanation": "Brazil ends the life with 192.9896 of contractor cash and a value of -5.8662, and Angola with 109.1947 and -58.1813."
+  "explanation": "Brazil ends the life with 192.9896 of contractor cash and a value of -5.8662, and Angola with 109.1947 and -58.1813. The sixth, Nigeria - PIA (2021), clears 12 percent with a value of 1.7389."
  },
  {
   "prompt": "A cumulative curve does not only rise. What turns it back down late in the life of a declining field?",
@@ -132,7 +132,7 @@
   "explanation": "ODIDI's year 25 sells 6.9081 of gross revenue against opex of 12.3405 under the Gulf of Mexico terms, so the row is negative and the running sum falls."
  },
  {
-  "prompt": "Swept from 40 to 120 USD per bbl on ODIDI, government take under the Gulf of Mexico terms falls from 78.5512 percent to 40.8517 while under PIA it stays within 75.1077 to 79.4678. What does a single ledger tell you about that?",
+  "prompt": "Swept from 40 to 120 USD per bbl on ODIDI, government take under the Gulf of Mexico terms falls from 78.5512 percent to 40.8517 while under Nigeria - PIA (2021) it stays within 42.2597 to 50.4050. What does a single ledger tell you about that?",
   "options": [
    "It tells you the ranking at the run's own price, and that ranking holds across the sweep.",
    "Nothing at all, because one run is one price deck and the shape of a regime across prices is not in it.",

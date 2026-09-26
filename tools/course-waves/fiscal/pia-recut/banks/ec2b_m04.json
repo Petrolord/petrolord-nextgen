@@ -41,7 +41,7 @@
    "Recovery of 220.9910, the whole of revenue after royalty, against opex of 31.0027 and capex of 500.0000."
   ],
   "answer": 3,
-  "explanation": "A 100 percent limit is a ceiling on revenue after royalty, not a promise to return the spend, so 310.0117 is carried into year 2."
+  "explanation": "A 100 percent limit is a ceiling on revenue after royalty and makes no promise to return the spend, so 310.0117 is carried into year 2."
  },
  {
   "prompt": "A published case runs the test project at capex 20000. Life contractor net cash flow is -15724.0151 and the closing unrecovered pool is 15724.0151. Why is it one figure with two signs?",

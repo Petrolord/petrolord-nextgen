@@ -22,15 +22,15 @@
   "explanation": "The uplift is optional in the object and defaults to 20, so a template that says nothing about it is not running without one."
  },
  {
-  "prompt": "Nigeria - PIA (2021) and Generic Royalty/Tax both carry CIT 30 percent, RRT 0 percent and minimum tax 0 percent, yet on the Designer's default project the contractor keeps 406.2057 million USD under one and 986.7327 million USD under the other. What opened that gap?",
+  "prompt": "Nigeria - PIA (2021) and Generic Royalty/Tax both carry CIT 30 percent, RRT 0 percent and minimum tax 0 percent, yet on the Designer's default project the contractor keeps 1058.0159 million USD under one and 986.7327 million USD under the other. What opened that gap?",
   "options": [
-   "A heavier tax bill under the PIA terms, which totals 422.8854 million USD over the life against 174.0882 million USD for the Generic terms.",
-   "The other three fields, a cost recovery limit of 80 percent instead of 100 and an R factor split of 60, then 40, then 30 percent instead of a flat 100 percent to the contractor.",
-   "A larger royalty under the PIA slider, which collects 335.8660 million USD against the 268.6928 million USD the Generic rate collects.",
-   "Different sales, since the PIA line is run against a lower price deck than the Generic line is."
+   "A lighter tax bill under the PIA terms, which totals 422.8854 million USD over the life against 453.4354 million USD for the Generic terms.",
+   "The royalty field: the PIA royalty collects 154.4828 million USD against Generic's 335.8660, more than its heavier tax wins back.",
+   "A larger cost recovery under the PIA limit, which returns 1591.0013 million USD of cost against the 941.4436 million USD the Generic limit returns.",
+   "Different sales, since the PIA line is run against a lower price deck than the Generic line is, year after year across the life."
   ],
   "answer": 1,
-  "explanation": "The PIA line pays the smaller tax of the two, 174.0882 million USD against 422.8854, and the smaller royalty, 268.6928 against 335.8660. A tax rate quoted on its own predicts nothing."
+  "explanation": "Both lines sell the same 2686.9277 million USD and recover the same 941.4436. The PIA line pays the larger tax, 453.4354 million USD against 422.8854, and the smaller royalty, 154.4828 against 335.8660. A tax rate quoted on its own predicts nothing."
  },
  {
   "prompt": "Six templates are run on the published test project. What does the total revenue column read down those six lines?",
@@ -124,9 +124,9 @@
   "prompt": "Why is subtracting the two printed endpoints of a derived column and matching the printed difference a bad check?",
   "options": [
    "The printed endpoints belong to different rows of the ledger, while a derived difference is only ever computed within one row.",
-   "A derived column is computed at full precision and then rounded, and its endpoints are rounded too, so a printed pair of 79.2711 and 79.4678 carries a printed climb of 0.1968.",
+   "A derived column is computed at full precision and then rounded, and its endpoints are rounded too, so a printed pair of 41.6869 and 41.6802 carries a printed climb of -0.0068.",
    "A derived column is an estimate the engine never returns, so it carries no defined precision to check anything against.",
-   "Derived columns print to six decimals and returned columns to four, so the two can never be put in the same subtraction."
+   "Derived columns print to six decimals and returned columns to four, so the two can never be put in the same subtraction, whichever two rows the printed endpoints come from."
   ],
   "answer": 1,
   "explanation": "Both figures are correct and the hand subtraction is off by one in the last place. The default project's Generic Royalty/Tax pair does the same thing, printing 51.2558 and 41.0660 against a climb of -10.1897."
@@ -148,10 +148,10 @@
    "Comparing the shape of regimes against each other, with the Petroleum Economics Studio engine holding the fiscal truth.",
    "Assessing a Nigerian liability under the Petroleum Industry Act, which is why the template set carries a PIA entry at all.",
    "Producing a filing figure, once a template has been reconciled against the Petroleum Economics Studio engine on the same project.",
-   "Replacing that engine for screening work, since the two agree on a total government cash flow of 1339.2784 million USD."
+   "Replacing that engine for screening work, since the two agree on a total government cash flow of 687.4682 million USD on this project."
   ],
   "answer": 0,
-  "explanation": "A template named for a jurisdiction is a caricature in six numbers, useful for asking which instrument moved which result and unfit for filing anything."
+  "explanation": "Even the template carrying the Act's base terms is a model of them. It answers which instrument moved which result, and no filing can rest on it."
  },
  {
   "prompt": "A term sheet carries a signature bonus, a domestic supply obligation and a state participation share. How are the three entered?",

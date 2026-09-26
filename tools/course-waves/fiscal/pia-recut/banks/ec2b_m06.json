@@ -44,7 +44,7 @@
   "explanation": "A tighter limit leaves more of the year 1 capex waiting, and on a field that declines 14 percent a year the later revenue never catches up."
  },
  {
-  "prompt": "ODIDI under Brazil returns the contractor 192.9896 over 25 years, the most of the six templates, and a value of -5.8662 at the project's 12 percent. How can both be true?",
+  "prompt": "ODIDI under Brazil returns the contractor 192.9896 over 25 years, the second most of the six templates, and a value of -5.8662 at the project's 12 percent. How can both be true?",
   "options": [
    "The value is computed on the government's cash flows rather than the contractor's, which is why it carries the opposite sign.",
    "The total adds 25 undiscounted rows and the value discounts each of them, and at 12 percent the year 1 capex outweighs cash that arrives late, so positive nominal cash is still worth less than nothing today.",
@@ -52,7 +52,7 @@
    "The closing unrecovered pool of 19.3270 is subtracted in the value and not in the total, and that is the whole of the difference."
   ],
   "answer": 1,
-  "explanation": "Same rows, two verdicts. Every one of the six templates closes ODIDI's cumulative in the black and returns a negative value at 12 percent."
+  "explanation": "Same rows, two verdicts. Five of the six templates close ODIDI's cumulative in the black and return a negative value at 12 percent; the PIA template's value is 1.7389."
  },
  {
   "prompt": "The capstone method says to build year 1 by hand before reading any column. Why year 1?",
@@ -132,7 +132,7 @@
   "explanation": "The same field returns 148.3166 of contractor cash under the Gulf of Mexico terms and 192.9896 under Brazil."
  },
  {
-  "prompt": "ODIDI hands the state between 232.9950 and 316.7898 depending on which of the six templates prices it. What can the Associate reading not say about that range?",
+  "prompt": "ODIDI hands the state between 196.0260 and 316.7898 depending on which of the six templates prices it. What can the Associate reading not say about that range?",
   "options": [
    "Which template collects the most, since the six collections are only comparable when the closing pools are equal.",
    "Which template leaves the contractor the least cash, which needs a discount convention the tier does not carry.",
@@ -140,18 +140,18 @@
    "How much of each collection is royalty, since the ledger prints government cash flow as a single undivided column."
   ],
   "answer": 2,
-  "explanation": "The contractor keeps between 109.1947 and 192.9896 across the same six templates, and the tier can state the range without judging it."
+  "explanation": "The contractor keeps between 109.1947 and 229.9586 across the same six templates, and the tier can state the range without judging it."
  },
  {
   "prompt": "Every regime in the Associate tier was read at one setting. Which instruments actually move on their own in the templates this tier held still?",
   "options": [
-   "The cost recovery limit, which tightens as the standing pool grows, and the minimum tax, which arms itself once the residual falls.",
-   "A royalty keyed on price and a profit split keyed on the R factor, which under PIA steps the contractor's share from 60 to 40 to 30 percent.",
+   "The cost recovery limit, which tightens as the standing pool grows, and the minimum tax, which arms itself once the residual falls away.",
+   "The R factor split Ghana and Angola carry, and the PIA template's royalty on price and daily rate with its split on cumulative production.",
    "The corporate rate, which steps with the R factor tier, and the royalty, which steps with cumulative production.",
-   "The discount rate, which follows the price deck, and the profit split, which follows the closing unrecovered pool."
+   "The discount rate, which follows the price deck, and the profit split, which follows the closing unrecovered pool of the year before."
   ],
   "answer": 1,
-  "explanation": "The R factor is a ratio of cumulatives, so it can fall back below a threshold it passed and step the contractor's share up again."
+  "explanation": "A split on cumulative production can only move one way, since production only accumulates. Ghana's and Angola's R factor, a ratio of cumulatives, can fall back and hand the contractor a larger share again."
  },
  {
   "prompt": "A published run leaves the resource rent tax uplift unstated and collects life tax of 2127.5549, where the run that sets it to 0 collects 2207.5549. What is the habit that catches this?",
