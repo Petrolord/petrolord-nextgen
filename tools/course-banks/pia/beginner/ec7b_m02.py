@@ -78,7 +78,7 @@ q(2, "How does this course treat a field lying partly in shallow water and partl
  ["As a computed case, in which the engine splits the field by the stated water depth and blends the two terrain rates by itself.",
   "The engine charges the higher of the two terrain rates on the whole volume of the field.",
   "At the frontier rate of 7.5% until reclassified."],
- "Seventh Schedule para 10(7) says the weighted average royalty for such a field \"shall be calculated as per regulations\", and the Regulations set the method in r.14. The engine does not model a field in two terrains, so it is taught from its text and never graded on a number. The engine never reads a depth, applies no higher-of rule and does not move such a field to frontier terms.")
+ "Seventh Schedule para 10(7) sends such a field to a weighted average royalty worked out under the Regulations, which set the method in r.14(5) and (6). The engine does not model a field in two terrains, so it is taught from its text and never graded on a number. The engine never reads a depth, applies no higher-of rule and does not move such a field to frontier terms.")
 
 q(1, "Under PIA s.92(4), by when must a conversion contract be concluded?",
  "The earlier of 18 months from the effective date and the expiry of the oil mining lease.",

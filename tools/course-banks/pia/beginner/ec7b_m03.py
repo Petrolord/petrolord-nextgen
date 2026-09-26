@@ -107,7 +107,7 @@ q(2, "A learner types an in-country gas share of 100.5 into the royalty calculat
  ["A rate of 0.025000, with the share capped at 100 and a note in kpis.pia_notes explaining the cap.",
   "A result at the default share of 0, applied silently with a gas rate of 0.050000.",
   "Negative gas royalty, shown as a credit."],
- "deriveGasRoyaltyRate refuses a share outside 0 to 100 and the panel shows the engine's own words. The engine never caps, defaults or extrapolates a bad input: 100 is the highest share it accepts, where the rate is 0.025000, and a share above 100 is refused with that message.")
+ "deriveGasRoyaltyRate refuses a share outside 0 to 100 and the panel shows the engine's own words. The engine does not cap, default or extrapolate this input: 100 is the highest share it accepts, where the rate is 0.025000, and a share above 100 is refused with that message.")
 
 q(1, "Ekene Alpha's daily rate in 2030 is 4989.463014 bopd. Which liquids royalty rate does it pay that year?",
  "Exactly 5 percent, 0.050000, at or below 5,000 bopd.",

@@ -107,7 +107,7 @@
    "At the frontier rate of 7.5% until reclassified."
   ],
   "answer": 2,
-  "explanation": "Seventh Schedule para 10(7) says the weighted average royalty for such a field \"shall be calculated as per regulations\", and the Regulations set the method in r.14. The engine does not model a field in two terrains, so it is taught from its text and never graded on a number. The engine never reads a depth, applies no higher-of rule and does not move such a field to frontier terms."
+  "explanation": "Seventh Schedule para 10(7) sends such a field to a weighted average royalty worked out under the Regulations, which set the method in r.14(5) and (6). The engine does not model a field in two terrains, so it is taught from its text and never graded on a number. The engine never reads a depth, applies no higher-of rule and does not move such a field to frontier terms."
  },
  {
   "prompt": "Under PIA s.92(4), by when must a conversion contract be concluded?",

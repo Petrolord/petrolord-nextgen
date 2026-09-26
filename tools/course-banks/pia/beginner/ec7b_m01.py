@@ -43,7 +43,7 @@ q(2, "Under the Nigeria Tax Act 2025, which body is the relevant tax authority f
  ["The Commission, which keeps the royalty role it holds under PIA s.259(b)(i) with no change at all.",
   "The Authority, because royalty in a year under that Act is treated as a downstream charge.",
   "The Nigerian Sovereign Investment Authority, for every royalty."],
- "NTA s.89(2) makes the Service the relevant tax authority for the administration of royalty, and the Seventh Schedule para 1(1) reads: \"The Service shall administer royalties payable in accordance with the provision of the Nigeria Tax Administration Act, 2025.\" The course reads this as a change of administration with the rates left as they were. The Authority has no royalty role, and the sovereign fund receives only the royalty by price.")
+ "NTA s.89(2) makes the Service the relevant tax authority for the administration of royalty, and the Seventh Schedule para 1(1) reads: \"The Service shall administer royalties payable in accordance with the provision of the Nigeria Tax Administration Act, 2025.\" The Nigeria Tax Act's Seventh Schedule restates the same terrain royalty rates. The Authority has no royalty role, and the sovereign fund receives only the royalty by price.")
 
 q(0, "Which recipient takes the largest share of the development levy under NTA s.59(3)?",
  "The Tertiary Education Trust Fund, at 50%.",

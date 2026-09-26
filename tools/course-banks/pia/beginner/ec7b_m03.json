@@ -151,7 +151,7 @@
    "Negative gas royalty, shown as a credit."
   ],
   "answer": 2,
-  "explanation": "deriveGasRoyaltyRate refuses a share outside 0 to 100 and the panel shows the engine's own words. The engine never caps, defaults or extrapolates a bad input: 100 is the highest share it accepts, where the rate is 0.025000, and a share above 100 is refused with that message."
+  "explanation": "deriveGasRoyaltyRate refuses a share outside 0 to 100 and the panel shows the engine's own words. The engine does not cap, default or extrapolate this input: 100 is the highest share it accepts, where the rate is 0.025000, and a share above 100 is refused with that message."
  },
  {
   "prompt": "Ekene Alpha's daily rate in 2030 is 4989.463014 bopd. Which liquids royalty rate does it pay that year?",

@@ -76,7 +76,7 @@ q(2, "Which education charge does a year under the Nigeria Tax Act 2025 carry, a
   "The development levy, on the hydrocarbon tax assessable profit."],
  "NTA s.59(1) charges \"A development levy of 4%\" on assessable profits, and the engine charges it on the companies income tax assessable profit. NTA s.59(4) keeps it off assessable profits computed for hydrocarbon tax, and NTA s.197(5) deletes the charging sections of the Tertiary Education Trust Fund Act, so the two charges never sit on the same year.")
 
-q(3, "The worked example is 2025, a year under the Act alone. What tertiary education tax does the engine return?",
+q(3, "The worked example is 2025, a year under the Act alone, on the default Regulations base. What tertiary education tax does the engine return?",
  "31747249.445676 USD, at 3.000000 percent.",
  ["Nothing, because the development levy of 4 percent is charged in that year of assessment.",
   "31747249.445676 USD at 2.5 percent, the rate that rests on a secondary source.",
@@ -97,14 +97,14 @@ q(2, "How does the shared fiscal wording define government take?",
   "The highest marginal rate that any barrel meets in any year of the lease."],
  "fiscalConventions.js reads that government take is \"Government cash flow divided by the project's pre-take net cash flow, which is revenue less opex less capex, over the project life.\" Adding capex back is the definition of the second metric, the government share of net revenue. The engine's take is undiscounted, and it is a share of value; a marginal rate describes something else.")
 
-q(1, "Ekene Alpha's government cash flow is 556475163.954050 USD over a pre-take value of 835989167.000000 USD. What take does the engine report?",
+q(1, "On the Regulations base, the engine default, Ekene Alpha's government cash flow is 556475163.954050 USD over a pre-take value of 835989167.000000 USD. What take does the engine report?",
  "66.564877 percent, undiscounted and nominal.",
  ["66.564877 percent, discounted at 10 percent nominal to the first year of the ledger.",
   "The take equals the royalties over revenue, since royalty is the first line of the stack.",
   "The ratio of total tax to net cash flow."],
  "The engine's take is government cash flow over revenue less capex less opex, undiscounted and nominal: 66.564877 percent on Alpha, which the government cash flow over the pre-take value reproduces. The discount rate of 10 percent is used for NPV and plays no part in the take, and the take counts every royalty, contribution and tax.")
 
-q(3, "At a 50 percent working interest, what does the engine return for Ekene Alpha's money lines and take?",
+q(3, "At a 50 percent working interest, what does the engine return for Ekene Alpha's money lines and take? The run keeps the default Regulations base.",
  "Every money line is half, and the take holds at 66.564877.",
  ["The royalty tranches are re-read at half the daily rate, so royalties fall by more than half.",
   "The money lines stay at field level, and the take alone is scaled to the share.",

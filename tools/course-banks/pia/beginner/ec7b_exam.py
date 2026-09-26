@@ -29,7 +29,7 @@ q(3, "Which companies do the closing words of NTA s.59(1) leave outside the deve
  ["Every company in upstream or midstream gas operations, whatever its size or residence.",
   "Companies holding a deep offshore lease in a year under the Nigeria Tax Act 2025.",
   "Companies that already pay a tertiary education tax to the Service in the same year."],
- "The text reads: \"other than small companies and non-resident companies.\" The levy draws no line by gas operations or by terrain, and a year that carries the development levy carries no tertiary education tax, so no company pays both in one year.")
+ "The text reads: \"other than small companies and non-resident companies.\" The levy draws no line by gas operations or by terrain, and in the engine a year that carries the development levy carries no tertiary education tax.")
 
 q(1, "How does this course use the Finance Act 2023, and why?",
  "It paraphrases it, because the copy read is a scan published by the Budget Office.",
@@ -86,7 +86,7 @@ q(2, "For leases under NTA Chapter Three Parts II and III, what gas royalty does
  ["5% everywhere and 2.5% for gas used in-country, computed by the gas royalty function on every case.",
   "7% onshore and 5% offshore, computed whenever pia_lease_status is stated as \"converted\".",
   "12.5% in shallow water and 15% onshore, the terrain rates."],
- "Para 7(3)(c) sets natural gas royalty for those leases at \"(i) onshore areas: 7 %, and (ii) offshore areas: 5%\". Those Parts include the Part on petroleum profits tax for leases yet to convert, which the engine does not model, so the provision is concept-only. The 5 and 2.5 percent gas rates belong to para 10(6) of the Act, and a converted lease is under the Act's terms.")
+ "Para 7(3)(c) sets natural gas royalty for those leases at \"(i) onshore areas: 7 %, and (ii) offshore areas: 5%\". The engine models converted and new-acreage terms only and computes no royalty for those leases, so the provision is concept-only. The 5 and 2.5 percent gas rates belong to para 10(6) of the Act, and a converted lease is under the Act's terms.")
 
 q(0, "What does NTA s.90(1) apply its Part on petroleum profits tax to?",
  "Oil prospecting licences and oil mining leases that are yet to convert under the Act.",
@@ -238,14 +238,14 @@ q(3, "The worked example states an NDDC sum of 15000000 USD. What does the engin
   "Uses it as the prior-year opex for HCDT."],
  "A fixed sum in pia_nddc_levy_fixed_usd replaces the percentage when given, so the worked example's NDDC line is 15000000.000000 USD. Nothing is added on top, the engine applies the stated sum, and HCDT reads the separately stated prior-year opex of 170000000 USD.")
 
-q(0, "Which seven lines add up to Ekene Alpha's government cash flow of 556475163.954050 USD?",
+q(0, "On the Regulations base, which seven lines add up to Ekene Alpha's government cash flow of 556475163.954050 USD?",
  "Royalties, hydrocarbon tax, income tax, education tax, development levy, HCDT and NDDC.",
  ["Royalties, hydrocarbon tax, income tax, capex, opex, HCDT and NDDC.",
   "The three royalty lines and the four taxes, with HCDT left out.",
   "Hydrocarbon tax alone, over the life."],
  "The decomposition sums total royalties, the hydrocarbon tax, companies income tax, the tertiary education tax (0 on Alpha), the development levy, HCDT and the NDDC levy to 556475163.954050 USD. Capex and opex are the project's own costs; HCDT and the NDDC levy sit on the government side of the take; and the hydrocarbon tax is one line of seven.")
 
-q(2, "At a 50 percent working interest, which development levy does Ekene Alpha pay over its life?",
+q(2, "On the Regulations base, which development levy does Ekene Alpha pay over its life at a 50 percent working interest?",
  "17857108.685849 USD, half the 100 percent figure.",
  ["35714217.371697 USD, as the levy is charged at field level before any working interest share.",
   "A quarter of the 100 percent figure, since the levy halves twice.",

@@ -30,7 +30,7 @@
    "Small companies and non-resident companies."
   ],
   "answer": 3,
-  "explanation": "The text reads: \"other than small companies and non-resident companies.\" The levy draws no line by gas operations or by terrain, and a year that carries the development levy carries no tertiary education tax, so no company pays both in one year."
+  "explanation": "The text reads: \"other than small companies and non-resident companies.\" The levy draws no line by gas operations or by terrain, and in the engine a year that carries the development levy carries no tertiary education tax."
  },
  {
   "prompt": "How does this course use the Finance Act 2023, and why?",
@@ -118,7 +118,7 @@
    "12.5% in shallow water and 15% onshore, the terrain rates."
   ],
   "answer": 2,
-  "explanation": "Para 7(3)(c) sets natural gas royalty for those leases at \"(i) onshore areas: 7 %, and (ii) offshore areas: 5%\". Those Parts include the Part on petroleum profits tax for leases yet to convert, which the engine does not model, so the provision is concept-only. The 5 and 2.5 percent gas rates belong to para 10(6) of the Act, and a converted lease is under the Act's terms."
+  "explanation": "Para 7(3)(c) sets natural gas royalty for those leases at \"(i) onshore areas: 7 %, and (ii) offshore areas: 5%\". The engine models converted and new-acreage terms only and computes no royalty for those leases, so the provision is concept-only. The 5 and 2.5 percent gas rates belong to para 10(6) of the Act, and a converted lease is under the Act's terms."
  },
  {
   "prompt": "What does NTA s.90(1) apply its Part on petroleum profits tax to?",
@@ -352,7 +352,7 @@
   "explanation": "A fixed sum in pia_nddc_levy_fixed_usd replaces the percentage when given, so the worked example's NDDC line is 15000000.000000 USD. Nothing is added on top, the engine applies the stated sum, and HCDT reads the separately stated prior-year opex of 170000000 USD."
  },
  {
-  "prompt": "Which seven lines add up to Ekene Alpha's government cash flow of 556475163.954050 USD?",
+  "prompt": "On the Regulations base, which seven lines add up to Ekene Alpha's government cash flow of 556475163.954050 USD?",
   "options": [
    "Royalties, hydrocarbon tax, income tax, education tax, development levy, HCDT and NDDC.",
    "Royalties, hydrocarbon tax, income tax, capex, opex, HCDT and NDDC.",
@@ -363,7 +363,7 @@
   "explanation": "The decomposition sums total royalties, the hydrocarbon tax, companies income tax, the tertiary education tax (0 on Alpha), the development levy, HCDT and the NDDC levy to 556475163.954050 USD. Capex and opex are the project's own costs; HCDT and the NDDC levy sit on the government side of the take; and the hydrocarbon tax is one line of seven."
  },
  {
-  "prompt": "At a 50 percent working interest, which development levy does Ekene Alpha pay over its life?",
+  "prompt": "On the Regulations base, which development levy does Ekene Alpha pay over its life at a 50 percent working interest?",
   "options": [
    "35714217.371697 USD, as the levy is charged at field level before any working interest share.",
    "A quarter of the 100 percent figure, since the levy halves twice.",

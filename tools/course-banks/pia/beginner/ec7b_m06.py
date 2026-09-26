@@ -46,7 +46,7 @@ q(2, "The worked example sells oil at 80 in 2025 and states no base year. What o
   "0.025000, the rate of the Act's example."],
  "The worked example states no base, so it runs on the Regulations base, the engine default, and returns 0.023910 at 80 USD/bbl in 2025. The Act base returns 0.022464 at the same price, a different stated reading, and 0.025000 is the Act's example at 75 USD/bbl in 2020.")
 
-q(0, "Ekene Alpha's 2026 total royalty is 18012822.226867 USD. Which lines make it up?",
+q(0, "On the Regulations base, Ekene Alpha's 2026 total royalty is 18012822.226867 USD. Which lines make it up?",
  "Liquids production royalty plus gas royalty plus royalty by price.",
  ["The liquids production royalty and the royalty by price.",
   "The production royalties, HCDT and the NDDC levy.",
@@ -81,7 +81,7 @@ q(3, "A capstone asks for a money value on a lease at a stated working interest.
   "At the government's share of the profit."],
  "Every money figure is at the working interest share: the engine runs the tranches, the caps and every rate at field level, then scales every money line to the stated share. Rates are read at field level, the 50 percent case is one practice case among several, and the government's share of value is what the take measures.")
 
-q(0, "On the worked example, what is the 2025 total tax, and which lines does it add?",
+q(0, "What 2025 total tax does the worked example return on the Regulations base, and which lines does it add?",
  "617004738.359202 USD, from the hydrocarbon tax, the income tax and the education tax.",
  ["617004738.359202 USD: every royalty plus the hydrocarbon tax and companies income tax.",
   "285784994.456763 USD: the hydrocarbon tax alone.",
@@ -102,7 +102,7 @@ q(3, "Which of these can appear in an Associate question only as a text to read 
   "A marginal field's liquids royalty rate."],
  "The terms of a lease that does not convert are concept-only: the engine models converted and new-acreage terms only, so they are taught from their text and never graded on a number. The gas rate, the royalty by price and a marginal field's royalty are all computed by the engine's rate functions and ledger.")
 
-q(1, "Over its life Ekene Alpha pays a development levy of 35714217.371697 USD and a tertiary education tax of 0.000000. What explains the split?",
+q(1, "On the Regulations base, over its life Ekene Alpha pays a development levy of 35714217.371697 USD and a tertiary education tax of 0.000000. What explains the split?",
  "Every Alpha year, 2026 to 2032, is a year under the Nigeria Tax Act 2025.",
  ["Alpha is a shallow water lease, and the tertiary education tax is charged only onshore under the Act.",
   "Alpha states no prior-year opex, so the tertiary education tax has no base.",
