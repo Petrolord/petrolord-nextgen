@@ -4,7 +4,7 @@ Four refusals are written into the engine's own header, and a fifth list of omis
 
 ## It is not a fiscal truth
 
-The module's single source of truth for Nigerian fiscal math is the Petroleum Economics Studio engine. This model exists to compare the shape of regimes against each other. A line reading total government cash flow 1339.2784 million USD under "Nigeria - PIA (2021)" on the Designer's default project is a shape, not an assessment.
+The module's single source of truth for Nigerian fiscal math is the Petroleum Economics Studio engine. This model exists to compare the shape of regimes against each other. A line reading total government cash flow 687.4682 million USD under "Nigeria - PIA (2021)" on the Designer's default project is a shape. It is never an assessment.
 
 ## It does not take a forecast
 

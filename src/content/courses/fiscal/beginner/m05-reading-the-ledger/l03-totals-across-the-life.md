@@ -33,7 +33,7 @@ The tax column and the take column rank differently, and confusing them is the f
 
 ## The mistake
 
-Adding the contractor's total to the state's and expecting the revenue total. Under the Gulf of Mexico terms that pair is 980.9313 and 764.5528 against a revenue of 2686.9277, and the gap is not missing money: opex of 441.4436 and capex of 500.0000 are the contractor's alone, and the engine prints that same relation on the rows it publishes for both a full recovery limit and a capped one. The other error is comparing totals across projects. The Suite test project turns over 7001.1938 of revenue and returns 2221.9251 to the contractor under the same Gulf of Mexico terms. That is a bigger field, not a better regime.
+Adding the contractor's total to the state's and expecting the revenue total. Under the Gulf of Mexico terms that pair is 980.9313 and 764.5528 against a revenue of 2686.9277, and the gap is not missing money: opex of 441.4436 and capex of 500.0000 are the contractor's alone, and the engine prints that same relation on the rows it publishes for both a full recovery limit and a capped one. The other error is comparing totals across projects. The Suite test project turns over 7001.1938 of revenue and returns 2221.9251 to the contractor under the same Gulf of Mexico terms. That is a bigger field. The regime is the same one.
 
 ## What it refuses
 

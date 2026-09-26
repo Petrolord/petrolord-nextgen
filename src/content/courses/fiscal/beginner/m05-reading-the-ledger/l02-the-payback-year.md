@@ -23,7 +23,7 @@ PIA and Angola take a year longer to return the contractor's cash than they take
 
 ## When there is no answer
 
-Both readings are null when the event never happens. The published case that runs the test project at capex 20000 returns payback null and payout null, with a life total of -15724.0151. A null is a reading, and quoting it as a null is the correct answer, not a gap in the table.
+Both readings are null when the event never happens. The published case that runs the test project at capex 20000 returns payback null and payout null, with a life total of -15724.0151. A null is a reading, and quoting it as a null is the correct answer. It is no gap in the table.
 
 ## The mistake
 

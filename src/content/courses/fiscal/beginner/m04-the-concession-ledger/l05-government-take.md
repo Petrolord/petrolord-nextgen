@@ -1,6 +1,6 @@
 # Government cash flow
 
-The state's line is royalty plus its share of profit oil plus tax, and it is a collection, not a profit, because the state carries none of the cost.
+The state's line is royalty plus its share of profit oil plus tax, and it is a collection rather than a profit, because the state carries none of the cost.
 
 {{panel:ec-regime-explorer}}
 
@@ -19,7 +19,7 @@ The contractor's line and the state's line divide one quantity, and the engine p
 | 3 | 149.2243 | 43.5890 | 192.8133 | 192.8133 |
 | 4 | 106.8784 | 65.4424 | 172.3208 | 172.3208 |
 
-Run "Angola - Deepwater PSC" on the same project and the same two derived columns still agree, row for row: -259.0138, 215.6148, 192.8133 and 172.3208, against a contractor line of -323.6112, 157.5549, 140.6278 and 110.6013 and a state line of 64.5974, 58.0599, 52.1855 and 61.7195. The regime moves the split. It cannot move the quantity being split, because unrecovered cost is carried, not paid to anyone.
+Run "Angola - Deepwater PSC" on the same project and the same two derived columns still agree, row for row: -259.0138, 215.6148, 192.8133 and 172.3208, against a contractor line of -323.6112, 157.5549, 140.6278 and 110.6013 and a state line of 64.5974, 58.0599, 52.1855 and 61.7195. The regime moves the split. It cannot move the quantity being split, because unrecovered cost is carried forward and paid to no one.
 
 ## Six collections on one field
 

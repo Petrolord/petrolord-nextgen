@@ -25,7 +25,7 @@ Every template leaves a closing pool on this field, from 19.3270 under Brazil to
 
 ## The conventions, each with its number
 
-A regime is four instruments and nothing else: a royalty, a cost recovery limit, a profit split and a tax stack. Royalty comes off gross, so ODIDI pays 26.1856 in a year it also spends 420.0000. Cost recovery is capped on revenue after royalty, and what it cannot take is carried, not lost. Profit oil is the residual, and the split acts on it alone. Tax acts on the contractor's share of that residual, which is why a year of 0.0000 profit oil pays 0.0000 of tax.
+A regime is four instruments and nothing else: a royalty, a cost recovery limit, a profit split and a tax stack. Royalty comes off gross, so ODIDI pays 26.1856 in a year it also spends 420.0000. Cost recovery is capped on revenue after royalty, and what it cannot take is carried forward and never lost. Profit oil is the residual, and the split acts on it alone. Tax acts on the contractor's share of that residual, which is why a year of 0.0000 profit oil pays 0.0000 of tax.
 
 ## Exercise
 

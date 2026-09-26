@@ -6,7 +6,7 @@ Cost recovery is the slice of revenue after royalty that the contractor is allow
 
 ## The pool and the limit
 
-The costs standing for recovery in a year are that year's opex, that year's capex, and whatever earlier years failed to recover. The limit is a percent of revenue AFTER royalty, not of gross revenue. "USA - Gulf of Mexico" sets it at 100 percent, so on the Designer's default project year 1 can recover the whole 220.9910 million USD of revenue after royalty, and `costRecovered` reads exactly that. Facing it are opex 31.0027 and capex 500.0000, the capex arriving whole in year 1, so a full limit still cannot clear them. `unrecoveredCostPool` closes the year at 310.0117.
+The costs standing for recovery in a year are that year's opex, that year's capex, and whatever earlier years failed to recover. For five of the six templates the limit is a percent of revenue AFTER royalty. "USA - Gulf of Mexico" sets it at 100 percent, so on the Designer's default project year 1 can recover the whole 220.9910 million USD of revenue after royalty, and `costRecovered` reads exactly that. Facing it are opex 31.0027 and capex 500.0000, the capex arriving whole in year 1, so a full limit still cannot clear them. `unrecoveredCostPool` closes the year at 310.0117.
 
 ## The pool drains, then it stops mattering
 
@@ -21,7 +21,7 @@ The costs standing for recovery in a year are that year's opex, that year's cape
 
 Year 2 recovers 198.6260 and carries 140.2337 forward. Year 3 recovers 167.1490 and closes the pool at 0.0000. From year 4 the recovered figure and the opex figure are one number, 25.1816, then 23.6264, then 22.2311: the carried balance is gone and the only cost left to assign is the year's own opex.
 
-## The limit changes when, not always how much
+## The limit changes when, and only sometimes how much
 
 Over the life of the default project the contractor recovers 941.4436, against life opex of 441.4436 and capex of 500.0000, and every one of the six templates recovers that same 941.4436 here, "Angola - Deepwater PSC" at a 50 percent limit included, because its pool also closes at 0.0000. The tighter limit shows in the waiting: Angola's pool stands at 395.0083 after year 1, then 301.6249, 218.6759, 145.1063, 73.1570 and 9.4844 in year 6. On the Suite test project it bites for good, and Angola strands 251.6537 against 97.2331 under the Gulf of Mexico terms.
 

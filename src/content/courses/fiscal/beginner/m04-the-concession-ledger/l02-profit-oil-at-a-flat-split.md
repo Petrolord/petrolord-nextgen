@@ -4,7 +4,7 @@ Profit oil is what remains of revenue after royalty once cost recovery has taken
 
 {{panel:ec-regime-explorer}}
 
-## The residual, not the profit
+## The residual before any profit
 
 Under "USA - Gulf of Mexico" on the Designer's default project, `profitOil` reads 0.0000 in years 1 and 2, because revenue after royalty of 220.9910 and 198.6260 went entirely to cost recovery. Year 3 leaves 11.3804 and year 4 leaves 135.2891.
 
