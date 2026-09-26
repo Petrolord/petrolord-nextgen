@@ -107,7 +107,7 @@ RUNS = [
 # THE LESSON STAGE adds the kit's lesson sweeps: every lesson literal against
 # the digest by tier range (no forward reach), and the graded-answer leakage
 # audit per tier.
-if STAGE in ('lessons', 'banks', 'full'):
+if STAGE in ('lessons', 'banks', 'full', 'final'):
     LESSONS = f'{REPO}/src/content/courses/pia'
     RUNS.append(('litsweep.py --lessons-only', f'{KIT}/litsweep.py', ['python3', f'{KIT}/litsweep.py', HERE, '--lessons', LESSONS, '--lessons-only'], 0))
     for tier in ('beginner', 'intermediate', 'advanced'):
@@ -118,7 +118,7 @@ if STAGE in ('lessons', 'banks', 'full'):
 # the repository's check-bank-sources, and per prefix the length tails, the
 # near-duplicate audit at Jaccard 0.45, the literal sweep and the leakage audit,
 # plus the numsweep and capstone-leak gates with the banks read.
-BANKS = STAGE in ('banks', 'full')
+BANKS = STAGE in ('banks', 'full', 'final')
 if BANKS:
     BK = f'{HERE}/banks'
     TIERS = [("ec7b", "beginner"), ("ec7i", "intermediate"), ("ec7a", "advanced")]
@@ -134,6 +134,25 @@ if BANKS:
         ('numsweep_pia.mjs --banks', f'{HERE}/numsweep_pia.mjs', ['node', f'{HERE}/numsweep_pia.mjs', '--banks', BK], 0),
         ('numsweep.mjs (kit) --banks', f'{KIT}/numsweep.mjs', ['node', f'{KIT}/numsweep.mjs', HERE, '--banks', BK], 0),
         ('gate_capstone_leak.mjs --banks', f'{HERE}/gate_capstone_leak.mjs', ['node', f'{HERE}/gate_capstone_leak.mjs', '--banks', BK], 0),
+    ]
+
+
+# THE FINAL (SHIP) STAGE. EC7_STAGE=final runs everything above AND the seed
+# ladder checks: the five migrations regenerated from the COMMITTED tree
+# (gen_seeds.sh, byte for byte), verify_sql.py field by field with its four
+# canaries, the course generator's and the go-live generator's self checks, and
+# promptleak over the course migration.
+if STAGE == 'final':
+    MIG = f'{REPO}/migrations/20261107_ec7_pia_course.sql'
+    RUNS += [
+        ('gen_seeds.sh HEAD', f'{HERE}/gen_seeds.sh', ['bash', f'{HERE}/gen_seeds.sh', 'HEAD'], 0),
+        ('verify_sql.py HEAD', f'{HERE}/verify_sql.py', ['python3', f'{HERE}/verify_sql.py', 'HEAD'], 0),
+        ('verify_sql.py CANARY text', f'{HERE}/verify_sql.py', ['python3', f'{HERE}/verify_sql.py', 'HEAD', '--canary'], 2),
+        ('verify_sql.py CANARY key', f'{HERE}/verify_sql.py', ['python3', f'{HERE}/verify_sql.py', 'HEAD', '--canary-key'], 2),
+        ('verify_sql.py CANARY field', f'{HERE}/verify_sql.py', ['python3', f'{HERE}/verify_sql.py', 'HEAD', '--canary-field'], 2),
+        ('verify_sql.py CANARY lesson', f'{HERE}/verify_sql.py', ['python3', f'{HERE}/verify_sql.py', 'HEAD', '--canary-lesson'], 2),
+        ('gen_golive.py (self checks)', f'{HERE}/gen_golive.py', ['python3', '-c', f'import sys; sys.argv=["x"]; sys.path.insert(0, "{HERE}"); import gen_golive as G; sys.exit(1 if G.refused else 0)'], 0),
+        ('promptleak.py --sql', f'{KIT}/promptleak.py', ['python3', f'{KIT}/promptleak.py', '--sql', MIG, '--course', 'pia'], 0),
     ]
 
 

@@ -55,6 +55,7 @@ export const APP_NAMES = {
   decision: 'Decision Analysis & Value of Information',
   portfolio: 'Capital Portfolio & Cost Control',
   fdp: 'Field Development Planning',
+  pia: 'Petroleum Industry Act 2021 & Nigerian Fiscal Terms',
   separation: 'Separation & Slug Catching',
   linesizing: 'Pipeline & Line Sizing',
   rotating: 'Rotating Equipment',

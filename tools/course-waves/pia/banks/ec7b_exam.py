@@ -50,7 +50,7 @@ q(0, "What does the course say about the data in its Ekene teaching cases?",
  ["The cases are anonymised records from a real Nigerian lease, with the names removed.",
   "Prices are the Commission's fiscal prices for each year of the ledger.",
   "The volumes follow a real field and the costs are invented."],
- "The digest states that every Ekene case, field, volume, price and cost is synthetic, written for this platform, and that no real company, licence, field or price list appears. No record is anonymised, and the Commission's fiscal price is concept-only: the realised price of the case stands in for it.")
+ "The course states that every Ekene case, field, volume, price and cost is synthetic, written for this platform, and that no real company, licence, field or price list appears. No record is anonymised, and the Commission's fiscal price is concept-only: the realised price of the case stands in for it.")
 
 # ---- m02 licences, leases and terrains
 q(2, "Which rights does the Act's producing instrument grant on an exclusive basis, in the words of s.70(1)(c)?",

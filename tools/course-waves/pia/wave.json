@@ -37,7 +37,7 @@
   "government take": "the engine's undiscounted take (fiscalConventions.js wording); never a tax rate. Vocabulary section."
  },
  "plan": {
-  "state": "LESSONS WRITTEN (78) AND FOUNDATION TOUCH-UP DONE; STOPS BEFORE BANKS."
+  "state": "SHIP: lessons (78), banks (396), three key-truth audits, the post-audit fix pass, the five held migrations, the apply script and the scratch dry run. Nothing applied; production untouched."
  },
  "digest": {
   "lines": 1115,
@@ -726,5 +726,16 @@
    "advanced m02 l03 (litsweep literal)",
    "advanced m03 l03 (litsweep literal)"
   ]
+ },
+ "ship": {
+  "migrations": [
+   "20261107_ec7_pia_course.sql",
+   "20261107_ec7_pia_beginner_deep.sql",
+   "20261107_ec7_pia_intermediate_deep.sql",
+   "20261107_ec7_pia_advanced_deep.sql",
+   "20261107_ec7_pia_go_live.sql (HELD)"
+  ],
+  "transactions": "No migration carries begin or commit lines of its own; the go-live's only begin is the plpgsql body of its do block. apply_ec7_pia.sh wraps each file in one transaction; dryrun_ec7.sh wraps the whole ladder in one that ends in ROLLBACK.",
+  "order": "course seed first (the FK on app_slug), then the three deep seeds, then the go-live after the NextGen upload serves /dashboard/apps/pia."
  }
 }
