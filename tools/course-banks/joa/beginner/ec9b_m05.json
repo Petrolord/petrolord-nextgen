@@ -33,7 +33,7 @@
   "explanation": "The budget is inside when the total overrun <= the lower of pct % of the approved total and the stated amount. 5 percent of 76000000.000000 is 3800000, and the stated amount is 3000000, so the lower, 3000000.000000, holds, and the engine reports it held by amount. The unbudgeted allowance is a separate test, and 5950000.000000 is the overrun the allowed figure is compared with."
  },
  {
-  "prompt": "Is the Ekene 2027 budget as a whole inside its budget tolerance?",
+  "prompt": "Does the whole 2027 budget pass its own test, with 5.000000 percent and 3000000.000000 stated?",
   "options": [
    "Yes: every item but exploration drilling is inside its item tolerance, so the budget is inside as well.",
    "No: its overrun of 5950000.000000 is beyond the allowed 3000000.000000.",

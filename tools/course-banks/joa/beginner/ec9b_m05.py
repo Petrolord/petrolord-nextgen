@@ -31,7 +31,7 @@ q(3, "The Ekene 2027 budget tolerance is the lower of 5.000000 percent and 30000
   "5950000.000000, the overrun the budget actually ran."],
  "The budget is inside when the total overrun <= the lower of pct % of the approved total and the stated amount. 5 percent of 76000000.000000 is 3800000, and the stated amount is 3000000, so the lower, 3000000.000000, holds, and the engine reports it held by amount. The unbudgeted allowance is a separate test, and 5950000.000000 is the overrun the allowed figure is compared with.")
 
-q(1, "Is the Ekene 2027 budget as a whole inside its budget tolerance?",
+q(1, "Does the whole 2027 budget pass its own test, with 5.000000 percent and 3000000.000000 stated?",
  "No: its overrun of 5950000.000000 is beyond the allowed 3000000.000000.",
  ["Yes: every item but exploration drilling is inside its item tolerance, so the budget is inside as well.",
   "Yes: the overrun is tested against 5 percent of the actual total of 81950000.000000.",
