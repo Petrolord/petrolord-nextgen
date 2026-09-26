@@ -49,11 +49,22 @@ export const WordField = ({ label, value, onChange }) => (
   </div>
 );
 
-/** The engine's own refusal, verbatim. */
+/**
+ * The part of a refusal the course teaches. Two engine refusals (a marginal field given as a terrain, a capital
+ * allowance life other than five) end with a sentence about a platform reproduction switch the course does not
+ * teach, so a panel shows their FIRST SENTENCE only. Every other refusal is shown whole.
+ */
+export const taughtRefusal = (text) => {
+  if (typeof text !== 'string' || !text.includes('pia_legacy_pre_audit')) return text;
+  const m = text.match(/^[\s\S]*?\.(?=\s+[A-Z])/);
+  return m ? m[0] : text;
+};
+
+/** The engine's own refusal, verbatim (its taught part). */
 export const Refusal = ({ text }) => (
   <div className="mt-3 rounded-md border border-red-800/60 bg-red-950/20 p-3">
     <p className="text-red-300 text-xs font-medium mb-1">THE ENGINE REFUSED, IN ITS OWN WORDS</p>
-    <p className="text-xs text-slate-300 mb-0 font-mono">{text}</p>
+    <p className="text-xs text-slate-300 mb-0 font-mono">{taughtRefusal(text)}</p>
   </div>
 );
 

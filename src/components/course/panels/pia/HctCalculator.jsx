@@ -98,9 +98,9 @@ export const CapitalMode = () => (
   </>
 );
 
-const useCase = (start) => {
+const useCase = (start, initialCase) => {
   const [name, setName] = useState(start);
-  const [text, setText] = useState(pretty(DATASET[start]));
+  const [text, setText] = useState(pretty(initialCase || DATASET[start]));
   const choose = (n) => { setName(n); setText(pretty(DATASET[n])); };
   const p = parseJson(text);
   return { name, choose, text, setText, p, r: p.error ? null : ledgerOf(p.value) };
@@ -113,8 +113,8 @@ const CaseFields = ({ c }) => (
   </FieldGrid>
 );
 
-export const BaseMode = () => {
-  const c = useCase('ekene_cpr_binding_forfeiture');
+export const BaseMode = ({ initialCase = null }) => {
+  const c = useCase('ekene_cpr_binding_forfeiture', initialCase);
   return (
     <>
       <CaseFields c={c} />
@@ -122,8 +122,10 @@ export const BaseMode = () => {
       {c.r && c.r.error && <Refusal text={c.r.error} />}
       {c.r && !c.r.error && (
         <>
-          <Tbl head={['year', 'CPR cap', 'CPR claimed', 'CPR carried out', 'HCT assessable profit', 'production allowance', 'HCT chargeable profit', 'HCT rate', 'HCT']}
-            rows={c.r.value.cashFlowData.map((d) => [String(d.year), six(d.cpr_cap), six(d.cpr_costs_claimed), six(d.cpr_deferred_to_next), six(d.hct_assessable_profit), six(d.production_allowance), six(d.hct_chargeable_profit), six(d.hct_rate), six(d.hct_tax)])} />
+          <Tbl head={['year', 'liquids bopd', 'liquids royalty rate', 'liquids production royalty', 'gas royalty', 'royalty by price']}
+            rows={c.r.value.cashFlowData.map((d) => [String(d.year), six(d.royalty_liquids_bopd), six(d.royalty_rate_liquids), six(d.liquids_production_royalty), six(d.gas_royalty), six(d.price_royalty)])} />
+          <Tbl head={['year', 'CPR cap', 'CPR claimed', 'CPR carried out', 'HCT assessable profit', 'production allowance', 'HCT chargeable profit', 'HCT rate', 'HCT', 'HCT loss carried']}
+            rows={c.r.value.cashFlowData.map((d) => [String(d.year), six(d.cpr_cap), six(d.cpr_costs_claimed), six(d.cpr_deferred_to_next), six(d.hct_assessable_profit), six(d.production_allowance), six(d.hct_chargeable_profit), six(d.hct_rate), six(d.hct_tax), six(d.hct_loss_carryforward)])} />
           <TileGrid>
             <Tile label="Forfeited at cessation" value={six(c.r.value.kpis.cpr_forfeited_at_cessation ?? 0)} />
             <Tile label="Total hydrocarbon tax" value={six(c.r.value.kpis.total_hct)} />
@@ -135,23 +137,28 @@ export const BaseMode = () => {
   );
 };
 
-export const CitMode = () => {
-  const c = useCase('ekene_onshore_across_2026');
+export const CitMode = ({ initialCase = null }) => {
+  const c = useCase('ekene_onshore_across_2026', initialCase);
   return (
     <>
       <CaseFields c={c} />
       {c.p.error && <Note>{c.p.error}</Note>}
       {c.r && c.r.error && <Refusal text={c.r.error} />}
       {c.r && !c.r.error && (
-        <Tbl head={['year', 'framework', 'CIT assessable profit', 'capital allowance', 'CIT allowance claimed', 'CIT allowance carried', 'CIT', 'CIT loss carried']}
-          rows={c.r.value.cashFlowData.map((d) => [String(d.year), d.fiscal_framework || '', six(d.cit_assessable_profit), six(d.depreciation), six(d.cit_allowance_claimed), six(d.cit_allowance_carryforward), six(d.cit_tax), six(d.cit_loss_carryforward)])} />
+        <>
+          <Tbl head={['year', 'framework', 'CIT assessable profit', 'capital allowance', 'CIT allowance claimed', 'CIT allowance carried', 'CIT', 'CIT loss carried']}
+            rows={c.r.value.cashFlowData.map((d) => [String(d.year), d.fiscal_framework || '', six(d.cit_assessable_profit), six(d.depreciation), six(d.cit_allowance_claimed), six(d.cit_allowance_carryforward), six(d.cit_tax), six(d.cit_loss_carryforward)])} />
+          <TileGrid>
+            <Tile label="Total companies income tax" value={six(c.r.value.kpis.total_cit)} />
+          </TileGrid>
+        </>
       )}
       <Note>Companies income tax does not deduct the hydrocarbon tax, and the cost price ratio does not reach it. In a year under the Act alone its capital allowance claim is limited to two thirds of the assessable profit.</Note>
     </>
   );
 };
 
-const HctCalculator = ({ initialMode = 'rate' }) => {
+const HctCalculator = ({ initialMode = 'rate', initialCase = null }) => {
   const [mode, setMode] = useState(initialMode);
   return (
     <PanelShell
@@ -165,8 +172,8 @@ const HctCalculator = ({ initialMode = 'rate' }) => {
         {mode === 'rate' && <RateMode />}
         {mode === 'allowance' && <AllowanceMode />}
         {mode === 'capital' && <CapitalMode />}
-        {mode === 'base' && <BaseMode />}
-        {mode === 'cit' && <CitMode />}
+        {mode === 'base' && <BaseMode initialCase={initialCase} />}
+        {mode === 'cit' && <CitMode initialCase={initialCase} />}
       </div>
       <Note>This is the course&apos;s own calculator: every number on it is a return value of the vendored engine. The Ekene cases are synthetic; paste your own terms and rows to replace them.</Note>
     </PanelShell>

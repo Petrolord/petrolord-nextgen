@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {
-  DATASET, CASE_NAMES, parseJson, pretty, ledgerOf, compareOf, frameworkOf,
+  DATASET, CASE_NAMES, parseJson, pretty, ledgerOf, compareOf, frameworkOf, readingsOf,
   PIA_NOTES, FISCAL_METRICS, GOVERNMENT_CASH_FLOW,
 } from './piaLab';
 import {
@@ -26,9 +26,9 @@ export const MODES = [
   ['notes', 'The engine notes'],
 ];
 
-const useCase = (start) => {
+const useCase = (start, initialCase) => {
   const [name, setName] = useState(start);
-  const [text, setText] = useState(pretty(DATASET[start]));
+  const [text, setText] = useState(pretty(initialCase || DATASET[start]));
   const choose = (n) => { setName(n); setText(pretty(DATASET[n])); };
   const p = parseJson(text);
   return { name, choose, text, setText, p };
@@ -41,8 +41,8 @@ const CaseFields = ({ c }) => (
   </FieldGrid>
 );
 
-export const LedgerMode = () => {
-  const c = useCase('ekene_onshore_across_2026');
+export const LedgerMode = ({ initialCase = null }) => {
+  const c = useCase('ekene_onshore_across_2026', initialCase);
   const r = c.p.error ? null : ledgerOf(c.p.value);
   return (
     <>
@@ -51,9 +51,10 @@ export const LedgerMode = () => {
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && (
         <>
-          <Tbl head={['year', 'framework', 'total royalty', 'HCT', 'CIT', 'TET', 'levy', 'decommissioning deduction', 'net cash flow']}
-            rows={r.value.cashFlowData.map((d) => [String(d.year), d.fiscal_framework || '', six(d.royalty), six(d.hct_tax), six(d.cit_tax), six(d.tet_tax), six(d.dev_levy_tax), six(d.decom_fund_deduction ?? 0), six(d.net_cash_flow)])} />
+          <Tbl head={['year', 'framework', 'liquids royalty rate', 'total royalty', 'production allowance', 'HCT chargeable profit', 'HCT', 'CIT', 'TET', 'levy', 'minimum ETR top-up', 'decommissioning deduction', 'net cash flow']}
+            rows={r.value.cashFlowData.map((d) => [String(d.year), d.fiscal_framework || '', six(d.royalty_rate_liquids), six(d.royalty), six(d.production_allowance), six(d.hct_chargeable_profit), six(d.hct_tax), six(d.cit_tax), six(d.tet_tax), six(d.dev_levy_tax), six(d.min_etr_topup ?? 0), six(d.decom_fund_deduction ?? 0), six(d.net_cash_flow)])} />
           <TileGrid>
+            <Tile label="Total companies income tax" value={six(r.value.kpis.total_cit)} />
             <Tile label="Framework of the ledger" value={String(r.value.kpis.fiscal_framework)} />
             <Tile label="First NTA year" value={String(r.value.kpis.nta_first_year ?? 'none')} />
             <Tile label="Government take, percent" value={six(r.value.kpis.government_take_pct)} />
@@ -73,27 +74,24 @@ export const FrameworkMode = () => (
   </>
 );
 
-const READINGS = [
-  ['as stated', {}],
-  ['Act base (2020)', { pia_price_royalty_base: 'act_2020' }],
-  ['deep offshore conservative_zero', { pia_deep_offshore_hct_interpretation: 'conservative_zero' }],
-  ['deep offshore aggressive_pml_30', { pia_deep_offshore_hct_interpretation: 'aggressive_pml_30' }],
-  ['new lease stated 15', { pia_new_pml_hct_rate_pct: 15 }],
-  ['new lease stated 30', { pia_new_pml_hct_rate_pct: 30 }],
-];
-
-export const ReadingsMode = () => {
-  const c = useCase('ekene_deep_new_60k_conservative');
-  const rows = c.p.error ? [] : READINGS.map(([label, patch]) => {
-    const r = ledgerOf({ ...c.p.value, cfg: { ...(c.p.value.cfg || {}), ...patch } });
-    return r.error ? [label, 'refused', '', '', ''] : [label, six(r.value.kpis.total_royalties), six(r.value.kpis.total_hct), six(r.value.kpis.total_cit), six(r.value.kpis.government_take_pct)];
-  });
+export const ReadingsMode = ({ initialCase = null }) => {
+  const c = useCase('ekene_deep_new_60k_conservative', initialCase);
+  const rows = c.p.error ? [] : readingsOf(c.p.value).map((x) => (x.run.error
+    ? [x.label, x.status, '', '', '', '']
+    : [x.label, x.status, six(x.run.value.kpis.total_royalties), six(x.run.value.kpis.total_hct), six(x.run.value.kpis.total_cit), six(x.run.value.kpis.government_take_pct)]));
+  const refused = c.p.error ? [] : readingsOf(c.p.value).filter((x) => x.run.error);
   return (
     <>
       <CaseFields c={c} />
       {c.p.error && <Note>{c.p.error}</Note>}
-      <Tbl head={['reading', 'total royalties', 'total HCT', 'total CIT', 'take percent']} rows={rows} />
-      <Note>Each row states one reading of an open question of the texts. The course shows the readings side by side and grades none of them; a row that does not apply to the case is refused or leaves the figures where they were.</Note>
+      <Tbl head={['reading', 'what the engine does with it for this case', 'total royalties', 'total HCT', 'total CIT', 'take percent']} rows={rows} />
+      {refused.map((x) => (
+        <div key={x.label}>
+          <Note>{`The ${x.label} row is refused, in the engine's words:`}</Note>
+          <Refusal text={x.run.error} />
+        </div>
+      ))}
+      <Note>Each row states one reading of an open question of the texts. The course shows the readings side by side and grades none of them. A row the engine does not read for this case is ignored and leaves every figure where the case as stated puts it.</Note>
     </>
   );
 };
@@ -137,7 +135,7 @@ export const NotesMode = () => (
   </>
 );
 
-const LedgerCalculator = ({ initialMode = 'ledger' }) => {
+const LedgerCalculator = ({ initialMode = 'ledger', initialCase = null }) => {
   const [mode, setMode] = useState(initialMode);
   return (
     <PanelShell
@@ -148,9 +146,9 @@ const LedgerCalculator = ({ initialMode = 'ledger' }) => {
         <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
       </FieldGrid>
       <div className="mt-3">
-        {mode === 'ledger' && <LedgerMode />}
+        {mode === 'ledger' && <LedgerMode initialCase={initialCase} />}
         {mode === 'framework' && <FrameworkMode />}
-        {mode === 'readings' && <ReadingsMode />}
+        {mode === 'readings' && <ReadingsMode initialCase={initialCase} />}
         {mode === 'moved' && <MovedMode />}
         {mode === 'notes' && <NotesMode />}
       </div>

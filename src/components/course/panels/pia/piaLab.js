@@ -94,14 +94,56 @@ export const frameworkOf = (override, year) => guard(() => fiscalFrameworkForYea
 export const daysOf = (year) => calendarDays(year);
 
 /** A case with one change of terms: the base run, the changed run, and their totals by provision. */
-export const TOTAL_KEYS = ['total_royalties', 'total_hct', 'total_cit', 'total_tet', 'total_dev_levy', 'total_hcdt', 'total_nddc'];
+export const TOTAL_KEYS = ['total_royalties', 'total_hct', 'total_cit', 'total_tet', 'total_dev_levy', 'total_hcdt', 'total_nddc', 'total_min_etr_topup'];
+/** The decommissioning deduction has no engine total, so its line is the sum of the engine's row values, labelled so. */
+export const DECOM_LINE = 'decommissioning deduction (sum of the rows)';
+const decomSum = (r) => r.cashFlowData.reduce((s, d) => s + (d.decom_fund_deduction || 0), 0);
 export const compareOf = (c, patch) => {
   const a = ledgerOf(c);
   const b = ledgerOf({ ...c, cfg: { ...clone(c.cfg || {}), ...clone(patch || {}) } });
   if (a.error || b.error) return { error: a.error || b.error };
   const lines = TOTAL_KEYS.map((k) => ({ key: k, base: a.value.kpis[k] ?? 0, changed: b.value.kpis[k] ?? 0 }));
+  lines.push({ key: DECOM_LINE, base: decomSum(a.value), changed: decomSum(b.value) });
   return { value: { lines, baseTake: a.value.kpis.government_take_pct, changedTake: b.value.kpis.government_take_pct } };
 };
+
+/**
+ * The stated readings of the open questions, run on one case. Each row says whether the engine READS the setting
+ * for this case, by the conditions under which the engine reads it: the royalty by price base in every PIA year;
+ * the deep offshore reading only for a deep offshore case in a year under the Nigeria Tax Act 2025 with no rate
+ * override; the new-lease rate only for a petroleum mining lease granted out of new acreage, onshore or in shallow
+ * water, that is not a converted marginal field and has no rate override. A setting the engine does not read for the
+ * case is ignored; a setting it reads can still be refused, and the row then shows the refusal.
+ */
+export const READINGS = [
+  ['as stated', {}],
+  ['Act base (2020)', { pia_price_royalty_base: 'act_2020' }],
+  ['deep offshore conservative_zero', { pia_deep_offshore_hct_interpretation: 'conservative_zero' }],
+  ['deep offshore aggressive_pml_30', { pia_deep_offshore_hct_interpretation: 'aggressive_pml_30' }],
+  ['new lease stated 15', { pia_new_pml_hct_rate_pct: 15 }],
+  ['new lease stated 30', { pia_new_pml_hct_rate_pct: 30 }],
+];
+export const readsSetting = (cfg, key) => {
+  const k = cfg || {};
+  const noOverride = k.pia_hct_rate_override_pct === null || k.pia_hct_rate_override_pct === undefined;
+  if (key === 'pia_price_royalty_base') return true;
+  if (key === 'pia_deep_offshore_hct_interpretation') return k.pia_terrain === 'deep_offshore' && noOverride;
+  if (key === 'pia_new_pml_hct_rate_pct') {
+    return (k.pia_terrain === 'onshore' || k.pia_terrain === 'shallow_water') && k.pia_license_type === 'PML'
+      && (k.pia_lease_status ?? 'converted') === 'new' && k.pia_marginal_field_pre_2021 !== true && noOverride;
+  }
+  return true;
+};
+export const readingsOf = (c) => READINGS.map(([label, patch]) => {
+  const keys = Object.keys(patch);
+  const run = ledgerOf({ ...c, cfg: { ...clone(c.cfg || {}), ...clone(patch) } });
+  const deepYears = run.error ? [] : run.value.cashFlowData.filter((d) => d.fiscal_framework === 'nta_2025').length;
+  let read = keys.every((k) => readsSetting(c.cfg, k));
+  if (keys.includes('pia_deep_offshore_hct_interpretation') && read && !run.error && deepYears === 0) read = false;
+  let status = 'the case as it is stated';
+  if (keys.length) status = run.error ? 'refused' : (read ? 'read by the engine for this case' : 'ignored: the engine does not read this setting for this case');
+  return { label, status, read: keys.length ? read : null, run };
+});
 
 /* ------------------------------------------------- the teaching readers */
 

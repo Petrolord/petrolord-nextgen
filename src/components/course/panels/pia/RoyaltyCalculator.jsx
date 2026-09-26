@@ -105,9 +105,9 @@ export const PriceMode = () => {
   );
 };
 
-export const StackMode = () => {
+export const StackMode = ({ initialCase = null }) => {
   const [name, setName] = useState('ekene_alpha_shallow_converted_nta');
-  const [text, setText] = useState(pretty(DATASET.ekene_alpha_shallow_converted_nta));
+  const [text, setText] = useState(pretty(initialCase || DATASET.ekene_alpha_shallow_converted_nta));
   const choose = (n) => { setName(n); setText(pretty(DATASET[n])); };
   const p = parseJson(text);
   const r = p.error ? null : ledgerOf(p.value);
@@ -121,8 +121,10 @@ export const StackMode = () => {
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && (
         <>
-          <Tbl head={['year', 'framework', 'total royalty', 'HCDT', 'NDDC', 'HCT', 'CIT', 'TET', 'development levy', 'net cash flow']}
-            rows={r.value.cashFlowData.map((d) => [String(d.year), d.fiscal_framework || '', six(d.royalty), six(d.hcdt), six(d.nddc), six(d.hct_tax), six(d.cit_tax), six(d.tet_tax), six(d.dev_levy_tax), six(d.net_cash_flow)])} />
+          <Tbl head={['year', 'framework', 'liquids bopd', 'liquids royalty rate', 'liquids production royalty', 'gas royalty', 'production royalty', 'royalty by price', 'total royalty']}
+            rows={r.value.cashFlowData.map((d) => [String(d.year), d.fiscal_framework || '', six(d.royalty_liquids_bopd), six(d.royalty_rate_liquids), six(d.liquids_production_royalty), six(d.gas_royalty), six(d.production_royalty), six(d.price_royalty), six(d.royalty)])} />
+          <Tbl head={['year', 'HCDT', 'NDDC', 'HCT', 'CIT', 'TET', 'development levy', 'net cash flow']}
+            rows={r.value.cashFlowData.map((d) => [String(d.year), six(d.hcdt), six(d.nddc), six(d.hct_tax), six(d.cit_tax), six(d.tet_tax), six(d.dev_levy_tax), six(d.net_cash_flow)])} />
           <TileGrid>
             <Tile label="Total royalties" value={six(r.value.kpis.total_royalties)} />
             <Tile label="Total companies income tax" value={six(r.value.kpis.total_cit)} />
@@ -146,7 +148,7 @@ export const RefusalsMode = () => (
   </>
 );
 
-const RoyaltyCalculator = ({ initialMode = 'tranches' }) => {
+const RoyaltyCalculator = ({ initialMode = 'tranches', initialCase = null }) => {
   const [mode, setMode] = useState(initialMode);
   return (
     <PanelShell
@@ -160,7 +162,7 @@ const RoyaltyCalculator = ({ initialMode = 'tranches' }) => {
         {mode === 'tranches' && <TranchesMode />}
         {mode === 'gas' && <GasMode />}
         {mode === 'price' && <PriceMode />}
-        {mode === 'stack' && <StackMode />}
+        {mode === 'stack' && <StackMode initialCase={initialCase} />}
         {mode === 'refusals' && <RefusalsMode />}
       </div>
       <Note>This is the course&apos;s own calculator: every number on it is a return value of the vendored engine. The Ekene cases are synthetic; paste your own terms and rows to replace them.</Note>

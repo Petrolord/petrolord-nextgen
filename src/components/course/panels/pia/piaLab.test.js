@@ -31,6 +31,7 @@ import process from 'node:process';
 import { fileURLToPath } from 'node:url';
 import * as E from '@petrolord/engines/engines/economics/cashflow.ts';
 import * as L from './piaLab.js';
+import { taughtRefusal } from './panelBits.jsx';
 import { waveInput, mirrorDir } from '../../../../../tools/course-waves/waveInputs.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -181,7 +182,8 @@ describe('THE ENGINE GATE: the interactive routes are the engine, unchanged', ()
     const alpha = L.DATASET.ekene_alpha_shallow_converted_nta;
     const r = L.compareOf(alpha, { pia_license_type: 'PPL' });
     const base = E.computeCashFlow(JSON.parse(JSON.stringify(alpha))).kpis;
-    expect(r.value.lines.map((l) => l.base)).toEqual(L.TOTAL_KEYS.map((k) => base[k] ?? 0));
+    expect(r.value.lines.slice(0, L.TOTAL_KEYS.length).map((l) => l.base)).toEqual(L.TOTAL_KEYS.map((k) => base[k] ?? 0));
+    expect(r.value.lines[L.TOTAL_KEYS.length].key).toBe(L.DECOM_LINE);
     expect(r.value.baseTake).toBe(base.government_take_pct);
     expect(L.compareOf(alpha, { pia_license_type: 'OML' }).error).toBeTruthy();
   });
@@ -192,6 +194,52 @@ describe('THE ENGINE GATE: the interactive routes are the engine, unchanged', ()
     expect(L.parseJson('{"a": 1}').value).toEqual({ a: 1 });
     expect(L.parseJson('{a: 1}').error).toBeTruthy();
     expect(L.parseJson('').error).toBeTruthy();
+  });
+});
+
+describe('THE TAUGHT PART OF A REFUSAL, AND THE READINGS VIEW', () => {
+  const alpha = L.DATASET.ekene_alpha_shallow_converted_nta;
+  it('the two refusals that name the platform switch are shown to their first sentence, every other refusal whole', () => {
+    const marginal = L.ledgerOf({ ...alpha, cfg: { ...alpha.cfg, pia_terrain: 'marginal_field' } }).error;
+    const life = L.ledgerOf({ ...alpha, cfg: { ...alpha.cfg, pia_capex_recovery_years: 4 } }).error;
+    [marginal, life].forEach((m) => {
+      expect(m).toContain('pia_legacy_pre_audit');
+      const t = taughtRefusal(m);
+      expect(t).not.toContain('pia_legacy_pre_audit');
+      expect(m.startsWith(t)).toBe(true);
+      expect(t.endsWith('.')).toBe(true);
+      expect(DIGEST).toContain(t);
+    });
+    expect(taughtRefusal(marginal)).toMatch(/^pia_terrain "marginal_field" is not a terrain[\s\S]*r\.13\(2\)\)\.$/);
+    L.refusalSamples().forEach((r) => expect(taughtRefusal(r.error)).toBe(r.error));
+  });
+  it('every row the readings view calls ignored leaves the ledger exactly as the case states it, on every Ekene case', () => {
+    let ignored = 0; let read = 0; let refused = 0;
+    L.CASE_NAMES.forEach((n) => {
+      const rows = L.readingsOf(L.DATASET[n]);
+      const base = rows[0].run;
+      rows.slice(1).forEach((x) => {
+        if (x.run.error) { refused += 1; expect(x.status).toBe('refused'); return; }
+        if (x.read === false) {
+          ignored += 1;
+          expect(x.run.value.cashFlowData, `${n} ${x.label}`).toEqual(base.value.cashFlowData);
+        } else read += 1;
+      });
+    });
+    expect(ignored).toBeGreaterThan(20);
+    expect(read).toBeGreaterThan(20);
+    console.log(`[pia lab] readings over ${L.CASE_NAMES.length} cases: ${read} read, ${ignored} ignored (ledger identical), ${refused} refused`);
+  });
+  it('the moved view lists the minimum ETR top-up and the decommissioning deduction', () => {
+    const me = L.DATASET.ekene_min_etr_nta_only;
+    const r = L.compareOf(me, { pia_minimum_etr_pct: 15 });
+    const etr = r.value.lines.find((l) => l.key === 'total_min_etr_topup');
+    expect(etr.base).toBeGreaterThan(0);
+    expect(etr.changed).toBe(0);
+    const sf = L.DATASET.ekene_sinking_fund_nta_escrow_met;
+    const d = L.compareOf(sf, { pia_decom_escrow_condition_met: false }).value.lines.find((l) => l.key === L.DECOM_LINE);
+    expect(d.base).toBeGreaterThan(0);
+    expect(d.changed).toBe(0);
   });
 });
 
