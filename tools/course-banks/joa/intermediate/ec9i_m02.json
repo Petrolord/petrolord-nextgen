@@ -123,7 +123,7 @@
  {
   "prompt": "The golden input carry-cap-exactly-cost states parties A 60, B 20 and N 20 percent, a compound uplift of 10 percent, carry recovery from 100 percent of N's share and a cap of 200, equal to N's carried cost. What happens in 2028?",
   "options": [
-   "220 is recovered, as a cap applies to the carried cost and never limits the uplift on top of it",
+   "The cost of 200 and the uplift of 20 are both recovered, as a cap bounds the carried cost alone and leaves the uplift on top of it",
    "200 is recovered and 20.000000 is carried to 2029 as outstanding, since a cap delays the uplift",
    "200 is recovered, the cap is reached, and the uplift of 20.000000 is written off",
    "A refusal, since a cap may not equal the carried cost"
@@ -135,7 +135,7 @@
   "prompt": "The golden input carry-cost-while-recovering states a compound uplift of 25 percent and carry recovery from 100 percent of the carried party's share. 2028 opens at 100.000000, carries a new cost of 100.000000 and has 50.000000 available. What balance closes 2028?",
   "options": [
    "200.000000, with the 25 percent uplift charged on the year's new cost as well as on the opening balance",
-   "225.000000, the amount due, since nothing is recovered while the carry is still adding cost",
+   "225, the amount due, since nothing is recovered while the carry is still adding cost",
    "150.000000, as the year's new cost is added only after the year's recovery is taken and earns no uplift",
    "175.000000"
   ],
