@@ -1,0 +1,367 @@
+{
+ "app_slug": "procurement",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-contract-types-on-one-job",
+   "title": "Contract Types on One Job",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-lump-sum-day-rate-reimbursable",
+     "title": "Lump sum, day rate and reimbursable",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-duration-from-the-activity-programme",
+     "title": "Duration from the activity programme",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-seeded-sampling",
+     "title": "Seeded sampling of days and daily cost",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-who-carries-the-overrun",
+     "title": "Who carries the overrun",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-chance-of-a-loss",
+     "title": "The contractor margin and the chance of a loss",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-cost-percentiles",
+   "title": "Cost Percentiles and Their Labels",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-the-exceedance-definition",
+     "title": "The exceedance definition",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-low-cost-label",
+     "title": "Why the high-probability label is the low cost",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-reading-a-cost-range",
+     "title": "Reading a cost range",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-plan-mean-and-overrun",
+     "title": "The plan, the mean and the overrun",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-should-cost",
+   "title": "Should-Cost",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-an-independent-estimate",
+     "title": "An independent estimate from the programme",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-contingency-and-the-partner-split",
+     "title": "Contingency and the partner split",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-screening-band",
+     "title": "The screening band",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-should-cost-beside-the-abnormally-low-test",
+     "title": "Should-cost beside the abnormally low test",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pr-award-calculator",
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-whole-tender-evaluation",
+   "title": "Whole-Tender Evaluation",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-stages-chained",
+     "title": "Stages chained in one call",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-well-services-tender-end-to-end",
+     "title": "The well services tender end to end",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "pr-envelope-calculator",
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-when-nobody-passes",
+     "title": "When nobody passes",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-award-basis-decides",
+     "title": "The award basis decides",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pr-award-calculator",
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-reading-the-engine-honestly",
+   "title": "Reading the Engine Honestly",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-cited-readings",
+     "title": "Cited readings and their dates",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-uncited-omission-option",
+     "title": "The uncited omission option",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator",
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-an-erratum-in-the-guidance",
+     "title": "An erratum in the Guidance",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator",
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-printed-figures-and-exact-figures",
+     "title": "Printed figures and exact figures",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator",
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-boundaries-rule-by-rule",
+     "title": "Boundaries, rule by rule",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-conventions-and-the-report",
+   "title": "Conventions and the Evaluation Report",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-conventions-that-are-choices",
+     "title": "Conventions that are choices",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-what-is-not-built",
+     "title": "What the engine does not build",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-the-evaluation-report",
+     "title": "Writing the evaluation report",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pr-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

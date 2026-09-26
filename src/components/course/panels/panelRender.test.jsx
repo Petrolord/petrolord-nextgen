@@ -26,7 +26,7 @@ import React from 'react';
 const panels = {
   ...import.meta.glob('/src/components/course/panels/**/*Explorer.jsx'),
   ...import.meta.glob('/src/components/course/panels/**/*Lab.jsx'),
-  // Engine courses whose practicals are calculator panels (EC7 pia).
+  // Engine courses whose practicals are calculator panels (SC2 procurement, EC7 pia).
   ...import.meta.glob('/src/components/course/panels/**/*Calculator.jsx'),
 };
 
@@ -347,6 +347,17 @@ describe('every course panel renders with no props', () => {
     }
     expect(rendered).toBe(15);
   }, 120000);
+  it('finds the SC2 procurement calculator panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('procurement/EnvelopeCalculator.jsx');
+    expect(names).toContain('procurement/AwardCalculator.jsx');
+    expect(names).toContain('procurement/ContractCalculator.jsx');
+  });
+  it('every SC2 procurement view renders, not only the default one', async () => {
+    const MODES = {
+      'procurement/EnvelopeCalculator.jsx': ['technical', 'arithmetic', 'evaluated', 'combined', 'tender'],
+      'procurement/AwardCalculator.jsx': ['lifecycle', 'band', 'alb', 'content', 'preference'],
+      'procurement/ContractCalculator.jsx': ['contracts', 'shouldcost', 'tender', 'bounds', 'refusals'],
   it('finds the EC7 pia calculator panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);
     expect(names).toContain('pia/RoyaltyCalculator.jsx');

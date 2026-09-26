@@ -1,0 +1,364 @@
+{
+ "app_slug": "procurement",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-lowest-evaluated-cost-over-the-life",
+   "title": "Lowest Evaluated Cost Over the Life of the Asset",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-an-award-without-rated-criteria",
+     "title": "An award without rated criteria",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-life-cycle-cost-as-net-present-cost",
+     "title": "Life-cycle cost as a net present cost",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-discounting-through-the-canonical-npv",
+     "title": "Discounting through the canonical NPV",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-residual-value-in-the-last-year",
+     "title": "Residual value in the last year",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-materials-tender-ranked",
+     "title": "The materials tender ranked",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "pr-envelope-calculator",
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-rated-criteria-and-price-scoring",
+   "title": "Rated Criteria and Price Scoring",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-risk-value-and-the-weighting-matrix",
+     "title": "Risk, value and the weighting matrix",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-high-value-line",
+     "title": "The high-value line and its boundary",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-linear-price-scoring",
+     "title": "Linear price scoring",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator",
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-ranking-paradox",
+     "title": "The ranking paradox of relative price scores",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator",
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-abnormally-low-bids",
+   "title": "Abnormally Low Bids",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-fewer-than-five-bids",
+     "title": "Fewer than five bids: the absolute test",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-five-or-more-bids",
+     "title": "Five or more bids: the relative test",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-population-standard-deviation",
+     "title": "The population standard deviation",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-clarify-before-deciding",
+     "title": "Clarify before any decision",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-measuring-nigerian-content",
+   "title": "Measuring Nigerian Content",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-act-and-its-schedule",
+     "title": "The Act and its Schedule",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-measured-units",
+     "title": "Man-hours, tonnage, number and spend",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-an-item-against-its-minimum",
+     "title": "An item against its minimum",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-overall-content-across-mixed-units",
+     "title": "Overall content across mixed units",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-target-the-schedule-does-not-list",
+     "title": "A target the Schedule does not list",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-section-14",
+   "title": "Section 14 of the Act",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-bids-within-one-percent",
+     "title": "Bids within one percent",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-closest-competitor",
+     "title": "The closest competitor",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-two-readings-of-five-percent-higher",
+     "title": "Two readings of five percent higher",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-a-shared-highest-content",
+     "title": "A shared highest content",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-section-16-and-the-award",
+   "title": "Section 16 and the Award",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-protection-within-ten-percent",
+     "title": "Protection within ten percent",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-content-in-a-combined-award",
+     "title": "Content in a combined award",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-materials-award-end-to-end",
+     "title": "The materials award end to end",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pr-award-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

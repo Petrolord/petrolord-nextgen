@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "With Cmin 862141.000000, what commercial score does the lowest-ratio method give WS2, whose evaluated cost is 885574.000000?",
+  "options": [
+   "88.235294, the ratio of WS2's technical percentage to the highest one.",
+   "97.353920, that is 100 x 862141 / 885574",
+   "100.000000, as for WS5.",
+   "90.970882, WS2's rank-three figure."
+  ],
+  "answer": 1,
+  "explanation": "The engine's basis is Sc = 100 x Cmin / C with Cmin = 862141, so WS2 scores 97.353920. 88.235294 is WS2's St, 100.000000 goes only to the lowest evaluated cost (WS5), and 90.970882 is WS2's combined score B, which weighs St and Sc together."
+ },
+ {
+  "prompt": "WS1's technical percentage is 82.500000. What relative technical score St does the engine give it?",
+  "options": [
+   "82.500000, as the relative method uses the percentage just as it was scored.",
+   "330.000000, WS1's weighted points, which the relative method carries forward.",
+   "92.883107, WS1's Sc.",
+   "97.058824, measured against Thigh 85"
+  ],
+  "answer": 3,
+  "explanation": "St = 100 x T / Thigh with Thigh = 85, WS3's percentage, so WS1 scores 100 x 82.500000 / 85 = 97.058824. Using T as scored is the absolute method, weighted points never enter the combined score, and 92.883107 is WS1's commercial score Sc."
+ },
+ {
+  "prompt": "At technical weight 0.7, with lowest-ratio pricing and relative technical scoring, which bid is most advantageous?",
+  "options": [
+   "WS3, at 96.998434",
+   "WS5, which holds the lowest evaluated cost and so the commercial score of 100.000000.",
+   "WS1, whose 95.806109 is the top combined score once its discount is taken into account.",
+   "WS2, since its commercial score of 97.353920 is the best of any bid that scores below 100."
+  ],
+  "answer": 0,
+  "explanation": "The engine ranks WS3 96.998434, WS1 95.806109, WS2 90.970882, WS5 87.647059. WS3 has the best technical proposal, St 100, and at a weight of 0.7 that lead outweighs its commercial score of 89.994781. WS5 ranks fourth despite Sc 100, and WS1's figure is below WS3's."
+ },
+ {
+  "prompt": "Where does WS5, the bid with the lowest evaluated cost, rank on the combined score at technical weight 0.7?",
+  "options": [
+   "First, since the combined score gives the lowest evaluated cost first place.",
+   "Second, behind WS3, with a combined score of 95.806109.",
+   "Fourth of four, at 87.647059",
+   "Joint first with WS3, as both bids reach a score of 100 in one part."
+  ],
+  "answer": 2,
+  "explanation": "WS5 scores Sc 100.000000 and St 82.352941, and 0.7 x 82.352941 + the rest x 100 gives 87.647059, the lowest of the four. 95.806109 belongs to WS1 in second place. Scoring 100 on one part is shared by WS3 (St) and WS5 (Sc) and gives neither a tie."
+ },
+ {
+  "prompt": "Which bid sets Thigh in the well services combined score, and why can WS6 not set it?",
+  "options": [
+   "WS3 at 85.000000; WS6 was never scored, so it is not among the bids ranked.",
+   "WS6, whose strong proposal sets Thigh although its price envelope stays sealed.",
+   "WS4, since Thigh is taken over every bid that the technical envelope scored.",
+   "WS1, because Thigh is the percentage of the bid received first at the box."
+  ],
+  "answer": 0,
+  "explanation": "Thigh is the highest technical percentage among the bids being ranked, the responsive ones, so the engine prints Thigh = 85 from WS3. WS6 failed a mandatory requirement and has no percentage at all, WS4's price was never opened so it is not ranked, and receipt time plays no part in Thigh."
+ },
+ {
+  "prompt": "The technical weight box of the combined score view is left empty. What comes back?",
+  "options": [
+   "Ranks at a technical weight of 0.7, the figure the well services tender states in its settings.",
+   "A refusal: \"technicalWeight must be a number from 0 to 1 (the technical share of the combined score); there is no default\".",
+   "An even split of 0.5 between the technical and the commercial score of each bid, applied until a weight is typed.",
+   "Ranks on the commercial score alone, as a missing technical weight is read as a weight of zero."
+  ],
+  "answer": 1,
+  "explanation": "The technical weight has no default, so a combined score without one is refused in the engine's own words. It borrows no weight from a fixture, assumes no even split, and never reads a blank as zero, because each of those would decide the award silently."
+ },
+ {
+  "prompt": "In the envelope calculator's combined score view, every bid carries a rejection reason. What does the engine return?",
+  "options": [
+   "All the bids ranked, with the rejection reasons printed beside each row.",
+   "A result naming the bid with the highest technical percentage as most advantageous.",
+   "Zero combined scores, 0.000000 for each bid, with no bid named as most advantageous.",
+   "The refusal \"bids has no bid left to score: every bid is rejected\", from rankTender."
+  ],
+  "answer": 3,
+  "explanation": "The combined score needs at least one bid to rank, so rankTender refuses with the field bids and the message quoted, in its own words. It ranks no rejected bid, names no winner and prints no zero scores."
+ },
+ {
+  "prompt": "What does the absolute technical method use as a bid's technical score?",
+  "options": [
+   "100 x T / Thigh, the percentage set against the highest one.",
+   "Weighted points, the sum of weight x score, without dividing by maxScore.",
+   "The technical percentage as scored, T itself",
+   "Its margin over the pass mark, times 100."
+  ],
+  "answer": 2,
+  "explanation": "The engine's message states the two methods: 'relative' (100 x T / Thigh) or 'absolute' (T as scored). Dividing by the highest percentage is the relative method, weighted points are a separate figure the combined score does not use, and no method subtracts the pass mark."
+ },
+ {
+  "prompt": "Every bid's technical percentage is set to 0 with the relative method. What does the engine return?",
+  "options": [
+   "An St of 100.000000 for every bid, since all of them tie for the top technical score.",
+   "St 0.000000 for all, so cost decides.",
+   "A switch to the absolute method.",
+   "A refusal: Thigh is 0, so the relative score is undefined."
+  ],
+  "answer": 3,
+  "explanation": "The engine's message is \"bids all score 0 technically, so Thigh is 0 and the 'relative' technical score is undefined\". Dividing by a Thigh of zero has no meaning, so the engine gives no St at all, and it never changes a method it was given."
+ },
+ {
+  "prompt": "Why does a bid with an evaluated cost of 0 draw a refusal in the combined score?",
+  "options": [
+   "Sc = 100 x Cmin / C has no meaning when C is zero, so the cost must be above 0.",
+   "The engine reads a cost of 0 as a missing price and prices it at the average of the others.",
+   "A cost of 0 gives every other bid Sc 100.000000.",
+   "A bid of 0 is read as withdrawn."
+  ],
+  "answer": 0,
+  "explanation": "The commercial score divides by each bid's evaluated cost, so the engine refuses with \"bids[0].evaluatedCost must be a finite number above 0\". It does not price the bid at an average, which is the omission rule for a single item, and it makes no guess about withdrawal."
+ },
+ {
+  "prompt": "The Guidance's Figures X to XII print Company D's combined score as 98.34. What does the engine return for D?",
+  "options": [
+   "98.34 exactly, the printed figure, which the engine reproduces to the last digit.",
+   "98.333333, exact; the Guidance prints two decimals",
+   "80.000000, the technical part alone, since D wins on its technical score.",
+   "91.666667, D's commercial score, which the Guidance prints as 91.7 in its table."
+  ],
+  "answer": 1,
+  "explanation": "At the technical weight of 0.8 that the World Bank Guidance (February 2025) states, the engine returns D's B as 98.333333, within 0.01 of the printed 98.34; two figures that look close are still different, and the course quotes each as printed. 80.000000 is 0.8 x St, 91.666667 is Sc, and the ranking D, C, B, A agrees with the Guidance."
+ },
+ {
+  "prompt": "In the Guidance's Figures X to XII, Company C scores Sc 100.000000. Why is D most advantageous at technical weight 0.8?",
+  "options": [
+   "C is rejected after examination, leaving D ahead of the rest.",
+   "D has the lower evaluated cost once corrected.",
+   "D's technical lead outweighs C's cost lead at that weight.",
+   "A tie goes to D, received first."
+  ],
+  "answer": 2,
+  "explanation": "At the 0.8 that the World Bank Guidance (February 2025) states, the technical score carries most of the weight: D's 0.8 x St is 80.000000 against C's 68.333333, and C's Sc of 100.000000 against D's 91.666667 cannot close that gap, so D scores 98.333333 and C 88.333333. The excluded company is E, C holds the lowest cost, and there is no tie."
+ },
+ {
+  "prompt": "The Guidance's Annex 3 states a technical weight of 0.4. What does the engine return for Company A?",
+  "options": [
+   "St 100.000000, Sc 90.625000 and B 94.375000, the Guidance printing 94.37",
+   "St 79.166667, Sc 100.000000 and B 91.666667, the winning figures for the bid.",
+   "St 100.000000 and B 94.37, since the printed figure is the engine's own.",
+   "B 240.000000, A's weighted points, which the Annex uses as its combined score."
+  ],
+  "answer": 0,
+  "explanation": "The engine returns A at St 100.000000, Sc 90.625000, B 94.375000, and B at St 79.166667, Sc 100.000000, B 91.666667, so A wins on both. The World Bank Guidance (February 2025) prints 94.37, two decimals of the engine's figure with the third dropped. 240.000000 is A's weighted points and plays no part in B."
+ },
+ {
+  "prompt": "On the well services bids, what happens to the most advantageous bid if the technical weight is set to 0, and if it is set to 1?",
+  "options": [
+   "At 0 it is WS3 and at 1 it is WS5, since the weight is the share given to price.",
+   "It is WS3 at every weight, because WS3 holds the best technical proposal.",
+   "Both are refused as out of range.",
+   "At 0 it is WS5 (Sc alone); at 1 it is WS3 (St alone)."
+  ],
+  "answer": 3,
+  "explanation": "B = technical weight x St + the rest x Sc, so a weight of 0 ranks on Sc alone and WS5, with the lowest evaluated cost, is most advantageous; a weight of 1 ranks on St alone and WS3 leads (engine run on the four responsive bids). The input is the technical share, and the engine accepts any weight from 0 to 1."
+ },
+ {
+  "prompt": "The Works SPD (September 2025) writes the combined evaluation as B = Clow / C x X x 100 + T / Thigh x (1 - X) x 100. What does X stand for, and what does the engine take as its input?",
+  "options": [
+   "The technical weight, which the engine takes directly as its own input.",
+   "X is the weight on price; the engine takes the technical weight and gives the rest to Sc.",
+   "A fraction for the pass mark, which the engine reads from the technical envelope.",
+   "Cmin, the lowest evaluated cost, as the engine names it in its basis."
+  ],
+  "answer": 1,
+  "explanation": "In the SPD's formula X multiplies the price term Clow / C, so it is the price weight. The engine's input is technicalWeight, the technical share, and the commercial score takes 1 minus it, which is why its basis at 0.7 reads B = 0.7 x St plus the rest x Sc. The pass mark and Cmin are separate quantities."
+ }
+]

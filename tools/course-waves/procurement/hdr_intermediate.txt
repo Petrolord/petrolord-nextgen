@@ -1,0 +1,19 @@
+-- ============================================================================
+-- SC2 PROFESSIONAL DEEP SEED: Procurement, Tendering & Contracting,
+-- intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions. Generated from the tier's
+-- manifest.json and the committed bank JSONs under
+-- tools/course-banks/procurement/intermediate.
+--
+-- What this tier owns: LOWEST EVALUATED COST AND THE CONTENT ACT. The award
+-- without rated criteria and the life-cycle cost through the canonical NPV;
+-- the Rated Criteria weighting band, linear price scoring and the ranking
+-- paradox; abnormally low bids by the absolute and the relative test; Nigerian
+-- content by item and overall in the 2010 Schedule's units; section 14 with
+-- both readings side by side and section 16. Digest sections 11 to 16.
+--
+-- AN ENGINE COURSE. The practicals run in the course's own award calculator.
+-- The Professional capstone grades the s.14 lead under both readings, each
+-- field naming its reading.
+-- ============================================================================

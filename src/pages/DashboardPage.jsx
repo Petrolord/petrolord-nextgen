@@ -76,6 +76,7 @@ import MlCoreLearningPage from '@/pages/apps/MlCoreLearningPage';
 import FaciesLearningPage from '@/pages/apps/FaciesLearningPage';
 import ForecastmlLearningPage from '@/pages/apps/ForecastmlLearningPage';
 import AppliedaiLearningPage from '@/pages/apps/AppliedaiLearningPage';
+import ProcurementLearningPage from '@/pages/apps/ProcurementLearningPage';
 import PiaLearningPage from '@/pages/apps/PiaLearningPage';
 import HygieneLearningPage from '@/pages/apps/HygieneLearningPage';
 import RiskChangeLearningPage from '@/pages/apps/RiskChangeLearningPage';
@@ -466,6 +467,7 @@ const DashboardPage = () => {
     <Route path="apps/facies" element={<FaciesLearningPage />} />
     <Route path="apps/forecastml" element={<ForecastmlLearningPage />} />
     <Route path="apps/appliedai" element={<AppliedaiLearningPage />} />
+    <Route path="apps/procurement" element={<ProcurementLearningPage />} />
     <Route path="apps/pia" element={<PiaLearningPage />} />
     <Route path="apps/hygiene" element={<HygieneLearningPage />} />
     <Route path="apps/riskchange" element={<RiskChangeLearningPage />} />
