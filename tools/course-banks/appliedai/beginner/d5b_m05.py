@@ -44,7 +44,7 @@ q(2, "Why does the engine use a 12-digit key to decide ties and never a relative
  ["Every passage would tie under a tolerance, since BM25 scores differ only in the sixth decimal",
   "Speed: a key runs faster, and that is the only reason stated",
   "Tolerances cannot be computed on a score above 0"],
- "The stated reason is transitivity: two scores with the same key tie, full stop, while near-to-near chains under a tolerance break a sort. Scores differ far more than in the sixth decimal, speed is no stated reason, and a tolerance is computable on any score."),
+ "The stated reason is transitivity: two scores with the same key tie, full stop, while near-to-near chains under a tolerance break a sort. BM25 scores on the Ekene set differ in their leading digits, as Q13's run from 9.951737 down to 6.222042 shows, speed is no stated reason, and a tolerance is computable on any score."),
 
 q(0, "Which of these values of k does the engine accept?",
  "1000",

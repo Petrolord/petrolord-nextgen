@@ -68,7 +68,7 @@ q(2, "With the stop list on, a geologist types the query \"the well top\" into B
  "the, well and top are all on the stop list, so the query loses every token and the call returns with the note \"the query has no token after the stop list, so no document is ranked\". That is a note on a result that ran; the query is still a string, well is removed as well as the and top, and only a score above 0 ranks, so nothing is listed."),
 
 q(3, "Q14 is \"Is Ekene-5 producing water?\". What changes when the stop list is switched on?",
- "is is removed, and \"no\", the word the answering passages use, is a stop word too",
+ "The word is drops out, and \"no\", the word the answering passages use, is a stop word too",
  ["Nothing, since every word in Q14 is a content word that the list leaves alone",
   "water and producing are removed, leaving only ekene and 5 to be matched",
   "ekene and 5 are removed, since the list drops every name and every number"],

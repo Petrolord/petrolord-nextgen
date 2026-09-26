@@ -107,7 +107,7 @@ q(0, "In what order does the claim reader pick claims out of an answer?",
  ["Numbers first, then dates, then quotes, so each figure is claimed as early as possible",
   "Left to right as the words appear, each one read as a quote, a date or a number",
   "Dates first, then the rest"],
- "The basis states quoted spans first, then ISO dates YYYY-MM-DD, then numbers, so a date inside a quote belongs to the quote, and the digits of a date are never read again as numbers. The order is by kind, whatever the position in the text."),
+ "The basis states quoted spans first, then ISO dates YYYY-MM-DD, then numbers. The order is by kind, whatever the position in the text, so numbers are taken last; neither a left-to-right reading nor dates first is the stated rule."),
 
 q(1, "A quoted span in an answer, such as \"water injection\", is checked against a passage. What must match?",
  "The same run of tokens, so case and punctuation do not matter and the words must appear together and in order",

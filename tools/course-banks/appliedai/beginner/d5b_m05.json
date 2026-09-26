@@ -52,7 +52,7 @@
    "Tolerances cannot be computed on a score above 0"
   ],
   "answer": 2,
-  "explanation": "The stated reason is transitivity: two scores with the same key tie, full stop, while near-to-near chains under a tolerance break a sort. Scores differ far more than in the sixth decimal, speed is no stated reason, and a tolerance is computable on any score."
+  "explanation": "The stated reason is transitivity: two scores with the same key tie, full stop, while near-to-near chains under a tolerance break a sort. BM25 scores on the Ekene set differ in their leading digits, as Q13's run from 9.951737 down to 6.222042 shows, speed is no stated reason, and a tolerance is computable on any score."
  },
  {
   "prompt": "Which of these values of k does the engine accept?",

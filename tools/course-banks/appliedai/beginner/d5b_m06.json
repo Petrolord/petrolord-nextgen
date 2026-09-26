@@ -151,7 +151,7 @@
    "Dates first, then the rest"
   ],
   "answer": 0,
-  "explanation": "The basis states quoted spans first, then ISO dates YYYY-MM-DD, then numbers, so a date inside a quote belongs to the quote, and the digits of a date are never read again as numbers. The order is by kind, whatever the position in the text."
+  "explanation": "The basis states quoted spans first, then ISO dates YYYY-MM-DD, then numbers. The order is by kind, whatever the position in the text, so numbers are taken last; neither a left-to-right reading nor dates first is the stated rule."
  },
  {
   "prompt": "A quoted span in an answer, such as \"water injection\", is checked against a passage. What must match?",
