@@ -628,65 +628,65 @@ Flat oil price 40 to 120 USD/bbl in steps of 10 on the PIA worked example; every
 ### psc_carryforward
 Hand-derived PSC: 36M cost oil cap binds, 54M carried, year 2 consumes 36M of it; contractor profit oil 27M both years.
 Config: base_year=2030, capex_escalator_pct=0, condensate_price_escalator_pct=0, condensate_price_usd_bbl=0, discount_rate_pct=10, fiscal_regime=PSC, gas_price_escalator_pct=0, gas_price_usd_mscf=0, inflation_rate_pct=0, oil_price_escalator_pct=0, oil_price_usd_bbl=100, opex_escalator_pct=0, present_value_basis=nominal, psc_contractor_profit_share_pct=50, psc_cost_oil_cap_pct=40, psc_royalty_pct=10, psc_tax_rate_pct=50. Production well1_oil_bbl=1000000 year=2030; well1_oil_bbl=1000000 year=2031. Capex amount_usd=80000000 year=2030. Opex total_opex_usd=10000000 year=2030; total_opex_usd=10000000 year=2031.
-| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2030 | 100000000.00 | 10000000.00 | 10000000.00 | 80000000.00 | 27000000.00 | 13500000.00 | -40500000.00 | 50.000000 | -40500000.00 | -40500000.00 | 1000000.00 |
-| 2031 | 100000000.00 | 10000000.00 | 10000000.00 | 0.00 | 27000000.00 | 13500000.00 | 39500000.00 | 50.000000 | 35909090.91 | -1000000.00 | 1000000.00 |
-KPIs: NPV -4590909.09 USD, IRR -2.4691 percent, payback Beyond project life (null years), discounted payback null years, DPI -0.057386, take 101.0000 percent, discounted take 105.0000 percent; total oil 2000000.00 bbl; working_interest_pct not reported; unrecovered cost at cessation not reported.
+| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_cost_pool_after | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2030 | 100000000.00 | 10000000.00 | 10000000.00 | 80000000.00 | 27000000.00 | 13500000.00 | -40500000.00 | 54000000.00 | 50.000000 | -40500000.00 | -40500000.00 | 1000000.00 |
+| 2031 | 100000000.00 | 10000000.00 | 10000000.00 | 0.00 | 27000000.00 | 13500000.00 | 39500000.00 | 28000000.00 | 50.000000 | 35909090.91 | -1000000.00 | 1000000.00 |
+KPIs: NPV -4590909.09 USD, IRR -2.4691 percent, payback Beyond project life (null years), discounted payback null years, DPI -0.057386, take 101.0000 percent, discounted take 105.0000 percent; total oil 2000000.00 bbl; working_interest_pct not reported; unrecovered cost at cessation 28000000.00.
 
 ### psc_tranches
 Tranche share on start-of-year cumulative liquids: 60 then 40 percent.
 Config: base_year=2030, capex_escalator_pct=0, condensate_price_escalator_pct=0, condensate_price_usd_bbl=0, discount_rate_pct=10, fiscal_regime=PSC, gas_price_escalator_pct=0, gas_price_usd_mscf=0, inflation_rate_pct=0, oil_price_escalator_pct=0, oil_price_usd_bbl=100, opex_escalator_pct=0, present_value_basis=nominal, psc_contractor_profit_share_pct=50, psc_cost_oil_cap_pct=40, psc_profit_split_mode=tranches, psc_profit_tranches=[{"contractor_share_pct":60,"from_cum_mmbbl":0},{"contractor_share_pct":40,"from_cum_mmbbl":1}], psc_royalty_pct=10, psc_tax_rate_pct=50. Production well1_oil_bbl=1000000 year=2030; well1_oil_bbl=1000000 year=2031. Capex amount_usd=80000000 year=2030. Opex total_opex_usd=10000000 year=2030; total_opex_usd=10000000 year=2031.
-| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2030 | 100000000.00 | 10000000.00 | 10000000.00 | 80000000.00 | 32400000.00 | 16200000.00 | -37800000.00 | 60.000000 | -37800000.00 | -37800000.00 | 1000000.00 |
-| 2031 | 100000000.00 | 10000000.00 | 10000000.00 | 0.00 | 21600000.00 | 10800000.00 | 36800000.00 | 40.000000 | 33454545.45 | -1000000.00 | 1000000.00 |
-KPIs: NPV -4345454.55 USD, IRR -2.6455 percent, payback Beyond project life (null years), discounted payback null years, DPI -0.054318, take 101.0000 percent, discounted take 104.7327 percent; total oil 2000000.00 bbl; working_interest_pct not reported; unrecovered cost at cessation not reported.
+| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_cost_pool_after | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2030 | 100000000.00 | 10000000.00 | 10000000.00 | 80000000.00 | 32400000.00 | 16200000.00 | -37800000.00 | 54000000.00 | 60.000000 | -37800000.00 | -37800000.00 | 1000000.00 |
+| 2031 | 100000000.00 | 10000000.00 | 10000000.00 | 0.00 | 21600000.00 | 10800000.00 | 36800000.00 | 28000000.00 | 40.000000 | 33454545.45 | -1000000.00 | 1000000.00 |
+KPIs: NPV -4345454.55 USD, IRR -2.6455 percent, payback Beyond project life (null years), discounted payback null years, DPI -0.054318, take 101.0000 percent, discounted take 104.7327 percent; total oil 2000000.00 bbl; working_interest_pct not reported; unrecovered cost at cessation 28000000.00.
 
 ### psc_tranches_prior_cumulative
 Brownfield tranche start at 1.5 MMbbl: 40 then 30 percent.
 Config: base_year=2030, capex_escalator_pct=0, condensate_price_escalator_pct=0, condensate_price_usd_bbl=0, discount_rate_pct=10, fiscal_regime=PSC, gas_price_escalator_pct=0, gas_price_usd_mscf=0, inflation_rate_pct=0, oil_price_escalator_pct=0, oil_price_usd_bbl=100, opex_escalator_pct=0, present_value_basis=nominal, psc_contractor_profit_share_pct=50, psc_cost_oil_cap_pct=40, psc_prior_cumulative_liquids_bbl=1500000, psc_profit_split_mode=tranches, psc_profit_tranches=[{"contractor_share_pct":60,"from_cum_mmbbl":0},{"contractor_share_pct":40,"from_cum_mmbbl":1},{"contractor_share_pct":30,"from_cum_mmbbl":2}], psc_royalty_pct=10, psc_tax_rate_pct=50. Production well1_oil_bbl=1000000 year=2030; well1_oil_bbl=1000000 year=2031. Capex amount_usd=80000000 year=2030. Opex total_opex_usd=10000000 year=2030; total_opex_usd=10000000 year=2031.
-| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2030 | 100000000.00 | 10000000.00 | 10000000.00 | 80000000.00 | 21600000.00 | 10800000.00 | -43200000.00 | 40.000000 | -43200000.00 | -43200000.00 | 1000000.00 |
-| 2031 | 100000000.00 | 10000000.00 | 10000000.00 | 0.00 | 16200000.00 | 8100000.00 | 34100000.00 | 30.000000 | 31000000.00 | -9100000.00 | 1000000.00 |
-KPIs: NPV -12200000.00 USD, IRR -21.0648 percent, payback Beyond project life (null years), discounted payback null years, DPI -0.152500, take 109.1000 percent, discounted take 113.2871 percent; total oil 2000000.00 bbl; working_interest_pct not reported; unrecovered cost at cessation not reported.
+| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_cost_pool_after | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2030 | 100000000.00 | 10000000.00 | 10000000.00 | 80000000.00 | 21600000.00 | 10800000.00 | -43200000.00 | 54000000.00 | 40.000000 | -43200000.00 | -43200000.00 | 1000000.00 |
+| 2031 | 100000000.00 | 10000000.00 | 10000000.00 | 0.00 | 16200000.00 | 8100000.00 | 34100000.00 | 28000000.00 | 30.000000 | 31000000.00 | -9100000.00 | 1000000.00 |
+KPIs: NPV -12200000.00 USD, IRR -21.0648 percent, payback Beyond project life (null years), discounted payback null years, DPI -0.152500, take 109.1000 percent, discounted take 113.2871 percent; total oil 2000000.00 bbl; working_interest_pct not reported; unrecovered cost at cessation 28000000.00.
 
 ### psc_itc
 ITC 40M on 80M capex: 13.5M used each year, 13M carried unused.
 Config: base_year=2030, capex_escalator_pct=0, condensate_price_escalator_pct=0, condensate_price_usd_bbl=0, discount_rate_pct=10, fiscal_regime=PSC, gas_price_escalator_pct=0, gas_price_usd_mscf=0, inflation_rate_pct=0, oil_price_escalator_pct=0, oil_price_usd_bbl=100, opex_escalator_pct=0, present_value_basis=nominal, psc_contractor_profit_share_pct=50, psc_cost_oil_cap_pct=40, psc_itc_pct=50, psc_royalty_pct=10, psc_tax_rate_pct=50. Production well1_oil_bbl=1000000 year=2030; well1_oil_bbl=1000000 year=2031. Capex amount_usd=80000000 year=2030. Opex total_opex_usd=10000000 year=2030; total_opex_usd=10000000 year=2031.
-| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2030 | 100000000.00 | 10000000.00 | 10000000.00 | 80000000.00 | 27000000.00 | 0.00 | -27000000.00 | 50.000000 | -27000000.00 | -27000000.00 | 1000000.00 |
-| 2031 | 100000000.00 | 10000000.00 | 10000000.00 | 0.00 | 27000000.00 | 0.00 | 53000000.00 | 50.000000 | 48181818.18 | 26000000.00 | 1000000.00 |
-KPIs: NPV 21181818.18 USD, IRR 96.2963 percent, payback 1.51 years (1.509434 years), discounted payback 1.560377 years, DPI 0.264773, take 74.0000 percent, discounted take 76.9307 percent; total oil 2000000.00 bbl; working_interest_pct not reported; unrecovered cost at cessation not reported.
+| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_cost_pool_after | psc_contractor_share_pct | psc_itc_used | psc_itc_carryforward | discounted_cash_flow | cumulative_cash_flow | oil_bbl |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2030 | 100000000.00 | 10000000.00 | 10000000.00 | 80000000.00 | 27000000.00 | 0.00 | -27000000.00 | 54000000.00 | 50.000000 | 13500000.00 | 26500000.00 | -27000000.00 | -27000000.00 | 1000000.00 |
+| 2031 | 100000000.00 | 10000000.00 | 10000000.00 | 0.00 | 27000000.00 | 0.00 | 53000000.00 | 28000000.00 | 50.000000 | 13500000.00 | 13000000.00 | 48181818.18 | 26000000.00 | 1000000.00 |
+KPIs: NPV 21181818.18 USD, IRR 96.2963 percent, payback 1.51 years (1.509434 years), discounted payback 1.560377 years, DPI 0.264773, take 74.0000 percent, discounted take 76.9307 percent; total oil 2000000.00 bbl; working_interest_pct not reported; unrecovered cost at cessation 28000000.00.
 
 ### psc_wi_50
 PSC at 50 percent WI: every monetary line and the entitlement volumes halve; take percent invariant.
 Config: base_year=2030, capex_escalator_pct=0, condensate_price_escalator_pct=0, condensate_price_usd_bbl=0, discount_rate_pct=10, fiscal_regime=PSC, gas_price_escalator_pct=0, gas_price_usd_mscf=0, inflation_rate_pct=0, oil_price_escalator_pct=0, oil_price_usd_bbl=100, opex_escalator_pct=0, present_value_basis=nominal, psc_contractor_profit_share_pct=50, psc_cost_oil_cap_pct=40, psc_royalty_pct=10, psc_tax_rate_pct=50, psc_working_interest_pct=50. Production well1_oil_bbl=1000000 year=2030; well1_oil_bbl=1000000 year=2031. Capex amount_usd=80000000 year=2030. Opex total_opex_usd=10000000 year=2030; total_opex_usd=10000000 year=2031.
-| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2030 | 50000000.00 | 5000000.00 | 5000000.00 | 40000000.00 | 13500000.00 | 6750000.00 | -20250000.00 | 50.000000 | -20250000.00 | -20250000.00 | 500000.00 |
-| 2031 | 50000000.00 | 5000000.00 | 5000000.00 | 0.00 | 13500000.00 | 6750000.00 | 19750000.00 | 50.000000 | 17954545.45 | -500000.00 | 500000.00 |
-KPIs: NPV -2295454.55 USD, IRR -2.4691 percent, payback Beyond project life (null years), discounted payback null years, DPI -0.057386, take 101.0000 percent, discounted take 105.0000 percent; total oil 1000000.00 bbl; working_interest_pct 50; unrecovered cost at cessation not reported.
+| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_cost_pool_after | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2030 | 50000000.00 | 5000000.00 | 5000000.00 | 40000000.00 | 13500000.00 | 6750000.00 | -20250000.00 | 27000000.00 | 50.000000 | -20250000.00 | -20250000.00 | 500000.00 |
+| 2031 | 50000000.00 | 5000000.00 | 5000000.00 | 0.00 | 13500000.00 | 6750000.00 | 19750000.00 | 14000000.00 | 50.000000 | 17954545.45 | -500000.00 | 500000.00 |
+KPIs: NPV -2295454.55 USD, IRR -2.4691 percent, payback Beyond project life (null years), discounted payback null years, DPI -0.057386, take 101.0000 percent, discounted take 105.0000 percent; total oil 1000000.00 bbl; working_interest_pct 50; unrecovered cost at cessation 14000000.00.
 
 ### psc_sinking_fund
 PSC sinking fund from 2031: one 10M contribution rides the recoverable cost lane.
 Config: abandonment_cost_usd=10000000, abandonment_fund_start_year=2031, abandonment_funding_mode=sinking_fund, base_year=2030, capex_escalator_pct=0, condensate_price_escalator_pct=0, condensate_price_usd_bbl=0, discount_rate_pct=10, fiscal_regime=PSC, gas_price_escalator_pct=0, gas_price_usd_mscf=0, inflation_rate_pct=0, oil_price_escalator_pct=0, oil_price_usd_bbl=100, opex_escalator_pct=0, present_value_basis=nominal, psc_contractor_profit_share_pct=50, psc_cost_oil_cap_pct=40, psc_royalty_pct=10, psc_tax_rate_pct=50. Production well1_oil_bbl=1000000 year=2030; well1_oil_bbl=1000000 year=2031. Capex amount_usd=80000000 year=2030. Opex total_opex_usd=10000000 year=2030; total_opex_usd=10000000 year=2031.
-| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl | decom_fund_contribution | abandonment_cost_funded |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2030 | 100000000.00 | 10000000.00 | 10000000.00 | 80000000.00 | 27000000.00 | 13500000.00 | -40500000.00 | 50.000000 | -40500000.00 | -40500000.00 | 1000000.00 | null | null |
-| 2031 | 100000000.00 | 10000000.00 | 10000000.00 | 0.00 | 27000000.00 | 13500000.00 | 29500000.00 | 50.000000 | 26818181.82 | -11000000.00 | 1000000.00 | 10000000.00 | 10000000.00 |
-KPIs: NPV -13681818.18 USD, IRR -27.1605 percent, payback Beyond project life (null years), discounted payback null years, DPI -0.171023, take 112.2222 percent, discounted take 114.9010 percent; total oil 2000000.00 bbl; working_interest_pct not reported; unrecovered cost at cessation not reported.
+| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_cost_pool_after | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl | decom_fund_contribution | abandonment_cost_funded |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2030 | 100000000.00 | 10000000.00 | 10000000.00 | 80000000.00 | 27000000.00 | 13500000.00 | -40500000.00 | 54000000.00 | 50.000000 | -40500000.00 | -40500000.00 | 1000000.00 | null | null |
+| 2031 | 100000000.00 | 10000000.00 | 10000000.00 | 0.00 | 27000000.00 | 13500000.00 | 29500000.00 | 38000000.00 | 50.000000 | 26818181.82 | -11000000.00 | 1000000.00 | 10000000.00 | 10000000.00 |
+KPIs: NPV -13681818.18 USD, IRR -27.1605 percent, payback Beyond project life (null years), discounted payback null years, DPI -0.171023, take 112.2222 percent, discounted take 114.9010 percent; total oil 2000000.00 bbl; working_interest_pct not reported; unrecovered cost at cessation 38000000.00.
 
 ### psc_abandonment_wi_50
 Lump-sum abandonment at 50 percent PSC WI: unscaled after the WI share.
 Config: abandonment_cost_usd=10000000, base_year=2030, capex_escalator_pct=0, condensate_price_escalator_pct=0, condensate_price_usd_bbl=0, discount_rate_pct=10, fiscal_regime=PSC, gas_price_escalator_pct=0, gas_price_usd_mscf=0, inflation_rate_pct=0, oil_price_escalator_pct=0, oil_price_usd_bbl=100, opex_escalator_pct=0, present_value_basis=nominal, psc_contractor_profit_share_pct=50, psc_cost_oil_cap_pct=40, psc_royalty_pct=10, psc_tax_rate_pct=50, psc_working_interest_pct=50. Production well1_oil_bbl=1000000 year=2030; well1_oil_bbl=1000000 year=2031. Capex amount_usd=80000000 year=2030. Opex total_opex_usd=10000000 year=2030; total_opex_usd=10000000 year=2031.
-| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl | abandonment_cost |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2030 | 50000000.00 | 5000000.00 | 5000000.00 | 40000000.00 | 13500000.00 | 6750000.00 | -20250000.00 | 50.000000 | -20250000.00 | -20250000.00 | 500000.00 | null |
-| 2031 | 50000000.00 | 5000000.00 | 5000000.00 | 0.00 | 13500000.00 | 6750000.00 | 9750000.00 | 50.000000 | 8863636.36 | -10500000.00 | 500000.00 | 10000000.00 |
-KPIs: NPV -11386363.64 USD, IRR -51.8519 percent, payback Beyond project life (null years), discounted payback null years, DPI -0.284659, take 126.2500 percent, discounted take 130.9259 percent; total oil 1000000.00 bbl; working_interest_pct 50; unrecovered cost at cessation not reported.
+| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_cost_pool_after | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl | abandonment_cost |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2030 | 50000000.00 | 5000000.00 | 5000000.00 | 40000000.00 | 13500000.00 | 6750000.00 | -20250000.00 | 27000000.00 | 50.000000 | -20250000.00 | -20250000.00 | 500000.00 | null |
+| 2031 | 50000000.00 | 5000000.00 | 5000000.00 | 0.00 | 13500000.00 | 6750000.00 | 9750000.00 | 14000000.00 | 50.000000 | 8863636.36 | -10500000.00 | 500000.00 | 10000000.00 |
+KPIs: NPV -11386363.64 USD, IRR -51.8519 percent, payback Beyond project life (null years), discounted payback null years, DPI -0.284659, take 126.2500 percent, discounted take 130.9259 percent; total oil 1000000.00 bbl; working_interest_pct 50; unrecovered cost at cessation 14000000.00.
 
 ### applyPSC on one year, the cap moving
 
@@ -704,18 +704,18 @@ The tranche table of psc_tranches read at cumulative liquids of 0, 999999, 10000
 ### AKATA under production sharing terms
 
 Config additions: psc_royalty_pct 10, psc_cost_oil_cap_pct 60, psc_contractor_profit_share_pct 45, psc_tax_rate_pct 50. Everything else as AKATA.
-| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2029 | 186032000.00 | 18603200.00 | 24000000.00 | 210000000.00 | 30137184.00 | 15068592.00 | -118474128.00 | 45.000000 | -118474128.00 | -118474128.00 | 2200000.00 |
-| 2030 | 159564720.00 | 15956472.00 | 24720000.00 | 45000000.00 | 25849484.64 | 12924742.32 | 29369691.12 | 45.000000 | 26699719.20 | -89959864.78 | 1850000.00 |
-| 2031 | 136363147.20 | 13636314.72 | 25461600.00 | 0.00 | 22090829.85 | 11045414.92 | 59219914.41 | 45.000000 | 48942078.03 | -34139415.71 | 1550000.00 |
-| 2032 | 116656473.02 | 11665647.30 | 26225448.00 | 0.00 | 18898348.63 | 9449174.31 | 46218221.75 | 45.000000 | 34724434.07 | 8156804.43 | 1300000.00 |
-| 2033 | 99768205.16 | 9976820.52 | 27012211.44 | 0.00 | 16162449.24 | 8081224.62 | 34943843.96 | 45.000000 | 23867115.61 | 39203957.20 | 1090000.00 |
-| 2034 | 85892186.90 | 8589218.69 | 27822577.78 | 0.00 | 19884953.47 | 9942476.74 | 15234081.67 | 45.000000 | 9459166.15 | 52345009.87 | 920000.00 |
-| 2035 | 73325786.51 | 7332578.65 | 28657255.12 | 0.00 | 16801178.74 | 8400589.37 | 8400589.37 | 45.000000 | 4741913.70 | 59380371.21 | 770000.00 |
-KPIs: NPV 29960298.75 USD, IRR 19.8650 percent, payback 3.65 years (3.646596 years), discounted payback 4.339710 years, DPI 0.119407, take 82.1085 percent, discounted take 90.1534 percent; unrecovered cost at cessation not reported.
+| year | gross_revenue | royalty | opex | capex | taxable_income | tax | net_cash_flow | psc_cost_pool_after | psc_contractor_share_pct | discounted_cash_flow | cumulative_cash_flow | oil_bbl |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2029 | 186032000.00 | 18603200.00 | 24000000.00 | 210000000.00 | 30137184.00 | 15068592.00 | -118474128.00 | 133542720.00 | 45.000000 | -118474128.00 | -118474128.00 | 2200000.00 |
+| 2030 | 159564720.00 | 15956472.00 | 24720000.00 | 45000000.00 | 25849484.64 | 12924742.32 | 29369691.12 | 117097771.20 | 45.000000 | 26699719.20 | -89959864.78 | 1850000.00 |
+| 2031 | 136363147.20 | 13636314.72 | 25461600.00 | 0.00 | 22090829.85 | 11045414.92 | 59219914.41 | 68923271.71 | 45.000000 | 48942078.03 | -34139415.71 | 1550000.00 |
+| 2032 | 116656473.02 | 11665647.30 | 26225448.00 | 0.00 | 18898348.63 | 9449174.31 | 46218221.75 | 32154224.28 | 45.000000 | 34724434.07 | 8156804.43 | 1300000.00 |
+| 2033 | 99768205.16 | 9976820.52 | 27012211.44 | 0.00 | 16162449.24 | 8081224.62 | 34943843.96 | 5291604.93 | 45.000000 | 23867115.61 | 39203957.20 | 1090000.00 |
+| 2034 | 85892186.90 | 8589218.69 | 27822577.78 | 0.00 | 19884953.47 | 9942476.74 | 15234081.67 | 0.00 | 45.000000 | 9459166.15 | 52345009.87 | 920000.00 |
+| 2035 | 73325786.51 | 7332578.65 | 28657255.12 | 0.00 | 16801178.74 | 8400589.37 | 8400589.37 | 0.00 | 45.000000 | 4741913.70 | 59380371.21 | 770000.00 |
+KPIs: NPV 29960298.75 USD, IRR 19.8650 percent, payback 3.65 years (3.646596 years), discounted payback 4.339710 years, DPI 0.119407, take 82.1085 percent, discounted take 90.1534 percent; unrecovered cost at cessation 0.00.
 
-THE ROWS DO NOT CARRY THE POOL. A PSC row reports royalty, taxable income (the contractor profit oil), tax and net cash flow, and nothing about how much cost was recovered or how much is still carried; no KPI reports the pool left at cessation either. The pool below is read by marching the engine's own applyPSC over the rows the engine produced, year by year, with the carried amount handed forward exactly as computeCashFlow does internally.
+THE ROWS CARRY THE POOL BUT NOT THE RECOVERY. A PSC row reports royalty, taxable income (the contractor profit oil), tax, net cash flow and psc_cost_pool_after, the cost still carried at the year end, and kpis.psc_unrecovered_cost_at_cessation reports the pool left when the field stops; no column prints how much cost was recovered in a year. The recovery below is read by marching the engine's own applyPSC over the rows the engine produced, year by year, with the carried amount handed forward exactly as computeCashFlow does internally; the marched pool equals psc_cost_pool_after on every row.
 
 - cost oil cap 30 percent: NPV -104151944.05, IRR -21.3161 percent, payback Beyond project life, take 120.4874 percent, tax by year 26370036.00, 22618299.06, 19329476.12, 16536055.05, 14142143.08, 12175217.49, 10393930.24; cost recovered by year (applyPSC march) 50228640.00, 43082474.40, 36818049.74, 31497247.72, 26937415.39, 23190890.46, 19797962.36; pool carried at each year end 183771360.00, 210408885.60, 199052435.86, 193780636.14, 193855432.19, 198487119.51, 207346412.26.
 - cost oil cap 45 percent: NPV -31510890.38, IRR 0.9150 percent, payback 6.57 years, take 99.0577 percent, tax by year 20719314.00, 17771520.69, 15187445.52, 12992614.68, 11111683.85, 9566242.32, 8166659.47; cost recovered by year (applyPSC march) 75342960.00, 64623711.60, 55227074.62, 47245871.57, 40406123.09, 34786335.69, 29696943.54; pool carried at each year end 158657040.00, 163753328.40, 133987853.78, 112967430.21, 99573518.56, 92609760.65, 91570072.23.

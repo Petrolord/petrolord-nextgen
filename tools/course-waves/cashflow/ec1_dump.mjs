@@ -103,7 +103,7 @@ const withCfg = (c, patch) => ({ ...clone(c), cfg: { ...clone(c.cfg), ...patch }
 const kpiLine = (k) => `NPV ${m(k.npv)} USD, IRR ${k.irr === null ? 'null' : p(k.irr) + ' percent'}, payback ${k.payback} (${k.payback_years === null ? 'null' : r(k.payback_years)} years), discounted payback ${k.discounted_payback_years === null ? 'null' : r(k.discounted_payback_years)} years, DPI ${k.dpi === null || k.dpi === undefined ? 'null' : r(k.dpi)}, take ${k.government_take_pct === null || k.government_take_pct === undefined ? 'null' : p(k.government_take_pct) + ' percent'}, discounted take ${k.government_take_pct_discounted === null || k.government_take_pct_discounted === undefined ? 'null' : p(k.government_take_pct_discounted) + ' percent'}`;
 
 const JV_COLS = ['year', 'oil_bbl', 'gas_mscf', 'condensate_bbl', 'applied_oil_price', 'gross_revenue', 'royalty', 'opex', 'capex', 'depreciation', 'taxable_income', 'loss_offset_used', 'loss_carryforward', 'tax', 'net_cash_flow', 'real_net_cash_flow', 'discounted_cash_flow', 'cumulative_cash_flow'];
-const PSC_COLS = ['year', 'gross_revenue', 'royalty', 'opex', 'capex', 'taxable_income', 'tax', 'net_cash_flow', 'cumulative_unrecovered_cost_after', 'psc_contractor_share_pct', 'itc_used', 'itc_carryforward', 'discounted_cash_flow', 'cumulative_cash_flow'];
+const PSC_COLS = ['year', 'gross_revenue', 'royalty', 'opex', 'capex', 'taxable_income', 'tax', 'net_cash_flow', 'psc_cost_pool_after', 'psc_contractor_share_pct', 'psc_itc_used', 'psc_itc_carryforward', 'discounted_cash_flow', 'cumulative_cash_flow'];
 const PIA_COLS = ['year', 'oil_bbl', 'condensate_bbl', 'gas_mscf', 'applied_oil_price', 'gross_revenue', 'production_royalty', 'price_royalty', 'royalty', 'hcdt', 'nddc', 'opex', 'capex', 'cpr_cap', 'cpr_costs_claimed', 'cpr_deferred_to_next', 'hct_assessable_profit', 'production_allowance', 'prod_alw_eligible_bbl', 'prod_alw_cap_applied', 'hct_chargeable_profit', 'hct_loss_offset_used', 'hct_loss_carryforward', 'hct_tax', 'cit_assessable_profit', 'cit_chargeable_profit', 'cit_loss_offset_used', 'cit_loss_carryforward', 'cit_tax', 'tet_tax', 'dev_levy_tax', 'tax', 'net_cash_flow', 'real_net_cash_flow', 'discounted_cash_flow', 'cumulative_cash_flow', 'fiscal_framework', 'cumulative_oil_bbl_lifetime'];
 const fmtCell = (k, x) => {
   if (x === null || x === undefined) return 'null';
@@ -486,7 +486,7 @@ for (const name of ['psc_carryforward', 'psc_tranches', 'psc_tranches_prior_cumu
   w(`${noteOf(c)}`);
   w(`Config: ${cfgLine(DP(c.cfg))}. Production ${rowsLine(c.prodRows)}. Capex ${rowsLine(c.capexRows)}. Opex ${rowsLine(c.opexRows)}.`);
   table(res.cashFlowData, [...PSC_COLS, 'oil_bbl', 'decom_fund_contribution', 'abandonment_cost', 'abandonment_cost_funded']);
-  w(`KPIs: ${kpiLine(res.kpis)}; total oil ${v(res.kpis.total_oil_bbl)} bbl; working_interest_pct ${res.kpis.working_interest_pct ?? 'not reported'}; unrecovered cost at cessation ${res.kpis.unrecovered_cost_at_cessation === undefined ? 'not reported' : m(res.kpis.unrecovered_cost_at_cessation)}.`);
+  w(`KPIs: ${kpiLine(res.kpis)}; total oil ${v(res.kpis.total_oil_bbl)} bbl; working_interest_pct ${res.kpis.working_interest_pct ?? 'not reported'}; unrecovered cost at cessation ${res.kpis.psc_unrecovered_cost_at_cessation === undefined ? 'not reported' : m(res.kpis.psc_unrecovered_cost_at_cessation)}.`);
   w();
 }
 w('### applyPSC on one year, the cap moving');
@@ -513,9 +513,9 @@ w();
   const res = run(PSC);
   w(`Config additions: psc_royalty_pct 10, psc_cost_oil_cap_pct 60, psc_contractor_profit_share_pct 45, psc_tax_rate_pct 50. Everything else as AKATA.`);
   table(res.cashFlowData, [...PSC_COLS, 'oil_bbl']);
-  w(`KPIs: ${kpiLine(res.kpis)}; unrecovered cost at cessation ${res.kpis.unrecovered_cost_at_cessation === undefined ? 'not reported' : m(res.kpis.unrecovered_cost_at_cessation)}.`);
+  w(`KPIs: ${kpiLine(res.kpis)}; unrecovered cost at cessation ${res.kpis.psc_unrecovered_cost_at_cessation === undefined ? 'not reported' : m(res.kpis.psc_unrecovered_cost_at_cessation)}.`);
   w();
-  w('THE ROWS DO NOT CARRY THE POOL. A PSC row reports royalty, taxable income (the contractor profit oil), tax and net cash flow, and nothing about how much cost was recovered or how much is still carried; no KPI reports the pool left at cessation either. The pool below is read by marching the engine\'s own applyPSC over the rows the engine produced, year by year, with the carried amount handed forward exactly as computeCashFlow does internally.');
+  w('THE ROWS CARRY THE POOL BUT NOT THE RECOVERY. A PSC row reports royalty, taxable income (the contractor profit oil), tax, net cash flow and psc_cost_pool_after, the cost still carried at the year end, and kpis.psc_unrecovered_cost_at_cessation reports the pool left when the field stops; no column prints how much cost was recovered in a year. The recovery below is read by marching the engine\'s own applyPSC over the rows the engine produced, year by year, with the carried amount handed forward exactly as computeCashFlow does internally; the marched pool equals psc_cost_pool_after on every row.');
   w();
   for (const cap of [30, 45, 60, 80, 100]) {
     const res2 = run(withCfg(PSC, { psc_cost_oil_cap_pct: cap })); const k = res2.kpis;
