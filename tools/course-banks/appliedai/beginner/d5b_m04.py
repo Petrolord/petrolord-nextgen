@@ -10,8 +10,8 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # term by term, the (k1 + 1) numerator choice, and the rankBm25 refusals.
 # Every figure is printed in the digest.
 
-q(1, "On the hand set, oil is in 2 of the 5 passages. What is its BM25 idf?",
- "0.875469, from ln(1 + (5 - 2 + 0.5) / (2 + 0.5))",
+q(1, "System A weights each matched word by the Lucene idf. Over the five stated passages, with df 2, what weight does oil get?",
+ "0.875469, adding 1 to (5 - 2 + 0.5) / (2 + 0.5) before the logarithm",
  ["1.693147, the smoothed idf that scikit-learn uses",
   "0.241162, the idf the six stated saturation passages give the word oil when b is set to 0",
   "0.707107, oil's weight in the unit query vector"],
@@ -38,7 +38,7 @@ q(2, "oil appears twice in d1 and twice in d3, yet contributes 1.095514 to d1 an
   "d3 ranks second, and each rank below the first loses a fixed share of every contribution it has"],
  "With the same tf and the same idf, the only difference is length: d3 has 12 tokens and d1 has 10, against an average of 7.400000, and the length term tf + k1 (1 - b + b dl / avgdl) grows with dl. The idf belongs to the word across the corpus, rates is a different token with nothing deducted, and rank is an outcome of the score."),
 
-q(3, "At k1 = 0, what do d1 and d3 score for \"oil rate\" on the hand set?",
+q(3, "With k1 set to 0, how do d1 and d3 compare for \"oil rate\"?",
  "1.750937 each, the sum of their matched terms' idf",
  ["0 each, since k1 = 0 switches the term weighting off entirely and every score collapses to nothing",
   "2.191027 and 1.722606, as k1 affects only passages longer than the average length",
@@ -66,7 +66,7 @@ q(2, "What does the engine return for b = 1.5?",
   "Scores that mark long passages down harder than b = 1 does, by half again"],
  "b must lie from 0 to 1, and a value outside is refused naming `b` in the engine's words \"b must be a number from 0 to 1 (0 removes length normalisation)\". The engine never clips silently. The k1 message is the refusal for a negative k1, and no score is computed for a refused b."),
 
-q(3, "On the hand set, BM25 scores \"oil oil rate\". What does d1 score?",
+q(3, "BM25 is handed \"oil oil rate\" over the five stated passages. What is d1's score?",
  "2.191027, exactly the score of \"oil rate\", since a repeated query word counts once",
  ["More than 2.191027, as the repeated oil adds its 1.095514 a second time",
   "0.679173, the cosine TF-IDF gives the same query",

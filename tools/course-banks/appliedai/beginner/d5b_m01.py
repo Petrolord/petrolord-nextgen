@@ -88,7 +88,7 @@ q(0, "A call asks `retrieve` for a method this engine does not offer. What is th
  "The refusal names `method`, and the engine's own words are \"method must be 'bm25' or 'tfidf'\". The engine never substitutes a method or returns an unranked list in place of a refusal. \"query must be a string\" is the refusal for a query that is not text, a different input."),
 
 q(1, "The query helicopter is run by BM25 on the Ekene passages, and no passage contains the word. What comes back?",
- "A result with no ranking and the note \"no document contains a query term, so no document is ranked\"",
+ "It runs and returns the note \"no document contains a query term, so no document is ranked\"",
  ["A refusal naming `query`, with the message \"query must be a string\", because the word is unknown to the corpus vocabulary",
   "A ranking of all 60 passages at score 0, in id order",
   "The five shortest passages, since each scores the same when nothing matches"],

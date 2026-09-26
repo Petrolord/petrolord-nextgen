@@ -1,9 +1,9 @@
 [
  {
-  "prompt": "On the hand set, oil is in 2 of the 5 passages. What is its BM25 idf?",
+  "prompt": "System A weights each matched word by the Lucene idf. Over the five stated passages, with df 2, what weight does oil get?",
   "options": [
    "1.693147, the smoothed idf that scikit-learn uses",
-   "0.875469, from ln(1 + (5 - 2 + 0.5) / (2 + 0.5))",
+   "0.875469, adding 1 to (5 - 2 + 0.5) / (2 + 0.5) before the logarithm",
    "0.241162, the idf the six stated saturation passages give the word oil when b is set to 0",
    "0.707107, oil's weight in the unit query vector"
   ],
@@ -44,7 +44,7 @@
   "explanation": "With the same tf and the same idf, the only difference is length: d3 has 12 tokens and d1 has 10, against an average of 7.400000, and the length term tf + k1 (1 - b + b dl / avgdl) grows with dl. The idf belongs to the word across the corpus, rates is a different token with nothing deducted, and rank is an outcome of the score."
  },
  {
-  "prompt": "At k1 = 0, what do d1 and d3 score for \"oil rate\" on the hand set?",
+  "prompt": "With k1 set to 0, how do d1 and d3 compare for \"oil rate\"?",
   "options": [
    "0 each, since k1 = 0 switches the term weighting off entirely and every score collapses to nothing",
    "2.191027 and 1.722606, as k1 affects only passages longer than the average length",
@@ -88,7 +88,7 @@
   "explanation": "b must lie from 0 to 1, and a value outside is refused naming `b` in the engine's words \"b must be a number from 0 to 1 (0 removes length normalisation)\". The engine never clips silently. The k1 message is the refusal for a negative k1, and no score is computed for a refused b."
  },
  {
-  "prompt": "On the hand set, BM25 scores \"oil oil rate\". What does d1 score?",
+  "prompt": "BM25 is handed \"oil oil rate\" over the five stated passages. What is d1's score?",
   "options": [
    "More than 2.191027, as the repeated oil adds its 1.095514 a second time",
    "0.679173, the cosine TF-IDF gives the same query",

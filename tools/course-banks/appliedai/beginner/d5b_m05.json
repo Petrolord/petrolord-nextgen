@@ -77,15 +77,15 @@
   "explanation": "a, b and d are relevant at grade 1 or more, c is grade 0 and x is unjudged, which counts as grade 0: 3 relevant in the top 5, over 5, is 0.600000. 0.750000 is the recall, 3 over the 4 relevant judged. x was never judged, and a judged passage at grade 0 is still not relevant."
  },
  {
-  "prompt": "For the same stated ranking, why is the recall at 5 0.750000?",
+  "prompt": "Which judged passage keeps the stated list's recall at 5 below 1.000000?",
   "options": [
-   "x is unjudged and counts as relevant, so 3 of 4 are found",
-   "Recall divides by k and one place is empty",
-   "e is relevant and was never retrieved, so 3 of the 4 relevant passages are in the top 5",
-   "c is graded 0 and so it is subtracted from the count"
+   "x, which nobody judged and which counts as grade 0 in the top 5",
+   "c, heading the list at grade 0",
+   "e, graded 2 and missing from the list",
+   "d, at grade 1"
   ],
   "answer": 2,
-  "explanation": "Recall is relevant in the top 5 over relevant judged. The judged relevant passages are a, b, d and e; e was not retrieved, so recall is 3 / 4, 0.750000. Unjudged x counts as grade 0, recall divides by the relevant judged (precision is the one that divides by k), and a grade 0 passage is simply not counted."
+  "explanation": "Recall asks how many of the relevant judged passages made the top 5. a, b, d and e clear grade 1, and e never appears in the list, so 3 of 4 are found, 0.750000. x and c sit in the list without being relevant, which lowers precision and leaves recall alone, and d's grade 1 counts in full at the default threshold."
  },
  {
   "prompt": "In the stated ranking, what is the reciprocal rank?",

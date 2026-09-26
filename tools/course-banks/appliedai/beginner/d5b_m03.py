@@ -53,7 +53,7 @@ q(0, "The hand-set passage d5 is empty. What happens to it in TF-IDF?",
   "It takes the mean vector of the other four passages, so it can still be matched"],
  "d5 has no tokens, every weight is 0 and its norm is 0; a vector of zeros cannot be scaled to length 1 and it can never rank. The empty-vocabulary refusal applies only when no passage in the call holds a token, and the engine invents no weights for an empty passage."),
 
-q(3, "For \"oil rate\" on the hand set, what cosine does d1 score, and how is it made?",
+q(3, "Ranked by TF-IDF cosine against the two-word query \"oil rate\", which figure does d1 reach, and from which products?",
  "0.715911, from 0.707107 x 0.506225 twice, summed",
  ["2.191027, the sum of d1's two matched terms, oil and rate, each weighted by BM25",
   "1.000000, since both of the query's words are in d1 and a full match scores 1",
