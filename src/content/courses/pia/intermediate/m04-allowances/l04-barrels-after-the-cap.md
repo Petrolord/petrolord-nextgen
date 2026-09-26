@@ -13,7 +13,7 @@ The Sixth Schedule para 1(2)(a) ends: "and the lower of US $4.00 per barrel and 
 | onshore | 75.000000 | 60000000 | 4000000.000000 | 1000000 |
 | onshore | 15.000000 | 60000000 | 3000000.000000 | 1000000 |
 
-At 15 USD/bbl, 20 percent of the price is 3.00, lower than 4.00, so the price leg applies after the cap too.
+At 15 USD/bbl, 20 percent of the price is 3 USD, lower than 4.00, so the price leg applies after the cap too.
 
 ## A lease that crosses inside the ledger
 

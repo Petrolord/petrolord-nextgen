@@ -41,6 +41,6 @@ A lower daily rate means a lower weighted royalty rate, which means a smaller ro
 
 Work in the course's own hydrocarbon tax calculator, which calls the same engine.
 
-1. Open "The tax base and the cost price ratio on a ledger" and start from ekene_alpha_shallow_converted_nta. Find the daily rate note in the engine notes under the table and read it against the quotation above.
-2. Set every `condensate_bbl` in `prodRows` to 0. Compare the 2026 HCT assessable profit with 182041059.069891. Name the two things the change removed from that line.
+1. Open "The tax base and the cost price ratio on a ledger" and start from ekene_alpha_shallow_converted_nta. Read the 2026 daily rate, 8320.000000 bopd, in the first table, and find the daily rate note in the engine notes under the tables. Read it against the quotation above.
+2. Set every `condensate_bbl` in `prodRows` to 0. Read the new 2026 daily rate and liquids royalty rate, and compare the 2026 HCT assessable profit with 182041059.069891. Name the two things the change removed from that line.
 3. Restore the case. Suppose Alpha had produced its 2026 barrels in nine months only. Which reading, the Regulations' monthly one or the engine's annual one, gives the higher daily rate, and in which direction would the royalty move?

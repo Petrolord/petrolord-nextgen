@@ -12,18 +12,18 @@ The capstone card carries one case file: the terms (`cfg`) and the production, c
 
 | value | what it tests | where to find it |
 | --- | --- | --- |
-| the crude oil and condensate production royalty rate in a stated year, as a fraction | the tranches and the daily rate | the year's daily rate, entered in "Royalty by terrain and daily rate" |
-| the production royalty on liquids and gas in a stated year | the rate applied to value, and the gas rate | the liquids rate times the liquids value, plus the gas rate times the gas value, at the share |
-| the hydrocarbon tax in a stated year | reading one line of the stack | the ledger table |
-| the development levy in a stated year | the education charge of a year under the Nigeria Tax Act 2025 | the ledger table |
+| the crude oil and condensate production royalty rate in a stated year, as a fraction | the tranches and the daily rate | the liquids royalty rate column |
+| the production royalty on liquids and gas in a stated year | the rate applied to value, and the gas rate | the production royalty column |
+| the hydrocarbon tax in a stated year | reading one line of the stack | the HCT column |
+| the development levy in a stated year | the education charge of a year under the Nigeria Tax Act 2025 | the development levy column |
 | companies income tax over the life of the ledger | the whole-profit tax | the total companies income tax tile |
 | the government take, undiscounted, in percent | the take by provision | the government take tile |
 
 All six are reported to six decimals.
 
-## Working the royalty values
+## Reading the royalty values
 
-The first two values ask for more than a read. For the rate, add the year's crude oil and condensate from the rows, divide by the calendar days of that year, and enter the result as the daily rate with the case's terrain. For the production royalty, the liquids are valued at their own prices and the gas at its price, each royalty rate is applied to its value, and the result is scaled to the working interest share as the cash flow course scales every money line. The production royalty excludes the royalty by price.
+Every value is printed on the panel, so the work is reading the right column and knowing why it holds that number. The first royalty table gives, for each year, the daily rate the tranches read (the year's crude oil and condensate over its calendar days), the liquids royalty rate that daily rate earns, the royalty on liquids and on gas, their sum as the production royalty, and the royalty by price beside them. The production royalty excludes the royalty by price, which has its own column. The second table carries HCDT, the NDDC levy and the taxes. Before you copy a figure, check that its row is the year the card names and that the year's framework is the one you expect.
 
 ## Practise on Ekene Alpha
 
@@ -31,4 +31,4 @@ Alpha's figures are printed in this course, so it is a safe place to rehearse. F
 
 ## Exercise
 
-Open the royalty calculator. Run ekene_alpha_shallow_converted_nta in "The instruments stacked on a ledger" and work all six values for the year 2027: compute the daily rate from the rows and read the rate in "Royalty by terrain and daily rate", build the production royalty on liquids and gas and check it against the two figures above, read the hydrocarbon tax and the development levy from the table, and read the two tiles. Then repeat on ekene_alpha_wi_50 and check that every money value halves while the rate and the take hold.
+Open the royalty calculator. Run ekene_alpha_shallow_converted_nta in "The instruments stacked on a ledger" and read all six values for the year 2027: the daily rate and the liquids royalty rate from the first table, then check the rate in "Royalty by terrain and daily rate" by entering that daily rate; the production royalty, and check it is the liquids and gas royalties added together; the hydrocarbon tax and the development levy from the second table; and the two tiles. Then repeat on ekene_alpha_wi_50 and check that every money value halves while the rate and the take hold.

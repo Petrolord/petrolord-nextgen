@@ -17,7 +17,7 @@ A tranche scale is only as clear as its edges. Every edge raises the same two qu
 
 Read each row on its own.
 
-The first tranche includes its edge. At 5,000 bopd onshore and shallow water pay exactly 5 percent; at 5,001 the one barrel past the edge pays 7.5 percent and the weighted rate moves to 0.050005.
+The first tranche includes its edge. At 5,000 bopd onshore and shallow water pay exactly 5 percent; at 5001 bopd the one barrel past the edge pays 7.5 percent and the weighted rate moves to 0.050005.
 
 At 10,000 bopd both terrains pay exactly 6.250000 percent, the average of the two small-field tranches. Just past it the terrain rate enters for the barrels over 10,000, and the terrains part: onshore at 0.062509 and shallow water at 0.062506, because 15 percent pulls harder than 12.5.
 

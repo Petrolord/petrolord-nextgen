@@ -1510,5 +1510,32 @@
   "paraphrase": "The NTA sets royalty by price at 10% at US $150 per barrel and above.",
   "found": true,
   "note": "Wording differs from the PIA ('above US $150') but gives the same rate at every price."
+ },
+ {
+  "id": "pia_chapter4_fiscal_framework",
+  "text": "PIA",
+  "cite": "PIA arrangement of sections, Chapter 4",
+  "quote": "CHAPTER 4—PETROLEUM INDUSTRY FISCAL FRAMEWORK PART I—OBJECTIVES AND ADMINISTRATION 258. Objectives. 259. Administration. PART II—HYDROCARBON TAX 260. Application of this Part.",
+  "paraphrase": "Chapter 4 of the Act is its fiscal framework: Part I sets its objectives and administration and Part II is the hydrocarbon tax.",
+  "found": true,
+  "note": "Added at the foundation touch-up (2026-09-26). The arrangement lists Parts I to X of Chapter 4 through s.302."
+ },
+ {
+  "id": "nta_part2_ppt_heading",
+  "text": "NTA",
+  "cite": "NTA Part II heading (before s.90)",
+  "quote": "PART II - PETROLEUM PROFITS TAX IMPOSITION OF TAX AND ASCERTAINMENT OF CHARGEABLE PROFITS",
+  "paraphrase": "The Nigeria Tax Act carries its own Part on petroleum profits tax.",
+  "found": true,
+  "note": "Added at the foundation touch-up (2026-09-26)."
+ },
+ {
+  "id": "nta_s90_unconverted",
+  "text": "NTA",
+  "cite": "NTA s.90(1)",
+  "quote": "90. (1) This Part shall apply to oil prospecting licences and oil mining petroleum leases that are yet to convert under the provisions of the Petroleum Industry",
+  "paraphrase": "That Part applies to oil prospecting licences and oil mining leases that have not yet converted under the Petroleum Industry Act.",
+  "found": true,
+  "note": "Added at the foundation touch-up (2026-09-26). The word 'petroleum' after 'oil mining' is a side note the text layer interleaves; quoted as extracted."
  }
 ]

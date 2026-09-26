@@ -70,8 +70,12 @@ module or a dashboard for this course.
 2. **Licensed texts are never quoted.** Model contracts sold under licence and
    paid commentary are taught by concept only.
 3. **Only public texts are quoted, with their citation**, and a quotation is
-   short and exact: quote the digest's section 24 row, which prints the text
-   verbatim (each dash the gazette prints shown as a colon).
+   short and exact: quote the digest row that prints the text (each dash the
+   gazette prints shown as a colon). The royalty texts sit beside the royalty
+   sections (9 to 11) and the texts behind the stack beside it (12), all owned by
+   the Associate tier; the conversion texts sit in section 5 and the
+   institutions in section 4; every other text is in section 24, owned by the
+   Professional and Expert tiers. Quote a text from the section your tier owns.
 4. **No legal threshold, rate or schedule value is invented.** Every figure the
    engine applies is cited in the digest. A figure a lesson needs that the
    digest does not print is not written.

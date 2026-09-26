@@ -49,9 +49,11 @@ const leaves = (v, at = '') => {
   if (v && typeof v === 'object') return Object.entries(v).flatMap(([k, x]) => leaves(x, `${at}.${k}`));
   return [];
 };
+// The digest prints a figure of sixteen or more significant digits comma-grouped.
+const grouped = (t) => { const [i, d] = t.split('.'); return `${i.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}${d === undefined ? '' : `.${d}`}`; };
 const printed = (x) => {
-  const cands = [x.toFixed(6), ...(Number.isInteger(x) ? [String(x)] : [])];
-  return cands.some((c) => new RegExp(`(?<![\\d.])${c.replace('.', '\\.')}(?![\\d])`).test(DIGEST));
+  const cands = [x.toFixed(6), grouped(x.toFixed(6)), ...(Number.isInteger(x) ? [String(x)] : [])];
+  return cands.some((c) => new RegExp(`(?<![\\d.,])${c.replace('.', '\\.')}(?![\\d])`).test(DIGEST));
 };
 const f6 = (x) => (x === null ? 'null' : x.toFixed(6));
 

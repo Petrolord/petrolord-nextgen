@@ -23,7 +23,7 @@ For one stated year of one million barrels at 75 USD/bbl and no earlier producti
 | new | frontier | nta_2025 | 0.000000 |
 | converted | shallow_water | nta_2025 | 2500000.000000 |
 
-On the Ekene deep offshore lease (synthetic; new acreage, 21,900,000 barrels a year, 2025 to 2027) the production allowance is 175200000.000000 in 2025 and 0.000000 in 2026. The switch is the whole explanation: the barrels and the price are the same in both years.
+On the Ekene deep offshore lease (synthetic; new acreage, 21900000 barrels a year, 2025 to 2027) the production allowance is 175200000.000000 in 2025 and 0.000000 in 2026. The switch is the whole explanation: the barrels and the price are the same in both years.
 
 ## Why the allowance barely shows under one reading
 
@@ -31,4 +31,4 @@ Under the conservative reading, a deep offshore lease pays no hydrocarbon tax in
 
 ## Exercise
 
-Open the ledger calculator on "The whole ledger, year by year" and load ekene_deep_new_60k_aggressive. Read the hydrocarbon tax in 2025, 2026 and 2027, and explain the 2025 figure from PIA s.260(3). Switch to "Which provision moved", load the same case and enter {"pia_lease_status": "converted"} as the change. Explain from the two Sixth Schedules which years the change can touch and why the sign of the hydrocarbon tax difference is what it is. Then repeat with ekene_deep_new_60k_conservative and explain the difference you see.
+Open the ledger calculator on "The whole ledger, year by year" and load ekene_deep_new_60k_conservative. Read the production allowance column: 175200000.000000 in 2025 and 0.000000 in 2026. Read the HCT chargeable profit beside it and name the provision that removes a line from its 2026 base. Load ekene_deep_new_60k_aggressive, read the hydrocarbon tax in 2025, 2026 and 2027, and explain the 2025 figure from PIA s.260(3). Switch to "Which provision moved", load the same case and enter {"pia_lease_status": "converted"} as the change. Explain from the two Sixth Schedules which years the change can touch and why the sign of the hydrocarbon tax difference is what it is.

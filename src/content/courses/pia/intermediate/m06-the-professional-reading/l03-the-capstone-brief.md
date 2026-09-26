@@ -25,7 +25,7 @@ The capstone runs its own synthetic lease, with its own name, terms and rows. No
 
 Read the stated terms before any figure: terrain, licence, lease status, the working interest, the prices, the preceding year's opex for the first year's HCDT, and the barrels produced before the ledger, which place the field against its allowance cap. Every money value is at the stated share; the tranches, the cap and the allowances are read at field level first. Scaling to the share is the cash flow course's arithmetic and the engine does it for you.
 
-Name the part before you read the royalty: the graded royalty is the production royalty on crude oil and condensate alone, the engine's `liquids_production_royalty`, with the gas royalty and the royalty by price left out. For the carry, read the "CPR carried out" column in the stated year, and for the forfeiture the "Forfeited at cessation" tile. For companies income tax over the life, take every year of the ledger.
+Every graded figure is printed on the panel. Name the part before you read the royalty: the graded royalty is the production royalty on crude oil and condensate alone, the "liquids production royalty" column of the tax base view, with the gas royalty and the royalty by price in their own columns beside it. The production allowance and the chargeable profit are columns of the second table on the same view. For the carry, read the "CPR carried out" column in the stated year, and for the forfeiture the "Forfeited at cessation" tile. For companies income tax over the life, paste the case into the income tax view and read the "Total companies income tax" tile.
 
 Keep every figure at full precision until the end and report six decimals. A note in `kpis.pia_notes` is part of a result. A refusal names the input it could not use, and the fix is in the terms.
 
@@ -35,5 +35,5 @@ Before you open the capstone, rerun these Ekene figures in the hydrocarbon tax c
 
 1. ekene_onshore_new_cap_crossing: the 2026 production allowance, 16000000.000000, and the 2026 chargeable profit, 151411548.913043.
 2. ekene_cpr_binding_forfeiture: the cost carried out of 2025, 52250000.000000, and the cost forfeited at cessation, 93000000.000000.
-3. ekene_onshore_across_2026: companies income tax in 2024, 40626775.230871, and in 2025, 36126841.671286.
+3. ekene_onshore_across_2026: companies income tax in 2024, 40626775.230871, and in 2025, 36126841.671286, and the total companies income tax tile beside them.
 4. For each of the six graded quantities, write the input you will check first.

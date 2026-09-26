@@ -2,7 +2,7 @@
 
 {{panel:pia-ledger-calculator}}
 
-A field does not stop producing on 31 December 2025. A ledger that starts under the Petroleum Industry Act 2021 and runs on into 2026 crosses from one set of texts to another part way through its life. The engine handles that by reading the framework one year of assessment at a time. This is one of the engine's declared choices, and every figure in this tier that crosses the switch depends on it.
+A field does not stop producing at the end of 2025. A ledger that starts under the Petroleum Industry Act 2021 and runs on into 2026 crosses from one set of texts to another part way through its life. The engine handles that by reading the framework one year of assessment at a time. This is one of the engine's declared choices, and every figure in this tier that crosses the switch depends on it.
 
 ## The rule
 

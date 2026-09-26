@@ -104,6 +104,15 @@ RUNS = [
     ('gen_course.py (self checks)', f'{HERE}/gen_course.py', ['python3', f'{HERE}/gen_course.py'], 0),
 ]
 
+# THE LESSON STAGE adds the kit's lesson sweeps: every lesson literal against
+# the digest by tier range (no forward reach), and the graded-answer leakage
+# audit per tier.
+if STAGE in ('lessons', 'banks', 'full'):
+    LESSONS = f'{REPO}/src/content/courses/pia'
+    RUNS.append(('litsweep.py --lessons-only', f'{KIT}/litsweep.py', ['python3', f'{KIT}/litsweep.py', HERE, '--lessons', LESSONS, '--lessons-only'], 0))
+    for tier in ('beginner', 'intermediate', 'advanced'):
+        RUNS.append((f'leakage.mjs lessons {tier}', f'{KIT}/leakage.mjs', ['node', f'{KIT}/leakage.mjs', HERE, '--tier', tier], 0))
+
 # THE BANK STAGE. EC7_STAGE=banks (or full) runs everything above AND every bank
 # gate over the 21 banks: each bank source re-emitted (bankkit gates inside),
 # the repository's check-bank-sources, and per prefix the length tails, the

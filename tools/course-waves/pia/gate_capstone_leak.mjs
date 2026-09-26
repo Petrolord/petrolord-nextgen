@@ -192,7 +192,8 @@ FIELDS.forEach(([, key, v]) => renderings(v).forEach((s) => {
 }));
 
 // 3. VALUES AS NUMBERS, five shiftings, ten tolerances
-const digestLits = literals(DIGEST.split('\n').filter((l) => !l.startsWith('#')).join('\n'));
+// A comma-grouped figure (1,012,073,369.565217) is ONE literal: the grouping commas are removed first.
+const digestLits = literals(DIGEST.split('\n').filter((l) => !l.startsWith('#')).join('\n').replace(/(\d),(?=\d{3}(?!\d))/g, '$1'));
 if (digestLits.length < 1000) die(`only ${digestLits.length} literals in the digest; an empty or half-written digest clears everything`);
 const SCALES = [1, 1e3, 1e-3, 1e2, 1e-2];
 const nearAnswer = (lits, label, dir) => FIELDS.forEach(([, key, v, tol]) => SCALES.forEach((sc) => {

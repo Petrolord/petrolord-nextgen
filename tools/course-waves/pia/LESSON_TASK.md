@@ -16,7 +16,10 @@ years, counts and whole barrels, Mscf and bopd inputs as whole numbers; an
 engine message and an engine note verbatim. A money figure may be written with
 its thousands grouped by commas, with the same digits the digest prints. A rule
 figure of a text (5 percent, 10,000 bopd, 65 percent) is written as the text
-states it, and the digest's section 24 prints the text.
+states it, and the digest prints the text beside the section that computes
+it (the royalty texts beside the royalty sections, every other text in the
+section of the quoted texts). A figure of sixteen or more significant digits is
+written with its thousands grouped by commas, as the digest prints it.
 
 ## WHAT A LESSON IS
 

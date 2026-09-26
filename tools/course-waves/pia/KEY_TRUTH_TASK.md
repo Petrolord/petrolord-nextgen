@@ -15,6 +15,10 @@ oracle and its golden, and the engine's source comments are PROVENANCE.
    `pia_engine.mjs`) for every keyed figure. Swap roles where the explanation
    supports a distractor.
 
+A figure of sixteen or more significant digits is written comma-grouped, as the
+digest prints it, and a quoted text comes from the digest section the tier owns
+(the royalty texts and the texts behind the stack are Associate material).
+
 ## THE DEFECT CLASSES TO READ FOR
 
 1. **A distractor that became true** under a setting the question did not rule

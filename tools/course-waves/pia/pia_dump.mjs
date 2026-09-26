@@ -58,7 +58,15 @@ const OUT = [];
 const w = (s = '') => OUT.push(s);
 const ASSERTS = [];
 const must = (claim, cond, detail) => { ASSERTS.push({ claim, pass: !!cond, detail: String(detail) }); return !!cond; };
-const f6 = (x) => (x === null || x === undefined ? 'none' : Number(x).toFixed(6));
+// A figure of sixteen or more significant digits at six decimals reads as a
+// serialised float, so it prints with its thousands grouped by commas; the
+// digits are the same.
+const group = (s) => { const [i, d] = s.split('.'); return `${i.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}${d === undefined ? '' : `.${d}`}`; };
+const f6 = (x) => {
+  if (x === null || x === undefined) return 'none';
+  const s = Number(x).toFixed(6);
+  return s.replace(/^-/, '').replace('.', '').replace(/^0+/, '').length > 15 ? group(s) : s;
+};
 const vol = (x) => (Number.isInteger(x) ? String(x) : Number(x).toFixed(6));
 const S = (x) => String(x);
 const list = (a) => a.join(', ');
@@ -269,7 +277,8 @@ const USED = new Set();
 // course prints each as a colon and changes nothing else (quote_check.py
 // applies the same rule when it compares).
 export const dashfix = (q) => q.replace(/\s*[\u2013\u2014]\s*/g, ': ');
-const cTable = (ids, status) => {
+const cTable = (ids0, status) => {
+  const ids = ids0.filter((id) => !USED.has(id));
   table(['citation', 'what it says (the course\'s paraphrase)', 'the text, verbatim', 'in the engine'], ids.map((id) => {
     const c = C(id); USED.add(id);
     return [c.cite, c.paraphrase, `"${dashfix(c.quote)}"`, typeof status === 'function' ? status(id) : status];
@@ -300,10 +309,12 @@ w('CONVERSION, RELINQUISHMENT, MARGINAL FIELDS AND LEASES THAT DO NOT CONVERT (c
 w();
 cTable(['pia_voluntary_conversion', 'pia_conversion_deadline', 'pia_unconverted_terms_continue', 'pia_conversion_40pct_selection', 'pia_relinquishment_unselected',
   'pia_oml_conversion_ppl_terms', 'pia_oml_conversion_pml_terms', 'pia_opl_conversion_ppl_terms', 'pia_opl_conversion_pml_terms',
-  'pia_marginal_field_conversion', 'pia_no_new_marginal_fields', 'pia_unconverted_act_not_applicable', 'nta_unconverted_part_not_applicable', 'nta_unconverted_gas_royalty'],
+  'pia_marginal_field_conversion', 'pia_no_new_marginal_fields', 'pia_unconverted_act_not_applicable', 'nta_unconverted_part_not_applicable', 'nta_repeal_ppta', 'nta_part2_ppt_heading', 'nta_s90_unconverted', 'nta_unconverted_gas_royalty'],
 (id) => (id === 'pia_marginal_field_conversion' ? 'the 15 percent rate is computed (the stated flag); the rest is concept-only' : 'concept-only'));
 w();
 w('READ TOGETHER: a holder of an oil mining lease may convert it; the areas it keeps in development or production become petroleum mining leases on the 30 percent terms, the areas it keeps for appraisal or discovery become petroleum prospecting licences on the 15 percent terms, and unselected areas are relinquished. A lease that does not convert stays on its old terms, outside the Act\'s fiscal Part and outside the engine.');
+w();
+w('LEASES THAT DO NOT CONVERT, UNDER THE NIGERIA TAX ACT 2025. The Nigeria Tax Act repeals the Petroleum Profits Tax Act (s.196(h)) and carries petroleum profits tax in a Part of its own, whose s.90(1) applies it to oil prospecting licences and oil mining leases that are yet to convert (the rows above quote both). So an unconverted lease pays petroleum profits tax under the Nigeria Tax Act from its commencement, on the old royalty terms. The engine models converted and new-acreage terms only, so this is concept-only and never graded.');
 
 
 /* ============================================================ SECTION 6 */
@@ -494,6 +505,11 @@ must('Alpha: 2026 to 2029 sit between 5,000 and 10,000 bopd and 2030 to 2032 at 
 w();
 w('Alpha sits between 5,000 and 10,000 bopd from 2026 to 2029, so each of those years pays a weighted rate between the table\'s 5,000 and 10,000 bopd rates that falls as the field declines; from 2030 it is at or below 5,000 bopd and pays exactly 5 percent. The regulations work month by month over the days oil was produced; the engine\'s annual reading is stated in `kpis.pia_notes` (' + ref('notes') + ').');
 
+w();
+w('THE TEXT BEHIND THIS SECTION, quoted verbatim with its citation (each dash the gazette prints shown as a colon):');
+w();
+cTable(['pia_royalty_condensate_ngl', 'pia_royalty_terrain_rates', 'pia_royalty_deep_offshore_tranche', 'pia_royalty_small_field_scope', 'pia_royalty_small_field_tranches', 'pia_royalty_small_field_above_10000', 'regs_sliding_scale_crude_plus_condensate', 'regs_daily_rate_basis', 'regs_deep_offshore_weighted', 'regs_onshore_shallow_up_to_5000', 'regs_onshore_shallow_5000_10000', 'regs_r13_2_b_less_than', 'regs_r13_2_c_greater_than', 'regs_onshore_above_10000', 'regs_shallow_above_10000', 'regs_frontier_flat', 'nta_royalty_rates_restated', 'nta_royalty_deep_offshore_tranche_restated', 'nta_royalty_small_field_scope_restated', 'nta_royalty_small_field_tranches_restated', 'nta_royalty_small_field_above_10000_restated'], 'computed');
+
 /* ============================================================ SECTION 10 */
 
 section('gas', 'Gas and NGL royalty, and gas used in-country', ['Associate m03', 'Expert m04']);
@@ -517,6 +533,11 @@ must('the gas field pays no hydrocarbon tax and has a CPR cap of 0', nag.cashFlo
 must('the gas field pays companies income tax', nag.cashFlowData.some((d) => d.cit_tax > 0), 'cit');
 w();
 w(`With half the gas used in-country the rate prints as ${f6(row(nag, 2026).royalty_rate_gas)}, half of it at 5 percent and half at 2.5 percent.` + ' The field has no crude oil or condensate, so the cost price ratio cap is 0 and there is no hydrocarbon tax; companies income tax is charged on the gas profit.');
+
+w();
+w('THE TEXT BEHIND THIS SECTION, quoted verbatim with its citation (each dash the gazette prints shown as a colon):');
+w();
+cTable(['pia_royalty_gas', 'regs_gas_in_country', 'regs_ngl_5pct', 'regs_gas_export_5pct', 'nta_gas_royalty_restated'], 'computed');
 
 /* ============================================================ SECTION 11 */
 
@@ -568,6 +589,11 @@ const fr = runG('ekene_frontier');
 w(`Frontier acreage at ${GC.ekene_frontier.cfg.oil_price_usd_bbl} USD/bbl in 2026 (ekene_frontier) pays a royalty by price of ${f6(row(fr, 2026).price_royalty)} and a liquids royalty rate of ${f6(row(fr, 2026).royalty_rate_liquids)}.`);
 must('frontier pays no royalty by price', row(fr, 2026).price_royalty === 0 && row(fr, 2026).royalty_rate_liquids === 0.075, 'frontier');
 
+w();
+w('THE TEXT BEHIND THIS SECTION, quoted verbatim with its citation (each dash the gazette prints shown as a colon):');
+w();
+cTable(['pia_price_royalty_levels', 'pia_price_royalty_example', 'pia_price_royalty_escalation', 'pia_price_royalty_high_wording', 'pia_price_royalty_frontier', 'regs_price_royalty_per_stream', 'regs_benchmark_escalation', 'regs_benchmark_table', 'nta_price_royalty_restated', 'nta_price_royalty_example_restated', 'nta_price_royalty_escalation_restated', 'nta_price_royalty_high_wording'], 'computed');
+
 /* ============================================================ SECTION 12 */
 
 section('stack', 'The instruments stacked on one year, and which base each reads', ['Associate m05', 'Associate m06']);
@@ -611,6 +637,11 @@ must('the worked example: the CPR does not bind', wr.cpr_deferred_to_next === 0,
 w();
 w(`Read the lines in order: at 50,000 bopd in shallow water the weighted rate is ${f6(100 * wr.royalty_rate_liquids)} percent; royalty by price at ${GC.worked_example_inputs_default.cfg.oil_price_usd_bbl} USD/bbl in 2025 is charged on the Regulations base; the hydrocarbon tax base deducts royalties, the claimed costs, the NDDC sum and the allowances; companies income tax reads its own base; and in 2025, a year under the Act alone, the tertiary education tax is 3 percent of the companies income tax assessable profit. Total tax is the hydrocarbon tax plus companies income tax plus the tertiary education tax (checked).`);
 
+w();
+w('THE TEXT BEHIND THE STACK, quoted verbatim with its citation:');
+w();
+cTable(['pia_hct_nondeduct_income_taxes', 'pia_hct_not_deductible_cit', 'nta_tetfund_deletions', 'pia_hcdt_contribution', 'pia_hcdt_deductible', 'pia_hct_deduct_hcdt_nddc'], 'computed');
+
 /* ============================================================ SECTION 13 */
 
 section('hctscope', 'What the hydrocarbon tax charges, and its rates', ['Professional m02', 'Expert m03 l01']);
@@ -637,6 +668,16 @@ table(['terrain', 'licence', 'lease status', 'converted marginal field', 'framew
 must('converted leases pay 30, a PPL and a converted marginal field 15', E.deriveHctRate('onshore', 'PML', false, null, 'pia_only', null, null, 'converted', null) === 0.3 && E.deriveHctRate('onshore', 'PPL', false, null) === 0.15 && E.deriveHctRate('shallow_water', 'PML', true, null) === 0.15, 'rates');
 must('a new lease onshore without a stated rate is refused', HCT_ROWS[4][5].startsWith('REFUSED'), HCT_ROWS[4][5]);
 must('deep offshore under the Act alone pays 0 and frontier 0', E.deriveHctRate('deep_offshore', 'PML', false, null, 'pia_only') === 0 && E.deriveHctRate('frontier', 'PML', false, null, 'nta_2025') === 0, 'zero');
+w();
+const dc25 = row(runG('ekene_deep_new_60k_conservative'), 2025);
+const dcIn = GC.ekene_deep_new_60k_conservative.prodRows.find((x) => x.year === 2025);
+w('DEEP OFFSHORE IN A YEAR UNDER THE ACT ALONE (ekene_deep_new_60k_conservative, its 2025 row; the years under the Nigeria Tax Act 2025 are the Expert question):');
+w();
+table(['year', 'oil bbl (golden input)', 'framework', 'liquids bopd', 'liquids royalty rate', 'production allowance', 'HCT chargeable profit', 'HCT rate', 'HCT', 'CIT'],
+  [[S(dc25.year), vol(dcIn.oil_bbl), dc25.fiscal_framework, f6(dc25.royalty_liquids_bopd), f6(dc25.royalty_rate_liquids), f6(dc25.production_allowance), f6(dc25.hct_chargeable_profit), f6(dc25.hct_rate), f6(dc25.hct_tax), f6(dc25.cit_tax)]]);
+must('deep 2025: a year under the Act alone with a chargeable profit and no HCT', dc25.fiscal_framework === 'pia_only' && dc25.hct_chargeable_profit > 0 && dc25.hct_tax === 0, dc25.hct_tax);
+w();
+w('The lease has a chargeable profit and pays no hydrocarbon tax: PIA s.260(3) keeps deep offshore outside the tax, and companies income tax is charged on the whole profit.');
 w();
 w('AN OPEN QUESTION FOR NEW LEASES. PIA s.267 (NTA s.72) gives 30 percent to leases selected under s.93(6)(b) and (7)(b), and 15 percent to onshore and shallow water and to petroleum prospecting licences, and does not say which applies to a petroleum mining lease granted after the Act out of new acreage. The engine refuses such a lease until the rate is stated (15 or 30), and the course never grades the hydrocarbon tax of such a lease: a figure on such a lease that the course grades is one the rate does not move (the chargeable profit, the allowances, the cost price ratio, companies income tax).');
 must('the refusal text of the new-lease rate names s.267 and s.93', /PIA s\.267/.test(REFUSED.find((r) => /no pia_new_pml_hct_rate_pct/.test(r[1]))[2]), 'cite');
@@ -754,6 +795,10 @@ w('The two pools are kept apart (the cash flow course owns the pool arithmetic; 
 /* ============================================================ SECTION 17 */
 
 section('framework', 'The framework read year by year: the education tax, the levy and the switch', ['Expert m02']);
+w('WHAT THE NIGERIA TAX ACT MOVED. NTA s.197(1)(a) deletes Parts I to X of Chapter Four of the Petroleum Industry Act, and Chapter 4 is the Act\'s fiscal framework: its Part I sets the objectives and administration and its Part II is the hydrocarbon tax. The same provisions are re-enacted in the Nigeria Tax Act, which is why the NTA sections this course cites beside the PIA sections (s.65 beside s.260, s.72 beside s.267, s.68 beside s.263) say the same things.');
+w();
+cTable(['pia_chapter4_fiscal_framework', 'nta_pia_deletions', 'nta_pia_deletion_para_14_6'], 'computed');
+w();
 w('THE RULE (`fiscalFrameworkForYear`). Under `pia_under_nta_2025_override` "auto" (the default) a year before 2026 is a year under the Act alone ("pia_only") and 2026 and every later year is a year under the Nigeria Tax Act 2025 ("nta_2025"), read row by row, so one ledger can cross the switch. "force_pia" and "force_nta" put every year on one framework. A ledger that crosses reports `kpis.fiscal_framework` "pia_only_then_nta_2025" and `kpis.nta_first_year`.');
 w();
 table(['year (stated)', 'auto', 'force_pia', 'force_nta'], [2023, 2024, 2025, 2026, 2027, 2030].map((y) => [S(y), ...['auto', 'force_pia', 'force_nta'].map((o) => E.fiscalFrameworkForYear({ pia_under_nta_2025_override: o }, y))]));
@@ -967,8 +1012,8 @@ w('The cost price ratio claims the lesser of the recoverable pool and the cap, s
 
 /* ============================================================ SECTION 24 */
 
-section('concepts', 'The texts quoted: every provision the course cites, computed or concept-only', ['Expert m01', 'Expert m03', 'Expert m04', 'Professional m01 l05']);
-w('Each provision below is quoted from its gazetted text with its citation. The paraphrase is the course\'s; the quotation is the text\'s, verbatim with whitespace collapsed and each dash the gazette prints shown as a colon, verified against the text by quote_check.py. The last column says whether the engine computes the provision. A concept-only provision is never in a capstone or a keyed question that needs a number.');
+section('concepts', 'The rest of the texts quoted, computed or concept-only', ['Expert m01', 'Expert m03', 'Expert m04', 'Professional m01 l05']);
+w('The royalty texts are printed beside the royalty sections and the texts behind the stack beside it (' + ref('tranches') + ' to ' + ref('stack') + '), the conversion texts in ' + ref('licences') + ' and the institutions in ' + ref('institutions') + '; this section prints every other text the course cites. Each provision below is quoted from its gazetted text with its citation. The paraphrase is the course\'s; the quotation is the text\'s, verbatim with whitespace collapsed and each dash the gazette prints shown as a colon, verified against the text by quote_check.py. The last column says whether the engine computes the provision. A concept-only provision is never in a capstone or a keyed question that needs a number.');
 w();
 const CONCEPT_GROUPS = [
   ['ROYALTY: the text behind the royalty lines (computed in ' + ref('tranches') + ', ' + ref('gas') + ' and ' + ref('price') + ')', ['pia_royalty_condensate_ngl', 'pia_royalty_terrain_rates', 'pia_royalty_deep_offshore_tranche', 'pia_royalty_small_field_scope', 'pia_royalty_small_field_tranches', 'pia_royalty_small_field_above_10000', 'pia_royalty_gas', 'pia_price_royalty_levels', 'pia_price_royalty_example', 'pia_price_royalty_escalation', 'pia_price_royalty_frontier',
@@ -996,7 +1041,8 @@ if (EXTRA.length) {
 }
 must('every concepts.json entry is printed', CONCEPTS.every((c) => USED.has(c.id)), CONCEPTS.filter((c) => !USED.has(c.id)).map((c) => c.id).join(','));
 must('every concepts.json entry is found and carries a quote', CONCEPTS.every((c) => c.found === true && c.quote && c.cite && c.paraphrase), 'found');
-w('A MISPRINT IN THE TEXT IS QUOTED AS PRINTED. Seventh Schedule para 14(4)(d) prints "over 250 million barrels" where the scale\'s own steps need 350; the Regulations\' Schedule prints the middle benchmark column as 102.00 to 110.00, which does not follow its own 2 percent rule (' + ref('price') + '). The course quotes each as printed and says so.');
+must('the NTA para 6(2)(d)(ii) quote carries the printed "bop" slip', / 5,000 bop - /.test(CON.nta_royalty_small_field_tranches_restated.quote), 'bop');
+w('A MISPRINT IN THE TEXT IS QUOTED AS PRINTED. Seventh Schedule para 14(4)(d) prints "over 250 million barrels" where the scale\'s own steps need 350; NTA Seventh Schedule para 6(2)(d)(ii) prints "5,000 bop" where the rest of the paragraph and the Act write bopd; the Regulations\' Schedule prints the middle benchmark column as 102.00 to 110.00, which does not follow its own 2 percent rule (' + ref('price') + '). The course quotes each as printed and says so.');
 
 
 /* ============================================================ SECTION 25 */

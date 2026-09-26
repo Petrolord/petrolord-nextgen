@@ -16,7 +16,7 @@ Six quantities from the ledger, each to six decimals. They are the kinds of line
 
 1. Paste the case file into the ledger calculator's view "The whole ledger, year by year" and read any refusal first; the case as issued runs.
 2. Read the framework tiles and mark which years are under each Act.
-3. Read the totals by year from the ledger table. For the hydrocarbon tax base, use the hydrocarbon tax calculator in the lesson on the capital allowance and the restriction by year: its view "The tax base and the cost price ratio on a ledger" takes the same case file and prints the chargeable profit.
+3. Read each figure from the ledger table in its year: the total royalty, the HCT chargeable profit, the education tax, the levy and companies income tax each have a column, and companies income tax over the life has its own tile.
 4. Read every note under the ledger and say which provision each belongs to.
 5. Check the readings. Open "One case under every stated reading" with the case pasted in and read total companies income tax on every row that runs; on the issued case it stays put.
 

@@ -33,6 +33,6 @@ Under the Act alone, deep offshore crude pays royalty and companies income tax, 
 Work in the course's own hydrocarbon tax calculator, which runs the same engine.
 
 1. Open the view "The tax base and the cost price ratio on a ledger" and start from ekene_deep_new_60k_conservative.
-2. Delete the 2026 and 2027 entries from `prodRows` and from `opexRows`, so the ledger holds only 2025, a year under the Act alone. Confirm the HCT rate column reads 0.000000 and the chargeable profit reads 795646660.199557.
-3. Change the 2025 `oil_bbl` to 18250000, which is 50,000 bopd over 365 days. Watch the HCT assessable profit fall. Two things moved: the revenue and the royalty rate. Which of them does the tier edge explain?
+2. Delete the 2026 and 2027 entries from `prodRows` and from `opexRows`, so the ledger holds only 2025, a year under the Act alone. In the first table read the 2025 daily rate, 60,000 bopd, and the liquids royalty rate, 0.054167. Confirm the HCT rate column reads 0.000000 and the chargeable profit reads 795646660.199557.
+3. Change the 2025 `oil_bbl` to 18250000, which is 50,000 bopd over 365 days. Read the new daily rate and the liquids royalty rate, 0.050000, and say which barrels stopped paying 7.5 percent.
 4. Say in one sentence why the hydrocarbon tax stayed at zero in both runs, citing the section.

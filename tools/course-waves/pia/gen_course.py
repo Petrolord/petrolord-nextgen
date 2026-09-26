@@ -319,7 +319,7 @@ for a in range(len(fields)):
             bad.append(f'pairwise: {fields[a][1]} and {fields[b][1]}')
 
 # EVERY NUMBER THE DIGEST PRINTS.
-DIGEST_NUMS = sorted({abs(float(tok)) for tok in NUM.findall(open(f'{W}/digest.txt', encoding='utf-8').read())})
+DIGEST_NUMS = sorted({abs(float(tok)) for tok in NUM.findall(re.sub(r'(\d),(?=\d{3}(?!\d))', r'\1', open(f'{W}/digest.txt', encoding='utf-8').read()))})
 if len(DIGEST_NUMS) < 300:
     bad.append(f'only {len(DIGEST_NUMS)} digest numbers were read')
 for ftier, key, val, tol in fields:

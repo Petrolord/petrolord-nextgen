@@ -32,5 +32,5 @@ A graded figure in this course is a return value of the engine on stated terms a
 Work in the course's own hydrocarbon tax calculator, which runs the same engine.
 
 1. Open "The tax base and the cost price ratio on a ledger" and start from ekene_alpha_shallow_converted_nta. Change `pia_water_depth_m` to 250 and confirm that no figure on the ledger moves. Say which input decides the royalty.
-2. Double the 2026 `oil_bbl` so the year sits above 10,000 bopd. Run the case once with `pia_terrain` "onshore" and once with "shallow_water", and note the 2026 HCT assessable profit each time. These are the two limbs of r.14(5) carried into the tax base.
+2. Double the 2026 `oil_bbl` so the year sits above 10,000 bopd. Run the case once with `pia_terrain` "onshore" and once with "shallow_water", and read the 2026 liquids royalty rate each time in the first table. These are the two limbs of r.14(5).
 3. Write down the one input you would need, and cannot give the engine, to finish the Regulations' method.

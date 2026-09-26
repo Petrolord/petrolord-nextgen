@@ -18,7 +18,7 @@ Whether a company meets that condition is a fact about its banking, which a proj
 
 ## The same fund, met and not met
 
-Two Ekene cases (synthetic, shallow water, converted, 2026 to 2028) collect a fund of 30,000,000 USD in equal contributions:
+Two Ekene cases (synthetic, shallow water, converted, 2026 to 2028) collect a fund of 30000000 USD in equal contributions:
 
 | year | contribution | deduction (met) | CIT (met) | HCT (met) | deduction (not met) | CIT (not met) | HCT (not met) |
 | --- | --- | --- | --- | --- | --- | --- | --- |

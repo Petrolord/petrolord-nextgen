@@ -35,4 +35,4 @@ The approximation swaps the Act's company for a field and its denominator for a 
 
 ## Exercise
 
-Open the ledger calculator on "The whole ledger, year by year" and load ekene_min_etr_nta_only. Read the net cash flow for 2026 and find the approximation note under the ledger. Set pia_minimum_etr_pct to 15 in the case and read the 2026 net cash flow again; explain the difference from the table. Then set pia_apply_minimum_etr to false and confirm the note disappears. Name what s.57(4) needs that the case does not contain.
+Open the ledger calculator on "The whole ledger, year by year" and load ekene_min_etr_nta_only. Read the minimum ETR top-up column: 0.000000 in 2025 and 35346403.532609 in 2026, and find the approximation note under the ledger. Set pia_minimum_etr_pct to 15 and read the column again. Then set pia_apply_minimum_etr to false and confirm the note disappears. Name what s.57(4) needs that the case does not contain.

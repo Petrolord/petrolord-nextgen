@@ -35,7 +35,7 @@ The terrain is a stated input, one of four strings; the engine reads no water de
 
 The practical runs in the course's own hydrocarbon tax calculator, which calls the same engine the lesson quotes.
 
-1. Open the view "The tax base and the cost price ratio on a ledger" and start from the Ekene case ekene_alpha_shallow_converted_nta. Note the HCT assessable profit in 2026: 182041059.069891.
-2. In the JSON, change `pia_terrain` to "onshore". Confirm that every year's HCT assessable profit stays where it was, and say why from the table above.
-3. Put `pia_terrain` back to "shallow_water" and double the 2026 `oil_bbl`, which lifts that year above 10,000 bopd. Note the 2026 assessable profit, then switch the terrain to "onshore" again.
-4. Which way did the 2026 assessable profit move, and which tranche of the Act produced the difference? Name the barrels the terrain rate now reaches.
+1. Open the view "The tax base and the cost price ratio on a ledger" and start from the Ekene case ekene_alpha_shallow_converted_nta. In the first table, read the 2026 row: a daily rate of 8320.000000 bopd and a liquids royalty rate of 0.059976.
+2. In the JSON, change `pia_terrain` to "onshore". Confirm that every year's liquids royalty rate stays where it was, and say why from the table above.
+3. Put `pia_terrain` back to "shallow_water" and double the 2026 `oil_bbl`, which lifts that year above 10,000 bopd. Read the new 2026 daily rate and rate, then switch the terrain to "onshore" again and read the rate once more.
+4. Which terrain now pays the higher rate, and which tranche of the Act produced the difference? Name the barrels the terrain rate now reaches.
