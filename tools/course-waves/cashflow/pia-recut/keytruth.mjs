@@ -40,6 +40,9 @@ const GRADED = [
 const plant = process.argv.includes('--plant');
 const bump = (s) => s.replace(/(\d)(?!.*\d)/, (d) => String((Number(d) + 1) % 10));
 
+// KEYTRUTH_ONLY=<file name part> runs only that writer's file and skips the
+// coverage refusal (a writer's own check; the full run needs every file).
+const ONLY = process.env.KEYTRUTH_ONLY || '';
 const checks = [];
 for (const t of ['beginner', 'intermediate', 'advanced']) {
   const f = path.join(HERE, `keytruth_${t}.mjs`);
@@ -47,6 +50,7 @@ for (const t of ['beginner', 'intermediate', 'advanced']) {
   // one file per writer: keytruth_<tier>.mjs plus any keytruth_<tier>_<part>.mjs
   const parts = [f, ...fs.readdirSync(HERE).filter((n) => n.startsWith(`keytruth_${t}_`) && n.endsWith('.mjs')).sort().map((n) => path.join(HERE, n))];
   for (const p of parts) {
+    if (ONLY && !path.basename(p).includes(ONLY)) continue;
     const mod = await import(p);
     checks.push(...mod.default.map((c) => ({ ...c, file: path.basename(p) })));
   }
@@ -85,7 +89,7 @@ if (plant) {
   console.log(`keytruth --plant: ${caught} of ${numeric} perturbed numeric checks went red`);
   process.exit(caught === numeric && numeric > 0 && fail === 0 ? 0 : 1);
 }
-if (missing.length) { console.error(`REFUSED: no key check for ${missing.join('; ')}`); process.exit(2); }
+if (missing.length && !ONLY) { console.error(`REFUSED: no key check for ${missing.join('; ')}`); process.exit(2); }
 console.log(`keytruth: ${checks.length} checks on ${new Set(checks.map((c) => c.q)).size} changed rows (${numeric} numeric), `
   + `${keyed.size} keys checked, all 26 audited keys covered; failures ${fail}`);
 process.exit(fail ? 1 : 0);
