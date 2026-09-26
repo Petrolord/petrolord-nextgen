@@ -71,12 +71,12 @@ x("The well services tender is run through evaluateTender at a stated pass mark 
  "The highest technical percentage is WS3's 85.000000, so nobody passes. The call is well formed, so the engine returns a result: award null, commercial null, reason (verbatim) \"no bid passed the technical envelope; no commercial envelope is opened\". A pass mark from 0 to 100 is accepted. No bid below the mark is awarded, and no price is opened, so price cannot pull a weak technical offer back in.")
 
 # 8
-x("The same tender is run with a stated maxWeeks of 5, so every bid that passes the technical envelope is late. What does evaluateTender return?",
+x("The same tender is run with maxWeeks lowered to 5 and minWeeks lowered below it, so the schedule is accepted and every bid that passes the technical envelope is late. What does evaluateTender return?",
  "Award null with the reason \"every opened bid was rejected at the commercial stage\"",
  ["The refusal \"bids has no bid left to score: every bid is rejected\" under the field bids",
   "An award to WS1, the least late of the four at 6 weeks, with the lateness priced",
   "A refusal naming schedule.maxWeeks, since 5 sits below every bid's weeks"],
- "evaluateTender returns a result here: award null and the reason \"every opened bid was rejected at the commercial stage\", with each late bid's exclusion, for example \"WS1: offers completion in 6 weeks, beyond the maximum 5 weeks; the bid is nonresponsive\". The refusal about no bid left to score belongs to rankTender called on its own. Beyond maxWeeks a bid is rejected and is not priced, and a maxWeeks of 5 is a valid input.")
+ "evaluateTender returns a result here: award null and the reason \"every opened bid was rejected at the commercial stage\", with each late bid's exclusion, for example \"WS1: offers completion in 6 weeks, beyond the maximum 5 weeks; the bid is nonresponsive\". The refusal about no bid left to score belongs to rankTender called on its own. Beyond maxWeeks a bid is rejected and is not priced. A maxWeeks of 5 above the stated minWeeks is a valid input; left with the fixture's minWeeks of 6 it would be refused under schedule.maxWeeks, since maxWeeks must be at or above minWeeks.")
 
 # 9
 x("Handed a list in which every bid carries a rejection, which call refuses, and what is its field?",
@@ -132,7 +132,7 @@ x("On the well services tender the combined score awards WS3 while a lowest-cost
  ["WS3's evaluated cost includes an omission that the combined score leaves out, which lowers the price it is scored on",
   "WS5's schedule adjustment is dropped by the combined score, raising its commercial score",
   "The combined score uses quoted totals, on which WS3's 918000.000000 sits lower"],
- "The engine's own explanation: the combined score weighs the technical percentage at 0.7, and WS3 carries the highest technical percentage (85.000000, St 100.000000) and the fourth-lowest evaluated cost (957990.000000). The combined score uses the same evaluated costs, omission and schedule adjustment included, and never the quoted totals.")
+ "The course explains it: the combined score weighs the technical percentage at 0.7, and WS3 carries the highest technical percentage (85.000000, St 100.000000) and the fourth-lowest evaluated cost (957990.000000). The combined score uses the same evaluated costs, omission and schedule adjustment included, and never the quoted totals.")
 
 emit(Q, '/root/cat-wip-procurement/banks/sc2a_m04.json', expect_n=15)
 finish()

@@ -85,7 +85,7 @@
    "Nothing for the company and 107001.253374 for the contractor, since a fixed fee caps the payment"
   ],
   "answer": 2,
-  "explanation": "Under a fixed fee the company reimburses the contractor's whole cost, so it pays the whole expected overrun, 107001.253374, with a share of 1.000000, and the contractor's margin is the fee in every iteration. With the fee set to the planned margin exactly as the engine holds it, the course's run prints the contractor's part as 6.98e-14, the rounding left by summing 20000 floating-point differences; a fee typed from its six-decimal print leaves a trace of another size, and neither carries any share of the overrun. The 12 percent row belongs to the percentage fee, the 71671.875955 row to the day rate, and a fixed fee caps the fee only, so the lump sum's split does not apply."
+  "explanation": "Under a fixed fee the company reimburses the contractor's whole cost, so it pays the whole expected overrun, 107001.253374, with a share of 1.000000, and the contractor's margin is the fee in every iteration. The contractor's part is a floating-point trace near zero, the rounding left by summing 20000 floating-point differences; its size depends on the exact double of the fee, so a fee typed from the six-decimal print leaves a trace of another size, and no trace carries any share of the overrun. The 12 percent row belongs to the percentage fee, the 71671.875955 row to the day rate, and a fixed fee caps the fee only, so the lump sum's split does not apply."
  },
  {
   "prompt": "Which contract type gives the contractor the largest planned margin and also a probability of a loss of 0.199500?",

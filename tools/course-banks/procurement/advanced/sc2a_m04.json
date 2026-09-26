@@ -77,7 +77,7 @@
   "explanation": "The highest technical percentage is WS3's 85.000000, so nobody passes. The call is well formed, so the engine returns a result: award null, commercial null, reason (verbatim) \"no bid passed the technical envelope; no commercial envelope is opened\". A pass mark from 0 to 100 is accepted. No bid below the mark is awarded, and no price is opened, so price cannot pull a weak technical offer back in."
  },
  {
-  "prompt": "The same tender is run with a stated maxWeeks of 5, so every bid that passes the technical envelope is late. What does evaluateTender return?",
+  "prompt": "The same tender is run with maxWeeks lowered to 5 and minWeeks lowered below it, so the schedule is accepted and every bid that passes the technical envelope is late. What does evaluateTender return?",
   "options": [
    "The refusal \"bids has no bid left to score: every bid is rejected\" under the field bids",
    "An award to WS1, the least late of the four at 6 weeks, with the lateness priced",
@@ -85,7 +85,7 @@
    "Award null with the reason \"every opened bid was rejected at the commercial stage\""
   ],
   "answer": 3,
-  "explanation": "evaluateTender returns a result here: award null and the reason \"every opened bid was rejected at the commercial stage\", with each late bid's exclusion, for example \"WS1: offers completion in 6 weeks, beyond the maximum 5 weeks; the bid is nonresponsive\". The refusal about no bid left to score belongs to rankTender called on its own. Beyond maxWeeks a bid is rejected and is not priced, and a maxWeeks of 5 is a valid input."
+  "explanation": "evaluateTender returns a result here: award null and the reason \"every opened bid was rejected at the commercial stage\", with each late bid's exclusion, for example \"WS1: offers completion in 6 weeks, beyond the maximum 5 weeks; the bid is nonresponsive\". The refusal about no bid left to score belongs to rankTender called on its own. Beyond maxWeeks a bid is rejected and is not priced. A maxWeeks of 5 above the stated minWeeks is a valid input; left with the fixture's minWeeks of 6 it would be refused under schedule.maxWeeks, since maxWeeks must be at or above minWeeks."
  },
  {
   "prompt": "Handed a list in which every bid carries a rejection, which call refuses, and what is its field?",
@@ -162,6 +162,6 @@
    "The combined score uses quoted totals, on which WS3's 918000.000000 sits lower"
   ],
   "answer": 2,
-  "explanation": "The engine's own explanation: the combined score weighs the technical percentage at 0.7, and WS3 carries the highest technical percentage (85.000000, St 100.000000) and the fourth-lowest evaluated cost (957990.000000). The combined score uses the same evaluated costs, omission and schedule adjustment included, and never the quoted totals."
+  "explanation": "The course explains it: the combined score weighs the technical percentage at 0.7, and WS3 carries the highest technical percentage (85.000000, St 100.000000) and the fourth-lowest evaluated cost (957990.000000). The combined score uses the same evaluated costs, omission and schedule adjustment included, and never the quoted totals."
  }
 ]

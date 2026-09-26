@@ -132,7 +132,7 @@ x("Why does the engine return percentileDefinition beside every set of cost perc
  ["Because SPE PRMS requires every cost report to carry its percentile definition",
   "To record which generator, mulberry32, drew the samples behind the percentiles",
   "Because the definition is recomputed from the seed and differs from run to run"],
- "A percentile copied without its definition invites the reader to supply one, and the conversational reading would take the P90 cost for the high figure, the wrong one here. PRMS is written for recoverable volumes; the platform keeps its definition for a cost so the convention is never guessed. The generator is stated in the sampling basis, and the definition is a fixed text from lib/conventions/percentile.js that no seed changes.")
+ "A percentile copied without its definition invites the reader to supply one, and the conversational reading would take the P90 cost for the high figure, the wrong one here. The definition is the platform's own convention, kept beside a cost so the convention is never guessed. The generator is stated in the sampling basis, and the definition is a fixed text from lib/conventions/percentile.js that no seed changes.")
 
 emit(Q, '/root/cat-wip-procurement/banks/sc2a_m02.json', expect_n=15)
 finish()

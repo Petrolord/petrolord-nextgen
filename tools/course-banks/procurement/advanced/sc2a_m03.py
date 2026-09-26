@@ -43,7 +43,7 @@ x("The should-cost's total days, 13.865486, are the same figure as the contract 
  ["The should-cost reads the mean sampled days of the contract run and rounds it to the plan",
   "Days are a stated input of the should-cost, copied by the fixture from the plan",
   "Coincidence of the fixture: the two figures only print alike at six decimals"],
- "The course checks that the total days equal the planned days: the same programme at the same NPT fraction, which is the mode of the contract comparison's triangle. The mean sampled days are 15.277257, a different figure. The days come from wellCost evaluateProgram and are not typed in. The equality is the engine's own check, so it rests on more than two figures that print alike.")
+ "The course checks that the total days equal the planned days: the same programme at the same NPT fraction, which is the mode of the contract comparison's triangle. The mean sampled days are 15.277257, a different figure. The days come from wellCost evaluateProgram and are not typed in. The course checks the two figures for equality, so it rests on more than two figures that print alike.")
 
 # 5
 x("No per-metre cost item enters the Ekene should-cost. What does the engine return that explains it?",
@@ -118,7 +118,7 @@ x("With the should-cost as the cost estimate, how far below it does WS5 sit on t
  "The engine returns 3.710240 percent below the estimate for WS5, and the absolute approach flags a bid 20 percent or more below, so no bid on this tender is flagged. 1.093083 is WS2's figure, and a bid below the estimate is not flagged for that alone. WS5's band ratio is 0.962898, inside the band's lower limit of 0.8.")
 
 # 14
-x("As a bid's evaluated cost falls toward 80 percent of the estimate, with the band's low at 0.8, at what point do the band and the absolute test first disagree?",
+x("On the band probe's estimate of 100000.000000, as a bid's evaluated cost falls toward 80 percent of it, with the band's low at 0.8, at what point do the band and the absolute test first disagree?",
  "Exactly at 0.8 of the estimate: the absolute test flags 20 percent below, the band takes the ratio as inside",
  ["Just above 0.8: the absolute test fires first because it rounds the percentage down",
   "They never disagree, since the band's 0.8 is the absolute test restated",

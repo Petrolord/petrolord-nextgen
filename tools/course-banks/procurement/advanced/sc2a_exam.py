@@ -61,15 +61,15 @@ x("A day rate is entered as { rate: 50000 } with no mobilisation fee. What does 
  ["A day rate with a mobilisation fee of 0, the default for a missing fee",
   "A day rate with the fixture's 160000.000000 fee filled in from the Ekene job",
   "The run with the day rate row left out and a note that its fee was missing"],
- "The engine refuses a day rate that lacks either part, naming the field dayRate. It supplies no default fee, borrows nothing from a fixture, and never drops a contract type from a result. A mobilisation fee of 0 stated outright is accepted, as the certain job with a day rate of 50000 and no fee shows.")
+ "The engine refuses a day rate that lacks either part, naming the field dayRate. It supplies no default fee, borrows nothing from a fixture, and never drops a contract type from a result. The message asks for both parts at or above 0, so a mobilisation fee stated as 0 is accepted; only a missing part is refused.")
 
 # 7
 x("A committee compares a lump sum bid and a day rate bid on their planned payments alone, 900000.000000 against 853274.305556. What does that comparison miss?",
- "The lump sum price carries the contractor's charge for the overrun, which the day rate plan leaves with the company",
- ["Nothing, since each planned payment is the figure the company actually pays on the job",
-  "The day rate's mobilisation fee, which the planned payment leaves out of its total",
-  "Seed choice, since planned payments change with every seed that is chosen"],
- "Part of the lump sum's planned margin, 177649.583333, is the contractor's price for carrying an overrun that 0.902400 of the iterations produce. The day rate's planned payment covers the plan's days only, and the company pays for extra days. The planned payment 853274.305556 already includes the 160000 fee (160000 + 50000 x days), and planned payments come from the plan, which no seed moves.")
+ "Who carries the overrun: the company pays 71671.875955 of it on a day rate, none on a lump sum",
+ ["Nothing, since each planned payment is the figure the company actually pays on the job in every outcome",
+  "The day rate's mobilisation fee of 160000.000000, which the planned payment leaves out of its total",
+  "Seed choice, since the planned payments change with every seed that the committee might choose to run"],
+ "A planned payment says nothing about the overrun, which 0.902400 of the iterations produce, averaging 107001.253374. Under the lump sum the company pays none of it and the contractor absorbs it all; under the day rate the company pays 71671.875955 of it for the extra days and the contractor absorbs 35329.377418. The planned payment 853274.305556 already includes the 160000 fee (160000 + 50000 x days), and planned payments come from the plan, which no seed moves.")
 
 # ---- cost percentiles
 # 8
@@ -211,15 +211,15 @@ x("A caller writes the content setting as a plain sentence where the whole-tende
  "The engine checks the shape of the content entry and refuses text under the field nigerianContent. It reads no reading out of free text and ignores no stated input, and it names the field it refuses, here the whole entry.")
 
 # 25
-x("Nigerian content is stated for the materials tender, but one bid that reaches the commercial stage carries no ncPct. What does evaluateTender return?",
- "A refusal naming that bid's ncPct: it is required for every bid at the commercial stage",
- ["The award with that bid's content taken as 0, so it cannot lead under s.14",
-  "The award with that bid left out of the s.14 group but still in the ranking",
+x("A caller asks for s.14 in a lowest-cost award of the well services tender, but no bid carries an ncPct. How does the whole-tender call respond?",
+ "A refusal naming a bid's ncPct: it is required for every bid at the commercial stage",
+ ["The award with each missing content taken as 0, so no bid can lead under s.14",
+  "The award with the bids left out of the s.14 group but still in the ranking",
   "A refusal naming criteria, since content is a technical criterion here"],
- "In the engine's words for the fifth bid: \"bids[4].ncPct is required for every bid that reaches the commercial stage when nigerianContent is given\". A missing content is never set to 0 or dropped from the group, since either would decide s.14 on a figure nobody stated. Content enters a lowest-cost award at the commercial stage, and a combined award takes it as a rated criterion instead.")
+ "In the engine's words: \"bids[4].ncPct is required for every bid that reaches the commercial stage when nigerianContent is given\". bids[4] is WS5, the fifth bid in the list, which passed the technical envelope. A missing content is never set to 0 or dropped from the group, since either would decide s.14 on a figure nobody stated. Content enters a lowest-cost award at the commercial stage, and a combined award takes it as a rated criterion instead.")
 
 # 26
-x("With a stated maxWeeks of 5, how does the engine word WS5's exclusion?",
+x("With maxWeeks lowered to 5 and minWeeks lowered below it, how does the engine word WS5's exclusion?",
  "\"WS5: offers completion in 9 weeks, beyond the maximum 5 weeks; the bid is nonresponsive\"",
  ["\"WS5: completion in 9 weeks is 3 weeks beyond the minimum 6 weeks; 0.005 x 3 x 849400 = 12741 is added\"",
   "\"WS5: technical score 70 is below the pass mark; the commercial envelope is not opened\"",
@@ -297,7 +297,7 @@ x("One boundary in the engine is described as a property of doubles. What is it?
  ["Every limit is rounded to six decimals before any comparison is made",
   "The engine adds a tolerance of 1e-9 to every typed limit to absorb floating-point error",
   "Limits are compared as text, so a typed 0.8 and a computed 0.8 always match"],
- "A typed limit such as a tolerance or a band is compared in binary floating point, and the engine's FINDINGS states that its oracle and the engine agree except within one unit in the last place of such a limit; every boundary was probed with figures exactly representable or far from that unit. The engine rounds nothing before comparing. 1e-9 is the weight-sum tolerance only.")
+ "A typed limit such as a tolerance or a band is compared in binary floating point, and the course states that the engine's oracle and the engine agree except within one unit in the last place of such a limit; every boundary was probed with figures exactly representable or far from that unit. The engine rounds nothing before comparing. 1e-9 is the weight-sum tolerance only.")
 
 # ---- conventions and the report
 # 36
@@ -338,7 +338,7 @@ x("How does the engine read the s.14 phrase \"within 1 % of each other at commer
  ["Within 1% of the next bid up the ranking, so the group chains upward one bid at a time until a gap finally opens",
   "Relative to the mean of the bids, so the edge moves with the field",
   "Strictly below 1 percent, so a bid at 2020000 against the lowest at 2000000 falls just outside of the group"],
- "The reading is stated in every reason: \"within 1 % of each other at commercial stage\" is read as within 1% of the lowest evaluated cost, with the group test 100 x (C - Cmin) <= 1 x Cmin. So a bid exactly 1 percent above the lowest joins the group and one unit more does not. The engine's convention table lists this as its reading of s.14.")
+ "The reading is stated in every reason: \"within 1 % of each other at commercial stage\" is read as within 1% of the lowest evaluated cost, with the group test 100 x (C - Cmin) <= 1 x Cmin. So a bid exactly 1 percent above the lowest joins the group and one unit more does not. The course's table of conventions lists this as the engine's reading of s.14.")
 
 # 41
 x("What makes a graded figure in this course have exactly one right answer?",

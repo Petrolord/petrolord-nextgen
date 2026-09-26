@@ -128,11 +128,11 @@ x("The engine returns WS5's evaluated cost as 862141.000000. What does that figu
 
 # 15
 x("The plan of a contract comparison is the modes unless a plan is stated. Why does the engine take the modes, and what does a caller who plans differently do?",
- "Budgets are usually built from most likely values; a caller who plans differently states a plan with days and a daily cost",
- ["Because the modes are the mean of each triangle, the plan equals the expected cost; no other plan is accepted",
-  "World Bank Regulations fix the plan at the modes; a caller cannot move it without a refusal",
-  "The modes give the most overruns, the cautious choice; a caller may pass the mean days only"],
- "The conventions table lists the plan of a contract as the modes unless a plan is stated, an engine convention. The mean is another possible reference for an overrun, but a plan is what a company budgets, and budgets are usually built from most likely values. A stated plan must carry its days and daily cost. The mode of a skewed triangle is not its mean, and no text fixes the plan.")
+ "An engine convention, as no text fixes one; a caller who plans differently states days and a daily cost",
+ ["The modes are each triangle's mean, so the plan is the expected cost; no other plan is accepted",
+  "World Bank Regulations fix the plan at the modes, so a caller cannot move it anywhere without meeting a refusal",
+  "The modes give the most overruns, the cautious choice, and a caller may pass the mean days and nothing else"],
+ "The course's table of conventions lists the plan of a contract as the modes unless a plan is stated: an engine convention, since no text fixes a plan. A caller who plans differently states a plan with its days and its daily cost, and a plan missing either is refused. The mode of a skewed triangle is not its mean, no World Bank text sets the plan, and the modes are no cautious choice: 0.902400 of the iterations overrun them.")
 
 emit(Q, '/root/cat-wip-procurement/banks/sc2a_m06.json', expect_n=15)
 finish()

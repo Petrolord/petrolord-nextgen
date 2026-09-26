@@ -162,6 +162,6 @@
    "Because the definition is recomputed from the seed and differs from run to run"
   ],
   "answer": 2,
-  "explanation": "A percentile copied without its definition invites the reader to supply one, and the conversational reading would take the P90 cost for the high figure, the wrong one here. PRMS is written for recoverable volumes; the platform keeps its definition for a cost so the convention is never guessed. The generator is stated in the sampling basis, and the definition is a fixed text from lib/conventions/percentile.js that no seed changes."
+  "explanation": "A percentile copied without its definition invites the reader to supply one, and the conversational reading would take the P90 cost for the high figure, the wrong one here. The definition is the platform's own convention, kept beside a cost so the convention is never guessed. The generator is stated in the sampling basis, and the definition is a fixed text from lib/conventions/percentile.js that no seed changes."
  }
 ]
