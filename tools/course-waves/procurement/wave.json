@@ -119,11 +119,11 @@
    "summary": "PROBLEMS: 0"
   },
   "prove_prior_courses.sh": {
-   "md5": "1fcdc4c46432cb05051e346e379ecb17",
+   "md5": "8c43a7cf527337fc2ead4cbc365404fb",
    "command": "bash prove_prior_courses.sh",
    "expected": 0,
    "exit": 0,
-   "summary": "PRIOR COURSES UNCHANGED: no shared vendored path moved; D1, D2, D3, D4, D5, H4 and H5 digests, fields and precision rebuild byte-identical against /root/wt-sc2-nextgen/packages/engines"
+   "summary": "PRIOR COURSES UNCHANGED: no shared vendored path moved; D1, D2, D3, D4, D5, H4, H5, EC1 cashflow and EC2 fiscal digests and fields rebuild byte-identical against /root/wt-sc2-nextgen/packages/engines"
   },
   "scaffold.py --check": {
    "md5": "f7062c9f280543cb4bbfb023048920f2",
@@ -154,28 +154,28 @@
    "summary": "sc2_capstone: 87 label-and-call, scenario, tie and seed assertions run, 0 failed"
   },
   "oracle_check.py": {
-   "md5": "946ad5ed8bb761368063b61ec434fa2a",
+   "md5": "667bc50a9d1d5e922864d9d44becffa0",
    "command": "python3 oracle_check.py",
    "expected": 0,
    "exit": 0,
    "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 1 s; every chain the oracle's own; worst relative difference 3.29e-15; disagreements: 0"
   },
   "oracle_check.py NEGATIVE CONTROL": {
-   "md5": "946ad5ed8bb761368063b61ec434fa2a",
+   "md5": "667bc50a9d1d5e922864d9d44becffa0",
    "command": "python3 oracle_check.py --plant",
    "expected": 1,
    "exit": 1,
    "summary": "NEGATIVE CONTROL: umuahia_s14_lead_relative was moved by ten tolerances; caught"
   },
   "discriminate.mjs": {
-   "md5": "4dcd8941c661ed56de9a8959dbd3864e",
+   "md5": "62d0c394f2d0743b8c7f5f395a251e48",
    "command": "node discriminate.mjs",
    "expected": 0,
    "exit": 0,
    "summary": "CLOSEST MISS ACROSS THE WHOLE SWEEP: okigwe_award_ratio via the_quoted_total, 3.047e+4 tolerances away"
   },
   "discriminate.mjs NEGATIVE CONTROL": {
-   "md5": "4dcd8941c661ed56de9a8959dbd3864e",
+   "md5": "62d0c394f2d0743b8c7f5f395a251e48",
    "command": "node discriminate.mjs --slack-tolerances",
    "expected": 1,
    "exit": 1,
