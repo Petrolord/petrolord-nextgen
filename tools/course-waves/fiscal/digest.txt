@@ -8,9 +8,9 @@ HOW TO READ A COLUMN MARKED "derived". A derived column is a ratio or a differen
 
 The four instruments a regime carries, and nothing else:
 
-- `royalty`, either `flat` with a `rate`, or `sliding_price` with tiers keyed on the oil price.
-- `costRecoveryLimit`, a percent of revenue after royalty.
-- `profitSplit`, either `flat` with a contractor `split`, or `tiered_r_factor` with tiers keyed on the R factor.
+- `royalty`, either `flat` with a `rate`, `sliding_price` with tiers keyed on the oil price, or `pia_2021`, the Petroleum Industry Act 2021 royalty the Nigeria - PIA (2021) template carries (Section 12).
+- `costRecoveryLimit`, a percent of revenue after royalty, or, with `costRecoveryBase` set to `liquids_gross`, a percent of the gross value of crude oil and NGL (Section 13).
+- `profitSplit`, either `flat` with a contractor `split`, `tiered_r_factor` with tiers keyed on the R factor, or `pia_cumulative_production`, the government's minimum share by cumulative crude production (Section 14).
 - `tax`, holding `cit`, `rrt`, `minTax` and an optional `rrtUpliftPct` that defaults to 20.
 
 Four things the sandbox refuses to be, all four stated in the engine's own header:
@@ -1001,7 +1001,7 @@ All six templates on the DEFAULT PROJECT, government share percent at each swept
 | Angola - Deepwater PSC | 63.4520 | 59.5510 | 66.9424 | 72.4012 | 76.0199 | 78.4920 | 80.3565 | 81.6019 | 83.1392 | 19.6873 |
 | Generic Royalty/Tax | 51.2558 | 46.8185 | 44.7054 | 43.4694 | 42.6583 | 42.0851 | 41.6585 | 41.3287 | 41.0660 | -10.1897 |
 
-The nine published price-sweep cases run ONE regime alone on the default project. READ THE NAME CAREFULLY: it is the Designer's own default regime, id 1, "Nigerian PIA (PSC)", and it is NOT the "Nigeria - PIA (2021)" TEMPLATE. Its values are the Designer's own sample values and none of them is read from the Act. The Designer regime recovers cost at 70 percent against the template's 70 percent of the gross value of crude oil and NGL, splits profit oil 60 percent from R 1 and 50 percent from R 1.5 against the template's government minimum profit oil by cumulative crude oil at the start of the year (type pia_cumulative_production), to 50 million bbl -> government 5 percent, to 100 million bbl -> government 10 percent, to 350 million bbl -> government 15 percent, to 750 million bbl -> government 25 percent, to 1500 million bbl -> government 35 percent, above million bbl -> government 45 percent, and charges royalty 12.5 percent from 60 USD/bbl and 15 percent from 80 USD/bbl against the template's PIA 2021 royalty (type pia_2021): production royalty by terrain deep_offshore and daily rate, royalty by price on the regulations_2021 benchmarks with project year 1 in calendar 2027, gas and NGL at the gas rate with 0 percent used in-country. On the default project the template returns NPV 432.0925 and the Designer regime 169.7176. Anything keyed to "the PIA template" on these sixteen sweep cases is mis-keyed.
+The nine published price-sweep cases run ONE regime alone on the default project. READ THE NAME CAREFULLY: it is the Designer's own default regime, id 1, "Nigerian PIA (PSC)", and it is NOT the "Nigeria - PIA (2021)" TEMPLATE. Its values are the Designer's own sample values and none of them is read from the Act. The Designer regime recovers cost at 70 percent against the template's 70 percent of the gross value of crude oil and NGL, splits profit oil 60 percent from R 1 and 50 percent from R 1.5 against the template's government minimum profit oil by cumulative crude oil at the start of the year (type pia_cumulative_production), to 50 million bbl -> government 5 percent, to 100 million bbl -> government 10 percent, to 350 million bbl -> government 15 percent, to 750 million bbl -> government 25 percent, to 1500 million bbl -> government 35 percent, above million bbl -> government 45 percent, and charges royalty 12.5 percent from 60 USD/bbl and 15 percent from 80 USD/bbl against the template's PIA 2021 royalty (type pia_2021): production royalty by terrain deep_offshore and daily rate, royalty by price on the regulations_2021 benchmarks with project year 1 in calendar 2027, gas and NGL at the gas rate with 0 percent used in-country. On the default project the template returns NPV 432.0925 and the Designer regime 169.7176. Anything keyed to "the PIA template" on these 18 sweep cases is mis-keyed.
 
 The nine cases pin the whole result at each price, not only the share:
 
@@ -1552,7 +1552,7 @@ The rule a reader needs. Before believing a point on this curve, read its state 
 
 # SECTION 27: The payback verdict restates the NPV ranking whenever payback ties (owned by Expert m04)
 
-Payback in this engine is an INTEGER year, the first year cumulative contractor net cash flow is above zero. Integers tie. On the Designer default project with all six templates loaded, four of the six pay back in the same year, and the verdict names one of them as though it had won.
+Payback in this engine is an INTEGER year, the first year cumulative contractor net cash flow is above zero. Integers tie. On the Designer default project with all six templates loaded, most of the six pay back in the same year, and the verdict names one of them as though it had won.
 
 | position in the summary (NPV descending) | regime | npv | paybackPeriod |
 | --- | --- | --- | --- |
@@ -1565,7 +1565,9 @@ Payback in this engine is an INTEGER year, the first year cumulative contractor 
 
 The verdict the engine returns: "Nigeria - PIA (2021)", "Generic Royalty/Tax", "USA - Gulf of Mexico", "Brazil - Concession" and "Ghana - Deepwater" pay back in year 3, against year 4 for "Angola - Deepwater PSC".
 
-Read it against the table. Four regimes pay back in year 3 and two in year 4, so "fastest capital recovery" has a four-way tie at the top and a two-way tie at the bottom. The regime the sentence names is the first of the four in summary order, and the summary is sorted by contractor NPV, so on any project where payback ties the payback verdict names WHICHEVER REGIME HAS THE HIGHEST NPV. It is the NPV ranking wearing a different label.
+Read it against the table. Five regimes pay back in year 3 and one regime pays back in year 4, so "fastest capital recovery" has a five-way tie at the top.
+
+The regime the sentence names is the first of the tied regimes in summary order, and the summary is sorted by contractor NPV, so on any project where payback ties the payback verdict names WHICHEVER REGIME HAS THE HIGHEST NPV. It is the NPV ranking wearing a different label.
 
 That is the exact claim `deriveInsights` was written to eliminate. The function exists because the Insights tab used to declare the top-NPV regime to also have the fastest payback, among three other conclusions nothing had computed. The payback verdict now genuinely reads the payback column, and it still lands on the top-NPV regime every time the column ties, because a strict less-than in a reduce keeps the first element it saw and the first element it saw is the NPV winner.
 
@@ -1594,7 +1596,7 @@ And notice the SECOND name in every one of these sentences. It is not the runner
 
 The reading rule. A verdict that names a winner on an INTEGER quantity is only a ranking when you have checked the column for ties, and the column is in the summary table two centimetres away. Where it ties, the sentence is telling you about NPV. And the two regimes a payback sentence names are the extremes, never a ranking of two.
 
-One more thing to notice in the sentences above, and it is a copy defect rather than an arithmetic one. The engine formats money inside its verdict strings as `$1339.3MM`. Every other number in this course is written as millions of USD in words, because the owner copy rule forbids the dollar sign and the MM unit in user-facing text. A panel that prints an insight sentence verbatim, which is the only honest way to show what the engine said, puts that formatting on the screen. Recorded in the wave FINDINGS.md as EC2-6.
+One more thing to notice in the sentences above, and it is a copy defect rather than an arithmetic one. The engine formats money inside its verdict strings with a dollar sign and an MM unit (the capex and government verdicts on the published comparisons print that way). Every other number in this course is written as millions of USD in words, because the owner copy rule forbids the dollar sign and the MM unit in user-facing text. A panel that prints an insight sentence verbatim, which is the only honest way to show what the engine said, puts that formatting on the screen. Recorded in the wave FINDINGS.md as EC2-6.
 
 # SECTION 28: Government take and government share of net revenue, the two named metrics (owned by Expert m01, m02 and m05)
 

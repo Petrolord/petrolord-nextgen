@@ -155,9 +155,9 @@ w('HOW TO READ A COLUMN MARKED "derived". A derived column is a ratio or a diffe
 w();
 w('The four instruments a regime carries, and nothing else:');
 w();
-w('- `royalty`, either `flat` with a `rate`, or `sliding_price` with tiers keyed on the oil price.');
-w('- `costRecoveryLimit`, a percent of revenue after royalty.');
-w('- `profitSplit`, either `flat` with a contractor `split`, or `tiered_r_factor` with tiers keyed on the R factor.');
+w('- `royalty`, either `flat` with a `rate`, `sliding_price` with tiers keyed on the oil price, or `pia_2021`, the Petroleum Industry Act 2021 royalty the Nigeria - PIA (2021) template carries (Section 12).');
+w('- `costRecoveryLimit`, a percent of revenue after royalty, or, with `costRecoveryBase` set to `liquids_gross`, a percent of the gross value of crude oil and NGL (Section 13).');
+w('- `profitSplit`, either `flat` with a contractor `split`, `tiered_r_factor` with tiers keyed on the R factor, or `pia_cumulative_production`, the government\'s minimum share by cumulative crude production (Section 14).');
 w('- `tax`, holding `cit`, `rrt`, `minTax` and an optional `rrtUpliftPct` that defaults to 20.');
 w();
 w('Four things the sandbox refuses to be, all four stated in the engine\'s own header:');
@@ -697,7 +697,7 @@ w();
     w(`| ${name} | ${d.values.map((v) => p(v)).join(' | ')} | ${p(d.values[d.values.length - 1] - d.values[0])} |`);
   }
   w();
-  w(`The nine published price-sweep cases run ONE regime alone on the default project. READ THE NAME CAREFULLY: it is the Designer's own default regime, id 1, "${G.priceSweep[0].regime.name}", and it is NOT the "Nigeria - PIA (2021)" TEMPLATE. Its values are the Designer\'s own sample values and none of them is read from the Act. The Designer regime recovers cost at ${G.priceSweep[0].regime.costRecoveryLimit} percent against the template's ${PIA.costRecoveryLimit} percent of the gross value of crude oil and NGL, splits profit oil ${G.priceSweep[0].regime.profitSplit.tiers.map((t) => `${t.split} percent from R ${t.threshold}`).join(' and ')} against the template's ${splitWords(PIA.profitSplit)}, and charges royalty ${G.priceSweep[0].regime.royalty.tiers.map((t) => `${t.rate} percent from ${t.threshold} USD/bbl`).join(' and ')} against the template's ${royaltyWords(PIA.royalty)}. On the default project the template returns NPV ${m(E.calculateNPV(cf(PIA, DEFAULT_PROJECT), DEFAULT_PROJECT.discountRate))} and the Designer regime ${m(G.priceSweep.find((x) => x.id === 'price_70_pia_default').expected.npv)}. Anything keyed to "the PIA template" on these sixteen sweep cases is mis-keyed.`);
+  w(`The nine published price-sweep cases run ONE regime alone on the default project. READ THE NAME CAREFULLY: it is the Designer's own default regime, id 1, "${G.priceSweep[0].regime.name}", and it is NOT the "Nigeria - PIA (2021)" TEMPLATE. Its values are the Designer\'s own sample values and none of them is read from the Act. The Designer regime recovers cost at ${G.priceSweep[0].regime.costRecoveryLimit} percent against the template's ${PIA.costRecoveryLimit} percent of the gross value of crude oil and NGL, splits profit oil ${G.priceSweep[0].regime.profitSplit.tiers.map((t) => `${t.split} percent from R ${t.threshold}`).join(' and ')} against the template's ${splitWords(PIA.profitSplit)}, and charges royalty ${G.priceSweep[0].regime.royalty.tiers.map((t) => `${t.rate} percent from ${t.threshold} USD/bbl`).join(' and ')} against the template's ${royaltyWords(PIA.royalty)}. On the default project the template returns NPV ${m(E.calculateNPV(cf(PIA, DEFAULT_PROJECT), DEFAULT_PROJECT.discountRate))} and the Designer regime ${m(G.priceSweep.find((x) => x.id === 'price_70_pia_default').expected.npv)}. Anything keyed to "the PIA template" on these ${G.priceSweep.length + G.capexSweep.length} sweep cases is mis-keyed.`);
   w();
   w('The nine cases pin the whole result at each price, not only the share:');
   w();
@@ -1048,7 +1048,7 @@ w();
 // -------------------------------------------------------------- Section 27
 w('# SECTION 27: The payback verdict restates the NPV ranking whenever payback ties (owned by Expert m04)');
 w();
-w('Payback in this engine is an INTEGER year, the first year cumulative contractor net cash flow is above zero. Integers tie. On the Designer default project with all six templates loaded, four of the six pay back in the same year, and the verdict names one of them as though it had won.');
+w('Payback in this engine is an INTEGER year, the first year cumulative contractor net cash flow is above zero. Integers tie. On the Designer default project with all six templates loaded, most of the six pay back in the same year, and the verdict names one of them as though it had won.');
 w();
 {
   const c = CMP['cmp_all_templates_default_project'];
@@ -1060,8 +1060,13 @@ w();
   const pb = res.insights.find((i) => i.key === 'payback');
   w(`The verdict the engine returns: ${pb.text}`);
   w();
+  const byYear = {}; res.summary.forEach((x) => { byYear[x.paybackPeriod] = (byYear[x.paybackPeriod] || 0) + 1; });
+  const ys = Object.keys(byYear).map(Number).sort((a, b) => a - b);
+  const words = ['none', 'one', 'two', 'three', 'four', 'five', 'six'];
+  w(`Read it against the table. ${ys.map((y, i) => `${i === 0 ? words[byYear[y]].replace(/^./, (ch) => ch.toUpperCase()) : words[byYear[y]]} regime${byYear[y] === 1 ? '' : 's'} pay${byYear[y] === 1 ? 's' : ''} back in year ${y}`).join(' and ')}, so "fastest capital recovery" has a ${words[byYear[ys[0]]]}-way tie at the top.`);
+  w();
 }
-w('Read it against the table. Four regimes pay back in year 3 and two in year 4, so "fastest capital recovery" has a four-way tie at the top and a two-way tie at the bottom. The regime the sentence names is the first of the four in summary order, and the summary is sorted by contractor NPV, so on any project where payback ties the payback verdict names WHICHEVER REGIME HAS THE HIGHEST NPV. It is the NPV ranking wearing a different label.');
+w('The regime the sentence names is the first of the tied regimes in summary order, and the summary is sorted by contractor NPV, so on any project where payback ties the payback verdict names WHICHEVER REGIME HAS THE HIGHEST NPV. It is the NPV ranking wearing a different label.');
 w();
 w('That is the exact claim `deriveInsights` was written to eliminate. The function exists because the Insights tab used to declare the top-NPV regime to also have the fastest payback, among three other conclusions nothing had computed. The payback verdict now genuinely reads the payback column, and it still lands on the top-NPV regime every time the column ties, because a strict less-than in a reduce keeps the first element it saw and the first element it saw is the NPV winner.');
 w();
@@ -1102,7 +1107,7 @@ w('And notice the SECOND name in every one of these sentences. It is not the run
 w();
 w('The reading rule. A verdict that names a winner on an INTEGER quantity is only a ranking when you have checked the column for ties, and the column is in the summary table two centimetres away. Where it ties, the sentence is telling you about NPV. And the two regimes a payback sentence names are the extremes, never a ranking of two.');
 w();
-w('One more thing to notice in the sentences above, and it is a copy defect rather than an arithmetic one. The engine formats money inside its verdict strings as `$1339.3MM`. Every other number in this course is written as millions of USD in words, because the owner copy rule forbids the dollar sign and the MM unit in user-facing text. A panel that prints an insight sentence verbatim, which is the only honest way to show what the engine said, puts that formatting on the screen. Recorded in the wave FINDINGS.md as EC2-6.');
+w('One more thing to notice in the sentences above, and it is a copy defect rather than an arithmetic one. The engine formats money inside its verdict strings with a dollar sign and an MM unit (the capex and government verdicts on the published comparisons print that way). Every other number in this course is written as millions of USD in words, because the owner copy rule forbids the dollar sign and the MM unit in user-facing text. A panel that prints an insight sentence verbatim, which is the only honest way to show what the engine said, puts that formatting on the screen. Recorded in the wave FINDINGS.md as EC2-6.');
 w();
 
 w('# SECTION 28: Government take and government share of net revenue, the two named metrics (owned by Expert m01, m02 and m05)');
