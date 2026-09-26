@@ -25,7 +25,7 @@ A score is a sum of floating-point terms. Two passages with the same text can la
 
 The exact duplicate in the corpus shows the rule working. EKD-058 is an exact copy of EKD-046, a spill note filed twice. On Q10, "diesel spill during bunkering", both score 13.884966 by BM25 and 0.464024 by TF-IDF, the engine reports the tie as [["EKD-046","EKD-058"]], and the id ascending puts EKD-046 first.
 
-## Why a key and not a tolerance
+## Why the rule uses a key
 
 A key is transitive: two scores with the same key tie, full stop. A relative tolerance is not: a can be near b and b near c while a is not near c, which breaks a sort.
 

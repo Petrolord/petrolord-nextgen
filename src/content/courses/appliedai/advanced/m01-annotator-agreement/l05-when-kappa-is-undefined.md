@@ -12,7 +12,7 @@ The expected disagreement is 0 when both raters give every item one and the same
 
 The boundary is exact: an expected disagreement above 0 gives a kappa, and one of 0 gives null with the reason. A single disagreement anywhere moves the expected disagreement above 0, and kappa returns.
 
-## A result with a note is not a refusal
+## Results with a note, and refusals
 
 A refusal is a call the engine will not run, because an input is wrong: it returns an `error` and names the `field`. A result with a note is a call that ran on valid inputs where one figure has no defined value: it returns everything else and puts the reason beside the missing figure. Kappa on two raters who always agree on one label is the second kind. Say that kappa "is returned as null, with the reason", and keep the word "refused" for the first kind.
 
