@@ -16,7 +16,7 @@ The engine's rule starts from the same place: seller shortfall = (PNQ - toleranc
 
 The model formula subtracts the daily actual quantity. The engine measures against the quantity the seller made available, and states that choice in its own basis:
 
-> "seller shortfall measured against the quantity the seller made available"
+> seller shortfall measured against the quantity the seller made available
 
 The difference shows on a day when gas was made available and not taken. In the golden case, 100.000000 was properly nominated and made available and the buyer took 60.000000. The seller shortfall is 0.000000 and the buyer shortfall 40.000000. Gas made available and not taken is the buyer's. This is one of four readings the engine states in its basis, and the Expert tier sets them side by side.
 
@@ -43,8 +43,8 @@ That day's adjusted DCQ drops to 14700.000000, because a seller shortfall is tak
 
 ## Why the seller shortfall reduces the buyer's obligation
 
-A buyer cannot be made to pay for gas the seller did not offer. So each seller shortfall reduces the adjusted DCQ for the day, and over the year it reduces the Adjusted ACQ, on which the take-or-pay quantity rests. The take-or-pay module picks this up.
+A buyer cannot be made to pay for gas the seller did not offer. So each seller shortfall reduces the adjusted DCQ for the day and, over the year, the Adjusted ACQ.
 
 ## Exercise
 
-Open the quantity calculator, the course's own calculator panel, and choose "The daily balance". Run the power plant's January 2027 and read every column for 2027-01-20. Then replace the box with a `dcq` of 100, `maxDcqPct` 120, `deliveryTolerance` 5 and one day dated "2027-03-01" with `nominated` 100, `available` 95 and `taken` 95. Run it, then change `available` and `taken` to 94 and run it again. Finally set `available` to 100 and `taken` to 60, and read both shortfall columns.
+Open the quantity calculator, the course's own calculator panel, and choose "The daily balance". Run the power plant's January 2027 and read every column for 2027-01-20. Then replace the box with a `dcq` of 100, `maxDcqPct` 120, `deliveryTolerance` 5 and one day dated "2027-03-01" with `nominated` 100, `available` 95 and `taken` 95. Run it, then change `available` and `taken` to 94 and run it again. Finally set `available` to 100 and `taken` to 60, read both shortfall columns, and read the line under the table where the engine states its reading.
