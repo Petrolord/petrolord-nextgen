@@ -83,8 +83,8 @@ q(3, "System A's Q13 answer repeats the year from \"the end of 2025\", and the c
 
 q(0, "System A's answers to Q14 and Q24 state no number, date or quote. How are they treated?",
  "Their supported fraction is returned as null, with the reason, and they add nothing to the pooled fraction",
- ["They are refused, naming `text`, since an answer must hold at least one claim",
-  "Each scores 1.000000, as an answer with no claim has nothing unsupported",
+ ["They are refused, naming `text`, since an answer must hold at least one claim before the check will run on it",
+  "Each scores 1.000000, as an answer with no claim has nothing unsupported and counts as fully supported in the pool",
   "Each scores 0, pulling the pooled fraction down"],
  "The fraction is undefined for an answer with no claim, and the engine returns it as null with the note \"the answer has no checkable claim (no quote, date or number), so the supported fraction is undefined\". The call is not refused, the fraction is never filled in as 1 or 0, and the pooled figure counts only claims."),
 
@@ -98,9 +98,9 @@ q(2, "An answer cites one id that is no passage of the corpus and one passage th
 q(3, "System A's Q01 answer has 2 claims, both found in its cited, retrieved passage EKD-018. What does \"supported\" tell you about that answer?",
  "Both figures appear in EKD-018; whether the answer is true is a question the check does not decide",
  ["The answer is right, since the passage was retrieved and cited and the figures were found in it word for word",
-  "EKD-018 was judged by the assessor to answer Q01 at grade 3",
+  "The check read EKD-018's judged grade for Q01 and counted each figure as supported because that grade is 3",
   "No other passage in the corpus contains a figure that contradicts it, since the check searches them all"],
- "In this course grounded is supported by a cited and retrieved passage, a statement about the passage and never about the truth of the answer; the check does not decide whether the answer is true or whether the passage is about the right well. The judgments play no part in the claim check, and the engine looks for no contradicting passage."),
+ "In this course grounded is supported by a cited and retrieved passage, a statement about the passage and never about the truth of the answer; the check does not decide whether the answer is true or whether the passage is about the right well. The claim check never reads a judged grade, so no grade makes a figure supported, and the engine looks for no contradicting passage."),
 
 q(0, "In what order does the claim reader pick claims out of an answer?",
  "Quoted spans first, then ISO dates, then numbers",

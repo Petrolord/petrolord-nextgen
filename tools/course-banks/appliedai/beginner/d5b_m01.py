@@ -14,7 +14,7 @@ q(2, "Which language model does the evaluation engine call when it scores a copi
  "None: its imports are lib/stats, the percentile conventions and the machine learning engine, and its source makes no network call.",
  ["A small model that it runs locally to judge whether each cited answer is true before the claims are counted.",
   "One that embeds every passage, so that BM25 and TF-IDF can compare meanings as well as words.",
-  "Only the model behind system B, which it asks to rerank the TF-IDF list before scoring."],
+  "Only the model behind system B, which it asks to rerank the TF-IDF list and then to grade each rewritten answer before scoring."],
  "The engine runs no language model: it writes no answer, embeds no text, reranks nothing and asks no model to judge an answer, and its imports are lib/stats, lib/conventions/percentile.js and the machine learning engine. There is no dense retrieval to compare meanings, and system B is a fixed TF-IDF retriever with hand-written answers, so there is nothing to rerank."),
 
 q(0, "Q14 asks \"Is Ekene-5 producing water?\" and BM25 finds none of its 3 relevant passages in the top 5. What causes the miss?",
@@ -38,9 +38,9 @@ q(1, "On the four-grade scale used for the Ekene judgments, what does grade 1 me
   "Relevant, the middle grade, which the course counts only when the threshold is raised to 2."],
  "The fixture grades are 3 answers the query, 2 relevant, 1 related and 0 judged not relevant. The course calls a passage relevant at or above a stated threshold, grade 1 by default, so a related passage counts. Grade 3 is the top grade and grade 0 is the judged not-relevant grade, and at a threshold of 2 grade 1 would stop counting."),
 
-q(0, "A passage in System A's top 5 for a query was never judged by anyone. How is it graded?",
+q(0, "A new retriever, one the pool was not built from, puts a passage nobody judged into its top 5 for a query. How is that passage graded?",
  "As grade 0, because unjudged passages count as grade 0.",
- ["As grade 1, since a passage the retriever found is assumed to be at least related to the query.",
+ ["As grade 1, since a passage a retriever found is assumed to be at least related to the query.",
   "It is removed from the ranked list first, and every passage below it moves up one rank.",
   "The engine refuses the call and names the passage, since every retrieved passage needs a grade."],
  "The stated rule is that unjudged passages count as grade 0. No grade is assumed for a retrieved passage, the ranking is never edited to drop it, and the call is not refused: an unjudged passage is an ordinary part of a ranked list."),

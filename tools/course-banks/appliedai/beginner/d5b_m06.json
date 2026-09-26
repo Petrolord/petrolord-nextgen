@@ -113,8 +113,8 @@
   "prompt": "System A's answers to Q14 and Q24 state no number, date or quote. How are they treated?",
   "options": [
    "Their supported fraction is returned as null, with the reason, and they add nothing to the pooled fraction",
-   "They are refused, naming `text`, since an answer must hold at least one claim",
-   "Each scores 1.000000, as an answer with no claim has nothing unsupported",
+   "They are refused, naming `text`, since an answer must hold at least one claim before the check will run on it",
+   "Each scores 1.000000, as an answer with no claim has nothing unsupported and counts as fully supported in the pool",
    "Each scores 0, pulling the pooled fraction down"
   ],
   "answer": 0,
@@ -135,12 +135,12 @@
   "prompt": "System A's Q01 answer has 2 claims, both found in its cited, retrieved passage EKD-018. What does \"supported\" tell you about that answer?",
   "options": [
    "The answer is right, since the passage was retrieved and cited and the figures were found in it word for word",
-   "EKD-018 was judged by the assessor to answer Q01 at grade 3",
+   "The check read EKD-018's judged grade for Q01 and counted each figure as supported because that grade is 3",
    "No other passage in the corpus contains a figure that contradicts it, since the check searches them all",
    "Both figures appear in EKD-018; whether the answer is true is a question the check does not decide"
   ],
   "answer": 3,
-  "explanation": "In this course grounded is supported by a cited and retrieved passage, a statement about the passage and never about the truth of the answer; the check does not decide whether the answer is true or whether the passage is about the right well. The judgments play no part in the claim check, and the engine looks for no contradicting passage."
+  "explanation": "In this course grounded is supported by a cited and retrieved passage, a statement about the passage and never about the truth of the answer; the check does not decide whether the answer is true or whether the passage is about the right well. The claim check never reads a judged grade, so no grade makes a figure supported, and the engine looks for no contradicting passage."
  },
  {
   "prompt": "In what order does the claim reader pick claims out of an answer?",

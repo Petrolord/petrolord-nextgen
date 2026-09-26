@@ -49,7 +49,7 @@ q(2, "A documents list holds a passage whose id is an empty string. What is the 
 q(3, "`retrieve` is given a list of queries whose first text is null. Which field does the refusal name?",
  "queries[0].text",
  ["query, the single-query field that `rankBm25` uses",
-  "queries, since one bad entry spoils the list as a whole",
+  "queries",
   "documents[0].text, the first passage in the corpus the call ranks against"],
  "When several queries run at once each is checked by position, so a null first text is refused naming `queries[0].text`: \"queries[0].text must be a string\". `query` is the field of a single-query call, the list itself is accepted, and the passages are a separate input."),
 
@@ -209,7 +209,7 @@ q(1, "What does \"a repeated query word counts once\" correspond to in the Okapi
 q(3, "On the hand set, d3 holds rate once. What does rate contribute to d3's BM25 score for \"oil rate\"?",
  "0.697974",
  ["0.875469, its idf, since tf 1 always contributes exactly the idf",
-  "1.095514, the same as rate in d1",
+  "1.095514",
   "0.506225, the rate weight TF-IDF gives the word"],
  "d3's row reads oil: 2, 1.024632; rate: 1, 0.697974. At tf 1 the fraction (k1 + 1) / (1 + k1 (1 - b + b dl / avgdl)) equals 1 only when that bracket is 1, and d3 is longer than average, so rate contributes less than its idf. 1.095514 is rate in d1 with tf 2, and 0.506225 is a TF-IDF weight in d1."),
 
@@ -298,7 +298,7 @@ q(0, "The stated hand-set answer cites d1 and d4. For which of its claims does t
  "45 and -2",
  ["The date 2023-01-01 and the quote \"water injection\"",
   "120 and 2,096, the two figures it was given",
-  "Only 45, since -2 is read as part of an identifier"],
+  "Only 45"],
  "45 and -2 are in none of the five hand-set passages, so each reason ends \"it appears in no passage of the corpus\". The date and the quote are in d2, retrieved and not cited, and their reasons name d2; 120 and 2,096 are supported in d1 and d4. The minus in -2 follows a space, so it is a negative number and a claim."),
 
 q(1, "System A's Q10 answer cites both EKD-046 and EKD-058. How does the check fare on it?",

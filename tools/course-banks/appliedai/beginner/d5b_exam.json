@@ -58,7 +58,7 @@
   "prompt": "`retrieve` is given a list of queries whose first text is null. Which field does the refusal name?",
   "options": [
    "query, the single-query field that `rankBm25` uses",
-   "queries, since one bad entry spoils the list as a whole",
+   "queries",
    "documents[0].text, the first passage in the corpus the call ranks against",
    "queries[0].text"
   ],
@@ -300,7 +300,7 @@
   "prompt": "On the hand set, d3 holds rate once. What does rate contribute to d3's BM25 score for \"oil rate\"?",
   "options": [
    "0.875469, its idf, since tf 1 always contributes exactly the idf",
-   "1.095514, the same as rate in d1",
+   "1.095514",
    "0.506225, the rate weight TF-IDF gives the word",
    "0.697974"
   ],
@@ -434,7 +434,7 @@
    "45 and -2",
    "The date 2023-01-01 and the quote \"water injection\"",
    "120 and 2,096, the two figures it was given",
-   "Only 45, since -2 is read as part of an identifier"
+   "Only 45"
   ],
   "answer": 0,
   "explanation": "45 and -2 are in none of the five hand-set passages, so each reason ends \"it appears in no passage of the corpus\". The date and the quote are in d2, retrieved and not cited, and their reasons name d2; 120 and 2,096 are supported in d1 and d4. The minus in -2 follows a space, so it is a negative number and a claim."

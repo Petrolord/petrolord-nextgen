@@ -109,11 +109,11 @@ q(1, "A BM25 call is given passages made of punctuation only. What does the engi
  "BM25 divides each length by avgdl, and with no token anywhere avgdl is 0, so the engine refuses naming `documents`: \"documents has no token in any text: BM25 needs an average document length above 0\". The note is for a query no passage contains in a corpus that has tokens, the vocabulary message is TF-IDF's, and nothing is ranked at score 0."),
 
 q(2, "Q13 is scored at k1 1.2 and at k1 2. What changes?",
- "Every score rises, EKD-029 goes from 9.951737 to 10.388779, and the order holds",
- ["Every score falls, since a larger k1 divides each term by more",
+ "Each top 5 score rises, EKD-029 goes from 9.951737 to 10.388779, and the order holds",
+ ["Each top 5 score falls, since a larger k1 divides each term by more",
   "The order reverses, with EKD-037 moving from fifth place to first place once k1 is raised to 2",
   "Nothing, since k1 matters only when b is 0"],
- "A larger k1 lets repeats keep counting for longer, and on Q13 every score rises at k1 2 while the order holds: EKD-029 9.951737 to 10.388779, EKD-030 9.798866 to 10.116345, down to EKD-037 at fifth. k1 applies whatever b is."),
+ "A larger k1 lets repeats keep counting for longer, and on Q13 each of the five top scores rises at k1 2 while the order holds: EKD-029 9.951737 to 10.388779, EKD-030 9.798866 to 10.116345, down to EKD-037 at fifth, 6.222042 to 6.469637. The claim is about the top 5 the course prints; a larger k1 does not raise every score in the corpus. k1 applies whatever b is."),
 
 emit(Q, '/root/dai-wip-appliedai/banks/d5b_m04.json', expect_n=15)
 finish()

@@ -60,10 +60,10 @@
    "1000",
    "0, the empty cutoff, as a way to rank without keeping anything",
    "2.5, rounded down to 2 before the ranking is cut",
-   "1001, as long as there are enough passages to fill the list"
+   "1001"
   ],
   "answer": 0,
-  "explanation": "k must be a whole number from 1 to 1000, so 1000 is accepted. 0, 2.5 and 1001 are each refused with the engine's own words \"k must be a whole number from 1 to 1000\". The engine never rounds a k, and the cap holds whatever the corpus size."
+  "explanation": "k must be a whole number from 1 to 1000, so 1000 is accepted. 0, 2.5 and 1001 are each refused with the engine's own words \"k must be a whole number from 1 to 1000\". The engine never rounds a k, and the cap of 1000 holds whatever the corpus size."
  },
  {
   "prompt": "The stated ranking c, a, x, b, d is scored against the judgments a 3, b 2, c 0, d 1, e 2, at k 5 and grade 1 or more. What is the precision at 5?",
@@ -135,7 +135,7 @@
   "prompt": "At k 5, relevant at grade 1 or more, system B's MRR is 0.923913 and system A's 0.880435. What does the difference say?",
   "options": [
    "B beats A on every metric, so B should be chosen",
-   "More of the relevant passages are found by B, since MRR counts every find",
+   "More of the relevant passages are found by B, since MRR counts every relevant find in the top 5 of each query",
    "System B puts its first relevant passage higher on average, while system A has the higher recall",
    "A trails on hit rate and on recall as well"
   ],

@@ -64,8 +64,8 @@ q(1, "\"oil rate\" is ranked by cosine on the five hand-set passages at k 5. How
  "2, d1 and d3",
  ["5, as k is 5 and a list is always filled to its cutoff",
   "4, since only the empty d5 is left out of the list",
-  "3, d1, d3 and d2, since d2 holds water, a word near the query"],
- "Only a score above 0 ranks. d2 and d4 share no term with the query and d5 is empty, so 2 of the 5 passages rank and the list is shorter than k. d2's water is a different token from oil and rate, and the engine matches tokens only."),
+  "3, d1, d2 and d3"],
+ "Only a score above 0 ranks. d2 and d4 share no term with the query and d5 is empty, so 2 of the 5 passages rank and the list is shorter than k. d2 shares no token with oil rate, water included, and the engine matches tokens only."),
 
 q(0, "For Q04 \"bubble point pressure of the Ekene oil\", TF-IDF ranks EKD-018 first at 0.553949. Where is EKD-010, the passage judged to answer the query?",
  "Second, at 0.328560",

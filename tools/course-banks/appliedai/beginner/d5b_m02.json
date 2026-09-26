@@ -5,7 +5,7 @@
    "10, since the stop list is applied before the text is split into its tokens",
    "13",
    "9, because \"1.25\" and \"MMscf/d\" each stay whole as a single token",
-   "11, with the well name Ekene-3 kept as one token and 1548 m read as one"
+   "11"
   ],
   "answer": 1,
   "explanation": "The engine splits on every run of characters outside [a-z0-9]: ekene 3 flowed 1 25 mmscf d top well at 1548 m tvd, 13 tokens. The decimal point and the slash both separate, and so does the hyphen in Ekene-3. 10 is the count with the stop list on, which removes top, well and at, and the list is off by default."
