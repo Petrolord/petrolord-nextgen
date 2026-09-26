@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Under PIA s.92(4), by when must the holder of an oil mining lease conclude its conversion contract?",
+  "options": [
+   "By the later of 18 months from the effective date and the lease's own expiry date",
+   "By the earlier of 18 months from the effective date and the expiry date of that oil mining lease",
+   "On one fixed date for every holder, 18 months from commencement, whatever the expiry",
+   "At any time while the lease runs, since s.92(1) makes conversion voluntary"
+  ],
+  "answer": 1,
+  "explanation": "S.92(4) sets the conversion date as \"the earlier of: (a) 18 months from the effective date ; and (b) the expiration date of the oil mining lease\". The earlier limb governs, so the later limb is wrong; the second limb reads each lease's own expiry, so the date is not the same for every holder; and voluntary conversion still has this deadline."
+ },
+ {
+  "prompt": "A holder lets the conversion date pass without signing. What does PIA s.92(6) say applies to its lease?",
+  "options": [
+   "It becomes a petroleum mining lease automatically, on the 30 percent class of s.267(a) for producing areas",
+   "Every area of it is relinquished under s.93(4), as the holder selected none",
+   "Its producing areas move to the 15 percent class of s.267(b) until it signs",
+   "The terms and conditions that applied to the licence or lease before the Act's effective date continue"
+  ],
+  "answer": 3,
+  "explanation": "S.92(6): a holder who \"does not enter into a conversion contract prior to the conversion date\" keeps \"the terms and conditions applicable to the oil prospecting licence or oil mining lease prior to the effective date of this Act\". No automatic conversion, no relinquishment and no s.267 class follows; relinquishment in s.93(4) is about areas a converting holder leaves unselected."
+ },
+ {
+  "prompt": "On conversion of an oil mining lease, which areas does PIA s.93(6)(a) turn into a petroleum prospecting licence?",
+  "options": [
+   "Areas the holder designates under s.93(1)(a), (b), (c) or (2), with fiscal terms under s.267(b)",
+   "Development and production areas under s.93(1)(d) and (e), with fiscal terms under s.267(a)",
+   "Unselected areas, which the Commission regrants to the holder as a prospecting licence",
+   "Every area of the lease, since conversion turns an oil mining lease into one prospecting licence"
+  ],
+  "answer": 0,
+  "explanation": "S.93(6)(a) converts areas \"designated by a holder under subsection (1) (a), (b), (c) or (2) into a petroleum prospecting licence\", \"with fiscal terms as applicable under section 267 (b)\". Development and production areas go to petroleum mining leases under s.93(6)(b) and s.267(a); unselected areas are relinquished under s.93(4); so the lease splits and never becomes one licence."
+ },
+ {
+  "prompt": "A converting holder's selection under s.93(1) covers less than 40% of its oil mining lease. What does PIA s.93(2) allow it to do?",
+  "options": [
+   "Nothing more: 40% is the least a conversion may keep, so the holder must relinquish the whole lease",
+   "Add further areas to its petroleum mining leases on the 30 percent class until the 40% is reached",
+   "Select further areas of the oil mining lease for conversion to a petroleum prospecting licence",
+   "Pay the Commission a fee for the shortfall below 40% before the conversion contract is signed"
+  ],
+  "answer": 2,
+  "explanation": "S.93(2): where the acreage selected under subsection (1) \"is less than 40% of the area\", \"the holder may select additional areas covered by the oil mining lease for conversion to a petroleum prospecting licence\". The top-up goes to a prospecting licence, which is the s.267(b) class; the text sets no fee and does not force relinquishment of the whole lease."
+ },
+ {
+  "prompt": "Ekene Alpha (synthetic; shallow water, converted, 2026 to 2032) is rerun with pia_license_type \"PPL\". Which provision totals move, changed run less base?",
+  "options": [
+   "Royalties and hydrocarbon tax together, since the licence type also sets which royalty tranches apply",
+   "Hydrocarbon tax and companies income tax, by -102385291.793528 each, since both charge 30 percent",
+   "Hydrocarbon tax alone, by -102385291.793528, with the take moving by -12.247203",
+   "None of the totals, as a prospecting licence shares the 30 percent class of s.267(a) with a mining lease"
+  ],
+  "answer": 2,
+  "explanation": "The one-change row for a prospecting licence prints royalties 0.000000, hydrocarbon tax -102385291.793528, companies income tax 0.000000 and take -12.247203. The licence type reaches only the hydrocarbon tax class: a prospecting licence is the 15 percent class of s.267(b) (rate 0.150000), and companies income tax does not deduct the hydrocarbon tax, so it stays at 0.000000."
+ },
+ {
+  "prompt": "Rerun as a new lease at a stated rate of 30, Ekene Alpha's hydrocarbon tax changes by -24691339.200000 although the rate is the same 30 percent. What moves it?",
+  "options": [
+   "The larger production allowance a new lease earns under the Sixth Schedule para 1(2)",
+   "A lower royalty on new leases, which leaves less royalty to deduct in the hydrocarbon tax base",
+   "Its class under the Nigeria Tax Act 2025, 15 percent for any new lease",
+   "The cost price ratio, which binds converted leases only"
+  ],
+  "answer": 0,
+  "explanation": "The course reads the new-lease rows this way: a new lease moves the hydrocarbon tax through the larger new-lease production allowance and through the rate it states. At a stated 30 the rate matches the converted class, so the allowance is what acts. Royalties move by 0.000000 on that row, the stated rate returns 0.300000 under either framework, and the cost price ratio reads no lease status."
+ },
+ {
+  "prompt": "How should a report quote Ekene Alpha's hydrocarbon tax if Alpha were a lease granted out of new acreage?",
+  "options": [
+   "As a fall of -114730961.393528, because new acreage onshore and in shallow water is the 15 percent class",
+   "As a fall of -24691339.200000, because every petroleum mining lease is the 30 percent class of s.267(a)",
+   "At the engine's default rate of 30, with the default named in a note in kpis.pia_notes",
+   "With its stated rate, 15 or 30, because PIA s.267 does not say which one applies to such a lease"
+  ],
+  "answer": 3,
+  "explanation": "The new-lease rate onshore and in shallow water is an open reading: s.267 (NTA s.72) gives 30 percent to leases selected under s.93(6)(b) and (7)(b) and 15 percent to onshore and shallow water, and does not say which applies to a lease granted out of new acreage. The engine keeps no default. The two rows, -114730961.393528 at a stated 15 and -24691339.200000 at a stated 30, are shown together and neither is the law."
+ },
+ {
+  "prompt": "A new-acreage onshore lease is run with pia_new_pml_hct_rate_pct left unset. What does the engine return?",
+  "options": [
+   "It runs at 30 percent, with a note in kpis.pia_notes naming 30 as the default it chose for the lease",
+   "A refusal that opens \"A new-acreage petroleum mining lease onshore or in shallow water needs pia_new_pml_hct_rate_pct set to 15 or 30; got null.\"",
+   "The ledger at 15 percent, the s.267(b) class for onshore and shallow water, printed with no note",
+   "Hydrocarbon tax of 0.000000 in every year, as deep offshore pays in a year under the Act alone"
+  ],
+  "answer": 1,
+  "explanation": "That is the engine's own refusal, and it goes on to say the rate is \"a stated user choice with no default\". A value the texts leave open is a stated input and a run without it is refused, so neither 15 nor 30 is filled in silently. A note in kpis.pia_notes accompanies a result, and a refusal returns no result at all."
+ },
+ {
+  "prompt": "Which terms does the engine accept for a producing marginal field in shallow water that converted under PIA s.94(1)?",
+  "options": [
+   "pia_terrain \"marginal_field\", the category the Act's royalty table names beside onshore fields",
+   "Terrain left blank and the field's water depth in metres, which the engine reads to set the terrain",
+   "Onshore as the terrain, since a marginal field in shallow water is entered as onshore acreage",
+   "pia_terrain \"shallow_water\" with pia_marginal_field_pre_2021 set to true"
+  ],
+  "answer": 3,
+  "explanation": "The engine's refusal of \"marginal_field\" says a marginal field is onshore or in shallow water and names the flag pia_marginal_field_pre_2021 for a producing marginal field converted under s.94(1). The engine never reads the water depth; the terrain string decides. \"onshore\" would misstate a shallow water field's terrain and its tranches above 10,000 bopd."
+ },
+ {
+  "prompt": "On ekene_marginal_shallow_flag (shallow water, 2026, daily rate 20000.000000 bopd), which pair of rates does the engine return?",
+  "options": [
+   "Liquids royalty rate 0.093750 and hydrocarbon tax rate 0.150000",
+   "A royalty rate of 0.050000, the old flat rate kept by s.94(1), with hydrocarbon tax at 0.150000",
+   "Royalty 0.093750 with hydrocarbon tax at 0.300000, the converted-lease class of s.267(a)",
+   "Onshore tranche royalty of 0.106250 at 20,000 bopd, with hydrocarbon tax at 0.150000"
+  ],
+  "answer": 0,
+  "explanation": "The course prints the case: daily rate 20000.000000 bopd, liquids royalty rate 0.093750, and a hydrocarbon tax rate of 0.150000 for the flagged field. The royalty follows the shallow water tranches (0.093750 at 20000 bopd); 0.106250 is the onshore rate at that volume. The flag gives the 15 percent class, so 0.300000 ignores it, and the engine models no original royalty rate."
+ },
+ {
+  "prompt": "PIA s.94(1) lets a producing marginal field keep its original royalty rates and farm-out agreements. Which part of that section does the engine compute?",
+  "options": [
+   "The original royalty rates and farm-out terms, read from the lease terms the learner states for the field",
+   "Only the 15 percent hydrocarbon tax rate, through the stated flag; the rest stays concept-only",
+   "The 18-month deadline, refusing a flagged field that converted late",
+   "Nothing: the flag only adds a note to kpis.pia_notes"
+  ],
+  "answer": 1,
+  "explanation": "The provision map records s.94(1) as \"the 15 percent rate is computed (the stated flag); the rest is concept-only\". The engine carries no original royalty rates or farm-out agreements and no conversion date, and the flag does change a figure: it gives the rate 0.150000 where a converted lease pays 0.300000."
+ },
+ {
+  "prompt": "Under the Nigeria Tax Act 2025 (June 2025 gazette), what tax does an oil mining lease that never converted pay, as the course reads the texts?",
+  "options": [
+   "Hydrocarbon tax at 30 percent under NTA s.72(a), because s.196(h) repealed the Petroleum Profits Tax Act",
+   "No petroleum tax until the lease expires, because NTA s.87(1) keeps it outside the hydrocarbon tax Part",
+   "Petroleum profits tax under the Nigeria Tax Act's own Part II, which s.90(1) applies to leases yet to convert",
+   "Petroleum profits tax under the Petroleum Profits Tax Act 2004, which the Nigeria Tax Act leaves in force"
+  ],
+  "answer": 2,
+  "explanation": "The Nigeria Tax Act repeals the Petroleum Profits Tax Act (s.196(h)) and carries petroleum profits tax in a Part of its own, whose s.90(1) applies it to \"oil prospecting licences and oil mining petroleum leases that are yet to convert\". S.87(1) keeps such holders outside the hydrocarbon tax Part, which is why s.72 does not reach them. The engine models none of this: it is concept-only."
+ },
+ {
+  "prompt": "What cost limits does the PIA Seventh Schedule para 14 set for production sharing contracts?",
+  "options": [
+   "70% for a contract on new acreage and 60% for one subject to a conversion contract",
+   "60% on new acreage and 70% under a conversion contract",
+   "65% for every contract, the cost price ratio limit that the Sixth Schedule sets for hydrocarbon tax",
+   "No limit under a conversion contract, 70% on new acreage"
+  ],
+  "answer": 0,
+  "explanation": "Para 14(4): \"For new acreage any production sharing contract shall have a cost limit of 70% based on total oil production\". Para 14(9): \"For a production sharing contract subject to a conversion contract under this Act, the cost limit shall be 60%.\" The 65 percent figure belongs to the hydrocarbon tax cost price ratio. Production sharing under the Act is concept-only in this course."
+ },
+ {
+  "prompt": "Para 14(4)(d) of the Seventh Schedule prints \"over 250 million barrels up to and including 750 million barrels: 25%\". How does the course treat the 250?",
+  "options": [
+   "Read as the law, so a field between 250 and 350 million barrels owes the government its 25% profit oil share",
+   "Proof that band (c) should close at 250 million barrels",
+   "A figure the engine's profit oil line applies and grades",
+   "As a misprint where the scale's own steps need 350, quoted as printed with the error named"
+  ],
+  "answer": 3,
+  "explanation": "The course lists this among the misprints it quotes as printed: para 14(4)(d) prints \"over 250 million barrels\" where the scale's own steps need 350, since band (c) runs \"over 100 million barrels and up to and including 350 million barrels\". The engine computes no production sharing contract, so nothing here is graded."
+ },
+ {
+  "prompt": "How does the engine carry the outcome of conversion under PIA ss.92 and 93?",
+  "options": [
+   "Modelling each conversion contract from the date s.92(4) sets",
+   "As a stated lease status, \"converted\" or \"new\", with conversion itself taught as concept-only",
+   "Reading licence type \"OML\" and treating it as a mining lease from 2026",
+   "Splitting one ledger into lease and licence areas under s.93(2)"
+  ],
+  "answer": 1,
+  "explanation": "Voluntary conversion is concept-only: the engine takes the lease status as a stated input and models converted and new-acreage terms only. Any other status is refused in the engine's words, \"pia_lease_status must be \"converted\" or \"new\"; got \"renewed\".\", and a licence type from before the Act is refused too: \"pia_license_type must be \"PML\" or \"PPL\"; got \"OML\".\""
+ }
+]
