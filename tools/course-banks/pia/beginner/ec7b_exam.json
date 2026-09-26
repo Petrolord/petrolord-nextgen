@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "Which taxes does PIA s.259(a)(ii) add to the Service's list, beside the hydrocarbon tax?",
+  "options": [
+   "Royalties, rents and signature bonus, with their enforcement under the Act.",
+   "The development levy and the NDDC levy on the total annual budget of each company.",
+   "Companies income tax and tertiary education tax on taxable petroleum operations.",
+   "Petroleum profits tax on leases that have not converted."
+  ],
+  "answer": 2,
+  "explanation": "The text reads: \"(ii) companies income tax and tertiary education tax in accordance with this Act as it relates to taxable petroleum operations\". Royalties, rents and bonuses are the Commission's under s.259(b)(i); the development levy comes from NTA s.59, years later, and the NDDC levy from the NDDC Act; and an unconverted lease sits outside the Act's fiscal Part."
+ },
+ {
+  "prompt": "Under NTA s.59(2), who collects the development levy, and where does it go first?",
+  "options": [
+   "The Service, into a special account created for that purpose.",
+   "The Commission, straight into the Federation Account with every royalty the lease pays.",
+   "The Tertiary Education Trust Fund, which then passes shares to six other bodies.",
+   "The Nigerian Sovereign Investment Authority."
+  ],
+  "answer": 0,
+  "explanation": "The text reads: \"(2) The Service shall collect the levy and pay it into a special account created for that purpose.\" The revenue is then shared under s.59(3), with 50% to the Tertiary Education Trust Fund, which receives a share and collects nothing. The Commission's role is royalty, and the sovereign fund receives the royalty by price."
+ },
+ {
+  "prompt": "Which companies do the closing words of NTA s.59(1) leave outside the development levy?",
+  "options": [
+   "Every company in upstream or midstream gas operations, whatever its size or residence.",
+   "Companies holding a deep offshore lease in a year under the Nigeria Tax Act 2025.",
+   "Companies that already pay a tertiary education tax to the Service in the same year.",
+   "Small companies and non-resident companies."
+  ],
+  "answer": 3,
+  "explanation": "The text reads: \"other than small companies and non-resident companies.\" The levy draws no line by gas operations or by terrain, and a year that carries the development levy carries no tertiary education tax, so no company pays both in one year."
+ },
+ {
+  "prompt": "How does this course use the Finance Act 2023, and why?",
+  "options": [
+   "It quotes it in full as a primary gazetted text, read on 2026-09-26 from the Official Gazette.",
+   "It paraphrases it, because the copy read is a scan published by the Budget Office.",
+   "It treats it as a secondary source, read only through law firm alerts and commentary on it.",
+   "It leaves it out, as the Nigeria Tax Act 2025 repealed it."
+  ],
+  "answer": 1,
+  "explanation": "The texts table lists the Finance Act 2023 as \"Final Signed by PMB\", published by the Budget Office of the Federation on 7 June 2023, a scanned copy read page by page: primary, paraphrased. The secondary source is the Finance Act 2021's 2.5 percent, read through EY and Forvis Mazars alerts, and the course still uses the 2023 Act for the 3 percent rate and its effective date."
+ },
+ {
+  "prompt": "Which phrase does the course reserve for a year of assessment the engine reads as \"pia_only\"?",
+  "options": [
+   "A year under the Nigeria Tax Act 2025, which is 2026 onward under \"auto\".",
+   "A year under the Act alone, before 2026 under \"auto\".",
+   "A converted year.",
+   "A stated reading of the framework, whichever year the learner types into the case box."
+  ],
+  "answer": 1,
+  "explanation": "The vocabulary gives \"a year under the Act alone\" to a year of assessment the engine reads as \"pia_only\" (before 2026 under \"auto\"), and \"a year under the Nigeria Tax Act 2025\" to one it reads as \"nta_2025\". The course has no phrase \"converted year\", and a stated reading is the answer a run gives to one of the three open questions of the texts."
+ },
+ {
+  "prompt": "What does the course say about the data in its Ekene teaching cases?",
+  "options": [
+   "Every case, volume, price and cost is synthetic, written for this platform.",
+   "The cases are anonymised records from a real Nigerian lease, with the names removed.",
+   "Prices are the Commission's fiscal prices for each year of the ledger.",
+   "The volumes follow a real field and the costs are invented."
+  ],
+  "answer": 0,
+  "explanation": "The digest states that every Ekene case, field, volume, price and cost is synthetic, written for this platform, and that no real company, licence, field or price list appears. No record is anonymised, and the Commission's fiscal price is concept-only: the realised price of the case stands in for it."
+ },
+ {
+  "prompt": "Which rights does the Act's producing instrument grant on an exclusive basis, in the words of s.70(1)(c)?",
+  "options": [
+   "To carry out petroleum exploration operations over the acreage, shared with other licensees.",
+   "To drill exploration and appraisal wells for up to 10 years in deep offshore acreage.",
+   "To win, work, carry away and dispose of crude oil, condensates and natural gas.",
+   "To take a royalty by price on crude oil from other holders."
+  ],
+  "answer": 2,
+  "explanation": "Section 70(1)(c) grants a mining lease the right \"to: (i) win, work, carry away and dispose of crude oil, condensates and natural gas on an exclusive basis\". Shared exploration work belongs to the exploration licence, wells for appraisal to the prospecting licence, which in deep offshore may last up to 10 years under s.77(2), and a holder pays royalty to Government and takes none from anyone."
+ },
+ {
+  "prompt": "How long does a petroleum exploration licence last under PIA s.71(3)?",
+  "options": [
+   "A maximum of 20 years, including the development period of any discovery made on it.",
+   "Not more than 10 years, with an initial period of five and an optional five-year extension.",
+   "Until the conversion date of the oil prospecting licence it replaced under s.92(4).",
+   "Three years, renewable for three more on prescribed conditions."
+  ],
+  "answer": 3,
+  "explanation": "The text reads: \"(3) A petroleum exploration licence shall be for three years and may be renewable for additional period of three years subject to fulfilment of prescribed conditions,\". Twenty years is the mining lease (s.86(1)), ten years the deep offshore and frontier prospecting licence (s.77(2)), and the conversion date belongs to oil mining leases and oil prospecting licences."
+ },
+ {
+  "prompt": "A converting holder keeps some acreage only to appraise a discovery. Under which instrument and fiscal terms does that acreage continue?",
+  "options": [
+   "A petroleum prospecting licence, on the fiscal terms of s.267(b).",
+   "Petroleum mining leases on the fiscal terms of s.267(a).",
+   "Relinquished areas under s.93(4).",
+   "Marginal fields under s.94(1)."
+  ],
+  "answer": 0,
+  "explanation": "PIA s.93(6)(a) puts acreage designated under s.93(1)(a), (b), (c) or (2) \"into a petroleum prospecting licence in accordance with section 78 of this Act\", on the s.267(b) terms. Mining leases on s.267(a) terms are for developed or producing acreage, relinquishment under s.93(4) is for acreage nobody selects, and s.94(9) closes the door on new marginal fields."
+ },
+ {
+  "prompt": "What may a holder do under PIA s.93(2) when its selected areas cover less than 40% of the oil mining lease?",
+  "options": [
+   "Keep the whole lease on its old terms until it expires, with no areas relinquished at all.",
+   "Select additional areas of the lease for conversion to a petroleum prospecting licence.",
+   "Claim a production allowance on the unselected areas until the conversion date passes.",
+   "Declare the unselected areas marginal fields."
+  ],
+  "answer": 1,
+  "explanation": "The text reads: \"(2) Where the total acreage selected under subsection (1) is less than 40% of the area to which the applicable oil mining lease applies, the holder may select additional areas covered by the oil mining lease for conversion to a petroleum prospecting licence\". Areas left unselected are relinquished under s.93(4), the subsection grants no allowance, and no new marginal fields may be declared."
+ },
+ {
+  "prompt": "For leases under NTA Chapter Three Parts II and III, what gas royalty does Seventh Schedule Part IV para 7(3)(c) set, and does the engine compute it?",
+  "options": [
+   "5% everywhere and 2.5% for gas used in-country, computed by the gas royalty function on every case.",
+   "7% onshore and 5% offshore, computed whenever pia_lease_status is stated as \"converted\".",
+   "7% onshore and 5% offshore; concept-only, as the engine models converted and new leases alone.",
+   "12.5% in shallow water and 15% onshore, the terrain rates."
+  ],
+  "answer": 2,
+  "explanation": "Para 7(3)(c) sets natural gas royalty for those leases at \"(i) onshore areas: 7 %, and (ii) offshore areas: 5%\". Those Parts include the Part on petroleum profits tax for leases yet to convert, which the engine does not model, so the provision is concept-only. The 5 and 2.5 percent gas rates belong to para 10(6) of the Act, and a converted lease is under the Act's terms."
+ },
+ {
+  "prompt": "What does NTA s.90(1) apply its Part on petroleum profits tax to?",
+  "options": [
+   "Oil prospecting licences and oil mining leases that are yet to convert under the Act.",
+   "Petroleum mining leases granted out of new acreage after the Nigeria Tax Act 2025.",
+   "Deep offshore leases in a year under the Nigeria Tax Act 2025.",
+   "Every lease in a year of assessment read as nta_2025."
+  ],
+  "answer": 0,
+  "explanation": "The text reads: \"90. (1) This Part shall apply to oil prospecting licences and oil mining petroleum leases that are yet to convert under the provisions of the Petroleum Industry\" Act. So an unconverted lease pays petroleum profits tax under the Nigeria Tax Act from its commencement, on the old royalty terms; the engine models converted and new-acreage terms only, so this is concept-only. New leases, deep offshore leases and other leases in NTA years sit under the hydrocarbon tax Part."
+ },
+ {
+  "prompt": "At 7500 bopd, which rates does the engine return for onshore, deep offshore and frontier?",
+  "options": [
+   "0.058333 onshore, 0.058333 deep offshore, and 0.058333 frontier, as the small-field tranches apply in every terrain.",
+   "0.058333 onshore, 0.050000 deep offshore and 0.075000 frontier.",
+   "0.075000 onshore, 0.050000 deep offshore and 0.075000 frontier.",
+   "0.050000 in all three, the first tranche."
+  ],
+  "answer": 1,
+  "explanation": "Onshore at 7500 bopd blends 5 percent on the first 5,000 bopd and 7.5 percent on the rest: 0.058333. Deep offshore pays exactly 5 percent up to and including 50,000 bopd, and frontier pays 7.5 percent at every rate. The small-field tranches are for onshore and shallow water only, and the first tranche covers only the first 5,000 bopd."
+ },
+ {
+  "prompt": "Onshore and shallow water fields both produce 120000 bopd. How do their weighted royalty rates compare?",
+  "options": [
+   "15 percent onshore and 12.5 percent in shallow water, the two terrain rates of para 10(2) on the whole volume.",
+   "0.119792 onshore and 0.142708 in shallow water.",
+   "0.142708 onshore and 0.119792 in shallow water.",
+   "0.064583 in both terrains."
+  ],
+  "answer": 2,
+  "explanation": "Above 10,000 bopd the barrels past the edge pay the terrain rate, so the weighted rate climbs toward 15 percent onshore and 12.5 percent in shallow water without reaching either: 0.142708 and 0.119792 at 120000 bopd. The flat terrain rates ignore the tranches, the reversed pair swaps the terrains, and 0.064583 is the deep offshore rate at that daily rate."
+ },
+ {
+  "prompt": "What royalty rate does r.13(1)(b) give deep offshore acreage producing 120000 bopd?",
+  "options": [
+   "0.064583: 5 percent on 50,000 bopd and 7.5 percent on the rest, divided by the total.",
+   "7.5 percent, the terrain rate, since most of the barrels lie above the 50,000 bopd tier.",
+   "0.119792, the rate the shallow water scale returns at the same daily rate.",
+   "0.054167, the rate at 60,000 bopd."
+  ],
+  "answer": 0,
+  "explanation": "Regulations r.13(1)(b) makes the deep offshore rate \"a weighted average rate of 5% of 50,000bopd plus 7.5% of the incremental daily production above 50,000bopd divided by the total production per day\": 0.064583 at 120000 bopd. The flat 7.5 percent ignores the first tier, 0.119792 is shallow water and 0.054167 is the rate at 60,000 bopd."
+ },
+ {
+  "prompt": "What does the engine return just below the second edge, at 9999 bopd onshore?",
+  "options": [
+   "0.062500, the rate at exactly 10,000 bopd, which holds for the whole band below it as well.",
+   "0.058333, the rate at 7500 bopd, which holds from there up to the edge of the second tranche.",
+   "0.075000, the second tranche's rate on every barrel.",
+   "0.062499."
+  ],
+  "answer": 3,
+  "explanation": "The rate is a weighted blend that rises barrel by barrel: 0.062499 at 9999 bopd and 0.062500 at exactly 10,000 bopd. It does not hold flat across a band, and 7.5 percent reaches only the barrels between 5,000 and 10,000 bopd while the first 5,000 pay 5 percent."
+ },
+ {
+  "prompt": "Which rates does the engine return for gas when 40 percent and when 60 percent of it is used in-country?",
+  "options": [
+   "0.035000 at 40 percent and 0.040000 at 60 percent, since more gas used in-country raises the rate.",
+   "0.025000 at both shares, since any in-country use earns the lower rate on all the gas.",
+   "0.040000 at 40 percent and 0.035000 at 60 percent.",
+   "0.050000 at both shares."
+  ],
+  "answer": 2,
+  "explanation": "Each point of in-country share moves the blend from 5 toward 2.5 percent, so a larger share gives a smaller rate: the engine returns 0.040000 at 40 and 0.035000 at 60. Reversing them gets the direction wrong, 0.025000 is reached only when all the gas stays in Nigeria, and 0.050000 is the rate with none of it used in-country."
+ },
+ {
+  "prompt": "Gas sold abroad: what production royalty rate does Regulations r.16(5) set on it?",
+  "options": [
+   "It pays 2.5%, the rate that para 10(6) gives to gas, wherever the gas is finally used.",
+   "It pays production royalty at 5% of the chargeable volumes.",
+   "It pays the terrain rate of the field it comes from, as the liquids do under para 10(2).",
+   "It pays no royalty, as exported gas is outside the Act."
+  ],
+  "answer": 1,
+  "explanation": "The text reads: \"(5) The royalty based on production of natural gas for export shall be at a rate of 5% of the chargeable volumes\". The 2.5% rate is only for gas produced and utilised in-country, gas pays no terrain rate, and exported gas is charged."
+ },
+ {
+  "prompt": "Which figure does Alpha's 2029 row carry in the liquids royalty rate column, at 5669.846575 bopd?",
+  "options": [
+   "0.050000, since the field is within a few hundred barrels of the first edge and rounds down to it.",
+   "0.062500, the rate at the upper edge of the small-field band that Alpha sits in.",
+   "0.055546, the rate of 2028, held until the field drops below 5,000 bopd.",
+   "0.052954."
+  ],
+  "answer": 3,
+  "explanation": "In 2029 Alpha is still above 5,000 bopd, so its weighted rate blends in a little of the 7.5 percent tranche: 0.052954. The engine does not round a daily rate to an edge, 0.062500 applies only at 10,000 bopd, and each year reads its own daily rate, so 2028's 0.055546 does not carry over."
+ },
+ {
+  "prompt": "What does the engine do with a daily rate of -1 handed to deriveOilRoyaltyRate?",
+  "options": [
+   "It refuses: the crude oil and condensate daily rate must be a finite number of 0 or more; got -1.",
+   "It returns 0.050000, the first tranche rate, as it does for every daily rate at or below 5,000 bopd.",
+   "It returns a negative royalty rate.",
+   "It clamps the rate to 0 bopd and adds a note."
+  ],
+  "answer": 0,
+  "explanation": "The refusal reads, in the engine's own words: The crude oil and condensate daily rate must be a finite number of 0 or more; got -1. A refusal returns no rate at all. The engine does not read a negative daily rate as a small one, does not return a negative rate and does not clamp a bad input behind a note."
+ },
+ {
+  "prompt": "Which levels does the Regulations reading hold for 2020, a year before its base year?",
+  "options": [
+   "Levels deflated backwards by 2 percent a year from the 2021 base.",
+   "50.000000, 100.000000 and 150.000000, the base levels, held until the base year.",
+   "51.000000, 102.000000 and 153.000000, the first escalation.",
+   "No benchmarks: 2020 is outside the Regulations."
+  ],
+  "answer": 1,
+  "explanation": "Before its base year each base keeps 50, 100 and 150, so the Regulations base returns 50.000000, 100.000000 and 150.000000 for 2020 as for 2021. Neither text deflates backwards, 51.000000, 102.000000 and 153.000000 are the Regulations' 2022 levels (and the Act's 2021), and the engine returns benchmarks for any year."
+ },
+ {
+  "prompt": "At 170 USD/bbl in 2025, what royalty by price rate does each base return?",
+  "options": [
+   "0.100000 on the Regulations base and 0.097057 on the Act base, whose high benchmark is higher.",
+   "More than 10 percent on the Regulations base, as the line keeps rising past the high benchmark.",
+   "0.050000 on each, the middle benchmark rate.",
+   "0.100000 on each."
+  ],
+  "answer": 3,
+  "explanation": "At or above the high benchmark of both bases the rate is 10 percent: 170 is above 162.360000 and 165.610000, so both bases return 0.100000. 0.097057 is the Act base at 162.360000, where the Act's own high benchmark is not yet reached; the rate does not rise past 10 percent; and 5 percent sits at the middle benchmark."
+ },
+ {
+  "prompt": "Price 120, year 2025: set the two base-year readings side by side. What do they return?",
+  "options": [
+   "0.060865 with the Regulations, 0.058694 with the Act.",
+   "0.058694 with the Regulations base and 0.060865 with the Act base, since the Act's benchmarks are higher.",
+   "0.060865 on both, since the two readings agree above the middle benchmark of each base.",
+   "0.100000 on both bases."
+  ],
+  "answer": 0,
+  "explanation": "The engine returns 0.060865 on the Regulations base and 0.058694 on the Act base: the Act's higher benchmarks put 120 lower on its scale, so the Act base charges less. The readings differ between the benchmarks, and 120 is below both high benchmarks of 2025."
+ },
+ {
+  "prompt": "What total royalty, production royalty and royalty by price together, does the 95 and 88 USD/bbl case return under each base-year reading?",
+  "options": [
+   "69663505.866593 USD on either base, since only the royalty by price depends on the base and it is the same.",
+   "69663505.866593 USD under the Regulations and 68707857.789855 USD under the Act.",
+   "20694235.033259 USD on the Regulations base, the total royalty of the year.",
+   "68707857.789855 USD on the Regulations base, and 69663505.866593 USD on the Act base."
+  ],
+  "answer": 1,
+  "explanation": "The engine returns a total royalty of 69663505.866593 USD on the Regulations base and 68707857.789855 USD on the Act base. The production royalty is the same on both, but the royalty by price differs, so the totals differ; 20694235.033259 USD is the Regulations base royalty by price alone; and the reversed pair swaps the bases."
+ },
+ {
+  "prompt": "Regulations r.15(2) names a price as the basis of the royalty by price. Which price, and what stands in for it in the engine?",
+  "options": [
+   "The daily rate of crude oil and condensate, which the engine reads as the year over its calendar days.",
+   "The Commission's fiscal oil price, which the case states and the engine reads for every year.",
+   "Last year's average price.",
+   "The fiscal oil price; the engine uses the realised price and says so in a note."
+  ],
+  "answer": 3,
+  "explanation": "r.15(2) reads: \"(2) The royalty by price shall be based on the fiscal oil price for crude oil\". The fiscal oil price the Commission sets is concept-only: the realised prices stand in for it, and the engine's note says so. The royalty by price reads price alone, the case carries no fiscal price, and nothing is carried from the previous year."
+ },
+ {
+  "prompt": "From when does each text escalate the royalty by price levels?",
+  "options": [
+   "The Act from the beginning of 2021; the Regulations from 1 January 2022.",
+   "Both from 1 January 2021, since the Regulations adopt the Act's own escalation date unchanged.",
+   "Both from 1 January 2026, the first year of the Nigeria Tax Act 2025.",
+   "The Regulations from 2021 and the Act from 2022."
+  ],
+  "answer": 0,
+  "explanation": "The Act raises the levels \"at the beginning of 2021 and of each succeeding calendar year\", and the Regulations' Schedule escalates \"commencing 1st January 2022\". That one-year gap is the open reading of the base year. The Nigeria Tax Act 2025 restates the Act's wording and moves no date, and reversing the two dates reverses the texts."
+ },
+ {
+  "prompt": "Ekene Alpha's 2027 HCDT is 720000.000000 USD. What produced it?",
+  "options": [
+   "3 percent of the year's own opex and capex, the total annual budget that also sets the NDDC levy.",
+   "3 percent of 2026's opex of 24000000 USD.",
+   "A fixed contribution the case states for every year after the first one.",
+   "3 percent of the 2027 revenue from crude oil and condensate."
+  ],
+  "answer": 1,
+  "explanation": "From its second year the engine reads the ledger's own previous opex for HCDT. Alpha spent 24000000 USD of opex in 2026, and 3 percent of it is 720000.000000 USD in 2027, as PIA s.240(2) sets. The budget of opex plus capex belongs to the NDDC levy, Alpha states no fixed contribution, and no revenue enters the HCDT base."
+ },
+ {
+  "prompt": "Which of Alpha's 2027 rows set its 1620000.000000 USD NDDC charge on the default base?",
+  "options": [
+   "The 2026 opex of 24000000 USD alone, the preceding year's cost, which is the base HCDT reads as well.",
+   "The year's gross revenue from crude oil, condensate and associated gas, at 3 percent of the total.",
+   "Capex of 30000000 USD alone.",
+   "Opex of 24000000 and capex of 30000000 USD."
+  ],
+  "answer": 3,
+  "explanation": "The default NDDC base is the total annual budget, the year's opex plus capex (from a secondary source): 3 percent of 24000000 plus 30000000 USD gives 1620000.000000 USD. Preceding-year opex is the HCDT base, revenue is no part of the levy, and capex alone leaves out the opex the budget counts."
+ },
+ {
+  "prompt": "What does PIA s.257(1) say about the settlor's annual host communities trust payment?",
+  "options": [
+   "It is deductible for the hydrocarbon tax and companies income tax as applicable.",
+   "It is deductible for companies income tax only, and is added back in the hydrocarbon tax base.",
+   "It is paid out of the royalty and so is never deducted.",
+   "It replaces the NDDC levy in years under the Act."
+  ],
+  "answer": 0,
+  "explanation": "The text reads that the payment \"shall be deductible for the purposes of hydrocarbon tax and companies\" income tax. It is deductible in both bases (in the hydrocarbon tax at the crude-plus-condensate share), it is a contribution separate from royalty, and the NDDC levy is charged beside it under its own Act."
+ },
+ {
+  "prompt": "Which contributions does PIA s.263(1)(h) let a company deduct for hydrocarbon tax?",
+  "options": [
+   "Tertiary education tax and companies income tax.",
+   "Royalties on crude oil and associated gas alone.",
+   "Amounts paid to host communities trusts, the Environmental Remediation Fund, the NDDC and similar approved funds.",
+   "The development levy under NTA s.59."
+  ],
+  "answer": 2,
+  "explanation": "Section 263(1)(h) covers \"any amount contributed to any fund, scheme or arrangement approved by the Commission pursuant to the establishment of host communities development trusts under Chapter 3 of this Act, Environmental Remediation Fund, Niger Delta Development Commission and other similar contributions.\" The profit taxes are barred by s.264(l), royalties are deductible under a different paragraph, s.263(1)(b), and the development levy is never charged on hydrocarbon tax profits."
+ },
+ {
+  "prompt": "The gas field ekene_nag_gas_in_country_half returns a 2026 hydrocarbon tax of 0.000000 and companies income tax of 10713000.000000 USD. Why?",
+  "options": [
+   "Half its gas is used in-country, and the in-country share exempts a field from the hydrocarbon tax entirely.",
+   "It sells no crude oil or condensate, the only products that tax charges, while income tax reads gas profit.",
+   "Shallow water gas fields sit outside the hydrocarbon tax in every framework by PIA s.260(3).",
+   "Its gas royalty is deducted in full, so no profit is left."
+  ],
+  "answer": 1,
+  "explanation": "The hydrocarbon tax charges crude oil and condensate only, so a field with none pays no hydrocarbon tax, while companies income tax is charged on the whole oil and gas profit, 10713000.000000 USD in 2026. The in-country share moves only the gas royalty, s.260(3) concerns frontier and deep offshore, and the field still shows a companies income tax profit."
+ },
+ {
+  "prompt": "The worked example states an NDDC sum of 15000000 USD. What does the engine do with it?",
+  "options": [
+   "Adds it to 3 percent of the total annual budget, and charges the two together as the year's NDDC levy.",
+   "Ignores it, since the levy is always 3 percent of the total annual budget under the NDDC Act.",
+   "Uses it as the prior-year opex for HCDT.",
+   "Uses it in place of the percentage."
+  ],
+  "answer": 3,
+  "explanation": "A fixed sum in pia_nddc_levy_fixed_usd replaces the percentage when given, so the worked example's NDDC line is 15000000.000000 USD. Nothing is added on top, the engine applies the stated sum, and HCDT reads the separately stated prior-year opex of 170000000 USD."
+ },
+ {
+  "prompt": "Which seven lines add up to Ekene Alpha's government cash flow of 556475163.954050 USD?",
+  "options": [
+   "Royalties, hydrocarbon tax, income tax, education tax, development levy, HCDT and NDDC.",
+   "Royalties, hydrocarbon tax, income tax, capex, opex, HCDT and NDDC.",
+   "The three royalty lines and the four taxes, with HCDT left out.",
+   "Hydrocarbon tax alone, over the life."
+  ],
+  "answer": 0,
+  "explanation": "The decomposition sums total royalties, the hydrocarbon tax, companies income tax, the tertiary education tax (0 on Alpha), the development levy, HCDT and the NDDC levy to 556475163.954050 USD. Capex and opex are the project's own costs; HCDT and the NDDC levy sit on the government side of the take; and the hydrocarbon tax is one line of seven."
+ },
+ {
+  "prompt": "At a 50 percent working interest, which development levy does Ekene Alpha pay over its life?",
+  "options": [
+   "35714217.371697 USD, as the levy is charged at field level before any working interest share.",
+   "A quarter of the 100 percent figure, since the levy halves twice.",
+   "17857108.685849 USD, half the 100 percent figure.",
+   "The same share of profit at a lower rate."
+  ],
+  "answer": 2,
+  "explanation": "Every money line is scaled to the working interest share after the field-level arithmetic, so at 50 percent the development levy is 17857108.685849 USD against 35714217.371697 USD at 100 percent. The engine reports money at the share, it halves once, and the 4 percent rate is unchanged."
+ },
+ {
+  "prompt": "What does the shared wording call government cash flow over revenue less opex, with capex added back?",
+  "options": [
+   "Government take, the engine's kpis.government_take_pct, read undiscounted over the life of the lease.",
+   "The government share of net revenue, a second metric.",
+   "The effective royalty rate of the lease.",
+   "The pre-take net cash flow of the project."
+  ],
+  "answer": 1,
+  "explanation": "fiscalConventions.js defines \"Government share of net revenue\" as \"Government cash flow divided by revenue less opex over the project life, so capex is added back to the contractor side.\" Government take divides by revenue less opex less capex; royalty is only one part of government cash flow; and the pre-take net cash flow is the take's denominator."
+ },
+ {
+  "prompt": "The government take is undiscounted and nominal. What follows for a dollar of tax paid in 2032 against one paid in 2026?",
+  "options": [
+   "The 2032 dollar counts for less, discounted at the case's 10 percent nominal rate to the base year.",
+   "The 2032 dollar counts for more, escalated by 2 percent a year as the benchmarks are.",
+   "Only the first year is read, so the 2032 dollar is left out of the take.",
+   "Both count the same."
+  ],
+  "answer": 3,
+  "explanation": "The engine's take sums the whole life undiscounted and nominal, so a dollar in 2032 counts the same as a dollar in 2026. The 10 percent discount rate serves NPV, the 2 percent escalation belongs to the royalty by price benchmarks, and the take reads every year of the ledger."
+ },
+ {
+  "prompt": "Which three questions does this course call open readings?",
+  "options": [
+   "The royalty by price base year, the new-lease rate onshore or in shallow water, and the deep offshore rate under the NTA.",
+   "The terrain of a field in two terrains, the fiscal oil price and the terms of leases that do not convert.",
+   "The NDDC levy base, the tertiary education tax before 2023 and the Act's effective date.",
+   "The daily rate reading, the shared costs and the take."
+  ],
+  "answer": 0,
+  "explanation": "The three open readings are the questions the texts leave open: the royalty by price base year, the hydrocarbon tax rate of a new lease onshore or in shallow water, and the deep offshore hydrocarbon tax under the Nigeria Tax Act 2025. The first distractor lists concept-only provisions, the second lists values from secondary sources and a date, and the third lists the engine's stated notes and a metric."
+ },
+ {
+  "prompt": "What does the course mean when it calls an input a stated reading?",
+  "options": [
+   "The reading of a text the course judges to be the law after comparing the Act with the Regulations.",
+   "Any figure the engine prints in kpis.pia_notes below the table of a run.",
+   "The answer to an open reading that a run states as an input.",
+   "The Regulations' reading of any provision."
+  ],
+  "answer": 2,
+  "explanation": "The vocabulary defines a stated reading as the answer to an open reading that a run states as an input, and it is never presented as the law. A note in kpis.pia_notes is the engine's statement about a default, a conflict or an approximation, and the Regulations' base year is only one of two readings of one question."
+ },
+ {
+  "prompt": "When this course says royalty with no qualifier, what does it mean?",
+  "options": [
+   "Any payment a lease makes to the state, taxes and contributions included, over its life.",
+   "The production royalty on liquids and gas plus the royalty by price, the engine's total royalty.",
+   "The production royalty on crude oil and condensate alone, leaving out gas and price.",
+   "The royalty by price, the Act's newest royalty."
+  ],
+  "answer": 1,
+  "explanation": "The vocabulary fixes royalty as the production royalty on liquids and gas plus the royalty by price, the engine's total royalty, and asks a writer to name the part when only one is meant. Taxes and contributions are separate lines, and the gas royalty and royalty by price are both inside royalty."
+ },
+ {
+  "prompt": "Why can a partner's working interest share never move the tranche a field falls into?",
+  "options": [
+   "The share is applied to the daily rate before the tranches are read, so every partner's rate is the same.",
+   "The tranches read the price, which the working interest share does not scale in any year.",
+   "Regulations set one tranche for every partner by law.",
+   "Rates are read at field level first."
+  ],
+  "answer": 3,
+  "explanation": "The engine reads the tranches, the caps and every rate at field level, then scales every money line to the share, so the daily rate and its rate are the field's whatever the share. Applying the share to the daily rate first would move the tranche, the tranches read volume, and no text assigns tranches to partners."
+ },
+ {
+  "prompt": "What does the engine say when a case arrives with no production rows at all?",
+  "options": [
+   "No production data found. Upload and process a CSV first.",
+   "It returns a ledger of zeros with a note in kpis.pia_notes saying that no production was stated.",
+   "A run on the golden rows of Ekene Alpha.",
+   "It refuses with a note naming the missing terrain."
+  ],
+  "answer": 0,
+  "explanation": "computeCashFlow refuses a case with no production rows, in its own words: No production data found. Upload and process a CSV first. A refusal returns no ledger and no note, the engine never substitutes another case's rows, and the message concerns the rows, whatever the terrain."
+ },
+ {
+  "prompt": "Para 10(3) gives deep offshore production of not more than 50,000 bopd a month 5%. What does the engine return at exactly that edge?",
+  "options": [
+   "0.054167, since the 50,000th barrel falls in the 7.5 percent tier above the edge.",
+   "7.5 percent, the deep offshore terrain rate of para 10(2), charged on every barrel.",
+   "0.050000, since the edge belongs to the 5 percent tier.",
+   "0.112500, the rate of a field at that daily rate."
+  ],
+  "answer": 2,
+  "explanation": "Para 10(3) reads: \"(3) For deep offshore fields with a production during a month of not more than 50,000 bopd, the royalty rate shall be 5%\". At exactly 50,000 bopd the engine returns 0.050000; 0.054167 is its rate at 60,000 bopd, the 7.5 percent reaches only barrels past 50,000, and 0.112500 is the shallow water rate at 50,000 bopd."
+ }
+]
