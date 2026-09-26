@@ -120,7 +120,7 @@
    "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
   },
   "gsa_capstone.mjs": {
-   "md5": "072d03d82658affee5494f91e75483a6",
+   "md5": "ef73453f97933862d526dace4e2d9dbe",
    "command": "node gsa_capstone.mjs",
    "expected": 0,
    "exit": 0,
@@ -720,6 +720,62 @@
    "expected": 0,
    "exit": 0,
    "summary": "FINDINGS: 0"
+  },
+  "gen_seeds.sh HEAD": {
+   "md5": "2ca918e5dc4d3d2635a65c8abe35cd17",
+   "command": "bash gen_seeds.sh HEAD",
+   "expected": 0,
+   "exit": 0,
+   "summary": "AGREE: all five migrations and the three case files and their index regenerate byte for byte from the committed inputs at HEAD."
+  },
+  "verify_sql.py HEAD": {
+   "md5": "8727a3de3e3bdff71ed960465179f4d7",
+   "command": "python3 verify_sql.py HEAD",
+   "expected": 0,
+   "exit": 0,
+   "summary": "AGREE: all 396 questions (prompt, options, answer key, explanation), 78 lesson keys in 18 modules, 18 graded fields (key, expected, tolerance) and the catalogue row are byte for byte what the committed banks, manifests, "
+  },
+  "verify_sql.py CANARY text": {
+   "md5": "8727a3de3e3bdff71ed960465179f4d7",
+   "command": "python3 verify_sql.py HEAD --canary",
+   "expected": 2,
+   "exit": 2,
+   "summary": "intermediate/module/11 explanation: seed 'The engine\\'s message reads \"years[0].shortfallPrice must be stated when sellerShortfall is above 0 (5); the engine holds no default rate; got nothing\". US$3.50 per MMBtu is the "
+  },
+  "verify_sql.py CANARY key": {
+   "md5": "8727a3de3e3bdff71ed960465179f4d7",
+   "command": "python3 verify_sql.py HEAD --canary-key",
+   "expected": 2,
+   "exit": 2,
+   "summary": "advanced/module/3 answer_index: seed '3' against bank '0'"
+  },
+  "verify_sql.py CANARY field": {
+   "md5": "8727a3de3e3bdff71ed960465179f4d7",
+   "command": "python3 verify_sql.py HEAD --canary-field",
+   "expected": 2,
+   "exit": 2,
+   "summary": "capstone field ifeyi_2031_make_up_expired expected: seed 253123.75 against fields.json 253123.77531237502"
+  },
+  "verify_sql.py CANARY lesson": {
+   "md5": "8727a3de3e3bdff71ed960465179f4d7",
+   "command": "python3 verify_sql.py HEAD --canary-lesson",
+   "expected": 2,
+   "exit": 2,
+   "summary": "beginner module m03-contract-quantities lesson keys differ from the manifest"
+  },
+  "gen_golive.py (self checks)": {
+   "md5": "8de0e14bd96cbf45e2f8c3429d412c85",
+   "command": "python3 -c import sys; sys.argv=[\"x\"]; sys.path.insert(0, \"/root/cat-wip-gsa\"); import gen_golive as G; sys.exit(1 if G.refused else 0)",
+   "expected": 0,
+   "exit": 0,
+   "summary": ""
+  },
+  "promptleak.py --sql": {
+   "md5": "e46b7e7196db51aa47fd95995fdb236c",
+   "command": "python3 /root/dc-wavekit/promptleak.py --sql /root/wt-ec8-nextgen/migrations/20261109_ec8_gsa_course.sql --course gsa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "own-field leaks: 0   cross-tier leaks: 0   self leaks: 0   near misses: 0   small-integer notes: 0"
   }
  }
 }
