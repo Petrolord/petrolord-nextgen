@@ -52,11 +52,11 @@ const LESSONS = [
     body: 'Take is the pre-take value at your share, revenue less capex less opex, minus the contractor net cash flow, over that pre-take value, so it reads the same at every working interest. Numerator and denominator are both the share, so the other partners are never counted as government.' },
   { n: 6, title: 'On the real basis NPV does not move with inflation',
     body: 'With the escalators set, deflating the flows and deflating the rate through the Fisher relation cancel, so the same NPV is reported at every inflation rate while the real total cash flow falls by a third. The convention that DOES move NPV is mid-year against end-year.' },
-  { n: 7, title: 'Sunk is a decision, not a date',
+  { n: 7, title: 'Sunk is a decision the calendar does not make',
     body: 'Valuing from a later year with prior rows kept adds a year of compounding. Valuing from the same year with prior rows SUNK nearly triples the NPV, reports the sunk flow separately, and returns a null IRR because nothing negative is left to bracket a root.' },
   { n: 8, title: 'The profile point at the applied rate IS the headline',
     body: 'The NPV profile labels its applied-rate point at the rate rounded to two decimals and evaluates it at the exact rate, so the profile passes through the headline NPV the same run reports. Read the label as a label: the point is evaluated at the exact applied rate.' },
-  { n: 9, title: 'IRR is a property of a curve, not of a project',
+  { n: 9, title: 'IRR is a property of the cash flow curve',
     body: 'A cash flow with a terminal negative can have two rates that zero its NPV. The engine names a rate only when exactly one lies between -99 and 1000 percent; with several it returns null, says multiple-roots and lists them. A single rate there would be one root of several.' },
   { n: 10, title: 'A production sharing pool is never on the rows',
     body: 'Cost recovery under a cap defers cost into a pool the returned rows do not carry, so the pool at cessation has to be marched from the rows by hand. Below the cap that clears the pool, the field is uneconomic before a single fiscal rate changes.' },
@@ -260,7 +260,7 @@ const CashflowLearningPage = () => {
                 flow falls from {fmt(cm.inflationFirst.totalNetCashFlowReal)} to
                 {' '}{fmt(cm.inflationLast.totalNetCashFlowReal)} USD and the applied real rate falls
                 from {pct(cm.inflationFirst.appliedRealRatePct)} to
-                {' '}{pct(cm.inflationLast.appliedRealRatePct)}. Sunk is a decision, not a date:
+                {' '}{pct(cm.inflationLast.appliedRealRatePct)}. Sunk is a decision the calendar does not make:
                 valuing from 2030 with prior years sunk reports {fmt(cm.sunk2030.sunkNetCashFlow)} USD
                 as the sunk flow and an IRR of {cm.sunk2030.irrPct === null ? 'null' : pct(cm.sunk2030.irrPct)},
                 because nothing negative is left to bracket a root. A cash flow with a terminal

@@ -269,6 +269,13 @@ export const templates = () => fiscalTemplates.map((t) => {
     royalty: g.royalty,
     royaltyType: g.royalty.type,
     costRecoveryLimit: g.costRecoveryLimit,
+    costRecoveryBase: g.costRecoveryBase ?? 'revenue_after_royalty',
+    // The three instruments in words, from the same helpers the digest lines use,
+    // so a template whose royalty or split has no price or R-factor tiers
+    // (the re-based Nigeria - PIA (2021) template) reads correctly.
+    royaltyText: royaltyWords(g.royalty),
+    costLimitText: `${g.costRecoveryLimit} percent of ${g.costRecoveryBase === 'liquids_gross' ? 'the gross value of crude oil and NGL' : 'revenue after royalty'}`,
+    splitText: splitWords(g.profitSplit),
     profitSplit: g.profitSplit,
     profitSplitType: g.profitSplit.type,
     tax: g.tax,

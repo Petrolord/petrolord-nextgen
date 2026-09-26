@@ -238,7 +238,7 @@ const Prices = () => {
       <Note>
         The middle line is the one to stare at: with no deck, a flat 80 escalated at 10 percent from a 2030 base
         is DEFLATED for the years before the base, which is why 2028 and 2029 read below 80. The escalator is a
-        rate anchored at the base year, not a markup that starts at the first row.
+        rate anchored at the base year; it does not start counting at the first row.
       </Note>
     </>
   );

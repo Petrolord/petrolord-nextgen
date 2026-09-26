@@ -72,19 +72,19 @@ const Instruments = () => {
             <div className="grid grid-cols-2 gap-2 text-xs text-slate-300">
               <div>
                 <p className="text-slate-500 mb-0">Royalty</p>
-                <p className="mb-0">{t.royaltyType === 'flat'
-                  ? `flat ${t.royalty.rate} percent`
-                  : t.royalty.tiers.map((x) => `${x.threshold} USD/bbl to ${x.rate} percent`).join(', ')}</p>
+                <p className="mb-0">{t.royaltyType === 'sliding_price'
+                  ? t.royalty.tiers.map((x) => `${x.threshold} USD/bbl to ${x.rate} percent`).join(', ')
+                  : t.royaltyText}</p>
               </div>
               <div>
                 <p className="text-slate-500 mb-0">Cost recovery limit</p>
-                <p className="mb-0">{t.costRecoveryLimit} percent of revenue after royalty</p>
+                <p className="mb-0">{t.costLimitText}</p>
               </div>
               <div>
                 <p className="text-slate-500 mb-0">Profit split</p>
-                <p className="mb-0">{t.profitSplitType === 'flat'
-                  ? `flat ${t.profitSplit.split} percent to the contractor`
-                  : t.profitSplit.tiers.map((x) => `R ${x.threshold} to ${x.split} percent`).join(', ')}</p>
+                <p className="mb-0">{t.profitSplitType === 'tiered_r_factor'
+                  ? t.profitSplit.tiers.map((x) => `R ${x.threshold} to ${x.split} percent`).join(', ')
+                  : t.splitText}</p>
               </div>
               <div>
                 <p className="text-slate-500 mb-0">Tax stack</p>
@@ -97,8 +97,11 @@ const Instruments = () => {
       <Note>
         Four instruments and nothing else. Three of the six take a flat 100 percent of profit oil and recover cost
         at 100 percent, which is what a concession looks like inside a model built around a production sharing
-        ledger: the contractor keeps whatever the taxes do not take. The other three split profit oil on the R
-        factor and cap cost recovery at 80, 90 and 50 percent. Where the RRT uplift is not written it defaults to
+        ledger: the contractor keeps whatever the taxes do not take. Two split profit oil on the R factor and cap
+        cost recovery at 90 percent (Ghana) and 50 percent (Angola) of revenue after royalty. The Nigeria - PIA (2021)
+        template carries the Act's base terms for a deep offshore production sharing contract on new acreage: the
+        royalty the Act and the Petroleum Royalty Regulations 2022 set, cost recovery to 70 percent of the gross value
+        of crude oil and NGL, and the government's minimum share of profit oil by cumulative crude production. Where the RRT uplift is not written it defaults to
         20 percent, and that default is charged in every one of the 25 years.
       </Note>
     </>
