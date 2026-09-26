@@ -46,8 +46,8 @@ The four responsive bids, with the omission rule at the average, a delivery sche
 
 The engine returns MS4 as the lowest evaluated cost. Each figure in the right-hand column depends on the settings above, so the course quotes it with its omission rule, schedule and life cycle. The next four lessons take the column apart.
 
-Hold on to one word. "Lowest evaluated cost" names the evaluated cost the engine builds, term by term. It never names the quoted price. MS4 does quote the lowest total of the four responsive bids, but its evaluated cost is built on top of that total with an omission, a schedule adjustment and a life-cycle cost, and the ranking reads the built figure. MS5's lower quote never entered the comparison at all.
+Hold on to one word. "Lowest evaluated cost" names the evaluated cost the engine builds, term by term. It never names the quoted price. MS5's lower quote never entered the comparison at all.
 
 ## Exercise
 
-Open the award calculator and choose the view "Evaluated cost with a life-cycle cost". It starts on the four materials bids that passed. Confirm the rank table and the lowest evaluated cost tile against the table above. Then edit MS4's completionWeeks to 8, the start of the delivery schedule, and read how its schedule column and its evaluated cost move. Finally read the two declared blocks under the table, which state the life-cycle rule and the evaluated-cost rule in the engine's own words.
+Open the award calculator and choose the view "Evaluated cost with a life-cycle cost". It starts on the four materials bids that passed. Confirm the rank table and the lowest evaluated cost tile against the table above. Then edit MS4's completionWeeks to 8, the start of the delivery schedule, and read how its schedule column and its evaluated cost move.

@@ -2,7 +2,7 @@
 
 {{panel:pr-award-calculator}}
 
-The 2010 Schedule lists 45 lines in the three sections the engine holds. A tender will sooner or later include an item that none of them names: catering on a rig, say, or a specialist inspection. The Act allows for this. Under s.11(2) the Nigerian Content Development and Monitoring Board may set a level for an item the Schedule does not list. The engine allows for it too, on one condition: the target is stated by the user, with its source.
+The 2010 Schedule lists 45 lines in the three sections the engine holds. A tender may include an item none of them names, catering on a rig, say. Under s.11(2) the Nigerian Content Development and Monitoring Board may set a level for an item the Schedule does not list. The engine allows for it too, on one condition: the target is stated by the user, with its source.
 
 ## A stated target
 
@@ -25,7 +25,7 @@ For the stated target, the source is whatever the user wrote, returned with a la
 
 > stated by the user: a level stated for this example by the course; no Board target was read
 
-A reader sees at once which target the Act sets and which one somebody typed. The catering level of 90% here is the course's own example figure, and its source says that no Board target was read.
+The catering level of 90% here is the course's own example figure, and its source says that no Board target was read.
 
 ## Three refusals
 
@@ -41,7 +41,7 @@ With a unit the engine does not accept:
 
 > items[0].measure must be one of man-hours, tonnage, spend, length, number, volume, litres
 
-The first refusal carries the course's rule for every legal figure: a typed target without a source would look, in the result, exactly like a figure read from the Act.
+Without the first rule, a typed target would look exactly like a figure read from the Act.
 
 ## Later Board targets
 

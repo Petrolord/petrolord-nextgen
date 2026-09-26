@@ -25,9 +25,7 @@ The four responsive materials bids, with their evaluated costs under the average
 | MS1 | 565746.220616 | 3.570054 | false |
 | MS3 | 581453.933847 | 6.445634 | false |
 
-MS2 is 0.296313 percent above MS4, well inside the margin, so the group is MS4 and MS2. The group is the same under either reading of "at least 5% higher", which the third lesson of this module takes: the reading changes the lead test, never the group.
-
-The group depends on the evaluated costs, and so on every setting behind them. A different omission rule, schedule or life cycle could move a bid in or out. That is why the course quotes an s.14 outcome with the settings of the evaluated costs as well as the reading of the Act.
+MS2 is 0.296313 percent above MS4, so the group is MS4 and MS2. The group is the same under either reading of "at least 5% higher", which the third lesson of this module takes: the reading changes the lead test, never the group.
 
 ## At the edge of the margin
 
@@ -41,8 +39,6 @@ Two stated cases, each run under the points reading. The lowest is LO at 2000000
 E1 is exactly 1% above LO and joins the group. E2 is one unit further and is out, however high its content. With only one bid in the group, s.14 is not engaged, and the engine returns the result with the reason, opening:
 
 "only LO is within 1% of the lowest evaluated cost 2000000; s.14 is not engaged"
-
-That is a result returned with the reason: the section does not apply.
 
 ## Exercise
 

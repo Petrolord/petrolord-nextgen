@@ -4,7 +4,7 @@
 
 {{panel:pr-award-calculator}}
 
-Both price methods in this course are relative. The lowest ratio divides by Cmin, and the linear method measures from Cmin to Cmax. Each bid's commercial score therefore depends on the other bids in the field. Chen (2008) shows what that dependence can do, and the engine reproduces his figures.
+Both price methods in this course are relative. The lowest ratio divides by Cmin, and the linear method measures from Cmin to Cmax. Each bid's commercial score therefore depends on the other bids in the field. Chen (2008) shows what that dependence can do.
 
 ## Chen's example
 
@@ -27,8 +27,6 @@ B beats C in both columns, but the distance changes: B leads by 15.000000 points
 ## Why that is a paradox
 
 On price alone the order of B and C does not move. Add a technical score and it bites. Suppose C's technical score adds more to its combined score than B's does, by a margin between the two price gaps. With A in the field, that margin outweighs a 15.000000 point price gap and C ranks above B; with A removed, it no longer outweighs an 18.750000 point gap and B ranks above C. The choice between B and C is decided by a third bid.
-
-The linear method is sharper still, since bids in the field set both ends of its scale: remove the dearest bid and every commercial score except the lowest bid's falls.
 
 ## What an evaluator does with this
 

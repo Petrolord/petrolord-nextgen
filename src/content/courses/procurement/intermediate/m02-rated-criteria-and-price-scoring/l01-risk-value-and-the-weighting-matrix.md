@@ -19,7 +19,7 @@ The engine returns the rule of each cell in the Regulations' own terms. For cell
 
 > para 5.50 (b): High/Substantial Procurement Risk and Low Value, Rated Criteria weighting between 60% and 100%; high value means an estimated cost at or above US$10 million
 
-Two readings of the table carry the idea. High risk pushes the band up: when the job is hard to do well, quality must count for more. High value pulls it down: when a lot of money is at stake, price must keep a real share of the score. Low risk and low value, cell d, gives the narrowest band of all.
+High risk pushes the band up: when the job is hard to do well, quality must count for more. High value pulls it down: when a lot of money is at stake, price must keep a real share of the score. Low risk and low value, cell d, gives the narrowest band of all.
 
 The risk is stated in two words, high or low. The engine maps the Regulations' four risk ratings onto them: High or Substantial is high, Moderate or Low is low. Any other word is refused:
 
@@ -38,7 +38,7 @@ Hand the engine a technical weight as well and it says whether the weight is ins
 
 > technical weight 0.35 is outside the range 0.2 to 0.3; misapplication of the matrix may lead to misprocurement (Annex X para 3.4)
 
-The well services tender is high risk with an estimated cost of US$900000, so its technical weight of 0.7 sits inside cell b. The Associate award to WS3 was made inside the matrix.
+The well services tender is high risk with an estimated cost of US$900000, so its technical weight of 0.7 sits inside cell b.
 
 The band says nothing about which weight inside it is right. A weight of 0.6 and a weight of 1 are both inside cell b and can award different bids. The band limits the buyer's freedom; the choice inside it is still stated, and the report names it.
 

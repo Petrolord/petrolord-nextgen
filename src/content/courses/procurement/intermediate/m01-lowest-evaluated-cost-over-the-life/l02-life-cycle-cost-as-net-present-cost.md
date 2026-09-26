@@ -12,7 +12,7 @@ The engine states its life-cycle rule in its basis, verbatim, for the materials 
 
 That sentence fixes four things: the years, the discount rate as a fraction a year, discounting from the end of each year, and a residual value credited in the final year. The citation is the World Bank Procurement Regulations for IPF Borrowers, Seventh Edition, September 2025, Annex X paras 3.7 and 3.8, read on 2026-09-26.
 
-The result is a net present cost: the sum of the future annual costs, each brought back to the award date. The engine adds it as the last term of the evaluated cost, after the corrected price, the discount, the priced deviations, the omissions and the schedule adjustment.
+The result is a net present cost: the sum of the future annual costs, each brought back to the award date. It is the last term of the evaluated cost.
 
 ## The materials tender's life cycle
 

@@ -30,7 +30,7 @@ The engine carries 45 lines of the Schedule, in three of its sections: MATERIALS
 | cement-portland | Cement (Portland) | 80% | tonnage |
 | drilling-mud-baryte-bentonite | Drilling mud-Baryte, Bentonite | 60% | tonnage |
 
-Every minimum in this table is read from the gazetted Schedule and cited to s.11. None is an engine default and none is a course estimate.
+Every minimum here is read from the gazetted Schedule and cited to s.11.
 
 ## The 2010 Schedule only
 

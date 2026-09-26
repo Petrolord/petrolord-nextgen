@@ -19,7 +19,7 @@ The engine's rule, in its basis:
 
 > fewer than 5 substantially responsive bids: flag when 100 x (estimate - C) >= 20 x estimate (20% or more below)
 
-C is a bid's evaluated cost, and the estimate is the buyer's own cost estimate. In words: a bid 20 percent or more below the estimate is flagged.
+In words: a bid 20 percent or more below the estimate is flagged.
 
 With fewer than five bids the estimate is required, and the engine refuses a call without one. On the four responsive materials bids:
 

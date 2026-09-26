@@ -4,7 +4,7 @@
 
 {{panel:pr-award-calculator}}
 
-The combined score of the Associate tier scored price by the lowest-price ratio: Sc = 100 x Cmin / C, so the bid with the lowest evaluated cost scores 100 and every other bid scores in proportion. It is the World Bank's formula, and one choice among several, and the choice of price method can move an award as surely as the technical weight can.
+The combined score of the Associate tier scored price by the lowest-price ratio: Sc = 100 x Cmin / C, so the bid with the lowest evaluated cost scores 100 and every other bid scores in proportion. It is the World Bank's formula and one choice among several, and the price method can move an award as surely as the technical weight can.
 
 ## Two price methods
 
@@ -34,9 +34,9 @@ Everything as the fixture states: technical weight 0.7, technical method relativ
 | WS1 | 92.883107 | 31.080136 | 95.806109 | 77.265217 |
 | WS3 | 89.994781 | 0.000000 | 96.998434 | 70.000000 |
 
-The spread of evaluated costs is the same in both columns. The lowest ratio compresses it: the four commercial scores sit between 89.994781 and 100.000000. The linear method stretches it across the whole scale from 0.000000 to 100.000000, so the same price differences carry more weight in the combined score.
+The lowest ratio compresses the spread of evaluated costs: the four commercial scores sit between 89.994781 and 100.000000. The linear method stretches it across the whole scale from 0.000000 to 100.000000, so the same price differences carry more weight in the combined score.
 
-On this tender that changes the award. Under the lowest ratio the most advantageous bid is WS3 at 96.998434. Under the linear method it is WS5 at 87.647059. The technical weight, the technical method and the bids did not change.
+On this tender that changes the award. Under the lowest ratio the most advantageous bid is WS3 at 96.998434. Under the linear method it is WS5 at 87.647059.
 
 ## What this means for a tender document
 

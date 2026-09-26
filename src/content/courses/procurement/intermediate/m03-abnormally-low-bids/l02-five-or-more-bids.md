@@ -2,7 +2,7 @@
 
 {{panel:pr-award-calculator}}
 
-With five or more substantially responsive bids, the World Bank's Guidance on Abnormally Low Bids and Proposals (Second Edition, July 2016, read on 2026-09-26) compares each bid with the other bids at Stage 1. A price far below the rest of the field is the signal.
+With five or more substantially responsive bids, the World Bank's Guidance on Abnormally Low Bids and Proposals (Second Edition, July 2016, read on 2026-09-26) compares each bid with the other bids at Stage 1.
 
 ## The relative rule
 
@@ -29,8 +29,6 @@ The Guidance works an example with 16 bids. The engine takes the relative approa
 The engine flags Bid 1, Bid 2 and Bid 3. The Guidance prints each figure rounded to the unit. The engine's reason for Bid 1, verbatim:
 
 > Bid 1: evaluated cost 1145142 is below the average 1664426.375 less one standard deviation 315974.5374956808, that is below 1348451.8375043191: a potential abnormally low bid: clarify the price with the bidder before any decision; it is never rejected automatically
-
-The course reasons with the numeric fields at six decimals and quotes the reason only whole.
 
 ## What the relative test sees and misses
 

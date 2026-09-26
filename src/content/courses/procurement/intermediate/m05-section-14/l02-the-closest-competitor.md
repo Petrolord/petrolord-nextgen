@@ -2,7 +2,7 @@
 
 {{panel:pr-award-calculator}}
 
-Once the s.14 group is formed, the Act looks for the bid with the highest Nigerian content in it and compares that bid's content with its "closest competitor". The phrase needs a reading too. Closest in price, or closest in content? The engine states its answer in every s.14 result.
+Once the s.14 group is formed, the Act looks for the bid with the highest Nigerian content in it and compares that bid's content with its "closest competitor". Closest in price, or closest in content? The engine states its answer in every s.14 result.
 
 ## The engine's reading
 
@@ -10,7 +10,7 @@ Verbatim, as it appears in every s.14 reason:
 
 > "its closest competitor" is read as the bid with the next-highest Nigerian content in that group
 
-So the competitor is found by content. The leader is the bid in the group with the highest overall content; the runner-up is the bid in the group with the next-highest. Price has already done its work in forming the group; inside the group, the comparison is content against content.
+So the competitor is found by content. The leader is the bid in the group with the highest overall content; the runner-up is the bid in the group with the next-highest.
 
 The alternative reading, the bid closest in evaluated cost, could compare the leader with a bid of far lower content than the runner-up. The engine reads the phrase as a comparison of contents and prints the reading.
 
@@ -27,7 +27,7 @@ With two bids in the group the runner-up is simply the other bid. The leader and
 
 ## When the lowest also leads
 
-The reading matters with three or more bids in the group. A stated case, run under the points reading: LO at 2000000 with 88%, L2 at 2006000 with 70%, and L3 at 2012000 with 75%. All three are within 1% of LO.
+The reading matters with three or more bids in the group. A stated case, run under the points reading: LO at 2000000 with 88%, L2 at 2006000 with 70%, and L3 at 2012000 with 75%.
 
 | bid | evaluated cost | content | role |
 | --- | --- | --- | --- |
@@ -39,7 +39,7 @@ L2 is closer to LO in price; L3 is closer in content, and L3 is the runner-up. T
 
 "LO is the lowest evaluated cost and also leads on Nigerian content, 88% against 75% (L3), a lead of 13 percentage points; s.14 confirms it"
 
-When the lowest evaluated cost also has the highest content, s.14 confirms the award. The engine still reports the group, the leader, the runner-up and the lead, so the report shows the section was tested.
+When the lowest evaluated cost also has the highest content, s.14 confirms the award.
 
 ## Why the runner-up matters
 

@@ -2,7 +2,7 @@
 
 {{panel:pr-award-calculator}}
 
-Section 14 of the Nigerian Oil and Gas Industry Content Development Act 2010 (Act No. 2, commenced 22 April 2010, as enacted; read on 2026-09-26) selects the leader in the group only if its Nigerian content is "at least 5% higher" than its closest competitor's. The Act does not say whether that means five percentage points or five percent of the competitor's content. This course treats the question as open, teaches both readings side by side, and states the reading beside every figure that depends on it.
+Section 14 of the Nigerian Oil and Gas Industry Content Development Act 2010 (Act No. 2, commenced 22 April 2010, as enacted; read on 2026-09-26) selects the leader in the group only if its Nigerian content is "at least 5% higher" than its closest competitor's. The Act does not say whether that means five percentage points or five percent of the competitor's content, and both are natural readings of the words. This course treats the question as open, teaches both readings side by side, and states the reading beside every figure that depends on it.
 
 ## The two readings
 

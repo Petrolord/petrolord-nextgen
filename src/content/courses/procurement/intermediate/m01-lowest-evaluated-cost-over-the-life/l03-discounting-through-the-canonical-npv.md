@@ -26,7 +26,7 @@ The engine's basis names the convention in words: "end-of-year discounting". A d
 
 ## One implementation of discounting
 
-The engine discounts through the npv function of engines/economics/cashflow.ts. It does not carry a second copy of the arithmetic, and neither does this course. The reason is practical. When two parts of a platform each discount a stream in their own code, they can disagree by a convention nobody wrote down, and the disagreement surfaces in front of a tender board. With one function, a life-cycle cost here and a discounted cash flow in the economics courses follow the same rule.
+The engine discounts through the npv function of engines/economics/cashflow.ts. It does not carry a second copy of the arithmetic, and neither does this course. With one function, a life-cycle cost here and a discounted cash flow in the economics courses follow the same rule.
 
 That seam runs both ways. How to choose a discount rate, and what it means for a company's cost of capital, belong to the economics courses. In this course the rate is a stated input, 0.1 on the materials tender, and the evaluation quotes it.
 

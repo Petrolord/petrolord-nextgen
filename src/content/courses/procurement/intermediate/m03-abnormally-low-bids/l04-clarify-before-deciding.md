@@ -2,7 +2,7 @@
 
 {{panel:pr-award-calculator}}
 
-A flag is a question. The engine's test for abnormally low bids identifies bids whose price needs explaining; it never removes a bid from the evaluation. This lesson reads what the engine says a flag means, and where the decision that follows it belongs.
+A flag is a question. The engine's test for abnormally low bids identifies bids whose price needs explaining; it never removes a bid from the evaluation.
 
 ## The same clause on every flag
 
@@ -10,7 +10,7 @@ Every flag reason the engine returns, under either approach, ends with the same 
 
 > a potential abnormally low bid: clarify the price with the bidder before any decision; it is never rejected automatically
 
-The wording follows the source, the World Bank Procurement Guidance, Abnormally Low Bids and Proposals, Second Edition, July 2016, read on 2026-09-26. Its Stage 1, which is what the engine computes, identifies a bid to examine. The Guidance then requires the price to be clarified with the bidder before any decision. The engine computes Stage 1 and stops there.
+The wording follows the source, the World Bank Procurement Guidance, Abnormally Low Bids and Proposals, Second Edition, July 2016, read on 2026-09-26. Its Stage 1, which is what the engine computes, identifies a bid to examine. The Guidance then requires the price to be clarified with the bidder before any decision.
 
 A low price can have honest causes or a misread scope behind it, and the arithmetic of Stage 1 cannot tell them apart. Only the bidder's answer, examined by the committee, can.
 
@@ -20,11 +20,11 @@ If the committee examines a flagged bid and rejects it, the rejection is a decis
 
 > bids[0].rejected must be a non-empty reason string when given
 
-The World Bank's Guidance on Evaluating Bids and Proposals (February 2025) shows the pattern in its Figures X to XII: company E is excluded with the stated reason "abnormally low bid, rejected after examination", and the remaining four are ranked. The rejection is visible, with a stage and a reason.
+The World Bank's Guidance on Evaluating Bids and Proposals (February 2025) shows the pattern in its Figures X to XII: company E is excluded with the stated reason "abnormally low bid, rejected after examination", and the remaining four are ranked.
 
 ## A rejection moves the relative test
 
-The two approaches behave differently once a bid leaves the field. Under the absolute approach each bid is compared with the buyer's estimate alone, so removing one bid changes nothing for the others. Under the relative approach the mean and the standard deviation are computed over the field, so removing a bid moves the limit for every bid that remains. With fewer than five bids left, the engine switches to the absolute approach and asks for an estimate.
+Under the absolute approach each bid is compared with the buyer's estimate alone, so removing one bid changes nothing for the others. Under the relative approach the mean and the standard deviation are computed over the field, so removing a bid moves the limit for every bid that remains. With fewer than five bids left, the engine switches to the absolute approach and asks for an estimate.
 
 Both runs belong in the report: the field before the rejection, the rejection with its reason, and the field after it.
 

@@ -2,11 +2,11 @@
 
 {{panel:pr-award-calculator}}
 
-Section 14 selects the bid that "contains the highest level" of Nigerian content, provided it leads its closest competitor by at least 5%. Two situations strain those words: two bids that share the highest content, and a runner-up with no Nigerian content at all. In both the engine returns a lead of null, and in both it says why. This lesson reads each.
+Section 14 selects the bid that "contains the highest level" of Nigerian content, provided it leads its closest competitor by at least 5%. Two situations strain those words: a shared highest content, and a runner-up with no Nigerian content. In both the engine returns a null lead and says why.
 
 ## Two bids at the top
 
-A stated case under the points reading: LO, the lowest evaluated cost, at 2000000 with 40%; S1 at 2005000 with 65%; S2 at 2010000 with 65%. All three are within 1% of LO, so all three are in the group.
+A stated case under the points reading: LO, the lowest evaluated cost, at 2000000 with 40%; S1 at 2005000 with 65%; S2 at 2010000 with 65%.
 
 | | points reading |
 | --- | --- |
@@ -19,13 +19,11 @@ S1 and S2 tie for the highest content. No single bid "contains the highest level
 
 "S1 and S2 share the highest Nigerian content 65%, so no single bid leads; the lowest evaluated cost LO stands"
 
-The lead is null because there is no single leader to measure it from. A lead of zero would say something different, that a leader exists and leads by nothing. Null says the question has no answer on these bids.
-
-The Act states no tie-break for this case, and the engine invents none for s.14: it leaves the lowest evaluated cost in place and reports why.
+The lead is null because there is no single leader to measure it from. A lead of zero would say a leader exists and leads by nothing.
 
 ## A runner-up with nothing
 
-A stated case under the relative reading: LO at 2000000 with 0%, and Z1 at 2004000 with 30%. Z1 leads. The runner-up, LO, has no Nigerian content.
+A stated case under the relative reading: LO at 2000000 with 0%, and Z1 at 2004000 with 30%. The runner-up, LO, has no Nigerian content.
 
 | | relative reading |
 | --- | --- |
@@ -38,7 +36,7 @@ Under the relative reading the lead is measured as a percentage of the runner-up
 
 "2 bids within 1% of the lowest evaluated cost; Z1 has the highest Nigerian content, 30% against 0% (LO), a runner-up with no Nigerian content, at least 5% higher, so s.14 selects Z1 over the lowest evaluated cost LO"
 
-Here a null lead sits beside an applied section. That is why the course reads the applied and selected fields as well as the lead: a null lead can mean "no single leader" or "no finite ratio", and only the reason and the other fields say which.
+The course reads the applied and selected fields as well as the lead: a null lead can mean "no single leader" or "no finite ratio", and only the reason and the other fields say which.
 
 ## Quoting these results
 

@@ -10,7 +10,7 @@ The engine's rule, in its basis:
 
 > content = 100 x nigerian / total in the measured unit of the Schedule line; the item meets its minimum when content >= the minimum
 
-For each item a bid reports three things: the measure it used, the Nigerian quantity and the total quantity. The engine checks the measure against the Schedule line before it divides. The units it accepts, listed in NC_MEASURES, are man-hours, tonnage, spend, length, number, volume and litres.
+For each item a bid reports three things: the measure it used, the Nigerian quantity and the total quantity. The units it accepts, listed in NC_MEASURES, are man-hours, tonnage, spend, length, number, volume and litres.
 
 ## A unit the Schedule does not use is refused
 
@@ -46,7 +46,7 @@ Each figure is a percentage in its own unit. MS2's valve content, 58.333333, is 
 
 ## Spend is a unit too
 
-NC_MEASURES lists spend beside the physical units, and the same check applies to it: the unit a Schedule line names is the only unit the engine accepts for that item. Spend also appears on the materials tender in a second role. Each materials bid weights its items by its own quoted amount for that item, the spend, when its item contents are combined into one overall figure. That is a weight chosen for the combination, stated in the fixture, and lesson 4 reads it.
+NC_MEASURES lists spend beside the physical units, and the same check applies to it: the unit a Schedule line names is the only unit the engine accepts for that item. Spend also appears on the materials tender in a second role. Each materials bid weights its items by its own quoted amount for that item, the spend, when its item contents are combined into one overall figure. Lesson 4 reads that weighting.
 
 ## Exercise
 
