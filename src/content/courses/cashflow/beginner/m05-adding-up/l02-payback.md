@@ -27,7 +27,7 @@ When the first row is already positive the engine prints "Year 0" and payback_ye
 
 ## The mistake
 
-Counting from the wrong start. Payback is measured from the first row of the ledger, 2029 on AKATA, not from first oil, not from the last capex year and not from the trough. Measured from the 2030 tranche the same crossing reads a year shorter, and the field looks faster than the engine says. The second mistake is to stop at the whole year: 2032 is a year, 3.461632 is a payback, and two fields that cross in the same calendar year can be nearly a year apart in payback_years.
+Counting from the wrong start. Payback is measured from the first row of the ledger, 2029 on AKATA; first oil, the last capex year and the trough are all the wrong start. Measured from the 2030 tranche the same crossing reads a year shorter, and the field looks faster than the engine says. The second mistake is to stop at the whole year: 2032 is a year, 3.461632 is a payback, and two fields that cross in the same calendar year can be nearly a year apart in payback_years.
 
 ## What it refuses
 

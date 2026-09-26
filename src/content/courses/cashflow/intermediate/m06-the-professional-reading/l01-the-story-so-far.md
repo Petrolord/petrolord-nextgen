@@ -28,7 +28,7 @@ At 60 USD/bbl AKATA's NPV is -21406234.12 and at 70 it is 22132715.69; the break
 
 ## The sentence the tier ends on
 
-IRR is a property of a curve, not of a project. So is every discounted reading: change the rule for placing rows in time and the number changes, with the rows untouched.
+IRR is a property of a curve rather than of a project. So is every discounted reading: change the rule for placing rows in time and the number changes, with the rows untouched.
 
 ## Exercise
 

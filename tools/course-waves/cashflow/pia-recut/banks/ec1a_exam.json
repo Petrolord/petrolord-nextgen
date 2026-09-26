@@ -82,7 +82,7 @@
    "The cap is a share of the pool of 80000000.00 rather than of revenue, and 40 percent of the pool is what came out.",
    "The recovery is reduced by the contractor's profit share of 50 percent applied to the cost oil as well as to the profit oil.",
    "The 4000000.00 shortfall is the tax on the cost oil, which the engine deducts before reporting the recovery.",
-   "The cap is a share of revenue after royalty, not of the gross."
+   "The cap is a share of revenue after royalty, below the gross."
   ],
   "answer": 3,
   "explanation": "At 0.200000 the recovery is 18000000.00 and at 1.000000 it is the whole pool of 80000000.00, with profit oil moving down by the same steps as recovery moves up."
@@ -378,7 +378,7 @@
   "options": [
    "Above 60 percent the cap no longer binds in any year, so cost oil equals the year's costs and the take is the royalty plus tax on a fixed profit oil.",
    "The engine caps the take at 82.1085 percent for production sharing, which is the royalty rate plus the tax rate blended at the contractor share.",
-   "Once the pool clears inside the field's life the cap only moves timing, and timing is what NPV and IRR price, not take.",
+   "Once the pool clears inside the field's life the cap only moves timing, and timing is what NPV and IRR price and take ignores.",
    "Above 60 percent the contractor share of profit oil steps down to hold the take constant, as the tranche mode requires once the pool has cleared."
   ],
   "answer": 2,

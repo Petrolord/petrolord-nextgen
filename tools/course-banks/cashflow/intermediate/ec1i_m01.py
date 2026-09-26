@@ -65,11 +65,11 @@ q(0,
 
 q(2,
  "With inflation and every escalator set to zero, AKATA's NPV is 65055328.97 on either basis. What does that say about the configured 72534830.66?",
- "The price and cost escalators lift the configured answer, not the inflation rate, which the discount rate refuses to carry on its own.",
+ "The price and cost escalators lift the configured answer; the inflation rate, which the discount rate refuses to carry alone, does not.",
  ["The 3 percent inflation lifts the answer by raising the revenue rows, and removing it exposes the flat prices underneath.",
   "The real basis adds value by deflating the capex of 255000000.00 in 2029 money, and the zero run loses that.",
   "The difference is the Fisher conversion of 10.000000 to 6.796117 percent, which the zero run no longer performs."],
- "Set only inflation to zero and NPV stays 72534830.66; it is the escalators, not the deflator, that move the rows.")
+ "Set only inflation to zero and NPV stays 72534830.66; it is the escalators that move the rows, and the deflator does not.")
 
 q(3,
  "Under mid_year_discounting the 2030 row goes from minus 12500000.00 to minus 11918282.37, the 2031 row to 32504406.45, and the NPV is 20586124.09 against the end-year 21590909.09. What is the relation between the two NPVs?",

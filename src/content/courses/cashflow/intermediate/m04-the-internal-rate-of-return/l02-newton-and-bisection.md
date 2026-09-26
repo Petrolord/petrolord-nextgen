@@ -8,7 +8,7 @@ The engine's root finder carries a contract: it names a rate only when exactly o
 
 Newton starts at 10 percent, reads the NPV and its slope there, and steps to where a straight line through that point would cross zero. On late_payout, [-1000, 0, 0, 0, 0, 2500], the sampled curve reads 552.303308 at 10 percent, 242.941838 at 15, 4.693930 at 20 and -180.800000 at 25. The steps land close and converge fast: the reported root is 20.1124 percent, irrStatus ok, and the NPV there is printed as -0.000000, a rounded residual on the negative side of zero.
 
-conventional_five_year, [-1000, 300, 300, 300, 300, 300], reads 137.24 at 10 percent and -102.82 at 20, and the root is 15.2382 percent. tiny_return, [-1000, 1001], has a root of 0.1000 percent. The residual at every reported root is 0.000000 or -0.000000: the finder stops at a tolerance, not at an exact zero.
+conventional_five_year, [-1000, 300, 300, 300, 300, 300], reads 137.24 at 10 percent and -102.82 at 20, and the root is 15.2382 percent. tiny_return, [-1000, 1001], has a root of 0.1000 percent. The residual at every reported root is 0.000000 or -0.000000: the finder stops at a tolerance short of an exact zero.
 
 ## Where Newton fails
 

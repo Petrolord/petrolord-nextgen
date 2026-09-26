@@ -31,7 +31,7 @@ The careful mistake is to read null as bad news. One of AKATA's nulls is the opp
 
 ## What it refuses
 
-It refuses to invent a rate when no rate in the band zeroes the NPV, and it refuses to clamp to a large number and call it converged. It refuses to pick one crossing from several. And the status names the branch, not the verdict: no-root and no-sign-change are both null, and only the NPV beside the null says whether the field is worth anything.
+It refuses to invent a rate when no rate in the band zeroes the NPV, and it refuses to clamp to a large number and call it converged. It refuses to pick one crossing from several. And the status names the branch and passes no verdict: no-root and no-sign-change are both null, and only the NPV beside the null says whether the field is worth anything.
 
 ## Exercise
 

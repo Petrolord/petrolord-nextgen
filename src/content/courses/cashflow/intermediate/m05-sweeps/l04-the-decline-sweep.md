@@ -36,7 +36,7 @@ The careful mistake is to read the decline sweep as a volume sensitivity and plo
 
 ## What it refuses
 
-The sweep refuses to keep the trimmed years: with the economic limit on, a year that fails the limit test is removed from the valued ledger, not carried at zero, and the KPIs are of the shortened field.
+The sweep refuses to keep the trimmed years: with the economic limit on, a year that fails the limit test is removed from the valued ledger instead of being carried at zero, and the KPIs are of the shortened field.
 
 ## Exercise
 

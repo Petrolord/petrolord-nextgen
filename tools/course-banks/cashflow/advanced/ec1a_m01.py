@@ -37,7 +37,7 @@ q(1,
  ["The recovery rises to 66000000.00, because the cap is a share of the pool and a larger pool lets more cost oil out in the same year.",
   "The profit oil, which is reduced by the brought-forward amount before the split so that the contractor's tax falls while the cash is unchanged.",
   "The tax, because the brought-forward cost is deductible against the contractor's profit oil in the year it arrives even though the cap refuses to recover it."],
- "The cap is a ceiling on recovery per year, not on the pool, so 30000000 of extra cost changes nothing in the year except how much is carried out of it.")
+ "The cap is a ceiling on recovery per year and leaves the pool unbounded, so 30000000 of extra cost changes nothing in the year except how much is carried out of it.")
 
 q(1,
  "AKATA under production sharing at a 30 percent cap carries 183771360.00 out of 2029 and 207346412.26 out of 2035. The field has produced for seven years and the pool is larger at the end than at the start. What is growing it?",
@@ -97,7 +97,7 @@ q(1,
 
 q(2,
  "psc_wi_50 reports total oil 1000000.00 bbl for a field that lifted 1000000 bbl in each of 2030 and 2031, and the rows carry oil_bbl 500000.00. Why has the volume halved with the money?",
- "Under a PSC the working interest is applied at the door, so the rows are the contractor's share and the volumes are entitlement volumes, not field volumes.",
+ "Under a PSC the working interest is applied at the door, so the rows are the contractor's share and the volumes are entitlement volumes rather than field volumes.",
  ["The engine halves the volumes because the cap binds in both years, and a binding cap converts half of the barrels into cost oil that is not counted as production.",
   "The production file was pre-scaled to 50 percent before upload, and the engine reads the halved barrels as the field's production.",
   "The oil_bbl column reports the barrels behind the contractor's profit oil, and at a 50 percent profit share that is half the field's production."],
@@ -109,7 +109,7 @@ q(0,
  ["It was deducted from the contractor's profit oil before tax, which is why the net fell by the full 10000000.00 while the taxable income stayed at 27000000.00.",
   "It was paid from the contractor's profit oil after tax and shared with the state at the 50 percent profit split, leaving the contractor's cash lower by the whole sum.",
   "It was charged as a lump sum in the last year of the field, and the sinking fund label only records that the money was set aside in 2031 rather than spent."],
- "The tax is unchanged at 13500000.00 because the base is unchanged; the contribution is a cost, and costs under a PSC go into the pool, not into the tax base.")
+ "The tax is unchanged at 13500000.00 because the base is unchanged; the contribution is a cost, and costs under a PSC go into the pool and stay out of the tax base.")
 
 q(3,
  "psc_abandonment_wi_50 charges a 10000000.00 lump sum against the 50 percent working interest flows. The 2031 net is 9750000.00 where psc_wi_50 had 19750000.00. What does the difference say about the lump sum?",

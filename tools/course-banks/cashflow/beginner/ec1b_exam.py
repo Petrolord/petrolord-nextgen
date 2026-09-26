@@ -25,11 +25,11 @@ q(3,
 
 q(0,
  "A capex row carries both amount_usd and cost_usd. Under what condition does the engine refuse the file?",
- "Only when the two hold different values; equal values are taken once, not doubled.",
+ "Only when the two hold different values; equal values are taken once.",
  ["Always, because a row may carry exactly one cost column and the engine will not pick between two preferred aliases.",
   "Never, because both are preferred aliases and the engine sums every column ending in _usd in that case.",
   "Only when one of them is prefixed total_, which the fallback excludes from its sum."],
- "ambiguous_cost_aliases says which: different values, refused; the same value, accepted once, and the year's capex is the value, not twice it.")
+ "ambiguous_cost_aliases says which: different values, refused; the same value, accepted once, and the year's capex is the value, counted once.")
 
 q(2,
  "AKATA's 2030 row prints applied_oil_price 83.640000 USD/bbl. Why does the course insist on quoting six decimals rather than 83.64?",
@@ -157,7 +157,7 @@ q(3,
  ["80.000000 from the base year onward and de-escalated values before it, since the base year is still the anchor for the years behind it.",
   "80.000000 from 2030 onward and the inflation rate applied before it, because a typed zero only switches off the forward escalation.",
   "Nothing, because an escalator of 0 is read as unset and falls back to the inflation rate."],
- "Zero means flat; it is a blank, not a zero, that falls back to inflation, and the same call with the escalator at 10 returns 72.727273 for 2029.")
+ "Zero means flat; it is a blank, never a zero, that falls back to inflation, and the same call with the escalator at 10 returns 72.727273 for 2029.")
 
 q(2,
  "A reader sets a 10 percent escalator for a flat price, then enters the deck_step_hold deck, which ends at 50 in 2032. What does the resolver return for 2035?",
@@ -281,7 +281,7 @@ q(2,
 
 q(0,
  "On the hand-derived case take is 65.3846 percent with the royalty at 0 and 30.7692 percent with the tax at 0. What do the two numbers together say?",
- "A regime is a take, not a rate: each instrument moves the share on its own axis, and neither rate alone is the government's share.",
+ "A regime is a take rather than a rate: each instrument moves the share on its own axis, and neither rate alone is the government's share.",
  ["That royalty is the larger instrument, since removing it moves the take further than removing the tax.",
   "That the two instruments add, so the take with both in force is their sum rather than the 80.7692 the engine prints.",
   "That take is undefined when either rate is zero, and the engine prints the other rate instead."],

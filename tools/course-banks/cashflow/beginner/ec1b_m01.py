@@ -90,7 +90,7 @@ q(3,
 q(2,
  "The hand-derived case sets gas_price_usd_mscf=0 and every row has gas_mscf 0.00. Does gas_price_unset fire?",
  "No, because gas_price_unset fires only when the production data has gas volumes, and there are none.",
- ["Yes, because a gas price of 0 is the same as an unset price and the check reads the configuration, not the volumes.",
+ ["Yes, because a gas price of 0 is the same as an unset price and the check reads the configuration and ignores the volumes.",
   "No, because the engine prices the gas at one sixth of the oil price of 100.000000 through the boe conversion.",
   "Yes, and the run continues with a warning while gas revenue is booked at 0.00."],
  "The refusal is about the pair: an unset gas_price_usd_mscf with gas volumes in the file, and the hand-derived case has neither.")

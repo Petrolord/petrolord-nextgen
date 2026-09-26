@@ -21,7 +21,7 @@ NPV becomes 37500000.00, the 2031 flow alone. The prior flow is reported separat
 
 Same rows, three answers from 2030 alone: 72534830.66 valued at the start, 77464382.26 valued a year later with everything kept, 206819768.67 valued a year later with 2029 written off. Each is right for its question. The first asks whether to start. The second restates the first in 2030 money. The third asks whether to continue, given that 2029 has been paid for and cannot be recovered.
 
-Note the sunk figure: minus 89377672.80 for a 2031 valuation is the cumulative nominal net cash flow through 2030, not the real cumulative of minus 90302313.79. The sunk column is money of the day.
+Note the sunk figure: minus 89377672.80 for a 2031 valuation is the cumulative nominal net cash flow through 2030; the real cumulative is minus 90302313.79. The sunk column is money of the day.
 
 ## The mistake
 

@@ -32,7 +32,7 @@ A field sanctioned in 2029 and reviewed in 2031 is worth stating at 2031, becaus
 
 ## The mistake
 
-The careful mistake is to expect that valuing from 2030 removes 2029. It does not; it revalues 2029. The 2029 flow of minus 121123680.00 becomes a larger negative when carried forward, exactly as the 2030 row of the published case becomes minus 13750000.00 rather than minus 12500000.00. So the NPV rises by compounding, not by forgiveness: 77464382.26 is 72534830.66 one year older, not 72534830.66 with the capex forgotten. Forgetting the capex is a different setting, treat_prior_as_sunk, and it produces 206819768.67, which is nowhere near.
+The careful mistake is to expect that valuing from 2030 removes 2029. It does not; it revalues 2029. The 2029 flow of minus 121123680.00 becomes a larger negative when carried forward, exactly as the 2030 row of the published case becomes minus 13750000.00 rather than minus 12500000.00. So the NPV rises by compounding alone: 77464382.26 is 72534830.66 one year older, with every capex still counted. Forgetting the capex is a different setting, treat_prior_as_sunk, and it produces 206819768.67, which is nowhere near.
 
 A reader who sees 77464382.26 against 72534830.66 and reports that the project improved has confused a change of date with a change of prospects. IRR did not move, payback did not move, the total did not move. Only the date on the statement moved.
 

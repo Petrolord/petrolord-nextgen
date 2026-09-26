@@ -13,7 +13,7 @@ q(2,
  ["Nothing, because the row nets -121123680.00 and a royalty is a share of what the year made rather than of what it sold.",
   "Fifteen percent of 186032000.00 less the 24000000.00 opex, because a royalty is levied on the net operating income the field actually cleared.",
   "Fifteen percent of the taxable income of 113127200.00, since royalty is deductible and so must be computed on the same base as tax."],
- "Off the top means a share of sales, not of profit: 2035 pays 10998867.98 on 73325786.51 in exactly the same proportion, and 2029 pays 27904800.00 while it loses money.")
+ "Off the top means a share of sales, taken before profit: 2035 pays 10998867.98 on 73325786.51 in exactly the same proportion, and 2029 pays 27904800.00 while it loses money.")
 
 q(0,
  "On the hand-derived case the royalty is moved from 10 to 30 percent, so the year 1 royalty line rises by 20000000.00 USD. The year 1 net moves only from -7500000.00 to -17500000.00. Where did the other half go?",
@@ -117,7 +117,7 @@ q(1,
  ["Because the engine applies the interest to the uploaded volumes before the cascade runs, so a field-level rate tier would read the partner's barrels rather than the field's.",
   "Because the depreciation schedule is unit-of-production and follows the scaled barrels.",
   "Because the two orders never give the same answer, even under flat rates."],
- "Under flat rates every line is proportional to revenue, so the habit is formed where it is cheap: interest is applied to results, not to inputs.")
+ "Under flat rates every line is proportional to revenue, so the habit is formed where it is cheap: interest is applied to results and leaves inputs alone.")
 
 q(3,
  "AKATA sells 1240000.00 Mscf of gas at 3.329280 USD/Mscf in 2031 beside its oil. What royalty rate does the gas revenue carry under the JV?",

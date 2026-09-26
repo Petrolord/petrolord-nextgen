@@ -69,10 +69,10 @@ q(3,
  ["Nothing, because the interpolation inside 2032 already accounts for how narrowly the crossing was made.",
   "That the field is exposed for 40339805.83 at its worst, which is the trough the payback recovers.",
   "That 2032's flow was only 1742002.07, so the field is close to its economic limit."],
- "payback_years reports a decimal, not a margin: a crossing made by 1742002.07 and one made by tens of millions print the same kind of number.")
+ "payback_years reports a decimal and says nothing of the margin: a crossing made by 1742002.07 and one made by tens of millions print the same kind of number.")
 
 q(1,
- "AKATA's total opex is 183899092.34 USD, not seven times the typed 24000000. Why?",
+ "AKATA's total opex is 183899092.34 USD, more than seven times the typed 24000000. Why?",
  "The 3 percent opex escalator carried the column from 24000000.00 in 2029 to 28657255.12 in 2035, and the total is the sum of the escalated column.",
  ["The total is restated in 2029 money by the inflation rate of 3 percent, so it drifts from the typed amount.",
   "The total includes the 45000000.00 second capex tranche, which the engine books in the opex lane.",
@@ -105,11 +105,11 @@ q(0,
 
 q(1,
  "A press release quotes AKATA's government share as royalty plus tax over the 857602518.80 USD of revenue. How does that compare with the engine's take of 66.1723 percent?",
- "It is smaller, because take divides by revenue less capex 255000000.00 less opex 183899092.34, the value the field created, not by sales.",
+ "It is smaller, because take divides by revenue less capex 255000000.00 less opex 183899092.34, the value the field created.",
  ["It is the same, because royalty and tax are the only two government lines and total revenue of 857602518.80 is the only base a share of it can be quoted on.",
   "It is larger, because the pre-take value adds back the depreciation of 174000000.00 that the tax base removed.",
   "It cannot be compared, because take is discounted and the press figure is not."],
- "Take is over value, not sales; the rest of that value is the contractor's total net cash flow.")
+ "Take is over value rather than sales; the rest of that value is the contractor's total net cash flow.")
 
 q(3,
  "elt_royalty_tail prints take 131.2500 percent and jv_loss_carryforward prints 125.0000. What makes a take pass 100?",

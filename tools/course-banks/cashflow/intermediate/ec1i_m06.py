@@ -64,7 +64,7 @@ q(2,
  "Basis does not move NPV end-year, inflation never does on the real basis with the escalators set, 2030 with prior years kept gives 77464382.26, and the 60000000 abandonment gives 38666394.86.")
 
 q(0,
- "The tier ends on the sentence that IRR is a property of a curve, not of a project. What is the sentence claiming?",
+ "The tier ends on the sentence that IRR is a property of a curve rather than of a project. What is the sentence claiming?",
  "That the IRR is a zero of one vector's NPV curve: a curve with two zeros has no single IRR, which is why the engine returns null there, and a scaled vector keeps its IRR at any size.",
  ["That the IRR moves when the convention moves, as NPV does from 72534830.66 to 70188970.32, because the curve is redrawn under mid-year discounting.",
   "That the IRR is a rate on the project's money, so a project with an IRR of 29.2361 percent earns 29.2361 percent on its 255000000.00 of capex.",

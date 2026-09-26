@@ -20,7 +20,7 @@ Every money line and the volumes carry the interest. At 60 percent the gross rev
 
 What does not move is a ratio. Take reads 66.1723 percent at every interest and the unit technical cost 40.006602 USD/boe at every interest, because the share sits in the numerator and the denominator alike and cancels. NPV does move, from 72534830.66 at 100 percent to 43520898.40 at 60, because NPV is a sum of cash and not a ratio.
 
-## Inside, not outside
+## Inside the cascade
 
 Scaling inside the regime means the fiscal cascade runs once on the whole field and the partner takes a share of each result. Scaling the volumes first gives the same answer under a flat royalty and a flat tax, because every line is proportional to revenue, and a different answer as soon as anything in the regime is not: a rate tier on the field's daily production, a lifetime cumulative cap, a fixed lump sum. Those are Expert edges, but the habit is formed here: the interest is applied to results, and the results are then printed as the share.
 

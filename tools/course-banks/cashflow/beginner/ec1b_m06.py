@@ -29,7 +29,7 @@ q(3,
  ["A ledger of zeros, from which the reader recovers the missing volumes by reading the annual totals the engine reports back.",
   "The same ledger the run would have produced, since a refusal only withholds the KPI block and not the rows.",
   "Whatever the engine produced on the last accepted upload, which it keeps until a new file replaces it."],
- "A file that fails is refused with a message, not run with a zero; the only fix for a missing price is the price.")
+ "A file that fails is refused with a message and never run with a zero; the only fix for a missing price is the price.")
 
 q(1,
  "A reader builds AKATA's 2029 row by hand and gets a tax of 0.00 where the engine prints 45250880.00 USD. Which convention did they break?",
@@ -93,7 +93,7 @@ q(3,
  ["As 25461027.24, its value in 2029 money, since the run is on the real basis and every total follows it.",
   "As 17161022.43, its discounted value, because the readings are stated at the applied rate.",
   "As money the payback can see, because the cumulative includes it."],
- "Nothing in this tier has a clock: payback, take and unit cost alike are undiscounted, and the real column is a restatement, not a valuation.")
+ "Nothing in this tier has a clock: payback, take and unit cost alike are undiscounted, and the real column is a restatement rather than a valuation.")
 
 q(1,
  "The engine prints take 66.1723 and 76.1610 percent, and payback 3.461632 and 3.961607 years, on the same line. Which of each pair is the Associate reading?",

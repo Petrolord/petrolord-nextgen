@@ -1,0 +1,210 @@
+[
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 3,
+  "prompt": "A capex row carries both amount_usd and cost_usd. Under what condition does the engine refuse the file?",
+  "options": [
+   "Only when the two hold different values; equal values are taken once.",
+   "Always, because a row may carry exactly one cost column and the engine will not pick between two preferred aliases.",
+   "Never, because both are preferred aliases and the engine sums every column ending in _usd in that case.",
+   "Only when one of them is prefixed total_, which the fallback excludes from its sum."
+  ],
+  "answer_index": 0,
+  "explanation": "ambiguous_cost_aliases says which: different values, refused; the same value, accepted once, and the year's capex is the value, counted once.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 19,
+  "prompt": "With no deck, a flat 80 and the escalator typed as 0, what does the resolver return for the years 2028 through 2035 around a 2030 base year?",
+  "options": [
+   "80.000000 from the base year onward and de-escalated values before it, since the base year is still the anchor for the years behind it.",
+   "80.000000 from 2030 onward and the inflation rate applied before it, because a typed zero only switches off the forward escalation.",
+   "Nothing, because an escalator of 0 is read as unset and falls back to the inflation rate.",
+   "80.000000 in every year, before the base year as well as after it."
+  ],
+  "answer_index": 3,
+  "explanation": "Zero means flat; it is a blank, never a zero, that falls back to inflation, and the same call with the escalator at 10 returns 72.727273 for 2029.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "prompt": "On the hand-derived case take is 65.3846 percent with the royalty at 0 and 30.7692 percent with the tax at 0. What do the two numbers together say?",
+  "options": [
+   "A regime is a take rather than a rate: each instrument moves the share on its own axis, and neither rate alone is the government's share.",
+   "That royalty is the larger instrument, since removing it moves the take further than removing the tax.",
+   "That the two instruments add, so the take with both in force is their sum rather than the 80.7692 the engine prints.",
+   "That take is undefined when either rate is zero, and the engine prints the other rate instead."
+  ],
+  "answer_index": 0,
+  "explanation": "With both in force the take is 80.7692 percent; royalty shrinks the tax base, so the two do not simply add.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m01-what-a-cash-flow-is",
+  "ord": 11,
+  "prompt": "The hand-derived case sets gas_price_usd_mscf=0 and every row has gas_mscf 0.00. Does gas_price_unset fire?",
+  "options": [
+   "Yes, because a gas price of 0 is the same as an unset price and the check reads the configuration and ignores the volumes.",
+   "No, because the engine prices the gas at one sixth of the oil price of 100.000000 through the boe conversion.",
+   "No, because gas_price_unset fires only when the production data has gas volumes, and there are none.",
+   "Yes, and the run continues with a warning while gas revenue is booked at 0.00."
+  ],
+  "answer_index": 2,
+  "explanation": "The refusal is about the pair: an unset gas_price_usd_mscf with gas volumes in the file, and the hand-derived case has neither.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-from-rows-to-years",
+  "ord": 13,
+  "prompt": "A capex file headed category, date, spend is refused. What single change lets it through?",
+  "options": [
+   "Give the cost column a name ending in _usd, since the fallback sums *_usd columns and spend has no unit in its name.",
+   "Rename spend to cost, because the word cost is on the preferred alias list as cost_usd and the engine matches on the word and ignores the suffix.",
+   "Add a total_usd column holding the sum, which the fallback prefers as the rollup.",
+   "Nothing short of the exact header amount_usd, which is the one name a capex file must carry."
+  ],
+  "answer_index": 0,
+  "explanation": "The unit is in the header or the column is not a cost; Cost_USD in case_insensitive_headers was read as 30000000.00 because case is ignored but the suffix is not.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m02-from-rows-to-years",
+  "ord": 15,
+  "prompt": "per_well_beats_total_rollup was run with no opex file at all. What does the refusal machinery do?",
+  "options": [
+   "It refuses with opex_no_cost_column, because a missing opex file has no cost column to recognise.",
+   "It refuses with no_production_rows, since a run needs all three files before it can build a ledger.",
+   "Nothing: the run proceeds with total opex 0.00, because the refusals check only that a recognised header exists, never that opex is present or the number under it right.",
+   "It runs, but fills opex from unit_opex_usd_per_bbl times the annual volumes, the way the fallback sums *_usd parts when no preferred alias is present, so that the ledger is not left without a cost."
+  ],
+  "answer_index": 2,
+  "explanation": "The same door lets an amount_usd column holding thousands of USD through at one thousandth of its value; after the door, the engine believes you.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-joint-venture-cascade",
+  "ord": 1,
+  "prompt": "AKATA's 2029 row reads gross revenue 186032000.00 USD, opex 24000000.00, capex 210000000.00 and net cash flow -121123680.00. What does the JV royalty at jv_royalty_pct 15 read on that row?",
+  "options": [
+   "Nothing, because the row nets -121123680.00 and a royalty is a share of what the year made rather than of what it sold.",
+   "Fifteen percent of 186032000.00 less the 24000000.00 opex, because a royalty is levied on the net operating income the field actually cleared.",
+   "27904800.00, fifteen percent of the 186032000.00 of sales, before any cost is seen.",
+   "Fifteen percent of the taxable income of 113127200.00, since royalty is deductible and so must be computed on the same base as tax."
+  ],
+  "answer_index": 2,
+  "explanation": "Off the top means a share of sales, taken before profit: 2035 pays 10998867.98 on 73325786.51 in exactly the same proportion, and 2029 pays 27904800.00 while it loses money.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m04-the-joint-venture-cascade",
+  "ord": 14,
+  "prompt": "Under AKATA's flat 15 percent royalty and 40 percent tax, scaling the volumes to the interest first would give the same net as scaling the results afterward. Why does the engine still insist on scaling inside?",
+  "options": [
+   "Because the engine applies the interest to the uploaded volumes before the cascade runs, so a field-level rate tier would read the partner's barrels rather than the field's.",
+   "Because a rate tier on the field's daily production, a lifetime cumulative cap or a fixed lump sum is not proportional to revenue, and the two orders then part.",
+   "Because the depreciation schedule is unit-of-production and follows the scaled barrels.",
+   "Because the two orders never give the same answer, even under flat rates."
+  ],
+  "answer_index": 1,
+  "explanation": "Under flat rates every line is proportional to revenue, so the habit is formed where it is cheap: interest is applied to results and leaves inputs alone.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-adding-up",
+  "ord": 8,
+  "prompt": "multiyear_jv_real turns from -40339805.83 to 1742002.07 USD between 2031 and 2032, and the engine prints payback_years 2.889357. What does the size of that first positive cumulative say?",
+  "options": [
+   "Nothing, because the interpolation inside 2032 already accounts for how narrowly the crossing was made.",
+   "That the field is exposed for 40339805.83 at its worst, which is the trough the payback recovers.",
+   "That 2032's flow was only 1742002.07, so the field is close to its economic limit.",
+   "The crossing clears zero by very little, so a modest price cut would move payback a whole year."
+  ],
+  "answer_index": 3,
+  "explanation": "payback_years reports a decimal and says nothing of the margin: a crossing made by 1742002.07 and one made by tens of millions print the same kind of number.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-adding-up",
+  "ord": 9,
+  "prompt": "AKATA's total opex is 183899092.34 USD, more than seven times the typed 24000000. Why?",
+  "options": [
+   "The total is restated in 2029 money by the inflation rate of 3 percent, so it drifts from the typed amount.",
+   "The 3 percent opex escalator carried the column from 24000000.00 in 2029 to 28657255.12 in 2035, and the total is the sum of the escalated column.",
+   "The total includes the 45000000.00 second capex tranche, which the engine books in the opex lane.",
+   "The total is scaled by the working interest, which AKATA carries at less than 100 percent."
+  ],
+  "answer_index": 1,
+  "explanation": "The capex total is exactly 255000000.00 because its escalator is 0; each money total is the sum of its column in money of the day.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m05-adding-up",
+  "ord": 13,
+  "prompt": "A press release quotes AKATA's government share as royalty plus tax over the 857602518.80 USD of revenue. How does that compare with the engine's take of 66.1723 percent?",
+  "options": [
+   "It is the same, because royalty and tax are the only two government lines and total revenue of 857602518.80 is the only base a share of it can be quoted on.",
+   "It is smaller, because take divides by revenue less capex 255000000.00 less opex 183899092.34, the value the field created.",
+   "It is larger, because the pre-take value adds back the depreciation of 174000000.00 that the tax base removed.",
+   "It cannot be compared, because take is discounted and the press figure is not."
+  ],
+  "answer_index": 1,
+  "explanation": "Take is over value rather than sales; the rest of that value is the contractor's total net cash flow.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 3,
+  "prompt": "The first step of working a ledger question is to check that the engine will accept the files. What is the reading of a run the engine refuses?",
+  "options": [
+   "A ledger of zeros, from which the reader recovers the missing volumes by reading the annual totals the engine reports back.",
+   "The same ledger the run would have produced, since a refusal only withholds the KPI block and not the rows.",
+   "Whatever the engine produced on the last accepted upload, which it keeps until a new file replaces it.",
+   "The refusal itself, with its reason."
+  ],
+  "answer_index": 3,
+  "explanation": "A file that fails is refused with a message and never run with a zero; the only fix for a missing price is the price.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "beginner",
+  "scope": "module",
+  "module_key": "m06-the-associate-reading",
+  "ord": 11,
+  "prompt": "Every Associate reading of AKATA treats the 30401798.05 USD earned in 2035 in one particular way. Which?",
+  "options": [
+   "As 25461027.24, its value in 2029 money, since the run is on the real basis and every total follows it.",
+   "As 17161022.43, its discounted value, because the readings are stated at the applied rate.",
+   "As money the payback can see, because the cumulative includes it.",
+   "As exactly 2029 money."
+  ],
+  "answer_index": 3,
+  "explanation": "Nothing in this tier has a clock: payback, take and unit cost alike are undiscounted, and the real column is a restatement rather than a valuation.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ }
+]

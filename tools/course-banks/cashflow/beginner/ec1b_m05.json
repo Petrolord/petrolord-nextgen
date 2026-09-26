@@ -85,10 +85,10 @@
    "The crossing clears zero by very little, so a modest price cut would move payback a whole year."
   ],
   "answer": 3,
-  "explanation": "payback_years reports a decimal, not a margin: a crossing made by 1742002.07 and one made by tens of millions print the same kind of number."
+  "explanation": "payback_years reports a decimal and says nothing of the margin: a crossing made by 1742002.07 and one made by tens of millions print the same kind of number."
  },
  {
-  "prompt": "AKATA's total opex is 183899092.34 USD, not seven times the typed 24000000. Why?",
+  "prompt": "AKATA's total opex is 183899092.34 USD, more than seven times the typed 24000000. Why?",
   "options": [
    "The total is restated in 2029 money by the inflation rate of 3 percent, so it drifts from the typed amount.",
    "The 3 percent opex escalator carried the column from 24000000.00 in 2029 to 28657255.12 in 2035, and the total is the sum of the escalated column.",
@@ -135,12 +135,12 @@
   "prompt": "A press release quotes AKATA's government share as royalty plus tax over the 857602518.80 USD of revenue. How does that compare with the engine's take of 66.1723 percent?",
   "options": [
    "It is the same, because royalty and tax are the only two government lines and total revenue of 857602518.80 is the only base a share of it can be quoted on.",
-   "It is smaller, because take divides by revenue less capex 255000000.00 less opex 183899092.34, the value the field created, not by sales.",
+   "It is smaller, because take divides by revenue less capex 255000000.00 less opex 183899092.34, the value the field created.",
    "It is larger, because the pre-take value adds back the depreciation of 174000000.00 that the tax base removed.",
    "It cannot be compared, because take is discounted and the press figure is not."
   ],
   "answer": 1,
-  "explanation": "Take is over value, not sales; the rest of that value is the contractor's total net cash flow."
+  "explanation": "Take is over value rather than sales; the rest of that value is the contractor's total net cash flow."
  },
  {
   "prompt": "elt_royalty_tail prints take 131.2500 percent and jv_loss_carryforward prints 125.0000. What makes a take pass 100?",

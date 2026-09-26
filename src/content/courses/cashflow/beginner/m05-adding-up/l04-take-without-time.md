@@ -21,7 +21,7 @@ Moving the tax rate alone on the hand-derived case:
 | 50 | -12500000.00 | 37500000.00 | 80.7692 |
 | 85 | -35250000.00 | 14750000.00 | 115.7692 |
 
-At a zero tax rate the take is 30.7692 percent, all of it royalty. At 85 percent it is 115.7692: the government collects more than the field's pre-take value and the contractor's two years sum to a loss. Royalty moves it on its own axis, 65.3846 percent at zero royalty and 88.4615 at 30. A regime is a take, not a rate.
+At a zero tax rate the take is 30.7692 percent, all of it royalty. At 85 percent it is 115.7692: the government collects more than the field's pre-take value and the contractor's two years sum to a loss. Royalty moves it on its own axis, 65.3846 percent at zero royalty and 88.4615 at 30. A regime is a take rather than a rate.
 
 ## Over 100 and null
 

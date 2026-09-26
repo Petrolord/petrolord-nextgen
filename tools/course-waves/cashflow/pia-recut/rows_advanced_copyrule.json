@@ -1,0 +1,82 @@
+[
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 8,
+  "prompt": "applyPSC on 100000000.00 of revenue with a 10 percent royalty and a 0.400000 cap recovers 36000000.00. Why not 40000000.00?",
+  "options": [
+   "The cap is a share of the pool of 80000000.00 rather than of revenue, and 40 percent of the pool is what came out.",
+   "The recovery is reduced by the contractor's profit share of 50 percent applied to the cost oil as well as to the profit oil.",
+   "The 4000000.00 shortfall is the tax on the cost oil, which the engine deducts before reporting the recovery.",
+   "The cap is a share of revenue after royalty, below the gross."
+  ],
+  "answer_index": 3,
+  "explanation": "At 0.200000 the recovery is 18000000.00 and at 1.000000 it is the whole pool of 80000000.00, with profit oil moving down by the same steps as recovery moves up.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "final",
+  "module_key": null,
+  "ord": 35,
+  "prompt": "AKATA under production sharing reports a take of 82.1085 percent at a 60 percent cost oil cap, at 80 and at 100, but 99.0577 at 45 and 120.4874 at 30. Why does the take stop moving above 60?",
+  "options": [
+   "Above 60 percent the cap no longer binds in any year, so cost oil equals the year's costs and the take is the royalty plus tax on a fixed profit oil.",
+   "The engine caps the take at 82.1085 percent for production sharing, which is the royalty rate plus the tax rate blended at the contractor share.",
+   "Once the pool clears inside the field's life the cap only moves timing, and timing is what NPV and IRR price and take ignores.",
+   "Above 60 percent the contractor share of profit oil steps down to hold the take constant, as the tranche mode requires once the pool has cleared."
+  ],
+  "answer_index": 2,
+  "explanation": "At 60 percent the pool clears in 2034, at 80 in 2031 and at 100 in 2030; NPV still rises from 29960298.75 to 48148675.31 across the three because the money arrives sooner.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-cost-recovery",
+  "ord": 4,
+  "prompt": "The one-year applyPSC case at the 0.4 cap is rerun with 30000000 brought forward from an earlier year. Cost recovered is still 36000000.00, profit oil still 27000000.00 and net still minus 30500000.00. What did the extra pool change?",
+  "options": [
+   "The recovery rises to 66000000.00, because the cap is a share of the pool and a larger pool lets more cost oil out in the same year.",
+   "Only the carried amount, from 44000000.00 to 74000000.00; a bigger pool does not recover faster, it waits.",
+   "The profit oil, which is reduced by the brought-forward amount before the split so that the contractor's tax falls while the cash is unchanged.",
+   "The tax, because the brought-forward cost is deductible against the contractor's profit oil in the year it arrives even though the cap refuses to recover it."
+  ],
+  "answer_index": 1,
+  "explanation": "The cap is a ceiling on recovery per year and leaves the pool unbounded, so 30000000 of extra cost changes nothing in the year except how much is carried out of it.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-cost-recovery",
+  "ord": 12,
+  "prompt": "psc_wi_50 reports total oil 1000000.00 bbl for a field that lifted 1000000 bbl in each of 2030 and 2031, and the rows carry oil_bbl 500000.00. Why has the volume halved with the money?",
+  "options": [
+   "The engine halves the volumes because the cap binds in both years, and a binding cap converts half of the barrels into cost oil that is not counted as production.",
+   "The production file was pre-scaled to 50 percent before upload, and the engine reads the halved barrels as the field's production.",
+   "Under a PSC the working interest is applied at the door, so the rows are the contractor's share and the volumes are entitlement volumes rather than field volumes.",
+   "The oil_bbl column reports the barrels behind the contractor's profit oil, and at a 50 percent profit share that is half the field's production."
+  ],
+  "answer_index": 2,
+  "explanation": "The joint venture ledger keeps field revenue and field volumes and applies the share later; the PSC ledger scales everything first, which is why NPV halves to minus 2295454.55 and take stays 101.0000.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ },
+ {
+  "tier": "advanced",
+  "scope": "module",
+  "module_key": "m01-cost-recovery",
+  "ord": 13,
+  "prompt": "psc_sinking_fund adds abandonment_cost_usd 10000000 funded from 2031. The 2031 row shows decom_fund_contribution 10000000.00, net cash flow 29500000.00 against 39500000.00, and tax still 13500000.00. Where did the contribution go?",
+  "options": [
+   "Into the recoverable cost lane, so it rides the pool as a cost to be recovered rather than being paid outside the contract.",
+   "It was deducted from the contractor's profit oil before tax, which is why the net fell by the full 10000000.00 while the taxable income stayed at 27000000.00.",
+   "It was paid from the contractor's profit oil after tax and shared with the state at the 50 percent profit split, leaving the contractor's cash lower by the whole sum.",
+   "It was charged as a lump sum in the last year of the field, and the sinking fund label only records that the money was set aside in 2031 rather than spent."
+  ],
+  "answer_index": 0,
+  "explanation": "The tax is unchanged at 13500000.00 because the base is unchanged; the contribution is a cost, and costs under a PSC go into the pool and stay out of the tax base.",
+  "why": "Owner copy rule: an \"X, not Y\" contrastive reworded plainly; no fact, figure or key changed."
+ }
+]

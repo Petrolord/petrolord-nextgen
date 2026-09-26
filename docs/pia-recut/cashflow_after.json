@@ -39,13 +39,13 @@
   "ord": 3,
   "prompt": "A capex row carries both amount_usd and cost_usd. Under what condition does the engine refuse the file?",
   "options": [
-   "Only when the two hold different values; equal values are taken once, not doubled.",
+   "Only when the two hold different values; equal values are taken once.",
    "Always, because a row may carry exactly one cost column and the engine will not pick between two preferred aliases.",
    "Never, because both are preferred aliases and the engine sums every column ending in _usd in that case.",
    "Only when one of them is prefixed total_, which the fallback excludes from its sum."
   ],
   "answer_index": 0,
-  "explanation": "ambiguous_cost_aliases says which: different values, refused; the same value, accepted once, and the year's capex is the value, not twice it."
+  "explanation": "ambiguous_cost_aliases says which: different values, refused; the same value, accepted once, and the year's capex is the value, counted once."
  },
  {
   "app_slug": "cashflow",
@@ -301,7 +301,7 @@
    "80.000000 in every year, before the base year as well as after it."
   ],
   "answer_index": 3,
-  "explanation": "Zero means flat; it is a blank, not a zero, that falls back to inflation, and the same call with the escalator at 10 returns 72.727273 for 2029."
+  "explanation": "Zero means flat; it is a blank, never a zero, that falls back to inflation, and the same call with the escalator at 10 returns 72.727273 for 2029."
  },
  {
   "app_slug": "cashflow",
@@ -551,7 +551,7 @@
   "ord": 35,
   "prompt": "On the hand-derived case take is 65.3846 percent with the royalty at 0 and 30.7692 percent with the tax at 0. What do the two numbers together say?",
   "options": [
-   "A regime is a take, not a rate: each instrument moves the share on its own axis, and neither rate alone is the government's share.",
+   "A regime is a take rather than a rate: each instrument moves the share on its own axis, and neither rate alone is the government's share.",
    "That royalty is the larger instrument, since removing it moves the take further than removing the tax.",
    "That the two instruments add, so the take with both in force is their sum rather than the 80.7692 the engine prints.",
    "That take is undefined when either rate is zero, and the engine prints the other rate instead."
@@ -839,7 +839,7 @@
   "ord": 11,
   "prompt": "The hand-derived case sets gas_price_usd_mscf=0 and every row has gas_mscf 0.00. Does gas_price_unset fire?",
   "options": [
-   "Yes, because a gas price of 0 is the same as an unset price and the check reads the configuration, not the volumes.",
+   "Yes, because a gas price of 0 is the same as an unset price and the check reads the configuration and ignores the volumes.",
    "No, because the engine prices the gas at one sixth of the oil price of 100.000000 through the boe conversion.",
    "No, because gas_price_unset fires only when the production data has gas volumes, and there are none.",
    "Yes, and the run continues with a warning while gas revenue is booked at 0.00."
@@ -1112,7 +1112,7 @@
   "prompt": "A capex file headed category, date, spend is refused. What single change lets it through?",
   "options": [
    "Give the cost column a name ending in _usd, since the fallback sums *_usd columns and spend has no unit in its name.",
-   "Rename spend to cost, because the word cost is on the preferred alias list as cost_usd and the engine matches on the word, not the suffix.",
+   "Rename spend to cost, because the word cost is on the preferred alias list as cost_usd and the engine matches on the word and ignores the suffix.",
    "Add a total_usd column holding the sum, which the fallback prefers as the rollup.",
    "Nothing short of the exact header amount_usd, which is the one name a capex file must carry."
   ],
@@ -1145,7 +1145,7 @@
   "options": [
    "It refuses with opex_no_cost_column, because a missing opex file has no cost column to recognise.",
    "It refuses with no_production_rows, since a run needs all three files before it can build a ledger.",
-   "Nothing: the run proceeds with total opex 0.00, because the refusals check that a recognised header exists, not that opex is present or that the number under it is right.",
+   "Nothing: the run proceeds with total opex 0.00, because the refusals check only that a recognised header exists, never that opex is present or the number under it right.",
    "It runs, but fills opex from unit_opex_usd_per_bbl times the annual volumes, the way the fallback sums *_usd parts when no preferred alias is present, so that the ledger is not left without a cost."
   ],
   "answer_index": 2,
@@ -1405,7 +1405,7 @@
    "Fifteen percent of the taxable income of 113127200.00, since royalty is deductible and so must be computed on the same base as tax."
   ],
   "answer_index": 2,
-  "explanation": "Off the top means a share of sales, not of profit: 2035 pays 10998867.98 on 73325786.51 in exactly the same proportion, and 2029 pays 27904800.00 while it loses money."
+  "explanation": "Off the top means a share of sales, taken before profit: 2035 pays 10998867.98 on 73325786.51 in exactly the same proportion, and 2029 pays 27904800.00 while it loses money."
  },
  {
   "app_slug": "cashflow",
@@ -1613,7 +1613,7 @@
    "Because the two orders never give the same answer, even under flat rates."
   ],
   "answer_index": 1,
-  "explanation": "Under flat rates every line is proportional to revenue, so the habit is formed where it is cheap: interest is applied to results, not to inputs."
+  "explanation": "Under flat rates every line is proportional to revenue, so the habit is formed where it is cheap: interest is applied to results and leaves inputs alone."
  },
  {
   "app_slug": "cashflow",
@@ -1757,7 +1757,7 @@
    "The crossing clears zero by very little, so a modest price cut would move payback a whole year."
   ],
   "answer_index": 3,
-  "explanation": "payback_years reports a decimal, not a margin: a crossing made by 1742002.07 and one made by tens of millions print the same kind of number."
+  "explanation": "payback_years reports a decimal and says nothing of the margin: a crossing made by 1742002.07 and one made by tens of millions print the same kind of number."
  },
  {
   "app_slug": "cashflow",
@@ -1765,7 +1765,7 @@
   "scope": "module",
   "module_key": "m05-adding-up",
   "ord": 9,
-  "prompt": "AKATA's total opex is 183899092.34 USD, not seven times the typed 24000000. Why?",
+  "prompt": "AKATA's total opex is 183899092.34 USD, more than seven times the typed 24000000. Why?",
   "options": [
    "The total is restated in 2029 money by the inflation rate of 3 percent, so it drifts from the typed amount.",
    "The 3 percent opex escalator carried the column from 24000000.00 in 2029 to 28657255.12 in 2035, and the total is the sum of the escalated column.",
@@ -1832,12 +1832,12 @@
   "prompt": "A press release quotes AKATA's government share as royalty plus tax over the 857602518.80 USD of revenue. How does that compare with the engine's take of 66.1723 percent?",
   "options": [
    "It is the same, because royalty and tax are the only two government lines and total revenue of 857602518.80 is the only base a share of it can be quoted on.",
-   "It is smaller, because take divides by revenue less capex 255000000.00 less opex 183899092.34, the value the field created, not by sales.",
+   "It is smaller, because take divides by revenue less capex 255000000.00 less opex 183899092.34, the value the field created.",
    "It is larger, because the pre-take value adds back the depreciation of 174000000.00 that the tax base removed.",
    "It cannot be compared, because take is discounted and the press figure is not."
   ],
   "answer_index": 1,
-  "explanation": "Take is over value, not sales; the rest of that value is the contractor's total net cash flow."
+  "explanation": "Take is over value rather than sales; the rest of that value is the contractor's total net cash flow."
  },
  {
   "app_slug": "cashflow",
@@ -1917,7 +1917,7 @@
    "The refusal itself, with its reason."
   ],
   "answer_index": 3,
-  "explanation": "A file that fails is refused with a message, not run with a zero; the only fix for a missing price is the price."
+  "explanation": "A file that fails is refused with a message and never run with a zero; the only fix for a missing price is the price."
  },
  {
   "app_slug": "cashflow",
@@ -2045,7 +2045,7 @@
    "As exactly 2029 money."
   ],
   "answer_index": 3,
-  "explanation": "Nothing in this tier has a clock: payback, take and unit cost alike are undiscounted, and the real column is a restatement, not a valuation."
+  "explanation": "Nothing in this tier has a clock: payback, take and unit cost alike are undiscounted, and the real column is a restatement rather than a valuation."
  },
  {
   "app_slug": "cashflow",
@@ -2905,11 +2905,11 @@
   "options": [
    "The 3 percent inflation lifts the answer by raising the revenue rows, and removing it exposes the flat prices underneath.",
    "The real basis adds value by deflating the capex of 255000000.00 in 2029 money, and the zero run loses that.",
-   "The price and cost escalators lift the configured answer, not the inflation rate, which the discount rate refuses to carry on its own.",
+   "The price and cost escalators lift the configured answer; the inflation rate, which the discount rate refuses to carry alone, does not.",
    "The difference is the Fisher conversion of 10.000000 to 6.796117 percent, which the zero run no longer performs."
   ],
   "answer_index": 2,
-  "explanation": "Set only inflation to zero and NPV stays 72534830.66; it is the escalators, not the deflator, that move the rows."
+  "explanation": "Set only inflation to zero and NPV stays 72534830.66; it is the escalators that move the rows, and the deflator does not."
  },
  {
   "app_slug": "cashflow",
@@ -3560,7 +3560,7 @@
   "prompt": "AKATA is on the real basis, so its discounted rows are the real flows 30821366.21 and 60767504.07. Which rate is its IRR of 29.2361 percent built to be compared against?",
   "options": [
    "The applied real rate of 6.796117 percent, because that is the rate the real flows are discounted at and the IRR is a root of the same discounted column.",
-   "The nominal 10 percent, because the IRR zeroes the vector printed in money of the day, not the real flows.",
+   "The nominal 10 percent, because the IRR zeroes the vector printed in money of the day rather than the real flows.",
    "Either rate, since the two bases give the same NPV of 72534830.66 end-year and therefore the same root.",
    "The inflation rate of 3 percent, since the Fisher relation joins the two rates through it."
   ],
@@ -3578,7 +3578,7 @@
    "Newton overshot on the flat part of the curve and the bisection fallback ran instead, which always leaves its residual on the negative side of zero.",
    "The root actually sits between the sampled 4.693930 at 20 percent and -180.800000 at 25 percent, and the engine reports the midpoint of that bracket.",
    "The engine prints the NPV at every reported root as a negative number, because the root is approached from above by convention.",
-   "The finder stops at a tolerance, not at an exact zero, and the rounded residual landed on the negative side."
+   "The finder stops at a tolerance short of an exact zero, and the rounded residual landed on the negative side."
   ],
   "answer_index": 3,
   "explanation": "Every reported root carries 0.000000 or -0.000000: conventional_five_year at 15.2382 percent and tiny_return at 0.1000 percent print the same kind of residual."
@@ -3613,7 +3613,7 @@
    "The total at 0 percent is -1.00, and the finder is not run at all on a vector whose undiscounted total never returns its outlay."
   ],
   "answer_index": 2,
-  "explanation": "Null here means no rate zeroes the vector, not that the vector is bad or good: it says nothing more than that the search found no crossing."
+  "explanation": "Null here means no rate zeroes the vector and passes no judgement on it: it says nothing more than that the search found no crossing."
  },
  {
   "app_slug": "cashflow",
@@ -3673,7 +3673,7 @@
   "options": [
    "The reader should have used the oracle's 0.0000 percent, which is below 5, and rejected the vector on the smaller root.",
    "Nothing, since 7.3509 sits above the hurdle and the curve reads 0.081930 at 30 percent.",
-   "The NPV at 5 percent is -0.028075, negative; a hurdle comparison needs the sign of the curve at the hurdle, which is the NPV, not a root.",
+   "The NPV at 5 percent is -0.028075, negative; a hurdle comparison needs the sign of the curve at the hurdle, which is the NPV rather than a root.",
    "The engine should have reported 33, the largest root, and the reader should compare that with the hurdle instead."
   ],
   "answer_index": 2,
@@ -3693,7 +3693,7 @@
    "Because the terminal negative is discounted less than the outlay, making the curve symmetric about its peak at 4 percent."
   ],
   "answer_index": 1,
-  "explanation": "no_real_root ends negative too and crosses zero times, which is also even: the argument fixes the parity of the count, not the count."
+  "explanation": "no_real_root ends negative too and crosses zero times, which is also even: the argument fixes the parity of the count and leaves the count open."
  },
  {
   "app_slug": "cashflow",
@@ -3703,7 +3703,7 @@
   "ord": 13,
   "prompt": "jv_analytic, [-12500000, 37500000], reports IRR 200.0000 percent and NPV 21590909.09 at 10 percent. AKATA reports 29.2361 percent and 72534830.66 at the same nominal 10 percent. A reader sorts the two by IRR. What has been measured?",
   "options": [
-   "How steeply each curve falls through zero, not how high it stands at the chosen rate; NPV ranks AKATA ahead.",
+   "How steeply each curve falls through zero, whatever its height at the chosen rate; NPV ranks AKATA ahead.",
    "The same thing either way, because both numbers are readings of one curve and the rankings must agree whenever the discount rate is the same on both sides.",
    "Value per unit of capital, since 200.0000 percent reflects a 50000000.00 capex recovered in a single year against AKATA's 255000000.00.",
    "The payback of each field, which is why jv_analytic at 1.333333 years ranks first."
@@ -3741,7 +3741,7 @@
    "The discounted payback at 15 percent, since a rate the field survives is one at which it still pays back inside its life."
   ],
   "answer_index": 2,
-  "explanation": "The profile at 15 is on the real flows, where 15 is not a nominal 15; the sweep row is the reading at the rate the manager named, and the IRR answers how wrong the rate could be, not what the value is."
+  "explanation": "The profile at 15 is on the real flows, where 15 differs from a nominal 15; the sweep row is the reading at the rate the manager named, and the IRR answers how wrong the rate could be and leaves the value to the NPV."
  },
  {
   "app_slug": "cashflow",
@@ -3773,7 +3773,7 @@
    "The sweep reused the royalty column from the 82 USD/bbl run against the smaller revenue at 50 USD/bbl."
   ],
   "answer_index": 0,
-  "explanation": "A take above 100 percent is a royalty on a loss, not an error; at 45 USD/bbl it reads 247.7770 percent for the same reason."
+  "explanation": "A take above 100 percent is a royalty on a loss and no error; at 45 USD/bbl it reads 247.7770 percent for the same reason."
  },
  {
   "app_slug": "cashflow",
@@ -3831,7 +3831,7 @@
   "ord": 6,
   "prompt": "An analyst averages AKATA's nine sweep NPVs, from -169873348.04 at 30 USD/bbl to 231658748.27 at 120, and reports the mean as the expected value. What is wrong?",
   "options": [
-   "The average must be taken over the discounted flows before the ledger is summed, not over the NPVs afterwards.",
+   "The average must be taken over the discounted flows before the ledger is summed, never over the NPVs afterwards.",
    "The sweep is on the flat price only, so the mean ignores the 2 percent escalator that the engine adds on top at each price.",
    "The sweep should have been weighted by the take at each price, since the government's share changes from 57.9418 to null across it.",
    "Each NPV says what the field is worth if the price is that number for the whole life, and the sweep says nothing about how likely any price is."
@@ -3845,7 +3845,7 @@
   "scope": "module",
   "module_key": "m05-sweeps",
   "ord": 7,
-  "prompt": "At a nominal discount rate of 0 percent AKATA's rate sweep prints NPV 141637829.18, the nominal total, not the real total 117362408.71, and an applied real rate of -2.912621 percent. Why?",
+  "prompt": "At a nominal discount rate of 0 percent AKATA's rate sweep prints NPV 141637829.18, the nominal total rather than the real total 117362408.71, and an applied real rate of -2.912621 percent. Why?",
   "options": [
    "A nominal rate under the 3 percent inflation is a negative real rate, and discounting the real flows at a negative rate inflates them back to money of the day.",
    "At 0 percent the engine switches to the nominal basis, since a real rate cannot be derived from a nominal rate of zero.",
@@ -3962,7 +3962,7 @@
    "Report them at all, so the rows column reads 10 on every point and only the KPIs reveal the trimming, because the row count is fixed by the production upload and the limit test only zeroes the values in the years it fails.",
    "Charge their opex, so the KPIs of the shortened field carry no cost after the limit year, while the revenue of the trimmed years is still counted inside the total revenue of the run.",
    "Discount them, so they enter the NPV at face value and pull the NPV down to -30055502.32, because a year past the limit is carried undiscounted as a liability instead of being removed from the ledger.",
-   "Keep them: a year that fails the limit test is removed from the valued ledger, not carried at zero, and the KPIs are of the shortened field."
+   "Keep them: a year that fails the limit test is removed from the valued ledger instead of carried at zero, and the KPIs are of the shortened field."
   ],
   "answer_index": 3,
   "explanation": "At 40 percent decline seven years are trimmed and three rows survive, and total revenue falls from 3485716284.18 at 5 percent decline to 794617600.00."
@@ -4101,7 +4101,7 @@
   "scope": "module",
   "module_key": "m06-the-professional-reading",
   "ord": 8,
-  "prompt": "The tier ends on the sentence that IRR is a property of a curve, not of a project. What is the sentence claiming?",
+  "prompt": "The tier ends on the sentence that IRR is a property of a curve rather than of a project. What is the sentence claiming?",
   "options": [
    "That the IRR is a zero of one vector's NPV curve: a curve with two zeros has no single IRR, which is why the engine returns null there, and a scaled vector keeps its IRR at any size.",
    "That the IRR moves when the convention moves, as NPV does from 72534830.66 to 70188970.32, because the curve is redrawn under mid-year discounting.",
@@ -4346,7 +4346,7 @@
    "The cap is a share of the pool of 80000000.00 rather than of revenue, and 40 percent of the pool is what came out.",
    "The recovery is reduced by the contractor's profit share of 50 percent applied to the cost oil as well as to the profit oil.",
    "The 4000000.00 shortfall is the tax on the cost oil, which the engine deducts before reporting the recovery.",
-   "The cap is a share of revenue after royalty, not of the gross."
+   "The cap is a share of revenue after royalty, below the gross."
   ],
   "answer_index": 3,
   "explanation": "At 0.200000 the recovery is 18000000.00 and at 1.000000 it is the whole pool of 80000000.00, with profit oil moving down by the same steps as recovery moves up."
@@ -4777,7 +4777,7 @@
   "options": [
    "Above 60 percent the cap no longer binds in any year, so cost oil equals the year's costs and the take is the royalty plus tax on a fixed profit oil.",
    "The engine caps the take at 82.1085 percent for production sharing, which is the royalty rate plus the tax rate blended at the contractor share.",
-   "Once the pool clears inside the field's life the cap only moves timing, and timing is what NPV and IRR price, not take.",
+   "Once the pool clears inside the field's life the cap only moves timing, and timing is what NPV and IRR price and take ignores.",
    "Above 60 percent the contractor share of profit oil steps down to hold the take constant, as the tranche mode requires once the pool has cleared."
   ],
   "answer_index": 2,
@@ -4957,7 +4957,7 @@
    "The tax, because the brought-forward cost is deductible against the contractor's profit oil in the year it arrives even though the cap refuses to recover it."
   ],
   "answer_index": 1,
-  "explanation": "The cap is a ceiling on recovery per year, not on the pool, so 30000000 of extra cost changes nothing in the year except how much is carried out of it."
+  "explanation": "The cap is a ceiling on recovery per year and leaves the pool unbounded, so 30000000 of extra cost changes nothing in the year except how much is carried out of it."
  },
  {
   "app_slug": "cashflow",
@@ -5081,7 +5081,7 @@
   "options": [
    "The engine halves the volumes because the cap binds in both years, and a binding cap converts half of the barrels into cost oil that is not counted as production.",
    "The production file was pre-scaled to 50 percent before upload, and the engine reads the halved barrels as the field's production.",
-   "Under a PSC the working interest is applied at the door, so the rows are the contractor's share and the volumes are entitlement volumes, not field volumes.",
+   "Under a PSC the working interest is applied at the door, so the rows are the contractor's share and the volumes are entitlement volumes rather than field volumes.",
    "The oil_bbl column reports the barrels behind the contractor's profit oil, and at a 50 percent profit share that is half the field's production."
   ],
   "answer_index": 2,
@@ -5101,7 +5101,7 @@
    "It was charged as a lump sum in the last year of the field, and the sinking fund label only records that the money was set aside in 2031 rather than spent."
   ],
   "answer_index": 0,
-  "explanation": "The tax is unchanged at 13500000.00 because the base is unchanged; the contribution is a cost, and costs under a PSC go into the pool, not into the tax base."
+  "explanation": "The tax is unchanged at 13500000.00 because the base is unchanged; the contribution is a cost, and costs under a PSC go into the pool and stay out of the tax base."
  },
  {
   "app_slug": "cashflow",

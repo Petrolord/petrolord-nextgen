@@ -65,7 +65,7 @@ def capstone_changes():
         diff = [c for c in cols if s[c] != k[c]]
         if not diff:
             continue
-        if t != 'advanced':
+        if t != 'advanced' and not (t == 'intermediate' and diff == ['prompt']):
             sys.exit(f'REFUSED: the {t} capstone differs from its served row ({", ".join(diff)})')
         sk = [f['key'] for f in s['fields']]; kk = [f['key'] for f in k['fields']]
         out.append({'slug': 'cashflow', 'tier': t, 'changed': diff,
@@ -73,7 +73,8 @@ def capstone_changes():
                     'graded_keys_added': [x for x in kk if x not in sk],
                     'graded_keys_kept_value_moved': [f['key'] for f in k['fields'] if f['key'] in sk and
                                                      next(g for g in s['fields'] if g['key'] == f['key'])['expected'] != f['expected']],
-                    'attempts': 'existing attempts and certificates stand as issued; only new attempts use the new keys (lead L1): the migration guards on attempts',
+                    'attempts': ('existing attempts and certificates stand as issued; only new attempts use the new keys (lead L1): the migration guards on attempts'
+                                 if t == 'advanced' else 'prompt text only (owner copy rule); graded fields unchanged, attempts unaffected'),
                     'old': {c: s[c] for c in cols}, 'new': {c: k[c] for c in cols}})
     return out
 

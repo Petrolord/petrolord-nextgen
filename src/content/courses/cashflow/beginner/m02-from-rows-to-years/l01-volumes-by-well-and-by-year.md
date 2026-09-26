@@ -1,6 +1,6 @@
 # Volumes by well and by year
 
-The production file is the only place the engine learns how much was sold, and it reads volumes by the shape of the header, not by what the column means in the field.
+The production file is the only place the engine learns how much was sold, and it reads volumes by the shape of the header; what the column means in the field plays no part.
 
 {{panel:ec-ledger-explorer}}
 

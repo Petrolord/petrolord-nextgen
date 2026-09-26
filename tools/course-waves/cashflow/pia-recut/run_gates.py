@@ -100,21 +100,20 @@ for e in changed_rows:
 hist_any = []
 for p in lesson_files:
     for i, l in enumerate(open(p).read().splitlines(), 1):
-        if HISTORY.search(l) or SECTION.search(l) or DASH.search(l):
+        if HISTORY.search(l) or SECTION.search(l) or DASH.search(l) or CONTRAST.search(l):
             hist_any.append(f'{os.path.relpath(p, COURSE)}:{i}')
-        if CONTRAST.search(l):
-            old_hits += 1
 for r in after:
     for t in [r['prompt'], r['explanation']] + r['options']:
-        if HISTORY.search(t) or SECTION.search(t) or DASH.search(t):
+        if HISTORY.search(t) or SECTION.search(t) or DASH.search(t) or CONTRAST.search(t):
             hist_any.append(f"{r['tier']} {r['scope']} {r['module_key']} {r['ord']}")
-        if CONTRAST.search(t):
-            old_hits += 1
+for c in json.load(open(os.path.join(KIT, 'capstones.json'))):
+    for t in (c['title'], c['dataset'], c['prompt']):
+        if HISTORY.search(t) or SECTION.search(t) or DASH.search(t) or CONTRAST.search(t):
+            hist_any.append(f"capstone {c['tier']}")
 gate('copy rule on every changed line and row (no dash, no contrastive, no section cite, no repair history)',
      not new_hits, f'{len(new_hits)} hit(s)' + (f'; first: {new_hits[:3]}' if new_hits else ''))
-gate('course-wide: no dash, no digest section cite, no repair-history framing (L5) in any lesson or row',
+gate('course-wide copy rule: no dash, no "X, not Y" contrastive, no digest section cite, no repair history (L5) in any lesson, row or capstone',
      not hist_any, f'{len(hist_any)} hit(s)' + (f'; first: {hist_any[:5]}' if hist_any else ''))
-print(f'      (contrastive-regex hits left in text this re-cut did not touch: {old_hits})')
 
 # ---------------------------------------------------------------- 5 lesson lengths
 rc, out = sh('python3 lengths.py', cwd=HERE)
@@ -167,7 +166,7 @@ gate('check-bank-sources cashflow (every committed .py reproduces its .json)', r
 rc, out = sh('node discriminate_expert.mjs', cwd=KIT)
 gate('discriminate_expert (one right answer; no field depends on the stated new-PML rate; L3 field moved by two methods)', rc == 0, tail(out))
 rc, out = sh('node ec1_capstone.mjs --check ../../../docs/pia-recut/served/cashflow_capstones.json', cwd=KIT)
-gate('capstone prompts rendered by the kit; Associate and Professional byte-identical to served', rc == 0, tail(out))
+gate('capstone prompts rendered by the kit; Associate byte-identical, Professional fields byte-identical to served', rc == 0, tail(out))
 rc, out = sh('git diff --quiet -- tools/course-waves/cashflow/capstones.json tools/course-waves/cashflow/fields.json')
 gate('capstones.json and fields.json as committed after the regeneration', rc == 0, 'clean' if rc == 0 else 'regenerated files differ from the committed ones')
 

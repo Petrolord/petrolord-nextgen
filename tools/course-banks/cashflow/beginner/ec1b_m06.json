@@ -30,7 +30,7 @@
    "The refusal itself, with its reason."
   ],
   "answer": 3,
-  "explanation": "A file that fails is refused with a message, not run with a zero; the only fix for a missing price is the price."
+  "explanation": "A file that fails is refused with a message and never run with a zero; the only fix for a missing price is the price."
  },
  {
   "prompt": "A reader builds AKATA's 2029 row by hand and gets a tax of 0.00 where the engine prints 45250880.00 USD. Which convention did they break?",
@@ -118,7 +118,7 @@
    "As exactly 2029 money."
   ],
   "answer": 3,
-  "explanation": "Nothing in this tier has a clock: payback, take and unit cost alike are undiscounted, and the real column is a restatement, not a valuation."
+  "explanation": "Nothing in this tier has a clock: payback, take and unit cost alike are undiscounted, and the real column is a restatement rather than a valuation."
  },
  {
   "prompt": "The engine prints take 66.1723 and 76.1610 percent, and payback 3.461632 and 3.961607 years, on the same line. Which of each pair is the Associate reading?",

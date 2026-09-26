@@ -135,7 +135,7 @@
   "prompt": "A capex file headed category, date, spend is refused. What single change lets it through?",
   "options": [
    "Give the cost column a name ending in _usd, since the fallback sums *_usd columns and spend has no unit in its name.",
-   "Rename spend to cost, because the word cost is on the preferred alias list as cost_usd and the engine matches on the word, not the suffix.",
+   "Rename spend to cost, because the word cost is on the preferred alias list as cost_usd and the engine matches on the word and ignores the suffix.",
    "Add a total_usd column holding the sum, which the fallback prefers as the rollup.",
    "Nothing short of the exact header amount_usd, which is the one name a capex file must carry."
   ],
@@ -158,7 +158,7 @@
   "options": [
    "It refuses with opex_no_cost_column, because a missing opex file has no cost column to recognise.",
    "It refuses with no_production_rows, since a run needs all three files before it can build a ledger.",
-   "Nothing: the run proceeds with total opex 0.00, because the refusals check that a recognised header exists, not that opex is present or that the number under it is right.",
+   "Nothing: the run proceeds with total opex 0.00, because the refusals check only that a recognised header exists, never that opex is present or the number under it right.",
    "It runs, but fills opex from unit_opex_usd_per_bbl times the annual volumes, the way the fallback sums *_usd parts when no preferred alias is present, so that the ledger is not left without a cost."
   ],
   "answer": 2,

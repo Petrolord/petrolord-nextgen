@@ -28,7 +28,7 @@ The discount rate. On multiyear_jv_real swept from 0 to 20 percent in steps of 2
 
 ## The mistake
 
-The careful mistake is to read the IRR as a bank rate on the project's money. It is a root, and it is solved on the nominal flows: AKATA's 29.2361 percent zeroes the vector printed in money of the day, not the real flows 30821366.21 and 60767504.07 that the real basis discounts. So the rate it is compared against is the nominal 10 percent, not the applied real rate of 6.796117 percent. At the breakeven price of 64.916777 USD/bbl, where NPV is zero, the IRR reads 10.0002 percent, the nominal rate, and that is the proof of which comparison the number was built for.
+The careful mistake is to read the IRR as a bank rate on the project's money. It is a root, and it is solved on the nominal flows: AKATA's 29.2361 percent zeroes the vector printed in money of the day; the real flows 30821366.21 and 60767504.07 that the real basis discounts play no part. So the rate it is compared against is the nominal 10 percent, and the applied real rate of 6.796117 percent is the wrong yardstick. At the breakeven price of 64.916777 USD/bbl, where NPV is zero, the IRR reads 10.0002 percent, the nominal rate, and that is the proof of which comparison the number was built for.
 
 ## What it refuses
 

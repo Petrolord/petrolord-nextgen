@@ -14,7 +14,7 @@ jv_analytic, [-12500000, 37500000], has an IRR of 200.0000 percent and an NPV of
 
 ## The rate you set
 
-The discount rate never enters the IRR. On multiyear_jv_real the IRR is 47.9020 percent at a nominal discount rate of 0, of 10 and of 20 percent, while the NPV is 148905488.72, 88104639.00 and 50852201.45. On AKATA the IRR can be compared only with the nominal rate: at the breakeven price 64.916777 USD/bbl the IRR reads 10.0002 percent against a nominal 10, not against the applied real rate 6.796117.
+The discount rate never enters the IRR. On multiyear_jv_real the IRR is 47.9020 percent at a nominal discount rate of 0, of 10 and of 20 percent, while the NPV is 148905488.72, 88104639.00 and 50852201.45. On AKATA the IRR can be compared only with the nominal rate: at the breakeven price 64.916777 USD/bbl the IRR reads 10.0002 percent against a nominal 10; the applied real rate 6.796117 is the wrong comparison.
 
 ## Which root
 

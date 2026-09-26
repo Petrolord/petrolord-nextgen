@@ -19,7 +19,7 @@
    "The sweep reused the royalty column from the 82 USD/bbl run against the smaller revenue at 50 USD/bbl."
   ],
   "answer": 0,
-  "explanation": "A take above 100 percent is a royalty on a loss, not an error; at 45 USD/bbl it reads 247.7770 percent for the same reason."
+  "explanation": "A take above 100 percent is a royalty on a loss and no error; at 45 USD/bbl it reads 247.7770 percent for the same reason."
  },
  {
   "prompt": "AKATA at 40 USD/bbl and below reports take as null, while at 45 it reports 247.7770 percent. Why does the take vanish there?",
@@ -57,7 +57,7 @@
  {
   "prompt": "An analyst averages AKATA's nine sweep NPVs, from -169873348.04 at 30 USD/bbl to 231658748.27 at 120, and reports the mean as the expected value. What is wrong?",
   "options": [
-   "The average must be taken over the discounted flows before the ledger is summed, not over the NPVs afterwards.",
+   "The average must be taken over the discounted flows before the ledger is summed, never over the NPVs afterwards.",
    "The sweep is on the flat price only, so the mean ignores the 2 percent escalator that the engine adds on top at each price.",
    "The sweep should have been weighted by the take at each price, since the government's share changes from 57.9418 to null across it.",
    "Each NPV says what the field is worth if the price is that number for the whole life, and the sweep says nothing about how likely any price is."
@@ -66,7 +66,7 @@
   "explanation": "Nine ledgers at nine flat prices are nine conditional answers, and averaging them is not an expected value because no probability was ever attached to a price."
  },
  {
-  "prompt": "At a nominal discount rate of 0 percent AKATA's rate sweep prints NPV 141637829.18, the nominal total, not the real total 117362408.71, and an applied real rate of -2.912621 percent. Why?",
+  "prompt": "At a nominal discount rate of 0 percent AKATA's rate sweep prints NPV 141637829.18, the nominal total rather than the real total 117362408.71, and an applied real rate of -2.912621 percent. Why?",
   "options": [
    "A nominal rate under the 3 percent inflation is a negative real rate, and discounting the real flows at a negative rate inflates them back to money of the day.",
    "At 0 percent the engine switches to the nominal basis, since a real rate cannot be derived from a nominal rate of zero.",
@@ -148,7 +148,7 @@
    "Report them at all, so the rows column reads 10 on every point and only the KPIs reveal the trimming, because the row count is fixed by the production upload and the limit test only zeroes the values in the years it fails.",
    "Charge their opex, so the KPIs of the shortened field carry no cost after the limit year, while the revenue of the trimmed years is still counted inside the total revenue of the run.",
    "Discount them, so they enter the NPV at face value and pull the NPV down to -30055502.32, because a year past the limit is carried undiscounted as a liability instead of being removed from the ledger.",
-   "Keep them: a year that fails the limit test is removed from the valued ledger, not carried at zero, and the KPIs are of the shortened field."
+   "Keep them: a year that fails the limit test is removed from the valued ledger instead of carried at zero, and the KPIs are of the shortened field."
   ],
   "answer": 3,
   "explanation": "At 40 percent decline seven years are trimmed and three rows survive, and total revenue falls from 3485716284.18 at 5 percent decline to 794617600.00."

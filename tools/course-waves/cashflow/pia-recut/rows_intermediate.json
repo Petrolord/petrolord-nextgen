@@ -344,12 +344,12 @@
   "options": [
    "The reader should have used the oracle's 0.0000 percent, which is below 5, and rejected the vector on the smaller root.",
    "Nothing, since 7.3509 sits above the hurdle and the curve reads 0.081930 at 30 percent.",
-   "The NPV at 5 percent is -0.028075, negative; a hurdle comparison needs the sign of the curve at the hurdle, which is the NPV, not a root.",
+   "The NPV at 5 percent is -0.028075, negative; a hurdle comparison needs the sign of the curve at the hurdle, which is the NPV rather than a root.",
    "The engine should have reported 33, the largest root, and the reader should compare that with the hurdle instead."
   ],
   "answer_index": 2,
   "explanation": "On two_roots_2_and_6 the same reasoning happens to hold because the NPV at 5 percent is 0.027211, positive; the reasoning is wrong either way, and only the sign at the hurdle is an answer.",
-  "why": "L5: the premise no longer cites a pre-release report."
+  "why": "L5: the premise no longer cites a pre-release report. An \"X, not Y\" contrastive reworded plainly (owner copy rule)."
  },
  {
   "tier": "intermediate",
@@ -393,11 +393,11 @@
    "Report them at all, so the rows column reads 10 on every point and only the KPIs reveal the trimming, because the row count is fixed by the production upload and the limit test only zeroes the values in the years it fails.",
    "Charge their opex, so the KPIs of the shortened field carry no cost after the limit year, while the revenue of the trimmed years is still counted inside the total revenue of the run.",
    "Discount them, so they enter the NPV at face value and pull the NPV down to -30055502.32, because a year past the limit is carried undiscounted as a liability instead of being removed from the ledger.",
-   "Keep them: a year that fails the limit test is removed from the valued ledger, not carried at zero, and the KPIs are of the shortened field."
+   "Keep them: a year that fails the limit test is removed from the valued ledger instead of carried at zero, and the KPIs are of the shortened field."
   ],
   "answer_index": 3,
   "explanation": "At 40 percent decline seven years are trimmed and three rows survive, and total revenue falls from 3485716284.18 at 5 percent decline to 794617600.00.",
-  "why": "Moved figures at 20 percent decline."
+  "why": "Moved figures at 20 percent decline. An \"X, not Y\" contrastive reworded plainly (owner copy rule)."
  },
  {
   "tier": "intermediate",
