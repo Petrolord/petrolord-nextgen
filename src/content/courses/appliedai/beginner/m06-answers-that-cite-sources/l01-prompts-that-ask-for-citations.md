@@ -43,4 +43,4 @@ That is the behaviour the example instructions ask for. The check has nothing to
 
 ## Exercise
 
-In the retrieval explorer choose "Claims in cited answers". The box holds system A's answers to Q01 to Q06, each with its retrieved list. In the Q01 answer, delete EKD-018 from the citations and read what happens to its claims. Put it back, then add the citation EKD-099, which is no passage of the corpus, and read the note the engine gives. Last, add to the Q01 citations a passage id that is in the corpus and absent from Q01's retrieved list, and read how that citation is flagged.
+In the retrieval explorer choose "Claims in cited answers". The box holds system A's answers to Q01 to Q06, each with its retrieved list. In the Q01 answer, delete EKD-018 from the citations and read what happens to its claims. Put it back, then add the citation EKD-100, which is no passage of the corpus, and read the note the engine gives. Last, add to the Q01 citations a passage id that is in the corpus and absent from Q01's retrieved list, and read how that citation is flagged.
