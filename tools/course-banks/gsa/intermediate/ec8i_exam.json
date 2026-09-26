@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "In 2030 the Ekene export feed buyer (synthetic) declares force majeure of 1260000.000000 against an ACQ of 22995000.000000, with take-or-pay at 90 percent. What take-or-pay quantity does the engine return?",
+  "options": [
+   "20695500.000000, which is 90 percent of the full ACQ, since force majeure declared by the buyer reduces nothing",
+   "21385000.000000, the gas taken that year",
+   "19561500.000000, on the reduced Adjusted ACQ",
+   "22995000.000000"
+  ],
+  "answer": 2,
+  "explanation": "Force majeure comes off the ACQ whichever party declares it, so the Adjusted ACQ falls by 1260000.000000 and 90 percent of it is 19561500.000000, as the export ledger prints. 20695500.000000 is the take-or-pay quantity of a 365 day year with nothing reduced. 21385000.000000 is the year's take, measured against the take-or-pay quantity. 22995000.000000 is the ACQ itself."
+ },
+ {
+  "prompt": "With the export feed's make-up order 'after-top-quantity', 3219250.000000 of make-up open and a 2030 take of 21385000.000000 against a take-or-pay quantity of 19561500.000000, how much make-up does the engine take?",
+  "options": [
+   "1823500.000000",
+   "3219250.000000, the whole open aggregate, since the take clears the take-or-pay quantity with room to spare",
+   "0.000000, since a force majeure year gives the buyer no make-up",
+   "576600.000000"
+  ],
+  "answer": 0,
+  "explanation": "Under 'after-top-quantity' make-up is taken only after the year's take-or-pay quantity is taken, so the draw is 21385000.000000 less 19561500.000000, 1823500.000000, and the engine's reason names the order in its words, \"make-up only after the take-or-pay quantity of the year is taken\". The take above the threshold limits the draw, so the whole aggregate is not released. A year with force majeure still counts its take. 576600.000000 is the make-up drawn in 2033, from the 2032 entry."
+ },
+ {
+  "prompt": "ESMAP Report 152/93 (January 1993) para 6.59 reads: \"Normally, make-up quantities are accounted for after the minimum-pay quantity for the year has been taken.\" Which of the engine's stated recovery orders computes that description?",
+  "options": [
+   "'after-adjusted-acq', since the Adjusted ACQ is the minimum-pay quantity of the ESMAP report under a different name",
+   "'first', since ESMAP describes the normal arrangement and the engine's first order is its normal one",
+   "None of them, since the engine computes only the model agreement's order and refuses the orders of the older guides",
+   "'after-top-quantity'"
+  ],
+  "answer": 3,
+  "explanation": "The engine's basis names 'after-adjusted-acq' as the reference text's order (the Commonwealth model agreement's Article 12.7.1) and 'after-top-quantity' and 'first' as variants it also computes; make-up counted after the year's minimum-pay (take-or-pay) quantity is 'after-top-quantity'. The Adjusted ACQ is the base of the take-or-pay quantity, which is a percentage of it. 'first' takes make-up in priority, before the year's own quantity. The engine computes all three orders and takes whichever the contract states."
+ },
+ {
+  "prompt": "HMRC's Oil Taxation Manual OT05435 (updated 19 December 2019) says make-up may be taken \"in priority over that period's contract amount; or only when the minimum for that period has been taken.\" Which engine order is the first of those two?",
+  "options": [
+   "'after-adjusted-acq', since it is the order the reference text names and every guide describes it first",
+   "'first', make-up taken in priority",
+   "'after-top-quantity'",
+   "'fifo', the first in first out order, which the makeUp.order input accepts beside the other three"
+  ],
+  "answer": 1,
+  "explanation": "Make-up in priority over the period's contract amount is the engine's 'first' order, whose reason reads \"make-up taken in priority, before the year's own quantity\"; HMRC's second arrangement is 'after-top-quantity'. 'after-adjusted-acq' is the model agreement's order. First in first out is how entries are drawn under every order, and \"fifo\" is refused as an order: \"makeUp.order must be one of \\\"after-adjusted-acq\\\", \\\"after-top-quantity\\\", \\\"first\\\"; got \\\"fifo\\\"\"."
+ },
+ {
+  "prompt": "A golden two-year case pays for a deficiency of 800.000000 in 2027 after a zero take. In 2028, the last contract year, the buyer takes 1000.000000 against an Adjusted ACQ of 1000.000000 under 'after-adjusted-acq' with 'forfeit'. What does the engine return for the 800.000000?",
+  "options": [
+   "800.000000 taken as make-up",
+   "200.000000 taken, 600.000000 forfeited",
+   "A refund of 800.000000 at 3",
+   "Nothing drawn; the buyer loses all 800.000000 at the close"
+  ],
+  "answer": 3,
+  "explanation": "The engine's reasons read \"make-up aggregate 800 available and none taken, because taken 1000 does not exceed the Adjusted ACQ 1000\" and \"the delivery period ends with make-up of 800 unrecovered; the buyer forfeits it\". Under this order the threshold is the Adjusted ACQ, and a take equal to it leaves nothing above. Measuring above the take-or-pay quantity is the other order. The case states forfeit, so nothing is refunded."
+ },
+ {
+  "prompt": "In 2031 the export feed takes 23915000.000000, draws 1395750.000000 of make-up and has a take-or-pay quantity of 20695500.000000, with carry-forward stated above the take-or-pay quantity. What surplus does the engine carry forward?",
+  "options": [
+   "1823750.000000, what is counted above the take-or-pay quantity",
+   "The whole take above the take-or-pay quantity",
+   "1395750.000000, the make-up drawn",
+   "None, since a year that takes make-up carries nothing"
+  ],
+  "answer": 0,
+  "explanation": "Make-up gas counts toward the deficiency year it was paid in, so 2031 counts 23915000.000000 less 1395750.000000, 22519250.000000, and the surplus is the part above 20695500.000000, which is 1823750.000000; the engine's reason reads \"22519250 counted exceeds the take-or-pay quantity 20695500 by 1823750, carried forward to the end of 2034\". Taking the whole take above the threshold counts the make-up twice. The make-up drawn is no surplus. A year may draw make-up and still carry a surplus."
+ },
+ {
+  "prompt": "The power plant ledger's totals rest on the fixture's take-or-pay and contract price of 2.180000, a stated planning assumption: regular revenue 120529584.000000, deficiency payments 2279844.000000 and seller shortfall damages 7875.000000, with no make-up revenue and no refund. What net to the seller does the engine return?",
+  "options": [
+   "120529584.000000, the regular revenue alone, since deficiency payments are held until the make-up is taken",
+   "1,883,223,633.172000",
+   "122801553.000000",
+   "The regular revenue less the damages, with the deficiency payments left out because they are no revenue"
+  ],
+  "answer": 2,
+  "explanation": "The engine builds the net as the gas counted at the contract price plus make-up revenue plus deficiency payments less damages and any refund: 120529584.000000 plus 2279844.000000 less 7875.000000 is 122801553.000000, on the stated planning price. Deficiency payments are paid in the deficiency year and are part of the net. 1,883,223,633.172000 is the export feed's net over its term. Leaving out the payments ignores what the buyer paid for gas it did not take."
+ },
+ {
+  "prompt": "Priced at 4, a 2027 deficiency of 200.000000 opens make-up usable for two years, but the agreement ends with 2028, when 150.000000 is recovered. With 'forfeit' stated, what becomes of the balance?",
+  "options": [
+   "50.000000 refunded at 4",
+   "50.000000 forfeited when the delivery period ends",
+   "50.000000 kept open until the end of 2029, the last year of the entry's make-up period after the deficiency year",
+   "Nothing, the payment covering it"
+  ],
+  "answer": 1,
+  "explanation": "The engine's reasons read \"make-up of 150 taken from the make-up aggregate 200\" and \"the delivery period ends with make-up of 50 unrecovered; the buyer forfeits it\". The case states forfeit, so no refund. The term ends in 2028, before the period would, so the end-of-term rule settles the rest. The payment of 200 x 4 = 800 bought the right to 200.000000 of gas; 50.000000 of it goes untaken."
+ },
+ {
+  "prompt": "In the golden case with make-up of 100.000000 from 2027 and 50.000000 from 2028, each for 3 contract years, the 2027 entry is fully drawn by 2030 under the order 'after-adjusted-acq'. In 2031 the buyer takes nothing above the Adjusted ACQ. What does the engine report for 2031?",
+  "options": [
+   "40.000000 from 2027 expired",
+   "40.000000 kept open to 2032",
+   "70.000000 expired, the whole aggregate",
+   "40.000000 from 2028 expired unrecovered at the end of 2031"
+  ],
+  "answer": 3,
+  "explanation": "The 2028 entry runs to the end of 2031 and 40.000000 of it is left after the 2030 draw of 10.000000, so the engine's reason reads \"make-up of 40 from 2028 expired unrecovered at the end of 2031, the last year of its make-up period\". The 2027 entry has nothing left by then. 2031 is the last year of the 2028 entry, so nothing stays open. 70.000000 was the aggregate after 2029; the 2030 draw cut it to 40.000000."
+ },
+ {
+  "prompt": "The export feed's term ends in 2036 with 457950.000000 of make-up unrecovered from 2035, and the fixture states a refund. At which price does the engine refund it?",
+  "options": [
+   "7.898300, the 2035 take-or-pay price of the deficiency year, since the buyer is repaid what it paid for that gas",
+   "8.950200, the price of December 2036, the last month of the term, since the refund is made when the term ends",
+   "8.081300, the 2036 take-or-pay price",
+   "0.808130"
+  ],
+  "answer": 2,
+  "explanation": "The model agreement's Alternative 2 refunds at the take-or-pay price of the contract year in which the delivery period expires, and the engine's reason reads \"the seller refunds 457950 x 8.0813\", the 2036 annual average the fixture states as its take-or-pay price. 7.898300 is the 2035 price. 8.950200 is the last month's price, which is Alternative 2 of the take-or-pay price rule and is not the fixture's basis. 0.808130 is the 2036 make-up price."
+ },
+ {
+  "prompt": "The plant's 2033 take falls 357000.000000 below its take-or-pay quantity. At the held 2.180000 (the fixture's stated planning assumption), what does the buyer pay for it?",
+  "options": [
+   "778260.000000, on that planning price",
+   "1501584.000000",
+   "0.000000, the 2033 deficiency being covered by the make-up still open from 2028",
+   "252000.000000"
+  ],
+  "answer": 0,
+  "explanation": "The engine's reason reads \"the deficiency payment is 357000 x 2.18 = 778260\", on the fixture's held planning price. 1501584.000000 is the 2028 payment on 688800.000000. The 2028 entry expired at the end of 2031, and make-up is gas already paid for, so it never pays a later deficiency. 252000.000000 is a quantity, the part of the 2033 entry forfeited in 2034."
+ },
+ {
+  "prompt": "A golden case with a make-up period of 5 contract years ends in 2029 with 150.000000 of make-up open from 2027, under 'forfeit'. What does the buyer receive for it?",
+  "options": [
+   "600.000000, the 150.000000 refunded at the last year's price of 4",
+   "Nothing: the buyer forfeits the 150.000000",
+   "The 150.000000 as gas in a year after the term, since the make-up period of 5 contract years runs to the end of 2032",
+   "500.000000, the 2027 payment"
+  ],
+  "answer": 1,
+  "explanation": "The engine's reason reads \"the delivery period ends with make-up of 150 unrecovered; the buyer forfeits it\". 600.000000 is what the same ledger returns under 'refund'. No year exists after the term, so the period cannot be used past it. 500.000000 was the 2027 payment on 200.000000, of which 50.000000 was taken in 2028."
+ },
+ {
+  "prompt": "The Commonwealth Secretariat's model agreement (2025, CC BY 4.0) defines the Make-Up Period. When does it run?",
+  "options": [
+   "From the deficiency year itself",
+   "Until the end of the Delivery Period",
+   "In calendar years after payment",
+   "In the Contract Years immediately following the deficiency year"
+  ],
+  "answer": 3,
+  "explanation": "The definition reads \"Contract Years immediately following the Contract Year corresponding to such Buyer's Annual Deficiency Quantity, within which Buyer has a right to make up\", which is why the engine's period for a deficiency year y runs from y + 1 to y + N. The deficiency year is not inside it. The period is a stated number of years and does not run to the end of the term. It is counted in contract years from the deficiency."
+ },
+ {
+  "prompt": "Under the Commonwealth model agreement's Article 12.7, what happens to a quantity the buyer does not make up within its make-up period?",
+  "options": [
+   "The seller refunds it at the take-or-pay price of the year the period ends in, under the model's main text",
+   "It rolls into the carry-forward aggregate",
+   "The right terminates and the buyer forfeits it",
+   "The period is extended by one contract year each time the buyer is unable to take the gas above the Adjusted ACQ"
+  ],
+  "answer": 2,
+  "explanation": "Article 12.7 reads \"the right to make up such equivalent quantity shall terminate, and Buyer shall forfeit any and all rights with respect to such Buyer's Annual Deficiency Quantity.\" A refund is the model's Alternative 2 for make-up still open at the end of the Delivery Period, a different moment. Carry-forward is built from excess takes. The model prints no rolling extension of a make-up period."
+ },
+ {
+  "prompt": "Three years after the train outage the export buyer under-takes again: 19599000.000000 counted in 2032 against 20752200.000000 due, with 1823750.000000 of carry-forward standing ready and a cap of half a deficiency. How much of it is used?",
+  "options": [
+   "1153200.000000, the whole deficiency, since the carry-forward available is larger than the deficiency",
+   "576600.000000, from 2031",
+   "1823750.000000",
+   "576600.000000 from 2028, the oldest surplus"
+  ],
+  "answer": 1,
+  "explanation": "The deficiency is 1153200.000000 and the cap allows half of it, 576600.000000, drawn first in first out from the oldest surplus still open, which is 2031's; the engine's reason reads \"a carry-forward credit of 576600 (at most 50% of the deficiency, first in first out: 576600 from 2031) leaves 576600\". The cap binds even when more is available. The 2028 surplus expired at the end of 2031."
+ },
+ {
+  "prompt": "For 2035 the export feed's take-or-pay price is 7.898300. The year's deficiency of 2299500.000000 draws a credit of 1149750.000000. What deficiency payment does the engine return?",
+  "options": [
+   "The whole deficiency priced at 7.898300, since the credit reduces only the make-up that opens",
+   "4472628.540000, the payment for 2032, the other year of the second half of the term in which the buyer fell short",
+   "31575852.662500, the payment for 2029",
+   "9081070.425000"
+  ],
+  "answer": 3,
+  "explanation": "The engine prices the deficiency left after the credit: 1149750 x 7.8983, which the course quotes as the field 9081070.425000. The credit comes off the deficiency before it is priced. 4472628.540000 and 31575852.662500 are the payments for 2032 and 2029."
+ },
+ {
+  "prompt": "Which carry-forward does the engine report as expiring unused in 2034 on the export feed ledger, where carry-forward is stated for 3 contract years?",
+  "options": [
+   "1247150.000000, the rest of 2031's surplus",
+   "2182900.000000 from 2033, since the newest surplus lapses first",
+   "694050.000000 from 2028",
+   "2069500.000000 from 2034, the surplus of the year itself, which cannot be carried forward into the year after"
+  ],
+  "answer": 0,
+  "explanation": "2031's surplus of 1823750.000000 lost 576600.000000 to the 2032 credit, and the remaining 1247150.000000 reaches the end of its period at the end of 2034; the engine's reason reads \"carry-forward of 1247150 from 2031 expired unused at the end of 2034\". 2033's surplus runs to 2036. 694050.000000 from 2028 expired in 2031. 2034's own surplus is carried to the end of 2037."
+ },
+ {
+  "prompt": "Two surpluses above the Adjusted ACQ, 100.000000 (2027) and 50.000000 (2028), may each be credited for 2 contract years at a cap of 100 percent. The 2027 one is used up in 2029. What happens when 2030 falls 200.000000 short, priced at 3?",
+  "options": [
+   "Credits of 150.000000 in all",
+   "200.000000, all of it",
+   "50.000000 credited, 450.000000 paid",
+   "No credit and a payment of 600.000000, since a surplus above the Adjusted ACQ may only be used within the year after"
+  ],
+  "answer": 2,
+  "explanation": "Only the 2028 surplus of 50.000000 is left, and its period runs to the end of 2030, so the credit is 50.000000 and the payment is 150 x 3 = 450; the engine's reason reads \"a carry-forward credit of 50 (at most 100% of the deficiency, first in first out: 50 from 2028) leaves 150\". The 2027 surplus was used up in 2029. A credit cannot exceed the surplus open. A surplus lasts its stated period of 2 contract years."
+ },
+ {
+  "prompt": "ESMAP Report 152/93 (January 1993) para 6.61 says \"gas taken in excess of the minimum pay could be credited against the minimum-pay quantities in later years\". Which right, in this course's vocabulary, does that describe?",
+  "options": [
+   "Make-up",
+   "Carry-forward",
+   "Seller shortfall damages",
+   "The Adjusted ACQ reduction for a permitted reduction, which lowers the minimum-pay quantity of the years that follow"
+  ],
+  "answer": 1,
+  "explanation": "The course legislates carry-forward as takes above the stated base credited against a later deficiency, capped, for a stated period, which is what para 6.61 describes. Make-up runs the other way: gas paid for in a deficiency year and taken later. Seller shortfall damages price gas the seller did not make available. A permitted reduction lowers the Adjusted ACQ of its own year."
+ },
+ {
+  "prompt": "The export feed fixture prices make-up gas at 10 percent of the contract price. Over the term the buyer takes 4487650.000000 of make-up. What make-up revenue does the engine return?",
+  "options": [
+   "3700831.335000, the refund paid at the end of the term for the make-up the buyer did not take",
+   "45129551.627500, the deficiency payments of the term, since make-up revenue is the payment for make-up gas",
+   "4487650.000000 MMBtu of make-up",
+   "4242052.824500"
+  ],
+  "answer": 3,
+  "explanation": "The engine prices each year's make-up at that year's stated make-up price and sums it to 4242052.824500 over the term. 3700831.335000 is the refund, money running back to the buyer. 45129551.627500 is the deficiency payments, paid when each deficiency arose. 4487650.000000 is a quantity in MMBtu, the make-up taken."
+ },
+ {
+  "prompt": "On a golden day with a DCQ of 100.000000, a delivery tolerance of 5.000000 and a properly nominated quantity of 100.000000, the seller makes 94.000000 available and the buyer takes all of it. What seller shortfall does the engine return?",
+  "options": [
+   "1.000000",
+   "The whole gap below the nomination, tolerance ignored",
+   "0.000000, since the tolerance covers the day",
+   "5.000000, the tolerance"
+  ],
+  "answer": 0,
+  "explanation": "The seller shortfall is the properly nominated quantity less the tolerance less the quantity made available, (100 - 5) - 94, and the engine's reason reads \"the seller made 94 available against a properly nominated 100 less the tolerance 5: seller shortfall 1\". Ignoring the tolerance charges the seller for the whole gap. The tolerance covers 5, and one unit more is the seller's. 5.000000 is the tolerance itself, which the seller owes nothing on (and the buyer shortfall of that day)."
+ },
+ {
+  "prompt": "No lag, a three-month mean and monthly repricing: with oil at 60, 62 and 64 over 2025-01 to 2025-03, what does 1 + 0.1 x oil give for 2025-03?",
+  "options": [
+   "7.400000, the 2025-03 index alone",
+   "7.000000, the average of the three months before 2025-03",
+   "7.200000, on an average of 62.000000",
+   "The averaged index read straight as the price, since the constant and the slope apply to a single month"
+  ],
+  "answer": 2,
+  "explanation": "With a lag of 0 the three-month window ends in the delivery month, 2025-01 to 2025-03, averaging 62.000000, so the price is 1 + 0.1 x 62 = 7.200000. The single month is a window of 1. A window ending the month before is a lag of 1. The formula applies to the averaged index as to any other."
+ },
+ {
+  "prompt": "Annual repricing: the line 1 + 0.1 x oil reads a six-month window closed one month early, but its price changes only once every 12 months, counting from 2025-07. Which price stands in 2026-06?",
+  "options": [
+   "7.500000, the block's first price, on 2025-01 to 2025-06",
+   "9.366667",
+   "8.900000, from a window ending in 2026-05",
+   "A new price each quarter"
+  ],
+  "answer": 0,
+  "explanation": "Every month of a 12 month block carries the price of the block's first month, so 2025-07 to 2026-06 all read the window 2025-01 to 2025-06, averaging 65.000000, and price 7.500000. 9.366667 is a quarterly reset case's figure for 2026-06. A window ending in 2026-05 would need a new block. A quarterly reset is a different term."
+ },
+ {
+  "prompt": "For April 2027 the export feed averages its oil index over 2026-10 to 2027-03. What average and price does the engine return?",
+  "options": [
+   "76.925000, priced 9.731000, since April 2027 still sits in the January price block of the quarterly reset",
+   "71.461667, priced 9.075400",
+   "61.730000, the March 2027 index",
+   "71.461667, priced 9.731000 because the price holds for six months"
+  ],
+  "answer": 1,
+  "explanation": "Blocks of three months run from 2027-01, so April opens the second one, and its window is the half year closed a month earlier, 2026-10 to 2027-03: the oil mean is 71.461667 and the line 0.5 + 0.12 x oil gives 9.075400. The pair 76.925000 and 9.731000 belongs to January to March. A single March reading is a one-month window. Each block holds its price for three months only."
+ },
+ {
+  "prompt": "An index of 11.234346 is passed straight through as the contract price, and the contract states the model agreement's four-decimal rounding. Which price is invoiced?",
+  "options": [
+   "The figure rounded one decimal at a time, the sixth first and then the fifth",
+   "11.234346, since the rule reads the fifth decimal and 4 leaves the figure untouched",
+   "11.234400, since the digits past the fourth decimal are rounded up whenever any of them is above zero",
+   "11.234300"
+  ],
+  "answer": 3,
+  "explanation": "The price is computed in full before the rule reads its fifth decimal: the fifth decimal of 11.234346 is 4, so the fourth decimal stays and the price is 11.234300. Rounding one decimal at a time is not the Article 15.4 rule. Leaving the figure untouched ignores the rounding to four decimals. Rounding up on any trailing digit is no rule the model prints."
+ },
+ {
+  "prompt": "A band of 3.5 to 4.5 US$ per MMBtu is put on the straight line 0.8 + 0.1485 x jcc. What comes out when jcc sits at 22.5?",
+  "options": [
+   "3.500000, since the line starts below the floor",
+   "4.500000, the ceiling, which binds from the midpoint of the band upward",
+   "4.141250, with no clamp",
+   "4.000000, the midpoint of the band"
+  ],
+  "answer": 2,
+  "explanation": "0.8 + 0.1485 x 22.5 is 4.141250, inside the band of 3.5 to 4.5, so the engine returns it unclamped. The floor binds only in a month where the line is below it. The ceiling binds only above 4.5. No rule moves a price to the midpoint of its band."
+ },
+ {
+  "prompt": "A golden index series lists 2025-01 and then 2025-03. What does the engine return, in its own words?",
+  "options": [
+   "months[1].month must be 2025-02, the month after 2025-01 (the series is consecutive); got \"2025-03\"",
+   "A price for 2025-02 read by straight-line interpolation between the months on either side",
+   "months must cover the averaging window",
+   "A series priced with 2025-02 left out"
+  ],
+  "answer": 0,
+  "explanation": "Index months must follow one another, so the engine stops at the second entry and says which month it wanted and which it got. Filling 2025-02 by interpolation would invent an index value that later prices depend on, and leaving it out would shift every window after it. The window message is a separate refusal, for a series that starts too late for the window a price needs."
+ },
+ {
+  "prompt": "A golden basket prices 5 x the weighted sum of each index over its base, with weights of 0.6 for fo and 0.4 for cpi and base values of 400 and 100, on a 2 month window with a lag of 1. For 2025-12 the averages are fo 410.000000 and cpi 100.500000. What price does the engine return?",
+  "options": [
+   "5.030000, the next month",
+   "5.105000, with a floor",
+   "5.000000, the price at the base values, since a basket reprices only when an index moves outside its band",
+   "5.085000"
+  ],
+  "answer": 3,
+  "explanation": "The engine weights each averaged index over its base value, fo 410.000000 over 400 and cpi 100.500000 over 100, sums them at 0.6 and 0.4 and multiplies by 5, which gives 5.085000. 5.030000 is the 2026-01 price. 5.105000 is 2026-01 again with an index floor on fo. This case reprices every month on its averaged indices and states no band."
+ },
+ {
+  "prompt": "Suppose a city distribution company agrees 2.5 US$ per MMBtu with its supplier, on the base price reported for 2026. Which figure does the engine price?",
+  "options": [
+   "2.680000, lifted to the commercial price on the stated base, since a distributor pays the commercial sector price",
+   "2.500000, the negotiated figure as it stands",
+   "2.180000, the stated power price",
+   "A refusal, since a distributor must state a price equal to the commercial price that the stated base gives"
+  ],
+  "answer": 1,
+  "explanation": "Distributors negotiate under s.167(7), and the engine returns the negotiated 2.500000 with the reason \"the negotiated price 2.5 is at or below the commercial sector price 2.68, the ceiling for gas distributors (s.167(7))\", on a call that states price control applies, that ceiling being the commercial price on the stated base reported for 2026. The Act caps a distributor's price and sets no floor at the ceiling, so nothing is lifted. The power sector price is a different sector's rule. Any negotiated price is accepted and tested against the ceiling."
+ },
+ {
+  "prompt": "A urea call states a CMPP equal to the product reference price, 250 US$ per tonne. What does the engine return?",
+  "options": [
+   "0.900000, the floor",
+   "0.000000",
+   "1.000000, with EPF 0.000000",
+   "2.000000, since EPF is (250 + 250) / 250"
+  ],
+  "answer": 2,
+  "explanation": "EPF is (250 - 250) / 250 = 0.000000, so CP = 1 x (1 + 0) = 1.000000, inside the floor and the stated base price; the engine's reason reads \"the formula gives 1, inside the floor 0.9\" and the stated base. The floor does not bind at 1.000000. A price of zero would drop the NRP. EPF subtracts the PRP."
+ },
+ {
+  "prompt": "Suppose the month-end urea price collapses to 0 US$ per tonne. Which gas price does the engine set?",
+  "options": [
+   "0.900000: a zero result is raised to the minimum",
+   "0.000000, the formula price",
+   "A refusal, since a product price of zero makes the Fourth Schedule formula meaningless",
+   "1.000000, the NRP"
+  ],
+  "answer": 0,
+  "explanation": "A product price of nothing drives EPF to -1.000000 and the Fourth Schedule result to 0.000000; the engine's reason reads \"the formula gives 0, below the floor US$0.90 per MMBtu, so the price is held at 0.9 (s.168(2))\". A zero price for gas is below what s.168(2) allows. A CMPP of zero is a stated input, so nothing is refused. The NRP of 1 multiplies (1 + EPF) and is no fallback."
+ },
+ {
+  "prompt": "An ammonia call states a domestic base price of 2 US$ per MMBtu (a stated probe) and a CMPP of 500, so the formula gives exactly 2. What does the engine return?",
+  "options": [
+   "2.000000, held at the ceiling",
+   "0.900000, the floor, since a formula price that reaches the ceiling drops to the floor",
+   "A refusal, since the formula must fall strictly below the domestic base price of the call",
+   "2.000000, with no hold"
+  ],
+  "answer": 3,
+  "explanation": "The ceiling holds the price only when the formula is above the domestic base price, so a formula exactly equal to it stands, and the engine returns 2.000000 with its held label none. Calling it held misreads the boundary. Nothing drops a price to the floor from above. A formula equal to the stated base is allowed."
+ },
+ {
+  "prompt": "For methanol, a month-end price of 225 US$ per tonne takes the Fourth Schedule result to exactly 0.9. How is that month priced?",
+  "options": [
+   "0.900000, held at the floor",
+   "A refusal",
+   "0.900000, the formula's own figure with no hold",
+   "1.000000, since a price that touches the floor is lifted to the National Reference Price of the Fourth Schedule"
+  ],
+  "answer": 2,
+  "explanation": "EPF is (225 - 250) / 250 = -0.100000 and the formula gives 0.900000, which is not below the floor, so the engine returns it with its held label none; its reason reads \"the formula gives 0.9, inside the floor 0.9\" and the stated base price. The floor holds a price only when the formula is below it. A formula at the floor is a valid result. Nothing lifts a price to the NRP."
+ },
+ {
+  "prompt": "Urea is priced for a gas based industry, but nobody enters the month-end product price. Which message comes back?",
+  "options": [
+   "A price at the NRP of 1",
+   "cmpp must be stated: the average current month end product price in US$ per tonne (Fourth Schedule); got nothing",
+   "A price at the floor of US$0.90 per MMBtu, the lowest the Act allows a gas based industry to pay for its gas",
+   "product must be given only for sector 'gas-based-industry'"
+  ],
+  "answer": 1,
+  "explanation": "The engine refuses the call by name, since the Fourth Schedule price cannot be computed without the product price. It holds no default CMPP, so it never falls back on the NRP or the floor. The message about product is its refusal of a product stated for a sector other than the gas based industries."
+ },
+ {
+  "prompt": "How does regulation 9 of the Domestic Gas Delivery Obligation Regulations 2022 define the domestic base price?",
+  "options": [
+   "As US$3.50 per MMBtu",
+   "As the price the Commission identifies on the national supply curve under regulation 5(2) each year",
+   "As the power sector price plus the transport tariff from the delivery point to the facilities of the wholesale buyer",
+   "As the price determined pursuant to the Act's Third Schedule"
+  ],
+  "answer": 3,
+  "explanation": "r.9 reads \"“domestic base price” is the price for marketable natural gas determined pursuant to the Third Schedule to the Act ;\". US$3.50 per MMBtu is the penalty rate of r.6(1). The supply curve of r.5(2) finds the lowest domestic gas supply price for the strategic sectors, which is a different quantity. Transport is added for a delivered price under s.167(8), outside the definition."
+ },
+ {
+  "prompt": "Over-delivery: 1200.000000 reaches the strategic sectors against an allocation of 1000.000000. What does the engine say?",
+  "options": [
+   "The obligation met, with no penalty",
+   "A credit of 200.000000 carried into next year's obligation",
+   "A penalty",
+   "The obligation met, with the 200.000000 over-delivery counted toward the lessee's voluntary contracts for deemed fulfilment next year"
+  ],
+  "answer": 0,
+  "explanation": "The engine's reason reads \"delivered 1200 meets the obligation 1000\", and the penalty is 0.000000. The obligation is a stated input each year, so nothing is carried. Only gas not delivered is penalised. Over-delivery does not turn into voluntary contracts."
+ },
+ {
+  "prompt": "A golden lessee delivers exactly its obligation of 1000.000000. What does the engine report?",
+  "options": [
+   "A penalty of 3.500000 applies",
+   "It is deemed fulfilled under s.110(2)(a), the provision for deliveries equal to the obligation",
+   "It meets the obligation, with no export restriction",
+   "It meets it, with the restriction flagged"
+  ],
+  "answer": 2,
+  "explanation": "The engine's reason reads \"delivered 1000 meets the obligation 1000\", with nothing undelivered, nothing penalised and no export restriction. Delivery equal to the obligation leaves nothing undelivered. Deemed fulfilment under s.110(2)(a) turns on voluntary contracts, and deliveries play no part in it. The restriction is reported only when a quantity is penalised."
+ },
+ {
+  "prompt": "A signed agreement states a penalty rate of exactly 3.5 per MMBtu, and 400.000000 is undelivered. What rate basis does the engine state?",
+  "options": [
+   "The Act's own US$3.50, since an agreement rate equal to the minimum is treated as silent",
+   "The agreement's rate of 3.5, at or above the r.6(2) minimum",
+   "A refusal",
+   "A rate of 5"
+  ],
+  "answer": 1,
+  "explanation": "The engine's basis reads \"the agreement's rate 3.5 per MMBtu (s.110(8) proviso), at or above the US$3.50 minimum of r.6(2)\", and the penalty is 1400.000000. The minimum is inclusive, so an equal rate is the agreement's own. Nothing is refused. 5 is the rate of a different agreement."
+ },
+ {
+  "prompt": "Section 110(13) of the Petroleum Industry Act 2021 makes a producer-customer of the domestic gas aggregator pay compensation to a customer-client for loss from a default in supply. What does the engine compute for it?",
+  "options": [
+   "The compensation at US$3.50 per MMBtu",
+   "The compensation at the agreement rate",
+   "A deduction from the penalty",
+   "Nothing; it is a concept the engine states it does not compute"
+  ],
+  "answer": 3,
+  "explanation": "s.110(13) sits in the engine's list of rules it names as uncomputed, beside the Regulations' 90-day investigation. The compensation is a loss suffered by a customer-client, and the Act prints no rate for it, so the engine does not apply the penalty rate or an agreement rate to it or offset one against the other."
+ },
+ {
+  "prompt": "Why is 688800.000000 excused in the Ekene power plant's synthetic 2028 allocation?",
+  "options": [
+   "The fixture states force majeure, s.110(10)(a)",
+   "The engine matches it to the deficiency",
+   "The fixture states the purchaser could not accept, s.110(10)(b)",
+   "The gas could not be transported, s.110(10)(c)"
+  ],
+  "answer": 2,
+  "explanation": "The fixture's note reads \"synthetic allocation; the plant outage of 2028 is the purchaser's inability to accept (s.110(10)(b))\", and the engine's reason reads \"688800 is excused: the purchaser could not accept the allocated volumes (s.110(10)(b))\". The excuse is a stated input on its stated ground; the engine does not read it off the take-or-pay ledger, and the fixture states neither force majeure nor a transport failure."
+ },
+ {
+  "prompt": "With no agreement rate and no adjusted rate stated, what rate basis does the engine print for the power plant's 2028 obligation penalty?",
+  "options": [
+   "US$3.50 per MMBtu not delivered (s.110(8); DGDO Regulations 2022 r.6(1))",
+   "US$1.25 per MMBtu, the power plant's stated seller shortfall rate",
+   "US$0.50 per MMBtu, the adder of s.167(6)",
+   "A rate the engine derives from the take-or-pay price of the year, so that the penalty tracks the value of the gas"
+  ],
+  "answer": 0,
+  "explanation": "The engine's basis prints the Act's rate with both citations: \"US$3.50 per MMBtu not delivered (s.110(8); DGDO Regulations 2022 r.6(1))\". 1.25 is the fixture's synthetic contract rate for seller shortfall damages. The US$0.50 adder sets the commercial sector price. The engine derives no rate from a price."
+ },
+ {
+  "prompt": "Under s.110(15) of the Petroleum Industry Act 2021, what does an approval to supply natural gas for export projects require?",
+  "options": [
+   "Payment of the penalty",
+   "Prior compliance by the lessee with its domestic gas delivery obligation",
+   "A signed wholesale agreement",
+   "An export price above the base price"
+  ],
+  "answer": 1,
+  "explanation": "s.110(15) reads \"An approval for the supply of natural gas for export projects shall, from the effective date, be subject to prior compliance by the lessee with its domestic gas delivery obligation.\" Paying a penalty is not compliance. A signed agreement sets the penalty rate under s.110(8); it does not stand in for compliance. The Act sets no export price test here."
+ }
+]

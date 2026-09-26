@@ -1,0 +1,18 @@
+{
+ "money": {
+  "decimals": 6,
+  "match": "^(?:ifeyi_2028_deficiency_payment|ifeyi_2031_dgdo_penalty|ifeyi_total_net_to_seller|nwaka_2032_royalty|nwaka_2035_refund|nwaka_npv_seller_revenue|ozubu_2029_deficiency_payment)$"
+ },
+ "price": {
+  "decimals": 6,
+  "match": "^(?:ifeyi_2030_average_price|nwaka_2034_average_price|nwaka_july_2029_price)$"
+ },
+ "quantity": {
+  "decimals": 6,
+  "match": "^(?:ifeyi_2031_make_up_expired|ifeyi_2031_make_up_taken|nwaka_2030_carry_forward_credit|ozubu_2028_acq|ozubu_fortnight_buyer_shortfall|ozubu_fortnight_seller_shortfall|ozubu_march_2028_mmbtu)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:ozubu_effective_swing)$"
+ }
+}

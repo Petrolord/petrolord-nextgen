@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "As the engine builds it, which sum gives the net to the seller for a contract year?",
+  "options": [
+   "Taken x contract price + deficiency payment + seller shortfall x shortfall price, the damages being added to the seller's side.",
+   "Counted x contract price + make-up taken x make-up price + deficiency payment - seller shortfall x shortfall price - refund.",
+   "ACQ x contract price - deficiency payment - seller shortfall x shortfall price, as the buyer pays for the ACQ.",
+   "Take-or-pay quantity x take-or-pay price, whatever the buyer takes, less any refund at the end of the term."
+  ],
+  "answer": 1,
+  "explanation": "The engine's money line: counted x contract price + make-up taken x make-up price + deficiency payment - seller shortfall x shortfall price - refund = net to the seller, each term a return value. Seller shortfall damages are paid BY the seller, so they come off. The buyer never pays for the ACQ as such, and gas taken above the take-or-pay quantity is paid for at the contract price, so the seller's year is no flat take-or-pay sum."
+ },
+ {
+  "prompt": "The single-year golden case counts 500 at a contract price of 3 and returns a deficiency payment of 1200. What net to the seller does the engine return?",
+  "options": [
+   "1200.000000, the deficiency payment alone, as the gas counted is paid for separately.",
+   "2400.000000, the take-or-pay quantity of 800 at the price of 3 for the year.",
+   "3000.000000, the whole ACQ of 1000 at the price of 3, as the buyer's full year.",
+   "2700.000000."
+  ],
+  "answer": 3,
+  "explanation": "In one year with no make-up, damages or refund, the net is counted x contract price + deficiency payment: the counted gas at 3 plus the 1200.000000 paid for the rest of the take-or-pay quantity of 900, which the engine returns as 2700.000000. That case's take-or-pay quantity is 900 at 90 percent, and the ACQ is paid for whole only in a year the buyer takes all of it."
+ },
+ {
+  "prompt": "The exactly-met golden year and the zero-take golden year both return a net to the seller of 2400.000000. Why?",
+  "options": [
+   "Up to the take-or-pay quantity the seller is paid whether the gas flows or not.",
+   "The engine fills a zero-take year with the take-or-pay quantity, as if taken.",
+   "Both years hold the same deficiency payment of 2400.000000.",
+   "Both are last years, and the net is fixed at the end of term."
+  ],
+  "answer": 0,
+  "explanation": "In the exactly-met year 800 is counted at 3 with no deficiency payment; in the zero-take year nothing is counted and the deficiency payment is 2400.000000. Each nets 2400.000000. That is take-or-pay working as designed; above the take-or-pay quantity the seller is paid only for what the buyer takes. The engine records the zero take as 0.000000 counted."
+ },
+ {
+  "prompt": "Force majeure and a seller shortfall hit one golden year: 600 counted at 3, a deficiency payment of 120, damages of 75. How much nets to the seller?",
+  "options": [
+   "120.000000, the deficiency payment, since the counted gas and the damages are settled apart.",
+   "2400.000000, as reductions leave the seller's year at the take-or-pay quantity of 800 at 3.",
+   "1845.000000.",
+   "1845.000000 plus 75.000000, as the damages are added back on the seller's side of the sum."
+  ],
+  "answer": 2,
+  "explanation": "Counted x contract price + deficiency payment - seller shortfall x shortfall price: the 600 counted at 3, plus 120, less 75, is 1845.000000 as the engine returns it. The damages are paid by the seller, so they reduce its net; the reductions lower the Adjusted ACQ to 800.000000 and the take-or-pay quantity to 640.000000."
+ },
+ {
+  "prompt": "The same golden year states a seller shortfall of 50 at a shortfall price of 1.5. What does the engine's reason say?",
+  "options": [
+   "The 50 is added to the buyer's deficiency and paid to the seller at 1.5, a sum of 75.",
+   "A line saying the 50 reduces the ACQ alone, leaving the take-or-pay quantity unchanged, with no payment.",
+   "That the 50 is paid to the buyer at 1.5, and the Adjusted ACQ stays whole.",
+   "\"2027: seller shortfall 50 reduces the Adjusted ACQ and is paid to the buyer at 1.5: 75\""
+  ],
+  "answer": 3,
+  "explanation": "The quoted line is the engine's own words, and it names both consequences of one seller shortfall: it reduces the Adjusted ACQ, so the take-or-pay quantity falls with it, and it is paid to the buyer at the stated rate. The damages run from the seller to the buyer, and the ACQ itself never changes."
+ },
+ {
+  "prompt": "A year states a seller shortfall of 5 and no shortfallPrice. What does the engine return?",
+  "options": [
+   "Damages of 0.000000, as no rate was stated.",
+   "A refusal, because the engine holds no default rate.",
+   "A result at the power plant's 1.25 rate.",
+   "A result at the take-or-pay price, the nearest stated price."
+  ],
+  "answer": 1,
+  "explanation": "The engine's own words: \"years[0].shortfallPrice must be stated when sellerShortfall is above 0 (5); the engine holds no default rate; got nothing\". The rate is a stated contract term. The power plant's 1.25 US$ per MMBtu is that synthetic agreement's own term, and the engine borrows no other price."
+ },
+ {
+  "prompt": "When the power plant's 2027 is reconciled on its own, how much does the seller owe in damages, and at which rate?",
+  "options": [
+   "7875.000000: the 6300 seller shortfall at the fixture's stated 1.25 US$ per MMBtu, a synthetic contract term.",
+   "7875.000000, at a rate the PIA sets for every domestic power sector agreement in Nigeria.",
+   "6300.000000, one US$ per MMBtu of seller shortfall under the model agreement.",
+   "48300.000000, the year's reductions at the stated rate."
+  ],
+  "answer": 0,
+  "explanation": "The engine's reason, verbatim: \"2027: seller shortfall 6300 reduces the Adjusted ACQ and is paid to the buyer at 1.25: 7875\". The fixture's note reads \"seller shortfall liquidated damages at a stated 1.25 US$ per MMBtu not made available (synthetic contract term)\". The rate is a stated contract term with no default, and force majeure earns no damages."
+ },
+ {
+  "prompt": "The power plant's 2027 run alone returns a net to the seller of 15786225.000000. Which statement about that figure can the course defend?",
+  "options": [
+   "It is the seller's revenue for 2027 at the price the Authority determined for that year.",
+   "It forecasts what the buyer will pay in 2027, from the plant demand the fixture states.",
+   "It is what the stated clauses give on the fixture's planning-assumption price, and no forecast of payment.",
+   "It rests on the commercial sector price of 2.68, as reported, which a power plant pays."
+  ],
+  "answer": 2,
+  "explanation": "The fixture holds 2.18 US$ per MMBtu, the domestic base price reported for 2026, flat in every year as a stated planning assumption; any money figure on the power plant says so. The regulator's circular was not read, and the Authority re-determines the price each year, so no 2027 figure exists in this course. A computed figure is what the stated clauses produce on stated takes, and no forecast. PIA s.167(5) prices the power sector at the domestic base price."
+ },
+ {
+  "prompt": "Leap year 2032, run alone, has its take-or-pay quantity exactly met. Which net to the seller comes back, quoted as the course requires?",
+  "options": [
+   "13404384.000000, stated with the price it rests on: 2.18, a planning assumption the fixture holds.",
+   "13404384.000000, with nothing more to say, since the take-or-pay quantity was exactly met by the buyer in 2032.",
+   "13404384.000000 as the seller's forecast revenue for 2032 at the gazetted domestic base price.",
+   "0.000000, since the deficiency is zero at the boundary."
+  ],
+  "answer": 0,
+  "explanation": "In 2032 the buyer took exactly the take-or-pay quantity, 6148800.000000, so the deficiency payment is 0.000000 and the net is the counted gas at the contract price, 13404384.000000. The contract price is the fixture's 2.18, the reported 2026 figure held flat as a stated planning assumption, so the figure is quoted with it; no domestic base price is gazetted in this course."
+ },
+ {
+  "prompt": "A reason prints a figure as the shortest decimal that reads back to the value the engine holds. Which figure does this course quote when it states a result?",
+  "options": [
+   "The reason's figure, since it is the engine's own words and carries every digit it holds.",
+   "Whichever of the two is shorter, as long as both agree at the printed precision of the tile.",
+   "The reason's figure rounded by hand to four decimals, as the model agreement requires.",
+   "The field."
+  ],
+  "answer": 3,
+  "explanation": "The fields, the numbers in the table and the tiles, are what the course quotes, always at six decimals. A reason may appear only verbatim, as the engine's own words, and serves to explain a result. The four-decimal rule of the model agreement belongs to contract prices, and printed agreement between two figures proves nothing."
+ },
+ {
+  "prompt": "Nothing unusual happened on 2027-01-11: the buyer asked for, was offered and took the DCQ of 21000. What line appears for that day?",
+  "options": [
+   "A buyer shortfall of 0, as its reason line.",
+   "Its over-take, recorded as zero.",
+   "Nothing: a day with nothing owed, excused or trimmed gets no line.",
+   "A line confirming the DCQ was met exactly and that both sides of the delivery point are square for the day."
+  ],
+  "answer": 2,
+  "explanation": "The daily balance prints a reason only on a day on which something is owed, excused or trimmed. On 2027-01-11 the buyer shortfall and over-take are both 0.000000, and the engine prints nothing. A day with nothing to say gets no reason, just as a year with nothing to reconcile returns an empty list of reasons."
+ },
+ {
+  "prompt": "What is a liquidated damages rate for a seller shortfall?",
+  "options": [
+   "A rate a court fixes after the event, from the loss the buyer proves.",
+   "A rate the parties agree at signing for each unit not made available.",
+   "The Act's US$3.50 per MMBtu, applied to every seller shortfall.",
+   "A price the engine derives from the contract price of the day, at a stated share."
+  ],
+  "answer": 1,
+  "explanation": "Liquidated damages are fixed in advance, so neither side has to prove its actual loss after the event; the rate is the parties' agreed estimate of what a missing unit costs the buyer, and the engine holds no default. US$3.50 per MMBtu is the Act's Domestic Gas Delivery Obligation penalty, a different provision taught at the next tier."
+ },
+ {
+  "prompt": "A seller shortfall reaches the year's reconciliation with a stated rate. What two things does it do?",
+  "options": [
+   "It adds to the buyer's deficiency.",
+   "It reduces the ACQ itself and cancels the buyer's deficiency payment for the whole of the year.",
+   "It opens a make-up right for the seller and reduces the buyer's take-or-pay price for the year.",
+   "It reduces the Adjusted ACQ and earns the buyer damages."
+  ],
+  "answer": 3,
+  "explanation": "A seller shortfall reduces the Adjusted ACQ, so the take-or-pay quantity falls with it and the buyer is never made to pay for gas that was not offered; and where the contract states a rate, the seller pays the buyer damages, which the net to the seller subtracts. The ACQ, the deficiency rule and the prices are untouched, and make-up is gas the BUYER paid for."
+ },
+ {
+  "prompt": "What separates a reason from a refusal in what the engine returns?",
+  "options": [
+   "A reason explains a figure; a refusal returns no figures at all.",
+   "A reason is printed for an error the engine repaired; a refusal is printed for one it could not repair.",
+   "A reason is a warning, and figures beside it may not be quoted.",
+   "A refusal lists the figures the engine could compute before it stopped."
+  ],
+  "answer": 0,
+  "explanation": "A reason sits beside a result: a deficiency with no make-up right, a day trimmed at MaxDCQ, a day excused by force majeure. A refusal names the field it refused and the exact condition that failed, and nothing is computed. The engine repairs nothing: an input it cannot read is refused by name."
+ },
+ {
+  "prompt": "A year states a contract price of 3 and a different take-or-pay price. Which price sets the deficiency payment?",
+  "options": [
+   "The contract price, which prices every MMBtu of the year, taken or paid for.",
+   "The higher of the two prices, which protects the seller against a buyer that takes less.",
+   "The take-or-pay price.",
+   "An average of the two prices, weighted by the gas counted and the deficiency."
+  ],
+  "answer": 2,
+  "explanation": "The rule, in the engine's basis: deficiency payment = (deficiency - carry-forward credit) x topPrice. The contract price prices the counted gas; the take-or-pay price, a stated input with no default, prices the deficiency. A contract may state the two apart, and the engine uses each for its own term with no maximum or average."
+ }
+]

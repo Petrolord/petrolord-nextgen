@@ -1,0 +1,361 @@
+{
+ "app_slug": "gsa",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-what-a-gas-sales-agreement-fixes",
+   "title": "What a Gas Sales Agreement Fixes",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-gas-sold-by-contract",
+     "title": "Gas sold by contract",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-seller-buyer-and-delivery-point",
+     "title": "The seller, the buyer and the delivery point",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-ekene-agreements",
+     "title": "The Ekene agreements",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-sources-and-the-dates-they-were-read",
+     "title": "Sources and the dates they were read",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-calculator-panels-and-refusals",
+     "title": "The calculator panels and the refusals",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-volume-to-energy",
+   "title": "Volume to Energy",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-why-gas-is-sold-by-energy",
+     "title": "Why gas is sold by its energy",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-gross-and-net-heating-value",
+     "title": "Gross and net heating value",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-imperial-and-metric-routes",
+     "title": "Imperial and metric routes to MMBtu",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-reference-conditions-and-mixed-units",
+     "title": "Reference conditions and mixed units",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-contract-quantities",
+   "title": "Contract Quantities",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-daily-contract-quantity",
+     "title": "The daily contract quantity and the contract year",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-day-counts-and-leap-years",
+     "title": "Day counts and leap years",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-maximum-daily-quantity-and-swing",
+     "title": "The maximum daily quantity and swing",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-effective-swing",
+     "title": "Effective swing against the take-or-pay level",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-nominations",
+     "title": "Nominations against the daily quantities",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-the-daily-balance",
+   "title": "The Daily Balance",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-properly-nominated-quantity",
+     "title": "The properly nominated quantity",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-seller-shortfall-day-by-day",
+     "title": "Seller shortfall, day by day",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-force-majeure-maintenance-and-the-buyer",
+     "title": "Force majeure, maintenance and a buyer-caused day",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-buyer-shortfall-and-the-identity",
+     "title": "Buyer shortfall and the reconciliation identity",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-take-or-pay-basics",
+   "title": "Take-or-Pay Basics",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-adjusted-acq",
+     "title": "The Adjusted ACQ",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-take-or-pay-quantity",
+     "title": "The take-or-pay quantity",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-deficiency-and-its-payment",
+     "title": "Deficiency and the deficiency payment",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-exactly-met",
+     "title": "When the take-or-pay quantity is exactly met",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-reading-one-contract-year",
+   "title": "Reading One Contract Year",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-year-in-money",
+     "title": "The contract year in money",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-seller-shortfall-damages",
+     "title": "Seller shortfall damages",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-reasons-the-engine-prints",
+     "title": "The reasons the engine prints",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

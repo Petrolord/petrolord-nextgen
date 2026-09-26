@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The Ekene power plant states 20 MMscf per day at 1050 Btu/scf gross. What energy does the engine return for that volume?",
+  "options": [
+   "22156.172905 MMBtu, once the Btu constant is applied to the product.",
+   "21000.000000 MMBtu, on the gross basis the contract states.",
+   "21000.000000 GJ, because the imperial route returns gigajoules first.",
+   "63000.000000 MMBtu for the stated day."
+  ],
+  "answer": 1,
+  "explanation": "The imperial rule, in the engine's words: MMBtu = volume in scf x heating value in Btu/scf / 1,000,000. Twenty million scf at 1050 Btu/scf is 21000.000000 MMBtu, the power plant's DCQ. 22156.172905 is the same energy in GJ, where the constant does apply. The route returns MMBtu as the plain product, and 63000.000000 MMBtu is the export feed's DCQ from 60 MMscf."
+ },
+ {
+  "prompt": "The power plant's 21000.000000 MMBtu is also returned as 22156.172905 GJ. What produces the GJ figure?",
+  "options": [
+   "A metric heating value the engine looks up.",
+   "The MMBtu figure times the thermochemical Btu, a slightly different joule value.",
+   "A net heating value applied to gigajoules.",
+   "The MMBtu figure times 1055.05585262 MJ per MMBtu."
+  ],
+  "answer": 3,
+  "explanation": "The engine's units line reads: 1 MMBtu = 1055.05585262 MJ (International Table Btu, NIST Special Publication 811 (2008 edition), Appendix B). 21000.000000 MMBtu at that exact constant is 22156.172905 GJ. The engine looks up no heating value; the contract states it. It holds the exact defining value, and it changes no basis: the power plant's figure stays gross in both units."
+ },
+ {
+  "prompt": "One MMSm3 of gas is stated at 39 MJ/Sm3 gross. What energy in MMBtu does the engine return?",
+  "options": [
+   "36964.867692 MMBtu.",
+   "39000.000000 MMBtu, the plain product of the volume and heating value.",
+   "33268.380923 MMBtu, once the engine reduces the gross value to a net one.",
+   "37080.400058 MMBtu, after it converts the cubic metres into cubic feet."
+  ],
+  "answer": 0,
+  "explanation": "The metric rule, in the engine's words: MMBtu = volume in Sm3 x heating value in MJ/Sm3 / 1055.05585262 (MJ per MMBtu). One million Sm3 at 39 MJ/Sm3 is 39000.000000 GJ, and divided through that is 36964.867692 MMBtu. 39000.000000 is the GJ figure. 33268.380923 is the net case at 35.100000 MJ/Sm3; the engine never converts one basis to the other. 37080.400058 is the mixed pair at 1050 Btu/scf."
+ },
+ {
+  "prompt": "On the metric route, which of the engine's two figures is the plain product of volume and heating value, with no constant applied?",
+  "options": [
+   "The MMBtu figure: 36964.867692 for the same gas.",
+   "Neither, since both tiles divide by the constant.",
+   "The GJ figure: 39000.000000 for one MMSm3 at 39 MJ/Sm3.",
+   "Both of them, because the metric route carries no constant in any direction."
+  ],
+  "answer": 2,
+  "explanation": "Volume in Sm3 times MJ/Sm3 gives megajoules, so the GJ tile is the plain product, 39000.000000. The MMBtu tile divides that by 1055.05585262 MJ per MMBtu to give 36964.867692. On the imperial route it is the other way round: the MMBtu figure is the plain product and the GJ figure needs the constant."
+ },
+ {
+  "prompt": "The net case, one MMSm3 at 35.100000 MJ/Sm3, is entered with heatingValueBasis set to gross. What does the engine return?",
+  "options": [
+   "33268.380923 MMBtu, labelled gross.",
+   "36964.867692 MMBtu, because the engine restores the gross heating value first.",
+   "A refusal, since 35.100000 MJ/Sm3 sits below the gross figure it expects.",
+   "33268.380923 MMBtu, labelled net, because the engine detects the lower value."
+  ],
+  "answer": 0,
+  "explanation": "The engine does the same arithmetic on a gross and a net heating value and carries the stated basis through. The net case's numbers stated as gross return 33268.380923 MMBtu, labelled gross: the label changes and the arithmetic does not. The engine cannot tell a net figure from a gross one, holds no expected value to refuse against, and never converts between them, so the discipline sits with whoever enters the term."
+ },
+ {
+  "prompt": "A learner sets heatingValueBasis to \"higher\" because the contract says higher heating value. What happens?",
+  "options": [
+   "It reads higher as gross and returns a gross result.",
+   "The engine refuses the call and names heatingValueBasis.",
+   "A result labelled higher, echoing the word.",
+   "It reads higher as net, its fallback basis."
+  ],
+  "answer": 1,
+  "explanation": "The engine's own words: heatingValueBasis must be one of \"gross\", \"net\"; got \"higher\". Gross and higher heating value mean the same thing, but the input takes the contract word gross or net only, and nothing else is guessed or echoed. The engine's wording for gross is \"gross (higher) heating value, as the contract states\"."
+ },
+ {
+  "prompt": "What does the engine do with the referenceConditions string of a toEnergy call?",
+  "options": [
+   "Converts the volume to 15 C and 101.325 kPa.",
+   "Corrects the heating value for temperature and pressure from the string's figures.",
+   "Checks it against a list of standard conditions and refuses any it does not know.",
+   "Echoes it on the result, refusing it only when it is blank."
+  ],
+  "answer": 3,
+  "explanation": "The input must be a non-empty string; the engine's words for a blank one are \"referenceConditions must be a non-empty string; got \"  \"\". It does not interpret the words: it echoes them back so the conditions travel with the figure. The power plant states 60 F and 14.696 psia (synthetic statement) and the golden metric cases 15 C and 101.325 kPa, and no conversion between the two is made."
+ },
+ {
+  "prompt": "Metric volume, imperial heating value: one MMSm3 at 1050 Btu/scf gross. Which MMBtu figure comes back?",
+  "options": [
+   "39121.893098 MMBtu, the product of the volume and the heating value as stated.",
+   "36964.867692 MMBtu, after the heating value is restated as 39 MJ/Sm3 by the engine.",
+   "37080.400058 MMBtu, the volume converted to scf by the exact factor.",
+   "A refusal, as Sm3 cannot pair with Btu/scf."
+  ],
+  "answer": 2,
+  "explanation": "The engine's rule for this pair: MMBtu = (volume in Sm3 / 0.028316846592 ft3 per Sm3) x heating value in Btu/scf / 1,000,000, which gives 37080.400058 MMBtu and 39121.893098 GJ. So 39121.893098 is the GJ figure. 36964.867692 is the all-metric case at 39 MJ/Sm3, which the engine never substitutes. A mixed pair is accepted, with one set of reference conditions assumed."
+ },
+ {
+  "prompt": "A contract states its volume at 60 F and 14.696 psia and its heating value at 15 C and 101.325 kPa. What does the engine's mixed-pair route do about the difference?",
+  "options": [
+   "It corrects the volume from one set of conditions to the other before it multiplies.",
+   "Nothing: it applies only the geometric factor and assumes one set of conditions.",
+   "It refuses the call and names referenceConditions as the field in conflict.",
+   "An average of the two sets of conditions, stated in the reason line."
+  ],
+  "answer": 1,
+  "explanation": "A mixed pair converts the volume by the exact geometric factor (a cubic foot is 0.028316846592 cubic metres) and assumes one set of reference conditions for both numbers, which the caller states and the engine echoes back. A contract that states its volume and heating value at different conditions needs a conversion the engine does not make; the engine neither corrects, refuses nor averages."
+ },
+ {
+  "prompt": "Which of these toEnergy inputs does the engine refuse?",
+  "options": [
+   "A quantity of -1.",
+   "A quantity of 0 MMSm3 at 39 MJ/Sm3 gross, since zero gas cannot be sold.",
+   "A heating value stated on the net basis for a volume in standard cubic metres.",
+   "A volume stated in MSm3, one of the metric units, with a heating value in MJ/Sm3."
+  ],
+  "answer": 0,
+  "explanation": "The engine's own words: quantity must be a finite number at or above 0; got -1. A quantity of zero is a result, 0.000000 MMBtu and 0.000000 GJ, with the rule printed as usual. Net is one of the two bases the engine accepts, and MSm3 is one of its six volume units."
+ },
+ {
+  "prompt": "A learner enters a heating value of 0 in the volume-to-energy view. What comes back?",
+  "options": [
+   "An energy of 0.000000 MMBtu, as a zero quantity gives.",
+   "A result at the fixture's 1050 Btu/scf.",
+   "A result of 0.000000 GJ and no MMBtu.",
+   "A refusal: heatingValue must be a finite number above 0; got 0."
+  ],
+  "answer": 3,
+  "explanation": "The heating value must be above zero, and the message is the engine's own words. A zero QUANTITY is a result of zero, but a zero heating value is refused. The engine has no default heating value to fall back on: 1050 Btu/scf is a term the Ekene fixtures state."
+ },
+ {
+  "prompt": "Where does the engine's 1055.05585262 MJ per MMBtu come from?",
+  "options": [
+   "A rounding the Commonwealth model gas sales agreement prints in its definitions.",
+   "The EIA's energy conversion calculator.",
+   "The International Table Btu, NIST SP 811 (2008 edition), Appendix B.",
+   "An average of the Ekene heating values."
+  ],
+  "answer": 2,
+  "explanation": "UNITS.BTU_IT_J is 1055.05585262 joules in one International Table Btu, NIST Special Publication 811 (2008 edition), Appendix B, exact by definition, so a MMBtu is 1055.05585262 MJ. The EIA calculator is read for a barrel of crude oil's heat content, later-tier material, and no heating value enters the constant."
+ },
+ {
+  "prompt": "What does the engine return for 1000 Mscf at 1000 Btu/scf gross?",
+  "options": [
+   "1055.055853 MMBtu and 1000.000000 GJ, the two tiles as the metric route prints them.",
+   "1000.000000 MMBtu and 1055.055853 GJ.",
+   "1000.000000 MMBtu and 1000.000000 GJ, because a thousand Mscf needs no constant.",
+   "1055.055853 MMBtu and 1055.055853 GJ, with the constant applied to both tiles."
+  ],
+  "answer": 1,
+  "explanation": "On the imperial route MMBtu is the plain product: one million scf at 1000 Btu/scf, divided by one million, is exactly 1000.000000 MMBtu. The GJ tile applies the exact constant, 1055.05585262 MJ per MMBtu, to give 1055.055853. The first two distractors swap or drop the constant."
+ },
+ {
+  "prompt": "Why does a gas sales agreement count its quantities in energy?",
+  "options": [
+   "The buyer is buying heat, and gas from different fields carries different heat per cubic foot.",
+   "Pipeline meters measure energy directly, so no conversion from volume is ever needed.",
+   "The Petroleum Industry Act 2021 forbids a contract quantity stated in cubic feet.",
+   "Energy units remove the need to state a heating value or a basis in the contract."
+  ],
+  "answer": 0,
+  "explanation": "A buyer burns gas for heat, and two cubic feet from different fields can carry different amounts of it. Meters measure volume, so the contract converts every volume to energy with a stated heating value and basis before it counts anything. No text the course reads bans a volume unit; the contract still states its heating value, gross or net."
+ },
+ {
+  "prompt": "A seller's meter records its volume in bcf. What must happen before the engine will read it?",
+  "options": [
+   "Nothing, since the engine converts bcf to MMscf on its own and notes it.",
+   "It is entered in GJ, which the engine treats as base.",
+   "The heating value is restated per bcf, which lets the engine keep the unit.",
+   "It is restated in one of the six units the engine accepts."
+  ],
+  "answer": 3,
+  "explanation": "The engine's own words: quantityUnit must be one of \"scf\", \"Mscf\", \"MMscf\", \"Sm3\", \"MSm3\", \"MMSm3\"; got \"bcf\". A unit outside the six is refused by name, and nothing is converted silently. The engine takes a volume and returns MMBtu and GJ; it takes no energy as input."
+ }
+]

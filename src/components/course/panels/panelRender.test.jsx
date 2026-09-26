@@ -26,7 +26,7 @@ import React from 'react';
 const panels = {
   ...import.meta.glob('/src/components/course/panels/**/*Explorer.jsx'),
   ...import.meta.glob('/src/components/course/panels/**/*Lab.jsx'),
-  // Engine courses whose practicals are calculator panels (SC2 procurement, EC7 pia).
+  // Engine courses whose practicals are calculator panels (SC2 procurement, EC7 pia, EC8 gsa).
   ...import.meta.glob('/src/components/course/panels/**/*Calculator.jsx'),
 };
 
@@ -402,6 +402,34 @@ describe('every course panel renders with no props', () => {
       }
     }
     expect(rendered).toBe(15);
+  }, 120000);
+  it('finds the EC8 gsa calculator panels', () => {
+    const names = entries.map(([p]) => p.split('/panels/')[1]);
+    expect(names).toContain('gsa/QuantityCalculator.jsx');
+    expect(names).toContain('gsa/LedgerCalculator.jsx');
+    expect(names).toContain('gsa/ContractCalculator.jsx');
+  });
+  it('every EC8 gsa view renders, not only the default one', async () => {
+    const MODES = {
+      'gsa/QuantityCalculator.jsx': ['energy', 'quantities', 'daily', 'year'],
+      'gsa/LedgerCalculator.jsx': ['ledger', 'price', 'domestic', 'dgdo'],
+      'gsa/ContractCalculator.jsx': ['curve', 'cash', 'parity', 'readings'],
+    };
+    let rendered = 0;
+    for (const [name, modes] of Object.entries(MODES)) {
+      const entry = entries.find(([p]) => p.endsWith(`/${name}`));
+      expect(entry, `${name} is not in the panel sweep`).toBeTruthy();
+      const mod = await entry[1]();
+      expect(mod.MODES.map((m) => m[0]), `${name} declares different modes`).toEqual(modes);
+      for (const mode of modes) {
+        expect(
+          () => renderToStaticMarkup(React.createElement(mod.default, { initialMode: mode })),
+          `${name} in the ${mode} view`,
+        ).not.toThrow();
+        rendered += 1;
+      }
+    }
+    expect(rendered).toBe(12);
   }, 120000);
   it('finds the D5 appliedai panels', () => {
     const names = entries.map(([p]) => p.split('/panels/')[1]);

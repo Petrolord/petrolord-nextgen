@@ -1,0 +1,370 @@
+{
+ "app_slug": "gsa",
+ "tier": "advanced",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-energy-parity-and-the-s-curve",
+   "title": "Energy Parity and the S-Curve",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-heat-equivalence",
+     "title": "Heat equivalence between oil and gas",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-slopes-below-parity",
+     "title": "Slopes below parity",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-s-curve-and-its-kinks",
+     "title": "The S-curve and its kinks",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "gsa-ledger-calculator",
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-continuity-at-the-kinks",
+     "title": "Continuity at the kinks",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-the-published-s-curve",
+     "title": "The published S-curve, figure by figure",
+     "order": 5,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator",
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-whole-contract-cash-flows",
+   "title": "Whole-Contract Cash Flows",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-the-revenue-lines",
+     "title": "The revenue lines of a contract year",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-royalty-on-delivered-value",
+     "title": "Royalty on the value of gas delivered",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-npv-through-the-canonical-npv",
+     "title": "Present value through the canonical NPV",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-export-contract-in-money",
+     "title": "The export contract in money",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "gsa-ledger-calculator",
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-the-stated-readings",
+   "title": "The Stated Readings",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-the-seller-shortfall-reading",
+     "title": "The seller shortfall reading",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator",
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-make-up-right-reading",
+     "title": "The make-up right reading",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-last-contract-year-reading",
+     "title": "The last contract year reading",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-royalty-reading",
+     "title": "The royalty reading",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-reference-texts-and-their-quirks",
+   "title": "Reference Texts and Their Quirks",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-the-model-agreement-and-its-alternatives",
+     "title": "The model agreement and its alternatives",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-recovery-orders-in-the-texts",
+     "title": "Recovery orders in the texts",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator",
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-printed-figures-and-exact-figures",
+     "title": "Printed figures and exact figures",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-quantity-calculator",
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-btu-and-the-cubic-foot",
+     "title": "The Btu and the cubic foot",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-quantity-calculator",
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-boundaries-rule-by-rule",
+     "title": "Boundaries, rule by rule",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-what-the-engine-does-not-compute",
+   "title": "What the Engine Does Not Compute",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-excess-off-specification-and-pre-start-gas",
+     "title": "Excess, off-specification and pre-start gas",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-price-reopeners-reported-by-month",
+     "title": "Price reopeners reported by month",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-ledger-calculator",
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-flaring-compensation-and-supply-tiers",
+     "title": "Flaring, compensation and the supply tiers",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-figures-quoted-only-as-reported",
+     "title": "Figures quoted only as reported",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-ledger-calculator",
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-conventions-and-the-contract-report",
+   "title": "Conventions and the Contract Report",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-conventions-that-are-choices",
+     "title": "Conventions that are choices",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-caps-and-refusals",
+     "title": "Caps and refusals",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-writing-the-contract-report",
+     "title": "Writing the contract report",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "gsa-contract-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

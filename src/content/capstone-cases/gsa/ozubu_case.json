@@ -1,0 +1,138 @@
+{
+ "dataset": "OZUBU (synthetic)",
+ "label": "OZUBU, Ekene gas to the Ozubu Tile Works (synthetic), an industrial buyer",
+ "energy": {
+  "quantity": 16.85,
+  "quantityUnit": "MMSm3",
+  "heatingValue": 38.62,
+  "heatingValueUnit": "MJ/Sm3",
+  "heatingValueBasis": "gross",
+  "referenceConditions": "15 C and 101.325 kPa, dry (the Ozubu metering statement, synthetic)"
+ },
+ "quantities": {
+  "dcq": 22437.25,
+  "period": {
+   "start": "2028-01-01",
+   "end": "2029-01-01"
+  },
+  "maxDcqPct": 115,
+  "topPct": 85
+ },
+ "fortnight": {
+  "dcq": 22437.25,
+  "maxDcqPct": 115,
+  "deliveryTolerance": 150.5,
+  "days": [
+   {
+    "date": "2029-02-01",
+    "nominated": 22180.5,
+    "available": 22180.5,
+    "taken": 22103.75
+   },
+   {
+    "date": "2029-02-02",
+    "nominated": 24310.5,
+    "available": 24310.5,
+    "taken": 24310.5
+   },
+   {
+    "date": "2029-02-03",
+    "nominated": 26980.75,
+    "available": 24115.25,
+    "taken": 24115.25
+   },
+   {
+    "date": "2029-02-04",
+    "nominated": 20560.25,
+    "available": 20560.25,
+    "taken": 20488.25
+   },
+   {
+    "date": "2029-02-05",
+    "nominated": 0,
+    "available": 0,
+    "taken": 0
+   },
+   {
+    "date": "2029-02-06",
+    "nominated": 22437.25,
+    "available": 19862.5,
+    "taken": 19862.5,
+    "maintenance": 1500.25
+   },
+   {
+    "date": "2029-02-07",
+    "nominated": 22900.75,
+    "available": 21340.25,
+    "taken": 21340.25
+   },
+   {
+    "date": "2029-02-08",
+    "nominated": 22050.75,
+    "available": 22050.75,
+    "taken": 21980.5
+   },
+   {
+    "date": "2029-02-09",
+    "nominated": 22437.25,
+    "available": 12410.75,
+    "taken": 12410.75,
+    "forceMajeure": 8200.5
+   },
+   {
+    "date": "2029-02-10",
+    "nominated": 23150.25,
+    "available": 18460.5,
+    "taken": 18460.5,
+    "buyerCaused": true
+   },
+   {
+    "date": "2029-02-11",
+    "nominated": 22437.25,
+    "available": 22437.25,
+    "taken": 22437.25
+   },
+   {
+    "date": "2029-02-12",
+    "nominated": 22437.25,
+    "available": 22320.25,
+    "taken": 22320.25
+   },
+   {
+    "date": "2029-02-13",
+    "nominated": 24990.25,
+    "available": 24990.25,
+    "taken": 24876.75
+   },
+   {
+    "date": "2029-02-14",
+    "nominated": 22300.5,
+    "available": 22300.5,
+    "taken": 22211.375
+   }
+  ]
+ },
+ "year": {
+  "topPct": 85,
+  "makeUp": {
+   "periodYears": 3,
+   "order": "after-adjusted-acq",
+   "endOfTerm": "forfeit"
+  },
+  "years": [
+   {
+    "year": 2029,
+    "acq": 8189596.25,
+    "maintenance": 44873.5,
+    "forceMajeure": 67311.75,
+    "sellerShortfall": 12650.25,
+    "permittedReduction": 22437.25,
+    "taken": 6180450.5,
+    "contractPrice": 3.8625,
+    "topPrice": 3.4763,
+    "makeUpPrice": 0,
+    "shortfallPrice": 1.35
+   }
+  ]
+ }
+}
