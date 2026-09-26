@@ -29,7 +29,7 @@ Reading revenue without knowing where the deck steps is therefore reading half t
 
 Run all six templates on the default project and total revenue reads 2686.9277 million USD on all six lines. Run them on the published test project and it reads 7001.1938 million USD on all six lines. The regime never touches production and never touches price, so this column is a constant across a comparison.
 
-That is the property that makes a regime comparison legible. Contractor net cash flow on the default project ranges from 406.2057 million USD to 986.7327 million USD across the six templates, and since the sales figure behind every one of those is the same 2686.9277 million USD, the whole of the spread is instrument.
+That is the property that makes a regime comparison legible. Contractor net cash flow on the default project ranges from 428.8774 million USD to 1058.0159 million USD across the six templates, and since the sales figure behind every one of those is the same 2686.9277 million USD, the whole of the spread is instrument.
 
 ## The mistake
 

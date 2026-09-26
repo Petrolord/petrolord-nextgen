@@ -23,13 +23,13 @@ Run both on the Designer's default project and total revenue is 2686.9277 millio
 
 ## The mistake
 
-The careful reader ranks regimes by their tax rate, because tax is the instrument with a familiar name. "Nigeria - PIA (2021)" and "Generic Royalty/Tax" both carry CIT 30 percent, RRT 0 percent and minimum tax 0 percent. On the default project the PIA contractor keeps 1058.0159 million USD and the Generic contractor keeps 986.7327 million USD.
+The careful reader ranks regimes by their tax rate, because tax has the familiar name. "Nigeria - PIA (2021)" and "Generic Royalty/Tax" both carry CIT 30 percent, RRT 0 percent and minimum tax 0 percent. On the default project the PIA contractor keeps 1058.0159 million USD and the Generic contractor keeps 986.7327 million USD.
 
-Worse for the intuition, the PIA case pays the larger tax bill of the two: total tax 453.4354 million USD against 422.8854 million USD. More tax, and more cash. The gap was opened by the other three fields. The PIA royalty collects 154.4828 million USD where the Generic flat 12.5 percent collects 335.8660, and the government's minimum share of profit oil is only 5 percent while cumulative production stays below 50 million bbl, so the contractor keeps 95 percent of a larger profit oil and pays its 30 percent on that. A tax rate quoted on its own predicts nothing.
+The PIA case also pays the larger tax bill: total tax 453.4354 million USD against 422.8854 million USD. More tax, and more cash. The other three fields opened the gap. The PIA royalty collects 154.4828 million USD where the Generic flat 12.5 percent collects 335.8660, and the government's minimum share of profit oil is only 5 percent while cumulative production stays below 50 million bbl, so the contractor keeps 95 percent of a larger profit oil and pays its 30 percent on that. A tax rate quoted on its own predicts nothing.
 
 ## What the four fields refuse
 
-They refuse to be a country's fiscal code. The engine's own header says this model exists to compare the shape of regimes against each other, and that the single source of truth for Nigerian fiscal math is the Petroleum Economics Studio engine. A template named for a jurisdiction is a sketch of its terms in the four fields. "Nigeria - PIA (2021)" carries the Act's minimum base terms for a deep offshore production sharing contract on new acreage, which a licensing round can bid up. Every template is useful for asking which instrument moved which result, and unfit for filing anything.
+They refuse to be a country's fiscal code. The engine's own header says this model exists to compare the shape of regimes against each other, and that the single source of truth for Nigerian fiscal math is the Petroleum Economics Studio engine. A template named for a jurisdiction is a sketch of its terms in the four fields. "Nigeria - PIA (2021)" carries the Act's minimum base terms for a deep offshore production sharing contract on new acreage, which a licensing round can bid up. Each is useful for asking which instrument moved which result, and unfit for filing anything.
 
 ## Exercise
 

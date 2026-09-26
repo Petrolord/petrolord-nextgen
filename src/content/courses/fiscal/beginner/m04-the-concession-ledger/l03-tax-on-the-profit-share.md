@@ -24,7 +24,7 @@ The `tax` instrument holds three rates. Corporate income tax runs from 21 percen
 
 ## The rate does not rank the tax
 
-Life tax on the default project reads 260.7539 under the Gulf of Mexico terms at 21 percent, 174.0882 under PIA at 30, 230.9340 under Ghana at 35, 422.8854 under Generic at 30 and 852.8256 under Brazil at 34 with its resource rent tax. Ghana carries the highest corporate rate of the six and pays less than Generic, because its tiers hand a smaller share of profit oil to the contractor and the rate has less to act on.
+Life tax on the default project reads 260.7539 under the Gulf of Mexico terms at 21 percent, 453.4354 under PIA at 30, 230.9340 under Ghana at 35, 422.8854 under Generic at 30 and 852.8256 under Brazil at 34 with its resource rent tax. Ghana carries the highest corporate rate of the six and pays less than Generic, because its tiers hand a smaller share of profit oil to the contractor and the rate has less to act on.
 
 ## A default rate inside the instrument
 

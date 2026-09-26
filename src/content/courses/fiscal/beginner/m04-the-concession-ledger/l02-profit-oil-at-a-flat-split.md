@@ -16,17 +16,17 @@ Under "USA - Gulf of Mexico" on the Designer's default project, `profitOil` read
 | 4 | 197.5024 | 37.0317 | 25.1816 | 135.2891 |
 | 5 | 191.1513 | 35.8409 | 23.6264 | 131.6841 |
 
-The step from 11.3804 to 135.2891 is not a better year. Gross revenue fell from 219.7286 to 197.5024 across it. The pool cleared, so cost recovery stopped taking the whole stream, and the residual is what jumped.
+The step from 11.3804 to 135.2891 is not a better year; revenue fell. The pool cleared, so cost recovery stopped taking the whole stream, and the residual is what jumped.
 
 ## A flat split
 
-Three of the six templates split profit oil flat and give the contractor 100 percent of it: "Brazil - Concession", "USA - Gulf of Mexico" and "Generic Royalty/Tax". The other three split on the R factor, with tiers at 60, 40 and 30 percent for "Nigeria - PIA (2021)", 70, 50 and 35 percent for "Ghana - Deepwater", and 70, 50 and 30 percent for "Angola - Deepwater PSC".
+Three of the six templates split profit oil flat and give the contractor 100 percent of it: "Brazil - Concession", "USA - Gulf of Mexico" and "Generic Royalty/Tax". Two split on the R factor, with tiers at 70, 50 and 35 percent for "Ghana - Deepwater" and 70, 50 and 30 percent for "Angola - Deepwater PSC". "Nigeria - PIA (2021)" gives the government a minimum share set by cumulative crude production, 5 percent up to 50 million bbl, so its contractor takes 95 percent here.
 
 A flat 100 percent to the contractor does not make the state a spectator: it collects royalty of 50.9979 in year 1, and tax of 28.4107 in year 4 out of the contractor's own share.
 
 ## The same field, six residuals
 
-Royalty and the recovery limit sit upstream, so life profit oil on the default project differs by template: 1241.6852 under the Gulf of Mexico terms, 1409.6182 under Generic, 1476.7914 under PIA and Brazil, 1611.1377 under Ghana and 1745.4841 under Angola, which charges no royalty.
+Royalty and the recovery limit sit upstream, so life profit oil on the default project differs by template: 1241.6852 under the Gulf of Mexico terms, 1409.6182 under Generic, 1476.7914 under Brazil, 1591.0013 under PIA, 1611.1377 under Ghana and 1745.4841 under Angola, which charges no royalty.
 
 ## What the split is worth
 

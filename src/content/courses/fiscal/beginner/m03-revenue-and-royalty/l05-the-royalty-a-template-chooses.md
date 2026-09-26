@@ -1,12 +1,12 @@
 # The royalty a template chooses
 
-Five of the six templates use a flat royalty and one uses a sliding scale keyed on the oil price. The published totals show what each choice actually collected.
+Five of the six templates use a flat royalty. The sixth, "Nigeria - PIA (2021)", carries the royalty the Petroleum Industry Act 2021 sets. The published totals show what each choice actually collected.
 
 {{panel:ec-regime-explorer}}
 
-## Five flat rates and one slider
+## Five flat rates and one Act royalty
 
-The flat rates are Angola at 0 percent, Ghana at 5 percent, Brazil at 10 percent, the Generic template at 12.5 percent and the Gulf of Mexico at 18.75 percent. "Nigeria - PIA (2021)" slides on price, with tiers of 0 USD/bbl to 7.5 percent and 50 USD/bbl to 10 percent.
+The flat rates are Angola at 0 percent, Ghana at 5 percent, Brazil at 10 percent, the Generic template at 12.5 percent and the Gulf of Mexico at 18.75 percent. The PIA template charges three things each year: a production royalty on oil at the rate for its terrain, deep offshore, and the year's daily rate, which is 5 percent below 50,000 bopd; a royalty by price on oil, which is zero while the oil price is at or below the year's low benchmark and positive above it; and 5 percent on gas and NGL. The benchmarks are the Regulations' figures, the engine default, with project year 1 set in calendar 2027.
 
 ## What each collected
 
@@ -14,7 +14,7 @@ Total royalty over the life, on total revenue of 2686.9277 million USD for the d
 
 | template | default project | test project |
 | --- | --- | --- |
-| Nigeria - PIA (2021) | 268.6928 | 700.1194 |
+| Nigeria - PIA (2021) | 154.4828 | 443.2226 |
 | Ghana - Deepwater | 134.3464 | 350.0597 |
 | Brazil - Concession | 268.6928 | 700.1194 |
 | USA - Gulf of Mexico | 503.7989 | 1312.7238 |
@@ -23,20 +23,20 @@ Total royalty over the life, on total revenue of 2686.9277 million USD for the d
 
 ## The row worth staring at
 
-The PIA line and the Brazil line are identical on both projects: 268.6928 million USD each on the default project and 700.1194 million USD each on the test project. Brazil is a flat 10 percent. The PIA slider has a top tier of 10 percent that applies from 50 USD per bbl upward.
+Set the PIA line beside the Ghana line. Ghana charges a flat 5 percent on everything. Both projects produce far less than 50,000 bopd of oil, so the PIA production royalty is also 5 percent, and its gas and NGL rate is 5 percent too. Without the royalty by price the two lines would be the same number. They are not: the PIA template collects about 20 million USD more on the default project and about 93 million USD more on the test project, and all of that is the royalty by price, charged in every year the deck price sits above that year's low benchmark.
 
-The default project's deck prices oil at 70, 75 and 80 USD per bbl, and the test project's deck prices it at 80 USD per bbl. Every applied price in both fields is above the 50 USD per bbl threshold, so the slider sits in its top tier in every year of both projects and behaves exactly like a flat 10 percent. A sliding instrument that never slides is a flat one.
+No two templates collected the same total on either project. Brazil's flat 10 percent collects 268.6928 on the default project, well above the PIA total.
 
 ## The mistake
 
-The careful reader sees `sliding_price` in a template and assumes the royalty must move. On these two published projects it never does, and a reader who tries to explain the PIA and Brazil results by their royalty difference is explaining a difference that does not exist. Contractor net cash flow on the default project is 406.2057 million USD under the PIA template and 623.9658 million USD under Brazil, and since both paid 268.6928 million USD of royalty, the whole of that gap comes from the other three fields.
+The careful reader sees the headline 5 percent production royalty and treats the PIA royalty as a flat 5 percent. On these decks that understates it every year the price clears the benchmark. The opposite slip is just as common: reading the PIA template as the most expensive royalty because it carries the most machinery. It collects less than Brazil, the Generic template or the Gulf of Mexico. Contractor net cash flow on the default project is 1058.0159 million USD under the PIA template and 623.9658 million USD under Brazil, and a royalty gap of about 114 million USD explains only part of that difference; the other three fields explain the rest.
 
-Whether a slider slides is a property of the deck, not of the template. The only way to know is to read the applied price in each year against the tier thresholds.
+Whether a price royalty is charged is a property of the deck and the calendar year, read against the benchmark. The only way to know is to read the year's royalty against its gross revenue.
 
-## What the slider refuses
+## What the royalty refuses
 
-It keys on the oil price alone. Not the gas price, not the NGL price, not the production rate, not cumulative volume, not the R factor. And it reads the applied price for the year, so anything that changes the price changes the tier as well as the revenue.
+The royalty never looks at cost. It is charged on gross revenue before any cost is recovered, so a year that loses money still pays it.
 
 ## Exercise
 
-Say which two templates collected the same total royalty on both published projects and explain why. Then name the one template whose royalty column is 0.0000 in every year and say what makes it the harsher regime for a contractor anyway.
+Name the template whose royalty total would equal the PIA template's on both projects if the royalty by price were switched off, and explain why. Then name the one template whose royalty column is 0.0000 in every year and say what makes it a harsher regime for a contractor anyway.

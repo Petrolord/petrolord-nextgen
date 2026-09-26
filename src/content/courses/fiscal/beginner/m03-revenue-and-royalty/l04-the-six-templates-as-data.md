@@ -8,39 +8,39 @@
 
 | template | royalty | cost recovery limit | profit split | CIT | RRT | minimum tax |
 | --- | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | sliding on price, 0 USD/bbl to 7.5 percent, 50 USD/bbl to 10 percent | 80 percent | tiered, R 1 to 60 percent, R 1.6 to 40 percent, R 2.5 to 30 percent | 30 percent | 0 percent | 0 percent |
+| Nigeria - PIA (2021) | PIA 2021 royalty: production royalty by terrain and daily rate, royalty by price, gas and NGL at 5 percent | 70 percent of the gross value of crude oil and NGL | government minimum share by cumulative crude production, 5 percent to 50 million bbl rising to 45 percent above 1500 million bbl | 30 percent | 0 percent | 0 percent |
 | Ghana - Deepwater | flat 5 percent | 90 percent | tiered, R 1 to 70 percent, R 1.25 to 50 percent, R 2 to 35 percent | 35 percent | 0 percent | 0 percent |
 | Brazil - Concession | flat 10 percent | 100 percent | flat 100 percent to the contractor | 34 percent | 40 percent | 0 percent |
 | USA - Gulf of Mexico | flat 18.75 percent | 100 percent | flat 100 percent to the contractor | 21 percent | 0 percent | 0 percent |
 | Angola - Deepwater PSC | flat 0 percent | 50 percent | tiered, R 1 to 70 percent, R 1.5 to 50 percent, R 2 to 30 percent | 25 percent | 50 percent | 0 percent |
 | Generic Royalty/Tax | flat 12.5 percent | 100 percent | flat 100 percent to the contractor | 30 percent | 0 percent | 0 percent |
 
-Each template also carries a description. Ghana - Deepwater is typical terms for a deepwater block, featuring royalty and additional oil entitlement. Brazil - Concession is a standard concession agreement with a special participation tax, described as a windfall tax.
+Each template also carries a description. Nigeria - PIA (2021) is the Act's minimum base terms for a new deep offshore production sharing contract. Ghana - Deepwater is typical terms for a deepwater block, featuring royalty and additional oil entitlement. Brazil - Concession is a standard concession agreement with a special participation tax, described as a windfall tax.
 
-Read those two descriptions against the fields and something is immediately visible: neither extra instrument exists. Ghana's additional oil entitlement is expressed as an R factor split and nothing else, and Brazil's windfall tax is expressed as RRT at 40 percent. The description is prose. Only the six fields are executed.
+Read those two descriptions against the fields: neither extra instrument exists. Ghana's additional oil entitlement is expressed as an R factor split and nothing else, and Brazil's windfall tax is expressed as RRT at 40 percent. The description is prose. Only the six fields are executed.
 
-Templates carry no `id` of their own. The Suite assigns one when a template is loaded into a comparison, and the goldens use the slug of the name, so "Angola - Deepwater PSC" becomes `angola___deepwater_psc`.
+Templates carry no `id` of their own; the goldens use the slug of the name, so "Angola - Deepwater PSC" becomes `angola___deepwater_psc`.
 
-## Two families
+## Three shapes
 
-Three of the six take a flat 100 percent of profit oil to the contractor and recover cost at 100 percent: Brazil, the Gulf of Mexico and the Generic template. That is what a concession looks like inside a model built around a production sharing ledger. The contractor keeps everything the taxes do not take, and the cost recovery machinery, while still running, stops binding after the early years.
+Three of the six take a flat 100 percent of profit oil to the contractor and recover cost at 100 percent: Brazil, the Gulf of Mexico and the Generic template. That is a concession inside a production sharing ledger: the contractor keeps everything the taxes leave, and cost recovery stops binding after the early years.
 
-The other three split profit oil on the R factor and cap cost recovery at 80, 90 and 50 percent. Those are the templates where the middle columns of the ledger do real work, because an unrecovered balance has somewhere to accumulate and the contractor's share of profit oil changes as the field matures rather than staying at one number for 25 years.
+Two split profit oil on the R factor and cap cost recovery at 90 percent (Ghana) and 50 percent (Angola) of revenue after royalty. The third shape, "Nigeria - PIA (2021)", recovers cost to 70 percent of the gross value of crude oil and NGL and gives the government a minimum share of profit oil that rises with cumulative crude production. In the sharing templates the middle columns of the ledger do real work, because an unrecovered balance can accumulate and the contractor's share of profit oil can change as the field matures.
 
 ## What the split buys the government
 
-On the Designer's default project, total contractor net cash flow is 406.2057 million USD under the PIA template, 428.8774 under Ghana, 623.9658 under Brazil, 980.9313 under the Gulf of Mexico, 481.7318 under Angola and 986.7327 under the Generic template. Total revenue behind every one of those is 2686.9277 million USD.
+On the Designer's default project, total contractor net cash flow is 1058.0159 million USD under the PIA template, 428.8774 under Ghana, 623.9658 under Brazil, 980.9313 under the Gulf of Mexico, 481.7318 under Angola and 986.7327 under the Generic template. Total revenue behind every one of those is 2686.9277 million USD.
 
-The two families separate cleanly. The three concession shaped templates occupy the top of that range and the three sharing templates the bottom, and no tax rate in the list predicts the ordering.
+The PIA template tops that range, the two R factor templates sit at the bottom, and the three concessions fall between, with Brazil well below the other two. No tax rate in the list predicts the ordering.
 
 ## The mistake
 
-The careful reader ranks by the headline royalty, since it is the number a press release quotes. Angola charges 0 percent and leaves the contractor 481.7318 million USD. The Generic template charges 12.5 percent and leaves 986.7327 million USD. Brazil charges 10 percent, pays the most tax of the six at 852.8256 million USD, and still leaves 623.9658 million USD.
+The careful reader ranks by the headline royalty. Angola charges 0 percent and leaves the contractor 481.7318 million USD. The Generic template charges 12.5 percent and leaves 986.7327 million USD. Brazil charges 10 percent, pays the most tax of the six at 852.8256 million USD, and still leaves 623.9658 million USD.
 
 ## What a template refuses
 
-It refuses to be a jurisdiction. Six fields cannot hold a country's fiscal code, and the engine says as much: the single source of truth for Nigerian fiscal math is the Petroleum Economics Studio engine, and this model exists to compare shapes.
+It refuses to be a jurisdiction's fiscal code. The single source of truth for Nigerian fiscal math is the Petroleum Economics Studio engine, and this model exists to compare shapes.
 
 ## Exercise
 
-Group the six templates by profit split family and, within each family, order them by cost recovery limit. Then name the template you would expect to punish a capital heavy project hardest, and say which two fields drove your answer.
+Group the six templates by profit split shape and, within each shape, order them by cost recovery limit, saying which base each limit is a percent of. Then name the template you would expect to punish a capital heavy project hardest, and say which two fields drove your answer.

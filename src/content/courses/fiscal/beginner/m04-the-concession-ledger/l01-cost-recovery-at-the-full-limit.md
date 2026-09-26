@@ -23,11 +23,11 @@ Year 2 recovers 198.6260 and carries 140.2337 forward. Year 3 recovers 167.1490 
 
 ## The limit changes when, and only sometimes how much
 
-Over the life of the default project the contractor recovers 941.4436, against life opex of 441.4436 and capex of 500.0000, and every one of the six templates recovers that same 941.4436 here, "Angola - Deepwater PSC" at a 50 percent limit included, because its pool also closes at 0.0000. The tighter limit shows in the waiting: Angola's pool stands at 395.0083 after year 1, then 301.6249, 218.6759, 145.1063, 73.1570 and 9.4844 in year 6. On the Suite test project it bites for good, and Angola strands 251.6537 against 97.2331 under the Gulf of Mexico terms.
+Over the life of the default project the contractor recovers 941.4436, against life opex of 441.4436 and capex of 500.0000, and every one of the six templates recovers that same 941.4436 here, "Angola - Deepwater PSC" at a 50 percent limit included, because its pool also closes at 0.0000. The tighter limit shows in the waiting: Angola's pool stands at 395.0083 after year 1, then 301.6249, 218.6759, 145.1063, 73.1570 and 9.4844 in year 6. On the Suite test project Angola strands 251.6537 for good.
 
 ## A full limit is not an empty pool
 
-Three templates set the limit at 100 percent, Ghana sets 90, PIA sets 80 and Angola sets 50. On a field that declines hard, late revenue after royalty can fall below the year's opex, and the pool starts filling again. The teaching field ODIDI closes its life with an unrecovered balance under every one of the six templates, 19.3270 at the smallest, 192.1146 under Angola, and 24.2824 under the Gulf of Mexico terms at a full 100 percent.
+Three templates set the limit at 100 percent, Ghana 90 and Angola 50, all of revenue after royalty; the PIA template sets 70 percent of the gross crude oil and NGL value. On a field that declines hard, late revenue after royalty can fall below the year's opex, and the pool starts filling again. The teaching field ODIDI closes its life with an unrecovered balance under every one of the six templates, 19.3270 at the smallest, 192.1146 under Angola, and 24.2824 under the Gulf of Mexico terms at a full 100 percent.
 
 ## The mistake
 
