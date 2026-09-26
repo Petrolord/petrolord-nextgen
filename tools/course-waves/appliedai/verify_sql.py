@@ -1,9 +1,5 @@
 #!/usr/bin/env python3
-# CARRIED FROM D4 (forecastml) WITH ITS NAMES REWRITTEN, AND NOT YET D5's. This
-# ship-phase generator is finished at the ship phase, when the banks and the
-# capstone case files exist; until then its D4 content (datasets, prompts,
-# checks) is not D5's and it is not run by run_gates.py.
-"""Compare the D4 appliedai seed ladder against its committed sources, FIELD BY FIELD:
+"""Compare the D5 appliedai seed ladder against its committed sources, FIELD BY FIELD:
 the three deep seeds against the 21 bank JSONs (every prompt, option, answer key
 and explanation of all 396 questions), the three structure rows against the
 three manifests (every module key, title and lesson key, 78 in all), the course
@@ -50,7 +46,7 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 UP = os.path.abspath(os.path.join(HERE, '../../..'))
 REPO = os.environ.get(
     'REPO', UP if os.path.exists(os.path.join(UP, '.git')) else '/root/wt-dai-d5-nextgen')
-SLUG, PREFIX, DATE = 'appliedai', 'd4', '20261103'
+SLUG, PREFIX, DATE = 'appliedai', 'd5', '20261104'
 WAVE = f'tools/course-waves/{SLUG}'
 TIERS = (('beginner', 'b'), ('intermediate', 'i'), ('advanced', 'a'))
 PARTS = ('m01', 'm02', 'm03', 'm04', 'm05', 'm06', 'exam')

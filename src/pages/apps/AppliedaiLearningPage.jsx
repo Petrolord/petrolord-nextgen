@@ -27,6 +27,8 @@ import {
 } from '@/services/academyService';
 import { buildCapstoneAnswers } from '@/lib/capstoneAnswer';
 import LearningModeGate from '@/components/academy/LearningModeGate';
+import CapstoneCaseFiles from '@/components/course/CapstoneCaseFiles';
+import { APPLIEDAI_CASE_FILES } from '@/content/capstone-cases/appliedai';
 
 // The Applied AI and Language Models course page, the fifth course of the
 // academy's Data & AI module, after Oilfield Data Quality, Machine Learning on
@@ -35,7 +37,9 @@ import LearningModeGate from '@/components/academy/LearningModeGate';
 // return value from the vendored evaluation engine on the Ekene document
 // fixtures. No language model runs on this page or behind it. It never reads
 // the capstone: panelCapstoneGuard.test.js and evaluateLab.test.js both grep
-// this file.
+// this file. The capstone case files are imported from
+// src/content/capstone-cases/appliedai and offered on the capstone card only,
+// as the dataqc, mlcore, facies and forecastml courses offer theirs.
 
 const APP = 'appliedai';
 const LEARN_TIERS = ['beginner', 'intermediate', 'advanced'];
@@ -257,6 +261,10 @@ const AppliedaiLearningPage = () => {
               <CardDescription>{capstone?.prompt}</CardDescription>
             </CardHeader>
             <CardContent className="space-y-4">
+              {capstone && APPLIEDAI_CASE_FILES[tier] && (
+                <CapstoneCaseFiles files={APPLIEDAI_CASE_FILES[tier]}
+                  note="Download the case file the brief names. It holds the passages, queries, judgments, answers, runs, records, ratings or calibration rows the six values are computed from; paste the parts each value needs into the panel view it belongs to. No panel loads a case for you." />
+              )}
               {!(!hasDeepCourse(APP, tier)
                 || courseProgress?.capstone?.unlocked === true
                 || courseProgress?.capstone?.passed === true

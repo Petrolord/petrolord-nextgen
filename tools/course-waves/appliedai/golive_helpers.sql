@@ -1,140 +1,254 @@
--- CARRIED FROM D4 (forecastml) WITH ITS NAMES REWRITTEN, AND NOT YET D5's. This
--- ship-phase generator is finished at the ship phase, when the banks and the
--- capstone case files exist; until then its D4 content (datasets, prompts,
--- checks) is not D5's and it is not run by run_gates.py.
 -- ------------------------------------------------ the second route's helpers
 -- Temporary functions (pg_temp), created with create or replace: they vanish
--- with the session and create nothing in any schema. Every series is a
--- double precision array, 1-based, oldest month first; "index t" in a comment
--- is the engine's 0-based month, which is element t + 1 here.
+-- with the session and create nothing in any schema. Each is written from the
+-- published definition the course states (Okapi BM25 with the Lucene idf,
+-- scikit-learn's smoothed TF-IDF, trec_eval's precision, recall, reciprocal
+-- rank and average precision, nDCG with a log2(rank + 1) discount, the SQuAD
+-- normalisation and token F1, Cohen's kappa, the Brier score and its Murphy
+-- decomposition with the within-bin terms of Stephenson, Coelho and Jolliffe
+-- 2008, the mulberry32 stream and the lib/stats quantile rule). No engine code
+-- is run: the go-live recomputes each graded value from the capstone data.
+-- Arrays are 1-based; a passage set is a pair of arrays, ids and texts.
+
+-- Tokens: ASCII A to Z lowercased and nothing else changed, split on every run
+-- of characters outside [a-z0-9], empty pieces dropped. No stop list (every
+-- capstone states the stop list off).
+create or replace function pg_temp.d5_tok(t text) returns text[]
+language sql immutable as $f$
+  select coalesce(array_agg(x order by o), '{}'::text[])
+    from regexp_split_to_table(translate(t, 'ABCDEFGHIJKLMNOPQRSTUVWXYZ', 'abcdefghijklmnopqrstuvwxyz'), '[^a-z0-9]+')
+         with ordinality s(x, o)
+   where x <> ''
+$f$;
+
+-- The distinct query terms, in order of first appearance.
+create or replace function pg_temp.d5_qterms(q text) returns text[]
+language sql immutable as $f$
+  select coalesce(array_agg(x order by o), '{}'::text[])
+    from (select x, min(o) o from unnest(pg_temp.d5_tok(q)) with ordinality u(x, o) group by x) d
+$f$;
+
+-- BM25 with the Lucene idf ln(1 + (N - df + 0.5) / (df + 0.5)): one score per
+-- passage (0 where no query term occurs), in passage order.
+create or replace function pg_temp.d5_bm25(texts text[], q text, k1 double precision, b double precision)
+returns double precision[]
+language plpgsql immutable as $f$
+#variable_conflict use_column
+declare
+  n int := array_length(texts, 1); toks text[][]; lens int[] := '{}'; total double precision := 0;
+  avgdl double precision; terms text[] := pg_temp.d5_qterms(q); s double precision[] := '{}';
+  i int; w text; df int; tf int; idf double precision; dt text[];
+begin
+  for i in 1 .. n loop
+    lens := lens || cardinality(pg_temp.d5_tok(texts[i]));
+    total := total + cardinality(pg_temp.d5_tok(texts[i]));
+    s := s || 0.0::double precision;
+  end loop;
+  avgdl := total / n::double precision;
+  foreach w in array terms loop
+    select count(*) into df from generate_series(1, n) j where w = any(pg_temp.d5_tok(texts[j]));
+    if df = 0 then continue; end if;
+    idf := ln(1.0 + (n - df + 0.5) / (df + 0.5));
+    for i in 1 .. n loop
+      dt := pg_temp.d5_tok(texts[i]);
+      select count(*) into tf from unnest(dt) x where x = w;
+      if tf > 0 then
+        s[i] := s[i] + (idf * tf * (k1 + 1)) / (tf + k1 * (1 - b + (b * lens[i]) / avgdl));
+      end if;
+    end loop;
+  end loop;
+  return s;
+end $f$;
+
+-- The BM25 idf of one term over a passage set.
+create or replace function pg_temp.d5_bm25_idf(texts text[], term text) returns double precision
+language sql immutable as $f$
+  select ln(1.0 + (array_length(texts, 1) - df + 0.5) / (df + 0.5))
+    from (select count(*)::double precision df from unnest(texts) t where term = any(pg_temp.d5_tok(t))) d
+$f$;
+
+-- TF-IDF as scikit-learn's default: idf ln((1 + N) / (1 + df)) + 1, raw
+-- counts (or 1 + ln tf, sublinear, on passages and query alike), each vector
+-- scaled to unit length; the query keeps only vocabulary terms. One cosine
+-- per passage, in passage order.
+create or replace function pg_temp.d5_tfidf(texts text[], q text, sub boolean) returns double precision[]
+language sql immutable as $f$
+  with tf as (select i d, x w, count(*)::double precision f
+                from generate_series(1, array_length(texts, 1)) i, unnest(pg_temp.d5_tok(texts[i])) x group by i, x),
+       idf as (select w, ln((1.0 + array_length(texts, 1)) / (1.0 + count(*))) + 1 idf from tf group by w),
+       dw as (select tf.d, tf.w, (case when sub then 1 + ln(tf.f) else tf.f end) * idf.idf v from tf join idf using (w)),
+       dn as (select d, sqrt(sum(v * v)) nrm from dw group by d),
+       qc as (select x w, count(*)::double precision c from unnest(pg_temp.d5_tok(q)) x where x in (select w from idf) group by x),
+       qw as (select qc.w, (case when sub then 1 + ln(qc.c) else qc.c end) * idf.idf v from qc join idf using (w)),
+       qn as (select sqrt(sum(v * v)) nrm from qw),
+       sc as (select dw.d, sum((qw.v / qn.nrm) * (dw.v / dn.nrm)) s
+                from dw join qw using (w) join dn using (d), qn where qn.nrm > 0 group by dw.d)
+  select array_agg(coalesce(sc.s, 0.0) order by i)
+    from generate_series(1, array_length(texts, 1)) i left join sc on sc.d = i
+$f$;
+
+-- The ranking: score above 0, the score rounded to 12 significant digits
+-- descending (the tie key), then the id ascending; the top k ids.
+create or replace function pg_temp.d5_rank(ids text[], scores double precision[], k int) returns text[]
+language sql immutable as $f$
+  select coalesce(array_agg(id order by key desc, id collate "C"), '{}'::text[])
+    from (select id, key
+            from (select ids[i] id, round(scores[i]::numeric, 11 - floor(log(scores[i]::numeric))::int) key
+                    from generate_series(1, array_length(ids, 1)) i where scores[i] > 0) a
+           order by key desc, id collate "C" limit k) r
+$f$;
+
+-- One ranked list against its judgments (passage id to grade; unjudged is
+-- grade 0) at cutoff k, relevant at grade t or more, with a gain. Returns
+-- [precision, recall, reciprocal rank, average precision, DCG, ideal DCG,
+-- nDCG, number relevant]; recall, AP and nDCG null where undefined.
+create or replace function pg_temp.d5_metrics(run text[], j jsonb, k int, t int, gain text) returns double precision[]
+language plpgsql immutable as $f$
+#variable_conflict use_column
+declare
+  nrel int; hits int := 0; rr double precision := 0; ap double precision := 0; dcg double precision := 0;
+  idcg double precision := 0; g int; i int; top text[] := run[1:k]; ng int := 0;
+begin
+  select count(*) into nrel from jsonb_each_text(j) e where e.value::int >= t;
+  for i in 1 .. coalesce(array_length(top, 1), 0) loop
+    g := coalesce((j->>top[i])::int, 0);
+    if g >= t then
+      hits := hits + 1;
+      if rr = 0 then rr := 1.0 / i; end if;
+      ap := ap + hits / i::double precision;
+    end if;
+    dcg := dcg + (case when gain = 'exponential' then 2.0 ^ g - 1 else g end) / (ln(i + 1.0) / ln(2.0));
+  end loop;
+  for g in select e.value::int from jsonb_each_text(j) e order by e.value::int desc limit k loop
+    ng := ng + 1;
+    idcg := idcg + (case when gain = 'exponential' then 2.0 ^ g - 1 else g end) / (ln(ng + 1.0) / ln(2.0));
+  end loop;
+  return array[hits / k::double precision,
+               case when nrel > 0 then hits / nrel::double precision end,
+               rr,
+               case when nrel > 0 then ap / nrel::double precision end,
+               dcg, idcg,
+               case when idcg > 0 then dcg / idcg end,
+               nrel::double precision];
+end $f$;
+
+-- The mean of one metric (by its position in d5_metrics) over the queries of a
+-- run object (query id to ranked ids) with a judgments object, the queries
+-- with no relevant passage excluded.
+create or replace function pg_temp.d5_mean(runs jsonb, js jsonb, k int, t int, gain text, pos int) returns double precision
+language sql immutable as $f$
+  select avg(m[pos]) from (
+    select pg_temp.d5_metrics(array(select jsonb_array_elements_text(r.value)), js->r.key, k, t, gain) m
+      from jsonb_each(runs) r) x
+   where m[8] > 0
+$f$;
+
+-- The per-query value of one metric, queries in id order.
+create or replace function pg_temp.d5_per(runs jsonb, js jsonb, k int, t int, gain text, pos int) returns double precision[]
+language sql immutable as $f$
+  select array_agg(m[pos] order by q collate "C") from (
+    select r.key q, pg_temp.d5_metrics(array(select jsonb_array_elements_text(r.value)), js->r.key, k, t, gain) m
+      from jsonb_each(runs) r) x
+$f$;
+
+-- A whole run in SQL: every query of a query set ranked over a passage set.
+create or replace function pg_temp.d5_run(ids text[], texts text[], qids text[], qtexts text[], method text,
+                                          k int, k1 double precision, b double precision, sub boolean) returns jsonb
+language sql immutable as $f$
+  select jsonb_object_agg(qids[i], to_jsonb(pg_temp.d5_rank(ids,
+           case when method = 'bm25' then pg_temp.d5_bm25(texts, qtexts[i], k1, b)
+                else pg_temp.d5_tfidf(texts, qtexts[i], sub) end, k)))
+    from generate_series(1, array_length(qids, 1)) i
+$f$;
+
+-- The SQuAD normalisation: lowercase, drop ASCII punctuation, the words a, an
+-- and the replaced by a space, whitespace collapsed; returned as tokens.
+create or replace function pg_temp.d5_squad(t text) returns text[]
+language sql immutable as $f$
+  select coalesce(array_agg(x order by o), '{}'::text[])
+    from regexp_split_to_table(
+           regexp_replace(
+             regexp_replace(lower(t), '[!"#$%&''()*+,./:;<=>?@\[\\\]^_`{|}~-]', '', 'g'),
+             '\y(a|an|the)\y', ' ', 'g'),
+           '\s+') with ordinality s(x, o)
+   where x <> ''
+$f$;
+
+-- SQuAD token F1 on two token lists by multiset overlap; [f1, precision, recall].
+create or replace function pg_temp.d5_f1(p text[], r text[]) returns double precision[]
+language plpgsql immutable as $f$
+#variable_conflict use_column
+declare common int; pr double precision; rc double precision;
+begin
+  if cardinality(p) = 0 or cardinality(r) = 0 then
+    return array[case when cardinality(p) = cardinality(r) then 1.0 else 0.0 end, null, null];
+  end if;
+  select coalesce(sum(least(a.c, b.c)), 0) into common
+    from (select x, count(*) c from unnest(p) x group by x) a join (select x, count(*) c from unnest(r) x group by x) b using (x);
+  if common = 0 then return array[0.0, 0.0, 0.0]; end if;
+  pr := common / cardinality(p)::double precision; rc := common / cardinality(r)::double precision;
+  return array[(2 * pr * rc) / (pr + rc), pr, rc];
+end $f$;
+
+-- Extraction over labels and predictions ([{id, fields}]) with field specs
+-- ([{name, type, absTol?, relTol?}]). Returns [macro F1, micro F1, macro
+-- accuracy, precision, recall, mean F1 of the text fields].
+create or replace function pg_temp.d5_extract(fields jsonb, labels jsonb, preds jsonb) returns double precision[]
+language plpgsql immutable as $f$
+#variable_conflict use_column
+declare
+  f jsonb; l jsonb; pf jsonb; lv jsonb; pv jsonb; le boolean; pe boolean; o text; x double precision;
+  cf int; wr int; mi int; un int; co int; tcf int := 0; twr int := 0; tmi int := 0; tun int := 0;
+  cells int; pr double precision; rc double precision; f1s double precision[] := '{}'; accs double precision[] := '{}';
+  tf1 double precision[] := '{}'; f1 double precision; tol double precision;
+begin
+  for f in select * from jsonb_array_elements(fields) loop
+    cf := 0; wr := 0; mi := 0; un := 0; co := 0; cells := 0;
+    for l in select * from jsonb_array_elements(labels) loop
+      pf := coalesce((select p->'fields' from jsonb_array_elements(preds) p where p->>'id' = l->>'id' limit 1), '{}'::jsonb);
+      lv := l->'fields'->(f->>'name'); pv := pf->(f->>'name');
+      le := lv is null or jsonb_typeof(lv) = 'null' or (jsonb_typeof(lv) = 'string' and btrim(lv #>> '{}') = '');
+      pe := pv is null or jsonb_typeof(pv) = 'null' or (jsonb_typeof(pv) = 'string' and btrim(pv #>> '{}') = '');
+      cells := cells + 1;
+      if le and pe then o := 'empty';
+      elsif pe then o := 'missed';
+      elsif le then o := 'unsupported';
+      elsif f->>'type' = 'text' then
+        o := case when pg_temp.d5_squad(pv #>> '{}') = pg_temp.d5_squad(lv #>> '{}') then 'correct' else 'wrong' end;
+      else
+        if jsonb_typeof(pv) = 'number' then x := (pv #>> '{}')::double precision;
+        elsif btrim(pv #>> '{}') ~ '^-?[0-9]+(,[0-9]{3})*([.][0-9]+)?$' then x := replace(btrim(pv #>> '{}'), ',', '')::double precision;
+        else x := null; end if;
+        tol := greatest(coalesce((f->>'absTol')::double precision, 0), coalesce((f->>'relTol')::double precision, 0) * abs((lv #>> '{}')::double precision));
+        o := case when x is not null and abs(x - (lv #>> '{}')::double precision) <= tol then 'correct' else 'wrong' end;
+      end if;
+      if o = 'empty' then co := co + 1;
+      elsif o = 'correct' then cf := cf + 1; co := co + 1;
+      elsif o = 'wrong' then wr := wr + 1;
+      elsif o = 'missed' then mi := mi + 1;
+      else un := un + 1; end if;
+    end loop;
+    pr := case when cf + wr + un > 0 then cf / (cf + wr + un)::double precision end;
+    rc := case when cf + wr + mi > 0 then cf / (cf + wr + mi)::double precision end;
+    f1 := case when pr is null and rc is null then null
+               when coalesce(pr, 0) + coalesce(rc, 0) = 0 then 0.0
+               else (2 * coalesce(pr, 0) * coalesce(rc, 0)) / (coalesce(pr, 0) + coalesce(rc, 0)) end;
+    if f1 is not null then f1s := f1s || f1; if f->>'type' = 'text' then tf1 := tf1 || f1; end if; end if;
+    accs := accs || (co / cells::double precision);
+    tcf := tcf + cf; twr := twr + wr; tmi := tmi + mi; tun := tun + un;
+  end loop;
+  pr := case when tcf + twr + tun > 0 then tcf / (tcf + twr + tun)::double precision end;
+  rc := case when tcf + twr + tmi > 0 then tcf / (tcf + twr + tmi)::double precision end;
+  return array[(select avg(v) from unnest(f1s) v),
+               case when coalesce(pr, 0) + coalesce(rc, 0) = 0 then 0.0 else (2 * coalesce(pr, 0) * coalesce(rc, 0)) / (coalesce(pr, 0) + coalesce(rc, 0)) end,
+               (select avg(v) from unnest(accs) v), pr, rc, (select avg(v) from unnest(tf1) v)];
+end $f$;
 
 -- a x b modulo 2^32 for a, b in [0, 2^32), with b split into 16-bit halves so
 -- no product leaves bigint.
 create or replace function pg_temp.d5_imul(a bigint, b bigint) returns bigint
 language sql immutable as $f$
   select ((a * (b & 65535)) + (((a * (b >> 16)) & 65535) << 16)) & 4294967295
-$f$;
-
--- n draws of mulberry32(seed), each in [0, 1), rebuilt in 64-bit integer
--- arithmetic.
-create or replace function pg_temp.d5_u(p_seed bigint, p_n int) returns double precision[]
-language plpgsql immutable as $f$
-#variable_conflict use_column
-declare
-  a bigint := p_seed & 4294967295; t bigint; u double precision[] := '{}'; i int;
-begin
-  for i in 1 .. p_n loop
-    a := (a + 1831565813) & 4294967295;
-    t := pg_temp.d5_imul(a # (a >> 15), a | 1);
-    t := t # ((t + pg_temp.d5_imul(t # (t >> 7), t | 61)) & 4294967295);
-    u := u || ((t # (t >> 14))::double precision / 4294967296.0);
-  end loop;
-  return u;
-end $f$;
-
--- The recursions from their published form (Gardner and McKenzie 1985 for the
--- damped trend; ses and Holt are phi = 1 with the trend off or on), started
--- at the first observation: l = y[1], and b = y[2] - y[1] with a trend.
--- Returns sse, the final level, the final trend, then the scored one-step
--- residuals in order (from index 1 for ses, index 2 with a trend).
-create or replace function pg_temp.d5_run(y double precision[], method text, a double precision,
-                                          b double precision, phi double precision) returns double precision[]
-language plpgsql immutable as $f$
-#variable_conflict use_column
-declare
-  n int := array_length(y, 1); tr_on boolean := method <> 'ses';
-  ph double precision := case when method = 'damped' then phi else 1.0 end;
-  sf int := case when method = 'ses' then 1 else 2 end;
-  l double precision := y[1]; tr double precision := case when method = 'ses' then 0.0 else y[2] - y[1] end;
-  f double precision; e double precision; ln double precision; sse double precision := 0.0;
-  res double precision[] := '{}'; t int;
-begin
-  for t in 2 .. n loop
-    f := case when tr_on then l + ph * tr else l end;
-    e := y[t] - f;
-    if t - 1 >= sf then sse := sse + e * e; res := res || e; end if;
-    ln := a * y[t] + (1 - a) * f;
-    if tr_on then tr := b * (ln - l) + (1 - b) * ph * tr; end if;
-    l := ln;
-  end loop;
-  return array[sse, l, tr] || res;
-end $f$;
-
--- h point forecasts from a final level and trend.
-create or replace function pg_temp.d5_fc(method text, l double precision, tr double precision,
-                                         phi double precision, h int) returns double precision[]
-language plpgsql immutable as $f$
-#variable_conflict use_column
-declare out double precision[] := '{}'; s double precision := 0.0; p double precision := 1.0; j int;
-begin
-  for j in 1 .. h loop
-    if method = 'ses' then out := out || l;
-    elsif method = 'holt' then out := out || (l + j * tr);
-    else p := p * phi; s := s + p; out := out || (l + s * tr);
-    end if;
-  end loop;
-  return out;
-end $f$;
-
--- The least one-step SSE, found by the stated rule: the coarse grid (alpha
--- outermost, then beta, then phi; a later point replaces the best only when
--- below best x (1 - 1e-12)), then the compass search (+step before -step,
--- alpha before beta before phi, a trial clipped to the box and skipped when
--- the clip leaves it where it was; move to the best trial that lowers the
--- SSE; halve after a sweep that improves nothing; stop when a sweep at a step
--- of at most 2^-30 of the range improves nothing). Returns alpha, beta, phi
--- (null where the method has none), the SSE, and 1 when it stopped by the
--- rule (0 at the 200000-evaluation cap).
-create or replace function pg_temp.d5_opt(y double precision[], method text) returns double precision[]
-language plpgsql immutable as $f$
-#variable_conflict use_column
-declare
-  d int := case method when 'ses' then 1 when 'holt' then 2 else 3 end;
-  ga double precision[] := array[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]::double precision[];
-  gp double precision[] := array[0.8, 0.85, 0.9, 0.95, 0.98]::double precision[];
-  lo double precision[] := array[0.0, 0.0, 0.8]; hi double precision[] := array[1.0, 1.0, 0.98];
-  rg double precision[]; x double precision[]; bx double precision[]; c double precision[];
-  fx double precision; bf double precision; f double precision; frac double precision := 0.05;
-  ev int := 0; conv int := 0; i int; s int; ia int; ib int; ip int; improved boolean;
-begin
-  rg := array[hi[1] - lo[1], hi[2] - lo[2], hi[3] - lo[3]];
-  fx := null;
-  for ia in 1 .. 11 loop
-    for ib in 1 .. case when d >= 2 then 11 else 1 end loop
-      for ip in 1 .. case when d = 3 then 5 else 1 end loop
-        c := array[ga[ia], case when d >= 2 then ga[ib] end, case when d = 3 then gp[ip] end];
-        f := (pg_temp.d5_run(y, method, c[1], c[2], c[3]))[1]; ev := ev + 1;
-        if fx is null or f < fx - fx * 1e-12 then x := c; fx := f; end if;
-      end loop;
-    end loop;
-  end loop;
-  while ev < 200000 loop
-    bx := null; bf := fx;
-    for i in 1 .. d loop
-      foreach s in array array[1, -1] loop
-        c := x;
-        c[i] := x[i] + s * frac * rg[i];
-        if c[i] < lo[i] then c[i] := lo[i]; elsif c[i] > hi[i] then c[i] := hi[i]; end if;
-        continue when c[i] = x[i];
-        f := (pg_temp.d5_run(y, method, c[1], c[2], c[3]))[1]; ev := ev + 1;
-        if f < bf then bx := c; bf := f; end if;
-      end loop;
-    end loop;
-    if bx is not null then x := bx; fx := bf; continue; end if;
-    if frac <= 9.313225746154785e-10 then conv := 1; exit; end if;
-    frac := frac / 2.0;
-  end loop;
-  return array[x[1], x[2], x[3], fx, conv];
-end $f$;
-
--- The in-sample lag-m naive MAE of a training series (Hyndman and Koehler
--- 2006), null when it has m values or fewer or every difference is 0.
-create or replace function pg_temp.d5_q(y double precision[], m int) returns double precision
-language sql immutable as $f$
-  select case when array_length(y, 1) <= m then null
-              when sum(abs(y[t] - y[t - m])) = 0 then null
-              else sum(abs(y[t] - y[t - m])) / (array_length(y, 1) - m)::double precision end
-    from generate_series(m + 1, array_length(y, 1)) t
 $f$;
 
 -- The quantile rule of lib/stats on SORTED values: idx = n p; a fractional
@@ -152,204 +266,211 @@ begin
   return x[idx::int + 1];
 end $f$;
 
--- The residual bootstrap, rebuilt: nsims paths on one mulberry32 stream,
--- path by path and step by step; each step adds a scored residual drawn with
--- replacement (index floor(u m)) to the one-step forecast, and the simulated
--- value updates the level and trend. Returns the 10th, 50th and 90th
--- percentiles of the paths at each step, 3h numbers: the P90 (low) run,
--- then the P50 run, then the P10 (high) run; a negative percentile is 0
--- when nonneg.
-create or replace function pg_temp.d5_boot(y double precision[], method text, a double precision, b double precision,
-                                           phi double precision, h int, nsims int, seed bigint, nonneg boolean)
-  returns double precision[]
+-- The bootstrap of a minus b: nboot replicates on one mulberry32(seed)
+-- stream rebuilt in 64-bit integer arithmetic; paired draws n positions and
+-- averages a - b there; unpaired draws n for a and then n for b. The
+-- percentile interval at the tails round((1 - level) / 2, 12 places) and one
+-- minus it. Returns [lower, upper].
+create or replace function pg_temp.d5_boot(a double precision[], b double precision[], nboot int, seed bigint,
+                                           level double precision, paired boolean) returns double precision[]
 language plpgsql immutable as $f$
 #variable_conflict use_column
 declare
-  r double precision[] := pg_temp.d5_run(y, method, a, b, phi);
-  pool double precision[] := r[4:array_length(r, 1)];
-  m int := array_length(r, 1) - 3; tr_on boolean := method <> 'ses';
-  ph double precision := case when method = 'damped' then phi else 1.0 end;
-  u double precision[] := pg_temp.d5_u(seed, nsims * h);
-  paths double precision[] := array_fill(0.0::double precision, array[h * nsims]);
-  l double precision; tr double precision; f double precision; ys double precision; ln double precision;
-  k int; j int; q int := 0; srt double precision[];
-  lo double precision[] := '{}'; md double precision[] := '{}'; hi double precision[] := '{}';
-  v double precision;
+  n int := array_length(a, 1); st bigint := seed & 4294967295; t bigint; u double precision;
+  reps double precision[] := array_fill(0.0::double precision, array[nboot]); r int; i int;
+  s double precision; sb double precision; lo double precision; hi double precision; srt double precision[];
 begin
-  for k in 1 .. nsims loop
-    l := r[2]; tr := case when tr_on then r[3] else 0.0 end;
-    for j in 1 .. h loop
-      q := q + 1;
-      f := case when tr_on then l + ph * tr else l end;
-      ys := f + pool[floor(u[q] * m)::int + 1];
-      paths[(j - 1) * nsims + k] := ys;
-      ln := a * ys + (1 - a) * f;
-      if tr_on then tr := b * (ln - l) + (1 - b) * ph * tr; end if;
-      l := ln;
+  for r in 1 .. nboot loop
+    s := 0; sb := 0;
+    for i in 1 .. (case when paired then n else 2 * n end) loop
+      st := (st + 1831565813) & 4294967295;
+      t := pg_temp.d5_imul(st # (st >> 15), st | 1);
+      t := t # ((t + pg_temp.d5_imul(t # (t >> 7), t | 61)) & 4294967295);
+      u := (t # (t >> 14))::double precision / 4294967296.0;
+      if paired then s := s + (a[floor(u * n)::int + 1] - b[floor(u * n)::int + 1]);
+      elsif i <= n then s := s + a[floor(u * n)::int + 1];
+      else sb := sb + b[floor(u * n)::int + 1]; end if;
     end loop;
+    reps[r] := case when paired then s / n::double precision else s / n::double precision - sb / n::double precision end;
   end loop;
-  for j in 1 .. h loop
-    srt := array(select v from unnest(paths[(j - 1) * nsims + 1:j * nsims]) v order by v);
-    v := pg_temp.d5_quant(srt, 0.1); lo := lo || case when nonneg and v < 0 then 0.0 else v end;
-    v := pg_temp.d5_quant(srt, 0.5); md := md || case when nonneg and v < 0 then 0.0 else v end;
-    v := pg_temp.d5_quant(srt, 0.9); hi := hi || case when nonneg and v < 0 then 0.0 else v end;
-  end loop;
-  return lo || md || hi;
+  srt := array(select v from unnest(reps) v order by v);
+  lo := round(((1 - level) / 2.0) * 1000000000000.0) / 1000000000000.0;
+  hi := round((1 - lo) * 1000000000000.0) / 1000000000000.0;
+  return array[pg_temp.d5_quant(srt, lo), pg_temp.d5_quant(srt, hi)];
 end $f$;
 
--- The Arps rate at t (calculateArpsHyperbolic's published forms).
-create or replace function pg_temp.d5_arps_q(qi double precision, di double precision, b double precision,
-                                             t double precision) returns double precision
-language sql immutable as $f$
-  select case when qi <= 0 or di < 0 or t < 0 then 0.0
-              when b <= 0 then qi * exp(-di * t)
-              else qi / power(1 + b * di * t, 1 / b) end
-$f$;
-
--- An Arps fit by least squares on the linearised rate, with the SQL
--- regression aggregates regr_slope and regr_intercept: the exponential on
--- ln q, the harmonic on 1/q, and the hyperbolic on q^-b for b from 0.05 by
--- 0.05 to 2 (the steps accumulated as the decline curve engine accumulates
--- them, the harmonic b skipped), each kept only with finite qi > 0 and
--- Di > 0; the lowest RMSE on the rate scale wins (Auto-Select), or the
--- model named. Zero and negative rates are dropped and t = 0 is the first
--- positive month, each later month at its own index. Returns qi, Di, b,
--- RMSE, the 0-based index of t = 0, and the smallest relative RMSE gap the
--- choice turned on (the route refuses to decide a near tie).
-create or replace function pg_temp.d5_arps(y double precision[], model text) returns double precision[]
+-- The claim grammar: quoted spans (straight or curly double quotes) first,
+-- then ISO dates touching no letter or digit, then numbers (digits with comma
+-- thousands groups and a decimal part; a leading minus only after a
+-- non-alphanumeric; a number after a letter, or after - _ or / that follows a
+-- letter or digit, is part of an identifier). Returns one row per claim:
+-- kind, the date text, the number value, the quote tokens, in text order.
+create or replace function pg_temp.d5_figs(s text, ord_base int)
+returns table(pos int, kind text, dval text, nval double precision, qtoks text[])
 language plpgsql immutable as $f$
 #variable_conflict use_column
 declare
-  t0 int; tt double precision[]; qq double precision[];
-  bb double precision; sl double precision; ic double precision; qi double precision; di double precision;
-  rm double precision; best double precision[] := null; hyp double precision[] := null; second double precision := null;
-  cands double precision[] := '{}'; gap double precision := 'Infinity'; k int; nc int;
+  t text := s; p int := 1; a int; m text; e int; pc text; pp text; neg boolean; v double precision;
 begin
-  select min(i) - 1 into t0 from generate_subscripts(y, 1) i where y[i] > 0;
-  tt := array(select (i - 1 - t0)::double precision from generate_subscripts(y, 1) i where y[i] > 0 order by i);
-  qq := array(select y[i] from generate_subscripts(y, 1) i where y[i] > 0 order by i);
-  if model in ('Exponential', 'Auto-Select') then
-    select regr_slope(ln(q), t), regr_intercept(ln(q), t) into sl, ic from unnest(tt, qq) p(t, q);
-    qi := exp(ic); di := -sl;
-    if qi > 0 and di > 0 and qi < 'Infinity' and di < 'Infinity' then
-      select sqrt(avg((q - pg_temp.d5_arps_q(qi, di, 0.0, t)) ^ 2)) into rm from unnest(tt, qq) p(t, q);
-      cands := cands || array[qi, di, 0.0, rm];
+  loop
+    a := regexp_instr(s, '[0-9]{4}-[0-9]{2}-[0-9]{2}', p);
+    exit when a = 0;
+    m := substr(s, a, 10); e := a + 10;
+    if not (a > 1 and substr(s, a - 1, 1) ~ '[A-Za-z0-9]') and not (substr(s, e, 1) ~ '[A-Za-z0-9]') then
+      pos := a; kind := 'date'; dval := m; nval := null; qtoks := null; return next;
+      t := overlay(t placing repeat(' ', 10) from a for 10);
     end if;
-  end if;
-  if model in ('Harmonic', 'Auto-Select') then
-    select regr_slope(1 / q, t), regr_intercept(1 / q, t) into sl, ic from unnest(tt, qq) p(t, q);
-    if ic <> 0 then
-      qi := 1 / ic; di := sl * qi;
-      if qi > 0 and di > 0 and qi < 'Infinity' and di < 'Infinity' then
-        select sqrt(avg((q - qi / (1 + di * t)) ^ 2)) into rm from unnest(tt, qq) p(t, q);
-        cands := cands || array[qi, di, 1.0, rm];
-      end if;
+    p := e;
+  end loop;
+  p := 1;
+  loop
+    a := regexp_instr(t, '[0-9]+(,[0-9]{3}(?![0-9]))*([.][0-9]+)?', p);
+    exit when a = 0;
+    m := regexp_substr(t, '[0-9]+(,[0-9]{3}(?![0-9]))*([.][0-9]+)?', p);
+    p := a + length(m);
+    pc := case when a > 1 then substr(t, a - 1, 1) else '' end;
+    pp := case when a > 2 then substr(t, a - 2, 1) else '' end;
+    continue when pc ~ '[A-Za-z]';
+    continue when pc in ('-', '_', '/') and pp ~ '[A-Za-z0-9]';
+    neg := pc = '-' and not (pp ~ '[A-Za-z0-9]');
+    v := replace(m, ',', '')::double precision;
+    pos := case when neg then a - 1 else a end; kind := 'number'; dval := null;
+    nval := case when neg then -v else v end; qtoks := null; return next;
+  end loop;
+end $f$;
+
+create or replace function pg_temp.d5_claims(s text)
+returns table(pos int, kind text, dval text, nval double precision, qtoks text[])
+language plpgsql immutable as $f$
+#variable_conflict use_column
+declare t text := s; p int := 1; a int; m text; tk text[];
+begin
+  loop
+    a := regexp_instr(s, '["“][^"“”]*["”]', p);
+    exit when a = 0;
+    m := regexp_substr(s, '["“][^"“”]*["”]', p);
+    tk := pg_temp.d5_tok(substr(m, 2, length(m) - 2));
+    if cardinality(tk) > 0 then
+      pos := a; kind := 'quote'; dval := null; nval := null; qtoks := tk; return next;
     end if;
-  end if;
-  if model in ('Hyperbolic', 'Auto-Select') then
-    bb := 0.05;
-    while bb <= 2 loop
-      if abs(bb - 1) >= 0.001 then
-        select regr_slope(power(q, -bb), t), regr_intercept(power(q, -bb), t) into sl, ic from unnest(tt, qq) p(t, q);
-        if ic > 0 then
-          qi := power(ic, -1 / bb); di := sl / (bb * power(qi, -bb));
-          if qi > 0 and di > 0 and qi < 'Infinity' and di < 'Infinity' then
-            select sqrt(avg((q - pg_temp.d5_arps_q(qi, di, bb, t)) ^ 2)) into rm from unnest(tt, qq) p(t, q);
-            if hyp is null or rm < hyp[4] then
-              if hyp is not null then second := hyp[4]; end if;
-              hyp := array[qi, di, bb, rm];
-            elsif second is null or rm < second then
-              second := rm;
-            end if;
-          end if;
-        end if;
-      end if;
-      bb := bb + 0.05;
-    end loop;
-    if second is not null then gap := least(gap, (second - hyp[4]) / hyp[4]); end if;
-    if hyp is not null then cands := cands || hyp; end if;
-  end if;
-  nc := (coalesce(array_length(cands, 1), 0) / 4.0)::int;
-  if nc = 0 then return null; end if;
-  for k in 0 .. nc - 1 loop
-    if best is null or cands[k * 4 + 4] < best[4] then best := cands[k * 4 + 1:k * 4 + 4]; end if;
+    t := overlay(t placing repeat(' ', length(m)) from a for length(m));
+    p := a + length(m);
   end loop;
-  if model = 'Auto-Select' then
-    for k in 0 .. nc - 1 loop
-      if cands[k * 4 + 4] <> best[4] then gap := least(gap, (cands[k * 4 + 4] - best[4]) / best[4]); end if;
-    end loop;
-  end if;
-  return best || array[t0::double precision, gap];
+  return query select * from pg_temp.d5_figs(t, 0);
 end $f$;
 
--- The coarse grid alone (the first stage of d5_opt): the grid point the
--- search would start from, alpha, beta, phi.
-create or replace function pg_temp.d5_grid(y double precision[], method text) returns double precision[]
+-- Does a passage hold a claim? A date as the same date, a number within
+-- reltol x |passage value| of a passage number, a quote as the same run of
+-- tokens.
+create or replace function pg_temp.d5_in(p_text text, p_kind text, p_dval text, p_nval double precision, p_qtoks text[],
+                                         p_reltol double precision) returns boolean
+language plpgsql immutable as $f$
+declare pt text[]; i int; n int; k int;
+begin
+  if p_kind = 'date' then
+    return exists (select 1 from pg_temp.d5_figs(p_text, 0) f where f.kind = 'date' and f.dval = p_dval);
+  elsif p_kind = 'number' then
+    return exists (select 1 from pg_temp.d5_figs(p_text, 0) f where f.kind = 'number' and abs(p_nval - f.nval) <= p_reltol * abs(f.nval));
+  end if;
+  pt := pg_temp.d5_tok(p_text); n := cardinality(pt); k := cardinality(p_qtoks);
+  for i in 1 .. n - k + 1 loop
+    if pt[i:i + k - 1] = p_qtoks then return true; end if;
+  end loop;
+  return false;
+end $f$;
+
+-- Groundedness of a set of answers ([{query, text, citations}]) over a
+-- passage set, a claim supported only by a passage the answer cites that is
+-- in the corpus and, when runs is not null, in the query's retrieved list.
+-- Returns [pooled supported fraction, mean of the per-answer fractions,
+-- number claims supported / number claims, share of answers with a claim that
+-- are fully supported].
+create or replace function pg_temp.d5_ground(ids text[], texts text[], answers jsonb, runs jsonb, reltol double precision)
+returns double precision[]
 language plpgsql immutable as $f$
 #variable_conflict use_column
 declare
-  d int := case method when 'ses' then 1 when 'holt' then 2 else 3 end;
-  ga double precision[] := array[0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]::double precision[];
-  gp double precision[] := array[0.8, 0.85, 0.9, 0.95, 0.98]::double precision[];
-  x double precision[]; c double precision[]; fx double precision := null; f double precision; ia int; ib int; ip int;
+  an jsonb; c record; elig text[]; nc int; ns int; tc int := 0; ts int := 0; fr double precision[] := '{}';
+  nn int := 0; nns int := 0; full_ int := 0; withc int := 0; sup boolean;
 begin
-  for ia in 1 .. 11 loop
-    for ib in 1 .. case when d >= 2 then 11 else 1 end loop
-      for ip in 1 .. case when d = 3 then 5 else 1 end loop
-        c := array[ga[ia], case when d >= 2 then ga[ib] end, case when d = 3 then gp[ip] end];
-        f := (pg_temp.d5_run(y, method, c[1], c[2], c[3]))[1];
-        if fx is null or f < fx - fx * 1e-12 then x := c; fx := f; end if;
-      end loop;
+  for an in select * from jsonb_array_elements(answers) loop
+    elig := array(select distinct x from jsonb_array_elements_text(an->'citations') x
+                   where x = any(ids) and (runs is null or runs->(an->>'query') ? x));
+    nc := 0; ns := 0;
+    for c in select * from pg_temp.d5_claims(an->>'text') order by pos loop
+      sup := exists (select 1 from unnest(elig) e
+                      where pg_temp.d5_in(texts[array_position(ids, e)], c.kind, c.dval, c.nval, c.qtoks, reltol));
+      nc := nc + 1; if sup then ns := ns + 1; end if;
+      if c.kind = 'number' then nn := nn + 1; if sup then nns := nns + 1; end if; end if;
     end loop;
+    tc := tc + nc; ts := ts + ns;
+    if nc > 0 then fr := fr || (ns / nc::double precision); withc := withc + 1; if ns = nc then full_ := full_ + 1; end if; end if;
   end loop;
-  return x;
+  return array[case when tc > 0 then ts / tc::double precision end,
+               (select avg(v) from unnest(fr) v),
+               case when nn > 0 then nns / nn::double precision end,
+               case when withc > 0 then full_ / withc::double precision end];
 end $f$;
 
--- A rolling-origin backtest with an expanding window: origins fo, fo + st,
--- ... while o + hz <= n; at each origin months 0 to o - 1 are fitted
--- (refitted by d5_opt, or held at the first origin's parameters) and hz steps
--- are forecast; e = actual - forecast; each |e| is scaled by its own origin's
--- lag-m naive in-sample MAE. method 'arps' fits d5_arps(model) on every
--- window instead. Returns the pooled RMSE, MAE, MASE (null when any origin
--- has no scale) and ME, then the MAE at each step ahead, then the number of
--- origins, then 1 when every fit stopped by the rule (for arps: the smallest
--- relative RMSE gap its model choices turned on).
-create or replace function pg_temp.d5_bt(y double precision[], method text, fo int, hz int, st int,
-                                         refit boolean, m int, model text) returns double precision[]
+-- Cohen's kappa on integer grades with the labels in order: 1 - sum w O /
+-- sum w E, w 0 on the diagonal and 1 off it (none), |i - j| (linear) or
+-- (i - j)^2 (quadratic). Returns [kappa, observed agreement, observed
+-- weighted disagreement].
+create or replace function pg_temp.d5_kappa(a int[], b int[], labels int[], weights text) returns double precision[]
 language plpgsql immutable as $f$
 #variable_conflict use_column
 declare
-  n int := array_length(y, 1); o int; j int; k int := 0; tr double precision[]; p double precision[];
-  hp double precision[] := null; r double precision[]; fc double precision[]; ar double precision[];
-  q double precision; e double precision; se double precision := 0.0; sa double precision := 0.0;
-  sm double precision := 0.0; sq double precision := 0.0; qnull boolean := false; cnt int := 0;
-  byh double precision[] := array_fill(0.0::double precision, array[hz]); conv double precision := 1.0;
-  gap double precision := 'Infinity';
+  m int := array_length(labels, 1); n int := array_length(a, 1); i int; j int; w double precision;
+  o double precision; rw double precision; cl double precision; num double precision := 0; den double precision := 0;
+  agree double precision := 0;
 begin
-  o := fo;
-  while o + hz <= n loop
-    k := k + 1;
-    tr := y[1:o];
-    if method = 'arps' then
-      ar := pg_temp.d5_arps(tr, model);
-      gap := least(gap, ar[6]);
-      fc := array(select pg_temp.d5_arps_q(ar[1], ar[2], ar[3], (o + j - 1 - ar[5])::double precision) from generate_series(1, hz) j order by j);
+  for i in 1 .. m loop
+    for j in 1 .. m loop
+      w := case when weights = 'none' then (case when i = j then 0 else 1 end)
+                when weights = 'linear' then abs(i - j) else (i - j) ^ 2 end;
+      select count(*) into o from generate_series(1, n) k where a[k] = labels[i] and b[k] = labels[j];
+      select count(*) into rw from unnest(a) x where x = labels[i];
+      select count(*) into cl from unnest(b) x where x = labels[j];
+      num := num + w * o; den := den + (w * rw * cl) / n;
+      if i = j then agree := agree + o; end if;
+    end loop;
+  end loop;
+  return array[1 - num / den, agree / n, num / n];
+end $f$;
+
+-- Calibration at m equal-width bins. rule 'engine': p is in bin i when
+-- i/m <= p < (i+1)/m, the edges as computed in double precision, 1 in the
+-- last bin; rule 'library': a probability exactly on an interior edge goes to
+-- the LOWER bin. Returns [Brier, REL, RES, UNC, WBV, WBC, ECE], WBC = 2 sum
+-- (y - observed_k)(p - mean p_k) / N as Stephenson, Coelho and Jolliffe
+-- (2008) label it in their eq. 7.
+create or replace function pg_temp.d5_cal(y int[], p double precision[], m int, rule text) returns double precision[]
+language plpgsql immutable as $f$
+#variable_conflict use_column
+declare
+  n int := array_length(y, 1); bin int[] := '{}'; i int; k int; e int; ob double precision; brier double precision := 0;
+  rel double precision := 0; res double precision := 0; wbv double precision := 0; wbc double precision := 0; ece double precision := 0;
+  nk int; pk double precision; ok double precision;
+begin
+  for i in 1 .. n loop
+    k := least(m - 1, floor(p[i] * m)::int);
+    if rule = 'engine' then
+      if k > 0 and p[i] < k / m::double precision then k := k - 1;
+      elsif k < m - 1 and p[i] >= (k + 1) / m::double precision then k := k + 1; end if;
     else
-      if refit or hp is null then p := pg_temp.d5_opt(tr, method); conv := least(conv, p[5]); hp := p; else p := hp; end if;
-      r := pg_temp.d5_run(tr, method, p[1], p[2], p[3]);
-      fc := pg_temp.d5_fc(method, r[2], r[3], p[3], hz);
+      for e in 1 .. m - 1 loop if p[i] = e / m::double precision then k := e - 1; end if; end loop;
     end if;
-    q := pg_temp.d5_q(tr, m);
-    if q is null then qnull := true; end if;
-    for j in 1 .. hz loop
-      e := y[o + j] - fc[j];
-      cnt := cnt + 1; se := se + e; sa := sa + abs(e); sq := sq + e * e;
-      if q is not null then sm := sm + abs(e) / q; end if;
-      byh[j] := byh[j] + abs(e);
-    end loop;
-    o := o + st;
+    bin := bin || k;
+    brier := brier + (p[i] - y[i]) ^ 2;
   end loop;
-  return array[sqrt(sq / cnt), sa / cnt, case when qnull then null else sm / cnt end, se / cnt]
-         || array(select byh[j] / k from generate_series(1, hz) j order by j)
-         || array[k::double precision, case when method = 'arps' then gap else conv end];
+  brier := brier / n;
+  ob := (select avg(v::double precision) from unnest(y) v);
+  for k in 0 .. m - 1 loop
+    select count(*), avg(p[i2]), avg(y[i2]::double precision) into nk, pk, ok from generate_series(1, n) i2 where bin[i2] = k;
+    continue when nk = 0;
+    rel := rel + nk * (pk - ok) ^ 2; res := res + nk * (ok - ob) ^ 2; ece := ece + (nk / n::double precision) * abs(ok - pk);
+    wbv := wbv + (select sum((p[i2] - pk) ^ 2) from generate_series(1, n) i2 where bin[i2] = k);
+    wbc := wbc + (select sum((y[i2] - ok) * (p[i2] - pk)) from generate_series(1, n) i2 where bin[i2] = k);
+  end loop;
+  return array[brier, rel / n, res / n, ob * (1 - ob), wbv / n, (2 * wbc) / n, ece];
 end $f$;

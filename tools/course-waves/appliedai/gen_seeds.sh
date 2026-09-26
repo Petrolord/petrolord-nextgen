@@ -1,16 +1,13 @@
 #!/usr/bin/env bash
-# CARRIED FROM D4 (forecastml) WITH ITS NAMES REWRITTEN, AND NOT YET D5's. This
-# ship-phase generator is finished at the ship phase, when the banks and the
-# capstone case files exist; until then its D4 content (datasets, prompts,
-# checks) is not D5's and it is not run by run_gates.py.
 # =============================================================================
-# D4 SEEDS AND CASE FILES, GENERATED FROM THE COMMITTED TREE AND NEVER FROM A
-# WORKING TREE. Adapted from tools/course-waves/facies/gen_seeds.sh (D3).
+# D5 SEEDS AND CASE FILES, GENERATED FROM THE COMMITTED TREE AND NEVER FROM A
+# WORKING TREE. Adapted from tools/course-waves/forecastml/gen_seeds.sh (D4).
 #
 # This script stages the COMMITTED tree first: wave.json, fields.json,
 # precision.json, digest.txt, the capstone generator d5_capstone.mjs, the three
 # tier headers, every manifest.json, all 21 bank JSONs, the vendored engine
-# closure (engines/dataai/forecast.js, engines/dca/arps.js and the two lib files forecast.js imports) and the one
+# closure (engines/dataai/evaluate.js, engines/dataai/ml.js, the three lib files
+# they import, and the five ekene-docs fixtures d5_capstone.mjs draws from) and the one
 # tolerance module gradedTolerance.js are pulled out of the git object store at
 # REF with `git show` into a throwaway directory, and all three generators are
 # pointed at that. The ENGINE the course generator runs is the committed one,
@@ -34,13 +31,13 @@ fi
 REPO=${REPO:-$DEFAULT_REPO}
 KIT=${KIT:-/root/dc-wavekit}
 SLUG=appliedai
-PREFIX=d4
-DATE=20261103
+PREFIX=d5
+DATE=20261104
 
-STAGE=$(mktemp -d /tmp/d4seed.XXXXXX)
+STAGE=$(mktemp -d /tmp/d5seed.XXXXXX)
 OUTDIR="$STAGE/out"
 trap 'rm -rf "$STAGE"' EXIT
-mkdir -p "$STAGE/banks" "$OUTDIR" "$OUTDIR/cases" "$STAGE/repo/src/content/courses/$SLUG" "$STAGE/engines/engines/dataai" "$STAGE/engines/engines/dca" "$STAGE/engines/lib/stats" "$STAGE/engines/lib/conventions"
+mkdir -p "$STAGE/banks" "$OUTDIR" "$OUTDIR/cases" "$STAGE/repo/src/content/courses/$SLUG" "$STAGE/engines/engines/dataai" "$STAGE/engines/lib/stats" "$STAGE/engines/lib/conventions" "$STAGE/engines/lib/lp" "$STAGE/engines/test-data/dataai/ekene-docs"
 
 echo "repo:    $REPO"
 echo "staging the committed tree at $REF into $STAGE"
@@ -53,7 +50,9 @@ git -C "$REPO" show "$REF:tools/course-waves/$SLUG/wave.json" \
 for f in fields.json precision.json digest.txt d5_capstone.mjs hdr_beginner.txt hdr_intermediate.txt hdr_advanced.txt; do
   git -C "$REPO" show "$REF:tools/course-waves/$SLUG/$f" > "$STAGE/$f"
 done
-for e in engines/dataai/forecast.js engines/dca/arps.js lib/stats/stats.js lib/conventions/percentile.js; do
+for e in engines/dataai/evaluate.js engines/dataai/ml.js lib/stats/stats.js lib/conventions/percentile.js lib/lp/simplex.js \
+         test-data/dataai/ekene-docs/corpus.json test-data/dataai/ekene-docs/queries.json test-data/dataai/ekene-docs/systems.json \
+         test-data/dataai/ekene-docs/extraction.json test-data/dataai/ekene-docs/calibration.json; do
   git -C "$REPO" show "$REF:packages/engines/$e" > "$STAGE/engines/$e"
 done
 git -C "$REPO" show "$REF:src/components/course/panels/$SLUG/gradedTolerance.js" > "$STAGE/gradedTolerance.js"

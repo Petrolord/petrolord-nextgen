@@ -1,11 +1,7 @@
 #!/usr/bin/env bash
-# CARRIED FROM D4 (forecastml) WITH ITS NAMES REWRITTEN, AND NOT YET D5's. This
-# ship-phase generator is finished at the ship phase, when the banks and the
-# capstone case files exist; until then its D4 content (datasets, prompts,
-# checks) is not D5's and it is not run by run_gates.py.
 # =============================================================================
-# D4 appliedai "Data-Driven Production Forecasting" SEED LADDER, content-addressed. The owner's
-# script. Adapted from apply_d3_facies.sh (D3): content pins read out of the git
+# D5 appliedai "Applied AI and Language Models" SEED LADDER, content-addressed.
+# The owner's script. Adapted from apply_d4_forecastml.sh (D4): content pins read out of the git
 # object store, never a working tree, and the same mode set (verify, dryrun,
 # attempts, prod-status, prod-dryrun, apply --prod, rows).
 #
@@ -15,9 +11,16 @@
 # sha256 below, pinned to the head of feat/d5-appliedai-course, or the run REFUSES
 # and names the file. Re-pin only with `pin <ref>`, never by hand.
 #
+# THE COURSE SEED GOES FIRST. The three deep seeds reference the course row
+# (a foreign key on app_slug), so a deep seed run alone before the course row
+# exists is refused by the database. apply --prod applies the course seed
+# first, and prod-status judges each deep seed inside a rolled-back
+# transaction that runs the course seed ahead of it (a no-op once the course
+# row exists), so the pre-check never reports a false FK refusal.
+#
 # THE FIVE FILES.
 #   20261104_d5_appliedai_course             catalogue row (coming_soon, module
-#                                         data_ai, path_order 69) + 3 capstones,
+#                                         data_ai, path_order 70) + 3 capstones,
 #                                         18 graded fields
 #   20261104_d5_appliedai_{beginner,intermediate,advanced}_deep
 #                                         3 structures, 78 lesson keys, 396 questions
@@ -26,8 +29,8 @@
 #                                         second-route and trap assertions.
 #
 # =========================== THE UPLOAD GATE ================================
-# The 78 lessons, the teaching lab, the three explorer panels and the three
-# capstone case files ship in the NextGen ZIP and not in this database. Upload
+# The 78 lessons, the teaching lab (evaluateLab.js), the three explorer panels
+# and the three capstone case files ship in the NextGen ZIP and not in this database. Upload
 # the zip FIRST. The four seeds may then be applied (the course stays
 # coming_soon, invisible to learners). The go-live runs ONLY after the deployed
 # site serves /dashboard/apps/appliedai: serve the built DashboardPage chunk and see
@@ -68,7 +71,7 @@ set -u
 REF=${REF:-origin/main}
 NG_REPO=${NG_REPO:-/opt/petrolord-studio/workspaces/dev1/projects/petrolord-nextgen}
 HERE=$(cd "$(dirname "$0")" && pwd)
-RUN=$(mktemp -d /tmp/d4apply.XXXXXX)
+RUN=$(mktemp -d /tmp/d5apply.XXXXXX)
 SLUG=appliedai
 
 SEEDS="20261104_d5_appliedai_course
@@ -120,8 +123,13 @@ HASH_Q="md5(coalesce((select string_agg(md5(a::text), ',') from (select slug, na
  || coalesce((select string_agg(md5(q::text), ',' order by q.tier, q.scope, q.module_key, q.ord) from (select tier, scope, module_key, ord, prompt, options, answer_index, explanation, active from public.academy_quiz_questions where app_slug = 'appliedai') q), '')
  || coalesce((select string_agg(md5(c::text), ',' order by c.tier) from (select tier, cert_tier, dataset, title, prompt, fields from public.academy_capstones where app_slug = 'appliedai') c), ''))"
 
+COURSE_SEED=20261104_d5_appliedai_course
 state_of() {  # file -> PENDING | ALREADY-APPLIED | REFUSED:<reason>
-  { echo "begin;"; echo "create temp table d5_before on commit drop as select $HASH_Q as h;"
+  { echo "begin;"
+    # A deep seed is judged with the course seed run ahead of it in the same
+    # rolled-back transaction (the FK on app_slug), a no-op once it is applied.
+    [ "$1" = "$COURSE_SEED" ] || { cat "$RUN/$COURSE_SEED.sql"; echo; }
+    echo "create temp table d5_before on commit drop as select $HASH_Q as h;"
     cat "$RUN/$1.sql"; echo
     echo "select case when (select h from d5_before) = $HASH_Q then 'ALREADY-APPLIED' else 'PENDING' end as d5_state;"
     echo "rollback;"; } > "$RUN/$1.state.sql"
@@ -133,12 +141,12 @@ state_of() {  # file -> PENDING | ALREADY-APPLIED | REFUSED:<reason>
 }
 
 golive_state() {
-  echo "select 'D4|' || coalesce((select status from public.academy_apps where slug = 'appliedai'), 'absent') as d5_golive;" > "$RUN/golive.sql"
+  echo "select 'D5|' || coalesce((select status from public.academy_apps where slug = 'appliedai'), 'absent') as d5_golive;" > "$RUN/golive.sql"
   out=$(prod_q "$RUN/golive.sql")
-  case "$(grep -oE 'D4\|[a-z_]+' <<<"$out" | head -1)" in
-    'D4|available') echo APPLIED ;;
-    'D4|coming_soon') echo HELD ;;
-    'D4|absent') echo "HELD (the course row is not seeded yet)" ;;
+  case "$(grep -oE 'D5\|[a-z_]+' <<<"$out" | head -1)" in
+    'D5|available') echo APPLIED ;;
+    'D5|coming_soon') echo HELD ;;
+    'D5|absent') echo "HELD (the course row is not seeded yet)" ;;
     *) echo UNKNOWN ;;
   esac
 }
@@ -177,9 +185,9 @@ SQL
 rows() {
   d=$(date -u +%F)
   for f in $SEEDS; do
-    echo "| $d | \`$f.sql\` | D4 Data-Driven Production Forecasting (appliedai), seed | **APPLIED $d** by the owner via tools/course-waves/appliedai/apply_d5_appliedai.sh apply --prod from $REF (content pinned by sha256; scratch dry run and prod rolled-back dry run first) |"
+    echo "| $d | \`$f.sql\` | D5 Applied AI and Language Models (appliedai), seed | **APPLIED $d** by the owner via tools/course-waves/appliedai/apply_d5_appliedai.sh apply --prod from $REF (content pinned by sha256; scratch dry run and prod rolled-back dry run first) |"
   done
-  echo "| $d | \`$GOLIVE.sql\` | D4 Data-Driven Production Forecasting (appliedai), GO-LIVE: coming_soon to available | **APPLIED $d** via apply_d5_appliedai.sh apply --prod --go-live, after the deployed site served /dashboard/apps/appliedai |"
+  echo "| $d | \`$GOLIVE.sql\` | D5 Applied AI and Language Models (appliedai), GO-LIVE: coming_soon to available | **APPLIED $d** via apply_d5_appliedai.sh apply --prod --go-live, after the deployed site served /dashboard/apps/appliedai |"
 }
 
 dryrun() {

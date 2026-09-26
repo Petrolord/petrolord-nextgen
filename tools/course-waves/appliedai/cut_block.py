@@ -1,8 +1,4 @@
 #!/usr/bin/env python3
-# CARRIED FROM D4 (forecastml) WITH ITS NAMES REWRITTEN, AND NOT YET D5's. This
-# ship-phase generator is finished at the ship phase, when the banks and the
-# capstone case files exist; until then its D4 content (datasets, prompts,
-# checks) is not D5's and it is not run by run_gates.py.
 """Cut named check blocks out of the go-live on stdin, for dryrun_d5.sh's
 negative controls only. `ledger` is the engine-ledger block, `route` the second
 route in SQL. A block runs from its section banner to the next banner, and the
