@@ -107,7 +107,7 @@
    "TET changes by 26785663.028773 and the levy by -35714217.371697"
   ],
   "answer": 3,
-  "explanation": "The one-change row prints TET 26785663.028773 and levy -35714217.371697. Forcing the Act alone swaps the development levy for the tertiary education tax and changes the capital allowance and the restriction, so the two lines do not trade at par. A forced run puts every year on one framework, whatever its date."
+  "explanation": "The one-change row prints TET 26785663.028773 and levy -35714217.371697. Forcing the Act alone swaps the development levy for the tertiary education tax, and the two are charged at different rates on the same companies income tax assessable profit, 3 percent against 4 percent, so the two lines do not trade at par. A forced run puts every year on one framework, whatever its date."
  },
  {
   "prompt": "The 2024 spend on ekene_onshore_across_2026 reaches its fifth year of life in 2028. What fraction does 2028 claim?",

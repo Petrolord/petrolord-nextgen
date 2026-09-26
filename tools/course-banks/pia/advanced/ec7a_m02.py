@@ -92,7 +92,7 @@ x("Ekene Alpha is rerun with every year forced to the Act alone. What happens to
  ["A straight swap at par: TET changes by 35714217.371697 and the levy by -35714217.371697",
   "Both move by 0.000000, since Alpha has no year before 2026 for the Act alone to govern in the first place",
   "Only the education tax moves, by 26785663.028773, the levy staying in the years the new Act reached"],
- "The one-change row prints TET 26785663.028773 and levy -35714217.371697. Forcing the Act alone swaps the development levy for the tertiary education tax and changes the capital allowance and the restriction, so the two lines do not trade at par. A forced run puts every year on one framework, whatever its date.")
+ "The one-change row prints TET 26785663.028773 and levy -35714217.371697. Forcing the Act alone swaps the development levy for the tertiary education tax, and the two are charged at different rates on the same companies income tax assessable profit, 3 percent against 4 percent, so the two lines do not trade at par. A forced run puts every year on one framework, whatever its date.")
 
 # 11
 x("The 2024 spend on ekene_onshore_across_2026 reaches its fifth year of life in 2028. What fraction does 2028 claim?",

@@ -59,9 +59,9 @@ x("What royalty rate do the Petroleum Royalty Regulations 2022 give natural gas 
 # 6
 x("PIA s.260(2) allocates the costs of associated gas to crude oil. What does the engine do in its place?",
  "Enters shared costs in the hydrocarbon tax at the crude-plus-condensate share of gross revenue, since it cannot tell the two gases apart",
- ["Reads a gas tag on each production row and puts every associated gas cost on crude oil",
-  "All condensate treated as non-associated, with every barrel of it kept out of the tax",
-  "It charges gas revenue to the tax at the crude-plus-condensate share of the revenue"],
+ ["Reads a gas tag on each production row, associated or non-associated, and puts every associated gas cost on crude oil as s.260(2) says",
+  "All condensate treated as non-associated gas condensate under s.260(1)(b)(ii), with every barrel of it kept out of the tax",
+  "It charges gas revenue to the hydrocarbon tax at the crude-plus-condensate share of the revenue, so associated gas pays with crude"],
  "The engine's note: \"Opex, HCDT, NDDC, capital allowances and any decommissioning contribution enter the hydrocarbon tax at the crude-plus-condensate share of gross revenue. The Act allocates associated-gas costs to crude oil (s.260(2)) and excludes non-associated gas condensate from the tax (s.260(1)(b)(ii)); the engine cannot tell the two gases apart.\" Gas revenue stays outside the tax.")
 
 # 7
@@ -123,9 +123,9 @@ x("What do PIA s.302(6) and NTA s.80(1) give investors in gas pipelines?",
 # 14
 x("What do PIA s.305 and NTA s.88(1) say about stabilisation clauses in contracts made after the Act's commencement?",
  "They do not shield contractors from changes to the listed fiscal provisions, favourable or unfavourable; NTA s.88(1) adds that changes must not discriminate",
- ["Fiscal terms of a converted lease frozen at its conversion date for the life of the lease",
-  "Protection from unfavourable changes only, favourable changes passing straight through",
-  "They bind only production sharing contracts signed before commencement"],
+ ["Fiscal terms of a converted lease frozen at its conversion date for the life of the lease, whatever later Acts change",
+  "Protection from unfavourable changes only, favourable changes to the listed fiscal provisions passing straight through to the contractor",
+  "They bind only production sharing contracts signed before commencement, leaving every lease and licence outside their reach"],
  "S.305: such clauses \"shall not be applicable to the fiscal provisions listed in this section, regardless of whether these changes affect the contractor favorably or unfavorably,\". NTA s.88(1) restates it, \"provided such changes in fiscal provi- sion are being made in a manner that is not discriminatory to the petroleum industry or the contractor.\" Stabilisation is concept-only.")
 
 # 15

@@ -87,19 +87,19 @@ x("How is each row of the course's one-change-at-a-time table on Ekene Alpha bui
  "The course sets it out: Ekene Alpha as the base case, then ONE stated change at a time, each run through the engine, and the differences derived as the changed run less the base, line by line. That is why a higher price prints positive (43566660.591831 on royalties) and a prospecting licence negative (-102385291.793528).")
 
 # 10
-x("Forcing every year of Ekene Alpha to the Act alone moves the hydrocarbon tax by 436533.662718 and companies income tax by 450000.000000. Which provisions account for those two movements?",
- "The capital allowance and the two thirds restriction, which the framework of a year changes",
- ["Royalty tranches, which the Act alone reads on a monthly daily rate",
-  "Development levy, deducted in both tax bases in years under the new Act",
+x("Forcing every year of Ekene Alpha to the Act alone moves the hydrocarbon tax by 436533.662718 and companies income tax by 450000.000000. Which provision accounts for those two movements?",
+ "The 1 percent of each spend that its fifth year of life leaves unclaimed",
+ ["The two thirds restriction, which the Act alone applies to both tax bases",
+  "Development levy, deducted in both tax bases under the new Act",
   "The royalty by price, whose benchmarks the Act alone starts a year earlier"],
- "The course reads the forced row: forcing the Act alone swaps the development levy for the tertiary education tax and changes the capital allowance and the restriction. Royalties on that row are 0.000000, so neither the tranches nor the royalty by price moved, and the levy is charged on the companies income tax assessable profit.")
+ "Alpha spends 120000000 in 2026 and 30000000 in 2027, and each spend reaches its fifth year of life in a year the forced run reads under the Act alone, where the fifth year claims 0.190000 against 0.200000 under the Nigeria Tax Act 2025. The 1 percent left unclaimed raises companies income tax by 450000.000000 at 30 percent, and the hydrocarbon tax by 436533.662718, since that tax takes the allowance at the liquids share. The two thirds restriction limits the companies income tax allowance only, so it cannot reach the hydrocarbon tax; royalties on the row are 0.000000, so the royalty by price did not move; and the levy is charged on the companies income tax assessable profit.")
 
 # 11
 x("Which engine note explains why the additional tax at the fiscal price of PIA s.268 does not appear on any ledger?",
  "\"The realised oil and condensate prices stand in for the Commission's fiscal prices (PIA Seventh Schedule para 8), so the additional tax at the fiscal price (PIA s.268; NTA s.73) is not computed.\"",
- ["Daily-rate note, which reads a year's crude oil and condensate over its calendar days",
-  "Shared-costs note, on costs entering the hydrocarbon tax at the crude-plus-condensate share",
-  "The note on the minimum effective tax rate, which is reported as a project-level top-up"],
+ ["The daily-rate note, which says the royalty tranches read the year's crude oil plus condensate over the calendar days of the year and so leave the fiscal price aside",
+  "Shared-costs note, which says opex, HCDT, NDDC and the capital allowances enter the hydrocarbon tax at the crude-plus-condensate share of gross revenue",
+  "The note on the minimum effective tax rate, which says the top-up is a project-level approximation of NTA s.57 reported on its own line in NTA years"],
  "That is the fiscalPrice note, printed on every PIA ledger. The fiscal oil price and the additional tax at it are concept-only. The daily-rate note is about the royalty tranches, the shared-costs note about cost allocation, and the minimum ETR note about NTA s.57.")
 
 # 12

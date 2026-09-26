@@ -50,9 +50,9 @@ x("A deep offshore ledger running into 2026 is given no pia_deep_offshore_hct_in
 # 5
 x("The reading is set to \"custom\" and no custom rate is stated. What comes back?",
  "The refusal \"pia_deep_offshore_hct_interpretation \"custom\" needs pia_deep_offshore_hct_custom_rate_pct as a number from 0 to 100; got null.\"",
- ["Runs at a custom rate of 20 percent, the figure the course's own three-readings table uses for it",
-  "Zero percent: the custom reading falls back to conservative_zero when it has no rate",
-  "A ledger at 30 percent, the custom reading taking the s.72(a) class when no figure is written in"],
+ ["Runs at a custom rate of 20 percent, the figure the course's own three-readings table uses for it, with a note naming that default",
+  "Zero percent: the custom reading falls back to conservative_zero when it has no rate, and the ledger prints a note saying so",
+  "A ledger at 30 percent, the custom reading taking the s.72(a) class of converted leases when no figure is written in"],
  "That is the engine's own message for this input: a custom reading needs its rate stated as a number from 0 to 100. The 20 in the course's table is a stated example, and the engine fills in no rate from another reading, so a custom reading with no rate is refused.")
 
 # 6
@@ -98,9 +98,9 @@ x("On the two NTA decommissioning fund cases (synthetic, shallow water, 2026 to 
 # 11
 x("What does NTA s.86 require before a decommissioning fund contribution is deductible?",
  "At least 30% of the fund in an escrow account with a Nigerian bank accredited under criteria of the Central Bank of Nigeria with the Service",
- ["The whole fund held in an escrow account the Commission controls, audited each year by the Service",
-  "Payment of 30% of each year's contribution into the Federation Account before any deduction is made",
-  "At least 30% of the fund invested in Nigerian government bonds that the Commission has approved"],
+ ["The whole fund held in an escrow account the Commission controls, audited each year by the Service before the deduction is allowed",
+  "Payment of 30% of each year's contribution into the Federation Account before any part of that contribution is deducted",
+  "At least 30% of the fund invested in Nigerian government bonds that the Commission has approved, held to maturity"],
  "S.86(a) requires that \"the licensee or lessee deposit a minimum of 30% of the\" fund with a Nigerian bank in escrow, and s.86(b) that \"the Nigerian bank is accredited in accordance with the criteria for accreditation for participation in the management of the fund, determined by the Central Bank of Nigeria in collaboration with the Service.\" A minimum of 30 percent, a bank and an escrow account are the condition.")
 
 # 12

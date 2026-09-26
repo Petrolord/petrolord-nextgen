@@ -79,10 +79,10 @@
  {
   "prompt": "A new-acreage onshore lease is run with pia_new_pml_hct_rate_pct left unset. What does the engine return?",
   "options": [
-   "It runs at 30 percent, with a note in kpis.pia_notes naming 30 as the default it chose for the lease",
+   "It runs at 30 percent, the s.267(a) class, with a note in kpis.pia_notes naming 30 as the default it chose for a lease out of new acreage",
    "A refusal that opens \"A new-acreage petroleum mining lease onshore or in shallow water needs pia_new_pml_hct_rate_pct set to 15 or 30; got null.\"",
-   "The ledger at 15 percent, the s.267(b) class for onshore and shallow water, printed with no note",
-   "Hydrocarbon tax of 0.000000 in every year, as deep offshore pays in a year under the Act alone"
+   "The ledger at 15 percent, the s.267(b) class for onshore and shallow water, printed with no note and no mention of the rate it chose",
+   "Hydrocarbon tax of 0.000000 in every year until a rate is stated, as deep offshore pays in a year under the Act alone"
   ],
   "answer": 1,
   "explanation": "That is the engine's own refusal, and it goes on to say the rate is \"a stated user choice with no default\". A value the texts leave open is a stated input and a run without it is refused, so neither 15 nor 30 is filled in silently. A note in kpis.pia_notes accompanies a result, and a refusal returns no result at all."

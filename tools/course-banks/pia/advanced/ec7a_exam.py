@@ -106,7 +106,7 @@ x("In 2025 the Ekene deep offshore lease has an HCT chargeable profit of 7956466
  "The 2025 row, a year under the Act alone: HCT 0.000000 and CIT 291253998.059867. The lease has a chargeable profit and pays no hydrocarbon tax, because PIA s.260(3) keeps deep offshore outside the tax, and companies income tax is charged on the whole profit. The stated reading matters only in years under the Nigeria Tax Act 2025.")
 
 # 12
-x("Take the deep offshore case into 2027 with pia_deep_offshore_hct_custom_rate_pct stated as 20. Which 2027 figure does the engine print on the tax line?",
+x("Take the deep offshore case into 2027 under the custom reading, with pia_deep_offshore_hct_custom_rate_pct stated as 20. Which 2027 figure does the engine print on the tax line?",
  "202851668.220565, quoted with the custom 20 reading beside the other two",
  ["304277502.330847, the figure that the course calls the law for deep offshore from 2026",
   "0.000000, since any custom reading below 30 is read by the engine as conservative_zero",
@@ -132,9 +132,9 @@ x("Which two values in this course rest on secondary sources, and how does the c
 # 15
 x("How does the engine's daily rate for the royalty tranches differ from the Regulations' own method?",
  "It divides the year's crude oil plus condensate by the calendar days; the Regulations divide each month's production by the days oil was produced",
- ["Crude oil alone over 365 days, leaving condensate out of the rate the tranches read",
-  "Each month's production over the days in the month, as r.12(2) directs, then averaged",
-  "The stated peak rate of the year, since the tranches in para 10 are set per day"],
+ ["Crude oil alone over 365 days in every year, leap years included, leaving condensate out of the daily rate the tranches read",
+  "Each month's production over the days oil was produced in that month, as r.12(2) directs, then averaged over the twelve months of the year",
+  "The stated peak daily rate of the year, since the tranches of para 10 are set per day and a year's peak decides its band"],
  "The engine's note: \"Royalty tranches read the year's crude oil plus condensate divided by the calendar days of the year; the Regulations (r.12(2)) divide each month's production by the days oil was produced in that month.\" Condensate counts in the daily rate, and 2024 and 2028 have 366 calendar days.")
 
 # 16
@@ -236,9 +236,9 @@ x("What does the additional tax of PIA s.268 compare a company's chargeable tax 
 # 28
 x("How do the Petroleum Royalty Regulations 2022 work out the royalty rate of a field lying partly onshore and partly in shallow water?",
  "Compute the rate as if the whole field were onshore and as if it were all in shallow water, then weight the two by each terrain's share",
- ["Charge the whole field at the higher onshore rate, since para 10(7) favours the Federation",
-  "Charge it at the shallow water rate, since the engine reads the water depth of each well",
-  "Split the field into two ledgers and apply the tranches to each part's own daily rate"],
+ ["Charge the whole field at the onshore rate, the higher of the two terrain rates above 10,000 bopd, since para 10(7) favours the Federation",
+  "Charge it at the shallow water rate, since the engine reads the water depth of each well and the deeper wells decide the terrain of the field",
+  "Split the field into two ledgers, one per terrain, and apply each terrain's tranches to that part's own daily rate alone"],
  "R.14(5) opens \"(5) The weighted average royalty rate calculation for a field partially in onshore and partially in shallow water shall be as follows: (a) determine the royalty rate as if the entire field is onshore ;\", and the course's paraphrase completes the method with the shallow water rate and each terrain's share of production. The engine takes one terrain string and never reads the water depth, so this is concept-only.")
 
 # 29
@@ -260,9 +260,9 @@ x("Who administers royalty under the Nigeria Tax Act 2025, set beside the Petrol
 # 31
 x("Where does the development levy of NTA s.59 go, and which profits does s.59(4) keep it off?",
  "Into a special account, shared by fixed percentages with half to the Tertiary Education Trust Fund; s.59(4) keeps it off profits computed for hydrocarbon tax",
- ["Into the Federation Account with every other petroleum revenue, charged on the hydrocarbon tax profit as well",
-  "Wholly to the Tertiary Education Trust Fund, as the education tax went, on the hydrocarbon tax base",
-  "Into the Nigerian Sovereign Investment Authority, charged on gross revenue less royalties"],
+ ["Into the Federation Account with every other petroleum revenue under PIA s.258(2), charged on the hydrocarbon tax profit as well as on the income tax base",
+  "Wholly to the Tertiary Education Trust Fund, as the education tax went, and charged on the hydrocarbon tax assessable profit of the year",
+  "Into the Nigerian Sovereign Investment Authority beside the royalty by price, charged at 4 percent of gross revenue less royalties"],
  "The Service collects the levy into a special account (s.59(2)) and shares it by fixed percentages, 50 percent to the Tertiary Education Trust Fund (s.59(3)), and s.59(4) keeps it off assessable profits computed for hydrocarbon tax. The engine charges it on the companies income tax assessable profit in years under the Nigeria Tax Act 2025.")
 
 # 32
@@ -300,9 +300,9 @@ x("What does NTA Sixth Schedule para 2(1) keep of the cost price ratio?",
 # 36
 x("A ledger states pia_capex_recovery_years as 4. What does the engine say?",
  "\"pia_capex_recovery_years is 4, but the PIA Fifth Schedule para 17(1) and NTA First Schedule Part II para 14(1) fix the capital allowance at five years (20, 20, 20, 20, 19 percent under the PIA; 20 percent a year under the NTA).\"",
- ["Runs a four-year schedule at 25 percent a year and names the change in kpis.pia_notes",
-  "Five years in NTA years, and four in years under the Act alone",
-  "It refuses only in years under the Nigeria Tax Act 2025, where the life is fixed"],
+ ["It runs a four-year schedule at 25 percent a year and adds a note to kpis.pia_notes naming the stated life beside the statutory five years, as it does for a stated tertiary education tax rate",
+  "It applies five years in years under the Nigeria Tax Act 2025, where the First Schedule fixes the life, and the stated four years in every year under the Act alone",
+  "A refusal only for a ledger that reaches a year under the Nigeria Tax Act 2025, where 20 percent a year is fixed; a ledger wholly under the Act alone runs on the stated four years"],
  "That is the first sentence of the engine's refusal: the capital allowance life is fixed by the texts at five years, so any other life is refused. The five-year schedule is 0.200000 in years 0 to 3 under both laws and 0.190000 or 0.200000 in the fifth year by the law of the year.")
 
 # 37
