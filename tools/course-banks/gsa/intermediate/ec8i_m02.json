@@ -26,7 +26,7 @@
   "options": [
    "Nothing: the whole 200.000000 expired at the end of 2029",
    "200.000000, available in 2030 because the entry never had a year with a take above the Adjusted ACQ to draw on",
-   "100.000000, since half of an unused entry rolls into the year after its period",
+   "Half of the unused entry, rolling into the year after its period",
    "200.000000 as a carry-forward credit, which the engine converts from any make-up that goes unused"
   ],
   "answer": 0,
@@ -69,7 +69,7 @@
   "prompt": "The 210000.000000 of make-up that expires at the end of 2031 was paid for in the power plant's 2028 deficiency payment, which rests on the fixture's stated planning price. What does its expiry do to the money?",
   "options": [
    "The 2028 payment for it is reversed",
-   "The seller owes damages at the stated shortfall price",
+   "The seller owes damages at the stated seller shortfall price",
    "It becomes a carry-forward credit for the buyer",
    "The seller keeps what was paid, and the buyer loses the right to take that gas"
   ],
@@ -101,8 +101,8 @@
  {
   "prompt": "In the last contract year of the same refund case, 2029, the buyer counts 700.000000 against a take-or-pay quantity of 800.000000 and pays 400.000000. What does the engine's stated reading do with that year's own deficiency of 100.000000?",
   "options": [
-   "It opens a make-up right that is refunded at once, raising the refund to 1000.000000",
-   "It is added to the aggregate and forfeited",
+   "A make-up right refunded at once, raising the refund to 1000.000000",
+   "Added to the aggregate and forfeited",
    "It is refunded at the 2029 price of 4",
    "Under the engine's stated reading it opens no make-up right, so the refund covers the 2027 entry only"
   ],

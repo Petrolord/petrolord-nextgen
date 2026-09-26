@@ -146,7 +146,7 @@
   "prompt": "The export feed fixture states price reopeners in 2031-01 and 2035-01. What does the engine return for them?",
   "options": [
    "A new formula from each reopener month, set by the change in the oil index since the last review",
-   "A price held flat",
+   "Held flat until the parties agree",
    "A refusal, since a reopener needs a stated outcome before the engine can price the months after it",
    "Each month reported only, with no outcome modelled"
   ],
@@ -156,9 +156,9 @@
  {
   "prompt": "A learner states the rounding rule as \"4dp\". What does the engine return?",
   "options": [
-   "Prices rounded to four decimals, half up",
+   "Four-decimal rounding, half up",
    "Refused by name: rounding accepts only \"none\" or \"model-gsa-4dp\"",
-   "Prices with no rounding at all",
+   "No rounding at all",
    "Prices rounded to four decimals by truncation, since the unknown rule falls back to cutting off the fifth decimal place"
   ],
   "answer": 1,

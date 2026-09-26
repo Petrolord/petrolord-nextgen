@@ -94,9 +94,9 @@ q(3, "A power sector call states the base price reported for 2026 and a transpor
   "The tariff is deducted from the seller's side, since the Act puts the transport cost on the producing lessee"],
  "The engine's basis reads \"prices at the marketable natural gas delivery point; the stated transport tariff is added for the delivered price (s.167(8), s.168(4))\". s.167(8) puts the transport cost from the delivery point to the buyers' facilities on the buyers, so it is added on top and the delivery point price stands. Both figures rest on the stated base price reported for 2026. Folding the tariff in or deducting it from the seller misreads s.167(8).")
 
-q(1, "A caller states NRP 1.2 and PRP 300 as an illustrative regulation (synthetic) for ammonia, with a CMPP of 450. The engine's reason prints \"the formula gives 1.7999999999999998\". Which figure does the course quote for the price?",
+q(1, "A caller states NRP 1.2 and PRP 300 as an illustrative regulation (synthetic) for ammonia, with a CMPP of 450. The engine's reason prints the formula's result as the double it holds, a run of nines just under the round figure. Which figure does the course quote for the price?",
  "1.800000, the numeric field at six decimals",
- ["1.7999999999999998, since the reason carries the double the engine holds and is the more exact figure",
+ ["The run of nines in the reason, since the reason carries the double the engine holds and is the more exact figure",
   "1.500000, EPF with no NRP applied",
   "The Schedule's own NRP 1 and PRP 250"],
  "The course quotes the numeric field at six decimals, 1.800000, and quotes a reason only verbatim as the engine's words, where a figure is the shortest round-trip decimal of the double. EPF is (450 - 300) / 300 = 0.500000, and CP is 1.2 x 1.500000, so a figure without the NRP drops a term. The Fourth Schedule lets the Authority change NRP and PRP by regulation, and the engine uses the stated values with their source.")

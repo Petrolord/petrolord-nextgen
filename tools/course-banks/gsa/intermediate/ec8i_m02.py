@@ -26,7 +26,7 @@ q(3, "In the golden case whose make-up of 200.000000 from 2027 reaches the last 
 q(0, "A buyer who paid a deficiency of 200.000000 in 2027, with a make-up period of 2 contract years, takes nothing above its Adjusted ACQ in 2028 or 2029 and plans to recover the gas in 2030. What does the engine hold for it in 2030?",
  "Nothing: the whole 200.000000 expired at the end of 2029",
  ["200.000000, available in 2030 because the entry never had a year with a take above the Adjusted ACQ to draw on",
-  "100.000000, since half of an unused entry rolls into the year after its period",
+  "Half of the unused entry, rolling into the year after its period",
   "200.000000 as a carry-forward credit, which the engine converts from any make-up that goes unused"],
  "The engine's reason reads \"make-up of 200 from 2027 expired unrecovered at the end of 2029, the last year of its make-up period\", and in 2030 the entry holds 0.000000. A year with no take above the Adjusted ACQ does not extend the period. No share of an expired entry rolls on. Make-up and carry-forward are separate rights; unused make-up never turns into a credit.")
 
@@ -54,7 +54,7 @@ q(0, "In 2031 the Ekene power plant (synthetic) takes 268800.000000 of make-up f
 q(3, "The 210000.000000 of make-up that expires at the end of 2031 was paid for in the power plant's 2028 deficiency payment, which rests on the fixture's stated planning price. What does its expiry do to the money?",
  "The seller keeps what was paid, and the buyer loses the right to take that gas",
  ["The 2028 payment for it is reversed",
-  "The seller owes damages at the stated shortfall price",
+  "The seller owes damages at the stated seller shortfall price",
   "It becomes a carry-forward credit for the buyer"],
  "A deficiency payment buys the right to take the gas later; when an entry expires the right ends and nothing is paid back, which is why the power plant ledger shows 210000.000000 in makeUpExpired and no refund. No payment is reversed. Seller shortfall damages price gas the seller did not make available, which is a different event. Carry-forward is built only from takes above a base, and expired make-up does not feed it.")
 
@@ -74,8 +74,8 @@ q(0, "The Commonwealth Secretariat's model agreement (2025, CC BY 4.0) prints al
 
 q(3, "In the last contract year of the same refund case, 2029, the buyer counts 700.000000 against a take-or-pay quantity of 800.000000 and pays 400.000000. What does the engine's stated reading do with that year's own deficiency of 100.000000?",
  "Under the engine's stated reading it opens no make-up right, so the refund covers the 2027 entry only",
- ["It opens a make-up right that is refunded at once, raising the refund to 1000.000000",
-  "It is added to the aggregate and forfeited",
+ ["A make-up right refunded at once, raising the refund to 1000.000000",
+  "Added to the aggregate and forfeited",
   "It is refunded at the 2029 price of 4"],
  "The engine states its reading in its own words, \"a last-contract-year deficiency creates no make-up right (forfeit/refund applies to earlier years' make-up only)\", and its reason for 2029 reads \"the delivery period ends with this year, so no make-up right arises\". This is the engine's stated choice where the text leaves the point open. On that reading nothing from 2029 enters the aggregate, so there is nothing of it to refund or forfeit, and the refund stays at 600.000000 for the 150.000000 from 2027.")
 

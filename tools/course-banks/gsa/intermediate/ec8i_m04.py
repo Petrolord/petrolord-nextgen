@@ -103,14 +103,14 @@ q(0, "Priced month by month, the export feed's 2029 averages 9.808450 and ends D
 q(3, "The export feed fixture states price reopeners in 2031-01 and 2035-01. What does the engine return for them?",
  "Each month reported only, with no outcome modelled",
  ["A new formula from each reopener month, set by the change in the oil index since the last review",
-  "A price held flat",
+  "Held flat until the parties agree",
   "A refusal, since a reopener needs a stated outcome before the engine can price the months after it"],
  "The engine reports each reopener in its own words: \"price reopener 2031-01: reported only; the engine does not model the outcome of a price review\". It sets no new formula and holds no price flat, since both would be outcomes. It does not refuse a reopener; it refuses only a reopener that is not a month written 'YYYY-MM'.")
 
 q(1, "A learner states the rounding rule as \"4dp\". What does the engine return?",
  "Refused by name: rounding accepts only \"none\" or \"model-gsa-4dp\"",
- ["Prices rounded to four decimals, half up",
-  "Prices with no rounding at all",
+ ["Four-decimal rounding, half up",
+  "No rounding at all",
   "Prices rounded to four decimals by truncation, since the unknown rule falls back to cutting off the fifth decimal place"],
  "The engine's message reads \"rounding must be one of \"none\", \"model-gsa-4dp\"; got \"4dp\"\". It reads no rule it does not know, so it neither applies the model agreement's rule on a guess nor drops rounding silently, and it has no truncation rule to fall back on.")
 

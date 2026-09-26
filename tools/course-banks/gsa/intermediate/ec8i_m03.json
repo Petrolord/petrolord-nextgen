@@ -13,7 +13,7 @@
  {
   "prompt": "Two golden cases state carry-forward for 2 contract years with a cap of 100 percent, one above the Adjusted ACQ of 1000.000000 and one above the take-or-pay quantity of 800.000000. The buyer counts 1100.000000 in 2027. What surplus does each record?",
   "options": [
-   "100.000000 in both cases",
+   "The same 100.000000 in both cases",
    "Surplus of 100.000000 against 1000.000000, and of 300.000000 against 800.000000",
    "300.000000 above the Adjusted ACQ and 100.000000 above the take-or-pay quantity, the larger base giving the larger surplus",
    "1100.000000 in both, since the whole take of an over-taking year becomes the surplus"
@@ -99,7 +99,7 @@
   "explanation": "A surplus from 2028 carried for 3 contract years runs to the end of 2031, and the engine's reason reads \"carry-forward of 694050 from 2028 expired unused at the end of 2031\". The 2027 surplus of 2299500.000000 was drawn in full in 2029. 2029 and 2030 record no surplus at all. A credit drawn does not create a surplus; only takes above the base do."
  },
  {
-  "prompt": "In 2027 the Ekene power plant's seller made 6300.000000 fewer MMBtu available than was properly nominated, and the fixture states liquidated damages of 1.25 US$ per MMBtu not made available (a synthetic contract term). What does the engine return for that shortfall of the seller?",
+  "prompt": "In 2027 the Ekene power plant's seller made 6300.000000 fewer MMBtu available than was properly nominated, and the fixture states liquidated damages of 1.25 US$ per MMBtu not made available (a synthetic contract term). What does the engine return for that seller shortfall?",
   "options": [
    "7875.000000, added to the seller's net as a charge on the buyer for gas it could not take",
    "Nothing, because the seller shortfall already reduces the Adjusted ACQ, which is the buyer's whole remedy for it",
@@ -110,7 +110,7 @@
   "explanation": "The engine's reason reads \"seller shortfall 6300 reduces the Adjusted ACQ and is paid to the buyer at 1.25: 7875\". The damages run from seller to buyer, so they reduce the net to the seller. The reduction of the Adjusted ACQ and the damages are two separate consequences, and the fixture states both. Make-up is the buyer's right after a deficiency it paid; a seller shortfall creates none."
  },
  {
-  "prompt": "A learner states a seller shortfall of 5 in a contract year and leaves the shortfall price out. What does the engine return?",
+  "prompt": "A learner states a seller shortfall of 5 in a contract year and leaves the seller shortfall price out. What does the engine return?",
   "options": [
    "A refusal: years[0].shortfallPrice must be stated, since the engine holds no default rate",
    "Damages at US$3.50 per MMBtu",
@@ -121,7 +121,7 @@
   "explanation": "The engine's message reads \"years[0].shortfallPrice must be stated when sellerShortfall is above 0 (5); the engine holds no default rate; got nothing\". US$3.50 per MMBtu is the Act's Domestic Gas Delivery Obligation penalty, a different rule on a different party. The take-or-pay price is no stand-in either. The engine does not run the year without the rate, since the net to the seller depends on it."
  },
  {
-  "prompt": "In a golden year with an ACQ of 1000.000000, reductions of 200.000000 including a seller shortfall of 50.000000, 600.000000 counted, take-or-pay at 80 percent, prices of 3 and a shortfall price of 1.5, what net to the seller does the engine return?",
+  "prompt": "In a golden year with an ACQ of 1000.000000, reductions of 200.000000 including a seller shortfall of 50.000000, 600.000000 counted, take-or-pay at 80 percent, prices of 3 and a seller shortfall price of 1.5, what net to the seller does the engine return?",
   "options": [
    "2400.000000, the take-or-pay quantity of a year with nothing reduced, priced at 3",
    "120.000000, the deficiency payment alone",
@@ -132,9 +132,9 @@
   "explanation": "The engine builds the net as the gas counted at the contract price plus the deficiency payment less the seller shortfall damages: 600 x 3 plus 40 x 3, less 50 x 1.5, which is 1845.000000, and its reason reads \"seller shortfall 50 reduces the Adjusted ACQ and is paid to the buyer at 1.5: 75\". The deficiency payment of 120.000000 is only one term of the net. 2400.000000 is what the same prices give when nothing reduces the Adjusted ACQ and the take-or-pay quantity is exactly met. The damages run to the buyer, so they come off the net."
  },
  {
-  "prompt": "The export feed's term ends in 2036 with 457950.000000 of make-up unrecovered, refunded at that year's take-or-pay price. The engine's reason prints the refund as 3700831.3350000004. Which figure does the course quote and reason with?",
+  "prompt": "The export feed's term ends in 2036 with 457950.000000 of make-up unrecovered, refunded at that year's take-or-pay price. The engine's reason prints the refund as the full double it holds, with a long tail of digits after the third decimal. Which figure does the course quote and reason with?",
   "options": [
-   "3700831.3350000004, the figure in the engine's reason, since the reason carries the double the engine holds",
+   "The longer figure in the engine's reason, since the reason carries the double the engine holds",
    "The refund rounded to cents, since it is paid in money",
    "3700831.335000 plus the 2069500.000000 of carry-forward still outstanding, which the refund also pays out",
    "3700831.335000, the numeric field"
