@@ -2,7 +2,7 @@
 
 {{panel:ae-scoring-explorer}}
 
-A supported claim was found in a passage the answer cites and retrieved. That is a statement about the passage and the answer: the figure is traceable. It is not a statement about the world. This course keeps the word "grounded" for that narrow meaning and never lets it stand for true.
+A supported claim was found in a passage the answer cites and retrieved. That is a statement about the passage and the answer: the figure is traceable to a source. Whether the source says what the answer claims is a separate question. This course keeps the word "grounded" for that narrow meaning and never lets it stand for true.
 
 ## A supported answer to the wrong well
 
@@ -22,7 +22,7 @@ Both cases have the same lesson. A supported claim tells you where to look. Read
 
 ## Grounded beside correct
 
-This is why the course reports groundedness beside the answer scores, never in place of them. For system B:
+This is why the course reports groundedness beside the answer scores. For system B:
 
 | query | groundedness | exact match of the short answer |
 | --- | --- | --- |

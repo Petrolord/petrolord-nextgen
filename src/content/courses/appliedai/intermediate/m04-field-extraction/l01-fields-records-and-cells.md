@@ -27,7 +27,7 @@ A tolerance belongs to a number field only. Put one on a text field and the engi
 
 ## Records
 
-A record is one source passage's labels: the value of each field that the passage states. The Ekene set has 30 labelled records, one per source passage, and the record id is the passage id. The fixture states its labelling rules: a field is empty where the passage does not state it for that record, water_cut_pct is 0 where the passage says the well makes no water, and reservoir_pressure_psia is the static reservoir pressure, never a wellhead pressure.
+A record is one source passage's labels: the value of each field that the passage states. The Ekene set has 30 labelled records, one per source passage, and the record id is the passage id. The fixture states its labelling rules: a field is empty where the passage does not state it for that record, water_cut_pct is 0 where the passage says the well makes no water, and reservoir_pressure_psia holds the static reservoir pressure only, so a wellhead pressure does not belong in it.
 
 Each system returned predictions in the same shape. System A returned 30 records and system B 28.
 

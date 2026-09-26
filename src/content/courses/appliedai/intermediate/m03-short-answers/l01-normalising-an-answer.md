@@ -31,7 +31,7 @@ Read the rows. Punctuation is dropped, and dropping it joins what it separated: 
 
 ## Two tokenisers in one course
 
-The Associate tier tokenised passages for retrieval, and that rule split on every character outside [a-z0-9], so "Ekene-3" gave two tokens and "1.25" gave two. The SQuAD rule drops the punctuation instead of splitting on it. Both are the engine's stated rules for different jobs, and a figure from one is never compared with a figure from the other. When a short answer surprises you, normalise it by hand with the SQuAD rule before reading its score.
+The Associate tier tokenised passages for retrieval, and that rule split on every character outside [a-z0-9], so "Ekene-3" gave two tokens and "1.25" gave two. The SQuAD rule drops punctuation and closes the gap. Both are the engine's stated rules for different jobs, and a figure from one is never compared with a figure from the other. When a short answer surprises you, normalise it by hand with the SQuAD rule before reading its score.
 
 ## Text in, text out
 
