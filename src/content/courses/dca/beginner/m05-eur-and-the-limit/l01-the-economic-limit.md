@@ -28,7 +28,7 @@ That is the sense in which EUR is a booking rather than a property of the reserv
 
 ## One misconception to bury now
 
-The commonest beginner error is to read EUR as the technically recoverable volume, or worse, as the oil in place. Ekene's volumetric oil in place is 12.14 million stock tank barrels, from the ReservoirCalc course. The four producers' EURs at the 10 stb/d limit sum to a few hundred thousand barrels for the primary declines. Those numbers are three orders of magnitude apart and both are correct, because they answer different questions. Oil in place asks what is there. EUR asks what this well, on this decline, produced and will produce down to this limit.
+The commonest beginner error is to read EUR as the technically recoverable volume, or worse, as the oil in place. Ekene's volumetric oil in place is 12.14 million stock tank barrels, from the Reservoir Volumetrics course. The four producers' EURs at the 10 stb/d limit sum to a few hundred thousand barrels for the primary declines. Those numbers are three orders of magnitude apart and both are correct, because they answer different questions. Oil in place asks what is there. EUR asks what this well, on this decline, produced and will produce down to this limit.
 
 ## Exercise
 

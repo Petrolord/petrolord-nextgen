@@ -1,12 +1,12 @@
 # Where this course hands over
 
-Crude Assay & Blending is the first course in the Commercial & Trading module, and Refinery Feasibility & Planning follows it there. Terminals, Depots & Fuel Supply sits in the Supply Chain & Logistics module. This lesson says where those two courses pick up.
+Crude Assay & Blending is the first course in the Midstream & Downstream module, and Refinery Feasibility & Planning follows it there. Terminals, Depots & Fuel Supply sits in the Supply Chain & Logistics module. This lesson says where those two courses pick up.
 
 ## What this course owns
 
 Two things run through all three tiers. The first is that every property of a blend is computed on its own basis: gravity through specific gravity on volume, sulfur and the other per-mass properties on mass, viscosity through an index, yields on volume off the curve. The second is that every least-cost recipe is a linear programme whose binding specifications, value of relief and infeasibility are answers in their own right.
 
-This course teaches the second for the Commercial & Trading module, and this tier taught it once:
+This course teaches the second for the Midstream & Downstream module, and this tier taught it once:
 
 - a linear programme is an objective, rows and bounds, and its optimum sits on a vertex;
 - the kernel's status is optimal, infeasible or unbounded, and each is an answer;

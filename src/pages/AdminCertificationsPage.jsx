@@ -10,17 +10,15 @@ import { useRole } from '@/contexts/RoleContext';
 import { Award, Loader2, Search as UserSearch, BadgeCheck, Ban } from 'lucide-react';
 import {
   findProfileByEmail, issueCertification, adminListCertifications,
-  revokeCertification, certificateStatus, verificationUrl,
+  revokeCertification, certificateStatus, verificationUrl, listAcademyApps,
 } from '@/services/academyService';
+import {
+  APP_NAMES, CERT_TIER_LABELS, courseName, courseNameFrom, formalDate, titleCaseSlug,
+} from '@/lib/appNames';
 
-const APPS = [
-  { slug: 'welldata', name: 'Well Data Manager' },
-  { slug: 'petrophysics', name: 'Petrophysics' },
-  { slug: 'wellcorrelation', name: 'Well Correlation' },
-  { slug: 'seismolord', name: 'Seismolord' },
-  { slug: 'mapping', name: 'Mapping' },
-  { slug: 'reservoircalc', name: 'ReservoirCalc Pro' },
-];
+// Every catalog course; replaced by the live academy_apps list (path order)
+// once it loads.
+const STATIC_APPS = Object.entries(APP_NAMES).map(([slug, name]) => ({ slug, name }));
 const TIERS = ['associate', 'professional', 'expert'];
 const STATUS_CLS = { valid: 'text-emerald-400', expired: 'text-yellow-400', revoked: 'text-red-400' };
 
@@ -40,6 +38,7 @@ const AdminCertificationsPage = () => {
   const [busy, setBusy] = useState(false);
   const [certs, setCerts] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [apps, setApps] = useState(STATIC_APPS);
 
   const refresh = async () => {
     try {
@@ -52,6 +51,9 @@ const AdminCertificationsPage = () => {
   };
 
   useEffect(() => {
+    listAcademyApps()
+      .then((rows) => { if (rows?.length) setApps(rows.map((a) => ({ slug: a.slug, name: courseName(a.slug, a.name) }))); })
+      .catch(() => {});
     refresh();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -77,7 +79,7 @@ const AdminCertificationsPage = () => {
       const res = await issueCertification({ userId: target.id, appSlug, tier });
       toast({
         title: `Issued ${res.certificate_number}`,
-        description: `${tier} · ${appSlug} for ${target.display_name || target.email}`,
+        description: `${courseNameFrom(apps, appSlug)} · ${CERT_TIER_LABELS[tier] || titleCaseSlug(tier)} for ${target.display_name || target.email}`,
         className: 'bg-[#BFFF00] text-slate-900',
       });
       await refresh();
@@ -153,7 +155,7 @@ const AdminCertificationsPage = () => {
                 <Label className="text-gray-300 mb-1 block">Course</Label>
                 <select value={appSlug} onChange={(e) => setAppSlug(e.target.value)}
                   className="w-full px-3 py-2 rounded-md bg-gray-700 text-white border border-gray-600 text-sm">
-                  {APPS.map((a) => <option key={a.slug} value={a.slug}>{a.name}</option>)}
+                  {apps.map((a) => <option key={a.slug} value={a.slug}>{a.name}</option>)}
                 </select>
               </div>
               <div>
@@ -203,8 +205,8 @@ const AdminCertificationsPage = () => {
                               className="text-[#BFFF00] hover:underline">{c.certificate_number}</a>
                           </td>
                           <td className="py-2 pr-4">{c.holder?.display_name || c.holder?.email || '—'}</td>
-                          <td className="py-2 pr-4">{c.app_slug} · <span className="capitalize">{c.tier}</span></td>
-                          <td className="py-2 pr-4 whitespace-nowrap">{new Date(c.valid_until).toLocaleDateString()}</td>
+                          <td className="py-2 pr-4">{courseName(c.app_slug, c.course_name)} · {CERT_TIER_LABELS[c.tier] || titleCaseSlug(c.tier)}</td>
+                          <td className="py-2 pr-4 whitespace-nowrap">{formalDate(c.valid_until)}</td>
                           <td className={`py-2 pr-4 capitalize ${STATUS_CLS[status]}`}>{status}</td>
                           <td className="py-2 pr-4">
                             {status !== 'revoked' && (

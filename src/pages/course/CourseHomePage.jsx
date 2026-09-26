@@ -13,6 +13,7 @@ import { listAcademyApps, listMyEnrollments, TIERS } from '@/services/academySer
 import { useCourse, moduleState, TIER_LABELS } from '@/components/course/useCourse';
 import LockedCard from '@/components/course/LockedCard';
 import { activeTiers, pickCourseTier, courseTierPath } from '@/lib/learningGate';
+import { courseNameFrom } from '@/lib/appNames';
 
 // Course home: syllabus + per-module progress for one (app, tier). The
 // tier tabs only list tiers that have authored content; enrollment (and
@@ -43,7 +44,7 @@ const CourseHomePage = () => {
     return <LockedCard title="No course content here yet" backTo="/dashboard" backLabel="Back to dashboard" />;
   }
 
-  const appName = apps.find((a) => a.slug === appSlug)?.name || appSlug;
+  const appName = courseNameFrom(apps, appSlug);
   const isEnrolled = enrolledTiers.has(tier);
   const base = `/dashboard/apps/${appSlug}/course/${tier}`;
   const allLessons = manifest ? flatLessons(manifest) : [];

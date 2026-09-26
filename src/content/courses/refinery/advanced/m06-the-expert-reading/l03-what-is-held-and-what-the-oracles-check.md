@@ -8,7 +8,7 @@ Three items are held. Each is taught as a stated limit and never graded.
 
 **H1.** The scaling exponents 0.6 and 0.9 are defaults for a vendor's own figures to replace. No published source for them is in the engines repository. When a screen's capital comes from the modular law, as ODIOMA's expansion capital does, the capital is only as good as that exponent. H1 names what replaces it: a vendor's own figures.
 
-**H2.** The screening engine depreciates capital in the year it is spent and offers no capital allowance schedule starting at commissioning. Carrying the loss forward covers the refinery case; a fuller allowance model belongs to the Economics module.
+**H2.** The screening engine depreciates capital in the year it is spent and offers no capital allowance schedule starting at commissioning. Carrying the loss forward covers the refinery case; a fuller allowance model belongs to the Economics & Commercial module.
 
 **H3.** materialBalance counts receipts in and deliveries, burns, flares, vents and losses out, and a unit run moves nothing. A refinery's crude leaves its tank through the crude unit and its products arrive from units, so the function cannot close a refinery tank. It serves a tank whose movements are receipts and deliveries. This course prints no material balance.
 

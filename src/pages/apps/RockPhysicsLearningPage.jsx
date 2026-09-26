@@ -50,7 +50,7 @@ function ScopeGate() {
     <LearningModeGate app={APP} title="Rock Physics: Learning Mode locked">
       <p>
         Enrol in the Rock Physics course and activate your account to open this app in
-        Learning Mode. This course requires a Well Data Manager certification first (it is the
+        Learning Mode. This course requires a Well Data Management certification first (it is the
         root of the geoscience path).
       </p>
     </LearningModeGate>

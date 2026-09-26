@@ -1,9 +1,12 @@
 import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import QRCode from 'qrcode';
-import { X, Printer, Loader2 } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { X, Printer, Loader2, UserCog } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { verificationUrl, certificateStatus } from '@/services/academyService';
-import { appName, CERT_TIER_LABELS } from '@/lib/appNames';
+import {
+  courseName, CERT_TIER_LABELS, formalDate, titleCaseSlug,
+} from '@/lib/appNames';
 import nextgenWordmark from '@/assets/certificates/nextgen-wordmark.png';
 import lordswayLogo from '@/assets/certificates/lordsway-logo.png';
 import authorisedSignature from '@/assets/certificates/authorised-signature.png';
@@ -28,7 +31,11 @@ const CertificateView = ({ cert, holderName, onClose }) => {
   const status = certificateStatus(cert);
   const url = verificationUrl(cert.verify_code);
   const tier = CERT_TIER_LABELS[cert.tier] ? cert.tier : 'associate';
-  const tierLabel = CERT_TIER_LABELS[cert.tier] || cert.tier;
+  const tierLabel = CERT_TIER_LABELS[cert.tier] || titleCaseSlug(cert.tier);
+  const title = courseName(cert.app_slug, cert.course_name);
+  // holderName is the learner's display name or null (never an email
+  // address); without one the sheet asks for it and printing waits.
+  const needsName = !holderName;
 
   useEffect(() => {
     let cancelled = false;
@@ -59,9 +66,7 @@ const CertificateView = ({ cert, holderName, onClose }) => {
     return () => ro.disconnect();
   }, []);
 
-  const fmt = (d) => new Date(d).toLocaleDateString(undefined, {
-    day: 'numeric', month: 'long', year: 'numeric',
-  });
+  const fmt = formalDate;
   const displayUrl = url.replace(/^https?:\/\//, '');
 
   return (
@@ -105,6 +110,7 @@ const CertificateView = ({ cert, holderName, onClose }) => {
         #certificate-sheet .award{flex:1;text-align:center;display:flex;flex-direction:column;align-items:center;justify-content:center;padding-bottom:3px}
         #certificate-sheet .certifies{font-size:13.5px;letter-spacing:.08em;color:#63705e;margin:0 0 8px}
         #certificate-sheet .holder{font-family:var(--serif);font-size:43px;line-height:1.05;font-weight:600;font-style:italic;color:#1f3514;margin:0;padding:0 34px 8px;min-width:520px;border-bottom:1px solid rgba(95,153,13,.42);text-shadow:0 1px 0 #fff}
+        #certificate-sheet .holder-missing{font-size:20px;font-style:normal;color:#8a9383}
         #certificate-sheet .statement{font-size:13.5px;color:#65705e;margin:14px 0 5px}
         #certificate-sheet .course{font-size:27px;line-height:1.1;color:#17280d;font-weight:900;margin:0;letter-spacing:.01em}
         #certificate-sheet .tier-badge{margin-top:10px;padding:7px 18px 6px;border-radius:999px;border:1px solid var(--tier-border);background:var(--tier-bg);color:var(--tier-ink);font-size:11px;line-height:1;font-weight:900;letter-spacing:.26em;text-transform:uppercase;box-shadow:inset 0 0 0 1px rgba(255,255,255,.7)}
@@ -151,7 +157,7 @@ const CertificateView = ({ cert, holderName, onClose }) => {
             Certificate preview. Printing produces a clean A4 landscape sheet.
           </p>
           <div className="flex gap-2">
-            <Button size="sm" onClick={() => window.print()}
+            <Button size="sm" onClick={() => window.print()} disabled={needsName}
               className="bg-[#BFFF00] text-[#0F172A] hover:bg-[#A8E600] font-semibold">
               <Printer className="h-4 w-4 mr-1" /> Print
             </Button>
@@ -161,6 +167,16 @@ const CertificateView = ({ cert, holderName, onClose }) => {
             </Button>
           </div>
         </div>
+
+        {needsName && (
+          <div className="mb-4 rounded-md border border-[#BFFF00]/50 bg-[#1E293B] p-4 text-sm text-gray-200 print:hidden">
+            Your certificate prints the display name on your profile, and your profile has none yet.{' '}
+            <Link to="/dashboard/settings" onClick={onClose} className="inline-flex items-center gap-1 font-semibold text-[#BFFF00] hover:underline">
+              <UserCog className="h-4 w-4" /> Set your display name in Settings
+            </Link>{' '}
+            to complete and print it.
+          </div>
+        )}
 
         <div ref={frameRef} style={{ height: `${SHEET_H * scale}px` }}>
           <div
@@ -194,9 +210,13 @@ const CertificateView = ({ cert, holderName, onClose }) => {
               </section>
               <section className="award">
                 <p className="certifies">Petrolord NextGen Academy proudly certifies that</p>
-                <p className="holder">{holderName}</p>
+                {needsName ? (
+                  <p className="holder holder-missing">Set your display name to complete this certificate</p>
+                ) : (
+                  <p className="holder">{holderName}</p>
+                )}
                 <p className="statement">has successfully met the requirements for certification in</p>
-                <p className="course">{appName(cert.app_slug)}</p>
+                <p className="course">{title}</p>
                 <div className="tier-badge">{tierLabel} Level</div>
                 <div className="dates">
                   Issued {fmt(cert.issued_at)} &nbsp;&bull;&nbsp; Valid until {fmt(cert.valid_until)}

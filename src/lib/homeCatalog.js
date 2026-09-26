@@ -25,12 +25,12 @@ export const HOME_MODULES = [
 const c = (slug, module, name, blurb, status = 'available', isNew = false) => ({ slug, module, name, blurb, status, isNew });
 
 export const HOME_COURSES = [
-  c('welldata', 'geoscience', 'Well Data Manager', 'Clean, trusted well data stops bad logs from becoming bad wells.'),
+  c('welldata', 'geoscience', 'Well Data Management', 'Clean, trusted well data stops bad logs from becoming bad wells.'),
   c('petrophysics', 'geoscience', 'Petrophysics', 'Porosity, saturation and net pay from logs. Fewer bypassed zones.'),
   c('wellcorrelation', 'geoscience', 'Well Correlation', 'A consistent picture of the reservoir across every well.'),
-  c('seismolord', 'geoscience', 'Seismolord', 'Tie wells to seismic and read the subsurface between them.'),
-  c('mapping', 'geoscience', 'Mapping', 'Honest structure and property maps that drive well placement.'),
-  c('reservoircalc', 'geoscience', 'ReservoirCalc Pro', 'In-place volumes with contacts and uncertainty, ready for partners.'),
+  c('seismolord', 'geoscience', 'Seismic Interpretation', 'Tie wells to seismic and read the subsurface between them.'),
+  c('mapping', 'geoscience', 'Subsurface Mapping', 'Honest structure and property maps that drive well placement.'),
+  c('reservoircalc', 'geoscience', 'Reservoir Volumetrics', 'In-place volumes with contacts and uncertainty, ready for partners.'),
   c('rockphysics', 'geoscience', 'Rock Physics', 'See fluids and lithology in the seismic before you drill.'),
   c('porepressure', 'geoscience', 'Pore Pressure', 'Predict pressure ahead of the bit. Prevent kicks and losses.'),
   c('earthmodel', 'geoscience', 'Earth Modeling', 'The 3D model every development plan depends on.'),
@@ -92,7 +92,7 @@ export const HOME_COURSES = [
   c('qra', 'hse', 'Quantitative Risk Assessment', 'Show risk is as low as reasonably practicable.'),
   c('dataqc', 'data_ai', 'Oilfield Data Quality', 'Fix bad data before it poisons models and decisions.', 'available', true),
   c('mlcore', 'data_ai', 'Machine Learning on Well Data', 'Predict missing logs with methods engineers can explain.', 'available', true),
-  c('facies', 'data_ai', 'Electrofacies', 'Classify rock types from logs across many wells.', 'available', true),
+  c('facies', 'data_ai', 'Electrofacies Classification', 'Classify rock types from logs across many wells.', 'available', true),
   c('forecastml', 'data_ai', 'Data-Driven Production Forecasting', 'Machine learning forecasts alongside classic decline.', 'coming_soon', true),
   c('appliedai', 'data_ai', 'Applied AI and Language Models', 'Use AI tools productively and evaluate them critically.', 'coming_soon', true),
 ];

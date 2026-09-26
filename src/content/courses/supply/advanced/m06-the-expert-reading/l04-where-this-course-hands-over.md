@@ -1,6 +1,6 @@
 # Where this course hands over
 
-Terminals, Depots & Fuel Supply is a course in the Supply Chain & Logistics module, written beside two courses in the Commercial & Trading module. Those two are `crude`, Crude Assay & Blending, and `refinery`, Refinery Feasibility & Planning. Each owns a stretch of the chain, and a learner should know where this course's stretch ends and what to take to the next one.
+Terminals, Depots & Fuel Supply is a course in the Supply Chain & Logistics module, written beside two courses in the Midstream & Downstream module. Those two are `crude`, Crude Assay & Blending, and `refinery`, Refinery Feasibility & Planning. Each owns a stretch of the chain, and a learner should know where this course's stretch ends and what to take to the next one.
 
 ## What this course owns
 
@@ -16,7 +16,7 @@ A refinery's plan, its schedule, the variance of its actuals against both, and t
 
 ## What no course here computes
 
-Neither this course nor the two Commercial & Trading courses teach or compute a net present value, an internal rate of return, a Monte Carlo simulation or a decision tree. Those belong to the Economics courses. The one money figure in this course that could be mistaken for a valuation is the throughput margin at the IBAFO depot, 4988.00 USD for the period, on a fee of 7.80 USD a cubic metre that is invented like every rate here. It is a period's margin, the revenue less the variable and fixed costs of that period, and it is never a valuation. Nothing in this course discounts it or adds it up over years.
+Neither this course nor the two Midstream & Downstream courses teach or compute a net present value, an internal rate of return, a Monte Carlo simulation or a decision tree. Those belong to the Economics courses. The one money figure in this course that could be mistaken for a valuation is the throughput margin at the IBAFO depot, 4988.00 USD for the period, on a fee of 7.80 USD a cubic metre that is invented like every rate here. It is a period's margin, the revenue less the variable and fixed costs of that period, and it is never a valuation. Nothing in this course discounts it or adds it up over years.
 
 ## What to carry forward
 

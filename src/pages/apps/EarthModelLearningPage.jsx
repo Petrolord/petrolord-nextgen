@@ -31,7 +31,7 @@ const CERT_LABELS = { associate: 'Associate', professional: 'Professional', expe
 
 const LESSONS = [
   { n: 1, title: 'A model is a container',
-    body: 'An earth model is the geometry everything else lives in: surfaces stacked in depth, zones between them, blocks between faults. Fluids and barrels come later, in ReservoirCalc.' },
+    body: 'An earth model is the geometry everything else lives in: surfaces stacked in depth, zones between them, blocks between faults. Fluids and barrels come later, in the Reservoir Volumetrics course.' },
   { n: 2, title: 'One frame, many sources',
     body: 'Surfaces arrive on whatever grid mapped them. The model resamples every one onto a single frame, bilinear and honest about nulls, so the stack can be compared node by node.' },
   { n: 3, title: 'Depth must not cross',
@@ -49,7 +49,7 @@ function ScopeGate() {
     <LearningModeGate app={APP} title="Earth Modeling: Learning Mode locked">
       <p>
         Enrol in the Earth Modeling course and activate your account to open this app in
-        Learning Mode. This course requires a Well Data Manager certification first (it is the
+        Learning Mode. This course requires a Well Data Management certification first (it is the
         root of the geoscience path).
       </p>
     </LearningModeGate>
@@ -299,7 +299,7 @@ const EarthModelLearningPage = () => {
                 </div>
                 <p className="text-xs text-gray-500">
                   Bulk volume is the container: thickness × cell area, cell-centred. Barrels need fluids and
-                  contacts, and those live in the ReservoirCalc course.
+                  contacts, and those live in the Reservoir Volumetrics course.
                 </p>
               </CardContent>
             </Card>

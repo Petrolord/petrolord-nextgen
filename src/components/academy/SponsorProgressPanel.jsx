@@ -7,6 +7,7 @@ import { sponsorLearnerProgress } from '@/services/academyService';
 import {
   TIER_LABELS, INACTIVE_DAYS, progressPct, scoreText, quizSummary, daysSinceActive, isInactive, summarizeProgress, progressCsv,
 } from '@/lib/sponsorPools';
+import { courseName } from '@/lib/appNames';
 
 // Learner progress for a sponsor pool (owner decision 2026-09-23): how far
 // each sponsored learner is through the assigned course and how they are
@@ -65,7 +66,7 @@ export function ProgressTable({ rows, nowMs = Date.now(), open = null, onToggle 
                     </div>
                     <div className="text-xs text-gray-500 pl-4">{r.email}</div>
                   </td>
-                  <td className="py-1.5 pr-3">{r.course_name || r.app_slug}<div className="text-xs text-gray-500">{TIER_LABELS[r.course_tier] || r.course_tier}</div></td>
+                  <td className="py-1.5 pr-3">{courseName(r.app_slug, r.course_name)}<div className="text-xs text-gray-500">{TIER_LABELS[r.course_tier] || r.course_tier}</div></td>
                   <td className="py-1.5 pr-3">
                     {r.deep ? (
                       <>

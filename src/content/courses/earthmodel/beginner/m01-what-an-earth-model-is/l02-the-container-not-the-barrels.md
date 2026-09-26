@@ -2,7 +2,7 @@
 
 There is a division of labour in subsurface volumetrics that is worth stating in plain words on the first day, because learners who do not know where the line runs spend a lot of energy trying to finish a calculation that was never theirs to finish.
 
-This course builds the container. The container is the framework of surfaces, the zones between them, the thickness of each zone at every node, and the bulk rock volume that follows. It stops there. Fluids, contacts, saturation and the booking of oil in place belong to the ReservoirCalc course, and the object handed across the line between the two is bulk rock volume.
+This course builds the container. The container is the framework of surfaces, the zones between them, the thickness of each zone at every node, and the bulk rock volume that follows. It stops there. Fluids, contacts, saturation and the booking of oil in place belong to the Reservoir Volumetrics course, and the object handed across the line between the two is bulk rock volume.
 
 ## What a container is
 
@@ -14,7 +14,7 @@ Notice what those numbers do not say. They do not say that any of that rock is p
 
 ## Where the other half lives
 
-The other half of the calculation is the ReservoirCalc course, and you have already met it. That course starts from a bulk volume and works down: how much of the rock is reservoir rather than shale, how much of the reservoir is pore space, how much of the pore space holds hydrocarbon rather than water, where the contact cuts the structure, and what a volume at reservoir conditions becomes at the surface. Each of those steps is a fraction or a conversion applied to the volume that arrived from the model.
+The other half of the calculation is the Reservoir Volumetrics course, and you have already met it. That course starts from a bulk volume and works down: how much of the rock is reservoir rather than shale, how much of the reservoir is pore space, how much of the pore space holds hydrocarbon rather than water, where the contact cuts the structure, and what a volume at reservoir conditions becomes at the surface. Each of those steps is a fraction or a conversion applied to the volume that arrived from the model.
 
 That is why the hand-off is the bulk volume. It is the last quantity that is purely geometric, and the first input the fluids side needs. Everything upstream of it is interpretation and gridding. Everything downstream of it is petrophysics, fluids and economics.
 
@@ -40,6 +40,6 @@ That last point is the habit this course drills hardest. Zone B has a mean thick
 
 ## Exercise
 
-Write down, in two columns, which of the following belong to this course and which belong to the ReservoirCalc course: zone thickness, oil water contact, cell area, net to gross, bulk rock volume, hydrocarbon saturation, the model frame, formation volume factor. Then state in one sentence what the interface between the two courses is and why it sits where it does.
+Write down, in two columns, which of the following belong to this course and which belong to the Reservoir Volumetrics course: zone thickness, oil water contact, cell area, net to gross, bulk rock volume, hydrocarbon saturation, the model frame, formation volume factor. Then state in one sentence what the interface between the two courses is and why it sits where it does.
 
-Self check: zone thickness, cell area, bulk rock volume and the model frame are this course. The oil water contact, net to gross, hydrocarbon saturation and the formation volume factor are the ReservoirCalc course. The interface is the bulk rock volume, per zone, in m3, with the nodes it was computed over stated. It sits there because bulk rock volume is the last purely geometric quantity in the chain and the first input the fluid side needs, so it is the natural place to change owners.
+Self check: zone thickness, cell area, bulk rock volume and the model frame are this course. The oil water contact, net to gross, hydrocarbon saturation and the formation volume factor are the Reservoir Volumetrics course. The interface is the bulk rock volume, per zone, in m3, with the nodes it was computed over stated. It sits there because bulk rock volume is the last purely geometric quantity in the chain and the first input the fluid side needs, so it is the natural place to change owners.

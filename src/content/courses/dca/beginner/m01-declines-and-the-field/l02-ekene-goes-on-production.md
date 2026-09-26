@@ -17,7 +17,7 @@ Development drilling confirmed the structure but delivered the classic mixed res
 
 Both wells sit on the eastern flank, downdip of the accumulation. Dry holes are expensive, but these two are not wasted: from 2023-01-01 they are converted to water injectors, pushing water in from the flank below the oil. Keep them in mind; they are silent through the whole primary period and then change everything.
 
-A note for those who took the ReservoirCalc Professional tier: the sealing-fault scenario you studied there was a what-if exercise. The base development case, the one this course's data lives in, treats Ekene as one connected tank with one contact at 1560 m, which is exactly why Ekene-2's wet sand at 1565 m and Ekene-6's oil at 1546 m are consistent with the same contact.
+A note for those who took the Reservoir Volumetrics Professional tier: the sealing-fault scenario you studied there was a what-if exercise. The base development case, the one this course's data lives in, treats Ekene as one connected tank with one contact at 1560 m, which is exactly why Ekene-2's wet sand at 1565 m and Ekene-6's oil at 1546 m are consistent with the same contact.
 
 ## The producers come on in sequence
 

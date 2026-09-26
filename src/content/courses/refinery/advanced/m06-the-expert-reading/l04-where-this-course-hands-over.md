@@ -22,7 +22,7 @@ The `supply` course, Terminals, Depots & Fuel Supply, owns what happens to a bar
 
 ## Where the investment decision lives
 
-The Economics courses own NPV, IRR, Monte Carlo and decision trees. This course read the feasibility NPV the screening engine returns as the screen's answer and graded neither it nor the IRR. The question of how to weigh a project under uncertainty, how to choose a discount rate and how to compare one investment against others is theirs. The Economics module also owns a fuller capital allowance model, the question held item H2 leaves open.
+The Economics courses own NPV, IRR, Monte Carlo and decision trees. This course read the feasibility NPV the screening engine returns as the screen's answer and graded neither it nor the IRR. The question of how to weigh a project under uncertainty, how to choose a discount rate and how to compare one investment against others is theirs. The Economics & Commercial module also owns a fuller capital allowance model, the question held item H2 leaves open.
 
 ## What to carry forward
 

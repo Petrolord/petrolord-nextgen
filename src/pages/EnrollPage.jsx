@@ -24,6 +24,7 @@ import { useActivation } from '@/hooks/useActivation';
 import { useRole } from '@/contexts/RoleContext';
 import { enrollmentAction } from '@/lib/learningGate';
 import { hasDeepCourse } from '@/lib/courseContent';
+import { courseName } from '@/lib/appNames';
 
 // One identity, four doors (NextGen-Academy-PLAN §1): same account, same
 // courses, same certificates — only the payer differs. Learning-Mode
@@ -70,7 +71,7 @@ function CourseTierPicker({ apps, tier, setTier, appSlug, setAppSlug, fees, feeK
         </select>
         <p className="mt-1 text-xs text-gray-500">
           One app = one course. The geoscience learning path follows the daily loop:
-          Well Data Manager → Petrophysics → Correlation → Seismolord → Mapping → ReservoirCalc.
+          Well Data Management → Petrophysics → Well Correlation → Seismic Interpretation → Subsurface Mapping → Reservoir Volumetrics.
         </p>
         <PrereqNote apps={apps} appSlug={appSlug} status={prereq} />
       </div>
@@ -117,7 +118,7 @@ function PrereqNote({ apps, appSlug, status }) {
   if (!sel?.prereq_slug) return null;
   const root = apps.find((a) => a.slug === sel.prereq_slug);
   const view = waiverPresentation(status || {
-    required: true, prereq_slug: sel.prereq_slug, prereq_name: root?.name || sel.prereq_slug, satisfied: false, exam_available: true,
+    required: true, prereq_slug: sel.prereq_slug, prereq_name: courseName(sel.prereq_slug, root?.name), satisfied: false, exam_available: true,
   });
   if (view.kind === 'none') return null;
   const cls = view.kind === 'satisfied' ? 'text-emerald-400' : 'text-amber-400';
@@ -521,7 +522,7 @@ const EnrollPage = () => {
                     <p className="text-sm font-medium text-gray-300">Your applications</p>
                     {residencyApps.map((a) => (
                       <div key={a.id} className="flex items-center justify-between text-sm text-gray-400">
-                        <span>{appName[a.app_slug] || a.app_slug}</span>
+                        <span>{courseName(a.app_slug, appName[a.app_slug])}</span>
                         <span className={`px-2 py-0.5 rounded-full border text-xs ${
                           a.status === 'accepted' ? STATUS_PILL.active
                           : a.status === 'rejected' ? STATUS_PILL.cancelled
@@ -557,7 +558,7 @@ const EnrollPage = () => {
                   >
                     <div>
                       <p className="text-white font-medium">
-                        {appName[e.app_slug] || e.app_slug}
+                        {courseName(e.app_slug, appName[e.app_slug])}
                         <span className="text-gray-400 font-normal"> · {TIER_LABELS[e.course_tier]}</span>
                       </p>
                       <p className="text-xs text-gray-500">{DOOR_LABELS[e.door]} · {new Date(e.created_at).toLocaleDateString()}</p>

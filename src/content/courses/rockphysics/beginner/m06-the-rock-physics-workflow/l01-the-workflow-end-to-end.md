@@ -50,7 +50,7 @@ The Beginner tier stops here, with three fluids, a frame and a mixed pore fluid,
 
 Laid out this way, the geoscience path stops looking like separate applications.
 
-The Well Data course made the logs trustworthy and is the formal prerequisite for this one. The Petrophysics course produced the porosity and the water saturation this course mixes at, and the lithology split that becomes the 70/30 quartz and clay frame in step 5. The Well Correlation course put the sand in a zone so you know which interval you are describing. The Pore Pressure course, further along the same path, is where the 25 MPa of step 1 comes from when no direct measurement exists. The Seismolord course is downstream: it is where the response this chain predicts gets compared against the seismic actually recorded.
+The Well Data course made the logs trustworthy and is the formal prerequisite for this one. The Petrophysics course produced the porosity and the water saturation this course mixes at, and the lithology split that becomes the 70/30 quartz and clay frame in step 5. The Well Correlation course put the sand in a zone so you know which interval you are describing. The Pore Pressure course, further along the same path, is where the 25 MPa of step 1 comes from when no direct measurement exists. The Seismic Interpretation course is downstream: it is where the response this chain predicts gets compared against the seismic actually recorded.
 
 Each course also inherits the previous one's weaknesses. A shale volume estimated badly in the petrophysics work becomes a mineral split that is wrong here, and the frame moduli it produces are wrong with it, quietly and without complaint.
 

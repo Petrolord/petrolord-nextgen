@@ -14,6 +14,7 @@ import {
 } from '@/lib/sponsorPools';
 import { isBonusTier, assignToast } from '@/lib/prereqWaiver';
 import SponsorProgressPanel from '@/components/academy/SponsorProgressPanel';
+import { courseName, courseNameFrom } from '@/lib/appNames';
 
 // The sponsor console (Breeze Energy onboarding, 2026-09-07): a training or
 // technical lead runs the employer's block of enrolments here. Assign a
@@ -30,7 +31,7 @@ const fmtDate = (iso) => (iso ? new Date(iso).toLocaleDateString('en-GB', { day:
 function toCsv(rows) {
   const head = ['learner', 'email', 'course', 'tier', 'status', 'enrollment', 'certified', 'assigned', 'cancelled', 'reason', 'note'];
   const esc = (v) => `"${String(v ?? '').replace(/"/g, '""')}"`;
-  const lines = rows.map((r) => [r.display_name, r.email, r.course_name || r.app_slug, TIER_LABELS[r.course_tier] || r.course_tier, r.status, r.enrollment_status, r.certified ? 'yes' : 'no', fmtDate(r.assigned_at), fmtDate(r.cancelled_at), r.cancel_reason, r.note].map(esc).join(','));
+  const lines = rows.map((r) => [r.display_name, r.email, courseName(r.app_slug, r.course_name), TIER_LABELS[r.course_tier] || r.course_tier, r.status, r.enrollment_status, r.certified ? 'yes' : 'no', fmtDate(r.assigned_at), fmtDate(r.cancelled_at), r.cancel_reason, r.note].map(esc).join(','));
   return [head.join(','), ...lines].join('\n');
 }
 
@@ -86,7 +87,7 @@ const SponsorConsolePage = () => {
     setBusy(true);
     try {
       const res = await sponsorAssign({ poolId: pool.id, email: email.trim(), appSlug, tier, note: note || null });
-      toast({ title: res.seat_consumed === false ? 'Enrolled, no seat used' : 'Seat assigned', description: assignToast({ ...res, email }, apps.find((a) => a.slug === appSlug)?.name || appSlug, TIER_LABELS[tier]), className: 'bg-[#BFFF00] text-slate-900' });
+      toast({ title: res.seat_consumed === false ? 'Enrolled, no seat used' : 'Seat assigned', description: assignToast({ ...res, email }, courseNameFrom(apps, appSlug), TIER_LABELS[tier]), className: 'bg-[#BFFF00] text-slate-900' });
       setEmail(''); setNote('');
       await refresh(); await loadReport(pool.id); setProgressKey((k) => k + 1);
     } catch (err) {
@@ -228,7 +229,7 @@ const SponsorConsolePage = () => {
                         {report.map((r) => (
                           <tr key={r.assignment_id} className="border-t border-gray-700 text-gray-200" data-testid={`sponsor-row-${r.assignment_id}`}>
                             <td className="py-1.5 pr-3"><div>{r.display_name || r.email}</div><div className="text-xs text-gray-500">{r.email}</div></td>
-                            <td className="py-1.5 pr-3">{r.course_name || r.app_slug}</td>
+                            <td className="py-1.5 pr-3">{courseName(r.app_slug, r.course_name)}</td>
                             <td className="py-1.5 pr-3">{TIER_LABELS[r.course_tier] || r.course_tier}</td>
                             <td className="py-1.5 pr-3">
                               {r.status === 'active' ? <span className="text-emerald-400">active</span> : <span className="text-gray-400">cancelled{r.seat_returned ? ', seat returned' : ', seat consumed'}</span>}

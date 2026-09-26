@@ -105,6 +105,7 @@ import RealTimeMonitoringPage from '@/pages/RealTimeMonitoringPage';
 import NotificationCenterPage from '@/pages/NotificationCenterPage';
 import { listAcademyApps, listMyEnrollments, listMyCertifications } from '@/services/academyService';
 import { MODULE_LABELS, moduleLabel } from '@/lib/academyModules';
+import { courseNameFrom } from '@/lib/appNames';
 
 // --- Role Specific Home Components ---
 
@@ -174,7 +175,7 @@ const DOOR_LABELS = { self: 'Self-enrolled', campus: 'Campus cohort', residency:
 // Start course, or Activate account first when the gate is not cleared.
 const YourCourses = ({ enrollments, apps, isLearner, activation }) => {
     if (!enrollments.length) return null;
-    const nameOf = (slug) => apps.find((a) => a.slug === slug)?.name || slug;
+    const nameOf = (slug) => courseNameFrom(apps, slug);
     return (
         <div className="rounded-lg border border-[#BFFF00]/30 bg-[#1E293B] p-6 shadow-lg">
             <div className="flex items-baseline justify-between mb-1">
