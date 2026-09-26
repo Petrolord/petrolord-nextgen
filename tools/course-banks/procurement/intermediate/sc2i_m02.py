@@ -107,7 +107,7 @@ q(1, "Stepping the technical weight under linear pricing on the well services bi
   "WS3 is most advantageous, since it carries the highest technical percentage of the tied pair"],
  "The table prints the row with \"WS3 by lower evaluated cost\" in the tie column: WS5 (862141.000000) is cheaper than WS3 (957990.000000), so WS5 ranks above it. The tie-break is the lower evaluated cost first, then the earlier receipt, then the bidder id, and receipt is never reached here. WS1, at 87.162020, is most advantageous at that step.")
 
-q(2, "The engine prints the commercial weight at technical weight 0.7 as 0.30000000000000004. What does that figure tell a reader?",
+q(2, "At technical weight 0.7 the engine's combined-score basis prints the commercial weight with a 4 in its seventeenth decimal place, where a reader expects 0.3. What does that tell a reader?",
  "The engine computes 1 - 0.7 in binary floating point and prints the shortest decimal of the double it holds",
  ["Seventeen significant digits, as the Standard Procurement Document states the cost weight",
   "A small margin added by the engine to the commercial weight so that ties on combined score are rarer",
