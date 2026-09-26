@@ -19,11 +19,11 @@ The other four verdicts still fire. The contractor verdict still names "Alpha" a
 | 1 | Brazil - Concession | -15354.6816 | null | null | 700.1194 | 13.5916 |
 | 2 | Ghana - Deepwater | -15361.7226 | null | null | 712.5465 | 13.8328 |
 | 3 | Generic Royalty/Tax | -15453.8510 | null | null | 875.1492 | 16.9894 |
-| 4 | USA - Gulf of Mexico | -15701.7744 | null | null | 1312.7238 | 25.4842 |
-| 5 | Nigeria - PIA (2021) | -15768.8129 | null | null | 1431.0440 | 27.7811 |
+| 4 | Nigeria - PIA (2021) | -15537.7310 | null | null | 1021.2611 | 19.8259 |
+| 5 | USA - Gulf of Mexico | -15701.7744 | null | null | 1312.7238 | 25.4842 |
 | 6 | Angola - Deepwater PSC | -15900.1132 | null | null | 1662.7835 | 32.2800 |
 
-The contractor verdict names "Brazil - Concession" at -15,354.7 million USD, with no IRR because no rate from -99 to 1000 percent brings its NPV to zero, under a heading that reads best for the contractor. The government verdict names "Angola - Deepwater PSC" collecting the most, 1,662.8 million USD against 1,431.0 million USD for the next highest, "Nigeria - PIA (2021)". Both sentences are correct and both describe a catastrophe.
+The contractor verdict names "Brazil - Concession" at -15,354.7 million USD, with no IRR because no rate from -99 to 1000 percent brings its NPV to zero, under a heading that reads best for the contractor. The government verdict names "Angola - Deepwater PSC" collecting the most, 1,662.8 million USD against 1,312.7 million USD for the next highest, "USA - Gulf of Mexico". Both sentences are correct and both describe a catastrophe.
 
 ## What the government still collects
 
@@ -31,7 +31,7 @@ A project that never pays back is not a project the government walks away from. 
 
 ## The null that is not a zero
 
-Every IRR on that comparison is null, and `calculateIRRResult` says why: no rate from -99 to 1000 percent brings the NPV to zero, the status no-root. These cases printed 0.0000 percent until the 2026-09-15 repair, and a reader who took 0 for breaking even had it backwards. The published `irr_negative_root_reported` case has flows of -100 then 90 and reports the negative root itself, -10.0000 percent.
+Every IRR on that comparison is null, and `calculateIRRResult` says why: no rate from -99 to 1000 percent brings the NPV to zero, the status no-root. A reader who takes a null IRR for 0 percent, and 0 for breaking even, has it backwards twice. The published `irr_negative_root_reported` case has flows of -100 then 90 and reports the negative root itself, -10.0000 percent.
 
 ## What the engine refuses
 

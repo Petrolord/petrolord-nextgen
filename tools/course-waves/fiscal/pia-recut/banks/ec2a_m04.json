@@ -1,14 +1,14 @@
 [
  {
-  "prompt": "On `cmp_all_templates_default_project` four of the six templates pay back in year 3. How does the payback verdict report that?",
+  "prompt": "On `cmp_all_templates_default_project` five of the six templates pay back in year 3. How does the payback verdict report that?",
   "options": [
-   "It names the first of them in summary order, which is the highest NPV regime, and says nothing of the other three.",
-   "It names all four of them, in summary order, against year 4 for Angola - Deepwater PSC.",
-   "It is omitted, because a four way tie at the top cannot be ranked and an unsupportable claim is dropped.",
+   "It names the first of them in summary order, which is the highest NPV regime, and says nothing of the other four.",
+   "It names all five of them, in summary order, against year 4 for Angola - Deepwater PSC.",
+   "It is omitted, because a five way tie at the top cannot be ranked and an unsupportable claim is dropped.",
    "It names whichever of them crosses zero cumulative contractor net cash flow earliest inside year 3, the engine interpolating within the year to separate a tie."
   ],
   "answer": 1,
-  "explanation": "Nigeria - PIA (2021) also pays back in year 4 and is not named, because the closing clause reports one regime at the slowest year. Naming every regime tied at the fastest year is the 2026-09-15 repair; the retired rule named the first of them, which was the NPV winner at 397.0445 million USD."
+  "explanation": "Nigeria - PIA (2021) leads the sort at 432.0925 million USD and is named first, and Angola - Deepwater PSC is the one regime at the slowest year. A verdict naming only the first tied regime would repeat the NPV ranking under another label."
  },
  {
   "prompt": "A payback verdict on ODIDI reads that Brazil - Concession and Ghana - Deepwater pay back in year 6, against year 8 for Angola - Deepwater PSC. What is the last regime in that sentence?",
@@ -44,26 +44,26 @@
   "explanation": "The tie is exact by construction, the golden pins the ranked quantities rather than a winner, and no tie break rule could be right among six answers that are one answer. The retired reduce named USA - Gulf of Mexico and the oracle named Brazil - Concession."
  },
  {
-  "prompt": "An earlier build called Nigeria - PIA (2021) the most progressive on `cmp_never_recovers`, rising 0.0 percentage points. What does the price verdict return there now, and why?",
+  "prompt": "On `cmp_never_recovers` every regime's price series is null and flagged undefined at all nine prices. What does the price verdict return there, and why?",
   "options": [
    "It declines to rank, because every point is undefined and so no swept price gives every regime a government take within 0 to 100 percent.",
-   "It still names Nigeria - PIA (2021), since two null endpoints subtract to a climb of zero that ranks like any other.",
+   "It names Nigeria - PIA (2021), since two null endpoints subtract to a climb of zero that ranks like any other.",
    "It names Angola - Deepwater PSC, the regime that collected the most, because the take column breaks a tie in the climbs.",
    "It is omitted entirely, as it is for a single regime, because the verdict needs at least two regimes whose series carry usable points before it will rank anything."
   ],
   "answer": 0,
-  "explanation": "Lifetime contractor net cash flow of -16279.9099 million USD outweighs a government cash flow of 1431.0440, profit is not positive at any swept price, and the sentence says no regime is economic at any swept price from 40 to 120 USD per bbl."
+  "explanation": "Under Nigeria - PIA (2021) lifetime contractor net cash flow of -15870.1271 million USD outweighs a government cash flow of 1021.2611, profit is not positive at any swept price, and the sentence says no regime is economic at any swept price from 40 to 120 USD per bbl."
  },
  {
-  "prompt": "The Insights tab once called the second ranked regime the one that maximises government revenue. What does the second row of `cmp_all_templates_default_project` actually collect?",
+  "prompt": "A reader takes the second ranked regime to be the one that maximises government revenue. What does the second row of `cmp_all_templates_default_project` actually collect?",
   "options": [
-   "1339.2784 million USD, because government cash flow descending is the summary's secondary sort once contractor NPV has ordered the rows.",
-   "758.7514 million USD, the largest of the six, which is why the old sentence looked right on this project.",
-   "764.5528 million USD, while the largest take on that comparison is 1339.2784 million USD and belongs to the regime in sixth place.",
+   "1316.6067 million USD, because government cash flow descending is the summary's secondary sort once contractor NPV has ordered the rows.",
+   "764.5528 million USD, the largest of the six, which is why the reading looks right on this project.",
+   "758.7514 million USD, while the largest take on that comparison is 1316.6067 million USD and belongs to the regime in sixth place.",
    "1263.7523 million USD, for Angola - Deepwater PSC, the regime the take column puts second."
   ],
   "answer": 2,
-  "explanation": "The sort carries no information about take, and on this project the take column runs the other way, from 758.7514 at rank 1 to 1339.2784 at rank 6."
+  "explanation": "The sort carries no information about take, and on this project the take column runs the other way, from 687.4682 at rank 1 to 1316.6067 at rank 6."
  },
  {
   "prompt": "`insights_single_regime` returns three verdicts rather than five. Which two are missing, and why?",
@@ -114,11 +114,11 @@
   "options": [
    "Brazil - Concession is a progressive regime, a property of its four instruments that the sweep has now measured on a second field.",
    "The climb is small because the sweep scales oil only, and ODIDI carries gas at 40 Mscf/d and NGL at 900 bbl/d that never move.",
-   "Half the field is going the other way: only Ghana - Deepwater at 1.9971 and Nigeria - PIA (2021) at 0.1968 climb beside it, and the other three fall.",
+   "Most of the field is going the other way: only Ghana - Deepwater at 1.9971 climbs beside it, and the other four fall.",
    "Seven percentage points is the smallest climb the verdict will report, below which the sentence is omitted for want of separation."
   ],
   "answer": 2,
-  "explanation": "The three falling climbs run as far down as -37.6994 for USA - Gulf of Mexico, so the winner leads a field on which half the regimes hand the state a shrinking fraction as price rises."
+  "explanation": "The four falling climbs run from -6.0087 for Nigeria - PIA (2021) down to -37.6994 for USA - Gulf of Mexico, so the winner leads a field on which four of six regimes hand the state a shrinking fraction as price rises."
  },
  {
   "prompt": "`insights_rounding` pins how the verdict sentences print their numbers. What is it guarding?",

@@ -63,7 +63,7 @@
    "The lowest government cash flow, because take and contractor NPV are the two sides of one revenue total and must run opposite each other."
   ],
   "answer": 2,
-  "explanation": "On the default project rank 2 returns an IRR of 40.2125 percent and rank 3 returns 44.0823, so even the IRR column is already out of order."
+  "explanation": "On the default project rank 3 returns an IRR of 40.2125 percent and rank 4 returns 44.0823, so even the IRR column is already out of order."
  },
  {
   "prompt": "A reader reads government take at 75 USD per bbl off the price chart. What have they read?",
@@ -96,7 +96,7 @@
    "A minimum tax that binds at low prices and stops binding once the computed charge exceeds it."
   ],
   "answer": 0,
-  "explanation": "Brazil - Concession climbs the most at 20.5076 percentage points, and the three templates whose split is tiered on the R factor climb by 19.6873, 10.1420 and 7.8960."
+  "explanation": "Brazil - Concession climbs the most at 20.5076 percentage points, the two templates whose split is tiered on the R factor climb by 19.6873 and 7.8960, and Nigeria - PIA (2021) is almost flat at -0.0068."
  },
  {
   "prompt": "Angola - Deepwater PSC returns a price climb of 19.6873 percentage points while its share falls from 63.4520 at 40 USD per bbl to 59.5510 at 50. How can both be true?",
@@ -253,12 +253,12 @@
   "explanation": "On the default project the capex verdict names Angola - Deepwater PSC at 88.6123 million USD while the price verdict declines to rank at all, so the two sweeps agree in tendency and never row for row."
  },
  {
-  "prompt": "The contractor verdict on ODIDI prints -5.9 million USD and says there is no single IRR, because the NPV is zero at -18.8% and 11.4%. What did it rank?",
+  "prompt": "The contractor verdict on ODIDI prints 1.7 million USD and says there is no single IRR, because the NPV is zero at -19.2% and 12.2%. What did it rank?",
   "options": [
-   "The first row of the summary at full precision, -5.8662 million USD, because the sort has already put the highest contractor NPV there.",
+   "The first row of the summary at full precision, 1.7389 million USD, because the sort has already put the highest contractor NPV there.",
    "The largest contractor NPV it could find across the six ledgers, recomputed at the comparison's discount rate before the sentence was built.",
    "The rounded figures themselves, which is why two regimes printing the same value are reported as a tie by this verdict.",
-   "The undiscounted lifetime contractor net cash flow, which on ODIDI is 192.9896 million USD for that regime."
+   "The undiscounted lifetime contractor net cash flow, which on ODIDI is 229.9586 million USD for that regime."
   ],
   "answer": 0,
   "explanation": "Every insight sentence rounds money and rates to one decimal place while the ranking underneath runs at full precision."
@@ -338,7 +338,7 @@
    "The discount rate, since ODIDI is discounted at 12 percent and the swept losses are reported at the comparison's own 10."
   ],
   "answer": 2,
-  "explanation": "Ranges and definitions are where the marks are lost, not rates, and ODIDI's losses of 181.1922 and 252.6075 million USD belong to that field alone."
+  "explanation": "Ranges and definitions are where the marks are lost, and ODIDI's losses of 181.1922 and 252.6075 million USD belong to that field alone."
  },
  {
   "prompt": "What does this model hand to someone else?",
@@ -355,23 +355,23 @@
   "prompt": "On ODIDI the highest contractor NPV and the largest government cash flow sit in different rows. Which rows, and why is that not a contradiction?",
   "options": [
    "Brazil - Concession heads both, and the appearance of a split comes from the government share of net revenue column, which is a ratio rather than a total.",
-   "Brazil - Concession at -5.8662 million USD heads the sort while Angola - Deepwater PSC collects 316.7898 at rank 6, because the sort key is discounted and government cash flow is an undiscounted lifetime total.",
-   "Generic Royalty/Tax heads the sort at -13.3840 million USD while Nigeria - PIA (2021) collects 312.9610 million USD, and the two differ because one of those columns is a percent of revenue and the other is money over the whole life.",
+   "Nigeria - PIA (2021) at 1.7389 million USD heads the sort while Angola - Deepwater PSC collects 316.7898 at rank 6, because the sort ranks the contractor's discounted cash and take is the state's undiscounted share.",
+   "Generic Royalty/Tax heads the sort at -13.3840 million USD while Nigeria - PIA (2021) collects 196.0260 million USD, and the two differ because one of those columns is a percent of revenue and the other is money over the whole life.",
    "Angola - Deepwater PSC heads both on ODIDI, which is what makes the field a poor one to rehearse a comparison on."
   ],
   "answer": 1,
-  "explanation": "All six ODIDI NPVs at 12 percent are negative, so the head of the sort is the least bad rather than the good one."
+  "explanation": "Only the head of the ODIDI sort returns a positive NPV at 12 percent, 1.7389 million USD, and the same regime collects the least for the government, 196.0260."
  },
  {
-  "prompt": "Under the PIA template on ODIDI the contractor net cash flow reads -1.0205 million USD in year 20 and stays negative to year 25, while the cumulative ends at 113.0236. What does that mean for the payback year?",
+  "prompt": "Under the PIA template on ODIDI the contractor net cash flow reads -0.0003 million USD in year 20 and stays negative to year 25, while the cumulative ends at 229.9586. What does that mean for the payback year?",
   "options": [
    "Payback is recomputed at the end and reported as the last year the cumulative was above zero, which on this ledger is year 25.",
    "Payback is null on this ledger, because a cumulative that turns down inside the horizon has not recovered the capital.",
    "Payback is unaffected because the engine reads only the years before the R factor passes 1.0, which on ODIDI is year 6.",
-   "Payback is a first crossing and not a high water mark, and the cumulative peaks at 138.3627 million USD before falling back."
+   "Payback is a first crossing and not a high water mark, and the cumulative peaks at 250.9149 million USD before falling back."
   ],
   "answer": 3,
-  "explanation": "The cumulative first turns positive in year 7 at 6.1264 million USD, and late year opex against a declining revenue is what pulls it back."
+  "explanation": "The cumulative first turns positive in year 7 at 43.8352 million USD, and late year opex against a declining revenue is what pulls it back."
  },
  {
   "prompt": "On the Designer's defaults the Concessionary regime reads 46.3452 percent in the summary and 59.6210 percent on the price chart at the base price. Which one is the rate on profit, and why do they differ?",
@@ -382,18 +382,18 @@
    "Neither, since both divide take by take plus contractor cash and the difference between them is the swept price."
   ],
   "answer": 0,
-  "explanation": "The Nigerian PIA (PSC) regime shows the same pair, 56.5354 against 72.7302, a gap of 16.1948 percentage points on one screen."
+  "explanation": "The Designer's sample PSC regime, whose values are illustrative samples, shows the same pair, 56.5354 against 72.7302, a gap of 16.1948 percentage points on one screen."
  },
  {
-  "prompt": "The payback column of `cmp_all_templates_default_project` reads 3, 3, 3, 4, 3 and 4 down the summary. What does the payback verdict then report?",
+  "prompt": "The payback column of `cmp_all_templates_default_project` reads 3, 3, 3, 3, 4 and 3 down the summary. What does the payback verdict then report?",
   "options": [
    "The regime with the highest NPV, because the tie is broken by summary order and the summary is sorted on contractor NPV.",
-   "No verdict at all, because a four way tie at the top cannot be ranked and an unsupportable claim is omitted.",
-   "All four regimes at year 3, in summary order, against year 4 for one of the two at the slowest year.",
+   "No verdict at all, because a five way tie at the top cannot be ranked and an unsupportable claim is omitted.",
+   "All five regimes at year 3, in summary order, against year 4 for Angola - Deepwater PSC.",
    "The regime whose R factor payout year is earliest, which is the tie break the engine applies whenever an integer column ties in the summary."
   ],
   "answer": 2,
-  "explanation": "Naming every regime tied at the fastest year is the 2026-09-15 repair. Until then the sentence named Generic Royalty/Tax alone, which leads the sort at 397.0445 million USD, so a tied payback verdict was the NPV ranking under another label."
+  "explanation": "The verdict names every regime tied at the fastest year, so the sentence opens with Nigeria - PIA (2021), which leads the sort at 432.0925 million USD, and lists four more. A sentence naming only the first would be the NPV ranking under another label."
  },
  {
   "prompt": "On a comparison where every point of every share series is null and flagged undefined, what does the price verdict return?",
@@ -426,7 +426,7 @@
    "Both are endpoint differences over seven points, so a regime that leads one must lead the other by construction."
   ],
   "answer": 0,
-  "explanation": "The two steepest climbers give up the least at 100.7185 and 88.6123 million USD and the two regressive ones give up 244.0782 and 267.7301, and the orders still differ row for row."
+  "explanation": "The two steepest climbers give up the least at 100.7185 and 88.6123 million USD and the two most regressive give up 244.0782 and 267.7301, while Nigeria - PIA (2021), almost flat at -0.0068, gives up 243.6525, so the orders still differ row for row."
  },
  {
   "prompt": "On `cmp_never_recovers` every IRR is null with the status no-root and every payback is null. What may a reader do with those two columns?",
@@ -448,13 +448,13 @@
    "On the test project the sweep must re-run the decline as well, since an oil only field has no gas revenue to hold the ledger up at a low price."
   ],
   "answer": 1,
-  "explanation": "A flat curve on a gas weighted field means the sweep did not move most of the revenue, not that the terms are neutral to price."
+  "explanation": "A flat curve on a gas weighted field means the sweep did not move most of the revenue, and it says little about whether the terms respond to price."
  },
  {
-  "prompt": "The engine returns 58.5739 million USD for Nigeria - PIA (2021) at a capex multiplier of 1.5 both as a swept point and when called directly. What does that agreement pin?",
+  "prompt": "The engine returns 255.8175 million USD for Nigeria - PIA (2021) at a capex multiplier of 1.5 both as a swept point and when called directly. What does that agreement pin?",
   "options": [
    "That the golden publishes the oracle's eighth point in place of the engine's, the two being equal at that multiplier.",
-   "That the chart may drop a point whose contractor NPV falls below the base case by more than half, as 58.5739 does against 154.8286.",
+   "That the chart may drop a point whose contractor NPV falls below the base case by more than a third, as 255.8175 does against 432.0925.",
    "That a direct call and a swept point use different discount conventions which happen to meet at a multiplier of 1.5.",
    "That the sweep reaches its endpoint rather than approaching it, which is the check a step count buys over an accumulating sum."
   ],

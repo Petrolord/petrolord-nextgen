@@ -1,6 +1,6 @@
 [
  {
-  "prompt": "Three probe decks on the Designer's default project, priced at 49.990000, 50.000000 and 50.010000 USD per bbl, are run against the PIA royalty tiers of 0 USD/bbl at 7.5 percent and 50 USD/bbl at 10 percent. What rate does the deck priced exactly at the threshold pay?",
+  "prompt": "Three probe decks on the Designer's default project, priced at 49.990000, 50.000000 and 50.010000 USD per bbl, are run against the tiered teaching regime's royalty tiers of 0 USD/bbl at 7.5 percent and 50 USD/bbl at 10 percent. What rate does the deck priced exactly at the threshold pay?",
   "options": [
    "0.075000, the lower tier, because a threshold is the price at which the next tier BEGINS and a price merely equal to it has not yet passed into the band above.",
    "The mean of the two tiers, because the engine interpolates the rate over the last cent of approach to a threshold rather than jumping.",
@@ -44,7 +44,7 @@
   "explanation": "`getSlidingScaleRoyalty` falls back to the lowest tier's rate when the price has reached no threshold, which is why year 1 pays 18.0299 on gross revenue of 144.2389."
  },
  {
-  "prompt": "At a price multiplier of 1.200000 on the default project the PIA royalty charges 32.3089 on gross revenue of 323.0889. How much of that revenue was charged at 7.5 percent?",
+  "prompt": "At a price multiplier of 1.200000 on the default project the tiered teaching regime's royalty charges 32.3089 on gross revenue of 323.0889. How much of that revenue was charged at 7.5 percent?",
   "options": [
    "None of it. One tier is selected for the year and its rate is charged on the whole of gross revenue, with nothing left in the lower band.",
    "The share of revenue attributable to the first 50 USD per bbl of price, with the remainder taken at 10 percent in the manner of an income tax bracket.",
@@ -55,7 +55,7 @@
   "explanation": "The implied rate at 1.200000 is 0.100000 on every dollar. A blended answer lands between the two printed royalties and looks reasonable, which is what makes it dangerous."
  },
  {
-  "prompt": "The teaching field ODIDI holds 45 USD per bbl through year 5 and steps to 65 at year 6. Under the PIA royalty its year 5 royalty is 5.7145 on gross revenue of 76.1939 and its year 6 royalty is 9.3986 on 93.9859. What moved?",
+  "prompt": "The teaching field ODIDI holds 45 USD per bbl through year 5 and steps to 65 at year 6. Under the tiered teaching regime's royalty its year 5 royalty is 5.7145 on gross revenue of 76.1939 and its year 6 royalty is 9.3986 on 93.9859. What moved?",
   "options": [
    "Only the rate, since the oil volume is declining and the deck step merely holds gross revenue flat while the tier above takes over.",
    "Only the revenue, because a deck that steps inside the life of a field cannot move a tier that was fixed when the regime was loaded.",
@@ -110,7 +110,7 @@
   "explanation": "A price printing as 50.000000 can be 49.99999999999998, and the implied rate of 0.075000 is what says so."
  },
  {
-  "prompt": "Across the default project sweep the PIA implied rate is 0.075000 at multipliers 0.500000, 0.600000, 0.700000 and 0.710000, and 0.100000 at 0.720000, 0.800000, 1.000000 and 1.200000. What is that pattern?",
+  "prompt": "Across the default project sweep the tiered teaching regime's implied rate is 0.075000 at multipliers 0.500000, 0.600000, 0.700000 and 0.710000, and 0.100000 at 0.720000, 0.800000, 1.000000 and 1.200000. What is that pattern?",
   "options": [
    "A step function with one break, flat inside each tier and discontinuous where the applied price crosses 50 USD per bbl.",
    "A ramp that rises with price throughout, sampled coarsely enough at these eight multipliers that its slope looks flat inside each band.",
@@ -121,9 +121,9 @@
   "explanation": "Nothing between two thresholds is interpolated. The rate is 0.100000 at an applied price of 50.400000 and still 0.100000 at 84.000000."
  },
  {
-  "prompt": "The PIA template's lowest royalty tier is keyed at 0 USD/bbl. Why does that hide something a reader needs to check?",
+  "prompt": "The tiered teaching regime's lowest royalty tier is keyed at 0 USD/bbl. Why does that hide something a reader needs to check?",
   "options": [
-   "Because a threshold of 0 USD/bbl is skipped by the walk, leaving the 50 USD/bbl tier as the only rate the template can charge.",
+   "Because a threshold of 0 USD/bbl is skipped by the walk, leaving the 50 USD/bbl tier as the only rate the regime can charge.",
    "Because a zero threshold makes the implied rate undefined in any year the applied oil price is itself below one dollar.",
    "Because the engine treats a 0 USD/bbl key as an instruction to charge no royalty until the next threshold in the list is reached.",
    "Because at any positive price that tier is genuinely reached, so the fallback to the lowest tier's rate never shows itself and the selection looks like an ordinary threshold rule."

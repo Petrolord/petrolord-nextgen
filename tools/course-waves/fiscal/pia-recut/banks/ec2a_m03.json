@@ -11,7 +11,7 @@
   "explanation": "The multipliers are written from a step count, as 8 plus the step number over 10, so the last is exactly 1.5. The loop they replaced accumulated 0.1, arrived at 1.5000000000000004 and stopped at 1.4."
  },
  {
-  "prompt": "Until the 2026-09-15 repair the capex axis was labelled to a multiplier of 1.5 and its last tick read 1.4. What had ended the loop early?",
+  "prompt": "A capex sweep written as a loop that adds 0.1 to a multiplier starting at 0.8, while it stays at or below 1.5, returns seven points and its last reads 1.4. What ends that loop early?",
   "options": [
    "Accumulating 0.1 in binary floating point arrives at 1.5000000000000004, which is greater than 1.5.",
    "The engine refused a multiplier above 1.4 because no cost recovery limit can absorb a larger overrun.",
@@ -19,7 +19,7 @@
    "The label came from the loop bound and the points from a step count."
   ],
   "answer": 0,
-  "explanation": "The point was never unreachable. Nigeria - PIA (2021) holds 58.5739 million USD of contractor NPV at a multiplier of 1.5 against 79.1811 at 1.4, and that value now arrives as a swept point rather than a direct call."
+  "explanation": "The engine sweeps a fixed grid of eight multipliers, so Nigeria - PIA (2021) returns 255.8175 million USD of contractor NPV at 1.5 as a swept point, against 291.8238 at 1.4."
  },
  {
   "prompt": "For Generic Royalty/Tax the capex sweep reports a loss of 244.0782 million USD. Between which two points is that measured?",
@@ -85,7 +85,7 @@
    "A different range on a different regime."
   ],
   "answer": 3,
-  "explanation": "The published set runs the Designer's default regime, id 1, at multipliers of 0.7 to 1.5, returning 169.7176 million USD of NPV at 1.0 where the template returns 154.8286, and the chart sweeps 0.8 to 1.5 on the six templates."
+  "explanation": "The published set runs the Designer's sample PSC regime, id 1, at multipliers of 0.7 to 1.5, returning 169.7176 million USD of NPV at 1.0 where the template returns 432.0925, and the chart sweeps 0.8 to 1.5 on the six templates."
  },
  {
   "prompt": "Across the published capex cases the payback year steps 3, 3, 4, 4, 4, 5, 5, 6 and 6 while the payout year steps 2, 2, 2, 3, 3, 3, 4, 4 and 4. What does that add to the NPV story?",
@@ -110,7 +110,7 @@
   "explanation": "Only the capex chart's values can be added or subtracted as amounts, and only the price chart's can be compared between projects of different sizes."
  },
  {
-  "prompt": "On the default project the two steepest climbers give up the least contractor NPV and the two regressive templates give up the most. Why is that agreement not a coincidence?",
+  "prompt": "On the default project the two steepest climbers give up the least contractor NPV and the two most regressive templates give up the most. Why is that agreement not a coincidence?",
   "options": [
    "The two verdicts are computed by the same reduce over the same array, so they cannot disagree.",
    "A regime taking a rising share of the upside absorbs a share of the downside too, so the contractor's NPV moves less when capital cost rises.",

@@ -14,14 +14,14 @@ The golden publishes the last swept point beside the engine called directly at a
 
 | regime | x1.4 | x1.5 | x1.5, called directly | loss over the swept range, 0.8 to 1.5 |
 | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 79.1811 | 58.5739 | 58.5739 | 118.3685 |
+| Nigeria - PIA (2021) | 291.8238 | 255.8175 | 255.8175 | 243.6525 |
 | Ghana - Deepwater | 107.3627 | 85.7833 | 85.7833 | 109.8425 |
 | Brazil - Concession | 225.4505 | 203.9903 | 203.9903 | 100.7185 |
 | USA - Gulf of Mexico | 228.4023 | 189.4674 | 189.4674 | 267.7301 |
 | Angola - Deepwater PSC | 147.4539 | 124.9212 | 124.9212 | 88.6123 |
 | Generic Royalty/Tax | 257.3831 | 221.3360 | 221.3360 | 244.0782 |
 
-The two middle columns agree to the last digit on every regime. That agreement is the check, and it is a stronger one than a tolerance: it says the endpoint is reached rather than approached. The golden also pins the grid itself, `capexGrid`, so the count and the labels cannot drift back.
+The two middle columns agree to the last digit on every regime. That agreement is the check, stronger than a tolerance: it says the endpoint is reached rather than approached. The golden also pins the grid itself, `capexGrid`, so the count and the labels cannot drift back.
 
 ## What the missing point was worth
 
@@ -33,7 +33,7 @@ The error is quoting a chart's axis instead of a chart's points. A reader who wr
 
 ## What it refuses
 
-The sweep still refuses to be reconfigured. The range and the count are written into the engine, no input reaches either, and there is no point beyond 1.5 for a reader to click. The published capex cases run a different range again, nine multipliers from 0.7 to 1.5, on the Designer's own default regime rather than on the six templates.
+The sweep still refuses to be reconfigured. The range and the count are written into the engine, no input reaches either, and there is no point beyond 1.5 for a reader to click. The published capex cases run a different range again, nine multipliers from 0.7 to 1.5, on the Designer's sample PSC regime, whose values are illustrative samples, rather than on the six templates.
 
 ## Exercise
 

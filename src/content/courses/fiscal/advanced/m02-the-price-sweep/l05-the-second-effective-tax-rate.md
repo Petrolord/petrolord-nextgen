@@ -10,16 +10,16 @@ Government take is government cash flow divided by the project's pre-take net ca
 
 | regime | government take, undiscounted | government share of net revenue, undiscounted | take minus share, percentage points (derived) | take over share (derived) |
 | --- | --- | --- | --- | --- |
+| Nigeria - PIA (2021) | 39.3855 | 30.6156 | 8.7699 | 1.286453 |
 | Generic Royalty/Tax | 43.4694 | 33.7901 | 9.6793 | 1.286453 |
 | USA - Gulf of Mexico | 43.8018 | 34.0485 | 9.7533 | 1.286453 |
 | Brazil - Concession | 64.2526 | 49.9455 | 14.3071 | 1.286453 |
 | Angola - Deepwater PSC | 72.4012 | 56.2797 | 16.1215 | 1.286453 |
 | Ghana - Deepwater | 75.4293 | 58.6335 | 16.7958 | 1.286453 |
-| Nigeria - PIA (2021) | 76.7282 | 59.6432 | 17.0850 | 1.286453 |
 
 ## Why they differ, exactly
 
-The last column is the whole story. Revenue less opex is 2245.4841 million USD under every regime and capex is 500.0000, so government take is always government share of net revenue times 2245.4841 over 1745.4841, which is 1.286453, whatever the terms. The gap in points is the share times capex over the pre-take net cash flow, so it grows with the share: 9.6793 for Generic Royalty/Tax, 17.0850 for Nigeria - PIA (2021). No fixed offset between the two columns exists. A fixed ratio does, and only on one project: on the test project, with capex of 1000.0000, it is 1.240898.
+The last column is the whole story. Revenue less opex is 2245.4841 million USD under every regime and capex is 500.0000, so government take is always government share of net revenue times 2245.4841 over 1745.4841, which is 1.286453, whatever the terms. The gap in points is the share times capex over the pre-take net cash flow, so it grows with the share: 8.7699 for Nigeria - PIA (2021), 9.6793 for Generic Royalty/Tax, up to 16.7958 for Ghana - Deepwater. No fixed offset between the two columns exists. A fixed ratio does, and only on one project: on the test project, with capex of 1000.0000, it is 1.240898.
 
 ## Where a royalty makes the second number matter
 
@@ -27,7 +27,7 @@ A royalty is charged on gross revenue from year 1, so a royalty-heavy regime col
 
 ## The mistake
 
-Treating the two numbers as one rate measured twice, or translating between them with a remembered offset. The gap is 9.6793 points for Generic Royalty/Tax and 17.0850 for Nigeria - PIA (2021) on the same project at the same price. Quote each with its name and its basis, and read government take's state before quoting it at all.
+Treating the two numbers as one rate measured twice, or translating between them with a remembered offset. The gap is 8.7699 points for Nigeria - PIA (2021) and 16.7958 for Ghana - Deepwater on the same project at the same price. Quote each with its name and its basis, and read government take's state before quoting it at all.
 
 ## Exercise
 

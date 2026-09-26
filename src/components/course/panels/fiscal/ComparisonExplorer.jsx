@@ -97,7 +97,7 @@ const Tbl = ({ head, rows, mark = () => false }) => (
   </div>
 );
 
-const Waiting = ({ what }) => <Note>Running {what} in the engine. This is a real comparison, not a cached table: it re-runs the whole ledger once per regime and again at nine prices and eight capex multipliers.</Note>;
+const Waiting = ({ what }) => <Note>Running {what} in the engine. This is a real comparison that re-runs the whole ledger once per regime and again at nine prices and eight capex multipliers.</Note>;
 const Failed = ({ what }) => <Note>The engine returned nothing for {what}. A comparison needs a project carrying production, prices and costs and at least one regime carrying all four instruments; without them there is no summary to sort and no sweep to plot.</Note>;
 
 const CASE_OPTIONS = COMPARISON_IDS.map((id) => [id, COMPARISON_LABELS[id] || id]);
@@ -114,13 +114,14 @@ const SweepRegimeCaution = () => {
   return (
     <p className="text-xs text-amber-300 mt-2 mb-0">
       READ THE NAME ON THESE CASES CAREFULLY. Every id contains "pia" and not one of them runs the
-      {' '}{s.template.name} TEMPLATE shown above. They run the Designer own default regime, id {s.id},
-      {' '}{s.name}, which shares a country with the template and nothing else: cost recovery at
-      {' '}{s.designerCostRecoveryLimit} percent against the template {s.templateCostRecoveryLimit}, and
-      {' '}{s.designerTrancheCount} profit tranches against the template {s.templateTrancheCount}. On the same
-      default project the template returns {mm(s.npvOfTheTemplate)} million USD of contractor net present value
-      and the Designer regime {mm(s.npvOfTheDesignerRegime)}. Anything keyed to the template on these cases is
-      mis-keyed.
+      {' '}{s.template.name} TEMPLATE shown above. They run {s.courseLabel}, the Designer default regime id {s.id}
+      {' '}(the engine names it {s.name}). Its values are the Designer illustrative samples and none is read from
+      the Act. It recovers cost at {s.designerCostRecoveryLimit} percent of revenue after royalty where the
+      template takes {s.templateCostRecoveryLimit} percent of the gross value of crude oil and NGL, and it splits
+      profit oil in {s.designerTrancheCount} R factor tranches where the template takes the government minimum
+      share by cumulative production in {s.templateBandCount} bands. On the same default project the template
+      returns {mm(s.npvOfTheTemplate)} million USD of contractor net present value and the Designer regime
+      {' '}{mm(s.npvOfTheDesignerRegime)}. Anything keyed to the template on these cases is mis-keyed.
     </p>
   );
 };

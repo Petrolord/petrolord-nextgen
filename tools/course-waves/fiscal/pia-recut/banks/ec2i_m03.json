@@ -74,10 +74,10 @@
    "The crossing case peaks at 3.109087 in year 12 and has only declined to 2.654466 by year 25, which is still above 2.5, so its split never leaves the 30 percent tranche."
   ],
   "answer": 3,
-  "explanation": "The only differences are capex 350 against 320 and opex 20 against 25. A reversal is an accident of where the ratio settles, not a property one case has and the other lacks."
+  "explanation": "The only differences are capex 350 against 320 and opex 20 against 25. A reversal is an accident of where the ratio settles. Neither case carries a property the other lacks."
  },
  {
-  "prompt": "On the default project year 1 the R factor is 0.512217, below every threshold in the PIA tranche list. What contractor split is applied?",
+  "prompt": "On the default project year 1 the R factor is 0.512217, below every threshold in the tiered teaching regime's tranche list. What contractor split is applied?",
   "options": [
    "0.600000, the lowest tranche's split, used as the fallback before any threshold has been reached.",
    "No split at all, since a tranche list cannot select a rate until its lowest threshold has actually been reached by the ratio.",
@@ -88,7 +88,7 @@
   "explanation": "`getTieredSplit` keeps the lowest tranche's split until a threshold is reached, exactly as the sliding royalty falls back to its lowest tier's rate."
  },
  {
-  "prompt": "In year 5 on the default project the PIA tranches give the contractor 59.3639 out of profit oil of 148.4098, at an R factor of 1.769792. How was that computed?",
+  "prompt": "In year 5 on the default project the tiered teaching regime's tranches give the contractor 59.3639 out of profit oil of 148.4098, at an R factor of 1.769792. How was that computed?",
   "options": [
    "The first 1.6 of the ratio was priced at the 60 percent rate and the balance of it at 40 percent, in the manner of a marginal income tax band.",
    "The profit oil was apportioned between the tranches in proportion to the years spent in each, then split at the two rates.",
@@ -110,7 +110,7 @@
   "explanation": "The cost recovery pool cleared and the tranche crossing landed in the same year. Two things moved in opposite directions in one row."
  },
  {
-  "prompt": "In year 11 on the default project the R factor is 2.581420, which has reached all three PIA thresholds, and the implied split reads 0.300000 on profit oil of 80.0217. What would happen if the 2.5 tranche were typed first?",
+  "prompt": "In year 11 on the default project the R factor is 2.581420, which has reached all three of the tiered teaching regime's thresholds, and the implied split reads 0.300000 on profit oil of 80.0217. What would happen if the 2.5 tranche were typed first?",
   "options": [
    "The split would be whichever qualifying tranche came last in the reordered list, so 0.600000 would be charged on that year's profit oil and no error would be raised.",
    "The engine would refuse the regime, since a tranche list whose thresholds do not ascend fails validation before any year is computed.",

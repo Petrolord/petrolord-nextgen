@@ -8,7 +8,7 @@ The summary's percentage column is government share of net revenue, two lifetime
 
 Government share of net revenue is government cash flow divided by revenue less opex over the project life. On the ledger the denominator is government cash flow plus contractor net cash flow plus TOTAL CAPEX, the capex added back. The engine returns it undiscounted, as `governmentShareOfNetRevenuePct` and under the legacy key `effectiveTaxRate`. The headline metric sits beside it: government take divides the same government cash flow by revenue less opex less capex, with nothing added back.
 
-Total capex on the default project is 500.0000 million USD, spent in year 1. Generic Royalty/Tax returns lifetime government cash flow of 758.7514 million USD and lifetime contractor net cash flow of 986.7327 million USD, and its government share of net revenue reads 33.7901 percent. Nigeria - PIA (2021) on the same field returns 687.4682 against 1058.0159 and reads 30.6156 percent. Revenue less opex, 2245.4841 million USD, is the same under every regime, so the column follows government cash flow.
+Total capex on the default project is 500.0000 million USD, spent in year 1. Generic Royalty/Tax returns lifetime government cash flow of 758.7514 million USD and lifetime contractor net cash flow of 986.7327 million USD, and its government share of net revenue reads 33.7901 percent. Nigeria - PIA (2021) on the same field returns 687.4682 against 1058.0159 and reads 30.6156 percent, the smallest collection and the lowest share of the six. Revenue less opex, 2245.4841 million USD, is the same under every regime, so the column follows government cash flow.
 
 ## It is not a tax rate
 

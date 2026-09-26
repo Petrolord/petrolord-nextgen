@@ -22,7 +22,7 @@
   "explanation": "The nine prices are fixed at 40, 50, 60, 70, 80, 90, 100, 110 and 120 USD per bbl and no input changes them, so a project whose economics turn between two of them cannot be examined there."
  },
  {
-  "prompt": "At 40 USD per bbl the Designer's default production sharing regime leaves 5.9578 million USD of cost unrecovered at the end of the life. What does that say?",
+  "prompt": "At 40 USD per bbl the Designer's sample PSC regime leaves 5.9578 million USD of cost unrecovered at the end of the life. What does that say?",
   "options": [
    "The cost recovery limit binds hard at the bottom of the sweep, and the pool closes to 0.7642 at 50 and to 0.0000 from 60 upward.",
    "The pool carries forward past the horizon, so the contractor recovers the remainder in the following licence period.",
@@ -35,13 +35,13 @@
  {
   "prompt": "The nine published price runs are named price_40_pia_default through price_120_pia_default. Which regime do they actually run?",
   "options": [
-   "The Nigeria - PIA (2021) template, which is why the 70 point returns that template's NPV of 154.8286 million USD on the default project.",
+   "The Nigeria - PIA (2021) template, which is why the 70 point returns that template's NPV of 432.0925 million USD on the default project.",
    "All six templates at once, with the PIA row published at each price and the other five rows computed and then discarded.",
    "The Nigeria - PIA (2021) template on the test project, the one project whose first deck point is not 70 USD per bbl.",
-   "The Designer's own default regime, id 1, Nigerian PIA (PSC)."
+   "The Designer's sample PSC regime, id 1, which the engine names Nigerian PIA (PSC)."
   ],
   "answer": 3,
-  "explanation": "The template and the Designer regime share a country and nothing else: cost recovery at 70 percent against 80, and royalty from 12.5 percent against 7.5 percent. The template returns 154.8286 million USD on that project and the Designer regime 169.7176."
+  "explanation": "The template and the Designer's sample PSC regime, whose values are illustrative samples, share little: the sample regime recovers cost to 70 percent of revenue after royalty and charges royalty of 12.5 percent from 60 USD/bbl, while the template recovers to 70 percent of the gross value of crude oil and NGL and charges the PIA 2021 royalty. The template returns 432.0925 million USD on that project and the sample regime 169.7176."
  },
  {
   "prompt": "What does the price sweep return for a regime when total government cash flow plus total contractor net cash flow is not greater than zero?",
@@ -136,7 +136,7 @@
   "options": [
    "The terms are flat rated, so the regime is neither progressive nor regressive.",
    "The project sits at its cost recovery limit at every price, which pins the share until the recoverable pool clears.",
-   "The sweep did not move most of that project's revenue, not that its terms are neutral to price.",
+   "The sweep did not move most of that project's revenue, so the flat curve says little about its terms.",
    "The engine flagged every point undefined and returned a constant, as it does whenever contractor net cash flow is negative."
   ],
   "answer": 2,
@@ -151,17 +151,17 @@
    "The chart is undiscounted while the table is discounted at 10 percent."
   ],
   "answer": 0,
-  "explanation": "Both are the same ratio on the same cash flows and only the add-back differs. The gap on that row is 13.2758 percentage points, and on Nigerian PIA (PSC) it is 16.1948."
+  "explanation": "Both are the same ratio on the same cash flows and only the add-back differs. The gap on that row is 13.2758 percentage points, and on the Designer's sample PSC regime it is 16.1948."
  },
  {
   "prompt": "Why can a reader not carry one fixed offset between government share of net revenue in the summary and government take on the chart?",
   "options": [
    "The two are computed on different projects, so a gap measured on one field cannot be carried to another.",
-   "The gap runs from 9.6793 to 17.0850 percentage points across six templates on one project at one price.",
+   "The gap runs from 8.7699 to 16.7958 percentage points across six templates on one project at one price.",
    "The chart prints four decimal places and the table one, so the offset changes with the rounding.",
    "The gap changes sign between a regime that adds capex back and one that does not."
   ],
   "answer": 1,
-  "explanation": "The gap grows with government share of net revenue itself, so Ghana - Deepwater's 16.7958 carried across to Generic Royalty/Tax, where it is 9.6793, overstates the chart badly."
+  "explanation": "The gap grows with government share of net revenue itself, so Ghana - Deepwater's 16.7958 carried across to Nigeria - PIA (2021), where it is 8.7699, overstates the chart badly."
  }
 ]

@@ -85,7 +85,7 @@
    "It opens a relief pool once, at the capex times one plus the uplift, and draws that pool down against the profit share until it is exhausted."
   ],
   "answer": 3,
-  "explanation": "At the default 20 percent on 500.0000 million USD of capex the pool is 1.2 times the capital cost and the first positive charge falls in year 7. Until the 2026-09-15 repair the subtraction was made in every one of the 25 years."
+  "explanation": "At the default 20 percent on 500.0000 million USD of capex the pool is 1.2 times the capital cost and the first positive charge falls in year 7."
  },
  {
   "prompt": "Two published cases run the same regime on the same project and differ only in the uplift field: one omits it and one sets it to 0. Total tax is 2127.5549 million USD against 2207.5549. What decided the gap?",
@@ -132,15 +132,15 @@
   "explanation": "Government cash flow runs the other way for exactly that reason, 1316.6067 million USD for Ghana against 758.7514 for Generic."
  },
  {
-  "prompt": "Nigeria - PIA (2021) collects the smallest total tax of the four templates carrying a corporate income tax alone, 174.0882 million USD, inside the largest government cash flow of the four, 1339.2784. What does that pair say?",
+  "prompt": "Nigeria - PIA (2021) collects the largest total tax of the four templates carrying a corporate income tax alone, 453.4354 million USD, inside the smallest government cash flow of the four, 687.4682. What does that pair say?",
   "options": [
-   "The template's royalty must be the largest of the four, because a small tax inside a large take can only be made up by a charge on gross revenue.",
+   "The template's royalty must be the smallest of the four, because a large tax inside a small take can only come from a royalty that collects almost nothing.",
    "The tax line measures one instrument and the take measures the regime, and on one ledger the two can point in opposite directions.",
    "The take is the wrong column to read, since it includes the contractor's own profit share.",
-   "The tax total is understated, because the government's share of profit oil is a tax collected in kind and belongs in that column."
+   "The tax total is overstated, because the government's share of profit oil is a tax collected in kind and has been counted in that column a second time."
   ],
   "answer": 1,
-  "explanation": "USA - Gulf of Mexico collects 260.7539 million USD of tax inside a take of 764.5528, so ranking these regimes by the tax column reverses the ranking by take."
+  "explanation": "Ghana - Deepwater collects 230.9340 million USD of tax inside a take of 1316.6067, so ranking these four regimes by the tax column reverses the ranking by take."
  },
  {
   "prompt": "By what route does capex reach the tax computation?",

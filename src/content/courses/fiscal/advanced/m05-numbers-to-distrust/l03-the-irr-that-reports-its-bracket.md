@@ -26,7 +26,7 @@ At 102400 percent the NPV is 0.0009, small, positive, and not zero. The curve is
 
 ## A root inside the old bracket
 
-`irr_above_clamp_inside_old_bracket` has flows of -100 then 1500 and a root of 1400.0000 percent. The doubling would have reported that one, because 1400 sits well inside 102400. It is above the band, so it is null with the same status. The band says what the engine will call an internal rate of return, not how far its search can reach.
+`irr_above_clamp_inside_old_bracket` has flows of -100 then 1500 and a root of 1400.0000 percent. The doubling would have reported that one, because 1400 sits well inside 102400. It is above the band, so it is null with the same status. The band defines what the engine calls an internal rate of return, whatever its search can reach.
 
 ## The two zeros, retired
 

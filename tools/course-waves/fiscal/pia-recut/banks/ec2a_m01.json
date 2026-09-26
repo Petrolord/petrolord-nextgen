@@ -19,7 +19,7 @@
    "Revenue is the figure discounted at 10 percent, which removes the regime's effect on timing."
   ],
   "answer": 2,
-  "explanation": "On that same 2686.9277 million USD, lifetime contractor net cash flow is 406.2057 million USD under Nigeria - PIA (2021) and 986.7327 under Generic Royalty/Tax."
+  "explanation": "On that same 2686.9277 million USD, lifetime contractor net cash flow is 1058.0159 million USD under Nigeria - PIA (2021) and 986.7327 under Generic Royalty/Tax."
  },
  {
   "prompt": "The summary comes back sorted. What can be read off a row's position, and what tie break applies when two regimes match?",
@@ -27,24 +27,24 @@
    "Contractor NPV descending, with the payback year as the secondary key wherever two NPVs are equal.",
    "Contractor NPV descending and nothing else, and there is no secondary key at all, so equal NPVs keep the order they were passed in.",
    "Contractor NPV descending and government cash flow ascending together, since the two mirror each other.",
-   "The internal rate of return descending, so rank 2 at 40.2125 percent above rank 3 at 44.0823 is an error."
+   "The internal rate of return descending, so rank 3 at 40.2125 percent above rank 4 at 44.0823 is an error."
   ],
   "answer": 1,
   "explanation": "summary[0] is the best regime for the contractor and nothing else can be read off a position, and the comparison exposes no option to sort on another column."
  },
  {
-  "prompt": "On the default project rank 2 returns an internal rate of return of 40.2125 percent and rank 3 returns 44.0823 percent. What has gone wrong?",
+  "prompt": "On the default project rank 3 returns an internal rate of return of 40.2125 percent and rank 4 returns 44.0823 percent. What has gone wrong?",
   "options": [
    "The two rates were solved at different discount rates, because the bisection reruns each regime against its own hurdle.",
-   "The rank 2 regime failed to converge, so the solver reported the edge of its own bracket in that row instead of a root.",
+   "The rank 3 regime failed to converge, so the solver reported the edge of its own bracket in that row instead of a root.",
    "The rows were ordered on the payback year, which puts a regime with a later payout above one with a higher rate.",
    "Nothing at all."
   ],
   "answer": 3,
-  "explanation": "Generic Royalty/Tax leads on NPV at 397.0445 million USD with a rate of 44.6574 percent, and Brazil - Concession sits at rank 3 with 287.2804 and 44.0823, so the higher rate and the higher NPV belong to different regimes."
+  "explanation": "Nigeria - PIA (2021) leads on NPV at 432.0925 million USD with a rate of 46.7732 percent, USA - Gulf of Mexico sits at rank 3 with 382.0660 and 40.2125, and Brazil - Concession at rank 4 with 287.2804 and 44.0823, so the higher rate and the higher NPV belong to different regimes."
  },
  {
-  "prompt": "On ODIDI, Ghana - Deepwater sits at rank 3 collecting 308.8447 million USD for the government and USA - Gulf of Mexico at rank 4 collecting 277.6679. Why does the lower ranked regime collect less?",
+  "prompt": "On ODIDI, Ghana - Deepwater sits at rank 4 collecting 308.8447 million USD for the government and USA - Gulf of Mexico at rank 5 collecting 277.6679. Why does the lower ranked regime collect less?",
   "options": [
    "The take column is reported after royalty on that field, and USA - Gulf of Mexico charges the higher flat royalty of the two.",
    "The sort key is NPV discounted at 12 percent while take is an undiscounted lifetime total, and the larger contractor sum arrives later.",
@@ -57,13 +57,13 @@
  {
   "prompt": "Which regime is best for the government on ODIDI, and where is that read from?",
   "options": [
-   "The regime at rank 2, Generic Royalty/Tax, since the second row is the state's preference once the contractor's own pick is set aside.",
-   "Brazil - Concession at rank 1, because on a field where every NPV is negative the leading row is the one the state has squeezed hardest.",
+   "The regime at rank 2, Brazil - Concession, since the second row is the state's preference once the contractor's own pick is set aside.",
+   "Nigeria - PIA (2021) at rank 1, because on a field this marginal the leading row is the one the state has squeezed hardest.",
    "Angola - Deepwater PSC, read out of the take column at 316.7898 million USD, from rank 6.",
-   "Nigeria - PIA (2021), whose 36.9937 percent is the harshest rate of the six."
+   "Ghana - Deepwater, whose 36.5071 percent is the harshest government share of net revenue the summary shows."
   ],
   "answer": 2,
-  "explanation": "Nothing in the summary sorts by take, and quoting the second row as the government's preference is the exact claim the Insights tab used to make."
+  "explanation": "Nothing in the summary sorts by take, and quoting the second row as the government's preference is a claim no column supports."
  },
  {
   "prompt": "The summary's government share of net revenue column divides which two quantities?",

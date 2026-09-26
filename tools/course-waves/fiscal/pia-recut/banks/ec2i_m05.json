@@ -66,7 +66,7 @@
   "explanation": "There is no valuation year, no partial period and no inflation term, and the horizon is 25 rows for every regime and every project."
  },
  {
-  "prompt": "All six templates return a negative present value on the teaching field at 12 percent, Brazil - Concession the least negative at negative 5.8662 million USD. What does the engine report in its rate of return column for Brazil there?",
+  "prompt": "Five of the six templates return a negative present value on the teaching field at 12 percent, and Brazil - Concession is the least negative of those five at negative 5.8662 million USD. What does the engine report in its rate of return column for Brazil there?",
   "options": [
    "The field loses money under that regime, as a negative present value reports, so the column carries a negative rate.",
    "A rate just under 12 percent, which is the crossing that matters and the one the summary reports.",
@@ -96,7 +96,7 @@
    "The top of a doubling search that started at 100 percent, since a bracket that stopped short is still the engine's fallback."
   ],
   "answer": 1,
-  "explanation": "`irr_above_clamp_inside_old_bracket`, with flows of negative 100 then 1500, has a root of 1400.0000 percent and the same status, so a root the retired bisection would have printed is refused as well."
+  "explanation": "`irr_above_clamp_inside_old_bracket`, with flows of negative 100 then 1500, has a root of 1400.0000 percent and the same status, so a finite root beyond the band is refused as well."
  },
  {
   "prompt": "What tells a reader that the engine refused to name a rate rather than failing to find one?",
@@ -110,15 +110,15 @@
   "explanation": "A null is a decision and not a gap. `irrRoots` carries the roots inside the band when there are several of them, and `irrRootAboveBand` flags one beyond it."
  },
  {
-  "prompt": "Two published cases used to report 0.0000 percent, one worth 25.6198 million USD at 10 percent and one worth negative 16.5289. What do they report now?",
+  "prompt": "Two published cases are worth 25.6198 million USD and negative 16.5289 at 10 percent: flows of 10 then 20, and flows of negative 100 then 90. What does the engine report for their rates?",
   "options": [
-   "0.0000 percent for both, since the repair changed the statuses the engine records and not the rates it prints.",
+   "0.0000 percent for both, since neither project has a rate that changes sign and zero is the floor the rate column carries.",
    "Null with the status no-sign-change for the first, and the negative root itself, negative 10.0000 percent, for the second.",
    "Null with the status no-root for both, since neither of them has a rate the engine is willing to name.",
    "Null with the status above-clamp for the first and null with the status multiple-roots for the second."
   ],
   "answer": 1,
-  "explanation": "One project never loses and the other never wins, and the retired rule printed the same four characters for both."
+  "explanation": "One project never loses and the other never wins, and the engine keeps them apart: a null with its status for the first, a reported negative rate for the second."
  },
  {
   "prompt": "A reader sees an empty rate column on several regimes of one comparison and reads it as a set of projects that broke even. What is wrong with that reading?",
@@ -129,7 +129,7 @@
    "It confuses the rate with the payout year, which is the first year the R factor rises above 1.0."
   ],
   "answer": 2,
-  "explanation": "All six templates on the teaching field come back null, and their present values at 12 percent run from negative 5.8662 to negative 58.1813 million USD."
+  "explanation": "All six templates on the teaching field come back null, and their present values at 12 percent run from 1.7389 down to negative 58.1813 million USD, so a null sits beside a small gain and a heavy loss alike."
  },
  {
   "prompt": "What goes wrong when a comparison is sorted or filtered on the internal rate of return column?",

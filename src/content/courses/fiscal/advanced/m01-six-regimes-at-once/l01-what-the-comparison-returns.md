@@ -8,14 +8,14 @@ One call returns four objects, and the table everybody reads is only the first o
 
 `runFiscalComparison` takes a project and a list of regimes and returns `summary`, one row per regime; `annualCashFlows`, the whole ledger for every regime; `sensitivityData`, the price and capex sweeps; and `insights`, the derived verdicts. Every ledger inside `annualCashFlows` is 25 rows long, because PROJECT_LIFE is 25 and no input changes it. The list of regimes is the only thing that grows the result: one project goes in, and each regime comes back with a complete life of its own.
 
-On the Designer's two default regimes and its default project the summary is two rows. The engine names the second one "Nigerian PIA (PSC)"; in this course it is the Designer's sample PSC regime, and its values are illustrative samples, none of them read from the Act:
+On the Designer's two default regimes and its default project the summary is two rows. The second, which the engine names "Nigerian PIA (PSC)", is the Designer's sample PSC regime; its values are illustrative samples, none read from the Act:
 
 | rank | regime | npv | irr | paybackPeriod | rFactorPayoutYear | govTake | effectiveTaxRate |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1 | Concessionary (Royalty/Tax) | 274.3670 | 37.4526 | 3 | 3 | 1040.6750 | 46.3452 |
 | 2 | Nigerian PIA (PSC) | 169.7176 | 26.1629 | 4 | 3 | 1269.4940 | 56.5354 |
 
-Money is millions of USD, so the Concessionary regime hands the government 1040.6750 million USD over the life while the Designer's sample PSC regime hands it 1269.4940 million USD. Two further columns, `royaltyRate` and `contractorSplit`, are published by the oracle rather than returned by the engine, so the tier a row selected can be read without deriving it.
+The Concessionary regime hands the government 1040.6750 million USD over the life while the Designer's sample PSC regime hands it 1269.4940 million USD. Two further columns, `royaltyRate` and `contractorSplit`, are published by the oracle rather than returned by the engine, so the tier a row selected can be read without deriving it.
 
 ## The column that never moves
 

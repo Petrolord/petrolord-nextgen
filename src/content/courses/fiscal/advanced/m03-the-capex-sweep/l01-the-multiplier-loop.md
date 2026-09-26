@@ -12,7 +12,7 @@ All six templates on the default project, contractor NPV in million USD at each 
 
 | regime | x0.8 | x0.9 | x1.0 | x1.1 | x1.2 | x1.3 | x1.4 | x1.5 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 176.9424 | 161.3220 | 154.8286 | 132.7266 | 121.6623 | 97.0074 | 79.1811 | 58.5739 |
+| Nigeria - PIA (2021) | 499.4700 | 466.1066 | 432.0925 | 397.9011 | 362.8470 | 327.7928 | 291.8238 | 255.8175 |
 | Ghana - Deepwater | 195.6257 | 185.0914 | 172.7531 | 160.6465 | 143.3384 | 129.9510 | 107.3627 | 85.7833 |
 | Brazil - Concession | 304.7089 | 296.9901 | 287.2804 | 275.6317 | 261.4250 | 244.4347 | 225.4505 | 203.9903 |
 | USA - Gulf of Mexico | 457.1975 | 419.6318 | 382.0660 | 343.9464 | 305.6635 | 267.3371 | 228.4023 | 189.4674 |
@@ -25,7 +25,7 @@ Angola - Deepwater PSC returns 213.5335 million USD at a multiplier of 0.8 and 2
 
 ## The mistake
 
-Reading the curve as a straight line is the error, and the published capex cases show why. The nine published runs of the Designer's production sharing regime move at multipliers of 0.7 to 1.5, returning NPVs of 220.1703, 204.6839, 189.9756, 169.7176, 149.8784, 123.6342, 98.2520, 69.4751 and 41.2671 million USD, with payback stepping 3, 3, 4, 4, 4, 5, 5, 6 and 6 and payout stepping 2, 2, 2, 3, 3, 3, 4, 4 and 4. A capex increase does not just lower NPV. It delays the year the contractor turns positive, delays the R factor through 1.0 and can move a profit split tier with it.
+Reading the curve as a straight line is the error, and the published capex cases show why. The nine published runs of the Designer's sample PSC regime move at multipliers of 0.7 to 1.5, returning NPVs of 220.1703, 204.6839, 189.9756, 169.7176, 149.8784, 123.6342, 98.2520, 69.4751 and 41.2671 million USD, with payback stepping 3, 3, 4, 4, 4, 5, 5, 6 and 6 and payout stepping 2, 2, 2, 3, 3, 3, 4, 4 and 4. A capex increase does not just lower NPV. It delays the year the contractor turns positive, delays the R factor through 1.0 and can move a profit split tier with it.
 
 ## What it refuses
 

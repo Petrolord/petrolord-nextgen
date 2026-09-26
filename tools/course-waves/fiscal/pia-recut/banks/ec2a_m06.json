@@ -33,29 +33,29 @@
   "explanation": "On the default project the shared figure is 2686.9277 million USD and on the test project 7001.1938, and contractor net cash flow underneath still moves by hundreds of millions."
  },
  {
-  "prompt": "The ODIDI summary is headed by Brazil - Concession at -5.8662 million USD. What does rank 1 mean there?",
+  "prompt": "The ODIDI summary is headed by Nigeria - PIA (2021) at 1.7389 million USD. What does rank 1 mean there?",
   "options": [
-   "Best on the sort's two keys, contractor NPV first and payback year second, which is what puts a year 6 regime at the head of the table.",
+   "Best on the sort's two keys, contractor NPV first and payback year second, which is what puts a year 7 regime at the head of the table.",
    "Break even, since a value that small sits inside the precision the summary reports.",
-   "Least bad, since all six ODIDI NPVs at 12 percent are negative, down to -58.1813 million USD.",
+   "The only contractor NPV of the six that clears 12 percent, and a thin one, while the rest run down to -58.1813 million USD.",
    "Best for the contractor and best for the government at once, because on ODIDI the take column runs opposite to the NPV column."
   ],
   "answer": 2,
-  "explanation": "The verdict names it best for the contractor at -5.9 million USD, and the sentence is correct while the project is still a loss."
+  "explanation": "The verdict names it best for the contractor at 1.7 million USD, and it is the one regime whose NPV is positive at that rate; the other five are losses at 12 percent."
  },
  {
   "prompt": "On ODIDI which regime collects the most for the government, and where does it sit in the summary?",
   "options": [
    "Angola - Deepwater PSC, 316.7898 million USD, at rank 6.",
-   "Nigeria - PIA (2021), 312.9610 million USD, at rank 5, the highest take on the field and the reason it ranks below the concessions.",
-   "Generic Royalty/Tax, 242.1194 million USD, at rank 2, which is the row the sort puts next to the contractor's own best.",
-   "Brazil - Concession, 232.9950 million USD, at rank 1, since the regime that leaves the contractor most also runs the largest revenue base."
+   "Nigeria - PIA (2021), 196.0260 million USD, at rank 1, the highest take on the field and the reason it heads the summary.",
+   "Generic Royalty/Tax, 242.1194 million USD, at rank 3, the middle of the table where a balanced regime would be expected to sit.",
+   "Brazil - Concession, 232.9950 million USD, at rank 2, since the regime that leaves the contractor most also runs the largest revenue base."
   ],
   "answer": 0,
   "explanation": "The summary is sorted by contractor NPV descending and by nothing else, so the take column has to be read from the take column."
  },
  {
-  "prompt": "On ODIDI, Ghana - Deepwater reads a government share of net revenue of 36.5071 at rank 3 and USA - Gulf of Mexico reads 32.8219 at rank 4. What does that show?",
+  "prompt": "On ODIDI, Ghana - Deepwater reads a government share of net revenue of 36.5071 at rank 4 and USA - Gulf of Mexico reads 32.8219 at rank 5. What does that show?",
   "options": [
    "That the two rows were computed at different discount rates, since the summary discounts each regime at the rate its template carries.",
    "That government share of net revenue does not follow the sort either.",
@@ -70,7 +70,7 @@
   "options": [
    "The royalty, the discount rate, the profit split and the tax block, since the rate is what turns a regime's timing into a value.",
    "The royalty, the cost recovery limit, the capex schedule and the tax block, because when capital is spent decides what is recovered.",
-   "The royalty, flat or sliding on the oil price; the cost recovery limit as a percent of revenue after royalty; the profit split, flat or tiered on the R factor; and the tax block.",
+   "The royalty, flat, sliding on price or the PIA 2021 royalty; the cost recovery limit and its base; the profit split, flat, tiered on the R factor or by cumulative production; and the tax block.",
    "The royalty, the cost recovery limit, the profit split and the production forecast, which is what makes one regime harsher than another."
   ],
   "answer": 2,
@@ -121,47 +121,47 @@
   "explanation": "It also models no abandonment, no depreciation, no loss carryforward against tax, no ring fence and no valuation date, and a year is its own discount exponent."
  },
  {
-  "prompt": "Under the PIA template on ODIDI, cumulative contractor net cash flow first turns positive in year 7 at 6.1264 million USD, against capex of 420.0000. What does the payback year say?",
+  "prompt": "Under the PIA template on ODIDI, cumulative contractor net cash flow first turns positive in year 7 at 43.8352 million USD, against capex of 420.0000. What does the payback year say?",
   "options": [
-   "That the contractor had recovered the whole 420.0000 million USD of capex, and 6.1264 million USD of profit on top of it, by the end of year 7 discounted at 12 percent.",
+   "That the contractor had recovered the whole 420.0000 million USD of capex, and 43.8352 million USD of profit on top of it, by the end of year 7 discounted at 12 percent.",
    "That the project is viable, since a payback inside the first third of a 25 year life is what the summary's payback column is there to show.",
-   "Only that the cumulative crossed zero in that year, on a field where the cumulative later peaks at 138.3627 and falls back to 113.0236 million USD by year 25.",
+   "Only that the cumulative crossed zero in that year, on a field where the cumulative later peaks at 250.9149 and falls back to 229.9586 million USD by year 25.",
    "That year 7 is the best year of the ledger, because it is the year the contractor's own cash position stopped falling and began to rise."
   ],
   "answer": 2,
-  "explanation": "Payback is undiscounted and is a first crossing rather than a maximum, and the same ledger returns an NPV of -43.7842 million USD at 12 percent."
+  "explanation": "Payback is undiscounted and is a first crossing rather than a maximum, and the same ledger returns an NPV of only 1.7389 million USD at 12 percent."
  },
  {
-  "prompt": "ODIDI returns contractor net cash flow of 113.0236 million USD under the PIA template and 148.3166 under USA - Gulf of Mexico, on one revenue of 1236.1983. Where did the difference go?",
+  "prompt": "ODIDI returns contractor net cash flow of 229.9586 million USD under the PIA template and 148.3166 under USA - Gulf of Mexico, on one revenue of 1236.1983. Where did the difference come from?",
   "options": [
-   "To the government, whose take is 312.9610 against 277.6679 million USD on the same two runs.",
-   "To cost recovery, which is 779.6254 under the PIA template against 785.9313 and is the larger of the two differences between the runs.",
-   "To opex and capex, which the PIA template charges against the contractor's line while a concession charges them against profit oil.",
-   "To the discount rate, since the two regimes return different NPVs at 12 percent."
+   "From the government, whose take is 196.0260 against 277.6679 million USD on the same two runs.",
+   "From cost recovery, which is 777.9904 under the PIA template against 785.9313 and is the larger of the two differences between the runs.",
+   "From opex and capex, which the PIA template charges against profit oil while a concession charges them against the contractor's line.",
+   "From the discount rate, since the two regimes return different NPVs at 12 percent."
   ],
   "answer": 0,
   "explanation": "Opex plus capex is the same 810.2137 million USD in both ledgers, so nothing but the four instruments separates the two contractor totals."
  },
  {
-  "prompt": "Under the PIA template the ODIDI royalty runs 5.7145 million USD in year 5 and 9.3986 in year 6, on gross revenue of 76.1939 and 93.9859. What moved?",
+  "prompt": "Under the PIA template the ODIDI royalty runs 3.8097 million USD in year 5 and 4.9025 in year 6, on gross revenue of 76.1939 and 93.9859. What moved?",
   "options": [
    "The R factor passed 1.0 in year 6, and the royalty rate in this template is keyed to the R factor tranche the year selects.",
    "Cost recovery closed the pool in year 6, and royalty is charged on revenue after cost recovery once the pool has cleared.",
    "Production rose in year 6, lifting revenue and royalty together.",
-   "The deck stepped at year 6 and carried the oil price over a sliding royalty threshold."
+   "The deck stepped at year 6 and lifted the oil price above that year's low benchmark, so the royalty by price began."
   ],
   "answer": 3,
-  "explanation": "The royalty tier changing inside a project's life is the one thing none of the published template cases do, and it is why the ODIDI royalty column moves for two reasons."
+  "explanation": "ODIDI produces well under 50,000 bopd, so the production royalty stays at 5 percent; at 65 USD/bbl against a year 6 low benchmark of 62.1700 the royalty by price adds 0.002276. The benchmarks are the Regulations (2021) base, the engine default, and no published template case shows that start inside a field's life."
  },
  {
-  "prompt": "Nigeria - PIA (2021) has a capex resilience of 118.3685 million USD and also of 216.2236. Which is right?",
+  "prompt": "Nigeria - PIA (2021) has a capex resilience of 243.6525 million USD and also of 244.8503. Which is right?",
   "options": [
-   "The first, because the second was measured on a field whose NPVs are all negative, and a loss between two negative numbers is not a resilience figure.",
-   "Both, each for its own field: 118.3685 is the loss on the default project and 216.2236 the loss on ODIDI, over the same eight multipliers.",
+   "The first, because the second was measured on a field where five of the six NPVs are negative, and a loss between two negative numbers is not a resilience figure.",
+   "Both, each for its own field: 243.6525 is the loss on the default project and 244.8503 the loss on ODIDI, over the same eight multipliers.",
    "The second, because a figure quoted on the Designer's own defaults understates what an overrun costs on a real field.",
    "Neither, because a loss between two endpoints is not a resilience figure at all when the curve between them is not a straight line."
   ],
   "answer": 1,
-  "explanation": "A number without its definition is not a number, which is the same lesson as one regime reading 59.6432 as government share of net revenue and 76.7282 as government take."
+  "explanation": "A number without its definition is not a number, which is the same lesson as one regime reading 30.6156 as government share of net revenue and 39.3855 as government take."
  }
 ]
