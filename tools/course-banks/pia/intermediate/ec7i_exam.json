@@ -1,0 +1,464 @@
+[
+ {
+  "prompt": "A third of an onshore field's 7500 bopd lies above 5,000 bopd. Which weighted rate applies to its liquids?",
+  "options": [
+   "0.075000, the second tranche rate",
+   "0.050000, below 10,000 bopd",
+   "0.058333",
+   "0.062500, the second tranche edge"
+  ],
+  "answer": 2,
+  "explanation": "Two thirds of 7500 bopd sit in the first tranche at 5 percent and a third in the second at 7.5 percent, and the Regulations weight them over the whole volume, so the engine returns 0.058333. Charging 7.5 percent on every barrel ignores the first tranche. 5 percent holds only up to 5,000 bopd. 0.062500 belongs to exactly 10,000 bopd."
+ },
+ {
+  "prompt": "At 120000 bopd the engine returns 0.142708 onshore, 0.119792 in shallow water and 0.064583 in deep offshore. What do the three returns have in common?",
+  "options": [
+   "Each stays below its terrain rate",
+   "Each has reached its terrain rate of para 10(2), since every barrel past the small-field edge pays it",
+   "All three use the onshore and shallow water tranches of 5,000 and 10,000 bopd before the terrain rate",
+   "Each sits a fixed margin below its terrain rate"
+  ],
+  "answer": 0,
+  "explanation": "A weighted rate keeps the low tiers on the first barrels, so even at 120000 bopd onshore stays below 15 percent, shallow water below 12.5 percent and deep offshore below 7.5 percent. The terrain rate falls only on the share above the edge. Deep offshore has one tier of 50,000 bopd and does not use the 5,000 and 10,000 bopd tranches. No fixed margin below the terrain rate appears anywhere in the scale."
+ },
+ {
+  "prompt": "Ekene Alpha's liquids royalty rate is 0.059976 in 2026 and 0.057927 in 2027. Why does it fall?",
+  "options": [
+   "The Regulations lower the second tranche rate by a set step each 1 January, so every later year of a ledger pays a little less on the same daily rate",
+   "2027 has more calendar days than 2026",
+   "Its royalty by price falls with the benchmarks",
+   "Alpha declines, so its daily rate falls within the 5,000 to 10,000 bopd band and less of it pays 7.5 percent"
+  ],
+  "answer": 3,
+  "explanation": "Alpha's daily rate falls from 8320.000000 to 7321.600000 bopd, so a smaller share of the volume sits above 5,000 bopd at 7.5 percent and the weighted rate falls. The tranche rates are fixed in the text. Both years have 365 days. The royalty by price is a separate line with its own rate and does not enter the liquids royalty rate."
+ },
+ {
+  "prompt": "The rate function is handed a daily rate of -1. What does it return?",
+  "options": [
+   "0.050000, the first tranche, applied to any daily rate at or below 5,000 bopd, negative rates included since they sit below the edge",
+   "0.000000, since a field with no production pays no royalty",
+   "A refusal: \"The crude oil and condensate daily rate must be a finite number of 0 or more; got -1.\"",
+   "A result with a note that the daily rate was reset to 0"
+  ],
+  "answer": 2,
+  "explanation": "The engine refuses a negative daily rate in its own words, stating the exact condition. A daily rate of 0 or more is accepted; below 0 there is no result, so no tranche rate and no zero rate come back. The engine never resets a stated input and attaches a note; a note belongs to a result, and a refusal returns none."
+ },
+ {
+  "prompt": "At 9999 bopd onshore the engine returns 0.062499, and at 10000 bopd 0.062500. What does the pair show about the scale?",
+  "options": [
+   "The rate jumps at the edge from one band to the next, as a step scale would, so the two figures come from different formulas",
+   "Below the edge the onshore terrain rate of 15 percent already applies to part of the volume, which is why 9999 bopd sits so close to the edge rate",
+   "The engine rounds every daily rate up to 10,000 bopd",
+   "The weighted rate climbs smoothly to the edge and meets the average of the two tranches exactly there"
+  ],
+  "answer": 3,
+  "explanation": "Inside the second tranche the weighted rate rises barrel by barrel, reaching 6.250000 percent at 10,000 bopd, the average of 5 and 7.5 percent. There is no jump. The terrain rate enters only above 10,000 bopd. The engine does not round daily rates; 9999 is read as 9999."
+ },
+ {
+  "prompt": "The Nigeria Tax Act 2025 (Official Gazette No. 117, Vol. 112, 26 June 2025) restates the tranches in its Seventh Schedule para 6(2)(d)(ii), printing \"5,000 bop\". How does the course treat that?",
+  "options": [
+   "It quotes the misprint as printed and says so",
+   "It corrects the text to bopd inside the quotation marks so the quotation reads cleanly",
+   "It reads bop as barrels a month and applies a monthly tranche",
+   "It drops the NTA quotation and cites the Regulations in its place"
+  ],
+  "answer": 0,
+  "explanation": "A misprint in a text is quoted as printed and said to be one: the rest of that paragraph and the Act write bopd. Changing a quotation would make it inexact, and the quotations are checked character by character. Nothing in the course reads bop as a different unit. The NTA wording is quoted beside the Act's, so nothing is dropped."
+ },
+ {
+  "prompt": "Regulations r.14(6) weights a field lying partly in shallow water and partly in deep offshore. At 60000 bopd the engine returns 0.114583 as shallow water and 0.054167 as deep offshore. What are these two figures?",
+  "options": [
+   "The weighted rate of the straddling field, which the engine computes from both",
+   "Two readings of an open question, of which the course grades neither",
+   "The two limbs of the method, each as if the whole field sat in one terrain",
+   "The rates the field pays before and after 1 January 2026"
+  ],
+  "answer": 2,
+  "explanation": "Rule 14(6) opens: \"(a) determine the royalty rate as if the entire field is in shallow water ;\", and the same for deep offshore, then weights the two by each terrain's share of production. The engine gives each limb from a stated terrain and has no share-of-production input, so the weighted rate is never computed and the provision is concept-only. The terrain rates are not one of the three open readings, and the tranches read no framework."
+ },
+ {
+  "prompt": "Under the Nigeria Tax Act 2025 (Official Gazette No. 117, Vol. 112, 26 June 2025), what does s.65(2)(a) do to the scope of the hydrocarbon tax?",
+  "options": [
+   "It widens the scope to natural gas sold for export, taxing it beside crude oil",
+   "It keeps the scope of PIA s.260(1)(a) in the same words",
+   "It narrows the scope to crude oil and drops condensate from the tax altogether",
+   "It moves the scope to the Seventh Schedule"
+  ],
+  "answer": 1,
+  "explanation": "The NTA re-enacts the Act's hydrocarbon tax Part, and its s.65(2)(a) repeats the words of PIA s.260(1)(a) as the course prints them side by side. Nothing is widened to export gas or narrowed to crude oil alone. The scope sits in the NTA's hydrocarbon tax Part; its Seventh Schedule deals with royalty."
+ },
+ {
+  "prompt": "The Ekene frontier case at 120 USD/bbl in 2026 pays hydrocarbon tax at a rate of 0.000000. Which texts set that rate?",
+  "options": [
+   "PIA s.267(b), which gives frontier acreage a rate of 0 percent",
+   "Seventh Schedule para 11(2), since frontier pays no royalty by price and so no hydrocarbon tax either",
+   "A stated reading of an open question",
+   "PIA s.260(3) and NTA s.65(4), until the acreage is reclassified"
+  ],
+  "answer": 3,
+  "explanation": "PIA s.260(3) keeps frontier acreage outside the Part \"until it is reclassified under section 68 (3)\", and NTA s.65(4) keeps the same carve-out, so the engine returns 0.000000 under either framework. Section 267(b) is the 15 percent class. Para 11(2) removes the royalty by price and says nothing about the tax. The frontier rate is printed in both texts and is no open reading."
+ },
+ {
+  "prompt": "The Ekene marginal field is a shallow water lease converted under s.94(1). Its hydrocarbon tax rate is 0.150000. Which provisions give that rate?",
+  "options": [
+   "PIA s.94(1) with s.267(b)",
+   "PIA s.267(a) alone",
+   "Seventh Schedule para 10(4)",
+   "A stated new-lease reading"
+  ],
+  "answer": 0,
+  "explanation": "Section 94(1) has a producing marginal field convert to a petroleum mining lease on the terms of s.267(b) and s.302, and s.267(b) is the 15 percent class; the engine takes it as the stated flag pia_marginal_field_pre_2021. Section 267(a) is the 30 percent class. Para 10(4) is royalty and sets the tranches this field pays (0.093750 at 20000 bopd), and it sets no tax rate. The flag is on a converted lease, so no new-lease reading arises."
+ },
+ {
+  "prompt": "Which response does the engine give to a licence type of \"OML\"?",
+  "options": [
+   "It refuses: \"pia_license_type must be \"PML\" or \"PPL\"; got \"OML\".\"",
+   "The old oil mining lease terms are applied, as the licence has not converted",
+   "OML is read as a converted PML and taxed at the 30 percent class",
+   "A run at 15 percent, the rate of a licence from before the Act"
+  ],
+  "answer": 0,
+  "explanation": "An oil mining lease is a licence type from before the Act, and the engine accepts \"PML\" or \"PPL\" only, refusing anything else in its own words. The engine models converted and new-acreage terms only, so the old terms are concept-only. It never maps one licence type to another silently, and a refusal returns no rate at all."
+ },
+ {
+  "prompt": "A lease status of \"renewed\" is typed into the terms. What comes back?",
+  "options": [
+   "Converted-lease terms, since the Sixth Schedule para 1(1) names converted leases and their renewals",
+   "New-lease terms, since a renewal is a fresh grant after the Act commenced",
+   "A refusal: \"pia_lease_status must be \"converted\" or \"new\"; got \"renewed\".\"",
+   "A result with the production allowance set to zero and a note"
+  ],
+  "answer": 2,
+  "explanation": "The engine takes the lease status as one of two stated strings and refuses any other in its own words. Para 1(1) does mention renewals of converted leases, but the engine reads only \"converted\" or \"new\", so the learner states which one applies. It never guesses a status, and a refusal returns no allowance or note."
+ },
+ {
+  "prompt": "On the Ekene new onshore lease in 2027, the chargeable profit is 123946029.235482 under both stated readings. What are the 2027 hydrocarbon tax figures?",
+  "options": [
+   "37183808.770645 under both readings, since the chargeable profit is the same",
+   "18591904.385322 at the stated 15 and 37183808.770645 at the stated 30",
+   "18591904.385322 under both readings, with the stated 30 moving companies income tax",
+   "40183808.770645 at the stated 15 and 18591904.385322 at the stated 30, one halving the other"
+  ],
+  "answer": 1,
+  "explanation": "The stated rate moves only the tax line: 15 percent gives 18591904.385322 and 30 percent 37183808.770645, on the same chargeable profit. The same base does not make the same tax; the rate differs. Companies income tax is 40183808.770645 under both readings, because it does not deduct the hydrocarbon tax, so it is neither moved by the reading nor a hydrocarbon tax figure."
+ },
+ {
+  "prompt": "An override of 150 is stated for the hydrocarbon tax rate. How does the engine handle it?",
+  "options": [
+   "Tax charged at 150 percent of chargeable profit, the rate as stated",
+   "The capped rate of 100 percent",
+   "A refusal naming the range the override must sit in",
+   "The s.267 rate for the lease, with the stated override ignored"
+  ],
+  "answer": 2,
+  "explanation": "The engine's words are: \"pia_hct_rate_override_pct must be a number from 0 to 100; got 150.\" Out of range means no run at all: the engine does not charge 150 percent, cap the figure at 100 or fall back to the s.267 class. The learner corrects the terms and runs again."
+ },
+ {
+  "prompt": "On the Ekene CPR case, 2025 HCDT is 1200000.000000 and the 2025 NDDC levy is also 1200000.000000. What does each read?",
+  "options": [
+   "Each reads the 2025 opex at 3 percent, which is why the two lines print the same figure",
+   "HCDT reads the 2024 opex; the levy reads the 2025 opex plus capex",
+   "The 2024 opex plus capex, for both",
+   "Revenue for HCDT and royalty for the levy"
+  ],
+  "answer": 1,
+  "explanation": "HCDT is 3 percent of the preceding year's opex (40000000 USD in 2024), and the NDDC levy is 3 percent of the year's opex plus capex (40000000 USD of opex and no capex in 2025). The two happen to print alike here and read different bases: in 2024 HCDT is 0.000000 with no prior year stated, while the levy is 5700000.000000 because the 2024 capex enters its base. Neither reads revenue or royalty."
+ },
+ {
+  "prompt": "PIA s.263(1)(f) names which deductions for the hydrocarbon tax?",
+  "options": [
+   "Companies income tax and the tertiary education tax paid in the same period, as taxes owed to the Federal Government",
+   "Signature and production bonuses paid for petroleum rights",
+   "Cost still above the cost price ratio at cessation",
+   "Levies, stamp duties and fees owed to the Federal, State or Local Government"
+  ],
+  "answer": 3,
+  "explanation": "The text reads: \"(f ) all sums the liability of which was incurred by the company to the Federal Government or any State or Local Government Council by way of levies, stamp duties and fees ;\". Companies income tax and the tertiary education tax are barred by s.264(l). Bonuses are barred by s.264(f), a concept-only item since the engine takes no bonus input. Cost above the cap at cessation is barred by s.264(q)."
+ },
+ {
+  "prompt": "PIA s.263(1)(e) makes a decommissioning and abandonment fund contribution deductible. What condition does the text attach?",
+  "options": [
+   "The fund's surplus or residue is taxed at the end of the field's life",
+   "The contribution is deductible only above 65 percent of revenue, as the part the cost price ratio cannot hold",
+   "Only half the contribution may be deducted",
+   "It is deductible for companies income tax only"
+  ],
+  "answer": 0,
+  "explanation": "The text allows \"any amount contributed to a fund, scheme or arrangement approved by the Commission for the purpose of decommissioning and abandonment, provided that the surplus or residue of the fund shall be subject to tax under this Act at the end of life of the field,\". The engine counts the contribution inside the cost price ratio pool; it is never a threshold above 65 percent. Nothing halves it, and s.302(11)(b) makes it deductible for companies income tax as well."
+ },
+ {
+  "prompt": "PIA s.264(f) bars signature, production and renewal bonuses from the hydrocarbon tax base. How does the course treat that item?",
+  "options": [
+   "As concept-only, since the engine takes no bonus input",
+   "Graded, read from the bonus column of the tax base view, since the engine prints every deduction the Act names",
+   "Deducted by the engine under s.263(1)(f)",
+   "Refused whenever a bonus appears"
+  ],
+  "answer": 0,
+  "explanation": "The engine has no input for a bonus, so the bar in s.264(f) is taught from its text and never graded on a number. No bonus column exists. Section 263(1)(f) covers levies, stamp duties and fees, and s.264(f) keeps bonuses out explicitly. With no bonus input, there is nothing for the engine to refuse."
+ },
+ {
+  "prompt": "On the Ekene CPR case in 2026 the hydrocarbon tax assessable profit is 10292934.782609 and the chargeable profit 8792934.782609. What came off between them?",
+  "options": [
+   "The capital allowance of the 2024 spend for 2026, in full, beside the production allowance",
+   "The carried pool of 93000000.000000, released against the profit in the ledger's last year",
+   "HCDT and the NDDC levy, 1200000.000000 each, taken at the chargeable step",
+   "The production allowance of 1500000.000000, with no capital allowance let through that year"
+  ],
+  "answer": 3,
+  "explanation": "The step deducts the capital allowance the cap let through and the production allowance. The gap between the two lines is exactly the production allowance, 1500000.000000, so the cap, full of carried cost and opex, let no capital allowance through in 2026. The carried pool of 93000000.000000 is what the cap turned away and is forfeited at cessation. HCDT and the NDDC levy come off before the assessable profit."
+ },
+ {
+  "prompt": "The Nigeria Tax Act 2025 prints the cost price ratio at its Sixth Schedule para 2(1). What does its text measure the 65 percent against?",
+  "options": [
+   "Total costs incurred, capital and operating together",
+   "Gross revenues determined at the measurement points",
+   "The previous year's revenue",
+   "Revenue after royalties and levies"
+  ],
+  "answer": 1,
+  "explanation": "The NTA text caps deductions at \"a cost price ratio limit of 65% of gross revenues determined at the measurement points.\" The limit is on revenue, so a share of costs would have nothing to cap. Nothing in either text reads the previous year's revenue or nets royalties first; royalties sit outside the cap altogether."
+ },
+ {
+  "prompt": "Between 2026 and 2027 the limit on Alpha's cost recovery drops from 147664400.000000 to 129944672.000000. What drives the drop?",
+  "options": [
+   "The carried pool shrinks the cap a little more in each year that follows",
+   "Capex falls from 120000000 USD to 30000000 USD, and the cap is a share of costs",
+   "Gas revenue grows, and the cap deducts it",
+   "Alpha's crude oil and condensate revenue falls as the field declines, and the cap is 65 percent of it"
+  ],
+  "answer": 3,
+  "explanation": "Para 2(1) sets the limit at 65 percent of gross revenues, which the engine reads as crude oil and condensate revenue, so a declining field has a falling cap. Alpha carries nothing, and no carry reduces a cap in any case. The cap is measured on revenue; capex enters the pool it limits and plays no part in the limit. Gas revenue never enters the cap and is not deducted from it; Alpha's gas declines with its crude."
+ },
+ {
+  "prompt": "Under the Nigeria Tax Act 2025, First Schedule Part II para 4(2) records 1 percent of qualifying capital expenditure. What effect does that record have on the allowance claimed?",
+  "options": [
+   "Holds back 1 percent of each spend until disposal, as the Act's para 5(2) does",
+   "Adds 1 percent to the fifth-year rate, lifting it above 20 percent",
+   "Each year's rate falls to 19 percent",
+   "None: it is a notional amount"
+  ],
+  "answer": 3,
+  "explanation": "Para 4(2) says the 1 percent is recorded \"for statistical purposes until the asset is disposed\" and, \"being a notional amount, shall not increase or reduce the amount of capital allowance claimable under this Part.\" The Act's para 5(2) retains 1 percent in the books; the NTA record does not. Neither text lifts a rate above 20 percent, and 19 percent is the Act's fifth-year rate alone."
+ },
+ {
+  "prompt": "A new shallow water lease has produced 99500000 barrels before a year under the Act alone and then produces 1000000 barrels at 75 USD/bbl. What does the engine return?",
+  "options": [
+   "8000000.000000, as the shallow water cap is 500 million barrels",
+   "6000000.000000, split 500000 barrels either side of the 100 million barrel cap",
+   "4000000.000000, as the onshore cap of 50 million is passed",
+   "2500000.000000"
+  ],
+  "answer": 1,
+  "explanation": "Para 1(2)(b) runs the first tier \"up to a cumulative maximum production of 100 million barrels\" for shallow water, so the year splits: 500000 barrels at 8.00 USD and 500000 at 4.00 USD. The 500 million barrel cap is for deep offshore and frontier. The 50 million cap is onshore. 2500000.000000 would be the converted-lease allowance, and this lease is new."
+ },
+ {
+  "prompt": "A new onshore lease is past its cap, and the oil price is 15 USD/bbl. What allowance does the engine give 1000000 barrels?",
+  "options": [
+   "4000000.000000, the second tier",
+   "2500000.000000, the converted leg",
+   "8000000.000000, the first tier",
+   "3000000.000000"
+  ],
+  "answer": 3,
+  "explanation": "After the cap each barrel earns the lower of 4.00 USD and 20 percent of the price; at 15 USD/bbl, 20 percent is lower, so 1000000 barrels earn 3000000.000000. 4000000.000000 is the return at 75 USD/bbl, where 4.00 USD is the lower leg. The converted-lease allowance does not apply to a new lease, and no price restores the first tier."
+ },
+ {
+  "prompt": "PIA Sixth Schedule para 1(4) extends the production allowance. To what?",
+  "options": [
+   "Condensates and liquid natural gas liquids within the tax under s.260(1)(a)",
+   "Natural gas sold in-country at the 2.5 percent royalty rate, as gas is the other stream a field sells",
+   "Non-associated gas condensate, which para 1(4) brings back into the tax base",
+   "Capital spending, as a second capital allowance"
+  ],
+  "answer": 0,
+  "explanation": "The text reads: \"(4) Any allowances for crude oil shall also apply to condensates and liquid natural gas liquids under section 260 (1) (a) of this Act.\" Gas is outside the tax and earns no allowance. Non-associated gas condensate is outside the tax under s.260(1)(b)(ii), and para 1(4) points only to s.260(1)(a). The production allowance is a sum per barrel and has nothing to do with capital spending."
+ },
+ {
+  "prompt": "Does the converted-lease production allowance differ between a year under the Act alone and a year under the Nigeria Tax Act 2025?",
+  "options": [
+   "Yes: the NTA raises the fixed leg to 8.00 USD for converted leases that renew after 2026",
+   "No, both texts print the same paragraph",
+   "The NTA drops the allowance for converted leases in shallow water, so it differs",
+   "It differs, as the NTA halves the 20 percent price leg"
+  ],
+  "answer": 1,
+  "explanation": "The Act's Sixth Schedule para 1(1) and the NTA's Sixth Schedule para 1(1) both give converted leases \"the lower of US $2.50 per barrel and 20% of the fiscal oil price\", so the engine returns the same allowance in every year it reads. The 8.00 USD leg belongs to new leases. Neither text drops or halves the converted-lease allowance."
+ },
+ {
+  "prompt": "The worked example's converted lease earns a production allowance of 45625000.000000 on 18250000 barrels at 80 USD/bbl. What would happen to it if the oil price were 10 USD/bbl?",
+  "options": [
+   "Nothing: a converted lease earns 2.50 USD a barrel at any price",
+   "A rise to the 8.00 USD first tier",
+   "Zero, since the allowance stops below 12.50 USD/bbl",
+   "It would fall, since 20 percent of the price drops below 2.50 USD"
+  ],
+  "answer": 3,
+  "explanation": "The converted-lease allowance is the lower of 2.50 USD and 20 percent of the price. At 80 USD/bbl the fixed leg is lower; at 10 USD/bbl the price leg is lower, and on 1000000 barrels the engine returns 2000000.000000 at that price. The 8.00 USD tier is for new leases. The allowance does not stop below the crossing price of 12.50 USD/bbl; the price leg simply takes over."
+ },
+ {
+  "prompt": "Which cumulative production cap does PIA Sixth Schedule para 1(2)(c) set for deep offshore and frontier leases granted after the Act?",
+  "options": [
+   "50 million barrels, the same as onshore, since para 1(2) sets one cap for every terrain",
+   "500 million barrels",
+   "100 million barrels, the same as shallow water",
+   "No cap at all"
+  ],
+  "answer": 1,
+  "explanation": "Para 1(2)(c) gives \"the lower of US $8.00 per barrel and 20% of the fiscal oil price, up to a cumulative maximum production of 500 million barrels\". The onshore cap is 50 million and the shallow water cap 100 million, each set in its own paragraph. The first tier ends at the cap on every terrain."
+ },
+ {
+  "prompt": "The course reads the Finance Act 2023 for the two thirds restriction. How is that text used?",
+  "options": [
+   "Quoted verbatim, like the gazetted Act",
+   "Taken from a paid commentary, quoted with its citation",
+   "Paraphrased, as it was read from a scanned copy",
+   "Not used; the engine sets the restriction itself"
+  ],
+  "answer": 2,
+  "explanation": "The Finance Act 2023 was read as the \"Final Signed by PMB\" copy published by the Budget Office of the Federation on 7 June 2023, a scan read page by page, so the course paraphrases it. Only public texts are quoted, and paid commentary is never quoted. The restriction the engine applies is the one the Act's s.9(b) substitutes into CITA para 24(7)."
+ },
+ {
+  "prompt": "PIA s.302(11)(b) lets companies income tax deduct contributions to approved funds. Which purposes does it name?",
+  "options": [
+   "Decommissioning, host communities trusts and environmental remediation",
+   "Only decommissioning funds, and only once production from the field has ended",
+   "Royalties on crude oil, condensate and natural gas",
+   "The Niger Delta Development Commission alone"
+  ],
+  "answer": 0,
+  "explanation": "The text names funds \"for the purpose of providing for: (i) abandonment and decommissioning, (ii) petroleum host communities development trust, or (iii) environmental remediation ;\". The text names three purposes and ties none of them to the end of production. Royalties are deducted under s.302(11)(a). The NDDC levy is deducted in the engine's base as well, but it is not what (b) names."
+ },
+ {
+  "prompt": "What does NTA s.78(3)(a) say about the hydrocarbon tax in computing income tax under Chapter Two?",
+  "options": [
+   "Fully deductible",
+   "That it is not deductible",
+   "Half of it may be deducted",
+   "It replaces income tax for crude oil"
+  ],
+  "answer": 1,
+  "explanation": "The text reads: \"(3) In determining the income tax under Chapter Two of this Act: (a) hydrocarbon tax is not deductible; and\", the same rule as PIA s.302(5). So the two taxes run in parallel and neither deducts the other, in full or in part, and neither replaces the other."
+ },
+ {
+  "prompt": "What companies income tax does the Ekene onshore lease pay in 2024, a year under the Act alone, when its assessable profit for that tax is 153422584.102902?",
+  "options": [
+   "30 percent of the whole assessable profit, with no capital allowance deducted",
+   "40626775.230871",
+   "36126841.671286, the figure the next year returns",
+   "83939977.984829, the total tax"
+  ],
+  "answer": 1,
+  "explanation": "The engine claims the 18000000.000000 capital allowance (two thirds of the assessable profit is larger, so the restriction does not bind) and charges 30 percent on the rest, 40626775.230871. Thirty percent of the whole assessable profit leaves the allowance in the base. 36126841.671286 is the 2025 companies income tax. 83939977.984829 is total tax, which adds the other instruments."
+ },
+ {
+  "prompt": "Under the two thirds restriction, how much capital allowance does the CPR case claim in 2025, when its assessable profit for companies income tax is 13442572.062084?",
+  "options": [
+   "13442572.062084, the whole assessable profit",
+   "The whole allowance, since the restriction ended in 2024",
+   "8961714.708056, two thirds of the assessable profit",
+   "Nothing, since the cost price ratio already took the allowance"
+  ],
+  "answer": 2,
+  "explanation": "The two thirds restriction applies in every year under the Act alone, so the claim is two thirds of 13442572.062084, 8961714.708056, and the rest is carried. Claiming the whole profit would ignore the limit. The rule is in force in 2025 as in 2024. The cost price ratio belongs to the hydrocarbon tax and leaves the companies income tax allowance alone."
+ },
+ {
+  "prompt": "PIA s.265(1) defines assessable profit for the hydrocarbon tax. What does it deduct from the adjusted profit?",
+  "options": [
+   "Any loss incurred in a previous accounting period",
+   "A loss the company expects to make in the next accounting period",
+   "The hydrocarbon tax paid in the previous accounting period",
+   "Every cost above the cost price ratio"
+  ],
+  "answer": 0,
+  "explanation": "The text reads: \"that period after the deduction of the amount of any loss incurred by that company during any previous accounting period.\" Losses run forward from earlier periods and none comes back from a later one. The tax itself is not a deduction. Cost above the cap is a cost price ratio carry, a different rule with its own forfeiture."
+ },
+ {
+  "prompt": "On the Ekene CPR case the 2026 companies income tax is 0.000000. Why?",
+  "options": [
+   "The two thirds restriction removes the whole profit, leaving nothing to tax",
+   "The hydrocarbon tax of 2026 is deducted first",
+   "The chargeable profit is below zero, so the year carries a loss",
+   "Companies income tax is suspended in any year when the cost price ratio cap binds"
+  ],
+  "answer": 2,
+  "explanation": "The 2026 companies income tax chargeable profit is -65495752.569896, so the tax is 0.000000 and the loss is carried. The restriction limits the allowance and leaves the profit alone, and companies income tax does not deduct the hydrocarbon tax. No rule suspends one tax when the other's cap binds."
+ },
+ {
+  "prompt": "The worked example's gross revenue is 1,460,000,000.000000. Which provision puts every dollar of it inside the hydrocarbon tax?",
+  "options": [
+   "Seventh Schedule para 6, which treats every stream as crude oil",
+   "PIA s.260(1)(a), since the year is crude oil only",
+   "Sixth Schedule para 2(1), which reads gross revenue",
+   "PIA s.263(1)(b)"
+  ],
+  "answer": 1,
+  "explanation": "Section 260(1)(a) brings crude oil into the tax, and the worked example sells crude oil only, so all of its revenue is in the base. Para 6 treats condensate as crude oil for royalty and natural gas liquids as gas. Para 2(1) sets the cap on revenue and puts nothing into the tax. Section 263(1)(b) deducts royalties."
+ },
+ {
+  "prompt": "A ledger returns with a note in kpis.pia_notes. Another run stops with a thrown message. How should each be read?",
+  "options": [
+   "The note is part of a result; the message names an input to fix in the terms",
+   "Warnings, both of them, on a finished ledger",
+   "Both are refusals",
+   "An error in the note, and a warning in the message"
+  ],
+  "answer": 0,
+  "explanation": "A note is a statement the engine attaches to a finished result about a stated default, a conflict between texts or an approximation. A refusal is a thrown error with no result, and its message states the exact condition that failed, so the fix is in the terms. Neither reading of both as the same kind of output holds."
+ },
+ {
+  "prompt": "On Ekene Alpha in 2026 the cost price ratio claim is 46563591.022444 and the HCT assessable profit 182041059.069891. Which provision decides that the claim holds only part of the opex?",
+  "options": [
+   "The 65 percent cap of para 2(1), which binds on Alpha in 2026",
+   "The two thirds restriction of CITA para 24(7)",
+   "The shared-costs split at the crude-plus-condensate share",
+   "The Sixth Schedule production allowance"
+  ],
+  "answer": 2,
+  "explanation": "Alpha sells gas, so opex and the other shared costs enter the tax at the 0.970075 liquids share; the claim is far below the cap of 147664400.000000, so the cap does not bind. The two thirds restriction limits the companies income tax allowance. The production allowance is a per-barrel deduction below the assessable line and is not part of the claim."
+ },
+ {
+  "prompt": "Ekene Alpha's hydrocarbon tax over its life is 204770583.587056 at 100 percent and 102385291.793528 at 50 percent. What does the pair show?",
+  "options": [
+   "Half the barrels feed the tranches",
+   "Money lines scale to the share after field-level arithmetic",
+   "A lower rate for the 50 percent partner",
+   "The cap binds at 50 percent"
+  ],
+  "answer": 1,
+  "explanation": "The course checks that at 50 percent every money line is exactly half, and the hydrocarbon tax pair shows it. The engine does the fiscal arithmetic on the whole field first, so the tranches see every barrel and the s.267 class is the lease's whatever the share. Alpha's cost price ratio never binds, at either share."
+ },
+ {
+  "prompt": "The Professional reading names the cash flow course for some of the work. Which of these belongs to that course?",
+  "options": [
+   "Forfeiture of cost under the Sixth Schedule cap at the end of the ledger",
+   "Classes of rate under s.267",
+   "The production allowance tiers and the barrels either side of the cap",
+   "Discounting, NPV, IRR and the arithmetic of carrying pools"
+  ],
+  "answer": 3,
+  "explanation": "The cash flow course owns the ledger arithmetic: discounting, NPV, IRR, payback, the order of the ledger rows, loss-pool arithmetic and working-interest scaling. This course names the provision behind a line: the cap and its forfeiture, the rate classes and the allowance tiers are all taught here."
+ },
+ {
+  "prompt": "The fiscal course is named at the seam of this one. What does it own?",
+  "options": [
+   "Teaching the Act's hydrocarbon tax as a system",
+   "Ekene cases",
+   "Regime design in the abstract: instruments, sliding scales and R-factors",
+   "The royalty tranches of the Seventh Schedule"
+  ],
+  "answer": 2,
+  "explanation": "Fiscal regime design belongs to the fiscal course: the four instruments in the abstract, sliding scales, R-factors, templates and progressivity. This course teaches the Act as a system, with its own Ekene cases and the gazetted tranches."
+ },
+ {
+  "prompt": "The engine accepts pia_gas_in_country_share_pct 100. What gas royalty rate results?",
+  "options": [
+   "0.050000, as export gas",
+   "0.037500, a half blend",
+   "A refusal at the edge",
+   "0.025000"
+  ],
+  "answer": 3,
+  "explanation": "The in-country share runs from 0 to 100 inclusive, and at 100 every unit of gas pays the 2.5 percent in-country rate, 0.025000. 0.050000 is the rate at a share of 0. 0.037500 is the blend at 50. The engine refuses only above 100, such as 100.5."
+ }
+]

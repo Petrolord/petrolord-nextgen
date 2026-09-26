@@ -1,0 +1,362 @@
+{
+ "app_slug": "pia",
+ "tier": "intermediate",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-the-small-field-tranches",
+   "title": "The Small Field Tranches",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-onshore-and-shallow-water-tranches",
+     "title": "Onshore and shallow water tranches",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-deep-offshore-tier",
+     "title": "The deep offshore tier",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-crude-plus-condensate-over-calendar-days",
+     "title": "Crude plus condensate over calendar days",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-weighted-rates-at-the-tranche-edges",
+     "title": "Weighted rates at the tranche edges",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "pia-royalty-calculator",
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-fields-that-straddle-terrains",
+     "title": "Fields that straddle terrains",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-what-the-hydrocarbon-tax-charges",
+   "title": "What the Hydrocarbon Tax Charges",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-crude-condensate-and-liquid-gas",
+     "title": "Crude, condensate and liquid gas",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-gas-outside-the-tax",
+     "title": "Gas outside the tax",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-deep-offshore-and-frontier-under-the-act",
+     "title": "Deep offshore and frontier under the Act",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-two-classes-of-rate",
+     "title": "The two classes of rate",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-an-open-question-for-new-leases",
+     "title": "An open question for new leases",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-deductions-and-the-cost-price-ratio",
+   "title": "Deductions and the Cost Price Ratio",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-deductible-and-non-deductible-items",
+     "title": "Deductible and non-deductible items",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-royalties-and-levies-in-the-base",
+     "title": "Royalties and levies in the base",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-cost-price-ratio-cap",
+     "title": "The cost price ratio cap",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-carrying-cost-forward",
+     "title": "Carrying cost forward",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-cost-lost-at-cessation",
+     "title": "Cost lost at cessation",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-allowances",
+   "title": "Allowances",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-capital-allowances-over-five-years",
+     "title": "Capital allowances over five years",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-allowance-for-converted-leases",
+     "title": "The production allowance for converted leases",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-new-leases-and-the-volume-cap",
+     "title": "New leases and the volume cap",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-barrels-after-the-cap",
+     "title": "Barrels after the cap",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-income-tax-alongside",
+   "title": "Companies Income Tax Alongside",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-income-tax-on-oil-and-gas",
+     "title": "Companies income tax on oil and gas",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-what-the-income-tax-base-deducts",
+     "title": "What the income tax base deducts",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-two-thirds-restriction",
+     "title": "The two thirds restriction in Act years",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-losses-carried-by-class",
+     "title": "Losses carried by class",
+     "order": 4,
+     "est_minutes": 12,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-the-professional-reading",
+   "title": "The Professional Reading",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-tax-so-far",
+     "title": "The tax so far",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-reading-a-hydrocarbon-tax-year",
+     "title": "Reading a hydrocarbon tax year",
+     "order": 2,
+     "est_minutes": 14,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pia-hct-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

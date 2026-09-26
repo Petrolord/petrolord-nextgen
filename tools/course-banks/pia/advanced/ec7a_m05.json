@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "In the wording this course shares with the fiscal course, what is \"Government take\"?",
+  "options": [
+   "Government cash flow divided by revenue less opex over the project life, capex added back to the contractor side",
+   "Total tax over the companies income tax assessable profit, year by year",
+   "Government cash flow and revenue, both discounted at 10 percent",
+   "Government cash flow divided by revenue less opex less capex over the project life"
+  ],
+  "answer": 3,
+  "explanation": "The conventions file: \"Government cash flow divided by the project's pre-take net cash flow, which is revenue less opex less capex, over the project life.\" Adding capex back to the contractor side gives the second metric, \"Government share of net revenue\". The engine's take is undiscounted and nominal, and it is a ratio of totals over a life."
+ },
+ {
+  "prompt": "The engine reports Ekene Alpha's government take as 66.564877. Which two totals does that figure divide?",
+  "options": [
+   "Hydrocarbon tax plus companies income tax over the pre-take value of 835989167.000000",
+   "Government cash flow of 556475163.954050 over a pre-take value of 835989167.000000",
+   "Government cash flow of 556475163.954050 over revenue less opex",
+   "Total royalties of 79273732.707567 plus every tax, over gross revenue for the life"
+  ],
+  "answer": 1,
+  "explanation": "The decomposition prints government cash flow (the sum of the seven lines) 556475163.954050 and the pre-take value (revenue less capex less opex) 835989167.000000, and checks that their ratio reproduces the engine's 66.564877. The two taxes alone leave out royalties, the levy, HCDT and NDDC, and the denominator subtracts capex."
+ },
+ {
+  "prompt": "Ekene Alpha is rerun at a 50 percent working interest (ekene_alpha_wi_50). What happens to its money lines and its take?",
+  "options": [
+   "Money lines halve except royalty, which the operator pays at field level, so the take rises a little",
+   "The tranches read half the daily rate, so royalty falls by more than half and the take falls with it",
+   "Every money line is half, and the take stays at 66.564877",
+   "Every money line is half, and the take halves too, to the share of the take the partner carries"
+  ],
+  "answer": 2,
+  "explanation": "The course checks that at 50 percent every money line is half and the take does not move: 66.564877 on both lines, because the tranches and caps are read at field level before the share is taken (PIA s.273(4); NTA s.77(4)). Royalty is a money line and halves with the rest (39636866.353784 against 79273732.707567)."
+ },
+ {
+  "prompt": "Why is the tertiary education tax line 0.000000 in Ekene Alpha's decomposition?",
+  "options": [
+   "Every Alpha year, 2026 to 2032, is a year under the Nigeria Tax Act 2025, where the development levy is charged in its place",
+   "Alpha's companies income tax assessable profit is below the threshold the Finance Act 2023 sets for the tax",
+   "The engine folds the education tax into companies income tax, so it has no line of its own",
+   "The education tax is charged on the hydrocarbon tax base, and Alpha's liquids share removes it"
+  ],
+  "answer": 0,
+  "explanation": "Alpha runs 2026 to 2032, every row \"nta_2025\". The framework table gives the tertiary education tax as none in a year under the Nigeria Tax Act 2025 (NTA s.197(5)) and the development levy as 4 percent of the companies income tax assessable profit; Alpha's levy is 35714217.371697. The education tax reads the companies income tax assessable profit when it is charged."
+ },
+ {
+  "prompt": "In Ekene Alpha's decomposition HCDT is 4320000.000000 against NDDC 9540000.000000. What rule behind HCDT keeps its first year empty?",
+  "options": [
+   "HCDT is 3 percent of the year's own opex plus capex, and its first year has capex only",
+   "Only once the field's production passes 10,000 bopd is HCDT charged, which Alpha never does in any year of its ledger",
+   "HCDT is 3 percent of the preceding year's opex, and Alpha's first year reads a prior-year opex of 0",
+   "A fixed sum of 720000.000000 a year, which begins in the second year of any ledger"
+  ],
+  "answer": 2,
+  "explanation": "HCDT is 3 percent of the preceding year's opex, and the first ledger year reads the stated pia_prior_year_opex_usd (0 if not stated); Alpha's 2026 HCDT is 0.000000 and every later year 720000.000000. The NDDC levy reads opex plus capex, which is why its 2026 figure is 4320000.000000. Nothing in HCDT reads the daily rate."
+ },
+ {
+  "prompt": "Moving Ekene Alpha onshore changes every provision total by 0.000000. What does the course read from that?",
+  "options": [
+   "The engine ignores the terrain once a lease has converted, whatever the daily rate",
+   "Onshore royalty is higher, and the hydrocarbon tax falls by exactly the same amount",
+   "Onshore and shallow water pay one terrain rate, 12.5 percent, at every volume",
+   "Every Alpha year is below 10,000 bopd, where onshore and shallow water pay the same rate"
+  ],
+  "answer": 3,
+  "explanation": "The course reads the row this way: moving Alpha onshore changes no royalty, because every Alpha year is below 10,000 bopd where onshore and shallow water pay the same rate. The terrain rates differ above 10,000 bopd (15 percent onshore, 12.5 percent in shallow water), and a converted lease pays 0.300000 in both terrains."
+ },
+ {
+  "prompt": "At oil 95 USD/bbl, Ekene Alpha's royalties change by 43566660.591831 on the Regulations base. What does the Act base give, and how is each figure quoted?",
+  "options": [
+   "41321586.250479, each figure quoted with its base year, since the base year is an open reading",
+   "43566660.591831 on both bases, because the price and the barrels are the same in each run",
+   "41321586.250479, and that figure is the law, since an Act always outranks the regulations made under it",
+   "43566660.591831 plus one more year of escalation, the Act base adding a further 2 percent to the royalty"
+  ],
+  "answer": 0,
+  "explanation": "The one-change rows print 43566660.591831 on the Regulations base and 41321586.250479 on the Act base. The base year of the royalty by price is one of the three open readings: the Act starts the benchmarks in 2020, the Regulations in 2021, and the course teaches both and grades neither against the other."
+ },
+ {
+  "prompt": "Why does the same 95 USD/bbl move Alpha's royalties less on the Act base than on the Regulations base?",
+  "options": [
+   "Condensate is left out of the royalty by price on the Act base",
+   "The Act base in any year equals the Regulations base one year later, so its benchmarks sit higher",
+   "Only years under the Act alone use the Act base, and every Alpha year is under the Nigeria Tax Act 2025",
+   "Benchmarks from the Nigeria Tax Act, which restart the escalation in 2026, are what the Act base reads"
+  ],
+  "answer": 1,
+  "explanation": "The benchmark table prints the Act base in any year equal to the Regulations base one year later (in 2026, 56.300000 against 55.200000 for the low benchmark), so between the benchmarks the same price pays a lower royalty by price on the Act base. Condensate pays the royalty by price on both bases, and neither base reads the framework."
+ },
+ {
+  "prompt": "How is each row of the course's one-change-at-a-time table on Ekene Alpha built?",
+  "options": [
+   "All eight changes stacked in order, each row a running total of the ones above it",
+   "One year of Alpha per row, changed from then on",
+   "The base less the changed run, so a line that rises under the change prints negative",
+   "One stated change at a time, each line the changed run less the base"
+  ],
+  "answer": 3,
+  "explanation": "The course sets it out: Ekene Alpha as the base case, then ONE stated change at a time, each run through the engine, and the differences derived as the changed run less the base, line by line. That is why a higher price prints positive (43566660.591831 on royalties) and a prospecting licence negative (-102385291.793528)."
+ },
+ {
+  "prompt": "Forcing every year of Ekene Alpha to the Act alone moves the hydrocarbon tax by 436533.662718 and companies income tax by 450000.000000. Which provision accounts for those two movements?",
+  "options": [
+   "The two thirds restriction, which the Act alone applies to both tax bases",
+   "Development levy, deducted in both tax bases under the new Act",
+   "The 1 percent of each spend that its fifth year of life leaves unclaimed",
+   "The royalty by price, whose benchmarks the Act alone starts a year earlier"
+  ],
+  "answer": 2,
+  "explanation": "Alpha spends 120000000 in 2026 and 30000000 in 2027, and each spend reaches its fifth year of life in a year the forced run reads under the Act alone, where the fifth year claims 0.190000 against 0.200000 under the Nigeria Tax Act 2025. The 1 percent left unclaimed raises companies income tax by 450000.000000 at 30 percent, and the hydrocarbon tax by 436533.662718, since that tax takes the allowance at the liquids share. The two thirds restriction limits the companies income tax allowance only, so it cannot reach the hydrocarbon tax; royalties on the row are 0.000000, so the royalty by price did not move; and the levy is charged on the companies income tax assessable profit."
+ },
+ {
+  "prompt": "Which engine note explains why the additional tax at the fiscal price of PIA s.268 does not appear on any ledger?",
+  "options": [
+   "The daily-rate note, which says the royalty tranches read the year's crude oil plus condensate over the calendar days of the year and so leave the fiscal price aside",
+   "\"The realised oil and condensate prices stand in for the Commission's fiscal prices (PIA Seventh Schedule para 8), so the additional tax at the fiscal price (PIA s.268; NTA s.73) is not computed.\"",
+   "Shared-costs note, which says opex, HCDT, NDDC and the capital allowances enter the hydrocarbon tax at the crude-plus-condensate share of gross revenue",
+   "The note on the minimum effective tax rate, which says the top-up is a project-level approximation of NTA s.57 reported on its own line in NTA years"
+  ],
+  "answer": 1,
+  "explanation": "That is the fiscalPrice note, printed on every PIA ledger. The fiscal oil price and the additional tax at it are concept-only. The daily-rate note is about the royalty tranches, the shared-costs note about cost allocation, and the minimum ETR note about NTA s.57."
+ },
+ {
+  "prompt": "Which of these is one of the three open readings the course teaches?",
+  "options": [
+   "The hydrocarbon tax rate of a new lease onshore or in shallow water, 15 or 30",
+   "Tertiary education tax of 2.5 percent before 2023, which rests on a secondary source",
+   "NDDC levy base, stated as the total annual budget or as opex alone",
+   "Daily rate, read over calendar days or over the days oil was produced"
+  ],
+  "answer": 0,
+  "explanation": "The three open readings are the royalty by price base year, the new-lease rate onshore or in shallow water, and the deep offshore rate under the Nigeria Tax Act 2025. The 2.5 percent is a value resting on a secondary source, the NDDC base is a stated alternative, and the daily rate is one of the engine's declared choices."
+ },
+ {
+  "prompt": "Where is the edge between an accepted and a refused value of pia_gas_in_country_share_pct?",
+  "options": [
+   "100 is refused, since a share of 100 leaves no exported gas to price at the full rate",
+   "Any share above 50 is refused, since the Regulations cap in-country gas at half",
+   "100 is accepted and returns 0.025000; 100.5 is refused",
+   "Nothing is refused: a share above 100 is capped at 100 with a note in kpis.pia_notes"
+  ],
+  "answer": 2,
+  "explanation": "The boundary row: \"0 and 100 are accepted; above 100 is refused\", with 0.025000 at the boundary and a refusal at 100.5. The rate table prints 0.037500 at 50 and 0.035000 at 60, so shares above 50 run, and the engine caps nothing silently: \"pia_gas_in_country_share_pct must be a number from 0 to 100; got 100.5.\""
+ },
+ {
+  "prompt": "How many of the provisions this course teaches does the engine compute?",
+  "options": [
+   "14 of 41, with the other 27 taught as concept-only from their citations",
+   "27 of 41, with the other 14 concept-only",
+   "All 41, since every provision the course cites has an engine field behind it",
+   "27 of 41, with the other 14 graded on figures that the lessons derive"
+  ],
+  "answer": 1,
+  "explanation": "The provision map closes \"41 provisions: 27 computed, 14 concept-only.\" A concept-only provision is taught from its text and never graded on a number, so none of the 14 is graded on a figure of any kind."
+ },
+ {
+  "prompt": "Which lines sit on the government side of the engine's take for a PIA ledger?",
+  "options": [
+   "Only the hydrocarbon tax and companies income tax, the two taxes that charge 30 percent here",
+   "Royalties and every tax, with HCDT and the NDDC levy counted as costs borne by the contractor",
+   "Every tax and royalty except the development levy, which the Service pays into a special account",
+   "Every royalty, HCDT, the NDDC levy and every tax"
+  ],
+  "answer": 3,
+  "explanation": "The engine's take is revenue less capex less opex, less the ledger's net cash flow, over revenue less capex less opex, and every royalty, HCDT, the NDDC levy and every tax is on the government side of that difference. Alpha's government cash flow is the sum of seven lines, the development levy (35714217.371697) among them."
+ }
+]

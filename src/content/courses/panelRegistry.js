@@ -288,6 +288,9 @@ export const PANELS = {
   'pr-envelope-calculator': React.lazy(() => import('@/components/course/panels/procurement/EnvelopeCalculator')),
   'pr-award-calculator': React.lazy(() => import('@/components/course/panels/procurement/AwardCalculator')),
   'pr-contract-calculator': React.lazy(() => import('@/components/course/panels/procurement/ContractCalculator')),
+  'pia-royalty-calculator': React.lazy(() => import('@/components/course/panels/pia/RoyaltyCalculator')),
+  'pia-hct-calculator': React.lazy(() => import('@/components/course/panels/pia/HctCalculator')),
+  'pia-ledger-calculator': React.lazy(() => import('@/components/course/panels/pia/LedgerCalculator')),
 };
 
 export function resolvePanel(id) {

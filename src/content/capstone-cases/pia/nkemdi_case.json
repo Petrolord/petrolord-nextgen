@@ -1,0 +1,118 @@
+{
+ "dataset": "NKEMDI (synthetic)",
+ "label": "NKEMDI, an Ekene synthetic shallow water lease granted out of new acreage",
+ "cfg": {
+  "fiscal_regime": "PIA",
+  "discount_rate_pct": 10,
+  "inflation_rate_pct": 0,
+  "present_value_basis": "nominal",
+  "oil_price_escalator_pct": 0,
+  "gas_price_escalator_pct": 0,
+  "condensate_price_escalator_pct": 0,
+  "capex_escalator_pct": 0,
+  "base_year": 2027,
+  "oil_price_usd_bbl": 54,
+  "condensate_price_usd_bbl": 51,
+  "gas_price_usd_mscf": 3.1,
+  "opex_escalator_pct": 0,
+  "pia_terrain": "shallow_water",
+  "pia_license_type": "PML",
+  "pia_lease_status": "new",
+  "pia_new_pml_hct_rate_pct": 30,
+  "pia_marginal_field_pre_2021": false,
+  "pia_water_depth_m": 85,
+  "pia_working_interest_pct": 45,
+  "pia_prior_year_opex_usd": 160000000,
+  "pia_prior_cumulative_oil_bbl": 64500000,
+  "pia_gas_in_country_share_pct": 25,
+  "pia_under_nta_2025_override": "auto"
+ },
+ "prodRows": [
+  {
+   "year": 2027,
+   "oil_bbl": 16400000,
+   "gas_mscf": 14760000,
+   "condensate_bbl": 820000
+  },
+  {
+   "year": 2028,
+   "oil_bbl": 13776000,
+   "gas_mscf": 12398400,
+   "condensate_bbl": 688800
+  },
+  {
+   "year": 2029,
+   "oil_bbl": 11571840,
+   "gas_mscf": 10414656,
+   "condensate_bbl": 578592
+  },
+  {
+   "year": 2030,
+   "oil_bbl": 9720346,
+   "gas_mscf": 8748311,
+   "condensate_bbl": 486017
+  },
+  {
+   "year": 2031,
+   "oil_bbl": 8165090,
+   "gas_mscf": 7348581,
+   "condensate_bbl": 408255
+  },
+  {
+   "year": 2032,
+   "oil_bbl": 6858676,
+   "gas_mscf": 6172808,
+   "condensate_bbl": 342934
+  },
+  {
+   "year": 2033,
+   "oil_bbl": 5761288,
+   "gas_mscf": 5185159,
+   "condensate_bbl": 288064
+  }
+ ],
+ "capexRows": [
+  {
+   "year": 2027,
+   "amount_usd": 620000000
+  },
+  {
+   "year": 2028,
+   "amount_usd": 410000000
+  },
+  {
+   "year": 2030,
+   "amount_usd": 180000000
+  }
+ ],
+ "opexRows": [
+  {
+   "year": 2027,
+   "total_opex_usd": 185000000
+  },
+  {
+   "year": 2028,
+   "total_opex_usd": 185000000
+  },
+  {
+   "year": 2029,
+   "total_opex_usd": 185000000
+  },
+  {
+   "year": 2030,
+   "total_opex_usd": 185000000
+  },
+  {
+   "year": 2031,
+   "total_opex_usd": 185000000
+  },
+  {
+   "year": 2032,
+   "total_opex_usd": 185000000
+  },
+  {
+   "year": 2033,
+   "total_opex_usd": 185000000
+  }
+ ]
+}

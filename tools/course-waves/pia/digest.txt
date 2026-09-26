@@ -1,0 +1,1115 @@
+# EC7 TEACHING DIGEST: Petroleum Industry Act 2021 & Nigerian Fiscal Terms
+
+# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The audit, the engine FINDINGS record, the oracle and the engine source comments are PROVENANCE and not teaching truth.
+
+# PRECISION. Every amount of money, rate, fraction, share, percentage, benchmark, price, allowance, levy, tax, take and daily rate prints to SIX decimals; years, counts and whole barrels, Mscf and bopd inputs print as whole numbers; an engine message and an engine note are printed verbatim, figures and all.
+
+# ENGINE. engines/economics/cashflow.ts, ENGINE_VERSION 3.12.0, vendored sha-identical with petrolord-engines 3778451 (engines PR #262), 2644 lines, the default path. It makes no network call. engines/economics/fiscalConventions.js supplies the take wording (section 20).
+
+# AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course's own calculator panels, which call this same vendored engine on the learner's own terms and rows.
+
+# THE DATA. Every Ekene case, field, volume, price and cost is SYNTHETIC, written for this platform. No real company, licence, field or price list appears.
+
+# WHAT IS NEVER IN THIS FILE. No capstone field, no capstone case and no graded answer. The capstones run their own leases and the digest never names them.
+
+# THIS COURSE TEACHES NO REPAIR HISTORY. Every section below describes what the engine does today.
+
+# SECTION 1: What this engine computes for the Act, and what it declines to compute (owned by Associate m01 and Expert m05)
+
+The engine is one ledger function and the rate functions it calls. `computeCashFlow` takes the terms (`cfg`) and three row sets (production, capex, opex) and returns one row a year and a set of KPIs. Under `fiscal_regime` PIA every year is run at 100 percent field level, then every money line is scaled to the working interest share. A refusal is a thrown error whose message states the exact condition that failed (section 7).
+
+| function | role | what it needs | what it returns |
+| --- | --- | --- | --- |
+| `computeCashFlow` | the whole ledger | cfg, prodRows, capexRows, opexRows | cashFlowData (one row a year, at the share) and kpis (totals, NPV, take, the framework, pia_notes) |
+| `deriveOilRoyaltyRate` | royalty by terrain and volume | terrain, liquidsBopd | the weighted production royalty rate for crude oil and condensate |
+| `deriveGasRoyaltyRate` | gas royalty | terrain, inCountrySharePct | the gas and NGL royalty rate |
+| `priceRoyaltyBenchmarks` | the royalty by price benchmarks | year, base | the low, middle and high benchmark in USD/bbl |
+| `derivePriceRoyaltyRate` | royalty by price | fiscalPrice, year, terrain, base | the royalty by price rate |
+| `deriveHctRate` | the hydrocarbon tax rate | terrain, licenseType, marginalPre2021, override, framework, deepOffshoreInterpretation, deepOffshoreCustomRatePct, leaseStatus, newPmlHctRatePct | the rate as a fraction |
+| `computeProductionAllowance` | the Sixth Schedule production allowance | cfg, liquidsBbl, fiscalPrice, priorCumulativeLiquids, framework | the allowance and the barrels below and after the new-lease cap |
+| `capitalAllowanceFraction` | the capital allowance schedule | yearOfLife, framework | the fraction of a spend claimed in that year of its life |
+| `statutoryTetRatePct` | the tertiary education tax rate | year | the rate in percent for a year under the Act alone |
+| `fiscalFrameworkForYear` | the framework of one year | cfg, year | "pia_only" or "nta_2025" |
+| `calendarDays` | the days in a year | year | 365 or 366 |
+
+The terrains the engine accepts, read from the exported `PIA_TERRAINS`: "onshore", "shallow_water", "deep_offshore", "frontier". The first year of assessment under the Nigeria Tax Act 2025, read from `NTA_FIRST_YEAR`: 2026.
+
+The texts the engine names, read from the exported `PIA_TEXTS` (verbatim):
+
+| key | the engine's text |
+| --- | --- |
+| `pia` | Petroleum Industry Act 2021 (Act No. 6), Official Gazette No. 142, Vol. 108, 27 August 2021 |
+| `nta` | Nigeria Tax Act 2025 (Act No. 7), Official Gazette No. 117, Vol. 112, 26 June 2025, effective 1 January 2026; re-gazetting ordered December 2025, no Certified True Copy read |
+| `regs` | Petroleum Royalty Regulations 2022 (S.I. No. 73), Official Gazette No. 205, Vol. 109, 22 November 2022 |
+| `fa2023` | Finance Act 2023, effective 1 May 2023 (s.30) |
+| `read_on` | 2026-09-26 |
+
+WHAT THE ENGINE DOES NOT DO, checked here against its source:
+- It does not read the water depth. `pia_water_depth_m` is carried in the terms and never read; the terrain string decides the royalty and the tax (section 5).
+- It does not model a field lying partly in two terrains, the fiscal oil price the Commission sets, the additional tax at the fiscal price, the split between associated and non-associated gas, exploration and appraisal expensing, the acquisition cost allowance, consolidation across fields, production sharing contracts under the Act, the terms of a lease that has not converted, the non-associated gas credit, or the company-level minimum effective tax test. Each is taught as a concept with its citation (section 24) and none is ever graded.
+- It decides no open question of the texts. Where the texts leave a rate open the engine takes a stated input with no default and refuses a run without it; where it keeps a default it says so in `kpis.pia_notes` (section 22).
+
+# SECTION 2: The texts, their editions and the date each was read (owned by Associate m01 l05 and Expert m02 l05)
+
+THE RULE THIS COURSE FOLLOWS FOR EVERY ACT, REGULATION AND STATEMENT IT TEACHES. Each one is named with its edition or gazette date and the date it was read. Only publicly available texts are quoted, with their citation. Every rate, threshold, cap and schedule value the engine applies was read from the cited text; a value that could not be sourced is a stated input with no default. Every text below was read on 2026-09-26.
+
+| text | edition or date | how the course uses it | date read |
+| --- | --- | --- | --- |
+| Petroleum Industry Act 2021 (Act No. 6) | Official Gazette No. 142, Vol. 108, Lagos, 27 August 2021; commencement 16 August 2021 | primary, quoted | 2026-09-26 |
+| Petroleum Royalty Regulations 2022 (S.I. No. 73 of 2022, made under PIA s.304(2)) | Official Gazette No. 205, Vol. 109, Lagos, 22 November 2022 | primary, quoted | 2026-09-26 |
+| Nigeria Tax Act 2025 (Act No. 7) | Official Gazette No. 117, Vol. 112, Lagos, 26 June 2025; effective 1 January 2026 (State House statement); re-gazetting ordered in December 2025 and no Certified True Copy read | primary, quoted | 2026-09-26 |
+| Finance Act 2023 | "Final Signed by PMB", published by the Budget Office of the Federation on 7 June 2023, a scanned copy read page by page; s.26 (tertiary education tax 3 percent), s.9(b) (the two thirds capital allowance restriction), s.30 (effective 1 May 2023) | primary, paraphrased (a scan) | 2026-09-26 |
+| Finance Act 2021 (tertiary education tax 2.5 percent) | not read; EY and Forvis Mazars Finance Act alerts | secondary | 2026-09-26 |
+| Niger-Delta Development Commission (Establishment, etc.) Act 2000 s.14(2)(b), as amended 2017 (3 percent of the total annual budget) | not read; Mondaq and Lexology commentary on NDDC v NLNG | secondary | 2026-09-26 |
+| The Nigeria Tax Act effective date and the re-gazetting order | statehouse.gov.ng statement and Arise TV, 27 December 2025 | secondary | 2026-09-26 |
+
+A SECONDARY SOURCE IS NEVER A HIDDEN DEFAULT. The two values that rest on a secondary source are stated where they are used: the tertiary education tax of 2.5 percent before 2023, and the NDDC levy base of the total annual budget, which the engine takes as the year's opex plus capex (section 19).
+
+LICENSED TEXTS. No licensed text is quoted anywhere in this course. Model contracts sold under licence (for example the AIPN model contracts) are taught by concept only, and no paid commentary is quoted.
+
+THE ENGINE CARRIES THE SAME EDITIONS IN ITS OWN WORDS (`PIA_TEXTS`, section 1), and states the Nigeria Tax Act version in `kpis.pia_notes` wherever a year under that Act appears (section 22).
+
+# SECTION 3: Every provision this course teaches, computed or concept-only (owned by Associate m01 and Expert m05 l04)
+
+THE RULE. A provision the engine computes may be graded, and only on a figure the engine returns. A provision the engine does not compute is taught from its text as a concept, with its citation, and is never in a capstone or a keyed question that needs a number.
+
+| provision | citation | computed by the engine? | where in the engine | taught in |
+| --- | --- | --- | --- | --- |
+| Royalty by terrain and daily rate (the small-field tranches) | PIA Seventh Schedule para 10(2) to (4); REGS r.12, r.13 | computed | deriveOilRoyaltyRate; row royalty_rate_liquids | section 9 |
+| Condensate treated as crude oil for royalty | PIA Seventh Schedule para 6 | computed | applyPIA liquids revenue | section 9 |
+| Gas and NGL royalty, 5 percent and 2.5 percent in-country | PIA Seventh Schedule para 10(6); REGS r.16 | computed | deriveGasRoyaltyRate; row gas_royalty | section 10 |
+| Royalty by price and its escalated benchmarks | PIA Seventh Schedule para 11(1); REGS r.15 and Schedule | computed | priceRoyaltyBenchmarks, derivePriceRoyaltyRate; row price_royalty | section 11 |
+| No royalty by price for frontier acreage | PIA Seventh Schedule para 11(2) | computed | derivePriceRoyaltyRate | section 11 |
+| What the hydrocarbon tax charges (crude, condensate; gas outside) | PIA s.260(1); NTA s.65(2) | computed | applyPIA liquids-only base | section 13 |
+| No hydrocarbon tax for deep offshore (under the Act) and frontier | PIA s.260(3); NTA s.65(4) | computed | deriveHctRate | section 13 |
+| Hydrocarbon tax rates of 30 and 15 percent | PIA s.267; NTA s.72 | computed | deriveHctRate; row hct_rate | section 13 |
+| Deductions in the hydrocarbon tax base (royalties, HCDT, NDDC, levies) | PIA s.263(1)(b), (f), (h); NTA s.68(1) | computed | applyPIA hct_assessable_profit | section 14 |
+| The cost price ratio limit, carryforward and forfeiture | PIA Sixth Schedule para 2; s.266(2) | computed | applyPIA cpr_cap, cpr_costs_claimed, cpr_deferred_to_next; kpis cpr_forfeited_at_cessation | section 14 |
+| Loss relief by class of tax | PIA s.265(1) to (3); NTA s.70 | computed | applyPIA loss pools | section 16 |
+| Production allowance, converted and new leases, the cap and after it | PIA Sixth Schedule para 1; NTA Sixth Schedule para 1 | computed | computeProductionAllowance; row production_allowance | section 15 |
+| Capital allowances by the law of each year | PIA Fifth Schedule paras 5(2), 17(1); NTA First Schedule Part II paras 4(2), 14(1) | computed | capitalAllowanceFraction; row depreciation | section 15 |
+| Companies income tax on oil and gas, hydrocarbon tax not deductible | PIA s.302(5), (11); NTA s.56(b), s.78(3)(a), s.82(1) | computed | applyPIA cit_assessable_profit, cit_tax | section 16 |
+| The two thirds capital allowance restriction in years before 2026 | CITA Second Schedule para 24(7) as substituted by Finance Act 2023 s.9(b) | computed | applyPIA cit_allowance_claimed, cit_allowance_carryforward | section 16 |
+| Tertiary education tax by year | Finance Act 2023 s.26, s.30; Finance Act 2021 (secondary) | computed | statutoryTetRatePct; row tet_tax | section 17 |
+| The development levy of 4 percent | NTA s.59(1), (4) | computed | row dev_levy_tax | section 17 |
+| The framework of each year of assessment | NTA commencement (1 January 2026) and s.197 | computed | fiscalFrameworkForYear; row fiscal_framework | section 17 |
+| Deep offshore hydrocarbon tax under the NTA (three stated readings) | NTA s.65(1), s.72 | computed | deriveHctRate with pia_deep_offshore_hct_interpretation | section 18 |
+| No deep offshore or frontier production allowance in NTA years | NTA Sixth Schedule para 1(2) | computed | computeProductionAllowance | section 18 |
+| Decommissioning fund deduction and the NTA escrow condition | PIA s.263(1)(e), s.302(11)(b)(i); NTA s.86 | computed | row decom_fund_deduction | section 18 |
+| The minimum effective tax rate top-up (a labelled project approximation) | NTA s.57 | computed | row min_etr_topup (only when switched on) | section 18 |
+| Host communities development trust contribution, 3 percent of the preceding year's opex | PIA s.240(2), s.257 | computed | row hcdt | section 19 |
+| The NDDC levy on the total annual budget | NDDC Act 2000 s.14(2)(b) (secondary source) | computed | row nddc | section 19 |
+| Working interest: fiscal arithmetic at field level, money at the share | PIA s.273(4); NTA s.77(4) | computed | computeCashFlow working interest scaling | section 20 |
+| Government take and government cash flow | fiscalConventions.js (course wording) | computed | kpis government_take_pct | section 20 |
+| A field lying partly in two terrains | PIA Seventh Schedule para 10(7); REGS r.14(5), (6) | concept-only | not computed | section 24 |
+| The fiscal oil price and the additional tax at the fiscal price | PIA Seventh Schedule para 8, s.268; NTA s.73 | concept-only | not computed (the realised price stands in) | section 24 |
+| Associated and non-associated gas: scope, cost allocation, royalty deduction | PIA s.260(1)(b)(ii), s.260(2), s.263(1)(b) | concept-only | not computed (stated approximation) | section 24 |
+| Exploration and appraisal expensing, acquisition cost allowance | PIA s.263(1)(d), s.266(1)(c); Fifth Schedule para 17(2) | concept-only | not computed | section 24 |
+| The election to defer a loss deduction | PIA s.265(4) | concept-only | not computed | section 24 |
+| Consolidation across fields and terrains | PIA s.272; NTA s.76 | concept-only | not computed | section 24 |
+| Production sharing contracts under the Act (cost limit and profit oil scale) | PIA Seventh Schedule para 14 | concept-only | not computed | section 24 |
+| Voluntary conversion, relinquishment and the conversion deadline | PIA ss.92, 93 | concept-only | not computed (the lease status is a stated input) | section 5 |
+| Producing marginal fields converted to a lease | PIA s.94 | computed | pia_marginal_field_pre_2021 gives the 15 percent rate | section 5 |
+| Leases that do not convert (petroleum profits tax, the old royalty table) | PIA s.303(1); NTA s.87(1), Part II | concept-only | not computed | section 5 |
+| The non-associated gas greenfield credit | NTA s.85 | concept-only | not computed | section 24 |
+| Gas pipeline and utilisation incentives | PIA s.302(6); NTA s.80 | concept-only | not computed | section 24 |
+| Fiscal stabilisation | PIA s.305; NTA s.88 | concept-only | not computed | section 24 |
+| The company-level minimum effective tax test and its denominator | NTA s.57(1), (2), (4) | concept-only | not computed (the engine's top-up is a labelled approximation) | section 24 |
+| Who assesses and collects, and where the money lands | PIA s.258(2), s.259; NTA s.59(3) | concept-only | not computed | section 4 |
+
+41 provisions: 27 computed, 14 concept-only.
+
+# SECTION 4: Who decides, who assesses and collects, and where the money lands (owned by Associate m01)
+
+THE INSTITUTIONS. The Act names the Nigerian Upstream Petroleum Regulatory Commission (the Commission), the Nigerian Midstream and Downstream Petroleum Regulatory Authority (the Authority) and the Federal Inland Revenue Service (the Service). None of this is computed by the engine; it is taught from the text and never graded on a number.
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| PIA s.258(2) | All money due to Government from the petroleum industry must be paid into the Federation Account in a timely manner. This covers taxes, royalties, production and profit shares, and signature and production bonuses, among other payments. | "(2) All money collected from the petroleum industry that are due to the Government shall be transferred to the Federation Account in a timely manner, subject to this Act and these payments shall include taxes, royalties, production shares, profit shares, signature bonuses, production bonuses," | concept-only |
+| PIA s.259 (opening words) and s.259(a)(i) | Government petroleum revenue is administered and collected by the Federal Inland Revenue Service (the Service) and the Commission. The Service assesses and collects hydrocarbon tax. | "collection of Government revenue in the petroleum industry shall be the function of the Federal Inland Revenue Service (the Service) and the Commission, and: (a) the Service shall be responsible for the assessment and collection of: (i) hydrocarbon tax" | concept-only |
+| PIA s.259(a)(ii) | The Service also assesses and collects companies income tax and tertiary education tax on taxable petroleum operations. | "(ii) companies income tax and tertiary education tax in accordance with this Act as it relates to taxable petroleum operations" | concept-only |
+| PIA s.259(b)(i) | The Commission determines and collects royalties, signature bonus, rents and related payments and enforces them under the Act. | "(b) the Commission shall be responsible for the determination and collection of: (i) royalties, signature bonus, rents, and related payments and its enforcement under this Act, and" | concept-only |
+| PIA Seventh Schedule para 11(3) | Royalty by price is credited to the Nigerian Sovereign Investment Authority. | "(3) Royalty derived from “royalty by price” shall be for the credit of Nigerian Sovereign Investment Authority." | concept-only |
+| NTA s.59(1) | A development levy of 4% is charged on assessable profits. | "59. (1) A development levy of 4% is imposed on the assessable profits of" | concept-only |
+| NTA s.59(1) (closing words) and s.59(2) | Small companies and non-resident companies are outside the levy. The Service collects the levy into a special account. | "other than small companies and non-resident companies. (2) The Service shall collect the levy and pay it into a special account created for that purpose." | concept-only |
+| NTA s.59(3)(a)-(d) | Levy revenue is shared out by fixed percentages: 50% to the Tertiary Education Trust Fund, 15% to the Nigerian Education Loan, 8% to the National Information Technology Development Fund and 8% to the National Agency for Science and Engineering Infrastructure. | "(3) The revenue accruing from the levy shall be distributed as follows: (a) Tertiary Education Trust Fund: 50%; (b) Nigerian Education Loan: 15%; (c) National Information Technology Development Fund: 8%; (d) National Agency for Science and Engineering Infrastructure: 8%;" | concept-only |
+| NTA s.59(3)(e)-(g) | The remaining shares are 4% to the National Board for Technological Incubation, 10% to the Defence and Security Infrastructure Fund and 5% to the National Cybersecurity Fund. | "(e) National Board for Technological Incubation: 4%; (f) Defence and Security Infrastructure Fund: 10%; and (g) National Cybersecurity Fund: 5%." | concept-only |
+| NTA s.59(4) | The development levy is not charged on assessable profits computed for hydrocarbon tax. | "(4) The tax imposed under this Part shall not be levied on assessable profits computed for the purposes of hydrocarbon tax." | concept-only |
+| NTA s.89(2) | Under the NTA the Service is the tax authority that administers royalty. | "(2) The Service shall be the relevant tax authority for the administration of the" | concept-only |
+| NTA Seventh Schedule para 1(1) | The Service administers royalties under the Nigeria Tax Administration Act, 2025. | "1. (1) The Service shall administer royalties payable in accordance with the provision of the Nigeria Tax Administration Act, 2025." | concept-only |
+
+READ TOGETHER: the Service assesses and collects the hydrocarbon tax and companies income tax, the Commission determines and collects royalties under the Act, and money due to Government goes to the Federation Account; under the Nigeria Tax Act 2025 the Service administers royalty (NTA s.89(2) and Seventh Schedule para 1(1)); the royalty by price is credited to the Nigerian Sovereign Investment Authority; the development levy of the Nigeria Tax Act 2025 is shared out by fixed percentages and is not charged on hydrocarbon tax profits.
+
+# SECTION 5: Licences, leases, terrains and conversion (owned by Associate m02 and Expert m01)
+
+THE LICENCES. The Act creates three instruments: the petroleum exploration licence, the petroleum prospecting licence and the petroleum mining lease. The engine accepts `pia_license_type` "PML" or "PPL" only (section 7); a licence type before the Act (OML, OPL) is refused.
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| PIA s.70(1)(a),(b) | The Act creates a petroleum exploration licence for exploration on a non-exclusive basis, and a petroleum prospecting licence under which the holder may drill exploration and appraisal wells. | "(a) petroleum exploration licence, which may be granted to qualified applicants to carry out petroleum exploration operations on a non-exclusive basis ; (b) petroleum prospecting licence, which may be granted to qualified applicants to: (i) drill exploration and appraisal wells" | concept-only |
+| PIA s.70(1)(c) | A petroleum mining lease gives the exclusive right to win, work, carry away and dispose of crude oil, condensates and natural gas. | "(c) petroleum mining lease, which may be granted to qualified applicants to: (i) win, work, carry away and dispose of crude oil, condensates and natural gas on an exclusive basis," | concept-only |
+| PIA s.71(3) | A petroleum exploration licence lasts three years and may be renewed for a further three years if prescribed conditions are met. | "(3) A petroleum exploration licence shall be for three years and may be renewable for additional period of three years subject to fulfilment of prescribed conditions," | concept-only |
+| PIA s.77(2) | A deep offshore or frontier petroleum prospecting licence lasts at most 10 years: a five-year initial exploration period and an optional five-year extension. | "(2) A petroleum prospecting licence for deep offshore and frontier acreages shall be for a duration of not more than 10 years, comprising of an initial exploration period of five years and an optional extension period of five years." | concept-only |
+| PIA s.86(1) | A petroleum mining lease runs for at most 20 years, including its development period. | "shall be for a maximum period of 20 years, which term shall include the" | concept-only |
+
+TERRAINS. The engine takes the terrain as one of four stated strings and never reads the water depth. The Act draws the shallow water line at 200 metres (section 24 quotes the terrain rates). A marginal field is not a terrain: it is onshore or in shallow water, and the engine refuses "marginal_field" as a terrain (section 7).
+
+A PRODUCING MARGINAL FIELD converted under s.94(1) is a stated flag (`pia_marginal_field_pre_2021`) on an onshore or shallow water lease: its hydrocarbon tax rate is 0.150000 and its royalty follows the terrain's tranches (ekene_marginal_shallow_flag, shallow water, 2026: daily rate 20000.000000 bopd, liquids royalty rate 0.093750).
+
+CONVERSION, RELINQUISHMENT, MARGINAL FIELDS AND LEASES THAT DO NOT CONVERT (concept-only; the engine takes the lease status as a stated input and models converted and new-acreage terms only):
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| PIA s.92(1) | A holder of an existing oil prospecting licence or oil mining lease may choose to sign a conversion contract under the Act. | "lease may enter into a voluntary conversion contract under this Act." | concept-only |
+| PIA s.92(4) | A conversion contract must be concluded by the conversion date, which is the earlier of 18 months from the effective date and the expiry of the oil mining lease (or the date an oil prospecting licence converts to an oil mining lease). | "(4) A conversion contract shall be concluded at a date (“conversion date”) which is the earlier of: (a) 18 months from the effective date ; and (b) the expiration date of the oil mining lease" | concept-only |
+| PIA s.92(6) | If a holder does not sign a conversion contract before the conversion date, the terms that applied to its licence or lease before the effective date continue to apply. | "does not enter into a conversion contract prior to the conversion date, the terms and conditions applicable to the oil prospecting licence or oil mining lease prior to the effective date of this Act shall continue to apply" | concept-only |
+| PIA s.93(2) | If the areas a holder selects for retention under subsection (1) come to less than 40% of the oil mining lease, it may pick further areas for conversion to a petroleum prospecting licence. | "(2) Where the total acreage selected under subsection (1) is less than 40% of the area to which the applicable oil mining lease applies, the holder may select additional areas covered by the oil mining lease for conversion to a petroleum prospecting licence" | concept-only |
+| PIA s.93(4) | Areas of an oil mining lease that the holder does not select under subsections (1) and (2) are relinquished. | "(4) Areas and zones subject to an oil mining lease and not selected by the holder under subsections (1) and (2) shall be relinquished by the holder." | concept-only |
+| PIA s.93(6)(a) | On conversion of an oil mining lease, areas designated for appraisal or discovery work (subsection (1) (a), (b), (c) or (2)) become a petroleum prospecting licence on the new-acreage fiscal terms of s.267 (b). | "(a) designated by a holder under subsection (1) (a), (b), (c) or (2) into a petroleum prospecting licence in accordance with section 78 of this Act, with fiscal terms as applicable under section 267 (b)" | concept-only |
+| PIA s.93(6)(b) | On conversion of an oil mining lease, areas under development or in regular commercial production (subsection (1) (d) and (e)) become petroleum mining leases on the fiscal terms of s.267 (a). | "(b) selected under subsection (1) (d) and (e), into petroleum mining leases, with fiscal terms as applicable under section 267 (a) and other terms of Chapter 4 of this Act to the lease," | concept-only |
+| PIA s.93(7)(a) | When an oil prospecting licence converts, the areas designated under s.93 (1) (a), (b) and (c) continue as a petroleum prospecting licence on the fiscal terms of s.267 (b). | "(a) designated by a holder under section 93 (1) (a), (b) and (c) of this Act as areas to be continued under the petroleum prospecting licence under this Act, with fiscal terms as applicable under section 267 (b)" | concept-only |
+| PIA s.93(7)(b) | When an oil prospecting licence converts, the areas selected under s.93 (1) (d) and (e) become petroleum mining leases on the fiscal terms of s.267 (a). | "(b) selected under section 93 (1) (d) and (e) of this Act shall be converted into petroleum mining leases with fiscal terms as applicable under section 267 (a) and other terms of Chapter 4 of this Act," | concept-only |
+| PIA s.94(1) | A producing marginal field may keep its original royalty rates and farm-out agreements but must convert to a petroleum mining lease, on the terms of s.267 (b) and 302, within 18 months from the effective date. | "operate under the original royalty rates and farm out agreements, but shall convert to a petroleum mining lease under this Act, with terms applicable under sections 267 (b), 302, and other provisions under the Act within 18 months from the effective date." | the 15 percent rate is computed (the stated flag); the rest is concept-only |
+| PIA s.94(9) | The Act allows no new marginal fields to be declared. | "(9) No new marginal fields shall be declared under this Act." | concept-only |
+| PIA s.303(1) | The Act does not apply to holders of an oil prospecting licence or oil mining lease who do not sign a conversion contract, until that licence or lease ends or expires. | "prospecting licence or oil mining lease who do not enter into a conversion" | concept-only |
+| NTA s.87(1) | The NTA hydrocarbon tax Part and the PIA do not apply to holders of an oil prospecting licence or oil mining lease who do not sign a conversion contract, until that licence or lease ends or expires. | "not apply to holders of an oil prospecting licence or oil mining lease who do not" | concept-only |
+| NTA s.196(h) | The Petroleum Profits Tax Act is also repealed. | "(h) Petroleum Profits Tax Act, Cap. P13, Laws of the Federation of Nigeria,2004;" | concept-only |
+| NTA Part II heading (before s.90) | The Nigeria Tax Act carries its own Part on petroleum profits tax. | "PART II - PETROLEUM PROFITS TAX IMPOSITION OF TAX AND ASCERTAINMENT OF CHARGEABLE PROFITS" | concept-only |
+| NTA s.90(1) | That Part applies to oil prospecting licences and oil mining leases that have not yet converted under the Petroleum Industry Act. | "90. (1) This Part shall apply to oil prospecting licences and oil mining petroleum leases that are yet to convert under the provisions of the Petroleum Industry" | concept-only |
+| NTA Seventh Schedule Part IV para 7(3)(c) | For leases under NTA Chapter Three Parts II and III, natural gas royalty is 7% onshore and 5% offshore of the price received (or a floor price tied to gas flare fees). | "any flare or waste gas appropriated by the Government of the Federation for its own use or for any purpose approved by it, as follows: (i) onshore areas: 7 %, and (ii) offshore areas: 5%;" | concept-only |
+
+READ TOGETHER: a holder of an oil mining lease may convert it; the areas it keeps in development or production become petroleum mining leases on the 30 percent terms, the areas it keeps for appraisal or discovery become petroleum prospecting licences on the 15 percent terms, and unselected areas are relinquished. A lease that does not convert stays on its old terms, outside the Act's fiscal Part and outside the engine.
+
+LEASES THAT DO NOT CONVERT, UNDER THE NIGERIA TAX ACT 2025. The Nigeria Tax Act repeals the Petroleum Profits Tax Act (s.196(h)) and carries petroleum profits tax in a Part of its own, whose s.90(1) applies it to oil prospecting licences and oil mining leases that are yet to convert (the rows above quote both). So an unconverted lease pays petroleum profits tax under the Nigeria Tax Act from its commencement, on the old royalty terms. The engine models converted and new-acreage terms only, so this is concept-only and never graded.
+
+# SECTION 6: The Ekene teaching cases (owned by Associate m02 l05 and Professional m06 and Expert m06)
+
+Every case in this course is an Ekene synthetic case (ours), read from the vendored golden file test-data/economics/goldens/pia2021_cases.json. The golden file also carries expected figures from the stdlib oracle; those are provenance and are never printed here. Every figure a section prints is the engine's own return on the case inputs.
+
+| case (golden input) | what it is | years | oil / condensate / gas price | terms |
+| --- | --- | --- | --- | --- |
+| worked_example_inputs_default | The single-year worked example: shallow water, converted lease, 2025, 50,000 bopd, a fixed NDDC sum | 2025 to 2025 | 80 / 70 / 4.5 | terrain shallow_water; licence PML; lease converted; deep offshore reading conservative_zero; NDDC fixed 15000000 USD |
+| ekene_alpha_shallow_converted_nta | Ekene Alpha: shallow water, converted lease, crude with condensate and associated gas, 2026 to 2032 | 2026 to 2032 | 75 / 70 / 3 | terrain shallow_water; licence PML; lease converted |
+| ekene_alpha_wi_50 | Ekene Alpha at a 50 percent working interest | 2026 to 2032 | 75 / 70 / 3 | terrain shallow_water; licence PML; lease converted; working interest 50 |
+| ekene_onshore_across_2026 | Onshore converted lease, 2024 to 2028, crossing 1 January 2026 | 2024 to 2028 | 75 / 70 / 0 | terrain onshore; licence PML; lease converted |
+| ekene_deep_new_60k_conservative | Deep offshore lease from new acreage at 60,000 bopd, 2025 to 2027, deep offshore reading conservative_zero | 2025 to 2027 | 75 / 70 / 0 | terrain deep_offshore; licence PML; lease new; deep offshore reading conservative_zero |
+| ekene_deep_new_60k_aggressive | The same deep offshore field, deep offshore reading aggressive_pml_30 | 2025 to 2027 | 75 / 70 / 0 | terrain deep_offshore; licence PML; lease new; deep offshore reading aggressive_pml_30 |
+| ekene_nag_gas_in_country_half | A gas field in shallow water, half the gas used in-country, no crude | 2026 to 2028 | 75 / 70 / 3 | terrain shallow_water; licence PML; lease converted; gas in-country 50 percent |
+| ekene_onshore_new_cap_crossing | A new onshore lease with 49 MMbbl produced before 2026, crossing the 50 MMbbl allowance cap; new-lease rate stated at 15 | 2026 to 2027 | 75 / 70 / 0 | terrain onshore; licence PML; lease new; new-lease rate stated 15; prior production 49000000 bbl |
+| ekene_condensate_price_royalty_regs | Crude at 95 and condensate at 88 USD/bbl in 2025 on the Regulations base | 2025 to 2025 | 95 / 88 / 0 | terrain shallow_water; licence PML; lease converted |
+| ekene_condensate_price_royalty_act | The same year on the Act base | 2025 to 2025 | 95 / 88 / 0 | terrain shallow_water; licence PML; lease converted; price royalty base act_2020 |
+| ekene_cpr_binding_forfeiture | Shallow water, heavy cost on thin revenue, 2024 to 2026: the cost price ratio binds, carries and is forfeited | 2024 to 2026 | 75 / 70 / 0 | terrain shallow_water; licence PML; lease converted |
+| ekene_sinking_fund_nta_escrow_met | A decommissioning fund in NTA years, escrow condition met | 2026 to 2028 | 75 / 70 / 0 | terrain shallow_water; licence PML; lease converted; decommissioning fund 30000000 USD; escrow condition met |
+| ekene_sinking_fund_nta_escrow_not_met | The same fund, escrow condition not met | 2026 to 2028 | 75 / 70 / 0 | terrain shallow_water; licence PML; lease converted; decommissioning fund 30000000 USD; escrow condition not met |
+| ekene_sinking_fund_pia_years | A decommissioning fund in years under the Act alone (2024 and 2025) | 2024 to 2025 | 75 / 70 / 0 | terrain shallow_water; licence PML; lease converted; decommissioning fund 30000000 USD |
+| ekene_min_etr_nta_only | The minimum effective tax rate switched on, 2025 and 2026, at a stated 85 percent so the top-up shows | 2025 to 2026 | 75 / 70 / 0 | terrain shallow_water; licence PML; lease converted; minimum ETR on at 85 percent |
+| ekene_marginal_shallow_flag | A producing marginal field converted under s.94(1), shallow water, 2026, about 20,000 bopd | 2026 to 2026 | 75 / 70 / 0 | terrain shallow_water; licence PML; lease converted; marginal field converted under s.94(1) |
+| ekene_frontier | Frontier acreage at 120 USD/bbl, 2026 | 2026 to 2026 | 120 / 70 / 0 | terrain frontier; licence PML; lease converted |
+| ekene_nddc_opex_base | The NDDC levy on the stated opex base | 2026 to 2027 | 75 / 70 / 0 | terrain shallow_water; licence PML; lease converted; NDDC base opex |
+| ekene_force_pia_2027 | A 2027 ledger forced to the terms of the Act alone | 2027 to 2032 | 75 / 70 / 0 | terrain shallow_water; licence PML; lease converted; framework force_pia |
+
+Every case keeps its prices, opex and capex flat in money of the day (every escalator 0), discounts at 10 percent nominal, and states no hydrocarbon tax override, no tertiary education tax rate and no capital allowance life, so the engine applies the statutory values. Each section prints the production, capex and opex rows of the case it uses.
+
+# SECTION 7: The refusals, with the engine's own words (owned by Associate m01 l05 and Associate m02 and Professional m02 and Expert m03)
+
+A refusal is a thrown error. The message states the exact condition that failed and, where the texts leave a value open, why there is no default. Each row below is a stated bad input handed to the engine; the message is the engine's, verbatim. A result returned with a note in `kpis.pia_notes` is a result, never a refusal.
+
+| function | stated bad input | the engine's message, verbatim |
+| --- | --- | --- |
+| `computeCashFlow` | pia_terrain "marginal_field" | pia_terrain "marginal_field" is not a terrain under the Petroleum Industry Act 2021: a marginal field is onshore or in shallow water (PIA Seventh Schedule para 10(4); Petroleum Royalty Regulations 2022 r.13(2)). Set pia_terrain to "onshore" or "shallow_water", and set pia_marginal_field_pre_2021 to true for a producing marginal field converted under PIA s.94(1). Set pia_legacy_pre_audit to true to reproduce a pre-audit run. |
+| `computeCashFlow` | pia_terrain "offshore" | pia_terrain must be "onshore", "shallow_water", "deep_offshore" or "frontier"; got "offshore". |
+| `computeCashFlow` | pia_license_type "OML" | pia_license_type must be "PML" or "PPL"; got "OML". |
+| `computeCashFlow` | pia_lease_status "renewed" | pia_lease_status must be "converted" or "new"; got "renewed". |
+| `computeCashFlow` | a new-acreage onshore lease with no pia_new_pml_hct_rate_pct | A new-acreage petroleum mining lease onshore or in shallow water needs pia_new_pml_hct_rate_pct set to 15 or 30; got null. PIA s.267 (NTA s.72) gives 30% to leases selected under s.93(6)(b) and (7)(b) and 15% to onshore and shallow water and to petroleum prospecting licences, and does not say which applies to a lease granted after the Act out of new acreage, so the rate is a stated user choice with no default. |
+| `computeCashFlow` | pia_new_pml_hct_rate_pct 20 | A new-acreage petroleum mining lease onshore or in shallow water needs pia_new_pml_hct_rate_pct set to 15 or 30; got 20. PIA s.267 (NTA s.72) gives 30% to leases selected under s.93(6)(b) and (7)(b) and 15% to onshore and shallow water and to petroleum prospecting licences, and does not say which applies to a lease granted after the Act out of new acreage, so the rate is a stated user choice with no default. |
+| `computeCashFlow` | a deep offshore NTA year with no pia_deep_offshore_hct_interpretation | A deep offshore year under the Nigeria Tax Act 2025 needs pia_deep_offshore_hct_interpretation set to "conservative_zero", "aggressive_pml_30" or "custom": NTA s.65(1) applies hydrocarbon tax to deep offshore operations but s.72 states rates only for onshore and shallow water, so the rate is a stated user choice with no default. |
+| `computeCashFlow` | pia_deep_offshore_hct_interpretation "custom" with no custom rate | pia_deep_offshore_hct_interpretation "custom" needs pia_deep_offshore_hct_custom_rate_pct as a number from 0 to 100; got null. |
+| `computeCashFlow` | pia_hct_rate_override_pct 150 | pia_hct_rate_override_pct must be a number from 0 to 100; got 150. |
+| `computeCashFlow` | pia_capex_recovery_years 4 | pia_capex_recovery_years is 4, but the PIA Fifth Schedule para 17(1) and NTA First Schedule Part II para 14(1) fix the capital allowance at five years (20, 20, 20, 20, 19 percent under the PIA; 20 percent a year under the NTA). Leave it unset or 5, or set pia_legacy_pre_audit to true to reproduce a pre-audit run with a different recovery life. |
+| `computeCashFlow` | pia_nddc_levy_base "budget" | pia_nddc_levy_base must be "total_budget" or "opex"; got "budget". |
+| `computeCashFlow` | an NTA-year fund contribution with no pia_decom_escrow_condition_met | 2026 is a year under the Nigeria Tax Act 2025 and carries a decommissioning fund contribution, so pia_decom_escrow_condition_met must be true or false: NTA s.86 allows the deduction only when at least 30% of the fund is deposited in an escrow account with a Nigerian bank accredited under the Central Bank of Nigeria's criteria. |
+| `computeCashFlow` | pia_gas_in_country_share_pct 120 | pia_gas_in_country_share_pct must be a number from 0 to 100; got 120. |
+| `computeCashFlow` | pia_price_royalty_base "act_2021" | pia_price_royalty_base must be "regulations_2021" or "act_2020"; got "act_2021". |
+| `computeCashFlow` | pia_under_nta_2025_override "nta" | pia_under_nta_2025_override must be "auto", "force_pia" or "force_nta"; got "nta". |
+| `computeCashFlow` | no production rows | No production data found. Upload and process a CSV first. |
+| `deriveOilRoyaltyRate` | a daily rate of -1 | The crude oil and condensate daily rate must be a finite number of 0 or more; got -1. |
+| `deriveGasRoyaltyRate` | an in-country share of 100.5 | pia_gas_in_country_share_pct must be a number from 0 to 100; got 100.5. |
+| `priceRoyaltyBenchmarks` | base "act" | pia_price_royalty_base must be "regulations_2021" or "act_2020"; got "act". |
+
+19 refusals. Four rules the table shows:
+- A value the texts leave open is a stated input with no default, and a run without it is refused with the reason: the hydrocarbon tax rate of a lease granted out of new acreage onshore or in shallow water (15 or 30), the deep offshore reading in a year under the Nigeria Tax Act 2025, and the escrow condition for a decommissioning fund in such a year.
+- A marginal field is not a terrain. The refusal names the two terrains a marginal field can be in and the flag that gives a converted producing marginal field its rate.
+- The capital allowance life is fixed by the texts at five years, so any other life is refused.
+- A refusal message is course content: quote it in a blockquote as the engine's own words. Two messages end with a sentence naming `pia_legacy_pre_audit`, a platform reproduction switch the course does not teach; a lesson quoting one of those two messages quotes its first sentences only.
+
+# SECTION 8: What is graded, where the practicals run, and what is never graded (owned by Associate m06 and Professional m06 and Expert m06)
+
+EVERY GRADED NUMBER IN THIS COURSE IS A RETURN VALUE OF THIS ENGINE ON FIXED TERMS AND ROWS. A capstone field, a question key and a panel figure are each read from `computeCashFlow` or one of the rate functions of section 1, on terms and rows written down in advance. The same inputs give the same number on any machine, so there is exactly one right answer.
+
+THE PRACTICALS RUN IN THE COURSE'S OWN CALCULATOR PANELS. This is an engine course with no Suite app. Each tier has a calculator panel that calls this same vendored engine: the royalty calculator (Associate), the hydrocarbon tax calculator (Professional) and the ledger calculator (Expert). A learner types or pastes their own terms and rows; the panel prints what the engine returns, every refusal in the engine's own words and every note in `kpis.pia_notes`.
+
+THE OPEN READINGS ARE NEVER GRADED. The texts leave three questions open, and the course teaches each as an open question: the royalty by price base year (the Act starts the benchmarks in 2020, the Regulations in 2021; section 11), the hydrocarbon tax rate of a lease granted out of new acreage onshore or in shallow water (15 or 30; section 13), and the deep offshore hydrocarbon tax under the Nigeria Tax Act 2025 (three readings; section 18). A graded figure is the same under every reading of all three, and any figure that depends on the royalty by price names the Regulations base, which is the engine default.
+
+CONCEPT-ONLY PROVISIONS ARE NEVER GRADED ON A NUMBER. The concept-only rows of section 3 are taught from their text and kept out of every capstone.
+
+EVERY MONEY FIGURE IS AT THE WORKING INTEREST SHARE. The engine runs the royalty tranches, the allowance cap and every rate at field level and then scales every money line to the share (section 20). A graded money figure is the share.
+
+# SECTION 9: Royalty by terrain and daily rate: the small-field tranches (owned by Associate m03 and Professional m01)
+
+THE RULE THE ENGINE APPLIES (`deriveOilRoyaltyRate`). Onshore and shallow water: the first 5,000 bopd at 5 percent, the next 5,000 bopd at 7.5 percent, everything above 10,000 bopd at the terrain rate (15 percent onshore, 12.5 percent in shallow water), as one weighted average rate on the whole volume. Deep offshore: 5 percent up to and including 50,000 bopd and 7.5 percent on the share above, as one weighted average. Frontier: 7.5 percent at every rate. The rate applies to the value of crude oil plus condensate (condensate counts as crude oil for royalty).
+
+THE TRANCHE BOUNDARY TABLE. The rate at each daily rate, per terrain (engine calls; the daily rate is stated):
+
+| liquids bopd (stated) | onshore | shallow_water | deep_offshore | frontier |
+| --- | --- | --- | --- | --- |
+| 1 | 0.050000 | 0.050000 | 0.050000 | 0.075000 |
+| 4999 | 0.050000 | 0.050000 | 0.050000 | 0.075000 |
+| 5000 | 0.050000 | 0.050000 | 0.050000 | 0.075000 |
+| 5001 | 0.050005 | 0.050005 | 0.050000 | 0.075000 |
+| 7500 | 0.058333 | 0.058333 | 0.050000 | 0.075000 |
+| 9999 | 0.062499 | 0.062499 | 0.050000 | 0.075000 |
+| 10000 | 0.062500 | 0.062500 | 0.050000 | 0.075000 |
+| 10001 | 0.062509 | 0.062506 | 0.050000 | 0.075000 |
+| 20000 | 0.106250 | 0.093750 | 0.050000 | 0.075000 |
+| 49999 | 0.132500 | 0.112500 | 0.050000 | 0.075000 |
+| 50000 | 0.132500 | 0.112500 | 0.050000 | 0.075000 |
+| 50001 | 0.132500 | 0.112500 | 0.050000 | 0.075000 |
+| 60000 | 0.135417 | 0.114583 | 0.054167 | 0.075000 |
+| 120000 | 0.142708 | 0.119792 | 0.064583 | 0.075000 |
+
+THE REGULATIONS LEAVE EXACTLY 10,000 BOPD BETWEEN TWO FORMULAS. r.13(2)(b) covers "less than 10,000bopd" and r.13(2)(c) and (d) cover "greater than 10,000bopd" (section 24 quotes both). At exactly 10,000 bopd both formulas give 0.062500 (derived from the stated tranches), which is what the engine returns, so the gap moves no figure.
+
+Read at the three edges: at 5,000 bopd onshore and shallow water pay exactly 5.000000 percent (the first tranche includes its edge); at 10,000 bopd both pay exactly 6.250000 percent, the average of the two small-field tranches; deep offshore pays exactly 5.000000 percent at 50,000 bopd and above it only the barrels past 50,000 pay 7.5 percent. Onshore and shallow water pay the same rate at or below 10,000 bopd and part above it, where the terrain rate enters.
+
+THE DAILY RATE THE TRANCHES READ. The engine divides the year's crude oil plus condensate by the calendar days of the year (`calendarDays`), and prints it on every row as `royalty_liquids_bopd`.
+
+| year (stated) | calendar days |
+| --- | --- |
+| 2024 | 366 |
+| 2025 | 365 |
+| 2026 | 365 |
+| 2027 | 365 |
+| 2028 | 366 |
+
+On Ekene Alpha (shallow water, converted lease), rows (golden input):
+
+| year | oil bbl (golden input) | condensate bbl | gas Mscf | capex USD | opex USD |
+| --- | --- | --- | --- | --- | --- |
+| 2026 | 2920000 | 116800 | 2336000 | 120000000 | 24000000 |
+| 2027 | 2569600 | 102784 | 2055680 | 30000000 | 24000000 |
+| 2028 | 2261248 | 90450 | 1808998 | 0 | 24000000 |
+| 2029 | 1989898 | 79596 | 1591918 | 0 | 24000000 |
+| 2030 | 1751110 | 70044 | 1400888 | 0 | 24000000 |
+| 2031 | 1540977 | 61639 | 1232782 | 0 | 24000000 |
+| 2032 | 1356060 | 54242 | 1084848 | 0 | 24000000 |
+
+The royalty lines the engine returns:
+
+| year | framework | liquids bopd | liquids royalty rate | liquids royalty | gas royalty rate | gas royalty | price royalty rate (oil) | price royalty | total royalty |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026 | nta_2025 | 8320.000000 | 0.059976 | 13625099.038462 | 0.050000 | 350400.000000 | 0.017935 | 4037323.188406 | 18012822.226867 |
+| 2027 | nta_2025 | 7321.600000 | 0.057927 | 11580515.038462 | 0.050000 | 308352.000000 | 0.016605 | 3287545.601137 | 15176412.639598 |
+| 2028 | nta_2025 | 6425.404372 | 0.055546 | 9771930.584405 | 0.050000 | 271349.700000 | 0.015297 | 2663543.885600 | 12706824.170005 |
+| 2029 | nta_2025 | 5669.846575 | 0.052954 | 8197954.296941 | 0.050000 | 238787.700000 | 0.014015 | 2145944.374701 | 10582686.371642 |
+| 2030 | nta_2025 | 4989.463014 | 0.050000 | 6811816.500000 | 0.050000 | 210133.200000 | 0.012762 | 1718065.801255 | 8740015.501255 |
+| 2031 | nta_2025 | 4390.728767 | 0.050000 | 5994400.250000 | 0.050000 | 184917.300000 | 0.011528 | 1364336.084879 | 7543653.634879 |
+| 2032 | nta_2025 | 3853.284153 | 0.050000 | 5275072.000000 | 0.050000 | 162727.200000 | 0.010320 | 1073518.963320 | 6511318.163320 |
+
+Alpha sits between 5,000 and 10,000 bopd from 2026 to 2029, so each of those years pays a weighted rate between the table's 5,000 and 10,000 bopd rates that falls as the field declines; from 2030 it is at or below 5,000 bopd and pays exactly 5 percent. The regulations work month by month over the days oil was produced; the engine's annual reading is stated in `kpis.pia_notes` (section 22).
+
+THE TEXT BEHIND THIS SECTION, quoted verbatim with its citation (each dash the gazette prints shown as a colon):
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| PIA Seventh Schedule para 6 | Royalties are paid into the Federation Account and verified by the Commission; for royalty, condensates count as crude oil and natural gas liquids count as natural gas. | "shall be paid into the Federation Account and verified by the Commission and for royalty purposes condensates shall be treated as crude oil and natural gas liquids shall be treated as natural gas." | computed |
+| PIA Seventh Schedule para 10(2)(a)-(d) | Production royalty is charged by terrain: onshore 15%, shallow water up to 200m 12.5%, deep offshore beyond 200m 7.5%, and frontier basins 7.5%. | "on terrain basis as follows: (a) onshore areas 15% ; (b) shallow water (up to 200m water depth) 12.5% ; (c) deep offshore (greater than 200m water depth) 7.5% ; and (d) frontier basins 7.5%." | computed |
+| PIA Seventh Schedule para 10(3) | Deep offshore fields pay 5% on production up to 50,000 bopd in a month, and the share above 50,000 bopd pays the subparagraph (2) rate. | "(3) For deep offshore fields with a production during a month of not more than 50,000 bopd, the royalty rate shall be 5% and the share of the production above 50,000 bopd shall be at the royalty rate specified in subparagraph (2)." | computed |
+| PIA Seventh Schedule para 10(4) (opening words) | Onshore and shallow water fields, marginal fields included, producing not more than 10,000 bopd in a month pay royalty on a tranched basis. | "(4) Royalties for onshore fields and shallow water fields, including marginal fields, with crude oil and condensate production not more than 10,000 bopd during a month shall be at a rate per centum of the chargeable volume" | computed |
+| PIA Seventh Schedule para 10(4)(a),(b) | The first 5,000 bopd pays 5% and the next 5,000 bopd pays 7.5%. | "on tranched basis as follows: (a) for the first 5,000 bopd 5% ; and (b) for the next 5,000 bopd, for the share of production over 5000 bopd 7.5% :" | computed |
+| PIA Seventh Schedule para 10(4) proviso | For fields producing more than 10,000 bopd in a month, the production over 10,000 bopd pays the terrain rate in subparagraph (2). | "Provided that fields with crude oil and condensate production more than 10,000 bopd during a month, the share of the production over 10,000 bopd per month shall be at the royalty rates specified under subparagraph (2)." | computed |
+| REGS r.12(1)(b) | Where a field produces crude oil and condensates, the royalty sliding scale applies to their combined production. | "(b) field produces both crude oil and condensates, the sliding scale shall be applied to the total production of crude oil plus condensates ;" | computed |
+| REGS r.12(2) | Barrels of oil per day are the month's total production divided by the number of days oil was produced that month, rounded to whole barrels. | "barrels of oil per day shall be determined by taking the total production for the applicable month and dividing this amount with the number of days during which oil was produced in such month, and the result shall be rounded to entire barrels." | computed |
+| REGS r.13(1)(a),(b) | Deep offshore production up to 50,000 bopd pays 5%; above that, the rate is a weighted average of 5% on 50,000 bopd plus 7.5% on the production above 50,000 bopd, divided by total daily production. | "5% ; and (b) for production greater than 50,000bopd, the rate shall be a weighted average rate of 5% of 50,000bopd plus 7.5% of the incremental daily production above 50,000bopd divided by the total production per day." | computed |
+| REGS r.13(2)(a) | Onshore and shallow water production up to 5,000 bopd pays 5%. | "(a) for production less than or equal to 5,000bopd, the rate shall be 5% ;" | computed |
+| REGS r.13(2)(b) | Between 5,000 and 10,000 bopd the rate is a weighted average of 5% on 5,000 bopd plus 7.5% on production above 5,000 bopd, divided by total daily production. | "(b) for production greater than 5,000bopd but less than 10,000bopd, the rate shall be a weighted average rate of 5% of 5,000bopd plus 7.5% of the incremental daily production above 5,000bopd divided by the total production per day ;" | computed |
+| REGS r.13(2)(b) (opening words) | The middle band covers production greater than 5,000 bopd and less than 10,000 bopd. | "(b) for production greater than 5,000bopd but less than 10,000bopd," | computed |
+| REGS r.13(2)(c) (opening words) | The onshore upper band covers production greater than 10,000 bopd. | "(c) for onshore areas where production is greater than 10,000bopd, the" | computed |
+| REGS r.13(2)(c) | Onshore above 10,000 bopd the rate is a weighted average of 5% on 5,000 bopd, 7.5% on the next 5,000 bopd and 15% on production above 10,000 bopd, divided by total daily production. | "(c) for onshore areas where production is greater than 10,000bopd, the rate shall be a weighted average rate of 5% of 5,000bopd plus 7.5% of 5,000bopd plus 15% of the incremental daily production above 10,000bopd divided by the total production per day ; and" | computed |
+| REGS r.13(2)(d) | Shallow water above 10,000 bopd the rate is a weighted average of 5% on 5,000 bopd, 7.5% on the next 5,000 bopd and 12.5% on production above 10,000 bopd, divided by total daily production. | "(d) for shallow waters where production is greater than 10,000bopd, the rate shall be a weighted average rate of 5% of 5,000bopd plus 7.5% of 5,000bopd plus 12.5% of the incremental daily production above 10,000bopd divided by the total production per day." | computed |
+| REGS r.13(3) | Frontier basins pay a flat 7.5% with no sliding scale. | "(3) For frontier basin, the sliding scale shall not apply and the applicable rate shall be 7.5%." | computed |
+| NTA Seventh Schedule para 6(2)(b)(i)-(iv) | The NTA restates the production royalty by terrain: onshore 15%, shallow water up to 200m 12.5%, deep offshore beyond 200m 7.5%, and frontier basins 7.5%. | "(i) onshore areas - 15%, (ii) shallow water (up to 200m water depth): 12.5%, (iii) deep offshore (beyond 200m water depth): 7.5%, and (iv) frontier basins: 7.5%;" | computed |
+| NTA Seventh Schedule para 6(2)(c) | Deep offshore fields pay 5% on production up to 50,000 bopd in a month, and the share above 50,000 bopd pays the terrain rate in paragraph (b). | "(c) for deep offshore fields with a production during a month of not more than 50,000 bopd, the royalty rate shall be 5% and the share of the production above 50,000 bopd shall be at the royalty rate specified in paragraph (b);" | computed |
+| NTA Seventh Schedule para 6(2)(d) (opening words) | Onshore and shallow water fields, marginal fields included, producing not more than 10,000 bopd in a month pay royalty on a tranched basis. | "(d) royalties for onshore fields and shallow water fields, including mar- ginal fields, with crude oil and condensate production not more than 10,000 bopd during a month shall be at a rate per centum" | computed |
+| NTA Seventh Schedule para 6(2)(d)(i),(ii) | The first 5,000 bopd pays 5% and the next 5,000 bopd pays 7.5%. | "(i) for the first 5,000 bopd - 5%, and (ii) for the next 5,000 bopd, for the share of production over 5,000 bop - 7.5%:" | computed |
+| NTA Seventh Schedule para 6(2)(d) proviso | For fields producing more than 10,000 bopd in a month, the production over 10,000 bopd pays the terrain rate in paragraph (b). | "Provided that for fields with crude oil and condensate production more than 10,000 bopd during a month, the share of the production over 10,000 bopd during a month shall be at the royalty rates specified under para- graph (b);" | computed |
+| PIA Seventh Schedule para 10(7) | A field straddling onshore and shallow water, or shallow water and deep offshore, pays a weighted average royalty worked out under regulations. | "(7) Where a field is located partially in onshore and in shallow water or partially in shallow water and deep offshore areas, the weighted average royalty shall be calculated as per regulations." | concept-only (a field in two terrains is not modelled) |
+| REGS r.14(5) | For a field partly onshore and partly in shallow water, the royalty rate is computed as if the whole field were onshore and as if it were all shallow water, and the two rates are weighted by each terrain's share of production. | "(5) The weighted average royalty rate calculation for a field partially in onshore and partially in shallow water shall be as follows: (a) determine the royalty rate as if the entire field is onshore ;" | concept-only (a field in two terrains is not modelled) |
+| REGS r.14(6) | For a field partly in shallow water and partly in deep offshore, the same method weights the shallow water rate and the deep offshore rate by each terrain's share of production. | "(6) The weighted average royalty rate calculation for a field partially in shallow water and partially in deep offshore shall be as follows: (a) determine the royalty rate as if the entire field is in shallow water ;" | concept-only (a field in two terrains is not modelled) |
+
+# SECTION 10: Gas and NGL royalty, and gas used in-country (owned by Associate m03 and Expert m04)
+
+THE RULE THE ENGINE APPLIES (`deriveGasRoyaltyRate`). Gas and natural gas liquids pay 5 percent of their value, and gas produced and used in-country pays 2.5 percent. The in-country share is a stated input (`pia_gas_in_country_share_pct`, 0 to 100, default 0), and the rate is the share-weighted blend. Every terrain pays the same gas rate.
+
+| in-country share percent (stated) | onshore | shallow_water | deep_offshore | frontier |
+| --- | --- | --- | --- | --- |
+| 0 | 0.050000 | 0.050000 | 0.050000 | 0.050000 |
+| 25 | 0.043750 | 0.043750 | 0.043750 | 0.043750 |
+| 40 | 0.040000 | 0.040000 | 0.040000 | 0.040000 |
+| 50 | 0.037500 | 0.037500 | 0.037500 | 0.037500 |
+| 60 | 0.035000 | 0.035000 | 0.035000 | 0.035000 |
+| 100 | 0.025000 | 0.025000 | 0.025000 | 0.025000 |
+
+A gas field with no crude oil (ekene_nag_gas_in_country_half, half the gas used in-country), rows (golden input):
+
+| year | oil bbl (golden input) | condensate bbl | gas Mscf | capex USD | opex USD |
+| --- | --- | --- | --- | --- | --- |
+| 2026 | 0 | 0 | 20000000 | 60000000 | 8000000 |
+| 2027 | 0 | 0 | 20000000 | 0 | 8000000 |
+| 2028 | 0 | 0 | 20000000 | 0 | 8000000 |
+
+| year | framework | liquids bopd | liquids royalty rate | liquids royalty | gas royalty rate | gas royalty | price royalty rate (oil) | price royalty | total royalty |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026 | nta_2025 | 0.000000 | 0.050000 | 0.000000 | 0.037500 | 2250000.000000 | 0.017935 | 0.000000 | 2250000.000000 |
+| 2027 | nta_2025 | 0.000000 | 0.050000 | 0.000000 | 0.037500 | 2250000.000000 | 0.016605 | 0.000000 | 2250000.000000 |
+| 2028 | nta_2025 | 0.000000 | 0.050000 | 0.000000 | 0.037500 | 2250000.000000 | 0.015297 | 0.000000 | 2250000.000000 |
+
+| year | CPR cap | HCT chargeable profit | HCT | CIT assessable profit (before the capital allowance) | CIT allowance claimed | CIT chargeable profit | CIT |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026 | 0.000000 | 0.000000 | 0.000000 | 47710000.000000 | 12000000.000000 | 35710000.000000 | 10713000.000000 |
+| 2027 | 0.000000 | 0.000000 | 0.000000 | 49270000.000000 | 12000000.000000 | 37270000.000000 | 11181000.000000 |
+| 2028 | 0.000000 | 0.000000 | 0.000000 | 49270000.000000 | 12000000.000000 | 37270000.000000 | 11181000.000000 |
+
+With half the gas used in-country the rate prints as 0.037500, half of it at 5 percent and half at 2.5 percent. The field has no crude oil or condensate, so the cost price ratio cap is 0 and there is no hydrocarbon tax; companies income tax is charged on the gas profit.
+
+THE TEXT BEHIND THIS SECTION, quoted verbatim with its citation (each dash the gazette prints shown as a colon):
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| PIA Seventh Schedule para 10(6) | Natural gas and natural gas liquids pay 5% production royalty; gas produced and used in Nigeria pays 2.5%. | "(6) Royalty based on production for natural gas and natural gas liquids shall be at a rate of 5% of the chargeable volume and royalty rate for natural gas produced and utilised in-country shall be 2.5% of the chargeable volume." | computed |
+| REGS r.16(1)(a) | Marketable natural gas used in Nigeria pays royalty at 2.5% under paragraph 10(6) of the Seventh Schedule. | "(a) the applicable rate shall be 2.5% pursuant to paragraph 10(6) of the" | computed |
+| REGS r.16(4) | Separately produced natural gas liquids pay 5% royalty whether used in Nigeria or exported. | "(4) The royalty rate of natural gas liquids produced separately, shall be 5% regardless of whether the natural gas liquids are used in-country or exported." | computed |
+| REGS r.16(5) | Natural gas for export pays production royalty at 5% of the chargeable volumes. | "(5) The royalty based on production of natural gas for export shall be at a rate of 5% of the chargeable volumes" | computed |
+| NTA Seventh Schedule para 6(2)(f) | Natural gas and natural gas liquids pay 5% production royalty; gas produced and used in Nigeria pays 2.5%. | "(f) royalty based on production for natural gas and natural gas liquids shall be at a rate of 5% of the chargeable volume and royalty rate for natural gas produced and utilised in-country shall be 2.5% of the chargeable volume; and" | computed |
+
+# SECTION 11: Royalty by price and its escalated benchmarks (owned by Associate m04)
+
+THE RULE THE ENGINE APPLIES (`priceRoyaltyBenchmarks`, `derivePriceRoyaltyRate`). A royalty by price is charged on the value of crude oil and of condensate, each at its own price: 0 at or below the low benchmark, 5 percent at the middle benchmark, 10 percent at or above the high benchmark, linear between. Frontier acreage pays none. The benchmarks start at 50, 100 and 150 USD/bbl and each rises by 2 percent of the previous year's benchmark every 1 January, rounded to whole cents year by year.
+
+THE BASE YEAR IS AN OPEN QUESTION. The Regulations' Schedule applies 50, 100 and 150 to 2021 and escalates from 1 January 2022 (`regulations_2021`, the engine default). The Act's own words apply the same levels to 2020 and escalate from 1 January 2021 (`act_2020`). The engine follows the Regulations unless told otherwise and states the conflict in `kpis.pia_notes`. The course teaches both and grades neither against the other.
+
+| year | low (Regulations base) | middle | high | low (Act base) | middle | high |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2019 | 50.000000 | 100.000000 | 150.000000 | 50.000000 | 100.000000 | 150.000000 |
+| 2020 | 50.000000 | 100.000000 | 150.000000 | 50.000000 | 100.000000 | 150.000000 |
+| 2021 | 50.000000 | 100.000000 | 150.000000 | 51.000000 | 102.000000 | 153.000000 |
+| 2022 | 51.000000 | 102.000000 | 153.000000 | 52.020000 | 104.040000 | 156.060000 |
+| 2023 | 52.020000 | 104.040000 | 156.060000 | 53.060000 | 106.120000 | 159.180000 |
+| 2024 | 53.060000 | 106.120000 | 159.180000 | 54.120000 | 108.240000 | 162.360000 |
+| 2025 | 54.120000 | 108.240000 | 162.360000 | 55.200000 | 110.400000 | 165.610000 |
+| 2026 | 55.200000 | 110.400000 | 165.610000 | 56.300000 | 112.610000 | 168.920000 |
+| 2027 | 56.300000 | 112.610000 | 168.920000 | 57.430000 | 114.860000 | 172.300000 |
+| 2028 | 57.430000 | 114.860000 | 172.300000 | 58.580000 | 117.160000 | 175.750000 |
+| 2029 | 58.580000 | 117.160000 | 175.750000 | 59.750000 | 119.500000 | 179.270000 |
+| 2030 | 59.750000 | 119.500000 | 179.270000 | 60.950000 | 121.890000 | 182.860000 |
+| 2031 | 60.950000 | 121.890000 | 182.860000 | 62.170000 | 124.330000 | 186.520000 |
+| 2032 | 62.170000 | 124.330000 | 186.520000 | 63.410000 | 126.820000 | 190.250000 |
+
+Read down the table: the Act base in any year equals the Regulations base one year later (checked for every year printed). Before its base year each base keeps 50, 100 and 150.
+
+THE REGULATIONS' OWN TABLE. The Schedule prints the middle column as 102.00, 104.00, 106.00, 108.00 and 110.00 for 2022 to 2026, which does not follow its own 2 percent rule; the engine applies the rule (section 22 quotes the engine's note).
+
+The rate at stated prices in 2025, on each base (onshore; every terrain but frontier pays the same):
+
+| price USD/bbl (stated) | rate, Regulations base | rate, Act base |
+| --- | --- | --- |
+| 50.000000 | 0.000000 | 0.000000 |
+| 54.120000 | 0.000000 | 0.000000 |
+| 75.000000 | 0.019290 | 0.017935 |
+| 80.000000 | 0.023910 | 0.022464 |
+| 95.000000 | 0.037768 | 0.036051 |
+| 108.240000 | 0.050000 | 0.048043 |
+| 120.000000 | 0.060865 | 0.058694 |
+| 162.360000 | 0.100000 | 0.097057 |
+| 170.000000 | 0.100000 | 0.100000 |
+
+At or above the high benchmark of both bases, and at or below the low benchmark of both, the two readings give the same rate; between them they differ.
+
+THE ACT'S OWN EXAMPLE. The Act says that if in 2020 the price is 75 USD/bbl, the royalty by price is 2.5 percent (section 24 quotes it). The engine on the Act base returns 0.025000 at 75 USD/bbl in 2020, and on the Regulations base, which keeps the 2021 levels for 2020, also 0.025000.
+
+Each stream at its own price: crude at 95 and condensate at 88 USD/bbl in 2025, rows (golden input):
+
+| year | oil bbl (golden input) | condensate bbl | gas Mscf | capex USD | opex USD |
+| --- | --- | --- | --- | --- | --- |
+| 2025 | 5000000 | 1000000 | 0 | 50000000 | 40000000 |
+
+| base | oil rate | condensate rate | royalty by price | total royalty |
+| --- | --- | --- | --- | --- |
+| Regulations (2021) | 0.037768 | 0.031301 | 20694235.033259 | 69663505.866593 |
+| Act (2020) | 0.036051 | 0.029710 | 19738586.956522 | 68707857.789855 |
+
+Frontier acreage at 120 USD/bbl in 2026 (ekene_frontier) pays a royalty by price of 0.000000 and a liquids royalty rate of 0.075000.
+
+THE TEXT BEHIND THIS SECTION, quoted verbatim with its citation (each dash the gazette prints shown as a colon):
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| PIA Seventh Schedule para 11(1)(a)-(c) | On top of production royalty, onshore, shallow water and deep offshore crude oil and condensates pay a royalty by price of 0% below US $50 per barrel, 5% at US $100 and 10% above US $150. | "a royalty by price with respect to crude oil and condensates at the rates set out below: (a) below US $50 per barrel: 0%, (b) at US $100 per barrel: 5%, (c) above US $150 per barrel: 10%," | computed |
+| PIA Seventh Schedule para 11(1) (worked example) | The Act's own example: at US $75 per barrel in 2020 the royalty by price is 2.5%, and the price levels apply to the year 2020. | "as an example, if in 2020 the price is US $75 per barrel, the royalty by price shall be 2.5%, and the price levels mentioned in sub-subparagraphs (a), (b) (c) and (d) shall apply to the year 2020," | computed |
+| PIA Seventh Schedule para 11(1) (escalation) | From the start of 2021 and each later calendar year, the price levels rise by 2% on the previous year's values. | "and at the beginning of 2021 and of each succeeding calendar year these price levels shall be increased by 2% relative to the values of the previous year." | computed |
+| PIA Seventh Schedule para 11(1)(c) | The PIA sets royalty by price at 10% above US $150 per barrel. | "(c) above US $150 per barrel: 10%, and" | computed |
+| PIA Seventh Schedule para 11(2) | Frontier acreages pay no royalty by price. | "(2) There shall be no royalty by price for frontier acreages." | computed |
+| REGS r.15(2) | Royalty by price is based on the fiscal oil price for crude oil or for condensates. | "(2) The royalty by price shall be based on the fiscal oil price for crude oil" | computed |
+| REGS Schedule (Royalty Price Benchmarks) | The royalty by price benchmarks rise by 2% a year every 1 January, starting 1 January 2022, each on the previous year's benchmark, rounded to whole US cents. | "shall be adjusted by applying an adjustment figure of 2% per year, every 1st January, commencing 1st January 2022 in such a way as to achieve a 2% escalation of the previous year benchmark. The results shall be rounded to entire US $ cents." | computed |
+| REGS Schedule (Royalty Price Benchmarks table) | The printed benchmarks for 2021 to 2026 are 50.00, 51.00, 52.02, 53.06, 54.12, 55.20 for 11(1) (a); 100.00, 102.00, 104.00, 106.00, 108.00, 110.00 for 11(1) (b); and 150.00, 153.00, 156.06, 159.18, 162.36, 165.61 for 11(1) (c). | "Royalty price benchmarks 2021 2022 2023 2024 2025 2026 11(1) (a) 50.00 51.00 52.02 53.06 54.12 55.20 11(1) (b) 100.00 102.00 104.00 106.00 108.00 110.00 11(1) (c) 150.00 153.00 156.06 159.18 162.36 165.61" | computed |
+| NTA Seventh Schedule para 6(3)(a)(i)-(iii) | The NTA restates royalty by price on crude oil and condensates: 0% below US $50 per barrel, 5% at US $100 and 10% at US $150 and above. | "a royalty by price with respect to crude oil and condensates at the rates set out below: (i) below US $50 per barrel: 0%, (ii) at US $100 per barrel: 5%, (iii) at US $150 per barrel and above: 10%, and" | computed |
+| NTA Seventh Schedule para 6(3)(a) (worked example) | The NTA keeps the Act's example: at US $75 per barrel in 2020 the royalty by price is 2.5%. | "on linear interpolation, as an example, if in 2020 the price is US $75 per barrel, the royalty by price shall be 2.5%," | computed |
+| NTA Seventh Schedule para 6(3)(a) (escalation) | The price levels apply to 2020 and rise by 2% on the previous year's values at the start of 2021 and each later calendar year. | "the price levels mentioned in subparagraphs (i), (ii) (iii) and (iv) shall apply to the year 2020, and at the beginning of 2021 and of each succeeding calendar year these price levels shall be increased by 2% relative to the values of the previous year;" | computed |
+| NTA Seventh Schedule para 6(3)(a)(iii) | The NTA sets royalty by price at 10% at US $150 per barrel and above. | "(iii) at US $150 per barrel and above: 10%, and" | computed |
+
+# SECTION 12: The instruments stacked on one year, and which base each reads (owned by Associate m05 and Associate m06 and Professional m03 and Professional m05)
+
+THE PRICE-ROYALTY BASE OF THIS SECTION. Every figure printed in this section that the royalty by price reaches (the royalty by price itself, the total royalty, every tax, levy, net cash flow, government cash flow and take) reads the royalty by price on the Petroleum Royalty Regulations 2022 base (2021), the engine default; the Act's 2020 base is the open question of section 11 and is never graded.
+
+THE ORDER THE ENGINE APPLIES THEM IN ONE YEAR. Royalty (production royalty on liquids and gas, and the royalty by price) comes off revenue first. HCDT and the NDDC levy are computed on their own bases. The hydrocarbon tax is charged on the crude oil and condensate profit after royalties, the costs the cost price ratio lets through, HCDT, NDDC, the capital allowance and the production allowance. Companies income tax is charged separately on the whole oil and gas profit and does not deduct the hydrocarbon tax. The tertiary education tax (a year under the Act alone) or the development levy (a year under the Nigeria Tax Act 2025) is charged on the companies income tax assessable profit.
+
+| instrument | base it reads | citation | engine field |
+| --- | --- | --- | --- |
+| production royalty, liquids | value of crude oil plus condensate, at the tranche rate | PIA Seventh Schedule para 10 | liquids_production_royalty |
+| production royalty, gas | value of gas and NGL, at 5 or 2.5 percent | PIA Seventh Schedule para 10(6) | gas_royalty |
+| royalty by price | value of crude oil and of condensate, each at its own price | PIA Seventh Schedule para 11 | price_royalty |
+| HCDT contribution | 3 percent of the preceding year's opex | PIA s.240(2) | hcdt |
+| NDDC levy | 3 percent of the total annual budget (opex plus capex) | NDDC Act 2000 s.14(2)(b) (secondary source) | nddc |
+| hydrocarbon tax | crude and condensate profit after royalties, capped costs, HCDT, NDDC and allowances | PIA ss.260, 263, 267; NTA ss.65, 68, 72 | hct_tax |
+| companies income tax | oil and gas profit after royalties, opex, HCDT, NDDC and its own capital allowance | PIA s.302; NTA s.56(b), s.78, s.82 | cit_tax |
+| tertiary education tax | companies income tax assessable profit, in years under the Act alone | Finance Act 2023 s.26 | tet_tax |
+| development levy | companies income tax assessable profit, in years under the Nigeria Tax Act 2025 | NTA s.59(1) | dev_levy_tax |
+
+ONE YEAR END TO END: the worked example inputs (golden input), shallow water, converted lease, 2025, a year under the Act alone. Rows:
+
+| year | oil bbl (golden input) | condensate bbl | gas Mscf | capex USD | opex USD |
+| --- | --- | --- | --- | --- | --- |
+| 2025 | 18250000 | 0 | 0 | 300000000 | 182500000 |
+
+Stated in the golden input: oil at 80 USD/bbl, NDDC as a fixed sum of 15000000 USD, prior-year opex of 170000000 USD (for HCDT), 100 percent working interest. The line items the engine returns for 2025:
+
+| line (engine) | 2025 |
+| --- | --- |
+| gross revenue | 1,460,000,000.000000 |
+| liquids daily rate, bopd | 50000.000000 |
+| liquids royalty rate | 0.112500 |
+| liquids production royalty | 164250000.000000 |
+| royalty by price rate (oil) | 0.023910 |
+| royalty by price | 34908351.810791 |
+| total royalty | 199158351.810791 |
+| HCDT | 5100000.000000 |
+| NDDC | 15000000.000000 |
+| capital allowance | 60000000.000000 |
+| CPR cap | 949000000.000000 |
+| CPR claimed | 242500000.000000 |
+| HCT assessable profit | 1,058,241,648.189209 |
+| production allowance | 45625000.000000 |
+| HCT chargeable profit | 952616648.189209 |
+| HCT rate | 0.300000 |
+| HCT | 285784994.456763 |
+| CIT assessable profit | 1,058,241,648.189209 |
+| CIT allowance claimed | 60000000.000000 |
+| CIT | 299472494.456763 |
+| TET rate percent | 3.000000 |
+| TET | 31747249.445676 |
+| total tax | 617004738.359202 |
+| net cash flow | 141236909.830007 |
+
+Read the lines in order: at 50,000 bopd in shallow water the weighted rate is 11.250000 percent; royalty by price at 80 USD/bbl in 2025 is charged on the Regulations base; the hydrocarbon tax base deducts royalties, the claimed costs, the NDDC sum and the allowances; companies income tax reads its own base; and in 2025, a year under the Act alone, the tertiary education tax is 3 percent of the companies income tax assessable profit. Total tax is the hydrocarbon tax plus companies income tax plus the tertiary education tax (checked).
+
+THE TEXT BEHIND THE STACK, quoted verbatim with its citation:
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| PIA s.264(l) | Tertiary education tax, companies income tax and other income or profits taxes, in Nigeria or abroad, cannot be deducted for hydrocarbon tax. | "(l) amounts incurred in respect of tertiary education tax, companies income tax, any income tax, profits tax or other similar taxes, whether charged within Nigeria or elsewhere ;" | computed |
+| PIA s.302(5) | Hydrocarbon tax cannot be deducted in computing companies income tax. | "(5) In determining the companies income tax, the hydrocarbon tax under this Act shall not be deductible." | computed |
+| NTA s.197(5) | The NTA deletes s.1, 2 and 3(3) of the Tertiary Education Trust Fund Act 2011. | "(5) The Tertiary Education Trust Fund (Establishment, Etc.) Act, 2011 is amended by deleting sections 1, 2, and 3(3)." | computed |
+| PIA s.240(2) | Each settlor pays into the host communities development trust fund each year an amount equal to 3% of its actual operating expenditure of the preceding financial year in the upstream operations affecting those host communities. | "of an amount equal to 3% of its actual annual operating expenditure of the preceding financial year in the upstream petroleum operations affecting the host communities for which the applicable host communities development trust fund was established." | computed |
+| PIA s.257(1) | The settlor's annual host communities trust payment is deductible for hydrocarbon tax and companies income tax as applicable. | "this Act, shall be deductible for the purposes of hydrocarbon tax and companies" | computed |
+| PIA s.263(1)(h) | Contributions to host communities development trusts, the Environmental Remediation Fund, the Niger Delta Development Commission and similar approved funds are deductible for hydrocarbon tax. | "(h) any amount contributed to any fund, scheme or arrangement approved by the Commission pursuant to the establishment of host communities development trusts under Chapter 3 of this Act, Environmental Remediation Fund, Niger Delta Development Commission and other similar contributions." | computed |
+
+# SECTION 13: What the hydrocarbon tax charges, and its rates (owned by Professional m02 and Expert m03 l01)
+
+WHAT IT CHARGES. The engine charges hydrocarbon tax on crude oil and condensate only; gas revenue is outside the tax and costs shared with gas enter at the crude-plus-condensate share of gross revenue (section 14). Deep offshore pays no hydrocarbon tax in a year under the Act alone, frontier acreage pays none under either framework.
+
+THE RATE (`deriveHctRate`), for every combination the engine accepts (stated inputs; the framework is the year's):
+
+| terrain | licence | lease status | converted marginal field | framework and reading | rate | where it comes from |
+| --- | --- | --- | --- | --- | --- | --- |
+| onshore | PML | converted | no | either | 0.300000 | PIA s.267(a); NTA s.72(a) |
+| shallow_water | PML | converted | no | either | 0.300000 | PIA s.267(a); NTA s.72(a) |
+| onshore | PPL | either | no | either | 0.150000 | PIA s.267(b); NTA s.72(b) |
+| shallow_water | PML | converted | yes | either | 0.150000 | PIA s.94(1) with s.267(b) |
+| onshore | PML | new | no | either | REFUSED (section 7) | open: PIA s.267 does not say (stated 15 or 30) |
+| onshore | PML | new, stated 15 | no | either | 0.150000 | stated reading |
+| onshore | PML | new, stated 30 | no | either | 0.300000 | stated reading |
+| deep_offshore | PML | either | no | pia_only | 0.000000 | PIA s.260(3) |
+| deep_offshore | PML | either | no | nta_2025, conservative_zero | 0.000000 | open: NTA s.65(1) against s.72 (stated reading) |
+| deep_offshore | PML | either | no | nta_2025, aggressive_pml_30 | 0.300000 | open: stated reading |
+| deep_offshore | PML | either | no | nta_2025, custom 20 | 0.200000 | open: stated reading |
+| frontier | PML | either | no | either | 0.000000 | PIA s.260(3); NTA s.65(4) |
+
+DEEP OFFSHORE IN A YEAR UNDER THE ACT ALONE (ekene_deep_new_60k_conservative, its 2025 row; the years under the Nigeria Tax Act 2025 are the Expert question):
+
+| year | oil bbl (golden input) | framework | liquids bopd | liquids royalty rate | production allowance | HCT chargeable profit | HCT rate | HCT | CIT |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2025 | 21900000 | pia_only | 60000.000000 | 0.054167 | 175200000.000000 | 795646660.199557 | 0.000000 | 0.000000 | 291253998.059867 |
+
+The lease has a chargeable profit and pays no hydrocarbon tax: PIA s.260(3) keeps deep offshore outside the tax, and companies income tax is charged on the whole profit.
+
+AN OPEN QUESTION FOR NEW LEASES. PIA s.267 (NTA s.72) gives 30 percent to leases selected under s.93(6)(b) and (7)(b), and 15 percent to onshore and shallow water and to petroleum prospecting licences, and does not say which applies to a petroleum mining lease granted after the Act out of new acreage. The engine refuses such a lease until the rate is stated (15 or 30), and the course never grades the hydrocarbon tax of such a lease: a figure on such a lease that the course grades is one the rate does not move (the chargeable profit, the allowances, the cost price ratio, companies income tax).
+
+THE SAME NEW ONSHORE LEASE UNDER BOTH STATED READINGS (ekene_onshore_new_cap_crossing, stated 15 in the golden input, and the same inputs stated 30):
+
+| year | HCT chargeable profit (15) | HCT (15) | HCT chargeable profit (30) | HCT (30) | CIT (15) | CIT (30) |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2026 | 151411548.913043 | 22711732.336957 | 151411548.913043 | 45423464.673913 | 50223464.673913 | 50223464.673913 |
+| 2027 | 123946029.235482 | 18591904.385322 | 123946029.235482 | 37183808.770645 | 40183808.770645 | 40183808.770645 |
+
+The stated rate moves the hydrocarbon tax line and leaves the chargeable profit and companies income tax where they are (checked on every year): companies income tax does not deduct the hydrocarbon tax.
+
+# SECTION 14: Deductions in the hydrocarbon tax base and the cost price ratio (owned by Professional m03 and Associate m05 l02)
+
+THE BASE. Hydrocarbon tax assessable profit is crude oil and condensate revenue less the liquids production royalty, less the royalty by price, less the costs the cost price ratio lets through this year, less the crude-plus-condensate share of HCDT and of the NDDC levy. Chargeable profit then deducts the capital allowance the cap let through and the production allowance. Gas royalty is not deducted (gas is outside the tax).
+
+THE COST PRICE RATIO (CPR). Opex, the capital allowance and any decommissioning contribution that is deductible, each at the crude-plus-condensate share, plus the cost carried in from last year, may be claimed up to 65 percent of crude oil and condensate revenue. The carried pool and this year's operating costs are claimed first, then this year's capital allowance. What does not fit is carried to the next year and claimed there within that year's cap. Cost still carried when the ledger ends is forfeited and reported as `cpr_forfeited_at_cessation`. Royalties, HCDT and the NDDC levy sit outside the cap. The cap limits the hydrocarbon tax only; companies income tax deducts opex in full.
+
+A CASE WHERE THE CAP BINDS (ekene_cpr_binding_forfeiture), rows (golden input):
+
+| year | oil bbl (golden input) | condensate bbl | gas Mscf | capex USD | opex USD |
+| --- | --- | --- | --- | --- | --- |
+| 2024 | 1000000 | 0 | 0 | 150000000 | 40000000 |
+| 2025 | 800000 | 0 | 0 | 0 | 40000000 |
+| 2026 | 600000 | 0 | 0 | 0 | 40000000 |
+
+| year | gross revenue | HCDT | NDDC | CPR cap | CPR claimed | CPR carried out | HCT assessable profit | production allowance | HCT chargeable profit | HCT rate | HCT |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2024 | 75000000.000000 | 0.000000 | 5700000.000000 | 48750000.000000 | 48750000.000000 | 21250000.000000 | 23999396.909159 | 2500000.000000 | 12749396.909159 | 0.300000 | 3824819.072748 |
+| 2025 | 60000000.000000 | 1200000.000000 | 1200000.000000 | 39000000.000000 | 39000000.000000 | 52250000.000000 | 14442572.062084 | 2000000.000000 | 12442572.062084 | 0.300000 | 3732771.618625 |
+| 2026 | 45000000.000000 | 1200000.000000 | 1200000.000000 | 29250000.000000 | 29250000.000000 | 93000000.000000 | 10292934.782609 | 1500000.000000 | 8792934.782609 | 0.300000 | 2637880.434783 |
+
+THE CAPITAL ALLOWANCE THE CAP LETS THROUGH. The row does not export it as a field of its own, so it is printed derived: the HCT assessable profit less the production allowance less the HCT chargeable profit, which is the capital allowance the cost price ratio let into the year after the carried pool and the year's operating costs were claimed first.
+
+| year | capital allowance (the year's, at the share) | HCT capital allowance let through the cap (derived) | CPR carried out |
+| --- | --- | --- | --- |
+| 2024 | 30000000.000000 | 8750000.000000 | 21250000.000000 |
+| 2025 | 30000000.000000 | 0.000000 | 52250000.000000 |
+| 2026 | 30000000.000000 | 0.000000 | 93000000.000000 |
+
+In 2024 part of the capital allowance fits under the cap after the operating costs; in 2025 and 2026 the carried pool and the year's operating costs fill the cap, so no capital allowance is let through and the whole of it joins the carry (checked).
+
+The cap binds in every year and the carry grows; the cost still carried at the end, 93000000.000000, is reported as cpr_forfeited_at_cessation (equal to the last year's carry, checked).
+
+| year | CIT assessable profit | opex (in full) | CIT allowance claimed | CIT |
+| --- | --- | --- | --- | --- |
+| 2024 | 23999396.909159 | 40000000.000000 | 15999597.939440 | 2399939.690916 |
+| 2025 | 13442572.062084 | 40000000.000000 | 8961714.708056 | 1344257.206208 |
+| 2026 | -457065.217391 | 40000000.000000 | 65038687.352504 | 0.000000 |
+
+Companies income tax in the same years deducts the full opex; the cap does not reach it.
+
+THE CRUDE-PLUS-CONDENSATE SHARE on Ekene Alpha, which sells associated gas (derived: liquids revenue over gross revenue, from the rows and prices of the golden input):
+
+| year | gross revenue | liquids share (derived) | HCDT | NDDC | CPR cap | CPR claimed | HCT assessable profit |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026 | 234184000.000000 | 0.970075 | 0.000000 | 4320000.000000 | 147664400.000000 | 46563591.022444 | 182041059.069891 |
+| 2027 | 206081920.000000 | 0.970075 | 720000.000000 | 1620000.000000 | 129944672.000000 | 52384039.900249 | 159495048.786836 |
+| 2028 | 181352094.000000 | 0.970075 | 720000.000000 | 720000.000000 | 114351315.000000 | 52384040.296772 | 138810922.101293 |
+| 2029 | 159589824.000000 | 0.970075 | 720000.000000 | 720000.000000 | 100629145.500000 | 52384040.350843 | 119791467.874183 |
+| 2030 | 140438994.000000 | 0.970075 | 720000.000000 | 720000.000000 | 88553614.500000 | 52384039.578068 | 103027744.608633 |
+| 2031 | 123586351.000000 | 0.970075 | 720000.000000 | 720000.000000 | 77927203.250000 | 29102244.065771 | 87850565.697348 |
+| 2032 | 108755984.000000 | 0.970075 | 720000.000000 | 720000.000000 | 68575936.000000 | 23281795.326315 | 74474145.990786 |
+
+The NDDC levy is deducted in the hydrocarbon tax base at the liquids share, as HCDT is. The engine's cost split by revenue share is a stated approximation (section 22).
+
+# SECTION 15: The production allowance and the capital allowance (owned by Professional m04 and Expert m02 l04)
+
+THE PRODUCTION ALLOWANCE (`computeProductionAllowance`), on crude oil and condensate barrels, deducted in the hydrocarbon tax base:
+- a converted lease: the lower of 2.50 USD/bbl and 20 percent of the oil price, on every barrel;
+- a lease granted out of new acreage: the lower of 8.00 USD/bbl and 20 percent of the oil price up to a cumulative cap per field counted from the start of production (onshore 50, shallow water 100, deep offshore and frontier 500 million barrels), then the lower of 4.00 USD/bbl and 20 percent on every later barrel; a year that crosses the cap is split at the cap;
+- a new lease in deep offshore or frontier in a year under the Nigeria Tax Act 2025: none.
+
+| lease (stated) | terrain | barrels | oil price | prior cumulative bbl | framework | allowance | below the cap bbl | after the cap bbl |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| converted | shallow_water | 1000000 | 75.000000 | 0 | nta_2025 | 2500000.000000 | 1000000 | 0 |
+| converted | shallow_water | 1000000 | 10.000000 | 0 | nta_2025 | 2000000.000000 | 1000000 | 0 |
+| new | onshore | 1000000 | 75.000000 | 0 | nta_2025 | 8000000.000000 | 1000000 | 0 |
+| new | onshore | 1000000 | 30.000000 | 0 | nta_2025 | 6000000.000000 | 1000000 | 0 |
+| new | onshore | 1000000 | 75.000000 | 49500000 | nta_2025 | 6000000.000000 | 500000 | 500000 |
+| new | onshore | 1000000 | 75.000000 | 60000000 | nta_2025 | 4000000.000000 | 0 | 1000000 |
+| new | onshore | 1000000 | 15.000000 | 60000000 | nta_2025 | 3000000.000000 | 0 | 1000000 |
+| new | shallow_water | 1000000 | 75.000000 | 99500000 | pia_only | 6000000.000000 | 500000 | 500000 |
+| new | deep_offshore | 1000000 | 75.000000 | 0 | pia_only | 8000000.000000 | 1000000 | 0 |
+| new | deep_offshore | 1000000 | 75.000000 | 0 | nta_2025 | 0.000000 | 0 | 0 |
+| new | frontier | 1000000 | 75.000000 | 0 | nta_2025 | 0.000000 | 0 | 0 |
+
+A NEW ONSHORE LEASE CROSSING THE CAP (ekene_onshore_new_cap_crossing: 49000000 bbl produced before 2026), rows (golden input):
+
+| year | oil bbl (golden input) | condensate bbl | gas Mscf | capex USD | opex USD |
+| --- | --- | --- | --- | --- | --- |
+| 2026 | 3000000 | 0 | 0 | 40000000 | 30000000 |
+| 2027 | 2500000 | 0 | 0 | 0 | 30000000 |
+
+| year | barrels below the cap | barrels after the cap | production allowance |
+| --- | --- | --- | --- |
+| 2026 | 1000000 | 2000000 | 16000000.000000 |
+| 2027 | 0 | 2500000 | 10000000.000000 |
+
+THE CAPITAL ALLOWANCE (`capitalAllowanceFraction`), the fraction of a spend claimed in each year of its life, read by the law of the year of assessment:
+
+| year of life (0 is the year of spend) | a year under the Act alone | a year under the Nigeria Tax Act 2025 |
+| --- | --- | --- |
+| 0 | 0.200000 | 0.200000 |
+| 1 | 0.200000 | 0.200000 |
+| 2 | 0.200000 | 0.200000 |
+| 3 | 0.200000 | 0.200000 |
+| 4 | 0.190000 | 0.200000 |
+| 5 | 0.000000 | 0.000000 |
+
+In a year under the Act alone the fifth year claims 19 percent and 1 percent of the cost is retained until disposal (never claimed in the ledger); under the Nigeria Tax Act 2025 the fifth year claims 20 percent. A spend part way through its life on 1 January 2026 takes the rate of each later year as that year's law gives it.
+
+# SECTION 16: Companies income tax beside the hydrocarbon tax, the two thirds restriction and losses (owned by Professional m05)
+
+THE BASE. Companies income tax (30 percent unless stated) is charged on oil and gas together: gross revenue less every royalty, opex in full, HCDT, the NDDC levy and any deductible decommissioning contribution, less its own capital allowance. The hydrocarbon tax is not deducted, and the cost price ratio does not apply. THE TWO PRINTED LINES: `cit_assessable_profit` is the profit BEFORE the capital allowance; the allowance claimed is printed as `cit_allowance_claimed`, and `cit_chargeable_profit` is the profit after it, on which the tax is charged.
+
+THE TWO THIRDS RESTRICTION. In a year under the Act alone the capital allowance claimed against companies income tax is limited to two thirds of the assessable profit, and the excess is carried forward; a company in upstream or midstream gas operations is exempt (stated input `pia_cit_company_gas_operations`). In a year under the Nigeria Tax Act 2025 there is no restriction and a carried amount is claimed in full. The engine applies the same restriction to years before 1 May 2023 and says so in `kpis.pia_notes`.
+
+AN ONSHORE LEASE ACROSS 1 JANUARY 2026 (ekene_onshore_across_2026), rows (golden input):
+
+| year | oil bbl (golden input) | condensate bbl | gas Mscf | capex USD | opex USD |
+| --- | --- | --- | --- | --- | --- |
+| 2024 | 2555000 | 0 | 0 | 90000000 | 20000000 |
+| 2025 | 2299500 | 0 | 0 | 0 | 20000000 |
+| 2026 | 2069550 | 0 | 0 | 0 | 20000000 |
+| 2027 | 1862595 | 0 | 0 | 0 | 20000000 |
+| 2028 | 1676336 | 0 | 0 | 0 | 20000000 |
+
+| year | framework | capital allowance | CIT assessable profit | CIT allowance claimed | CIT allowance carried | CIT | TET rate percent | TET | development levy | total tax | net cash flow |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2024 | pia_only | 18000000.000000 | 153422584.102902 | 18000000.000000 | 0.000000 | 40626775.230871 | 3.000000 | 4602677.523087 | 0.000000 | 83939977.984829 | -20517393.881926 |
+| 2025 | pia_only | 18000000.000000 | 138422805.570953 | 18000000.000000 | 0.000000 | 36126841.671286 | 3.000000 | 4152684.167129 | 0.000000 | 74681742.509701 | 63741063.061253 |
+| 2026 | nta_2025 | 18000000.000000 | 123013136.548913 | 18000000.000000 | 0.000000 | 31503940.964674 | 0.000000 | 0.000000 | 4920525.461957 | 66376244.891304 | 56636891.657609 |
+| 2027 | nta_2025 | 18000000.000000 | 109119842.223295 | 18000000.000000 | 0.000000 | 27335952.666989 | 0.000000 | 0.000000 | 4364793.688932 | 57639752.772909 | 51480089.450386 |
+| 2028 | nta_2025 | 18000000.000000 | 96315736.305067 | 18000000.000000 | 0.000000 | 23494720.891520 | 0.000000 | 0.000000 | 3852629.452203 | 49584819.235243 | 46730917.069824 |
+
+The restriction column the engine returns (`cit_allowance_restricted`): true in 2024 and 2025, false from 2026 (checked). On this lease the restriction does not bind: two thirds of each assessable profit is larger than the allowance, so the whole allowance is claimed.
+
+Where it binds: on the CPR case of section 14 (2024 and 2025 are years under the Act alone) the claim is two thirds of the assessable profit, 15999597.939440 in 2024 and 8961714.708056 in 2025, and the rest is carried; 2026 is an NTA year and claims the carried amount in full (the CIT table of section 14).
+
+A YEAR BEFORE 2023 UNDER THE RESTRICTION. The same CPR case with every row moved two years earlier (stated: base year 2022, the rows otherwise as the golden input), so its first year falls before the Finance Act 2023:
+
+| year | framework | restricted (engine) | CIT assessable profit (before the capital allowance) | capital allowance available | CIT allowance claimed | CIT allowance carried | TET rate percent |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2022 | pia_only | true | 23785294.117647 | 30000000.000000 | 15856862.745098 | 14143137.254902 | 2.500000 |
+| 2023 | pia_only | true | 13274740.484429 | 30000000.000000 | 8849826.989619 | 35293310.265283 | 3.000000 |
+| 2024 | pia_only | true | -580361.854504 | 30000000.000000 | 0.000000 | 65293310.265283 | 3.000000 |
+
+In 2022 the claim is two thirds of the assessable profit and the rest is carried (checked), and the tertiary education tax is 2.5 percent. The engine applies to 2022 the restriction as Finance Act 2023 worded it, and its note says the earlier wording was not read.
+
+LOSSES BY CLASS. A loss (or a chargeable profit below zero) is carried to the next year and used there, separately for the hydrocarbon tax and for companies income tax. On the CPR case:
+
+| year | HCT chargeable profit | HCT loss used | HCT loss carried | CIT chargeable profit | CIT loss used | CIT loss carried |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2024 | 12749396.909159 | 0.000000 | 0.000000 | 7999798.969720 | 0.000000 | 0.000000 |
+| 2025 | 12442572.062084 | 0.000000 | 0.000000 | 4480857.354028 | 0.000000 | 0.000000 |
+| 2026 | 8792934.782609 | 0.000000 | 0.000000 | -65495752.569896 | 0.000000 | 65495752.569896 |
+
+The two pools are kept apart (the cash flow course owns the pool arithmetic; this course names the provision behind it).
+
+# SECTION 17: The framework read year by year: the education tax, the levy and the switch (owned by Expert m02)
+
+WHAT THE NIGERIA TAX ACT MOVED. NTA s.197(1)(a) deletes Parts I to X of Chapter Four of the Petroleum Industry Act, and Chapter 4 is the Act's fiscal framework: its Part I sets the objectives and administration and its Part II is the hydrocarbon tax. The same provisions are re-enacted in the Nigeria Tax Act, which is why the NTA sections this course cites beside the PIA sections (s.65 beside s.260, s.72 beside s.267, s.68 beside s.263) say the same things.
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| PIA arrangement of sections, Chapter 4 | Chapter 4 of the Act is its fiscal framework: Part I sets its objectives and administration and Part II is the hydrocarbon tax. | "CHAPTER 4: PETROLEUM INDUSTRY FISCAL FRAMEWORK PART I: OBJECTIVES AND ADMINISTRATION 258. Objectives. 259. Administration. PART II: HYDROCARBON TAX 260. Application of this Part." | computed |
+| NTA s.197(1)(a)-(d) | The NTA deletes from the Petroleum Industry Act Chapter Four Parts I to X, the Fifth and Sixth Schedules, Seventh Schedule paragraphs 6, 9, 10, 11 and 12, and paragraph 14 (6). | "(a) Part I - X of Chapter Four; (b) the Fifth and Sixth Schedules; (c) paragraphs 6, 9, 10, 11 and 12, of the Seventh Schedule; and (d) paragraph 14 (6) of Part IV of the Seventh Schedule." | computed |
+| NTA s.197(1)(d) | The NTA also deletes paragraph 14 (6) of Part IV of the PIA Seventh Schedule. | "(d) paragraph 14 (6) of Part IV of the Seventh Schedule." | computed |
+
+THE RULE (`fiscalFrameworkForYear`). Under `pia_under_nta_2025_override` "auto" (the default) a year before 2026 is a year under the Act alone ("pia_only") and 2026 and every later year is a year under the Nigeria Tax Act 2025 ("nta_2025"), read row by row, so one ledger can cross the switch. "force_pia" and "force_nta" put every year on one framework. A ledger that crosses reports `kpis.fiscal_framework` "pia_only_then_nta_2025" and `kpis.nta_first_year`.
+
+| year (stated) | auto | force_pia | force_nta |
+| --- | --- | --- | --- |
+| 2023 | pia_only | pia_only | nta_2025 |
+| 2024 | pia_only | pia_only | nta_2025 |
+| 2025 | pia_only | pia_only | nta_2025 |
+| 2026 | nta_2025 | pia_only | nta_2025 |
+| 2027 | nta_2025 | pia_only | nta_2025 |
+| 2030 | nta_2025 | pia_only | nta_2025 |
+
+WHAT CHANGES WITH THE FRAMEWORK OF A YEAR, as the engine applies it:
+| line | a year under the Act alone | a year under the Nigeria Tax Act 2025 |
+| --- | --- | --- |
+| tertiary education tax | charged: 3 percent from 2023, 2.5 percent before, on the CIT assessable profit | none (NTA s.197(5)) |
+| development levy | none | 4 percent of the CIT assessable profit (NTA s.59(1)) |
+| capital allowance, fifth year | 19 percent, 1 percent retained | 20 percent |
+| two thirds restriction on the CIT capital allowance | applies | does not apply |
+| deep offshore hydrocarbon tax | none (PIA s.260(3)) | a stated reading (section 18) |
+| deep offshore and frontier new-lease production allowance | allowed | none |
+| decommissioning fund contribution | deductible | deductible only if the escrow condition is met |
+| minimum effective tax top-up (when switched on) | none | applied |
+
+THE TERTIARY EDUCATION TAX RATE BY YEAR (`statutoryTetRatePct`), used in a year under the Act alone unless a rate is stated:
+
+| year (stated) | rate percent |
+| --- | --- |
+| 2021 | 2.500000 |
+| 2022 | 2.500000 |
+| 2023 | 3.000000 |
+| 2024 | 3.000000 |
+| 2025 | 3.000000 |
+
+The Finance Act 2023 raised the rate to 3 percent with effect from 1 May 2023; the annual model applies 3 percent to the whole of 2023. The 2.5 percent before rests on a secondary source (section 2).
+
+ONE LEDGER ACROSS THE SWITCH (ekene_onshore_across_2026, the rows and CIT lines of section 16): kpis.fiscal_framework is "pia_only_then_nta_2025" and kpis.nta_first_year is 2026.
+
+| year | framework | capital allowance | TET rate percent | TET | development levy |
+| --- | --- | --- | --- | --- | --- |
+| 2024 | pia_only | 18000000.000000 | 3.000000 | 4602677.523087 | 0.000000 |
+| 2025 | pia_only | 18000000.000000 | 3.000000 | 4152684.167129 | 0.000000 |
+| 2026 | nta_2025 | 18000000.000000 | 0.000000 | 0.000000 | 4920525.461957 |
+| 2027 | nta_2025 | 18000000.000000 | 0.000000 | 0.000000 | 4364793.688932 |
+| 2028 | nta_2025 | 18000000.000000 | 0.000000 | 0.000000 | 3852629.452203 |
+
+The 2024 spend claims 20 percent in each of its five years: 2024 to 2027 at 20 percent by either law, and 2028, its fifth year and an NTA year, at 20 percent (checked).
+
+A LEDGER FORCED TO THE ACT ALONE (ekene_force_pia_2027, 2027 to 2032): every year reports "pia_only", the tertiary education tax rate is 3.000000 percent, the development levy is 0.000000 and the fifth-year capital allowance of the 2027 spend, in 2031, is 11400000.000000.
+
+# SECTION 18: What the Nigeria Tax Act 2025 changed at the edges, and what it did not (owned by Expert m03)
+
+DEEP OFFSHORE UNDER THE NIGERIA TAX ACT 2025: THREE READINGS. NTA s.65(1) brings deep offshore into the hydrocarbon tax and s.72 prints rates only for onshore and shallow water. The engine takes the reading as a stated input with no default: "conservative_zero", "aggressive_pml_30" or "custom" with a stated rate. The course shows all three and grades none. The deep offshore lease of the dataset, rows (golden input):
+
+| year | oil bbl (golden input) | condensate bbl | gas Mscf | capex USD | opex USD |
+| --- | --- | --- | --- | --- | --- |
+| 2025 | 21900000 | 0 | 0 | 1500000000 | 200000000 |
+| 2026 | 21900000 | 0 | 0 | 0 | 200000000 |
+| 2027 | 21900000 | 0 | 0 | 0 | 200000000 |
+
+| year | framework | liquids royalty rate | production allowance | HCT chargeable profit | HCT, conservative_zero | HCT, aggressive_pml_30 | HCT, custom 20 (stated) | CIT (every reading) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2025 | pia_only | 0.054167 | 175200000.000000 | 795646660.199557 | 0.000000 | 0.000000 | 0.000000 | 291253998.059867 |
+| 2026 | nta_2025 | 0.054167 | 0.000000 | 1,012,073,369.565217 | 0.000000 | 303622010.869565 | 202414673.913043 | 303622010.869565 |
+| 2027 | nta_2025 | 0.054167 | 0.000000 | 1,014,258,341.102824 | 0.000000 | 304277502.330847 | 202851668.220565 | 304277502.330847 |
+
+The reading moves the hydrocarbon tax line and nothing else (checked); 2025, a year under the Act alone, pays none under every reading.
+
+THE DELETED DEEP OFFSHORE ALLOWANCE. The same lease earns a production allowance of 175200000.000000 in 2025 and 0.000000 in 2026: the Nigeria Tax Act 2025 re-enacts the new-lease allowance for onshore and shallow water only.
+
+THE DECOMMISSIONING ESCROW CONDITION. A decommissioning fund contribution is deductible for the hydrocarbon tax and companies income tax in a year under the Act alone. In a year under the Nigeria Tax Act 2025 it is deductible only if at least 30 percent of the fund sits in an escrow account with a Nigerian bank accredited under the Central Bank's criteria (NTA s.86), which the engine takes as a stated true or false. The cash goes out either way. Rows of the two NTA cases (golden input):
+
+| year | oil bbl (golden input) | condensate bbl | gas Mscf | capex USD | opex USD |
+| --- | --- | --- | --- | --- | --- |
+| 2026 | 2000000 | 0 | 0 | 60000000 | 15000000 |
+| 2027 | 1760000 | 0 | 0 | 0 | 15000000 |
+| 2028 | 1548800 | 0 | 0 | 0 | 15000000 |
+
+| year | contribution | deduction (met) | CIT (met) | HCT (met) | deduction (not met) | CIT (not met) | HCT (not met) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026 | 10000000.000000 | 10000000.000000 | 30069497.282609 | 28569497.282609 | 0.000000 | 33069497.282609 | 31569497.282609 |
+| 2027 | 10000000.000000 | 10000000.000000 | 25592461.374534 | 24272461.374534 | 0.000000 | 28592461.374534 | 27272461.374534 |
+| 2028 | 10000000.000000 | 10000000.000000 | 21202534.215567 | 20040934.215567 | 0.000000 | 24202534.215567 | 23040934.215567 |
+
+| year (a fund in years under the Act alone) | contribution | deduction |
+| --- | --- | --- |
+| 2024 | 15000000.000000 | 15000000.000000 |
+| 2025 | 15000000.000000 | 15000000.000000 |
+
+THE MINIMUM EFFECTIVE TAX RATE. The Nigeria Tax Act 2025 s.57 sets a 15 percent minimum effective tax rate for a company in a multinational group or with a turnover of 20 billion naira or more, on audited profit. The engine offers a labelled project-level approximation, off by default (`pia_apply_minimum_etr`): in a year under the Nigeria Tax Act 2025 only, a top-up to the stated rate of the CIT assessable profit. The approximation is stated in `kpis.pia_notes` and is never graded. On the case ekene_min_etr_nta_only (rows golden input), at the golden input's stated 85 percent (set high so the top-up shows) and at 15 percent:
+
+| year | framework | CIT assessable profit | HCT + CIT + TET + levy | top-up at 85 (stated) | top-up at 15 |
+| --- | --- | --- | --- | --- | --- |
+| 2025 | pia_only | 151142412.694013 | 87344719.997228 | 0.000000 | 0.000000 |
+| 2026 | nta_2025 | 131887635.869565 | 76758086.956522 | 35346403.532609 | 0.000000 |
+
+WHAT DID NOT CHANGE. The royalty rates, the tranches, the royalty by price, the hydrocarbon tax rates of 30 and 15 percent onshore and in shallow water, the cost price ratio of 65 percent and the converted-lease production allowance are the same under both frameworks: the engine's royalty and royalty by price functions take no framework input, and its cost price ratio reads none.
+
+# SECTION 19: Host communities, the NDDC levy and the decommissioning fund (owned by Associate m05 and Professional m03 l02)
+
+HCDT (host communities development trust). 3 percent of the preceding year's opex. The first ledger year reads the stated `pia_prior_year_opex_usd` (0 if not stated). Deductible for the hydrocarbon tax (at the liquids share) and for companies income tax.
+
+THE NDDC LEVY. 3 percent of the company's total annual budget, which the engine takes as the year's opex plus capex (NDDC Act 2000 s.14(2)(b) as amended, from a secondary source). `pia_nddc_levy_base` "opex" is a stated alternative and a fixed sum (`pia_nddc_levy_fixed_usd`) replaces the percentage when given. Deductible for the hydrocarbon tax (at the liquids share) and for companies income tax.
+
+| year (Ekene Alpha) | opex | capex | HCDT | NDDC |
+| --- | --- | --- | --- | --- |
+| 2026 | 24000000.000000 | 120000000.000000 | 0.000000 | 4320000.000000 |
+| 2027 | 24000000.000000 | 30000000.000000 | 720000.000000 | 1620000.000000 |
+| 2028 | 24000000.000000 | 0.000000 | 720000.000000 | 720000.000000 |
+| 2029 | 24000000.000000 | 0.000000 | 720000.000000 | 720000.000000 |
+| 2030 | 24000000.000000 | 0.000000 | 720000.000000 | 720000.000000 |
+| 2031 | 24000000.000000 | 0.000000 | 720000.000000 | 720000.000000 |
+| 2032 | 24000000.000000 | 0.000000 | 720000.000000 | 720000.000000 |
+
+The two NDDC bases on the same rows (ekene_nddc_opex_base, stated "opex", and the same inputs on the default total budget):
+
+| year | NDDC, opex base | NDDC, total budget | HCT, opex base | HCT, total budget |
+| --- | --- | --- | --- | --- |
+| 2026 | 450000.000000 | 2250000.000000 | 32109497.282609 | 31569497.282609 |
+| 2027 | 450000.000000 | 450000.000000 | 27272461.374534 | 27272461.374534 |
+
+THE DECOMMISSIONING FUND. With `abandonment_funding_mode` "sinking_fund" the stated cost at the share is collected in equal contributions from the first year to the abandonment year; each contribution is a cash outflow and, where deductible (section 18), sits inside the cost price ratio for the hydrocarbon tax and is deducted in full for companies income tax.
+
+# SECTION 20: Government cash flow, government take and the working interest (owned by Associate m05 and Expert m05)
+
+THE PRICE-ROYALTY BASE OF THIS SECTION. Every figure printed in this section that the royalty by price reaches (the royalty by price itself, the total royalty, every tax, levy, net cash flow, government cash flow and take) reads the royalty by price on the Petroleum Royalty Regulations 2022 base (2021), the engine default; the Act's 2020 base is the open question of section 11 and is never graded.
+
+THE WORDING, from engines/economics/fiscalConventions.js (verbatim, shared with the fiscal course): "Government take" is "Government cash flow divided by the project's pre-take net cash flow, which is revenue less opex less capex, over the project life." Its formula: government cash flow / (revenue - opex - capex). The second metric, "Government share of net revenue", is "Government cash flow divided by revenue less opex over the project life, so capex is added back to the contractor side." Government cash flow is "Royalty plus the government share of profit oil plus tax."
+
+THE ENGINE'S TAKE (`kpis.government_take_pct`) for a PIA ledger is (revenue less capex less opex, less the ledger's net cash flow) over (revenue less capex less opex), undiscounted and nominal. Every royalty, HCDT, the NDDC levy and every tax is on the government side of that difference.
+
+DECOMPOSED BY PROVISION on Ekene Alpha at 100 and at 50 percent working interest (engine totals; government cash flow and the pre-take value derived as stated):
+
+| line | Alpha, 100 percent | Alpha, 50 percent |
+| --- | --- | --- |
+| total royalties | 79273732.707567 | 39636866.353784 |
+| hydrocarbon tax | 204770583.587056 | 102385291.793528 |
+| companies income tax | 222856630.287730 | 111428315.143865 |
+| tertiary education tax | 0.000000 | 0.000000 |
+| development levy | 35714217.371697 | 17857108.685849 |
+| HCDT | 4320000.000000 | 2160000.000000 |
+| NDDC | 9540000.000000 | 4770000.000000 |
+| government cash flow (derived: the sum of the seven lines) | 556475163.954050 | 278237581.977025 |
+| pre-take value (derived: revenue less capex less opex) | 835989167.000000 | 417994583.500000 |
+| government take percent (engine) | 66.564877 | 66.564877 |
+
+Government cash flow over the pre-take value reproduces the engine's take on both lines (checked). At 50 percent every money line is half (checked) and the take does not move (checked): the tranches and caps are read at field level before the share is taken.
+
+# SECTION 21: Which provision moved: one change at a time (owned by Expert m05)
+
+Ekene Alpha as the base case, then ONE stated change at a time, each run through the engine. The differences are derived (the changed run less the base, line by line).
+
+| stated change | royalties | hydrocarbon tax | companies income tax | TET | levy | take percent |
+| --- | --- | --- | --- | --- | --- | --- |
+| terrain onshore | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| a prospecting licence | 0.000000 | -102385291.793528 | 0.000000 | 0.000000 | 0.000000 | -12.247203 |
+| a new lease, stated 30 | 0.000000 | -24691339.200000 | 0.000000 | 0.000000 | 0.000000 | -2.953548 |
+| a new lease, stated 15 | 0.000000 | -114730961.393528 | 0.000000 | 0.000000 | 0.000000 | -13.723977 |
+| oil at 95 USD/bbl | 43566660.591831 | 72668690.783886 | 73263359.822451 | 0.000000 | 9768447.976327 | 0.685923 |
+| oil at 95 USD/bbl, Act base | 41321586.250479 | 73342213.086292 | 73936882.124856 | 0.000000 | 9858250.949981 | 0.614002 |
+| every year forced to the Act alone | 0.000000 | 436533.662718 | 450000.000000 | 26785663.028773 | -35714217.371697 | -0.961977 |
+| all gas used in-country | -863333.550000 | 0.000000 | 259000.065000 | 0.000000 | 34533.342000 | -0.068159 |
+
+EKENE ALPHA AS A PROSPECTING LICENCE, year by year (the stated change of the second row):
+
+| year | HCT assessable profit (PML) | HCT assessable profit (PPL) | HCT rate (PPL) | HCT (PML) | HCT (PPL) |
+| --- | --- | --- | --- | --- | --- |
+| 2026 | 182041059.069891 | 182041059.069891 | 0.150000 | 45350179.067601 | 22675089.533800 |
+| 2027 | 159495048.786836 | 159495048.786836 | 0.150000 | 37113553.319343 | 18556776.659671 |
+| 2028 | 138810922.101293 | 138810922.101293 | 0.150000 | 31148829.747593 | 15574414.873796 |
+| 2029 | 119791467.874183 | 119791467.874183 | 0.150000 | 25654646.470448 | 12827323.235224 |
+| 2030 | 103027744.608633 | 103027744.608633 | 0.150000 | 20811784.619579 | 10405892.309789 |
+| 2031 | 87850565.697348 | 87850565.697348 | 0.150000 | 23407073.065258 | 11703536.532629 |
+| 2032 | 74474145.990786 | 74474145.990786 | 0.150000 | 21284517.297236 | 10642258.648618 |
+
+The base does not move and the rate halves, so the prospecting licence's hydrocarbon tax is exactly half the lease's in every year (checked as an exact equality).
+
+EVERY YEAR FORCED TO THE ACT ALONE, year by year (the stated change of the seventh row):
+
+| year | capital allowance (base) | capital allowance (forced) | restricted (forced) | CIT allowance carried (forced) | CIT assessable profit (both) | development levy (base) | TET (forced) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026 | 24000000.000000 | 24000000.000000 | true | 0.000000 | 187851177.773133 | 7514047.110925 | 5635535.333194 |
+| 2027 | 30000000.000000 | 30000000.000000 | true | 0.000000 | 164565507.360402 | 6582620.294416 | 4936965.220812 |
+| 2028 | 30000000.000000 | 30000000.000000 | true | 0.000000 | 143205269.829995 | 5728210.793200 | 4296158.094900 |
+| 2029 | 30000000.000000 | 30000000.000000 | true | 0.000000 | 123567137.628358 | 4942685.505134 | 3707014.128851 |
+| 2030 | 30000000.000000 | 28800000.000000 | true | 0.000000 | 106258978.498745 | 4250359.139950 | 3187769.354962 |
+| 2031 | 6000000.000000 | 5700000.000000 | true | 0.000000 | 90602697.365121 | 3624107.894605 | 2718080.920954 |
+| 2032 | 0.000000 | 0.000000 | true | 0.000000 | 76804665.836680 | 3072186.633467 | 2304139.975100 |
+
+Read the table: the restriction applies in every forced year and never binds, since nothing is carried and the whole allowance is claimed every year (checked; the gas-operations exemption changes no total). The capital allowance differs only in the fifth year of each spend: 1200000.000000 in 2030 and 300000.000000 in 2031, the 1 percent the Act alone retains (checked). The hydrocarbon tax and companies income tax move only in 2030 and 2031, the two years whose allowance differs (checked). The tertiary education tax and the levy are charged on the same CIT assessable profit (identical in every year, checked), at 3 and 4 percent, so each forced year's education tax is three quarters of the base year's levy (checked to a relative 1e-12).
+
+Read the rows: moving Alpha onshore changes no royalty, because every Alpha year is below 10,000 bopd where onshore and shallow water pay the same rate; a prospecting licence moves only the hydrocarbon tax, to exactly half; a new lease moves the hydrocarbon tax twice, through the larger new-lease production allowance and through the rate it states (the two stated rates are both shown and neither is graded); the price moves the royalty by price and everything after it, and the base year moves it again; forcing the Act alone swaps the development levy for the tertiary education tax and moves the two taxes only through the 1 percent of each spend that the fifth year retains.
+
+# SECTION 22: The engine's notes, verbatim, and when each appears (owned by Expert m05 l04 and Professional m01 l03)
+
+Every note the engine can print in `kpis.pia_notes`, read from the exported `PIA_NOTES`, with the condition that puts it there. A note is a statement the engine makes about a stated default, a conflict between texts or an approximation; it is course content and is quoted verbatim.
+
+| note | appears when | the engine's words |
+| --- | --- | --- |
+| `priceRoyaltyBaseRegulations` | every PIA ledger on the default base | Royalty by price uses the Petroleum Royalty Regulations 2022 Schedule: 50, 100 and 150 USD/bbl apply to 2021 and rise by 2% of the previous year's benchmark every 1 January from 2022, rounded to whole cents. The Act (PIA Seventh Schedule para 11(1), restated in NTA Seventh Schedule para 6(3)) applies the same levels to 2020 and escalates from 1 January 2021, one year earlier. Set pia_price_royalty_base to "act_2020" for the Act's reading. |
+| `priceRoyaltyBaseAct` | every PIA ledger with pia_price_royalty_base "act_2020" | Royalty by price uses the Act's reading (PIA Seventh Schedule para 11(1)): 50, 100 and 150 USD/bbl apply to 2020 and rise by 2% of the previous year's benchmark every 1 January from 2021, rounded to whole cents. The Petroleum Royalty Regulations 2022 Schedule starts the same levels one year later, in 2021. |
+| `priceRoyaltyMidColumn` | a ledger with a year of 2023 or later | The Regulations' benchmark table prints the 100 USD level as 102.00, 104.00, 106.00, 108.00 and 110.00 for 2022 to 2026, which does not follow its own 2% rule; the engine applies the rule (104.04 in 2023). |
+| `dailyRate` | every PIA ledger | Royalty tranches read the year's crude oil plus condensate divided by the calendar days of the year; the Regulations (r.12(2)) divide each month's production by the days oil was produced in that month. |
+| `sharedCosts` | a ledger with gas production in some year | Opex, HCDT, NDDC, capital allowances and any decommissioning contribution enter the hydrocarbon tax at the crude-plus-condensate share of gross revenue. The Act allocates associated-gas costs to crude oil (s.260(2)) and excludes non-associated gas condensate from the tax (s.260(1)(b)(ii)); the engine cannot tell the two gases apart. |
+| `citRestrictionPre2026` | a year under the Act alone, unless the company is in gas operations | Before 2026 the companies income tax capital allowance is limited to two thirds of the assessable profit, with the excess carried forward (CITA Second Schedule para 24(7) as substituted by Finance Act 2023 s.9(b), effective 1 May 2023). The wording in force before 1 May 2023 was not read; the engine applies the same restriction to every year before 2026. Companies in upstream or midstream gas operations are exempt: set pia_cit_company_gas_operations to true. |
+| `ntaVersion` | a year under the Nigeria Tax Act 2025 | Nigeria Tax Act 2025 figures follow Official Gazette No. 117, Vol. 112, of 26 June 2025. The National Assembly ordered the Acts re-gazetted in December 2025; no Certified True Copy was read. |
+| `minEtrApproximation` | the minimum effective tax rate switched on | The minimum effective tax rate top-up is a project-level approximation of NTA s.57: the Act tests the company (a member of a multinational group, or turnover of 20 billion naira or more) on audited profit before tax less 5% of depreciation and personnel cost, which a project model cannot see. The top-up is applied only to years under the NTA and is reported on its own line. |
+| `fiscalPrice` | every PIA ledger | The realised oil and condensate prices stand in for the Commission's fiscal prices (PIA Seventh Schedule para 8), so the additional tax at the fiscal price (PIA s.268; NTA s.73) is not computed. |
+
+ONE MORE NOTE IS BUILT FROM THE RUN. A stated tertiary education tax rate that differs from the statute in a year under the Act alone is used and named. The worked example inputs with a stated 2.5 percent in 2025 print:
+> pia_tet_rate_pct 2.5 was used for 2025. The statutory tertiary education tax is 3% from 2023 (Tertiary Education Trust Fund Act s.1(2) as amended by Finance Act 2023 s.26) and 2.5% before; leave pia_tet_rate_pct unset to apply it.
+
+# SECTION 23: Every boundary rule, one by one (owned by Professional m01 and Expert m05)
+
+A boundary rule is stated per rule, never globally. Each row is an engine call at the boundary and just past it.
+
+| rule | the boundary | at the boundary | just past it |
+| --- | --- | --- | --- |
+| onshore first tranche | at or below 5,000 bopd is exactly 5 percent (the edge belongs to the first tranche) | 0.050000 | 0.050005 |
+| onshore second tranche | at 10,000 bopd is exactly 6.250000 percent; above it the terrain rate enters | 0.062500 | 0.062509 |
+| deep offshore tier | at or below 50,000 bopd is exactly 5 percent | 0.050000 | 0.050000 |
+| royalty by price, low benchmark (2025, Regulations) | at or below the low benchmark is 0 | 0.000000 | 0.000009 |
+| royalty by price, high benchmark (2025, Regulations) | at or above the high benchmark is 10 percent | 0.100000 | 0.099991 |
+| new-lease allowance cap (onshore, 1000000 barrels at 75) | a year that ends exactly on the cap has no barrel after it | 8000000.000000 | 7999996.000000 |
+| production allowance price leg (converted, 1000000 barrels) | at 12.50 USD/bbl 20 percent of price equals 2.50 a barrel | 2500000.000000 | 2498000.000000 |
+| framework | 2025 is a year under the Act alone and 2026 the first NTA year | pia_only | nta_2025 |
+| tertiary education tax rate | 2022 is 2.5 percent and 2023 is 3 percent | 2.500000 | 3.000000 |
+| gas in-country share | 0 and 100 are accepted; above 100 is refused | 0.025000 | refused at 100.5 |
+
+The cost price ratio claims the lesser of the recoverable pool and the cap, so a pool equal to the cap is claimed in full and carries nothing. HCDT is 0 in a year whose preceding opex is 0 or not stated.
+
+# SECTION 24: The rest of the texts quoted, computed or concept-only (owned by Expert m01 and Expert m03 and Expert m04 and Professional m01 l05)
+
+The royalty texts are printed beside the royalty sections and the texts behind the stack beside it (section 9 to section 12), the conversion texts in section 5 and the institutions in section 4; this section prints every other text the course cites. Each provision below is quoted from its gazetted text with its citation. The paraphrase is the course's; the quotation is the text's, verbatim with whitespace collapsed and each dash the gazette prints shown as a colon, verified against the text by quote_check.py. The last column says whether the engine computes the provision. A concept-only provision is never in a capstone or a keyed question that needs a number.
+
+ROYALTY: the text behind the royalty lines (computed in section 9, section 10 and section 11):
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+
+ROYALTY: what the engine does not compute:
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| PIA Seventh Schedule para 8(1) | Royalties on crude oil and condensates are based on a fiscal oil price for the field at the measurement points, set by the Commission. | "8.: (1) The royalties applicable to crude oil and condensates shall be based on the fiscal oil price determined for the field at the measurement points under applicable regulations or guidelines, and this price shall be determined by the Commission" | concept-only |
+| PIA Seventh Schedule para 8(2) | The fiscal oil price reflects quality differentials against international crudes and is an export parity price net of transport costs within Nigeria. | "(2) The fiscal oil price for each field shall consider any quality differentials related to international crude oils and condensates and shall be an export parity price taking into consideration the deduction of transportation costs within Nigeria" | concept-only |
+
+HYDROCARBON TAX: the text behind the lines (computed in section 13, section 14 and section 15):
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| PIA s.260(1)(a) | Hydrocarbon tax applies to crude oil, field condensates and liquid natural gas liquids from associated gas, produced in the field upstream of the measurement points. | "(a) hydrocarbon tax shall apply to crude oil as well as field condensates and liquid natural gas liquids derived from associated gas and produced in the field upstream of the measurement points ;" | computed |
+| PIA s.260(3) | The hydrocarbon tax Part does not apply to deep offshore, or to frontier acreage until it is reclassified under s.68 (3). | "(3) This Part shall not apply to a frontier acreage until it is reclassified under section 68 (3) of this Act and to deep offshore." | computed |
+| PIA s.263(1)(b) | Royalties incurred and paid in the period on crude oil and associated gas are deductible for hydrocarbon tax. | "(b) all royalties the liability for which was incurred and were paid by the company during that period in respect of crude oil and associated gas" | computed |
+| PIA s.263(1)(e) | Contributions to a Commission-approved decommissioning and abandonment fund are deductible, and any surplus returned to the lessee is taxed at the end of field life. | "any amount contributed to a fund, scheme or arrangement approved by the Commission for the purpose of decommissioning and abandonment, provided that the surplus or residue of the fund shall be subject to tax under this Act at the end of life of the field," | computed |
+| PIA s.263(1)(f) | Levies, stamp duties and fees owed to the Federal, State or Local Government are deductible for hydrocarbon tax. | "(f ) all sums the liability of which was incurred by the company to the Federal Government or any State or Local Government Council by way of levies, stamp duties and fees ;" | computed |
+| PIA s.264(q) | Costs still above the cost price ratio limit when crude oil operations end (Sixth Schedule paragraph 2 (2) (c)) cannot be deducted. | "(q) costs under paragraph 2 (2) (c) of the Sixth Schedule to this Act." | computed |
+| PIA s.265(1) | Assessable profit for a period is the adjusted profit after deducting losses the company incurred in any previous accounting period. | "that period after the deduction of the amount of any loss incurred by that company during any previous accounting period." | computed |
+| PIA s.265(2) | Assessable profit, and so loss relief, is worked out separately for each of the two hydrocarbon tax classes in s.267 (a) and (b). | "(2) The assessable profit shall be determined separately for each of the two classes of chargeable tax identified in section 267 (a) and (b)." | computed |
+| PIA s.265(3) | A loss is deducted as far as possible from the adjusted profit of the first accounting period after the one in which it was incurred. | "(3) A deduction under subsection (1) shall be made so far as possible from the amount, if any, of the adjusted profit of the first accounting period after that in which the loss was incurred," | computed |
+| PIA s.266(2) | In working out chargeable profit, total cost may not exceed the cost price ratio set in the Sixth Schedule. | "(2) In determining the chargeable profit, the total cost shall not exceed" | computed |
+| PIA Sixth Schedule para 2(1) | Hydrocarbon tax deductions under s.263 and the Fifth Schedule, except rents, royalties and host community and similar contributions (s.263 (1) (a), (b) and (h)), are capped at a cost price ratio of 65% of gross revenues. | "excluding those related to section 263 (1) (a), (b) and (h), in an accounting period the sum of which is eligible for deduction under the hydrocarbon tax shall be subject to a cost price ratio limit of 65% of gross revenues" | computed |
+| PIA Sixth Schedule para 2(2)(a) | Costs disallowed by the cost price ratio limit can be deducted in later years, but total deductions may never exceed the costs actually incurred. | "(a) the costs may be allowed for deduction for the purposes of ascertaining the profits of the company for subsequent years of assessment provided that the total costs to be deducted shall not exceed the actual costs incurred ;" | computed |
+| PIA Sixth Schedule para 2(2)(b) | Carried-forward costs claimed in a later year, added to that year's own costs, must stay within the 65% cost price ratio limit. | "shall be such an amount that if added to the sum of the total costs to be allowed as deduction under subparagraph (1) shall not exceed the specified cost price ratio limit of 65% ;" | computed |
+| PIA Sixth Schedule para 2(2)(c) | Costs still above the cost price ratio limit when crude oil operations terminate are not deductible for hydrocarbon tax. | "(c) where under paragraph 2 (2) (b), any cost exceed the cost price ratio limit upon the termination of upstream petroleum operations related to crude oil, such costs shall not be deductible for purpose of calculation of the hydrocarbon tax." | computed |
+| PIA s.267(a) | Hydrocarbon tax is 30% of crude oil profit for onshore and shallow water petroleum mining leases selected under s.93 (6) (b) and (7) (b), that is, converted producing areas. | "(a) 30% of the profit from crude oil for petroleum mining leases selected under section 93 (6) (b) and (7) (b) of this Act with respect to onshore and shallow water areas ;" | computed |
+| PIA s.267(b) | Hydrocarbon tax is 15% of crude oil profit for onshore and shallow water and for petroleum prospecting licences selected under s.93 (6) (a) and (7) (a). | "(b) 15% of profit from crude oil for onshore and shallow water and for petroleum prospecting licences selected under section 93 (6) (a) and (7) (a) of this Act." | computed |
+| PIA Fifth Schedule para 17(1) | Qualifying capital expenditure is written off at 20% a year for four years and 19% in the fifth year. | "17.: (1) Qualifying expenditure shall be subject to the rates below: Qualifying Capital Expenditure 1st 2nd 3rd 4th 5th Year Year Year Year Year Qualifying Plant Expenditure 20% 20% 20% 20% 19%" | computed |
+| PIA Fifth Schedule para 5(2) | 1% of each asset's initial cost stays in the books and can only be written off on disposal under a Commission certificate (subparagraph (3)). | "(2) Notwithstanding the provisions of subparagraph (1) of this paragraph, there shall be retained in the books, in respect of each asset 1% of the initial cost of the asset which may only be written off in accordance with subparagraph (3)." | computed |
+| PIA Sixth Schedule para 1(1) | Converted oil mining leases and their renewals get a production allowance equal to the lower of US $2.50 per barrel and 20% of the fiscal oil price. | "1.: (1) There shall be a production allowance for crude oil production by leases which are converted oil mining leases based on a conversion contract and their renewals, which shall be the lower of US $2.50 per barrel and 20% of the fiscal oil price." | computed |
+| PIA Sixth Schedule para 1(2) (opening words) | Leases granted after the Act commenced get a production allowance per field, set out by terrain in paragraphs (a) to (c). | "(2) There shall be a production allowance per field for crude oil production by a company for leases granted after the commencement of this Act and determined as follows: " | computed |
+| PIA Sixth Schedule para 1(2)(a) | Onshore: the lower of US $8.00 per barrel and 20% of the fiscal oil price up to 50 million barrels cumulative production, then the lower of US $4.00 per barrel and 20% of the fiscal oil price. | "lower of US $8.00 per barrel and 20% of the fiscal oil price per barrel up to a cumulative maximum production of 50 million barrels from commencement of production and the lower of US $4.00 per barrel and 20% of the fiscal oil price thereafter" | computed |
+| PIA Sixth Schedule para 1(2)(b) | Shallow water: the first-tier allowance runs up to 100 million barrels cumulative production, then the lower of US $4.00 per barrel and 20% of the fiscal oil price. | "20% of the fiscal oil price, up to a cumulative maximum production of 100 million barrels from commencement of production and the lower of US $4.00 per barrel and 20% of the fiscal oil price thereafter ; and" | computed |
+| PIA Sixth Schedule para 1(2)(c) | Deep offshore and frontier: the lower of US $8.00 per barrel and 20% of the fiscal oil price up to 500 million barrels cumulative production. | "(c) for deep offshore areas and frontier basins: the lower of US $8.00 per barrel and 20% of the fiscal oil price, up to a cumulative maximum production of 500 million barrels" | computed |
+| PIA Sixth Schedule para 1(4) | Production allowances for crude oil also apply to condensates and liquid natural gas liquids that are within hydrocarbon tax under s.260 (1) (a). | "(4) Any allowances for crude oil shall also apply to condensates and liquid natural gas liquids under section 260 (1) (a) of this Act." | computed |
+| PIA s.302(11)(a) | For companies income tax, rents and royalties on crude oil, condensate and natural gas sold or disposed of are deductible. | "(a) all rents and royalties the liability for which was incurred by the company during that period in respect of crude oil sold, condensate sold and natural gas sold or delivered or disposed of in any other commercial manner" | computed |
+| PIA s.302(11)(b) | For companies income tax, contributions to approved funds for decommissioning, host communities development trusts or environmental remediation are deductible. | "(b) any amount contributed to any fund, scheme or arrangement approved by the Commission or Authority for the purpose of providing for: (i) abandonment and decommissioning, (ii) petroleum host communities development trust, or (iii) environmental remediation ;" | computed |
+
+HYDROCARBON TAX: what the engine does not compute:
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| PIA s.260(1)(b)(ii) | Condensates and natural gas liquids produced from non-associated gas in fields or gas processing plants are outside hydrocarbon tax, provided their volumes are determined at the measurement points or the gas plant exit. | "(ii) condensates and natural gas liquids produced from non-associated gas in fields or gas processing plants, provided the related volumes are determined at the measurement points or at the exit of the gas processing plant," | concept-only |
+| PIA s.260(2) | Costs of producing associated gas upstream of the measurement point are allocated to crude oil for hydrocarbon tax, with an exception for wells that produce only gas-cap gas. | "(2) The costs of production of associated gas, upstream of the measurement point shall be allocated to crude oil for the purposes of calculating hydrocarbon tax, provided that capital and operating costs for wells solely" | concept-only |
+| PIA s.264(f) | Production bonuses, signature bonuses, lease or licence renewal bonuses or fees, and fees for assigning rights cannot be deducted for hydrocarbon tax. | "(f ) production bonuses, signature bonuses paid for the acquisition of, or of rights in or over, petroleum deposits, bonuses or fees paid for renewing petroleum mining lease or petroleum prospecting licence or marginal field or fees paid for assigning rights to another party ;" | concept-only |
+| PIA s.265(4) | A company may elect in writing to defer all or part of a loss deduction to the next accounting period, and may make the same election in later periods. | "the company may elect in writing that a deduction or any part to be made under this section shall be deferred to and be made in the succeeding accounting period, and may so elect in any succeeding accounting period." | concept-only |
+| PIA s.268(1) | If chargeable tax computed normally is below the amount in subsection (2), the company pays additional chargeable tax equal to the difference. | "in subsection (2), the company is liable to pay an additional amount of chargeable" | concept-only |
+| PIA s.268(2) | The comparison amount is the tax that would be due if crude oil exported were valued at barrels at the measurement point times the fiscal oil price per barrel. | "the reference in section 262 (1) (a) of this Act to the proceeds of sale were a reference to the amount obtained by multiplying the number of barrels of that crude oil determined at the measurement point by the fiscal oil price per barrel." | concept-only |
+| NTA s.73(1) | Under the NTA the top-up applies where chargeable oil is sold between connected persons or disposed of between connected or unconnected persons and hydrocarbon tax falls below the fiscal-price amount. | "chargeable oil between connected persons, or disposal of chargeable oil be-" | concept-only |
+| NTA s.73(2) | The comparison amount is the hydrocarbon tax that would be due if the crude oil were valued at barrels at the measurement point times the fiscal oil price per barrel. | "in section 67 (1) (a) of this Act to the proceeds of sale were a reference to the amount obtained by multiplying the number of barrels of that crude oil determined at the measurement point by the fiscal oil price per barrel." | concept-only |
+| PIA Fifth Schedule para 17(2) | Exploration spending and the first two appraisal wells in a field are deducted 100% in the year incurred; further pre-production exploration and appraisal spending in the same field is amortised. | "Exploration expenditure and the first two appraisal wells expenditure in the same field are to be treated as deductible costs 100% in the year incurred, while for additional exploration expenditures and appraisal expenditures in the same field relating to pre-production period are to be amortised" | concept-only |
+| PIA s.272(1) | A company operating upstream across terrains may consolidate costs for companies income tax. | "terrains shall be allowed to consolidate costs for the purpose of companies" | concept-only |
+| PIA s.272(2) | For hydrocarbon tax, a company may consolidate costs and taxes across terrains only across the assets it holds licences and leases in. | "(2) A company engaged in upstream petroleum operations related to crude oil across terrains shall be allowed to consolidate costs and taxes for the purposes of hydrocarbon tax only across assets in which it holds licences and leases" | concept-only |
+| PIA s.302(6) | Midstream, downstream gas and large-scale gas utilisation companies get the s.39 Companies Income Tax Act incentives, and gas pipeline investors get an extra five-year tax-free period after that. | "in this Act, shall be entitled to benefit from the incentives provided under section 39 of the Companies Income Tax Act, and investors in gas pipeline will be granted an additional tax-free period of five years at the expiration of the tax-free period" | concept-only |
+| PIA s.305 | Stabilisation clauses in PSCs or other contracts signed after commencement do not shield contractors from changes to the listed fiscal provisions, whether the change helps or hurts them. | "contract or other contract entered into after the commencement of this Act shall not be applicable to the fiscal provisions listed in this section, regardless of whether these changes affect the contractor favorably or unfavorably," | concept-only |
+
+PRODUCTION SHARING CONTRACTS UNDER THE ACT (concept-only; the fiscal course owns production sharing as design):
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| PIA Seventh Schedule para 14(4) (cost limit) | A production sharing contract on new acreage has a cost limit of 70% of total oil production (with condensates and associated-gas NGLs where applicable). | "(4) For new acreage any production sharing contract shall have a cost limit of 70% based on total oil production, and where applicable condensates" | concept-only |
+| PIA Seventh Schedule para 14(9) | A production sharing contract under a conversion contract has a cost limit of 60%. | "(9) For a production sharing contract subject to a conversion contract under this Act, the cost limit shall be 60%." | concept-only |
+| PIA Seventh Schedule para 14(4)(a)-(c) | Government's minimum profit oil share, by cumulative production per field: 5% up to 50 million barrels, 10% over 50 up to 100 million, 15% over 100 up to 350 million barrels. | "(a) up to and including 50 million barrels - 5% ; (b) over 50 million barrels and up to and including 100 million barrels: 10% ; (c) over 100 million barrels and up to and including 350 million barrels: 15% ;" | concept-only |
+| PIA Seventh Schedule para 14(4)(d)-(f) | The scale continues at 25% up to 750 million barrels, 35% up to 1500 million barrels and 45% over 1500 million barrels. | "(d) over 250 million barrels up to and including 750 million barrels: 25% ; (e) over 750 million barrels ad up to and including 1500 million barrels: 35% ; or (f ) over 1500 million barrels: 45%." | concept-only |
+
+THE NIGERIA TAX ACT 2025: what it moved and changed (computed where section 17 and section 18 show it):
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| NTA commencement note (long title) | The gazette prints the NTA's commencement note as 26th June, 2025. | "[ 26th June, 2025 ] Commence- ment ENECTED by the National Assembly of the Federal Republic of Nigeria" | computed |
+| NTA s.196 (opening words) | From the NTA's commencement the enactments listed in s.196 are repealed. | "196. From the commencement of this Act, the following enactments are repealed (repealed enactments): " | computed |
+| NTA s.196(c) | The repealed enactments include the Companies Income Tax Act and the Deep Offshore and Inland Basin Act. | "(c) Companies Income Tax Act, Cap. C21, Laws of the Federation of Nigeria, 2004; (d) Deep offshore and Inland Basin Act, Cap. D3, Laws of the Federation" | computed |
+| NTA s.56(a),(b) | Company income tax is 0% for a small company and 30 per cent for any other company from the commencement of the Act. | "(a) a small company, at 0%; and (b) any other company, at the rate of 30 per cent from the commence- ment of this Act." | computed |
+| NTA s.65(1) | The NTA hydrocarbon tax Part applies to upstream companies in the onshore, shallow water and deep offshore holding PIA licences and leases. | "operations in the onshore, shallow water and deep offshore with licences and" | computed |
+| NTA s.65(2)(a) | Hydrocarbon tax applies to crude oil, field condensates and liquid natural gas liquids from associated gas produced upstream of the measurement points. | "(2) In this Part: (a) hydrocarbon tax shall apply to crude oil as well as field condensates and liquid natural gas liquids derived from associated gas and produced in the field upstream of the measurement points;" | computed |
+| NTA s.65(4) | The Part does not apply to frontier acreage until it is reclassified under s.68 (3) of the PIA. | "(4) This Part shall not apply to a frontier acreage until it is reclassified under section 68 (3) of the Petroleum Industry Act." | computed |
+| NTA s.72(a) | Hydrocarbon tax is 30% of crude oil profit for onshore and shallow water petroleum mining leases selected under PIA s.93 (6) (b) and (7) (b). | "(a) 30% of the profit from crude oil for petroleum mining leases selected under section 93 (6) (b) and (7) (b) of the Petroleum Industry Act with respect to onshore and shallow water areas; and" | computed |
+| NTA s.72(b) | Hydrocarbon tax is 15% of crude oil profit for onshore and shallow water and for petroleum prospecting licences selected under the PIA conversion rules. | "(b) 15% of profit from crude oil for onshore and shallow water and for" | computed |
+| NTA s.86 (opening words) | A provision for a decommissioning and abandonment fund is not tax deductible except where the escrow conditions in paragraphs (a) and (b) are met. | "provision made for decommissioning and abandonment fund shall not be" | computed |
+| NTA s.86(a) | The licensee or lessee must deposit at least 30% of the decommissioning and abandonment fund with a Nigerian bank in an escrow account the Commission or Authority can access. | "(a) the licensee or lessee deposit a minimum of 30% of the" | computed |
+| NTA s.86(b) | The bank must be accredited under criteria set by the Central Bank of Nigeria with the Service. | "(b) the Nigerian bank is accredited in accordance with the criteria for accreditation for participation in the management of the fund, determined by the Central Bank of Nigeria in collaboration with the Service." | computed |
+| NTA Sixth Schedule para 1(2)(a),(b) | The NTA new-lease production allowance list ends with (b) shallow water, so only onshore and shallow water leases get the per-field allowance of the lower of US $8.00 per barrel and 20% of the fiscal oil price. | "and the lower of US $4.00 per barrel and 20% of the fiscal oil price thereafter; and (b) for shallow water areas, the lower of US $8.00 per barrel and 20% of the fiscal oil price, up to a cumulative maximum production of 100" | computed |
+| NTA First Schedule Part II para 14(1) | Under the NTA, upstream qualifying capital expenditure is written off at 20% a year for five years. | "14. (1) Qualifying expenditure shall be subject to the rates below: Qualifying Capital Expenditure 1st 2nd 3rd 4th 5th Qualifying Plant Expenditure 20% 20% 20% 20% 20%" | computed |
+| NTA First Schedule Part II para 4(2) | 1% of the qualifying expenditure is recorded for statistical purposes until disposal, but as a notional figure it does not change the capital allowance that can be claimed. | "there shall be recorded in the capital allowance computation schedule for statistical purposes until the asset is disposed, 1% of the qualifying capital expenditure, which being a notional amount, shall not increase or reduce the amount of capital allowance claimable under this Part." | computed |
+
+THE NIGERIA TAX ACT 2025 RESTATES: the royalty, the cost price ratio, the deductions, loss relief and the converted-lease allowance carried into it (computed; the engine applies them under both frameworks):
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| NTA Sixth Schedule para 2(1) | Hydrocarbon tax costs, except rents, royalties and host community and similar contributions, are capped at a cost price ratio of 65% of gross revenues determined at the measurement points. | "(b) and (h), in an accounting period the sum of which is eligible for deduction under the hydrocarbon tax shall be subject to a cost price ratio limit of 65% of gross revenues determined at the measurement points." | computed |
+| NTA Sixth Schedule para 1(1) | Converted oil mining leases and their renewals get a production allowance equal to the lower of US $2.50 per barrel and 20% of the fiscal oil price. | "1. (1) There shall be a production allowance for crude oil production by leases which are converted oil mining leases based on a conversion contract and their renewals, which shall be the lower of US $2.50 per barrel and 20% of the fiscal oil price." | computed |
+| NTA s.68(1)(b) | Royalties incurred in the period on crude oil and associated gas are deductible for hydrocarbon tax. | "(b) all royalties incurred by the company during that period in respect of crude oil and associated gas" | computed |
+| NTA s.68(1)(f) | Levies, stamp duties and fees owed to the Federal, State or Local Government are deductible for hydrocarbon tax. | "(f) all sums incurred by the company to the Federal Government or any State or Local Government Council by way of levies, stamp duties and fees;" | computed |
+| NTA s.68(1)(h) | Contributions to host communities development trusts, the Environmental Remediation Fund, the Niger Delta Development Commission and similar approved funds are deductible for hydrocarbon tax. | "development trusts under Chapter 3 of the Petroleum Industry Act, Environmental Remediation Fund, Niger Delta Development Commission and other similar contributions." | computed |
+| NTA s.70(1) | Assessable profit for a period is the adjusted profit after deducting losses incurred in any previous accounting period. | "that period after the deduction of the amount of any loss incurred by that company during any previous accounting period." | computed |
+| NTA s.70(2) | Assessable profit is worked out separately for each of the two hydrocarbon tax classes in s.72 (a) and (b). | "(2) The assessable profit shall be determined separately for each of the two classes of chargeable tax identified in section 72 (a) and (b) of this Act." | computed |
+| NTA s.70(3) | A loss is deducted as far as possible from the adjusted profits of the accounting period immediately after the one in which it was incurred. | "(3) The loss referred to in subsection (1) shall be deducted to the extent possible from the amount of the adjusted profits of the accounting period immediately succeeding the accounting period in which the loss was incurred," | computed |
+| NTA s.78(3)(a) | Hydrocarbon tax cannot be deducted in computing income tax under Chapter Two. | "(3) In determining the income tax under Chapter Two of this Act: (a) hydrocarbon tax is not deductible; and" | computed |
+| NTA s.82(1)(a) | For income tax, rents and royalties on crude oil, condensate and natural gas sold or disposed of are deductible. | "(a) all rents and royalties the liability for which was incurred by the company during that period in respect of crude oil sold, condensate sold and natural gas sold or delivered or disposed of in any other commercial manner" | computed |
+| NTA s.82(1)(b) | For income tax, contributions to approved funds for decommissioning, host communities development trusts or environmental remediation are deductible. | "(b) any amount contributed to any fund, scheme or arrangement approved by the Commission or Authority for the purpose of providing for: (i) abandonment and decommissioning, (ii) petroleum host communities development trust, or (iii) environmental remediation; and" | computed |
+
+THE NIGERIA TAX ACT 2025: what the engine does not compute:
+
+| citation | what it says (the course's paraphrase) | the text, verbatim | in the engine |
+| --- | --- | --- | --- |
+| NTA s.76(1) | A company operating upstream across terrains may consolidate costs and incomes for income tax under Chapter Two. | "terrains shall be allowed to consolidate costs and incomes for the purpose of" | concept-only |
+| NTA s.76(2) | For hydrocarbon tax, a company may consolidate costs and revenue across terrains only across the assets it holds licences and leases in. | "(2) A company engaged in upstream petroleum operations related to crude oil across terrains shall be allowed to consolidate costs and revenue for the purposes of hydrocarbon tax, only across assets in which it holds licences and" | concept-only |
+| NTA s.80(1) | Gas pipeline investors get a tax-free period of five years after their economic development incentive certificate expires. | "shall be granted a tax-free period of five years at the expiration of the economic" | concept-only |
+| NTA s.80(2),(3) | Natural gas transferred from upstream to midstream or downstream is taxed under Chapter Two. | "(2) Natural gas transferred or disposed from the upstream to the midstream or downstream shall be subject to tax under the relevant provisions of Chapter Two of this Act." | concept-only |
+| NTA s.57(1) | A company whose effective tax rate for a year of assessment is below 15% must recompute and pay additional tax to bring it up to 15%. | "where, in any year of assessment, the effective tax rate of a company is less than 15%, such company shall recompute and pay an additional tax that makes its effective tax rate equal to 15%." | concept-only |
+| NTA s.57(2) | The minimum rate applies only to constituent entities of an MNE group and to other companies with aggregate turnover of N20,000,000,000 or more in the year. | "(2) The provisions of this section shall apply to: (a) a company that is a constituent entity of an MNE group; and (b) any other company with an aggregate turnover of N20,000,000,000 and above in the relevant year of assessment." | concept-only |
+| NTA s.57(4) ("effective tax rate") | The effective tax rate is the aggregate covered tax paid for the year divided by the company's profits. | ""effective tax rate" means the rate produced by dividing the aggre- gate covered tax paid by a company for a year of assessment by the profits of the company; and" | concept-only |
+| NTA s.57(4) ("profits") | Profits for this test are net profit before tax in the audited financial statements, less 5% of depreciation and personnel cost for the year. | ""profits" means the net profits before tax as reported in the audited financial statement less 5% of depreciation and personnel cost for the year." | concept-only |
+| NTA s.85(1) (opening words) | The non-associated gas incentive covers onshore and shallow water greenfield developments reaching first commercial gas production between the NTA's commencement and 1 January 2029. | "gas production from the commencement of this Act to 1 January, 2029: " | concept-only |
+| NTA s.85(1)(a) | Where hydrocarbon liquids do not exceed 30 barrels per million standard cubic feet, the gas production tax credit is the lower of US$1.00 per thousand cubic feet and 30% of the fiscal gas price. | "rate of US$1.00 per thousand cubic feet or 30% of the fiscal gas price, whichever is lower;" | concept-only |
+| NTA s.85(1)(b) | In the middle liquids band, up to 100 barrels per million standard cubic feet, the credit is the lower of US$0.50 per thousand cubic feet and 30% of the fiscal gas price. | "but do not exceed 100 barrels per million standard cubic feet, there shall be granted a gas production tax credit at the rate of US$0.50 per thousand cubic feet or 30% of the fiscal gas price, whichever is lower;" | concept-only |
+| NTA s.85(1)(d) | The gas tax credit applies to non-associated gas sales for 10 years from first gas production. | "(d) the gas tax credit granted by this section shall apply on Non-Associated Gas sales for 10 years only, beginning from the date of attaining first gas production; and" | concept-only |
+| NTA s.85(2) | Non-associated gas greenfield projects with first commercial gas after 1 January 2029 get a gas production allowance of the lower of US$0.50 per thousand cubic feet and 30% of the fiscal gas price. | "(2) In the case of all other Non-Associated Gas Greenfield projects with first commercial gas production after 1 January, 2029, gas production allow- ance shall be granted at US$0.50 per thousand cubic feet or 30% of the fiscal gas price, whichever is lower," | concept-only |
+| NTA s.85(4) | Tax credit not used in a year can be carried forward for up to three years. | "(4) Unrecouped tax credit in one year may be carried forward for a maximum of three years." | concept-only |
+| NTA s.88(1) | Stabilisation clauses in contracts made after the PIA commenced do not protect against changes to the listed fiscal provisions, favourable or unfavourable, if the changes do not discriminate against the industry or the contractor. | "this Part, regardless of whether the changes in fiscal provisions affect the contractor favourably or unfavourably, provided such changes in fiscal provi- sion are being made in a manner that is not discriminatory to the petroleum industry or the contractor." | concept-only |
+| NTA s.88(2)(a) | The listed provisions include generally applicable taxes such as income tax, development levy, VAT, stamp duties and withholding at source. | "(2) The respective fiscal provisions referred to in subsection (1) are: (a) generally applicable taxes, such as income tax, development levy, value added tax, stamp duties, and deduction of tax at source;" | concept-only |
+
+A MISPRINT IN THE TEXT IS QUOTED AS PRINTED. Seventh Schedule para 14(4)(d) prints "over 250 million barrels" where the scale's own steps need 350; NTA Seventh Schedule para 6(2)(d)(ii) prints "5,000 bop" where the rest of the paragraph and the Act write bopd; the Regulations' Schedule prints the middle benchmark column as 102.00 to 110.00, which does not follow its own 2 percent rule (section 11). The course quotes each as printed and says so.
+
+# SECTION 25: Vocabulary this course legislates before a word is written (owned by Associate m01 and Professional m01 and Expert m01)
+
+These words carry a narrower meaning in this course than they have in conversation or elsewhere in the academy. The rule for each is binding on every lesson, bank question, key truth and panel.
+
+| word | what it can mean elsewhere | the rule here |
+| --- | --- | --- |
+| royalty | any payment to the state | the production royalty on liquids and gas plus the royalty by price, as the engine's total royalty; name which part when only one is meant |
+| royalty by price | a sliding royalty in general | the Seventh Schedule para 11 royalty on crude oil and condensate, 0 to 10 percent between the escalated benchmarks, always with its base year stated |
+| terrain | the ground or the water depth | one of onshore, shallow_water, deep_offshore, frontier, as a stated input; the engine does not read the water depth |
+| converted lease | any lease under the Act | a petroleum mining lease converted from an oil mining lease under the Act's conversion (engine `pia_lease_status` "converted") |
+| new lease | a recently signed lease | a petroleum mining lease granted out of new acreage (engine `pia_lease_status` "new") |
+| a year under the Act alone | any year after 2021 | a year of assessment the engine reads as "pia_only" (before 2026 under "auto") |
+| a year under the Nigeria Tax Act 2025 | any year after June 2025 | a year of assessment the engine reads as "nta_2025" (2026 onward under "auto") |
+| open reading | an opinion | one of the three questions the texts leave open (the royalty by price base year, the new-lease rate onshore or in shallow water, the deep offshore rate under the Nigeria Tax Act 2025); taught, never graded |
+| stated reading | the correct reading | the answer to an open reading that a run states as an input; never presented as the law |
+| government take | any government share | the engine's undiscounted take: government cash flow over revenue less capex less opex (section 20) |
+| at the share | at 100 percent | at the stated working interest; every money figure in a ledger is at the share |
+| concept-only | unimportant | taught from the text with its citation and never graded on a number |
+
+A FIGURE THAT DEPENDS ON A SETTING is quoted with it: a royalty by price with its base year, a hydrocarbon tax on a new lease onshore or in shallow water with its stated rate, a deep offshore hydrocarbon tax under the Nigeria Tax Act 2025 with its stated reading, a money figure with its working interest.

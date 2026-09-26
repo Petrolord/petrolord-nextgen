@@ -1,0 +1,19 @@
+-- ============================================================================
+-- EC7 PROFESSIONAL DEEP SEED: Petroleum Industry Act 2021 & Nigerian Fiscal
+-- Terms, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json, and the question rows from the committed bank JSONs under
+-- tools/course-banks/pia/intermediate.
+--
+-- What this tier owns: THE HYDROCARBON TAX AS A SYSTEM. The small-field
+-- tranches and the deep offshore tier; what the tax charges and its two
+-- classes of rate, with the new-lease rate taught as an open question;
+-- deductions and the cost price ratio with its carry and forfeiture; the
+-- production and capital allowances; and companies income tax beside it.
+--
+-- AN ENGINE COURSE. There is no Suite app: the practicals run in the course's
+-- own hydrocarbon tax calculator. The Professional capstone grades six
+-- quantities no stated new-lease rate moves.
+-- ============================================================================

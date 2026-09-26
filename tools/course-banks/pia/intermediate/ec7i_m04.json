@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "A capital spend's whole five-year life falls in years under the Act alone. What fraction of it does the engine claim in year of life 4, the fifth year?",
+  "options": [
+   "0.200000, the same share as each of the four years before",
+   "0.000000, since the fifth year holds only the retained share",
+   "0.190000 plus the retained 1 percent, released that year",
+   "0.190000, the fifth-year rate"
+  ],
+  "answer": 3,
+  "explanation": "PIA Fifth Schedule para 17(1) prints \"20% 20% 20% 20% 19%\", and the engine returns 0.190000 for year of life 4 in a year under the Act alone. 0.200000 in the fifth year is the Nigeria Tax Act 2025 schedule. Year of life 5 is the one that claims 0.000000. The retained 1 percent is never released in the ledger, because para 5(2) holds it until disposal and the ledger has no disposal event."
+ },
+ {
+  "prompt": "Under the Act alone the capital allowance schedule claims 20, 20, 20, 20 and 19 percent of a spend. What happens to the last 1 percent of its cost in the engine's ledger?",
+  "options": [
+   "Claimed in year of life 5, the year after the 19 percent, once the schedule has run",
+   "It is retained in the books until disposal and never claimed in the ledger, since the ledger has no disposal event",
+   "It moves into the carried cost pool and waits there for a later year with room enough under the cap to claim it in full",
+   "Added to the fifth year's production allowance, so the barrels of that year carry it"
+  ],
+  "answer": 1,
+  "explanation": "Para 5(2) says \"there shall be retained in the books, in respect of each asset 1% of the initial cost of the asset which may only be written off in accordance with subparagraph (3)\", on disposal. The engine has no disposal event, so it never claims it; year of life 5 claims 0.000000. The carried pool holds costs the cap turned away, and holds no unclaimed schedule share. The production allowance is a sum per barrel with no cost behind it."
+ },
+ {
+  "prompt": "A learner sets pia_capex_recovery_years to 4. How does the engine respond?",
+  "options": [
+   "It refuses, since the texts fix the capital allowance at five years",
+   "A run at 25 percent a year over four years, named in a note",
+   "The five-year schedule runs and the stated life is ignored",
+   "It rounds the life to one the texts allow, with a note"
+  ],
+  "answer": 0,
+  "explanation": "The engine's own words open: \"pia_capex_recovery_years is 4, but the PIA Fifth Schedule para 17(1) and NTA First Schedule Part II para 14(1) fix the capital allowance at five years (20, 20, 20, 20, 19 percent under the PIA; 20 percent a year under the NTA).\" Any stated life other than 5 is refused, and a refusal returns no ledger. The engine never overrides a stated input silently and never rounds it; the fix is to leave it unset or set 5."
+ },
+ {
+  "prompt": "On a lease where the cost price ratio cap binds, which of this year's costs does the engine carry forward first?",
+  "options": [
+   "Opex for the year, which the engine claims after the capital allowance",
+   "The HCDT contribution, which enters the pool at the liquids share",
+   "This year's capital allowance",
+   "The production allowance, as the last deduction in the base"
+  ],
+  "answer": 2,
+  "explanation": "The engine claims the carried pool and this year's opex first and this year's capital allowance last, so when the cap binds the capital allowance is the first cost left over. Opex is claimed before the capital allowance. HCDT sits outside the cap and is never carried. The production allowance is deducted outside the cap, from assessable to chargeable profit, and is never part of the pool."
+ },
+ {
+  "prompt": "Oil sells at 75 USD/bbl. How much production allowance does a converted lease earn on 1000000 barrels?",
+  "options": [
+   "8000000.000000, the first tier",
+   "4000000.000000, the second tier",
+   "2500000.000000, the 2.50 USD leg",
+   "20 percent of the price on every barrel"
+  ],
+  "answer": 2,
+  "explanation": "PIA Sixth Schedule para 1(1) gives converted leases \"the lower of US $2.50 per barrel and 20% of the fiscal oil price\"; at 75 USD/bbl the fixed leg is lower, so the allowance is 2.50 USD on each barrel, 2500000.000000. The 8.00 and 4.00 USD tiers belong to leases granted out of new acreage. Twenty percent of 75 USD is far above 2.50, so the price leg does not apply."
+ },
+ {
+  "prompt": "A converted lease produces 1000000 barrels at one cent below 12.50 USD/bbl. What allowance does the engine return, and which leg applies?",
+  "options": [
+   "2498000.000000, the 20 percent price leg",
+   "2500000.000000, since the 2.50 USD leg holds at every price",
+   "2000000.000000, as prices under 12.50 fall to a fixed floor",
+   "0.000000: no allowance below it"
+  ],
+  "answer": 0,
+  "explanation": "At 12.50 USD/bbl the two legs are equal (20 percent of 12.50 is 2.50), and below it the price leg is the lower one, so one cent below returns 2498000.000000. The 2.50 USD leg applies only where it is the lower of the two. 2000000.000000 is the return at 10 USD/bbl, where 20 percent of the price is lower still; there is no fixed floor. The allowance never switches off at the crossing."
+ },
+ {
+  "prompt": "A lease granted out of new acreage onshore produces 1000000 barrels at 30 USD/bbl with nothing produced before. What production allowance does the engine return?",
+  "options": [
+   "8000000.000000, the fixed first-tier leg",
+   "2500000.000000, the converted-lease leg",
+   "4000000.000000, the tier after the cap",
+   "6000000.000000"
+  ],
+  "answer": 3,
+  "explanation": "Para 1(2)(a) gives the lower of 8.00 USD and 20 percent of the price below the cap. At 30 USD/bbl, 20 percent of the price is below 8.00 USD, so the allowance is 6000000.000000. 8000000.000000 is the return at 75 USD/bbl. The converted-lease allowance applies to converted leases, and this is a new lease. The 4.00 USD tier starts only after 50 million barrels, and a low price does not move a barrel across the cap."
+ },
+ {
+  "prompt": "Suppose 49500000 barrels came out of a new onshore field before this year, and this year adds 1000000 at 75 USD/bbl. What allowance results?",
+  "options": [
+   "8000000.000000, since the year started below the cap and the whole year stays in the first tier",
+   "6000000.000000, with 500000 barrels below the cap and 500000 after it",
+   "4000000.000000, every barrel of the year on the 4.00 USD tier",
+   "2500000.000000, the converted-lease leg, once the history passes 49 million barrels"
+  ],
+  "answer": 1,
+  "explanation": "A year that crosses the cap is split at the cap: 500000 barrels at 8.00 USD and 500000 at 4.00 USD, 6000000.000000 in all, with below and after the cap printed as 500000 each. Keeping the whole year in the first tier or moving the whole year to the second both ignore the split the engine makes. 2500000.000000 is the converted-lease allowance, and a new lease keeps its own tiers whatever its history."
+ },
+ {
+  "prompt": "The Ekene new onshore lease had produced 49000000 barrels before 2026 and produces 3000000 barrels in 2026 at 75 USD/bbl. How does the engine reach its 2026 allowance of 16000000.000000?",
+  "options": [
+   "3000000 barrels at a blended rate, with the cap spread over the whole year",
+   "2000000 barrels below the cap at 8.00 USD and 1000000 after it earning nothing",
+   "1000000 barrels below the cap at 8.00 USD and 2000000 after it at 4.00 USD",
+   "Every barrel at 8.00 USD, less a 50 million barrel cap deduction"
+  ],
+  "answer": 2,
+  "explanation": "One million barrels remain below the 50 million barrel onshore cap, and they earn 8.00 USD each; the other two million are past it and earn 4.00 USD each, 16000000.000000 in all. The engine splits the year at the cap and blends nothing. The second tier pays the lower of 4.00 USD and 20 percent of the price, which is 4.00 USD at 75, so no barrel earns zero. There is no cap deduction; the cap is a volume limit."
+ },
+ {
+  "prompt": "In 2027 the same lease produces 2500000 barrels at 75 USD/bbl. What allowance does the engine return?",
+  "options": [
+   "Every barrel at 8.00 USD, since each year's tier restarts on 1 January",
+   "0.000000, since a lease past its cap gets no production allowance for the rest of its life",
+   "The converted-lease allowance",
+   "10000000.000000, every barrel at 4.00 USD"
+  ],
+  "answer": 3,
+  "explanation": "The cap counts cumulative production from the start, and the lease crossed it in 2026, so every 2027 barrel earns the second tier: 4.00 USD, the lower leg at 75 USD/bbl, giving 10000000.000000. The tier does not restart each year. Para 1(2)(a) keeps \"the lower of US $4.00 per barrel and 20% of the fiscal oil price thereafter\", so the allowance continues. A new lease stays a new lease past its cap."
+ },
+ {
+  "prompt": "On 1000000 new onshore barrels at 75 USD/bbl, a year that ends exactly on the cap returns 8000000.000000, and one barrel further returns 7999996.000000. What does that show?",
+  "options": [
+   "The engine rounds any year within one barrel of the cap back into the first tier",
+   "The barrel landing on the cap earns the first tier, and the one past it earns 4.00 USD",
+   "The cap is inclusive only in years under the Act alone",
+   "Every barrel of the year drops a few cents once the cap is crossed"
+  ],
+  "answer": 1,
+  "explanation": "A year that ends exactly on the cap has no barrel after it, so all of it earns 8.00 USD; one barrel further, that last barrel earns 4.00 USD, which is 4 less, giving 7999996.000000. The engine applies an exact split and no rounding. The rule is stated per rule for the cap and does not depend on the framework of the year. Only the barrel past the cap changes tier."
+ },
+ {
+  "prompt": "A new onshore lease, its new-lease rate stated, has produced for years, and a learner leaves pia_prior_cumulative_oil_bbl at 0. What does the engine do?",
+  "options": [
+   "It treats the lease as fresh, paying the first tier until the ledger itself reaches the cap",
+   "It refuses the run, since a new lease must state its production history before any year is taxed",
+   "It reads the field's history from the production rows, counting back from the first ledger year",
+   "It applies the 4.00 USD second tier to every barrel"
+  ],
+  "answer": 0,
+  "explanation": "The cap counts from the start of production, and the engine learns where a field stands only from the stated pia_prior_cumulative_oil_bbl, adding each ledger year's crude oil and condensate to it. With 0 the lease looks fresh and earns 8.00 USD a barrel until the ledger's own barrels reach the cap, which can overstate the allowance. The engine does not refuse a 0, has no production history beyond the rows it is given, and never guesses the second tier."
+ },
+ {
+  "prompt": "Every PIA run prints: \"The realised oil and condensate prices stand in for the Commission's fiscal prices (PIA Seventh Schedule para 8), so the additional tax at the fiscal price (PIA s.268; NTA s.73) is not computed.\" What does that mean for the production allowance's 20 percent leg?",
+  "options": [
+   "A fiscal price the learner must type",
+   "It is switched off, lacking the fiscal price",
+   "Twenty percent of the price benchmark",
+   "It reads the realised price"
+  ],
+  "answer": 3,
+  "explanation": "The text says \"20% of the fiscal oil price\"; the engine uses the realised price and states that choice in its note, which is part of the result. There is no fiscal price input and no refusal. The leg stays on: at 10 USD/bbl a converted lease earns 2000000.000000 through it. Royalty by price benchmarks belong to the royalty and never enter the allowance."
+ },
+ {
+  "prompt": "The Ekene new onshore lease's allowance falls from 16000000.000000 to 10000000.000000 as it passes the cap. Which lines does crossing the cap move?",
+  "options": [
+   "The chargeable profit and the hydrocarbon tax",
+   "The cost price ratio claim, since the allowance is claimed inside the 65 percent cap",
+   "Companies income tax as well",
+   "The assessable profit"
+  ],
+  "answer": 0,
+  "explanation": "The production allowance is deducted from assessable profit to reach chargeable profit, outside the cap, so the cap on volume moves the chargeable profit and through it the tax. The cost price ratio lines sit above that step and do not read the allowance. Companies income tax has no production allowance in its base. The assessable profit is computed before the allowance comes off."
+ },
+ {
+  "prompt": "The Ekene deep offshore lease is a new lease producing 21900000 barrels at 75 USD/bbl in 2025, a year under the Act alone. What production allowance does the engine return?",
+  "options": [
+   "0.000000, since deep offshore pays no hydrocarbon tax in 2025 and so earns no allowance on any barrel",
+   "175200000.000000, 8.00 USD on every barrel",
+   "The 2.50 USD leg on every barrel",
+   "The 4.00 USD tier on every barrel"
+  ],
+  "answer": 1,
+  "explanation": "Para 1(2)(c) gives deep offshore and frontier new leases the lower of 8.00 USD and 20 percent of the price up to 500 million barrels, and at 75 USD/bbl that is 8.00 USD a barrel, 175200000.000000. The engine computes the base and the allowance even where s.260(3) sets the tax at zero. The 2.50 USD leg is for converted leases. The 4.00 USD tier starts only past the cap."
+ }
+]

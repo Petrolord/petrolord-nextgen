@@ -1,0 +1,96 @@
+{
+ "dataset": "ALAKU (synthetic)",
+ "label": "ALAKU, an Ekene synthetic deep offshore lease granted out of new acreage",
+ "cfg": {
+  "fiscal_regime": "PIA",
+  "discount_rate_pct": 10,
+  "inflation_rate_pct": 0,
+  "present_value_basis": "nominal",
+  "oil_price_escalator_pct": 0,
+  "gas_price_escalator_pct": 0,
+  "condensate_price_escalator_pct": 0,
+  "capex_escalator_pct": 0,
+  "base_year": 2025,
+  "oil_price_usd_bbl": 180,
+  "gas_price_usd_mscf": 3.4,
+  "opex_escalator_pct": 0,
+  "pia_terrain": "deep_offshore",
+  "pia_license_type": "PML",
+  "pia_lease_status": "new",
+  "pia_marginal_field_pre_2021": false,
+  "pia_deep_offshore_hct_interpretation": "conservative_zero",
+  "pia_water_depth_m": 1350,
+  "pia_working_interest_pct": 20,
+  "pia_prior_year_opex_usd": 0,
+  "pia_prior_cumulative_oil_bbl": 0,
+  "pia_gas_in_country_share_pct": 60,
+  "abandonment_cost_usd": 90000000,
+  "abandonment_funding_mode": "sinking_fund",
+  "pia_decom_escrow_condition_met": false,
+  "pia_under_nta_2025_override": "auto"
+ },
+ "prodRows": [
+  {
+   "year": 2025,
+   "oil_bbl": 22630000,
+   "gas_mscf": 24893000,
+   "condensate_bbl": 0
+  },
+  {
+   "year": 2026,
+   "oil_bbl": 19914400,
+   "gas_mscf": 21905840,
+   "condensate_bbl": 0
+  },
+  {
+   "year": 2027,
+   "oil_bbl": 17524672,
+   "gas_mscf": 19277139,
+   "condensate_bbl": 0
+  },
+  {
+   "year": 2028,
+   "oil_bbl": 15421711,
+   "gas_mscf": 16963882,
+   "condensate_bbl": 0
+  },
+  {
+   "year": 2029,
+   "oil_bbl": 13571106,
+   "gas_mscf": 14928217,
+   "condensate_bbl": 0
+  }
+ ],
+ "capexRows": [
+  {
+   "year": 2025,
+   "amount_usd": 2400000000
+  },
+  {
+   "year": 2026,
+   "amount_usd": 350000000
+  }
+ ],
+ "opexRows": [
+  {
+   "year": 2025,
+   "total_opex_usd": 420000000
+  },
+  {
+   "year": 2026,
+   "total_opex_usd": 420000000
+  },
+  {
+   "year": 2027,
+   "total_opex_usd": 420000000
+  },
+  {
+   "year": 2028,
+   "total_opex_usd": 420000000
+  },
+  {
+   "year": 2029,
+   "total_opex_usd": 420000000
+  }
+ ]
+}
