@@ -79,9 +79,9 @@
  {
   "prompt": "An onshore petroleum mining lease selected under s.93(6)(b) on conversion produces crude oil. What hydrocarbon tax rate does the engine return?",
   "options": [
-   "0.150000, because s.267(b) names onshore and shallow water in its opening words and so covers every onshore lease",
-   "0.000000, since onshore fields below 10,000 bopd sit in the small-field tranches and pay royalty alone",
-   "A refusal until a rate of 15 or 30 is stated, because the Act leaves every onshore lease rate open",
+   "0.150000, as s.267(b) names onshore in its opening words",
+   "0.000000, as a small onshore field pays royalty alone",
+   "A refusal until a rate of 15 or 30 is stated",
    "0.300000, under s.267(a)"
   ],
   "answer": 3,
@@ -136,7 +136,7 @@
   "options": [
    "Runs at 20 percent and names the stated rate in a note",
    "It rounds 20 to the nearest printed rate, 15, and carries on with that rate for every year of the ledger",
-   "It refuses with the same message, ending \"got 20.\"",
+   "It refuses, and the first sentence of the message ends \"got 20.\"",
    "Accepted as an override, since any stated rate from 0 to 100 runs"
   ],
   "answer": 2,

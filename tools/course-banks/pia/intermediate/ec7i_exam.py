@@ -10,12 +10,12 @@ def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 # on a named base. No exam question re-asks a module question.
 
 # ---- the small-field tranches
-q(2, "Half of an onshore field's 7500 bopd lies above 5,000 bopd. Which weighted rate applies to its liquids?",
+q(2, "A third of an onshore field's 7500 bopd lies above 5,000 bopd. Which weighted rate applies to its liquids?",
  "0.058333",
- ["0.075000, the 7.5 percent of the second tranche applied to every barrel",
-  "0.050000, since the field has not reached 10,000 bopd",
-  "0.062500, the rate of the second tranche edge"],
- "Half of 7500 bopd sits in the first tranche at 5 percent and half in the second at 7.5 percent, and the Regulations weight them over the whole volume, so the engine returns 0.058333. Charging 7.5 percent on every barrel ignores the first tranche. 5 percent holds only up to 5,000 bopd. 0.062500 belongs to exactly 10,000 bopd.")
+ ["0.075000, the second tranche rate",
+  "0.050000, below 10,000 bopd",
+  "0.062500, the second tranche edge"],
+ "Two thirds of 7500 bopd sit in the first tranche at 5 percent and a third in the second at 7.5 percent, and the Regulations weight them over the whole volume, so the engine returns 0.058333. Charging 7.5 percent on every barrel ignores the first tranche. 5 percent holds only up to 5,000 bopd. 0.062500 belongs to exactly 10,000 bopd.")
 
 q(0, "At 120000 bopd the engine returns 0.142708 onshore, 0.119792 in shallow water and 0.064583 in deep offshore. What do the three returns have in common?",
  "Each stays below its terrain rate",
@@ -54,9 +54,9 @@ q(0, "The Nigeria Tax Act 2025 (Official Gazette No. 117, Vol. 112, 26 June 2025
 
 q(2, "Regulations r.14(6) weights a field lying partly in shallow water and partly in deep offshore. At 60000 bopd the engine returns 0.114583 as shallow water and 0.054167 as deep offshore. What are these two figures?",
  "The two limbs of the method, each as if the whole field sat in one terrain",
- ["The weighted rate of the straddling field",
-  "Two readings of an open question",
-  "The rates before and after 2026"],
+ ["The weighted rate of the straddling field, which the engine computes from both",
+  "Two readings of an open question, of which the course grades neither",
+  "The rates the field pays before and after 1 January 2026"],
  "Rule 14(6) opens: \"(a) determine the royalty rate as if the entire field is in shallow water ;\", and the same for deep offshore, then weights the two by each terrain's share of production. The engine gives each limb from a stated terrain and has no share-of-production input, so the weighted rate is never computed and the provision is concept-only. The terrain rates are not one of the three open readings, and the tranches read no framework.")
 
 # ---- what the hydrocarbon tax charges
@@ -76,16 +76,16 @@ q(3, "The Ekene frontier case at 120 USD/bbl in 2026 pays hydrocarbon tax at a r
 
 q(0, "The Ekene marginal field is a shallow water lease converted under s.94(1). Its hydrocarbon tax rate is 0.150000. Which provisions give that rate?",
  "PIA s.94(1) with s.267(b)",
- ["PIA s.267(a), which gives marginal fields 15 percent of the profit from crude oil",
-  "Seventh Schedule para 10(4), which names marginal fields in its royalty tranches",
-  "A stated new-lease reading, since a marginal field converted after the Act counts as new acreage"],
- "Section 94(1) says a producing marginal field \"shall convert to a petroleum mining lease under this Act, with terms applicable under sections 267 (b), 302\", and s.267(b) is the 15 percent class; the engine takes it as the stated flag pia_marginal_field_pre_2021. Section 267(a) is the 30 percent class. Para 10(4) is royalty and sets the tranches this field pays (0.093750 at 20000 bopd), and it sets no tax rate. The flag is on a converted lease, so no new-lease reading arises.")
+ ["PIA s.267(a) alone",
+  "Seventh Schedule para 10(4)",
+  "A stated new-lease reading"],
+ "Section 94(1) has a producing marginal field convert to a petroleum mining lease on the terms of s.267(b) and s.302, and s.267(b) is the 15 percent class; the engine takes it as the stated flag pia_marginal_field_pre_2021. Section 267(a) is the 30 percent class. Para 10(4) is royalty and sets the tranches this field pays (0.093750 at 20000 bopd), and it sets no tax rate. The flag is on a converted lease, so no new-lease reading arises.")
 
 q(0, "Which response does the engine give to a licence type of \"OML\"?",
  "It refuses: \"pia_license_type must be \"PML\" or \"PPL\"; got \"OML\".\"",
- ["Old oil mining lease terms are applied",
-  "OML is read as a converted PML",
-  "A run at 15 percent"],
+ ["The old oil mining lease terms are applied, as the licence has not converted",
+  "OML is read as a converted PML and taxed at the 30 percent class",
+  "A run at 15 percent, the rate of a licence from before the Act"],
  "An oil mining lease is a licence type from before the Act, and the engine accepts \"PML\" or \"PPL\" only, refusing anything else in its own words. The engine models converted and new-acreage terms only, so the old terms are concept-only. It never maps one licence type to another silently, and a refusal returns no rate at all.")
 
 q(2, "A lease status of \"renewed\" is typed into the terms. What comes back?",
@@ -140,9 +140,9 @@ q(0, "PIA s.264(f) bars signature, production and renewal bonuses from the hydro
 
 q(3, "On the Ekene CPR case in 2026 the hydrocarbon tax assessable profit is 10292934.782609 and the chargeable profit 8792934.782609. What came off between them?",
  "The production allowance of 1500000.000000, with no capital allowance let through that year",
- ["The capital allowance of the 2024 spend, in full",
-  "The carried pool of 93000000.000000",
-  "HCDT and the NDDC levy"],
+ ["The capital allowance of the 2024 spend for 2026, in full, beside the production allowance",
+  "The carried pool of 93000000.000000, released against the profit in the ledger's last year",
+  "HCDT and the NDDC levy, 1200000.000000 each, taken at the chargeable step"],
  "The step deducts the capital allowance the cap let through and the production allowance. The gap between the two lines is exactly the production allowance, 1500000.000000, so the cap, full of carried cost and opex, let no capital allowance through in 2026. The carried pool of 93000000.000000 is what the cap turned away and is forfeited at cessation. HCDT and the NDDC levy come off before the assessable profit.")
 
 q(1, "The Nigeria Tax Act 2025 prints the cost price ratio at its Sixth Schedule para 2(1). What does its text measure the 65 percent against?",
@@ -176,9 +176,9 @@ q(1, "A new shallow water lease has produced 99500000 barrels before a year unde
 
 q(3, "A new onshore lease is past its cap, and the oil price is 15 USD/bbl. What allowance does the engine give 1000000 barrels?",
  "3000000.000000",
- ["4000000.000000, the fixed second-tier amount",
-  "2500000.000000, the converted-lease leg",
-  "8000000.000000, since low prices restore the first tier"],
+ ["4000000.000000, the second tier",
+  "2500000.000000, the converted leg",
+  "8000000.000000, the first tier"],
  "After the cap each barrel earns the lower of 4.00 USD and 20 percent of the price; at 15 USD/bbl, 20 percent is lower, so 1000000 barrels earn 3000000.000000. 4000000.000000 is the return at 75 USD/bbl, where 4.00 USD is the lower leg. The converted-lease allowance does not apply to a new lease, and no price restores the first tier.")
 
 q(0, "PIA Sixth Schedule para 1(4) extends the production allowance. To what?",
@@ -304,9 +304,9 @@ q(2, "The fiscal course is named at the seam of this one. What does it own?",
 
 q(3, "The engine accepts pia_gas_in_country_share_pct 100. What gas royalty rate results?",
  "0.025000",
- ["0.050000, since a share of 100 is treated as export gas",
-  "0.037500, half of each rate",
-  "A refusal, as 100 sits on the edge of the range"],
+ ["0.050000, as export gas",
+  "0.037500, a half blend",
+  "A refusal at the edge"],
  "The in-country share runs from 0 to 100 inclusive, and at 100 every unit of gas pays the 2.5 percent in-country rate, 0.025000. 0.050000 is the rate at a share of 0. 0.037500 is the blend at 50. The engine refuses only above 100, such as 100.5.")
 
 emit(Q, '/root/cat-wip-pia/banks/ec7i_exam.json', expect_n=42)

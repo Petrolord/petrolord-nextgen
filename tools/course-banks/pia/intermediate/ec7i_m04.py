@@ -16,14 +16,14 @@ q(3, "A capital spend's whole five-year life falls in years under the Act alone.
 
 q(1, "Under the Act alone the capital allowance schedule claims 20, 20, 20, 20 and 19 percent of a spend. What happens to the last 1 percent of its cost in the engine's ledger?",
  "It is retained in the books until disposal and never claimed in the ledger, since the ledger has no disposal event",
- ["Claimed in year of life 5",
-  "Moved into the carried cost pool",
-  "Added to the production allowance"],
+ ["Claimed in year of life 5, the year after the 19 percent, once the schedule has run",
+  "It moves into the carried cost pool and waits there for a later year with room enough under the cap to claim it in full",
+  "Added to the fifth year's production allowance, so the barrels of that year carry it"],
  "Para 5(2) says \"there shall be retained in the books, in respect of each asset 1% of the initial cost of the asset which may only be written off in accordance with subparagraph (3)\", on disposal. The engine has no disposal event, so it never claims it; year of life 5 claims 0.000000. The carried pool holds costs the cap turned away, and holds no unclaimed schedule share. The production allowance is a sum per barrel with no cost behind it.")
 
 q(0, "A learner sets pia_capex_recovery_years to 4. How does the engine respond?",
  "It refuses, since the texts fix the capital allowance at five years",
- ["A run at 25 percent a year over four years, since any stated life is used and named in kpis.pia_notes",
+ ["A run at 25 percent a year over four years, named in a note",
   "The five-year schedule runs and the stated life is ignored",
   "It rounds the life to one the texts allow, with a note"],
  "The engine's own words open: \"pia_capex_recovery_years is 4, but the PIA Fifth Schedule para 17(1) and NTA First Schedule Part II para 14(1) fix the capital allowance at five years (20, 20, 20, 20, 19 percent under the PIA; 20 percent a year under the NTA).\" Any stated life other than 5 is refused, and a refusal returns no ledger. The engine never overrides a stated input silently and never rounds it; the fix is to leave it unset or set 5.")
@@ -51,17 +51,17 @@ q(0, "A converted lease produces 1000000 barrels at one cent below 12.50 USD/bbl
 
 q(3, "A lease granted out of new acreage onshore produces 1000000 barrels at 30 USD/bbl with nothing produced before. What production allowance does the engine return?",
  "6000000.000000",
- ["8000000.000000, the fixed first-tier leg, which applies to every barrel below the cap",
-  "2500000.000000, the converted-lease allowance, since the lease is onshore",
-  "4000000.000000, the tier after the cap, since the price is low"],
+ ["8000000.000000, the fixed first-tier leg",
+  "2500000.000000, the converted-lease leg",
+  "4000000.000000, the tier after the cap"],
  "Para 1(2)(a) gives the lower of 8.00 USD and 20 percent of the price below the cap. At 30 USD/bbl, 20 percent of the price is below 8.00 USD, so the allowance is 6000000.000000. 8000000.000000 is the return at 75 USD/bbl. The converted-lease allowance applies to converted leases, and this is a new lease. The 4.00 USD tier starts only after 50 million barrels, and a low price does not move a barrel across the cap.")
 
 q(1, "Suppose 49500000 barrels came out of a new onshore field before this year, and this year adds 1000000 at 75 USD/bbl. What allowance results?",
  "6000000.000000, with 500000 barrels below the cap and 500000 after it",
  ["8000000.000000, since the year started below the cap and the whole year stays in the first tier",
-  "4000000.000000, as crossing the cap puts every barrel of that year on the 4.00 USD tier",
-  "6000000.000000, being 20 percent of 30 USD"],
- "A year that crosses the cap is split at the cap: 500000 barrels at 8.00 USD and 500000 at 4.00 USD, 6000000.000000 in all, with below and after the cap printed as 500000 each. Keeping the whole year in the first tier or moving the whole year to the second both ignore the split the engine makes. Twenty percent of 30 USD lands on the same figure by coincidence; that reasoning belongs to a different run at a different price.")
+  "4000000.000000, every barrel of the year on the 4.00 USD tier",
+  "2500000.000000, the converted-lease leg, once the history passes 49 million barrels"],
+ "A year that crosses the cap is split at the cap: 500000 barrels at 8.00 USD and 500000 at 4.00 USD, 6000000.000000 in all, with below and after the cap printed as 500000 each. Keeping the whole year in the first tier or moving the whole year to the second both ignore the split the engine makes. 2500000.000000 is the converted-lease allowance, and a new lease keeps its own tiers whatever its history.")
 
 q(2, "The Ekene new onshore lease had produced 49000000 barrels before 2026 and produces 3000000 barrels in 2026 at 75 USD/bbl. How does the engine reach its 2026 allowance of 16000000.000000?",
  "1000000 barrels below the cap at 8.00 USD and 2000000 after it at 4.00 USD",
@@ -84,18 +84,18 @@ q(1, "On 1000000 new onshore barrels at 75 USD/bbl, a year that ends exactly on 
   "Every barrel of the year drops a few cents once the cap is crossed"],
  "A year that ends exactly on the cap has no barrel after it, so all of it earns 8.00 USD; one barrel further, that last barrel earns 4.00 USD, which is 4 less, giving 7999996.000000. The engine applies an exact split and no rounding. The rule is stated per rule for the cap and does not depend on the framework of the year. Only the barrel past the cap changes tier.")
 
-q(0, "A new lease has produced for years, and a learner leaves pia_prior_cumulative_oil_bbl at 0. What does the engine do?",
+q(0, "A new onshore lease, its new-lease rate stated, has produced for years, and a learner leaves pia_prior_cumulative_oil_bbl at 0. What does the engine do?",
  "It treats the lease as fresh, paying the first tier until the ledger itself reaches the cap",
- ["It refuses, since a new lease must state its history",
-  "It reads the history from the production rows",
-  "It applies the second tier to every barrel"],
+ ["It refuses the run, since a new lease must state its production history before any year is taxed",
+  "It reads the field's history from the production rows, counting back from the first ledger year",
+  "It applies the 4.00 USD second tier to every barrel"],
  "The cap counts from the start of production, and the engine learns where a field stands only from the stated pia_prior_cumulative_oil_bbl, adding each ledger year's crude oil and condensate to it. With 0 the lease looks fresh and earns 8.00 USD a barrel until the ledger's own barrels reach the cap, which can overstate the allowance. The engine does not refuse a 0, has no production history beyond the rows it is given, and never guesses the second tier.")
 
 q(3, "Every PIA run prints: \"The realised oil and condensate prices stand in for the Commission's fiscal prices (PIA Seventh Schedule para 8), so the additional tax at the fiscal price (PIA s.268; NTA s.73) is not computed.\" What does that mean for the production allowance's 20 percent leg?",
  "It reads the realised price",
- ["A fiscal price the learner types beside the realised one, refused without it",
-  "It is switched off, as the text's fiscal oil price is not available to the engine",
-  "Twenty percent of the Regulations' royalty by price benchmark for the year"],
+ ["A fiscal price the learner must type",
+  "It is switched off, lacking the fiscal price",
+  "Twenty percent of the price benchmark"],
  "The text says \"20% of the fiscal oil price\"; the engine uses the realised price and states that choice in its note, which is part of the result. There is no fiscal price input and no refusal. The leg stays on: at 10 USD/bbl a converted lease earns 2000000.000000 through it. Royalty by price benchmarks belong to the royalty and never enter the allowance.")
 
 q(0, "The Ekene new onshore lease's allowance falls from 16000000.000000 to 10000000.000000 as it passes the cap. Which lines does crossing the cap move?",

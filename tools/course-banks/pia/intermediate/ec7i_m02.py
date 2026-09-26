@@ -60,9 +60,9 @@ q(1, "How does s.260(3) treat frontier acreage and deep offshore differently?",
 
 q(3, "An onshore petroleum mining lease selected under s.93(6)(b) on conversion produces crude oil. What hydrocarbon tax rate does the engine return?",
  "0.300000, under s.267(a)",
- ["0.150000, because s.267(b) names onshore and shallow water in its opening words and so covers every onshore lease",
-  "0.000000, since onshore fields below 10,000 bopd sit in the small-field tranches and pay royalty alone",
-  "A refusal until a rate of 15 or 30 is stated, because the Act leaves every onshore lease rate open"],
+ ["0.150000, as s.267(b) names onshore in its opening words",
+  "0.000000, as a small onshore field pays royalty alone",
+  "A refusal until a rate of 15 or 30 is stated"],
  "Section 267(a) charges \"30% of the profit from crude oil for petroleum mining leases selected under section 93 (6) (b) and (7) (b) of this Act with respect to onshore and shallow water areas\", and the engine returns 0.300000 for a converted PML. Reading s.267(b) over every onshore lease skips the specific class (a) gives converted leases. The tranches are royalty and grant no tax holiday. The refusal applies to a lease granted out of new acreage, which this lease is not.")
 
 q(1, "Which of these returns a hydrocarbon tax rate of 0.150000 from the engine?",
@@ -94,7 +94,7 @@ q(3, "A new-acreage petroleum mining lease onshore is run with no pia_new_pml_hc
  "The engine's own words: \"A new-acreage petroleum mining lease onshore or in shallow water needs pia_new_pml_hct_rate_pct set to 15 or 30; got null.\" The text does not say which class such a lease falls in, so the rate is a stated input with no default, and a run without it is a thrown error. There is no default of 30 or of 15, and a refusal returns no ledger, blank or otherwise.")
 
 q(2, "The engine is given pia_new_pml_hct_rate_pct 20 on a new-acreage onshore lease. How does it respond?",
- "It refuses with the same message, ending \"got 20.\"",
+ "It refuses, and the first sentence of the message ends \"got 20.\"",
  ["Runs at 20 percent and names the stated rate in a note",
   "It rounds 20 to the nearest printed rate, 15, and carries on with that rate for every year of the ledger",
   "Accepted as an override, since any stated rate from 0 to 100 runs"],

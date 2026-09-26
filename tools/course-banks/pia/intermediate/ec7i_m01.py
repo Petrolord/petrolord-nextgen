@@ -52,9 +52,9 @@ q(3, "Over which daily rates do an onshore and a shallow water field pay the sam
 
 q(0, "At 10001 bopd the engine returns 0.062509 onshore and 0.062506 in shallow water. Why do the two terrains part at that point?",
  "The barrel past 10,000 bopd pays the terrain rate, 15 percent onshore and 12.5 percent in shallow water",
- ["Shallow water keeps its second tranche past the onshore edge",
-  "Onshore fields lose their first tranche above 10,000 bopd",
-  "The engine uses 366 days onshore and 365 offshore"],
+ ["Shallow water keeps its second tranche running on past 10,000 bopd, where the onshore one stops",
+  "Onshore fields lose their first tranche above 10,000 bopd, so every onshore barrel pays 7.5 percent or more",
+  "The engine divides onshore volumes by 366 days and offshore volumes by 365, so the daily rates differ"],
  "The proviso to para 10(4) charges \"the share of the production over 10,000 bopd\" at the subparagraph (2) terrain rate, and r.13(2)(c) and (d) put 15 percent onshore and 12.5 percent in shallow water on that incremental volume, so the onshore rate rises faster. Neither terrain loses the first tranche; the Regulations keep 5 percent on 5,000 bopd in every band. The second tranche ends at 10,000 bopd on both terrains. The day count depends on the year and never on the terrain.")
 
 q(2, "A frontier field produces 20000 bopd. What liquids royalty rate does the engine return?",

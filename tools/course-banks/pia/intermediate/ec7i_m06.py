@@ -31,9 +31,9 @@ q(2, "The worked example's hydrocarbon tax is 285784994.456763 at a rate of 0.30
 
 q(0, "On the worked example the cost price ratio cap is 949000000.000000 and the claim 242500000.000000. What does that mean for the carry and the forfeiture?",
  "Nothing is carried to a later year and nothing can be forfeited when the ledger ends",
- ["Unused room under the cap, carried forward",
-  "Forfeiture of the difference at cessation",
-  "A quarter of the cap is carried"],
+ ["The unused room under the cap is carried forward to be claimed in a later year",
+  "The difference between cap and claim is forfeited when the ledger ends",
+  "A quarter of the cap is carried to the next year as a reserve"],
  "The claim is far below the cap, so the whole pool is claimed; a carry exists only when the pool exceeds the cap, and forfeiture can only take cost that is still carried. Unused room under the cap is not a cost and is never carried or forfeited. No rule carries a share of the cap.")
 
 q(0, "The worked example charges a royalty by price in 2025 at 80 USD/bbl. On which base does the engine charge it, and at what rate?",
@@ -66,9 +66,9 @@ q(1, "Three carries appear in this tier. Which pairing of carry and rule is righ
 
 q(3, "On the Ekene new onshore lease the 2026 chargeable profit is 151411548.913043 under the stated 15 and under the stated 30. What does that show about the system?",
  "The rate and the base are separate",
- ["The two stated readings give the same hydrocarbon tax, so the open question makes no difference to what the lease pays",
-  "The chargeable profit is computed after the tax, so both runs share a tax line",
-  "The stated reading reaches the base only through the production allowance on the barrels past the cap"],
+ ["The readings give the same tax, so the question is moot",
+  "The chargeable profit is computed after the tax",
+  "The reading reaches the base through the allowance"],
  "A licence type or a stated reading moves the rate; the royalty, the cap and the allowances move the base. So the chargeable profit is the same under both readings while the tax is 22711732.336957 at the stated 15 and 45423464.673913 at the stated 30. The readings do change the tax. The tax is computed after the chargeable profit. The production allowance depends on lease status and cumulative barrels, which the rate does not touch.")
 
 q(1, "On Ekene Alpha in 2026 the total royalty is 18012822.226867. What is its production royalty on crude oil and condensate alone?",

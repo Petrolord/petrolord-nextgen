@@ -16,9 +16,9 @@ q(2, "Which of these deductions sits outside the 65 percent cost price ratio lim
 
 q(3, "On the worked example inputs (shallow water, crude oil only, 2025) the cost price ratio cap is 949000000.000000 against gross revenue of 1,460,000,000.000000. What is the cap measured on?",
  "Crude oil and condensate revenue",
- ["Gross revenue from every stream, gas included, before any deduction is taken off it",
-  "Revenue after the liquids royalties, since para 2(1) lets royalties come off first",
-  "The year's total costs, of which 65 percent may be claimed and the rest carried"],
+ ["Gross revenue from every stream, gas included",
+  "Revenue after the liquids royalties",
+  "The year's total costs, 65 percent of them"],
  "The cap is 65 percent of crude oil and condensate revenue, and on this crude-only year that is 949000000.000000. Gas revenue never enters the cap (the Ekene gas field's cap is 0.000000). Royalties sit outside the cap and do not shrink its base. The limit is a share of revenue; a share of the costs would carry something forward every year.")
 
 q(1, "When the engine fills the cost price ratio cap, in what order does it claim the pool?",
@@ -30,17 +30,17 @@ q(1, "When the engine fills the cost price ratio cap, in what order does it clai
 
 q(0, "On the Ekene CPR case the 2024 cap is 48750000.000000 and the claim equals it. What cost does the engine carry out of 2024?",
  "21250000.000000, the part of the pool the cap turned away",
- ["48750000.000000, the claim",
-  "75000000.000000, the revenue",
-  "5700000.000000, the NDDC levy"],
+ ["48750000.000000, the whole claim the cap let through that year",
+  "75000000.000000, the 2024 gross revenue the cap is measured on",
+  "5700000.000000, the NDDC levy, which the cap holds back"],
  "The claim fills the cap at 48750000.000000 and what does not fit, 21250000.000000, is printed as CPR carried out and claimed in a later year. 48750000.000000 is what the cap let through. 75000000.000000 is 2024 gross revenue, the base of the cap. 5700000.000000 is the NDDC levy, which is deducted outside the cap and never carried.")
 
 q(1, "On the Ekene CPR case the claim equals the cap in 2024, 2025 and 2026, yet the carried pool grows from 21250000.000000 to 52250000.000000 to 93000000.000000. Why does it grow?",
- "Revenue falls each year, so the cap falls, while opex holds flat",
+ "More opex and allowance arrive each year than the falling cap can take",
  ["Each year it waits, the carried cost earns a 65 percent uplift under para 2(2)(b) of the Sixth Schedule",
-  "The capital allowance is claimed again in full every year on top of the carry",
+  "The whole 2024 capex is claimed again in every later year on top of the carry",
   "Royalties join the pool once the cap binds"],
- "The cap is 65 percent of each year's revenue: 48750000.000000, 39000000.000000, 29250000.000000 as revenue falls from 75000000.000000 to 45000000.000000, while the carried pool and 40000000 USD of opex a year keep arriving, so less fits each year. Para 2(2)(b) limits the carry to the cap and adds no uplift; para 2(2)(a) says the total deducted may not exceed the actual costs incurred. The capital allowance is a scheduled fraction and is never claimed twice. Royalties stay outside the cap.")
+ "The cap is 65 percent of each year's revenue: 48750000.000000, 39000000.000000, 29250000.000000 as revenue falls from 75000000.000000 to 45000000.000000. Each year 40000000 USD of opex and the year's capital allowance on the 2024 spend arrive on top of the carried pool, more than even the 2024 cap takes, so the carry grows every year and grows faster as the cap falls. Para 2(2)(b) limits the carry to the cap and adds no uplift; para 2(2)(a) says the total deducted may not exceed the actual costs incurred. The capital allowance is a scheduled fraction of the spend each year, and no spend is claimed twice. Royalties stay outside the cap.")
 
 q(2, "The Ekene CPR case ends in 2026 with 93000000.000000 still carried. What does the engine do with it, and under which provisions?",
  "Reports it as forfeited at cessation, non-deductible under para 2(2)(c) and s.264(q)",
@@ -51,9 +51,9 @@ q(2, "The Ekene CPR case ends in 2026 with 93000000.000000 still carried. What d
 
 q(3, "Sixth Schedule para 2(2)(a) allows a carried cost in later years \"provided that the total costs to be deducted shall not exceed the actual costs incurred\". What does that limit mean on a ledger?",
  "Each cost is deducted once",
- ["A carried cost may be claimed only in the year immediately after the one it was carried out of",
-  "The carried pool may not exceed 65 percent of the costs actually incurred in the year of spend",
-  "The cap is lifted in any year whose own costs are below the actual costs of the year before"],
+ ["A carried cost may be claimed only in the next year",
+  "The carry may not exceed 65 percent of the year's costs",
+  "The cap lifts in any year whose costs fall"],
  "The words cap the total over the life: a cost carried forward is claimed once and never inflated or repeated. Nothing in para 2(2)(a) restricts the carry to the next year; a carried cost waits for any later year with room. The 65 percent figure is the per-year limit of para 2(2)(b), measured on revenue. No provision lifts the cap.")
 
 q(1, "Para 2(2)(b) says a carried cost claimed later \"shall be such an amount that if added to the sum of the total costs to be allowed as deduction under subparagraph (1) shall not exceed the specified cost price ratio limit of 65% ;\". What does that rule do?",
@@ -82,7 +82,7 @@ q(1, "The worked example states a preceding year's opex of 170000000 USD. What H
  ["15000000.000000, the stated NDDC sum, which the case enters in the HCDT line",
   "3 percent of the 2025 opex itself, since s.240(2) reads the current year",
   "Nothing, since HCDT is paid from profit after tax and s.264(l) bars it"],
- "Section 240(2) sets the contribution at \"an amount equal to 3% of its actual annual operating expenditure of the preceding financial year\", so 3 percent of 170000000 USD is 5100000.000000, and s.263(1)(h) makes it deductible. 15000000.000000 is the fixed NDDC sum on its own line. The contribution reads the preceding year, which is why the case states it. Section 264(l) bars income and profits taxes; the trust contribution is deductible under s.257(1).")
+ "Section 240(2) sets the contribution at 3 percent of the actual operating expenditure of the preceding financial year, so 3 percent of 170000000 USD is 5100000.000000, and s.263(1)(h) makes it deductible. 15000000.000000 is the fixed NDDC sum on its own line. The contribution reads the preceding year, which is why the case states it. Section 264(l) bars income and profits taxes; the trust contribution is deductible under s.257(1).")
 
 q(2, "Ekene Alpha's HCDT is 0.000000 in 2026 and 720000.000000 in 2027. Why is 2026 zero?",
  "No preceding year's opex was stated for the first ledger year",
@@ -110,7 +110,7 @@ q(1, "Which of these may the hydrocarbon tax base never deduct, under PIA s.264?
  ["Levies, stamp duties and fees owed to any government",
   "The host communities development trust contribution",
   "A contribution to an approved decommissioning fund"],
- "Section 264(l) bars \"amounts incurred in respect of tertiary education tax, companies income tax, any income tax, profits tax or other similar taxes, whether charged within Nigeria or elsewhere ;\". Levies, stamp duties and fees are deductible under s.263(1)(f), the trust contribution under s.263(1)(h), and an approved decommissioning fund contribution under s.263(1)(e).")
+ "Section 264(l) bars the tertiary education tax, companies income tax and any other income or profits tax, charged in Nigeria or elsewhere, from the hydrocarbon tax base. Levies, stamp duties and fees are deductible under s.263(1)(f), the trust contribution under s.263(1)(h), and an approved decommissioning fund contribution under s.263(1)(e).")
 
 emit(Q, '/root/cat-wip-pia/banks/ec7i_m03.json', expect_n=15)
 finish()
