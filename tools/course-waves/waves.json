@@ -1473,7 +1473,7 @@
     "course": "SC2",
     "live": "/root/cat-wip-procurement",
     "kit": "full",
-    "kitNote": "Full kit, committed at the foundation. The mirror carries everything the wave is rebuilt and gated from: the digest and its generator with the one engine loader (tender_engine.mjs registers ts_loader.mjs, since tender.js imports engines/economics/cashflow.ts for the canonical npv); the eighteen graded answers, the capstone generator, the precision declaration and the tolerance derivation's writer; the discriminate sweep and the oracle cross-check that replays the vendored stdlib oracle on the capstone; every wave gate with its negative control and the runner that pins every gate's md5 into wave.json; the prose rules; the harvested truth file with its check, the wave numsweep wrapper and the tier-scoped lengths gate; the structure and the scaffold that writes the 78 lesson stubs and three manifests; the vendoring script, the prior-course proof and this mirror script; the five writer briefs; the three tier headers; the course and capstone generator (gen_course.py, which writes the three capstone case files now and the course migration at the ship phase); and the 21 bank stubs, each writing to its literal path in the wave directory, which the bank writers fill. The dataset is the vendored ekene-tender fixtures under packages/engines/test-data/supplychain/ekene-tender, so there is no dataset generator. The remaining ship-phase generators (go-live, seeds, SQL verifier, scratch database, dry run, apply script) are carried from D5 at the ship phase.",
+    "kitNote": "Full kit, committed at the foundation. The mirror carries everything the wave is rebuilt and gated from: the digest and its generator with the one engine loader (tender_engine.mjs registers ts_loader.mjs, since tender.js imports engines/economics/cashflow.ts for the canonical npv); the eighteen graded answers, the capstone generator, the precision declaration and the tolerance derivation's writer; the discriminate sweep and the oracle cross-check that replays the vendored stdlib oracle on the capstone; every wave gate with its negative control and the runner that pins every gate's md5 into wave.json; the prose rules; the harvested truth file with its check, the wave numsweep wrapper and the tier-scoped lengths gate; the structure and the scaffold that writes the 78 lesson stubs and three manifests; the vendoring script, the prior-course proof and this mirror script; the five writer briefs; the three tier headers; the course and capstone generator (gen_course.py, which writes the three capstone case files now and the course migration at the ship phase); and the 21 bank stubs, each writing to its literal path in the wave directory, which the bank writers fill. The dataset is the vendored ekene-tender fixtures under packages/engines/test-data/supplychain/ekene-tender, so there is no dataset generator. The ship-phase seed ladder, carried from D5 and finished for SC2: the go-live generator and its pg_temp helpers (engine ledger, a second route in SQL for all eighteen fields, the oracle by value, the 85 engine-swept traps by value), the seed regenerator from a git-archive export of the committed tree, the field-by-field SQL verifier with its canaries, the scratch database, the rolled-back dry run with its six negative controls and the 36-run sweep, the block cutter and the owner's content-pinned apply script.",
     "inputs": [
       "digest.txt",
       "fields.json",
@@ -1533,7 +1533,15 @@
       "banks/sc2a_m04.py",
       "banks/sc2a_m05.py",
       "banks/sc2a_m06.py",
-      "banks/sc2a_exam.py"
+      "banks/sc2a_exam.py",
+      "gen_golive.py",
+      "golive_helpers.sql",
+      "gen_seeds.sh",
+      "scratch_db.sh",
+      "dryrun_sc2.sh",
+      "cut_block.py",
+      "verify_sql.py",
+      "apply_sc2_procurement.sh"
     ],
     "pins": {
       "digest.txt": "581b7dd366f6719489d8a6e1e177ff2dbbdc7b6039bbfebefdaaa34845d625ab",

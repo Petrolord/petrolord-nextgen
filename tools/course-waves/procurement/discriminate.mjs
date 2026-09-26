@@ -28,6 +28,7 @@
 //
 //   node discriminate.mjs
 //   node discriminate.mjs --slack-tolerances   THE NEGATIVE CONTROL
+//   node discriminate.mjs --json               every truth and wrong value, for gen_golive.py
 //
 // The control multiplies every tolerance by 1e12 and must report EIGHTEEN WEAK
 // ROUTES, proving the sweep reads the tolerances rather than printing a
@@ -41,6 +42,9 @@ import { execFileSync } from 'node:child_process';
 const HERE = process.env.SC2_WAVE_DIR || '/root/cat-wip-procurement';
 const { T, STATS } = await import(`${HERE}/tender_engine.mjs`);
 const SLACK = process.argv.includes('--slack-tolerances') ? 1e12 : 1;
+// --json: for gen_golive.py, { key: { truth, wrong: { name: value } } } and no table.
+const JSONOUT = process.argv.includes('--json');
+const say = JSONOUT ? () => {} : console.log;
 const fields = Object.fromEntries(
   JSON.parse(fs.readFileSync(`${HERE}/fields.json`, 'utf8')).map((f) => [f[1], [f[0], f[1], f[2], f[3] * SLACK]]));
 if (Object.keys(fields).length !== 18) { console.log('REFUSED: fields.json does not carry eighteen fields'); process.exit(2); }
@@ -275,7 +279,8 @@ let weak = 0;
 let closest = { key: null, name: null, ratio: Infinity };
 const report = [];
 const summary = {};
-console.log('field                                            tol        errors  moved  blind  closest miss (tolerances)');
+const values = {};
+say('field                                            tol        errors  moved  blind  closest miss (tolerances)');
 Object.entries(ROUTES).forEach(([key, { truth, wrong }]) => {
   if (!fields[key]) { console.log(`REFUSED: ${key} is not a graded field`); process.exit(2); }
   const tol = fields[key][3];
@@ -299,15 +304,21 @@ Object.entries(ROUTES).forEach(([key, { truth, wrong }]) => {
       const ratio = d / tol;
       if (ratio < nearest) { nearest = ratio; nearestName = name; }
       report.push({ key, name, value: got });
+      (values[key] ||= { truth: t, wrong: {} }).wrong[name] = got;
     } else { blind.push(`${name} (off by ${d.toExponential(3)})`); }
   });
   summary[key] = Object.keys(wrong).map((n) => n.replace(/_/g, ' ')).join(', ');
   if (nearest < closest.ratio) closest = { key, name: nearestName, ratio: nearest };
   const isWeak = moved.length < 3 || blind.length > 0;
   if (isWeak) weak += 1;
-  console.log(`${key.padEnd(48)} ${String(tol).padEnd(10)} ${String(moved.length + blind.length).padStart(6)} ${String(moved.length).padStart(6)} ${String(blind.length).padStart(6)}  ${nearest === Infinity ? 'all infinite' : nearest.toExponential(3)} (${nearestName})${isWeak ? '   WEAK' : ''}`);
-  if (blind.length) console.log(`${' '.repeat(49)}BLIND TO: ${blind.join(', ')}`);
+  say(`${key.padEnd(48)} ${String(tol).padEnd(10)} ${String(moved.length + blind.length).padStart(6)} ${String(moved.length).padStart(6)} ${String(blind.length).padStart(6)}  ${nearest === Infinity ? 'all infinite' : nearest.toExponential(3)} (${nearestName})${isWeak ? '   WEAK' : ''}`);
+  if (blind.length) say(`${' '.repeat(49)}BLIND TO: ${blind.join(', ')}`);
 });
+if (JSONOUT) {
+  if (weak || Object.keys(ROUTES).length !== 18) process.exit(1);
+  process.stdout.write(`${JSON.stringify(values)}\n`);
+  process.exit(0);
+}
 console.log();
 console.log(`routes swept: ${Object.keys(ROUTES).length}  plausible wrong methods aimed at them: ${totalWrong}  WEAK routes: ${weak}`);
 console.log(`CLOSEST MISS ACROSS THE WHOLE SWEEP: ${closest.key} via ${closest.name}, ${closest.ratio.toExponential(3)} tolerances away`);
