@@ -3,7 +3,9 @@
 
 No em dashes, no en dashes, and no "X, not Y" contrastive, in the digest, in
 any lesson body or manifest title, and in the three D5 panels, their shared bits and the lab
-and the learning page (the text a learner reads in the app). Headings included.
+and the learning page (the text a learner reads in the app), and in every
+prompt, option and explanation of the 21 question banks (the emitted JSON in
+<wave>/banks, D5_BANKS to override). Headings included.
 
 The digest is swept because every lesson is written from it, so a contrastive
 in the digest becomes a contrastive in a lesson. structure.py is NOT swept for
@@ -17,7 +19,8 @@ message in a blockquote as the engine's own words, and never write a
 contrastive of your own.
 
 --plant is THE NEGATIVE CONTROL: it plants a contrastive and an em dash in the
-digest text in memory and must exit 1 with both caught.
+digest text in memory and must exit 1 with both caught. --plant-bank plants the
+same two in one bank explanation, in memory, and must exit 1 with both caught.
 
 REFUSALS. Exit 2 if the digest is missing, if fewer than 500 lines were read,
 or if the course directory exists with lesson files in it and not one was
@@ -29,6 +32,7 @@ import json, os, re, sys
 HERE = os.path.dirname(os.path.abspath(__file__))
 REPO = os.environ.get('D5_REPO', '/root/wt-dai-d5-nextgen')
 COURSE = os.environ.get('D5_COURSE', os.path.join(REPO, 'src/content/courses/appliedai'))
+BANKS = os.environ.get('D5_BANKS', os.path.join(HERE, 'banks'))
 APP_TEXT = [os.path.join(REPO, 'src/components/course/panels/appliedai', f) for f in
             ('RetrievalExplorer.jsx', 'ScoringExplorer.jsx', 'TrustExplorer.jsx', 'panelBits.jsx', 'evaluateLab.js')] + \
            [os.path.join(REPO, 'src/pages/apps/AppliedaiLearningPage.jsx')]
@@ -91,12 +95,39 @@ def main():
                     findings += sweep(os.path.relpath(p, COURSE), '\n'.join(titles))
                     files += 1
                     lines += len(titles)
+    bank_files, bank_strings = 0, 0
+    if os.path.isdir(BANKS):
+        names = sorted(n for n in os.listdir(BANKS) if re.match(r'^d5[bia]_.*\.json$', n))
+        for n in names:
+            data = json.load(open(os.path.join(BANKS, n), encoding='utf-8'))
+            strs = []
+
+            def walk(v, where):
+                if isinstance(v, str):
+                    strs.append((where, v))
+                elif isinstance(v, list):
+                    for i, x in enumerate(v):
+                        walk(x, f'{where}[{i}]')
+                elif isinstance(v, dict):
+                    for k, x in v.items():
+                        walk(x, f'{where}.{k}')
+            walk(data, n)
+            if '--plant-bank' in sys.argv and n == names[0] and strs:
+                strs[-1] = (strs[-1][0], strs[-1][1] + ' The median, not the mean \u2014 always.')
+            for where, t in strs:
+                findings += [(where, i, k, c, h) for (_, i, k, c, h) in sweep(where, t)]
+            bank_files += 1
+            bank_strings += len(strs)
+            files += 1
+        if names and bank_strings == 0:
+            print('  GATE REFUSES: bank files exist and not one string was examined')
+            return 2
     exempt = [f for f in findings if f[4]]
     bad = [f for f in findings if not f[4]]
     hit = sorted({f[4] for f in exempt})
     dead = sorted(set(ENGINE_TEXT) - set(hit))
     print(f'  files examined: {files}  (app sources: {app_files}, lesson bodies: {lesson_files}, lesson files on disk: {on_disk})')
-    print(f'  lines and titles examined: {lines}')
+    print(f'  lines and titles examined: {lines}; bank files: {bank_files}, bank strings: {bank_strings}')
     print(f'  exempt engine strings declared: {len(ENGINE_TEXT)}, hit: {len(hit)}, dead: {len(dead)} -> {dead}')
     print(f'  quotations of engine text found: {len(exempt)}')
     print(f'  VIOLATIONS: {len(bad)}')
@@ -105,6 +136,10 @@ def main():
     if lines < 500 or (on_disk and lesson_files == 0):
         print('  GATE REFUSES: it examined too little to have checked anything')
         return 2
+    if '--plant-bank' in sys.argv:
+        caught = len([f for f in bad if f[0].startswith('d5')])
+        print(f'  NEGATIVE CONTROL: a contrastive and a dash were planted in a bank string; expected 2 caught, got {caught}')
+        return 1 if caught == 2 else 2
     if '--plant' in sys.argv:
         caught = len([f for f in bad if f[0] == 'digest.txt'])
         print(f'  NEGATIVE CONTROL: a contrastive and a dash were planted in the digest; expected 2 caught, got {caught}')

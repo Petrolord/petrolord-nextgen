@@ -27,19 +27,17 @@ On r1 both differences sit exactly on their tolerances, and both are correct: th
 
 ## On the Ekene records
 
-Three cells from the two systems show the rule at work. System A wrote "3,038" for the label 3038, and it is correct: the comma is a thousands group. System B wrote 45.25 for the label 45.2 on EKD-032, a difference that sits on the absTol of 0.05, and it is correct because the tolerance is inclusive. System B wrote 64.7 for the label 64.6 on EKD-033, and it is wrong. The engine's reason prints the difference as the computer holds it:
+Three cells from the two systems show the rule at work. System A wrote "3,038" for the label 3038, and it is correct: the comma is a thousands group. System B wrote 45.25 for the label 45.2 on EKD-032: 0.05 as written, but held as a double just under 0.05, so it is correct under either rule. The inclusive rule decides the r1 cells above. System B wrote 64.7 for the label 64.6 on EKD-033, and it is wrong. The engine's reason prints the difference as the computer holds it:
 
 > 64.7 differs from 64.6 by 0.10000000000000853, above the tolerance 0.05
 
-The difference is just over 0.1, twice the tolerance, and the cell is wrong. The long figure is the double-precision subtraction printed in full, and it belongs to the message.
+The difference is just over 0.1, twice the tolerance. The long figure is the double-precision subtraction printed in full.
 
 ## A unit inside a number
 
 System B wrote "150 bopd" for the oil rate of EKD-003, where the label is 150. The value is right and the cell is wrong, because a string with a unit in it is not a plain number:
 
 > "150 bopd" is not a plain number (digits with optional comma thousands groups and a decimal part)
-
-The fix belongs in the system's output.
 
 ## Tolerances are stated inputs
 

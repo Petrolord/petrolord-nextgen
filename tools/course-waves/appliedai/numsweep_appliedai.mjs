@@ -31,6 +31,11 @@
 // the digest prints it.)
 //
 //   node numsweep_appliedai.mjs [--tier beginner|intermediate|advanced] [--content DIR]
+//   node numsweep_appliedai.mjs --banks DIR   the 21 bank JSON files instead of the
+//                                             lessons: every prompt, option and
+//                                             explanation string, with the same
+//                                             exemption and extra rule, then the
+//                                             kit numsweep --banks on the result
 //   node numsweep_appliedai.mjs --selftest     the negative controls
 //
 // Exit 0 clean, 1 a finding, 2 could not run.
@@ -138,6 +143,40 @@ const run = (content, tiers, reasons) => {
   return bad;
 };
 
+/** Every string inside a bank JSON value, rewritten through scan(). */
+const mapStrings = (v, f) => (typeof v === 'string' ? f(v) : Array.isArray(v) ? v.map((x) => mapStrings(x, f))
+  : v && typeof v === 'object' ? Object.fromEntries(Object.entries(v).map(([k, x]) => [k, mapStrings(x, f)])) : v);
+
+const runBanks = (dir, reasons) => {
+  if (!fs.existsSync(dir)) die(`no bank directory ${dir}`);
+  const files = fs.readdirSync(dir).filter((f) => /^d5[bia]_.*\.json$/.test(f)).sort();
+  if (files.length !== 21) die(`expected 21 d5 bank JSON files in ${dir}, found ${files.length}`);
+  const tmp = fs.mkdtempSync(path.join(os.tmpdir(), 'd5ns-banks-'));
+  let exempt = 0;
+  const noise = [];
+  files.forEach((f) => {
+    const data = JSON.parse(fs.readFileSync(path.join(dir, f), 'utf8'));
+    const out = mapStrings(data, (str) => {
+      const r = scan(str, reasons);
+      exempt += r.exempt;
+      r.noise.forEach((n) => noise.push(`${f}: ${n.raw}`));
+      return r.blanked;
+    });
+    fs.writeFileSync(path.join(tmp, f), JSON.stringify(out, null, 1));
+  });
+  let out = '';
+  let code = 0;
+  try {
+    out = execFileSync('node', [path.join(KIT, 'numsweep.mjs'), HERE, '--banks', tmp], { encoding: 'utf8' });
+  } catch (e) { out = (e.stdout || '') + (e.stderr || ''); code = e.status; }
+  fs.rmSync(tmp, { recursive: true, force: true });
+  console.log(`== banks: ${files.length} bank files, ${exempt} exact reason quote(s) exempted`);
+  console.log(out.trim().split('\n').map((l) => `   ${l}`).join('\n'));
+  console.log(`   serialised floats outside an exact reason quote: ${noise.length}`);
+  noise.forEach((n) => console.log(`     FLOAT NOISE ${n}`));
+  return code !== 0 || noise.length ? 1 : 0;
+};
+
 const selftest = () => {
   const reasons = printedReasons('# SECTION 1: x (owned by Associate m01)\n\nThe flag reads, verbatim: "value 1 has z = 2.9999999999999996, beyond the threshold 2.9".\n');
   const ok1 = scan('It reads "value 1 has z = 2.9999999999999996, beyond the threshold 2.9".', reasons);
@@ -174,5 +213,6 @@ if (!fs.readdirSync(HERE).some((f) => /^truth-.*\.json$/.test(f))) die('no truth
 const reasons = printedReasons(digest);
 if (reasons.size < 40) die(`only ${reasons.size} printed reason strings read from the digest`);
 console.log(`[numsweep_appliedai] ${reasons.size} engine reason and message strings read from digest.txt`);
-const bad = run(content, tier ? [tier] : TIERS, reasons);
+const banksDir = opt('--banks');
+const bad = banksDir ? runBanks(banksDir, reasons) : run(content, tier ? [tier] : TIERS, reasons);
 process.exit(bad ? 1 : 0);

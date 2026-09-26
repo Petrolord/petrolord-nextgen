@@ -29,7 +29,7 @@ The bounds are the 2.5th and 97.5th percentiles of the bootstrap difference.
 
 On retrieval the two systems cannot be told apart on these 23 queries. MAP favours A at grade 1 and B at grade 2; mean nDCG favours B by a difference the course derives as 1.38e-3; and both paired intervals, on nDCG and on AP, cross 0. A write-up that picks one of these figures and calls a winner has chosen its conclusion before its evidence.
 
-On answers the systems do separate, and the answer scores all point the same way. A matches more short answers exactly, earns more partial credit, extracts more fields correctly on filled cells, and supports more of its claims. Those are separate checks with separate settings, and the write-up names each. It also names the planted defects behind them: B's rounded pressure, its unit change, its figures from uncited passages and its fabricated event on Q24 are fixture text written to carry those defects, and no model produced them.
+On answers every score points the same way, and by wide margins. No interval was computed on any answer score, so the write-up reports these as scores and stops short of calling them a tested difference. A matches more short answers exactly, earns more partial credit, extracts more fields correctly on filled cells, and supports more of its claims. Those are separate checks with separate settings, and the write-up names each. It also names the planted defects behind them: B's rounded pressure, its unit change, its figures from uncited passages and its fabricated event on Q24 are fixture text written to carry those defects, and no model produced them.
 
 ## What the write-up must name
 

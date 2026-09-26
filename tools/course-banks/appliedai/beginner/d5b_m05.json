@@ -33,7 +33,7 @@
   "explanation": "The first and second passages tie and the cut falls between them, so the id keeps EKD-046 and tieAtCutoff is true: the flag warns that a metric on that list rests on the id. k 1 is a whole number from 1 to 1000 and is accepted, and the cutoff is never stretched to hold a tie."
  },
  {
-  "prompt": "Passages n2 and n1 score 0.4700036292457355 and 0.47000361642745514 for \"oil\" with b = 1e-7. Both print 0.470004. How are they ranked?",
+  "prompt": "Passages n2 and n1 score 0.470003629246 and 0.470003616427 at 12 significant digits for \"oil\" with b = 1e-7. Both print 0.470004. How are they ranked?",
   "options": [
    "n1 above n2, since they tie at 0.470004 and the id ascending decides",
    "n2 above n1, since the 12-digit keys differ and there is no tie",

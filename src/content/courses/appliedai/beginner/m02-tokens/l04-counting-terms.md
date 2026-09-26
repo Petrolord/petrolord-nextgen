@@ -14,7 +14,7 @@ Each passage below was tokenised by the engine with the stop list off and then w
 | EKD-018 | 44 | 31 | the (5), pressure (3), 01 (2) |
 | EKD-030 | 43 | 39 | 0 (4), bopd (4), ekene (4) |
 
-Read the rows. In EKD-001 the most frequent tokens are a unit, m, and two small words. In EKD-018 pressure appears 3 times, and 01 twice because dates split into pieces. EKD-030 repeats 0, bopd and ekene. Counting does not know which tokens matter; the scoring methods decide how much a count is worth.
+Read the rows. In EKD-001 the most frequent tokens are a unit, m, and two small words. In EKD-018 pressure appears 3 times, and 01 twice because its date, 2023-01-01, splits into pieces. EKD-030 repeats 0, bopd and ekene. Counting does not know which tokens matter; the scoring methods decide how much a count is worth.
 
 ## The length of a passage
 

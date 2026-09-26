@@ -44,7 +44,7 @@ q(0, "System B puts \"150 bopd\" in oil_rate_bopd for EKD-003, where the label i
  "A number field accepts a number or a string of digits with optional comma thousands groups and a decimal part. \"150 bopd\" is neither, so the engine scores the cell wrong with the reason \"\\\"150 bopd\\\" is not a plain number (digits with optional comma thousands groups and a decimal part)\". Both sides hold a value, so the cell is neither missed nor unsupported.")
 
 q(3, "System B writes 45.25 for the label 45.2 on EKD-032, where water_cut_pct has absTol 0.05. How is the cell scored?",
- "Correct, as the tolerance is inclusive and the difference sits on it",
+ "Correct, as the difference is within absTol 0.05 on either reading",
  ["Wrong, since a difference equal to the tolerance lies outside it",
   "Wrong, since 45.25 carries a digit that the label does not have",
   "Unsupported, since a two-decimal figure has no match in a one-decimal label"],

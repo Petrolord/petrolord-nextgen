@@ -33,7 +33,7 @@ oil is in d1 and d3, so its df is 2, although it appears 4 times in all. water i
 
 ## Why both counts
 
-tf says how much a passage talks about a word. df says how common the word is across the collection. A word in every passage, such as a field name in a field's own reports, tells you nothing about which passage to pick however often it appears. A rare word, such as bubble or injection, points at the few passages that use it. TF-IDF multiplies a tf by a weight that falls as df rises, and the next lesson gives that weight exactly.
+tf says how much a passage talks about a word. df says how common the word is across the collection. A word in almost every passage, such as ekene in the Ekene reports, tells you little about which passage to pick however often it appears. A rare word, such as bubble or injection, points at the few passages that use it. TF-IDF multiplies a tf by a weight that falls as df rises, and the next lesson gives that weight exactly.
 
 On the corpus the same idea holds at scale. On Q02, "initial oil rate of Ekene-3", ekene appears in 44 of the 60 passages and initial in 7. A match on initial therefore counts for much more than a match on ekene.
 

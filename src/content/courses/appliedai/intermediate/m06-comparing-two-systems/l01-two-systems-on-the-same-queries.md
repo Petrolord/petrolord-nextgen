@@ -25,7 +25,7 @@ These are the ten queries where the two differ. A is higher on 7, B on 3, and th
 
 ## What the pairs show that the means hide
 
-The mean difference is -0.001384, B a hair ahead. Yet A wins more queries than B, seven against three. B's lead comes from two large wins, Q02 and Q14, two queries where BM25's word matching failed: EKD-043's "rate of penetration" outranking the answer on Q02, and the lexical trap on Q14, where the passages say "no water" and "water free". A wins several smaller contests and two larger ones, Q15 and Q20.
+The mean difference is -0.001384, B a hair ahead. Yet A wins more queries than B, seven against three. B's three wins add up to 0.838542 against 0.806717 for A's seven, and that is where B's lead comes from. The two largest, Q02 and Q14, add up to 0.783390, less than A's seven, so B's third win, Q23, is needed as well. Q02 and Q14 are the two queries where BM25's word matching failed: EKD-043's "rate of penetration" outranking the answer on Q02, and the lexical trap on Q14, where the passages say "no water" and "water free". A wins several smaller contests and two larger ones, Q15 and Q20.
 
 Neither the mean nor the count of wins is the whole story. The per-query differences are, and every comparison in this module starts from them.
 

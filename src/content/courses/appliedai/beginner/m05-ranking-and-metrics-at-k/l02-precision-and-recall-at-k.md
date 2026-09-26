@@ -46,7 +46,7 @@ System A retrieves by BM25 at k 5. At grade 1 or more:
 | Q10 | 2 | 2 | 0.400000 | 1.000000 |
 | Q14 | 3 | 0 | 0.000000 | 0.000000 |
 
-Q01 has 8 relevant passages, more than a list of 5 can hold, so its recall at 5 can never pass 5 / 8. Q10 has precision 0.400000 with only 2 passages ranked: precision at 5 divides by 5 even when fewer are ranked. That is a stated choice, the one trec_eval makes; the alternative divides by the passages ranked, and would give Q10 a perfect precision for a list of two. Q14 is the lexical trap, and BM25 finds none of its 3 relevant passages.
+Q01 has 8 relevant passages, more than a list of 5 can hold, so its recall at 5 can never pass 5 / 8. Q10 has precision 0.400000 with only 2 passages ranked: precision at 5 divides by 5 even when fewer are ranked. That is a stated choice, the one trec_eval makes; the alternative divides by the passages ranked, and would give Q10 2 / 2 = 1.000000 for a list of two, a figure the engine does not compute. Q14 is the lexical trap, and BM25 finds none of its 3 relevant passages.
 
 ## Why both
 

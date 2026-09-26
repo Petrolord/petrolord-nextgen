@@ -85,6 +85,7 @@ RUNS = [
     ('gate_capstone_leak.mjs NEGATIVE CONTROL lesson', f'{HERE}/gate_capstone_leak.mjs', ['node', f'{HERE}/gate_capstone_leak.mjs', '--no-banks', '--plant-lesson'], 1),
     ('gate_copy_rule.py', f'{HERE}/gate_copy_rule.py', ['python3', f'{HERE}/gate_copy_rule.py'], 0),
     ('gate_copy_rule.py NEGATIVE CONTROL', f'{HERE}/gate_copy_rule.py', ['python3', f'{HERE}/gate_copy_rule.py', '--plant'], 1),
+    ('gate_copy_rule.py NEGATIVE CONTROL bank', f'{HERE}/gate_copy_rule.py', ['python3', f'{HERE}/gate_copy_rule.py', '--plant-bank'], 1),
     ('gate_typed_literals.py', f'{HERE}/gate_typed_literals.py', ['python3', f'{HERE}/gate_typed_literals.py'], 0),
     ('gate_typed_literals.py NEGATIVE CONTROL', f'{HERE}/gate_typed_literals.py', ['python3', f'{HERE}/gate_typed_literals.py', '--plant'], 1),
     ('gate_vocabulary.py', f'{HERE}/gate_vocabulary.py', ['python3', f'{HERE}/gate_vocabulary.py'], 0),

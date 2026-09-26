@@ -23,7 +23,7 @@ Work it: (5 - 2 + 0.5) / (2 + 0.5) is 3.5 over 2.5, add 1, take the natural loga
 
 ## Never negative
 
-The older Robertson form of the BM25 idf leaves out the 1 inside the logarithm. For a word in more than half the passages that form goes negative, and a match on a common word would lower a passage's score. The Lucene form adds 1 inside the logarithm, so a word in every passage still scores a small positive idf. The engine chose it for that reason: never negative. A word in no passage has no posting and contributes nothing.
+The older Robertson form of the BM25 idf leaves out the 1 inside the logarithm. Its argument drops below 1 exactly when the word is in more than half the passages, df > N / 2, so for such a word that form goes negative, and a match on a common word would lower a passage's score. On the corpus, ekene is in 44 of the 60 passages: the Robertson form would give it -0.992129, where the engine's idf is 0.315385. The Lucene form adds 1 inside the logarithm, so a word in every passage still scores a small positive idf. The engine chose it for that reason: never negative. A word in no passage has no posting and contributes nothing.
 
 ## On the corpus
 

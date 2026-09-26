@@ -36,7 +36,7 @@ Weights use label positions, so the labels must be in the order the scale means.
 
 > labels must be given in order for linear weights on string ratings (the weights use the label positions)
 
-Give the labels in order and the call succeeds. On six stated pairs rated with the words none, related, relevant and answers, labels given in that order, linear weights, kappa is 0.608696.
+Give the labels in order and the call succeeds. On six stated pairs rated with the words none, related, relevant and answers, labels given in that order, linear weights, kappa is 0.608696. Rater a then b: related and relevant; answers and answers; none and none; relevant and relevant; answers and relevant; none and related.
 
 ## Exercise
 

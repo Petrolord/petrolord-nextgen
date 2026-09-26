@@ -60,7 +60,7 @@
    "Wrong, since a difference equal to the tolerance lies outside it",
    "Wrong, since 45.25 carries a digit that the label does not have",
    "Unsupported, since a two-decimal figure has no match in a one-decimal label",
-   "Correct, as the tolerance is inclusive and the difference sits on it"
+   "Correct, as the difference is within absTol 0.05 on either reading"
   ],
   "answer": 3,
   "explanation": "The rule is |prediction - label| <= max(absTol, relTol x |label|), a less-than-or-equal. As written the difference is exactly 0.05, which that rule accepts; in double precision the engine computes it just under 0.05, so the cell is correct on either reading. Numbers are compared as values, so an extra digit is no mismatch, and both sides hold a value, which rules out unsupported."

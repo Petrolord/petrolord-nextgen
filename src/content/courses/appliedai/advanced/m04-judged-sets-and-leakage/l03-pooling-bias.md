@@ -6,24 +6,24 @@ A pool is judged from the lists of the systems that built it. A new system that 
 
 ## A run the pool did not come from
 
-The course ran BM25 with b 0.4 and the stop list on, at k 5, against the Ekene judgments. It is a close cousin of system A's retriever, with two settings changed. Scored at grade 1 or more with linear gain:
+The course ran BM25 with b 0.4 and the stop list on, at k 5, against the Ekene judgments. Scored at grade 1 or more with linear gain:
 
 | run | unjudged passages retrieved, all queries | queries with an unjudged passage | mean precision | MAP | mean nDCG |
 | --- | --- | --- | --- | --- | --- |
 | system A's retriever at k 5 (in the pool) | 0 | 0 | 0.443478 | 0.600278 | 0.762753 |
 | BM25 b 0.4, stop list on, k 5 | 16 | 11 | 0.443478 | 0.656854 | 0.799171 |
 
-The new run brings 16 unjudged passages into its top 5 lists, on 11 of the 24 queries. Each of the 16 is scored as grade 0. Even so, its MAP is 0.656854 against system A's 0.600278 and its mean nDCG 0.799171 against 0.762753, and its mean precision at 5 is the same, 0.443478.
+The new run brings 16 unjudged passages into its top 5 lists, on 11 of the 24 queries. Each of the 16 is scored as grade 0. Even so, its MAP is 0.656854 against system A's 0.600278 and its mean nDCG 0.799171 against 0.762753, and its mean precision at 5 prints the same at six decimals, 0.443478. The doubles differ in the last bits: not a tie.
 
 ## What the table can and cannot say
 
 It can say that, on the passages the pool judged, the new run places the relevant ones higher on average than system A does. It cannot say how the new run would score if its 16 unjudged passages were judged. Some of them may answer their queries. If they do, the new run's precision at 5 is understated by exactly those passages, and the comparison with system A is tilted toward A by the way the pool was built.
 
-The bias runs one way. A pooled system never meets an unjudged passage at its pooled cutoff, so it is never penalised for one. The tilt always runs toward the systems that built the pool.
+A pooled system never meets an unjudged passage at its pooled cutoff, so it is never penalised for one. On precision the tilt runs toward the systems that built the pool; on average precision, judging a passage relevant also enlarges the divisor, so the effect can go either way.
 
 ## What to do about it
 
-The course's rule, applied to any new system: report unjudgedRetrieved beside every score, and judge the new system's unjudged passages before comparing it with the pooled ones. On the Ekene set that means 16 new judgments, a small cost against the question it settles. Once judged, those passages join the key for every system, so the pooled systems are rescored on the enlarged set too: recall, average precision and the ideal DCG all read every relevant judged passage, and a newly relevant passage raises the bar for every system that missed it.
+The course's rule, applied to any new system: report unjudgedRetrieved beside every score, and judge the new system's unjudged passages before comparing it with the pooled ones. On the Ekene set that means 16 new judgments. Once judged, those passages join the key for every system, so the pooled systems are rescored on the enlarged set too: recall, average precision and the ideal DCG all read every relevant judged passage, and a newly relevant passage raises the bar for every system that missed it.
 
 ## The pool as a rater
 

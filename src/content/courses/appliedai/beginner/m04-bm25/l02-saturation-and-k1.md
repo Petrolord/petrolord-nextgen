@@ -36,7 +36,7 @@ A small k1 makes the count saturate fast. At k1 = 0 the fraction is 1 for any co
 | 4 | EKD-027 | 6.818244 | EKD-027 | 7.327155 |
 | 5 | EKD-037 | 6.222042 | EKD-037 | 6.469637 |
 
-Every score rises at k1 2, and on this query the order holds. The default is k1 = 1.2, and system A used it.
+Each of the five top scores rises at k1 2, and on this query the order holds. Below the top five some fall, EKD-008 from 2.323039 to 2.306499: a term met once in a longer than average passage loses as k1 grows. The default is k1 = 1.2, and system A used it.
 
 ## A k1 the engine refuses
 
