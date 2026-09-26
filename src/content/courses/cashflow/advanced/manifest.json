@@ -57,7 +57,7 @@
       "lessons": [
         {
           "key": "l01-terrain-sets-the-rate",
-          "title": "Terrain sets the rate",
+          "title": "Terrain and daily rate set the rate",
           "order": 1,
           "est_minutes": 13,
           "panels": [
@@ -67,7 +67,7 @@
         },
         {
           "key": "l02-the-marginal-blend",
-          "title": "The marginal blend",
+          "title": "The small-field tranches",
           "order": 2,
           "est_minutes": 13,
           "panels": [

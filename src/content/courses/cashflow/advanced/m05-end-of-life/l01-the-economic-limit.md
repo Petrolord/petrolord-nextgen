@@ -18,7 +18,7 @@ The published elt_off_tail_kept case keeps a 2032 row of 10000.00 bbl:
 
 The year's net cash flow is -9200000.00, it banks a 14200000.00 loss nothing will use, and NPV is 13987603.31 with IRR null. With apply_economic_limit true the row goes: NPV 21590909.09, IRR 200.0000 percent, economic_limit_year 2031, rows 2. The distance between the two NPVs is one row no operator would run.
 
-The null is the second cost of the default. The kept tail is a terminal negative flow, and such a vector can have two rates that zero its NPV or none. Since engines 3.10.0 a rate is named only where exactly one rate in the band does, so keeping the tail costs the ledger its IRR as well as 7603305.79 of discounted cash.
+The null is the second cost of the default. The kept tail is a terminal negative flow, and such a vector can have two rates that zero its NPV or none. The engine names a rate only where exactly one rate in the band does, so keeping the tail costs the ledger its IRR as well as 7603305.79 of discounted cash.
 
 ## AKATA with a long tail
 
