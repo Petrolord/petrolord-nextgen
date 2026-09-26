@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "A golden escalated price starts at 2 in 2027-04 and escalates by 2.5 percent a year, with no rounding. What price does the engine return for 2028-04?",
+  "options": [
+   "2.000000, since the price steps only when a new calendar year begins in January",
+   "2.037500",
+   "2.050000, the first step",
+   "2.101250, since a year of escalation is applied again at every monthly reset"
+  ],
+  "answer": 2,
+  "explanation": "Escalation steps in whole years on each anniversary of the base month, so 2028-04 is the first step: 2 raised by 2.5 percent is 2.050000, as the engine prints. The step follows the base month, so it comes in April and the calendar year plays no part. 2.037500 is the engine's 2028 annual average, three months at 2.000000 and nine at 2.050000. 2.101250 is the price after the second anniversary, in 2029-04."
+ },
+ {
+  "prompt": "For the same escalated price, what does the engine return as the 2028 annual average price, the basis of the model agreement's Article 15.2.6 Alternative 1?",
+  "options": [
+   "2.050000, the price of the last month of 2028, since the annual row reports the price that stands at the year end",
+   "2.037500, the mean of the twelve monthly prices of 2028",
+   "2.000000, the price that stands in January",
+   "2.075625, which is the mean the engine returns across the 2029 months after the second anniversary"
+  ],
+  "answer": 1,
+  "explanation": "The annual average is the arithmetic mean of the calendar year's monthly prices: three months at 2.000000 and nine at 2.050000 give 2.037500. 2.050000 is the last month's price, the Alternative 2 figure the engine also returns. January alone is one month of twelve. 2.075625 is the 2029 average, a year later."
+ },
+ {
+  "prompt": "A golden oil-indexed formula prices 0.8 + 0.1485 x jcc with no S-curve and no band, averaging over 1 month with no lag. What does the engine return in the month the jcc index is 30?",
+  "options": [
+   "4.500000, a stated ceiling",
+   "4.141250, a lower index",
+   "6.740000, a higher index",
+   "5.255000, on the straight line of the formula"
+  ],
+  "answer": 3,
+  "explanation": "0.8 plus 0.1485 x 30 is 5.255000, and with no band and no S-curve every month sits on the straight line. 4.500000 is what the same formula returns when a ceiling of 4.5 is stated, which this case does not state. 4.141250 is the price at a jcc of 22.5. 6.740000 is the price at a jcc of 40."
+ },
+ {
+  "prompt": "The same formula is run with a floor of 3.5 and a ceiling of 4.5. In the month the jcc index is 10, the line gives 2.285000. What does the engine return?",
+  "options": [
+   "3.500000, labelled clamped at the floor",
+   "2.285000, since a floor applies only to an averaged index and this month averages a single value over one month",
+   "4.500000, since the ceiling and the floor are applied together and the higher of the two bounds is the one returned",
+   "A refusal, since the formula falls below its floor and a stated floor must hold in every month the engine prices"
+  ],
+  "answer": 0,
+  "explanation": "The engine holds the price at the floor when the line falls below it and labels the month clamped: floor, as the golden case prints. The floor applies to the price whatever the averaging window. A ceiling acts only when the line rises above it. A month below the floor is a result held at the floor with its label; the engine does not refuse it."
+ },
+ {
+  "prompt": "A golden formula prices 1 + 0.1 x oil, averaging over 6 months with a lag of 1 month and a reset every 3 months. Which window does the engine average for the price of 2025-08?",
+  "options": [
+   "2025-03 to 2025-08, six months ending in the priced month itself",
+   "2025-02 to 2025-07, six months ending one month before",
+   "2025-01 to 2025-06, six months ending two months before 2025-08, the lag counted from the month before",
+   "2025-07 alone"
+  ],
+  "answer": 1,
+  "explanation": "The engine averages averagingMonths months ending lagMonths months before the delivery month, so six months ending in 2025-07: 2025-02 to 2025-07, an average of 67.000000 and a price of 7.700000. Ending in the priced month is a lag of 0. Ending in 2025-06 would be a lag of 2. A single month is an averaging window of 1."
+ },
+ {
+  "prompt": "With a one-month window read three months back (a lag of 3), the golden line 1 + 0.1 x oil sees oil at 60, 62, 64 and 66 from 2025-01 to 2025-04. Which 2025-04 price comes out?",
+  "options": [
+   "7.000000, from the 2025-01 index of 60",
+   "7.600000, from the 2025-04 reading of 66",
+   "7.400000, from the 2025-03 index",
+   "7.200000, from 2025-02"
+  ],
+  "answer": 0,
+  "explanation": "A lag of 3 months with a window of 1 month reads the single month three months before the delivery month, 2025-01, so the price is 1 + 0.1 x 60 = 7.000000, as the engine prints. The 2025-04 index would be a lag of 0. 2025-03 and 2025-02 would be lags of 1 and 2."
+ },
+ {
+  "prompt": "The 6 month, lag 1 formula resets every 3 months, the first block starting at 2025-08. What does the engine return for 2025-10 and 2025-11?",
+  "options": [
+   "A fresh window each month",
+   "7.700000 in both months, the price being held for six months to match the length of the averaging window",
+   "7.700000 in 2025-10, then 8.300000 in 2025-11",
+   "8.300000 in both months"
+  ],
+  "answer": 2,
+  "explanation": "Every month of a block carries the price of the block's first month, counted from the first priced month, so 2025-08 to 2025-10 carry 7.700000 and 2025-11 starts a new block on the window 2025-05 to 2025-10, an average of 73.000000 and a price of 8.300000. A monthly recompute is a reset of 1. The reset is its own term and is not tied to the window length. 2025-10 still sits in the first block."
+ },
+ {
+  "prompt": "The Ekene export feed (synthetic) prices 0.5 + 0.12 x oil on the index averaged over 6 months ending 1 month before the priced month. What does the engine return for January 2027?",
+  "options": [
+   "71.461667 on 2026-10 to 2027-03, priced 9.075400, the window the first quarter of 2027 closes on",
+   "71.560000, the index for January 2027 itself, priced at once in the month the gas is delivered to the buyer",
+   "The average of the whole 2026 index year, priced on the calendar year before the first contract year",
+   "76.925000 on 2026-07 to 2026-12, priced 9.731000"
+  ],
+  "answer": 3,
+  "explanation": "The window is six months ending one month before January 2027, so July to December 2026, which averages 76.925000; 0.5 + 0.12 x 76.925000 is 9.731000, as the engine prints. 71.461667 and 9.075400 belong to April 2027, the second quarterly block. The January 2027 index itself is outside its own window under a lag of 1. The window is six months long, and the calendar year plays no part in it."
+ },
+ {
+  "prompt": "Under the rounding rule 'model-gsa-4dp', the golden formula prices an index of 11.23459 one for one. What price does the engine return?",
+  "options": [
+   "11.234500, since the fifth decimal is cut off",
+   "11.234590, the unrounded figure",
+   "11.234300, since the rule reads the whole remainder",
+   "11.234600"
+  ],
+  "answer": 3,
+  "explanation": "The model agreement's Article 15.4 rounds the final price to four decimals, and \"if the number in the fifth decimal place is five (5) or more then the number in the fourth decimal place shall be rounded up\": the fifth decimal of 11.23459 is 9, so the price is 11.234600. Cutting the fifth decimal is truncation. The unrounded figure is what 'none' returns. 11.234300 is the engine's price for a different index, 11.234346."
+ },
+ {
+  "prompt": "The Oxford Institute for Energy Studies paper NG 175 (2022) prints a hub-indexed form, 1.15 x HH plus a constant. On a golden case of 1.15 x hh + 2.25, what does the engine return in the month hh is 3?",
+  "options": [
+   "5.125000, since the hub price is read one month late",
+   "5.700000",
+   "6.275000, at 3.5",
+   "The hub term alone, since the constant is added only to an oil-indexed formula"
+  ],
+  "answer": 1,
+  "explanation": "1.15 x 3 plus 2.25 is 5.700000, as the engine prints for that month. 5.125000 is the price at an hh of 2.5, the month before, and this case states no lag. 6.275000 is the price at an hh of 3.5. The constant belongs to the hub-indexed formula as stated, so it is added."
+ },
+ {
+  "prompt": "A golden basket formula states index floors of fo 410 with weights of 0.6 for fo and 0.4 for cpi. For 2026-01 the fo average is 400.000000 and the cpi average 101.500000. What price does the engine return?",
+  "options": [
+   "5.105000, with fo held at its floor of 410.000000",
+   "5.030000, the price of the same month with no index floor stated in the contract",
+   "5.085000, the price of the month before",
+   "A refusal, since an index average below its stated floor is not an input the basket formula accepts"
+  ],
+  "answer": 0,
+  "explanation": "An index floor holds the index before the formula uses it: fo is held at 410.000000 and the engine returns 5.105000, where the same month with no floors prices 5.030000. 5.085000 is the 2025-12 price, where fo averages 410.000000 already. An index below its floor is a result held at the floor; the engine refuses nothing here."
+ },
+ {
+  "prompt": "A learner prices 2025-03 on a 6 month window with a lag of 1, and the index series starts only in 2025-01. What does the engine return, in its own words?",
+  "options": [
+   "A price averaged over the two months the series does hold, 2025-01 and 2025-02, since a partial window is averaged",
+   "A price of 0.000000 for 2025-03, the month the window is missing from",
+   "months must cover the averaging window 2024-09 to 2025-02 for the price of 2025-03; got no value for 2024-09, 2024-10, 2024-11, 2024-12",
+   "months[1].month must be 2025-02"
+  ],
+  "answer": 2,
+  "explanation": "The engine refuses a window the series does not cover, naming the missing months: its message is \"months must cover the averaging window 2024-09 to 2025-02 for the price of 2025-03; got no value for 2024-09, 2024-10, 2024-11, 2024-12\". It never averages a partial window, and it does not price the month at zero. The message about months[1].month is its refusal of a gap in the series, a different fault."
+ },
+ {
+  "prompt": "Priced month by month, the export feed's 2029 averages 9.808450 and ends December at 10.674000. A contract adopting the first alternative the model agreement prints for its take-or-pay price uses which figure?",
+  "options": [
+   "The annual average, 9.808450",
+   "The last month's price, 10.674000, which Alternative 1 takes as the price that stands when the year closes",
+   "The higher, 10.674000",
+   "A mean of the two"
+  ],
+  "answer": 0,
+  "explanation": "Alternative 1 reads \"the arithmetic average of the Contract Price for each Month during such Contract Year\", which is 9.808450 for 2029, and the export feed fixture states that basis. The last month's price is Alternative 2. The model prints no rule that takes the higher figure or a mean of the two."
+ },
+ {
+  "prompt": "The export feed fixture states price reopeners in 2031-01 and 2035-01. What does the engine return for them?",
+  "options": [
+   "A new formula from each reopener month, set by the change in the oil index since the last review",
+   "A price held flat",
+   "A refusal, since a reopener needs a stated outcome before the engine can price the months after it",
+   "Each month reported only, with no outcome modelled"
+  ],
+  "answer": 3,
+  "explanation": "The engine reports each reopener in its own words: \"price reopener 2031-01: reported only; the engine does not model the outcome of a price review\". It sets no new formula and holds no price flat, since both would be outcomes. It does not refuse a reopener; it refuses only a reopener that is not a month written 'YYYY-MM'."
+ },
+ {
+  "prompt": "A learner states the rounding rule as \"4dp\". What does the engine return?",
+  "options": [
+   "Prices rounded to four decimals, half up",
+   "Refused by name: rounding accepts only \"none\" or \"model-gsa-4dp\"",
+   "Prices with no rounding at all",
+   "Prices rounded to four decimals by truncation, since the unknown rule falls back to cutting off the fifth decimal place"
+  ],
+  "answer": 1,
+  "explanation": "The engine's message reads \"rounding must be one of \"none\", \"model-gsa-4dp\"; got \"4dp\"\". It reads no rule it does not know, so it neither applies the model agreement's rule on a guess nor drops rounding silently, and it has no truncation rule to fall back on."
+ }
+]
