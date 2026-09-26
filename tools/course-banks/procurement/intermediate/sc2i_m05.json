@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The engine reads s.14's phrase \"within 1 % of each other at commercial stage\" in one stated way. Which?",
+  "options": [
+   "As a chain of bids each within 1% of the next one, so the group can stretch well above the lowest",
+   "Within 1% of the mean evaluated cost of the responsive bids, so the group sits around the middle",
+   "As within 1% of the lowest evaluated cost, written 100 x (C - Cmin) <= 1 x Cmin",
+   "As within 1% of the lowest quoted total, read before any omission, schedule or life cycle is added"
+  ],
+  "answer": 2,
+  "explanation": "Every s.14 reason prints the reading \"within 1 % of each other at commercial stage\" is read as within 1% of the lowest evaluated cost, and the basis writes the group as 100 x (C - Cmin) <= 1 x Cmin. A chain reading is possible and the engine does not take it. The group is measured on evaluated cost, at the commercial stage."
+ },
+ {
+  "prompt": "On the materials tender, MS2 sits 0.296313 percent above MS4 and MS1 3.570054 percent above. Which bids form the s.14 group, under either reading of the lead?",
+  "options": [
+   "MS4 and MS2, the two bids within 1% of the lowest evaluated cost",
+   "MS4, MS2 and MS1, the three bids within 5% of the lowest evaluated cost on the tender",
+   "MS2 and MS3, the two bids with the highest Nigerian content among the four responsive",
+   "It depends on the reading of the lead: points gives MS4 alone and relative gives MS4 and MS2"
+  ],
+  "answer": 0,
+  "explanation": "The group is every bid whose evaluated cost is within 1% of the lowest, MS4 at 546244.982386. MS2 at 0.296313 percent is in; MS1 at 3.570054 and MS3 at 6.445634 are out. The engine's table marks MS4 and MS2 in the group under both readings: the reading changes the lead test and leaves the group as it is. The 5% figure belongs to the lead test."
+ },
+ {
+  "prompt": "Under the points reading, stated bids LO at 2000000 (50%) and E1 at 2020000 (56%) are tested. E1 is exactly 1% above LO. What does the engine return?",
+  "options": [
+   "E1 stays out of the group, since a bid must sit strictly inside 1% of the lowest to join it",
+   "E1 joins the group, and LO stands, because a lead must exceed 5 points by a whole point",
+   "The call is refused, as a bid exactly on the margin cannot be placed in or out of the group",
+   "E1 joins the group, leads by 6.000000 points, and s.14 selects E1 under the points reading"
+  ],
+  "answer": 3,
+  "explanation": "The group rule 100 x (C - Cmin) <= 1 x Cmin includes the margin, so E1 at exactly 1% is in. Read as points, its lead is 6.000000, at least 5, so s.14 applies and selects E1. At 2020001 a bid is out, and with only LO in the group the reason says \"s.14 is not engaged\"."
+ },
+ {
+  "prompt": "A stated bid E2 at 2020001 carries 90% content against LO at 2000000 with 50%, read as points. What does the engine return, and in what form?",
+  "options": [
+   "E2 is selected, since a content of 90% against 50% clears 5 points by any reading of the Act",
+   "A result with the reason that only LO is within 1% and s.14 is not engaged, so LO is selected",
+   "A refusal naming bids[1].evaluatedCost, because E2 sits one unit outside the margin of the group",
+   "A null lead with s.14 applied, since E2 leads on content from outside the group and cannot be ranked"
+  ],
+  "answer": 1,
+  "explanation": "E2 is one unit beyond 1% of the lowest, so the group holds LO alone. The engine returns the result with the reason \"only LO is within 1% of the lowest evaluated cost 2000000; s.14 is not engaged\", and LO is selected. However high E2's content, it never enters the comparison. That is a result with a reason, and nothing is refused."
+ },
+ {
+  "prompt": "How does the engine read s.14's \"its closest competitor\"?",
+  "options": [
+   "As the bid next above the leader in evaluated cost, since the Act acts at the commercial stage",
+   "The bid with the lowest evaluated cost, whatever its content, since that is the bid s.14 displaces",
+   "As the bid with the next-highest Nigerian content in the group, printed in every s.14 reason",
+   "As the mean content of every other bid in the group, so a crowded group lowers the bar"
+  ],
+  "answer": 2,
+  "explanation": "The reading, verbatim, is \"its closest competitor\" is read as the bid with the next-highest Nigerian content in that group. The competitor is found by content. The bid closest in evaluated cost is the alternative the engine does not take, and no mean enters the lead."
+ },
+ {
+  "prompt": "Three stated bids share the group: LO at 2000000 with 88% content, L2 at 2006000 with 70% and L3 at 2012000 with 75%. Taking the points reading, which bid is the runner-up and what is the outcome?",
+  "options": [
+   "LO leads, L3 is the runner-up, the lead is 13.000000 points, and s.14 confirms LO",
+   "LO leads, L2 is the runner-up as the bid closest to LO in price, and the lead is 18 points",
+   "L3 is selected over LO, since s.14 prefers a bid other than the lowest when one clears 5 points",
+   "The group holds LO alone, because L3 sits more than 1% above LO and is left out of the test"
+  ],
+  "answer": 0,
+  "explanation": "All three sit within 1% of 2000000. The runner-up is the next-highest content, L3 at 75%, and the lead read as points is 13.000000. The engine's reason: \"LO is the lowest evaluated cost and also leads on Nigerian content, 88% against 75% (L3), a lead of 13 percentage points; s.14 confirms it\". L2 is closer in price, and the engine does not read the phrase by price."
+ },
+ {
+  "prompt": "Does the Nigerian Oil and Gas Industry Content Development Act 2010 say whether \"at least 5% higher\" means five percentage points or five percent of the runner-up's content?",
+  "options": [
+   "Percentage points, as the Schedule states every minimum in points",
+   "Five percent of the runner-up's content, as the Act writes a % sign",
+   "Yes: the Board's regulations settle it as points, and the engine applies that as its default",
+   "The Act does not say; the engine takes the reading as a stated input with no default"
+  ],
+  "answer": 3,
+  "explanation": "Every s.14 reading the engine prints ends \"(the Act does not say points or relative)\". The engine therefore has no default: ncLeadBasis must be stated. The course teaches both readings side by side as an open question of the Act. No later Board text was read, and the engine holds none."
+ },
+ {
+  "prompt": "A contentPreference call states no reading of \"at least 5% higher\". What does the engine return?",
+  "options": [
+   "A result under the points reading, the default, with that reading printed in the s.14 reason",
+   "A refusal by ncLeadBasis, which says s.14 does not say which reading applies, so there is no default",
+   "Both readings side by side, since a call with no reading asks the engine to show the two outcomes",
+   "A result with s.14 left out and the lowest evaluated cost selected, along with a note about the reading"
+  ],
+  "answer": 1,
+  "explanation": "The message is \"ncLeadBasis must be 'points' (at least 5 percentage points more) or 'relative' (at least 5 percent more than the runner-up's content); s.14 does not say which, so there is no default\". The engine never picks a reading for the caller. A reading misnamed as ncBasis is refused too, as a key the function does not read."
+ },
+ {
+  "prompt": "Under the points reading of \"at least 5% higher\", MS2 leads MS4 on overall content in the materials group, 61.584657 against 57.043637. What does s.14 do?",
+  "options": [
+   "7.960608 points, at least 5, so s.14 selects MS2 over MS4 as the lowest evaluated cost",
+   "MS2 is selected anyway at 4.541020 points, being inside the 1% group",
+   "The lead is 4.541020 percentage points, less than 5, so s.14 does not apply and MS4 stands",
+   "The lead is 4.541020 points, and MS3 is selected as the bid with the highest content on the tender"
+  ],
+  "answer": 2,
+  "explanation": "Under the points reading the engine returns a lead of 4.541020, s.14 applied false, and MS4 selected: \"less than 5% higher, so the lowest evaluated cost MS4 stands\". 7.960608 is the lead under the relative reading. MS3 is outside the group, so s.14 never reaches it."
+ },
+ {
+  "prompt": "Suppose the evaluator states the relative reading instead. MS2's content is 61.584657 and MS4's, the runner-up's, 57.043637. Which bid does the engine select, and on what lead?",
+  "options": [
+   "The lead is 7.960608 percent of MS4's content, at least 5, so s.14 selects MS2 over MS4",
+   "The lead is 4.541020 percent, short of 5, so the lowest evaluated cost MS4 stands under this reading",
+   "The lead is 7.960608 percent, and MS4 stands anyway, since s.14 confirms the lowest in every case",
+   "It cannot be computed, since a relative lead needs the leader's own content as the divisor"
+  ],
+  "answer": 0,
+  "explanation": "Under the relative reading the lead is measured against the runner-up's content: 7.960608 percent of MS4's 57.043637, at least 5, so s.14 applies and selects MS2. The basis writes it as 100 x (top - runner-up) >= 5 x runner-up. 4.541020 is the points lead, and the divisor is the runner-up's content."
+ },
+ {
+  "prompt": "Under the points reading, LO (80%) and K4 (84%) sit in the group, a lead of 4.000000 points. The same pair is then read as relative. What changes?",
+  "options": [
+   "Nothing changes, because a 4-point lead falls short of 5 under the relative reading as well",
+   "Relative gives 4.000000 percent too, so LO stands under both readings",
+   "Both readings apply, as any positive lead in the group meets the test",
+   "Short of 5 as points, the lead reads 5.000000 as relative and s.14 applies, selecting K4"
+  ],
+  "answer": 3,
+  "explanation": "The edge table prints the pair twice: read as points the lead is 4.000000 and s.14 does not apply, so LO is selected; read as relative the lead is 5.000000 (4 points is 5 percent of 80) and s.14 applies, selecting K4. A lead exactly on 5 meets the test under either reading, as K5's 5.000000 points does."
+ },
+ {
+  "prompt": "Under the points reading, stated bids LO (40%), S1 (65%) and S2 (65%) all sit in the group. What does the engine return?",
+  "options": [
+   "A lead of 0.000000 points between S1 and S2, below 5, with the lowest evaluated cost LO kept",
+   "A null lead with s.14 not applied, as no single bid leads, so the lowest evaluated cost LO stands",
+   "S1 is selected, as the earlier receipt breaks the tie between the two bids at the top",
+   "A refusal naming bids, since two bids with the same content cannot both lead the group"
+  ],
+  "answer": 1,
+  "explanation": "The engine's reason: \"S1 and S2 share the highest Nigerian content 65%, so no single bid leads; the lowest evaluated cost LO stands\". The lead is null because there is no single leader to measure it from; a lead of 0 would say a leader exists. The engine applies no tie-break to content here and refuses nothing."
+ },
+ {
+  "prompt": "Under the relative reading, stated bids LO (0%) and Z1 (30%) sit in the group. Why is the lead null while s.14 still applies?",
+  "options": [
+   "A relative lead over a runner-up with no content would divide by zero, and any positive content is more than 5% higher",
+   "The lead is null because Z1 is outside the group, and s.14 applies to it through s.16 instead",
+   "No reading can compare with 0%, so the engine applies the points reading and returns its lead",
+   "A null lead means the reading was left unstated, and the engine applies s.14 by default"
+  ],
+  "answer": 0,
+  "explanation": "The engine returns the lead as null for a runner-up with no Nigerian content, since the relative lead divides by it, while any positive content is more than 5% higher by any reading. It selects Z1 with the reason \"a runner-up with no Nigerian content, at least 5% higher\". Z1 is in the group, and the engine never switches readings."
+ },
+ {
+  "prompt": "Every s.14 reason the engine returns ends with a parenthesis that opens \"(readings of s.14:\". What does it hold?",
+  "options": [
+   "The citation of s.14 to its gazette page and the date the course read the Act",
+   "Both outcomes, points and relative, whichever reading the call itself stated",
+   "The three readings the engine applied: the 1% group, the closest competitor, and points or relative for the lead",
+   "The evaluated cost and content of every bid in the group, printed at full precision"
+  ],
+  "answer": 2,
+  "explanation": "Each reason prints the three readings the call applied, the third one naming the lead basis stated for that call, so a reader holding another reading can see what was done. The points reason for MS2 and MS4 carries the points reading alone, and the relative reason the relative reading alone."
+ },
+ {
+  "prompt": "A contentPreference call passes the reading under the key ncBasis. What does the engine return?",
+  "options": [
+   "Accepted as a short form of ncLeadBasis, so the result runs under the reading given",
+   "The points reading, with the key ignored, since points is the engine's default",
+   "A refusal saying the reading must be 'points' or 'relative', since ncBasis held no known value",
+   "A refusal: \"ncBasis is not an accepted key; the accepted keys at the top level are bids, ncLeadBasis\""
+  ],
+  "answer": 3,
+  "explanation": "The engine refuses any input key a function does not read, naming the key and the accepted keys. It never reads a misspelt key as the right one, and it has no default reading to fall back to. The refusal for a missing reading names ncLeadBasis and is a different message."
+ }
+]
