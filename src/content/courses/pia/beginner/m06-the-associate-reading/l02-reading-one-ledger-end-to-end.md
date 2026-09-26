@@ -19,9 +19,9 @@ Ekene Alpha is a converted petroleum mining lease in shallow water, at a 100 per
 | gas royalty | 350400.000000 | Seventh Schedule para 10(6) |
 | royalty by price rate, oil | 0.017935 | Seventh Schedule para 11(1), Regulations base |
 | royalty by price | 4037323.188406 | Seventh Schedule para 11(1), Regulations base |
-| total royalty | 18012822.226867 | the three lines above |
+| total royalty | 18012822.226867 | the engine's total of the three royalties above |
 
-The daily rate sits between 5,000 and 10,000 bopd, so the rate is a weighted average of the two small-field tranches. The royalty by price is read on the Regulations base, the engine default, and every figure after it depends on that base.
+The daily rate sits between 5,000 and 10,000 bopd, so the rate is a weighted average of the two small-field tranches. The total royalty is the engine's own sum of the three royalties; each printed line is rounded to six decimals, so adding the printed lines can miss the printed total in the last place. The royalty by price is read on the Regulations base, the engine default, and every figure after it depends on that base.
 
 ## The contributions
 

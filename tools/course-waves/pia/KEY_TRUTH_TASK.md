@@ -17,7 +17,8 @@ oracle and its golden, and the engine's source comments are PROVENANCE.
 
 A figure of sixteen or more significant digits is written comma-grouped, as the
 digest prints it, and a quoted text comes from the digest section the tier owns
-(the royalty texts and the texts behind the stack are Associate material).
+(the royalty texts are Associate material; the texts behind the stack are
+Associate material that Professional m03 and m05 may also quote).
 
 ## THE DEFECT CLASSES TO READ FOR
 

@@ -72,8 +72,9 @@ module or a dashboard for this course.
 3. **Only public texts are quoted, with their citation**, and a quotation is
    short and exact: quote the digest row that prints the text (each dash the
    gazette prints shown as a colon). The royalty texts sit beside the royalty
-   sections (9 to 11) and the texts behind the stack beside it (12), all owned by
-   the Associate tier; the conversion texts sit in section 5 and the
+   sections (9 to 11), owned by the Associate tier, and the texts behind the
+   stack beside it (12), owned by the Associate tier and Professional m03 and
+   m05; the conversion texts sit in section 5 and the
    institutions in section 4; every other text is in section 24, owned by the
    Professional and Expert tiers. Quote a text from the section your tier owns.
 4. **No legal threshold, rate or schedule value is invented.** Every figure the
@@ -135,7 +136,7 @@ section headings name their owners.
 | tier | question | modules | digest sections it owns |
 | --- | --- | --- | --- |
 | Associate | THE MAP OF THE ACT | who decides what; licences, leases and terrains; royalty by terrain; royalty by price; the instruments stacked; the Associate reading | 1 to 12, 14, 19, 20 and 25 |
-| Professional | THE HYDROCARBON TAX AS A SYSTEM | the small-field tranches; what the hydrocarbon tax charges; deductions and the cost price ratio; allowances; companies income tax alongside; the Professional reading | 6 to 9, 13 to 16, 19 and 22 to 25 |
+| Professional | THE HYDROCARBON TAX AS A SYSTEM | the small-field tranches; what the hydrocarbon tax charges; deductions and the cost price ratio; allowances; companies income tax alongside; the Professional reading | 6 to 9, 12 to 16, 19 and 22 to 25 |
 | Expert | TRANSITIONS AND READING AN OUTCOME | conversion and the legacy terms; what the Nigeria Tax Act moved; what it changed at the edges; gas and incentives; reading a fiscal outcome; the Expert reading | 1 to 3, 5 to 8, 10, 13, 15, 17, 18 and 20 to 25 |
 
 ## THE DATASET

@@ -125,11 +125,11 @@
   "options": [
    "Computed as a line on the gas field's ledger, and graded once the credit's inputs are stated",
    "Only for fields whose first gas arrives before 1 January 2029 is it computed, on a stated date",
-   "As concept-only: the engine does not model it, and it reads realised prices where s.85 names the fiscal gas price",
+   "As concept-only: the engine does not model it, and it reads the stated gas price where s.85 names the fiscal gas price",
    "As part of the gas royalty rate, where it appears as the 2.5 percent rate for gas used in-country"
   ],
   "answer": 2,
-  "explanation": "The engine's list of what it does not model includes the non-associated gas credit, and its note says \"The realised oil and condensate prices stand in for the Commission's fiscal prices\". A concept-only provision is taught from its text and never graded on a number, and the 2.5 percent in-country rate is a royalty rule of para 10(6)."
+  "explanation": "The engine's list of what it does not model includes the non-associated gas credit, and its note says \"The realised oil and condensate prices stand in for the Commission's fiscal prices\", and it applies the gas price the case states. A concept-only provision is taught from its text and never graded on a number, and the 2.5 percent in-country rate is a royalty rule of para 10(6)."
  },
  {
   "prompt": "What do PIA s.302(6) and NTA s.80(1) give investors in gas pipelines?",

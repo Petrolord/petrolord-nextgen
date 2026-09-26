@@ -21,21 +21,21 @@ The base is Ekene Alpha (synthetic; shallow water, converted, 2026 to 2032, ever
 
 ## Reading the rows
 
-**Terrain onshore moves nothing.** Every year of Alpha produces below 10,000 bopd, where onshore and shallow water pay the same tranche rates, and the hydrocarbon tax rate of a converted lease is 30 percent in both terrains. A terrain change that moves nothing is still a finding: it says the field sits entirely in the part of the table the two terrains share.
+**Terrain onshore moves nothing.** Every year of Alpha produces below 10,000 bopd, where onshore and shallow water pay the same tranche rates, and the hydrocarbon tax rate of a converted lease is 30 percent in both terrains. A terrain change that moves nothing is still a finding.
 
-**A prospecting licence moves only the hydrocarbon tax**, by exactly half, because it changes the class under s.267 and nothing else reads the licence type.
+**A prospecting licence moves only the hydrocarbon tax**, to exactly half, because it changes the class under s.267 and nothing else reads the licence type.
 
 **A new lease moves the hydrocarbon tax twice**: once through the larger new-lease production allowance of Sixth Schedule para 1(2), and once through the rate it states. At a stated 30 only the allowance acts; at a stated 15 both act. The two stated rates are shown together because the texts leave the rate of such a lease open, and neither is graded.
 
 **The price moves the royalty by price and everything after it.** A higher price raises the royalty by price, which the tax bases deduct, and raises every profit line. Stated on the Act base, the same price moves the royalty less and the taxes more, because the Act's benchmarks sit one year of escalation higher. Every figure on these two rows names its base year.
 
-**Forcing the Act alone swaps the levy for the education tax** and changes the capital allowance and the restriction, which is why the hydrocarbon tax and companies income tax move a little.
+**Forcing the Act alone swaps the levy for the education tax** and keeps 1 percent of each spend back in its fifth year, which is why the hydrocarbon tax and companies income tax move a little, in 2030 and 2031 only. The two thirds restriction applies in every forced year and never binds on Alpha, so it moves nothing.
 
 **Gas used in-country moves the gas royalty and what reads it.** The hydrocarbon tax row stays at zero because gas royalty is outside its base.
 
 ## Why one change at a time
 
-Two changes run together produce a difference that belongs to neither. The price and the base year show why: the Act base row differs from the plain price row in every column, and only running them apart makes the base year's part visible. The same holds for a change of your own: state it alone, run it, and read the rows before you combine it with anything. The arithmetic of the ledger rows is the cash flow course's; this course reads which provision each difference belongs to.
+Two changes run together produce a difference that belongs to neither. The price and the base year show why: the Act base row differs from the plain price row in every column, and only running them apart makes the base year's part visible. The same holds for a change of your own. The arithmetic of the ledger rows is the cash flow course's; this course reads which provision each difference belongs to.
 
 ## Exercise
 

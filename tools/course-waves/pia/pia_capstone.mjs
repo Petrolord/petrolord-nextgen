@@ -240,11 +240,12 @@ const quiet = process.argv.includes('--json') || process.argv.includes('--inputs
 if (!quiet) NOTES.forEach((n) => process.stderr.write(`  ${n}\n`));
 process.stderr.write(`pia_capstone: ${ASSERTS.length} scenario, field and open-reading assertions run, 0 failed\n`);
 
-if (process.argv.includes('--json')) {
+const MAIN = import.meta.url === `file://${process.argv[1]}`;
+if (MAIN && process.argv.includes('--json')) {
   process.stdout.write(`${JSON.stringify(ROWS)}\n`);
-} else if (process.argv.includes('--inputs')) {
+} else if (MAIN && process.argv.includes('--inputs')) {
   process.stdout.write(`${JSON.stringify(CASES)}\n`);
-} else if (import.meta.url === `file://${process.argv[1]}`) {
+} else if (MAIN) {
   const pad = (s, n2) => String(s).padEnd(n2);
   process.stdout.write(`${pad('TIER', 14)}${pad('KEY', 40)}${pad('CLASS', 9)}${pad('VALUE', 24)}TOLERANCE\n`);
   ROWS.forEach((r) => process.stdout.write(

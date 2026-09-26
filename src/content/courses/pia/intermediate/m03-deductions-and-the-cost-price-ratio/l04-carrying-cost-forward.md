@@ -25,7 +25,7 @@ On the Ekene CPR case (synthetic: shallow water, converted lease):
 | 2025 | 39000000.000000 | 39000000.000000 | 52250000.000000 | 12442572.062084 |
 | 2026 | 29250000.000000 | 29250000.000000 | 93000000.000000 | 8792934.782609 |
 
-The cap binds in every year, so the pool only grows. A carried cost comes back only in a year whose own costs leave room under that year's cap, and on this lease revenue falls while the costs hold flat, so no year does.
+The cap binds in every year, so the pool only grows. A carried cost comes back only in a year whose own costs leave room under that year's cap. On this lease more opex and capital allowance arrive each year than the falling cap can take, so no year does.
 
 ## The carry and a loss
 

@@ -24,7 +24,7 @@ The Ekene CPR case (synthetic: shallow water, converted lease, heavy cost on thi
 | 2025 | 60000000.000000 | 39000000.000000 | 39000000.000000 | 52250000.000000 |
 | 2026 | 45000000.000000 | 29250000.000000 | 29250000.000000 | 93000000.000000 |
 
-In every year the claim equals the cap, and the carry grows. The cap is 65 percent of that year's revenue, so as revenue falls the cap falls with it.
+In every year the claim equals the cap, and the carry grows, because more opex and capital allowance arrive each year than the cap can take. The cap is 65 percent of that year's revenue, so as revenue falls the cap falls with it and the carry grows faster.
 
 ## The one tax it reaches
 

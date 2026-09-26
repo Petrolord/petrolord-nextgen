@@ -17,7 +17,7 @@ decimal; two independent float chains over a many-row ledger cannot promise a
 tenth of that on a value of hundreds of millions, so the bar is the grading
 tolerance itself, and the worst disagreement is printed in tolerances).
 
-    python3 oracle_check.py [--plant]
+    python3 oracle_check.py [--plant | --json]
 
 --plant is THE NEGATIVE CONTROL: it perturbs one graded value by ten
 tolerances before comparing, and must exit 1 naming it.
@@ -88,6 +88,15 @@ if set(got) != set(graded):
 
 if PLANT:
     got[PLANTED_KEY] = got[PLANTED_KEY] + 10 * graded[PLANTED_KEY][1]
+
+if '--json' in sys.argv:
+    # For gen_golive.py: the oracle's value for every field, with the oracle
+    # module it came from. Nothing else is printed, and the run still refuses
+    # (exit 1) when any value disagrees with fields.json.
+    out = {k: {'value': float(got[k]), 'oracle': 'tools/validation/economics/oracle_pia2021.py'} for _, k, _v, _t in fields}
+    dis = [k for _, k, v, tol in fields if not (abs(float(got[k]) - v) / max(abs(v), 1e-300) <= 1e-12 and abs(float(got[k]) - v) <= tol)]
+    print(json.dumps(out))
+    sys.exit(1 if dis else 0)
 
 worst_rel = worst_tol = 0.0
 bad = []

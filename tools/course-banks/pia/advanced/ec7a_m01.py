@@ -104,7 +104,7 @@ x("PIA s.94(1) lets a producing marginal field keep its original royalty rates a
  "The provision map records s.94(1) as \"the 15 percent rate is computed (the stated flag); the rest is concept-only\". The engine carries no original royalty rates or farm-out agreements and no conversion date, and the flag does change a figure: it gives the rate 0.150000 where a converted lease pays 0.300000.")
 
 # 12
-x("Under the Nigeria Tax Act 2025 (June 2025 gazette), what tax does an oil mining lease that never converted pay, as the course reads the texts?",
+x("Under the Nigeria Tax Act 2025 (Official Gazette No. 117, Vol. 112, 26 June 2025), what tax does an oil mining lease that never converted pay, as the course reads the texts?",
  "Petroleum profits tax under the Nigeria Tax Act's own Part II, which s.90(1) applies to leases yet to convert",
  ["Hydrocarbon tax at 30 percent under NTA s.72(a), because s.196(h) repealed the Petroleum Profits Tax Act",
   "No petroleum tax until the lease expires, because NTA s.87(1) keeps it outside the hydrocarbon tax Part",

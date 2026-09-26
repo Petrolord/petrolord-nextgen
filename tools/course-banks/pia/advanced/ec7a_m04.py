@@ -106,11 +106,11 @@ x("A non-associated gas greenfield project first produces commercial gas after 1
 
 # 12
 x("How does this course treat the NTA s.85 greenfield gas credit?",
- "As concept-only: the engine does not model it, and it reads realised prices where s.85 names the fiscal gas price",
+ "As concept-only: the engine does not model it, and it reads the stated gas price where s.85 names the fiscal gas price",
  ["Computed as a line on the gas field's ledger, and graded once the credit's inputs are stated",
   "Only for fields whose first gas arrives before 1 January 2029 is it computed, on a stated date",
   "As part of the gas royalty rate, where it appears as the 2.5 percent rate for gas used in-country"],
- "The engine's list of what it does not model includes the non-associated gas credit, and its note says \"The realised oil and condensate prices stand in for the Commission's fiscal prices\". A concept-only provision is taught from its text and never graded on a number, and the 2.5 percent in-country rate is a royalty rule of para 10(6).")
+ "The engine's list of what it does not model includes the non-associated gas credit, and its note says \"The realised oil and condensate prices stand in for the Commission's fiscal prices\", and it applies the gas price the case states. A concept-only provision is taught from its text and never graded on a number, and the 2.5 percent in-country rate is a royalty rule of para 10(6).")
 
 # 13
 x("What do PIA s.302(6) and NTA s.80(1) give investors in gas pipelines?",

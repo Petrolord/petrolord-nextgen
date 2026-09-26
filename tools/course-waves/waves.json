@@ -1617,7 +1617,7 @@
       "banks/ec7i_m06.py"
     ],
     "pins": {
-      "digest.txt": "0681ba53b65705fa7a6542719e586e99325b7b47b4c666b7350bba3a9b92a9d2",
+      "digest.txt": "c555b5622bf31142181e5e62120fa2a085bec8838c86c0aaaf639f499732edea",
       "fields.json": "db32035bdcb7552f40eaaad7aef4947da9e67a3ee127f2449ca6b7d7bf16f9c2"
     }
   }

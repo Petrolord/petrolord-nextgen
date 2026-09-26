@@ -46,6 +46,9 @@ const HERE = process.env.EC7_WAVE_DIR || '/root/cat-wip-pia';
 const { E, variant } = await import(`${HERE}/pia_engine.mjs`);
 const { CASES, READ, OPEN_READINGS } = await import(`${HERE}/pia_capstone.mjs`);
 const SLACK = process.argv.includes('--slack-tolerances') ? 1e15 : 1;
+const JSONOUT = process.argv.includes('--json');
+const say = JSONOUT ? () => {} : console.log;
+const VALUES = {};
 const fields = Object.fromEntries(
   JSON.parse(fs.readFileSync(`${HERE}/fields.json`, 'utf8')).map((f) => [f[1], [f[0], f[1], f[2], f[3] * SLACK]]));
 if (Object.keys(fields).length !== 18) { console.log('REFUSED: fields.json does not carry eighteen fields'); process.exit(2); }
@@ -93,8 +96,9 @@ for (const [key, [, , value, tol]] of Object.entries(fields)) {
   const [cn, get] = READ[key];
   const c = CASES[cn];
   const truth = get(truthRuns[cn]);
-  if (truth !== value) { console.log(`REFUSED: ${key} truth ${truth} is not fields.json ${value}`); process.exit(2); }
+  if (truth !== value) { say(`REFUSED: ${key} truth ${truth} is not fields.json ${value}`); process.exit(2); }
   const out = [];
+  VALUES[key] = { truth, wrong: {} };
   let moves = 0;
   let blind = 0;
   for (const w of WRONG[key] || []) {
@@ -104,6 +108,7 @@ for (const [key, [, , value, tol]] of Object.entries(fields)) {
       else if (w.kind === 'term') v = get(run(E, c, w.patch));
       else v = w.fn(truthRuns[cn], c);
     } catch (e) { out.push(`${w.name} REFUSED BY THE ENGINE (${e.message.slice(0, 60)})`); continue; }
+    VALUES[key].wrong[w.name] = v;
     const d = Math.abs(v - truth) / tol;
     if (d > 1) { moves += 1; moved.add(w.name); } else blind += 1;
     if (d < closest.d) closest = { d, key, w: w.name };
@@ -117,17 +122,18 @@ for (const [key, [, , value, tol]] of Object.entries(fields)) {
   }
   const isWeak = moves < 3 || blind > 0;
   if (isWeak) weak += 1;
-  console.log(`${isWeak ? 'WEAK ' : 'ok   '} ${key}  (${moves} of ${(WRONG[key] || []).length} wrong methods move it)`);
-  console.log(`        wrong, in tolerances: ${out.join('; ')}`);
-  console.log(`        open readings: ${readings.join('; ')}`);
+  say(`${isWeak ? 'WEAK ' : 'ok   '} ${key}  (${moves} of ${(WRONG[key] || []).length} wrong methods move it)`);
+  say(`        wrong, in tolerances: ${out.join('; ')}`);
+  say(`        open readings: ${readings.join('; ')}`);
 }
 const missing = REQUIRED.filter((n) => !moved.has(n));
-console.log(`LEAD'S NAMED WRONG METHODS: ${REQUIRED.length - missing.length} of ${REQUIRED.length} aimed at a field and moving it${missing.length ? `; MISSING ${missing.join(', ')}` : ''}`);
-console.log(`OPEN READINGS: ${dependent} field-reading pair(s) move a graded value`);
-console.log(`CLOSEST MISS ACROSS THE WHOLE SWEEP: ${closest.key} via ${closest.w}, ${closest.d.toExponential(3)} tolerances away`);
+say(`LEAD'S NAMED WRONG METHODS: ${REQUIRED.length - missing.length} of ${REQUIRED.length} aimed at a field and moving it${missing.length ? `; MISSING ${missing.join(', ')}` : ''}`);
+say(`OPEN READINGS: ${dependent} field-reading pair(s) move a graded value`);
+say(`CLOSEST MISS ACROSS THE WHOLE SWEEP: ${closest.key} via ${closest.w}, ${closest.d.toExponential(3)} tolerances away`);
 if (SLACK !== 1) {
-  console.log(`NEGATIVE CONTROL: tolerances multiplied by ${SLACK}. Expected 18 WEAK routes, got ${weak}.`);
+  say(`NEGATIVE CONTROL: tolerances multiplied by ${SLACK}. Expected 18 WEAK routes, got ${weak}.`);
   process.exit(weak === 18 ? 1 : 2);
 }
-console.log(`WEAK ROUTES: ${weak}; READING-DEPENDENT: ${dependent}`);
+say(`WEAK ROUTES: ${weak}; READING-DEPENDENT: ${dependent}`);
+if (JSONOUT) process.stdout.write(`${JSON.stringify(VALUES)}\n`);
 process.exit(weak || dependent || missing.length ? 1 : 0);

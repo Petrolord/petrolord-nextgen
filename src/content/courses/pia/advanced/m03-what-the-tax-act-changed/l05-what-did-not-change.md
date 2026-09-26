@@ -28,7 +28,7 @@ The engine's royalty and royalty by price functions take no framework input, and
 | tertiary education tax | 26785663.028773 |
 | development levy | -35714217.371697 |
 
-The royalty line is flat. Every figure that does move is traced to a change the earlier lessons read: the fifth year of the capital allowance, the restriction, and the levy in place of the education tax.
+The royalty line is flat. Every figure that does move is traced to a change the earlier lessons read: the fifth year of the capital allowance and the levy in place of the education tax.
 
 ## A small check worth making
 

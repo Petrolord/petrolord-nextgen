@@ -508,7 +508,7 @@ w('Alpha sits between 5,000 and 10,000 bopd from 2026 to 2029, so each of those 
 w();
 w('THE TEXT BEHIND THIS SECTION, quoted verbatim with its citation (each dash the gazette prints shown as a colon):');
 w();
-cTable(['pia_royalty_condensate_ngl', 'pia_royalty_terrain_rates', 'pia_royalty_deep_offshore_tranche', 'pia_royalty_small_field_scope', 'pia_royalty_small_field_tranches', 'pia_royalty_small_field_above_10000', 'regs_sliding_scale_crude_plus_condensate', 'regs_daily_rate_basis', 'regs_deep_offshore_weighted', 'regs_onshore_shallow_up_to_5000', 'regs_onshore_shallow_5000_10000', 'regs_r13_2_b_less_than', 'regs_r13_2_c_greater_than', 'regs_onshore_above_10000', 'regs_shallow_above_10000', 'regs_frontier_flat', 'nta_royalty_rates_restated', 'nta_royalty_deep_offshore_tranche_restated', 'nta_royalty_small_field_scope_restated', 'nta_royalty_small_field_tranches_restated', 'nta_royalty_small_field_above_10000_restated'], 'computed');
+cTable(['pia_royalty_condensate_ngl', 'pia_royalty_terrain_rates', 'pia_royalty_deep_offshore_tranche', 'pia_royalty_small_field_scope', 'pia_royalty_small_field_tranches', 'pia_royalty_small_field_above_10000', 'regs_sliding_scale_crude_plus_condensate', 'regs_daily_rate_basis', 'regs_deep_offshore_weighted', 'regs_onshore_shallow_up_to_5000', 'regs_onshore_shallow_5000_10000', 'regs_r13_2_b_less_than', 'regs_r13_2_c_greater_than', 'regs_onshore_above_10000', 'regs_shallow_above_10000', 'regs_frontier_flat', 'nta_royalty_rates_restated', 'nta_royalty_deep_offshore_tranche_restated', 'nta_royalty_small_field_scope_restated', 'nta_royalty_small_field_tranches_restated', 'nta_royalty_small_field_above_10000_restated', 'pia_royalty_straddling', 'regs_straddling_onshore_shallow', 'regs_straddling_shallow_deep'], (id) => (/straddling/.test(id) ? 'concept-only (a field in two terrains is not modelled)' : 'computed'));
 
 /* ============================================================ SECTION 10 */
 
@@ -527,7 +527,8 @@ rowsTable('ekene_nag_gas_in_country_half');
 w();
 ledger(nag, ROY_COLS);
 w();
-table(['year', 'CPR cap', 'HCT chargeable profit', 'HCT', 'CIT assessable profit', 'CIT'], nag.cashFlowData.map((d) => [S(d.year), f6(d.cpr_cap), f6(d.hct_chargeable_profit), f6(d.hct_tax), f6(d.cit_assessable_profit), f6(d.cit_tax)]));
+table(['year', 'CPR cap', 'HCT chargeable profit', 'HCT', 'CIT assessable profit (before the capital allowance)', 'CIT allowance claimed', 'CIT chargeable profit', 'CIT'], nag.cashFlowData.map((d) => [S(d.year), f6(d.cpr_cap), f6(d.hct_chargeable_profit), f6(d.hct_tax), f6(d.cit_assessable_profit), f6(d.cit_allowance_claimed), f6(d.cit_chargeable_profit), f6(d.cit_tax)]));
+must('gas field: CIT is 30 percent of the assessable profit less the allowance claimed', nag.cashFlowData.every((d) => Math.abs(d.cit_tax - 0.3 * (d.cit_assessable_profit - d.cit_allowance_claimed)) <= 1e-6 && d.cit_chargeable_profit === d.cit_assessable_profit - d.cit_allowance_claimed), 'gascit');
 must('the gas field pays a gas royalty rate that prints as 3.750000 percent', nag.cashFlowData.every((d) => Math.abs(d.royalty_rate_gas - 0.0375) < 1e-15), nag.cashFlowData[0].royalty_rate_gas);
 must('the gas field pays no hydrocarbon tax and has a CPR cap of 0', nag.cashFlowData.every((d) => d.hct_tax === 0 && d.cpr_cap === 0), 'hct');
 must('the gas field pays companies income tax', nag.cashFlowData.some((d) => d.cit_tax > 0), 'cit');
@@ -596,7 +597,9 @@ cTable(['pia_price_royalty_levels', 'pia_price_royalty_example', 'pia_price_roya
 
 /* ============================================================ SECTION 12 */
 
-section('stack', 'The instruments stacked on one year, and which base each reads', ['Associate m05', 'Associate m06']);
+section('stack', 'The instruments stacked on one year, and which base each reads', ['Associate m05', 'Associate m06', 'Professional m03', 'Professional m05']);
+w('THE PRICE-ROYALTY BASE OF THIS SECTION. Every figure printed in this section that the royalty by price reaches (the royalty by price itself, the total royalty, every tax, levy, net cash flow, government cash flow and take) reads the royalty by price on the Petroleum Royalty Regulations 2022 base (2021), the engine default; the Act\'s 2020 base is the open question of ' + ref('price') + ' and is never graded.');
+w();
 w('THE ORDER THE ENGINE APPLIES THEM IN ONE YEAR. Royalty (production royalty on liquids and gas, and the royalty by price) comes off revenue first. HCDT and the NDDC levy are computed on their own bases. The hydrocarbon tax is charged on the crude oil and condensate profit after royalties, the costs the cost price ratio lets through, HCDT, NDDC, the capital allowance and the production allowance. Companies income tax is charged separately on the whole oil and gas profit and does not deduct the hydrocarbon tax. The tertiary education tax (a year under the Act alone) or the development levy (a year under the Nigeria Tax Act 2025) is charged on the companies income tax assessable profit.');
 w();
 table(['instrument', 'base it reads', 'citation', 'engine field'], [
@@ -705,6 +708,14 @@ rowsTable('ekene_cpr_binding_forfeiture');
 w();
 ledger(cpr, HCT_COLS);
 w();
+w('THE CAPITAL ALLOWANCE THE CAP LETS THROUGH. The row does not export it as a field of its own, so it is printed derived: the HCT assessable profit less the production allowance less the HCT chargeable profit, which is the capital allowance the cost price ratio let into the year after the carried pool and the year\'s operating costs were claimed first.');
+w();
+table(['year', 'capital allowance (the year\'s, at the share)', 'HCT capital allowance let through the cap (derived)', 'CPR carried out'], cpr.cashFlowData.map((d) => [S(d.year), f6(d.depreciation), f6(d.hct_assessable_profit - d.production_allowance - d.hct_chargeable_profit), f6(d.cpr_deferred_to_next)]));
+const letThrough = (d) => d.hct_assessable_profit - d.production_allowance - d.hct_chargeable_profit;
+must('CPR case: some allowance is let through in 2024 and none in 2025 and 2026', letThrough(row(cpr, 2024)) > 0 && [2025, 2026].every((y) => Math.abs(letThrough(row(cpr, y))) <= 1e-6), 'letthrough');
+w();
+w('In 2024 part of the capital allowance fits under the cap after the operating costs; in 2025 and 2026 the carried pool and the year\'s operating costs fill the cap, so no capital allowance is let through and the whole of it joins the carry (checked).');
+w();
 cpr.cashFlowData.forEach((d) => {
   must(`CPR ${d.year}: the cap is 65 percent of crude plus condensate revenue`, Math.abs(d.cpr_cap - 0.65 * d.gross_revenue) <= 1e-6, d.cpr_cap);
   must(`CPR ${d.year}: claimed is at most the cap`, d.cpr_costs_claimed <= d.cpr_cap + 1e-9, d.cpr_costs_claimed);
@@ -767,7 +778,7 @@ w('In a year under the Act alone the fifth year claims 19 percent and 1 percent 
 /* ============================================================ SECTION 16 */
 
 section('cit', 'Companies income tax beside the hydrocarbon tax, the two thirds restriction and losses', ['Professional m05']);
-w('THE BASE. Companies income tax (30 percent unless stated) is charged on oil and gas together: gross revenue less every royalty, opex in full, HCDT, the NDDC levy and any deductible decommissioning contribution, less its own capital allowance. The hydrocarbon tax is not deducted, and the cost price ratio does not apply.');
+w('THE BASE. Companies income tax (30 percent unless stated) is charged on oil and gas together: gross revenue less every royalty, opex in full, HCDT, the NDDC levy and any deductible decommissioning contribution, less its own capital allowance. The hydrocarbon tax is not deducted, and the cost price ratio does not apply. THE TWO PRINTED LINES: `cit_assessable_profit` is the profit BEFORE the capital allowance; the allowance claimed is printed as `cit_allowance_claimed`, and `cit_chargeable_profit` is the profit after it, on which the tax is charged.');
 w();
 w('THE TWO THIRDS RESTRICTION. In a year under the Act alone the capital allowance claimed against companies income tax is limited to two thirds of the assessable profit, and the excess is carried forward; a company in upstream or midstream gas operations is exempt (stated input `pia_cit_company_gas_operations`). In a year under the Nigeria Tax Act 2025 there is no restriction and a carried amount is claimed in full. The engine applies the same restriction to years before 1 May 2023 and says so in `kpis.pia_notes`.');
 w();
@@ -785,6 +796,18 @@ w();
 const cprBind = cpr.cashFlowData.filter((d) => d.fiscal_framework === 'pia_only');
 must('CPR case: the restriction binds in its two PIA years, claiming exactly two thirds', cprBind.length === 2 && cprBind.every((d) => Math.abs(d.cit_allowance_claimed - d.cit_assessable_profit * 2 / 3) <= 1e-6 && d.cit_allowance_carryforward > 0), 'bind');
 w(`Where it binds: on the CPR case of ${ref('hctbase')} (2024 and 2025 are years under the Act alone) the claim is two thirds of the assessable profit, ${f6(cprBind[0].cit_allowance_claimed)} in 2024 and ${f6(cprBind[1].cit_allowance_claimed)} in 2025, and the rest is carried; 2026 is an NTA year and claims the carried amount in full (the CIT table of ${ref('hctbase')}).`);
+w();
+const SHIFT = -2;
+const cprShift = (() => { const k = GC.ekene_cpr_binding_forfeiture; const mv = (rs) => rs.map((x) => ({ ...x, year: x.year + SHIFT }));
+  return ok('the CPR case moved two years earlier (stated)', () => E.computeCashFlow({ cfg: { ...clone(k.cfg), base_year: k.cfg.base_year + SHIFT }, prodRows: mv(k.prodRows), capexRows: mv(k.capexRows), opexRows: mv(k.opexRows) })); })();
+w(`A YEAR BEFORE 2023 UNDER THE RESTRICTION. The same CPR case with every row moved two years earlier (stated: base year ${GC.ekene_cpr_binding_forfeiture.cfg.base_year + SHIFT}, the rows otherwise as the golden input), so its first year falls before the Finance Act 2023:`);
+w();
+table(['year', 'framework', 'restricted (engine)', 'CIT assessable profit (before the capital allowance)', 'capital allowance available', 'CIT allowance claimed', 'CIT allowance carried', 'TET rate percent'], cprShift.cashFlowData.map((d) => [S(d.year), d.fiscal_framework, S(d.cit_allowance_restricted), f6(d.cit_assessable_profit), f6(d.depreciation), f6(d.cit_allowance_claimed), f6(d.cit_allowance_carryforward), f6(d.tet_rate_pct)]));
+const y22 = row(cprShift, 2022);
+must('2022: restricted, the claim exactly two thirds of the assessable profit, TET 2.5', y22.cit_allowance_restricted === true && Math.abs(y22.cit_allowance_claimed - y22.cit_assessable_profit * 2 / 3) <= 1e-6 && y22.tet_rate_pct === 2.5 && y22.cit_allowance_carryforward > 0, y22.cit_allowance_claimed);
+must('the moved case carries the note that the pre-May-2023 wording was not read', cprShift.kpis.pia_notes.includes(NOTES.citRestrictionPre2026), 'note');
+w();
+w('In 2022 the claim is two thirds of the assessable profit and the rest is carried (checked), and the tertiary education tax is 2.5 percent. The engine applies to 2022 the restriction as Finance Act 2023 worded it, and its note says the earlier wording was not read.');
 w();
 w('LOSSES BY CLASS. A loss (or a chargeable profit below zero) is carried to the next year and used there, separately for the hydrocarbon tax and for companies income tax. On the CPR case:');
 w();
@@ -905,6 +928,8 @@ w('THE DECOMMISSIONING FUND. With `abandonment_funding_mode` "sinking_fund" the 
 /* ============================================================ SECTION 20 */
 
 section('take', 'Government cash flow, government take and the working interest', ['Associate m05', 'Expert m05']);
+w('THE PRICE-ROYALTY BASE OF THIS SECTION. Every figure printed in this section that the royalty by price reaches (the royalty by price itself, the total royalty, every tax, levy, net cash flow, government cash flow and take) reads the royalty by price on the Petroleum Royalty Regulations 2022 base (2021), the engine default; the Act\'s 2020 base is the open question of ' + ref('price') + ' and is never graded.');
+w();
 const GT = CONV.FISCAL_METRICS.governmentTake;
 w(`THE WORDING, from engines/economics/fiscalConventions.js (verbatim, shared with the fiscal course): "${GT.title}" is "${GT.definition}" Its formula: ${GT.formula}. The second metric, "${CONV.FISCAL_METRICS.governmentShareOfNetRevenue.title}", is "${CONV.FISCAL_METRICS.governmentShareOfNetRevenue.definition}" Government cash flow is "${CONV.GOVERNMENT_CASH_FLOW.definition}"`);
 must('the conventions carry the two metrics', GT && CONV.FISCAL_METRICS.governmentShareOfNetRevenue && CONV.GOVERNMENT_CASH_FLOW, 'conv');
@@ -954,7 +979,29 @@ must('onshore moves royalties only through the tranche above 10,000 bopd: Alpha 
 must('a prospecting licence moves the hydrocarbon tax and not royalties', dT({ pia_license_type: 'PPL' }).royalty === baseT.royalty && dT({ pia_license_type: 'PPL' }).hct !== baseT.hct, 'ppl');
 must('a new lease with a stated 30 still lowers the hydrocarbon tax (the allowance)', dT({ pia_lease_status: 'new', pia_new_pml_hct_rate_pct: 30 }).hct < baseT.hct, 'new30');
 must('forcing the Act alone swaps the levy for TET', dT({ pia_under_nta_2025_override: 'force_pia' }).levy === 0 && dT({ pia_under_nta_2025_override: 'force_pia' }).tet > 0, 'force');
-w('Read the rows: moving Alpha onshore changes no royalty, because every Alpha year is below 10,000 bopd where onshore and shallow water pay the same rate; a prospecting licence moves only the hydrocarbon tax rate; a new lease moves the hydrocarbon tax twice, through the larger new-lease production allowance and through the rate it states (the two stated rates are both shown and neither is graded); the price moves the royalty by price and everything after it, and the base year moves it again; forcing the Act alone swaps the development levy for the tertiary education tax and changes the capital allowance and the restriction.');
+const ppl = runG('ekene_alpha_shallow_converted_nta', { pia_license_type: 'PPL' });
+w('EKENE ALPHA AS A PROSPECTING LICENCE, year by year (the stated change of the second row):');
+w();
+table(['year', 'HCT assessable profit (PML)', 'HCT assessable profit (PPL)', 'HCT rate (PPL)', 'HCT (PML)', 'HCT (PPL)'], al.cashFlowData.map((d, i) => { const e = ppl.cashFlowData[i]; return [S(d.year), f6(d.hct_assessable_profit), f6(e.hct_assessable_profit), f6(e.hct_rate), f6(d.hct_tax), f6(e.hct_tax)]; }));
+must('PPL: the base is unchanged and the hydrocarbon tax is exactly half in every year', al.cashFlowData.every((d, i) => d.hct_assessable_profit === ppl.cashFlowData[i].hct_assessable_profit && d.hct_chargeable_profit === ppl.cashFlowData[i].hct_chargeable_profit && ppl.cashFlowData[i].hct_tax * 2 === d.hct_tax), 'half');
+w();
+w('The base does not move and the rate halves, so the prospecting licence\'s hydrocarbon tax is exactly half the lease\'s in every year (checked as an exact equality).');
+w();
+const TOLREL = 1e-12;
+const fp2 = runG('ekene_alpha_shallow_converted_nta', { pia_under_nta_2025_override: 'force_pia' });
+const fpg = runG('ekene_alpha_shallow_converted_nta', { pia_under_nta_2025_override: 'force_pia', pia_cit_company_gas_operations: true });
+w('EVERY YEAR FORCED TO THE ACT ALONE, year by year (the stated change of the seventh row):');
+w();
+table(['year', 'capital allowance (base)', 'capital allowance (forced)', 'restricted (forced)', 'CIT allowance carried (forced)', 'CIT assessable profit (both)', 'development levy (base)', 'TET (forced)'], al.cashFlowData.map((d, i) => { const e = fp2.cashFlowData[i]; return [S(d.year), f6(d.depreciation), f6(e.depreciation), S(e.cit_allowance_restricted), f6(e.cit_allowance_carryforward), f6(e.cit_assessable_profit), f6(d.dev_levy_tax), f6(e.tet_tax)]; }));
+must('forced: the restriction applies and never binds (nothing carried, the whole allowance claimed every year)', fp2.cashFlowData.every((e) => e.cit_allowance_restricted === true && e.cit_allowance_carryforward === 0 && e.cit_allowance_claimed === e.depreciation), 'nobind');
+must('forced: the gas-operations exemption changes no total (the restriction moves nothing here)', fpg.kpis.total_cit === fp2.kpis.total_cit && fpg.kpis.total_hct === fp2.kpis.total_hct, 'exempt');
+must('forced: the capital allowance differs only in 2030 and 2031, by 1200000 and 300000', al.cashFlowData.every((d, i) => { const diff = d.depreciation - fp2.cashFlowData[i].depreciation; return d.year === 2030 ? diff === 1200000 : d.year === 2031 ? diff === 300000 : diff === 0; }), 'ca');
+must('forced: HCT and CIT differ from the base only in 2030 and 2031', al.cashFlowData.every((d, i) => { const e = fp2.cashFlowData[i]; const same = e.hct_tax === d.hct_tax && e.cit_tax === d.cit_tax; return (d.year === 2030 || d.year === 2031) ? !same : same; }), 'years');
+must('forced: the CIT assessable profit is identical in every year and TET is three quarters of the base levy', al.cashFlowData.every((d, i) => { const e = fp2.cashFlowData[i]; return e.cit_assessable_profit === d.cit_assessable_profit && Math.abs(e.tet_tax - 0.75 * d.dev_levy_tax) <= TOLREL * Math.max(1, d.dev_levy_tax); }), 'tet');
+w();
+w(`Read the table: the restriction applies in every forced year and never binds, since nothing is carried and the whole allowance is claimed every year (checked; the gas-operations exemption changes no total). The capital allowance differs only in the fifth year of each spend: ${f6(row(al, 2030).depreciation - row(fp2, 2030).depreciation)} in 2030 and ${f6(row(al, 2031).depreciation - row(fp2, 2031).depreciation)} in 2031, the 1 percent the Act alone retains (checked). The hydrocarbon tax and companies income tax move only in 2030 and 2031, the two years whose allowance differs (checked). The tertiary education tax and the levy are charged on the same CIT assessable profit (identical in every year, checked), at 3 and 4 percent, so each forced year\'s education tax is three quarters of the base year\'s levy (checked to a relative ${TOLREL}).`);
+w();
+w('Read the rows: moving Alpha onshore changes no royalty, because every Alpha year is below 10,000 bopd where onshore and shallow water pay the same rate; a prospecting licence moves only the hydrocarbon tax, to exactly half; a new lease moves the hydrocarbon tax twice, through the larger new-lease production allowance and through the rate it states (the two stated rates are both shown and neither is graded); the price moves the royalty by price and everything after it, and the base year moves it again; forcing the Act alone swaps the development levy for the tertiary education tax and moves the two taxes only through the 1 percent of each spend that the fifth year retains.');
 
 /* ============================================================ SECTION 22 */
 

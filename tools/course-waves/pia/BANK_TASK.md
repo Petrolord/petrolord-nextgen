@@ -20,8 +20,9 @@ replace the stub's question list and keep its emit line.
 A figure of sixteen or more significant digits (a money figure of a billion or
 more at six decimals) is written comma-grouped, as the digest prints it. A
 quoted text is quoted from the digest section your tier owns: the royalty
-texts and the texts behind the stack are Associate material, and the rest of
-the quoted texts are Professional and Expert material.
+texts are Associate material, the texts behind the stack are Associate material
+that Professional m03 and m05 may also quote, and the rest of the quoted texts
+are Professional and Expert material.
 
 ## THE ANSWER-LENGTH DEFECT
 
