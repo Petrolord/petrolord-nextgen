@@ -1,38 +1,33 @@
 # CIT and the two-thirds restriction
 
-Companies income tax is the second profit tax on the same cash, on a base that includes gas and excludes the production allowance, with a capital allowance that is capped at two thirds of the profit and carried when the cap refuses it.
+Companies income tax is the second profit tax on the same cash, on a base that includes gas, with a capital allowance the law caps at two thirds of the profit in PIA years and carries forward. PIA figures here use the Regulations (2021) price-royalty base, the engine default.
 
 {{panel:ec-fiscal-explorer}}
 
 ## The base
 
-cit_assessable_profit is gross revenue less royalty, HCDT, NDDC and opex. On the worked example it is 1039994854.24, 15000000.00 below the HCT base of 1054994854.24 because NDDC is deductible here and not there, and 15000000.00 is the fixed NDDC. Then the capital allowance comes off: 300000000.00 of capex over 5 years is 60000000.00 a year, so cit_chargeable_profit is 979994854.24, and CIT at pia_cit_rate_pct 30 is 293998456.27. The production allowance of 45625000.00 never enters; it is an HCT deduction only. AKATA in 2029 runs the same way: cit_assessable_profit 134762247.64 less the 42000000.00 fifth of its 210000000.00 capex gives cit_chargeable_profit 92762247.64, and CIT 27828674.29.
+cit_assessable_profit is gross revenue less royalty, HCDT, NDDC and opex. On the worked example it is 1058241648.19, equal to the HCT base because this oil-only field deducts the NDDC in both. Then the capital allowance comes off: 300000000.00 of capex at 20 percent in its first year is 60000000.00, so cit_chargeable_profit is 998241648.19, and CIT at pia_cit_rate_pct 30 is 299472494.46. The production allowance and the cost price ratio cap never reach it. AKATA in 2029 runs the same way: cit_assessable_profit 141335497.73 less the 42000000.00 fifth of its 210000000.00 capex gives cit_chargeable_profit 99335497.73, and CIT 29800649.32.
 
-## Recovery years
+## Five years, fixed by the texts
 
-| pia_capex_recovery_years | cpr_costs_claimed | cit_chargeable_profit | cit_tax | NPV |
-| --- | --- | --- | --- | --- |
-| 1 | 482500000.00 | 739994854.24 | 221998456.27 | 279185570.34 |
-| 2 | 332500000.00 | 889994854.24 | 266998456.27 | 189185570.34 |
-| 5 | 242500000.00 | 979994854.24 | 293998456.27 | 135185570.34 |
-| 10 | 212500000.00 | 1009994854.24 | 302998456.27 | 117185570.34 |
-
-On a one-year field the recovery years are the whole answer: at 1 the entire 300000000.00 is claimed and NPV more than doubles; at 10 a tenth is claimed and NPV falls to 117185570.34. On a field that stops before the years run out, the rest is never claimed.
+The capital allowance runs over five years: 20, 20, 20, 20 and 19 percent of the cost in PIA years (PIA Fifth Schedule para 17(1)), and 20 percent a year in NTA years (NTA First Schedule Part II para 14(1)). Left unset or at 5, pia_capex_recovery_years runs the worked example to NPV 141236909.83; at 1, 2 or 10 the engine refuses the run and names both texts. A field that stops early never claims the rest.
 
 ## The restriction
 
-cpr_forfeiture has cit_assessable_profit 7987389.27, and its recoverable costs are 40000000.00 of opex plus the year's fifth of 100000000.00 of capex. The full allowance would take the base below zero. The engine restricts it to two thirds of the assessable profit, so cit_chargeable_profit is 2662463.09, one third of 7987389.27, and cit_tax is 798738.93. HCT on the same row is 2546216.78 on 8487389.27, unrestricted.
+For a crude oil company the Companies Income Tax Act limits the capital allowance to two thirds of the assessable profit, with the excess carried forward (CITA Second Schedule para 24(7), as substituted by Finance Act 2023 s.9(b), effective 1 May 2023). The Nigeria Tax Act has no such limit, so it acts only in years before 2026, and a company in upstream or midstream gas operations is exempt (set pia_cit_company_gas_operations true).
 
-What the restriction refuses is carried. Since engines 3.10.0 the disallowed allowance goes into a carryforward and is claimed in the next year with room for it, which is what the Act does. The published pair prices the rule: pia_cit_allowance_restricted_carry reports NPV -113389070.73, and pia_cit_allowance_no_carry, the same field with the carry switched off, reports -115209545.41. Switching it off is how the engine behaved before that release. On cpr_forfeiture nothing moves either way, because one year has no next year to carry into, and cpr_deferred_to_next reads 8000000.00 for a different reason, the cost price ratio cap.
+cpr_forfeiture shows it. Its cit_assessable_profit is 13987213.60, and the year's allowance is 20000000.00 on 100000000.00 of capex. The law cuts the claim to two thirds of the profit: cit_allowance_claimed 9324809.07, cit_chargeable_profit 4662404.53, one third of 13987213.60, and cit_tax 1398721.36. The refused 10675190.93 sits in cit_allowance_carryforward. The HCT on the same row has no such limit and carries its own loss of 512786.40.
+
+The published pair prices the carry. pia_cit_allowance_restricted_carry reports NPV -102455984.11, and pia_cit_allowance_no_carry, the same field with cit_restricted_allowance_carryforward false, reports -116276490.72. The carry lands in 2026, an NTA year, and claims 110675190.93 there against 60000000.00 without it.
 
 ## The mistake
 
-Reading the two thirds as a floor on tax of one third of profit in every year. It is a cap on the allowance, and it only acts in a year where the allowance is large against a thin profit; the worked example's 60000000.00 against 1039994854.24 is nowhere near it. The other is reading the old behaviour forward and writing the disallowed amount off, which understates every later year's allowance.
+Reading the two thirds as a floor on tax of one third of profit in every year. It is a cap on the allowance, and it only acts in a pre-2026 year where the allowance is large against a thin profit; the worked example's 60000000.00 against 1058241648.19 is nowhere near it. The other is writing the refused amount off.
 
 ## What it refuses
 
-CIT has no production allowance, no terrain and no reading; its rate is 30 in every published case. And the carryforward needs a later year to land in, so a company whose ledger ends in the year the restriction binds loses the allowance anyway.
+CIT has no terrain and no reading; its rate is 30 in every published case. The carryforward needs a later year to land in, so a ledger that ends in the year the restriction binds loses it.
 
 ## Exercise
 
-Write the CIT on cpr_forfeiture from its assessable profit and say why the chargeable profit is exactly one third of it. Then say why the disallowed allowance reappears nowhere on that ledger although the engine now carries it.
+Write the CIT on cpr_forfeiture from its assessable profit and say why the chargeable profit is exactly one third of it. Then say where the refused allowance sits on that ledger and why it is never claimed.

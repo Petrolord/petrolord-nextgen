@@ -6,7 +6,7 @@ Cost recovery looks like three familiar things and is none of them. Each mistake
 
 ## It is not a tax deduction
 
-The tax base in this model is the contractor's profit share, and nothing else. Cost recovered is added to the contractor's cash separately and never enters the base. The engine's own header records that an earlier version subtracted half of opex from the base, and that the halving was invented and removed.
+The tax base in this model is the contractor's profit share, and nothing else. Cost recovered is added to the contractor's cash separately and never enters the base. No share of opex is subtracted from the base either.
 
 The consequence is measurable. On the Suite test project, tightening the limit raises the tax bill:
 

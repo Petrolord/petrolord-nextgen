@@ -31,7 +31,7 @@
 import golden from '@petrolord/engines/test-data/economics/goldens/fiscal_cases.json';
 import {
   calculateNPV, calculateIRR, calculateIRRResult, calculateCashFlowForRegime, deriveInsights, runFiscalComparison,
-  GOVERNMENT_SHARE_STATES, commonShareWindow,
+  GOVERNMENT_SHARE_STATES, commonShareWindow, CAPEX_SWEEP_MULTIPLIERS,
 } from '@petrolord/engines/engines/economics/fiscalRegime.js';
 import { fiscalTemplates } from '@petrolord/engines/engines/economics/fiscalTemplates.js';
 
@@ -56,7 +56,19 @@ export const GOLDEN_DESCRIPTION = golden.description;
  */
 const strip = (c) => { const { expected, ...rest } = c; return rest; };
 
-const CASE = Object.fromEntries(golden.cashflow.map((c) => [c.id, strip(c)]));
+// COURSE LABELS IN THREE GOLDEN NOTES, exactly as the digest prints them. The
+// golden's notes call the tiered teaching regime's tranches "the Nigeria PIA
+// tranches" and the Designer's sample PSC regime's royalty "the Designer's
+// default PIA sliding royalty". Neither regime is the Act, so the notes are
+// relabelled here and every number in them is untouched.
+export const NOTE_LABELS = [
+  ['The Nigeria PIA tranches', "The tiered teaching regime's tranches"],
+  ['the Nigeria PIA tranches', "the tiered teaching regime's tranches"],
+  ["the Designer's default PIA sliding royalty", "the Designer's sample PSC regime's sliding royalty"],
+];
+const relabel = (note) => NOTE_LABELS.reduce((t, [a, b]) => t.split(a).join(b), note);
+const CASHFLOW = golden.cashflow.map((c) => ({ ...c, note: relabel(c.note) }));
+const CASE = Object.fromEntries(CASHFLOW.map((c) => [c.id, strip(c)]));
 const CMP = Object.fromEntries(golden.comparisons.map((c) => [c.id, strip(c)]));
 const INS = Object.fromEntries(golden.insights.map((c) => [c.id, strip(c)]));
 const IRRC = Object.fromEntries(golden.irr.map((c) => [c.id, c]));
@@ -137,7 +149,13 @@ export const LEDGER_COLUMNS = [
 export const projectLine = (pr) => `oil ${pr.production.oil.initial} bbl/d declining ${pr.production.oil.decline} percent a year, gas ${pr.production.gas.initial} Mscf/d declining ${pr.production.gas.decline} percent, NGL ${pr.production.ngl.initial} bbl/d declining ${pr.production.ngl.decline} percent; capex drilling ${pr.costs.capex.drilling}, facilities ${pr.costs.capex.facilities}, subsea ${pr.costs.capex.subsea} $MM; opex fixed ${pr.costs.opex.fixed} $MM a year and variable ${pr.costs.opex.variable} USD per boe; discount rate ${pr.discountRate} percent; price deck ${pr.prices.map((q) => `year ${q.year}: oil ${q.oil}, gas ${q.gas}, NGL ${q.ngl}`).join('; ')}`;
 
 /** One line of prose for a regime, exactly as the digest words it. */
-export const regimeLine = (g) => `royalty ${g.royalty.type === 'flat' ? `flat ${g.royalty.rate} percent` : `sliding on price, tiers ${g.royalty.tiers.map((t) => `${t.threshold} USD/bbl -> ${t.rate} percent`).join(', ')}`}; cost recovery limit ${g.costRecoveryLimit} percent; profit split ${g.profitSplit.type === 'flat' ? `flat ${g.profitSplit.split} percent to the contractor` : `tiered on the R factor, ${g.profitSplit.tiers.map((t) => `R ${t.threshold} -> ${t.split} percent`).join(', ')}`}; CIT ${g.tax.cit} percent, RRT ${g.tax.rrt} percent, minimum tax ${g.tax.minTax} percent${g.tax.rrtUpliftPct === undefined ? '' : `, RRT uplift ${g.tax.rrtUpliftPct} percent`}`;
+const royaltyWords = (y) => (y.type === 'flat' ? `flat ${y.rate} percent`
+  : y.type === 'pia_2021' ? `PIA 2021 royalty (type pia_2021): production royalty by terrain ${y.terrain} and daily rate, royalty by price on the ${y.priceRoyaltyBase ?? 'regulations_2021'} benchmarks with project year 1 in calendar ${y.firstCalendarYear}, gas and NGL at the gas rate with ${y.gasInCountrySharePct ?? 0} percent used in-country`
+    : `sliding on price, tiers ${y.tiers.map((t) => `${t.threshold} USD/bbl -> ${t.rate} percent`).join(', ')}`);
+const splitWords = (p) => (p.type === 'flat' ? `flat ${p.split} percent to the contractor`
+  : p.type === 'pia_cumulative_production' ? `government minimum profit oil by cumulative crude oil at the start of the year (type pia_cumulative_production), ${p.tiers.map((t, i) => `${t.upToMMbbl === null ? `above ${p.tiers[i - 1].upToMMbbl}` : `to ${t.upToMMbbl}`} million bbl -> government ${t.governmentPct} percent`).join(', ')}`
+    : `tiered on the R factor, ${p.tiers.map((t) => `R ${t.threshold} -> ${t.split} percent`).join(', ')}`);
+export const regimeLine = (g) => `royalty ${royaltyWords(g.royalty)}; cost recovery limit ${g.costRecoveryLimit} percent of ${g.costRecoveryBase === 'liquids_gross' ? 'the gross value of crude oil and NGL (costRecoveryBase liquids_gross)' : 'revenue after royalty'}; profit split ${splitWords(g.profitSplit)}; CIT ${g.tax.cit} percent, RRT ${g.tax.rrt} percent, minimum tax ${g.tax.minTax} percent${g.tax.rrtUpliftPct === undefined ? '' : `, RRT uplift ${g.tax.rrtUpliftPct} percent`}`;
 
 // ---------------------------------------------------------------------------
 // SECTION 2. The three projects, and the six regimes.
@@ -153,8 +171,8 @@ export const TEST_PROJECT = clone(goldenCase('template_nigeria___pia__2021_test_
 
 /**
  * THE TEACHING FIELD, ODIDI. Designed for this course. It is not a golden case
- * and it is not graded anywhere. Its deck deliberately crosses the PIA royalty
- * threshold between year 5 and year 6, which is the one thing no published
+ * and it is not graded anywhere. Its deck deliberately crosses the tiered
+ * teaching regime's 50 USD/bbl royalty threshold between year 5 and year 6, which is the one thing no published
  * case does on a template.
  */
 export const ODIDI = {
@@ -214,6 +232,24 @@ const GENERIC = () => regime('generic_royalty_tax');
 const ANGOLA = () => regime('angola___deepwater_psc');
 const BRAZIL = () => regime('brazil___concession');
 
+/**
+ * THE TIERED TEACHING REGIME, value for value the digest's. A regime of this
+ * course carrying no country's values: a two-tier sliding royalty (7.5 percent
+ * from 0, 10 percent from 50 USD/bbl), cost recovery to 80 percent of revenue
+ * after royalty, and three R-factor tranches (60 percent from R 1.0, 40 from
+ * 1.6, 30 from 2.5), CIT 30. The sliding royalty and the R-factor split are
+ * taught on it, because none of the six templates carries either with a step
+ * inside the teaching field's life.
+ */
+export const TIERED_REGIME = Object.freeze({
+  id: 'tiered_teaching', name: 'Tiered teaching regime',
+  royalty: { type: 'sliding_price', tiers: [{ threshold: 0, rate: 7.5 }, { threshold: 50, rate: 10 }] },
+  tax: { cit: 30, rrt: 0, minTax: 0 },
+  costRecoveryLimit: 80,
+  profitSplit: { type: 'tiered_r_factor', tiers: [{ threshold: 1.0, split: 60 }, { threshold: 1.6, split: 40 }, { threshold: 2.5, split: 30 }] },
+});
+const TIERED = () => clone(TIERED_REGIME);
+
 // ---------------------------------------------------------------------------
 // SECTION 7. The six templates as data.
 // ---------------------------------------------------------------------------
@@ -233,6 +269,13 @@ export const templates = () => fiscalTemplates.map((t) => {
     royalty: g.royalty,
     royaltyType: g.royalty.type,
     costRecoveryLimit: g.costRecoveryLimit,
+    costRecoveryBase: g.costRecoveryBase ?? 'revenue_after_royalty',
+    // The three instruments in words, from the same helpers the digest lines use,
+    // so a template whose royalty or split has no price or R-factor tiers
+    // (the re-based Nigeria - PIA (2021) template) reads correctly.
+    royaltyText: royaltyWords(g.royalty),
+    costLimitText: `${g.costRecoveryLimit} percent of ${g.costRecoveryBase === 'liquids_gross' ? 'the gross value of crude oil and NGL' : 'revenue after royalty'}`,
+    splitText: splitWords(g.profitSplit),
     profitSplit: g.profitSplit,
     profitSplitType: g.profitSplit.type,
     tax: g.tax,
@@ -449,7 +492,7 @@ export const ledgerIdentity = () => {
   fiscalTemplates.forEach((t) => PROJECT_KEYS.forEach((key) => {
     templateRuns.push({ label: t.name, rows: cf({ id: slug(t.name), name: t.name, ...clone(t.regime) }, project(key)) });
   }));
-  const publishedRuns = golden.cashflow.map((c) => ({ label: c.id, rows: runCase(strip(c)) }));
+  const publishedRuns = CASHFLOW.map((c) => ({ label: c.id, rows: runCase(strip(c)) }));
   return { cases, templates: worstOf(templateRuns), published: worstOf(publishedRuns) };
 };
 
@@ -499,7 +542,7 @@ export const STALE_NOTES = {
     'HISTORY, AND THE NOTE IS CORRECT NOW. The retired note said the R factor peaks "just above 2.5". It peaks at 2.972625 in year 11, crossing 2.5 upward in year 5 at 2.501684. The fall back through 2.5 in year 23 and the step from 30 back up to 40 were always as described.',
 };
 
-export const publishedCaseLines = () => golden.cashflow.map((c) => {
+export const publishedCaseLines = () => CASHFLOW.map((c) => {
   const rows = runCase(c);
   const s = totals(rows);
   return {
@@ -531,13 +574,13 @@ export const publishedCaseLines = () => golden.cashflow.map((c) => {
 export const ROYALTY_MULTIPLIERS = [0.5, 0.6, 0.7, 0.71, 0.72, 0.8, 1.0, 1.2];
 
 /**
- * The PIA royalty swept across the price multiplier on the DEFAULT PROJECT,
+ * The tiered teaching regime's royalty swept across the price multiplier on the DEFAULT PROJECT,
  * whose year 1 deck price is 70 USD per bbl. The applied price column is
  * derived, 70 times the multiplier; the implied rate column is derived, the
  * royalty the engine returned over the gross revenue it returned.
  */
 export const royaltyMultiplierSweep = () => ROYALTY_MULTIPLIERS.map((multiplier) => {
-  const rows = cf(PIA(), DEFAULT_PROJECT, 1, multiplier);
+  const rows = cf(TIERED(), DEFAULT_PROJECT, 1, multiplier);
   return {
     multiplier,
     appliedYear1PriceDerived: 70 * multiplier,
@@ -560,7 +603,7 @@ export const ROYALTY_THRESHOLD_PRICES = [49.99, 50, 50.01];
 export const royaltyThresholdProbe = () => ROYALTY_THRESHOLD_PRICES.map((price) => {
   const pr = clone(DEFAULT_PROJECT);
   pr.prices = [{ year: 1, oil: price, gas: DEFAULT_PROJECT.prices[0].gas, ngl: DEFAULT_PROJECT.prices[0].ngl }];
-  const rows = cf(PIA(), pr);
+  const rows = cf(TIERED(), pr);
   return {
     deckOilPrice: price,
     grossRevenue: rows[0].grossRevenue,
@@ -579,7 +622,7 @@ export const ROYALTY_ROUNDING_MULTIPLIER = 0.714285714285714;
 
 export const royaltyThresholdRounding = () => {
   const multiplier = ROYALTY_ROUNDING_MULTIPLIER;
-  const rows = cf(PIA(), DEFAULT_PROJECT, 1, multiplier);
+  const rows = cf(TIERED(), DEFAULT_PROJECT, 1, multiplier);
   return {
     multiplier,
     appliedYear1PriceDerived: 70 * multiplier,
@@ -591,7 +634,7 @@ export const royaltyThresholdRounding = () => {
 
 /** The same instrument along ODIDI's deck rather than along a multiplier. */
 export const odidiRoyaltyByYear = () => {
-  const rows = cf(PIA(), ODIDI);
+  const rows = cf(TIERED(), ODIDI);
   return rows.slice(0, 8).map((x) => ({
     year: x.year,
     grossRevenue: x.grossRevenue,
@@ -599,6 +642,20 @@ export const odidiRoyaltyByYear = () => {
     impliedRateDerived: x.royalty / x.grossRevenue,
   }));
 };
+
+/**
+ * The Nigeria - PIA (2021) template's royalty (type pia_2021) on ODIDI, the
+ * first fourteen years: production royalty at the deep offshore rate for the
+ * year's daily oil rate, royalty by price once the oil price passes the year's
+ * low benchmark (Regulations 2021 base, the engine default), and the gas rate on
+ * gas and NGL. The implied rate is derived, royalty over gross revenue.
+ */
+export const odidiPiaRoyaltyByYear = () => cf(PIA(), ODIDI).slice(0, 14).map((x) => ({
+  year: x.year,
+  grossRevenue: x.grossRevenue,
+  royalty: x.royalty,
+  impliedRateDerived: x.royalty / x.grossRevenue,
+}));
 
 export const ROYALTY_CASE_IDS = ['sliding_royalty_price_deck_crossing', 'price_below_every_threshold'];
 
@@ -671,11 +728,11 @@ export const costRecoveryCases = () => COST_RECOVERY_CASE_IDS.map((id) => {
 // ---------------------------------------------------------------------------
 
 export const R_FACTOR_CASE_IDS = [
-  'pia_default_project', 'rfactor_tranche_crossing', 'rfactor_falls_back', 'harsh_split_40_royalty_20',
+  'tiered_default_project', 'rfactor_tranche_crossing', 'rfactor_falls_back', 'harsh_split_40_royalty_20',
 ];
 
 export const R_FACTOR_CASE_LABELS = {
-  pia_default_project: 'Nigeria - PIA (2021) on the DEFAULT PROJECT',
+  tiered_default_project: 'The tiered teaching regime on the DEFAULT PROJECT',
   rfactor_tranche_crossing: 'rfactor_tranche_crossing, the published crossing case',
   rfactor_falls_back: 'rfactor_falls_back, the published falling-back case',
   harsh_split_40_royalty_20: 'harsh_split_40_royalty_20, the published harsh case',
@@ -690,12 +747,12 @@ export const R_FACTOR_CASE_LABELS = {
  * row whose R factor is below the previous row's, which is the property the
  * oracle records and the course teaches.
  */
-export const rFactorTable = (caseId = 'pia_default_project') => {
+export const rFactorTable = (caseId = 'tiered_default_project') => {
   let rows; let note; let line;
-  if (caseId === 'pia_default_project') {
-    const g = PIA();
+  if (caseId === 'tiered_default_project') {
+    const g = TIERED();
     rows = cf(g, DEFAULT_PROJECT);
-    note = 'The PIA template splits at R 1.0 to 60 percent, R 1.6 to 40 percent and R 2.5 to 30 percent.';
+    note = 'The tiered teaching regime splits at R 1.0 to 60 percent, R 1.6 to 40 percent and R 2.5 to 30 percent.';
     line = regimeLine(g);
   } else {
     const c = goldenCase(caseId);
@@ -1085,12 +1142,18 @@ export const priceSweep = async (caseId) => {
 /**
  * THE REGIME THE SIXTEEN PUBLISHED SWEEP CASES ACTUALLY RUN, which is NOT the
  * "Nigeria - PIA (2021)" template despite every case id containing "pia". It is
- * the Designer's own default regime, id 1, "Nigerian PIA (PSC)". The two share
- * a country and nothing else: different cost recovery limit, two profit
- * tranches against the template's three, different royalty thresholds and
- * rates, and a tax stack carrying an RRT and a minimum tax the template does
+ * the Designer's own default regime, id 1, which the golden names "Nigerian PIA
+ * (PSC)" and the course calls the Designer's sample PSC regime: its values are
+ * the Designer's illustrative samples and none is read from the Act. It
+ * recovers cost at 70 percent of revenue after royalty where the template takes
+ * 70 percent of the gross value of crude oil and NGL, splits profit oil in two R
+ * factor tranches where the template takes the government's minimum share by
+ * cumulative production, slides its royalty on price where the template charges
+ * the PIA 2021 royalty, and carries an RRT and a minimum tax the template does
  * not have. Anything keyed to "the PIA template" on these cases is mis-keyed.
  */
+export const DESIGNER_REGIME_LABEL = "the Designer's sample PSC regime";
+
 export const sweepCaseRegime = () => {
   const g = clone(golden.priceSweep[0].regime);
   const t = PIA();
@@ -1099,6 +1162,7 @@ export const sweepCaseRegime = () => {
   return {
     id: g.id,
     name: g.name,
+    courseLabel: DESIGNER_REGIME_LABEL,
     line: regimeLine(g),
     sameRegimeOnEveryPriceCase: new Set(golden.priceSweep.map((x) => JSON.stringify(x.regime))).size === 1,
     sameRegimeOnEveryCapexCase: new Set(golden.capexSweep.map((x) => JSON.stringify(x.regime))).size === 1,
@@ -1109,8 +1173,12 @@ export const sweepCaseRegime = () => {
     npvOfTheTemplate: calculateNPV(cf(t, DEFAULT_PROJECT), DEFAULT_PROJECT.discountRate),
     designerCostRecoveryLimit: g.costRecoveryLimit,
     templateCostRecoveryLimit: t.costRecoveryLimit,
+    designerCostRecoveryBase: g.costRecoveryBase ?? 'revenue_after_royalty',
+    templateCostRecoveryBase: t.costRecoveryBase ?? 'revenue_after_royalty',
     designerTrancheCount: g.profitSplit.tiers.length,
-    templateTrancheCount: t.profitSplit.tiers.length,
+    designerSplitType: g.profitSplit.type,
+    templateSplitType: t.profitSplit.type,
+    templateBandCount: t.profitSplit.tiers.length,
     designerTotalContractorNCF: totals(rows).ncf,
   };
 };
@@ -1190,10 +1258,10 @@ export const insights = (caseId) => {
 };
 
 /**
- * SECTION 22. The tie ranked by floating point noise, with the ranked
- * quantities printed so a reader can see the tie the sentence does not admit.
- * The capex and price verdicts pick their winner with a strict less-than in a
- * reduce, which returns the first element when two are equal.
+ * SECTION 22. The tie a strict reduce would rank by floating point noise, with
+ * the ranked quantities printed. A strict less-than in a reduce returns the
+ * first element when two are equal; the capex verdict ranks each end with
+ * leadOrTie instead, and declines to rank when the least and the most meet.
  */
 export const tieEvidence = async () => {
   const c = goldenComparison('cmp_never_recovers');
@@ -1224,12 +1292,14 @@ export const tieEvidence = async () => {
   // THE TIE IS EXACT, AND BY CONSTRUCTION. At BOTH ends of the swept range
   // every regime recovers cost at its own limit, the pool being far larger
   // than any allowance, so cost recovered, profit oil and tax are unchanged
-  // between a multiplier of 0.8 and one of 1.4. Nothing below the capex line
-  // moves, so the whole capex difference reaches the contractor's year 1 line
-  // undiluted and is discounted by the same single year.
+  // between the first and last swept multipliers, 0.8 and 1.5. Nothing below
+  // the capex line moves, so the whole capex difference reaches the
+  // contractor's year 1 line undiluted and is discounted by the same single year.
+  const LO = CAPEX_SWEEP_MULTIPLIERS[0];
+  const HI = CAPEX_SWEEP_MULTIPLIERS[CAPEX_SWEEP_MULTIPLIERS.length - 1];
   const ends = c.regimes.map((g) => {
-    const lo = totals(cf(g, c.project, 0.8, 1));
-    const hi = totals(cf(g, c.project, 1.4, 1));
+    const lo = totals(cf(g, c.project, LO, 1));
+    const hi = totals(cf(g, c.project, HI, 1));
     return {
       id: g.id,
       name: g.name,
@@ -1238,8 +1308,8 @@ export const tieEvidence = async () => {
       taxAtLow: lo.tax, taxAtHigh: hi.tax,
       capexAtLow: lo.capex, capexAtHigh: hi.capex,
       unchangedBelowTheCapexLine: lo.rec === hi.rec && lo.po === hi.po && lo.tax === hi.tax,
-      lossDerived: calculateNPV(cf(g, c.project, 0.8, 1), c.project.discountRate)
-        - calculateNPV(cf(g, c.project, 1.4, 1), c.project.discountRate),
+      lossDerived: calculateNPV(cf(g, c.project, LO, 1), c.project.discountRate)
+        - calculateNPV(cf(g, c.project, HI, 1), c.project.discountRate),
     };
   });
   const totalCapex = c.project.costs.capex.drilling + c.project.costs.capex.facilities + c.project.costs.capex.subsea;
@@ -1248,8 +1318,10 @@ export const tieEvidence = async () => {
     note: c.note,
     ranked,
     ends,
+    lowMultiplier: LO,
+    highMultiplier: HI,
     everyRegimeUnchangedBelowTheCapexLine: ends.every((x) => x.unchangedBelowTheCapexLine),
-    // The arithmetic closes exactly: 0.6 of the capex, spent in year 1 and
+    // The arithmetic closes exactly: 0.7 of the capex, spent in year 1 and
     // discounted one year at the project rate, IS every one of the six losses.
     capexDifference: ends[0].capexAtHigh - ends[0].capexAtLow,
     totalCapex,
@@ -1389,6 +1461,9 @@ export const paybackTieEvidence = async () => {
       // LAST one, not the second. secondNamed is kept for the history the
       // lessons quote and is only the slowest of the rest when nothing tied.
       lastNamed: named.length ? named[named.length - 1] : null,
+      // The regime after "against", present only when a regime sits outside
+      // the tie: the SLOWEST of the rest, never the runner-up.
+      afterAgainst: named.length > atFastest.length ? named[named.length - 1] : null,
       slowestOfTheRest,
       runnerUp,
       secondNamedIsTheSlowestOfTheRest: named.length > 1 && named[1] === slowestOfTheRest,
@@ -1519,7 +1594,9 @@ export const uruanCapstoneFields = async () => {
     ['beginner', 'con_y4_royalty_musd', con[3].royalty, URUAN_MONEY],
     ['beginner', 'con_y4_opex_musd', con[3].opex, URUAN_MONEY],
     ['beginner', 'con_y5_contractor_ncf_musd', con[4].contractorNCF, URUAN_MONEY],
-    ['beginner', 'con_payback_year_cum_ncf_musd', con.find((x) => x.cumulativeNCF > 0).cumulativeNCF, URUAN_MONEY],
+    // Tolerance 0.0003 (PIA re-cut lead decision): the PIA template's year 2
+    // royalty on the default project sits 0.000606 away, inside a 0.001 band.
+    ['beginner', 'con_payback_year_cum_ncf_musd', con.find((x) => x.cumulativeNCF > 0).cumulativeNCF, 0.0003],
     ['beginner', 'con_total_government_take_musd', sum(con, 'governmentTake'), URUAN_MONEY],
     ['intermediate', 'psc_y1_cost_recovered_musd', psc[0].costRecovered, URUAN_MONEY],
     ['intermediate', 'psc_y3_unrecovered_pool_musd', psc[2].unrecoveredCostPool, URUAN_MONEY],

@@ -238,7 +238,7 @@ const Prices = () => {
       <Note>
         The middle line is the one to stare at: with no deck, a flat 80 escalated at 10 percent from a 2030 base
         is DEFLATED for the years before the base, which is why 2028 and 2029 read below 80. The escalator is a
-        rate anchored at the base year, not a markup that starts at the first row.
+        rate anchored at the base year; it does not start counting at the first row.
       </Note>
     </>
   );
@@ -372,12 +372,11 @@ const AddingUp = () => {
       />
       <Note>
 Every line is the share: gross revenue and the total oil move with the working interest alongside royalty,
-        tax and net cash flow, the way the production sharing and PIA regimes always did. The IRR, the unit technical
+        tax and net cash flow, the way the production sharing and PIA regimes do. The IRR, the unit technical
         cost and the government take do not move at all, because each is a ratio of things that scaled together, and
-        a take that no longer moves with the interest is the point of the repair. Until engines 3.10.0 the joint
-        venture ledger kept revenue, volumes, opex, capex and depreciation at FIELD level while reporting royalty,
-        tax and net cash flow at the share, so take counted the partners' share as government take and read 79.7034
-        percent at a 60 percent interest where it now reads 66.1723 at every interest.
+        a take that stays put as the interest moves is how to tell that every line is on one base. A reader who
+        scales royalty, tax and net cash flow to the share while leaving revenue, volumes, opex, capex and
+        depreciation at field level counts the partners' share as government take.
       </Note>
     </>
   );

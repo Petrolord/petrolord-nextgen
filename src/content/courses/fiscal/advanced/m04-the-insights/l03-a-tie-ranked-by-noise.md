@@ -1,16 +1,16 @@
 # A tie ranked by noise
 
-A verdict that names a winner can be ranking nothing. Two of the three verdicts that could do that now refuse. One still does it.
+A verdict that names a winner can be ranking nothing. Two of the three verdicts that could do that refuse. One still does it.
 
 {{panel:ec-comparison-explorer}}
 
 ## Where every quantity is the same
 
-`cmp_never_recovers` runs the six templates on a project with capex 20000, being 10000.0000 drilling plus 10000.0000 facilities plus 0.0000 subsea million USD, on the TEST project's production of 30000 bbl/d of oil declining 12 percent. Nothing pays back and every IRR is null with the status no-root. Read the capex sweep:
+`cmp_never_recovers` runs the six templates on a project with capex 20000, on the TEST project's production of 30000 bbl/d of oil declining 12 percent. Nothing pays back and every IRR is null with the status no-root. Read the capex sweep:
 
 | regime | npv | capex sweep first point | capex sweep last point | loss (derived) |
 | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | -15768.8129 | -12132.449284 | -24859.722012 | 12727.272727 |
+| Nigeria - PIA (2021) | -15537.7310 | -11901.367333 | -24628.640060 | 12727.272727 |
 | Ghana - Deepwater | -15361.7226 | -11725.358969 | -24452.631697 | 12727.272727 |
 | Brazil - Concession | -15354.6816 | -11718.317943 | -24445.590670 | 12727.272727 |
 | USA - Gulf of Mexico | -15701.7744 | -12065.410782 | -24792.683509 | 12727.272727 |
@@ -19,19 +19,19 @@ A verdict that names a winner can be ranking nothing. Two of the three verdicts 
 
 Six different NPVs, and one loss figure repeated to every printed digit.
 
-## What the sentence says now
+## What the sentence says
 
-The capex verdict declines: no regime can be ranked on resilience to cost overrun, and all six are named as giving up 12,727.3 million USD each, within 0.1 million USD of each other. `leadOrTie` names a leader only when it leads the next regime by at least one printed step, 0.1 million USD for the capex verdict and one percentage point for the price verdict. The retired reduce used a strict less-than, which keeps the first of two equals, so it named "USA - Gulf of Mexico" while the oracle named "Brazil - Concession". Neither was a result.
+The capex verdict declines: no regime can be ranked on resilience to cost overrun, and all six are named as giving up 12,727.3 million USD each, within 0.1 million USD of each other. `leadOrTie` names a leader only when it leads the next regime by at least one printed step, 0.1 million USD for the capex verdict and one percentage point for the price verdict. A strict less-than keeps the first of two equals, and here the six losses differ only in their last binary digits, so a strict pick on the engine's values would name "USA - Gulf of Mexico" on noise, which is no result.
 
 The price verdict stays out too: every point is null and flagged undefined, so it says no regime is economic from 40 to 120 USD per bbl.
 
 ## The tie is exact, which is stronger than close
 
-At both ends of the sweep every regime recovers cost at its own limit, so cost recovered, profit oil and tax do not move. The whole capex difference reaches the contractor's year 1 line and is discounted by one year. Between a multiplier of 0.8 and one of 1.4 that difference is 12000 million USD, and 12000 divided by 1.1 is 10909.090909 for all six. No tie break could be right here: first, last or alphabetical are picks among six answers that are one answer.
+At both ends of the sweep every regime recovers cost at its own limit, so cost recovered, profit oil and tax do not move. The whole capex difference reaches the contractor's year 1 line and is discounted by one year. Between a multiplier of 0.8 and one of 1.5 that difference is 14000 million USD, and 14000 divided by 1.1 is 12727.272727 for all six. No tie break could be right here: first, last or alphabetical are picks among six answers that are one answer.
 
 ## The tie that is still broken by order
 
-`insights_ties` shows what survived. Its payback verdict names both, "Alpha" and "Beta" both pay back in year 4. Its government verdict does not: "Alpha" collects the most, 900.0 million USD against 900.0 million USD for "Beta". The strict comparison still keeps the first of the tied pair there.
+`insights_ties` shows where list order still decides. Its payback verdict names both, "Alpha" and "Beta" both pay back in year 4. Its government verdict does not: "Alpha" collects the most, 900.0 million USD against 900.0 million USD for "Beta". The strict comparison still keeps the first of the tied pair there.
 
 ## Rounding, a separate trap
 

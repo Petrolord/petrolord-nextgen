@@ -33,13 +33,13 @@ At very negative rates the discount factor on the last entry is enormous, so a n
 
 AKATA with an abandonment of 60000000 in 2035 ends in -29598201.95. Its NPV is 81637829.18 at 0 percent and -78880508.48 at 100 percent, so it is positive in the middle and negative at the ends, and it crosses twice. The engine reports IRR null. The headline NPV at the configured rate is still 38666394.86, the number a decision is made on.
 
-## What the engine used to do
+## Why no root is chosen
 
-Until engines 3.10.0 the engine reported whichever root Newton reached from 10 percent, with nothing to say a second existed. two_roots_2_and_6 returned 6.0000 percent where the oracle read 2.0000, three_roots_0_7_33 returned 7.3509 where the oracle read 0.0000, and AKATA with the 60000000 abandonment returned 23.2570 percent. Which root came back was an accident of the starting point. The golden records no disagreement now.
+A finder that reports whichever root it reaches first lets the starting point decide. A Newton search from 10 percent on two_roots_2_and_6 can settle on 6.0000 percent and say nothing of 2.0000; on three_roots_0_7_33 it can settle on 7.3509 and miss 0.0000 and 32.6491. So the engine lists every root it found in the band and names none of them.
 
 ## The mistake
 
-The careful mistake survives the repair. It is to take any single rate to a hurdle and approve. Carry 6.0000 percent to a hurdle of 5 percent and the approval happens to hold, because the NPV at 5 percent is 0.027211. The same reasoning on three_roots_0_7_33, 7.3509 against 5 percent, approves a vector whose NPV at 5 percent is -0.028075. A root is where the curve is zero; a hurdle comparison needs the sign of the curve there, which is the NPV.
+The careful mistake survives the null. It is to take any single rate to a hurdle and approve. Carry 6.0000 percent to a hurdle of 5 percent and the approval happens to hold, because the NPV at 5 percent is 0.027211. The same reasoning on three_roots_0_7_33, 7.3509 against 5 percent, approves a vector whose NPV at 5 percent is -0.028075. A root is where the curve is zero; a hurdle comparison needs the sign of the curve there, which is the NPV.
 
 ## What it refuses
 

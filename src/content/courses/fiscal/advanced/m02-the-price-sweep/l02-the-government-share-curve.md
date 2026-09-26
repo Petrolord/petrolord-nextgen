@@ -1,12 +1,12 @@
 # The government take curve
 
-One series on one chart can carry three different states, and every point now says which one it is.
+One series on one chart can carry three different states, and every point says which one it is.
 
 {{panel:ec-comparison-explorer}}
 
 ## The division and its three states
 
-The price sweep plots government take, undiscounted. At each swept price it divides total government cash flow by total government cash flow plus total contractor net cash flow. That sum is the project's lifetime profit, revenue less opex less capex, and it is the same under every regime at a given price. The engine returns a state beside every value. When profit is positive and the ratio sits between 0 and 100 the state is `share`. When profit is small and positive because the contractor is losing money while the government still collects, the ratio goes above 100 percent, the true value is kept and the state is `exceeds`. When profit is zero or negative there is no share at all, the value is null and the state is `undefined`. An earlier build returned exactly 0 in that last case, with no flag.
+The price sweep plots government take, undiscounted. At each swept price it divides total government cash flow by total government cash flow plus total contractor net cash flow. That sum is the project's lifetime profit, revenue less opex less capex, and it is the same under every regime at a given price. The engine returns a state beside every value. When profit is positive and the ratio sits between 0 and 100 the state is `share`. When profit is small and positive because the contractor is losing money while the government still collects, the ratio goes above 100 percent, the true value is kept and the state is `exceeds`. When profit is zero or negative there is no share at all, the value is null and the state is `undefined`. Zero is never returned as a fallback.
 
 ## No value over a fortune
 
@@ -14,7 +14,7 @@ The published comparison built with capex of 20000, which is 10000.0000 drilling
 
 | regime | total government cash flow | total contractor NCF | the two added | value and state at all nine prices |
 | --- | --- | --- | --- | --- |
-| Nigeria - PIA (2021) | 1431.0440 | -16279.9099 | -14848.8659 | null, undefined |
+| Nigeria - PIA (2021) | 1021.2611 | -15870.1271 | -14848.8659 | null, undefined |
 | Ghana - Deepwater | 712.5465 | -15561.4124 | -14848.8659 | null, undefined |
 | Brazil - Concession | 700.1194 | -15548.9853 | -14848.8659 | null, undefined |
 | USA - Gulf of Mexico | 1312.7238 | -16161.5898 | -14848.8659 | null, undefined |

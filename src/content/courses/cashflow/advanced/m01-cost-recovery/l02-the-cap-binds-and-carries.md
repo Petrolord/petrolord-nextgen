@@ -16,7 +16,7 @@ The engine's applyPSC on a single year with 100000000.00 of revenue, a 10 percen
 | 0.800000 | 72000000.00 | 9000000.00 | 8000000.00 |
 | 1.000000 | 80000000.00 | 5000000.00 | 0.00 |
 
-Each step of the cap moves cost recovered up and profit oil down by the same amount, so the contractor's tax falls as its recovery rises: 18000000.00 of tax at a 0.200000 cap, 13500000.00 at 0.400000, 2500000.00 at 1.000000, where the year's net turns positive at 2500000.00. The cap is a share of revenue after royalty: 0.400000 recovers 36000000.00, not 40 percent of the gross. With 30000000 brought forward from an earlier year at the 0.4 cap, the recovery is still 36000000.00, profit oil still 27000000.00, net still -30500000.00, and only the carried amount changes, to 74000000.00. A bigger pool does not recover faster. It waits.
+Each step of the cap moves cost recovered up and profit oil down by the same amount, so the contractor's tax falls as its recovery rises: 18000000.00 of tax at a 0.200000 cap, 13500000.00 at 0.400000, 2500000.00 at 1.000000, where the year's net turns positive at 2500000.00. The cap is a share of revenue after royalty: 0.400000 recovers 36000000.00, less than 40 percent of the gross. With 30000000 brought forward from an earlier year at the 0.4 cap, the recovery is still 36000000.00, profit oil still 27000000.00, net still -30500000.00, and only the carried amount changes, to 74000000.00. A bigger pool does not recover faster. It waits.
 
 ## AKATA at five caps
 
@@ -38,7 +38,7 @@ The careful reader sees the cap as a ceiling on how much cost can be recovered. 
 
 ## What it refuses
 
-No row prints the cost recovered in the year. Every recovery figure above comes from the march rather than from the engine's output, and nothing on the 30 percent run warns that 207346412.26 was left on the table. The balance is better served: since engines 3.10.0 a production sharing row can report psc_cost_pool_after and a KPI can report the pool a cessation forfeits, which tells a reader how much was stranded without telling them how it got there.
+No row prints the cost recovered in the year. Every recovery figure above comes from the march rather than from the engine's output. The balance is better served: psc_cost_pool_after on the last row and kpis.psc_unrecovered_cost_at_cessation both report the 207346412.26 the 30 percent run leaves on the table, which tells a reader how much was stranded without telling them how it got there.
 
 ## Exercise
 

@@ -1,0 +1,26 @@
+{
+ "boe": {
+  "decimals": 2,
+  "match": "^(?:jv_total_boe)$"
+ },
+ "pct": {
+  "decimals": 6,
+  "match": "^(?:jv_government_take_pct|jv_irr_pct)$"
+ },
+ "ratio": {
+  "decimals": 6,
+  "match": "^(?:jv_dpi)$"
+ },
+ "usd": {
+  "decimals": 2,
+  "match": "^(?:jv_2032_tax_usd|jv_2033_gross_revenue_usd|jv_2034_net_cash_flow_usd|jv_npv_mid_year_usd|jv_npv_real_usd|pia_2031_nddc_usd|pia_2032_price_royalty_usd|pia_2032_production_allowance_usd|pia_2033_dev_levy_usd|pia_2035_cpr_deferred_usd|pia_total_cit_usd)$"
+ },
+ "usd_bbl": {
+  "decimals": 6,
+  "match": "^(?:jv_breakeven_oil_price_usd_bbl)$"
+ },
+ "years": {
+  "decimals": 6,
+  "match": "^(?:jv_discounted_payback_years|jv_payback_years)$"
+ }
+}

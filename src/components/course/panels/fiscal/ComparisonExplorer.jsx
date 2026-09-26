@@ -97,7 +97,7 @@ const Tbl = ({ head, rows, mark = () => false }) => (
   </div>
 );
 
-const Waiting = ({ what }) => <Note>Running {what} in the engine. This is a real comparison, not a cached table: it re-runs the whole ledger once per regime and again at nine prices and eight capex multipliers.</Note>;
+const Waiting = ({ what }) => <Note>Running {what} in the engine. This is a real comparison that re-runs the whole ledger once per regime and again at nine prices and eight capex multipliers.</Note>;
 const Failed = ({ what }) => <Note>The engine returned nothing for {what}. A comparison needs a project carrying production, prices and costs and at least one regime carrying all four instruments; without them there is no summary to sort and no sweep to plot.</Note>;
 
 const CASE_OPTIONS = COMPARISON_IDS.map((id) => [id, COMPARISON_LABELS[id] || id]);
@@ -114,13 +114,14 @@ const SweepRegimeCaution = () => {
   return (
     <p className="text-xs text-amber-300 mt-2 mb-0">
       READ THE NAME ON THESE CASES CAREFULLY. Every id contains "pia" and not one of them runs the
-      {' '}{s.template.name} TEMPLATE shown above. They run the Designer own default regime, id {s.id},
-      {' '}{s.name}, which shares a country with the template and nothing else: cost recovery at
-      {' '}{s.designerCostRecoveryLimit} percent against the template {s.templateCostRecoveryLimit}, and
-      {' '}{s.designerTrancheCount} profit tranches against the template {s.templateTrancheCount}. On the same
-      default project the template returns {mm(s.npvOfTheTemplate)} million USD of contractor net present value
-      and the Designer regime {mm(s.npvOfTheDesignerRegime)}. Anything keyed to the template on these cases is
-      mis-keyed.
+      {' '}{s.template.name} TEMPLATE shown above. They run {s.courseLabel}, the Designer default regime id {s.id}
+      {' '}(the engine names it {s.name}). Its values are the Designer illustrative samples and none is read from
+      the Act. It recovers cost at {s.designerCostRecoveryLimit} percent of revenue after royalty where the
+      template takes {s.templateCostRecoveryLimit} percent of the gross value of crude oil and NGL, and it splits
+      profit oil in {s.designerTrancheCount} R factor tranches where the template takes the government minimum
+      share by cumulative production in {s.templateBandCount} bands. On the same default project the template
+      returns {mm(s.npvOfTheTemplate)} million USD of contractor net present value and the Designer regime
+      {' '}{mm(s.npvOfTheDesignerRegime)}. Anything keyed to the template on these cases is mis-keyed.
     </p>
   );
 };
@@ -428,9 +429,10 @@ const Insights = () => {
       </p>
 
       <p className="text-xs text-slate-500 mt-5 mb-1">
-        THE TIE THE SENTENCE DOES NOT ADMIT. The capex verdict picks its winner with a strict less-than in a reduce,
-        which returns the FIRST element when two are equal and therefore breaks a tie by list order. The price verdict
-        declines to rank unless its lead is at least one percentage point over at least three share prices.
+        A TIE THAT A STRICT REDUCE WOULD RANK. A strict less-than in a reduce returns the FIRST element when two are
+        equal and so breaks a tie by list order. The capex verdict names a regime alone only when it leads the next by
+        at least 0.1 million USD, and declines to rank when the least and the most meet. The price verdict declines to
+        rank unless its lead is at least one percentage point over at least three share prices.
       </p>
       {tie.status !== 'done' ? (tie.status === 'failed' ? <Failed what="the tie evidence" /> : <Waiting what="the tie evidence" />) : (
         <>
@@ -449,12 +451,13 @@ const Insights = () => {
           <p className="text-xs text-slate-500 mt-4 mb-1">
             AND THE TIE HERE IS EXACT, WHICH IS STRONGER THAN A NEAR TIE, but not for the reason it first looks. At
             BOTH ends of the swept range every regime recovers cost at its own limit, the pool being far larger than
-            any allowance, so cost recovered, profit oil and tax are unchanged between a multiplier of 0.8 and one of
-            1.4. Nothing below the capex line moves, so the whole capex difference reaches the contractor year 1 line
+            any allowance, so cost recovered, profit oil and tax are unchanged between a multiplier of{' '}
+            {tie.value.lowMultiplier.toFixed(1)} and one of {tie.value.highMultiplier.toFixed(1)}, the first and last
+            swept multipliers. Nothing below the capex line moves, so the whole capex difference reaches the contractor year 1 line
             undiluted and is discounted by the same single year.
           </p>
           <Tbl
-            head={['regime', 'cost recovered at x0.8', 'at x1.4', 'profit oil at x0.8', 'at x1.4', 'tax at x0.8', 'at x1.4', 'capex loss']}
+            head={(() => { const lo = `x${tie.value.lowMultiplier.toFixed(1)}`; const hi = `at x${tie.value.highMultiplier.toFixed(1)}`; return ['regime', `cost recovered at ${lo}`, hi, `profit oil at ${lo}`, hi, `tax at ${lo}`, hi, 'capex loss']; })()}
             rows={tie.value.ends.map((d) => [d.name, mm(d.costRecoveredAtLow), mm(d.costRecoveredAtHigh), mm(d.profitOilAtLow), mm(d.profitOilAtHigh), mm(d.taxAtLow), mm(d.taxAtHigh), ratio(d.lossDerived)])}
           />
           <p className="text-xs text-slate-300 mt-2 mb-0">
@@ -470,33 +473,34 @@ const Insights = () => {
           <p className="text-xs text-amber-300 mt-2 mb-0">
             {tie.value.separatedAtOneDecimal
               ? 'On this case the ranked quantities are separated at the precision the sentence prints.'
-              : 'The ranked quantities are NOT separated at the precision the sentence prints. Every loss above rounds to the same figure, and the capex verdict names a least and a most and prints the same number for both. A verdict naming a winner is only a verdict when the quantities it ranks are separated by more than the precision they are printed to.'}
+              : 'The ranked quantities are NOT separated at the precision the sentence prints. Every loss above rounds to the same figure, and the capex verdict declines to rank and names all six together. A verdict naming a winner is only a verdict when the quantities it ranks are separated by more than the precision they are printed to.'}
           </p>
         </>
       )}
 
       <p className="text-xs text-slate-500 mt-5 mb-1">
-        AND THE SAME REDUCE ON AN INTEGER COLUMN. Payback is a whole year, and whole years tie far more often than a
-        continuous quantity does. Where the column ties, the sentence names the first regime in summary order, and the
-        summary is sorted by contractor NPV.
+        AND AN INTEGER COLUMN, WHERE TIES ARE THE NORMAL CASE. Payback is a whole year, and whole years tie far more
+        often than a continuous quantity does. Where the column ties, the sentence names every tied regime, in
+        summary order, and the summary is sorted by contractor NPV, so the order of those names ranks nothing about
+        payback.
       </p>
       {payback.status !== 'done' ? (payback.status === 'failed' ? <Failed what="the payback evidence" /> : <Waiting what="the payback evidence" />) : (
         <Tbl
-          head={['comparison', 'payback years down the summary', 'fastest year', 'regimes tied at it', 'the regime the verdict names', 'the top-NPV regime', 'is the verdict a ranking', 'the SECOND regime the sentence names', 'the actual runner-up']}
+          head={['comparison', 'payback years down the summary', 'fastest year', 'regimes tied at it', 'the first name in the sentence', 'the top-NPV regime', 'is the verdict a ranking', 'the regime after "against"', 'the actual runner-up']}
           rows={payback.value.map((e) => [
             e.caseId, e.paybackYears.map((y) => yr(y)).join(', '), yr(e.fastestPaybackYear), e.tiedAtFastest,
             e.namedRegime === null ? 'null' : e.namedRegime, e.topNpvRegime,
-            e.tied ? <span key={e.caseId} className="text-amber-300">no, the column ties and the sentence is telling you about NPV</span> : 'yes, the column does not tie',
-            e.secondNamed === null ? 'null' : e.secondNamed,
+            e.tied ? <span key={e.caseId} className="text-amber-300">no, the column ties: read the tied names as a list</span> : 'yes, the column does not tie',
+            e.afterAgainst === null ? 'none, every paying regime is tied' : e.afterAgainst,
             e.runnerUp === null ? 'null' : e.runnerUp,
           ])}
         />
       )}
       {payback.status === 'done' && (
         <p className="text-xs text-amber-300 mt-2 mb-0">
-          And notice the SECOND name in every one of those sentences. It is not the runner-up. The function picks the
-          fastest, removes it, and then takes the MAXIMUM of what is left, so the second regime named is the SLOWEST
-          of the rest. A sentence of the form "A pays back in year x, against year y for B" reads like a top two and
+          And notice the LAST name in every one of those sentences, the one after "against". It is not the runner-up.
+          The function names the fastest year&apos;s regimes, sets them aside, and then takes the MAXIMUM of what is
+          left, so the regime after "against" is the SLOWEST of the rest. A sentence of the form "A pays back in year x, against year y for B" reads like a top two and
           is a top and a bottom, with everything else silently in between.
         </p>
       )}

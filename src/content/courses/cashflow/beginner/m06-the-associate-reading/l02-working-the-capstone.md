@@ -6,7 +6,7 @@ A ledger question hands you files and a configuration and asks for readings. The
 
 ## Step one: the files must be readable
 
-Before any arithmetic, check what the engine will accept. Production needs a year, a date or a month_index, and volume columns ending in _oil_bbl, _gas_mscf or _condensate_bbl, or the bare forms. Capex and opex need one cost column each, and every stream with volumes needs a price. AKATA passes: akata_oil_bbl and akata_gas_mscf by year, amount_usd for capex, total_opex_usd for opex, oil_price_usd_bbl 82 and gas_price_usd_mscf 3.2. A file that fails is refused with a message, not run with a zero, and the reading of a refused run is the refusal, with its reason.
+Before any arithmetic, check what the engine will accept. Production needs a year, a date or a month_index, and volume columns ending in _oil_bbl, _gas_mscf or _condensate_bbl, or the bare forms. Capex and opex need one cost column each, and every stream with volumes needs a price. AKATA passes: akata_oil_bbl and akata_gas_mscf by year, amount_usd for capex, total_opex_usd for opex, oil_price_usd_bbl 82 and gas_price_usd_mscf 3.2. A failing file is refused with a message and never run with a zero, and the reading of a refused run is the refusal, with its reason.
 
 ## Step two: build one row by hand
 
@@ -29,7 +29,7 @@ If the row does not match the engine to the cent, stop. The gap tells you which 
 
 The base year hides the escalators, so prove a later row. AKATA 2030: applied_oil_price 83.640000, applied_gas_price 3.264000, opex 24720000.00, depreciation 25500000.00 now that the 45000000.00 tranche has joined, gross revenue 159564720.00, tax 34164004.80, net 31746007.20. If the price is still 82.000000 in your 2030 row, the oil escalator was not applied; if the opex is still 24000000.00, the opex escalator was not.
 
-## Step four: read down, not across
+## Step four: read down the columns
 
 With two rows proven, take the engine's columns and read the readings this tier owns. Cumulative: trough -121123680.00 in 2029, crossing between -29534809.71 and 19845806.34, payback 3.461632 years from the nominal running sum. Totals: revenue 857602518.80, capex 255000000.00, opex 183899092.34, tax 148425219.46. Boe 10970666.67 with gas at 6. Unit technical cost 40.006602, opex per boe 16.762800. Take 66.1723 percent. If the question is asked at a working interest, scale the money readings and the volumes alike, and quote the take and the unit costs as the engine prints them, because a ratio with the share on both sides does not move.
 

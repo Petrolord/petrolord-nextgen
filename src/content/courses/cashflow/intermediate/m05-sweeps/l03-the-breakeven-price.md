@@ -23,7 +23,7 @@ The basis does not move it, because the two bases give the same NPV. The working
 
 ## The published cases and their residuals
 
-jv_analytic reports 71.725872 USD/bbl where the golden holds 71.726190; the NPV rerun at the engine's price is -243.53 and the golden's NPV at its own price is -0.000213. pia_worked_example reports 55.308589 against 55.308445, rerun NPV 810.98. multiyear_pia_real reports 53.239280 against 53.239195, rerun NPV 851.16. The search stops at a tolerance on price, and a small residual on NPV is the trace it leaves: nothing for a decision, something for a reader who expected zero.
+jv_analytic reports 71.725872 USD/bbl where the golden holds 71.726190; the NPV rerun at the engine's price is -243.53 and the golden's NPV at its own price is -0.000213. The two PIA cases carry no golden breakeven to compare with: pia_worked_example reports 54.286320 with a rerun NPV of -1391.65, and multiyear_pia_real reports 49.623705 with -3574.39. The search stops at a tolerance on price, and a small residual on NPV is the trace it leaves: nothing for a decision, something for a reader who expected zero.
 
 ## The three nulls
 

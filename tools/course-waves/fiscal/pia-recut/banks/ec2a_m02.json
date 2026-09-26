@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "How does the price sweep reach a swept oil price of 40 USD per bbl on the default project?",
+  "options": [
+   "It overwrites the deck with a flat 40 USD per bbl, which removes the step at year 5 and the step at year 10.",
+   "It divides 40 by the first deck point's oil price of 70 and applies that multiplier to the oil price in every year of the deck.",
+   "It shifts every deck point down by the gap between 40 and 70, keeping the steps but not the ratios between them.",
+   "It rescales the base case NPV by the ratio of the two prices without re-running the ledger."
+  ],
+  "answer": 1,
+  "explanation": "The multiplier moves the level and leaves the step structure intact, and every one of the nine points is a full re-run of the whole comparison."
+ },
+ {
+  "prompt": "There is no swept point between 70 and 80 USD per bbl. What is the line the chart draws across that gap?",
+  "options": [
+   "A linear interpolation the engine returns beside the nine points, so any price inside the range can be quoted from it.",
+   "The engine's answer at the midpoint, because the sweep bisects each interval once to smooth the series it plots.",
+   "The chart's own line. The engine computed nine points and nothing between them.",
+   "A projection built from the climb, spread evenly across the range."
+  ],
+  "answer": 2,
+  "explanation": "The nine prices are fixed at 40, 50, 60, 70, 80, 90, 100, 110 and 120 USD per bbl and no input changes them, so a project whose economics turn between two of them cannot be examined there."
+ },
+ {
+  "prompt": "At 40 USD per bbl the Designer's sample PSC regime leaves 5.9578 million USD of cost unrecovered at the end of the life. What does that say?",
+  "options": [
+   "The cost recovery limit binds hard at the bottom of the sweep, and the pool closes to 0.7642 at 50 and to 0.0000 from 60 upward.",
+   "The pool carries forward past the horizon, so the contractor recovers the remainder in the following licence period.",
+   "The engine wrote the remainder off as an abandonment provision, which is what makes the NPV smaller than the loss.",
+   "Cost recovery was capped by the profit oil split rather than by the limit, since a low price walks the R factor into a generous tranche."
+  ],
+  "answer": 0,
+  "explanation": "At the deck price the limit binds only in the first four years and the pool clears; at 40 USD per bbl the pool is still open after year 25, NPV is -51.1673 million USD, and the engine reports no single IRR, the NPV being zero at -40.1442 and 6.6994 percent."
+ },
+ {
+  "prompt": "The nine published price runs are named price_40_pia_default through price_120_pia_default. Which regime do they actually run?",
+  "options": [
+   "The Nigeria - PIA (2021) template, which is why the 70 point returns that template's NPV of 432.0925 million USD on the default project.",
+   "All six templates at once, with the PIA row published at each price and the other five rows computed and then discarded.",
+   "The Nigeria - PIA (2021) template on the test project, the one project whose first deck point is not 70 USD per bbl.",
+   "The Designer's sample PSC regime, id 1, which the engine names Nigerian PIA (PSC)."
+  ],
+  "answer": 3,
+  "explanation": "The template and the Designer's sample PSC regime, whose values are illustrative samples, share little: the sample regime recovers cost to 70 percent of revenue after royalty and charges a royalty of 12.5 percent below 80 USD/bbl and 15 percent from 80, while the template recovers to 70 percent of the gross value of crude oil and NGL and charges the PIA 2021 royalty. The template returns 432.0925 million USD on that project and the sample regime 169.7176."
+ },
+ {
+  "prompt": "What does the price sweep return for a regime when total government cash flow plus total contractor net cash flow is not greater than zero?",
+  "options": [
+   "Exactly 0, drawn on the axis beside the shares of the other regimes.",
+   "A null, with the point's state set to undefined and a break in the line.",
+   "100 percent, on the reasoning that the state took all of a contractor return that was not positive.",
+   "The absolute value of the ratio, flagged exceeds, which is why a plotted share can run into the thousands."
+  ],
+  "answer": 1,
+  "explanation": "On the comparison built with capex of 20000 all six templates return null with the state undefined at all nine prices while the government collected between 700.1194 and 1662.7835 million USD."
+ },
+ {
+  "prompt": "Six series draw no line at any of the nine prices on one published comparison, every point flagged undefined. What do the missing lines report?",
+  "options": [
+   "That the six regimes collected nothing, which is what an empty series would mean on a chart of government cash flow.",
+   "That every point sits above 100 percent and was pinned off the top of the axis.",
+   "That the project's lifetime profit is not positive at any swept price, so no government take exists to plot.",
+   "That the sweep failed to run, since a comparison whose engine call rejects returns no series at all."
+  ],
+  "answer": 2,
+  "explanation": "Angola - Deepwater PSC collected 1662.7835 million USD for the government on that comparison, and every one of its nine points is null with the state undefined."
+ },
+ {
+  "prompt": "The Angola template on the default project at three times capex returns null at 40 USD per bbl, then 2223.0766, then 144.0692, then 85.6015. How many states sit on those four points?",
+  "options": [
+   "Three: undefined, then exceeds at 2223.0766 and 144.0692, then an ordinary share.",
+   "One, since all four are the same ratio on a curve that is steep.",
+   "Two, a computed share and a missing value, with 2223.0766 and 144.0692 both ordinary shares of a project the state dominates.",
+   "Four, because the engine switches its definition of government cash flow at each swept price as the ledger changes sign."
+  ],
+  "answer": 0,
+  "explanation": "The null carries the state undefined because lifetime profit is not positive at 40, and the two points above 100 percent carry exceeds and keep their true values."
+ },
+ {
+  "prompt": "What must a reader check before quoting any single point off the government take curve?",
+  "options": [
+   "That the point sits at a price the deck itself contains, since only the 70 USD per bbl point is a real deck price.",
+   "That the regime pays back, because the sweep drops any point whose payback year comes back null.",
+   "The discount rate, since the share is computed on discounted totals and moves whenever that rate moves.",
+   "The two lifetime totals underneath it."
+  ],
+  "answer": 3,
+  "explanation": "If lifetime contractor net cash flow is negative the point is above 100 percent and flagged exceeds, and if it is negative enough to outweigh the take the point is null and flagged undefined."
+ },
+ {
+  "prompt": "The sweep reports a climb for each regime. What quantity is that?",
+  "options": [
+   "The average slope against price, fitted across all nine swept points.",
+   "The rise from the curve's minimum to its maximum, wherever those fall.",
+   "The last swept share minus the first, at full precision, which is two of the nine points.",
+   "The change in share per 10 USD per bbl around the deck price."
+  ],
+  "answer": 2,
+  "explanation": "On the default project the climbs run from 20.5076 percentage points for Brazil - Concession down to -17.2498 for USA - Gulf of Mexico."
+ },
+ {
+  "prompt": "Angola - Deepwater PSC climbs 19.6873 percentage points on the default project and is not simply rising. How are both true?",
+  "options": [
+   "It falls from 63.4520 to 59.5510 over the first interval and only then turns, so the climb is measured from the far side of its own minimum.",
+   "The climb is computed on the test project while the nine plotted points belong to the default project.",
+   "Its resource rent tax at 50 percent is charged only above 90 USD per bbl, so the first two points sit outside the regime.",
+   "The climb includes a capex multiplier of 1.5 that the chart itself does not plot."
+  ],
+  "answer": 0,
+  "explanation": "An endpoint difference cannot report a shape. Ghana - Deepwater reverses twice inside a positive climb, from 76.7284 down to 76.4647 and from 77.2412 down to 77.0702."
+ },
+ {
+  "prompt": "Angola - Deepwater PSC climbs 19.6873 percentage points on the default project and -8.3874 on ODIDI with all four of its instruments unchanged. What moved?",
+  "options": [
+   "The discount rate, 10 percent on one field and 12 percent on the other, which reweights the share at every price.",
+   "The field: a different decline, a different deck and a different cost stack change where cost recovery still binds across the range.",
+   "The template, since ODIDI is run against the Designer's own two regimes rather than against the six templates.",
+   "The swept prices, which are set from each project's own first deck point and are therefore lower on ODIDI."
+  ],
+  "answer": 1,
+  "explanation": "The sweep visits the same nine prices on both fields and the shares are undiscounted lifetime totals, so only the project underneath them differs."
+ },
+ {
+  "prompt": "Which streams does the price multiplier touch?",
+  "options": [
+   "All three, in the ratio the deck's first year sets, so the mix is preserved while the level moves.",
+   "Oil and NGL, because both are liquids and both are quoted in USD per bbl on the deck.",
+   "All three, but only from the deck's first step year onward, so the year 1 prices are held where they are.",
+   "Oil alone."
+  ],
+  "answer": 3,
+  "explanation": "The published case at a price multiplier of 0.5 returns gross revenue of 1419.0195 million USD against the deck's own 2686.9277, because two of the three streams did not move."
+ },
+ {
+  "prompt": "A gas weighted project shows a government take that barely moves across the nine points. What is the correct conclusion?",
+  "options": [
+   "The terms are flat rated, so the regime is neither progressive nor regressive.",
+   "The project sits at its cost recovery limit at every price, which pins the share until the recoverable pool clears.",
+   "The sweep did not move most of that project's revenue, so the flat curve says little about its terms.",
+   "The engine flagged every point undefined and returned a constant, as it does whenever contractor net cash flow is negative."
+  ],
+  "answer": 2,
+  "explanation": "The multiplier scales oil only, so comparing the steepness of two projects' curves compares their stream mix as much as their terms. The test project is 30000 bbl/d of oil with no gas and no NGL, so there the multiplier is the whole revenue multiplier."
+ },
+ {
+  "prompt": "On the Designer's two default regimes at the deck's own first year price, Concessionary (Royalty/Tax) reads 46.3452 in one place and 59.6210 in another. What separates those two figures?",
+  "options": [
+   "The table adds total capex back into the contractor's side of the denominator and the chart does not.",
+   "The chart is computed at the swept price and the table at the deck price, which are not the same price.",
+   "The chart counts the government's profit oil share as well as tax and the table counts tax alone.",
+   "The chart is undiscounted while the table is discounted at 10 percent."
+  ],
+  "answer": 0,
+  "explanation": "Both are the same ratio on the same cash flows and only the add-back differs. The gap on that row is 13.2758 percentage points, and on the Designer's sample PSC regime it is 16.1948."
+ },
+ {
+  "prompt": "Why can a reader not carry one fixed offset between government share of net revenue in the summary and government take on the chart?",
+  "options": [
+   "The two are computed on different projects, so a gap measured on one field cannot be carried to another.",
+   "The gap runs from 8.7699 to 16.7958 percentage points across six templates on one project at one price.",
+   "The chart prints four decimal places and the table one, so the offset changes with the rounding.",
+   "The gap changes sign between a regime that adds capex back and one that does not."
+  ],
+  "answer": 1,
+  "explanation": "The gap grows with government share of net revenue itself, so Ghana - Deepwater's 16.7958 carried across to Nigeria - PIA (2021), where it is 8.7699, overstates the chart badly."
+ }
+]

@@ -70,6 +70,11 @@ describe('THE PANEL GUARD: no panel may read the capstone', () => {
       expect(printed, `${file} prints a graded capstone answer`).toEqual([]);
     });
 
+    it(`${file} states the engine as it is, with no repair history in its copy`, () => {
+      expect(text).not.toMatch(/Until engines|engines? 3\.(9|10|11)\.0|used to (be|report|find|do|lose)|the retired engine|pre-audit/i);
+      expect(text).not.toMatch(/marginal_field'|pia_capex_recovery_years|pia_tet_rate_pct/);
+    });
+
     it(`${file} carries no em dash, no en dash and no dollar sign`, () => {
       expect(text).not.toMatch(/[–—]/);
       expect(text).not.toMatch(/\$(?!\{)/);

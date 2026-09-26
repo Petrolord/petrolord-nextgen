@@ -10,7 +10,7 @@ The sweep does not write a new deck. It takes the price it wants, divides by the
 
 ## The evidence in one published case
 
-The published `price_below_every_threshold` case takes that same deck at a price multiplier of 0.5, which puts oil at 35 USD per bbl and below every tier of the sliding royalty. Total gross revenue over the life comes back at 1419.0195 million USD against the deck's own 2686.9277. Halving the oil price did not halve the revenue, because two of the three streams did not move. The rest of the ledger follows: contractor net cash flow of 80.8085 million USD, government cash flow of 396.7675, an NPV of -111.7254 at 10 percent, payback pushed out to year 12 and 72.2941 million USD still unrecovered at the end.
+The published `price_below_every_threshold` case takes that same deck at a price multiplier of 0.5, which puts oil at 35 USD per bbl and below every tier of the Designer's sample PSC regime's sliding royalty. Total gross revenue over the life comes back at 1419.0195 million USD against the deck's own 2686.9277. Halving the oil price did not halve the revenue, because two of the three streams did not move. The rest of the ledger follows: contractor net cash flow of 80.8085 million USD, government cash flow of 396.7675, an NPV of -111.7254 at 10 percent, payback pushed out to year 12 and 72.2941 million USD still unrecovered at the end.
 
 ## Two consequences worth holding
 
@@ -18,7 +18,7 @@ A gas-weighted project moves less across the sweep than the axis suggests, so co
 
 ## The mistake
 
-The error to avoid is reading a flat curve as fiscal stability. A project whose revenue is heavily gas will show a government take that barely moves across the nine points, and the correct conclusion is that the sweep did not move most of its revenue, not that the terms are neutral to price. The mirror image is the oil-only project: the Suite test project produces 30000 bbl/d of oil with gas at 0 Mscf/d and NGL at 0 bbl/d, so there the multiplier is the whole revenue multiplier.
+The error to avoid is reading a flat curve as fiscal stability. A project whose revenue is heavily gas will show a government take that barely moves across the nine points, and the correct conclusion is that the sweep did not move most of its revenue, and it says nothing about whether the terms are neutral to price. The mirror image is the oil-only project: the Suite test project produces 30000 bbl/d of oil with gas at 0 Mscf/d and NGL at 0 bbl/d, so there the multiplier is the whole revenue multiplier.
 
 ## What it refuses
 

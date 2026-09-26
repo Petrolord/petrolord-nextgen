@@ -1,0 +1,131 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC1 cashflow, advanced tier, Levies and Losses. Reconstructed from the served rows (the applied
+# migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
+
+q(1,
+ "On the published PIA worked example the tertiary education tax is 31747249.45 in its 2025 PIA year, and the development levy is 42329665.93 when the same year is forced to nta_2025, four thirds of the TET. What makes the ratio exactly the ratio of the rates?",
+ "Both are charged on the same line, the CIT assessable profit of 1058241648.19, so only the rates differ, 4 against 3.",
+ ["The levy is charged on revenue less royalty, a larger base than the TET's, and the extra base matches the rate step.",
+  "The levy is charged on the chargeable profit of 998241648.19 after the capital allowance and then grossed up by the allowance, which returns the ratio of the rates.",
+  "Each levy includes the one it replaces, so the 4 percent is the 3 percent TET plus a one point surcharge."],
+ "Royalty 199158351.81, HCT 285784994.46 and CIT 299472494.46 are identical in both runs; only the last line changes, and total tax moves from 617004738.36 to 627587154.84. The TET rate is 3 percent from 2023 under the Finance Act 2023, so on one base the two levies stand as 4 to 3.")
+
+q(0,
+ "A reader who knows the 2021 Act and has heard of the 2025 framework adds TET and the development levy to the same year of AKATA. What does the ledger say about that total?",
+ "No run of the engine produces it: one of tet_tax and dev_levy_tax is 0.00 on every row, and the fiscal_framework column says which one was charged.",
+ ["It is right for AKATA, whose 2029 base year sits on the trigger, so the engine charges TET of 4240064.93 under the Act and a levy of 5653419.91 under the framework in the same year.",
+  "It is right whenever the override is set to auto, because auto blends the two frameworks in proportion to the years each one covers.",
+  "It overstates by the TET only in the years after 2026, since the levy replaces TET from the switch date and the earlier rows keep both."],
+ "AKATA on auto is an NTA ledger in every year from 2029: it pays a levy of 5653419.91 in 2029 and 23822173.11 over the life with TET at 0.00; forced to pia_only it pays TET of 4240064.93 in 2029 and no levy.")
+
+q(3,
+ "On pia_loss_relief the 2026 development levy is 12098579.71 whether the 2025 CIT loss of 43056393.20 is relieved or clamped. Why does the pool never reach the levy?",
+ "Relief acts on the chargeable profit and the levy sits on the assessable profit, a line the pool is never subtracted from.",
+ ["The pool was spent against the 2025 hydrocarbon tax before the year closed, so nothing was left over for 2026 to relieve against any base at all.",
+  "The levy is charged on the HCT base, which never went into loss, so a CIT pool has no base to meet on the levy line of the 2026 row.",
+  "The clamp only deletes losses on the JV cascade; under the PIA the pool is relieved against every tax on the row including the levy."],
+ "The 2026 row is an NTA year, so the levy stands where TET would. The 2026 CIT is 65822429.87 relieved against 78739347.83 clamped, and the HCT 61697429.87 against 64789347.83, while the levy of 12098579.71 is the same in both runs: 4 percent of an assessable profit neither pool is subtracted from.")
+
+q(2,
+ "A PIA ledger runs from 2027 to 2030 and carries no value for pia_under_nta_2025_override at all. Which framework do its rows print?",
+ "nta_2025 on every row, because an unset override behaves as auto and auto makes each year of assessment from 2026 an NTA year.",
+ ["pia_only, because with no override the engine has no instruction to leave the 2021 Act and keeps the framework it was written for.",
+  "The engine refuses the run, since the framework is a required string and the decision table has no row for an unset override.",
+  "nta_2025 on the 2027 row alone and pia_only from 2028, because an unset override applies the 2025 framework to the first year of the ledger only."],
+ "The framework is read for each year of assessment. On auto, or with the override unset, 2024 and 2025 are pia_only and 2026 onward nta_2025, so a ledger that starts in 2027 is nta_2025 throughout; force_pia and force_nta apply one framework to every year.")
+
+q(0,
+ "pia_loss_relief runs on auto with rows in 2025 and 2026. Its 2025 row prints pia_only with no development levy, and its 2026 row prints nta_2025 with a development levy of 12098579.71 and no TET. Why do the two rows differ?",
+ "The framework is chosen for each year of assessment: on auto a year before 2026 is a PIA year and a year from 2026 an NTA year.",
+ ["The loss banked in 2025 moves the ledger onto the 2025 framework in the year it is spent, so any year that uses relief prints nta_2025 whatever its date.",
+  "The engine chose one framework from the base year, and a 2025 base year selects nta_2025 for every row after the first one by design of the switch.",
+  "The engine renamed the column and kept the rate, so the 12098579.71 is TET at 3 percent under the levy heading."],
+ "The same holds on pia_cpr_carry_two_years, pia_only in 2025 and nta_2025 in 2026 and 2027, and on elt_pia_multiyear, nta_2025 from 2026 to 2030. A ledger that crosses 2026 is named pia_only_then_nta_2025 in the KPI line.")
+
+q(1,
+ "The worked example in 2025 forced to nta_2025 pays a levy of 42329665.93 with NPV 130654493.35; the same volumes in 2026 on auto pay 42414115.94 with NPV 131414543.48. The framework is nta_2025 both times. What moved the levy?",
+ "The royalty-by-price benchmarks escalated a year further, so the price royalty fell from 34908351.810791 to 32797101.449275 and the assessable profit the levy follows rose to 1060352898.55.",
+ ["The 3 percent inflation rate deflated the 2026 year once more, lifting the real profit on which the development levy is computed, so the later year pays more.",
+  "The levy rate steps up in its second year under the framework, above 4 percent, which is why the later ledger pays a little more on the same assessable base.",
+  "The 2026 run discounts one year less than the 2025 run, and the development levy is reported on the discounted profit of the year rather than the nominal profit printed on the row."],
+ "Total royalty fell from 199158351.81 to 197047101.45, and HCT rose from 285784994.46 to 286418369.57 and CIT from 299472494.46 to 300105869.57 on the same movement. The price royalty here is on the Petroleum Royalty Regulations (2021) base, the engine default.")
+
+q(2,
+ "jv_loss_carryforward's 2031 row reads taxable income 65000000.00 and tax 30000000.00, which is not 50 percent of the column. A reader concludes the rate is wrong. What did the reader miss?",
+ "The pool is applied after the taxable income column: loss_offset_used reads 5000000.00 and the rate is charged on the remainder.",
+ ["The depreciation of 5000000.00 in 2031 was deducted a second time from the tax rather than from the income, which is how the engine relieves a loss year.",
+  "The 2030 loss reduced the rate for the following year from 50 to 40 percent, since relief in this engine works on the rate and not on the base.",
+  "The royalty of 20000000.00 is credited against tax under joint venture terms, and the credit happens to be 2500000.00 after discounting."],
+ "The pool of 5000000.00 banked in 2030 falls to 0.00 in 2031; net cash flow is 40000000.00 and NPV -13636363.64 against -15909090.91 with the clamp on.")
+
+q(3,
+ "The engine's single-year function is given taxable income of 10000000.00 at the 50 percent rate with a pool of 15000000.00 brought forward. What does it report?",
+ "Offset used 10000000.00, tax 0.00 and a pool after of 5000000.00.",
+ ["Offset used 15000000.00, tax 0.00 and a negative taxable income of 5000000.00 banked as a fresh loss for the next year.",
+  "Offset used 10000000.00, tax 0.00 and a pool after of 0.00, because a pool is spent whole in the first year with income.",
+  "Offset used 5000000.00, tax 2500000.00 and a pool after of 10000000.00, because the offset is capped at half the year's income."],
+ "The offset is capped at the year's taxable income, so tax bottoms at 0.00 and the rest waits: a pool of 40000000.00 leaves 30000000.00 after the same year.")
+
+q(1,
+ "With apply_loss_carryforward set to false, what happens to the 5000000.00 loss of jv_loss_carryforward's 2030 row?",
+ "It is deleted: loss_carryforward reads 0.00, 2031 pays the full 32500000.00 and NPV falls to -15909090.91.",
+ ["It is deferred until the ledger ends and then reported as tax losses unused at cessation, so NPV is unchanged and the memo line carries it.",
+  "It is relieved against the HCT base instead of the CIT base, which is why the 2031 tax does not move.",
+  "It is carried at face value but charged interest at the discount rate, so the 2031 offset is worth less than 5000000.00."],
+ "The clamp does not defer the loss; the IRR moves from -20.0000 to -25.0000 percent because 2500000.00 of tax that relief would have removed is paid.")
+
+q(0,
+ "On pia_loss_relief the 2026 HCT is 61697429.87 relieved against 64789347.83 clamped, and the CIT 65822429.87 against 78739347.83. Why does relief move both taxes?",
+ "The pools are kept per base and 2025 put both into loss: the HCT base banked 10306393.20 and the CIT base 43056393.20, each spent in 2026 against its own tax.",
+ ["HCT is charged on liquids and the loss arose on gas, so the pool is one gas pool that both bases share in proportion to revenue.",
+  "One pool of 43056393.20 is banked on the CIT base, and the engine lends part of it to the HCT base whenever the HCT base turns positive in a following year of the ledger.",
+  "The engine relieves the larger tax first and passes whatever is left of a single pool to the smaller one, which is why both taxes fall by exactly the same amount in 2026."],
+ "An HCT profit cannot absorb a CIT loss; the two pools are reported apart as hct_loss_carryforward and cit_loss_carryforward, and NPV moves from -9568013.75 clamped to 4985473.45 relieved.")
+
+q(2,
+ "jv_loss_unused_at_cessation reports NPV -50000000.00 and tax losses unused at cessation of 5000000.00. What is the unused pool worth in the NPV?",
+ "Nothing: it is a memo line outside the NPV, a shield with nothing to shield, and adding it back counts a year the ledger does not contain.",
+ ["2500000.00, the tax it would save at the 50 percent rate, which the engine has already netted into the -50000000.00.",
+  "5000000.00 discounted one year, since the pool is carried to the year after cessation and valued there.",
+  "2500000.00 in present value only if the reader adds it by hand, which the engine invites by printing the memo line beside the KPIs."],
+ "Give the same capex one more year of production, as jv_loss_carryforward does, and the pool is spent: tax falls from 32500000.00 to 30000000.00 and the memo line disappears.")
+
+q(1,
+ "Each regime names the value the horizon left behind differently. Which pairing of regime and cessation line is right?",
+ "Production sharing, with kpis.psc_unrecovered_cost_at_cessation: the cost the cost oil cap never let the contractor recover.",
+ ["Joint venture, which banks the loss in the row's loss_carryforward column and so prints no line at cessation.",
+  "The PIA, whose deferred CPR balance is relieved against the final year's CIT and so never reaches cessation or any line of its own.",
+  "Joint venture, with CPR forfeited at cessation: the carried royalty the final year could not claim."],
+ "cpr_forfeiture ends with CPR forfeited at cessation 8000000.00 and jv_loss_unused_at_cessation with tax losses unused 5000000.00; production sharing reports its unrecovered pool at cessation, 207346412.26 on AKATA at a 30 percent cost oil cap.")
+
+q(3,
+ "With pia_apply_minimum_etr true at 85 percent and the worked example forced to nta_2025, the row grows a min_etr_topup column and total tax becomes 85 percent of the CIT assessable profit of 1058241648.19. Which taxes count as already paid when the floor is measured?",
+ "HCT, CIT and the development levy, the three taxes in the tax column of an NTA year, with the royalty left outside.",
+ ["HCT and CIT alone, 285784994.46 and 299472494.46, since the floor is a floor on the profit taxes and a levy on profit is a separate charge outside it.",
+  "All of them: the amount the floor is measured against includes the royalty of 199158351.81, the HCDT, the NDDC and the development levy.",
+  "HCT, CIT and the tertiary education tax at 3 percent, since the floor is tested in exactly the years in which the tertiary education tax is charged."],
+ "The floor is tested only in NTA years, where the development levy stands in place of TET. Forced to nta_2025 the year pays 627587154.84 before the floor, HCT 285784994.46 plus CIT 299472494.46 plus levy 42329665.93, and the top-up lifts the total to 85 percent of 1058241648.19; the royalty, HCDT and NDDC sit outside it. On the published 2025 year the floor is never tested.")
+
+q(0,
+ "With pia_apply_minimum_etr true at 15 percent, the worked example forced to nta_2025 already pays taxes well above the floor. What does the row show for min_etr_topup?",
+ "Nothing: the column exists only where the floor was charged, and the KPI line reads min ETR top-up not reported.",
+ ["A value of 0.00, printed so that a reader can confirm the floor was tested and found already satisfied.",
+  "The shortfall as a negative number, the amount by which the 627587154.84 of tax exceeds 15 percent of 1058241648.19.",
+  "The 15 percent of the assessable profit of 1058241648.19, printed as the floor tested, with a flag beside it reading false because it did not bind."],
+ "The default for pia_apply_minimum_etr is false. The floor is tested only in NTA years: on the published 2025 year it is never tested at any percentage, and forced to nta_2025 at 15 percent the year's taxes already exceed it, so no column appears.")
+
+q(2,
+ "Forced to nta_2025 with the floor at 85 percent, the worked example's net cash flow turns from positive to negative and its take rises from 86.6338 percent to past 100 percent. How can a take exceed 100 percent?",
+ "The top-up is charged on a profit measured before capex, so it can exceed the cash the year generates, and the engine refuses to cap it at the year's cash.",
+ ["It cannot; a take above 100 percent is a display fault in the KPI line, and the figure should be read as 100 with the excess carried into the next year of the ledger.",
+  "The take ratio counts the 300000000.00 of capex as government revenue once the floor binds, since capex recovery is suspended under a minimum rate.",
+  "The floor is measured on the chargeable profit of 998241648.19 while take is measured on the assessable one, and the two denominators differ by enough to push the ratio past 100."],
+ "Payback moves from Year 0 to beyond project life and DPI from 0.435515 to -0.470879; the government collected more than the year's pre-take value. The floor applies only to NTA years, so the published 2025 run at 85 percent pays no top-up and changes nothing.")
+
+emit(Q, '/root/wt-ec7-recut/tools/course-banks/cashflow/advanced/ec1a_m04.json', expect_n=15)
+finish()

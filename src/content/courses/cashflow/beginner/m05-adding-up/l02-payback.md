@@ -15,7 +15,7 @@ The hand-derived case: -12500000.00 after 2030, 25000000.00 after 2031, payback 
 | AKATA | -29534809.71 | 19845806.34 | 3.46 years | 3.461632 |
 | jv_analytic_decision_kpis | -12500000.00 | 25000000.00 | 1.33 years | 1.333333 |
 | multiyear_jv_real | -40339805.83 | 1742002.07 | 2.89 years | 2.889357 |
-| multiyear_pia_real | -140433273.28 | 6104035.92 | 2.89 years | 2.892034 |
+| multiyear_pia_real | -136920868.40 | 13799645.40 | 2.84 years | 2.844931 |
 
 ## Which column the fraction comes from
 
@@ -27,7 +27,7 @@ When the first row is already positive the engine prints "Year 0" and payback_ye
 
 ## The mistake
 
-Counting from the wrong start. Payback is measured from the first row of the ledger, 2029 on AKATA, not from first oil, not from the last capex year and not from the trough. Measured from the 2030 tranche the same crossing reads a year shorter, and the field looks faster than the engine says. The second mistake is to stop at the whole year: 2032 is a year, 3.461632 is a payback, and two fields that cross in the same calendar year can be nearly a year apart in payback_years.
+Counting from the wrong start. Payback is measured from the first row of the ledger, 2029 on AKATA; first oil, the last capex year and the trough are all the wrong start. Measured from the 2030 tranche the same crossing reads a year shorter, and the field looks faster than the engine says. The second mistake is to stop at the whole year: 2032 is a year, 3.461632 is a payback, and two fields that cross in the same calendar year can be nearly a year apart in payback_years.
 
 ## What it refuses
 

@@ -1,12 +1,14 @@
 # The limit and its base
 
-The cost recovery limit is a percent, and the number it is a percent of is revenue after royalty. Getting the base wrong is a larger error than getting the limit wrong.
+The cost recovery limit is a percent, and for five of the six templates the number it is a percent of is revenue after royalty. Getting the base wrong is a larger error than getting the limit wrong.
 
 {{panel:ec-instrument-explorer}}
 
 ## Which revenue
 
-The allowance is the limit applied to revenue AFTER royalty, not to gross revenue. On the Designer's default project year 1 under the "Generic Royalty/Tax" instruments, gross revenue is 271.9889 million USD and royalty is 33.9986. A 100 percent limit recovers 237.9903, which is the whole of what is left after royalty and is not 271.9889. The royalty is taken first and never becomes recoverable cost.
+The allowance is the limit applied to revenue AFTER royalty, a smaller number than gross revenue. On the Designer's default project year 1 under the "Generic Royalty/Tax" instruments, gross revenue is 271.9889 million USD and royalty is 33.9986. A 100 percent limit recovers 237.9903, which is the whole of what is left after royalty and is not 271.9889. The royalty is taken first and never becomes recoverable cost.
+
+The "Nigeria - PIA (2021)" template takes a different base: 70 percent of the gross value of crude oil and NGL, before royalty. On ODIDI in year 1 that allows 97.7288 million USD of cost recovered against gross revenue of 139.6563.
 
 The same year at four limits, with nothing else changed:
 
@@ -21,7 +23,7 @@ At 100 percent profit oil in year 1 is exactly 0.0000, because the pool holds mo
 
 ## The limit is a timing instrument
 
-The four limits are the three the templates use, 50 for Angola, 80 for the PIA and 90 for Ghana, plus the concession 100. Over the whole life on this project they barely separate:
+The four limits are Angola's 50, the tiered teaching regime's 80 and Ghana's 90, plus the concession 100. Over the whole life on this project they barely separate:
 
 | cost recovery limit | total cost recovered | total profit oil | total contractor NCF | closing pool |
 | --- | --- | --- | --- | --- |
@@ -34,7 +36,7 @@ Three of the four are identical to the last printed digit. Once the pool clears 
 
 ## The mistake
 
-Two errors hide in the same place. The first is taking the limit against gross revenue, which on this year 1 would offer more than the 237.9903 the engine allows and would make the pool clear a year early. The second is assuming that a harsher limit is a harsher regime. Undiscounted contractor net cash flow moves from 986.7327 to 986.4494 between a 100 percent limit and a 50 percent limit. What actually changed is the shape of the early years, and a discounted measure is where that shows. A tight limit costs the contractor time rather than money, right up to the point where the pool fails to clear inside the horizon, and then it costs money and nothing else.
+Two errors hide in the same place. The first is taking the limit against gross revenue, which on this year 1 would offer more than the 237.9903 the engine allows and would make the pool clear a year early. The second is assuming that a harsher limit is a harsher regime. Undiscounted contractor net cash flow moves from 986.7327 to 986.4494 between a 100 percent limit and a 50 percent limit. A tight limit costs the contractor time rather than money, right up to the point where the pool fails to clear inside the horizon, and then it costs money and nothing else.
 
 ## What it refuses
 

@@ -31,7 +31,7 @@ Nothing in this column has a clock. Year 25's 6.4592 is added to year 2's 169.77
 
 ## The mistake
 
-The error that costs most is to read the closing cumulative as a verdict. On the teaching field ODIDI at a discount rate of 12 percent, every template closes its cumulative in the black and every template returns a negative net present value: "Brazil - Concession" ends the life with 192.9896 of contractor cash and a value of -5.8662, and "Angola - Deepwater PSC" with 109.1947 and -58.1813. A field can pay back all of its money and still not be worth building.
+The error that costs most is to read the closing cumulative as a verdict. On the teaching field ODIDI at a discount rate of 12 percent, every template closes its cumulative in the black and five of the six return a negative net present value: "Brazil - Concession" ends the life with 192.9896 of contractor cash and a value of -5.8662, and "Angola - Deepwater PSC" with 109.1947 and -58.1813. Only "Nigeria - PIA (2021)" returns a positive value, 1.7389, on 229.9586 of contractor cash, and that is close to nothing on 420.0000 of capex. A field can pay back all of its money and still not be worth building.
 
 The second error is to assume the column only rises. It rises while the contractor's line is positive, and a declining field can turn it back down late in life, when revenue after royalty no longer covers the year's opex. ODIDI's own year 25 sells 6.9081 of gross revenue and pays 12.3405 of opex under the Gulf of Mexico terms, and the ledger mode of the panel will show you which of its late years bend the curve.
 

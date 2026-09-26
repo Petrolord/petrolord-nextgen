@@ -5,7 +5,7 @@ import {
 } from 'recharts';
 import {
   COST_RECOVERY_LIMITS, R_FACTOR_CASE_IDS, R_FACTOR_CASE_LABELS,
-  royaltyMultiplierSweep, royaltyThresholdProbe, royaltyThresholdRounding, odidiRoyaltyByYear, royaltyCases,
+  royaltyMultiplierSweep, royaltyThresholdProbe, royaltyThresholdRounding, odidiRoyaltyByYear, odidiPiaRoyaltyByYear, royaltyCases,
   costRecoverySweep, costRecoveryCases,
   rFactorTable,
   taxDecomposition, taxCases, upliftSweep, upliftTotalCapex,
@@ -64,9 +64,10 @@ const Royalty = () => {
   const probe = useMemo(() => { try { return royaltyThresholdProbe(); } catch { return null; } }, []);
   const rounding = useMemo(() => { try { return royaltyThresholdRounding(); } catch { return null; } }, []);
   const deck = useMemo(() => { try { return odidiRoyaltyByYear(); } catch { return null; } }, []);
+  const pia = useMemo(() => { try { return odidiPiaRoyaltyByYear(); } catch { return null; } }, []);
   const cases = useMemo(() => { try { return royaltyCases(); } catch { return null; } }, []);
   const [caseId, setCaseId] = useState('sliding_royalty_price_deck_crossing');
-  if (!sweep || !probe || !rounding || !deck || !cases) {
+  if (!sweep || !probe || !rounding || !deck || !pia || !cases) {
     return <Note>The royalty sweep did not run. A sliding scale needs a tier list keyed on the oil price, and the price it reads is the applied price for the year after the multiplier, so with no run there is no rate to read.</Note>;
   }
   const c = cases.find((x) => x.id === caseId) || cases[0];
@@ -75,7 +76,7 @@ const Royalty = () => {
   return (
     <>
       <p className="text-xs text-slate-400 mb-0">
-        The PIA royalty has two tiers, 0 USD per bbl at 7.5 percent and 50 USD per bbl at 10 percent. Swept across
+        The tiered teaching regime's royalty has two tiers, 0 USD per bbl at 7.5 percent and 50 USD per bbl at 10 percent. Swept across
         the price multiplier on the DEFAULT PROJECT, whose year 1 deck price is 70 USD per bbl. The implied rate is
         the royalty the engine returned over the gross revenue it returned, on the same row.
       </p>
@@ -115,6 +116,16 @@ const Royalty = () => {
         head={['year', 'grossRevenue', 'royalty', 'implied rate']}
         rows={deck.map((x) => [x.year, mm(x.grossRevenue), mm(x.royalty), ratio(x.impliedRateDerived)])}
       />
+      <p className="text-xs text-slate-500 mt-4 mb-1">
+        The Nigeria - PIA (2021) template carries no price tiers. Each year it charges a production royalty at the
+        deep offshore rate for the year's daily oil rate, a royalty by price once the oil price passes that year's low
+        benchmark (the Regulations 2021 base, the engine default, with project year 1 in 2027), and 5 percent on gas
+        and NGL. ODIDI under it, the first fourteen years:
+      </p>
+      <Tbl
+        head={['year', 'grossRevenue', 'royalty', 'implied rate']}
+        rows={pia.map((x) => [x.year, mm(x.grossRevenue), mm(x.royalty), ratio(x.impliedRateDerived)])}
+      />
       <FieldGrid>
         <SelectField label="Published case" value={c.id} onChange={setCaseId} options={cases.map((x) => [x.id, x.id])} />
       </FieldGrid>
@@ -125,9 +136,9 @@ const Royalty = () => {
         rows={c.head.map((x) => [x.year, mm(x.grossRevenue), mm(x.royalty), ratio(x.impliedRateDerived)])}
       />
       <Note>
-        It is a STEP, not a ramp: nothing between the tiers is interpolated. The walk starts at the FIRST tier rate
-        and keeps the rate of every tier whose threshold the price has reached, so a price below every threshold pays
-        the first tier rate and not zero, which is what price_below_every_threshold is published to show. Read a
+        It is a STEP: nothing between the tiers is interpolated. The walk starts at the FIRST tier rate and keeps
+        the rate of every tier whose threshold the price has reached, so a price below every threshold pays the
+        first tier rate, never zero, which is what price_below_every_threshold is published to show. Read a
         sweep printed price column as a ROUNDING of the price the engine used, never as the price itself, and read
         the implied rate as the measurement: the rate says which side of the threshold the engine was actually on.
       </Note>
@@ -256,7 +267,7 @@ const RFactor = () => {
         {t.fallsBackAnywhere ? '' : ' There are none in this case.'}
       </p>
       <Note>
-        The R factor is a ratio of CUMULATIVES, not of the year, and it is computed BEFORE the split is chosen, from
+        The R factor is a ratio of CUMULATIVES over the life so far, never of the year alone, and it is computed BEFORE the split is chosen, from
         the totals including the current year. It is therefore NOT monotone: revenue declines while opex keeps
         accruing, and the ratio can cross back below a threshold it had passed. Where it does, the contractor split
         steps back UP. Real R factor contracts usually ratchet, so that a split once given up is never returned; this

@@ -12,7 +12,7 @@ The simplest ledger in the sandbox shows both. USA - Gulf of Mexico on the defau
 
 ## When they separate
 
-They separate as soon as the government takes a large early share. On the Designer's defaults the production sharing regime returns payback in year 4 with payout in year 3, and the concession returns 3 and 3. On the default project Angola - Deepwater PSC pays back in year 4 and reaches payout in year 3, while Ghana - Deepwater does both in year 3. Price moves them at different speeds too. The nine published price runs of the Designer's production sharing regime on the default project return:
+They separate as soon as the government takes a large early share. On the Designer's defaults the Designer's sample PSC regime returns payback in year 4 with payout in year 3, and the concession returns 3 and 3. On the default project Angola - Deepwater PSC pays back in year 4 and reaches payout in year 3, while Ghana - Deepwater does both in year 3. Price moves them at different speeds too. The nine published price runs of the Designer's sample PSC regime on the default project return:
 
 | price, USD per bbl | 40 | 50 | 60 | 70 | 80 | 90 | 100 | 110 | 120 |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |

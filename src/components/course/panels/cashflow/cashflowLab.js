@@ -5,7 +5,7 @@
 // EVERYTHING HERE IS THE VENDORED ENGINE'S OWN OUTPUT. Every ledger row, every
 // KPI, every sweep point, every IRR and every fiscal line below is a return
 // value from a call into engines/economics/cashflow.ts (the Petroleum
-// Economics Studio engine, v3.9.0, extracted in the EC0 wave). Nothing in this
+// Economics Studio engine, v3.12.0). Nothing in this
 // file re-implements the engine. The one place that looks like arithmetic, the
 // cost recovery pool in akataUnderPsc, is the engine's own applyPSC marched
 // over the engine's own rows, because the rows do not carry the pool and no
@@ -16,6 +16,15 @@
 // percent for rates where the engine reports percent (irr, take, applied
 // discount rate), fractions where the engine reports fractions (royalty and
 // HCT rates from the derive* functions, DPI). Years are calendar years.
+//
+// THE PIA DEFAULT PATH. Every PIA run is the engine on its default path,
+// which follows the texts as gazetted (PIA 2021, NTA 2025, Petroleum Royalty
+// Regulations 2022, Finance Act 2023). A published PIA config loses the
+// pia_legacy_pre_audit flag and its stated tertiary education tax rate before
+// it runs, so TET is the statutory rate for the row's year, exactly as the
+// digest generator does. The three published configs the default path refuses
+// run on the digest's stated inputs (STATED_INPUTS below); a stated reading the
+// texts leave open is labelled as one wherever it appears.
 //
 // PURITY. Every function here is pure and deterministic. There is no random
 // number anywhere in this module and nothing is memoised, so two calls with
@@ -31,6 +40,8 @@ import {
   applyJV, applyPSC, pscTrancheShare,
   deriveOilRoyaltyRate, deriveGasRoyaltyRate, derivePriceRoyaltyRate, deriveHctRate,
   computeProductionAllowance, determineFiscalFramework,
+  priceRoyaltyBenchmarks, capitalAllowanceFraction, statutoryTetRatePct, fiscalFrameworkForYear,
+  PIA_TEXTS, PIA_TERRAINS, NTA_FIRST_YEAR,
   irrResult,
 } from '@petrolord/engines/engines/economics/cashflow.ts';
 
@@ -43,6 +54,8 @@ export {
   applyJV, applyPSC, pscTrancheShare,
   deriveOilRoyaltyRate, deriveGasRoyaltyRate, derivePriceRoyaltyRate, deriveHctRate,
   computeProductionAllowance, determineFiscalFramework,
+  priceRoyaltyBenchmarks, capitalAllowanceFraction, statutoryTetRatePct, fiscalFrameworkForYear,
+  PIA_TEXTS, PIA_TERRAINS, NTA_FIRST_YEAR,
 };
 
 // ---------------------------------------------------------------------------
@@ -53,12 +66,54 @@ export const GOLDEN = cases;
 export const GOLDEN_ENGINE_VERSION = cases.engine_version;
 
 const CASE = Object.fromEntries(cases.cases.map((c) => [c.name, c]));
+
+const clone0 = (o) => JSON.parse(JSON.stringify(o));
+
+/**
+ * The digest's default path for a published config: a PIA config loses the
+ * legacy flag and its stated TET rate; every other stated input is kept.
+ */
+export const defaultPathCfg = (cfg) => {
+  if (!cfg || cfg.fiscal_regime !== 'PIA') return cfg;
+  const c = { ...cfg };
+  delete c.pia_legacy_pre_audit;
+  delete c.pia_tet_rate_pct;
+  return c;
+};
+
+/**
+ * The three published configs the default path refuses, and the stated input
+ * each one runs on instead. A new-acreage PML onshore or in shallow water has
+ * no hydrocarbon tax rate in the texts, so 30 is a STATED READING the texts
+ * leave open; a marginal field is onshore with pia_marginal_field_pre_2021.
+ */
+export const STATED_INPUTS = {
+  allowance_cap_midyear: { pia_new_pml_hct_rate_pct: 30 },
+  pia_onshore_new_lease: { pia_new_pml_hct_rate_pct: 30 },
+  pia_marginal_field_blend: { pia_terrain: 'onshore' },
+};
+
+/** Why the default path refuses a published config as published, or null. */
+export const publishedRefusal = (name) => {
+  const c = CASE[name];
+  if (!c) throw new Error(`no published case named ${name}`);
+  try {
+    computeCashFlow({ cfg: defaultPathCfg(c.cfg), prodRows: c.prodRows, capexRows: c.capexRows, opexRows: c.opexRows });
+    return null;
+  } catch (err) {
+    return String(err.message);
+  }
+};
 const DISAGREEMENT = Object.fromEntries(cases.disagreements.map((d) => [d.case, d]));
 
+/** A published case as the course runs it: the stated input on top where the default path refuses the config. */
 export const goldenCase = (name) => {
   const c = CASE[name];
   if (!c) throw new Error(`no published case named ${name}`);
-  return c;
+  if (!STATED_INPUTS[name]) return c;
+  const o = clone0(c);
+  o.cfg = { ...o.cfg, ...STATED_INPUTS[name] };
+  return o;
 };
 
 export const goldenCaseNames = () => cases.cases.map((c) => c.name);
@@ -69,7 +124,7 @@ export const goldenCaseNames = () => cases.cases.map((c) => c.name);
 
 const clone = (o) => JSON.parse(JSON.stringify(o));
 const withCfg = (c, patch) => ({ ...clone(c), cfg: { ...clone(c.cfg), ...patch } });
-const run = (c) => computeCashFlow({ cfg: c.cfg, prodRows: c.prodRows, capexRows: c.capexRows, opexRows: c.opexRows });
+const run = (c) => computeCashFlow({ cfg: defaultPathCfg(c.cfg), prodRows: c.prodRows, capexRows: c.capexRows, opexRows: c.opexRows });
 const mapToRows = (m) => [...m.entries()].map(([year, usd]) => ({ year, usd }));
 
 /** The headline KPI subset every panel prints in the same order. */
@@ -135,13 +190,16 @@ export const AKATA_PSC_PATCH = {
   psc_contractor_profit_share_pct: 45, psc_tax_rate_pct: 50, psc_working_interest_pct: 100,
 };
 
-/** AKATA under the PIA, as the digest's Section 20 sets it. */
+/**
+ * AKATA under the PIA, as the digest's Section 20 sets it. Everything not
+ * named here is the engine's default: NDDC 3 percent of the total annual
+ * budget, the capital allowance over the five years the texts fix, the Sixth
+ * Schedule production allowance, TET at the statutory rate.
+ */
 export const AKATA_PIA_PATCH = {
   fiscal_regime: 'PIA', pia_terrain: 'shallow_water', pia_license_type: 'PML', pia_lease_status: 'converted',
   pia_water_depth_m: 60, pia_marginal_field_pre_2021: false, pia_hct_rate_override_pct: null,
-  pia_cit_rate_pct: 30, pia_tet_rate_pct: 2.5, pia_nddc_levy_pct_of_opex: 3, pia_nddc_levy_fixed_usd: null,
-  pia_prior_year_opex_usd: 0, pia_capex_recovery_years: 5, pia_cpr_limit_pct: 65,
-  pia_production_allowance_per_bbl_converted: 2.5, pia_production_allowance_per_bbl_new: 8, pia_production_allowance_pct_of_price: 20,
+  pia_cit_rate_pct: 30, pia_prior_year_opex_usd: 0, pia_cpr_limit_pct: 65,
   pia_under_nta_2025_override: 'auto', pia_prior_cumulative_oil_bbl: 0,
 };
 
@@ -172,9 +230,13 @@ export const refusals = () => cases.errors.map((e) => {
 });
 
 /** Every published case, one line each: name, note and the headline KPIs. */
-export const publishedCaseLines = () => cases.cases.map((c) => {
-  const res = run(c);
-  return { name: c.name, note: c.note, rows: res.cashFlowData.length, ...kpiSummary(res.kpis) };
+export const publishedCaseLines = () => cases.cases.map((c0) => {
+  const refusedAsPublished = publishedRefusal(c0.name);
+  const res = run(goldenCase(c0.name));
+  return {
+    name: c0.name, note: c0.note, rows: res.cashFlowData.length, refusedAsPublished,
+    statedInput: STATED_INPUTS[c0.name] ?? null, ...kpiSummary(res.kpis),
+  };
 });
 
 /** Run one published case and hand back its rows and KPIs untouched. */
@@ -663,13 +725,17 @@ export const akataCostScaleSweep = () => COST_SCALES.map((scale) => {
 // SECTION 12. The breakeven oil price.
 // ---------------------------------------------------------------------------
 
+// A PIA breakeven case runs on the default path, as the digest runs it; the
+// golden's own breakeven for a PIA case was cut with the pre-audit flag, so the
+// course carries no golden figure beside it (the digest prints none).
 export const breakevenCases = () => cases.breakeven.map((c) => {
-  const be = computeBreakevenOilPrice({ cfg: c.cfg, prodRows: c.prodRows, capexRows: c.capexRows, opexRows: c.opexRows });
+  const isPia = c.cfg.fiscal_regime === 'PIA';
+  const be = computeBreakevenOilPrice({ cfg: defaultPathCfg(c.cfg), prodRows: c.prodRows, capexRows: c.capexRows, opexRows: c.opexRows });
   const npvAtBreakeven = be === null ? null : run(withCfg(c, { oil_price_usd_bbl: be })).kpis.npv;
   return {
-    name: c.name, note: c.note ?? null,
-    engineBreakeven: be, goldenBreakeven: c.breakeven_usd_bbl ?? null,
-    npvAtBreakeven, goldenNpvAtBreakeven: c.npv_at_breakeven ?? null,
+    name: c.name, note: isPia ? null : (c.note ?? null),
+    engineBreakeven: be, goldenBreakeven: isPia ? null : (c.breakeven_usd_bbl ?? null),
+    npvAtBreakeven, goldenNpvAtBreakeven: isPia ? null : (c.npv_at_breakeven ?? null),
     configOilPrice: c.cfg.oil_price_usd_bbl, deck: c.cfg.price_deck ?? null,
   };
 });
@@ -768,34 +834,60 @@ export const akataPscCapSweep = () => PSC_CAP_SWEEP_PCT.map((cap) => akataUnderP
 // SECTION 14. The PIA royalties.
 // ---------------------------------------------------------------------------
 
-export const TERRAINS = ['onshore', 'shallow_water', 'deep_offshore', 'frontier', 'marginal_field'];
-export const ROYALTY_RATE_PROBES_BOPD = [1000, 5000, 6000, 8000, 10000, 12000, 20000, 50000, 50001, 60000, 120000];
-export const PRICE_ROYALTY_YEARS = [2021, 2025, 2026, 2030, 2035];
+export const TERRAINS = [...PIA_TERRAINS];
+export const ROYALTY_RATE_PROBES_BOPD = [1, 1000, 4999, 5000, 5001, 6000, 7500, 8000, 9999, 10000, 10001, 12000, 20000, 40000, 49999, 50000, 50001, 60000, 100000, 120000];
+export const GAS_IN_COUNTRY_SHARES = [0, 25, 50, 100];
+export const PRICE_ROYALTY_YEARS = [2021, 2025, 2026, 2030, 2032, 2035];
 export const PRICE_ROYALTY_PROBES = [40, 50, 55, 60, 75, 80, 100, 110, 125, 150, 160, 200];
+export const BENCHMARK_YEARS = Array.from({ length: 17 }, (_, i) => 2020 + i);
 
+/**
+ * deriveHctRate's nine arguments: terrain, licence, marginal field converted
+ * under s.94(1), override, framework, deep offshore reading, custom rate,
+ * lease status, stated new-PML rate. The rows the digest prints, labelled as
+ * it labels them; every rate named after "stated" or a deep offshore NTA
+ * reading is a stated reading the texts leave open, never a settled rate.
+ */
 export const HCT_RATE_CASES = [
-  ['shallow_water PML converted, PIA', ['shallow_water', 'PML', false, null, 'pia_only']],
-  ['shallow_water PPL, PIA', ['shallow_water', 'PPL', false, null, 'pia_only']],
-  ['onshore PML marginal pre-2021, PIA', ['onshore', 'PML', true, null, 'pia_only']],
-  ['deep_offshore PML, PIA', ['deep_offshore', 'PML', false, null, 'pia_only']],
-  ['deep_offshore PML, NTA conservative', ['deep_offshore', 'PML', false, null, 'nta_2025', 'conservative_zero']],
-  ['deep_offshore PML, NTA aggressive', ['deep_offshore', 'PML', false, null, 'nta_2025', 'aggressive_pml_30']],
-  ['deep_offshore PML, NTA custom 12.5', ['deep_offshore', 'PML', false, null, 'nta_2025', 'custom', 12.5]],
-  ['frontier, either', ['frontier', 'PML', false, null, 'pia_only']],
-  ['override 20 anywhere', ['onshore', 'PML', false, 20, 'pia_only']],
+  ['shallow_water PML converted, PIA year', ['shallow_water', 'PML', false, null, 'pia_only', null, null, 'converted', null]],
+  ['onshore PML converted, NTA year', ['onshore', 'PML', false, null, 'nta_2025', null, null, 'converted', null]],
+  ['shallow_water PPL, PIA year', ['shallow_water', 'PPL', false, null, 'pia_only', null, null, 'converted', null]],
+  ['onshore PML, marginal field converted under s.94(1)', ['onshore', 'PML', true, null, 'pia_only', null, null, 'converted', null]],
+  ['shallow_water new-acreage PML, no rate stated', ['shallow_water', 'PML', false, null, 'pia_only', null, null, 'new', null]],
+  ['shallow_water new-acreage PML, stated 30', ['shallow_water', 'PML', false, null, 'pia_only', null, null, 'new', 30]],
+  ['shallow_water new-acreage PML, stated 15', ['shallow_water', 'PML', false, null, 'pia_only', null, null, 'new', 15]],
+  ['deep_offshore PML, PIA year', ['deep_offshore', 'PML', false, null, 'pia_only', null, null, 'converted', null]],
+  ['deep_offshore PML, NTA year, no reading stated', ['deep_offshore', 'PML', false, null, 'nta_2025', null, null, 'converted', null]],
+  ['deep_offshore PML, NTA year, conservative_zero', ['deep_offshore', 'PML', false, null, 'nta_2025', 'conservative_zero', null, 'converted', null]],
+  ['deep_offshore PML, NTA year, aggressive_pml_30', ['deep_offshore', 'PML', false, null, 'nta_2025', 'aggressive_pml_30', null, 'converted', null]],
+  ['deep_offshore PML, NTA year, custom 12.5', ['deep_offshore', 'PML', false, null, 'nta_2025', 'custom', 12.5, 'converted', null]],
+  ['frontier, either framework', ['frontier', 'PML', false, null, 'pia_only', null, null, 'converted', null]],
+  ['override 20 anywhere', ['onshore', 'PML', false, 20, 'pia_only', null, null, 'converted', null]],
 ];
+
+const refusedOr = (fn) => { try { return { value: fn(), refused: null }; } catch (err) { return { value: null, refused: String(err.message) }; } };
 
 export const royaltyTables = () => ({
   oilByTerrain: TERRAINS.map((terrain) => ({
     terrain, byRate: ROYALTY_RATE_PROBES_BOPD.map((bopd) => ({ bopd, rate: deriveOilRoyaltyRate(terrain, bopd) })),
   })),
-  gasByTerrain: TERRAINS.map((terrain) => ({ terrain, rate: deriveGasRoyaltyRate(terrain) })),
+  marginalFieldTerrainRefusal: refusedOr(() => deriveOilRoyaltyRate('marginal_field', 8000)).refused,
+  gasByShare: GAS_IN_COUNTRY_SHARES.map((sharePct) => ({
+    sharePct, byTerrain: TERRAINS.map((terrain) => ({ terrain, rate: deriveGasRoyaltyRate(terrain, sharePct) })),
+  })),
+  benchmarks: BENCHMARK_YEARS.map((year) => ({
+    year, regulations2021: priceRoyaltyBenchmarks(year, 'regulations_2021'), act2020: priceRoyaltyBenchmarks(year, 'act_2020'),
+  })),
   priceAnchors: PRICE_ROYALTY_YEARS.map((year) => ({
-    year, terrain: 'shallow_water',
+    year, terrain: 'shallow_water', base: 'regulations_2021',
     byPrice: PRICE_ROYALTY_PROBES.map((price) => ({ price, rate: derivePriceRoyaltyRate(price, year, 'shallow_water') })),
   })),
+  actExampleAt75In2020: derivePriceRoyaltyRate(75, 2020, 'shallow_water', 'act_2020'),
   frontierAt200In2025: derivePriceRoyaltyRate(200, 2025, 'frontier'),
-  hctRates: HCT_RATE_CASES.map(([label, args]) => ({ label, rate: deriveHctRate(...args) })),
+  hctRates: HCT_RATE_CASES.map(([label, args]) => {
+    const r = refusedOr(() => deriveHctRate(...args));
+    return { label, rate: r.value, refused: r.refused };
+  }),
 });
 
 export const TERRAIN_CASES = [
@@ -823,7 +915,8 @@ export const terrainCases = () => TERRAIN_CASES.map((name) => {
 
 export const HCT_CASCADE_CASES = [
   'pia_worked_example', 'allowance_cap_midyear', 'cpr_forfeiture', 'pia_cpr_carry_two_years', 'pia_gas_only_hct_zero',
-  'pia_gas_only_legacy_hct', 'pia_prior_year_opex_zero', 'multiyear_pia_real', 'multiyear_pia_nominal', 'multiyear_pia_midyear_real',
+  'pia_gas_only_legacy_hct', 'pia_prior_year_opex_zero', 'pia_cit_allowance_restricted_carry', 'pia_cit_allowance_no_carry',
+  'multiyear_pia_real', 'multiyear_pia_nominal', 'multiyear_pia_midyear_real',
 ];
 
 export const hctCascadeCases = () => HCT_CASCADE_CASES.map((name) => {
@@ -831,22 +924,40 @@ export const hctCascadeCases = () => HCT_CASCADE_CASES.map((name) => {
   return { ...p, ...piaTotalsOf(p.kpis), cprForfeitedAtCessation: p.kpis.cpr_forfeited_at_cessation ?? null, totalBoe: p.kpis.total_boe ?? null };
 });
 
+const allowanceCfg = () => {
+  const converted = defaultPathCfg(goldenCase('pia_worked_example').cfg);
+  const newShallow = defaultPathCfg(goldenCase('allowance_cap_midyear').cfg);
+  return { converted, newShallow, newOnshore: { ...newShallow, pia_terrain: 'onshore' }, newDeep: { ...newShallow, pia_terrain: 'deep_offshore' } };
+};
+
+/** [label, which lease, barrels, price, prior cumulative, framework], the rows the digest prints. */
 export const ALLOWANCE_CASES = [
-  ['converted lease, 1000000 bbl at 80', 'pia_worked_example', 1000000, 80, 0],
-  ['converted lease, 1000000 bbl at 10 (pct-of-price cap binds)', 'pia_worked_example', 1000000, 10, 0],
-  ['converted lease, 1000000 bbl at 12.5', 'pia_worked_example', 1000000, 12.5, 0],
-  ['new shallow lease, 1000000 bbl at 80, prior 0', 'allowance_cap_midyear', 1000000, 80, 0],
-  ['new shallow lease, 1000000 bbl at 80, prior 99000000', 'allowance_cap_midyear', 1000000, 80, 99000000],
-  ['new shallow lease, 1000000 bbl at 80, prior 99500000', 'allowance_cap_midyear', 1000000, 80, 99500000],
-  ['new shallow lease, 1000000 bbl at 80, prior 100000000', 'allowance_cap_midyear', 1000000, 80, 100000000],
-  ['new shallow lease, 1000000 bbl at 30, prior 0', 'allowance_cap_midyear', 1000000, 30, 0],
-  ['zero barrels', 'allowance_cap_midyear', 0, 80, 0],
+  ['converted lease, 1000000 bbl at 80', 'converted', 1000000, 80, 0, 'pia_only'],
+  ['converted lease, 1000000 bbl at 10 (the 20 percent limit binds)', 'converted', 1000000, 10, 0, 'pia_only'],
+  ['converted lease, 1000000 bbl at 12.5', 'converted', 1000000, 12.5, 0, 'pia_only'],
+  ['new shallow lease, 1000000 bbl at 80, prior 0', 'newShallow', 1000000, 80, 0, 'pia_only'],
+  ['new shallow lease, 1000000 bbl at 80, prior 99000000', 'newShallow', 1000000, 80, 99000000, 'pia_only'],
+  ['new shallow lease, 1000000 bbl at 80, prior 99500000', 'newShallow', 1000000, 80, 99500000, 'pia_only'],
+  ['new shallow lease, 1000000 bbl at 80, prior 100000000', 'newShallow', 1000000, 80, 100000000, 'pia_only'],
+  ['new shallow lease, 1000000 bbl at 30, prior 0', 'newShallow', 1000000, 30, 0, 'pia_only'],
+  ['new shallow lease, 1000000 bbl at 15, prior 100000000', 'newShallow', 1000000, 15, 100000000, 'pia_only'],
+  ['new onshore lease, 1000000 bbl at 80, prior 49600000', 'newOnshore', 1000000, 80, 49600000, 'pia_only'],
+  ['new deep offshore lease, 1000000 bbl at 80, prior 0, PIA year', 'newDeep', 1000000, 80, 0, 'pia_only'],
+  ['new deep offshore lease, 1000000 bbl at 80, prior 0, NTA year', 'newDeep', 1000000, 80, 0, 'nta_2025'],
+  ['new shallow lease, 1000000 bbl at 80, prior 0, NTA year', 'newShallow', 1000000, 80, 0, 'nta_2025'],
+  ['zero barrels', 'newShallow', 0, 80, 0, 'pia_only'],
 ];
 
-export const allowanceCases = () => ALLOWANCE_CASES.map(([label, caseName, bbl, price, prior]) => {
-  const o = computeProductionAllowance({ ...goldenCase(caseName).cfg }, bbl, price, prior);
-  return { label, bbl, price, prior, allowance: o.allowance, eligibleBbl: o.eligible_bbl, capApplied: o.cap_applied };
-});
+export const allowanceCases = () => {
+  const cfg = allowanceCfg();
+  return ALLOWANCE_CASES.map(([label, lease, bbl, price, prior, framework]) => {
+    const o = computeProductionAllowance(cfg[lease], bbl, price, prior, framework);
+    return {
+      label, lease, bbl, price, prior, framework, allowance: o.allowance, eligibleBbl: o.eligible_bbl,
+      belowCapBbl: o.below_cap_bbl, afterCapBbl: o.after_cap_bbl, capApplied: o.cap_applied,
+    };
+  });
+};
 
 export const CPR_CAP_SWEEP_PCT = [30, 40, 50, 65, 80, 100];
 
@@ -861,15 +972,18 @@ export const cprCapSweep = () => CPR_CAP_SWEEP_PCT.map((cprPct) => {
   };
 });
 
+/** The capital allowance fraction by year of life, under each framework: five years, fixed by the texts. */
+export const capitalAllowanceTable = () => ({
+  piaYears: [0, 1, 2, 3, 4, 5].map((i) => capitalAllowanceFraction(i, 'pia_only')),
+  ntaYears: [0, 1, 2, 3, 4, 5].map((i) => capitalAllowanceFraction(i, 'nta_2025')),
+});
+
 export const RECOVERY_YEARS = [1, 2, 5, 10];
 
+/** A recovery life other than five is refused; five runs. */
 export const recoveryYearsSweep = () => RECOVERY_YEARS.map((years) => {
-  const res = run(withCfg(goldenCase('pia_worked_example'), { pia_capex_recovery_years: years }));
-  const q = res.cashFlowData[0];
-  return {
-    years, claimed: q.cpr_costs_claimed, deferred: q.cpr_deferred_to_next,
-    hctChargeable: q.hct_chargeable_profit, hct: q.hct_tax, citChargeable: q.cit_chargeable_profit, cit: q.cit_tax, npv: res.kpis.npv,
-  };
+  const r = refusedOr(() => run(withCfg(goldenCase('pia_worked_example'), { pia_capex_recovery_years: years })));
+  return { years, npv: r.value ? r.value.kpis.npv : null, refused: r.refused };
 });
 
 // ---------------------------------------------------------------------------
@@ -891,7 +1005,59 @@ export const FRAMEWORK_PROBES = [
   ['base 2027, override unset', { base_year: 2027 }],
 ];
 
+/** determineFiscalFramework names the framework of a ledger's first year; the framework is chosen for each year of assessment. */
 export const frameworkTable = () => FRAMEWORK_PROBES.map(([label, cfg]) => ({ label, framework: determineFiscalFramework(cfg) }));
+
+/** The framework of each year of assessment, and the statutory TET rate by year. */
+export const frameworkByYear = () => ({
+  ntaFirstYear: NTA_FIRST_YEAR,
+  auto: [2024, 2025, 2026, 2027].map((year) => ({ year, framework: fiscalFrameworkForYear({ pia_under_nta_2025_override: 'auto' }, year) })),
+  forcePia2030: fiscalFrameworkForYear({ pia_under_nta_2025_override: 'force_pia' }, 2030),
+  forceNta2025: fiscalFrameworkForYear({ pia_under_nta_2025_override: 'force_nta' }, 2025),
+  statutoryTet: [2020, 2021, 2022, 2023, 2024, 2025].map((year) => ({ year, ratePct: statutoryTetRatePct(year) })),
+});
+
+/** The worked example's one year repeated in 2026: one ledger that carries both frameworks. */
+export const oneLedgerAcross2025And2026 = () => {
+  const c = withCfg(goldenCase('pia_worked_example'), {});
+  c.prodRows = [...c.prodRows, ...c.prodRows.map((q) => ({ ...q, year: 2026 }))];
+  c.opexRows = [...c.opexRows, ...c.opexRows.map((q) => ({ ...q, year: 2026 }))];
+  const res = run(c);
+  return {
+    framework: res.kpis.fiscal_framework,
+    rows: res.cashFlowData.map((q) => ({
+      year: q.year, framework: q.fiscal_framework, tetRatePct: q.tet_rate_pct, tet: q.tet_tax, devLevy: q.dev_levy_tax,
+      hct: q.hct_tax, cit: q.cit_tax, citAllowanceRestricted: q.cit_allowance_restricted, net: q.net_cash_flow,
+    })),
+    totalTet: res.kpis.total_tet, totalDevLevy: res.kpis.total_dev_levy, npv: res.kpis.npv,
+  };
+};
+
+/**
+ * The three figures the texts leave to a stated reading, each shown side by
+ * side on the digest's own case. None is graded anywhere in the course.
+ */
+export const statedReadings = () => {
+  const wx = goldenCase('pia_worked_example');
+  const regs = run(wx).kpis;
+  const act = run(withCfg(wx, { pia_price_royalty_base: 'act_2020' })).kpis;
+  const dx = goldenCase('pia_deep_offshore_nta_aggressive');
+  const deep = [
+    ['conservative_zero', { pia_deep_offshore_hct_interpretation: 'conservative_zero' }],
+    ['aggressive_pml_30', { pia_deep_offshore_hct_interpretation: 'aggressive_pml_30' }],
+    ['custom 12.5', { pia_deep_offshore_hct_interpretation: 'custom', pia_deep_offshore_hct_custom_rate_pct: 12.5 }],
+  ].map(([reading, patch]) => { const k = run(withCfg(dx, patch)).kpis; return { reading, hct: k.total_hct, npv: k.npv }; });
+  const nx = CASE.allowance_cap_midyear;
+  const newPml = [30, 15].map((ratePct) => { const k = run(withCfg(nx, { pia_new_pml_hct_rate_pct: ratePct })).kpis; return { ratePct, hct: k.total_hct, npv: k.npv }; });
+  return {
+    priceRoyaltyBase: [
+      { base: 'regulations_2021', royalties: regs.total_royalties, npv: regs.npv },
+      { base: 'act_2020', royalties: act.total_royalties, npv: act.npv },
+    ],
+    deepOffshoreNta: deep,
+    newAcreagePml: newPml,
+  };
+};
 
 // ---------------------------------------------------------------------------
 // SECTION 17. Loss relief.
@@ -1049,7 +1215,7 @@ export const akataPiaYearWaterfall = (year, patch = {}) => {
     year, framework: q.fiscal_framework ?? kpis.fiscal_framework,
     grossRevenue: q.gross_revenue,
     taxes: [
-      { name: 'royalty', base: 'gross revenue', baseValue: q.gross_revenue, amount: q.royalty, parts: { production: q.production_royalty, price: q.price_royalty } },
+      { name: 'royalty', base: 'gross revenue', baseValue: q.gross_revenue, amount: q.royalty, parts: { 'crude and condensate': q.liquids_production_royalty, gas: q.gas_royalty, price: q.price_royalty } },
       { name: 'hydrocarbon tax', base: 'HCT chargeable profit', baseValue: q.hct_chargeable_profit, amount: q.hct_tax, parts: { assessable: q.hct_assessable_profit, allowance: q.production_allowance } },
       { name: 'companies income tax', base: 'CIT chargeable profit', baseValue: q.cit_chargeable_profit, amount: q.cit_tax, parts: { assessable: q.cit_assessable_profit } },
       { name: 'tertiary education tax', base: 'CIT assessable profit', baseValue: q.cit_assessable_profit, amount: q.tet_tax, parts: {} },
@@ -1057,36 +1223,49 @@ export const akataPiaYearWaterfall = (year, patch = {}) => {
     ],
     levies: { hcdt: q.hcdt, nddc: q.nddc },
     costRecovery: { cap: q.cpr_cap, claimed: q.cpr_costs_claimed, deferred: q.cpr_deferred_to_next },
-    allowance: { amount: q.production_allowance, eligibleBbl: q.prod_alw_eligible_bbl, capApplied: q.prod_alw_cap_applied },
+    allowance: { amount: q.production_allowance, eligibleBbl: q.prod_alw_eligible_bbl, belowCapBbl: q.prod_alw_below_cap_bbl, afterCapBbl: q.prod_alw_after_cap_bbl, capApplied: q.prod_alw_cap_applied },
     totalTax: q.tax, netCashFlow: q.net_cash_flow, realNetCashFlow: q.real_net_cash_flow, discountedCashFlow: q.discounted_cash_flow,
   };
 };
 
+/** The variants the digest prints on AKATA under the PIA; a stated reading is labelled as one. */
 export const AKATA_PIA_VARIANTS = [
   ['as configured', {}],
   ['force_pia', { pia_under_nta_2025_override: 'force_pia' }],
-  ['new lease, prior cumulative 0', { pia_lease_status: 'new' }],
-  ['new lease, prior cumulative 96000000', { pia_lease_status: 'new', pia_prior_cumulative_oil_bbl: 96000000 }],
+  ['new lease, prior cumulative 0, no new-PML rate stated', { pia_lease_status: 'new' }],
+  ['new lease, prior cumulative 0, stated new-PML rate 30', { pia_lease_status: 'new', pia_new_pml_hct_rate_pct: 30 }],
+  ['new lease, prior cumulative 0, stated new-PML rate 15', { pia_lease_status: 'new', pia_new_pml_hct_rate_pct: 15 }],
+  ['new lease, prior cumulative 96000000, stated new-PML rate 30', { pia_lease_status: 'new', pia_prior_cumulative_oil_bbl: 96000000, pia_new_pml_hct_rate_pct: 30 }],
   ['onshore', { pia_terrain: 'onshore' }],
-  ['deep_offshore conservative', { pia_terrain: 'deep_offshore', pia_water_depth_m: 1200 }],
-  ['deep_offshore aggressive', { pia_terrain: 'deep_offshore', pia_water_depth_m: 1200, pia_deep_offshore_hct_interpretation: 'aggressive_pml_30' }],
-  ['marginal field', { pia_terrain: 'marginal_field' }],
+  ['deep_offshore, no reading stated', { pia_terrain: 'deep_offshore', pia_water_depth_m: 1200 }],
+  ['deep_offshore, conservative_zero', { pia_terrain: 'deep_offshore', pia_water_depth_m: 1200, pia_deep_offshore_hct_interpretation: 'conservative_zero' }],
+  ['deep_offshore, aggressive_pml_30', { pia_terrain: 'deep_offshore', pia_water_depth_m: 1200, pia_deep_offshore_hct_interpretation: 'aggressive_pml_30' }],
+  ['deep_offshore, custom 12.5', { pia_terrain: 'deep_offshore', pia_water_depth_m: 1200, pia_deep_offshore_hct_interpretation: 'custom', pia_deep_offshore_hct_custom_rate_pct: 12.5 }],
+  ['marginal_field terrain', { pia_terrain: 'marginal_field' }],
+  ['marginal field converted under s.94(1), shallow water', { pia_marginal_field_pre_2021: true }],
   ['CPR 40', { pia_cpr_limit_pct: 40 }],
   ['prior year opex 20000000', { pia_prior_year_opex_usd: 20000000 }],
+  ['NDDC on the opex base', { pia_nddc_levy_base: 'opex' }],
+  ['gas 50 percent used in-country', { pia_gas_in_country_share_pct: 50 }],
+  ['price royalty on the act_2020 base', { pia_price_royalty_base: 'act_2020' }],
   ['oil price 120', { oil_price_usd_bbl: 120 }],
   ['oil price 45', { oil_price_usd_bbl: 45 }],
   ['WI 50', { pia_working_interest_pct: 50 }],
 ];
 
 export const akataPiaVariants = () => AKATA_PIA_VARIANTS.map(([label, patch]) => {
-  const r = akataUnderPia(patch);
+  const got = refusedOr(() => akataUnderPia(patch));
+  if (got.refused) return { label, patch, refused: got.refused };
+  const r = got.value;
   const q = r.rows[0];
   return {
-    label, patch,
+    label, patch, refused: null,
     year1: {
-      productionRoyalty: q.production_royalty, priceRoyalty: q.price_royalty, hcdt: q.hcdt,
+      productionRoyalty: q.production_royalty, liquidsRoyaltyRate: q.royalty_rate_liquids, priceRoyalty: q.price_royalty,
+      gasRoyalty: q.gas_royalty, hcdt: q.hcdt, nddc: q.nddc,
       cprClaimed: q.cpr_costs_claimed, cprDeferred: q.cpr_deferred_to_next,
-      allowance: q.production_allowance, eligibleBbl: q.prod_alw_eligible_bbl, capApplied: q.prod_alw_cap_applied,
+      allowance: q.production_allowance, eligibleBbl: q.prod_alw_eligible_bbl, belowCapBbl: q.prod_alw_below_cap_bbl,
+      afterCapBbl: q.prod_alw_after_cap_bbl, capApplied: q.prod_alw_cap_applied, hctRate: q.hct_rate,
       hct: q.hct_tax, cit: q.cit_tax, tet: q.tet_tax, devLevy: q.dev_levy_tax, net: q.net_cash_flow,
     },
     totalRoyalties: r.totalRoyalties, totalHct: r.totalHct, totalCit: r.totalCit, totalTet: r.totalTet, totalDevLevy: r.totalDevLevy,
@@ -1096,9 +1275,9 @@ export const akataPiaVariants = () => AKATA_PIA_VARIANTS.map(([label, patch]) =>
 });
 
 // ---------------------------------------------------------------------------
-// SECTION 21. Three numbers that used to be wrong: the profile point (EC1-1),
-// the IRR of a multi-root profile (EC1-2, now null with a status) and the
-// abandonment fund at a partial working interest (EC1-3).
+// SECTION 21. Three numbers to distrust: the profile point at the applied
+// rate, the IRR of a profile with several roots (null with a status), and the
+// abandonment fund at a partial working interest.
 // ---------------------------------------------------------------------------
 
 export const distrustTable = () => {
@@ -1190,13 +1369,14 @@ export const IKPOTO_JV = {
   opex_escalator_pct: 3.5, capex_escalator_pct: 0,
   jv_working_interest_pct: 80, jv_royalty_pct: 12.5, jv_tax_rate_pct: 45,
 };
+// The Expert tier on the default path (ec1_fields.mjs PIA, verbatim): every
+// term the texts fix is the engine default, and the new-acreage PML
+// hydrocarbon tax rate is a STATED READING of 30 that no graded field depends on.
 export const IKPOTO_PIA = {
   ...IKPOTO_JV, fiscal_regime: 'PIA',
   pia_terrain: 'shallow_water', pia_license_type: 'PML', pia_lease_status: 'new', pia_water_depth_m: 45,
-  pia_marginal_field_pre_2021: false, pia_hct_rate_override_pct: null,
-  pia_cit_rate_pct: 30, pia_tet_rate_pct: 2.5, pia_nddc_levy_pct_of_opex: 3, pia_nddc_levy_fixed_usd: null,
-  pia_prior_year_opex_usd: 0, pia_capex_recovery_years: 4, pia_cpr_limit_pct: 35,
-  pia_production_allowance_per_bbl_converted: 2.5, pia_production_allowance_per_bbl_new: 8, pia_production_allowance_pct_of_price: 20,
+  pia_marginal_field_pre_2021: false, pia_hct_rate_override_pct: null, pia_new_pml_hct_rate_pct: 30,
+  pia_cit_rate_pct: 30, pia_nddc_levy_fixed_usd: null, pia_prior_year_opex_usd: 0,
   pia_under_nta_2025_override: 'auto', pia_prior_cumulative_oil_bbl: 97612500,
   pia_working_interest_pct: 80,
   abandonment_cost_usd: 40000000,
@@ -1233,11 +1413,11 @@ export const ikpotoCapstoneFields = () => {
     ['intermediate', 'jv_dpi', jv.kpis.dpi, 0.000001],
     ['intermediate', 'jv_breakeven_oil_price_usd_bbl', breakeven, 0.001],
     ['advanced', 'pia_2032_price_royalty_usd', row(pia, 2032).price_royalty, 1],
-    ['advanced', 'pia_2032_prod_alw_eligible_bbl', row(pia, 2032).prod_alw_eligible_bbl, 1],
-    ['advanced', 'pia_2031_cpr_deferred_usd', row(pia, 2031).cpr_deferred_to_next, 1],
-    ['advanced', 'pia_total_hct_usd', pia.kpis.total_hct, 1],
+    ['advanced', 'pia_2032_production_allowance_usd', row(pia, 2032).production_allowance, 1],
+    ['advanced', 'pia_2031_nddc_usd', row(pia, 2031).nddc, 1],
+    ['advanced', 'pia_total_cit_usd', pia.kpis.total_cit, 1],
     ['advanced', 'pia_2033_dev_levy_usd', row(pia, 2033).dev_levy_tax, 1],
-    ['advanced', 'pia_npv_real_usd', pia.kpis.npv, 1],
+    ['advanced', 'pia_2035_cpr_deferred_usd', row(pia, 2035).cpr_deferred_to_next, 1],
   ];
 };
 

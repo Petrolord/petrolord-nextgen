@@ -18,7 +18,7 @@ The JV royalty is one flat percentage of gross revenue. AKATA carries jv_royalty
 | 2031 | 136363147.20 | 20454472.08 | 64468245.07 |
 | 2035 | 73325786.51 | 10998867.98 | 30401798.05 |
 
-The 2029 row closes at -121123680.00 because 210000000.00 of capex lands in it, and the royalty is still 27904800.00. That is what off the top means: a share of sales, not of profit.
+The 2029 row closes at -121123680.00 because 210000000.00 of capex lands in it, and the royalty is still 27904800.00. That is what off the top means: a share of sales, taken before profit is known.
 
 ## Where the royalty goes next
 
@@ -31,7 +31,7 @@ Royalty is deductible against tax, so the government does not keep the whole of 
 | 20 | 20000000.00 | 32500000.00 | -12500000.00 |
 | 30 | 30000000.00 | 27500000.00 | -17500000.00 |
 
-Each step of ten points adds 10000000.00 to the royalty line, but tax falls by 5000000.00 at the same time, so net cash flow moves by 5000000.00, not 10000000.00. At a 50 percent tax rate the treasury hands half of its own royalty back through the tax base. The take still rises, from 65.3846 percent at zero royalty to 88.4615 percent at 30.
+Each step of ten points adds 10000000.00 to the royalty line, but tax falls by 5000000.00 at the same time, so net cash flow moves by only 5000000.00. At a 50 percent tax rate the treasury hands half of its own royalty back through the tax base. The take still rises, from 65.3846 percent at zero royalty to 88.4615 percent at 30.
 
 ## The mistake
 

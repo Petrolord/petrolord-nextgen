@@ -28,7 +28,7 @@ The published case `gas_and_ngl_streams` exists to prove the secondary streams r
 
 ## The mistake
 
-The careful reader reads 0.018250 in a gas column and compares it directly with 3.650000 in an oil column, concluding the gas is irrelevant. The gas column is million Mscf, not million bbl, and the two columns are not on the same axis. The conversion for opex is 6000 scf to the barrel, which the engine writes as a multiply by 1000 and a divide by 6000.
+The careful reader reads 0.018250 in a gas column and compares it directly with 3.650000 in an oil column, concluding the gas is irrelevant. The gas column is million Mscf where the oil column is million bbl, and the two columns are not on the same axis. The conversion for opex is 6000 scf to the barrel, which the engine writes as a multiply by 1000 and a divide by 6000.
 
 A related slip is assuming a zero stream is absent. The test project's gas rate of 0 Mscf/d and NGL rate of 0 bbl/d still declare a decline of 0 percent each and still produce a column of zeros for all 25 years. They contribute 0.0000 to revenue and 0 boe to opex, which is not the same as the engine skipping them.
 

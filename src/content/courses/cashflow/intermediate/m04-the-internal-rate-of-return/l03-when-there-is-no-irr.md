@@ -21,17 +21,17 @@ Two further statuses complete the set. above_band_only, [-1, 1000], has its only
 
 AKATA at an oil price of 30 USD/bbl reports IRR null, NPV -169873348.04 and payback Beyond project life. No sampled rate produced a positive NPV to bracket, and the NPV beside the null says the field is deeply uneconomic.
 
-AKATA with an abandonment of 200000000 in 2035 has a last flow of -169598201.95. Its NPV is -58362170.82 at 0 percent, -81068008.48 at 100 percent and -108144473.17 at 300, negative everywhere sampled, so the IRR is null and the headline NPV is -40359955.35. With an abandonment of 60000000 the last flow is -29598201.95 and the NPV at 0 percent is 81637829.18, so that curve does cross, and it crosses twice; the null there has the opposite cause, too many rates rather than none. Until engines 3.10.0 that run reported 23.2570 percent, one of the two.
+AKATA with an abandonment of 200000000 in 2035 has a last flow of -169598201.95. Its NPV is -58362170.82 at 0 percent, -81068008.48 at 100 percent and -108144473.17 at 300, negative everywhere sampled, so the IRR is null and the headline NPV is -40359955.35. With an abandonment of 60000000 the last flow is -29598201.95 and the NPV at 0 percent is 81637829.18, so that curve does cross, and it crosses twice; the null there has the opposite cause, too many rates rather than none. The status multiple-roots is what separates it from the 200000000 run.
 
 AKATA valued from 2030 with prior years sunk reports NPV 206819768.67 and IRR null. The only negative row was removed from the value metrics, so what remains is all positive, like [5, 5, 5], and there is nothing to bracket.
 
 ## The mistake
 
-The careful mistake is to read null as bad news. One of AKATA's nulls is the opposite: 206819768.67 of NPV with no IRR, because treating 2029 as sunk left no outlay for a return to be a return on. Null means the question has no single answer for this vector; it never says whether the vector is good. Until engines 3.10.0 the null carried no status, so the shapes were indistinguishable.
+The careful mistake is to read null as bad news. One of AKATA's nulls is the opposite: 206819768.67 of NPV with no IRR, because treating 2029 as sunk left no outlay for a return to be a return on. Null means the question has no single answer for this vector; it never says whether the vector is good. The status beside each null is what tells the shapes apart.
 
 ## What it refuses
 
-It refuses to invent a rate when no rate in the band zeroes the NPV, and it refuses to clamp to a large number and call it converged. It refuses to pick one crossing from several. And the status names the branch, not the verdict: no-root and no-sign-change are both null, and only the NPV beside the null says whether the field is worth anything.
+It refuses to invent a rate when no rate in the band zeroes the NPV, and it refuses to clamp to a large number and call it converged. It refuses to pick one crossing from several. And the status names the branch and passes no verdict: no-root and no-sign-change are both null, and only the NPV beside the null says whether the field is worth anything.
 
 ## Exercise
 

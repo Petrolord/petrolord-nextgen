@@ -1323,8 +1323,8 @@
       "path": "test-data/economics/goldens/montecarlo_cases.json",
       "kind": "differing",
       "group": "6-test-layer-drift",
-      "vendoredSha": "a6742b34b710ca9117c2281edb04f7bed92fb4f4",
-      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it."
+      "vendoredSha": "499c2a4697717707b94f650d020b85546d83f0bd",
+      "reason": "A golden NextGen's courses teach against. It moves only with a recut of the course that grades it. EC7 PIA recut (2026-09-26): engines #262 (3778451) added \"pia_legacy_pre_audit\": true to the four PIA case configs of this golden; that four-line change is backported onto the held blob (no other line moves), so the held montecarlo suite keeps its pre-audit numbers against the re-vendored cashflow.ts."
     },
     {
       "path": "test-data/economics/goldens/portfolio_cases.json",
@@ -1990,6 +1990,118 @@
       "group": "d5-appliedai-course",
       "vendoredSha": "1a127166c6ee9cd3f01109ebb628572811be551d",
       "reason": "D5 appliedai course: vendored sha-identical from petrolord-engines f50251d (PR #257 and the wording repair #258: engines/dataai/evaluate.js, its jest suite, golden, library pins, the ekene-docs fixtures and their writer, oracle, pin writer, timing script, FINDINGS, negative control) by the wave's vendor_appliedai.sh, 4 proofs per path. New since the canonical pin 54cf7c4, which stays: moving it would also move economics, facilities, production, seismolord and wellsite paths other courses grade. Clears as STALE when the pin moves to f50251d or later."
+    },
+    {
+      "path": "engines/economics/cashflow.ts",
+      "kind": "differing",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "92906576c0cc9afdeee45dd6d640f997dcb9fb49",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "engines/economics/fiscalRegime.js",
+      "kind": "differing",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "005b3fecb665dd60212f501a92a367ee77f618aa",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "engines/economics/fiscalTemplates.js",
+      "kind": "differing",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "0f237c895ff2083de32e4ddaaa1c352979a9ff86",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "__tests__/economics.cashflow.test.ts",
+      "kind": "differing",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "b4ec0c70820eabf2c9623093d6493bad04b47552",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "__tests__/economics.fiscal.test.js",
+      "kind": "differing",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "abcbd2156e6237afe3d79c54a4fcf5da01f8553c",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "__tests__/economics.pia2021.test.ts",
+      "kind": "extra",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "24c3a8d9c4000761589aa1278af165abf9a2a06c",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "test-data/economics/goldens/cashflow_cases.json",
+      "kind": "differing",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "9ba8d506f224ea37eebd3375b68a895bd2941b50",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "test-data/economics/goldens/fiscal_cases.json",
+      "kind": "differing",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "d7011dba87fd87775940ecdf4ed88751ca5794db",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "test-data/economics/goldens/pia2021_cases.json",
+      "kind": "extra",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "b405aea853195c97f2f04facc2df1de2bc25730f",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "test-data/economics/fixtures/pia-worked-example.json",
+      "kind": "differing",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "9b842529948dfc599c351e69bb2baca4c32a34ae",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "tools/validation/economics/oracle_cashflow.py",
+      "kind": "differing",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "6a2dc4a0ab6ebd38215dce51ed13fbe95fade479",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "tools/validation/economics/oracle_fiscal.py",
+      "kind": "differing",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "3908b54327f741e248abd8a2018af53e55618932",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "tools/validation/economics/oracle_pia2021.py",
+      "kind": "extra",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "3183e566e7776d26f0155679a58087e4f302f726",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "tools/validation/economics/negcontrol_pia2021.sh",
+      "kind": "extra",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "fa099481249721aebfa50ad66c7d373d004c7144",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "tools/validation/economics/FINDINGS-pia2021.md",
+      "kind": "extra",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "543ce185fa3b00f28530c3d8095062a7cdbd138b",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
+    },
+    {
+      "path": "tools/validation/economics/AUDIT-PIA-2021.md",
+      "kind": "extra",
+      "group": "ec7-pia-recut",
+      "vendoredSha": "f25cdeb2110122b4b4d8ea7048813e6c23dae4ca",
+      "reason": "EC7 PIA 2021 recut: vendored sha-identical from petrolord-engines 3778451 (PR #262, engines 3.12.0, PIA 2021 / NTA 2025 compliance by default, pia_legacy_pre_audit switch): cashflow.ts, fiscalRegime.js, fiscalTemplates.js, their suites, goldens, the worked-example fixture, oracles, negative control, FINDINGS-pia2021 and AUDIT-PIA-2021. fiscalConventions.js and irrContract.js already match. The pin stays at 54cf7c4. The cashflow and fiscal courses are re-cut on the default path in the same branch (fix/cashflow-fiscal-pia-recut); qra (npv only) is proven byte-identical."
     },
     {
       "path": "__tests__/supplychain.tender.test.js",

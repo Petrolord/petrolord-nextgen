@@ -45,25 +45,25 @@ const LESSONS = [
   { n: 2, title: 'Rows become years before anything is priced',
     body: 'Per-well columns beat the rollup, a month index is folded to a calendar year, and a file that names no volume column, no usable date or no cost column is refused with the message that says so. The engine will not guess a column.' },
   { n: 3, title: 'The joint venture ledger is one base, the share',
-    body: 'Every monetary line and every volume is reported at the working interest, as the production sharing and PIA regimes always were. Until engines 3.10.0 revenue, volumes, opex, capex and depreciation stayed at field level while royalty, tax and net cash flow were the share, and a reader who scaled the wrong lines was wrong by the working interest.' },
+    body: 'Every monetary line and every volume is reported at the working interest, as the production sharing and PIA regimes are. A reader who scales some lines and not others is wrong by the working interest.' },
   { n: 4, title: 'Depreciation is a deduction, never a cash flow',
     body: 'It reduces taxable income and therefore tax, and it never appears in net cash flow, which carries the capex it was built from instead. A shorter depreciation life moves NPV without moving a single cash flow.' },
-  { n: 5, title: 'Government take no longer moves with the working interest',
-    body: 'Take is the pre-take value at your share, revenue less capex less opex, minus the contractor net cash flow, over that pre-take value, so it reads the same at every working interest. Until engines 3.10.0 the numerator was the share and the denominator the whole field, so the other partners were counted as government and take rose as the interest fell.' },
+  { n: 5, title: 'Government take does not move with the working interest',
+    body: 'Take is the pre-take value at your share, revenue less capex less opex, minus the contractor net cash flow, over that pre-take value, so it reads the same at every working interest. Numerator and denominator are both the share, so the other partners are never counted as government.' },
   { n: 6, title: 'On the real basis NPV does not move with inflation',
     body: 'With the escalators set, deflating the flows and deflating the rate through the Fisher relation cancel, so the same NPV is reported at every inflation rate while the real total cash flow falls by a third. The convention that DOES move NPV is mid-year against end-year.' },
-  { n: 7, title: 'Sunk is a decision, not a date',
+  { n: 7, title: 'Sunk is a decision the calendar does not make',
     body: 'Valuing from a later year with prior rows kept adds a year of compounding. Valuing from the same year with prior rows SUNK nearly triples the NPV, reports the sunk flow separately, and returns a null IRR because nothing negative is left to bracket a root.' },
   { n: 8, title: 'The profile point at the applied rate IS the headline',
-    body: 'The NPV profile labels its applied-rate point at the rate rounded to two decimals and evaluates it at the exact rate, so the profile passes through the headline NPV the same run reports. Until engines 3.10.0 it was evaluated at the label too, and the point sat tens of thousands of USD off the headline.' },
-  { n: 9, title: 'IRR is a property of a curve, not of a project',
-    body: 'A cash flow with a terminal negative can have two rates that zero its NPV. The engine names a rate only when exactly one lies between -99 and 1000 percent; with several it returns null, says multiple-roots and lists them. Until engines 3.10.0 it reported whichever root Newton reached from 10 percent and said nothing about the others.' },
+    body: 'The NPV profile labels its applied-rate point at the rate rounded to two decimals and evaluates it at the exact rate, so the profile passes through the headline NPV the same run reports. Read the label as a label: the point is evaluated at the exact applied rate.' },
+  { n: 9, title: 'IRR is a property of the cash flow curve',
+    body: 'A cash flow with a terminal negative can have two rates that zero its NPV. The engine names a rate only when exactly one lies between -99 and 1000 percent; with several it returns null, says multiple-roots and lists them. A single rate there would be one root of several.' },
   { n: 10, title: 'A production sharing pool is never on the rows',
     body: 'Cost recovery under a cap defers cost into a pool the returned rows do not carry, so the pool at cessation has to be marched from the rows by hand. Below the cap that clears the pool, the field is uneconomic before a single fiscal rate changes.' },
   { n: 11, title: 'The PIA cascade is five taxes on three bases',
-    body: 'Royalties on gross revenue, hydrocarbon tax and company income tax on their own taxable incomes, a development levy or an education tax depending on the framework the base year selects. The terrain string moves NPV by more than an oil price sweep does.' },
-  { n: 12, title: 'Three numbers that used to need a sentence beside them',
-    body: 'The profile point at the rounded rate, the single IRR on a multi-root profile, and a fund scaled by the working interest while the lump sum was not. All three are repaired, and the habit they taught survives them: read the status word, read the convention, and never quote a rate the engine did not name.' },
+    body: 'Royalties on gross revenue, hydrocarbon tax and company income tax on their own taxable incomes, and a development levy or an education tax depending on the framework of each year of assessment, so one ledger from 2025 into 2026 carries both. Where the texts leave a figure open, the engine asks for a stated reading and the NPV moves with it.' },
+  { n: 12, title: 'Three numbers that need a sentence beside them',
+    body: 'The profile point at the rounded rate, the IRR of a profile with several roots, and an abandonment fund at a partial working interest. Each is reported with the status or the convention that explains it: read the status word, read the convention, and never quote a rate the engine did not name.' },
 ];
 
 function ScopeGate() {
@@ -157,8 +157,8 @@ const CashflowLearningPage = () => {
       deprDefault: depr[0],
       depr5: find(depr, 'jv_psc_depr_years 5'),
       pia,
-      deepConservative: find(piaVariants, 'deep_offshore conservative'),
-      deepAggressive: find(piaVariants, 'deep_offshore aggressive'),
+      deepConservative: find(piaVariants, 'deep_offshore, conservative_zero'),
+      deepAggressive: find(piaVariants, 'deep_offshore, aggressive_pml_30'),
       price120: find(piaVariants, 'oil price 120'),
       pscBelow: psc.find((r) => r.poolAtCessation > 0),
       pscClears: psc.find((r) => r.poolAtCessation === 0),
@@ -235,7 +235,7 @@ const CashflowLearningPage = () => {
               first year SUNK and they report {fmt(cm.sunk2030.npv)} USD with a null IRR. Run the
               same rows under the Petroleum Industry Act and the NPV is {fmt(cm.pia.kpis.npv)} USD
               as a shallow-water converted lease and {fmt(cm.deepConservative.npv)} USD as a deep
-              offshore one. This course is why each of those numbers is what it is, which convention
+              offshore one on the conservative_zero reading, a stated reading the texts leave open. This course is why each of those numbers is what it is, which convention
               it silently carries, and what the engine that produced it refuses to tell you.
               {gate.quota?.own_data_upload === false && ' Your own data upload unlocks at the Associate tier.'}
             </p>
@@ -260,7 +260,7 @@ const CashflowLearningPage = () => {
                 flow falls from {fmt(cm.inflationFirst.totalNetCashFlowReal)} to
                 {' '}{fmt(cm.inflationLast.totalNetCashFlowReal)} USD and the applied real rate falls
                 from {pct(cm.inflationFirst.appliedRealRatePct)} to
-                {' '}{pct(cm.inflationLast.appliedRealRatePct)}. Sunk is a decision, not a date:
+                {' '}{pct(cm.inflationLast.appliedRealRatePct)}. Sunk is a decision the calendar does not make:
                 valuing from 2030 with prior years sunk reports {fmt(cm.sunk2030.sunkNetCashFlow)} USD
                 as the sunk flow and an IRR of {cm.sunk2030.irrPct === null ? 'null' : pct(cm.sunk2030.irrPct)},
                 because nothing negative is left to bracket a root. A cash flow with a terminal
@@ -274,9 +274,10 @@ const CashflowLearningPage = () => {
                 {' '}{fmt(cm.pia.totalHct)} USD of hydrocarbon tax, {fmt(cm.pia.totalCit)} USD of
                 company income tax and {fmt(cm.pia.totalDevLevy)} USD of development levy under the
                 {' '}{cm.pia.framework} framework, and moving the same field to deep offshore under
-                the conservative reading zeroes the hydrocarbon tax and takes NPV from
-                {' '}{fmt(cm.pia.kpis.npv)} to {fmt(cm.deepConservative.npv)} USD, further than an
-                oil price of 120 does at {fmt(cm.price120.npv)} USD.
+                the conservative_zero reading removes the hydrocarbon tax and takes NPV from
+                {' '}{fmt(cm.pia.kpis.npv)} to {fmt(cm.deepConservative.npv)} USD, while the
+                aggressive_pml_30 reading gives {fmt(cm.deepAggressive.npv)} USD: the stated reading
+                moves NPV nearly as far as an oil price of 120 does at {fmt(cm.price120.npv)} USD.
               </CardDescription>
             </CardHeader>
             <CardContent className="grid gap-3 sm:grid-cols-2">

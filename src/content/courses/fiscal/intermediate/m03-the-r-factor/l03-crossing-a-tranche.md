@@ -6,7 +6,7 @@ A tranche crossing is a discontinuity in the middle of a smooth ledger. The R fa
 
 ## The published crossing
 
-`rfactor_tranche_crossing` runs the "Nigeria - PIA (2021)" tranches, 60 percent at R 1, 40 percent at R 1.6 and 30 percent at R 2.5, on a 10000 bopd project with capex 350 and opex 20 plus 1 USD per boe, at 80 USD per bbl:
+`rfactor_tranche_crossing` runs the tiered teaching regime's tranches, 60 percent at R 1, 40 percent at R 1.6 and 30 percent at R 2.5, on a 10000 bopd project with capex 350 and opex 20 plus 1 USD per boe, at 80 USD per bbl:
 
 | year | rFactor | profitOil | implied split |
 | --- | --- | --- | --- |

@@ -20,7 +20,7 @@ The capex multiplier scales the total before it is charged. On the published tes
 
 ## The mistake
 
-The careful reader spreads the spend, because a 500.0000 million USD deepwater development is not built in twelve months. The sandbox refuses a capex schedule outright and has no field to hold one. Faking a schedule by lowering the multiplier changes the total, not the timing, and quietly answers a different question.
+The careful reader spreads the spend, because a 500.0000 million USD deepwater development is not built in twelve months. The sandbox refuses a capex schedule outright and has no field to hold one. Faking a schedule by lowering the multiplier changes the total and leaves the timing where it was, and quietly answers a different question.
 
 The consequence is discounting. All 500.0000 million USD sits at the year 1 exponent, so its present value is as large as it can be, while the revenue it buys is spread over 25 discounted years. Every NPV here is harsher on capital, and any rate of return read off it more sensitive to the capex number, than a phased model would be.
 

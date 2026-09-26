@@ -1,0 +1,131 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# EC1 cashflow, advanced tier, Cost Recovery. Reconstructed from the served rows (the applied
+# migrations replayed on a local scratch database) with the EC7 PIA re-cut applied;
+# written by tools/course-waves/cashflow/pia-recut/build.py. Edit the rows there, then re-run it.
+
+q(2,
+ "psc_carryforward spends 80000000.00 USD of capex and 10000000.00 of opex in 2030 against 100000000.00 of revenue, yet the 2030 row reports taxable_income 27000000.00 and tax 13500000.00. Why is a year that ends 40500000.00 in the red taxed at all?",
+ "Under a PSC the base is the contractor's profit oil, and capex is not a deduction but a debt the cost oil repays, so 27000000.00 is taxed whether or not 80000000.00 was spent.",
+ ["The engine writes the 80000000.00 off as depreciation over the field life, so only a small part of it reduces the 2030 base and the rest waits for later years.",
+  "The base is revenue less royalty, and the 80000000.00 of capex only becomes deductible once the cost pool has been fully recovered through the cap.",
+  "Tax is charged on the 36000000.00 of cost oil recovered in the year, because cost oil is income to the contractor and profit oil is shared before tax."],
+ "The joint venture reflex reads 2030 as a loss with no tax; the PSC prices the contractor's half of profit oil, 27000000.00, the same in a capex year as in a year with none.")
+
+q(0,
+ "At a cost oil cap of 0.400000 the engine's applyPSC line recovers 36000000.00 on 100000000.00 of revenue. A reader expects 40000000.00. What did the reader take the cap against?",
+ "The gross revenue. The cap is a share of revenue after the 10000000.00 royalty, and 40 percent of what is left is 36000000.00.",
+ ["The pool. A cap of 0.400000 on an 80000000.00 pool would release 32000000.00, and the reader rounded up to the nearest tranche of profit oil.",
+  "The revenue after royalty and after opex, which leaves 80000000.00 to share, and 40 percent of 80000000.00 recovers less than the engine reports.",
+  "The contractor's entitlement, which at a 50 percent profit share is half the revenue, so the reader doubled the cap to reach the field level figure."],
+ "A cap read off the gross gives a cost oil larger than 36000000.00 and a pool that clears too early, and the error repeats in every year the cap binds.")
+
+q(3,
+ "Sweeping the cap on the one-year applyPSC case, cost recovered rises from 18000000.00 at 0.200000 to 80000000.00 at 1.000000 while tax falls from 18000000.00 to 2500000.00. Why does a higher cap lower the tax?",
+ "Cost oil comes out before profit oil is split, so every USD more recovered is a USD less of profit oil, and profit oil is the taxable base.",
+ ["A higher cap accelerates the depreciation of the 80000000.00 of capex, and the larger write-off shrinks the taxable income in the year it is claimed.",
+  "The cap is applied to the tax itself as well as to the cost pool, so the 50 percent rate is scaled down in proportion to the share of cost recovered.",
+  "The royalty falls as the cap rises, because the 10 percent royalty is charged on revenue after cost oil, and the smaller royalty base drags the tax down with it."],
+ "Each step of the cap moves cost recovered up and profit oil down by the same amount: 54000000.00 recovered leaves 18000000.00 of profit oil and 9000000.00 of tax at 0.600000.")
+
+q(1,
+ "The one-year applyPSC case at the 0.4 cap is rerun with 30000000 brought forward from an earlier year. Cost recovered is still 36000000.00, profit oil still 27000000.00 and net still minus 30500000.00. What did the extra pool change?",
+ "Only the carried amount, from 44000000.00 to 74000000.00; a bigger pool does not recover faster, it waits.",
+ ["The recovery rises to 66000000.00, because the cap is a share of the pool and a larger pool lets more cost oil out in the same year.",
+  "The profit oil, which is reduced by the brought-forward amount before the split so that the contractor's tax falls while the cash is unchanged.",
+  "The tax, because the brought-forward cost is deductible against the contractor's profit oil in the year it arrives even though the cap refuses to recover it."],
+ "The cap is a ceiling on recovery per year and leaves the pool unbounded, so 30000000 of extra cost changes nothing in the year except how much is carried out of it.")
+
+q(1,
+ "AKATA under production sharing at a 30 percent cap carries 183771360.00 out of 2029 and 207346412.26 out of 2035. The field has produced for seven years and the pool is larger at the end than at the start. What is growing it?",
+ "Each year's opex enters the pool faster than the cap lets cost oil out of a declining revenue, so the pool never shrinks for long and the field stops with more unrecovered than it began with.",
+ ["The engine escalates the unrecovered balance at the 3 percent inflation rate for every year it is carried, so a pool that waits grows even if nothing is added to it.",
+  "The 45 percent profit share is deducted from cost recovered before it leaves the pool, so only part of each year's recovery actually reduces the balance.",
+  "The tax of 10393930.24 in 2035 is charged to the pool when the contractor cannot pay it from profit oil, and the late years add their tax to the balance."],
+ "Cost recovered falls from 50228640.00 in 2029 to 19797962.36 in 2035 while opex rises every year; the cap is a ceiling per year, and the years run out before the pool does.")
+
+q(3,
+ "AKATA's take is 82.1085 percent at a 60, an 80 and a 100 percent cap, while NPV reads 29960298.75, 42273746.33 and 48148675.31. Why does the take not follow the NPV?",
+ "Once the pool clears inside the life the cap only moves timing, and take is a ratio of undiscounted totals that cannot see timing.",
+ ["The take is computed at the 60 percent cap for every run, because the engine reports take on the base case and only reruns the discounted lines when the cap changes.",
+  "The take excludes cost oil, the only line the cap moves, so every cap that clears the pool gives one take by construction.",
+  "The NPV differences come from the IRR of 19.8650, 32.2148 and 48.4048 percent, which the take does not use because it is a share of revenue rather than a rate of return."],
+ "The pool clears in 2034 at 60 percent, in 2031 at 80 and in 2030 at 100; the same USD arrive sooner, and sooner is what NPV and IRR price and take does not.")
+
+q(0,
+ "AKATA at a 30 percent cap reports a take of 120.4874 percent. What does a take above 100 percent mean on a PSC?",
+ "The state collected royalty and tax in every year while the contractor ended the field with 207346412.26 still unrecovered, and nothing bounds the ratio at 100.",
+ ["The engine has counted the 207346412.26 of unrecovered cost as government revenue, which is the error a cap that never clears produces in the take.",
+  "The take is capped at 100 in the engine and any reading above it is a rounding artefact of the discounted take, which reads 90.1534 percent at the 60 percent cap.",
+  "The working interest was applied twice, once at the door and once in the take, so the contractor's share was counted against a ledger that had already been scaled."],
+ "The hand-derived case does the same at 101.0000 percent: the contractor ends 1000000.00 down and the state's take is measured against a contractor that never got its money back.")
+
+q(2,
+ "psc_tranches lifts 1000000.00 bbl in 2030, exactly the from_cum_mmbbl 1 boundary of its second tranche, yet the 2030 row prints a contractor share of 60.000000 and taxable_income 32400000.00. Why is 2030 not in the 40 percent tranche?",
+ "The table is read at the cumulative liquids at the start of the year, which is 0 in 2030; the field crosses 1000000 bbl on its last barrel of 2030, too late to change 2030.",
+ ["The boundary is exclusive: from_cum_mmbbl 1 means more than 1000000 bbl, and a field that reaches exactly 1000000 in 2030 has not passed it until it produces one barrel more.",
+  "The engine blends the two shares across the barrels of the year, and with the whole of 2030 below the boundary the blend is 0.600000 until 2031 starts above it.",
+  "The prior cumulative defaults to 0 and the engine reads the table on that default in every year until psc_prior_cumulative_liquids_bbl is set explicitly."],
+ "The tranche table read at 999999 bbl gives 0.600000 and at 1000000 gives 0.400000, so the boundary is not exclusive; it is the start-of-year reading that keeps 2030 at 60.")
+
+q(3,
+ "psc_tranches_prior_cumulative keeps the first tranche row at 60 percent from 0, yet its 2030 taxable_income is 21600000.00 where psc_tranches printed 32400000.00. What changed 2030?",
+ "psc_prior_cumulative_liquids_bbl 1500000 opens 2030 inside the 40 percent tranche, so the first row of the table is never used.",
+ ["The third tranche at 30 percent from 2 pulls the average share of the field down, and the engine prices every year at the average of the tranches it will pass through.",
+  "The 1500000 bbl of prior cumulative is added to the cost pool, so more cost oil is taken in 2030 and less profit oil is shared.",
+  "The table is read at the end of 2030, when the cumulative is 2500000 bbl, and the 40 percent row applies at that reading."],
+ "A brownfield gets no fresh start: 2030 opens at 1500000 bbl and 2031 opens at 2500000, in the 30 percent tranche, giving taxable income 16200000.00 and an NPV of minus 12200000.00.")
+
+q(0,
+ "psc_itc sets psc_itc_pct 50 on the 80000000.00 of capex. Both years print tax 0.00 while taxable_income stays 27000000.00. Why does the credit leave the base untouched?",
+ "The credit is applied after the tax is computed and offsets the tax itself, so the base of 27000000.00 is never reduced by it.",
+ ["The credit comes off the cost pool rather than the base, and a smaller pool recovers faster so the tax vanishes as cost oil.",
+  "The taxable_income column is printed before the credit is deducted, and the base after the credit is 0.00 in both years, which is why the tax is 0.00.",
+  "The credit is paid to the contractor as cash in 2030, and the engine reports it in the tax column as a negative tax that nets the 13500000.00 to zero."],
+ "The applyPSC sample says it in one call: an ITC of 40000000 against a tax before credit of 4500000.00 uses 4500000.00 and carries 35500000.00, and the base is not in the sentence.")
+
+q(1,
+ "A credit larger than the tax it meets waits for the next year's tax. What happens to the balance of psc_itc's 40000000 credit that is still unused when the field ends in 2031?",
+ "Nothing. There is no refund line and no KPI for the balance, and a field that ends with credit unused ends with nothing.",
+ ["It is refunded in the final row as a negative tax, which is why the 2031 net cash flow of 53000000.00 is higher than the 39500000.00 of the case without the credit.",
+  "It is added to unrecovered cost at cessation, since a credit the state owes is a cost and the pool holds unpaid cost.",
+  "It is reported in the KPI block beside the take, so a reader sees how much of the 74.0000 percent was offset by credit."],
+ "The 2031 net of 53000000.00 is 39500000.00 plus the 13500000.00 of tax the credit absorbed in that year; the remainder carries past the end of the field and is never seen again.")
+
+q(2,
+ "psc_wi_50 reports total oil 1000000.00 bbl for a field that lifted 1000000 bbl in each of 2030 and 2031, and the rows carry oil_bbl 500000.00. Why has the volume halved with the money?",
+ "Under a PSC the working interest is applied at the door, so the rows are the contractor's share and the volumes are entitlement volumes rather than field volumes.",
+ ["The engine halves the volumes because the cap binds in both years, and a binding cap converts half of the barrels into cost oil that is not counted as production.",
+  "The production file was pre-scaled to 50 percent before upload, and the engine reads the halved barrels as the field's production.",
+  "The oil_bbl column reports the barrels behind the contractor's profit oil, and at a 50 percent profit share that is half the field's production."],
+ "The joint venture ledger keeps field revenue and field volumes and applies the share later; the PSC ledger scales everything first, which is why NPV halves to minus 2295454.55 and take stays 101.0000.")
+
+q(0,
+ "psc_sinking_fund adds abandonment_cost_usd 10000000 funded from 2031. The 2031 row shows decom_fund_contribution 10000000.00, net cash flow 29500000.00 against 39500000.00, and tax still 13500000.00. Where did the contribution go?",
+ "Into the recoverable cost lane, so it rides the pool as a cost to be recovered rather than being paid outside the contract.",
+ ["It was deducted from the contractor's profit oil before tax, which is why the net fell by the full 10000000.00 while the taxable income stayed at 27000000.00.",
+  "It was paid from the contractor's profit oil after tax and shared with the state at the 50 percent profit split, leaving the contractor's cash lower by the whole sum.",
+  "A lump sum charged in the last year of the field, the sinking fund label only recording that the money was set aside in 2031 rather than spent."],
+ "The tax is unchanged at 13500000.00 because the base is unchanged; the contribution is a cost, and costs under a PSC go into the pool and stay out of the tax base.")
+
+q(3,
+ "psc_abandonment_wi_50 charges a 10000000.00 lump sum against the 50 percent working interest flows. The 2031 net is 9750000.00 where psc_wi_50 had 19750000.00. What does the difference say about the lump sum?",
+ "It was charged in full: the lump sum is not scaled by the working interest, and the whole 10000000.00 came off a ledger that had already been halved.",
+ ["It was scaled to 5000000.00 and the other 5000000.00 is the tax on the abandonment, which the engine charges at the 50 percent rate on the lump sum.",
+  "It was scaled to 5000000.00 and then discounted at 10 percent back to 2030 before being charged, which is why the row moves by twice the scaled amount.",
+  "It was charged in full because the working interest only applies to revenue and volumes, and the capex of 40000000.00 in 2030 was likewise charged unscaled."],
+ "The capex in 2030 halved to 40000000.00 with everything else; the abandonment did not, and NPV reads minus 11386363.64 against minus 2295454.55 without it.")
+
+q(1,
+ "AKATA under production sharing at a 30 percent cap leaves 207346412.26 in the pool at the end of 2035. Which output column of the engine reports that figure?",
+ "psc_cost_pool_after on the 2035 row, and kpis.psc_unrecovered_cost_at_cessation repeats it as the cost the end of the field leaves unrecovered.",
+ ["The depreciation column, which under a PSC reports the unrecovered capex in the pool rather than a write-off, because cost oil replaces depreciation.",
+  "The cumulative_cash_flow column, which on a PSC row is the contractor's cumulative position after cost oil and therefore mirrors the pool with its sign reversed.",
+  "The tax column, because tax moves with the pool, 10393930.24 in 2035 at 30 percent against 8400589.37 at 60, and the pool can be read back from it."],
+ "Every production sharing row carries psc_cost_pool_after, the cost still carried at the year end, and the KPI block reports the pool cessation leaves; no column prints the cost recovered in a year, so the recovery itself is read by marching applyPSC. Tax moves with the pool, but tax alone cannot tell a low tax from a low profit.")
+
+emit(Q, '/root/wt-ec7-recut/tools/course-banks/cashflow/advanced/ec1a_m01.json', expect_n=15)
+finish()

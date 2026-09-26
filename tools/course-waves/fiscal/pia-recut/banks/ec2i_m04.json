@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "Corporate income tax and the resource rent tax in this model are charged on which quantity?",
+  "options": [
+   "Gross revenue, taken before any cost at all.",
+   "Revenue after royalty less cost recovered, which is the whole of profit oil before the split takes the government's part out of it.",
+   "The contractor's share of profit oil, and nothing else.",
+   "The contractor's profit share less half of that year's opex, the deduction the engine's own header describes."
+  ],
+  "answer": 2,
+  "explanation": "Cost is compensated through cost recovery and is never deducted again at the tax line, and the header records that the halving of opex was invented and has been removed. In year 3 of the Brazil instruments the base is 75.7962 million USD and the charge is 25.7707."
+ },
+ {
+  "prompt": "The Brazil instruments on the Designer's default project sell 271.9889 million USD of gross revenue in year 1 and charge 0.0000 of tax. What produced the zero?",
+  "options": [
+   "A 100 percent recovery limit took the whole of that year's revenue after royalty back against the 500.0000 million USD of capex, so profit oil and therefore the base were 0.0000.",
+   "The capex of 500.0000 million USD was written off against income in the year it was spent, which is the capital allowance the model grants in the first year only.",
+   "A loss in year 1 was carried forward, so nothing was charged until the carried balance had been worked off in year 3.",
+   "The stack holds a two year tax holiday before its first charge, which is why the first tax in the column arrives in year 3."
+  ],
+  "answer": 0,
+  "explanation": "Profit oil reads 0.0000 in years 1 and 2 and the base is the profit share, so the first charge is the 25.7707 million USD of year 3."
+ },
+ {
+  "prompt": "Running the Brazil instruments with two of the three tax instruments switched off gives 502.1091 million USD for a corporate income tax of 34 percent and 350.7165 for a resource rent tax of 40 percent, on the same base. Why does the higher rate collect the smaller amount?",
+  "options": [
+   "The resource rent tax is charged on what survives the corporate income tax, so it works on a base that the 34 percent charge has already taken a third out of, which is how a second profits tax is usually stacked on a first.",
+   "The resource rent tax falls on the government's share of profit oil rather than the contractor's, and on this regime that share is much the smaller of the two.",
+   "The resource rent tax begins only once the cost recovery pool has cleared in year 3, so it reaches fewer of the 25 years than the corporate income tax does.",
+   "The resource rent tax draws relief from a pool of 1.2 times the 500.0000 million USD of capex before it charges anything, so the first six years of the base are sheltered whole."
+  ],
+  "answer": 3,
+  "explanation": "The pool is drawn against the profit share and never refilled, so the column is 0.0000 until year 7, charges 10.8703 million USD there and is the full rate from year 8."
+ },
+ {
+  "prompt": "The tax charged in a year is the larger of the corporate income tax plus the resource rent tax, and the minimum tax. In year 1 of the Brazil decomposition a 5 percent minimum reads 13.5994 million USD and the published stack reads 0.0000. What would switching the minimum on charge in that year?",
+  "options": [
+   "Nothing, because a minimum tax is waived in any year whose profit share is 0.0000 and the base test governs all three instruments alike.",
+   "13.5994 million USD, because the minimum replaces the profits taxes rather than adding to them.",
+   "13.5994 million USD on top of the published stack, since a floor is an additional instrument and the three charges are summed before the larger is taken.",
+   "A share of 13.5994 million USD set by how far the floor stands above the profits taxes."
+  ],
+  "answer": 1,
+  "explanation": "The rule is a maximum and not a sum. From year 3 the stack reads 25.7707 against a minimum of 10.9864 and the floor never binds again."
+ },
+ {
+  "prompt": "The decomposition prints 502.1091 million USD for the corporate income tax alone and 350.7165 for the resource rent tax alone, against a published stack of 852.8256. What should a reader conclude from adding the first two figures?",
+  "options": [
+   "That the printed columns disagree with the stack, which is evidence that the maximum rule drops part of one instrument somewhere in the life of the field.",
+   "That a third instrument is quietly present in the published run, since a stack built from two exact components would reproduce its own total at the printed precision.",
+   "Nothing beyond what each column already says, because every column total is rounded on its own and the sum of two rounded figures is not itself a published number.",
+   "That the decomposition is only approximate inside the engine."
+  ],
+  "answer": 2,
+  "explanation": "Unrounded, the two come to 852.8256004720 against a published 852.8256004720. The decomposition is exact in the engine and only approximate at the precision printed, so quote the columns and never assert that the printed figures add."
+ },
+ {
+  "prompt": "The uplift sweep on the Brazil instruments reports a total tax of 390.7165 million USD at an uplift of 0 percent. What is that figure?",
+  "options": [
+   "The resource rent tax alone at 40 percent, because the sweep sets the template's own corporate income tax of 34 percent to zero in every one of its rows.",
+   "The regime's whole tax bill with the relief withdrawn, which is what the published stack of 852.8256 million USD becomes when the uplift is taken away.",
+   "The corporate income tax and the resource rent tax added together on a base that no longer carries any capital relief at all.",
+   "The total government cash flow at that uplift, of which the tax column is the part collected through the stack rather than through the royalty."
+  ],
+  "answer": 0,
+  "explanation": "The published Brazil stack on this project is 852.8256 million USD. The sweep's tax, cash flow, take and NPV columns are an isolation of one instrument and not the regime."
+ },
+ {
+  "prompt": "What does the uplift sweep on the Brazil instruments report at an uplift of 50 percent?",
+  "options": [
+   "A total tax of 0.0000, because half of the 500.0000 million USD of capex is taken out of the base in every one of the 25 years of the life.",
+   "A total tax of 290.7165 million USD, with the first positive charge falling in year 9.",
+   "A negative tax, because the base falls below zero and the engine credits the shortfall back to the contractor as relief in that year.",
+   "A refusal, because an uplift larger than the resource rent tax rate is rejected by the engine as an instrument that cannot be expressed."
+  ],
+  "answer": 1,
+  "explanation": "The pool there is 1.5 times the capex, so it lasts longer and the charge begins later, and contractor net cash flow reaches 1186.0748 million USD."
+ },
+ {
+  "prompt": "The resource rent tax uplift is a percent of total capex. What does the engine do with it?",
+  "options": [
+   "It takes the capex times the uplift off the base in every one of the 25 years, so the relief over the life runs to several times the capex.",
+   "It takes the capex times the uplift off the base once, in the year the capex is spent, so no charge can arise in year 1 on a project that spends its capital there.",
+   "It takes the capex times the uplift off the base in every year the cost recovery pool still carries a balance, since the uplift is the tax side of the same unrecovered capital.",
+   "It opens a relief pool once, at the capex times one plus the uplift, and draws that pool down against the profit share until it is exhausted."
+  ],
+  "answer": 3,
+  "explanation": "At the default 20 percent on 500.0000 million USD of capex the pool is 1.2 times the capital cost. On the Designer's default project Brazil - Concession's first positive resource rent tax charge falls in year 7, and Angola - Deepwater PSC's in year 13."
+ },
+ {
+  "prompt": "Two published cases run the same regime on the same project and differ only in the uplift field: one omits it and one sets it to 0. Total tax is 2127.5549 million USD against 2207.5549. What decided the gap?",
+  "options": [
+   "The omitted field took the documented default of 20 percent, so one run opens a relief pool of 1.2 times the capex where the other opens one at the capex itself.",
+   "The omitted field was read as zero and the explicit zero as missing, so the two case names sit against the wrong totals and the pair should be read the other way round.",
+   "The two runs differ in their corporate income tax as well, because the default uplift is applied to that rate before the resource rent tax is worked out.",
+   "A minimum tax bound in the second run and replaced the profits taxes."
+  ],
+  "answer": 0,
+  "explanation": "Contractor net cash flow is 1323.4598 against 1243.4598 million USD. The two ledgers differ in one year only, year 4, at 169.6803 against 249.6803."
+ },
+ {
+  "prompt": "In the published case where the minimum tax binds, year 1 has gross revenue of 876.0000 million USD, profit oil of 0.0000 and a tax of 87.6000. What does that row establish?",
+  "options": [
+   "The minimum tax is charged on the profit share like the other two, and the 0.0000 in that row is the printing of a very small positive base.",
+   "The minimum tax is charged on revenue after royalty and not on gross revenue.",
+   "The minimum tax is a percent of gross revenue and takes no notice of the profit share, the recovery limit or the unrecovered pool.",
+   "The minimum tax is charged only in years where the profits taxes come to nothing, which is what makes it a floor rather than a tax of its own."
+  ],
+  "answer": 2,
+  "explanation": "Over the life the instrument collects 700.1194 million USD and leaves contractor net cash flow at 2575.8655."
+ },
+ {
+  "prompt": "A year in which the minimum tax exceeds the profits taxes pays more than those taxes would have charged. What becomes of the difference?",
+  "options": [
+   "It is carried forward and set against the corporate income tax of the first later year in which the profits taxes are the larger of the two figures.",
+   "Nothing. There is no minimum tax credit, and the excess is not banked against any later year.",
+   "It is added to the unrecovered cost pool, which is where the model parks any amount it cannot settle inside the year that produced it.",
+   "It is settled at the horizon, because the stack is reconciled on lifetime totals such as the 700.1194 million USD that case collects."
+  ],
+  "answer": 1,
+  "explanation": "The instrument has no credit, no exemption for a loss making year and no sight of the royalty already taken off the same gross revenue."
+ },
+ {
+  "prompt": "Ghana - Deepwater charges a corporate income tax of 35 percent on the default project and collects 230.9340 million USD, while Generic Royalty/Tax charges 30 percent and collects 422.8854. What explains that order?",
+  "options": [
+   "Ghana's royalty of 134.3464 million USD is deducted from the base before the rate is applied to it, and Generic's larger royalty is not deducted at all.",
+   "Ghana recovers far more of its cost, so much less of the revenue after royalty survives as profit oil for the higher rate to reach.",
+   "Ghana's rate is charged on the contractor's net cash flow rather than on the profit share, and that is a smaller quantity in every year.",
+   "The base. Generic hands the contractor the whole of profit oil, while Ghana splits it on the R factor and the government's own share never passes through the tax line."
+  ],
+  "answer": 3,
+  "explanation": "Government cash flow runs the other way for exactly that reason, 1316.6067 million USD for Ghana against 758.7514 for Generic."
+ },
+ {
+  "prompt": "Nigeria - PIA (2021) collects the largest total tax of the four templates carrying a corporate income tax alone, 453.4354 million USD, inside the smallest government cash flow of the four, 687.4682. What does that pair say?",
+  "options": [
+   "The template's royalty must be the smallest of the four, because a large tax inside a small take can only come from a royalty that collects almost nothing.",
+   "The tax line measures one instrument and the take measures the regime, and on one ledger the two can point in opposite directions.",
+   "The take is the wrong column to read, since it includes the contractor's own profit share.",
+   "The tax total is overstated, because the government's share of profit oil is a tax collected in kind and has been counted in that column a second time."
+  ],
+  "answer": 1,
+  "explanation": "Ghana - Deepwater collects 230.9340 million USD of tax inside a take of 1316.6067, so ranking these four regimes by the tax column reverses the ranking by take."
+ },
+ {
+  "prompt": "By what route does capex reach the tax computation?",
+  "options": [
+   "Through cost recovery, since the 941.4436 million USD recovered on the default project is subtracted from the profit share before any rate is applied.",
+   "Through a capital allowance written down across the 25 year horizon, which is the depreciation the four tax fields between them express.",
+   "Through the resource rent tax uplift only, and four of the six templates set that rate to 0, so for those four capex reaches the tax line by no route at all.",
+   "Through the cost recovery limit, which fixes how much of the capital has been returned and therefore how much of it is still deductible at the tax line."
+  ],
+  "answer": 2,
+  "explanation": "The base is the profit share and recovery has already been settled in cash, so no part of the 941.4436 million USD appears in the tax computation."
+ },
+ {
+  "prompt": "Years 1 and 2 of the Brazil instruments have profit oil of 0.0000 and pay 0.0000 of tax, and year 3 is then charged 25.7707 million USD on a base of 75.7962. What did those two years buy?",
+  "options": [
+   "Nothing. There is no loss carryforward, so a year whose base is not positive pays nothing and passes nothing to the year after it.",
+   "Relief in year 3, which is why that year's charge is smaller than the rate of 34 percent applied to a base of 75.7962 would otherwise have been.",
+   "A balance in the unrecovered cost pool, which is the model's route for a base that cannot be used in the year that produced it.",
+   "A deferral, since the stack is settled again on lifetime totals when the 25 year horizon closes on the ledger."
+  ],
+  "answer": 0,
+  "explanation": "The year 3 charge is the full rate on 75.7962, and the corporate income tax alone over the life comes to 502.1091 million USD."
+ }
+]

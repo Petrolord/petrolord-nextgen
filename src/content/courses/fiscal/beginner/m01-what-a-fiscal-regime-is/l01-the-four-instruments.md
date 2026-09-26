@@ -4,7 +4,7 @@ A fiscal regime in this sandbox is exactly four fields on one object. Everything
 
 ## The four fields
 
-`royalty` is either `flat` with a `rate`, or `sliding_price` with tiers keyed on the oil price. `costRecoveryLimit` is a percent of revenue after royalty, and it caps how much cost the contractor may take back in one year. `profitSplit` is either `flat` with a contractor `split`, or `tiered_r_factor` with tiers keyed on the R factor. `tax` holds `cit`, `rrt`, `minTax` and an optional `rrtUpliftPct` that defaults to 20.
+`royalty` is `flat` with a `rate`, `sliding_price` with tiers keyed on the oil price, or `pia_2021`, the Petroleum Industry Act 2021 royalty that the "Nigeria - PIA (2021)" template carries. `costRecoveryLimit` caps how much cost the contractor may take back in one year: a percent of revenue after royalty, or, with `costRecoveryBase` set to `liquids_gross`, a percent of the gross value of crude oil and NGL. `profitSplit` is `flat` with a contractor `split`, `tiered_r_factor` with tiers keyed on the R factor, or `pia_cumulative_production`, the government's minimum share of profit oil by cumulative crude production. `tax` holds `cit`, `rrt`, `minTax` and an optional `rrtUpliftPct` that defaults to 20.
 
 Nothing else exists. There is no signature bonus, no domestic supply obligation, no state participation and no flare penalty. A regime that needs one of those cannot be expressed here at all.
 
@@ -23,13 +23,13 @@ Run both on the Designer's default project and total revenue is 2686.9277 millio
 
 ## The mistake
 
-The careful reader ranks regimes by their tax rate, because tax is the instrument with a familiar name. "Nigeria - PIA (2021)" and "Generic Royalty/Tax" both carry CIT 30 percent, RRT 0 percent and minimum tax 0 percent. On the default project the PIA contractor keeps 406.2057 million USD and the Generic contractor keeps 986.7327 million USD.
+The careful reader ranks regimes by their tax rate, because tax has the familiar name. "Nigeria - PIA (2021)" and "Generic Royalty/Tax" both carry CIT 30 percent, RRT 0 percent and minimum tax 0 percent. On the default project the PIA contractor keeps 1058.0159 million USD and the Generic contractor keeps 986.7327 million USD.
 
-Worse for the intuition, the PIA case pays the smaller tax bill of the two: total tax 174.0882 million USD against 422.8854 million USD. Less tax, and less than half the cash. The gap was opened by the other three fields, a cost recovery limit of 80 percent instead of 100, and an R factor split that hands the contractor 60, then 40, then 30 percent of profit oil instead of all of it. A tax rate quoted on its own predicts nothing.
+The PIA case also pays the larger tax bill: total tax 453.4354 million USD against 422.8854 million USD. More tax, and more cash. The other three fields opened the gap. The PIA royalty collects 154.4828 million USD where the Generic flat 12.5 percent collects 335.8660, and the government's minimum share of profit oil is only 5 percent while cumulative production stays below 50 million bbl, so the contractor keeps 95 percent of a larger profit oil and pays its 30 percent on that. A tax rate quoted on its own predicts nothing.
 
 ## What the four fields refuse
 
-They refuse to be a country's fiscal code. The engine's own header says this model exists to compare the shape of regimes against each other, and that the single source of truth for Nigerian fiscal math is the Petroleum Economics Studio engine. A template named for a jurisdiction is a caricature in six numbers, useful for asking which instrument moved which result, and unfit for filing anything.
+They refuse to be a country's fiscal code. The engine's own header says this model exists to compare the shape of regimes against each other, and that the single source of truth for Nigerian fiscal math is the Petroleum Economics Studio engine. A template named for a jurisdiction is a sketch of its terms in the four fields. "Nigeria - PIA (2021)" carries the Act's minimum base terms for a deep offshore production sharing contract on new acreage, which a licensing round can bid up. Each is useful for asking which instrument moved which result, and unfit for filing anything.
 
 ## Exercise
 

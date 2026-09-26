@@ -20,7 +20,7 @@ The unused pool is a tax shield with nothing to shield. At the 50 percent rate a
 
 Each regime names the value the horizon left behind differently.
 
-Under joint venture terms it is the tax loss. Under the PIA it is the cost price ratio pool: cpr_forfeiture claims 52000000.00 against its cap, defers 8000000.00, and the ledger ends: CPR forfeited at cessation 8000000.00. On pia_cpr_carry_two_years the cap at 30 percent binds for three years and 66000000.00 is forfeited. Under production sharing the line arrived late: since engines 3.10.0 a row can carry psc_cost_pool_after and a KPI can report what cessation forfeits, while the recovery behind it is still read from the march.
+Under joint venture terms it is the tax loss. Under the PIA it is the cost price ratio pool: cpr_forfeiture claims 52000000.00 against its cap, defers 8000000.00, and the ledger ends: CPR forfeited at cessation 8000000.00. On pia_cpr_carry_two_years the cap at 30 percent binds for three years and 66000000.00 is forfeited. Under production sharing a row carries psc_cost_pool_after and a KPI reports what cessation forfeits, while the recovery behind it is read from the march.
 
 Depreciation the horizon never reaches goes the same way: AKATA's ten-year default straight line claims 174000000.00 of 255000000.00 capex in seven years, and the rest is neither banked, forfeited nor reported.
 
@@ -34,7 +34,7 @@ The careful mistake is treating take null as a data error. Take is the governmen
 
 ## What the engine refuses
 
-It refuses to value the unused pool or to extend the ledger to spend it. It refuses to report the cost oil recovered in a year. And the two-thirds CIT restriction has left this list: since engines 3.10.0 what it disallows is carried, so a binding restriction is a deferral unless the ledger ends there.
+It refuses to value the unused pool or to extend the ledger to spend it. It refuses to report the cost oil recovered in a year. And the two-thirds CIT capital allowance restriction, a rule of the years before 2026, carries what it disallows, so a binding restriction is a deferral unless the ledger ends there.
 
 ## Exercise
 

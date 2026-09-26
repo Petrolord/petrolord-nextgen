@@ -16,11 +16,11 @@ From the rates and declines it generates a production profile. From the profile 
 
 Because it makes exactly one thing comparable. Run all six templates on the default project and total revenue reads 2686.9277 million USD on every line. Run them on the published test project and it reads 7001.1938 million USD on every line. The revenue column is a constant, so any difference in the answer is the regime and only the regime.
 
-That is the whole design. On the default project contractor net cash flow ranges from 406.2057 million USD under "Nigeria - PIA (2021)" to 986.7327 million USD under "Generic Royalty/Tax", against that identical 2686.9277 million USD of sales.
+That is the whole design. On the default project contractor net cash flow ranges from 428.8774 million USD under "Ghana - Deepwater" to 1058.0159 million USD under "Nigeria - PIA (2021)", against that identical 2686.9277 million USD of sales.
 
 ## The mistake
 
-The careful reader treats a contractor net cash flow of 986.7327 million USD as a valuation of the asset under those terms. It is not. It is the cash consequence of one manufactured profile and one deck, with no uncertainty around either, and with an internal rate of return of 44.6574 percent that would evaporate if the profile were wrong. The number answers "which instrument moved this", not "what is this worth".
+The careful reader treats a contractor net cash flow of 986.7327 million USD as a valuation of the asset under those terms. It is not. It is the cash consequence of one manufactured profile and one deck, with no uncertainty around either, and with an internal rate of return of 44.6574 percent that would evaporate if the profile were wrong. The number answers "which instrument moved this". It does not answer "what is this worth".
 
 ## What it refuses
 
