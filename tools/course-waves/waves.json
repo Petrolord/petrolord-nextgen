@@ -113,7 +113,7 @@
       "ts_loader.mjs"
     ],
     "pins": {
-      "digest.txt": "e02ec58c252b33097f09fad2d1719f61d444e09a000819d396f239d9d45b4802",
+      "digest.txt": "e6e61e89277f2ef22bb93497975e72b54a6f7a1ee05dc6b11a26258b9f95b6c8",
       "fields.json": "06eef99fb60dc4ddbb255d4821a5b10208fde1d66ea175ca7dbe227933b8702e"
     },
     "recutNote": "EC7 PIA recut 2026-09-26 (engines 3.12.0 at 3778451, default path): the digest is re-cut; every graded value in fields.json is unchanged (the URUAN capstone runs its own two regimes and reads no template) and con_payback_year_cum_ncf_musd is narrowed to tolerance 0.0003 (lead decision: the PIA template's year 2 royalty on the default project sat inside the 0.001 band). ec2_fields.mjs now spells cmp_psc_capex_loss_last_tenth_musd, so the fieldsNoGeneratorSpells exception is retired. fiscalRegime.js imports cashflow.ts, so the dump registers ts_loader.mjs."

@@ -1550,9 +1550,9 @@ Read the x3 row along its length. It is null and undefined at 40 USD per bbl, ex
 
 The rule a reader needs. Before believing a point on this curve, read its state and the two totals underneath it. If contractor net cash flow over the life is negative, the point is above 100 percent and flagged exceeds. If it is negative enough to outweigh the government take, the point is null and flagged undefined, and there is no share to quote. The course explorer breaks the line at an undefined price, shades that band as uneconomic, and pins an exceeds point to the top of the axis with its true value in the tooltip, so it never sets the scale.
 
-# SECTION 27: The payback verdict restates the NPV ranking whenever payback ties (owned by Expert m04)
+# SECTION 27: The payback verdict ranks an integer column, where ties are the normal case (owned by Expert m04)
 
-Payback in this engine is an INTEGER year, the first year cumulative contractor net cash flow is above zero. Integers tie. On the Designer default project with all six templates loaded, most of the six pay back in the same year, and the verdict names one of them as though it had won.
+Payback in this engine is an INTEGER year, the first year cumulative contractor net cash flow is above zero. Integers tie. On the Designer default project with all six templates loaded, most of the six pay back in the same year.
 
 | position in the summary (NPV descending) | regime | npv | paybackPeriod |
 | --- | --- | --- | --- |
@@ -1567,11 +1567,9 @@ The verdict the engine returns: "Nigeria - PIA (2021)", "Generic Royalty/Tax", "
 
 Read it against the table. Five regimes pay back in year 3 and one regime pays back in year 4, so "fastest capital recovery" has a five-way tie at the top.
 
-The regime the sentence names is the first of the tied regimes in summary order, and the summary is sorted by contractor NPV, so on any project where payback ties the payback verdict names WHICHEVER REGIME HAS THE HIGHEST NPV. It is the NPV ranking wearing a different label.
+The verdict names EVERY regime tied at the fastest year, so a tie prints as a tie. The names inside a tie follow the summary order, which is contractor NPV descending; that order ranks nothing about payback, and a reader who takes the first name as the fastest is reading the NPV ranking under another label.
 
-That is the exact claim `deriveInsights` was written to eliminate. The function exists because the Insights tab used to declare the top-NPV regime to also have the fastest payback, among three other conclusions nothing had computed. The payback verdict now genuinely reads the payback column, and it still lands on the top-NPV regime every time the column ties, because a strict less-than in a reduce keeps the first element it saw and the first element it saw is the NPV winner.
-
-The capex and price verdicts have the same reduce and the same tie behaviour, and the golden records a case where the engine and the oracle name different winners on quantities that differ in the fifteenth figure. The payback verdict differs in one way that makes it worse rather than better: those two rank continuous quantities, where an exact tie is rare and a near-tie is the hazard, while THIS one ranks a small integer, where an exact tie is the normal case.
+A payback verdict ranks a small integer, where an exact tie is the normal case. The capex and price verdicts rank continuous quantities, where a near tie is the hazard, and each names a leader only past a stated minimum lead (Sections 21 and 22). The government verdict is the one that still keeps the first of two exactly tied regimes in summary order (`insights_ties`, Section 22).
 
 The same six templates on the TEST PROJECT pay back in years 2, 2, 2, 2, 2, 2 reading down the summary, and the verdict reads: "Nigeria - PIA (2021)", "Generic Royalty/Tax", "USA - Gulf of Mexico", "Brazil - Concession", "Angola - Deepwater PSC" and "Ghana - Deepwater" all pay back in year 2.
 
@@ -1592,11 +1590,11 @@ The verdict: "Brazil - Concession" and "Ghana - Deepwater" pay back in year 6, a
 
 2 regimes pay back in year 6 on ODIDI: Brazil - Concession, Ghana - Deepwater. The verdict names every one of them.
 
-And notice the SECOND name in every one of these sentences. It is not the runner-up. The function picks the fastest, removes it, and then takes the MAXIMUM of what is left, so the second regime named is the SLOWEST of the rest. A sentence of the form "A pays back in year x, against year y for B" reads like a top two and is a top and a bottom, with everything else silently in between.
+And notice the LAST name in every one of these sentences, the one after "against". It is not the runner-up. The function names the fastest year's regimes, sets them aside, and then takes the MAXIMUM of what is left, so the regime after "against" is the SLOWEST of the rest. A sentence of the form "A pays back in year x, against year y for B" reads like a top two and is a top and a bottom, with everything else silently in between. If two regimes tied at that slowest year, the strict greater-than would keep the first of them in summary order and name only that one.
 
-The reading rule. A verdict that names a winner on an INTEGER quantity is only a ranking when you have checked the column for ties, and the column is in the summary table two centimetres away. Where it ties, the sentence is telling you about NPV. And the two regimes a payback sentence names are the extremes, never a ranking of two.
+The reading rule. A verdict on an INTEGER quantity is a ranking only where the column does not tie, and the column is in the summary table two centimetres away. Read the names inside a tie as a list. And the regime after "against" is the slowest of the rest, never the runner-up.
 
-One more thing to notice in the sentences above, and it is a copy defect rather than an arithmetic one. The engine formats money inside its verdict strings with a dollar sign and an MM unit (the capex and government verdicts on the published comparisons print that way). Every other number in this course is written as millions of USD in words, because the owner copy rule forbids the dollar sign and the MM unit in user-facing text. A panel that prints an insight sentence verbatim, which is the only honest way to show what the engine said, puts that formatting on the screen. Recorded in the wave FINDINGS.md as EC2-6.
+One more thing to notice in the sentences above. The engine writes money inside its verdict strings as millions of USD in words, one decimal with thousands separators, which is how every other number in this course is written, so a panel prints an insight sentence verbatim, the only honest way to show what the engine said.
 
 # SECTION 28: Government take and government share of net revenue, the two named metrics (owned by Expert m01, m02 and m05)
 

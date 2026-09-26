@@ -1075,9 +1075,9 @@ w('The rule a reader needs. Before believing a point on this curve, read its sta
 w();
 
 // -------------------------------------------------------------- Section 27
-w('# SECTION 27: The payback verdict restates the NPV ranking whenever payback ties (owned by Expert m04)');
+w('# SECTION 27: The payback verdict ranks an integer column, where ties are the normal case (owned by Expert m04)');
 w();
-w('Payback in this engine is an INTEGER year, the first year cumulative contractor net cash flow is above zero. Integers tie. On the Designer default project with all six templates loaded, most of the six pay back in the same year, and the verdict names one of them as though it had won.');
+w('Payback in this engine is an INTEGER year, the first year cumulative contractor net cash flow is above zero. Integers tie. On the Designer default project with all six templates loaded, most of the six pay back in the same year.');
 w();
 {
   const c = CMP['cmp_all_templates_default_project'];
@@ -1095,11 +1095,9 @@ w();
   w(`Read it against the table. ${ys.map((y, i) => `${i === 0 ? words[byYear[y]].replace(/^./, (ch) => ch.toUpperCase()) : words[byYear[y]]} regime${byYear[y] === 1 ? '' : 's'} pay${byYear[y] === 1 ? 's' : ''} back in year ${y}`).join(' and ')}, so "fastest capital recovery" has a ${words[byYear[ys[0]]]}-way tie at the top.`);
   w();
 }
-w('The regime the sentence names is the first of the tied regimes in summary order, and the summary is sorted by contractor NPV, so on any project where payback ties the payback verdict names WHICHEVER REGIME HAS THE HIGHEST NPV. It is the NPV ranking wearing a different label.');
+w('The verdict names EVERY regime tied at the fastest year, so a tie prints as a tie. The names inside a tie follow the summary order, which is contractor NPV descending; that order ranks nothing about payback, and a reader who takes the first name as the fastest is reading the NPV ranking under another label.');
 w();
-w('That is the exact claim `deriveInsights` was written to eliminate. The function exists because the Insights tab used to declare the top-NPV regime to also have the fastest payback, among three other conclusions nothing had computed. The payback verdict now genuinely reads the payback column, and it still lands on the top-NPV regime every time the column ties, because a strict less-than in a reduce keeps the first element it saw and the first element it saw is the NPV winner.');
-w();
-w('The capex and price verdicts have the same reduce and the same tie behaviour, and the golden records a case where the engine and the oracle name different winners on quantities that differ in the fifteenth figure. The payback verdict differs in one way that makes it worse rather than better: those two rank continuous quantities, where an exact tie is rare and a near-tie is the hazard, while THIS one ranks a small integer, where an exact tie is the normal case.');
+w('A payback verdict ranks a small integer, where an exact tie is the normal case. The capex and price verdicts rank continuous quantities, where a near tie is the hazard, and each names a leader only past a stated minimum lead (Sections 21 and 22). The government verdict is the one that still keeps the first of two exactly tied regimes in summary order (`insights_ties`, Section 22).');
 w();
 {
   const c = CMP['cmp_all_templates_test_project'];
@@ -1132,11 +1130,11 @@ w();
   w(`${tied.length} regimes pay back in year ${fastest} on ODIDI: ${tied.join(', ')}. The verdict names every one of them.`);
   w();
 }
-w('And notice the SECOND name in every one of these sentences. It is not the runner-up. The function picks the fastest, removes it, and then takes the MAXIMUM of what is left, so the second regime named is the SLOWEST of the rest. A sentence of the form "A pays back in year x, against year y for B" reads like a top two and is a top and a bottom, with everything else silently in between.');
+w('And notice the LAST name in every one of these sentences, the one after "against". It is not the runner-up. The function names the fastest year\'s regimes, sets them aside, and then takes the MAXIMUM of what is left, so the regime after "against" is the SLOWEST of the rest. A sentence of the form "A pays back in year x, against year y for B" reads like a top two and is a top and a bottom, with everything else silently in between. If two regimes tied at that slowest year, the strict greater-than would keep the first of them in summary order and name only that one.');
 w();
-w('The reading rule. A verdict that names a winner on an INTEGER quantity is only a ranking when you have checked the column for ties, and the column is in the summary table two centimetres away. Where it ties, the sentence is telling you about NPV. And the two regimes a payback sentence names are the extremes, never a ranking of two.');
+w('The reading rule. A verdict on an INTEGER quantity is a ranking only where the column does not tie, and the column is in the summary table two centimetres away. Read the names inside a tie as a list. And the regime after "against" is the slowest of the rest, never the runner-up.');
 w();
-w('One more thing to notice in the sentences above, and it is a copy defect rather than an arithmetic one. The engine formats money inside its verdict strings with a dollar sign and an MM unit (the capex and government verdicts on the published comparisons print that way). Every other number in this course is written as millions of USD in words, because the owner copy rule forbids the dollar sign and the MM unit in user-facing text. A panel that prints an insight sentence verbatim, which is the only honest way to show what the engine said, puts that formatting on the screen. Recorded in the wave FINDINGS.md as EC2-6.');
+w('One more thing to notice in the sentences above. The engine writes money inside its verdict strings as millions of USD in words, one decimal with thousands separators, which is how every other number in this course is written, so a panel prints an insight sentence verbatim, the only honest way to show what the engine said.');
 w();
 
 w('# SECTION 28: Government take and government share of net revenue, the two named metrics (owned by Expert m01, m02 and m05)');

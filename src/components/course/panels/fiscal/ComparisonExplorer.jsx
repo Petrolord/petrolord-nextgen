@@ -479,27 +479,28 @@ const Insights = () => {
       )}
 
       <p className="text-xs text-slate-500 mt-5 mb-1">
-        AND THE SAME REDUCE ON AN INTEGER COLUMN. Payback is a whole year, and whole years tie far more often than a
-        continuous quantity does. Where the column ties, the sentence names the first regime in summary order, and the
-        summary is sorted by contractor NPV.
+        AND AN INTEGER COLUMN, WHERE TIES ARE THE NORMAL CASE. Payback is a whole year, and whole years tie far more
+        often than a continuous quantity does. Where the column ties, the sentence names every tied regime, in
+        summary order, and the summary is sorted by contractor NPV, so the order of those names ranks nothing about
+        payback.
       </p>
       {payback.status !== 'done' ? (payback.status === 'failed' ? <Failed what="the payback evidence" /> : <Waiting what="the payback evidence" />) : (
         <Tbl
-          head={['comparison', 'payback years down the summary', 'fastest year', 'regimes tied at it', 'the regime the verdict names', 'the top-NPV regime', 'is the verdict a ranking', 'the SECOND regime the sentence names', 'the actual runner-up']}
+          head={['comparison', 'payback years down the summary', 'fastest year', 'regimes tied at it', 'the first name in the sentence', 'the top-NPV regime', 'is the verdict a ranking', 'the regime after "against"', 'the actual runner-up']}
           rows={payback.value.map((e) => [
             e.caseId, e.paybackYears.map((y) => yr(y)).join(', '), yr(e.fastestPaybackYear), e.tiedAtFastest,
             e.namedRegime === null ? 'null' : e.namedRegime, e.topNpvRegime,
-            e.tied ? <span key={e.caseId} className="text-amber-300">no, the column ties and the sentence is telling you about NPV</span> : 'yes, the column does not tie',
-            e.secondNamed === null ? 'null' : e.secondNamed,
+            e.tied ? <span key={e.caseId} className="text-amber-300">no, the column ties: read the tied names as a list</span> : 'yes, the column does not tie',
+            e.afterAgainst === null ? 'none, every paying regime is tied' : e.afterAgainst,
             e.runnerUp === null ? 'null' : e.runnerUp,
           ])}
         />
       )}
       {payback.status === 'done' && (
         <p className="text-xs text-amber-300 mt-2 mb-0">
-          And notice the SECOND name in every one of those sentences. It is not the runner-up. The function picks the
-          fastest, removes it, and then takes the MAXIMUM of what is left, so the second regime named is the SLOWEST
-          of the rest. A sentence of the form "A pays back in year x, against year y for B" reads like a top two and
+          And notice the LAST name in every one of those sentences, the one after "against". It is not the runner-up.
+          The function names the fastest year&apos;s regimes, sets them aside, and then takes the MAXIMUM of what is
+          left, so the regime after "against" is the SLOWEST of the rest. A sentence of the form "A pays back in year x, against year y for B" reads like a top two and
           is a top and a bottom, with everything else silently in between.
         </p>
       )}

@@ -1454,6 +1454,9 @@ export const paybackTieEvidence = async () => {
       // LAST one, not the second. secondNamed is kept for the history the
       // lessons quote and is only the slowest of the rest when nothing tied.
       lastNamed: named.length ? named[named.length - 1] : null,
+      // The regime after "against", present only when a regime sits outside
+      // the tie: the SLOWEST of the rest, never the runner-up.
+      afterAgainst: named.length > atFastest.length ? named[named.length - 1] : null,
       slowestOfTheRest,
       runnerUp,
       secondNamedIsTheSlowestOfTheRest: named.length > 1 && named[1] === slowestOfTheRest,

@@ -1263,6 +1263,8 @@ describe('THE PAYBACK VERDICT RESTATES THE NPV RANKING WHENEVER PAYBACK TIES', (
       expect(e.namesInTheSentence.slice(0, e.tiedAtFastest), e.caseId).toEqual(e.tiedRegimeNames);
       const named = e.namesInTheSentence;
       expect(e.lastNamed, e.caseId).toBe(named[named.length - 1]);
+      expect(e.afterAgainst, e.caseId).toBe(named.length > e.tiedAtFastest ? e.lastNamed : null);
+      if (e.afterAgainst !== null) expect(e.afterAgainst, e.caseId).toBe(e.slowestOfTheRest);
       if (named.length > e.tiedAtFastest) {
         // A trailing "against year y for X" survives, and X is still the
         // SLOWEST of the rest rather than the runner-up. THE LIVE PROPERTY IS
