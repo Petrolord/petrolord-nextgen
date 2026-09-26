@@ -27,7 +27,7 @@
   "x1e-2"
  ],
  "plan": {
-  "state": "FOUNDATION: vendoring, structure, digest on the vendored Ekene document fixtures, capstones, gates, kit, stubs and the teaching lab with three explorers. Lessons not started."
+  "state": "SHIPPED FOR REVIEW: foundation, 78 lessons, 396 questions (three key-truth audits, 2 wrong keys fixed), post-audit digest additions and lesson fixes, and the five migrations 20261104_d5_appliedai_* (HELD, not applied), the three JSON capstone case files, the go-live with an engine ledger, a second route in SQL and 57 traps, and the owner's apply_d5_appliedai.sh (content pinned). Local scratch dry run clean with idempotence, five negative controls and the 36-control sweep."
  },
  "history": {
   "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The engine's review changes (extraction precision, recall and micro and macro F1 added beside accuracy, the near-tie golden) landed before its merge and before any lesson was written; they are provenance. The digest describes the engine as it is."
