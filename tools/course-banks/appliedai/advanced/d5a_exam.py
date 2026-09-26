@@ -143,11 +143,11 @@ x("Scored under the primary grades and again under the second annotator's, at k 
 
 # 17
 x("Judging the 80 unjudged passages that BM25 at k 10 retrieves could move its MAP of 0.670893 which way?",
- "Either way: a passage judged relevant enters every divisor and the ideal DCG, and one judged not relevant confirms its 0",
+ "Either way: a passage judged relevant adds precision at its rank and also enlarges its query's divisor",
  ["Only upward, since every unjudged passage now scored 0 can only gain grade when an assessor finally reads it",
   "Only downward, since the newly judged passages raise the number of relevant passages the run is measured on",
   "Not at all, since MAP reads only the relevant passages the run retrieved and those are judged already"],
- "A newly relevant passage the run retrieved adds precision at its rank, while the same passage also enters the divisor of every relevant judged passage, and a new relevant passage the run missed only raises that divisor. So judging can raise or lower the figure, which is why the course says the figures bound nothing in either direction until the passages are judged.")
+ "Every one of the 80 sits in the run's own lists. Judged relevant, a passage adds a precision term at its rank and also joins the divisor of every relevant judged passage for its query, so that query's average precision rises when the passage sits high in the list and can fall when it sits near the foot. Judged not relevant, it leaves the figure as it stands. So judging can move MAP either way, which is why the course says those figures bound nothing in either direction until the passages are judged.")
 
 # 18
 x("Under the primary grades, system A's evaluateRetrieval at k 5 lists Q24 as excluded. What reason does the engine give?",
@@ -174,12 +174,12 @@ x("A new team wants the test set for its copilot kept safe. Which practice does 
  "No score can tell a leaked key from skill, because a leaked answer compares perfectly with its reference, so the leak is prevented by process before the score is computed. Discarding a perfect run would punish a system that is simply right. Groundedness checks cited passages and cannot see where a figure came from. The threshold changes retrieval metrics and leaves short-answer matching alone.")
 
 # 21
-x("A pooled key is set beside an assessor who judged every passage a new system retrieved. Where in their confusion table do all the disagreements fall?",
+x("A pooled key is set beside a full key that keeps every grade the pool gave and adds an assessor's grades for the passages a new system retrieved that the pool left unjudged. Where in their confusion table do all the disagreements fall?",
  "In the row where the pooled key says 0 and the assessor gives grade 1 or more, since the key scores every unjudged passage 0",
  ["Along the diagonal, since the pooled key and the full judging agree on every passage that the pool happened to judge",
   "In the column where the assessor says 0 and the pooled key gives grade 1 or more, since pools over-grade passages",
   "Spread evenly over the table, since pooling errors are random and fall on both sides of the diagonal equally"],
- "On the passages the pool judged, both carry the same grade; the rest are unjudged, which the pooled key scores 0, so every disagreement sits where the key says 0 and the assessor says 1 or more. A one-sided table is the signature of pooling bias. The diagonal is agreement, pools never grade an unjudged passage above 0, and the error is systematic.")
+ "On the passages the pool judged, both keys carry the same grade, because the full key keeps them; the rest are unjudged, which the pooled key scores 0, so every disagreement sits where the key says 0 and the assessor says 1 or more. A one-sided table is the signature of pooling bias. The diagonal is agreement, pools never grade an unjudged passage above 0, and the error is systematic.")
 
 # 22
 x("BM25 at k 5 reports a tie at the cutoff on four queries. Which, and what does a metric computed there depend on?",
@@ -227,7 +227,7 @@ x("An answer cites a passage and writes the date \"2023-01-01x\". What does the 
  ["The date 2023-01-01, since the reader strips a trailing letter before it matches a date",
   "Nothing at all, since any text that touches a letter is part of an identifier and is skipped entirely",
   "A quote, since a date that is followed by a letter is taken as quoted text by the reader"],
- "The boundary table states the date rule: YYYY-MM-DD touching no letter or digit is a date, and \"2023-01-01x\" is read as numbers. The reader strips nothing before matching. A quote needs quotation marks. The identifier rule is about a number directly after a letter, or after - _ or / that follows a letter or digit.")
+ "The boundary table states the date rule: YYYY-MM-DD touching no letter or digit is a date, and \"2023-01-01x\" is read as numbers: 2023 is a number claim, and each later piece follows a hyphen after a digit, so it is part of an identifier. The reader strips nothing before matching. A quote needs quotation marks. The identifier rule is about a number directly after a letter, or after - _ or / that follows a letter or digit.")
 
 # 28
 x("To let any rounded figure stand, someone sets numericRelTol to 1 in checkGroundedness. How does the engine respond?",
@@ -323,7 +323,7 @@ x("The paired nDCG bootstrap on seed 7 reports a share of 0.511000 at or below 0
  ["The p-value of the difference, which the engine prints beside the interval as its test result",
   "A p-value needs an unpaired bootstrap, so it is reported only on the unpaired row, 0.505000",
   "A refusal naming `paired`, returned because a paired comparison has no share to give"],
- "The share at or below 0 is the share of replicates in which A did not beat B, a count of replicates, and the engine does not call it a p-value; the course lists no p-value among what is not built. The unpaired share, 0.505000, is also a share, and the `paired` refusal is for a value that is not true or false.")
+ "The share at or below 0 is the share of replicates in which A did not beat B, a count of replicates, and the engine does not call it a p-value; the course lists a p-value among what is not built. The unpaired share, 0.505000, is also a share, and the `paired` refusal is for a value that is not true or false.")
 
 # 40
 x("Which statement about the Ekene second annotator's grades is supported by the course?",

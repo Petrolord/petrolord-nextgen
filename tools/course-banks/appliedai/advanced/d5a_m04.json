@@ -41,7 +41,7 @@
    "On the judged passages it ranks the relevant ones higher; its standing once the 16 are judged is open"
   ],
   "answer": 3,
-  "explanation": "The table can say that, on the passages the pool judged, the new run places the relevant ones higher on average; it cannot say how the run would score if its 16 unjudged passages were judged. Judging them can raise or lower its figures, and the other systems' too, so no verdict is final. The engine scores the run and counts the unjudged passages, and equal precision at 5 settles nothing about the order."
+  "explanation": "The table can say that, on the passages the pool judged, the new run places the relevant ones higher on average; it cannot say how the run would score if its 16 unjudged passages were judged. Judging them can raise or lower its figures, and the other systems' too, so no verdict is final. The engine scores the run and counts the unjudged passages, and a mean precision at 5 that prints alike, 0.443478, is neither a tie nor evidence about the order: printed alike at six decimals is not equal."
  },
  {
   "prompt": "Which way does pooling bias tilt a comparison between a new system and the systems the pool was built from?",

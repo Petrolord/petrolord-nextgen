@@ -42,7 +42,7 @@ x("A new run, BM25 with b 0.4 and the stop list on at k 5, retrieves 16 unjudged
  ["It is the better retriever, since it wins on MAP although its 16 unjudged passages all count against it",
   "Its figures are void, as the engine returns a null MAP for any run with an unjudged passage in its list",
   "It ties with system A, since its mean precision at 5 is the same 0.443478 and precision is the key figure"],
- "The table can say that, on the passages the pool judged, the new run places the relevant ones higher on average; it cannot say how the run would score if its 16 unjudged passages were judged. Judging them can raise or lower its figures, and the other systems' too, so no verdict is final. The engine scores the run and counts the unjudged passages, and equal precision at 5 settles nothing about the order.")
+ "The table can say that, on the passages the pool judged, the new run places the relevant ones higher on average; it cannot say how the run would score if its 16 unjudged passages were judged. Judging them can raise or lower its figures, and the other systems' too, so no verdict is final. The engine scores the run and counts the unjudged passages, and a mean precision at 5 that prints alike, 0.443478, is neither a tie nor evidence about the order: printed alike at six decimals is not equal.")
 
 # 5
 x("Which way does pooling bias tilt a comparison between a new system and the systems the pool was built from?",

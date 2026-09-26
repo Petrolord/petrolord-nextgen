@@ -70,7 +70,7 @@ x("Six pairs are rated with the words none, related, relevant and answers, and l
  "Weights use the label positions, and words have no order of their own: sorting them alphabetically would put \"answers\" before \"none\". So the engine refuses, names the field `labels` and says why, in the words quoted. It never guesses an order and never falls back to the unweighted kappa. The `weights` message is for a weighting the engine does not offer, and linear is one it offers.")
 
 # 8
-x("The same six word-rated pairs are sent again, now with labels none, related, relevant, answers in that order and linear weights. What comes back?",
+x("The course's six stated word-rated pairs are sent with labels none, related, relevant, answers in that order and linear weights. What comes back?",
  "The call runs, and the kappa on the six stated pairs is 0.608696",
  ["A refusal again, because weighted kappa is only offered on number ratings",
   "The kappa of the Ekene annotators, 0.675940, since the labels match the four grades",

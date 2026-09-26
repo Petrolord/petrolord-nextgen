@@ -118,11 +118,11 @@ x("Bin 6 of the ten-bin table holds 15 rows at a mean probability of 0.648000 wi
 
 # 14
 x("A classifier gives every Ekene row the base rate, 0.190000. What would a reliability table show, and why would it still be no use?",
- "One populated bin whose gap is 0: honest about the average, and it separates no relevant row from any other",
- ["Ten bins with equal rows, each over-confident by the base rate, so the gaps add to exactly 0.190000",
-  "An error, since the engine refuses any probability list in which every value given is equal to every other value",
-  "A perfect score everywhere, which would make it the best classifier the calibration set can reward"],
- "Every row lands in the one bin holding the base rate, whose observed frequency is the base rate itself, so the one gap is 0. Calibration and separation are different properties: this classifier gives every row the same number, so it cannot rank relevant rows above the others. The engine accepts equal probabilities, and a zero gap is no evidence of usefulness.")
+ "One populated bin, its gap 0 up to rounding: honest about the average, and it separates no relevant row from any other",
+ ["Ten bins with equal rows, each one over-confident by the base rate, so that the gaps add to exactly 0.190000",
+  "An error, since the engine refuses any probability list in which every single value given is equal to every other value",
+  "A perfect score in every bin, which would make it the very best classifier that the Ekene calibration set can reward"],
+ "Every row lands in the one bin holding the base rate, whose observed frequency is the base rate itself, so the one gap is 0 up to rounding: the mean of the 200 equal probabilities lands a few bits away from the observed frequency, so the gap prints 0.000000 without being exactly 0, and printed alike is not equal. Calibration and separation are different properties: this classifier gives every row the same number, so it cannot rank relevant rows above the others. The engine accepts equal probabilities, and a zero gap is no evidence of usefulness.")
 
 # 15
 x("How does the engine place a row whose probability is exactly 1 at 10 bins?",
