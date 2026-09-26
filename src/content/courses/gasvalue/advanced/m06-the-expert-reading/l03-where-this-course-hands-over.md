@@ -16,7 +16,7 @@ cngCompression does not compute compression itself. Its basis sentence: "Staging
 
 ## The discount rate
 
-Two engines here hand a cash flow on and do not discount it. conversionEconomics says so on the bus's result: "Simple payback is undiscounted. Anything needing a discount rate belongs in the sanctioned economics engine." Its cash flow is year0 -1200000.0000 and recurring 3825710.1400 naira. The Professional tier met the same hand over in routeEconomics, whose note reads: "Capital, operating cost and revenue are assembled here and handed to the sanctioned economics engine. A second discounted cash flow in this module would be a second answer." This course grades a simple payback and a breakeven credit price. The Economics module teaches the discounted figures.
+Two engines here hand a cash flow on and do not discount it. conversionEconomics says so on the bus's result: "Simple payback is undiscounted. Anything needing a discount rate belongs in the sanctioned economics engine." Its cash flow is year0 -1200000.0000 and recurring 3825710.1400 naira. The Professional tier met the same hand over in routeEconomics, whose note reads: "Capital, operating cost and revenue are assembled here and handed to the sanctioned economics engine. A second discounted cash flow in this module would be a second answer." This course grades a simple payback and a breakeven credit price. The Economics & Commercial module teaches the discounted figures.
 
 ## The inventory
 

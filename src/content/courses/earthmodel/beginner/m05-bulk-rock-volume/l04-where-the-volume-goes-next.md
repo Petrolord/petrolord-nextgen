@@ -1,6 +1,6 @@
 # Where the volume goes next
 
-This course stops at bulk rock volume. That is not an omission and it is not a limit of the tier, it is the boundary the curriculum was drawn along. The Earth Modeling course owns the container: the surfaces, the model frame, the clamp, the zones, the thickness grids and the gross rock those imply. Fluids, contacts, saturation and the booking of hydrocarbon volumes belong to the ReservoirCalc course. The bulk rock volume is the object that passes between them.
+This course stops at bulk rock volume. That is not an omission and it is not a limit of the tier, it is the boundary the curriculum was drawn along. The Earth Modeling course owns the container: the surfaces, the model frame, the clamp, the zones, the thickness grids and the gross rock those imply. Fluids, contacts, saturation and the booking of hydrocarbon volumes belong to the Reservoir Volumetrics course. The bulk rock volume is the object that passes between them.
 
 This lesson names the chain that picks the volume up on the other side, so that you can see the join clearly, and so that you know which parts of it are not yours.
 
@@ -18,7 +18,7 @@ Saturation reduces it once more. Pore volume holds water as well as hydrocarbon,
 
 A formation volume factor converts it. What remains is a volume at reservoir pressure and temperature, and a volume at surface is a different quantity. The formation volume factor is the conversion between them, and it is the step that finally produces a number in barrels or standard cubic metres.
 
-Contact, net-to-gross, porosity, saturation, formation volume factor. That is the chain, and every link in it belongs to the ReservoirCalc course.
+Contact, net-to-gross, porosity, saturation, formation volume factor. That is the chain, and every link in it belongs to the Reservoir Volumetrics course.
 
 ## None of that is this course's job
 

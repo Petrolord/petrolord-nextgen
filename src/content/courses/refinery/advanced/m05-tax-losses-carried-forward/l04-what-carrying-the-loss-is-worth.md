@@ -39,7 +39,7 @@ That is why the choice is an owner decision in force: loss carry-forward is an o
 
 ## What it does not settle
 
-Carrying the loss covers the refinery case under held item H2, where capital is deducted in the year it is spent. It does not make the engine a full capital allowance model. A regime that allows capital only from commissioning, over a set number of years, would give different figures, and that model belongs to the Economics module. The 35.3496 million is the value of carrying the loss under this engine's rule.
+Carrying the loss covers the refinery case under held item H2, where capital is deducted in the year it is spent. It does not make the engine a full capital allowance model. A regime that allows capital only from commissioning, over a set number of years, would give different figures, and that model belongs to the Economics & Commercial module. The 35.3496 million is the value of carrying the loss under this engine's rule.
 
 ## Exercise
 

@@ -21,7 +21,7 @@ So the tuning curve scales exactly with the size of the reflection coefficients 
 
 ## Where this was established
 
-The Seismolord Expert tier owns this result. It derived the underlying law from a wedge with a $\pm 0.08$ pair, which is the second row of the table above, and showed that the Ricker wavelet depends on frequency and thickness only through their product.
+The Seismic Interpretation Expert tier owns this result. It derived the underlying law from a wedge with a $\pm 0.08$ pair, which is the second row of the table above, and showed that the Ricker wavelet depends on frequency and thickness only through their product.
 
 That law is why 25 Hz at 16 ms, 40 Hz at 10 ms and 50 Hz at 8 ms all give the same peak amplitude: their products are all 400 Hz milliseconds.
 
@@ -40,7 +40,7 @@ At 15, 25, 40 and 50 Hz with the $\pm 0.1$ pair:
 
 Three of the four peaks are identical to the last digit, and their products are all exactly 400. The 15 Hz case has a product of 390 and a slightly higher peak, because 390 sits nearer the ideal value of 389.8484 than 400 does.
 
-Everything the Seismolord tier found on a $\pm 0.08$ pair holds here on a $\pm 0.1$ pair, with every amplitude scaled by 1.25.
+Everything the Seismic Interpretation tier found on a $\pm 0.08$ pair holds here on a $\pm 0.1$ pair, with every amplitude scaled by 1.25.
 
 ## Why this is useful
 

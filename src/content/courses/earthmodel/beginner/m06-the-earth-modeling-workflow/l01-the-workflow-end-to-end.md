@@ -65,7 +65,7 @@ Mean thickness times node count times cell area. Zone A gives 36 x 500 x 2500 = 
 
 ## Step 8: hand it on
 
-The Beginner tier stops here, with a frame, three clamped surfaces, a clamp count, two thickness grids and two bulk rock volumes. Those are exactly the ingredients a volumetric estimate needs, and the ReservoirCalc course is where a contact, net-to-gross, porosity, saturation and a formation volume factor turn them into hydrocarbon in place.
+The Beginner tier stops here, with a frame, three clamped surfaces, a clamp count, two thickness grids and two bulk rock volumes. Those are exactly the ingredients a volumetric estimate needs, and the Reservoir Volumetrics course is where a contact, net-to-gross, porosity, saturation and a formation volume factor turn them into hydrocarbon in place.
 
 ## Where each course fits
 
@@ -73,7 +73,7 @@ Laid out this way, the geoscience path stops looking like separate applications.
 
 The Well Data course is the formal prerequisite for this one and earns the place, because a depth reference settled there is what makes a surface depth mean the same thing at every well. The Well Correlation course names the zones, so that zone A and zone B are stratigraphic units with a definition rather than two gaps between three grids. The Mapping and Seismic Interpretation work produces the three surfaces themselves, each on whatever grid its own workflow used, which is why step 3 exists at all.
 
-Downstream, this course hands its bulk rock volumes to the ReservoirCalc course.
+Downstream, this course hands its bulk rock volumes to the Reservoir Volumetrics course.
 
 Each course inherits the previous one's weaknesses. A pick that is wrong in the correlation work becomes a wrong surface here, then a wrong thickness, then a wrong volume, and the volume carries no memory of where the error entered.
 

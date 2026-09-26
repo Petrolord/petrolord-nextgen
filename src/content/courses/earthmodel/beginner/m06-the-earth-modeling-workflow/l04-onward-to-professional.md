@@ -32,7 +32,7 @@ Put the three tiers in one line. The Beginner tier builds the container: a frame
 
 Each tier makes the one below it more demanding rather than replacing it. A tie residual is only meaningful against a framework whose clamp you can explain, so module three matters more at the Professional tier, not less. A per-block volume is only checkable because a whole-model volume exists to check it against, which is the Beginner anchor doing work two tiers up.
 
-The same widening runs sideways. Well data, correlation and mapping feed this course its surfaces and its zone definitions. This course hands its bulk rock volume to the ReservoirCalc course, where a contact, net-to-gross, porosity, saturation and a formation volume factor turn gross rock into hydrocarbon in place. None of that changes what you built. It consumes it.
+The same widening runs sideways. Well data, correlation and mapping feed this course its surfaces and its zone definitions. This course hands its bulk rock volume to the Reservoir Volumetrics course, where a contact, net-to-gross, porosity, saturation and a formation volume factor turn gross rock into hydrocarbon in place. None of that changes what you built. It consumes it.
 
 ## Exercise
 

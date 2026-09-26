@@ -26,9 +26,9 @@ That is the whole rule. The capital is expensed in the years it is spent, before
 
 Many tax regimes recover capital through capital allowances, spread over a number of years, and often starting only when the plant is commissioned and begins to earn. The screening engine offers no capital allowance schedule starting at commissioning.
 
-This is held item H2: the screening engine depreciates capital in the year it is spent and offers no capital allowance schedule starting at commissioning. Carrying the loss forward covers the refinery case. A fuller allowance model belongs to the Economics module.
+This is held item H2: the screening engine depreciates capital in the year it is spent and offers no capital allowance schedule starting at commissioning. Carrying the loss forward covers the refinery case. A fuller allowance model belongs to the Economics & Commercial module.
 
-Held means three things for this course. The treatment is stated as a limit of the engine. It is not presented as the way any particular tax authority works. And nothing is graded that depends on choosing a different treatment. A learner who knows a regime's real allowance schedule should read the ODIOMA tax figures as the screen's answer under this engine's rule, and take the fuller question to the Economics module.
+Held means three things for this course. The treatment is stated as a limit of the engine. It is not presented as the way any particular tax authority works. And nothing is graded that depends on choosing a different treatment. A learner who knows a regime's real allowance schedule should read the ODIOMA tax figures as the screen's answer under this engine's rule, and take the fuller question to the Economics & Commercial module.
 
 ## What rescues the refinery case
 

@@ -26,7 +26,7 @@ Every word of that contract will matter. The vector x is the recipe. The vector 
 
 ## Why this course owns the method
 
-This course teaches the method for the Commercial & Trading module: rows and bounds, the vertex, binding, the shadow price and infeasible. The `refinery` course leans on this teaching and does not repeat it.
+This course teaches the method for the Midstream & Downstream module: rows and bounds, the vertex, binding, the shadow price and infeasible. The `refinery` course leans on this teaching and does not repeat it.
 
 ## Exercise
 

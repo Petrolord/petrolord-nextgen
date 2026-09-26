@@ -32,7 +32,7 @@ year0 is the conversion, -1200000.0000 naira, as a negative. recurring is the an
 
 The paybackNote is the engine's statement: "Simple payback is undiscounted. Anything needing a discount rate belongs in the sanctioned economics engine." This course grades the simple payback. A present value, a rate of return or any other discounted figure is outside it, and the note names where that work belongs.
 
-In practice, the Economics module is where this academy teaches discounting.
+In practice, the Economics & Commercial module is where this academy teaches discounting.
 
 ## When there is no saving
 
