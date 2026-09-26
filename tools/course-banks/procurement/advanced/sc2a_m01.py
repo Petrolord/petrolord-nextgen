@@ -67,15 +67,15 @@ x("Under cost plus 12 percent, the engine returns the contractor's part of the e
  ["A loss on the average overrun, as its 0.199500 loss probability shows",
   "The subtraction ran in the wrong order, and the figure should be read as a positive 12840.150405",
   "A rounding trace from summing 20000 differences, with no share"],
- "The company pays the whole overrun plus 12 percent of it, 119841.403778 with a share of 1.120000, so the contractor's part is below zero: an overrun raises its fee. Its probability of a loss is 0.000000; 0.199500 belongs to the lump sum. The sign is the engine's split as defined, companyPays + contractorAbsorbs = expectedOverrun. A rounding trace is the fixed fee case, whose contractor part prints as 6.98e-14.")
+ "The company pays the whole overrun plus 12 percent of it, 119841.403778 with a share of 1.120000, so the contractor's part is below zero: an overrun raises its fee. Its probability of a loss is 0.000000; 0.199500 belongs to the lump sum. The sign is the engine's split as defined, companyPays + contractorAbsorbs = expectedOverrun. A rounding trace near zero is the fixed fee case.")
 
 # 8
-x("The same job is rerun with the reimbursable contract paying cost plus a fixed fee of 86682.050000, same seed and iterations. What overrun split does the engine return?",
- "The company pays 107001.253374, the whole of it; the contractor's part prints as 6.98e-14",
+x("The same job is rerun with the reimbursable contract paying cost plus a fixed fee equal to the percentage fee's planned margin (printed 86682.050000), same seed and iterations. What overrun split does the engine return?",
+ "The company pays 107001.253374, the whole of it; the contractor's part is a floating-point trace",
  ["The company pays 119841.403778, the overrun plus 12 percent, and the contractor -12840.150405",
   "71671.875955 for the company and 35329.377418 for the contractor, as under the day rate",
   "Nothing for the company and 107001.253374 for the contractor, since a fixed fee caps the payment"],
- "Under a fixed fee the company reimburses the contractor's whole cost, so it pays the whole expected overrun, 107001.253374, with a share of 1.000000, and the contractor's margin is the fee in every iteration. The engine prints the contractor's part as 6.98e-14, the rounding left by summing 20000 floating-point differences. The 12 percent row belongs to the percentage fee, the 71671.875955 row to the day rate, and a fixed fee caps the fee only, so the lump sum's split does not apply.")
+ "Under a fixed fee the company reimburses the contractor's whole cost, so it pays the whole expected overrun, 107001.253374, with a share of 1.000000, and the contractor's margin is the fee in every iteration. With the fee set to the planned margin exactly as the engine holds it, the course's run prints the contractor's part as 6.98e-14, the rounding left by summing 20000 floating-point differences; a fee typed from its six-decimal print leaves a trace of another size, and neither carries any share of the overrun. The 12 percent row belongs to the percentage fee, the 71671.875955 row to the day rate, and a fixed fee caps the fee only, so the lump sum's split does not apply.")
 
 # 9
 x("Which contract type gives the contractor the largest planned margin and also a probability of a loss of 0.199500?",
