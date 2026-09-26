@@ -29,9 +29,9 @@ The offset is capped at the year's taxable income, so tax bottoms at 0.00 and th
 
 ## Two pools under the PIA
 
-The published pia_loss_relief case runs a 2025 year with 500000.00 bbl against opex of 60000000.00 and capex of 100000000.00. The HCT base stays positive: hct_chargeable_profit 1693694.64 and HCT 508108.39. The CIT base does not: cit_assessable_profit -12056305.36, cit_tax 0.00 and cit_loss_carryforward 12056305.36. One year, one tax paid, one loss banked.
+The published pia_loss_relief case runs a 2025 year with 500000.00 bbl against opex of 60000000.00 and capex of 100000000.00. Both bases go negative. The HCT base reads hct_chargeable_profit -10306393.20, HCT 0.00 and hct_loss_carryforward 10306393.20. The CIT base reads cit_assessable_profit -43056393.20, cit_tax 0.00 and cit_loss_carryforward 43056393.20.
 
-In 2026 the CIT pool is spent: cit_loss_offset_used 12056305.36 and CIT of 59448092.62, against 63064984.23 with the clamp on. The HCT of 63814984.23 and the TET of 5755415.35 are identical in both runs. NPV moves from -8763295.32 clamped to -5475212.04 relieved.
+In 2026 both pools are spent, each against its own base: hct_loss_offset_used 10306393.20 takes the HCT to 61697429.87 against 64789347.83 with the clamp on, and cit_loss_offset_used 43056393.20 takes the CIT to 65822429.87 against 78739347.83. The 2026 row is an NTA year with TET 0.00, and its development levy of 12098579.71 is identical in both runs. NPV moves from -9568013.75 clamped to 4985473.45 relieved: the relief turns the sign.
 
 ## The mistake
 
@@ -39,8 +39,8 @@ The careful mistake is reading taxable_income as the base the tax was charged on
 
 ## What the engine refuses
 
-It refuses to let one base relieve another: an HCT profit cannot absorb a CIT loss, and the pools are reported apart as hct_loss_carryforward and cit_loss_carryforward. It refuses to relieve the levies: the TET base is untouched by the pool. And with the clamp on it carries nothing, so a project whose losses arrive before its revenue pays as if they never happened.
+It refuses to let one base relieve another: an HCT profit cannot absorb a CIT loss, and the pools are reported apart as hct_loss_carryforward and cit_loss_carryforward. It refuses to relieve the levies: the TET and development levy base, the assessable profit, is untouched by either pool. With the clamp on it carries nothing.
 
 ## Exercise
 
-From the drain table, give the tax and the pool after for a year with taxable income of 10000000.00 and a pool of 15000000.00. Then explain why the 2026 HCT on pia_loss_relief is the same with relief on and off, while the CIT is not.
+From the drain table, give the tax and the pool after for a year with taxable income of 10000000.00 and a pool of 15000000.00. Then explain why the 2026 HCT and CIT on pia_loss_relief both fall when relief is on, while the development levy does not move.
