@@ -101,32 +101,53 @@ export const PriceMode = ({ initialCase = null, initialText = null }) => {
   );
 };
 
+const PRICE_CONTROL = [['true', 'yes: the price control of s.167 applies'], ['false', 'no: the free-market criteria of s.167(3)(b) are met']];
+
 export const DomesticMode = ({ initialText = null }) => {
   const box = useJsonBox(STARTS.domestic, initialText);
   const r = box.parsed.error ? null : viewDomestic(box.parsed.value);
+  const dv = box.parsed.error ? null : pick(box.parsed.value, 'domestic');
+  const stated = dv && typeof dv === 'object' ? dv.priceControlApplies : undefined;
+  // The control writes the stated input into the box; it never supplies a value the box does not show.
+  const setControl = (v) => {
+    if (box.parsed.error || !box.parsed.value || typeof box.parsed.value !== 'object') return;
+    const next = JSON.parse(box.text);
+    const target = Object.prototype.hasOwnProperty.call(next, 'domestic') ? next.domestic : next;
+    target.priceControlApplies = v === 'true';
+    box.setText(pretty(next));
+  };
   return (
     <>
-      <Box box={box} label="domesticPrice inputs (JSON: sector, domesticBasePrice, negotiatedPrice, product, cmpp, transportTariff, schedule), or a case file with a domestic block" rows={8} />
+      <FieldGrid>
+        <SelectField label="Price control applies (a stated input, written into the box)" value={typeof stated === 'boolean' ? String(stated) : ''} onChange={setControl} options={PRICE_CONTROL} />
+      </FieldGrid>
+      <Box box={box} label="domesticPrice inputs (JSON: sector, priceControlApplies, domesticBasePrice, negotiatedPrice, product, cmpp, transportTariff, schedule), or a case file with a domestic block" rows={9} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
+      {!box.parsed.error && typeof stated !== 'boolean' && <Note>The box does not state priceControlApplies, so the engine refuses: choose yes or no above, or type it.</Note>}
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && (
         <>
           <TileGrid>
             <Tile label="Sector" value={r.sector} />
+            <Tile label="Price control applies (stated)" value={r.priceControlApplies ? 'yes' : 'no'} />
             <Tile label="Price, US$ per MMBtu" value={six(r.price)} />
-            <Tile label="Delivered price" value={six(r.deliveredPrice)} />
+            <Tile label="Stated (negotiated) figure" value={six(r.statedPrice)} />
+            <Tile label="Within the ceiling" value={r.withinCeiling === undefined ? 'none' : (r.withinCeiling ? 'yes' : 'no')} />
             <Tile label="Held at" value={orNone(r.heldAt)} />
+            <Tile label="Ceiling" value={six(r.ceiling)} />
+            <Tile label="Delivered price" value={six(r.deliveredPrice)} />
             <Tile label="EPF" value={six(r.epf)} />
             <Tile label="Formula price" value={six(r.formulaPrice)} />
-            <Tile label="Ceiling" value={six(r.ceiling)} />
           </TileGrid>
           {r.reason && <EngineNote text={r.reason} />}
+          {r.heldAt === 'ceiling' && r.sector === 'gas-distributor' && <Note>While price control applies, the stated figure above the ceiling is not a lawful price under s.167(7): the price is the held figure.</Note>}
           <EngineNote text={r.basis.rule} />
+          <EngineNote text={r.basis.ceilings} />
           <EngineNote text={r.basis.domesticBasePrice} />
           <Source text={r.basis.source} />
         </>
       )}
-      <Note>The domestic base price is a stated input with no default. The figures the course names are reported figures, quoted with their reports, and none is graded.</Note>
+      <Note>Whether price control applies and the domestic base price are stated inputs with no default. The figures the course names for the base price are reported figures, quoted with their reports, and none is graded.</Note>
     </>
   );
 };

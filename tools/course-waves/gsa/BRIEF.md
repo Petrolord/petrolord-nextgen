@@ -146,9 +146,17 @@ with the engine behaviour that finds each.
 7. **Prices** (section 13): the export price averages its index over 6 months
    ending 1 month before the priced month, resets quarterly and rounds to four
    decimals; the 2029 annual average is 9.808450.
-8. **Domestic prices and the obligation** (sections 14 and 15): the commercial
-   price is the base price plus US$0.50 per MMBtu; the 2028 obligation penalty
-   is 2366700.000000 on 676200.000000 MMBtu penalised at 3.500000.
+8. **Domestic prices and the obligation** (sections 14 and 15): whether the
+   price control of s.167 applies is a stated input with no default; under it the
+   commercial price is the base price plus US$0.50 per MMBtu, and a distributor
+   figure above the commercial price is held at it (s.167(7)): the stated 2.900000
+   is returned beside the price 2.680000, and the stated figure is no lawful price
+   while price control applies. Without price control (s.167(3)(b)) the
+   negotiated price stands. The 2028 obligation penalty is 2366700.000000 on
+   676200.000000 MMBtu penalised at 3.500000.
+10. **Every contract year states its permitted reduction** (section 10), 0 when
+   the contract permits none; a take-or-pay percentage of 0 is stated in the
+   basis.
 9. **Parity and the NPV** (sections 16 and 17): the parity slope at 5.8 MMBtu
    per barrel is 0.172414; the export contract's NPV of the seller revenue is
    1,157,367,784.116539 through the canonical npv of `cashflow.ts`, which this
@@ -156,7 +164,7 @@ with the engine behaviour that finds each.
 
 ## THE REFUSALS
 
-Digest section 5 tables 84 refusals across 9 functions, each with the field it
+Digest section 5 tables 90 refusals across 9 functions, each with the field it
 names and the engine's message verbatim. **Quote a refusal in a blockquote as
 the engine's own words.** A result returned with a reason (a deficiency with no
 make-up right, a price held at its floor, an excused quantity) is a result. It

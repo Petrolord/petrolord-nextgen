@@ -29,7 +29,7 @@ Model contracts sold under licence are another matter. The AIPN model gas sales 
 
 No legal rate, floor or adder in this course is typed from memory. Each is read from its cited section, and a figure that could not be read from a public text is a required input with no default. The clearest case is the domestic base price. The Authority determines it each year (PIA s.167(1)), and the regulator's own circular could not be retrieved. The engine's basis reports the figures in this form:
 
-> a required input with no default: the Authority determines it each year under the Third Schedule (s.167(1)). US$2.18 per MMBtu (power) and US$2.68 (commercial), effective 1 April 2026, are reported by BusinessDay (31 March 2026) and by Advocaat Law Practice through Legal 500 (7 April 2026); the regulator's circular was not read
+> a required input with no default under price control: the Authority determines it each year under the Third Schedule (s.167(1)). US$2.18 per MMBtu (power) and US$2.68 (commercial), effective 1 April 2026, are reported by BusinessDay (31 March 2026) and by Advocaat Law Practice through Legal 500 (7 April 2026); the regulator's circular was not read
 
 The course quotes the reported figures only in that form and grades none of them.
 

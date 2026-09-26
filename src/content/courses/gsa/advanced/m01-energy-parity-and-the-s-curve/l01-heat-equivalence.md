@@ -8,7 +8,7 @@ The Expert tier asks how a contract price sits against oil, what the whole contr
 
 If a barrel of crude costs one dollar and the gas matching its heat costs the same, each MMBtu of gas is worth one dollar divided by the MMBtu in the barrel. The engine's function `energyParitySlope` states its rule in its own basis:
 
-> slope = 1 / (MMBtu per barrel); gas in US$/MMBtu = slope x oil in US$/bbl on equal heat content.
+> slope = 1 / (MMBtu per barrel); gas in US$/MMBtu = slope x oil in US$/bbl on equal heat content
 
 That slope is the parity slope. Multiply it by an oil price in US$ per barrel and it returns the gas price in US$ per MMBtu that matches oil on heat content alone.
 

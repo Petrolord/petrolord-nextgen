@@ -15,7 +15,9 @@ Two golden cases sit on either side of the edge, each with a take-or-pay quantit
 
 For the exactly met case the engine prints no reason, because there is nothing to reconcile. For the case one unit short it prints the working, verbatim:
 
-> 2027: 799 counted against the take-or-pay quantity 800 leaves a deficiency of 1; the deficiency payment is 1 x 3 = 3; the buyer may make up 1 in the 2 contract years after 2027, to the end of 2029
+> 2027: 799 counted against the take-or-pay quantity 800 leaves a deficiency of 1; the deficiency payment is 1 x 3 = 3
+
+That is the opening of the engine's reason; its tail names the buyer's right to make the gas up later, which the Professional tier teaches.
 
 The last clause of that reason opens a make-up right, because 2027 in that case is followed by another contract year. What the buyer does with it belongs to the Professional tier.
 

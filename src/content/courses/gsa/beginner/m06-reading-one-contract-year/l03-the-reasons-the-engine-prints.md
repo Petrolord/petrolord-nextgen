@@ -20,7 +20,9 @@ A day with nothing to say gets no reason. On 2027-01-11 the buyer nominated, was
 
 The take-or-pay year prints its working in full. From the golden case with force majeure and a seller shortfall, verbatim:
 
-> 2027: 600 counted against the take-or-pay quantity 640 leaves a deficiency of 40; the deficiency payment is 40 x 3 = 120; the buyer may make up 40 in the 2 contract years after 2027, to the end of 2029
+> 2027: 600 counted against the take-or-pay quantity 640 leaves a deficiency of 40; the deficiency payment is 40 x 3 = 120
+
+That is the opening of the reason; its tail names the make-up right, which the Professional tier teaches.
 
 > 2027: seller shortfall 50 reduces the Adjusted ACQ and is paid to the buyer at 1.5: 75
 

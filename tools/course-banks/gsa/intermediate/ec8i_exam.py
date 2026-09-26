@@ -216,7 +216,7 @@ q(1, "Suppose a city distribution company agrees 2.5 US$ per MMBtu with its supp
  ["2.680000, lifted to the commercial price on the stated base, since a distributor pays the commercial sector price",
   "2.180000, the stated power price",
   "A refusal, since a distributor must state a price equal to the commercial price that the stated base gives"],
- "Distributors negotiate under s.167(7), and the engine returns the negotiated 2.500000 with the reason \"negotiated price 2.5 is at or below the commercial sector price 2.68\", that ceiling being the commercial price on the stated base reported for 2026. The Act caps a distributor's price and sets no floor at the ceiling, so nothing is lifted. The power sector price is a different sector's rule. Any negotiated price is accepted and tested against the ceiling.")
+ "Distributors negotiate under s.167(7), and the engine returns the negotiated 2.500000 with the reason \"the negotiated price 2.5 is at or below the commercial sector price 2.68, the ceiling for gas distributors (s.167(7))\", on a call that states price control applies, that ceiling being the commercial price on the stated base reported for 2026. The Act caps a distributor's price and sets no floor at the ceiling, so nothing is lifted. The power sector price is a different sector's rule. Any negotiated price is accepted and tested against the ceiling.")
 
 q(2, "A urea call states a CMPP equal to the product reference price, 250 US$ per tonne. What does the engine return?",
  "1.000000, with EPF 0.000000",

@@ -16,7 +16,7 @@ The HMRC Oil Taxation Manual (OT05435, updated 19 December 2019, read 2026-09-26
 
 The engine computes three orders and states which one is the reference text's. Its basis on the power plant ledger, verbatim:
 
-> after-adjusted-acq: make-up only after the Adjusted ACQ of the year is taken (Commonwealth Secretariat, Gas Sales Agreement, Contract 2 in the Commonwealth Model Contract Series (2025, CC BY 4.0) Article 12.7.1 (Alternative 1&2A)); a required input with no default. 'after-adjusted-acq' is the reference text's order (Commonwealth Secretariat, Gas Sales Agreement, Contract 2 in the Commonwealth Model Contract Series (2025, CC BY 4.0) Article 12.7.1); 'after-top-quantity' and 'first' are variants the engine also computes.
+> after-adjusted-acq: make-up only after the Adjusted ACQ of the year is taken (Commonwealth Secretariat, Gas Sales Agreement, Contract 2 in the Commonwealth Model Contract Series (2025, CC BY 4.0) Article 12.7.1 (Alternative 1&2A)); a required input with no default. 'after-adjusted-acq' is the reference text's order (Commonwealth Secretariat, Gas Sales Agreement, Contract 2 in the Commonwealth Model Contract Series (2025, CC BY 4.0) Article 12.7.1); 'after-top-quantity' and 'first' are variants the engine also computes
 
 So `after-top-quantity` (ESMAP's) and `first` (make-up in priority) are variants beside the reference order. Anything else is refused:
 

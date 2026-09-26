@@ -70,7 +70,10 @@ starting from the power plant (the 2028 deficiency payment of 1501584.000000) or
 the export feed (the 2029 carry-forward credit of 3219250.000000); contract prices
 month by month with windows, segments and annual rows (the export 2029 average
 of 9.808450); the domestic gas prices (commercial 2.680000 on the reported 2026
-base price); and the delivery obligation (2366700.000000 in 2028).
+base price; a visible "price control applies" control that writes the stated
+`priceControlApplies` into the box, with no hidden default, and a distributor
+figure above the ceiling shown as the stated figure beside the held price
+2.680000); and the delivery obligation (2366700.000000 in 2028).
 
 ### `gsa-contract-calculator` (Expert)
 

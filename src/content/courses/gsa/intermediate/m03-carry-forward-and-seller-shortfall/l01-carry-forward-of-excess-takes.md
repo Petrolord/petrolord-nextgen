@@ -16,7 +16,7 @@ The Commonwealth model gas sales agreement (2025, Creative Commons Attribution 4
 
 ## Off unless stated
 
-Carry-forward is an option. A contract that states no carry-forward right gets none, and the engine's basis says so: "Off (no carry-forward right stated)". When it is stated, `carryForward` carries three terms: `periodYears`, `base` and `capPct`. A misspelt term is refused by name, so no term is dropped in silence:
+Carry-forward is an option. A contract that states no carry-forward right gets none, and the engine's basis says so: "off (no carry-forward right stated)". When it is stated, `carryForward` carries three terms: `periodYears`, `base` and `capPct`. A misspelt term is refused by name, so no term is dropped in silence:
 
 > carryForward.cap is not an accepted key; the accepted keys of carryForward are periodYears, base, capPct
 

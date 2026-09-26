@@ -4,7 +4,7 @@
 
 # PRECISION. Every quantity, price, amount of money, rate, ratio, fraction, share, percentage, slope, index average and present value prints to SIX decimals; years, day counts, month counts, contract years and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all, and a figure inside a message is the shortest round-trip decimal of the double the engine holds.
 
-# ENGINE. engines/economics/gasContract.js, vendored sha-identical with petrolord-engines d745b88 (engines PR #267), 1079 lines. It imports npv, deriveGasRoyaltyRate and calendarDays from engines/economics/cashflow.ts and nothing else. It makes no network call.
+# ENGINE. engines/economics/gasContract.js, vendored sha-identical with petrolord-engines 7f5d462 (engines PRs #267 and #268), 1116 lines. It imports npv, deriveGasRoyaltyRate and calendarDays from engines/economics/cashflow.ts and nothing else. It makes no network call.
 
 # AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course's own calculator panels, which call this same vendored engine on the learner's own contract terms.
 
@@ -26,7 +26,7 @@ Every function takes plain arrays and objects and returns either a result object
 | `takeOrPay` | the take-or-pay reconciliation | years, topPct, makeUp, carryForward | each year's Adjusted ACQ, take-or-pay quantity, make-up, deficiency, carry-forward, expiries, damages, refund and net to the seller with its reasons |
 | `priceSeries` | contract prices | months, formula, from, to, averagingMonths, lagMonths, resetMonths, rounding, reopeners | each month's window, index average, segment, clamp and price, the annual average and last-month price, and the reopeners reported |
 | `energyParitySlope` | energy parity | mmbtuPerBarrel | the gas price per MMBtu that matches one dollar per barrel on heat content |
-| `domesticPrice` | Nigerian domestic prices | sector, domesticBasePrice, negotiatedPrice, product, cmpp, transportTariff, schedule | the sector price under PIA s.167 or s.168 and the Fourth Schedule, with its reason |
+| `domesticPrice` | Nigerian domestic prices | sector, priceControlApplies, domesticBasePrice, negotiatedPrice, product, cmpp, transportTariff, schedule | the sector price under PIA s.167 or s.168 and the Fourth Schedule, a figure above a ceiling held at it, or the negotiated price where price control does not apply (s.167(3)(b)), with its reason |
 | `domesticGasObligation` | the Domestic Gas Delivery Obligation | obligation, delivered, voluntaryContracts, excused, agreementPenaltyRate, penaltyRate | deemed fulfilment, the undelivered quantity, the excuses applied, the penalised quantity, the rate and the penalty with its reasons |
 | `gsaCashFlows` | cash flows and NPV | contract, royalty, discountRate, baseYear | each year's seller revenue, delivered value, royalty and net after royalty, and the NPV of the seller revenue and of the net |
 
@@ -58,7 +58,7 @@ The Fourth Schedule products the engine holds in `PIA_GAS.gbiProducts` (NRP in U
 
 WHAT THE ENGINE DOES NOT DO, checked here against its exports and its source:
 - Its one import is engines/economics/cashflow.ts, for npv, deriveGasRoyaltyRate and calendarDays. It discounts through the canonical npv and takes the gas royalty rate from the canonical deriveGasRoyaltyRate; it carries no NPV, Monte Carlo or royalty code of its own, and nothing in it samples.
-- It decides nothing a contract or a text does not state. The take-or-pay percentage, the make-up period, the recovery order, the end-of-term rule, every price, the seller shortfall rate and the domestic base price are inputs with no default, and a call without one is refused by name (section 5).
+- It decides nothing a contract or a text does not state. The take-or-pay percentage, each year's permitted reduction, the make-up period, the recovery order, the end-of-term rule, every price, the seller shortfall rate, whether price control applies and the domestic base price are inputs with no default, and a call without one is refused by name (section 5).
 - It reads no key it does not know. `ACCEPTED_KEYS` is exported with one shape for each of the 9 functions, and every call refuses an input key the function does not read, at every level, naming the key, its path and the accepted keys. A misspelt optional key is refused; it never silently drops a term.
 - It models no outcome of a price review, no excess gas, no off-specification or pre-start gas and no flare penalty. Section 21 lists each with where it would come from.
 - Its exported names are, in full: ACCEPTED_KEYS, DEFAULTS, PIA_GAS, UNITS, contractQuantities, dailyBalance, domesticGasObligation, domesticPrice, energyParitySlope, gsaCashFlows, priceSeries, takeOrPay, toEnergy.
@@ -69,7 +69,7 @@ THE RULE THIS COURSE FOLLOWS FOR EVERY LAW, REGULATION, MODEL CONTRACT AND GUIDE
 
 | text | edition or date | what the engine reads from it | date read |
 | --- | --- | --- | --- |
-| Petroleum Industry Act 2021 (Act No. 6) | Official Gazette No. 142, Vol. 108, 27 August 2021 | s.104 and s.105 (flaring: a fine by regulation, no rate in the Act); s.110 (the Domestic Gas Delivery Obligation); s.167 (the domestic base price and the sector prices); s.168 and the Fourth Schedule (gas based industries); the Third Schedule (base price principles); the Seventh Schedule para 10(6) (gas royalty, through cashflow.ts) | 2026-09-26 |
+| Petroleum Industry Act 2021 (Act No. 6) | Official Gazette No. 142, Vol. 108, 27 August 2021 | s.104 and s.105 (flaring: a fine by regulation, no rate in the Act); s.110 (the Domestic Gas Delivery Obligation); s.167 (the domestic base price, the sector prices, and s.167(3) on when price control ends); s.168 and the Fourth Schedule (gas based industries); the Third Schedule (base price principles); the Seventh Schedule para 10(6) (gas royalty, through cashflow.ts) | 2026-09-26 |
 | Domestic Gas Delivery Obligation Regulations 2022 (S.I. No. 74 of 2022) | Official Gazette No. 206, Vol. 109, Lagos, 23 November 2022; made and commenced 18 November 2022 | r.6(1) (US$3.50 per MMBtu not delivered), r.6(2) (under a signed agreement not less than that amount), r.6(3) and (4) (the 90-day investigation, which the engine does not compute), r.4 and r.5 (supply curve and allocation, concept), r.9 (definitions) | 2026-09-26 |
 | Commonwealth Secretariat, Gas Sales Agreement, Contract 2 in the Commonwealth Model Contract Series | 2025, licensed under Creative Commons Attribution 4.0 | the definitions (ACQ, Adjusted ACQ, Take or Pay Quantity, BADQ, BASQ, Make-Up Aggregate, Carry Forward Aggregate, Shortfall Quantity, MaxDCQ) and Articles 12.5 to 12.8, 15.1, 15.2.6, 15.4 and 15.8 | 2026-09-26 |
 | ESMAP Report 152/93, Long-term Gas Contracts: Principles and Applications | January 1993, World Bank and UNDP | paras 6.52 (daily availability), 6.55 to 6.59 (minimum pay and make-up), 6.61 and 6.62 (carry-forward) | 2026-09-26 |
@@ -83,7 +83,7 @@ THE RULE THIS COURSE FOLLOWS FOR EVERY LAW, REGULATION, MODEL CONTRACT AND GUIDE
 | NUPRC, Gas Flaring, Venting and Methane Emissions (Prevention of Waste and Pollution) Regulations 2023 | the copy on the NUPRC gazetted page is unnumbered and undated | not implemented; flaring is taught as concept only | 2026-09-26 |
 
 THE DOMESTIC BASE PRICE IS A REQUIRED INPUT, QUOTED ONLY AS REPORTED. The Authority determines it each year (PIA s.167(1)); the regulator's own circular could not be retrieved, so the engine holds no default and every domesticPrice call states it. The engine's own basis, verbatim:
-> a required input with no default: the Authority determines it each year under the Third Schedule (s.167(1)). US$2.18 per MMBtu (power) and US$2.68 (commercial), effective 1 April 2026, are reported by BusinessDay (31 March 2026) and by Advocaat Law Practice through Legal 500 (7 April 2026); the regulator's circular was not read
+> a required input with no default under price control: the Authority determines it each year under the Third Schedule (s.167(1)). US$2.18 per MMBtu (power) and US$2.68 (commercial), effective 1 April 2026, are reported by BusinessDay (31 March 2026) and by Advocaat Law Practice through Legal 500 (7 April 2026); the regulator's circular was not read
 This course quotes the reported figures in that form only and grades none of them.
 
 The engine carries its citations in its own words. The `basis.source` of one call of each kind, verbatim:
@@ -95,7 +95,7 @@ The engine carries its citations in its own words. The `basis.source` of one cal
 | takeOrPay | Commonwealth Secretariat, Gas Sales Agreement, Contract 2 in the Commonwealth Model Contract Series (2025, CC BY 4.0) definitions and Articles 12.5 to 12.8; ESMAP Report 152/93, Long-term Gas Contracts: Principles and Applications (January 1993) paras 6.55 to 6.62; HMRC Oil Taxation Manual OT05435 |
 | priceSeries | Commonwealth Secretariat, Gas Sales Agreement, Contract 2 in the Commonwealth Model Contract Series (2025, CC BY 4.0) Articles 15.1, 15.2.6, 15.4, 15.8; Energy Charter Secretariat, Putting a Price on Energy: International Pricing Mechanisms for Oil and Gas (2007), section 4.5.3.3 and Figure 51; OIES Paper NG 175, International Gas Contracts (2022), section 2.2 |
 | energyParitySlope | Energy Charter Secretariat, Putting a Price on Energy: International Pricing Mechanisms for Oil and Gas (2007), section 4.5.3.3 and Figure 51 |
-| domesticPrice | Petroleum Industry Act 2021 (Act No. 6), Official Gazette No. 142, Vol. 108, 27 August 2021 s.167(6) |
+| domesticPrice | Petroleum Industry Act 2021 (Act No. 6), Official Gazette No. 142, Vol. 108, 27 August 2021 s.167(6); PIA s.167(3): "The price control and the corresponding role of the domestic gas aggregator shall not be required, where the (a) entire domestic gas demand requirement under section 173 (2) is covered by contracts under sections 110 (2) and 173 (3) of this Act; or (b) domestic market for natural gas is largely characterised by free market based contracting for natural gas between willing buyers and willing sellers, based on criteria established by the Authority in consultation with the stakeholders and at such time the provisions of subsections (4), (5), (6) and (7) and section 168 shall no longer be applicable" |
 | domesticGasObligation | Petroleum Industry Act 2021 (Act No. 6), Official Gazette No. 142, Vol. 108, 27 August 2021 s.110; Domestic Gas Delivery Obligation Regulations 2022 (S.I. No. 74), Official Gazette No. 206, Vol. 109, 23 November 2022, commenced 18 November 2022 r.6 |
 | gsaCashFlows | Petroleum Industry Act 2021 (Act No. 6), Official Gazette No. 142, Vol. 108, 27 August 2021 Seventh Schedule para 10(6); Commonwealth Secretariat, Gas Sales Agreement, Contract 2 in the Commonwealth Model Contract Series (2025, CC BY 4.0) Articles 12.5 to 12.8 |
 
@@ -148,6 +148,15 @@ PIA s.110(16): Domestic supply contracts signed before the Act took effect and s
 
 PIA s.167(1): The Authority determines the domestic base price each year under the Third Schedule.
 > "determine the domestic base price under the Third Schedule to this" (PIA s.167(1))
+
+PIA s.167(3): Price control, and the aggregator's role with it, is not required where either of two conditions is met.
+> "The price control and the corresponding role of the domestic gas aggregator shall not be required, where the" (PIA s.167(3))
+
+PIA s.167(3)(b): The second condition: the domestic market is largely free-market contracting between willing buyers and willing sellers, on criteria the Authority sets.
+> "(b) domestic market for natural gas is largely characterised by free market based contracting for natural gas between willing buyers and willing sellers," (PIA s.167(3)(b))
+
+PIA s.167(3)(b): Once that condition is met, the sector prices of s.167(4) to (7) and the gas based industries price of s.168 cease to apply.
+> "and at such time the provisions of subsections (4), (5), (6) and (7) and section 168 shall no longer be applicable" (PIA s.167(3)(b))
 
 PIA s.167(5): The power sector price is the domestic base price at the delivery point.
 > "The price of marketable natural gas applicable to the power sector shall be the domestic base price at the marketable natural gas delivery point." (PIA s.167(5))
@@ -243,6 +252,9 @@ Commonwealth model GSA (2025), definition of Make-Up Period: The make-up period 
 Commonwealth model GSA (2025), Article 12.6: The take-or-pay obligation: take and pay for, or pay for if not taken, at least the take-or-pay quantity each contract year.
 > "In each Contract Year Buyer shall be obligated to take and pay for, or to pay for if not taken, a quantity of Gas at least equal to the Take or Pay Quantity." (Commonwealth model GSA (2025), Article 12.6)
 
+Commonwealth model GSA (2025), Article 12.7.1: The make-up right (or, in Alternative 2, obligation) runs on any day of the year after the buyer has taken at least the stated quantity; the text goes on to name the Adjusted ACQ.
+> "Make-Up Aggregate Buyer shall have the ALTERNATIVE 1 right ALTERNATIVE 2 obligation for any Day in such Contract Year after Buyer has taken delivery of at least" (Commonwealth model GSA (2025), Article 12.7.1)
+
 Commonwealth model GSA (2025), Article 12.7: Make-up taken is attributed first in first out to the deficiency quantities in the aggregate.
 > "A Make-Up Quantity nominated and taken shall be attributed on a FIFO basis to the specific Buyer’s Annual Deficiency Quantities comprising the Make-Up Aggregate at the time." (Commonwealth model GSA (2025), Article 12.7)
 
@@ -289,7 +301,7 @@ HMRC Oil Taxation Manual OT05435 (updated 19 December 2019): The two orders: mak
 HMRC Oil Taxation Manual OT05402 (updated 19 December 2019): Effective swing is the swing factor divided by the take-or-pay level.
 > "is derived from the result of dividing the swing factor by the take or pay level, or maximum daily capacity by the minimum take." (HMRC Oil Taxation Manual OT05402 (updated 19 December 2019))
 
-58 provisions quoted: PIA 27, DGDO 6, CW 19, ESMAP 3, HMRC 3.
+62 provisions quoted: PIA 30, DGDO 6, CW 20, ESMAP 3, HMRC 3.
 
 # SECTION 4: The Ekene agreements and what is planted in them (owned by Associate m01 l03 and Professional m02 l04 and Professional m03 l05 and Expert m02 l04)
 
@@ -297,9 +309,12 @@ Every agreement in this course's teaching comes from two fixture files under tes
 
 THE POWER PLANT AGREEMENT (fixture): Ekene gas to the Ekene Power Plant (synthetic), a domestic power sector GSA 2027 to 2034. Buyer: Ekene Power Plant (synthetic), sector power. DCQ 21000 MMBtu per day (20 MMscf per day at a stated 1050 Btu/scf gross, reference conditions 60 F and 14.696 psia (synthetic statement)); MaxDCQ 110 percent; take-or-pay 80 percent of the Adjusted ACQ; make-up for 3 contract years, order after-adjusted-acq, end of term forfeit; no carry-forward.
 
-Its price note (fixture), verbatim: reported 2026 domestic base price (effective 1 April 2026) held flat as a planning assumption; the Authority re-determines it each year (PIA s.167(1)). The fixture holds 2.18 US$ per MMBtu, the figure reported for 2026 (section 2), flat in every year as a stated planning assumption.
+Its price note (fixture), verbatim:
+> reported 2026 domestic base price (effective 1 April 2026) held flat as a planning assumption; the Authority re-determines it each year (PIA s.167(1))
+The fixture holds 2.18 US$ per MMBtu, the figure reported for 2026 (section 2), flat in every year as a stated planning assumption.
 
-Its seller shortfall note (fixture), verbatim: seller shortfall liquidated damages at a stated 1.25 US$ per MMBtu not made available (synthetic contract term).
+Its seller shortfall note (fixture), verbatim:
+> seller shortfall liquidated damages at a stated 1.25 US$ per MMBtu not made available (synthetic contract term)
 
 | year | ACQ | taken | force majeure | seller shortfall | contract price | take-or-pay price | make-up price | shortfall price |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -312,11 +327,15 @@ Its seller shortfall note (fixture), verbatim: seller shortfall liquidated damag
 | 2033 | 7665000.000000 | 5775000.000000 | 0.000000 | 0.000000 | 2.180000 | 2.180000 | 0.000000 | none |
 | 2034 | 7665000.000000 | 7770000.000000 | 0.000000 | 0.000000 | 2.180000 | 2.180000 | 0.000000 | none |
 
-Its Domestic Gas Delivery Obligation (fixture): year 2028, obligation 6825000.000000 MMBtu, delivered 5460000.000000, excused because the purchaser could not accept 688800.000000; note, verbatim: synthetic allocation; the plant outage of 2028 is the purchaser's inability to accept (s.110(10)(b)). Royalty (fixture): terrain onshore, 100 percent of the gas utilised in-country; discount rate 0.1 to 2026.
+Its Domestic Gas Delivery Obligation (fixture): year 2028, obligation 6825000.000000 MMBtu, delivered 5460000.000000, excused because the purchaser could not accept 688800.000000; its note is quoted below. Royalty (fixture): terrain onshore, 100 percent of the gas utilised in-country; discount rate 0.1 to 2026.
+The obligation's note (fixture), verbatim:
+> synthetic allocation; the plant outage of 2028 is the purchaser's inability to accept (s.110(10)(b))
 
 THE EXPORT FEED AGREEMENT (fixture): Ekene gas to an export feed-gas buyer (synthetic), an oil-indexed GSA 2027 to 2036. Buyer: Ekene Export Feed Buyer (synthetic), sector export. DCQ 63000 MMBtu per day (60 MMscf per day at 1050 Btu/scf); MaxDCQ 105 percent; take-or-pay 90 percent; make-up for 5 contract years, order after-top-quantity, end of term refund; carry-forward for 3 contract years above the top-quantity, at most 50 percent of a year's deficiency; make-up gas at 10 percent of the contract price.
 
-Its price (fixture): oil-indexed, 0.5 + 0.12 x the oil index averaged over 6 months ending 1 month before the priced month, reset every 3 months from 2027-01, with an S-curve at 55 and 90 US$ per barrel and slopes 0.06 below and 0.06 above, rounding model-gsa-4dp, reopeners reported in 2031-01, 2035-01, priced 2027-01 to 2036-12. The take-or-pay price rule (fixture), verbatim: annual average of the monthly contract prices (CW GSA Article 15.2.6 Alternative 1).
+Its price (fixture): oil-indexed, 0.5 + 0.12 x the oil index averaged over 6 months ending 1 month before the priced month, reset every 3 months from 2027-01, with an S-curve at 55 and 90 US$ per barrel and slopes 0.06 below and 0.06 above, rounding model-gsa-4dp, reopeners reported in 2031-01, 2035-01, priced 2027-01 to 2036-12.
+The take-or-pay price rule (fixture), verbatim:
+> annual average of the monthly contract prices (CW GSA Article 15.2.6 Alternative 1)
 
 Its oil index (fixture, synthetic, US$ per barrel), one row per year:
 
@@ -404,6 +423,8 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `takeOrPay` | top-refuse-cap-above-100 | `carryForward.capPct` | carryForward.capPct must be a number from 0 to 100; got 120 |
 | `takeOrPay` | top-refuse-cf-period-zero | `carryForward.periodYears` | carryForward.periodYears must be an integer at or above 1; got 0 |
 | `takeOrPay` | top-refuse-toppct | `topPct` | topPct must be a number from 0 to 100; got 101 |
+| `takeOrPay` | top-refuse-missing-permitted-reduction | `years[0].permittedReduction` | years[0].permittedReduction must be stated for every contract year (0 when the contract permits none); the engine holds no default; got nothing |
+| `takeOrPay` | top-refuse-permitted-reduction-negative | `years[0].permittedReduction` | years[0].permittedReduction must be a finite number at or above 0; got -5 |
 | `takeOrPay` | top-refuse-missing-top-price | `years[0].topPrice` | years[0].topPrice must be a finite number at or above 0; got nothing |
 | `takeOrPay` | top-refuse-unknown-key-makeup | `makeup` | makeup is not an accepted key; the accepted keys at the top level are years, topPct, makeUp, carryForward |
 | `takeOrPay` | top-refuse-unknown-year-key | `years[0].fm` | years[0].fm is not an accepted key; the accepted keys of years[0] are year, acq, maintenance, forceMajeure, sellerShortfall, permittedReduction, taken, contractPrice, topPrice, makeUpPrice, shortfallPrice |
@@ -428,16 +449,20 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `priceSeries` | price-refuse-lag-negative | `lagMonths` | lagMonths must be an integer at or above 0; got -1 |
 | `energyParitySlope` | parity-refuse-zero | `mmbtuPerBarrel` | mmbtuPerBarrel must be a finite number above 0; got 0 |
 | `energyParitySlope` | parity-refuse-unknown-key | `mmbtu` | mmbtu is not an accepted key; the accepted keys at the top level are mmbtuPerBarrel |
+| `domesticPrice` | dp-refuse-no-control-flag | `priceControlApplies` | priceControlApplies must be true or false, stated: whether the price control of PIA s.167 applies, or the free-market criteria of s.167(3)(b) are met (no default); got nothing |
+| `domesticPrice` | dp-refuse-control-flag-text | `priceControlApplies` | priceControlApplies must be true or false, stated: whether the price control of PIA s.167 applies, or the free-market criteria of s.167(3)(b) are met (no default); got "yes" |
+| `domesticPrice` | dp-refuse-no-control-no-price | `negotiatedPrice` | negotiatedPrice must be stated when priceControlApplies is false: every sector negotiates its price (PIA s.167(3)(b)); got nothing |
+| `domesticPrice` | dp-refuse-no-control-with-formula | `product` | product must be given only when priceControlApplies is true (the Fourth Schedule formula is part of s.168); got "urea" |
 | `domesticPrice` | dp-refuse-no-dbp | `domesticBasePrice` | domesticBasePrice must be stated in US$ per MMBtu: the Authority determines it each year (PIA s.167(1)) and the engine holds no default; got nothing |
 | `domesticPrice` | dp-refuse-sector | `sector` | sector must be one of "power", "commercial", "gas-distributor", "gas-based-industry"; got "industrial" |
 | `domesticPrice` | dp-refuse-dbp-below-floor | `domesticBasePrice` | domesticBasePrice must be at or above the gas based industries floor US$0.90 per MMBtu (s.168(2)) for a gas based industry price, which is capped at the domestic base price (s.168(3)); got 0.8 |
-| `domesticPrice` | dp-refuse-negotiated-for-power | `negotiatedPrice` | negotiatedPrice must be given only for sector 'gas-distributor'; got 2 |
+| `domesticPrice` | dp-refuse-negotiated-for-power | `negotiatedPrice` | negotiatedPrice must be given only for sector 'gas-distributor' while priceControlApplies is true; got 2 |
 | `domesticPrice` | dp-refuse-distributor-no-price | `negotiatedPrice` | negotiatedPrice must be stated for a gas distributor, which negotiates its price (PIA s.167(7)); got nothing |
 | `domesticPrice` | dp-refuse-no-cmpp | `cmpp` | cmpp must be stated: the average current month end product price in US$ per tonne (Fourth Schedule); got nothing |
 | `domesticPrice` | dp-refuse-product | `product` | product must be one of "ammonia", "urea", "methanol", "polypropylene", "low-sulphur-diesel-gtl"; got "fertiliser" |
 | `domesticPrice` | dp-refuse-product-for-power | `product` | product must be given only for sector 'gas-based-industry'; got "urea" |
 | `domesticPrice` | dp-refuse-schedule-source | `schedule.source` | schedule.source must be a non-empty string; got "" |
-| `domesticPrice` | dp-refuse-unknown-key | `dbp` | dbp is not an accepted key; the accepted keys at the top level are sector, domesticBasePrice, negotiatedPrice, product, cmpp, transportTariff, schedule |
+| `domesticPrice` | dp-refuse-unknown-key | `dbp` | dbp is not an accepted key; the accepted keys at the top level are sector, priceControlApplies, domesticBasePrice, negotiatedPrice, product, cmpp, transportTariff, schedule |
 | `domesticGasObligation` | dgdo-refuse-two-rates | `penaltyRate` | penaltyRate must be left out when agreementPenaltyRate is stated (state one rate basis); got {"value":4,"source":"x"} |
 | `domesticGasObligation` | dgdo-refuse-rate-source | `penaltyRate.source` | penaltyRate.source must be a non-empty string; got nothing |
 | `domesticGasObligation` | dgdo-refuse-unknown-excuse | `excused.pipelineOutage` | excused.pipelineOutage is not an accepted key; the accepted keys of excused are forceMajeure, purchaserCannotAccept, transportUnavailable, purchaserNonPayment |
@@ -453,15 +478,15 @@ A refusal is an object with `error` and `field`. The message starts with the nam
 | `takeOrPay` | takeOrPay-refuse-unknown-top-key | `notAKey` | notAKey is not an accepted key; the accepted keys at the top level are years, topPct, makeUp, carryForward |
 | `priceSeries` | priceSeries-refuse-unknown-top-key | `notAKey` | notAKey is not an accepted key; the accepted keys at the top level are months, formula, from, to, averagingMonths, lagMonths, resetMonths, rounding, reopeners |
 | `energyParitySlope` | energyParitySlope-refuse-unknown-top-key | `notAKey` | notAKey is not an accepted key; the accepted keys at the top level are mmbtuPerBarrel |
-| `domesticPrice` | domesticPrice-refuse-unknown-top-key | `notAKey` | notAKey is not an accepted key; the accepted keys at the top level are sector, domesticBasePrice, negotiatedPrice, product, cmpp, transportTariff, schedule |
+| `domesticPrice` | domesticPrice-refuse-unknown-top-key | `notAKey` | notAKey is not an accepted key; the accepted keys at the top level are sector, priceControlApplies, domesticBasePrice, negotiatedPrice, product, cmpp, transportTariff, schedule |
 | `domesticGasObligation` | domesticGasObligation-refuse-unknown-top-key | `notAKey` | notAKey is not an accepted key; the accepted keys at the top level are obligation, delivered, voluntaryContracts, excused, agreementPenaltyRate, penaltyRate |
 | `gsaCashFlows` | gsaCashFlows-refuse-unknown-top-key | `notAKey` | notAKey is not an accepted key; the accepted keys at the top level are contract, royalty, discountRate, baseYear |
 | `toEnergy` | options-refuse-array | `options` | options must be an object of named inputs; got [1,2] |
 
-84 refusals across 9 functions: toEnergy 8, contractQuantities 10, dailyBalance 8, takeOrPay 15, priceSeries 18, energyParitySlope 3, domesticPrice 11, domesticGasObligation 5, gsaCashFlows 6.
+90 refusals across 9 functions: toEnergy 8, contractQuantities 10, dailyBalance 8, takeOrPay 17, priceSeries 18, energyParitySlope 3, domesticPrice 15, domesticGasObligation 5, gsaCashFlows 6.
 
 Four rules the table shows:
-- A contract term with no default is refused when it is missing, and the message says so: the make-up terms, the recovery order, the royalty terrain, the take-or-pay price, a shortfall price when a seller shortfall is stated, and the domestic base price.
+- A contract term with no default is refused when it is missing, and the message says so: the make-up terms, the recovery order, each year's permitted reduction, the royalty terrain, the take-or-pay price, a shortfall price when a seller shortfall is stated, whether price control applies, and the domestic base price under price control.
 - An input key a function does not read is refused at whatever level it sits (a top-level option, a year, a day, a formula, an S-curve, a schedule), with the path to the key and the full list of accepted keys; a key that is an index name is checked against the indices the series carries.
 - A quantity that cannot be true is refused before anything is computed: gas taken above the gas made available, force majeure and maintenance above the DCQ, reductions above the ACQ, contract years or months that are not consecutive.
 - Every figure inside a message is the shortest round-trip decimal of the value it was given.
@@ -482,7 +507,8 @@ WHAT A COMPUTED FIGURE DOES NOT SAY. A deficiency payment is what the stated cla
 
 # SECTION 7: Volume to energy: gross and net heating value, the imperial and metric routes, reference conditions (owned by Associate m02)
 
-THE UNITS, in the engine's basis: 1 MMBtu = 1055.05585262 MJ (International Table Btu, NIST Special Publication 811 (2008 edition), Appendix B); 1 ft3 = 0.028316846592 m3 exactly; a mixed pair assumes one set of reference conditions.
+THE UNITS, in the engine's basis, verbatim:
+> 1 MMBtu = 1055.05585262 MJ (International Table Btu, NIST Special Publication 811 (2008 edition), Appendix B); 1 ft3 = 0.028316846592 m3 exactly; a mixed pair assumes one set of reference conditions
 
 | golden case | quantity | unit | heating value | unit | basis | MMBtu (engine) | GJ (engine) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -514,7 +540,8 @@ A MIXED PAIR (a volume in standard cubic metres with a heating value in Btu per 
 
 # SECTION 8: Contract quantities: DCQ, ACQ, day counts, MaxDCQ, swing and effective swing (owned by Associate m03)
 
-THE RULE, in the engine's basis: ACQ = DCQ x days in the contract year; MaxDCQ = maxDcqPct % of DCQ; swing factor = MaxDCQ / DCQ; take-or-pay quantity = topPct % of ACQ (before any adjustment); effective swing = swing factor / take-or-pay fraction.
+THE RULE, in the engine's basis, verbatim:
+> ACQ = DCQ x days in the contract year; MaxDCQ = maxDcqPct % of DCQ; swing factor = MaxDCQ / DCQ; take-or-pay quantity = topPct % of ACQ (before any adjustment); effective swing = swing factor / take-or-pay fraction
 
 | golden case | DCQ | day count (engine basis) | ACQ | MaxDCQ | swing factor | take-or-pay quantity | effective swing |
 | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -538,9 +565,11 @@ NOMINATIONS. A buyer nominates a daily quantity against the DCQ; the part of a n
 
 # SECTION 9: The daily balance: properly nominated quantity, seller shortfall, force majeure and maintenance, buyer shortfall (owned by Associate m04 and Expert m03 l01)
 
-THE RULE, in the engine's basis: PNQ = min(nominated, MaxDCQ); seller shortfall = (PNQ - tolerance) - available, less the force majeure and maintenance stated for the day, none on a buyer-caused day; adjusted DCQ = DCQ - force majeure - maintenance - seller shortfall; buyer shortfall = adjusted DCQ - taken when positive.
+THE RULE, in the engine's basis, verbatim:
+> PNQ = min(nominated, MaxDCQ); seller shortfall = (PNQ - tolerance) - available, less the force majeure and maintenance stated for the day, none on a buyer-caused day; adjusted DCQ = DCQ - force majeure - maintenance - seller shortfall; buyer shortfall = adjusted DCQ - taken when positive
 
-THE IDENTITY, in the engine's basis: sum of buyer shortfall - sum of over-take = Adjusted ACQ - taken.
+THE IDENTITY, in the engine's basis, verbatim:
+> sum of buyer shortfall - sum of over-take = Adjusted ACQ - taken
 
 THE POWER PLANT'S JANUARY 2027 (golden input daily-power-january-2027, the fixture's days): DCQ 21000, MaxDCQ 23100.000000, delivery tolerance 0.000000.
 
@@ -613,16 +642,16 @@ The engine's reasons for the month, verbatim:
 
 SINGLE DAYS (golden inputs), each stated to show one rule:
 
-| golden case | DCQ | MaxDCQ percent | tolerance | nominated | properly nominated | available | taken | force majeure | maintenance | buyer-caused | seller shortfall | adjusted DCQ | buyer shortfall |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| daily-tolerance-covers-the-gap | 100.000000 | 120 | 5.000000 | 100.000000 | 100.000000 | 95.000000 | 95.000000 | 0.000000 | 0.000000 | false | 0.000000 | 100.000000 | 5.000000 |
-| daily-tolerance-one-short | 100.000000 | 120 | 5.000000 | 100.000000 | 100.000000 | 94.000000 | 94.000000 | 0.000000 | 0.000000 | false | 1.000000 | 99.000000 | 5.000000 |
-| daily-over-nomination-failed | 100.000000 | 120 | 0.000000 | 150.000000 | 120.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | false | 120.000000 | -20.000000 | 0.000000 |
-| daily-fm-part-day | 100.000000 | 120 | 0.000000 | 100.000000 | 100.000000 | 40.000000 | 40.000000 | 30.000000 | 10.000000 | false | 20.000000 | 40.000000 | 0.000000 |
-| daily-fm-whole-day-with-nomination | 100.000000 | 120 | 0.000000 | 100.000000 | 100.000000 | 0.000000 | 0.000000 | 100.000000 | 0.000000 | false | 0.000000 | 0.000000 | 0.000000 |
-| daily-available-not-taken | 100.000000 | 120 | 0.000000 | 100.000000 | 100.000000 | 100.000000 | 60.000000 | 0.000000 | 0.000000 | false | 0.000000 | 100.000000 | 40.000000 |
-| daily-no-maxdcq | 100.000000 | none | 0.000000 | 180.000000 | 180.000000 | 180.000000 | 180.000000 | 0.000000 | 0.000000 | false | 0.000000 | 100.000000 | 0.000000 |
-| daily-buyer-caused | 100.000000 | 120 | 0.000000 | 100.000000 | 100.000000 | 20.000000 | 20.000000 | 0.000000 | 0.000000 | true | 0.000000 | 100.000000 | 80.000000 |
+| golden case | DCQ | MaxDCQ percent | tolerance | nominated | properly nominated | available | taken | force majeure | maintenance | buyer-caused | seller shortfall | adjusted DCQ | buyer shortfall | over-take |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| daily-tolerance-covers-the-gap | 100.000000 | 120 | 5.000000 | 100.000000 | 100.000000 | 95.000000 | 95.000000 | 0.000000 | 0.000000 | false | 0.000000 | 100.000000 | 5.000000 | 0.000000 |
+| daily-tolerance-one-short | 100.000000 | 120 | 5.000000 | 100.000000 | 100.000000 | 94.000000 | 94.000000 | 0.000000 | 0.000000 | false | 1.000000 | 99.000000 | 5.000000 | 0.000000 |
+| daily-over-nomination-failed | 100.000000 | 120 | 0.000000 | 150.000000 | 120.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | false | 120.000000 | -20.000000 | 0.000000 | 20.000000 |
+| daily-fm-part-day | 100.000000 | 120 | 0.000000 | 100.000000 | 100.000000 | 40.000000 | 40.000000 | 30.000000 | 10.000000 | false | 20.000000 | 40.000000 | 0.000000 | 0.000000 |
+| daily-fm-whole-day-with-nomination | 100.000000 | 120 | 0.000000 | 100.000000 | 100.000000 | 0.000000 | 0.000000 | 100.000000 | 0.000000 | false | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| daily-available-not-taken | 100.000000 | 120 | 0.000000 | 100.000000 | 100.000000 | 100.000000 | 60.000000 | 0.000000 | 0.000000 | false | 0.000000 | 100.000000 | 40.000000 | 0.000000 |
+| daily-no-maxdcq | 100.000000 | none | 0.000000 | 180.000000 | 180.000000 | 180.000000 | 180.000000 | 0.000000 | 0.000000 | false | 0.000000 | 100.000000 | 0.000000 | 80.000000 |
+| daily-buyer-caused | 100.000000 | 120 | 0.000000 | 100.000000 | 100.000000 | 20.000000 | 20.000000 | 0.000000 | 0.000000 | true | 0.000000 | 100.000000 | 80.000000 | 0.000000 |
 
 daily-tolerance-covers-the-gap, the engine's reasons, verbatim:
 > 2027-03-01: taken 95 is below the adjusted DCQ 100: buyer shortfall 5
@@ -641,7 +670,7 @@ daily-fm-whole-day-with-nomination, the engine's reasons, verbatim:
 daily-available-not-taken, the engine's reasons, verbatim:
 > 2027-03-01: taken 60 is below the adjusted DCQ 100: buyer shortfall 40
 daily-no-maxdcq, the engine's reasons, verbatim:
-(no reason: nothing is owed either way)
+(the engine returns no reason)
 daily-buyer-caused, the engine's reasons, verbatim:
 > 2027-03-01: 80 of the properly nominated quantity was not made available for a cause on the buyer's side, so it is not a seller shortfall
 > 2027-03-01: taken 20 is below the adjusted DCQ 100: buyer shortfall 80
@@ -650,9 +679,10 @@ THE READING THIS SECTION RESTS ON. The engine measures a seller shortfall agains
 
 # SECTION 10: Take-or-pay in one contract year: the Adjusted ACQ, the take-or-pay quantity, the deficiency and its payment, damages (owned by Associate m05 and Associate m06)
 
-THE RULE, in the engine's basis: Adjusted ACQ = ACQ - maintenance - force majeure - seller shortfall - permitted reduction; TOPQ = topPct % of Adjusted ACQ; deficiency = TOPQ - (taken - make-up taken) when positive; deficiency payment = (deficiency - carry-forward credit) x topPrice.
+THE RULE, in the engine's basis, verbatim:
+> Adjusted ACQ = ACQ - maintenance - force majeure - seller shortfall - permitted reduction; TOPQ = topPct % of Adjusted ACQ; deficiency = TOPQ - (taken - make-up taken) when positive; deficiency payment = (deficiency - carry-forward credit) x topPrice
 
-Money in a contract year, as the engine builds it: counted x contract price + make-up taken x make-up price + deficiency payment - seller shortfall x shortfall price - refund = net to the seller. Each term is a return value in the rows below.
+Money in a contract year, as the engine builds it: regular revenue (the field regularRevenue, counted x contract price) + make-up revenue (makeUpRevenue, make-up taken x make-up price) + deficiency payment - shortfall damages (shortfallPayment, seller shortfall x shortfall price) - refund = net to the seller (netToSeller). Each term is a return value in the rows below.
 
 | golden case | year | ACQ | reductions | Adjusted ACQ | take-or-pay quantity | taken | counted | deficiency | contract price (golden input) | take-or-pay price (golden input) | deficiency payment | shortfall damages | net to seller |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -677,12 +707,12 @@ THE POWER PLANT'S YEARS ALONE. The fixture's 2027 and 2032, each run as a one-ye
 2027 alone, the engine's reasons, verbatim:
 > 2027: seller shortfall 6300 reduces the Adjusted ACQ and is paid to the buyer at 1.25: 7875
 2032 alone, the engine's reasons, verbatim:
-(no reason: nothing to reconcile)
+(the engine returns no reason)
 
 top-single-year, the engine's reasons, verbatim:
 > 2027: 500 counted against the take-or-pay quantity 900 leaves a deficiency of 400; the deficiency payment is 400 x 3 = 1200; the delivery period ends with this year, so no make-up right arises
 top-exactly-met, the engine's reasons, verbatim:
-(no reason: nothing to reconcile)
+(the engine returns no reason)
 top-one-unit-short, the engine's reasons, verbatim:
 > 2027: 799 counted against the take-or-pay quantity 800 leaves a deficiency of 1; the deficiency payment is 1 x 3 = 3; the buyer may make up 1 in the 2 contract years after 2027, to the end of 2029
 > 2028: make-up aggregate 1 available and none taken, because taken 800 does not exceed the Adjusted ACQ 1000
@@ -697,7 +727,17 @@ top-force-majeure-and-shortfall, the engine's reasons, verbatim:
 > 2028: make-up aggregate 40 available and none taken, because taken 800 does not exceed the Adjusted ACQ 1000
 > 2028: the delivery period ends with make-up of 40 unrecovered; the buyer forfeits it
 top-fm-whole-year, the engine's reasons, verbatim:
-(no reason: nothing to reconcile)
+(the engine returns no reason)
+A TAKE-OR-PAY PERCENTAGE OF ZERO (top-zero-percent) is accepted; the engine states it in each year's reasons and in its basis, verbatim:
+> a take-or-pay percentage of 0 sets no take-or-pay quantity
+
+THE PERMITTED REDUCTION IS STATED FOR EVERY YEAR (zero when the contract permits none). The engine's basis, verbatim:
+> stated for every contract year (0 when the contract permits none); the engine holds no default
+A year that leaves it out is refused (section 5).
+
+A TAKE-OR-PAY PRICE DIFFERENT FROM THE CONTRACT PRICE (stated probe: ACQ 1000, taken 600, take-or-pay 80 percent, contract price 3.200000, take-or-pay price 2.400000): deficiency 200.000000, deficiency payment 480.000000, regular revenue 1920.000000, net to the seller 2400.000000. The deficiency is paid at the take-or-pay price and the gas taken at the contract price. The engine's reason, verbatim:
+> 2027: 600 counted against the take-or-pay quantity 800 leaves a deficiency of 200; the deficiency payment is 200 x 2.4 = 480; the delivery period ends with this year, so no make-up right arises
+
 
 WHEN THE TAKE-OR-PAY QUANTITY IS EXACTLY MET (top-exactly-met, 2027: taken 800.000000 against the take-or-pay quantity 800.000000) there is no deficiency; one unit short (top-one-unit-short) leaves a deficiency of 1.000000. The deficiency is the take-or-pay quantity less the quantity counted when that is above 0.
 
@@ -707,9 +747,11 @@ The multi-year ledger with make-up, the recovery order and expiry is in section 
 
 # SECTION 11: The take-or-pay ledger: make-up, the recovery order, first in first out, expiry and the end of the term (owned by Professional m01 and Professional m02 and Expert m04 l02)
 
-THE ORDER, in the engine's basis (top-power): after-adjusted-acq: make-up only after the Adjusted ACQ of the year is taken (Commonwealth Secretariat, Gas Sales Agreement, Contract 2 in the Commonwealth Model Contract Series (2025, CC BY 4.0) Article 12.7.1 (Alternative 1&2A)); a required input with no default. 'after-adjusted-acq' is the reference text's order (Commonwealth Secretariat, Gas Sales Agreement, Contract 2 in the Commonwealth Model Contract Series (2025, CC BY 4.0) Article 12.7.1); 'after-top-quantity' and 'first' are variants the engine also computes.
+THE ORDER, in the engine's basis (top-power), verbatim:
+> after-adjusted-acq: make-up only after the Adjusted ACQ of the year is taken (Commonwealth Secretariat, Gas Sales Agreement, Contract 2 in the Commonwealth Model Contract Series (2025, CC BY 4.0) Article 12.7.1 (Alternative 1&2A)); a required input with no default. 'after-adjusted-acq' is the reference text's order (Commonwealth Secretariat, Gas Sales Agreement, Contract 2 in the Commonwealth Model Contract Series (2025, CC BY 4.0) Article 12.7.1); 'after-top-quantity' and 'first' are variants the engine also computes
 
-MAKE-UP, in the engine's basis (top-power): make-up entries are the deficiency quantities paid, recoverable in the 3 contract years after the deficiency year, drawn first in first out, expiring at the end of their last year; at the end of the delivery period the rest is forfeited.
+MAKE-UP, in the engine's basis (top-power), verbatim:
+> make-up entries are the deficiency quantities paid, recoverable in the 3 contract years after the deficiency year, drawn first in first out, expiring at the end of their last year; at the end of the delivery period the rest is forfeited
 
 THE POWER PLANT LEDGER, 2027 to 2034 (golden input top-power, the fixture's years):
 
@@ -859,9 +901,11 @@ A make-up period of N contract years after a deficiency year y runs to the end o
 
 # SECTION 12: Carry-forward, its cap, base and expiry, seller shortfall damages and the export feed ledger (owned by Professional m03 and Expert m04 l02)
 
-CARRY-FORWARD, in the engine's basis (top-export): surplus above the take-or-pay quantity is credited against later deficiencies, at most 50% of a year's deficiency, first in first out, for 3 contract years.
+CARRY-FORWARD, in the engine's basis (top-export), verbatim:
+> surplus above the take-or-pay quantity is credited against later deficiencies, at most 50% of a year's deficiency, first in first out, for 3 contract years
 
-MAKE-UP, in the engine's basis (top-export): make-up entries are the deficiency quantities paid, recoverable in the 5 contract years after the deficiency year, drawn first in first out, expiring at the end of their last year; at the end of the delivery period the rest is refunded at the last year's topPrice.
+MAKE-UP, in the engine's basis (top-export), verbatim:
+> make-up entries are the deficiency quantities paid, recoverable in the 5 contract years after the deficiency year, drawn first in first out, expiring at the end of their last year; at the end of the delivery period the rest is refunded at the last year's topPrice
 
 THE EXPORT FEED LEDGER, 2027 to 2036 (golden input top-export). Its contract price and take-or-pay price in each year are the annual average of the monthly prices priceSeries returns on the fixture (section 13); its make-up price is 10 percent of that price (fixture):
 
@@ -989,15 +1033,19 @@ top-carry-forward-off-by-default, the engine's reasons, verbatim:
 > 2031: make-up of 100 from 2029 expired unrecovered at the end of 2031, the last year of its make-up period
 > 2031: the delivery period ends with make-up of 200 unrecovered; the buyer forfeits it
 
-Off (no carry-forward right stated): that is the engine's basis, verbatim, when a contract states no carry-forward right.
+When a contract states no carry-forward right, the engine's basis reads, verbatim:
+> off (no carry-forward right stated)
 
 # SECTION 13: Price formulas: fixed, escalated, oil-indexed, hub-indexed and basket, with averaging, lag, reset, floor, ceiling and rounding (owned by Professional m04 and Expert m05 l02)
 
-THE AVERAGING, in the engine's basis (price-export): index averaged over 6 months ending 1 month before the delivery month; price reset every 3 months from 2027-01.
+THE AVERAGING, in the engine's basis (price-export), verbatim:
+> index averaged over 6 months ending 1 month before the delivery month; price reset every 3 months from 2027-01
 
-THE ANNUAL PRICES, in the engine's basis: annual average price = arithmetic mean of the monthly prices of the calendar year (CW GSA Article 15.2.6 Alternative 1); lastMonthPrice is Alternative 2.
+THE ANNUAL PRICES, in the engine's basis, verbatim:
+> annual average price = arithmetic mean of the monthly prices of the calendar year (CW GSA Article 15.2.6 Alternative 1); lastMonthPrice is Alternative 2
 
-THE ROUNDING, in the engine's basis (price-export): each price rounded to 4 decimals, half up on the fifth decimal (CW GSA Article 15.4), after normalising the double to 12 significant digits.
+THE ROUNDING, in the engine's basis (price-export), verbatim:
+> each price rounded to 4 decimals, half up on the fifth decimal (CW GSA Article 15.4), after normalising the double to 12 significant digits
 
 THE EXPORT FEED PRICE (golden input price-export, the fixture): the first eighteen priced months and every annual row.
 
@@ -1232,27 +1280,29 @@ FLOOR AND CEILING. On price-oil-floor-ceiling the engine labels a month clamped 
 
 # SECTION 14: Nigerian domestic gas prices: power, commercial, gas distributors and gas based industries (owned by Professional m05 and Expert m05 l04)
 
-Every domesticPrice call states the domestic base price; section 2 says where the reported figures come from and why none is graded. The rows below state 2.180000 and 2.130000 as the figures reported for 2026 and 2025 (the golden file's published figures), and other figures as stated probes.
+Every domesticPrice call states whether the price control of s.167 applies (priceControlApplies, true or false, with no default) and, under price control, the domestic base price; section 2 says where the reported base price figures come from and why none is graded. The rows below state 2.180000 and 2.130000 as the figures reported for 2026 and 2025 (the golden file's published figures), and other figures as stated probes.
 
-| golden case | sector | domestic base price | negotiated | product | CMPP | NRP | PRP | EPF | formula price | price | ceiling | held at | delivered price |
+UNDER PRICE CONTROL (priceControlApplies true):
+
+| golden case | sector | price control (stated) | domestic base price | stated (negotiated) figure | product | CMPP | EPF | formula price | price | ceiling | within the ceiling | held at | delivered price |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| dp-power-2026 | power | 2.180000 (reported 2026) | none | none | none | none | none | none | none | 2.180000 | none | none | none |
-| dp-commercial-2026 | commercial | 2.180000 (reported 2026) | none | none | none | none | none | none | none | 2.680000 | none | none | none |
-| dp-power-2025 | power | 2.130000 (reported 2025) | none | none | none | none | none | none | none | 2.130000 | none | none | none |
-| dp-commercial-2025 | commercial | 2.130000 (reported 2025) | none | none | none | none | none | none | none | 2.630000 | none | none | none |
-| dp-distributor-within | gas-distributor | 2.180000 (reported 2026) | 2.500000 | none | none | none | none | none | none | 2.500000 | 2.680000 | none | none |
-| dp-distributor-at-ceiling | gas-distributor | 2.180000 (reported 2026) | 2.680000 | none | none | none | none | none | none | 2.680000 | 2.680000 | none | none |
-| dp-distributor-above | gas-distributor | 2.180000 (reported 2026) | 2.900000 | none | none | none | none | none | none | 2.900000 | 2.680000 | none | none |
-| dp-gbi-urea-inside | gas-based-industry | 2.180000 (reported 2026) | none | urea | 450.000000 | 1.000000 | 250.000000 | 0.800000 | 1.800000 | 1.800000 | none | none | none |
-| dp-gbi-urea-floor | gas-based-industry | 2.180000 (reported 2026) | none | urea | 200.000000 | 1.000000 | 250.000000 | -0.200000 | 0.800000 | 0.900000 | none | floor | none |
-| dp-gbi-urea-ceiling | gas-based-industry | 2.180000 (reported 2026) | none | urea | 600.000000 | 1.000000 | 250.000000 | 1.400000 | 2.400000 | 2.180000 | none | ceiling | none |
-| dp-gbi-urea-at-prp | gas-based-industry | 2.180000 (reported 2026) | none | urea | 250.000000 | 1.000000 | 250.000000 | 0.000000 | 1.000000 | 1.000000 | none | none | none |
-| dp-gbi-urea-zero-cmpp | gas-based-industry | 2.180000 (reported 2026) | none | urea | 0.000000 | 1.000000 | 250.000000 | -1.000000 | 0.000000 | 0.900000 | none | floor | none |
-| dp-gbi-gtl-diesel | gas-based-industry | 2.180000 (reported 2026) | none | low-sulphur-diesel-gtl | 520.000000 | 1.000000 | 325.000000 | 0.600000 | 1.600000 | 1.600000 | none | none | none |
-| dp-gbi-exactly-dbp | gas-based-industry | 2.000000 (stated) | none | ammonia | 500.000000 | 1.000000 | 250.000000 | 1.000000 | 2.000000 | 2.000000 | none | none | none |
-| dp-gbi-exactly-floor | gas-based-industry | 2.180000 (reported 2026) | none | methanol | 225.000000 | 1.000000 | 250.000000 | -0.100000 | 0.900000 | 0.900000 | none | none | none |
-| dp-gbi-schedule-override | gas-based-industry | 2.180000 (reported 2026) | none | ammonia | 450.000000 | 1.200000 | 300.000000 | 0.500000 | 1.800000 | 1.800000 | none | none | none |
-| dp-power-transport | power | 2.180000 (reported 2026) | none | none | none | none | none | none | none | 2.180000 | none | none | 2.980000 |
+| dp-power-2026 | power | yes | 2.180000 (reported 2026) | none | none | none | none | none | 2.180000 | none | none | none | none |
+| dp-commercial-2026 | commercial | yes | 2.180000 (reported 2026) | none | none | none | none | none | 2.680000 | none | none | none | none |
+| dp-power-2025 | power | yes | 2.130000 (reported 2025) | none | none | none | none | none | 2.130000 | none | none | none | none |
+| dp-commercial-2025 | commercial | yes | 2.130000 (reported 2025) | none | none | none | none | none | 2.630000 | none | none | none | none |
+| dp-distributor-within | gas-distributor | yes | 2.180000 (reported 2026) | 2.500000 | none | none | none | none | 2.500000 | 2.680000 | yes | none | none |
+| dp-distributor-at-ceiling | gas-distributor | yes | 2.180000 (reported 2026) | 2.680000 | none | none | none | none | 2.680000 | 2.680000 | yes | none | none |
+| dp-distributor-above | gas-distributor | yes | 2.180000 (reported 2026) | 2.900000 | none | none | none | none | 2.680000 | 2.680000 | no | ceiling | none |
+| dp-gbi-urea-inside | gas-based-industry | yes | 2.180000 (reported 2026) | none | urea | 450.000000 | 0.800000 | 1.800000 | 1.800000 | none | none | none | none |
+| dp-gbi-urea-floor | gas-based-industry | yes | 2.180000 (reported 2026) | none | urea | 200.000000 | -0.200000 | 0.800000 | 0.900000 | none | none | floor | none |
+| dp-gbi-urea-ceiling | gas-based-industry | yes | 2.180000 (reported 2026) | none | urea | 600.000000 | 1.400000 | 2.400000 | 2.180000 | none | none | ceiling | none |
+| dp-gbi-urea-at-prp | gas-based-industry | yes | 2.180000 (reported 2026) | none | urea | 250.000000 | 0.000000 | 1.000000 | 1.000000 | none | none | none | none |
+| dp-gbi-urea-zero-cmpp | gas-based-industry | yes | 2.180000 (reported 2026) | none | urea | 0.000000 | -1.000000 | 0.000000 | 0.900000 | none | none | floor | none |
+| dp-gbi-gtl-diesel | gas-based-industry | yes | 2.180000 (reported 2026) | none | low-sulphur-diesel-gtl | 520.000000 | 0.600000 | 1.600000 | 1.600000 | none | none | none | none |
+| dp-gbi-exactly-dbp | gas-based-industry | yes | 2.000000 (stated) | none | ammonia | 500.000000 | 1.000000 | 2.000000 | 2.000000 | none | none | none | none |
+| dp-gbi-exactly-floor | gas-based-industry | yes | 2.180000 (reported 2026) | none | methanol | 225.000000 | -0.100000 | 0.900000 | 0.900000 | none | none | none | none |
+| dp-gbi-schedule-override | gas-based-industry | yes | 2.180000 (reported 2026) | none | ammonia | 450.000000 | 0.500000 | 1.800000 | 1.800000 | none | none | none | none |
+| dp-power-transport | power | yes | 2.180000 (reported 2026) | none | none | none | none | none | 2.180000 | none | none | none | 2.980000 |
 
 The engine's rule and reason for each, verbatim:
 
@@ -1262,9 +1312,9 @@ The engine's rule and reason for each, verbatim:
 | dp-commercial-2026 | commercial sector price = domestic base price + US$0.50 per MMBtu | none | prices at the marketable natural gas delivery point |
 | dp-power-2025 | power sector price = domestic base price | none | prices at the marketable natural gas delivery point |
 | dp-commercial-2025 | commercial sector price = domestic base price + US$0.50 per MMBtu | none | prices at the marketable natural gas delivery point |
-| dp-distributor-within | gas distributors negotiate; the price shall not exceed the commercial sector price | negotiated price 2.5 is at or below the commercial sector price 2.68 | prices at the marketable natural gas delivery point |
-| dp-distributor-at-ceiling | gas distributors negotiate; the price shall not exceed the commercial sector price | negotiated price 2.68 is at or below the commercial sector price 2.68 | prices at the marketable natural gas delivery point |
-| dp-distributor-above | gas distributors negotiate; the price shall not exceed the commercial sector price | negotiated price 2.9 exceeds the commercial sector price 2.68, which s.167(7) sets as the ceiling for gas distributors | prices at the marketable natural gas delivery point |
+| dp-distributor-within | gas distributors negotiate; the price shall not exceed the commercial sector price, and a figure above it is held at that ceiling | the negotiated price 2.5 is at or below the commercial sector price 2.68, the ceiling for gas distributors (s.167(7)) | prices at the marketable natural gas delivery point |
+| dp-distributor-at-ceiling | gas distributors negotiate; the price shall not exceed the commercial sector price, and a figure above it is held at that ceiling | the negotiated price 2.68 is at or below the commercial sector price 2.68, the ceiling for gas distributors (s.167(7)) | prices at the marketable natural gas delivery point |
+| dp-distributor-above | gas distributors negotiate; the price shall not exceed the commercial sector price, and a figure above it is held at that ceiling | the negotiated price 2.9 exceeds the commercial sector price 2.68, so the price is held at 2.68 (s.167(7)) | prices at the marketable natural gas delivery point |
 | dp-gbi-urea-inside | CP = NRP x (1 + EPF), EPF = (CMPP - PRP) / PRP, CP <= domestic base price, floor US$0.90 per MMBtu; NRP 1 and PRP 250 from the Fourth Schedule table | the formula gives 1.8, inside the floor 0.9 and the domestic base price 2.18 | prices at the marketable natural gas delivery point |
 | dp-gbi-urea-floor | CP = NRP x (1 + EPF), EPF = (CMPP - PRP) / PRP, CP <= domestic base price, floor US$0.90 per MMBtu; NRP 1 and PRP 250 from the Fourth Schedule table | the formula gives 0.8, below the floor US$0.90 per MMBtu, so the price is held at 0.9 (s.168(2)) | prices at the marketable natural gas delivery point |
 | dp-gbi-urea-ceiling | CP = NRP x (1 + EPF), EPF = (CMPP - PRP) / PRP, CP <= domestic base price, floor US$0.90 per MMBtu; NRP 1 and PRP 250 from the Fourth Schedule table | the formula gives 2.4, above the domestic base price 2.18, so the price is held at 2.18 (s.168(3)) | prices at the marketable natural gas delivery point |
@@ -1276,13 +1326,36 @@ The engine's rule and reason for each, verbatim:
 | dp-gbi-schedule-override | CP = NRP x (1 + EPF), EPF = (CMPP - PRP) / PRP, CP <= domestic base price, floor US$0.90 per MMBtu; NRP 1.2 and PRP 300 from the stated by the caller: illustrative regulation (synthetic) (the Authority may change NRP and PRP by regulation, Fourth Schedule) | the formula gives 1.7999999999999998, inside the floor 0.9 and the domestic base price 2.18 | prices at the marketable natural gas delivery point |
 | dp-power-transport | power sector price = domestic base price | none | prices at the marketable natural gas delivery point; the stated transport tariff is added for the delivered price (s.167(8), s.168(4)) |
 
+THE DISTRIBUTOR CEILING IS HELD (dp-distributor-above). A gas distributor negotiates its price, and s.167(7) says that price "shall not exceed" the commercial sector price. Under price control the engine returns the stated figure as statedPrice (2.900000), withinCeiling no, heldAt ceiling, and the price held at the ceiling, 2.680000. The stated figure is not a lawful price under s.167(7) while price control applies; the price is the held figure. Both ceilings of this section are applied alike, in the engine's basis, verbatim:
+> both ceilings are applied alike: price is the lawful figure, heldAt names the bound that held it (s.167(7) for gas distributors, s.168(3) and (2) for gas based industries), and the stated or formula figure is returned beside it
+
 THE FOURTH SCHEDULE ARITHMETIC (dp-gbi-urea-inside): EPF = (CMPP - PRP) / PRP and CP = NRP x (1 + EPF), then held at or below the domestic base price and at or above the floor of 0.900000 US$ per MMBtu. The ceiling applies before the floor. Section 3 quotes the Schedule.
+
+WITHOUT PRICE CONTROL (priceControlApplies false). PIA s.167(3) says price control is not required where either of two conditions is met, and under (b), once the domestic market is largely free-market contracting, the sector prices of s.167(4) to (7) and s.168 cease to apply (the provisions section quotes both). The engine then returns the negotiated price with no ceiling or floor:
+
+| golden case | sector | price control (stated) | domestic base price | stated (negotiated) figure | product | CMPP | EPF | formula price | price | ceiling | within the ceiling | held at | delivered price |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| dp-distributor-above-no-control | gas-distributor | no | 2.180000 (reported 2026) | 2.900000 | none | none | none | none | 2.900000 | none | none | none | none |
+| dp-distributor-at-ceiling-no-control | gas-distributor | no | none | 2.680000 | none | none | none | none | 2.680000 | none | none | none | none |
+| dp-power-no-control | power | no | none | 3.100000 | none | none | none | none | 3.100000 | none | none | none | 3.900000 |
+| dp-gbi-no-control-below-floor | gas-based-industry | no | none | 0.700000 | none | none | none | none | 0.700000 | none | none | none | none |
+
+| golden case | reason, verbatim |
+| --- | --- |
+| dp-distributor-above-no-control | price control does not apply: the negotiated price 2.9 stands, with no ceiling or floor, because s.167(4) to (7) and s.168 no longer apply once the free-market criteria are met (s.167(3)(b)) |
+| dp-distributor-at-ceiling-no-control | price control does not apply: the negotiated price 2.68 stands, with no ceiling or floor, because s.167(4) to (7) and s.168 no longer apply once the free-market criteria are met (s.167(3)(b)) |
+| dp-power-no-control | price control does not apply: the negotiated price 3.1 stands, with no ceiling or floor, because s.167(4) to (7) and s.168 no longer apply once the free-market criteria are met (s.167(3)(b)) |
+| dp-gbi-no-control-below-floor | price control does not apply: the negotiated price 0.7 stands, with no ceiling or floor, because s.167(4) to (7) and s.168 no longer apply once the free-market criteria are met (s.167(3)(b)) |
+
+Whether price control applies is a statement about the market, and the engine asks for it. It never assumes one.
 
 # SECTION 15: The Domestic Gas Delivery Obligation: deemed fulfilment, the excuses in order, the penalty and a signed agreement (owned by Professional m06)
 
-THE RULE, in the engine's basis: undelivered = obligation - delivered when positive; the s.110(10) excuses apply in the order (a) to (d) up to the undelivered quantity; penalty = penalised quantity x rate.
+THE RULE, in the engine's basis, verbatim:
+> undelivered = obligation - delivered when positive; the s.110(10) excuses apply in the order (a) to (d) up to the undelivered quantity; penalty = penalised quantity x rate
 
-WHAT IS NOT COMPUTED, in the engine's basis: the 90-day investigation rule of r.6(3) and the compensation to customer-clients of s.110(13) are not computed.
+WHAT IS NOT COMPUTED, in the engine's basis, verbatim:
+> the 90-day investigation rule of r.6(3) and the compensation to customer-clients of s.110(13) are not computed
 
 | golden case | obligation | delivered | voluntary contracts | excuses stated | deemed fulfilled | undelivered | excused applied | penalised | rate | penalty | export restriction |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
@@ -1360,7 +1433,8 @@ THE EXCUSES are applied in the order of s.110(10), (a) force majeure, (b) a purc
 | parity-eia-2026 | 5.689000 | 0.175778 | EIA energy conversion calculators, read 2026-09-26: {"btuPerBarrel":5689000} |
 | parity-6 | 6.000000 | 0.166667 | none |
 
-THE RULE, in the engine's basis: slope = 1 / (MMBtu per barrel); gas in US$/MMBtu = slope x oil in US$/bbl on equal heat content.
+THE RULE, in the engine's basis, verbatim:
+> slope = 1 / (MMBtu per barrel); gas in US$/MMBtu = slope x oil in US$/bbl on equal heat content
 
 THE PRINTED SLOPE AND THE EXACT ONE. The Energy Charter Secretariat prints the heat-equivalence slope as 0.172 (text). On 5.8 MMBtu per barrel the engine returns 0.172414; the reciprocal of the printed slope is 5.813953 MMBtu per barrel (derived), so the printed slope is a rounded figure. On the EIA's 5689000 Btu per barrel (text) the slope is 0.175778. A contract slope below the parity slope prices gas below oil on heat content.
 
@@ -1389,9 +1463,11 @@ THE KINKS (golden input price-s-curve-kinks: oil-indexed 0.5 + 0.12 x oil, S-cur
 
 # SECTION 17: Whole-contract cash flows: the revenue lines, royalty on the value of gas delivered, and the NPV (owned by Expert m02)
 
-THE ROYALTY, in the engine's basis (cf-power): gas royalty rate 0.025 from engines/economics/cashflow.ts deriveGasRoyaltyRate (onshore, 100% utilised in-country: 5%, 2.5% in-country, PIA Seventh Schedule para 10(6)) on the value of gas delivered (taken x contract price): royalty is charged on delivered gas value and not on deficiency payments.
+THE ROYALTY, in the engine's basis (cf-power), verbatim:
+> gas royalty rate 0.025 from engines/economics/cashflow.ts deriveGasRoyaltyRate (onshore, 100% utilised in-country: 5%, 2.5% in-country, PIA Seventh Schedule para 10(6)) on the value of gas delivered (taken x contract price): royalty is charged on delivered gas value and not on deficiency payments
 
-THE NPV, in the engine's basis (cf-power): canonical npv from engines/economics/cashflow.ts, year-end flows discounted to 2026 at 0.1.
+THE NPV, in the engine's basis (cf-power), verbatim:
+> canonical npv from engines/economics/cashflow.ts, year-end flows discounted to 2026 at 0.1
 
 THE POWER PLANT IN MONEY (golden input cf-power: the power ledger, onshore, 100 percent utilised in-country, discount rate 0.1 to 2026):
 
@@ -1535,7 +1611,8 @@ Each item below is taught as a concept only, with where it would come from. None
 REOPENERS ARE REPORTED BY MONTH. priceSeries returns each reopener with this note, verbatim (price-export):
 > price reopener 2031-01: reported only; the engine does not model the outcome of a price review
 
-THE DGDO'S UNCOMPUTED RULES, in the engine's basis: the 90-day investigation rule of r.6(3) and the compensation to customer-clients of s.110(13) are not computed.
+THE DGDO'S UNCOMPUTED RULES, in the engine's basis, verbatim:
+> the 90-day investigation rule of r.6(3) and the compensation to customer-clients of s.110(13) are not computed
 
 FIGURES QUOTED ONLY AS REPORTED. The domestic base price for 2026 (2.180000 US$ per MMBtu for power and 2.680000 for the commercial sector, effective on the first of April) and for 2025 (2.130000 and 2.630000) are reported figures; the regulator's circular was not read. The engine's own sentence is in section 2. A lesson quotes them with that attribution and never as a value the course grades.
 

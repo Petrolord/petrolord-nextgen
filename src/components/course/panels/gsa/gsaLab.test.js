@@ -125,7 +125,7 @@ describe('THE DIGEST GATE: every number a teaching reader returns is printed in 
   it('every refusal a route returns is the engine\'s own message, the digest quotes it verbatim, and the lab never writes it', () => {
     const gold = JSON.parse(fs.readFileSync(GOLDEN, 'utf8'));
     const refusals = gold.cases.filter((c) => c.expected && c.expected.error === true);
-    expect(refusals.length).toBe(84);
+    expect(refusals.length).toBe(90);
     const routes = {
       toEnergy: L.energyOf, contractQuantities: L.quantitiesOf, dailyBalance: L.dailyOf, takeOrPay: L.takeOrPayOf, priceSeries: L.priceOf,
       energyParitySlope: L.parityOf, domesticPrice: L.domesticOf, domesticGasObligation: L.dgdoOf, gsaCashFlows: L.cashFlowsOf,
@@ -230,6 +230,12 @@ describe('THE PASTE GATE: a whole case file pasted into any view runs that view\
   it('NEGATIVE CONTROL: the raw route without pick refuses the whole case by its first unknown key', () => {
     expect(L.priceOf(CASES[1]).error).toMatch(/^dataset is not an accepted key/);
     expect(L.dgdoOf(CASES[1]).error).toMatch(/^dataset is not an accepted key/);
+  });
+  it('every starting case states its required inputs: price control for the domestic view, a permitted reduction for every contract year', () => {
+    expect(L.STARTS.domestic.priceControlApplies).toBe(true);
+    ['year', 'ledger', 'exportLedger', 'power2027', 'power2032'].forEach((k) => L.STARTS[k].years.forEach((y) => expect(y.permittedReduction, `${k} ${y.year}`).toBeDefined()));
+    L.STARTS.cash.contract.years.forEach((y) => expect(y.permittedReduction).toBeDefined());
+    expect(L.domesticOf({ ...L.STARTS.domestic, priceControlApplies: undefined }).error).toMatch(/^priceControlApplies must be true or false/);
   });
   it('the one-year view starts from one contract year, and the two power plant years alone are offered', () => {
     expect(L.STARTS.year.years).toHaveLength(1);

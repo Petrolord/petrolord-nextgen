@@ -33,15 +33,15 @@
   "explanation": "s.167(6) sets the commercial sector price at the domestic base price plus US$0.50 per MMBtu, so on the stated 2.180000 the engine returns 2.680000; the course quotes both as the figures reported for 2026 and keys only the engine's arithmetic on the stated input. Returning the base price unchanged is the power sector rule. 2.630000 is what the base price reported for 2025 gives. 2.980000 is the delivered power price of a case that states a transport tariff."
  },
  {
-  "prompt": "A gas distributor states a negotiated price of 2.9 on a call whose stated domestic base price is the figure reported for 2026. What does the engine return?",
+  "prompt": "A gas distributor states a negotiated price of 2.9 on a call that states price control applies and the domestic base price reported for 2026. What does the engine return?",
   "options": [
-   "A price held at 2.680000, the commercial price on the stated base, since the engine clamps a distributor's price",
-   "Refused by name at negotiatedPrice, since a negotiated price above the commercial sector price is not a valid input",
-   "A price of 2.900000 with no reason, because a gas distributor negotiates its price freely under the Act",
-   "The stated 2.900000 returned as it stands, with a reason flagging it above the ceiling s.167(7) sets for it"
+   "The stated 2.900000 as the price, with a reason flagging that it breaks the ceiling of s.167(7)",
+   "Refused by name at negotiatedPrice, since a negotiated price above the commercial price is not an input",
+   "A price of 2.900000 with no reason, because a distributor negotiates its price freely under the Act",
+   "A price of 2.680000 held at the ceiling of s.167(7), with the 2.900000 returned as the stated figure"
   ],
   "answer": 3,
-  "explanation": "The engine returns the negotiated price and states the breach in its own words: \"negotiated price 2.9 exceeds the commercial sector price 2.68, which s.167(7) sets as the ceiling for gas distributors\". The 2.68 in that reason is the commercial price on the stated base price reported for 2026. It does not clamp the figure and it does not refuse the call; the reason carries the finding. The figure is no lawful distributor price while s.167(7) applies: it says a distributor's price \"shall not exceed\" the commercial sector price, so the negotiation is not free of limit, and the engine returns 2.900000 with the breach stated beside it."
+  "explanation": "While price control applies, s.167(7) says a distributor's price \"shall not exceed\" the commercial sector price, so the engine holds the price there: its reason reads \"the negotiated price 2.9 exceeds the commercial sector price 2.68, so the price is held at 2.68 (s.167(7))\", and it returns the stated figure as statedPrice with withinCeiling false and heldAt ceiling. The 2.68 is the commercial price on the stated base reported for 2026. The stated figure is no lawful price under s.167(7), so the engine does not return it as the price, and it refuses nothing: the call is valid and the breach is readable beside the price. A distributor negotiates only inside the ceiling while price control applies."
  },
  {
   "prompt": "A gas distributor's negotiated price is exactly equal to the commercial sector price that the stated 2026 reported base price gives. How does the engine read it?",
@@ -52,7 +52,7 @@
    "Within the ceiling"
   ],
   "answer": 3,
-  "explanation": "The ceiling is inclusive, and on the stated base price reported for 2026 the engine's reason reads \"negotiated price 2.68 is at or below the commercial sector price 2.68\". \"Shall not exceed\" allows equality, so the ceiling itself is available. The engine refuses nothing here. The power sector price plays no part in a distributor's price."
+  "explanation": "The ceiling is inclusive, and on the stated base price reported for 2026 the engine's reason reads \"the negotiated price 2.68 is at or below the commercial sector price 2.68, the ceiling for gas distributors (s.167(7))\". \"Shall not exceed\" allows equality, so the ceiling itself is available. The engine refuses nothing here. The power sector price plays no part in a distributor's price."
  },
  {
   "prompt": "A gas based industries call for urea states a CMPP of 450 US$ per tonne. The Fourth Schedule table holds NRP 1 and PRP 250. What price does the engine return?",
@@ -110,15 +110,15 @@
   "explanation": "The engine's message reads \"domesticBasePrice must be at or above the gas based industries floor US$0.90 per MMBtu (s.168(2)) for a gas based industry price, which is capped at the domestic base price (s.168(3)); got 0.8\": a ceiling below the floor leaves no price both rules allow. The engine does not choose one rule over the other. The base price is a stated input, and any figure at or above the floor is accepted."
  },
  {
-  "prompt": "Someone pricing the power sector also fills in negotiatedPrice with 2. Quote the engine's response.",
+  "prompt": "Someone pricing the power sector under price control also fills in negotiatedPrice with 2. Quote the engine's response.",
   "options": [
    "A power price of 2.000000, since a negotiated figure replaces the domestic base price for any sector",
-   "negotiatedPrice must be given only for sector 'gas-distributor'; got 2",
+   "negotiatedPrice must be given only for sector 'gas-distributor' while priceControlApplies is true; got 2",
    "negotiatedPrice must be stated for a gas distributor",
    "A power price with the negotiated figure ignored"
   ],
   "answer": 1,
-  "explanation": "The engine refuses the input by name: \"negotiatedPrice must be given only for sector 'gas-distributor'; got 2\". The power sector price is the domestic base price under s.167(5), so no negotiated figure replaces it. The message about a figure that must be stated is the refusal of a distributor call with no negotiated price. The engine never ignores an input it was given."
+  "explanation": "The engine refuses the input by name: \"negotiatedPrice must be given only for sector 'gas-distributor' while priceControlApplies is true; got 2\". Under price control the power sector price is the domestic base price under s.167(5), so no negotiated figure replaces it. The message about a figure that must be stated is the refusal of a distributor call with no negotiated price. The engine never ignores an input it was given."
  },
  {
   "prompt": "A power sector call states the base price reported for 2026 and a transport tariff, and the engine returns a price of 2.180000 and a delivered price of 2.980000. What does the engine's basis say about the two figures?",

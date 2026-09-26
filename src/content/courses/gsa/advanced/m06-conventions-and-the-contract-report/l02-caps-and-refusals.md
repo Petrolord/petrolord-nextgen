@@ -17,7 +17,7 @@ The cap on contract years is the one a whole-contract call can meet, and the mes
 
 ## The refusals of a whole-contract call
 
-The course tables 84 refusals across the engine's 9 functions. A whole-contract call meets the ledger's refusals with the path prefixed by contract, and its own. Three that this tier teaches:
+The course tables 90 refusals across the engine's 9 functions. A whole-contract call meets the ledger's refusals with the path prefixed by contract, and its own. Three that this tier teaches:
 
 > royalty must be an object { terrain, inCountrySharePct } (no default terrain); got nothing
 

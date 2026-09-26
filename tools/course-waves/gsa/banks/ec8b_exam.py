@@ -3,13 +3,311 @@ from bankkit import emit, finish
 Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
-# EC8 Associate final exam, 42 questions across the tier's six modules.
-# STUB written by the foundation. The bank writer replaces this comment and
-# adds 42 q(...) calls: q(key_position, prompt, correct, [three distractors],
-# explanation). Every figure is quoted from digest.txt; read BANK_TASK.md.
-# No exam question near-duplicates a module question (dupaxes at 0.45).
-# The emit line below writes to a LITERAL path, which the kit's
-# check-bank-sources reads; keep it as it is.
+# EC8 Associate final exam, 42 questions, seven from each of the tier's six
+# modules, each on a fact or an angle the module banks do not ask (dupaxes at
+# 0.45 against every module question). Every key rests on a digest-printed
+# line or an engine return re-run in
+# /root/cat-wip-gsa/scratch/bank-beginner/witness.mjs.
+
+# m01, what a gas sales agreement fixes
+q(1, "Which gazette reference belongs to the Petroleum Industry Act 2021 itself?",
+ "Act No. 6, Official Gazette No. 142, Vol. 108, 27 August 2021.",
+ ["Official Gazette No. 206, Vol. 109, 23 November 2022, which amended the Act.",
+  "The statutory instrument the Act was made under, S.I. No. 74.",
+  "An unnumbered, undated copy on a regulator's page."],
+ "The Act is Act No. 6, printed in Official Gazette No. 142, Vol. 108, dated 27 August 2021, and read for this course on 2026-09-26. Gazette No. 206 and S.I. No. 74 are the references of the 2022 Regulations made under the Act; an Act is not made under a statutory instrument. The unnumbered, undated copy describes the flaring Regulations of 2023.")
+
+q(3, "Which edition of the ESMAP report on long-term gas contracts does the course read?",
+ "ESMAP Report 152/93, January 1993, World Bank and UNDP.",
+ ["ESMAP Report 152/93 in its 2025 revision, published under Creative Commons Attribution 4.0.",
+  "The edition current as of October 2017, published jointly with the US Department of Energy.",
+  "The 2007 edition, whose pricing chapter prints Figure 51 and the heat-equivalence slope."],
+ "The course names ESMAP Report 152/93, Long-term Gas Contracts: Principles and Applications, January 1993, World Bank and UNDP, read on 2026-09-26. The 2025 Creative Commons text is the Commonwealth model gas sales agreement; October 2017 is the CLDP and US DOE guide; 2007 is the Energy Charter Secretariat's pricing study.")
+
+q(0, "What licence and date does the course record for the two HMRC Oil Taxation Manual pages it reads?",
+ "Both updated 19 December 2019, under the Open Government Licence.",
+ ["Licensed text, taught by concept only.",
+  "Creative Commons Attribution 4.0, in the 2025 edition of the model contract series.",
+  "Gazetted on 27 August 2021 beside the Act."],
+ "OT05435 and OT05402 are both updated 19 December 2019, Open Government Licence, and read on 2026-09-26, so the course quotes them with citation. The licensed text taught by concept only is the AIPN model agreement. Creative Commons Attribution 4.0 is the Commonwealth model agreement's licence, and a UK tax manual is no part of the Nigerian gazette.")
+
+q(2, "The oil-indexed Ekene contract runs from 2027 to 2036. What are its daily and take-or-pay terms?",
+ "A DCQ of 63000 MMBtu per day from 60 MMscf at 1050 Btu/scf, MaxDCQ 105 percent, take-or-pay 90 percent.",
+ ["A DCQ of 21000 MMBtu per day from 20 MMscf at 1050 Btu/scf, MaxDCQ 110 percent, take-or-pay 80 percent.",
+  "A DCQ of 63000 MMBtu per day from 60 MMscf at 1050 Btu/scf, MaxDCQ 110 percent, take-or-pay 80 percent.",
+  "A DCQ of 60 MMscf per day with no heating value stated, since the buyer takes feed gas by volume."],
+ "The export feed fixture states a DCQ of 63000 MMBtu per day (60 MMscf per day at 1050 Btu/scf), MaxDCQ 105 percent and take-or-pay 90 percent, running 2027 to 2036. The 21000 MMBtu, 110 percent and 80 percent terms are the power plant's. Both fixtures state their DCQ in energy with the heating value it came from.")
+
+q(2, "The power plant fixture plants a situation in 2032 for the take-or-pay year to find. Which one?",
+ "A take that lands precisely on the year's obligation, found at the boundary.",
+ ["A plant outage leaving a paid deficiency.",
+  "Force majeure of 42,000 and a seller shortfall of 6,300 reducing the Adjusted ACQ.",
+  "A zero nomination and a buyer-caused gap."],
+ "The fixture README's table reads \"2032: the take-or-pay quantity exactly met\", found by \"takeOrPay deficiency 0 at the boundary\". The plant outage with a deficiency is 2028, force majeure of 42,000 with a seller shortfall of 6,300 is 2027, and the zero nomination and buyer-caused gap are days of January 2027.")
+
+q(0, "What does the gas contract engine import, and from where?",
+ "npv, deriveGasRoyaltyRate and calendarDays, from engines/economics/cashflow.ts.",
+ ["A Monte Carlo sampler from the statistics library.",
+  "The domestic base price, from the regulator's circular.",
+  "Nothing at all: it carries its own NPV and royalty code alongside its contract rules."],
+ "The engine's one import is engines/economics/cashflow.ts, for npv, deriveGasRoyaltyRate and calendarDays. It carries no NPV, Monte Carlo or royalty code of its own, nothing in it samples, it makes no network call, and the domestic base price is a required input with no default.")
+
+q(3, "A day entry in a dailyBalance call spells forcemajeure in lower case. What does the engine return?",
+ "A refusal naming days[0].forcemajeure and listing the keys a day accepts.",
+ ["A result reading it as forceMajeure.",
+  "Force majeure taken as 0, with a reason.",
+  "A result in which the whole day counts as force majeure until the key is fixed."],
+ "The engine's own words: \"days[0].forcemajeure is not an accepted key; the accepted keys of days[0] are date, nominated, available, taken, forceMajeure, maintenance, buyerCaused\". An input key a function does not read is refused at whatever level it sits, with its path and the accepted keys, so no term is ever silently dropped or guessed.")
+
+# m02, volume to energy
+q(1, "Sixty million standard cubic feet a day of the export feed's gas, at its stated 1050 Btu/scf gross: which two energy figures does the view print?",
+ "63000.000000 MMBtu and 66468.518715 GJ.",
+ ["66468.518715 MMBtu and 63000.000000 GJ, the two tiles reading the other way.",
+  "63000.000000 MMBtu and 63000.000000 GJ, a gross figure needing no constant.",
+  "21000.000000 MMBtu and 22156.172905 GJ, the per-train figure of the export DCQ."],
+ "On the imperial route the MMBtu tile is the plain product divided by a million, so the export DCQ is 63000.000000 MMBtu; the gigajoule tile applies 1055.05585262 MJ per MMBtu and prints 66468.518715. The pair 21000.000000 and 22156.172905 belongs to the power plant's 20 MMscf, and swapping or dropping the constant gives the other two options.")
+
+q(3, "A small meter reading of 1000 scf carries a heating value quoted as 39 MJ/Sm3 gross. What energy results?",
+ "1.046728 MMBtu.",
+ ["39.000000 MMBtu, as the scf volume is read as Sm3 by the engine without any conversion.",
+  "1.104357 MMBtu, the product of the volume and the heating value with no Btu constant.",
+  "A refusal, since the engine takes a metric heating value only with a metric volume."],
+ "The engine first turns standard cubic feet into standard cubic metres by the exact cubic-foot factor, applies the megajoule heating value, then divides by the megajoules in one MMBtu: 1.046728 MMBtu, or 1.104357 GJ. That GJ figure is what skipping the last division gives. Unlike units are accepted together, with one set of reference conditions assumed.")
+
+q(0, "What separates the gross heating value of a gas from its net heating value?",
+ "Gross counts the heat of condensing the water that burning makes; net leaves it out.",
+ ["Gross is measured at 60 F and net at 15 C.",
+  "Gross includes the heat of any liquids removed at the plant; net counts the dry gas only.",
+  "Gross comes before the Btu constant, net after it."],
+ "Burning natural gas makes water. The gross, or higher, heating value counts the heat recovered when that water condenses; the net, or lower, value leaves it out. The difference is chemistry: reference conditions are a separate statement, and the Btu constant converts units without changing either basis.")
+
+q(2, "The cubic-foot-to-cubic-metre factor, 0.028316846592, rests on what?",
+ "(0.3048 m) cubed, exact.",
+ ["A measured volume at 15 C and 101.325 kPa, updated with each edition of NIST SP 811.",
+  "The ratio of the power plant's 60 F conditions to the golden cases' 15 C conditions.",
+  "A rounding the EIA energy calculator prints, read for this course on 2026-09-26."],
+ "UNITS.M3_PER_FT3 is 0.028316846592, (0.3048 m) cubed, exact. It is pure geometry, so a mixed pair applies it and makes no correction for temperature or pressure; it has nothing to do with either set of reference conditions or with any published calculator.")
+
+q(1, "Both Ekene fixtures state their heating value on one basis. Which, and why does it matter?",
+ "Gross; every figure built on the DCQ inherits that basis.",
+ ["Net, as no heat is recovered from the water.",
+  "Gross for the power plant and net for the export feed, each buyer choosing its own basis.",
+  "Neither; the engine ignores the basis."],
+ "Both fixtures state 1050 Btu/scf gross. Every quantity downstream of the DCQ carries the basis, so a gross DCQ cannot be compared with a take converted on a net basis until one is restated. The engine does the same arithmetic on either value, which is exactly why the stated basis must be the right one: the label travels with the number.")
+
+q(3, "How should a learner quote the power plant's daily contract quantity in energy?",
+ "21000.000000 MMBtu, on a gross basis.",
+ ["21000 MMBtu, with no basis needed for a daily figure.",
+  "22156.172905 MMBtu, net.",
+  "20 MMscf, the volume, since energy is only an invoice unit and has no place in a contract."],
+ "The course quotes every energy figure with its basis, at six decimals: the power plant's DCQ is 21000.000000 MMBtu on a gross basis. 22156.172905 is that energy in GJ on the same gross basis. The contract counts quantity in energy; the volume is where the energy came from.")
+
+q(0, "Zero cubic metres go into the volume-to-energy view. Refused, or returned?",
+ "Returned: 0.000000 MMBtu and 0.000000 GJ, with the rule printed as usual.",
+ ["Refused: quantity must be a finite number above 0.",
+  "Refused, naming referenceConditions, since no gas was measured.",
+  "Returned blank, with a reason saying no gas was delivered."],
+ "The golden case energy-zero-quantity returns 0.000000 MMBtu and 0.000000 GJ with the metric rule line. The refusal is for a negative quantity: the engine's words are \"quantity must be a finite number at or above 0; got -1\". A zero quantity is a result.")
+
+# m03, contract quantities
+q(2, "Stated as running from 1 January 2027 up to 1 January 2028, how long is the export feed's contract year, and what does it hold?",
+ "22995000.000000 MMBtu over 365 days, the closing date left out.",
+ ["23058000.000000 MMBtu over 366 days, both dates counted.",
+  "A refusal, as a period stated this way must stop on 31 December of its year.",
+  "7665000.000000 MMBtu over 365 days, at the power plant's DCQ."],
+ "The engine counts a period from its first date up to its closing date and leaves the closing date out, which is how a contract year that finishes on the following 1 January is written. That gives 365 days, and at 63000 a day 22995000.000000. The leap-year export figure is 23058000.000000, and 7665000.000000 belongs to the power plant.")
+
+q(0, "At a DCQ of 1000, what does calendar year 2000 give?",
+ "366 days and an ACQ of 366000.000000: a century year divisible by four hundred.",
+ ["365 days and 365000.000000, because century years are never leap years.",
+  "A refusal, since 2000 lies before the Act.",
+  "366 days, but an ACQ of 365000.000000."],
+ "The engine's day count reads \"calendar year 2000: 366 days (a leap year)\", and 1000 x 366 is 366000.000000. A century year is a leap year only when it divides by four hundred, which 2000 does and 2100 does not. A calendar year carries no legal date limit, and the ACQ is always the DCQ times the days counted.")
+
+q(3, "HMRC's own example states a DCQ of 100, 365 days, MaxDCQ 150 percent and take-or-pay 90 percent. What MaxDCQ and swing factor does the engine return?",
+ "150.000000 and 1.500000.",
+ ["1.666667 and 1.500000, since MaxDCQ is quoted as a ratio.",
+  "36500.000000 and 1.666667, the ACQ and the effective swing.",
+  "150.000000 and 1.666667, the swing factor divided by the take-or-pay fraction."],
+ "The golden case returns MaxDCQ 150.000000 (150 percent of 100), swing factor 1.500000, ACQ 36500.000000, take-or-pay quantity 32850.000000 and effective swing 1.666667. The swing factor is MaxDCQ / DCQ; dividing it by the take-or-pay fraction gives the EFFECTIVE swing, a different figure.")
+
+q(1, "A learner types \"2027-02-30\" as the first day of a contract year. What does the engine return?",
+ "A refusal: period.start must be a real date.",
+ ["A period starting on 2027-03-02, the date rolled forward by the calendar.",
+  "A period starting on 2027-02-28, the last real day of that February in 2027.",
+  "A result for 365 days, the period read as calendar year 2027."],
+ "The engine's own words: \"period.start must be a real date 'YYYY-MM-DD'; got \"2027-02-30\"\". A date that does not exist on the calendar is refused before anything is counted. The engine neither rolls a date forward nor back, and a period never becomes a calendar year.")
+
+q(1, "A contract's effective swing rises. Which side does that favour, according to the course?",
+ "The buyer, who may take much on busy days and little on quiet ones and still meet its obligation.",
+ ["The seller, whose facilities then run at a steadier daily load through the contract year.",
+  "Neither side: effective swing enters every deficiency payment the engine computes.",
+  "The regulator, since effective swing fixes the domestic gas delivery obligation."],
+ "A higher effective swing gives the buyer more room: it can nominate up to MaxDCQ on peak days and take little on others while still reaching its take-or-pay level. A lower one lets the seller run closer to a steady load. Nothing in the engine turns effective swing into a quantity or a payment; it is a measure for comparing contracts and sizing facilities.")
+
+q(3, "Fifty thousand a day for 360 stated days, take-or-pay set to zero, no MaxDCQ at all: what comes back?",
+ "18000000.000000 for the ACQ, with nothing owed under take-or-pay.",
+ ["A refusal for a take-or-pay percentage of 0.",
+  "18000000.000000 for the ACQ and an effective swing of 0.000000 beside it.",
+  "An ACQ of 17500000.000000, read as 350 days."],
+ "The golden case cq-top-zero-without-swing returns an ACQ of 18000000.000000, a take-or-pay quantity of 0.000000 and no effective swing. A zero percentage is refused only when a MaxDCQ is stated, because the effective swing would divide by it. 17500000.000000 is the 350-day case.")
+
+q(2, "In how many ways, and which, may a contractQuantities call state its day count?",
+ "Three: a stated number of days, a calendar year, or a period whose end date is excluded.",
+ ["Two: a calendar year or a stated number of days, a period being refused as too loose.",
+  "One: a calendar year, since every contract year runs from 1 January to 31 December.",
+  "Any mix of the three, the engine summing them into one count for the ACQ."],
+ "The engine takes days, year or period, exactly one of them. A period's end date is excluded, as a contract year that finishes on the following 1 January. Two counts at once are refused, and so is none, so the ACQ never rests on a count the contract did not state.")
+
+# m04, the daily balance
+q(0, "A golden day is flagged buyerCaused: 100 properly nominated, 20 made available. In whose column does the missing 80 land, and why?",
+ "The buyer's, because the flag places the cause on its side.",
+ ["The seller's, as it made only 20 of the 100 available.",
+  "Neither column; the engine treats the flag like force majeure.",
+  "Both columns, split between the buyer and the seller."],
+ "With buyerCaused set true the engine counts no seller shortfall, keeps the adjusted DCQ at 100 and books the 80 as buyer shortfall. Without the flag the same day would be the seller's failure, and force majeure, a different input, would lift the gap off both sides. The flag takes true or false only.")
+
+q(2, "The January 2027 daily balance prints an ACQ for the days of 651000.000000. Where does that figure come from?",
+ "The 31 days of January at the DCQ of 21000.",
+ ["The Adjusted ACQ plus buyer shortfall.",
+  "The sum of the month's nominations, capped each day at MaxDCQ, less the over-take.",
+  "One twelfth of the year's ACQ, 7665000.000000, rounded to the whole day."],
+ "The ACQ for the days is 31 days at the DCQ, 651000.000000. Take off the maintenance (10500.000000), the force majeure (42000.000000) and the seller shortfall (6300.000000) and you have the Adjusted ACQ for the days, 592200.000000. Nominations and takes do not enter the ACQ, and the engine never divides the year.")
+
+q(1, "On 2027-01-25 the power plant's buyer took 23100 against a DCQ of 21000. What over-take does the engine return for the day?",
+ "2100.000000.",
+ ["1050.000000, the part of the nomination above MaxDCQ that was never properly nominated.",
+  "23100.000000, the whole of the day's take, all of it counted as over-take.",
+  "0.000000, since gas taken within MaxDCQ is never counted as over-take by the engine."],
+ "Over-take is the gas taken above the adjusted DCQ: 23100 less 21000 is 2100.000000. The 1050 above MaxDCQ was never properly nominated or made available, so it was not taken either. Over-take is carried to the month's totals, where it offsets buyer shortfall in the reconciliation identity.")
+
+q(3, "A dailyBalance call lists 2027-03-02 and then 2027-03-02 again. What does the engine return?",
+ "A refusal: each day's date must come after the one before.",
+ ["Both entries merged into one day's figures.",
+  "A result that keeps the later entry and drops the first.",
+  "A result for both entries, with a reason naming the repeat."],
+ "The engine's own words: \"days[1].date must be after the previous day 2027-03-02; got \"2027-03-02\"\". Days must be real dates in ascending order, and a quantity or a sequence that cannot be true is refused before anything is computed. The engine never merges, drops or keeps a duplicate day.")
+
+q(0, "In which order does the engine's rule build a day's seller shortfall?",
+ "The properly nominated quantity, less the tolerance, less the gas made available, less the force majeure and maintenance of the day.",
+ ["The DCQ less the gas taken, less the tolerance, with force majeure then added back.",
+  "The nomination less the gas taken, before any cap at MaxDCQ is applied to it.",
+  "The adjusted DCQ less the gas made available, with the tolerance ignored."],
+ "The rule, in the engine's basis: seller shortfall = (PNQ - tolerance) - available, less the force majeure and maintenance stated for the day, none on a buyer-caused day. The yardstick is the properly nominated quantity, which is the nomination capped at MaxDCQ, and the engine measures against the gas made available as its stated reading.")
+
+q(2, "Force majeure of 100 blankets a day on which the buyer still nominated 100 and nothing flowed. What comes back?",
+ "Nothing owed by either side; the adjusted DCQ falls to 0.000000.",
+ ["Seller liable for all 100, the nomination unmet.",
+  "A buyer shortfall of 100.000000, the nomination left untaken.",
+  "A refusal, as a nomination on a force majeure day is contradictory and the engine cannot reconcile it."],
+ "The engine's reasons, verbatim: \"2027-03-01: 100 not made available is excused by the force majeure and maintenance quantities stated for the day\" and \"2027-03-01: force majeure and maintenance cover the whole DCQ; no quantity is owed either way for the day\". A nomination may stand on such a day; force majeure lifts the gap off both sides.")
+
+q(3, "The power plant's January 2027 totals print force majeure of 42000.000000. Which days carry it?",
+ "2027-01-12 and 2027-01-13, each with 21000.",
+ ["2027-01-20, the day the seller made only 15750 available.",
+  "2027-01-28, the maintenance day.",
+  "Every day of the month, spread evenly across the thirty-one of them."],
+ "The day table shows force majeure of 21000.000000 on 2027-01-12 and on 2027-01-13, two whole days, 42000.000000 in all. 2027-01-20 is the seller shortfall of 6300.000000, and 2027-01-28 carries maintenance of 10500.000000, a separate column.")
+
+# m05, take-or-pay basics
+q(1, "How does the Commonwealth model gas sales agreement (2025) state the take-or-pay percentage in its definition of Take or Pay Quantity?",
+ "As [## INSERT] percent of the Adjusted ACQ, left for the parties.",
+ ["As 80 percent of the ACQ, the model's printed default for power sector contracts.",
+  "As 90 percent of the Adjusted ACQ, the figure OIES reports as the market norm.",
+  "As a percentage the regulator fixes each year under PIA s.167(1)."],
+ "The definition reads: \"quantity of Gas equal to [## INSERT] percent (##%) of the Adjusted Annual Contract Quantity for that Contract Year.\" The model leaves the figure blank, and the engine takes topPct as an input with no default. The 80 and 90 percent of the Ekene fixtures are those synthetic agreements' own terms, and PIA s.167(1) concerns the domestic base price.")
+
+q(3, "What does the model agreement's definition of BADQ, the buyer's annual deficiency quantity, open with?",
+ "A contract year in which the buyer does not take at least the take-or-pay quantity.",
+ ["A day on which the buyer takes less than the DCQ it nominated.",
+  "A year in which the seller fails to make the ACQ available.",
+  "Any shortfall at the delivery point, whichever side caused it."],
+ "The definition opens: \"means for any Contract Year in which Buyer does not take at least the Take or Pay Quantity,\". It is annual, measured against the take-or-pay quantity, and it is the buyer's. A day's gap is a buyer shortfall carried to the year's end, and the seller's failure is a seller shortfall, which reduces the Adjusted ACQ.")
+
+q(0, "What is the permitted reduction in the engine's Adjusted ACQ rule?",
+ "A contract's own further reduction, such as an operational flexibility credit, stated for every year, 0 if none.",
+ ["The share of the ACQ the buyer may leave untaken each year before any deficiency arises.",
+  "The seller shortfall damages, deducted from the ACQ at the stated shortfall price.",
+  "A reduction the engine applies by default when the ACQ falls in a leap year."],
+ "The rule: Adjusted ACQ = ACQ - maintenance - force majeure - seller shortfall - permitted reduction. The model agreement's definition ends \"and if applicable less the Operational Flexibility Credit\"; the engine takes the permitted reduction as a required input for every contract year, 0 when the contract permits none, and refuses a year that leaves it out. The untaken share is what the take-or-pay percentage governs, damages are money, and no reduction is applied by default.")
+
+q(2, "Two figures near the take-or-pay edge print the same at six decimals. What decides whether the take-or-pay quantity was met?",
+ "The deficiency the engine returns on the exact numbers.",
+ ["Their printed agreement, read as equality.",
+  "A comparison of the two figures by eye, rounded to four decimals first.",
+  "The reason line's round-trip figures."],
+ "The engine compares exact numbers. Two figures that print alike at six decimals are not, for that reason alone, met or equal: printed alike is not equal. Only the engine's own deficiency says whether the take-or-pay quantity was met, and the course keys a figure as equal only where it checks the engine's two values equal exactly.")
+
+q(1, "Why does the engine refuse a take-or-pay year that states no makeUp object, even when only one year is run?",
+ "It must know what happens to a deficiency, and the make-up terms carry no default.",
+ ["A single contract year always opens make-up, which the engine cannot price without terms.",
+  "Its make-up price is required to compute the deficiency payment of the year in every case.",
+  "A one-year run is refused outright; the engine reconciles two years at the least."],
+ "The engine's own words: \"makeUp must be an object { periodYears, order, endOfTerm } (no default); got nothing\". The make-up period, the recovery order and the end-of-term rule are contract terms the engine will not guess. A one-year case runs once they are stated, and the deficiency payment uses the take-or-pay price.")
+
+q(3, "The power plant states take-or-pay at 80 percent and the export feed at 90 percent. What does the course say the higher percentage expresses?",
+ "Steadier revenue the seller can finance a development on.",
+ ["More room for the buyer to take less gas in a poor year without paying for it.",
+  "A larger MaxDCQ, the two moving together.",
+  "A lower effective swing for the buyer, which the Act requires of export sales."],
+ "A high take-or-pay percentage, such as the export feed's 90, gives the seller a steady revenue it can finance on; a lower one, such as the power plant's 80, gives the buyer more room in a bad year. The percentage is negotiated alongside swing, and effective swing combines the two; no Act sets it.")
+
+q(0, "Two views print two take-or-pay figures for the plant's 2027. Why does the one-year reconciliation owe less than the planning figure?",
+ "Force majeure and the seller shortfall come off the ACQ before the percentage applies.",
+ ["The contract quantities view uses 90 percent and the take-or-pay view uses 80.",
+  "Over-take of the year, deducted from the quantity owed.",
+  "The take-or-pay view counts 2027 as a leap year of 366 days, and the other does not."],
+ "The contract quantities view applies 80 percent to the full ACQ, 6132000.000000, before any adjustment. The take-or-pay year first takes off the force majeure of 42000 and the seller shortfall of 6300, reaching an Adjusted ACQ of 7616700.000000, and 80 percent of that is 6093360.000000. Both views use the same percentage and the same 365-day year.")
+
+# m06, reading one contract year
+q(2, "In a single contract year at this tier, which terms of the engine's money sum are zero, and why?",
+ "Make-up taken and the refund: make-up belongs to a later year and a refund to the end of a longer term.",
+ ["The deficiency payment and the damages, which the engine settles only in the year after.",
+  "The counted gas and the contract price, which one year leaves to the take-or-pay price.",
+  "None: every term is live in each year, including any refund due at the end of the term."],
+ "Money in a contract year is counted x contract price + make-up taken x make-up price + deficiency payment - seller shortfall x shortfall price - refund. In one year no make-up is taken and no refund arises, which leaves the counted gas at the contract price, the deficiency payment and any seller shortfall damages.")
+
+q(1, "What does a deficiency payment the engine computes NOT say?",
+ "What a buyer will actually pay; it is what the stated clauses produce on stated takes.",
+ ["Which take-or-pay percentage and price produced it, since the engine prints neither of the two.",
+  "Whether the year had a deficiency at all, which the reason line alone reports.",
+  "How much gas was counted, which the one take-or-pay year view leaves unprinted."],
+ "A computed figure is no forecast: a deficiency payment is what the stated clauses produce on stated takes. The engine prints the percentage, the price in its reason, the deficiency and the counted gas, and the course quotes each figure with the terms it depends on.")
+
+q(3, "The single-year golden case pays 1200.000000. What must be quoted beside that figure?",
+ "Its take-or-pay percentage of 90 and its take-or-pay price.",
+ ["The domestic base price, as reported.",
+  "The make-up period, since the payment is refunded when the make-up period ends.",
+  "Nothing: a deficiency payment is a fixed sum under Article 12.6 of the model."],
+ "A figure that depends on a term is quoted with it: a deficiency payment with its take-or-pay percentage and price. Change either and the payment changes. The golden case prices at its own stated take-or-pay price, the model agreement leaves both terms to the parties, and nothing in one year refunds a payment.")
+
+q(0, "Which of these can an Associate capstone value never depend on?",
+ "The domestic base price.",
+ ["The day count the capstone card states for its contract year and the calendar it reads.",
+  "The heating value basis and the reference conditions stated on the card for the volume.",
+  "The take-or-pay price stated for the contract year, apart from its contract price."],
+ "Each graded value is a return value of the engine on the card's stated terms, and none uses the domestic base price, which is quoted only as reported; each is also the same number under every reading the engine states. The day count, the heating value basis and the take-or-pay price are stated terms every graded figure may rest on.")
+
+q(2, "What is the mirror of take-or-pay in a gas sales agreement?",
+ "Damages the seller pays for properly nominated gas it did not make available.",
+ ["Make-up, which the seller owes when it cannot deliver in the year.",
+  "Over-take, which the buyer pays at the contract price on busy days.",
+  "The Domestic Gas Delivery Obligation penalty, paid by the buyer."],
+ "Take-or-pay protects the seller against a buyer that does not take; the mirror clause protects the buyer against a seller that does not deliver, with damages per unit at a stated rate. Make-up is gas the buyer paid for and takes later, over-take is ordinary gas taken above the adjusted DCQ, and the DGDO penalty falls on a lessee under the Act.")
+
+q(3, "In the one take-or-pay year view, what is regular revenue?",
+ "The counted gas at the contract price.",
+ ["The deficiency payment plus the counted gas, at the take-or-pay price of the year.",
+  "The net to the seller before any refund at the end of the delivery period is paid.",
+  "The take-or-pay quantity at the contract price, whatever the buyer actually took."],
+ "The panel prints each year's regular revenue, the counted gas at the contract price, beside the deficiency payment, the shortfall damages and the net to the seller. Regular revenue plus the deficiency payment, less the shortfall damages, gives the net in a single year with no make-up or refund.")
+
+q(1, "The quantity calculator's reasons print figures such as 1.5 and 7875. How should a learner use them?",
+ "To understand a result, quoting the fields at six decimals when stating it.",
+ ["Quote them directly, because a reason carries the exact double the engine holds.",
+  "As estimates to be checked against the tiles, which the panel rounds for display.",
+  "As refusals whenever they appear, since a reason means the engine stopped."],
+ "A figure inside a reason is the shortest decimal that reads back to the value the engine holds, so it can carry many digits or few. The course quotes the numeric fields at six decimals, and a reason may appear only verbatim as the engine's own words. A reason sits beside a result; a refusal returns no figures.")
 
 emit(Q, '/root/cat-wip-gsa/banks/ec8b_exam.json', expect_n=42)
 finish()

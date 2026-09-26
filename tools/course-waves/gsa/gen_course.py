@@ -201,7 +201,8 @@ ORDER_WORDS = {'after-adjusted-acq': "only after the year's Adjusted ACQ is take
                'after-top-quantity': "only after the year's take-or-pay quantity is taken (after-top-quantity)",
                'first': 'in priority, before the year\'s own quantity (first)'}
 BASIS_WORDS = {'annual-average': 'the annual average of its monthly prices (annual-average)', 'last-month': "its last month's price (last-month)"}
-FREE = ("No value depends on any of the four readings the engine states, and no value uses the domestic base price.")
+FREE = ("Every contract year states its permitted reduction (0 where the contract permits none). No value depends on any of the four readings the engine states, and no value uses the domestic base price "
+        "or the price control of PIA s.167 (priceControlApplies): no call of this case prices gas under s.167 or s.168.")
 
 
 def price_text(p):
@@ -265,6 +266,14 @@ for v in (OZ['quantities']['dcq'], OZ['quantities']['maxDcqPct'], OZ['quantities
         bad.append(f'beginner prompt does not state {n(v)}')
 if 'carryForward' in NW['contract'] and n(NW['contract']['carryForward']['capPct']) not in NUMS['advanced']:
     bad.append('the Expert prompt does not state the carry-forward cap')
+for tier, c in (('beginner', OZ), ('intermediate', IF), ('advanced', NW)):
+    yrs = (c.get('year') or c.get('contract'))['years']
+    if not all('permittedReduction' in y for y in yrs):
+        bad.append(f'{tier}: a contract year does not state permittedReduction')
+    if 'permitted reduction' not in PROMPTS[tier] or 'priceControlApplies' not in PROMPTS[tier]:
+        bad.append(f'{tier} prompt does not state the permitted reduction and the price control')
+    if 'domestic' in c:
+        bad.append(f'{tier}: a capstone case prices gas under s.167, which its prompt says none does')
 for tier in TIERS:
     if FREE not in PROMPTS[tier]:
         bad.append(f'{tier} prompt does not say that no value depends on a stated reading or the domestic base price')

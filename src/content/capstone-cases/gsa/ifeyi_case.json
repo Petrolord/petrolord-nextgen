@@ -493,12 +493,14 @@
     "acq": 11437500,
     "forceMajeure": 468750,
     "maintenance": 93750,
+    "permittedReduction": 0,
     "taken": 7812500.5
    },
    {
     "year": 2029,
     "acq": 11406250,
     "maintenance": 93750,
+    "permittedReduction": 0,
     "taken": 11562500.25
    },
    {
@@ -507,12 +509,14 @@
     "maintenance": 62500,
     "sellerShortfall": 125000.5,
     "shortfallPrice": 1.15,
+    "permittedReduction": 0,
     "taken": 8750000.75
    },
    {
     "year": 2031,
     "acq": 11406250,
     "maintenance": 93750,
+    "permittedReduction": 0,
     "taken": 11968750.5
    },
    {
@@ -521,12 +525,14 @@
     "maintenance": 93750,
     "sellerShortfall": 218750.25,
     "shortfallPrice": 1.15,
+    "permittedReduction": 0,
     "taken": 11187500
    },
    {
     "year": 2033,
     "acq": 11406250,
     "maintenance": 93750,
+    "permittedReduction": 0,
     "taken": 11250000.75
    }
   ]

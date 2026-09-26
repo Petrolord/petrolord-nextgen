@@ -86,7 +86,7 @@ text is EXACTLY a string the digest prints. The export refund reason prints
 
 ## THE REFUSALS, BY NAME
 
-Digest section 5 tables 84 refusals. **Quote the engine's message in a
+Digest section 5 tables 90 refusals. **Quote the engine's message in a
 blockquote.** The ones each tier must teach:
 
 * Associate m01 l05 to m05: an unknown key (heatingvalue), a unit the engine

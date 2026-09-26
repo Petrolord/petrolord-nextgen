@@ -14,13 +14,13 @@ The course puts the comparison in one line: a contract slope below the parity sl
 | the Ekene export feed agreement (synthetic) | 0.12 | 0.172414 | below parity |
 | parity itself | 0.172414 | 0.172414 | at parity |
 
-The Ekene export feed agreement is synthetic, written for this platform. Its price is 0.5 + 0.12 x the oil index averaged over 6 months ending 1 month before the priced month, reset every 3 months. Its slope of 0.12 is well below the parity slope,, and its constant of 0.5 lifts every price by the same amount.
+The Ekene export feed agreement is synthetic, written for this platform. Its price is 0.5 + 0.12 x the oil index averaged over 6 months ending 1 month before the priced month, reset every 3 months. Its slope of 0.12 is well below the parity slope, and its constant of 0.5 lifts every price by the same amount.
 
 ## Why a buyer and a seller settle below parity
 
 Gas has to be moved by pipeline or liquefied, it cannot always replace oil in a given use, and a long contract binds both parties for years. The constant does part of the work: a seller may accept a low slope for a higher constant, which keeps the gas price up when oil is low.
 
-So the slope alone does not describe a price. A slope of 0.1485 with a constant of 0.8 and a slope of 0.12 with a constant of 0.5 cross at some oil price, and which is higher depends on where oil sits.
+So the slope alone does not describe a price. A slope of 0.1485 with a constant of 0.8 and a slope of 0.12 with a constant of 0.5 cross only at a negative oil price, so the first line is the higher at every real oil price, and the gap between them widens as oil rises.
 
 ## Linking to a gas hub
 

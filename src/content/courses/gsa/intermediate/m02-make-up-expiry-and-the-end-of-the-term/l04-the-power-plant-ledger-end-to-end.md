@@ -52,3 +52,4 @@ Work in the course's own ledger calculator, on the view "The take-or-pay ledger"
 2. Reduce the 2032 `taken` by one MMBtu. Write the new 2032 deficiency and deficiency payment, and say which later rows change.
 3. Restore 2032 and change `order` to "after-top-quantity". Run the make-up account check again and write which year's make-up taken moved first.
 4. Write the terms you would quote beside the total deficiency payment, following the course's rule for a figure that depends on a term.
+5. Choose the start "The export feed" and compare its recovery order, make-up period and end-of-term rule with the power plant's. Write one sentence on what each difference does to the make-up account.

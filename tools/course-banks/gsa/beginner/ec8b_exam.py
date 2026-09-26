@@ -225,11 +225,11 @@ q(3, "What does the model agreement's definition of BADQ, the buyer's annual def
  "The definition opens: \"means for any Contract Year in which Buyer does not take at least the Take or Pay Quantity,\". It is annual, measured against the take-or-pay quantity, and it is the buyer's. A day's gap is a buyer shortfall carried to the year's end, and the seller's failure is a seller shortfall, which reduces the Adjusted ACQ.")
 
 q(0, "What is the permitted reduction in the engine's Adjusted ACQ rule?",
- "A contract's own further reduction, such as an operational flexibility credit, stated explicitly and zero unless stated.",
+ "A contract's own further reduction, such as an operational flexibility credit, stated for every year, 0 if none.",
  ["The share of the ACQ the buyer may leave untaken each year before any deficiency arises.",
   "The seller shortfall damages, deducted from the ACQ at the stated shortfall price.",
   "A reduction the engine applies by default when the ACQ falls in a leap year."],
- "The rule: Adjusted ACQ = ACQ - maintenance - force majeure - seller shortfall - permitted reduction. The model agreement's definition ends \"and if applicable less the Operational Flexibility Credit\"; the engine takes the permitted reduction as an explicit input. The untaken share is what the take-or-pay percentage governs, damages are money, and no reduction is applied by default.")
+ "The rule: Adjusted ACQ = ACQ - maintenance - force majeure - seller shortfall - permitted reduction. The model agreement's definition ends \"and if applicable less the Operational Flexibility Credit\"; the engine takes the permitted reduction as a required input for every contract year, 0 when the contract permits none, and refuses a year that leaves it out. The untaken share is what the take-or-pay percentage governs, damages are money, and no reduction is applied by default.")
 
 q(2, "Two figures near the take-or-pay edge print the same at six decimals. What decides whether the take-or-pay quantity was met?",
  "The deficiency the engine returns on the exact numbers.",

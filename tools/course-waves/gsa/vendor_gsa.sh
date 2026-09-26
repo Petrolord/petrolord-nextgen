@@ -30,8 +30,9 @@ set -euo pipefail
 ENG=/root/petrolord-engines
 NG=${NG:-/root/wt-ec8-nextgen}
 PIN=$(python3 -c "import json,sys;print(json.load(open(sys.argv[1]))['canonical']['commit'])" "$NG/packages/engines/VENDOR.json")
-# Vendored at d745b88 (engines PR #267, gasContract.js and its validation kit).
-REV=${REV:-d745b88}
+# Vendored at d745b88 (engines PR #267, gasContract.js and its validation kit); re-vendored at
+# 7f5d462 (engines PR #268, the s.167(7) ceiling held, priceControlApplies and permittedReduction required).
+REV=${REV:-7f5d462}
 FULL=$(git -C "$ENG" rev-parse "$REV^{commit}")
 EXP=$(mktemp -d)
 LEDGER_PY=$(mktemp)
@@ -195,7 +196,7 @@ for p in paths:
     added.append({
         'path': p, 'kind': kind, 'group': GROUP, 'vendoredSha': blob,
         'reason': (f"EC8 gsa course: vendored sha-identical from petrolord-engines {full[:7]} "
-                   f"(PR #267: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, "
+                   f"(PRs #267 and #268: engines/economics/gasContract.js, its jest suite, golden, the ekene-gsa fixtures and their writer, oracle, "
                    f"timing script, FINDINGS, negative control) by the wave's vendor_procurement.sh, 4 proofs per path. "
                    f"{'New since' if kind == 'extra' else 'Differing from'} the canonical pin {pin[:7]}, which stays: moving it "
                    f"would also move paths other courses grade. "

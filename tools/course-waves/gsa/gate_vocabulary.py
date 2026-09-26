@@ -71,7 +71,12 @@ REPORT = [
     ('take or pay unhyphenated', re.compile(r'\btake or pay\b', re.I)),
 ]
 
-EXEMPT = []
+EXEMPT = [
+    # The Act's own words (PIA s.167(3)(b)), quoted verbatim and checked by quote_check.py.
+    'and at such time the provisions of subsections (4), (5), (6) and (7) and section 168 shall no longer be applicable',
+    # The engine's reason and basis, which quote or paraphrase that subsection.
+    'because s.167(4) to (7) and s.168 no longer apply once the free-market criteria are met (s.167(3)(b))',
+]
 
 # A reported domestic price figure on a LINE (a paragraph, a table row, a
 # bullet) that nowhere says "reported" is a breach.
@@ -142,7 +147,7 @@ def main():
     for label, t in texts:
         u = unwrap(t)
         for e in EXEMPT:
-            if label.startswith('digest') and e in u:
+            if e in u:
                 hit.add(e)
                 u = u.replace(e, ' ' * len(e))
         for name, rx in RULES:

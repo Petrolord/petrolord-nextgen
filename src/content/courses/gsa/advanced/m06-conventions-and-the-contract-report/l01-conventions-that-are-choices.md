@@ -20,7 +20,7 @@ Every figure the engine returns rests on stated terms, stated readings and a han
 
 Beside them sit the engine's stated readings: the seller shortfall against the quantity made available, the make-up right equal to the deficiency paid with none from the last year, and royalty on the value of gas delivered. A reading is where a text is open or odd; a convention is where no text speaks at all. A report names both.
 
-## Three that move figures the most
+## Five that move figures
 
 **The index window.** A lag of zero ends the window at the delivery month itself; the model agreement ends it one month before the review month. The Ekene export feed (synthetic) states a lag of 1, so its window ends the month before the priced month, and its 2027-01 block averages 2026-07 to 2026-12. Change the lag and every export price moves.
 

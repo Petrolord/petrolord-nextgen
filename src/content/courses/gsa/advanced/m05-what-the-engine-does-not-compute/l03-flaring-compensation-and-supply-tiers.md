@@ -32,7 +32,7 @@ The Regulations give the Commission a deadline to test a claimed excuse:
 
 The engine applies the excuses as the caller states them and follows no timetable. Its basis says so, verbatim:
 
-> the 90-day investigation rule of r.6(3) and the compensation to customer-clients of s.110(13) are not computed.
+> the 90-day investigation rule of r.6(3) and the compensation to customer-clients of s.110(13) are not computed
 
 ## The supply tiers and the supply curve
 

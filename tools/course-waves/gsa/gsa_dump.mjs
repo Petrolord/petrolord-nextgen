@@ -149,7 +149,8 @@ const P = G.PIA_GAS;
 const PROBES = {
   cq: { dcq: 100, days: 365, maxDcqPct: 100, topPct: 80 },
   day: { dcq: 100, maxDcqPct: 120, days: [{ date: '2027-03-01', nominated: 120, available: 120, taken: 120 }] },
-  cap: { years: [{ year: 2027, acq: 1000, taken: 1100, contractPrice: 3, topPrice: 3, makeUpPrice: 0 }, { year: 2028, acq: 1000, taken: 700, contractPrice: 3, topPrice: 3, makeUpPrice: 0 }], topPct: 80, makeUp: { periodYears: 0, order: 'after-adjusted-acq', endOfTerm: 'forfeit' }, carryForward: { periodYears: 1, base: 'top-quantity', capPct: 50 } },
+  cap: { years: [{ year: 2027, acq: 1000, taken: 1100, contractPrice: 3, topPrice: 3, makeUpPrice: 0, permittedReduction: 0 }, { year: 2028, acq: 1000, taken: 700, contractPrice: 3, topPrice: 3, makeUpPrice: 0, permittedReduction: 0 }], topPct: 80, makeUp: { periodYears: 0, order: 'after-adjusted-acq', endOfTerm: 'forfeit' }, carryForward: { periodYears: 1, base: 'top-quantity', capPct: 50 } },
+  topPrice: { years: [{ year: 2027, acq: 1000, taken: 600, contractPrice: 3.2, topPrice: 2.4, makeUpPrice: 0, permittedReduction: 0 }], topPct: 80, makeUp: { periodYears: 2, order: 'after-adjusted-acq', endOfTerm: 'forfeit' } },
   floor: { months: [{ month: '2027-01', values: { oil: 30 } }, { month: '2027-02', values: { oil: 29 } }], formula: { type: 'oil-indexed', index: 'oil', slope: 0.1, constant: 1, floor: 4, ceiling: 9 }, from: '2027-01', to: '2027-02' },
 };
 
@@ -162,7 +163,7 @@ w('# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every
 w();
 w('# PRECISION. Every quantity, price, amount of money, rate, ratio, fraction, share, percentage, slope, index average and present value prints to SIX decimals; years, day counts, month counts, contract years and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all, and a figure inside a message is the shortest round-trip decimal of the double the engine holds.');
 w();
-w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines d745b88 (engines PR #267), ${engineLines} lines. It imports npv, deriveGasRoyaltyRate and calendarDays from engines/economics/cashflow.ts and nothing else. It makes no network call.`);
+w(`# ENGINE. ${ENGINE_REL}, vendored sha-identical with petrolord-engines 7f5d462 (engines PRs #267 and #268), ${engineLines} lines. It imports npv, deriveGasRoyaltyRate and calendarDays from engines/economics/cashflow.ts and nothing else. It makes no network call.`);
 w();
 w('# AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course\'s own calculator panels, which call this same vendored engine on the learner\'s own contract terms.');
 w();
@@ -184,7 +185,7 @@ const EXPORTS = [
   ['takeOrPay', 'the take-or-pay reconciliation', 'years, topPct, makeUp, carryForward', 'each year\'s Adjusted ACQ, take-or-pay quantity, make-up, deficiency, carry-forward, expiries, damages, refund and net to the seller with its reasons'],
   ['priceSeries', 'contract prices', 'months, formula, from, to, averagingMonths, lagMonths, resetMonths, rounding, reopeners', 'each month\'s window, index average, segment, clamp and price, the annual average and last-month price, and the reopeners reported'],
   ['energyParitySlope', 'energy parity', 'mmbtuPerBarrel', 'the gas price per MMBtu that matches one dollar per barrel on heat content'],
-  ['domesticPrice', 'Nigerian domestic prices', 'sector, domesticBasePrice, negotiatedPrice, product, cmpp, transportTariff, schedule', 'the sector price under PIA s.167 or s.168 and the Fourth Schedule, with its reason'],
+  ['domesticPrice', 'Nigerian domestic prices', 'sector, priceControlApplies, domesticBasePrice, negotiatedPrice, product, cmpp, transportTariff, schedule', 'the sector price under PIA s.167 or s.168 and the Fourth Schedule, a figure above a ceiling held at it, or the negotiated price where price control does not apply (s.167(3)(b)), with its reason'],
   ['domesticGasObligation', 'the Domestic Gas Delivery Obligation', 'obligation, delivered, voluntaryContracts, excused, agreementPenaltyRate, penaltyRate', 'deemed fulfilment, the undelivered quantity, the excuses applied, the penalised quantity, the rate and the penalty with its reasons'],
   ['gsaCashFlows', 'cash flows and NPV', 'contract, royalty, discountRate, baseYear', 'each year\'s seller revenue, delivered value, royalty and net after royalty, and the NPV of the seller revenue and of the net'],
 ];
@@ -223,7 +224,7 @@ const IMPORTS = [...ENGINE_SRC.matchAll(/^import .* from \x27([^\x27]+)\x27;$/gm
 must('the engine imports exactly cashflow.ts', IMPORTS.join() === './cashflow.ts', IMPORTS.join());
 must('the engine source makes no network call, reads no clock and draws no random number', !/\bfetch\x28|XMLHttpRequest|\bimport\x28|require\x28|Math\.random|Date\.now|new Date\x28\x29/.test(ENGINE_SRC), 'none');
 w('- Its one import is engines/economics/cashflow.ts, for npv, deriveGasRoyaltyRate and calendarDays. It discounts through the canonical npv and takes the gas royalty rate from the canonical deriveGasRoyaltyRate; it carries no NPV, Monte Carlo or royalty code of its own, and nothing in it samples.');
-w(`- It decides nothing a contract or a text does not state. The take-or-pay percentage, the make-up period, the recovery order, the end-of-term rule, every price, the seller shortfall rate and the domestic base price are inputs with no default, and a call without one is refused by name (${ref('refusals')}).`);
+w(`- It decides nothing a contract or a text does not state. The take-or-pay percentage, each year's permitted reduction, the make-up period, the recovery order, the end-of-term rule, every price, the seller shortfall rate, whether price control applies and the domestic base price are inputs with no default, and a call without one is refused by name (${ref('refusals')}).`);
 must('ACCEPTED_KEYS carries one shape for every exported function', Object.keys(G.ACCEPTED_KEYS).sort().join() === EXPORTS.map((x) => x[0]).sort().join() && Object.isFrozen(G.ACCEPTED_KEYS), Object.keys(G.ACCEPTED_KEYS).join());
 w(`- It reads no key it does not know. \`ACCEPTED_KEYS\` is exported with one shape for each of the ${EXPORTS.length} functions, and every call refuses an input key the function does not read, at every level, naming the key, its path and the accepted keys. A misspelt optional key is refused; it never silently drops a term.`);
 w(`- It models no outcome of a price review, no excess gas, no off-specification or pre-start gas and no flare penalty. ${refCap('notcomputed')} lists each with where it would come from.`);
@@ -235,7 +236,7 @@ section('sources', 'The sources, their editions and the date each was read', ['A
 w('THE RULE THIS COURSE FOLLOWS FOR EVERY LAW, REGULATION, MODEL CONTRACT AND GUIDE IT TEACHES. Each one is named with its edition or gazette date and the date it was read. Only publicly available texts are quoted, with their citation. Licensed model contracts (the AIPN model gas sales agreement among them) are taught by concept only and never quoted. Every legal rate, floor, adder and Schedule value the engine applies was read from the cited text and is cited to its section; a figure that could not be read from a public text is a required input with no default. Every text below was read on 2026-09-26.');
 w();
 const SOURCES = [
-  ['Petroleum Industry Act 2021 (Act No. 6)', 'Official Gazette No. 142, Vol. 108, 27 August 2021', 's.104 and s.105 (flaring: a fine by regulation, no rate in the Act); s.110 (the Domestic Gas Delivery Obligation); s.167 (the domestic base price and the sector prices); s.168 and the Fourth Schedule (gas based industries); the Third Schedule (base price principles); the Seventh Schedule para 10(6) (gas royalty, through cashflow.ts)', 'Official Gazette No. 142, Vol. 108, 27 August 2021'],
+  ['Petroleum Industry Act 2021 (Act No. 6)', 'Official Gazette No. 142, Vol. 108, 27 August 2021', 's.104 and s.105 (flaring: a fine by regulation, no rate in the Act); s.110 (the Domestic Gas Delivery Obligation); s.167 (the domestic base price, the sector prices, and s.167(3) on when price control ends); s.168 and the Fourth Schedule (gas based industries); the Third Schedule (base price principles); the Seventh Schedule para 10(6) (gas royalty, through cashflow.ts)', 'Official Gazette No. 142, Vol. 108, 27 August 2021'],
   ['Domestic Gas Delivery Obligation Regulations 2022 (S.I. No. 74 of 2022)', 'Official Gazette No. 206, Vol. 109, Lagos, 23 November 2022; made and commenced 18 November 2022', 'r.6(1) (US$3.50 per MMBtu not delivered), r.6(2) (under a signed agreement not less than that amount), r.6(3) and (4) (the 90-day investigation, which the engine does not compute), r.4 and r.5 (supply curve and allocation, concept), r.9 (definitions)', 'Official Gazette No. 206, Vol. 109, Lagos 23 November 2022'],
   ['Commonwealth Secretariat, Gas Sales Agreement, Contract 2 in the Commonwealth Model Contract Series', '2025, licensed under Creative Commons Attribution 4.0', 'the definitions (ACQ, Adjusted ACQ, Take or Pay Quantity, BADQ, BASQ, Make-Up Aggregate, Carry Forward Aggregate, Shortfall Quantity, MaxDCQ) and Articles 12.5 to 12.8, 15.1, 15.2.6, 15.4 and 15.8', 'Contract 2 in the Commonwealth Model Contract Series'],
   ['ESMAP Report 152/93, Long-term Gas Contracts: Principles and Applications', 'January 1993, World Bank and UNDP', 'paras 6.52 (daily availability), 6.55 to 6.59 (minimum pay and make-up), 6.61 and 6.62 (carry-forward)', 'Long-term Gas Contracts: Principles and Applications | January 1993'],
@@ -297,19 +298,26 @@ must('both fixture files carry their SYNTHETIC statement', [PW, EX].every((f) =>
 w();
 w(`THE POWER PLANT AGREEMENT (fixture): ${PW.title}. Buyer: ${PW.buyer.name}, sector ${PW.buyer.sector}. DCQ ${S(PW.dcq)} MMBtu per day (${S(PW.energy.dcqMMscf)} MMscf per day at a stated ${S(PW.energy.heatingValue)} ${PW.energy.heatingValueUnit} ${PW.energy.heatingValueBasis}, reference conditions ${PW.energy.referenceConditions}); MaxDCQ ${S(PW.maxDcqPct)} percent; take-or-pay ${S(PW.topPct)} percent of the Adjusted ACQ; make-up for ${S(PW.makeUp.periodYears)} contract years, order ${PW.makeUp.order}, end of term ${PW.makeUp.endOfTerm}; no carry-forward.`);
 w();
-w(`Its price note (fixture), verbatim: ${PW.domesticBasePrice.note}. The fixture holds ${S(PW.domesticBasePrice.value)} US$ per MMBtu, the figure reported for 2026 (${ref('sources')}), flat in every year as a stated planning assumption.`);
+w('Its price note (fixture), verbatim:');
+quote(PW.domesticBasePrice.note);
+w(`The fixture holds ${S(PW.domesticBasePrice.value)} US$ per MMBtu, the figure reported for 2026 (${ref('sources')}), flat in every year as a stated planning assumption.`);
 w();
-w(`Its seller shortfall note (fixture), verbatim: ${PW.shortfallPriceNote}.`);
+w('Its seller shortfall note (fixture), verbatim:');
+quote(PW.shortfallPriceNote);
 w();
 table(['year', 'ACQ', 'taken', 'force majeure', 'seller shortfall', 'contract price', 'take-or-pay price', 'make-up price', 'shortfall price'],
   PW.years.map((y) => [S(y.year), f6(y.acq), f6(y.taken), f6(y.forceMajeure || 0), f6(y.sellerShortfall || 0), f6(y.contractPrice), f6(y.topPrice), f6(y.makeUpPrice), y.shortfallPrice === undefined ? 'none' : f6(y.shortfallPrice)]));
 w();
-w(`Its Domestic Gas Delivery Obligation (fixture): year ${S(PW.dgdo.year)}, obligation ${f6(PW.dgdo.obligation)} MMBtu, delivered ${f6(PW.dgdo.delivered)}, excused because the purchaser could not accept ${f6(PW.dgdo.excused.purchaserCannotAccept)}; note, verbatim: ${PW.dgdo.note}. Royalty (fixture): terrain ${PW.royalty.terrain}, ${S(PW.royalty.inCountrySharePct)} percent of the gas utilised in-country; discount rate ${S(PW.discountRate)} to ${S(PW.baseYear)}.`);
+w(`Its Domestic Gas Delivery Obligation (fixture): year ${S(PW.dgdo.year)}, obligation ${f6(PW.dgdo.obligation)} MMBtu, delivered ${f6(PW.dgdo.delivered)}, excused because the purchaser could not accept ${f6(PW.dgdo.excused.purchaserCannotAccept)}; its note is quoted below. Royalty (fixture): terrain ${PW.royalty.terrain}, ${S(PW.royalty.inCountrySharePct)} percent of the gas utilised in-country; discount rate ${S(PW.discountRate)} to ${S(PW.baseYear)}.`);
+w('The obligation\'s note (fixture), verbatim:');
+quote(PW.dgdo.note);
 w();
 w(`THE EXPORT FEED AGREEMENT (fixture): ${EX.title}. Buyer: ${EX.buyer.name}, sector ${EX.buyer.sector}. DCQ ${S(EX.dcq)} MMBtu per day (${S(EX.energy.dcqMMscf)} MMscf per day at ${S(EX.energy.heatingValue)} ${EX.energy.heatingValueUnit}); MaxDCQ ${S(EX.maxDcqPct)} percent; take-or-pay ${S(EX.topPct)} percent; make-up for ${S(EX.makeUp.periodYears)} contract years, order ${EX.makeUp.order}, end of term ${EX.makeUp.endOfTerm}; carry-forward for ${S(EX.carryForward.periodYears)} contract years above the ${EX.carryForward.base}, at most ${S(EX.carryForward.capPct)} percent of a year's deficiency; make-up gas at ${S(EX.makeUpPricePct)} percent of the contract price.`);
 w();
 const EF = EX.price.formula;
-w(`Its price (fixture): ${EF.type}, ${S(EF.constant)} + ${S(EF.slope)} x the ${EF.index} index averaged over ${S(EX.price.averagingMonths)} months ending ${S(EX.price.lagMonths)} month before the priced month, reset every ${S(EX.price.resetMonths)} months from ${EX.price.from}, with an S-curve at ${S(EF.sCurve.lowKink)} and ${S(EF.sCurve.highKink)} US$ per barrel and slopes ${S(EF.sCurve.lowSlope)} below and ${S(EF.sCurve.highSlope)} above, rounding ${EX.price.rounding}, reopeners reported in ${list(EX.price.reopeners)}, priced ${EX.price.from} to ${EX.price.to}. The take-or-pay price rule (fixture), verbatim: ${EX.price.topPriceRule}.`);
+w(`Its price (fixture): ${EF.type}, ${S(EF.constant)} + ${S(EF.slope)} x the ${EF.index} index averaged over ${S(EX.price.averagingMonths)} months ending ${S(EX.price.lagMonths)} month before the priced month, reset every ${S(EX.price.resetMonths)} months from ${EX.price.from}, with an S-curve at ${S(EF.sCurve.lowKink)} and ${S(EF.sCurve.highKink)} US$ per barrel and slopes ${S(EF.sCurve.lowSlope)} below and ${S(EF.sCurve.highSlope)} above, rounding ${EX.price.rounding}, reopeners reported in ${list(EX.price.reopeners)}, priced ${EX.price.from} to ${EX.price.to}.`);
+w('The take-or-pay price rule (fixture), verbatim:');
+quote(EX.price.topPriceRule);
 w();
 w('Its oil index (fixture, synthetic, US$ per barrel), one row per year:');
 w();
@@ -364,10 +372,10 @@ w();
 w(`${REF.length} refusals across ${Object.keys(byFn).length} functions: ${list(Object.entries(byFn).map(([k, v]) => `${k} ${v}`))}.`);
 must('every exported function has at least one refusal tabled', EXPORTS.every(([n]) => byFn[n] > 0), JSON.stringify(byFn));
 must('no refusal message carries an em or en dash', REFUSED.every((r) => !/[–—]/.test(r[3])), 'dash');
-must('eighty-four refusal cases in the golden file', REF.length === 84, REF.length);
+must('ninety refusal cases in the golden file', REF.length === 90, REF.length);
 w();
 w('Four rules the table shows:');
-w('- A contract term with no default is refused when it is missing, and the message says so: the make-up terms, the recovery order, the royalty terrain, the take-or-pay price, a shortfall price when a seller shortfall is stated, and the domestic base price.');
+w('- A contract term with no default is refused when it is missing, and the message says so: the make-up terms, the recovery order, each year\'s permitted reduction, the royalty terrain, the take-or-pay price, a shortfall price when a seller shortfall is stated, whether price control applies, and the domestic base price under price control.');
 w('- An input key a function does not read is refused at whatever level it sits (a top-level option, a year, a day, a formula, an S-curve, a schedule), with the path to the key and the full list of accepted keys; a key that is an index name is checked against the indices the series carries.');
 w('- A quantity that cannot be true is refused before anything is computed: gas taken above the gas made available, force majeure and maintenance above the DCQ, reductions above the ACQ, contract years or months that are not consecutive.');
 w('- Every figure inside a message is the shortest round-trip decimal of the value it was given.');
@@ -391,7 +399,8 @@ w('WHAT A COMPUTED FIGURE DOES NOT SAY. A deficiency payment is what the stated 
 
 section('energy', 'Volume to energy: gross and net heating value, the imperial and metric routes, reference conditions', ['Associate m02']);
 const E0 = runG('energy-power-dcq');
-w(`THE UNITS, in the engine's basis: ${E0.basis.units}.`);
+w(`THE UNITS, in the engine's basis, verbatim:`);
+quote(E0.basis.units);
 must('the units basis names the International Table Btu and the exact cubic foot', /1055\.05585262 MJ/.test(E0.basis.units) && /0\.028316846592 m3 exactly/.test(E0.basis.units), E0.basis.units);
 w();
 const ENERGY = ['energy-power-dcq', 'energy-export-dcq', 'energy-mscf', 'energy-metric', 'energy-metric-net', 'energy-mixed-sm3-btu', 'energy-mixed-scf-mj', 'energy-zero-quantity'];
@@ -420,7 +429,8 @@ w('A MIXED PAIR (a volume in standard cubic metres with a heating value in Btu p
 section('quantities', 'Contract quantities: DCQ, ACQ, day counts, MaxDCQ, swing and effective swing', ['Associate m03']);
 const CQ = ['cq-power-2027', 'cq-power-2028-leap', 'cq-year-2100-not-leap', 'cq-year-2000-leap', 'cq-period-full-year', 'cq-period-first-contract-year', 'cq-days-stated', 'cq-top-zero-without-swing', 'cq-hmrc-ot05402-effective-swing'];
 const cq0 = runG('cq-power-2027');
-w(`THE RULE, in the engine's basis: ${cq0.basis.rule}.`);
+w(`THE RULE, in the engine's basis, verbatim:`);
+quote(cq0.basis.rule);
 w();
 table(['golden case', 'DCQ', 'day count (engine basis)', 'ACQ', 'MaxDCQ', 'swing factor', 'take-or-pay quantity', 'effective swing'], CQ.map((id) => {
   const r = runG(id);
@@ -445,9 +455,11 @@ w(`NOMINATIONS. A buyer nominates a daily quantity against the DCQ; the part of 
 /* ============================================================ SECTION 9 */
 
 section('daily', 'The daily balance: properly nominated quantity, seller shortfall, force majeure and maintenance, buyer shortfall', ['Associate m04', 'Expert m03 l01']);
-w(`THE RULE, in the engine's basis: ${dayPw.basis.rule}.`);
+w(`THE RULE, in the engine's basis, verbatim:`);
+quote(dayPw.basis.rule);
 w();
-w(`THE IDENTITY, in the engine's basis: ${dayPw.basis.identity}.`);
+w(`THE IDENTITY, in the engine's basis, verbatim:`);
+quote(dayPw.basis.identity);
 w();
 w(`THE POWER PLANT'S JANUARY 2027 (golden input daily-power-january-2027, the fixture's days): DCQ ${S(dayPw.dcq)}, MaxDCQ ${f6(dayPw.maxDcq)}, delivery tolerance ${f6(dayPw.deliveryTolerance)}.`);
 w();
@@ -468,12 +480,12 @@ w();
 const DAYS = ['daily-tolerance-covers-the-gap', 'daily-tolerance-one-short', 'daily-over-nomination-failed', 'daily-fm-part-day', 'daily-fm-whole-day-with-nomination', 'daily-available-not-taken', 'daily-no-maxdcq', 'daily-buyer-caused'];
 w('SINGLE DAYS (golden inputs), each stated to show one rule:');
 w();
-table(['golden case', 'DCQ', 'MaxDCQ percent', 'tolerance', 'nominated', 'properly nominated', 'available', 'taken', 'force majeure', 'maintenance', 'buyer-caused', 'seller shortfall', 'adjusted DCQ', 'buyer shortfall'], DAYS.map((id) => {
+table(['golden case', 'DCQ', 'MaxDCQ percent', 'tolerance', 'nominated', 'properly nominated', 'available', 'taken', 'force majeure', 'maintenance', 'buyer-caused', 'seller shortfall', 'adjusted DCQ', 'buyer shortfall', 'over-take'], DAYS.map((id) => {
   const a = argsOf(id); const r = runG(id); const d = r.days[0]; const ad = a.days[0];
-  return [id, f6(a.dcq), a.maxDcqPct === undefined ? 'none' : S(a.maxDcqPct), f6(a.deliveryTolerance || 0), f6(ad.nominated), f6(d.properlyNominated), f6(ad.available), f6(ad.taken), f6(d.forceMajeure), f6(d.maintenance), S(ad.buyerCaused === true), f6(d.sellerShortfall), f6(d.adjustedDcq), f6(d.buyerShortfall)];
+  return [id, f6(a.dcq), a.maxDcqPct === undefined ? 'none' : S(a.maxDcqPct), f6(a.deliveryTolerance || 0), f6(ad.nominated), f6(d.properlyNominated), f6(ad.available), f6(ad.taken), f6(d.forceMajeure), f6(d.maintenance), S(ad.buyerCaused === true), f6(d.sellerShortfall), f6(d.adjustedDcq), f6(d.buyerShortfall), f6(d.overTake)];
 }));
 w();
-DAYS.forEach((id) => { const r = runG(id); w(`${id}, the engine's reasons, verbatim:`); if (r.days[0].reasons.length) reasons(r.days[0].reasons); else w('(no reason: nothing is owed either way)'); });
+DAYS.forEach((id) => { const r = runG(id); w(`${id}, the engine's reasons, verbatim:`); if (r.days[0].reasons.length) reasons(r.days[0].reasons); else w('(the engine returns no reason)'); });
 const ant = runG('daily-available-not-taken').days[0];
 must('gas made available and not taken is no seller shortfall', ant.sellerShortfall === 0 && ant.buyerShortfall > 0, `${ant.sellerShortfall} ${ant.buyerShortfall}`);
 w();
@@ -483,9 +495,10 @@ w(`THE READING THIS SECTION RESTS ON. The engine measures a seller shortfall aga
 
 section('topyear', 'Take-or-pay in one contract year: the Adjusted ACQ, the take-or-pay quantity, the deficiency and its payment, damages', ['Associate m05', 'Associate m06']);
 const t1 = runG('top-single-year');
-w(`THE RULE, in the engine's basis: ${t1.basis.rule}.`);
+w(`THE RULE, in the engine's basis, verbatim:`);
+quote(t1.basis.rule);
 w();
-w('Money in a contract year, as the engine builds it: counted x contract price + make-up taken x make-up price + deficiency payment - seller shortfall x shortfall price - refund = net to the seller. Each term is a return value in the rows below.');
+w('Money in a contract year, as the engine builds it: regular revenue (the field regularRevenue, counted x contract price) + make-up revenue (makeUpRevenue, make-up taken x make-up price) + deficiency payment - shortfall damages (shortfallPayment, seller shortfall x shortfall price) - refund = net to the seller (netToSeller). Each term is a return value in the rows below.');
 w();
 const ONE = ['top-single-year', 'top-exactly-met', 'top-one-unit-short', 'top-zero-take-year', 'top-force-majeure-and-shortfall', 'top-fm-whole-year'];
 const oneRows = [];
@@ -499,11 +512,26 @@ w('THE POWER PLANT\'S YEARS ALONE. The fixture\'s 2027 and 2032, each run as a o
 w();
 const PW_ALONE = [2027, 2032].map((yy) => ({ yy, r: success(`takeOrPay on the power plant's ${yy} alone`, G.takeOrPay({ years: [clone(PW.years.find((x) => x.year === yy))], topPct: PW.topPct, makeUp: clone(PW.makeUp) })) }));
 table(['power plant year alone (fixture)', 'ACQ', 'reductions', 'Adjusted ACQ', 'take-or-pay quantity', 'taken', 'deficiency', 'contract price (fixture)', 'take-or-pay price (fixture)', 'deficiency payment', 'shortfall damages', 'net to seller'], PW_ALONE.map(({ yy, r }) => { const y = r.years[0]; const inp = PW.years.find((x) => x.year === yy); return [S(yy), f6(y.acq), f6(y.maintenance + y.forceMajeure + y.sellerShortfall + y.permittedReduction), f6(y.adjustedAcq), f6(y.topQuantity), f6(y.taken), f6(y.deficiency), f6(inp.contractPrice), f6(inp.topPrice), f6(y.deficiencyPayment), f6(y.shortfallPayment), f6(y.netToSeller)]; }));
-PW_ALONE.forEach(({ yy, r }) => { w(`${yy} alone, the engine's reasons, verbatim:`); if (r.years[0].reasons.length) reasons(r.years[0].reasons); else w('(no reason: nothing to reconcile)'); });
+PW_ALONE.forEach(({ yy, r }) => { w(`${yy} alone, the engine's reasons, verbatim:`); if (r.years[0].reasons.length) reasons(r.years[0].reasons); else w('(the engine returns no reason)'); });
 must('the power plant 2032 alone meets its take-or-pay quantity exactly', PW_ALONE[1].r.years[0].deficiency === 0 && PW_ALONE[1].r.years[0].counted === PW_ALONE[1].r.years[0].topQuantity, 'pw 2032');
 must('each power plant year alone equals the same year of the eight-year ledger in quantities', PW_ALONE.every(({ yy, r }) => r.years[0].topQuantity === yr(topPw, yy).topQuantity && r.years[0].deficiency === yr(topPw, yy).deficiency), 'alone vs ledger');
 w();
-ONE.forEach((id) => { const r = runG(id); w(`${id}, the engine's reasons, verbatim:`); const rs = r.years.flatMap((y) => y.reasons); if (rs.length) reasons(rs); else w('(no reason: nothing to reconcile)'); });
+ONE.forEach((id) => { const r = runG(id); w(`${id}, the engine's reasons, verbatim:`); const rs = r.years.flatMap((y) => y.reasons); if (rs.length) reasons(rs); else w('(the engine returns no reason)'); });
+const tz = runG('top-zero-percent');
+w(`A TAKE-OR-PAY PERCENTAGE OF ZERO (top-zero-percent) is accepted; the engine states it in each year's reasons and in its basis, verbatim:`);
+quote(tz.basis.topPct);
+must('TOP 0 is stated in the basis and the reasons', tz.basis.topPct === 'a take-or-pay percentage of 0 sets no take-or-pay quantity' && tz.years.every((y) => y.reasons.some((x) => /sets no take-or-pay quantity/.test(x))), tz.basis.topPct);
+w();
+w('THE PERMITTED REDUCTION IS STATED FOR EVERY YEAR (zero when the contract permits none). The engine\'s basis, verbatim:');
+quote(tz.basis.permittedReduction);
+w(`A year that leaves it out is refused (${ref('refusals')}).`);
+w();
+const tpp = success('takeOrPay with a take-or-pay price below the contract price (stated probe)', G.takeOrPay(clone(PROBES.topPrice)));
+const tpy = tpp.years[0]; const tpi = PROBES.topPrice.years[0];
+must('the deficiency payment follows the take-or-pay price', tpy.deficiencyPayment === tpy.deficiencyPaid * tpi.topPrice && tpi.topPrice !== tpi.contractPrice, tpy.deficiencyPayment);
+w(`A TAKE-OR-PAY PRICE DIFFERENT FROM THE CONTRACT PRICE (stated probe: ACQ ${S(tpi.acq)}, taken ${S(tpi.taken)}, take-or-pay ${S(PROBES.topPrice.topPct)} percent, contract price ${f6(tpi.contractPrice)}, take-or-pay price ${f6(tpi.topPrice)}): deficiency ${f6(tpy.deficiency)}, deficiency payment ${f6(tpy.deficiencyPayment)}, regular revenue ${f6(tpy.regularRevenue)}, net to the seller ${f6(tpy.netToSeller)}. The deficiency is paid at the take-or-pay price and the gas taken at the contract price. The engine's reason, verbatim:`);
+reasons(tpy.reasons);
+w();
 const em = runG('top-exactly-met');
 const ous = runG('top-one-unit-short');
 must('exactly met: no deficiency; one unit short: a deficiency of 1', em.years[0].deficiency === 0 && ous.years[0].deficiency === 1, `${em.years[0].deficiency} ${ous.years[0].deficiency}`);
@@ -518,9 +546,11 @@ w(`The multi-year ledger with make-up, the recovery order and expiry is in ${ref
 /* ============================================================ SECTION 11 */
 
 section('ledger', 'The take-or-pay ledger: make-up, the recovery order, first in first out, expiry and the end of the term', ['Professional m01', 'Professional m02', 'Expert m04 l02']);
-w(`THE ORDER, in the engine's basis (top-power): ${topPw.basis.order}.`);
+w(`THE ORDER, in the engine's basis (top-power), verbatim:`);
+quote(topPw.basis.order);
 w();
-w(`MAKE-UP, in the engine's basis (top-power): ${topPw.basis.makeUp}.`);
+w(`MAKE-UP, in the engine's basis (top-power), verbatim:`);
+quote(topPw.basis.makeUp);
 w();
 const ledgerTable = (r) => table(['year', 'Adjusted ACQ', 'take-or-pay quantity', 'taken', 'make-up available', 'make-up taken', 'counted', 'deficiency', 'deficiency payment', 'make-up expired', 'make-up outstanding', 'net to seller'],
   r.years.map((y) => [S(y.year), f6(y.adjustedAcq), f6(y.topQuantity), f6(y.taken), f6(y.makeUpAvailable), f6(y.makeUpTaken), f6(y.counted), f6(y.deficiency), f6(y.deficiencyPayment), f6(sum(y.makeUpExpired.map((x) => x.quantity))), f6(y.makeUpOutstanding), f6(y.netToSeller)]));
@@ -560,9 +590,11 @@ w('A make-up period of N contract years after a deficiency year y runs to the en
 /* ============================================================ SECTION 12 */
 
 section('carryforward', 'Carry-forward, its cap, base and expiry, seller shortfall damages and the export feed ledger', ['Professional m03', 'Expert m04 l02']);
-w(`CARRY-FORWARD, in the engine's basis (top-export): ${topEx.basis.carryForward}.`);
+w(`CARRY-FORWARD, in the engine's basis (top-export), verbatim:`);
+quote(topEx.basis.carryForward);
 w();
-w(`MAKE-UP, in the engine's basis (top-export): ${topEx.basis.makeUp}.`);
+w(`MAKE-UP, in the engine's basis (top-export), verbatim:`);
+quote(topEx.basis.makeUp);
 w();
 const psEx = runG('price-export');
 const exArgs = argsOf('top-export');
@@ -588,19 +620,23 @@ table(['golden case', 'carry-forward (golden input)', 'year', 'counted', 'surplu
   return r.years.map((y) => [id, cfText, S(y.year), f6(y.counted), f6(y.surplus), f6(y.deficiency), f6(y.carryForwardApplied), f6(y.deficiencyPaid), f6(sum(y.carryForwardExpired.map((x) => x.quantity))), f6(y.carryForwardOutstanding)]);
 }));
 w();
-CFC.forEach((id) => { const rs = runG(id).years.flatMap((y) => y.reasons); w(`${id}, the engine's reasons, verbatim:`); if (rs.length) reasons(rs); else w('(no reason)'); });
+CFC.forEach((id) => { const rs = runG(id).years.flatMap((y) => y.reasons); w(`${id}, the engine's reasons, verbatim:`); if (rs.length) reasons(rs); else w('(the engine returns no reason)'); });
 w();
-w(`${runG('top-carry-forward-off-by-default').basis.carryForward[0].toUpperCase()}${runG('top-carry-forward-off-by-default').basis.carryForward.slice(1)}: that is the engine's basis, verbatim, when a contract states no carry-forward right.`);
+w('When a contract states no carry-forward right, the engine\'s basis reads, verbatim:');
+quote(runG('top-carry-forward-off-by-default').basis.carryForward);
 must('carry-forward is off unless stated', runG('top-carry-forward-off-by-default').basis.carryForward === 'off (no carry-forward right stated)', runG('top-carry-forward-off-by-default').basis.carryForward);
 
 /* ============================================================ SECTION 13 */
 
 section('prices', 'Price formulas: fixed, escalated, oil-indexed, hub-indexed and basket, with averaging, lag, reset, floor, ceiling and rounding', ['Professional m04', 'Expert m05 l02']);
-w(`THE AVERAGING, in the engine's basis (price-export): ${psEx.basis.averaging}.`);
+w(`THE AVERAGING, in the engine's basis (price-export), verbatim:`);
+quote(psEx.basis.averaging);
 w();
-w(`THE ANNUAL PRICES, in the engine's basis: ${psEx.basis.annual}.`);
+w(`THE ANNUAL PRICES, in the engine's basis, verbatim:`);
+quote(psEx.basis.annual);
 w();
-w(`THE ROUNDING, in the engine's basis (price-export): ${psEx.basis.rounding}.`);
+w(`THE ROUNDING, in the engine's basis (price-export), verbatim:`);
+quote(psEx.basis.rounding);
 w();
 w('THE EXPORT FEED PRICE (golden input price-export, the fixture): the first eighteen priced months and every annual row.');
 w();
@@ -644,28 +680,52 @@ must('the plain linear case has no segment and no clamp', ecsPlain.months.every(
 
 section('domestic', 'Nigerian domestic gas prices: power, commercial, gas distributors and gas based industries', ['Professional m05', 'Expert m05 l04']);
 const REPORTED = { 2026: GC['dp-power-2026'].published.printed.price, 2025: GC['dp-power-2025'].published.printed.price };
-w(`Every domesticPrice call states the domestic base price; ${ref('sources')} says where the reported figures come from and why none is graded. The rows below state ${f6(REPORTED[2026])} and ${f6(REPORTED[2025])} as the figures reported for 2026 and 2025 (the golden file's published figures), and other figures as stated probes.`);
+w(`Every domesticPrice call states whether the price control of s.167 applies (priceControlApplies, true or false, with no default) and, under price control, the domestic base price; ${ref('sources')} says where the reported base price figures come from and why none is graded. The rows below state ${f6(REPORTED[2026])} and ${f6(REPORTED[2025])} as the figures reported for 2026 and 2025 (the golden file's published figures), and other figures as stated probes.`);
 w();
 const DP = ['dp-power-2026', 'dp-commercial-2026', 'dp-power-2025', 'dp-commercial-2025', 'dp-distributor-within', 'dp-distributor-at-ceiling', 'dp-distributor-above', 'dp-gbi-urea-inside', 'dp-gbi-urea-floor', 'dp-gbi-urea-ceiling', 'dp-gbi-urea-at-prp', 'dp-gbi-urea-zero-cmpp', 'dp-gbi-gtl-diesel', 'dp-gbi-exactly-dbp', 'dp-gbi-exactly-floor', 'dp-gbi-schedule-override', 'dp-power-transport'];
-const dbpLabel = (v) => (v === REPORTED[2026] ? `${f6(v)} (reported 2026)` : v === REPORTED[2025] ? `${f6(v)} (reported 2025)` : `${f6(v)} (stated)`);
-table(['golden case', 'sector', 'domestic base price', 'negotiated', 'product', 'CMPP', 'NRP', 'PRP', 'EPF', 'formula price', 'price', 'ceiling', 'held at', 'delivered price'], DP.map((id) => {
+const DP_FREE = ['dp-distributor-above-no-control', 'dp-distributor-at-ceiling-no-control', 'dp-power-no-control', 'dp-gbi-no-control-below-floor'];
+const dbpLabel = (v) => (v === undefined || v === null ? 'none' : v === REPORTED[2026] ? `${f6(v)} (reported 2026)` : v === REPORTED[2025] ? `${f6(v)} (reported 2025)` : `${f6(v)} (stated)`);
+const none = (v, f = f6) => (v === undefined || v === null ? 'none' : f(v));
+const yn = (v) => (v === undefined ? 'none' : v ? 'yes' : 'no');
+const dpRow = (id) => {
   const a = argsOf(id); const r = runG(id);
-  return [id, r.sector, dbpLabel(a.domesticBasePrice), a.negotiatedPrice === undefined ? 'none' : f6(a.negotiatedPrice), r.product || 'none', r.cmpp === undefined ? 'none' : f6(r.cmpp), r.nrp === undefined ? 'none' : f6(r.nrp), r.prp === undefined ? 'none' : f6(r.prp), r.epf === undefined ? 'none' : f6(r.epf), r.formulaPrice === undefined ? 'none' : f6(r.formulaPrice), f6(r.price), r.ceiling === undefined ? 'none' : f6(r.ceiling), r.heldAt === undefined || r.heldAt === null ? 'none' : S(r.heldAt), r.deliveredPrice === undefined ? 'none' : f6(r.deliveredPrice)];
-}));
+  return [id, r.sector, yn(a.priceControlApplies), dbpLabel(a.domesticBasePrice), none(r.statedPrice), r.product || 'none', none(r.cmpp), none(r.epf), none(r.formulaPrice), f6(r.price), none(r.ceiling), yn(r.withinCeiling), none(r.heldAt, S), none(r.deliveredPrice)];
+};
+const DP_HEAD = ['golden case', 'sector', 'price control (stated)', 'domestic base price', 'stated (negotiated) figure', 'product', 'CMPP', 'EPF', 'formula price', 'price', 'ceiling', 'within the ceiling', 'held at', 'delivered price'];
+w('UNDER PRICE CONTROL (priceControlApplies true):');
+w();
+table(DP_HEAD, DP.map(dpRow));
+DP.forEach((id) => must(`${id} states price control`, argsOf(id).priceControlApplies === true, id));
 w();
 w('The engine\'s rule and reason for each, verbatim:');
 w();
 table(['golden case', 'basis.rule', 'reason', 'basis.point'], DP.map((id) => { const r = runG(id); return [id, r.basis.rule, r.reason || 'none', r.basis.point]; }));
 must('power and commercial 2026 on the reported base price are the published figures', runG('dp-power-2026').price === GC['dp-power-2026'].published.printed.price && Math.abs(runG('dp-commercial-2026').price - GC['dp-commercial-2026'].published.printed.price) < 1e-12, 'dp');
 w();
+const above = runG('dp-distributor-above');
+must('the distributor figure above the commercial price is held at it under price control', above.heldAt === 'ceiling' && above.withinCeiling === false && above.price === above.ceiling && above.statedPrice > above.ceiling, JSON.stringify(above).slice(0, 160));
+w(`THE DISTRIBUTOR CEILING IS HELD (dp-distributor-above). A gas distributor negotiates its price, and s.167(7) says that price "shall not exceed" the commercial sector price. Under price control the engine returns the stated figure as statedPrice (${f6(above.statedPrice)}), withinCeiling ${yn(above.withinCeiling)}, heldAt ${above.heldAt}, and the price held at the ceiling, ${f6(above.price)}. The stated figure is not a lawful price under s.167(7) while price control applies; the price is the held figure. Both ceilings of this section are applied alike, in the engine's basis, verbatim:`);
+quote(above.basis.ceilings);
+w();
 w(`THE FOURTH SCHEDULE ARITHMETIC (dp-gbi-urea-inside): EPF = (CMPP - PRP) / PRP and CP = NRP x (1 + EPF), then held at or below the domestic base price and at or above the floor of ${f6(P.gbiFloorUsdPerMmbtu)} US$ per MMBtu. The ceiling applies before the floor. ${refCap('provisions')} quotes the Schedule.`);
+w();
+w('WITHOUT PRICE CONTROL (priceControlApplies false). PIA s.167(3) says price control is not required where either of two conditions is met, and under (b), once the domestic market is largely free-market contracting, the sector prices of s.167(4) to (7) and s.168 cease to apply (the provisions section quotes both). The engine then returns the negotiated price with no ceiling or floor:');
+w();
+table(DP_HEAD, DP_FREE.map(dpRow));
+DP_FREE.forEach((id) => must(`${id} states no price control and returns the negotiated price`, argsOf(id).priceControlApplies === false && runG(id).price === argsOf(id).negotiatedPrice && runG(id).heldAt === null, id));
+w();
+table(['golden case', 'reason, verbatim'], DP_FREE.map((id) => [id, runG(id).reason]));
+w();
+w('Whether price control applies is a statement about the market, and the engine asks for it. It never assumes one.');
 
 /* ============================================================ SECTION 15 */
 
 section('dgdo', 'The Domestic Gas Delivery Obligation: deemed fulfilment, the excuses in order, the penalty and a signed agreement', ['Professional m06']);
-w(`THE RULE, in the engine's basis: ${dgPw.basis.rule}.`);
+w(`THE RULE, in the engine's basis, verbatim:`);
+quote(dgPw.basis.rule);
 w();
-w(`WHAT IS NOT COMPUTED, in the engine's basis: ${dgPw.basis.notReported}.`);
+w(`WHAT IS NOT COMPUTED, in the engine's basis, verbatim:`);
+quote(dgPw.basis.notReported);
 w();
 const DG = ['dgdo-power-2028', 'dgdo-deemed-by-contracts', 'dgdo-contracts-one-short', 'dgdo-met', 'dgdo-over-delivered', 'dgdo-all-excused', 'dgdo-excuses-in-order', 'dgdo-agreement-above', 'dgdo-agreement-below', 'dgdo-agreement-equal', 'dgdo-adjusted-rate'];
 table(['golden case', 'obligation', 'delivered', 'voluntary contracts', 'excuses stated', 'deemed fulfilled', 'undelivered', 'excused applied', 'penalised', 'rate', 'penalty', 'export restriction'], DG.map((id) => {
@@ -688,7 +748,8 @@ const PAR = ['parity-ecs-0172', 'parity-eia-2026', 'parity-6'];
 table(['golden case', 'MMBtu per barrel (golden input)', 'slope (engine)', 'printed by the source'], PAR.map((id) => { const r = runG(id); const pub = GC[id].published; return [id, f6(r.mmbtuPerBarrel), f6(r.slope), pub ? `${pub.source}: ${JSON.stringify(pub.printed)}` : 'none']; }));
 const p58 = runG('parity-ecs-0172');
 w();
-w(`THE RULE, in the engine's basis: ${p58.basis.rule}.`);
+w(`THE RULE, in the engine's basis, verbatim:`);
+quote(p58.basis.rule);
 w();
 const ECS_SLOPE = GC['parity-ecs-0172'].published.printed.slope;
 const EIA_BTU = GC['parity-eia-2026'].published.printed.btuPerBarrel;
@@ -717,9 +778,11 @@ must('an index exactly at a kink is on the mid segment', sk.months.some((m, i) =
 section('cashflows', 'Whole-contract cash flows: the revenue lines, royalty on the value of gas delivered, and the NPV', ['Expert m02']);
 const cfPw = runG('cf-power');
 const cfEx = runG('cf-export');
-w(`THE ROYALTY, in the engine's basis (cf-power): ${cfPw.basis.royalty}.`);
+w(`THE ROYALTY, in the engine's basis (cf-power), verbatim:`);
+quote(cfPw.basis.royalty);
 w();
-w(`THE NPV, in the engine's basis (cf-power): ${cfPw.basis.npv}.`);
+w(`THE NPV, in the engine's basis (cf-power), verbatim:`);
+quote(cfPw.basis.npv);
 w();
 const cfTable = (r) => table(['year', 'regular', 'make-up', 'deficiency payment', 'shortfall damages', 'refund', 'seller revenue', 'delivered value', 'royalty rate', 'royalty', 'net after royalty'],
   r.years.map((y) => [S(y.year), f6(y.lines.regular), f6(y.lines.makeUp), f6(y.lines.deficiencyPayment), f6(y.lines.shortfallPayment), f6(y.lines.refund), f6(y.sellerRevenue), f6(y.deliveredValue), f6(y.royaltyRate), f6(y.royalty), f6(y.netAfterRoyalty)]));
@@ -914,7 +977,8 @@ w('REOPENERS ARE REPORTED BY MONTH. priceSeries returns each reopener with this 
 quote(psEx.reopeners[0].note);
 must('the reopener note says the outcome is not modelled', /reported only; the engine does not model the outcome of a price review/.test(psEx.reopeners[0].note), psEx.reopeners[0].note);
 w();
-w(`THE DGDO'S UNCOMPUTED RULES, in the engine's basis: ${dgPw.basis.notReported}.`);
+w(`THE DGDO'S UNCOMPUTED RULES, in the engine's basis, verbatim:`);
+quote(dgPw.basis.notReported);
 w();
 w(`FIGURES QUOTED ONLY AS REPORTED. The domestic base price for 2026 (${f6(REPORTED[2026])} US$ per MMBtu for power and ${f6(GC['dp-commercial-2026'].published.printed.price)} for the commercial sector, effective on the first of April) and for 2025 (${f6(REPORTED[2025])} and ${f6(GC['dp-commercial-2025'].published.printed.price)}) are reported figures; the regulator's circular was not read. The engine's own sentence is in ${ref('sources')}. A lesson quotes them with that attribution and never as a value the course grades.`);
 must('FINDINGS lists the not-computed items', /Not computed/.test(FINDINGS) && /excess gas/.test(FINDINGS) && /90-day investigation/.test(FINDINGS) && /Third Schedule tier allocation/.test(FINDINGS), 'not computed');

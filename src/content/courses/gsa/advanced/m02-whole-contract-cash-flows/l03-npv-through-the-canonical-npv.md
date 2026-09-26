@@ -8,7 +8,7 @@ A gas sales agreement runs for years, and money in its tenth year is worth less 
 
 The engine's basis on the power plant states it:
 
-> canonical npv from engines/economics/cashflow.ts, year-end flows discounted to 2026 at 0.1.
+> canonical npv from engines/economics/cashflow.ts, year-end flows discounted to 2026 at 0.1
 
 Two terms set every NPV: the discount rate and the base year. Each year's flow is taken at the end of that year and discounted back to the base year. An NPV quoted without both terms says nothing, so the course quotes them beside every present value.
 

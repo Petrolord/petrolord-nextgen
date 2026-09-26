@@ -36,7 +36,7 @@ A gas sales agreement names its delivery point, as the Associate tier showed, an
 
 Work in the course's own ledger calculator, on the view "Domestic gas prices".
 
-1. Replace the inputs with a power sector call on the reported 2026 figure, stated as an input: `{ "sector": "power", "domesticBasePrice": 2.18 }`. Read the price, the delivered price tile and the basis.
+1. Replace the inputs with a power sector call on the reported 2026 figure, stated as an input: `{ "sector": "power", "priceControlApplies": true, "domesticBasePrice": 2.18 }`. Read the price, the delivered price tile and the basis.
 2. Add a `transportTariff` of your own and read the delivered price and the basis again. Check the difference.
 3. Change the sector to "commercial" with the same tariff. Write the price at the delivery point and the delivered price.
 4. In one sentence, say what the delivered price tile shows when no tariff is stated, and why.

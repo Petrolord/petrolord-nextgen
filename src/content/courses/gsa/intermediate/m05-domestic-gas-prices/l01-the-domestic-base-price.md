@@ -26,7 +26,7 @@ The Act prints no figure; the Authority determines one every year. The regulator
 
 The engine's basis carries the whole position in its own words:
 
-> a required input with no default: the Authority determines it each year under the Third Schedule (s.167(1)). US$2.18 per MMBtu (power) and US$2.68 (commercial), effective 1 April 2026, are reported by BusinessDay (31 March 2026) and by Advocaat Law Practice through Legal 500 (7 April 2026); the regulator's circular was not read
+> a required input with no default under price control: the Authority determines it each year under the Third Schedule (s.167(1)). US$2.18 per MMBtu (power) and US$2.68 (commercial), effective 1 April 2026, are reported by BusinessDay (31 March 2026) and by Advocaat Law Practice through Legal 500 (7 April 2026); the regulator's circular was not read
 
 ## Quoting the reported figures
 
@@ -43,7 +43,7 @@ The power plant agreement (synthetic) prices every year from 2027 to 2034 at the
 
 Work in the course's own ledger calculator, on the view "Domestic gas prices". It starts with a gas based industry case.
 
-1. Replace the inputs with `{ "sector": "power", "domesticBasePrice": 2.130000 }`, the reported 2025 figure. Read the price and the basis note under it.
+1. Replace the inputs with `{ "sector": "power", "priceControlApplies": true, "domesticBasePrice": 2.130000 }`, the reported 2025 figure. Read the price and the basis note under it.
 2. Change the sector to "commercial" and read the price.
 3. Delete `domesticBasePrice` and read the refusal.
 4. Write one sentence you could put beside any power plant money figure, naming the assumption it rests on and who reported the figure.

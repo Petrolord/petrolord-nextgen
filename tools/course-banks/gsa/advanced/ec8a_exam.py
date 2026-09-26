@@ -176,12 +176,12 @@ x("For urea at a stated CMPP of 200.000000, what does the engine's reason say ab
  "EPF = (200 - 250) / 250, which is -0.200000, and CP = 0.8; the floor of US$0.90 per MMBtu of s.168(2) holds it at 0.9. The floor applies to every gas based industry; a CMPP below the PRP is a stated input and a result (even a CMPP of 0 is held at the floor); and nothing goes to zero.")
 
 # 21
-x("A gas distributor states a negotiated price of 2.900000 on the reported 2026 base. What does domesticPrice do?",
- "Returns 2.900000 with a reason that it exceeds the commercial price 2.68, the s.167(7) ceiling, on the reported base",
- ["Cuts the price to 2.680000 on the reported base, the commercial sector price",
-  "Refuses the call",
+x("A gas distributor states a negotiated price of 2.900000 on the reported 2026 base, with price control stated as applying. What does domesticPrice do?",
+ "Holds the price at 2.680000, the s.167(7) ceiling, and returns 2.900000 beside it as the stated figure",
+ ["Returns 2.900000 as the price with a reason that it exceeds the commercial price, which s.167(7) sets as the ceiling",
+  "Refuses the call, since a negotiated figure above the ceiling is no valid input",
   "Returns 2.180000 on the reported base, the power sector price, in place of any negotiated one"],
- "The engine returns the negotiated 2.900000 with the reason \"negotiated price 2.9 exceeds the commercial sector price 2.68, which s.167(7) sets as the ceiling for gas distributors\": a result with a reason. It changes no stated price, refuses nothing here, and substitutes no sector price; the reported base is a stated input.")
+ "The engine's reason reads \"the negotiated price 2.9 exceeds the commercial sector price 2.68, so the price is held at 2.68 (s.167(7))\": the price is the lawful figure, statedPrice keeps 2.900000 and heldAt names the ceiling, as s.168(3) is held for gas based industries. It refuses nothing, and it substitutes no other sector's price; the reported base is a stated input. With price control stated as not applying (s.167(3)(b)) the negotiated 2.900000 would stand.")
 
 # 22
 x("The Fourth Schedule's gazetted table heads its NRP column \"US $/mmbtu\" with \"Net of transport Tariff US $/Kcf\" beneath. How does the engine hold NRP?",
@@ -225,11 +225,11 @@ x("What does the engine import from engines/economics/cashflow.ts, and what else
 
 # 27
 x("How many refusals does the course table, across how many of the engine's functions?",
- "84 refusals across 9 functions",
- ["84 refusals across 13 exported names",
-  "58 refusals, one for each provision",
+ "90 refusals across 9 functions",
+ ["90 refusals across 13 exported names",
+  "62 refusals, one for each provision",
   "18 refusals across 9 functions, the count held by priceSeries"],
- "The refusal table holds 84 refusals across the 9 functions, from toEnergy's 8 to priceSeries's 18. The engine exports 13 names, 4 of them constants; 58 is the count of quoted provisions; and 18 is the count for priceSeries alone.")
+ "The refusal table holds 90 refusals across the 9 functions, from toEnergy's 8 to priceSeries's 18. The engine exports 13 names, 4 of them constants; 62 is the count of quoted provisions; and 18 is the count for priceSeries alone.")
 
 # 28
 x("A contract grants the seller a delivery tolerance of 5.000000 on a DCQ of 100.000000. On one golden day the seller offers 94.000000 against a full nomination, and the buyer takes all of it. What comes back?",

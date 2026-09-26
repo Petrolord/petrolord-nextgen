@@ -126,6 +126,33 @@
   "found": true
  },
  {
+  "id": "pia_167_3_control",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.167(3)",
+  "quote": "The price control and the corresponding role of the domestic gas aggregator shall not be required, where the",
+  "paraphrase": "Price control, and the aggregator's role with it, is not required where either of two conditions is met.",
+  "found": true
+ },
+ {
+  "id": "pia_167_3b_free_market",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.167(3)(b)",
+  "quote": "(b) domestic market for natural gas is largely characterised by free market based contracting for natural gas between willing buyers and willing sellers,",
+  "paraphrase": "The second condition: the domestic market is largely free-market contracting between willing buyers and willing sellers, on criteria the Authority sets.",
+  "found": true
+ },
+ {
+  "id": "pia_167_3b_consequence",
+  "text": "PIA",
+  "source": "pia_nuprc.txt",
+  "cite": "PIA s.167(3)(b)",
+  "quote": "and at such time the provisions of subsections (4), (5), (6) and (7) and section 168 shall no longer be applicable",
+  "paraphrase": "Once that condition is met, the sector prices of s.167(4) to (7) and the gas based industries price of s.168 cease to apply.",
+  "found": true
+ },
+ {
   "id": "pia_167_5_power",
   "text": "PIA",
   "source": "pia_nuprc.txt",
@@ -393,6 +420,15 @@
   "cite": "Commonwealth model GSA (2025), Article 12.6",
   "quote": "In each Contract Year Buyer shall be obligated to take and pay for, or to pay for if not taken, a quantity of Gas at least equal to the Take or Pay Quantity.",
   "paraphrase": "The take-or-pay obligation: take and pay for, or pay for if not taken, at least the take-or-pay quantity each contract year.",
+  "found": true
+ },
+ {
+  "id": "cw_makeup_after",
+  "text": "CW",
+  "source": "comsec.txt",
+  "cite": "Commonwealth model GSA (2025), Article 12.7.1",
+  "quote": "Make-Up Aggregate Buyer shall have the ALTERNATIVE 1 right ALTERNATIVE 2 obligation for any Day in such Contract Year after Buyer has taken delivery of at least",
+  "paraphrase": "The make-up right (or, in Alternative 2, obligation) runs on any day of the year after the buyer has taken at least the stated quantity; the text goes on to name the Adjusted ACQ.",
   "found": true
  },
  {

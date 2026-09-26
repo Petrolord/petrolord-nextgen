@@ -38,7 +38,7 @@ fail=0
 
 echo "PART 1: packages/engines on this branch against $BASE"
 ENG_CANON=${ENG_CANON:-/root/petrolord-engines}
-REV=d745b88
+REV=7f5d462
 LEDGERED=$(python3 -c "import json,sys;print('\n'.join(sorted(e['path'] for e in json.load(open(sys.argv[1]))['knownDeviations'] if e.get('group')=='ec8-gsa-course')))" "$ENG/VENDOR.json")
 nled=$(printf '%s\n' "$LEDGERED" | grep -c .)
 [ "$nled" = 11 ] || { echo "  VENDOR.json ledgers $nled paths as ec8-gsa-course, expected 11"; fail=1; }
