@@ -60,6 +60,7 @@ const f6 = (x) => x.toFixed(6);
 const READERS = {
   januaryReader: L.januaryReader,
   powerLedgerReader: L.powerLedgerReader,
+  powerYearReader: L.powerYearReader,
   exportPriceReader: L.exportPriceReader,
   sCurveReader: L.sCurveReader,
   exportCashReader: L.exportCashReader,
@@ -196,6 +197,44 @@ describe('THE ENGINE GATE: the interactive routes are the engine, unchanged', ()
     expect(L.parseJson('{"a": 1}').value).toEqual({ a: 1 });
     expect(L.parseJson('{a: 1}').error).toBeTruthy();
     expect(L.parseJson('').error).toBeTruthy();
+  });
+});
+
+describe('THE PASTE GATE: a whole case file pasted into any view runs that view\'s block', () => {
+  const CASES = ['ozubu', 'ifeyi', 'nwaka'].map((n) => JSON.parse(fs.readFileSync(path.join(ROOT, `src/content/capstone-cases/gsa/${n}_case.json`), 'utf8')));
+  const VIEWS = [
+    ['energy', L.viewEnergy, L.energyOf], ['quantities', L.viewQuantities, L.quantitiesOf], ['fortnight', L.viewDaily, L.dailyOf],
+    ['year', L.viewYear, L.takeOrPayOf], ['price', L.viewPrice, L.priceOf], ['dgdo', L.viewDgdo, L.dgdoOf], ['price', L.viewCurve, L.priceOf],
+  ];
+  it('every view gives the whole case the same result as its block alone, and a block alone runs as it stands', () => {
+    let n = 0;
+    CASES.forEach((c) => VIEWS.forEach(([key, view, route]) => {
+      if (!Object.prototype.hasOwnProperty.call(c, key)) return;
+      const whole = view(c);
+      expect(whole.error, `${c.dataset} ${key}`).toBeUndefined();
+      expect(whole).toEqual(route(c[key]));
+      expect(view(c[key])).toEqual(whole);
+      n += 1;
+    }));
+    expect(n).toBe(9);
+  });
+  it('the ledger and the money views read a whole priced case by its named keys', () => {
+    const [, ifeyi, nwaka] = CASES;
+    const block = { price: ifeyi.price, pricing: ifeyi.pricing, contract: ifeyi.contract };
+    expect(L.viewLedger(ifeyi).years).toEqual(L.viewLedger(block).years);
+    expect(L.viewLedger(ifeyi).error).toBeUndefined();
+    const nb = { price: nwaka.price, pricing: nwaka.pricing, contract: nwaka.contract, royalty: nwaka.royalty, discountRate: nwaka.discountRate, baseYear: nwaka.baseYear };
+    expect(L.viewCash(nwaka)).toEqual(L.viewCash(nb));
+    expect(L.viewCash(nwaka).error).toBeUndefined();
+  });
+  it('NEGATIVE CONTROL: the raw route without pick refuses the whole case by its first unknown key', () => {
+    expect(L.priceOf(CASES[1]).error).toMatch(/^dataset is not an accepted key/);
+    expect(L.dgdoOf(CASES[1]).error).toMatch(/^dataset is not an accepted key/);
+  });
+  it('the one-year view starts from one contract year, and the two power plant years alone are offered', () => {
+    expect(L.STARTS.year.years).toHaveLength(1);
+    expect(L.STARTS.power2027.years.map((y) => y.year)).toEqual([2027]);
+    expect(L.STARTS.power2032.years.map((y) => y.year)).toEqual([2032]);
   });
 });
 

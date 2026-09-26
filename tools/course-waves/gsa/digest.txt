@@ -613,16 +613,16 @@ The engine's reasons for the month, verbatim:
 
 SINGLE DAYS (golden inputs), each stated to show one rule:
 
-| golden case | DCQ | MaxDCQ percent | tolerance | nominated | available | taken | force majeure | maintenance | buyer-caused | seller shortfall | adjusted DCQ | buyer shortfall |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| daily-tolerance-covers-the-gap | 100.000000 | 120 | 5.000000 | 100.000000 | 95.000000 | 95.000000 | 0.000000 | 0.000000 | false | 0.000000 | 100.000000 | 5.000000 |
-| daily-tolerance-one-short | 100.000000 | 120 | 5.000000 | 100.000000 | 94.000000 | 94.000000 | 0.000000 | 0.000000 | false | 1.000000 | 99.000000 | 5.000000 |
-| daily-over-nomination-failed | 100.000000 | 120 | 0.000000 | 150.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | false | 120.000000 | -20.000000 | 0.000000 |
-| daily-fm-part-day | 100.000000 | 120 | 0.000000 | 100.000000 | 40.000000 | 40.000000 | 30.000000 | 10.000000 | false | 20.000000 | 40.000000 | 0.000000 |
-| daily-fm-whole-day-with-nomination | 100.000000 | 120 | 0.000000 | 100.000000 | 0.000000 | 0.000000 | 100.000000 | 0.000000 | false | 0.000000 | 0.000000 | 0.000000 |
-| daily-available-not-taken | 100.000000 | 120 | 0.000000 | 100.000000 | 100.000000 | 60.000000 | 0.000000 | 0.000000 | false | 0.000000 | 100.000000 | 40.000000 |
-| daily-no-maxdcq | 100.000000 | none | 0.000000 | 180.000000 | 180.000000 | 180.000000 | 0.000000 | 0.000000 | false | 0.000000 | 100.000000 | 0.000000 |
-| daily-buyer-caused | 100.000000 | 120 | 0.000000 | 100.000000 | 20.000000 | 20.000000 | 0.000000 | 0.000000 | true | 0.000000 | 100.000000 | 80.000000 |
+| golden case | DCQ | MaxDCQ percent | tolerance | nominated | properly nominated | available | taken | force majeure | maintenance | buyer-caused | seller shortfall | adjusted DCQ | buyer shortfall |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| daily-tolerance-covers-the-gap | 100.000000 | 120 | 5.000000 | 100.000000 | 100.000000 | 95.000000 | 95.000000 | 0.000000 | 0.000000 | false | 0.000000 | 100.000000 | 5.000000 |
+| daily-tolerance-one-short | 100.000000 | 120 | 5.000000 | 100.000000 | 100.000000 | 94.000000 | 94.000000 | 0.000000 | 0.000000 | false | 1.000000 | 99.000000 | 5.000000 |
+| daily-over-nomination-failed | 100.000000 | 120 | 0.000000 | 150.000000 | 120.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | false | 120.000000 | -20.000000 | 0.000000 |
+| daily-fm-part-day | 100.000000 | 120 | 0.000000 | 100.000000 | 100.000000 | 40.000000 | 40.000000 | 30.000000 | 10.000000 | false | 20.000000 | 40.000000 | 0.000000 |
+| daily-fm-whole-day-with-nomination | 100.000000 | 120 | 0.000000 | 100.000000 | 100.000000 | 0.000000 | 0.000000 | 100.000000 | 0.000000 | false | 0.000000 | 0.000000 | 0.000000 |
+| daily-available-not-taken | 100.000000 | 120 | 0.000000 | 100.000000 | 100.000000 | 100.000000 | 60.000000 | 0.000000 | 0.000000 | false | 0.000000 | 100.000000 | 40.000000 |
+| daily-no-maxdcq | 100.000000 | none | 0.000000 | 180.000000 | 180.000000 | 180.000000 | 180.000000 | 0.000000 | 0.000000 | false | 0.000000 | 100.000000 | 0.000000 |
+| daily-buyer-caused | 100.000000 | 120 | 0.000000 | 100.000000 | 100.000000 | 20.000000 | 20.000000 | 0.000000 | 0.000000 | true | 0.000000 | 100.000000 | 80.000000 |
 
 daily-tolerance-covers-the-gap, the engine's reasons, verbatim:
 > 2027-03-01: taken 95 is below the adjusted DCQ 100: buyer shortfall 5
@@ -654,19 +654,30 @@ THE RULE, in the engine's basis: Adjusted ACQ = ACQ - maintenance - force majeur
 
 Money in a contract year, as the engine builds it: counted x contract price + make-up taken x make-up price + deficiency payment - seller shortfall x shortfall price - refund = net to the seller. Each term is a return value in the rows below.
 
-| golden case | year | ACQ | reductions | Adjusted ACQ | take-or-pay quantity | taken | counted | deficiency | deficiency payment | shortfall damages | net to seller |
+| golden case | year | ACQ | reductions | Adjusted ACQ | take-or-pay quantity | taken | counted | deficiency | contract price (golden input) | take-or-pay price (golden input) | deficiency payment | shortfall damages | net to seller |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| top-single-year | 2027 | 1000.000000 | 0.000000 | 1000.000000 | 900.000000 | 500.000000 | 500.000000 | 400.000000 | 3.000000 | 3.000000 | 1200.000000 | 0.000000 | 2700.000000 |
+| top-exactly-met | 2027 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 800.000000 | 800.000000 | 0.000000 | 3.000000 | 3.000000 | 0.000000 | 0.000000 | 2400.000000 |
+| top-exactly-met | 2028 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 800.000000 | 800.000000 | 0.000000 | 3.000000 | 3.000000 | 0.000000 | 0.000000 | 2400.000000 |
+| top-one-unit-short | 2027 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 799.000000 | 799.000000 | 1.000000 | 3.000000 | 3.000000 | 3.000000 | 0.000000 | 2400.000000 |
+| top-one-unit-short | 2028 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 800.000000 | 800.000000 | 0.000000 | 3.000000 | 3.000000 | 0.000000 | 0.000000 | 2400.000000 |
+| top-zero-take-year | 2027 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 0.000000 | 0.000000 | 800.000000 | 3.000000 | 3.000000 | 2400.000000 | 0.000000 | 2400.000000 |
+| top-zero-take-year | 2028 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 1000.000000 | 1000.000000 | 0.000000 | 3.000000 | 3.000000 | 0.000000 | 0.000000 | 3000.000000 |
+| top-force-majeure-and-shortfall | 2027 | 1000.000000 | 200.000000 | 800.000000 | 640.000000 | 600.000000 | 600.000000 | 40.000000 | 3.000000 | 3.000000 | 120.000000 | 75.000000 | 1845.000000 |
+| top-force-majeure-and-shortfall | 2028 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 800.000000 | 800.000000 | 0.000000 | 3.000000 | 3.000000 | 0.000000 | 0.000000 | 2400.000000 |
+| top-fm-whole-year | 2027 | 1000.000000 | 1000.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 3.000000 | 3.000000 | 0.000000 | 0.000000 | 0.000000 |
+| top-fm-whole-year | 2028 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 800.000000 | 800.000000 | 0.000000 | 3.000000 | 3.000000 | 0.000000 | 0.000000 | 2400.000000 |
+
+THE POWER PLANT'S YEARS ALONE. The fixture's 2027 and 2032, each run as a one-year case with the fixture's take-or-pay percentage and make-up terms (each is then the last contract year of its own case, so a deficiency would open no make-up right):
+
+| power plant year alone (fixture) | ACQ | reductions | Adjusted ACQ | take-or-pay quantity | taken | deficiency | contract price (fixture) | take-or-pay price (fixture) | deficiency payment | shortfall damages | net to seller |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| top-single-year | 2027 | 1000.000000 | 0.000000 | 1000.000000 | 900.000000 | 500.000000 | 500.000000 | 400.000000 | 1200.000000 | 0.000000 | 2700.000000 |
-| top-exactly-met | 2027 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 800.000000 | 800.000000 | 0.000000 | 0.000000 | 0.000000 | 2400.000000 |
-| top-exactly-met | 2028 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 800.000000 | 800.000000 | 0.000000 | 0.000000 | 0.000000 | 2400.000000 |
-| top-one-unit-short | 2027 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 799.000000 | 799.000000 | 1.000000 | 3.000000 | 0.000000 | 2400.000000 |
-| top-one-unit-short | 2028 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 800.000000 | 800.000000 | 0.000000 | 0.000000 | 0.000000 | 2400.000000 |
-| top-zero-take-year | 2027 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 0.000000 | 0.000000 | 800.000000 | 2400.000000 | 0.000000 | 2400.000000 |
-| top-zero-take-year | 2028 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 1000.000000 | 1000.000000 | 0.000000 | 0.000000 | 0.000000 | 3000.000000 |
-| top-force-majeure-and-shortfall | 2027 | 1000.000000 | 200.000000 | 800.000000 | 640.000000 | 600.000000 | 600.000000 | 40.000000 | 120.000000 | 75.000000 | 1845.000000 |
-| top-force-majeure-and-shortfall | 2028 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 800.000000 | 800.000000 | 0.000000 | 0.000000 | 0.000000 | 2400.000000 |
-| top-fm-whole-year | 2027 | 1000.000000 | 1000.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
-| top-fm-whole-year | 2028 | 1000.000000 | 0.000000 | 1000.000000 | 800.000000 | 800.000000 | 800.000000 | 0.000000 | 0.000000 | 0.000000 | 2400.000000 |
+| 2027 | 7665000.000000 | 48300.000000 | 7616700.000000 | 6093360.000000 | 7245000.000000 | 0.000000 | 2.180000 | 2.180000 | 0.000000 | 7875.000000 | 15786225.000000 |
+| 2032 | 7686000.000000 | 0.000000 | 7686000.000000 | 6148800.000000 | 6148800.000000 | 0.000000 | 2.180000 | 2.180000 | 0.000000 | 0.000000 | 13404384.000000 |
+2027 alone, the engine's reasons, verbatim:
+> 2027: seller shortfall 6300 reduces the Adjusted ACQ and is paid to the buyer at 1.25: 7875
+2032 alone, the engine's reasons, verbatim:
+(no reason: nothing to reconcile)
 
 top-single-year, the engine's reasons, verbatim:
 > 2027: 500 counted against the take-or-pay quantity 900 leaves a deficiency of 400; the deficiency payment is 400 x 3 = 1200; the delivery period ends with this year, so no make-up right arises

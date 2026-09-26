@@ -37,6 +37,12 @@ const INPUTS = JSON.parse(execFileSync('node', [path.join(mirrorDir('gsa'), 'gsa
   },
 }));
 const caseOf = (c) => c;
+// THE PASTE PATH: the case file exactly as the capstone card offers it for copying.
+const CASE_TEXT = {
+  OZUBU: fs.readFileSync(path.join(ROOT, 'src/content/capstone-cases/gsa/ozubu_case.json'), 'utf8'),
+  IFEYI: fs.readFileSync(path.join(ROOT, 'src/content/capstone-cases/gsa/ifeyi_case.json'), 'utf8'),
+  NWAKA: fs.readFileSync(path.join(ROOT, 'src/content/capstone-cases/gsa/nwaka_case.json'), 'utf8'),
+};
 
 const text = (h) => h.replace(/<[^>]+>/g, '').replace(/&amp;/g, '&').replace(/&#x27;/g, "'").trim();
 /** Every table in the markup as { head, rows } of cell text. */
@@ -104,6 +110,26 @@ describe('EVERY GRADED FIELD IS READABLE FROM A PANEL AT ITS TOLERANCE', () => {
     });
     expect(read).toHaveLength(18);
     console.log('[gsa panels] all 18 graded fields read off a rendered panel within their tolerance');
+  }, 120000);
+  it('THE PASTE PATH: each field read the same way with the WHOLE case file pasted into the view box', () => {
+    const cache = new Map();
+    const render = (cap, Panel, mode) => {
+      const k = `${cap}|${mode}|${Panel.name}`;
+      if (!cache.has(k)) cache.set(k, renderToStaticMarkup(React.createElement(Panel, { initialMode: mode, initialText: CASE_TEXT[cap] })));
+      return cache.get(k);
+    };
+    let read = 0;
+    FIELDS.forEach(([, key, value, tol]) => {
+      const [cap, Panel, mode, get] = WHERE[key];
+      const html = render(cap, Panel, mode);
+      expect(html, `${key}: the ${mode} view refused the pasted case file`).not.toContain('THE ENGINE REFUSED');
+      const shown = get(html);
+      expect(shown, `${key} is printed with six decimals`).toMatch(/^-?\d+\.\d{6}$/);
+      expect(Math.abs(Number(shown) - value), `${key}: pasted, the panel prints ${shown}, graded ${value} at ${tol}`).toBeLessThanOrEqual(tol);
+      read += 1;
+    });
+    expect(read).toBe(18);
+    console.log('[gsa panels] all 18 graded fields read off a rendered panel with the whole case file pasted');
   }, 120000);
   it('NEGATIVE CONTROL: a field read one row off is caught', () => {
     const [, , value, tol] = FIELDS.find((f) => f[1] === 'ifeyi_2031_make_up_taken');

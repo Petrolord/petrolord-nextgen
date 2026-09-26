@@ -89,12 +89,13 @@ export const orNone = (v) => (v === null || v === undefined ? 'none' : String(v)
 export const eX = (v) => (v === null || v === undefined || !Number.isFinite(Number(v)) ? 'none' : (Number(v) === 0 ? '0' : Number(v).toExponential(2)));
 
 /**
- * A JSON box a learner edits, started from a teaching case (or, on the
- * capstone card's instruction, from a case file the learner pastes). Returns
- * the text, its setter and the parsed { value } or { error }.
+ * A JSON box a learner edits, started from a teaching case, or from text as a
+ * learner pastes it (initialText, used verbatim: the whole case file copied from
+ * the capstone card is the case the tests render). Returns the text, its setter
+ * and the parsed { value } or { error }.
  */
-export const useJsonBox = (start) => {
-  const [text, setText] = React.useState(pretty(start));
+export const useJsonBox = (start, initialText = null) => {
+  const [text, setText] = React.useState(typeof initialText === 'string' ? initialText : pretty(start));
   let parsed;
   try {
     parsed = text.trim() === '' ? { error: 'the box is empty' } : { value: JSON.parse(text) };
@@ -103,6 +104,14 @@ export const useJsonBox = (start) => {
   }
   return { text, setText, parsed };
 };
+
+/** The source the engine names for the rule it applied (its basis.source), verbatim. */
+export const Source = ({ text }) => (text ? (
+  <div className="mt-3 rounded-md border border-slate-600/60 bg-slate-900/40 p-3">
+    <p className="text-slate-300 text-xs font-medium mb-1">Source, as the engine names it</p>
+    <p className="text-xs text-slate-300 mb-0 font-mono">{text}</p>
+  </div>
+) : null);
 
 /** The engine's reasons, each verbatim. */
 export const Reasons = ({ items }) => (items && items.length ? (

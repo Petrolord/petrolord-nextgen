@@ -1700,7 +1700,7 @@
       "banks/ec8b_m06.py"
     ],
     "pins": {
-      "digest.txt": "d68b9066fde69b0ac49ff5cead3ad51de38bd40bde9af9674c63ae454abe82c5",
+      "digest.txt": "8ee99b2c29b07b1c3887d3f5ea309fc06ce65062dc95b7b6c331ebbe75088d63",
       "fields.json": "65052a2bdd6ca449286bf85b0c8fb07026bb1339b4ed846e393da889852a2226"
     }
   }

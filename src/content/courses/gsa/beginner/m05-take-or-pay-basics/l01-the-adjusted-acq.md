@@ -47,4 +47,4 @@ Without it, a buyer would owe take-or-pay money on gas the seller never offered.
 
 ## Exercise
 
-Open the quantity calculator, the course's own calculator panel, and choose "One take-or-pay year". The box holds the golden case with force majeure and a seller shortfall. Run it and read the ACQ and the Adjusted ACQ for 2027 and 2028. Find each reduction among the inputs of 2027 and check that they add up to the difference. Then lower the 2027 `acq` to 100 and read the refusal. Restore it, raise `forceMajeure` for 2027 until the reductions equal the ACQ, and read the Adjusted ACQ.
+Open the quantity calculator, the course's own calculator panel, and choose "One take-or-pay year". Start from "The power plant, 2027 alone", a year with force majeure and a seller shortfall. Run it and read the ACQ, the reductions and the Adjusted ACQ. Find each reduction among the inputs of 2027 and check that they add up to the difference. Then lower `acq` to 100 and read the refusal. Restore it, raise `forceMajeure` until the reductions equal the ACQ, and read the Adjusted ACQ.

@@ -36,4 +36,4 @@ A high take-or-pay percentage, such as the export feed's 90, gives the seller a 
 
 ## Exercise
 
-Open the quantity calculator, the course's own calculator panel, and choose "One take-or-pay year". Run the starting case and read the Adjusted ACQ and the take-or-pay quantity for 2027. Change `topPct` to 90 and run it; read the take-or-pay quantity again. Set `topPct` to 101 and read the refusal. Then switch to "Contract quantities and swing", run the power plant's 2027 terms, and compare the take-or-pay quantity on the full ACQ with the one you would expect after a year's reductions.
+Open the quantity calculator, the course's own calculator panel, and choose "One take-or-pay year". Start from "The power plant, 2027 alone" and read the Adjusted ACQ and the take-or-pay quantity. Change `topPct` to 90 and run it; read the take-or-pay quantity again. Set `topPct` to 101 and read the refusal. Then switch to "Contract quantities and swing", run the power plant's 2027 terms, and compare the take-or-pay quantity on the full ACQ with the one you would expect after a year's reductions.

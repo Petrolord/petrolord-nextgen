@@ -14,7 +14,7 @@ Six quantities, each to six decimals, and the card names each exactly. They are 
 
 ## How to work it
 
-1. Copy the case's price block into "Prices on an S-curve". That view reads priceSeries inputs as they stand, so paste the price block alone; the whole file is refused there by its first unknown key. Read the monthly prices, their segments and the annual rows.
+1. Paste the whole case file into "Prices on an S-curve". That view reads the price block of the file and runs it. Read the monthly prices, their segments and the annual rows.
 2. Paste the whole case file into "The whole contract in money". The view prices the ledger from the price block by the stated basis and runs the contract.
 3. Read the ledger table for the carry-forward credit and the refund, the money table for the royalty, and the NPV tile for the present value.
 4. Read every reason under the tables, and every refusal first if one appears; the case as issued runs.

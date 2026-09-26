@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import {
-  STARTS, pick, energyOf, quantitiesOf, dailyOf, takeOrPayOf,
+  STARTS, pick, viewEnergy, viewQuantities, viewDaily, viewYear,
 } from './gsaLab';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
 import {
-  six, orNone, Tbl, TextField, Refusal, EngineNote, Reasons, useJsonBox,
+  six, orNone, Tbl, TextField, Refusal, EngineNote, Reasons, Source, useJsonBox,
+  pretty,
 } from './panelBits';
 
 // The quantity calculator (Associate): volume to energy, contract quantities,
@@ -27,12 +28,12 @@ const Box = ({ box, label, rows = 10 }) => (
   </FieldGrid>
 );
 
-export const EnergyMode = ({ initialCase = null }) => {
-  const box = useJsonBox(initialCase ? pick(initialCase, 'energy') : STARTS.energy);
-  const r = box.parsed.error ? null : energyOf(box.parsed.value);
+export const EnergyMode = ({ initialCase = null, initialText = null }) => {
+  const box = useJsonBox(initialCase ? pick(initialCase, 'energy') : STARTS.energy, initialText);
+  const r = box.parsed.error ? null : viewEnergy(box.parsed.value);
   return (
     <>
-      <Box box={box} label="toEnergy inputs (JSON: quantity, quantityUnit, heatingValue, heatingValueUnit, heatingValueBasis, referenceConditions)" rows={8} />
+      <Box box={box} label="toEnergy inputs (JSON: quantity, quantityUnit, heatingValue, heatingValueUnit, heatingValueBasis, referenceConditions), or a whole case file" rows={8} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && (
@@ -46,18 +47,19 @@ export const EnergyMode = ({ initialCase = null }) => {
           <EngineNote text={r.basis.rule} />
           <EngineNote text={r.basis.heatingValue} />
           <EngineNote text={r.basis.units} />
+          <Source text={r.basis.units.split('; ')[0]} />
         </>
       )}
     </>
   );
 };
 
-export const QuantitiesMode = ({ initialCase = null }) => {
-  const box = useJsonBox(initialCase ? pick(initialCase, 'quantities') : STARTS.quantities);
-  const r = box.parsed.error ? null : quantitiesOf(box.parsed.value);
+export const QuantitiesMode = ({ initialCase = null, initialText = null }) => {
+  const box = useJsonBox(initialCase ? pick(initialCase, 'quantities') : STARTS.quantities, initialText);
+  const r = box.parsed.error ? null : viewQuantities(box.parsed.value);
   return (
     <>
-      <Box box={box} label="contractQuantities inputs (JSON: dcq; days, year or period; maxDcqPct; topPct)" rows={7} />
+      <Box box={box} label="contractQuantities inputs (JSON: dcq; days, year or period; maxDcqPct; topPct), or a whole case file" rows={7} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && (
@@ -72,18 +74,19 @@ export const QuantitiesMode = ({ initialCase = null }) => {
           </TileGrid>
           <EngineNote text={r.basis.dayCount} />
           <EngineNote text={r.basis.rule} />
+          <Source text={r.basis.source} />
         </>
       )}
     </>
   );
 };
 
-export const DailyMode = ({ initialCase = null }) => {
-  const box = useJsonBox(initialCase ? pick(initialCase, 'fortnight') : STARTS.daily);
-  const r = box.parsed.error ? null : dailyOf(box.parsed.value);
+export const DailyMode = ({ initialCase = null, initialText = null }) => {
+  const box = useJsonBox(initialCase ? pick(initialCase, 'fortnight') : STARTS.daily, initialText);
+  const r = box.parsed.error ? null : viewDaily(box.parsed.value);
   return (
     <>
-      <Box box={box} label="dailyBalance inputs (JSON: dcq, maxDcqPct, deliveryTolerance, days)" rows={12} />
+      <Box box={box} label="dailyBalance inputs (JSON: dcq, maxDcqPct, deliveryTolerance, days), or a whole case file" rows={12} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && (
@@ -103,24 +106,36 @@ export const DailyMode = ({ initialCase = null }) => {
           <Reasons items={r.days.flatMap((d) => d.reasons)} />
           <EngineNote text={r.basis.rule} />
           <EngineNote text={r.basis.reading} />
+          <Source text={r.basis.source} />
         </>
       )}
     </>
   );
 };
 
-export const YearMode = ({ initialCase = null }) => {
-  const box = useJsonBox(initialCase ? pick(initialCase, 'year') : STARTS.year);
-  const r = box.parsed.error ? null : takeOrPayOf(box.parsed.value);
+const YEAR_STARTS = [
+  ['golden', 'A one-year teaching case'],
+  ['power2027', 'The power plant, 2027 alone'],
+  ['power2032', 'The power plant, 2032 alone'],
+];
+
+export const YearMode = ({ initialCase = null, initialText = null }) => {
+  const [start, setStart] = useState('golden');
+  const box = useJsonBox(initialCase ? pick(initialCase, 'year') : STARTS.year, initialText);
+  const choose = (k) => { setStart(k); box.setText(pretty(k === 'golden' ? STARTS.year : STARTS[k])); };
+  const r = box.parsed.error ? null : viewYear(box.parsed.value);
   return (
     <>
-      <Box box={box} label="takeOrPay inputs (JSON: years, topPct, makeUp)" rows={12} />
+      <FieldGrid>
+        <SelectField label="Start from" value={start} onChange={choose} options={YEAR_STARTS} />
+      </FieldGrid>
+      <Box box={box} label="takeOrPay inputs (JSON: years, topPct, makeUp), or a whole case file" rows={12} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && (
         <>
-          <Tbl head={['year', 'ACQ', 'Adjusted ACQ', 'take-or-pay quantity', 'taken', 'counted', 'deficiency', 'deficiency payment', 'regular revenue', 'shortfall damages', 'net to seller']}
-            rows={r.years.map((y) => [String(y.year), six(y.acq), six(y.adjustedAcq), six(y.topQuantity), six(y.taken), six(y.counted), six(y.deficiency), six(y.deficiencyPayment), six(y.regularRevenue), six(y.shortfallPayment), six(y.netToSeller)])} />
+          <Tbl head={['year', 'ACQ', 'Adjusted ACQ', 'take-or-pay quantity', 'taken', 'counted', 'deficiency', 'contract price', 'take-or-pay price', 'deficiency payment', 'regular revenue', 'shortfall damages', 'net to seller']}
+            rows={r.years.map((y, i) => { const inp = pick(box.parsed.value, 'year').years[i]; return [String(y.year), six(y.acq), six(y.adjustedAcq), six(y.topQuantity), six(y.taken), six(y.counted), six(y.deficiency), six(inp.contractPrice), six(inp.topPrice), six(y.deficiencyPayment), six(y.regularRevenue), six(y.shortfallPayment), six(y.netToSeller)]; })} />
           <TileGrid>
             <Tile label="Total deficiency payment" value={six(r.totals.deficiencyPayment)} />
             <Tile label="Total net to the seller" value={six(r.totals.netToSeller)} />
@@ -129,13 +144,14 @@ export const YearMode = ({ initialCase = null }) => {
           </TileGrid>
           <Reasons items={r.years.flatMap((y) => y.reasons)} />
           <EngineNote text={r.basis.rule} />
+          <Source text={r.basis.source} />
         </>
       )}
     </>
   );
 };
 
-const QuantityCalculator = ({ initialMode = 'energy', initialCase = null }) => {
+const QuantityCalculator = ({ initialMode = 'energy', initialCase = null, initialText = null }) => {
   const [mode, setMode] = useState(initialMode);
   return (
     <PanelShell
@@ -146,10 +162,10 @@ const QuantityCalculator = ({ initialMode = 'energy', initialCase = null }) => {
         <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
       </FieldGrid>
       <div className="mt-3">
-        {mode === 'energy' && <EnergyMode initialCase={initialCase} />}
-        {mode === 'quantities' && <QuantitiesMode initialCase={initialCase} />}
-        {mode === 'daily' && <DailyMode initialCase={initialCase} />}
-        {mode === 'year' && <YearMode initialCase={initialCase} />}
+        {mode === 'energy' && <EnergyMode initialCase={initialCase} initialText={initialText} />}
+        {mode === 'quantities' && <QuantitiesMode initialCase={initialCase} initialText={initialText} />}
+        {mode === 'daily' && <DailyMode initialCase={initialCase} initialText={initialText} />}
+        {mode === 'year' && <YearMode initialCase={initialCase} initialText={initialText} />}
       </div>
       <Note>This is the course&apos;s own calculator: every number on it is a return value of the vendored engine. The Ekene agreements are synthetic; paste your own terms, or a whole case file, to replace them.</Note>
     </PanelShell>

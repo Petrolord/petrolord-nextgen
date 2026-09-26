@@ -131,18 +131,47 @@ export const contractCashOf = (c) => {
   return cashFlowsOf({ contract, royalty: c.royalty, discountRate: c.discountRate, baseYear: c.baseYear });
 };
 
+/* ------------------------------------------------ the view routes: what a pasted box goes through
+
+   Every view reads the box through `pick` at the key it needs, so a whole case
+   file pasted into any view runs the block that view computes, and a box that
+   holds one call's inputs runs as it stands. The ledger and the contract money
+   views read a priced case (price, pricing, contract) by its named keys. */
+
+export const VIEW_KEYS = Object.freeze({
+  energy: 'energy', quantities: 'quantities', daily: 'fortnight', year: 'year',
+  price: 'price', domestic: 'domestic', dgdo: 'dgdo', curve: 'price', parity: 'parity',
+});
+export const viewEnergy = (v) => energyOf(pick(v, VIEW_KEYS.energy));
+export const viewQuantities = (v) => quantitiesOf(pick(v, VIEW_KEYS.quantities));
+export const viewDaily = (v) => dailyOf(pick(v, VIEW_KEYS.daily));
+export const viewYear = (v) => takeOrPayOf(pick(v, VIEW_KEYS.year));
+export const viewLedger = (v) => ledgerOf(v);
+export const viewPrice = (v) => priceOf(pick(v, VIEW_KEYS.price));
+export const viewDomestic = (v) => domesticOf(pick(v, VIEW_KEYS.domestic));
+export const viewDgdo = (v) => dgdoOf(pick(v, VIEW_KEYS.dgdo));
+export const viewCurve = (v) => priceOf(pick(v, VIEW_KEYS.curve));
+export const viewCash = (v) => contractCashOf(v);
+export const viewParity = (v) => parityOf(pick(v, VIEW_KEYS.parity));
+
 /* ------------------------------------------------ the teaching cases, as a panel starts */
 
 const powerContract = () => ({ years: clone(POWER.years), topPct: POWER.topPct, makeUp: clone(POWER.makeUp) });
+/** One Ekene power plant contract year alone, as a one-year take-or-pay case. */
+const powerYear = (year) => ({ years: [clone(POWER.years.find((y) => y.year === year))], topPct: POWER.topPct, makeUp: clone(POWER.makeUp) });
 
-/** The starting inputs of every panel view: the fixtures and golden inputs only. */
+/** The starting inputs of every panel view: the fixtures and golden inputs only. The one
+ *  take-or-pay year view starts from a one-year golden case and offers two power plant
+ *  years alone (the fixture's 2027 and 2032). */
 export const STARTS = Object.freeze({
   energy: GOLDEN_ARGS['energy-power-dcq'].args,
   quantities: GOLDEN_ARGS['cq-power-2028-leap'].args,
   daily: { dcq: POWER.january2027.dcq, maxDcqPct: POWER.january2027.maxDcqPct, days: POWER.january2027.days },
-  year: GOLDEN_ARGS['top-force-majeure-and-shortfall'].args,
+  year: GOLDEN_ARGS['top-single-year'].args,
   ledger: powerContract(),
   exportLedger: GOLDEN_ARGS['top-export'].args,
+  power2027: powerYear(2027),
+  power2032: powerYear(2032),
   price: GOLDEN_ARGS['price-export'].args,
   domestic: GOLDEN_ARGS['dp-gbi-urea-inside'].args,
   dgdo: GOLDEN_ARGS['dgdo-power-2028'].args,
@@ -160,6 +189,12 @@ export const januaryReader = () => {
 };
 
 /** The power plant ledger: deficiency payments and make-up by year, and the totals. */
+/** The power plant's 2027 and 2032, each run alone as a one-year case. */
+export const powerYearReader = () => [STARTS.power2027, STARTS.power2032].map((c) => {
+  const y = takeOrPayOf(c).years[0];
+  return { year: y.year, adjustedAcq: y.adjustedAcq, topQuantity: y.topQuantity, deficiency: y.deficiency, deficiencyPayment: y.deficiencyPayment, shortfallPayment: y.shortfallPayment, netToSeller: y.netToSeller };
+});
+
 export const powerLedgerReader = () => {
   const r = takeOrPayOf(STARTS.ledger);
   return {

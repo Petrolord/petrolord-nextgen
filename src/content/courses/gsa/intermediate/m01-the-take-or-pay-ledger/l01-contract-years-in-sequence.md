@@ -39,6 +39,6 @@ That is why 2029 counts 7665000.000000 against its take-or-pay quantity although
 Work in the course's own calculator panels, which call the same engine these lessons quote.
 
 1. Open the ledger calculator on the view "The take-or-pay ledger". It starts with the power plant agreement. Check the 2027, 2028 and 2029 rows against the table above.
-2. Copy the 2027 entry of `years`, with `topPct` and `makeUp`, into the quantity calculator's view "One take-or-pay year". Confirm that the Adjusted ACQ and the take-or-pay quantity are the same when the year stands alone.
+2. In the quantity calculator's view "One take-or-pay year", start from "The power plant, 2027 alone". Confirm that the Adjusted ACQ and the take-or-pay quantity are the same when the year stands alone.
 3. Back in the ledger view, delete the 2029 entry from `years`. Read the refusal: write down which entry it names and which year it expects. Restore the entry.
 4. For 2029, write the quantity taken, the quantity counted and the make-up taken, and show that the first less the third is the second.

@@ -39,4 +39,4 @@ The one-year view prints each year's ACQ, Adjusted ACQ, take-or-pay quantity, ta
 
 ## Exercise
 
-Open the quantity calculator, the course's own calculator panel, and choose "One take-or-pay year". Run the starting case, which holds two contract years, and read the regular revenue, the deficiency payment, the shortfall damages and the net to the seller for 2027. Check that the first two, less the third, give the fourth. Then change the 2027 `taken` to 0, run it, and read the four columns again. Finally set `taken` to 800 and compare the net to the seller in the three runs.
+Open the quantity calculator, the course's own calculator panel, and choose "One take-or-pay year". Start from "The power plant, 2027 alone" and read the regular revenue, the deficiency payment, the shortfall damages and the net to the seller. Check that the first two, less the third, give the fourth. Then change `taken` to 0, run it, and read the four columns again. Finally set `taken` to 5460000, the take of the plant's outage year, and compare the net to the seller in the three runs.

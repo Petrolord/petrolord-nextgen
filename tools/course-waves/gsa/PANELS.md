@@ -40,22 +40,34 @@ on the capstone card only.
 ## THE THREE CALCULATORS
 
 Every view takes the learner's own inputs as JSON, because that is how a
-capstone is worked. A box that holds a whole case file is read at the key the
-view needs (energy, quantities, fortnight, year, price, contract, dgdo); a box
-that holds one call's inputs is read as it stands. Every view shows the
-engine's own refusal and reasons, verbatim.
+capstone is worked. Every view reads what is pasted through the lab's view
+routes (`viewEnergy` to `viewParity`), which apply `pick` at the key the view
+needs (energy, quantities, fortnight, year, price, domestic, dgdo, parity), so a
+whole case file pasted into any view runs that view's block and a box that
+holds one call's inputs runs as it stands; the ledger and the contract money
+views read a priced case by its named keys. `gsaLab.test.js` proves every view
+gives a whole case file the result of its block alone, and
+`panelCapstoneReadable.test.js` reads all eighteen graded fields with each case
+file pasted WHOLE, as the capstone card offers it. Every view shows the
+engine's own refusal and reasons, verbatim, and a Source block with the
+engine's `basis.source` (the volume view names its units line, which carries
+its source).
 
 ### `gsa-quantity-calculator` (Associate)
 
 Volume to energy (the power plant DCQ at 21000.000000 MMBtu); contract
 quantities with the day count and effective swing (1.666667 on HMRC's own
 figures); the daily balance with its totals (January 2027: buyer shortfall
-31270.000000); one take-or-pay year with its deficiency payment.
+31270.000000); one take-or-pay year with its deficiency payment, starting from a
+one-year golden case (a deficiency payment of 1200.000000) with the power
+plant's 2027 and 2032 alone offered as starts, and the contract and take-or-pay
+price of each year printed beside its payment.
 
 ### `gsa-ledger-calculator` (Professional)
 
-The take-or-pay ledger, plain or priced from a price series by the stated basis
-(the power plant's 2028 deficiency payment of 1501584.000000); contract prices
+The take-or-pay ledger, plain or priced from a price series by the stated basis,
+starting from the power plant (the 2028 deficiency payment of 1501584.000000) or
+the export feed (the 2029 carry-forward credit of 3219250.000000); contract prices
 month by month with windows, segments and annual rows (the export 2029 average
 of 9.808450); the domestic gas prices (commercial 2.680000 on the reported 2026
 base price); and the delivery obligation (2366700.000000 in 2028).

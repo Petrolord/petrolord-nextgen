@@ -44,4 +44,4 @@ A take-or-pay year cannot be computed without the make-up terms, because the eng
 
 ## Exercise
 
-Open the quantity calculator, the course's own calculator panel, and choose "One take-or-pay year". Replace the box with one year: `year` 2027, `acq` 1000, `taken` 500, a `contractPrice`, `topPrice` and `makeUpPrice` of your own, `topPct` 90, and a `makeUp` object with `periodYears` 2, `order` "after-adjusted-acq" and `endOfTerm` "forfeit". Run it and read the deficiency, the deficiency payment and the reason. Change `topPrice` and run it again. Then delete `topPrice` and read the refusal.
+Open the quantity calculator, the course's own calculator panel, and choose "One take-or-pay year". The starting case is one year: `year` 2027, `acq` 1000, `taken` 500, `topPct` 90, and a `makeUp` object with `periodYears` 2, `order` "after-adjusted-acq" and `endOfTerm` "forfeit". Run it and read the deficiency, the contract price and take-or-pay price columns, the deficiency payment and the reason. Change `topPrice` and run it again. Then delete `topPrice` and read the refusal.

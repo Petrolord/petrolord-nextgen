@@ -23,7 +23,7 @@ All six are reported to six decimals, as the panel prints them. Each is the same
 
 ## How to load the case
 
-Paste the whole case file into "The take-or-pay ledger". That view prices the months with the `price` block, copies each year's prices from the annual rows by the basis in `pricing`, and runs the ledger; the priced prices appear in a table above the ledger. For "Contract prices month by month", paste only the `price` block; for "The Domestic Gas Delivery Obligation", paste only the `dgdo` block.
+Paste the whole case file into "The take-or-pay ledger". That view prices the months with the `price` block, copies each year's prices from the annual rows by the basis in `pricing`, and runs the ledger; the priced prices appear in a table above the ledger. Paste the same whole file into "Contract prices month by month" and into "The Domestic Gas Delivery Obligation": each view reads the block it needs, `price` or `dgdo`, and leaves the rest of the file alone.
 
 ## Things to check before you copy a figure
 

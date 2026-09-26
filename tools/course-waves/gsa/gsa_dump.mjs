@@ -468,9 +468,9 @@ w();
 const DAYS = ['daily-tolerance-covers-the-gap', 'daily-tolerance-one-short', 'daily-over-nomination-failed', 'daily-fm-part-day', 'daily-fm-whole-day-with-nomination', 'daily-available-not-taken', 'daily-no-maxdcq', 'daily-buyer-caused'];
 w('SINGLE DAYS (golden inputs), each stated to show one rule:');
 w();
-table(['golden case', 'DCQ', 'MaxDCQ percent', 'tolerance', 'nominated', 'available', 'taken', 'force majeure', 'maintenance', 'buyer-caused', 'seller shortfall', 'adjusted DCQ', 'buyer shortfall'], DAYS.map((id) => {
+table(['golden case', 'DCQ', 'MaxDCQ percent', 'tolerance', 'nominated', 'properly nominated', 'available', 'taken', 'force majeure', 'maintenance', 'buyer-caused', 'seller shortfall', 'adjusted DCQ', 'buyer shortfall'], DAYS.map((id) => {
   const a = argsOf(id); const r = runG(id); const d = r.days[0]; const ad = a.days[0];
-  return [id, f6(a.dcq), a.maxDcqPct === undefined ? 'none' : S(a.maxDcqPct), f6(a.deliveryTolerance || 0), f6(ad.nominated), f6(ad.available), f6(ad.taken), f6(d.forceMajeure), f6(d.maintenance), S(ad.buyerCaused === true), f6(d.sellerShortfall), f6(d.adjustedDcq), f6(d.buyerShortfall)];
+  return [id, f6(a.dcq), a.maxDcqPct === undefined ? 'none' : S(a.maxDcqPct), f6(a.deliveryTolerance || 0), f6(ad.nominated), f6(d.properlyNominated), f6(ad.available), f6(ad.taken), f6(d.forceMajeure), f6(d.maintenance), S(ad.buyerCaused === true), f6(d.sellerShortfall), f6(d.adjustedDcq), f6(d.buyerShortfall)];
 }));
 w();
 DAYS.forEach((id) => { const r = runG(id); w(`${id}, the engine's reasons, verbatim:`); if (r.days[0].reasons.length) reasons(r.days[0].reasons); else w('(no reason: nothing is owed either way)'); });
@@ -491,9 +491,17 @@ const ONE = ['top-single-year', 'top-exactly-met', 'top-one-unit-short', 'top-ze
 const oneRows = [];
 ONE.forEach((id) => {
   const r = runG(id);
-  r.years.forEach((y) => oneRows.push([id, S(y.year), f6(y.acq), f6(y.maintenance + y.forceMajeure + y.sellerShortfall + y.permittedReduction), f6(y.adjustedAcq), f6(y.topQuantity), f6(y.taken), f6(y.counted), f6(y.deficiency), f6(y.deficiencyPayment), f6(y.shortfallPayment), f6(y.netToSeller)]));
+  r.years.forEach((y, i) => oneRows.push([id, S(y.year), f6(y.acq), f6(y.maintenance + y.forceMajeure + y.sellerShortfall + y.permittedReduction), f6(y.adjustedAcq), f6(y.topQuantity), f6(y.taken), f6(y.counted), f6(y.deficiency), f6(argsOf(id).years[i].contractPrice), f6(argsOf(id).years[i].topPrice), f6(y.deficiencyPayment), f6(y.shortfallPayment), f6(y.netToSeller)]));
 });
-table(['golden case', 'year', 'ACQ', 'reductions', 'Adjusted ACQ', 'take-or-pay quantity', 'taken', 'counted', 'deficiency', 'deficiency payment', 'shortfall damages', 'net to seller'], oneRows);
+table(['golden case', 'year', 'ACQ', 'reductions', 'Adjusted ACQ', 'take-or-pay quantity', 'taken', 'counted', 'deficiency', 'contract price (golden input)', 'take-or-pay price (golden input)', 'deficiency payment', 'shortfall damages', 'net to seller'], oneRows);
+w();
+w('THE POWER PLANT\'S YEARS ALONE. The fixture\'s 2027 and 2032, each run as a one-year case with the fixture\'s take-or-pay percentage and make-up terms (each is then the last contract year of its own case, so a deficiency would open no make-up right):');
+w();
+const PW_ALONE = [2027, 2032].map((yy) => ({ yy, r: success(`takeOrPay on the power plant's ${yy} alone`, G.takeOrPay({ years: [clone(PW.years.find((x) => x.year === yy))], topPct: PW.topPct, makeUp: clone(PW.makeUp) })) }));
+table(['power plant year alone (fixture)', 'ACQ', 'reductions', 'Adjusted ACQ', 'take-or-pay quantity', 'taken', 'deficiency', 'contract price (fixture)', 'take-or-pay price (fixture)', 'deficiency payment', 'shortfall damages', 'net to seller'], PW_ALONE.map(({ yy, r }) => { const y = r.years[0]; const inp = PW.years.find((x) => x.year === yy); return [S(yy), f6(y.acq), f6(y.maintenance + y.forceMajeure + y.sellerShortfall + y.permittedReduction), f6(y.adjustedAcq), f6(y.topQuantity), f6(y.taken), f6(y.deficiency), f6(inp.contractPrice), f6(inp.topPrice), f6(y.deficiencyPayment), f6(y.shortfallPayment), f6(y.netToSeller)]; }));
+PW_ALONE.forEach(({ yy, r }) => { w(`${yy} alone, the engine's reasons, verbatim:`); if (r.years[0].reasons.length) reasons(r.years[0].reasons); else w('(no reason: nothing to reconcile)'); });
+must('the power plant 2032 alone meets its take-or-pay quantity exactly', PW_ALONE[1].r.years[0].deficiency === 0 && PW_ALONE[1].r.years[0].counted === PW_ALONE[1].r.years[0].topQuantity, 'pw 2032');
+must('each power plant year alone equals the same year of the eight-year ledger in quantities', PW_ALONE.every(({ yy, r }) => r.years[0].topQuantity === yr(topPw, yy).topQuantity && r.years[0].deficiency === yr(topPw, yy).deficiency), 'alone vs ledger');
 w();
 ONE.forEach((id) => { const r = runG(id); w(`${id}, the engine's reasons, verbatim:`); const rs = r.years.flatMap((y) => y.reasons); if (rs.length) reasons(rs); else w('(no reason: nothing to reconcile)'); });
 const em = runG('top-exactly-met');

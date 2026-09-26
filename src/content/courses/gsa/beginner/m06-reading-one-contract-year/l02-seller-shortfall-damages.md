@@ -38,4 +38,4 @@ Over a multi-year term, seller shortfall damages sit in the ledger beside make-u
 
 ## Exercise
 
-Open the quantity calculator, the course's own calculator panel, and choose "One take-or-pay year". Run the starting case and read the Adjusted ACQ, the shortfall damages and the net to the seller for 2027, and find the reason that names the seller shortfall. Delete `shortfallPrice` from 2027 and read the refusal. Restore it, set `sellerShortfall` to 0, and run it again; compare the Adjusted ACQ, the take-or-pay quantity and the net to the seller with the first run.
+Open the quantity calculator, the course's own calculator panel, and choose "One take-or-pay year". Start from "The power plant, 2027 alone" and read the Adjusted ACQ, the shortfall damages and the net to the seller, and find the reason that names the seller shortfall. Delete `shortfallPrice` and read the refusal. Restore it, set `sellerShortfall` to 0, and run it again; compare the Adjusted ACQ, the take-or-pay quantity and the net to the seller with the first run.

@@ -42,4 +42,4 @@ When a figure surprises you, find its reason before changing any input. A wrong 
 
 ## Exercise
 
-Open the quantity calculator, the course's own calculator panel, and choose "The daily balance". Run the power plant's January 2027 and read every reason printed below the table. Count how many name a buyer shortfall, how many a seller shortfall, and how many say nothing is owed. Then switch to "One take-or-pay year", run the starting case, and match each figure in the 2027 reasons to a column of the table.
+Open the quantity calculator, the course's own calculator panel, and choose "The daily balance". Run the power plant's January 2027 and read every reason printed below the table. Count how many name a buyer shortfall, how many a seller shortfall, and how many say nothing is owed. Then switch to "One take-or-pay year", start from "The power plant, 2027 alone", and match each figure in its reason to a column of the table.

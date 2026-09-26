@@ -62,9 +62,9 @@ The make-up account from the power plant lesson closes here too: 4487650.000000 
 
 ## Exercise
 
-Work in the course's own ledger calculator, on the view "The take-or-pay ledger". It starts with the power plant, so build the export ledger yourself.
+Work in the course's own ledger calculator, on the view "The take-or-pay ledger".
 
-1. Write ten entries of `years` from the two tables above: `year`, `acq`, `taken`, `forceMajeure` in 2030, and `contractPrice`, `topPrice` and `makeUpPrice`. Add `topPct` 90, `makeUp` with `periodYears` 5, `order` "after-top-quantity" and `endOfTerm` "refund", and `carryForward` with `periodYears` 3, `base` "top-quantity" and `capPct` 50.
+1. Choose the start "The export feed". The box holds the ten years of the tables above with their prices, `topPct` 90, `makeUp` with `periodYears` 5, `order` "after-top-quantity" and `endOfTerm` "refund", and `carryForward` with `periodYears` 3, `base` "top-quantity" and `capPct` 50. Check each term against the tables.
 2. Check the 2029 row, the four total tiles and the make-up account.
 3. Set `capPct` to 100 and write the 2029 deficiency payment and the make-up entry it opens.
 4. Restore `capPct` and set every `makeUpPrice` to 0. Write which totals move and which do not, and say why the deficiency payments stay put.

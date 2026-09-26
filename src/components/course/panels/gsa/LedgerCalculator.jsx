@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import {
-  STARTS, pick, ledgerOf, priceOf, domesticOf, dgdoOf,
+  STARTS, pick, viewLedger, viewPrice, viewDomestic, viewDgdo,
 } from './gsaLab';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
 import {
-  six, orNone, list, Tbl, TextField, Refusal, EngineNote, Reasons, useJsonBox,
+  six, orNone, list, Tbl, TextField, Refusal, EngineNote, Reasons, Source, useJsonBox, pretty,
 } from './panelBits';
 
 // The ledger calculator (Professional): the take-or-pay ledger with make-up and
@@ -35,12 +35,19 @@ const ledgerStart = (c) => {
   return pick(c, 'contract');
 };
 
-export const LedgerMode = ({ initialCase = null }) => {
-  const box = useJsonBox(ledgerStart(initialCase));
-  const r = box.parsed.error ? null : ledgerOf(box.parsed.value);
+const LEDGER_STARTS = [['power', 'The power plant (fixture)'], ['export', 'The export feed (golden input)']];
+
+export const LedgerMode = ({ initialCase = null, initialText = null }) => {
+  const [start, setStart] = useState('power');
+  const box = useJsonBox(ledgerStart(initialCase), initialText);
+  const choose = (k) => { setStart(k); box.setText(pretty(k === 'export' ? STARTS.exportLedger : STARTS.ledger)); };
+  const r = box.parsed.error ? null : viewLedger(box.parsed.value);
   return (
     <>
-      <Box box={box} label="takeOrPay inputs (JSON: years, topPct, makeUp, carryForward), or a priced case (price, pricing, contract)" rows={14} />
+      <FieldGrid>
+        <SelectField label="Start from" value={start} onChange={choose} options={LEDGER_STARTS} />
+      </FieldGrid>
+      <Box box={box} label="takeOrPay inputs (JSON: years, topPct, makeUp, carryForward), or a priced case or whole case file (price, pricing, contract)" rows={14} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && (
@@ -62,18 +69,19 @@ export const LedgerMode = ({ initialCase = null }) => {
           <EngineNote text={r.basis.makeUp} />
           <EngineNote text={r.basis.carryForward} />
           <EngineNote text={r.basis.reading} />
+          <Source text={r.basis.source} />
         </>
       )}
     </>
   );
 };
 
-export const PriceMode = ({ initialCase = null }) => {
-  const box = useJsonBox(initialCase ? pick(initialCase, 'price') : STARTS.price);
-  const r = box.parsed.error ? null : priceOf(box.parsed.value);
+export const PriceMode = ({ initialCase = null, initialText = null }) => {
+  const box = useJsonBox(initialCase ? pick(initialCase, 'price') : STARTS.price, initialText);
+  const r = box.parsed.error ? null : viewPrice(box.parsed.value);
   return (
     <>
-      <Box box={box} label="priceSeries inputs (JSON: months, formula, from, to, averagingMonths, lagMonths, resetMonths, rounding, reopeners)" rows={12} />
+      <Box box={box} label="priceSeries inputs (JSON: months, formula, from, to, averagingMonths, lagMonths, resetMonths, rounding, reopeners), or a whole case file" rows={12} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && (
@@ -86,18 +94,19 @@ export const PriceMode = ({ initialCase = null }) => {
           <EngineNote text={r.basis.averaging} />
           <EngineNote text={r.basis.rounding} />
           <EngineNote text={r.basis.annual} />
+          <Source text={r.basis.source} />
         </>
       )}
     </>
   );
 };
 
-export const DomesticMode = () => {
-  const box = useJsonBox(STARTS.domestic);
-  const r = box.parsed.error ? null : domesticOf(box.parsed.value);
+export const DomesticMode = ({ initialText = null }) => {
+  const box = useJsonBox(STARTS.domestic, initialText);
+  const r = box.parsed.error ? null : viewDomestic(box.parsed.value);
   return (
     <>
-      <Box box={box} label="domesticPrice inputs (JSON: sector, domesticBasePrice, negotiatedPrice, product, cmpp, transportTariff, schedule)" rows={8} />
+      <Box box={box} label="domesticPrice inputs (JSON: sector, domesticBasePrice, negotiatedPrice, product, cmpp, transportTariff, schedule), or a case file with a domestic block" rows={8} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && (
@@ -114,6 +123,7 @@ export const DomesticMode = () => {
           {r.reason && <EngineNote text={r.reason} />}
           <EngineNote text={r.basis.rule} />
           <EngineNote text={r.basis.domesticBasePrice} />
+          <Source text={r.basis.source} />
         </>
       )}
       <Note>The domestic base price is a stated input with no default. The figures the course names are reported figures, quoted with their reports, and none is graded.</Note>
@@ -121,12 +131,12 @@ export const DomesticMode = () => {
   );
 };
 
-export const DgdoMode = ({ initialCase = null }) => {
-  const box = useJsonBox(initialCase ? pick(initialCase, 'dgdo') : STARTS.dgdo);
-  const r = box.parsed.error ? null : dgdoOf(box.parsed.value);
+export const DgdoMode = ({ initialCase = null, initialText = null }) => {
+  const box = useJsonBox(initialCase ? pick(initialCase, 'dgdo') : STARTS.dgdo, initialText);
+  const r = box.parsed.error ? null : viewDgdo(box.parsed.value);
   return (
     <>
-      <Box box={box} label="domesticGasObligation inputs (JSON: obligation, delivered, voluntaryContracts, excused, agreementPenaltyRate, penaltyRate)" rows={8} />
+      <Box box={box} label="domesticGasObligation inputs (JSON: obligation, delivered, voluntaryContracts, excused, agreementPenaltyRate, penaltyRate), or a whole case file" rows={8} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && (
@@ -144,13 +154,14 @@ export const DgdoMode = ({ initialCase = null }) => {
           <Reasons items={r.reasons} />
           <EngineNote text={r.basis.rate} />
           <EngineNote text={r.basis.notReported} />
+          <Source text={r.basis.source} />
         </>
       )}
     </>
   );
 };
 
-const LedgerCalculator = ({ initialMode = 'ledger', initialCase = null }) => {
+const LedgerCalculator = ({ initialMode = 'ledger', initialCase = null, initialText = null }) => {
   const [mode, setMode] = useState(initialMode);
   return (
     <PanelShell
@@ -161,10 +172,10 @@ const LedgerCalculator = ({ initialMode = 'ledger', initialCase = null }) => {
         <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
       </FieldGrid>
       <div className="mt-3">
-        {mode === 'ledger' && <LedgerMode initialCase={initialCase} />}
-        {mode === 'price' && <PriceMode initialCase={initialCase} />}
-        {mode === 'domestic' && <DomesticMode />}
-        {mode === 'dgdo' && <DgdoMode initialCase={initialCase} />}
+        {mode === 'ledger' && <LedgerMode initialCase={initialCase} initialText={initialText} />}
+        {mode === 'price' && <PriceMode initialCase={initialCase} initialText={initialText} />}
+        {mode === 'domestic' && <DomesticMode initialText={initialText} />}
+        {mode === 'dgdo' && <DgdoMode initialCase={initialCase} initialText={initialText} />}
       </div>
       <Note>This is the course&apos;s own calculator: every number on it is a return value of the vendored engine. The Ekene agreements are synthetic; paste your own terms, or a whole case file, to replace them.</Note>
     </PanelShell>

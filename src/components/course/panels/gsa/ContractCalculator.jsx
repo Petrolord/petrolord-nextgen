@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import {
-  STARTS, pick, priceOf, parityOf, contractCashOf, dailyOf, ledgerOf, cashFlowsOf, GOLDEN_ARGS,
+  STARTS, pick, viewCurve, viewParity, viewCash, dailyOf, ledgerOf, cashFlowsOf, GOLDEN_ARGS,
 } from './gsaLab';
 import {
   PanelShell, SelectField, Tile, TileGrid, FieldGrid, Note,
 } from '@/components/course/panels/petrophysics/panelKit';
 import {
-  six, orNone, Tbl, TextField, Refusal, EngineNote, Reasons, useJsonBox,
+  six, orNone, Tbl, TextField, Refusal, EngineNote, Reasons, Source, useJsonBox,
 } from './panelBits';
 
 // The contract calculator (Expert): energy parity and the S-curve, the whole
@@ -28,12 +28,12 @@ const Box = ({ box, label, rows = 12 }) => (
   </FieldGrid>
 );
 
-export const CurveMode = ({ initialCase = null }) => {
-  const box = useJsonBox(initialCase ? pick(initialCase, 'price') : STARTS.sCurve);
-  const r = box.parsed.error ? null : priceOf(box.parsed.value);
+export const CurveMode = ({ initialCase = null, initialText = null }) => {
+  const box = useJsonBox(initialCase ? pick(initialCase, 'price') : STARTS.sCurve, initialText);
+  const r = box.parsed.error ? null : viewCurve(box.parsed.value);
   return (
     <>
-      <Box box={box} label="priceSeries inputs (JSON), an oil-indexed formula with an sCurve { lowKink, highKink, lowSlope, highSlope }" rows={12} />
+      <Box box={box} label="priceSeries inputs (JSON), an oil-indexed formula with an sCurve { lowKink, highKink, lowSlope, highSlope }, or a whole case file" rows={12} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && (
@@ -43,7 +43,7 @@ export const CurveMode = ({ initialCase = null }) => {
           <Tbl head={['year', 'months priced', 'annual average price', 'last month price']}
             rows={r.annual.map((a) => [String(a.year), String(a.months), six(a.averagePrice), six(a.lastMonthPrice)])} />
           <EngineNote text={r.basis.averaging} />
-          <EngineNote text={r.basis.source} />
+          <Source text={r.basis.source} />
         </>
       )}
     </>
@@ -56,9 +56,9 @@ const cashStart = (c) => {
   return price && pricing ? { price, pricing, contract, royalty, discountRate, baseYear } : { contract, royalty, discountRate, baseYear };
 };
 
-export const CashMode = ({ initialCase = null }) => {
-  const box = useJsonBox(cashStart(initialCase));
-  const r = box.parsed.error ? null : contractCashOf(box.parsed.value);
+export const CashMode = ({ initialCase = null, initialText = null }) => {
+  const box = useJsonBox(cashStart(initialCase), initialText);
+  const r = box.parsed.error ? null : viewCash(box.parsed.value);
   const t = r && !r.error ? r.takeOrPay : null;
   return (
     <>
@@ -79,18 +79,19 @@ export const CashMode = ({ initialCase = null }) => {
           <Reasons items={t.years.flatMap((y) => y.reasons)} />
           <EngineNote text={r.basis.royalty} />
           <EngineNote text={r.basis.npv} />
+          <Source text={r.basis.source} />
         </>
       )}
     </>
   );
 };
 
-export const ParityMode = () => {
-  const box = useJsonBox(STARTS.parity);
-  const r = box.parsed.error ? null : parityOf(box.parsed.value);
+export const ParityMode = ({ initialText = null }) => {
+  const box = useJsonBox(STARTS.parity, initialText);
+  const r = box.parsed.error ? null : viewParity(box.parsed.value);
   return (
     <>
-      <Box box={box} label="energyParitySlope inputs (JSON: mmbtuPerBarrel)" rows={3} />
+      <Box box={box} label="energyParitySlope inputs (JSON: mmbtuPerBarrel), or a case file with a parity block" rows={3} />
       {box.parsed.error && <Note>{box.parsed.error}</Note>}
       {r && r.error && <Refusal text={r.error} />}
       {r && !r.error && (
@@ -100,6 +101,7 @@ export const ParityMode = () => {
             <Tile label="Parity slope" value={six(r.slope)} />
           </TileGrid>
           <EngineNote text={r.basis.rule} />
+          <Source text={r.basis.source} />
         </>
       )}
     </>
@@ -116,20 +118,23 @@ export const ReadingsMode = () => {
     <>
       <Note>The engine states four readings in its own basis. The course shows each where it acts and grades none of them.</Note>
       <EngineNote text={day.basis.reading} />
+      <Source text={day.basis.source} />
       <Tbl head={['day', 'nominated', 'available', 'taken', 'seller shortfall', 'buyer shortfall']}
         rows={day.days.map((d) => [d.date, six(d.nominated), six(d.available), six(d.taken), six(d.sellerShortfall), six(d.buyerShortfall)])} />
       <EngineNote text={top.basis.reading} />
+      <Source text={top.basis.source} />
       <Tbl head={['year', 'deficiency', 'carry-forward applied', 'deficiency paid', 'make-up available']}
         rows={top.years.map((y) => [String(y.year), six(y.deficiency), six(y.carryForwardApplied), six(y.deficiencyPaid), six(y.makeUpAvailable)])} />
       <Reasons items={eot.years[eot.years.length - 1].reasons} />
       <EngineNote text={cf.basis.royalty} />
+      <Source text={cf.basis.source} />
       <Tbl head={['year', 'deficiency payment', 'delivered value', 'royalty']}
         rows={cf.years.map((y) => [String(y.year), six(y.lines.deficiencyPayment), six(y.deliveredValue), six(y.royalty)])} />
     </>
   );
 };
 
-const ContractCalculator = ({ initialMode = 'curve', initialCase = null }) => {
+const ContractCalculator = ({ initialMode = 'curve', initialCase = null, initialText = null }) => {
   const [mode, setMode] = useState(initialMode);
   return (
     <PanelShell
@@ -140,9 +145,9 @@ const ContractCalculator = ({ initialMode = 'curve', initialCase = null }) => {
         <SelectField label="View" value={mode} onChange={setMode} options={MODES} />
       </FieldGrid>
       <div className="mt-3">
-        {mode === 'curve' && <CurveMode initialCase={initialCase} />}
-        {mode === 'cash' && <CashMode initialCase={initialCase} />}
-        {mode === 'parity' && <ParityMode />}
+        {mode === 'curve' && <CurveMode initialCase={initialCase} initialText={initialText} />}
+        {mode === 'cash' && <CashMode initialCase={initialCase} initialText={initialText} />}
+        {mode === 'parity' && <ParityMode initialText={initialText} />}
         {mode === 'readings' && <ReadingsMode />}
       </div>
       <Note>This is the course&apos;s own calculator: every number on it is a return value of the vendored engine. The Ekene agreements are synthetic; paste your own terms, or a whole case file, to replace them.</Note>

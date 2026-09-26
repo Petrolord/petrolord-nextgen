@@ -42,4 +42,4 @@ A buyer that tracks its position through the year may aim to take just enough, a
 
 ## Exercise
 
-Open the quantity calculator, the course's own calculator panel, and choose "One take-or-pay year". Enter one year with an `acq` of 1000, `topPct` 80, a `topPrice` of your own and a `makeUp` object, and set `taken` to 800. Run it and read the deficiency. Change `taken` to 799 and run it again. Then set `taken` to 0. Finally enter the power plant's 2032 as a single year, `acq` 7686000 and `taken` 6148800, and read the deficiency.
+Open the quantity calculator, the course's own calculator panel, and choose "One take-or-pay year". Enter one year with an `acq` of 1000, `topPct` 80, a `topPrice` of your own and a `makeUp` object, and set `taken` to 800. Run it and read the deficiency. Change `taken` to 799 and run it again. Then set `taken` to 0. Finally start from "The power plant, 2032 alone" and read the take-or-pay quantity, the quantity counted and the deficiency.
