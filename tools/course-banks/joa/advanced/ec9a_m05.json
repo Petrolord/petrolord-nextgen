@@ -129,7 +129,7 @@
    "A back-in refund of each debt from NNPC's future entitlement under s.85(4)(f)"
   ],
   "answer": 1,
-  "explanation": "The course lists the cash call debts of NNPC joint ventures and incorporated joint venture companies (PIA s.54(8) and s.65) as nothing the engine computes, concept only. The Act prints no rate the engine applies to such debts, and s.85(4)(f) governs a back-in refund."
+  "explanation": "The course lists the cash call debts of NNPC joint ventures and incorporated joint venture companies (PIA s.54(8) and s.65) as nothing the engine computes, concept only. The engine keeps no ledger, charges no default interest and computes no refund for them; s.85(4)(f) governs a back-in refund."
  },
  {
   "prompt": "Which of these does the engine compute?",

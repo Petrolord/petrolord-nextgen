@@ -110,7 +110,7 @@ x("The Petroleum Industry Act 2021 deals with the cash call debts of NNPC joint 
  ["A cash call ledger per NNPC joint venture with its debt carried to the next call",
   "Default interest on each debt at the Act's rate from the date the debt arose",
   "A back-in refund of each debt from NNPC's future entitlement under s.85(4)(f)"],
- "The course lists the cash call debts of NNPC joint ventures and incorporated joint venture companies (PIA s.54(8) and s.65) as nothing the engine computes, concept only. The Act prints no rate the engine applies to such debts, and s.85(4)(f) governs a back-in refund.")
+ "The course lists the cash call debts of NNPC joint ventures and incorporated joint venture companies (PIA s.54(8) and s.65) as nothing the engine computes, concept only. The engine keeps no ledger, charges no default interest and computes no refund for them; s.85(4)(f) governs a back-in refund.")
 
 # 13
 x("Which of these does the engine compute?",

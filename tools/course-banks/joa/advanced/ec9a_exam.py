@@ -167,7 +167,7 @@ x("On default-forfeiture-last-day PB's default is still open at asOf 2027-06-10,
  ["At both, since a default open on the trigger date has already reached it",
   "At neither, since a forfeiture needs the operator to notify the management committee first",
   "Only at 2027-06-10, since the engine counts the trigger date as the first day"],
- "The engine's reason for the last day reads not triggered, the default being open only to asOf 2027-06-10, and for the day after triggered, the default being open after 2027-06-10. The notice is a stated input, from 2027-03-10 on the Ekene call, already inside the trigger date.")
+ "The engine's reason for the last day reads not triggered, the default being open only to asOf 2027-06-10, and for the day after triggered, the default being open after 2027-06-10. The operator's notice enters as the stated start, 2027-03-10, from which the 3 months run.")
 
 # 20 (m04)
 x("On carry-one-short N's carried cost of 200.000000 meets an available 199.800000 in 2028, with no uplift and recovery from 100 percent of its share. What does the engine do?",
