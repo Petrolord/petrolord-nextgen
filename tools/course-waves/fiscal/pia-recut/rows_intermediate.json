@@ -61,7 +61,7 @@
   ],
   "answer_index": 3,
   "explanation": "Year 10 is the partial draw at 30.1819 million USD, the 14.8678 carried out of year 9 plus that year's opex of 15.3141. From year 11, until the pool reopens late in the life, the instrument hands back each year's opex and passes the rest through as profit oil.",
-  "why": "PIA template ODIDI pool and cost recovered re-derived: year 10 is the partial draw, year 11 recovers its own opex"
+  "why": "re-cut onto the PIA template's years 9 to 11 on ODIDI: year 10 is the partial draw (30.1819 = 14.8678 carried + 15.3141 opex); the audited key words 'That year's own opex' are kept because they are TRUE of year 11 (cost recovered 14.8473 = opex 14.8473, pool 0), confirmed by engine call in keytruth_intermediate.mjs"
  },
  {
   "tier": "intermediate",
@@ -340,7 +340,7 @@
   "scope": "module",
   "module_key": "m05-rate-and-return",
   "ord": 7,
-  "prompt": "Five of the six templates return a negative present value on the teaching field at 12 percent, and Brazil - Concession is the least negative of those five at negative 5.8662 million USD. What does the engine report in its rate of return column for Brazil there?",
+  "prompt": "On the teaching field at 12 percent, Brazil - Concession returns negative 5.8662 million USD, the least negative of the five templates below zero. What sits in the engine's rate of return column for Brazil?",
   "options": [
    "The field loses money under that regime, as a negative present value reports, so the column carries a negative rate.",
    "A rate just under 12 percent, which is the crossing that matters and the one the summary reports.",
@@ -356,16 +356,16 @@
   "scope": "module",
   "module_key": "m05-rate-and-return",
   "ord": 9,
-  "prompt": "The published case with flows of negative 1 then 2000 has a root at 199900.0000 percent. What does the engine report for it?",
+  "prompt": "The published case with flows of negative 100 then 1500 has its only root at 1400.0000 percent. What does the engine put in the rate column?",
   "options": [
-   "199900.0000 percent, since the root is exact and the band is a search hint rather than a limit on what may be reported.",
+   "1400.0000 percent, since a root the solver can verify exactly is reported wherever it lies on the rate axis.",
    "Null, with the status above-clamp, because the only root sits beyond the top of the band the engine searches.",
-   "1000.0000 percent, the top of the band, which is the nearest rate the engine is prepared to defend.",
-   "The top of a doubling search that started at 100 percent, since a bracket that stopped short is still the engine's fallback."
+   "1000.0000 percent, the upper edge of the searched band, which is the closest defensible rate the engine can print.",
+   "Null with the status no-root, since a single root is treated as a failed search whenever it falls outside the band."
   ],
   "answer_index": 1,
-  "explanation": "`irr_above_clamp_inside_old_bracket`, with flows of negative 100 then 1500, has a root of 1400.0000 percent and the same status, so a finite root beyond the band is refused as well.",
-  "why": "repair-history framing removed"
+  "explanation": "The band runs from -99 to 1000 percent and neither edge is ever returned as a rate. A root above it, however exact, leaves the column null with the status above-clamp.",
+  "why": "repair-history framing removed; re-aimed at the 1400 percent case so it no longer duplicates the exam question on the 199900 percent case"
  },
  {
   "tier": "intermediate",
@@ -444,7 +444,7 @@
    "That the first row is the best regime for the contractor, and nothing else."
   ],
   "answer_index": 3,
-  "explanation": "On the teaching field the sort puts Nigeria - PIA (2021) first and Angola - Deepwater PSC last, while government cash flow runs the other way at 316.7898 million USD for Angola against 196.0260 for the PIA template.",
+  "explanation": "On the teaching field the sort puts Nigeria - PIA (2021) first and Angola - Deepwater PSC last, and neither position says anything about payback, rate of return or the government's share.",
   "why": "ODIDI sort re-derived"
  },
  {
