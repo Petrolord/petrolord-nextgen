@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "elt_royalty_tail's 2031 row would sell 120000.00 bbl at 100.000000 USD against opex of 10000000.00, and with the limit on the ledger ends at 2030. Why was a year whose gross revenue exceeds its opex trimmed?",
+  "options": [
+   "The test is net cash flow, and the 5000000.00 of depreciation the year would carry turns its operating margin into a loss.",
+   "The test is taxable income after the loss offset, and the 2031 row would have banked a loss with no year after it to spend it.",
+   "The test is revenue less royalty against opex, and after the 20 percent royalty the year falls short of 10000000.00.",
+   "The test is cumulative cash flow, still -12500000.00 at the end of 2030 and not yet positive in 2031."
+  ],
+  "answer": 2,
+  "explanation": "Tax, depreciation and capex play no part; the KPI line reads economic_limit_year 2030 with years trimmed 1, and NPV is -12500000.00 on the one row that remains."
+ },
+ {
+  "prompt": "A reader runs elt_off_tail_kept without touching apply_economic_limit and reads NPV 13987603.31 and IRR null. What did the default decide?",
+  "options": [
+   "To keep the 2032 row: a net cash flow of -9200000.00, a 14200000.00 loss nothing will spend, a terminal negative that costs the ledger its rate, and a KPI line reading economic_limit_year not reported.",
+   "To trim the 2032 row and report the trimmed NPV, since a year selling 10000.00 bbl against 10000000.00 of opex fails the test whether or not the flag is set.",
+   "To keep the row but exclude it from the NPV, so 13987603.31 is the value of the two producing years alone.",
+   "To test the row on taxable income rather than operating margin, which -14200000.00 fails, and to trim it on that basis."
+  ],
+  "answer": 0,
+  "explanation": "With apply_economic_limit true the row goes and the KPIs read NPV 21590909.09, IRR 200.0000 percent, economic_limit_year 2031, rows 2."
+ },
+ {
+  "prompt": "AKATA extended to 2041 reads revenue less royalty against opex of 37795328.32 against 31314556.41 in 2038 and 31541919.46 against 32253993.10 in 2039. What does the engine report as economic_limit_year?",
+  "options": [
+   "2039, the first year that fails, which is where the ledger is cut so that the failing year is the one recorded.",
+   "2038, the last year that passes; 2039 fails and it and the two years after it are trimmed.",
+   "2041, because the limit is read on the cumulative margin and the field as a whole never fails it.",
+   "2037, because the test requires a year to pass by a margin and 2038 passes by too little to count."
+  ],
+  "answer": 1,
+  "explanation": "Limit on: 10 rows ending in 2038, years trimmed 3, NPV 93890737.45 against 87727489.23 with the tail kept; a reader who reports 2039 has kept a losing year."
+ },
+ {
+  "prompt": "abandonment_final_year adds a 10000000.00 lump sum to the 2031 row: net cash flow falls from 37500000.00 to 27500000.00 while tax stays 32500000.00 and taxable income 65000000.00. Why did the tax not move?",
+  "options": [
+   "The engine deducted it and then added back the same 10000000.00 as depreciation recapture, so the two cancel on the tax line.",
+   "The lump sum is deductible but only against the loss pool, and the pool was empty in 2031, so the deduction waits for a year that never comes.",
+   "The cost is deducted from the following year's taxable income, and 2031 is the last modeled year, so the deduction was never reached.",
+   "The outflow is charged after the cascade has finished; the engine refuses to deduct the lump sum from any base."
+  ],
+  "answer": 3,
+  "explanation": "Total tax on every abandonment case equals the total without abandonment, 65000000.00 on the two-year case and 148425219.46 on AKATA; NPV falls from 21590909.09 to 12500000.00, the lump sum discounted one year."
+ },
+ {
+  "prompt": "With abandonment_year 2033 on the two-year case the engine appends a row with no revenue, depreciation of 5000000.00 and a net cash flow of -10000000.00, and NPV is 14077761.08 against 12500000.00 with the cost in 2031. What is the appended row doing?",
+  "options": [
+   "Paying later, which is cheaper on present value, and banking a loss of 5000000.00 that nothing will use.",
+   "Earning two more years of price escalation, which lifts the 2033 row above the 2031 one.",
+   "Spreading the 10000000.00 across 2032 and 2033 as two half payments, so each is discounted more lightly than the whole.",
+   "Relieving the abandonment cost against the depreciation of 5000000.00, which is why NPV rises rather than falls."
+  ],
+  "answer": 0,
+  "explanation": "The 2033 flow discounts to -7513148.01 against -10000000.00 undiscounted; the IRR is null against 120.0000 percent with the cost in 2031, because the appended row hands the vector a terminal negative."
+ },
+ {
+  "prompt": "AKATA at a 100 percent working interest with a 60000000 lump sum reports NPV 38666394.86 and a unit technical cost of 45.475732; at 50 percent the same entry reports NPV 2398979.53 and 50.944861. What should the 50 percent partner have entered?",
+  "options": [
+   "The same 60000000, because the engine scales every monetary line by the working interest, and 2398979.53 is the honest half-share reading.",
+   "The cost net of tax relief, since the partner's share of the deduction is what the engine expects in the abandonment column.",
+   "The share of the cost, because the lump sum is charged in full against the share flows and the engine will not scale it.",
+   "Twice the cost, so that the engine's halving returns the field-level 60000000 the partner is jointly liable for."
+  ],
+  "answer": 2,
+  "explanation": "jv_abandonment_wi_60 shows the mechanism: gross revenue 60000000.00 and tax 19500000.00 are the share, the abandonment_cost column reads the entered 10000000.00, and the unit technical cost is 43.333333 against 40.000000 at a full interest."
+ },
+ {
+  "prompt": "jv_sinking_fund funds the same 10000000.00 as two contributions of 5000000.00 and reports NPV 16818181.82 against the lump sum's 12500000.00. Where does the gain come from?",
+  "options": [
+   "The fund earns interest at the 10 percent discount rate inside the engine, and the accumulated balance exceeds the 10000000.00 it has to pay, so the surplus is released to the contractor in the final year.",
+   "The contributions are charged after tax like the lump sum, but splitting the outflow across two years discounts the second half more gently, and that discounting difference alone accounts for the whole gain.",
+   "The fund is discounted at the real rate while the lump sum is discounted at the nominal one, and the difference between 6.796117 and 10.000000 percent applied to 10000000.00 is the gain reported.",
+   "The contribution rides the opex lane, so taxable income falls to 60000000.00 and tax to 30000000.00 a year, and the final spend is paid from the fund with no further outflow."
+  ],
+  "answer": 3,
+  "explanation": "Total tax is 60000000.00 against 65000000.00, the 2031 row prints abandonment_cost_funded 10000000.00, and IRR is 133.3333 against 120.0000 percent."
+ },
+ {
+  "prompt": "pia_sinking_fund contributes 30000000.00 in its single year: HCT falls from 284810956.27 to 275810956.27 and CIT from 293998456.27 to 284998456.27. What happens to the TET of 25999871.36?",
+  "options": [
+   "It falls by 2.5 percent of 30000000.00, since the levy sits on the assessable profit that the contribution reduces.",
+   "Nothing: the contribution relieves the two profit taxes at their rates and the engine refuses to relieve the levies.",
+   "It falls in proportion to CIT, because the levy is a fixed fraction of the CIT paid and moves with it.",
+   "It rises, because a lower HCT leaves more assessable profit for the levy to be charged on."
+  ],
+  "answer": 1,
+  "explanation": "NPV falls from 135185570.34 to 123185570.34 and the unit technical cost rises from 26.438356 to 28.082192 USD per boe; the levy line is unchanged."
+ },
+ {
+  "prompt": "On AKATA a fund from 2029 pays seven contributions of 8571428.57 and relieves the most tax, total 124585925.52, yet reports NPV 44902775.54 and IRR 21.9086 percent against the 2032 fund's 47415100.31 and 23.9820 percent on a total tax of 127157354.09. Why does the fund that relieves more tax score lower on both?",
+  "options": [
+   "Its money leaves earlier, and an outflow moved into the early years costs more in present value and in rate than the extra relief it buys.",
+   "Its seven contributions of 8571428.57 are discounted at the real rate while its IRR is computed on the nominal flows, so the two readings use different money.",
+   "Its IRR is one root of two and the engine reported the lower one; read at the other root the early fund wins on both.",
+   "Its relief lands on the levy base, which the engine refuses to relieve, so the 124585925.52 counts tax that was never actually saved."
+  ],
+  "answer": 0,
+  "explanation": "Starting in 2032 pays four contributions of 15000000.00 and gives the higher NPV because the money leaves later; both funds beat the lump sum's 38666394.86, which reports no rate at all because its terminal negative leaves the IRR null."
+ },
+ {
+  "prompt": "pia_sinking_fund_wi_50 runs at a 50 percent working interest and reports total fund contributions of 30000000.00 beside a total_abandonment_cost and an abandonment_cost_funded of 30000000.00, with NPV 55592785.17. What does the agreement between those three figures say?",
+  "options": [
+   "That the working interest is not applied to the decommissioning lane at all, so a fund at any interest collects the field-level cost and the partner overpays.",
+   "That abandonment_cost_usd is the share under both funding modes since engines 3.10.0, so a fund collects exactly the amount that was entered.",
+   "That the engine grossed the entered 15000000.00 up to a field figure and printed both, which is why the contributions and the cost now agree.",
+   "That the fund was overfunded, and the surplus is released to the contractor in the final row, which is why the contributions exceed what the partner owes."
+  ],
+  "answer": 1,
+  "explanation": "Until engines 3.10.0 the same row collected 15000000.00 against a reported 30000000.00 and read NPV 61592785.17; on AKATA at 50 percent the fund now collects the whole 60000000.00 and reports NPV 7713047.81 with IRR 14.1861 percent."
+ },
+ {
+  "prompt": "schedule_shift_1 keeps 50000000.00 of capex in 2030 while production and opex reappear in 2031 and 2032, and NPV is 17355371.90. What does schedule_shift_years move?",
+  "options": [
+   "Everything in the ledger, capex included, so the project as a whole starts a year later and every row keeps its relation to the others.",
+   "Production only; opex stays in 2030 as a standing cost, which is why the 2030 row shows a loss of 5000000.00.",
+   "Production and opex only; capex stays where it was, so the delay is a delay of first oil against a spend already made.",
+   "Production, opex and the base year together, so that the escalators restart from the year of first oil."
+  ],
+  "answer": 2,
+  "explanation": "The 2030 row reads revenue 0.00, depreciation 5000000.00, a loss carried forward of 5000000.00 and net cash flow -50000000.00; 2031 spends the pool and pays 30000000.00."
+ },
+ {
+  "prompt": "AKATA delayed one year sells its first 2200000.00 bbl in 2030 at 83.640000 rather than 82.000000 and pays opex of 24720000.00 rather than 24000000.00. Why are first-year values not first-year values?",
+  "options": [
+   "The escalators count calendar years from the base year and do not care when first oil came; the engine refuses to hold prices or opex at first-oil levels.",
+   "The engine escalates the delayed year twice, once for the shift and once for the calendar, which is why both price and opex moved by a full step.",
+   "The delayed first year inherits the second year's price and opex because the row list was shifted as a block and the labels were left behind.",
+   "Inflation of 3 percent was applied to the first production year because a delay converts the real basis to a nominal one."
+  ],
+  "answer": 0,
+  "explanation": "The delayed first year reports 55541846.40 against 31746007.20 at zero shift, where the same barrels had to carry the 210000000.00 of capex; NPV is 56565094.12 against 72534830.66."
+ },
+ {
+  "prompt": "AKATA at a three-year shift lists rows for 2029, 2030 and 2032 onward with no 2031 row. NPV fell from 40880824.32 at two years to 17894126.42 and IRR fell from 14.6753 to 11.6363 percent, both as they should, yet payback shortened from 4.96 to 4.90 years. Which reading cannot be trusted?",
+  "options": [
+   "The IRR, which fell too far: a longer delay on the same flows cannot move a rate by three percentage points, and the missing row took the rest.",
+   "The NPV, which double-discounted the empty year and fell further than the delay alone can explain.",
+   "None of them, because a ledger with a missing calendar year is refused by the engine and the KPIs printed are those of the two-year run carried forward unchanged.",
+   "The payback, which is counted on rows rather than on calendar years, so the missing row made the delay look a year shorter to it."
+  ],
+  "answer": 3,
+  "explanation": "A longer wait for the same money cannot shorten a payback; until engines 3.10.0 the IRR of that run read 15.1070 percent and rose with the delay, which was the same row counting reaching the rate."
+ },
+ {
+  "prompt": "AKATA with a 200000000 lump sum in 2035 reports payback 3.46 years, the same figure as the run with no abandonment at all, while its nominal flows sum to -58362170.82 and its NPV is -40359955.35. What is that payback telling the reader?",
+  "options": [
+   "That the abandonment is excluded from the payback vector, which is counted on the producing years alone and so matches the run without it.",
+   "Only that the cumulative cash flow first turned non-negative in the fourth year; it never looks again, so a field that ends underwater still reads as paid back.",
+   "That the payback is interpolated on the discounted flows, which pulls the crossing forward and hides the final outflow inside the discounting.",
+   "That the 200000000 was charged after the cascade, so it reaches neither the tax column nor the cumulative cash flow the payback reads."
+  ],
+  "answer": 1,
+  "explanation": "With a 60000000 lump sum the payback is 3.46 years as well, and the IRR of both runs is null; the sign of the last row and the total beneath it have to be read beside the payback."
+ },
+ {
+  "prompt": "The sampled NPV curve of the vector [-100, 208, -108.12] reads zero at 2 percent and again at 6 percent. What does irr() return for it?",
+  "options": [
+   "6.0000 percent, the root Newton reaches from a start of 10 percent, reported on its own with nothing beside it in the result to say that a second root exists inside the band.",
+   "2.0000 percent, the root nearest zero on the positive side, which the engine prefers as the hurdle-rate reading.",
+   "null, with irrStatus multiple-roots and both roots listed, because a rate is named only where exactly one rate in the band from -99 to 1000 percent zeroes the NPV.",
+   "The larger root by rule, since an IRR is read as the highest rate at which the project is still worth doing."
+  ],
+  "answer": 2,
+  "explanation": "Until engines 3.10.0 it returned 6.0000 percent unflagged; terminal negatives are where the shape comes from, and AKATA with a 60000000 lump sum ends on -29598201.95 and now returns null too."
+ }
+]

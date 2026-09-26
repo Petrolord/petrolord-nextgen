@@ -1,0 +1,136 @@
+{
+ "course": "cashflow",
+ "recut": "PIA 2021 re-cut, phase 2 (branch fix/cashflow-fiscal-pia-recut)",
+ "served": "docs/pia-recut/served/cashflow_questions.json and cashflow_capstones.json (tools/course-waves/fiscal/pia-recut/replay_banks.sh on a local scratch database)",
+ "digest": "tools/course-waves/cashflow/digest.txt (md5 950a84dbee7d53c4d98bf9be0a5ebba1)",
+ "counts": {},
+ "questions": [],
+ "capstones": [
+  {
+   "slug": "cashflow",
+   "tier": "advanced",
+   "changed": [
+    "dataset",
+    "prompt",
+    "fields"
+   ],
+   "graded_keys_removed": [
+    "pia_2032_prod_alw_eligible_bbl",
+    "pia_2031_cpr_deferred_usd",
+    "pia_total_hct_usd",
+    "pia_npv_real_usd"
+   ],
+   "graded_keys_added": [
+    "pia_2032_production_allowance_usd",
+    "pia_2031_nddc_usd",
+    "pia_total_cit_usd",
+    "pia_2035_cpr_deferred_usd"
+   ],
+   "graded_keys_kept_value_moved": [
+    "pia_2032_price_royalty_usd",
+    "pia_2033_dev_levy_usd"
+   ],
+   "attempts": "existing attempts and certificates stand as issued; only new attempts use the new keys (lead L1): the migration guards on attempts",
+   "old": {
+    "cert_tier": "expert",
+    "title": "Run the same rows through the cascade",
+    "dataset": "the IKPOTO rows under the Petroleum Industry Act: a new shallow-water lease crossing the allowance cap in its second year, a CPR limit that defers cost, the 2025 framework, and a terminal abandonment",
+    "prompt": "Six values for IKPOTO run under the PIA with the SAME production, capex and opex rows and the same prices, escalators, inflation, base year and 9 percent nominal rate as the Professional capstone. Fiscal terms: shallow water at 45 m, PML, NEW lease, not a pre-2021 marginal field, 80 percent working interest, no HCT override, CIT 30 percent, TET 2.5 percent, NDDC 3 percent of opex, no prior-year opex, capital allowance over FOUR years, CPR limit 35 percent, production allowance 8 USD/bbl for a new lease capped at 20 percent of the oil price, framework override auto, prior cumulative production 97,612,500 bbl, and a 40,000,000 USD post-tax abandonment lump sum in the final modeled year. Report: (1) the PRICE ROYALTY in 2032; (2) the allowance-ELIGIBLE barrels in 2032; (3) the cost DEFERRED by the CPR cap at the end of 2031; (4) the TOTAL hydrocarbon tax; (5) the DEVELOPMENT LEVY in 2033; and (6) the NPV on the real basis. Traps. The 2031 base year is at or past 2026, so the framework is NTA 2025: the development levy at 4 percent replaces TET and TET is nought in every year. The royalty tiers, the price-royalty anchors (escalating 2 percent a year from 2021) and the allowance volume cap are FIELD-LEVEL and are applied before the 80 percent share; the cap is 100 MMbbl for shallow water, the prior production counts against it, and 2031 crosses it, so field 2 is the room the cap leaves for 2032 once every earlier barrel is counted. The CPR cap is 35 percent of GROSS revenue and cost claims opex first, then the capital allowance; what does not fit is field 3 and carries. HCT is charged on liquids only at the shallow-water PML rate; field 4 sums it over every year. The abandonment is post-tax and moves field 6 but no tax line.",
+    "fields": [
+     {
+      "key": "pia_2032_price_royalty_usd",
+      "tol": 1,
+      "unit": "USD",
+      "label": "Price royalty in 2032",
+      "expected": 951123.1830656304
+     },
+     {
+      "key": "pia_2032_prod_alw_eligible_bbl",
+      "tol": 1,
+      "unit": "bbl",
+      "label": "Allowance-eligible barrels in 2032",
+      "expected": 787500
+     },
+     {
+      "key": "pia_2031_cpr_deferred_usd",
+      "tol": 1,
+      "unit": "USD",
+      "label": "Cost deferred by the CPR cap in 2031",
+      "expected": 3942400
+     },
+     {
+      "key": "pia_total_hct_usd",
+      "tol": 1,
+      "unit": "USD",
+      "label": "Total hydrocarbon tax",
+      "expected": 51541932.563462615
+     },
+     {
+      "key": "pia_2033_dev_levy_usd",
+      "tol": 1,
+      "unit": "USD",
+      "label": "Development levy in 2033",
+      "expected": 1331296.587088759
+     },
+     {
+      "key": "pia_npv_real_usd",
+      "tol": 1,
+      "unit": "USD",
+      "label": "NPV under the PIA, real basis",
+      "expected": -46086957.32549152
+     }
+    ]
+   },
+   "new": {
+    "cert_tier": "expert",
+    "title": "Run the same rows through the cascade",
+    "dataset": "the IKPOTO rows under the Petroleum Industry Act and the Nigeria Tax Act 2025: a new shallow-water lease crossing the allowance cap in its second year, a cost price ratio carry that grows, and a terminal abandonment",
+    "prompt": "Six values for IKPOTO run under the PIA with the SAME production, capex and opex rows and the same prices, escalators, inflation, base year and 9 percent nominal rate as the Professional capstone. Fiscal terms: shallow water at 45 m, PML, a NEW lease granted out of new acreage, not a pre-2021 marginal field, 80 percent working interest, no HCT override, CIT 30 percent, no prior-year opex, framework override auto, prior cumulative production 97,612,500 bbl, and a 40,000,000 USD post-tax abandonment lump sum in the final modeled year. Every other term is the engine's default, which follows the texts: NDDC at 3 percent of the total annual budget, the capital allowance over the five years the texts fix, the cost price ratio limit of 65 percent, the Sixth Schedule production allowance, and the tertiary education tax at its statutory rate. The texts do not say which hydrocarbon tax rate a PML granted out of new acreage onshore or in shallow water pays, so this capstone states 30 percent as a stated reading; none of the six values depends on it. The royalty by price is read on the Petroleum Royalty Regulations 2022 base, benchmarks of 50, 100 and 150 USD/bbl at 2021 levels, which is the engine's default. Report: (1) the PRICE ROYALTY in 2032; (2) the PRODUCTION ALLOWANCE in 2032; (3) the NDDC levy in 2031; (4) the TOTAL companies income tax; (5) the DEVELOPMENT LEVY in 2033; and (6) the cost the CPR cap carries out of 2035 into 2036. Traps. The framework is chosen for each year of assessment, and every year from 2031 to 2036 is 2026 or later, so each is an NTA 2025 year: the development levy at 4 percent applies and TET is nought in every year. The production royalty tranches, the price-royalty benchmarks and the allowance volume cap are read at FIELD level and applied before the 80 percent share. The cap is 100 MMbbl for shallow water and the prior production counts against it; the barrels below the cap earn the new-lease allowance and the barrels after it still earn the lower after-cap allowance, each limited to 20 percent of the oil price. NDDC is charged on opex plus capex at your share and is deducted in the hydrocarbon tax base. The CPR cap is 65 percent of crude plus condensate revenue and limits only the costs claimed against the hydrocarbon tax; shared costs enter it at the crude-plus-condensate share, and what does not fit carries to the next year and is claimed there within that year's cap. Companies income tax deducts the full opex, royalties, HCDT, NDDC and its own capital allowance, and the CPR cap never touches it. The abandonment is post-tax and moves no tax line.",
+    "fields": [
+     {
+      "key": "pia_2032_price_royalty_usd",
+      "tol": 1,
+      "unit": "USD",
+      "label": "Price royalty in 2032",
+      "expected": 951174.9189189179
+     },
+     {
+      "key": "pia_2032_production_allowance_usd",
+      "tol": 1,
+      "unit": "USD",
+      "label": "Production allowance in 2032",
+      "expected": 6616000
+     },
+     {
+      "key": "pia_2031_nddc_usd",
+      "tol": 1,
+      "unit": "USD",
+      "label": "NDDC levy in 2031",
+      "expected": 3336000
+     },
+     {
+      "key": "pia_total_cit_usd",
+      "tol": 1,
+      "unit": "USD",
+      "label": "Total companies income tax",
+      "expected": 39056834.778322995
+     },
+     {
+      "key": "pia_2033_dev_levy_usd",
+      "tol": 1,
+      "unit": "USD",
+      "label": "Development levy in 2033",
+      "expected": 1804107.954906831
+     },
+     {
+      "key": "pia_2035_cpr_deferred_usd",
+      "tol": 1,
+      "unit": "USD",
+      "label": "Cost the CPR cap carries out of 2035",
+      "expected": 18128786.5348819
+     }
+    ]
+   }
+  }
+ ]
+}
