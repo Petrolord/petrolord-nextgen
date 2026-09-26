@@ -56,7 +56,7 @@ q(2, "How does the engine label the lower bound of a level 0.95 bootstrap interv
  ["A lower confidence limit on the true mean nDCG, as a textbook would name it",
   "\"97.5th percentile of the bootstrap mean\", the tail counted from the top",
   "\"5th percentile of the bootstrap mean\", as 0.95 leaves 0.05 below"],
- "Each bound is a percentile of the bootstrap distribution of a statistic and is labelled that way, never with a P label, which the platform keeps for outcomes. At level 0.95 the tails are 0.025 and 0.975, so the lower bound is the 2.5th percentile; 97.5th is the upper label. The 5th percentile label belongs to level 0.9, where 0.05 is split across two tails.")
+ "Each bound is a percentile of the bootstrap distribution of a statistic and is labelled as one. The platform keeps P labels for outcomes, so none appears here. At level 0.95 the tails are 0.025 and 0.975, so the lower bound is the 2.5th percentile; 97.5th is the upper label. The 5th percentile label belongs to level 0.9, where 0.05 is split across two tails.")
 
 q(1, "Seed 7, 2000 replicates, level 0.95: A's mean nDCG has bounds 0.653604 and 0.852644, B's 0.666871 and 0.847238. What do these two intervals settle about A against B?",
  "Little: they overlap almost entirely, and the comparison is the paired difference",

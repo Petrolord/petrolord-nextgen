@@ -76,7 +76,7 @@ q(3, "retrievalMetrics scores system A's Q24 list with the judgments for Q24 rem
  ["\"nDCG is undefined: the 8 judged documents all have grade 0, so the ideal DCG is 0\"",
   "\"nDCG is undefined: the 1 judged document has grade 0, so the ideal DCG is 0\"",
   "\"recall is undefined: no judged document has grade 1 or more\", and nDCG is 0"],
- "The ideal DCG is 0 in exactly two cases, and the note names which one it met. With no judgments at all it is the first case, no judged documents. The 8-document wording belongs to Q24 as judged, and the 1-document wording to a single judgment at grade 0. The recall note is a separate note on a separate metric, and nDCG is returned as null, never 0.")
+ "The ideal DCG is 0 in exactly two cases, and the note names which one it met. With no judgments at all it is the first case, no judged documents. The 8-document wording belongs to Q24 as judged, and the 1-document wording to a single judgment at grade 0. The recall note is a separate note on a separate metric, and nDCG comes back as null with its own note.")
 
 q(1, "At k 5, system A retrieves 0 unjudged passages and system B 0. Why?",
  "The judged set pooled both systems' top 5, so every passage either system ranks there was judged",

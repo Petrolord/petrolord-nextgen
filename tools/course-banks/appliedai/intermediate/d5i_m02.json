@@ -107,7 +107,7 @@
    "\"nDCG is undefined: the query has no judged documents, so the ideal DCG is 0\""
   ],
   "answer": 3,
-  "explanation": "The ideal DCG is 0 in exactly two cases, and the note names which one it met. With no judgments at all it is the first case, no judged documents. The 8-document wording belongs to Q24 as judged, and the 1-document wording to a single judgment at grade 0. The recall note is a separate note on a separate metric, and nDCG is returned as null, never 0."
+  "explanation": "The ideal DCG is 0 in exactly two cases, and the note names which one it met. With no judgments at all it is the first case, no judged documents. The 8-document wording belongs to Q24 as judged, and the 1-document wording to a single judgment at grade 0. The recall note is a separate note on a separate metric, and nDCG comes back as null with its own note."
  },
  {
   "prompt": "At k 5, system A retrieves 0 unjudged passages and system B 0. Why?",

@@ -90,7 +90,7 @@ q(1, "The first field passed to scoreExtraction is declared {\"name\": \"well\",
  ["The tolerance is ignored and the text is compared after normalisation",
   "The well name is read as a number and matched within 1",
   "Every cell of the field is scored as unsupported, flagged by the tolerance"],
- "A tolerance belongs to a number field, so the engine refuses a tolerance on a text field and names the field by its position, in its own words. It does not ignore the input or reinterpret the field, and an unsupported outcome depends on a cell's values, never on a declaration.")
+ "A tolerance belongs to a number field, so the engine refuses a tolerance on a text field and names the field by its position, in its own words. It does not ignore the input or reinterpret the field. An unsupported outcome depends on a cell's values; a declaration alone produces none.")
 
 q(2, "A prediction arrives with the id r9, which has no labelled record. What does scoreExtraction do?",
  "Refuses the call: \"predictions[0].id is r9, which is not a labelled record\"",

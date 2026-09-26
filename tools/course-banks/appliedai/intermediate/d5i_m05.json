@@ -118,7 +118,7 @@
    "Nothing, as citations are only read when a claim needs support"
   ],
   "answer": 2,
-  "explanation": "The corpus runs EKD-001 to EKD-060, so EKD-061 is flagged unknown, a citation to nothing; it was planted. The not-retrieved flag is for a real passage outside the top 5, as B's Q15 citation of EKD-059. The engine flags an unknown id and refuses only a citation that is not a non-empty string. Every citation is checked, claim or no claim."
+  "explanation": "The corpus runs EKD-001 to EKD-060, so EKD-061 is flagged unknown, a citation to nothing; it was planted. The not-retrieved flag is for a real passage outside the top 5, as B's Q15 citation of EKD-059. The engine flags an unknown id; it refuses citations only when they are not a list of non-empty ids. Every citation is checked, claim or no claim."
  },
  {
   "prompt": "Why does the engine refuse a numericRelTol of 1?",

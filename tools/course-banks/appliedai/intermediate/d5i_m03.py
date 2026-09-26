@@ -92,7 +92,7 @@ q(1, "Mean token F1 over the 24 short answers is A 0.921507 and B 0.712004. What
   "A mean over the 23 queries with a relevant passage, Q24 left out"],
  "The course derives it as the mean of the F1 column over all 24 short answers, the same 24 that exact match counts. Pooling the text into one string is no rule the engine states, and a share above a cut is a different figure. Q24 is kept: A's abstention on it scores 1 and B's fabricated date 0.")
 
-q(0, "A short answer is supplied as the number 45 instead of the text \"45\". What does answerMatch do?",
+q(0, "A short answer is supplied as the number 45 where the text \"45\" belongs. What does answerMatch do?",
  "Refuses it, in its own words: \"prediction must be a string\"",
  ["Converts it to text and scores it as usual",
   "Scores it exact 0 and F1 0, noting that the prediction held no token",

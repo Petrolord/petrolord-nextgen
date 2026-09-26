@@ -83,7 +83,7 @@ q(2, "System B's Q21 answer cites EKD-061. What does the check report?",
  ["The flag \"citation EKD-061 was not retrieved for this query\"",
   "A refusal naming citations[0], as every cited id must be in the corpus",
   "Nothing, as citations are only read when a claim needs support"],
- "The corpus runs EKD-001 to EKD-060, so EKD-061 is flagged unknown, a citation to nothing; it was planted. The not-retrieved flag is for a real passage outside the top 5, as B's Q15 citation of EKD-059. The engine flags an unknown id and refuses only a citation that is not a non-empty string. Every citation is checked, claim or no claim.")
+ "The corpus runs EKD-001 to EKD-060, so EKD-061 is flagged unknown, a citation to nothing; it was planted. The not-retrieved flag is for a real passage outside the top 5, as B's Q15 citation of EKD-059. The engine flags an unknown id; it refuses citations only when they are not a list of non-empty ids. Every citation is checked, claim or no claim.")
 
 q(1, "Why does the engine refuse a numericRelTol of 1?",
  "At 1, any number from 0 to twice a passage value would match it",
