@@ -135,7 +135,7 @@
   "prompt": "What cost limits does the PIA Seventh Schedule para 14 set for production sharing contracts?",
   "options": [
    "70% for a contract on new acreage and 60% for one subject to a conversion contract",
-   "60% on new acreage and 70% under a conversion contract",
+   "60% for a contract on new acreage and 70% for one that came in through a conversion contract",
    "65% for every contract, the cost price ratio limit that the Sixth Schedule sets for hydrocarbon tax",
    "No limit under a conversion contract, 70% on new acreage"
   ],
@@ -146,7 +146,7 @@
   "prompt": "Para 14(4)(d) of the Seventh Schedule prints \"over 250 million barrels up to and including 750 million barrels: 25%\". How does the course treat the 250?",
   "options": [
    "Read as the law, so a field between 250 and 350 million barrels owes the government its 25% profit oil share",
-   "Proof that band (c) should close at 250 million barrels",
+   "Proof that band (c) should close at 250 million barrels, which the course then corrects in its table",
    "A figure the engine's profit oil line applies and grades",
    "As a misprint where the scale's own steps need 350, quoted as printed with the error named"
   ],

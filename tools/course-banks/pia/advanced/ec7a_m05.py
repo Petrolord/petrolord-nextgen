@@ -95,7 +95,7 @@ x("Forcing every year of Ekene Alpha to the Act alone moves the hydrocarbon tax 
  "The course reads the forced row: forcing the Act alone swaps the development levy for the tertiary education tax and changes the capital allowance and the restriction. Royalties on that row are 0.000000, so neither the tranches nor the royalty by price moved, and the levy is charged on the companies income tax assessable profit.")
 
 # 11
-x("Which engine note explains why the additional tax at the fiscal price, PIA s.268, never appears on a ledger?",
+x("Which engine note explains why the additional tax at the fiscal price of PIA s.268 does not appear on any ledger?",
  "\"The realised oil and condensate prices stand in for the Commission's fiscal prices (PIA Seventh Schedule para 8), so the additional tax at the fiscal price (PIA s.268; NTA s.73) is not computed.\"",
  ["Daily-rate note, which reads a year's crude oil and condensate over its calendar days",
   "Shared-costs note, on costs entering the hydrocarbon tax at the crude-plus-condensate share",

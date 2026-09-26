@@ -114,7 +114,7 @@ x("Under the Nigeria Tax Act 2025 (June 2025 gazette), what tax does an oil mini
 # 13
 x("What cost limits does the PIA Seventh Schedule para 14 set for production sharing contracts?",
  "70% for a contract on new acreage and 60% for one subject to a conversion contract",
- ["60% on new acreage and 70% under a conversion contract",
+ ["60% for a contract on new acreage and 70% for one that came in through a conversion contract",
   "65% for every contract, the cost price ratio limit that the Sixth Schedule sets for hydrocarbon tax",
   "No limit under a conversion contract, 70% on new acreage"],
  "Para 14(4): \"For new acreage any production sharing contract shall have a cost limit of 70% based on total oil production\". Para 14(9): \"For a production sharing contract subject to a conversion contract under this Act, the cost limit shall be 60%.\" The 65 percent figure belongs to the hydrocarbon tax cost price ratio. Production sharing under the Act is concept-only in this course.")
@@ -123,7 +123,7 @@ x("What cost limits does the PIA Seventh Schedule para 14 set for production sha
 x("Para 14(4)(d) of the Seventh Schedule prints \"over 250 million barrels up to and including 750 million barrels: 25%\". How does the course treat the 250?",
  "As a misprint where the scale's own steps need 350, quoted as printed with the error named",
  ["Read as the law, so a field between 250 and 350 million barrels owes the government its 25% profit oil share",
-  "Proof that band (c) should close at 250 million barrels",
+  "Proof that band (c) should close at 250 million barrels, which the course then corrects in its table",
   "A figure the engine's profit oil line applies and grades"],
  "The course lists this among the misprints it quotes as printed: para 14(4)(d) prints \"over 250 million barrels\" where the scale's own steps need 350, since band (c) runs \"over 100 million barrels and up to and including 350 million barrels\". The engine computes no production sharing contract, so nothing here is graded.")
 
