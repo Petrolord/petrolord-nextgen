@@ -1,0 +1,20 @@
+-- ============================================================================
+-- EC9 PROFESSIONAL DEEP SEED: Joint Ventures, Operating Agreements & Cost
+-- Recovery, intermediate tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/joa/intermediate.
+--
+-- What this tier owns: RECOVERY, DEFAULT AND COST RECOVERY. The cash call
+-- ledger with the reconciliation lag and a negative call refunded or carried;
+-- carries with a compound or multiple uplift and a cap; the back-in of PIA
+-- 2021 s.85(4); a default with pro rata cover, simple or monthly-compound
+-- interest, grace, suspension and forfeiture; PSC cost recovery through the
+-- canonical applyPSC and the three published checks.
+--
+-- AN ENGINE COURSE. There is no Suite app: the practicals run in the course's
+-- own recovery calculator. The capstone grades six values of this tier, each
+-- identical under every reading the engine states.
+-- ============================================================================

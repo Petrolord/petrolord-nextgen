@@ -1,0 +1,10 @@
+{
+ "money": {
+  "decimals": 6,
+  "match": "^(?:abiama_2035_government_profit_oil|abiama_buy_in_to_spa|abiama_spa_carry_npv|abiama_spb_2036_receipt|abiama_spb_premium|idumu_budget_allowed_overrun|idumu_development_overhead|idumu_operating_overhead|idumu_zed_august_paid|idumu_zed_june_call|okwelle_2031_carry_balance|okwelle_2032_cost_recovered|okwelle_backin_refund_to_pra|okwelle_default_cover_oko|okwelle_default_interest|okwelle_prb_june_call)$"
+ },
+ "share": {
+  "decimals": 6,
+  "match": "^(?:abiama_abo_after_forfeiture_pct|idumu_zed_paying_pct)$"
+ }
+}

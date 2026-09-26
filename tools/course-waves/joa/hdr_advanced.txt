@@ -1,0 +1,20 @@
+-- ============================================================================
+-- EC9 EXPERT DEEP SEED: Joint Ventures, Operating Agreements & Cost Recovery,
+-- advanced tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/joa/advanced.
+--
+-- What this tier owns: SOLE RISK, THE READINGS AND READING THE ENGINE. Sole
+-- risk and non-consent with the premium on the proportionate share, recovery
+-- from production and reversion inside the period; buy-in at a stated
+-- multiple; the three readings the engine states; the reference texts and
+-- their quirks; boundaries; what the engine does not compute; the partner
+-- report.
+--
+-- AN ENGINE COURSE. There is no Suite app: the practicals run in the course's
+-- own agreement calculator. The capstone grades six values of this tier, each
+-- identical under every reading the engine states.
+-- ============================================================================

@@ -1,0 +1,1742 @@
+# EC9 TEACHING DIGEST: Joint Ventures, Operating Agreements & Cost Recovery
+
+# THIS FILE IS THE ONLY TEACHING TRUTH FOR THIS COURSE. Every number in every lesson, bank question, key truth and panel comes from a line below. The engine FINDINGS record, the oracle, the golden file's expected figures, the fixture README and the engine source comments are PROVENANCE and not teaching truth.
+
+# PRECISION. Every amount of money, interest, share, percentage, rate, multiple, balance and present value prints to SIX decimals; years, months, day counts, hours, party counts and whole inputs print as whole numbers; a figure of sixteen or more significant digits at six decimals prints with its thousands grouped by commas; an engine message, reason and basis is printed verbatim, figures and all. Inside a message, money prints rounded to the cent with trailing zeros dropped, and a percentage or rate prints as the shortest round-trip decimal of the double the engine holds.
+
+# ENGINE. engines/economics/jointVenture.js, vendored sha-identical with petrolord-engines 3ae56e7 (engines PR #270), 1118 lines. It imports applyPSC and npv from engines/economics/cashflow.ts and calculatePartnerCosts from engines/economics/afe.js, and nothing else. It makes no network call.
+
+# AN ENGINE COURSE. There is no Suite app for this course. Every practical runs in the course's own calculator panels, which call this same vendored engine on the learner's own agreement terms.
+
+# THE DATA. Every Ekene party, budget, cost, cash call and production figure is SYNTHETIC, written for this platform by a stated script. No real company, contract, budget, price or regulator decision appears.
+
+# WHAT IS NEVER IN THIS FILE. No capstone field, no capstone case and no graded answer. The capstones run their own joint ventures and the digest never names them.
+
+# THIS COURSE TEACHES NO REPAIR HISTORY. Every section below describes what the engine does today.
+
+# SECTION 1: What this engine computes, and what it declines to compute (owned by Associate m01 and Expert m05 and Expert m06)
+
+Every function takes plain arrays and objects and returns either a result object or an object with `error` and `field`, where `field` names the input it refused and the message starts with that name. Every result carries a `basis` block naming the rule it applied and where the rule comes from, so the working can be printed.
+
+| function | role | what it needs | what it returns |
+| --- | --- | --- | --- |
+| `participatingInterests` | interests | parties, carries | each party's beneficial interest (its share of production), paying interest (its share of cost) and carried part, and each carry's carriers with their points |
+| `cashCalls` | monthly cash calls | parties, carries, months, reconciliationLagMonths, negativeCall, noCallBelow | each month's forecast share, adjustment, call, arrears billing, actual share, difference, amount carried and balance per party, with reasons, and the closing balances |
+| `budgetControl` | budget control | items, itemTolerancePct, budgetTolerance, unbudgetedAllowance | each item's overrun, limit and whether it is inside its tolerance, the budget total against the allowed overrun, and the unbudgeted items against their allowance |
+| `overhead` | operator overhead | costs, excluded, scale | each category's base, the charge in each band and above the last band, and the total |
+| `defaultCover` | a default on a cash call | parties, carries, callTotal, dueDate, asOf, defaulters, interest, suspension, forfeiture, holidays | each defaulter's unpaid amount and default interest, the cover by each non-defaulting party, the stated consequences with their trigger dates, and the interests after a forfeiture |
+| `carryRecovery` | a carry and its recovery | parties, carries, carried, years, uplift, recoverFromPct, cap, basis, discountRate, baseYear | the recovery ledger (opening, uplift, carried cost, due, available, recovered, closing, written off), each party's cash flow by year and its NPV |
+| `backIn` | a back-in | parties, backInParty, targetPct, costs, basis, refundableKinds, refundForm, recoverFromPct, years | the interests after the back-in, the refundable and excluded costs, the refund, who receives it, and its recovery from future entitlement |
+| `nonConsent` | sole risk and non-consent | parties, consenting, operation, premiumMultiplePct, mode, years | the consenting parties' cost shares, each non-consenting party's premium, and either its buy-in payment or the recovery ledger with the year its interest reverts |
+| `pscCostRecovery` | PSC cost recovery | years, royaltyPct, costOilLimitPct, costOilLimitBase, contractorProfitSharePct, taxRatePct, openingCostPool, parties, discountRate, baseYear | each year's royalty, cost oil limit, cost recovered, pool carried, profit oil and its split, tax and contractor entitlement through the canonical applyPSC, the split between partners and their NPVs |
+
+The stated constants, read from the exported `DEFAULTS` and `PIA_JV`:
+
+| constant | value | what it sets | where it comes from |
+| --- | --- | --- | --- |
+| `DEFAULTS.MAX_PARTIES` | 20 | the most parties (and carries, and defaulters) one call accepts | cap |
+| `DEFAULTS.MAX_YEARS` | 100 | the most years one call accepts | cap |
+| `DEFAULTS.MAX_MONTHS` | 600 | the most months in one cash call ledger | cap |
+| `DEFAULTS.MAX_ITEMS` | 200 | the most budget items, cost categories or cost lines in one call | cap |
+| `DEFAULTS.MAX_BANDS` | 20 | the most bands in one overhead scale | cap |
+| `DEFAULTS.SUM_TOLERANCE` | 1e-9 | how far participating interests or carrier shares may sum from 100 | engine convention |
+| `PIA_JV.maxGovernmentParticipationPct` | 60.000000 | the most the Government may participate to under basis "pia-s85-4" | PIA s.85(4)(a) |
+| `PIA_JV.refundableKinds` | development, production | the cost kinds refunded under basis "pia-s85-4" | PIA s.85(4)(c) |
+| `PIA_JV.renegotiatedPscCostOilLimitPct` | 60.000000 | the ceiling on the cost oil limit of a renegotiated PSC, reported in the basis only | PIA s.311(2)(a)(iii) |
+
+WHAT THE ENGINE DOES NOT DO, checked here against its exports and its source:
+- Its two imports are engines/economics/cashflow.ts, for applyPSC and npv, and engines/economics/afe.js, for calculatePartnerCosts. It computes the PSC cost pool through the canonical applyPSC, discounts through the canonical npv and splits every joint account amount between parties through the canonical calculatePartnerCosts; it carries no cost pool, NPV or Monte Carlo code of its own, and nothing in it samples.
+- It decides nothing a contract or a text does not state. Every carry share, uplift, recovery share, cap, reconciliation lag, negative call rule, tolerance, overhead band and rate, default interest rate, day basis, interest method, grace, premium multiple, royalty, cost oil limit and its base, profit share and tax rate is an input with no default, and a call without one is refused by name (section 5).
+- It reads no key it does not know. `ACCEPTED_KEYS` is exported with one shape for each of the 9 functions, and every call refuses an input key the function does not read, at every level, naming the key, its path and the accepted keys. A misspelt optional key is refused; it never silently drops a term.
+- It computes no compensation on an assignment, no cover by taking a defaulter's petroleum, no interest on cash balances, no index adjustment of a scale, no expert determination and no sliding scale of profit shares. Section 22 lists each with where it would come from.
+- Its exported names are, in full: ACCEPTED_KEYS, DEFAULTS, PIA_JV, backIn, budgetControl, carryRecovery, cashCalls, defaultCover, nonConsent, overhead, participatingInterests, pscCostRecovery.
+
+# SECTION 2: The sources, their editions and the date each was read (owned by Associate m01 l04 and Professional m03 and Professional m06 and Expert m04)
+
+THE RULE THIS COURSE FOLLOWS FOR EVERY LAW, REGULATION, MODEL CONTRACT AND GUIDE IT TEACHES. Each one is named with its edition or gazette date and the date it was read. Only publicly available texts are quoted, with their citation. Licensed model contracts and accounting procedures (the AIPN model joint operating agreement, the COPAS accounting procedures and the AAPL forms) are taught by concept only and never quoted. Every legal figure the engine applies was read from the cited text and is cited to its section; every contractual rate, percentage, multiple, share, tolerance and scale is a required input with no default. Every text below was read on 2026-09-26.
+
+| text | edition or date | what the course reads from it | date read |
+| --- | --- | --- | --- |
+| Norway, Ministry of Petroleum and Energy, Agreement concerning petroleum activities: Attachment A Joint Operating Agreement and Attachment B Accounting Agreement | unofficial English translation; the PDF is dated 27 February 2007; cited from the Wayback Machine capture of 26 May 2024 (the live regjeringen.no copy answered a bot check with HTTP 403 on the date read) | JOA Art. 8.1, Art. 9.1 to 9.5, Art. 12.5, Art. 18.1 to 18.14, Art. 19.6; Accounting Agreement Art. 1.2.1, 1.2.2, 2.2.2 and 2.2.3 | 2026-09-26 |
+| Petroleum Industry Act 2021 (Act No. 6) | Official Gazette No. 142, Vol. 108, 27 August 2021 | s.85(2)(a) and (d); s.85(4)(a) to (g), the carried interest provision; s.311(2)(a)(iii), the renegotiated PSC cost oil limit (reported only); s.54(8) and s.65 as concepts | 2026-09-26 |
+| World Bank, Petroleum Sector Briefing Note No. 8, Contracts for Petroleum Development, Part 2 | November 2007; Public Disclosure Authorized | the two-barrel illustration and Figure 2: royalty first, the cost oil limit on gross, profit oil split, income tax | 2026-09-26 |
+| IMF, Luca and Mesa Puyo, Fiscal Analysis of Resource Industries (FARI) Methodology, TNM/16/01 | February 2016; read from the Wayback capture of 12 October 2025 (the direct download answered 403) | Figure 5 (one USD100 barrel under a PSC), Table 11 (the PSC/DROP regime), Table 12 (cost petroleum by year) and Table 13 (DROP profit sharing) | 2026-09-26 |
+| IMF, Benninger, Devlin, Camero Godinez and Vernon-Lin, Cash Flow Analysis of Fiscal Regimes for Extractive Industries, WP/24/89 | April 2024; read from the Wayback capture of 14 August 2025 | concept only: production shared net of royalties; a carry as a financing arrangement repaid from the state's share of production | 2026-09-26 |
+| Republic of Kenya, Model Production Sharing Contract, Participation Agreement | 2015 model (file name dated 21 January 2015) | Art. 6: the cash call on notice, an excess advance reducing the next advance or refunded, interest compounded monthly from the due date with the seventy-two hour clause, no vote after five days, forfeiture after ninety days | 2026-09-26 |
+| Tanzania, Model Production Sharing Agreement 2013 (TPDC) | 2013; read from the Wayback capture of 23 May 2024 | concept only: a cost recovery limit on production net of royalty, a contractor loan of an unpaid amount recovered from cost oil, an overhead cap before the development licence | 2026-09-26 |
+| OpenOil, Oil Contracts: How to read and understand them | version 1, November 2012, Creative Commons | no schedule is used; its state participation example is taught as a printed arithmetic error | 2026-09-26 |
+
+WHERE NO PUBLIC TEXT PRINTS A WORKED SCHEDULE. The validation record states, verbatim:
+> The research found NO public text that prints a worked schedule for a carry recovered with interest, for a non-consent premium recovered from production, for a cash call over/under reconciliation, for a default cover or for an overhead scale applied to figures.
+The carry, cash call, default, overhead and premium figures of this course are therefore the stated clause arithmetic of the Norwegian agreement and PIA s.85(4), each run by the engine; the PSC cost recovery has published worked examples, and section 16 runs all three.
+
+The engine carries its citations in its own words. The `basis.source` of one call of each kind, verbatim:
+
+| call | the engine's basis.source, verbatim |
+| --- | --- |
+| participatingInterests | Norway, Agreement concerning petroleum activities, Attachment A Joint Operating Agreement (unofficial English translation, 2007 text) Art. 8.1 (contribution in accordance with the Participating interest); Petroleum Industry Act 2021 (Act No. 6), Official Gazette No. 142, Vol. 108, 27 August 2021 s.85(4) (the carried interest provision) |
+| cashCalls | Norway, Agreement concerning petroleum activities, Attachment B Accounting Agreement (unofficial English translation, 2007 text) Art. 1.2.1; Norway, Agreement concerning petroleum activities, Attachment A Joint Operating Agreement (unofficial English translation, 2007 text) Art. 8.1 |
+| budgetControl | Norway, Agreement concerning petroleum activities, Attachment A Joint Operating Agreement (unofficial English translation, 2007 text) Art. 12.5 (a budget item or an AFE by up to 10%; a budget by no more than the lower of 5% or NOK 75 million; NOK 3 million for work outside the budgets); every percentage and amount is a stated input with no default |
+| overhead | Norway, Agreement concerning petroleum activities, Attachment B Accounting Agreement (unofficial English translation, 2007 text) Art. 2.2.2 (per cent rates and limits on annual exploration, operating and development cost, with stated exclusions) and Art. 2.2.3 (0.65 % of the annual costs); every band and rate is a stated input with no default |
+| defaultCover | Norway, Agreement concerning petroleum activities, Attachment A Joint Operating Agreement (unofficial English translation, 2007 text) Art. 9.1 to 9.4; Norway, Agreement concerning petroleum activities, Attachment B Accounting Agreement (unofficial English translation, 2007 text) Art. 1.2.2 (the reference rate plus three percentage points in that text; the rate is a stated input here) |
+| carryRecovery | Petroleum Industry Act 2021 (Act No. 6), Official Gazette No. 142, Vol. 108, 27 August 2021 s.85(4); Norway, Agreement concerning petroleum activities, Attachment A Joint Operating Agreement (unofficial English translation, 2007 text) Art. 8.1; the carry, uplift, recovery share and cap are stated inputs with no default |
+| backIn | Petroleum Industry Act 2021 (Act No. 6), Official Gazette No. 142, Vol. 108, 27 August 2021 s.85(4) |
+| nonConsent | Norway, Agreement concerning petroleum activities, Attachment A Joint Operating Agreement (unofficial English translation, 2007 text) Art. 18.6 and 18.12 (entry at one thousand (1000) % of the proportionate share of the costs, apportioned to the initial participants); premium recovery from production is a contract term taught by concept and stated here as inputs |
+| pscCostRecovery | Petroleum Industry Act 2021 (Act No. 6), Official Gazette No. 142, Vol. 108, 27 August 2021 s.85(2)(a), s.311(2)(a)(iii); engines/economics/cashflow.ts applyPSC |
+
+LICENSED TEXTS. No licensed text is quoted anywhere in this course. The AIPN model joint operating agreement and the COPAS accounting procedures are licensed; where a lesson needs their ideas (a non-consent premium recovered from production, an overhead scale, an operating committee), it teaches them as concepts, and every quoted clause comes from the public texts above.
+
+# SECTION 3: The provisions this course quotes, verbatim, with their citations (owned by Associate m01 l04 and Professional m03 and Expert m04 l01)
+
+Each provision below is quoted exactly from the text named in section 2, with whitespace collapsed; a dash the text prints is shown as a colon. Each is preceded by the course's plain paraphrase. A figure or a spelling the text prints is quoted as printed.
+
+THE PETROLEUM INDUSTRY ACT 2021:
+
+PIA s.85(2)(a): A production sharing contract lets the party that bears the financial risk recover its costs from a share of production, as the contract sets out.
+> "(a) a production sharing contract for the exploration, development and production of petroleum on terms under which the financial risk-bearing party shall recover costs from a share of production as established in the contract from the applicable area ;" (PIA s.85(2)(a))
+
+PIA s.85(2)(d): A concession agreement may include an incorporated or unincorporated joint venture with NNPC Limited.
+> "(d) a concession agreement for exploration, development and production of petroleum, which may include an incorporated or unincorporated joint venture with NNPC Limited ; and" (PIA s.85(2)(d))
+
+PIA s.85(4): A concession agreement under s.85(2)(d) must carry a carried interest provision on the terms that follow.
+> "(4) A contract as provided for under section 85 (2) (d) of this Act shall include a carried interest provision, whereby" (PIA s.85(4))
+
+PIA s.85(4)(a): The Government, through NNPC Limited, may participate up to 60 percent, or as a bid parameter states.
+> "(a) the Government through the NNPC Limited has the right to participate up to 60% in the contract or identified as a bid parameter ;" (PIA s.85(4)(a))
+
+PIA s.85(4)(b): The right to participate runs from any time after the licence or lease is granted.
+> "(b) the right to participate shall be from any time upon the granting of the licence or lease ;" (PIA s.85(4)(b))
+
+PIA s.85(4)(c): The Government refunds in full its proportionate share of the unrecovered proven costs from the date it participates.
+> "(c) the contract shall stipulate that Government shall refund fully its proportionate share of the unrecovered proven costs from the date of its participation" (PIA s.85(4)(c))
+
+PIA s.85(4)(c): The refundable costs are development and production costs, with no bonuses, penalties, interest, premium or markups.
+> "such refunded cost shall relate to development and production and shall not include bonuses and penalties, interest, premium or markups on cost ;" (PIA s.85(4)(c))
+
+PIA s.85(4)(d): The contract may not require the Government to pay anything upfront.
+> "(d) the contract shall not require any upfront payment by the Government ;" (PIA s.85(4)(d))
+
+PIA s.85(4)(e): An agreed expert determination settles the nature, validity and amount of the unrecovered costs.
+> "(e) the nature, the validity and quantum of the unrecovered costs to be refunded shall be determined or verified by an agreed expert determination procedure ;" (PIA s.85(4)(e))
+
+PIA s.85(4)(f): The refund may be paid in cash or in kind from the future share of production or entitlements.
+> "(f ) the refund obligation under this subsection may be in the form of cash or kind from future share of production or entitlements from the effective participation date ; and" (PIA s.85(4)(f))
+
+PIA s.311(2)(a)(iii): A renegotiated production sharing contract carries a cost oil limit of at most 60 percent of total oil production and a haircut of at least 55 percent on disputed amounts.
+> "shall feature a cost oil limit of not more than 60% of the total oil production, a minimum of 55% haircut on disputed amount" (PIA s.311(2)(a)(iii))
+
+THE NORWEGIAN JOINT OPERATING AGREEMENT (ATTACHMENT A, UNOFFICIAL ENGLISH TRANSLATION):
+
+Norway JOA Art. 8.1: The parties must fund every expense of the joint venture.
+> "The Parties are obliged to provide sufficient funds to cover all expenses relating to the activities of the joint venture." (Norway JOA Art. 8.1)
+
+Norway JOA Art. 8.1: Each party contributes by its participating interest at the time of payment.
+> "the amount to be contributed by each Party shall be calculated in accordance with the Participating interest at the time the payment is made." (Norway JOA Art. 8.1)
+
+Norway JOA Art. 9.1: The non-defaulting parties advance a defaulter's unpaid amounts by their participating interests.
+> "the amounts which are not paid shall be advanced by the non-defaulting Parties in accordance with their Participating interest." (Norway JOA Art. 9.1)
+
+Norway JOA Art. 9.1: A defaulting party pays penal interest under the Accounting Agreement.
+> "he shall be charged a penal interest pursuant to Article 1.2.2 of Attachment B" (Norway JOA Art. 9.1)
+
+Norway JOA Art. 9.2: After five working days from the demand a defaulting party loses its vote and its access to data.
+> "If a Party's default has not ceased within five (5) working days after he has received a demand for payment from the Operator, he looses his right to vote and his access to data and information" (Norway JOA Art. 9.2)
+
+Norway JOA Art. 9.3: After three months from the operator's notice the other parties may demand an assignment of the defaulter's interest.
+> "If a Party's default remains in effect for more than three (3) months after the Operator has informed the management committee" (Norway JOA Art. 9.3)
+
+Norway JOA Art. 9.3: The compensation on an assignment is agreed, with the book value of the share of the investment as its ceiling.
+> "The compensation shall be agreed between the Parties, but shall not exceed the book value of the Party's share of the investment" (Norway JOA Art. 9.3)
+
+Norway JOA Art. 9.4: An assigned interest goes to the non-defaulting parties pro rata to their participating interests.
+> "The assigned Participating interest shall be apportioned pro rata amongst the non-defaulting Parties in accordance with their Participating interest, unless otherwise agreed." (Norway JOA Art. 9.4)
+
+Norway JOA Art. 12.5: The operator may exceed a budget item or an AFE by up to 10 percent.
+> "In carrying out an approved work program, however, the Operator may exceed a budget item or an AFE by up to 10%." (Norway JOA Art. 12.5)
+
+Norway JOA Art. 12.5: A budget may be exceeded by at most the lower of 5 percent and NOK 75 million in the year.
+> "None of the budgets may be exceeded by more than the lower of 5% or NOK 75 million during the Accounting year." (Norway JOA Art. 12.5)
+
+Norway JOA Art. 12.5: Work outside the programme and the budgets may reach NOK 3 million a budget in the year.
+> "up to an aggregate amount for each budget of NOK 3 million during the Accounting year." (Norway JOA Art. 12.5)
+
+Norway JOA Art. 18.6: Parties in a sole risk project take part in proportion to their participating interests.
+> "In sole risk projects each Party participates in proportion to his Participating interest, unless the Parties otherwise agree." (Norway JOA Art. 18.6)
+
+Norway JOA Art. 18.12: A party entering a sole risk project later pays one thousand percent of its proportionate share of the cost.
+> "must pay one thousand (1000) % of their proportionate share of the costs of the project." (Norway JOA Art. 18.12)
+
+Norway JOA Art. 18.12: That entry payment is shared by the initial participants by their interests in the project.
+> "The payment shall be apportioned between the initial participants according to their Participating interest in the project." (Norway JOA Art. 18.12)
+
+THE NORWEGIAN ACCOUNTING AGREEMENT (ATTACHMENT B, UNOFFICIAL ENGLISH TRANSLATION):
+
+Norway Accounting Agreement Art. 1.2.1: The difference between the advances and the actual payments adjusts the next request for advances.
+> "The difference between the monthly cash advances and the actual payments in each currency shall be stated, and the next request for advances shall be adjusted accordingly." (Norway Accounting Agreement Art. 1.2.1)
+
+Norway Accounting Agreement Art. 1.2.1: An excess advance is refunded, or carried to the following period when the parties agree.
+> "the Operator shall refund the excess amounts as soon as possible, unless the Parties agree to transfer the amount to the following period." (Norway Accounting Agreement Art. 1.2.1)
+
+Norway Accounting Agreement Art. 1.2.1: Below NOK 5 million a month the operator need not make a cash call.
+> "Where the total cash requirement is less than NOK 5 million a month, the Operator is not required to make cash calls." (Norway Accounting Agreement Art. 1.2.1)
+
+Norway Accounting Agreement Art. 1.2.1: With no cash call, each non-operator pays its share of the actual payments when billed.
+> "If the Operator has made no request for advance payments, the Non-operators shall pay their proportionate share of the actual monthly payments within 15 days after receipt of the Operator's billing" (Norway Accounting Agreement Art. 1.2.1)
+
+Norway Accounting Agreement Art. 1.2.2: Late payment interest runs from and including the due date to, and excluding, the value date.
+> "Interest is due for the period starting on and including the due date of payment and ending on, but excluding, the value date for payment." (Norway Accounting Agreement Art. 1.2.2)
+
+Norway Accounting Agreement Art. 1.2.2: The rate is a reference rate on the due date plus three percentage points.
+> "as per the due date of payment, plus three percentage points." (Norway Accounting Agreement Art. 1.2.2)
+
+Norway Accounting Agreement Art. 2.2.2: The operator's general research and development cost is charged by per cent rates in bands of annual cost.
+> "may be charged to the Joint Account according to the following per cent rates and limits based on annual costs" (Norway Accounting Agreement Art. 2.2.2)
+
+Norway Accounting Agreement Art. 2.2.2: The charge itself never enters the cost it is charged on.
+> "Cost charged to the Joint Account in accordance with this Article is not to be included in the basis of calculation." (Norway Accounting Agreement Art. 2.2.2)
+
+Norway Accounting Agreement Art. 2.2.2: The band limits move each year with the Norwegian consumer price index.
+> "The intervals above will be adjusted at the beginning of each Year on the basis of the consumer price index as published by Statistics Norway per 15 July of the current year." (Norway Accounting Agreement Art. 2.2.2)
+
+Norway Accounting Agreement Art. 2.2.3: Corporate management and staff cost is charged at 0.65 percent of the annual cost.
+> "may be charged to the Joint Account with 0.65 % of the annual costs for exploration, operation and development of the Joint operation" (Norway Accounting Agreement Art. 2.2.3)
+
+THE KENYA MODEL PRODUCTION SHARING CONTRACT 2015, PARTICIPATION AGREEMENT:
+
+Kenya Model PSC 2015, Participation Agreement Art. 6.2: The operator may ask each non-operator to advance its share of next month's estimated spend by a due date.
+> "request a non-operator to advance a share of the estimated expenditure for the following month, stipulating the due date of payment" (Kenya Model PSC 2015, Participation Agreement Art. 6.2)
+
+Kenya Model PSC 2015, Participation Agreement Art. 6.4: An advance above the month's spend reduces the next cash advance.
+> "If any non-operator's advances for a given month exceed its share of cash disbursements for the same month, the next succeeding cash advance, after such determination, shall be reduced accordingly." (Kenya Model PSC 2015, Participation Agreement Art. 6.4)
+
+Kenya Model PSC 2015, Participation Agreement Art. 6.4: A non-operator may ask for an excess advance back, paid within fifteen days.
+> "non-operator(s) may request that excess advances be refunded. The operator shall make such refund within fifteen (15) days after date of such notice." (Kenya Model PSC 2015, Participation Agreement Art. 6.4)
+
+Kenya Model PSC 2015, Participation Agreement Art. 6.7: Late payment interest is a reference rate plus a margin the model leaves blank.
+> "A late payment shall attract interest at LIBOR plus" (Kenya Model PSC 2015, Participation Agreement Art. 6.7)
+
+Kenya Model PSC 2015, Participation Agreement Art. 6.7: The interest compounds monthly from the due date.
+> "compounded monthly and calculated from the due date of payment." (Kenya Model PSC 2015, Participation Agreement Art. 6.7)
+
+Kenya Model PSC 2015, Participation Agreement Art. 6.7: A payment later than seventy-two hours after the due date carries interest from the due date itself.
+> "A payment not received within seventy-two (72) hours of the due date shall accrue interest from the due date" (Kenya Model PSC 2015, Participation Agreement Art. 6.7)
+
+Kenya Model PSC 2015, Participation Agreement Art. 6.8: After five days in default a party loses its vote on the operating committee.
+> "A party which remains in default for five (5) days shall have no right to vote at any operating committee meeting held during the period of the default" (Kenya Model PSC 2015, Participation Agreement Art. 6.8)
+
+Kenya Model PSC 2015, Participation Agreement Art. 6.9: After ninety days in default the other parties may declare the defaulter's share forfeit.
+> "and remains in default for ninety (90) days, the participating interest share of the defaulting party may be declared forfeit by the non-defaulting parties" (Kenya Model PSC 2015, Participation Agreement Art. 6.9)
+
+Kenya Model PSC 2015, Participation Agreement Art. 6.10: A forfeited share vests in the non-defaulting parties in proportion, with no compensation.
+> "that share shall vest rateably, unless otherwise agreed, in the non-defaulting parties without payment of compensation" (Kenya Model PSC 2015, Participation Agreement Art. 6.10)
+
+WORLD BANK PETROLEUM SECTOR BRIEFING NOTE NO. 8 (NOVEMBER 2007):
+
+World Bank Petroleum Sector Briefing Note No. 8 (November 2007): In the two-barrel example the royalty of 10 percent is paid first.
+> "the royalty is paid first. At 10 percent, this amounts to $10 going to the government." (World Bank Petroleum Sector Briefing Note No. 8 (November 2007))
+
+World Bank Petroleum Sector Briefing Note No. 8 (November 2007): The example's cost oil limit is 60 percent of gross revenue.
+> "the contractor recovers costs to the limit permitted, in this case 60 percent of the gross revenue or US$60." (World Bank Petroleum Sector Briefing Note No. 8 (November 2007))
+
+World Bank Petroleum Sector Briefing Note No. 8 (November 2007): The note says income tax deductions carry no limit of the kind cost oil has.
+> "For paying income tax, there are no limits on deductible expenses in the way there are limits on cost oil." (World Bank Petroleum Sector Briefing Note No. 8 (November 2007))
+
+World Bank Petroleum Sector Briefing Note No. 8 (November 2007): Profit oil of 65 is split 60 percent to the government and 40 percent to the contractor.
+> "The government takes 60 percent of US$65, or US$39, and the remaining US$26 goes to the contractor." (World Bank Petroleum Sector Briefing Note No. 8 (November 2007))
+
+World Bank Petroleum Sector Briefing Note No. 8 (November 2007): The note's end result, in whole dollars.
+> "The end result is that the contractor retains US$43 and the government takes $57." (World Bank Petroleum Sector Briefing Note No. 8 (November 2007))
+
+IMF FARI TNM/16/01 (FEBRUARY 2016):
+
+IMF FARI TNM/16/01 (February 2016), Figure 5: In the one-barrel figure the government takes 30 of profit oil and 6 of income tax.
+> "In the PSC system, the government revenue consists of USD30 in profit oil and USD6 in income tax." (IMF FARI TNM/16/01 (February 2016), Figure 5)
+
+IMF FARI TNM/16/01 (February 2016), Figure 5: The income tax base is cost petroleum plus profit petroleum less the allowable deductions.
+> "In the PSC diagram below, the base for CIT is equal to cost petroleum plus profit petroleum minus allowable tax deduction." (IMF FARI TNM/16/01 (February 2016), Figure 5)
+
+IMF FARI TNM/16/01 (February 2016), Figure 5: The figure assumes the deductions equal the cost recovered.
+> "Normal tax deductions in the tax/royalty regime are assumed to be equal to the cost recovery in the PSC." (IMF FARI TNM/16/01 (February 2016), Figure 5)
+
+IMF WP/24/89 (APRIL 2024):
+
+IMF WP/24/89 (April 2024): Production shared under a PSC is usually counted after royalty.
+> "Under a production sharing regime, revenues shared are usually net of royalties." (IMF WP/24/89 (April 2024))
+
+IMF WP/24/89 (April 2024): A carry is a financing arrangement for the state's share of development spending.
+> "The parties may establish a financing arrangement to cover (“carry”) the state’s proportional share of development spending." (IMF WP/24/89 (April 2024))
+
+OPENOIL, OIL CONTRACTS (VERSION 1, NOVEMBER 2012):
+
+OpenOil, Oil Contracts: How to read and understand them (version 1, November 2012): The book's state participation example taxes the companies' 49 million at 25 percent.
+> "25% of the international oil company's share of benefits = 25% of 49 million dollars" (OpenOil, Oil Contracts: How to read and understand them (version 1, November 2012))
+
+OpenOil, Oil Contracts: How to read and understand them (version 1, November 2012): The book prints the product as 11.75 million.
+> "This is calculated by: 0.25 x 49 = 11.75 million dollars" (OpenOil, Oil Contracts: How to read and understand them (version 1, November 2012))
+
+56 provisions quoted: PIA 11, NOJOA 14, NOAA 10, KENYA 9, WB 5, FARI 3, IMFWP 2, OPENOIL 2.
+
+THE ACT'S CARRIED INTEREST PROVISION AND THE CONTRACT IT GOVERNS. Section 85(4) opens "A contract as provided for under section 85 (2) (d)", which is the concession agreement that may include a joint venture with NNPC Limited; a production sharing contract is s.85(2)(a). The engine applies the s.85(4) figures only under basis "pia-s85-4", which the caller states.
+
+# SECTION 4: The Ekene joint venture and what is planted in it (owned by Associate m01 l03 and Professional m01 and Professional m02 and Expert m01)
+
+Every joint venture in this course's teaching comes from one fixture file under test-data/economics/ekene-jv, written by a stated script that reproduces it. It is labelled SYNTHETIC in the file:
+> SYNTHETIC teaching data for the Ekene field (ours). No real company, contract, budget, price or regulator decision.
+
+THE LICENCE (fixture): Ekene shallow water licence joint venture (synthetic). Money in US$, whole dollars. The Ekene shallow water licence, the terrain of the pia course's Ekene Alpha case.
+
+| party (fixture) | name (fixture) | participating interest | beneficial interest (engine) | paying interest (engine) | carried part (engine) |
+| --- | --- | --- | --- | --- | --- |
+| EKO | Ekene Operator (synthetic) | 40.000000 | 40.000000 | 50.000000 | 0.000000 |
+| PA | Partner A (synthetic) | 25.000000 | 25.000000 | 31.250000 | 0.000000 |
+| PB | Partner B (synthetic) | 15.000000 | 15.000000 | 18.750000 | 0.000000 |
+| NOC | State participant (synthetic) | 20.000000 | 20.000000 | 0.000000 | 100.000000 |
+
+THE CARRY (fixture): NOC carried 100 percent, carriers pro-rata.
+
+THE FIXTURE'S TERMS, each a term of the synthetic contract stated in the file:
+- Cash calls 2027: reconciliation lag 2 months, negative call "carry", no cash call below 500000.000000; twelve months of forecasts and actuals (section 11).
+- Budget 2027: item tolerance 10.000000 percent, budget tolerance the lower of 5.000000 percent and 3000000.000000, unbudgeted allowance 500000.000000 (section 9).
+- Overhead 2031: a marginal scale per category, 2000000.000000 of operating cost excluded, and a flat corporate charge of 0.625000 percent (section 10).
+- Default: PB pays 250000.000000 of the 12000000.000000 call due 2027-03-01 and cures on 2027-04-15; interest 8.250000 percent a year, simple, 360-day basis, grace 0 hours; suspension after 5 working-days, forfeiture after 3 months from 2027-03-10 (section 14).
+- Carry recovery: NOC's carried cost recovered from at most 50.000000 percent of its share of the entitlement with a compound uplift of 8.000000 percent a year (section 12).
+- Back-in: NOC backs in to 40.000000 percent, the refund recovered from 50.000000 percent of its new share (section 13).
+- Non-consent: PB declines the Ekene-4 sidetrack (18000000.000000), premium 400.000000 percent (section 17).
+- PSC variant: royalty 12.500000 percent, cost oil limit 60.000000 percent of gross, contractor profit share 60.000000 percent, tax 30.000000 percent, opening pool 142000000.000000 (section 15).
+
+| planted situation (fixture README) | found by |
+| --- | --- |
+| cash calls: the January over-call is credited in March, two months later | cashCalls adjustment |
+| cash calls: April (forecast 0) and May (below the threshold) make no call; May's actual is billed in June | cashCalls threshold and arrears |
+| cash calls: the July over-call exceeds September's forecast shares, so September calls 0 and a credit carries to October | cashCalls negative call carried |
+| budget: geology and geophysics overruns by exactly its 10 percent tolerance and is inside | budgetControl item boundary |
+| budget: exploration drilling is beyond its item tolerance, and the budget is beyond the lower of 5 percent and 3,000,000 | budgetControl item and total |
+| overhead: 2,000,000 of operating cost is excluded from its base | overhead exclusions |
+| default: PB cures on 2027-04-15, after the suspension trigger and before the forfeiture trigger | defaultCover consequences |
+| carry: NOC's carry with 8 percent compound uplift is recovered in 2033 | carryRecovery payout year |
+| carry: under PIA s.85(4), with no uplift and the whole share, it is recovered in 2031 | carryRecovery basis pia-s85-4 |
+| carry: a stated cap of 25,000,000 writes off the rest | carryRecovery cap |
+| back-in: exploration, the bonus, interest and the markup are excluded, and the refund is recovered in 2034 | backIn exclusions and recovery |
+| non-consent: PB's interest in the sidetrack reverts inside 2035 | nonConsent reversion |
+| PSC: the pool is recovered in 2036 | pscCostRecovery pool |
+
+All 13 planted situations are found by the engine behaviour named beside each (checked when this digest is built).
+
+# SECTION 5: Every refusal, with the field it names and the engine's own words (owned by Associate m01 l05 and Associate m02 and Associate m03 and Associate m04 and Associate m05 and Associate m06 and Professional m01 and Professional m02 and Professional m03 and Professional m04 and Professional m05 and Expert m01 and Expert m02 and Expert m06)
+
+A refusal is an object with `error` and `field`. The message starts with the name of the field it refuses and states the exact condition that failed: "<field> must <condition>; got <value>", the value as the engine prints it (a string in quotes, an absent value as nothing), or, for an unknown key, "<field> is not an accepted key; the accepted keys ... are ...". Each row below is a stated bad input from the golden file handed to the engine; the message is the engine's, verbatim. A result returned with a reason (a month with no cash call, a carry not recovered by the last year, a consequence not triggered) is a result. It is no refusal.
+
+| function | golden case | field | the engine's message, verbatim |
+| --- | --- | --- | --- |
+| `participatingInterests` | int-refuse-sum | `parties` | parties must have participatingPct summing to 100; got a sum of 90 |
+| `participatingInterests` | int-refuse-dup-id | `parties[1].id` | parties[1].id must be an id no other party has; got "A" |
+| `participatingInterests` | int-refuse-zero-pct | `parties[0].participatingPct` | parties[0].participatingPct must be a number above 0 and at most 100; got 0 |
+| `participatingInterests` | int-refuse-carried-unknown | `carries[0].carried` | carries[0].carried must be the id of a party (EKO, PA, PB, NOC); got "XYZ" |
+| `participatingInterests` | int-refuse-carriers-missing | `carries[0].carriers` | carries[0].carriers must be "pro-rata" or an object of carrier shares in per cent (no default); got nothing |
+| `participatingInterests` | int-refuse-carriers-sum | `carries[0].carriers` | carries[0].carriers must sum to 100; got a sum of 90 |
+| `participatingInterests` | int-refuse-carrier-carried | `carries[1].carriers.NOC` | carries[1].carriers.NOC is a carried party and cannot carry another |
+| `participatingInterests` | int-refuse-carried-pct | `carries[0].carriedPct` | carries[0].carriedPct must be a number above 0 and at most 100; got 0 |
+| `participatingInterests` | int-refuse-all-carried | `carries` | carries must be leaving at least one party that is not carried; got ["A","B"] |
+| `participatingInterests` | int-refuse-unknown-key | `carry` | carry is not an accepted key; the accepted keys at the top level are parties, carries |
+| `participatingInterests` | int-refuse-unknown-party-key | `parties[0].wi` | parties[0].wi is not an accepted key; the accepted keys of parties[0] are id, name, participatingPct |
+| `cashCalls` | cc-refuse-gap | `months[1].month` | months[1].month must be 2027-02, the month after 2027-01 (the months are consecutive); got "2027-03" |
+| `cashCalls` | cc-refuse-lag0 | `reconciliationLagMonths` | reconciliationLagMonths must be an integer at or above 1; got 0 |
+| `cashCalls` | cc-refuse-no-lag | `reconciliationLagMonths` | reconciliationLagMonths must be an integer at or above 1; got nothing |
+| `cashCalls` | cc-refuse-negative-call | `negativeCall` | negativeCall must be one of "refund", "carry"; got "net" |
+| `cashCalls` | cc-refuse-negative-actual | `months[0].actual` | months[0].actual must be a finite number at or above 0; got -1 |
+| `cashCalls` | cc-refuse-month-format | `months[0].month` | months[0].month must be a month 'YYYY-MM'; got "2027-1" |
+| `cashCalls` | cc-refuse-unknown-key | `lag` | lag is not an accepted key; the accepted keys at the top level are parties, carries, months, reconciliationLagMonths, negativeCall, noCallBelow |
+| `cashCalls` | cc-refuse-unknown-month-key | `months[0].budget` | months[0].budget is not an accepted key; the accepted keys of months[0] are month, forecast, actual |
+| `budgetControl` | budget-refuse-no-tolerance | `budgetTolerance` | budgetTolerance must be an object { pct, amount } (amount optional; no default); got nothing |
+| `budgetControl` | budget-refuse-dup-item | `items[1].item` | items[1].item must be a name no other item has; got "x" |
+| `budgetControl` | budget-refuse-item-tol | `itemTolerancePct` | itemTolerancePct must be a finite number at or above 0; got nothing |
+| `budgetControl` | budget-refuse-unknown-key | `budgetTolerance.amt` | budgetTolerance.amt is not an accepted key; the accepted keys of budgetTolerance are pct, amount |
+| `overhead` | overhead-refuse-no-scale | `scale.operating` | scale.operating must be an object { bands, abovePct } (no default rate); got nothing |
+| `overhead` | overhead-refuse-band-order | `scale.operating.bands[1].upTo` | scale.operating.bands[1].upTo must be above the previous band's upTo 100; got 100 |
+| `overhead` | overhead-refuse-exclusion | `excluded.operating` | excluded.operating must be at or below the cost of the category 10; got 11 |
+| `overhead` | overhead-refuse-exclusion-category | `excluded.drilling` | excluded.drilling is not a cost category; the categories are operating |
+| `overhead` | overhead-refuse-scale-category | `scale.drilling` | scale.drilling is not a cost category; the categories are operating |
+| `overhead` | overhead-refuse-above | `scale.operating.abovePct` | scale.operating.abovePct must be a number from 0 to 100; got nothing |
+| `overhead` | overhead-refuse-scale-key | `scale.operating.flat` | scale.operating.flat is not an accepted key; the accepted keys of scale.operating are bands, abovePct |
+| `overhead` | overhead-refuse-band-key | `scale.operating.bands[0].rate` | scale.operating.bands[0].rate is not an accepted key; the accepted keys of scale.operating.bands[0] are upTo, pct |
+| `overhead` | overhead-refuse-unknown-key | `rate` | rate is not an accepted key; the accepted keys at the top level are costs, excluded, scale |
+| `defaultCover` | default-refuse-no-method | `interest.interestMethod` | interest.interestMethod must be one of "simple", "monthly-compound"; got nothing |
+| `defaultCover` | default-refuse-method | `interest.interestMethod` | interest.interestMethod must be one of "simple", "monthly-compound"; got "compound" |
+| `defaultCover` | default-refuse-no-grace | `interest.graceHours` | interest.graceHours must be a finite number of hours at or above 0, stated (0 when the contract gives no grace; the engine holds no default); got nothing |
+| `defaultCover` | default-refuse-negative-grace | `interest.graceHours` | interest.graceHours must be a finite number of hours at or above 0, stated (0 when the contract gives no grace; the engine holds no default); got -1 |
+| `defaultCover` | default-refuse-paid-in-full | `defaulters[0].paid` | defaulters[0].paid must be below the party's share of the call 2250000 (a party that paid its share is not in default); got 2250000 |
+| `defaultCover` | default-refuse-no-rate | `interest.annualRatePct` | interest.annualRatePct must be a finite number at or above 0; got nothing |
+| `defaultCover` | default-refuse-day-basis | `interest.dayBasis` | interest.dayBasis must be 365 or 360; got 366 |
+| `defaultCover` | default-refuse-no-interest | `interest` | interest must be an object { annualRatePct, dayBasis, interestMethod, graceHours } (no default rate or method); got nothing |
+| `defaultCover` | default-refuse-cure-before-due | `defaulters[0].curedOn` | defaulters[0].curedOn must be a date from the due date 2027-03-01 to asOf 2027-05-31; got "2027-02-28" |
+| `defaultCover` | default-refuse-asof-before-due | `asOf` | asOf must be on or after the due date 2027-03-01; got "2027-02-01" |
+| `defaultCover` | default-refuse-bad-date | `dueDate` | dueDate must be a real date 'YYYY-MM-DD'; got "2027-02-30" |
+| `defaultCover` | default-refuse-all-default | `defaulters` | defaulters must be leaving at least one non-defaulting party with a paying interest above 0; got ["EKO","PA","PB"] |
+| `defaultCover` | default-refuse-unit | `suspension.unit` | suspension.unit must be one of "calendar-days", "working-days", "months"; got "business-days" |
+| `defaultCover` | default-refuse-unknown-key | `interest.compounding` | interest.compounding is not an accepted key; the accepted keys of interest are annualRatePct, dayBasis, interestMethod, graceHours |
+| `carryRecovery` | carry-refuse-pia-uplift | `uplift.type` | uplift.type must be "none" under basis "pia-s85-4": the refund excludes interest, premium or markups on cost (PIA s.85(4)(c)); got "compound" |
+| `carryRecovery` | carry-refuse-no-uplift | `uplift` | uplift must be an object { type } with type "none", "compound" or "multiple" (no default); got nothing |
+| `carryRecovery` | carry-refuse-uplift-extra | `uplift.ratePctPerYear` | uplift.ratePctPerYear must be left out when type is "none"; got 5 |
+| `carryRecovery` | carry-refuse-multiple-below | `uplift.multiplePct` | uplift.multiplePct must be a number at or above 100 (100 recovers the cost alone); got 90 |
+| `carryRecovery` | carry-refuse-not-carried | `carried` | carried must be the carried party of one of the carries (NOC); got "PA" |
+| `carryRecovery` | carry-refuse-no-carries | `carries` | carries must be an array with the carry to recover; got nothing |
+| `carryRecovery` | carry-refuse-recover-from | `recoverFromPct` | recoverFromPct must be a number above 0 and at most 100; got 0 |
+| `carryRecovery` | carry-refuse-basis | `basis` | basis must be one of "pia-s85-4", "contract"; got nothing |
+| `carryRecovery` | carry-refuse-npv-half | `baseYear` | baseYear must be an integer at or above 1; got nothing |
+| `carryRecovery` | carry-refuse-year-gap | `years[1].year` | years[1].year must be 2028, the year after 2027 (years are consecutive); got 2029 |
+| `carryRecovery` | carry-refuse-unknown-key | `uplift.rate` | uplift.rate is not an accepted key; the accepted keys of uplift are type, ratePctPerYear, multiplePct |
+| `backIn` | backin-refuse-pia-61 | `targetPct` | targetPct must be at most 60 under basis "pia-s85-4" (the right to participate up to 60%, PIA s.85(4)(a)); got 61 |
+| `backIn` | backin-refuse-pia-upfront | `refundForm` | refundForm must be "from-future-entitlement" under basis "pia-s85-4": no upfront payment by the Government (s.85(4)(d)); the refund is in cash or in kind from future production or entitlements (s.85(4)(f)); got "upfront" |
+| `backIn` | backin-refuse-pia-kinds | `refundableKinds` | refundableKinds must be left out under basis "pia-s85-4" (development and production, s.85(4)(c)); got ["exploration"] |
+| `backIn` | backin-refuse-contract-no-kinds | `refundableKinds` | refundableKinds must be an array of cost kinds stated under basis "contract" (exploration, development, production, bonus, penalty, interest, premium, markup; no default); got nothing |
+| `backIn` | backin-refuse-target-below | `targetPct` | targetPct must be above the back-in party's current interest 20; got 20 |
+| `backIn` | backin-refuse-kind | `costs[0].kind` | costs[0].kind must be one of "exploration", "development", "production", "bonus", "penalty", "interest", "premium", "markup"; got "appraisal" |
+| `backIn` | backin-refuse-upfront-years | `years` | years must be left out when refundForm is "upfront"; got [{"year":2030,"entitlement":96000000},{"year":2031,"entitlement":112000000},{"year":2032,"entitlement":104000000},{"year":2033,"entitlement":94000000},{"year":2034,"entitlement":86000000},{"year":2035,"entitlement":78000000},{"year":2036,"entitlement":70000000}] |
+| `backIn` | backin-refuse-unknown-key | `refund` | refund is not an accepted key; the accepted keys at the top level are parties, backInParty, targetPct, costs, basis, refundableKinds, refundForm, recoverFromPct, years |
+| `nonConsent` | nc-refuse-all-consent | `consenting` | consenting must be leaving at least one non-consenting party (every party consents: a joint operation); got ["EKO","PA","PB","NOC"] |
+| `nonConsent` | nc-refuse-multiple | `premiumMultiplePct` | premiumMultiplePct must be a number at or above 100 (a stated contract figure; 100 recovers the cost alone); got 50 |
+| `nonConsent` | nc-refuse-no-multiple | `premiumMultiplePct` | premiumMultiplePct must be a number at or above 100 (a stated contract figure; 100 recovers the cost alone); got nothing |
+| `nonConsent` | nc-refuse-dup | `consenting[1]` | consenting[1] must be an id not already listed; got "EKO" |
+| `nonConsent` | nc-refuse-buyin-years | `years` | years must be left out when mode is "buy-in"; got [{"year":2031,"grossValue":30000000,"deductions":10000000},{"year":2032,"grossValue":26000000,"deductions":9000000},{"year":2033,"grossValue":22000000,"deductions":8000000},{"year":2034,"grossValue":19000000,"deductions":7000000},{"year":2035,"grossValue":16000000,"deductions":6000000},{"year":2036,"grossValue":14000000,"deductions":6000000}] |
+| `nonConsent` | nc-refuse-mode | `mode` | mode must be one of "recover-from-production", "buy-in"; got "penalty" |
+| `nonConsent` | nc-refuse-unknown-key | `operation.date` | operation.date is not an accepted key; the accepted keys of operation are name, cost |
+| `pscCostRecovery` | psc-refuse-gross-limit | `costOilLimitPct` | costOilLimitPct must be at or below the revenue left after royalty, 87.5% of gross, when costOilLimitBase is "gross"; got 90 |
+| `pscCostRecovery` | psc-refuse-royalty-100 | `royaltyPct` | royaltyPct must be a number from 0 up to, but excluding, 100; got 100 |
+| `pscCostRecovery` | psc-refuse-base | `costOilLimitBase` | costOilLimitBase must be one of "after-royalty", "gross"; got "net" |
+| `pscCostRecovery` | psc-refuse-no-pool | `openingCostPool` | openingCostPool must be a finite number at or above 0; got nothing |
+| `pscCostRecovery` | psc-refuse-year-share | `years[0].contractorProfitSharePct` | years[0].contractorProfitSharePct must be a number from 0 to 100; got 120 |
+| `pscCostRecovery` | psc-refuse-unknown-key | `costRecoveryLimitPct` | costRecoveryLimitPct is not an accepted key; the accepted keys at the top level are years, royaltyPct, costOilLimitPct, costOilLimitBase, contractorProfitSharePct, taxRatePct, openingCostPool, parties, discountRate, baseYear |
+
+78 refusals across 9 functions: participatingInterests 11, cashCalls 8, budgetControl 4, overhead 9, defaultCover 14, carryRecovery 11, backIn 8, nonConsent 7, pscCostRecovery 6.
+
+Four rules the table shows:
+- A contract term with no default is refused when it is missing, and the message says so: the carriers of a carry, the uplift, the reconciliation lag, the negative call rule, the budget tolerance, the overhead scale of every category, the default interest with its rate, method and grace, the premium multiple, the refundable kinds under basis "contract", the opening cost pool.
+- An input key a function does not read is refused at whatever level it sits (a top-level option, a party, a month, a year, a band, an uplift), with the path to the key and the full list of accepted keys.
+- A term the Act fixes is refused when a call breaks it under basis "pia-s85-4": a target above 60 percent, an uplift, stated refundable kinds, an upfront refund.
+- Every figure inside a message is the shortest round-trip decimal of the value it was given.
+
+# SECTION 6: What is graded, where the practicals run, and what is never graded (owned by Associate m01 l05 and Expert m06)
+
+EVERY GRADED NUMBER IN THIS COURSE IS A RETURN VALUE OF THIS ENGINE ON FIXED INPUTS. A capstone field, a question key and a panel figure are each computed by a function in the table of section 1 on agreement terms written down in advance. Nothing in the engine samples or searches, so the same terms give the same number on any machine, and there is exactly one right answer.
+
+THE PRACTICALS RUN IN THE COURSE'S OWN CALCULATOR PANELS. This is an engine course with no Suite app. Each tier has a calculator panel that calls this same vendored engine: the account calculator (Associate), the recovery calculator (Professional) and the agreement calculator (Expert). A learner types or pastes their own agreement terms; the panel prints what the engine returns, every refusal in the engine's own words, and the reasons beside each figure.
+
+WHAT A CAPSTONE STATES. Each capstone runs its own synthetic joint venture, which this digest does not print, and states every term a figure depends on: the parties and their participating interests, each carry and its carriers, the months and the reconciliation terms, the budget and its tolerances, the overhead scale and exclusions, the default dates, interest terms and consequences, the carry's uplift, recovery share and basis, the back-in target and costs, the premium multiple and mode, the PSC terms, the discount rate and base year. Each graded figure is quoted to six decimals as the panel prints it.
+
+WHAT IS NEVER GRADED. No graded figure depends on a reading the engine states (section 19): every capstone field is the same number under each reading the engine takes and under the alternative it names.
+
+WHAT A COMPUTED FIGURE DOES NOT SAY. A cash call is what the stated forecast and the stated clauses produce; a carry recovery is what the stated entitlement pays; a premium is a stated multiple of a stated cost. None is a forecast of what a partner will pay. An NPV depends on the discount rate and base year stated. Each figure is quoted with its terms for that reason.
+
+# SECTION 7: Participating, paying and beneficial interests, carries and the partner split (owned by Associate m02 and Associate m03)
+
+THE RULE, in the engine's basis, verbatim:
+> beneficial interest = participating interest (the share of production); paying interest = participating interest - the carried part of a carried party's share + the carriers' shares of every carry
+
+THE CARRIERS, in the engine's basis, verbatim:
+> carriers 'pro-rata' share a carry in proportion to their participating interests among the parties no carry names as carried; stated shares must sum to 100
+
+| golden case | party | beneficial interest | paying interest | carried percent | carry points it pays |
+| --- | --- | --- | --- | --- | --- |
+| int-ekene | EKO | 40.000000 | 50.000000 | 0.000000 | NOC 10.000000 |
+| int-ekene | PA | 25.000000 | 31.250000 | 0.000000 | NOC 6.250000 |
+| int-ekene | PB | 15.000000 | 18.750000 | 0.000000 | NOC 3.750000 |
+| int-ekene | NOC | 20.000000 | 0.000000 | 100.000000 | none |
+| int-ekene-no-carry | EKO | 40.000000 | 40.000000 | 0.000000 | none |
+| int-ekene-no-carry | PA | 25.000000 | 25.000000 | 0.000000 | none |
+| int-ekene-no-carry | PB | 15.000000 | 15.000000 | 0.000000 | none |
+| int-ekene-no-carry | NOC | 20.000000 | 20.000000 | 0.000000 | none |
+| int-half-carry-stated | EKO | 40.000000 | 47.500000 | 0.000000 | NOC 7.500000 |
+| int-half-carry-stated | PA | 25.000000 | 27.500000 | 0.000000 | NOC 2.500000 |
+| int-half-carry-stated | PB | 15.000000 | 15.000000 | 0.000000 | none |
+| int-half-carry-stated | NOC | 20.000000 | 10.000000 | 50.000000 | none |
+| int-two-carries | EKO | 40.000000 | 59.807692 | 0.000000 | NOC 12.307692; PB 7.500000 |
+| int-two-carries | PA | 25.000000 | 40.192308 | 0.000000 | NOC 7.692308; PB 7.500000 |
+| int-two-carries | PB | 15.000000 | 0.000000 | 100.000000 | none |
+| int-two-carries | NOC | 20.000000 | 0.000000 | 100.000000 | none |
+
+int-ekene, the engine's reasons, verbatim:
+> NOC: 100% of its 20% cost share is carried (20 points), paid by EKO 10, PA 6.25, PB 3.75 (pro rata to their participating interests); its share of production stays 20%
+int-ekene-no-carry, the engine's reasons, verbatim:
+(the engine returns no reason)
+int-half-carry-stated, the engine's reasons, verbatim:
+> NOC: 50% of its 20% cost share is carried (10 points), paid by EKO 7.5, PA 2.5 (in the stated shares); its share of production stays 20%
+int-two-carries, the engine's reasons, verbatim:
+> NOC: 100% of its 20% cost share is carried (20 points), paid by EKO 12.307692307692308, PA 7.6923076923076925 (pro rata to their participating interests); its share of production stays 20%
+> PB: 100% of its 15% cost share is carried (15 points), paid by EKO 7.5, PA 7.5 (in the stated shares); its share of production stays 15%
+
+BENEFICIAL AND PAYING. On int-ekene, NOC's beneficial interest is 20.000000 (its share of production) and its paying interest 0.000000 (its share of cost while it is carried); EKO pays 50.000000 on a beneficial 40.000000. A carry moves cost and never moves production.
+
+STATED SHARES. On int-half-carry-stated NOC is carried for 50.000000 percent of its cost share by EKO and PA in stated shares of 75.000000 and 25.000000; PB pays none of it and its paying interest stays 15.000000.
+
+THE PARTNER SPLIT. Every joint account amount the engine splits between parties goes through the canonical calculatePartnerCosts of engines/economics/afe.js, on the paying interests for cost and the beneficial interests for production. In the engine's basis (cc-ekene-2027), verbatim:
+> every split of a joint account amount is calculatePartnerCosts from engines/economics/afe.js on the paying interests
+January 2027's forecast of 4000000.000000 splits as EKO 2000000.000000, PA 1250000.000000, PB 750000.000000, NOC 0.000000 (engine).
+
+# SECTION 8: Cash calls: the forecast share, actuals, the difference, the threshold and a month with a zero forecast (owned by Associate m04)
+
+THE RULE, in the engine's basis (cc-ekene-2027), verbatim:
+> forecast share = forecast x paying interest; difference = forecast share - actual share for a month with a call; call = forecast share - (the difference of the month reconciliationLagMonths earlier + any amount carried)
+
+THE THRESHOLD, verbatim:
+> no cash call in a month whose forecast is below 500000; its actual share is billed in arrears the next month
+
+ONE MONTH (cc-ekene-2027, January 2027): forecast 4000000.000000, actual 3600000.000000. Per party (engine):
+
+| party | paying interest | forecast share | adjustment | call | actual share | difference |
+| --- | --- | --- | --- | --- | --- | --- |
+| EKO | 50.000000 | 2000000.000000 | 0.000000 | 2000000.000000 | 1800000.000000 | 200000.000000 |
+| PA | 31.250000 | 1250000.000000 | 0.000000 | 1250000.000000 | 1125000.000000 | 125000.000000 |
+| PB | 18.750000 | 750000.000000 | 0.000000 | 750000.000000 | 675000.000000 | 75000.000000 |
+| NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+
+The difference of a called month is the forecast share less the actual share: above zero an over-call, below zero an under-call. January's differences total 400000.000000 (engine), and the reconciliation lag decides which later call they adjust (section 11).
+
+SMALL LEDGERS (golden inputs), each stated to show one rule. Parties A 50, B 30, C 20 percent, no carry:
+
+| golden case | month | forecast | actual | called | calls | arrears billed | difference | carried | terms (golden input) |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| cc-zero-call-month | 2027-01 | 1000.000000 | 800.000000 | true | 1000.000000 | 0.000000 | 200.000000 | 0.000000 | lag 1, carry |
+| cc-zero-call-month | 2027-02 | 0.000000 | 0.000000 | true | 0.000000 | 0.000000 | 0.000000 | 200.000000 | lag 1, carry |
+| cc-zero-call-month | 2027-03 | 400.000000 | 400.000000 | true | 200.000000 | 0.000000 | 0.000000 | 0.000000 | lag 1, carry |
+| cc-zero-call-month-refund | 2027-01 | 1000.000000 | 800.000000 | true | 1000.000000 | 0.000000 | 200.000000 | 0.000000 | lag 1, refund |
+| cc-zero-call-month-refund | 2027-02 | 0.000000 | 0.000000 | true | -200.000000 | 0.000000 | 0.000000 | 0.000000 | lag 1, refund |
+| cc-zero-call-month-refund | 2027-03 | 400.000000 | 400.000000 | true | 400.000000 | 0.000000 | 0.000000 | 0.000000 | lag 1, refund |
+| cc-threshold-exactly | 2027-01 | 500.000000 | 500.000000 | true | 500.000000 | 0.000000 | 0.000000 | 0.000000 | lag 1, carry, threshold 500 |
+| cc-threshold-exactly | 2027-02 | 499.000000 | 499.000000 | false | 0.000000 | 0.000000 | 0.000000 | 0.000000 | lag 1, carry, threshold 500 |
+| cc-last-month-uncalled | 2027-11 | 1000.000000 | 1100.000000 | true | 1000.000000 | 0.000000 | -100.000000 | 0.000000 | lag 2, carry, threshold 500 |
+| cc-last-month-uncalled | 2027-12 | 100.000000 | 120.000000 | false | 0.000000 | 0.000000 | 0.000000 | 0.000000 | lag 2, carry, threshold 500 |
+| cc-year-boundary | 2026-12 | 1000.000000 | 900.000000 | true | 1000.000000 | 0.000000 | 100.000000 | 0.000000 | lag 1, carry |
+| cc-year-boundary | 2027-01 | 1000.000000 | 1000.000000 | true | 900.000000 | 0.000000 | 0.000000 | 0.000000 | lag 1, carry |
+
+cc-zero-call-month, the engine's reasons, verbatim:
+> 2027-02: the over-call of 200 in 2027-01 (forecast 1000, actual 800) is credited against this cash call, 1 month later
+> 2027-02: a forecast of 0: the cash call is the adjustment alone
+> 2027-02: the adjustment exceeds the forecast share of A, B, C: the call is 0 and the rest of the credit is carried to the next cash call
+> 2027-03: 2027-02 was called exactly (forecast = actual = 0); no adjustment
+> 2027-03: a credit of 200 held from 2027-02 is applied to this cash call
+cc-zero-call-month-refund, the engine's reasons, verbatim:
+> 2027-02: the over-call of 200 in 2027-01 (forecast 1000, actual 800) is credited against this cash call, 1 month later
+> 2027-02: a forecast of 0: the cash call is the adjustment alone
+> 2027-02: the adjustment exceeds the forecast share of A, B, C: the excess is refunded (a negative call)
+> 2027-03: 2027-02 was called exactly (forecast = actual = 0); no adjustment
+cc-threshold-exactly, the engine's reasons, verbatim:
+> 2027-02: no cash call: the forecast 499 is below the stated threshold 500; the actual is billed in arrears in the next month
+> 2027-02: 2027-01 was called exactly (forecast = actual = 500); no adjustment
+cc-last-month-uncalled, the engine's reasons, verbatim:
+> 2027-12: no cash call: the forecast 100 is below the stated threshold 500; the actual is billed in arrears in the next month
+cc-year-boundary, the engine's reasons, verbatim:
+> 2027-01: the over-call of 100 in 2026-12 (forecast 1000, actual 900) is credited against this cash call, 1 month later
+
+A MONTH WITH A ZERO FORECAST. With no threshold stated, February on cc-zero-call-month is called with a forecast of 0.000000, and the call is the adjustment alone; under "carry" the credit waits, under "refund" it is paid back as a negative call (cc-zero-call-month-refund). A forecast equal to the threshold is called; one below it is not (cc-threshold-exactly).
+
+# SECTION 9: Budget control: the item tolerance, the budget tolerance and the unbudgeted allowance (owned by Associate m05)
+
+THE RULE, in the engine's basis (budget-ekene-2027), verbatim:
+> an item is inside its tolerance when actual <= approved x (100 + itemTolerancePct) / 100; the budget is inside when the total overrun <= the lower of pct % of the approved total and the stated amount
+
+THE BOUNDARY, verbatim:
+> an overrun of exactly the tolerance is inside ("may exceed ... by up to")
+
+THE EKENE 2027 BUDGET (golden input budget-ekene-2027, the fixture's items): item tolerance 10.000000 percent, budget tolerance the lower of 5.000000 percent and 3000000.000000, unbudgeted allowance 500000.000000.
+
+| item | approved | actual | overrun | overrun percent | limit | inside its tolerance |
+| --- | --- | --- | --- | --- | --- | --- |
+| geology and geophysics | 6000000.000000 | 6600000.000000 | 600000.000000 | 10.000000 | 6600000.000000 | true |
+| exploration drilling | 48000000.000000 | 53500000.000000 | 5500000.000000 | 11.458333 | 52800000.000000 | false |
+| facilities engineering | 10000000.000000 | 9200000.000000 | -800000.000000 | -8.000000 | 11000000.000000 | true |
+| operations support | 8000000.000000 | 8300000.000000 | 300000.000000 | 3.750000 | 8800000.000000 | true |
+| general and administration | 4000000.000000 | 4100000.000000 | 100000.000000 | 2.500000 | 4400000.000000 | true |
+| environmental baseline survey | 0.000000 | 250000.000000 | 250000.000000 | none | none | true |
+
+| the budget (engine) | value |
+| --- | --- |
+| approved | 76000000.000000 |
+| actual | 81950000.000000 |
+| overrun | 5950000.000000 |
+| allowed overrun | 3000000.000000 |
+| held by | amount |
+| inside the budget tolerance | false |
+| unbudgeted total | 250000.000000 |
+| unbudgeted allowance | 500000.000000 |
+| inside the allowance | true |
+
+The engine's reasons, verbatim:
+> geology and geophysics: 6600000 against 6000000 approved is an overrun of 600000, inside the item tolerance of 10% (limit 6600000)
+> exploration drilling: 53500000 against 48000000 approved is an overrun of 5500000, beyond the item tolerance of 10% (limit 52800000)
+> operations support: 8300000 against 8000000 approved is an overrun of 300000, inside the item tolerance of 10% (limit 8800000)
+> general and administration: 4100000 against 4000000 approved is an overrun of 100000, inside the item tolerance of 10% (limit 4400000)
+> environmental baseline survey: 250000 spent with no approved budget, inside the unbudgeted allowance 500000 with the other unbudgeted items (250000 in all)
+> the budget: 81950000 against 76000000 approved, an overrun of 5950000; the allowed overrun is the lower of 5% of the approved total (3800000) and 3000000: 3000000; beyond the budget tolerance
+
+| golden case | approved | actual | overrun | allowed overrun | held by | inside the budget tolerance | items outside their tolerance |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| budget-ekene-no-allowance | 76000000.000000 | 81950000.000000 | 5950000.000000 | 3000000.000000 | amount | false | exploration drilling, environmental baseline survey |
+| budget-ekene-allowance-short | 76000000.000000 | 81950000.000000 | 5950000.000000 | 3000000.000000 | amount | false | exploration drilling, environmental baseline survey |
+| budget-item-at-tolerance | 50.000000 | 55.000000 | 5.000000 | 5.000000 | pct | true | none |
+| budget-item-one-over | 50.000000 | 55.500000 | 5.500000 | 5.000000 | pct | false | x |
+| budget-norway-lower-of | 2000.000000 | 2080.000000 | 80.000000 | 75.000000 | amount | false | none |
+| budget-norway-pct-holds | 1000.000000 | 1050.000000 | 50.000000 | 50.000000 | pct | true | none |
+| budget-underrun | 100.000000 | 90.000000 | -10.000000 | 5.000000 | pct | true | none |
+
+budget-ekene-no-allowance, the engine's reasons, verbatim:
+> geology and geophysics: 6600000 against 6000000 approved is an overrun of 600000, inside the item tolerance of 10% (limit 6600000)
+> exploration drilling: 53500000 against 48000000 approved is an overrun of 5500000, beyond the item tolerance of 10% (limit 52800000)
+> operations support: 8300000 against 8000000 approved is an overrun of 300000, inside the item tolerance of 10% (limit 8800000)
+> general and administration: 4100000 against 4000000 approved is an overrun of 100000, inside the item tolerance of 10% (limit 4400000)
+> environmental baseline survey: 250000 spent with no approved budget: outside the approved budget
+> the budget: 81950000 against 76000000 approved, an overrun of 5950000; the allowed overrun is the lower of 5% of the approved total (3800000) and 3000000: 3000000; beyond the budget tolerance
+budget-ekene-allowance-short, the engine's reasons, verbatim:
+> geology and geophysics: 6600000 against 6000000 approved is an overrun of 600000, inside the item tolerance of 10% (limit 6600000)
+> exploration drilling: 53500000 against 48000000 approved is an overrun of 5500000, beyond the item tolerance of 10% (limit 52800000)
+> operations support: 8300000 against 8000000 approved is an overrun of 300000, inside the item tolerance of 10% (limit 8800000)
+> general and administration: 4100000 against 4000000 approved is an overrun of 100000, inside the item tolerance of 10% (limit 4400000)
+> environmental baseline survey: 250000 spent with no approved budget: the unbudgeted items total 250000, above the allowance 249999
+> the budget: 81950000 against 76000000 approved, an overrun of 5950000; the allowed overrun is the lower of 5% of the approved total (3800000) and 3000000: 3000000; beyond the budget tolerance
+budget-item-at-tolerance, the engine's reasons, verbatim:
+> x: 55 against 50 approved is an overrun of 5, inside the item tolerance of 10% (limit 55)
+> the budget: 55 against 50 approved, an overrun of 5; the allowed overrun is 10% of the approved total, 5; inside the budget tolerance
+budget-item-one-over, the engine's reasons, verbatim:
+> x: 55.5 against 50 approved is an overrun of 5.5, beyond the item tolerance of 10% (limit 55)
+> the budget: 55.5 against 50 approved, an overrun of 5.5; the allowed overrun is 10% of the approved total, 5; beyond the budget tolerance
+budget-norway-lower-of (Norway JOA Art. 12.5 in NOK million: the lower of 5% of 2,000 (100) and 75 is 75; an overrun of 80 is beyond), the engine's reasons, verbatim:
+> investment budget: 2080 against 2000 approved is an overrun of 80, inside the item tolerance of 10% (limit 2200)
+> the budget: 2080 against 2000 approved, an overrun of 80; the allowed overrun is the lower of 5% of the approved total (100) and 75: 75; beyond the budget tolerance
+budget-norway-pct-holds (Norway JOA Art. 12.5 in NOK million: the lower of 5% of 1,000 (50) and 75 is 50; an overrun of exactly 50 is inside), the engine's reasons, verbatim:
+> exploration budget: 1050 against 1000 approved is an overrun of 50, inside the item tolerance of 10% (limit 1100)
+> the budget: 1050 against 1000 approved, an overrun of 50; the allowed overrun is the lower of 5% of the approved total (50) and 75: 50; inside the budget tolerance
+budget-underrun, the engine's reasons, verbatim:
+> the budget: 90 against 100 approved, an underrun of 10; the allowed overrun is 5% of the approved total, 5; inside the budget tolerance
+
+THE NORWEGIAN FIGURES AS STATED INPUTS. The Norwegian agreement prints 10 percent for an item and the lower of 5 percent and NOK 75 million for a budget (text, section 3, stated on the golden input); the two golden cases state them in NOK million and return an allowed overrun of 75.000000 on an approved 2000.000000 and 50.000000 on an approved 1000.000000. The engine holds none of these figures: each call states its own.
+
+# SECTION 10: Operator overhead: the base, a marginal sliding scale, exclusions and the band edge (owned by Associate m06)
+
+THE RULE, in the engine's basis (overhead-ekene-2031), verbatim:
+> base = annual cost - stated exclusions; the scale is marginal: each band's per cent on the part of the base inside the band, abovePct on the part above the last band; a flat percentage is a scale with no bands
+
+THE BASE, verbatim:
+> overhead charged under the scale is never part of its own base
+
+THE EKENE 2031 OVERHEAD (golden input overhead-ekene-2031, the fixture's scale):
+
+| category | band | from | up to | per cent | part of the base in it | charge |
+| --- | --- | --- | --- | --- | --- | --- |
+| exploration | band 1 | 0.000000 | 30000000.000000 | 2.500000 | 5000000.000000 | 125000.000000 |
+| exploration | above the last band | 30000000.000000 | none | 0.000000 | 0.000000 | 0.000000 |
+| operating | band 1 | 0.000000 | 50000000.000000 | 2.750000 | 50000000.000000 | 1375000.000000 |
+| operating | band 2 | 50000000.000000 | 125000000.000000 | 1.000000 | 8000000.000000 | 80000.000000 |
+| operating | above the last band | 125000000.000000 | none | 0.000000 | 0.000000 | 0.000000 |
+| development | band 1 | 0.000000 | 50000000.000000 | 2.500000 | 50000000.000000 | 1250000.000000 |
+| development | band 2 | 50000000.000000 | 100000000.000000 | 1.000000 | 50000000.000000 | 500000.000000 |
+| development | band 3 | 100000000.000000 | 175000000.000000 | 0.500000 | 50000000.000000 | 250000.000000 |
+| development | above the last band | 175000000.000000 | none | 0.000000 | 0.000000 | 0.000000 |
+
+| category (engine) | cost | excluded | base | charge |
+| --- | --- | --- | --- | --- |
+| exploration | 5000000.000000 | 0.000000 | 5000000.000000 | 125000.000000 |
+| operating | 60000000.000000 | 2000000.000000 | 58000000.000000 | 1455000.000000 |
+| development | 150000000.000000 | 0.000000 | 150000000.000000 | 2000000.000000 |
+Total overhead 3580000.000000 (engine).
+
+The engine's reasons, verbatim:
+> exploration: base 5000000; 2.5% of 5000000 = 125000
+> operating: base 58000000 (cost 60000000 less exclusions 2000000); 2.75% of 50000000 + 1% of 8000000 = 1455000
+> development: base 150000000; 2.5% of 50000000 + 1% of 50000000 + 0.5% of 50000000 = 2000000
+
+| golden case | categories and bases (engine) | total (engine) |
+| --- | --- | --- |
+| overhead-ekene-2031-corporate | exploration, operating and development 215000000.000000 | 1343750.000000 |
+| overhead-norway-operating-1800 | operating 1800.000000 | 35.000000 |
+| overhead-norway-development-3000 | development 3000.000000 | 40.000000 |
+| overhead-norway-development-4000 | development 4000.000000 | 42.500000 |
+| overhead-norway-exploration-250 | exploration 250.000000 | 6.250000 |
+| overhead-norway-all-with-exclusion | exploration 400.000000; operating 850.000000; development 2000.000000 | 65.450000 |
+| overhead-norway-corporate-065 | exploration, operation and development 3400.000000 | 22.100000 |
+| overhead-band-edge-exact | operating 1000.000000 | 27.000000 |
+| overhead-zero-cost | operating 0.000000 | 0.000000 |
+
+overhead-ekene-2031-corporate, the engine's reasons, verbatim:
+> exploration, operating and development: base 215000000; 0.625% of 215000000 = 1343750
+overhead-norway-operating-1800 (Norway Accounting Agreement Art. 2.2.2 scale in NOK million (the printed bands and rates; nothing is printed above the last band, stated here as 0)), the engine's reasons, verbatim:
+> operating: base 1800; 2.7% of 1000 + 1% of 800 = 35
+overhead-norway-development-3000 (Norway Accounting Agreement Art. 2.2.2 scale in NOK million (the printed bands and rates; nothing is printed above the last band, stated here as 0)), the engine's reasons, verbatim:
+> development: base 3000; 2.5% of 1000 + 1% of 1000 + 0.5% of 1000 = 40
+overhead-norway-development-4000 (Norway Accounting Agreement Art. 2.2.2 scale in NOK million (the printed bands and rates; nothing is printed above the last band, stated here as 0)), the engine's reasons, verbatim:
+> development: base 4000; 2.5% of 1000 + 1% of 1000 + 0.5% of 1500 + 0% of 500 above 3500 = 42.5
+overhead-norway-exploration-250 (Norway Accounting Agreement Art. 2.2.2 scale in NOK million (the printed bands and rates; nothing is printed above the last band, stated here as 0)), the engine's reasons, verbatim:
+> exploration: base 250; 2.5% of 250 = 6.25
+overhead-norway-all-with-exclusion (Norway Accounting Agreement Art. 2.2.2 scale in NOK million (the printed bands and rates; nothing is printed above the last band, stated here as 0); 150 of area fees and CO2 duty excluded from the operating base), the engine's reasons, verbatim:
+> exploration: base 400; 2.5% of 300 + 0% of 100 above 300 = 7.5
+> operating: base 850 (cost 1000 less exclusions 150); 2.7% of 850 = 22.95
+> development: base 2000; 2.5% of 1000 + 1% of 1000 = 35
+overhead-norway-corporate-065 (Norway Accounting Agreement Art. 2.2.3: 0.65 % of the annual costs for exploration, operation and development), the engine's reasons, verbatim:
+> exploration, operation and development: base 3400; 0.65% of 3400 = 22.1
+overhead-band-edge-exact, the engine's reasons, verbatim:
+> operating: base 1000; 2.7% of 1000 = 27
+overhead-zero-cost, the engine's reasons, verbatim:
+> operating: base 0; nothing to charge = 0
+
+THE BAND EDGE. A base exactly at a band's upper limit is charged in that band only (overhead-band-edge-exact: 1000.000000 in the first band, 0.000000 in the second). A FLAT PERCENTAGE is a scale with no bands: the whole base is charged at abovePct (overhead-ekene-2031-corporate and overhead-norway-corporate-065).
+
+# SECTION 11: The cash call ledger: the reconciliation lag, a negative call refunded or carried, arrears and the balance with the operator (owned by Professional m01)
+
+THE LAG, in the engine's basis (cc-ekene-2027), verbatim:
+> the difference of a month adjusts the cash call 2 months later (a stated input, no default)
+
+THE NEGATIVE CALL, verbatim:
+> an adjustment above the forecast share makes the call 0 and the rest is carried to the next call
+
+THE IDENTITY, verbatim:
+> balance with the operator = differences not yet adjusted + carried - arrears billed and not yet paid
+
+THE EKENE 2027 LEDGER (golden input cc-ekene-2027, the fixture's months): lag 2, negative call "carry", threshold 500000.000000. Month totals (engine):
+
+| month | forecast | actual | called | calls | arrears billed | paid | difference |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 2027-01 | 4000000.000000 | 3600000.000000 | true | 4000000.000000 | 0.000000 | 4000000.000000 | 400000.000000 |
+| 2027-02 | 6000000.000000 | 6500000.000000 | true | 6000000.000000 | 0.000000 | 6000000.000000 | -500000.000000 |
+| 2027-03 | 12000000.000000 | 11200000.000000 | true | 11600000.000000 | 0.000000 | 11600000.000000 | 800000.000000 |
+| 2027-04 | 0.000000 | 0.000000 | false | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-05 | 400000.000000 | 448000.000000 | false | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-06 | 9000000.000000 | 9000000.000000 | true | 8700000.000000 | 448000.000000 | 9148000.000000 | 0.000000 |
+| 2027-07 | 15000000.000000 | 13800000.000000 | true | 15000000.000000 | 0.000000 | 15000000.000000 | 1200000.000000 |
+| 2027-08 | 3000000.000000 | 3104000.000000 | true | 3000000.000000 | 0.000000 | 3000000.000000 | -104000.000000 |
+| 2027-09 | 1000000.000000 | 1000000.000000 | true | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-10 | 8000000.000000 | 8400000.000000 | true | 7904000.000000 | 0.000000 | 7904000.000000 | -400000.000000 |
+| 2027-11 | 7000000.000000 | 6896000.000000 | true | 7000000.000000 | 0.000000 | 7000000.000000 | 104000.000000 |
+| 2027-12 | 5000000.000000 | 5200000.000000 | true | 5400000.000000 | 0.000000 | 5400000.000000 | -200000.000000 |
+
+Per party, month by month (engine):
+
+| month | party | forecast share | adjustment | call | arrears billing | actual share | difference | carried | balance |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2027-01 | EKO | 2000000.000000 | 0.000000 | 2000000.000000 | 0.000000 | 1800000.000000 | 200000.000000 | 0.000000 | 200000.000000 |
+| 2027-01 | PA | 1250000.000000 | 0.000000 | 1250000.000000 | 0.000000 | 1125000.000000 | 125000.000000 | 0.000000 | 125000.000000 |
+| 2027-01 | PB | 750000.000000 | 0.000000 | 750000.000000 | 0.000000 | 675000.000000 | 75000.000000 | 0.000000 | 75000.000000 |
+| 2027-01 | NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-02 | EKO | 3000000.000000 | 0.000000 | 3000000.000000 | 0.000000 | 3250000.000000 | -250000.000000 | 0.000000 | -50000.000000 |
+| 2027-02 | PA | 1875000.000000 | 0.000000 | 1875000.000000 | 0.000000 | 2031250.000000 | -156250.000000 | 0.000000 | -31250.000000 |
+| 2027-02 | PB | 1125000.000000 | 0.000000 | 1125000.000000 | 0.000000 | 1218750.000000 | -93750.000000 | 0.000000 | -18750.000000 |
+| 2027-02 | NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-03 | EKO | 6000000.000000 | 200000.000000 | 5800000.000000 | 0.000000 | 5600000.000000 | 400000.000000 | 0.000000 | 150000.000000 |
+| 2027-03 | PA | 3750000.000000 | 125000.000000 | 3625000.000000 | 0.000000 | 3500000.000000 | 250000.000000 | 0.000000 | 93750.000000 |
+| 2027-03 | PB | 2250000.000000 | 75000.000000 | 2175000.000000 | 0.000000 | 2100000.000000 | 150000.000000 | 0.000000 | 56250.000000 |
+| 2027-03 | NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-04 | EKO | 0.000000 | -250000.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | -250000.000000 | 150000.000000 |
+| 2027-04 | PA | 0.000000 | -156250.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | -156250.000000 | 93750.000000 |
+| 2027-04 | PB | 0.000000 | -93750.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | -93750.000000 | 56250.000000 |
+| 2027-04 | NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-05 | EKO | 200000.000000 | 150000.000000 | 0.000000 | 0.000000 | 224000.000000 | 0.000000 | 150000.000000 | -74000.000000 |
+| 2027-05 | PA | 125000.000000 | 93750.000000 | 0.000000 | 0.000000 | 140000.000000 | 0.000000 | 93750.000000 | -46250.000000 |
+| 2027-05 | PB | 75000.000000 | 56250.000000 | 0.000000 | 0.000000 | 84000.000000 | 0.000000 | 56250.000000 | -27750.000000 |
+| 2027-05 | NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-06 | EKO | 4500000.000000 | 150000.000000 | 4350000.000000 | 224000.000000 | 4500000.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-06 | PA | 2812500.000000 | 93750.000000 | 2718750.000000 | 140000.000000 | 2812500.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-06 | PB | 1687500.000000 | 56250.000000 | 1631250.000000 | 84000.000000 | 1687500.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-06 | NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-07 | EKO | 7500000.000000 | 0.000000 | 7500000.000000 | 0.000000 | 6900000.000000 | 600000.000000 | 0.000000 | 600000.000000 |
+| 2027-07 | PA | 4687500.000000 | 0.000000 | 4687500.000000 | 0.000000 | 4312500.000000 | 375000.000000 | 0.000000 | 375000.000000 |
+| 2027-07 | PB | 2812500.000000 | 0.000000 | 2812500.000000 | 0.000000 | 2587500.000000 | 225000.000000 | 0.000000 | 225000.000000 |
+| 2027-07 | NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-08 | EKO | 1500000.000000 | 0.000000 | 1500000.000000 | 0.000000 | 1552000.000000 | -52000.000000 | 0.000000 | 548000.000000 |
+| 2027-08 | PA | 937500.000000 | 0.000000 | 937500.000000 | 0.000000 | 970000.000000 | -32500.000000 | 0.000000 | 342500.000000 |
+| 2027-08 | PB | 562500.000000 | 0.000000 | 562500.000000 | 0.000000 | 582000.000000 | -19500.000000 | 0.000000 | 205500.000000 |
+| 2027-08 | NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-09 | EKO | 500000.000000 | 600000.000000 | 0.000000 | 0.000000 | 500000.000000 | 0.000000 | 100000.000000 | 48000.000000 |
+| 2027-09 | PA | 312500.000000 | 375000.000000 | 0.000000 | 0.000000 | 312500.000000 | 0.000000 | 62500.000000 | 30000.000000 |
+| 2027-09 | PB | 187500.000000 | 225000.000000 | 0.000000 | 0.000000 | 187500.000000 | 0.000000 | 37500.000000 | 18000.000000 |
+| 2027-09 | NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-10 | EKO | 4000000.000000 | 48000.000000 | 3952000.000000 | 0.000000 | 4200000.000000 | -200000.000000 | 0.000000 | -200000.000000 |
+| 2027-10 | PA | 2500000.000000 | 30000.000000 | 2470000.000000 | 0.000000 | 2625000.000000 | -125000.000000 | 0.000000 | -125000.000000 |
+| 2027-10 | PB | 1500000.000000 | 18000.000000 | 1482000.000000 | 0.000000 | 1575000.000000 | -75000.000000 | 0.000000 | -75000.000000 |
+| 2027-10 | NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-11 | EKO | 3500000.000000 | 0.000000 | 3500000.000000 | 0.000000 | 3448000.000000 | 52000.000000 | 0.000000 | -148000.000000 |
+| 2027-11 | PA | 2187500.000000 | 0.000000 | 2187500.000000 | 0.000000 | 2155000.000000 | 32500.000000 | 0.000000 | -92500.000000 |
+| 2027-11 | PB | 1312500.000000 | 0.000000 | 1312500.000000 | 0.000000 | 1293000.000000 | 19500.000000 | 0.000000 | -55500.000000 |
+| 2027-11 | NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2027-12 | EKO | 2500000.000000 | -200000.000000 | 2700000.000000 | 0.000000 | 2600000.000000 | -100000.000000 | 0.000000 | -48000.000000 |
+| 2027-12 | PA | 1562500.000000 | -125000.000000 | 1687500.000000 | 0.000000 | 1625000.000000 | -62500.000000 | 0.000000 | -30000.000000 |
+| 2027-12 | PB | 937500.000000 | -75000.000000 | 1012500.000000 | 0.000000 | 975000.000000 | -37500.000000 | 0.000000 | -18000.000000 |
+| 2027-12 | NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+
+The engine's reasons, verbatim:
+> 2027-03: the over-call of 400000 in 2027-01 (forecast 4000000, actual 3600000) is credited against this cash call, 2 months later
+> 2027-04: no cash call: the forecast 0 is below the stated threshold 500000; the actual is billed in arrears in the next month
+> 2027-04: the under-call of 500000 in 2027-02 (forecast 6000000, actual 6500000) is added to the next cash call (none is made this month), 2 months later
+> 2027-05: the actual of 2027-04, 0, made without a cash call, is billed in arrears
+> 2027-05: no cash call: the forecast 400000 is below the stated threshold 500000; the actual is billed in arrears in the next month
+> 2027-05: the over-call of 800000 in 2027-03 (forecast 12000000, actual 11200000) is credited against the next cash call (none is made this month), 2 months later
+> 2027-05: 500000 owed from 2027-04 is added to the next cash call (none is made this month)
+> 2027-06: the actual of 2027-05, 448000, made without a cash call, is billed in arrears
+> 2027-06: a credit of 300000 held from 2027-05 is applied to this cash call
+> 2027-08: 2027-06 was called exactly (forecast = actual = 9000000); no adjustment
+> 2027-09: the over-call of 1200000 in 2027-07 (forecast 15000000, actual 13800000) is credited against this cash call, 2 months later
+> 2027-09: the adjustment exceeds the forecast share of EKO, PA, PB: the call is 0 and the rest of the credit is carried to the next cash call
+> 2027-10: the under-call of 104000 in 2027-08 (forecast 3000000, actual 3104000) is added to this cash call, 2 months later
+> 2027-10: a credit of 200000 held from 2027-09 is applied to this cash call
+> 2027-11: 2027-09 was called exactly (forecast = actual = 1000000); no adjustment
+> 2027-12: the under-call of 400000 in 2027-10 (forecast 8000000, actual 8400000) is added to this cash call, 2 months later
+
+| closing (engine) | balance | differences not yet adjusted | carried | arrears due |
+| --- | --- | --- | --- | --- |
+| EKO | -48000.000000 | -48000.000000 | 0.000000 | 0.000000 |
+| PA | -30000.000000 | -30000.000000 | 0.000000 | 0.000000 |
+| PB | -18000.000000 | -18000.000000 | 0.000000 | 0.000000 |
+| NOC | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+
+THE IDENTITY ON THE CLOSING ROWS (derived): for each party the balance less (the differences not yet adjusted + carried - arrears due) is within 0.000001 of zero (checked for EKO, PA, PB, NOC).
+
+| golden case | terms (golden input) | calls over the year (engine) | arrears billed (engine) | actual (engine) | EKO closing balance (engine) |
+| --- | --- | --- | --- | --- | --- |
+| cc-ekene-2027 | lag 2, carry, threshold 500000 | 68604000.000000 | 448000.000000 | 69148000.000000 | -48000.000000 |
+| cc-ekene-2027-lag1 | lag 1, carry, threshold 500000 | 68500000.000000 | 448000.000000 | 69148000.000000 | -100000.000000 |
+| cc-ekene-2027-refund | lag 2, refund, threshold 500000 | 68604000.000000 | 448000.000000 | 69148000.000000 | -48000.000000 |
+| cc-ekene-2027-every-month | lag 2, carry, no threshold | 69052000.000000 | 0.000000 | 69148000.000000 | -48000.000000 |
+
+cc-ekene-2027-lag1, the engine's reasons, verbatim:
+> 2027-02: the over-call of 400000 in 2027-01 (forecast 4000000, actual 3600000) is credited against this cash call, 1 month later
+> 2027-03: the under-call of 500000 in 2027-02 (forecast 6000000, actual 6500000) is added to this cash call, 1 month later
+> 2027-04: no cash call: the forecast 0 is below the stated threshold 500000; the actual is billed in arrears in the next month
+> 2027-04: the over-call of 800000 in 2027-03 (forecast 12000000, actual 11200000) is credited against the next cash call (none is made this month), 1 month later
+> 2027-05: the actual of 2027-04, 0, made without a cash call, is billed in arrears
+> 2027-05: no cash call: the forecast 400000 is below the stated threshold 500000; the actual is billed in arrears in the next month
+> 2027-05: a credit of 800000 held from 2027-04 is applied to the next cash call (none is made this month)
+> 2027-06: the actual of 2027-05, 448000, made without a cash call, is billed in arrears
+> 2027-06: a credit of 800000 held from 2027-05 is applied to this cash call
+> 2027-07: 2027-06 was called exactly (forecast = actual = 9000000); no adjustment
+> 2027-08: the over-call of 1200000 in 2027-07 (forecast 15000000, actual 13800000) is credited against this cash call, 1 month later
+> 2027-09: the under-call of 104000 in 2027-08 (forecast 3000000, actual 3104000) is added to this cash call, 1 month later
+> 2027-10: 2027-09 was called exactly (forecast = actual = 1000000); no adjustment
+> 2027-11: the under-call of 400000 in 2027-10 (forecast 8000000, actual 8400000) is added to this cash call, 1 month later
+> 2027-12: the over-call of 104000 in 2027-11 (forecast 7000000, actual 6896000) is credited against this cash call, 1 month later
+cc-ekene-2027-refund, the engine's reasons, verbatim:
+> 2027-03: the over-call of 400000 in 2027-01 (forecast 4000000, actual 3600000) is credited against this cash call, 2 months later
+> 2027-04: no cash call: the forecast 0 is below the stated threshold 500000; the actual is billed in arrears in the next month
+> 2027-04: the under-call of 500000 in 2027-02 (forecast 6000000, actual 6500000) is added to the next cash call (none is made this month), 2 months later
+> 2027-05: the actual of 2027-04, 0, made without a cash call, is billed in arrears
+> 2027-05: no cash call: the forecast 400000 is below the stated threshold 500000; the actual is billed in arrears in the next month
+> 2027-05: the over-call of 800000 in 2027-03 (forecast 12000000, actual 11200000) is credited against the next cash call (none is made this month), 2 months later
+> 2027-05: 500000 owed from 2027-04 is added to the next cash call (none is made this month)
+> 2027-06: the actual of 2027-05, 448000, made without a cash call, is billed in arrears
+> 2027-06: a credit of 300000 held from 2027-05 is applied to this cash call
+> 2027-08: 2027-06 was called exactly (forecast = actual = 9000000); no adjustment
+> 2027-09: the over-call of 1200000 in 2027-07 (forecast 15000000, actual 13800000) is credited against this cash call, 2 months later
+> 2027-09: the adjustment exceeds the forecast share of EKO, PA, PB: the excess is refunded (a negative call)
+> 2027-10: the under-call of 104000 in 2027-08 (forecast 3000000, actual 3104000) is added to this cash call, 2 months later
+> 2027-11: 2027-09 was called exactly (forecast = actual = 1000000); no adjustment
+> 2027-12: the under-call of 400000 in 2027-10 (forecast 8000000, actual 8400000) is added to this cash call, 2 months later
+cc-ekene-2027-every-month, the engine's reasons, verbatim:
+> 2027-03: the over-call of 400000 in 2027-01 (forecast 4000000, actual 3600000) is credited against this cash call, 2 months later
+> 2027-04: the under-call of 500000 in 2027-02 (forecast 6000000, actual 6500000) is added to this cash call, 2 months later
+> 2027-04: a forecast of 0: the cash call is the adjustment alone
+> 2027-05: the over-call of 800000 in 2027-03 (forecast 12000000, actual 11200000) is credited against this cash call, 2 months later
+> 2027-05: the adjustment exceeds the forecast share of EKO, PA, PB: the call is 0 and the rest of the credit is carried to the next cash call
+> 2027-06: 2027-04 was called exactly (forecast = actual = 0); no adjustment
+> 2027-06: a credit of 400000 held from 2027-05 is applied to this cash call
+> 2027-07: the under-call of 48000 in 2027-05 (forecast 400000, actual 448000) is added to this cash call, 2 months later
+> 2027-08: 2027-06 was called exactly (forecast = actual = 9000000); no adjustment
+> 2027-09: the over-call of 1200000 in 2027-07 (forecast 15000000, actual 13800000) is credited against this cash call, 2 months later
+> 2027-09: the adjustment exceeds the forecast share of EKO, PA, PB: the call is 0 and the rest of the credit is carried to the next cash call
+> 2027-10: the under-call of 104000 in 2027-08 (forecast 3000000, actual 3104000) is added to this cash call, 2 months later
+> 2027-10: a credit of 200000 held from 2027-09 is applied to this cash call
+> 2027-11: 2027-09 was called exactly (forecast = actual = 1000000); no adjustment
+> 2027-12: the under-call of 400000 in 2027-10 (forecast 8000000, actual 8400000) is added to this cash call, 2 months later
+
+A CREDIT LARGER THAN THE CALL. In September 2027 the July over-call reaches the call two months later and exceeds every paying party's forecast share: under "carry" each call is 0.000000 and 200000.000000 is carried to October (engine); under "refund" (cc-ekene-2027-refund) the excess is paid back as a negative call of -200000.000000 in total.
+
+# SECTION 12: Carries with uplift and caps: the recovery ledger (owned by Professional m02)
+
+THE RULE, in the engine's basis (carry-ekene-compound), verbatim:
+> carried cost = cost x participating interest x carriedPct / 10,000, paid by the carriers in their carry shares; due = opening + uplift + carried cost; recovered = min(carried party's entitlement share x recoverFromPct / 100, due, cap left)
+
+THE UPLIFT and THE TIMING, verbatim:
+> 8% a year on the opening balance, compounded yearly; a year's new cost earns none in its own year
+> the uplift accrues on the opening balance; the year's carried cost is added; recovery comes from the same year's entitlement at the year end
+
+carry-ekene-compound (golden input: uplift compound 8 percent a year, recover from 50 percent of the share, basis contract, discount rate 0.100000 to 2027):
+
+| year | opening | uplift | carried cost | due | share | available | recovered | closing | written off | carried party receives |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2027 | 0.000000 | 0.000000 | 16400000.000000 | 16400000.000000 | 0.000000 | 0.000000 | 0.000000 | 16400000.000000 | 0.000000 | 0.000000 |
+| 2028 | 16400000.000000 | 1312000.000000 | 12000000.000000 | 29712000.000000 | 0.000000 | 0.000000 | 0.000000 | 29712000.000000 | 0.000000 | 0.000000 |
+| 2029 | 29712000.000000 | 2376960.000000 | 0.000000 | 32088960.000000 | 0.000000 | 0.000000 | 0.000000 | 32088960.000000 | 0.000000 | 0.000000 |
+| 2030 | 32088960.000000 | 2567116.800000 | 0.000000 | 34656076.800000 | 19200000.000000 | 9600000.000000 | 9600000.000000 | 25056076.800000 | 0.000000 | 9600000.000000 |
+| 2031 | 25056076.800000 | 2004486.144000 | 0.000000 | 27060562.944000 | 22400000.000000 | 11200000.000000 | 11200000.000000 | 15860562.944000 | 0.000000 | 11200000.000000 |
+| 2032 | 15860562.944000 | 1268845.035520 | 0.000000 | 17129407.979520 | 20800000.000000 | 10400000.000000 | 10400000.000000 | 6729407.979520 | 0.000000 | 10400000.000000 |
+| 2033 | 6729407.979520 | 538352.638362 | 0.000000 | 7267760.617882 | 18800000.000000 | 9400000.000000 | 7267760.617882 | 0.000000 | 0.000000 | 11532239.382118 |
+| 2034 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 17200000.000000 | 8600000.000000 | 0.000000 | 0.000000 | 0.000000 | 17200000.000000 |
+| 2035 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 15600000.000000 | 7800000.000000 | 0.000000 | 0.000000 | 0.000000 | 15600000.000000 |
+| 2036 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 14000000.000000 | 7000000.000000 | 0.000000 | 0.000000 | 0.000000 | 14000000.000000 |
+
+Totals (engine): carried cost 28400000.000000, uplift 10067760.617882, recovered 38467760.617882, written off 0.000000, outstanding 0.000000; recovered in year 2033.
+NPV by party (engine, the canonical npv): EKO 95024921.509253, PA 59390575.943283, PB 35634345.565970, NOC 49870804.456959.
+The engine's reasons, verbatim:
+> 2027: 0 recovered of 16400000 due; 16400000 carried to 2028
+> 2028: 8% a year on the opening balance 16400000 adds 1312000
+> 2028: 0 recovered of 29712000 due; 29712000 carried to 2029
+> 2029: 8% a year on the opening balance 29712000 adds 2376960
+> 2029: 0 recovered of 32088960 due; 32088960 carried to 2030
+> 2030: 8% a year on the opening balance 32088960 adds 2567116.8
+> 2030: 9600000 recovered of 34656076.8 due; 25056076.8 carried to 2031
+> 2031: 8% a year on the opening balance 25056076.8 adds 2004486.14
+> 2031: 11200000 recovered of 27060562.94 due; 15860562.94 carried to 2032
+> 2032: 8% a year on the opening balance 15860562.94 adds 1268845.04
+> 2032: 10400000 recovered of 17129407.98 due; 6729407.98 carried to 2033
+> 2033: 8% a year on the opening balance 6729407.98 adds 538352.64
+> 2033: the balance 7267760.62 is recovered with 7267760.62 of the 9400000 available; the carried party receives 11532239.38 of its share 18800000
+
+carry-ekene-pia (golden input: uplift none, recover from 100 percent of the share, basis pia-s85-4, discount rate 0.100000 to 2027):
+
+| year | opening | uplift | carried cost | due | share | available | recovered | closing | written off | carried party receives |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2027 | 0.000000 | 0.000000 | 16400000.000000 | 16400000.000000 | 0.000000 | 0.000000 | 0.000000 | 16400000.000000 | 0.000000 | 0.000000 |
+| 2028 | 16400000.000000 | 0.000000 | 12000000.000000 | 28400000.000000 | 0.000000 | 0.000000 | 0.000000 | 28400000.000000 | 0.000000 | 0.000000 |
+| 2029 | 28400000.000000 | 0.000000 | 0.000000 | 28400000.000000 | 0.000000 | 0.000000 | 0.000000 | 28400000.000000 | 0.000000 | 0.000000 |
+| 2030 | 28400000.000000 | 0.000000 | 0.000000 | 28400000.000000 | 19200000.000000 | 19200000.000000 | 19200000.000000 | 9200000.000000 | 0.000000 | 0.000000 |
+| 2031 | 9200000.000000 | 0.000000 | 0.000000 | 9200000.000000 | 22400000.000000 | 22400000.000000 | 9200000.000000 | 0.000000 | 0.000000 | 13200000.000000 |
+| 2032 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 20800000.000000 | 20800000.000000 | 0.000000 | 0.000000 | 0.000000 | 20800000.000000 |
+| 2033 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 18800000.000000 | 18800000.000000 | 0.000000 | 0.000000 | 0.000000 | 18800000.000000 |
+| 2034 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 17200000.000000 | 17200000.000000 | 0.000000 | 0.000000 | 0.000000 | 17200000.000000 |
+| 2035 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 15600000.000000 | 15600000.000000 | 0.000000 | 0.000000 | 0.000000 | 15600000.000000 |
+| 2036 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 14000000.000000 | 14000000.000000 | 0.000000 | 0.000000 | 0.000000 | 14000000.000000 |
+
+Totals (engine): carried cost 28400000.000000, uplift 0.000000, recovered 28400000.000000, written off 0.000000, outstanding 0.000000; recovered in year 2031.
+NPV by party (engine, the canonical npv): EKO 92668197.518975, PA 57917623.449360, PB 34750574.069616, NOC 54584252.437515.
+The engine's reasons, verbatim:
+> 2027: 0 recovered of 16400000 due; 16400000 carried to 2028
+> 2028: 0 recovered of 28400000 due; 28400000 carried to 2029
+> 2029: 0 recovered of 28400000 due; 28400000 carried to 2030
+> 2030: 19200000 recovered of 28400000 due; 9200000 carried to 2031
+> 2031: the balance 9200000 is recovered with 9200000 of the 22400000 available; the carried party receives 13200000 of its share 22400000
+
+carry-ekene-multiple (golden input: uplift multiple 150 percent, recover from 50 percent of the share, basis contract, discount rate 0.100000 to 2027):
+
+| year | opening | uplift | carried cost | due | share | available | recovered | closing | written off | carried party receives |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2027 | 0.000000 | 8200000.000000 | 16400000.000000 | 24600000.000000 | 0.000000 | 0.000000 | 0.000000 | 24600000.000000 | 0.000000 | 0.000000 |
+| 2028 | 24600000.000000 | 6000000.000000 | 12000000.000000 | 42600000.000000 | 0.000000 | 0.000000 | 0.000000 | 42600000.000000 | 0.000000 | 0.000000 |
+| 2029 | 42600000.000000 | 0.000000 | 0.000000 | 42600000.000000 | 0.000000 | 0.000000 | 0.000000 | 42600000.000000 | 0.000000 | 0.000000 |
+| 2030 | 42600000.000000 | 0.000000 | 0.000000 | 42600000.000000 | 19200000.000000 | 9600000.000000 | 9600000.000000 | 33000000.000000 | 0.000000 | 9600000.000000 |
+| 2031 | 33000000.000000 | 0.000000 | 0.000000 | 33000000.000000 | 22400000.000000 | 11200000.000000 | 11200000.000000 | 21800000.000000 | 0.000000 | 11200000.000000 |
+| 2032 | 21800000.000000 | 0.000000 | 0.000000 | 21800000.000000 | 20800000.000000 | 10400000.000000 | 10400000.000000 | 11400000.000000 | 0.000000 | 10400000.000000 |
+| 2033 | 11400000.000000 | 0.000000 | 0.000000 | 11400000.000000 | 18800000.000000 | 9400000.000000 | 9400000.000000 | 2000000.000000 | 0.000000 | 9400000.000000 |
+| 2034 | 2000000.000000 | 0.000000 | 0.000000 | 2000000.000000 | 17200000.000000 | 8600000.000000 | 2000000.000000 | 0.000000 | 0.000000 | 15200000.000000 |
+| 2035 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 15600000.000000 | 7800000.000000 | 0.000000 | 0.000000 | 0.000000 | 15600000.000000 |
+| 2036 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 14000000.000000 | 7000000.000000 | 0.000000 | 0.000000 | 0.000000 | 14000000.000000 |
+
+Totals (engine): carried cost 28400000.000000, uplift 14200000.000000, recovered 42600000.000000, written off 0.000000, outstanding 0.000000; recovered in year 2034.
+NPV by party (engine, the canonical npv): EKO 96139876.399404, PA 60087422.749627, PB 36052453.649776, NOC 47640894.676658.
+The engine's reasons, verbatim:
+> 2027: the 150% multiple on the carried cost of 16400000 adds 8200000
+> 2027: 0 recovered of 24600000 due; 24600000 carried to 2028
+> 2028: the 150% multiple on the carried cost of 12000000 adds 6000000
+> 2028: 0 recovered of 42600000 due; 42600000 carried to 2029
+> 2029: 0 recovered of 42600000 due; 42600000 carried to 2030
+> 2030: 9600000 recovered of 42600000 due; 33000000 carried to 2031
+> 2031: 11200000 recovered of 33000000 due; 21800000 carried to 2032
+> 2032: 10400000 recovered of 21800000 due; 11400000 carried to 2033
+> 2033: 9400000 recovered of 11400000 due; 2000000 carried to 2034
+> 2034: the balance 2000000 is recovered with 2000000 of the 8600000 available; the carried party receives 15200000 of its share 17200000
+
+carry-ekene-capped (golden input: uplift compound 8 percent a year, recover from 50 percent of the share, basis contract, cap 25000000, discount rate 0.100000 to 2027):
+
+| year | opening | uplift | carried cost | due | share | available | recovered | closing | written off | carried party receives |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2027 | 0.000000 | 0.000000 | 16400000.000000 | 16400000.000000 | 0.000000 | 0.000000 | 0.000000 | 16400000.000000 | 0.000000 | 0.000000 |
+| 2028 | 16400000.000000 | 1312000.000000 | 12000000.000000 | 29712000.000000 | 0.000000 | 0.000000 | 0.000000 | 29712000.000000 | 0.000000 | 0.000000 |
+| 2029 | 29712000.000000 | 2376960.000000 | 0.000000 | 32088960.000000 | 0.000000 | 0.000000 | 0.000000 | 32088960.000000 | 0.000000 | 0.000000 |
+| 2030 | 32088960.000000 | 2567116.800000 | 0.000000 | 34656076.800000 | 19200000.000000 | 9600000.000000 | 9600000.000000 | 25056076.800000 | 0.000000 | 9600000.000000 |
+| 2031 | 25056076.800000 | 2004486.144000 | 0.000000 | 27060562.944000 | 22400000.000000 | 11200000.000000 | 11200000.000000 | 15860562.944000 | 0.000000 | 11200000.000000 |
+| 2032 | 15860562.944000 | 1268845.035520 | 0.000000 | 17129407.979520 | 20800000.000000 | 10400000.000000 | 4200000.000000 | 0.000000 | 12929407.979520 | 16600000.000000 |
+| 2033 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 18800000.000000 | 9400000.000000 | 0.000000 | 0.000000 | 0.000000 | 18800000.000000 |
+| 2034 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 17200000.000000 | 8600000.000000 | 0.000000 | 0.000000 | 0.000000 | 17200000.000000 |
+| 2035 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 15600000.000000 | 7800000.000000 | 0.000000 | 0.000000 | 0.000000 | 15600000.000000 |
+| 2036 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 14000000.000000 | 7000000.000000 | 0.000000 | 0.000000 | 0.000000 | 14000000.000000 |
+
+Totals (engine): carried cost 28400000.000000, uplift 9529407.979520, recovered 25000000.000000, written off 12929407.979520, outstanding 0.000000; recovered in year none.
+NPV by party (engine, the canonical npv): EKO 91048834.708437, PA 56905521.692773, PB 34143313.015664, NOC 57822978.058592.
+The engine's reasons, verbatim:
+> 2027: 0 recovered of 16400000 due; 16400000 carried to 2028
+> 2028: 8% a year on the opening balance 16400000 adds 1312000
+> 2028: 0 recovered of 29712000 due; 29712000 carried to 2029
+> 2029: 8% a year on the opening balance 29712000 adds 2376960
+> 2029: 0 recovered of 32088960 due; 32088960 carried to 2030
+> 2030: 8% a year on the opening balance 32088960 adds 2567116.8
+> 2030: 9600000 recovered of 34656076.8 due; 25056076.8 carried to 2031
+> 2031: 8% a year on the opening balance 25056076.8 adds 2004486.14
+> 2031: 11200000 recovered of 27060562.94 due; 15860562.94 carried to 2032
+> 2032: 8% a year on the opening balance 15860562.94 adds 1268845.04
+> 2032: the stated cap 25000000 is reached with 4200000 recovered this year; the rest, 12929407.98, is written off
+
+carry-ekene-short-horizon (golden input: uplift compound 8 percent a year, recover from 50 percent of the share, basis contract, discount rate 0.100000 to 2027):
+
+| year | opening | uplift | carried cost | due | share | available | recovered | closing | written off | carried party receives |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2027 | 0.000000 | 0.000000 | 16400000.000000 | 16400000.000000 | 0.000000 | 0.000000 | 0.000000 | 16400000.000000 | 0.000000 | 0.000000 |
+| 2028 | 16400000.000000 | 1312000.000000 | 12000000.000000 | 29712000.000000 | 0.000000 | 0.000000 | 0.000000 | 29712000.000000 | 0.000000 | 0.000000 |
+| 2029 | 29712000.000000 | 2376960.000000 | 0.000000 | 32088960.000000 | 0.000000 | 0.000000 | 0.000000 | 32088960.000000 | 0.000000 | 0.000000 |
+| 2030 | 32088960.000000 | 2567116.800000 | 0.000000 | 34656076.800000 | 19200000.000000 | 9600000.000000 | 9600000.000000 | 25056076.800000 | 0.000000 | 9600000.000000 |
+| 2031 | 25056076.800000 | 2004486.144000 | 0.000000 | 27060562.944000 | 22400000.000000 | 11200000.000000 | 11200000.000000 | 15860562.944000 | 0.000000 | 11200000.000000 |
+
+Totals (engine): carried cost 28400000.000000, uplift 8260562.944000, recovered 20800000.000000, written off 0.000000, outstanding 15860562.944000; recovered in year none.
+NPV by party (engine, the canonical npv): EKO -1392049.723380, PA -870031.077112, PB -522018.646267, NOC 14862372.788744.
+The engine's reasons, verbatim:
+> 2027: 0 recovered of 16400000 due; 16400000 carried to 2028
+> 2028: 8% a year on the opening balance 16400000 adds 1312000
+> 2028: 0 recovered of 29712000 due; 29712000 carried to 2029
+> 2029: 8% a year on the opening balance 29712000 adds 2376960
+> 2029: 0 recovered of 32088960 due; 32088960 carried to 2030
+> 2030: 8% a year on the opening balance 32088960 adds 2567116.8
+> 2030: 9600000 recovered of 34656076.8 due; 25056076.8 carried to 2031
+> 2031: 8% a year on the opening balance 25056076.8 adds 2004486.14
+> 2031: 11200000 recovered of 27060562.94 due; 15860562.94 carried to 2032
+> 2031: 15860562.94 of the carry is not recovered by the last year
+
+THE PARTY FLOWS (carry-ekene-compound, 2033, engine): EKO cost 0.000000, entitlement share 37600000.000000, recovery 3633880.308941, net 41233880.308941; PA cost 0.000000, entitlement share 23500000.000000, recovery 2271175.193088, net 25771175.193088; PB cost 0.000000, entitlement share 14100000.000000, recovery 1362705.115853, net 15462705.115853; NOC cost 0.000000, entitlement share 18800000.000000, recovery -7267760.617882, net 11532239.382118. The recovered amount goes to the carriers in their carry shares.
+
+THE PIA BASIS. Under basis "pia-s85-4" the uplift must be none, verbatim from the engine's basis (carry-ekene-pia):
+> PIA s.85(4): the Government refunds its proportionate share of the unrecovered proven costs, with no bonuses, penalties, interest, premium or markups (s.85(4)(c)), in cash or in kind from future production (s.85(4)(f))
+
+SMALL LEDGERS (golden inputs), parties A 60, B 20, N 20 percent:
+
+| golden case | terms (golden input) | year | opening | uplift | carried cost | available | recovered | closing | written off |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| carry-recovered-exactly | none, from 100 | 2027 | 0.000000 | 0.000000 | 200.000000 | 0.000000 | 0.000000 | 200.000000 | 0.000000 |
+| carry-recovered-exactly | none, from 100 | 2028 | 200.000000 | 0.000000 | 0.000000 | 200.000000 | 200.000000 | 0.000000 | 0.000000 |
+| carry-recovered-exactly | none, from 100 | 2029 | 0.000000 | 0.000000 | 0.000000 | 200.000000 | 0.000000 | 0.000000 | 0.000000 |
+| carry-one-short | none, from 100 | 2027 | 0.000000 | 0.000000 | 200.000000 | 0.000000 | 0.000000 | 200.000000 | 0.000000 |
+| carry-one-short | none, from 100 | 2028 | 200.000000 | 0.000000 | 0.000000 | 199.800000 | 199.800000 | 0.200000 | 0.000000 |
+| carry-one-short | none, from 100 | 2029 | 0.200000 | 0.000000 | 0.000000 | 200.000000 | 0.200000 | 0.000000 | 0.000000 |
+| carry-cap-exactly-cost | compound 10, from 100, cap 200 | 2027 | 0.000000 | 0.000000 | 200.000000 | 0.000000 | 0.000000 | 200.000000 | 0.000000 |
+| carry-cap-exactly-cost | compound 10, from 100, cap 200 | 2028 | 200.000000 | 20.000000 | 0.000000 | 200.000000 | 200.000000 | 0.000000 | 20.000000 |
+| carry-cap-exactly-cost | compound 10, from 100, cap 200 | 2029 | 0.000000 | 0.000000 | 0.000000 | 200.000000 | 0.000000 | 0.000000 | 0.000000 |
+| carry-partial-stated | compound 12.5, from 50 | 2027 | 0.000000 | 0.000000 | 100.000000 | 0.000000 | 0.000000 | 100.000000 | 0.000000 |
+| carry-partial-stated | compound 12.5, from 50 | 2028 | 100.000000 | 12.500000 | 0.000000 | 100.000000 | 100.000000 | 12.500000 | 0.000000 |
+| carry-partial-stated | compound 12.5, from 50 | 2029 | 12.500000 | 1.562500 | 0.000000 | 100.000000 | 14.062500 | 0.000000 | 0.000000 |
+| carry-cost-while-recovering | compound 25, from 100 | 2027 | 0.000000 | 0.000000 | 100.000000 | 0.000000 | 0.000000 | 100.000000 | 0.000000 |
+| carry-cost-while-recovering | compound 25, from 100 | 2028 | 100.000000 | 25.000000 | 100.000000 | 50.000000 | 50.000000 | 175.000000 | 0.000000 |
+| carry-cost-while-recovering | compound 25, from 100 | 2029 | 175.000000 | 43.750000 | 50.000000 | 200.000000 | 200.000000 | 68.750000 | 0.000000 |
+
+carry-recovered-exactly, the engine's reasons, verbatim:
+> 2027: 0 recovered of 200 due; 200 carried to 2028
+> 2028: the balance 200 is recovered exactly by the 200 available; the carried party receives 0 of its share 200
+carry-one-short, the engine's reasons, verbatim:
+> 2027: 0 recovered of 200 due; 200 carried to 2028
+> 2028: 199.8 recovered of 200 due; 0.2 carried to 2029
+> 2029: the balance 0.2 is recovered with 0.2 of the 200 available; the carried party receives 199.8 of its share 200
+carry-cap-exactly-cost, the engine's reasons, verbatim:
+> 2027: 0 recovered of 200 due; 200 carried to 2028
+> 2028: 10% a year on the opening balance 200 adds 20
+> 2028: the stated cap 200 is reached with 200 recovered this year; the rest, 20, is written off
+carry-partial-stated, the engine's reasons, verbatim:
+> 2027: 0 recovered of 100 due; 100 carried to 2028
+> 2028: 12.5% a year on the opening balance 100 adds 12.5
+> 2028: 100 recovered of 112.5 due; 12.5 carried to 2029
+> 2029: 12.5% a year on the opening balance 12.5 adds 1.56
+> 2029: the balance 14.06 is recovered with 14.06 of the 100 available; the carried party receives 185.94 of its share 200
+carry-cost-while-recovering, the engine's reasons, verbatim:
+> 2027: 0 recovered of 100 due; 100 carried to 2028
+> 2028: 25% a year on the opening balance 100 adds 25
+> 2028: 50 recovered of 225 due; 175 carried to 2029
+> 2029: 25% a year on the opening balance 175 adds 43.75
+> 2029: 200 recovered of 268.75 due; 68.75 carried to 2030
+> 2029: 68.75 of the carry is not recovered by the last year
+
+# SECTION 13: Back-in under PIA 2021 s.85(4): the interests after, refundable costs and the refund from future entitlement (owned by Professional m03)
+
+THE RULE, in the engine's basis (backin-ekene-pia), verbatim:
+> new interest of another party = old x (100 - target) / (100 - current); refund = (target - current) / 100 x refundable costs, received in proportion to the interest given up
+
+WHAT IS REFUNDABLE, and IN WHAT FORM, verbatim:
+> development and production costs only; bonuses, penalties, interest, premium and markups excluded (PIA s.85(4)(c)); exploration is not development or production
+> recovered with no uplift from recoverFromPct % of the back-in party's share of future entitlement, in cash or in kind (s.85(4)(f)), the whole refund owed from the first year
+
+WHAT IT DOES NOT COMPUTE, verbatim:
+> the expert determination of the unrecovered costs (s.85(4)(e)); the unrecovered cost figures are stated inputs
+
+backin-ekene-pia (golden input: NOC to 40 percent, basis pia-s85-4, refund from-future-entitlement from 50 percent of the new share):
+
+| party | before | after | interest given up | refund received | refund paid |
+| --- | --- | --- | --- | --- | --- |
+| EKO | 40.000000 | 30.000000 | 10.000000 | 49000000.000000 | 0.000000 |
+| PA | 25.000000 | 18.750000 | 6.250000 | 30625000.000000 | 0.000000 |
+| PB | 15.000000 | 11.250000 | 3.750000 | 18375000.000000 | 0.000000 |
+| NOC | 20.000000 | 40.000000 | 0.000000 | 0.000000 | 98000000.000000 |
+Refundable 490000000.000000, excluded 156000000.000000, refund 98000000.000000 (engine).
+
+| year | due | share | available | recovered | closing | back-in party receives |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2030 | 98000000.000000 | 38400000.000000 | 19200000.000000 | 19200000.000000 | 78800000.000000 | 19200000.000000 |
+| 2031 | 78800000.000000 | 44800000.000000 | 22400000.000000 | 22400000.000000 | 56400000.000000 | 22400000.000000 |
+| 2032 | 56400000.000000 | 41600000.000000 | 20800000.000000 | 20800000.000000 | 35600000.000000 | 20800000.000000 |
+| 2033 | 35600000.000000 | 37600000.000000 | 18800000.000000 | 18800000.000000 | 16800000.000000 | 18800000.000000 |
+| 2034 | 16800000.000000 | 34400000.000000 | 17200000.000000 | 16800000.000000 | 0.000000 | 17600000.000000 |
+| 2035 | 0.000000 | 31200000.000000 | 15600000.000000 | 0.000000 | 0.000000 | 31200000.000000 |
+| 2036 | 0.000000 | 28000000.000000 | 14000000.000000 | 0.000000 | 0.000000 | 28000000.000000 |
+Recovered 98000000.000000, outstanding 0.000000, recovered in year 2034 (engine).
+The engine's reasons, verbatim:
+> NOC backs in from 20% to 40%: the others keep 60 / 80 of their interests; refund 20% x refundable costs 490000000 = 98000000 (156000000 excluded)
+> exploration wells Ekene-1 and Ekene-2: 136000000 (exploration) is not refundable (PIA s.85(4)(c): development and production costs only, no bonuses, penalties, interest, premium or markups)
+> signature bonus: 10000000 (bonus) is not refundable (PIA s.85(4)(c): development and production costs only, no bonuses, penalties, interest, premium or markups)
+> interest on partner loans: 8000000 (interest) is not refundable (PIA s.85(4)(c): development and production costs only, no bonuses, penalties, interest, premium or markups)
+> operator markup on shared services: 2000000 (markup) is not refundable (PIA s.85(4)(c): development and production costs only, no bonuses, penalties, interest, premium or markups)
+> 2030: 19200000 recovered of 98000000 due; 78800000 carried to 2031
+> 2031: 22400000 recovered of 78800000 due; 56400000 carried to 2032
+> 2032: 20800000 recovered of 56400000 due; 35600000 carried to 2033
+> 2033: 18800000 recovered of 35600000 due; 16800000 carried to 2034
+> 2034: the balance 16800000 is recovered with 16800000 of the 17200000 available; the back-in party receives 17600000 of its share 34400000
+
+backin-ekene-contract-upfront (golden input: NOC to 40 percent, basis contract, refund upfront):
+
+| party | before | after | interest given up | refund received | refund paid |
+| --- | --- | --- | --- | --- | --- |
+| EKO | 40.000000 | 30.000000 | 10.000000 | 62600000.000000 | 0.000000 |
+| PA | 25.000000 | 18.750000 | 6.250000 | 39125000.000000 | 0.000000 |
+| PB | 15.000000 | 11.250000 | 3.750000 | 23475000.000000 | 0.000000 |
+| NOC | 20.000000 | 40.000000 | 0.000000 | 0.000000 | 125200000.000000 |
+Refundable 626000000.000000, excluded 20000000.000000, refund 125200000.000000 (engine).
+The engine's reasons, verbatim:
+> NOC backs in from 20% to 40%: the others keep 60 / 80 of their interests; refund 20% x refundable costs 626000000 = 125200000 (20000000 excluded)
+> signature bonus: 10000000 (bonus) is not refundable (not a stated refundable kind)
+> interest on partner loans: 8000000 (interest) is not refundable (not a stated refundable kind)
+> operator markup on shared services: 2000000 (markup) is not refundable (not a stated refundable kind)
+
+backin-pia-at-60 (golden input: NOC to 60 percent, basis pia-s85-4, refund from-future-entitlement from 50 percent of the new share):
+
+| party | before | after | interest given up | refund received | refund paid |
+| --- | --- | --- | --- | --- | --- |
+| EKO | 40.000000 | 20.000000 | 20.000000 | 98000000.000000 | 0.000000 |
+| PA | 25.000000 | 12.500000 | 12.500000 | 61250000.000000 | 0.000000 |
+| PB | 15.000000 | 7.500000 | 7.500000 | 36750000.000000 | 0.000000 |
+| NOC | 20.000000 | 60.000000 | 0.000000 | 0.000000 | 196000000.000000 |
+Refundable 490000000.000000, excluded 156000000.000000, refund 196000000.000000 (engine).
+
+| year | due | share | available | recovered | closing | back-in party receives |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2030 | 196000000.000000 | 57600000.000000 | 28800000.000000 | 28800000.000000 | 167200000.000000 | 28800000.000000 |
+| 2031 | 167200000.000000 | 67200000.000000 | 33600000.000000 | 33600000.000000 | 133600000.000000 | 33600000.000000 |
+| 2032 | 133600000.000000 | 62400000.000000 | 31200000.000000 | 31200000.000000 | 102400000.000000 | 31200000.000000 |
+| 2033 | 102400000.000000 | 56400000.000000 | 28200000.000000 | 28200000.000000 | 74200000.000000 | 28200000.000000 |
+| 2034 | 74200000.000000 | 51600000.000000 | 25800000.000000 | 25800000.000000 | 48400000.000000 | 25800000.000000 |
+| 2035 | 48400000.000000 | 46800000.000000 | 23400000.000000 | 23400000.000000 | 25000000.000000 | 23400000.000000 |
+| 2036 | 25000000.000000 | 42000000.000000 | 21000000.000000 | 21000000.000000 | 4000000.000000 | 21000000.000000 |
+Recovered 192000000.000000, outstanding 4000000.000000, recovered in year none (engine).
+The engine's reasons, verbatim:
+> NOC backs in from 20% to 60%: the others keep 40 / 80 of their interests; refund 40% x refundable costs 490000000 = 196000000 (156000000 excluded)
+> exploration wells Ekene-1 and Ekene-2: 136000000 (exploration) is not refundable (PIA s.85(4)(c): development and production costs only, no bonuses, penalties, interest, premium or markups)
+> signature bonus: 10000000 (bonus) is not refundable (PIA s.85(4)(c): development and production costs only, no bonuses, penalties, interest, premium or markups)
+> interest on partner loans: 8000000 (interest) is not refundable (PIA s.85(4)(c): development and production costs only, no bonuses, penalties, interest, premium or markups)
+> operator markup on shared services: 2000000 (markup) is not refundable (PIA s.85(4)(c): development and production costs only, no bonuses, penalties, interest, premium or markups)
+> 2030: 28800000 recovered of 196000000 due; 167200000 carried to 2031
+> 2031: 33600000 recovered of 167200000 due; 133600000 carried to 2032
+> 2032: 31200000 recovered of 133600000 due; 102400000 carried to 2033
+> 2033: 28200000 recovered of 102400000 due; 74200000 carried to 2034
+> 2034: 25800000 recovered of 74200000 due; 48400000 carried to 2035
+> 2035: 23400000 recovered of 48400000 due; 25000000 carried to 2036
+> 2036: 21000000 recovered of 25000000 due; 4000000 carried to 2037
+> 2036: 4000000 of the refund is not recovered by the last year
+
+backin-recovered-on-last-year (golden input: N to 40 percent, basis pia-s85-4, refund from-future-entitlement from 50 percent of the new share):
+
+| party | before | after | interest given up | refund received | refund paid |
+| --- | --- | --- | --- | --- | --- |
+| A | 60.000000 | 45.000000 | 15.000000 | 150.000000 | 0.000000 |
+| B | 20.000000 | 15.000000 | 5.000000 | 50.000000 | 0.000000 |
+| N | 20.000000 | 40.000000 | 0.000000 | 0.000000 | 200.000000 |
+Refundable 1000.000000, excluded 0.000000, refund 200.000000 (engine).
+
+| year | due | share | available | recovered | closing | back-in party receives |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2030 | 200.000000 | 200.000000 | 100.000000 | 100.000000 | 100.000000 | 100.000000 |
+| 2031 | 100.000000 | 200.000000 | 100.000000 | 100.000000 | 0.000000 | 100.000000 |
+Recovered 200.000000, outstanding 0.000000, recovered in year 2031 (engine).
+The engine's reasons, verbatim:
+> N backs in from 20% to 40%: the others keep 60 / 80 of their interests; refund 20% x refundable costs 1000 = 200
+> 2030: 100 recovered of 200 due; 100 carried to 2031
+> 2031: the balance 100 is recovered exactly by the 100 available; the back-in party receives 100 of its share 200
+
+| cost line (golden input backin-ekene-pia) | kind | amount | refundable under s.85(4) (engine) |
+| --- | --- | --- | --- |
+| exploration wells Ekene-1 and Ekene-2 | exploration | 136000000.000000 | false |
+| front end engineering design | development | 40000000.000000 | true |
+| development wells and facilities to date | development | 450000000.000000 | true |
+| signature bonus | bonus | 10000000.000000 | false |
+| interest on partner loans | interest | 8000000.000000 | false |
+| operator markup on shared services | markup | 2000000.000000 | false |
+
+THE OTHERS KEEP THEIR SHARE IN PROPORTION. After NOC backs in from 20.000000 to 40.000000 percent, each other party keeps (100 - target) / (100 - current) of its interest: EKO 30.000000, PA 18.750000, PB 11.250000 (engine), and each receives the refund in proportion to the interest it gives up.
+
+# SECTION 14: Default: pro rata cover, default interest simple or compounded monthly, the grace, suspension and forfeiture (owned by Professional m04)
+
+THE COVER, in the engine's basis (default-ekene-march), verbatim:
+> the non-defaulting parties advance the unpaid amounts in proportion to their paying interests among themselves (the parties that pay cost; a carried party pays none)
+
+THE INTEREST and THE GRACE, verbatim:
+> simple interest at the stated 8.25% a year on a 360-day year, from and including the due date to, but excluding, the cure date (or asOf); distributed to the parties financing the default in proportion to their cover
+> a stated grace of 0 hours (days x 24 from the due date): a default cured within it carries no interest; one cured later carries interest from the due date, as the Kenya Model PSC 2015 Participation Agreement Art. 6.7 prints (72 hours)
+
+THE CONSEQUENCES, verbatim:
+> reported only as stated: each applies when the default is open after the whole trigger date; working days are Monday to Friday less the stated holidays; months keep the day of the month (the last day when the month is shorter)
+> the cover by acquiring the defaulting party's share of petroleum, and the compensation on an assignment, are reported only
+
+| golden case | defaulter | interest terms (golden input) | due | cured | share of the call | paid | unpaid | days | whole months | remaining days | within the grace | default interest |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| default-ekene-march | PB | 8.25 percent, simple, 360 days, grace 0 hours | 2027-03-01 | 2027-04-15 | 2250000.000000 | 250000.000000 | 2000000.000000 | 45 | none | none | false | 20625.000000 |
+| default-ekene-uncured | PB | 8.25 percent, simple, 360 days, grace 0 hours | 2027-03-01 | open at 2027-07-01 | 2250000.000000 | 250000.000000 | 2000000.000000 | 122 | none | none | false | 55916.666667 |
+| default-ekene-monthly-compound-kenya | PB | 8.25 percent, monthly-compound, 360 days, grace 72 hours | 2027-03-01 | 2027-04-15 | 2250000.000000 | 250000.000000 | 2000000.000000 | 45 | 1 | 14 | false | 20210.781250 |
+| default-monthly-compound-uncured | PB | 8.25 percent, monthly-compound, 360 days, grace 72 hours | 2027-03-01 | open at 2027-07-01 | 2250000.000000 | 250000.000000 | 2000000.000000 | 122 | 4 | 0 | false | 55569.791577 |
+| default-monthly-compound-whole-months | PB | 8.25 percent, monthly-compound, 360 days, grace 0 hours | 2027-03-01 | 2027-05-01 | 2250000.000000 | 250000.000000 | 2000000.000000 | 61 | 2 | 0 | false | 27594.531250 |
+| default-monthly-compound-month-end | C | 12 percent, monthly-compound, 365 days, grace 0 hours | 2027-01-31 | open at 2027-04-15 | 200000.000000 | 0.000000 | 200000.000000 | 74 | 2 | 15 | false | 5026.126027 |
+| default-grace-last-hour | PB | 8.25 percent, simple, 360 days, grace 72 hours | 2027-03-01 | 2027-03-04 | 2250000.000000 | 250000.000000 | 2000000.000000 | 3 | none | none | true | 0.000000 |
+| default-grace-exceeded | PB | 8.25 percent, simple, 360 days, grace 72 hours | 2027-03-01 | 2027-03-05 | 2250000.000000 | 250000.000000 | 2000000.000000 | 4 | none | none | false | 1833.333333 |
+| default-grace-compound-exceeded | PB | 8.25 percent, monthly-compound, 360 days, grace 72 hours | 2027-03-01 | 2027-03-05 | 2250000.000000 | 250000.000000 | 2000000.000000 | 4 | 0 | 4 | false | 1833.333333 |
+| default-grace-fractional-hours | PB | 8.25 percent, simple, 360 days, grace 71.5 hours | 2027-03-01 | 2027-03-04 | 2250000.000000 | 250000.000000 | 2000000.000000 | 3 | none | none | false | 1375.000000 |
+| default-cured-on-due-date | PB | 8.25 percent, simple, 360 days, grace 0 hours | 2027-03-01 | 2027-03-01 | 2250000.000000 | 250000.000000 | 2000000.000000 | 0 | none | none | true | 0.000000 |
+| default-two-defaulters | PB | 8.25 percent, simple, 360 days, grace 0 hours | 2027-03-01 | 2027-03-31 | 2250000.000000 | 0.000000 | 2250000.000000 | 30 | none | none | false | 15468.750000 |
+| default-two-defaulters | PA | 8.25 percent, simple, 360 days, grace 0 hours | 2027-03-01 | 2027-04-30 | 3750000.000000 | 750000.000000 | 3000000.000000 | 60 | none | none | false | 41250.000000 |
+| default-no-carry-365 | C | 7.3 percent, simple, 365 days, grace 0 hours | 2027-01-15 | open at 2027-03-01 | 200000.000000 | 0.000000 | 200000.000000 | 45 | none | none | false | 1800.000000 |
+
+| golden case | cover by the non-defaulting parties (engine) | interest received (engine) |
+| --- | --- | --- |
+| default-ekene-march | EKO 1230769.230769 (61.538462 percent); PA 769230.769231 (38.461538 percent) | EKO 12692.307692; PA 7932.692308 |
+| default-ekene-uncured | EKO 1230769.230769 (61.538462 percent); PA 769230.769231 (38.461538 percent) | EKO 34410.256410; PA 21506.410256 |
+| default-ekene-monthly-compound-kenya | EKO 1230769.230769 (61.538462 percent); PA 769230.769231 (38.461538 percent) | EKO 12437.403846; PA 7773.377404 |
+| default-monthly-compound-uncured | EKO 1230769.230769 (61.538462 percent); PA 769230.769231 (38.461538 percent) | EKO 34196.794817; PA 21372.996761 |
+| default-monthly-compound-whole-months | EKO 1230769.230769 (61.538462 percent); PA 769230.769231 (38.461538 percent) | EKO 16981.250000; PA 10613.281250 |
+| default-monthly-compound-month-end | A 125000.000000 (62.500000 percent); B 75000.000000 (37.500000 percent) | A 3141.328767; B 1884.797260 |
+| default-grace-last-hour | EKO 1230769.230769 (61.538462 percent); PA 769230.769231 (38.461538 percent) | EKO 0.000000; PA 0.000000 |
+| default-grace-exceeded | EKO 1230769.230769 (61.538462 percent); PA 769230.769231 (38.461538 percent) | EKO 1128.205128; PA 705.128205 |
+| default-grace-compound-exceeded | EKO 1230769.230769 (61.538462 percent); PA 769230.769231 (38.461538 percent) | EKO 1128.205128; PA 705.128205 |
+| default-grace-fractional-hours | EKO 1230769.230769 (61.538462 percent); PA 769230.769231 (38.461538 percent) | EKO 846.153846; PA 528.846154 |
+| default-cured-on-due-date | EKO 1230769.230769 (61.538462 percent); PA 769230.769231 (38.461538 percent) | EKO 0.000000; PA 0.000000 |
+| default-two-defaulters | EKO 5250000.000000 (100.000000 percent) | EKO 56718.750000 |
+| default-no-carry-365 | A 125000.000000 (62.500000 percent); B 75000.000000 (37.500000 percent) | A 1125.000000; B 675.000000 |
+
+default-ekene-march, the engine's reasons, verbatim:
+> the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; interest 2000000 x 8.25% x 45 days / 360 = 20625 (from 2027-03-01 to the cure on 2027-04-15, the last date excluded)
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: triggered, the default being open after 2027-03-08
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: not triggered, the default being cured on 2027-04-15
+default-ekene-uncured, the engine's reasons, verbatim:
+> the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; interest 2000000 x 8.25% x 122 days / 360 = 55916.67 (from 2027-03-01 to asOf 2027-07-01, the default still open, the last date excluded)
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: triggered, the default being open after 2027-03-08
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: triggered, the default being open after 2027-06-10
+> if the assignment of PB is demanded, the interest is apportioned pro rata: EKO 47.05882352941177%, PA 29.41176470588235%, NOC 23.529411764705884%; the compensation (at most the book value less unpaid contributions) is not computed
+default-ekene-monthly-compound-kenya (Kenya Model PSC 2015 Participation Agreement Art. 6.7: compounded monthly from the due date; a payment not received within seventy-two (72) hours accrues interest from the due date (rate and grace stated here)), the engine's reasons, verbatim:
+> the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; interest 2000000 x ((1 + 8.25% / 12)^1 x (1 + 8.25% x 14 days / 360) - 1), 1 whole month and 14 days = 20210.78 (from 2027-03-01 to the cure on 2027-04-15, the last date excluded); the stated grace of 72 hours is exceeded, so interest runs from the due date
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: triggered, the default being open after 2027-03-08
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: not triggered, the default being cured on 2027-04-15
+default-monthly-compound-uncured, the engine's reasons, verbatim:
+> the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; interest 2000000 x ((1 + 8.25% / 12)^4 x (1 + 8.25% x 0 days / 360) - 1), 4 whole months and 0 days = 55569.79 (from 2027-03-01 to asOf 2027-07-01, the default still open, the last date excluded); the stated grace of 72 hours is exceeded, so interest runs from the due date
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: triggered, the default being open after 2027-03-08
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: triggered, the default being open after 2027-06-10
+> if the assignment of PB is demanded, the interest is apportioned pro rata: EKO 47.05882352941177%, PA 29.41176470588235%, NOC 23.529411764705884%; the compensation (at most the book value less unpaid contributions) is not computed
+default-monthly-compound-whole-months, the engine's reasons, verbatim:
+> the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; interest 2000000 x ((1 + 8.25% / 12)^2 x (1 + 8.25% x 0 days / 360) - 1), 2 whole months and 0 days = 27594.53 (from 2027-03-01 to the cure on 2027-05-01, the last date excluded)
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: triggered, the default being open after 2027-03-08
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: not triggered, the default being cured on 2027-05-01
+default-monthly-compound-month-end, the engine's reasons, verbatim:
+> the unpaid 200000 is advanced by A 125000, B 75000, in proportion to their paying interests among the non-defaulting parties
+> C: share of the call 200000, paid 0, unpaid 200000; interest 200000 x ((1 + 12% / 12)^2 x (1 + 12% x 15 days / 365) - 1), 2 whole months and 15 days = 5026.13 (from 2027-01-31 to asOf 2027-04-15, the default still open, the last date excluded)
+default-grace-last-hour (72 hours after the due date (3 days): within the grace, no interest), the engine's reasons, verbatim:
+> the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; no interest: 3 days (72 hours, from 2027-03-01 to the cure on 2027-03-04, the last date excluded) are within the stated grace of 72 hours
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: not triggered, the default being cured on 2027-03-04
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: not triggered, the default being cured on 2027-03-04
+default-grace-exceeded (96 hours: the grace is exceeded and interest runs from the due date (4 days)), the engine's reasons, verbatim:
+> the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; interest 2000000 x 8.25% x 4 days / 360 = 1833.33 (from 2027-03-01 to the cure on 2027-03-05, the last date excluded); the stated grace of 72 hours is exceeded, so interest runs from the due date
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: not triggered, the default being cured on 2027-03-05
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: not triggered, the default being cured on 2027-03-05
+default-grace-compound-exceeded, the engine's reasons, verbatim:
+> the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; interest 2000000 x ((1 + 8.25% / 12)^0 x (1 + 8.25% x 4 days / 360) - 1), 0 whole months and 4 days = 1833.33 (from 2027-03-01 to the cure on 2027-03-05, the last date excluded); the stated grace of 72 hours is exceeded, so interest runs from the due date
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: not triggered, the default being cured on 2027-03-05
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: not triggered, the default being cured on 2027-03-05
+default-grace-fractional-hours, the engine's reasons, verbatim:
+> the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; interest 2000000 x 8.25% x 3 days / 360 = 1375 (from 2027-03-01 to the cure on 2027-03-04, the last date excluded); the stated grace of 71.5 hours is exceeded, so interest runs from the due date
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: not triggered, the default being cured on 2027-03-04
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: not triggered, the default being cured on 2027-03-04
+default-cured-on-due-date, the engine's reasons, verbatim:
+> the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; interest 2000000 x 8.25% x 0 days / 360 = 0 (from 2027-03-01 to the cure on 2027-03-01, the last date excluded)
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: not triggered, the default being cured on 2027-03-01
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: not triggered, the default being cured on 2027-03-01
+default-two-defaulters, the engine's reasons, verbatim:
+> the unpaid 5250000 is advanced by EKO 5250000, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 0, unpaid 2250000; interest 2250000 x 8.25% x 30 days / 360 = 15468.75 (from 2027-03-01 to the cure on 2027-03-31, the last date excluded)
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: triggered, the default being open after 2027-03-08
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: not triggered, the default being cured on 2027-03-31
+> PA: share of the call 3750000, paid 750000, unpaid 3000000; interest 3000000 x 8.25% x 60 days / 360 = 41250 (from 2027-03-01 to the cure on 2027-04-30, the last date excluded)
+> PA: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: triggered, the default being open after 2027-03-08
+> PA: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: not triggered, the default being cured on 2027-04-30
+default-no-carry-365, the engine's reasons, verbatim:
+> the unpaid 200000 is advanced by A 125000, B 75000, in proportion to their paying interests among the non-defaulting parties
+> C: share of the call 200000, paid 0, unpaid 200000; interest 200000 x 7.3% x 45 days / 365 = 1800 (from 2027-01-15 to asOf 2027-03-01, the default still open, the last date excluded)
+
+THE TRIGGERS (golden inputs):
+
+| golden case | consequence | stated (golden input) | trigger date (engine) | applies (engine) |
+| --- | --- | --- | --- | --- |
+| default-cured-on-trigger-day | suspension | 5 working-days from 2027-03-01 | 2027-03-08 | false |
+| default-cured-on-trigger-day | forfeiture | 3 months from 2027-03-10 | 2027-06-10 | false |
+| default-cured-day-after-trigger | suspension | 5 working-days from 2027-03-01 | 2027-03-08 | true |
+| default-cured-day-after-trigger | forfeiture | 3 months from 2027-03-10 | 2027-06-10 | false |
+| default-forfeiture-last-day | suspension | 5 working-days from 2027-03-01 | 2027-03-08 | true |
+| default-forfeiture-last-day | forfeiture | 3 months from 2027-03-10 | 2027-06-10 | false |
+| default-forfeiture-day-after | suspension | 5 working-days from 2027-03-01 | 2027-03-08 | true |
+| default-forfeiture-day-after | forfeiture | 3 months from 2027-03-10 | 2027-06-10 | true |
+| default-working-days-holiday | suspension | 5 working-days from 2027-12-22 | 2028-01-03 | true |
+| default-months-end-of-month | forfeiture | 3 months from 2027-01-31 | 2027-04-30 | true |
+| default-calendar-days | forfeiture | 90 calendar-days from 2027-01-01 | 2027-04-01 | false |
+
+default-cured-on-trigger-day, the engine's reasons, verbatim:
+> the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; interest 2000000 x 8.25% x 7 days / 360 = 3208.33 (from 2027-03-01 to the cure on 2027-03-08, the last date excluded)
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: not triggered, the default being cured on 2027-03-08
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: not triggered, the default being cured on 2027-03-08
+default-cured-day-after-trigger, the engine's reasons, verbatim:
+> the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; interest 2000000 x 8.25% x 8 days / 360 = 3666.67 (from 2027-03-01 to the cure on 2027-03-09, the last date excluded)
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: triggered, the default being open after 2027-03-08
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: not triggered, the default being cured on 2027-03-09
+default-forfeiture-last-day, the engine's reasons, verbatim:
+> the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; interest 2000000 x 8.25% x 101 days / 360 = 46291.67 (from 2027-03-01 to asOf 2027-06-10, the default still open, the last date excluded)
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: triggered, the default being open after 2027-03-08
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: not triggered, the default being open only to asOf 2027-06-10
+default-forfeiture-day-after, the engine's reasons, verbatim:
+> the unpaid 2000000 is advanced by EKO 1230769.23, PA 769230.77, in proportion to their paying interests among the non-defaulting parties
+> PB: share of the call 2250000, paid 250000, unpaid 2000000; interest 2000000 x 8.25% x 102 days / 360 = 46750 (from 2027-03-01 to asOf 2027-06-11, the default still open, the last date excluded)
+> PB: the suspension of its rights (as the contract states) starts after 5 working days from 2027-03-01, that is after 2027-03-08: triggered, the default being open after 2027-03-08
+> PB: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-03-10, that is after 2027-06-10: triggered, the default being open after 2027-06-10
+> if the assignment of PB is demanded, the interest is apportioned pro rata: EKO 47.05882352941177%, PA 29.41176470588235%, NOC 23.529411764705884%; the compensation (at most the book value less unpaid contributions) is not computed
+default-working-days-holiday, the engine's reasons, verbatim:
+> the unpaid 200000 is advanced by A 125000, B 75000, in proportion to their paying interests among the non-defaulting parties
+> C: share of the call 200000, paid 0, unpaid 200000; interest 200000 x 0% x 14 days / 365 = 0 (from 2027-12-22 to asOf 2028-01-05, the default still open, the last date excluded)
+> C: the suspension of its rights (as the contract states) starts after 5 working days from 2027-12-22, that is after 2028-01-03: triggered, the default being open after 2028-01-03
+default-months-end-of-month, the engine's reasons, verbatim:
+> the unpaid 200000 is advanced by A 125000, B 75000, in proportion to their paying interests among the non-defaulting parties
+> C: share of the call 200000, paid 0, unpaid 200000; interest 200000 x 0% x 90 days / 365 = 0 (from 2027-01-31 to asOf 2027-05-01, the default still open, the last date excluded)
+> C: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 3 months from 2027-01-31, that is after 2027-04-30: triggered, the default being open after 2027-04-30
+> if the assignment of C is demanded, the interest is apportioned pro rata: A 62.5%, B 37.5%; the compensation (at most the book value less unpaid contributions) is not computed
+default-calendar-days, the engine's reasons, verbatim:
+> the unpaid 200000 is advanced by A 125000, B 75000, in proportion to their paying interests among the non-defaulting parties
+> C: share of the call 200000, paid 0, unpaid 200000; interest 200000 x 0% x 90 days / 365 = 0 (from 2027-01-01 to asOf 2027-04-01, the default still open, the last date excluded)
+> C: the right to demand the assignment of its interest (forfeiture, as the contract states) arises after 90 calendar days from 2027-01-01, that is after 2027-04-01: not triggered, the default being open only to asOf 2027-04-01
+
+SIMPLE AND COMPOUNDED MONTHLY ON THE SAME DEFAULT. PB's unpaid 2000000.000000 from 2027-03-01 to 2027-04-15: simple at 8.25 percent on a 360-day basis, 45 days, gives 20625.000000; compounded monthly with a 72-hour grace (default-ekene-monthly-compound-kenya), 1 whole month and 14 days, gives 20210.781250 (engine).
+
+THE COVER. The unpaid 2000000.000000 is advanced by EKO 1230769.230769 and PA 769230.769231, in proportion to their paying interests of 50.000000 and 31.250000; NOC, carried, pays no cost and covers none (engine).
+FORFEITURE AVAILABLE. On default-ekene-uncured the default is still open after the forfeiture trigger, and the interests if PB's assignment is demanded are EKO 47.058824, PA 29.411765, NOC 23.529412 (engine), pro rata to the participating interests of the others.
+
+# SECTION 15: PSC cost recovery through the canonical applyPSC: the order, the limit and its base, the pool, the partner split (owned by Professional m05)
+
+THE ENGINE, THE ORDER and THE LIMIT BASE, in the engine's basis (psc-ekene), verbatim:
+> applyPSC imported from engines/economics/cashflow.ts, called once a year with the unrecovered pool threaded; nothing here re-computes the cost pool
+> royalty = royaltyPct % of gross; cost oil limit = costOilLimitPct % of revenue after royalty (or of gross, as stated); cost recovered = min(pool + capex + opex, limit); profit oil = revenue after royalty - cost recovered; contractor profit oil = its share; tax = taxRatePct % of the contractor's profit oil
+> the limit is stated on gross revenue and passed to applyPSC as the fraction 60 / (100 - 12.5) of revenue after royalty
+
+THE SHARE, THE TAX and THE SPLIT, verbatim:
+> contractorProfitSharePct applies to every year that does not state its own (a year's own figure carries a sliding scale, e.g. by daily rate or R-factor, computed outside)
+> income tax is charged on the contractor's profit oil share, as FARI TNM/16/01 and World Bank Note 8 assume (applyPSC in engines/economics/cashflow.ts)
+> the contractor entitlement and the costs are split by participating interest with calculatePartnerCosts from engines/economics/afe.js
+
+THE ACT, verbatim:
+> PIA s.311(2)(a)(iii): a renegotiated production sharing contract features a cost oil limit of not more than 60% of the total oil production; the limit here is the contract's stated figure
+
+THE EKENE PSC VARIANT (golden input psc-ekene, the fixture's terms): royalty 12.500000 percent, limit 60.000000 percent of gross, contractor share 60.000000 percent, tax 30.000000 percent, opening pool 142000000.000000, discount rate 0.100000 to 2029:
+
+| year | gross revenue | royalty | revenue after royalty | pool in | capex | opex | cost oil limit | cost recovered | pool out | profit oil | contractor share | contractor profit oil | government profit oil | tax | contractor entitlement | government take |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2029 | 0.000000 | 0.000000 | 0.000000 | 142000000.000000 | 280000000.000000 | 0.000000 | 0.000000 | 0.000000 | 422000000.000000 | 0.000000 | 60.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2030 | 219000000.000000 | 27375000.000000 | 191625000.000000 | 422000000.000000 | 90000000.000000 | 20000000.000000 | 131400000.000000 | 131400000.000000 | 400600000.000000 | 60225000.000000 | 60.000000 | 36135000.000000 | 24090000.000000 | 10840500.000000 | 156694500.000000 | 62305500.000000 |
+| 2031 | 197100000.000000 | 24637500.000000 | 172462500.000000 | 400600000.000000 | 10000000.000000 | 21000000.000000 | 118260000.000000 | 118260000.000000 | 313340000.000000 | 54202500.000000 | 60.000000 | 32521500.000000 | 21681000.000000 | 9756450.000000 | 141025050.000000 | 56074950.000000 |
+| 2032 | 177390000.000000 | 22173750.000000 | 155216250.000000 | 313340000.000000 | 0.000000 | 22000000.000000 | 106434000.000000 | 106434000.000000 | 228906000.000000 | 48782250.000000 | 60.000000 | 29269350.000000 | 19512900.000000 | 8780805.000000 | 126922545.000000 | 50467455.000000 |
+| 2033 | 159651000.000000 | 19956375.000000 | 139694625.000000 | 228906000.000000 | 0.000000 | 23000000.000000 | 95790600.000000 | 95790600.000000 | 156115400.000000 | 43904025.000000 | 60.000000 | 26342415.000000 | 17561610.000000 | 7902724.500000 | 114230290.500000 | 45420709.500000 |
+| 2034 | 143686000.000000 | 17960750.000000 | 125725250.000000 | 156115400.000000 | 0.000000 | 24000000.000000 | 86211600.000000 | 86211600.000000 | 93903800.000000 | 39513650.000000 | 60.000000 | 23708190.000000 | 15805460.000000 | 7112457.000000 | 102807333.000000 | 40878667.000000 |
+| 2035 | 129317000.000000 | 16164625.000000 | 113152375.000000 | 93903800.000000 | 0.000000 | 25000000.000000 | 77590200.000000 | 77590200.000000 | 41313600.000000 | 35562175.000000 | 60.000000 | 21337305.000000 | 14224870.000000 | 6401191.500000 | 92526313.500000 | 36790686.500000 |
+| 2036 | 116386000.000000 | 14548250.000000 | 101837750.000000 | 41313600.000000 | 0.000000 | 26000000.000000 | 69831600.000000 | 67313600.000000 | 0.000000 | 34524150.000000 | 60.000000 | 20714490.000000 | 13809660.000000 | 6214347.000000 | 81813743.000000 | 34572257.000000 |
+| 2037 | 104747000.000000 | 13093375.000000 | 91653625.000000 | 0.000000 | 0.000000 | 27000000.000000 | 62848200.000000 | 27000000.000000 | 0.000000 | 64653625.000000 | 60.000000 | 38792175.000000 | 25861450.000000 | 11637652.500000 | 54154522.500000 | 50592477.500000 |
+| 2038 | 94272000.000000 | 11784000.000000 | 82488000.000000 | 0.000000 | 0.000000 | 28000000.000000 | 56563200.000000 | 28000000.000000 | 0.000000 | 54488000.000000 | 60.000000 | 32692800.000000 | 21795200.000000 | 9807840.000000 | 50884960.000000 | 43387040.000000 |
+
+Totals (engine): cost recovered 738000000.000000, profit oil 435855375.000000, government profit oil 174342150.000000, tax 78453967.500000, contractor entitlement 921059257.500000, government take 420489742.500000; unrecovered at the end 0.000000.
+The engine's reasons, verbatim:
+> 2029: recoverable 422000000 is above the cost oil limit 0; 422000000 carried to 2030
+> 2030: recoverable 532000000 is above the cost oil limit 131400000; 400600000 carried to 2031
+> 2031: recoverable 431600000 is above the cost oil limit 118260000; 313340000 carried to 2032
+> 2032: recoverable 335340000 is above the cost oil limit 106434000; 228906000 carried to 2033
+> 2033: recoverable 251906000 is above the cost oil limit 95790600; 156115400 carried to 2034
+> 2034: recoverable 180115400 is above the cost oil limit 86211600; 93903800 carried to 2035
+> 2035: recoverable 118903800 is above the cost oil limit 77590200; 41313600 carried to 2036
+
+THE PARTNER SPLIT (engine), by participating interest:
+
+| year | EKO net | PA net | PB net | NOC net |
+| --- | --- | --- | --- | --- |
+| 2029 | -112000000.000000 | -70000000.000000 | -42000000.000000 | -56000000.000000 |
+| 2030 | 18677800.000000 | 11673625.000000 | 7004175.000000 | 9338900.000000 |
+| 2031 | 44010020.000000 | 27506262.500000 | 16503757.500000 | 22005010.000000 |
+| 2032 | 41969018.000000 | 26230636.250000 | 15738381.750000 | 20984509.000000 |
+| 2033 | 36492116.200000 | 22807572.625000 | 13684543.575000 | 18246058.100000 |
+| 2034 | 31522933.200000 | 19701833.250000 | 11821099.950000 | 15761466.600000 |
+| 2035 | 27010525.400000 | 16881578.375000 | 10128947.025000 | 13505262.700000 |
+| 2036 | 22325497.200000 | 13953435.750000 | 8372061.450000 | 11162748.600000 |
+| 2037 | 10861809.000000 | 6788630.625000 | 4073178.375000 | 5430904.500000 |
+| 2038 | 9153984.000000 | 5721240.000000 | 3432744.000000 | 4576992.000000 |
+NPV by party (engine, the canonical npv): EKO 53034092.139510, PA 33146307.587194, PB 19887784.552316, NOC 26517046.069755.
+
+THE SAME FIELD WITH THE LIMIT STATED ON REVENUE AFTER ROYALTY (golden input psc-ekene-after-royalty, limit 60.000000 percent of after-royalty):
+
+| year | gross revenue | royalty | revenue after royalty | pool in | capex | opex | cost oil limit | cost recovered | pool out | profit oil | contractor share | contractor profit oil | government profit oil | tax | contractor entitlement | government take |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2029 | 0.000000 | 0.000000 | 0.000000 | 142000000.000000 | 280000000.000000 | 0.000000 | 0.000000 | 0.000000 | 422000000.000000 | 0.000000 | 60.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 | 0.000000 |
+| 2030 | 219000000.000000 | 27375000.000000 | 191625000.000000 | 422000000.000000 | 90000000.000000 | 20000000.000000 | 114975000.000000 | 114975000.000000 | 417025000.000000 | 76650000.000000 | 60.000000 | 45990000.000000 | 30660000.000000 | 13797000.000000 | 147168000.000000 | 71832000.000000 |
+| 2031 | 197100000.000000 | 24637500.000000 | 172462500.000000 | 417025000.000000 | 10000000.000000 | 21000000.000000 | 103477500.000000 | 103477500.000000 | 344547500.000000 | 68985000.000000 | 60.000000 | 41391000.000000 | 27594000.000000 | 12417300.000000 | 132451200.000000 | 64648800.000000 |
+| 2032 | 177390000.000000 | 22173750.000000 | 155216250.000000 | 344547500.000000 | 0.000000 | 22000000.000000 | 93129750.000000 | 93129750.000000 | 273417750.000000 | 62086500.000000 | 60.000000 | 37251900.000000 | 24834600.000000 | 11175570.000000 | 119206080.000000 | 58183920.000000 |
+| 2033 | 159651000.000000 | 19956375.000000 | 139694625.000000 | 273417750.000000 | 0.000000 | 23000000.000000 | 83816775.000000 | 83816775.000000 | 212600975.000000 | 55877850.000000 | 60.000000 | 33526710.000000 | 22351140.000000 | 10058013.000000 | 107285472.000000 | 52365528.000000 |
+| 2034 | 143686000.000000 | 17960750.000000 | 125725250.000000 | 212600975.000000 | 0.000000 | 24000000.000000 | 75435150.000000 | 75435150.000000 | 161165825.000000 | 50290100.000000 | 60.000000 | 30174060.000000 | 20116040.000000 | 9052218.000000 | 96556992.000000 | 47129008.000000 |
+| 2035 | 129317000.000000 | 16164625.000000 | 113152375.000000 | 161165825.000000 | 0.000000 | 25000000.000000 | 67891425.000000 | 67891425.000000 | 118274400.000000 | 45260950.000000 | 60.000000 | 27156570.000000 | 18104380.000000 | 8146971.000000 | 86901024.000000 | 42415976.000000 |
+| 2036 | 116386000.000000 | 14548250.000000 | 101837750.000000 | 118274400.000000 | 0.000000 | 26000000.000000 | 61102650.000000 | 61102650.000000 | 83171750.000000 | 40735100.000000 | 60.000000 | 24441060.000000 | 16294040.000000 | 7332318.000000 | 78211392.000000 | 38174608.000000 |
+| 2037 | 104747000.000000 | 13093375.000000 | 91653625.000000 | 83171750.000000 | 0.000000 | 27000000.000000 | 54992175.000000 | 54992175.000000 | 55179575.000000 | 36661450.000000 | 60.000000 | 21996870.000000 | 14664580.000000 | 6599061.000000 | 70389984.000000 | 34357016.000000 |
+| 2038 | 94272000.000000 | 11784000.000000 | 82488000.000000 | 55179575.000000 | 0.000000 | 28000000.000000 | 49492800.000000 | 49492800.000000 | 33686775.000000 | 32995200.000000 | 60.000000 | 19797120.000000 | 13198080.000000 | 5939136.000000 | 63350784.000000 | 30921216.000000 |
+
+The engine's reasons, verbatim:
+> 2029: recoverable 422000000 is above the cost oil limit 0; 422000000 carried to 2030
+> 2030: recoverable 532000000 is above the cost oil limit 114975000; 417025000 carried to 2031
+> 2031: recoverable 448025000 is above the cost oil limit 103477500; 344547500 carried to 2032
+> 2032: recoverable 366547500 is above the cost oil limit 93129750; 273417750 carried to 2033
+> 2033: recoverable 296417750 is above the cost oil limit 83816775; 212600975 carried to 2034
+> 2034: recoverable 236600975 is above the cost oil limit 75435150; 161165825 carried to 2035
+> 2035: recoverable 186165825 is above the cost oil limit 67891425; 118274400 carried to 2036
+> 2036: recoverable 144274400 is above the cost oil limit 61102650; 83171750 carried to 2037
+> 2037: recoverable 110171750 is above the cost oil limit 54992175; 55179575 carried to 2038
+> 2038: recoverable 83179575 is above the cost oil limit 49492800; 33686775 carried to 2039
+
+THE BASE MOVES THE LIMIT. In 2030 the limit is 131400000.000000 on gross and 114975000.000000 on after-royalty with the same percentage (engine). The base is a required input: a contract states which it means.
+Every year above is the canonical applyPSC of cashflow.ts called once with the pool threaded (checked when this digest is built): the pool out and the tax of each year are the applyPSC return values exactly.
+
+# SECTION 16: The published PSC checks: World Bank Briefing Note 8, IMF FARI Figure 5, IMF FARI Tables 12 and 13 (owned by Professional m06)
+
+Three published worked examples run through the same engine call. Each golden input states the example's own terms; each printed figure is typed here from the text with its citation (text), beside the engine's figure.
+
+WORLD BANK BRIEFING NOTE 8 (November 2007), golden input psc-wb-bn8-2007: gross 100.000000, costs 25.000000, royalty 10.000000 percent, limit 60.000000 percent of gross, contractor profit share 40.000000 percent, tax 30.000000 percent.
+
+| line | printed (text) | engine |
+| --- | --- | --- |
+| royalty | 10 | 10.000000 |
+| cost oil limit | 60 | 60.000000 |
+| cost recovered | 25 | 25.000000 |
+| profit oil | 65 | 65.000000 |
+| contractor profit oil | 26 | 26.000000 |
+| government profit oil | 39 | 39.000000 |
+| income tax | 7.8 | 7.800000 |
+| contractor retains | 43 | 43.200000 |
+| government takes | 57 | 56.800000 |
+The note prints the totals in whole dollars ("The end result is that the contractor retains US$43 and the government takes $57.", World Bank Petroleum Sector Briefing Note No. 8 (November 2007)); the engine returns 43.200000 and 56.800000, which round to 43 and 57. Its taxable income of 26 is the contractor's profit oil here, because the costs are recovered in full.
+
+IMF FARI FIGURE 5 (February 2016), golden input psc-fari-figure-5: one barrel at 100.000000, limit 50.000000 percent of after-royalty, contractor share 40.000000 percent, tax 30.000000 percent.
+
+| line | printed (text) | engine |
+| --- | --- | --- |
+| cost recovered | 50 | 50.000000 |
+| government profit oil | 30 | 30.000000 |
+| contractor profit oil | 20 | 20.000000 |
+| income tax | 6 | 6.000000 |
+| government | 36 | 36.000000 |
+
+IMF FARI TABLES 12 AND 13 (February 2016), golden input psc-fari-table-12: eleven years in USD million, royalty 0.000000 percent, ceiling 80.000000 percent of after-royalty, the government share of profit petroleum per year as Table 13 prints it (a daily-rate scale the tables compute outside this engine). The printed figures (text, Tables 12 and 13) are whole numbers of an unrounded model:
+
+| year | ceiling printed | ceiling engine | cost petroleum printed | cost recovered engine | closing printed | pool out engine | profit printed | profit oil engine | contractor printed | contractor engine | government printed | government engine |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2001 | 0 | 0.000000 | 0 | 0.000000 | 250 | 250.000000 | 0 | 0.000000 | 0 | 0.000000 | 0 | 0.000000 |
+| 2002 | 0 | 0.000000 | 0 | 0.000000 | 250 | 250.000000 | 0 | 0.000000 | 0 | 0.000000 | 0 | 0.000000 |
+| 2003 | 170 | 170.400000 | 170 | 170.400000 | 299 | 298.600000 | 43 | 42.600000 | 26 | 25.560000 | 17 | 17.040000 |
+| 2004 | 434 | 433.600000 | 434 | 433.600000 | 264 | 264.000000 | 108 | 108.400000 | 61 | 60.704000 | 48 | 47.696000 |
+| 2005 | 1327 | 1327.200000 | 1264 | 1265.000000 | 0 | 0.000000 | 395 | 394.000000 | 166 | 165.480000 | 229 | 228.520000 |
+| 2006 | 1083 | 1083.200000 | 840 | 840.000000 | 0 | 0.000000 | 514 | 514.000000 | 238 | 236.440000 | 276 | 277.560000 |
+| 2007 | 884 | 884.000000 | 778 | 778.000000 | 0 | 0.000000 | 326 | 327.000000 | 160 | 160.230000 | 166 | 166.770000 |
+| 2008 | 721 | 721.600000 | 552 | 552.000000 | 0 | 0.000000 | 349 | 350.000000 | 181 | 182.000000 | 169 | 168.000000 |
+| 2009 | 589 | 588.800000 | 451 | 451.000000 | 0 | 0.000000 | 285 | 285.000000 | 156 | 156.750000 | 129 | 128.250000 |
+| 2010 | 480 | 480.000000 | 368 | 369.000000 | 0 | 0.000000 | 232 | 231.000000 | 130 | 129.360000 | 102 | 101.640000 |
+| 2011 | 392 | 392.000000 | 303 | 302.000000 | 0 | 0.000000 | 187 | 188.000000 | 108 | 109.040000 | 79 | 78.960000 |
+
+AGREEMENT AT THE PRINTED PRECISION (derived): the largest difference on a cost line (ceiling, cost petroleum, closing balance, profit) is 1.000000, inside the 1.5 a line made of at most three printed whole numbers can carry; the largest on the profit split is 1.560000, inside 1.5 plus half a per cent of the year's profit petroleum, because Table 13 prints the government share as a whole per cent. The carry of 250 through the first two years and the ceilings that bind in the third and fourth are reproduced.
+
+NO DEFECT, AND WHAT IT PROVES. The validation record states, verbatim:
+> Result: NO DEFECT. The cost pool arithmetic of `applyPSC` (royalty on gross; the limit on revenue after royalty; cost recovered = min(pool + capex + opex, limit); the rest carried; profit oil = revenue after royalty - cost recovered) reproduces the IMF schedule year by year
+
+# SECTION 17: Sole risk and non-consent: the premium on the proportionate share, recovery from production and reversion (owned by Expert m01)
+
+THE RULE and THE MULTIPLE, in the engine's basis (nc-ekene-sidetrack), verbatim:
+> the consenting parties pay the cost in proportion to their participating interests among themselves; the premium of a non-consenting party = its proportionate share of the cost x premiumMultiplePct / 100
+> 400% of the non-consenting party's proportionate share of the cost (a stated contract figure with no default; 100% is the cost alone)
+
+THE RECOVERY, verbatim:
+> recovered each year from the non-consenting party's share of max(0, grossValue - deductions); in the year the premium is recovered the rest of that year's share is the non-consenting party's (reversion inside the period)
+
+nc-ekene-sidetrack (golden input: Ekene-4 sidetrack costing 18000000.000000, consenting EKO, PA, NOC, premium 400.000000 percent):
+
+| consenting party | participating interest | share of the project | cost paid |
+| --- | --- | --- | --- |
+| EKO | 40.000000 | 47.058824 | 8470588.235294 |
+| PA | 25.000000 | 29.411765 | 5294117.647059 |
+| NOC | 20.000000 | 23.529412 | 4235294.117647 |
+
+PB: participating interest 15.000000, proportionate share of the cost 2700000.000000, premium 10800000.000000; reverts in 2035 (engine).
+
+| year | opening | due | share of net value | recovered | closing | non-consenting party receives |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2031 | 0.000000 | 10800000.000000 | 3000000.000000 | 3000000.000000 | 7800000.000000 | 0.000000 |
+| 2032 | 7800000.000000 | 7800000.000000 | 2550000.000000 | 2550000.000000 | 5250000.000000 | 0.000000 |
+| 2033 | 5250000.000000 | 5250000.000000 | 2100000.000000 | 2100000.000000 | 3150000.000000 | 0.000000 |
+| 2034 | 3150000.000000 | 3150000.000000 | 1800000.000000 | 1800000.000000 | 1350000.000000 | 0.000000 |
+| 2035 | 1350000.000000 | 1350000.000000 | 1500000.000000 | 1350000.000000 | 0.000000 | 150000.000000 |
+| 2036 | 0.000000 | 0.000000 | 1200000.000000 | 0.000000 | 0.000000 | 1200000.000000 |
+
+The engine's reasons, verbatim:
+> Ekene-4 sidetrack: cost 18000000 paid by the consenting parties EKO 47.05882352941177%, PA 29.41176470588235%, NOC 23.529411764705884% (in proportion to their participating interests)
+> PB 2031: 3000000 recovered of 10800000 due; 7800000 carried to 2032
+> PB 2032: 2550000 recovered of 7800000 due; 5250000 carried to 2033
+> PB 2033: 2100000 recovered of 5250000 due; 3150000 carried to 2034
+> PB 2034: 1800000 recovered of 3150000 due; 1350000 carried to 2035
+> PB 2035: the balance 1350000 is recovered with 1350000 of the 1500000 available; the non-consenting party receives 150000 of its share 1500000
+
+nc-premium-last-barrel (golden input: well costing 1000.000000, consenting A, B, premium 300.000000 percent):
+
+| consenting party | participating interest | share of the project | cost paid |
+| --- | --- | --- | --- |
+| A | 50.000000 | 62.500000 | 625.000000 |
+| B | 30.000000 | 37.500000 | 375.000000 |
+
+C: participating interest 20.000000, proportionate share of the cost 200.000000, premium 600.000000; reverts in 2031 (engine).
+
+| year | opening | due | share of net value | recovered | closing | non-consenting party receives |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2030 | 0.000000 | 600.000000 | 200.000000 | 200.000000 | 400.000000 | 0.000000 |
+| 2031 | 400.000000 | 400.000000 | 400.000000 | 400.000000 | 0.000000 | 0.000000 |
+| 2032 | 0.000000 | 0.000000 | 200.000000 | 0.000000 | 0.000000 | 200.000000 |
+
+The engine's reasons, verbatim:
+> well: cost 1000 paid by the consenting parties A 62.5%, B 37.5% (in proportion to their participating interests)
+> C 2030: 200 recovered of 600 due; 400 carried to 2031
+> C 2031: the balance 400 is recovered exactly by the 400 available; the non-consenting party receives 0 of its share 400
+
+nc-premium-reverts-mid-year (golden input: well costing 1000.000000, consenting A, B, premium 300.000000 percent):
+
+| consenting party | participating interest | share of the project | cost paid |
+| --- | --- | --- | --- |
+| A | 50.000000 | 62.500000 | 625.000000 |
+| B | 30.000000 | 37.500000 | 375.000000 |
+
+C: participating interest 20.000000, proportionate share of the cost 200.000000, premium 600.000000; reverts in 2031 (engine).
+
+| year | opening | due | share of net value | recovered | closing | non-consenting party receives |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2030 | 0.000000 | 600.000000 | 200.000000 | 200.000000 | 400.000000 | 0.000000 |
+| 2031 | 400.000000 | 400.000000 | 600.000000 | 400.000000 | 0.000000 | 200.000000 |
+| 2032 | 0.000000 | 0.000000 | 200.000000 | 0.000000 | 0.000000 | 200.000000 |
+
+The engine's reasons, verbatim:
+> well: cost 1000 paid by the consenting parties A 62.5%, B 37.5% (in proportion to their participating interests)
+> C 2030: 200 recovered of 600 due; 400 carried to 2031
+> C 2031: the balance 400 is recovered with 400 of the 600 available; the non-consenting party receives 200 of its share 600
+
+nc-two-nonconsenting-deductions-exceed (golden input: well costing 1000.000000, consenting A, premium 100.000000 percent):
+
+| consenting party | participating interest | share of the project | cost paid |
+| --- | --- | --- | --- |
+| A | 50.000000 | 100.000000 | 1000.000000 |
+
+B: participating interest 30.000000, proportionate share of the cost 300.000000, premium 300.000000; reverts in 2031 (engine).
+
+| year | opening | due | share of net value | recovered | closing | non-consenting party receives |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2030 | 0.000000 | 300.000000 | 0.000000 | 0.000000 | 300.000000 | 0.000000 |
+| 2031 | 300.000000 | 300.000000 | 1200.000000 | 300.000000 | 0.000000 | 900.000000 |
+
+C: participating interest 20.000000, proportionate share of the cost 200.000000, premium 200.000000; reverts in 2031 (engine).
+
+| year | opening | due | share of net value | recovered | closing | non-consenting party receives |
+| --- | --- | --- | --- | --- | --- | --- |
+| 2030 | 0.000000 | 200.000000 | 0.000000 | 0.000000 | 200.000000 | 0.000000 |
+| 2031 | 200.000000 | 200.000000 | 800.000000 | 200.000000 | 0.000000 | 600.000000 |
+
+The engine's reasons, verbatim:
+> well: cost 1000 paid by the consenting parties A 100% (in proportion to their participating interests)
+> B 2030: 0 recovered of 300 due; 300 carried to 2031
+> B 2031: the balance 300 is recovered with 300 of the 1200 available; the non-consenting party receives 900 of its share 1200
+> C 2030: 0 recovered of 200 due; 200 carried to 2031
+> C 2031: the balance 200 is recovered with 200 of the 800 available; the non-consenting party receives 600 of its share 800
+> 2030: deductions 150 exceed the gross value 100: no net value, nothing recovered
+
+THE PREMIUM BASE. PB's premium is its proportionate share of the cost, 2700000.000000 (the cost 18000000.000000 x its participating interest 15.000000 percent), times the stated 400.000000 percent: 10800000.000000 (engine). The consenting parties pay the whole cost between them, in proportion to their participating interests among themselves.
+REVERSION INSIDE THE PERIOD. On nc-premium-last-barrel the premium is recovered by exactly the 400.000000 available in 2031, so C receives 0.000000 that year and its whole share from the next; on nc-premium-reverts-mid-year the share in the payout year is larger than the balance, and the rest of that year's share is C's (200.000000).
+
+# SECTION 18: Buy-in: entry at a stated multiple, apportioned to the consenting parties (owned by Expert m02)
+
+THE NORWEGIAN ENTRY (golden input nc-ekene-buy-in-norway-1000: Ekene-4 sidetrack costing 18000000.000000, consenting EKO, PA, NOC, multiple 1000.000000 percent, mode buy-in). Norway JOA Art. 18.12: one thousand (1000) % of the proportionate share of the costs, apportioned to the initial participants by their interest in the project.
+
+PB pays 27000000.000000 to enter (engine), apportioned:
+
+| consenting party | participating interest | amount received |
+| --- | --- | --- |
+| EKO | 40.000000 | 12705882.352941 |
+| PA | 25.000000 | 7941176.470588 |
+| NOC | 20.000000 | 6352941.176471 |
+
+The engine's reasons, verbatim:
+> Ekene-4 sidetrack: cost 18000000 paid by the consenting parties EKO 47.05882352941177%, PA 29.41176470588235%, NOC 23.529411764705884% (in proportion to their participating interests)
+> PB: to enter it pays 1000% of its share 2700000 = 27000000, apportioned to the consenting parties in their shares
+
+BUY-IN AND RECOVERY FROM PRODUCTION COMPARED, on the same sidetrack. Under buy-in at 1000.000000 percent PB pays 27000000.000000 at once; under recovery at 400.000000 percent the consenting parties take 10800000.000000 out of PB's share of net value from 2031 to 2035 (engine). Both rest on the same base, PB's proportionate share of 2700000.000000; the multiple and the timing are the contract's.
+
+THE CONSENTING PARTIES' SHARES. Under both modes the consenting parties hold the project in proportion to their participating interests among themselves: EKO 47.058824, PA 29.411765, NOC 23.529412 (engine).
+
+# SECTION 19: The three readings the engine states, and the limit base as a stated input (owned by Expert m03)
+
+A READING is a place where a public text can be read two ways and the engine takes one, stating it in its basis. The course quotes each verbatim and grades none. Three readings:
+
+READING ONE: THE PSC INCOME TAX. The engine's basis, verbatim:
+> income tax is charged on the contractor's profit oil share, as FARI TNM/16/01 and World Bank Note 8 assume (applyPSC in engines/economics/cashflow.ts)
+READING ONE ACTS in a year where the limit binds. On psc-ekene, 2031: cost recovered 118260000.000000 against capex and opex of 31000000.000000, contractor profit oil 32521500.000000, tax 9756450.000000 (engine), which is 30.000000 percent of the contractor's profit oil. The World Bank note says income tax deductions carry no limit of the kind cost oil has ("For paying income tax, there are no limits on deductible expenses in the way there are limits on cost oil.", World Bank Petroleum Sector Briefing Note No. 8 (November 2007)); a regime that deducts every cost incurred would tax a different base in such a year. No public text prints such a year with its tax, so the engine states its reading and the course grades no tax figure.
+
+READING TWO: THE GRACE. The engine's basis (default-grace-exceeded), verbatim:
+> a stated grace of 72 hours (days x 24 from the due date): a default cured within it carries no interest; one cured later carries interest from the due date, as the Kenya Model PSC 2015 Participation Agreement Art. 6.7 prints (72 hours)
+READING TWO ACTS when a default is cured after the grace. On default-grace-exceeded (grace 72 hours, cured after 4 days) the interest 1833.333333 runs from the due date, as the Kenya clause prints ("A payment not received within seventy-two (72) hours of the due date shall accrue interest from the due date", Kenya Model PSC 2015, Participation Agreement Art. 6.7); on default-grace-last-hour (3 days) there is none. A contract whose grace also delays the start of interest would give a smaller figure; the engine follows the printed clause and the course grades no figure that depends on which.
+
+READING THREE: THE COVER. The engine's basis (default-ekene-march), verbatim:
+> the non-defaulting parties advance the unpaid amounts in proportion to their paying interests among themselves (the parties that pay cost; a carried party pays none)
+READING THREE ACTS while a carry is live. The Norwegian text advances a defaulter's unpaid amount "in accordance with their Participating interest" (Norway JOA Art. 9.1); outside a carry the paying and participating interests are the same, and under the Ekene carry NOC pays no cost. On default-ekene-march the engine covers by the paying interests (EKO 61.538462 percent, PA 38.461538 percent of the cover, engine); a reading by participating interest would bring the carried NOC into the cover.
+
+THE LIMIT BASE IS A STATED INPUT. applyPSC takes the limit on revenue after royalty; the World Bank note states its limit on gross revenue; the Act's s.311(2)(a)(iii) ceiling is worded on "total oil production". The engine takes `costOilLimitBase` as a required input with no default and, for "gross", passes the same amount to applyPSC as a fraction of revenue after royalty. The limit base basis (psc-wb-bn8-2007), verbatim:
+> the limit is stated on gross revenue and passed to applyPSC as the fraction 60 / (100 - 10) of revenue after royalty
+
+NO HIDDEN CONTRACTUAL DEFAULTS. Every contract term below is required, and a call without it is refused by name (section 5): the interest method and the grace hours (0 when the contract gives none), the day basis, the rate, the reconciliation lag, the negative call rule, the uplift type, the recovery share, the premium multiple, the refundable kinds under basis "contract", the overhead scale of every category, the budget tolerance, the cost oil limit and its base, the opening pool. A threshold, a cap and a set of consequences are optional and are applied only when stated.
+The refusal when the grace is left out, verbatim:
+> interest.graceHours must be a finite number of hours at or above 0, stated (0 when the contract gives no grace; the engine holds no default); got nothing
+
+# SECTION 20: Reference texts and their quirks: licensed forms, printed figures, a worked example that does not add up (owned by Expert m04)
+
+MODEL AGREEMENTS AND LICENSED FORMS. The industry's common model joint operating agreement (AIPN) and the COPAS accounting procedures are sold under licence and are taught here by concept only. The public texts this course quotes are government publications: the Norwegian agreement (an unofficial English translation) and the Kenya and Tanzania model contracts. Where a public text leaves a figure blank, as the Kenya model leaves the margin over LIBOR, the engine takes the figure as a required input.
+
+THE TRANSLATION PRINTS WHAT IT PRINTS. The Norwegian Article 9.2 reads "he looses his right to vote" (Norway JOA Art. 9.2); the course quotes it as printed and paraphrases it as the loss of the vote.
+
+THE NORWEGIAN SCALE IS A RESEARCH AND DEVELOPMENT CHARGE. Accounting Agreement Art. 2.2.2 charges the operator's general research and development cost by per cent rates in bands, and Art. 2.2.3 charges corporate management at a flat per cent of annual cost (Norway Accounting Agreement Art. 2.2.3); the engine's `overhead` computes any marginal scale of this shape, with every band and rate a stated input. The printed bands are in NOK million and move each year with the consumer price index from 15 July 2004 (Norway Accounting Agreement Art. 2.2.2); the engine does not index them.
+
+PRINTED FIGURES AND EXACT FIGURES. The World Bank note prints 43 and 57; the engine returns 43.200000 and 56.800000 (section 16). IMF FARI Tables 12 and 13 print whole numbers of an unrounded model; the engine agrees with them within the printed precision. A reason the engine prints rounds money to the cent: the Ekene carry recovery reads, verbatim,
+> 2033: the balance 7267760.62 is recovered with 7267760.62 of the 9400000 available; the carried party receives 11532239.38 of its share 18800000
+and the course quotes that balance as the numeric field at six decimals: 7267760.617882.
+
+A WORKED EXAMPLE THAT DOES NOT ADD UP. OpenOil's book prints "This is calculated by: 0.25 x 49 = 11.75 million dollars" (OpenOil, Oil Contracts: How to read and understand them (version 1, November 2012)). The product of 0.25 and 49 is 12.25 (derived); the printed 11.75 is an arithmetic error, and the validation record keeps the book out of every gate for that reason. A figure copied from a reference text is checked before it is taught.
+
+THE ACT GOVERNS A NAMED CONTRACT. PIA s.85(4) applies to the contract "provided for under section 85 (2) (d)", the concession agreement with a joint venture; its figures are applied only when a call states basis "pia-s85-4" (section 3).
+
+# SECTION 21: Boundaries, rule by rule (owned by Expert m04 l04)
+
+Every rule the engine applies has its own boundary; no single rule covers them all. Each row below was probed by a call on a golden input when this digest was built:
+
+| rule | at the boundary (probed) | engine result |
+| --- | --- | --- |
+| no-call threshold | a forecast EQUAL to the threshold (cc-threshold-exactly: 500.000000) | called (true); one below it is not (false) |
+| zero-forecast month | a forecast of 0 with no threshold (cc-zero-call-month) | called (true); the call is the adjustment alone |
+| negative call | an adjustment above the forecast share | "refund": a negative call; "carry": a call of 0 and the rest carried |
+| reconciliation | the difference of month t | adjusts the call of month t + lag |
+| budget item | an overrun of EXACTLY the tolerance (budget-item-at-tolerance: 5.000000 on 50.000000) | inside (true); 5.500000 is beyond (false) |
+| budget total | an overrun EQUAL to the allowed overrun (budget-norway-pct-holds: 50.000000) | inside (true) |
+| unbudgeted allowance | unbudgeted spend EQUAL to the allowance | inside; one unit above is outside (budget-ekene-allowance-short) |
+| overhead band | a base EXACTLY at a band's upper limit (overhead-band-edge-exact: 1000.000000) | that band only; the next band gets 0.000000 |
+| default interest | cured on the due date (default-cured-on-due-date) | 0 days, 0.000000 interest |
+| grace | cured EXACTLY graceHours after the due date (default-grace-last-hour: 72 hours) | inside the grace (true), no interest; a 71.5-hour grace with 72 hours elapsed is exceeded (true) |
+| monthly compounding | cured on a month anniversary (default-monthly-compound-whole-months) | 2 whole months, 0 remaining days |
+| monthly compounding from a month end | due 2027-01-31 (default-monthly-compound-month-end) | 2 whole months, then 15 days |
+| a consequence | cured ON the trigger date (default-cured-on-trigger-day) | not triggered (false); cured a day later it is (true) |
+| forfeiture, uncured | asOf EQUAL to the trigger date (default-forfeiture-last-day) | not triggered (false); a day later it is (true) |
+| working days | a weekend and stated holidays inside the count (default-working-days-holiday) | five working days from 2027-12-22 end 2028-01-03 |
+| months | three months from 31 January (default-months-end-of-month) | end 2027-04-30, the month end |
+| paid share | paid EQUAL to the share | refused: no default (default-refuse-paid-in-full) |
+| carry recovered exactly | available EQUAL to the balance (carry-recovered-exactly) | recovered that year; one short (carry-one-short) leaves 0.200000 |
+| carry cap | cumulative recovery reaching the cap (carry-cap-exactly-cost: cap 200) | the rest written off that year (20.000000) |
+| premium on the last barrel | a share EQUAL to the balance (nc-premium-last-barrel) | reversion from the next period; the non-consenting party receives 0 that year |
+| premium inside a period | a share above the balance (nc-premium-reverts-mid-year) | the rest of that year's share is the non-consenting party's (200.000000) |
+| net value | deductions above the gross value (nc-two-nonconsenting-deductions-exceed, 2030) | 0, nothing recovered (0.000000) |
+| PIA participation | a target EQUAL to 60 (backin-pia-at-60) | accepted (60.000000); 61 refused |
+| PSC limit on gross | a limit above 100 - royalty | refused (psc-refuse-gross-limit) |
+
+# SECTION 22: What the engine does not compute (owned by Expert m05)
+
+Each item below is taught as a concept only, with where it would come from. None is graded.
+
+| not computed | where it comes from | what the engine does instead |
+| --- | --- | --- |
+| the compensation on an assignment of a defaulter's interest | Norway JOA Art. 9.3 (at most the book value less unpaid contributions) | reports forfeiture as available with the pro rata interests |
+| cover by acquiring the defaulter's share of petroleum | Norway JOA Art. 9.1 | cover in cash, pro rata |
+| interest on cash balances held by the operator | Norway Accounting Agreement Art. 1.2.3 | nothing |
+| the consumer price index adjustment of the overhead bands | Norway Accounting Agreement Art. 2.2.2 | the bands are stated inputs |
+| the expert determination of the unrecovered costs | PIA s.85(4)(e) | the costs are stated inputs |
+| the haircut on disputed amounts | PIA s.311(2)(a)(iii) | nothing |
+| sole risk development and the bar on later entry | Norway JOA Art. 19 | sole risk operations only |
+| a daily-rate or R-factor scale of profit shares | IMF FARI Table 11 and Table 13 (a DROP scale) | takes a stated profit share per year |
+| income tax on a regime that deducts every cost incurred | World Bank Note 8 | tax on the contractor's profit oil (section 19) |
+| cash call debts of NNPC joint ventures and incorporated joint venture companies | PIA s.54(8) and s.65 | nothing; concept only |
+
+WHAT THE ENGINE SAYS IT DOES NOT COMPUTE, in its own bases, verbatim:
+> the cover by acquiring the defaulting party's share of petroleum, and the compensation on an assignment, are reported only
+> the expert determination of the unrecovered costs (s.85(4)(e)); the unrecovered cost figures are stated inputs
+
+A SLIDING SCALE COMPUTED OUTSIDE. When a year states its own contractor share, the engine uses it (psc-fari-table-12 carries the Table 13 shares, 2003 60, 2004 56, 2005 42, 2006 46, 2007 49, 2008 52, 2009 55, 2010 56, 2011 58); the scale that sets each share is the contract's and is worked outside the engine.
+
+# SECTION 23: Size caps and refusals at scale (owned by Expert m06 l02)
+
+| cap | value | stated call over the cap | the engine's message, verbatim |
+| --- | --- | --- | --- |
+| `MAX_PARTIES` | 20 | participatingInterests with 21 parties | parties must have at most 20 entries; got 21 |
+| `MAX_MONTHS` | 600 | cashCalls with 601 months | months must have at most 600 entries; got 601 |
+| `MAX_YEARS` | 100 | carryRecovery with 101 years | years must have at most 100 entries; got 101 |
+| `MAX_ITEMS` | 200 | budgetControl with 201 items | items must have at most 200 entries; got 201 |
+| `MAX_BANDS` | 20 | an overhead scale of 21 bands | scale.operating.bands must have at most 20 entries; got 21 |
+
+A panel stays well inside these caps. The validation record's timing table, run on 2026-09-26 on one machine, prints a 600-month cash call ledger of 20 parties at 152.28 milliseconds (text).
+
+# SECTION 24: Conventions that are choices, and the partner report (owned by Expert m06)
+
+CONVENTIONS THAT ARE CHOICES. Each is the engine's stated choice where no text fixes one; a different choice would move a figure, so each is named in any report that quotes the figure:
+
+| convention | the engine's choice | where it comes from |
+| --- | --- | --- |
+| beneficial and paying interest | beneficial interest is the participating interest; paying interest moves only under a carry | engine convention on Norway JOA Art. 8.1 |
+| carriers pro rata | in proportion to the participating interests of the parties no carry names as carried | engine convention |
+| the reconciliation | the difference of a called month adjusts the call reconciliationLagMonths later; an uncalled month has no difference and is billed in arrears | Norway Accounting Agreement Art. 1.2.1 ("the next request"), with the lag stated |
+| overhead | a marginal scale on the base after the stated exclusions; overhead never in its own base | Norway Accounting Agreement Art. 2.2.2 |
+| the budget tolerance | the lower of the percentage and the amount; an overrun of exactly the tolerance is inside | Norway JOA Art. 12.5 ("by up to", "the lower of") |
+| default interest | from and including the due date to, but excluding, the cure date; simple or compounded monthly as stated | Norway Accounting Agreement Art. 1.2.2; Kenya Model PSC 2015 Art. 6.7 |
+| the cover | by the paying interests of the non-defaulting parties | a stated reading (section 19) |
+| the grace | cured within it: no interest; cured later: interest from the due date | a stated reading (section 19) |
+| the carry uplift | on the opening balance; a year's new carried cost earns none in its own year; recovery at the year end from the same year's entitlement | engine convention |
+| a back-in | the others keep (100 - target) / (100 - current) of their interests and receive the refund in proportion to the interest given up | engine convention |
+| non-consent | the premium on the proportionate share of the cost; reversion inside the payout period | engine convention; Norway JOA Art. 18.12 for the entry base |
+| the PSC tax | on the contractor's profit oil | a stated reading (section 19) |
+| the NPV | year-end flows discounted to the stated base year | the canonical npv of cashflow.ts |
+| money in a reason | rounded to the cent, half away from zero, trailing zeros dropped; every numeric field keeps full precision | engine convention |
+
+WRITING THE PARTNER REPORT names: the licence and its parties (synthetic in this course) with their participating interests; every source applied with its edition and the date read; each carry with its carriers and the paying interests it produces; the cash call terms (lag, negative call rule, threshold) and each month's calls with the engine's reasons; the budget and its tolerances; the overhead scale and exclusions; any default with its dates, interest terms, cover and consequences; each carry recovery with its uplift, recovery share, cap and basis; any back-in with its target, refundable costs and refund form; any sole risk operation with its premium multiple and mode; the PSC terms with the limit base stated; the discount rate and base year beside every NPV; and each reading the figures rest on.
+
+# SECTION 25: Vocabulary this course legislates before a word is written (owned by Associate m01 and Professional m01 and Expert m01)
+
+Six terms in this course carry a narrower meaning than they have in conversation. The rule for each is binding on every lesson, bank question, key truth and panel.
+
+| term | what it can mean elsewhere | the rule here |
+| --- | --- | --- |
+| interest | any interest, including money charged on a loan | always qualified: participating interest, paying interest, beneficial interest or carried interest for a share of the venture; default interest for money charged on a late payment |
+| carry | anything carried | a carried party's cost share paid by its carriers; a pool, a credit or a balance moved to a later period is "carried forward" or "carried to" a named period |
+| recovery | any getting back | always of something named: carry recovery, premium recovery, or cost recovery under a PSC |
+| premium | any extra payment | the stated multiple of a non-consenting party's proportionate share of an operation's cost |
+| cash call | any request for money | the operator's monthly request for advances against a forecast; an adjustment is the difference of an earlier month applied to a later call |
+| overhead | any indirect cost | the operator's charge on a stated scale over a stated base; the Norwegian scale it follows is a research and development and corporate charge |
+
+A FIGURE THAT DEPENDS ON A TERM is quoted with it: a call with its lag and negative call rule; an overrun with its tolerance; an overhead charge with its scale and exclusions; default interest with its rate, method, day basis and grace; a recovery with its uplift and recovery share; a premium with its multiple; a PSC figure with its limit and base; an NPV with its rate and base year.

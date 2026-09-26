@@ -1,0 +1,445 @@
+{
+ "slug": "joa",
+ "prefix": "ec9",
+ "name": "Joint Ventures, Operating Agreements & Cost Recovery",
+ "pathOrder": 74,
+ "module": "economics",
+ "prerequisite": null,
+ "engineCourse": "An ENGINE COURSE: no Suite app. The practicals run in the course's own calculator panels (joa-account-calculator, joa-recovery-calculator, joa-agreement-calculator) over the vendored engine engines/economics/jointVenture.js; the learning page says so plainly. Lead decisions (cat-brief): the same published fee and the same Associate/Professional/Expert certificate ladder as app courses; no Suite bridge mapping; prerequisite null.",
+ "repo": "/root/wt-ec9-nextgen",
+ "branch": "feat/ec9-joa-course",
+ "goldens": [],
+ "goldensNote": "EMPTY BY DECISION, as EC8, SC2, EC7 and D5. The vendored golden test-data/economics/goldens/jointventure_cases.json carries oracle output beside its inputs. The digest reads its INPUTS only and prints the engine's own figures (and asserts every refusal message equals the golden's); naming the golden here would let numsweep resolve a lesson literal against an oracle figure the digest never prints.",
+ "engines": [
+  "engines/economics/jointVenture.js",
+  "engines/economics/cashflow.ts",
+  "engines/economics/afe.js"
+ ],
+ "enginesVendoredAt": "jointVenture.js and its closure vendored sha-identical from petrolord-engines 3ae56e7 (engines PR #270) by vendor_joa.sh (NextGen ef542c2a6): 12 closure paths, 10 new and ledgered in VENDOR.json group ec9-joa-course, 2 already matching the manifest; pin 54cf7c4 unchanged. cashflow.ts is NOT moved: NextGen's blob 92906576c0 is the 3ae56e7 blob (applyPSC and npv source-identical). afe.js is NOT moved: NextGen keeps its older blob f5262a5237 (the 3ae56e7 blob is 52d840d950, the EC5 fdp repairs), and calculatePartnerCosts is source-identical by its exported text; the engine suite passes 187 of 187 against NextGen's copies.",
+ "history": {
+  "position": "THIS COURSE TEACHES NO REPAIR HISTORY. The lead's decisions on the engine (interest method and grace as required inputs, the Kenya clause as printed, the PSC tax reading stated, the Norwegian agreement cited from its Wayback capture) landed before its merge and before any lesson was written; that is provenance."
+ },
+ "regulatoryRule": "Every Act, model contract, accounting agreement and guide taught is named with its edition or gazette date and the date read (2026-09-26), printed in digest section 2 and asserted against the vendored FINDINGS-jointVenture.md. Every quotation is in concepts.json with its citation and is verified against the public text by quote_check.py (the PDFs hash to the sha256 prefix FINDINGS records). The Norwegian agreement (an unofficial English translation, cited from the Wayback capture of 26 May 2024), the Kenya Model PSC 2015, the PIA 2021 gazette, World Bank Briefing Note 8, IMF FARI TNM/16/01, IMF WP/24/89 and OpenOil (CC) are public and quoted with citation; the AIPN model JOA, COPAS and AAPL forms are licensed and never quoted. No legal figure is invented: PIA s.85(4)(a) 60% and s.85(4)(c) development and production only are cited; every contractual rate, tolerance, scale, multiple and share is a required input with no default.",
+ "openReadings": {
+  "PSC tax": "income tax is charged on the contractor's profit oil share, as FARI TNM/16/01 and World Bank Note 8 assume. Never graded: every field bit-identical under reading_psc_tax_all_costs (joa_capstone.mjs, discriminate.mjs).",
+  "grace": "a default cured within the stated grace carries no interest; one cured later carries interest from the due date, as the Kenya Model PSC 2015 Art. 6.7 prints. Never graded: bit-identical under reading_grace_delays_interest.",
+  "cover": "the non-defaulting parties cover in proportion to their paying interests (a carried party pays none). Never graded: bit-identical under reading_cover_by_participating.",
+  "limit base": "a required input with no default (costOilLimitBase), taught as a stated input and no reading."
+ },
+ "scopeSeams": {
+  "ledger arithmetic, discounting and NPV": "OWNED BY the cashflow course; this course imports the canonical npv and applyPSC and refers there.",
+  "fiscal regime design": "OWNED BY the fiscal course (royalty, profit share and tax as design levers).",
+  "the Nigerian fiscal system": "OWNED BY the pia course; this course teaches only the Act's carried interest provision (s.85(4)) and quotes s.85(2) and s.311(2)(a)(iii).",
+  "portfolio choice and the field development plan": "OWNED BY the portfolio and fdp courses."
+ },
+ "namingCollisions": {
+  "interest": "always qualified: participating, paying, beneficial or carried interest; default interest for money charged on a late payment.",
+  "carry": "a carried party's cost share paid by its carriers; a pool, credit or balance is 'carried forward' or 'carried to' a named period.",
+  "recovery": "always of something named: carry recovery, premium recovery, cost recovery (PSC).",
+  "premium": "the stated multiple of a non-consenting party's proportionate share of an operation's cost.",
+  "cash call": "the operator's monthly request for advances; an adjustment is an earlier month's difference applied to a later call.",
+  "overhead": "the operator's charge on a stated scale over a stated base."
+ },
+ "plan": {
+  "state": "FOUNDATION: structure, digest, capstones, fields, precision, truth, panels, learning page, gates, writer briefs. Stops before lessons."
+ },
+ "fieldsDiscrimination": {
+  "idumu_zed_paying_pct": "paying and beneficial swapped, the carry spread over every party, the carry in equal shares, the carry taken in full",
+  "idumu_zed_june_call": "paying and beneficial swapped, the under-call not carried, the carry over every party, the lag two months",
+  "idumu_zed_august_paid": "arrears not billed, the adjustment not carried, paying and beneficial swapped, the threshold dropped",
+  "idumu_budget_allowed_overrun": "the higher of the two, the percentage of the actual total, the reference text's five percent",
+  "idumu_operating_overhead": "exclusions ignored (overhead on the wrong base), each band's rate on the whole base, the whole base at its band's rate, the first band's rate",
+  "idumu_development_overhead": "each band's rate on the whole base, the rate above the bands on the whole base, the first band's rate, the part above the last band dropped",
+  "okwelle_2031_carry_balance": "carry recovered without uplift, uplift on the year's new cost, the recovery share ignored, the carried cost on the paying interest",
+  "okwelle_backin_refund_to_pra": "exploration refunded, the refund on the target interest, bonus, interest and markup refunded, the refund in equal parts",
+  "okwelle_default_interest": "simple interest in place of monthly compounding, the monthly rate as the annual rate, the remaining days dropped, the value date counted",
+  "okwelle_default_cover_oko": "cover in equal shares (default not pro rata), the defaulter left in the cover base, the whole share of the call covered",
+  "okwelle_prb_june_call": "the adjustment not carried, paying and beneficial swapped, the lag one month, a negative call refunded",
+  "okwelle_2032_cost_recovered": "a gross limit applied to revenue after royalty, the opening pool left out, the year's costs recovered whole",
+  "abiama_spb_premium": "premium on the whole cost, premium on the consenting parties' cost (premium on the wrong base), the premium above the cost alone",
+  "abiama_spb_2036_receipt": "reversion a period late, deductions not taken off, premium on the whole cost, premium on the consenting parties' cost",
+  "abiama_buy_in_to_spa": "the buy-in apportioned over 100, premium on the whole cost, the buy-in in equal parts",
+  "abiama_spa_carry_npv": "the NPV a year early, carry recovered without uplift, the entitlement on the paying interest, paying and beneficial swapped",
+  "abiama_2035_government_profit_oil": "a year's own contractor share ignored, a gross limit applied to revenue after royalty, the opening pool left out, the limit base swapped",
+  "abiama_abo_after_forfeiture_pct": "the forfeited interest over every party, in equal parts, to the operator alone"
+ },
+ "openItems": {
+  "ENGINE FINDINGS": "No engine defect found at the foundation. Every refusal golden (78) returns the golden message through the vendored engine (joa_dump.mjs asserts each); the three published PSC checks (World Bank Note 8, IMF FARI Figure 5, Tables 12 and 13) agree at the printed precision; the oracle replays all 18 capstone fields within 5e-07 tolerances (worst 8.94e-02 tolerances, worst relative 1.03e-14).",
+  "readings": "The three stated readings are printed verbatim where each acts; every capstone field is bit-identical under the other side of each (ts_loader.mjs reading_* variants), asserted in joa_capstone.mjs and discriminate.mjs. The limit base is a required input, taught as a stated input and no reading.",
+  "grace start": "FINDINGS leaves one question open for the lead (interest starting after the grace). The engine applies the Kenya clause as printed; no capstone field depends on it (graceHours 0 in both capstone defaults).",
+  "gate adjustments recorded": "gate_typed_literals.py allows '0' and '100' with reasons (a zero named as a count, the whole of an interest in per cent in the engine's stated algebra) and adds EC9 citation shapes (Art., Note, Table, version, a YYYY-MM month, a day of a named month); gate_vocabulary.py replaces the EC8 domestic-price rule with a hidden-default rule and a licensed-text-quoted rule, each with a control; panelCapstoneGuard requires at least one searchable rendering per field (some joa answers collapse to one shape) and 36 in all."
+ },
+ "digest": {
+  "lines": 1742,
+  "sections": 25,
+  "md5": "1af7b2dfe7b70a9585ee8e0c5ba980ca",
+  "sha256": "4477ea6bc48cab4bf16f5736f71ffca40789eec2d0d06b11fa5aba3227b454aa"
+ },
+ "fields": {
+  "count": 18,
+  "sha256": "1f9065fc160c7377d678a887d992d115956f3866f3abcdca7407d803483b8c4c",
+  "keys": [
+   "idumu_zed_paying_pct",
+   "idumu_zed_june_call",
+   "idumu_zed_august_paid",
+   "idumu_budget_allowed_overrun",
+   "idumu_operating_overhead",
+   "idumu_development_overhead",
+   "okwelle_2031_carry_balance",
+   "okwelle_backin_refund_to_pra",
+   "okwelle_default_interest",
+   "okwelle_default_cover_oko",
+   "okwelle_prb_june_call",
+   "okwelle_2032_cost_recovered",
+   "abiama_spb_premium",
+   "abiama_spb_2036_receipt",
+   "abiama_buy_in_to_spa",
+   "abiama_spa_carry_npv",
+   "abiama_2035_government_profit_oil",
+   "abiama_abo_after_forfeiture_pct"
+  ]
+ },
+ "gates": {
+  "structure.py": {
+   "md5": "70ded3462a3022dc981af06cc9670eef",
+   "command": "python3 structure.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PROBLEMS: 0"
+  },
+  "prove_prior_courses.sh": {
+   "md5": "1b595c836e0f09d02b84e9aa6718e8c8",
+   "command": "bash prove_prior_courses.sh",
+   "expected": 0,
+   "exit": 0,
+   "summary": "PRIOR COURSES UNCHANGED: packages/engines differs from origin/main only by the ten ec9-joa-course paths (sha-identical to 3ae56e7) and their ledger entries, with cashflow.ts and afe.js byte-identical; D1 to D5, H1, H3, H"
+  },
+  "scaffold.py --check": {
+   "md5": "a06a2dd758f3a3a0e39dc7c4ef53cb52",
+   "command": "python3 scaffold.py --check",
+   "expected": 0,
+   "exit": 0,
+   "summary": "scaffold: 3 manifests, 0 stubs written, 78 existing lesson files left alone, 0 drift"
+  },
+  "joa_capstone.mjs": {
+   "md5": "2f1bde6141a6413d2e85e981e76693c9",
+   "command": "node joa_capstone.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "joa_capstone: 292 assertions, 0 failed; 3 stated readings, every field bit-identical under each"
+  },
+  "make_fields.mjs": {
+   "md5": "cbd34f7db309ec0c723ed47375d64802",
+   "command": "node make_fields.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "make_fields: 0 field(s) unanswerable at the declared precision"
+  },
+  "make_fields.mjs NEGATIVE CONTROL": {
+   "md5": "cbd34f7db309ec0c723ed47375d64802",
+   "command": "node make_fields.mjs --bare-stated-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "make_fields: 18 field(s) unanswerable at the declared precision"
+  },
+  "oracle_check.py": {
+   "md5": "f1ccc7f84474849d7538556799b3242e",
+   "command": "python3 oracle_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "oracle_check: 18 graded values replayed through the stdlib oracle in 1 s; every chain the oracle's own; worst relative difference 1.03e-14, worst 8.94e-02 tolerances; disagreements: 0"
+  },
+  "oracle_check.py NEGATIVE CONTROL": {
+   "md5": "f1ccc7f84474849d7538556799b3242e",
+   "command": "python3 oracle_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: okwelle_default_interest was moved by ten tolerances; caught"
+  },
+  "make_concepts.py (every quotation found in its text)": {
+   "md5": "8aa719fe8ad3463ed603d41277f7f635",
+   "command": "python3 make_concepts.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "concepts.json: 56 quotations, every one found in its text: {'PIA': 11, 'NOJOA': 14, 'NOAA': 10, 'KENYA': 9, 'WB': 5, 'FARI': 3, 'IMFWP': 2, 'OPENOIL': 2}"
+  },
+  "discriminate.mjs": {
+   "md5": "f4387b1862b036c66d9616d04e69331a",
+   "command": "node discriminate.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "WEAK ROUTES: 0; READING-DEPENDENT: 0"
+  },
+  "discriminate.mjs NEGATIVE CONTROL": {
+   "md5": "f4387b1862b036c66d9616d04e69331a",
+   "command": "node discriminate.mjs --slack-tolerances",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: tolerances multiplied by 1000000000000000. Expected 18 WEAK routes, got 18."
+  },
+  "quote_check.py": {
+   "md5": "3f524d093741abe3bfda2e179ca8afb6",
+   "command": "python3 quote_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "MISMATCHES: 0"
+  },
+  "quote_check.py NEGATIVE CONTROL": {
+   "md5": "3f524d093741abe3bfda2e179ca8afb6",
+   "command": "python3 quote_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: one character of pia_85_2a_psc was altered in memory; caught"
+  },
+  "digestrepro.sh": {
+   "md5": "dc723d03530192367ddc22937fc0c673",
+   "command": "/root/dc-wavekit/digestrepro.sh cat-wip-joa /root/wt-ec9-nextgen",
+   "expected": 0,
+   "exit": 0,
+   "summary": "joa_dump: 1326 label-and-call, measurement and claim assertions run, 0 failed; 25 sections"
+  },
+  "digestprose.mjs": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules cat-wip-joa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] /root/cat-wip-joa/digest.txt: 1742 line(s), 25 section title(s) and 110 in-body marker(s) swept against their blocks, 32 history framings, 13 engine pin(s); 0 warned for a human read and 0 framed as curricu"
+  },
+  "digestprose.mjs --selftest": {
+   "md5": "97dda85819e61737a76d8caf5badb46d",
+   "command": "node /root/dc-wavekit/digestprose.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestprose] selftest OK: the founding heading case is caught by the corrected pairing and missed by the broken one; both real keyword cases fail inside a teaching section; FC3 line 683 WARNS where the keyword family ca"
+  },
+  "digestfigures.py": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py cat-wip-joa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] 0 FAILED, 0 outstanding for a human read (0 sentence(s) cleared by name in wave.json)"
+  },
+  "digestfigures.py --selftest": {
+   "md5": "f3428a1fab68f45527c0a34f8b51f29c",
+   "command": "python3 /root/dc-wavekit/digestfigures.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[digestfigures] selftest OK"
+  },
+  "digestpromise_joa.py": {
+   "md5": "6bf09dc262638985279721aa3bbaad0c",
+   "command": "python3 digestpromise_joa.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 completeness problem(s), all checks applied"
+  },
+  "digestpromise_joa.py NEGATIVE CONTROL": {
+   "md5": "6bf09dc262638985279721aa3bbaad0c",
+   "command": "python3 digestpromise_joa.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a promise of section 99 was planted; caught"
+  },
+  "digestpromise.py --selftest": {
+   "md5": "f22dd5d57795e134faa73d625358eed7",
+   "command": "python3 /root/dc-wavekit/digestpromise.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "negative control: ALL PASS"
+  },
+  "digestleak.py": {
+   "md5": "b03f1c2f90ff332d4f54c55995944634",
+   "command": "python3 /root/dc-wavekit/digestleak.py cat-wip-joa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "=> 0 graded answer(s) reachable from this digest"
+  },
+  "collisions.py": {
+   "md5": "a5636d0b84e634d5fdc0cbfbdb023044",
+   "command": "python3 /root/dc-wavekit/collisions.py cat-wip-joa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "fields checked: 18  fatal collisions: 0  notes: 0"
+  },
+  "gradeprecision.py": {
+   "md5": "1ceee19667cba7d10f293abd0b97f509",
+   "command": "python3 /root/dc-wavekit/gradeprecision.py cat-wip-joa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "[gradeprecision] /root/cat-wip-joa: 18 graded field(s), 18 OF 18 CLASSIFIED against 2 precision clause(s) in the digest header and 2 declared class(es)"
+  },
+  "briefleak.py": {
+   "md5": "2b5acd7c2b4eea5fbcf9ec657684851f",
+   "command": "python3 /root/dc-wavekit/briefleak.py cat-wip-joa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 graded answer(s) reachable from this brief"
+  },
+  "briefcheck.py": {
+   "md5": "4c7fcb25e09b0dd3110a38a1128d3dfb",
+   "command": "python3 /root/dc-wavekit/briefcheck.py cat-wip-joa",
+   "expected": 0,
+   "exit": 0,
+   "summary": "0 figure(s) the digest cannot vouch for. Dates and the leakage-ban conditions are expected here; read the rest."
+  },
+  "gate_capstone_leak.mjs": {
+   "md5": "3a1b16574e5cbda1df359ab5669eb89f",
+   "command": "node gate_capstone_leak.mjs --no-banks",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL value": {
+   "md5": "3a1b16574e5cbda1df359ab5669eb89f",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-value",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-value: expected a [2 values] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL input": {
+   "md5": "3a1b16574e5cbda1df359ab5669eb89f",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-input",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-input: expected a [1 inputs] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL name": {
+   "md5": "3a1b16574e5cbda1df359ab5669eb89f",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-name",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-name: expected a [4 names] finding, caught"
+  },
+  "gate_capstone_leak.mjs NEGATIVE CONTROL lesson": {
+   "md5": "3a1b16574e5cbda1df359ab5669eb89f",
+   "command": "node gate_capstone_leak.mjs --no-banks --plant-lesson",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL --plant-lesson: expected a [10 lessons numeric] finding, caught"
+  },
+  "gate_copy_rule.py": {
+   "md5": "89320d7a96b614e949d737bd401d4d9c",
+   "command": "python3 gate_copy_rule.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "VIOLATIONS: 0"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL": {
+   "md5": "89320d7a96b614e949d737bd401d4d9c",
+   "command": "python3 gate_copy_rule.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in the digest with a rather-than; expected 3 caught, got 3"
+  },
+  "gate_copy_rule.py NEGATIVE CONTROL bank": {
+   "md5": "89320d7a96b614e949d737bd401d4d9c",
+   "command": "python3 gate_copy_rule.py --plant-bank",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a contrastive and a dash were planted in a bank string with an instead-of; expected 3 caught, got 3"
+  },
+  "gate_typed_literals.py": {
+   "md5": "dc060221bf81d418f9f24d09e5ebc251",
+   "command": "python3 gate_typed_literals.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "UNEXPLAINED TYPED NUMBERS: 0"
+  },
+  "gate_typed_literals.py NEGATIVE CONTROL": {
+   "md5": "dc060221bf81d418f9f24d09e5ebc251",
+   "command": "python3 gate_typed_literals.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a typed 4.217 was planted in a printed line; caught 1"
+  },
+  "gate_vocabulary.py": {
+   "md5": "d02934a0a704fd361d0d08039962deb9",
+   "command": "python3 gate_vocabulary.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "exemptions declared: 0, dead: []"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL": {
+   "md5": "d02934a0a704fd361d0d08039962deb9",
+   "command": "python3 gate_vocabulary.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: expected a repair-history framing and an AI claim caught; got ['a repair-history framing', 'an AI claim']"
+  },
+  "gate_vocabulary.py NEGATIVE CONTROL licensed": {
+   "md5": "d02934a0a704fd361d0d08039962deb9",
+   "command": "python3 gate_vocabulary.py --plant-licensed",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a quoted AIPN clause was planted in a lesson line; caught 1"
+  },
+  "truth_check.py": {
+   "md5": "95e787ed2a5f7f7b368855c301575a16",
+   "command": "python3 truth_check.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "truth_check: truth-joa.json (1077 digest lines) IS the harvest of digest.txt"
+  },
+  "truth_check.py NEGATIVE CONTROL": {
+   "md5": "95e787ed2a5f7f7b368855c301575a16",
+   "command": "python3 truth_check.py --plant",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a line was planted in the scratch digest; expected a mismatch, caught"
+  },
+  "numsweep_joa.mjs": {
+   "md5": "0a6dba2c07fed858061a68a2847b764b",
+   "command": "node numsweep_joa.mjs",
+   "expected": "held NOT ONE literal of seven or more significant figures",
+   "exit": 1,
+   "summary": "This gate does not pass on an empty or unreadable sweep.",
+   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+  },
+  "numsweep_joa.mjs --selftest": {
+   "md5": "0a6dba2c07fed858061a68a2847b764b",
+   "command": "node numsweep_joa.mjs --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "numsweep_joa selftest OK"
+  },
+  "lengths.py": {
+   "md5": "4a4c7cfa9590e35eb3d88338471b6a98",
+   "command": "python3 lengths.py",
+   "expected": [
+    "UNDER ITS OWN FLOOR",
+    78
+   ],
+   "exit": 1,
+   "summary": "tiers read: 3  out of band: 80  not written yet: 0",
+   "stage": "foundation: expected to refuse on the 78 stubs for the stated reason"
+  },
+  "lengths.py --selftest": {
+   "md5": "4a4c7cfa9590e35eb3d88338471b6a98",
+   "command": "python3 lengths.py --selftest",
+   "expected": 0,
+   "exit": 0,
+   "summary": "lengths.py selftest OK: a heading counts, a table row does not, a 430 word lesson at fourteen minutes is UNDER its own floor of 500 where a flat 420 floor passed it, and an unwritten lesson is named rather than skipped"
+  },
+  "gate_claims.mjs": {
+   "md5": "0a6e6fe2637afa79bee58d575409d6f1",
+   "command": "node gate_claims.mjs",
+   "expected": 0,
+   "exit": 0,
+   "summary": "FINDINGS: 0"
+  },
+  "gate_claims.mjs NEGATIVE CONTROL": {
+   "md5": "0a6e6fe2637afa79bee58d575409d6f1",
+   "command": "node gate_claims.mjs --plant-a-recon-figure",
+   "expected": 1,
+   "exit": 1,
+   "summary": "NEGATIVE CONTROL: a figure from the recon report was planted in BRIEF.md. Expected it caught and named as a recon figure, got 1."
+  },
+  "gen_course.py (self checks)": {
+   "md5": "b9692fdfd4a57072cda9dbd6f3178c25",
+   "command": "python3 gen_course.py",
+   "expected": 0,
+   "exit": 0,
+   "summary": "gen_course: engine run 18 of 18 fields.json values equal what joa_capstone.mjs returned through /root/wt-ec9-nextgen/packages/engines, every tolerance the one gradedTolerance.js derives; case-file data re-read and equal "
+  }
+ }
+}
