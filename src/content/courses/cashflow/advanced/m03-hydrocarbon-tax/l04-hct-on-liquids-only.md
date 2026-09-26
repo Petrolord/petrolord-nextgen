@@ -1,6 +1,6 @@
 # HCT on liquids only
 
-The hydrocarbon tax has a rate chosen by terrain, licence and reading, and a base that is oil and condensate with gas left out.
+The hydrocarbon tax has a rate set by terrain, licence and lease, and a base that is crude oil and condensate with gas left out.
 
 {{panel:ec-fiscal-explorer}}
 
@@ -14,28 +14,31 @@ deriveHctRate:
 | shallow_water PPL, PIA | 0.150000 |
 | onshore PML marginal pre-2021, PIA | 0.150000 |
 | deep_offshore PML, PIA | 0.000000 |
-| deep_offshore PML, NTA conservative | 0.000000 |
-| deep_offshore PML, NTA aggressive | 0.300000 |
+| deep_offshore PML, NTA, no reading stated | refused |
+| deep_offshore PML, NTA conservative_zero | 0.000000 |
+| deep_offshore PML, NTA aggressive_pml_30 | 0.300000 |
 | deep_offshore PML, NTA custom 12.5 | 0.125000 |
 | frontier, either | 0.000000 |
 | override 20 anywhere | 0.200000 |
 
-On the worked example's chargeable profit of 949369854.24 the rates read: PML 284810956.27 (NPV 135185570.34), PPL 142405478.14 (NPV 277591048.48), override 20 189873970.85 (NPV 230122555.76). The licence alone moves take from 86.1703 percent to 71.6019. The marginal pre-2021 flag does the same thing at the same rate: pia_marginal_field_blend charges 26361776.50 on 175745176.68, which is 0.150000. The framework does not move it: AKATA under force_pia reports the same HCT of 77020493.72 as under nta_2025, and only the TET and levy lines change. Deep offshore under the 2025 framework is a reading, not a rule. pia_deep_offshore_nta_aggressive charges 419659147.53 and reports NPV 449025977.03; the custom 12.5 charges 174857978.14 for 693827146.42; the conservative reading charges 0.00 for 890564331.93. On AKATA the same choice is NPV 141623594.88 against 61725382.46, and the course's own comparison is that the terrain string moves NPV more than an oil price sweep from 82 to 120, which reaches 128984232.18.
+On the worked example's chargeable profit of 952616648.19 the rates read: PML 285784994.46 (NPV 141236909.83), PPL 142892497.23 (NPV 284129407.06), override 20 190523329.64 (NPV 236498574.65). The licence alone moves take from 85.5512 percent to 70.9331. A producing marginal field converted under s.94(1) pays the same 0.150000: pia_marginal_field_blend, run onshore with the marginal flag, charges 24111699.56 on 160744663.71. The framework does not change the rate of a converted shallow-water PML: AKATA reads 0.300000 in every year under force_pia and on auto. Its HCT still differs, 92396680.43 against 91654840.32, because PIA years take the capital allowance as 20, 20, 20, 20 and 19 percent and NTA years as 20 percent a year.
+
+Deep offshore in a PIA year pays nothing: pia_deep_offshore_full, a 2025 year, charges 0.00. In an NTA year the Act brings deep offshore into the tax (NTA s.65(1)) and prints rates only for onshore and shallow water (s.72), so the engine refuses the year until a reading is stated. The same field under force_nta: aggressive_pml_30 charges 426107993.35 for NPV 466664592.02; custom 12.5 charges 177544997.23 for 715227588.14; conservative_zero charges 0.00 for 892772585.37. On AKATA the choice is NPV 136554243.51 against 60060654.75, a swing of about 76 million, most of the 94 million an oil price sweep from 82 to 120 adds (NPV 153901708.13).
 
 ## The base
 
-pia_gas_only_hct_zero sells 20000000.00 Mscf and no liquids for 90000000.00 of gross revenue. Its hct_assessable_profit is 0.00, hct_tax 0.00, and CIT is still 14880000.00 on a cit_chargeable_profit of 49600000.00. NPV 17380000.00. The escape hatch pia_hct_include_gas_revenue true rebuilds the base on the whole revenue: hct_assessable_profit 68600000.00, chargeable 64600000.00, hct_tax 19380000.00, and NPV -2000000.00. Condensate is a liquid: multiyear_pia_real lifts 6000000.00 bbl of oil and 400000.00 bbl of condensate in 2025 and prod_alw_eligible_bbl reads 6400000.00.
+pia_gas_only_hct_zero sells 20000000.00 Mscf and no liquids for 90000000.00 of gross revenue. Its hct_assessable_profit is 0.00, hct_tax 0.00, and CIT is still 15420000.00 on a cit_chargeable_profit of 51400000.00. NPV 18318000.00. The Act taxes crude oil and condensate (PIA s.260(1); NTA s.65(2)), and the engine follows it whatever pia_hct_include_gas_revenue says: pia_gas_only_legacy_hct, the same field with that flag true, prints the same 0.00 and the same NPV. Condensate is a liquid: multiyear_pia_real lifts 6000000.00 bbl of oil and 400000.00 bbl of condensate in 2025 and prod_alw_eligible_bbl reads 6400000.00.
 
-On AKATA the exclusion is visible in the bases. The 2029 hct_assessable_profit is 130971072.31 while cit_assessable_profit is 134762247.64; the gas revenue and its royalty are out of the first, and the NDDC is out of the second. From there the HCT base loses the capital allowance and the production allowance of 5500000.00 to reach hct_chargeable_profit 84742595.49, and the 0.300000 rate gives 25422778.65. A field with 800 scf of gas per barrel pays its hydrocarbon tax on the oil alone.
+On AKATA the exclusion is visible in the bases. The 2029 hct_assessable_profit is 136924208.42 while cit_assessable_profit is 141335497.73; both deduct the NDDC of 7020000.00, but the first leaves out the gas revenue and its royalty and takes the shared costs at the oil share. From there the HCT base loses the capital allowance and the production allowance of 5500000.00 to reach hct_chargeable_profit 90695731.60, and the 0.300000 rate gives 27208719.48. A field with 800 scf of gas per barrel pays its hydrocarbon tax on the oil alone.
 
 ## The mistake
 
-Taxing the whole revenue at 30 percent, which is what the legacy hatch does: on the gas-only case it turns a project worth 17380000.00 into one worth -2000000.00. The other mistake is treating the deep offshore rate as settled. Three readings, three NPVs, and pia_deep_offshore_hct_interpretation is a string somebody chose; the engine's conservative_zero is a default, not a finding.
+Taxing the whole revenue at 30 percent: the gas-only field would carry a hydrocarbon tax it does not owe. The other mistake is treating the deep offshore rate in an NTA year as settled. Three readings give three NPVs, and pia_deep_offshore_hct_interpretation is a string somebody states; the texts leave the question open.
 
 ## What it refuses
 
-The rate does not read water depth or price, and there is no gas rate in the table: gas is not in the base, so there is nothing for a rate to act on unless the hatch is opened. Frontier pays 0.000000 under either framework, whatever its licence.
+The rate does not read water depth or price, and there is no gas rate in the table: gas is not in the base. Frontier pays 0.000000 under either framework, whatever its licence.
 
 ## Exercise
 
-Write the HCT on the worked example at PML, PPL and override 20, and the NPV for each. Then run the gas-only case with and without the hatch and say what base each HCT was charged on.
+Write the HCT on the worked example at PML, PPL and override 20, and the NPV for each. Then run the gas-only case with the flag false and true and say what base each HCT was charged on.
