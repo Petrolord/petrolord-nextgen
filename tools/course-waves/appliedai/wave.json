@@ -82,10 +82,10 @@
  },
  "cleared_claimsNote": "Read by hand: the reliability table prints bin 7 with 3 rows, mean probability 0.723333 and observed frequency 0.000000, and the sentence says exactly that.",
  "digest": {
-  "lines": 1294,
+  "lines": 1332,
   "sections": 24,
-  "md5": "50f9d2728eb0e6c47c02632bcf1735d3",
-  "sha256": "6215305f9dbd0cb69017b8264366204baf3d66842fa9cc448db8d14601135aff"
+  "md5": "3cf3393ace3b3324a01ceb9128632d1d",
+  "sha256": "f382e3b952532f29de4df5891dbc499de2f066bb3119bf6dff0387a2a15ef903"
  },
  "fields": {
   "count": 18,
@@ -187,14 +187,14 @@
    "command": "/root/dc-wavekit/digestrepro.sh dai-wip-appliedai /root/wt-dai-d5-nextgen",
    "expected": 0,
    "exit": 0,
-   "summary": "d5_dump: 1102 label-and-call, measurement and claim assertions run, 0 failed; 24 sections"
+   "summary": "d5_dump: 1128 label-and-call, measurement and claim assertions run, 0 failed; 24 sections"
   },
   "digestprose.mjs": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
    "command": "node /root/dc-wavekit/digestprose.mjs digest.txt --rules dai-wip-appliedai",
    "expected": 0,
    "exit": 0,
-   "summary": "[digestprose] /root/dai-wip-appliedai/digest.txt: 1294 line(s), 24 section title(s) and 108 in-body marker(s) swept against their blocks, 32 history framings, 42 engine pin(s); 0 warned for a human read and 0 framed as c"
+   "summary": "[digestprose] /root/dai-wip-appliedai/digest.txt: 1332 line(s), 24 section title(s) and 116 in-body marker(s) swept against their blocks, 32 history framings, 42 engine pin(s); 0 warned for a human read and 0 framed as c"
   },
   "digestprose.mjs --selftest": {
    "md5": "97dda85819e61737a76d8caf5badb46d",
@@ -348,7 +348,7 @@
    "command": "python3 truth_check.py",
    "expected": 0,
    "exit": 0,
-   "summary": "truth_check: truth-appliedai.json (760 digest lines) IS the harvest of digest.txt"
+   "summary": "truth_check: truth-appliedai.json (785 digest lines) IS the harvest of digest.txt"
   },
   "truth_check.py NEGATIVE CONTROL": {
    "md5": "b20fbb2eb8f9d9c93cd88ee02b448313",

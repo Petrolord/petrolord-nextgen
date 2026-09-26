@@ -554,6 +554,8 @@ table(['passage', 'tokens', 'with the stop list on', 'the three most frequent to
   const top = Object.entries(c).sort((x, y) => y[1] - x[1] || (x[0] < y[0] ? -1 : 1)).slice(0, 3);
   return [id, S(a.count), S(b.count), top.map(([t, n]) => `${t} (${n})`).join(', ')];
 }));
+w();
+w(`EKD-018 in full (fixture), the passage the next sections return to: "${TEXT['EKD-018']}"`);
 const vStop = success('tfidfVectors stop list on', EV.tfidfVectors({ documents: DOCS, stopWords: true }));
 const bStop = success('bm25 stop list on for avgdl', EV.rankBm25({ documents: DOCS, query: 'oil', stopWords: true }));
 w();
@@ -630,6 +632,17 @@ must('the derived oil contribution matches', nearly(h1o.contribution, (h1o.idf *
 w();
 w('THE BM25 IDF IS NEVER NEGATIVE. The Lucene form adds 1 inside the logarithm, so a term in every passage still scores a small positive idf. A term in no passage has no posting and contributes nothing.');
 w();
+const bEk = success('rankBm25 ekene', EV.rankBm25({ documents: DOCS, query: 'ekene', k: 1 }));
+const ekT = bEk.queryTerms[0];
+const robIdf = Math.log((bEk.N - ekT.df + 0.5) / (ekT.df + 0.5));
+must('the Robertson idf of ekene is negative and df > N/2', robIdf < 0 && ekT.df > bEk.N / 2 && ekT.idf > 0, `${ekT.df}/${bEk.N}`);
+must('the Robertson form changes sign at df = N/2 exactly', Math.log((60 - 30 + 0.5) / (30 + 0.5)) === 0 && Math.log((60 - 31 + 0.5) / (31 + 0.5)) < 0 && Math.log((60 - 29 + 0.5) / (29 + 0.5)) > 0, 'sign');
+w(`THE ALTERNATIVE THE ENGINE DID NOT TAKE: THE ROBERTSON IDF, ln((N - df + 0.5) / (df + 0.5)), without the 1 +. Its argument falls below 1, and the idf below 0, exactly when N - df < df, that is when df > N / 2: a word in more than half the passages scores a NEGATIVE idf (at df = N / 2 it is exactly 0). On the corpus, ekene is in ${ekT.df} of the ${bEk.N} passages, so the Robertson form gives ln((${bEk.N} - ${ekT.df} + 0.5) / (${ekT.df} + 0.5)) = ${f6(robIdf)} (derived), where the engine's Lucene idf is ${f6(ekT.idf)}.`);
+w();
+const bh22 = bh.ranking.map((r) => r.score / (KD.K1 + 1));
+must('dropping (k1 + 1) keeps the order', bh22.every((x, i) => i === 0 || x <= bh22[i - 1]), 'order');
+w(`THE (k1 + 1) NUMERATOR. The engine keeps (k1 + 1) in each term's numerator (the Robertson and Zaragoza form, stated in its basis); Lucene 8 and later drop it. For a given k1 the factor is one constant, ${KD.K1 + 1} at k1 ${KD.K1}, so dropping it divides every score by ${KD.K1 + 1} and leaves the order unchanged: on the hand set "${HAND_Q}" would score ${bh.ranking.map((r, i) => `${r.id} ${f6(bh22[i])}`).join(', ')} (derived), in the same order.`);
+w();
 // k1 = 0 and b = 0, the property calls
 const bk0 = success('rankBm25 k1 0', EV.rankBm25({ documents: HAND, query: HAND_Q, k: K, k1: 0 }));
 must('k1 = 0: every score is the sum of the matched terms\' idf', bk0.ranking.every((r) => nearly(r.score, sum(r.terms.map((t) => t.idf)))), 'k1 0');
@@ -686,6 +699,15 @@ const b13 = success('bm25 Q13', EV.rankBm25({ documents: DOCS, query: QTEXT.Q13,
 w(`K1 ON THE CORPUS. Q13 "${QTEXT.Q13}" at k1 ${KD.K1} and k1 ${K1_ALT}:`);
 w();
 table(['rank', `k1 ${KD.K1}: passage`, 'score', `k1 ${K1_ALT}: passage`, 'score'], b13.ranking.map((r, i) => [S(r.rank), r.id, f6(r.score), b13k.ranking[i].id, f6(b13k.ranking[i].score)]));
+const b13all = success('bm25 Q13 every passage', EV.rankBm25({ documents: DOCS, query: QTEXT.Q13, k: DOCS.length }));
+const b13allK = success('bm25 Q13 every passage k1 alt', EV.rankBm25({ documents: DOCS, query: QTEXT.Q13, k: DOCS.length, k1: K1_ALT }));
+const k1Score = Object.fromEntries(b13allK.ranking.map((r) => [r.id, r.score]));
+const fell = b13all.ranking.filter((r) => k1Score[r.id] < r.score);
+must('each top 5 score rises at k1 2', b13.ranking.every((r) => k1Score[r.id] > r.score), 'top5');
+must('some scores below the top 5 fall at k1 2', fell.length > 0 && fell.every((r) => r.rank > K) && fell.some((r) => r.id === 'EKD-008'), fell.map((r) => r.id).join());
+w();
+w(`Each of the five top scores rises at k1 ${K1_ALT}. Below the top ${K} some scores FALL (every passage scored, checked): ${fell.map((r) => `${r.id} ${f6(r.score)} to ${f6(k1Score[r.id])} (tf ${r.terms.map((t) => t.tf).join(', ')}, length ${r.length})`).join('; ')}. Each is longer than the mean passage (${f6(b13all.avgdl)} tokens). From the formula, a term's contribution idf x tf x (k1 + 1) / (tf + k1 x L), with L = 1 - b + b x length / avgdl, rises with k1 when tf > L and falls when tf < L; a term met once in a passage longer than average has tf 1 below L, and in these passages those terms lose more than the others gain. A larger k1 does not raise every score.`);
+must('every passage whose score falls is longer than average', fell.every((r) => r.length > b13all.avgdl), 'long');
 
 /* ============================================================ SECTION 8 */
 
@@ -755,7 +777,7 @@ table(['query', 'relevant judged', `relevant in top ${K}`, 'precision', 'recall'
 const pA14 = eA.perQuery.find((r) => r.query === 'Q14');
 planted(2, pA14.hit === 0 && pA14.nRelevant > 0, JSON.stringify(pA14));
 w();
-w(`Q14 has ${pA14.nRelevant} relevant passages and BM25 retrieves none of them in the top ${K}: hit 0. Q24 has recall null, because no passage is relevant to it. Q10 has precision ${f6(eA.perQuery.find((r) => r.query === 'Q10').precision)} with only ${eA.perQuery.find((r) => r.query === 'Q10').retrieved} passages ranked: precision at ${K} divides by ${K} even when fewer are ranked.`);
+w(`Q14 has ${pA14.nRelevant} relevant passages and BM25 retrieves none of them in the top ${K}: hit 0. Q24 has recall null, because no passage is relevant to it. Q10 has precision ${f6(eA.perQuery.find((r) => r.query === 'Q10').precision)} with only ${eA.perQuery.find((r) => r.query === 'Q10').retrieved} passages ranked: precision at ${K} divides by ${K} even when fewer are ranked. Dividing by the ${eA.perQuery.find((r) => r.query === 'Q10').retrieved} ranked instead would give ${eA.perQuery.find((r) => r.query === 'Q10').relevantRetrieved} / ${eA.perQuery.find((r) => r.query === 'Q10').retrieved} = ${f6(eA.perQuery.find((r) => r.query === 'Q10').relevantRetrieved / eA.perQuery.find((r) => r.query === 'Q10').retrieved)} (derived), which the engine does not compute.`);
 must('Q10 precision divides by 5', eA.perQuery.find((r) => r.query === 'Q10').precision === eA.perQuery.find((r) => r.query === 'Q10').relevantRetrieved / 5, 'p10');
 w();
 w(`THE MEANS OVER QUERIES (the engine's basis: ${eA.basis.mean}). ${eA.nIncluded} of the ${eA.nQueries} queries are included; ${eA.excluded.map((x) => x.query).join(', ')} is excluded (${ref('ap')} gives the rule):`);
@@ -959,6 +981,10 @@ must('macro F1 differs from micro F1', Math.abs(xA.overall.macroF1 - xA.overall.
 w();
 w(`ACCURACY IS INFLATED BY EMPTY CELLS. ${xA.overall.correctEmpty} of system A's ${xA.overall.correct} correct cells are correct because both sides are empty. Precision and recall count filled cells only, which is why they sit beside accuracy.`);
 w();
+const fB = xB.overall.correct - xB.overall.correctEmpty;
+must('B precision and recall on filled cells are the same double', xB.overall.precision === xB.overall.recall && xB.overall.precision === fB / (fB + xB.overall.wrong + xB.overall.unsupported) && xB.overall.recall === fB / (fB + xB.overall.wrong + xB.overall.missed), `${xB.overall.precision} ${xB.overall.recall}`);
+w(`SYSTEM B'S PRECISION AND RECALL ON FILLED CELLS ARE EQUAL: the engine returns the same double for both (checked). ${fB} filled cells are correct; precision divides by the ${fB + xB.overall.wrong + xB.overall.unsupported} cells B filled (${fB} + ${xB.overall.wrong} wrong + ${xB.overall.unsupported} unsupported), recall by the ${fB + xB.overall.wrong + xB.overall.missed} cells the labels filled (${fB} + ${xB.overall.wrong} wrong + ${xB.overall.missed} missed), and ${xB.overall.unsupported} unsupported equals ${xB.overall.missed} missed, so both are ${fB} / ${fB + xB.overall.wrong + xB.overall.missed} = ${f6(xB.overall.precision)}.`);
+w();
 w(`MICRO AND MACRO. Micro pools every cell; macro averages the per-field figures. Every labelled record is scored on every field, so each field has the same ${xA.nRecords} cells and macro accuracy equals micro accuracy by construction (checked for both systems, differences ${eX(xA.overall.macroAccuracy - xA.overall.microAccuracy)} and ${eX(xB.overall.macroAccuracy - xB.overall.microAccuracy)}). F1 counts filled cells, which differ by field, so micro and macro F1 differ: system A ${f6(xA.overall.microF1)} against ${f6(xA.overall.macroF1)}.`);
 w();
 table(['field', 'type', 'A correct', 'A wrong', 'A missed', 'A unsupported', 'A F1', 'B correct', 'B wrong', 'B missed', 'B unsupported', 'B F1'], xA.perField.map((f, i) => { const g = xB.perField[i]; return [f.field, f.type, S(f.correct), S(f.wrong), S(f.missed), S(f.unsupported), f6(f.f1), S(g.correct), S(g.wrong), S(g.missed), S(g.unsupported), f6(g.f1)]; }));
@@ -981,7 +1007,21 @@ planted(21, find('B', 'EKD-013', 'well', 'unsupported') && find('B', 'EKD-029', 
 w();
 must('B EKD-032 is correct on the tolerance and EKD-033 wrong', xB.perRecord.find((r) => r.id === 'EKD-032').fields.oil_rate_bopd.outcome === 'correct' && xB.perRecord.find((r) => r.id === 'EKD-033').fields.oil_rate_bopd.outcome === 'wrong', 'tol');
 const cellOf = (x, id, f) => x.perRecord.find((r) => r.id === id).fields[f];
-w(`System A's "${cellOf(xA, 'EKD-013', 'reservoir_pressure_psia').prediction}" for the label ${cellOf(xA, 'EKD-013', 'reservoir_pressure_psia').label} is correct: a number field reads digits with comma thousands groups. System B's ${cellOf(xB, 'EKD-032', 'oil_rate_bopd').prediction} against ${cellOf(xB, 'EKD-032', 'oil_rate_bopd').label} on EKD-032 is correct: the difference sits on the absTol ${FIELDS.find((f) => f.name === 'oil_rate_bopd').absTol}, the tolerance is inclusive, and the double computes it as ${S(xB.perRecord.find((r) => r.id === 'EKD-032').fields.oil_rate_bopd.difference)}. System B's ${cellOf(xB, 'EKD-033', 'oil_rate_bopd').prediction} against ${cellOf(xB, 'EKD-033', 'oil_rate_bopd').label} on EKD-033 is wrong: the double difference is ${S(cellOf(xB, 'EKD-033', 'oil_rate_bopd').difference)}, above ${FIELDS.find((f) => f.name === 'oil_rate_bopd').absTol}. System B did not return EKD-053 or EKD-056; a labelled record with no prediction is scored as all empty, so its filled labels are missed.`);
+w(`System A's "${cellOf(xA, 'EKD-013', 'reservoir_pressure_psia').prediction}" for the label ${cellOf(xA, 'EKD-013', 'reservoir_pressure_psia').label} is correct: a number field reads digits with comma thousands groups. System B's ${cellOf(xB, 'EKD-032', 'oil_rate_bopd').prediction} against ${cellOf(xB, 'EKD-032', 'oil_rate_bopd').label} on EKD-032 is correct: as written the difference is the absTol ${FIELDS.find((f) => f.name === 'oil_rate_bopd').absTol}, and the double computes it as ${S(xB.perRecord.find((r) => r.id === 'EKD-032').fields.oil_rate_bopd.difference)}, just under it, so this cell is correct whether the tolerance is inclusive or strict. The stated r1 cells below (a difference of 1 on a tolerance of 1, and 3 on 3) are the ones inclusivity decides. System B's ${cellOf(xB, 'EKD-033', 'oil_rate_bopd').prediction} against ${cellOf(xB, 'EKD-033', 'oil_rate_bopd').label} on EKD-033 is wrong: the double difference is ${S(cellOf(xB, 'EKD-033', 'oil_rate_bopd').difference)}, above ${FIELDS.find((f) => f.name === 'oil_rate_bopd').absTol}. System B did not return EKD-053 or EKD-056; a labelled record with no prediction is scored as all empty, so its filled labels are missed.`);
+w();
+const textCells = (x, sname) => x.perRecord.flatMap((r) => Object.entries(r.fields).filter(([f, c]) => FIELDS.find((d) => d.name === f).type === 'text' && c.outcome !== 'correct').map(([f, c]) => [sname, r.id, f, c.label === null ? '(empty)' : S(c.label), c.prediction === null ? '(empty)' : `\`${S(c.prediction)}\``, c.outcome, f6(c.f1)]));
+const TC = [...textCells(xA, 'A'), ...textCells(xB, 'B')];
+must('every text cell carries an f1', xA.perRecord.every((r) => FIELDS.filter((d) => d.type === 'text').every((d) => typeof r.fields[d.name].f1 === 'number')), 'f1');
+w('A TEXT CELL ALSO CARRIES A TOKEN F1 (the SQuAD token F1 of the prediction against the label, \`f1\` on each text cell; a correct text cell has f1 1). Every text cell that is not correct:');
+w();
+table(['system', 'record', 'field', 'label', 'prediction', 'outcome', 'token F1'], TC);
+w();
+const X17f = FIELDS.map((f) => (f.name === 'reservoir_pressure_psia' ? { ...f, relTol: TOL } : f));
+const x17 = success('scoreExtraction B relTol on pressure', EV.scoreExtraction({ labels: LABELS, predictions: PRED.B, fields: X17f }));
+const c17 = x17.perRecord.find((r) => r.id === 'EKD-017').fields.reservoir_pressure_psia;
+const c17o = xB.perRecord.find((r) => r.id === 'EKD-017').fields.reservoir_pressure_psia;
+must('EKD-017 wrong at absTol 0.5, correct with relTol 0.002', c17o.outcome === 'wrong' && c17.outcome === 'correct', c17.outcome);
+w(`A NUMBER FIELD'S TOLERANCE IS ITS OWN SETTING. System B's EKD-017 pressure ${S(c17o.prediction)} against ${S(c17o.label)} is ${c17o.outcome} at the field's absTol ${FIELDS.find((f) => f.name === 'reservoir_pressure_psia').absTol}. Give the field relTol ${TOL} as well and the tolerance becomes max(${FIELDS.find((f) => f.name === 'reservoir_pressure_psia').absTol}, ${TOL} x ${S(c17o.label)}) = ${S(Math.max(FIELDS.find((f) => f.name === 'reservoir_pressure_psia').absTol, TOL * c17o.label))} (derived), and the cell is ${c17.outcome}. Extraction reads only the fields' absTol and relTol; the groundedness check's numericRelTol is a setting of that check, and scoreExtraction never reads it.`);
 w();
 const XT = { labels: [{ id: 'r1', fields: { q: 100, p: 3000 } }, { id: 'r2', fields: { q: 50, p: 1000 } }], predictions: [{ id: 'r1', fields: { q: '101', p: '3,003' } }, { id: 'r2', fields: { q: 50.6, p: 1002.5 } }] }; // stated records
 const xt = success('scoreExtraction tolerances', EV.scoreExtraction({ ...XT, fields: [{ name: 'q', type: 'number', relTol: XT_TOL.qRel }, { name: 'p', type: 'number', absTol: XT_TOL.pAbs, relTol: XT_TOL.pRel }] }));
@@ -1074,6 +1114,12 @@ table(['query', 'A nDCG', 'B nDCG', 'A minus B'], incA.map((r, i) => [r.query, f
 const wins = nA.filter((x, i) => x > nB[i]).length; const losses = nA.filter((x, i) => x < nB[i]).length;
 w();
 w(`A is higher on ${wins} queries, B on ${losses}, and they are equal on ${incA.length - wins - losses} (counted).`);
+const dN = nA.map((x, i) => x - nB[i]);
+const winA = dN.filter((d) => d > 0); const winB = dN.filter((d) => d < 0);
+const q0214 = incA.map((r, i) => [r.query, dN[i]]).filter(([q]) => q === 'Q02' || q === 'Q14').map(([, d]) => -d);
+const q23 = -dN[incA.findIndex((r) => r.query === 'Q23')];
+must('Q02 and Q14 alone are less than A\'s wins; B\'s three wins are more', sum(q0214) < sum(winA) && -sum(winB) > sum(winA) && winB.length === 3 && q23 > 0, `${sum(q0214)} ${sum(winA)} ${-sum(winB)}`);
+w(`THE WINS, SUMMED (derived from the differences above): A's ${winA.length} wins add up to ${f6(sum(winA))}; B's ${winB.length} wins add up to ${f6(-sum(winB))}, and B's lead in the mean comes from that. Q02 and Q14 alone add up to ${f6(sum(q0214))}, less than A's ${winA.length} wins; B's third win, Q23 at ${f6(q23)}, is needed as well. The ${incA.length - wins - losses} equal queries add 0.`);
 w();
 const bA = success('bootstrapMean A nDCG', EV.bootstrapMean({ values: nA, seed: SEED, nBoot: NBOOT }));
 const bB = success('bootstrapMean B nDCG', EV.bootstrapMean({ values: nB, seed: SEED, nBoot: NBOOT }));
@@ -1101,6 +1147,12 @@ const pD = success('bootstrap of differences', EV.bootstrapMean({ values: nA.map
 must('the paired bootstrap equals the bootstrap of the differences with the same seed', pD.lower === pN.lower && pD.upper === pN.upper, `${pD.lower} ${pN.lower}`);
 w();
 w(`Read the rows. The nDCG difference is ${f6(pN.difference)}, and its paired interval runs from ${f6(pN.lower)} to ${f6(pN.upper)}, across 0, as does the AP interval: on these ${incA.length} queries the data do not separate the two systems. The unpaired interval, ${f6(uN.lower)} to ${f6(uN.upper)}, is wider (width ${f6(uN.upper - uN.lower)} against ${f6(pN.upper - pN.lower)}, derived) because it ignores that both systems answered the same queries. The paired result is exactly the bootstrap of the per-query differences on the same seed (checked bit for bit).`);
+w();
+const p2322 = EV.pairedBootstrap({ a: nA, b: nB.slice(0, -1), seed: SEED, nBoot: NBOOT });
+must('23 against 22 is refused', !!p2322.error, JSON.stringify(p2322));
+w(`A PAIR NEEDS BOTH HALVES. Drop one query from B's list, ${nA.length} values against ${nA.length - 1}, and the engine refuses (field \`${p2322.field}\`):`);
+w();
+w(`> ${p2322.error}`);
 w();
 w(`THE SHARE AT OR BELOW 0 is ${f6(pN.shareAtOrBelowZero)} for nDCG: the share of replicates in which A did not beat B. It is a count of replicates, and the engine does not call it a p-value.`);
 w();
@@ -1135,7 +1187,9 @@ w(`The annotators agree on ${f6(kN.observedAgreement)} of the pairs; two raters 
 must('unweighted: 1 - (1-po)/(1-pe)', nearly(kN.kappa, 1 - (1 - kN.observedAgreement) / (1 - kN.expectedAgreement)), kN.kappa);
 w();
 const ks = success('kappa strings', EV.cohenKappa({ a: ['related', 'answers', 'none', 'relevant', 'answers', 'none'], b: ['relevant', 'answers', 'none', 'relevant', 'relevant', 'related'], labels: ['none', 'related', 'relevant', 'answers'], weights: 'linear' }));
-w(`WORDS AS RATINGS. Weighted kappa uses the label positions, so words need their order given: six stated pairs on the labels none, related, relevant, answers, linear weights, kappa ${f6(ks.kappa)}. Without labels the engine refuses (${ref('refusals')}), because sorting the words alphabetically would put "answers" before "none".`);
+const KSA = ['related', 'answers', 'none', 'relevant', 'answers', 'none']; const KSB = ['relevant', 'answers', 'none', 'relevant', 'relevant', 'related'];
+must('the printed word pairs are the ones the engine ran', ks.n === KSA.length && f6(ks.kappa) === f6(EV.cohenKappa({ a: KSA, b: KSB, labels: ['none', 'related', 'relevant', 'answers'], weights: 'linear' }).kappa), 'ks');
+w(`WORDS AS RATINGS. Weighted kappa uses the label positions, so words need their order given: six stated pairs on the labels none, related, relevant, answers, linear weights, kappa ${f6(ks.kappa)}. The six pairs, rater a then rater b: ${KSA.map((x, i) => `${x} and ${KSB[i]}`).join('; ')}. Without labels the engine refuses (${ref('refusals')}), because sorting the words alphabetically would put "answers" before "none".`);
 w();
 const b2a = RA.map((g) => (g >= 2 ? 1 : 0)); const b2b = RB.map((g) => (g >= 2 ? 1 : 0));
 const b1a = RA.map((g) => (g >= 1 ? 1 : 0)); const b1b = RB.map((g) => (g >= 1 ? 1 : 0));
@@ -1175,6 +1229,12 @@ const meanP = P.reduce((a, b) => a + b, 0) / P.length;
 must('ECE is the same at 5, 10 and 15 bins and equals mean p minus the base rate', Math.abs(c5.ece - cal.ece) < 1e-12 && Math.abs(c15.ece - cal.ece) < 1e-12 && Math.abs(cal.ece - (meanP - cal.baseRate)) < 1e-12 && c5.mce !== cal.mce, `${c5.ece} ${c15.ece} ${meanP - cal.baseRate}`);
 must('every non-empty bin is over-confident at 5 and 15 bins too', [c5, c15].every((c) => c.table.every((t) => t.n === 0 || t.meanPredicted > t.observedFrequency)), 'over');
 w(`The Brier score is the same at every bin count (checked): it is a mean over rows and uses no bins. MCE changes with the bins. ECE does not, ON THIS SET: every non-empty bin is over-confident at ${c5.bins}, ${cal.bins} and ${c15.bins} bins alike (checked), so each gap is mean probability minus observed frequency, the weights n_k / N add the bins back together, and ECE comes to the mean probability minus the base rate, ${f6(meanP)} - ${f6(cal.baseRate)} = ${f6(meanP - cal.baseRate)} (derived), whatever the bins. On a set with bins on both sides of the diagonal the gaps no longer add up this way; quote each figure with its bin count.`);
+
+w();
+const cBR = success('calibration every row at the base rate', EV.calibration({ yTrue: Y, probabilities: Y.map(() => cal.baseRate) }));
+const brRow = cBR.table.find((t) => t.n > 0);
+must('one populated bin, its gap tiny and not exactly 0', cBR.table.filter((t) => t.n > 0).length === 1 && cBR.ece > 0 && cBR.ece < 1e-12 && f6(cBR.ece) === '0.000000' && cBR.murphy.resolution === 0, `${cBR.ece}`);
+w(`EVERY ROW GIVEN THE BASE RATE. Give all ${Y.length} Ekene rows the probability ${f6(cal.baseRate)} (stated: the base rate) and every row falls in one bin, whose mean probability the engine returns as ${S(brRow.meanPredicted)} against the observed frequency ${S(brRow.observedFrequency)}. The gap is ${eX(cBR.ece)}, so ECE and MCE print ${f6(cBR.ece)} and ${f6(cBR.mce)} without being exactly 0: rounding in the last bits, printed alike and not equal. RES is ${S(cBR.murphy.resolution)}: one probability for every row resolves nothing.`);
 
 /* ============================================================ SECTION 19 */
 
@@ -1264,6 +1324,12 @@ table(['judgments', 'queries in the means', 'A MAP', 'B MAP', 'A mean nDCG', 'B 
 must('under the second annotator A leads on nDCG', eAJ2.mean.ndcg > eBJ2.mean.ndcg && eB.mean.ndcg > eA.mean.ndcg, 'flip');
 w();
 w(`On the primary grades B has the higher mean nDCG; on the second annotator's, A does. A difference between two systems smaller than the difference between two annotators is not a finding. ${eAJ2.excluded.length ? `Under the second annotator ${eAJ2.excluded.map((x) => x.query).join(', ')} is excluded.` : 'Under the second annotator no query is excluded.'}`);
+const q24two = Object.entries(QS.find((q) => q.id === 'Q24').secondAnnotator).filter(([, g]) => g > 0).sort();
+must('Q24 has relevant passages under the second annotator only', q24two.length > 0 && Object.values(J.Q24).every((g) => g === 0), q24two.join());
+w(`Why no query drops out: Q24, excluded on the primary grades (all 0), has passages the second annotator graded 1 or more (fixture): ${q24two.map(([d, g]) => `${d} ${g}`).join(', ')}; every other passage judged for Q24 is 0 on both.`);
+w();
+must('the two 0.443478 precisions print alike and differ', f6(e3.mean.precision) === f6(eA.mean.precision) && e3.mean.precision !== eA.mean.precision, `${e3.mean.precision} ${eA.mean.precision}`);
+w(`PRINTED ALIKE IS NOT EQUAL. The b ${B_THIRD} run's mean precision and system A's both print ${f6(eA.mean.precision)}; the engine's doubles are ${S(e3.mean.precision)} and ${S(eA.mean.precision)}, which differ in the last bits (difference ${eX(e3.mean.precision - eA.mean.precision)}, derived). They are not a tie, and at six decimals they are no evidence either way.`);
 w();
 const leak = QS.map((q) => success(`leak ${q.id}`, EV.answerMatch({ prediction: q.reference, truth: q.reference })));
 w(`TEST QUESTIONS IN A PROMPT. The reference answers are the key. A system whose instructions or examples contained them would return the key itself, and the engine scores that as ${leak.filter((r) => r.exactMatch).length} exact matches of ${QS.length} (computed: each reference against itself). No score can tell a leaked key from skill, so the judged queries and their references are kept out of every prompt, every example and every fine-tuning set, and a leak is prevented by process: the score cannot detect it.`);
@@ -1302,7 +1368,9 @@ brow('checkGroundedness', 'comma groups', 'exactly three digits after a comma jo
 const mn = EV.checkGroundedness({ answer: PROBE.minus, citations: [], documents: DOCS });
 brow('checkGroundedness', 'minus sign', 'after a space: "-2" is a negative number', 'after a letter or digit: "Ekene-2" is an identifier', mn.claims.length === 1 && mn.claims[0].value === -2, 'minus');
 const dt = EV.checkGroundedness({ answer: PROBE.date, citations: [], documents: DOCS });
-brow('checkGroundedness', 'date', 'YYYY-MM-DD touching no letter or digit is a date', '"2023-01-01x" is read as numbers', dt.claims[0].kind === 'date' && dt.claims.slice(1).every((c) => c.kind === 'number'), 'date');
+const dtNums = dt.claims.filter((c) => c.kind === 'number');
+must('"2023-01-01x" yields the one number 2023', dtNums.length === 1 && dtNums[0].value === 2023, JSON.stringify(dt.claims));
+brow('checkGroundedness', 'date', 'YYYY-MM-DD touching no letter or digit is a date', `"2023-01-01x" is read as numbers: the one number claim ${dtNums[0].value}, each "-01" after a digit being part of an identifier`, dt.claims[0].kind === 'date' && dt.claims.slice(1).every((c) => c.kind === 'number'), 'date');
 const ce = EV.calibration({ yTrue: [0, 1, 0, 1, 1, 0, 1], probabilities: [0.0, 0.1, 0.2, 0.3, 0.7, 0.9, 1.0] });
 brow('calibration', 'bin edge', 'p = i / M opens bin i', 'scikit-learn closes bin i - 1 at that value', ce.table[3].n === 1 && ce.table[2].n === 1, 'edge');
 brow('calibration', 'last bin', 'p = 1 is in bin M - 1 (closed)', 'no bin above it', ce.table[9].n === 2, 'last');

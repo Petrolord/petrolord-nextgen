@@ -3,12 +3,317 @@ from bankkit import emit, finish
 Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
-# D5 Associate exam, the final exam.
-# STUB written by the foundation. The bank writer replaces this comment and
-# adds 42 q(...) calls: q(key_position, prompt, correct, [three distractors],
-# explanation). Every figure is quoted from digest.txt; read BANK_TASK.md.
-# The emit line below writes to a LITERAL path, which the kit's
-# check-bank-sources reads; keep it as it is.
+# D5 Associate exam, the final exam: 42 questions across the six Associate
+# modules (copilots and retrieval, tokens, TF-IDF, BM25, ranking and metrics at
+# k, answers that cite their sources). Every figure is printed in the digest,
+# in sections 1 to 10 and the vocabulary table. The exam asks each module's
+# material from a different angle than that module's bank.
+
+# --- what copilots and retrieval do, the Ekene set, the refusals ---
+
+q(2, "With the stop list off, how large is the vocabulary of the 60 Ekene passages, and how many tokens do they carry?",
+ "574 distinct tokens, over 2299 tokens in all",
+ ["505 distinct tokens, over 2299 tokens in all",
+  "60 distinct tokens, one per passage, over 183 tokens",
+  "318 distinct tokens, the size of scikit-learn's word list, over 574 tokens"],
+ "The corpus carries 2299 tokens, from 16 to 58 a passage with a mean of 38.316667, and 574 distinct tokens. 505 is the vocabulary with the stop list on. 183 is the count of judged (query, passage) pairs, and 318 is the length of the stop list."),
+
+q(0, "How many (query, passage) pairs carry a judged grade in the Ekene set?",
+ "183, pooled from both systems' top 5 plus the assessor's additions",
+ ["All of them, every one of the 60 passages judged for each of the 24 queries",
+  "120, the top 5 of system A for each of the 24 queries",
+  "24, one answering passage per query"],
+ "183 pairs are judged. The pool took every passage in the top 5 of either system, plus passages the assessor added, and left the rest unjudged, where they count as grade 0. Judging every pair, one system alone, or only an answering passage would each give a different set, and Q24 has no answering passage at all."),
+
+q(3, "Who or what wrote the answer texts of systems A and B?",
+ "They are hand-written fixture text, written once and committed",
+ ["A language model at build time, whose output was then frozen into the fixture files for the course",
+  "The engine, which drafts one answer per query from the top 5 passages each time a panel runs",
+  "The assessor who graded the passages, as a byproduct of the judging"],
+ "The answer texts are hand-written fixture text: no model produced them, at build time or at run time, and they stand in for what a copilot returns. The engine writes no answer, and the judged grades are a separate fixture from the answers."),
+
+q(1, "Handed a copilot's cited answer, what work does the engine actually do on it?",
+ "Looking for the answer's numbers, dates and quotes in the passages it cites",
+ ["Deciding whether the answer is true by comparing it with the reference answer for the query",
+  "Asking a second language model whether the answer reads well",
+  "Rewriting any unsupported sentence so that it matches a passage"],
+ "The engine checks a claim by finding it in a passage: it does not decide whether an answer is true, asks no model to judge an answer, and writes no text. Its check reports each claim as supported or unsupported with a reason and leaves the answer as it was."),
+
+q(2, "A documents list holds a passage whose id is an empty string. What is the engine's message?",
+ "documents[0].id must be a non-empty string",
+ ["documents must be a non-empty array of { id, text }",
+  "documents[0].text must be a string",
+  "documents[1].id repeats EKD-001 (documents[0])"],
+ "An empty id is refused on its own, naming `documents[0].id`, in the engine's words \"documents[0].id must be a non-empty string\". The array message is for no documents at all, the text message for a text that is not a string, and the repeat message for an id given twice."),
+
+q(3, "`retrieve` is given a list of queries whose first text is null. Which field does the refusal name?",
+ "queries[0].text",
+ ["query, the single-query field that `rankBm25` uses",
+  "queries",
+  "documents[0].text, the first passage in the corpus the call ranks against"],
+ "When several queries run at once each is checked by position, so a null first text is refused naming `queries[0].text`: \"queries[0].text must be a string\". `query` is the field of a single-query call, the list itself is accepted, and the passages are a separate input."),
+
+q(0, "Which Ekene query has no passage judged above grade 0?",
+ "Q24, \"subsea tree replacement on Ekene-5\"",
+ ["Q14, \"Is Ekene-5 producing water?\", since BM25 retrieves none of its passages",
+  "Q10, \"diesel spill during bunkering\", since only 2 passages match it",
+  "Q02, \"initial oil rate of Ekene-3\", whose top passage is graded 0"],
+ "Q24 has no passage judged above 0 and an empty reference: nothing in the corpus answers it. Q14 has 3 relevant passages that BM25 misses, Q10 has 2 relevant passages, both retrieved, and Q02 has 5 relevant passages although its first-ranked passage is graded 0."),
+
+# --- tokens ---
+
+q(1, "With the stop list switched on, which token leaves `Average reservoir pressure 2,096 psia on 2023-01-01.`?",
+ "on, taking the count from 10 to 9",
+ ["reservoir, the only common word in the sentence",
+  "psia, since unit abbreviations are on scikit-learn's list",
+  "none, since a sentence of figures and units has no stop words at all"],
+ "The sentence gives 10 tokens, average reservoir pressure 2 096 psia on 2023 01 01, and the stop list removes 1: on. reservoir and psia carry meaning and stay, and the sentence does hold a stop word."),
+
+q(3, "`Monthly H2S drill: 0 ppm H2S.` is tokenised. What comes out?",
+ "monthly h2s drill 0 ppm h2s, 6 tokens",
+ ["monthly h 2 s drill 0 ppm h 2 s, 10 tokens, since digits break a word apart",
+  "only monthly drill ppm, since the single character 0 and the codes are dropped as noise",
+  "four tokens, monthly h2s drill ppm, with the repeat and the 0 removed"],
+ "Letters and digits that sit together stay together, so H2S is the one token h2s, and it appears twice; the 0 is a single character and is kept. The text gives 6 tokens. Nothing inside [a-z0-9] is split, nothing is dropped as noise, and repeats are kept."),
+
+q(2, "Where does the engine's stop list come from, and how long is it?",
+ "scikit-learn's ENGLISH_STOP_WORDS, 318 words, BSD-3-Clause",
+ ["A list written for oilfield text, 30 words long, that keeps well and top",
+  "The 574 words of the Ekene vocabulary, marked by hand",
+  "NLTK's English list, which the engine applies by default to every query"],
+ "The engine exports ENGLISH_STOP_WORDS, scikit-learn's list of 318 words under BSD-3-Clause, and leaves it off by default. It is a general English list, which is exactly why it removes well, top, bottom, fire and system, and 574 is the corpus vocabulary."),
+
+q(0, "A passage records the date 2023-01-01. Why does its token list carry 01 twice?",
+ "The date splits at its hyphens into 2023, 01 and 01",
+ ["The passage repeats a well number, and 01 is its code",
+  "01 is the token the engine uses for any empty piece",
+  "The stop list adds 01 as a marker each time it removes a word"],
+ "An ISO date such as 2023-01-01 becomes three tokens, 2023, 01 and 01, because the hyphens separate; a repeated token counts every time. Empty pieces are dropped, never replaced, and the stop list only removes words, and it is off here in any case."),
+
+q(1, "A user searches the Ekene corpus with the query \"2096\" for a pressure written \"2,096 psia\". What goes wrong?",
+ "The passage holds the tokens 2 and 096, so the query token 2096 matches nothing",
+ ["Nothing, since the engine reads 2,096 and 2096 as the same number when it ranks",
+  "The query is refused, since a query made only of digits is not text",
+  "It matches every passage with a 2 or a 0 in it"],
+ "For retrieval the comma separates, so \"2,096\" is indexed as 2 and 096 and the token 2096 finds nothing there. Reading 2,096 as one value is the claim reader's job, a separate rule. A string of digits is still a string and is accepted, and matching is by whole tokens."),
+
+q(3, "In Q02 \"initial oil rate of Ekene-3\", the well number becomes the token 3. How many Ekene passages contain that token?",
+ "19, so the 3 matches passages about other wells as well",
+ ["1, the well report for Ekene-3, since the token is kept tied to its well name",
+  "0, since single-character tokens are dropped before a query is scored",
+  "44, the same as ekene, since the two are always found together in the passages"],
+ "Ekene-3 becomes ekene and 3, and single-character tokens are kept, so the 3 can match any other 3 in a passage: it is in 19 passages. The token carries no link to its well name, and ekene, in 44 passages, is counted on its own."),
+
+q(2, "Which of these words does scikit-learn's stop list remove?",
+ "fire, a word that matters in an HSE note",
+ ["oil, since it appears in most production notes",
+  "pressure, as a very common word in survey passages across the Ekene corpus",
+  "psia, like other units"],
+ "fire is one of the words the list removes that carries meaning in oilfield text, together with well, top, bottom, system, no and not. oil, pressure and psia are not on it: the stated texts keep oil and rate, and pressure and psia, with the list on. The list was written for general English, and it removes common function words and a few others, never domain terms chosen for their frequency in these passages."),
+
+# --- TF-IDF ---
+
+q(1, "d4 is \"Pressure survey: 2,096 psia.\", 5 tokens with norm 4.525864. What weight do pressure, survey, psia and 096 each carry after scaling?",
+ "0.463693, a large share, because the passage has few words",
+ ["0.200000, one fifth each, since the passage has 5 tokens",
+  "2.098612, their idf, since scaling applies only to long passages",
+  "0.374105, the weight every word of d4 carries"],
+ "Each of those four words has count 1 and idf 2.098612, and dividing by the norm 4.525864 gives 0.463693. The token 2 has the lower idf 1.693147 and ends at 0.374105. Scaling divides by the norm, so the weights are not a plain fifth, and every passage with words is scaled, short ones included."),
+
+q(0, "For \"oil rate\" on the hand set, d3 scores the cosine 0.503451. Which products sum to it?",
+ "oil 0.707107 x 0.474658 and rate 0.707107 x 0.237329",
+ ["d1's products, oil 0.707107 x 0.506225 and rate 0.707107 x 0.506225",
+  "The BM25 terms, oil 1.024632 plus rate 0.697974",
+  "Raw counts over length: oil 1.693147 x 2 plus rate 1.693147 x 1, divided by 12"],
+ "The cosine is the dot product of the unit query and passage vectors: d3's oil weight is 0.474658 and its rate weight 0.237329, each times 0.707107. The 0.506225 pair is d1's row, the 1.024632 and 0.697974 pair are d3's BM25 contributions, and the engine never divides by a token count."),
+
+q(3, "On the hand set, why is the df of the token 2 equal to 2?",
+ "It is in d2, from Ekene-2, and in d4, from the 2 of 2,096",
+ ["It appears twice in d2, and df counts every occurrence",
+  "The two dates in the hand set each supply one 2",
+  "The engine assigns df 2 to every single digit"],
+ "df counts passages that contain a token at least once. The 2 comes from Ekene-2 in d2 and from the comma-split 2,096 in d4: two unrelated pieces of text share a token because the engine counts strings. df ignores repeats, and there is no fixed df for digits."),
+
+q(2, "Why does the query \"oil rate\" have the unit vector oil 0.707107, rate 0.707107 on the hand set?",
+ "Each word appears once and both have idf 1.693147, so the two equal weights are scaled to length 1",
+ ["Each weight is the square root of the word's df divided by the number of passages",
+  "A query is always split evenly across its words, whatever their idf, so any two-word query gets these",
+  "Because the two words match d1 equally"],
+ "The query is weighted the same way as a passage: count times idf, then scaled to unit length. Two equal raw weights scaled to length 1 give 0.707107 each. Unequal idfs would give unequal weights, as Q04's query vector shows, and the query vector is built before any passage is compared."),
+
+q(1, "What does `rankTfidf` return besides the top k by cosine?",
+ "The query vector, the terms dropped as outside the vocabulary, and each term's two weights",
+ ["Nothing else, the ranked list of ids is the whole result",
+  "A probability of relevance for every ranked passage",
+  "Each passage's BM25 score, for comparison"],
+ "The function table lists the query vector, the dropped terms and the top k by cosine with each term's query and passage weight, so the working can be printed. A cosine is a score for ranking and never a probability, and BM25 is a separate function."),
+
+q(0, "Q04 ranked by TF-IDF puts EKD-057 fifth at 0.251461. What was it judged?",
+ "Grade 0, judged not relevant to Q04",
+ ["Grade 3, the passage that answers Q04",
+  "Unjudged, since a fifth-place passage is left out of the pool",
+  "Grade 1, related"],
+ "The Q04 list runs EKD-018 (grade 2), EKD-010 (3), EKD-011 (2), EKD-020 (1) and EKD-057 (0). The answering passage is EKD-010, second, and every passage in either system's top 5 was pooled and judged, fifth place included."),
+
+q(3, "Sublinear tf is switched on for TF-IDF. What does it change?",
+ "Each count c becomes 1 + ln c before the idf, so repeats in a passage count for less",
+ ["Each idf becomes its logarithm, so rare words count for less than before",
+  "Every passage vector is scaled to the length of its token count",
+  "BM25's k1 is set to 0"],
+ "Sublinear tf replaces a raw count c by 1 + ln c before the idf is applied, which damps repeated words. The idf formula is untouched, the unit-length scaling is unchanged, and the switch belongs to TF-IDF alone; BM25's saturation is set by its own k1."),
+
+# --- BM25 ---
+
+q(2, "Why is avgdl 7.400000 on the hand set, when d1 to d4 hold 10, 10, 12 and 5 tokens?",
+ "The empty d5 counts in the mean with length 0, so the total is divided by 5",
+ ["Only the passages that match the query count, and d4 is skipped",
+  "avgdl is fixed by the engine at a default for any small corpus",
+  "The lengths are counted with the stop list on"],
+ "avgdl is the mean token count over all 5 passages, and d5 counts in the mean with length 0. Every passage counts whether or not it matches, avgdl is computed from the corpus, and the stop list is off, so the lengths are the full token counts."),
+
+q(1, "What happens to BM25's length term for a passage of exactly average length?",
+ "dl / avgdl is 1, so the bracket 1 - b + b dl / avgdl is 1 whatever b is",
+ ["The passage is marked down by b, since average length is the threshold for a penalty",
+  "Its score is 0",
+  "It is marked up by k1"],
+ "With dl equal to avgdl the bracket is 1 - b + b, which is 1 for any b, so average length neither helps nor hurts. A longer passage makes the bracket bigger and its contribution smaller, a shorter one the opposite, and k1 sets saturation."),
+
+q(3, "At k1 1.2 with b 0, why is a passage that says oil nine times not scored nine times as high as one that says it once?",
+ "Each extra repeat adds less, so a word said many times is not rewarded in proportion",
+ ["The contribution doubles with each doubling of tf, as in TF-IDF on raw counts",
+  "The later repeats add more, since the idf is applied again at each repeat of the word",
+  "Length normalisation, since b is 0"],
+ "The ratio climbs toward k1 + 1 = 2.2 with diminishing steps: one extra mention lifts the ratio from 1.000000 to 1.375000, while four more lift it only from 1.774194 to 1.941176. That is saturation. It does not double, the idf is applied once per term, and b = 0 removes length from the score."),
+
+q(0, "Q13 at b 0 has EKD-006 (56 tokens) fourth and EKD-002 (58 tokens) fifth. Where are they at the default b 0.75?",
+ "Out of the top 5, once length counts",
+ ["Still fourth and fifth, since b changes scores and leaves membership alone",
+  "First and second, since longer passages gain from length normalisation",
+  "Tied at the cutoff with EKD-027"],
+ "At b 0 length plays no part and the long passages EKD-006 and EKD-002 hold places 4 and 5; at b 0.75 the top 5 is EKD-029, EKD-030, EKD-028, EKD-027 and EKD-037, so both drop out. Length normalisation marks long passages down, and the tie at the cutoff belongs to the b 0 list."),
+
+q(2, "Why does EKD-003, the passage that answers Q02, score only 4.084216 and rank fourth by BM25?",
+ "It has neither rate nor initial, and at 56 tokens it is the longest of the five",
+ ["Its grade 3 is subtracted from its score to keep the ranking blind",
+  "It mentions oil only once",
+  "Its idf for oil is lower than every other passage's"],
+ "EKD-003 matches oil, of, ekene and 3 but not the two heaviest query words, rate and initial, and its 56 tokens mark every contribution down. BM25 never reads the grades, EKD-003 has oil twice, and an idf belongs to the word across the corpus, the same for every passage."),
+
+q(1, "What does \"a repeated query word counts once\" correspond to in the Okapi BM25 family?",
+ "The query-frequency factor with k3 = 0, treating the query as a set of words",
+ ["The Lucene idf with the 1 added inside the logarithm",
+  "Setting b to 0, which removes the passage length from the score entirely, whatever the query",
+  "k1 = 0, at which each repeat in the passage scores its idf alone"],
+ "Okapi's k3 weights a query word by how often the query repeats it; the engine keeps the distinct query terms, which is k3 = 0, and says so in its basis. The Lucene idf, b and k1 act on the passage side, on rarity, length and repeats in the passage."),
+
+q(3, "On the hand set, d3 holds rate once. What does rate contribute to d3's BM25 score for \"oil rate\"?",
+ "0.697974",
+ ["0.875469, its idf, since tf 1 always contributes exactly the idf",
+  "1.095514",
+  "0.506225, the rate weight TF-IDF gives the word"],
+ "d3's row reads oil: 2, 1.024632; rate: 1, 0.697974. At tf 1 the fraction (k1 + 1) / (1 + k1 (1 - b + b dl / avgdl)) equals 1 only when that bracket is 1, and d3 is longer than average, so rate contributes less than its idf. 1.095514 is rate in d1 with tf 2, and 0.506225 is a TF-IDF weight in d1."),
+
+q(0, "Q02's query word of says nothing about the question. Why does it still earn EKD-043 a contribution of 1.537842?",
+ "It is in only 19 of the 60 passages, so its idf is 1.140459, and EKD-043 uses it twice",
+ ["BM25 gives every word the same weight",
+  "of is on the stop list, and stop words are weighted up when the list is off",
+  "EKD-043 is graded 3 for Q02"],
+ "BM25 matches words and knows nothing of meaning: of is in 19 passages and has idf 1.140459, a sizeable weight, and EKD-043's \"rate of penetration\" uses it twice. Weights differ by idf, the stop list is off and adds no weight, and EKD-043 is graded 0."),
+
+# --- ranking and metrics at k ---
+
+q(1, "Q06 is ranked by BM25 at k 5. What does the engine report about ties?",
+ "Four passages tie, EKD-001, EKD-003, EKD-005 and EKD-006, and tieAtCutoff is true",
+ ["No ties, since only duplicate texts can share a score",
+  "A tie between EKD-046 and EKD-058, the duplicated spill note",
+  "Two passages tie, and the engine keeps both by stretching the list to 6"],
+ "Q06 by BM25 at k 5 ties [[\"EKD-001\",\"EKD-003\",\"EKD-005\",\"EKD-006\"]] and tieAtCutoff is true. Different texts can tie, the spill-note twins belong to Q10, and a list is never stretched: the id ascending decides and the flag reports it."),
+
+q(3, "Across the 24 queries at k 5, where does each method report a tie at the cutoff?",
+ "BM25 on Q01, Q06, Q17 and Q22, TF-IDF on Q22",
+ ["Nowhere, since k 5 is wide enough to hold every tie",
+  "BM25 on Q10 alone, from the twin spill notes",
+  "TF-IDF on every query, since cosines are rounded"],
+ "The engine reports a tie at the cutoff on Q01, Q06, Q17 and Q22 by BM25 and on Q22 by TF-IDF. The Q10 twins tie at ranks 1 and 2 of a list of 2, so the cut does not fall between them at k 5, and cosines are compared by the 12-digit key, never rounded to six decimals."),
+
+q(0, "By TF-IDF, EKD-046 and EKD-058 both score 0.464024 on Q10. How are they ordered?",
+ "EKD-046 first, by the id ascending, with the two reported as tied",
+ ["EKD-058 first, since TF-IDF breaks ties by the newer passage",
+  "In input order, since the tie rule applies to BM25 only and cosines keep the order given",
+  "Only one is kept, since duplicate texts are merged"],
+ "The ranking rule is the same for both methods: equal 12-digit keys tie and the id ascending decides, so EKD-046 comes first and the engine reports [[\"EKD-046\",\"EKD-058\"]]. No method prefers a newer passage, input order is never used, and each id is ranked once."),
+
+q(2, "At k 5, relevant at grade 1 or more, what are the two systems' mean precisions over the included queries?",
+ "System A 0.443478, system B 0.434783",
+ ["A at 0.673188, B at 0.658696",
+  "0.880435 for A, 0.923913 for B",
+  "B 1.000000 and A 0.956522"],
+ "Mean precision at 5 is 0.443478 for system A and 0.434783 for system B. 0.673188 and 0.658696 are the mean recalls, 0.880435 and 0.923913 the MRRs, and 0.956522 and 1.000000 the hit rates, each over the 23 included queries."),
+
+q(1, "System B's hit rate at 5 is 1.000000 and system A's 0.956522. What accounts for A's shortfall?",
+ "A misses every relevant passage on Q14, the lexical trap, so one included query scores hit 0",
+ ["A retrieves fewer than 5 passages on several queries",
+  "Q24 is counted for A and excluded for B",
+  "A's list for Q10 holds only 2 passages"],
+ "Hit rate is the mean hit over the 23 included queries, and system A scores hit 0 only on Q14, where BM25 retrieves none of the 3 relevant passages. Q24 is excluded for both systems by the same rule, and Q10's short list still holds both relevant passages, so its hit is 1."),
+
+q(3, "Every one of Q04's 4 relevant passages lands in system A's top 5. Which pair is right for that query?",
+ "Precision 0.800000, recall 1.000000",
+ ["Recall 0.800000 with precision 1.000000",
+  "Both 1.000000, since every relevant passage was found",
+  "0.800000 for each of the two"],
+ "Precision is 4 relevant in the top 5 over 5, 0.800000, and recall is 4 found over 4 relevant judged, 1.000000. Swapping them confuses the denominators: precision divides by k and recall by the relevant judged, and finding every relevant passage fills recall while the fifth place holds a passage below the threshold, which keeps precision below 1."),
+
+q(0, "System A on Q15: the top relevant passage sits second, and 2 of the 3 relevant passages make the list. Which pair gives its reciprocal rank and recall?",
+ "0.500000 and 0.666667",
+ ["1.000000 and 0.666667",
+  "0.500000 and 0.400000, the precision",
+  "0.333333 and 0.500000"],
+ "Reciprocal rank is 1 / 2 for a first relevant passage at rank 2, and recall is 2 found over 3 relevant judged, 0.666667. 0.400000 is Q15's precision, 2 over 5, and a first relevant rank of 2 cannot give a reciprocal rank of 1.000000."),
+
+q(2, "In the stated ranking c, a, x, b, d, how many unjudged passages were retrieved, and how is it graded?",
+ "1, the passage x, which counts as grade 0",
+ ["0, since every retrieved passage is judged by pooling",
+  "2, x and e, both unjudged",
+  "1, the passage x, which is dropped from the list before scoring"],
+ "x is the one retrieved passage that nobody judged, and unjudged documents count as grade 0. e was judged grade 2 and not retrieved, so it is neither unjudged nor in the list, and the engine drops no passage from a ranking before it scores it."),
+
+q(1, "What does every mean in this tier state beside its value so that it can be reproduced?",
+ "Its cutoff, its relevance threshold and the queries left out, such as Q24",
+ ["Only the method, since the cutoff and threshold are fixed by the engine",
+  "The number of passages in the corpus, and nothing else",
+  "The date the queries were run"],
+ "A retrieval metric is quoted with its cutoff and threshold, and a mean with the queries excluded and why: for example MRR at 5, relevant at grade 1 or more, 23 of 24 queries, Q24 excluded. k and relevantGrade are settings with defaults the caller can change, and the result depends on them."),
+
+# --- answers that cite their sources ---
+
+q(3, "Of system A's 22 answers that make at least one claim, how many are fully supported?",
+ "20, with Q06 and Q13 each carrying one unsupported claim",
+ ["22, since every cited passage was retrieved",
+  "24, counting the two answers with no claim as fully supported",
+  "47, one for every supported claim in the whole answer set"],
+ "20 of the 22 answers with a claim are fully supported; the Q06 answer has 20.3 and the Q13 answer has 2025 unsupported. A citation being retrieved does not make every figure found, Q14 and Q24 have no claim and a null fraction, and 47 counts claims."),
+
+q(0, "The stated hand-set answer cites d1 and d4. For which of its claims does the engine's reason say the figure appears in no passage of the corpus?",
+ "45 and -2",
+ ["The date 2023-01-01 and the quote \"water injection\"",
+  "120 and 2,096, the two figures it was given",
+  "Only 45"],
+ "45 and -2 are in none of the five hand-set passages, so each reason ends \"it appears in no passage of the corpus\". The date and the quote are in d2, retrieved and not cited, and their reasons name d2; 120 and 2,096 are supported in d1 and d4. The minus in -2 follows a space, so it is a negative number and a claim."),
+
+q(1, "System A's Q10 answer cites both EKD-046 and EKD-058. How does the check fare on it?",
+ "Its 2 claims are both supported, a fraction of 1.000000",
+ ["It is flagged, since citing two copies of one note is refused",
+  "Each claim counts twice, once per copy, giving 4 claims",
+  "One citation is flagged notRetrieved, since only one copy can be retrieved"],
+ "The Q10 answer makes 2 claims and both are found, so its supported fraction is 1.000000 with no flags. Citing both copies is allowed, a claim counts once however many passages hold it, and both twins were in system A's retrieved list."),
+
+q(2, "An answer states the same figure twice. How many claims does the check count?",
+ "Two, since every occurrence is a claim",
+ ["One, since repeated figures are merged before checking",
+  "None, since a repeat marks the figure as a quote",
+  "Two only when the figures cite different passages"],
+ "The claim basis ends \"every occurrence is a claim\", so a figure stated twice is checked twice and counts twice in the fraction. Figures are never merged, quotes are spans in double quotes, and the count does not depend on citations."),
 
 emit(Q, '/root/dai-wip-appliedai/banks/d5b_exam.json', expect_n=42)
 finish()

@@ -4,11 +4,115 @@ Q=[]
 def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
 
 # D5 Professional m06, Comparing Two Systems.
-# STUB written by the foundation. The bank writer replaces this comment and
-# adds 15 q(...) calls: q(key_position, prompt, correct, [three distractors],
-# explanation). Every figure is quoted from digest.txt; read BANK_TASK.md.
-# The emit line below writes to a LITERAL path, which the kit's
-# check-bank-sources reads; keep it as it is.
+# Every figure is quoted from digest.txt: per-query nDCG at 5 (linear gain,
+# grade 1 or more) on the 23 included queries, and the engine's seeded
+# bootstrap at seed 7, 2000 replicates, level 0.95 unless a question states
+# otherwise. No capstone name, id, query, answer or value appears.
+
+q(2, "Per-query nDCG at 5, linear gain, on the 23 included queries: on how many is A higher, on how many is B higher, and on how many are they equal?",
+ "A higher on 7, B on 3, equal on 13",
+ ["A higher on 3, B on 7 and equal on 13, B having the higher mean",
+  "A higher on 10 and B on 13, each equal query going to the higher mean",
+  "An even split, 12 against 11, since the two means lie so close together"],
+ "The course counts the per-query differences: 7 queries favour A, 3 favour B and 13 are equal. B still has the higher mean, which is why the count of wins and the mean must be read together. An equal query goes to nobody, and a close mean says nothing about how the wins are spread.")
+
+q(0, "B's mean nDCG at 5 is the higher, a difference A minus B of -0.001384, although A wins more queries. What explains it?",
+ "B's three wins, led by Q02 at -0.472652 and Q14 at -0.310738, outweigh A's seven",
+ ["B's mean takes in Q24, where A's nDCG comes back null while B's counts",
+  "Each of A's seven wins is smaller than 0.001384, too small to move the mean",
+  "The mean weights each query by how many relevant judged passages it holds"],
+ "The mean difference is the sum of the 23 per-query differences over 23, and the 13 equal queries add 0, so a negative mean says B's three wins add up to more than A's seven. Q02 and Q14 carry most of B's total and Q23 at -0.055152 makes up the rest. Q02 and Q14 are two queries where BM25's word matching failed: EKD-043's rate of penetration outranks the answer on Q02, and Q14 is the lexical trap. Q24 is excluded for both systems. A's wins include Q15 at 0.363114 and Q20 at 0.197904, far above 0.001384. The mean over queries is an arithmetic mean with every query weighted alike.")
+
+q(3, "At seed 7, 2000 replicates and level 0.95, the paired interval for the nDCG difference, A minus B, runs from -0.068015 to 0.058726. What is the reading?",
+ "It crosses 0, so on these 23 queries the data do not separate the two systems",
+ ["B is the better system, since the observed difference of -0.001384 sits below 0",
+  "The two systems are shown to be equal, since the interval contains 0",
+  "B beats A on the share 0.511000 of the 23 queries, just over half of them"],
+ "An interval that spans 0 means the data cannot say which system is ahead; a sign on a difference this small settles nothing. Containing 0 is also no proof of equality: it is an absence of separation. 0.511000 is the share of the 2000 replicates at or below 0, a count of replicates and no count of queries.")
+
+q(1, "The unpaired interval for the same difference runs from -0.133554 to 0.128297, width 0.261851 against the paired 0.126741. Why is it wider?",
+ "It ignores that both systems answered the same queries, so query difficulty stays in",
+ ["Fewer replicates are drawn for it, so its percentiles come out noisier than the paired ones",
+  "A different seed drives it, and a seed names the result it produces",
+  "Its bounds add the standard errors 0.051501 and 0.046104 straight in"],
+ "Query-to-query variation is shared by both systems and cancels in each pair; the unpaired draw leaves it in, and the interval roughly doubles. Both rows use seed 7 and 2000 replicates. The two single-system standard errors belong to the bootstrap of each mean and are never added into a difference's bounds.")
+
+q(0, "The share at or below 0 for the paired nDCG difference is 0.511000. What is it?",
+ "The share of the 2000 replicates in which A did not beat B",
+ ["The chance B is better on queries not yet seen",
+  "A p-value for the hypothesis that the two systems are equal",
+  "The share of the 23 queries on which B scored at least as high as A"],
+ "The basis: \"the share of replicates with a difference at or below 0 (a does not beat b in that replicate)\". It is a count of replicates, and the engine does not call it a p-value or a probability about unseen queries. The query count is different: B scores at least as high as A on 16 of the 23 queries, which is no share of replicates.")
+
+q(3, "On seed 8 the paired nDCG interval is -0.063543 to 0.055562; on seed 7 it is -0.068015 to 0.058726. What should a reader take from this?",
+ "The bounds move with the seed while the reading holds, so quote seed, replicates and level",
+ ["One of the two seeds must be wrong, since a bootstrap has one right interval for its data",
+  "Seed 8 is the better estimate to report, since its interval is the narrower of the two",
+  "The seeds should be averaged bound by bound, giving the interval the engine ought to report"],
+ "Each seed gives its own exact result, and both intervals cross 0, so the conclusion stands. A seed and a replicate count name a bootstrap result, which is why a figure is quoted with its seed, its replicate count and its level. Neither seed is wrong or better, and averaging seeds is no rule the engine states.")
+
+q(2, "How does the engine label the lower bound of a level 0.95 bootstrap interval on A's mean nDCG?",
+ "\"2.5th percentile of the bootstrap mean\", a parameter percentile",
+ ["A lower confidence limit on the true mean nDCG, as a textbook would name it",
+  "\"97.5th percentile of the bootstrap mean\", the tail counted from the top",
+  "\"5th percentile of the bootstrap mean\", as 0.95 leaves 0.05 below"],
+ "Each bound is a percentile of the bootstrap distribution of a statistic and is labelled as one. The platform keeps P labels for outcomes, so none appears here. At level 0.95 the tails are 0.025 and 0.975, so the lower bound is the 2.5th percentile; 97.5th is the upper label. The 5th percentile label belongs to level 0.9, where 0.05 is split across two tails.")
+
+q(1, "Seed 7, 2000 replicates, level 0.95: A's mean nDCG has bounds 0.653604 and 0.852644, B's 0.666871 and 0.847238. What do these two intervals settle about A against B?",
+ "Little: they overlap almost entirely, and the comparison is the paired difference",
+ ["B is the better system, since both its bounds sit inside A's interval",
+  "A is the better system, since its upper bound of 0.852644 is the higher",
+  "They show that the two systems are equal, since overlapping intervals prove exactly that"],
+ "Each interval describes one system's mean. Comparing two systems is a question about their difference, which the paired bootstrap answers by drawing the same queries for both. A narrower interval inside a wider one says B's mean varies less, which is no ranking, and overlap proves no equality.")
+
+q(3, "The paired bootstrap of AP at 5 (grade 1 or more), seed 7, 2000 replicates, level 0.95, gives a difference A minus B of 0.007271 and bounds -0.054879 and 0.064758. What follows?",
+ "The interval crosses 0, so AP does not separate the systems either",
+ ["A is the better retriever, since the difference is above 0",
+  "AP and nDCG contradict each other, their differences having opposite signs",
+  "B is better, since the share at or below 0 is 0.418500, below one half"],
+ "Like the nDCG interval, the AP interval spans 0, so neither score separates the two systems on these 23 queries. The opposite signs of two small differences are no contradiction when both intervals cross 0. A share of replicates below one half names no winner; it is no test.")
+
+q(0, "A bootstrapMean call gives values, nBoot and level but no seed. What happens?",
+ "A refusal naming seed, an input with no default in this engine",
+ ["Draws from the clock and prints the seed it picked in its basis block",
+  "Falls back to seed 7, the course's teaching seed, as a default",
+  "An unseeded generator samples, so the interval varies by run"],
+ "The seed is a required input: the bootstrap is the only random draw in the engine, and it is seeded so that a seed and a replicate count name its result exactly. There is no default seed and no unseeded draw, so the call is refused with the field named: \"seed must be a whole number from 0 to 4294967295\".")
+
+q(2, "Which interval levels does the engine's bootstrap accept?",
+ "0.8, 0.9, 0.95 and 0.99; any other level is refused",
+ ["Any level strictly between 0 and 1, with 0.95 as the default",
+  "Only 0.9, 0.95 and 0.99, since 0.8 is too wide to report",
+  "Any level from 0.8 to 0.99 in steps of 0.01, each labelled"],
+ "The engine accepts exactly four levels, and a level of 0.5 draws \"level must be 0.8, 0.9, 0.95 or 0.99\". A fixed list keeps every percentile label a well-formed ordinal. 0.95 is the default, and 0.8 is one of the four.")
+
+q(1, "pairedBootstrap receives 23 values for A and 22 for B. What happens, and what can the engine not check?",
+ "It refuses the unequal lengths, and it cannot see equal lists given in different query orders",
+ ["Pads B with a 0 at the end, pairs the two lists by position and records the padding in its basis",
+  "B is paired with A's first 22 values, and a warning notes that A's last value went unmatched",
+  "Refuses it, and also checks that both lists name the same queries in the same order as each other"],
+ "The engine pairs by position and refuses lists of different length, as in its message for three values against two: \"b must have 3 values, one per value of a (the same queries in the same order)\". The values carry no query ids, so two lists of equal length in different orders pair the wrong queries silently; keep both in query order. Nothing is padded or truncated.")
+
+q(3, "A write-up reports a paired bootstrap comparison. Which settings must it name so that a reader can reproduce the result?",
+ "Seed, replicate count, level and whether the draw was paired",
+ ["Only the level, as seed and replicate count move just the last digit",
+  "The seed alone, since a seed fixes every other setting of the draw",
+  "Replicate count and level, the seed being an implementation detail"],
+ "The course's report names the comparison with its seed, replicate count, level and whether it was paired. The seed changes the bounds (seed 8 gives -0.063543 to 0.055562), the replicate count and level change them too, and the paired and unpaired intervals differ by about a factor of two.")
+
+q(0, "Across the Professional scores, how does an honest write-up read systems A and B?",
+ "Retrieval does not separate them; on answers A leads on every check",
+ ["B wins overall, since its MRR and its mean nDCG are both the higher",
+  "A wins retrieval, since its MAP at grade 1 is the higher of the two",
+  "They tie on every score once the planted defects are set aside"],
+ "MAP favours A at grade 1 and B at grade 2, mean nDCG favours B by 1.38e-3, and both paired intervals cross 0, so retrieval is not separated. On answers the checks agree: exact matches 20 against 13 of 24, mean token F1 0.921507 against 0.712004, micro F1 0.966825 against 0.895238 and pooled support 0.959184 against 0.731707. The planted defects are part of the fixture and stay in the scores.")
+
+q(1, "How does the engine draw each replicate of the paired bootstrap on the 23 included queries?",
+ "23 query positions with replacement from one mulberry32(7) stream, averaging a - b there",
+ ["23 positions for A and a separate 23 positions for B, each drawn from a stream of its own",
+  "All 23 queries each time, shuffled into a new order, averaging a - b",
+  "One query per replicate, whose difference is kept as that replicate"],
+ "The basis: each replicate draws 23 query positions with replacement, index floor(u x 23) with u from one mulberry32(7) stream, and averages a - b at those positions, so both systems see the same queries. Separate draws would be the unpaired comparison. Shuffling without replacement would return the same mean every time, and one query per replicate is no mean of 23.")
 
 emit(Q, '/root/dai-wip-appliedai/banks/d5i_m06.json', expect_n=15)
 finish()

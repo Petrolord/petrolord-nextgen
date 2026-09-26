@@ -326,6 +326,8 @@ COUNTING TERMS. A passage's length for BM25 is its token count after the stop li
 | EKD-018 | 44 | 31 | the (5), pressure (3), 01 (2) |
 | EKD-030 | 43 | 39 | 0 (4), bopd (4), ekene (4) |
 
+EKD-018 in full (fixture), the passage the next sections return to: "Static pressure survey on 2023-01-01: average reservoir pressure 2,096 psia at the datum, close to the 2000 psia bubble point, with cumulative field oil of 261,475 stb. The waterflood started the same day to hold pressure above the bubble point."
+
 With the stop list on, the corpus vocabulary is 505 tokens (against 574) and the mean passage length 27.483333 (against 38.316667).
 
 # SECTION 6: TF-IDF: counts, the smoothed idf, unit vectors and the cosine (owned by Associate m03)
@@ -443,6 +445,10 @@ Derived check on d1's oil term: idf 0.875469 x 2 x (1.2 + 1) / (2 + 1.2 x (1 - 0
 
 THE BM25 IDF IS NEVER NEGATIVE. The Lucene form adds 1 inside the logarithm, so a term in every passage still scores a small positive idf. A term in no passage has no posting and contributes nothing.
 
+THE ALTERNATIVE THE ENGINE DID NOT TAKE: THE ROBERTSON IDF, ln((N - df + 0.5) / (df + 0.5)), without the 1 +. Its argument falls below 1, and the idf below 0, exactly when N - df < df, that is when df > N / 2: a word in more than half the passages scores a NEGATIVE idf (at df = N / 2 it is exactly 0). On the corpus, ekene is in 44 of the 60 passages, so the Robertson form gives ln((60 - 44 + 0.5) / (44 + 0.5)) = -0.992129 (derived), where the engine's Lucene idf is 0.315385.
+
+THE (k1 + 1) NUMERATOR. The engine keeps (k1 + 1) in each term's numerator (the Robertson and Zaragoza form, stated in its basis); Lucene 8 and later drop it. For a given k1 the factor is one constant, 2.2 at k1 1.2, so dropping it divides every score by 2.2 and leaves the order unchanged: on the hand set "oil rate" would score d1 0.995921, d3 0.783003 (derived), in the same order.
+
 K1 = 0 scores each matched term at its idf alone, whatever its count: d1 1.750937, d3 1.750937, each the sum of its matched terms' idf (checked).
 
 SATURATION AND K1. Six stated passages, "oil" repeated 1, 2, 3, 5 and 9 times and one passage "gas", scored for "oil" with b = 0 so that length plays no part (k1 = 1.2, idf 0.241162):
@@ -494,6 +500,8 @@ K1 ON THE CORPUS. Q13 "Ekene-6 water cut at the end of 2025" at k1 1.2 and k1 2:
 | 3 | EKD-028 | 7.982142 | EKD-028 | 8.074363 |
 | 4 | EKD-027 | 6.818244 | EKD-027 | 7.327155 |
 | 5 | EKD-037 | 6.222042 | EKD-037 | 6.469637 |
+
+Each of the five top scores rises at k1 2. Below the top 5 some scores FALL (every passage scored, checked): EKD-008 2.323039 to 2.306499 (tf 1, 1, 3, 1, length 51); EKD-038 2.016546 to 2.004142 (tf 1, 1, 1, 1, length 41); EKD-010 1.977177 to 1.964366 (tf 1, 1, 2, 1, length 47); EKD-042 1.515275 to 1.505954 (tf 1, 1, 1, length 41). Each is longer than the mean passage (38.316667 tokens). From the formula, a term's contribution idf x tf x (k1 + 1) / (tf + k1 x L), with L = 1 - b + b x length / avgdl, rises with k1 when tf > L and falls when tf < L; a term met once in a passage longer than average has tf 1 below L, and in these passages those terms lose more than the others gain. A larger k1 does not raise every score.
 
 # SECTION 8: The ranking: score order, the twelve-digit tie rule and a tie at the cutoff (owned by Associate m05 and Expert m05 l02)
 
@@ -584,7 +592,7 @@ SYSTEM A (BM25) ON EVERY QUERY, k 5, relevant at grade 1 or more:
 | Q23 | 2 | 2 | 0.400000 | 1.000000 | 1 | 1 | 1.000000 |
 | Q24 | 0 | 0 | 0.000000 | null | 0 | null | 0.000000 |
 
-Q14 has 3 relevant passages and BM25 retrieves none of them in the top 5: hit 0. Q24 has recall null, because no passage is relevant to it. Q10 has precision 0.400000 with only 2 passages ranked: precision at 5 divides by 5 even when fewer are ranked.
+Q14 has 3 relevant passages and BM25 retrieves none of them in the top 5: hit 0. Q24 has recall null, because no passage is relevant to it. Q10 has precision 0.400000 with only 2 passages ranked: precision at 5 divides by 5 even when fewer are ranked. Dividing by the 2 ranked instead would give 2 / 2 = 1.000000 (derived), which the engine does not compute.
 
 THE MEANS OVER QUERIES (the engine's basis: arithmetic mean over the included queries: mrr is the mean reciprocal rank, map the mean average precision, hitRate the mean hit). 23 of the 24 queries are included; Q24 is excluded (section 11 gives the rule):
 
@@ -879,6 +887,8 @@ A CELL is one field of one record: 30 records x 6 fields = 180 cells. System A r
 
 ACCURACY IS INFLATED BY EMPTY CELLS. 73 of system A's 175 correct cells are correct because both sides are empty. Precision and recall count filled cells only, which is why they sit beside accuracy.
 
+SYSTEM B'S PRECISION AND RECALL ON FILLED CELLS ARE EQUAL: the engine returns the same double for both (checked). 94 filled cells are correct; precision divides by the 105 cells B filled (94 + 7 wrong + 4 unsupported), recall by the 105 cells the labels filled (94 + 7 wrong + 4 missed), and 4 unsupported equals 4 missed, so both are 94 / 105 = 0.895238.
+
 MICRO AND MACRO. Micro pools every cell; macro averages the per-field figures. Every labelled record is scored on every field, so each field has the same 30 cells and macro accuracy equals micro accuracy by construction (checked for both systems, differences 1.11e-16 and 2.22e-16). F1 counts filled cells, which differ by field, so micro and macro F1 differ: system A 0.966825 against 0.942735.
 
 | field | type | A correct | A wrong | A missed | A unsupported | A F1 | B correct | B wrong | B missed | B unsupported | B F1 |
@@ -915,7 +925,25 @@ EVERY CELL THAT IS NOT CORRECT, with the engine's reason:
 | B | EKD-056 | well | Ekene-1 | (empty) | missed | the label has a value and the prediction is empty |
 | B | EKD-056 | event | core plug | (empty) | missed | the label has a value and the prediction is empty |
 
-System A's "3,038" for the label 3038 is correct: a number field reads digits with comma thousands groups. System B's 45.25 against 45.2 on EKD-032 is correct: the difference sits on the absTol 0.05, the tolerance is inclusive, and the double computes it as 0.04999999999999716. System B's 64.7 against 64.6 on EKD-033 is wrong: the double difference is 0.10000000000000853, above 0.05. System B did not return EKD-053 or EKD-056; a labelled record with no prediction is scored as all empty, so its filled labels are missed.
+System A's "3,038" for the label 3038 is correct: a number field reads digits with comma thousands groups. System B's 45.25 against 45.2 on EKD-032 is correct: as written the difference is the absTol 0.05, and the double computes it as 0.04999999999999716, just under it, so this cell is correct whether the tolerance is inclusive or strict. The stated r1 cells below (a difference of 1 on a tolerance of 1, and 3 on 3) are the ones inclusivity decides. System B's 64.7 against 64.6 on EKD-033 is wrong: the double difference is 0.10000000000000853, above 0.05. System B did not return EKD-053 or EKD-056; a labelled record with no prediction is scored as all empty, so its filled labels are missed.
+
+A TEXT CELL ALSO CARRIES A TOKEN F1 (the SQuAD token F1 of the prediction against the label, `f1` on each text cell; a correct text cell has f1 1). Every text cell that is not correct:
+
+| system | record | field | label | prediction | outcome | token F1 |
+| --- | --- | --- | --- | --- | --- | --- |
+| A | EKD-038 | event | casing | `casing run` | wrong | 0.666667 |
+| A | EKD-044 | event | near miss | `near-miss` | wrong | 0.000000 |
+| B | EKD-003 | well | Ekene-3 | `Ekene 3` | wrong | 0.000000 |
+| B | EKD-005 | well | Ekene-5 | `Ekene 5` | wrong | 0.000000 |
+| B | EKD-013 | well | (empty) | `Ekene-1` | unsupported | 0.000000 |
+| B | EKD-026 | date | 2024-03-01 | `2024-09-01` | wrong | 0.000000 |
+| B | EKD-040 | event | losses | `lost circulation` | wrong | 0.000000 |
+| B | EKD-053 | date | 2025-04-08 | (empty) | missed | 0.000000 |
+| B | EKD-053 | event | water treatment | (empty) | missed | 0.000000 |
+| B | EKD-056 | well | Ekene-1 | (empty) | missed | 0.000000 |
+| B | EKD-056 | event | core plug | (empty) | missed | 0.000000 |
+
+A NUMBER FIELD'S TOLERANCE IS ITS OWN SETTING. System B's EKD-017 pressure 2230 against 2226 is wrong at the field's absTol 0.5. Give the field relTol 0.002 as well and the tolerance becomes max(0.5, 0.002 x 2226) = 4.452 (derived), and the cell is correct. Extraction reads only the fields' absTol and relTol; the groundedness check's numericRelTol is a setting of that check, and scoreExtraction never reads it.
 
 A TOLERANCE IS INCLUSIVE, |prediction - label| <= max(absTol, relTol x |label|). Two stated records, q with relTol 0.01 and p with absTol 2 and relTol 0.001:
 
@@ -1019,6 +1047,7 @@ TWO SYSTEMS ON THE SAME QUERIES. Both systems answered the same 23 included quer
 | Q23 | 0.944848 | 1.000000 | -0.055152 |
 
 A is higher on 7 queries, B on 3, and they are equal on 13 (counted).
+THE WINS, SUMMED (derived from the differences above): A's 7 wins add up to 0.806717; B's 3 wins add up to 0.838542, and B's lead in the mean comes from that. Q02 and Q14 alone add up to 0.783390, less than A's 7 wins; B's third win, Q23 at 0.055152, is needed as well. The 13 equal queries add 0.
 
 THE BOOTSTRAP OF A MEAN (the engine's basis, verbatim): 2000 replicates of 23 values drawn with replacement (index floor(u x 23), u from one mulberry32(7) stream, replicate by replicate); each replicate's statistic is its mean. Interval: lib/stats quantile at 0.025 and 0.975 of the 2000 replicates (idx = nBoot x p on the sorted values: idx not whole takes the ceil(idx)-th smallest, idx whole with nBoot even the mean of the idx-th and (idx+1)-th, idx whole with nBoot odd the (idx+1)-th); a percentile interval of a statistic, labelled as parameter percentiles, never P-labels; standardError is the SD of the replicates with divisor nBoot - 1.
 
@@ -1036,6 +1065,10 @@ THE PAIRED BOOTSTRAP (the engine's basis, verbatim): 2000 replicates; each draws
 | AP at 5, paired | 0.007271 | -0.054879 | 0.064758 | 0.030704 | 0.418500 |
 
 Read the rows. The nDCG difference is -0.001384, and its paired interval runs from -0.068015 to 0.058726, across 0, as does the AP interval: on these 23 queries the data do not separate the two systems. The unpaired interval, -0.133554 to 0.128297, is wider (width 0.261851 against 0.126741, derived) because it ignores that both systems answered the same queries. The paired result is exactly the bootstrap of the per-query differences on the same seed (checked bit for bit).
+
+A PAIR NEEDS BOTH HALVES. Drop one query from B's list, 23 values against 22, and the engine refuses (field `b`):
+
+> b must have 23 values, one per value of a (the same queries in the same order)
 
 THE SHARE AT OR BELOW 0 is 0.511000 for nDCG: the share of replicates in which A did not beat B. It is a count of replicates, and the engine does not call it a p-value.
 
@@ -1070,7 +1103,7 @@ THE TWO ANNOTATORS on all 183 judged pairs (rater a the primary grades, rater b 
 
 The annotators agree on 0.721311 of the pairs; two raters labelling at random with these same row and column totals would agree on 0.336708. Kappa rescales the first against the second: unweighted 0.579841. Weighted kappa counts a disagreement of one grade as less serious than one of three: linear 0.675940, quadratic 0.771549. 40 of the 51 disagreements are one grade apart (counted from the table), so the weighted figures are higher.
 
-WORDS AS RATINGS. Weighted kappa uses the label positions, so words need their order given: six stated pairs on the labels none, related, relevant, answers, linear weights, kappa 0.608696. Without labels the engine refuses (section 3), because sorting the words alphabetically would put "answers" before "none".
+WORDS AS RATINGS. Weighted kappa uses the label positions, so words need their order given: six stated pairs on the labels none, related, relevant, answers, linear weights, kappa 0.608696. The six pairs, rater a then rater b: related and relevant; answers and answers; none and none; relevant and relevant; answers and relevant; none and related. Without labels the engine refuses (section 3), because sorting the words alphabetically would put "answers" before "none".
 
 AGREEMENT ON THE RELEVANT/NOT DECISION. Reduce each grade to relevant (1) or not (0) at a threshold (derived ratings): at grade 1 or more, kappa 0.634430 (observed agreement 0.814208); at grade 2 or more, kappa 0.794115 (observed agreement 0.928962). The threshold a metric uses is also a threshold the annotators have to agree on.
 
@@ -1113,6 +1146,8 @@ THE BIN COUNT IS A CHOICE. The same rows at 5, 10 and 15 bins:
 | 15 | 0.168382 | 0.209300 | 0.750000 | 0 |
 
 The Brier score is the same at every bin count (checked): it is a mean over rows and uses no bins. MCE changes with the bins. ECE does not, ON THIS SET: every non-empty bin is over-confident at 5, 10 and 15 bins alike (checked), so each gap is mean probability minus observed frequency, the weights n_k / N add the bins back together, and ECE comes to the mean probability minus the base rate, 0.399300 - 0.190000 = 0.209300 (derived), whatever the bins. On a set with bins on both sides of the diagonal the gaps no longer add up this way; quote each figure with its bin count.
+
+EVERY ROW GIVEN THE BASE RATE. Give all 200 Ekene rows the probability 0.190000 (stated: the base rate) and every row falls in one bin, whose mean probability the engine returns as 0.1900000000000001 against the observed frequency 0.19. The gap is 1.11e-16, so ECE and MCE print 0.000000 and 0.000000 without being exactly 0: rounding in the last bits, printed alike and not equal. RES is 0: one probability for every row resolves nothing.
 
 # SECTION 19: Decomposing the Brier score: reliability, resolution, uncertainty and the within-bin terms; the bin-edge rule; log loss (owned by Expert m03)
 
@@ -1181,6 +1216,9 @@ A SECOND ANNOTATOR AS A CHECK. The same runs scored against the second annotator
 | second annotator | 24 | 0.551119 | 0.542743 | 0.718064 | 0.701037 |
 
 On the primary grades B has the higher mean nDCG; on the second annotator's, A does. A difference between two systems smaller than the difference between two annotators is not a finding. Under the second annotator no query is excluded.
+Why no query drops out: Q24, excluded on the primary grades (all 0), has passages the second annotator graded 1 or more (fixture): EKD-023 1, EKD-033 2, EKD-037 1; every other passage judged for Q24 is 0 on both.
+
+PRINTED ALIKE IS NOT EQUAL. The b 0.4 run's mean precision and system A's both print 0.443478; the engine's doubles are 0.4434782608695653 and 0.44347826086956527, which differ in the last bits (difference 5.55e-17, derived). They are not a tie, and at six decimals they are no evidence either way.
 
 TEST QUESTIONS IN A PROMPT. The reference answers are the key. A system whose instructions or examples contained them would return the key itself, and the engine scores that as 24 exact matches of 24 (computed: each reference against itself). No score can tell a leaked key from skill, so the judged queries and their references are kept out of every prompt, every example and every fine-tuning set, and a leak is prevented by process: the score cannot detect it.
 
@@ -1203,7 +1241,7 @@ Every rule has its own boundary; none is global. Each row below is probed by two
 | `scoreExtraction` | empty | null, absent or a blank string is empty | "the" is a value (it normalises to nothing) |
 | `checkGroundedness` | comma groups | exactly three digits after a comma join the number | four digits: "12,1234" reads as "12" and "1234" |
 | `checkGroundedness` | minus sign | after a space: "-2" is a negative number | after a letter or digit: "Ekene-2" is an identifier |
-| `checkGroundedness` | date | YYYY-MM-DD touching no letter or digit is a date | "2023-01-01x" is read as numbers |
+| `checkGroundedness` | date | YYYY-MM-DD touching no letter or digit is a date | "2023-01-01x" is read as numbers: the one number claim 2023, each "-01" after a digit being part of an identifier |
 | `calibration` | bin edge | p = i / M opens bin i | scikit-learn closes bin i - 1 at that value |
 | `calibration` | last bin | p = 1 is in bin M - 1 (closed) | no bin above it |
 | `cohenKappa` | expected disagreement | above 0: a kappa | 0: null with the reason |
