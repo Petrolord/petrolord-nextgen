@@ -1,0 +1,21 @@
+-- ============================================================================
+-- SC2 ASSOCIATE DEEP SEED: Procurement, Tendering & Contracting, beginner tier.
+--
+-- Six modules, 26 lessons, 132 questions (15 per module bank plus a 42
+-- question final exam). The structure row is GENERATED from the tier's
+-- manifest.json rather than hand typed, and the question rows from the
+-- committed bank JSONs under tools/course-banks/procurement/beginner.
+--
+-- What this tier owns: TWO ENVELOPES, BY HAND. What a tender evaluation
+-- decides and the sources with their editions and read dates; mandatory
+-- requirements, weights, the technical percentage and the pass mark;
+-- arithmetic correction with the unit rate prevailing and a misplaced decimal
+-- point; the evaluated cost with its discount, deviations, omissions at the
+-- average and the completion-time adjustment; the combined score; the ranking,
+-- its tie-break and every exclusion. Digest sections 1 to 10, and section 25.
+--
+-- AN ENGINE COURSE. There is no Suite app: the practicals run in the course's
+-- own envelope calculator. The Associate capstone grades six Associate
+-- quantities and grades no life-cycle cost, no content figure and no contract
+-- comparison.
+-- ============================================================================

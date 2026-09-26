@@ -1,0 +1,167 @@
+[
+ {
+  "prompt": "The well services tender is rated high procurement risk with an estimated cost of US$900000. Which para 5.50 cell does weightingBand return, and what range?",
+  "options": [
+   "The cell a range, 0.500000 to 0.800000, since every high-risk contract falls in that cell of the matrix",
+   "Low-value cell d, 0.200000 to 0.300000, since a contract of that size is low value under para 5.50",
+   "Cell b, a Rated Criteria weighting from 0.600000 to 1.000000",
+   "Cell c, from 0.100000 to 0.400000, a high-value cell"
+  ],
+  "answer": 2,
+  "explanation": "High risk and an estimated cost below US$10 million give cell b: \"High/Substantial Procurement Risk and Low Value, Rated Criteria weighting between 60% and 100%\". Cell a is high risk and high value. Cells c and d are the Moderate/Low rows, and the risk here is high, so neither applies."
+ },
+ {
+  "prompt": "Which pair of settings gives the narrowest weighting range of the four cells?",
+  "options": [
+   "Moderate or low risk with a low-value contract, cell d at 0.200000 to 0.300000",
+   "High risk with a low-value contract, cell b at 0.600000 to 1.000000",
+   "High risk and high value, cell a, as both conditions pull inward",
+   "Moderate or low risk with a high-value contract, cell c at 0.100000 to 0.400000"
+  ],
+  "answer": 0,
+  "explanation": "The engine returns cell d as 0.200000 to 0.300000, a width of a tenth. Cell c runs 0.100000 to 0.400000, cell a 0.500000 to 0.800000 and cell b 0.600000 to 1.000000, all of them wider."
+ },
+ {
+  "prompt": "An evaluator passes risk as 'medium' to weightingBand. What comes back?",
+  "options": [
+   "Cell c or d, as the engine maps medium onto the Moderate/Low row",
+   "The two cells for both rows side by side, with a note asking the evaluator to choose between them",
+   "A refusal naming estimatedCostUsd, as risk is then read from the cost",
+   "A refusal: \"risk must be 'high' (High/Substantial) or 'low' (Moderate/Low)\""
+  ],
+  "answer": 3,
+  "explanation": "The engine accepts two words only and maps the Regulations' four ratings onto them: High or Substantial is high, Moderate or Low is low. Any other word is refused by the field risk with the message in the key. It returns no cell for an unknown word and never guesses a row."
+ },
+ {
+  "prompt": "Moderate or low risk, an estimated cost of US$900000, and a stated technical weight of 0.35. What does weightingBand return?",
+  "options": [
+   "Inside the band, since 0.35 sits within the range 0.100000 to 0.400000 of cell c for that risk",
+   "Outside the band, with the reason that misapplying the matrix may lead to misprocurement (Annex X para 3.4)",
+   "A refusal, because a technical weight outside its cell is an input error the engine will not score",
+   "Inside the band, as the band limits only the upper end and 0.35 is below the 0.6 of cell b"
+  ],
+  "answer": 1,
+  "explanation": "Low risk and low value give cell d, 0.200000 to 0.300000. The engine returns within band false with the reason \"technical weight 0.35 is outside the range 0.2 to 0.3; misapplication of the matrix may lead to misprocurement (Annex X para 3.4)\". That is a result with a reason. Cell c is the high-value row and does not apply at US$900000, and a lower end binds as firmly as an upper one."
+ },
+ {
+  "prompt": "Under moderate or low risk, what separates a contract estimated at exactly US$10000000 from one at US$9999999?",
+  "options": [
+   "Both sit in cell d, as high value begins only above US$10 million",
+   "Both sit in cell c, since the engine rounds an estimated cost to the nearest million first",
+   "The first is high value in cell c; the second is low value in cell d",
+   "The first is refused on the line; the second goes to cell d"
+  ],
+  "answer": 2,
+  "explanation": "Every cell rule ends \"high value means an estimated cost at or above US$10 million\", and HIGH_VALUE_USD is 10000000. At exactly that figure the contract is high value (cell c, 0.100000 to 0.400000); a dollar less is low value (cell d, 0.200000 to 0.300000). Nothing is rounded and a figure on the line is placed by the \"at or above\" rule."
+ },
+ {
+  "prompt": "High risk, US$12000000, and a stated technical weight of 0.5, the lower end of cell a. What does the engine say?",
+  "options": [
+   "\"technical weight 0.5 is inside the range 0.5 to 0.8\"",
+   "Outside, because a technical weight has to sit strictly above the lower end of its range",
+   "That the weight is on the line and must be stated to more decimals before a cell can judge it",
+   "Cell b's range applies instead, so 0.5 is read against 0.6 to 1 for this contract"
+  ],
+  "answer": 0,
+  "explanation": "Both ends of a range are inside. The engine returns within band true with the reason quoted in the key. Cell b is the low-value row and does not apply to US$12000000, and the engine has no rule asking for more decimals."
+ },
+ {
+  "prompt": "An evaluator hands weightingBand a technical weight of 1.2. What does the engine return?",
+  "options": [
+   "The cell and its range, with within band false and a reason naming the misprocurement risk",
+   "The cell with the weight clipped to 1, so a high-risk low-value contract still reads as inside",
+   "A result reading the weight as 12 percent of the combined score, which is placed in cell c",
+   "A refusal: \"technicalWeight must be a number from 0 to 1\""
+  ],
+  "answer": 3,
+  "explanation": "A weight outside zero to one is refused by the field technicalWeight before any cell is compared with it. Within band false is what a valid weight outside its range returns, as 0.35 does in cell d. The engine does not clip or rescale a weight."
+ },
+ {
+  "prompt": "On the four responsive well services bids (Cmin 862141, Cmax 957990), WS2's evaluated cost is 885574.000000. What commercial score does it get under each price method?",
+  "options": [
+   "75.552171 by the lowest ratio and 97.353920 by the linear method, which gives the full 100 to Cmin only",
+   "97.353920 by the lowest ratio and 75.552171 by the linear method",
+   "97.353920 by both methods, since WS2 sits between Cmin and Cmax and each method draws a straight line",
+   "90.970882 by the lowest ratio and 84.430357 by the linear method, taken off the combined column"
+  ],
+  "answer": 1,
+  "explanation": "The lowest ratio is Sc = 100 x Cmin / C, giving 97.353920. The linear method is Sc = 100 x (Cmax - C) / (Cmax - Cmin), giving 75.552171. 90.970882 and 84.430357 are WS2's combined scores B at technical weight 0.7 with the relative technical method, where the question asks for Sc."
+ },
+ {
+  "prompt": "At technical weight 0.7 with the relative technical method, the well services award goes to WS3 under the lowest-ratio price method. What happens under the linear method, with nothing else changed?",
+  "options": [
+   "WS3 stays, since only the technical weight can move an award",
+   "WS2 becomes most advantageous, since it gains the most from the stretched commercial scale",
+   "WS1 becomes most advantageous at 87.162020, since the linear method rewards the middle bids",
+   "WS5 becomes most advantageous at 87.647059, and WS3 falls to 70.000000"
+  ],
+  "answer": 3,
+  "explanation": "Under the linear method the dearest responsive bid scores Sc 0.000000 and the cheapest 100.000000. WS3, the dearest, drops to a combined 70.000000 and WS5 leads at 87.647059. The price method alone moves the award. 87.162020 is WS1's combined score at technical weight 0.85 under the linear method, a different setting."
+ },
+ {
+  "prompt": "Kiiver and Kodym's Table 1 (Journal of Public Procurement 15(3), Fall 2015) prices bids A, B and C at 50, 75 and 100, price only. What does the engine score B?",
+  "options": [
+   "67 by the lowest ratio exactly, since the engine rounds to whole points as the source does",
+   "66.666667 by the lowest ratio, which the source prints as 67, and 50.000000 by the linear method",
+   "50.000000 by the lowest ratio and 66.666667 by the linear method, as B sits halfway along the line",
+   "75.000000 by the linear method, which is the straight line drawn between A's 100 and C's 50"
+  ],
+  "answer": 1,
+  "explanation": "The lowest ratio gives 100 x 50 / 75 = 66.666667; the source prints 67, and printed alike is not equal. The linear method gives the dearest bid 0.000000, so B at the midpoint scores 50.000000. The engine has no method that reproduces a 75 for B, and the course claims none."
+ },
+ {
+  "prompt": "Chen (2008, p. 409) scores price as \"50 x L / P\" on prices 40, 50 and 80. Declaring A invalid after opening changes the gap between B and C. From what to what?",
+  "options": [
+   "From 15.000000 to 18.750000 points, with B ahead of C both times",
+   "From 18.750000 to 15.000000 points, as removing the lowest price compresses the field",
+   "It stays at 15.000000 points, since A is neither B nor C and a price score reads each bid alone",
+   "From 15.000000 to 18.750000 points, and C moves ahead of B once A has been removed"
+  ],
+  "answer": 0,
+  "explanation": "With A in the field B scores 40.000000 and C 25.000000; with A excluded B scores 50.000000 and C 31.250000. The gap widens from 15.000000 to 18.750000, and B stays ahead. A relative price score depends on which other bids are in the field. B leads C in both columns, so only the distance between them moves."
+ },
+ {
+  "prompt": "To enter Chen's example the course gives every bid a technicalPercent of 0 at technical weight 0.5. Why must the technical method be 'absolute'?",
+  "options": [
+   "Under 'relative' every bid takes St 100, which doubles each combined score and breaks the match with Chen",
+   "'relative' is kept for combined awards over 0.5, and Chen's weight of 0.5 sits below that threshold",
+   "Under 'relative' Thigh is 0, and the engine refuses: \"bids all score 0 technically, so Thigh is 0 and the 'relative' technical score is undefined\"",
+   "Under 'relative' the engine returns every bid with a null score and a reason that no bid passed"
+  ],
+  "answer": 2,
+  "explanation": "St = 100 x T / Thigh needs a Thigh above 0. With every technical percent at 0 the engine refuses the call by the field bids with the message in the key. 'absolute' uses T as scored, so B = 0.5 x 100 x Cmin / C, which is Chen's formula. The engine has no threshold on the technical weight for either method."
+ },
+ {
+  "prompt": "An evaluator asks rankTender for the price method 'mean-deviation'. What does the engine return?",
+  "options": [
+   "Lowest-ratio ranking, taken as the default for an unknown name",
+   "Each bid scored on its distance from the mean price, in the family Chen warns against",
+   "A refusal naming technicalMethod, which fixes the price method",
+   "A refusal: \"priceMethod must be 'lowest-ratio' or 'linear'; there is no default\""
+  ],
+  "answer": 3,
+  "explanation": "The engine offers 'lowest-ratio' and 'linear' only, has no default price method, and refuses any other name by the field priceMethod. Average-price methods are described and warned against by Kiiver and Kodym and by Chen, and neither prints a formula, so the engine does not offer one."
+ },
+ {
+  "prompt": "Stepping the technical weight under linear pricing on the well services bids (relative technical score), the stepped table prints the row at 0.85: WS1 87.162020, WS2 86.332826, WS5 85.000000, WS3 85.000000. How does the engine read that row?",
+  "options": [
+   "WS1 is most advantageous; WS5 and WS3 tie, and the earlier receipt puts WS3 above WS5",
+   "WS1 is most advantageous; WS5 and WS3 tie, and the lower evaluated cost ranks WS5 above WS3",
+   "WS5 and WS3 share the award, since two bids with the same combined score cannot be separated",
+   "WS3 is most advantageous, since it carries the highest technical percentage of the tied pair"
+  ],
+  "answer": 1,
+  "explanation": "The table prints the row with \"WS3 by lower evaluated cost\" in the tie column: WS5 (862141.000000) is cheaper than WS3 (957990.000000), so WS5 ranks above it. The tie-break is the lower evaluated cost first, then the earlier receipt, then the bidder id, and receipt is never reached here. WS1, at 87.162020, is most advantageous at that step."
+ },
+ {
+  "prompt": "At technical weight 0.7 the engine's combined-score basis prints the commercial weight with a 4 in its seventeenth decimal place, where a reader expects 0.3. What does that tell a reader?",
+  "options": [
+   "Seventeen significant digits, as the Standard Procurement Document states the cost weight",
+   "A small margin added by the engine to the commercial weight so that ties on combined score are rarer",
+   "The engine computes 1 - 0.7 in binary floating point and prints the shortest decimal of the double it holds",
+   "The figure is the double 0.3 printed in full, as every weight is printed to its last binary digit"
+  ],
+  "answer": 2,
+  "explanation": "The course states that the engine computes 1 - 0.7 in binary floating point, prints the shortest decimal that reads back to the double it holds, and that this double is not the double 0.3. No margin is added, and the SPD formula writes the weight as (1 - X) with no digits at all."
+ }
+]

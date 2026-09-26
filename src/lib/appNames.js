@@ -74,6 +74,7 @@ export const APP_NAMES = {
   crude: 'Crude Assay & Blending',
   refinery: 'Refinery Feasibility & Planning',
   supply: 'Terminals, Depots & Fuel Supply',
+  procurement: 'Procurement, Tendering & Contracting',
   gasvalue: 'Flare Gas to Value & LPG/CNG',
   carbon: 'Carbon & Energy Efficiency',
   dataqc: 'Oilfield Data Quality',

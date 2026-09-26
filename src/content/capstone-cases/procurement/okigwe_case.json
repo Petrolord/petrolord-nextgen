@@ -1,0 +1,387 @@
+{
+ "dataset": "OKIGWE (synthetic)",
+ "scope": "Fishing and recompletion workover on Ekene-4 (synthetic)",
+ "program": [
+  {
+   "id": "rigup",
+   "kind": "flat",
+   "label": "Move in and rig up on Ekene-4",
+   "durationHr": 36
+  },
+  {
+   "id": "kill",
+   "kind": "flat",
+   "label": "Kill the well and set the barrier",
+   "durationHr": 14
+  },
+  {
+   "id": "pull",
+   "kind": "trip",
+   "label": "Pull the completion",
+   "mdM": 1580,
+   "tripSpeedMPerHr": 450
+  },
+  {
+   "id": "fish-trip",
+   "kind": "trip",
+   "label": "Run and pull the fishing string",
+   "mdM": 1560,
+   "tripSpeedMPerHr": 700
+  },
+  {
+   "id": "fish",
+   "kind": "flat",
+   "label": "Fish the parted tubing",
+   "durationHr": 30
+  },
+  {
+   "id": "clean",
+   "kind": "flat",
+   "label": "Clean out to the perforations",
+   "durationHr": 18
+  },
+  {
+   "id": "run",
+   "kind": "casing",
+   "label": "Run the new completion",
+   "mdM": 1580,
+   "runSpeedMPerHr": 400,
+   "flatHr": 10
+  },
+  {
+   "id": "test",
+   "kind": "flat",
+   "label": "Test and hand over",
+   "durationHr": 20
+  },
+  {
+   "id": "rigdown",
+   "kind": "flat",
+   "label": "Rig down and move off",
+   "durationHr": 30
+  }
+ ],
+ "costItems": [
+  {
+   "id": "rig",
+   "label": "Workover rig spread",
+   "basis": "per-day",
+   "rate": 21800,
+   "category": "intangible"
+  },
+  {
+   "id": "supervision",
+   "label": "Company supervision",
+   "basis": "per-day",
+   "rate": 2900,
+   "category": "intangible"
+  },
+  {
+   "id": "fishing",
+   "label": "Fishing tools and operator",
+   "basis": "lump",
+   "value": 64000,
+   "category": "intangible"
+  },
+  {
+   "id": "fluids",
+   "label": "Completion fluids",
+   "basis": "lump",
+   "value": 38500,
+   "category": "tangible"
+  },
+  {
+   "id": "completion",
+   "label": "Completion string",
+   "basis": "lump",
+   "value": 142000,
+   "category": "tangible"
+  },
+  {
+   "id": "mob-demob",
+   "label": "Mobilisation and demobilisation",
+   "basis": "lump",
+   "value": 118000,
+   "category": "intangible"
+  }
+ ],
+ "partners": [
+  {
+   "name": "Partner EK-B (synthetic)",
+   "working_interest": 35
+  },
+  {
+   "name": "Partner EK-D (synthetic)",
+   "working_interest": 22.5
+  }
+ ],
+ "criteria": [
+  {
+   "id": "method",
+   "weight": 40,
+   "maxScore": 4
+  },
+  {
+   "id": "crew",
+   "weight": 30,
+   "maxScore": 4
+  },
+  {
+   "id": "equipment",
+   "weight": 20,
+   "maxScore": 4
+  },
+  {
+   "id": "hse",
+   "weight": 10,
+   "maxScore": 4
+  }
+ ],
+ "bids": [
+  {
+   "id": "OK1",
+   "receivedAt": "2027-10-11T09:00:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    }
+   ],
+   "scores": {
+    "method": 3,
+    "crew": 3,
+    "equipment": 3,
+    "hse": 4
+   },
+   "completionWeeks": 4,
+   "lines": [
+    {
+     "id": "mob",
+     "quantity": 1,
+     "unitRate": 118500,
+     "quotedAmount": 118500
+    },
+    {
+     "id": "rig",
+     "quantity": 16,
+     "unitRate": 23150.5,
+     "quotedAmount": 370408
+    },
+    {
+     "id": "fishing",
+     "quantity": 1,
+     "unitRate": 61200,
+     "quotedAmount": 61200
+    },
+    {
+     "id": "fluids",
+     "quantity": 1,
+     "unitRate": 40150,
+     "quotedAmount": 40150
+    },
+    {
+     "id": "completion",
+     "quantity": 1,
+     "unitRate": 139800,
+     "quotedAmount": 139800
+    }
+   ]
+  },
+  {
+   "id": "OK2",
+   "receivedAt": "2027-10-11T10:30:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    }
+   ],
+   "scores": {
+    "method": 4,
+    "crew": 3,
+    "equipment": 4,
+    "hse": 3
+   },
+   "completionWeeks": 3,
+   "lines": [
+    {
+     "id": "mob",
+     "quantity": 1,
+     "unitRate": 126000,
+     "quotedAmount": 126000
+    },
+    {
+     "id": "rig",
+     "quantity": 16,
+     "unitRate": 24480.25,
+     "quotedAmount": 391684
+    },
+    {
+     "id": "fishing",
+     "quantity": 1,
+     "unitRate": 66800,
+     "quotedAmount": 66800
+    },
+    {
+     "id": "fluids",
+     "quantity": 1,
+     "unitRate": 41200,
+     "quotedAmount": 41200
+    },
+    {
+     "id": "completion",
+     "quantity": 1,
+     "unitRate": 146250,
+     "quotedAmount": 146250
+    }
+   ]
+  },
+  {
+   "id": "OK3",
+   "receivedAt": "2027-10-12T08:45:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    }
+   ],
+   "scores": {
+    "method": 3,
+    "crew": 2,
+    "equipment": 3,
+    "hse": 3
+   },
+   "completionWeeks": 5,
+   "lines": [
+    {
+     "id": "mob",
+     "quantity": 1,
+     "unitRate": 104000,
+     "quotedAmount": 104000
+    },
+    {
+     "id": "rig",
+     "quantity": 16,
+     "unitRate": 21870.4,
+     "quotedAmount": 349926.4
+    },
+    {
+     "id": "fishing",
+     "quantity": 1,
+     "unitRate": 58900,
+     "quotedAmount": 58900
+    },
+    {
+     "id": "fluids",
+     "quantity": 1,
+     "unitRate": 37600,
+     "quotedAmount": 37600
+    },
+    {
+     "id": "completion",
+     "quantity": 1,
+     "unitRate": 133400,
+     "quotedAmount": 133400
+    }
+   ]
+  },
+  {
+   "id": "OK4",
+   "receivedAt": "2027-10-12T14:05:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    }
+   ],
+   "scores": {
+    "method": 2,
+    "crew": 2,
+    "equipment": 2,
+    "hse": 3
+   },
+   "completionWeeks": 4,
+   "lines": [
+    {
+     "id": "mob",
+     "quantity": 1,
+     "unitRate": 96000,
+     "quotedAmount": 96000
+    },
+    {
+     "id": "rig",
+     "quantity": 16,
+     "unitRate": 20450,
+     "quotedAmount": 327200
+    },
+    {
+     "id": "fishing",
+     "quantity": 1,
+     "unitRate": 52000,
+     "quotedAmount": 52000
+    },
+    {
+     "id": "fluids",
+     "quantity": 1,
+     "unitRate": 33900,
+     "quotedAmount": 33900
+    },
+    {
+     "id": "completion",
+     "quantity": 1,
+     "unitRate": 128700,
+     "quotedAmount": 128700
+    }
+   ]
+  },
+  {
+   "id": "OK5",
+   "receivedAt": "2027-10-13T11:20:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    }
+   ],
+   "scores": {
+    "method": 4,
+    "crew": 4,
+    "equipment": 3,
+    "hse": 4
+   },
+   "completionWeeks": 5,
+   "lines": [
+    {
+     "id": "mob",
+     "quantity": 1,
+     "unitRate": 131000,
+     "quotedAmount": 131000
+    },
+    {
+     "id": "rig",
+     "quantity": 16,
+     "unitRate": 25320.8,
+     "quotedAmount": 405132.8
+    },
+    {
+     "id": "fishing",
+     "quantity": 1,
+     "unitRate": 69500,
+     "quotedAmount": 69500
+    },
+    {
+     "id": "fluids",
+     "quantity": 1,
+     "unitRate": 42800,
+     "quotedAmount": 42800
+    },
+    {
+     "id": "completion",
+     "quantity": 1,
+     "unitRate": 151300,
+     "quotedAmount": 151300
+    }
+   ]
+  }
+ ]
+}

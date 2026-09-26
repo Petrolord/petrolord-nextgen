@@ -1,0 +1,400 @@
+{
+ "dataset": "ONITSHA (synthetic)",
+ "tender": "EK-11/WS/2027-19 (synthetic)",
+ "scope": "Coiled tubing scale cleanout with nitrogen lift on Ekene-2 and Ekene-6",
+ "criteria": [
+  {
+   "id": "methodology",
+   "weight": 32,
+   "maxScore": 5
+  },
+  {
+   "id": "personnel",
+   "weight": 27,
+   "maxScore": 5
+  },
+  {
+   "id": "equipment",
+   "weight": 19,
+   "maxScore": 5
+  },
+  {
+   "id": "hse",
+   "weight": 13,
+   "maxScore": 5
+  },
+  {
+   "id": "schedule",
+   "weight": 9,
+   "maxScore": 5
+  }
+ ],
+ "bids": [
+  {
+   "id": "ON1",
+   "receivedAt": "2027-08-02T09:05:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    },
+    {
+     "id": "signed-bid-form",
+     "met": true
+    }
+   ],
+   "scores": {
+    "methodology": 4,
+    "personnel": 4,
+    "equipment": 3,
+    "hse": 4,
+    "schedule": 3
+   },
+   "discount": 12500,
+   "completionWeeks": 5,
+   "lines": [
+    {
+     "id": "mob",
+     "quantity": 1,
+     "unitRate": 112000,
+     "quotedAmount": 112000
+    },
+    {
+     "id": "ct-spread",
+     "quantity": 15,
+     "unitRate": 27450.35,
+     "quotedAmount": 411755.25
+    },
+    {
+     "id": "pump-spread",
+     "quantity": 5,
+     "unitRate": 19875.5,
+     "quotedAmount": 99377.5
+    },
+    {
+     "id": "dissolver",
+     "quantity": 40,
+     "unitRate": 1612.4,
+     "quotedAmount": 64496
+    },
+    {
+     "id": "nitrogen",
+     "quantity": 100,
+     "unitRate": 305.75,
+     "quotedAmount": 30575
+    },
+    {
+     "id": "demob",
+     "quantity": 1,
+     "unitRate": 58000,
+     "quotedAmount": 58000
+    }
+   ]
+  },
+  {
+   "id": "ON2",
+   "receivedAt": "2027-08-02T11:47:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    },
+    {
+     "id": "signed-bid-form",
+     "met": true
+    }
+   ],
+   "scores": {
+    "methodology": 3,
+    "personnel": 4,
+    "equipment": 4,
+    "hse": 4,
+    "schedule": 3
+   },
+   "completionWeeks": 8,
+   "deviations": [
+    {
+     "id": "payment-terms",
+     "amount": 7250,
+     "reason": "asks for payment in 30 days where the conditions give 60; priced at the interest on the earlier payment"
+    }
+   ],
+   "lines": [
+    {
+     "id": "mob",
+     "quantity": 1,
+     "unitRate": 98500,
+     "quotedAmount": 98500
+    },
+    {
+     "id": "ct-spread",
+     "quantity": 15,
+     "unitRate": 26980.4,
+     "quotedAmount": 406980
+    },
+    {
+     "id": "pump-spread",
+     "quantity": 5,
+     "unitRate": 19210.25,
+     "quotedAmount": 96051.25
+    },
+    {
+     "id": "dissolver",
+     "quantity": 40,
+     "unitRate": 1575.8,
+     "quotedAmount": 63032
+    },
+    {
+     "id": "nitrogen",
+     "quantity": 100,
+     "unitRate": 298.6,
+     "quotedAmount": 29860
+    },
+    {
+     "id": "demob",
+     "quantity": 1,
+     "unitRate": 52500,
+     "quotedAmount": 52500
+    }
+   ]
+  },
+  {
+   "id": "ON3",
+   "receivedAt": "2027-08-03T08:20:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    },
+    {
+     "id": "signed-bid-form",
+     "met": true
+    }
+   ],
+   "scores": {
+    "methodology": 4,
+    "personnel": 4,
+    "equipment": 4,
+    "hse": 5,
+    "schedule": 3
+   },
+   "completionWeeks": 7,
+   "omitted": [
+    "nitrogen"
+   ],
+   "lines": [
+    {
+     "id": "mob",
+     "quantity": 1,
+     "unitRate": 104000,
+     "quotedAmount": 104000
+    },
+    {
+     "id": "ct-spread",
+     "quantity": 15,
+     "unitRate": 28120.6,
+     "quotedAmount": 421809
+    },
+    {
+     "id": "pump-spread",
+     "quantity": 5,
+     "unitRate": 20480.75,
+     "quotedAmount": 102403.75
+    },
+    {
+     "id": "dissolver",
+     "quantity": 40,
+     "unitRate": 1650.25,
+     "quotedAmount": 66010
+    },
+    {
+     "id": "demob",
+     "quantity": 1,
+     "unitRate": 55500,
+     "quotedAmount": 55500
+    }
+   ]
+  },
+  {
+   "id": "ON4",
+   "receivedAt": "2027-08-03T10:02:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    },
+    {
+     "id": "signed-bid-form",
+     "met": true
+    }
+   ],
+   "scores": {
+    "methodology": 3,
+    "personnel": 2,
+    "equipment": 3,
+    "hse": 3,
+    "schedule": 2
+   },
+   "completionWeeks": 6,
+   "lines": [
+    {
+     "id": "mob",
+     "quantity": 1,
+     "unitRate": 82000,
+     "quotedAmount": 82000
+    },
+    {
+     "id": "ct-spread",
+     "quantity": 15,
+     "unitRate": 23840.5,
+     "quotedAmount": 357607.5
+    },
+    {
+     "id": "pump-spread",
+     "quantity": 5,
+     "unitRate": 16950,
+     "quotedAmount": 84750
+    },
+    {
+     "id": "dissolver",
+     "quantity": 40,
+     "unitRate": 1380.6,
+     "quotedAmount": 55224
+    },
+    {
+     "id": "nitrogen",
+     "quantity": 100,
+     "unitRate": 262.4,
+     "quotedAmount": 26240
+    },
+    {
+     "id": "demob",
+     "quantity": 1,
+     "unitRate": 41000,
+     "quotedAmount": 41000
+    }
+   ]
+  },
+  {
+   "id": "ON5",
+   "receivedAt": "2027-08-03T14:36:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": true
+    },
+    {
+     "id": "signed-bid-form",
+     "met": true
+    }
+   ],
+   "scores": {
+    "methodology": 4,
+    "personnel": 3,
+    "equipment": 3,
+    "hse": 3,
+    "schedule": 3
+   },
+   "completionWeeks": 9,
+   "lines": [
+    {
+     "id": "mob",
+     "quantity": 1,
+     "unitRate": 99000,
+     "quotedAmount": 99000
+    },
+    {
+     "id": "ct-spread",
+     "quantity": 15,
+     "unitRate": 26250.8,
+     "quotedAmount": 393762
+    },
+    {
+     "id": "pump-spread",
+     "quantity": 5,
+     "unitRate": 18990.4,
+     "quotedAmount": 94952
+    },
+    {
+     "id": "dissolver",
+     "quantity": 40,
+     "unitRate": 15.482,
+     "quotedAmount": 61928,
+     "decimalMisplaced": true
+    },
+    {
+     "id": "nitrogen",
+     "quantity": 100,
+     "unitRate": 289.15,
+     "quotedAmount": 28915
+    },
+    {
+     "id": "demob",
+     "quantity": 1,
+     "unitRate": 49750,
+     "quotedAmount": 49750
+    }
+   ]
+  },
+  {
+   "id": "ON6",
+   "receivedAt": "2027-08-04T16:41:00Z",
+   "mandatory": [
+    {
+     "id": "bid-security",
+     "met": false
+    },
+    {
+     "id": "signed-bid-form",
+     "met": true
+    }
+   ],
+   "scores": {
+    "methodology": 5,
+    "personnel": 4,
+    "equipment": 4,
+    "hse": 4,
+    "schedule": 4
+   },
+   "completionWeeks": 6,
+   "lines": [
+    {
+     "id": "mob",
+     "quantity": 1,
+     "unitRate": 126000,
+     "quotedAmount": 126000
+    },
+    {
+     "id": "ct-spread",
+     "quantity": 15,
+     "unitRate": 29900,
+     "quotedAmount": 448500
+    },
+    {
+     "id": "pump-spread",
+     "quantity": 5,
+     "unitRate": 22400,
+     "quotedAmount": 112000
+    },
+    {
+     "id": "dissolver",
+     "quantity": 40,
+     "unitRate": 1720,
+     "quotedAmount": 68800
+    },
+    {
+     "id": "nitrogen",
+     "quantity": 100,
+     "unitRate": 318,
+     "quotedAmount": 31800
+    },
+    {
+     "id": "demob",
+     "quantity": 1,
+     "unitRate": 63000,
+     "quotedAmount": 63000
+    }
+   ]
+  }
+ ]
+}

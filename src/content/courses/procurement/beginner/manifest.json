@@ -1,0 +1,361 @@
+{
+ "app_slug": "procurement",
+ "tier": "beginner",
+ "content_version": 1,
+ "modules": [
+  {
+   "key": "m01-what-a-tender-evaluation-decides",
+   "title": "What a Tender Evaluation Decides",
+   "order": 1,
+   "lessons": [
+    {
+     "key": "l01-a-scope-a-tender-and-a-contract",
+     "title": "A scope, a tender and a contract",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-one-envelope-then-the-other",
+     "title": "One envelope, then the other",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-ekene-tenders",
+     "title": "The Ekene tenders",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-sources-and-the-dates-they-were-read",
+     "title": "Sources and the dates they were read",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-calculator-panels-and-refusals",
+     "title": "The calculator panels and the refusals",
+     "order": 5,
+     "est_minutes": 14,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m02-the-technical-envelope",
+   "title": "The Technical Envelope",
+   "order": 2,
+   "lessons": [
+    {
+     "key": "l01-mandatory-requirements-first",
+     "title": "Mandatory requirements first",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-weights-and-maximum-scores",
+     "title": "Weights and maximum scores",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-the-technical-percentage",
+     "title": "The technical percentage and weighted points",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-pass-mark-and-the-bid-on-it",
+     "title": "The pass mark and the bid that sits on it",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l05-a-price-never-opened",
+     "title": "A price envelope that is never opened",
+     "order": 5,
+     "est_minutes": 12,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m03-arithmetic-correction",
+   "title": "Arithmetic Correction",
+   "order": 3,
+   "lessons": [
+    {
+     "key": "l01-quantity-times-unit-rate",
+     "title": "Quantity times unit rate",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-unit-rate-prevails",
+     "title": "The unit rate prevails",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-a-misplaced-decimal-point",
+     "title": "A misplaced decimal point",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-tolerance-and-the-quoted-total",
+     "title": "The tolerance and the quoted total",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m04-evaluated-cost",
+   "title": "Evaluated Cost",
+   "order": 4,
+   "lessons": [
+    {
+     "key": "l01-corrected-price-less-discount",
+     "title": "Corrected price less the discount",
+     "order": 1,
+     "est_minutes": 12,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-priced-deviations",
+     "title": "Priced deviations",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-an-omitted-item-at-the-average",
+     "title": "An omitted item priced at the average",
+     "order": 3,
+     "est_minutes": 14,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-completion-time-adjustment",
+     "title": "Completion time and its adjustment",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m05-the-combined-score",
+   "title": "The Combined Score",
+   "order": 5,
+   "lessons": [
+    {
+     "key": "l01-the-commercial-score",
+     "title": "The commercial score of the lowest ratio",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-relative-technical-score",
+     "title": "The relative technical score",
+     "order": 2,
+     "est_minutes": 12,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-weighting-the-two-scores",
+     "title": "Weighting the two scores",
+     "order": 3,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-guidance-worked-example",
+     "title": "The Guidance worked example, figure by figure",
+     "order": 4,
+     "est_minutes": 14,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 500,
+     "max_prose_words": 560
+    }
+   ]
+  },
+  {
+   "key": "m06-reading-an-award",
+   "title": "Reading an Award",
+   "order": 6,
+   "lessons": [
+    {
+     "key": "l01-the-ranking-and-its-tie-break",
+     "title": "The ranking and its tie-break",
+     "order": 1,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l02-the-most-advantageous-bid",
+     "title": "The most advantageous bid",
+     "order": 2,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l03-exclusions-and-their-reasons",
+     "title": "Exclusions and their reasons",
+     "order": 3,
+     "est_minutes": 12,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 420,
+     "max_prose_words": 560
+    },
+    {
+     "key": "l04-the-capstone-brief",
+     "title": "The capstone brief",
+     "order": 4,
+     "est_minutes": 13,
+     "panels": [
+      "pr-envelope-calculator"
+     ],
+     "has_exercise": true,
+     "min_prose_words": 460,
+     "max_prose_words": 560
+    }
+   ]
+  }
+ ]
+}

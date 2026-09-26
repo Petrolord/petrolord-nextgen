@@ -1,0 +1,118 @@
+import sys; sys.path.insert(0, '/root/dc-wavekit')
+from bankkit import emit, finish
+Q=[]
+def q(k,p,c,ds,e): Q.append((k,p,c,ds,e))
+
+# SC2 Professional m01, Lowest Evaluated Cost Over the Life of the Asset.
+# Every figure is quoted from digest.txt. Unless a question states otherwise the
+# materials tender runs on its fixture settings: pass mark 60, omission rule
+# average, delivery schedule minWeeks 8, maxWeeks 14, ratePerWeek 0.0025, and a
+# life cycle of 5 years at 0.1. No capstone name, code, price or value appears.
+
+q(1, "On the materials tender, MS5 quotes a total of 487200.000000, the lowest of the five quoted totals, and scores a technical percentage of 50.000000 against a pass mark of 60. What happens to its price in a lowest-cost award?",
+ "Its commercial envelope is never opened, so its price takes no part in ranking the evaluated costs",
+ ["MS5 becomes the lowest evaluated cost, since the award now rests on price and the technical score falls away",
+  "Opened and then rejected at the commercial stage for failing the pass mark by 10 points",
+  "It enters the ranking with a penalty equal to its shortfall below the pass mark, added to its price"],
+ "The engine returns MS5 with the reason \"technical score 50 is below the pass mark 60; the commercial envelope is not opened\". A lowest-cost award still runs the technical envelope first, so MS5's quoted total never reaches the commercial stage. No penalty is added and no commercial rejection happens, because nothing is opened. The lowest evaluated cost is MS4.")
+
+q(3, "Which texts does the engine cite for an award that goes to the lowest evaluated cost with no rated criteria?",
+ "World Bank Procurement Regulations (7th ed.) para 5.70 and the Public Procurement Act 2007 s.24(3) and s.33(1)",
+ ["World Bank Regulations (7th ed.) para 5.50, the weighting matrix, with s.14 of the Nigerian Oil and Gas Industry Content Development Act 2010",
+  "The Standard Procurement Document ITB 34.1 alone, because the award is made on price after any omission is priced",
+  "Annex X paras 3.7 and 3.8 only, since every award without rated criteria must include a life-cycle cost"],
+ "The engine's award source for a lowest-cost award reads \"World Bank Procurement Regulations (7th ed.) para 5.70; Nigeria Public Procurement Act 2007 s.24(3) and s.33(1)\". Para 5.50 sets the Rated Criteria band for a combined award. ITB 34.1 prices an omission and Annex X paras 3.7 and 3.8 support the life-cycle cost; both are terms inside the evaluated cost, and neither is the award rule.")
+
+q(0, "MS3 scores the highest technical percentage of the materials bids, 90.000000. Under the materials tender's lowest-cost award, what does that score earn MS3?",
+ "A pass through the technical envelope and nothing more; the award ranks passing bids on evaluated cost alone",
+ ["A technical weight of 0.7 on its score, which places it first on combined score",
+  "Its commercial score, which is scaled up by 90 divided by the highest technical percentage",
+  "The award itself, because it clears the pass mark by the widest margin among the four"],
+ "With no rated criteria the passing bids are ranked on evaluated cost alone, and no technical weight enters the award. MS3's evaluated cost, 581453.933847, is the highest of the four responsive bids, so it ranks fourth. A technical weight of 0.7 and a relative technical score belong to the combined award of the well services tender.")
+
+q(2, "The engine's basis for the materials life cycle reads \"net present cost of 5 years of annual costs at 0.1 a year, end-of-year discounting, residual value credited in the last year\". Where does the discounting itself come from?",
+ "The canonical npv function of engines/economics/cashflow.ts, which the tender engine imports",
+ ["A discounting routine written inside tender.js, apart from the economics engines",
+  "The lib/stats library, which also carries the seeded mulberry32 stream the engine samples with",
+  "Annex X of the World Bank Regulations, typed into the engine as a discount table"],
+ "The basis ends \"through engines/economics/cashflow.ts npv\", and the engine's imports list economics/cashflow.ts for exactly that. It carries no Monte Carlo or NPV code of its own. lib/stats is imported for sampling, and Annex X paras 3.7 and 3.8 are the citation for counting life-cycle costs, with no discount table in them.")
+
+q(1, "At 0.1 a year and end-of-year discounting, MS4's valve maintenance of 7000.000000 in year 1 discounts to 6363.636364. What does the same 7000.000000 paid in year 5 count for?",
+ "4346.449261, discounted by the year 5 factor 0.620921",
+ ["6363.636364, as every year is discounted from the end of year 1",
+  "7000.000000 in full, since the last year of a life cycle is left undiscounted by the engine",
+  "5259.203606, which is the discounted figure for the middle year of the five"],
+ "Each year's cost is discounted from the end of its own year by 1 / (1 + 0.1) raised to the year. Year 5's factor is 0.620921, and 7000.000000 discounts to 4346.449261. 6363.636364 is year 1 and 5259.203606 is year 3. No year is left undiscounted; the five discounted figures sum to 26535.507386.")
+
+q(3, "MS4's corrected price is 503930.000000 and its life-cycle cost 26535.507386. How does the engine treat the award price when it builds the life-cycle term?",
+ "It leaves the price undiscounted, because the price is paid at the start",
+ ["The price is discounted at 0.1 over the five years along with the valve maintenance of each year",
+  "Spread evenly over the five years, with each year's share of the price discounted",
+  "It discounts the price at year 1 only, so a sum paid at the award counts for less than its face"],
+ "The course states it plainly: the engine does not discount the award price, which is paid at the start, and only the annual costs of years 1 to 5 are discounted. The life-cycle cost of 26535.507386 is the five discounted maintenance years and nothing else. Spreading or discounting the price would build a different figure from the one the engine returns.")
+
+q(2, "A materials bid gives four annual costs while the life cycle states 5 years. What does the engine return?",
+ "A refusal: \"bids[0].annualCosts must be an array of 5 finite numbers, one per life-cycle year\"",
+ ["Four years of life-cycle cost, with the missing fifth year counted as a cost of 0",
+  "One result for that bid, with the reason that year 5 was filled with the mean of the other four",
+  "A refusal that names lifeCycle.years, since the years then have to be cut to 4 to match the bid"],
+ "The engine refuses the call by the field it names, bids[0].annualCosts, with the message quoted in the key. It never pads the missing year: a zero for a year the bidder never priced would lower that bid's evaluated cost. lifeCycle.years is the field refused for a life cycle of 0 years, whose message reads \"lifeCycle.years must be a whole number from 1 to 100\".")
+
+q(0, "Two stated bids R1 and R2 are identical (life cycle 3 years at 0.08, annual costs 1500 a year) except that R1 states a residual value of 4000. The engine gives R1 a life-cycle cost of 690.316517 and R2 3865.645481. Where does the difference of 3175.328964 come from?",
+ "The 4000 is taken off year 3's cost before discounting, so it is 4000 / 1.08^3",
+ ["4000 is credited in full at the award date, less the year 1 factor",
+  "A credit of 4000 is spread over the three years, a third of it in each year before discounting",
+  "It is subtracted once the life-cycle cost is summed, less 0.08 of it"],
+ "The engine credits the residual value in the last year: \"residual value credited in the last year\". The difference, 3175.328964, is checked to be 4000 / 1.08^3. Crediting it at the award date would be worth the full 4000, and spreading it over three years discounts parts of it at larger factors; neither is the rule the engine states.")
+
+q(3, "What does the engine return for a bid whose residualValue is given as text?",
+ "A refusal: \"bids[0].residualValue must be a finite number when given\"",
+ ["The life-cycle cost with the residual value ignored and a note that the text could not be read",
+  "Zero residual value in the last year, along with the reason that the text was dropped",
+  "A refusal naming lifeCycle, as the residual value is part of the life-cycle settings of the call"],
+ "The engine refuses by the field it names, bids[0].residualValue, with the message in the key. It never drops a term silently, and it does not name lifeCycle: the residual value belongs to the bid, and lifeCycle carries only the years and the discount rate.")
+
+q(1, "On the fixture settings, MS4's evaluated cost is 546244.982386. What does the same call return for MS4 with lifeCycle left out?",
+ "519709.475000, which is the corrected price with the omission and the schedule adjustment",
+ ["503930.000000, as the evaluated cost falls back to the corrected price",
+  "546244.982386 again, as annual costs count with or without a life cycle",
+  "527014.250000, the evaluated cost MS2 has on the materials tender when the life cycle is left out"],
+ "Without a life cycle MS4's evaluated cost is 519709.475000: the corrected price 503930.000000 plus the omission 12000.000000 and the schedule adjustment 3779.475000. The life cycle adds 26535.507386 to reach 546244.982386. 527014.250000 is MS2's figure without the life cycle, and 503930.000000 leaves out the omission and the schedule term, which do not depend on a life cycle.")
+
+q(2, "With and without the life cycle, the four responsive materials bids rank MS4, MS2, MS1, MS3 both ways. What does the life cycle do to the gap between MS4 and MS2?",
+ "It narrows it from 7304.775000 to 1618.594846",
+ ["Widens it from 1618.594846 to 7304.775000, as MS4's maintenance is the dearest",
+  "Nothing: the gap stays at 7304.775000, since the order of the bids does not change",
+  "It reverses the order of the pair, so MS2 now leads MS4 by 1618.594846 overall"],
+ "MS4 carries the dearest maintenance, 7000.000000 a year, against MS2's 5500.000000, so the life cycle adds more to MS4 (26535.507386) than to MS2 (20849.327232). The gap falls from 7304.775000 to 1618.594846, and the order is checked to be the same both ways. Nothing reverses; the order holding does not mean the gap holds.")
+
+q(0, "MS4 omits the inspection line. MS2, MS1 and MS3 price it at 9500.000000, 12000.000000 and 14500.000000, and MS5, which failed the pass mark, also quotes one. What does the engine add to MS4 under the average rule?",
+ "12000.000000, the average of the three responsive bids that price it",
+ ["The average over all four bids that quote the line, MS5 included, as every quoted price counts",
+  "9500.000000, the lowest of the three responsive prices, so the omitting bid is given the benefit",
+  "Nothing, as an omitted item stays out until the bidder prices it"],
+ "Under World Bank SPD ITB 34.1 an omitted item is priced at the average of the corrected amounts quoted by the other responsive bids: MS2, MS1 and MS3 give 12000.000000. MS5's price envelope is never opened, so its figure is not in the average. The engine refuses 'lowest' as an omission rule by name, and an omission is always priced.")
+
+q(3, "MS4 delivers in 11 weeks on a schedule of minWeeks 8 at ratePerWeek 0.0025, with no discount. What schedule adjustment does the engine add to MS4?",
+ "3779.475000, for the 3 weeks beyond the minimum at 0.0025 of its corrected price",
+ ["1314.250000, the adjustment the engine adds to MS2, which delivers in 9 weeks",
+  "2701.500000, as each week beyond 8 is charged on the average price of the bids",
+  "Nothing, since 11 weeks sits inside the window of 8 to 14 weeks"],
+ "The adjustment is ratePerWeek x the weeks beyond minWeeks x (corrected price less the discount). MS4 is 3 weeks beyond 8, and the engine adds 3779.475000. A delivery inside the window is still adjusted for every week past the minimum; only beyond 14 weeks is a bid rejected. 1314.250000 is MS2's term and 2701.500000 is MS1's.")
+
+q(1, "Which materials bid has the smallest life-cycle cost, and what does it pay for its delivery schedule?",
+ "MS3, at 18953.933847, with no schedule adjustment as it delivers at the minimum of 8 weeks",
+ ["MS4, at 26535.507386, since it offers the lowest corrected price of the four responsive bids",
+  "MS2, at 20849.327232, and it also earns a credit of 1314.250000 for its early delivery",
+  "MS1, at 22744.720616, with a schedule adjustment that the life cycle then cancels out in full"],
+ "MS3's valve maintenance is 5000.000000 a year, the lowest, so its life-cycle cost of 18953.933847 is the smallest. It delivers in 8 weeks, which is the minimum, so its schedule adjustment is 0.000000; no bid earns a credit for delivering early. MS4's 26535.507386 is the largest life-cycle cost. MS2's 1314.250000 is an addition for 9 weeks.")
+
+q(2, "A materials report states: \"The lowest evaluated cost is MS4.\" Which reading of that sentence does the course's vocabulary allow?",
+ "MS4 has the lowest evaluated cost the engine builds from price, omission, schedule and life cycle",
+ ["Its quoted price was the lowest of the five materials bids that answered the invitation",
+  "Once the bid below the pass mark is set aside, MS4 carries the lowest price of those left",
+  "MS4 scores the highest combined score at a stated technical weight on the materials tender"],
+ "\"Lowest evaluated cost\" names the evaluated cost as the engine builds it: corrected price, discount, deviations, omissions, schedule and life cycle. MS4's quoted total is 503930.000000, and MS5 quotes less at 487200.000000. Among the four passing bids MS4 does quote the lowest total, yet that is a fact about price: the course never reads \"lowest evaluated cost\" as a quoted price, even where the two point at the same bid. \"Most advantageous\" is the term for the highest combined score, and the materials tender has no combined score.")
+
+emit(Q, '/root/cat-wip-procurement/banks/sc2i_m01.json', expect_n=15)
+finish()
