@@ -1,6 +1,6 @@
 # The Ekene accumulation
 
-The fixture does not change. This is the same Ekene field you gridded in the mapping course, the same six wells at the same map coordinates, with the same TOP_SAND picks you already know. One thing is added: every well now also carries a pick on BASE_SAND, so the reservoir has a floor as well as a roof.
+The fixture does not change. This is the same Ekene field you gridded in the Subsurface Mapping course, the same six wells at the same map coordinates, with the same TOP_SAND picks you already know. One thing is added: every well now also carries a pick on BASE_SAND, so the reservoir has a floor as well as a roof.
 
 Keeping the data fixed is deliberate. By the time you reach the capstone, nothing about the field should be new. Its brief changes the contact and the properties, and the only thing you should be learning is what volumetrics does with them.
 
@@ -44,7 +44,7 @@ The mapped extremes are worth putting side by side, because the two surfaces do 
 
 Compare each of those against the picks in the control table. The deepest mapped value on TOP_SAND, 1590 m, is exactly the Ekene-4 pick. Both mapped extremes on BASE_SAND land exactly on picks as well: 1570 m is the Ekene-3 base and 1615 m is the Ekene-4 base.
 
-The shallowest mapped value on TOP_SAND does not. There is no pick at 1539.7181396484375 m. The shallowest measurement in the whole dataset is Ekene-3 at 1541 m, and the mapped crest sits 1.2819 m above it, at a node roughly 300 m away from that well. You met this in the mapping course as the spline overshoot. It is still here, it has not been corrected, and module 2 shows you what it does to a volume.
+The shallowest mapped value on TOP_SAND does not. There is no pick at 1539.7181396484375 m. The shallowest measurement in the whole dataset is Ekene-3 at 1541 m, and the mapped crest sits 1.2819 m above it, at a node roughly 300 m away from that well. You met this in the Subsurface Mapping course as the spline overshoot. It is still here, it has not been corrected, and module 2 shows you what it does to a volume.
 
 ## Why both surfaces are needed at all
 

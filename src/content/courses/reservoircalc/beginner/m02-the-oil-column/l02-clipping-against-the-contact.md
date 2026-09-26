@@ -46,7 +46,7 @@ Zero is the correct contribution because zero is the truth. There is no oil ther
 
 ## How the engine expresses it
 
-The teaching pipeline builds a thickness grid and fills it with the same null sentinel the mapping course used, 1.0e30, so that every node starts out as no data rather than as zero. A node is only written into if it passes three tests in order: the top must be live, the base must be live, and the clipped column must be greater than zero. Nodes that fail any of the three keep the sentinel and never reach the volume summation.
+The teaching pipeline builds a thickness grid and fills it with the same null sentinel the Subsurface Mapping course used, 1.0e30, so that every node starts out as no data rather than as zero. A node is only written into if it passes three tests in order: the top must be live, the base must be live, and the clipped column must be greater than zero. Nodes that fail any of the three keep the sentinel and never reach the volume summation.
 
 That is why the count of oil bearing cells is a smaller number than the count of live nodes, and why the two counts are reported separately. One is how much ground the map covers. The other is how much of that ground holds oil at the contact you assumed.
 

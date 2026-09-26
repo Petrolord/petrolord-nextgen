@@ -1,6 +1,6 @@
 # The volumetrics workflow map
 
-The mapping course ended with a five step workflow you could recite: assemble control, choose the frame and cell, interpolate, mask, present and read. This course has a workflow of the same shape, and it starts where that one stopped. This lesson lays it out end to end so that every later module has a known place in it.
+The Subsurface Mapping course ended with a five step workflow you could recite: assemble control, choose the frame and cell, interpolate, mask, present and read. This course has a workflow of the same shape, and it starts where that one stopped. This lesson lays it out end to end so that every later module has a known place in it.
 
 There are eight steps. The first three build the geometry, the next four apply the properties, and the last one converts to barrels.
 

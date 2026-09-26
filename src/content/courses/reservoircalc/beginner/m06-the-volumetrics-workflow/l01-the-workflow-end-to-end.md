@@ -12,7 +12,7 @@ Those picks are not produced here. The well data course got the LAS files in and
 
 ## Step 2: the surfaces
 
-Both sets of picks are gridded. The mapping course covered every decision in this step, and the settings here are the ones it used: a frame with two cells of padding around the control, a 100 m cell giving 25 columns by 20 rows and therefore 500 frame nodes, a thin plate spline through all six points, and an 800 m extrapolation limit that leaves 201 live nodes.
+Both sets of picks are gridded. The Subsurface Mapping course covered every decision in this step, and the settings here are the ones it used: a frame with two cells of padding around the control, a 100 m cell giving 25 columns by 20 rows and therefore 500 frame nodes, a thin plate spline through all six points, and an 800 m extrapolation limit that leaves 201 live nodes.
 
 Two surfaces are built on the same frame, so they are node for node comparable. TOP_SAND runs from a mapped crest of 1539.72 m to a deepest value of 1590 m, and BASE_SAND from 1570 m to 1615 m. Both share one mask, which is why the both live count is also 201.
 
@@ -47,9 +47,9 @@ The last step is the one module five ended on. The booking is 12.139208 MMstb at
 
 ## Where each course fits
 
-Laid out this way, the geoscience path stops looking like five separate applications. The well data course made the logs trustworthy. The petrophysics course turned the logs into the properties that appear in step 6. The correlation course produced the tops in step 1. The mapping course produced the surfaces in step 2 and, just as importantly, taught you which parts of those surfaces are supported and which are the interpolator talking. This course supplies steps 3 through 7 and hands the result to whoever has to decide something with it.
+Laid out this way, the geoscience path stops looking like five separate applications. The well data course made the logs trustworthy. The petrophysics course turned the logs into the properties that appear in step 6. The correlation course produced the tops in step 1. The Subsurface Mapping course produced the surfaces in step 2 and, just as importantly, taught you which parts of those surfaces are supported and which are the interpolator talking. This course supplies steps 3 through 7 and hands the result to whoever has to decide something with it.
 
-Each course also inherits the previous one's weaknesses. The 800 m mask that the mapping course applied is the reason the volume claims 1.69 square kilometres rather than the whole frame, and the spline overshoot at the crest is the reason the maximum column is not a depth any well has seen.
+Each course also inherits the previous one's weaknesses. The 800 m mask that the Subsurface Mapping course applied is the reason the volume claims 1.69 square kilometres rather than the whole frame, and the spline overshoot at the crest is the reason the maximum column is not a depth any well has seen.
 
 That is the whole path. Six wells in, two surfaces, one contact, 169 cells, four multiplications, and a number a decision can rest on.
 

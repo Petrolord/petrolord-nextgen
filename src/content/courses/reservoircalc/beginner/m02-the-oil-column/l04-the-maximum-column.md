@@ -10,13 +10,13 @@ That is the maximum oil column at the teaching contact. The maximum column is on
 
 Read the subtraction again and look at what is standing in it. The contact is an interpretation, which the earlier lesson already made you uneasy about. The other term is 1539.7181396484375 m, the shallowest value on the mapped TOP_SAND surface, and it deserves the same scrutiny.
 
-The mapping course took a whole lesson over it. That value is not a pick. The shallowest measurement anywhere in the Ekene dataset is Ekene-3 at 1541 m, and the mapped crest sits 1.2819 m above it. It is also not at a well: the crest node is about 300 m from Ekene-3, on ground where nothing was drilled and nothing was logged.
+The Subsurface Mapping course took a whole lesson over it. That value is not a pick. The shallowest measurement anywhere in the Ekene dataset is Ekene-3 at 1541 m, and the mapped crest sits 1.2819 m above it. It is also not at a well: the crest node is about 300 m from Ekene-3, on ground where nothing was drilled and nothing was logged.
 
-It is the thin-plate spline overshooting. The surface is rising north across the field toward Ekene-3, and a minimum curvature solution will not pay for the sharp kink that stopping exactly at the pick would require, so the rise carries a little past the last control before it turns over. Every smooth interpolator does this. It is not a bug and it was not a discovery, and the mapping course established that it is not fixed by tightening the extrapolation limit or by changing the cell size, because the crest node sits deep inside the supported part of the map.
+It is the thin-plate spline overshooting. The surface is rising north across the field toward Ekene-3, and a minimum curvature solution will not pay for the sharp kink that stopping exactly at the pick would require, so the rise carries a little past the last control before it turns over. Every smooth interpolator does this. It is not a bug and it was not a discovery, and the Subsurface Mapping course established that it is not fixed by tightening the extrapolation limit or by changing the cell size, because the crest node sits deep inside the supported part of the map.
 
 ## What that does here
 
-In the mapping course the overshoot was a number you had to report carefully. Here it is load bearing.
+In the Subsurface Mapping course the overshoot was a number you had to report carefully. Here it is load bearing.
 
 The maximum oil column is 20.2818603515625 m, and 1.2819 m of that comes from a value no measurement produced. The thickest part of the Ekene accumulation, the place where the oil column is greatest, is measured from an artefact of the interpolator, at a location 300 m from the nearest well.
 
@@ -34,7 +34,7 @@ The crest also enters the gross rock volume, but differently. Volume is a sum ov
 
 ## Reporting it
 
-Three habits, and they are the same habits the mapping course asked for, applied to a volume.
+Three habits, and they are the same habits the Subsurface Mapping course asked for, applied to a volume.
 
 Quote the maximum column against its crest. "Maximum oil column, being a contact at 1560 m against a mapped crest of 1539.72 m, which is 1.2819 m shallower than the shallowest pick of 1541 m at Ekene-3, some 300 m away." That sentence is not much longer than the bare number and it cannot be misread.
 

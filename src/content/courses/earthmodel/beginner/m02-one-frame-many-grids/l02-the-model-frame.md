@@ -26,7 +26,7 @@ The fourth is the denominator. Every mean this course quotes is averaged over th
 
 ## The fence post arithmetic
 
-The mapping course taught this rule and it applies here without change, so this is a reinforcement rather than a fresh idea.
+The Subsurface Mapping course taught this rule and it applies here without change, so this is a reinforcement rather than a fresh idea.
 
 Nodes are the fence posts and intervals are the panels. A run of 25 nodes has 24 intervals between them, because the first node sits at the start of the first interval and every interval after it adds one node at its far end.
 

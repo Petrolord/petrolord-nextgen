@@ -30,7 +30,7 @@ The first change is that the answer stops being separable. With a constant, the 
 
 The second change is that the difference has a sign you can predict. Structural highs often carry the cleaner, better sorted rock, so porosity tends to be higher where the oil column is tallest. When a property correlates positively with column height, the cells that carry the most volume also carry the best rock, and the volume weighted average porosity comes out above the plain arithmetic average of the wells. Using the plain average understates the booking. Where the correlation runs the other way the error runs the other way.
 
-The third change is one of honesty rather than arithmetic. A property grid is an interpolation of six values across hundreds of nodes, which is exactly the situation the mapping course spent a module warning about. Replacing a constant with a grid adds realism and it also adds invented detail. A property map is not more true than a constant. It is more specific, and specificity has to be earned with data.
+The third change is one of honesty rather than arithmetic. A property grid is an interpolation of six values across hundreds of nodes, which is exactly the situation the Subsurface Mapping course spent a module warning about. Replacing a constant with a grid adds realism and it also adds invented detail. A property map is not more true than a constant. It is more specific, and specificity has to be earned with data.
 
 ## Where this goes
 

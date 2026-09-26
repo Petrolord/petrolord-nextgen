@@ -42,7 +42,7 @@ Switch between the three methods and watch two things.
 
 The gross rock volume and net volume tiles never move. Whatever the porosity model does, it cannot touch the geometry, and seeing that hold across three quite different models is the fastest way to internalise where porosity enters the chain.
 
-The well rings change colour. Under constant, all six are red. Under trend, all six are red. Under krige, five turn green and one stays red. That one is Ekene-2, and the reason it stays red is not a defect in the kriging. It is the same reason the mapping course could not report a value at that well, and module five returns to it.
+The well rings change colour. Under constant, all six are red. Under trend, all six are red. Under krige, five turn green and one stays red. That one is Ekene-2, and the reason it stays red is not a defect in the kriging. It is the same reason the Subsurface Mapping course could not report a value at that well, and module five returns to it.
 
 ## Worked example
 

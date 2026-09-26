@@ -8,7 +8,7 @@ Every one of those outputs is a description. This course produces a decision var
 
 The quantity is stock tank oil initially in place, STOIIP: the volume of oil the reservoir held before anything was produced, expressed at surface conditions rather than at reservoir conditions. On the Ekene field, with the oil water contact at 1560 m, it is 12.139208 MMstb.
 
-That is the destination. Six well picks, a 100 m grid, a thin-plate spline, an 800 m extrapolation limit and 201 live nodes all exist so that one number can be computed. Everything the mapping course taught you to be careful about now has somewhere to go.
+That is the destination. Six well picks, a 100 m grid, a thin-plate spline, an 800 m extrapolation limit and 201 live nodes all exist so that one number can be computed. Everything the Subsurface Mapping course taught you to be careful about now has somewhere to go.
 
 ## What rests on it
 
@@ -54,7 +54,7 @@ The geometry is the part that is not predictable, and it is the only part you ac
 
 ## The honest version of a volume
 
-The mapping course ended on a warning that was easy to file away as a matter of taste. The mapped crest of TOP_SAND on Ekene is 1539.7181396484375 m, and it is shallower than the shallowest pick in the dataset, at a location where no well was drilled.
+The Subsurface Mapping course ended on a warning that was easy to file away as a matter of taste. The mapped crest of TOP_SAND on Ekene is 1539.7181396484375 m, and it is shallower than the shallowest pick in the dataset, at a location where no well was drilled.
 
 In this course that stops being a matter of taste. The thickest part of the Ekene accumulation is measured from that crest. Module 2 works out exactly how much of the maximum oil column rests on a value no measurement produced, and the answer is uncomfortable enough that it is worth carrying with you from the first lesson.
 

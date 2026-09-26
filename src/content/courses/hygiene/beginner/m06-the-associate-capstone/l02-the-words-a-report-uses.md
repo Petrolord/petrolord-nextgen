@@ -10,7 +10,7 @@ This tier follows five rules, legislated before any lesson was written and bindi
 | --- | --- | --- |
 | noise dose | dose | Flow Assurance and Gas Processing dose inhibitors and methanol |
 | noise exposure, chemical exposure, heat exposure | exposure | Field Development Planning, Uncertainty and Well Cost use it for money |
-| sound level | noise, for a reading | Decline Curve Analysis, Well Test and Seismolord use noise for scatter in data |
+| sound level | noise, for a reading | Decline Curve Analysis, Well Test and Seismic Interpretation use noise for scatter in data |
 | decibel exchange rate | exchange rate | the Economics courses have currency |
 | heat stress | heat | Heat Transfer has heat duty; Separation and Relief have flare radiation |
 
